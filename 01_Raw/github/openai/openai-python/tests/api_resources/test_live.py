@@ -40,7 +40,10 @@ class TestLive:
                         "allowed_server_events": "all",
                     }
                 },
-                "delegation": {"type": "client"},
+                "delegation": {
+                    "type": "client",
+                    "acknowledgement_delay_ms": 0,
+                },
                 "input": [
                     {
                         "content": [
@@ -62,8 +65,18 @@ class TestLive:
                         "decisions": {
                             "questions": [
                                 {
-                                    "instructions": "instructions",
-                                    "type": "predicate",
+                                    "choices": [
+                                        {
+                                            "value": False,
+                                            "description": "description",
+                                        },
+                                        {
+                                            "value": True,
+                                            "description": "description",
+                                        },
+                                    ],
+                                    "instructions": "string",
+                                    "type": "choice",
                                     "name": "name",
                                 }
                             ]
@@ -141,7 +154,10 @@ class TestAsyncLive:
                         "allowed_server_events": "all",
                     }
                 },
-                "delegation": {"type": "client"},
+                "delegation": {
+                    "type": "client",
+                    "acknowledgement_delay_ms": 0,
+                },
                 "input": [
                     {
                         "content": [
@@ -163,8 +179,18 @@ class TestAsyncLive:
                         "decisions": {
                             "questions": [
                                 {
-                                    "instructions": "instructions",
-                                    "type": "predicate",
+                                    "choices": [
+                                        {
+                                            "value": False,
+                                            "description": "description",
+                                        },
+                                        {
+                                            "value": True,
+                                            "description": "description",
+                                        },
+                                    ],
+                                    "instructions": "string",
+                                    "type": "choice",
                                     "name": "name",
                                 }
                             ]

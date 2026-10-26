@@ -814,13 +814,13 @@ impl App {
                 // transcript would hide the fact that server history has already changed.
                 tokio::time::timeout(Duration::from_secs(/*secs*/ 10), async {
                     while let Some(event) = app_server.next_event().await {
-                        let is_reverted = matches!(
-                            &event,
+                        let is_reverted = event.backend_id == app_server.backend_id() && matches!(
+                            &event.event,
                             AppServerEvent::ServerNotification(notification)
                                 if matches!(notification.as_ref(), ServerNotification::ThreadReverted(notification)
                                     if notification.thread_id == thread_id.to_string())
                         );
-                        self.handle_app_server_event(app_server, event).await;
+                        self.handle_backend_event(app_server, event).await;
                         if is_reverted {
                             return Ok(());
                         }
@@ -1408,8 +1408,8 @@ impl App {
             AppEvent::FetchPluginsList { cwd } => {
                 self.fetch_plugins_list(app_server, cwd);
             }
-            AppEvent::FetchHooksList { cwd } => {
-                self.fetch_hooks_list(app_server, cwd);
+            AppEvent::FetchHooksList { target } => {
+                self.fetch_hooks_list(app_server, target);
             }
             AppEvent::OpenMarketplaceAddPrompt => {
                 self.chat_widget.open_marketplace_add_prompt();
@@ -1471,8 +1471,8 @@ impl App {
                     section_errors,
                 );
             }
-            AppEvent::HooksLoaded { cwd, result } => {
-                self.chat_widget.on_hooks_loaded(cwd, result);
+            AppEvent::HooksLoaded { target, result } => {
+                self.chat_widget.on_hooks_loaded(target, result);
             }
             AppEvent::FetchMarketplaceAdd { cwd, source } => {
                 self.fetch_marketplace_add(app_server, cwd, source);
@@ -2204,7 +2204,8 @@ impl App {
                 self.app_event_tx.send(AppEvent::SettingsSelectionSettled);
             }
             AppEvent::SettingsSelectionSettled => {
-                if self.chat_widget.no_modal_or_popup_active()
+                if !self.chat_widget.permission_popup_pending
+                    && self.chat_widget.no_modal_or_popup_active()
                     && !self
                         .chat_widget
                         .inline_permission_profile_selection_pending()
@@ -2290,8 +2291,10 @@ impl App {
             }
             AppEvent::ModelsLoaded { request_id, result }
             | AppEvent::ApiKeyCompatModelsLoaded { request_id, result } => {
-                if self.chat_widget.on_models_loaded(request_id, result) {
-                    self.model_catalog = self.chat_widget.model_catalog();
+                self.chat_widget.on_models_loaded(request_id, result);
+                let catalog = self.chat_widget.model_catalog();
+                if !Arc::ptr_eq(&self.model_catalog, &catalog) {
+                    self.model_catalog = catalog;
                     app_server.set_available_models(self.model_catalog.try_list_models()?);
                     self.sync_active_thread_service_tier_to_cached_session().await;
                 }
@@ -3239,7 +3242,9 @@ impl App {
                     .select_permission_profile(&profile_id);
             }
             AppEvent::OpenPermissionsPopup | AppEvent::OpenApprovalsPopup => {
+                self.chat_widget.permission_popup_pending = false;
                 if self.reject_pending_permission_change() {
+                    self.app_event_tx.send(AppEvent::SettingsSelectionClosed);
                     return Ok(AppRunControl::Continue);
                 }
                 #[cfg(any(target_os = "windows", test))]
@@ -3248,6 +3253,7 @@ impl App {
                     && self.chat_widget.windows_sandbox_config.requirements.is_none()
                     && !self.refresh_windows_sandbox_config(app_server).await
                 {
+                    self.app_event_tx.send(AppEvent::SettingsSelectionClosed);
                     return Ok(AppRunControl::Continue);
                 }
                 if app_server.uses_remote_workspace() {

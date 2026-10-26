@@ -57,8 +57,6 @@ pub(crate) struct ContextInput<'a> {
     pub(crate) node_repl_images: Option<&'a [codex_protocol::models::ContentItem]>,
 }
 
-pub(crate) type RenderedContext = ComposedContext;
-
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub(crate) struct TranscriptConfig {
     pub(crate) format: TranscriptFormat,
@@ -87,15 +85,6 @@ impl Default for TranscriptConfig {
 }
 
 impl TranscriptConfig {
-    pub(crate) fn build_context(
-        &self,
-        input: ContextInput<'_>,
-    ) -> Result<RenderedContext, SectionError> {
-        let (mut context, _) = self.collect_context(input)?.compose(/*cursor*/ None, &[])?;
-        context.deduplicate_transcript_instructions();
-        Ok(context)
-    }
-
     pub(super) fn collect_context(
         &self,
         input: ContextInput<'_>,
@@ -195,7 +184,8 @@ impl CollectedTranscript {
             }
         };
         let transcript = self.profile.prepare_transcript(entries, offset);
-        let context = self.context.compose(presentation, transcript)?;
+        let mut context = self.context.compose(presentation, transcript)?;
+        context.retain_new_agent_messages(reviewer_history)?;
         Ok((context, next))
     }
 }

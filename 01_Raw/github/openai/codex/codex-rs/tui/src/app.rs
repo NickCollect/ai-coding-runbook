@@ -215,6 +215,8 @@ mod app_server_events;
 pub(crate) mod app_server_requests;
 mod app_server_thread_ownership;
 mod backend_banner_fallback;
+mod backend_events;
+pub(crate) mod backend_sessions;
 mod background_requests;
 mod composer_hints;
 mod config_panel;
@@ -1131,7 +1133,7 @@ impl App {
                     let restrict_disconnected_input = self.reconnect.offline
                         && !self.chat_widget.keymap_contexts().is_warnings()
                         && self.reconnect.presentation
-                            == reconnect::ReconnectPresentation::Conversation
+                            != reconnect::ReconnectPresentation::Overview
                         && !self
                             .chat_widget
                             .active_view_accepts_input_when_disconnected();
@@ -1227,7 +1229,6 @@ impl App {
     }
 
     fn render_chat_widget_frame(&mut self, tui: &mut tui::Tui, screen_size: Size) -> Result<Rect> {
-        self.sync_thread_title_progress();
         self.chat_widget
             .set_sparkle_terminal_focus(tui.is_terminal_focused());
         if tui.is_owned_screen() {

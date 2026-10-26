@@ -16,6 +16,13 @@ function resolveResourceRequestOptions(
   return Promise.resolve(options).then(buildOptions);
 }
 
+function withBodyFinalization<T extends RequestOptions>(
+  options: T,
+  finalization: { streamFromBody?: true; finalizeMultipart?: true },
+): T {
+  return { ...options, __metadata: { ...options.__metadata, ...finalization } };
+}
+
 /**
  * Turn audio into text or text into audio.
  */
@@ -54,7 +61,7 @@ export class Transcriptions extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Stream<TranscriptionStreamEvent>>;
   create(
-    body: TranscriptionCreateParamsStreaming,
+    body: TranscriptionCreateParams,
     options?: RequestOptions,
   ): APIPromise<TranscriptionCreateResponse | string | Stream<TranscriptionStreamEvent>>;
   create(
@@ -65,17 +72,19 @@ export class Transcriptions extends APIResource {
       '/audio/transcriptions',
       resolveResourceRequestOptions(options, (options) =>
         multipartFormRequestOptions(
-          {
-            body,
-            ...options,
-            stream: body.stream ?? false,
-            __metadata: { model: body.model },
-            __security: { bearerAuth: true },
-          },
+          withBodyFinalization(
+            ((request) => ({ ...request, __metadata: { model: body.model } }))({
+              body,
+              ...options,
+              stream: body.stream ?? false,
+              __security: { bearerAuth: true },
+            }),
+            { streamFromBody: true },
+          ),
           this._client,
         ),
       ),
-    );
+    ) as APIPromise<TranscriptionCreateResponse> | APIPromise<Stream<TranscriptionStreamEvent>>;
   }
 }
 

@@ -104,6 +104,7 @@ use codex_protocol::protocol::Event;
 use codex_protocol::protocol::EventMsg;
 use codex_protocol::protocol::ExecApprovalRequestEvent;
 use codex_protocol::protocol::Op;
+use codex_protocol::protocol::PrivateSessionEventPayload;
 use codex_protocol::protocol::RealtimeEvent;
 use codex_protocol::protocol::ReviewDecision;
 use codex_protocol::protocol::SubAgentActivityKind;
@@ -1174,6 +1175,45 @@ pub(crate) async fn apply_bespoke_event_handling(
                 .send_server_notification(ServerNotification::HookCompleted(notification))
                 .await;
         }
+        EventMsg::PrivateSessionEvent(private) => match private.event {
+            PrivateSessionEventPayload::RecordedItem(mut recorded) => {
+                recorded.item.clear_executed_tool_calls();
+                let mut notification = ServerNotification::RawResponseItemCompleted(
+                    RawResponseItemCompletedNotification {
+                        thread_id: private.thread_id.to_string(),
+                        turn_id: event_turn_id,
+                        item: recorded.item,
+                    },
+                );
+                if conversation.enabled(Feature::OmitAppServerNotificationMedia) {
+                    notification = without_notification_media(notification);
+                }
+                outgoing.send_server_notification(notification).await;
+            }
+            PrivateSessionEventPayload::TurnAborted(aborted) => {
+                // Notify observers without completing or clearing the parent's turn.
+                emit_turn_completed_with_status(
+                    private.thread_id,
+                    event_turn_id,
+                    TurnCompletionMetadata {
+                        status: TurnStatus::Interrupted,
+                        root_turn_id: aborted.root_turn_id,
+                        error: aborted.error.map(|error| TurnError {
+                            message: error.message,
+                            codex_error_info: error.codex_error_info.map(Into::into),
+                            misalignment: error.misalignment.map(Into::into),
+                            additional_details: None,
+                        }),
+                        last_agent_message: None,
+                        started_at: aborted.started_at,
+                        completed_at: aborted.completed_at,
+                        duration_ms: aborted.duration_ms,
+                    },
+                    &outgoing,
+                )
+                .await;
+            }
+        },
         EventMsg::RawResponseItem(mut raw_response_item_event) => {
             // Keep warehouse metadata out of app-server notifications.
             raw_response_item_event.item.clear_executed_tool_calls();
@@ -1246,8 +1286,10 @@ pub(crate) async fn apply_bespoke_event_handling(
         }
         EventMsg::ThreadRolledBack(_) | EventMsg::ThreadQueueChanged(_) => {}
         EventMsg::ThreadSettingsApplied(_) => {
-            let thread_settings =
-                thread_settings_from_config_snapshot(&conversation.config_snapshot().await);
+            let (mut config_snapshot, selected_service_tier) =
+                conversation.resume_config_snapshot().await;
+            config_snapshot.service_tier = selected_service_tier;
+            let thread_settings = thread_settings_from_config_snapshot(&config_snapshot);
             let changed = {
                 let mut state = thread_state.lock().await;
                 state.note_thread_settings(thread_settings.clone())

@@ -18,7 +18,6 @@ use codex_guardian_context::TranscriptSelection;
 use codex_guardian_context::default_registry;
 use codex_protocol::models::ResponseItem;
 
-use crate::context::ContextualUserFragment;
 use crate::context::GuardianPermissionContext;
 use crate::context::GuardianReviewEvidence;
 use crate::context::GuardianToolDescriptions;
@@ -27,9 +26,7 @@ use crate::context::NodeReplReviewEvidenceMode;
 use crate::context::is_guardian_context_message;
 use crate::context::node_repl_review_evidence_mode;
 use crate::session::session::Session;
-use codex_utils_output_truncation::TruncationPolicy;
 use codex_utils_output_truncation::approx_bytes_for_tokens;
-use codex_utils_output_truncation::truncate_text;
 
 use super::ApprovalRequestReasons;
 use super::GUARDIAN_MAX_NODE_REPL_TOOL_RESULT_TOKENS;
@@ -38,7 +35,6 @@ use super::GuardianApprovalRequest;
 use super::GuardianReviewContext;
 use super::approval_request::format_guardian_action_pretty;
 
-const GUARDIAN_MAX_APPROVAL_REASON_TOKENS: usize = 512;
 // Bound both JSON and permission evidence without restricting manual approvals.
 const MAX_GUARDIAN_ENVIRONMENT_ID_BYTES: usize = 256;
 pub(super) const GUARDIAN_TRANSCRIPT_START: &str = ">>> TRANSCRIPT START\n";
@@ -138,7 +134,6 @@ pub(crate) async fn build_guardian_prompt_items_with_parent_turn(
                 tool_description.as_deref(),
                 connector_description.as_deref(),
             )
-            .map(|descriptions| descriptions.render().into_text().unwrap_or_default())
         } else {
             None
         },
@@ -152,12 +147,7 @@ pub(crate) async fn build_guardian_prompt_items_with_parent_turn(
             | GuardianApprovalRequest::McpToolCall { .. }
             | GuardianApprovalRequest::RequestPermissions { .. } => PlannedActionKind::Command,
         },
-        reason: reasons.retry.or(reasons.approval).map(|reason| {
-            truncate_text(
-                &reason,
-                TruncationPolicy::Tokens(GUARDIAN_MAX_APPROVAL_REASON_TOKENS),
-            )
-        }),
+        reason: reasons.retry.or(reasons.approval),
     };
     let permissions = parent_context
         .map(|context| {
@@ -277,8 +267,8 @@ pub(crate) fn render_guardian_transcript_entries(
 /// Keep both tool calls and tool results here. The reviewer often needs the
 /// agent's exact queried path / arguments as well as the returned evidence to
 /// decide whether the pending approval is justified.
-/// Per-entry truncation happens during collection, using the current review's
-/// Node REPL cap; the cursor still counts every non-empty evidence entry.
+/// Tool-call and output truncation happen in sync preparation; other caps still apply
+/// during collection. The cursor counts every non-empty evidence entry.
 pub(super) fn collect_guardian_context(
     history: &dyn SectionHistory,
     node_repl_result_token_limit: usize,

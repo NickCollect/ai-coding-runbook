@@ -43,7 +43,10 @@ class TestSessions:
                 "model": "x",
                 "type": "live",
                 "audio": {"output": {"voice": "alloy"}},
-                "delegation": {"type": "client"},
+                "delegation": {
+                    "type": "client",
+                    "acknowledgement_delay_ms": 0,
+                },
                 "input": [
                     {
                         "content": [
@@ -65,8 +68,18 @@ class TestSessions:
                         "decisions": {
                             "questions": [
                                 {
-                                    "instructions": "instructions",
-                                    "type": "predicate",
+                                    "choices": [
+                                        {
+                                            "value": False,
+                                            "description": "description",
+                                        },
+                                        {
+                                            "value": True,
+                                            "description": "description",
+                                        },
+                                    ],
+                                    "instructions": "string",
+                                    "type": "choice",
                                     "name": "name",
                                 }
                             ]
@@ -197,6 +210,7 @@ class TestSessions:
                 },
                 "delegation": {
                     "type": "responses",
+                    "acknowledgement_delay_ms": 0,
                     "responses": {
                         "instructions": "instructions",
                         "max_output_tokens": 16,
@@ -415,7 +429,10 @@ class TestAsyncSessions:
                 "model": "x",
                 "type": "live",
                 "audio": {"output": {"voice": "alloy"}},
-                "delegation": {"type": "client"},
+                "delegation": {
+                    "type": "client",
+                    "acknowledgement_delay_ms": 0,
+                },
                 "input": [
                     {
                         "content": [
@@ -437,8 +454,18 @@ class TestAsyncSessions:
                         "decisions": {
                             "questions": [
                                 {
-                                    "instructions": "instructions",
-                                    "type": "predicate",
+                                    "choices": [
+                                        {
+                                            "value": False,
+                                            "description": "description",
+                                        },
+                                        {
+                                            "value": True,
+                                            "description": "description",
+                                        },
+                                    ],
+                                    "instructions": "string",
+                                    "type": "choice",
                                     "name": "name",
                                 }
                             ]
@@ -571,6 +598,7 @@ class TestAsyncSessions:
                 },
                 "delegation": {
                     "type": "responses",
+                    "acknowledgement_delay_ms": 0,
                     "responses": {
                         "instructions": "instructions",
                         "max_output_tokens": 16,

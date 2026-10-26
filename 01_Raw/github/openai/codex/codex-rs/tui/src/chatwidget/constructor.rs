@@ -128,6 +128,7 @@ impl ChatWidget {
             has_codex_backend_auth,
             model_catalog,
             model_popup_request_id: None,
+            permission_popup_pending: false,
             permission_popup_request_id: None,
             permission_discovery: None,
             inline_permission_profile_selection: None,
@@ -298,6 +299,10 @@ impl ChatWidget {
             test_codex_home: None,
         };
 
+        widget.bottom_pane.set_mention_usage_home(
+            widget.local_settings.codex_home.as_path(),
+            widget.local_settings.history.persistence,
+        );
         widget.prefetch_rate_limits();
         if let Some(keymap) = runtime_keymap {
             widget.bottom_pane.set_keymap_bindings(&keymap);

@@ -346,7 +346,7 @@
       ]
     },
     "AsyncClassifierMode": {
-      "description": "Async classifier experiment, resolved once for each parent task.",
+      "description": "Legacy classifier modes retained for configuration and model-catalog compatibility.",
       "enum": [
         "snapshot",
         "conversation"
@@ -453,6 +453,12 @@
         "policy": {
           "description": "Additional policy instructions inserted into the guardian prompt.",
           "type": "string"
+        },
+        "timeout_ms": {
+          "description": "Overall Guardian review budget in milliseconds, including setup and retries. Defaults to 90,000. Set to 0 to wait without a review deadline; cancellation and independent transport timeouts still apply.",
+          "format": "uint32",
+          "minimum": 0.0,
+          "type": "integer"
         }
       },
       "type": "object"
@@ -512,6 +518,51 @@
       },
       "required": [
         "command"
+      ],
+      "type": "object"
+    },
+    "AwsSigV4Config": {
+      "additionalProperties": false,
+      "description": "AWS SigV4 action selected by an exact-host, method, and path MITM hook.",
+      "properties": {
+        "access_key_id": {
+          "$ref": "#/definitions/ProxySecretSource"
+        },
+        "max_body_bytes": {
+          "default": 8388608,
+          "format": "uint",
+          "minimum": 0.0,
+          "type": "integer"
+        },
+        "placeholder_access_key_id": {
+          "description": "Nonsecret access key ID installed in the guest AWS profile.",
+          "type": "string"
+        },
+        "port": {
+          "default": 443,
+          "format": "uint16",
+          "minimum": 0.0,
+          "type": "integer"
+        },
+        "region": {
+          "type": "string"
+        },
+        "secret_access_key": {
+          "$ref": "#/definitions/ProxySecretSource"
+        },
+        "service": {
+          "type": "string"
+        },
+        "session_token": {
+          "$ref": "#/definitions/ProxySecretSource"
+        }
+      },
+      "required": [
+        "access_key_id",
+        "placeholder_access_key_id",
+        "region",
+        "secret_access_key",
+        "service"
       ],
       "type": "object"
     },
@@ -964,6 +1015,9 @@
             "guardian_node_repl_transcript_images": {
               "type": "boolean"
             },
+            "guardian_recorded_items": {
+              "type": "boolean"
+            },
             "guardian_reuse_parent_compaction": {
               "type": "boolean"
             },
@@ -978,6 +1032,9 @@
             },
             "guardianv2_decisions_comparison": {
               "type": "boolean"
+            },
+            "guardianv3": {
+              "$ref": "#/definitions/FeatureToml_for_GuardianV3ConfigToml"
             },
             "hooks": {
               "type": "boolean"
@@ -1162,6 +1219,9 @@
             "rollout_budget": {
               "$ref": "#/definitions/FeatureToml_for_RolloutBudgetConfigToml"
             },
+            "runtime_agent_instances": {
+              "$ref": "#/definitions/FeatureToml_for_RuntimeAgentInstancesConfigToml"
+            },
             "runtime_metrics": {
               "type": "boolean"
             },
@@ -1222,6 +1282,9 @@
             "subagent_default_context_limits": {
               "type": "boolean"
             },
+            "subagent_thread_environments": {
+              "type": "boolean"
+            },
             "system_proxy_fallback": {
               "type": "boolean"
             },
@@ -1256,6 +1319,9 @@
               "type": "boolean"
             },
             "tui_app_server": {
+              "type": "boolean"
+            },
+            "tui_multi_backend": {
               "type": "boolean"
             },
             "ultrafast_mode": {
@@ -1676,6 +1742,16 @@
         }
       ]
     },
+    "FeatureToml_for_GuardianV3ConfigToml": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "#/definitions/GuardianV3ConfigToml"
+        }
+      ]
+    },
     "FeatureToml_for_MultiAgentV2ConfigToml": {
       "anyOf": [
         {
@@ -1716,6 +1792,16 @@
         }
       ]
     },
+    "FeatureToml_for_RuntimeAgentInstancesConfigToml": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "#/definitions/RuntimeAgentInstancesConfigToml"
+        }
+      ]
+    },
     "FeatureToml_for_SleepToolConfigToml": {
       "anyOf": [
         {
@@ -1740,7 +1826,7 @@
       "additionalProperties": false,
       "properties": {
         "enabled": {
-          "description": "When `false`, disables the feedback flow across Codex product surfaces.",
+          "description": "When `false`, disables feedback uploads and background Guardian review retention. Explicit local exports remain available.",
           "type": "boolean"
         }
       },
@@ -1975,7 +2061,7 @@
               "$ref": "#/definitions/AsyncClassifierMode"
             }
           ],
-          "description": "Classifier mode override. Otherwise use the model default, then conversation."
+          "description": "Deprecated and ignored; asynchronous classification always uses conversations."
         },
         "classifier_instructions": {
           "type": "string"
@@ -2116,6 +2202,16 @@
         "reasoning"
       ],
       "type": "string"
+    },
+    "GuardianV3ConfigToml": {
+      "additionalProperties": false,
+      "description": "User-configurable settings for Guardian V3.",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
     },
     "History": {
       "additionalProperties": false,
@@ -2476,6 +2572,14 @@
       },
       "type": "object"
     },
+    "McpEmaTokenEndpointAuthMethod": {
+      "description": "Token endpoint authentication selected by a confidential EMA client registration.",
+      "enum": [
+        "client_secret_basic",
+        "client_secret_post"
+      ],
+      "type": "string"
+    },
     "McpEnterpriseManagedAuthConfig": {
       "additionalProperties": false,
       "properties": {
@@ -2545,12 +2649,24 @@
       "additionalProperties": false,
       "properties": {
         "client_id": {
-          "description": "Public OAuth client registered with that enterprise IdP.",
+          "description": "OAuth client registered with that enterprise IdP.",
+          "type": "string"
+        },
+        "client_secret": {
+          "description": "Provisioned client secret for confidential IdP login and token exchange. Omitted for a public client.",
           "type": "string"
         },
         "issuer": {
           "description": "Issuer used for enterprise OAuth discovery and identity validation.",
           "type": "string"
+        },
+        "token_endpoint_auth_method": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/McpEmaTokenEndpointAuthMethod"
+            }
+          ],
+          "description": "Registered EMA client authentication method. Defaults to client_secret_basic when a secret is configured; requires a client secret."
         }
       },
       "required": [
@@ -2584,6 +2700,14 @@
         "client_secret": {
           "description": "OAuth client secret used for token exchange with a pre-registered client.",
           "type": "string"
+        },
+        "token_endpoint_auth_method": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/McpEmaTokenEndpointAuthMethod"
+            }
+          ],
+          "description": "Registered EMA client authentication method. Defaults to client_secret_basic when a secret is configured; requires a client secret."
         }
       },
       "type": "object"
@@ -2645,7 +2769,7 @@
           "type": "boolean"
         },
         "dual_write": {
-          "description": "Generate both versions while the selected version supplies context.",
+          "description": "Generate both versions while v1 is selected; v2 runs alone after cutover.",
           "type": "boolean"
         },
         "extract_model": {
@@ -2702,7 +2826,7 @@
               "$ref": "#/definitions/MemoryVersion"
             }
           ],
-          "description": "Selects the memory pipeline; v1 remains the default."
+          "description": "Selects the memory pipeline. Fresh profiles default to v2 when memories are enabled, unless dual-write is explicitly disabled; existing v1 profiles default to v1."
         }
       },
       "type": "object"
@@ -2900,6 +3024,10 @@
           "description": "Additional HTTP headers to include in requests to this provider where the (key, value) pairs are the header name and value.",
           "type": "object"
         },
+        "location": {
+          "description": "Google Cloud location for the built-in GCP provider. Takes precedence over `GOOGLE_CLOUD_LOCATION`; defaults to `global` when neither is set.",
+          "type": "string"
+        },
         "model_catalog_url": {
           "description": "Optional full URL for a Codex-native model catalog. When unset, OpenAI discovery uses the Codex backend unless `base_url` overrides the inference endpoint.",
           "type": "string"
@@ -2907,6 +3035,10 @@
         "name": {
           "default": "",
           "description": "Friendly display name.",
+          "type": "string"
+        },
+        "project_id": {
+          "description": "Google Cloud project ID for the built-in GCP provider. Takes precedence over `GOOGLE_CLOUD_PROJECT` when deriving the Vertex AI endpoint.",
           "type": "string"
         },
         "query_params": {
@@ -3030,7 +3162,7 @@
           "type": "boolean"
         },
         "preserve_fork_prefix": {
-          "description": "Preserve the parent's model-visible history on full forks and append child instructions. Defaults to false. Legacy compaction without a reusable context baseline still rebuilds.",
+          "description": "Preserve the parent's model-visible history on full forks and append child instructions. Defaults to true. Legacy compaction without a reusable context baseline still rebuilds.",
           "type": "boolean"
         },
         "root_agent_usage_hint_text": {
@@ -3074,7 +3206,16 @@
       "type": "object"
     },
     "NetworkMitmActionToml": {
+      "additionalProperties": false,
       "properties": {
+        "aws_sigv4": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AwsSigV4Config"
+            }
+          ],
+          "default": null
+        },
         "inject_request_headers": {
           "default": [],
           "items": {
@@ -3127,6 +3268,15 @@
           },
           "type": "array"
         },
+        "ports": {
+          "default": [],
+          "items": {
+            "format": "uint16",
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          "type": "array"
+        },
         "query": {
           "additionalProperties": {
             "items": {
@@ -3136,6 +3286,13 @@
           },
           "default": {},
           "type": "object"
+        },
+        "schemes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "required": [
@@ -3147,9 +3304,14 @@
       "type": "object"
     },
     "NetworkMitmInjectedHeaderToml": {
+      "additionalProperties": false,
       "properties": {
         "name": {
           "default": "",
+          "type": "string"
+        },
+        "placeholder": {
+          "default": null,
           "type": "string"
         },
         "prefix": {
@@ -3181,6 +3343,13 @@
             "$ref": "#/definitions/NetworkMitmHookToml"
           },
           "type": "object"
+        },
+        "version": {
+          "description": "Set to 2 when using origin-scoped hooks or credential substitution.",
+          "format": "uint8",
+          "maximum": 2.0,
+          "minimum": 2.0,
+          "type": "integer"
         }
       },
       "type": "object"
@@ -3852,6 +4021,35 @@
       },
       "type": "object"
     },
+    "ProxySecretSource": {
+      "description": "A credential source in the trusted proxy process, never in the executor environment.",
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "env_var": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "env_var"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "file": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "file"
+          ],
+          "type": "object"
+        }
+      ]
+    },
     "RawMcpServerConfig": {
       "additionalProperties": false,
       "description": "Raw MCP config shape used for deserialization and supported-field JSON Schema generation.\n\nFields that are accepted only to produce targeted validation errors should be skipped in the generated schema.\n\nKeep `TryFrom<RawMcpServerConfig> for McpServerConfig` exhaustively destructuring this struct so new TOML fields cannot be added here without updating the validation/mapping logic that produces [`McpServerConfig`].",
@@ -4270,6 +4468,36 @@
         }
       },
       "type": "object"
+    },
+    "RuntimeAgentInstancesConfigToml": {
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "mode": {
+          "$ref": "#/definitions/RuntimeAuthMode"
+        }
+      },
+      "type": "object"
+    },
+    "RuntimeAuthMode": {
+      "oneOf": [
+        {
+          "description": "Send the actor credential and a runtime assertion together during migration.",
+          "enum": [
+            "dual_header"
+          ],
+          "type": "string"
+        },
+        {
+          "description": "Send only the runtime assertion as the request credential.",
+          "enum": [
+            "assertion_only"
+          ],
+          "type": "string"
+        }
+      ]
     },
     "SandboxMode": {
       "enum": [
@@ -7373,6 +7601,9 @@
         "guardian_node_repl_transcript_images": {
           "type": "boolean"
         },
+        "guardian_recorded_items": {
+          "type": "boolean"
+        },
         "guardian_reuse_parent_compaction": {
           "type": "boolean"
         },
@@ -7387,6 +7618,9 @@
         },
         "guardianv2_decisions_comparison": {
           "type": "boolean"
+        },
+        "guardianv3": {
+          "$ref": "#/definitions/FeatureToml_for_GuardianV3ConfigToml"
         },
         "hooks": {
           "type": "boolean"
@@ -7571,6 +7805,9 @@
         "rollout_budget": {
           "$ref": "#/definitions/FeatureToml_for_RolloutBudgetConfigToml"
         },
+        "runtime_agent_instances": {
+          "$ref": "#/definitions/FeatureToml_for_RuntimeAgentInstancesConfigToml"
+        },
         "runtime_metrics": {
           "type": "boolean"
         },
@@ -7631,6 +7868,9 @@
         "subagent_default_context_limits": {
           "type": "boolean"
         },
+        "subagent_thread_environments": {
+          "type": "boolean"
+        },
         "system_proxy_fallback": {
           "type": "boolean"
         },
@@ -7665,6 +7905,9 @@
           "type": "boolean"
         },
         "tui_app_server": {
+          "type": "boolean"
+        },
+        "tui_multi_backend": {
           "type": "boolean"
         },
         "ultrafast_mode": {
@@ -7842,7 +8085,7 @@
           "$ref": "#/definitions/AbsolutePathBuf"
         }
       ],
-      "description": "Directory where Codex writes log files. Setting this value explicitly also enables the TUI text log in this directory. Defaults to `$CODEX_HOME/log`."
+      "description": "Directory for log files. Setting this value explicitly also routes the SQLite logs database here and enables the TUI text log in this directory. When unset, log files use `$CODEX_HOME/log` and SQLite logs use `sqlite_home`. Existing SQLite logs in `sqlite_home` are not migrated automatically. A managed `sqlite_home` requirement keeps SQLite logs in that required directory."
     },
     "marketplaces": {
       "additionalProperties": {
@@ -8164,7 +8407,7 @@
       "type": "boolean"
     },
     "thread_unload_delay_secs": {
-      "description": "Seconds a thread must have no subscribers and no activity before app-server unloads it. Defaults to 1800 (30 minutes); zero unloads immediately. Changes require a server restart.",
+      "description": "Seconds a thread must have no subscribers and no activity before app-server unloads it. Defaults to 1800 (30 minutes); zero unloads immediately. Resolved when each thread is loaded; request config overrides apply per thread.",
       "format": "uint64",
       "minimum": 0.0,
       "type": "integer"

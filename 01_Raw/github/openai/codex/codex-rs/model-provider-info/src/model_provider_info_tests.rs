@@ -97,6 +97,8 @@ base_url = "http://localhost:11434/v1"
         supports_websockets: false,
         supports_standalone_web_search: false,
         capabilities: None,
+        project_id: None,
+        location: None,
         include_internal_metadata: false,
     };
 
@@ -136,6 +138,8 @@ query_params = { api-version = "2025-04-01-preview" }
         supports_websockets: false,
         supports_standalone_web_search: false,
         capabilities: None,
+        project_id: None,
+        location: None,
         include_internal_metadata: false,
     };
 
@@ -179,6 +183,8 @@ supports_standalone_web_search = true
         supports_websockets: false,
         supports_standalone_web_search: true,
         capabilities: None,
+        project_id: None,
+        location: None,
         include_internal_metadata: false,
     };
 
@@ -369,6 +375,8 @@ fn test_create_amazon_bedrock_provider() {
             supports_websockets: false,
             supports_standalone_web_search: false,
             capabilities: None,
+            project_id: None,
+            location: None,
             include_internal_metadata: false,
         }
     );
@@ -627,6 +635,68 @@ fn test_merge_configured_model_providers_applies_amazon_bedrock_transport_overri
         .http_headers
         .get_or_insert_default()
         .insert("x-example-header".to_string(), "value".into());
+
+    assert_eq!(
+        merge_configured_model_providers(
+            built_in_model_providers(/*openai_base_url*/ None),
+            configured_model_providers,
+        ),
+        Ok(expected)
+    );
+}
+
+#[test]
+fn test_merge_configured_model_providers_applies_gcp_transport_overrides() {
+    let auth = provider_auth_for_test();
+    let configured_model_providers = std::collections::HashMap::from([(
+        GCP_PROVIDER_ID.to_string(),
+        ModelProviderInfo {
+            base_url: Some("https://vertex.example.com/v1".to_string()),
+            project_id: Some("configured-project".to_string()),
+            location: Some("us-east4".to_string()),
+            auth: Some(auth.clone()),
+            http_headers: Some(maplit::hashmap! {
+                "x-example-header".to_string() => "value".into(),
+            }),
+            ..ModelProviderInfo::default()
+        },
+    )]);
+
+    let mut expected = built_in_model_providers(/*openai_base_url*/ None);
+    let provider = expected
+        .get_mut(GCP_PROVIDER_ID)
+        .expect("GCP provider should be built in");
+    provider.base_url = Some("https://vertex.example.com/v1".to_string());
+    provider.project_id = Some("configured-project".to_string());
+    provider.location = Some("us-east4".to_string());
+    provider.auth = Some(auth);
+    provider.http_headers = Some(maplit::hashmap! {
+        "x-example-header".to_string() => "value".into(),
+    });
+
+    assert_eq!(
+        merge_configured_model_providers(
+            built_in_model_providers(/*openai_base_url*/ None),
+            configured_model_providers,
+        ),
+        Ok(expected)
+    );
+}
+
+#[test]
+fn test_merge_configured_model_providers_applies_gcp_endpoint_override() {
+    let configured_model_providers = std::collections::HashMap::from([(
+        GCP_PROVIDER_ID.to_string(),
+        ModelProviderInfo {
+            base_url: Some("https://vertex.example.com/v1".to_string()),
+            ..ModelProviderInfo::default()
+        },
+    )]);
+    let mut expected = built_in_model_providers(/*openai_base_url*/ None);
+    expected
+        .get_mut(GCP_PROVIDER_ID)
+        .expect("GCP provider should be built in")
+        .base_url = Some("https://vertex.example.com/v1".to_string());
 
     assert_eq!(
         merge_configured_model_providers(

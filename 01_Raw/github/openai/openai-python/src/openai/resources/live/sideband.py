@@ -27,7 +27,7 @@ from ...types.live.error_event import ErrorEvent
 from ...types.websocket_reconnection import ReconnectingEvent, ReconnectingOverrides
 from ...types.live.connect_client_event import ConnectClientEvent
 from ...types.live.connect_server_event import ConnectServerEvent
-from ...types.websocket_connection_options import WebSocketConnectionOptions
+from ...types.websocket_connection_options import WebSocketConnectionOptions, SyncWebSocketConnectionOptions
 from ...types.live.connect_client_event_param import ConnectClientEventParam
 from ...types.live.session_update_config_param import SessionUpdateConfigParam
 from ...types.responses.response_input_item_param import ResponseInputItemParam
@@ -51,7 +51,7 @@ class Sideband(SyncAPIResource):
         graceful_close: bool | Omit = omit,
         extra_query: Query = {},
         extra_headers: Headers = {},
-        websocket_connection_options: WebSocketConnectionOptions = {},
+        websocket_connection_options: SyncWebSocketConnectionOptions = {},
         on_reconnecting: Callable[[ReconnectingEvent], ReconnectingOverrides | None] | None = None,
         max_retries: int = 5,
         initial_delay: float = 0.5,
@@ -142,9 +142,7 @@ class AsyncSidebandConnection(AsyncWebSocketConnectionBase):
             max_delay=max_delay,
             extra_query=extra_query,
             extra_headers=extra_headers,
-            send_queue=(
-                send_queue if send_queue is not None else SendQueue(max_bytes=DEFAULT_LIVE_SEND_QUEUE_MAX_BYTES)
-            ),
+            send_queue=send_queue if send_queue is not None else SendQueue(max_bytes=DEFAULT_LIVE_SEND_QUEUE_MAX_BYTES),
             logger=log,
         )
         self._event_handler_registry = EventHandlerRegistry(use_lock=False)
@@ -430,20 +428,29 @@ class AsyncSidebandConnectionManager:
         """
         ws = await self._connect_ws(self.__extra_query, self.__extra_headers)
 
-        self.__connection = AsyncSidebandConnection(
-            ws,
-            make_ws=self._connect_ws if self.__on_reconnecting is not None else None,
-            on_reconnecting=self.__on_reconnecting,
-            max_retries=self.__max_retries,
-            initial_delay=self.__initial_delay,
-            max_delay=self.__max_delay,
-            extra_query=self.__extra_query,
-            extra_headers=self.__extra_headers,
-            send_queue=self.__send_queue,
-        )
+        try:
+            self.__connection = AsyncSidebandConnection(
+                ws,
+                make_ws=self._connect_ws if self.__on_reconnecting is not None else None,
+                on_reconnecting=self.__on_reconnecting,
+                max_retries=self.__max_retries,
+                initial_delay=self.__initial_delay,
+                max_delay=self.__max_delay,
+                extra_query=self.__extra_query,
+                extra_headers=self.__extra_headers,
+                send_queue=self.__send_queue,
+            )
 
-        self.__event_handler_registry.merge_into(self.__connection._event_handler_registry)
-        await self.__connection._flush_send_queue()
+            self.__event_handler_registry.merge_into(self.__connection._event_handler_registry)
+            await self.__connection._flush_send_queue()
+        except BaseException:
+            self.__connection = None
+            try:
+                await ws.close()
+            except BaseException:
+                # Preserve the exception that prevented successful entry.
+                pass
+            raise
 
         return self.__connection
 
@@ -456,17 +463,18 @@ class AsyncSidebandConnectionManager:
             raise OpenAIError("You need to install `openai[realtime]` to use this method") from exc
 
         url = self._prepare_url()
+        try:
+            # Older runtimes do not declare this optional helper.
+            query_params = getattr(self.__client, "_websocket_query_params")  # noqa: B009
+        except AttributeError:
+            query_params = self.__client._websocket_query_params_fallback
         url = url.copy_with(
-            params=httpx2.QueryParams(self.__client.qs.stringify(cast(Any, self.__client.default_query)))
-            .merge(url.params)
-            .merge(
-                cast(
-                    Any,
-                    {
-                        **({"graceful_close": self.__graceful_close} if self.__graceful_close is not omit else {}),
-                        **extra_query,
-                    },
-                )
+            params=query_params(
+                url,
+                {
+                    **({"graceful_close": self.__graceful_close} if self.__graceful_close is not omit else {}),
+                    **extra_query,
+                },
             ),
         )
         url = url.copy_with(scheme={"http": "ws", "https": "wss"}.get(url.scheme, url.scheme))
@@ -496,11 +504,16 @@ class AsyncSidebandConnectionManager:
         if self.__websocket_connection_options:
             log.debug("Custom WebSocket connection options provided")
 
+        websocket_options = self.__websocket_connection_options.copy()
+        websocket_options.setdefault("max_size", None)
+        if websocket_options.get("max_size") is None:
+            websocket_options.setdefault("compression", None)
+
         return await connect(
             str(url),
             user_agent_header=None,
             additional_headers=_merge_mappings(dict(headers.values()), {}),
-            **self.__websocket_connection_options,
+            **websocket_options,
         )
 
     def _prepare_url(self) -> httpx2.URL:
@@ -512,8 +525,12 @@ class AsyncSidebandConnectionManager:
             base_url = self.__client._base_url.copy_with(scheme=ws_scheme)
 
         path, separator, query = base_url.raw_path.partition(b"?")
-        endpoint = path_template("/live/sessions/{session_id}/attach", session_id=self.__session_id).encode("utf-8")
-        merge_raw_path = path.rstrip(b"/") + endpoint + separator + query
+        merge_raw_path = (
+            path.rstrip(b"/")
+            + path_template("/live/sessions/{session_id}/attach", session_id=self.__session_id).encode("utf-8")
+            + separator
+            + query
+        )
         return base_url.copy_with(raw_path=merge_raw_path)
 
     async def __aexit__(
@@ -554,9 +571,7 @@ class SidebandConnection(WebSocketConnectionBase):
             max_delay=max_delay,
             extra_query=extra_query,
             extra_headers=extra_headers,
-            send_queue=(
-                send_queue if send_queue is not None else SendQueue(max_bytes=DEFAULT_LIVE_SEND_QUEUE_MAX_BYTES)
-            ),
+            send_queue=send_queue if send_queue is not None else SendQueue(max_bytes=DEFAULT_LIVE_SEND_QUEUE_MAX_BYTES),
             logger=log,
         )
         self._event_handler_registry = EventHandlerRegistry(use_lock=True)
@@ -752,7 +767,7 @@ class SidebandConnectionManager:
         graceful_close: bool | Omit = omit,
         extra_query: Query,
         extra_headers: Headers,
-        websocket_connection_options: WebSocketConnectionOptions,
+        websocket_connection_options: SyncWebSocketConnectionOptions,
         on_reconnecting: Callable[[ReconnectingEvent], ReconnectingOverrides | None] | None = None,
         max_retries: int = 5,
         initial_delay: float = 0.5,
@@ -838,20 +853,29 @@ class SidebandConnectionManager:
         """
         ws = self._connect_ws(self.__extra_query, self.__extra_headers)
 
-        self.__connection = SidebandConnection(
-            ws,
-            make_ws=self._connect_ws if self.__on_reconnecting is not None else None,
-            on_reconnecting=self.__on_reconnecting,
-            max_retries=self.__max_retries,
-            initial_delay=self.__initial_delay,
-            max_delay=self.__max_delay,
-            extra_query=self.__extra_query,
-            extra_headers=self.__extra_headers,
-            send_queue=self.__send_queue,
-        )
+        try:
+            self.__connection = SidebandConnection(
+                ws,
+                make_ws=self._connect_ws if self.__on_reconnecting is not None else None,
+                on_reconnecting=self.__on_reconnecting,
+                max_retries=self.__max_retries,
+                initial_delay=self.__initial_delay,
+                max_delay=self.__max_delay,
+                extra_query=self.__extra_query,
+                extra_headers=self.__extra_headers,
+                send_queue=self.__send_queue,
+            )
 
-        self.__event_handler_registry.merge_into(self.__connection._event_handler_registry)
-        self.__connection._flush_send_queue()
+            self.__event_handler_registry.merge_into(self.__connection._event_handler_registry)
+            self.__connection._flush_send_queue()
+        except BaseException:
+            self.__connection = None
+            try:
+                ws.close()
+            except BaseException:
+                # Preserve the exception that prevented successful entry.
+                pass
+            raise
 
         return self.__connection
 
@@ -864,17 +888,18 @@ class SidebandConnectionManager:
             raise OpenAIError("You need to install `openai[realtime]` to use this method") from exc
 
         url = self._prepare_url()
+        try:
+            # Older runtimes do not declare this optional helper.
+            query_params = getattr(self.__client, "_websocket_query_params")  # noqa: B009
+        except AttributeError:
+            query_params = self.__client._websocket_query_params_fallback
         url = url.copy_with(
-            params=httpx2.QueryParams(self.__client.qs.stringify(cast(Any, self.__client.default_query)))
-            .merge(url.params)
-            .merge(
-                cast(
-                    Any,
-                    {
-                        **({"graceful_close": self.__graceful_close} if self.__graceful_close is not omit else {}),
-                        **extra_query,
-                    },
-                )
+            params=query_params(
+                url,
+                {
+                    **({"graceful_close": self.__graceful_close} if self.__graceful_close is not omit else {}),
+                    **extra_query,
+                },
             ),
         )
         url = url.copy_with(scheme={"http": "ws", "https": "wss"}.get(url.scheme, url.scheme))
@@ -904,11 +929,16 @@ class SidebandConnectionManager:
         if self.__websocket_connection_options:
             log.debug("Custom WebSocket connection options provided")
 
+        websocket_options = self.__websocket_connection_options.copy()
+        websocket_options.setdefault("max_size", None)
+        if websocket_options.get("max_size") is None:
+            websocket_options.setdefault("compression", None)
+
         return connect(
             str(url),
             user_agent_header=None,
             additional_headers=_merge_mappings(dict(headers.values()), {}),
-            **self.__websocket_connection_options,
+            **websocket_options,
         )
 
     def _prepare_url(self) -> httpx2.URL:
@@ -920,8 +950,12 @@ class SidebandConnectionManager:
             base_url = self.__client._base_url.copy_with(scheme=ws_scheme)
 
         path, separator, query = base_url.raw_path.partition(b"?")
-        endpoint = path_template("/live/sessions/{session_id}/attach", session_id=self.__session_id).encode("utf-8")
-        merge_raw_path = path.rstrip(b"/") + endpoint + separator + query
+        merge_raw_path = (
+            path.rstrip(b"/")
+            + path_template("/live/sessions/{session_id}/attach", session_id=self.__session_id).encode("utf-8")
+            + separator
+            + query
+        )
         return base_url.copy_with(raw_path=merge_raw_path)
 
     def __exit__(
@@ -1115,7 +1149,9 @@ class SidebandDecisionItemResource(BaseSidebandConnectionResource):
             )
         )
 
-    def create(self, *, item: decision_item_create_event_param.Item, event_id: Optional[str] | Omit = omit) -> None:
+    def create(
+        self, *, item: decision_item_create_event_param.ItemUnion, event_id: Optional[str] | Omit = omit
+    ) -> None:
         """
         Append an input item for future decisions without starting an evaluation or changing Live voice context.
         """
@@ -1349,7 +1385,7 @@ class AsyncSidebandDecisionItemResource(BaseAsyncSidebandConnectionResource):
         )
 
     async def create(
-        self, *, item: decision_item_create_event_param.Item, event_id: Optional[str] | Omit = omit
+        self, *, item: decision_item_create_event_param.ItemUnion, event_id: Optional[str] | Omit = omit
     ) -> None:
         """
         Append an input item for future decisions without starting an evaluation or changing Live voice context.

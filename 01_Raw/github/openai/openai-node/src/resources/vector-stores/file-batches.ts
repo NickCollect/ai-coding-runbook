@@ -8,10 +8,10 @@ import { APIPromise } from '../../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
-import { type Uploadable } from '../../uploads';
 import { pollVectorStoreFileBatch } from '../../lib/vector-store-polling';
-import { uploadAndPollVectorStoreFileBatch } from '../../lib/vector-store-upload';
 import { path } from '../../internal/utils/path';
+import { uploadAndPollVectorStoreFileBatch } from '../../lib/vector-store-upload';
+import { Uploadable } from '../../core/uploads';
 
 function resolveResourceRequestOptions(
   options: RequestOptions | undefined,
@@ -87,8 +87,8 @@ export class FileBatches extends APIResource {
     body: FileBatchCreateParams,
     options?: RequestOptions & { pollIntervalMs?: number },
   ): Promise<VectorStoreFileBatch> {
-    const batch = await this.create(vectorStoreId, body, options);
-    return await this.poll(vectorStoreId, batch.id, options);
+    const created = await this.create(vectorStoreId, body, options);
+    return await this.poll(vectorStoreId, created.id, options);
   }
 
   /**

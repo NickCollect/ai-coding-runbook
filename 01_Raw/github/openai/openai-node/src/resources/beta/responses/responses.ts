@@ -20,6 +20,13 @@ function resolveResourceRequestOptions(
   return Promise.resolve(options).then(buildOptions);
 }
 
+function withBodyFinalization<T extends RequestOptions>(
+  options: T,
+  finalization: { streamFromBody?: true; finalizeMultipart?: true },
+): T {
+  return { ...options, __metadata: { ...options.__metadata, ...finalization } };
+}
+
 // Recognizable options across SDK runtime versions. Keep this independent of
 // private RequestOptions fields so older handwritten runtimes still compile.
 const normalizeRequestOptionsForQueryKeys = new Set([
@@ -168,16 +175,21 @@ export class Responses extends APIResource {
     const { betas, ...body } = params;
     return this._client.post(
       '/responses?beta=true',
-      resolveResourceRequestOptions(options, (options) => ({
-        body,
-        ...options,
-        headers: buildHeaders([
-          { ...(betas?.toString() != null ? { 'openai-beta': betas?.toString() } : undefined) },
-          options?.headers,
-        ]),
-        stream: params.stream ?? false,
-        __security: { bearerAuth: true },
-      })),
+      resolveResourceRequestOptions(options, (options) =>
+        withBodyFinalization(
+          {
+            body,
+            ...options,
+            headers: buildHeaders([
+              { ...(betas?.toString() != null ? { 'openai-beta': betas?.toString() } : undefined) },
+              options?.headers,
+            ]),
+            stream: params.stream ?? false,
+            __security: { bearerAuth: true },
+          },
+          { streamFromBody: true },
+        ),
+      ),
     ) as APIPromise<BetaResponse> | APIPromise<Stream<BetaResponseStreamEvent>>;
   }
 
@@ -5343,6 +5355,11 @@ export namespace BetaResponseInputFile {
      * The breakpoint mode. Always `explicit`.
      */
     mode: 'explicit';
+
+    /**
+     * The minimum lifetime of this cache breakpoint. Defaults to the request TTL.
+     */
+    ttl?: '30m' | '12h';
   }
 }
 
@@ -5403,6 +5420,11 @@ export namespace BetaResponseInputFileContent {
      * The breakpoint mode. Always `explicit`.
      */
     mode: 'explicit';
+
+    /**
+     * The minimum lifetime of this cache breakpoint. Defaults to the request TTL.
+     */
+    ttl?: '30m' | '12h';
   }
 }
 
@@ -5452,6 +5474,11 @@ export namespace BetaResponseInputImage {
      * The breakpoint mode. Always `explicit`.
      */
     mode: 'explicit';
+
+    /**
+     * The minimum lifetime of this cache breakpoint. Defaults to the request TTL.
+     */
+    ttl?: '30m' | '12h';
   }
 }
 
@@ -5501,6 +5528,11 @@ export namespace BetaResponseInputImageContent {
      * The breakpoint mode. Always `explicit`.
      */
     mode: 'explicit';
+
+    /**
+     * The minimum lifetime of this cache breakpoint. Defaults to the request TTL.
+     */
+    ttl?: '30m' | '12h';
   }
 }
 
@@ -6983,6 +7015,11 @@ export namespace BetaResponseInputItem {
     type: 'compaction_trigger';
 
     /**
+     * The unique ID of this compaction trigger.
+     */
+    id?: string | null;
+
+    /**
      * The agent that produced this item.
      */
     agent?: CompactionTrigger.Agent | null;
@@ -7206,6 +7243,11 @@ export namespace BetaResponseInputText {
      * The breakpoint mode. Always `explicit`.
      */
     mode: 'explicit';
+
+    /**
+     * The minimum lifetime of this cache breakpoint. Defaults to the request TTL.
+     */
+    ttl?: '30m' | '12h';
   }
 }
 
@@ -7242,6 +7284,11 @@ export namespace BetaResponseInputTextContent {
      * The breakpoint mode. Always `explicit`.
      */
     mode: 'explicit';
+
+    /**
+     * The minimum lifetime of this cache breakpoint. Defaults to the request TTL.
+     */
+    ttl?: '30m' | '12h';
   }
 }
 
@@ -7412,6 +7459,11 @@ export namespace BetaResponseItem {
          * The breakpoint mode. Always `explicit`.
          */
         mode: 'explicit';
+
+        /**
+         * The minimum lifetime of this cache breakpoint. Defaults to the request TTL.
+         */
+        ttl?: '30m' | '12h';
       }
     }
 
@@ -8699,6 +8751,11 @@ export namespace BetaResponseOutputItem {
          * The breakpoint mode. Always `explicit`.
          */
         mode: 'explicit';
+
+        /**
+         * The minimum lifetime of this cache breakpoint. Defaults to the request TTL.
+         */
+        ttl?: '30m' | '12h';
       }
     }
 
@@ -12154,11 +12211,14 @@ export namespace BetaResponseToolSearchOutputItemParam {
     input_image_mask?: ImageGeneration.InputImageMask;
 
     /**
-     * The image generation model to use. One of `gpt-image-1`, `gpt-image-1-mini`,
-     * `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`,
-     * `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`,
-     * `gpt-image-2.5-flare`, `gpt-image-2.5-flare-2026-09-08`, or
-     * `chatgpt-image-latest`. Default: `gpt-image-1`.
+     * The image generation model to use. One of `gpt-image-1-mini`, `gpt-image-1.5`,
+     * `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
+     * `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`,
+     * `gpt-image-2.5-flare-2026-09-08`, or `chatgpt-image-latest`. Default:
+     * `gpt-image-2`.
+     *
+     * `gpt-image-1` was shut down on October 23, 2026. Use `gpt-image-2.5-sunburst` or
+     * `gpt-image-2.5-flare` instead.
      */
     model?:
       | (string & {})
@@ -13204,13 +13264,13 @@ export type BetaResponsesServerEvent =
   | BetaResponsesServerEvent.BetaResponseWsQueued
   | BetaResponsesServerEvent.BetaResponseCustomToolCallInputWsDelta
   | BetaResponsesServerEvent.BetaResponseCustomToolCallInputWsDone
-  | BetaResponsesServerEvent.BetaResponseWsStreamingError
   | BetaResponsesServerEvent.BetaResponseWsError
   | BetaResponseSteerAcceptedEvent
   | BetaResponseSteerPendingEvent
   | BetaResponseSteerFailedEvent
   | BetaResponseInjectCreatedEvent
-  | BetaResponseInjectFailedEvent;
+  | BetaResponseInjectFailedEvent
+  | BetaResponsesServerEvent.BetaResponseWsStreamingError;
 
 export namespace BetaResponsesServerEvent {
   /**
@@ -13861,17 +13921,6 @@ export namespace BetaResponsesServerEvent {
   }
 
   /**
-   * Emitted when an error occurs while streaming a response over the WebSocket.
-   */
-  export interface BetaResponseWsStreamingError extends BetaResponseErrorEvent {
-    /**
-     * The WebSocket lane that emitted this event. This field is present when the
-     * originating `response.create` event supplied a `stream_id`.
-     */
-    stream_id?: string;
-  }
-
-  /**
    * Emitted when an error occurs while processing a Responses WebSocket request.
    */
   export interface BetaResponseWsError {
@@ -13991,6 +14040,17 @@ export namespace BetaResponsesServerEvent {
        */
       agent_name: string;
     }
+  }
+
+  /**
+   * Emitted when an error occurs while streaming a response over the WebSocket.
+   */
+  export interface BetaResponseWsStreamingError extends BetaResponseErrorEvent {
+    /**
+     * The WebSocket lane that emitted this event. This field is present when the
+     * originating `response.create` event supplied a `stream_id`.
+     */
+    stream_id?: string;
   }
 }
 
@@ -14344,11 +14404,14 @@ export namespace BetaTool {
     input_image_mask?: ImageGeneration.InputImageMask;
 
     /**
-     * The image generation model to use. One of `gpt-image-1`, `gpt-image-1-mini`,
-     * `gpt-image-1.5`, `gpt-image-2`, `gpt-image-2-2026-04-21`,
-     * `gpt-image-2.5-sunburst`, `gpt-image-2.5-sunburst-2026-09-08`,
-     * `gpt-image-2.5-flare`, `gpt-image-2.5-flare-2026-09-08`, or
-     * `chatgpt-image-latest`. Default: `gpt-image-1`.
+     * The image generation model to use. One of `gpt-image-1-mini`, `gpt-image-1.5`,
+     * `gpt-image-2`, `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
+     * `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`,
+     * `gpt-image-2.5-flare-2026-09-08`, or `chatgpt-image-latest`. Default:
+     * `gpt-image-2`.
+     *
+     * `gpt-image-1` was shut down on October 23, 2026. Use `gpt-image-2.5-sunburst` or
+     * `gpt-image-2.5-flare` instead.
      */
     model?:
       | (string & {})

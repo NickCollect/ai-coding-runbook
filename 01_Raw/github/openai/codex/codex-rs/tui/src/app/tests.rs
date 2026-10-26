@@ -71,6 +71,8 @@ mod quick_dials_tests;
 #[path = "tests/unavailable_commands_tests.rs"]
 mod unavailable_commands;
 
+#[path = "tests/backend_sessions_tests.rs"]
+mod backend_sessions;
 #[path = "tests/history_hydration_tests.rs"]
 mod history_hydration_tests;
 #[path = "tests/permission_shortcuts_tests.rs"]
@@ -483,7 +485,8 @@ async fn next_thread_settings_updated(
         .await
         .expect("app-server should emit an event")
         .expect("app-server event stream should remain open");
-        if let codex_app_server_client::AppServerEvent::ServerNotification(notification) = event
+        if let codex_app_server_client::AppServerEvent::ServerNotification(notification) =
+            event.event
             && let ServerNotification::ThreadSettingsUpdated(notification) = *notification
             && notification.thread_id == thread_id.to_string()
         {
@@ -961,6 +964,11 @@ async fn enqueue_primary_thread_session_replays_turns_before_initial_prompt_subm
             text_elements: Vec::new(),
         }])
     );
+
+    for expected in ["follow-up after replay", "earlier prompt"] {
+        app.chat_widget.handle_key_event(KeyCode::Up.into());
+        assert_eq!(app.chat_widget.composer_text_with_pending(), expected);
+    }
 
     Ok(())
 }
@@ -2819,7 +2827,10 @@ fn selected_and_resumed_threads_use_server_capability_for_v1_and_v2_children() -
         }
 
         // Cold-resume the persisted V2 root so its children are registered before selection.
-        app.config.thread_unload_delay = Duration::ZERO;
+        std::fs::write(
+            app.config.codex_home.join("config.toml"),
+            "thread_unload_delay_secs = 0\n",
+        )?;
         let mut app_server = Box::pin(crate::start_embedded_app_server_for_picker(
             &app.config,
         ))
@@ -2873,7 +2884,7 @@ fn selected_and_resumed_threads_use_server_capability_for_v1_and_v2_children() -
             app_server.thread_unsubscribe(child_thread_id).await?;
             let closed = tokio::time::timeout(Duration::from_secs(/*secs*/ 5), async {
                 while let Some(event) = app_server.next_event().await {
-                    if matches!(&event,
+                    if matches!(&event.event,
                         codex_app_server_client::AppServerEvent::ServerNotification(notification)
                             if matches!(notification.as_ref(), ServerNotification::ThreadClosed(closed)
                                 if closed.thread_id == child_thread_id.to_string()))
@@ -2888,7 +2899,7 @@ fn selected_and_resumed_threads_use_server_capability_for_v1_and_v2_children() -
             app.select_agent_thread(&mut tui, &mut app_server, child_thread_id)
                 .await?;
             // A queued close from the old runtime must not undo the new attachment.
-            app.handle_app_server_event(&app_server, closed).await;
+            app.handle_backend_event(&app_server, closed).await;
             app.drain_active_thread_events(&mut tui).await?;
             assert_eq!(app.active_thread_id, Some(child_thread_id));
             assert!(!matches!(
@@ -3185,7 +3196,8 @@ async fn handle_start_side_seeds_navigation_before_thread_started() -> Result<()
         .await
         .expect("app-server should emit an event")
         .expect("app-server event stream should remain open");
-        if let codex_app_server_client::AppServerEvent::ServerNotification(notification) = event
+        if let codex_app_server_client::AppServerEvent::ServerNotification(notification) =
+            event.event
             && let ServerNotification::ThreadStarted(notification) = notification.as_ref()
             && notification.thread.id == side_thread_id.to_string()
         {
@@ -9474,7 +9486,7 @@ async fn override_turn_context_sends_thread_settings_update() {
         app.enqueue_primary_thread_session(started.session, started.turns)
             .await
             .expect("primary thread should be registered");
-        let service_tier = ServiceTier::Fast.request_value().to_string();
+        let service_tier = ServiceTier::Fast.request_value();
         let collaboration_mode = CollaborationMode {
             mode: ModeKind::Plan,
             settings: Settings {
@@ -9494,7 +9506,7 @@ async fn override_turn_context_sends_thread_settings_update() {
             Some("gpt-5.4".to_string()),
             Some(Some(ReasoningEffortConfig::High)),
             /*summary*/ None,
-            Some(Some(service_tier.clone())),
+            Some(Some(service_tier.to_string())),
             Some(collaboration_mode.clone()),
         );
 
@@ -9520,8 +9532,8 @@ async fn override_turn_context_sends_thread_settings_update() {
             Some(ReasoningEffortConfig::High)
         );
         assert_eq!(
-            notification.thread_settings.service_tier,
-            Some(service_tier.clone())
+            notification.thread_settings.service_tier.as_deref(),
+            Some(service_tier)
         );
         assert_eq!(
             notification.thread_settings.approval_policy,
@@ -9568,7 +9580,7 @@ async fn override_turn_context_sends_thread_settings_update() {
             updated_mode.settings.reasoning_effort,
             collaboration_mode.settings.reasoning_effort
         );
-        assert_eq!(updated_session.service_tier, Some(service_tier));
+        assert_eq!(updated_session.service_tier.as_deref(), Some(service_tier));
         assert_eq!(updated_session.approval_policy, AskForApproval::OnRequest);
         assert_eq!(
             updated_session.approvals_reviewer,
@@ -9589,7 +9601,7 @@ async fn override_turn_context_sends_thread_settings_update() {
 #[tokio::test]
 async fn selecting_cyber_model_defaults_active_thread_to_auto_review() {
     Box::pin(async {
-        let mut app = make_test_app().await;
+        let (mut app, mut events, _) = make_test_app_with_channels().await;
         app.config
             .permissions
             .approval_policy
@@ -9621,6 +9633,8 @@ async fn selecting_cyber_model_defaults_active_thread_to_auto_review() {
         );
         assert_eq!(started.session.approvals_reviewer, ApprovalsReviewer::User);
         let thread_id = started.session.thread_id;
+        app.chat_widget
+            .handle_thread_session_quiet(started.session.clone());
         app.enqueue_primary_thread_session(started.session, started.turns)
             .await
             .expect("primary thread should be registered");
@@ -9664,6 +9678,20 @@ async fn selecting_cyber_model_defaults_active_thread_to_auto_review() {
             !app.agents_overview
                 .requested_permission_profiles
                 .contains_key(&thread_id)
+        );
+        while events.try_recv().is_ok() {}
+        // Until the cyber model's permissions are confirmed, do not offer another selection.
+        app.chat_widget.handle_paste("/permissions".into());
+        app.chat_widget.handle_key_event(KeyCode::Enter.into());
+        let event = std::iter::from_fn(|| events.try_recv().ok())
+            .find(|event| matches!(event, AppEvent::OpenPermissionsPopup))
+            .expect("slash permissions goes through app permission guards");
+        app.handle_event(&mut tui, &mut app_server, event)
+            .await
+            .expect("permissions menu");
+        insta::assert_snapshot!(
+            next_history_message(&mut events),
+            @"■ Wait for permissions to update before changing permissions."
         );
         let notification = next_thread_settings_updated(&mut app_server, thread_id).await;
         assert_eq!(
@@ -10264,3 +10292,6 @@ mod active_reconnect;
 #[cfg(unix)]
 #[path = "tests/navigation_reconnect_tests.rs"]
 mod navigation_reconnect;
+
+#[path = "tests/backend_event_tests.rs"]
+mod backend_event_tests;

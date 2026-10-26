@@ -1,4 +1,4 @@
-//! Resolved Guardian evidence profiles and pure transcript retention.
+//! Resolved Guardian evidence profiles, transcript admission and retention.
 //! Sync keeps recent entries; async protects approvals/final answers and evicts
 //! in cacheable chunks. Hosts still own history snapshots and delivery cursors.
 //! User messages and manual approvals stay complete until whole-request admission.
@@ -160,7 +160,13 @@ impl ContextProfile {
                         TruncationPolicy::Bytes(record.rendered().text_bytes).token_budget();
                     (TranscriptContent::Record(record), tokens, text.len())
                 };
-                let (content, tokens, retained_bytes) = match &entry.content {
+                let content = match self.target {
+                    ContextTarget::Sync => {
+                        prepare_sync_content(entry, &self.transcript.entry_limits)
+                    }
+                    ContextTarget::Async => std::borrow::Cow::Borrowed(&entry.content),
+                };
+                let (content, tokens, retained_bytes) = match content.as_ref() {
                     TranscriptContent::Text(text) => prepare_text(text),
                     TranscriptContent::Record(record) => prepare_text(record.text()),
                     TranscriptContent::AgentMessage(message) => (
@@ -298,6 +304,44 @@ impl ContextProfile {
             truncations,
         }
     }
+}
+
+/// Bounds sync content before rendering or calculating retention costs.
+fn prepare_sync_content<'a>(
+    entry: &'a crate::ConversationTranscriptEntry,
+    limits: &crate::TranscriptEntryLimits,
+) -> std::borrow::Cow<'a, TranscriptContent> {
+    let text = match &entry.content {
+        TranscriptContent::Text(text) => text.as_str(),
+        TranscriptContent::Record(record) => record.text(),
+        TranscriptContent::AgentMessage(_) => {
+            // Native ciphertext stays whole, or leaves an omission at the same position.
+            let limit = codex_protocol::protocol::TruncationPolicy::Tokens(
+                limits.message_tokens.min(/*other*/ 9_000),
+            )
+            .byte_budget();
+            return if entry.original_bytes > limit {
+                std::borrow::Cow::Owned(TranscriptContent::Text(
+                    crate::transcript::TRANSCRIPT_OMISSION_NOTICE.to_owned(),
+                ))
+            } else {
+                std::borrow::Cow::Borrowed(&entry.content)
+            };
+        }
+    };
+    let tokens = match &entry.kind {
+        ConversationTranscriptEntryKind::ToolCall(_)
+        | ConversationTranscriptEntryKind::ToolOutput(_) => limits.tool_tokens,
+        ConversationTranscriptEntryKind::Assistant
+        | ConversationTranscriptEntryKind::ProtectedAssistant
+        | ConversationTranscriptEntryKind::Reasoning => limits.message_tokens,
+        ConversationTranscriptEntryKind::User
+        | ConversationTranscriptEntryKind::Developer
+        | ConversationTranscriptEntryKind::NodeReplToolOutput(_) => {
+            return std::borrow::Cow::Borrowed(&entry.content);
+        }
+    };
+    std::borrow::Cow::Owned(TranscriptContent::Text(crate::truncate_text(text, tokens)))
 }
 
 #[cfg(test)]

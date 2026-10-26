@@ -1,6 +1,8 @@
 //! Shared SQLite connection configuration.
+//! New databases use DELETE on NFS and WAL elsewhere.
 //! Writable pools preserve the journal and vacuum modes of initialized databases.
 //! Startup retries SQLITE_BUSY and reports other errors to callers.
+//! The configured logs directory is created and locked only when opening its database.
 
 #![expect(
     clippy::disallowed_methods,
@@ -12,6 +14,7 @@ use crate::migrations::repair_legacy_recency_migration_version;
 use crate::runtime::recovery::RuntimeDbInitError;
 use crate::telemetry;
 use crate::telemetry::DbKind;
+use codex_file_system::LocalLogsDir;
 use codex_utils_absolute_path::AbsolutePathBuf;
 use log::LevelFilter;
 use sqlx::ConnectOptions;
@@ -65,8 +68,13 @@ struct RuntimeDbSpec {
 }
 
 impl RuntimeDbSpec {
-    fn path(self, codex_home: &Path) -> PathBuf {
-        codex_home.join(self.filename)
+    fn path(self, sqlite: &SqliteConfig) -> PathBuf {
+        let home = if matches!(self.kind, DbKind::Logs) {
+            sqlite.logs_home()
+        } else {
+            sqlite.home()
+        };
+        home.join(self.filename)
     }
 }
 
@@ -156,19 +164,23 @@ pub struct RuntimeDbPath {
 }
 
 /// Resolved configuration shared by all Codex SQLite connections.
-/// Clones share filesystem probes and quick-check attempts; a new config checks independently.
+/// Clones share directory locks, filesystem probes, and quick-check attempts.
 #[derive(Clone, Debug)]
 pub struct SqliteConfig {
     sqlite_home: AbsolutePathBuf,
+    local_logs_dir: Option<LocalLogsDir>,
     is_nfs: Arc<OnceCell<bool>>,
+    logs_is_nfs: Arc<OnceCell<bool>>,
     quick_check_manager: SqliteQuickCheckManager,
 }
 
-// Cached filesystem information and validation history are operational state,
+// Directory locks, cached filesystem information, and validation history are operational state,
 // not part of configuration equality.
 impl PartialEq for SqliteConfig {
     fn eq(&self, other: &Self) -> bool {
         self.sqlite_home == other.sqlite_home
+            && self.local_logs_dir.as_ref().map(LocalLogsDir::path)
+                == other.local_logs_dir.as_ref().map(LocalLogsDir::path)
     }
 }
 
@@ -178,7 +190,9 @@ impl SqliteConfig {
     pub fn from_sqlite_home(sqlite_home: AbsolutePathBuf) -> Self {
         Self {
             sqlite_home,
+            local_logs_dir: None,
             is_nfs: Arc::new(OnceCell::new()),
+            logs_is_nfs: Arc::new(OnceCell::new()),
             quick_check_manager: SqliteQuickCheckManager::new(),
         }
     }
@@ -191,42 +205,55 @@ impl SqliteConfig {
         self.sqlite_home.as_path()
     }
 
+    /// Select the logs directory without accessing it until its database is opened.
+    pub fn with_local_logs_home(mut self, home: PathBuf) -> Self {
+        self.local_logs_dir = Some(LocalLogsDir::new(home));
+        self.logs_is_nfs = Arc::new(OnceCell::new());
+        self
+    }
+
+    pub(crate) fn logs_home(&self) -> &Path {
+        self.local_logs_dir
+            .as_ref()
+            .map_or(self.home(), LocalLogsDir::path)
+    }
+
     /// Detects if the sqlite_home directory is under the NFS mount (once per the lifetime)
     pub async fn is_nfs(&self) -> anyhow::Result<bool> {
-        self.is_nfs
-            .get_or_try_init(|| async {
-                let sqlite_home = self.home().to_path_buf();
-                Ok(
-                    tokio::task::spawn_blocking(move || codex_file_system::is_nfs(&sqlite_home))
-                        .await??,
-                )
-            })
-            .await
-            .copied()
+        probe_nfs(self.home(), &self.is_nfs).await
+    }
+
+    pub(crate) async fn logs_are_on_nfs(&self) -> anyhow::Result<bool> {
+        probe_nfs(self.logs_home(), &self.logs_is_nfs).await
     }
 
     /// Return the path to the primary state database.
     pub fn state_db_path(&self) -> PathBuf {
-        STATE_DB.path(self.home())
+        STATE_DB.path(self)
     }
 
     /// Return the path to the logs database.
     pub fn logs_db_path(&self) -> PathBuf {
-        LOGS_DB.path(self.home())
+        LOGS_DB.path(self)
+    }
+
+    pub(crate) fn legacy_logs_db_path(&self) -> Option<PathBuf> {
+        let path = self.home().join(LOGS_DB_FILENAME);
+        (path != self.logs_db_path()).then_some(path)
     }
 
     /// Return the path to the goals database.
     pub fn goals_db_path(&self) -> PathBuf {
-        GOALS_DB.path(self.home())
+        GOALS_DB.path(self)
     }
 
     /// Return the path to the memories database.
     pub fn memories_db_path(&self) -> PathBuf {
-        MEMORIES_DB.path(self.home())
+        MEMORIES_DB.path(self)
     }
 
     pub(crate) fn memories_v2_db_path(&self) -> PathBuf {
-        MEMORIES_V2_DB.path(self.home())
+        MEMORIES_V2_DB.path(self)
     }
 
     pub(crate) async fn open_memories_v2_db(&self) -> anyhow::Result<SqlitePool> {
@@ -240,12 +267,12 @@ impl SqliteConfig {
 
     /// Return the path to the durable user-message queue database.
     pub fn queue_db_path(&self) -> PathBuf {
-        QUEUE_DB.path(self.home())
+        QUEUE_DB.path(self)
     }
 
     /// Return the path to the paginated thread-history database.
     pub fn thread_history_db_path(&self) -> PathBuf {
-        THREAD_HISTORY_DB.path(self.home())
+        THREAD_HISTORY_DB.path(self)
     }
 
     /// Return the paths to every database managed by the state runtime.
@@ -254,9 +281,21 @@ impl SqliteConfig {
             .iter()
             .map(|spec| RuntimeDbPath {
                 label: spec.label,
-                path: spec.path(self.home()),
+                path: spec.path(self),
                 background_reclamation: spec.background_reclamation,
             })
+            .collect()
+    }
+
+    pub(crate) fn reclamation_db_paths(&self) -> Vec<RuntimeDbPath> {
+        self.runtime_db_paths()
+            .into_iter()
+            .filter(|db| db.background_reclamation)
+            .chain(self.legacy_logs_db_path().map(|path| RuntimeDbPath {
+                label: "legacy log DB",
+                path,
+                background_reclamation: true,
+            }))
             .collect()
     }
 
@@ -323,7 +362,7 @@ impl SqliteConfig {
         migrator: &Migrator,
         telemetry_override: Option<&dyn DbTelemetry>,
     ) -> anyhow::Result<SqlitePool> {
-        let path = spec.path(self.home());
+        let path = spec.path(self);
         let started = Instant::now();
         let pool_result = self
             .open_read_write_pool_with_spec(path.as_path(), Some(spec), telemetry_override)
@@ -363,6 +402,7 @@ impl SqliteConfig {
     }
 
     /// Open a writable Codex SQLite database, creating it if necessary.
+    /// Keep this configuration alive to retain the cleanup lock for local logs.
     pub async fn open_read_write_pool(&self, path: &Path) -> anyhow::Result<SqlitePool> {
         self.open_read_write_pool_with_spec(
             path, /*recover_spec*/ None, /*telemetry_override*/ None,
@@ -376,6 +416,23 @@ impl SqliteConfig {
         recover_spec: Option<RuntimeDbSpec>,
         telemetry_override: Option<&dyn DbTelemetry>,
     ) -> anyhow::Result<SqlitePool> {
+        self.prepare_logs_directory(path).await?;
+        let directory = path
+            .parent()
+            .filter(|parent| !parent.as_os_str().is_empty())
+            .unwrap_or_else(|| Path::new("."));
+        let is_nfs = if self.local_logs_dir.is_some() && directory == self.logs_home() {
+            self.logs_are_on_nfs().await?
+        } else if directory == self.home() {
+            self.is_nfs().await?
+        } else {
+            probe_nfs(directory, &OnceCell::new()).await?
+        };
+        let journal_mode_policy = if is_nfs {
+            JournalModePolicy::InitializeDelete
+        } else {
+            JournalModePolicy::InitializeWal
+        };
         let recovery = recover_spec.map_or(RecoveryMode::Unavailable, |spec| spec.recovery);
         let options = SqliteConnectOptions::new()
             .filename(path)
@@ -384,7 +441,11 @@ impl SqliteConfig {
             .busy_timeout(DEFAULT_BUSY_TIMEOUT)
             .log_statements(LevelFilter::Off);
         // Each failed attempt closes its pool before initialization is retried.
-        let connect = || async { connect_once(&options).await.map_err(anyhow::Error::from) };
+        let connect = || async {
+            connect_once(&options, journal_mode_policy)
+                .await
+                .map_err(anyhow::Error::from)
+        };
         let pool = retry_on_busy(connect).await?;
         let validation_result = self
             .quick_check_manager
@@ -423,11 +484,13 @@ impl SqliteConfig {
     }
 
     /// Open an existing Codex SQLite database without creating or modifying it.
+    /// Keep this configuration alive to retain the cleanup lock for local logs.
     pub async fn open_read_only_pool(
         &self,
         path: &Path,
         busy_timeout: Option<Duration>,
     ) -> Result<SqlitePool, Error> {
+        self.prepare_logs_directory(path).await.map_err(Error::Io)?;
         let mut options = SqliteConnectOptions::new()
             .filename(path)
             .create_if_missing(false)
@@ -441,9 +504,51 @@ impl SqliteConfig {
             .connect_with(options)
             .await
     }
+
+    /// Open old logs for cleanup without creating, migrating, or rebuilding the database.
+    pub(crate) async fn open_legacy_logs_for_cleanup(&self) -> anyhow::Result<Option<SqlitePool>> {
+        let Some(path) = self.legacy_logs_db_path() else {
+            return Ok(None);
+        };
+        if !tokio::fs::try_exists(&path).await? {
+            return Ok(None);
+        }
+        let options = SqliteConnectOptions::new()
+            .filename(path)
+            .create_if_missing(false)
+            .busy_timeout(Duration::ZERO)
+            .log_statements(LevelFilter::Off);
+        SqlitePoolOptions::new()
+            .max_connections(1)
+            .connect_with(options)
+            .await
+            .map(Some)
+            .map_err(anyhow::Error::from)
+    }
+
+    async fn prepare_logs_directory(&self, path: &Path) -> std::io::Result<()> {
+        // Login, login status, and logout load configuration without opening SQLite.
+        // Create and lock the logs directory only when opening its database.
+        // An unavailable log_dir must not prevent those commands from loading configuration.
+        if let Some(directory) = &self.local_logs_dir
+            && path == self.logs_db_path()
+        {
+            directory.initialize().await?;
+        }
+        Ok(())
+    }
 }
 
-async fn connect_once(options: &SqliteConnectOptions) -> Result<SqlitePool, Error> {
+#[derive(Clone, Copy, Eq, PartialEq)]
+enum JournalModePolicy {
+    InitializeWal,
+    InitializeDelete,
+}
+
+async fn connect_once(
+    options: &SqliteConnectOptions,
+    journal_mode_policy: JournalModePolicy,
+) -> Result<SqlitePool, Error> {
     // SQLx retries after_connect errors, eventually replacing them with PoolTimedOut.
     // Return the first initialization error directly while opening this pool.
     let (init_error_tx, mut init_error_rx) = tokio::sync::mpsc::channel(/*buffer*/ 1);
@@ -500,17 +605,23 @@ async fn connect_once(options: &SqliteConnectOptions) -> Result<SqlitePool, Erro
                     .execute(&mut *connection)
                     .await?;
             }
-            sqlx::query("PRAGMA journal_mode = WAL")
-                .execute(&mut *connection)
-                .await?;
+            let pragma = match journal_mode_policy {
+                JournalModePolicy::InitializeWal => "PRAGMA journal_mode = WAL",
+                JournalModePolicy::InitializeDelete => "PRAGMA journal_mode = DELETE",
+            };
+            sqlx::query(pragma).execute(&mut *connection).await?;
         }
-        // Another process can initialize WAL after this connection selects EXTRA.
-        // Apply NORMAL to WAL even if that process already created the schema.
+        // Initialization or another process can change the journal mode after after_connect.
+        // Match this connection's synchronization setting to the resulting journal mode.
         let journal: String = sqlx::query_scalar("PRAGMA journal_mode")
             .fetch_one(&mut *connection)
             .await?;
         if journal == "wal" {
             sqlx::query("PRAGMA synchronous = NORMAL")
+                .execute(&mut *connection)
+                .await?;
+        } else if journal == "delete" {
+            sqlx::query("PRAGMA synchronous = EXTRA")
                 .execute(&mut *connection)
                 .await?;
         }
@@ -525,6 +636,16 @@ async fn connect_once(options: &SqliteConnectOptions) -> Result<SqlitePool, Erro
         return Err(error);
     }
     Ok(pool)
+}
+
+async fn probe_nfs(home: &Path, probe: &OnceCell<bool>) -> anyhow::Result<bool> {
+    probe
+        .get_or_try_init(|| async {
+            let home = home.to_path_buf();
+            Ok(tokio::task::spawn_blocking(move || codex_file_system::is_nfs(&home)).await??)
+        })
+        .await
+        .copied()
 }
 
 #[cfg(test)]

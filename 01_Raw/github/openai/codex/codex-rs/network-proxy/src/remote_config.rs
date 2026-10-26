@@ -2,8 +2,11 @@ use anyhow::Result;
 use anyhow::ensure;
 use serde::Deserialize;
 use serde::Serialize;
+use std::collections::BTreeMap;
+use std::fmt;
 use std::sync::Mutex;
 
+use crate::CredentialProviderConfig;
 use crate::NetworkDomainPermissions;
 use crate::NetworkMode;
 use crate::NetworkProxyAuditMetadata;
@@ -69,6 +72,54 @@ impl RemoteCredentialBrokerCache {
     }
 }
 
+/// Credential masking supported by an executor or requested for a remote launch.
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub enum RemoteCredentialMasking {
+    #[default]
+    Disabled,
+    /// Mask only when the configuration contains no custom providers.
+    BuiltInOnly,
+    WithConfiguredProviders,
+}
+
+/// Masking fields shared with independently deployed executors.
+#[derive(Clone, Default, Deserialize, Eq, PartialEq, Serialize)]
+#[serde(default)]
+struct CredentialMaskingConfig {
+    #[serde(
+        rename = "credentialMasking",
+        skip_serializing_if = "std::ops::Not::not"
+    )]
+    enabled: bool,
+    #[serde(
+        rename = "credentialProviders",
+        skip_serializing_if = "BTreeMap::is_empty"
+    )]
+    providers: BTreeMap<String, CredentialProviderConfig>,
+}
+
+impl CredentialMaskingConfig {
+    fn deserialize_normalized<'de, D: serde::Deserializer<'de>>(
+        deserializer: D,
+    ) -> Result<Self, D::Error> {
+        let mut config = Self::deserialize(deserializer)?;
+        // Discard provider rules sent with masking off, even if we forward this configuration.
+        if !config.enabled {
+            config.providers.clear();
+        }
+        Ok(config)
+    }
+}
+
+impl fmt::Debug for CredentialMaskingConfig {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("CredentialMaskingConfig")
+            .field("enabled", &self.enabled)
+            .field("credential_provider_count", &self.providers.len())
+            .finish()
+    }
+}
+
 /// Executor-local proxy launch inputs transported with one process start.
 ///
 /// Unlike [`crate::ManagedNetworkSandboxContext`], this describes how the executor should create
@@ -115,21 +166,27 @@ impl RemoteNetworkProxyLaunchConfig {
 /// Effective network proxy settings that are safe to send to a remote executor.
 ///
 /// Listener addresses are deliberately omitted because the executor chooses its own loopback
-/// ports. Masking carries only built-in broker activation; credentials, destination context, custom
-/// providers, CA configuration, and MITM hooks stay on their execution host.
+/// ports. Masking carries provider rules; credential values and destination context are resolved
+/// on the executor. CA configuration and MITM hooks stay on their execution host.
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RemoteNetworkProxyConfig {
     pub enabled: bool,
-    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
-    pub credential_masking: bool,
+    #[serde(
+        flatten,
+        deserialize_with = "CredentialMaskingConfig::deserialize_normalized"
+    )]
+    credential_masking: CredentialMaskingConfig,
     pub enable_socks5: bool,
     pub enable_socks5_udp: bool,
     pub allow_upstream_proxy: bool,
     pub dangerously_allow_all_unix_sockets: bool,
     pub mode: NetworkMode,
     pub domains: Option<NetworkDomainPermissions>,
+    /// Clients must require the `networkProxyReviewDomains` executor capability when nonempty.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub review_domains: Vec<String>,
     pub unix_sockets: Option<NetworkUnixSocketPermissions>,
     pub allow_local_binding: bool,
 }
@@ -147,7 +204,7 @@ impl RemoteNetworkProxyConfig {
         );
         Ok(Self {
             enabled: config.enabled,
-            credential_masking: false,
+            credential_masking: CredentialMaskingConfig::default(),
             enable_socks5: config.enable_socks5,
             enable_socks5_udp: config.enable_socks5_udp,
             allow_upstream_proxy: config.allow_upstream_proxy,
@@ -156,9 +213,26 @@ impl RemoteNetworkProxyConfig {
                 .unwrap_or(false),
             mode: config.mode,
             domains: config.domains.clone(),
+            review_domains: config.review_domains.clone(),
             unix_sockets: config.unix_sockets.clone(),
             allow_local_binding: config.allow_local_binding(),
         })
+    }
+
+    /// Enable masking with the given provider rules, or just the built-ins if empty.
+    pub fn enable_credential_masking(
+        &mut self,
+        providers: BTreeMap<String, CredentialProviderConfig>,
+    ) {
+        self.credential_masking = CredentialMaskingConfig {
+            enabled: true,
+            providers,
+        };
+    }
+
+    /// Whether the executor should mask credentials for this launch.
+    pub fn credential_masking_enabled(&self) -> bool {
+        self.credential_masking.enabled
     }
 
     pub(crate) fn into_network_proxy_config(self) -> NetworkProxyConfig {
@@ -170,11 +244,15 @@ impl RemoteNetworkProxyConfig {
             dangerously_allow_all_unix_sockets: Some(self.dangerously_allow_all_unix_sockets),
             mode: self.mode,
             domains: self.domains,
+            review_domains: self.review_domains,
             unix_sockets: self.unix_sockets,
             allow_local_binding: Some(self.allow_local_binding),
             ..NetworkProxyConfig::default()
         };
-        config.set_credential_broker_enabled(self.credential_masking);
+        if self.credential_masking.enabled {
+            config.set_credential_broker_enabled(/*enabled*/ true);
+            config.credential_providers = self.credential_masking.providers;
+        }
         config
     }
 }

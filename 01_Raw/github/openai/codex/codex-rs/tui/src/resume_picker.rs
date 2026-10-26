@@ -73,6 +73,7 @@ use unicode_width::UnicodeWidthStr;
 use uuid::Uuid;
 
 mod archive;
+mod catalog;
 mod layout;
 mod page_loading;
 
@@ -186,6 +187,7 @@ struct PageLoadRequest {
     request_token: usize,
     search_token: Option<usize>,
     mode: PageLoadMode,
+    filter_mode: SessionFilterMode,
     cwd_filter: Option<PathBuf>,
     status: SessionStatus,
     provider_filter: ProviderFilter,
@@ -218,6 +220,7 @@ enum ProviderFilter {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum SessionFilterMode {
     Cwd,
+    Repo,
     All,
 }
 
@@ -230,11 +233,20 @@ impl SessionFilterMode {
         }
     }
 
-    fn toggle(self, filter_cwd: Option<&Path>) -> Self {
-        match self {
-            Self::Cwd => Self::All,
-            Self::All if filter_cwd.is_some() => Self::Cwd,
-            Self::All => Self::All,
+    fn change(
+        self,
+        direction: ToolbarValueDirection,
+        filter_cwd: Option<&Path>,
+        repo_filter_available: bool,
+    ) -> Self {
+        match (self, direction) {
+            (Self::Cwd, ToolbarValueDirection::Next) if repo_filter_available => Self::Repo,
+            (Self::Cwd, ToolbarValueDirection::Next | ToolbarValueDirection::Previous)
+            | (Self::Repo, ToolbarValueDirection::Next) => Self::All,
+            (Self::Repo, ToolbarValueDirection::Previous) => Self::Cwd,
+            (Self::All, ToolbarValueDirection::Previous) if repo_filter_available => Self::Repo,
+            (Self::All, _) if filter_cwd.is_some() => Self::Cwd,
+            (Self::All, _) => Self::All,
         }
     }
 }
@@ -250,6 +262,11 @@ enum ToolbarControl {
     Filter,
     Status,
     Sort,
+}
+
+enum ToolbarValueDirection {
+    Previous,
+    Next,
 }
 
 impl ToolbarControl {
@@ -570,6 +587,12 @@ async fn run_session_picker_with_loader(
     picker_loader: PickerLoader,
     bg_rx: mpsc::UnboundedReceiver<BackgroundEvent>,
 ) -> Result<SessionSelection> {
+    let (repo_filter_tx, repo_filter_rx) = mpsc::unbounded_channel();
+    if let Some(cwd) = options.local_filter_cwd.clone() {
+        tokio::task::spawn_blocking(move || {
+            let _ = repo_filter_tx.send(local_repo_filter_available(&cwd));
+        });
+    }
     let alt = AltScreenGuard::enter(tui);
     let mut state = PickerState::new(
         options.backend_id,
@@ -577,9 +600,12 @@ async fn run_session_picker_with_loader(
         picker_loader,
         options.provider_filter,
         options.show_all,
-        options.filter_cwd,
+        options.local_filter_cwd.clone(),
         options.action,
     );
+    state.filter_mode =
+        SessionFilterMode::from_show_all(options.show_all, options.filter_cwd.as_deref());
+    state.filter_cwd = options.filter_cwd;
     state.local_filter_cwd = options.local_filter_cwd;
     state.use_theme_colors = options.use_theme_colors;
     state.copy_on_select = options.copy_on_select;
@@ -604,6 +630,7 @@ async fn run_session_picker_with_loader(
     }
     let mut tui_events = alt.tui.event_stream().fuse();
     let mut background_events = UnboundedReceiverStream::new(bg_rx).fuse();
+    let mut repo_filter_events = UnboundedReceiverStream::new(repo_filter_rx).fuse();
 
     loop {
         tokio::select! {
@@ -657,6 +684,9 @@ async fn run_session_picker_with_loader(
                 if let Some(selection) = state.handle_background_event(event).await? {
                     return Ok(selection);
                 }
+            }
+            Some(available) = repo_filter_events.next() => {
+                state.set_repo_filter_available(available);
             }
             else => break,
         }
@@ -729,15 +759,26 @@ fn spawn_app_server_page_loader(
     tokio::spawn(async move {
         let mut app_server = app_server;
         let mut page_cwd_filter = PageCwdFilter::default();
+        let mut catalog = catalog::ThreadCatalog::default();
         while let Some(request) = request_rx.recv().await {
             match request {
                 PickerLoadRequest::Page(request) => {
+                    if request.cursor.is_none() {
+                        catalog.reset();
+                    }
+                    let Some(catalog_request) = catalog.begin_page(app_server.backend_id()) else {
+                        continue;
+                    };
                     let cwd_filter = page_cwd_filter.for_request(
                         request.cursor.as_ref(),
                         request.cwd_filter.as_deref(),
+                        request.filter_mode,
                         uses_remote_filesystem,
                     );
-                    let cursor = request.cursor.map(|PageCursor::AppServer(cursor)| cursor);
+                    let cursor = catalog_request
+                        .cursor
+                        .clone()
+                        .map(|PageCursor::AppServer(cursor)| cursor);
                     let params = thread_list_params(
                         cursor,
                         cwd_filter,
@@ -748,6 +789,9 @@ fn spawn_app_server_page_loader(
                         matches!(request.mode, PageLoadMode::StateDbOnly),
                     );
                     let page = load_app_server_page(&mut app_server, params).await;
+                    let Some(page) = catalog.finish_page(catalog_request, page) else {
+                        continue;
+                    };
                     let _ = bg_tx.send(BackgroundEvent::Page {
                         request_token: request.request_token,
                         search_token: request.search_token,
@@ -870,7 +914,6 @@ struct PickerState {
     pagination: PaginationState,
     all_rows: Vec<Row>,
     filtered_rows: Vec<Row>,
-    thread_history_modes: HashMap<ThreadId, ThreadHistoryMode>,
     seen_rows: HashSet<SeenRowKey>,
     selected: usize,
     scroll_top: usize,
@@ -888,6 +931,7 @@ struct PickerState {
     status: SessionStatus,
     filter_cwd: Option<PathBuf>,
     local_filter_cwd: Option<PathBuf>,
+    repo_filter_available: bool,
     toolbar_focus: ToolbarControl,
     density: SessionListDensity,
     launch_context: SessionPickerLaunchContext,
@@ -989,6 +1033,8 @@ impl SearchState {
 #[derive(Clone)]
 #[cfg_attr(test, derive(Debug, PartialEq))]
 struct Row {
+    backend_id: Option<crate::backend_id::BackendId>,
+    history_mode: Option<ThreadHistoryMode>,
     path: Option<PathBuf>,
     preview: String,
     thread_id: Option<ThreadId>,
@@ -1072,7 +1118,6 @@ impl PickerState {
             pagination: PaginationState::new(),
             all_rows: Vec::new(),
             filtered_rows: Vec::new(),
-            thread_history_modes: HashMap::new(),
             seen_rows: HashSet::new(),
             selected: 0,
             scroll_top: 0,
@@ -1091,6 +1136,7 @@ impl PickerState {
             local_filter_cwd: filter_cwd.clone(),
             local_cwd_matches: HashMap::new(),
             filter_cwd,
+            repo_filter_available: false,
             toolbar_focus: ToolbarControl::Filter,
             density: SessionListDensity::Comfortable,
             launch_context: SessionPickerLaunchContext::Startup,
@@ -1141,6 +1187,11 @@ impl PickerState {
 
     fn request_frame(&self) {
         self.requester.schedule_frame();
+    }
+
+    fn set_repo_filter_available(&mut self, available: bool) {
+        self.repo_filter_available = available;
+        self.request_frame();
     }
 
     fn is_transcript_loading(&self) -> bool {
@@ -1211,7 +1262,6 @@ impl PickerState {
             self.request_frame();
             return;
         };
-
         match self.transcript_cells.get(&thread_id) {
             Some(SessionTranscriptState::Loaded(_)) => {
                 self.begin_transcript_loading(thread_id);
@@ -1339,11 +1389,11 @@ impl PickerState {
                             return Ok(None);
                         }
                         return Ok(Some(self.action.selection(SessionTarget {
-                            backend_id: self.backend_id,
+                            backend_id: row.backend_id.unwrap_or(self.backend_id),
                             path,
                             thread_id,
                             cwd: row.cwd.clone(),
-                            history_mode: self.thread_history_modes.get(&thread_id).copied(),
+                            history_mode: row.history_mode,
                         })));
                     }
                     self.inline_error = Some(match path {
@@ -1421,11 +1471,12 @@ impl PickerState {
                 self.focus_previous_toolbar_control();
                 self.request_frame();
             }
-            _ if allow_plain_char_navigation
-                && (self.keymap.list.move_left.is_pressed(key)
-                    || self.keymap.list.move_right.is_pressed(key)) =>
-            {
-                self.change_focused_toolbar_value();
+            _ if allow_plain_char_navigation && self.keymap.list.move_left.is_pressed(key) => {
+                self.change_focused_toolbar_value(ToolbarValueDirection::Previous);
+                self.request_frame();
+            }
+            _ if allow_plain_char_navigation && self.keymap.list.move_right.is_pressed(key) => {
+                self.change_focused_toolbar_value(ToolbarValueDirection::Next);
                 self.request_frame();
             }
             KeyEvent {
@@ -1479,7 +1530,6 @@ impl PickerState {
         self.reset_pagination();
         self.all_rows.clear();
         self.filtered_rows.clear();
-        self.thread_history_modes.clear();
         self.seen_rows.clear();
         self.local_cwd_matches.clear();
         self.selected = 0;
@@ -1506,6 +1556,7 @@ impl PickerState {
             request_token,
             search_token,
             mode,
+            filter_mode: self.filter_mode,
             cwd_filter: self.active_cwd_filter(),
             status: self.status,
             provider_filter: self.provider_filter.clone(),
@@ -1546,6 +1597,7 @@ impl PickerState {
                         request_token,
                         search_token,
                         mode: PageLoadMode::StoreDefault,
+                        filter_mode: self.filter_mode,
                         cwd_filter: self.active_cwd_filter(),
                         status: self.status,
                         provider_filter: self.provider_filter.clone(),
@@ -1633,9 +1685,10 @@ impl PickerState {
         } = page;
         self.pagination
             .complete_page(next_cursor, num_scanned_files, reached_scan_cap);
-        self.thread_history_modes.extend(history_modes);
-
-        for row in rows {
+        for mut row in rows {
+            if let Some(thread_id) = row.thread_id {
+                row.history_mode = history_modes.get(&thread_id).copied();
+            }
             if let Some(cwd) = row.cwd.as_ref()
                 && !self.local_cwd_matches.contains_key(cwd)
             {
@@ -1643,8 +1696,15 @@ impl PickerState {
                 self.local_cwd_matches.insert(cwd.clone(), matches);
             }
             if let Some(seen_key) = row.seen_key() {
-                if self.seen_rows.insert(seen_key) {
+                if self.seen_rows.insert(seen_key.clone()) {
                     self.all_rows.push(row);
+                } else if let Some(existing) = self.all_rows.iter_mut().find(|existing| {
+                    existing.seen_key().as_ref() == Some(&seen_key)
+                        && existing.backend_id == row.backend_id
+                        && existing.thread_id == row.thread_id
+                }) {
+                    // Preserve the pre-catalog behavior where metadata from a later page wins.
+                    existing.history_mode = row.history_mode;
                 }
             } else {
                 self.all_rows.push(row);
@@ -1716,11 +1776,13 @@ impl PickerState {
             return false;
         };
         paths_match(row_cwd, filter_cwd)
-            || codex_git_utils::repository_identity(row_cwd)
-                .zip(codex_git_utils::repository_identity(filter_cwd))
-                .is_some_and(|(row, filter)| {
-                    row.common_dir == filter.common_dir && row.relative_cwd == filter.relative_cwd
-                })
+            || (self.filter_mode == SessionFilterMode::Repo
+                && codex_git_utils::repository_identity(row_cwd)
+                    .zip(codex_git_utils::repository_identity(filter_cwd))
+                    .is_some_and(|(row, filter)| {
+                        row.common_dir == filter.common_dir
+                            && row.relative_cwd == filter.relative_cwd
+                    }))
     }
 
     fn set_query(&mut self, new_query: String) {
@@ -1871,6 +1933,7 @@ impl PickerState {
             request_token,
             search_token,
             mode,
+            filter_mode: self.filter_mode,
             cwd_filter: self.active_cwd_filter(),
             status: self.status,
             provider_filter: self.provider_filter.clone(),
@@ -1910,8 +1973,12 @@ impl PickerState {
         self.start_initial_load();
     }
 
-    fn toggle_filter_mode(&mut self) {
-        let next_filter_mode = self.filter_mode.toggle(self.filter_cwd.as_deref());
+    fn change_filter_mode(&mut self, direction: ToolbarValueDirection) {
+        let next_filter_mode = self.filter_mode.change(
+            direction,
+            self.filter_cwd.as_deref(),
+            self.repo_filter_available,
+        );
         if self.filter_mode == next_filter_mode {
             return;
         }
@@ -1929,7 +1996,7 @@ impl PickerState {
 
     fn active_cwd_filter(&self) -> Option<PathBuf> {
         match self.filter_mode {
-            SessionFilterMode::Cwd => self.filter_cwd.clone(),
+            SessionFilterMode::Cwd | SessionFilterMode::Repo => self.filter_cwd.clone(),
             SessionFilterMode::All => None,
         }
     }
@@ -1942,10 +2009,10 @@ impl PickerState {
         self.toolbar_focus = self.toolbar_focus.next(self.action);
     }
 
-    fn change_focused_toolbar_value(&mut self) {
+    fn change_focused_toolbar_value(&mut self, direction: ToolbarValueDirection) {
         match self.toolbar_focus {
             ToolbarControl::Sort => self.toggle_sort_key(),
-            ToolbarControl::Filter => self.toggle_filter_mode(),
+            ToolbarControl::Filter => self.change_filter_mode(direction),
             ToolbarControl::Status => self.toggle_status(),
         }
     }
@@ -2086,6 +2153,8 @@ fn row_from_app_server_thread(thread: Thread) -> Option<Row> {
     };
     let preview = thread.preview.trim();
     Some(Row {
+        backend_id: None,
+        history_mode: None,
         path: thread.path,
         preview: if preview.is_empty() {
             String::from("(no message yet)")
@@ -2114,6 +2183,7 @@ fn thread_list_params(
 ) -> ThreadListParams {
     ThreadListParams {
         excluded_thread_ids: None,
+        attached_to_thread_id: None,
         originators: None,
         cursor,
         limit: Some(PAGE_SIZE as u32),
@@ -2150,6 +2220,16 @@ pub(crate) fn repository_cwd_filter(
         );
     }
     ThreadListCwdFilter::One(cwd.to_string_lossy().into_owned())
+}
+
+fn local_repo_filter_available(cwd: &Path) -> bool {
+    codex_git_utils::linked_worktree_cwds(cwd).is_some_and(|cwds| {
+        cwds.into_iter()
+            .filter_map(|cwd| dunce::canonicalize(cwd).ok())
+            .collect::<HashSet<_>>()
+            .len()
+            > 1
+    })
 }
 
 fn paths_match(a: &Path, b: &Path) -> bool {
@@ -2289,19 +2369,27 @@ fn filter_control_spans(state: &PickerState, compact: bool) -> Vec<Span<'static>
             ),
         ];
     }
-    vec![
+    let mut values = vec![
         "Filter: ".set_style(secondary_text_style()),
         toolbar_value(
             filter_mode_label(SessionFilterMode::Cwd),
             state.filter_mode == SessionFilterMode::Cwd,
             filter_focused,
         ),
-        toolbar_value(
-            filter_mode_label(SessionFilterMode::All),
-            state.filter_mode == SessionFilterMode::All,
+    ];
+    if state.repo_filter_available {
+        values.push(toolbar_value(
+            filter_mode_label(SessionFilterMode::Repo),
+            state.filter_mode == SessionFilterMode::Repo,
             filter_focused,
-        ),
-    ]
+        ));
+    }
+    values.push(toolbar_value(
+        filter_mode_label(SessionFilterMode::All),
+        state.filter_mode == SessionFilterMode::All,
+        filter_focused,
+    ));
+    values
 }
 
 fn toolbar_value(label: &'static str, active: bool, focused: bool) -> Span<'static> {
@@ -2321,6 +2409,7 @@ fn toolbar_value(label: &'static str, active: bool, focused: bool) -> Span<'stat
 fn filter_mode_label(filter_mode: SessionFilterMode) -> &'static str {
     match filter_mode {
         SessionFilterMode::Cwd => "Cwd",
+        SessionFilterMode::Repo => "Repo",
         SessionFilterMode::All => "All",
     }
 }
@@ -3632,7 +3721,7 @@ mod tests {
     use std::sync::Mutex;
     use tempfile::tempdir;
 
-    fn page(
+    pub(super) fn page(
         rows: Vec<Row>,
         next_cursor: Option<&str>,
         num_scanned_files: usize,
@@ -3675,9 +3764,11 @@ mod tests {
         Ok(page(rows, next_cursor, n, /*reached_scan_cap*/ false))
     }
 
-    fn make_row(path: &str, ts: &str, preview: &str) -> Row {
+    pub(super) fn make_row(path: &str, ts: &str, preview: &str) -> Row {
         let timestamp = parse_timestamp_str(ts).expect("timestamp should parse");
         Row {
+            backend_id: None,
+            history_mode: None,
             path: Some(PathBuf::from(path)),
             preview: preview.to_string(),
             thread_id: None,
@@ -3689,7 +3780,7 @@ mod tests {
         }
     }
 
-    fn local_db_first_state() -> (PickerState, Arc<Mutex<Vec<PageLoadRequest>>>) {
+    pub(super) fn local_db_first_state() -> (PickerState, Arc<Mutex<Vec<PageLoadRequest>>>) {
         let requests = Arc::new(Mutex::new(Vec::new()));
         let request_sink = Arc::clone(&requests);
         let loader = page_only_loader(move |request| {
@@ -3740,7 +3831,7 @@ mod tests {
             .join("\n")
     }
 
-    fn render_picker_list(state: &PickerState, width: u16, height: u16) -> String {
+    pub(super) fn render_picker_list(state: &PickerState, width: u16, height: u16) -> String {
         use crate::custom_terminal::Terminal;
         use crate::test_backend::VT100Backend;
 
@@ -3759,6 +3850,8 @@ mod tests {
     #[test]
     fn row_display_preview_prefers_thread_name() {
         let row = Row {
+            backend_id: None,
+            history_mode: None,
             path: Some(PathBuf::from("/tmp/a.jsonl")),
             preview: String::from("first message"),
             thread_id: None,
@@ -3773,7 +3866,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn linked_worktree_sessions_are_included_for_local_repositories() {
+    async fn linked_worktree_sessions_follow_directory_scope() {
         let root = tempfile::tempdir().expect("temporary repository");
         let primary = root.path().join("primary");
         let linked = root.path().join("linked");
@@ -3802,7 +3895,16 @@ mod tests {
         let mut row = make_row("session.jsonl", "2025-01-01T00:00:00Z", "Linked session");
         row.cwd = Some(linked.clone());
         let single = ThreadListCwdFilter::One(primary.display().to_string());
+        state.repo_filter_available = local_repo_filter_available(&primary);
         state.start_initial_load();
+        state.ingest_page(page(
+            vec![row.clone()],
+            /*next_cursor*/ None,
+            /*num_scanned_files*/ 1,
+            /*reached_scan_cap*/ false,
+        ));
+        assert!(state.filtered_rows.is_empty());
+        state.change_filter_mode(ToolbarValueDirection::Next);
         state.ingest_page(page(
             vec![row.clone()],
             /*next_cursor*/ None,
@@ -3887,6 +3989,22 @@ mod tests {
             .handle_background_event(event)
             .await
             .expect("ingest app-server page");
+        assert!(
+            live_picker
+                .filtered_rows
+                .iter()
+                .all(|row| row.cwd.as_deref() == Some(primary.as_path()))
+        );
+        live_picker.filter_mode = SessionFilterMode::Repo;
+        live_picker.start_initial_load();
+        let event = tokio::time::timeout(std::time::Duration::from_secs(10), bg_rx.recv())
+            .await
+            .expect("app-server repo page response")
+            .expect("repo page event");
+        live_picker
+            .handle_background_event(event)
+            .await
+            .expect("ingest app-server repo page");
         let linked_index = live_picker
             .filtered_rows
             .iter()
@@ -3906,18 +4024,15 @@ mod tests {
             live_picker.handle_key(accept).await.expect("fork selection"),
             Some(SessionSelection::Fork(SessionTarget { thread_id, .. })) if thread_id == linked_id
         ));
-        let mut local = crate::latest_session_lookup_params(
-            /*uses_remote_filesystem*/ false,
+        let local = crate::latest_session_lookup_params(
             /*model_provider*/ None,
             Some(&primary),
             /*include_non_interactive*/ false,
             crate::LatestSessionLookupMode::StateDbOnly,
         );
-        assert!(matches!(local.cwd, Some(ThreadListCwdFilter::Many(_))));
-        local.cwd = Some(single.clone());
+        assert_eq!(local.cwd, Some(single.clone()));
         assert_eq!(
             crate::latest_session_lookup_params(
-                /*uses_remote_filesystem*/ true,
                 /*model_provider*/ None,
                 Some(&primary),
                 /*include_non_interactive*/ false,
@@ -4092,7 +4207,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn local_db_first_accepts_db_thread_id_without_rollout_validation() {
+    async fn local_db_first_accepts_db_thread_id_and_latest_history_mode() {
         let (mut state, requests) = local_db_first_state();
         state.start_initial_load();
         let db_request = requests.lock().unwrap()[0].clone();
@@ -4111,6 +4226,20 @@ mod tests {
             .insert(thread_id, ThreadHistoryMode::Legacy);
         deliver_page(&mut state, &db_request, Ok(listed_page)).await;
 
+        let mut updated_row = make_row(
+            "/tmp/missing-rollout.jsonl",
+            "2025-01-02T00:00:00Z",
+            "updated indexed metadata",
+        );
+        updated_row.thread_id = Some(thread_id);
+        updated_row.cwd = Some(PathBuf::from("/tmp/saved-cwd"));
+        let mut updated_page = ok_page(vec![updated_row], /*next_cursor*/ None)
+            .expect("updated indexed thread page should be available");
+        updated_page
+            .history_modes
+            .insert(thread_id, ThreadHistoryMode::Paginated);
+        state.ingest_page(updated_page);
+
         let selection = state
             .handle_key(KeyEvent::new(KeyCode::Enter, KeyModifiers::NONE))
             .await
@@ -4120,7 +4249,7 @@ mod tests {
             Some(SessionSelection::Resume(SessionTarget {
                 thread_id: selected_thread_id,
                 cwd: Some(cwd),
-                history_mode: Some(ThreadHistoryMode::Legacy),
+                history_mode: Some(ThreadHistoryMode::Paginated),
                 ..
             })) if selected_thread_id == thread_id && cwd == Path::new("/tmp/saved-cwd")
         ));
@@ -4131,6 +4260,8 @@ mod tests {
         let thread_id =
             ThreadId::from_string("019dabc1-0ef5-7431-b81c-03037f51f62c").expect("thread id");
         let row = Row {
+            backend_id: None,
+            history_mode: None,
             path: Some(PathBuf::from("/tmp/a.jsonl")),
             preview: String::from("first message"),
             thread_id: Some(thread_id),
@@ -4193,6 +4324,8 @@ mod tests {
         state.clock_format = ClockFormat::TwentyFourHour;
         state.relative_time_reference = parse_timestamp_str("2026-05-02T14:48:19Z");
         let row = Row {
+            backend_id: None,
+            history_mode: None,
             path: Some(PathBuf::from("/tmp/a.jsonl")),
             preview: String::from("first message"),
             thread_id: Some(thread_id),
@@ -4441,6 +4574,8 @@ mod tests {
         }
 
         let row = Row {
+            backend_id: None,
+            history_mode: None,
             path: None,
             preview: String::from("remote session"),
             thread_id: Some(ThreadId::new()),
@@ -4467,6 +4602,8 @@ mod tests {
             SessionPickerAction::Resume,
         );
         let row = Row {
+            backend_id: None,
+            history_mode: None,
             path: None,
             preview: String::from("remote session"),
             thread_id: Some(ThreadId::new()),
@@ -4496,6 +4633,8 @@ mod tests {
         let now = parse_timestamp_str("2026-04-28T16:30:00Z").expect("timestamp");
         let rows = vec![
             Row {
+                backend_id: None,
+                history_mode: None,
                 path: Some(PathBuf::from("/tmp/a.jsonl")),
                 preview: String::from("Fix resume picker timestamps"),
                 thread_id: None,
@@ -4506,6 +4645,8 @@ mod tests {
                 git_branch: None,
             },
             Row {
+                backend_id: None,
+                history_mode: None,
                 path: Some(PathBuf::from("/tmp/b.jsonl")),
                 preview: String::from("Investigate lazy pagination cap"),
                 thread_id: None,
@@ -4516,6 +4657,8 @@ mod tests {
                 git_branch: None,
             },
             Row {
+                backend_id: None,
+                history_mode: None,
                 path: Some(PathBuf::from("/tmp/c.jsonl")),
                 preview: String::from("Explain the codebase"),
                 thread_id: None,
@@ -4957,6 +5100,8 @@ mod tests {
             SessionPickerAction::Resume,
         );
         state.filtered_rows = vec![Row {
+            backend_id: None,
+            history_mode: None,
             path: None,
             preview: String::from("preview"),
             thread_id: Some(thread_id),
@@ -4996,6 +5141,8 @@ mod tests {
         );
         state.filtered_rows = vec![
             Row {
+                backend_id: None,
+                history_mode: None,
                 path: None,
                 preview: String::from("one"),
                 thread_id: Some(ThreadId::new()),
@@ -5006,6 +5153,8 @@ mod tests {
                 git_branch: None,
             },
             Row {
+                backend_id: None,
+                history_mode: None,
                 path: None,
                 preview: String::from("two"),
                 thread_id: Some(ThreadId::new()),
@@ -5133,6 +5282,8 @@ mod tests {
         state.pending_transcript_open = Some(thread_id);
         state.filtered_rows = vec![
             Row {
+                backend_id: None,
+                history_mode: None,
                 path: None,
                 preview: String::from("Find pending threads and emails"),
                 thread_id: Some(thread_id),
@@ -5143,6 +5294,8 @@ mod tests {
                 git_branch: None,
             },
             Row {
+                backend_id: None,
+                history_mode: None,
                 path: None,
                 preview: String::from("Plan raw scrollback mode"),
                 thread_id: Some(ThreadId::new()),
@@ -5199,6 +5352,8 @@ mod tests {
             SessionPickerAction::Resume,
         );
         state.filtered_rows = vec![Row {
+            backend_id: None,
+            history_mode: None,
             path: None,
             preview: String::from("preview"),
             thread_id: Some(thread_id),
@@ -5230,6 +5385,8 @@ mod tests {
             SessionPickerAction::Resume,
         );
         state.filtered_rows = vec![Row {
+            backend_id: None,
+            history_mode: None,
             path: Some(PathBuf::from("/tmp/a.jsonl")),
             preview: String::from("preview"),
             thread_id: None,
@@ -5373,6 +5530,8 @@ mod tests {
             SessionPickerAction::Resume,
         );
         state.filtered_rows = vec![Row {
+            backend_id: None,
+            history_mode: None,
             path: None,
             preview: String::from("preview"),
             thread_id: Some(thread_id),
@@ -5542,6 +5701,8 @@ session_picker_view = "dense"
             SessionPickerAction::Resume,
         );
         state.filtered_rows = vec![Row {
+            backend_id: None,
+            history_mode: None,
             path: None,
             preview: String::from("preview"),
             thread_id: Some(thread_id),
@@ -5582,6 +5743,8 @@ session_picker_view = "dense"
             SessionPickerAction::Resume,
         );
         state.filtered_rows = vec![Row {
+            backend_id: None,
+            history_mode: None,
             path: None,
             preview: String::from("preview"),
             thread_id: Some(thread_id),
@@ -5606,7 +5769,7 @@ session_picker_view = "dense"
         use crate::test_backend::VT100Backend;
 
         let loader = page_only_loader(|_| {});
-        let state = PickerState::new(
+        let mut state = PickerState::new(
             crate::backend_id::BackendId::new(),
             FrameRequester::test_dummy(),
             loader,
@@ -5615,6 +5778,7 @@ session_picker_view = "dense"
             Some(PathBuf::from("/tmp/project")),
             SessionPickerAction::Resume,
         );
+        state.set_repo_filter_available(/*available*/ true);
 
         let width: u16 = 100;
         let backend = VT100Backend::new(width, /*height*/ 1);
@@ -5657,6 +5821,8 @@ session_picker_view = "dense"
 
     fn dense_snapshot_row() -> Row {
         Row {
+            backend_id: None,
+            history_mode: None,
             path: Some(PathBuf::from("/tmp/a.jsonl")),
             preview: String::from(
                 "Propose session picker redesign with enough title text to exercise truncation",
@@ -5893,6 +6059,8 @@ session_picker_view = "dense"
         let thread_id =
             ThreadId::from_string("019dabc1-0ef5-7431-b81c-03037f51f62c").expect("thread id");
         let row = Row {
+            backend_id: None,
+            history_mode: None,
             path: Some(PathBuf::from("/tmp/a.jsonl")),
             preview: String::from("Investigate picker expansion"),
             thread_id: Some(thread_id),
@@ -5964,6 +6132,8 @@ session_picker_view = "dense"
 
         let loader = page_only_loader(|_| {});
         let row = Row {
+            backend_id: None,
+            history_mode: None,
             path: Some(PathBuf::from("/tmp/a.jsonl")),
             preview: String::from("Investigate picker expansion"),
             thread_id: Some(
@@ -6026,6 +6196,8 @@ session_picker_view = "dense"
         let now = parse_timestamp_str("2026-04-28T16:30:00Z").expect("timestamp");
         state.all_rows = (0..5)
             .map(|idx| Row {
+                backend_id: None,
+                history_mode: None,
                 path: Some(PathBuf::from(format!("/tmp/{idx}.jsonl"))),
                 preview: format!("item-{idx}"),
                 thread_id: None,
@@ -6079,6 +6251,8 @@ session_picker_view = "dense"
         let now = parse_timestamp_str("2026-04-28T16:30:00Z").expect("timestamp");
         state.all_rows = (0..4)
             .map(|idx| Row {
+                backend_id: None,
+                history_mode: None,
                 path: Some(PathBuf::from(format!("/tmp/{idx}.jsonl"))),
                 preview: format!("item-{idx}"),
                 thread_id: None,
@@ -6362,10 +6536,28 @@ session_picker_view = "dense"
             .handle_key(KeyEvent::new(KeyCode::Right, KeyModifiers::NONE))
             .await
             .unwrap();
+        assert_eq!(state.filter_mode, SessionFilterMode::All);
+        state.set_repo_filter_available(/*available*/ true);
+        assert_eq!(state.filter_mode, SessionFilterMode::All);
 
-        let guard = recorded_requests.lock().unwrap();
-        assert_eq!(guard.len(), 2);
-        assert_eq!(guard[1].cwd_filter, None);
+        let cwd_filter = Some(Path::new("/tmp/project"));
+        for (key, filter_mode, expected_cwd) in [
+            (KeyCode::Left, SessionFilterMode::Repo, cwd_filter),
+            (KeyCode::Left, SessionFilterMode::Cwd, cwd_filter),
+            (KeyCode::Right, SessionFilterMode::Repo, cwd_filter),
+            (KeyCode::Right, SessionFilterMode::All, None),
+        ] {
+            state
+                .handle_key(KeyEvent::new(key, KeyModifiers::NONE))
+                .await
+                .unwrap();
+            let guard = recorded_requests.lock().unwrap();
+            let request = guard.last().expect("filter reload request");
+            assert_eq!(
+                (request.filter_mode, request.cwd_filter.as_deref()),
+                (filter_mode, expected_cwd)
+            );
+        }
     }
 
     #[tokio::test]
@@ -6659,6 +6851,8 @@ session_picker_view = "dense"
         );
 
         let row = Row {
+            backend_id: None,
+            history_mode: None,
             path: Some(PathBuf::from("/tmp/missing.jsonl")),
             preview: String::from("missing metadata"),
             thread_id: None,
@@ -6699,6 +6893,8 @@ session_picker_view = "dense"
         );
         let thread_id = ThreadId::new();
         let row = Row {
+            backend_id: None,
+            history_mode: None,
             path: None,
             preview: String::from("pathless thread"),
             thread_id: Some(thread_id),

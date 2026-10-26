@@ -4,6 +4,7 @@ use codex_config::CloudConfigBundleLoader;
 use codex_config::ConfigLayerStack;
 use codex_config::LoaderOverrides;
 use codex_config::ThreadConfigLoader;
+use codex_config::apply_default_gcp_auth;
 use codex_config::loader::load_config_layers_state;
 use codex_config::loader::load_managed_requirements_state;
 use codex_core::config::Config;
@@ -15,6 +16,7 @@ use codex_login::AuthManager;
 use codex_login::default_client::set_default_client_residency_requirement;
 use codex_model_provider_info::AMAZON_BEDROCK_PROVIDER_ID;
 use codex_model_provider_info::AMAZON_BEDROCK_RUNTIME_PROVIDER_ID;
+use codex_model_provider_info::GCP_PROVIDER_ID;
 use codex_model_provider_info::built_in_model_providers;
 use codex_model_provider_info::merge_configured_model_providers;
 use codex_utils_absolute_path::AbsolutePathBuf;
@@ -25,7 +27,9 @@ use std::collections::HashMap;
 use std::path::Path;
 use std::path::PathBuf;
 use std::sync::Arc;
+use std::sync::Mutex;
 use std::sync::RwLock;
+use tokio_util::sync::CancellationToken;
 use toml::Value as TomlValue;
 use tracing::instrument;
 use tracing::warn;
@@ -54,12 +58,26 @@ pub(crate) struct ConfigManager {
     local_network_policy: codex_http_client::NetworkPolicyController,
     network_policy_reload: Arc<tokio::sync::Semaphore>,
     network_policy_snapshot: Arc<RwLock<Option<Arc<ApplicationPolicySnapshot>>>>,
+    /// Captured before config loading so a reload also revokes pending startups.
+    mcp_ema_cancellation: Arc<Mutex<EmaCancellationRoots>>,
+}
+
+#[derive(Default)]
+struct EmaCancellationRoots {
+    startup: CancellationToken,
+    lifetime: CancellationToken,
 }
 
 /// Startup configuration, including whether loading had to fall back to defaults.
 pub(crate) struct StartupConfig {
     pub(crate) config: Config,
     pub(crate) used_defaults: bool,
+}
+
+/// Local auth authority and the cloud-backed configuration loaded with it.
+pub(crate) struct CloudStartupConfig {
+    pub(crate) bootstrap: Config,
+    pub(crate) config: std::io::Result<Config>,
 }
 
 /// Configuration and policy must finish loading against the same account and cloud snapshot.
@@ -99,11 +117,41 @@ impl ConfigManager {
             local_network_policy: Default::default(),
             network_policy_reload: Arc::new(tokio::sync::Semaphore::new(/*permits*/ 1)),
             network_policy_snapshot: Arc::default(),
+            mcp_ema_cancellation: Arc::default(),
         }
     }
 
     pub(crate) fn codex_home(&self) -> &Path {
         self.codex_home.as_path()
+    }
+
+    /// Explicit account, policy-owner, and enterprise-login changes revoke cached access.
+    pub(crate) fn revoke_mcp_ema(&self) {
+        let mut current = self
+            .mcp_ema_cancellation
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        current.startup.cancel();
+        current.lifetime.cancel();
+        *current = EmaCancellationRoots::default();
+    }
+
+    /// Published threads are validated individually by the existing refresh loop.
+    pub(crate) fn revoke_mcp_ema_startups(&self) {
+        let mut current = self
+            .mcp_ema_cancellation
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        current.startup.cancel();
+        current.startup = CancellationToken::new();
+    }
+
+    fn capture_mcp_ema_cancellation(&self) -> codex_config::McpEmaCancellation {
+        let current = self
+            .mcp_ema_cancellation
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        codex_config::McpEmaCancellation::pending(current.startup.clone(), current.lifetime.clone())
     }
 
     pub(crate) fn with_embedded_network_policy(
@@ -171,6 +219,7 @@ impl ConfigManager {
         } else {
             warn!("failed to update cloud config bundle loader");
         }
+        self.revoke_mcp_ema();
     }
 
     pub(crate) fn clear_cloud_config_bundle_loader(&self) {
@@ -180,6 +229,7 @@ impl ConfigManager {
         } else {
             warn!("failed to clear cloud config bundle loader");
         }
+        self.revoke_mcp_ema();
     }
 
     pub(crate) async fn sync_default_client_residency_requirement(&self) {
@@ -213,6 +263,7 @@ impl ConfigManager {
     /// Loads system, user, and runtime settings without discovering a project
     /// from the app-server process's working directory.
     pub(crate) async fn load_non_project_config(&self) -> std::io::Result<Config> {
+        let mcp_ema_cancellation = self.capture_mcp_ema_cancellation();
         let policy_load = self.refresh_application_network_policy().await?;
         let mut config = ConfigBuilder::default()
             .codex_home(self.codex_home.clone())
@@ -229,6 +280,9 @@ impl ConfigManager {
         self.apply_network_policy(&mut config);
         self.apply_runtime_feature_enablement(&mut config);
         self.apply_arg0_paths(&mut config);
+        config.config_layer_stack = config
+            .config_layer_stack
+            .with_mcp_ema_cancellation(mcp_ema_cancellation);
         Ok(config)
     }
 
@@ -237,6 +291,7 @@ impl ConfigManager {
         session_layers: &ConfigLayerStack,
         cwd: &Path,
     ) -> std::io::Result<Config> {
+        let mcp_ema_cancellation = self.capture_mcp_ema_cancellation();
         let codex_home = AbsolutePathBuf::from_absolute_path(&self.codex_home)?;
         let layers = self
             .load_config_layers_for_cwd(AbsolutePathBuf::from_absolute_path(cwd)?)
@@ -251,6 +306,9 @@ impl ConfigManager {
         self.apply_network_policy(&mut config);
         self.apply_runtime_feature_enablement(&mut config);
         self.apply_arg0_paths(&mut config);
+        config.config_layer_stack = config
+            .config_layer_stack
+            .with_mcp_ema_cancellation(mcp_ema_cancellation);
         Ok(config)
     }
 
@@ -260,6 +318,7 @@ impl ConfigManager {
         session_layers: &ConfigLayerStack,
         cwd: &Path,
     ) -> std::io::Result<Config> {
+        let mcp_ema_cancellation = self.capture_mcp_ema_cancellation();
         let mut manager = self.clone();
         manager.thread_config_loader = Arc::new(codex_config::NoopThreadConfigLoader);
         let refreshed_layers = manager
@@ -276,6 +335,9 @@ impl ConfigManager {
         self.apply_network_policy(&mut config);
         self.apply_runtime_feature_enablement(&mut config);
         self.apply_arg0_paths(&mut config);
+        config.config_layer_stack = config
+            .config_layer_stack
+            .with_mcp_ema_cancellation(mcp_ema_cancellation);
         Ok(config)
     }
 
@@ -311,16 +373,24 @@ impl ConfigManager {
             Some(provider)
                 if matches!(
                     current.model_provider_id.as_str(),
-                    AMAZON_BEDROCK_PROVIDER_ID | AMAZON_BEDROCK_RUNTIME_PROVIDER_ID
+                    AMAZON_BEDROCK_PROVIDER_ID
+                        | AMAZON_BEDROCK_RUNTIME_PROVIDER_ID
+                        | GCP_PROVIDER_ID
                 ) =>
             {
-                // Bedrock requirements contain overrides of the built-in provider.
-                merge_configured_model_providers(
+                // Managed overrides must receive the same built-in defaults as startup config.
+                let mut provider = merge_configured_model_providers(
                     built_in_model_providers(/*openai_base_url*/ None),
                     HashMap::from([(current.model_provider_id.clone(), provider)]),
                 )
                 .map_err(|message| std::io::Error::new(std::io::ErrorKind::InvalidData, message))?
-                .remove(&current.model_provider_id)
+                .remove(&current.model_provider_id);
+                if current.model_provider_id == GCP_PROVIDER_ID
+                    && let Some(provider) = provider.as_mut()
+                {
+                    apply_default_gcp_auth(provider, &current.cwd);
+                }
+                provider
             }
             Some(provider) => Some(provider),
             None => None,
@@ -335,6 +405,26 @@ impl ConfigManager {
             ));
         }
         Ok(())
+    }
+
+    /// Load local policy before auth, then fetch the account's cloud configuration.
+    /// Callers choose their error/recovery policy before initializing any runtimes.
+    pub(crate) async fn load_cloud_startup_config(
+        &self,
+        cwd: Option<PathBuf>,
+    ) -> std::io::Result<CloudStartupConfig> {
+        let bootstrap = self.load_startup_config(cwd.clone()).await?.config;
+        let auth =
+            AuthManager::shared_from_config(&bootstrap, /*enable_codex_api_key_env*/ false)
+                .await
+                .map_err(std::io::Error::other)?;
+        self.replace_cloud_config_bundle_loader(
+            auth,
+            bootstrap.chatgpt_base_url.clone(),
+            bootstrap.http_client_factory(),
+        );
+        let config = self.load_latest_config(cwd).await;
+        Ok(CloudStartupConfig { bootstrap, config })
     }
 
     /// Installs local policy before cloud access; failed policy loads block traffic while
@@ -365,6 +455,7 @@ impl ConfigManager {
     }
 
     pub(crate) async fn load_default_config(&self) -> std::io::Result<Config> {
+        let mcp_ema_cancellation = self.capture_mcp_ema_cancellation();
         let mut loader_overrides = self.loader_overrides.clone();
         loader_overrides.ignore_user_config = true;
         loader_overrides.ignore_project_config = true;
@@ -381,6 +472,9 @@ impl ConfigManager {
         self.apply_network_policy(&mut config);
         self.apply_runtime_feature_enablement(&mut config);
         self.apply_arg0_paths(&mut config);
+        config.config_layer_stack = config
+            .config_layer_stack
+            .with_mcp_ema_cancellation(mcp_ema_cancellation);
         Ok(config)
     }
 
@@ -467,6 +561,7 @@ impl ConfigManager {
         mut typesafe_overrides: ConfigOverrides,
         fallback_cwd: Option<PathBuf>,
     ) -> std::io::Result<Config> {
+        let mcp_ema_cancellation = self.capture_mcp_ema_cancellation();
         let policy_load = self.refresh_application_network_policy().await?;
         let mut request_overrides = request_overrides.unwrap_or_default();
         if let Some(value) = request_overrides.remove("bypass_hook_trust") {
@@ -502,6 +597,9 @@ impl ConfigManager {
         self.apply_network_policy(&mut config);
         self.apply_runtime_feature_enablement(&mut config);
         self.apply_arg0_paths(&mut config);
+        config.config_layer_stack = config
+            .config_layer_stack
+            .with_mcp_ema_cancellation(mcp_ema_cancellation);
         Ok(config)
     }
 

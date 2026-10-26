@@ -70,6 +70,19 @@ proxy_url = "http://127.0.0.1:43128"
             .contains_key(&thread_id)
     );
     insta::assert_snapshot!(next_history_message(&mut events).replace(profile_id, "<PROFILE>"), @"• Permission selection requested: <PROFILE>");
+    // Another permissions menu and prompt are queued as this selection closes.
+    app.chat_widget
+        .set_queue_autosend_suppressed(/*suppressed*/ true);
+    for text in ["/permissions", "after permissions"] {
+        app.chat_widget
+            .restore_user_message_to_composer(text.into());
+        app.chat_widget.handle_key_event(KeyCode::Tab.into());
+    }
+    app.chat_widget.handle_server_notification(
+        turn_completed_notification(thread_id, "turn-1", TurnStatus::Completed),
+        /*replay_kind*/ None,
+    );
+    app.app_event_tx.send(AppEvent::SettingsSelectionClosed);
     let settings = next_thread_settings_updated(&mut server, thread_id).await;
     app.enqueue_thread_notification(
         thread_id,
@@ -96,6 +109,16 @@ proxy_url = "http://127.0.0.1:43128"
         app.runtime_permission_profile_override,
         Some(RuntimePermissionProfileOverride::from_config(&app.config))
     );
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+    loop {
+        let event = events.try_recv().expect("queued permissions menu");
+        if matches!(event, AppEvent::OpenPermissionsPopup) {
+            // Neither the old picker's close nor its confirmation may release this prompt.
+            assert!(app.chat_widget.has_queued_follow_up_messages());
+            break;
+        }
+        app.handle_event(&mut tui, &mut server, event).await?;
+    }
     server.shutdown().await?;
     Ok(())
 }
@@ -221,6 +244,10 @@ async fn inline_server_permission_selection_holds_queued_prompt_until_confirmati
 #[tokio::test]
 async fn custom_permission_selection_uses_server_definition_and_preserves_state_on_rejection()
 -> Result<()> {
+    boxed_future!(custom_permission_selection_scenario()).await
+}
+
+async fn custom_permission_selection_scenario() -> Result<()> {
     let (mut app, mut events, _ops) = make_test_app_with_channels().await;
     app.config.ephemeral = false;
     let home = tempdir()?;
@@ -389,16 +416,17 @@ async fn custom_permission_selection_uses_server_definition_and_preserves_state_
     }))?]).await?;
     let mut tui = crate::tui::test_support::make_test_tui()?;
     while events.try_recv().is_ok() {}
-    let side = server
-        .fork_side_thread(
+    let side = Box::pin(
+        server.fork_side_thread(
             &app.local_settings,
             app.config.clone(),
             thread_id,
             app.agents_overview
                 .requested_permission_profiles
                 .get(&thread_id),
-        )
-        .await?;
+        ),
+    )
+    .await?;
     assert_eq!(
         (
             side.session.permission_profile,
@@ -413,11 +441,11 @@ async fn custom_permission_selection_uses_server_definition_and_preserves_state_
     // Both the accepted request and its confirmed descendant remain server-owned.
     for _ in 0..2 {
         let previous_thread_id = app.chat_widget.thread_id();
-        app.handle_event(
+        Box::pin(app.handle_event(
             &mut tui,
             &mut server,
             AppEvent::ForkCurrentSession { name: None },
-        )
+        ))
         .await?;
         assert_ne!(app.chat_widget.thread_id(), previous_thread_id);
         assert_eq!(

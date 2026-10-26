@@ -31,14 +31,25 @@ import {
   TranslationVerbose,
   Translations,
 } from './translations';
+import * as VoiceConsentsAPI from './voice-consents';
+import {
+  VoiceConsent,
+  VoiceConsentCreateParams,
+  VoiceConsentDeleted,
+  VoiceConsentListParams,
+  VoiceConsentUpdateParams,
+  VoiceConsents,
+  VoiceConsentsPage,
+} from './voice-consents';
 import * as VoicesAPI from './voices';
-import { Voice, VoiceCreateParams, Voices } from './voices';
+import { Voice, VoiceCreateParams, VoiceDeleted, Voices } from './voices';
 
 export class Audio extends APIResource {
   transcriptions: TranscriptionsAPI.Transcriptions = new TranscriptionsAPI.Transcriptions(this._client);
   translations: TranslationsAPI.Translations = new TranslationsAPI.Translations(this._client);
   speech: SpeechAPI.Speech = new SpeechAPI.Speech(this._client);
   voices: VoicesAPI.Voices = new VoicesAPI.Voices(this._client);
+  voiceConsents: VoiceConsentsAPI.VoiceConsents = new VoiceConsentsAPI.VoiceConsents(this._client);
 }
 
 export type AudioModel =
@@ -62,6 +73,7 @@ Audio.Transcriptions = Transcriptions;
 Audio.Translations = Translations;
 Audio.Speech = Speech;
 Audio.Voices = Voices;
+Audio.VoiceConsents = VoiceConsents;
 
 export declare namespace Audio {
   export { type AudioModel as AudioModel, type AudioResponseFormat as AudioResponseFormat };
@@ -96,5 +108,20 @@ export declare namespace Audio {
 
   export { Speech as Speech, type SpeechModel as SpeechModel, type SpeechCreateParams as SpeechCreateParams };
 
-  export { Voices as Voices, type Voice as Voice, type VoiceCreateParams as VoiceCreateParams };
+  export {
+    Voices as Voices,
+    type Voice as Voice,
+    type VoiceDeleted as VoiceDeleted,
+    type VoiceCreateParams as VoiceCreateParams,
+  };
+
+  export {
+    VoiceConsents as VoiceConsents,
+    type VoiceConsent as VoiceConsent,
+    type VoiceConsentDeleted as VoiceConsentDeleted,
+    type VoiceConsentsPage as VoiceConsentsPage,
+    type VoiceConsentCreateParams as VoiceConsentCreateParams,
+    type VoiceConsentUpdateParams as VoiceConsentUpdateParams,
+    type VoiceConsentListParams as VoiceConsentListParams,
+  };
 }

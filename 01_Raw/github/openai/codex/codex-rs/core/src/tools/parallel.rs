@@ -194,7 +194,12 @@ impl ToolCallRuntime {
             otel.name = %call.tool_name,
             tool_name = %call.tool_name,
             thread.id = %session.thread_id,
+            conversation.id = %session.thread_id,
+            turn.id = %turn.sub_id,
+            turn_id = %turn.sub_id,
+            tool_source = trace_source.as_str(),
             call_id = call.call_id.as_str(),
+            codex.tool.phase = "dispatch",
             aborted = false,
         );
         let abort_dispatch_span = dispatch_span.clone();
@@ -207,13 +212,23 @@ impl ToolCallRuntime {
                     if let Some(tool_runtime) = tool_runtime
                         && let Some(readiness) = tool_runtime.wait_until_ready(&session)
                     {
-                        readiness.await;
+                        readiness
+                            .instrument(trace_span!("tool_dispatch.wait_until_ready"))
+                            .await;
                     }
 
                     if supports_parallel {
-                        Either::Left(lock.read().await)
+                        Either::Left(
+                            lock.read()
+                                .instrument(trace_span!("tool_dispatch.parallel_lock"))
+                                .await,
+                        )
                     } else {
-                        Either::Right(lock.write().await)
+                        Either::Right(
+                            lock.write()
+                                .instrument(trace_span!("tool_dispatch.exclusive_lock"))
+                                .await,
+                        )
                     }
                 }
                 .or_cancel_tool(&invocation_cancellation_token)
@@ -234,7 +249,6 @@ impl ToolCallRuntime {
                         source,
                         dispatch_call_state,
                     )
-                    .instrument(dispatch_span.clone())
                     .await;
                 drop(guard);
                 // The sampling loop collects results in order only after its stream ends.
@@ -248,11 +262,12 @@ impl ToolCallRuntime {
                         &dispatch_tool_name,
                         &dispatch_call_id,
                         trace_source,
+                        started.elapsed(),
                     );
                 }
                 result
             }
-            .in_current_span(),
+            .instrument(dispatch_span.or_current()),
         ));
 
         async move {
@@ -280,6 +295,7 @@ impl ToolCallRuntime {
                                     &call.tool_name,
                                     &call.call_id,
                                     trace_source,
+                                    started.elapsed(),
                                 );
                                 call_state.terminal_outcome_reached.store(true, Ordering::Release);
                                 notify_tool_aborted(
@@ -375,7 +391,7 @@ impl ToolCallRuntime {
 
     fn abort_message(call: &ToolCall, elapsed_secs: Option<f32>) -> String {
         let Some(secs) = elapsed_secs else {
-            return "aborted by user before dispatch".to_string();
+            return "aborted before dispatch".to_string();
         };
         if call.tool_name.is_default_namespace() && call.tool_name.name == "exec_command" {
             format!("Wall time: {secs:.1} seconds\naborted by user")
@@ -884,3 +900,7 @@ mod tests {
 #[cfg(test)]
 #[path = "parallel_observation_tests.rs"]
 mod observation_tests;
+
+#[cfg(test)]
+#[path = "parallel_trace_tests.rs"]
+mod trace_tests;

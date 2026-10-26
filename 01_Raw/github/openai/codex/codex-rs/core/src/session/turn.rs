@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use std::collections::HashSet;
 use std::sync::Arc;
 use std::sync::atomic::Ordering;
+use std::time::Instant;
 
 use crate::client::ModelClientSession;
 use crate::client_common::Prompt;
@@ -395,6 +396,17 @@ pub(crate) async fn run_turn(
         return Ok(None);
     }
 
+    // Guardian can replace its submitted prompt with response items during finalization.
+    // Those skip UserInput telemetry above, so emit the saved prompt after acceptance.
+    if crate::guardian::is_basic_session_source(&turn_context.session_source)
+        && !user_input.is_empty()
+        && input
+            .iter()
+            .all(|item| matches!(item, TurnInput::ResponseItem(_)))
+    {
+        turn_context.session_telemetry.user_prompt(&user_input);
+    }
+
     // Only speculate after hooks accept the turn, using its finalized tools and permissions.
     {
         let mut state = sess.state.lock().await;
@@ -546,8 +558,7 @@ pub(crate) async fn run_turn(
             // Isolated Guardian reviewers deliberately have no skill catalog.
             if !crate::guardian::is_basic_session_source(&turn_context.session_source) {
                 validate_required_skills(
-                    &sess.services.thread_extension_data,
-                    &turn_context.extension_data,
+                    &step_context.extension_data,
                     step_context.environments.required_skills(),
                 )
                 .map_err(CodexErr::Fatal)?;
@@ -962,6 +973,10 @@ pub(crate) async fn run_hooks_and_record_inputs(
             blocked_input = true;
             record_additional_contexts(sess, turn_context, hook_outcome.additional_contexts).await;
         } else {
+            if let TurnInput::UserInput { content, .. } = input_item {
+                // Prompt telemetry can contain the full text, so emit it only after hooks accept it.
+                turn_context.session_telemetry.user_prompt(content);
+            }
             if matches!(input_item, TurnInput::UserInput { content, .. } if !content.is_empty()) {
                 accepted_user_input = true;
             }
@@ -1273,6 +1288,7 @@ async fn build_extension_turn_input_items(
         .collect::<Vec<_>>();
 
     let input = TurnInputContext {
+        step_store: &step_context.extension_data,
         turn_id: turn_context.sub_id.to_string(),
         user_input: user_input.to_vec(),
         environments,
@@ -1742,7 +1758,14 @@ async fn run_sampling_request(
         Arc::clone(&turn_diff_tracker),
     );
     let max_retries = turn_context.provider.info().stream_max_retries();
-    record_registration_metrics(&step_context.tool_router, &step_context.session_telemetry);
+    let incremental_tools = sess
+        .current_window_uses_incremental_tools(&step_context)
+        .await;
+    record_registration_metrics(
+        &step_context.tool_router,
+        &step_context.session_telemetry,
+        incremental_tools,
+    );
     let mut retry_state = ResponsesStreamRetryState::default();
     let mut initial_input = Some(input);
     let mut original_input = None;
@@ -1765,8 +1788,7 @@ async fn run_sampling_request(
             prompt_input,
             step_context.as_ref(),
             base_instructions.clone(),
-            sess.current_window_uses_incremental_tools(&step_context)
-                .await,
+            incremental_tools,
         );
         let responses_metadata = sess
             .responses_metadata(step_context.as_ref(), CodexResponsesRequestKind::Turn)
@@ -1780,6 +1802,7 @@ async fn run_sampling_request(
             )
             .await?;
         }
+        let mut draining_for_mailbox = false;
         let err = match try_run_sampling_request(
             tool_runtime.clone(),
             Arc::clone(&sess),
@@ -1790,6 +1813,7 @@ async fn run_sampling_request(
             Arc::clone(&turn_diff_tracker),
             &prompt,
             cancellation_token.child_token(),
+            &mut draining_for_mailbox,
         )
         .await
         {
@@ -1829,7 +1853,9 @@ async fn run_sampling_request(
         if cancellation_token.is_cancelled() {
             return Err(CodexErr::TurnAborted);
         }
-        if preempt.is_cancelled() {
+        // Recover typed errors (including filter guidance) before handing queued mail back
+        // to the turn loop. Terminal errors and exhausted retries must still propagate.
+        if preempt.is_cancelled() || (draining_for_mailbox && matches!(retry, Ok(Ok(())))) {
             return Ok((
                 SamplingRequestResult {
                     needs_follow_up: true,
@@ -2269,6 +2295,7 @@ pub(super) fn realtime_text_for_event(msg: &EventMsg) -> Option<RealtimeEventTex
         | EventMsg::EnteredReviewMode(_)
         | EventMsg::ExitedReviewMode(_)
         | EventMsg::RawResponseItem(_)
+        | EventMsg::PrivateSessionEvent(_)
         | EventMsg::RawResponseCompleted(_)
         | EventMsg::ItemStarted(_)
         | EventMsg::HookStarted(_)
@@ -2392,6 +2419,7 @@ async fn emit_streamed_assistant_text_delta(
 }
 
 /// Flush buffered assistant text parser state when an assistant message item ends.
+#[instrument(level = "trace", skip_all)]
 async fn flush_assistant_text_segments_for_item(
     sess: &Session,
     turn_context: &TurnContext,
@@ -2404,6 +2432,7 @@ async fn flush_assistant_text_segments_for_item(
 }
 
 /// Flush any remaining buffered assistant text parser state at response completion.
+#[instrument(level = "trace", skip_all)]
 async fn flush_assistant_text_segments_all(
     sess: &Session,
     turn_context: &TurnContext,
@@ -2635,6 +2664,7 @@ async fn try_run_sampling_request(
     turn_diff_tracker: SharedTurnDiffTracker,
     prompt: &Prompt,
     cancellation_token: CancellationToken,
+    draining_for_mailbox: &mut bool,
 ) -> CodexResult<SamplingRequestResult> {
     let turn_context = Arc::clone(&step_context.turn);
     feedback_tags!(
@@ -2712,6 +2742,8 @@ async fn try_run_sampling_request(
     let sampling_timing_guard = turn_context.turn_timing_state.begin_sampling();
     let mut response_completed = false;
     let mut request_token_usage = None;
+    sess.set_server_reasoning_included(step_context.settings.model_info.use_responses_lite)
+        .await;
     let mut stream = match client_session
         .stream(
             prompt,
@@ -2786,19 +2818,30 @@ async fn try_run_sampling_request(
             gen_ai.usage.output_tokens = field::Empty,
             codex.usage.reasoning_output_tokens = field::Empty,
             codex.usage.total_tokens = field::Empty,
+            codex.response.receive_wait_ms = field::Empty,
         );
 
+        let receive_started = Instant::now();
         let event = stream
             .next()
             .instrument(trace_span!(parent: &handle_responses, "receiving"))
             .or_cancel(&preempt)
             .or_cancel(&cancellation_token)
             .await;
+        // Split the existing iteration span without adding another span per streamed delta.
+        handle_responses.record(
+            "codex.response.receive_wait_ms",
+            receive_started.elapsed().as_secs_f64() * 1000.0,
+        );
         // Account for an already-received terminal error even if cancellation raced it.
         // Cancellation still stops ordinary stream events before they can run tools.
         let event = match event {
             Ok(Ok(event)) => event,
             Ok(Err(_)) => {
+                if *draining_for_mailbox {
+                    preempt = CancellationToken::new();
+                    continue;
+                }
                 if let Some(interrupt) = stream.interrupt.take() {
                     if step_context.settings.model_info.use_responses_lite {
                         let _ = interrupt.send(codex_api::ResponseInterrupt::Drain);
@@ -2825,9 +2868,13 @@ async fn try_run_sampling_request(
             break Err(CodexErr::TurnAborted);
         }
 
-        let event = match event {
-            Some(Ok(event)) => event,
-            Some(Err(err)) => {
+        let event = match event.unwrap_or_else(|| {
+            Err(CodexErr::Stream(
+                "stream closed before response.completed".into(),
+            ))
+        }) {
+            Ok(event) => event,
+            Err(err) => {
                 if let CodexErrorDetails::ResponseIncomplete(incomplete) = err.details() {
                     request_token_usage = incomplete.token_usage.clone();
                     sess.record_incomplete_response_usage(
@@ -2838,12 +2885,15 @@ async fn try_run_sampling_request(
                     .await;
                     should_emit_token_count |= incomplete.token_usage.is_some();
                 }
+                if *draining_for_mailbox && matches!(err.details(), CodexErrorDetails::Stream(_)) {
+                    // Mail already requires a follow-up, even if the producer exited before
+                    // receiving the interrupt. Do not retry without that pending input.
+                    break Ok(SamplingRequestResult {
+                        needs_follow_up: true,
+                        last_agent_message,
+                    });
+                }
                 break Err(err);
-            }
-            None => {
-                break Err(CodexErr::Stream(
-                    "stream closed before response.completed".into(),
-                ));
             }
         };
 
@@ -2925,9 +2975,14 @@ async fn try_run_sampling_request(
                     step_context: Arc::clone(&step_context),
                     turn_store: Arc::clone(&turn_store),
                     tool_runtime: tool_runtime.clone(),
-                    defer_tool_dispatch,
+                    defer_tool_dispatch: defer_tool_dispatch || *draining_for_mailbox,
                     cancellation_token: cancellation_token.child_token(),
                 };
+                if *draining_for_mailbox {
+                    // Retain buffered calls in history, but use the existing pre-dispatch
+                    // cancellation path so they cannot run ahead of the queued mail.
+                    ctx.cancellation_token.cancel();
+                }
 
                 let preempt_for_mailbox_mail = match &item {
                     ResponseItem::Message { role, phase, .. } => {
@@ -2974,6 +3029,7 @@ async fn try_run_sampling_request(
                 // Hosts can keep the current response intact and deliver mail before the next
                 // model request instead of cutting off its remaining tool calls.
                 if preempt_for_mailbox_mail
+                    && !*draining_for_mailbox
                     && !turn_context
                         .config
                         .features
@@ -2988,6 +3044,18 @@ async fn try_run_sampling_request(
                         conversation.id = %sess.thread_id,
                         turn.id = %turn_context.sub_id,
                     );
+                    if step_context.settings.model_info.use_responses_lite
+                        && let Some(interrupt) = stream.interrupt.take()
+                    {
+                        // A closed receiver can mean completion is already buffered. Drain it
+                        // too; a transport failure below still takes the mailbox follow-up.
+                        let _ = interrupt.send(codex_api::ResponseInterrupt::Drain);
+                        // Retain completed items and the response ID for incremental continuation.
+                        // Further item boundaries must not drop the stream while it drains.
+                        *draining_for_mailbox = true;
+                        needs_follow_up = true;
+                        continue;
+                    }
                     break Ok(SamplingRequestResult {
                         needs_follow_up: true,
                         last_agent_message,
@@ -2998,12 +3066,13 @@ async fn try_run_sampling_request(
                 assign_missing_streamed_response_item_id(&mut item, /*active_item*/ None);
                 sess.reserve_assistant_message_order(&turn_context, &item)
                     .await;
-                if let ResponseItem::CustomToolCall {
-                    call_id,
-                    name,
-                    namespace,
-                    ..
-                } = &item
+                if !*draining_for_mailbox
+                    && let ResponseItem::CustomToolCall {
+                        call_id,
+                        name,
+                        namespace,
+                        ..
+                    } = &item
                 {
                     let tool_name = ToolName::new(namespace.clone(), name.as_str());
                     active_tool_argument_diff_consumer = tool_runtime
@@ -3021,7 +3090,10 @@ async fn try_run_sampling_request(
                 .await
                 {
                     let mut turn_item = turn_item;
-                    let stream_item_to_client = !defer_streamed_turn_items_for_contributors;
+                    // An interrupted response may discard its partial item. Only expose
+                    // items received during this drain once OutputItemDone confirms them.
+                    let stream_item_to_client =
+                        !*draining_for_mailbox && !defer_streamed_turn_items_for_contributors;
                     let mut seeded_parsed: Option<ParsedAssistantTextDelta> = None;
                     let mut seeded_item_id: Option<String> = None;
                     if stream_item_to_client

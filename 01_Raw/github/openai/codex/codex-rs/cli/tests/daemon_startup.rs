@@ -179,7 +179,7 @@ async fn daemon_startup(command: &str) -> Result<()> {
         home.path().join("config.toml"),
         format!(
             "model = \"gpt-5.6-terra\"\n\
-         features.bedrock_setup_wizard = true\ncli_auth_credentials_store = \"file\"\n\
+         cli_auth_credentials_store = \"file\"\n\
          suppress_unstable_features_warning = true\nanalytics.enabled = false\n\
          windows.sandbox = \"unelevated\"\n\
          tui.disable_paste_burst = true\n\
@@ -187,7 +187,7 @@ async fn daemon_startup(command: &str) -> Result<()> {
          notice.model_migrations.\"gpt-5.6-terra\" = \"gpt-6-sol\"\n\
          [projects.{}]\ntrust_level = \"{}\"\n",
             if command == "discovered" {
-                "tui.status_line=[\"model\",\"thread-id\",\"thread-name\"]"
+                "tui.status_line=[\"model\",\"thread-id\",\"thread-name\"]\nfeatures.daemon_auto_start=false"
             } else {
                 ""
             },
@@ -472,6 +472,12 @@ async fn daemon_startup(command: &str) -> Result<()> {
                             }) {
                                 continue;
                             }
+                        }
+                        // A replacement PID can appear before the TUI observes the disconnect.
+                        // Wait for reconnect to clear/rebuild the transcript, so the old
+                        // composer's command popup cannot make the status probe look ready.
+                        if *input == b"/status" && !output.contains("\x1b[3J") {
+                            continue;
                         }
                         // The old header can linger while the daemon stops. Check both
                         // the draft and its Enter against the replacement process and UI.

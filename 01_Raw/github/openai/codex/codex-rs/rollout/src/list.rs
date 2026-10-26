@@ -2,6 +2,7 @@
 
 use codex_utils_path as path_utils;
 use std::cmp::Reverse;
+use std::collections::HashMap;
 use std::ffi::OsStr;
 use std::fmt;
 use std::io;
@@ -121,6 +122,7 @@ pub type ConversationsPage = ThreadsPage;
 struct HeadTailSummary {
     originator: Option<String>,
     saw_session_meta: bool,
+    attached_to_parent: bool,
     thread_id: Option<ThreadId>,
     first_user_message: Option<String>,
     preview: Option<String>,
@@ -289,6 +291,7 @@ impl<'a> RolloutFileVisitor for FilesByCreatedAtVisitor<'a> {
             self.cwd_filters,
             updated_at,
             PreviewFilter::RequirePreview,
+            /*include_attached_threads*/ false,
         )
         .await
         {
@@ -583,6 +586,7 @@ async fn traverse_directories_for_paths_updated(
             cwd_filters,
             updated_at_fallback,
             PreviewFilter::RequirePreview,
+            /*include_attached_threads*/ false,
         )
         .await
         {
@@ -641,6 +645,7 @@ async fn traverse_flat_paths_created(
             cwd_filters,
             updated_at,
             PreviewFilter::IncludeEmpty,
+            /*include_attached_threads*/ false,
         )
         .await
         {
@@ -703,6 +708,7 @@ async fn traverse_flat_paths_updated(
             cwd_filters,
             updated_at_fallback,
             PreviewFilter::IncludeEmpty,
+            /*include_attached_threads*/ false,
         )
         .await
         {
@@ -784,12 +790,16 @@ async fn build_thread_item(
     cwd_filters: Option<&[PathBuf]>,
     updated_at: Option<String>,
     preview_filter: PreviewFilter,
+    include_attached_threads: bool,
 ) -> Option<ThreadItem> {
     // Read head and detect preview-bearing events; goal previews can appear before
     // the first normal user message.
     let summary = read_head_summary(&path, HEAD_RECORD_LIMIT)
         .await
         .unwrap_or_default();
+    if summary.attached_to_parent && !include_attached_threads {
+        return None;
+    }
     if !allowed_sources.is_empty()
         && !summary
             .source
@@ -881,6 +891,7 @@ pub async fn read_thread_item_from_rollout(path: PathBuf) -> Option<ThreadItem> 
         /*cwd_filters*/ None,
         /*updated_at*/ None,
         PreviewFilter::RequirePreview,
+        /*include_attached_threads*/ true,
     )
     .await
 }
@@ -1003,6 +1014,7 @@ async fn read_head_summary(path: &Path, head_limit: usize) -> io::Result<HeadTai
                     summary.originator = (!session_meta_line.meta.originator.is_empty())
                         .then(|| session_meta_line.meta.originator.clone());
                     summary.source = Some(session_meta_line.meta.source.clone());
+                    summary.attached_to_parent = session_meta_line.meta.attached_thread;
                     summary.history_mode = session_meta_line.meta.history_mode;
                     summary.parent_thread_id = session_meta_line.meta.parent_thread_id;
                     summary.agent_nickname = session_meta_line.meta.agent_nickname.clone();
@@ -1203,7 +1215,7 @@ pub async fn read_session_meta_line(path: &Path) -> io::Result<SessionMetaLine> 
             continue;
         };
         match rollout_line.item {
-            RolloutItem::SessionMeta(session_meta_line) => return Ok(session_meta_line),
+            RolloutItem::SessionMeta(session_meta_line) => return Ok(*session_meta_line),
             RolloutItem::ResponseItem(_) | RolloutItem::InterAgentCommunication(_) => {
                 return Err(io::Error::other(MetadataReadError {
                     reason: "response_before_metadata",
@@ -1544,6 +1556,66 @@ pub async fn find_rollout_path_by_rollout_id(
         }
     }
     Ok(None)
+}
+
+/// Prefetch a bounded set of active rollout paths for a history page.
+///
+/// The sibling directory supplies candidate IDs. They are resolved in the same traversal order as
+/// [`find_rollout_path_by_rollout_id`] to preserve duplicate-ID selection; missing or stale paths
+/// still require the normal lookup.
+pub async fn prefetch_sibling_rollout_paths(
+    codex_home: &Path,
+    child_path: &Path,
+    first_ancestor_id: RolloutId,
+) -> io::Result<HashMap<RolloutId, PathBuf>> {
+    let Some(child_name) = child_path
+        .file_name()
+        .and_then(OsStr::to_str)
+        .and_then(RolloutFileName::parse)
+    else {
+        return Ok(HashMap::new());
+    };
+    // A thread's original rollout ends the chain of same-thread ancestors.
+    if child_name.thread_id() == child_name.rollout_id()
+        || first_ancestor_id == child_name.thread_id()
+    {
+        return Ok(HashMap::new());
+    }
+    let active_root = codex_home.join(SESSIONS_SUBDIR);
+    let canonical_root = tokio::fs::canonicalize(&active_root).await?;
+    let canonical_child = tokio::fs::canonicalize(child_path).await?;
+    let Some(directory) = canonical_child
+        .parent()
+        .filter(|directory| directory.starts_with(&canonical_root))
+    else {
+        return Ok(HashMap::new());
+    };
+    let ids = files::collect_sibling_rollout_ids(
+        directory,
+        child_name.thread_id(),
+        child_name.rollout_id(),
+        first_ancestor_id,
+    )
+    .await?;
+    if ids.len() < 2 || !ids.contains(&first_ancestor_id) {
+        return Ok(HashMap::new());
+    }
+
+    let mut paths = HashMap::new();
+    visit_rollout_filenames(
+        &active_root,
+        |file_name| ids.contains(&file_name.rollout_id()),
+        |file_name, path| {
+            paths.entry(file_name.rollout_id()).or_insert(path);
+            if paths.len() == ids.len() {
+                ControlFlow::Break(())
+            } else {
+                ControlFlow::Continue(())
+            }
+        },
+    )
+    .await?;
+    Ok(paths)
 }
 
 /// Extract the `YYYY/MM/DD` directory components from a rollout filename.

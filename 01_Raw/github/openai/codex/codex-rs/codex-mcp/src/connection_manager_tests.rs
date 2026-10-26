@@ -1,4 +1,6 @@
 use super::*;
+#[path = "connection_manager/network_policy_tests.rs"]
+mod network_policy_tests;
 use crate::McpBinding;
 use crate::client_tool_catalog::ClientToolCatalog;
 use crate::elicitation::ElicitationLifecycle;
@@ -103,6 +105,8 @@ impl McpConnectionSet {
         prefix_mcp_tool_names: bool,
     ) -> Self {
         Self {
+            config: None,
+            network_policy_metadata: None,
             servers: HashMap::new(),
             event_stream_connection: None,
             disabled_servers: Vec::new(),
@@ -493,6 +497,7 @@ async fn create_test_managed_client(tools: Vec<ToolInfo>) -> ManagedClient {
         tool_timeout: None,
         server_instructions: None,
         server_supports_sandbox_state_meta_capability: false,
+        client_supports_network_policy_meta_capability: false,
         codex_apps_tools_cache_context: None,
     }
 }
@@ -579,6 +584,7 @@ async fn prepared_call_timeout_includes_trusted_access_lookup() {
 
 pub(crate) async fn create_ready_async_managed_client(tools: Vec<ToolInfo>) -> AsyncManagedClient {
     AsyncManagedClient {
+        ema_authority: None,
         client: futures::future::ready::<Result<ManagedClient, StartupOutcomeError>>(Ok(
             create_test_managed_client(tools).await,
         ))
@@ -610,6 +616,7 @@ async fn connection_statuses_observe_clients_without_starting_them() {
             StartupOutcomeError::Failed {
                 error: "broken".to_string(),
                 is_authentication_required: false,
+                is_ema_authentication_required: false,
             },
         ),
         (
@@ -617,6 +624,7 @@ async fn connection_statuses_observe_clients_without_starting_them() {
             StartupOutcomeError::Failed {
                 error: "login".to_string(),
                 is_authentication_required: true,
+                is_ema_authentication_required: false,
             },
         ),
         (
@@ -691,6 +699,7 @@ async fn connection_statuses_follow_latest_reconnect_outcome() {
                     0 | 1 => Err(StartupOutcomeError::Failed {
                         error: "retry failed".to_string(),
                         is_authentication_required: attempt == 0,
+                        is_ema_authentication_required: false,
                     }),
                     _ => Ok(recovered),
                 }
@@ -749,6 +758,7 @@ fn create_gated_async_managed_client(
 
     (
         AsyncManagedClient {
+            ema_authority: None,
             client,
             is_codex_apps_mcp_server: false,
             server_capabilities: Arc::new(std::sync::Mutex::new(None)),
@@ -805,6 +815,7 @@ pub(crate) async fn create_test_manager_with_ready_apps_client(
         tool_timeout: Some(Duration::from_secs(5)),
         server_instructions: None,
         server_supports_sandbox_state_meta_capability: false,
+        client_supports_network_policy_meta_capability: false,
         codex_apps_tools_cache_context: Some(cache_context.clone()),
     };
     let approval_policy = Constrained::allow_any(AskForApproval::OnRequest);
@@ -817,6 +828,7 @@ pub(crate) async fn create_test_manager_with_ready_apps_client(
     manager.insert_test_client(
         CODEX_APPS_MCP_SERVER_NAME.to_string(),
         AsyncManagedClient {
+            ema_authority: None,
             client: futures::future::ready::<Result<ManagedClient, StartupOutcomeError>>(Ok(
                 managed_client,
             ))
@@ -853,6 +865,7 @@ fn create_test_manager_with_failed_apps_startup(
     let client: ManagedClientFuture = futures::future::ready(Err(StartupOutcomeError::Failed {
         error: "startup failed".to_string(),
         is_authentication_required: false,
+        is_ema_authentication_required: false,
     }))
     .boxed()
     .shared();
@@ -873,6 +886,7 @@ fn create_test_manager_with_failed_apps_startup(
     manager.insert_test_client(
         CODEX_APPS_MCP_SERVER_NAME.to_string(),
         AsyncManagedClient {
+            ema_authority: None,
             client,
             is_codex_apps_mcp_server: true,
             server_capabilities: Arc::new(std::sync::Mutex::new(None)),
@@ -2059,9 +2073,12 @@ async fn read_only_apps_discovery_never_uses_a_shared_writable_catalog() -> anyh
         let cancellation = CancellationToken::new();
         cancellation.cancel();
         let manager = McpConnectionSet::new(
+            /*ema_auth*/ None,
+            /*existing_ema*/ None,
             /*previous*/ None,
             McpPublicationGate::already_published(),
             McpRuntimeInput {
+                network_policy_metadata: None,
                 startup_policy: McpStartupPolicy::Eager,
                 config: Arc::new(config),
                 plugins_available: false,
@@ -2132,9 +2149,12 @@ async fn hosted_apps_protocol_mode_is_independent_of_generic_mode() -> anyhow::R
         let startup_cancellation_token = CancellationToken::new();
         startup_cancellation_token.cancel();
         let manager = McpConnectionSet::new(
+            /*ema_auth*/ None,
+            /*existing_ema*/ None,
             /*previous*/ None,
             McpPublicationGate::already_published(),
             McpRuntimeInput {
+                network_policy_metadata: None,
                 startup_policy: McpStartupPolicy::Eager,
                 config: Arc::new(config),
                 plugins_available: false,
@@ -2238,9 +2258,12 @@ async fn codex_apps_extension_does_not_share_host_owned_tools_cache() -> anyhow:
         let startup_cancellation_token = CancellationToken::new();
         startup_cancellation_token.cancel();
         let manager = McpConnectionSet::new(
+            /*ema_auth*/ None,
+            /*existing_ema*/ None,
             /*previous*/ None,
             McpPublicationGate::already_published(),
             McpRuntimeInput {
+                network_policy_metadata: None,
                 startup_policy: McpStartupPolicy::Eager,
                 config: Arc::new(config),
                 plugins_available: false,
@@ -2315,6 +2338,7 @@ async fn list_all_tools_uses_shared_codex_apps_cache_while_client_is_pending() {
     manager.insert_test_client(
         CODEX_APPS_MCP_SERVER_NAME.to_string(),
         AsyncManagedClient {
+            ema_authority: None,
             client: pending_client,
             is_codex_apps_mcp_server: true,
             server_capabilities: Arc::new(std::sync::Mutex::new(None)),
@@ -2387,6 +2411,7 @@ async fn capture_binding_preserves_ready_client_catalog_and_shares_prepared_meta
     manager.insert_test_client(
         CODEX_APPS_MCP_SERVER_NAME.to_string(),
         AsyncManagedClient {
+            ema_authority: None,
             client: futures::future::ready(Ok(ready_client)).boxed().shared(),
             is_codex_apps_mcp_server: true,
             server_capabilities: Arc::new(std::sync::Mutex::new(None)),
@@ -2783,6 +2808,7 @@ async fn list_available_server_infos_uses_cache_while_client_is_pending() {
     manager.insert_test_client(
         CODEX_APPS_MCP_SERVER_NAME.to_string(),
         AsyncManagedClient {
+            ema_authority: None,
             client: pending_client,
             is_codex_apps_mcp_server: true,
             server_capabilities: Arc::new(std::sync::Mutex::new(None)),
@@ -2880,6 +2906,7 @@ async fn capture_binding_exposes_cached_tools_before_startup() {
     manager.insert_test_client(
         CODEX_APPS_MCP_SERVER_NAME.to_string(),
         AsyncManagedClient {
+            ema_authority: None,
             client: pending_client,
             is_codex_apps_mcp_server: true,
             server_capabilities: Arc::new(std::sync::Mutex::new(None)),
@@ -2980,6 +3007,7 @@ async fn capture_binding_skips_pending_optional_servers_after_configured_shared_
         manager.insert_test_client(
             server_name.to_string(),
             AsyncManagedClient {
+                ema_authority: None,
                 client: futures::future::pending::<Result<ManagedClient, StartupOutcomeError>>()
                     .boxed()
                     .shared(),
@@ -3165,6 +3193,7 @@ async fn stable_catalog_revisions_ignore_terminal_optional_server_failures() {
         StartupOutcomeError::Failed {
             error: "optional startup failed".to_string(),
             is_authentication_required: false,
+            is_ema_authentication_required: false,
         },
     ))
     .boxed()
@@ -3232,6 +3261,7 @@ async fn capture_binding_shares_optional_startup_grace_across_connection_sets() 
         manager.insert_test_client(
             "pending",
             AsyncManagedClient {
+                ema_authority: None,
                 client: futures::future::pending::<Result<ManagedClient, StartupOutcomeError>>()
                     .boxed()
                     .shared(),
@@ -3913,6 +3943,7 @@ async fn list_all_tools_blocks_while_client_is_pending_without_cached_tools() {
     manager.insert_test_client(
         CODEX_APPS_MCP_SERVER_NAME.to_string(),
         AsyncManagedClient {
+            ema_authority: None,
             client: pending_client,
             is_codex_apps_mcp_server: true,
             server_capabilities: Arc::new(std::sync::Mutex::new(None)),
@@ -3971,6 +4002,7 @@ async fn shutdown_cancels_pending_tool_listing() {
     manager.insert_test_client(
         CODEX_APPS_MCP_SERVER_NAME.to_string(),
         AsyncManagedClient {
+            ema_authority: None,
             client: pending_client,
             is_codex_apps_mcp_server: true,
             server_capabilities: Arc::new(std::sync::Mutex::new(None)),
@@ -4018,6 +4050,7 @@ async fn shutdown_continues_after_caller_is_aborted() {
     manager.insert_test_client(
         CODEX_APPS_MCP_SERVER_NAME.to_string(),
         AsyncManagedClient {
+            ema_authority: None,
             client: blocking_client,
             is_codex_apps_mcp_server: true,
             server_capabilities: Arc::new(std::sync::Mutex::new(None)),
@@ -4071,6 +4104,7 @@ async fn list_all_tools_does_not_block_when_shared_codex_apps_cache_is_empty() {
     manager.insert_test_client(
         CODEX_APPS_MCP_SERVER_NAME.to_string(),
         AsyncManagedClient {
+            ema_authority: None,
             client: pending_client,
             is_codex_apps_mcp_server: true,
             server_capabilities: Arc::new(std::sync::Mutex::new(None)),
@@ -4109,6 +4143,7 @@ async fn list_all_tools_uses_shared_codex_apps_cache_when_client_startup_fails()
         StartupOutcomeError::Failed {
             error: "startup failed".to_string(),
             is_authentication_required: false,
+            is_ema_authentication_required: false,
         },
     ))
     .boxed()
@@ -4124,6 +4159,7 @@ async fn list_all_tools_uses_shared_codex_apps_cache_when_client_startup_fails()
     manager.insert_test_client(
         CODEX_APPS_MCP_SERVER_NAME.to_string(),
         AsyncManagedClient {
+            ema_authority: None,
             client: failed_client,
             is_codex_apps_mcp_server: true,
             server_capabilities: Arc::new(std::sync::Mutex::new(None)),
@@ -4267,6 +4303,7 @@ async fn later_tool_list_retries_after_failed_reconnect_and_keeps_cached_tools()
                 Err(StartupOutcomeError::Failed {
                     error: "recreated startup failed".to_string(),
                     is_authentication_required: false,
+                    is_ema_authentication_required: false,
                 })
             } else {
                 Ok(recovered_client)
@@ -4542,7 +4579,8 @@ fn hosted_actor_credentials_are_only_available_to_host_owned_mcp_servers() {
     let bootstrap_auth = CodexAuth::create_dummy_chatgpt_auth_for_testing();
     let mut actor_headers = Default::default();
     codex_model_provider::auth_provider_from_auth(&bootstrap_auth)
-        .add_auth_headers(&mut actor_headers);
+        .add_auth_headers(&mut actor_headers)
+        .unwrap();
     actor_headers.insert(
         "x-openai-actor-authorization",
         "hosted-actor-secret"
@@ -4565,6 +4603,7 @@ fn hosted_actor_credentials_are_only_available_to_host_owned_mcp_servers() {
     assert_eq!(
         local_provider
             .to_auth_headers()
+            .unwrap()
             .get("x-openai-actor-authorization")
             .and_then(|value| value.to_str().ok()),
         Some("hosted-actor-secret")
@@ -4651,7 +4690,8 @@ async fn executor_owned_chatgpt_mcp_accepts_only_safe_explicit_authorization() -
     let bootstrap_auth = CodexAuth::create_dummy_chatgpt_auth_for_testing();
     let mut actor_headers = Default::default();
     codex_model_provider::auth_provider_from_auth(&bootstrap_auth)
-        .add_auth_headers(&mut actor_headers);
+        .add_auth_headers(&mut actor_headers)
+        .unwrap();
     actor_headers.insert(
         "x-openai-actor-authorization",
         "hosted-actor-secret"
@@ -4793,6 +4833,8 @@ async fn executor_owned_chatgpt_mcp_accepts_only_safe_explicit_authorization() -
             OAuthCredentialsStoreMode::default(),
             AuthKeyringBackendKind::default(),
             Some(&hosted_auth),
+            /*auth_manager*/ None,
+            &crate::EmaState::default(),
             &runtime_context,
         )
         .await;
@@ -4807,9 +4849,12 @@ async fn executor_owned_chatgpt_mcp_accepts_only_safe_explicit_authorization() -
         );
 
         let manager = McpConnectionSet::new(
+            /*ema_auth*/ None,
+            /*existing_ema*/ None,
             /*previous*/ None,
             McpPublicationGate::already_published(),
             McpRuntimeInput {
+                network_policy_metadata: None,
                 startup_policy: McpStartupPolicy::Eager,
                 config: Arc::new(runtime_config.clone()),
                 plugins_available: false,
@@ -4925,9 +4970,12 @@ async fn no_local_runtime_fails_local_stdio_but_keeps_local_http_server() {
 
     let cancel_token = CancellationToken::new();
     let manager = McpConnectionSet::new(
+        /*ema_auth*/ None,
+        /*existing_ema*/ None,
         /*previous*/ None,
         McpPublicationGate::already_published(),
         McpRuntimeInput {
+            network_policy_metadata: None,
             startup_policy: McpStartupPolicy::Eager,
             config: Arc::new(crate::mcp::tests::test_mcp_config(
                 codex_home.path().to_path_buf(),
@@ -5061,6 +5109,7 @@ fn mcp_init_error_display_prompts_for_login_when_auth_required() {
         StartupOutcomeError::Failed {
             error: "OAuth refresh token was rejected: invalid_grant".to_string(),
             is_authentication_required: true,
+            is_ema_authentication_required: false,
         },
     ] {
         let display = mcp_init_error_display(
@@ -5092,6 +5141,7 @@ fn mcp_init_error_display_identifies_oauth_reauthentication() {
     let error = StartupOutcomeError::Failed {
         error: "authorization required: Bearer error=\"invalid_token\"".to_string(),
         is_authentication_required: true,
+        is_ema_authentication_required: false,
     };
     let executor_config: McpServerConfig = serde_json::from_value(serde_json::json!({
         "url": "https://example.com/mcp",
@@ -5155,6 +5205,7 @@ fn mcp_startup_failure_reason_requires_existing_oauth_and_auth_failure() {
         let error = StartupOutcomeError::Failed {
             error: "startup failed".to_string(),
             is_authentication_required,
+            is_ema_authentication_required: false,
         };
 
         assert_eq!(
@@ -5373,9 +5424,12 @@ async fn reconcile_reusable_server_with_mcp_config(
 ) -> McpConnectionSet {
     let (tx_event, _rx_event) = async_channel::unbounded();
     McpConnectionSet::new(
+        /*ema_auth*/ None,
+        /*existing_ema*/ None,
         Some(previous),
         McpPublicationGate::already_published(),
         McpRuntimeInput {
+            network_policy_metadata: None,
             startup_policy: McpStartupPolicy::Eager,
             config: Arc::new(mcp_config),
             plugins_available: false,
@@ -5747,6 +5801,7 @@ async fn reconciliation_reuses_connection_without_relisting_regular_tools() -> a
         tool_timeout: None,
         server_instructions: initialize.instructions,
         server_supports_sandbox_state_meta_capability: false,
+        client_supports_network_policy_meta_capability: false,
         codex_apps_tools_cache_context: None,
     };
     let runtime_context = reusable_server_runtime_context();
@@ -5769,6 +5824,7 @@ async fn reconciliation_reuses_connection_without_relisting_regular_tools() -> a
             connection: Arc::new(McpServerConnection {
                 identity: Some(reusable_server_identity("docs", &config, &runtime_context)),
                 client: AsyncManagedClient {
+                    ema_authority: None,
                     client: futures::future::ready(Ok(managed_client)).boxed().shared(),
                     is_codex_apps_mcp_server: false,
                     server_capabilities: Arc::new(std::sync::Mutex::new(None)),
@@ -5876,7 +5932,7 @@ async fn reconciliation_reuses_connection_without_relisting_regular_tools() -> a
         .call_tool(
             "notify".into(),
             /*arguments*/ None,
-            /*meta*/ None,
+            |_| Ok(None),
             /*timeout*/ None,
         )
         .await?;
@@ -6072,6 +6128,7 @@ async fn reconciliation_retries_non_oauth_authentication_failures() {
     connection.client.client = futures::future::ready(Err(StartupOutcomeError::Failed {
         error: "bearer token rejected".to_string(),
         is_authentication_required: true,
+        is_ema_authentication_required: false,
     }))
     .boxed()
     .shared();
@@ -6297,6 +6354,7 @@ async fn reconciliation_replaces_connection_when_auth_mode_changes() -> anyhow::
         StartupOutcomeError::Failed {
             error,
             is_authentication_required,
+            ..
         } => {
             assert_eq!(
                 (error.as_str(), is_authentication_required),
@@ -6329,9 +6387,12 @@ async fn reconciliation_replaces_connection_when_protocol_mode_changes() {
     mcp_config.protocol_mode = codex_rmcp_client::McpProtocolMode::V20260728;
 
     let reconciled = McpConnectionSet::new(
+        /*ema_auth*/ None,
+        /*existing_ema*/ None,
         Some(&previous),
         McpPublicationGate::already_published(),
         McpRuntimeInput {
+            network_policy_metadata: None,
             startup_policy: McpStartupPolicy::Eager,
             config: Arc::new(mcp_config),
             plugins_available: false,
@@ -6387,9 +6448,12 @@ async fn reconciliation_reuses_legacy_stdio_server_when_modern_protocol_is_enabl
     mcp_config.protocol_mode = codex_rmcp_client::McpProtocolMode::V20260728;
 
     let reconciled = McpConnectionSet::new(
+        /*ema_auth*/ None,
+        /*existing_ema*/ None,
         Some(&previous),
         McpPublicationGate::already_published(),
         McpRuntimeInput {
+            network_policy_metadata: None,
             startup_policy: McpStartupPolicy::Eager,
             config: Arc::new(mcp_config),
             plugins_available: false,
@@ -6586,6 +6650,7 @@ async fn reconciliation_replaces_closed_connections() -> anyhow::Result<()> {
     view.connection = Arc::new(McpServerConnection {
         identity: Some(reusable_server_identity("docs", &config, &runtime_context)),
         client: AsyncManagedClient {
+            ema_authority: None,
             client: futures::future::ready(Ok(connected_client))
                 .boxed()
                 .shared(),

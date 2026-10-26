@@ -5,6 +5,7 @@ import asyncio
 import threading
 from types import TracebackType
 from typing import TYPE_CHECKING, Any, Literal, cast
+from concurrent.futures import Future
 
 import httpx2
 from pydantic import BaseModel
@@ -23,7 +24,7 @@ from ..types.realtime import (
     RealtimeTranslationClientEventParam,
     RealtimeTranslationSessionClosedEvent,
 )
-from ..types.websocket_connection_options import WebSocketConnectionOptions
+from ..types.websocket_connection_options import WebSocketConnectionOptions, SyncWebSocketConnectionOptions
 
 __all__ = ["TranslationSession", "AsyncTranslationSession", "TranslationConnection", "AsyncTranslationConnection"]
 
@@ -48,12 +49,27 @@ def _check_connection(client: OpenAI | AsyncOpenAI, model: str, query: Query) ->
         raise ValueError("Realtime Translation does not accept an intent query parameter.")
 
 
-def _connection_query(client: OpenAI | AsyncOpenAI, model: str, query: Query) -> Query:
+class _PreparedTranslationQuery(httpx2.QueryParams):
+    """Complete managed query; its removed defaults must not be added again."""
+
+
+def _connection_query(client: OpenAI | AsyncOpenAI, model: str, query: Query) -> _PreparedTranslationQuery:
     # Preserve Translation's base URL query when a separate WebSocket gateway is used.
-    params = client.base_url.params.merge(client.qs.stringify(cast(Any, client.default_query)))
+    params = client.base_url.params
+    # Defaults override the HTTP base URL, while the WebSocket URL wins over both.
+    # Let the shared helper encode the defaults after retiring logical overrides.
+    default_params = httpx2.QueryParams(client.qs.stringify(cast(Any, client.default_query)))
+    params = httpx2.QueryParams([(key, value) for key, value in params.multi_items() if key not in default_params])
     if client.websocket_base_url is not None:
         params = params.merge(httpx2.URL(str(client.websocket_base_url)).params)
-    return cast(Query, params.merge({"model": model}).merge(cast(Any, query)))
+    connection_query: Query = (
+        httpx2.QueryParams({"model": model}).merge(query)
+        if isinstance(query, httpx2.QueryParams)
+        else {"model": model, **query}
+    )
+    return _PreparedTranslationQuery(
+        client._websocket_query_params(client.base_url.copy_with(params=params), connection_query)
+    )
 
 
 def _parse(data: str | bytes) -> RealtimeTranslationServerEvent:
@@ -72,6 +88,8 @@ class TranslationConnection:
     def __init__(self, connection: TranslationsConnection) -> None:
         self._connection = connection
         self._send_lock = threading.Lock()
+        self._close_lock = threading.Lock()
+        self._close_result: Future[None] | None = None
         self._state: Literal["open", "finishing", "closed"] = "open"
 
     def send(self, event: RealtimeTranslationClientEvent | RealtimeTranslationClientEventParam) -> None:
@@ -100,13 +118,48 @@ class TranslationConnection:
             self._connection.recv_bytes() if timeout is None else self._connection._connection.recv(timeout=timeout)
         )
         if isinstance(event, RealtimeTranslationSessionClosedEvent):
-            self.close()
+            if timeout is None:
+                self.close()
+            else:
+                self._close(background=True)
         return event
 
     def close(self) -> None:
+        self._close(background=False)
+
+    def _close(self, *, background: bool) -> None:
         # Do not wait for a blocked writer before aborting the transport.
-        self._state = "closed"
-        self._connection.close()
+        with self._close_lock:
+            self._state = "closed"
+            result = self._close_result
+            first = result is None
+            if result is None:
+                result = self._close_result = Future()
+
+        if first:
+            if background:
+                try:
+                    threading.Thread(target=self._finish_close, args=(result,), daemon=True).start()
+                except BaseException as starting:
+                    # Keep ownership if the close worker couldn't start.
+                    self._finish_close(result)
+                    try:
+                        result.result()
+                    except BaseException as closing:
+                        raise starting from closing
+                    raise
+            else:
+                self._finish_close(result)
+        if not background:
+            result.result()
+
+    def _finish_close(self, result: Future[None]) -> None:
+        try:
+            self._connection.close()
+        except BaseException as error:
+            result.set_exception(error)
+        else:
+            result.set_result(None)
 
 
 class AsyncTranslationConnection:
@@ -158,7 +211,7 @@ class TranslationSession:
         model: str,
         extra_query: Query = {},
         extra_headers: Headers = {},
-        websocket_connection_options: WebSocketConnectionOptions = {},
+        websocket_connection_options: SyncWebSocketConnectionOptions = {},
     ) -> None:
         self._resource = resource
         self._client = resource._client

@@ -42,7 +42,7 @@ from ...types.websocket_reconnection import ReconnectingEvent, ReconnectingOverr
 from ...types.live.client_event_param import ClientEventParam
 from ...types.live.live_create_response import LiveCreateResponse
 from ...types.live.session_config_param import SessionConfigParam
-from ...types.websocket_connection_options import WebSocketConnectionOptions
+from ...types.websocket_connection_options import WebSocketConnectionOptions, SyncWebSocketConnectionOptions
 from ...types.live.media_session_config_param import MediaSessionConfigParam
 from ...types.live.session_update_config_param import SessionUpdateConfigParam
 from ...types.responses.response_input_item_param import ResponseInputItemParam
@@ -143,7 +143,7 @@ class Live(SyncAPIResource):
         self,
         extra_query: Query = {},
         extra_headers: Headers = {},
-        websocket_connection_options: WebSocketConnectionOptions = {},
+        websocket_connection_options: SyncWebSocketConnectionOptions = {},
         on_reconnecting: Callable[[ReconnectingEvent], ReconnectingOverrides | None] | None = None,
         max_retries: int = 5,
         initial_delay: float = 0.5,
@@ -359,9 +359,7 @@ class AsyncLiveConnection(AsyncWebSocketConnectionBase):
             max_delay=max_delay,
             extra_query=extra_query,
             extra_headers=extra_headers,
-            send_queue=(
-                send_queue if send_queue is not None else SendQueue(max_bytes=DEFAULT_LIVE_SEND_QUEUE_MAX_BYTES)
-            ),
+            send_queue=send_queue if send_queue is not None else SendQueue(max_bytes=DEFAULT_LIVE_SEND_QUEUE_MAX_BYTES),
             logger=log,
         )
         self._event_handler_registry = EventHandlerRegistry(use_lock=False)
@@ -641,20 +639,29 @@ class AsyncLiveConnectionManager:
         """
         ws = await self._connect_ws(self.__extra_query, self.__extra_headers)
 
-        self.__connection = AsyncLiveConnection(
-            ws,
-            make_ws=self._connect_ws if self.__on_reconnecting is not None else None,
-            on_reconnecting=self.__on_reconnecting,
-            max_retries=self.__max_retries,
-            initial_delay=self.__initial_delay,
-            max_delay=self.__max_delay,
-            extra_query=self.__extra_query,
-            extra_headers=self.__extra_headers,
-            send_queue=self.__send_queue,
-        )
+        try:
+            self.__connection = AsyncLiveConnection(
+                ws,
+                make_ws=self._connect_ws if self.__on_reconnecting is not None else None,
+                on_reconnecting=self.__on_reconnecting,
+                max_retries=self.__max_retries,
+                initial_delay=self.__initial_delay,
+                max_delay=self.__max_delay,
+                extra_query=self.__extra_query,
+                extra_headers=self.__extra_headers,
+                send_queue=self.__send_queue,
+            )
 
-        self.__event_handler_registry.merge_into(self.__connection._event_handler_registry)
-        await self.__connection._flush_send_queue()
+            self.__event_handler_registry.merge_into(self.__connection._event_handler_registry)
+            await self.__connection._flush_send_queue()
+        except BaseException:
+            self.__connection = None
+            try:
+                await ws.close()
+            except BaseException:
+                # Preserve the exception that prevented successful entry.
+                pass
+            raise
 
         return self.__connection
 
@@ -667,10 +674,16 @@ class AsyncLiveConnectionManager:
             raise OpenAIError("You need to install `openai[realtime]` to use this method") from exc
 
         url = self._prepare_url()
+        try:
+            # Older runtimes do not declare this optional helper.
+            query_params = getattr(self.__client, "_websocket_query_params")  # noqa: B009
+        except AttributeError:
+            query_params = self.__client._websocket_query_params_fallback
         url = url.copy_with(
-            params=httpx2.QueryParams(self.__client.qs.stringify(cast(Any, self.__client.default_query)))
-            .merge(url.params)
-            .merge(cast(Any, extra_query)),
+            params=query_params(
+                url,
+                extra_query,
+            ),
         )
         url = url.copy_with(scheme={"http": "ws", "https": "wss"}.get(url.scheme, url.scheme))
         options = await self.__client._prepare_options(
@@ -699,11 +712,16 @@ class AsyncLiveConnectionManager:
         if self.__websocket_connection_options:
             log.debug("Custom WebSocket connection options provided")
 
+        websocket_options = self.__websocket_connection_options.copy()
+        websocket_options.setdefault("max_size", None)
+        if websocket_options.get("max_size") is None:
+            websocket_options.setdefault("compression", None)
+
         return await connect(
             str(url),
             user_agent_header=None,
             additional_headers=_merge_mappings(dict(headers.values()), {}),
-            **self.__websocket_connection_options,
+            **websocket_options,
         )
 
     def _prepare_url(self) -> httpx2.URL:
@@ -756,9 +774,7 @@ class LiveConnection(WebSocketConnectionBase):
             max_delay=max_delay,
             extra_query=extra_query,
             extra_headers=extra_headers,
-            send_queue=(
-                send_queue if send_queue is not None else SendQueue(max_bytes=DEFAULT_LIVE_SEND_QUEUE_MAX_BYTES)
-            ),
+            send_queue=send_queue if send_queue is not None else SendQueue(max_bytes=DEFAULT_LIVE_SEND_QUEUE_MAX_BYTES),
             logger=log,
         )
         self._event_handler_registry = EventHandlerRegistry(use_lock=True)
@@ -949,7 +965,7 @@ class LiveConnectionManager:
         client: OpenAI,
         extra_query: Query,
         extra_headers: Headers,
-        websocket_connection_options: WebSocketConnectionOptions,
+        websocket_connection_options: SyncWebSocketConnectionOptions,
         on_reconnecting: Callable[[ReconnectingEvent], ReconnectingOverrides | None] | None = None,
         max_retries: int = 5,
         initial_delay: float = 0.5,
@@ -1033,20 +1049,29 @@ class LiveConnectionManager:
         """
         ws = self._connect_ws(self.__extra_query, self.__extra_headers)
 
-        self.__connection = LiveConnection(
-            ws,
-            make_ws=self._connect_ws if self.__on_reconnecting is not None else None,
-            on_reconnecting=self.__on_reconnecting,
-            max_retries=self.__max_retries,
-            initial_delay=self.__initial_delay,
-            max_delay=self.__max_delay,
-            extra_query=self.__extra_query,
-            extra_headers=self.__extra_headers,
-            send_queue=self.__send_queue,
-        )
+        try:
+            self.__connection = LiveConnection(
+                ws,
+                make_ws=self._connect_ws if self.__on_reconnecting is not None else None,
+                on_reconnecting=self.__on_reconnecting,
+                max_retries=self.__max_retries,
+                initial_delay=self.__initial_delay,
+                max_delay=self.__max_delay,
+                extra_query=self.__extra_query,
+                extra_headers=self.__extra_headers,
+                send_queue=self.__send_queue,
+            )
 
-        self.__event_handler_registry.merge_into(self.__connection._event_handler_registry)
-        self.__connection._flush_send_queue()
+            self.__event_handler_registry.merge_into(self.__connection._event_handler_registry)
+            self.__connection._flush_send_queue()
+        except BaseException:
+            self.__connection = None
+            try:
+                ws.close()
+            except BaseException:
+                # Preserve the exception that prevented successful entry.
+                pass
+            raise
 
         return self.__connection
 
@@ -1059,10 +1084,16 @@ class LiveConnectionManager:
             raise OpenAIError("You need to install `openai[realtime]` to use this method") from exc
 
         url = self._prepare_url()
+        try:
+            # Older runtimes do not declare this optional helper.
+            query_params = getattr(self.__client, "_websocket_query_params")  # noqa: B009
+        except AttributeError:
+            query_params = self.__client._websocket_query_params_fallback
         url = url.copy_with(
-            params=httpx2.QueryParams(self.__client.qs.stringify(cast(Any, self.__client.default_query)))
-            .merge(url.params)
-            .merge(cast(Any, extra_query)),
+            params=query_params(
+                url,
+                extra_query,
+            ),
         )
         url = url.copy_with(scheme={"http": "ws", "https": "wss"}.get(url.scheme, url.scheme))
         options = self.__client._prepare_options(
@@ -1091,11 +1122,16 @@ class LiveConnectionManager:
         if self.__websocket_connection_options:
             log.debug("Custom WebSocket connection options provided")
 
+        websocket_options = self.__websocket_connection_options.copy()
+        websocket_options.setdefault("max_size", None)
+        if websocket_options.get("max_size") is None:
+            websocket_options.setdefault("compression", None)
+
         return connect(
             str(url),
             user_agent_header=None,
             additional_headers=_merge_mappings(dict(headers.values()), {}),
-            **self.__websocket_connection_options,
+            **websocket_options,
         )
 
     def _prepare_url(self) -> httpx2.URL:
@@ -1319,7 +1355,9 @@ class LiveDecisionItemResource(BaseLiveConnectionResource):
             )
         )
 
-    def create(self, *, item: decision_item_create_event_param.Item, event_id: Optional[str] | Omit = omit) -> None:
+    def create(
+        self, *, item: decision_item_create_event_param.ItemUnion, event_id: Optional[str] | Omit = omit
+    ) -> None:
         """
         Append an input item for future decisions without starting an evaluation or changing Live voice context.
         """
@@ -1571,7 +1609,7 @@ class AsyncLiveDecisionItemResource(BaseAsyncLiveConnectionResource):
         )
 
     async def create(
-        self, *, item: decision_item_create_event_param.Item, event_id: Optional[str] | Omit = omit
+        self, *, item: decision_item_create_event_param.ItemUnion, event_id: Optional[str] | Omit = omit
     ) -> None:
         """
         Append an input item for future decisions without starting an evaluation or changing Live voice context.

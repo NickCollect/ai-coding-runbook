@@ -3054,6 +3054,7 @@ fn network_requirements_deserializes_legacy_fields() {
             dangerously_allow_non_loopback_proxy: None,
             dangerously_allow_all_unix_sockets: None,
             domains: None,
+            review_domains: None,
             managed_allowed_domains_only: None,
             allowed_domains: Some(vec!["api.openai.com".to_string()]),
             denied_domains: Some(vec!["blocked.example.com".to_string()]),
@@ -3080,6 +3081,7 @@ fn network_requirements_serializes_canonical_and_legacy_fields() {
                 NetworkDomainPermission::Deny,
             ),
         ])),
+        review_domains: Some(vec!["api.openai.com".to_string()]),
         managed_allowed_domains_only: Some(true),
         allowed_domains: Some(vec!["api.openai.com".to_string()]),
         denied_domains: Some(vec!["blocked.example.com".to_string()]),
@@ -3110,6 +3112,7 @@ fn network_requirements_serializes_canonical_and_legacy_fields() {
                 "api.openai.com": "allow",
                 "blocked.example.com": "deny"
             },
+            "reviewDomains": ["api.openai.com"],
             "managedAllowedDomainsOnly": true,
             "allowedDomains": ["api.openai.com"],
             "deniedDomains": ["blocked.example.com"],
@@ -5452,4 +5455,33 @@ fn tool_request_user_input_params_default_legacy_missing_is_blocking_to_true() {
             auto_resolution_ms: Some(60_000),
         }
     );
+}
+
+/// Native path spelling survives serialization so the receiving host can validate it.
+#[test]
+fn feedback_paths_preserve_native_wire_spelling_before_host_validation() {
+    for path in [
+        "/tmp/feedback.zip",
+        r"C:\Users\test\feedback.zip",
+        r"\\server\share\feedback.zip",
+        "relative.zip",
+    ] {
+        let request: FeedbackSaveParams = serde_json::from_value(json!({
+            "classification": "bug", "savePath": path
+        }))
+        .expect("wire paths remain uninterpreted");
+        assert_eq!(request.save_path.as_str(), path);
+        assert_eq!(
+            serde_json::to_value(&request).expect("serialize request")["savePath"],
+            path
+        );
+        let response: FeedbackSaveResponse = serde_json::from_value(json!({
+            "threadId": "synthetic", "savedPath": path, "promptHash": null
+        }))
+        .expect("wire response");
+        assert_eq!(
+            serde_json::to_value(response).expect("serialize response")["savedPath"],
+            path
+        );
+    }
 }

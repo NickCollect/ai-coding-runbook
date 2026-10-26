@@ -36,16 +36,26 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../../../../core
 import { Stream } from '../../../../core/streaming';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
-import { AssistantStream, RunCreateParamsBaseStream } from '../../../../lib/AssistantStream';
 import { pollAssistantRun } from '../../../../lib/assistant-run-polling';
-import { RunSubmitToolOutputsParamsStream } from '../../../../lib/AssistantStream';
 import { path } from '../../../../internal/utils/path';
+import {
+  AssistantStream,
+  RunCreateParamsBaseStream,
+  RunSubmitToolOutputsParamsStream,
+} from '../../../../lib/AssistantStream';
 
 function resolveResourceRequestOptions(
   options: RequestOptions | undefined,
   buildOptions: (options: RequestOptions | undefined) => RequestOptions | Promise<RequestOptions>,
 ): Promise<RequestOptions> {
   return Promise.resolve(options).then(buildOptions);
+}
+
+function withBodyFinalization<T extends RequestOptions>(
+  options: T,
+  finalization: { streamFromBody?: true; finalizeMultipart?: true },
+): T {
+  return { ...options, __metadata: { ...options.__metadata, ...finalization } };
 }
 
 // Recognizable options across SDK runtime versions. Keep this independent of
@@ -187,16 +197,46 @@ export class Runs extends APIResource {
     const { include, ...body } = params;
     return this._client.post(
       path`/threads/${threadID}/runs`,
-      resolveResourceRequestOptions(options, (options) => ({
-        query: { include },
-        body,
-        ...options,
-        headers: buildHeaders([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
-        stream: params.stream ?? false,
-        __synthesizeEventData: true,
-        __security: { bearerAuth: true },
-      })),
+      resolveResourceRequestOptions(options, (options) =>
+        withBodyFinalization(
+          {
+            query: { include },
+            body,
+            ...options,
+            headers: buildHeaders([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            stream: params.stream ?? false,
+            __synthesizeEventData: true,
+            __security: { bearerAuth: true },
+          },
+          { streamFromBody: true },
+        ),
+      ),
     ) as APIPromise<Run> | APIPromise<Stream<AssistantsAPI.AssistantStreamEvent>>;
+  }
+
+  /**
+   * A helper to create a run and poll until it reaches a terminal state.
+   */
+  async createAndPoll(
+    threadId: string,
+    body: RunCreateParamsNonStreaming,
+    options?: RequestOptions & { pollIntervalMs?: number },
+  ): Promise<Run> {
+    const created = await this.create(threadId, body, options);
+    return await this.poll(created.id, { thread_id: threadId }, options);
+  }
+
+  /**
+   * Create a Run stream
+   *
+   * @deprecated use `stream` instead
+   */
+  createAndStream(
+    threadId: string,
+    body: RunCreateParamsBaseStream,
+    options?: RequestOptions,
+  ): AssistantStream {
+    return AssistantStream.createAssistantStream(threadId, this._client.beta.threads.runs, body, options);
   }
 
   /**
@@ -368,33 +408,6 @@ export class Runs extends APIResource {
   }
 
   /**
-   * A helper to create a run an poll for a terminal state. More information on Run
-   * lifecycles can be found here:
-   * https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
-   */
-  async createAndPoll(
-    threadId: string,
-    body: RunCreateParamsNonStreaming,
-    options?: RequestOptions & { pollIntervalMs?: number },
-  ): Promise<Run> {
-    const run = await this.create(threadId, body, options);
-    return await this.poll(run.id, { thread_id: threadId }, options);
-  }
-
-  /**
-   * Create a Run stream
-   *
-   * @deprecated use `stream` instead
-   */
-  createAndStream(
-    threadId: string,
-    body: RunCreateParamsBaseStream,
-    options?: RequestOptions,
-  ): AssistantStream {
-    return AssistantStream.createAssistantStream(threadId, this._client.beta.threads.runs, body, options);
-  }
-
-  /**
    * A helper to poll a run status until it reaches a terminal state. More
    * information on Run lifecycles can be found here:
    * https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
@@ -445,29 +458,32 @@ export class Runs extends APIResource {
     const { thread_id, ...body } = params;
     return this._client.post(
       path`/threads/${thread_id}/runs/${runID}/submit_tool_outputs`,
-      resolveResourceRequestOptions(options, (options) => ({
-        body,
-        ...options,
-        headers: buildHeaders([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
-        stream: params.stream ?? false,
-        __synthesizeEventData: true,
-        __security: { bearerAuth: true },
-      })),
+      resolveResourceRequestOptions(options, (options) =>
+        withBodyFinalization(
+          {
+            body,
+            ...options,
+            headers: buildHeaders([{ 'OpenAI-Beta': 'assistants=v2' }, options?.headers]),
+            stream: params.stream ?? false,
+            __synthesizeEventData: true,
+            __security: { bearerAuth: true },
+          },
+          { streamFromBody: true },
+        ),
+      ),
     ) as APIPromise<Run> | APIPromise<Stream<AssistantsAPI.AssistantStreamEvent>>;
   }
 
   /**
-   * A helper to submit a tool output to a run and poll for a terminal run state.
-   * More information on Run lifecycles can be found here:
-   * https://platform.openai.com/docs/assistants/how-it-works/runs-and-run-steps
+   * A helper to submit tool outputs and poll the run to a terminal state.
    */
   async submitToolOutputsAndPoll(
     runId: string,
     params: RunSubmitToolOutputsParamsNonStreaming,
     options?: RequestOptions & { pollIntervalMs?: number },
   ): Promise<Run> {
-    const run = await this.submitToolOutputs(runId, params, options);
-    return await this.poll(run.id, params, options);
+    const completed = await this.submitToolOutputs(runId, params, options);
+    return await this.poll(completed.id, params, options);
   }
 
   /**
@@ -1150,12 +1166,6 @@ export interface RunCancelParams {
   thread_id: string;
 }
 
-export type RunCreateAndPollParams = ThreadsAPI.ThreadCreateAndRunParamsNonStreaming;
-
-export type RunCreateAndStreamParams = RunCreateParamsBaseStream;
-
-export type RunStreamParams = RunCreateParamsBaseStream;
-
 export type RunSubmitToolOutputsParams =
   | RunSubmitToolOutputsParamsNonStreaming
   | RunSubmitToolOutputsParamsStreaming;
@@ -1217,7 +1227,14 @@ export interface RunSubmitToolOutputsParamsStreaming extends RunSubmitToolOutput
   stream: true;
 }
 
+export type RunCreateAndPollParams = ThreadsAPI.ThreadCreateAndRunParamsNonStreaming;
+
+export type RunCreateAndStreamParams = RunCreateParamsBaseStream;
+
+export type RunStreamParams = RunCreateParamsBaseStream;
+
 export type RunSubmitToolOutputsAndPollParams = RunSubmitToolOutputsParamsNonStreaming;
+
 export type RunSubmitToolOutputsStreamParams = RunSubmitToolOutputsParamsStream;
 
 Runs.Steps = Steps;
@@ -1234,14 +1251,14 @@ export declare namespace Runs {
     type RunRetrieveParams as RunRetrieveParams,
     type RunUpdateParams as RunUpdateParams,
     type RunListParams as RunListParams,
-    type RunCreateAndPollParams,
-    type RunCreateAndStreamParams,
-    type RunStreamParams,
     type RunSubmitToolOutputsParams as RunSubmitToolOutputsParams,
     type RunSubmitToolOutputsParamsNonStreaming as RunSubmitToolOutputsParamsNonStreaming,
     type RunSubmitToolOutputsParamsStreaming as RunSubmitToolOutputsParamsStreaming,
-    type RunSubmitToolOutputsAndPollParams,
-    type RunSubmitToolOutputsStreamParams,
+    type RunCreateAndPollParams as RunCreateAndPollParams,
+    type RunCreateAndStreamParams as RunCreateAndStreamParams,
+    type RunStreamParams as RunStreamParams,
+    type RunSubmitToolOutputsAndPollParams as RunSubmitToolOutputsAndPollParams,
+    type RunSubmitToolOutputsStreamParams as RunSubmitToolOutputsStreamParams,
   };
 
   export {

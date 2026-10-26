@@ -47,12 +47,6 @@ import {
 } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
-import { APIPromise } from './core/api-promise';
-import {
-  getDeferredRealtimeAPIKeyCache,
-  resolveRealtimeAPIKey,
-  validateCapturedAPIKey,
-} from './internal/realtime-credentials';
 import {
   Batch,
   BatchCreateParams,
@@ -81,6 +75,7 @@ import {
   Decision,
   DecisionCreateParams,
   DecisionInputImage,
+  DecisionInputJson,
   DecisionInputMessage,
   DecisionInputPart,
   DecisionInputText,
@@ -255,6 +250,7 @@ import {
   ChatCompletionModality,
   ChatCompletionNamedToolChoice,
   ChatCompletionNamedToolChoiceCustom,
+  ChatCompletionParseParams,
   ChatCompletionPredictionContent,
   ChatCompletionReasoningEffort,
   ChatCompletionRole,
@@ -268,13 +264,35 @@ import {
   ChatCompletionUpdateParams,
   ChatCompletionUserMessageParam,
   ChatCompletionsPage,
+  ParsedChatCompletion,
+  ParsedChatCompletionMessage,
+  ParsedChatCompletionMessageToolCall,
+  ParsedChoice,
+  ParsedFunction,
+  ParsedFunctionToolCall,
 } from './resources/chat/completions/completions';
+import { APIPromise } from './core/api-promise';
+import {
+  getDeferredRealtimeAPIKeyCache,
+  resolveRealtimeAPIKey,
+  validateCapturedAPIKey,
+} from './internal/realtime-credentials';
 import { type Fetch } from './internal/builtin-types';
 import { isRunningInBrowser } from './internal/detect-platform';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { mergeWebSocketAuthHeaders, webSocketHeaderRemovals } from './internal/ws';
-import { configureProvider, type Provider, type ProviderRuntime } from './internal/provider';
+import {
+  configureProvider,
+  isProviderTimeoutError,
+  type Provider,
+  type ProviderRuntime,
+} from './internal/provider';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
+import {
+  finalizeStreamingFormRequestOptions,
+  hasUploadableValue,
+  maybeMultipartFormRequestOptions,
+} from './internal/uploads';
 import { readEnv } from './internal/utils/env';
 import {
   type LogLevel,
@@ -1029,8 +1047,24 @@ export class OpenAI {
 
   #isSensitiveLogKey(key: string): boolean {
     const normalized = key.replace(/[^a-z0-9]/gi, '').toLowerCase();
-    return /authorization|authentication|cookie|session|signature|assertion|connectionstring|devicecode|codeverifier|accountkey|mtlskey|proxyauth|(?:api|access|secret|private|security|refresh|id|bearer|aws|azure|openai|admin|client|proxy|auth)[a-z0-9]*(?:key|token|secret|password|passwd|pwd|credential|auth)|^(?:auth|key|sig|sas|jwt|bearer|pfx|p12)$|(?:sid|token|secret|password|passwd|pwd|credential|passphrase|apikey|accesskey|privatekey|username)s?$/.test(
-      normalized,
+    if (
+      /authorization|authentication|cookie|session|signature|assertion|connectionstring|devicecode|codeverifier|accountkey|mtlskey|proxyauth|^(?:auth|key|sig|sas|jwt|bearer|pfx|p12)$|(?:sid|token|secret|password|passwd|pwd|credential|passphrase|apikey|accesskey|privatekey|username)s?$/.test(
+        normalized,
+      )
+    ) {
+      return true;
+    }
+    // Search the normalized alphanumeric key once per part, rather than retrying
+    // a greedy suffix search at every occurrence of a credential prefix.
+    const prefix =
+      /api|access|secret|private|security|refresh|id|bearer|aws|azure|openai|admin|client|proxy|auth/.exec(
+        normalized,
+      );
+    return (
+      prefix !== null &&
+      /key|token|secret|password|passwd|pwd|credential|auth/.test(
+        normalized.slice(prefix.index + prefix[0].length),
+      )
     );
   }
 
@@ -1039,8 +1073,21 @@ export class OpenAI {
     const maxValues = 4096;
     const redactString = (entry: string): string =>
       entry
-        .replace(/((?:[a-z][a-z0-9+.-]*:)?\/\/)([^/\s?#]*@)(?=[^/\s?#]+)/gi, '$1[REDACTED]@')
-        .replace(/(^|[\s(=])([^/\s]+:[^/\s]*@)(?=[^/\s@]+)/gi, '$1[REDACTED]@')
+        // Leave the scheme outside the match: an optional scheme retries its
+        // entire tail at every letter in a long resource ID.
+        .replace(/(\/\/)([^/\s?#]*@)(?=[^/\s?#]+)/g, '$1[REDACTED]@')
+        .replace(/(^|[\s/])([^/\s]+)/g, (match, prefix: string, token: string) => {
+          // Scan each bare proxy token once. A slash only permits a later '(' or
+          // '=' boundary; otherwise the token must start the string or follow whitespace.
+          const start = prefix === '/' ? token.search(/[=(]/) + 1 : 0;
+          if (prefix === '/' && start === 0) return match;
+          const colon = token.indexOf(':', start + 1);
+          let at = token.length - 2;
+          while (at >= 0 && (token[at] !== '@' || token[at + 1] === '@')) at--;
+          return colon >= 0 && at > colon
+            ? `${prefix}${token.slice(0, start)}[REDACTED]${token.slice(at)}`
+            : match;
+        })
         .replace(/(^|[\s,;])([a-z][a-z0-9_-]*)(\s*:\s*)([^\r\n,;]+)/gi, (match, prefix, key, separator) =>
           this.#isSensitiveLogKey(key) ? `${prefix}${key}${separator}[REDACTED]` : match,
         )
@@ -1633,7 +1680,11 @@ export class OpenAI {
           options.__metadata = { ...options.__metadata, hasStreamingBody: true };
         }
         await this.prepareRequest(built.req, { url: built.url, options });
-        await this._provider?.prepareRequest?.(built.req, { url: built.url, options });
+        await this._provider?.prepareRequest?.(built.req, {
+          url: built.url,
+          options,
+          timeout: built.timeout,
+        });
         x509Authentication.beginRequestPlanning();
         x509Authentication.authorizePlannedRequest(built.url, built.req, built.timeout, true);
         if (X509WorkloadIdentityAuth.isStreamingRequestBody(built.req.body)) {
@@ -1684,9 +1735,21 @@ export class OpenAI {
     x509Authentication?.bindRequest(options, req, this.adminAPIKey);
     let hasStreamingBody = options.__metadata?.['hasStreamingBody'] === true;
 
+    let providerAuthStartedAt: { wallTime: number; monotonicTime: number } | undefined;
+    let providerAuthTimeout: Errors.APIConnectionTimeoutError | undefined;
     if (!x509Authentication) {
       await this.prepareRequest(req, { url, options });
-      await this._provider?.prepareRequest?.(req, { url, options });
+      if (this._provider?.timeoutIncludesAuth) {
+        providerAuthStartedAt = { wallTime: Date.now(), monotonicTime: performance.now() };
+      }
+      try {
+        await this._provider?.prepareRequest?.(req, { url, options, timeout });
+      } catch (error) {
+        if (!providerAuthStartedAt || !isProviderTimeoutError(error)) {
+          throw error;
+        }
+        providerAuthTimeout = error;
+      }
     }
     x509Authentication?.adoptRequestHeaders(req);
     if (x509Authentication && X509WorkloadIdentityAuth.isStreamingRequestBody(req.body)) {
@@ -1696,7 +1759,8 @@ export class OpenAI {
     /** Not an API request ID, just for correlating local log entries. */
     const requestLogID = 'log_' + ((Math.random() * (1 << 24)) | 0).toString(16).padStart(6, '0');
     const retryLogStr = retryOfRequestLogID === undefined ? '' : `, retryOf: ${retryOfRequestLogID}`;
-    const startTime = x509Authentication?.requestStartedAt(options) ?? Date.now();
+    const startTime =
+      x509Authentication?.requestStartedAt(options) ?? providerAuthStartedAt?.wallTime ?? Date.now();
 
     if (this.logLevel === 'debug') {
       // Summarize serialized strings without reparsing or re-running caller serialization hooks.
@@ -1728,12 +1792,17 @@ export class OpenAI {
             x509Authentication ? callerSignal : undefined,
           )
         : new AbortController();
-    const remainingTimeout = x509Authentication?.remainingTimeout(options, timeout) ?? timeout;
+    const remainingTimeout =
+      x509Authentication?.remainingTimeout(options, timeout) ??
+      (providerAuthStartedAt ? timeout - (performance.now() - providerAuthStartedAt.monotonicTime) : timeout);
+    if (providerAuthStartedAt && remainingTimeout <= 0) {
+      providerAuthTimeout ??= new Errors.APIConnectionTimeoutError();
+    }
     const fetchWithAuth = x509Authentication ? OpenAI.prototype.fetchWithAuth : this.fetchWithAuth;
     x509Authentication?.releaseRequestBody(req.body);
-    const response = await fetchWithAuth
-      .call(this, url, req, remainingTimeout, controller, security)
-      .catch(castToError);
+    const response =
+      providerAuthTimeout ??
+      (await fetchWithAuth.call(this, url, req, remainingTimeout, controller, security).catch(castToError));
     const headersTime = Date.now();
 
     if (response instanceof globalThis.Error) {
@@ -2233,7 +2302,90 @@ export class OpenAI {
       this._provider || x509Authentication
         ? undefined
         : await this.authHeaders(inputOptions, inputOptions.__security ?? { bearerAuth: true });
-    const { bodyHeaders, body, isStreamingBody } = this.buildBody({ options });
+    if (options.__metadata?.['finalizeMultipart'] === true && hasUploadableValue(options.body)) {
+      // Multipart encoding owns its Content-Type; retain all other caller headers.
+      const multipartHeaders = buildHeaders([options.headers]);
+      multipartHeaders.values.delete('content-type');
+      multipartHeaders.nulls.delete('content-type');
+      const finalized = await maybeMultipartFormRequestOptions(
+        { ...options, headers: multipartHeaders },
+        this,
+        options.__metadata?.['preserveMultipartFilenames'] === true ? { stripFilenames: false } : undefined,
+      );
+      inputOptions.body = options.body = finalized.body;
+      // Encoding headers belong to this body; keep caller headers for a replacement on retry.
+      options.headers = finalized.headers;
+      inputOptions.__metadata = options.__metadata = {
+        ...finalized.__metadata,
+        finalizedMultipart: {
+          body: finalized.body,
+          contentType: buildHeaders([finalized.headers]).values.get('content-type'),
+        },
+      };
+    }
+    if (options.__metadata?.['streamFromBody'] === true) {
+      finalizeStreamingFormRequestOptions(options);
+      inputOptions.stream = options.stream;
+    }
+    const isRawJSON = (JSON as typeof JSON & { isRawJSON?: (value: unknown) => value is { rawJSON: string } })
+      .isRawJSON;
+    let jsonRoot: unknown;
+    let jsonRootVisited = false;
+    let jsonStream = false;
+    let jsonSerialized = false;
+    const stopObserving =
+      options.__metadata?.['streamFromBody'] === true &&
+      typeof options.body === 'object' &&
+      options.body !== null
+        ? Opts.observeJSONRequestBody(options.body, {
+            value(holder, key, value) {
+              if (!jsonRootVisited) {
+                jsonRootVisited = true;
+                jsonRoot = value;
+              } else if (holder === jsonRoot && key === 'stream') {
+                jsonStream = value === true;
+                if (isRawJSON?.(value)) {
+                  jsonStream = value.rawJSON === 'true';
+                } else if (value !== null && typeof value === 'object') {
+                  try {
+                    // JSON.stringify unboxes Boolean objects using their internal value.
+                    jsonStream = Boolean.prototype.valueOf.call(value);
+                  } catch {
+                    // Other objects are not boolean stream discriminators.
+                  }
+                }
+              }
+              return undefined;
+            },
+            complete() {
+              jsonSerialized = true;
+            },
+          })
+        : undefined;
+    let encodedBody: ReturnType<OpenAI['buildBody']>;
+    try {
+      encodedBody = this.buildBody({ options });
+    } finally {
+      stopObserving?.();
+    }
+    const { bodyHeaders, body, isStreamingBody } = encodedBody;
+
+    // Choose the parser from the encoded payload. Opaque bodies retain the
+    // caller's parser choice; JSON and multipart fields reflect serialization.
+    if (options.__metadata?.['streamFromBody'] === true) {
+      if (body instanceof FormData) {
+        inputOptions.stream = options.stream = body.get('stream') === 'true';
+      } else if (
+        jsonSerialized &&
+        jsonRoot !== null &&
+        typeof jsonRoot === 'object' &&
+        !Array.isArray(jsonRoot) &&
+        !isRawJSON?.(jsonRoot)
+      ) {
+        // Observe the existing serializer without parsing a second object graph.
+        inputOptions.stream = options.stream = jsonStream;
+      }
+    }
 
     if (isStreamingBody) {
       inputOptions.__metadata = {
@@ -2243,6 +2395,24 @@ export class OpenAI {
       x509Authentication?.ownRequestBody(body, options.body);
     }
 
+    // Retain encoding ownership on retries, but never transfer it to a replacement body.
+    let finalizedContentType: string | null | undefined;
+    const finalizedMultipart = options.__metadata?.['finalizedMultipart'];
+    if (
+      typeof finalizedMultipart === 'object' &&
+      finalizedMultipart !== null &&
+      'body' in finalizedMultipart &&
+      'contentType' in finalizedMultipart
+    ) {
+      const { body: multipartBody, contentType } = finalizedMultipart;
+      if (multipartBody === body) {
+        if (typeof contentType === 'string') {
+          finalizedContentType = contentType;
+        } else if (contentType === null) {
+          finalizedContentType = null;
+        }
+      }
+    }
     const reqHeaders = await this.buildHeaders({
       options: inputOptions,
       method,
@@ -2253,6 +2423,9 @@ export class OpenAI {
       x509Timeout: explicitTimeout ? options.timeout : undefined,
       x509Tenant,
     });
+    // Apply the encoding header after authentication has composed its request snapshot.
+    if (finalizedContentType === null) reqHeaders.delete('content-type');
+    else if (finalizedContentType !== undefined) reqHeaders.set('content-type', finalizedContentType);
 
     const req: FinalizedRequestInit = {
       method,
@@ -2624,6 +2797,7 @@ export declare namespace OpenAI {
     type DecisionInputPart as DecisionInputPart,
     type DecisionInputText as DecisionInputText,
     type DecisionPromptCacheBreakpoint as DecisionPromptCacheBreakpoint,
+    type DecisionInputJson as DecisionInputJson,
     type DecisionCreateParams as DecisionCreateParams,
   };
 
@@ -2676,12 +2850,19 @@ export declare namespace OpenAI {
     type ChatCompletionUserMessageParam as ChatCompletionUserMessageParam,
     type ChatCompletionAllowedTools as ChatCompletionAllowedTools,
     type ChatCompletionReasoningEffort as ChatCompletionReasoningEffort,
+    type ParsedFunction as ParsedFunction,
+    type ParsedFunctionToolCall as ParsedFunctionToolCall,
+    type ParsedChatCompletionMessageToolCall as ParsedChatCompletionMessageToolCall,
+    type ParsedChatCompletionMessage as ParsedChatCompletionMessage,
+    type ParsedChoice as ParsedChoice,
+    type ParsedChatCompletion as ParsedChatCompletion,
     type ChatCompletionsPage as ChatCompletionsPage,
     type ChatCompletionCreateParams as ChatCompletionCreateParams,
     type ChatCompletionCreateParamsNonStreaming as ChatCompletionCreateParamsNonStreaming,
     type ChatCompletionCreateParamsStreaming as ChatCompletionCreateParamsStreaming,
     type ChatCompletionUpdateParams as ChatCompletionUpdateParams,
     type ChatCompletionListParams as ChatCompletionListParams,
+    type ChatCompletionParseParams as ChatCompletionParseParams,
   };
 
   export {
@@ -2869,6 +3050,10 @@ export declare namespace OpenAI {
   export type ComparisonFilter = API.ComparisonFilter;
   export type CompoundFilter = API.CompoundFilter;
   export type CustomToolInputFormat = API.CustomToolInputFormat;
+  export type DecisionInputJSON = API.DecisionInputJSON;
+  export type DecisionQuestionInputImage = API.DecisionQuestionInputImage;
+  export type DecisionQuestionInputPart = API.DecisionQuestionInputPart;
+  export type DecisionQuestionInputText = API.DecisionQuestionInputText;
   export type ErrorObject = API.ErrorObject;
   export type FunctionDefinition = API.FunctionDefinition;
   export type FunctionParameters = API.FunctionParameters;

@@ -47,7 +47,12 @@ export class OpenAIRealtimeWS extends OpenAIRealtimeEmitter {
    */
   constructor(
     props: RealtimeConnectionConfig & {
-      /** Options passed directly to the underlying `ws.WebSocket` constructor. */
+      /**
+       * Options for the underlying `ws.WebSocket` constructor.
+       * Incoming messages have no size limit by default. Set `maxPayload` to a byte limit to cap them.
+       * Compression is off by default, including when `maxPayload` is finite.
+       * Set `perMessageDeflate` to `true` or a `ws` configuration object to opt in.
+       */
       options?: WS.ClientOptions | undefined;
 
       /** Indicates that a function-based credential was resolved by an async factory. @internal */
@@ -81,13 +86,15 @@ export class OpenAIRealtimeWS extends OpenAIRealtimeEmitter {
       'OpenAI-Beta': 'realtime=v1',
     };
 
-    this.socket = new WS.WebSocket(
-      this.url,
-      protectWebSocketOptionsFromCredentialRedirects({
-        ...props.options,
-        headers,
-      }),
-    );
+    const { maxPayload, ...nativeOptions } = props.options ?? {};
+    const socketOptions: WS.ClientOptions = {
+      perMessageDeflate: false,
+      ...nativeOptions,
+      maxPayload: maxPayload ?? 0,
+      headers,
+    };
+    socketOptions.perMessageDeflate ??= false;
+    this.socket = new WS.WebSocket(this.url, protectWebSocketOptionsFromCredentialRedirects(socketOptions));
 
     this.socket.on('message', (wsEvent) => {
       const event = (() => {

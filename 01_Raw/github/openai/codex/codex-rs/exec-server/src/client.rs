@@ -327,9 +327,10 @@ impl ConnectionState {
             ConnectionStatus::Connected(rpc_client) if !rpc_client.is_disconnected() => {
                 EnvironmentConnectionState::Connected
             }
-            ConnectionStatus::Connected(_)
-            | ConnectionStatus::Recovering
-            | ConnectionStatus::Failed(_) => EnvironmentConnectionState::Disconnected,
+            ConnectionStatus::Connected(_) | ConnectionStatus::Recovering => {
+                EnvironmentConnectionState::Recovering
+            }
+            ConnectionStatus::Failed(_) => EnvironmentConnectionState::Disconnected,
         };
         let _ = self
             .environment_connection_state_tx
@@ -700,6 +701,8 @@ pub enum ExecServerError {
     Json(#[from] serde_json::Error),
     #[error("HTTP request failed: {0}")]
     HttpRequest(String),
+    #[error("request not sent: {0}")]
+    RequestNotSent(String),
     #[error("authentication required: {0}")]
     AuthenticationRequired(String),
     #[error("exec-server protocol error: {0}")]
@@ -842,7 +845,29 @@ impl ExecServerClient {
     }
 
     pub async fn exec(&self, params: ExecParams) -> Result<ExecResponse, ExecServerError> {
+        self.ensure_network_review_capability(&params).await?;
         self.call(EXEC_METHOD, &params).await
+    }
+
+    async fn ensure_network_review_capability(
+        &self,
+        params: &ExecParams,
+    ) -> Result<(), ExecServerError> {
+        if params
+            .network_proxy
+            .as_ref()
+            .is_some_and(|launch| !launch.proxy.review_domains.is_empty())
+            && !self
+                .environment_info()
+                .await?
+                .capabilities
+                .network_proxy_review_domains
+        {
+            return Err(ExecServerError::Protocol(
+                "selected exec-server does not support managed network review domains".to_string(),
+            ));
+        }
+        Ok(())
     }
 
     /// Returns shared cached executor metadata, fetching it lazily if initialization omitted it.
@@ -1104,6 +1129,7 @@ impl ExecServerClient {
         params: ExecParams,
         network_policy_decider: Option<Arc<dyn NetworkPolicyDecider>>,
     ) -> Result<Session, ExecServerError> {
+        self.ensure_network_review_capability(&params).await?;
         let policy_decision_timeout_ms = params
             .network_proxy
             .as_ref()

@@ -132,7 +132,11 @@ pub struct McpConfig {
     pub codex_home: PathBuf,
     /// Trusted enterprise IdP inherited after normal catalog and policy resolution.
     pub mcp_enterprise_managed_auth: Option<McpEnterpriseManagedAuthConfig>,
+    /// Retires only EMA connections and pending exchanges for this config snapshot.
+    pub mcp_ema_cancellation: codex_config::McpEmaCancellation,
     pub xaa_enabled: bool,
+    /// Shared sign-in requirements for account-backed enterprise MCP.
+    pub ema_state: Arc<crate::EmaState>,
     /// Preferred credential store for MCP OAuth tokens.
     pub mcp_oauth_credentials_store_mode: OAuthCredentialsStoreMode,
     /// OAuth refresh ownership selected for new MCP connections.
@@ -362,7 +366,7 @@ pub fn effective_mcp_servers(
     effective_mcp_servers_from_configured(configured_mcp_servers(config), config, auth)
 }
 
-fn is_trusted_chatgpt_mcp_server(
+pub(crate) fn is_trusted_chatgpt_mcp_server(
     transport: &McpServerTransportConfig,
     chatgpt_base_url: &str,
 ) -> bool {
@@ -461,9 +465,12 @@ pub async fn read_mcp_resource(
     let cancel_token = CancellationToken::new();
     let runtime_config = config.for_threadless_operations(&mcp_servers);
     let manager = McpConnectionSet::new(
+        /*ema_auth*/ None,
+        /*existing_ema*/ None,
         /*previous*/ None,
         McpPublicationGate::already_published(),
         McpRuntimeInput {
+            network_policy_metadata: None,
             startup_policy: McpStartupPolicy::Eager,
             config: Arc::new(runtime_config),
             plugins_available: false,
@@ -504,9 +511,11 @@ pub struct McpServerStatusSnapshot {
     pub server_names: Vec<String>,
 }
 
+#[allow(clippy::too_many_arguments)]
 pub async fn collect_mcp_server_status_snapshot_with_detail(
     config: &McpConfig,
     auth: Option<&CodexAuth>,
+    auth_manager: Option<&Arc<codex_login::AuthManager>>,
     runtime_context: McpRuntimeContext,
     codex_apps_tools_cache: ConnectorRuntimeManager<ToolInfo>,
     tool_catalog_cache: crate::McpToolCatalogCache,
@@ -534,6 +543,8 @@ pub async fn collect_mcp_server_status_snapshot_with_detail(
         config.mcp_oauth_credentials_store_mode,
         config.auth_keyring_backend_kind,
         auth,
+        auth_manager,
+        &config.ema_state,
         &runtime_context,
     )
     .await;
@@ -543,9 +554,12 @@ pub async fn collect_mcp_server_status_snapshot_with_detail(
     let cancel_token = CancellationToken::new();
     let runtime_config = config.for_threadless_operations(&mcp_servers);
     let mcp_connection_manager = McpConnectionSet::new(
+        /*ema_auth*/ None,
+        /*existing_ema*/ None,
         /*previous*/ None,
         McpPublicationGate::already_published(),
         McpRuntimeInput {
+            network_policy_metadata: None,
             startup_policy: McpStartupPolicy::Eager,
             config: Arc::new(runtime_config),
             plugins_available: false,
@@ -853,11 +867,16 @@ pub(crate) async fn collect_mcp_server_status_snapshot_from_manager(
             .insert(tool_name, tool);
     }
 
-    // Status-only discovery has no event channel. Report OAuth failures from the completed
+    // Status-only discovery has no event channel. Report OAuth and EMA failures from the completed
     // connection attempt instead of retaining the credential-presence status read beforehand.
     let mut auth_statuses = auth_statuses_from_entries(&auth_status_entries);
     for server_name in mcp_connection_manager.authentication_failed_servers().await {
-        if auth_statuses.get(&server_name) == Some(&McpAuthStatus::OAuth) {
+        if auth_statuses.get(&server_name) == Some(&McpAuthStatus::OAuth)
+            || auth_status_entries
+                .get(&server_name)
+                .and_then(|entry| entry.config.as_ref())
+                .is_some_and(|config| matches!(config.auth, McpServerAuth::EmaAuth))
+        {
             auth_statuses.insert(server_name, McpAuthStatus::NotLoggedIn);
         }
     }

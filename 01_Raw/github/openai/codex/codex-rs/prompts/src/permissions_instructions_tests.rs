@@ -193,6 +193,8 @@ fn catalog_permission_messages_select_sandbox_mode_and_render_network_access() {
         danger_full_access: Some("catalog danger".to_string()),
         workspace_write: Some("catalog workspace {{ network_access }}".to_string()),
         read_only: Some("catalog read only {{ network_access }}".to_string()),
+        approved_prefixes: None,
+        ..PermissionMessages::default()
     };
 
     for (mode, expected) in [
@@ -217,6 +219,8 @@ fn catalog_permission_text_equal_to_bundled_template_preserves_literal_whitespac
         danger_full_access: None,
         workspace_write: Some(WORKSPACE_WRITE_TEMPLATE.to_string()),
         read_only: None,
+        approved_prefixes: None,
+        ..PermissionMessages::default()
     };
     let catalog_text = sandbox_text(
         SandboxMode::WorkspaceWrite,
@@ -248,6 +252,8 @@ fn missing_catalog_permission_message_uses_legacy_sandbox_text() {
         danger_full_access: None,
         workspace_write: None,
         read_only: Some("unused".to_string()),
+        approved_prefixes: None,
+        ..PermissionMessages::default()
     };
 
     assert_eq!(
@@ -267,6 +273,8 @@ fn invalid_catalog_permission_message_is_preserved_verbatim() {
             danger_full_access: None,
             workspace_write: Some(workspace_write.to_string()),
             read_only: None,
+            approved_prefixes: None,
+            ..PermissionMessages::default()
         };
         assert_eq!(
             sandbox_text(
@@ -286,6 +294,8 @@ fn catalog_permission_message_renders_network_access_and_preserves_other_placeho
         danger_full_access: None,
         workspace_write: Some(source.to_string()),
         read_only: None,
+        approved_prefixes: None,
+        ..PermissionMessages::default()
     };
 
     assert_eq!(
@@ -304,6 +314,8 @@ fn empty_catalog_permission_message_preserves_non_sandbox_sections() {
         danger_full_access: None,
         workspace_write: Some(String::new()),
         read_only: None,
+        approved_prefixes: None,
+        ..PermissionMessages::default()
     };
     let writable_root = "/tmp/repo".to_string();
     let text = PermissionsInstructions::from_resolved(
@@ -441,8 +453,11 @@ fn catalog_approval_messages_select_reviewer_variant() {
         assert_eq!(
             approval_text(
                 approval_policy,
-                reviewer,
-                ResolvedApprovalMessages::new(Some(&messages)),
+                ApprovalPromptContext {
+                    reviewer,
+                    messages: ResolvedApprovalMessages::new(Some(&messages)),
+                    ..user_approval_context()
+                },
                 &[],
                 /*exec_permission_approvals_enabled*/ true,
                 /*request_permissions_tool_enabled*/ true,
@@ -511,19 +526,21 @@ fn missing_catalog_key_uses_legacy_approval_text() {
             },
         ),
     ] {
-        let messages = ResolvedApprovalMessages::new(Some(&messages));
+        let approval_context = ApprovalPromptContext {
+            reviewer,
+            messages: ResolvedApprovalMessages::new(Some(&messages)),
+            ..user_approval_context()
+        };
         let on_request = approval_text(
             AskForApproval::OnRequest,
-            reviewer,
-            messages,
+            approval_context,
             &[],
             /*exec_permission_approvals_enabled*/ false,
             /*request_permissions_tool_enabled*/ false,
         );
         let never = approval_text(
             AskForApproval::Never,
-            reviewer,
-            messages,
+            approval_context,
             &[],
             /*exec_permission_approvals_enabled*/ false,
             /*request_permissions_tool_enabled*/ false,
@@ -555,8 +572,11 @@ fn empty_catalog_non_on_request_approval_messages_suppress_legacy_approval_text(
         assert_eq!(
             approval_text(
                 approval_policy,
-                ApprovalsReviewer::AutoReview,
-                ResolvedApprovalMessages::new(Some(&messages)),
+                ApprovalPromptContext {
+                    reviewer: ApprovalsReviewer::AutoReview,
+                    messages: ResolvedApprovalMessages::new(Some(&messages)),
+                    ..user_approval_context()
+                },
                 &[],
                 /*exec_permission_approvals_enabled*/ true,
                 /*request_permissions_tool_enabled*/ true,
@@ -570,8 +590,10 @@ fn empty_catalog_non_on_request_approval_messages_suppress_legacy_approval_text(
 fn auto_review_approvals_append_auto_review_specific_guidance() {
     let text = approval_text(
         AskForApproval::OnRequest,
-        ApprovalsReviewer::AutoReview,
-        ResolvedApprovalMessages::new(/*messages*/ None),
+        ApprovalPromptContext::new(
+            ApprovalsReviewer::AutoReview,
+            ResolvedModelMessages::bundled(),
+        ),
         &[],
         /*exec_permission_approvals_enabled*/ false,
         /*request_permissions_tool_enabled*/ false,
@@ -586,8 +608,10 @@ fn auto_review_approvals_append_auto_review_specific_guidance() {
 fn auto_review_approvals_omit_auto_review_specific_guidance_when_approval_is_never() {
     let text = approval_text(
         AskForApproval::Never,
-        ApprovalsReviewer::AutoReview,
-        ResolvedApprovalMessages::new(/*messages*/ None),
+        ApprovalPromptContext::new(
+            ApprovalsReviewer::AutoReview,
+            ResolvedModelMessages::bundled(),
+        ),
         &[],
         /*exec_permission_approvals_enabled*/ false,
         /*request_permissions_tool_enabled*/ false,
@@ -622,8 +646,7 @@ fn granular_policy_lists_prompted_and_rejected_categories_separately() {
             request_permissions: true,
             mcp_elicitations: false,
         }),
-        ApprovalsReviewer::User,
-        ResolvedApprovalMessages::new(/*messages*/ None),
+        user_approval_context(),
         &[],
         /*exec_permission_approvals_enabled*/ true,
         /*request_permissions_tool_enabled*/ false,
@@ -644,8 +667,7 @@ fn granular_policy_lists_prompted_and_rejected_categories_separately() {
 fn granular_policy_includes_command_permission_instructions_when_sandbox_approval_can_prompt() {
     let text = approval_text(
         AskForApproval::Granular(ALL_APPROVALS_ENABLED),
-        ApprovalsReviewer::User,
-        ResolvedApprovalMessages::new(/*messages*/ None),
+        user_approval_context(),
         &[],
         /*exec_permission_approvals_enabled*/ true,
         /*request_permissions_tool_enabled*/ false,
@@ -666,8 +688,7 @@ fn granular_policy_includes_command_permission_instructions_when_sandbox_approva
 fn granular_policy_omits_shell_permission_instructions_when_inline_requests_are_disabled() {
     let text = approval_text(
         AskForApproval::Granular(ALL_APPROVALS_ENABLED),
-        ApprovalsReviewer::User,
-        ResolvedApprovalMessages::new(/*messages*/ None),
+        user_approval_context(),
         &[],
         /*exec_permission_approvals_enabled*/ false,
         /*request_permissions_tool_enabled*/ false,
@@ -683,8 +704,7 @@ fn granular_policy_omits_shell_permission_instructions_when_inline_requests_are_
 fn granular_policy_includes_request_permissions_tool_only_when_that_prompt_can_still_fire() {
     let allowed = approval_text(
         AskForApproval::Granular(ALL_APPROVALS_ENABLED),
-        ApprovalsReviewer::User,
-        ResolvedApprovalMessages::new(/*messages*/ None),
+        user_approval_context(),
         &[],
         /*exec_permission_approvals_enabled*/ true,
         /*request_permissions_tool_enabled*/ true,
@@ -696,8 +716,7 @@ fn granular_policy_includes_request_permissions_tool_only_when_that_prompt_can_s
             request_permissions: false,
             ..ALL_APPROVALS_ENABLED
         }),
-        ApprovalsReviewer::User,
-        ResolvedApprovalMessages::new(/*messages*/ None),
+        user_approval_context(),
         &[],
         /*exec_permission_approvals_enabled*/ true,
         /*request_permissions_tool_enabled*/ true,
@@ -720,6 +739,8 @@ fn preserves_supplied_path_spellings_and_order() {
         danger_full_access: None,
         workspace_write: Some(String::new()),
         read_only: None,
+        approved_prefixes: None,
+        ..PermissionMessages::default()
     };
 
     let instructions = PermissionsInstructions::from_resolved(
@@ -783,4 +804,73 @@ fn bounds_permission_paths_at_whole_entry_boundaries() {
     );
     let expected = render(&[writable], &[denied], &["/short/**".into()]);
     assert_eq!(text, format!("{expected}{OMITTED_PERMISSION_PATHS}\n"));
+}
+
+#[test]
+fn catalog_writable_roots_preserve_fragment_facts() {
+    let messages = PermissionMessages {
+        writable_root: Some("Catalog root: {{ roots }}.".into()),
+        writable_roots: Some("Catalog roots: {{ roots }}.".into()),
+        ..PermissionMessages::default()
+    };
+    let catalog_context = ApprovalPromptContext {
+        permission_messages: ResolvedPermissionMessages::new(Some(&messages)),
+        ..user_approval_context()
+    };
+    let denied = vec!["/private".to_string()];
+    for roots in [
+        vec![],
+        vec!["/a/{{ roots }}".to_string()],
+        vec![r"C:\work\z".to_string(), "/a/é\n{literal}".to_string()],
+    ] {
+        let context = PermissionsRenderContext {
+            writable_roots: &roots,
+            denied_read_paths: &denied,
+            ..WORKSPACE_CONTEXT
+        };
+        let original = PermissionsInstructions::from_resolved(context, user_approval_context());
+        let expected = PermissionsInstructions {
+            text: original
+                .text
+                .replace(" The writable root is ", "Catalog root: ")
+                .replace(" The writable roots are ", "Catalog roots: "),
+        };
+        assert_eq!(
+            PermissionsInstructions::from_resolved(context, catalog_context,).render_fragment(),
+            expected.render_fragment(),
+        );
+    }
+}
+
+#[test]
+fn catalog_writable_roots_select_displayed_count_after_truncation() {
+    let messages = PermissionMessages {
+        writable_root: Some("Catalog root: {{ roots }}.".into()),
+        writable_roots: Some("Catalog roots: {{ roots }}.".into()),
+        ..PermissionMessages::default()
+    };
+    let roots = vec!["x".repeat(MAX_PERMISSION_PATH_BYTES), "/short".to_string()];
+    let context = PermissionsRenderContext {
+        writable_roots: &roots,
+        ..WORKSPACE_CONTEXT
+    };
+    let original = PermissionsInstructions::from_resolved(context, user_approval_context());
+    let expected = PermissionsInstructions {
+        text: original
+            .text
+            .replace(" The writable root is ", "Catalog root: "),
+    };
+    let actual = PermissionsInstructions::from_resolved(
+        context,
+        ApprovalPromptContext {
+            permission_messages: ResolvedPermissionMessages::new(Some(&messages)),
+            ..user_approval_context()
+        },
+    );
+    assert_eq!(actual.render_fragment(), expected.render_fragment());
+    assert!(
+        actual
+            .text
+            .ends_with(&format!("{OMITTED_PERMISSION_PATHS}\n"))
+    );
 }

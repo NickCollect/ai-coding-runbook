@@ -2009,6 +2009,29 @@ async fn workspace_owner_limit_states_render_state_specific_messages() {
 }
 
 #[tokio::test]
+async fn academic_researchers_usage_limit_renders_admin_guidance() {
+    let (mut chat, mut rx, _op_rx) = make_chatwidget_manual(/*model_override*/ None).await;
+    let error = codex_protocol::error::UsageLimitReachedError {
+        plan_type: Some(codex_protocol::auth::PlanType::Known(
+            codex_protocol::auth::KnownPlan::Sci,
+        )),
+        resets_at: None,
+        limit_window_minutes: None,
+        rate_limits: None,
+        promo_message: None,
+        rate_limit_reached_type: None,
+    };
+    chat.on_rate_limit_error(RateLimitErrorKind::UsageLimit, error.to_string());
+    insta::assert_snapshot!(
+        drain_insert_history(&mut rx)
+            .into_iter()
+            .map(|lines| lines_to_single_string(&lines))
+            .collect::<String>(),
+        @"■ You’ve hit your usage limit. To get more access now, send a request to your admin or try again later."
+    );
+}
+
+#[tokio::test]
 async fn missing_rate_limit_reached_type_does_not_prompt_or_refresh() {
     let (mut chat, mut rx, _op_rx) = make_chatwidget_manual(/*model_override*/ None).await;
     chat.on_rate_limit_snapshot(Some(snapshot(/*percent*/ 100.0)));
@@ -4996,7 +5019,9 @@ async fn user_prompt_submit_app_server_hook_notifications_render_snapshot() {
                 handler_type: AppServerHookHandlerType::Command,
                 execution_mode: AppServerHookExecutionMode::Sync,
                 scope: AppServerHookScope::Turn,
-                source_path: PathBuf::from(test_path_display("/tmp/hooks.json")).abs(),
+                source_path: PathBuf::from(test_path_display("/tmp/hooks.json"))
+                    .abs()
+                    .into(),
                 source: codex_app_server_protocol::HookSource::User,
                 display_order: 0,
                 status: AppServerHookRunStatus::Running,
@@ -5019,7 +5044,9 @@ async fn user_prompt_submit_app_server_hook_notifications_render_snapshot() {
                 handler_type: AppServerHookHandlerType::Command,
                 execution_mode: AppServerHookExecutionMode::Sync,
                 scope: AppServerHookScope::Turn,
-                source_path: PathBuf::from(test_path_display("/tmp/hooks.json")).abs(),
+                source_path: PathBuf::from(test_path_display("/tmp/hooks.json"))
+                    .abs()
+                    .into(),
                 source: codex_app_server_protocol::HookSource::User,
                 display_order: 0,
                 status: AppServerHookRunStatus::Stopped,
@@ -5668,7 +5695,9 @@ fn hook_run_summary(
         handler_type: codex_app_server_protocol::HookHandlerType::Command,
         execution_mode: codex_app_server_protocol::HookExecutionMode::Sync,
         scope: codex_app_server_protocol::HookScope::Turn,
-        source_path: PathBuf::from(test_path_display("/tmp/hooks.json")).abs(),
+        source_path: PathBuf::from(test_path_display("/tmp/hooks.json"))
+            .abs()
+            .into(),
         source: codex_app_server_protocol::HookSource::User,
         display_order: 0,
         status,

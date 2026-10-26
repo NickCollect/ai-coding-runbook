@@ -655,6 +655,8 @@ mod thread_processor_behavior_tests {
             supports_websockets: true,
             supports_standalone_web_search: false,
             capabilities: None,
+            project_id: None,
+            location: None,
             include_internal_metadata: false,
         };
         let config_manager = ConfigManager::new(
@@ -759,7 +761,11 @@ mod thread_processor_behavior_tests {
         };
 
         assert_eq!(
-            collect_resume_override_mismatches(&request, &config_snapshot),
+            collect_resume_override_mismatches(
+                &request,
+                &config_snapshot,
+                /* selected_service_tier */ Some("flex"),
+            ),
             vec!["service_tier requested=Some(\"priority\") active=Some(\"flex\")".to_string()]
         );
     }
@@ -989,10 +995,10 @@ mod thread_processor_behavior_tests {
         let line = RolloutLine {
             timestamp: timestamp.clone(),
             ordinal: None,
-            item: RolloutItem::SessionMeta(SessionMetaLine {
+            item: RolloutItem::SessionMeta(Box::new(SessionMetaLine {
                 meta: session_meta.clone(),
                 git: None,
-            }),
+            })),
         };
 
         fs::write(&path, format!("{}\n", serde_json::to_string(&line)?))?;
@@ -1057,10 +1063,10 @@ mod thread_processor_behavior_tests {
         let line = RolloutLine {
             timestamp,
             ordinal: None,
-            item: RolloutItem::SessionMeta(SessionMetaLine {
+            item: RolloutItem::SessionMeta(Box::new(SessionMetaLine {
                 meta: session_meta,
                 git: None,
-            }),
+            })),
         };
         fs::write(&path, format!("{}\n", serde_json::to_string(&line)?))?;
 
@@ -1100,10 +1106,10 @@ mod thread_processor_behavior_tests {
         let line = RolloutLine {
             timestamp,
             ordinal: None,
-            item: RolloutItem::SessionMeta(SessionMetaLine {
+            item: RolloutItem::SessionMeta(Box::new(SessionMetaLine {
                 meta: session_meta,
                 git: None,
-            }),
+            })),
         };
         fs::write(&path, format!("{}\n", serde_json::to_string(&line)?))?;
 
