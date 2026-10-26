@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/model-and-integration-management
-fetched_at: 2026-10-19T05:32:44.378742+00:00
+fetched_at: 2026-10-26T05:40:00.234351+00:00
 fetch_method: mintlify_md
 ---
 
@@ -162,6 +162,8 @@ Tool controls live in the MCP Configuration section and are set per server, not 
 Each approved server has its own network policy, so you control what it can reach.
 
 Remote (URL) MCP servers are restricted to the configured URL entry pattern.
+
+Grok Bot has its own switch for this, **Apply to MCP servers**, under **Network** on the Grok Bot page. It holds remote MCP servers to the Grok Bot network allowlist, it's off by default, and it doesn't change the MCP settings here. See [MCP servers and the network policy](https://cursor.com/docs/grok-bot/security.md#mcp-servers-and-the-network-policy).
 
 Local command-based (`stdio`) servers run in a sandbox with one of these network modes:
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/github
-fetched_at: 2026-10-05T06:27:20.847357+00:00
+fetched_at: 2026-10-26T05:40:00.419620+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,10 @@ Requires Cursor admin access and GitHub org admin access.
 [GitHub setup](/docs-static/images/bugbot/bugbot-install.mp4)
 
 To disconnect your GitHub account, return to the integrations dashboard and click **Disconnect Account**.
+
+The first time a Cursor account connects GitHub, **Connect** signs in with GitHub to link your GitHub account without installing the app. You can connect a second Cursor account to a GitHub account that already has the Cursor app installed: that first Connect doesn't move or change the existing installation.
+
+Each GitHub App installation belongs to one Cursor account or team. If another Cursor account or team already owns an installation, connecting it from yours fails with "GitHub installation is already connected to another Cursor target." and the installation stays with its owner. One exception: when a team admin connects an organization installation that a member of the same team connected personally, Cursor moves that installation to the team. GitHub Enterprise Server installations don't show this error.
 
 ### GitHub Enterprise Server
 
@@ -95,11 +99,31 @@ The proxy should allow authenticated GitHub API requests from Cursor without blo
 6. The app will appear under your available GitHub Apps in your GHES instance
 7. Return to the dashboard to configure features on your repositories
 
+For GitHub Enterprise Cloud with data residency (`*.ghe.com`), use these registration steps with `https://<subdomain>.ghe.com` as the base URL.
+
+## Share an installation with another team
+
+A team in an [Organization](https://cursor.com/docs/enterprise/organizations.md) can share its GitHub installation with other teams in the same Organization. Those teams use the installation's repositories with Cloud Agents, automations, and Bugbot without installing the GitHub app again. Sharing works for GitHub.com and GitHub Enterprise Server installations.
+
+### Open the share dialog
+
+As an admin of the team that owns the installation, go to [Integrations in the dashboard](https://cursor.com/dashboard/integrations) and select **Share with another team** on the **GitHub** or **GitHub Enterprise** row.
+
+### Grant access
+
+In **Share GitHub installation**, choose the **GitHub account** and the **Team**, then click **Grant access**.
+
+The receiving team can use every repository on the installation, and its usage is billed to that team. Its GitHub row on the Integrations page names the team that owns the installation.
+
+Only one of the teams sharing an installation can turn on Bugbot for a given repository. If another team already has Bugbot on for it, an admin of that team has to turn it off first.
+
+To remove access, open **Share with another team** again and select **Revoke** next to the team under **Already shared with**. Revoking also deletes that team's Bugbot settings for the installation's repositories.
+
 ## IP allow list configuration
 
 If your organization uses GitHub's IP allow list feature to restrict access to your repositories, Cursor can be configured to use a hosted egress proxy with a narrow set of IPs.
 
-The recommended GitHub Apps setting is configured in GitHub. You do not need Cursor to enable it. If you add the git egress proxy IPs yourself instead, contact [hi@cursor.com](mailto:hi@cursor.com) so we can enable git egress proxy for your team. Otherwise git traffic may not come from those addresses.
+Cloud Agents send git traffic through the egress proxy only after Cursor enables it for your team, whichever allowlist option you choose below. [Contact support](https://cursor.com/help.md) with your team ID to enable it. The proxy is available for teams, not individual accounts. Other GitHub calls from the agent's VM, such as `gh` or GitHub API requests, don't use the proxy. If your agents make those calls, also allowlist the [Cloud Agent egress ranges](https://cursor.com/docs/cloud-agent/security-network.md#egress-ip-ranges).
 
 ### Enable IP allow list configuration for installed GitHub Apps (recommended)
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/ignore-file
-fetched_at: 2026-09-21T05:44:04.256817+00:00
+fetched_at: 2026-10-26T05:40:01.805215+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ Cursor reads your project's codebase to power its features. Control which direct
 
 Cursor blocks access to files listed in `.cursorignore` from:
 
-- Code accessible by [Agent](https://cursor.com/docs/agent/overview.md), Tab, and Inline Edit
+- Code accessible by [Agent](https://cursor.com/docs/agent/overview.md) and Tab
 - Code accessible via [@ mention references](https://cursor.com/docs/agent/prompting.md)
 
 The terminal and MCP server tools used by Agent cannot block access to code

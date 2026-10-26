@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/projects
-fetched_at: 2026-10-19T05:32:43.101729+00:00
+fetched_at: 2026-10-26T05:39:58.967682+00:00
 fetch_method: mintlify_md
 ---
 
@@ -36,6 +36,12 @@ Under **Workspace**, pick the repository the Project works in. Projects run in t
 The Project opens as a chat with its coordinator. Describe what you want built, and the coordinator takes it from there.
 
 Projects work best on work that outlives a single chat: a feature with several PRs, a migration, or a job you want handled while you're away.
+
+## Add and remove chats
+
+Drag an eligible top-level Cloud Agent chat from the sidebar onto a Project row to add it. You can also open the chat's sidebar menu and choose **Add to Project**. If the action is available for a local chat, Cursor converts it to Remote Control before adding it. The chat then appears under the Project row and in the **Agents** list above the Project's chat input.
+
+To take a chat out, open its menu in the **Agents** list and choose **Remove from Project**.
 
 ## Cloud by default, local when needed
 

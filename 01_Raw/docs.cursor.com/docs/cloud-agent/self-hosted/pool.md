@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/pool
-fetched_at: 2026-10-19T05:32:44.131904+00:00
+fetched_at: 2026-10-26T05:39:59.860697+00:00
 fetch_method: mintlify_md
 ---
 
@@ -61,6 +61,8 @@ curl https://cursor.com/install -fsS | bash
 irm 'https://cursor.com/install?win32=true' | iex
 ```
 
+Windows workers need [Git for Windows](https://git-scm.com/download/win), including Git Bash. Without it, the worker doesn't start.
+
 Confirm the CLI is available:
 
 ```bash
@@ -111,6 +113,14 @@ agent worker --pool my-pool --computer-use start
 ```
 
 On macOS, the first start installs the **Cursor Computer Use** helper app. Grant it **Accessibility** and **Screen Recording**, verify with a task that takes a screenshot, then snapshot the machine so every worker restored from the image is ready. On Linux, bake the desktop packages into the worker image. See [Computer use and desktop sharing](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md) for the macOS permission steps, MDM profile guidance, and the Linux display options.
+
+### Open the live workspace
+
+Pass `--connect-workspace` on Linux workers so people who open their agents in the Cursor desktop app get the agent's files, changes, terminal, and forwarded ports. It needs Cursor 3.25 or later and gives those people a terminal as the worker's OS user. Read [Live workspace](https://cursor.com/docs/cloud-agent/self-hosted.md#live-workspace) for who can open it before you turn it on.
+
+```bash
+agent worker --pool my-pool --connect-workspace start
+```
 
 ## Register multiple repo roots
 
@@ -275,7 +285,7 @@ agent worker --pool start
 
 Multi-use workers (started without `--pool`) don't belong to a pool.
 
-From the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents), pick a pool in the worker selector when starting a session or editing an automation. You can also include `pool=<name>` in a Slack, GitHub, or Linear trigger. Sessions route only to workers registered with that pool name.
+From the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents), pick a pool in the worker selector when starting a session or editing an automation. In the automation editor, the pool selector appears after you choose a specific environment or repository. You can also include `pool=<name>` in a Slack, GitHub, or Linear trigger. Sessions route only to workers registered with that pool name.
 
 ## Triggering pool agents
 
@@ -313,6 +323,45 @@ Policy handling depends on where the request starts:
 To target one of your own machines by name, use [My Machines](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md#trigger-this-machine-from-a-chat-surface) with `worker=` or `machine=`.
 
 The Cloud Agent API uses the same resolver with `usePrivateWorker` and `labels` fields. See the [Cloud Agent API docs](https://cursor.com/docs/cloud-agent/api/endpoints.md) for endpoint details.
+
+### Default pool
+
+Team admins can send self-hosted runs that don't name a pool to one team pool. Set **Default pool** in the Self-Hosted section of the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#self-hosted). It appears once **Allow Self-Hosted Machines** is on. The picker lists your team's pools, minus pools with no worker connected in the last 30 days and repo-bound pools whose repository you can't access. A saved default stays listed. Choose **None** to turn it off. Without a default, routing works as before.
+
+The default applies to self-hosted runs that name no pool or machine, whether they opted in or **Require Self-Hosted Machines** sent them there. Cursor routes each run in this order:
+
+1. **A pool or machine named in the request.** `pool=<name>`, `worker=`, and `machine=` always win.
+2. **The default pool, when it serves the run's repository,** even if another pool serves it too.
+3. **Another team pool that serves the repository,** if one of its workers connected in the last 30 days.
+4. **The default pool, when it's an [any-repo](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools) pool.** It takes runs for any other repository and runs with no repository.
+5. **No match.** The run routes as if no default were set.
+
+```mermaid
+flowchart TD
+    named("Names a pool or machine?")
+    defRepo("Default pool serves the repo?")
+    otherRepo("Another pool with a worker in the last 30 days serves the repo?")
+    defAny("Default pool is any-repo?")
+    toNamed["Named pool or machine"]
+    toDefault1["Default pool"]
+    toOther["That pool"]
+    toDefault2["Default pool"]
+    asBefore["Routes as if no default"]
+    named -->|yes| toNamed
+    named -->|no| defRepo
+    defRepo -->|yes| toDefault1
+    defRepo -->|no| otherRepo
+    otherRepo -->|yes| toOther
+    otherRepo -->|no| defAny
+    defAny -->|yes| toDefault2
+    defAny -->|no| asBefore
+```
+
+A run the default takes waits a limited time for that pool's workers, then fails if none connects. It never falls back to your own My Machines workers. A pool named `default` qualifies only when it serves a repository, because workers started with `--pool` and no name join it too.
+
+The default changes where a run goes, not who can start it: repository access checks, such as an API key's repository scope, still apply to the repository the request names.
+
+Slack's [team](https://cursor.com/docs/integrations/slack.md#team-default-pool) and [channel](https://cursor.com/docs/integrations/slack.md#channel-default-pool) default pools are separate settings and win for `@Cursor` mentions. When a Slack default doesn't serve the mention's repository, Slack refuses the mention instead of falling back to this setting.
 
 ## Hooks
 
@@ -403,6 +452,8 @@ MCP servers on self-hosted workers are routed by transport type:
 
 If your MCP server needs to access private-network endpoints, use the command (stdio) transport. The process runs directly on the worker and shares its network. For HTTP-based MCP servers, Cursor manages the connection from its backend, handling OAuth and session caching.
 
+Cursor doesn't connect to an HTTP server whose URL still contains an unfilled variable, so agents don't get its tools. Fill in the variable, or configure the server as a command server if it should run on the worker. Adding a server to the [MCP Allowlist](https://cursor.com/docs/mcp.md#mcp-allowlist) approves it but doesn't distribute it to agents.
+
 ## Artifacts
 
 Artifact behavior is identical on self-hosted workers and Cursor-hosted agents. The agent produces the artifact inside the worker and the worker uploads it to Cursor-managed storage over HTTPS. Everything downstream (PR embeds, dashboard previews, notification attachments) is handled by Cursor's backend and doesn't depend on where the worker runs.
@@ -418,6 +469,7 @@ Workers need outbound HTTPS access to:
 - `api2.cursor.sh` and `api2direct.cursor.sh` for the agent session
 - `downloads.cursor.com` for CLI updates and the first-time [Cursor Computer Use](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md#macos) install on macOS
 - `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` for [artifact](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#artifacts) uploads
+- `cursor.blob.core.windows.net` for the [live workspace](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#open-the-live-workspace) server download, only on workers started with `--connect-workspace`
 
 If your firewall can only match wildcards, `*.s3.us-east-1.amazonaws.com` covers both artifact hosts, but also opens every other bucket in the region. Prefer an exact-host rule when the firewall supports it.
 
@@ -430,6 +482,7 @@ No inbound ports, public IPs, or VPN tunnels are required. If you use a proxy, s
 | `api2.cursor.sh` or `api2direct.cursor.sh`                                                       | The worker can't start or continue an agent session.                                                                                                                          |
 | `downloads.cursor.com`                                                                           | CLI updates and the first-time Cursor Computer Use install on macOS fail. A worker that already has both installed keeps running.                                             |
 | `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` | Artifact uploads fail. PR embeds, dashboard previews, and notification attachments that depend on artifacts are missing. The agent session and other tool calls keep working. |
+| `cursor.blob.core.windows.net`                                                                   | On workers started with `--connect-workspace`, the live workspace can't start. The agent keeps running.                                                                       |
 | An outbound host a specific tool or integration needs                                            | Only that tool or integration fails. The agent continues.                                                                                                                     |
 
 The [Prerequisites](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#prerequisites) section covers the broader set of hosts a worker needs during agent runs (git hosts, package registries, internal APIs).
@@ -575,6 +628,8 @@ agent worker --pool my-pool --idle-release-timeout 600 start
 ```
 
 `--idle-release-timeout` (env var `CURSOR_WORKER_IDLE_RELEASE_TIMEOUT`) is the number of seconds the worker stays connected after a session ends, waiting for follow-up messages. If a follow-up arrives, the timer resets. When the timeout fires, the CLI exits with code 0 so a supervisor can recycle the machine. Pass `0` to disable idle-based release. [Releasing a claim](https://cursor.com/docs/cloud-agent/api/endpoints.md#release-a-claim) is a separate API: it frees the worker for another agent right away and tells the worker CLI to exit. Cursor refuses it while a turn is using the worker.
+
+A pool worker process serves one agent. While it waits for follow-ups it refuses claims from other agents, and it exits instead of taking a new agent when its claim is released or reset, for example after it reconnects holding a claim Cursor already ended.
 
 Once a worker times out, Cursor marks it as freed. The machine can reset and re-enter the pool. If a user restarts a chat that has disconnected from its machine, the chat reconnects to a fresh machine from the pool. Workspace state from the original machine does not carry over unless the pool uses [hibernation](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#hibernation).
 
@@ -855,6 +910,7 @@ agent worker [options] start
 | `--computer-use`               | Let claimed agents drive this machine's desktop. On macOS, installs Cursor Computer Use if needed; grant it Accessibility and Screen Recording. See [Computer use](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md).                                                                                                                                                                                                                                                                                                                             |
 | `--display <display>`          | Linux only. Existing X11 display to require for `--computer-use`, for example `:0`. When omitted, a reachable `DISPLAY` is reused or a managed desktop is started.                                                                                                                                                                                                                                                                                                                                                                                               |
 | `--share-desktop [mode]`       | Linux only. Let authorized viewers watch or control the agent desktop: `view` or `view_and_control` (default). Separate from computer use; see [Share the agent desktop](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md#share-the-agent-desktop).                                                                                                                                                                                                                                                                                               |
+| `--connect-workspace`          | Linux only. Let the Cursor desktop app open a [live workspace](https://cursor.com/docs/cloud-agent/self-hosted.md#live-workspace) (files, changes, terminal, forwarded ports) for this worker's agents, as the worker's OS user. Requires Cursor 3.25 or later. Off by default.                                                                                                                                                                                                                                                                                  |
 | `--pool [name]`                | Register for pool assignment. Optional pool name; defaults to `default`. Each session claims one worker at a time. Env var: `CURSOR_WORKER_POOL_NAME`.                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `--single-use`                 | Legacy alias for `--pool`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `--pool-name <name>`           | Deprecated alias for `--pool <name>`. Env var: `CURSOR_WORKER_POOL_NAME`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |

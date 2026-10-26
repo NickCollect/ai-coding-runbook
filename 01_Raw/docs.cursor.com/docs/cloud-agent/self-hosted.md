@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted
-fetched_at: 2026-10-19T05:32:44.103056+00:00
+fetched_at: 2026-10-26T05:39:59.863835+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,7 +35,7 @@ You don't need to own the compute to keep agents inside your security perimeter.
 
 ## What leaves your network
 
-The full checkout, build cache, and machine-local credentials stay on your machine. During a run, the worker sends Cursor the content the agent needs, such as file contents, terminal output, diffs, screenshots, local MCP results, and routing metadata. If you enable [desktop sharing](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md#share-the-agent-desktop), it also streams the agent desktop.
+The full checkout, build cache, and machine-local credentials stay on your machine. During a run, the worker sends Cursor the content the agent needs, such as file contents, terminal output, diffs, screenshots, local MCP results, and routing metadata. If you enable [desktop sharing](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md#share-the-agent-desktop), it also streams the agent desktop. If you enable the [live workspace](https://cursor.com/docs/cloud-agent/self-hosted.md#live-workspace), it relays the agent's files, terminal, and forwarded ports to people who open the agent in the desktop app.
 
 The worker uploads Cloud Agent artifacts, such as screenshots, videos, and log references, to Cursor-managed storage so they can appear in pull requests and the dashboard. Keep secrets out of tool output and artifacts.
 
@@ -102,6 +102,60 @@ Environment-scoped secrets and Build Secrets never reach a worker. My Machines w
 | Environment-scoped secrets                                                                        | Secrets on the machine, or team and user secrets through Secret sync                                                                                                      |
 | MCP server limits in `environment.json`                                                           | Your team's [MCP servers](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#mcp-servers), available to every run with no per-environment limit                      |
 | `.cursor/environment.json` in the repository                                                      | `.cursor/hooks.json` in the worker directory                                                                                                                              |
+
+## Live workspace
+
+Start a Linux worker with `--connect-workspace` to open an agent's live workspace from the Cursor desktop app: its files and changes, a terminal, and forwarded ports. It works on [My Machines](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md) and [Team Pools](https://cursor.com/docs/cloud-agent/self-hosted/pool.md) workers.
+
+```bash
+# My Machines
+agent worker --connect-workspace start
+
+# Team Pools
+agent worker --pool my-pool --connect-workspace start
+```
+
+- **Off by default.** Cursor never turns it on for you. The worker reads the flag at startup, so restart it after you add the flag. To turn it off, restart the worker without the flag.
+- **Linux only.** On macOS and Windows, the worker logs `--connect-workspace requires a Linux worker` and starts without the live workspace. Those workers behave as they do today.
+- **Cursor 3.25 or later.** The worker installs only server builds whose published signature verifies. Older Cursor versions show "Update Cursor to 3.25 or later to open this workspace."
+- **One more outbound host.** When the desktop app opens one of its agents, the worker downloads the server build for that Cursor version from `cursor.blob.core.windows.net` into `~/.cursor-server/bin/<commit>/`, once per version, and runs it on `127.0.0.1`. Workspace traffic uses the worker's existing outbound connection, so no inbound ports open.
+
+The live workspace runs as the worker's OS user. Anyone who can open one of
+the worker's agents gets a terminal and file access as that user: the agent's
+owner, plus teammates when a team admin turns on **Allow VM sharing** in the
+[Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents). Tasks and
+settings in the repository also run as that user, including tasks that run
+when the workspace opens. The worker serves only agents it's already running.
+
+### Troubleshoot the live workspace
+
+### Why does the workspace say Worker offline?
+
+The agent's worker isn't connected to Cursor. Start the worker again. The
+desktop app reconnects when the worker is back.
+
+### Why is the terminal unavailable?
+
+The terminal tab says why. "To use the terminal, restart the worker with
+the --connect-workspace flag" means the worker started without the flag.
+"Terminal is only available on Linux workers" means it runs on macOS or
+Windows. To confirm the flag took effect, restart with `--verbose` and look
+for `cursor-server enabled (--connect-workspace)` in the startup output.
+
+### Why does Cursor ask me to update to 3.25 or later?
+
+Your Cursor version has no signed server build, and the worker refuses
+unsigned builds. Update the desktop app, then open the agent again.
+
+### Why didn't the server download verify?
+
+When a download doesn't match its Cursor signature or carries an invalid
+one, the worker installs and runs nothing, and the worker log says why. If
+another agent or worker process on the machine is still running a copy of
+that build, end that session or stop that worker, then retry. A download
+whose bytes don't match fails again on retry. If the log shows the download
+itself failed, allow outbound HTTPS to `cursor.blob.core.windows.net`.
+Cursor provides no mirror.
 
 ## Supported deployment patterns
 

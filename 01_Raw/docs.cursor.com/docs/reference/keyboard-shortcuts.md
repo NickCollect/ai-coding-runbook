@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/keyboard-shortcuts
-fetched_at: 2026-09-21T05:44:04.285058+00:00
+fetched_at: 2026-10-26T05:40:01.808988+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ All Cursor keybindings, including Cursor-specific features, can be remapped in K
 | Shortcut        | Action                                  |
 | --------------- | --------------------------------------- |
 | Cmd I           | Toggle Sidepanel (unless bound to mode) |
-| Cmd L           | Toggle Sidepanel (unless bound to mode) |
+| Cmd L or Cmd K  | Toggle Sidepanel (unless bound to mode) |
 | Cmd E           | Toggle Agent layout                     |
 | Cmd .           | Mode Menu                               |
 | Cmd /           | Loop between AI models                  |
@@ -50,16 +50,6 @@ Shortcuts for the chat input box.
 | Cmd W                                      | Close chat                   |
 | Escape                                     | Unfocus field                |
 
-## Inline Edit
-
-| Shortcut            | Action             |
-| ------------------- | ------------------ |
-| Cmd K               | Open               |
-| Cmd Shift K         | Toggle input focus |
-| Return              | Submit             |
-| Cmd Shift Backspace | Cancel             |
-| Opt Return          | Ask quick question |
-
 ## Code Selection & Context
 
 | Shortcut                        | Action                                                   |
@@ -67,8 +57,7 @@ Shortcuts for the chat input box.
 | @                               | [@-mentions](https://cursor.com/docs/agent/prompting.md) |
 | /                               | Shortcut Commands                                        |
 | Cmd Shift L                     | Add selection to Chat                                    |
-| Cmd Shift K                     | Add selection to Edit                                    |
-| Cmd L                           | Add selection to new chat                                |
+| Cmd L or Cmd K                  | Add selection to new chat                                |
 | Cmd →                           | Accept next word of suggestion                           |
 | Cmd Return                      | Search codebase in chat                                  |
 | Select code, Cmd C, Cmd V       | Add copied reference code as context                     |
@@ -80,14 +69,6 @@ Shortcuts for the chat input box.
 | -------- | ----------------- |
 | Tab      | Accept suggestion |
 | Cmd →    | Accept next word  |
-
-## Terminal
-
-| Shortcut   | Action                   |
-| ---------- | ------------------------ |
-| Cmd K      | Open terminal prompt bar |
-| Cmd Return | Run generated command    |
-| Escape     | Accept command           |
 
 ## Related
 

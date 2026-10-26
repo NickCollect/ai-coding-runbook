@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin
-fetched_at: 2026-10-19T05:32:43.390005+00:00
+fetched_at: 2026-10-26T05:39:59.220235+00:00
 fetch_method: mintlify_md
 ---
 
@@ -86,6 +86,7 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [List Namespaces](https://cursor.com/docs/api/origin/reference/list-namespaces.md)
 - [List Repos](https://cursor.com/docs/api/origin/reference/list-repos.md)
 - [Get Repo](https://cursor.com/docs/api/origin/reference/get-repo.md)
+- [Delete Repo](https://cursor.com/docs/api/origin/reference/delete-repo.md)
 - [Update Repo](https://cursor.com/docs/api/origin/reference/update-repo.md)
 - [Create Repo](https://cursor.com/docs/api/origin/reference/create-repo.md)
 - [List Branches](https://cursor.com/docs/api/origin/reference/list-branches.md)
@@ -239,6 +240,8 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Repository Deleted](https://cursor.com/docs/api/origin/reference/repository-deleted.md)
 - [Repository Push](https://cursor.com/docs/api/origin/reference/repository-push.md)
 - [Repository Metadata Updated](https://cursor.com/docs/api/origin/reference/repository-metadata-updated.md)
+- [Repository Label Events](https://cursor.com/docs/api/origin/reference/repository-label-events.md)
+- [Repository Label Updated](https://cursor.com/docs/api/origin/reference/repository-label-updated.md)
 - [Pull Request Events](https://cursor.com/docs/api/origin/reference/pull-request-events.md)
 - [Pull Request Auto Merge Enabled](https://cursor.com/docs/api/origin/reference/pull-request-auto-merge-enabled.md)
 - [Pull Request Auto Merge Disabled](https://cursor.com/docs/api/origin/reference/pull-request-auto-merge-disabled.md)
@@ -255,6 +258,8 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Installation Suspended](https://cursor.com/docs/api/origin/reference/installation-suspended.md)
 - [Installation Unsuspended](https://cursor.com/docs/api/origin/reference/installation-unsuspended.md)
 - [Installation Deleted](https://cursor.com/docs/api/origin/reference/installation-deleted.md)
+- [Pull Request Commandeered](https://cursor.com/docs/api/origin/reference/pull-request-commandeered.md)
+- [Repository Ruleset Events](https://cursor.com/docs/api/origin/reference/repository-ruleset-events.md)
 
 
 ---

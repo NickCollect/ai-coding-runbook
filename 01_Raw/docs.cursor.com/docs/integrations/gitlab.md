@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/gitlab
-fetched_at: 2026-10-19T05:32:44.648166+00:00
+fetched_at: 2026-10-26T05:40:00.454268+00:00
 fetch_method: mintlify_md
 ---
 
@@ -86,11 +86,14 @@ For other connection options beyond IP whitelisting, see [Advanced networking](h
 1. Go to [Integrations in the dashboard](https://cursor.com/dashboard/integrations) → **Advanced** → **GitLab Self-Hosted**
 2. Enter your GitLab instance **hostname**
 3. Paste the **Application ID** and **Secret**
-4. Click **Register**
-5. Select your GitLab instance from the dropdown
-6. Click **Connect** to complete the installation
-7. Back on the Integrations tab, click **Manage** next to your GitLab connection and select **Sync Repos**
-8. Return to the dashboard to configure features on your repositories
+4. If Cursor should reach the instance through a different hostname, such as a load balancer, enter it as the **External Host**
+5. Click **Register**
+6. Select your GitLab instance from the dropdown
+7. Click **Connect** to complete the installation
+8. Back on the Integrations tab, click **Manage** next to your GitLab connection and select **Sync Repos**
+9. Return to the dashboard to configure features on your repositories
+
+When you set an External Host, Cursor sends API requests (including merge requests), OAuth token requests, and Cloud Agent git clones and pushes to it. The GitLab sign-in page that **Connect** opens in your browser still uses the instance hostname.
 
 ### Disconnect GitLab Self-Hosted
 
@@ -119,6 +122,10 @@ Available for Enterprise customers. Use Cloudflare Tunnel when AWS PrivateLink i
 **Security:** HTTPS encryption, Cloudflare Tunnel, service account access tokens
 
 **Drawbacks:** Requires running and maintaining `cloudflared` in your environment.
+
+## Commit author
+
+Cloud Agents commit as the bot user of the project access token Cursor creates for each project, so their commits pass push rules that require the commit author to be a GitLab user. Creating that token needs Maintainer access to the project. If the token is unavailable or Cursor can't resolve its bot identity, agents fall back to `Cursor Agent <cursoragent@cursor.com>`, and those push rules reject the commits.
 
 ## Protected Git Scopes
 

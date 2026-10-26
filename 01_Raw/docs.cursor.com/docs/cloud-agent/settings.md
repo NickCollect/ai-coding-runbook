@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/settings
-fetched_at: 2026-10-19T05:32:44.165719+00:00
+fetched_at: 2026-10-26T05:39:59.882147+00:00
 fetch_method: mintlify_md
 ---
 
@@ -56,10 +56,11 @@ All security options require admin privileges.
 
 Team admins can enable or disable these features for their team:
 
-- **Long running agents** – controls whether team members can run agents for extended durations. Admins can enable or restrict this capability at the team level. Long-running is not available for multi-repo environments yet. Selecting a multi-repo environment disables the toggle.
 - **Computer use** – controls whether agents can use computer interaction capabilities (available to enterprise teams only).
 
 Changes save instantly and affect new agents immediately.
+
+For long-running work, use [`/goal`](https://cursor.com/docs/agent/overview.md#goals-with-goal) in the composer. In the Cursor app, `/goal` needs a recent version.
 
 ### Team follow-ups
 

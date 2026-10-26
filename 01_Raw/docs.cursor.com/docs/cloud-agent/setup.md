@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-10-19T05:32:44.194645+00:00
+fetched_at: 2026-10-26T05:39:59.893028+00:00
 fetch_method: mintlify_md
 ---
 
@@ -55,7 +55,9 @@ Cursor resolves environment configuration by repository or repo group, using the
 
 This gives you predictable defaults at the team level while still letting individual users override with a personal environment. User overrides are also useful to allow testing out a new environment configuration before rolling it out to the entire team.
 
-A saved environment runs with the configuration saved in it. It reads `.cursor/environment.json` from a repository only when its **environment.json location** points at that file. New environments start with the location set to **None (skip environment.json)**. To use a committed file, pick its repository when you create the environment.
+A saved environment runs with the configuration saved in it. It reads `.cursor/environment.json` from a repository only when its **environment.json location** points at that file. Environments you create start with the location set to **None (skip environment.json)**. To use a committed file, pick its repository when you create the environment.
+
+When a cloud agent start creates a saved environment for a single repository that doesn't have one yet, it checks that repository for a committed `.cursor/environment.json`. If the file is valid, the new environment's **environment.json location** points at it, so that agent, later agents, and Builds all use the file.
 
 Environment configuration applies to Cursor-hosted Cloud Agents. A run on [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md#environments-on-self-hosted-machines) uses only the environment's repositories and never reads `.cursor/environment.json`.
 
@@ -120,7 +122,7 @@ Self-serve custom resource configuration is coming soon.
 
 You can start a cloud agent without a repository or a connected source control provider. Select **Start from scratch** in the repository picker at [cursor.com/agents](https://cursor.com/agents) or in the [Agents Window](https://cursor.com/docs/agent/agents-window.md), then send your prompt. Cursor creates a draft [Origin](https://cursor.com/docs/origin.md) repository for the agent in the background, and the agent works in it from the first turn.
 
-Start from scratch needs a paid plan and Origin. If your team hasn't set up Origin yet, Cursor points you to [Origin setup](https://cursor.com/docs/origin.md#enable-origin) first. If an admin has turned Origin off for your team, the agent starts without a repository.
+Start from scratch needs a plan that includes Cloud Agents and Origin (not Free or Plus). If your team hasn't set up Origin yet, Cursor points you to [Origin setup](https://cursor.com/docs/origin.md#enable-origin) first. If an admin has turned Origin off for your team, the agent starts without a repository.
 
 ### Save the work to a repository
 

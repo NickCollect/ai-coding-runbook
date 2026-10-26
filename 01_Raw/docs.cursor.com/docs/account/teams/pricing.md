@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/pricing
-fetched_at: 2026-10-19T05:32:42.873251+00:00
+fetched_at: 2026-10-26T05:39:58.768715+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,7 +41,7 @@ Seat tier is separate from role. Members and Admins can have any seat tier, and 
 
 Each paid seat has its own weekly pool for Cursor models (Grok 4.7, Grok 4.6, Grok 4.5, and Composer 2.5), shared across Cursor and Grok for that person. Seats don't share weekly pools with each other, and usage doesn't transfer between team members. The pool refreshes weekly.
 
-Third-party models aren't included. They're billed at public list API prices plus the Cursor Token Rate, paid from the team's prepaid balance from the first request. This includes when Cursor Router (Balance or Intelligence) routes to a third-party model. Cost mode requests and Cursor models, including Grok and Composer, are exempt from the Cursor Token Rate.
+Third-party models aren't included. They're billed at public list API prices plus the Cursor Token Rate, paid from the team's prepaid balance from the first request. This includes when Cursor Router (Balance or Intelligence) routes to a third-party model. Cost mode requests, Cursor models (including Grok and Composer), and the third-party models listed on [Models & Pricing](https://cursor.com/docs/models-and-pricing.md#cursor-token-rate) are exempt from the Cursor Token Rate.
 
 Admins can see team usage under **Usage** at [grok.com/dashboard](https://grok.com/dashboard) and per-member spend through the [Admin API](https://cursor.com/docs/account/teams/admin-api.md).
 
@@ -52,9 +52,9 @@ Our [Enterprise plan](https://cursor.com/docs/enterprise.md) offers pooled usage
 Additional usage is any third-party model usage, plus any Cursor model usage after a seat's weekly pool runs out. It's paid from a prepaid balance the whole team shares.
 
 - Admins buy credit with one-time top-ups, or turn on **Auto Top-up** to refill the balance when it drops below a threshold
-- Third-party models are billed at public list API prices plus the Cursor Token Rate
+- Third-party models are billed at public list API prices plus the Cursor Token Rate, except the models listed on [Models & Pricing](https://cursor.com/docs/models-and-pricing.md#cursor-token-rate)
 - Cursor models beyond the weekly pool are billed at their token rates with no Cursor Token Rate
-- Cost mode (classic Auto) bills as a Cursor-model request. With Cursor Router on, Balance and Intelligence bill at the routed model's list price, and a third-party route also incurs the Cursor Token Rate
+- Cost mode (classic Auto) bills as a Cursor-model request. With Cursor Router on, Balance and Intelligence bill at the routed model's list price, and a third-party route also incurs the Cursor Token Rate unless that model is exempt
 - No interruption in service or quality
 - Tracked per user in your admin dashboard (see [spending data API](https://cursor.com/docs/account/teams/admin-api.md#get-spending-data))
 - Capped with a monthly additional usage limit
@@ -63,12 +63,12 @@ Additional usage stops when the prepaid balance is empty or the team's monthly a
 
 ### Cursor Token Rate
 
-The Cursor Token Rate is $0.25 per million tokens and is charged on third-party model requests. This covers:
+The Cursor Token Rate is $0.25 per million tokens and is charged on eligible third-party model requests. This covers:
 
 - Custom model execution (Tab, Apply, etc.)
 - Infrastructure and processing costs
 
-The Cursor Token Rate applies to input tokens, output tokens, and cached tokens on eligible third-party model requests. This includes when Cursor Router (Balance or Intelligence) routes to a third-party model. This applies to [BYOK](https://cursor.com/help/models-and-usage/api-keys.md) as well. Cost mode requests are exempt, and so are Cursor models, including Grok and Composer.
+The Cursor Token Rate applies to input tokens, output tokens, and cached tokens on eligible third-party model requests. This includes when Cursor Router (Balance or Intelligence) routes to a third-party model. This applies to [BYOK](https://cursor.com/help/models-and-usage/api-keys.md) as well. Cost mode requests are exempt, and so are Cursor models, including Grok and Composer. The third-party models listed on [Models & Pricing](https://cursor.com/docs/models-and-pricing.md#cursor-token-rate) are exempt too.
 
 See [Auto modes](https://cursor.com/docs/models-and-pricing.md#auto-modes) for Auto pricing.
 
@@ -95,7 +95,7 @@ Existing teams can keep adding seats and changing seat types without switching. 
 
 ## Model Pricing
 
-All prices are per million tokens. Teams are charged at public list API prices plus [Cursor Token Rate](https://cursor.com/docs/account/teams/pricing.md#cursor-token-rate) for third-party model requests, including when Cursor Router (Balance or Intelligence) routes to a third-party model.
+All prices are per million tokens. Teams are charged at public list API prices plus the [Cursor Token Rate](https://cursor.com/docs/account/teams/pricing.md#cursor-token-rate) for eligible third-party model requests, including when Cursor Router (Balance or Intelligence) routes to one. The third-party models listed on [Models & Pricing](https://cursor.com/docs/models-and-pricing.md#cursor-token-rate) are excluded.
 
 | Model                                                                                         | Provider  | Input | Cache write | Cache read | Output | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | --------------------------------------------------------------------------------------------- | --------- | ----- | ----------- | ---------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/jira
-fetched_at: 2026-10-12T06:49:41.836677+00:00
+fetched_at: 2026-10-26T05:40:00.473757+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,10 +60,10 @@ FedRAMP (including Government Cloud) instances.
 
 You can choose how Jira authenticates Cloud Agents on the Cursor Jira integration admin dashboard by enabling the *Require individual authentication* toggle.
 
-| Mode                           | How it works                                     | Settings used                                                                                                                                              |
-| :----------------------------- | :----------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Service account authentication | Cloud Agents run under a service account.        | Uses only the team's Cloud Agent settings for routing, models, repositories, and defaults.                                                                 |
-| User-level authentication      | Runs all Cloud Agents under each user's account. | Uses each user's Cloud Agent settings for routing, models, repositories, and defaults. Also allows users to find their running agents under their account. |
+| Mode                           | How it works                                     | Settings used                                                                                                                                                                                                                     |
+| :----------------------------- | :----------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Service account authentication | Cloud Agents run under a service account.        | Uses the team's Cloud Agent settings for routing, models, repositories, and defaults. Team MCP servers aren't available in service-account mode by default. Turn on *Require individual authentication* if your agents need them. |
+| User-level authentication      | Runs all Cloud Agents under each user's account. | Uses each user's Cloud Agent settings for routing, models, repositories, and defaults. Also allows users to find their running agents under their account.                                                                        |
 
 If you turn on **Restrict Cloud Agent Usage** in your Enterprise team's Cloud Agents settings, each Jira user must connect a Cursor account before Cursor starts an agent, even with the toggle off. Cursor checks that account against the restriction. With the toggle off, agents still run under the service account.
 
@@ -223,6 +223,10 @@ Yes. Cloud Agents require usage-based billing. Enable usage-based billing while 
 ### Who can install the Jira integration?
 
 A user that is both a Jira admin and Cursor team admin will need to do the initial setup.
+
+### Can a Jira site connect to more than one Cursor team?
+
+No. Each Jira site connects to one Cursor team. A Cursor team can connect multiple Jira sites. Team admins can add another site from the Jira integration settings. To link their Jira accounts, users must be members of the Cursor team connected to that site.
 
 ### Do users need to connect their own Cursor accounts?
 

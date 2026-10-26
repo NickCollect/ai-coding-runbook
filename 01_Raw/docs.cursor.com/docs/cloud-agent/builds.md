@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/builds
-fetched_at: 2026-10-19T05:32:43.868753+00:00
+fetched_at: 2026-10-26T05:39:59.629557+00:00
 fetch_method: mintlify_md
 ---
 
@@ -71,7 +71,9 @@ Make `install` complete and idempotent. It can run repeatedly and may run on top
 
 Builds preserve disk state only. Running processes, shell exports, and
 in-memory caches stop when Cursor snapshots the machine. Put services and
-other session-specific work in `start` or `terminals`.
+other session-specific work in `start` or `terminals`. Disk state includes
+the repository checkout and Docker's data directory (`/var/lib/docker`), so
+images and stopped containers persist.
 
 Your existing environment inputs still apply. Builds use saved snapshots, `.cursor/environment.json`, Dockerfiles, install and startup commands, secrets, and network settings.
 
@@ -104,8 +106,11 @@ Open an environment's **Builds** tab to:
 - Cancel an in-progress Build
 - Start an agent from a specific Build
 - Configure **Update stale builds** and the **Staleness threshold**
+- Set the **Install timeout**, how many minutes `install` can run before the Build fails. Enter a whole number from 5 to 300, or leave it blank to use the default of 90 minutes
 
-Every agent run records the Build it started from. Use this provenance to compare environment behavior with the exact configuration and repository commits in the Build.
+**Trigger build** runs as the person who selects it. Their connected source control account needs access to every repository in the environment. For GitHub repositories, that means Write access or higher.
+
+Every agent run records the Build it started from. Use this provenance to compare environment behavior with the exact configuration and repository commits in the Build. To see it, ask the agent to call the [Cursor Cloud MCP](https://cursor.com/docs/cloud-agent/capabilities.md#cursor-cloud-mcp) `environment-info` tool. Its `build` field has the Build ID (`bld-...`) and whether the run reused the Build's checkout or fetched the latest code. A run on a feature branch, or one that pulled newer code because its Build was stale, can have a different Git `HEAD` than the commit the Build recorded.
 
 ## Debug a Build
 

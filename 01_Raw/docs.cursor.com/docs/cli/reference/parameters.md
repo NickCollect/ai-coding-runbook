@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/parameters
-fetched_at: 2026-09-07T05:31:26.719123+00:00
+fetched_at: 2026-10-26T05:39:59.416973+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,7 +51,7 @@ Global options can be used with any command:
 | `worker`                      | Start a private cloud worker that runs agents in your environment | `agent worker start`                |
 | `acp`                         | Start ACP server mode (advanced, hidden command)                  | `agent acp`                         |
 | `update`                      | Update Cursor Agent to the latest version                         | `agent update`                      |
-| `ls`                          | Resume a chat session                                             | `agent ls`                          |
+| `ls`                          | Open previous chats and pick one to resume                        | `agent ls`                          |
 | `resume`                      | Resume the latest chat session                                    | `agent resume`                      |
 | `create-chat`                 | Create a new empty chat and return its ID                         | `agent create-chat`                 |
 | `generate-rule` \| `rule`     | Generate a new Cursor rule with interactive prompts               | `agent generate-rule`               |
@@ -141,7 +141,7 @@ Start a private cloud worker that connects to Cursor and runs agents in your env
 
 ## Arguments
 
-When starting in chat mode (default behavior), you can provide an initial prompt:
+When starting in agent mode (default behavior), you can provide an initial prompt:
 
 **Arguments:**
 

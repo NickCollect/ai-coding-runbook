@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/azure-devops
-fetched_at: 2026-09-07T05:31:28.913210+00:00
+fetched_at: 2026-10-26T05:40:00.642245+00:00
 fetch_method: mintlify_md
 ---
 
@@ -142,6 +142,8 @@ https://dev.azure.com/{organization}/{project}/_git/{repository}
 Azure DevOps uses an organization, project, and repository hierarchy. Cursor shows repositories as `{project}/{repository}` under the Azure DevOps organization.
 
 If your organization still uses a `*.visualstudio.com` URL, open the repository in Azure DevOps and copy the `dev.azure.com` URL before adding it to Cursor.
+
+When you start a Cloud Agent from a local checkout whose Git remote is an Azure DevOps SSH remote (`ssh.dev.azure.com` or `vs-ssh.visualstudio.com`) or a `*.visualstudio.com` URL, Cursor converts the remote to the `dev.azure.com` format.
 
 ## Permissions
 

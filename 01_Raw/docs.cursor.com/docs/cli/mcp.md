@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/mcp
-fetched_at: 2026-06-22T06:23:24.713423+00:00
+fetched_at: 2026-10-26T05:39:59.366402+00:00
 fetch_method: mintlify_md
 ---
 
@@ -50,7 +50,7 @@ This displays:
 - Required and optional parameters
 - Parameter types and constraints
 
-### Login to MCP server
+### Log in to MCP server
 
 Authenticate with an MCP server configured in your `mcp.json`:
 

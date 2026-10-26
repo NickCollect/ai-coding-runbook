@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/automations
-fetched_at: 2026-10-19T05:32:43.851348+00:00
+fetched_at: 2026-10-26T05:39:59.569668+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,6 +29,8 @@ The Automations page also includes three Cursor-managed agents:
 - [Bugbot](https://cursor.com/docs/bugbot.md) reviews pull requests for bugs and code quality issues.
 - [Security Agents](https://cursor.com/docs/security-agents.md) review pull requests and scan codebases for vulnerabilities.
 - [PR Routing & Approval](https://cursor.com/docs/approval-agents.md) routes pull requests to reviewers and can approve low-risk changes.
+
+Open these from their cards under **From Cursor**. They don't appear in the **Mine** or **Team** automation lists.
 
 ## Billing
 
@@ -81,7 +83,7 @@ GitHub is the reference provider and supports every source control trigger. Alon
 - **PR review comment** - When an inline comment is left on a pull request diff.
 - **PR review submitted** - When a review is submitted as approved, changes requested, or commented.
 - **Review thread updated** - When a review thread on a pull request is marked resolved or unresolved.
-- **Workflow run completed** - When a GitHub Actions workflow run finishes on a pull request or branch.
+- **Workflow run completed** - When a GitHub Actions workflow run started by a `push` event finishes. Runs started by `pull_request`, `workflow_dispatch`, or `schedule` don't match; use **CI completed** for pull request checks. The **Workflow** filter matches the workflow file name, such as `deploy.yml`.
 
 The [Cursor Marketplace](/marketplace/automations) includes templates for [triaging failed GitHub Actions](/marketplace/automations/triage-github-workflow-failures) and [fixing pull request review comments](/marketplace/automations/autofix-pr-review-comments).
 
@@ -147,6 +149,8 @@ PagerDuty triggers run on incident events and can be helpful to automatically tr
 
 Cursor Automations can have tools enabled for richer capabilities around GitHub, Slack, memory, MCP, and more. Automations also include the same base set of tools as other cloud agents. See [Cloud agent capabilities](https://cursor.com/docs/cloud-agent/capabilities.md) for details.
 
+When someone follows up on an automation run from the web, Slack, or GitHub, the agent doesn't use messaging or comment tools such as Send to Slack or Comment on pull request for that reply. Cursor delivers the reply where the follow-up was sent.
+
 ### Pull request creation
 
 Repo-backed automations can open pull requests after making code changes requested by the automation prompt. This tool is enabled by default for every automation.
@@ -171,6 +175,8 @@ When you allow any channel, Cursor also includes the read access needed for the 
 
 Note that the agent is granted read access to public channels that it can send messages to.
 
+To have the agent tag people or groups, put Slack's mention tokens in your prompt as plain text, without backticks: `<@U123>` for a person and `<!subteam^S123|@handle>` for a user group. A user group's ID starts with `S`.
+
 ### Read Slack channels
 
 Gives the agent read-only access to list and read messages from public Slack channels.
@@ -182,6 +188,8 @@ Use this when the agent needs more context before it replies or opens a pull req
 Connects an [MCP (Model Context Protocol)](https://cursor.com/docs/mcp.md) server so the agent can use external tools and data sources.
 
 Connecting an MCP server gives the agent access to every tool exposed by that server. Only connect servers you trust with the permissions your automation needs.
+
+If an MCP server rejects an automation's credentials, the run continues without that server's tools, and its page shows an **MCP authentication failed** event. On Enterprise, [OpenTelemetry Export](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorcloud_agentmcp_auth_error) also sends it as a `cursor.cloud_agent.mcp_auth_error` log.
 
 ### Memories
 
@@ -253,6 +261,8 @@ Changing **Run as** to **Service account** changes the identity the automation u
 ### Service accounts for automations
 
 Each automation set to **Run as: Service account** gets its own service account. Cursor creates it the first time the automation is saved with that setting, whether from the automation editor or through the API or Terraform provider.
+
+The [Cursor Terraform provider](https://registry.terraform.io/providers/cursor/cursor/latest/docs) manages automations as `cursor_platform_workflow` resources. Authenticate it with a team service account's API key (the provider's `token`, or the `CURSOR_TOKEN` environment variable) and leave `team_id` unset. A workflow's `scope` sets its Share options: `team` runs as the service account and team admins manage it, `team_editable` runs as the service account and members can edit it, and `team_visible` runs as its owner and members can view it.
 
 On Enterprise teams, these accounts are listed in Dashboard → Settings → API Keys → Service Accounts with names like `automation-<id>`. Neither the ID in the name nor the service account ID (`sa_...`) is the automation's ID.
 

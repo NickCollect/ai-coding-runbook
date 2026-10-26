@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/mcp
-fetched_at: 2026-10-12T06:49:40.487120+00:00
+fetched_at: 2026-10-26T05:39:59.171928+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,7 +29,7 @@ The server speaks MCP over stateless streamable HTTP and supports tools only. Se
 
 ## Permissions
 
-Tool calls are attributed to you; from Grok Bot they show as "\<your name> via Grok Bot". Your access and the client's [scopes](https://cursor.com/docs/api/origin/reference/scopes.md) both limit what a tool can do, under the same permission checks and rate limits as the equivalent [Origin API](https://cursor.com/docs/api/origin.md) request (see [Authentication](https://cursor.com/docs/api/origin/reference/authentication.md) and [Acting on behalf of users](https://cursor.com/docs/api/origin/acting-as-users.md)). Some write actions, such as approving a pull request, are available only in Grok Bot.
+Tool calls are attributed to you; from Grok Bot they show as "`<your name>` via Grok Bot". Your access and the client's [scopes](https://cursor.com/docs/api/origin/reference/scopes.md) both limit what a tool can do, under the same permission checks and rate limits as the equivalent [Origin API](https://cursor.com/docs/api/origin.md) request (see [Authentication](https://cursor.com/docs/api/origin/reference/authentication.md) and [Acting on behalf of users](https://cursor.com/docs/api/origin/acting-as-users.md)). Some write actions, such as approving a pull request, are available only in Grok Bot.
 
 ## Confirmation
 
@@ -54,6 +54,14 @@ A tool that fails returns a normal MCP tool result with `isError: true`. The tex
 `category` is one of `not_found`, `forbidden`, `quota_exceeded`, `conflict`, `validation_error`, or `upstream_failure`. `retryAfterSeconds` and `rateLimit` appear only when the call was rate limited. Include the request ID when reporting a problem.
 
 Unknown tools and invalid parameters return JSON-RPC errors instead of tool results.
+
+## Results
+
+A tool that succeeds returns its data as JSON in the text content and again as the structured content. A tool that returns an image, such as `get_pull_request_attachment`, adds an `image` content block after the text, with the bytes base64-encoded and their `mimeType`; the JSON describes the image and says how it was delivered.
+
+## Pull request attachments
+
+Images and recordings pasted into a pull request description, review, or comment appear in `pull_request_read` as upload URLs on cursor.com. Those URLs need a signed-in browser, so an agent fetches one with `get_pull_request_attachment`, naming the pull request and the URL exactly as it was returned. The server fetches only the pull request page's own upload URLs, only when the URL appears in that pull request's text, and only for a caller who can read the pull request. Small images come back inline; larger images, recordings, and other files come back as a short-lived URL the agent can fetch without further credentials. The size limit is in the [tool reference](https://cursor.com/docs/api/origin/mcp/tools.md#get_pull_request_attachment).
 
 ## Pagination
 

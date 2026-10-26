@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/plugins
-fetched_at: 2026-09-21T05:44:04.399612+00:00
+fetched_at: 2026-10-26T05:40:01.851391+00:00
 fetch_method: mintlify_md
 ---
 
@@ -377,6 +377,8 @@ Cursor Plugins discover `mcp.json` automatically. Specify `mcpServers` in
 ```
 
 `${POSTGRES_URL}` is a [plugin variable](https://cursor.com/docs/reference/plugins.md#variables) placeholder (not shell `${env:...}`). Declare the variable name under `variables` in `plugin.json`, put only the placeholder in plugin config, and set the value in the dashboard under **Plugins** → **Configure**. Plugin-managed MCP config is read-only in the dashboard.
+
+Plugin MCP servers appear with a `plugin-` prefix followed by the plugin and server names. For example, the `postgres` server in a plugin named `my-plugin` shows as `plugin-my-plugin-postgres` in approval prompts.
 
 For full documentation, see [MCP](https://cursor.com/docs/mcp.md).
 

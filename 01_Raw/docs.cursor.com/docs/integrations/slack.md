@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/slack
-fetched_at: 2026-10-12T06:49:41.961353+00:00
+fetched_at: 2026-10-26T05:40:00.572579+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,6 +27,8 @@ With Cursor's integration for Slack, you can use [Cloud Agents](https://cursor.c
    3. Confirm privacy settings
 
 5. Start using Cloud Agents in Slack by mentioning `@cursor`
+
+To unlink your Slack account, go to [Dashboard → Cloud Agents](https://www.cursor.com/dashboard/cloud-agents) and click **Unlink Slack** next to **Slack integration**. You'll need to link it again before you can start Cloud Agents from Slack.
 
 ## How to use
 
@@ -128,6 +130,12 @@ Phrases like "create a new agent", "launch a fresh agent", or "new agent please"
 
 Use the context menu (⋯) on an agent's response for followup instructions. Useful when multiple agents exist in a thread and you need to specify which one to follow up on.
 
+#### Direct messages
+
+You can also message Cursor directly instead of mentioning `@Cursor` in a channel. A new top-level DM message starts a new agent in its own thread. Replies in that thread follow up on its agent, so you don't need `@Cursor` there, and the DM context menu doesn't show **Add follow-up**. If a reply asks for something new, Cursor can start a new agent in the thread instead, and it replaces the first one.
+
+While the agent works, Cursor shows its status under the thread, for example "Cursor is reading code...", until the agent finishes its turn. To run a second agent at the same time, start a new chat in the DM with a new top-level message, or mention `@Cursor` in a channel, where each top-level mention starts its own agent.
+
 ### Status updates & handoff
 
 Before Cursor starts changing code, it posts a short plan in the thread when you are fixing a bug or when implementation details would help you follow along. Straightforward requests skip that note. While it works, Cursor updates a short status under the thread.
@@ -150,13 +158,13 @@ Manage Cloud Agents using the context menu by clicking the three dots (⋯) on a
 
 Available options:
 
-- **Add follow-up**: Add instructions to an existing agent
-- **Switch repository**: Relaunch the same request against a different repository or [cloud agent environment](https://cursor.com/docs/cloud-agent/setup.md)
+- **Add follow-up**: Add instructions to an existing agent. Not shown in DMs, where a reply in the thread follows up
+- **Switch repository**: Start a new agent with the same request on a different repository or [cloud agent environment](https://cursor.com/docs/cloud-agent/setup.md), from that target's default branch. The first agent's changes don't carry over; its branch and pull request stay as they are
 - **Delete**: Stop and archive the Cloud Agent
 - **View request ID**: View unique request ID for troubleshooting (include when contacting support)
 - **Give feedback**: Provide feedback about agent performance
 
-If the agent needs a repository or environment outside the current one, Slack also shows **Switch repository** on the launch message. Choose the new target and Cursor continues from there.
+If the agent needs a repository or environment outside the current one, Slack also shows **Switch repository** on the launch message. Choosing a new target starts a new agent the same way.
 
 ## Configuration
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/design-mode
-fetched_at: 2026-06-29T05:25:13.166984+00:00
+fetched_at: 2026-10-26T05:39:58.952019+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,12 +42,12 @@ Use voice input and drawing together to describe a change.
 
 ## Keyboard shortcuts
 
-| Action               | Shortcut        |
-| :------------------- | :-------------- |
-| Toggle Design Mode   | Cmd + Shift + D |
-| Select an area       | Shift + drag    |
-| Add element to chat  | Cmd + L         |
-| Add element to input | Option + click  |
+| Action               | Shortcut           |
+| :------------------- | :----------------- |
+| Toggle Design Mode   | Cmd + Shift + D    |
+| Select an area       | Shift + drag       |
+| Add element to chat  | Cmd + L or Cmd + K |
+| Add element to input | Option + click     |
 
 ## What the agent sees
 

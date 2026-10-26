@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/pricing/legacy-cursor-plans
-fetched_at: 2026-10-19T05:32:42.590221+00:00
+fetched_at: 2026-10-26T05:39:58.568016+00:00
 fetch_method: mintlify_md
 ---
 
@@ -52,7 +52,7 @@ Model choice affects how fast you use the pool. When you select a third-party mo
 On-demand usage lets you keep working after an included pool runs out. It's billed monthly in arrears at the same per-model rates as included usage, with no change in quality or speed.
 
 - **Individual plans (Pro, Pro+, Ultra).** Off until you turn it on under **Spending** at [cursor.com/dashboard/spending](https://cursor.com/dashboard/spending). Set a monthly spend limit there.
-- **Teams.** On by default. Admins can turn it off or set a team-wide spend limit from the team dashboard. Third-party requests also carry the [Cursor Token Rate](https://cursor.com/docs/models-and-pricing.md#cursor-token-rate).
+- **Teams.** On by default. Admins can turn it off or set a team-wide spend limit from the team dashboard. Eligible third-party requests also carry the [Cursor Token Rate](https://cursor.com/docs/models-and-pricing.md#cursor-token-rate). The third-party models listed there are excluded.
 - **Start and Hobby.** Not available. AI features pause until the pool resets.
 
 See [Usage-based charges](https://cursor.com/help/account-and-billing/overages.md) and [Spend limits](https://cursor.com/help/account-and-billing/spend-limits.md) for how limits and credits behave.

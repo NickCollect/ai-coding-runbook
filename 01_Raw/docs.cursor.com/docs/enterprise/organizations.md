@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/organizations
-fetched_at: 2026-09-21T05:44:02.227170+00:00
+fetched_at: 2026-10-26T05:40:00.216436+00:00
 fetch_method: mintlify_md
 ---
 
@@ -102,7 +102,7 @@ Work bottom-up from least to most permissive: set the strictest defaults at the 
 
 Organizations add org-level administration on top of team-level roles. Org admins manage organization settings, organization membership, shared identity configuration, and can view the Organization's teams. Team admins and team owners manage settings and members for their own teams.
 
-Team admin access doesn't grant org admin access, and roles can differ by layer. A user can be an org admin while only being a member of specific teams.
+Team admin access doesn't grant org admin access, and roles can differ by layer. A user can be an org admin while only being a member of specific teams. On every team linked to their Organization, org admins can still manage Team MCP servers and team plugin variables, the same as team admins. See [Team MCP distribution](https://cursor.com/docs/mcp.md#team-mcp-distribution).
 
 ## Organization API
 

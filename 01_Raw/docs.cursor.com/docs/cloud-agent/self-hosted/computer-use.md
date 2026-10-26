@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/computer-use
-fetched_at: 2026-09-07T05:31:27.905602+00:00
+fetched_at: 2026-10-26T05:39:59.800680+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,6 +31,8 @@ agent worker --pool gpu --computer-use start
 ```
 
 What happens next depends on the operating system. On macOS, the worker drives the signed-in desktop session through a helper app called **Cursor Computer Use**, and you grant it two macOS privacy permissions. On Linux, the worker uses an X11 display and needs desktop packages installed first.
+
+On Enterprise teams, an admin can turn computer use off with the **Computer Use** switch under **MCP Configuration** in [team settings](https://cursor.com/dashboard/settings). The switch is on by default. While it's off, or while all MCP servers are disabled for the team, agents on your workers start without computer use, even when the worker runs with `--computer-use`.
 
 ## macOS
 

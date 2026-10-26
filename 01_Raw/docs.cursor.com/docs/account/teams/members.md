@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/members
-fetched_at: 2026-10-19T05:32:42.846064+00:00
+fetched_at: 2026-10-26T05:39:58.749444+00:00
 fetch_method: mintlify_md
 ---
 
@@ -133,6 +133,12 @@ Admins can change roles for other members by clicking the context menu and then 
 There must be at least one Admin, and one paid member on the team at all times.
 
 On a team that belongs to an [Organization](https://cursor.com/docs/enterprise/organizations.md), an org admin who is also on the team shows their team role, so you can change their role or remove them like any other member. Turn on **Show org admins** to also list org admins who aren't on the team. In that view, every org admin shows as a read-only **Org Admin**. Turn the switch off to edit their team role.
+
+### Review members' API keys
+
+On Enterprise teams, admins can review and revoke the personal Cursor API keys members create for scripts and integrations. Open **Members** on the [API Keys](https://cursor.com/dashboard/api) page, or choose **View API keys** from a member's context menu. The list includes members whose email is on one of your team's or organization's verified domains, and you can filter it by member.
+
+Revoke one key, or revoke all of a member's keys at once. Requests that use a revoked key fail immediately, and the member can create new keys. Revocations appear in the [audit log](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#api-keys-and-service-accounts) as `user_api_key` events with the `revoke` action.
 
 ## Domain settings
 

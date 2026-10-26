@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/organizations/organization-admin-api
-fetched_at: 2026-10-12T06:49:39.833649+00:00
+fetched_at: 2026-10-26T05:39:58.531651+00:00
 fetch_method: mintlify_md
 ---
 
@@ -89,13 +89,17 @@ Number of members per page. Capped at 200; values above 200 are clamped to 200.
 
 Return only members of this team. A team that isn't linked to the organization returns an empty page.
 
+`userId` number | string
+
+Return only this user. Accepts the numeric user ID (for example `12345`) or the encoded `user_…` ID that [`GET /teams/members`](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) returns.
+
 #### Response Fields
 
 `members` array
 
 Array of organization member objects, each containing:
 
-- `id` number - Numeric user ID of the member, matching the `id` returned by the team [`GET /teams/members`](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) endpoint
+- `id` number - Numeric user ID of the member, such as `12345`. The team [`GET /teams/members`](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) endpoint returns the same user as an encoded `user_…` ID, so the two values don't match as strings. To join the two lists, pass either form to the `userId` filter, or match on `email`.
 - `email` string - Email address of the member
 - `name` string - Display name of the member
 - `organizationRole` string - Organization-level role, either `admin` or `member`. This is distinct from each team assignment's `teamRole`: a user can be an org `admin` while holding a `member` role on a specific team, or vice versa.
@@ -171,7 +175,7 @@ Public organization ID (for example `org_abc123`). Must match the organization f
 
 Non-empty list of entries (at most 500 per request). Each element is an object with a user ID and exactly one team field (`teamIds` or `destinationTeamId`):
 
-- `userId` number | string: ID of the user to sync. Accepts either an integer numeric ID (for example `12345`) or a string ID (for example `"user_abc123"`).
+- `userId` number | string: ID of the user to sync. Accepts either the numeric user ID as a JSON integer (for example `12345`) or the encoded `user_…` ID as a string (for example `"user_abc123"`). A numeric string such as `"12345"` is rejected.
 - `teamIds` number\[]: The complete set of org-linked team IDs the user should belong to after the sync. Memberships are reconciled to exactly this set. Any team not listed is removed. Include the user's current teams to keep them (for example `[7, 8]`). At most 100 teams per entry.
 - `destinationTeamId` number: Field for syncing to a single team. Setting `destinationTeamId: NNN` is the same as sending `teamIds: [NNN]`. The user's teams are set to exactly that one team. Must be a team linked to the organization.
 
@@ -1374,11 +1378,11 @@ Bulk org routes (`PUT .../providers/:provider`, `PUT .../providers/:provider/mod
 
 ## Organization Groups
 
-Organization groups organize members across teams linked to the same organization. For dashboard setup and group-level controls, see [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md). Team directory groups use the Team Admin API at [`/teams/directory-groups`](https://cursor.com/docs/account/teams/admin-api.md#team-directory-groups) and `team_group_…` ids. Those routes do not accept Organization Group `id` (`g_`) or `publicId` (`grp_`) values.
+Organization groups organize members across teams linked to the same organization. For dashboard setup and group-level controls, see [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md). Team directory groups use the Team Admin API at [`/teams/directory-groups`](https://cursor.com/docs/account/teams/admin-api.md#team-directory-groups) and `team_group_…` ids. Those routes do not accept Organization Group `id` (`g_`) values. Team directory groups also have a `publicId` with the `grp_` prefix, which their get and list-members routes accept.
 
 - **Availability**: Enterprise only
 - **Authentication**: Organization API key (Basic auth). Every group route, read or write, requires the **`members:*`** scope. Keys with **`admin:*`** also work because admin implies members.
-- **Group IDs**: Each group has two IDs. `id` (`g_` prefix) is the Organization API group ID; use it wherever a route takes `:groupId`. `publicId` (`grp_` prefix) is the group's public ID.
+- **Group IDs**: Each group has two IDs. `id` (`g_` prefix) is the Organization API group ID; use it wherever a route takes `:groupId`. `publicId` (`grp_` prefix) is the group's public ID. Origin [access grants](https://cursor.com/docs/api/origin/grants-api.md) refer to groups by `publicId`. To list the members of a `grp_…` grantee, find the group whose `publicId` matches in [List Organization Groups](https://cursor.com/docs/account/organizations/organization-admin-api.md#list-organization-groups), then call [List Organization Group Members](https://cursor.com/docs/account/organizations/organization-admin-api.md#list-organization-group-members) with that group's `g_…` `id`.
 - **Name lookup**: To find a group's IDs from its name, call [List Organization Groups](https://cursor.com/docs/account/organizations/organization-admin-api.md#list-organization-groups) with the `name` query parameter. No route accepts a name in place of `:groupId`.
 - **Pagination**: List routes accept `page` and `pageSize`. Both values must be positive integers.
 - **Rate limit**: Each route allows 20 requests per minute per organization. See [rate limits and best practices](https://cursor.com/docs/api.md#rate-limits).
@@ -1884,7 +1888,7 @@ Case-insensitive substring match against `user_email`, `event_type`, and `event_
 
 `users` string
 
-Comma-separated email addresses, numeric user IDs, or `user_` public IDs. Up to 100 values. Every user must be a member of the organization.
+Comma-separated email addresses, numeric user IDs, or `user_` public IDs. Up to 100 values. Every user must be a member of the organization. Email values match `user_email` exactly and are case-sensitive.
 
 `teamId` number
 
@@ -1910,7 +1914,7 @@ Audit events, each containing:
 - `timestamp` string - ISO 8601 timestamp
 - `team_id` string - Team the event belongs to. Empty for organization-level events such as `organization_group` and `xai_credit_transfer`
 - `ip_address` string - Client IP of the request
-- `user_email` string - Actor. See the [log format](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#log-format) for `Api Key:`, `Bot:`, and `System` values
+- `user_email` string - Actor, as recorded when the event was written. See the [log format](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#log-format) for `Api Key:`, `Bot:`, and `System` values, and for why this isn't a stable user key
 - `event_type` string - Event type
 - `application_type` string - `cursor`, `grok_bot`, or empty when unknown
 - `event_data` object - Event-specific fields. `old_value` and `new_value` are parsed into JSON when the stored value is valid JSON
@@ -1985,9 +1989,9 @@ curl -X GET "https://api.cursor.com/organizations/audit-logs?startTime=7d&endTim
 
 ## Grok Bot computers
 
-Recreate, terminate, or delete the hosted computers that run Grok Bot for a team's members, then follow the operation until every member has a result. These routes run the same operations as **Manage Bot Computers** in the dashboard. See [Manage Grok Bot computers](https://cursor.com/docs/grok-bot/computers.md) for what each action does to a member's computer and what the member sees.
+Recreate, terminate, or delete the hosted computers that run Grok Bot for a team's members, or delete all of their Grok Bot data, then follow the operation until every member has a result. These routes run the same operations as **Manage Member Computers and Data** in the dashboard. See [Manage Grok Bot computers](https://cursor.com/docs/grok-bot/computers.md) for what each action does to a member's computer and what the member sees.
 
-- **Availability**: Enterprise only. Access is turned on per team; contact your account team to turn it on. Until then, every route returns `403` for that team.
+- **Availability**: Enterprise only.
 - **Authentication**: Organization API key (Basic auth) with the **`admin:*`** scope. Keys with any other scope return `401`. These routes take an Organization API key rather than a Team API key because one computer serves every team a member belongs to.
 - **Team**: `teamId` in the path must be a team linked to your organization. Any other team returns `404`.
 - **One operation per team**: A team runs one operation at a time. Starting another while one runs returns `409` with the running operation's ID.
@@ -1999,7 +2003,6 @@ Operation routes share these error responses:
 | ------ | ----------------------------------------------------------------------------------------------------------------------- |
 | `400`  | Malformed body or query, an unknown body field, a `userId` that isn't a current member of the team, or too many members |
 | `401`  | Invalid API key, or the key is missing the `admin:*` scope                                                              |
-| `403`  | Grok Bot computer operations aren't turned on for the team                                                              |
 | `404`  | The team isn't linked to your organization, or the operation doesn't exist or is no longer available                    |
 | `409`  | Another operation is running for the team (start only)                                                                  |
 | `429`  | Rate limit exceeded. The response includes a `Retry-After: 60` header                                                   |
@@ -2028,10 +2031,11 @@ What to do to each member's computer:
 - `recreate_vm` - Build a replacement computer on the latest image and run Team Setup. Bots, files, and logins carry over, and a Bot that is mid-turn pauses and resumes on the new computer.
 - `terminate_vm` - Delete the member's current computer and keep the durable disk. The member's next message starts a fresh computer.
 - `delete_vm_and_data` - Delete the computer and its durable data, so the member starts from empty. This can't be undone.
+- `delete_grok_bot_data` - Delete all of the member's [Grok Bot data](https://cursor.com/docs/grok-bot/computers.md#delete-all-grok-bot-data). This can't be undone.
 
 `userIds` number\[] Required
 
-Numeric user IDs of the members to change. To collect them, call [List Organization Members](https://cursor.com/docs/account/organizations/organization-admin-api.md#list-organization-members) with `teamId`. Send at least 1 and at most 25,000 IDs, or at most 1,000 for `delete_vm_and_data`. Duplicates are ignored. Every ID must belong to a current member of the team who has signed in to Cursor; if one doesn't, the request returns `400` and nothing starts. Members without a computer are skipped for recreate and terminate. `delete_vm_and_data` still deletes durable data.
+Numeric user IDs of the members to change. To collect them, call [List Organization Members](https://cursor.com/docs/account/organizations/organization-admin-api.md#list-organization-members) with `teamId`. Send at least 1 and at most 25,000 IDs, at most 1,000 for `delete_vm_and_data`, or at most 100 for `delete_grok_bot_data`. Duplicates are ignored. Every ID must belong to a current member of the team who has signed in to Cursor; if one doesn't, the request returns `400` and nothing starts. Members without a computer are skipped for recreate and terminate. `delete_vm_and_data` and `delete_grok_bot_data` still delete the member's data.
 
 `operationId` string Required
 
@@ -2085,15 +2089,6 @@ curl -X POST https://api.cursor.com/organizations/teams/7/grok-bot/operations \
 }
 ```
 
-**403: operations aren't turned on for the team:**
-
-```json
-{
-  "code": "error",
-  "message": "Bot fleet admin API access is not enabled for this team"
-}
-```
-
 ### Get Grok Bot Computer Operation
 
 GET
@@ -2130,7 +2125,7 @@ The operation's ID.
 
 `action` string
 
-`recreate_vm`, `terminate_vm`, or `delete_vm_and_data`.
+`recreate_vm`, `terminate_vm`, `delete_vm_and_data`, or `delete_grok_bot_data`.
 
 `state` string
 
@@ -2138,7 +2133,7 @@ The operation's ID.
 
 `counts` object
 
-Member counts across the whole operation: `total`, `queued`, `running`, `succeeded`, `skipped`, and `failed`. `noVmSkipped` is the part of `skipped` made up of members who had no computer. It's always `0` for `delete_vm_and_data`, which deletes durable data whether or not a computer is running.
+Member counts across the whole operation: `total`, `queued`, `running`, `succeeded`, `skipped`, and `failed`. `noVmSkipped` is the part of `skipped` made up of members who had no computer. It's always `0` for `delete_vm_and_data` and `delete_grok_bot_data`, which delete the member's data whether or not a computer is running.
 
 `items` array | null
 
@@ -2166,6 +2161,8 @@ The `reason` values you're most likely to see:
 | `team-member-not-found`        | `skipped` | The member left the team while the operation was queued                                                          |
 | `member-identity-changed`      | `skipped` | The member's account changed while the operation was queued                                                      |
 | `recreate-already-in-progress` | `failed`  | The member's computer was already being recreated. Start a new operation for this member once it finishes        |
+| `delete-already-in-progress`   | `failed`  | The member's Grok Bot data was already being deleted                                                             |
+| `delete-failed`                | `failed`  | The deletion didn't finish                                                                                       |
 | `authorization-revoked`        | `failed`  | The API key that started the operation was revoked, expired, or lost `admin:*` before Cursor reached this member |
 
 Any other `reason` on a failed member means the action didn't finish. Start a new operation for those members. See [Skipped and failed members](https://cursor.com/docs/grok-bot/computers.md#skipped-and-failed-members) for what to do next.

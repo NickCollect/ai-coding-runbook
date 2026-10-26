@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/capabilities
-fetched_at: 2026-10-12T06:49:41.024821+00:00
+fetched_at: 2026-10-26T05:39:59.618855+00:00
 fetch_method: mintlify_md
 ---
 
@@ -93,7 +93,7 @@ Depending on your MCP client, tool names may include a server prefix (for exampl
 | Tool                                | Purpose                                                                                                                                                                                                                 |
 | :---------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `run-info`                          | Get the current run's identity, metadata, and URL. Start here.                                                                                                                                                          |
-| `environment-info`                  | Get the current run's environment version, config, dashboard URL, and effective egress policy.                                                                                                                          |
+| `environment-info`                  | Get the current run's environment version, config, dashboard URL, effective egress policy, and the [Build](https://cursor.com/docs/cloud-agent/builds.md) the run started from.                                         |
 | `get-events`                        | List the current run's dashboard events, oldest first.                                                                                                                                                                  |
 | `rename-chat`                       | Rename the current run's chat. The new title, up to 200 characters, shows in the agents list and the conversation header.                                                                                               |
 | `list-cloud-agents`                 | Browse Cloud Agent runs visible to you in this environment. Filter by source, status, date, code changes, PR creation, and archived state.                                                                              |

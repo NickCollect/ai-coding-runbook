@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-fable-5-1
-fetched_at: 2026-10-19T05:32:45.048742+00:00
+fetched_at: 2026-10-26T05:40:00.779763+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,7 +29,7 @@ Head to [Team Settings](https://cursor.com/dashboard/restricted_models/claude-fa
 
 ## Data retention
 
-Anthropic's policy for Fable models is described in detail [here](https://trust.anthropic.com/resources?s=7ksqkied5hn0pocsj206m\&name=%5Banthropic%5D-security-and-privacy-design-of-anthropic-data-retention-and-review) and as follows:
+Anthropic's policy for Fable models is described in detail [here](https://privacy.claude.com/en/articles/15425996-data-retention-practices-for-covered-models) and as follows:
 
 - Retained customer data is being deleted after 30 days, automatically and permanently, unless subject to a safety investigation or legal hold
 - Retained customer data is not readable by any person by default

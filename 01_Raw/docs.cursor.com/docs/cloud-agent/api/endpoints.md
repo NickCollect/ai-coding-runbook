@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/api/endpoints
-fetched_at: 2026-10-19T05:32:43.808239+00:00
+fetched_at: 2026-10-26T05:39:59.566936+00:00
 fetch_method: mintlify_md
 ---
 
@@ -92,7 +92,7 @@ Repository URL on any connected source control provider (for example, `https://g
 
 `repos[0].startingRef` string (optional)
 
-Branch name or commit SHA to use as the starting point. Ignored when `prUrl` is provided.
+Branch name or full 40-character commit SHA to use as the starting point. Ignored when `prUrl` is provided.
 
 `repos[0].prUrl` string (optional)
 
@@ -112,7 +112,7 @@ Whether to skip requesting the user as a reviewer when Cursor opens a PR. Only a
 
 `envVars` object (optional)
 
-Session-scoped environment variables for the cloud agent. Values are encrypted at rest, injected into the agent's shell, and deleted with the agent. Maximum 50 entries; names up to 255 bytes (can't start with `CURSOR_`), values up to 4096 bytes. Cannot be combined with a client-supplied `agentId`.
+Session-scoped environment variables for the cloud agent. Values are encrypted at rest, injected into the agent's shell, and deleted with the agent. Maximum 50 entries. Each name is 1 to 255 characters of ASCII letters, digits, and underscores, doesn't start with a digit, can't start with `CURSOR_`, and can't contain `CURSOR_SANDBOX` in any letter case. Each value is non-empty and at most 4096 UTF-8 bytes. Cannot be combined with a client-supplied `agentId`.
 
 On self-hosted targets, `envVars` reach only pool workers that run with `--sync-dashboard-secrets` while a team admin has **Secret sync** on. `machine` targets and other pool workers run without them. See [Environments on Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md#environments-on-self-hosted-machines).
 
@@ -407,15 +407,15 @@ curl --request GET \
 }
 ```
 
-### Create A Run
+### Send A Follow-Up Or Steer
 
 POST
 
 `/v1/agents/{id}/runs`
 
-Send a follow-up prompt to an existing active agent. The new run uses the agent's current conversation and workspace state.
+Send a follow-up prompt to an existing active agent. Without `delivery`, the prompt starts a new run that uses the agent's current conversation and workspace state.
 
-Only one run can be active per agent. Calling this while another run is `CREATING` or `RUNNING` returns `409 agent_busy`. Wait for the existing run to terminate, or cancel it.
+Only one run can be active per agent. Without `delivery`, calling this while another run is `CREATING`, `RUNNING`, or `WAITING_FOR_BACKGROUND_WORK` returns `409 agent_busy`. To add the prompt to the running agent instead, [steer](https://cursor.com/docs/cloud-agent/api/endpoints.md#steering) it with `delivery: "steer"`. Otherwise, wait for the existing run to terminate, or cancel it.
 
 #### Path Parameters
 
@@ -444,6 +444,21 @@ Inline MCP server definitions for this follow-up run. When provided, these repla
 `mode` string (optional)
 
 Conversation mode override for this follow-up run: `agent` or `plan`. Omit to keep the conversation's current mode from prior runs.
+
+`delivery` string (optional)
+
+`steer` sends the prompt into the agent's running turn instead of starting a new run. A steer requires `prompt` and `delivery: "steer"` and accepts no other top-level fields, so sending `model`, `mcpServers`, `envVars`, or `mode` with it returns `400 validation_error`. Omit `delivery` for an ordinary follow-up. See [Steering](https://cursor.com/docs/cloud-agent/api/endpoints.md#steering).
+
+#### Steering
+
+A steer adds a prompt to an agent while it works, instead of being refused with `409 agent_busy`. You can send one whether or not a run is active. The response is `202` with a `delivery` field:
+
+- `steered` — The agent's running turn accepted the prompt. The response includes `runId`, the run that accepted the steer, which was running when the API got it. The prompt reaches that run at its next safe step unless the run ends first, in which case the prompt starts the agent's next run. `runId` is omitted when the agent had no active run.
+- `queued` — No running turn could take the prompt, so it becomes the agent's next follow-up. That includes a steer that lands just after the agent's run changed. A `queued` response never includes `runId`.
+
+A steer body with any top-level field besides `prompt` and `delivery` returns `400 validation_error` with a message that names the fields, such as `"model" is not allowed with delivery "steer"` or `"model", "mode" are not allowed with delivery "steer"`. A `delivery` other than `steer` also returns `400 validation_error`. Cursor checks the body first, so these errors happen even when steering isn't available for your account. A steer that Cursor refuses also returns `400 validation_error`. If steering isn't available for your account, a valid steer returns `403 feature_unavailable`.
+
+A steer that fails with a server or network error may still have reached the agent. Cursor treats a retry as a new prompt, so retrying can deliver the prompt twice.
 
 ```bash
 curl --request POST \
@@ -475,6 +490,38 @@ curl --request POST \
     "createdAt": "2026-04-13T18:50:00.000Z",
     "updatedAt": "2026-04-13T18:50:00.000Z"
   }
+}
+```
+
+Steer a running agent:
+
+```bash
+curl --request POST \
+  --url https://api.cursor.com/v1/agents/bc-00000000-0000-0000-0000-000000000001/runs \
+  -u YOUR_API_KEY: \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "prompt": {
+      "text": "Also cover the error path"
+    },
+    "delivery": "steer"
+  }'
+```
+
+**Response:** `202`
+
+```json
+{
+  "delivery": "steered",
+  "runId": "run-00000000-0000-0000-0000-000000000002"
+}
+```
+
+If no running turn can take the prompt, the same request returns:
+
+```json
+{
+  "delivery": "queued"
 }
 ```
 
@@ -552,7 +599,7 @@ Unique identifier for the run (for example, `run-00000000-0000-0000-0000-0000000
 
 #### Response Fields
 
-The base run fields (`id`, `agentId`, `status`, `createdAt`, `updatedAt`) are always present. The following are populated as soon as data is available:
+The base run fields (`id`, `agentId`, `status`, `createdAt`, `updatedAt`) are always present. `status` is `CREATING`, `RUNNING`, or `WAITING_FOR_BACKGROUND_WORK` while the run is active, and `FINISHED`, `ERROR`, `CANCELLED`, or `EXPIRED` once it ends. The following are populated as soon as data is available:
 
 `durationMs` integer (terminal runs)
 
@@ -1073,11 +1120,33 @@ GET
 
 `/v1/environments`
 
-List the saved environments your API key can access, most recently updated first: your personal environments and your team's environments. Team admins don't see members' personal environments in the list.
+List the saved environments your API key can access, most recently updated first. Without `userId`, the list includes your personal environments and your team's environments. Team admins can list another current member's personal environments only by passing that member's `userId`.
 
 Team admins and service account API keys see every team environment. Other callers see a team environment only when they can access all of its repositories. A service account API key limited to specific repositories, and user-scoped tokens minted with it, only list environments that have repositories, all within that limit. Drafts and deleted environments aren't included.
 
+Filters combine, so the list keeps only environments that match every filter you send. An invalid filter value returns `400 validation_error`.
+
 #### Query Parameters
+
+`query` string (optional)
+
+Only environments whose name contains this text, ignoring case. 1 to 255 characters.
+
+`owner` string (optional)
+
+`personal` or `team`, to list only environments with that `owner`.
+
+`named` boolean (optional)
+
+`true` for only environments with a `name`, or `false` for only environments without one.
+
+`repo` string (optional, repeatable)
+
+Only environments that include this repository, such as `github.com/acme/api`. Repeat it, up to 100 times, to list environments that include any of the repositories.
+
+`userId` string (optional)
+
+Only one user's personal environments. Pass the numeric `userId` from [API Key Info](https://cursor.com/docs/cloud-agent/api/endpoints.md#api-key-info), or the `user_` ID from the Admin API's [team members list](https://cursor.com/docs/account/teams/admin-api.md#get-team-members). Your own ID lists your personal environments. A team admin's user API key can also pass a current team member's ID, and gets that member's personal environments that have at least one repository, all of which the admin can read. A valid ID for a user you aren't allowed to list returns `items: []` with no `nextCursor`, not an error. Combining `userId` with `owner=team` returns `400 validation_error`.
 
 `limit` number (optional)
 
@@ -1085,19 +1154,19 @@ Number of environments to return. Default: 20, Max: 100.
 
 `cursor` string (optional)
 
-Pagination cursor from `nextCursor` on the previous response.
+Pagination cursor from `nextCursor` on the previous response. Send the same filters with each `cursor`.
 
 #### Response Fields
 
 `items` array
 
-Environments, with the same fields as [Get An Environment](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-an-environment) except `environmentJson` and `versionId`. Call Get An Environment to load an environment's configuration.
+Environments, with the same fields as [Get An Environment](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-an-environment) except `environmentJson`, `versionId`, and `buildSettings`. Call Get An Environment to load an environment's configuration and build settings.
 
 `nextCursor` string (optional)
 
 Cursor for the next page. Omitted when there are no more pages.
 
-A page can come back with fewer items than `limit`. Keep requesting pages until `nextCursor` is absent. It's **omitted** from the response, not returned as `null`, when there are no more pages.
+A page can come back with fewer items than `limit`, or with none when `userId` names another member. Keep requesting pages until `nextCursor` is absent. It's **omitted** from the response, not returned as `null`, when there are no more pages.
 
 Callers other than team admins and service account API keys see team environments only after Cursor checks their access to the repositories, and those checks can run out of time. A response can then leave out team environments it hasn't verified yet, or stop before the end of the list. Those environments show up in later requests.
 
@@ -1105,7 +1174,7 @@ The list is ordered by last update, so an environment that changes during a walk
 
 ```bash
 curl --request GET \
-  --url 'https://api.cursor.com/v1/environments?limit=20' \
+  --url 'https://api.cursor.com/v1/environments?repo=github.com/your-org/your-web-app&repo=github.com/your-org/your-api' \
   -u YOUR_API_KEY:
 ```
 
@@ -1136,7 +1205,7 @@ GET
 
 `/v1/environments/{id}`
 
-Retrieve a saved environment and its latest saved configuration.
+Retrieve a saved environment, its latest saved configuration, and its build settings.
 
 #### Path Parameters
 
@@ -1160,6 +1229,14 @@ The environment's latest saved configuration, its `environment.json`, as a JSON-
 
 ID of the latest saved environment version. Omitted when no version has been saved.
 
+`buildSettings` object
+
+The environment's [Build](https://cursor.com/docs/cloud-agent/builds.md#how-builds-handle-git-state) settings:
+
+- `pullLatestCode` string - Whether agents that start on the default branch pull its latest code. `when_stale`, the default, pulls when the active Build is older than `stalenessThresholdHours`. `never` uses the commit the Build recorded. `always` is a legacy value you can read but not set.
+- `stalenessThresholdHours` integer or null - Hours, from 0 to 8,760, before the active Build counts as stale. `0` pulls on every start. `null` means the default, 24.
+- `installTimeoutMinutes` integer or null - Minutes, from 5 to 300, that a Build's install step can run. `null` means the default, 90.
+
 ```bash
 curl --request GET \
   --url https://api.cursor.com/v1/environments/8f14e45f-ceea-4e6b-9c3a-1d2e3f4a5b6c \
@@ -1179,6 +1256,11 @@ curl --request GET \
   ],
   "environmentJson": "{\"install\": \"pnpm install\", \"start\": \"sudo service docker start\"}",
   "versionId": "c9f0f895-fb98-4b91-8f3e-2a1b0c9d8e7f",
+  "buildSettings": {
+    "pullLatestCode": "when_stale",
+    "stalenessThresholdHours": null,
+    "installTimeoutMinutes": 120
+  },
   "createdAt": "2026-09-01T16:20:00.000Z",
   "updatedAt": "2026-09-29T21:05:00.000Z"
 }
@@ -1190,7 +1272,7 @@ PATCH
 
 `/v1/environments/{id}`
 
-Rename an environment, replace its configuration, or both. A request with both fields applies them together, so either both change or neither does. The response is `204` with no body.
+Rename an environment, replace its configuration, replace its repositories, or any combination. A request applies every field it sends together, so either all of them change or none do. Change [build settings](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-an-environment) in a request of their own. The response is `204` with no body.
 
 Renaming an environment to a name its owner already uses returns `409 environment_name_conflict`.
 
@@ -1208,7 +1290,28 @@ New display name, up to 255 characters. It must differ from the names of the own
 
 `environmentJson` string (optional)
 
-Replacement `environment.json`, as a JSON-encoded string. It replaces the whole configuration and uses the same [schema](https://cursor.com/docs/cloud-agent/setup.md#configuration-in-code-with-environmentjson) as a `.cursor/environment.json` file. An invalid configuration returns `400 validation_error`.
+Replacement `environment.json`, as a JSON-encoded string. It replaces the whole configuration and uses the same [schema](https://cursor.com/docs/cloud-agent/setup.md#configuration-in-code-with-environmentjson) as a `.cursor/environment.json` file. An invalid configuration returns `400 validation_error`. If the environment reads its configuration from a file in its only repository, the request returns `409 repo_file_environment_locked`.
+
+`repos` array (optional)
+
+The environment's full list of repositories. It replaces the current list, so include every repository to keep. Each entry has a `url`, and the list follows the same rules as in [Create An Environment](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-environment). Send `environmentJson` with it: a repository change saves the whole configuration, so `repos` without `environmentJson` returns `400 validation_error`. To keep the current configuration, send the `environmentJson` from [Get An Environment](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-an-environment). See [Repository Changes](https://cursor.com/docs/cloud-agent/api/endpoints.md#repository-changes) for which environments can change their repositories.
+
+`buildSettings` object (optional)
+
+New values for any of the `buildSettings` fields [Get An Environment](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-an-environment) returns. Fields you leave out stay unchanged, and `null` resets a field to its default: `when_stale`, 24, or 90. Send `buildSettings` on its own, because a request that also sends `name`, `environmentJson`, or `repos` returns `400 validation_error`. Setting `pullLatestCode` to `always` returns `400 validation_error` too. To move an environment off `always`, send `pullLatestCode: "when_stale"` with `stalenessThresholdHours`.
+
+#### Repository Changes
+
+Only environments with two or more repositories can change them, and they must keep at least two. Sending the current list unchanged doesn't count as a change.
+
+- An environment without repositories can't add any, and a single-repository environment can't change its repository. Both return `409 environment_repo_edit_blocked`. To work in different repositories, create a new environment.
+- A multi-repository environment can add, remove, and swap repositories. A list with fewer than two returns `409 environment_repo_edit_blocked`.
+
+When an environment reads its configuration from a file in a repository, [Get An Environment](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-an-environment) returns that file in `repoFile`. Changing its repositories keeps the file as the configuration source, with these limits:
+
+- Keep the `repoFile.url` repository in `repos`. A list without it returns `409 repo_file_repo_removed`. Cursor compares repositories, not exact strings, so a trailing `.git` or slash, a missing `https://`, a leading `www.`, or different letter case on GitHub still match. If the list names that repository more than once in different forms, Cursor keeps the first entry and drops the others. For Bitbucket Server, send the URL as Get An Environment returns it. A clone URL doesn't match.
+- An environment whose only repository holds its configuration file is locked to that file. Any request with `repos` returns `409 repo_file_environment_locked`, even with the current list.
+- When Cursor can't read an environment's stored repositories, a request with `repos` returns `400 stored_repos_unreadable`.
 
 ```bash
 curl --request PATCH \
@@ -1218,6 +1321,43 @@ curl --request PATCH \
   --data '{
     "name": "Web app (staging)",
     "environmentJson": "{\"install\": \"pnpm install --frozen-lockfile\", \"start\": \"sudo service docker start\"}"
+  }'
+```
+
+**Response:** `204 No Content`
+
+Replace the repositories and keep the current configuration:
+
+```bash
+curl --request PATCH \
+  --url https://api.cursor.com/v1/environments/8f14e45f-ceea-4e6b-9c3a-1d2e3f4a5b6c \
+  -u YOUR_API_KEY: \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "repos": [
+      { "url": "https://github.com/your-org/your-web-app" },
+      { "url": "https://github.com/your-org/your-api" },
+      { "url": "https://github.com/your-org/your-design-system" }
+    ],
+    "environmentJson": "{\"install\": \"pnpm install\", \"start\": \"sudo service docker start\"}"
+  }'
+```
+
+**Response:** `204 No Content`
+
+Change build settings:
+
+```bash
+curl --request PATCH \
+  --url https://api.cursor.com/v1/environments/8f14e45f-ceea-4e6b-9c3a-1d2e3f4a5b6c \
+  -u YOUR_API_KEY: \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "buildSettings": {
+      "pullLatestCode": "when_stale",
+      "stalenessThresholdHours": 12,
+      "installTimeoutMinutes": null
+    }
   }'
 ```
 
@@ -1357,7 +1497,7 @@ GET
 
 `/v1/environments/{id}/builds`
 
-List an environment's [Builds](https://cursor.com/docs/cloud-agent/builds.md), newest first, up to 10 per page.
+List an environment's [Builds](https://cursor.com/docs/cloud-agent/builds.md), newest first. Filter them by status or creation time.
 
 #### Path Parameters
 
@@ -1367,15 +1507,31 @@ Environment ID.
 
 #### Query Parameters
 
+`status` string (optional)
+
+Only Builds with this status: `IN_PROGRESS`, `SUCCEEDED`, `FAILED`, `CANCELLED`, or `SKIPPED`.
+
+`createdAfter` string (optional)
+
+Only Builds created at or after this time. Use an ISO 8601 timestamp with `Z` or a UTC offset and at most millisecond precision, such as `2026-09-29T00:00:00Z`.
+
+`createdBefore` string (optional)
+
+Only Builds created before this time, in the same format. It must be later than `createdAfter`.
+
+`limit` number (optional)
+
+Number of Builds to return. Default: 10, Max: 100.
+
 `cursor` string (optional)
 
-Pagination cursor from `nextCursor` on the previous response.
+Pagination cursor from `nextCursor` on the previous response. Send the same filters with it.
 
 #### Response Fields
 
 `items` array
 
-Up to 10 Builds, newest first. Each has the fields [Get An Environment Build](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-an-environment-build) returns.
+Up to `limit` Builds, newest first. Each has the fields [Get An Environment Build](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-an-environment-build) returns.
 
 `nextCursor` string (optional)
 
@@ -1383,7 +1539,7 @@ Cursor for the next page. Omitted when there are no more Builds.
 
 ```bash
 curl --request GET \
-  --url https://api.cursor.com/v1/environments/8f14e45f-ceea-4e6b-9c3a-1d2e3f4a5b6c/builds \
+  --url 'https://api.cursor.com/v1/environments/8f14e45f-ceea-4e6b-9c3a-1d2e3f4a5b6c/builds?createdAfter=2026-09-29T00:00:00Z&limit=2' \
   -u YOUR_API_KEY:
 ```
 
@@ -1397,7 +1553,20 @@ curl --request GET \
       "environmentId": "8f14e45f-ceea-4e6b-9c3a-1d2e3f4a5b6c",
       "status": "SUCCEEDED",
       "trigger": "RECURRING",
+      "source": "SYSTEM",
       "draft": false,
+      "requestedRefs": [],
+      "repoCommits": [
+        {
+          "repoUrl": "https://github.com/your-org/your-web-app",
+          "commitSha": "06b7d943cd0e7ea353ca932d5cdea8987b8e8105"
+        },
+        {
+          "repoUrl": "https://github.com/your-org/your-api",
+          "commitSha": "1dcf04d09d11d33343ae4758346ce1b61de676ed"
+        }
+      ],
+      "snapshotState": "ACTIVE",
       "createdAt": "2026-09-30T09:00:00.000Z",
       "updatedAt": "2026-09-30T09:12:00.000Z",
       "completedAt": "2026-09-30T09:12:00.000Z"
@@ -1407,14 +1576,90 @@ curl --request GET \
       "environmentId": "8f14e45f-ceea-4e6b-9c3a-1d2e3f4a5b6c",
       "status": "FAILED",
       "trigger": "CONFIG_CHANGE",
+      "source": "SYSTEM",
       "draft": false,
       "failure": { "type": "TERMINAL_FAILURE", "code": "environment_json_invalid" },
+      "requestedRefs": [],
+      "repoCommits": [],
       "createdAt": "2026-09-29T21:05:00.000Z",
       "updatedAt": "2026-09-29T21:06:00.000Z",
       "completedAt": "2026-09-29T21:06:00.000Z"
     }
   ]
 }
+```
+
+### Start An Environment Build
+
+POST
+
+`/v1/environments/{id}/builds`
+
+Start a [Build](https://cursor.com/docs/cloud-agent/builds.md) of an environment, like **Trigger build** in the dashboard. The response is `202` with the new Build's `id`. Reading the Build right away can briefly return `404`.
+
+Access follows [Update An Environment](https://cursor.com/docs/cloud-agent/api/endpoints.md#update-an-environment), with two differences:
+
+- **A draft Build on a team environment needs only read access.** When a team limits environment edits to admins, members can still start drafts, but only admins can start non-draft Builds. Other members get `403 team_admin_required`.
+- **Service account API keys get `403 key_not_supported`.** A user-scoped token minted by an API key limited to certain repositories gets `404 environment_not_found` when the environment has no repositories or any repository outside the limit. Otherwise it gets `403 key_not_supported`.
+
+Too many requests, or too many Builds already in progress for the environment, return `429 rate_limit_exceeded`. A `503 upstream_error` means Cursor couldn't confirm whether the Build started. Don't retry automatically, because another request can start a second Build. Check [List Environment Builds](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-environment-builds) before deciding what to do.
+
+#### Path Parameters
+
+`id` string
+
+Environment ID.
+
+#### Request Body
+
+Optional. Send no body, or `{}`, for a non-draft Build of every repository's default branch.
+
+`draft` boolean (optional)
+
+`true` for a draft Build, which agents don't start from until it's activated. Default: `false`, a Build that agents start from once it succeeds.
+
+`refs` array (optional)
+
+Branches to build instead of the default branches. Each entry has a `repoUrl`, one of the environment's repositories, and a `ref`, the branch name. Repositories without an entry build their default branch, and a `ref` that names the default branch counts as no entry. Any other branch requires `draft: true`. Without it, and for a repository that isn't in the environment or a second `ref` for the same repository, the request returns `400 validation_error`. Cursor doesn't check that the branch exists, so a missing branch fails the Build, not the request.
+
+#### Response Fields
+
+`id` string
+
+ID of the new Build.
+
+`environmentId` string
+
+Environment ID.
+
+```bash
+curl --request POST \
+  --url https://api.cursor.com/v1/environments/8f14e45f-ceea-4e6b-9c3a-1d2e3f4a5b6c/builds \
+  -u YOUR_API_KEY:
+```
+
+**Response:** `202`
+
+```json
+{
+  "id": "bld-20261020-0f2a6c1e-3b7d-4e59-9a41-8c2d7e6f5a10",
+  "environmentId": "8f14e45f-ceea-4e6b-9c3a-1d2e3f4a5b6c"
+}
+```
+
+Start a draft Build of a feature branch:
+
+```bash
+curl --request POST \
+  --url https://api.cursor.com/v1/environments/8f14e45f-ceea-4e6b-9c3a-1d2e3f4a5b6c/builds \
+  -u YOUR_API_KEY: \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "draft": true,
+    "refs": [
+      { "repoUrl": "https://github.com/your-org/your-web-app", "ref": "feature/new-checkout" }
+    ]
+  }'
 ```
 
 ### Get An Environment Build
@@ -1453,13 +1698,37 @@ ID of the environment the Build belongs to.
 
 What started the Build: `RECURRING` for a scheduled Build, `CONFIG_CHANGE` after a configuration or secrets change, or `MANUAL` for one started on request.
 
+`source` string
+
+Where the Build was started from: `SYSTEM` (Cursor on its own), `WEBSITE` (the dashboard), `API`, or `AGENT` (a cloud agent).
+
 `draft` boolean
 
 `true` for a draft Build. Agents don't start from a draft Build until it's activated.
 
 `failure` object (optional)
 
-Why a failed Build failed. `type` is `INSTALL_FAILED` when the `install` command failed, or `TERMINAL_FAILURE` for other failures. `code`, when present, is a machine-readable cause such as `environment_json_invalid`.
+Why a failed Build failed. `type` is `INSTALL_FAILED` when the `install` command failed, or `TERMINAL_FAILURE` for other failures. `code`, when present, is a machine-readable cause such as `environment_json_invalid`. Other codes include:
+
+- `bitbucket_server_not_enabled` - The environment includes a Bitbucket Server repository, which Cloud Agents can't use on this team.
+- `origin_not_enabled` - The environment includes an [Origin](https://cursor.com/docs/origin.md) repository, which Cloud Agents can't use on this team.
+- `repo_url_invalid` - A repository URL in the environment isn't in a supported format.
+- `snapshot_installation_missing` - Cursor couldn't find the source control app installation that grants access to the environment's repository.
+- `dockerfile_contents_not_enabled` - The environment sets `build.dockerfileContents`, which isn't available for your team.
+
+Cursor can add codes over time. Treat a code you don't recognize as a generic failure.
+
+`requestedRefs` array
+
+Each entry has a repository's `repoUrl` and the branch, tag, or commit (`ref`) the Build was asked to use instead of its default branch. Repositories without an entry use their default branch.
+
+`repoCommits` array
+
+Repository commits returned for the Build, when available. Each entry has `repoUrl` and `commitSha`. In both arrays, an API key limited to certain repositories sees only entries inside its limit.
+
+`snapshotState` string (optional)
+
+State of the Build's snapshot: `ACTIVE`, `REAP_REQUESTED`, or `DELETED`. Omitted if the Build didn't create a snapshot.
 
 `createdAt`, `updatedAt` string
 
@@ -1483,7 +1752,20 @@ curl --request GET \
   "environmentId": "8f14e45f-ceea-4e6b-9c3a-1d2e3f4a5b6c",
   "status": "SUCCEEDED",
   "trigger": "RECURRING",
+  "source": "SYSTEM",
   "draft": false,
+  "requestedRefs": [],
+  "repoCommits": [
+    {
+      "repoUrl": "https://github.com/your-org/your-web-app",
+      "commitSha": "06b7d943cd0e7ea353ca932d5cdea8987b8e8105"
+    },
+    {
+      "repoUrl": "https://github.com/your-org/your-api",
+      "commitSha": "1dcf04d09d11d33343ae4758346ce1b61de676ed"
+    }
+  ],
+  "snapshotState": "ACTIVE",
   "createdAt": "2026-09-30T09:00:00.000Z",
   "updatedAt": "2026-09-30T09:12:00.000Z",
   "completedAt": "2026-09-30T09:12:00.000Z"
@@ -1531,10 +1813,10 @@ curl --request GET \
 
 ## Secrets
 
-Secrets are the environment variables Cursor gives cloud agents, the values you also manage in the **Secrets** tab of the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents). The secrets endpoints cover the secrets that belong to one environment and the secrets that belong to your team. To choose a type for a secret, see [Secret protection](https://cursor.com/docs/cloud-agent/security-network.md#secret-protection).
+Secrets are the environment variables Cursor gives cloud agents, the values you also manage in the **Secrets** tab of the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents). The secrets endpoints cover the secrets that belong to one environment, the secrets that belong to your team, and your personal secrets. To choose a type for a secret, see [Secret protection](https://cursor.com/docs/cloud-agent/security-network.md#secret-protection).
 
 - **Responses never include values.** They list names, types, and repositories.
-- **A name can have versions for different repositories.** An environment or team can hold one name several times, each version for repositories the others don't cover. Each version is listed separately and has its own `id`.
+- **A name can have versions for different repositories.** An environment, a team, or a user can hold one name several times, each version for repositories the others don't cover. Each version is listed separately and has its own `id`.
 - **Use a user API key, an agent-scoped service account API key, or a user-scoped token.** Each works within one team: a user API key in its user's default team, a user-scoped token in the team that minted it, and a service account API key in its own team. User-scoped tokens come from [Create A User-Scoped Worker Token](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-a-user-scoped-worker-token). Team API keys and automation webhook API keys aren't supported, and API keys that start with `grok_` get `403 key_not_supported`.
 
 #### Secret Versions
@@ -2102,6 +2384,145 @@ Name of the deleted secret.
 ```bash
 curl --request DELETE \
   --url https://api.cursor.com/v1/team/secrets/NPM_TOKEN \
+  -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "name": "NPM_TOKEN"
+}
+```
+
+### Set A Personal Secret
+
+PUT
+
+`/v1/me/secrets/{name}`
+
+Create a personal secret for the user your API key acts for, rotate its value, or change its type or repositories. Every request sends the value, and the response is the [secret version](https://cursor.com/docs/cloud-agent/api/endpoints.md#secret-versions) without it.
+
+Which version the request changes:
+
+- **With `?id=`**, it changes the version with that `id`, from your personal secrets list (`GET /v1/secrets?scope=user`). An `id` that isn't a version of this name among your personal secrets returns `404 secret_not_found`.
+- **Without `?id=`**, a name with no version gets one, and the response is `201`. A name with one version has it changed in place, and the response is `200`. A name with several versions returns `409 secret_name_ambiguous`, listing each version's `id` and `repos`, so you can pass one as `?id=`.
+
+A `PUT` never adds a second version to a name that already has one. To give a name a version for other repositories, use the dashboard.
+
+When you omit `type` or `repos`, the version keeps its current one, so rotating a value never changes its type or widens its repositories. Send `repos: []` to give the version every repository. New `repos` that overlap another version of the name return `409 secret_scope_conflict`, and so does `repos: []` while the name has other versions. A user holds at most 1,000 personal secrets, and creating one more returns `409 secret_limit_reached`.
+
+Build Secrets can't be set or changed; either returns `400 validation_error`. `DELETE` can remove one.
+
+Who can set personal secrets:
+
+- **A user API key or user-scoped token** sets its own user's personal secrets. Team admins can't set other members' personal secrets.
+- **A service account API key** gets `403 user_required`, because it doesn't act for a user.
+- **A user-scoped token minted by an API key limited to certain repositories** gets `403 repository_access`, because personal secrets reach every repository.
+- **When the team your API key works in has turned off personal secrets**, setting one returns `403 personal_secrets_disabled`. [Deleting one](https://cursor.com/docs/cloud-agent/api/endpoints.md#delete-a-personal-secret) still works.
+
+#### Path Parameters
+
+`name` string
+
+Secret name, as agents see it: letters, digits, and underscores, not starting with a digit, and at most 255 characters. Names that contain `CURSOR_SANDBOX` are reserved, and so are `HTTP_PROXY`, `HTTPS_PROXY`, and `ALL_PROXY` in any letter case.
+
+Names that differ only in letter case count as the same name. Creating `npm_token` when you have `NPM_TOKEN` returns `409 secret_name_conflict`.
+
+#### Query Parameters
+
+`id` string (optional)
+
+The `id` of the version to change, from your personal secrets list or from a `409 secret_name_ambiguous` response.
+
+#### Request Body
+
+`value` string (required)
+
+The secret's value, 1 to 4,096 bytes of UTF-8 text.
+
+`type` string (optional)
+
+`runtime_secret` or `environment_variable`. A new version defaults to `runtime_secret`. A change without `type` keeps the version's type.
+
+`repos` array of strings (optional)
+
+The only repositories that get this version, up to 100. An empty array, or omitting `repos` on a new version, gives it every repository. A change without `repos` keeps the version's repositories.
+
+Each entry names a repository: `acme/api`, a URL such as `https://github.com/acme/api.git` or `git@github.com:acme/api.git`, or another host's path such as `gitlab.com/group/subgroup/project`.
+
+#### Response Fields
+
+The [secret version](https://cursor.com/docs/cloud-agent/api/endpoints.md#secret-versions) the request created or changed. A `201` can leave out `id` and `createdAt`.
+
+```bash
+curl --request PUT \
+  --url https://api.cursor.com/v1/me/secrets/NPM_TOKEN \
+  -u YOUR_API_KEY: \
+  --header 'Content-Type: application/json' \
+  --data '{"value": "npm_example_token"}'
+```
+
+**Response:** `201`
+
+```json
+{
+  "id": "secv_Pk6nV3yH8rT1wQ4zM9cX2b",
+  "name": "NPM_TOKEN",
+  "type": "runtime_secret",
+  "repos": [],
+  "createdAt": "2026-10-04T14:02:11.000Z"
+}
+```
+
+Change one version of a name that has several, using its `id` from your personal secrets list:
+
+```bash
+curl --request PUT \
+  --url 'https://api.cursor.com/v1/me/secrets/NPM_TOKEN?id=secv_Pk6nV3yH8rT1wQ4zM9cX2b' \
+  -u YOUR_API_KEY: \
+  --header 'Content-Type: application/json' \
+  --data '{"value": "npm_rotated_token"}'
+```
+
+### Delete A Personal Secret
+
+DELETE
+
+`/v1/me/secrets/{name}`
+
+Delete one version of a personal secret of the user your API key acts for. This action is irreversible. Agents that start afterward stop getting this version.
+
+Which version the request deletes:
+
+- **With `?id=`**, it deletes the version with that `id`, from your personal secrets list (`GET /v1/secrets?scope=user`). An `id` that isn't a version of this name among your personal secrets returns `404 secret_not_found`.
+- **Without `?id=`**, a name with one version has it deleted. A name with no version returns `404 secret_not_found`, and a name with several versions returns `409 secret_name_ambiguous`, listing each version's `id` and `repos`, and deletes nothing.
+
+`{name}` must match a listed name exactly, letter case included, so a request for `NPM_TOKEN` never deletes `npm_token`.
+
+Who can delete personal secrets follows the same rules as setting them: a user API key or user-scoped token deletes only its own user's personal secrets. A service account API key gets `403 user_required`, and a user-scoped token minted by an API key limited to certain repositories gets `403 repository_access`.
+
+#### Path Parameters
+
+`name` string
+
+Secret name, exactly as your personal secrets list shows it.
+
+#### Query Parameters
+
+`id` string (optional)
+
+The `id` of the version to delete, from your personal secrets list or from a `409 secret_name_ambiguous` response.
+
+#### Response Fields
+
+`name` string
+
+Name of the deleted secret.
+
+```bash
+curl --request DELETE \
+  --url https://api.cursor.com/v1/me/secrets/NPM_TOKEN \
   -u YOUR_API_KEY:
 ```
 
@@ -3136,6 +3557,8 @@ GET
 List GitHub repositories accessible to the authenticated user through Cursor's GitHub App installation.
 
 This endpoint returns GitHub repositories only. Repositories on GitLab, Bitbucket Cloud, and Azure DevOps are not listed here, even though you can create agents against them with [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent).
+
+GitHub Enterprise Server repositories aren't listed either. Service account API keys always get an empty list, because the endpoint reads the caller's personal GitHub connection. In both cases, create the agent with the repository URL.
 
 **This endpoint has very strict rate limits.**
 

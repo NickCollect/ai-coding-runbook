@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security
-fetched_at: 2026-10-19T05:32:43.995964+00:00
+fetched_at: 2026-10-26T05:39:59.713993+00:00
 fetch_method: mintlify_md
 ---
 
@@ -82,7 +82,7 @@ The layers that contain this risk:
 - **Redacted runtime secrets.** Mark secrets as [Runtime Secrets](https://cursor.com/docs/cloud-agent/security-network.md#runtime-secrets) so their values are stripped from the transcript, tool output, and commits and never reach the model.
 - **File exclusion.** Add sensitive paths to [`.cursorignore`](https://cursor.com/docs/reference/ignore-file.md) to keep them out of the agent's context.
 - **Human-in-the-loop handoff.** Agents open draft pull requests. Nothing merges until a person reviews the change.
-- **Signed commits.** Every agent commit is signed with an HSM-backed Ed25519 key and shows a "Verified" badge, so agent-authored changes are attributable and can satisfy signed-commit branch protection. See [Signed commits](https://cursor.com/docs/cloud-agent/security-network.md#signed-commits).
+- **Signed commits.** Every agent commit is signed with an HSM-backed Ed25519 key and shows a "Verified" badge on GitHub, so agent-authored changes are attributable and can satisfy signed-commit branch protection. See [Signed commits](https://cursor.com/docs/cloud-agent/security-network.md#signed-commits).
 
 For deeper defense, pair these with [hooks](https://cursor.com/docs/hooks.md) to enforce policy and log activity at agent lifecycle points, and have [Bugbot](https://cursor.com/docs/bugbot.md) or [Security Agents](https://cursor.com/docs/security-agents.md) review agent output before it ships.
 

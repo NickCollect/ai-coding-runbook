@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/choose-runtime
-fetched_at: 2026-10-05T06:27:19.971225+00:00
+fetched_at: 2026-10-26T05:39:59.759768+00:00
 fetch_method: mintlify_md
 ---
 
@@ -9,6 +9,8 @@ fetch_method: mintlify_md
 Cursor-hosted Cloud Agents run each agent in an isolated cloud VM with managed lifecycle, saved environments, artifact capture, and dashboard controls for secrets and network access.
 
 [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md) runs tool calls on hardware you control through [My Machines](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md) or [Team Pools](https://cursor.com/docs/cloud-agent/self-hosted/pool.md). The agent loop still runs in Cursor's cloud.
+
+Cursor-hosted VMs run on x86\_64 (amd64). For arm64, run a self-hosted worker on arm64 hardware with My Machines or a Team Pool.
 
 ## Self-hosted or Cursor-hosted: which is right for you?
 

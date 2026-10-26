@@ -1,12 +1,86 @@
 ---
 source_url: https://cursor.com/docs/cli/changelog
-fetched_at: 2026-10-12T06:49:40.578730+00:00
+fetched_at: 2026-10-26T05:39:59.258184+00:00
 fetch_method: mintlify_md
 ---
 
 # Cursor CLI changelog
 
 The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent --version` to check your installed version, and `agent update` to upgrade in place.
+
+## v2026.10.22
+
+### Cloud Agent environments
+
+- **Update an existing environment with `agent env deploy --env`.** Pass `--env <id>`, using the public ID that `agent env list` shows, to redeploy an environment file onto an existing Cloud Agent environment. The environment keeps its name and repositories, so `--repo` becomes optional. If `--name`, `--repo`, or `--scm-repo-node-id` don't match the stored environment, the command stops with an error that explains the mismatch.
+
+### Self-hosted workers
+
+- **Self-hosted workers run under the team you selected.** `agent worker start` and `agent worker debug` now register and check the worker under the team you picked at `agent login` or with `agent team switch`, instead of your account's default team. If that team doesn't allow you to use Cloud Agents, the worker exits with a message naming the team and suggesting `agent team switch`.
+- **Fixes to self-hosted workers.** Workers sharing a machine no longer fail to start the editor server when another worker is running an older build of it, and workers answer editor connections right away while that server downloads instead of hanging. Connections a worker can't serve now fail immediately, backend connections no longer drop when the machine is busy, and the first turn of a session no longer misses the skills of the person who started it.
+
+### Subagents
+
+- &#x20;**Custom subagents no longer fail when their model can't run.** When a custom subagent is pinned to a model your team's admin settings block, that requires Max Mode, or isn't available, it now runs on the parent agent's model instead of erroring out. The subagent's result notes which model it ran on, so the agent knows the pinned model was skipped. See [when the configured model won't be used](https://cursor.com/docs/subagents.md#when-the-configured-model-wont-be-used).
+- **Composer 2.5 subagents run and bill at the speed you picked.** Subagents set to Composer 2.5 now run and are billed at standard speed instead of the fast tier. Subagents on Composer 2.5 Fast run at fast speed without failing with an "Unknown model ID" error.
+- **Fixes to subagents.** When the agent waits on a subagent that failed or was stopped, it now sees the failure instead of treating the subagent as finished.
+
+### Rules
+
+- **Nested `AGENTS.md` rules now apply when the agent edits a file.** When the agent edits or creates a file in a subdirectory, it now sees that directory's [`AGENTS.md`](https://cursor.com/docs/rules.md#agentsmd) and nested always-apply rules, even if it never read a file there first. Each rule is shown once per conversation, and glob-scoped and root rules behave as before.
+
+### Fixes
+
+- **Fixes to background summarization.** Long agent sessions now keep summaries computed in the background instead of discarding them and summarizing again.
+- **Fixes to tool call display.** Edit, shell, and task tool calls now show as started while the agent is still writing them.
+- **Fixes to agent image generation and web fetch.** Image generation prompts written in Chinese, Japanese, Thai, and similar scripts are no longer rejected as too short. Web fetch no longer fails on long pages when the cutoff lands inside an emoji, and video generation now explains why it couldn't read an input image.
+- **Fixes to Auto-review.** Auto-review of MCP tool calls now sees the tool's input schema when the server sends it as a JSON string.
+- **Fixes to MCP servers.** A single invalid tool or a tool schema without a type no longer hides the rest of an MCP server's tools, and a server that fails to list its tools now reports an error to the agent.
+- **Fixes to Windows.** Shell commands the agent runs in PowerShell now use UTF-8, so non-ASCII output no longer appears garbled. Staged updates are no longer held back by leftover markers from crashed or killed processes, and the background update check no longer flashes console windows.
+
+## v2026.10.17
+
+### Hooks and subagents
+
+- **Post-tool hooks now fire for subagents.** [`postToolUse`](https://cursor.com/docs/hooks.md#posttooluse) and `postToolUseFailure` hooks that match the `Task` tool now run when a subagent finishes or fails. Before, only `preToolUse` fired for subagents. Any `additional_context` a hook returns now reaches the main agent, and Claude Code `PostToolUse` matchers for `Task` work too.
+- **Hooks in subagents get the right transcript.** Subagent transcripts are now saved inside the parent conversation's folder, under `agent-transcripts/<parent>/subagents/`. Hooks that run inside a subagent now receive that file as [`transcript_path`](https://cursor.com/docs/hooks.md#common-schema) and `CURSOR_TRANSCRIPT_PATH`.
+
+### Self-hosted workers
+
+- **Health checks track self-hosted workers through shutdown.** On a worker started with `--management-addr`, [`/readyz`](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#monitoring) now keeps answering while the worker shuts down, returning 503 with `draining: true` so orchestrators stop sending it work. The worker now fails to start if it can't bind the management address after a few retries, instead of running without health checks. Pool workers also exit after dropping a stale claim, so your host can replace them.
+- **Fixes to self-hosted workers.** Workers running `agent worker` no longer drop their connection when heavy local builds stall the machine for a few seconds, and no longer exit mid-session when briefly offered another agent. Closing the terminal or losing the SSH session now shuts the worker down cleanly, and a worker that is shutting down refuses new runs instead of accepting one it can't finish.
+
+### Agent
+
+- **Fixed unanswered approvals being reported as cancelled.** If you send a new message while a tool call is still waiting for your approval, the agent no longer tells you that you interrupted or cancelled it. Tool calls that already finished before a pause also no longer run a second time when the agent resumes.
+
+### Rules
+
+- **Fixes to rule matching on Windows.** Nested `AGENTS.md` files, [rules](https://cursor.com/docs/rules.md), and skills now apply on Windows even when the workspace path and rule path differ only in drive-letter case.
+
+## v2026.10.15
+
+### Agent tools
+
+- **Grep and Glob search folders outside the workspace.** When the agent asks to search a folder outside your open workspace, Grep and Glob now search that folder. Before, they quietly searched the workspace instead and returned results from the wrong place. `.cursorignore` and Read deny rules still apply to files outside the workspace, and Glob now says when its results were cut off.
+
+### Cloud Agents
+
+- **`agent env` commands work with your personal environments and public IDs.** `agent env get <repoUrl>` now shows your saved [personal environments](https://cursor.com/docs/cloud-agent/setup.md#environment-resolution-order) for that repo, each with its `environment.json`, and `agent env list` shows each environment's public ID first, also in JSON output. `agent env delete` takes that public ID and explains what to pass if you use an old numeric ID. `agent env get` no longer takes `--ref`.
+
+### Self-hosted workers
+
+- **Give slow MCP servers more time on self-hosted workers.** Use the repeatable `agent worker --mcp-tool-timeout server=seconds` or `server/tool=seconds` option to raise or lower how long a stdio [MCP](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md#mcp-servers) tool call can run, instead of the fixed 60 seconds. Workers also respect a stdio MCP server's `startupTimeoutSec`, so servers that start slowly are no longer cut off after 90 seconds.
+- **Windows workers explain when Git Bash is missing.** On Windows, `agent worker start` now exits with a message saying the worker requires Git for Windows, including Git Bash, and where to install it, instead of failing later. The same message is appended to `%LOCALAPPDATA%\cursor-agent\worker-startup.log`, and `agent worker --help` lists the requirement.
+
+### Fixes
+
+- **Fixes to agent search, read, edit, and shell tools.** Searches that time out now keep partial results, and invalid regexes or empty patterns get clear errors instead of matching everything. Reads with huge offsets no longer end the session, and edits no longer silently change only the first of several overlapping matches. Shell output no longer runs stdout and stderr lines together, and waiting on a background command tracks it instead of sleeping the full timeout.
+- **Fixes to subagents.** When a subagent fails, the agent now sees the subagent's ID and the reason it failed, not a generic error. Subagents asked to use a model name with an extra `cursor-` prefix or a `-fast` suffix that doesn't exist now run the requested model instead of erroring or switching to Composer. Resuming a failed subagent keeps its original type and model.
+- **Fixes to long sessions, memory, and summarization.** Long sessions use less memory: very long todo lists and turns that end during a background summary no longer bloat the agent, and turns no longer fail if summarization can't start near the context limit. Context usage after a summary is more accurate, oversized web search results and runaway tool-call streams no longer overflow the context, and stopping an agent keeps tool results that had already returned.
+- **Fixes to self-hosted workers.** Workers no longer time out agent claims when the agent store is slow to open, and they keep recognizing a running Cursor server after the process that launched it exits. A worker also no longer fails when another worker on the same machine installs the same server build while it is downloading.
+- **Fixes to hooks and shell commands on Windows.** Hooks that fail or point at a command that can't be found are now reported as failed instead of silently succeeding. The agent also no longer tries to use tmux for shell commands on Windows.
+- **Fixes to file suggestions, archived agents, and local addresses.** Running the CLI from your home folder on macOS no longer triggers permission prompts for protected folders like Desktop, Documents, or Library when building `@` file suggestions. Messaging an archived agent now says so clearly instead of showing a generic not-found error, and unrelated errors that mention "archived" are no longer misreported. IPv6 hosts such as `[::1]` are now recognized as loopback, and the full link-local range is treated as private.
 
 ## v2026.10.08
 
@@ -25,11 +99,13 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 ### ACP
 
 - **ACP clients now get wakeups from watched background shells.** In [ACP](https://cursor.com/docs/cli/acp.md) mode, when the agent starts a background shell that watches for output, the prompt now stays open and the agent wakes up and responds whenever the output matches. Previously the agent said it would be notified, but the wakeup never arrived. While the prompt waits, the client shows an in-progress `Watching: <reason>` tool call. Cancelling the prompt or sending a new one ends the wait without stopping the shell.
+- **ACP sessions no longer keep running under your old team after you switch teams.** If you switch teams while the [ACP](https://cursor.com/docs/cli/acp.md) server is running, `session/new`, `session/load`, and `session/prompt` requests now fail with `Your team has switched to <team>. Create a new session to continue.` and the server exits. Before, it kept working under the team it started with.
 
 ### Self-hosted workers
 
 - **Any-repo pool agents now work inside the repo they claimed.** On a worker started with [`--clone-git-repos`](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools), an agent's tools, shells, rules, skills, and subagents now run in the checkout cloned or reused for its claim, then go back to the worker directory when the claim ends. The worker also clones fresh instead of reusing a checkout that has untracked rules, skills, or `AGENTS.md` files an earlier agent may have left there, and the worker log lists the files that blocked reuse.
 - **Self-hosted workers stop when they register too many repositories.** When Cursor refuses an `agent worker` because it registers more repositories than a worker allows, the worker now exits with a message giving the count, the limit, and how many repository folders to remove before starting it again, instead of reconnecting endlessly.
+- &#x20;**Verify who a claimed run is for before you provision it.** `agent worker controller --identity-audience <aud>` asks each claim for a short-lived signed [identity token](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#identity-tokens) bound to your audience and a fresh nonce. Your `--spawn` hook receives `CURSOR_IDENTITY_TOKEN`, `CURSOR_IDENTITY_TOKEN_EXPIRES_AT`, and `CURSOR_IDENTITY_NONCE`, so the hook can check the agent and its owner before it creates a machine or hands out credentials. If a claim comes back without a token, the controller releases the claim and exits. The flag works in claim mode only and can't be combined with `--warm-idle`.
 
 ### Cloud Agents
 
@@ -42,6 +118,7 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 - **Fixes to MCP tools.** MCP sign-in no longer fails when another Cursor app is already using the login callback port. The agent now refreshes a server's tool list when a tool seems to be missing. When a tool doesn't exist, the error now lists the tools the agent can call.
 - **Fixes to self-hosted workers.** Workers no longer drop their connection while uploading large messages on slow links, report themselves ready before the server accepts them, or delete git credentials another worker pushed on the same machine. Existing checkouts are no longer refused because of system or global git config, and stopping a worker now prints the reason. Agent stores you removed stay removed after a restart, and a store that hangs while closing reopens on the next claim.
 - **Fixes to long sessions and summarization.** Sessions that hit the context limit now summarize and continue instead of getting stuck, and your latest request is kept word for word after summarization. Debug mode no longer fails a turn after the conversation is summarized, and images attached to a message queued during an interrupted turn are now sent on the next turn.
+- **Agent store sync keeps working after you switch teams.** Local agent stores no longer fail to sync after you change your active team, as long as you are still a member of the team that owns the store.
 
 ## v2026.09.28
 
