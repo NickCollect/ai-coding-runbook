@@ -1,44 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=tr
-fetched_at: 2026-10-19T05:46:08.052883+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=id
+fetched_at: 2026-10-26T05:44:54.685115+00:00
 title: "Veo 2.0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
+Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Geri bildirim gönderin
+Kirim masukan
 
 # Veo 2.0
 
-Üretime hazır iş akışlarında tutarlı performans sağlayan sağlam ve güvenilir sabit video üretme modelimiz. Veo 2.0, standart 1080p içerik oluşturma, sosyal medya öğeleri ve güvenilir karakter tutarlılığı ile öngörülebilir bir saniyeden kısa sürede üretim hızına öncelik veren yüksek hacimli video görevleri için en uygun seçenektir.
+Model pembuatan video stabil kami yang tangguh dan andal, memberikan performa yang konsisten untuk alur kerja siap produksi. Veo 2.0 paling cocok untuk pembuatan konten 1080p standar, aset media sosial, dan tugas video bervolume tinggi yang memprioritaskan konsistensi karakter yang andal dan kecepatan pembuatan sub-detik yang dapat diprediksi.
 
-## Belgeler
+## Dokumentasi
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Video oluşturma](https://ai.google.dev/gemini-api/docs/video?hl=tr) sayfasını ziyaret edin.
+Buka halaman [Pembuatan video](https://ai.google.dev/gemini-api/docs/video?hl=id) untuk mengetahui cakupan lengkap fitur dan kemampuan.
 
 ## veo-2.0-generate-001
 
-| Mülk | Açıklama |
+| Properti | Deskripsi |
 | --- | --- |
-| id\_cardModel kodu | **Gemini API**  `veo-2.0-generate-001` |
-| saveDesteklenen veri türleri | **Giriş**  Metin, resim  **Çıkış**  Video |
-| token\_autoSınırlar | **Metin girişi**  Yok  **Resim girişi**  Dosya boyutu 20 MB'a kadar olan tüm görüntü çözünürlükleri ve en boy oranları  **Çıkış videosu**  2'ye kadar |
-| calendar\_monthSon güncelleme | Nisan 2025 |
+| id\_cardKode model | **Gemini API**  `veo-2.0-generate-001` |
+| saveJenis data yang didukung | **Input**  Teks, gambar  **Output**  Video |
+| token\_autoLimits | **Input teks**  T/A  **Input gambar**  Resolusi dan rasio aspek gambar apa pun hingga ukuran file 20 MB  **Video output**  Maksimal 2 |
+| calendar\_monthPembaruan terbaru | April 2025 |
 
-Geri bildirim gönderin
+Kirim masukan
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Son güncelleme tarihi: 2026-09-07 UTC.
+Terakhir diperbarui pada 2026-10-19 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Ada masukan untuk kami?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-07 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-19 UTC."],[],[]]

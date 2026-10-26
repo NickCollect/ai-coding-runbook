@@ -1,80 +1,91 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=ja
-fetched_at: 2026-10-19T05:36:47.480347+00:00
-title: "Google AI Studio \u306e\u30af\u30a4\u30c3\u30af\u30b9\u30bf\u30fc\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=zh-CN
+fetched_at: 2026-10-26T05:44:28.252466+00:00
+title: "Google AI Studio \u5feb\u901f\u5165\u95e8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-フィードバックを送信
+发送反馈
 
-# Google AI Studio のクイックスタート
+# Google AI Studio 快速入门
 
-[Google AI Studio](https://aistudio.google.com/?hl=ja) を使用すると、さまざまなプロンプトでモデルを簡単に試すことができます。構築の準備ができたら、[Get code] を選択し、好みのプログラミング言語で [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=ja) の使用を開始できます。
+[Google AI Studio](https://aistudio.google.com/?hl=zh-cn) 让您可以快速尝试
+各种模型，使用不同的提示进行试验。准备好构建后，您
+可以选择“获取代码”和首选编程语言，以
+使用 [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=zh-cn)。
 
-## プロンプトと設定
+## 提示和设置
 
-Google AI Studio には、さまざまなユースケース向けに設計されたプロンプト用のインターフェースが複数用意されています。このガイドでは、会話機能の構築に使用される**チャット プロンプト**について説明します。このプロンプト技法では、複数の入力とレスポンスのターンを使用して出力を生成できます。詳しくは、[以下のチャット プロンプトの例](#chat_example)をご覧ください。他にも、**リアルタイム ストリーミング**、**動画生成**などのオプションがあります。
+Google AI Studio 提供了多个提示界面，这些界面专为不同的使用场景而设计。本指南介绍了用于打造
+对话式体验的**聊天提示**。这种提示技术允许多次输入
+和响应，以生成输出。您可以参阅下面的
+[聊天提示示例了解详情](#chat_example)。
+其他选项包括**实时流式传输**、**视频生成**等
+。
 
-AI Studio には、**実行設定**パネルもあります。このパネルでは、[モデル パラメータ](https://ai.google.dev/docs/prompting-strategies?hl=ja#model-parameters)、[安全設定](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ja)を調整したり、[構造化された出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)、[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)、[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)、[グラウンディング](https://ai.google.dev/gemini-api/docs/grounding?hl=ja)などのツールを切り替えたりできます。
+AI Studio 还提供了 **运行设置** 面板，您可以在其中调整 [模型参数](https://ai.google.dev/docs/prompting-strategies?hl=zh-cn#model-parameters)、[安全设置](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn)，以及开启 [结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)、[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)、[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)和 [接地](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-cn)等工具。
 
-## チャット プロンプトの例: カスタム チャット アプリケーションを作成する
+## 聊天提示示例：构建自定义聊天应用
 
-[Gemini](https://gemini.google.com/?hl=ja) などの汎用 chatbot を使用したことがある場合は、生成 AI モデルがオープンエンドのダイアログにどれほど強力であるかを直接体験したことがあるでしょう。汎用チャットボットは便利ですが、特定のユースケースに合わせて調整する必要があることがよくあります。
+如果您使用过
+[Gemini](https://gemini.google.com/?hl=zh-cn)等通用聊天机器人，那么您一定亲身体验过
+生成式 AI 模型在开放式对话中的强大功能。虽然这些通用聊天机器人很有用，但通常需要针对特定使用场景进行定制。
 
-たとえば、自社製品に関する会話のみをサポートするカスタマー サービス chatbot を構築するとします。特定のトーンやスタイルで話す chatbot を作成したい場合があります。たとえば、ジョークをたくさん言う bot、詩人のように韻を踏む bot、回答に絵文字をたくさん使う bot などです。
+例如，您可能想要构建一个客户服务聊天机器人，该机器人仅支持有关公司产品的对话。您可能想要构建一个以特定语气或风格说话的聊天机器人：一个会讲很多笑话、像诗人一样押韵或在回答中使用大量表情符号的机器人。
 
-この例では、Google AI Studio を使用して、木星の衛星の 1 つであるエウロパに住むエイリアンのように会話するフレンドリーなチャットボットを構築する方法を示します。
+此示例向您展示了如何使用 Google AI Studio 构建一个友好的聊天机器人，该机器人会像居住在木星卫星欧罗巴上的外星人一样进行交流。
 
-### ステップ 1 - チャット プロンプトを作成する
+### 第 1 步 - 创建聊天提示
 
-chatbot を構築するには、ユーザーと chatbot の間のやり取りの例を提供して、モデルが求める回答を提供できるようにする必要があります。
+如需构建聊天机器人，您需要提供用户与聊天机器人之间互动的示例，以引导模型提供您所需的响应。
 
-チャット プロンプトを作成するには:
+如需创建聊天提示，请执行以下操作：
 
-1. [Google AI Studio](https://aistudio.google.com/?hl=ja) を開きます。**Playground** は、新しいチャット プロンプトとともにデフォルトで開きます。
-2. 右上にある [**実行設定**] tune をクリックしてパネルを開き、[[**システム指示**](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#system-instructions)] 入力フィールドを見つけます。次の内容をテキスト入力フィールドに貼り付けます。
+1. 打开 [Google AI Studio](https://aistudio.google.com/?hl=zh-cn)。默认情况下，**游乐场** 会打开并显示新的聊天提示。
+2. 点击右上角的**运行设置** tune以展开面板，然后找到[**系统指令**](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#system-instructions)输入字段。将以下内容粘贴到文本输入字段中：
 
    ```
    You are an alien that lives on Europa, one of Jupiter's moons.
    ```
 
-システム指示を追加したら、モデルとチャットしてアプリケーションのテストを開始します。
+添加系统指令后，通过与模型聊天来开始测试您的应用：
 
-1. [**Type something...**] とラベルの付いたテキスト入力ボックスに、ユーザーがする可能性のある質問や観察結果を入力します。次に例を示します。
+1. 在标有**输入内容...**的文本输入框中，输入用户可能会提出的问题或
+   意见。例如：
 
-   **ユーザー:**
+   **用户**：
 
    ```
    What's the weather like?
    ```
-2. [**実行**] ボタンをクリックして、chatbot からレスポンスを取得します。レスポンスは次のようになります。
+2. 点击**运行** 按钮以获取聊天机器人的响应。此响应可能类似于以下内容：
 
-   **モデル:**
+   **模型**：
 
    ```
    Ah, a query about the flows and states upon Europa! You speak of "weather,"
    yes? A curious concept from worlds with thick gas veils...
    ```
 
-   （gemini-2.5-pro）
+   (gemini-2.5-pro)
 
-### ステップ 2 - ボットのチャット機能を強化する
+### 第 2 步 - 教您的机器人更好地聊天
 
-1 つの指示で、基本的なエウロパのエイリアン チャットボットを作成できました。ただし、1 つの指示だけでは、モデルのレスポンスの一貫性と品質を確保するのに十分でない場合があります。具体的な指示がないと、天気に関する質問に対するモデルの回答は非常に長くなる傾向があり、独自の解釈が加わる可能性があります。
+通过提供一条指令，您就能够构建一个基本的欧罗巴外星人聊天机器人。但是，一条指令可能不足以确保模型响应的一致性和质量。如果没有更具体的指令，模型对有关天气的问题的响应往往会很长，并且可能会自行其是。
 
-システム指示に追加して、chatbot のトーンをカスタマイズします。
+通过向系统指令添加内容来自定义聊天机器人的语气：
 
-1. 新しいチャット プロンプトを開始するか、同じプロンプトを使用します。システム指示は、チャット セッションの開始後に変更できます。
-2. [**システム指示**] セクションで、既存の指示を次のように変更します。
+1. 开始新的聊天提示，或使用相同的聊天提示。聊天会话开始后，系统指令可以修改。
+2. 在**系统指令** 部分中，将您已有的指令更改为以下内容：
 
    ```
    You are Tim, an alien that lives on Europa, one of Jupiter's moons.
@@ -82,9 +93,10 @@ chatbot を構築するには、ユーザーと chatbot の間のやり取りの
    Keep your answers under 3 paragraphs long, and use an upbeat, chipper tone
    in your answers.
    ```
-3. 質問（`What's the weather like?`）を再入力し、[**実行**] ボタンをクリックします。新しいチャットを開始していない場合、回答は次のようになります。
+3. 重新输入您的问题（`What's the weather like?`），然后点击**运行**
+   按钮。如果您没有开始新的聊天，您的响应可能如下所示：
 
-   **モデル:**
+   **模型**：
 
    ```
    Oh, hello again! Still curious about the flows and states, are we? Wonderful!
@@ -93,25 +105,27 @@ chatbot を構築するには、ユーザーと chatbot の間のやり取りの
    (that's your Jupiter!)...
    ```
 
-   （gemini-2.5-pro）
+   (gemini-2.5-pro)
 
-このアプローチを使用すると、chatbot にさらに深みを追加できます。質問を追加したり、回答を編集したりして、チャットボットの品質を高めます。手順の追加や変更を続け、チャットボットの動作がどのように変化するかをテストします。
+您可以使用这种方法为聊天机器人添加更多深度。提出更多问题、修改答案并提高聊天机器人的质量。继续添加或修改指令，并测试它们如何改变聊天机器人的行为。
 
-### ステップ 3 - 次のステップ
+### 第 3 步 - 后续步骤
 
-他のプロンプト タイプと同様に、プロンプトのプロトタイプが完成したら、[**コードを取得**] ボタンを使用してコーディングを開始するか、プロンプトを保存して後で作業したり、他のユーザーと共有したりできます。
+与其他提示类型类似，在您对提示原型感到满意后，可以使用**获取代码** 按钮开始编码，也可以保存提示以供日后使用并与他人分享。
 
-## 関連情報
+## 深入阅读
 
-- コードに進む準備ができたら、[API スタートガイド](https://ai.google.dev/gemini-api/docs/get-started?hl=ja)をご覧ください。
-- より良いプロンプトを作成する方法については、[プロンプト設計のガイドライン](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ja)をご覧ください。
+- 如果您已准备好开始编码，请参阅 [API
+  快速入门指南](https://ai.google.dev/gemini-api/docs/get-started?hl=zh-cn)。
+- 如需了解如何编写更好的提示，请查看[提示设计
+  指南](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=zh-cn)。
 
-フィードバックを送信
+发送反馈
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最終更新日 2026-07-30 UTC。
+最后更新时间 (UTC)：2026-07-30。
 
-ご意見をお聞かせください
+需要向我们提供更多信息？
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]

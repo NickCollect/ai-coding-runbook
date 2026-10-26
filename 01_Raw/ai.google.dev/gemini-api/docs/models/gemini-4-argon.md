@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=ja
-fetched_at: 2026-10-19T05:44:31.700134+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=tr
+fetched_at: 2026-10-26T05:46:26.009607+00:00
 title: "Gemini 4 Argon \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-フィードバックを送信
+Geri bildirim gönderin
 
 # Gemini 4 Argon
 
-Gemini 4 Argon（`gemini-4-argon`）は、複雑なソフトウェア エンジニアリング、高度な数学的および科学的問題の解決、自律型の多段階エージェント、最大 100 万トークンの長いデコード向けに構築された、Google のフラッグシップ推論モデルです。
+Gemini 4 Argon (`gemini-4-argon`), karmaşık yazılım mühendisliği, derin matematiksel ve bilimsel problem çözme, otonom çok adımlı temsilciler ve 1 milyona kadar token'lık uzun kod çözme işlemleri için tasarlanmış amiral gemisi akıl yürütme modelimizdir.
 
-[Google AI Studio で試す](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+[Google AI Studio'da deneme](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr)
 
-## ドキュメント
+## Belgeler
 
-機能、API の変更、移行ガイダンスの詳細については、[最新モデル](https://ai.google.dev/gemini-api/docs/latest-model?hl=ja)のページをご覧ください。
+Özellikler, API değişiklikleri ve geçişle ilgili rehberlik hakkında tüm bilgileri [En yeni model](https://ai.google.dev/gemini-api/docs/latest-model?hl=tr) sayfasında bulabilirsiniz.
 
 ## gemini-4-argon
 
-| プロパティ | 説明 |
+| Mülk | Açıklama |
 | --- | --- |
-| id\_cardモデルコード | `gemini-4-argon` |
-| saveサポートされるデータタイプ | **入力**  テキスト、画像、動画、音声、PDF  **出力**  テキスト |
-| token\_autoトークンの上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **コンテキスト ウィンドウ（入力トークンと出力トークンの上限を統合）**  1,048,576  **最大出力**  65,536（デフォルトの同期）/ 最大 1,048,576（[長いデコード](https://ai.google.dev/gemini-api/docs/long-decode?hl=ja)を使用） |
-| handyman機能 | **[エージェントによる動画の理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja#agentic-video-understanding)**  サポート対象（デフォルトは `static`）  **[音声生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)**  サポート対象外  **[キャッシュ保存](https://ai.google.dev/gemini-api/docs/caching?hl=ja)**  サポート対象（暗黙的のみ）  注: 明示的なキャッシュ保存はサポートされていません。  **[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)**  サポート対象  **[コンピュータ使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja)**  サポート対象（プレビュー）  **[ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)**  サポート対象  **[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)**  サポート対象  **[Google マップによるグラウンディング](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja)**  サポート対象  **[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)**  サポート対象外  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ja)**  サポート対象外  **[検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)**  サポート対象  **[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)**  サポート対象  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)**  サポート対象（低、中、高）  **[URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)**  サポート対象 |
-| speed使用オプション | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja)**  サポート対象  **[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ja)**  サポート対象  **[優先推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)**  サポート対象 |
-| 123 バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models?hl=ja#model-versions)をご覧ください。  - 安定版: `gemini-4-argon` |
-| calendar\_month最終更新 | 2026 年 10 月 |
-| id\_cardモデルカード | [モデルカード](https://deepmind.google/models/model-cards/gemini-4-argon/?hl=ja) |
+| id\_cardModel kodu | `gemini-4-argon` |
+| saveDesteklenen veri türleri | **Girişler**  Metin, resim, video, ses ve PDF  **Çıkış**  Metin |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Bağlam penceresi (birleştirilmiş giriş ve çıkış jetonu sınırı)**  1.048.576  **Maksimum çıkış**  65.536 (varsayılan eşzamanlı) / 1.048.576'ya kadar ([uzun kod çözme](https://ai.google.dev/gemini-api/docs/long-decode?hl=tr) ile) |
+| handymanÖzellikler | **[Ajan tabanlı video anlama](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr#agentic-video-understanding)**  Desteklenir (varsayılan olarak `static`)  **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Desteklenmiyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Destekleniyor (yalnızca dolaylı)  Not: Açık önbelleğe alma desteklenmez.  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Destekleniyor  **[Bilgisayar kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr)**  Destekleniyor (Önizleme)  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Destekleniyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Destekleniyor  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Destekleniyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Desteklenmiyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Destekleniyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Destekleniyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)**  Desteklenir (düşük, orta, yüksek)  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Destekleniyor |
+| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Destekleniyor  **[Flex çıkarımı](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr)**  Destekleniyor  **[Öncelik çıkarımı](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)**  Destekleniyor |
+| 123Sürümler | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models?hl=tr#model-versions) okuyun.  - Kararlı: `gemini-4-argon` |
+| calendar\_monthSon güncelleme | Ekim 2026 |
+| id\_cardModel kartı | [Model kartı](https://deepmind.google/models/model-cards/gemini-4-argon/?hl=tr) |
 
-フィードバックを送信
+Geri bildirim gönderin
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-最終更新日 2026-10-14 UTC。
+Son güncelleme tarihi: 2026-10-14 UTC.
 
-ご意見をお聞かせください
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-14 UTC。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-14 UTC."],[],[]]

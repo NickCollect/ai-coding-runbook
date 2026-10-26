@@ -1,31 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=ja
-fetched_at: 2026-10-19T05:52:04.149512+00:00
-title: "\u7a7a\u9593\u63a8\u8ad6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=vi
+fetched_at: 2026-10-26T05:57:14.581380+00:00
+title: "Suy lu\u1eadn kh\u00f4ng gian \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-# 空間推論
+# Suy luận không gian
 
-Gemini Robotics ER モデルは、オブジェクトを指し示したり、動画内でオブジェクトを追跡したり、境界ボックスでオブジェクトを検出したり、移動軌跡を生成したりできます。
+Các mô hình Gemini Robotics ER có thể chỉ vào các đối tượng, theo dõi các đối tượng đó trong video, phát hiện các đối tượng đó bằng khung hình chữ nhật và tạo quỹ đạo chuyển động.
 
-実行可能な完全なコードについては、
-[ロボット工学のクックブック](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)をご覧ください。
+Để xem toàn bộ mã có thể chạy, hãy xem [Sổ tay về robot học](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## オブジェクトを指し示す
+## Chỉ vào các đối tượng
 
-次の例では、画像内の特定のオブジェクトを検索し、正規化された `[y, x]` 座標を返します。
+Ví dụ sau đây tìm các đối tượng cụ thể trong một hình ảnh và trả về toạ độ `[y, x]` được chuẩn hoá của các đối tượng đó:
 
 ### Python
 
@@ -93,7 +92,7 @@ curl -X POST \
   }'
 ```
 
-出力は、オブジェクトを含む JSON 配列になります。各オブジェクトには、`point`（正規化された `[y, x]` 座標）と、オブジェクトを識別する `label` が含まれます。
+Đầu ra sẽ là một mảng JSON chứa các đối tượng, mỗi đối tượng có một `point` (toạ độ `[y, x]` được chuẩn hoá) và một `label` xác định đối tượng.
 
 ### JSON
 
@@ -112,14 +111,13 @@ curl -X POST \
 ]
 ```
 
-次の画像は、これらの点を表示する方法の例です。
+Hình ảnh sau đây là ví dụ về cách hiển thị các điểm này:
 
-![画像内のオブジェクトのポイントを表示する例](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=ja)
+![Ví dụ minh hoạ các điểm của đối tượng trong hình ảnh](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=vi)
 
-## 動画内のオブジェクトを追跡する
+## Theo dõi đối tượng trong video
 
-Gemini Robotics ER 2 では、動画フレームを分析して、オブジェクトを時間経過とともに追跡することもできます。サポートされている動画形式の一覧については、[動画入力](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja#supported-formats)
-をご覧ください。
+Gemini Robotics ER 2 cũng có thể phân tích các khung hình video để theo dõi các đối tượng theo thời gian. Hãy xem phần [Đầu vào video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi#supported-formats) để biết danh sách các định dạng video được hỗ trợ.
 
 ### Python
 
@@ -153,9 +151,9 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## オブジェクト検出と境界ボックス
+## Phát hiện đối tượng và khung hình chữ nhật
 
-点に加えて、検出されたオブジェクトの空間的な詳細情報を提供する 2D 境界ボックスを返すようにモデルに指示することもできます。
+Ngoài các điểm, bạn có thể nhắc mô hình trả về các khung hình chữ nhật 2D, cung cấp thêm thông tin chi tiết về không gian cho các đối tượng được phát hiện.
 
 ### Python
 
@@ -189,11 +187,11 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## 軌跡
+## Quỹ đạo
 
-Gemini Robotics ER 2 は、軌跡を定義する点のシーケンスを生成できます。これは、ロボットの動きを誘導するのに役立ちます。
+Gemini Robotics ER 2 có thể tạo ra các chuỗi điểm xác định quỹ đạo, hữu ích cho việc hướng dẫn chuyển động của robot.
 
-この例では、赤いペンをオーガナイザーに移動する軌跡をリクエストします。これには、中間ウェイポイントの推定が含まれます。コードはプロンプトのみを表示するように短縮されています。
+Ví dụ này yêu cầu một quỹ đạo để di chuyển bút đỏ đến một ngăn chứa, bao gồm cả ước tính về các điểm tham chiếu trung gian. Mã đã được rút gọn để chỉ hiển thị lời nhắc.
 
 ### Python
 
@@ -206,9 +204,9 @@ prompt = """
         """
 ```
 
-## ノートパソコンのスペースを作る
+## Dành chỗ cho máy tính xách tay
 
-この例では、Gemini Robotics ER が空間について推論する方法を示します。プロンプトは、別のアイテムのスペースを作成するために移動する必要があるオブジェクトを特定するようにモデルに指示します。
+Ví dụ này cho thấy cách Gemini Robotics ER có thể suy luận về một không gian. Câu lệnh yêu cầu mô hình xác định đối tượng nào cần được di chuyển để tạo không gian cho một mục khác.
 
 ### Python
 
@@ -240,7 +238,7 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-レスポンスには、ユーザーの質問に答えるオブジェクトの 2D 座標が含まれます。この場合、ノートパソコンのスペースを作るために移動する必要があるオブジェクトです。
+Phản hồi chứa toạ độ 2D của đối tượng trả lời câu hỏi của người dùng, trong trường hợp này là đối tượng cần di chuyển để nhường chỗ cho máy tính xách tay.
 
 ```
 [
@@ -248,11 +246,11 @@ print(image_response.output_text)
 ]
 ```
 
-![別のオブジェクトのために移動する必要があるオブジェクトを示す例](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=ja)
+![Ví dụ cho thấy đối tượng nào cần được di chuyển cho một đối tượng khác](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=vi)
 
-## ランチを詰める
+## Chuẩn bị bữa trưa
 
-モデルは、複数ステップのタスクの手順を提供し、各ステップに関連するオブジェクトを指し示すこともできます。この例では、モデルがランチバッグを詰める一連のステップを計画する方法を示します。
+Mô hình này cũng có thể cung cấp hướng dẫn cho các tác vụ nhiều bước và chỉ đến các đối tượng có liên quan cho từng bước. Ví dụ này cho thấy cách mô hình lên kế hoạch cho một loạt các bước để đóng gói túi đựng bữa trưa.
 
 ### Python
 
@@ -285,13 +283,13 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-このプロンプトのレスポンスは、画像入力からランチバッグを詰める方法に関するステップごとの手順です。
+Câu trả lời cho câu lệnh này là một bộ hướng dẫn từng bước về cách đóng gói một túi đựng bữa trưa từ dữ liệu đầu vào là hình ảnh.
 
-**入力画像**
+**Hình ảnh đầu vào**
 
-![お弁当箱と中に入れるものの画像](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=ja)
+![Hình ảnh hộp đựng bữa trưa và các vật phẩm cần bỏ vào hộp](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=vi)
 
-**モデル出力**
+**Đầu ra của mô hình**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -314,19 +312,19 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-## 次のステップ
+## Bước tiếp theo
 
-- [エージェント機能](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=ja) - コード実行、機器の読み取り、画像の注釈。
-- [タスク オーケストレーション](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ja) - カスタム ロボット API を使用した長期的なタスク。
-- [ストリーミングによるロボット工学](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ja) - リアルタイム双方向ストリーミング（Gemini Robotics ER 2 のみ）。
-- [動画理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ja) - モーメントの検出と進捗状況の分類（Gemini Robotics ER 2 のみ）。
+- [Khả năng của tác nhân AI](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=vi) – thực thi mã, đọc công cụ, chú thích hình ảnh.
+- [Điều phối tác vụ](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=vi) – các tác vụ có thời hạn dài bằng API robot tuỳ chỉnh.
+- [Robot học có tính năng truyền trực tuyến](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=vi) — truyền trực tuyến hai chiều theo thời gian thực (chỉ Gemini Robotics ER 2).
+- [Hiểu video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=vi) – tìm khoảnh khắc và phân loại tiến trình (chỉ Gemini Robotics ER 2).
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-最終更新日 2026-09-08 UTC。
+Cập nhật lần gần đây nhất: 2026-09-08 UTC.
 
-ご意見をお聞かせください
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-08 UTC。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-08 UTC."],[],[]]

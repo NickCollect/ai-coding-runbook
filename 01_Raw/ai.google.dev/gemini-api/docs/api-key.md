@@ -1,136 +1,157 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=es-419
-fetched_at: 2026-10-19T05:43:52.318126+00:00
-title: "C\u00f3mo usar claves de API de Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=it
+fetched_at: 2026-10-26T05:45:21.895653+00:00
+title: "Utilizzo delle chiavi API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
+Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Enviar comentarios
+Invia feedback
 
-# Cómo usar claves de API de Gemini
+# Utilizzo delle chiavi API Gemini
 
-Para usar la API de Gemini, debes autenticar tus solicitudes. Puedes autenticarte con una clave de API estándar o de autorización.
+Per utilizzare l'API Gemini, devi autenticare le tue richieste. Puoi autenticarti utilizzando una chiave API standard o di autorizzazione.
 
-[Cómo crear o ver una clave de API de Gemini](https://aistudio.google.com/apikey?hl=es-419)
+[Creare o visualizzare una chiave API Gemini](https://aistudio.google.com/apikey?hl=it)
 
-## Tipos de claves de API: estándar y de autorización
+## Tipi di chiavi API: standard e autorizzazione
 
-Las claves de API proporcionan acceso a la API de Gemini, pero sus características de seguridad difieren. Para mejorar la seguridad, la API de Gemini está realizando una transición de las claves de API estándar a las claves de autorización:
+Le chiavi API forniscono l'accesso all'API Gemini, ma le loro caratteristiche di sicurezza
+sono diverse. L'API Gemini sta passando dalle chiavi API standard alle chiavi di autorizzazione
+per migliorare la sicurezza:
 
-- **Claves de API estándar**: Asocian solicitudes con un proyecto de Google Cloud para fines de facturación y cuota. Las claves estándar no identifican a un llamador, lo que limita la granularidad de los permisos y el control de acceso que pueden admitir.
-- **Claves de autorización (auth)**: Se vinculan directamente a una cuenta de servicio de Google Cloud. Cuando usas una clave de autorización, tus solicitudes se procesan con la identidad de esa cuenta de servicio vinculada, lo que permite un control de acceso detallado. De forma predeterminada, las claves de autorización están restringidas a la API de Generative Language (API de Gemini) y proporcionan una aplicación de claves filtradas de acción rápida que detiene rápidamente el uso de las claves filtradas detectadas por nuestros sistemas.
+- **Chiavi API standard**: associa le richieste a un progetto Google Cloud ai fini di fatturazione e quota. Le chiavi standard non identificano un chiamante, il che
+  limita la granularità delle autorizzazioni e del controllo dell'accesso che possono supportare.
+- **Chiavi di autorizzazione**: associate direttamente a un service account Google Cloud. Quando utilizzi una chiave di autorizzazione, le tue richieste vengono elaborate
+  con l'identità del service account associato, consentendo un controllo
+  dell'accesso granulare. Per impostazione predefinita, le chiavi di autorizzazione sono limitate all'API Generative Language (API Gemini) e forniscono un'applicazione rapida delle chiavi compromesse che interrompe rapidamente l'utilizzo delle chiavi compromesse rilevate dai nostri sistemi.
 
-Para garantizar un uso seguro, la API de Gemini pasará de las claves estándar a las claves de autorización:
+Per garantire un utilizzo sicuro, l'API Gemini passerà dalle chiavi standard alle chiavi di autenticazione:
 
-- **Valores predeterminados de las claves de autorización**: A partir del 28 de mayo de 2026, todas las claves de API nuevas que se creen en Google AI Studio se crearán automáticamente como claves de autorización.
-- **Se rechazan las claves sin restricciones**: La API de Gemini rechaza las solicitudes de **claves estándar sin restricciones**. Las claves de API estándar que tienen restricciones explícitas aplicadas siguen funcionando. Esta restricción impide el uso no autorizado de claves que podrían compartirse públicamente o vincularse a otros servicios.
+- **Chiavi di autenticazione predefinite**: a partire dal 28 maggio 2026, tutte le nuove chiavi API create in
+  Google AI Studio vengono create automaticamente come chiavi di autenticazione.
+- **Chiavi senza restrizioni rifiutate**: l'API Gemini rifiuta le richieste
+  dalle **chiavi standard senza restrizioni**. Le chiavi API standard a cui sono state applicate
+  restrizioni esplicite continuano a funzionare. Questa limitazione impedisce l'uso non autorizzato di chiavi che potrebbero essere condivise pubblicamente o collegate ad altri servizi.
 
-## Administra claves de API en Google AI Studio
+## Gestione delle chiavi API in Google AI Studio
 
-Puedes administrar tus proyectos y claves directamente en [Google AI Studio](https://aistudio.google.com/apikey?hl=es-419).
+Puoi gestire i tuoi progetti e le tue chiavi direttamente in [Google AI Studio](https://aistudio.google.com/apikey?hl=it).
 
-### Proyectos de Google Cloud
+### Progetti Google Cloud
 
-Cada clave de la API de Gemini está asociada a un [proyecto de Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=es-419).
-Los proyectos de Google Cloud administran la facturación, los colaboradores y los permisos. Google AI Studio proporciona una interfaz ligera para acceder a estos proyectos.
+Ogni chiave API Gemini è associata a un [progetto Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=it).
+I progetti Google Cloud gestiscono la fatturazione, i collaboratori e le autorizzazioni. Google AI Studio fornisce un'interfaccia leggera per accedere a questi progetti.
 
-- **Proyecto predeterminado**: Si eres un usuario nuevo, Google AI Studio crea automáticamente un proyecto predeterminado de Google Cloud y una clave de API después de que aceptas las Condiciones del Servicio. Para cambiarle el nombre a este proyecto, navega a la vista **Projects** en tu panel.
-- **Proyectos existentes**: Si ya tienes una cuenta de Google Cloud, AI Studio no crea un proyecto predeterminado. En su lugar, debes importar tus proyectos existentes.
+- **Progetto predefinito**: se sei un nuovo utente, Google AI Studio crea automaticamente
+  un progetto Google Cloud e una chiave API predefiniti dopo che hai accettato i
+  Termini di servizio. Puoi rinominare questo progetto andando alla visualizzazione
+  **Progetti** nella dashboard.
+- **Progetti esistenti**: se hai già un account Google Cloud, AI
+  Studio non crea un progetto predefinito. Devi invece importare i tuoi
+  progetti esistenti.
 
-### Cómo importar proyectos
+### Importazione dei progetti
 
-De forma predeterminada, Google AI Studio no muestra todos tus proyectos de Google Cloud. Debes importar los proyectos que quieras usar:
+Per impostazione predefinita, Google AI Studio non mostra tutti i tuoi progetti Google Cloud. Devi importare i progetti che vuoi utilizzare:
 
-1. Ve a [Google AI Studio](https://aistudio.google.com?hl=es-419).
-2. Abre el **Panel** en el panel izquierdo y selecciona **Proyectos**.
-3. Haz clic en el botón **Importar proyectos**.
-4. Busca y selecciona el proyecto de Google Cloud que deseas importar y, luego, haz clic en **Importar**.
-5. Una vez que se haya importado, navega a la página **Claves de API** en el panel para crear una clave en ese proyecto.
+1. Vai a [Google AI Studio](https://aistudio.google.com?hl=it).
+2. Apri la **dashboard** dal riquadro a sinistra e seleziona **Progetti**.
+3. Fai clic sul pulsante **Importa progetti**.
+4. Cerca e seleziona il progetto Google Cloud da importare, poi
+   fai clic su **Importa**.
+5. Una volta importato, vai alla pagina **Chiavi API** nella dashboard per
+   creare una chiave nel progetto.
 
-### Soluciona problemas relacionados con los permisos de creación de llaves
+### Risoluzione dei problemi relativi alle autorizzazioni di creazione delle chiavi
 
-Si el botón **Crear clave de API** no está disponible y muestra el mensaje *"No tienes permiso para crear una clave en este proyecto"*, significa que no tienes los permisos de IAM necesarios.
+Se il pulsante **Crea chiave API** non è disponibile e viene visualizzato il messaggio:
+*"Non hai l'autorizzazione per creare una chiave in questo progetto"*, non disponi delle autorizzazioni IAM richieste.
 
-Pídele al administrador de tu organización o proyecto de Google Cloud que te otorgue un rol que contenga los siguientes permisos (como el de editor del proyecto):
+Chiedi all'amministratore del progetto o dell'organizzazione Google Cloud di concederti un ruolo
+che contenga le seguenti autorizzazioni (ad esempio Editor progetto):
 
-- `resourcemanager.projects.get`: Permite que AI Studio verifique el proyecto.
-- `apikeys.keys.create`: Permite la generación de claves.
-- `serviceusage.services.enable`: Garantiza que la API de Generative Language esté habilitada.
-- `iam.serviceAccounts.create`: Se requiere para crear la cuenta de servicio vinculada.
-- `iam.serviceAccountApiKeyBindings.create`: Vincula la cuenta de servicio a la clave de API.
+- `resourcemanager.projects.get`: consente ad AI Studio di verificare il progetto.
+- `apikeys.keys.create`: Consente la generazione di chiavi.
+- `serviceusage.services.enable`: garantisce che l'API Generative Language sia
+  abilitata.
+- `iam.serviceAccounts.create`: obbligatorio per creare il service account collegato.
+- `iam.serviceAccountApiKeyBindings.create`: associa il service account alla chiave API.
 
-Si no puedes obtener acceso administrativo, puedes crear un proyecto nuevo de Google Cloud que no esté asociado a una organización para generar tus claves.
+Se non riesci a ottenere l'accesso amministrativo, puoi creare un nuovo progetto Google Cloud
+non associato a un'organizzazione per generare le chiavi.
 
-## Crea claves en la consola de Google Cloud
+## Creazione di chiavi nella console Google Cloud
 
-Google AI Studio solo muestra las claves que no están restringidas o que están restringidas a la API de Gemini. Si no puedes usar AI Studio o quieres administrar todas tus claves de API en un solo lugar, sigue la documentación de Cloud para [crear una clave de API](https://cloud.google.com/docs/authentication/api-keys?hl=es-419#create). Para crear una clave de la API de Gemini, debes vincularla a una [cuenta de servicio](https://cloud.google.com/iam/docs/service-account-overview?hl=es-419).
+Google AI Studio mostra solo le chiavi senza limitazioni o limitate all'API
+Gemini. Se non puoi utilizzare AI Studio o vuoi gestire tutte le tue chiavi API in un unico posto, segui la documentazione di Cloud sulla [creazione di una chiave API](https://cloud.google.com/docs/authentication/api-keys?hl=it#create). La creazione di una chiave API Gemini richiede l'associazione a un [service account](https://cloud.google.com/iam/docs/service-account-overview?hl=it).
 
-## Configura tu entorno
+## Configurazione dell'ambiente
 
-Una vez que tengas una clave, configura tu entorno para usarla de forma segura en tus aplicaciones.
+Una volta ottenuta una chiave, configura l'ambiente per utilizzarla in modo sicuro nelle tue
+applicazioni.
 
-### Opción 1: Usa variables de entorno (recomendado)
+### Opzione 1: utilizza le variabili di ambiente (consigliata)
 
-Establece la variable de entorno `GEMINI_API_KEY` o `GOOGLE_API_KEY`. Las bibliotecas cliente de la API de Gemini detectan y usan automáticamente estas variables. Si se configuran ambos, `GOOGLE_API_KEY` tiene prioridad.
+Imposta la variabile di ambiente `GEMINI_API_KEY` o `GOOGLE_API_KEY`. Le librerie client dell'API Gemini rilevano e utilizzano automaticamente queste variabili. Se vengono impostati entrambi, `GOOGLE_API_KEY` ha la precedenza.
 
-Selecciona tu sistema operativo para establecer la variable:
+Seleziona il tuo sistema operativo per impostare la variabile:
 
 ### Linux/macOS - Bash
 
-Verifica si tienes un archivo de configuración de bash:
+Verifica se hai un file di configurazione bash:
 
 ```
 ~/.bashrc
 ```
 
-De lo contrario, crea uno y ábrelo:
+In caso contrario, creane uno e aprilo:
 
 ```
 touch ~/.bashrc && open ~/.bashrc
 ```
 
-Agrega el comando de exportación al final del archivo:
+Aggiungi il comando di esportazione alla fine del file:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-Guarda el archivo y, luego, aplica los cambios:
+Salva il file, poi applica le modifiche:
 
 ```
 source ~/.bashrc
 ```
 
-### macOS: Zsh
+### macOS - Zsh
 
-Verifica si tienes un archivo de configuración de zsh:
+Verifica di avere un file di configurazione zsh:
 
 ```
 ~/.zshrc
 ```
 
-De lo contrario, crea uno y ábrelo:
+In caso contrario, creane uno e aprilo:
 
 ```
 touch ~/.zshrc && open ~/.zshrc
 ```
 
-Agrega el comando de exportación:
+Aggiungi il comando di esportazione:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-Guarda el archivo y, luego, aplica los cambios:
+Salva il file, poi applica le modifiche:
 
 ```
 source ~/.zshrc
@@ -138,15 +159,16 @@ source ~/.zshrc
 
 ### Windows
 
-1. Busca "Variables de entorno" en la barra de búsqueda de Windows.
-2. Haz clic en **Variables de entorno** en el diálogo Propiedades del sistema.
-3. En **Variables del usuario** o **Variables del sistema**, haz clic en **Nueva…**.
-4. Establece el nombre de la variable en `GEMINI_API_KEY` y el valor en tu clave de API.
-5. Haga clic en **Aceptar** para guardar los cambios. Abre una sesión de terminal nueva para cargar la variable.
+1. Cerca "Variabili di ambiente" nella barra di ricerca di Windows.
+2. Fai clic su **Variabili di ambiente** nella finestra di dialogo Proprietà del sistema.
+3. In **Variabili utente** o **Variabili di sistema**, fai clic su **Nuova…**.
+4. Imposta il nome della variabile su `GEMINI_API_KEY` e il valore sulla tua chiave API.
+5. Fai clic su **OK** per salvarlo. Apri una nuova sessione del terminale per caricare la variabile.
 
-### Opción 2: Proporciona la clave de API de forma explícita en el código
+### Opzione 2: fornisci la chiave API in modo esplicito nel codice
 
-Puedes pasar la clave de API de forma explícita cuando inicialices el cliente. Solo hazlo si no puedes usar variables de entorno.
+Puoi passare la chiave API in modo esplicito durante l'inizializzazione del client. Esegui questa operazione
+solo se non puoi utilizzare le variabili di ambiente.
 
 ### Python
 
@@ -256,97 +278,117 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Administración de seguridad y secretos
+## Gestione della sicurezza e dei secret
 
-Trata tu clave de API de Gemini como una contraseña. Si se ve comprometida, otras personas pueden consumir la cuota de tu proyecto, generar cargos de facturación inesperados y acceder a recursos privados.
+Tratta la chiave API Gemini come una password. Se viene compromesso, altri possono consumare
+la quota del tuo progetto, incorrere in addebiti di fatturazione imprevisti e accedere a risorse
+private.
 
-### Reglas de seguridad críticas
+### Regole di sicurezza critiche
 
-- **Mantén la confidencialidad de las claves**: Nunca registres claves de API en sistemas de control de código fuente como Git.
-- **Nunca expongas claves del cliente en producción**: No codifiques de forma rígida las claves de API directamente en las apps web o para dispositivos móviles. Los usuarios pueden extraer las claves compiladas en el código del cliente. Para proteger las apps del cliente, ejecuta un servidor proxy de backend para realizar las llamadas a la API reales.
+- **Mantieni riservate le chiavi**: non archiviare mai le chiavi API nei sistemi di controllo del codice sorgente
+  come Git.
+- **Non esporre mai le chiavi lato client in produzione**: non codificare le chiavi API
+  direttamente nelle app web o mobile. Le chiavi compilate nel codice lato client possono essere
+  estratte dagli utenti. Per proteggere le app lato client, esegui un server proxy di backend per effettuare le chiamate API effettive.
 
-### Prácticas recomendadas para la administración de secretos
+### Best practice per la gestione dei secret
 
-- **Variables de entorno**: Lee las claves de las variables de entorno en lugar de los archivos de configuración.
-- **Secret Manager**: Para la producción, almacena tus claves en un almacén de secretos seguro, como [Google Cloud Secret Manager](https://cloud.google.com/secret-manager?hl=es-419).
-- **Alertas de facturación**: Configura alertas de facturación en la consola de Google Cloud para recibir notificaciones si se produce un aumento repentino en el uso o los costos.
+- **Variabili di ambiente**: leggi le chiavi dalle variabili di ambiente anziché dai file di configurazione.
+- **Secret Manager**: per la produzione, archivia le chiavi in un archivio dei secret sicuro
+  come [Google Cloud Secret Manager](https://cloud.google.com/secret-manager?hl=it).
+- **Avvisi di fatturazione**: configura gli avvisi di fatturazione nella console Google Cloud per
+  ricevere una notifica in caso di picchi di utilizzo o costi.
 
-### Lista de tareas de respuesta ante filtraciones
+### Elenco di controllo per la risposta alle perdite di dati
 
-Si sospechas que se filtró tu clave de API, haz lo siguiente:
+Se sospetti che la tua chiave API sia stata compromessa:
 
-1. **Genera una clave nueva**: Crea una clave de reemplazo en Google AI Studio o en la consola de Cloud.
-2. **Actualiza tu aplicación**: Implementa tu código con la clave nueva.
-3. **Inhabilita o borra la clave comprometida**: Inhabilita la clave filtrada en la consola de Cloud una vez que se verifique la clave nueva. No borres la clave anterior hasta que la nueva esté completamente activa para evitar el tiempo de inactividad de la aplicación.
-4. **Audita el uso**: Revisa los registros de facturación y el uso de la API en la consola de Google Cloud para identificar actividad no autorizada.
+1. **Genera una nuova chiave**: crea una chiave sostitutiva in Google AI Studio o nella
+   console Google Cloud.
+2. **Aggiorna l'applicazione**: esegui il deployment del codice utilizzando la nuova chiave.
+3. **Disattiva o elimina la chiave compromessa**: disattiva la chiave compromessa nella
+   console Cloud una volta verificata la nuova chiave. Non eliminare la vecchia chiave finché
+   la nuova chiave non è completamente attiva per evitare tempi di inattività dell'applicazione.
+4. **Controlla l'utilizzo**: controlla i log di fatturazione e l'utilizzo delle API nella console Google Cloud per identificare attività non autorizzate.
 
-## Cómo restringir y proteger tus claves
+## Limitare e proteggere le chiavi
 
-Si agregas restricciones a tus claves de API, se minimizan los posibles daños en caso de que se vulnere una clave.
+L'aggiunta di limitazioni alle chiavi API riduce al minimo i potenziali danni in caso di compromissione di una chiave.
 
-### Aplica restricciones de origen de la solicitud
+### Applica limitazioni all'origine della richiesta
 
-Las restricciones de origen limitan qué direcciones IP, sitios web o aplicaciones pueden usar tu clave.
+Le limitazioni di origine limitano gli indirizzi IP, i siti web o le applicazioni che possono utilizzare la tua chiave.
 
-1. Ve a la [página Credenciales de la consola de Google Cloud](https://console.cloud.google.com/apis/credentials?hl=es-419).
-2. Selecciona tu proyecto y haz clic en el nombre de la clave de API que deseas restringir.
-3. En **Restricciones de aplicaciones**, selecciona **Direcciones IP** (o el tipo de restricción adecuado para tu entorno).
-4. Especifica los rangos o las direcciones IP permitidos y, luego, haz clic en **Guardar**.
+1. Vai alla [pagina delle credenziali della console Google Cloud](https://console.cloud.google.com/apis/credentials?hl=it).
+2. Seleziona il tuo progetto e fai clic sul nome della chiave API che vuoi limitare.
+3. In **Restrizioni delle applicazioni**, seleziona **Indirizzi IP** (o il tipo di restrizione appropriato per il tuo ambiente).
+4. Specifica gli indirizzi IP o gli intervalli consentiti, quindi fai clic su **Salva**.
 
-### Cómo proteger las claves de API estándar sin restricciones
+### Protezione delle chiavi API standard senza limitazioni
 
-Para seguir usando la API de Gemini, debes proteger todas las claves no restringidas.
+Per continuare a utilizzare l'API Gemini, devi proteggere le chiavi senza limitazioni.
 
-#### Método A: Restringe la clave solo a la API de Gemini (AI Studio)
+#### Metodo A: limita la chiave solo all'API Gemini (AI Studio)
 
-Si solo usas la clave para la API de Gemini, protégela directamente en AI Studio:
+Se utilizzi la chiave solo per l'API Gemini, proteggila direttamente in AI Studio:
 
-1. En la página **Claves de API** de [Google AI Studio](https://aistudio.google.com/api-keys?hl=es-419), busca las claves marcadas con la etiqueta **Sin restricciones**.
-2. Coloca el cursor sobre la etiqueta y haz clic en **Agregar restricciones** en el diálogo.
-3. Selecciona **Restringir solo a la API de Gemini**.
-4. Haz clic en **Restringir clave** para confirmar.
+1. Nella pagina **Chiavi API** di [Google AI Studio](https://aistudio.google.com/api-keys?hl=it), individua le chiavi contrassegnate con l'etichetta
+   **Senza limitazioni**.
+2. Passa il mouse sopra l'etichetta e fai clic su **Aggiungi limitazioni** nella finestra di dialogo.
+3. Seleziona **Limita solo all'API Gemini**.
+4. Fai clic su **Limita chiave** per confermare.
 
-#### Método B: Restringe la clave para otros servicios (consola de Google Cloud)
+#### Metodo B: limita la chiave per altri servizi (console Google Cloud)
 
-Si la clave se comparte con otras APIs de Google (no se recomienda), restrínsela en la consola de Cloud. **Nota: Las solicitudes a la API de Gemini que usen esta clave fallarán después de que se apliquen estas restricciones.**
+Se la chiave è condivisa con altre API di Google (non consigliato), limitane l'utilizzo nella console Cloud. **Nota: le richieste dell'API Gemini che utilizzano questa chiave non andranno a buon fine dopo l'applicazione di queste limitazioni.**
 
-1. Visita la [página de credenciales de la consola de Google Cloud](https://console.cloud.google.com/apis/credentials?hl=es-419).
-2. Selecciona el proyecto y la clave de API.
-3. En **Restricciones de API**, usa el menú desplegable **Elige las restricciones de API** para seleccionar las APIs a las que deseas que acceda esta clave. No selecciones la **API de Generative Language**.
-4. Haz clic en **Guardar**. Crea una clave independiente y restringida en AI Studio para seguir usando la API de Gemini.
+1. Visita la [pagina delle credenziali della console Google Cloud](https://console.cloud.google.com/apis/credentials?hl=it).
+2. Seleziona il progetto e la chiave API.
+3. In **Restrizioni delle API**, utilizza il menu a discesa **Seleziona limitazioni dell'API** per
+   selezionare le API a cui vuoi che questa chiave acceda. Non selezionare l'**API
+   Generative Language**.
+4. Fai clic su **Salva**. Crea una chiave separata con limitazioni in AI Studio per continuare
+   a utilizzare l'API Gemini.
 
-### Claves inactivas bloqueadas
+### Chiavi inattive bloccate
 
-A partir del 7 de mayo de 2026, la API de Gemini bloqueará las claves de API sin restricciones que hayan estado inactivas durante un período prolongado. Estas claves muestran una etiqueta **Bloqueado** en AI Studio. Para continuar, debes generar una clave nueva o usar una clave restringida existente.
+A partire dal 7 maggio 2026, l'API Gemini blocca le chiavi API senza limitazioni che sono
+rimaste inattive per un periodo prolungato. Queste chiavi mostrano un tag **Bloccata** in AI
+Studio. Per continuare, devi generare una nuova chiave o utilizzare una chiave con limitazioni esistente.
 
-## Migra a una clave de autorización
+## Esegui la migrazione a una chiave di autenticazione
 
-Sigue estos pasos para crear una nueva clave de API de autenticación y actualizar tus aplicaciones:
+Per creare una nuova chiave API di autenticazione e aggiornare le tue applicazioni:
 
-1. Ve a la [página Claves de API de AI Studio](https://aistudio.google.com/api-keys?hl=es-419).
-2. Revisa la columna **Tipo de clave** para identificar las claves que se indican como **Estándar**.
-3. Haz clic en **Crear clave de API** para generar una clave nueva. Todas las claves nuevas creadas en AI Studio se crean automáticamente como claves de autorización.
-4. Copia la nueva clave de API de autenticación.
-5. Actualiza el código de tu aplicación, las variables de entorno y cualquier configuración de implementación para usar la nueva clave de API de autenticación.
-6. Prueba tu aplicación para confirmar que funciona correctamente con la nueva clave.
-7. Una vez que se verifique, borra o revoca tu clave de tráfico anterior para evitar un uso inadecuado.
+1. Vai alla [pagina delle chiavi API di AI Studio](https://aistudio.google.com/api-keys?hl=it).
+2. Controlla la colonna **Tipo di chiave** per identificare le chiavi elencate come **Standard**.
+3. Fai clic su **Crea chiave API** per generare una nuova chiave. Tutte le nuove chiavi create in
+   AI Studio vengono create automaticamente come chiavi di autenticazione.
+4. Copia la nuova chiave API di autenticazione.
+5. Aggiorna il codice dell'applicazione, le variabili di ambiente e qualsiasi configurazione di deployment
+   per utilizzare la nuova chiave API di autenticazione.
+6. Testa l'applicazione per verificare che funzioni correttamente con la nuova chiave.
+7. Una volta verificata, elimina o revoca la vecchia chiave del traffico per evitare abusi.
 
-## Limitaciones
+## Limitazioni
 
-Google AI Studio impone las siguientes limitaciones de administración de proyectos y claves:
+Google AI Studio impone le seguenti limitazioni alla gestione di progetti e chiavi:
 
-- Puedes crear un máximo de 10 proyectos a la vez desde la página **Projects** de Google AI Studio.
-- En las páginas **Claves de API** y **Proyectos**, se muestran un máximo de 100 claves y 50 proyectos.
-- Solo se muestran las claves de API que no están restringidas o que están restringidas específicamente a la API de Generative Language (API de Gemini).
+- Puoi creare un massimo di 10 progetti alla volta dalla pagina **Progetti** di Google AI Studio.
+- Le pagine **Chiavi API** e **Progetti** mostrano un massimo di 100 chiavi e 50
+  progetti.
+- Vengono visualizzate solo le chiavi API senza limitazioni o limitate specificamente all'API Generative Language (API Gemini).
 
-Para la administración avanzada de proyectos o para modificar claves con otras restricciones, usa la [página de credenciales de la consola de Google Cloud](https://console.cloud.google.com/apis/credentials?hl=es-419).
+Per la gestione avanzata dei progetti o per modificare le chiavi con altre limitazioni, utilizza
+la [pagina delle credenziali della console Google Cloud](https://console.cloud.google.com/apis/credentials?hl=it).
 
-Enviar comentarios
+Invia feedback
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Última actualización: 2026-10-06 (UTC)
+Ultimo aggiornamento 2026-10-06 UTC.
 
-¿Quieres brindar más información?
+Vuoi dirci altro?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-06 (UTC)"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-10-06 UTC."],[],[]]

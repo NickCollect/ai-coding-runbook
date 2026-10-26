@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/tool-combination?hl=pt-BR
-fetched_at: 2026-10-19T05:51:43.301083+00:00
-title: "Combinar ferramentas integradas e chamadas de fun\u00e7\u00e3o \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/tool-combination?hl=it
+fetched_at: 2026-10-26T05:41:42.961960+00:00
+title: "Combinare strumenti integrati e chiamata di funzione \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
+Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=pt-br)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs/generate-content?hl=it)
 
-Envie comentários
+Invia feedback
 
-# Combinar ferramentas integradas e chamadas de função
+# Combinare strumenti integrati e chiamata di funzione
 
-O Gemini permite a combinação de [ferramentas integradas](https://ai.google.dev/gemini-api/docs/tools?hl=pt-br), como `google_search`, e [chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) (também conhecida como *ferramentas personalizadas*) em uma única geração, preservando e expondo o histórico de contexto das chamadas de ferramenta. As combinações de ferramentas integradas e personalizadas permitem Agentic Workflows complexos em que, por exemplo, o modelo pode se fundamentar em dados da Web em tempo real antes de chamar sua lógica de negócios específica.
+Gemini consente la combinazione di [strumenti integrati](https://ai.google.dev/gemini-api/docs/tools?hl=it), come `google_search`, e la [chiamata di funzioni](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) (nota anche come *strumenti personalizzati*) in una singola generazione, mantenendo ed esponendo la cronologia del contesto delle chiamate di strumenti. Le combinazioni di strumenti integrati e personalizzati consentono workflow complessi e agentivi in cui, ad esempio, il modello può basarsi su dati web in tempo reale prima di chiamare la logica di business specifica.
 
-Confira um exemplo que permite combinações de ferramentas integradas e personalizadas com `google_search` e uma função personalizada `getWeather`:
+Ecco un esempio che consente combinazioni di strumenti integrati e personalizzati con `google_search` e una funzione personalizzata `getWeather`:
 
 ### Python
 
@@ -111,7 +111,7 @@ for part in response_2.candidates[0].content.parts:
         print(part.text)
 ```
 
-### JavaScript
+### Javascript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -199,7 +199,7 @@ async function run() {
 run();
 ```
 
-### Go
+### Vai
 
 ```
 package main
@@ -388,64 +388,65 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
 }'
 ```
 
-## Como funciona
+## Come funziona
 
-Os modelos do Gemini 3 usam a *circulação de contexto de ferramentas* para permitir combinações de ferramentas integradas e personalizadas. A circulação de contexto de ferramentas possibilita preservar e expor o contexto de ferramentas integradas e compartilhá-lo com ferramentas personalizadas na mesma chamada de turno para turno.
+I modelli Gemini 3 utilizzano la *circolazione del contesto dello strumento* per consentire combinazioni di strumenti integrati e personalizzati. La circolazione del contesto dello strumento consente di mantenere ed esporre il contesto degli strumenti integrati e di condividerlo con gli strumenti personalizzati nella stessa chiamata da un turno all'altro.
 
-### Ativar a combinação de ferramentas
+### Attivare la combinazione di strumenti
 
-- Defina a flag `include_server_side_tool_invocations` como `true` para ativar a circulação de contexto de ferramentas.
-- Inclua os [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#function-declarations), junto com as
-  ferramentas integradas que você quer usar, para acionar o comportamento de combinação.
-  - Se você não incluir `function_declarations`, a circulação de contexto de ferramentas ainda vai agir nas ferramentas integradas incluídas, desde que a flag esteja definida.
+- Devi impostare il flag `include_server_side_tool_invocations` su `true` per attivare la circolazione del contesto dello strumento.
+- Includi [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#function-declarations), insieme agli
+  strumenti integrati che vuoi utilizzare, per attivare il comportamento di combinazione.
+  - Se non includi `function_declarations`, la circolazione del contesto dello strumento continuerà ad agire sugli strumenti integrati inclusi, a condizione che il flag sia impostato.
 
-### Partes retornadas da API
+### Parti restituite dall'API
 
-Em uma única resposta, a API retorna as partes `toolCall` e `toolResponse` para a chamada de ferramenta integrada. Para a chamada de função (ferramenta personalizada), a API retorna a parte de chamada `functionCall`, à qual o usuário fornece a parte `functionResponse` no próximo turno.
+In una singola risposta, l'API restituisce le parti `toolCall` e `toolResponse` per la chiamata dello strumento integrato. Per la chiamata di funzione (strumento personalizzato), l'API restituisce la parte di chiamata `functionCall`, a cui l'utente fornisce la parte `functionResponse` nel turno successivo.
 
-- `toolCall` e `toolResponse`: a API retorna essas partes para preservar o contexto de quais ferramentas são executadas no lado do servidor e o resultado da execução delas para o próximo turno.
-- `functionCall` e `functionResponse`: a API envia a chamada de função para
-  o usuário preencher, e o usuário envia o resultado de volta na
-  resposta da função. Essas partes são padrão para todas as [chamadas de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) na API Gemini, não exclusivas do
-  recurso de combinação de ferramentas.
-- ([Somente ferramenta de](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br)execução de código)
+- `toolCall` e `toolResponse`: l'API restituisce queste parti per mantenere il contesto degli strumenti eseguiti sul lato server e il risultato della loro esecuzione per il turno successivo.
+- `functionCall` e `functionResponse`: l'API invia la chiamata di funzione all'
+  utente per completarla e l'utente invia il risultato nella
+  risposta della funzione (queste parti sono standard per tutte le [chiamate di funzioni](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) nell'API Gemini, non sono specifiche della
+  funzionalità di combinazione di strumenti).
+- ([Solo strumento di esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it))
   `executableCode` e `codeExecutionResult`:
-  ao usar a ferramenta de execução de código, em vez de `functionCall` e
-  `functionResponse`, a API retorna `executableCode` (o código gerado
-  pelo modelo que deve ser executado) e `codeExecutionResult` (o
-  resultado do código executável).
+  Quando utilizzi lo strumento di esecuzione del codice, anziché `functionCall` e
+  `functionResponse`, l'API restituisce `executableCode` (il codice generato
+  dal modello che deve essere eseguito) e `codeExecutionResult` (il
+  risultato del codice eseguibile).
 
-Você precisa retornar todas as partes, incluindo todos os [campos](#critical-fields) que elas
-contêm, para o modelo em cada turno para manter o contexto e ativar combinações de ferramentas.
+Devi restituire tutte le parti, inclusi tutti i [campi](#critical-fields) che
+contengono, al modello a ogni turno per mantenere il contesto e attivare le combinazioni di strumenti.
 
-### Campos críticos nas partes retornadas
+### Campi critici nelle parti restituite
 
-Algumas [partes retornadas pela API](#api-returns-parts) incluem os campos `id`,
-`tool_type` e `thought_signature`. Esses campos são essenciais para manter o contexto da ferramenta (e, portanto, para combinações de ferramentas). Você precisa retornar todas as partes *conforme fornecidas na resposta* nas solicitações subsequentes.
+Alcune [parti restituite dall'API](#api-returns-parts) includeranno i campi `id`,
+`tool_type` e `thought_signature`. Questi campi sono fondamentali per mantenere il contesto dello strumento (e quindi per le combinazioni di strumenti); devi restituire tutte le parti *come indicato nella risposta* nelle richieste successive.
 
-- `id`: um identificador exclusivo que mapeia uma chamada para a resposta. `id` é **definido em
-  todas as respostas de chamada de função**, independentemente da circulação de contexto de ferramentas.
-  Você *precisa* fornecer o mesmo `id` na resposta da função que a API fornece na chamada de função. As ferramentas integradas compartilham automaticamente o `id` entre a chamada e a resposta da ferramenta.
-  - Encontrado em todas as partes relacionadas a ferramentas: `toolCall`, `toolResponse`, `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
-- `tool_type`: identifica a ferramenta específica que está sendo usada, a ferramenta integrada literal ou (por exemplo, `URL_CONTEXT`) ou o nome da função (por exemplo, `getWeather`).
-  - Encontrado nas partes `toolCall` e `toolResponse`.
-- `thought_signature`: o contexto criptografado real incorporado em **cada parte retornada pela API**. O contexto não pode ser reconstruído sem assinaturas de pensamento. Se você não retornar as assinaturas de pensamento para todas as partes em cada turno, o modelo vai gerar um erro.
-  - Encontrado em *todas* as partes.
+- `id`: un identificatore univoco che mappa una chiamata alla relativa risposta. `id` viene **impostato su
+  tutte le risposte delle chiamate di funzioni**, indipendentemente dalla circolazione del contesto dello strumento.
+  Devi *fornire* lo stesso `id` nella risposta della funzione
+  che l'API fornisce nella chiamata di funzione. Gli strumenti integrati condividono automaticamente l'`id` tra la chiamata dello strumento e la risposta dello strumento.
+  - Trovato in tutte le parti correlate allo strumento: `toolCall`, `toolResponse`, `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
+- `tool_type`: identifica lo strumento specifico in uso; il nome letterale dello strumento integrato (ad es. `URL_CONTEXT`) o della funzione (ad es. `getWeather`).
+  - Trovato nelle parti `toolCall` e `toolResponse`.
+- `thought_signature`: il contesto criptato effettivo incorporato in **ogni parte restituita dall'API**. Il contesto non può essere ricostruito senza le firme di pensiero; se non restituisci le firme di pensiero per tutte le parti in ogni turno, il modello genererà un errore.
+  - Trovato in *tutte* le parti.
 
-### Dados específicos da ferramenta
+### Dati specifici dello strumento
 
-Algumas ferramentas integradas retornam argumentos de dados visíveis ao usuário específicos do tipo de ferramenta.
+Alcuni strumenti integrati restituiscono argomenti di dati visibili all'utente specifici per il tipo di strumento.
 
-| Ferramenta | Argumentos de chamada de ferramenta visíveis ao usuário (se houver) | Resposta da ferramenta visível ao usuário (se houver) |
+| Strumento | Argomenti della chiamata dello strumento visibili all'utente (se presenti) | Risposta dello strumento visibile all'utente (se presente) |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` URLs a serem navegados | `url_metadata` `retrieved_url`: URLs navegados `url_retrieval_status`: status de navegação |
-| **FILE\_SEARCH** | Nenhum | Nenhum |
+| **URL\_CONTEXT** | `urls` URL da visitare | `url_metadata` `retrieved_url`: URL visitati `url_retrieval_status`: stato di navigazione |
+| **FILE\_SEARCH** | Nessuno | Nessuno |
 
-## Exemplo de estrutura de solicitação de combinação de ferramentas
+## Esempio di struttura della richiesta di combinazione di strumenti
 
-A estrutura de solicitação a seguir mostra a estrutura da solicitação do comando: "Qual é a cidade mais ao norte dos Estados Unidos? Como está o clima hoje?". Ela combina três ferramentas: as ferramentas integradas do Gemini `google_search` e `code_execution`, e uma função personalizada `get_weather`.
+La seguente struttura della richiesta mostra la struttura della richiesta del prompt: "Qual è la città più a nord degli Stati Uniti? Che tempo fa oggi?". Combina tre strumenti: gli strumenti integrati di Gemini `google_search` e `code_execution` e una funzione personalizzata `get_weather`.
 
 ```
 {
@@ -514,52 +515,52 @@ A estrutura de solicitação a seguir mostra a estrutura da solicitação do com
 }
 ```
 
-## Tokens e preços
+## Token e prezzi
 
-As partes `toolCall` e `toolResponse` nas solicitações são contadas para `prompt_token_count`. Como essas etapas intermediárias da ferramenta agora são visíveis e retornadas para você, elas fazem parte do histórico de conversas. Isso só acontece com o
-caso para *solicitações*, não *respostas*.
+Tieni presente che le parti `toolCall` e `toolResponse` nelle richieste vengono conteggiate nel `prompt_token_count`. Poiché questi passaggi intermedi dello strumento sono ora visibili e ti vengono restituiti, fanno parte della cronologia delle conversazioni. Questo vale solo per il
+caso per *richieste*, non per *risposte*.
 
-A ferramenta Pesquisa Google é uma exceção a essa regra. A Pesquisa Google já
-aplica o próprio modelo de preços no nível da consulta, então os tokens não são
-cobrados duas vezes (consulte a página de [Preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br)).
+Lo strumento Ricerca Google è un'eccezione a questa regola. La Ricerca Google applica già
+il proprio modello di prezzi a livello di query, quindi i token non sono
+addebitati due volte (vedi la pagina [Prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it)).
 
-Leia a página de [tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) para mais informações.
+Per ulteriori informazioni, consulta la pagina [Token](https://ai.google.dev/gemini-api/docs/tokens?hl=it).
 
-## Limitações
+## Limitazioni
 
-- O padrão é o modo `VALIDATED` (o modo `AUTO` não é compatível) quando a flag `include_server_side_tool_invocations` está ativada.
-- As ferramentas integradas, como `google_search`, dependem de informações de localização e hora atual. Portanto, se a `system_instruction` ou `function_declaration.description` tiver informações de localização e hora conflitantes, o recurso de combinação de ferramentas poderá não funcionar bem.
+- Impostazione predefinita della modalità `VALIDATED` (la modalità `AUTO` non è supportata) quando il flag `include_server_side_tool_invocations` è attivato
+- Gli strumenti integrati come `google_search` si basano sulle informazioni relative alla località e all'ora corrente, quindi se `system_instruction` o `function_declaration.description` contengono informazioni su località e ora in conflitto, la funzionalità di combinazione di strumenti potrebbe non funzionare correttamente.
 
-## Ferramentas compatíveis
+## Strumenti supportati
 
-A circulação de contexto de ferramentas padrão se aplica a ferramentas do lado do servidor (integradas).
-A execução de código também é uma ferramenta do lado do servidor, mas tem a própria solução integrada para a circulação de contexto. O uso do computador e a chamada de função são ferramentas do lado do cliente e também têm soluções integradas para a circulação de contexto.
+La circolazione standard del contesto dello strumento si applica agli strumenti lato server (integrati).
+L'esecuzione di codice è anche uno strumento lato server, ma ha una propria soluzione integrata per la circolazione del contesto. L'utilizzo del computer e la chiamata di funzioni sono strumenti lato client e hanno anche soluzioni integrate per la circolazione del contesto.
 
-| Ferramenta | Lado de execução | Suporte à circulação de contexto |
+| Strumento | Lato di esecuzione | Supporto per la circolazione del contesto |
 | --- | --- | --- |
-| [Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br) | do lado do servidor | Compatível |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br) | do lado do servidor | Compatível |
-| [Contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br) | do lado do servidor | Compatível |
-| [Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br) | do lado do servidor | Compatível |
-| [Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br) | do lado do servidor | Compatível (integrado, usa as partes `executableCode` e `codeExecutionResult`) |
-| [Uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br) | Lado do cliente | Compatível (integrado, usa as partes `functionCall` e `functionResponse`) |
-| [Funções personalizadas](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) | Lado do cliente | Compatível (integrado, usa as partes `functionCall` e `functionResponse`) |
+| [Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) | Lato server | Supportato |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it) | Lato server | Supportato |
+| [Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it) | Lato server | Supportato |
+| [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it) | Lato server | Supportato |
+| [Esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it) | Lato server | Supportato (integrato, utilizza le parti `executableCode` e `codeExecutionResult`) |
+| [Utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it) | Lato client | Supportato (integrato, utilizza le parti `functionCall` e `functionResponse`) |
+| [Funzioni personalizzate](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) | Lato client | Supportato (integrato, utilizza le parti `functionCall` e `functionResponse`) |
 
-## A seguir
+## Passaggi successivi
 
-- Saiba mais sobre [a chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) na API Gemini.
-- Conheça as ferramentas compatíveis:
-  - [Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)
-  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)
-  - [Contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)
-  - [Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)
+- Scopri di più sulla [chiamata di funzioni](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) nell'API Gemini.
+- Esplora gli strumenti supportati:
+  - [Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it)
+  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it)
+  - [Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it)
+  - [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it)
 
-Envie comentários
+Invia feedback
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Última atualização 2026-10-13 UTC.
+Ultimo aggiornamento 2026-10-13 UTC.
 
-Quer enviar seu feedback?
+Vuoi dirci altro?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-10-13 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-10-13 UTC."],[],[]]

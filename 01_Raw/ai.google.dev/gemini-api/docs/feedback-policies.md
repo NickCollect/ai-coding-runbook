@@ -1,63 +1,62 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=hi
-fetched_at: 2026-10-19T05:51:37.246636+00:00
-title: "\u0938\u0941\u091d\u093e\u0935 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=vi
+fetched_at: 2026-10-26T05:56:29.021093+00:00
+title: "Ph\u1ea3n h\u1ed3i \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-# सुझाव
+# Phản hồi
 
-Google AI Studio में, मॉडल के आउटपुट, जनरेट किए गए आर्टफ़ैक्ट, और एपीआई अनुरोध लॉग के बारे में सुझाव/राय देने या शिकायत करने के कई तरीके उपलब्ध हैं. यह नीति, Google AI Studio पर सबमिट किए गए सभी सुझाव/राय या शिकायत पर लागू होती है. इनमें जवाबों को रेटिंग देना (जैसे कि पसंद और नापसंद करना), लिखित टिप्पणियां, और पसंद के हिसाब से वोट करना (जैसे कि इनलाइन प्रेफ़रेंस वोटिंग और बिल्ड अरीना मोड) शामिल है.
+Google AI Studio cung cấp nhiều cách để bạn gửi ý kiến phản hồi về đầu ra của mô hình, các cấu phần phần mềm được tạo và nhật ký yêu cầu API. Chính sách này áp dụng cho tất cả ý kiến phản hồi được gửi trên Google AI Studio, bao gồm cả điểm xếp hạng phản hồi (chẳng hạn như thích và không thích), bình luận bằng văn bản và bình chọn lựa chọn ưu tiên (chẳng hạn như Bình chọn lựa chọn ưu tiên trong dòng và chế độ Build Arena).
 
-## हम ऐसा क्यों कर रहे हैं?
+## Vì sao chúng tôi làm vậy?
 
-हम अपने एआई मॉडल और सेवाओं को बेहतर बनाने के लिए लगातार काम कर रहे हैं. आपके सुझाव, राय या शिकायत से हमें Google के प्रॉडक्ट, सेवाओं, और मशीन लर्निंग टेक्नोलॉजी को उपलब्ध कराने, उन्हें बेहतर बनाने, और डेवलप करने में मदद मिलती है. इनमें Google की एंटरप्राइज़ सुविधाएं, प्रॉडक्ट, और सेवाएं भी शामिल हैं. ऐसा [Gemini API की सेवा की अतिरिक्त शर्तों](https://ai.google.dev/gemini-api/terms?hl=hi) और [निजता नीति](https://policies.google.com/privacy?hl=hi) के मुताबिक किया जाता है.
+Chúng tôi không ngừng nỗ lực cải thiện các mô hình và dịch vụ AI của mình. Ý kiến phản hồi của bạn giúp chúng tôi cung cấp, cải thiện và phát triển các sản phẩm, dịch vụ cũng như công nghệ học máy của Google, bao gồm cả các tính năng, sản phẩm và dịch vụ dành cho doanh nghiệp của Google, theo [Điều khoản dịch vụ bổ sung của Gemini API](https://ai.google.dev/gemini-api/terms?hl=vi) và [Chính sách quyền riêng tư](https://policies.google.com/privacy?hl=vi).
 
-## सुझाव/राय या शिकायत में कौनसा डेटा शामिल होता है?
+## Những dữ liệu nào được đưa vào ý kiến phản hồi?
 
-अपने मॉडल और सुविधाओं के बारे में बेहतर फ़ैसले लेने के लिए, हम कुछ डेटा इकट्ठा करते हैं. यह डेटा तब इकट्ठा किया जाता है, जब Google AI Studio में सुझाव/राय दी जाती है या शिकायत की जाती है:
+Để đưa ra quyết định sáng suốt về các mô hình và tính năng của chúng tôi, chúng tôi thu thập một số dữ liệu nhất định khi bạn gửi ý kiến phản hồi trong Google AI Studio:
 
-- **प्रॉम्प्ट और जवाब:** हम प्रॉम्प्ट और जवाब रिकॉर्ड करते हैं. इनमें अपलोड की गई फ़ाइलें या मीडिया भी शामिल होता है. यह वह इंटरैक्शन या बातचीत होती है जिसके बारे में आपने सुझाव/राय दी है या शिकायत की है. जब तुलनात्मक प्राथमिकता के आधार पर आकलन में हिस्सा लिया जाता है, तो हम जवाब के कई विकल्पों को भी रिकॉर्ड करते हैं. इससे हमें यह समझने में मदद मिलती है कि आपने किस आधार पर कोई विकल्प चुना.
-- **आपकी रेटिंग, वोट या टिप्पणियां:** हम आपकी दी गई रेटिंग (जैसे, पसंद या नापसंद), वोट में चुना गया विकल्प, चुनी गई सुझाव/राय देने या शिकायत करने की कैटगरी, और सबमिट की गई टिप्पणियां रिकॉर्ड करते हैं.
-- **इस्तेमाल की जानकारी:** इसमें आपके इंटरैक्शन या बातचीत से जुड़ी तकनीकी और ऑपरेशनल जानकारी शामिल होती है. जैसे, किस मॉडल ने जवाब जनरेट किया, मॉडल के पैरामीटर, और सिस्टम मेटाडेटा.
+- **Câu lệnh và câu trả lời:** Chúng tôi ghi lại câu lệnh và câu trả lời, bao gồm cả mọi tệp hoặc nội dung nghe nhìn được tải lên, từ hoạt động tương tác hoặc cuộc trò chuyện mà bạn đã gửi ý kiến phản hồi. Khi bạn tham gia đánh giá lựa chọn ưu tiên so sánh, chúng tôi cũng ghi lại nhiều lựa chọn phản hồi được đưa ra để có thể hiểu được bối cảnh lựa chọn của bạn.
+- **Điểm xếp hạng, phiếu bầu hoặc bình luận của bạn:** Chúng tôi ghi lại điểm xếp hạng mà bạn đã đưa ra (chẳng hạn như thích hoặc không thích), câu trả lời mà bạn chọn trong một cuộc bình chọn, mọi danh mục ý kiến phản hồi đã chọn và mọi bình luận bằng văn bản mà bạn đã gửi.
+- **Thông tin chi tiết về việc sử dụng:** Thông tin này bao gồm thông tin chi tiết về kỹ thuật và hoạt động từ hoạt động tương tác hoặc cuộc trò chuyện của bạn, chẳng hạn như thông tin về mô hình đã tạo câu trả lời, các thông số mô hình và siêu dữ liệu hệ thống.
 
-### प्लैटफ़ॉर्म के हिसाब से सुझाव/राय दें या शिकायत करें
+### Phản hồi theo nền tảng
 
-Google AI Studio के अलग-अलग प्लैटफ़ॉर्म पर सुझाव/राय दी जा सकती है या शिकायत की जा सकती है. हालांकि, हर प्लैटफ़ॉर्म पर कॉन्टेक्स्ट में थोड़ा अंतर हो सकता है:
+Bạn có thể gửi ý kiến phản hồi trên nhiều nền tảng trong Google AI Studio, với một số điểm khác biệt nhỏ về ngữ cảnh được ghi lại:
 
-- **AI Studio का Playground:** Playground में, जवाबों को रेटिंग देकर (पसंद या नापसंद) या साइड-बाय-साइड इनलाइन प्रेफ़रेंस वोटिंग का इस्तेमाल करके सुझाव/राय दी जा सकती है या शिकायत की जा सकती है. रिकॉर्ड किए गए डेटा में बातचीत का इतिहास, प्रॉम्प्ट, मॉडल के जवाब, अपलोड किया गया मीडिया या फ़ाइलें, पैरामीटर सेटिंग, सुझाव/राय/शिकायत, और इस्तेमाल की जानकारी शामिल होती है.
-- **AI Studio Build:** Build (इसमें Build Arena भी शामिल है) में, जनरेट किए गए कोड, ऐप्लिकेशन के आउटपुट, और मॉडल की तुलनात्मक परफ़ॉर्मेंस के बारे में सुझाव/राय दी जा सकती है या शिकायत की जा सकती है.
-  रिकॉर्ड किए गए डेटा में, ऐप्लिकेशन बनाने के निर्देश और प्रॉम्प्ट, जनरेट किया गया ऐप्लिकेशन कोड और आउटपुट, तुलनात्मक वोट या रेटिंग, साथ में दिए गए कोई भी सुझाव/राय/शिकायत और इस्तेमाल की जानकारी शामिल होती है.
-- **Gemini API के लॉग:** लॉग और डेटासेट व्यूअर में, Gemini API के अनुरोध के अलग-अलग लॉग पर सुझाव/राय दी जा सकती है या शिकायत की जा सकती है. रिकॉर्ड किए गए डेटा में, एपीआई लॉग की खास एंट्री (इसमें अनुरोध का पेलोड, मॉडल का जवाब, पैरामीटर, और मेटाडेटा शामिल है) के साथ-साथ सुझाव, राय या शिकायत और इस्तेमाल की जानकारी शामिल होती है. लॉग डेटा स्टोरेज और डेटासेट शेयर करने के बारे में ज़्यादा जानने के लिए, [डेटा लॉग करने और शेयर करने](https://ai.google.dev/gemini-api/docs/logs-policy?hl=hi) से जुड़ी नीति देखें.
+- **Playground của AI Studio:** Trong Playground, bạn có thể gửi ý kiến phản hồi bằng cách đánh giá phản hồi (thích hoặc không thích) hoặc bình chọn trực tiếp theo cách so sánh song song. Dữ liệu được ghi lại bao gồm nhật ký trò chuyện, câu lệnh, câu trả lời của mô hình, nội dung nghe nhìn hoặc tệp đã tải lên, chế độ cài đặt tham số, ý kiến phản hồi và thông tin chi tiết về việc sử dụng.
+- **AI Studio Build:** Trong Build (bao gồm cả Build Arena), bạn có thể gửi ý kiến phản hồi về mã được tạo, đầu ra của ứng dụng và các đánh giá so sánh mô hình.
+  Dữ liệu được ghi lại bao gồm các hướng dẫn và câu lệnh tạo bản dựng, mã xử lý ứng dụng và dữ liệu đầu ra được tạo, phiếu bầu hoặc điểm xếp hạng so sánh, mọi nhận xét và thông tin chi tiết về việc sử dụng đi kèm.
+- **Nhật ký Gemini API:** Trong trình xem Nhật ký và tập dữ liệu, bạn có thể gửi ý kiến phản hồi về từng nhật ký yêu cầu API Gemini. Dữ liệu được ghi lại bao gồm mục nhập nhật ký API cụ thể (bao gồm cả tải trọng yêu cầu, phản hồi mô hình, các tham số và siêu dữ liệu) cùng với mọi ý kiến phản hồi và thông tin chi tiết về việc sử dụng. Để biết thêm thông tin chi tiết về việc lưu trữ dữ liệu nhật ký và chia sẻ tập dữ liệu, hãy xem chính sách [Ghi nhật ký và chia sẻ dữ liệu](https://ai.google.dev/gemini-api/docs/logs-policy?hl=vi).
 
-## इनलाइन वोटिंग की सुविधा
+## Bình chọn lựa chọn ưu tiên cùng dòng
 
-Google AI Studio में, आपको कभी-कभी अपने प्रॉम्प्ट के दो अलग-अलग जवाबों की तुलना एक साथ दिख सकती है. यह हमारे प्राथमिकता के हिसाब से वोट करने वाले सिस्टम का हिस्सा है. आपसे पूछा जाएगा कि आपको कौनसा जवाब ज़्यादा पसंद आया. इससे हमें यह समझने में मदद मिलेगी कि उपयोगकर्ताओं को कौनसा मॉडल सबसे ज़्यादा मददगार लगता है.
+Trong Google AI Studio, đôi khi bạn có thể thấy một bản so sánh song song gồm 2 câu trả lời khác nhau cho câu lệnh của mình. Đây là một phần trong hệ thống bình chọn ưu tiên của chúng tôi. Bạn sẽ được yêu cầu chọn câu trả lời mà bạn thích. Việc này giúp chúng tôi hiểu được câu trả lời nào của mô hình mà người dùng thấy hữu ích nhất.
 
-## आपकी निजता
+## Quyền riêng tư của bạn
 
-**ऐसी बातचीत, प्रॉम्प्ट, जवाब या लॉग के बारे में सुझाव/राय या शिकायत सबमिट न करें जिनमें संवेदनशील, गोपनीय या निजी जानकारी शामिल हो.** सुझाव/राय देना या शिकायत करना
-हमेशा आपकी मर्ज़ी पर निर्भर करता है.
+**Đừng gửi ý kiến phản hồi về những cuộc trò chuyện, câu lệnh, câu trả lời hoặc nhật ký có chứa thông tin nhạy cảm, thông tin mật hoặc thông tin cá nhân.** Việc cung cấp ý kiến phản hồi luôn là tự nguyện.
 
-Google AI Studio को बेहतर बनाने में हमारी मदद करने के लिए धन्यवाद!
+Cảm ơn bạn đã giúp chúng tôi cải thiện Google AI Studio!
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-आखिरी बार 2026-09-25 (UTC) को अपडेट किया गया.
+Cập nhật lần gần đây nhất: 2026-09-25 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-25 (UTC) को अपडेट किया गया."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-25 UTC."],[],[]]

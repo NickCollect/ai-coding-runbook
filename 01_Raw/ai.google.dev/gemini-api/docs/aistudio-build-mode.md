@@ -1,202 +1,273 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=hi
-fetched_at: 2026-10-19T05:55:46.092011+00:00
-title: "Google AI Studio \u092e\u0947\u0902 \u0910\u092a\u094d\u0932\u093f\u0915\u0947\u0936\u0928 \u092c\u0928\u093e\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=es-419
+fetched_at: 2026-10-26T05:58:33.879098+00:00
+title: "Crea apps en Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-सुझाव भेजें
+Enviar comentarios
 
-# Google AI Studio में ऐप्लिकेशन बनाना
+# Crea apps en Google AI Studio
 
-इस पेज पर, Google AI Studio का इस्तेमाल करके, तेज़ी से ऐप्लिकेशन बनाने (या "वाइब
-कोड") और उन्हें डिप्लॉय करने का तरीका बताया गया है. इन ऐप्लिकेशन की मदद से, Gemini की नई सुविधाओं को आज़माया जा सकता है. जैसे,
-[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi) और [Live
-API](https://ai.google.dev/gemini-api/docs/live?hl=hi). Google AI Studio की मदद से, **वेब ऐप्लिकेशन** बनाए जा सकते हैं. इनमें फ़ुल-स्टैक रनटाइम का इस्तेमाल किया जाता है. साथ ही, Kotlin और Jetpack Compose की मदद से **नेटिव Android ऐप्लिकेशन** भी बनाए जा सकते हैं. इन सभी के लिए, नैचुरल लैंग्वेज में प्रॉम्प्ट का इस्तेमाल किया जाता है.
+En esta página, se describe cómo usar Google AI Studio para compilar (o "programar
+por intuición") e implementar rápidamente apps que prueben las funciones más recientes de Gemini, como
+[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=es-419) y la [API de
+Live](https://ai.google.dev/gemini-api/docs/live?hl=es-419). Google AI Studio admite la creación de **apps web**
+con entornos de ejecución full stack y **apps nativas para Android** con Kotlin y Jetpack
+Compose, todo a través de instrucciones en lenguaje natural.
 
-## शुरू करें
+## Comenzar
 
-Google AI Studio के ['बनाएं' मोड](https://aistudio.google.com/apps?hl=hi) में, वाइब कोडिंग शुरू करें. ऐप्लिकेशन बनाने के लिए, यहां दिए गए तरीकों का इस्तेमाल किया जा सकता है:
+Comienza a usar el vibe coding en el [modo de compilación](https://aistudio.google.com/apps?hl=es-419) de Google AI Studio. Puedes
+comenzar a compilar de las siguientes maneras:
 
-- **प्रॉम्प्ट से शुरू करें**: 'बनाएं' मोड में, इनपुट बॉक्स का इस्तेमाल करके, बताएं कि आपको क्या बनाना है. अपने प्रॉम्प्ट में, इमेज जनरेट करने या Google Maps का डेटा जोड़ने जैसी खास सुविधाएं शामिल करने के लिए, एआई चिप चुनें. स्पीच-टू-टेक्स्ट बटन का इस्तेमाल करके, यह भी बताया जा सकता है कि आपको क्या चाहिए.
-- **"मेरे पास कम समय है" बटन**: अगर आपको कोई क्रिएटिव आइडिया चाहिए, तो "मेरे पास कम समय है" बटन का इस्तेमाल करें. Gemini, आपको शुरुआत करने के लिए, प्रोजेक्ट के आइडिया के साथ एक प्रॉम्प्ट जनरेट करेगा.
-- **गैलरी से किसी प्रोजेक्ट को रीमिक्स करें**: [ऐप्लिकेशन
-  गैलरी](https://aistudio.google.com/apps?source=showcase&hl=hi) से कोई प्रोजेक्ट खोलें और **ऐप्लिकेशन की कॉपी बनाएं** को चुनें.
-- **GitHub से कोई प्रोजेक्ट इंपोर्ट करें**: 'बनाएं' मोड में, मौजूदा कोड इंपोर्ट करने के लिए, प्रॉम्प्ट
-  इनपुट बॉक्स में **फ़ाइलें जोड़ें** (+ आइकॉन) मेन्यू से
-  **GitHub से इंपोर्ट करें** को चुनें.
+- **Comienza con una instrucción**: En el modo de compilación, usa el cuadro de entrada para ingresar una
+  descripción de lo que quieres compilar. Selecciona chips de IA para agregar funciones específicas,
+  como la generación de imágenes o datos de Google Maps, a tu instrucción. Incluso puedes
+  decir lo que quieres con el botón de voz a texto.
+- **Botón "Voy a tener suerte"**: Si necesitas una chispa creativa, usa el botón "Voy a tener suerte" y Gemini generará una instrucción con una idea de proyecto para que comiences.
+- **Remezcla un proyecto de la galería**: Abre un proyecto de la [galería de apps](https://aistudio.google.com/apps?source=showcase&hl=es-419) y selecciona **Copiar app**.
+- **Importa un proyecto desde GitHub**: En el modo de compilación, selecciona
+  **Importar desde GitHub** en el menú **Agregar archivos** (ícono de signo más) en el cuadro de entrada de la instrucción
+  para importar tu código existente.
 
-प्रॉम्प्ट चलाने के बाद, आपको ज़रूरी कोड और फ़ाइलें जनरेट होती दिखेंगी. साथ ही, दाईं ओर आपके ऐप्लिकेशन की लाइव झलक दिखेगी.
+Una vez que ejecutes la instrucción, verás que se generan el código y los archivos necesarios,
+con una vista previa en vivo de tu app que aparece en el lado derecho.
 
-## क्या बनाया जा सकता है?
+## ¿Qué se crea?
 
-प्रॉम्प्ट चलाने पर, AI Studio एक पूरा ऐप्लिकेशन बनाता है. प्लेटफ़ॉर्म पिकर का इस्तेमाल करके, **वेब ऐप्लिकेशन** या **नेटिव Android ऐप्लिकेशन** बनाया जा सकता है.
+Cuando ejecutas la instrucción, AI Studio crea una aplicación completa. Puedes
+elegir compilar una **app web** o una **app nativa para Android** con el selector de
+plataforma.
 
-**वेब ऐप्लिकेशन** (डिफ़ॉल्ट) के लिए, AI Studio एक फ़ुल-स्टैक एनवायरमेंट बनाता है. इसमें ये शामिल हैं:
+Para las **apps web** (predeterminadas), AI Studio crea un entorno de pila completa que
+incluye lo siguiente:
 
-- **क्लाइंट-साइड**: एक वेब फ़्रंटएंड (डिफ़ॉल्ट रूप से React).
-- **सर्वर-साइड**: एक Node.js रनटाइम, जिसकी मदद से सुरक्षित एपीआई कॉल,
-  डेटाबेस कनेक्शन, और एनपीएम पैकेज का इस्तेमाल किया जा सकता है.
+- **Del cliente**: Un frontend web (React es el valor predeterminado).
+- **Del lado del servidor**: Es un entorno de ejecución de Node.js que permite realizar llamadas a la API,
+  conexiones de bases de datos y uso de paquetes de npm de forma segura.
 
-**Android ऐप्लिकेशन** के लिए, AI Studio, Kotlin और Jetpack Compose प्रोजेक्ट जनरेट करता है. इसकी झलक, ब्राउज़र पर आधारित एम्युलेटर में देखी जा सकती है. इसे किसी फ़िज़िकल डिवाइस पर इंस्टॉल किया जा सकता है. साथ ही, इसे Play Store पर टेस्टिंग के लिए पब्लिश किया जा सकता है. [Android ऐप्लिकेशन बनाने के बारे में ज़्यादा जानें
-apps](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=hi).
+En el caso de las **apps para Android**, AI Studio genera un proyecto de Kotlin y Jetpack Compose
+que puedes obtener una vista previa en un emulador basado en el navegador, instalar en un dispositivo físico
+y publicar en Play Store para realizar pruebas. [Obtén más información para compilar apps para Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419).
 
-दाईं ओर मौजूद झलक वाले पैनल में, **कोड** टैब को चुनकर, जनरेट किया गया कोड देखा जा सकता है. **Antigravity एजेंट**, आपके स्टैक में मौजूद कई फ़ाइलों को बेहतर तरीके से मैनेज करता है. इससे यह पक्का होता है कि बदलाव सही तरीके से लागू हों.
+Para ver el código que se genera, selecciona la pestaña **Código** en el
+panel de vista previa de la derecha. El **agente de Antigravity** administra de forma inteligente
+varios archivos en tu pila, lo que garantiza que los cambios se propaguen
+correctamente.
 
-### Antigravity एजेंट
+### El agente de Antigravity
 
-**Antigravity एजेंट**, [Google
-Antigravity](https://antigravity.google?hl=hi) में एआई की मुख्य सुविधा है. अब एजेंट हार्नेस के मुख्य कॉम्पोनेंट, Google AI Studio में 'बनाएं' मोड के अनुभव को बेहतर बना रहे हैं. यह सिर्फ़ कोड जनरेट करने से कहीं ज़्यादा काम करता है. यह आपके पूरे प्रोजेक्ट के कॉन्टेक्स्ट को बनाए रखता है, कई फ़ाइलें मैनेज करता है, और फ़ुल-स्टैक ऐप्लिकेशन बनाने के लिए, जटिल निर्देशों को समझता है.
+El **agente de Antigravity** es la principal función IA dentro de [Google Antigravity](https://antigravity.google?hl=es-419) y, ahora, los componentes principales del arnés del agente potencian la experiencia del modo de compilación en Google AI Studio. Va
+más allá de la simple generación de código, ya que mantiene el contexto de todo tu proyecto,
+administra varios archivos y comprende instrucciones complejas para compilar aplicaciones sólidas
+y de pila completa.
 
-मुख्य सुविधाएं:
+Las siguientes son algunas de las funciones clave:
 
-- **कॉन्टेक्स्ट की जानकारी**: पिछले प्रॉम्प्ट और फ़ाइल की स्थितियों के कॉन्टेक्स्ट को बनाए रखता है.
-- **कई फ़ाइलें मैनेज करना**: कई फ़ाइलों के बीच मौजूद डिपेंडेंसी को मैनेज करता है.
-- **पुष्टि की गई कार्रवाई**: कोड के अपडेट की पुष्टि करता है, ताकि गलत जानकारी देने की समस्या कम हो.
+- **Reconocimiento del contexto**: Mantiene el contexto de las instrucciones y los estados de los archivos anteriores.
+- **Administración de varios archivos**: Controla las dependencias en varios archivos.
+- **Ejecución verificada**: Verifica las actualizaciones de código para reducir las alucinaciones.
 
-## फ़ुल-स्टैक की सुविधाएं
+## Capacidades full-stack
 
-Google AI Studio, मॉडर्न वेब इकोसिस्टम की सुविधाओं को ऐक्सेस करने की अनुमति देता है. इससे, क्लाइंट-साइड प्रोटोटाइप के अलावा और भी कई तरह के ऐप्लिकेशन बनाए जा सकते हैं.
+Google AI Studio libera el poder del ecosistema web moderno, lo que te permite
+crear más que solo prototipos del lado del cliente.
 
-- **सर्वर-साइड रनटाइम और एनपीएम**: एनपीएम पैकेज की बड़ी लाइब्रेरी का इस्तेमाल करें. एजेंट, आपके ऐप्लिकेशन के लिए ज़रूरी पैकेज की अपने-आप पहचान करेगा और उन्हें इंस्टॉल करेगा. जैसे, डेटा विज़ुअलाइज़ेशन या एपीआई क्लाइंट के लिए खास लाइब्रेरी. अगर चाहें, तो खास पैकेज के लिए अनुरोध भी किया जा सकता है.
-- **सीक्रेट मैनेज करना**: **सेटिंग** मेन्यू में, एपीआई पासकोड और सीक्रेट को सुरक्षित तरीके से स्टोर करें. इन्हें आपके सर्वर-साइड कोड में ऐक्सेस किया जा सकता है. इससे, ये क्लाइंट-साइड पर दिखने से सुरक्षित रहते हैं.
-- **मल्टीप्लेयर**: सीधे
-  AI Studio में, रीयल-टाइम में साथ मिलकर काम करने के अनुभव बनाएं. सर्वर-साइड रनटाइम, उपयोगकर्ताओं के साथ इंटरैक्ट करने के लिए ज़रूरी स्थिति और कनेक्शन को मैनेज करता है.
-- **Firebase Firestore और पुष्टि करना**: Firebase को अपने-आप प्रोविज़न और सेट
-  अप करें. इसमें Firestore डेटाबेस (लगातार डेटा स्टोरेज) और
-  Firebase से पुष्टि करना (साइन-इन फ़्लो, खास तौर पर "Google से साइन इन करें")
-  शामिल है. एजेंट, सेटअप की पूरी प्रोसेस को हैंडल करता है. साथ ही, इन सेवाओं के लिए आपके ऐप्लिकेशन में कोड भी लिखता है.
-- **Google Workspace इंटिग्रेशन**: अपने ऐप्लिकेशन को Gmail, Sheets, Docs, Drive, Calendar वगैरह जैसे Google Workspace
-  API से कनेक्ट करें. AI Studio, OAuth कॉन्फ़िगरेशन को अपने-आप हैंडल करता है.
+- **Entorno de ejecución del servidor y npm**: Usa la amplia biblioteca de paquetes de npm. El
+  agente identificará e instalará automáticamente los paquetes que necesite tu
+  app (p.ej., bibliotecas específicas para la visualización de datos o clientes de API). También
+  puedes solicitar paquetes específicos si lo deseas.
+- **Administración de secretos**: Almacena de forma segura claves de API y secretos en el menú **Configuración**. Se puede acceder a ellas en tu código del servidor, lo que las mantiene
+  a salvo de la exposición del cliente.
+- **Multijugador**: Crea experiencias colaborativas en tiempo real directamente en
+  AI Studio. El entorno de ejecución del servidor administra el estado y las conexiones
+  necesarias para que los usuarios interactúen entre sí.
+- **Firebase Firestore y Authentication**: Aprovisiona y configura Firebase de forma automática, incluida la base de datos de Firestore (almacenamiento de datos persistente) y Firebase Authentication (flujos de acceso, específicamente "Acceder con Google"). El agente controla todo el proceso de configuración y hasta escribe el
+  código en tu app para estos servicios.
+- **Integraciones de Google Workspace**: Conecta tu app a las APIs de Google Workspace, como Gmail, Hojas de cálculo, Documentos, Drive, Calendario y muchas más. AI Studio controla
+  toda la configuración de OAuth automáticamente.
 
-[फ़ुल-स्टैक ऐप्लिकेशन डेवलप करने के बारे में ज़्यादा जानें](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=hi)
+[Más información para desarrollar apps de pila completa](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=es-419)
 
-### Android ऐप्लिकेशन
+### Apps para Android
 
-Kotlin और Jetpack Compose का इस्तेमाल करके, नेटिव Android ऐप्लिकेशन भी बनाए जा सकते हैं.
-अपने ऐप्लिकेशन की झलक, ब्राउज़र पर आधारित Android एम्युलेटर में देखें. साथ ही, ब्राउज़र में ADB का इस्तेमाल करके, इसे किसी डिवाइस पर इंस्टॉल करें. इसके अलावा, इसे इंटरनल टेस्टिंग के लिए Play Store पर पब्लिश करें.
+También puedes compilar apps para Android nativas con Kotlin y Jetpack Compose.
+Obtén una vista previa de tu app en un Android Emulator basado en el navegador, instálala en un dispositivo físico con adb en el navegador y publícala en Play Store para realizar pruebas internas.
 
-[Android ऐप्लिकेशन बनाने के बारे में ज़्यादा जानें](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=hi)
+AI Studio también se integra en
+[Firebase](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=es-419)
+para que las apps para Android aprovisionen automáticamente **Firebase AI Logic** y la **Verificación de aplicaciones de Firebase** (para realizar llamadas seguras a la API de Gemini del cliente sin exponer claves de API sin procesar), así como **Cloud Firestore** y **Firebase Authentication**.
 
-## ऐप्लिकेशन बनाना जारी रखें
+[Más información para compilar apps para Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419)
 
-Google AI Studio, आपके ऐप्लिकेशन के लिए शुरुआती कोड जनरेट करता है. इसके बाद, इसमें बदलाव किया जा सकता है:
+## Continúa con la compilación
 
-### Google AI Studio में ऐप्लिकेशन बनाना
+Una vez que Google AI Studio genere el código inicial para tu aplicación, podrás
+seguir perfeccionándolo:
 
-- **Gemini की मदद से बदलाव करना**: **बनाएं मोड** में, चैट पैनल का इस्तेमाल करके, Gemini
-  से बदलाव करने, नई सुविधाएं जोड़ने या स्टाइल बदलने के लिए कहें.
-- **सीधे कोड में बदलाव करना**: लाइव बदलाव करने के लिए, झलक वाले पैनल में **कोड टैब** खोलें.
+### Compila en Google AI Studio
 
-### बाहर से डेवलप करना
+- **Itera con Gemini**: Usa el panel de chat en el **modo de compilación** para pedirle a Gemini
+  que realice modificaciones, agregue funciones nuevas o cambie el diseño.
+- **Edita el código directamente**: Abre la **pestaña Código** en el panel de vista previa para realizar ediciones en vivo.
 
-ज़्यादा बेहतर वर्कफ़्लो के लिए, कोड को सिंक या एक्सपोर्ट करके, अपनी पसंद के एनवायरमेंट में काम किया जा सकता है:
+### Desarrollar externamente
 
-- **GitHub के साथ सिंक करना**: दो-तरफ़ा सिंक की सुविधा चालू करने के लिए, अपने ऐप्लिकेशन को GitHub रिपॉज़िटरी से कनेक्ट करें. AI Studio में किए गए बदलावों को, एआई से जनरेट किए गए कमिट मैसेज के साथ सीधे अपनी रिपॉज़िटरी में पुश किया जा सकता है. इसके अलावा, अपने आईडीई या टीम के सदस्यों की ओर से स्थानीय तौर पर किए गए बदलावों को वापस AI Studio में पुल किया जा सकता है. सेटिंग में **GitHub** टैब में जाकर, सिंक की स्थिति को कभी भी मैनेज किया जा सकता है.
-- **स्थानीय तौर पर डाउनलोड और डेवलप करना**: जनरेट किए गए कोड को **ZIP
-  फ़ाइल** के तौर पर एक्सपोर्ट करें और इसे अपने कोड एडिटर में इंपोर्ट करें.
+Para flujos de trabajo más avanzados, puedes sincronizar o exportar el código para trabajar en tu
+entorno preferido:
 
-## मुख्य सुविधाएं
+- **Sincronizar con GitHub**: Conecta tu app a un repositorio de GitHub para habilitar
+  la sincronización bidireccional. Puedes enviar los cambios que se solicitan en AI Studio directamente a tu
+  repositorio con mensajes de confirmación generados por IA o extraer los cambios realizados de forma local
+  en tu IDE o por tus compañeros de equipo de vuelta a AI Studio. Administra el estado de sincronización
+  en cualquier momento en la pestaña **GitHub** de Configuración.
+- **Descarga y desarrolla de forma local**: Exporta el código generado como un **archivo ZIP** y, luego, impórtalo a tu editor de código.
 
-Google AI Studio में कई सुविधाएं शामिल हैं, ताकि ऐप्लिकेशन बनाने की प्रोसेस को आसान और विज़ुअल बनाया जा सके:
+## Características clave
 
-- **फ़ुल स्टैक ऐप्लिकेशन बनाना और उनमें बदलाव करना**: सिर्फ़
-  एक प्रॉम्प्ट की मदद से फ़ुल स्टैक ऐप्लिकेशन बनाएं और चैट या **एनोटेशन मोड** की मदद से उनमें बदलाव करें. एनोटेशन मोड की मदद से, अपने ऐप्लिकेशन के यूआई के किसी भी हिस्से को हाइलाइट किया जा सकता है और उस बदलाव के बारे में बताया जा सकता है जो आपको करना है.
-- **अपने ऐप्लिकेशन को शेयर और डिप्लॉय करना**: अपने काम को दिखाने या साथ मिलकर काम करने के लिए, अपनी क्रिएशन को दूसरों के साथ
-  शेयर किया जा सकता है. शेयर करते समय, एपीआई कॉल को आपकी इस्तेमाल की सीमाओं में गिना जाता है. पैसे देकर इस्तेमाल किए जाने वाले मॉडल का इस्तेमाल करने पर, शुल्क लागू हो सकते हैं. इसके बाद, जब आपका ऐप्लिकेशन तैयार हो जाए, तो उसे Cloud Run पर डिप्लॉय करें.
-- **ऐप्लिकेशन की गैलरी**: ऐप्लिकेशन की गैलरी में, प्रोजेक्ट के आइडिया की विज़ुअल लाइब्रेरी उपलब्ध होती है.
-  इसमें Gemini की मदद से किए जा सकने वाले काम देखे जा सकते हैं. साथ ही, ऐप्लिकेशन की झलक तुरंत देखी जा सकती है और उन्हें रीमिक्स करके, अपनी ज़रूरत के हिसाब से बनाया जा सकता है.
+Google AI Studio incluye varias funciones para que el proceso de compilación sea
+intuitivo y visual:
 
-## अपने ऐप्लिकेशन को डिप्लॉय करना या उसका संग्रह बनाना
+- **Crea apps full stack y realiza iteraciones en ellas**: Crea apps full stack con solo
+  una instrucción y realiza iteraciones a través del chat o el **modo de anotación**. El modo de anotación
+  te permite destacar cualquier parte de la IU de tu app y describir el
+  cambio que quieres realizar.
+- **Comparte e implementa tu app**: Puedes compartir tus creaciones con otras personas para
+  colaborar o mostrar tu trabajo. Cuando compartes, las llamadas a la API se consideran en tus límites de uso. Si usas modelos pagados, es posible que se apliquen costos. Luego, cuando tu app esté lista,
+  implementa en Cloud Run.
+- **Galería de apps**: La galería de apps proporciona una biblioteca visual de ideas para proyectos.
+  Puedes explorar lo que es posible con Gemini, obtener una vista previa de las aplicaciones al instante
+  y modificarlas para personalizarlas.
 
-आपका ऐप्लिकेशन तैयार होने के बाद, उसे डिप्लॉय किया जा सकता है:
+## Implementa o archiva tu app
 
-- **Cloud Run**: अपने ऐप्लिकेशन को स्केल की जा सकने वाली सेवा के तौर पर डिप्लॉय करें.
-  इस्तेमाल के आधार पर, [Google Cloud Run](https://cloud.google.com/run?hl=hi) के लिए शुल्क लागू हो सकते हैं. डिप्लॉयमेंट के बारे में ज़्यादा जानने के लिए, [Google AI Studio से डिप्लॉय करना](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=hi) लेख पढ़ें.
-- **GitHub**: सोर्स कोड मैनेज करने या टीम के सदस्यों के साथ मिलकर काम करने के लिए, अपने प्रोजेक्ट को नई या मौजूदा GitHub रिपॉज़िटरी के साथ सिंक करें.
+Cuando tu aplicación esté lista, puedes implementarla de la siguiente manera:
 
-## सीमाएं
+- **Cloud Run**: Implementa tu aplicación como un servicio escalable.
+  Es posible que se apliquen precios de [Google Cloud Run](https://cloud.google.com/run?hl=es-419) según
+  el uso. Para obtener más información sobre la implementación, consulta
+  [Implementa desde Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=es-419).
+- **GitHub**: Sincroniza tu proyecto con un repositorio de GitHub nuevo o existente
+  para administrar el código fuente o colaborar con tus compañeros de equipo.
 
-इस सेक्शन में, Google AI Studio में 'बनाएं' मोड की मौजूदा सीमाओं की जानकारी दी गई है.
+## Limitaciones
 
-### एपीआई पासकोड मैनेज करना
+En esta sección, se enumeran las limitaciones actuales del modo de compilación en Google AI Studio.
 
-Gemini API का इस्तेमाल करने वाला नया ऐप्लिकेशन बनाने पर, AI Studio, आपके Gemini API पासकोड को ऐप्लिकेशन के सर्वर-साइड एनवायरमेंट में सीक्रेट के तौर पर अपने-आप कॉन्फ़िगर कर देता है.
-इस पासकोड को **सीक्रेट** पैनल में देखा और मैनेज किया जा सकता है.
+### Administración de claves de API
 
-- **अपने-आप सेटअप होना**: आपका `GEMINI_API_KEY` अपने-आप सेट अप हो जाता है. ऐप्लिकेशन बनाने के लिए, मैन्युअल तरीके से
-  कॉन्फ़िगरेशन करने की ज़रूरत नहीं होती.
-- **सिर्फ़ सर्वर-साइड**: एपीआई पासकोड, सर्वर-साइड रनटाइम में डाले जाते हैं.
-  इन्हें कभी भी क्लाइंट-साइड कोड में शामिल नहीं किया जाता.
-- **मौजूदा ऐप्लिकेशन**: 14 मई, 2026 से पहले बनाए गए ऐप्लिकेशन के लिए, एजेंट, आपके Gemini API इंटिग्रेशन को, सुझाए गए
-  सर्वर-साइड तरीके में अपने-आप अपग्रेड कर देगा. ऐसा तब होगा, जब अगली बार ऐप्लिकेशन की Gemini सुविधाओं में बदलाव किया जाएगा.
+Cuando creas una app web nueva que usa la API de Gemini, AI Studio configura automáticamente
+tu clave de API de Gemini como un secreto en el entorno del servidor de la app.
+Puedes ver y administrar esta clave en el panel **Secrets**.
 
-### Google AI Studio के बाहर डिप्लॉय करना
+- **Configuración automática**: Tu `GEMINI_API_KEY` se configura automáticamente, por lo que no se requiere
+  ninguna configuración manual para comenzar a compilar.
+- **Solo del servidor**: Las claves de API se insertan en el entorno de ejecución del servidor y
+  nunca se incluyen en el código del cliente.
+- **Apps existentes**: En el caso de las apps creadas antes del 14 de mayo de 2026, el agente
+  actualizará automáticamente tu integración de la API de Gemini al enfoque recomendado
+  del servidor la próxima vez que modifiques las funciones de Gemini de la app.
 
-- **Cloud Run**: AI Studio से Cloud Run पर डिप्लॉय करने पर, आपका एपीआई पासकोड, सर्वर-साइड एनवायरमेंट में सुरक्षित तरीके से
-  शामिल किया जाता है. डिप्लॉय किया गया ऐप्लिकेशन, सभी उपयोगकर्ताओं के Gemini API कॉल के लिए आपके एपीआई पासकोड का इस्तेमाल करेगा.
-- **ZIP फ़ाइल के तौर पर डाउनलोड करना**: अगर अपने ऐप्लिकेशन को कहीं और चलाने के लिए, ZIP फ़ाइल के तौर पर डाउनलोड किया जाता है, तो आपको अपने होस्टिंग एनवायरमेंट में `GEMINI_API_KEY` एनवायरमेंट वैरिएबल सेट अप करना होगा. आपके ऐप्लिकेशन के Gemini API कॉल, सर्वर-साइड कोड से किए जाते हैं. इसलिए, पासकोड असली उपयोगकर्ताओं को नहीं दिखता.
+#### Apps para Android
 
-### ऐप्लिकेशन शेयर करते समय गड़बड़ी होना
+Cuando se compilan apps para Android, AI Studio usa
+[Firebase AI Logic y Verificación de aplicaciones de Firebase](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419#firebase-integration) en lugar de una clave de API sin procesar, por lo que las credenciales nunca se incorporan en tu APK.
 
-अगर आपने अपना ऐप्लिकेशन शेयर किया है और असली उपयोगकर्ता को शेयर किए गए यूआरएल का इस्तेमाल करते समय, **403 ऐक्सेस प्रतिबंधित है** गड़बड़ी दिखती है, तो इसकी वजह इनमें से कोई एक हो सकती है:
+### Implementación fuera de Google AI Studio
 
-- **ब्राउज़र एक्सटेंशन**: Privacy Badger जैसे निजता बनाए रखने वाले एक्सटेंशन, ऐप्लिकेशन को ब्लॉक कर सकते हैं. गड़बड़ी से बचने के लिए, एक्सटेंशन बंद करें.
-- **ऐप्लिकेशन बनाने में समस्याएं**: मौजूदा कोड में समस्याएं हो सकती हैं. एजेंट को "मौजूदा कोड में ऐप्लिकेशन बनाने से जुड़ी समस्याओं को ठीक करने" के लिए प्रॉम्प्ट करें. इसके बाद, यूआरएल को फिर से शेयर करें.
+- **Cloud Run**: Cuando implementas en Cloud Run desde AI Studio, tu clave de API se
+  incluye de forma segura en el entorno del servidor. La app implementada usará
+  tu clave de API para todas las llamadas a la API de Gemini de los usuarios.
+- **Descarga de ZIP**: Si descargas tu app como un archivo ZIP para ejecutarla
+  en otro lugar, deberás configurar la variable de entorno `GEMINI_API_KEY`
+  en tu entorno de hosting. Como las llamadas a la API de Gemini de tu app se realizan desde
+  el código del servidor, la clave no se expone a los usuarios finales.
 
-## अक्सर पूछे जाने वाले सवाल
+### Error cuando se comparten apps
 
-### AI Studio में बिल्ड क्या है?
+Si compartes tu app y el usuario final se encuentra con un error **403 Access Restricted**
+cuando usa la URL compartida, puede deberse a uno de los siguientes motivos:
 
-AI Studio का 'बनाएं' मोड एक ऐसा प्लैटफ़ॉर्म है जिसकी मदद से, Gemini का इस्तेमाल करके, एक सामान्य प्रॉम्प्ट से लेकर प्रोडक्शन के लिए तैयार, एआई की मदद से काम करने वाला ऐप्लिकेशन बनाया जा सकता है. प्रॉम्प्ट की मदद से बताएं कि आपको क्या बनाना है. Gemini, आपके लिए एक ऐप्लिकेशन जनरेट करेगा. हमारी गैलरी में जाकर, यह भी देखा जा सकता है कि Gemini API की मदद से क्या-क्या किया जा सकता है. साथ ही, ऐप्लिकेशन को रीमिक्स करके, अपनी ज़रूरत के हिसाब से बनाया जा सकता है.
+- **Extensiones del navegador**: Es posible que las extensiones de privacidad, como Privacy Badger, bloqueen la app. Inhabilita la extensión para evitar el error.
+- **Problemas de compilación**: Es posible que haya problemas con el código actual. Pídele al
+  agente que "solucione cualquier problema de compilación con el código actual" y, luego, vuelve a compartir la
+  URL.
 
-### 'बनाएं' मोड, मेरे Gemini API पासकोड को कैसे हैंडल करता है?
+## Preguntas frecuentes
 
-Gemini API का इस्तेमाल करने वाला ऐप्लिकेशन बनाने पर, AI Studio, आपके Gemini API पासकोड को सर्वर-साइड सीक्रेट के तौर पर अपने-आप सेट अप कर देता है. आपके ऐप्लिकेशन के Gemini API कॉल, इस पासकोड का इस्तेमाल करके, सर्वर-साइड कोड से किए जाते हैं. इसलिए, यह ब्राउज़र में कभी नहीं दिखता. सेटिंग में **सीक्रेट** पैनल में जाकर, अपना एपीआई पासकोड देखा जा सकता है.
+### ¿Qué es Build in AI Studio?
 
-### क्या ऐप्लिकेशन शेयर करते समय, मेरा एपीआई पासकोड दिखता है?
+AI Studio Build es una plataforma diseñada para llevarte de una instrucción simple a una
+aplicación potenciada por IA lista para producción con Gemini. Describe lo que
+quieres compilar con una instrucción y Gemini generará una app para ti. También
+puedes explorar nuestra galería para ver qué es posible con la API de Gemini
+y hacer remixes de apps para personalizarlas.
 
-नहीं. आपका एपीआई पासकोड, सर्वर-साइड सीक्रेट के तौर पर स्टोर किया जाता है. इसे कभी भी क्लाइंट-साइड कोड में शामिल नहीं किया जाता. अपने ऐप्लिकेशन को शेयर करने पर, अन्य लोग इसका इस्तेमाल कर सकते हैं. हालांकि, वे आपका एपीआई पासकोड नहीं देख सकते.
+### ¿Cómo controla Build mi clave de API de Gemini?
 
-अपने ऐप्लिकेशन को दूसरों के साथ शेयर करते समय, एपीआई कॉल को आपकी इस्तेमाल की सीमाओं में गिना जाता है.
-पैसे देकर इस्तेमाल किए जाने वाले मॉडल का इस्तेमाल करने पर, शुल्क लागू हो सकते हैं. अगर आपके ऐप्लिकेशन पर शुल्क लग सकता है, तो AI Studio, सेटअप के दौरान और शेयर करने से पहले आपको इसकी जानकारी देगा.
+Cuando creas una app web que usa la API de Gemini, AI Studio configura automáticamente
+tu clave de API de Gemini como un secreto del servidor. Las llamadas a la API de Gemini de tu app
+se realizan desde el código del servidor con esta clave, por lo que nunca se expone
+en el navegador. Puedes ver tu clave de API en el panel **Secrets** en
+Configuración. En el caso de las apps para Android, AI Studio usa [Firebase AI Logic y la Verificación de aplicaciones de Firebase](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419#firebase-integration) para realizar llamadas seguras del cliente sin incorporar una clave de API en el objeto binario de la app.
 
-### मेरे ऐप्लिकेशन कौन देख सकता है?
+### ¿Se expone mi clave de API cuando comparto apps?
 
-डिफ़ॉल्ट रूप से, आपका ऐप्लिकेशन निजी होता है. अपने ऐप्लिकेशन को अन्य उपयोगकर्ताओं के साथ शेयर करके, उन्हें इसका इस्तेमाल करने की अनुमति दी जा सकती है. जिन उपयोगकर्ताओं के साथ अपना ऐप्लिकेशन शेयर किया जाता है वे इसका कोड देख सकते हैं और अपने मकसद के लिए इसकी कॉपी बना सकते हैं. अगर अपने ऐप्लिकेशन को बदलाव करने की अनुमति के साथ शेयर किया जाता है, तो अन्य उपयोगकर्ता आपके ऐप्लिकेशन के कोड में बदलाव कर सकते हैं.
+No. Tu clave de API se almacena como un secreto del servidor y nunca se incluye en el código del cliente. Cuando compartes tu app, otros usuarios pueden usarla, pero no pueden ver tu clave de API.
 
-### क्या AI Studio के बाहर ऐप्लिकेशन चलाए जा सकते हैं?
+Cuando compartes tus apps con otras personas, las llamadas a la API se tienen en cuenta para tus límites de uso.
+Si usas modelos pagados, es posible que se apliquen costos. AI Studio te avisará
+durante la configuración y antes de compartir si tu app podría generar costos.
 
-हां. अपने ऐप्लिकेशन को
-[Cloud Run](https://cloud.google.com/run?hl=hi) से AI Studio पर डिप्लॉय किया जा सकता है. इससे आपके ऐप्लिकेशन को एक सार्वजनिक यूआरएल मिलता है. साथ ही, आपका एपीआई पासकोड,
-सर्वर-साइड एनवायरमेंट में सुरक्षित तरीके से कॉन्फ़िगर किया जाता है. अपने ऐप्लिकेशन को ZIP फ़ाइल के तौर पर डाउनलोड करके, इसे कहीं और होस्ट किया जा सकता है. इसके लिए, आपको अपने होस्टिंग एनवायरमेंट में `GEMINI_API_KEY` एनवायरमेंट वैरिएबल सेट करना होगा. Gemini API कॉल, सर्वर-साइड कोड से किए जाते हैं. इसलिए, आपका पासकोड सुरक्षित रहता है.
+### ¿Quién puede ver mis apps?
 
-डिप्लॉयमेंट के विकल्पों के बारे में ज़्यादा जानने के लिए, [Google AI Studio से डिप्लॉय करना](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=hi) लेख पढ़ें.
+De forma predeterminada, tu app es privada. Puedes compartir tu app con otros usuarios para
+que la usen. Los usuarios con los que compartes tu app pueden ver su código y bifurcarlo
+para sus propios fines. Si compartes tu app con permiso de edición, los
+demás usuarios podrán editar el código de tu app.
 
-### क्या अपने टूल का इस्तेमाल करके, स्थानीय तौर पर ऐप्लिकेशन डेवलप किए जा सकते हैं और फिर उन्हें यहां शेयर किया जा सकता है?
+### ¿Puedo ejecutar apps fuera de AI Studio?
 
-हां. अपने AI Studio ऐप्लिकेशन को GitHub रिपॉज़िटरी से कनेक्ट करके, अपनी पसंद के कोड एडिटर या सीएलआई टूल का इस्तेमाल करके, स्थानीय तौर पर डेवलप किया जा सकता है. इसके बाद, अपने बदलावों को GitHub पर पुश किया जा सकता है. फिर, सेटिंग में **GitHub** टैब का इस्तेमाल करके, उन अपडेट को सीधे AI Studio में पुल किया जा सकता है.
+Sí. Puedes implementar tu app en
+[Cloud Run](https://cloud.google.com/run?hl=es-419) desde AI Studio, lo que
+le otorga una URL pública con tu clave de API configurada de forma segura en el
+entorno del servidor. También puedes descargar tu app como un archivo ZIP y
+alojarla en otro lugar. Deberás establecer la variable de entorno `GEMINI_API_KEY`
+en tu entorno de hosting. Como las llamadas a la API de Gemini se realizan desde
+el código del servidor, tu clave se mantiene segura.
 
-### अपने ऐप्लिकेशन के साथ डेटाबेस या अन्य स्टोरेज का इस्तेमाल कैसे किया जा सकता है?
+Para obtener más información sobre las opciones de implementación, consulta [Implementa desde Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=es-419).
 
-AI Studio ऐप्लिकेशन, Cloud Run कंटेनर में चलने वाले स्टैंडर्ड ऐप्लिकेशन होते हैं. किसी भी स्टोरेज सलूशन का इस्तेमाल किया जा सकता है जिसे नेटवर्क से कनेक्ट किया जा सकता है. हालांकि, इसके लिए यह ज़रूरी है कि कोई फ़ायरवॉल, डाइनैमिक आईपी रेंज से ऐक्सेस को न रोक रहा हो.
+### ¿Puedo desarrollar apps de forma local con mis propias herramientas y, luego, compartirlas aquí?
 
-हम आने वाले समय में स्टोरेज के लिए सीधे तौर पर सहायता जोड़ने पर काम कर रहे हैं. इसे सीधे AI Studio में कॉन्फ़िगर किया जा सकेगा.
+Sí. Puedes conectar tu app de AI Studio a un repositorio de GitHub para desarrollarla
+de forma local con tu editor de código o herramientas de CLI preferidos, enviar los cambios a
+GitHub y, luego, extraer esas actualizaciones directamente a AI Studio con la
+pestaña **GitHub** en Configuración.
 
-### माइक्रोफ़ोन, वेबकैम, और अन्य Navigator API को कैसे ऐक्सेस किया जा सकता है?
+### ¿Cómo puedo usar una base de datos o algún otro tipo de almacenamiento con mis apps?
 
-यह पक्का करने के लिए कि दर्शकों को किसी ऐप्लिकेशन के वेबकैम या अन्य
-डिवाइसों के इस्तेमाल के बारे में पता हो, हम इन [Navigator API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator) को ऐक्सेस करने से पहले, एक अतिरिक्त पुष्टि की ज़रूरत होती है.
-ऐप्लिकेशन बनाने वाले लोग, अपने ऐप्लिकेशन की `metadata.json` फ़ाइल में, अनुमति के इन अनुरोधों को जोड़ सकते हैं. उदाहरण के लिए:
+Las apps de AI Studio son apps estándar que se ejecutan en un contenedor de Cloud Run. Puedes
+usar cualquier solución de almacenamiento a la que puedas conectarte a través de una red, siempre
+y cuando no haya un firewall que impida el acceso desde un rango de IP dinámico.
+
+Estamos trabajando para agregar compatibilidad directa con el almacenamiento en el futuro, que
+podrás configurar directamente en AI Studio.
+
+### ¿Cómo puedo acceder al micrófono, la cámara web y otras APIs de Navigator?
+
+Para garantizar que los usuarios sepan que una app usa su cámara web o algún otro dispositivo, solicitamos una confirmación adicional antes de que la app pueda acceder a estas [APIs de Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator).
+Los creadores de apps pueden agregar estas solicitudes de permiso al archivo `metadata.json` de su app. Por ejemplo:
 
 ```
 {
@@ -214,73 +285,84 @@ AI Studio ऐप्लिकेशन, Cloud Run कंटेनर में �
 }
 ```
 
-`requestFramePermissions` के लिए इस्तेमाल की जा सकने वाली वैल्यू,
-स्टैंडर्ड [नीति के तहत कंट्रोल की जाने वाली सुविधाओं](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md) का सबसेट होती हैं.
+Los valores admitidos para `requestFramePermissions` son un subconjunto de las
+[funciones estándar controladas por políticas](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
 
-### अपने ऐप्लिकेशन के साथ GitHub का इस्तेमाल कैसे किया जा सकता है?
+### ¿Cómo puedo usar GitHub con mis apps?
 
-AI Studio, GitHub के साथ दो-तरफ़ा सिंक की सुविधा देता है:
+AI Studio admite la sincronización bidireccional con GitHub:
 
-- **रिपॉज़िटरी इंपोर्ट करना**: 'बनाएं' मोड में, मौजूदा कोड इंपोर्ट करने के लिए, प्रॉम्प्ट इनपुट बॉक्स में **फ़ाइलें जोड़ें** (+ आइकॉन) मेन्यू से **GitHub से इंपोर्ट करें**
-  को चुनें.
-- **रिपॉज़िटरी लिंक करना**: सेटिंग में, **GitHub** टैब खोलें. यहां से, अपने ऐप्लिकेशन से नई GitHub रिपॉज़िटरी बनाई जा सकती है या किसी मौजूदा रिपॉज़िटरी को लिंक किया जा सकता है.
-- **दो-तरफ़ा सिंक**: AI Studio में किए गए बदलावों को, एआई से जनरेट किए गए कमिट मैसेज के साथ सीधे अपनी
-  रिपॉज़िटरी में पुश किया जा सकता है. इसके अलावा, बाहर से किए गए बदलावों (जैसे, स्थानीय आईडीई में किए गए बदलाव या टीम के सदस्यों के पुल अनुरोध) को वापस AI
-  Studio में पुल किया जा सकता है.
-- **मर्ज के टकरावों को हल करना**: GitHub के साथ सिंक करते समय, अगर बदलावों में टकराव होता है, तो AI Studio, **टकरावों को हल करें** डायलॉग दिखाता है. इसमें, साइड-बाय-साइड डिफ़ व्यूअर होता है. इसकी मदद से, अंतर की समीक्षा की जा सकती है और यह चुना जा सकता है कि टकराव वाली हर फ़ाइल के लिए, AI Studio या GitHub का कौनसा वर्शन रखना है.
+- **Importa un repositorio**: En el modo de compilación, selecciona **Importar desde GitHub**
+  en el menú **Agregar archivos** (ícono de signo más) del cuadro de entrada de instrucciones para importar
+  código existente.
+- **Vincula un repositorio**: En Configuración, abre la pestaña **GitHub** para crear un repositorio de GitHub nuevo desde tu app o vincularlo a uno existente.
+- **Sincronización bidireccional**: Envía los cambios solicitados en AI Studio directamente a tu
+  repositorio con mensajes de confirmación generados por IA o extrae los cambios realizados
+  de forma externa (como ediciones locales del IDE o solicitudes de extracción de compañeros de equipo) de vuelta a AI
+  Studio.
+- **Resuelve conflictos de combinación**: Si los cambios entran en conflicto cuando se sincronizan con
+  GitHub, AI Studio proporciona un diálogo **Resolver conflictos** con un
+  visor de diferencias en paralelo, lo que te permite revisar las diferencias y elegir
+  si deseas conservar la versión de AI Studio o de GitHub para cada archivo en conflicto.
 
-### क्या अन्य उपयोगकर्ताओं को अपने ऐप्लिकेशन में बदलाव करने का ऐक्सेस दिया जा सकता है?
+### ¿Puedo otorgar acceso de edición a mi app a otros usuarios?
 
-AI Studio, रीयल-टाइम में साथ मिलकर बदलाव करने की सुविधा नहीं देता.
-हालांकि, अपने ऐप्लिकेशन को शेयर की गई GitHub रिपॉज़िटरी से लिंक करके, टीम के सदस्यों के साथ मिलकर काम किया जा सकता है. टीम के सदस्य, GitHub पर बदलाव पुश कर सकते हैं या पुल अनुरोध खोल सकते हैं. साथ ही, उन अपडेट को AI Studio में पुल किया जा सकता है.
+AI Studio no admite la edición colaborativa directa en tiempo real.
+Sin embargo, puedes colaborar con tus compañeros de equipo vinculando tu app a un repositorio de GitHub compartido. Los miembros del equipo pueden enviar cambios o abrir solicitudes de extracción en GitHub,
+y tú puedes incorporar esas actualizaciones en AI Studio.
 
-### नीति का उल्लंघन करने की वजह से, मेरे ऐप्लिकेशन को फ़्लैग क्यों किया गया?
+### ¿Por qué se marcó mi app por incumplimiento de política?
 
-हमारे पास ऐसे सिस्टम हैं जो ऐप्लिकेशन की समीक्षा अपने-आप करते हैं, ताकि यह पक्का किया जा सके कि वे हमारी नीतियों का पालन करते हैं. अगर हमें पता चलता है कि कोई ऐप्लिकेशन हमारी नीतियों का उल्लंघन करता है, तो उसे AI Studio से हटा दिया जाएगा. नीति के उल्लंघन में ये शामिल हो सकते हैं. हालांकि, ये इन तक ही सीमित नहीं हैं:
+Contamos con sistemas que revisan automáticamente las apps para garantizar que cumplan con nuestras políticas. Si descubrimos que una app incumple nuestras políticas, se quitará
+de AI Studio. Los incumplimientos de política pueden incluir, entre otros, los siguientes:
 
-- ऐसे ऐप्लिकेशन जिनमें मैलवेयर, फ़िशिंग या किसी दूसरे के नाम पर काम करने की गतिविधि शामिल हो
-- ऐसे ऐप्लिकेशन जिनमें बच्चों का यौन शोषण दिखाने वाली तस्वीरें और/या वीडियो से जुड़ी नीति का उल्लंघन करने वाला कॉन्टेंट दिखाया या शेयर किया गया हो
-- ऐसे ऐप्लिकेशन जिनमें उत्पीड़न से जुड़ी नीति का उल्लंघन करने वाला कॉन्टेंट दिखाया या शेयर किया गया हो
-- ऐसे ऐप्लिकेशन जिनमें नफ़रत फैलाने वाली भाषा का इस्तेमाल रोकने के लिए बनी नीति का उल्लंघन करने वाला कॉन्टेंट दिखाया या शेयर किया गया हो
-- ऐसे ऐप्लिकेशन जिनमें मानव तस्करी से जुड़ी नीति का उल्लंघन करने वाला कॉन्टेंट दिखाया या शेयर किया गया हो
-- ऐसे ऐप्लिकेशन जिनमें साफ़ तौर पर सेक्शुअल ऐक्ट दिखाने वाले कॉन्टेंट से जुड़ी नीति का उल्लंघन करने वाला कॉन्टेंट दिखाया या शेयर किया गया हो
-- ऐसे ऐप्लिकेशन जिनमें हिंसा और खून-खराबे से जुड़ी नीति का उल्लंघन करने वाला कॉन्टेंट दिखाया या शेयर किया गया हो
-- ऐसे ऐप्लिकेशन जिनमें नुकसान पहुंचाने वाले या खतरनाक कॉन्टेंट से जुड़ी नीति का उल्लंघन करने वाला कॉन्टेंट दिखाया या शेयर किया गया हो
+- Apps que contienen software malicioso, phishing o suplantación de identidad
+- Apps que muestran o distribuyen contenido que infringe la política sobre imágenes de abuso sexual infantil
+- Apps que muestran o distribuyen contenido que infringe la política de hostigamiento
+- Apps que muestran o distribuyen contenido que incumple la política sobre la incitación al odio o a la violencia
+- Apps que muestran o distribuyen contenido que incumple la política de trata de personas
+- Aplicaciones que muestran o distribuyen contenido que infringe la política de contenido sexual explícito
+- Apps que muestren o distribuyan contenido que infrinja la política de contenido violento y sangriento
+- Apps que muestran o distribuyen contenido que infringe la política de contenido dañino o peligroso
 
-अगर आपके ऐप्लिकेशन को नीति का उल्लंघन करने की वजह से फ़्लैग किया गया है और आपको लगता है कि यह गलती से हुआ है, तो अपील सबमिट की जा सकती है. हमारी नीतियों का बार-बार उल्लंघन करने पर, AI Studio का ऐक्सेस खत्म किया जा सकता है.
+Si se marcó tu app por un incumplimiento de política y crees que se trata de un error, puedes enviar una apelación. Los incumplimientos reiterados de nuestras políticas pueden
+ocasionar la rescisión de tu acceso a AI Studio.
 
-### ऐप्लिकेशन डेवलपर के तौर पर मेरी क्या ज़िम्मेदारियां हैं?
+### ¿Cuáles son mis responsabilidades como desarrollador de apps?
 
-आपको याद दिला दें कि अपने ऐप्लिकेशन के मालिक के तौर पर, आप उसके बर्ताव और उसके ज़रिए हैंडल किए जाने वाले सभी डेटा के लिए ज़िम्मेदार हैं. इसमें ये शामिल हैं:
+Como recordatorio, como propietario de tu aplicación, eres responsable de
+su comportamiento y de todos los datos que maneja. Esto incluye lo siguiente:
 
-- **कानूनी तौर पर नियमों का पालन करना और तीसरे पक्ष के अधिकार:** यह पक्का करना कि आपका ऐप्लिकेशन, लागू होने वाले सभी कानूनों और नियमों का पालन करता हो. साथ ही, यह भी पक्का करना कि यह दूसरों के अधिकारों का उल्लंघन न करता हो. इनमें बौद्धिक संपत्ति और निजता के अधिकार भी शामिल हैं.
-- **कॉन्टेंट की निगरानी:** आपके ऐप्लिकेशन से इस्तेमाल की जाने वाली
-  अन्य सेवाओं पर, अतिरिक्त शर्तें लागू हो सकती हैं. उदाहरण के लिए,
-  [Firestore पर लागू होने वाली Google Cloud की सेवा की शर्तों](https://cloud.google.com/terms?hl=hi) के मुताबिक,
-  तीसरे पक्ष का कॉन्टेंट होस्ट करने वाले ग्राहकों को ऐसी नीतियां पब्लिश करनी होंगी जिनमें यह बताया गया हो कि किस तरह का कॉन्टेंट प्रतिबंधित है.जैसे, गैर-कानूनी
-  कॉन्टेंट. साथ ही, उन्हें यह भी मॉनिटर करना होगा कि कहीं गैर-कानूनी कॉन्टेंट मौजूद तो नहीं है.
-- **सुरक्षित तरीके से लागू करना:** अपने ऐप्लिकेशन का गलत इस्तेमाल रोकने के लिए, ज़रूरी सुरक्षा उपाय और मॉडरेशन टूल लागू करना.
+- **Cumplimiento de los requisitos legales y derechos de terceros:** Asegurarte de que tu app cumpla con todas las leyes y reglamentaciones aplicables, y no infrinja los derechos de otras personas, incluidos los derechos de propiedad intelectual y privacidad
+- **Supervisión de contenido:** Es posible que se aplique el cumplimiento de condiciones adicionales a
+  otros servicios que use tu app. Por ejemplo,
+  las [Condiciones del Servicio de Google Cloud](https://cloud.google.com/terms?hl=es-419),
+  aplicables a Firestore, requieren que los clientes que alojan contenido de terceros
+  publiquen políticas que definan qué contenido está prohibido (p.ej., contenido
+  ilegal) y supervisen la presencia de ese contenido ilegal.
+- **Implementación segura:** Implementa las protecciones y herramientas de moderación necesarias para evitar que se use tu aplicación de forma inadecuada.
 
-सेवा की शर्तों में, [इस्तेमाल से जुड़ी पाबंदियों](https://ai.google.dev/gemini-api/terms?hl=hi#use-restrictions)
-के बारे में जानें.
+Ten en cuenta las [restricciones de uso](https://ai.google.dev/gemini-api/terms?hl=es-419#use-restrictions)
+en las Condiciones del Servicio.
 
-### AI Studio में ऐप्लिकेशन गैलरी में मौजूद ऐप्लिकेशन पर कौनसी शर्तें लागू होती हैं?
+### ¿Qué condiciones se aplican a las apps de la galería de apps en AI Studio?
 
-AI Studio में ऐप्लिकेशन गैलरी में मौजूद ऐप्लिकेशन के इस्तेमाल पर, [Gemini API की सेवा की अतिरिक्त शर्तें](https://ai.google.dev/gemini-api/terms?hl=hi)
-लागू होती हैं. हालांकि, अगर किसी ऐप्लिकेशन के लिए अलग से कोई शर्त बताई गई है, तो वह लागू होगी.
+Las [Condiciones del Servicio Adicionales de la API de Gemini](https://ai.google.dev/gemini-api/terms?hl=es-419)
+se aplican al uso de las apps que se muestran en la galería de apps de AI Studio, a menos que
+se indique lo contrario.
 
-## आगे क्या करना है
+## ¿Qué sigue?
 
-- [फ़ुल-स्टैक ऐप्लिकेशन डेवलप करना](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=hi) (वेब)
-- [Android ऐप्लिकेशन बनाना](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=hi)
-- [ऐप्लिकेशन गैलरी](https://aistudio.google.com/apps?source=showcase&hl=hi) में उदाहरण देखें.
+- [Desarrolla apps de pila completa](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=es-419) (web)
+- [Compila apps para Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419)
+- Consulta ejemplos en la [Galería de apps](https://aistudio.google.com/apps?source=showcase&hl=es-419).
 
-सुझाव भेजें
+Enviar comentarios
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-आखिरी बार 2026-09-11 (UTC) को अपडेट किया गया.
+Última actualización: 2026-10-20 (UTC)
 
-क्या आपको हमें और कुछ बताना है?
+¿Quieres brindar más información?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-11 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-20 (UTC)"],[],[]]

@@ -1,48 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3.5-pro-preview?hl=pl
-fetched_at: 2026-10-19T05:33:02.404424+00:00
-title: "Lyria\u00a03.5 Pro (wersja testowa) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3.5-pro-preview?hl=th
+fetched_at: 2026-10-26T05:55:38.800976+00:00
+title: "\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e0a\u0e31\u0e19\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07\u0e02\u0e2d\u0e07 Lyria 3.5 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
+Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
 
-Prześlij opinię
+ส่งความคิดเห็น
 
-# Lyria 3.5 Pro (wersja testowa)
+# เวอร์ชันตัวอย่างของ Lyria 3.5 Pro
 
-Lyria 3.5 Pro Preview to flagowy model Google do generowania muzyki. Jest zoptymalizowany pod kątem generowania pełnych utworów o złożonej spójności strukturalnej, w tym wielu zwrotek, refrenów i przejść. Generuje wysokiej jakości dźwięk stereo o częstotliwości 44,1 kHz na podstawie promptów tekstowych lub danych wejściowych w postaci obrazów.
+Lyria 3.5 Pro Preview เป็นโมเดลสร้างเพลงรุ่นเรือธงของ Google ซึ่งได้รับการปรับให้เหมาะกับการสร้างเพลงเต็มความยาวที่มีความสอดคล้องของโครงสร้างที่ซับซ้อน รวมถึงท่อนต่างๆ ท่อนฮุก และท่อนบริดจ์ โดยจะสร้างเสียงสเตอริโอคุณภาพสูง 44.1 kHz จากพรอมต์ข้อความหรืออินพุตรูปภาพ
 
-[Wypróbuj w Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=lyria-3.5-pro-preview&hl=pl)
+[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=lyria-3.5-pro-preview&hl=th)
 
-## Dokumentacja
+## เอกสารประกอบ
 
-Więcej informacji o funkcjach i możliwościach znajdziesz w przewodniku po [generowaniu muzyki](https://ai.google.dev/gemini-api/docs/music-generation?hl=pl).
+ดูข้อมูลทั้งหมดเกี่ยวกับฟีเจอร์และความสามารถได้ในคู่มือ[การสร้างเพลง](https://ai.google.dev/gemini-api/docs/music-generation?hl=th)
 
 ## lyria-3.5-pro-preview
 
-| Właściwość | Opis |
+| พร็อพเพอร์ตี้ | คำอธิบาย |
 | --- | --- |
-| id\_cardKod modelu | `lyria-3.5-pro-preview` |
-| saveObsługiwane typy danych | **Dane wejściowe**  Tekst i obraz  **Dane wyjściowe**  Audio (MP3), tekst (tekst utworu) |
-| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  131 072 |
-| handymanUprawnienia | **[Generowanie dźwięku](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl)**  Obsługiwane  **[Zapisywanie w pamięci podręcznej](https://ai.google.dev/gemini-api/docs/caching?hl=pl)**  Nieobsługiwane  **[Wykonywanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**  Nieobsługiwane  **[Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)**  Nieobsługiwane  **[Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)**  Nieobsługiwane  **[Powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**  Nieobsługiwane  **[Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)**  Nieobsługiwane  **[Interfejs API na żywo](https://ai.google.dev/gemini-api/docs/live-api?hl=pl)**  Nieobsługiwane  **[Szukaj groundingu](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)**  Nieobsługiwane  **[Uporządkowane dane wyjściowe](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl)**  Nieobsługiwane  **[Myślę](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)**  Nieobsługiwane  **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**  Nieobsługiwane |
-| speedOpcje zużycia | **[Interfejs API wsadowy](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl)**  Nieobsługiwane  **[Wnioskowanie Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl)**  Nieobsługiwane  **[Wnioskowanie priorytetowe](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl)**  Nieobsługiwane |
-| 123Wersje | Więcej informacji znajdziesz w artykule [Wzorce wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Wersja testowa: `lyria-3.5-clip-preview` - Wersja testowa: `lyria-3.5-pro-preview` |
-| calendar\_monthOstatnia aktualizacja | Wrzesień 2026 r. |
+| id\_cardรหัสโมเดล | `lyria-3.5-pro-preview` |
+| ประเภทข้อมูลที่บันทึกได้ | **อินพุต**  ข้อความและรูปภาพ  **เอาต์พุต**  เสียง (MP3), ข้อความ (เนื้อเพลง) |
+| token\_autoขีดจำกัดโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  131,072 |
+| handymanความสามารถ | **[การสร้างเสียง](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)**  สิ่งที่ทำได้  **[การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th)**  ไม่รองรับ  **[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)**  ไม่รองรับ  **[การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)**  ไม่รองรับ  **[การเรียกฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)**  ไม่รองรับ  **[การเชื่อมต่อแหล่งข้อมูลกับ Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)**  ไม่รองรับ  **[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)**  ไม่รองรับ  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=th)**  ไม่รองรับ  **[การเชื่อมต่อแหล่งข้อมูลของ Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)**  ไม่รองรับ  **[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)**  ไม่รองรับ  **[การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)**  ไม่รองรับ  **[บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th)**  ไม่รองรับ |
+| speedConsumptionตัวเลือก | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)**  ไม่รองรับ  **[Flex Inference](https://ai.google.dev/gemini-api/docs/flex-inference?hl=th)**  ไม่รองรับ  **[Priority Inference](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)**  ไม่รองรับ |
+| 123เวอร์ชัน | อ่าน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)เพื่อดูรายละเอียดเพิ่มเติม  - Preview: `lyria-3.5-clip-preview` - Preview: `lyria-3.5-pro-preview` |
+| calendar\_monthการอัปเดตล่าสุด | กันยายน 2569 |
 
-Prześlij opinię
+ส่งความคิดเห็น
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Ostatnia aktualizacja: 2026-09-09 UTC.
+อัปเดตล่าสุด 2026-09-08 UTC
 
-Chcesz przekazać coś jeszcze?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-09 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-08 UTC"],[],[]]

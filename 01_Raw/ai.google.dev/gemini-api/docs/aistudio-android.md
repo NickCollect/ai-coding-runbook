@@ -1,149 +1,204 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ja
-fetched_at: 2026-10-19T05:55:14.746284+00:00
-title: "Google AI Studio \u3067 Android \u30a2\u30d7\u30ea\u3092\u69cb\u7bc9\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=pt-BR
+fetched_at: 2026-10-26T05:55:11.540543+00:00
+title: "Criar apps Android no Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-フィードバックを送信
+Envie comentários
 
-# Google AI Studio で Android アプリを構築する
+# Criar apps Android no Google AI Studio
 
-Google AI Studio を使用すると、自然言語プロンプトからネイティブ Android アプリを構築できます。必要なアプリについて説明すると、
-[Antigravity Agent](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ja#antigravity-agent)
-が完全な Kotlin プロジェクトと[Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=ja)
-プロジェクトを生成します。ブラウザから、ブラウザベースの Android エミュレータでアプリをプレビューしたり、実機にインストールしたり、テスト用に公開したりできます。
+Com o Google AI Studio, você pode criar apps Android nativos usando um comando em linguagem natural. Descreva o app que você quer, e o
+[agente do Antigravity](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=pt-br#antigravity-agent)
+vai gerar um projeto completo em Kotlin e
+[Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=pt-br). No navegador, é possível visualizar o app em um Android Emulator baseado em navegador, instalá-lo em um dispositivo físico e publicá-lo para teste.
 
-## 始める
+Os apps Android também são compatíveis com a [integração do Firebase](#firebase-integration) para
+chamar modelos do Gemini com a Lógica de IA do Firebase e o App Check, armazenar dados no
+Cloud Firestore e fazer login de usuários com o Firebase Authentication.
 
-Android アプリの構築を開始する手順は次のとおりです。
+## Primeiros passos
 
-1. 左側のナビゲーション パネルを使用して、Google AI Studio の [[ビルド] モード](https://aistudio.google.com/apps?hl=ja)に移動します。
-2. プラットフォーム ピッカーから [**Android**] を選択します。
-3. 構築するアプリの説明を入力します（例: *「ローカル ストレージを使用して毎日のタスク トラッカーを作成する」* または *「シンプルな電卓を作成する」*）。
-4. エージェントがプロジェクトを生成し、ブラウザベースの Android エミュレータで起動します。
+Para começar a criar um app Android:
 
-チャットパネルを使用して、ウェブと同じようにアプリを反復処理できます。エージェントは Android プロジェクト内のすべてのファイルを管理し、コードベース全体に変更を反映します。
+1. Acesse o [Modo de criação](https://aistudio.google.com/apps?hl=pt-br) no Google AI Studio usando o painel de navegação à esquerda.
+2. Selecione **Android** no seletor de plataforma.
+3. Insira um comando descrevendo o app que você quer criar (por exemplo, *"Crie um
+   rastreador de tarefas diárias com armazenamento local"* ou *"Crie um app de receitas que use IA
+   para sugerir refeições com base em ingredientes"*).
+4. O agente gera o projeto e o inicia no Android Emulator baseado em navegador.
 
-## ブラウザベースの Android エミュレータ
+Em seguida, é possível iterar no app usando o painel de chat, assim como na experiência
+da Web. O agente gerencia todos os arquivos no seu projeto do Android e propaga
+as mudanças na base de código.
 
-Android エミュレータはクラウドで完全に実行され、ブラウザにストリーミングされます。
-Android SDK、Android Studio、ローカル エミュレータをインストールする必要はありません。
+## Integração com o Firebase
 
-エミュレータには次の機能があります。
+O Google AI Studio se integra ao
+[Firebase](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=pt-br)
+para que seu app Android possa chamar modelos do Gemini com segurança, manter dados e
+autenticar usuários sem um back-end personalizado do lado do servidor. Quando você pede ao
+agente para criar recursos que exigem IA generativa, um banco de dados ou login, ele
+pode provisionar e configurar automaticamente os seguintes serviços no seu
+projeto do Firebase:
 
-- **Pixel のようなデバイスのシミュレーション**: 実機と同じように、アプリをタップ、スクロール、操作できます。
-- **回転のサポート**: 縦向きと横向きを切り替えます。
-- **ライブプレビュー**: エージェントがコードを変更すると、アプリが再ビルドされ、
-  エミュレータが自動的に更新されます。
+- **[Firebase AI Logic](https://firebase.google.com/docs/ai-logic?hl=pt-br) e
+  [App Check do Firebase](https://firebase.google.com/docs/ai-logic/app-check?hl=pt-br)**:
+  chame modelos do Gemini diretamente do seu app Android sem incorporar chaves de API
+  brutas no APK. O AI Studio configura automaticamente o App Check para verificar se
+  as solicitações são originadas de uma instância autêntica do seu app:
+  - **Teste e compartilhamento (builds de depuração)**: usa um token de depuração do App Check
+    gerenciado automaticamente pelo AI Studio ao visualizar no emulador baseado em navegador,
+    instalar por USB ou compartilhar com testadores.
+  - **Publicação no Google Play (builds de lançamento)**: muda automaticamente
+    para o reCAPTCHA Enterprise usando uma chave de site pré-configurada ao criar uma
+    versão de lançamento para o Google Play.
+- **Cloud Firestore**: armazene e sincronize dados em um banco de dados NoSQL na nuvem,
+  incluindo regras de segurança do Firestore geradas automaticamente
+  (`firestore.rules`).
+- **Firebase Authentication**: adicione fluxos de "Fazer login com o Google" para autenticar
+  usuários.
 
-### エミュレータの制限事項
+É possível ativar o Firebase no card de configuração que aparece no chat quando você
+solicita esses recursos ou a qualquer momento em **Configurações > Integrações**. Para
+detalhes sobre a configuração do projeto, cotas compartilhadas e o ciclo de vida do App Check, consulte
+[Adicionar o Firebase ao seu app do Google AI
+Studio](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=pt-br).
 
-ブラウザベースのエミュレータは、すべてのハードウェア機能をサポートしていません。エミュレータでは次の機能は使用できません。
+## Android Emulator baseado em navegador
 
-- カメラと写真のキャプチャ
-- NFC と Bluetooth
-- GPS（位置情報はシミュレートされます）
-- Google Play 開発者サービス（Google ログイン、マップ、その他の Google Play 開発者サービスの機能は、実機では動作しますが、エミュレータでは動作しません）
+O Android Emulator é executado inteiramente na nuvem e transmitido para seu navegador.
+Não é necessário instalar o SDK do Android, o Android Studio ou um emulador local.
 
-## ADB を使用してデバイスにインストールする
+O emulador oferece:
 
-ビルドした APK は、USB でパソコンに接続された実機の Android デバイスに直接インストールできます。これには、
-[WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=ja) を
-使用してブラウザ経由でデバイスと通信します。ローカル ADB のインストールは不要です。
+- **Simulação de dispositivo semelhante ao Pixel**: toque, role e interaja com o app
+  como em um dispositivo real.
+- **Suporte à rotação**: alterne entre as orientações retrato e paisagem.
+- **Prévia em tempo real**: quando o agente faz mudanças no código, o app é recriado e
+  o emulador é atualizado automaticamente.
 
-### 前提条件
+### Limitações do emulador
 
-- WebUSB をサポートする Chrome または Edge ブラウザ。
-- [[デベロッパー向けオプション] と [USB デバッグ](https://developer.android.com/studio/debug/dev-options?hl=ja)]
-  が有効になっている Android デバイス。
-- デバイスをパソコンに接続する USB ケーブル。
+O emulador baseado em navegador não é compatível com todos os recursos de hardware. Os seguintes
+recursos não estão disponíveis no emulador:
 
-### デバイスにアプリをインストールする
+- Captura de fotos e câmera
+- NFC e Bluetooth
+- GPS (localização simulada)
+- Google Play Services (o Login do Google, o Maps e outros recursos do Google Play Services
+  funcionam em um dispositivo real, mas não no emulador)
 
-1. プレビュー パネルで [**Install on Device**] をクリックします。
-2. ブラウザの USB デバイス ピッカーから Android デバイスを選択します。
-3. APK が転送され、デバイスにインストールされます。
-4. アプリが自動的に起動します。
+## Instalar em um dispositivo com ADB
 
-## Google Play ストアに公開する
+É possível instalar o APK criado diretamente em um dispositivo Android físico conectado
+ao computador por USB. Isso usa o
+[WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=pt-br) para
+se comunicar com o dispositivo pelo navegador. Não é necessário instalar o ADB localmente.
 
-Android アプリを
-[Google Play Console](https://play.google.com/console?hl=ja) の内部
-テストトラックに公開して、最大 100 人のテスターにアプリを配布できます。
+### Pré-requisitos
 
-### 前提条件
+- Um navegador Chrome ou Edge compatível com WebUSB.
+- Um dispositivo Android com as
+  [Opções do desenvolvedor e a depuração USB](https://developer.android.com/studio/debug/dev-options?hl=pt-br)
+  ativadas.
+- Um cabo USB conectando o dispositivo ao computador.
 
-- [Google Play デベロッパー アカウント](https://play.google.com/console/signup?hl=ja)
-  （1 回限りの登録料 25 ドルが必要です）。
-- Google Play Console でデベロッパー プロファイルが完成していること。
+### Instalar o app no dispositivo
 
-### アプリを公開する
+1. Clique em **Instalar no dispositivo** no painel de visualização.
+2. Selecione o dispositivo Android no seletor de dispositivos USB do navegador.
+3. O APK será transferido e instalado no dispositivo.
+4. O app é iniciado automaticamente.
 
-1. Google AI Studio で **[Settings] > [Publish]** を開きます。
-2. [**Google Play ストアに公開**] をクリックします。
-3. Google Play デベロッパー アカウントで認証します。
-4. AI Studio が APK に署名し、アプリの掲載情報を作成（または新しいバージョンをアップロード）して、内部テストトラックに公開します。
-5. テスターと共有するリンクが届きます。
+## Publicar na Google Play Store
 
-AI Studio は、マネージド キーストアを使用して APK の署名を自動的に管理します。アプリの掲載情報（アイコン、スクリーンショット、説明）は、後で Google Play Console でカスタマイズできます。
+É possível publicar seu app Android na faixa de teste interno do [Google Play Console](https://play.google.com/console?hl=pt-br), que permite distribuir o app para até 100 testadores.
 
-## 生成されるもの
+### Pré-requisitos
 
-Android アプリをビルドすると、エージェントは次の構造で標準の Gradle ベースのプロジェクトを生成します。
+- Uma [conta de desenvolvedor do Google Play](https://play.google.com/console/signup?hl=pt-br)
+  (requer uma taxa de registro única de US $25).
+- Um perfil de desenvolvedor preenchido no Play Console.
 
-- **ビルド構成**: `build.gradle.kts` ファイル（プロジェクト レベルとアプリレベル）
-  Kotlin DSL を使用。
-- **UI レイヤ**: [マテリアル デザイン 3](https://developer.android.com/develop/ui/compose?hl=ja) のテーマ設定を使用した [Jetpack Compose](https://m3.material.io/)
-  コンポーネント。
-- **アーキテクチャ**: ViewModel とデータ
-  クラスを使用した単一アクティビティ アーキテクチャ。
-- **リソース**: `AndroidManifest.xml`、ドローアブル、文字列、その他の Android
-  リソース。
+### Publicar o app
 
-エージェントは Gradle の依存関係を自動的に管理し、必要に応じて Maven リポジトリと Google リポジトリからパッケージを追加します。
+1. Abra **Configurações > Publicar** no Google AI Studio.
+2. Clique em **Publicar na Play Store**.
+3. Autentique-se com sua conta de desenvolvedor do Google Play.
+4. O AI Studio assina o APK, cria a página de detalhes do app (ou faz upload de uma nova versão)
+   e publica na faixa de teste interno.
+5. Você vai receber um link para compartilhar com os testadores.
 
-生成されたコードは、プレビュー パネルの [**Code**] タブで表示、編集できます。Android Studio で開発を続行するには、プロジェクトを**ZIP ファイル** としてダウンロードします。
+O AI Studio gerencia a assinatura de APKs automaticamente usando um keystore gerenciado. É possível
+personalizar a página de detalhes do app (ícone, capturas de tela, descrição) mais tarde no Play
+Console.
 
-## 制限事項
+## O que é gerado
 
-AI Studio での Android アプリのビルドには、次の制限があります。
+Quando você cria um app Android, o agente gera um projeto padrão baseado no Gradle
+com a seguinte estrutura:
 
-### プラットフォームの制限
+- **Configuração do build**: arquivos `build.gradle.kts` (nível do projeto e do app)
+  usando a DSL do Kotlin.
+- **Camada de interface**: componentes do [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=pt-br)
+  com temas do [Material 3](https://m3.material.io/).
+- **Arquitetura**: arquitetura de atividade única com ViewModels e classes de dados.
+- **Recursos**: `AndroidManifest.xml`, drawables, strings e outros recursos do Android.
+- **Configuração do Firebase** (quando o Firebase está ativado):
+  `google-services.json`, `firebase_applet_config.xml` e `firestore.rules`.
 
-- **クライアントサイドのみ**: Android アプリにはサーバーサイド コンポーネントが含まれていません。サーバー ランタイムを必要とする機能（シークレット管理、マルチプレイヤー、Firebase、Google Workspace API）は使用できません。
-- **単一アクティビティ アーキテクチャ**: 単一アクティビティ、単一モジュール
-  プロジェクトのみがサポートされています。
-- **Jetpack Compose のみ**: アプリは Kotlin と Jetpack Compose を使用します。Java と XML レイアウトはサポートされていません。
-- **NDK またはネイティブ コードなし**: C コードと C++ コードはサポートされていません。
-- **Wear OS または Android TV なし**: スマートフォンとタブレットのフォーム ファクタのみが
-  サポートされています。
+O agente gerencia automaticamente as dependências do Gradle, adicionando pacotes dos repositórios do Maven
+e do Google conforme necessário.
 
-### エクスポートの制限事項
+É possível visualizar e editar o código gerado usando a guia **Código** no painel de
+pré-lançamento. Para continuar o desenvolvimento no Android Studio, faça o download do projeto como um
+**arquivo ZIP**.
 
-- **ZIP ダウンロードのみ**: プロジェクトを ZIP ファイルとしてダウンロードできます。Android プロジェクトでは、GitHub エクスポートはまだ使用できません。
+## Limitações
 
-## 次のステップ
+A criação de apps Android no AI Studio tem as seguintes limitações:
 
-- [Google AI Studio でアプリをビルドする](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ja)
-- [フルスタック アプリの開発](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ja)（ウェブ）
-- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=ja) で例を見る。
+### Limitações da plataforma
 
-フィードバックを送信
+- **Somente do lado do cliente**: os apps Android não incluem um componente do lado do servidor.
+  Os recursos que exigem um ambiente de execução do servidor (gerenciamento de secrets, multijogador,
+  APIs do Google Workspace) não estão disponíveis.
+- **Arquitetura de atividade única**: apenas projetos de atividade única e módulo único
+  são compatíveis.
+- **Somente Jetpack Compose**: os apps usam Kotlin e Jetpack Compose. Layouts Java e
+  XML não são compatíveis.
+- **Sem NDK ou código nativo**: não há suporte para código C e C++.
+- **Sem Wear OS ou Android TV**: apenas os formatos de smartphone e tablet são
+  compatíveis.
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+### Limitações de exportação
 
-最終更新日 2026-08-19 UTC。
+- **Somente download de ZIP**: é possível baixar o projeto como um arquivo ZIP. A exportação para o GitHub
+  ainda não está disponível para projetos do Android.
 
-ご意見をお聞かせください
+## A seguir
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-08-19 UTC。"],[],[]]
+- [Criar apps no Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=pt-br)
+- [Desenvolvimento de apps de pilha completa](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=pt-br) (Web)
+- Confira exemplos na [Galeria de apps](https://aistudio.google.com/apps?source=showcase&hl=pt-br).
+
+Envie comentários
+
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+
+Última atualização 2026-10-20 UTC.
+
+Quer enviar seu feedback?
+
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-10-20 UTC."],[],[]]

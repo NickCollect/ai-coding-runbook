@@ -1,43 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/omni?hl=th
-fetched_at: 2026-10-19T05:41:13.368956+00:00
-title: "\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e41\u0e25\u0e30\u0e41\u0e01\u0e49\u0e44\u0e02\u0e27\u0e34\u0e14\u0e35\u0e42\u0e2d\u0e14\u0e49\u0e27\u0e22 Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/omni?hl=ko
+fetched_at: 2026-10-26T05:41:02.508414+00:00
+title: "Gemini Omni Flash\ub85c \ub3d9\uc601\uc0c1 \uc0dd\uc131 \ubc0f \ud3b8\uc9d1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
+Gemini 4 Argon을 지금 이용 가능합니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-ส่งความคิดเห็น
+의견 보내기
 
-# สร้างและแก้ไขวิดีโอด้วย Gemini Omni Flash
+# Gemini Omni Flash로 동영상 생성 및 편집
 
-Gemini Omni Flash (`gemini-omni-1.1-flash`) เป็นโมเดลแบบหลายรูปแบบที่มีประสิทธิภาพสูง
-ซึ่งออกแบบมาเพื่อการสร้าง การตัดต่อ และการควบคุมวิดีโอระดับภาพยนตร์ด้วยความเร็วสูง
-Gemini Omni สร้างขึ้นจากความสามารถหลักต่อไปนี้ที่ทำให้แตกต่างจาก
-โมเดลวิดีโอก่อนหน้า
+Gemini Omni Flash (`gemini-omni-1.1-flash`)는 고속 동영상 생성, 편집, 영화 같은 제어를 위해 설계된 고성능 멀티모달 모델입니다.
+Gemini Omni는 이전 동영상 모델과 차별화되는 다음과 같은 핵심 기능을 기반으로 빌드되었습니다.
 
-- **ความสามารถในการประมวลผลข้อมูลหลายรูปแบบโดยกำเนิด:** ประมวลผลข้อความ รูปภาพ เสียง และวิดีโอ
-  พร้อมกัน ทำให้คุณได้เอาต์พุตที่สอดคล้องกันมากขึ้น ควบคุมได้มากขึ้น และมีความสอดคล้องกัน
-- **การแก้ไขโดยใช้การสนทนา:** เปิดใช้โดย [Interactions
-  API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) ซึ่งช่วยให้คุณปรับแต่ง
-  และแก้ไขวิดีโอซ้ำๆ ได้ผ่านการสนทนาด้วยภาษาธรรมชาติ อธิบายสิ่งที่คุณต้องการเปลี่ยนแปลง แล้วโมเดลจะใช้การแก้ไขพร้อมทั้งรักษา
-  ส่วนของวิดีโอที่คุณต้องการเก็บไว้
-- **ความรู้เกี่ยวกับโลก:** Gemini Omni ผสานความเข้าใจด้าน
-  ฟิสิกส์เข้ากับความรู้ด้านประวัติศาสตร์ วิทยาศาสตร์ และบริบททางวัฒนธรรมของ Gemini
-  เพื่อเชื่อมช่องว่างจากภาพถ่ายสมจริงไปสู่การเล่าเรื่องที่มีความหมาย
+- **기본 멀티모달:** 텍스트, 이미지, 오디오, 동영상을 동시에 처리하여 더 일관되고 제어 가능한 출력을 제공합니다.
+- **대화 기반 수정:** [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)를 통해 사용 설정되며, 자연어 대화를 통해 동영상을 반복적으로 미세 조정하고 편집할 수 있습니다. 변경하려는 부분을 설명하면 모델이 수정 사항을 적용하면서 유지하려는 동영상 부분을 보존합니다.
+- **세계에 대한 지식:** Gemini Omni는 물리학에 대한 이해와 Gemini의 역사, 과학, 문화적 맥락에 대한 지식을 결합하여 사실적인 이미지와 의미 있는 스토리텔링 사이의 간극을 해소합니다.
 
-## การสร้างวิดีโอจากข้อความ
+## 텍스트로 동영상 생성
 
-สร้างวิดีโอจากพรอมต์ข้อความ โมเดลจะสร้างวิดีโอพร้อมเสียง
-โดยอิงตามคำอธิบายข้อความของคุณ เขียนพรอมต์โดยระบุรายละเอียด เช่น คำอธิบายฉาก
-การเคลื่อนไหวของกล้อง แสง และอารมณ์ เพื่อให้ได้ผลลัพธ์ที่ดีที่สุด
+텍스트 프롬프트로 동영상을 생성합니다. 모델은 텍스트 설명을 기반으로 오디오가 포함된 동영상을 생성합니다. 최상의 결과를 얻으려면 장면 설명, 카메라 움직임, 조명, 분위기와 같은 세부정보를 포함하여 프롬프트를 작성하세요.
 
 ### Python
 
@@ -55,7 +45,7 @@ with open("marble.mp4", "wb") as f:
     f.write(base64.b64decode(interaction.output_video.data))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -72,7 +62,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -162,12 +152,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### สคีมาการตอบกลับของ REST
+### REST 응답 스키마
 
-ฟิลด์ความสะดวก `interaction.output_video` เป็น**SDK เท่านั้น**
-รับเอาต์พุตวิดีโอจากอาร์เรย์ `steps` เมื่อใช้ REST API โดยตรง
+편의 필드 `interaction.output_video`는 **SDK 전용**입니다.
+REST API를 직접 사용하는 경우 `steps` 배열에서 동영상 출력을 가져옵니다.
 
-**โครงสร้าง JSON ของ REST แบบดิบ:**
+**원시 REST JSON 구조:**
 
 ```
 {
@@ -192,9 +182,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### ควบคุมสัดส่วนภาพ
+### 가로세로 비율 제어
 
-ตั้งค่า `aspect_ratio` เป็น `"9:16"` เพื่อสร้างวิดีโอแนวตั้ง โดยค่าเริ่มต้นจะเป็นแนวนอน (16:9)
+`aspect_ratio`을 `"9:16"`로 설정하여 세로 동영상을 만듭니다. 기본값은 가로 모드 (16:9)입니다.
 
 ### Python
 
@@ -216,7 +206,7 @@ with open("example.mp4", "wb") as f:
     f.write(base64.b64decode(interaction.output_video.data))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -237,7 +227,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -348,17 +338,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### ความละเอียดเอาต์พุต
+### 출력 해상도
 
-ควบคุมความละเอียดเอาต์พุตของวิดีโอที่สร้างขึ้นโดยใช้พารามิเตอร์ `resolution`
-ใน `response_format` ความละเอียดเริ่มต้นคือ 720p
+`response_format`에서 `resolution` 매개변수를 사용하여 생성된 동영상의 출력 해상도를 제어합니다. 기본 해상도는 720p입니다.
 
-| ค่า | คำอธิบาย |
+| 값 | 설명 |
 | --- | --- |
-| `360p` | ความละเอียดเอาต์พุต 360p |
-| `720p` | ความละเอียดเอาต์พุต 720p (ค่าเริ่มต้น) |
-| `1080p` | เอาต์พุต 1080p (เพิ่มความละเอียด) |
-| `4k` | เอาต์พุต 4K (เพิ่มความละเอียด) |
+| `360p` | 360p 출력 해상도 |
+| `720p` | 720p 출력 해상도 (기본값) |
+| `1080p` | 1080p 출력 (업스케일) |
+| `4k` | 4K 출력 (업스케일됨) |
 
 ### Python
 
@@ -380,7 +369,7 @@ with open("hires.mp4", "wb") as f:
     f.write(base64.b64decode(interaction.output_video.data))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -401,7 +390,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -510,26 +499,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 
 [
 
-เบราว์เซอร์ของคุณไม่รองรับแท็กวิดีโอ
+브라우저에서 동영상 태그를 지원하지 않습니다.
 ](https://storage.googleapis.com/generativeai-downloads/videos/omni_misty_mountains_1080p.mp4)
 
-## การสร้างวิดีโอจากรูปภาพ
+## 이미지 동영상 변환 생성
 
-คุณระบุรูปภาพอ้างอิงพร้อมกับพรอมต์ข้อความได้ โมเดลจะตัดสินใจวิธีใช้รูปภาพตามพรอมต์ของคุณ ซึ่งมีประโยชน์ในการทำให้ภาพผลิตภัณฑ์ ภาพวาด
-หรือภาพถ่ายดูมีชีวิตชีวา
+텍스트 프롬프트와 함께 참고 이미지를 제공할 수 있습니다. 프롬프트에 따라 모델이 이미지를 사용하는 방법을 결정합니다. 제품 사진, 일러스트레이션 또는 사진에 생기를 불어넣는 데 유용합니다.
 
-ตัวอย่างต่อไปนี้แสดงวิธีใช้รูปภาพอ้างอิงของภาพวาด
-ปลาที่กระโดดขึ้นจากน้ำ
+다음 예시에서는 물에서 뛰어오르는 물고기 그림의 참고 이미지를 사용하는 방법을 보여줍니다.
 
-![ภาพวาดปลากระโดดขึ้นจากน้ำ](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=th)
+![물 밖으로 뛰어오르는 물고기 그림](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=ko)
 
-ด้วยพรอมต์ต่อไปนี้
+다음 프롬프트를 사용합니다.
 
 ```
 turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video
 ```
 
-เพื่อสร้างวิดีโอภาพวาดที่สมจริง
+그림의 사실적인 동영상을 생성합니다.
 
 ### Python
 
@@ -550,7 +537,7 @@ with open("clownfish.mp4", "wb") as f:
     f.write(base64.b64decode(interaction.output_video.data))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -570,7 +557,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -698,14 +685,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### การแทรกเฟรมแรกและเฟรมสุดท้าย
+### 첫 번째 및 마지막 프레임 보간
 
-Gemini Omni Flash รองรับการประมาณค่าระหว่างเฟรมของวิดีโอ ซึ่งช่วยให้คุณสร้าง
-วิดีโอที่มีการเปลี่ยนผ่านอย่างราบรื่นระหว่างรูปภาพเริ่มต้น (เฟรมแรก) กับ
-รูปภาพสิ้นสุด (เฟรมสุดท้าย)
+Gemini Omni Flash는 동영상 보간을 지원하므로 시작 이미지 (첫 번째 프레임)와 종료 이미지 (마지막 프레임) 사이를 부드럽게 전환하는 동영상을 생성할 수 있습니다.
 
-ระบุรูปภาพ 2 รูปในรายการ `input` และอธิบายการเปลี่ยนฉากที่ต้องการในพรอมต์ โมเดลจะสร้างภาพเคลื่อนไหวของฉากตั้งแต่เฟรมแรกจนถึง
-เฟรมสุดท้าย
+`input` 목록에 두 이미지를 제공하고 프롬프트에 원하는 전환을 설명합니다. 모델은 첫 번째 프레임부터 마지막 프레임까지 장면을 애니메이션으로 표시합니다.
 
 ### Python
 
@@ -727,7 +711,7 @@ with open("interpolation.mp4", "wb") as f:
     f.write(base64.b64decode(interaction.output_video.data))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -748,7 +732,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -897,14 +881,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 
 [
 
-เบราว์เซอร์ของคุณไม่รองรับแท็กวิดีโอ
+브라우저에서 동영상 태그를 지원하지 않습니다.
 ](https://storage.googleapis.com/generativeai-downloads/videos/omni_keyframe_interpolation.mp4)
 
-### การอ้างอิงหัวเรื่อง
+### 피사체 참조
 
-คุณสร้างวิดีโอที่รวมตัวละคร/ตัวแบบที่เฉพาะเจาะจงซึ่งระบุเป็นรูปภาพอ้างอิงได้
-ตัวอย่างเช่น โค้ดต่อไปนี้แสดงวิธีระบุรูปภาพแมวและเส้นด้าย 2 รูป
-เพื่อสร้างวิดีโอแมวเล่นกับเส้นด้าย
+참고 이미지로 제공된 특정 피사체를 포함하는 동영상을 생성할 수 있습니다.
+예를 들어 다음 코드는 고양이와 털실의 이미지 2개를 제공하여 고양이가 털실을 가지고 노는 동영상을 생성하는 방법을 보여줍니다.
 
 ### Python
 
@@ -926,7 +909,7 @@ with open("cat.mp4", "wb") as f:
     f.write(base64.b64decode(interaction.output_video.data))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -947,7 +930,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1091,11 +1074,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### พารามิเตอร์งาน
+### Tasks 매개변수
 
-ใช้พารามิเตอร์ `task` ใน `video_config` เพื่อระบุลักษณะการทำงานที่ต้องการอย่างชัดเจน เช่น หากต้องการให้โมเดลสร้างวิดีโอจากรูปภาพ คุณสามารถตั้งค่าพารามิเตอร์เป็น `image_to_video` หากไม่ได้ตั้งค่านี้ไว้ โมเดลจะอนุมานสิ่งที่คุณต้องการจากพรอมต์
+`video_config`에서 `task` 매개변수를 사용하여 원하는 동작을 명시적으로 지정합니다. 예를 들어 모델이 이미지에서 동영상을 생성하도록 하려면 매개변수를 `image_to_video`로 설정하면 됩니다. 설정되지 않으면 모델이 프롬프트에서 원하는 내용을 추론합니다.
 
-ค่าที่อนุญาตมีดังนี้
+허용되는 값은 다음과 같습니다.
 
 - `text_to_video`
 - `image_to_video`
@@ -1103,8 +1086,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 - `edit`
 - `extend`
 
-ตัวอย่างต่อไปนี้แสดงวิธีตั้งค่านี้สำหรับรูปภาพที่แสดงก่อนหน้า
-เป็นตัวอย่างวิดีโอ
+다음 예에서는 이전에 표시된 이미지-동영상 예시에서 이를 설정하는 방법을 보여줍니다.
 
 ### Python
 
@@ -1130,7 +1112,7 @@ with open("example.mp4", "wb") as f:
     f.write(base64.b64decode(interaction.output_video.data))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1155,7 +1137,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1312,14 +1294,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## การตัดต่อวิดีโอแบบมีสถานะ
+## 상태 저장 동영상 편집
 
-สร้างวิดีโอและแก้ไขซ้ำๆ โดยใช้พรอมต์ต่อเนื่อง แต่ละเทิร์น
-จะอิงตามผลลัพธ์ก่อนหน้า โมเดลจะจดจำบริบทของวิดีโอและใช้การเปลี่ยนแปลงของคุณพร้อมทั้งรักษาองค์ประกอบที่คุณไม่ได้กล่าวถึง ใช้
-`previous_interaction_id`เพื่อติดตามประวัติการสนทนาและสถานะวิดีโอที่สร้างขึ้น
-โดยไม่ต้องอัปโหลดวิดีโอก่อนหน้าซ้ำ
+후속 프롬프트를 사용하여 동영상을 생성하고 반복적으로 수정합니다. 각 턴은 이전 결과를 기반으로 합니다. 모델은 동영상 컨텍스트를 기억하여 변경사항을 적용하면서 언급하지 않은 요소는 유지합니다. `previous_interaction_id`을 사용하여 이전 동영상을 다시 업로드하지 않고도 대화 기록과 생성된 동영상 상태를 추적합니다.
 
-ตัวอย่างต่อไปนี้แสดงวิธีสร้างวิดีโอแรกแล้วแก้ไข
+다음 예에서는 첫 번째 동영상을 생성한 후 수정하는 방법을 보여줍니다.
 
 ### Python
 
@@ -1342,7 +1321,7 @@ with open("example.mp4", "wb") as f:
     f.write(base64.b64decode(res2.output_video.data))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1367,7 +1346,7 @@ if (res2.output_video?.data) {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1479,18 +1458,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-ตัวอย่างวิดีโอเริ่มต้น
+초기 동영상 예시:
 
-ตัวอย่างวิดีโอที่แก้ไขแล้ว
+수정된 동영상의 예:
 
-การโต้ตอบแต่ละครั้งในการสนทนาจะสร้างวิดีโอใหม่ โมเดลจะเข้าใจบริบทจากเทิร์นก่อนหน้า ซึ่งช่วยให้คุณทำการเปลี่ยนแปลงทีละน้อยได้ เช่น การปรับแสงและการสลับพื้นหลัง โดยไม่ต้องอธิบายฉากทั้งหมดอีกครั้ง
+대화의 각 턴마다 새 동영상이 생성됩니다. 이 모델은 이전 턴의 컨텍스트를 이해하므로 전체 장면을 다시 설명하지 않고도 조명 조정, 배경 바꾸기 등 점진적인 변경을 할 수 있습니다.
 
-### แก้ไขวิดีโอของคุณเอง
+### 내 동영상 수정하기
 
-อัปโหลดวิดีโอโดยใช้ [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th) เพื่อแก้ไขวิดีโอ
-ด้วย Gemini Omni Flash
+[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 사용하여 동영상을 업로드하고 Gemini Omni Flash로 수정하세요.
 
-ตัวอย่างต่อไปนี้แสดงวิธีแก้ไขวิดีโอต้นฉบับต่อไปนี้
+다음 예에서는 원본 동영상을 수정하는 방법을 보여줍니다.
 
 ### Python
 
@@ -1525,7 +1503,7 @@ with open("example.mp4", "wb") as f:
     f.write(base64.b64decode(interaction.output_video.data))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1562,7 +1540,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1739,13 +1717,12 @@ curl -sS -w "\n[HTTP %{http_code}]\n" "https://generativelanguage.googleapis.com
 EOF
 ```
 
-ตัวอย่างวิดีโอที่แก้ไขแล้ว
+수정된 동영상의 예:
 
-## การดึงข้อมูลวิดีโอด้วย URI
+## URI로 동영상 가져오기
 
-ใช้พารามิเตอร์ `delivery="uri"` ใน
-`response_format` เพื่อดึงวิดีโอที่สร้างขึ้นซึ่งมีขนาดใหญ่กว่า 4 MB
-ซึ่งจะแสดง URI ที่โฮสต์โดย Google ซึ่งคุณสามารถสำรวจได้จนกว่าวิดีโอจะ`ACTIVE`ก่อนดาวน์โหลด
+`response_format`에서 `delivery="uri"` 파라미터를 사용하여 4MB보다 큰 생성된 동영상을 가져옵니다.
+이렇게 하면 다운로드하기 전에 동영상이 `ACTIVE`될 때까지 폴링할 수 있는 Google 호스팅 URI가 반환됩니다.
 
 ### Python
 
@@ -1779,7 +1756,7 @@ while True:
 client.files.download(file=video_output.uri, destination="output.mp4")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1813,7 +1790,7 @@ await ai.files.download({
 console.log("💾 Saved video to output.mp4");
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1990,7 +1967,7 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/$FILE_ID:
 echo "Done! Video saved to output.mp4"
 ```
 
-**โครงสร้าง JSON ของ REST แบบดิบ (URI):**
+**원시 REST JSON 구조 (URI):**
 
 ```
 {
@@ -2015,17 +1992,15 @@ echo "Done! Video saved to output.mp4"
 }
 ```
 
-## ส่วนขยายวิดีโอ
+## 동영상 확장 프로그램
 
-ขยายวิดีโอที่มีอยู่ด้วยการสร้างส่วนต่อเนื่องที่ราบรื่นที่ท้ายคลิป
-อธิบายว่าคุณต้องการให้วิดีโอดำเนินต่อไปอย่างไรในพรอมต์ เช่น
-`"Extend this video"` หรือ `"Continue the scene: the camera pans across the mountains"`
-โมเดลจะวิเคราะห์วิดีโออินพุตเพื่อสร้างวิดีโอต่อเนื่องความยาว 3-10 วินาที
+클립의 끝부분에 끊김 없는 연속 동영상을 생성하여 기존 동영상을 연장합니다. 프롬프트에서 동영상이 어떻게 이어지기를 원하는지 설명합니다(예: `"Extend this video"` 또는 `"Continue the scene: the camera pans across the mountains"`).
+모델이 입력 동영상을 분석하여 3~10초 길이의 이어지는 동영상을 생성합니다.
 
-คุณขยายเวลาได้ดังนี้
+다음과 같은 항목을 확장할 수 있습니다.
 
-- **วิดีโอที่โมเดลสร้างขึ้น (การสนทนาไปมา)**: ขยายวิดีโอที่สร้างขึ้นก่อนหน้านี้ โดยอ้างอิง`previous_interaction_id`
-- **วิดีโอที่อัปโหลด**: ระบุไฟล์วิดีโอที่อัปโหลด (ผ่าน Files API) พร้อมกับพรอมต์ของส่วนขยาย
+- **모델에서 생성한 동영상 (멀티턴)**: `previous_interaction_id`를 참조하여 이전에 생성된 동영상을 확장합니다.
+- **업로드된 동영상**: 확장 프로그램 프롬프트와 함께 업로드된 동영상 파일 (Files API를 통해)을 제공합니다.
 
 ### Python
 
@@ -2050,7 +2025,7 @@ with open("extended.mp4", "wb") as f:
     f.write(base64.b64decode(interaction.output_video.data))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -2081,7 +2056,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -2206,18 +2181,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 
 [
 
-เบราว์เซอร์ของคุณไม่รองรับแท็กวิดีโอ
+브라우저에서 동영상 태그를 지원하지 않습니다.
 ](https://storage.googleapis.com/generativeai-downloads/videos/omni_scene_extension_base.mp4)
 
 [
 
-เบราว์เซอร์ของคุณไม่รองรับแท็กวิดีโอ
+브라우저에서 동영상 태그를 지원하지 않습니다.
 ](https://storage.googleapis.com/generativeai-downloads/videos/omni_scene_extension_extended.mp4)
 
-### การขยายด้วยสื่ออ้างอิง
+### 참조 미디어로 확장
 
-คุณระบุรูปภาพอ้างอิงในอาร์เรย์ `input` พร้อมกับพรอมต์เพื่อ
-แนะนำตัวละครหรือองค์ประกอบใหม่ๆ ลงในวิดีโอแบบขยายได้โดยทำดังนี้
+프롬프트와 함께 `input` 배열에 참조 이미지를 제공하여 확장된 동영상에 새 캐릭터나 요소를 도입할 수 있습니다.
 
 ### Python
 
@@ -2244,7 +2218,7 @@ with open("extended_with_character.mp4", "wb") as f:
     f.write(base64.b64decode(interaction.output_video.data))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -2276,7 +2250,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -2420,133 +2394,123 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 
 [
 
-เบราว์เซอร์ของคุณไม่รองรับแท็กวิดีโอ
+브라우저에서 동영상 태그를 지원하지 않습니다.
 ](https://storage.googleapis.com/generativeai-downloads/videos/omni_traveler_extension.mp4)
 
-### ข้อจำกัดและหลักเกณฑ์ของส่วนขยาย
+### 확장 프로그램 제약 조건 및 가이드라인
 
-โปรดคำนึงถึงกฎและข้อจำกัดต่อไปนี้เมื่อขยายวิดีโอ
+동영상을 연장할 때는 다음 규칙과 제약 조건에 유의하세요.
 
-- **บทพูดในวิดีโอที่อัปโหลด**: ปัจจุบันคุณไม่สามารถขยายวิดีโอที่อัปโหลดซึ่งมีคนพูดเพื่อเพิ่มบทพูดเพิ่มเติม (ระบบรองรับในกรณีที่ตัวละครไม่พูดหรือหากพรอมต์ไม่ได้เพิ่มบทพูด)
-- **การขยายเสียงแบบหลายรอบ**: ระบบรองรับการสร้างบทสนทนาหรือคำพูดที่พูด
-  เมื่อขยายวิดีโอที่สร้างไว้ก่อนหน้าผ่านการสนทนาไปมา (`previous_interaction_id`)
-- **ท้ายคลิปเท่านั้น**: ส่วนขยายจะจำกัดเฉพาะการต่อท้ายวิดีโอ
-  คุณไม่สามารถเพิ่มเนื้อหาที่จุดเริ่มต้นหรือขยายช่วงกลางของคลิปได้
-- **ขีดจำกัดระยะเวลา**: วิดีโออินพุตสำหรับส่วนขยายต้องมีความยาวไม่เกิน 10 วินาที เมื่ออัปโหลด (เว้นแต่จะใช้การสนทนาไปมา)
-- **ความพร้อมให้บริการในภูมิภาค**: ขณะนี้การขยายวิดีโอที่อัปโหลดไม่พร้อมให้บริการ
-  สำหรับผู้ใช้ในเขตเศรษฐกิจยุโรป (EEA), สวิตเซอร์แลนด์ และสห
-  ราชอาณาจักร (ระบบรองรับการขยายวิดีโอที่โมเดลสร้างขึ้นในทุกภูมิภาคที่พร้อมให้บริการ)
+- **업로드된 동영상의 대화**: 현재는 누군가 말하는 업로드된 동영상을 확장하여 대화를 추가할 수 없습니다 (캐릭터가 조용히 있거나 프롬프트에서 대화를 추가하지 않는 경우에는 지원됨).
+- **멀티턴 음성 확장**: 멀티턴 (`previous_interaction_id`)을 통해 이전에 생성된 동영상을 확장할 때 음성 대화 또는 음성 생성이 지원됩니다.
+- **클립 끝에만 추가**: 확장 프로그램은 동영상 끝에만 추가할 수 있습니다.
+  콘텐츠를 앞에 추가하거나 클립의 중간을 확장할 수는 없습니다.
+- **길이 제한**: 확장 프로그램에 사용할 동영상은 업로드 시 길이가 10초 이하여야 합니다 (멀티턴을 사용하는 경우 제외).
+- **지역별 사용 가능 여부**: 현재 유럽 경제 지역 (EEA), 스위스, 영국에서는 업로드된 동영상을 연장할 수 없습니다 (모델에서 생성된 동영상 연장은 사용 가능한 모든 지역에서 지원됨).
 
-## แนวทางปฏิบัติแนะนำ
+## 권장사항
 
-- **ใช้การนำส่ง URI สำหรับวิดีโอขนาดใหญ่:** สำหรับวิดีโอที่มีขนาดใหญ่กว่า 4 MB (>720p
-  หากมี) ให้ใช้ `delivery="uri"` ใน `response_format` เพื่อหลีกเลี่ยงขีดจำกัดขนาดของเพย์โหลด
-- **ประสิทธิภาพที่เพิ่มขึ้น:** ตั้งค่า `background=false`, `store=false` และ
-  `stream=false` เพื่อให้สร้างคำตอบแบบเอกพจน์ได้เร็วขึ้นและพร้อมกัน โปรดทราบว่าการตั้งค่า
-  `store=false` หมายความว่าคุณจะแก้ไขวิดีโอที่สร้างขึ้นไม่ได้ใน
-  เทิร์นถัดไปโดยใช้ `previous_interaction_id`
-- **ความแม่นยำของพรอมต์:** ดูรายละเอียดในส่วน[คำแนะนำเกี่ยวกับพรอมต์](#prompt-guide)
+- **대용량 동영상에 URI 전송 사용:** 4MB보다 큰 동영상(사용 가능한 경우 720p 초과)의 경우 `response_format`에서 `delivery="uri"`를 사용하여 페이로드 크기 제한을 방지합니다.
+- **최적화된 성능:** 더 빠른 동기 단항 생성을 위해 `background=false`, `store=false`, `stream=false`를 설정합니다. `store=false`를 설정하면 생성된 동영상을 `previous_interaction_id`를 사용하여 후속 턴에서 수정할 수 없습니다.
+- **프롬프트 정확성:** 자세한 내용은 [프롬프트 안내](#prompt-guide) 섹션을 참고하세요.
 
-## ข้อจำกัด
+## 제한사항
 
-- การอัปโหลดและแก้ไขรูปภาพที่มีผู้เยาว์ไม่รองรับในเขตเศรษฐกิจยุโรป สวิตเซอร์แลนด์ และสหราชอาณาจักร
-- ระบบไม่รองรับการอัปโหลดและแก้ไขรูปภาพที่มีบุคคลที่ระบุตัวตนได้บางคน
-- ขณะนี้การแก้ไขหรือขยายวิดีโอที่อัปโหลดไม่พร้อมให้บริการสำหรับผู้ใช้ในเขตเศรษฐกิจยุโรป (EEA), สวิตเซอร์แลนด์ และสหราชอาณาจักร (ระบบรองรับการแก้ไขหรือขยายวิดีโอที่โมเดลสร้างขึ้น)
-- วิดีโออินพุตสำหรับการแก้ไขและการขยายต้องยาวไม่เกิน 10 วินาทีเมื่ออัปโหลด (ยกเว้นการขยายวิดีโอที่โมเดลสร้างขึ้นในการสนทนาไปมา)
-- ส่วนขยายวิดีโอจะจำกัดไว้ที่การต่อท้ายวิดีโอเท่านั้น ระบบไม่รองรับการต่อต้นหรือการขยายช่วงกลางของคลิป
-- คุณไม่สามารถขยายวิดีโอที่อัปโหลดซึ่งมีคนพูดเพื่อเพิ่มบทสนทนา (ตัวละครจะเงียบหรือใช้การสนทนาไปมาด้วย `previous_interaction_id` ก็ได้)
-- ไม่รองรับการแก้ไขด้วยเสียง
-- API เวอร์ชันปัจจุบันไม่รองรับการอัปโหลดข้อมูลอ้างอิงเสียง
-- การอ้างอิงวิดีโอจะทำงานได้ดีที่สุดเมื่อใช้กับภาพบุคคล ระบบจะไม่สนใจเสียงใดๆ ในการอ้างอิงวิดีโอ การอ้างอิงวิดีโอรองรับคลิปสูงสุด 3 คลิป โดยแต่ละคลิปมีความยาวได้สูงสุด 3 วินาที
-- ระบบไม่รองรับการอ้างอิงหรือการให้เหตุผลในวิดีโอหลายรายการ การพยายามใช้พรอมต์แบบหลายวิดีโออาจส่งผลให้ประสิทธิภาพของโมเดลลดลงหรือได้เอาต์พุตที่ไม่คาดคิด
-- ไม่รองรับปริมาณงานที่จัดสรร
-- ไม่รองรับคำสั่งระบบ อุณหภูมิ `top_p` ลำดับการหยุด และพรอมต์เชิงลบ (คุณใส่พรอมต์เชิงลบในพรอมต์ปกติได้ เช่น "อย่าทำ X")
-- ระบบไม่รองรับการใช้วิดีโอ YouTube เป็นแหล่งที่มาของสื่อ
+- 유럽 경제 지역, 스위스, 영국에서는 미성년자가 포함된 이미지를 업로드하거나 수정할 수 없습니다.
+- 특정 식별 가능한 인물이 포함된 이미지를 업로드하고 수정하는 것은 지원되지 않습니다.
+- 현재 유럽 경제 지역 (EEA), 스위스, 영국에서는 업로드된 동영상을 수정하거나 연장할 수 없습니다 (모델에서 생성된 동영상의 수정 또는 연장은 지원됨).
+- 수정 및 연장을 위한 입력 동영상은 업로드 시 10초 이하여야 합니다 (멀티턴에서 모델이 생성한 동영상을 연장하는 경우는 제외).
+- 동영상 연장은 동영상 끝에 추가하는 것만 가능하며, 클립의 시작 부분에 추가하거나 중간 부분을 연장하는 것은 지원되지 않습니다.
+- 누군가 말하는 업로드된 동영상을 확장하여 추가 대화를 추가할 수는 없습니다 (캐릭터는 무음으로 유지하거나 `previous_interaction_id`를 사용한 멀티턴 확장 기능을 사용할 수 있음).
+- 음성 편집은 지원되지 않습니다.
+- 현재 버전의 API에서는 오디오 참조 업로드가 지원되지 않습니다.
+- 동영상 참조는 인물 사진에 가장 적합하며 동영상 참조의 오디오는 무시됩니다. 동영상 참조는 최대 3개의 클립을 지원하며 각 클립의 길이는 최대 3초입니다.
+- 여러 동영상에 걸쳐 참조하거나 추론하는 것은 지원되지 않습니다. 다중 동영상 프롬프트를 시도하면 모델 성능이 저하되거나 예기치 않은 출력이 발생할 수 있습니다.
+- 프로비저닝된 처리량은 지원되지 않습니다.
+- 시스템 안내, 온도, `top_p`, 중지 시퀀스, 부정적 프롬프트는 지원되지 않습니다. 부정적 프롬프트는 일반 프롬프트에 입력할 수 있습니다 (예: 'X를 하지 마세요').
+- YouTube 동영상을 미디어 소스로 사용하는 것은 지원되지 않습니다.
 
-## รายละเอียดทางเทคนิค
+## 기술 세부정보
 
-- วิดีโอที่สร้างขึ้นทั้งหมดจะมีลายน้ำ SynthID ซึ่งผู้ชมมองไม่เห็น แต่สามารถตรวจหาได้โดยอัตโนมัติเพื่อการยืนยันแหล่งที่มา
-- เวลาในการสร้างวิดีโอจะแตกต่างกันไปตามระยะเวลา ความละเอียด และการโหลด API ปัจจุบัน วิดีโอที่ยาวขึ้นและความละเอียดสูงขึ้นจะใช้เวลาในการสร้างนานขึ้น
-- Omni ใช้ตัวกรองความปลอดภัยของเนื้อหากับทั้งพรอมต์อินพุตและวิดีโอที่สร้างขึ้น (ซึ่งจะแตกต่างกันไปตามภูมิภาค) ระบบจะบล็อกพรอมต์ที่ละเมิดนโยบายการใช้งาน
-- ระบบรองรับภาษาอังกฤษ (EN) อย่างเต็มรูปแบบ แต่ยังไม่ได้ประเมินภาษาอื่นๆ จึงอาจใช้งานได้ แต่ผลลัพธ์อาจแตกต่างกันไป
+- 생성된 모든 동영상에는 시청자에게는 보이지 않지만 출처 확인을 위해 프로그래매틱 방식으로 감지할 수 있는 SynthID 워터마크가 포함됩니다.
+- 동영상 생성 시간은 길이, 해상도, 현재 API 로드에 따라 다릅니다. 길고 해상도가 높은 동영상은 생성하는 데 시간이 더 오래 걸립니다.
+- Omni는 입력 프롬프트와 생성된 동영상에 콘텐츠 안전 필터를 적용합니다 (지역에 따라 다름). 사용 정책을 위반하는 프롬프트는 차단됩니다.
+- 영어 (EN)는 완전히 지원되지만 다른 언어는 평가되지 않았으므로 작동할 수도 있지만 결과는 다를 수 있습니다.
 
-## คู่มือการใช้พรอมต์สำหรับ Gemini Omni Flash
+## Gemini Omni Flash 프롬프트 가이드
 
-ส่วนนี้มีเคล็ดลับและตัวอย่างเกี่ยวกับวิธีพรอมต์ Gemini Omni Flash อย่างมีประสิทธิภาพ
+이 섹션에는 Gemini Omni Flash에 효과적으로 프롬프트를 입력하는 방법에 관한 팁과 예시가 포함되어 있습니다.
 
-### ฉากเดียว
+### 단일 장면
 
-โดยค่าเริ่มต้น Omni Flash จะพยายามสร้างวิดีโอที่มีช็อตต่างๆ
-โดยจะพยายามสร้างเรื่องราวที่น่าสนใจตามพรอมต์
+기본적으로 Omni Flash는 몇 가지 다른 장면이 포함된 동영상을 만들려고 시도합니다.
+프롬프트를 기반으로 흥미로운 이야기를 만들려고 시도합니다.
 
-หากต้องการให้วิดีโอเอาต์พุตมีฉากเดียว คุณต้องป้อนพรอมต์ดังนี้
+출력 동영상에 단일 장면이 포함되어야 하는 경우 다음과 같이 프롬프트를 입력해야 합니다.
 
-- ในฉากเดียวที่ไม่มีการตัดต่อ
-- เป็นช็อตเดียวต่อเนื่อง
-- ไม่มีการตัดฉาก
+- 단일 끊김 없는 장면
+- 하나의 연속된 샷으로
+- 장면 자르기 없음
 
-เช่น
+예를 들면 다음과 같습니다.
 
 ```
 Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny windowsill, looking out into a leafy garden. The cat's tail twitches slowly, and its ears rotate slightly toward ambient noises. Sunbeams illuminate dust motes in the air. Sound design: Gentle breeze, distant bird chirps. No dialogue.
 ```
 
-### การนำองค์ประกอบที่ไม่ต้องการออก
+### 원치 않는 요소 삭제
 
-หากวิดีโอที่สร้างขึ้นมีสิ่งที่คุณไม่ต้องการ ให้ใส่พรอมต์เชิงลบแบบง่ายๆ เพื่อหลีกเลี่ยงสิ่งเหล่านั้น
+생성된 동영상에 원치 않는 항목이 포함되어 있으면 간단한 부정적 프롬프트를 포함하여 이를 방지하세요.
 
-- ไม่มีบทสนทนา
-- ไม่มีการตกแต่ง
-- ไม่มีเอฟเฟกต์เสียงเพิ่มเติม
+- 대화 없음
+- 장식 없음
+- 추가 음향 효과 없음
 
-### พรอมต์สำหรับการแก้ไข
+### 수정을 위한 프롬프트
 
-พรอมต์ที่เรียบง่ายจะทำงานได้ดีที่สุดสำหรับการตัดต่อวิดีโอ พรอมต์ที่มีคำอธิบายมากเกินไปอาจทำให้เกิดการเปลี่ยนแปลงที่ไม่ต้องการ
+동영상 편집에는 간단한 프롬프트가 가장 적합합니다. 지나치게 설명적인 프롬프트는 의도하지 않은 변경으로 이어질 수 있습니다.
 
-ตัวอย่างเพิ่มเติมของพรอมต์การแก้ไขแบบง่ายมีดังนี้
+다음은 간단한 수정 프롬프트의 추가 예입니다.
 
-- เปลี่ยนวิดีโอนี้ให้เป็นสไตล์อนิเมะ
-- ใส่หมวกที่ดูดีให้บุคคลนี้
-- เปลี่ยนแสงให้ดูน่าทึ่งมากขึ้น
-- เปลี่ยนข้อความบนป้ายเป็น "Omni Flash"
+- 이 동영상을 애니메이션으로 만들어 줘.
+- 이 사람에게 세련된 모자를 씌워 줘
+- 조명을 더 극적으로 바꿔 줘
+- 표지판의 텍스트를 'Omni Flash'로 변경합니다.
 
-เมื่อแก้ไขลักษณะเฉพาะของวิดีโอ ให้ใส่ `"Keep everything else the same"` เพื่อรักษาความสอดคล้องของภาพ
+동영상의 특정 부분을 수정할 때는 `"Keep everything else the same"`를 포함하여 시각적 일관성을 유지하세요.
 
-ตัวอย่างต่อไปนี้แสดงวิธีใช้เทคนิคนี้
+다음은 이 기법을 적용하는 방법을 보여주는 몇 가지 예입니다.
 
-- **สิ่งที่ควรหลีกเลี่ยง** `In the video of the man sitting on the sofa, please add a small
+- **피해야 할 사항:** `In the video of the man sitting on the sofa, please add a small
   black cat that runs from the right side of the screen, jumps onto his lap,
   and then he starts to stroke its head while looking down.`
-  - **ปรับให้อ่านง่าย:** `Add a cat that jumps onto his lap, he begins to pet it.
+  - **단순화:** `Add a cat that jumps onto his lap, he begins to pet it.
     Keep everything else the same.`
-- **สิ่งที่ควรหลีกเลี่ยง** `Please remove the cell phone that the person is holding in
+- **피해야 할 사항:** `Please remove the cell phone that the person is holding in
   their hand and fill in the background so it looks like they are just holding
   their hand empty.`
-  - **ปรับให้อ่านง่าย:** `Make the phone invisible. Keep everything else the
+  - **단순화:** `Make the phone invisible. Keep everything else the
     same.`
 
-### การแจ้งเสียง
+### 오디오 프롬프트
 
-โดยค่าเริ่มต้น โมเดลจะพยายามสร้างแทร็กเสียงที่เหมาะสมสำหรับวิดีโอ ซึ่งอาจไม่ใช่สิ่งที่คุณต้องการเสมอไป คุณใช้พรอมต์เพื่อ
-อธิบายประเภทเสียงที่ต้องการได้ ซึ่งสำคัญอย่างยิ่งหากคุณต้องการ
-ใช้เพลงในวิดีโอ
+기본적으로 모델은 동영상에 적합한 오디오 트랙을 생성하려고 시도합니다. 이 방법이 항상 원하는 결과로 이어지는 것은 아닙니다. 프롬프트를 사용하여 원하는 오디오 유형을 설명할 수 있습니다. 동영상에 음악을 포함하려는 경우 특히 중요합니다.
 
-- ใส่เพลงบรรเลงเบาๆ
-- วิดีโอมีบีทเทคโนสุดเร้าใจ
-- เสียงเป็นเสียงวิทยุที่เบาและแหลมเล็กเล่นอยู่เบื้องหลังพร้อมเพลง
+- 차분한 배경 음악 포함
+- 동영상에 활기찬 테크노 비트가 있습니다.
+- 오디오는 배경에서 노래를 재생하는 낮은 음질의 라디오 방송입니다.
 
-### ช่วงเวลาของเหตุการณ์
+### 타이밍 이벤트
 
-คุณสามารถแจ้งให้ระบบดำเนินการบางอย่างในวิดีโอในช่วงเวลาที่เฉพาะเจาะจงได้โดยไม่ต้องใช้ไวยากรณ์ที่แน่นอนและใช้ภาษาธรรมชาติได้ ซึ่งมีประโยชน์อย่างยิ่ง
-ในการสร้างฉากตัด จังหวะ หรือลำดับภาพแบบรวดเร็วของคุณเอง
-โปรดดูตัวอย่างต่อไปนี้
+동영상에서 특정 시간에 발생할 일을 요청할 수 있으며, 정확한 문법이 필요하지 않고 자연어를 사용할 수 있습니다. 이 기능은 특히 자체 장면 전환, 리듬 또는 연사 시퀀스를 만드는 데 유용합니다.
+예는 다음을 참고하세요.
 
-- หลังจากผ่านไป 3 วินาที ผู้หญิงคนหนึ่งก็ปรากฏตัวในฉาก
-- ที่ 5 วินาที ท่อนคอรัสจะเริ่มในเสียงพื้นหลัง
-- ตัดไปที่เฟรมใหม่ทุกๆ 2 วินาที
-- ในฉากที่เปลี่ยนอย่างรวดเร็ว ให้เปลี่ยนฉากไปยังสถานที่ใหม่ทุกๆ ครึ่งวินาที (12 เฟรมที่ 24fps)
+- 3초 후 여성이 장면으로 들어옵니다.
+- 5초에 백그라운드 오디오에서 코러스가 시작됩니다.
+- 2초마다 새로운 프레임으로 전환됩니다.
+- 연속적인 시퀀스에서 0.5초 (24fps에서 12프레임)마다 장면을 새 위치로 변경합니다.
 
-นอกจากนี้ คุณยังใช้ไวยากรณ์รหัสเวลาได้ด้วย
+타임코드 구문을 사용할 수도 있습니다.
 
 ```
 [0-3s] A person is walking
@@ -2554,59 +2518,52 @@ Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny wind
 [6-10s] They start running
 ```
 
-### การเขียนพรอมต์แบบเมตา
+### 메타 프롬프트 작성
 
-คุณขอให้ Gemini Omni Flash ให้ความสนใจกับคุณภาพทั่วไปหรือหลักการสร้างวิดีโอได้โดยทำดังนี้
+Gemini Omni Flash에게 동영상 생성의 일반적인 품질이나 원칙에 주의를 기울여 달라고 요청할 수 있습니다.
 
-- พิจารณารายละเอียดเล็กๆ น้อยๆ การแสดงออก และจังหวะเวลาเพื่อสร้างฉากที่มีรายละเอียดสมบูรณ์
-  แต่ดูเป็นธรรมชาติอย่างยิ่ง
-- อธิบายตัวละครและสภาพแวดล้อมอย่างละเอียด
-  ใช้หลักการออกแบบเครื่องแต่งกายกับตัวละคร ระบุรายละเอียดเกี่ยวกับ
-  ผู้คน สิ่งของ และวัตถุในฉากให้ชัดเจน
-- ใส่รายละเอียดที่เหมาะสมมากมายในองค์ประกอบพื้นหลังเพื่อให้
-  ฉากดูสมจริงและเป็นธรรมชาติ
-- สร้างวิดีโอแบบรัวๆ ที่แสดง`[thing]`หายากที่แตกต่างกันทุกๆ 1 วินาที พร้อมเพลงสนุกๆ
-  และใส่ข้อความเพื่อติดป้ายกำกับสิ่งนั้น
+- 미세한 디테일, 표정, 타이밍을 고려하여 매우 풍부하고 섬세하지만 완전히 자연스러운 장면을 만드세요.
+- 캐릭터와 환경을 매우 자세하게 설명하세요.
+  캐릭터에 의상 디자인 원칙을 적용합니다. 장면에 있는 사람, 항목, 객체를 매우 구체적으로 설명하세요.
+- 배경 요소에 적절한 세부정보를 많이 포함하여 장면이 사실적이고 자연스럽게 느껴지도록 합니다.
+- 1초마다 다른 희귀한 `[thing]`를 보여주는 래피드 파이어 동영상을 만들어 줘. 신나는 음악을 넣고 텍스트를 포함해 사물을 라벨링해 줘.
 
-### ข้อความในวิดีโอ
+### 동영상의 텍스트
 
-คุณสามารถป้อนพรอมต์ให้ใส่ข้อความในวิดีโอ แล้ว Gemini Omni จะแสดงข้อความในลักษณะที่ถูกต้องและอ่านได้ หากมีข้อความที่เกิดขึ้นตามธรรมชาติในวิดีโอ แม้จะเป็นองค์ประกอบพื้นหลัง ก็จะช่วยกำหนดสิ่งที่ควรพูดได้
+동영상에 텍스트를 포함하도록 프롬프트를 입력하면 Gemini Omni가 올바르고 읽기 쉬운 방식으로 렌더링합니다. 동영상에 자연스럽게 발생하는 텍스트가 있는 경우(배경 요소 포함) 텍스트의 내용을 정의하는 것이 좋습니다.
 
-- แสดงคำทีละคำบนหน้าจอ: "คุณ, รู้, ไหม, ว่า, Omni, ทำ, ข้อความ, สุด, เจ๋ง, ได้" คำแต่ละคำจะปรากฏเป็นเวลา 1 วินาทีพร้อมสไตล์ภาพเคลื่อนไหวที่แตกต่างกัน ไม่มี
-  บทพูด
-- มีป้ายถนนที่เขียนว่า "นี่คือภาพที่ AI สร้างขึ้นโดย Omni" มีหน้าร้านที่เขียนว่า "AI ที่คุณต้องการ" มีรถยนต์ที่มีป้ายทะเบียน "OMNI1.1"
+- 화면에 한 번에 한 단어씩 표시됩니다. 'Omni가, 멋진, 텍스트를, 생성할 수 있다는 사실을, 알고 계셨나요?' 각 단어는 서로 다른 애니메이션 스타일로 1초 동안 표시됩니다. 대화가 없습니다.
+- 'This is an AI generation by Omni'라고 적힌 거리 표지판이 있고, 'All you need AI'라고 적힌 상점 전면이 있으며, 번호판이 'OMNI1.1'인 자동차가 있습니다.
 
-### พรอมต์สำหรับการขยายวิดีโอ
+### 동영상 연장을 위한 프롬프트
 
-Gemini Omni 1.1 Flash ช่วยให้คุณขยายวิดีโอได้ด้วยพรอมต์ เช่น `"Extend this video"` หรือ `"The scene continues"` คุณขยายวิดีโอได้ครั้งละ 10 วินาที โดยมีความยาวรวมสูงสุด 40 วินาที
+Gemini Omni 1.1 Flash를 사용하면 `"Extend this video"` 또는 `"The scene continues"`과 같은 프롬프트로 동영상을 확장할 수 있습니다. 동영상을 10초씩 최대 총 길이 40초까지 연장할 수 있습니다.
 
-Omni จะสร้างส่วนขยายที่ทำให้วิดีโอ การเคลื่อนไหว ตัวละคร และเสียงสอดคล้องกันโดยใช้ 10 วินาทีสุดท้ายของวิดีโอต้นฉบับเป็นบริบท ระบบจะแก้ไขเฟรมสุดท้ายบางเฟรมในวิดีโออินพุตเพื่อให้การเปลี่ยนฉากเป็นไปอย่างราบรื่น
+Omni는 원본 동영상의 마지막 10초를 컨텍스트로 사용하여 동영상, 동작, 캐릭터, 오디오를 일관되게 유지하는 확장 프로그램을 만듭니다. 입력 동영상의 일부 마지막 프레임이 수정되어 전환이 매끄럽게 이루어집니다.
 
-เมื่อขยายเวลา เคล็ดลับการแจ้ง Omni ทั้งหมดในคำแนะนำนี้จะยังคงมีผลดังนี้
+확장할 때 이 가이드의 모든 Omni 프롬프트 팁이 계속 적용됩니다.
 
-- อธิบายเสียงในฉากที่ขยาย โดยเฉพาะอย่างยิ่งหากคุณต้องการให้มีการเปลี่ยนแปลง `"The music continues into the chorus"`
-- อธิบายว่าฉากดำเนินต่อไปหรือมีการตัดภาพไปยังฉากใหม่ (อาจมีตัวละครเดียวกัน): `"Show the same characters in the next scene"`
-- ใส่รูปภาพและวิดีโอเป็นข้อมูลอ้างอิงเมื่อขยายความเพื่อช่วยให้เอาต์พุตมีความถูกต้อง หรือเพื่อแนะนำตัวละครใหม่: `"The person shown in the reference image enters the scene"`, `"The dog in the reference video <VIDEO_REF_0> jumps onto the sofa"`
-- หากใช้ไทม์สแตมป์หรือไวยากรณ์รหัสเวลา 0s จะหมายถึงจุดเริ่มต้นของส่วนที่ขยายของวิดีโอ หากขยายวิดีโอ 10 วินาที การตัดฉากในพรอมต์นี้จะเกิดขึ้นหลังจากผ่านไป 12 วินาที `"After 2s cut to a new scene with the same characters"`
+- 확장된 장면의 오디오를 설명합니다. 특히 오디오를 변경해야 하는 경우에 유용합니다. `"The music continues into the chorus"`
+- 장면이 계속되는지 아니면 새로운 장면으로 샷이 전환되는지 설명합니다 (동일한 캐릭터가 등장할 수도 있음). `"Show the same characters in the next scene"`
+- 출력의 정확성을 유지하거나 새로운 캐릭터를 소개하기 위해 확장할 때 이미지와 동영상을 참조로 포함하세요. `"The person shown in the reference image enters the scene"`, `"The dog in the reference video <VIDEO_REF_0> jumps onto the sofa"`
+- 타임스탬프 또는 타임코드 문법을 사용하는 경우 0초는 동영상의 확장된 부분의 시작을 나타냅니다. 10초 동영상을 연장하는 경우 이 프롬프트의 장면 전환은 12초 후에 발생합니다. `"After 2s cut to a new scene with the same characters"`
 
-### การใช้แท็กในพรอมต์เพื่อกำหนดบทบาทของรูปภาพและวิดีโอ
+### 프롬프트에서 태그를 사용하여 이미지 및 동영상 역할 설정
 
-คุณใช้แท็กเพื่อเชื่อมโยงสื่อที่อัปโหลดกับบทบาทการสร้างที่เฉพาะเจาะจงได้ ซึ่งจะช่วยให้คุณระบุได้ว่ารูปภาพหรือวิดีโอแต่ละรายการเป็นเฟรมเริ่มต้น เฟรมสุดท้าย หรือเฟรมอ้างอิง
+태그를 사용하여 업로드된 미디어를 특정 생성 역할에 바인딩할 수 있습니다. 이를 통해 각 이미지 또는 동영상이 시작 프레임인지, 최종 프레임인지, 참조인지 지정할 수 있습니다.
 
-#### 1. แท็กอย่างง่าย (แนะนำ)
+#### 1. 단순 태그 (권장)
 
-ในกรณีที่สื่อมีบทบาทชัดเจนจากพรอมต์ คุณสามารถเชื่อมโยง
-รูปภาพและวิดีโอกับบทบาทได้โดยตรง
+미디어 역할이 프롬프트에서 명확한 간단한 경우 이미지와 동영상을 역할에 직접 바인드할 수 있습니다.
 
-- **`<FIRST_FRAME>`**: ใช้รูปภาพเป็นเฟรมเริ่มต้นของวิดีโอ เช่น `<FIRST_FRAME> a woman is walking`
-- **`<LAST_FRAME>`**: ใช้รูปภาพเป็นเฟรมสุดท้ายของวิดีโอเพื่อเปลี่ยนฉาก ต้องใช้กับ `<FIRST_FRAME>` เช่น `<FIRST_FRAME> <LAST_FRAME> a woman is walking`
-- **`<IMAGE_REF_N>`**: ใช้รูปภาพเป็นข้อมูลอ้างอิง เช่น `in the
-  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (รวมข้อมูลอ้างอิงสไตล์จากรูปภาพแรกและข้อมูลอ้างอิงเรื่องจากรูปภาพที่ 2)
-  การอ้างอิงรูปภาพจะเริ่มจาก 0
-- **`<VIDEO_REF_N>`**: ใช้เป็นข้อมูลอ้างอิงตัวละครหรือวัตถุ เช่น
-  `the person in <VIDEO_REF_0> is playing the violin` ข้อมูลอ้างอิงวิดีโอจะเริ่มต้นจาก 0 ด้วย
+- **`<FIRST_FRAME>`**: 이미지를 동영상의 시작 프레임으로 사용합니다(예: `<FIRST_FRAME> a woman is walking`).
+- **`<LAST_FRAME>`**: 이미지를 동영상의 최종 프레임으로 사용하여 전환합니다. `<FIRST_FRAME>`와 함께 사용해야 합니다(예: `<FIRST_FRAME> <LAST_FRAME> a woman is walking`).
+- **`<IMAGE_REF_N>`**: 이미지를 참조로 사용합니다 (예: `in the
+  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking`은 첫 번째 이미지의 스타일 참조와 두 번째 이미지의 피사체 참조를 결합함).
+  이미지 참조는 0부터 시작합니다.
+- **`<VIDEO_REF_N>`**: 동영상을 캐릭터 또는 객체 참조로 사용합니다(예: `the person in <VIDEO_REF_0> is playing the violin`). 동영상 참조도 0부터 시작합니다.
 
-ตัวอย่างต่อไปนี้มีรูปภาพอ้างอิง 6 ภาพ
+다음은 참조 이미지가 6개인 예시입니다.
 
 ```
 [0-3s] A studio fashion sequence. Starting with woman <IMAGE_REF_0>, she is holding <IMAGE_REF_1>
@@ -2614,56 +2571,54 @@ Omni จะสร้างส่วนขยายที่ทำให้วิ
 [6-10s] And finally another woman <IMAGE_REF_4> who is holding <IMAGE_REF_5> while walking.
 ```
 
-#### 2. การประกาศแหล่งที่มาและการอ้างอิง
+#### 2. 소스 및 참조 선언
 
-สำหรับกรณีที่ซับซ้อนมากขึ้นซึ่งมีอินพุตสื่อและบทบาทหลายรายการ คุณสามารถใช้
-แท็กคำนำหน้าที่ชัดเจนซึ่งจับคู่กับคำสั่งที่เป็นภาษาธรรมชาติได้ คุณควร
-ประกาศแหล่งที่มาและการอ้างอิงเหล่านี้ที่จุดเริ่มต้นของพรอมต์
+미디어 입력이 여러 개이고 역할이 여러 개인 더 복잡한 경우에는 자연어 요청 사항과 함께 명시적 접두사 태그를 사용할 수 있습니다. 프롬프트 시작 부분에 이러한 소스와 참조를 선언해야 합니다.
 
-- `[# Sources <FIRST_FRAME>@Image1]` จะใช้รูปภาพแรกเป็นเฟรมเริ่มต้น
-- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image2]` จะใช้รูปภาพแรกเป็นเฟรมเริ่มต้นและรูปภาพที่ 2 เป็นเฟรมสุดท้าย
-- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image1]` จะใช้รูปภาพแรกเป็นทั้งเฟรมแรกและเฟรมสุดท้ายเพื่อสร้างวิดีโอที่เล่นวน
-- `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` จะใช้รูปภาพแรกเป็นเฟรมเริ่มต้นและรูปภาพที่ 2 เป็นข้อมูลอ้างอิง
-- `[# Sources <VIDEO_0>@Video1]` จะใช้วิดีโอเป็นวิดีโอต้นฉบับหลักในการแก้ไขหรือดัดแปลง
-- `[# Sources <PREVIOUS_VIDEO>@Video1]` จะใช้วิดีโอจากเทิร์นก่อนหน้าเพื่อขยายเวลา
-- `[# References <IMAGE_REF_0>@Image1]` จะใช้รูปภาพแรกเป็นข้อมูลอ้างอิง
-- `[# References <IMAGE_REF_1>@Image2]` จะใช้รูปภาพที่ 2 เป็นข้อมูลอ้างอิง
-- `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` จะใช้รูปภาพทั้ง 2 รูปเป็นข้อมูลอ้างอิง
-- `[# References <VIDEO_REF_0>@Video1]` จะใช้วิดีโอแรกเป็นข้อมูลอ้างอิง
-- `[# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1]` จะใช้ทั้งรูปภาพและวิดีโอเป็นข้อมูลอ้างอิง
+- `[# Sources <FIRST_FRAME>@Image1]`는 첫 번째 이미지를 시작 프레임으로 사용합니다.
+- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image2]`은 첫 번째 이미지를 시작 프레임으로, 두 번째 이미지를 최종 프레임으로 사용합니다.
+- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image1]`는 첫 번째 이미지를 첫 번째 프레임과 마지막 프레임으로 모두 사용하여 연속 재생되는 동영상을 만듭니다.
+- `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]`는 첫 번째 이미지를 시작 프레임으로 사용하고 두 번째 이미지를 참조로 사용합니다.
+- `[# Sources <VIDEO_0>@Video1]`는 동영상을 기본 소스 동영상으로 사용하여 편집하거나 수정합니다.
+- `[# Sources <PREVIOUS_VIDEO>@Video1]`는 이전 턴의 동영상을 사용하여 확장합니다.
+- `[# References <IMAGE_REF_0>@Image1]`은 첫 번째 이미지를 참조로 사용합니다.
+- `[# References <IMAGE_REF_1>@Image2]`는 두 번째 이미지를 참조로 사용합니다.
+- `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]`는 두 이미지를 모두 참조로 사용합니다.
+- `[# References <VIDEO_REF_0>@Video1]`에서는 첫 번째 동영상을 참조로 사용합니다.
+- `[# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1]`는 이미지와 동영상을 모두 참조로 사용합니다.
 
-เพิ่มคำสั่งแนะนำที่ท้ายพรอมต์
+프롬프트 끝에 안내 요청 사항을 추가합니다.
 
-- สำหรับเฟรมเริ่มต้น ให้ทำดังนี้ `"Use this image as the starting frame."`
-- สำหรับวิดีโอที่เล่นวนผ่านเฟรมเริ่มต้นและเฟรมสิ้นสุด ให้ทำดังนี้ `"Use this image as the first frame and the last frame."`
-- สำหรับรูปภาพอ้างอิง `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
-- สำหรับวิดีโออ้างอิง: `"Use the given video(s) as references. Do not use them as a source for video editing."`
+- 시작 프레임: `"Use this image as the starting frame."`
+- 시작 프레임과 종료 프레임을 통해 반복되는 동영상: `"Use this image as the first frame and the last frame."`
+- 참고 이미지: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
+- 참조 동영상: `"Use the given video(s) as references. Do not use them as a source for video editing."`
 
-ตัวอย่างพรอมต์ที่มีการประกาศแหล่งที่มาและการอ้างอิง
+소스 및 참조 선언이 포함된 프롬프트의 예는 다음과 같습니다.
 
-**เฟรมเริ่มต้นที่รวมกับรูปภาพอ้างอิง:**
+**시작 프레임과 참고 이미지를 결합한 경우:**
 
 ```
 [# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2] a woman <IMAGE_REF_0> is walking. Use Image1 as the starting frame. Use Image2 as a reference for the video generation.
 ```
 
-**วิดีโออ้างอิงตัวละครรวมกับรูปภาพอ้างอิงวัตถุ:**
+**캐릭터 참조 동영상과 결합된 객체 참고 이미지:**
 
 ```
 [# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1] The woman in <VIDEO_REF_0> is playing the violin shown in <IMAGE_REF_0>. Use Video1 as a character reference and Image1 as an object reference.
 ```
 
-## ขั้นตอนถัดไป
+## 다음 단계
 
-- เริ่มต้นใช้งาน Gemini Omni Flash โดยทดลองใช้ใน [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=th)
-- ดูวิธีเขียนพรอมต์ให้ดียิ่งขึ้นด้วย[ข้อมูลเบื้องต้นเกี่ยวกับการออกแบบพรอมต์](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=th)
+- [Omni 빠른 시작 Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=ko)에서 실험하여 Gemini Omni Flash를 시작하세요.
+- [프롬프트 설계 소개](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ko)를 통해 더 나은 프롬프트를 작성하는 방법을 알아보세요.
 
-ส่งความคิดเห็น
+의견 보내기
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-อัปเดตล่าสุด 2026-09-24 UTC
+최종 업데이트: 2026-09-24(UTC)
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+의견을 전달하고 싶나요?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-24(UTC)"],[],[]]

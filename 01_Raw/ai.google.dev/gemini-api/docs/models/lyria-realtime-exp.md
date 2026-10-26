@@ -1,49 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=ar
-fetched_at: 2026-10-19T05:43:37.922173+00:00
-title: "\u062a\u062c\u0631\u0628\u0629 Lyria RealTime \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=fr
+fetched_at: 2026-10-26T06:01:24.387449+00:00
+title: "Lyria RealTime (version exp\u00e9rimentale) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫Gemini 4 Argon متاح الآن. [جرِّب هذه الميزة](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ar).
+Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-إرسال ملاحظات
+Envoyer des commentaires
 
-# تجربة Lyria RealTime
+# Lyria RealTime (version expérimentale)
 
-محرك تجريبي لتوليف الموسيقى بدقة عالية، يقدّم إمكانات مبتكرة لإنشاء محتوى صوتي وتحويله. ‫Lyria RealTime هو الخيار الأفضل لكتابة الأغاني بمساعدة الذكاء الاصطناعي وإنشاء ألحان موسيقية فريدة
-وسير عمل إبداعي للصوت يتطلّب تحكّمًا دقيقًا في اللحن والإيقاع،
-بدون غناء.
+Moteur expérimental de synthèse musicale haute fidélité, offrant des fonctionnalités innovantes pour générer et transformer des contenus audio. Lyria RealTime
+est idéal pour la composition de chansons assistée par l'IA, la génération d'instruments uniques et
+les workflows audio créatifs qui nécessitent un contrôle approfondi de la mélodie et du rythme, sans
+voix.
 
-[تجربة Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=ar)
+[Essayer Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=fr)
 
-## الوثائق
+## Documentation
 
-يمكنك الانتقال إلى صفحة [إنشاء الموسيقى في الوقت الفعلي](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=ar) للاطّلاع على التغطية الكاملة للميزات والإمكانات.
+Consultez la page [Génération de musique en temps réel](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=fr) pour découvrir toutes les fonctionnalités et les possibilités.
 
 ## lyria-realtime-exp
 
-| الموقع | الوصف |
+| Propriété | Description |
 | --- | --- |
-| رمز النموذج id\_card | **Gemini API**  `lyria-realtime-exp` |
-| saveأنواع البيانات المتوافقة | **الإدخال**  النص (الطلبات المرجّحة)  **الناتج**  الصوت (تنسيق PCM غير مضغوط بمعدّل 16 بت) |
-| token\_autoحدود البث | **معدّل البيانات في الملف الصوتي**  ‫48 كيلو هرتز (استيريو)  **وقت استجابة عناصر التحكّم**  ثانيتان كحدّ أقصى |
-| 123Versions | يمكنك الاطّلاع على [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - تجريبية: `lyria-realtime-exp` |
-| calendar\_monthآخر تعديل | مايو 2025 |
+| Code du modèle id\_card | **API Gemini**  `lyria-realtime-exp` |
+| Types de données acceptés pour save | **Entrée**  Texte (prompts pondérés)  **Résultat**  Audio (PCM 16 bits brut) |
+| Limites de streaming token\_auto | **Taux d'échantillonnage**  48 kHz (stéréo)  **Contrôler la latence**  2 secondes maximum |
+| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Expérimental : `lyria-realtime-exp` |
+| calendar\_monthDernière mise à jour | Mai 2025 |
 
-إرسال ملاحظات
+Envoyer des commentaires
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-تاريخ التعديل الأخير: 2026-10-08 (حسب التوقيت العالمي المتفَّق عليه)
+Dernière mise à jour le 2026/10/08 (UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Voulez-vous nous donner plus d'informations ?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-10-08 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/08 (UTC)."],[],[]]

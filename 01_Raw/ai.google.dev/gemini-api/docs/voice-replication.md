@@ -1,53 +1,72 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/voice-replication?hl=vi
-fetched_at: 2026-10-19T05:56:28.091668+00:00
-title: "Sao ch\u00e9p gi\u1ecdng n\u00f3i \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/voice-replication?hl=th
+fetched_at: 2026-10-26T05:45:44.104654+00:00
+title: "\u0e01\u0e32\u0e23\u0e08\u0e33\u0e25\u0e2d\u0e07\u0e40\u0e2a\u0e35\u0e22\u0e07 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
+Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Gửi ý kiến phản hồi
+ส่งความคิดเห็น
 
-# Sao chép giọng nói
+# การจำลองเสียง
 
-Tính năng nhân bản giọng nói cho phép bạn nhân bản đặc điểm giọng nói của người nói từ một đoạn âm thanh ngắn bằng cách sử dụng điểm cuối Giọng nói của Gemini API (`POST /v1beta/voices`). Cả [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=vi) (`gemini-3.8-flash-tts`) và [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=vi) (`gemini-3.8-flash-lite-tts`) đều hỗ trợ tính năng nhân bản giọng nói.
+การจำลองเสียงช่วยให้คุณจำลองลักษณะเสียงร้องของลำโพงจากตัวอย่างเสียงสั้นๆ โดยใช้ปลายทางเสียงของ Gemini API (`POST /v1beta/voices`)
+ทั้ง [TTS ของ Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=th)
+(`gemini-3.8-flash-tts`) และ
+[TTS ของ Gemini 3.8 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=th)
+(`gemini-3.8-flash-lite-tts`) รองรับการจำลองเสียง
 
-Cách nhanh nhất để sao chép, xác minh sự đồng ý và nghe thử giọng nói được sao chép là sử dụng trải nghiệm **Sao chép giọng nói** có tính tương tác trong [Google AI Studio](https://aistudio.google.com/generate-speech?hl=vi). Bạn có thể ghi lại hoặc tải các đoạn video tham chiếu và đoạn video có sự đồng ý lên ngay trong trình duyệt, xem trước giọng nói và sao chép mã nhận dạng `voice_...` thu được trực tiếp vào mã ứng dụng của mình.
+วิธีที่เร็วที่สุดในการจำลอง ยืนยันความยินยอม และทดสอบเสียงที่จำลองคือ
+การใช้ประสบการณ์**การจำลองเสียง**แบบอินเทอร์แอกทีฟใน
+[Google AI Studio](https://aistudio.google.com/generate-speech?hl=th) คุณสามารถบันทึก
+หรืออัปโหลดคลิปอ้างอิงและคลิปความยินยอมในเบราว์เซอร์ได้โดยตรง แสดงตัวอย่าง
+เสียง และคัดลอก`voice_...`รหัสที่ได้ลงในโค้ดแอปพลิเคชัน
+โดยตรง
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com/generate-speech?hl=vi)
+[ลองใช้ใน Google AI Studio](https://aistudio.google.com/generate-speech?hl=th)
 
-![Quy trình nhân bản giọng nói](https://ai.google.dev/static/gemini-api/docs/images/voice-replication-overview.svg?hl=vi)
+![เวิร์กโฟลว์การจำลองเสียง](https://ai.google.dev/static/gemini-api/docs/images/voice-replication-overview.svg?hl=th)
 
-## Chế độ lưu trữ có trạng thái so với chế độ lưu trữ không có trạng thái
+## โหมดพื้นที่เก็บข้อมูลแบบมีสถานะเทียบกับแบบไม่มีสถานะ
 
-Tính năng nhân bản giọng nói hỗ trợ 2 chế độ lưu trữ khi gọi `voices.create` (`POST /v1beta/voices`), trong đó chế độ lưu trữ có trạng thái được bật theo mặc định:
+การจำลองเสียงรองรับโหมดพื้นที่เก็บข้อมูล 2 โหมดเมื่อโทร `voices.create`
+(`POST /v1beta/voices`) โดยจะเปิดใช้พื้นที่เก็บข้อมูลแบบมีสถานะโดยค่าเริ่มต้น
 
-- **Bộ nhớ có trạng thái (`store=True`, mặc định nên dùng):** Google lưu trữ hồ sơ giọng nói đã xác minh trong dự án của bạn và trả về một `voice_id` (`replicated_voice.id`, chẳng hạn như `voice_abc123...`) liên tục, có dung lượng nhỏ. Bạn có thể truyền `voice_id` này qua các yêu cầu và quản lý bằng `voices.list()`, `voices.get()` và `voices.delete()`.
-- **Khoá do ứng dụng không trạng thái quản lý (`store=False`, không bắt buộc):** Đối với các khối lượng công việc yêu cầu không có sự duy trì phía máy chủ đối với hồ sơ giọng nói sinh trắc học, hãy đặt `store=False`. API này trả về một `voice_key` (`replicated_voice.key`, bắt đầu bằng `voicekey_...`) được mã hoá, độc lập mà ứng dụng của bạn lưu trữ cục bộ và truyền trực tiếp trong các yêu cầu tổng hợp.
+- **ที่เก็บข้อมูลแบบมีสถานะ (`store=True` ค่าเริ่มต้นที่แนะนำ):** Google จะจัดเก็บโปรไฟล์เสียงที่ยืนยันแล้ว
+  ในโปรเจ็กต์ของคุณและแสดงผล `voice_id` แบบถาวรที่มีขนาดเล็ก (`replicated_voice.id` เช่น `voice_abc123...`) คุณสามารถส่ง `voice_id` นี้ในคำขอต่างๆ และจัดการได้ด้วย `voices.list()`,
+  `voices.get()` และ `voices.delete()`
+- **คีย์ที่ลูกค้าจัดการแบบไม่เก็บสถานะ (`store=False` ไม่บังคับ):** สำหรับภาระงาน
+  ที่ต้องไม่มีการคงอยู่ฝั่งเซิร์ฟเวอร์ของโปรไฟล์เสียงไบโอเมตริก ให้ตั้งค่า
+  `store=False` API จะแสดง `voice_key`
+  (`replicated_voice.key` ซึ่งเริ่มต้นด้วย `voicekey_...`) ที่เข้ารหัสและมีข้อมูลครบถ้วน ซึ่งแอปพลิเคชันของคุณ
+  จัดเก็บไว้ในเครื่องและส่งในคำขอการสังเคราะห์โดยตรง
 
-| Chế độ lưu trữ | Số nhận dạng | Hạn mức dự án | Thời gian lưu giữ (TTL) |
+| โหมดพื้นที่เก็บข้อมูล | ตัวระบุ | ขีดจำกัดของโปรเจ็กต์ | การเก็บรักษา (TTL) |
 | --- | --- | --- | --- |
-| **Giọng nói có trạng thái** (`store=True`) | `voice_...` | **200 giọng nói cho mỗi dự án** (được chia sẻ giữa giọng nói được tạo theo yêu cầu và giọng nói được sao chép) | **1 năm** |
-| **Khoá giọng nói không trạng thái** (`store=False`) | `voicekey_...` | Do ứng dụng quản lý | **7 ngày** |
+| **เสียงที่มีสถานะ** (`store=True`) | `voice_...` | **เสียง 200 เสียงต่อโปรเจ็กต์** (ใช้ร่วมกันในเสียงที่พรอมต์และจำลอง) | **1 ปี** |
+| **คีย์เสียงแบบไม่เก็บสถานะ** (`store=False`) | `voicekey_...` | จัดการโดยไคลเอ็นต์ | **7 วัน** |
 
-## Yêu cầu về âm thanh và sự đồng ý
+## ข้อกำหนดด้านเสียงและความยินยอม
 
-Mỗi yêu cầu sao chép `CreateVoice` đều yêu cầu 2 bản ghi âm giọng nói của người thật từ **cùng một người nói là người lớn** (nên dùng WAV đơn âm 16 bit 24 kHz):
+`CreateVoice`คำขอจำลองทุกรายการต้องมีการบันทึกเสียงจากมนุษย์จริง 2 รายการ
+จาก**ผู้พูดที่เป็นผู้ใหญ่คนเดียวกัน** (แนะนำให้ใช้ WAV 16 บิตแบบโมโน 24 kHz)
 
-1. **Âm thanh tham chiếu (`source_audio`):** Một đoạn âm thanh dài từ 10 đến 30 giây, có giọng nói tự nhiên, rõ ràng của người mà bạn muốn mô phỏng giọng.
-2. **Âm thanh đồng ý (`consent_audio`):** Bản ghi âm giọng nói của chính người nói đó, trong đó người nói đọc rõ ràng câu đồng ý bắt buộc bằng một trong các [ngôn ngữ được hỗ trợ](https://ai.google.dev/gemini-api/docs/voice-replication?hl=vi#consent-phrases-by-language) (ví dụ: bằng tiếng Anh): > *"Tôi là chủ sở hữu giọng nói này và tôi đồng ý để Google sử dụng giọng nói này nhằm tạo mẫu giọng nói."*
+1. **เสียงอ้างอิง (`source_audio`):** คลิปเสียงพูดที่ชัดเจนและเป็นธรรมชาติ
+   จากผู้พูดที่คุณต้องการจำลองเสียง ความยาว 10-30 วินาที
+2. **เสียงความยินยอม (`consent_audio`):** บันทึกเสียงของบุคคลเดียวกันที่พูด ข้อความความยินยอมที่จำเป็นอย่างชัดเจนในภาษาใดภาษาหนึ่งที่ [รองรับ](https://ai.google.dev/gemini-api/docs/voice-replication?hl=th#consent-phrases-by-language) (เช่น ภาษาอังกฤษ) > *"ฉันเป็นเจ้าของเสียงนี้และยินยอมให้ Google ใช้เสียงนี้เพื่อ > สร้างรูปแบบเสียงสังเคราะห์"*
 
-## Tạo giọng nói được sao chép (mặc định có trạng thái)
+## สร้างเสียงที่จำลอง (ค่าเริ่มต้นแบบมีสถานะ)
 
-Sử dụng Google GenAI SDK (`google-genai` 2.25.0 trở lên / `@google/genai` 2.24.0 trở lên) hoặc API REST với `store=True` để tạo và lưu hồ sơ giọng nói được sao chép trong dự án của bạn:
+ใช้ Google GenAI SDK (`google-genai` 2.25.0 ขึ้นไป / `@google/genai` 2.24.0 ขึ้นไป) หรือ REST API
+กับ `store=True` เพื่อสร้างและบันทึกโปรไฟล์เสียงที่จำลองไว้ในโปรเจ็กต์
 
 ### Python
 
@@ -150,9 +169,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/voices" \
   }"
 ```
 
-## Tổng hợp lời nói bằng giọng nói được sao chép
+## สังเคราะห์เสียงด้วยเสียงที่จำลอง
 
-Truyền `id` (`voice_...`) đã trả về trong yêu cầu tổng hợp của bạn:
+ส่ง `id` (`voice_...`) ที่ส่งคืนมาในคำขอการสังเคราะห์
 
 ### Python
 
@@ -251,9 +270,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }' | jq -r '[.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio")] | last | .data' | base64 --decode > out.wav
 ```
 
-## Quản lý giọng nói được sao chép đã lưu trữ
+## จัดการเสียงที่จำลองแบบที่จัดเก็บไว้
 
-Khi được tạo bằng `store=True`, bạn có thể liệt kê, lọc, kiểm tra và xoá các giọng nói được sao chép thông qua Voices API (xem [Thư viện giọng nói mở rộng và lọc](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#voice-library) để biết tất cả các tham số bộ lọc):
+เมื่อสร้างด้วย `store=True` คุณจะแสดง กรอง ตรวจสอบ และลบเสียงที่จำลองได้ผ่าน Voices API (ดู[คลังเสียงและการกรองเพิ่มเติม](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th#voice-library)
+สำหรับพารามิเตอร์ตัวกรองทั้งหมด)
 
 ### Python
 
@@ -311,9 +331,11 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/voices/voice_YO
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Lựa chọn: Khoá giọng nói do ứng dụng khách quản lý không trạng thái (`store=False`)
+## ตัวเลือก: คีย์เสียงที่จัดการโดยไคลเอ็นต์แบบไม่เก็บสถานะ (`store=False`)
 
-Nếu ứng dụng của bạn không yêu cầu duy trì hồ sơ giọng nói phía máy chủ, hãy đặt `store=False` khi tạo giọng nói sao chép. API này trả về một `voice_key` được mã hoá (`replicated_voice.key`, bắt đầu bằng `voicekey_...`) mà bạn lưu trữ phía máy khách và truyền trực tiếp đến bất cứ nơi nào chấp nhận mã nhận dạng `voice`:
+หากแอปพลิเคชันของคุณไม่ต้องการให้มีการคงอยู่ของโปรไฟล์เสียงฝั่งเซิร์ฟเวอร์ ให้ตั้งค่า
+`store=False` เมื่อสร้างเสียงที่จำลอง API จะแสดง`voice_key`ที่เข้ารหัส (`replicated_voice.key` ซึ่งขึ้นต้นด้วย `voicekey_...`) ซึ่งคุณ
+จัดเก็บไว้ฝั่งไคลเอ็นต์และส่งโดยตรงไปยังที่ใดก็ตามที่ยอมรับรหัส `voice`
 
 ### Python
 
@@ -435,60 +457,62 @@ curl "https://generativelanguage.googleapis.com/v1beta/voices" \
   }"
 ```
 
-## Các cụm từ đồng ý được hỗ trợ theo ngôn ngữ
+## วลีความยินยอมที่รองรับตามภาษา
 
-Bản ghi âm đồng ý phải đọc rõ ràng nội dung chính xác bằng một trong 30 ngôn ngữ được hỗ trợ:
+เสียงที่บันทึกความยินยอมต้องอ่านข้อความที่แน่นอนอย่างชัดเจนในภาษาใดภาษาหนึ่งจาก 30 ภาษาที่รองรับ
 
-| Ngôn ngữ | Ngôn ngữ (`lang_id`) | Tuyên bố đồng ý nguyên văn |
+| ภาษา | ภาษา (`lang_id`) | ข้อความความยินยอมที่ตรงกัน |
 | --- | --- | --- |
-| **Tiếng Ả Rập** | `ar-XA` | أنا مالك هذا الصوت وأوافق على أن تستخدم Google هذا الصوت لإنشاء نموذج صوتي اصطناعي. |
-| **Tiếng Bengali** | `bn-IN` | আমি এই ভয়েসের মালিক এবং আমি একটি সিন্থেটিক ভয়েস মডেল তৈরি করতে এই ভয়েস ব্যবহার করে Google-এর সাথে সম্মতি দিচ্ছি। |
-| **Tiếng Trung (Giản thể)** | `zh-CN` | Tôi là chủ sở hữu của giọng nói này và cho phép Google sử dụng giọng nói này để tạo mô hình tổng hợp giọng nói |
-| **Tiếng Hà Lan** | `nl-NL` | Ik ben de eigenaar van deze stem en ik geef Google toestemming om deze stem te gebruiken om een synthetisch stemmodel te maken. |
-| **Tiếng Anh (Mỹ)** | `en-US` | Tôi là chủ sở hữu giọng nói này và tôi đồng ý cho Google sử dụng giọng nói này để tạo mẫu giọng nói tổng hợp. |
-| **Tiếng Anh (Anh)** | `en-GB` | Tôi là chủ sở hữu giọng nói này và tôi đồng ý cho Google sử dụng giọng nói này để tạo mẫu giọng nói tổng hợp. |
-| **Tiếng Anh (Ấn Độ)** | `en-IN` | Tôi là chủ sở hữu giọng nói này và tôi đồng ý cho phép Google sử dụng giọng nói này để tạo mẫu giọng nói tổng hợp. |
-| **Tiếng Anh (Úc)** | `en-AU` | Tôi là chủ sở hữu giọng nói này và tôi đồng ý cho Google sử dụng giọng nói này để tạo mẫu giọng nói tổng hợp. |
-| **Tiếng Pháp (Pháp)** | `fr-FR` | Je suis le propriétaire de cette voix et j'autorise Google à utiliser cette voix pour créer un modèle de voix synthétique. |
-| **Tiếng Pháp (Canada)** | `fr-CA` | Je suis le propriétaire de cette voix et j'autorise Google à utiliser cette voix pour créer un modèle de voix synthétique. |
-| **Tiếng Đức** | `de-DE` | Ich bin der Eigentümer dieser Stimme und bin damit einverstanden, dass Google diese Stimme zur Erstellung eines synthetischen Stimmmodells verwendet. |
-| **Tiếng Gujarati** | `gu-IN` | હું આ વોઈસનો માલિક છું અને સિન્થેટિક વોઈસ મોડલ બનાવવા માટે આ વોઈસનો ઉપયોગ કરીને google ને હું સંમતિ આપું છું |
-| **Tiếng Hindi** | `hi-IN` | मैं इस आवाज का मालिक हूं और मैं सिंथेटिक आवाज मॉडल बनाने के लिए Google को इस आवाज का उपयोग करने की सहमति देता हूं |
-| **Tiếng Indonesia** | `id-ID` | Saya pemilik suara ini dan saya menyetujui Google menggunakan suara ini untuk membuat model suara sintetis. |
-| **Tiếng Ý** | `it-IT` | Sono il proprietario di questa voce e acconsento che Google la utilizzi per creare un modello di voce sintetica. |
-| **Tiếng Nhật** | `ja-JP` | 私はこの音声の所有者であり、Googleがこの音声を使用して音声合成モデルを作成することを承認します。 |
-| **Tiếng Kannada** | `kn-IN` | ನಾನು ಈ ಧ್ವನಿಯ ಮಾಲಿಕ ಮತ್ತು ಸಂಶ್ಲೇಷಿತ ಧ್ವನಿ ಮಾದರಿಯನ್ನು ರಚಿಸಲು ಈ ಧ್ವನಿಯನ್ನು ಬಳಸಿಕೊಂಡುಗೂಗಲ್ ಗೆ ನಾನು ಸಮ್ಮತಿಸುತ್ತೇನೆ. |
-| **Tiếng Hàn** | `ko-KR` | Tôi là chủ sở hữu của giọng nói này và cho phép Google sử dụng giọng nói này để tạo mô hình tổng hợp giọng nói. |
-| **Tiếng Malayalam** | `ml-IN` | ഈ ശബ്ദത്തിന്റെ ഉടമ ഞാനാണ്, ഒരു സിന്തറ്റിക് വോയ്സ് മോഡൽ സൃഷ്ടിക്കാൻ ഈ ശബ്ദം ഉപയോഗിക്കുന്നതിന് ഞാൻ Google-ന് സമ്മതം നൽകുന്നു. |
-| **Tiếng Marathi** | `mr-IN` | मी या आवाजाचा मालक आहे आणि सिंथेटिक व्हॉइस मॉडेल तयार करण्यासाठी हा आवाज वापरण्यासाठी मी Google ला संमती देतो |
-| **Tiếng Ba Lan** | `pl-PL` | Jestem właścicielem tego głosu i wyrażam zgodę na wykorzystanie go przez Google w celu utworzenia syntetycznego modelu głosu. |
-| **Tiếng Bồ Đào Nha (Brazil)** | `pt-BR` | Eu sou o proprietário desta voz e autorizo o Google a usá-la para criar um modelo de voz sintética. |
-| **Tiếng Nga** | `ru-RU` | Я являюсь владельцем этого голоса и даю согласие Google на использование этого голоса для создания модели синтетического голоса. |
-| **Tiếng Tây Ban Nha (Tây Ban Nha)** | `es-ES` | Soy el propietario de esta voz y doy mi consentimiento para que Google la utilice para crear un modelo de voz sintética. |
-| **Tiếng Tây Ban Nha (Mỹ)** | `es-US` | Soy el propietario de esta voz y doy mi consentimiento para que Google la utilice para crear un modelo de voz sintética. |
-| **Tiếng Tamil** | `ta-IN` | நான் இந்த குரலின் உரிமையாளர் மற்றும் செயற்கை குரல் மாதிரியை உருவாக்க இந்த குரலை பயன்படுத்த குகல்க்கு நான் ஒப்புக்கொள்கிறேன். |
-| **Tiếng Telugu** | `te-IN` | నేను ఈ వాయిస్ యజమానిని మరియు సింతటిక్ వాయిస్ మోడల్ ని రూపొందించడానికి ఈ వాయిస్ ని ఉపయోగించడానికి googleకి నేను సమ్మతిస్తున్నాను. |
-| **Tiếng Thái** | `th-TH` | Tôi là chủ sở hữu giọng nói này và tôi đồng ý cho Google sử dụng giọng nói này để tạo mô hình giọng nói nhân tạo |
-| **Tiếng Thổ Nhĩ Kỳ** | `tr-TR` | Bu sesin sahibi benim ve Google'ın bu sesi kullanarak sentetik bir ses modeli oluşturmasına izin veriyorum. |
-| **Tiếng Việt** | `vi-VN` | Tôi là chủ sở hữu giọng nói này và tôi đồng ý cho Google sử dụng giọng nói này để tạo mô hình giọng nói tổng hợp. |
+| **อาหรับ** | `ar-XA` | أنا مالك هذا الصوت وأوافق على أن تستخدم Google هذا الصوت لإنشاء نموذج صوتي اصطناعي. |
+| **เบงกาลี** | `bn-IN` | আমি এই ভয়েসের মালিক এবং আমি একটি সিন্থেটিক ভয়েস মডেল তৈরি করতে এই ভয়েস ব্যবহার করে Google-এর সাথে সম্মতি দিচ্ছি। |
+| **จีน (ตัวย่อ)** | `zh-CN` | 我是此声音的拥有者并授权谷歌使用此声音创建语音合成模型 |
+| **ดัตช์** | `nl-NL` | Ik ben de eigenaar van deze stem en ik geef Google toestemming om deze stem te gebruiken om een synthetisch stemmodel te maken. |
+| **อังกฤษ (สหรัฐอเมริกา)** | `en-US` | ฉันเป็นเจ้าของเสียงนี้และยินยอมให้ Google ใช้เสียงนี้เพื่อสร้างรูปแบบเสียงสังเคราะห์ |
+| **อังกฤษ (สหราชอาณาจักร)** | `en-GB` | ฉันเป็นเจ้าของเสียงนี้และยินยอมให้ Google ใช้เสียงนี้เพื่อสร้างรูปแบบเสียงสังเคราะห์ |
+| **อังกฤษ (อินเดีย)** | `en-IN` | ฉันเป็นเจ้าของเสียงนี้และยินยอมให้ Google ใช้เสียงนี้เพื่อสร้างรูปแบบเสียงสังเคราะห์ |
+| **อังกฤษ (ออสเตรเลีย)** | `en-AU` | ฉันเป็นเจ้าของเสียงนี้และยินยอมให้ Google ใช้เสียงนี้เพื่อสร้างรูปแบบเสียงสังเคราะห์ |
+| **ฝรั่งเศส (ฝรั่งเศส)** | `fr-FR` | Je suis le propriétaire de cette voix et j'autorise Google à utiliser cette voix pour créer un modèle de voix synthétique. |
+| **ฝรั่งเศส (แคนาดา)** | `fr-CA` | Je suis le propriétaire de cette voix et j'autorise Google à utiliser cette voix pour créer un modèle de voix synthétique. |
+| **เยอรมัน** | `de-DE` | Ich bin der Eigentümer dieser Stimme und bin damit einverstanden, dass Google diese Stimme zur Erstellung eines synthetischen Stimmmodells verwendet. |
+| **คุชราต** | `gu-IN` | હું આ વોઈસનો માલિક છું અને સિન્થેટિક વોઈસ મોડલ બનાવવા માટે આ વોઈસનો ઉપયોગ કરીને google ને હું સંમતિ આપું છું |
+| **ฮินดี** | `hi-IN` | मैं इस आवाज का मालिक हूं और मैं सिंथेटिक आवाज मॉडल बनाने के लिए Google को इस आवाज का उपयोग करने की सहमति देता हूं |
+| **อินโดนีเซีย** | `id-ID` | Saya pemilik suara ini dan saya menyetujui Google menggunakan suara ini untuk membuat model suara sintetis. |
+| **อิตาลี** | `it-IT` | Sono il proprietario di questa voce e acconsento che Google la utilizzi per creare un modello di voce sintetica. |
+| **ญี่ปุ่น** | `ja-JP` | 私はこの音声の所有者であり、Googleがこの音声を使用して音声合成モデルを作成することを承認します。 |
+| **กันนาดา** | `kn-IN` | ನಾನು ಈ ಧ್ವನಿಯ ಮಾಲಿಕ ಮತ್ತು ಸಂಶ್ಲೇಷಿತ ಧ್ವನಿ ಮಾದರಿಯನ್ನು ರಚಿಸಲು ಈ ಧ್ವನಿಯನ್ನು ಬಳಸಿಕೊಂಡುಗೂಗಲ್ ಗೆ ನಾನು ಸಮ್ಮತಿಸುತ್ತೇನೆ. |
+| **เกาหลี** | `ko-KR` | 나는 이 음성의 소유자이며 구글이 이 음성을 사용하여 음성 합성 모델을 생성할 것을 허용합니다. |
+| **มาลายาลัม** | `ml-IN` | ഈ ശബ്ദത്തിന്റെ ഉടമ ഞാനാണ്, ഒരു സിന്തറ്റിക് വോയ്സ് മോഡൽ സൃഷ്ടിക്കാൻ ഈ ശബ്ദം ഉപയോഗിക്കുന്നതിന് ഞാൻ Google-ന് സമ്മതം നൽകുന്നു. |
+| **มราฐี** | `mr-IN` | मी या आवाजाचा मालक आहे आणि सिंथेटिक व्हॉइस मॉडेल तयार करण्यासाठी हा आवाज वापरण्यासाठी मी Google ला संमती देतो |
+| **โปแลนด์** | `pl-PL` | Jestem właścicielem tego głosu i wyrażam zgodę na wykorzystanie go przez Google w celu utworzenia syntetycznego modelu głosu. |
+| **โปรตุเกส (บราซิล)** | `pt-BR` | Eu sou o proprietário desta voz e autorizo o Google a usá-la para criar um modelo de voz sintética. |
+| **รัสเซีย** | `ru-RU` | Я являюсь владельцем этого голоса и даю согласие Google на использование этого голоса для создания модели синтетического голоса. |
+| **สเปน (สเปน)** | `es-ES` | Soy el propietario de esta voz y doy mi consentimiento para que Google la utilice para crear un modelo de voz sintética. |
+| **สเปน (สหรัฐอเมริกา)** | `es-US` | Soy el propietario de esta voz y doy mi consentimiento para que Google la utilice para crear un modelo de voz sintética. |
+| **ทมิฬ** | `ta-IN` | நான் இந்த குரலின் உரிமையாளர் மற்றும் செயற்கை குரல் மாதிரியை உருவாக்க இந்த குரலை பயன்படுத்த குகல்க்கு நான் ஒப்புக்கொள்கிறேன். |
+| **เตลูกู** | `te-IN` | నేను ఈ వాయిస్ యజమానిని మరియు సింతటిక్ వాయిస్ మోడల్ ని రూపొందించడానికి ఈ వాయిస్ ని ఉపయోగించడానికి googleకి నేను సమ్మతిస్తున్నాను. |
+| **ไทย** | `th-TH` | ฉันเป็นเจ้าของเสียงนี้ และฉันยินยอมให้ Google ใช้เสียงนี้เพื่อสร้างแบบจำลองเสียงสังเคราะห์ |
+| **ตุรกี** | `tr-TR` | Bu sesin sahibi benim ve Google'ın bu sesi kullanarak sentetik bir ses modeli oluşturmasına izin veriyorum. |
+| **เวียดนาม** | `vi-VN` | Tôi là chủ sở hữu giọng nói này và tôi đồng ý cho Google sử dụng giọng nói này để tạo mô hình giọng nói tổng hợp. |
 
-## Các phương pháp hay nhất để ghi âm thanh tham chiếu
+## แนวทางปฏิบัติแนะนำในการบันทึกเสียงอ้างอิง
 
-- **Ghi âm trong môi trường yên tĩnh:** Giảm thiểu tiếng vọng trong phòng, tạp âm, nhạc và giọng nói chồng chéo.
-- **Điều kiện ghi âm trùng khớp:** Ghi âm cả `source_audio` và `consent_audio` trên cùng một micrô trong cùng một môi trường âm thanh để quy trình xác minh người nói diễn ra thành công một cách đáng tin cậy.
-- **Chuyển đổi sang WAV đơn âm 24 kHz:** Để có kết quả tốt nhất, hãy lấy mẫu lại âm thanh đầu vào thành WAV PCM 16 bit đơn âm 24 kHz trước khi mã hoá.
+- **บันทึกในสภาพแวดล้อมที่เงียบ:** ลดเสียงสะท้อนในห้อง เสียงรบกวนรอบข้าง
+  เพลง และเสียงพูดที่ทับซ้อนกัน
+- **เงื่อนไขการบันทึกที่ตรงกัน:** บันทึกทั้ง `source_audio` และ
+  `consent_audio` ในไมโครโฟนเดียวกันในการตั้งค่าเสียงเดียวกันเพื่อให้การตรวจสอบการยืนยันตัวตนของผู้พูดสำเร็จอย่างสม่ำเสมอ
+- **แปลงเป็น WAV โมโน 24kHz:** เพื่อให้ได้ผลลัพธ์ที่ดีที่สุด ให้ทำการสุ่มตัวอย่างเสียงอินพุตใหม่เป็น WAV แบบ PCM 16 บิต โมโน 24kHz ก่อนทำการเข้ารหัส
 
-## Bước tiếp theo
+## ขั้นตอนถัดไป
 
-- Tìm hiểu cách tạo chân dung người dùng tuỳ chỉnh từ nội dung mô tả bằng văn bản trong [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi).
-- Khám phá kiểu theo lượt, thẻ nội tuyến và đoạn hội thoại nhiều người nói trong [Hướng dẫn chuyển văn bản sang lời nói](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi).
+- ดูวิธีสร้างลักษณะตัวตนที่กำหนดเองจากคำอธิบายข้อความใน[การออกแบบเสียง](https://ai.google.dev/gemini-api/docs/voice-design?hl=th)
+- ดูข้อมูลเกี่ยวกับการจัดรูปแบบระดับคำ การใช้แท็กในบรรทัด และบทสนทนาแบบหลายผู้พูดได้ใน[คู่มือ Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)
 
-Gửi ý kiến phản hồi
+ส่งความคิดเห็น
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Cập nhật lần gần đây nhất: 2026-09-24 UTC.
+อัปเดตล่าสุด 2026-09-24 UTC
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-24 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]

@@ -1,29 +1,29 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/file-input-methods?hl=es-419
-fetched_at: 2026-10-19T05:50:50.339584+00:00
-title: "M\u00e9todos de entrada de archivos \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/file-input-methods?hl=tr
+fetched_at: 2026-10-26T05:42:48.654001+00:00
+title: "Dosya giri\u015f y\u00f6ntemleri \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
+Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=es-419)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
 
-Enviar comentarios
+Geri bildirim gönderin
 
-# Métodos de entrada de archivos
+# Dosya giriş yöntemleri
 
-En esta guía, se explican las diferentes formas en que puedes incluir archivos multimedia, como imágenes, audio, video y documentos, cuando realizas solicitudes a la API de Gemini.
-Los nuevos métodos son compatibles con todos los extremos de la API de Gemini, incluidas las APIs de Batch, Interactions y Live.
-Elegir el método adecuado depende del tamaño del archivo, dónde se almacenan tus datos actualmente y con qué frecuencia planeas usar el archivo.
+Bu kılavuzda, Gemini API'ye istek gönderirken resim, ses, video ve doküman gibi medya dosyalarını eklemenin farklı yolları açıklanmaktadır.
+Yeni yöntemler, Batch, Interactions ve Live API dahil olmak üzere tüm Gemini API uç noktalarında desteklenir.
+Doğru yöntemi seçmek, dosyanızın boyutuna, verilerinizin şu anda nerede depolandığına ve dosyayı ne sıklıkta kullanmayı planladığınıza bağlıdır.
 
-La forma más sencilla de incluir un archivo como entrada es leer un archivo local e incluirlo en una instrucción. En el siguiente ejemplo, se muestra cómo leer un archivo PDF local. Los archivos PDF tienen un límite de 50 MB para este método. Consulta la [tabla de comparación de métodos de entrada](#method-comparison) para obtener una lista completa de los tipos y límites de entrada de archivos.
+Giriş olarak dosya eklemenin en basit yolu, yerel bir dosyayı okuyup isteme dahil etmektir. Aşağıdaki örnekte, yerel bir PDF dosyasının nasıl okunacağı gösterilmektedir. Bu yöntemde PDF'ler 50 MB ile sınırlıdır. Dosya giriş türlerinin ve sınırlarının tam listesi için [Giriş yöntemi karşılaştırma tablosu](#method-comparison)'na bakın.
 
 ### Python
 
@@ -112,26 +112,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
   }'
 ```
 
-## Comparación de métodos de entrada
+## Giriş yöntemi karşılaştırması
 
-En la siguiente tabla, se compara cada método de entrada con los límites de archivos y los casos de uso más adecuados. Ten en cuenta que el límite de tamaño del archivo puede variar según el tipo de archivo y el modelo o el tokenizador que se usen para procesarlo.
+Aşağıdaki tabloda, her giriş yöntemi dosya sınırları ve en iyi kullanım alanlarıyla karşılaştırılmaktadır. Dosya boyutu sınırının, dosya türüne ve dosyayı işlemek için kullanılan modele/tokenleştiriciye bağlı olarak değişebileceğini unutmayın.
 
-| Método | Ideal para | Tamaño máximo de los archivos | Persistencia |
+| Yöntem | En uygun olduğu durumlar | Maksimum dosya boyutu | Kalıcılık |
 | --- | --- | --- | --- |
-| **Datos intercalados** | Pruebas rápidas, archivos pequeños y aplicaciones en tiempo real | 100 MB por solicitud o carga útil   (**50 MB para PDFs**) | Ninguna (se envía con cada solicitud) |
-| **Subida de archivos a la API** | Archivos grandes y archivos que se usan varias veces | 2 GB por archivo,   hasta 20 GB por proyecto | 48 horas |
-| **Registro del URI de GCS de la API de File** | Archivos grandes que ya están en Google Cloud Storage y archivos que se usan varias veces | 2 GB por archivo, sin límites de almacenamiento generales | Ninguno (se recupera por solicitud). El registro único puede brindar acceso por hasta 30 días. |
-| **URLs externas** | Datos públicos o datos en buckets de la nube (AWS, Azure, GCS) sin volver a subirlos | 15 MB por archivo | Ninguno (se recupera por solicitud) |
+| **Satır içi veriler** | Hızlı test, küçük dosyalar, gerçek zamanlı uygulamalar. | İstek/yük başına 100 MB   (**PDF'ler için 50 MB**) | Yok (her istekle birlikte gönderilir) |
+| **Dosya API'si yükleme** | Büyük dosyalar, birden fazla kez kullanılan dosyalar | Dosya başına 2 GB,   proje başına en fazla 20 GB | 48 Saat |
+| **File API GCS URI kaydı** | Google Cloud Storage'da bulunan büyük dosyalar, birden çok kez kullanılan dosyalar. | Dosya başına 2 GB, genel depolama alanı sınırı yok | Yok (istek başına getirilir). Tek seferlik kayıt, 30 güne kadar erişim sağlayabilir. |
+| **Harici URL'ler** | Yeniden yükleme yapmadan bulut paketlerindeki (AWS, Azure, GCS) herkese açık veriler veya veriler. | Dosya başına 15 MB | Yok (istek başına getirilir) |
 
-## Datos intercalados
+## Satır içi veriler
 
-En el caso de archivos más pequeños (menos de 100 MB o 50 MB para archivos PDF), puedes pasar los datos directamente en la carga útil de la solicitud. Este es el método más simple para pruebas rápidas o aplicaciones que manejan datos transitorios en tiempo real. Puedes proporcionar datos como cadenas codificadas en base64 o leyendo archivos locales directamente.
+Daha küçük dosyalar (100 MB'tan küçük veya PDF'ler için 50 MB'tan küçük) için verileri doğrudan istek yükünde iletebilirsiniz. Bu, hızlı testler veya gerçek zamanlı, geçici verileri işleyen uygulamalar için en basit yöntemdir. Verileri base64 olarak kodlanmış dizeler şeklinde veya doğrudan yerel dosyaları okuyarak sağlayabilirsiniz.
 
-Para ver un ejemplo de lectura desde un archivo local, consulta el ejemplo que se encuentra al principio de esta página.
+Yerel bir dosyadan okuma örneği için bu sayfanın başındaki örneğe bakın.
 
-### Recuperar desde una URL
+### URL'den getirme
 
-También puedes recuperar un archivo desde una URL, convertirlo en bytes y agregarlo a la entrada.
+Ayrıca bir URL'den dosya getirebilir, bunu baytlara dönüştürebilir ve girişe ekleyebilirsiniz.
 
 ### Python
 
@@ -233,13 +233,13 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## API de Gemini File
+## Gemini File API
 
-La API de File está diseñada para archivos más grandes (hasta 2 GB) o archivos que planeas usar en varias solicitudes.
+File API, daha büyük dosyalar (2 GB'a kadar) veya birden fazla istekte kullanmayı planladığınız dosyalar için tasarlanmıştır.
 
-### Carga de archivos estándar
+### Standart dosya yükleme
 
-Sube un archivo local a la API de Gemini. Los archivos que se suben de esta manera se almacenan temporalmente (48 horas) y se procesan para que el modelo los recupere de manera eficiente.
+Gemini API'ye yerel bir dosya yükleyin. Bu şekilde yüklenen dosyalar geçici olarak (48 saat) depolanır ve model tarafından verimli bir şekilde alınabilmesi için işlenir.
 
 ### Python
 
@@ -346,42 +346,44 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Registra archivos de Google Cloud Storage
+### Google Cloud Storage dosyalarını kaydetme
 
-Si tus datos ya están en Google Cloud Storage, no es necesario que los descargues y vuelvas a subirlos. Puedes registrarlo directamente con la API de File.
+Verileriniz zaten Google Cloud Storage'da bulunuyorsa bunları indirip yeniden yüklemeniz gerekmez. Bunu doğrudan File API ile kaydedebilirsiniz.
 
-1. Otorga acceso de **agente de servicio** a cada bucket.
+1. Her pakete **Service Agent** erişimi verme
 
-   1. Habilita la API de Gemini en tu proyecto de Google Cloud.
-   2. Crea el agente de servicio:
+   1. Google Cloud projenizde Gemini API'yi etkinleştirin.
+   2. Hizmet aracısını oluşturun:
 
       `gcloud beta services identity create --service=generativelanguage.googleapis.com --project=<your_project>`
-   3. **Otorga permisos al agente de servicio de la API de Gemini** para leer tus buckets de almacenamiento.
+   3. Depolama paketlerinizi okumak için **Gemini API Hizmet Aracısı'na izin verin**.
 
-      El usuario debe asignar el [rol de IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=es-419#storage.objectViewer) `Storage Object Viewer` a este agente de servicio en los buckets de almacenamiento específicos que pretende usar.
+      Kullanıcının, kullanmayı planladığı belirli depolama paketlerinde bu hizmet aracısına `Storage Object Viewer`
+      [IAM rolü](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=tr#storage.objectViewer)
+      atması gerekir.
 
-   Este acceso no vence de forma predeterminada, pero se puede cambiar en cualquier momento. También puedes usar los comandos del [SDK de IAM de Google Cloud Storage](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=es-419) para otorgar permisos.
-2. Autentica tu servicio
+   Bu erişim varsayılan olarak sona ermez ancak istediğiniz zaman değiştirilebilir. İzin vermek için [Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=tr) komutlarını da kullanabilirsiniz.
+2. Hizmetinizin kimliğini doğrulama
 
-   **Requisitos previos**
+   **Ön koşullar**
 
-   - Habilitar la API
-   - Crea una cuenta de servicio o un agente con los permisos adecuados.
+   - API'yi Etkinleştir
+   - Uygun izinlere sahip bir hizmet hesabı/aracı oluşturun.
 
-   Primero, debes autenticarte como el servicio que tiene permisos de visualizador de objetos de almacenamiento. La forma en que esto sucede depende del entorno en el que se ejecutará tu código de administración de archivos.
+   Öncelikle, depolama nesnesi görüntüleyici izinlerine sahip hizmet olarak kimliğinizi doğrulamanız gerekir. Bu durum, dosya yönetimi kodunuzun çalışacağı ortama bağlıdır.
 
-   **Fuera de Google Cloud**
+   **Google Cloud dışında**
 
-   Si tu código se ejecuta fuera de Google Cloud, por ejemplo, desde tu computadora de escritorio, descarga las credenciales de la cuenta desde la consola de Google Cloud siguiendo estos pasos:
+   Kodunuz Google Cloud'un dışından (ör. masaüstünüzden) çalıştırılıyorsa aşağıdaki adımları uygulayarak hesap kimlik bilgilerini Google Cloud Console'dan indirin:
 
-   1. Navega a la [consola de cuentas de servicio](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=es-419).
-   2. Selecciona la cuenta de servicio pertinente.
-   3. Selecciona la pestaña **Claves** y elige **Agregar clave, Crear clave nueva**.
-   4. Elige el tipo de clave **JSON** y observa dónde se descargó el archivo en tu máquina.
+   1. [Hizmet hesabı konsoluna](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=tr) gidin.
+   2. İlgili hizmet hesabını seçin.
+   3. **Anahtarlar** sekmesini seçin ve **Anahtar ekle, Yeni anahtar oluştur**'u seçin.
+   4. **JSON** anahtar türünü seçin ve dosyanın makinenizde nereye indirildiğini not edin.
 
-   Para obtener más detalles, consulta la documentación oficial de Google Cloud sobre la [administración de claves de cuentas de servicio](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=es-419).
+   Daha fazla bilgi için [hizmet hesabı anahtarı yönetimi](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=tr) ile ilgili resmi Google Cloud belgelerine bakın.
 
-   Luego, usa los siguientes comandos para autenticarte. En estos comandos, se supone que el archivo de tu cuenta de servicio se encuentra en el directorio actual y se llama `service-account.json`.
+   Ardından, kimlik doğrulaması yapmak için aşağıdaki komutları kullanın. Bu komutlar, hizmet hesabı dosyanızın geçerli dizinde olduğunu ve `service-account.json` olarak adlandırıldığını varsayar.
 
    ### Python
 
@@ -419,7 +421,7 @@ Si tus datos ya están en Google Cloud Storage, no es necesario que los descargu
    });
    ```
 
-   ### CLI
+   ### KSA
 
    ```
    gcloud auth application-default login \
@@ -427,13 +429,13 @@ Si tus datos ya están en Google Cloud Storage, no es necesario que los descargu
      --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only'
    ```
 
-   **En Google Cloud**
+   **Google Cloud'da**
 
-   Si ejecutas directamente en Google Cloud, por ejemplo, con [Cloud Run functions](https://cloud.google.com/functions?hl=es-419) o una [instancia de Compute Engine](https://cloud.google.com/products/compute?hl=es-419), tendrás credenciales implícitas, pero deberás volver a autenticarte para otorgar los permisos adecuados.
+   Doğrudan Google Cloud'da çalışıyorsanız (ör. [Cloud Run işlevlerini](https://cloud.google.com/functions?hl=tr) veya [Compute Engine örneğini](https://cloud.google.com/products/compute?hl=tr) kullanarak) örtülü kimlik bilgileriniz olur ancak uygun kapsamları vermek için yeniden kimlik doğrulamanız gerekir.
 
    ### Python
 
-   Este código espera que el servicio se ejecute en un entorno en el que se puedan obtener automáticamente las [credenciales predeterminadas de la aplicación](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=es-419), como Cloud Run o Compute Engine.
+   Bu kod, hizmetin Cloud Run veya Compute Engine gibi [Uygulama Varsayılan Kimlik Bilgileri](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=tr)'nın otomatik olarak alınabileceği bir ortamda çalıştırılmasını bekler.
 
    ```
    import google.auth
@@ -448,7 +450,7 @@ Si tus datos ya están en Google Cloud Storage, no es necesario que los descargu
 
    ### JavaScript
 
-   Este código espera que el servicio se ejecute en un entorno en el que se puedan obtener automáticamente las [credenciales predeterminadas de la aplicación](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=es-419), como Cloud Run o Compute Engine.
+   Bu kod, hizmetin Cloud Run veya Compute Engine gibi [Uygulama Varsayılan Kimlik Bilgileri](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=tr)'nın otomatik olarak alınabileceği bir ortamda çalıştırılmasını bekler.
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -461,17 +463,19 @@ Si tus datos ya están en Google Cloud Storage, no es necesario que los descargu
    });
    ```
 
-   ### CLI
+   ### KSA
 
-   Este es un comando interactivo. En el caso de servicios como Compute Engine, puedes adjuntar alcances al servicio en ejecución a nivel de la configuración. Consulta la [documentación del servicio administrado por el usuario](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=es-419#using) para ver un ejemplo.
+   Bu, etkileşimli bir komuttur. Compute Engine gibi hizmetlerde, yapılandırma düzeyinde çalışan hizmete kapsamlar ekleyebilirsiniz. Örnek için [user-managed service
+   docs](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=tr#using)
+   başlıklı makaleyi inceleyin.
 
    ```
    gcloud auth application-default login \
    --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only"
    ```
-3. Registro de archivos (API de Files)
+3. Dosya kaydı (Files API)
 
-   Usa la API de Files para registrar archivos y generar una ruta de acceso a la API de Files que se pueda usar directamente en la API de Gemini.
+   Dosyaları kaydetmek ve Gemini API'de doğrudan kullanılabilecek bir Files API yolu oluşturmak için Files API'yi kullanın.
 
    ### Python
 
@@ -504,7 +508,7 @@ Si tus datos ya están en Google Cloud Storage, no es necesario que los descargu
      print(response.text)
    ```
 
-   ### CLI
+   ### KSA
 
    ```
    access_token=$(gcloud auth application-default print-access-token)
@@ -516,11 +520,13 @@ Si tus datos ya están en Google Cloud Storage, no es necesario que los descargu
        -d '{"uris": ["gs://bucket/object1", "gs://bucket/object2"]}'
    ```
 
-## URLs externas HTTP o firmadas
+## Harici HTTP / İmzalı URL'ler
 
-Puedes pasar URLs HTTPS de acceso público o URLs previamente firmadas (compatibles con las [URLs previamente firmadas de S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) y las SAS de Azure) directamente en tu solicitud de generación. La API de Gemini recuperará el contenido de forma segura durante el procesamiento. Esto es ideal para los archivos que no quieres volver a subir. Cada archivo puede tener hasta 15 MB. Para archivos más grandes, usa la [API de File](#file-api).
+Herkese açık HTTPS URL'lerini veya önceden imzalanmış URL'leri ([S3 Presigned
+URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)
+ve Azure SAS ile uyumlu) doğrudan oluşturma isteğinize iletebilirsiniz. Gemini API, işleme sırasında içeriği güvenli bir şekilde getirir. Bu yöntem, yeniden yüklemek istemediğiniz dosyalar için idealdir. Her dosya en fazla 15 MB olabilir. Daha büyük dosyalar için [File API](#file-api)'yi kullanın.
 
-Puedes usar URLs públicas o firmadas como entrada con las URLs en el campo `file_uri`.
+`file_uri` alanındaki URL'leri kullanarak herkese açık veya imzalı URL'leri giriş olarak kullanabilirsiniz.
 
 ### Python
 
@@ -594,20 +600,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
         }'
 ```
 
-### Accesibilidad
+### Erişilebilirlik
 
-Verifica que las URLs que proporciones no dirijan a páginas que requieran acceso o estén detrás de un muro de pago. En el caso de las bases de datos privadas, asegúrate de crear una URL firmada con los permisos de acceso y la fecha de vencimiento correctos.
+Sağladığınız URL'lerin giriş gerektiren veya ödeme duvarının arkasında olan sayfalara yönlendirmediğini doğrulayın. Özel veritabanları için doğru erişim izinleri ve geçerlilik süresiyle imzalı bir URL oluşturduğunuzdan emin olun.
 
-### Controles de seguridad
+### Güvenlik kontrolleri
 
-El sistema realiza una verificación de moderación de contenido en la URL para confirmar que cumple con los estándares de seguridad y políticas (p.ej., contenido no excluido y con muro de pago). Si la URL que proporcionaste no pasa esta verificación, recibirás un `url_retrieval_status` de `URL_RETRIEVAL_STATUS_UNSAFE`.
+Sistem, URL'de içerik denetleme kontrolü yaparak güvenlik ve politika standartlarını (ör. kapsam dışında bırakılmamış ve ödeme duvarı olan içerik) karşıladığını onaylar. Belirttiğiniz URL bu kontrolü geçemezse `url_retrieval_status` `URL_RETRIEVAL_STATUS_UNSAFE` hatası alırsınız.
 
-### Tipos de contenido admitidos
+### Desteklenen içerik türleri
 
-Esta lista de tipos de archivos admitidos y limitaciones se proporciona como guía inicial y no es exhaustiva. El conjunto efectivo de tipos admitidos está sujeto a cambios y puede variar según el modelo específico y la versión del tokenizador en uso. Los tipos no admitidos generarán un error.
-Además, actualmente, la recuperación de contenido para estos tipos de archivos solo admite URLs de acceso público.
+Desteklenen dosya türleri ve sınırlamalarla ilgili bu liste, ilk rehberlik olarak hazırlanmıştır ve kapsamlı değildir. Desteklenen türlerin etkili kümesi değişebilir ve kullanılan modele ve belirteç ayrıştırıcı sürümüne göre farklılık gösterebilir. Desteklenmeyen türler hataya neden olur.
+Ayrıca, bu dosya türleri için içerik alma işlemi şu anda yalnızca herkese açık URL'leri desteklemektedir.
 
-#### Tipos de archivos de texto
+#### Metin dosyası türleri
 
 - `text/html`
 - `text/css`
@@ -617,19 +623,19 @@ Además, actualmente, la recuperación de contenido para estos tipos de archivos
 - `text/rtf`
 - `text/javascript`
 
-#### Tipos de archivos de la aplicación
+#### Uygulama dosyası türleri
 
 - `application/json`
 - `application/pdf`
 
-#### Tipos de archivo de imagen
+#### Resim dosyası türleri
 
 - `image/bmp`
 - `image/jpeg`
 - `image/png`
 - `image/webp`
 
-#### Tipos de archivo de video
+#### Video dosyası türleri
 
 - `video/mp4`
 - `video/mpeg`
@@ -641,35 +647,35 @@ Además, actualmente, la recuperación de contenido para estos tipos de archivos
 - `video/wmv`
 - `video/3gpp`
 
-## Prácticas recomendadas
+## En iyi uygulamalar
 
-- **Elige el método adecuado:** Usa datos intercalados para archivos pequeños y transitorios.
-  Usa la API de File para los archivos más grandes o que se usan con frecuencia. Usa URLs externas para los datos que ya están alojados en línea.
-- **Especifica los tipos de MIME:** Siempre proporciona el tipo de MIME correcto para los datos del archivo para garantizar el procesamiento adecuado.
-- **Maneja los errores:** Implementa el manejo de errores en tu código para administrar posibles problemas, como fallas de red, problemas de acceso a archivos o errores de API.
-- **Administra los permisos de GCS:** Cuando uses el registro de GCS, otorga al agente de servicio de la API de Gemini solo el rol `Storage Object Viewer` necesario en los buckets específicos.
-- **Seguridad de las URLs firmadas:** Asegúrate de que las URLs firmadas tengan un tiempo de vencimiento adecuado y permisos limitados.
+- **Doğru yöntemi seçin:** Küçük ve geçici dosyalar için satır içi verileri kullanın.
+  Daha büyük veya sık kullanılan dosyalar için File API'yi kullanın. Hâlihazırda internette barındırılan veriler için harici URL'ler kullanın.
+- **MIME türlerini belirtin:** Doğru işleme için dosya verilerinin doğru MIME türünü her zaman sağlayın.
+- **Hataları Yönetme:** Ağ hataları, dosya erişimi sorunları veya API hataları gibi olası sorunları yönetmek için kodunuzda hata yönetimini uygulayın.
+- **GCS izinlerini yönetme:** GCS kaydı kullanılırken Gemini API Hizmet Aracısı'na yalnızca belirli paketlerde gerekli `Storage Object Viewer` rolünü verin.
+- **İmzalı URL Güvenliği:** İmzalı URL'lerin uygun bir geçerlilik süresine ve sınırlı izinlere sahip olduğundan emin olun.
 
-## Limitaciones
+## Sınırlamalar
 
-- Los límites de tamaño de los archivos varían según el método (consulta la [tabla de comparación](#method-comparison)) y el tipo de archivo.
-- Los datos intercalados aumentan el tamaño de la carga útil de la solicitud.
-- Las cargas de la API de File son temporales y vencen después de 48 horas.
-- La recuperación de URLs externas se limita a 15 MB por archivo y admite tipos de contenido específicos.
-- El registro de Google Cloud Storage requiere una configuración adecuada de IAM y la administración de tokens de OAuth.
+- Dosya boyutu sınırları, yönteme ([karşılaştırma tablosuna](#method-comparison) bakın) ve dosya türüne göre değişir.
+- Satır içi veriler, istek yükü boyutunu artırır.
+- File API yüklemeleri geçicidir ve 48 saat sonra sona erer.
+- Harici URL getirme, dosya başına 15 MB ile sınırlıdır ve belirli içerik türlerini destekler.
+- Google Cloud Storage kaydı için uygun IAM kurulumu ve OAuth jetonu yönetimi gerekir.
 
-## ¿Qué sigue?
+## Sırada ne var?
 
-- Intenta escribir tus propias instrucciones multimodales con [Google AI Studio](http://aistudio.google.com/?hl=es-419).
-- Para obtener información sobre cómo incluir archivos en tus instrucciones, consulta las guías de [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=es-419), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=es-419) y [Procesamiento de documentos](https://ai.google.dev/gemini-api/docs/document-processing?hl=es-419).
-- Para obtener más orientación sobre el diseño de instrucciones, como el ajuste de los parámetros de muestreo, consulta la guía de [Estrategias de instrucciones](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=es-419).
+- [Google AI Studio](http://aistudio.google.com/?hl=tr)'yu kullanarak kendi çok formatlı istemlerinizi yazmayı deneyin.
+- İstemlerinize dosya ekleme hakkında bilgi edinmek için [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=tr), [Ses](https://ai.google.dev/gemini-api/docs/audio?hl=tr) ve [Belge işleme](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr) kılavuzlarına bakın.
+- İstem tasarımıyla ilgili daha fazla bilgi (ör. örnekleme parametrelerini ayarlama) için [İstem stratejileri](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=tr) kılavuzuna bakın.
 
-Enviar comentarios
+Geri bildirim gönderin
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Última actualización: 2026-10-07 (UTC)
+Son güncelleme tarihi: 2026-10-07 UTC.
 
-¿Quieres brindar más información?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-07 (UTC)"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-07 UTC."],[],[]]

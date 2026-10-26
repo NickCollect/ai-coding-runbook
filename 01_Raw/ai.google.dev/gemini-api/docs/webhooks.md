@@ -1,52 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=pt-BR
-fetched_at: 2026-10-19T05:35:13.648650+00:00
-title: "Webhooks \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=hi
+fetched_at: 2026-10-26T06:00:37.341047+00:00
+title: "\u0935\u0947\u092c\u0939\u0941\u0915 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
+Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Envie comentários
+सुझाव भेजें
 
-# Webhooks
+# वेबहुक
 
-Os webhooks permitem que a API Gemini envie notificações em tempo real para seu servidor
-quando operações assíncronas ou de longa execução (LROs) são concluídas. Isso substitui a necessidade de sondar a API para atualizações de status, reduzindo a latência e o overhead.
+वेबहुक की मदद से, Gemini API आपके सर्वर पर रीयल-टाइम सूचनाएं भेज सकता है. ऐसा तब होता है, जब एसिंक्रोनस या लंबे समय तक चलने वाली कार्रवाइयां (एलआरओ) पूरी हो जाती हैं. इससे स्टेटस अपडेट के लिए, एपीआई को पोल करने की ज़रूरत नहीं पड़ती. साथ ही, इंतज़ार का समय और ओवरहेड कम हो जाता है.
 
-Os webhooks estão disponíveis para operações como jobs em [lote](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br), [interações](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) e [geração de vídeo](https://ai.google.dev/gemini-api/docs/video?hl=pt-br).
+वेबहुक, [बैच](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi) जॉब, [इंटरैक्शन](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi), और [वीडियो जनरेट करने](https://ai.google.dev/gemini-api/docs/video?hl=hi) जैसे ऑपरेशनों के लिए उपलब्ध हैं.
 
-## Como funciona
+## यह कैसे काम करता है
 
-Em vez de fazer polling de `GET /operations` repetidamente para verificar se um job foi concluído,
-configure os webhooks da API Gemini para enviar uma solicitação HTTP POST ao seu
-URL de listener imediatamente após um gatilho de evento.
+किसी टास्क के पूरा होने की स्थिति की जानकारी पाने के लिए, `GET /operations` को बार-बार पोल करने के बजाय, Gemini API वेबहुक को कॉन्फ़िगर किया जा सकता है. इससे, इवेंट ट्रिगर होने पर, आपके लिसनर यूआरएल को तुरंत एचटीटीपी पोस्ट अनुरोध भेजा जा सकेगा.
 
-A API Gemini oferece suporte a duas maneiras de configurar webhooks:
+Gemini API में, वेबुक को कॉन्फ़िगर करने के दो तरीके उपलब्ध हैं:
 
-- [**Webhooks estáticos**](#static-webhooks): endpoints no nível do projeto configurados com a [API WebhookService](https://ai.google.dev/api?hl=pt-br) do Gemini. Bom para integrações globais (por exemplo, notificar o Slack, sincronizar um banco de dados etc.).
-- [**Webhooks dinâmicos**](#dynamic-webhooks): substituições no nível da solicitação que transmitem um
-  URL do webhook no payload de configuração de uma chamada de jobs específica. Ideal para
-  direcionar jobs específicos a endpoints dedicados.
+- [**स्टैटिक वेबहुक**](#static-webhooks): प्रोजेक्ट-लेवल के एंडपॉइंट, जिन्हें Gemini [WebhookService API](https://ai.google.dev/api?hl=hi) की मदद से कॉन्फ़िगर किया जाता है. ग्लोबल इंटिग्रेशन के लिए अच्छा है. जैसे, Slack को सूचना देना, डेटाबेस को सिंक करना वगैरह.
+- [**डाइनैमिक वेबहुक**](#dynamic-webhooks): अनुरोध के लेवल पर, किसी खास जॉब कॉल के कॉन्फ़िगरेशन पेलोड में वेबहुक यूआरएल पास करने वाले ओवरराइड. यह खास तौर पर, किसी खास काम को डेडीकेटेड एंडपॉइंट पर रूट करने के लिए सही है.
 
-## Webhooks estáticos
+## स्टैटिक वेबहुक
 
-Os webhooks estáticos são registrados para um [projeto](https://ai.google.dev/gemini-api/docs/api-key?hl=pt-br#google-cloud-projects) inteiro e são acionados para qualquer evento
-correspondente.
+स्टैटिक वेबुक पूरे [प्रोजेक्ट](https://ai.google.dev/gemini-api/docs/api-key?hl=hi#google-cloud-projects) के लिए रजिस्टर किए जाते हैं. साथ ही, ये मिलते-जुलते किसी भी इवेंट के लिए ट्रिगर होते हैं.
 
-### Criar um webhook
+### वेबबुक बनाना
 
-É possível criar endpoints usando o SDK ou a API REST.
+एसडीके या REST API का इस्तेमाल करके, एंडपॉइंट बनाए जा सकते हैं.
 
-**IMPORTANTE**: ao criar um webhook, a API retorna um **segredo de assinatura**
-**apenas uma vez**. Armazene isso com segurança (por exemplo, nas variáveis de ambiente) para verificar as assinaturas mais tarde. Se você perder o secret de assinatura, será necessário [rotacioná-lo](#rotate-signing-secret).
+**अहम जानकारी**: वेबुक बनाते समय, एपीआई **साइनिंग सीक्रेट** को **सिर्फ़ एक बार** दिखाता है. आपको इसे सुरक्षित तरीके से सेव करना होगा.जैसे, अपने एनवायरमेंट वैरिएबल में. ऐसा इसलिए, ताकि बाद में हस्ताक्षर की पुष्टि की जा सके. साइनिंग सीक्रेट खो जाने पर, आपको उसे [बदलना](#rotate-signing-secret) होगा.
 
 ### Python
 
@@ -116,7 +109,7 @@ System.out.println(
     "Created webhook: " + webhook.name().orElse("") + ", " + webhook.id().orElse(""));
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -173,12 +166,11 @@ curl -X POST \
   }'
 ```
 
-Para detalhes sobre como configurar seu servidor para receber dados, consulte a seção
-[Processar solicitações de webhook](#handle-webhook-requests).
+डेटा पाने के लिए सर्वर सेट अप करने के बारे में जानने के लिए, [वेबहुक अनुरोधों को मैनेज करना](#handle-webhook-requests) सेक्शन देखें.
 
-### Receber um webhook
+### वेबहुक पाना
 
-Recupera detalhes sobre um webhook específico pelo nome do recurso.
+किसी वेबुक की जानकारी को उसके संसाधन के नाम के हिसाब से वापस पाएं.
 
 ### Python
 
@@ -228,7 +220,7 @@ System.out.println("URI: " + webhook.uri().orElse(""));
 System.out.println("Events: " + webhook.subscribedEvents().orElse(Collections.emptyList()));
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -273,9 +265,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Listar webhooks
+### वेबहुक की सूची बनाना
 
-Lista todos os webhooks configurados para o projeto atual, com paginação opcional.
+मौजूदा प्रोजेक्ट के लिए कॉन्फ़िगर किए गए सभी वेबुक की सूची बनाएं. इसमें पेज नंबर डालने का विकल्प होता है.
 
 ### Python
 
@@ -327,7 +319,7 @@ for (Webhook wh : response.webhooks().orElse(Collections.emptyList())) {
 }
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -369,9 +361,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Atualizar um webhook
+### किसी वेबहुक को अपडेट करना
 
-Atualize as propriedades de um webhook existente, como o nome de exibição, o URI de destino ou os eventos inscritos.
+किसी मौजूदा वेबुक की प्रॉपर्टी अपडेट करें. जैसे, डिसप्ले नेम, टारगेट यूआरआई या सदस्यता लिए गए इवेंट.
 
 ### Python
 
@@ -442,7 +434,7 @@ Webhook updatedWebhook =
 System.out.println("Updated webhook: " + updatedWebhook.name().orElse(""));
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -497,10 +489,9 @@ curl -X PATCH \
   }'
 ```
 
-### Excluir um webhook
+### वेबहुक मिटाना
 
-Remove um endpoint de webhook do projeto. Isso interrompe as entregas de eventos futuras
-para esse endpoint.
+प्रोजेक्ट से वेबहुक एंडपॉइंट हटाएं. इससे उस एंडपॉइंट पर, आने वाले समय में इवेंट डिलीवर नहीं किए जाएंगे.
 
 ### Python
 
@@ -542,7 +533,7 @@ client.webhooks.delete("<your_webhook_id>");
 System.out.println("Webhook deleted.");
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -582,11 +573,11 @@ curl -X DELETE \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Alternar um secret de assinatura
+### साइनिंग सीक्रेट को रोटेट करना
 
-Alternar o secret de assinatura de um webhook. É possível configurar se os secrets ativos anteriormente serão revogados imediatamente ou após um período de carência de 24 horas.
+किसी वेबहुक के लिए, हस्ताक्षर करने वाले सीक्रेट को रोटेट करना. आपके पास यह कॉन्फ़िगर करने का विकल्प होता है कि पहले से चालू सीक्रेट को तुरंत रद्द किया जाए या 24 घंटे की ग्रेस पीरियड के बाद.
 
-**IMPORTANTE**: o novo segredo de assinatura é retornado **apenas uma vez** no momento da rotação. Armazene com segurança antes de atualizar a lógica de verificação.
+**अहम जानकारी**: रोटेशन के समय, नया हस्ताक्षर करने का सीक्रेट **सिर्फ़ एक बार** दिखाया जाता है. पुष्टि करने के लॉजिक को अपडेट करने से पहले, इसे सुरक्षित तरीके से सेव करें.
 
 ### Python
 
@@ -656,7 +647,7 @@ String newSecret = response.secret().orElse("");
 System.out.println("New signing secret generated. Update your server configuration.");
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -706,15 +697,14 @@ curl -X POST \
   }'
 ```
 
-### Processar solicitações de webhook em um servidor
+### सर्वर पर वेबहुक अनुरोधों को मैनेज करना
 
-Quando um evento a que você se inscreveu acontece, o URL do webhook recebe
-uma solicitação HTTP POST. Seu endpoint precisa responder com um código de status 2xx em alguns segundos para evitar uma nova tentativa. Para garantir a entrega, a API Gemini
-repete automaticamente as solicitações com falha por 24 horas usando a espera exponencial.
+जिस इवेंट के लिए आपने सदस्यता ली है उसके होने पर, आपके वेबहुक यूआरएल को एचटीटीपी पोस्ट अनुरोध मिलेगा. रीट्राई से बचने के लिए, आपके एंडपॉइंट को कुछ ही सेकंड में 2xx स्टेटस कोड के साथ जवाब देना होगा. डिलीवरी पक्का करने के लिए, Gemini API
+एक्सपोनेंशियल बैकऑफ़ का इस्तेमाल करके, 24 घंटे तक उन अनुरोधों को अपने-आप फिर से भेजता है जो पूरे नहीं हो सके.
 
-O Gemini segue estritamente a especificação [Webhooks padrão](https://github.com/standard-webhooks/standard-webhooks) para cabeçalhos de segurança. Verifique o payload no seu servidor usando as assinaturas de cabeçalho assinado e o secret de assinatura estático armazenado. Consulte a seção [Envelope do webhook](#webhook-envelope) para informações sobre o payload.
+Gemini, सुरक्षा हेडर के लिए [स्टैंडर्ड वेबहुक](https://github.com/standard-webhooks/standard-webhooks) स्पेसिफ़िकेशन का सख्ती से पालन करता है. हस्ताक्षर किए गए हेडर के सिग्नेचर और सेव किए गए स्टैटिक साइनिंग सीक्रेट का इस्तेमाल करके, अपने सर्वर पर पेलोड की पुष्टि करें. पेलोड की जानकारी के लिए, [वेबहुक एनवलप](#webhook-envelope) सेक्शन देखें.
 
-Confira um exemplo usando Flask para o listener HTTP:
+यहां एचटीटीपी लिसनर के लिए, Flask का इस्तेमाल करने का एक उदाहरण दिया गया है:
 
 ### Python
 
@@ -885,7 +875,7 @@ server.createContext(
 server.start();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -964,15 +954,13 @@ func main() {
 }
 ```
 
-## Webhooks dinâmicos
+## डाइनैमिक वेबहुक
 
-Com os webhooks dinâmicos, é possível vincular um endpoint de webhook a uma **configuração de solicitação específica**, o que é ideal para filas de orquestração de agentes. Os webhooks dinâmicos usam
-assinaturas JWKS de chave pública assimétricas em vez de secrets simétricos.
+डाइनैमिक वेबहुक की मदद से, वेबहुक एंडपॉइंट को **अनुरोध के किसी खास कॉन्फ़िगरेशन** से बाइंड किया जा सकता है. यह एजेंट-ऑर्केस्ट्रेशन कतारों के लिए सबसे सही है. डाइनैमिक वेबुक, सिमेट्रिक सीक्रेट के बजाय असिमेट्रिक पब्लिक-की JWKS सिग्नेचर का इस्तेमाल करते हैं.
 
-### Enviar uma solicitação dinâmica
+### डाइनैमिक अनुरोध सबमिट करना
 
-Adicione um `webhook_config` ao acionar um job assíncrono (por exemplo, ao criar um
-Batch).
+एसिंक्रोनस जॉब (जैसे, बैच बनाना) ट्रिगर करते समय, `webhook_config` जोड़ें.
 
 ### Python
 
@@ -1064,7 +1052,7 @@ System.out.println(
     "Status: " + response.status().map(InteractionStatus::value).orElse(""));
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -1130,10 +1118,9 @@ curl -X POST \
   }'
 ```
 
-### Verificar assinaturas dinâmicas (JWKS)
+### डाइनैमिक सिग्नेचर (JWKS) की पुष्टि करना
 
-As solicitações de webhook dinâmico emitem uma assinatura de JSON Web Token (JWT). Seu listener
-precisa extrair a assinatura e verificar usando os [endpoints de certificado público do Google](https://www.googleapis.com/oauth2/v3/certs).
+डाइनैमिक वेबहुक अनुरोध, JSON Web Token (JWT) सिग्नेचर भेजते हैं. आपके लिसनर को हस्ताक्षर निकालना होगा और [Google के सार्वजनिक सर्टिफ़िकेट एंडपॉइंट](https://www.googleapis.com/oauth2/v3/certs) का इस्तेमाल करके उसकी पुष्टि करनी होगी.
 
 ### Python
 
@@ -1327,7 +1314,7 @@ server.createContext(
 server.start();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -1419,14 +1406,12 @@ func main() {
 }
 ```
 
-## Envelope do webhook
+## वेबबुक एन्वेलप
 
-Para evitar congestionamento da largura de banda, os webhooks do Gemini usam um modelo de **payload reduzido** para
-entregar dados.
-As entregas enviam um snapshot com detalhes de status e indicadores de resultados,
-em vez do arquivo de saída bruto.
+बैंडविड्थ की समस्या से बचने के लिए, Gemini के वेबहुक, डेटा डिलीवर करने के लिए **थिन पेलोड** मॉडल का इस्तेमाल करते हैं.
+डेटा डिलीवर करने के दौरान, रॉ आउटपुट फ़ाइल के बजाय, स्टेटस की जानकारी और नतीजों के पॉइंटर वाला स्नैपशॉट भेजा जाता है.
 
-Confira um exemplo de formato de payload:
+यहां पेलोड फ़ॉर्मैट का एक उदाहरण दिया गया है:
 
 ```
 {
@@ -1440,42 +1425,41 @@ Confira um exemplo de formato de payload:
 }
 ```
 
-## Referência do catálogo de eventos
+## इवेंट कैटलॉग का रेफ़रंस
 
-Os seguintes eventos são acionados para jobs de suporte:
+सहायता देने वाली नौकरियों के लिए, ये इवेंट ट्रिगर होते हैं:
 
-| Tipo de evento | Gatilho | Item de payload (`data`) |
+| इवेंट किस तरह का है | ट्रिगर | पेलोड आइटम (`data`) |
 | --- | --- | --- |
-| `batch.succeeded` | O processamento foi concluído. | `id`, `output_file_uri` |
-| `batch.cancelled` | O usuário cancelou a solicitação | `id` |
-| `batch.expired` | O lote não foi processado (concluído) em um período de 24 horas | `id` |
-| `batch.failed` | Falha no job em lote (erro de sistema ou validação). | `id`, `error_code`, `error_message` |
-| `interaction.requires_action` | Chamada de função, o usuário precisa fazer algo | `id` |
-| `interaction.completed` | LRO na API Interactions concluído | `id` |
-| `interaction.failed` | Falha na LRO na API Interactions (erro de sistema ou validação). | `id`, `error_code`, `error_message` |
-| `interaction.cancelled` | LRO na API de interações cancelada | `id` |
-| `video.generated` | A LRO de geração de vídeo foi concluída. | `id`, `output_file_uri`, `file_name` |
+| `batch.succeeded` | प्रोसेसिंग पूरी हो गई है. | `id`, `output_file_uri` |
+| `batch.cancelled` | उपयोगकर्ता ने अनुरोध रद्द किया | `id` |
+| `batch.expired` | बैच को 24 घंटे में प्रोसेस नहीं किया गया (पूरा नहीं किया गया) | `id` |
+| `batch.failed` | बैच जॉब पूरा नहीं हो सका (सिस्टम या पुष्टि करने से जुड़ी गड़बड़ी). | `id`, `error_code`, `error_message` |
+| `interaction.requires_action` | फ़ंक्शन कॉल, उपयोगकर्ता को कुछ करना होगा | `id` |
+| `interaction.completed` | interactions API में LRO पूरा हुआ | `id` |
+| `interaction.failed` | इंटरैक्शन एपीआई में LRO फ़ेल हो गया (सिस्टम या पुष्टि करने से जुड़ी गड़बड़ी). | `id`, `error_code`, `error_message` |
+| `interaction.cancelled` | Interactions API में LRO रद्द किया गया | `id` |
+| `video.generated` | वीडियो जनरेट करने की LRO प्रोसेस पूरी हो गई है. | `id`, `output_file_uri`, `file_name` |
 
-## Práticas recomendadas
+## सबसे सही तरीके
 
-Para garantir uma operação confiável e escalonável:
+भरोसेमंद और बड़े पैमाने पर काम करने के लिए:
 
-- **Verificação estrita de proteção contra repetição**: todas as solicitações têm um cabeçalho `webhook-timestamp`. Sempre valide esse carimbo de data/hora na camada de configuração do servidor para
-  rejeitar payloads com mais de **5 minutos** (para reduzir ataques de repetição).
-- **Processamento assíncrono**: responda com `2xx OK` imediatamente após a detecção de uma assinatura válida e coloque as operações de análise na fila internamente. Tempos de espera prolongados do listener
-  acionam um ciclo de nova tentativa de entrega.
-- **Processamento de remoção de duplicidade**: os webhooks padrão fazem a entrega "pelo menos uma vez". Use o cabeçalho `webhook-id` consistente para lidar com possíveis duplicados em fluxos de congestionamento mais altos.
+- **रिप्ले से सुरक्षा की सख्त जांच**: सभी अनुरोधों में `webhook-timestamp`
+  हेडर होता है. हमेशा अपने सर्वर कॉन्फ़िगरेशन लेयर पर इस टाइमस्टैंप की पुष्टि करें, ताकि **पांच मिनट** से पुराने पेलोड को अस्वीकार किया जा सके. इससे रीप्ले अटैक को कम करने में मदद मिलती है.
+- **एसिंक्रोनस तरीके से प्रोसेस करना**: सही हस्ताक्षर का पता चलने पर, तुरंत `2xx OK` के साथ जवाब दें. साथ ही, पार्स करने की कार्रवाइयों को इंटरनल तौर पर कतार में लगाएं. अगर श्रोता लंबे समय तक कॉल पर बने रहते हैं, तो डिलीवरी फिर से करने की कोशिश की जाएगी.
+- **डुप्लीकेट डेटा को मैनेज करना**: स्टैंडर्ड वेबहुक, "कम से कम एक बार" डिलीवर करते हैं. ज़्यादा ट्रैफ़िक वाले फ़्लो में डुप्लीकेट अनुरोधों को मैनेज करने के लिए, एक जैसे `webhook-id` हेडर का इस्तेमाल करें.
 
-## A seguir
+## आगे क्या करना है?
 
-- [API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br): use webhooks para automatizar endpoints de alto volume.
+- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi): ज़्यादा वॉल्यूम वाले एंडपॉइंट को अपने-आप प्रोसेस करने के लिए, वेबुक का इस्तेमाल करें.
 
-Envie comentários
+सुझाव भेजें
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Última atualização 2026-09-24 UTC.
+आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया.
 
-Quer enviar seu feedback?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-24 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया."],[],[]]

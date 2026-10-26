@@ -1,46 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=id
-fetched_at: 2026-10-19T05:56:41.769195+00:00
-title: "Agen ReAct dari awal dengan Gemini dan LangGraph \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=he
+fetched_at: 2026-10-26T05:45:41.091772+00:00
+title: "\u05e1\u05d5\u05db\u05df ReAct \u05de\u05d0\u05e4\u05e1 \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Gemini \u05d5-LangGraph \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
+‫Gemini 4 Argon זמין עכשיו. [רוצים לנסות?](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=he)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Kirim masukan
+שליחת משוב
 
-# Agen ReAct dari awal dengan Gemini dan LangGraph
+# סוכן ReAct מאפס באמצעות Gemini ו-LangGraph
 
-LangGraph adalah framework untuk membangun aplikasi LLM stateful, sehingga menjadi pilihan yang baik untuk membuat Agen ReAct (Reasoning and Acting).
+‫LangGraph הוא framework לבניית אפליקציות LLM עם שמירת מצב, ולכן הוא בחירה טובה לבניית סוכני ReAct (Reasoning and Acting).
 
-Agen ReAct menggabungkan penalaran LLM dengan eksekusi tindakan. Agen ini berpikir secara berulang, menggunakan alat, dan bertindak berdasarkan pengamatan untuk mencapai sasaran pengguna, serta menyesuaikan pendekatan secara dinamis. Diperkenalkan dalam ["ReAct: Synergizing Reasoning and Acting
-in Language Models"](https://arxiv.org/abs/2210.03629) (2023), pola ini
-mencoba meniru pemecahan masalah yang fleksibel dan mirip manusia melalui alur kerja yang kaku.
+סוכני ReAct משלבים בין נימוק של LLM לבין ביצוע פעולות. הם חושבים באופן איטרטיבי, משתמשים בכלים ופועלים על סמך תצפיות כדי להשיג את יעדי המשתמשים, ומתאימים את הגישה שלהם באופן דינמי. התבנית הזו, שהוצגה במאמר ["ReAct: Synergizing Reasoning and Acting
+in Language Models"‎](https://arxiv.org/abs/2210.03629) (2023), מנסה לשקף פתרון בעיות גמיש כמו אצל בני אדם, ולא תהליכי עבודה נוקשים.
 
-LangGraph menawarkan agen ReAct bawaan ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)),
-yang sangat berguna saat Anda memerlukan lebih banyak kontrol dan penyesuaian untuk penerapan ReAct. Panduan ini akan menunjukkan versi yang disederhanakan.
+‫LangGraph מציע סוכן ReAct מוכן מראש ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)),
+שמתאים במיוחד כשצריך יותר שליטה והתאמה אישית בהטמעות של ReAct. במדריך הזה מוצגת גרסה פשוטה יותר.
 
-Agen model LangGraph sebagai grafik menggunakan tiga komponen utama:
+מודלים של סוכני LangGraph הם גרפים שכוללים שלושה רכיבים מרכזיים:
 
-- `State`: Struktur data bersama (biasanya `TypedDict` atau `Pydantic BaseModel`) yang mewakili snapshot saat ini dari aplikasi.
-- `Nodes`: Mengenkode logika agen Anda. Agen ini menerima Status saat ini sebagai input, melakukan beberapa komputasi atau efek samping, dan menampilkan Status yang diperbarui, seperti panggilan LLM atau panggilan alat.
-- `Edges`: Menentukan `Node` berikutnya yang akan dieksekusi berdasarkan `State` saat ini, sehingga memungkinkan logika kondisional dan transisi tetap.
+- ‫`State`: מבנה נתונים משותף (בדרך כלל `TypedDict` או `Pydantic BaseModel`) שמייצג את תמונת המצב העדכנית של האפליקציה.
+- ‫`Nodes`: קידוד הלוגיקה של הסוכנים. הם מקבלים את המצב הנוכחי כקלט, מבצעים חישוב או תופעת לוואי ומחזירים מצב מעודכן, כמו קריאות ל-LLM או קריאות לכלים.
+- ‫`Edges`: מגדירים את `Node` הבא להפעלה על סמך `State` הנוכחי, כדי לאפשר לוגיקה מותנית ומעברים קבועים.
 
-Jika belum memiliki Kunci API, Anda bisa mendapatkannya dari [Google AI
-Studio](https://aistudio.google.com/apikey?hl=id).
+אם עדיין אין לכם מפתח API, תוכלו לקבל אותו מ-[Google AI Studio](https://aistudio.google.com/apikey?hl=he).
 
 ```
 pip install langgraph langchain-google-genai geopy requests
 ```
 
-Tetapkan kunci API Anda dalam variabel lingkungan `GEMINI_API_KEY`.
+מגדירים את מפתח ה-API במשתנה הסביבה `GEMINI_API_KEY`.
 
 ```
 import os
@@ -49,12 +47,11 @@ import os
 api_key = os.getenv("GEMINI_API_KEY")
 ```
 
-Untuk lebih memahami cara menerapkan agen ReAct menggunakan LangGraph, panduan ini akan membahas contoh praktis. Anda akan membuat agen yang tujuannya adalah menggunakan alat untuk menemukan cuaca saat ini untuk lokasi tertentu.
+כדי להבין טוב יותר איך להטמיע סוכן ReAct באמצעות LangGraph, במדריך הזה נציג דוגמה מעשית. תצרו סוכן שהמטרה שלו היא להשתמש בכלי כדי למצוא את מזג האוויר הנוכחי במיקום ספציפי.
 
-Untuk agen cuaca ini, `State` akan mempertahankan histori percakapan yang sedang berlangsung (sebagai daftar pesan) dan penghitung (sebagai bilangan bulat) untuk jumlah langkah yang diambil, untuk tujuan ilustrasi.
+לצורך המחשה, סוכן מזג האוויר הזה, `State`, ישמור את היסטוריית השיחה המתמשכת (כמו רשימה של הודעות) ומונה (כמספר שלם) של מספר השלבים שבוצעו.
 
-LangGraph menyediakan fungsi helper, `add_messages`, untuk memperbarui daftar pesan status. Fungsi ini berfungsi sebagai [peredam](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers),
-mengambil daftar saat ini, ditambah pesan baru, dan menampilkan daftar gabungan. Fungsi ini menangani pembaruan berdasarkan ID pesan dan secara default menggunakan perilaku "hanya tambahkan" untuk pesan baru yang belum dilihat.
+‫LangGraph מספקת פונקציית עזר, `add_messages`, לעדכון רשימות של הודעות מצב. היא פועלת כ[פונקציית צמצום](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers), מקבלת את הרשימה הנוכחית בתוספת ההודעות החדשות ומחזירה רשימה משולבת. הוא מטפל בעדכונים לפי מזהה ההודעה, ובאופן ברירת מחדל הוא פועל בשיטת 'הוספה בלבד' להודעות חדשות שלא נראו.
 
 ```
 from typing import Annotated,Sequence, TypedDict
@@ -68,7 +65,7 @@ class AgentState(TypedDict):
     number_of_steps: int
 ```
 
-Selanjutnya, tentukan alat cuaca Anda.
+בשלב הבא, מגדירים את כלי מזג האוויר.
 
 ```
 from langchain_core.tools import tool
@@ -107,7 +104,7 @@ def get_weather_forecast(location: str, date: str):
 tools = [get_weather_forecast]
 ```
 
-Sekarang, inisialisasi model dan ikat alat ke model.
+עכשיו מאתחלים את המודל ומקשרים את הכלים למודל.
 
 ```
 from datetime import datetime
@@ -130,16 +127,14 @@ res=model.invoke(f"What is the weather in Berlin on {datetime.today()}?")
 print(res)
 ```
 
-Langkah terakhir sebelum Anda dapat menjalankan agen adalah menentukan node dan edge.
-Dalam contoh ini, Anda memiliki dua node dan satu edge.
+השלב האחרון לפני הפעלת הסוכן הוא הגדרת הצמתים והקצוות.
+בדוגמה הזו יש שני צמתים וקצה אחד.
 
-- Node `call_tool` yang menjalankan metode alat Anda. LangGraph memiliki node bawaan
-  untuk ini yang disebut
-  [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/).
-- Node `call_model` yang menggunakan `model_with_tools` untuk memanggil model.
-- Edge `should_continue` yang menentukan apakah akan memanggil alat atau model.
+- ‫`call_tool` node שמבצע את שיטת הכלי. ל-LangGraph יש צומת מובנה מראש בשביל זה שנקרא [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/).
+- ‫`call_model` שמשתמש בצומת `model_with_tools` כדי להפעיל את המודל.
+- `should_continue` edge שמחליט אם להתקשר לכלי או למודל.
 
-Jumlah node dan edge tidak tetap. Anda dapat menambahkan node dan edge sebanyak yang Anda inginkan ke grafik. Misalnya, Anda dapat menambahkan node untuk menambahkan output terstruktur atau node verifikasi/refleksi mandiri untuk memeriksa output model sebelum memanggil alat atau model.
+מספר הצמתים והקצוות לא קבוע. אתם יכולים להוסיף לגרף כמה צמתים וקשתות שתרצו. לדוגמה, אפשר להוסיף צומת להוספת פלט מובנה או צומת לאימות עצמי או לרפלקציה כדי לבדוק את פלט המודל לפני שמפעילים את הכלי או המודל.
 
 ```
 from langchain_core.messages import ToolMessage
@@ -183,7 +178,7 @@ def should_continue(state: AgentState):
     return "continue"
 ```
 
-Dengan semua komponen agen siap, Anda kini dapat merakitnya.
+אחרי שכל רכיבי הסוכן מוכנים, אפשר להרכיב אותם.
 
 ```
 from langgraph.graph import StateGraph, END
@@ -219,7 +214,7 @@ workflow.add_edge("tools", "llm")
 graph = workflow.compile()
 ```
 
-Anda dapat memvisualisasikan grafik menggunakan metode `draw_mermaid_png`.
+אפשר להמחיש את הגרף באמצעות ה-method‏ `draw_mermaid_png`.
 
 ```
 from IPython.display import Image, display
@@ -227,9 +222,9 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=id)
+![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=he)
 
-Sekarang jalankan agen.
+עכשיו מפעילים את הסוכן.
 
 ```
 from datetime import datetime
@@ -242,7 +237,7 @@ for state in graph.stream(inputs, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-Anda kini dapat melanjutkan percakapan, meminta cuaca di kota lain, atau meminta perbandingan.
+עכשיו אפשר להמשיך את השיחה, לשאול מה מזג האוויר בעיר אחרת או לבקש השוואה.
 
 ```
 state["messages"].append(("user", "Would it be warmer in Munich?"))
@@ -252,12 +247,12 @@ for state in graph.stream(state, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-Kirim masukan
+שליחת משוב
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Terakhir diperbarui pada 2026-09-12 UTC.
+עדכון אחרון: 2026-09-12 (שעון UTC).
 
-Ada masukan untuk kami?
+רוצה לתת לנו משוב?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-12 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-12 (שעון UTC)."],[],[]]

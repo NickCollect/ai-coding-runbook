@@ -1,39 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/structured-output?hl=tr
-fetched_at: 2026-10-19T05:51:56.610751+00:00
-title: "Yap\u0131land\u0131r\u0131lm\u0131\u015f \u00e7\u0131k\u0131\u015flar \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/structured-output?hl=bn
+fetched_at: 2026-10-26T05:48:26.659521+00:00
+title: "\u09b8\u09cd\u099f\u09cd\u09b0\u09be\u0995\u099a\u09be\u09b0\u09cd\u09a1 \u0986\u0989\u099f\u09aa\u09c1\u099f \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
+Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=bn)।
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
+- [হোম](https://ai.google.dev/?hl=bn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=bn)
+- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs/generate-content?hl=bn)
 
-Geri bildirim gönderin
+মতামত জানান
 
-# Yapılandırılmış çıkışlar
+# স্ট্রাকচার্ড আউটপুট
 
-Gemini modellerini, sağlanan JSON şemasına uygun yanıtlar üretecek şekilde yapılandırabilirsiniz. Bu sayede, tahmin edilebilir ve tip güvenliği olan sonuçlar elde edilir ve yapılandırılmamış metinlerden yapılandırılmış verilerin ayıklanması kolaylaşır.
+আপনি Gemini মডেল কনফিগার করতে পারেন যাতে এটি প্রদত্ত JSON স্কিমা মেনে চলে এমন উত্তর তৈরি করে। এটি অনুমানযোগ্য, টাইপ-নিরাপদ ফলাফল নিশ্চিত করে এবং আনস্ট্রাকচার্ড টেক্সট থেকে স্ট্রাকচার্ড ডেটা এক্সট্র্যাক্ট করার প্রসেসকে সহজ করে তোলে।
 
-Yapılandırılmış çıkışlar aşağıdaki durumlarda idealdir:
+স্ট্রাকচার্ড আউটপুট ব্যবহার করা এগুলির জন্য আদর্শ:
 
-- **Veri ayıklama:** Metinden ad ve tarih gibi belirli bilgileri ayıklayın.
-- **Yapılandırılmış sınıflandırma:** Metni önceden tanımlanmış kategorilere göre sınıflandırın.
-- **Temsilci tabanlı iş akışları:** Araçlar veya API'ler için yapılandırılmış girişler oluşturun.
+- **ডেটা এক্সট্র্যাকশন:** টেক্সট থেকে নাম ও তারিখের মতো নির্দিষ্ট তথ্য বের করে আনা।
+- **স্ট্রাকচার্ড ক্লাসিফিকেশন:** পূর্বনির্ধারিত বিভাগে টেক্সট ক্লাসিফাই করুন।
+- **এজেন্টিক ওয়ার্কফ্লো:** টুল বা API-এর জন্য স্ট্রাকচার্ড ইনপুট তৈরি করুন।
 
-Google GenAI SDK'ları, REST API'de JSON şemasını desteklemenin yanı sıra [Pydantic](https://docs.pydantic.dev/latest/) (Python) ve [Zod](https://zod.dev/) (JavaScript) kullanarak şema tanımlamayı kolaylaştırır.
+REST API-তে JSON স্কিমা সাপোর্ট করার পাশাপাশি, Google GenAI SDK
+[Pydantic](https://docs.pydantic.dev/latest/) (Python) এবং
+[Zod](https://zod.dev/) (JavaScript) ব্যবহার করে
+সহজেই স্কিমা নির্ধারণ করতে সাহায্য করে।
 
-## Yapılandırılmış çıkış örnekleri
+## স্ট্রাকচার্ড আউটপুটের উদাহরণ
 
-### Yemek Tarifi Ayıklayıcı
+### রেসিপি এক্সট্র্যাক্টর
 
-Bu örnekte, `object`, `array`, `string` ve `integer` gibi temel JSON şeması türleri kullanılarak metinden yapılandırılmış verilerin nasıl çıkarılacağı gösterilmektedir.
+এই উদাহরণে দেখানো হয়েছে যে কীভাবে `object`, `array`, `string` ও `integer`-এর মতো বেসিক JSON স্কিমা টাইপ ব্যবহার করে টেক্সট থেকে স্ট্রাকচার্ড ডেটা এক্সট্র্যাক্ট করা যায়।
 
 ### Python
 
@@ -81,7 +84,7 @@ recipe = Recipe.model_validate_json(response.text)
 print(recipe)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -129,7 +132,7 @@ const recipe = recipeSchema.parse(JSON.parse(response.text));
 console.log(recipe);
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -214,7 +217,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -266,7 +269,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
     }'
 ```
 
-**Örnek yanıt:**
+**উদাহরণস্বরূপ উত্তর:**
 
 ```
 {
@@ -321,9 +324,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-### İçerik Denetimi
+### কন্টেন্ট মডারেশন
 
-Bu örnekte, koşullu şemalar için `anyOf` ve sınıflandırma için `enum` kullanılarak çıkış yapısının içeriğe göre değişmesi sağlanır.
+এই উদাহরণে কন্ডিশনাল স্কিমার জন্য `anyOf` এবং শ্রেণীবিন্যাসের জন্য `enum` দেখানো হয়েছে, যা কন্টেন্টের উপর ভিত্তি করে আউটপুট স্ট্রাকচার পরিবর্তন করার অনুমতি দেয়।
 
 ### Python
 
@@ -363,7 +366,7 @@ result = ModerationResult.model_validate_json(response.text)
 print(result)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -404,7 +407,7 @@ const result = moderationResultSchema.parse(JSON.parse(response.text));
 console.log(result);
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -488,7 +491,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -552,9 +555,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-### Yinelemeli Yapılar
+### স্ট্রাকচারের পুনরাবৃত্তি
 
-Bu örnekte, kuruluş şeması gibi özyinelemeli bir şemanın nasıl tanımlanacağı gösterilmektedir.
+এই উদাহরণে দেখানো হয়েছে যে কীভাবে একটি রিকার্সিভ স্কিমা যেমন একটি প্রতিষ্ঠানের চার্ট
+সংজ্ঞায়িত করা যায়।
 
 ### Python
 
@@ -592,7 +596,7 @@ employee = Employee.model_validate_json(response.text)
 print(employee)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -625,7 +629,7 @@ const employee = employeeSchema.parse(JSON.parse(response.text));
 console.log(employee);
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -681,7 +685,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -719,7 +723,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
     }'
 ```
 
-**Örnek yanıt:**
+**উদাহরণস্বরূপ উত্তর:**
 
 ```
 {
@@ -746,11 +750,12 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-## Canlı Yayın
+## স্ট্রিমিং
 
-Yapılandırılmış çıktıları akış olarak alabilirsiniz. Bu sayede, tüm çıktının tamamlanmasını beklemeden yanıtı oluşturulurken işlemeye başlayabilirsiniz. Bu sayede uygulamanızın algılanan performansını artırabilirsiniz.
+আপনি স্ট্রাকচার্ড আউটপুট স্ট্রিম করতে পারেন, যা আপনাকে সম্পূর্ণ আউটপুট সম্পূর্ণ হওয়ার জন্য অপেক্ষা না করেই, জেনারেট হওয়ার সাথে সাথে উত্তর প্রসেস করা শুরু করতে দেয়। এটি আপনার অ্যাপ্লিকেশনের পারফর্ম্যান্স উন্নত করতে পারে।
 
-Akışla aktarılan parçalar, geçerli kısmi JSON dizeleri olur ve bunlar birleştirilerek nihai, eksiksiz JSON nesnesi oluşturulabilir.
+স্ট্রিম করা চাঙ্কগুলি সঠিক আংশিক JSON স্ট্রিং হবে, যা
+চূড়ান্ত, সম্পূর্ণ JSON অবজেক্ট তৈরি করতে কনক্যাটিনেট করা যেতে পারে।
 
 ### Python
 
@@ -779,7 +784,7 @@ for chunk in response_stream:
     print(chunk.candidates[0].content.parts[0].text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -808,14 +813,14 @@ for await (const chunk of stream) {
 }
 ```
 
-## Araçlarla yapılandırılmış çıkışlar
+## টুলের মাধ্যমে স্ট্রাকচার্ড আউটপুট
 
-Gemini 3, yapılandırılmış çıkışları yerleşik araçlarla birleştirmenize olanak tanır. Bu araçlar arasında şunlar bulunur:
-[Google Arama ile Temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr),
-[URL Bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr),
-[Kod Yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr),
-[Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr#structured-output) ve
-[İşlev Çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr).
+Gemini 3 আপনাকে বিল্ট-ইন টুলের সাথে স্ট্রাকচার্ড আউটপুট একত্রিত করতে দেয়, যার মধ্যে রয়েছে
+[Grounding with Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=bn),
+[URL কন্টেক্সট](https://ai.google.dev/gemini-api/docs/url-context?hl=bn),
+[কোড এক্সিকিউশন](https://ai.google.dev/gemini-api/docs/code-execution?hl=bn),
+[ফাইল সার্চ](https://ai.google.dev/gemini-api/docs/file-search?hl=bn#structured-output) এবং
+[ফাংশন কলিং](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn)।
 
 ### Python
 
@@ -848,7 +853,7 @@ result = MatchResult.model_validate_json(response.text)
 print(result)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -884,7 +889,7 @@ async function run() {
 run();
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-argon:generateContent" \
@@ -922,104 +927,104 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-argon:gen
   }'
 ```
 
-## JSON şeması desteği
+## JSON স্কিমা সংক্রান্ত সহায়তা
 
-JSON nesnesi oluşturmak için oluşturma yapılandırmasında `response_json_schema` (veya REST'te `responseFormat.text.schema`) değerini ayarlayın. Şema, istenen çıkış biçimini açıklayan geçerli bir [JSON şeması](https://json-schema.org/) olmalıdır.
+JSON অবজেক্ট তৈরি করতে, জেনারেশন কনফিগারেশনে `response_json_schema` (অথবা REST-এ `responseFormat.text.schema`) সেট করুন। স্কিমাটি অবশ্যই একটি সঠিক [JSON স্কিমা](https://json-schema.org/) হতে হবে যা কাঙ্ক্ষিত আউটপুট ফর্ম্যাট বর্ণনা করে।
 
-Ardından model, sağlanan şemayla eşleşen ve söz dizimi açısından geçerli bir JSON dizesi olan bir yanıt oluşturur. Yapılandırılmış çıkışlar kullanıldığında model, şemadaki anahtarlarla aynı sırada çıkışlar üretir.
+মডেলটি তখন একটি উত্তর তৈরি করবে যা প্রদত্ত স্কিমার সাথে মিলে যায় এমন একটি সিনট্যাক্টিক্যালি সঠিক JSON স্ট্রিং। স্ট্রাকচার্ড আউটপুট ব্যবহার করার সময়, মডেলটি স্কিমার কীগুলির মতো একই ক্রমে আউটপুট তৈরি করবে।
 
-Gemini'ın yapılandırılmış çıkış modu, [JSON Şeması](https://json-schema.org) spesifikasyonunun bir alt kümesini destekler.
+Gemini-র স্ট্রাকচার্ড আউটপুট মোড [JSON স্কিমা](https://json-schema.org) স্পেসিফিকেশনের সাবসেট সাপোর্ট করে।
 
-`type` için aşağıdaki değerler desteklenir:
+`type`-এর নিম্নলিখিত ভ্যালু কাজ করে:
 
-- **`string`**: Metin için.
-- **`number`**: Kayan noktalı sayılar için.
-- **`integer`**: Tam sayılar için.
-- **`boolean`**: Doğru/yanlış değerleri için.
-- **`object`**: Anahtar/değer çiftleri içeren yapılandırılmış veriler için.
-- **`array`**: Öğe listeleri için kullanılır.
-- **`null`**: Bir özelliğin boş olmasına izin vermek için tür dizisine `"null"` değerini ekleyin (ör. `{"type": ["string", "null"]}`).
+- **`string`**: টেক্সটের জন্য।
+- **`number`**: ফ্লোটিং-পয়েন্ট সংখ্যার জন্য।
+- **`integer`**: পূর্ণ সংখ্যার জন্য।
+- **`boolean`**: সত্য/মিথ্যা মানের জন্য।
+- **`object`**: কী-ভ্যালু পেয়ার সহ স্ট্রাকচার্ড ডেটার জন্য।
+- **`array`**: আইটেমের তালিকার জন্য।
+- **`null`**: কোনও প্রপার্টিকে ফাঁকা রাখার অনুমতি দিতে, টাইপ অ্যারেতে `"null"` অন্তর্ভুক্ত করুন (যেমন, `{"type": ["string", "null"]}`)।
 
-Bu açıklayıcı özellikler, modele yol gösterir:
+এইসব বর্ণনামূলক প্রপার্টি মডেলকে নির্দেশ দিতে সাহায্য করে:
 
-- **`title`**: Bir mülkün kısa açıklaması.
-- **`description`**: Bir mülkün daha uzun ve daha ayrıntılı açıklaması.
+- **`title`**: কোনও প্রপার্টির সংক্ষিপ্ত বিবরণ।
+- **`description`**: কোনও প্রপার্টির আরও দীর্ঘ ও বিস্তারিত বিবরণ।
 
-### Türe özel özellikler
+### ধরন-নির্দিষ্ট প্রপার্টি
 
-**`object` değerleri için:**
+**`object` ভ্যালুর জন্য:**
 
-- **`properties`**: Her anahtarın bir özellik adı ve her değerin bu özelliğin şeması olduğu bir nesne.
-- **`required`**: Hangi özelliklerin zorunlu olduğunu listeleyen bir dize dizisi.
-- **`additionalProperties`**: `properties` içinde listelenmeyen mülklere izin verilip verilmeyeceğini kontrol eder. Boole veya şema olabilir.
+- **`properties`**: এমন একটি অবজেক্ট যেখানে প্রতিটি কী হল একটি প্রপার্টির নাম এবং প্রতিটি ভ্যালু হল সেই প্রপার্টির জন্য একটি স্কিমা।
+- **`required`**: স্ট্রিংয়ের একটি অ্যারে, কোন কোন প্রপার্টি বাধ্যতামূলক তা তালিকাভুক্ত করে।
+- **`additionalProperties`**: `properties`-এ তালিকাভুক্ত নয় এমন প্রপার্টি অনুমোদিত কিনা তা নিয়ন্ত্রণ করে। বুলিয়ান বা স্কিমা হতে পারে।
 
-**`string` değerleri için:**
+**`string` ভ্যালুর জন্য:**
 
-- **`enum`**: Sınıflandırma görevleri için olası dizelerin belirli bir grubunu listeler.
-- **`format`**: Dize için `date-time`, `date`, `time` gibi bir söz dizimi belirtir.
+- **`enum`**: ক্লাসিফিকেশন টাস্কের জন্য সম্ভাব্য স্ট্রিংয়ের নির্দিষ্ট সেট তালিকাভুক্ত করে।
+- **`format`**: স্ট্রিংয়ের জন্য সিনট্যাক্স নির্দিষ্ট করে, যেমন `date-time`, `date`, `time`।
 
-**`number` ve `integer` değerleri için:**
+**`number` এবং `integer` ভ্যালুর জন্য:**
 
-- **`enum`**: Belirli bir olası sayısal değerler kümesini listeler.
-- **`minimum`**: Minimum dahil edilen değer.
-- **`maximum`**: Maksimum dahil edilen değer.
+- **`enum`**: সম্ভাব্য সংখ্যাসূচক মানের একটি নির্দিষ্ট সেট তালিকাভুক্ত করে।
+- **`minimum`**: ন্যূনতম ইনক্লুসিভ ভ্যালু।
+- **`maximum`**: সর্বাধিক ইনক্লুসিভ ভ্যালু।
 
-**`array` değerleri için:**
+**`array` ভ্যালুর জন্য:**
 
-- **`items`**: Dizideki tüm öğelerin şemasını tanımlar.
-- **`prefixItems`**: İlk N öğe için şema listesi tanımlayarak tuple benzeri yapılara olanak tanır.
-- **`minItems`**: Dizideki minimum öğe sayısı.
-- **`maxItems`**: Dizideki maksimum öğe sayısı.
+- **`items`**: অ্যারের সব আইটেমের জন্য স্কিমা নির্ধারণ করে।
+- **`prefixItems`**: প্রথম N আইটেমের জন্য স্কিমার তালিকা নির্ধারণ করে, যা টিউপলের মতো স্ট্রাকচারের অনুমতি দেয়।
+- **`minItems`**: অ্যারেতে আইটেমের ন্যূনতম সংখ্যা।
+- **`maxItems`**: অ্যারেতে আইটেমের সর্বাধিক সংখ্যা।
 
-## Model desteği
+## মডেল সহায়তা
 
-Aşağıdaki modeller yapılandırılmış çıkışı destekler:
+নিম্নলিখিত মডেলগুলি স্ট্রাকচার্ড আউটপুট সমর্থন করে:
 
-| Model | Yapılandırılmış Çıkışlar |
+| মডেল | স্ট্রাকচার্ড আউটপুট |
 | --- | --- |
 | Gemini 4 Argon | ✔️ |
 | Gemini 3.8 Flash | ✔️ |
 | Gemini 3.6 Flash | ✔️ |
 | Gemini 3.5 Flash-Lite | ✔️ |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Gemini 3.1 Pro Preview | ✔️ |
-| Gemini 3.1 Flash-Lite Preview | ✔️ |
+| Gemini 3.1 Pro প্রিভিউ | ✔️ |
+| Gemini 3.1 Flash-Lite প্রিভিউ | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️\* |
 | Gemini 2.0 Flash-Lite | ✔️\* |
 
-*\* Gemini 2.0'ın, tercih edilen yapıyı tanımlamak için JSON girişinde açık bir `propertyOrdering` listesi gerektirdiğini unutmayın. Bu [yemek kitabında](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb) bir örnek bulabilirsiniz.*
+*\* মনে রাখবেন যে Gemini 2.0-এর ক্ষেত্রে পছন্দের স্ট্রাকচার নির্ধারণ করার জন্য JSON ইনপুটের মধ্যে একটি স্পষ্ট `propertyOrdering` তালিকা প্রয়োজন। আপনি এই [কুকবুক](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb)-এ একটি উদাহরণ দেখতে পাবেন।*
 
-## Yapılandırılmış çıkışlar ve işlev çağrısı
+## স্ট্রাকচার্ড আউটপুট বনাম ফাংশন কলিং
 
-Hem yapılandırılmış çıkışlar hem de işlev çağrısı JSON şemalarını kullanır ancak farklı amaçlara hizmet eder:
+স্ট্রাকচার্ড আউটপুট এবং ফাংশন কলিং, উভয় ক্ষেত্রেই JSON স্কিমা ব্যবহার করা হয়, তবে এগুলি আলাদা আলাদা উদ্দেশ্যে ব্যবহার করা হয়:
 
-| Özellik | Birincil Kullanım Alanı |
+| ফিচার | প্রাথমিক ব্যবহারিক ক্ষেত্র |
 | --- | --- |
-| **Yapılandırılmış çıkışlar** | **Kullanıcıya verilecek son yanıtı biçimlendirme** Modelin *yanıtının* belirli bir biçimde olmasını istediğinizde (ör. bir belgeden veri ayıklayıp veritabanına kaydetme) bu yöntemi kullanın. |
-| **İşlev Çağırma** | **Görüşme sırasında harekete geçme** Modelin nihai bir yanıt verebilmesi için bir görevi yerine getirmenizi *istemesi* gerektiğinde (ör. "mevcut hava durumunu öğren") bu seçeneği kullanın. |
+| **স্ট্রাকচার্ড আউটপুট** | **ব্যবহারকারীর জন্য চূড়ান্ত উত্তর ফর্ম্যাট করা হচ্ছে।** মডেলের *উত্তর* নির্দিষ্ট কোনও ফর্ম্যাটে পেতে চাইলে এটি ব্যবহার করুন (যেমন, ডেটাবেসে সেভ করার জন্য কোনও ডকুমেন্ট থেকে ডেটা এক্সট্র্যাক্ট করা)। |
+| **ফাংশন কলিং** | **কথোপকথন চলাকালীন অ্যাকশন নেওয়া।** মডেলকে কোনও চূড়ান্ত উত্তর দেওয়ার আগে কোনও টাস্ক (যেমন, "বর্তমান আবহাওয়ার তথ্য পাওয়া") সম্পূর্ণ করার জন্য *আপনাকে জিজ্ঞাসা* করতে হলে এটি ব্যবহার করুন। |
 
-## En iyi uygulamalar
+## পেশাদার পদ্ধতি
 
-- **Net açıklamalar:** Modele her bir özelliğin neyi temsil ettiğiyle ilgili net talimatlar vermek için şemanızdaki `description` alanını kullanın. Bu, modelin çıkışını yönlendirmek için çok önemlidir.
-- **Güçlü yazma:** Mümkün olduğunda belirli türleri (`integer`, `string`, `enum`) kullanın. Bir parametrenin sınırlı sayıda geçerli değeri varsa `enum` kullanın.
-- **İstem mühendisliği:** İsteminizde modelin ne yapmasını istediğinizi açıkça belirtin. Örneğin, "Metinden aşağıdaki bilgileri çıkarın..." veya "Bu geri bildirimi sağlanan şemaya göre sınıflandırın...".
-- **Doğrulama:** Yapılandırılmış çıkış, söz dizimi açısından doğru JSON'u garanti etse de değerlerin anlamsal olarak doğru olduğunu garanti etmez. Uygulama kodunuzdaki nihai çıkışı kullanmadan önce her zaman doğrulayın.
-- **Hata işleme:** Modelin çıkışının şemaya uygun olsa da iş mantığı gereksinimlerinizi karşılamadığı durumları sorunsuz bir şekilde yönetmek için uygulamanızda güçlü hata işleme özellikleri uygulayın.
+- **স্পষ্ট বিবরণ:** প্রতিটি প্রপার্টি কী উপস্থাপন করে সেই সম্পর্কে মডেলকে স্পষ্ট নির্দেশাবলী প্রদান করতে আপনার স্কিমার `description` ফিল্ড ব্যবহার করুন। মডেলের আউটপুটকে গাইড করার জন্য এটি অত্যন্ত গুরুত্বপূর্ণ।
+- **স্ট্রং টাইপিং:** যখনই সম্ভব নির্দিষ্ট টাইপ (`integer`, `string`, `enum`) ব্যবহার করুন। কোনও প্যারামিটারে সীমিত সংখ্যক সঠিক ভ্যালু থাকলে, `enum` ব্যবহার করুন।
+- **প্রম্পট ইঞ্জিনিয়ারিং:** আপনি মডেলকে দিয়ে কী করাতে চান তা আপনার প্রম্পটে স্পষ্টভাবে উল্লেখ করুন। যেমন, "টেক্সট থেকে নিম্নলিখিত তথ্য এক্সট্র্যাক্ট করুন..." বা "প্রদত্ত স্কিমা অনুযায়ী এই মতামত শ্রেণীবদ্ধ করুন..."।
+- **যাচাইকরণ:** স্ট্রাকচার্ড আউটপুট সিনট্যাক্সগতভাবে সঠিক JSON-এর গ্যারেন্টি দিলেও, এটি ভ্যালুগুলি শব্দার্থগতভাবে সঠিক হওয়ার গ্যারেন্টি দেয় না। আপনার অ্যাপ্লিকেশন কোড ব্যবহার করার আগে সবসময় চূড়ান্ত আউটপুট যাচাই করুন।
+- **সমস্যা ম্যানেজ করা:** আপনার অ্যাপ্লিকেশনে সমস্যা ম্যানেজ করার জন্য শক্তিশালী ব্যবস্থা প্রয়োগ করুন যাতে মডেলের আউটপুট স্কিমা-সম্মত হলেও আপনার ব্যবসার লজিক সংক্রান্ত প্রয়োজনীয়তা পূরণ না করলে, সেই পরিস্থিতি সুন্দরভাবে ম্যানেজ করা যায়।
 
-## Sınırlamalar
+## সীমাবদ্ধতা
 
-- **Şema alt kümesi:** JSON Şeması spesifikasyonunun tüm özellikleri desteklenmez. Model, desteklenmeyen özellikleri yoksayar.
-- **Şema karmaşıklığı:** API, çok büyük veya derinlemesine iç içe yerleştirilmiş şemaları reddedebilir. Hatalarla karşılaşırsanız özellik adlarını kısaltarak, iç içe yerleştirmeyi azaltarak veya kısıtlama sayısını sınırlayarak şemanızı basitleştirmeyi deneyin.
+- **স্কিমা সাবসেট:** JSON স্কিমা স্পেসিফিকেশনের সব ফিচার কাজ করে না। মডেলটি কাজ করে না এমন প্রপার্টি উপেক্ষা করে।
+- **স্কিমার জটিলতা:** API খুব বড় বা গভীরভাবে নেস্ট করা স্কিমা প্রত্যাখ্যান করতে পারে। আপনি কোনও সমস্যার সম্মুখীন হলে, প্রপার্টির নাম ছোট করে, নেস্টিং কমিয়ে বা সীমাবদ্ধতার সংখ্যা সীমিত করে আপনার স্কিমা সহজ করার চেষ্টা করুন।
 
-Geri bildirim gönderin
+মতামত জানান
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
 
-Son güncelleme tarihi: 2026-10-19 UTC.
+2026-10-19 UTC-তে শেষবার আপডেট করা হয়েছে।
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+আমাদের আরও কিছু জানাতে চান?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-19 UTC."],[],[]]
+[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-19 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]

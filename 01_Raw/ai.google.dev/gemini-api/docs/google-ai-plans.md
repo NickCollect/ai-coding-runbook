@@ -1,62 +1,63 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/google-ai-plans?hl=zh-CN
-fetched_at: 2026-10-19T05:47:18.962738+00:00
-title: "Google AI \u65b9\u6848 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/google-ai-plans?hl=th
+fetched_at: 2026-10-26T05:42:12.443337+00:00
+title: "\u0e41\u0e1e\u0e47\u0e01\u0e40\u0e01\u0e08 Google AI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
+Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-发送反馈
+ส่งความคิดเห็น
 
-# Google AI 方案
+# แพ็กเกจ Google AI
 
-在 AI Studio 中使用您的 Google AI 订阅方案。
+ใช้แพ็กเกจการสมัครใช้บริการ Google AI ใน AI Studio
 
-与免费层级相比，Google AI Pro 和 Ultra 订阅方案提供了更广泛的模型访问权限，并提高了在 AI Studio 中进行原型设计和开发的速率限制。
+แพ็กเกจการสมัครใช้บริการ Google AI Pro และ Ultra ให้สิทธิ์เข้าถึงโมเดลที่มากขึ้นและขีดจำกัดอัตราคำขอที่เพิ่มขึ้นสำหรับการสร้างต้นแบบและการพัฒนาใน AI Studio เมื่อเทียบกับระดับที่ไม่มีค่าใช้จ่าย
 
-如需订阅 Google AI 方案，您可以直接在 Google AI Studio 中升级，只需点击左侧导航菜单中的**升级**按钮即可。或者，您也可以访问 [Google AI 方案页面](https://one.google.com/about/google-ai-plans/?hl=zh-cn)进行订阅。
+หากต้องการลงชื่อสมัครใช้แพ็กเกจ Google AI คุณสามารถอัปเกรดได้โดยตรงจากภายใน Google AI Studio โดยคลิกปุ่ม**อัปเกรด**ในเมนูการนำทางด้านซ้าย หรือจะลงชื่อสมัครใช้โดยไปที่[หน้าแพ็กเกจ Google AI](https://one.google.com/about/google-ai-plans/?hl=th) ก็ได้
 
-## 概览
+## ภาพรวม
 
-订阅 Google AI Pro 和 Ultra 后，开发者可以在 Google AI Studio Playground 中解锁付费模型和更高的速率限制，并使用[构建模式](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=zh-cn)中的编码辅助等功能进行氛围编程 (vibe coding)。订阅者可获得高于免费层级的每日基准配额，可在 [Playground](https://aistudio.google.com/prompts/new_chat?hl=zh-cn) 和[构建](https://aistudio.google.com/apps?hl=zh-cn)界面中使用。每日限额通过重置而非滚动时间窗口来强制执行，从而确保在过渡到使用 Cloud Billing 进行生产规模开发之前获得顺畅的开发体验。
+การสมัครใช้บริการ Google AI Pro และ Ultra ช่วยให้นักพัฒนาซอฟต์แวร์สามารถปลดล็อกโมเดลแบบชำระเงินและขีดจำกัดอัตราคำขอที่สูงขึ้นใน Playground ของ Google AI Studio รวมถึงฟีเจอร์ต่างๆ เช่น ผู้ช่วยเขียนโค้ดใน[โหมดสร้าง](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=th)สำหรับการเขียนโค้ดแบบ Vibe Coding สมาชิกจะได้รับโควต้ารายวันพื้นฐานที่สูงกว่ารุ่นฟรีสำหรับการใช้งานในอินเทอร์เฟซ [Playground](https://aistudio.google.com/prompts/new_chat?hl=th) และ [Build](https://aistudio.google.com/apps?hl=th) ขีดจำกัดการใช้งานต่อวันจะบังคับใช้โดยใช้การรีเซ็ตแทนกรอบเวลาแบบต่อเนื่อง เพื่อให้มั่นใจว่าประสบการณ์การพัฒนาจะราบรื่นก่อนที่จะเปลี่ยนไปใช้การพัฒนาในระดับการใช้งานจริงด้วยการเรียกเก็บเงินใน Cloud
 
-| 方案 | AI Studio 用量 | 模型访问权限和福利 |
+| แผน | การใช้งาน AI Studio | สิทธิ์เข้าถึงโมเดลและสิทธิประโยชน์ |
 | --- | --- | --- |
-| **免费** | 适中配额 | 基础限额和访问权限，可选择升级以获取更多。 |
-| **AI Pro** | 更高配额 | 使用 [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=zh-cn)、Gemini Pro、Nano Banana 和 Lyria 等高级模型。 |
-| **AI Ultra** | 最高配额 | 在原型设计、开发和使用 [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=zh-cn) 等高级前沿模型方面享有最高用量上限。 |
+| **ฟรี** | โควต้าต่ำ | ขีดจำกัดและสิทธิ์เข้าถึงระดับพื้นฐาน พร้อมตัวเลือกในการอัปเกรดเพื่อรับสิทธิ์เพิ่มเติม |
+| **AI Pro** | โควต้าที่สูงขึ้น | สิทธิ์เข้าถึงโมเดลพรีเมียม เช่น [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=th), Gemini Pro, Nano Banana และ Lyria |
+| **AI Ultra** | โควต้าสูงสุด | เพดานขีดจำกัดสูงสุดสำหรับการสร้างต้นแบบ การพัฒนา และ Frontier Model ขั้นสูงอย่าง [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=th) |
 
-## Gemini API 用量
+## การใช้งาน Gemini API
 
-当 AI Studio 中的每日基准订阅配额用尽时，您可以使用启用了 Cloud Billing 的 Gemini API 密钥继续工作流，直接按请求付费使用 Gemini API。您可以在 [AI Studio 信息中心](https://aistudio.google.com/projects?hl=zh-cn)内查看项目和 API 密钥的 Gemini API 使用情况。
+เมื่อโควต้าการสมัครใช้บริการพื้นฐานรายวันหมดลงใน AI Studio คุณจะยังคงใช้เวิร์กโฟลว์ต่อได้โดยใช้คีย์ Gemini API ที่เปิดใช้การเรียกเก็บเงินใน Cloud สำหรับการใช้งาน Gemini API โดยตรงแบบจ่ายต่อคำขอ
+คุณสามารถดูการใช้งาน Gemini API สำหรับโปรเจ็กต์และคีย์ API ได้ใน[แดชบอร์ด AI Studio](https://aistudio.google.com/projects?hl=th)
 
-订阅者如果拥有 Google Cloud Platform (GCP) 项目并启用了 Cloud Billing，则有资格通过 [Google 开发者计划](https://developers.google.com/program?hl=zh-cn)每月获得 Cloud 赠金，用于抵扣 Gemini API 等 Cloud 服务的使用费。预付费和后付费的使用和结算方式保持不变。对于采用预付款结算方式的用户，AI Studio 中的付费余额必须大于 0 美元，才能激活赠金。系统将优先抵扣符合条件的 Google Cloud 赠金（如有）。
-[了解详情](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn#billing-plans)。
+สมาชิกที่มีโปรเจ็กต์ Google Cloud Platform (GCP) และเปิดใช้การเรียกเก็บเงินใน Cloud จะมีสิทธิ์รับเครดิต Cloud รายเดือนจาก [Google Developer Program](https://developers.google.com/program?hl=th) สำหรับบริการ Cloud ซึ่งรวมถึง Gemini API การใช้งานและการเรียกเก็บเงินแบบชำระเงินล่วงหน้าและชำระเงินภายหลังจะยังคงเหมือนเดิม สำหรับผู้ใช้ที่ใช้การเรียกเก็บเงินแบบชำระเงินล่วงหน้า ยอดคงเหลือที่ชำระแล้วใน AI Studio ต้องมากกว่า $0 จึงจะเปิดใช้งานเครดิตโปรโมชันได้ ระบบจะใช้เครดิต Google Cloud ที่มีสิทธิ์ (หากมี) ก่อน
+[ดูข้อมูลเพิ่มเติม](https://ai.google.dev/gemini-api/docs/billing?hl=th#billing-plans)
 
-Google AI 订阅方案集成降低了高级实验和开发的准入门槛。不过，对于大规模生产部署，建议使用 Google Cloud 项目、[Google Cloud 新手体验层级](https://cloud.google.com/blog/topics/developers-practitioners/the-starter-tier-for-google-ai-studio-explained?hl=zh-cn)和 Gemini API 密钥。
+การผสานรวมการสมัครใช้บริการ AI ของ Google ช่วยลดอุปสรรคในการเริ่มทำการทดสอบและการพัฒนาขั้นสูง อย่างไรก็ตาม สำหรับการติดตั้งใช้งานเวอร์ชันที่ใช้งานจริงในวงกว้าง เราขอแนะนำให้ใช้โปรเจ็กต์ Google Cloud, [Google Cloud ระดับเริ่มต้น](https://cloud.google.com/blog/topics/developers-practitioners/the-starter-tier-for-google-ai-studio-explained?hl=th) และคีย์ Gemini API
 
-## 限制和兼容性
+## ข้อจำกัดและความเข้ากันได้
 
-- **仅限 AI Studio 界面**：Google AI 方案的开发者用量福利仅适用于 Google AI Studio 网页界面。直接使用 Gemini API（例如使用 API 密钥或外部应用）需单独计费和管理。不过，您可以在其他 Google 产品中使用您的订阅（请参阅 [Google AI 方案](https://one.google.com/about/google-ai-plans/?hl=zh-cn)）。
-- **与 API 结算不同**：AI Studio 的 Google AI 方案与 [Gemini API 用量层级](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn)是分开的，后者涵盖开发和生产 API 用量。
-- **Google One 点数**：[Google One AI 点数](https://support.google.com/googleone/answer/16287445?hl=zh-cn)是一个单独的点数系统，AI Studio 不支持该系统，并且该系统与 Google Cloud 赠金不重叠。
-- **Gemini 4 Argon 访问权限**：免费方案不提供 [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=zh-cn)。
-- **代理访问权限**：Google AI 方案不包含对 AI Studio 中代理（Deep Research 和 Antigravity 预览版）的访问权限，需要[付费 API 密钥](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn#setup-billing)。
+- **UI ของ AI Studio เท่านั้น:** สิทธิประโยชน์ของแพ็กเกจ Google AI สำหรับการใช้งานของนักพัฒนาแอปจะมีผลเฉพาะภายในอินเทอร์เฟซเว็บของ Google AI Studio เท่านั้น การใช้ Gemini API โดยตรง (เช่น การใช้คีย์ API หรือแอปพลิเคชันภายนอก) จะมีการเรียกเก็บเงินและจัดการแยกต่างหาก อย่างไรก็ตาม คุณสามารถใช้การสมัครใช้บริการในผลิตภัณฑ์อื่นๆ ของ Google ได้ (ดู[แพ็กเกจ Google AI](https://one.google.com/about/google-ai-plans/?hl=th))
+- **แตกต่างจากการเรียกเก็บเงิน API:** แพ็กเกจ Google AI สำหรับ AI Studio จะแยกต่างหากจาก[ระดับการใช้งาน Gemini API](https://ai.google.dev/gemini-api/docs/billing?hl=th) ซึ่งครอบคลุมการใช้งาน API สำหรับการพัฒนาและการใช้งานจริง
+- **เครดิต Google One:** [เครดิต AI ของ Google One](https://support.google.com/googleone/answer/16287445?hl=th) เป็นระบบเครดิตแยกต่างหากที่ไม่รองรับภายใน AI Studio และไม่ทับซ้อนกับเครดิต Google Cloud
+- **สิทธิ์เข้าถึง Gemini 4 Argon:** [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=th) ไม่พร้อมให้บริการในแพ็กเกจแบบไม่มีค่าใช้จ่าย
+- **สิทธิ์เข้าถึง Agent:** สิทธิ์เข้าถึง Agent (Deep Research และ Antigravity เวอร์ชันตัวอย่าง) ภายใน AI Studio ไม่รวมอยู่ในแพ็กเกจ Google AI และต้องใช้[คีย์ API แบบชำระเงิน](https://ai.google.dev/gemini-api/docs/billing?hl=th#setup-billing)
 
-发送反馈
+ส่งความคิดเห็น
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-最后更新时间 (UTC)：2026-10-16。
+อัปเดตล่าสุด 2026-10-16 UTC
 
-需要向我们提供更多信息？
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-10-16。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-10-16 UTC"],[],[]]

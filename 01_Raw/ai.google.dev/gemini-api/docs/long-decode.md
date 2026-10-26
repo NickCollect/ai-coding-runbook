@@ -1,33 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/long-decode?hl=pt-BR
-fetched_at: 2026-10-19T05:43:56.464641+00:00
-title: "Decodifica\u00e7\u00e3o longa \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/long-decode?hl=de
+fetched_at: 2026-10-26T05:40:45.010587+00:00
+title: "Lange Decodierung \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
+Gemini 4 Argon ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Envie comentários
+Feedback geben
 
-# Decodificação longa
+# Lange Decodierung
 
-A decodificação longa permite que o Gemini 4 Argon gere mais de 64 mil tokens para tarefas de raciocínio complexas, até a janela de contexto unificada de 1 milhão de tokens (1.048.576 tokens compartilhados entre entrada, raciocínio e saída). Na API Interactions, você ativa a decodificação longa com execução em segundo plano para que nossos servidores gerem e combinem automaticamente cada salto de 64 mil em uma única interação.
+Mit der langen Decodierung kann Gemini 4 Argon für Aufgaben mit komplexen Schlussfolgerungen mehr als 64.000 Tokens generieren, bis zum einheitlichen Kontextfenster von 1 Million Tokens (1.048.576 Tokens, die für Eingabe, Überlegungen und Ausgabe verwendet werden). In der Interactions API aktivieren Sie die lange Decodierung mit der Ausführung im Hintergrund, damit unsere Server automatisch jeden 64.000-Token-Schritt generieren und zu einer einzelnen Interaktion kombinieren.
 
-## Como a decodificação longa funciona
+## Funktionsweise der langen Decodierung
 
-Uma única chamada de modelo gera até 64 mil tokens. Quando uma resposta precisa de mais de 64 mil tokens, o servidor a gera em saltos de 64 mil que continuam de onde o salto anterior parou. Cada salto adiciona uma etapa `model_output` a `interaction.steps` no mesmo ID de interação. Assim, você une essas etapas para ler a resposta completa:
+Mit einem einzelnen Modellaufruf werden bis zu 64.000 Tokens generiert. Wenn für eine Antwort mehr als 64.000 Tokens erforderlich sind, generiert der Server sie in Schritten von 64.000 Tokens, die dort fortgesetzt werden, wo der vorherige Schritt aufgehört hat. Bei jedem Schritt wird `interaction.steps` unter derselben Interaktions-ID ein `model_output`-Schritt hinzugefügt. Sie müssen diese Schritte also zusammenführen, um die vollständige Antwort zu lesen:
 
-1. Você cria uma interação com `background: true` e `max_output_tokens` maior que 65.536, até 1 milhão.
-2. O servidor gera o primeiro salto, até 64 mil tokens.
-3. O servidor inicia o próximo salto de onde o último parou e repete até que o modelo termine ou use todos os `max_output_tokens`.
-4. Você pesquisa a interação ou faz streaming dela para receber o resultado.
+1. Sie erstellen eine Interaktion mit `background: true` und `max_output_tokens` größer als 65.536, bis zu 1 Million.
+2. Der Server generiert den ersten Schritt mit bis zu 64.000 Tokens.
+3. Der Server startet den nächsten Hop dort, wo der letzte aufgehört hat, und wiederholt den Vorgang, bis das Modell fertig ist oder alle `max_output_tokens` verwendet wurden.
+4. Sie rufen die Interaktion ab oder streamen sie, um das Ergebnis zu erhalten.
 
 ### Python
 
@@ -127,137 +127,137 @@ while true; do
 done
 ```
 
-## Limites de saída
+## Ausgabelimits
 
-As interações de streaming e não streaming têm um limite padrão de 64 mil tokens de saída. Portanto, as respostas de até 64 mil tokens não precisam de mudanças no código. Para gerar mais de 64 mil tokens, ative a execução em segundo plano e aumente `max_output_tokens`.
+Für Streaming- und Nicht-Streaming-Interaktionen gilt standardmäßig ein Ausgabetokenlimit von 64.000. Für Antworten mit bis zu 64.000 Tokens sind also keine Codeänderungen erforderlich. Wenn Sie mehr als 64.000 Tokens generieren möchten, aktivieren Sie die Ausführung im Hintergrund und erhöhen Sie `max_output_tokens`.
 
-| Como você cria a interação | Limite de saída |
+| So erstellen Sie die Interaktion | Ausgabelimit |
 | --- | --- |
-| `background: false` (streaming ou não streaming) | 65.536 tokens. Valores maiores que 65.536 retornam um erro 400. A decodificação longa será lançada em breve. |
-| `background: true`, `max_output_tokens` não definido | 65.536 tokens |
-| `background: true`, `max_output_tokens` maior que 65.536 | Seu `max_output_tokens`, até 1.048.576 menos sua entrada |
+| `background: false` (Streaming oder Nicht-Streaming) | 65.536 Tokens Werte über 65.536 geben einen 400-Fehler zurück. Lange Decodierung demnächst verfügbar. |
+| `background: true`, `max_output_tokens` nicht festgelegt | 65.536 Tokens |
+| `background: true`, `max_output_tokens` größer als 65.536 | Ihr `max_output_tokens`, bis zu 1.048.576 minus Ihre Eingabe |
 
-## Quando usar a decodificação longa
+## Wann sollte die lange Decodierung verwendet werden?
 
-A maioria das solicitações termina em até 64 mil tokens. Use a decodificação longa somente quando uma resposta precisar de mais raciocínio e saída do que isso.
+Die meisten Anfragen sind mit 64.000 Tokens abgeschlossen. Verwenden Sie die lange Decodierung nur, wenn für eine Antwort mehr Überlegungen und Ausgaben erforderlich sind.
 
-| Carga de trabalho | Usar decodificação longa? | Por quê? |
+| Arbeitslast | Lange Decodierung verwenden? | Warum |
 | --- | --- | --- |
-| Matemática, ciência, pesquisa e provas formais difíceis | Sim | O modelo pode gastar mais de 64 mil tokens para explorar e verificar o raciocínio. |
-| As tarefas de programação e agênticas mais difíceis | Sim | Algumas tarefas precisam de mais de 64 mil tokens de raciocínio e código em uma resposta. A maioria das tarefas de programação e agênticas termina com menos de 64 mil. |
-| Ferramentas de avaliação que param no limite de saída | Sim | A decodificação longa evita respostas cortadas quando o modelo gasta uma resposta inteira de 64 mil no raciocínio. |
-| Chat, perguntas e respostas, resumo, classificação e extração | Não | Essas tarefas terminam com menos de 32 mil tokens. |
-| Solicitações de um comprimento fixo, como "escreva um livro de 700 mil palavras" | Não | O modelo não segue metas de comprimento. |
-| Agentes que chamam ferramentas em muitos turnos curtos | Não | Cada turno é curto. Grandes saídas em cada turno preenchem a janela de contexto compartilhada rapidamente. |
-| Comandos próximos ao limite de entrada | Não | A saída pode usar apenas 1.048.576 tokens menos sua entrada. |
-| Solicitações sensíveis à latência | Não | A decodificação longa pode ser executada por vários minutos. |
+| Schwierige mathematische, wissenschaftliche und Forschungsaufgaben sowie formale Beweise | Ja | Das Modell kann mehr als 64.000 Tokens verwenden, um seine Überlegungen zu untersuchen und zu prüfen. |
+| Die schwierigsten Coding- und Agentenaufgaben | Ja | Für einige Aufgaben sind mehr als 64.000 Tokens für Überlegungen und Code in einer Antwort erforderlich. Die meisten Coding- und Agentenaufgaben sind mit weniger als 64.000 Tokens abgeschlossen. |
+| Bewertungstools, die am Ausgabelimit anhalten | Ja | Die lange Decodierung verhindert abgeschnittene Antworten, wenn das Modell die gesamten 64.000 Tokens für Überlegungen verwendet. |
+| Chat, Fragen und Antworten, Zusammenfassung, Klassifizierung und Extraktion | Nein | Diese Aufgaben sind mit deutlich weniger als 32.000 Tokens abgeschlossen. |
+| Anfragen mit einer festen Länge, z. B. „Schreibe ein Buch mit 700.000 Wörtern“ | Nein | Das Modell berücksichtigt keine Längenziele. |
+| Agenten, die Tools in vielen kurzen Schritten aufrufen | Nein | Jeder Schritt ist kurz. Große Ausgaben in jedem Schritt füllen das gemeinsame Kontextfenster schnell. |
+| Prompts in der Nähe des Eingabelimits | Nein | Für die Ausgabe können nur 1.048.576 Tokens minus Ihre Eingabe verwendet werden. |
+| Latenzsensitive Anfragen | Nein | Die lange Decodierung kann mehrere Minuten dauern. |
 
-Definir um `max_output_tokens` alto dá ao modelo espaço para pensar mais em problemas difíceis, mas o modelo ainda decide quanto escrever. Para controlar o esforço de raciocínio usado pelo modelo, defina [`thinking_level`](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br).
+Wenn Sie einen hohen Wert für `max_output_tokens` festlegen, hat das Modell mehr Zeit, über schwierige Probleme nachzudenken. Es entscheidet jedoch weiterhin, wie viel es schreibt. Mit [`thinking_level`](https://ai.google.dev/gemini-api/docs/thinking?hl=de) können Sie festlegen, wie viel Aufwand das Modell für die Überlegungen verwendet.
 
-## Escolher como executar a decodificação longa
+## Auswahl der Ausführungsmethode für die lange Decodierung
 
-A execução em segundo plano é a maneira mais fácil de executar a decodificação longa na API Interactions. A continuação do lado do cliente, em que o código inicia cada salto, está disponível na API GenerateContent. Ela será lançada em breve na API Interactions como uma opção mais avançada para gerenciar sua própria resiliência.
+Die Ausführung im Hintergrund ist die einfachste Möglichkeit, die lange Decodierung in der Interactions API auszuführen. Die clientseitige Fortsetzung, bei der Ihr Code jeden Schritt startet, ist mit der GenerateContent API verfügbar. Sie wird bald auch in der Interactions API als erweiterte Option zur Verwaltung Ihrer eigenen Resilienz verfügbar sein.
 
-|  | Execução em segundo plano (API Interactions) | Continuação do lado do cliente (API GenerateContent) |
+|  | Ausführung im Hintergrund (Interactions API) | Clientseitige Fortsetzung (GenerateContent API) |
 | --- | --- | --- |
-| **Quem inicia cada salto** | Nossos servidores | O SDK de IA generativa do Google ou seu próprio código |
-| **Tokens por solicitação** | Seu `max_output_tokens`, em uma interação | 64 mil por stream, 32 mil por solicitação não streaming |
-| **Horário da execução** | Até 24 horas | 20 minutos |
-| **Armazenamento** | Requer `store: true` | Nada armazenado no servidor. |
-| **Ideal para** | A maneira mais fácil de executar a decodificação longa | Controle mais refinado sobre novas tentativas, para que você possa criar seu próprio backoff, tratamento de erros e resiliência |
+| **Wer startet jeden Schritt?** | Unsere Server | Das Google GenAI SDK oder Ihr eigener Code |
+| **Tokens pro Anfrage** | Ihr `max_output_tokens` in einer Interaktion | 64.000 pro Stream, 32.000 pro Nicht-Streaming-Anfrage |
+| **Laufzeit** | Bis zu 24 Stunden | 20 Minuten |
+| **Speicher** | `store: true` erforderlich | Nichts auf dem Server gespeichert. |
+| **Optimal für** | Die einfachste Möglichkeit, die lange Decodierung auszuführen | Feinere Kontrolle über Wiederholungsversuche, sodass Sie Ihre eigene Backoff-Strategie, Fehlerbehandlung und Resilienz entwickeln können |
 
-Para usar a continuação do lado do cliente, consulte [Decodificação longa com a API GenerateContent](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=pt-br).
+Informationen zur Verwendung der clientseitigen Fortsetzung finden Sie unter [Lange Decodierung mit der GenerateContent API](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=de).
 
-## Fazer streaming de decodificação longa
+## Lange Decodierung streamen
 
-Para fazer streaming de saídas e resumos de pensamento à medida que chegam, adicione `stream: true` e `thinking_summaries: "auto"`. Streams longos podem cair, então o cliente precisa se reconectar. Siga o padrão de reconexão no [guia de execução em segundo plano](https://ai.google.dev/gemini-api/docs/background-execution?hl=pt-br). A decodificação longa adiciona estas regras:
+Wenn Sie Ausgaben und Zusammenfassungen der Überlegungen streamen möchten, sobald sie verfügbar sind, fügen Sie `stream: true` und `thinking_summaries: "auto"` hinzu. Lange Streams können unterbrochen werden, daher muss Ihr Client die Verbindung wiederherstellen. Folgen Sie dem Muster für die Wiederherstellung der Verbindung in der [Anleitung zur Ausführung im Hintergrund](https://ai.google.dev/gemini-api/docs/background-execution?hl=de). Bei der langen Decodierung gelten die folgenden Regeln:
 
-- **Salve o ID da interação**:leia-o no evento `interaction.created`.
-- **Salve cada `event_id`:** Um `event_id` pode chegar em eventos `interaction.status_update`, não apenas em deltas de texto.
-- **Reconecte-se com `last_event_id`:** chame `interactions.get` com `stream: true` e o último `event_id`. O stream continua após esse evento.
-- **Leia até o final**:depois de se reconectar, leia o stream até o final antes de verificar o status. O servidor reproduz eventos perdidos, mesmo após a conclusão da interação.
-- **Defina tempos limite longos**:defina tempos limite de leitura HTTP de 15 a 20 minutos por stream.
-- **Espere a saída em blocos de 5 mil tokens**:após os primeiros 64 mil tokens (cerca de 10 minutos), o stream envia a saída em blocos de cerca de 5 mil tokens. As pausas entre os blocos são normais. A interação não está travada, então mantenha a conexão aberta.
+- **Interaktions-ID speichern**:Lesen Sie sie aus dem Ereignis `interaction.created`.
+- **Jede `event_id` speichern**:Eine `event_id` kann bei `interaction.status_update`-Ereignissen eintreffen, nicht nur bei Textänderungen.
+- **Verbindung mit `last_event_id` wiederherstellen**:Rufen Sie `interactions.get` mit `stream: true` und der letzten `event_id` auf. Der Stream wird nach diesem Ereignis fortgesetzt.
+- **Bis zum Ende lesen**:Nachdem Sie die Verbindung wiederhergestellt haben, lesen Sie den Stream bis zum Ende, bevor Sie den Status prüfen. Der Server spielt verpasste Ereignisse auch nach Abschluss der Interaktion ab.
+- **Lange Zeitüberschreitungen festlegen**:Legen Sie für HTTP-Lesevorgänge eine Zeitüberschreitung von 15 bis 20 Minuten pro Stream fest.
+- **Ausgabe in 5.000-Token-Blöcken erwarten**:Nach den ersten 64.000 Tokens (ungefähr die ersten 10 Minuten) sendet der Stream die Ausgabe in Blöcken von etwa 5.000 Tokens. Pausen zwischen den Blöcken sind normal. Die Interaktion ist nicht blockiert. Lassen Sie die Verbindung also geöffnet.
 
-## Status em segundo plano
+## Hintergrundstatus
 
-Uma interação em segundo plano pode ser executada por até 24 horas. Quando o status não for mais `in_progress` ou `queued`, processe o estado terminal usando esta tabela:
+Eine Hintergrundinteraktion kann bis zu 24 Stunden dauern. Sobald der Status nicht mehr `in_progress` oder `queued` ist, verarbeiten Sie den Endstatus anhand dieser Tabelle:
 
-| Status | Significado | O que fazer |
+| Status | Bedeutung | Was muss ich tun? |
 | --- | --- | --- |
-| `completed` | O modelo terminou. | Una as etapas `model_output` em `steps` e leia `usage`. Para continuar a conversa, transmita o `id` dessa interação como `previous_interaction_id`. |
-| `requires_action` | O modelo pediu uma chamada de ferramenta. | Execute a ferramenta. Em seguida, envie o resultado com o `id` dessa interação. |
-| `incomplete` | O modelo usou todos os `max_output_tokens`. O texto pode estar vazio se o modelo ainda estiver pensando. | Envie a solicitação novamente com um `max_output_tokens` maior. |
-| `failed` | O servidor não conseguiu terminar ou a interação foi executada por mais de 24 horas. | Tente fazer a solicitação novamente. Se ela falhar de novo, compartilhe o `id` da interação com o suporte. |
-| `cancelled` | Você cancelou a interação. | Leia `usage` para conferir os tokens faturados. |
+| `completed` | Das Modell ist fertig. | Führen Sie die `model_output`-Schritte in `steps` zusammen und lesen Sie `usage`. Wenn Sie die Unterhaltung fortsetzen möchten, übergeben Sie die `id` dieser Interaktion als `previous_interaction_id`. |
+| `requires_action` | Das Modell hat einen Toolaufruf angefordert. | Führen Sie das Tool aus. Senden Sie dann das Ergebnis mit der `id` dieser Interaktion. |
+| `incomplete` | Das Modell hat alle `max_output_tokens` verwendet. Der Text kann leer sein, wenn das Modell noch überlegt hat. | Senden Sie die Anfrage noch einmal mit einem höheren Wert für `max_output_tokens`. |
+| `failed` | Der Server konnte den Vorgang nicht abschließen oder die Interaktion hat länger als 24 Stunden gedauert. | Wiederholen Sie die Anfrage. Wenn der Fehler wieder auftritt, teilen Sie dem Support die `id` der Interaktion mit. |
+| `cancelled` | Sie haben die Interaktion abgebrochen. | Lesen Sie `usage`, um die abgerechneten Tokens zu sehen. |
 
-Para interromper uma interação em execução, chame `client.interactions.cancel(id=interaction.id)` em Python, `client.interactions.cancel(interaction.id)` em JavaScript ou `POST /v1beta/interactions/{id}/cancel` em REST.
+Wenn Sie eine laufende Interaktion beenden möchten, rufen Sie in Python `client.interactions.cancel(id=interaction.id)`, in JavaScript `client.interactions.cancel(interaction.id)` oder in REST `POST /v1beta/interactions/{id}/cancel` auf.
 
-## Definir `max_output_tokens`
+## `max_output_tokens` festlegen
 
-`max_output_tokens` define o limite combinado para raciocínio e saída em toda a interação. Diminuir esse valor não faz com que o modelo pense de forma mais concisa, mas corta a resposta mais cedo.
+`max_output_tokens` legt das kombinierte Limit für Überlegungen und Ausgaben für die gesamte Interaktion fest. Wenn Sie diesen Wert senken, überlegt das Modell nicht präziser, sondern die Antwort wird früher abgeschnitten.
 
-| Sua carga de trabalho | `max_output_tokens` recomendado |
+| Ihre Arbeitslast | Empfohlener Wert für `max_output_tokens` |
 | --- | --- |
-| Apps atuais com um limite menor que 32 mil | Aumente para 32.768. A execução em segundo plano não é necessária. |
-| Tarefas de programação e agênticas longas | Comece com 65.536 (o padrão). A execução em segundo plano não é necessária. |
-| Raciocínio complexo, matemática, ciência e provas difíceis | Defina `background: true` e comece com 262.144, até 1.048.576 menos seus tokens de entrada. |
+| Vorhandene Apps mit einem Limit unter 32.000 | Auf 32.768 erhöhen. Die Ausführung im Hintergrund ist nicht erforderlich. |
+| Lange Coding- und Agentenaufgaben | Beginnen Sie mit 65.536 (Standard). Die Ausführung im Hintergrund ist nicht erforderlich. |
+| Komplexe Schlussfolgerungen, schwierige mathematische und wissenschaftliche Aufgaben sowie Beweise | Legen Sie `background: true` fest und beginnen Sie mit 262.144, bis zu 1.048.576 minus Ihre Eingabetokens. |
 
-Para usar menos tokens, diminua `thinking_level`. Use `high` para as tarefas de raciocínio mais difíceis. Use `medium` (o padrão) para a maioria dos trabalhos de programação e agênticos.
+Wenn Sie weniger Tokens verwenden möchten, senken Sie `thinking_level`. Verwenden Sie `high` für die schwierigsten Aufgaben mit Schlussfolgerungen. Verwenden Sie `medium` (Standard) für die meisten Coding- und Agentenaufgaben.
 
-## Contar tokens
+## Tokens zählen
 
-`interaction.usage` informa os totais em todos os saltos. Leia estes campos: `total_input_tokens`, `total_cached_tokens`, `total_output_tokens`, `total_thought_tokens` e `total_tokens`.
+`interaction.usage` meldet die Summen für alle Schritte. Lesen Sie die folgenden Felder: `total_input_tokens`, `total_cached_tokens`, `total_output_tokens`, `total_thought_tokens` und `total_tokens`.
 
-`total_input_tokens` soma os tokens de entrada de cada salto. Cada salto envia o comando e tudo o que foi gerado até o momento de volta ao modelo como entrada. Assim, os mesmos tokens são contados novamente em cada salto posterior. Por exemplo, um comando de 1.000 tokens que produz 200 mil tokens de raciocínio e saída leva quatro saltos:
+`total_input_tokens` summiert die Eingabetokens aller Schritte. Bei jedem Schritt werden Ihr Prompt und alle bisher generierten Inhalte als Eingabe an das Modell zurückgesendet. Die gleichen Tokens werden also in jedem späteren Schritt noch einmal gezählt. Ein Prompt mit 1.000 Tokens, der 200.000 Tokens für Überlegungen und Ausgaben erzeugt, erfordert beispielsweise vier Schritte:
 
-| Salto | Entrada enviada ao modelo | Tokens de entrada |
+| Schritt | An das Modell gesendete Eingabe | Eingabetokens |
 | --- | --- | --- |
-| 1 | Comando | 1.000 |
-| 2 | Comando + salto 1 | 66.536 |
-| 3 | Comando + saltos 1 e 2 | 132.072 |
-| 4 | Comando + saltos 1 a 3 | 197.608 |
-| **Total** |  | **397.216** |
+| 1 | Prompt | 1.000 |
+| 2 | Prompt + Schritt 1 | 66.536 |
+| 3 | Prompt + Schritte 1 und 2 | 132.072 |
+| 4 | Prompt + Schritte 1 bis 3 | 197.608 |
+| **Summe** |  | **397.216** |
 
-`total_input_tokens` informa cerca de 397 mil tokens (com entradas de salto repetidas automaticamente descontadas em 95% pelo armazenamento em cache implícito), embora o tamanho real do contexto seja de apenas cerca de 201 mil tokens: o comando de 1.000 tokens mais 200 mil tokens de raciocínio e saída.
+`total_input_tokens` meldet etwa 397.000 Tokens (wobei wiederholte Eingaben für Schritte durch implizites Caching automatisch um 95% reduziert werden), obwohl die tatsächliche Kontextgröße nur etwa 201.000 Tokens beträgt: der Prompt mit 1.000 Tokens plus 200.000 Tokens für Überlegungen und Ausgaben.
 
-Durante um stream, os eventos `step.stop` e `interaction.status_update` incluem `usage` (cumulativo para a interação). Leia o valor `usage` mais recente em vez de adicioná-los.
+Während eines Streams enthalten sowohl `step.stop`- als auch `interaction.status_update`-Ereignisse `usage` (kumulativ für die Interaktion). Lesen Sie den neuesten Wert für `usage`, anstatt die Werte zu addieren.
 
-## Noções básicas sobre o faturamento
+## Informationen zur Abrechnung
 
-Você paga por cada token em cada salto, incluindo aqueles que contêm apenas raciocínio.
+Sie zahlen für jedes Token in jedem Schritt, einschließlich der Schritte, die nur Überlegungen enthalten.
 
-- **Desconto de cache**:o armazenamento em cache implícito desconta a entrada repetida em cada salto em 95%. A entrada armazenada em cache custa US $0,10 por 1 milhão de tokens em vez de US $2,00 durante o período introdutório.
-- **Interações canceladas e com falha**:você paga por todo o trabalho concluído antes do término da interação.
+- **Cache-Rabatt**:Durch implizites Caching wird die wiederholte Eingabe in jedem Schritt um 95 % reduziert. Für zwischengespeicherte Eingaben fallen während des Einführungszeitraums 0,10 $ pro 1 Million Tokens an, statt 2,00 $.
+- **Abgebrochene und fehlgeschlagene Interaktionen**:Sie zahlen für alle Arbeiten, die vor dem Ende der Interaktion abgeschlossen wurden.
 
-## Solução de problemas
+## Fehlerbehebung
 
-| Sintoma | Causa e correção |
+| Symptom | Ursache und Lösung |
 | --- | --- |
-| A saída para em 64 mil | `background` é `false` ou `max_output_tokens` não está definido. Defina `background: true` e `max_output_tokens` maior que 65.536. |
-| 400: "max\_output\_tokens greater than 65536 is not yet supported with background=false." | A decodificação longa sem execução em segundo plano ainda não está disponível. Defina `background: true`. |
-| 400: "store=true is required for background interactions" | A execução em segundo plano precisa de `store: true`. |
-| Status `incomplete` com texto vazio | O modelo usou todos os tokens no raciocínio. Aumente `max_output_tokens` ou diminua `thinking_level`. |
-| A compactação de contexto começa muito cedo | O framework do agente ou a ferramenta de avaliação lê `total_input_tokens`. Consulte [Contar tokens](#count-tokens). |
+| Ausgabe endet bei 64.000 | `background` ist `false` oder `max_output_tokens` ist nicht festgelegt. Legen Sie `background: true` und `max_output_tokens` größer als 65.536 fest. |
+| 400: „max\_output\_tokens greater than 65536 is not yet supported with background=false.“ | Die lange Decodierung ohne Ausführung im Hintergrund ist noch nicht verfügbar. Legen Sie `background: true` fest. |
+| 400: „store=true is required for background interactions“ | Für die Ausführung im Hintergrund ist `store: true` erforderlich. |
+| Status `incomplete` mit leerem Text | Das Modell hat alle Tokens für Überlegungen verwendet. Erhöhen Sie `max_output_tokens` oder senken Sie `thinking_level`. |
+| Die Kontextkomprimierung beginnt zu früh | Ihr Agenten-Framework oder Bewertungstool liest `total_input_tokens`. Weitere Informationen finden Sie unter [Tokens zählen](#count-tokens). |
 
-## Limitações
+## Beschränkungen
 
-- **Não há decodificação longa sem execução em segundo plano**:as interações com `background: false` param em 65.536 tokens. O suporte será lançado em breve.
-- **Sem metas de comprimento**:o modelo não segue metas de comprimento de token ou contagem de palavras.
+- **Keine lange Decodierung ohne Ausführung im Hintergrund**:Interaktionen mit `background: false` enden bei 65.536 Tokens. Unterstützung ist demnächst verfügbar.
+- **Keine Längenziele**:Das Modell berücksichtigt keine Ziele für die Tokenlänge oder die Anzahl der Wörter.
 
-## Próximas etapas
+## Nächste Schritte
 
-- [Novidades no Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/latest-model?hl=pt-br)
-- [Execução em segundo plano](https://ai.google.dev/gemini-api/docs/background-execution?hl=pt-br)
-- [Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br)
-- [Decodificação longa com a API GenerateContent](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=pt-br)
+- [Neuerungen in Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/latest-model?hl=de)
+- [Ausführung im Hintergrund](https://ai.google.dev/gemini-api/docs/background-execution?hl=de)
+- [Überlegungen](https://ai.google.dev/gemini-api/docs/thinking?hl=de)
+- [Lange Decodierung mit der GenerateContent API](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=de)
 
-Envie comentários
+Feedback geben
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Última atualização 2026-10-13 UTC.
+Zuletzt aktualisiert: 2026-10-13 (UTC).
 
-Quer enviar seu feedback?
+Haben Sie Feedback für uns?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-10-13 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-10-13 (UTC)."],[],[]]

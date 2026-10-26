@@ -1,44 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=id
-fetched_at: 2026-10-19T05:50:05.898221+00:00
-title: "Agen Riset Pasar dengan Gemini dan AI SDK dari Vercel \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=zh-TW
+fetched_at: 2026-10-26T05:58:02.585811+00:00
+title: "Vercel \u904b\u7528 Gemini \u548c AI SDK \u6253\u9020\u7684\u5e02\u5834\u8abf\u67e5\u4ee3\u7406\u7a0b\u5f0f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Kirim masukan
+提供意見
 
-# Agen Riset Pasar dengan Gemini dan AI SDK dari Vercel
+# Vercel 運用 Gemini 和 AI SDK 打造的市場調查代理程式
 
-[AI SDK by Vercel](https://ai-sdk.dev) adalah library open source yang canggih untuk
-membangun aplikasi, antarmuka pengguna, dan agen yang didukung AI di TypeScript.
+[Vercel 的 AI SDK](https://ai-sdk.dev) 是功能強大的開放原始碼程式庫，可使用 TypeScript 建構 AI 輔助應用程式、使用者介面和代理程式。
 
-Panduan ini akan memandu Anda membuat aplikasi Node.js dengan TypeScript yang menggunakan AI SDK untuk terhubung dengan Gemini API melalui [Google Generative AI Provider](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) dan melakukan analisis tren pasar otomatis. Aplikasi
-akhir akan:
+本指南會逐步說明如何使用 TypeScript 建構 Node.js 應用程式，透過 [Google 生成式 AI Provider](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) 使用 AI SDK 連線至 Gemini API，並自動分析市場趨勢。最終應用程式將：
 
-1. Menggunakan Gemini dengan Google Penelusuran untuk meneliti tren pasar saat ini.
-2. Ekstrak data terstruktur dari riset untuk membuat diagram.
-3. Gabungkan riset dan diagram ke dalam laporan HTML profesional, lalu simpan sebagai PDF.
+1. 使用 Gemini 和 Google 搜尋研究當前的市場趨勢。
+2. 從研究資料中擷取結構化資料，然後生成圖表。
+3. 將研究和圖表合併為專業的 HTML 報表，並儲存為 PDF。
 
-## Prasyarat
+## 必要條件
 
-Untuk menyelesaikan panduan ini, Anda memerlukan:
+如要完成本指南，您需要：
 
-- Kunci Gemini API. Anda dapat membuatnya secara gratis di [Google AI Studio](https://aistudio.google.com/apikey?hl=id).
-- [Node.js](https://nodejs.org/en/download) versi 18 atau yang lebih baru.
-- Pengelola paket, seperti `npm`, `pnpm`, atau `yarn`.
+- Gemini API 金鑰。您可以在 [Google AI Studio](https://aistudio.google.com/apikey?hl=zh-tw) 免費建立。
+- [Node.js](https://nodejs.org/en/download) 18 以上版本。
+- 套件管理工具，例如 `npm`、`pnpm` 或 `yarn`。
 
-## Menyiapkan aplikasi Anda
+## 設定應用程式
 
-Pertama, buat direktori baru untuk project Anda dan lakukan inisialisasi.
+首先，請為專案建立新目錄並初始化。
 
 ### npm
 
@@ -56,7 +54,7 @@ cd market-trend-app
 pnpm init
 ```
 
-### benang
+### 紗線
 
 ```
 mkdir market-trend-app
@@ -64,10 +62,9 @@ cd market-trend-app
 yarn init -y
 ```
 
-### Menginstal dependensi
+### 安裝依附元件
 
-Selanjutnya, instal AI SDK, penyedia AI Generatif Google, dan dependensi
-lain yang diperlukan.
+接著，請安裝 AI SDK、Google 生成式 AI 提供者和其他必要依附元件。
 
 ### npm
 
@@ -76,8 +73,7 @@ npm install ai @ai-sdk/google zod
 npm install -D @types/node tsx typescript && npx tsc --init
 ```
 
-Untuk mencegah error compiler TypeScript, jadikan baris berikut sebagai komentar di
-`tsconfig.json` yang dihasilkan:
+如要避免發生 TypeScript 編譯器錯誤，請在產生的 `tsconfig.json` 中註解排除下列程式碼：
 
 ```
 //"verbatimModuleSyntax": true,
@@ -90,21 +86,20 @@ pnpm add ai @ai-sdk/google zod
 pnpm add -D @types/node tsx typescript
 ```
 
-### benang
+### 紗線
 
 ```
 yarn add ai @ai-sdk/google zod
 yarn add -D @types/node tsx typescript && yarn tsc --init
 ```
 
-Untuk mencegah error compiler TypeScript, jadikan baris berikut sebagai komentar di
-`tsconfig.json` yang dihasilkan:
+如要避免發生 TypeScript 編譯器錯誤，請在產生的 `tsconfig.json` 中註解排除下列程式碼：
 
 ```
 //"verbatimModuleSyntax": true,
 ```
 
-Aplikasi ini juga akan menggunakan paket pihak ketiga [Puppeteer](https://pptr.dev/) dan [Chart.js](https://www.chartjs.org) untuk merender diagram dan membuat PDF:
+這個應用程式也會使用第三方套件 [Puppeteer](https://pptr.dev/) 和 [Chart.js](https://www.chartjs.org) 算繪圖表及建立 PDF：
 
 ### npm
 
@@ -120,21 +115,20 @@ pnpm add puppeteer chart.js
 pnpm add -D @types/chart.js
 ```
 
-### benang
+### 紗線
 
 ```
 yarn add puppeteer chart.js
 yarn add -D @types/chart.js
 ```
 
-Paket `puppeteer` memerlukan skrip yang dijalankan untuk mendownload browser Chromium. Pengelola paket Anda mungkin meminta persetujuan, jadi pastikan Anda menyetujui skrip saat diminta.
+`puppeteer` 套件需要執行指令碼才能下載 Chromium 瀏覽器。套件管理員可能會要求核准，因此系統提示時，請務必核准指令碼。
 
-### Konfigurasi kunci API Anda
+### 設定 API 金鑰
 
-Tetapkan variabel lingkungan `GOOGLE_GENERATIVE_AI_API_KEY` dengan kunci Gemini API Anda. Penyedia AI Generatif Google akan otomatis mencari kunci API Anda di
-variabel lingkungan ini.
+使用 Gemini API 金鑰設定 `GOOGLE_GENERATIVE_AI_API_KEY` 環境變數。Google 生成式 AI Provider 會自動在這個環境變數中尋找 API 金鑰。
 
-### MacOS/Linux
+### macOS/Linux
 
 ```
 export GOOGLE_GENERATIVE_AI_API_KEY="YOUR_API_KEY_HERE"
@@ -146,12 +140,11 @@ export GOOGLE_GENERATIVE_AI_API_KEY="YOUR_API_KEY_HERE"
 setx GOOGLE_GENERATIVE_AI_API_KEY "YOUR_API_KEY_HERE"
 ```
 
-## Buat aplikasi Anda
+## 建立應用程式
 
-Sekarang, mari kita buat file utama untuk aplikasi kita. Buat file baru bernama
-`main.ts` di direktori project Anda. Anda akan membangun logika dalam file ini langkah demi langkah.
+現在，讓我們為應用程式建立主要檔案。在專案目錄中建立名為 `main.ts` 的新檔案。您將逐步建構這個檔案中的邏輯。
 
-Untuk pengujian cepat guna memastikan semuanya telah disiapkan dengan benar, tambahkan kode berikut ke `main.ts`. Contoh dasar ini menggunakan `generateText` untuk mendapatkan respons sederhana dari Gemini.
+如要快速測試，確保所有設定皆正確無誤，請將下列程式碼新增至 `main.ts`。這個基本範例會使用 `generateText`，從 Gemini 取得簡單的回覆。
 
 ```
 import { google } from "@ai-sdk/google";
@@ -169,7 +162,7 @@ async function main() {
 main().catch(console.error);
 ```
 
-Sebelum menambahkan kompleksitas, jalankan skrip ini untuk memverifikasi bahwa lingkungan Anda dikonfigurasi dengan benar. Jalankan perintah berikut di terminal.
+在增加複雜度之前，請先執行這項指令碼，確認環境設定正確無誤。在終端機中執行下列指令：
 
 ### npm
 
@@ -183,19 +176,19 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### benang
+### 紗線
 
 ```
 yarn tsc && node main.js
 ```
 
-Jika semuanya disiapkan dengan benar, Anda akan melihat respons Gemini dicetak ke konsol.
+如果一切設定正確，您會在控制台中看到 Gemini 的回覆。
 
-## Melakukan riset pasar dengan Google Penelusuran
+## 使用 Google 搜尋進行市場調查
 
-Untuk mendapatkan informasi terbaru, Anda dapat mengaktifkan alat [Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id) untuk Gemini. Saat alat ini aktif, model dapat menelusuri web untuk menjawab perintah dan akan menampilkan sumber yang digunakannya.
+如要取得最新資訊，可以為 Gemini 啟用 [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)工具。啟用這項工具後，模型就能搜尋網路來回覆提示，並提供使用的來源。
 
-Ganti konten `main.ts` dengan kode berikut untuk melakukan langkah pertama analisis kita.
+將 `main.ts` 的內容替換為下列程式碼，執行分析的第一個步驟。
 
 ```
 import { google } from "@ai-sdk/google";
@@ -221,15 +214,14 @@ async function main() {
 main().catch(console.error);
 ```
 
-## Mengekstrak data diagram
+## 擷取圖表資料
 
-Selanjutnya, mari kita proses teks riset untuk mengekstrak data terstruktur yang cocok untuk
-diagram. Gunakan fungsi `generateObject` AI SDK bersama dengan skema `zod`
-untuk menentukan struktur data yang tepat.
+接著，我們來處理研究文字，擷取適合用於圖表的結構化資料。使用 AI SDK 的 `generateObject` 函式和 `zod`
+結構定義確切的資料結構。
 
-Buat juga fungsi helper untuk mengonversi data terstruktur ini menjadi konfigurasi yang dapat dipahami oleh `Chart.js`.
+此外，請建立輔助函式，將這項結構化資料轉換為 `Chart.js` 可解讀的設定。
 
-Tambahkan kode berikut ke `main.ts`. Perhatikan impor baru dan "Langkah 2" yang ditambahkan.
+在 `main.ts` 中加入下列程式碼。請注意新增的匯入項目和「步驟 2」。
 
 ```
 import { google } from "@ai-sdk/google";
@@ -311,13 +303,11 @@ ${marketTrends}
 main().catch(console.error);
 ```
 
-## Buat laporan akhir
+## 生成最終報告
 
-Pada langkah terakhir, instruksikan Gemini untuk bertindak sebagai penulis laporan ahli.
-Berikan riset pasar, konfigurasi diagram, dan serangkaian petunjuk yang jelas untuk membuat laporan HTML. Kemudian, gunakan
-[Puppeteer](https://pptr.dev/) untuk merender HTML ini dan menyimpannya sebagai PDF.
+最後一個步驟是請 Gemini 扮演專業報告撰寫者的角色。提供市場研究、圖表設定，以及建構 HTML 報表的明確指令集。接著，使用 [Puppeteer](https://pptr.dev/) 算繪這個 HTML，並儲存為 PDF。
 
-Tambahkan impor `puppeteer` akhir dan "Step 3" ke file `main.ts` Anda.
+將最終的 `puppeteer` 匯入項目和「步驟 3」新增至 `main.ts` 檔案。
 
 ```
 // ... (imports from previous step)
@@ -378,10 +368,9 @@ async function main() {
 main().catch(console.error);
 ```
 
-## Menjalankan aplikasi Anda
+## 執行應用程式
 
-Sekarang Anda siap menjalankan aplikasi. Jalankan perintah berikut di
-terminal Anda:
+現在可以執行應用程式了。在終端機中執行下列指令：
 
 ### npm
 
@@ -395,33 +384,33 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### benang
+### 紗線
 
 ```
 yarn tsc && node main.js
 ```
 
-Anda akan melihat logging di terminal saat skrip menjalankan setiap langkah.
-Setelah selesai, file `report.pdf` yang berisi analisis pasar Anda akan dibuat di direktori project Anda.
+指令碼執行每個步驟時，終端機中會顯示記錄。
+完成後，專案目錄中會建立包含市場分析的 `report.pdf` 檔案。
 
-Di bawah, Anda akan melihat dua halaman pertama contoh laporan PDF:
+以下是範例 PDF 報表的前兩頁：
 
-![Laporan analisis pasar](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=id)
+![市場分析報告](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=zh-tw)
 
-## Aset lainnya
+## 其他資源
 
-Untuk mengetahui informasi selengkapnya tentang cara membangun dengan Gemini dan AI SDK, pelajari referensi berikut:
+如要進一步瞭解如何使用 Gemini 和 AI SDK 建構內容，請參閱下列資源：
 
-- [Dokumen AI SDK](https://ai-sdk.dev/docs)
-- [Dokumen AI SDK Google Generative AI](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
-- [Cookbook AI SDK: Mulai Menggunakan Gemini](https://ai-sdk.dev/cookbook/guides/gemini)
+- [AI SDK 說明文件](https://ai-sdk.dev/docs)
+- [AI SDK Google 生成式 AI 說明文件](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
+- [AI SDK 食譜：開始使用 Gemini](https://ai-sdk.dev/cookbook/guides/gemini)
 
-Kirim masukan
+提供意見
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Terakhir diperbarui pada 2026-09-12 UTC.
+上次更新時間：2026-09-12 (世界標準時間)。
 
-Ada masukan untuk kami?
+想進一步說明嗎？
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-12 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-12 (世界標準時間)。"],[],[]]

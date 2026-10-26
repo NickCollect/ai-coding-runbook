@@ -1,46 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=tr
-fetched_at: 2026-10-19T05:52:31.626048+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=ja
+fetched_at: 2026-10-26T05:55:09.390298+00:00
 title: "Imagen 4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
 # Imagen 4
 
-Gelişmiş görsel sentez için yüksek performanslı bir motor. Sofistike yaratıcı kontrol ve fotogerçekçi çıkış sunar. Profesyonel markalama, karmaşık sahne kompozisyonu ve hassas metin oluşturma ile karmaşık aydınlatma gerektiren yüksek kaliteli tasarım görevleri için Imagen 4'ü kullanın.
+高度なビジュアル合成のための高性能エンジン。洗練されたクリエイティブ コントロールとフォトリアリスティックな出力を実現します。Imagen 4
+は、正確なテキスト レンダリングと複雑な照明を必要とする、プロフェッショナルなブランディング、複雑なシーン構成、高忠実度のデザイン タスクに使用します。
 
-[Google AI Studio'da deneme](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=tr)
+[Google AI Studio で試す](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=ja)
 
-## Belgeler
+## ドキュメント
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=tr) sayfasını ziyaret edin.
+機能の詳細については、[Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ja) のページをご覧ください。
 
 ## imagen-4.0-generate-001
 
-| Mülk | Açıklama |
+| プロパティ | 説明 |
 | --- | --- |
-| id\_cardModel kodu | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveDesteklenen veri türleri | **Giriş**  Metin  **Çıkış**  Resimler |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  480 jeton (metin)  **Çıkış resimleri**  1-4 (Ultra/Standart/Hızlı) |
-| calendar\_monthSon güncelleme | Haziran 2025 |
+| id\_cardモデルコード | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveサポートされるデータタイプ | **入力**  テキスト  **出力**  画像検索 |
+| token\_autoトークン上限[[\*](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)] | **入力トークンの上限**  480 トークン（テキスト）  **出力画像**  1 ～ 4（ウルトラ/標準/高速） |
+| calendar\_month最終更新日 | 2025 年 6 月 |
 
-Geri bildirim gönderin
+フィードバックを送信
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Son güncelleme tarihi: 2026-06-15 UTC.
+最終更新日 2026-06-15 UTC。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+ご意見をお聞かせください
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-15 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-15 UTC。"],[],[]]

@@ -1,32 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=zh-TW
-fetched_at: 2026-10-19T05:51:34.649889+00:00
-title: "\u9077\u79fb\u81f3 Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=ar
+fetched_at: 2026-10-26T05:51:10.197575+00:00
+title: "\u0627\u0644\u0627\u0646\u062a\u0642\u0627\u0644 \u0625\u0644\u0649 \u062d\u0632\u0645\u0629 \u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u0628\u0631\u0627\u0645\u062c (SDK) \u0645\u0646 Google GenAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
+‫Gemini 4 Argon متاح الآن. [جرِّب هذه الميزة](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ar).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-提供意見
+إرسال ملاحظات
 
-# 遷移至 Google GenAI SDK
+# الانتقال إلى حزمة تطوير البرامج (SDK) من Google GenAI
 
-自 2024 年底發布 Gemini 2.0 起，我們推出了一組名為 [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw) 的新程式庫。這項工具採用[更新後的用戶端架構](https://ai.google.dev/gemini-api/docs/migrate?hl=zh-tw#client)，可提升開發人員體驗，並[簡化開發人員和企業工作流程之間的轉換](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=zh-tw)。
+بدءًا من إصدار Gemini 2.0 في أواخر عام 2024، قدّمنا مجموعة جديدة من
+المكتبات تُسمى [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=ar). وتوفّر هذه الأداة
+تجربة محسّنة للمطوّرين من خلال
+[بنية أساسية معدَّلة للعميل](https://ai.google.dev/gemini-api/docs/migrate?hl=ar#client)، كما أنّها
+[تسهّل عملية الانتقال](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=ar) بين سير عمل المطوّرين
+وسير عمل المؤسسات.
 
-Google GenAI SDK 現已在所有支援的平台上[正式發布 (GA)](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw#new-libraries)。如果您使用的是[舊版程式庫](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw#previous-sdks)，強烈建議您進行遷移。
+أصبحت حزمة Google GenAI SDK الآن
+[متوفّرة للجمهور العام](https://ai.google.dev/gemini-api/docs/libraries?hl=ar#new-libraries) على
+جميع الأنظمة الأساسية المتوافقة. إذا كنت تستخدم إحدى
+[المكتبات القديمة](https://ai.google.dev/gemini-api/docs/libraries?hl=ar#previous-sdks)، ننصحك بشدة
+بنقل البيانات.
 
-本指南提供遷移前後的程式碼範例，協助您開始使用。
+يقدّم هذا الدليل أمثلة على الرموز البرمجية قبل وبعد نقلها لمساعدتك في البدء.
 
-## 安裝
+## تثبيت
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -46,7 +55,7 @@ npm install @google/generative-ai
 go get github.com/google/generative-ai-go
 ```
 
-### Java
+### جافا
 
 ```
 <dependency>
@@ -56,7 +65,7 @@ go get github.com/google/generative-ai-go
 </dependency>
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -76,7 +85,7 @@ npm install @google/genai
 go get google.golang.org/genai
 ```
 
-### Java
+### جافا
 
 ```
 <dependency>
@@ -86,15 +95,16 @@ go get google.golang.org/genai
 </dependency>
 ```
 
-## API 存取權
+## الدخول إلى واجهة برمجة التطبيقات
 
-舊版 SDK 會在幕後使用各種臨時方法，隱含處理 API 用戶端。因此難以管理用戶端和憑證。現在，您可透過中央 `Client` 物件進行互動。這個 `Client` 物件可做為各種 API 服務 (例如 `models`、`chats`、`files`、`tunings`) 的單一進入點，提升一致性，並簡化不同 API 呼叫的憑證和設定管理。
+كانت حزمة SDK القديمة تعالج ضِمنيًا برنامج واجهة برمجة التطبيقات من جهة الخادم في الخلفية باستخدام مجموعة متنوعة من الطرق المخصّصة. وقد صعّب ذلك إدارة العميل وبيانات الاعتماد.
+أما الآن، فيمكنك التفاعل من خلال عنصر `Client` مركزي. يعمل العنصر `Client` كنقطة دخول واحدة لمختلف خدمات واجهات برمجة التطبيقات (مثل `models` و`chats` و`files` و`tunings`)، ما يعزّز الاتساق ويبسّط إدارة عملية الإعداد وبيانات الاعتماد في مختلف طلبات البيانات من واجهات برمجة التطبيقات.
 
-**之前 (API 存取權較不集中)**
+**قبل (الوصول إلى واجهة برمجة التطبيقات بشكل أقل مركزية)**
 
 ### Python
 
-舊版 SDK 並未明確使用頂層用戶端物件，來處理大多數 API 呼叫。您會直接例項化 `GenerativeModel` 物件並與其互動。
+لم تستخدِم حزمة SDK القديمة عنصر عميل على أعلى مستوى بشكل صريح لمعظم طلبات البيانات من واجهة برمجة التطبيقات. يمكنك إنشاء مثيل لكائنات `GenerativeModel` والتفاعل معها مباشرةً.
 
 ```
 import google.generativeai as genai
@@ -107,7 +117,7 @@ chat = model.start_chat(...)
 
 ### JavaScript
 
-雖然 `GoogleGenerativeAI` 是模型和即時通訊的中心點，但檔案和快取管理等其他功能通常需要匯入及例項化完全獨立的用戶端類別。
+على الرغم من أنّ `GoogleGenerativeAI` كان نقطة مركزية للنماذج والمحادثات، كانت الوظائف الأخرى، مثل إدارة الملفات وذاكرة التخزين المؤقت، تتطلّب في كثير من الأحيان استيراد وإنشاء فئات عملاء منفصلة تمامًا.
 
 ```
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -127,7 +137,7 @@ const uploadedFile = await fileManager.uploadFile(...);
 const cache = await cacheManager.create(...);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Chat;
@@ -143,7 +153,8 @@ Chat chat = client.chats.create("gemini-3.8-flash");
 
 ### Go
 
-`genai.NewClient` 函式會建立用戶端，但生成模型作業通常會在從這個用戶端取得的獨立 `GenerativeModel` 執行個體上呼叫。其他服務可能透過不同的套件或模式存取。
+أنشأت الدالة `genai.NewClient` عميلاً، ولكن عادةً ما يتم استدعاء عمليات النموذج التوليدي على مثيل `GenerativeModel` منفصل تم الحصول عليه من هذا العميل. قد يكون تم الوصول إلى خدمات أخرى من خلال
+حزم أو أنماط مختلفة.
 
 ```
 import (
@@ -164,7 +175,7 @@ cs := model.StartChat()
 uploadedFile, err := fileClient.UploadFile(...)
 ```
 
-**修改後 (集中式用戶端物件)**
+**بعد (كائن العميل المركزي)**
 
 ### Python
 
@@ -196,7 +207,7 @@ const uploadedFile = await ai.files.upload(...);
 const cache = await ai.caches.create(...);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Chat;
@@ -233,15 +244,17 @@ uploadedFile, err := client.Files.Upload(...)
 tuningJob, err := client.Tunings.Tune(...)
 ```
 
-## 驗證
+## المصادقة
 
-新舊程式庫都使用 API 金鑰進行驗證。您可以在 Google AI Studio [建立](https://aistudio.google.com/apikey?hl=zh-tw) API 金鑰。
+تتم المصادقة على المكتبات القديمة والجديدة باستخدام مفاتيح واجهة برمجة التطبيقات. يمكنك
+[إنشاء](https://aistudio.google.com/apikey?hl=ar) مفتاح واجهة برمجة التطبيقات في Google AI
+Studio.
 
-**變更前**
+**قبل**
 
 ### Python
 
-舊版 SDK 會隱含處理 API 用戶端物件。
+كانت حزمة SDK القديمة تتعامل مع عنصر عميل واجهة برمجة التطبيقات بشكل ضِمني.
 
 ```
 import google.generativeai as genai
@@ -257,7 +270,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -268,7 +281,7 @@ Client client = Client.builder().apiKey("GEMINI_API_KEY").build();
 
 ### Go
 
-匯入 Google 程式庫：
+استيراد مكتبات Google:
 
 ```
 import (
@@ -277,17 +290,19 @@ import (
 )
 ```
 
-建立用戶端：
+أنشئ العميل:
 
 ```
 client, err := genai.NewClient(ctx, option.WithAPIKey("GEMINI_API_KEY"))
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
-使用 Google GenAI SDK 時，您必須先建立 API 用戶端，才能呼叫 API。如果您未將 API 金鑰傳遞至用戶端，新版 SDK 會從 `GEMINI_API_KEY` 環境變數中擷取 API 金鑰。
+باستخدام حزمة تطوير البرامج (SDK) لـ Google GenAI، يمكنك إنشاء عميل واجهة برمجة تطبيقات أولاً، والذي يُستخدم لطلب
+واجهة برمجة التطبيقات.
+ستحصل حزمة SDK الجديدة على مفتاح واجهة برمجة التطبيقات من متغيرات بيئة `GEMINI_API_KEY`، إذا لم يتم تمرير مفتاح إلى العميل.
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
@@ -309,7 +324,7 @@ import { GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({apiKey: "GEMINI_API_KEY"});
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -321,13 +336,13 @@ Client client = new Client();
 
 ### Go
 
-匯入 GenAI 程式庫：
+استيراد مكتبة GenAI:
 
 ```
 import "google.golang.org/genai"
 ```
 
-建立用戶端：
+أنشئ العميل:
 
 ```
 client, err := genai.NewClient(ctx, &genai.ClientConfig{
@@ -335,15 +350,15 @@ client, err := genai.NewClient(ctx, &genai.ClientConfig{
 })
 ```
 
-## 生成內容
+## إنشاء محتوى
 
-### 文字
+### نص
 
-**變更前**
+**قبل**
 
 ### Python
 
-先前沒有用戶端物件，您是直接透過 `GenerativeModel` 物件存取 API。
+في السابق، لم تكن هناك عناصر عميل، بل كان بإمكانك الوصول إلى واجهات برمجة التطبيقات مباشرةً من خلال عناصر `GenerativeModel`.
 
 ```
 import google.generativeai as genai
@@ -368,7 +383,7 @@ const result = await model.generateContent(prompt);
 console.log(result.response.text());
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -401,11 +416,12 @@ if err != nil {
 printResponse(resp) // utility for printing response parts
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
-新的 Google GenAI SDK 可讓您透過 `Client` 物件存取所有 API 方法。除了少數有狀態的特殊情況 (`chat` 和 live-api `session`)，這些都是無狀態函式。為求實用性和一致性，傳回的物件為 `pydantic` 類別。
+تتيح حزمة Google GenAI SDK الجديدة الوصول إلى جميع طرق واجهة برمجة التطبيقات من خلال الكائن
+`Client`. باستثناء بعض الحالات الخاصة التي تتطلّب تتبُّع الحالة (`chat` و`session` في live-api)، فإنّ جميع هذه الدوال لا تتطلّب تتبُّع الحالة. لتحقيق الفائدة والاتساق، تكون الكائنات التي يتم عرضها من فئات `pydantic`.
 
 ```
 from google import genai
@@ -435,7 +451,7 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -465,9 +481,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-### 圖片
+### صورة
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -510,7 +526,7 @@ const result = await model.generateContent([prompt, imagePart]);
 console.log(result.response.text());
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -560,11 +576,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
-新版 SDK 包含許多相同的便利功能。舉例來說，`PIL.Image` 物件會自動轉換。
+تتوفّر العديد من ميزات الراحة نفسها في حزمة SDK الجديدة. على سبيل المثال، يتم تحويل كائنات `PIL.Image` تلقائيًا.
 
 ```
 from google import genai
@@ -605,7 +621,7 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -657,9 +673,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-### 串流
+### البث
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -692,7 +708,7 @@ for await (const chunk of result.stream) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -734,7 +750,7 @@ for {
 }
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -768,7 +784,7 @@ for await (const chunk of response) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -808,9 +824,9 @@ for result, err := range client.Models.GenerateContentStream(
 }
 ```
 
-## 設定
+## التهيئة
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -854,7 +870,7 @@ const result = await model.generateContent(
 console.log(result.response.text())
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -906,11 +922,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
-在新版 SDK 的所有方法中，必要引數都會以關鍵字引數的形式提供。所有選用輸入內容都會在 `config` 引數中提供。設定引數可以指定為 Python 字典，或 `google.genai.types` 命名空間中的 `Config` 類別。為求實用和一致，`types` 模組中的所有定義都是 `pydantic` 類別。
+بالنسبة إلى جميع الطرق في حزمة تطوير البرامج (SDK) الجديدة، يتم تقديم الوسيطات المطلوبة كوسيطات كلمات رئيسية. يتم توفير جميع المدخلات الاختيارية في الوسيطة `config`. يمكن تحديد وسيطات الإعدادات إما كقواميس Python أو فئات `Config` في مساحة الاسم `google.genai.types`. لتحقيق الفائدة والاتساق، تكون جميع التعريفات ضمن الوحدة `types` عبارة عن فئات `pydantic`.
 
 ```
 from google import genai
@@ -955,7 +971,7 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1010,11 +1026,11 @@ if err != nil {
 debugPrint(result) // utility for printing response
 ```
 
-## 安全性設定
+## إعدادات الأمان
 
-使用安全設定生成回覆：
+إنشاء ردّ باستخدام إعدادات الأمان:
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -1062,7 +1078,7 @@ try {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1090,7 +1106,7 @@ GenerateContentResponse response =
 System.out.println(response.text());
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -1142,7 +1158,7 @@ console.log("Finish reason:", response.candidates[0].finishReason);
 console.log("Safety ratings:", response.candidates[0].safetyRatings);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1170,9 +1186,9 @@ GenerateContentResponse response =
 System.out.println("Finish reason: " + response.finishReason());
 ```
 
-## 非同步
+## غير متزامنة
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -1185,11 +1201,11 @@ response = model.generate_content_async(
 )
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
-如要搭配 `asyncio` 使用新版 SDK，`client.aio` 下的每個方法都有獨立的 `async` 實作。
+لاستخدام حزمة SDK الجديدة مع `asyncio`، يجب `async`تنفيذ كل طريقة بشكل منفصل ضمن `client.aio`.
 
 ```
 from google import genai
@@ -1202,11 +1218,11 @@ response = await client.aio.models.generate_content(
 )
 ```
 
-## 即時通訊
+## محادثة
 
-開始與模型對話並傳送訊息：
+ابدأ محادثة وأرسِل رسالة إلى النموذج:
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -1247,7 +1263,7 @@ result = await chat.sendMessage("How many paws are in my house?");
 console.log(result.response.text());
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Chat;
@@ -1299,7 +1315,7 @@ if err != nil {
 printResponse(res) // utility for printing the response
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -1347,7 +1363,7 @@ const response2 = await chat.sendMessage({
 console.log("Chat response 2:", response2.text);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Chat;
@@ -1391,9 +1407,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-## 函式呼叫
+## استدعاء الدالة
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -1420,11 +1436,12 @@ response = model.generate_content("What is the weather in San Francisco?")
 function_call = response.candidates[0].parts[0].function_call
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
-在新版 SDK 中，自動呼叫函式是預設功能。在這裡停用。
+في حزمة SDK الجديدة، يكون خيار استدعاء الدوال تلقائيًا هو الخيار التلقائي. هنا، يمكنك
+تعطيله.
 
 ```
 from google import genai
@@ -1454,13 +1471,13 @@ response = client.models.generate_content(
 function_call = response.candidates[0].content.parts[0].function_call
 ```
 
-### 自動呼叫函式
+### استدعاء الدوال تلقائيًا
 
-**變更前**
+**قبل**
 
 ### Python
 
-舊版 SDK 僅支援在即時通訊中自動呼叫函式。在新版 SDK 中，這是 `generate_content` 的預設行為。
+تتيح حزمة تطوير البرامج القديمة استدعاء الدوال تلقائيًا في المحادثة فقط. في حزمة SDK الجديدة، يكون هذا هو الإعداد التلقائي في `generate_content`.
 
 ```
 import google.generativeai as genai
@@ -1478,7 +1495,7 @@ chat = model.start_chat(
 result = chat.send_message("What is the weather in San Francisco?")
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -1499,11 +1516,12 @@ response = client.models.generate_content(
 )
 ```
 
-## 執行程式碼
+## تطبيق الرموز البرمجية
 
-執行程式碼工具可讓模型生成 Python 程式碼、執行程式碼並傳回結果。
+تطبيق الرموز البرمجية هو أداة تتيح للنموذج إنشاء رموز Python البرمجية وتشغيلها
+وعرض النتيجة.
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -1540,7 +1558,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1568,7 +1586,7 @@ GenerateContentResponse response =
 System.out.println(response.text());
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -1612,7 +1630,7 @@ console.log("-".repeat(80));
 console.log("\n", response.text);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1647,11 +1665,13 @@ if (response.parts() != null) {
 System.out.println(response.text());
 ```
 
-## 以 Google 搜尋為參考依據
+## لتحديد المصادر في "بحث Google"
 
-`GoogleSearch` (Gemini 2.0 以上版本) 和 `GoogleSearchRetrieval` (Gemini 2.0 以下版本) 是 Google 提供的工具，可讓模型擷取公開網路資料，做為建立基準的依據。
+‫`GoogleSearch` (Gemini>=2.0) و`GoogleSearchRetrieval` (Gemini < 2.0) هما
+أداتان تتيحان للنموذج استرداد بيانات الويب المتاحة للجميع من أجل التحقّق من صحة الردود، وهما من تطوير
+Google.
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -1665,7 +1685,7 @@ response = model.generate_content(
 )
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -1688,15 +1708,17 @@ response = client.models.generate_content(
 )
 ```
 
-## JSON 回應
+## استجابة JSON
 
-以 JSON 格式生成答案。
+إنشاء إجابات بتنسيق JSON
 
-**變更前**
+**قبل**
 
 ### Python
 
-指定 `response_schema` 並設定 `response_mime_type="application/json"`，使用者就能限制模型按照指定結構產生 `JSON` 回覆。
+من خلال تحديد `response_schema` وضبط
+`response_mime_type="application/json"`، يمكن للمستخدمين حصر النموذج
+بإنتاج ردّ `JSON` يتّبع بنية معيّنة.
 
 ```
 import google.generativeai as genai
@@ -1759,7 +1781,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1802,11 +1824,11 @@ GenerateContentResponse response =
 System.out.println(response.text());
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
-新版 SDK 會使用 `pydantic` 類別提供結構定義 (但您可以傳遞 `genai.types.Schema` 或同等 `dict`)。SDK 會盡可能剖析傳回的 JSON，並以 `response.parsed` 傳回結果。如果您提供 `pydantic` 類別做為結構定義，SDK 會將該 `JSON` 轉換為類別例項。
+تستخدم حزمة SDK الجديدة فئات `pydantic` لتوفير المخطط (مع أنّه يمكنك تمرير `genai.types.Schema` أو ما يعادله `dict`). وعند الإمكان، ستحلّل حزمة SDK ملف JSON الذي تم عرضه، وتعرض النتيجة في `response.parsed`. إذا قدّمت فئة `pydantic` كمخطط، ستحوّل حزمة SDK هذه الفئة `JSON` إلى مثيل من الفئة.
 
 ```
 from google import genai
@@ -1863,7 +1885,7 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1906,13 +1928,13 @@ GenerateContentResponse response =
 System.out.println(response.text());
 ```
 
-## 檔案
+## الملفات
 
-### 上傳
+### تحميل
 
-上傳檔案：
+تحميل ملف:
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -1936,7 +1958,7 @@ response = model.generate_content([
 print(response.text)
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -1964,11 +1986,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### 列出及取得
+### إدراج والحصول على
 
-列出上傳的檔案，並取得指定檔案名稱的上傳檔案：
+يمكنك إدراج الملفات المحمَّلة والحصول على ملف محمَّل باسم ملف:
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -1981,7 +2003,7 @@ for file in genai.list_files():
 file = genai.get_file(name=file.name)
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -1995,11 +2017,11 @@ for file in client.files.list():
 file = client.files.get(name=file.name)
 ```
 
-### 刪除
+### حذف
 
-刪除檔案：
+لحذف ملف، اتّبِع الخطوات التالية:
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -2013,7 +2035,7 @@ dummy_file = genai.upload_file(path='dummy.txt')
 file = genai.delete_file(name=dummy_file.name)
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -2029,11 +2051,11 @@ dummy_file = client.files.upload(file='dummy.txt')
 response = client.files.delete(name=dummy_file.name)
 ```
 
-## 脈絡快取
+## التخزين المؤقت للسياق
 
-使用者可透過脈絡快取功能將內容傳送至模型一次、快取輸入權杖，然後在後續呼叫中參照快取的權杖，以降低成本。
+يتيح التخزين المؤقت للسياق للمستخدم تمرير المحتوى إلى النموذج مرة واحدة، وتخزين الرموز المميّزة للإدخال مؤقتًا، ثم الإشارة إلى الرموز المميّزة المخزّنة مؤقتًا في الطلبات اللاحقة لخفض التكلفة.
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -2105,7 +2127,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -2144,7 +2166,7 @@ GenerateContentResponse response =
 System.out.println(response.text());
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -2226,7 +2248,7 @@ const response = await ai.models.generateContent({
 console.log("Response text:", response.text);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -2265,11 +2287,11 @@ GenerateContentResponse response =
 System.out.println(response.text());
 ```
 
-## 計算詞元數
+## احتساب الرموز المميّزة
 
-計算要求中的詞元數量。
+احتساب عدد الرموز المميّزة في طلب معيّن
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -2311,7 +2333,7 @@ response = model.count_tokens(
  // { promptTokenCount: 11, candidatesTokenCount: 124, totalTokenCount: 135 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -2329,7 +2351,7 @@ GenerateContentResponse generateResult =
 System.out.println(generateResult.usageMetadata());
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -2364,7 +2386,7 @@ const generateResponse = await ai.models.generateContent({
 console.log(generateResponse.usageMetadata);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -2383,11 +2405,11 @@ GenerateContentResponse generateResponse =
 System.out.println(generateResponse.usageMetadata());
 ```
 
-## 生成圖像
+## إنشاء صور
 
-生成圖片：
+إنشاء صور:
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -2406,7 +2428,7 @@ gen_images = imagen.generate_images(
 )
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -2431,11 +2453,11 @@ for n, image in enumerate(gen_images.generated_images):
         image.image.image_bytes)
 ```
 
-## 嵌入內容
+## تضمين المحتوى
 
-生成內容嵌入。
+إنشاء تضمينات للمحتوى
 
-**變更前**
+**قبل**
 
 ### Python
 
@@ -2463,7 +2485,7 @@ const result = await model.embedContent("Hello world!");
 console.log(result.embedding);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -2476,7 +2498,7 @@ EmbedContentResponse response =
 System.out.println(response.embeddings());
 ```
 
-**變更後**
+**بعد**
 
 ### Python
 
@@ -2506,7 +2528,7 @@ const result = await ai.models.embedContent({
 console.log(result.embeddings);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -2524,12 +2546,12 @@ EmbedContentResponse result =
 System.out.println(result.embeddings());
 ```
 
-提供意見
+إرسال ملاحظات
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-上次更新時間：2026-10-15 (世界標準時間)。
+تاريخ التعديل الأخير: 2026-10-15 (حسب التوقيت العالمي المتفَّق عليه)
 
-想進一步說明嗎？
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-15 (世界標準時間)。"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-10-15 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=pl
-fetched_at: 2026-10-19T05:46:36.660203+00:00
-title: "Wyszukiwanie plik\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=he
+fetched_at: 2026-10-26T05:46:03.108010+00:00
+title: "\u05d7\u05d9\u05e4\u05d5\u05e9 \u05e7\u05d1\u05e6\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
+‫Gemini 4 Argon זמין עכשיו. [רוצים לנסות?](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=he)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Prześlij opinię
+שליחת משוב
 
-# Wyszukiwanie plików
+# חיפוש קבצים
 
-Interfejs Gemini API umożliwia generowanie wspomagane wyszukiwaniem (RAG) za pomocą narzędzia wyszukiwania plików. Wyszukiwarka plików importuje, dzieli na części i indeksuje dane, aby umożliwić szybkie wyszukiwanie odpowiednich informacji na podstawie podanego promptu. Te informacje są następnie wykorzystywane jako kontekst dla modelu, co pozwala mu udzielać dokładniejszych i trafniejszych odpowiedzi. Wyszukiwanie plików może też oferować funkcje multimodalne z wektorami dystrybucyjnymi tekstu obsługiwanymi przez `gemini-embedding-001` oraz wektorami dystrybucyjnymi obrazów i multimodalnymi obsługiwanymi przez `gemini-embedding-2`.
+‫Gemini API מאפשר לבצע Retrieval-Augmented Generation (יצירה משולבת-אחזור, RAG) באמצעות הכלי File Search. הכלי "חיפוש קבצים" מייבא את הנתונים, מחלק אותם לחלקים ומוסיף אותם לאינדקס כדי לאפשר אחזור מהיר של מידע רלוונטי על סמך הנחיה שסופקה. המידע הזה משמש כהקשר למודל, וכך הוא יכול לספק תשובות מדויקות ורלוונטיות יותר. חיפוש הקבצים יכול גם לספק יכולות מולטי-מודאליות עם הטמעות טקסט שנתמכות על ידי `gemini-embedding-001`, והטמעת תמונות/מולטי-מודאליות שנתמכת על ידי `gemini-embedding-2`.
 
-Przechowywanie plików i generowanie osadzania w momencie wysyłania zapytania jest bezpłatne. Płacisz tylko za tworzenie osadzania podczas pierwszego indeksowania plików oraz za normalne koszty tokenów wejściowych i wyjściowych modelu Gemini. Ten nowy model rozliczeń sprawia, że narzędzie do wyszukiwania plików jest łatwiejsze i bardziej opłacalne w tworzeniu i skalowaniu. Szczegółowe informacje znajdziesz w sekcji [Ceny](#pricing).
+אחסון הקבצים ויצירת ההטמעות בזמן השאילתה הם בחינם, ואתם משלמים רק על יצירת ההטמעות כשאתם מוסיפים את הקבצים לאינדקס בפעם הראשונה ועל העלות הרגילה של טוקנים של קלט ופלט במודל Gemini. המודל החדש הזה לחיוב מאפשר לבנות את הכלי לחיפוש קבצים ולהרחיב אותו בקלות וביעילות מבחינת עלויות. פרטים נוספים מופיעים בקטע [תמחור](#pricing).
 
-## Przesyłanie bezpośrednio do sklepu File Search
+## העלאה ישירה למאגר חיפוש הקבצים
 
-Ten przykład pokazuje, jak przesłać plik bezpośrednio do [wyszukiwarki plików](https://ai.google.dev/api/file-search/file-search-stores?hl=pl#method:-media.uploadtofilesearchstore):
+בדוגמה הזו אפשר לראות איך מעלים קובץ ישירות אל [מאגר החיפוש בקבצים](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-media.uploadtofilesearchstore):
 
 ### Python
 
@@ -365,11 +365,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-Więcej informacji znajdziesz w dokumentacji interfejsu API [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=pl#method:-media.uploadtofilesearchstore).
+מידע נוסף זמין במאמרי העזרה של ה-API בנושא [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-media.uploadtofilesearchstore).
 
-## Importowanie plików
+## ייבוא קבצים
 
-Możesz też przesłać istniejący plik i [zaimportować go do magazynu wyszukiwania plików](https://ai.google.dev/api/file-search/file-search-stores?hl=pl#method:-filesearchstores.importfile):
+לחלופין, אתם יכולים להעלות קובץ קיים ו[לייבא אותו למאגר החיפוש בקבצים](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-filesearchstores.importfile):
 
 ### Python
 
@@ -675,11 +675,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-Więcej informacji znajdziesz w dokumentacji interfejsu API [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=pl#method:-filesearchstores.importfile).
+מידע נוסף זמין במאמרי העזרה של ה-API בנושא [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-filesearchstores.importfile).
 
-## Konfiguracja podziału na fragmenty
+## הגדרות החלוקה לחלקים
 
-Gdy zaimportujesz plik do sklepu File Search, zostanie on automatycznie podzielony na części, osadzony, zindeksowany i przesłany do sklepu File Search. Jeśli potrzebujesz większej kontroli nad strategią dzielenia na części, możesz określić ustawienie [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=pl#request-body_5), aby ustawić maksymalną liczbę tokenów w każdej części i maksymalną liczbę nakładających się tokenów.
+כשמייבאים קובץ למאגר חיפוש קבצים, הוא מחולק באופן אוטומטי לחלקים, מוטמע, נוסף לאינדקס ומועלה למאגר חיפוש הקבצים. אם אתם צריכים יותר שליטה על אסטרטגיית החלוקה לחלקים, אתם יכולים לציין הגדרה של [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=he#request-body_5) כדי לקבוע את המספר המקסימלי של אסימונים בכל חלק ואת המספר המקסימלי של אסימונים חופפים.
 
 ### Python
 
@@ -857,39 +857,35 @@ curl "${upload_url}" \
 cat upload_response.json
 ```
 
-Aby użyć sklepu File Search, przekaż go jako narzędzie do metody `interactions.create`, jak pokazano w przykładach [przesyłania](#upload) i [importowania](#importing-files).
+כדי להשתמש במאגר של חיפוש הקבצים, מעבירים אותו ככלי ל-method‏ `interactions.create`, כמו שמוצג בדוגמאות של [העלאה](#upload) ו[ייבוא](#importing-files).
 
-## Jak to działa
+## איך זה עובד
 
-Wyszukiwanie plików wykorzystuje technikę zwaną wyszukiwaniem semantycznym, aby znaleźć informacje istotne dla prompta użytkownika. W przeciwieństwie do standardowego wyszukiwania opartego na słowach kluczowych wyszukiwanie semantyczne rozumie znaczenie i kontekst zapytania.
+חיפוש הקבצים משתמש בטכניקה שנקראת חיפוש סמנטי כדי למצוא מידע שרלוונטי להנחיה של המשתמש. בניגוד לחיפוש רגיל שמבוסס על מילות מפתח, חיפוש סמנטי מבין את המשמעות וההקשר של השאילתה.
 
-Podczas importowania pliku jest on przekształcany w reprezentacje numeryczne zwane [wektorami dystrybucyjnymi](https://ai.google.dev/gemini-api/docs/embeddings?hl=pl), które odzwierciedlają znaczenie semantyczne przesłanej treści. Te wektory dystrybycyjne są przechowywane w specjalnej bazie danych wyszukiwania plików.
-Gdy wysyłasz zapytanie, jest ono również przekształcane w wektor. Następnie system przeprowadza wyszukiwanie plików, aby znaleźć najbardziej podobne i odpowiednie fragmenty dokumentów w magazynie wyszukiwania plików.
+כשמייבאים קובץ, הוא מומר לייצוגים מספריים שנקראים [הטמעות](https://ai.google.dev/gemini-api/docs/embeddings?hl=he), שמתעדים את המשמעות הסמנטית של התוכן שהועלה. ההטמעות האלה מאוחסנות במסד נתונים ייעודי של חיפוש קבצים.
+כשאתם מזינים שאילתה, גם היא מומרת להטמעה. לאחר מכן המערכת מבצעת חיפוש קבצים כדי למצוא את קטעי המסמכים הדומים והרלוונטיים ביותר ממאגר חיפוש הקבצים.
 
-W przypadku osadzania nie ma czasu życia (TTL);
-są one przechowywane do momentu ręcznego usunięcia lub wycofania modelu. Pliki są jednak usuwane po 48 godzinach.
+אין אורך חיים (TTL) להטמעות. הן נשמרות עד למחיקה ידנית או עד שהמודל יוצא משימוש. אבל הקבצים נמחקים אחרי 48 שעות.
 
-Oto opis procesu korzystania z interfejsu File Search
-`uploadToFileSearchStore` API:
+כאן מפורט התהליך לשימוש ב-File Search API של `uploadToFileSearchStore`:
 
-1. **Utwórz magazyn wyszukiwania plików:** magazyn wyszukiwania plików zawiera przetworzone dane z Twoich plików. Jest to stały kontener na wektory dystrybucyjne, na których będzie działać wyszukiwanie semantyczne.
-2. **Przesyłanie pliku i importowanie do magazynu wyszukiwania plików**: możesz jednocześnie przesłać plik i zaimportować wyniki do magazynu wyszukiwania plików. Spowoduje to utworzenie tymczasowego obiektu `File`, który jest odwołaniem do pierwotnego dokumentu. Dane są następnie dzielone na części, przekształcane w wektory dystrybucyjne wyszukiwania plików i indeksowane. Obiekt `File` zostanie usunięty po 48 godzinach, a dane zaimportowane do magazynu wyszukiwania plików będą przechowywane bezterminowo, dopóki nie zdecydujesz się ich usunąć.
-3. **Zapytanie z wyszukiwaniem plików:** na koniec używasz narzędzia `FileSearch` w wywołaniu `generateContent`. W konfiguracji narzędzia określasz `FileSearchRetrievalResource`, który wskazuje `FileSearchStore`, którego chcesz wyszukać. Informuje to model, że ma przeprowadzić wyszukiwanie semantyczne w tym konkretnym magazynie wyszukiwania plików, aby znaleźć odpowiednie informacje, na których może oprzeć swoją odpowiedź.
+1. **יצירת מאגר חיפוש קבצים**: מאגר חיפוש קבצים מכיל את הנתונים המעובדים מהקבצים שלכם. זהו מאגר קבוע להטמעות שעליהן יפעל החיפוש הסמנטי.
+2. **העלאת קובץ וייבוא לחנות של חיפוש קבצים**: מעלים קובץ ומייבאים את התוצאות לחנות של חיפוש קבצים בו-זמנית. הפעולה הזו יוצרת אובייקט `File` זמני, שהוא הפניה למסמך הגולמי. הנתונים האלה מחולקים לחלקים, מומרים להטמעות של חיפוש קבצים ומתווספים לאינדקס. האובייקט `File` נמחק אחרי 48 שעות, והנתונים שיובאו למאגר של File Search נשמרים ללא הגבלת זמן, עד שאתם בוחרים למחוק אותם.
+3. **שאילתה עם חיפוש קבצים**: לבסוף, משתמשים בכלי `FileSearch` בקריאה ל-`generateContent`. בהגדרת הכלי, מציינים `FileSearchRetrievalResource` שמפנה אל `FileSearchStore` שרוצים לחפש. כך המודל מבצע חיפוש סמנטי במאגר הספציפי של File Search כדי למצוא מידע רלוונטי שעליו תתבסס התשובה.
 
-![Proces indeksowania i wyszukiwania plików](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=pl)
+![תהליך ההוספה לאינדקס והשאילתות של חיפוש הקבצים](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=he)
 
-Proces indeksowania i przeszukiwania w wyszukiwarce plików
+תהליך ההוספה לאינדקס והשאילתות של File Search
 
-Na tym diagramie linia przerywana od *Dokumentów* do *Modelu osadzania*
-(za pomocą [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=pl))
-reprezentuje interfejs API `uploadToFileSearchStore` (z pominięciem *Pamięci plików*).
-W przeciwnym razie użycie [interfejsu Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl) do oddzielnego tworzenia, a następnie importowania plików przenosi proces indeksowania z *Dokumentów* do *pamięci plików*, a potem do *modelu osadzania*.
+בתרשים הזה, הקו המקווקו מ*מסמכים* אל *מודל הטמעה* (באמצעות [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=he)) מייצג את `uploadToFileSearchStore` API (עוקף את *אחסון הקבצים*).
+אחרת, אם משתמשים ב-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=he) כדי ליצור קבצים בנפרד ואז לייבא אותם, תהליך ההוספה לאינדקס עובר מ*מסמכים* ל*אחסון קבצים* ואז ל*מודל הטמעה*.
 
-## Sklepy z wyszukiwarką plików
+## מאגרי חיפוש קבצים
 
-Magazyn wyszukiwania plików to kontener na wektory dystrybucyjne dokumentów. Surowe pliki przesłane za pomocą interfejsu File API są usuwane po 48 godzinach, ale dane zaimportowane do sklepu wyszukiwania plików są przechowywane bezterminowo, dopóki nie usuniesz ich ręcznie. Możesz utworzyć wiele magazynów wyszukiwania plików, aby uporządkować dokumenty. Interfejs API `FileSearchStore` umożliwia tworzenie, wyświetlanie, pobieranie i usuwanie magazynów wyszukiwania plików oraz zarządzanie nimi. Nazwy sklepów wyszukiwania plików mają zasięg globalny.
+מאגר File Search הוא מאגר להטמעות של המסמכים שלכם. קובצי נתונים גולמיים שהועלו דרך File API נמחקים אחרי 48 שעות, אבל הנתונים שיובאו למאגר של חיפוש קבצים נשמרים ללא הגבלת זמן עד שמבצעים מחיקה ידנית. אתם יכולים ליצור כמה מאגרי חיפוש קבצים כדי לארגן את המסמכים שלכם. ‫`FileSearchStore` API מאפשר ליצור, להציג, לאחזר ולמחוק מאגרי חיפוש בקבצים. שמות המאגרים של חיפוש הקבצים הם בהיקף גלובלי.
 
-Oto kilka przykładów zarządzania magazynami wyszukiwania plików:
+ריכזנו כאן כמה דוגמאות לניהול מאגרי חיפוש קבצים:
 
 ### Python
 
@@ -1026,9 +1022,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilese
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilesearchstore123?key=${GEMINI_API_KEY}"
 ```
 
-## Dokumenty wyszukiwania plików
+## מסמכים בחיפוש קבצים
 
-Możesz zarządzać poszczególnymi dokumentami w magazynach plików za pomocą interfejsu [File Search Documents](https://ai.google.dev/api/file-search/documents?hl=pl) API, aby `list` każdy dokument w magazynie wyszukiwania plików, `get` informacje o dokumencie i `delete` dokument według nazwy.
+אתם יכולים לנהל מסמכים ספציפיים במאגרי הקבצים באמצעות ה-API של [חיפוש מסמכים בקבצים](https://ai.google.dev/api/file-search/documents?hl=he) כדי `list` כל מסמך במאגר חיפוש הקבצים, `get` מידע על מסמך ו`delete` מסמך לפי שם.
 
 ### Python
 
@@ -1138,9 +1134,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilese
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilesearchstore123/documents/sampletxt123?key=${GEMINI_API_KEY}&force=true"
 ```
 
-## Metadane pliku
+## המטא-נתונים של הקבצים
 
-Do plików możesz dodawać niestandardowe metadane, aby ułatwić ich filtrowanie lub zapewnić dodatkowy kontekst. Metadane to zbiór par klucz-wartość.
+אתם יכולים להוסיף מטא-נתונים בהתאמה אישית לקבצים כדי לסנן אותם או לספק הקשר נוסף. מטא-נתונים הם קבוצה של צמדי מפתח/ערך.
 
 ### Python
 
@@ -1232,7 +1228,7 @@ func main() {
 }
 ```
 
-Jest to przydatne, gdy masz wiele dokumentów w magazynie wyszukiwania plików i chcesz przeszukać tylko ich podzbiór.
+האפשרות הזו שימושית אם יש לכם כמה מסמכים במאגר של חיפוש קבצים ואתם רוצים לחפש רק בחלק מהם.
 
 ### Python
 
@@ -1400,15 +1396,16 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 cat response.json
 ```
 
-Wskazówki dotyczące implementacji składni filtra listy dla `metadata_filter` znajdziesz na stronie [google.aip.dev/160](https://google.aip.dev/160).
+הנחיות להטמעה של תחביר מסנן רשימות ל-`metadata_filter` זמינות בכתובת [google.aip.dev/160](https://google.aip.dev/160)
 
-## Multimodalne wyszukiwanie plików
+## חיפוש קבצים מרובה מצבים
 
-Multimodalne wyszukiwanie plików umożliwia natywne umieszczanie i wyszukiwanie obrazów, co pozwala na tworzenie rozbudowanych, multimodalnych aplikacji RAG.
+חיפוש קבצים מולטימודאלי מאפשר לכם להטמיע ולחפש תמונות באופן מקורי,
+וכך ליצור אפליקציות RAG מולטימודאליות עשירות.
 
-### Konfigurowanie modelu wektora dystrybucyjnego
+### הגדרת מודל ההטמעה
 
-Podczas tworzenia `FileSearchStore` musisz zastąpić domyślny model wektorów dystrybucyjnych tylko tekstowych, aby używać modelu multimodalnego. Użyj `models/gemini-embedding-2`, aby przetwarzać zarówno tekst, jak i obrazy.
+כשיוצרים `FileSearchStore`, צריך להגדיר מודל מולטי-מודאלי במקום מודל ברירת המחדל להטמעה של טקסט בלבד. אפשר להשתמש ב-`models/gemini-embedding-2` כדי לעבד גם טקסט וגם תמונות.
 
 ### Python
 
@@ -1490,20 +1487,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/fileSearchStores?
     }'
 ```
 
-### Prześlij obrazy
+### העלאת תמונות
 
-Po utworzeniu magazynu z modelem wektorów dystrybucyjnych multimodalnych możesz przesyłać pliki graficzne bezpośrednio za pomocą tych samych interfejsów API do przesyłania, które opisano w sekcji [Bezpośrednie przesyłanie do magazynu wyszukiwania plików](#upload) lub [Importowanie plików](#importing-files).
+אחרי שיוצרים את המאגר עם מודל הטמעה מולטימודלי, אפשר להעלות קובצי תמונות ישירות באמצעות אותם ממשקי API להעלאה שמתוארים בקטע [העלאה ישירה למאגר של File Search](#upload) או [ייבוא קבצים](#importing-files).
 
-**Wymagania dotyczące plików graficznych:**
+**הדרישות לגבי קובצי תמונות:**
 
-- Pliki graficzne mogą mieć rozdzielczość maksymalnie 4K x 4K pikseli.
-- Obsługiwane formaty to PNG i JPEG.
+- הרזולוציה של קובצי התמונות צריכה להיות 4K על 4K פיקסלים לכל היותר.
+- הפורמטים הנתמכים הם PNG ו-JPEG.
 
-## Cytaty
+## ציטוטים ביבליוגרפיים
 
-Gdy korzystasz z wyszukiwania plików, odpowiedź modelu może zawierać cytaty wskazujące, które części przesłanych dokumentów zostały użyte do wygenerowania odpowiedzi. Pomaga to w weryfikacji informacji.
+כשאתם משתמשים בחיפוש בקבצים, התשובה של המודל עשויה לכלול ציטוטים שמציינים אילו חלקים מהמסמכים שהעליתם שימשו ליצירת התשובה. זה עוזר לבדוק עובדות ולאמת אותן.
 
-Informacje o cytatach znajdziesz w atrybucie `annotations` w blokach `content` kroku `model_output` w odpowiedzi.
+אפשר לגשת לפרטי הציטוט דרך המאפיין `annotations` בתוך הבלוקים `content` של השלב `model_output` בתשובה.
 
 ### Python
 
@@ -1656,12 +1653,12 @@ func main() {
 }
 ```
 
-Szczegółowe informacje o strukturze cytatów znajdziesz w [dokumentacji API do interakcji](https://ai.google.dev/api/interactions-api?hl=pl#Resource:FileCitation).
+למידע מפורט על מבנה הציטוטים, ראו [מאמרי העזרה של ה-API לאינטראקציות](https://ai.google.dev/api/interactions-api?hl=he#Resource:FileCitation).
 
-### Numery stron
+### מספרי דפים
 
-Gdy używasz wyszukiwania plików w dokumentach, które mają strony (np. w plikach PDF), odpowiedź modelu może zawierać numer strony, na której znaleziono informacje.
-Dostęp do tych informacji można uzyskać za pomocą atrybutu `page_number` adnotacji `file_citation`.
+כשמשתמשים בחיפוש קבצים במסמכים עם דפים (כמו קובצי PDF), התשובה של המודל עשויה לכלול את מספר הדף שבו נמצא המידע.
+אפשר לגשת למידע הזה דרך המאפיין `page_number` של הערת `file_citation`.
 
 ### Python
 
@@ -1834,11 +1831,11 @@ func main() {
 }
 ```
 
-### Cytowania w mediach
+### ציטוטים של מדיה
 
-Gdy model odwołuje się do fragmentu obrazu podczas generowania, interfejs API zwraca w adnotacjach adnotację typu `file_citation`, która zawiera `media_id`. Możesz użyć tego identyfikatora, aby pobrać dokładny fragment obrazu, do którego odnosi się model. Ten identyfikator `media_id` jest trwały w przypadku wielu wywołań wyszukiwania, co pozwala na niezawodne pobieranie tego samego obrazu lub zapisywanie go w pamięci podręcznej przy użyciu identyfikatora.
+כשהמודל מתייחס לחלק של תמונה במהלך היצירה, ה-API מחזיר הערה מהסוג `file_citation` בהערות שכוללת `media_id`. אתם יכולים להשתמש במזהה הזה כדי להוריד את החלק המדויק בתמונה שהמודל התייחס אליו. הערך של `media_id` נשמר בקריאות חיפוש מרובות, וכך אפשר לאחזר באופן מהימן את אותה תמונה או לשמור אותה במטמון באמצעות המזהה.
 
-Poniższy fragment kodu to przykład kroku odpowiedzi REST:
+קטע הקוד הבא הוא דוגמה לשלב של תגובת REST:
 
 ```
 {
@@ -1859,7 +1856,7 @@ Poniższy fragment kodu to przykład kroku odpowiedzi REST:
 }
 ```
 
-Poniższe fragmenty kodu pokazują, jak pobrać `media_id` i pobrać multimedia:
+קטעי הקוד הבאים מדגימים איך מאחזרים את `media_id` ומורידים את המדיה:
 
 ### Python
 
@@ -2024,9 +2021,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1/fileSearchStores/my-st
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Niestandardowe metadane
+## מטא-נתונים בהתאמה אישית
 
-Jeśli do plików dodano niestandardowe metadane, możesz uzyskać do nich dostęp w adnotacjach do odpowiedzi modelu. Jest to przydatne do przekazywania dodatkowego kontekstu (np. adresów URL, numerów stron lub autorów) z dokumentów źródłowych do logiki aplikacji. Każda adnotacja cytatu typu `file_citation` zawiera te niestandardowe metadane.
+אם הוספתם מטא-נתונים בהתאמה אישית לקבצים, אתם יכולים לגשת אליהם בהערות של התשובה מהמודל. האפשרות הזו שימושית להעברת הקשר נוסף (כמו כתובות URL, מספרי דפים או מחברים) ממסמכי המקור ללוגיקה של האפליקציה. כל הערת ציטוט מסוג `file_citation` מכילה את המטא-נתונים המותאמים אישית האלה.
 
 ### Python
 
@@ -2214,9 +2211,9 @@ func main() {
 }
 ```
 
-## Uporządkowane dane wyjściowe
+## פלט מובנה
 
-Począwszy od modeli Gemini 3, możesz łączyć narzędzie do wyszukiwania plików z [ustrukturyzowanymi danymi wyjściowymi](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl).
+החל ממודלים של Gemini 3, אפשר לשלב את הכלי לחיפוש קבצים עם [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he).
 
 ### Python
 
@@ -2440,29 +2437,29 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Obsługiwane modele
+## מודלים נתמכים
 
-Wyszukiwanie plików obsługują te modele:
+המודלים הבאים תומכים בחיפוש קבצים:
 
-| Model | Wyszukiwanie plików |
+| מודל | חיפוש קבצים |
 | --- | --- |
-| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=pl) | ✔️ |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=pl) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=pl) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=pl) | ✔️ |
-| [Gemini 3.1 Pro (wersja testowa)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pl) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pl) | ✔️ |
-| [Gemini 3 Flash (wersja testowa)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=pl) | ✔️ |
+| ‫[Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=he) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=he) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=he) | ✔️ |
+| ‫[Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=he) | ✔️ |
+| [גרסת טרום-השקה של Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=he) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=he) | ✔️ |
+| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=he) | ✔️ |
 
-## Obsługiwane kombinacje narzędzi
+## שילובים נתמכים של כלים
 
-Modele Gemini 4 i Gemini 3 obsługują łączenie wbudowanych narzędzi (takich jak wyszukiwanie plików) z narzędziami niestandardowymi (wywoływanie funkcji). Więcej informacji znajdziesz na stronie [Kombinacje narzędzi](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl).
+המודלים Gemini 4 ו-Gemini 3 תומכים בשילוב של כלים מובנים (כמו חיפוש קבצים) עם כלים בהתאמה אישית (קריאה לפונקציות). מידע נוסף זמין בדף [שילובים של כלים](https://ai.google.dev/gemini-api/docs/tool-combination?hl=he).
 
-## Obsługiwane typy plików
+## סוגי קבצים נתמכים
 
-Wyszukiwanie plików obsługuje szeroką gamę formatów plików wymienionych w sekcjach poniżej.
+התכונה "חיפוש קבצים" תומכת במגוון רחב של פורמטים של קבצים, שמפורטים בקטעים הבאים.
 
-### Typy plików aplikacji
+### סוגי קבצים של אפליקציות
 
 - `application/dart`
 - `application/ecmascript`
@@ -2495,7 +2492,7 @@ Wyszukiwanie plików obsługuje szeroką gamę formatów plików wymienionych w 
 - `application/xml`
 - `application/zip`
 
-### Typy plików tekstowych
+### סוגי קבצים של טקסט
 
 - `text/1d-interleaved-parityfec`
 - `text/RED`
@@ -2654,40 +2651,40 @@ Wyszukiwanie plików obsługuje szeroką gamę formatów plików wymienionych w 
 - `text/xml-external-parsed-entity`
 - `text/yaml`
 
-## Ograniczenia
+## מגבלות
 
-- **Live API:** wyszukiwanie plików nie jest obsługiwane w [Live API](https://ai.google.dev/gemini-api/docs/live?hl=pl).
-- **Niezgodność narzędzi:** wbudowanych narzędzi do powiązania ze źródłami informacji nie można ze sobą łączyć. Na przykład w tym samym żądaniu nie można używać wyszukiwania plików jednocześnie z [powiązaniem ze źródłami informacji przy użyciu wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl) ani z [kontekstem adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl).
+- ‫**Live API:** חיפוש קבצים לא נתמך ב-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=he).
+- **אי-תאימות בין כלים:** אי אפשר לשלב בין כלי העיגון המובנים. לדוגמה, אי אפשר להשתמש בחיפוש קבצים בו-זמנית עם [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) או עם [URL Context](https://ai.google.dev/gemini-api/docs/url-context?hl=he) באותה בקשה.
 
-### Ograniczenia liczby żądań
+### מגבלות קצב
 
-Aby zapewnić stabilność usługi, interfejs File Search API ma te limity:
+כדי לשמור על יציבות השירות, ל-File Search API יש את המגבלות הבאות:
 
-- **Maksymalny rozmiar pliku / limit na dokument:** 100 MB
-- **Łączny rozmiar magazynów wyszukiwania plików w projekcie** (na podstawie poziomu użytkownika):
-  - **Bezpłatnie:** 1 GB
-  - **Poziom 1:** 10 GB
-  - **Poziom 2:** 100 GB
-  - **Poziom 3:** 1 TB
-- **Zalecenie:** aby zapewnić optymalne opóźnienia pobierania, ogranicz rozmiar każdego magazynu wyszukiwania plików do mniej niż 20 GB.
+- **גודל הקובץ המקסימלי / מגבלה לכל מסמך**: 100MB
+- **הגודל הכולל של מאגרי חיפוש הקבצים בפרויקט** (בהתאם לרמת המשתמש):
+  - **בחינם**: 1GB
+  - **רמה 1**: 10GB
+  - **רמה 2**: 100GB
+  - **רמה 3**: 1TB
+- **המלצה**: כדי להבטיח זמן אחזור אופטימלי, מומלץ להגביל את הגודל של כל מאגר נתונים של חיפוש קבצים ל-20GB.
 
-## Ceny
+## תמחור
 
-- Opłaty za wektoryzację są naliczane w momencie indeksowania na podstawie obowiązującego [cennika wektorów](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#gemini-embedding-2).
-- Przechowywanie jest bezpłatne.
-- Wektory dystrybucyjne czasu zapytania są bezpłatne.
-- Pobrane tokeny dokumentów są rozliczane jako zwykłe [tokeny kontekstu](https://ai.google.dev/gemini-api/docs/tokens?hl=pl).
+- החיוב על הטמעות מתבצע בזמן ההוספה לאינדקס, בהתאם ל[תמחור הקיים של הטמעות](https://ai.google.dev/gemini-api/docs/pricing?hl=he#gemini-embedding-2).
+- האחסון הוא בחינם.
+- הטמעות של שאילתות בזמן אמת הן בחינם.
+- הטוקנים של המסמכים שאוחזרו מחויבים כמו [טוקנים רגילים של הקשר](https://ai.google.dev/gemini-api/docs/tokens?hl=he).
 
-## Co dalej?
+## המאמרים הבאים
 
-- Zapoznaj się z dokumentacją interfejsu API [File Search Stores](https://ai.google.dev/api/file-search/file-search-stores?hl=pl) i File Search [Documents](https://ai.google.dev/api/file-search/documents?hl=pl).
+- אפשר לעיין במאמרי העזרה של ה-API בנושא [מאגרי חיפוש קבצים](https://ai.google.dev/api/file-search/file-search-stores?hl=he) ו[מסמכים](https://ai.google.dev/api/file-search/documents?hl=he) של חיפוש קבצים.
 
-Prześlij opinię
+שליחת משוב
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ostatnia aktualizacja: 2026-10-13 UTC.
+עדכון אחרון: 2026-10-13 (שעון UTC).
 
-Chcesz przekazać coś jeszcze?
+רוצה לתת לנו משוב?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-10-13 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-10-13 (שעון UTC)."],[],[]]

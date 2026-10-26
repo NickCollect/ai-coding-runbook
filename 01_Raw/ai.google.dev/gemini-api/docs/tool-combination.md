@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi
-fetched_at: 2026-10-19T05:38:00.703429+00:00
-title: "\u092a\u0939\u0932\u0947 \u0938\u0947 \u092e\u094c\u091c\u0942\u0926 \u091f\u0942\u0932 \u0914\u0930 \u092b\u093c\u0902\u0915\u094d\u0936\u0928 \u0915\u0949\u0932\u093f\u0902\u0917 \u0915\u094b \u090f\u0915 \u0938\u093e\u0925 \u0907\u0938\u094d\u0924\u0947\u092e\u093e\u0932 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr
+fetched_at: 2026-10-26T06:00:13.545716+00:00
+title: "Yerle\u015fik ara\u00e7lar\u0131 ve i\u015flev \u00e7a\u011fr\u0131lar\u0131n\u0131 birle\u015ftirme \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-सुझाव भेजें
+Geri bildirim gönderin
 
-# पहले से मौजूद टूल और फ़ंक्शन कॉलिंग को एक साथ इस्तेमाल करना
+# Yerleşik araçları ve işlev çağrılarını birleştirme
 
-Gemini में, [पहले से मौजूद टूल](https://ai.google.dev/gemini-api/docs/tools?hl=hi), जैसे कि `google_search`, और [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) (इसे *कस्टम टूल* भी कहा जाता है) को एक साथ इस्तेमाल किया जा सकता है. इसके लिए, टूल कॉल के कॉन्टेक्स्ट के इतिहास को सेव किया जाता है और उसे दिखाया जाता है. इसमें पहले से मौजूद और कस्टम टूल के कॉम्बिनेशन इस्तेमाल किए जा सकते हैं. इससे, एजेंट के तौर पर काम करने वाले जटिल वर्कफ़्लो बनाए जा सकते हैं. उदाहरण के लिए, मॉडल आपके कारोबार के खास नियमों को लागू करने से पहले, रीयल-टाइम में वेब डेटा का इस्तेमाल कर सकता है.
+Gemini, araç çağrılarının bağlam geçmişini koruyup göstererek `google_search` gibi [yerleşik araçların](https://ai.google.dev/gemini-api/docs/tools?hl=tr) ve [işlev çağrılarının](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) (*özel araçlar* olarak da bilinir) tek bir etkileşimde birleştirilmesine olanak tanır. Yerleşik ve özel araç kombinasyonları, karmaşık ve temsilci tabanlı iş akışlarına olanak tanır. Örneğin, model belirli bir iş mantığınızı çağırmadan önce gerçek zamanlı web verilerine dayalı olarak çalışabilir.
 
-यहां एक उदाहरण दिया गया है, जिसमें `google_search` और कस्टम फ़ंक्शन `getWeather` की मदद से, बिल्ट-इन और कस्टम टूल के कॉम्बिनेशन को चालू किया गया है:
+Aşağıda, `google_search` ve özel bir işlev `getWeather` ile yerleşik ve özel araç kombinasyonlarını etkinleştiren bir örnek verilmiştir:
 
 ### Python
 
@@ -150,7 +150,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -230,87 +230,87 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## यह कैसे काम करता है
+## İşleyiş şekli
 
-Gemini 3 मॉडल, *टूल के कॉन्टेक्स्ट को शेयर करने की सुविधा* का इस्तेमाल करते हैं. इससे, पहले से मौजूद और कस्टम टूल के कॉम्बिनेशन को चालू किया जा सकता है. टूल के कॉन्टेक्स्ट को शेयर करने की सुविधा की मदद से, पहले से मौजूद टूल के कॉन्टेक्स्ट को सुरक्षित रखा जा सकता है और उसे दिखाया जा सकता है. साथ ही, उसे एक ही इंटरैक्शन में कस्टम टूल के साथ शेयर किया जा सकता है.
+Gemini 3 modelleri, yerleşik ve özel araç kombinasyonlarını etkinleştirmek için *araç bağlamı dolaşımını* kullanır. Araç bağlamı dolaşımı, yerleşik araçların bağlamını koruyup göstermeyi ve aynı etkileşimdeki özel araçlarla paylaşmayı mümkün kılar.
 
-### टूल कॉम्बिनेशन की सुविधा चालू करना
+### Araç kombinasyonunu etkinleştirme
 
-- [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi#function-declarations) को उन बिल्ट-इन टूल के साथ शामिल करें जिनका इस्तेमाल आपको करना है. इससे कॉम्बिनेशन बिहेवियर ट्रिगर होगा.
+- Birleştirme davranışını tetiklemek için kullanmak istediğiniz yerleşik araçlarla birlikte [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#function-declarations) öğesini ekleyin.
 
-### एपीआई से मिले जवाब में शामिल चरण
+### API, adımları döndürür
 
-इंटरैक्शन के जवाब में, एपीआई पहले से मौजूद टूल कॉल और फ़ंक्शन (कस्टम टूल) कॉल के लिए अलग-अलग चरण दिखाता है:
+API, etkileşim yanıtında yerleşik araç çağrıları ve işlev (özel araç) çağrıları için ayrı adımlar döndürür:
 
-- **पहले से मौजूद टूल के चरण**: एपीआई इन्हें अपने-आप मैनेज करता है. इससे, बातचीत के हर चरण में कॉन्टेक्स्ट बना रहता है.
-- **फ़ंक्शन कॉल के चरण**: एपीआई, आपके कस्टम फ़ंक्शन के लिए `function_call` चरण दिखाता है. फ़ंक्शन को लागू करें और नतीजे वापस दें.
+- **Yerleşik araç adımları**: API, bunları otomatik olarak yöneterek sıralar arasında bağlamı korur.
+- **İşlev çağrısı adımları**: API, özel işlevleriniz için `function_call` adım döndürür. İşlevi yürütür ve sonucu geri sağlarsınız.
 
-### जवाब में मिले चरणों में मौजूद ज़रूरी फ़ील्ड
+### Döndürülen adımlardaki kritik alanlar
 
-जवाब में मिले चरणों में कुछ फ़ील्ड, टूल के संदर्भ को बनाए रखने और टूल के कॉम्बिनेशन को चालू करने के लिए ज़रूरी होते हैं:
+Döndürülen adımlardaki belirli alanlar, araç bağlamını korumak ve araç kombinasyonlarını etkinleştirmek için çok önemlidir:
 
-- **`id`**: `function_call` और `function_response` चरण में मिला. यह एक यूनीक आइडेंटिफ़ायर होता है, जो कॉल को उसके रिस्पॉन्स से मैप करता है.
-- **`signature`**: यह `thought` चरणों के साथ-साथ, Gemini 3 और इसके बाद के मॉडल के लिए, टूल कॉल (जैसे, `function_call`) और नतीजे (जैसे, `function_response`) वाले सभी चरणों में मिलता है. एन्क्रिप्ट किए गए इस कॉन्टेक्स्ट की मदद से, अलग-अलग इंटरैक्शन के दौरान **टूल के कॉन्टेक्स्ट को सर्कुलेट** किया जा सकता है.
+- **`id`**: `function_call` ve `function_response` adımlarında bulunur. Bir aramayı yanıtıyla eşleyen benzersiz tanımlayıcı.
+- **`signature`**: `thought` adımlarında ve Gemini 3+ modelleri için tüm araç çağrısı (ör. `function_call`) ve sonuç (ör. `function_response`) adımlarında bulunur. Bu şifrelenmiş bağlam, etkileşimler arasında **araç bağlamı dolaşımını** sağlar.
 
-**इन फ़ील्ड को मैनेज करना:**
+**Bu alanları yönetme:**
 
-- **स्टेटफ़ुल मोड (सुझाया गया)**: `previous_interaction_id` का इस्तेमाल करने पर, सर्वर `id` और `signature`, दोनों फ़ील्ड को अपने-आप मैनेज करता है.
-- **स्टेटलेस मोड**: बातचीत के इतिहास को मैन्युअल तरीके से मैनेज करते समय, आपको यह पक्का करना होगा कि आपने बाद के अनुरोधों में, `id` और `signature`, दोनों फ़ील्ड को मॉडल में वापस पास किया हो. इससे, प्रामाणिकता की पुष्टि की जा सकेगी और कॉन्टेक्स्ट को बनाए रखा जा सकेगा. अगर आपने पूरे जवाब वाले ऑब्जेक्ट को इतिहास में वापस भेज दिया है, तो आधिकारिक एसडीके इसे अपने-आप मैनेज कर लेते हैं.
+- **Durum bilgili mod (önerilir):** `previous_interaction_id` kullandığınızda sunucu, hem `id` hem de `signature` alanlarını otomatik olarak işler.
+- **Durum Bilgisiz Mod**: Konuşma geçmişini manuel olarak yönetirken, kimliği doğrulamak ve bağlamı korumak için sonraki isteklerde hem `id` hem de `signature` alanlarını modele geri ilettiğinizden emin olmanız gerekir. Tam yanıt nesnesini geçmişe geri iletirseniz resmi SDK'lar bunu otomatik olarak işler.
 
-### टूल के हिसाब से डेटा
+### Araca özel veriler
 
-कुछ बिल्ट-इन टूल, उपयोगकर्ता को दिखने वाले डेटा आर्ग्युमेंट दिखाते हैं. ये आर्ग्युमेंट, टूल टाइप के हिसाब से अलग-अलग होते हैं.
+Bazı yerleşik araçlar, araç türüne özel ve kullanıcı tarafından görülebilen veri bağımsız değişkenleri döndürür.
 
-| टूल | उपयोगकर्ता को दिखने वाले टूल कॉल आर्ग्युमेंट (अगर कोई है) | उपयोगकर्ता को दिखने वाला टूल का जवाब (अगर कोई है) |
+| Araç | Kullanıcı tarafından görülebilen araç çağrısı bağımsız değişkenleri (varsa) | Kullanıcı tarafından görülebilen araç yanıtı (varsa) |
 | --- | --- | --- |
 | **google\_search** | `queries` | `search_suggestions` |
 | **google\_maps** | `queries` | `places` `google_maps_widget_context_token` |
-| **url\_context** | `urls` ब्राउज़ किए जाने वाले यूआरएल | `status`: ब्राउज़ करने की स्थिति `retrieved_url`: ब्राउज़ किए गए यूआरएल |
-| **file\_search** | कोई नहीं | कोई नहीं |
+| **url\_context** | `urls` Göz atılacak URL'ler | `status`: Göz atma durumu `retrieved_url`: Göz atılan URL'ler |
+| **file\_search** | Yok | Yok |
 
-## टोकन और कीमत
+## Jetonlar ve fiyatlandırma
 
-ध्यान दें कि अनुरोधों में मौजूद, पहले से मौजूद टूल कॉल के हिस्सों को `prompt_token_count` में गिना जाता है. टूल के इस्तेमाल से जुड़े ये इंटरमीडिएट चरण अब आपको दिखते हैं और इनका डेटा आपको वापस मिल जाता है. इसलिए, ये बातचीत के इतिहास का हिस्सा होते हैं. यह सिर्फ़ *अनुरोधों* के लिए है, *जवाबों* के लिए नहीं.
+İsteklerdeki yerleşik araç çağrısı bölümlerinin `prompt_token_count` sınırına dahil edildiğini unutmayın. Bu ara araç adımları artık görünür ve size geri döndürüldüğü için görüşme geçmişinin bir parçasıdır. Bu durum yalnızca *istekler* için geçerlidir, *yanıtlar* için geçerli değildir.
 
-Google Search टूल पर यह नियम लागू नहीं होता. Google Search, क्वेरी लेवल पर पहले से ही अपना प्राइसिंग मॉडल लागू करता है. इसलिए, टोकन के लिए दो बार शुल्क नहीं लिया जाता. ज़्यादा जानकारी के लिए, [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) पेज देखें.
+Google Arama aracı bu kuralın istisnasıdır. Google Arama, sorgu düzeyinde kendi fiyatlandırma modelini zaten uyguladığından jetonlar iki kez ücretlendirilmez ([Fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) sayfasına bakın).
 
-ज़्यादा जानकारी के लिए, [टोकन](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) पेज पढ़ें.
+Daha fazla bilgi için [Parçalar](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) sayfasını okuyun.
 
-## सीमाएं
+## Sınırlamalar
 
-- टूल के कॉन्टेक्स्ट को शेयर करने की सुविधा चालू होने पर, डिफ़ॉल्ट रूप से `validated` मोड चालू होता है. `auto` मोड काम नहीं करता.
-- `google_search` जैसे पहले से मौजूद टूल, जगह और मौजूदा समय की जानकारी पर निर्भर करते हैं. इसलिए, अगर आपके `system_instruction` या `function_declaration.description` में जगह और समय की जानकारी अलग-अलग है, तो टूल कॉम्बिनेशन की सुविधा ठीक से काम नहीं करेगी.
+- Araç bağlamı dolaşımı etkinleştirildiğinde varsayılan olarak `validated` moduna (`auto` modu desteklenmez) geçin.
+- `google_search` gibi yerleşik araçlar konum ve mevcut saat bilgilerini kullandığından `system_instruction` veya `function_declaration.description` cihazınızda çakışan konum ve saat bilgileri varsa araç kombinasyonu özelliği iyi çalışmayabilir.
 
-## इन टूल के साथ काम करता है
+## Desteklenen araçlar
 
-सर्वर-साइड (पहले से मौजूद) टूल पर, टूल के कॉन्टेक्स्ट को सर्कुलेट करने की स्टैंडर्ड प्रोसेस लागू होती है.
-कोड एक्ज़ीक्यूशन भी सर्वर-साइड टूल है. हालांकि, इसमें कॉन्टेक्स्ट सर्कुलेशन के लिए, पहले से मौजूद समाधान होता है. कंप्यूटर का इस्तेमाल और फ़ंक्शन कॉलिंग, क्लाइंट-साइड टूल हैं. इनमें कॉन्टेक्स्ट सर्कुलेशन के लिए पहले से मौजूद समाधान भी होते हैं.
+Standart araç bağlamı dolaşımı, sunucu tarafı (yerleşik) araçlar için geçerlidir.
+Kod yürütme de sunucu tarafı bir araçtır ancak bağlam dolaşımı için kendi yerleşik çözümüne sahiptir. Bilgisayar Kullanımı ve işlev çağrısı, istemci tarafı araçlardır ve bağlam dolaşımı için yerleşik çözümleri de vardır.
 
-| टूल | प्रोग्राम चलाने वाला पक्ष | कॉन्टेक्स्ट सर्कुलेशन सपोर्ट |
+| Araç | Yürütme tarafı | Bağlam Dolaşımı Desteği |
 | --- | --- | --- |
-| [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=hi) | सर्वर-साइड | समर्थित |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi) | सर्वर-साइड | समर्थित |
-| [यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi) | सर्वर-साइड | समर्थित |
-| [फ़ाइल खोजना](https://ai.google.dev/gemini-api/docs/file-search?hl=hi) | सर्वर-साइड | समर्थित |
-| [कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi) | सर्वर-साइड | सपोर्ट करता है (पहले से मौजूद है, `code_execution` और `code_execution_result` चरणों का इस्तेमाल करता है) |
-| [कंप्यूटर का इस्तेमाल](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi) | क्लाइंट-साइड | इस्तेमाल किया जा सकता है (पहले से मौजूद है, `function_call` और `function_response` चरणों का इस्तेमाल करता है) |
-| [कस्टम फ़ंक्शन](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) | क्लाइंट-साइड | इस्तेमाल किया जा सकता है (पहले से मौजूद है, `function_call` और `function_response` चरणों का इस्तेमाल करता है) |
+| [Google Arama](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) | Sunucu tarafı | Destekleniyor |
+| [Google Haritalar](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr) | Sunucu tarafı | Destekleniyor |
+| [URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr) | Sunucu tarafı | Destekleniyor |
+| [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) | Sunucu tarafı | Destekleniyor |
+| [Kod Yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr) | Sunucu tarafı | Destekleniyor (yerleşik, `code_execution` ve `code_execution_result` adımlarını kullanır) |
+| [Bilgisayar Kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) | İstemci tarafı | Desteklenir (yerleşik, `function_call` ve `function_response` adımlarını kullanır) |
+| [Özel işlevler](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) | İstemci tarafı | Desteklenir (yerleşik, `function_call` ve `function_response` adımlarını kullanır) |
 
-## आगे क्या करना है
+## Sırada ne var?
 
-- Gemini API में [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) के बारे में ज़्यादा जानें.
-- इन टूल के साथ काम करने की सुविधा उपलब्ध है:
-  - [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)
-  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)
-  - [यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)
-  - [फ़ाइल सर्च](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)
+- Gemini API'deki [işlev çağrısı](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) hakkında daha fazla bilgi edinin.
+- Desteklenen araçları keşfedin:
+  - [Google Arama](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)
+  - [Google Haritalar](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)
+  - [URL Bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)
+  - [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)
 
-सुझाव भेजें
+Geri bildirim gönderin
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-आखिरी बार 2026-10-13 (UTC) को अपडेट किया गया.
+Son güncelleme tarihi: 2026-10-13 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-10-13 (UTC) को अपडेट किया गया."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-13 UTC."],[],[]]

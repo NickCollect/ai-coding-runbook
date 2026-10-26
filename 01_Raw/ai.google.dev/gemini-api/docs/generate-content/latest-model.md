@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=zh-TW
-fetched_at: 2026-10-19T05:54:55.999728+00:00
+fetched_at: 2026-10-26T06:01:13.156486+00:00
 title: "Gemini 4 Argon \u65b0\u529f\u80fd \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

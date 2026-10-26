@@ -1,37 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=es-419
-fetched_at: 2026-10-19T05:58:12.446997+00:00
-title: "Resoluci\u00f3n de contenido multimedia \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-TW
+fetched_at: 2026-10-26T05:53:01.464790+00:00
+title: "\u5a92\u9ad4\u89e3\u6790\u5ea6 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=es-419)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
 
-Enviar comentarios
+提供意見
 
-# Resolución de contenido multimedia
+# 媒體解析度
 
-El parámetro `media_resolution` controla cómo la API de Gemini procesa las entradas de contenido multimedia, como imágenes, videos, audio y documentos PDF, ya que determina la **cantidad máxima de tokens** asignados para las entradas de contenido multimedia, lo que te permite equilibrar la calidad de la respuesta con la latencia y el costo. Si bien las entradas visuales y de documentos escalan la asignación de tokens según el parámetro de configuración de resolución, las entradas de audio se tokenizan a una tasa fija por segundo en todos los niveles de resolución. Para conocer los
-diferentes parámetros de configuración, los valores predeterminados y cómo se corresponden con los tokens, consulta la sección
-[Recuento de tokens](#token-counts).
+`media_resolution` 參數可控管 Gemini API 處理媒體輸入內容 (例如圖片、影片、音訊和 PDF 文件) 的方式，方法是決定分配給媒體輸入內容的**權杖數量上限**，讓您在回覆品質、延遲時間和成本之間取得平衡。視覺和文件輸入內容會根據解析度設定調整詞元分配，而音訊輸入內容則會以每秒固定的速率，在所有解析度層級進行詞元化。如要瞭解不同設定的預設值，以及這些設定如何對應至權杖，請參閱「[權杖計數](#token-counts)」一節。
 
-Puedes configurar la resolución de contenido multimedia de dos maneras:
+您可以透過下列兩種方式設定媒體解析度：
 
-- [Por parte](#per-part-media-resolution) (modelos Gemini 4 y Gemini 3)
-- [De forma global](#global-media-resolution) para una solicitud `generateContent` completa (todos los modelos multimodales)
+- [每部分](#per-part-media-resolution) (Gemini 4 和 Gemini 3 模型)
+- [全域](#global-media-resolution)：適用於整個 `generateContent` 要求 (所有多模態模型)
 
-## Resolución de contenido multimedia por parte (Gemini 4 y Gemini 3)
+## 各部分媒體解析度 (Gemini 4 和 Gemini 3)
 
-Gemini 4 y Gemini 3 te permiten establecer la resolución de contenido multimedia para objetos de contenido multimedia individuales dentro de tu solicitud, lo que ofrece una optimización detallada del uso de tokens. Puedes combinar niveles de resolución en una sola solicitud. Por ejemplo, usar alta resolución para un diagrama complejo y baja resolución para una imagen contextual. Este parámetro de configuración anula cualquier configuración global para una parte específica. Para conocer la configuración predeterminada,
-consulta la sección [Recuento de tokens](#token-counts).
+Gemini 4 和 Gemini 3 可讓您為要求中的個別媒體物件設定媒體解析度，精細調整權杖用量。您可以在單一要求中混合解析度等級。例如，複雜的圖表使用高解析度，情境圖片則使用低解析度。這項設定會覆寫特定零件的任何全域設定。如要瞭解預設設定，請參閱「[詞元數](#token-counts)」一節。
 
 ### Python
 
@@ -134,11 +131,9 @@ curl -s -X POST \
   -d @request.json
 ```
 
-## Resolución de contenido multimedia global
+## 全球媒體解析度
 
-Puedes establecer una resolución predeterminada para todas las partes de contenido multimedia en una solicitud con `GenerationConfig`. Esto es compatible con todos los modelos multimodales. Si una solicitud
-incluye parámetros de configuración globales y [por parte](#per-part-media-resolution), el
-parámetro de configuración por parte tiene prioridad para ese elemento específico.
+您可以使用 `GenerationConfig`，為要求中的所有媒體元件設定預設解析度。所有多模態模型都支援這項功能。如果要求同時包含全域和[每個部分的設定](#per-part-media-resolution)，系統會優先採用該特定項目的每個部分設定。
 
 ### Python
 
@@ -206,100 +201,95 @@ curl -s -X POST \
   }'
 ```
 
-## Valores de resolución disponibles
+## 可用的解析度值
 
-La API de Gemini define los siguientes niveles para la resolución de contenido multimedia:
+Gemini API 定義了下列媒體解析度等級：
 
-- `MEDIA_RESOLUTION_UNSPECIFIED`: Es el parámetro de configuración predeterminado. El recuento de tokens para este nivel varía significativamente entre Gemini 3 y los modelos de Gemini anteriores.
-- `MEDIA_RESOLUTION_LOW`: Recuento de tokens más bajo, lo que genera un procesamiento más rápido y un costo menor, pero con menos detalles.
-- `MEDIA_RESOLUTION_MEDIUM`: Un equilibrio entre detalles, costo y latencia.
-- `MEDIA_RESOLUTION_HIGH`: Recuento de tokens más alto, que proporciona más detalles para que el modelo funcione, a costa de una mayor latencia y costo.
-- `MEDIA_RESOLUTION_ULTRA_HIGH` (solo por parte): Recuento de tokens más alto, necesario para casos de uso
-  específicos, como el [uso de computadoras](https://ai.google.dev/gemini-api/docs/computer-use?hl=es-419).
+- `MEDIA_RESOLUTION_UNSPECIFIED`：預設設定。Gemini 3 和早期 Gemini 模型的詞元數有顯著差異。
+- `MEDIA_RESOLUTION_LOW`：詞元數較少，處理速度較快且成本較低，但細節較少。
+- `MEDIA_RESOLUTION_MEDIUM`：在詳細程度、成本和延遲時間之間取得平衡。
+- `MEDIA_RESOLUTION_HIGH`：詞元數較高，可為模型提供更多細節，但延遲時間和成本會增加。
+- `MEDIA_RESOLUTION_ULTRA_HIGH` (僅限每個部分)：詞元數上限，適用於[電腦使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-tw)等特定用途。
 
-Ten en cuenta que `MEDIA_RESOLUTION_HIGH` proporciona el rendimiento óptimo para la mayoría de los casos de uso.
+請注意，`MEDIA_RESOLUTION_HIGH` 可為大多數用途提供最佳效能。
 
-La cantidad exacta de tokens generados para cada uno de estos niveles depende del **tipo de contenido multimedia** (imagen, video, audio, PDF) y de la **versión del modelo**.
+每個層級產生的確切權杖數量取決於**媒體類型** (圖片、影片、音訊、PDF) 和**模型版本**。
 
-## Recuento de tokens
+## 詞元數
 
-En las siguientes tablas, se resumen los recuentos de tokens aproximados para cada valor `media_resolution` y tipo de contenido multimedia por familia de modelos.
+下表列出各模型系列中，每個 `media_resolution` 值和媒體類型的約略詞元數。
 
-**Modelos de Gemini 3**
+**Gemini 3 模型**
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **MediaResolution** | **Imagen** | **Video** | **Audio** | **PDF** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` (predeterminado) | 1120 | 70 | 25 (por segundo) | 560 |
-| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 25 (por segundo) | 280 + texto nativo |
-| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 25 (por segundo) | 560 + texto nativo |
-| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | 25 (por segundo) | 1120 + texto nativo |
+| **MediaResolution** | **圖片** | **影片** | **音訊** | **PDF** |
+| `MEDIA_RESOLUTION_UNSPECIFIED` (預設) | 1120 | 70 | 25 (每秒) | 560 |
+| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 25 (每秒) | 280 + 原生文字 |
+| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 25 (每秒) | 560 + 原生文字 |
+| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | 25 (每秒) | 1120 + 原生文字 |
 | `MEDIA_RESOLUTION_ULTRA_HIGH` | 2240 | N/A | N/A | N/A |
 
-**Modelos de Gemini 2.5**
+**Gemini 2.5 模型**
 
 |  |  |  |  |  |  |
 | --- | --- | --- | --- | --- | --- |
-| **MediaResolution** | **Imagen** | **Video** | **Audio** | **PDF (escaneado)** | **PDF (nativo)** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` (predeterminado) | 256 + desplazamiento lateral y escaneo (~2048) | 256 | 32 (por segundo) | 256 + OCR | 256 + texto nativo |
-| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 32 (por segundo) | 64 + OCR | 64 + texto nativo |
-| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 32 (por segundo) | 256 + OCR | 256 + texto nativo |
-| `MEDIA_RESOLUTION_HIGH` | 256 + desplazamiento lateral y escaneo | 256 | 32 (por segundo) | 256 + OCR | 256 + texto nativo |
+| **MediaResolution** | **圖片** | **影片** | **音訊** | **PDF (掃描)** | **PDF (原生)** |
+| `MEDIA_RESOLUTION_UNSPECIFIED` (預設) | 256 + 平移和掃描 (~2048) | 256 | 32 (每秒) | 256 + OCR | 256 + 原生文字 |
+| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 32 (每秒) | 64 + OCR | 64 + 原生文字 |
+| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 32 (每秒) | 256 + OCR | 256 + 原生文字 |
+| `MEDIA_RESOLUTION_HIGH` | 256 + Pan & Scan | 256 | 32 (每秒) | 256 + OCR | 256 + 原生文字 |
 
-## Cómo elegir la resolución correcta
+## 選擇合適的解析度
 
-- **Predeterminado (`UNSPECIFIED`):** Comienza con el valor predeterminado. Está optimizado para lograr un buen equilibrio entre calidad, latencia y costo para los casos de uso más comunes.
-- **`LOW`:** Úsalo en situaciones en las que el costo y la latencia son fundamentales, y los detalles precisos son menos importantes.
-- **`MEDIUM` / `HIGH`:** Aumenta la resolución cuando la tarea requiere comprender detalles complejos dentro del contenido multimedia. Esto suele ser necesario para el análisis visual complejo, la lectura de gráficos o la comprensión de documentos densos.
-- **`ULTRA HIGH`** : Solo está disponible para la configuración por parte. Se recomienda para casos de uso específicos, como el uso de computadoras o cuando las pruebas muestran una mejora clara en comparación con `HIGH`.
-- **Control por parte (Gemini 4 y Gemini 3):** Optimiza el uso de tokens. Por ejemplo, en una instrucción con varias imágenes, usa `HIGH` para un diagrama complejo y `LOW` o `MEDIUM` para imágenes contextuales más simples.
+- **預設 (`UNSPECIFIED`)：**從預設值開始。這個模型經過調整，可在最常見的用途中，兼顧品質、延遲時間和成本。
+- **`LOW`：**適用於成本和延遲時間至關重要，但細節精確度較不重要的情境。
+- **`MEDIUM` / `HIGH`：**如果工作需要理解媒體中的複雜細節，請提高解析度。這通常適用於複雜的圖像分析、解讀圖表或理解內容密集的檔案。
+- **`ULTRA HIGH`** - 僅適用於依零件設定。建議用於特定用途，例如電腦使用，或測試結果顯示 `HIGH` 明顯優於其他選項時。
+- **Per-part control (Gemini 4 和 Gemini 3)：**最佳化權杖用量。舉例來說，在包含多張圖片的提示中，請使用 `HIGH` 處理複雜的圖表，並使用 `LOW` 或 `MEDIUM` 處理較簡單的背景圖片。
 
-**Configuración recomendada**
+**建議設定**
 
-En la siguiente lista, se indican los parámetros de configuración de resolución de contenido multimedia recomendados para cada tipo de contenido multimedia compatible.
+以下列出每種支援媒體類型的建議媒體解析度設定。
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **Tipo de contenido multimedia** | **Parámetro de configuración recomendado** | **Tokens máx.** | **Orientación de uso** |
-| **Imágenes** | `MEDIA_RESOLUTION_HIGH` | 1120 | Se recomienda para la mayoría de las tareas de análisis de imágenes para garantizar la máxima calidad. |
-| **PDFs** | `MEDIA_RESOLUTION_MEDIUM` | 560 | Es óptimo para la comprensión de documentos; la calidad suele saturarse en `medium`. Aumentar a `high` rara vez mejora los resultados de OCR para documentos estándar. |
-| **Video** (general) | `MEDIA_RESOLUTION_LOW` (o `MEDIA_RESOLUTION_MEDIUM`) | 70 (por fotograma) | **Nota:** En el caso de los videos, los parámetros de configuración `low` y `medium` se tratan de forma idéntica (70 tokens) para optimizar el uso del contexto. Esto es suficiente para la mayoría de las tareas de reconocimiento y descripción de acciones. |
-| **Video** (con mucho texto) | `MEDIA_RESOLUTION_HIGH` | 280 (por fotograma) | Solo es necesario cuando el caso de uso implica leer texto denso (OCR) o detalles pequeños dentro de los fotogramas de video. |
-| **Audio** | `MEDIA_RESOLUTION_UNSPECIFIED` (predeterminado) | 25 (por segundo) para Gemini 3; 32 (por segundo) para Gemini 2.5 | El audio se tokeniza a una tasa fija por segundo en todos los parámetros de configuración de resolución compatibles (`unspecified`, `low`, `medium` y `high`). |
+| **媒體類型** | **建議設定** | **詞元數上限** | **使用指南** |
+| **Google 圖片** | `MEDIA_RESOLUTION_HIGH` | 1120 | 建議用於大多數圖像分析工作，確保最高品質。 |
+| **PDF** | `MEDIA_RESOLUTION_MEDIUM` | 560 | 最適合用於瞭解文件內容，品質通常會在 `medium` 達到飽和。`high`很少能提升標準文件的 OCR 結果。 |
+| **影片** (一般) | `MEDIA_RESOLUTION_LOW` (或 `MEDIA_RESOLUTION_MEDIUM`) | 70 (每影格) | **注意：**為最佳化脈絡使用情形，影片的 `low` 和 `medium` 設定會視為相同 (70 個詞元)。這足以應付大多數動作辨識和描述工作。 |
+| **影片** (文字內容較多) | `MEDIA_RESOLUTION_HIGH` | 280 (每個影格) | 只有在用途涉及讀取密集文字 (OCR) 或影片影格中的細節時，才需要此參數。 |
+| **音訊** | `MEDIA_RESOLUTION_UNSPECIFIED` (預設) | Gemini 3：25 (每秒)；Gemini 2.5：32 (每秒) | 在所有支援的解析度設定 (`unspecified`、`low`、`medium` 和 `high`) 中，音訊會以每秒固定的速率權杖化。 |
 
-Siempre prueba y evalúa el impacto de los diferentes parámetros de configuración de resolución en tu aplicación específica para encontrar el mejor equilibrio entre calidad, latencia y costo.
+請務必測試及評估不同解析度設定對特定應用程式的影響，在品質、延遲時間和成本之間取得最佳平衡。
 
-## Relación con los modos de procesamiento de video
+## 與影片處理模式的關係
 
-Los parámetros `media_resolution` y de procesamiento controlan diferentes aspectos de la entrada de video:
+`media_resolution` 和處理參數可控制影片輸入的不同層面：
 
-- `media_resolution` controla la **resolución** de cada fotograma (cantidad de tokens por fotograma).
-- `processing` / `media_processing` controla **qué contenido del video** se carga en el contexto.
+- `media_resolution` 控制每個影格的**解析度** (每個影格的權杖數量)。
+- `processing` / `media_processing` 控制項**會將影片中的哪些內容**載入至環境。
 
-Puedes configurar ambos en la misma entrada de video. Por ejemplo, puedes usar el procesamiento de agentes con baja resolución de contenido multimedia para minimizar el uso total de tokens en un video largo.
+你可以在同一個影片輸入中設定兩者。舉例來說，您可能會使用代理處理程序和低媒體解析度，盡量減少長影片的權杖總用量。
 
-Para obtener detalles sobre los modos de procesamiento de video, consulta la guía [Comprensión de videos de agentes](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=es-419#agentic-video-understanding).
+如要進一步瞭解影片處理模式，請參閱「[代理式影片解讀](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=zh-tw#agentic-video-understanding)」指南。
 
-## Resumen de compatibilidad de versiones
+## 版本相容性摘要
 
-- La enumeración `MediaResolution` está disponible para todos los modelos que admiten entrada de contenido multimedia.
-- Los recuentos de tokens asociados con cada nivel de enumeración **difieren** entre los modelos de Gemini 4 y Gemini 3, y las versiones anteriores de Gemini.
-- La configuración de `media_resolution` en objetos `Part` individuales **se admite en los modelos de Gemini 4 y Gemini 3**.
+- `MediaResolution` 列舉適用於所有支援媒體輸入的模型。
+- Gemini 4 / Gemini 3 模型和早期 Gemini 版本的每個列舉層級，其詞元數**不同**。
+- **Gemini 4 和 Gemini 3 模型**支援在個別 `Part` 物件上設定 `media_resolution`。
 
-## Próximos pasos
+## 後續步驟
 
-- Obtén más información sobre las capacidades multimodales de la API de Gemini en las guías
-  [Comprensión de imágenes](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=es-419),
-  [Comprensión de videos](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=es-419),
-  [Comprensión de audio](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=es-419) y
-  [Comprensión de documentos](https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=es-419).
+- 如要進一步瞭解 Gemini API 的多模態功能，請參閱[圖片理解](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=zh-tw)、[影片理解](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=zh-tw)、[音訊理解](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=zh-tw)和[文件理解](https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=zh-tw)指南。
 
-Enviar comentarios
+提供意見
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Última actualización: 2026-10-13 (UTC)
+上次更新時間：2026-10-13 (世界標準時間)。
 
-¿Quieres brindar más información?
+想進一步說明嗎？
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-13 (UTC)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-13 (世界標準時間)。"],[],[]]

@@ -1,67 +1,67 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=tr
-fetched_at: 2026-10-19T05:49:37.788099+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=th
+fetched_at: 2026-10-26T05:45:14.691558+00:00
 title: "Gemini 3.8 Live Extended Thinking \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
+Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Geri bildirim gönderin
+ส่งความคิดเห็น
 
 # Gemini 3.8 Live Extended Thinking
 
-Gemini 3.8 Live Extended Thinking, yüksek akıl yürütme özelliğine sahip sesli etkileşimlerde karmaşık ve çok adımlı sorunları çözerken daha fazla arka plan akıl yürütme gerektiğinde önerilen, sesli etkileşimden sesli etkileşime akıl yürütme modelimizdir. Sürekli sesli yanıtlar akışını yaparken arka planda gerekçelendirme ve eşzamansız araç çağrılarını işler.
+Gemini 3.8 Live Extended Thinking เป็นโมเดลเสียงต่อเสียงที่มีการให้เหตุผลสูง ซึ่งแนะนำให้ใช้เมื่อต้องการการให้เหตุผลเบื้องหลังที่สูงขึ้นสำหรับการแก้ปัญหาที่ซับซ้อนและมีหลายขั้นตอนในระหว่างการโต้ตอบด้วยเสียงแบบเรียลไทม์ โดยจะประมวลผลการให้เหตุผลในเบื้องหลังและการเรียกใช้เครื่องมือแบบอะซิงโครนัสขณะสตรีมการตอบกลับด้วยเสียงอย่างต่อเนื่อง
 
-[Google AI Studio'da deneme](https://aistudio.google.com/live?model=gemini-3.8-live-extended-thinking&hl=tr)
+[ลองใช้ใน Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live-extended-thinking&hl=th)
 
-## Belgeler
+## เอกสารประกอบ
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr) kılavuzunu ziyaret edin.
+ดูคู่มือ [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=th) เพื่อดูข้อมูลทั้งหมดเกี่ยวกับฟีเจอร์และความสามารถ
 
 ## gemini-3.8-live-extended-thinking
 
-| Mülk | Açıklama |
+| พร็อพเพอร์ตี้ | คำอธิบาย |
 | --- | --- |
-| id\_cardModel kodu | `gemini-3.8-live-extended-thinking` |
-| saveDesteklenen veri türleri | **Girişler**  Metin, resim, ses, video  **Çıkış**  Metin ve ses |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  131.072  **Çıkış jetonu sınırı**  65.536 |
-| handymanÖzellikler | **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Destekleniyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Desteklenmiyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Desteklenmiyor  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Desteklenmiyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Desteklenir (yalnızca eş zamansız)  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Desteklenmiyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Destekleniyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Destekleniyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Desteklenmiyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)** (Thinking)  Destekleniyor  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Desteklenmiyor |
-| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Desteklenmiyor |
-| 123Sürümler | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Kararlı: `gemini-3.8-live-extended-thinking` |
-| calendar\_monthSon güncelleme | Eylül 2026 |
-| id\_cardModel kartı | [Model kartı](https://deepmind.google/models/model-cards/gemini-3-8-audio/?hl=tr) |
+| id\_cardรหัสรุ่น | `gemini-3.8-live-extended-thinking` |
+| saveประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ เสียง  **เอาต์พุต**  ข้อความและเสียง |
+| token\_autoขีดจำกัดโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  131,072  **ขีดจำกัดโทเค็นเอาต์พุต**  65,536 |
+| handymanความสามารถ | **[การสร้างเสียง](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)**  สิ่งที่ทำได้  **[การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th)**  สิ่งที่ทำไม่ได้  **[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)**  สิ่งที่ทำไม่ได้  **[การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)**  สิ่งที่ทำไม่ได้  **[การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)**  รองรับ (Async เท่านั้น)  **[การเชื่อมต่อแหล่งข้อมูลกับ Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)**  สิ่งที่ทำไม่ได้  **[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)**  สิ่งที่ทำไม่ได้  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=th)**  สิ่งที่ทำได้  **[การเชื่อมต่อแหล่งข้อมูลของ Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)**  สิ่งที่ทำได้  **[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)**  สิ่งที่ทำไม่ได้  **[กำลังคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)**  สิ่งที่ทำได้  **[บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th)**  สิ่งที่ทำไม่ได้ |
+| speedตัวเลือกการรับชม | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)**  สิ่งที่ทำไม่ได้ |
+| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ที่[รูปแบบเวอร์ชันโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - เสถียร: `gemini-3.8-live-extended-thinking` |
+| calendar\_monthอัปเดตล่าสุด | กันยายน 2569 |
+| id\_cardModel card | [การ์ดโมเดล](https://deepmind.google/models/model-cards/gemini-3-8-audio/?hl=th) |
 
-## Gemini 3.8 Live Extended Thinking'e yükseltme
+## การอัปเกรดเป็น Gemini 3.8 Live ที่มีการคิดที่นานขึ้น
 
-Gemini 3.8 Live Extended Thinking, canlı ses oturumları sırasında arka plan muhakemesi özelliğini sunar. Bu modeli entegre ederken istemci durumu yönetiminizi eşzamansız muhakeme sinyallerini işleyecek şekilde güncelleyin:
+Gemini 3.8 Live Extended Thinking เปิดตัวการให้เหตุผลในเบื้องหลังระหว่างเซสชันเสียงแบบเรียลไทม์ เมื่อผสานรวมโมเดลนี้ ให้อัปเดตการจัดการสถานะไคลเอ็นต์เพื่อจัดการสัญญาณการให้เหตุผลแบบอะซิงโครนัส ดังนี้
 
-- **Asenkron muhakeme protokolü**: Asenkron muhakeme kullanan modellerle etkileşimde bulunurken `turnComplete: true` artık modelin boşta olduğunu belirtmiyor. Sunucu, arka planda akıl yürütme veya araç çağrılarını işlemeye devam edebilir. İstemciniz, `turnComplete: true` geldikten sonra sonraki sunucu mesajlarını (ör. araç çağrıları veya ses çerçeveleri) dinlemeye devam etmelidir.
-- **İzleme `interaction_status`**: Geçerli sunucu durumunu belirlemek için gelen sunucu mesajlarındaki `interaction_status` alanını kullanın:
-  - `IN_PROGRESS`: Sunucu, kullanıcı girişini etkin bir şekilde işliyor, arka planda akıl yürütme yapıyor veya eşzamansız araç çağrıları için yanıt bekliyor.
-    Ek model çıkışı veya araç çağrıları gelebilir.
-  - `IDLE`: Sunucu tüm işleme, muhakeme ve araç çağrılarını tamamlamıştır.
-    Oturum boşta ve kullanıcı girişi bekleniyor.
-- **Eşzamansız işlev çağrısı**: Yalnızca eşzamansız engellemeyen yürütme (`behavior: NON_BLOCKING`) desteklenir. Eşzamanlı engelleme modu desteklenmez ve kesin bir hata döndürür. İşlev planlama yapılandırmaları desteklenmez.
-- **Yapılandırmayı düşünme**: Kurulum yapılandırmanızda (`thinking_level`: `low`, `medium` veya `high`) `thinking_config` kullanarak arka plan gerekçelendirmesini yapılandırın. `MINIMAL` desteklenmez.
-- **İstemci içeriği güncellemeleri**: `send_client_content`, açık rollerle (`user` veya `model`) tüm oturum yaşam döngüsü boyunca desteklenir. `turn_complete=true` ayarı, etkin oluşturma işlemini anında kesintiye uğratır.
-- **Proaktif ses**: Kalıcı olarak etkindir. `proactive_audio: false` ayarı hata döndürüyor.
+- **โปรโตคอลการให้เหตุผลแบบอะซิงโครนัส**: เมื่อโต้ตอบกับโมเดลที่ใช้การให้เหตุผลแบบอะซิงโครนัส `turnComplete: true` จะไม่ระบุว่าโมเดลไม่มีการใช้งานอีกต่อไป เซิร์ฟเวอร์อาจประมวลผลการให้เหตุผลในเบื้องหลังหรือการเรียกใช้เครื่องมือต่อไป ไคลเอ็นต์ของคุณต้องฟังข้อความจากเซิร์ฟเวอร์ที่ตามมา (เช่น การเรียกใช้เครื่องมือหรือเฟรมเสียง) ต่อไปหลังจากที่ `turnComplete: true` มาถึง
+- **การตรวจสอบ `interaction_status`**: ใช้ช่อง `interaction_status` ในข้อความเซิร์ฟเวอร์ขาเข้าเพื่อระบุสถานะปัจจุบันของเซิร์ฟเวอร์
+  - `IN_PROGRESS`: เซิร์ฟเวอร์กำลังประมวลผลอินพุตของผู้ใช้ เรียกใช้การให้เหตุผลในเบื้องหลัง หรือรอการตอบกลับสำหรับการเรียกใช้เครื่องมือแบบอะซิงโครนัส
+    อาจมีเอาต์พุตโมเดลหรือการเรียกใช้เครื่องมือเพิ่มเติมตามมา
+  - `IDLE`: เซิร์ฟเวอร์ประมวลผล การให้เหตุผล และการเรียกใช้เครื่องมือเสร็จสิ้นแล้ว
+    เซสชันไม่มีการใช้งานและกำลังรอข้อมูลจากผู้ใช้
+- **การเรียกใช้ฟังก์ชันแบบอะซิงโครนัส**: รองรับเฉพาะการดำเนินการแบบอะซิงโครนัสที่ไม่บล็อก (`behavior: NON_BLOCKING`) เท่านั้น ระบบไม่รองรับโหมดการบล็อกแบบซิงโครนัสและจะแสดงข้อผิดพลาดร้ายแรง ระบบไม่รองรับการกำหนดค่าการตั้งเวลาฟังก์ชัน
+- **การกำหนดค่าการคิด**: กำหนดค่าการให้เหตุผลเบื้องหลังโดยใช้ `thinking_config` ในการกำหนดค่าการตั้งค่า (`thinking_level`: `low`, `medium` หรือ `high`) โปรดทราบว่าระบบไม่รองรับ `MINIMAL`
+- **การอัปเดตเนื้อหาของไคลเอ็นต์**: ระบบรองรับ `send_client_content` ตลอดวงจรของเซสชันทั้งหมดโดยมีบทบาทที่ชัดเจน (`user` หรือ `model`) การตั้งค่า `turn_complete=true` จะขัดจังหวะการสร้างที่ทำงานอยู่ทันที
+- **เสียงเชิงรุก**: เปิดใช้อย่างถาวร การตั้งค่า `proactive_audio: false` จะแสดงข้อผิดพลาด
 
-Tüm Live API modelleri arasındaki özellik karşılaştırması için [Model karşılaştırma](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=tr#model-comparison) tablosuna bakın.
+ดูตาราง[การเปรียบเทียบโมเดล](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=th#model-comparison)เพื่อเปรียบเทียบฟีเจอร์ในโมเดล Live API ทั้งหมด
 
-Geri bildirim gönderin
+ส่งความคิดเห็น
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Son güncelleme tarihi: 2026-09-17 UTC.
+อัปเดตล่าสุด 2026-10-19 UTC
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-17 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-10-19 UTC"],[],[]]

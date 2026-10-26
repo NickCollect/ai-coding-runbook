@@ -1,36 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=fr
-fetched_at: 2026-10-19T05:36:55.889421+00:00
-title: "Agent de recherche avec Gemini et LlamaIndex \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=tr
+fetched_at: 2026-10-26T05:56:26.187565+00:00
+title: "Gemini ve LlamaIndex ile ara\u015ft\u0131rma temsilcisi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
+Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Envoyer des commentaires
+Geri bildirim gönderin
 
-# Agent de recherche avec Gemini et LlamaIndex
+# Gemini ve LlamaIndex ile araştırma temsilcisi
 
-LlamaIndex est un framework permettant de créer des agents de connaissances à l'aide de LLM connectés à vos données. Cet exemple vous montre comment créer un workflow multi-agents pour un agent de recherche. Dans LlamaIndex, les [`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
-sont les éléments constitutifs des systèmes mono-agent et multi-agents.
+LlamaIndex, verilerinize bağlı LLM'leri kullanarak bilgi aracıları oluşturmaya yönelik bir çerçevedir. Bu örnekte, bir Araştırma Ajanı için çoklu ajan iş akışının nasıl oluşturulacağı gösterilmektedir. LlamaIndex'te [`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/), temsilci ve çoklu temsilci sistemlerinin yapı taşlarıdır.
 
-Vous avez besoin d'une clé API Gemini. Si vous n'en avez pas encore, vous pouvez [en obtenir une dans Google AI Studio](https://aistudio.google.com/apikey?hl=fr).
-Commencez par installer toutes les bibliothèques LlamaIndex requises. LlamaIndex utilise le package `google-genai` en arrière-plan.
+Gemini API anahtarına ihtiyacınız vardır. Henüz bir hesabınız yoksa [Google AI Studio'da hesap oluşturabilirsiniz](https://aistudio.google.com/apikey?hl=tr).
+Öncelikle, gerekli tüm LlamaIndex kitaplıklarını yükleyin. LlamaIndex, arka planda `google-genai` paketini kullanır.
 
 ```
 pip install llama-index llama-index-utils-workflow llama-index-llms-google-genai llama-index-tools-google
 ```
 
-## Configurer Gemini dans LlamaIndex
+## LlamaIndex'te Gemini'ı kurma
 
-Le moteur de tout agent LlamaIndex est un LLM qui gère le raisonnement et le traitement du texte. Cet exemple utilise Gemini 3 Flash. Assurez-vous de [définir votre clé API en tant que variable d'environnement](https://ai.google.dev/gemini-api/docs/api-key?hl=fr).
+Herhangi bir LlamaIndex aracının motoru, akıl yürütme ve metin işlemeyi gerçekleştiren bir LLM'dir. Bu örnekte Gemini 3 Flash kullanılmaktadır. [API anahtarınızı ortam değişkeni olarak ayarladığınızdan](https://ai.google.dev/gemini-api/docs/api-key?hl=tr) emin olun.
 
 ```
 import os
@@ -42,10 +41,11 @@ assert 'GEMINI_API_KEY' in os.environ
 llm = GoogleGenAI(model="gemini-3.6-flash")
 ```
 
-## Outils de compilation
+## Derleme araçları
 
-Les agents utilisent des outils pour interagir avec le monde extérieur, comme effectuer des recherches sur le Web ou stocker des informations. Les [outils de LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/) peuvent être des fonctions Python standards ou être importés à partir de `ToolSpecs` préexistants.
-Gemini est fourni avec un outil intégré pour utiliser la recherche Google, qui est utilisé ici.
+Aracı, web'de arama yapmak veya bilgi depolamak gibi dış dünyayla etkileşim kurmak için araçları kullanır. [LlamaIndex'teki araçlar](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)
+normal Python işlevleri olabilir veya önceden var olan `ToolSpecs`'dan içe aktarılabilir.
+Gemini, Google Arama'yı kullanmak için yerleşik bir araçla birlikte gelir. Burada bu araç kullanılır.
 
 ```
 from google.genai import types
@@ -60,21 +60,21 @@ llm_with_search = GoogleGenAI(
 )
 ```
 
-Testez maintenant l'instance LLM avec une requête nécessitant une recherche. Ce guide suppose qu'une boucle d'événements est en cours d'exécution (comme `python -m asyncio` ou Google Colab).
+Şimdi LLM örneğini arama gerektiren bir sorguyla test edin. Bu kılavuzda, çalışan bir etkinlik döngüsü (ör. `python -m asyncio` veya Google Colab) olduğu varsayılır.
 
 ```
 response = await llm_with_search.acomplete("What's the weather like today in Biarritz?")
 print(response)
 ```
 
-L'agent de recherche utilisera des fonctions Python comme outils. Il existe de nombreuses façons de créer un système pour effectuer cette tâche. Dans cet exemple, vous utiliserez les éléments suivants :
+Araştırma Aracısı, Python işlevlerini araç olarak kullanır. Bu görevi gerçekleştirecek bir sistem oluşturmanın birçok yolu vardır. Bu örnekte aşağıdakileri kullanacaksınız:
 
-1. `search_web` utilise Gemini avec la recherche Google pour rechercher des informations sur le Web concernant le thème donné.
-2. `record_notes` enregistre les recherches trouvées sur le Web dans l'état afin que les autres outils puissent les utiliser.
-3. `write_report` rédige le rapport à l'aide des informations trouvées par `ResearchAgent`.
-4. `review_report` examine le rapport et fournit des commentaires.
+1. `search_web`, verilen konuyla ilgili bilgileri web'de aramak için Google Arama ile Gemini'ı kullanır.
+2. `record_notes`, web'de bulunan araştırmaları diğer araçların kullanabilmesi için duruma kaydeder.
+3. `write_report`, `ResearchAgent` tarafından bulunan bilgileri kullanarak raporu yazar.
+4. `review_report` raporu inceler ve geri bildirim sağlar.
 
-La classe `Context` transmet l'état entre les agents/outils, et chaque agent aura accès à l'état actuel du système.
+`Context` sınıfı, durumları aracılar/araçlar arasında aktarır ve her aracı, sistemin mevcut durumuna erişebilir.
 
 ```
 from llama_index.core.workflow import Context
@@ -109,18 +109,18 @@ async def review_report(ctx: Context, review: str) -> str:
     return "Report reviewed."
 ```
 
-## Créer un assistant multi-agents
+## Birden çok temsilcinin yer aldığı bir asistan oluşturma
 
-Pour créer un système multi-agent, vous devez définir les agents et leurs interactions.
-Votre système comportera trois agents :
+Çoklu temsilci sistemi oluşturmak için temsilcileri ve etkileşimlerini tanımlarsınız.
+Sisteminizde üç temsilci bulunur:
 
-1. Un `ResearchAgent` recherche des informations sur le Web concernant le sujet donné.
-2. Un `WriteAgent` rédige le rapport à l'aide des informations trouvées par le `ResearchAgent`.
-3. Un `ReviewAgent` examine le rapport et fournit des commentaires.
+1. `ResearchAgent`, verilen konuyla ilgili bilgi için web'de arama yapar.
+2. `WriteAgent`, `ResearchAgent` tarafından bulunan bilgileri kullanarak raporu yazar.
+3. Bir `ReviewAgent` raporu inceler ve geri bildirim sağlar.
 
-Cet exemple utilise la classe `AgentWorkflow` pour créer un système multi-agents qui exécutera ces agents dans l'ordre. Chaque agent prend un `system_prompt` qui lui indique ce qu'il doit faire et suggère comment travailler avec les autres agents.
+Bu örnekte, `AgentWorkflow` sınıfı kullanılarak bu aracıları sırayla yürütecek çok aracılı bir sistem oluşturuluyor. Her aracı, ne yapması gerektiğini söyleyen ve diğer aracılarla nasıl çalışılacağını öneren bir `system_prompt` alır.
 
-Vous pouvez éventuellement aider votre système multi-agents en spécifiant les autres agents avec lesquels il peut communiquer à l'aide de `can_handoff_to` (sinon, il tentera de le déterminer lui-même).
+İsteğe bağlı olarak, `can_handoff_to` kullanarak çoklu aracı sisteminizin hangi diğer aracılarla konuşabileceğini belirterek sisteminize yardımcı olabilirsiniz (Aksi takdirde, sistem bunu kendi başına bulmaya çalışır).
 
 ```
 from llama_index.core.agent.workflow import (
@@ -170,7 +170,7 @@ review_agent = FunctionAgent(
 )
 ```
 
-Les agents sont définis. Vous pouvez maintenant créer le `AgentWorkflow` et l'exécuter.
+Aracıları tanımladığınıza göre artık `AgentWorkflow` oluşturup uygulayabilirsiniz.
 
 ```
 from llama_index.core.agent.workflow import AgentWorkflow
@@ -186,7 +186,7 @@ agent_workflow = AgentWorkflow(
 )
 ```
 
-Pendant l'exécution du workflow, vous pouvez diffuser des événements, des appels d'outils et des mises à jour vers la console.
+İş akışı yürütülürken etkinlikleri, araç çağrılarını ve güncellemeleri konsola aktarabilirsiniz.
 
 ```
 from llama_index.core.agent.workflow import (
@@ -234,7 +234,7 @@ async for event in handler.stream_events():
         print(f"  With arguments: {event.tool_kwargs}")
 ```
 
-Une fois le workflow terminé, vous pouvez imprimer le résultat final du rapport, ainsi que l'état final de l'examen par l'agent.
+İş akışı tamamlandıktan sonra raporun nihai çıktısını ve inceleme aracısının nihai inceleme durumunu yazdırabilirsiniz.
 
 ```
 state = await handler.ctx.store.get("state")
@@ -242,24 +242,24 @@ print("Report Content:\n", state["report_content"])
 print("\n------------\nFinal Review:\n", state["review"])
 ```
 
-## Aller plus loin avec les workflows personnalisés
+## Özel iş akışlarıyla daha fazlasını yapın
 
-Le `AgentWorkflow` est un excellent moyen de se lancer dans les systèmes multi-agents. Mais que faire si vous avez besoin de plus de contrôle ? Vous pouvez créer un workflow de A à Z. Voici quelques raisons pour lesquelles vous pouvez créer votre propre workflow :
+`AgentWorkflow`, çoklu aracı sistemlerini kullanmaya başlamak için harika bir yöntemdir. Ancak daha fazla kontrole ihtiyacınız varsa ne yapmalısınız? Sıfırdan bir iş akışı oluşturabilirsiniz. Kendi iş akışınızı oluşturmak isteyebileceğiniz bazı nedenler şunlardır:
 
-- **Meilleur contrôle du processus** : vous pouvez décider du chemin exact que vos agents doivent suivre. Cela inclut la création de boucles, la prise de décisions à certains moments ou le fait de faire travailler les agents en parallèle sur différentes tâches.
-- **Utilisez des données complexes** : allez au-delà du texte brut. Les workflows personnalisés vous permettent d'utiliser des données plus structurées, comme des objets JSON ou des classes personnalisées, pour vos entrées et sorties.
-- **Travailler avec différents types de contenus multimédias** : créez des agents capables de comprendre et de traiter non seulement du texte, mais aussi des images, du contenu audio et des vidéos.
-- **Planification plus intelligente** : vous pouvez concevoir un workflow qui crée d'abord un plan détaillé avant que les agents ne commencent à travailler. Cela est utile pour les tâches complexes qui nécessitent plusieurs étapes.
-- **Activer l'auto-correction** : créez des agents capables de vérifier leur propre travail. Si le résultat n'est pas satisfaisant, l'agent peut réessayer, créant ainsi une boucle d'amélioration jusqu'à ce que le résultat soit parfait.
+- **Süreç üzerinde daha fazla kontrol**: Temsilcilerinizin izleyeceği yolu tam olarak belirleyebilirsiniz. Buna döngüler oluşturma, belirli noktalarda kararlar alma veya temsilcilerin farklı görevler üzerinde paralel olarak çalışmasını sağlama dahildir.
+- **Karmaşık veriler kullanın**: Düz metnin ötesine geçin. Özel iş akışları, giriş ve çıkışlarınız için JSON nesneleri veya özel sınıflar gibi daha fazla yapılandırılmış veri kullanmanıza olanak tanır.
+- **Farklı medya türleriyle çalışma**: Yalnızca metni değil, resimleri, sesleri ve videoları da anlayıp işleyebilen aracılar oluşturun.
+- **Daha akıllı planlama**: Temsilciler çalışmaya başlamadan önce ayrıntılı bir plan oluşturan bir iş akışı tasarlayabilirsiniz. Bu özellik, birden fazla adım gerektiren karmaşık görevler için yararlıdır.
+- **Kendi kendini düzeltme özelliğini etkinleştirme**: Kendi çalışmalarını inceleyebilen aracılar oluşturun. Çıkış yeterince iyi değilse aracı tekrar deneyebilir ve sonuç mükemmel olana kadar iyileştirme döngüsü oluşturabilir.
 
-Pour en savoir plus sur les workflows LlamaIndex, consultez la [documentation sur les workflows LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/workflow/).
+LlamaIndex Workflows hakkında daha fazla bilgi edinmek için [LlamaIndex Workflows Belgeleri](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)'ne bakın.
 
-Envoyer des commentaires
+Geri bildirim gönderin
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Dernière mise à jour le 2026/09/12 (UTC).
+Son güncelleme tarihi: 2026-09-12 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/12 (UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-12 UTC."],[],[]]

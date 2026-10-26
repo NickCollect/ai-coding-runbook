@@ -1,23 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content?hl=ru
-fetched_at: 2026-10-19T05:48:10.400671+00:00
+source_url: https://ai.google.dev/gemini-api/docs/generate-content?hl=id
+fetched_at: 2026-10-26T05:43:18.961063+00:00
 title: "Gemini API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Доступна новая модель Gemini 4 Argon. [Попробовать](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ru)
+Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Главная](https://ai.google.dev/?hl=ru)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ru)
-- [Документация](https://ai.google.dev/gemini-api/docs/generate-content?hl=ru)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs/generate-content?hl=id)
 
 # Gemini API
 
-Gemini API – это самый быстрый способ перейти от запроса к готовому продукту с помощью Gemini, Veo, Nano Banana и других моделей. Он позволяет интегрировать эти генеративные модели в приложения, чтобы создавать сгенерированный текст и изображения, анализировать мультимодальные входные данные и разрабатывать разговорных агентов.
+Gemini API adalah jalur tercepat dari perintah ke tahap produksi dengan Gemini, Veo,
+Nano Banana, dan lainnya. Dengan Vertex AI, Anda dapat mengintegrasikan model generatif ini ke dalam
+aplikasi Anda untuk menghasilkan teks dan gambar, menganalisis input multimodal, dan membangun
+agen percakapan.
 
 ### Python
 
@@ -52,7 +55,7 @@ async function main() {
 await main();
 ```
 
-### Проложить маршрут
+### Go
 
 ```
 package main
@@ -145,124 +148,124 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-argon:gen
   }'
 ```
 
-[Начать](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ru)
+[Mulai membangun](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
 
 ---
 
-## Модели
+## Perkenalkan model kami
 
-[Весь список](https://ai.google.dev/gemini-api/docs/models?hl=ru)
+[Lihat semua](https://ai.google.dev/gemini-api/docs/models?hl=id)
 
 [auto\_awesome
 Gemini 4 Argon
-Новое
+Baru
 
-Наша флагманская модель с окном контекста на 1 млн токенов и длинными декодированиями до 1 млн токенов.](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=ru)
+Model penalaran unggulan kami dengan jendela konteks bersama 1 juta token dan dekode panjang hingga 1 juta token.](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=id)
 [spark
 Gemini 3.6 Flash
-Новинка
+Baru
 
-Наша последняя модель, которая сочетает в себе скорость и интеллект, чтобы обеспечивать высокую производительность при выполнении агентских и мультимодальных задач.](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ru)
+Model terbaru kami yang menyeimbangkan kecepatan dengan kecerdasan untuk memberikan performa yang kuat dalam tugas agentic dan multimodal.](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=id)
 [graphic\_eq
 Gemini 3.8 Flash TTS
-Новинка
+Baru
 
-Модель студийного уровня для преобразования текста в речь с выразительной интонацией, возможностью создания собственного голоса и его копирования.](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=ru)
+Model text-to-speech berkualitas studio dengan akting ekspresif, desain Suara kustom, dan Replikasi suara.](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=id)
 [spark
 Gemini 3.5 Flash-Lite
-Новинка
+Baru
 
-Модель для больших объемов данных, оптимизированная для задач субагентов с высокой пропускной способностью и низкой задержкой.](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ru)
+Model bervolume tinggi dan sensitif biaya yang dioptimalkan untuk tugas sub-agen dengan throughput tinggi dan latensi rendah.](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=id)
 [spark
 Gemini 3.1 Flash-Lite
 
-Модель с высокой производительностью и качеством серии Gemini 3, которая позволяет снизить расходы.](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ru)
+Model bervolume tinggi dan hemat biaya dengan performa dan kualitas seri Gemini 3.](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id)
 [spark
 Gemini 3 Flash
 
-Производительность на уровне передовых моделей при значительно меньших затратах.](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ru)
+Performa kelas terdepan yang menyaingi model yang lebih besar dengan biaya yang jauh lebih rendah.](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id)
 [🍌
 Nano Banana
 
-Передовые модели для создания и редактирования изображений.](https://ai.google.dev/gemini-api/docs/image-generation?hl=ru)
+Model pembuatan dan pengeditan gambar yang canggih.](https://ai.google.dev/gemini-api/docs/image-generation?hl=id)
 [video\_library
-Veo 3.1
+Gemini Omni Flash
 
-Наша передовая модель генерации видео с нативным аудио.](https://ai.google.dev/gemini-api/docs/video?hl=ru)
+Model pembuatan dan pengeditan video tercanggih kami.](https://ai.google.dev/gemini-api/docs/omni?hl=id)
 [spark
 Gemini Robotics
 
-Визуально-языковая модель (VLM), которая позволяет использовать агентные возможности Gemini в робототехнике и обеспечивает расширенные возможности рассуждения в физическом мире.](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=ru)
+Model bahasa-visi (VLM) yang menghadirkan kemampuan agentic Gemini ke robotika dan memungkinkan penalaran canggih di dunia fisik.](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=id)
 
-## Изучить возможности
+## Ketahui Kemampuannya
 
 [imagesmode
 
-Встроенная генерация изображений (Nano Banana)
+Pembuatan Gambar Native (Nano Banana)
 
-Генерируйте и редактируйте изображения с учетом контекста с помощью Gemini 2.5 Flash Image.](https://ai.google.dev/gemini-api/docs/image-generation?hl=ru)
+Buat dan edit gambar yang sangat kontekstual secara native dengan Gemini 2.5 Flash Image.](https://ai.google.dev/gemini-api/docs/image-generation?hl=id)
 [article
 
-Большое окно контекста
+Konteks Panjang
 
-Передавайте моделям Gemini миллионы токенов и получайте информацию из неструктурированных изображений, видео и документов.](https://ai.google.dev/gemini-api/docs/long-context?hl=ru)
+Masukkan jutaan token ke model Gemini dan dapatkan pemahaman dari gambar, video, dan dokumen yang tidak terstruktur.](https://ai.google.dev/gemini-api/docs/long-context?hl=id)
 [code
 
-Structured Outputs
+Output Terstruktur
 
-Задайте Gemini ограничение, чтобы он отвечал в формате JSON – формате структурированных данных, подходящем для автоматической обработки.](https://ai.google.dev/gemini-api/docs/structured-output?hl=ru)
+Batasi Gemini untuk merespons dengan JSON, format data terstruktur yang cocok untuk pemrosesan otomatis.](https://ai.google.dev/gemini-api/docs/structured-output?hl=id)
 [functions
 
-Вызов функций
+Pemanggilan Fungsi
 
-Создавайте рабочие процессы с агентами, подключая Gemini к внешним API и инструментам.](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru)
+Membangun Agentic Workflows dengan menghubungkan Gemini ke API dan alat eksternal.](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)
 [videocam
 
-Создание видео с помощью Veo 3.1
+Pembuatan Video dengan Gemini Omni Flash
 
-Создавайте высококачественный видеоконтент по текстовым или графическим запросам с помощью нашей передовой модели.](https://ai.google.dev/gemini-api/docs/video?hl=ru)
+Buat konten video berkualitas tinggi dari perintah teks atau gambar dengan model tercanggih kami.](https://ai.google.dev/gemini-api/docs/video?hl=id)
 [android\_recorder
 
-Голосовые агенты с Live API
+Agen Suara dengan Live API
 
-Создавайте голосовые приложения и агентов, работающих в реальном времени, с помощью Live API.](https://ai.google.dev/gemini-api/docs/live-api?hl=ru)
+Bangun aplikasi dan agen suara real-time dengan Live API.](https://ai.google.dev/gemini-api/docs/live-api?hl=id)
 [build
 
-Инструменты
+Alat
 
-Подключите Gemini к миру с помощью встроенных инструментов, таких как Google Поиск, контекст URL, Google Карты, выполнение кода и использование компьютера.](https://ai.google.dev/gemini-api/docs/tools?hl=ru)
+Hubungkan Gemini ke dunia melalui alat bawaan seperti Google Penelusuran, Konteks URL, Google Maps, Eksekusi Kode, dan Penggunaan Komputer.](https://ai.google.dev/gemini-api/docs/tools?hl=id)
 [stacks
 
-Распознавание документов
+Document Understanding
 
-Обрабатывайте до 1000 страниц PDF-файлов с полным пониманием мультимодальных запросов или другие текстовые файлы.](https://ai.google.dev/gemini-api/docs/document-processing?hl=ru)
+Proses hingga 1.000 halaman file PDF dengan pemahaman multimodal penuh atau jenis file berbasis teks lainnya.](https://ai.google.dev/gemini-api/docs/document-processing?hl=id)
 [cognition\_2
 
-Думающая
+Penalaran
 
-Узнайте, как возможности рассуждения улучшают логическое мышление при выполнении сложных задач и работе агентов.](https://ai.google.dev/gemini-api/docs/thinking?hl=ru)
+Pelajari cara kemampuan berpikir meningkatkan penalaran untuk tugas dan agen yang kompleks.](https://ai.google.dev/gemini-api/docs/thinking?hl=id)
 
 [Google AI Studio
 
-Тестируйте запросы, управляйте ключами API, отслеживайте использование и создавайте прототипы.](https://aistudio.google.com?hl=ru)
+Uji perintah, kelola kunci API Anda, pantau penggunaan, dan bangun prototipe.](https://aistudio.google.com?hl=id)
 [group
 
-Сообщество разработчиков
+Komunitas Developer
 
-Задавайте вопросы и находите решения вместе с другими разработчиками и инженерами Google.](https://discuss.ai.google.dev/c/gemini-api/4?hl=ru)
+Ajukan pertanyaan dan temukan solusi dari developer lain dan engineer Google.](https://discuss.ai.google.dev/c/gemini-api/4?hl=id)
 [menu\_book
 
-Документация по API
+Referensi API
 
-Подробную информацию о Gemini API можно найти в официальной справочной документации.](https://ai.google.dev/api?hl=ru)
+Temukan informasi mendetail tentang Gemini API dalam dokumentasi referensi resmi.](https://ai.google.dev/api?hl=id)
 [sensors
 
-Статус
+Status
 
-Проверьте статус Gemini API, Google AI Studio и наших сервисов моделей.](https://aistudio.google.com/status?hl=ru)
+Periksa status Gemini API, Google AI Studio, dan layanan model kami.](https://aistudio.google.com/status?hl=id)
 
-Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Последнее обновление: 2026-10-16 UTC.
+Terakhir diperbarui pada 2026-10-22 UTC.
 
-[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-16 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-22 UTC."],[],[]]

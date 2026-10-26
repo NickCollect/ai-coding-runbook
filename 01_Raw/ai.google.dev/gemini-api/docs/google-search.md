@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=fr
-fetched_at: 2026-10-19T05:53:53.096236+00:00
-title: "Ancrage avec la recherche\u00a0Google \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=hi
+fetched_at: 2026-10-26T05:48:19.537910+00:00
+title: "Google Search \u0915\u0947 \u0906\u0927\u093e\u0930 \u092a\u0930 \u091c\u093e\u0928\u0915\u093e\u0930\u0940 \u0926\u0947\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
+Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Envoyer des commentaires
+सुझाव भेजें
 
-# Ancrage avec la recherche Google
+# Google Search के आधार पर जानकारी देना
 
-L'ancrage avec la recherche Google permet d'associer le modèle Gemini à des contenus Web en temps réel et fonctionne avec toutes les langues disponibles. Cela permet à Gemini de fournir des réponses plus précises et de citer des sources vérifiables au-delà de sa date limite de connaissances.
+Google Search से सटीक जानकारी पाने की सुविधा, Gemini मॉडल को रीयल-टाइम में वेब कॉन्टेंट से कनेक्ट करती है और सभी उपलब्ध भाषाओं में काम करती है. इससे Gemini, जानकारी न मिलने की स्थिति के दायरे से बाहर निकलकर ज़्यादा सटीक जवाब और भरोसेमंद सोर्स के रेफ़रंस दे पाता है.
 
-L'ancrage vous aide à créer des applications capables de :
+Google Search से सटीक जानकारी पाने की सुविधा की मदद से, ऐसे ऐप्लिकेशन बनाए जा सकते हैं जो:
 
-- **Améliorer la justesse factuelle** : réduisez les hallucinations du modèle en basant les réponses sur des informations réelles.
-- **Accéder à des informations en temps réel** : répondez à des questions sur des événements et des sujets récents.
-- **Fournir des citations** : gagnez la confiance des utilisateurs en indiquant les sources des affirmations du modèle.
+- **जानकारी की सटीकता बढ़ा सकते हैं:** असल दुनिया की जानकारी के आधार पर जवाब देकर, मॉडल के गलत जवाब देने की समस्या को कम कर सकते हैं.
+- **रीयल-टाइम में जानकारी ऐक्सेस कर सकते हैं:** हाल ही में हुई घटनाओं और विषयों के बारे में सवालों के जवाब दे सकते हैं.
+- **रेफ़रंस दे सकते हैं:** मॉडल के दावों के सोर्स दिखाकर, उपयोगकर्ताओं का भरोसा जीत सकते हैं.
 
 ### Python
 
@@ -85,7 +85,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -139,21 +139,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Fonctionnement de l'ancrage avec la recherche Google
+## Google Search से सटीक जानकारी पाने की सुविधा कैसे काम करती है
 
-Lorsque vous activez l'outil `google_search`, le modèle gère automatiquement l'ensemble du workflow de recherche, de traitement et de citation des informations.
+`google_search` टूल चालू करने पर, मॉडल खोज करने, जानकारी प्रोसेस करने, और रेफ़रंस देने का पूरा वर्कफ़्लो अपने-आप मैनेज करता है.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=fr)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=hi)
 
-1. **Requête utilisateur** : votre application envoie la requête d'un utilisateur à l'API Gemini avec l'outil `google_search` activé.
-2. **Analyse de la requête** : le modèle analyse la requête et détermine si une recherche Google peut améliorer la réponse.
-3. **Recherche Google** : si nécessaire, le modèle génère automatiquement une ou plusieurs requêtes de recherche et les exécute.
-4. **Traitement des résultats de recherche** : le modèle traite les résultats de recherche, synthétise les informations et formule une réponse.
-5. **Réponse ancrée** : l'API renvoie une réponse finale et conviviale qui est ancrée dans les résultats de recherche. Cette réponse inclut la réponse textuelle du modèle avec des `annotations` intégrées contenant les citations, ainsi que les étapes `google_search_call` et `google_search_result` avec les requêtes de recherche et les suggestions de recherche.
+1. **उपयोगकर्ता का प्रॉम्प्ट:** आपका ऐप्लिकेशन, `google_search` टूल चालू होने पर, उपयोगकर्ता का प्रॉम्प्ट Gemini API को भेजता है.
+2. **प्रॉम्प्ट का विश्लेषण:** मॉडल, प्रॉम्प्ट का विश्लेषण करता है और यह तय करता है कि Google Search की मदद से जवाब को बेहतर बनाया जा सकता है या नहीं.
+3. **Google Search:** ज़रूरत पड़ने पर, मॉडल अपने-आप एक या एक से ज़्यादा सर्च क्वेरी जनरेट करता है और उन्हें लागू करता है.
+4. **खोज के नतीजों को प्रोसेस करना:** मॉडल, खोज के नतीजों को प्रोसेस करता है, जानकारी को सिंथेसाइज़ करता है, और जवाब तैयार करता है.
+5. **भरोसेमंद स्रोतों से मिला जवाब:** एपीआई, खोज के नतीजों के आधार पर, उपयोगकर्ता के लिए फ़ाइनल और आसान जवाब देता है. इस जवाब में, मॉडल का टेक्स्ट जवाब शामिल होता है. इसमें इनलाइन `annotations` भी शामिल होते हैं, जिनमें रेफ़रंस होते हैं. इसके अलावा, इसमें `google_search_call` और `google_search_result` के चरण भी शामिल होते हैं, जिनमें सर्च क्वेरी और खोज से जुड़े सुझाव होते हैं.
 
-## Comprendre la réponse d'ancrage
+## भरोसेमंद स्रोतों से मिले जवाब को समझना
 
-Lorsqu'une réponse est correctement ancrée, la sortie textuelle du modèle inclut des `annotations` intégrées directement dans le bloc de contenu textuel. Ces annotations fournissent des informations de citation qui associent des parties de la réponse à leurs sources.
+जवाब के लिए भरोसेमंद सोर्स मिलने पर, मॉडल के टेक्स्ट आउटपुट में, टेक्स्ट कॉन्टेंट ब्लॉक पर सीधे इनलाइन `annotations` शामिल होते हैं. इन एनोटेशन में, रेफ़रंस की जानकारी होती है. इससे जवाब के हिस्सों को उनके सोर्स से लिंक किया जाता है.
 
 ```
 {
@@ -212,20 +212,21 @@ Lorsqu'une réponse est correctement ancrée, la sortie textuelle du modèle inc
 }
 ```
 
-Les champs clés de la réponse sont les suivants :
+जवाब में मौजूद मुख्य फ़ील्ड:
 
-- `google_search_call` : contient les `queries` de recherche exécutées par le modèle.
-- `google_search_result` : contient `search_suggestions`, un extrait HTML permettant d'afficher des suggestions de recherche dans votre UI. Les conditions d'utilisation complètes sont
-  détaillées dans les [Conditions d'utilisation](https://ai.google.dev/gemini-api/terms?hl=fr#grounding-with-google-search).
-- `text` avec `annotations` : réponse synthétisée du modèle avec des citations intégrées. Chaque annotation `url_citation` associe un segment de texte (défini par `start_index` et `end_index`) à une URL source. C'est la clé pour créer des citations intégrées.
+- `google_search_call` : इसमें मॉडल की लागू की गई खोज `queries` शामिल होती हैं.
+- `google_search_result` : इसमें `search_suggestions` शामिल होते हैं. यह आपके यूज़र इंटरफ़ेस (यूआई) में खोज से जुड़े सुझाव दिखाने के लिए, एचटीएमएल स्निपेट होता है. इस्तेमाल से जुड़ी पूरी ज़रूरी शर्तें,
+  [सेवा की शर्तों](https://ai.google.dev/gemini-api/terms?hl=hi#grounding-with-google-search) में बताई गई हैं.
+- `text` with `annotations` : मॉडल का सिंथेसाइज़ किया गया जवाब, जिसमें इनलाइन रेफ़रंस शामिल होते हैं. हर `url_citation` एनोटेशन, टेक्स्ट के किसी सेगमेंट (`start_index` और `end_index` से तय) को सोर्स यूआरएल से लिंक करता है. इनलाइन रेफ़रंस बनाने के लिए, यह ज़रूरी है.
 
-L'ancrage avec la recherche Google peut également être utilisé en combinaison avec l'outil de contexte d'[URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr) pour ancrer les réponses à la fois dans
-les données Web publiques et les URL spécifiques que vous fournissez.
+Google Search से सटीक जानकारी पाने की सुविधा को, [यूआरएल
+कॉन्टेक्स्ट टूल](https://ai.google.dev/gemini-api/docs/url-context?hl=hi) के साथ भी इस्तेमाल किया जा सकता है. इससे जवाबों को,
+सार्वजनिक वेब डेटा और आपके दिए गए खास यूआरएल, दोनों के आधार पर तैयार किया जा सकता है.
 
-## Attribuer des sources avec des citations intégrées
+## इनलाइन रेफ़रंस की मदद से सोर्स एट्रिब्यूट करना
 
-L'API renvoie des annotations `url_citation` intégrées dans le bloc de contenu textuel, ce qui vous permet de contrôler entièrement la façon dont vous affichez les sources dans votre interface utilisateur.
-Chaque annotation inclut `start_index` et `end_index` pour identifier la partie du texte qu'elle cite. Voici comment les extraire et les afficher.
+एपीआई, टेक्स्ट कॉन्टेंट ब्लॉक पर इनलाइन `url_citation` एनोटेशन दिखाता है. इससे आपको यह तय करने का पूरा कंट्रोल मिलता है कि अपने यूज़र इंटरफ़ेस में सोर्स कैसे दिखाए जाएं.
+हर एनोटेशन में `start_index` और `end_index` शामिल होता है. इससे यह पता चलता है कि यह टेक्स्ट के किस हिस्से का रेफ़रंस है. इन्हें एक्सट्रैक्ट और दिखाने का तरीका यहां बताया गया है.
 
 ### Python
 
@@ -334,7 +335,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -414,7 +415,7 @@ func main() {
 }
 ```
 
-La sortie affiche le texte suivi de ses citations :
+आउटपुट में, टेक्स्ट के बाद उसके रेफ़रंस दिखेंगे:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final. This victory marks Spain's record fourth European Championship title.
@@ -426,61 +427,59 @@ Citations:
     Cited text: "This victory marks Spain's record fourth European Championship title."
 ```
 
-## Tarifs
+## कीमत
 
-Lorsque vous utilisez l'ancrage avec la recherche Google avec les modèles Gemini 3 et versions ultérieures, votre projet est facturé pour **chaque** requête de recherche que le modèle décide d'exécuter.
-Ce modèle de facturation par requête inclut 5 000 requêtes de recherche sans frais par mois partagées entre tous les modèles Gemini 3 et versions ultérieures, puis coûte **14 $ pour 1 000 requêtes de recherche**.
+Gemini 3 और उसके बाद के मॉडल के साथ, Google Search से सटीक जानकारी पाने की सुविधा का इस्तेमाल करने पर, आपके प्रोजेक्ट से **हर** सर्च क्वेरी के लिए शुल्क लिया जाता है. यह शुल्क तब लिया जाता है, जब मॉडल उस क्वेरी को लागू करने का फ़ैसला लेता है.
+क्वेरी के हिसाब से शुल्क लेने वाले इस मॉडल में, हर महीने 5,000 खोज अनुरोध मुफ़्त में किए जा सकते हैं. ये अनुरोध, Gemini 3 और उसके बाद के सभी मॉडल के लिए शेयर किए जाते हैं. इसके बाद, **1,000 खोज अनुरोधों के लिए 14 डॉलर** का शुल्क लिया जाता है.
 
-Par exemple, si le modèle décide d'exécuter plusieurs requêtes de recherche pour répondre
-à une seule requête (par exemple, en recherchant `"UEFA Euro 2024 winner"` et `"Spain vs
-England Euro 2024 final score"` dans le même appel d'API), cela compte comme deux
-utilisations facturables de l'outil pour cette requête. À des fins de facturation, nous ignorons les requêtes de recherche Web vides lors du comptage des requêtes uniques.
+उदाहरण के लिए, अगर मॉडल किसी एक प्रॉम्प्ट का जवाब देने के लिए, एक से ज़्यादा सर्च क्वेरी लागू करने का फ़ैसला लेता है (जैसे, एक ही एपीआई कॉल में `"UEFA Euro 2024 winner"` और `"Spain vs
+England Euro 2024 final score"` की खोज करना), तो इस अनुरोध के लिए, टूल के दो बार इस्तेमाल का शुल्क लिया जाएगा. शुल्क लेने के मकसद से, यूनीक क्वेरी की गिनती करते समय, हम वेब पर खोज की खाली क्वेरी को अनदेखा करते हैं.
 
-Lorsque vous utilisez l'ancrage de recherche avec les modèles Gemini 2.5 ou versions antérieures, votre projet est facturé par requête.
+Gemini 2.5 या उससे पुराने मॉडल के साथ, खोज के लिए सटीक जानकारी पाने की सुविधा का इस्तेमाल करने पर, आपके प्रोजेक्ट से हर प्रॉम्प्ट के लिए शुल्क लिया जाता है.
 
-Pour obtenir des informations détaillées sur les tarifs, consultez la [page Tarifs de l'API Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=fr).
+कीमत की ज़्यादा जानकारी के लिए, [Gemini API की कीमत
+वाला पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) देखें.
 
-## Modèles compatibles
+## इस्तेमाल किए जा सकने वाले मॉडल
 
-Vous trouverez toutes les fonctionnalités sur la page de présentation du [modèle
-vue d'ensemble](https://ai.google.dev/gemini-api/docs/models?hl=fr).
+मॉडल की पूरी क्षमताओं के बारे में, मॉडल की खास जानकारी वाले [model
+overview](https://ai.google.dev/gemini-api/docs/models?hl=hi) पेज पर देखा जा सकता है.
 
-| Modèle | Ancrage avec la recherche Google |
+| मॉडल | Google Search से सटीक जानकारी पाने की सुविधा |
 | --- | --- |
 | Gemini 4 Argon | ✔️ |
 | Gemini 3.8 Flash | ✔️ |
 | Gemini 3.6 Flash | ✔️ |
 | Gemini 3.5 Flash-Lite | ✔️ |
-| Preview Gemini 3.1 Flash Image | ✔️ |
-| Preview Gemini 3.1 Pro | ✔️ |
-| Preview Gemini 3 Pro Image | ✔️ |
-| Preview Gemini 3 Flash | ✔️ |
+| Gemini 3.1 Flash Image Preview | ✔️ |
+| Gemini 3.1 Pro Preview | ✔️ |
+| Gemini 3 Pro Image Preview | ✔️ |
+| Gemini 3 Flash Preview | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️ |
 
-## Combinaisons d'outils compatibles
+## टूल के इस्तेमाल के लिए उपलब्ध कॉम्बिनेशन
 
-Vous pouvez utiliser l'ancrage avec la Recherche Google avec d'autres outils tels que
-[l'exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr),
-[le contexte de l'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr) et
-[l'ancrage avec Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr) (compatible avec les modèles
-Gemini 3.5 Flash-Lite et versions ultérieures) pour gérer des cas d'utilisation plus complexes.
-Les modèles Gemini 3 sont également compatibles avec la combinaison de ces outils intégrés avec des outils personnalisés (appels de fonction). Pour en savoir plus, consultez la
-[page Combinaisons d'outils](https://ai.google.dev/gemini-api/docs/tool-combination?hl=fr).
+ज़्यादा मुश्किल इस्तेमाल के मामलों के लिए, Google Search से सटीक जानकारी पाने की सुविधा को अन्य टूल के साथ इस्तेमाल किया जा सकता है. जैसे,
+[कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi),
+[यूआरएल कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi), और
+[Google Maps से सटीक जानकारी पाने की सुविधा](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi). Google Maps से सटीक जानकारी पाने की सुविधा,
+Gemini 3.5 Flash-Lite और उसके बाद के मॉडल पर उपलब्ध है.
+Gemini 3 मॉडल में, इन बिल्ट-इन टूल को कस्टम टूल (फ़ंक्शन कॉलिंग) के साथ भी इस्तेमाल किया जा सकता है. टूल के कॉम्बिनेशन वाले पेज पर ज़्यादा जानें.
 
-## Étape suivante
+## आगे क्या करना है
 
-- Découvrez d'autres outils disponibles, comme les [appels de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr).
-- Découvrez comment augmenter les requêtes avec des URL spécifiques à l'aide de l'[outil de contexte d'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr).
+- [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) जैसे अन्य उपलब्ध टूल के बारे में जानें.
+- [यूआरएल कॉन्टेक्स्ट टूल](https://ai.google.dev/gemini-api/docs/url-context?hl=hi) का इस्तेमाल करके, खास यूआरएल की मदद से प्रॉम्प्ट को बेहतर बनाने का तरीका जानें.
 
-Envoyer des commentaires
+सुझाव भेजें
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Dernière mise à jour le 2026/10/13 (UTC).
+आखिरी बार 2026-10-13 (UTC) को अपडेट किया गया.
 
-Voulez-vous nous donner plus d'informations ?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/13 (UTC)."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-10-13 (UTC) को अपडेट किया गया."],[],[]]

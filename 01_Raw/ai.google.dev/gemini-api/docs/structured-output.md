@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=id
-fetched_at: 2026-10-19T05:36:17.309922+00:00
-title: "Output terstruktur \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=es-419
+fetched_at: 2026-10-26T05:50:31.085009+00:00
+title: "Resultados estructurados \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
+Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Kirim masukan
+Enviar comentarios
 
-# Output terstruktur
+# Resultados estructurados
 
-Anda dapat mengonfigurasi model Gemini untuk menghasilkan respons yang sesuai dengan Skema JSON yang diberikan. Hal ini memastikan hasil yang dapat diprediksi dan aman untuk jenis, serta menyederhanakan
-ekstraksi data terstruktur dari teks tidak terstruktur.
+Puedes configurar los modelos de Gemini para que generen respuestas que se adhieran a un esquema JSON proporcionado. Esto garantiza resultados predecibles y con seguridad de tipos, y simplifica
+la extracción de datos estructurados de texto no estructurado.
 
-Penggunaan output terstruktur sangat ideal untuk:
+El uso de resultados estructurados es ideal para lo siguiente:
 
-- **Ekstraksi data:** Mengambil informasi tertentu seperti nama dan tanggal dari teks.
-- **Klasifikasi terstruktur:** Mengklasifikasikan teks ke dalam kategori yang telah ditentukan.
-- **Alur kerja agentic:** Membuat input terstruktur untuk alat atau API.
+- **Extracción de datos:** Extrae información específica, como nombres y fechas, de un texto.
+- **Clasificación estructurada:** Clasifica texto en categorías predefinidas.
+- **Flujos de trabajo basados en agentes:** Genera entradas estructuradas para herramientas o APIs.
 
-Selain mendukung Skema JSON di REST API, Google GenAI SDK
-memungkinkan penentuan skema menggunakan
-[Pydantic](https://docs.pydantic.dev/latest/) (Python) dan
+Además de admitir el esquema JSON en la API de REST, los SDKs de Google GenAI
+permiten definir esquemas con
+[Pydantic](https://docs.pydantic.dev/latest/) (Python) y
 [Zod](https://zod.dev/) (JavaScript).
 
-## Contoh output terstruktur
+## Ejemplos de resultados estructurados
 
-### Pengekstrak Resep
+### Extractor de recetas
 
-Contoh ini menunjukkan cara mengekstrak data terstruktur dari teks menggunakan jenis Skema JSON dasar seperti `object`, `array`, `string`, dan `integer`.
+En este ejemplo, se muestra cómo extraer datos estructurados de texto con tipos básicos de esquema JSON, como `object`, `array`, `string` y `integer`.
 
 ### Python
 
@@ -394,7 +394,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Contoh Respons:**
+**Ejemplo de respuesta:**
 
 ```
 {
@@ -422,10 +422,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Moderasi Konten
+### Moderación de contenido
 
-Contoh ini menampilkan `anyOf` untuk skema bersyarat dan `enum` untuk
-klasifikasi, sehingga struktur output dapat bervariasi berdasarkan konten.
+En este ejemplo, se muestra `anyOf` para esquemas condicionales y `enum` para
+la clasificación, lo que permite que la estructura de salida varíe según el contenido.
 
 ### Python
 
@@ -756,7 +756,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Contoh Respons:**
+**Ejemplo de respuesta:**
 
 ```
 {
@@ -767,10 +767,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Struktur Rekursif
+### Estructuras recursivas
 
-Contoh ini menggambarkan cara menentukan skema rekursif seperti
-diagram organisasi.
+En este ejemplo, se ilustra cómo definir un esquema recursivo, como un
+organigrama.
 
 ### Python
 
@@ -1022,7 +1022,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Contoh Respons:**
+**Ejemplo de respuesta:**
 
 ```
 {
@@ -1049,9 +1049,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## Hasil streaming
+## Resultados de transmisión
 
-Anda dapat mengalirkan output terstruktur, sehingga Anda dapat mulai memproses respons saat respons tersebut sedang dibuat. Potongan yang di-streaming adalah string JSON parsial yang valid yang dapat digabungkan untuk membentuk objek JSON akhir.
+Puedes transmitir salidas estructuradas, lo que te permite comenzar a procesar la
+respuesta a medida que se genera. Los fragmentos transmitidos son cadenas JSON parciales válidas
+que se pueden concatenar para formar el objeto JSON final.
 
 ### Python
 
@@ -1294,14 +1296,14 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     }'
 ```
 
-## Output terstruktur dengan alat
+## Resultados estructurados con herramientas
 
-Gemini 3 memungkinkan Anda menggabungkan Output Terstruktur dengan alat bawaan, termasuk
-[Perujukan dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id),
-[Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id),
-[Eksekusi Kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id),
-[Penelusuran File](https://ai.google.dev/gemini-api/docs/file-search?hl=id#structured-output), dan
-[Pemanggilan Fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id).
+Gemini 3 te permite combinar salidas estructuradas con herramientas integradas, como
+[Fundamentación con la Búsqueda de Google](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419),
+[contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419),
+[ejecución de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=es-419),
+[búsqueda de archivos](https://ai.google.dev/gemini-api/docs/file-search?hl=es-419#structured-output) y
+[llamada a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419).
 
 ### Python
 
@@ -1533,80 +1535,100 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Dukungan skema JSON
+## Compatibilidad con el esquema JSON
 
-Untuk membuat objek JSON, konfigurasi `response_format` dengan objek (atau array yang berisi objek) berjenis `text` dan tetapkan `mime_type`-nya ke `application/json`. Skema harus diberikan di kolom `schema`.
+Para generar un objeto JSON, configura `response_format` con un objeto (o un array que contenga un objeto) de tipo `text` y establece su `mime_type` en `application/json`. El esquema debe proporcionarse en el campo `schema`.
 
-Mode output terstruktur Gemini mendukung subset spesifikasi
-[JSON Schema](https://json-schema.org/).
+El modo de salida estructurada de Gemini admite un subconjunto de la especificación del
+[esquema JSON](https://json-schema.org/).
 
-Nilai `type` berikut didukung:
+Se admiten los siguientes valores de `type`:
 
-- **`string`**: Untuk teks.
-- **`number`**: Untuk bilangan floating point.
-- **`integer`**: Untuk bilangan bulat.
-- **`boolean`**: Untuk nilai benar atau salah.
-- **`object`**: Untuk data terstruktur dengan pasangan nilai kunci.
-- **`array`**: Untuk daftar item.
-- **`null`**: Untuk mengizinkan properti bernilai null, sertakan `"null"` dalam array jenis (misalnya, `{"type": ["string", "null"]}`).
+- **`string`**: Para texto.
+- **`number`**: Para números de punto flotante.
+- **`integer`**: Para números enteros.
+- **`boolean`**: Para valores verdaderos o falsos.
+- **`object`**: Para datos estructurados con pares clave-valor.
+- **`array`**: Para listas de elementos.
+- **`null`**: Para permitir que una propiedad sea nula, incluye `"null"` en el array de tipos (p.ej., `{"type": ["string", "null"]}`).
 
-Properti deskriptif ini membantu memandu model:
+Estas propiedades descriptivas ayudan a guiar el modelo:
 
-- **`title`**: Deskripsi singkat properti.
-- **`description`**: Deskripsi properti yang lebih panjang dan mendetail.
+- **`title`**: Es una descripción breve de una propiedad.
+- **`description`**: Es una descripción más larga y detallada de una propiedad.
 
-### Properti spesifik per jenis
+### Propiedades específicas del tipo
 
-**Untuk nilai `object`:**
+**Para los valores de `object`, haz lo siguiente:**
 
-- **`properties`**: Objek dengan setiap kunci adalah nama properti dan setiap nilai adalah skema untuk properti tersebut.
-- **`required`**: Array string, yang mencantumkan properti mana yang wajib diisi.
-- **`additionalProperties`**: Mengontrol apakah properti yang tidak tercantum dalam `properties` diizinkan. Dapat berupa boolean atau skema.
+- **`properties`**: Es un objeto en el que cada clave es un nombre de propiedad y cada valor es un esquema para esa propiedad.
+- **`required`**: Es un array de cadenas que enumera las propiedades obligatorias.
+- **`additionalProperties`**: Controla si se permiten las propiedades que no se indican en `properties`. Puede ser un valor booleano o un esquema.
+- **Restricciones de recuento no admitidas**: `minProperties` y `maxProperties`
+  no se aplican durante la decodificación restringida y el servidor las ignora.
+  Si es necesario, valida los recuentos de propiedades en el código de la aplicación.
 
-**Untuk nilai `string`:**
+**Para los valores de `string`, haz lo siguiente:**
 
-- **`enum`**: Mencantumkan kumpulan string tertentu yang mungkin untuk tugas klasifikasi.
-- **`format`**: Menentukan sintaksis untuk string, seperti `date-time`, `date`, `time`.
+- **`enum`**: Enumera un conjunto específico de cadenas posibles para las tareas de clasificación.
+- **`format`**: Especifica una sintaxis para la cadena, como `date-time`, `date`, `time`.
+- **Restricciones de longitud no admitidas**: `minLength` y `maxLength` no se aplican durante la decodificación restringida y el servidor las ignora.
+  Si es necesario, valida las longitudes de las cadenas en el código de la aplicación.
 
-**Untuk nilai `number` dan `integer`:**
+**Para los valores `number` y `integer`:**
 
-- **`enum`**: Mencantumkan serangkaian nilai numerik tertentu yang mungkin.
-- **`minimum`**: Nilai inklusif minimum.
-- **`maximum`**: Nilai inklusif maksimum.
+- **`enum`**: Enumera un conjunto específico de valores numéricos posibles.
+- **`minimum`**: Es el valor mínimo inclusivo.
+- **`maximum`**: Es el valor máximo inclusivo.
 
-**Untuk nilai `array`:**
+**Para los valores de `array`, haz lo siguiente:**
 
-- **`items`**: Menentukan skema untuk semua item dalam array.
-- **`prefixItems`**: Menentukan daftar skema untuk N item pertama, sehingga memungkinkan struktur seperti tuple.
-- **`minItems`**: Jumlah minimum item dalam array.
-- **`maxItems`**: Jumlah maksimum item dalam array.
+- **`items`**: Define el esquema para todos los elementos del array.
+- **`prefixItems`**: Define una lista de esquemas para los primeros N elementos, lo que permite estructuras similares a tuplas.
+- **`minItems`**: Es la cantidad mínima de elementos en el array.
+- **`maxItems`**: Es la cantidad máxima de elementos en el array.
+- **Restricciones de arrays no admitidas**: `uniqueItems`, `contains`,
+  `minContains` y `maxContains` no se aplican durante la decodificación
+  restringida y el servidor las ignora. Anula la duplicación de elementos o verifica el contenido del array
+  en el código de la aplicación si es necesario.
 
-## Output terstruktur versus pemanggilan fungsi
+## Resultados estructurados frente a llamadas a funciones
 
-| Fitur | Kasus Penggunaan Utama |
+| Función | Caso de uso principal |
 | --- | --- |
-| **Output Terstruktur** | **Memformat respons akhir.** Gunakan saat Anda menginginkan *jawaban* model dalam format tertentu. |
-| **Pemanggilan Fungsi** | **Mengambil tindakan selama percakapan.** Gunakan saat model perlu *meminta Anda* melakukan tugas sebelum memberikan jawaban akhir. |
+| **Salidas estructuradas** | **Dar formato a la respuesta final** Úsala cuando quieras que la *respuesta* del modelo tenga un formato específico. |
+| **Llamada a funciones** | **Cómo realizar acciones durante una conversación** Úsala cuando el modelo deba *pedirte* que realices una tarea antes de proporcionar una respuesta final. |
 
-## Praktik terbaik
+## Prácticas recomendadas
 
-- **Deskripsi yang jelas:** Gunakan kolom `description` untuk memandu model.
-- **Pengetikan kuat:** Gunakan jenis tertentu (`integer`, `string`, `enum`).
-- **Rekayasa perintah:** Nyatakan dengan jelas apa yang Anda ingin model lakukan.
-- **Validasi:** Meskipun output adalah JSON yang benar secara sintaksis, selalu validasi nilai di aplikasi Anda.
-- **Penanganan error:** Terapkan penanganan error yang andal untuk output yang sesuai dengan skema, tetapi salah secara semantik.
+- **Descripciones claras:** Usa el campo `description` para guiar al modelo.
+- **Tipado fuerte:** Usa tipos específicos (`integer`, `string`, `enum`).
+- **Ingeniería de instrucciones:** Indica con claridad lo que quieres que haga el modelo.
+- **Validación:** Si bien el resultado es un JSON sintácticamente correcto, siempre valida los valores en tu aplicación.
+- **Manejo de errores:** Implementa un manejo de errores sólido para los resultados que cumplen con el esquema, pero que son semánticamente incorrectos.
 
-## Batasan
+## Limitaciones
 
-- **Subkumpulan skema:** Tidak semua fitur Skema JSON didukung.
-- **Kompleksitas skema:** Skema yang sangat besar atau memiliki banyak tingkat mungkin ditolak.
+- **Subconjunto de esquemas:** No se admiten todas las funciones del esquema JSON.
+- **Complejidad del esquema:** Es posible que se rechacen los esquemas muy grandes o con un nivel de anidamiento profundo con un error `400 INVALID_ARGUMENT` que indica que el esquema produce una restricción con demasiados estados o demasiadas ramificaciones para la entrega. Las causas
+  comunes son límites de `maxItems` grandes (en especial en arrays anidados), nombres de propiedades o enumeraciones muy largos,
+  enumeraciones con muchos valores, ejecuciones largas de propiedades opcionales,
+  `anyOf` con muchas alternativas y límites numéricos de `minimum`/`maximum`. Para solucionarlo, reduce o quita los límites de arrays anidados, acorta los nombres o
+  intercala las propiedades obligatorias entre las opcionales.
+- **Restricciones no aplicadas:** El motor de gramática de decodificación restringida no aplica `minLength`, `maxLength`, `minProperties`, `maxProperties`, `uniqueItems`, `contains`, `minContains` ni `maxContains` (ni sus variantes en minúsculas con guiones bajos). Si estas palabras clave están presentes en tu
+  esquema (p.ej., emitidas automáticamente por `Field(min_length=...)` de Pydantic o
+  `.min()` de Zod), la API las quita y las ignora automáticamente durante
+  la normalización de la solicitud, en lugar de devolver un error. Se aplican `minItems` y
+  `maxItems`. Para aplicar las otras restricciones, valida el
+  resultado analizado en el cliente (p.ej., con Pydantic
+  `model_validate_json()` o Zod `.parse()`).
 
-Kirim masukan
+Enviar comentarios
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Terakhir diperbarui pada 2026-10-13 UTC.
+Última actualización: 2026-10-21 (UTC)
 
-Ada masukan untuk kami?
+¿Quieres brindar más información?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-13 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-21 (UTC)"],[],[]]

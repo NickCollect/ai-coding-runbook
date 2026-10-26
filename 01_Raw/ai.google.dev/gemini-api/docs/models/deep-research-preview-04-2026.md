@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=es-419
-fetched_at: 2026-10-19T05:57:45.287190+00:00
-title: "Vista previa de Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=id
+fetched_at: 2026-10-26T05:46:33.044234+00:00
+title: "Pratinjau Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
+Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Enviar comentarios
+Kirim masukan
 
-# Vista previa de Deep Research
+# Pratinjau Deep Research
 
-Un potente agente de investigación diseñado para investigaciones autónomas de varios pasos que sintetizan información compleja en informes integrales con citas. Este modelo admite la planificación colaborativa, la visualización, los servidores de MCP y la búsqueda de archivos. Se ofrece en dos versiones: Deep Research para mayor velocidad y eficiencia, y Deep Research Max para una máxima exhaustividad.
+Peneliti agentik yang canggih dan dirancang untuk penyelidikan multi-langkah yang otonom, yang menyintesis informasi kompleks menjadi laporan komprehensif yang mencantumkan kutipan. Model ini mendukung perencanaan kolaboratif, visualisasi, server MCP, dan Penelusuran File. Fitur ini hadir dalam dua versi: Deep Research untuk kecepatan dan efisiensi, serta Deep Research Max untuk kelengkapan maksimal.
 
-## Documentación
+## Dokumentasi
 
-Visita la página [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) para obtener una cobertura completa de las funciones y capacidades.
+Buka halaman [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) untuk mengetahui cakupan lengkap fitur dan kapabilitas.
 
 ## deep-research-preview-04-2026
 
-| Propiedad | Descripción |
+| Properti | Deskripsi |
 | --- | --- |
-| id\_cardCódigo de agente | **API de Interactions**  `deep-research-preview-04-2026` |
-| saveTipos de datos admitidos | **Entrada**  Texto, imagen, PDF, audio y video  **Resultado**  Texto (informes citados), imágenes |
-| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Ventana de contexto de entrada**  1,048,576  **Límite de tokens de salida**  65,536 |
-| Versiones 123 | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Vista previa: `deep-research-preview-04-2026` - Máx.: `deep-research-max-preview-04-2026` |
-| calendar\_monthÚltima actualización | Abril de 2026 |
+| Kode agen id\_card | **Interactions API**  `deep-research-preview-04-2026` |
+| saveJenis data yang didukung | **Input**  Teks, Gambar, PDF, Audio, Video  **Output**  Teks (Laporan yang Dikutip), Gambar |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Jendela konteks input**  1.048.576  **Batas token output**  65.536 |
+| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Pratinjau: `deep-research-preview-04-2026` - Maks: `deep-research-max-preview-04-2026` |
+| calendar\_monthPembaruan terbaru | April 2026 |
 
-Enviar comentarios
+Kirim masukan
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Última actualización: 2026-04-29 (UTC)
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-¿Quieres brindar más información?
+Ada masukan untuk kami?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

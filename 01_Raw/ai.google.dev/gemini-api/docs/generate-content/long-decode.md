@@ -1,90 +1,90 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=vi
-fetched_at: 2026-10-19T05:45:18.309607+00:00
-title: "Gi\u1ea3i m\u00e3 d\u00e0i \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=es-419
+fetched_at: 2026-10-26T05:49:27.683167+00:00
+title: "Decodificaci\u00f3n larga \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
+Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=es-419)
 
-Gửi ý kiến phản hồi
+Enviar comentarios
 
-# Giải mã dài
+# Decodificación larga
 
-Tính năng giải mã dài cho phép Gemini 4 Argon tạo ra kết quả vượt quá giới hạn đầu ra của một yêu cầu cho các nhiệm vụ suy luận sâu, lên đến cửa sổ ngữ cảnh hợp nhất 1 triệu token (1.048.576 token được chia sẻ cho đầu vào, suy nghĩ và đầu ra).
+La decodificación larga permite que Gemini 4 Argon genere más allá del límite de salida de una sola solicitud para tareas de razonamiento profundo, hasta la ventana de contexto unificada de 1 millón de tokens (1,048,576 tokens compartidos entre la entrada, el pensamiento y la salida).
 
-Chỉ thay đổi mã mô hình sẽ không bật tính năng giải mã dài. Nếu không thiết lập thêm, đầu ra sẽ dừng ở 64.000 mã thông báo cho các lệnh gọi truyền trực tuyến và 32.000 mã thông báo cho các lệnh gọi không truyền trực tuyến. Cách nhanh nhất để bật tính năng giải mã dài là nâng cấp Google GenAI SDK và đặt `max_output_tokens` lớn hơn 65.536. Hướng dẫn này giải thích cách hoạt động của tính năng giải mã dài, thời điểm sử dụng và cách bật tính năng này bằng `generateContent`.
+Cambiar solo el ID del modelo no habilita la decodificación larga. Sin configuración adicional, la salida se detiene en 64,000 tokens para las llamadas de transmisión y en 32,000 tokens para las llamadas que no son de transmisión. La forma más rápida de activar la decodificación larga es actualizar el SDK de IA generativa de Google y establecer `max_output_tokens` en un valor superior a 65,536. En esta guía, se explica cómo funciona la decodificación de Long, cuándo usarla y cómo activarla con `generateContent`.
 
-## Thời gian giải mã
+## Cómo funciona la decodificación de duración
 
-Một yêu cầu truyền trực tuyến hoặc yêu cầu SDK duy nhất tạo ra tối đa 64.000 mã thông báo, còn yêu cầu REST không truyền trực tuyến tạo ra tối đa 32.000 mã thông báo. Khi một phản hồi cần thêm mã thông báo, mô hình sẽ tạo phản hồi đó qua nhiều bước yêu cầu và phản hồi, mỗi bước tiếp tục từ nơi bước trước dừng lại.
+Una sola solicitud de transmisión o del SDK genera hasta 64,000 tokens, y una solicitud de REST sin transmisión genera hasta 32,000 tokens. Cuando una respuesta necesita más tokens, el modelo la genera en varios saltos de solicitud y respuesta, y cada uno continúa desde donde se detuvo el salto anterior.
 
-- **Giới hạn về số lượng mã thông báo đầu vào và đầu ra hợp nhất:** Đầu vào, quá trình suy nghĩ, lệnh gọi hàm và câu trả lời cuối cùng dùng chung một cửa sổ 1 triệu mã thông báo. Kết quả đầu ra có thể sử dụng tối đa 1.048.576 trừ đi số token đầu vào của bạn.
-- **Giới hạn cho mỗi bước nhảy:** Một bước nhảy trả về tối đa 65.536 mã thông báo đầu ra. Yêu cầu REST không truyền trực tuyến trả về tối đa 32.768.
-- **Tín hiệu tiếp tục:** Nếu mô hình đạt đến giới hạn và vẫn còn mã thông báo, thì phản hồi sẽ kết thúc bằng `finish_reason: CONTINUATION` và `continuation_token`.
-- **Bước tiếp theo:** Máy khách gửi lại cùng một yêu cầu kèm theo mã thông báo. Mô hình sẽ tiếp tục từ nơi đã dừng lại.
-- **Một tổng số cho tất cả các bước:** `max_output_tokens` đặt tổng số mã thông báo tư duy và đầu ra cho tất cả các bước cùng nhau.
-- **Tín hiệu dừng:** Khi mô hình sử dụng hết `max_output_tokens`, câu trả lời sẽ kết thúc bằng `finish_reason: MAX_TOKENS`.
+- **Límite unificado de tokens de entrada y salida:** La entrada, el pensamiento, las llamadas a funciones y la respuesta final comparten una ventana de 1 millón de tokens. La salida puede usar hasta 1,048,576 tokens menos los de entrada.
+- **Límite en cada salto:** Un salto devuelve hasta 65,536 tokens de salida. Las solicitudes de REST sin transmisión devuelven hasta 32,768.
+- **Un indicador de continuación:** Si el modelo alcanza el límite y le quedan tokens, la respuesta termina con `finish_reason: CONTINUATION` y un `continuation_token`.
+- **El próximo salto:** El cliente vuelve a enviar la misma solicitud con el token. El modelo continúa desde donde se detuvo.
+- **Un total para todos los saltos:** `max_output_tokens` establece el total de tokens de razonamiento y de salida para todos los saltos en conjunto.
+- **Una señal de detención:** Cuando el modelo usa todo `max_output_tokens`, la respuesta termina con `finish_reason: MAX_TOKENS`.
 
-Đối với các vấn đề khó, một bước nhảy có thể sử dụng tất cả mã thông báo cho quá trình suy nghĩ nội bộ và trả về văn bản trống kèm theo `continuation_token`. Điều này là bình thường và câu trả lời cuối cùng sẽ xuất hiện ở các bước tiếp theo.
+En problemas difíciles, un salto puede gastar todos sus tokens en el pensamiento interno y devolver un texto vacío con un `continuation_token`. Esto es normal, y la respuesta final llega en saltos posteriores.
 
-## Hạn mức đầu ra mặc định
+## Límites de salida predeterminados
 
-Nếu không có tính năng giải mã dài, một yêu cầu sẽ dừng lại ở các giới hạn sau cho mỗi yêu cầu:
+Sin la decodificación larga, una sola solicitud se detiene en estos límites por solicitud:
 
-- **Yêu cầu truyền trực tuyến và yêu cầu không truyền trực tuyến thông qua SDK GenAI của Google (`generate_content`):** Mặc định là 64.000 mã thông báo đầu ra.
-- **Lệnh gọi REST trực tiếp không truyền trực tuyến (`generateContent`):** Mặc định là 32.000 mã thông báo đầu ra. Nếu bạn đặt `max_output_tokens` lớn hơn 32.768 cho một lệnh gọi REST không truyền trực tuyến mà không có `continuation_token`,thì hệ thống sẽ trả về lỗi `400`.
+- **Solicitudes de transmisión y solicitudes que no son de transmisión a través del SDK de IA generativa de Google (`generate_content`):** Se establecen de forma predeterminada en 64 000 tokens de salida.
+- **Llamadas de REST directas que no son de transmisión (`generateContent`):** El valor predeterminado es 32,000 tokens de salida. Si se configura `max_output_tokens` en un valor superior a 32,768 en una llamada REST que no es de transmisión sin un `continuation_token`, se devuelve un error `400`.
 
-| Cách bạn gọi mô hình | Giới hạn đầu ra mà không có quá trình giải mã dài | Giải mã lâu khi khởi chạy | Việc nên làm |
+| Cómo llamas al modelo | Límite de salida sin decodificación larga | Decodificación prolongada al inicio | Qué hacer |
 | --- | --- | --- | --- |
-| Google GenAI SDK, phiên bản mới nhất | 64K | Có, SDK tiếp tục cho bạn | Đặt `max_output_tokens`. |
-| Google GenAI SDK, phiên bản cũ, không truyền trực tuyến | 64K | Không | Nâng cấp SDK. |
-| REST `streamGenerateContent` | 64K | Có, với vòng lặp của riêng bạn | Viết một vòng lặp. Xem [Cách 2](#option-2-loop). |
-| REST `generateContent` | 32 nghìn | Có, bằng vòng lặp của riêng bạn | Viết một vòng lặp. Xem [Cách 2](#option-2-loop). |
+| SDK de IA generativa de Google, versión más reciente | 64 K | Sí, el SDK continúa por ti | Establece `max_output_tokens`. |
+| SDK de IA generativa de Google, versión anterior, sin transmisión | 64 K | No | Actualiza el SDK. |
+| REST `streamGenerateContent` | 64 K | Sí, con tu propio bucle | Escribe un bucle. Consulta la [opción 2](#option-2-loop). |
+| REST `generateContent` | 32,000 | Sí, con tu propio bucle | Escribe un bucle. Consulta la [opción 2](#option-2-loop). |
 
-## Trường hợp sử dụng tính năng giải mã dài
+## Cuándo usar la decodificación larga
 
-Hầu hết các yêu cầu đều nằm trong giới hạn yêu cầu duy nhất (64.000 mã thông báo cho các lệnh gọi phát trực tuyến và SDK hoặc 32.000 mã thông báo cho các lệnh gọi REST không phát trực tuyến). Hãy sử dụng tính năng giải mã dài khi một câu trả lời cần nhiều mã thông báo tư duy và mã thông báo đầu ra kết hợp hơn mức cho phép của một yêu cầu. Việc tăng `max_output_tokens` sẽ giúp mô hình có giới hạn cao hơn để suy luận về các vấn đề khó, thay vì làm cho các câu trả lời tiêu chuẩn dài hơn.
+La mayoría de las solicitudes se completan dentro del límite de una sola solicitud (64 000 tokens para las llamadas de transmisión y del SDK, o 32 000 tokens para las llamadas de REST que no son de transmisión). Usa la decodificación larga cuando una respuesta necesite más tokens de razonamiento y de salida combinados de los que permite una sola solicitud. Aumentar `max_output_tokens` le da al modelo un límite más alto para razonar sobre problemas difíciles, en lugar de hacer que las respuestas estándar sean más largas.
 
-| Tải công việc | Sử dụng phương thức giải mã dài? | Lý do |
+| Carga de trabajo | ¿Quieres usar la decodificación larga? | Por qué |
 | --- | --- | --- |
-| Toán học, khoa học, nghiên cứu và chứng minh chính thức ở mức độ khó | Có | Mô hình có thể sử dụng hơn 64.000 token để khám phá và kiểm tra lập luận của mình. |
-| Những nhiệm vụ khó nhất về lập trình và tác nhân | Có | Một số nhiệm vụ cần hơn 64.000 token suy nghĩ và mã trong một câu trả lời. Hầu hết các nhiệm vụ lập trình và nhiệm vụ dạng tác nhân đều hoàn thành trong phạm vi 64 nghìn mã thông báo. |
-| Hệ thống đánh giá dừng lại ở giới hạn đầu ra | Có | Việc giải mã dài ngăn câu trả lời bị cắt khi mô hình dành toàn bộ yêu cầu 64K hoặc 32K để suy nghĩ. |
-| Trò chuyện, hỏi đáp, tóm tắt, phân loại và trích xuất | Không | Những nhiệm vụ này hoàn thành tốt dưới 32.000 mã thông báo. |
-| Yêu cầu về độ dài cố định, chẳng hạn như "viết một cuốn sách dài 700.000 từ" | Không | Mô hình không tuân theo mục tiêu về độ dài. |
-| Các tác nhân gọi công cụ trong nhiều lượt ngắn | Không | Mỗi lượt chơi đều ngắn. Kết quả đầu ra lớn ở mỗi lượt sẽ nhanh chóng lấp đầy cửa sổ đầu vào và đầu ra hợp nhất 1 triệu token. |
-| Câu lệnh gần đạt đến giới hạn đầu vào là 1 triệu | Không | Kết quả đầu ra chỉ có thể sử dụng 1 triệu trừ đi dữ liệu đầu vào của bạn. |
-| Yêu cầu có độ trễ thấp | Không | Quá trình giải mã dài có thể mất vài phút. |
+| Matemáticas, ciencias, investigación y pruebas formales complejas | Sí | El modelo puede usar más de 64,000 tokens para explorar y verificar su razonamiento. |
+| Las tareas de programación y de agentes más difíciles | Sí | Algunas tareas necesitan más de 64,000 tokens de razonamiento y código en una sola respuesta. La mayoría de las tareas de programación y de agentes finalizan con menos de 64,000 tokens. |
+| Arneses de evaluación que se detienen en el límite de salida | Sí | La decodificación larga evita que se corten las respuestas cuando el modelo dedica una solicitud completa de 64,000 o 32,000 tokens al pensamiento. |
+| Chat, preguntas y respuestas, resumen, clasificación y extracción | No | Estas tareas se completan con menos de 32,000 tokens. |
+| Solicitudes de una longitud fija, como "escribe un libro de 700,000 palabras" | No | El modelo no sigue los objetivos de longitud. |
+| Agentes que llaman a herramientas en muchos turnos cortos | No | Cada turno es corto. Las salidas grandes en cada turno llenan rápidamente la ventana unificada de entrada y salida de 1M. |
+| Instrucciones cerca del límite de entrada de 1 millón | No | La salida solo puede usar 1 millón menos tu entrada. |
+| Solicitudes sensibles a la latencia | No | La decodificación larga puede ejecutarse durante varios minutos. |
 
-Việc đặt `max_output_tokens` cao giúp mô hình có thêm thời gian suy nghĩ về các vấn đề khó, nhưng mô hình vẫn quyết định lượng nội dung cần viết. Để kiểm soát mức độ nỗ lực suy luận mà mô hình sử dụng, hãy đặt [`thinking_level`](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=vi).
+Establecer un valor alto de `max_output_tokens` le da al modelo espacio para pensar más tiempo en problemas difíciles, pero el modelo sigue decidiendo cuánto escribir. Para controlar cuánto esfuerzo de razonamiento usa el modelo, establece [`thinking_level`](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=es-419).
 
-## Bật tính năng giải mã dài
+## Activa la decodificación larga
 
-Bạn có thể tự động chạy giải mã dài bằng SDK Google GenAI (Lựa chọn 1, nên dùng cho hầu hết ứng dụng) hoặc viết vòng lặp tiếp tục của riêng bạn (Lựa chọn 2). Cả hai lựa chọn này đều hỗ trợ cửa sổ ngữ cảnh 1 triệu token.
+Puedes ejecutar la decodificación larga automáticamente con el SDK de IA generativa de Google (opción 1, recomendada para la mayoría de las apps) o escribir tu propio bucle de continuación (opción 2). Ambas opciones admiten la ventana de contexto completa de 1 millón de tokens.
 
-|  | Cách 1: SDK Google GenAI (nên dùng) | Cách 2: Vòng lặp phát trực tuyến của riêng bạn | Cách 2: Vòng lặp không phát trực tuyến của riêng bạn |
+|  | Opción 1: SDK de Google GenAI (recomendado) | Opción 2: Tu propio bucle de transmisión | Opción 2: Tu propio bucle que no es de transmisión |
 | --- | --- | --- | --- |
-| **Ai bắt đầu mỗi lượt chuyển tiếp** | SDK. Bạn đã đặt `max_output_tokens`. | Mã của bạn, tại mỗi điểm kiểm tra hoặc sau khi luồng bị rớt | Mã của bạn, mỗi 32.000 token |
-| **Số mã thông báo trên mỗi yêu cầu** | 64K mỗi bước nhảy | 64.000 mã thông báo cho mỗi luồng, với một điểm kiểm tra sau mỗi 5.000 mã thông báo sau 32.000 | 32 nghìn mỗi yêu cầu |
-| **Giới hạn thời gian cho mỗi yêu cầu** | 20 phút | 20 phút | 20 phút |
-| **Bộ nhớ** | Không có bộ nhớ máy chủ | Không có bộ nhớ máy chủ | Không có bộ nhớ máy chủ |
-| **Phù hợp nhất cho** | Hầu hết các ứng dụng | Người gọi REST và các thiết bị tuỳ chỉnh truyền phát trực tiếp | Các công cụ đánh giá đơn giản |
+| **Quién inicia cada salto** | El SDK Tú estableces `max_output_tokens`. | Tu código, en cada punto de control o después de una transmisión interrumpida | Tu código, cada 32,000 tokens |
+| **Tokens por solicitud** | 64 K por salto | 64 K por transmisión, con un punto de control cada 5 K tokens después de 32 K | 32,000 por solicitud |
+| **Límite de tiempo por solicitud** | 20 minutos | 20 minutos | 20 minutos |
+| **Almacenamiento** | No hay almacenamiento en el servidor | No hay almacenamiento en el servidor | No hay almacenamiento en el servidor |
+| **Ideal para** | La mayoría de las aplicaciones | Llamadores de REST y arneses personalizados que transmiten | Arneses de evaluación simples |
 
-`continuation_token` được mã hoá sẽ mang trạng thái của mô hình giữa các yêu cầu, vì vậy không có dữ liệu nào được lưu trữ trên máy chủ.
+El `continuation_token` encriptado transporta el estado del modelo entre solicitudes, por lo que no se almacena nada en el servidor.
 
-### Cách 1: Sử dụng SDK Google GenAI (nên dùng)
+### Opción 1: Usa el SDK de Google GenAI (recomendado)
 
-Trong Google GenAI SDK mới nhất, `automatic_continuation` được bật theo mặc định cho cả lệnh gọi truyền trực tuyến và không truyền trực tuyến, vì vậy bạn không cần đặt tham số này. Khi bạn đặt `max_output_tokens` cao hơn giới hạn cho mỗi yêu cầu, SDK sẽ tự động chạy các bước tiếp theo và trả về một phản hồi kết hợp.
+En el SDK de GenAI de Google más reciente, `automatic_continuation` está habilitado de forma predeterminada para las llamadas de transmisión y las que no son de transmisión, por lo que no es necesario que lo configures. Cuando configuras `max_output_tokens` por encima del límite por solicitud, el SDK ejecuta automáticamente los saltos de continuación y devuelve una respuesta combinada.
 
-1. Nâng cấp SDK.
+1. Actualiza el SDK.
 
    ### Python
 
@@ -97,7 +97,7 @@ Trong Google GenAI SDK mới nhất, `automatic_continuation` được bật the
    ```
    npm install "@google/genai@>=2.29.1"
    ```
-2. Đặt `max_output_tokens` lớn hơn 65.536.
+2. Establece `max_output_tokens` en un valor mayor que 65,536.
 
    ### Python
 
@@ -146,24 +146,24 @@ Trong Google GenAI SDK mới nhất, `automatic_continuation` được bật the
    console.log("Billed tokens:", response.usageMetadata?.totalTokenCount);
    ```
 
-Xin lưu ý những điều sau đây:
+Recuerda estos puntos:
 
-- **Phát trực tuyến:** `generate_content_stream` (Python) và `generateContentStream` (JavaScript) cũng tiếp tục cho bạn. Nếu một luồng bị rớt sau một điểm kiểm tra, thì SDK sẽ tiếp tục từ điểm kiểm tra đó.
-- **Thời gian chờ:** Thời gian chờ và số lần thử lại áp dụng cho từng bước, chứ không phải cho toàn bộ quá trình chạy.
-- **Kiểm soát thủ công:** Để tự chạy vòng lặp, hãy đặt `automatic_continuation=False` (Python) hoặc `automaticContinuation: false` (JavaScript). Sau đó, hãy làm theo Cách 2.
-- **Mức sử dụng:** Các trường mức sử dụng cho biết tổng số tất cả các chặng. Để biết kích thước của câu lệnh, hãy đọc `initial_prompt_token_count`. Xem phần [Đếm mã thông báo](#count-tokens).
+- **Transmisión:** `generate_content_stream` (Python) y `generateContentStream` (JavaScript) también continúan para ti. Si una transmisión se interrumpe después de un punto de control, el SDK se reanuda desde ese punto de control.
+- **Tiempos de espera:** Los tiempos de espera y los reintentos se aplican a cada salto, no a la ejecución completa.
+- **Control manual:** Para ejecutar el bucle por tu cuenta, establece `automatic_continuation=False` (Python) o `automaticContinuation: false` (JavaScript). Luego, sigue la opción 2.
+- **Uso:** Los campos de uso muestran la suma de todos los saltos. Para obtener el tamaño de tu instrucción, lee `initial_prompt_token_count`. Consulta [Recuento de tokens](#count-tokens).
 
-### Cách 2: Tự viết vòng lặp
+### Opción 2: Escribe tu propio bucle
 
-Viết vòng lặp của riêng bạn nếu bạn gọi REST trực tiếp, sử dụng ngôn ngữ không có SDK mới nhất hoặc cần toàn quyền kiểm soát. Bạn cũng có thể tham khảo các cách triển khai SDK AI tạo sinh của Google trong [Python](https://github.com/googleapis/python-genai/blob/v2.30.1/google/genai/models.py#L6111) và [JavaScript/TypeScript](https://github.com/googleapis/js-genai/blob/v2.29.1/src/models.ts#L88).
+Escribe tu propio bucle si llamas a REST directamente, usas un lenguaje sin el SDK más reciente o necesitas un control total. También puedes consultar nuestras implementaciones del SDK de IA generativa de Google en [Python](https://github.com/googleapis/python-genai/blob/v2.30.1/google/genai/models.py#L6111) y [JavaScript/TypeScript](https://github.com/googleapis/js-genai/blob/v2.29.1/src/models.ts#L88) como referencia.
 
-Hãy tuân thủ các quy tắc sau:
+Siga estas reglas:
 
-1. **Gửi cùng một yêu cầu trên mọi bước nhảy.** Gửi `contents`, `system_instruction`, `tools` và `generation_config` ban đầu. Giữ nguyên `max_output_tokens`.
-2. **Đừng thêm kết quả một phần vào `contents`.** `continuation_token` mang trạng thái của mô hình, bao gồm cả suy nghĩ của mô hình.
-3. **Chỉ gửi mã thông báo mới nhất.** Mỗi mã thông báo đều chứa tất cả tiến trình trước đó.
-4. **Tiếp tục trong khi `finish_reason` là `CONTINUATION`.** Dừng khi có bất kỳ lý do kết thúc nào khác.
-5. **Nối các phần sau bước nhảy cuối cùng.** Kết hợp các phần của tất cả các bước nhảy thành một lượt của mô hình cho nhật ký trò chuyện.
+1. **Enviar la misma solicitud en cada salto** Envía los atributos originales `contents`, `system_instruction`, `tools` y `generation_config`. Mantén `max_output_tokens` igual.
+2. **No agregues resultados parciales a `contents`.** El `continuation_token` contiene el estado del modelo, incluido su proceso de pensamiento.
+3. **Envía solo el token más reciente.** Cada token contiene todo el progreso anterior.
+4. **Continúa mientras `finish_reason` es `CONTINUATION`.** Se detiene por cualquier otro motivo de finalización.
+5. **Une las partes después del último salto.** Combina las partes de todos los saltos en un turno de modelo para el historial de conversaciones.
 
 ### Python
 
@@ -263,7 +263,7 @@ curl -s "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-argon:
   }'
 ```
 
-Một hop chỉ dành cho việc suy nghĩ sẽ trả về `text` trống với `finishReason: "CONTINUATION"`. Hãy coi đây là tiến trình bình thường và yêu cầu hop tiếp theo:
+Un salto dedicado por completo a la reflexión devuelve un `text` vacío con `finishReason: "CONTINUATION"`. Trata esto como un progreso normal y solicita el próximo salto:
 
 ```
 {
@@ -281,123 +281,123 @@ Một hop chỉ dành cho việc suy nghĩ sẽ trả về `text` trống với 
 }
 ```
 
-**Vòng lặp phát trực tuyến** cần thêm một quy tắc nữa. Sau 32.768 mã thông báo đầu tiên, luồng sẽ gửi một mã thông báo điểm kiểm tra sau mỗi 5.000 mã thông báo. Giữ các đoạn mới trong danh sách đang chờ xử lý. Khi một đoạn có `continuation_token`, hãy di chuyển các đoạn đang chờ xử lý sang kết quả đã cam kết và lưu mã thông báo. Nếu luồng bị gián đoạn, hãy loại bỏ các đoạn đang chờ xử lý và tiếp tục từ mã thông báo gần đây nhất. Nếu luồng bị gián đoạn trước điểm kiểm tra đầu tiên, hãy gửi lại yêu cầu ban đầu.
+Los **bucles de transmisión** necesitan una regla más. Después de los primeros 32,768 tokens, la transmisión envía un token de punto de control cada 5,000 tokens. Mantén los fragmentos nuevos en una lista pendiente. Cuando un fragmento tenga un `continuation_token`, mueve los fragmentos pendientes a tu resultado confirmado y guarda el token. Si se interrumpe la transmisión, descarta los fragmentos pendientes y reanuda la transmisión desde el último token. Si la transmisión se interrumpe antes del primer punto de control, vuelve a enviar la solicitud original.
 
-## Đặt `max_output_tokens`
+## Conjunto `max_output_tokens`
 
-`max_output_tokens` đặt giới hạn kết hợp cho việc suy nghĩ và kết quả đầu ra trên tất cả các bước. Việc giảm giá trị này không khiến mô hình suy nghĩ ngắn gọn hơn mà thay vào đó sẽ cắt bớt câu trả lời sớm hơn.
+`max_output_tokens` establece el límite combinado para el pensamiento y la salida en todos los saltos. Disminuirlo no hace que el modelo piense de forma más concisa, sino que corta la respuesta antes.
 
-| Khối lượng công việc của bạn | `max_output_tokens` đề xuất |
+| Tu carga de trabajo | Recomendada `max_output_tokens` |
 | --- | --- |
-| Ứng dụng hiện có có giới hạn thấp hơn 32K | Tăng lên 32.768. |
-| Các nhiệm vụ lập trình và nhiệm vụ dựa trên tác nhân dài | Bắt đầu từ 65.536. |
-| Toán học, khoa học, nghiên cứu và chứng minh khó | Giá trị thử nghiệm từ 262.144 đến 1.048.576 trừ đi số mã thông báo đầu vào. |
+| Apps existentes con un límite inferior a 32,000 | Aumenta el valor a 32,768. |
+| Tareas de programación y de agentes extensas | Comienza en 65,536. |
+| Matemáticas, ciencia, investigación y demostraciones difíciles | Valores de prueba desde 262,144 hasta 1,048,576 menos tus tokens de entrada. |
 
-Để sử dụng ít mã thông báo hơn, hãy giảm `thinking_level`. Sử dụng `high` cho những nhiệm vụ suy luận khó nhất. Sử dụng `medium` (mặc định) cho hầu hết các công việc lập trình và tác nhân. Sử dụng `low` cho các tác vụ ít phức tạp hơn.
+Para usar menos tokens, disminuye `thinking_level`. Usa `high` para las tareas de razonamiento más difíciles. Usa `medium` (la opción predeterminada) para la mayoría de las tareas de programación y de agentes. Usa `low` para tareas menos complejas.
 
-## Xử lý các yêu cầu chạy trong thời gian dài
+## Cómo controlar solicitudes de larga duración
 
-Vì Gemini 4 Argon suy nghĩ lâu hơn các mô hình Gemini 3.x đối với các vấn đề khó, nên bạn cần tăng thời gian chờ của ứng dụng để các yêu cầu dài không bị ngắt kết nối sớm.
+Como Gemini 4 Argon piensa más tiempo que los modelos Gemini 3.x en problemas difíciles, debes aumentar los tiempos de espera de tus clientes para que las solicitudes largas no se desconecten antes de tiempo.
 
-- **Cuộc gọi không truyền trực tuyến:** Máy chủ sẽ đóng kết nối sau 10 phút.
-- **Cuộc gọi trực tuyến:** Máy chủ sẽ đóng luồng sau 20 phút.
-- **Thời gian chờ của ứng dụng:** Đặt thời gian chờ đọc HTTP thành 20 phút. Thời gian chờ 3 phút hoặc 5 phút sẽ dừng yêu cầu sớm.
+- **Llamadas que no son de transmisión:** El servidor cierra la conexión después de 10 minutos.
+- **Llamadas de transmisión:** El servidor cierra la transmisión después de 20 minutos.
+- **Tiempos de espera del cliente:** Establece el tiempo de espera de lectura de HTTP en 20 minutos. Un tiempo de espera de 3 o 5 minutos detiene la solicitud antes de tiempo.
 
-Trong Python, hãy đặt thời gian chờ trên ứng dụng khách tính bằng mili giây:
+En Python, establece el tiempo de espera en el cliente en milisegundos:
 
 ```
 client = genai.Client(http_options=types.HttpOptions(timeout=1_200_000))  # 20 minutes
 ```
 
-Đối với những công việc mà ứng dụng của bạn thăm dò ý kiến, Interactions API sẽ chạy quá trình giải mã dài trên máy chủ. Xem phần [thực thi trong nền](https://ai.google.dev/gemini-api/docs/background-execution?hl=vi).
+En el caso de los trabajos que son sondeados por tu cliente, la API de Interactions ejecuta una decodificación prolongada en el servidor. Consulta [Ejecución en segundo plano](https://ai.google.dev/gemini-api/docs/background-execution?hl=es-419).
 
-## Tiếp tục khi mô hình sử dụng tất cả mã thông báo đầu ra
+## Reanudar cuando el modelo use todos los tokens de salida
 
-Khi một phản hồi kết thúc bằng `MAX_TOKENS`, phản hồi đó vẫn chứa `continuation_token`. Bạn có hai lựa chọn:
+Cuando una respuesta termina con `MAX_TOKENS`, aún incluye un `continuation_token`. Tienes dos opciones:
 
-- **Tiếp tục:** Gửi cùng một yêu cầu kèm theo mã thông báo và `max_output_tokens` cao hơn. Giá trị phải cao hơn số lượng mã thông báo đã sử dụng cho đến nay. Nếu không, API sẽ trả về lỗi 400.
-- **Bắt đầu lại:** Gửi yêu cầu ban đầu với `max_output_tokens` cao hơn và không có mã thông báo. Bạn sẽ phải trả tiền cho cả hai lần chạy.
+- **Continuar:** Envía la misma solicitud con el token y un `max_output_tokens` más alto. El valor debe ser superior a los tokens que se usaron hasta el momento. De lo contrario, la API devuelve un error 400.
+- **Vuelve a empezar:** Envía la solicitud original con un valor de `max_output_tokens` más alto y sin token. Pagas por ambas ejecuciones.
 
-## Đếm số token
+## Cuenta tokens
 
-Với tính năng tiếp tục tự động, `usage_metadata` sẽ báo cáo tổng số lượt truy cập trên tất cả các chặng. SDK sẽ cộng mọi trường số lượng: `prompt_token_count`, `cached_content_token_count`, `candidates_token_count`, `thoughts_token_count` và `total_token_count`.
+Con la continuación automática, `usage_metadata` informa los totales de todos los saltos. El SDK suma todos los campos de recuento: `prompt_token_count`, `cached_content_token_count`, `candidates_token_count`, `thoughts_token_count` y `total_token_count`.
 
-`prompt_token_count` cộng dồn mã thông báo đầu vào của mỗi bước nhảy. Mỗi bước sẽ gửi câu lệnh của bạn cùng với mọi nội dung đã tạo cho đến thời điểm đó trở lại mô hình dưới dạng dữ liệu đầu vào, vì vậy, các mã thông báo giống nhau sẽ được tính lại ở mỗi bước sau đó. Ví dụ: với SDK Google GenAI, một câu lệnh 1.000 mã thông báo tạo ra 200.000 mã thông báo suy nghĩ và đầu ra sẽ mất 4 bước:
+`prompt_token_count` suma los tokens de entrada de cada salto. Cada salto envía tu instrucción y todo lo que se generó hasta el momento de vuelta al modelo como entrada, por lo que los mismos tokens se vuelven a contar en cada salto posterior. Por ejemplo, con el SDK de IA generativa de Google, una instrucción de 1,000 tokens que produce 200,000 tokens de razonamiento y resultado requiere cuatro saltos:
 
-| Hop | Dữ liệu đầu vào được gửi đến mô hình | Mã thông báo nhập |
+| Hop | Entrada enviada al modelo | Tokens de entrada |
 | --- | --- | --- |
-| 1 | Câu lệnh | 1.000 |
-| 2 | Lời nhắc + hop 1 | 66.536 |
-| 3 | Lời nhắc + bước nhảy 1 và 2 | 132.072 |
-| 4 | Câu lệnh + 1 đến 3 bước | 197.608 |
-| **Tổng cộng** |  | **397.216** |
+| 1 | Instrucción | 1,000 |
+| 2 | Instrucción + salto 1 | 66,536 |
+| 3 | Instrucción + saltos 1 y 2 | 132,072 |
+| 4 | Instrucción + saltos 1 a 3 | 197,608 |
+| **Total** |  | **397,216** |
 
-`prompt_token_count` báo cáo khoảng 397.000 mã thông báo (với các đầu vào lặp lại được giảm tự động 95% nhờ bộ nhớ đệm ngầm) và `total_token_count` báo cáo khoảng 597.000 mã thông báo, mặc dù kích thước ngữ cảnh thực tế chỉ khoảng 201.000 mã thông báo: câu lệnh 1.000 mã thông báo cộng với 200.000 mã thông báo của quá trình suy nghĩ và đầu ra. Vòng lặp REST không truyền trực tuyến sử dụng 32K bước nhảy, vì vậy,cần 7 bước nhảy cho cùng một đầu ra và báo cáo 695.128 mã thông báo đầu vào.
+`prompt_token_count` informa sobre 397,000 tokens (con entradas de saltos repetidos que se descuentan automáticamente en un 95% por el almacenamiento en caché implícito), y `total_token_count` informa sobre 597,000 tokens, aunque el tamaño real del contexto es de solo unos 201,000 tokens: la instrucción de 1,000 tokens más 200,000 tokens de pensamiento y salida. Un bucle REST que no es de transmisión usa 32 000 saltos, por lo que se necesitan siete saltos para la misma salida y se registran 695,128 tokens de entrada.
 
-| Cách bạn gọi mô hình | Nội dung `usage_metadata` cho thấy | Chi phí | Đối với kích thước câu lệnh |
+| Cómo llamas al modelo | Qué muestra `usage_metadata` | Por costo | Para el tamaño de la instrucción |
 | --- | --- | --- | --- |
-| Google GenAI SDK, tự động tiếp tục (mặc định) | Tổng số trên tất cả các chặng | Đọc các trường sử dụng như hiện tại. | Đọc `usage_metadata.initial_prompt_token_count` (Python) hoặc `usageMetadata.initialPromptTokenCount` (JavaScript). |
-| SDK có `automatic_continuation=False` hoặc REST | Một bước nhảy cho mỗi phản hồi | Thêm từng trường trên các chặng. | Đọc `prompt_token_count` từ bước nhảy đầu tiên. |
+| SDK de IA generativa de Google, continuación automática (opción predeterminada) | Totales en todos los saltos | Lee los campos de uso tal como están. | Lee `usage_metadata.initial_prompt_token_count` (Python) o `usageMetadata.initialPromptTokenCount` (JavaScript). |
+| SDK con `automatic_continuation=False` o REST | Un salto por respuesta | Agrega cada campo en los diferentes saltos. | Lee `prompt_token_count` desde el primer salto. |
 
-`prompt_token_count` và `total_token_count` là tổng của mọi bước nhảy, chứ không phải kích thước của bối cảnh. Đừng sử dụng các mã thông báo này để quyết định thời điểm tóm tắt hoặc cắt bớt nhật ký trò chuyện (thu gọn ngữ cảnh) hoặc để thực thi giới hạn ngữ cảnh. Để ước tính kích thước ngữ cảnh, hãy cộng kích thước câu lệnh trong bảng vào `candidates_token_count` và `thoughts_token_count`.
+`prompt_token_count` y `total_token_count` son la suma de cada salto, no el tamaño de tu contexto. No los uses para decidir cuándo resumir o recortar tu historial de conversaciones (compactación del contexto) ni para aplicar un límite de contexto. Para estimar el tamaño del contexto, agrega el tamaño de tu instrucción de la tabla a `candidates_token_count` y `thoughts_token_count`.
 
-Cập nhật khung tác nhân, công cụ đánh giá hoặc proxy trước khi bạn chạy quy trình giải mã dài:
+Actualiza el framework del agente, la herramienta de evaluación o el proxy antes de ejecutar la decodificación larga:
 
-- **Các tác nhân và công cụ đánh giá:** Nếu mã của bạn nén ngữ cảnh hoặc dừng một lần chạy ở giới hạn mã thông báo, hãy sử dụng `initial_prompt_token_count` (hoặc `prompt_token_count` của bước nhảy đầu tiên trong REST) thay vì `prompt_token_count` được cộng. Các phản hồi hoàn tất trong một bước nhảy sẽ báo cáo cùng một giá trị trong cả hai trường, vì vậy, các thử nghiệm ngắn không cho thấy vấn đề.
-- **Các proxy và cổng gọi REST:** Mỗi phản hồi REST chỉ báo cáo bước nhảy của riêng mình. Cộng từng trường trong các bước nhảy để tính chi phí và giữ `promptTokenCount` của bước nhảy đầu tiên làm kích thước câu lệnh. Nếu không, người dùng của bạn sẽ thấy các số khác với số mà người dùng SDK thấy cho cùng một yêu cầu.
-- **Nhật ký và phản hồi được chuyển đổi tuần tự:** SDK tính toán `initial_prompt_token_count` trên ứng dụng khách. Thông tin này không có trong phản hồi REST hoặc trong kết quả JSON của SDK, chẳng hạn như `model_dump()`. Hãy lưu giá trị này dưới dạng một giá trị riêng biệt nếu bạn cần dùng sau này.
+- **Agentes y herramientas de evaluación:** Si tu código compacta el contexto o detiene una ejecución en un límite de tokens, usa `initial_prompt_token_count` (o el `prompt_token_count` del primer salto en REST) en lugar del `prompt_token_count` sumado. Las respuestas que finalizan en un salto informan el mismo valor en ambos campos, por lo que las pruebas cortas no muestran el problema.
+- **Proxies y puertas de enlace que llaman a REST:** Cada respuesta de REST informa solo su propio salto. Suma cada campo en los saltos para el costo y mantén el `promptTokenCount` del primer salto como el tamaño de la instrucción. De lo contrario, tus usuarios verán números diferentes de los que ven los usuarios del SDK para la misma solicitud.
+- **Registros y respuestas serializadas:** El SDK calcula `initial_prompt_token_count` en el cliente. No se encuentra en la respuesta de REST ni en el resultado JSON del SDK, como `model_dump()`. Guárdalo como un valor independiente si lo necesitas más adelante.
 
-Nếu bạn phát trực tuyến trong vòng lặp của riêng mình, thì `usage_metadata` sẽ được tích luỹ trong mỗi sự kiện phát trực tiếp. Chỉ giữ lại giá trị cuối cùng của mỗi luồng, sau đó cộng các giá trị qua các bước nhảy.
+Si transmites en tu propio bucle, `usage_metadata` es acumulativo dentro de cada transmisión. Conserva solo el último valor de cada transmisión y, luego, suma los valores en los saltos.
 
-## Tìm hiểu về việc tính phí
+## Comprende la facturación
 
-Bạn phải trả phí cho mọi mã thông báo trong mọi bước, kể cả những bước chỉ chứa suy nghĩ.
+Pagas por cada token en cada salto, incluidos los saltos que solo contienen pensamiento.
 
-- **Chiết khấu cho bộ nhớ đệm:** Bộ nhớ đệm ngầm định giúp giảm 95% chi phí cho dữ liệu đầu vào lặp lại trong mỗi bước. Trong giai đoạn ra mắt, chi phí cho dữ liệu đầu vào được lưu vào bộ nhớ đệm là 0,1 USD/1 triệu token thay vì 2 USD.
-- **Hết hạn bộ nhớ đệm:** Bộ nhớ đệm sẽ hết hạn sau 15 đến 20 phút nếu không được sử dụng. Nếu bạn tạm dừng lâu giữa các lần nhảy, thì tốc độ đầu vào sẽ được tính lại từ đầu.
-- **Lượt gọi không trực tuyến không thành công:** Bạn chỉ trả phí khi một phản hồi hoàn tất. Yêu cầu không thành công hoặc bị huỷ sẽ không mất phí.
-- **Luồng bị rớt:** Luồng bị rớt trước khi đạt 32.000 mã thông báo sẽ có giá 0 USD. Sau đó, bạn thanh toán cho đến mã thông báo điểm kiểm tra cuối cùng, vì bạn có thể tiếp tục từ đó.
+- **Descuento por almacenamiento en caché:** El almacenamiento en caché implícito descuenta la entrada repetida en cada salto en un 95%. La entrada almacenada en caché cuesta USD 0.10 por cada millón de tokens en lugar de USD 2.00 durante el período de lanzamiento.
+- **Vencimiento de la caché:** La caché vence después de 15 a 20 minutos sin uso. Una pausa larga entre saltos vuelve a cobrar la tarifa de entrada completa.
+- **Saltos fallidos sin transmisión:** Solo pagas cuando se completa una respuesta. Una solicitud con errores o descartada cuesta $0.
+- **Transmisiones descartadas:** Una transmisión que se descarta antes de los 32,000 tokens cuesta $0. Después de eso, pagas hasta el último token de punto de control, porque puedes reanudar desde allí.
 
-## Khắc phục sự cố
+## Solución de problemas
 
-| Dấu hiệu | Nguyên nhân và cách khắc phục |
+| Síntoma | Causa y solución |
 | --- | --- |
-| Đầu ra dừng ở 64K hoặc 32K với `CONTINUATION` | Mô hình vẫn còn mã thông báo, nhưng không có gì tiếp tục yêu cầu. Nâng cấp SDK hoặc thêm vòng lặp. |
-| Đầu ra dừng ở 64K hoặc 32K với `MAX_TOKENS` | `max_output_tokens` chưa được đặt hoặc quá thấp. Đặt giá trị này lớn hơn 65.536. |
-| Văn bản trống có `MAX_TOKENS` | Mô hình đã sử dụng tất cả mã thông báo để suy nghĩ. Tăng `max_output_tokens` hoặc giảm `thinking_level`. |
-| 400: "Mã thông báo tiếp tục đã sử dụng mã thông báo đầu ra..." | `max_output_tokens` không vượt quá số lượng mã thông báo đã sử dụng cho đến nay. Nâng nó lên. |
-| Lỗi đối với `thinking_level: "minimal"` hoặc đối với `thinking_budget` có `thinking_level` | Gemini 4 Argon không hỗ trợ `minimal`. Sử dụng `low`, `medium` hoặc `high`. Đặt `thinking_level` hoặc `thinking_budget`, không đặt cả hai. |
-| Cảnh báo cho `thinking_budget`, `temperature`, `top_p` hoặc `top_k` | Gemini 4 Argon bỏ qua hoặc liên kết các trường này. Sử dụng `thinking_level` và xoá các tham số lấy mẫu. |
-| Yêu cầu sẽ kết thúc sau 3 hoặc 5 phút | Thời gian chờ của ứng dụng quá ngắn. Đặt thành 20 phút. |
-| Quá trình thu gọn bối cảnh bắt đầu quá sớm | Bộ khung đọc tổng đầu vào. Thay vào đó, hãy đọc `initial_prompt_token_count`. |
+| La salida se detiene en 64,000 o 32,000 con `CONTINUATION` | Al modelo le quedan tokens, pero nada continuó la solicitud. Actualiza el SDK o agrega un bucle. |
+| La salida se detiene en 64 K o 32 K con `MAX_TOKENS` | `max_output_tokens` no está configurado o es demasiado bajo. Establece un valor superior a 65,536. |
+| Texto vacío con `MAX_TOKENS` | El modelo usó todos los tokens en el pensamiento. Sube `max_output_tokens` o baja `thinking_level`. |
+| 400: "El token de continuación ya usó tokens de salida…" | `max_output_tokens` no supera los tokens usados hasta el momento. Levántala. |
+| Error para `thinking_level: "minimal"` o para `thinking_budget` con `thinking_level` | Gemini 4 Argon no admite `minimal`. Usa `low`, `medium` o `high`. Configura `thinking_level` o `thinking_budget`, pero no ambos. |
+| Advertencia para `thinking_budget`, `temperature`, `top_p` o `top_k` | Gemini 4 Argon ignora o asigna estos campos. Usa `thinking_level` y quita los parámetros de muestreo. |
+| La solicitud finaliza después de 3 o 5 minutos | El tiempo de espera del cliente es demasiado corto. Establécelo en 20 minutos. |
+| La compactación de contexto comienza demasiado pronto | El harness lee la entrada sumada. Lee `initial_prompt_token_count` en su lugar. |
 
-## Các điểm hạn chế
+## Limitaciones
 
-- **Điểm cuối khả năng tương thích với OpenAI:** Không có tính năng giải mã dài. Kết quả đầu ra sẽ dừng ở giới hạn cho mỗi yêu cầu.
-- **SDK cũ:** Các phiên bản thấp hơn mức tối thiểu trong ghi chú sẽ không tự động tiếp tục.
-- **Độ dài:** Mô hình không tuân theo mục tiêu về độ dài mã thông báo hoặc số từ.
+- **Extremo de compatibilidad con OpenAI:** La decodificación larga no está disponible. La salida se detiene en el límite por solicitud.
+- **SDKs más antiguos:** Las versiones anteriores a las mínimas que se indican en la nota no continúan automáticamente.
+- **Longitud:** El modelo no sigue los objetivos de longitud de tokens ni de recuento de palabras.
 
-## Danh sách kiểm tra
+## Lista de tareas
 
-- Nâng cấp Google GenAI SDK lên phiên bản tối thiểu.
-- Đặt `max_output_tokens` lớn hơn 65.536.
-- Sử dụng `thinking_level` (`low`, `medium` hoặc `high`), không sử dụng `thinking_budget`.
-- Đặt thời gian chờ đọc HTTP thành 20 phút.
-- Sử dụng `initial_prompt_token_count` cho kích thước và độ nén của bối cảnh.
-- Chạy một câu lệnh để thử nghiệm trước khi đánh giá trên quy mô lớn.
+- Actualiza el SDK de GenAI de Google a la versión mínima.
+- Establece `max_output_tokens` en un valor mayor que 65,536.
+- Usa `thinking_level` (`low`, `medium` o `high`), no `thinking_budget`.
+- Establece los tiempos de espera de lectura de HTTP en 20 minutos.
+- Usa `initial_prompt_token_count` para el tamaño y la compactación del contexto.
+- Ejecuta una instrucción como prueba antes de una evaluación grande.
 
-## Các bước tiếp theo
+## Próximos pasos
 
-- [Tính năng mới trong Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=vi)
-- [Đang suy nghĩ](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=vi)
-- [Đếm số lượng mã thông báo](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=vi)
+- [Novedades de Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=es-419)
+- [Pensamiento](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=es-419)
+- [Recuento de tokens](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=es-419)
 
-Gửi ý kiến phản hồi
+Enviar comentarios
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Cập nhật lần gần đây nhất: 2026-10-13 UTC.
+Última actualización: 2026-10-13 (UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+¿Quieres brindar más información?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-13 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-13 (UTC)"],[],[]]

@@ -1,98 +1,94 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=ja
-fetched_at: 2026-10-19T05:58:28.998428+00:00
-title: "\u601d\u8003\u30b7\u30b0\u30cd\u30c1\u30e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=vi
+fetched_at: 2026-10-26T05:55:29.499201+00:00
+title: "Ch\u1eef k\u00fd suy ngh\u0129 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-# 思考シグネチャ
+# Chữ ký suy nghĩ
 
-思考シグネチャは、モデルの内部的な思考プロセスを暗号化したもので、マルチステップのやり取りで推論コンテキストを維持するために使用されます。
-思考モデル（Gemini 4、3、2.5 シリーズなど）を使用する場合、API は
-`thoughtSignature` フィールドをレスポンスの[コンテンツ部分](https://ai.google.dev/api/caching?hl=ja#Part)
-（`text` 部分や `functionCall` 部分など）に返すことがあります。
+Chữ ký suy nghĩ là các bản trình bày được mã hoá về quy trình suy nghĩ nội bộ của mô hình và được dùng để duy trì bối cảnh suy luận trong các hoạt động tương tác nhiều bước.
+Khi sử dụng các mô hình tư duy (chẳng hạn như dòng Gemini 4, 3 và 2.5), API có thể trả về trường `thoughtSignature` trong [các phần nội dung](https://ai.google.dev/api/caching?hl=vi#Part) của câu trả lời (ví dụ: các phần `text` hoặc `functionCall`).
 
-原則として、モデル レスポンスで思考シグネチャを受け取った場合は、次のターンで会話履歴を送信するときに、受け取ったとおりに返します。
-**Gemini 4 モデルと Gemini 3 モデルを使用する場合は、関数呼び出し中に思考シグネチャを返す必要があります。そうしないと、検証エラー** （4xx ステータス コード）が発生します。
-これには、Gemini 3
-Flash で `minimal`
-[思考レベル](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#thinking-levels)の設定を使用する場合も含まれます。
+Theo nguyên tắc chung, nếu nhận được chữ ký suy nghĩ trong câu trả lời của mô hình, bạn nên truyền lại chính xác chữ ký đó như khi nhận được khi gửi nhật ký trò chuyện ở lượt tiếp theo.
+**Khi sử dụng các mô hình Gemini 4 và Gemini 3, bạn phải truyền lại chữ ký ý tưởng trong quá trình gọi hàm, nếu không bạn sẽ gặp lỗi xác thực** (mã trạng thái 4xx).
+Điều này bao gồm cả khi bạn sử dụng chế độ cài đặt `minimal`
+[mức độ tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#thinking-levels) cho Gemini 3
+Flash.
 
-## 仕組み
+## Cách hoạt động
 
-下の図は、Gemini API での
-[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)における「ターン」と「ステップ」の意味を視覚化したものです。「ターン」とは、ユーザーとモデルの間の会話における 1 回の完全なやり取りです。「ステップ」とは、モデルが実行するより細かいアクションまたはオペレーションです。多くの場合、ターンを完了するための大きなプロセスの一部として実行されます。
+Hình ảnh bên dưới minh hoạ ý nghĩa của "lượt" và "bước" liên quan đến [gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) trong Gemini API. Một "lượt" là một lần trao đổi hoàn chỉnh trong cuộc trò chuyện giữa người dùng và mô hình. "Bước" là một hành động hoặc thao tác chi tiết hơn do mô hình thực hiện, thường là một phần của quy trình lớn hơn để hoàn tất một lượt.
 
-![関数呼び出しのターンとステップの図](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=ja)
+![Sơ đồ các bước và lượt gọi hàm](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=vi)
 
-*このドキュメントでは、Gemini 4 モデルと Gemini 3 モデルの関数呼び出しの処理に焦点を当てています。2.5 との違いについては、[モデルの動作](#model-behavior)のセクションをご覧ください。*
+*Tài liệu này tập trung vào việc xử lý tính năng gọi hàm cho các mô hình Gemini 4 và Gemini 3. Hãy tham khảo
+phần [hành vi của mô hình](#model-behavior) để biết những điểm khác biệt so với phiên bản 2.5.*
 
-Gemini 4 と Gemini 3 は、関数呼び出しを含むすべてのモデル レスポンス（API からのレスポンス）に対して思考シグネチャを返します。思考シグネチャは、次のような場合に表示されます。
+Gemini 4 và Gemini 3 trả về chữ ký suy nghĩ cho tất cả phản hồi của mô hình (phản hồi từ
+API) bằng một lệnh gọi hàm. Chữ ký của suy nghĩ xuất hiện trong những trường hợp sau:
 
-- [並列関数](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#parallel_function_calling)
-  呼び出しがある場合、モデル レスポンスから返される最初の関数呼び出し部分には
-  思考シグネチャが含まれます。
-- 順次関数呼び出しがある場合（マルチステップ）、各関数呼び出しにシグネチャがあり、すべてのシグネチャを返す必要があります。
-- 関数呼び出しのないモデル レスポンスでは、モデルによって返される最後の部分に思考シグネチャを返します。
+- Khi có các lệnh gọi [hàm song song](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi#parallel_function_calling), phần lệnh gọi hàm đầu tiên do phản hồi của mô hình trả về sẽ có chữ ký suy nghĩ.
+- Khi có các lệnh gọi hàm tuần tự (nhiều bước), mỗi lệnh gọi hàm sẽ có một chữ ký và bạn phải truyền tất cả chữ ký trở lại.
+- Câu trả lời của mô hình không có lệnh gọi hàm sẽ trả về chữ ký suy nghĩ bên trong phần cuối cùng mà mô hình trả về.
 
-次の表は、マルチステップ関数呼び出しの視覚化を示しています。ターンとステップの定義と、前述のシグネチャの概念を組み合わせています。
+Bảng sau đây minh hoạ các lệnh gọi hàm nhiều bước, kết hợp định nghĩa về lượt và bước với khái niệm về chữ ký được giới thiệu ở trên:
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **ターン** | **ステップ** | **ユーザー リクエスト** | **モデルのレスポンス** | **FunctionResponse** |
+| **Lượt** | **Bước** | **Yêu cầu của người dùng** | **Câu trả lời của mô hình** | **FunctionResponse** |
 | 1 | 1 | `request1 = user_prompt` | `FC1 + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + (FC1 + signature) + FR1` | `FC2 + signature` | `FR2` |
-| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | なし |
+| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Không có |
 
-## 関数呼び出し部分のシグネチャ
+## Chữ ký trong các phần gọi hàm
 
-Gemini は `functionCall` を生成するときに、`thought_signature` を使用して次のターンでツールの出力を正しく処理します。
+Khi tạo `functionCall`, Gemini dựa vào `thought_signature` để xử lý chính xác kết quả của công cụ trong lượt tiếp theo.
 
-- **動作**:
-  - **単一の関数呼び出し**: `functionCall` 部分に `thought_signature` が含まれます。
-  - **並列関数呼び出し**: モデルがレスポンスで並列関数呼び出しを生成する場合、`thought_signature` は**最初の**
-    `functionCall` 部分にのみ付加されます。同じレスポンス内の後続の `functionCall` 部分にはシグネチャは**含まれません** 。
-- **要件**: 会話履歴を返す際は、このシグネチャを受け取った部分に正確に返す**必要があります**。
-- **検証**: 現在のターン内のすべての関数呼び出しに対して厳格な検証が適用されます。（現在のターンのみが必要です。以前のターンでは検証されません）
-  - API は履歴を遡って（最新から最古まで）、標準コンテンツ（`text` など）を含む最新の**ユーザー** メッセージ（現在のターンの開始）を検索します。これは `functionResponse` **be** 。
-  - その特定のユーザー メッセージの後に発生する**すべての** モデル `functionCall` ターンは、ターンの一部と見なされます。
-  - 現在のターンの**各ステップ** の**最初の** `functionCall` 部分には、その `thought_signature` を含める**必要があります** 。
-  - 現在のターンのいずれかのステップの最初の `functionCall` 部分の `thought_signature` を省略すると、リクエストは失敗し、400 エラーが返されます。
-- **適切なシグネチャが返されない場合、エラーは次のように発生します**
-  - Gemini 3 モデル: シグネチャを含めないと、400 エラーが発生します。文言は次の形式になります。
-    - `<index of contents array>`
-      コンテンツ ブロックの関数呼び出し `<Function Call>` に `thought_signature` がありません。例: *関数
-      呼び出し `FC1` コンテンツ ブロックに `1.` `thought_signature`がありません。*
+- **Hành vi**:
+  - **Single Function Call** (Lệnh gọi hàm đơn lẻ): Phần `functionCall` sẽ chứa một `thought_signature`.
+  - **Lệnh gọi hàm song song**: Nếu mô hình tạo lệnh gọi hàm song song
+    trong một phản hồi, thì `thought_signature` **chỉ được đính kèm vào**
+    `functionCall` phần đầu tiên. Các phần `functionCall` tiếp theo trong cùng một phản hồi sẽ **không** chứa chữ ký.
+- **Yêu cầu**: Bạn **phải** trả về chữ ký này ở đúng phần mà bạn nhận được chữ ký khi gửi lại nhật ký trò chuyện.
+- **Xác thực**: Quy trình xác thực nghiêm ngặt được thực thi cho tất cả lệnh gọi hàm trong lượt hiện tại . (Chỉ cần lượt hiện tại; chúng tôi không xác thực các lượt trước)
+  - API này sẽ quay lại nhật ký (từ mới nhất đến cũ nhất) để tìm thông báo **Người dùng** gần đây nhất có chứa nội dung tiêu chuẩn (ví dụ: `text`) ( đây sẽ là điểm bắt đầu của lượt hiện tại). Đây sẽ không **be** là `functionResponse`.
+  - Mọi lượt **Tất cả** mô hình `functionCall` diễn ra sau thông báo sử dụng cụ thể đó đều được coi là một phần của lượt.
+  - Phần **đầu tiên** của `functionCall` trong **mỗi bước** của lượt hiện tại **phải** bao gồm `thought_signature`.
+  - Nếu bạn bỏ qua `thought_signature` cho phần `functionCall` đầu tiên trong bất kỳ bước nào của lượt hiện tại, thì yêu cầu sẽ không thành công và trả về lỗi 400.
+- **Nếu không trả về chữ ký thích hợp, bạn sẽ gặp lỗi theo cách sau**
+  - Các mô hình Gemini 3: Nếu không có chữ ký, bạn sẽ gặp lỗi 400. Nội dung sẽ có dạng như sau:
+    - Lệnh gọi hàm `<Function Call>` trong khối nội dung `<index of contents array>` bị thiếu `thought_signature`. Ví dụ: *Lệnh gọi hàm `FC1` trong khối nội dung `1.` bị thiếu `thought_signature`.*
 
-### 順次関数呼び出しの例
+### Ví dụ về gọi hàm tuần tự
 
-このセクションでは、ユーザーが複数のタスクを必要とする複雑な質問をした場合の、複数の関数呼び出しの例を示します。
+Phần này trình bày ví dụ về nhiều lệnh gọi hàm, trong đó người dùng đặt một câu hỏi phức tạp cần nhiều tác vụ.
 
-ユーザーが複数のタスクを必要とする複雑な質問（`"Check flight status for AA100 and
-book a taxi if delayed"`）をした場合の、マルチターン関数呼び出しの例を見てみましょう。
+Hãy cùng xem một ví dụ về lệnh gọi hàm nhiều lượt, trong đó người dùng đặt một câu hỏi phức tạp cần nhiều tác vụ: `"Check flight status for AA100 and
+book a taxi if delayed"`.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **ターン** | **ステップ** | **ユーザー リクエスト** | **モデルのレスポンス** | **FunctionResponse** |
+| **Bật** | **Bước** | **Yêu cầu của người dùng** | **Câu trả lời của mô hình** | **FunctionResponse** |
 | 1 | 1 | `request1="Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-次のコードは、上の表のシーケンスを示しています。
+Đoạn mã sau đây minh hoạ trình tự trong bảng trên.
 
-**ターン 1、ステップ 1（ユーザーのリクエスト）**
+**Lượt 1, Bước 1 (Yêu cầu của người dùng)**
 
 ```
 {
@@ -147,7 +143,7 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 }
 ```
 
-**ターン 1、ステップ 1（モデルのレスポンス）**
+**Lượt 1, Bước 1 (Câu trả lời của mô hình)**
 
 ```
 {
@@ -168,8 +164,7 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 }
 ```
 
-**ターン 1、ステップ 2（ユーザーのレスポンス - ツールの出力を送信）** このユーザーのターンには `functionResponse` のみ（新しいテキストなし）が含まれているため、まだターン 1 です。
-は保持する必要があります`<Signature_A>`。
+**Lượt 1, Bước 2 (Phản hồi của người dùng – Gửi kết quả của công cụ)** Vì lượt này của người dùng chỉ chứa một `functionResponse` (không có văn bản mới), nên chúng ta vẫn đang ở Lượt 1. Chúng ta phải bảo tồn `<Signature_A>`.
 
 ```
 {
@@ -210,7 +205,7 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 }
 ```
 
-**ターン 1、ステップ 2（モデル）** モデルは、前のツールの出力に基づいてタクシーを予約することにしました。
+**Lượt 1, Bước 2 (Mô hình)** Mô hình hiện quyết định đặt taxi dựa trên kết quả đầu ra của công cụ trước đó.
 
 ```
 {
@@ -231,7 +226,7 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 }
 ```
 
-**ターン 1、ステップ 3（ユーザー - ツールの出力を送信）** タクシーの予約確認を送信するには、このループ内の**すべての** 関数呼び出し（`<Signature A>` + `<Signature B>`）の署名を含める必要があります。
+**Lượt 1, Bước 3 (Người dùng – Gửi kết quả của công cụ)** Để gửi thông tin xác nhận đặt taxi, chúng ta phải thêm chữ ký cho **TẤT CẢ** lệnh gọi hàm trong vòng lặp này (`<Signature A>` + `<Signature B>`).
 
 ```
 {
@@ -300,19 +295,19 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 }
 ```
 
-### 並列関数呼び出しの例
+### Ví dụ về lệnh gọi hàm song song
 
-ユーザーが
-`"Check weather in Paris and London"`と尋ねた場合の並列関数呼び出しの例を見てみましょう。モデルが検証を行う場所を確認できます。
+Hãy cùng xem một ví dụ về lệnh gọi hàm song song, trong đó người dùng yêu cầu
+`"Check weather in Paris and London"` để xem mô hình thực hiện quy trình xác thực ở đâu.
 
-| **ターン** | **ステップ** | **ユーザー リクエスト** | **モデルのレスポンス** | **FunctionResponse** |
+| **Lượt** | **Bước** | **Yêu cầu của người dùng** | **Câu trả lời của mô hình** | **FunctionResponse** |
 | --- | --- | --- | --- | --- |
-| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + signature  FC2 ("London") | FR1 |
-| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  （FC なし） | なし |
+| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + chữ ký  FC2 ("London") | FR1 |
+| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (không có FC) | Không có |
 
-次のコードは、上の表のシーケンスを示しています。
+Đoạn mã sau đây minh hoạ trình tự trong bảng trên.
 
-**ターン 1、ステップ 1（ユーザーのリクエスト）**
+**Lượt 1, Bước 1 (Yêu cầu của người dùng)**
 
 ```
 {
@@ -351,7 +346,7 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 }
 ```
 
-**ターン 1、ステップ 1（モデルのレスポンス）**
+**Lượt 1, Bước 1 (Câu trả lời của mô hình)**
 
 ```
 {
@@ -379,8 +374,7 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 }
 ```
 
-**ターン 1、ステップ 2（ユーザーのレスポンス - ツールの出力を送信）** 最初の部分の
-`<Signature_A>` は、受け取ったとおりに保持する必要があります。
+**Lượt 1, Bước 2 (Phản hồi của người dùng – Gửi đầu ra của công cụ)** Chúng ta phải giữ nguyên `<Signature_A>` ở phần đầu tiên đúng như đã nhận.
 
 ```
 [
@@ -438,18 +432,18 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 ]
 ```
 
-## `functionCall` 以外のパーツのシグネチャ
+## Chữ ký trong các phần không phải `functionCall`
 
-関数呼び出し以外の部分のレスポンスの最後の部分に、`thought_signatures` が返されることもあります。
+Gemini cũng có thể trả về `thought_signatures` trong phần cuối của câu trả lời
+trong các phần không phải lệnh gọi hàm.
 
-- **動作**: モデルから返される最終的なコンテンツ部分（`text, inlineData…`）に
-  `thought_signature`が含まれることがあります。
-- **推奨事項**: 特に複雑な指示の実行や Agentic Workflows のシミュレーションで、モデルが高品質の推論を維持するために、これらのシグネチャを返すことを**おすすめします** 。
-- **検証**: API は検証を厳密に適用**しません** 。省略してもブロッキング エラーは発生しませんが、パフォーマンスが低下する可能性があります。
+- **Hành vi**: Phần nội dung cuối cùng (`text, inlineData…`) do mô hình trả về có thể chứa `thought_signature`.
+- **Đề xuất**: Bạn **nên** trả về các chữ ký này để đảm bảo mô hình duy trì khả năng suy luận chất lượng cao, đặc biệt là đối với các quy trình làm việc phức tạp theo hướng dẫn hoặc quy trình làm việc mô phỏng của tác nhân.
+- **Xác thực**: API **không** thực thi nghiêm ngặt quy trình xác thực. Bạn sẽ không nhận được lỗi chặn nếu bỏ qua các chỉ số này, mặc dù hiệu suất có thể giảm.
 
-### テキスト/コンテキスト推論（検証なし）
+### Văn bản/Lý luận theo ngữ cảnh (Không xác thực)
 
-**ターン 1、ステップ 1（モデルのレスポンス）**
+**Lượt 1, Bước 1 (Câu trả lời của mô hình)**
 
 ```
 {
@@ -463,7 +457,7 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 }
 ```
 
-**ターン 2、ステップ 1（ユーザー）**
+**Lượt 2, Bước 1 (Người dùng)**
 
 ```
 [
@@ -481,27 +475,28 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 ]
 ```
 
-## OpenAI 互換性のシグネチャ
+## Chữ ký cho khả năng tương thích với OpenAI
 
-次の例は、[OpenAI 互換性](https://ai.google.dev/gemini-api/docs/openai?hl=ja)を使用してチャット
-補完 API の思考シグネチャを処理する方法を示しています。
+Các ví dụ sau đây cho thấy cách xử lý chữ ký suy nghĩ cho một API hoàn thành cuộc trò chuyện bằng cách sử dụng [khả năng tương thích với OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=vi).
 
-### 順次関数呼び出しの例
+### Ví dụ về việc gọi hàm tuần tự
 
-これは、ユーザーが複数のタスクを必要とする複雑な質問をした場合の、複数の関数呼び出しの例です。
+Đây là ví dụ về việc gọi nhiều hàm khi người dùng đặt một câu hỏi phức tạp, đòi hỏi phải thực hiện nhiều nhiệm vụ.
 
-ユーザーが `Check flight status for AA100 and book a taxi if delayed` と尋ねた場合の、マルチターン関数呼び出しの例を見てみましょう。ユーザーが複数のタスクを必要とする複雑な質問をした場合に何が起こるかを確認できます。
+Hãy cùng xem một ví dụ về lệnh gọi hàm nhiều lượt, trong đó người dùng hỏi
+`Check flight status for AA100 and book a taxi if delayed` và bạn có thể thấy điều gì
+xảy ra khi người dùng đặt một câu hỏi phức tạp cần nhiều tác vụ.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **ターン** | **ステップ** | **ユーザー リクエスト** | **モデルのレスポンス** | **FunctionResponse** |
+| **Turn** | **Bước** | **Yêu cầu của người dùng** | **Câu trả lời của mô hình** | **FunctionResponse** |
 | 1 | 1 | `request1 = "Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-次のコードは、指定されたシーケンスを示しています。
+Đoạn mã sau đây sẽ thực hiện trình tự đã cho.
 
-**ターン 1、ステップ 1（ユーザーのリクエスト）**
+**Lượt 1, Bước 1 (Yêu cầu của người dùng)**
 
 ```
 {
@@ -555,7 +550,7 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 }
 ```
 
-**ターン 1、ステップ 1（モデルのレスポンス）**
+**Lượt 1, Bước 1 (Câu trả lời của mô hình)**
 
 ```
 {
@@ -578,9 +573,9 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
     }
 ```
 
-**ターン 1、ステップ 2（ユーザーのレスポンス - ツールの出力を送信）**
+**Lượt 1, Bước 2 (Phản hồi của người dùng – Gửi kết quả của công cụ)**
 
-このユーザーのターンには `functionResponse` のみ（新しいテキストなし）が含まれているため、まだターン 1 です。`<Signature_A>` は保持する必要があります。
+Vì lượt này của người dùng chỉ chứa `functionResponse` (không có văn bản mới), nên chúng ta vẫn đang ở Lượt 1 và phải giữ nguyên `<Signature_A>`.
 
 ```
 "messages": [
@@ -615,9 +610,9 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
   ]
 ```
 
-**ターン 1、ステップ 2（モデル）**
+**Lượt 1, Bước 2 (Mô hình)**
 
-モデルは、前のツールの出力に基づいてタクシーを予約することにしました。
+Giờ đây, mô hình quyết định đặt taxi dựa trên kết quả đầu ra trước đó của công cụ.
 
 ```
 {
@@ -640,10 +635,9 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 }
 ```
 
-**ターン 1、ステップ 3（ユーザー - ツールの出力を送信）**
+**Lượt 1, Bước 3 (Người dùng – Gửi kết quả của công cụ)**
 
-タクシーの予約確認を送信するには、このループ内のすべての
-関数呼び出し（`<Signature A>` + `<Signature B>`）の署名を含める必要があります。
+Để gửi thông báo xác nhận đặt xe taxi, chúng ta phải thêm chữ ký cho TẤT CẢ các lệnh gọi hàm trong vòng lặp này (`<Signature A>` + `<Signature B>`).
 
 ```
 "messages": [
@@ -702,21 +696,19 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
   ]
 ```
 
-### 並列関数呼び出しの例
+### Ví dụ về lệnh gọi hàm song song
 
-ユーザーが
-`"Check weather in Paris and London"`と尋ねた場合の並列関数呼び出しの例を見てみましょう。モデルが
-検証を行う場所を確認できます。
+Hãy cùng xem một ví dụ về lệnh gọi hàm song song, trong đó người dùng hỏi `"Check weather in Paris and London"` và bạn có thể thấy mô hình thực hiện quy trình xác thực ở đâu.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **ターン** | **ステップ** | **ユーザー リクエスト** | **モデルのレスポンス** | **FunctionResponse** |
+| **Bật** | **Bước** | **Yêu cầu của người dùng** | **Câu trả lời của mô hình** | **FunctionResponse** |
 | 1 | 1 | `request1="Check the weather in Paris and London"` | `FC1 ("Paris") + signature`  `FC2 ("London")` | `FR1` |
 | 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | `text_output`  `(no FCs)` | `None` |
 
-指定されたシーケンスを示すコードは次のとおりです。
+Sau đây là mã để duyệt qua chuỗi đã cho.
 
-**ターン 1、ステップ 1（ユーザーのリクエスト）**
+**Lượt 1, Bước 1 (Yêu cầu của người dùng)**
 
 ```
 {
@@ -755,7 +747,7 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 }
 ```
 
-**ターン 1、ステップ 1（モデルのレスポンス）**
+**Lượt 1, Bước 1 (Câu trả lời của mô hình)**
 
 ```
 {
@@ -786,9 +778,9 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
 }
 ```
 
-**ターン 1、ステップ 2（ユーザーのレスポンス - ツールの出力を送信）**
+**Lượt 1, Bước 2 (Phản hồi của người dùng – Gửi kết quả của công cụ)**
 
-最初の部分の `<Signature_A>` は、受け取ったとおりに保持する必要があります。
+Bạn phải giữ nguyên `<Signature_A>` ở phần đầu tiên đúng như khi nhận được.
 
 ```
 "messages": [
@@ -837,44 +829,40 @@ book a taxi if delayed"`）をした場合の、マルチターン関数呼び�
   ]
 ```
 
-## よくある質問
+## Câu hỏi thường gặp
 
-1. **現在のターンとステップに関数呼び出し部分がある場合に、別のモデルから Gemini 4 または Gemini 3 に履歴を転送するにはどうすればよいですか？API で生成されなかったため、関連する
-   思考シグネチャがない関数呼び出し
-   部分を提供する必要があります。**
+1. **Làm cách nào để chuyển nhật ký từ một mô hình khác sang Gemini 4 hoặc Gemini 3 bằng một
+   phần gọi hàm trong lượt và bước hiện tại? Tôi cần cung cấp các phần gọi hàm không phải do API tạo ra và do đó không có chữ ký suy nghĩ liên kết?**
 
-   リクエストにカスタム関数呼び出しブロックを挿入することは強く
-   推奨されませんが、回避できない場合（クライアントによって決定論的に実行された関数呼び出しとレスポンスに関する情報をモデルに提供する場合や、思考シグネチャを含まない別のモデルからトレースを転送する場合など）は、思考シグネチャ フィールドに `"context_engineering_is_the_way_to_go"` または
-   `"skip_thought_signature_validator"` のダミー シグネチャを設定して、検証をスキップできます。
-2. **並列関数呼び出しとレスポンスをインターリーブして返していますが、API から 400 が返されます。なぜですか？**
+   Mặc dù bạn không nên chèn các khối lệnh gọi hàm tuỳ chỉnh vào yêu cầu, nhưng trong trường hợp không thể tránh khỏi, chẳng hạn như cung cấp thông tin cho mô hình về các lệnh gọi hàm và phản hồi được ứng dụng thực thi một cách tất định, hoặc chuyển dấu vết từ một mô hình khác không bao gồm chữ ký suy nghĩ, bạn có thể đặt các chữ ký giả sau đây là `"context_engineering_is_the_way_to_go"` hoặc `"skip_thought_signature_validator"` trong trường chữ ký suy nghĩ để bỏ qua bước xác thực.
+2. **Tôi đang gửi lại các lệnh gọi hàm song song và phản hồi xen kẽ và API đang trả về mã lỗi 400. Vì sao lại như vậy?**
 
-   API が並列関数呼び出し「FC1 + signature, FC2」を返す場合、想定されるユーザー レスポンスは「FC1+ signature, FC2, FR1, FR2」です。「FC1 + signature, FR1, FC2, FR2」のようにインターリーブすると、API は 400 エラーを返します。
-3. **ストリーミング中にモデルが関数呼び出しを返さない場合、
-   思考シグネチャが見つかりません**
+   Khi API trả về các lệnh gọi hàm song song "FC1 + chữ ký, FC2", phản hồi dự kiến của người dùng là "FC1 + chữ ký, FC2, FR1, FR2". Nếu bạn có các khoá này xen kẽ với nhau dưới dạng "FC1 + chữ ký, FR1, FC2, FR2", thì API sẽ trả về lỗi 400.
+3. **Khi truyền trực tuyến và mô hình không trả về lệnh gọi hàm, tôi không tìm thấy chữ ký suy nghĩ**
 
-   ストリーミング リクエストで FC を含まないモデル レスポンスの場合、モデルはテキスト コンテンツ部分が空の部分に思考シグネチャを返すことがあります。モデルから `finish_reason` が返されるまで、リクエスト全体を解析することをおすすめします。
+   Trong một phản hồi của mô hình không chứa lệnh gọi hàm có yêu cầu truyền trực tuyến, mô hình có thể trả về chữ ký suy nghĩ trong một phần có nội dung văn bản trống. Bạn nên phân tích cú pháp toàn bộ yêu cầu cho đến khi mô hình trả về `finish_reason`.
 
-## モデルごとの思考シグネチャ
+## Chữ ký suy nghĩ cho các mô hình khác nhau
 
-[Gemini 4](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=ja)、[Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=ja#gemini-3)、Gemini 2.5 モデルでは、関数呼び出しの思考シグネチャの動作が異なります。
+Các mô hình [Gemini 4](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=vi), [Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=vi#gemini-3) và Gemini 2.5 có hành vi khác nhau đối với chữ ký tư duy trong các lệnh gọi hàm:
 
-- レスポンスに関数呼び出しがある場合、
-  - Gemini 4 と Gemini 3 では、最初の関数呼び出し部分に常にシグネチャが含まれます。
-    その部分を返すことは**必須** です。
-  - Gemini 2.5 では、最初の部分にシグネチャが含まれます（タイプに関係なく）。その部分を返すことは**省略可能** です。
-- レスポンスに関数呼び出しがない場合、
-  - Gemini 4 と Gemini 3 では、モデルが思考を生成すると、最後の部分にシグネチャが含まれます。
-  - Gemini 2.5 では、どの部分にもシグネチャはありません。
+- Nếu có lệnh gọi hàm trong một phản hồi,
+  - Gemini 4 và Gemini 3 sẽ luôn có chữ ký trong phần gọi hàm đầu tiên.
+    Bạn **bắt buộc** phải trả lại bộ phận đó.
+  - Gemini 2.5 sẽ có chữ ký ở phần đầu tiên (bất kể loại). Bạn **không bắt buộc** phải trả lại phần đó.
+- Nếu không có lệnh gọi hàm nào trong phản hồi, hãy làm như sau:
+  - Gemini 4 và Gemini 3 sẽ có chữ ký ở phần cuối nếu mô hình tạo ra một suy nghĩ.
+  - Gemini 2.5 sẽ không có chữ ký ở bất kỳ phần nào.
 
-比較の詳細については、[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#signatures)のページをご覧ください。Gemini 3 Image モデルについては、
-[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja#thinking-process)ガイドの思考プロセスをご覧ください。
+Hãy tham khảo trang [Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#signatures) để biết thêm thông tin chi tiết về việc so sánh.
+Đối với các mô hình Gemini 3 Image, hãy xem phần quy trình tư duy trong hướng dẫn về tính năng [Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi#thinking-process).
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-最終更新日 2026-10-13 UTC。
+Cập nhật lần gần đây nhất: 2026-10-13 UTC.
 
-ご意見をお聞かせください
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-13 UTC。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-13 UTC."],[],[]]

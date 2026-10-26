@@ -1,50 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=it
-fetched_at: 2026-10-19T05:34:16.254832+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=ru
+fetched_at: 2026-10-26T05:52:52.634440+00:00
 title: "Veo 3.1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
+Доступна новая модель Gemini 4 Argon. [Попробовать](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ru)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Главная](https://ai.google.dev/?hl=ru)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
+- [Документация](https://ai.google.dev/gemini-api/docs?hl=ru)
 
-Invia feedback
+Отправить отзыв
 
 # Veo 3.1
 
-Un motore cinematografico all'avanguardia progettato per la narrazione creativa di fascia alta
-e la produzione video sperimentale. Veo 3.1 è ideale per l'output 4K di livello professionale,
-la generazione audio sincronizzata in modo nativo e i movimenti complessi della videocamera
-che richiedono il massimo livello di coerenza temporale e controllo artistico.
+Современный кинематографический движок, предназначенный для создания высококачественного творческого сторителлинга и экспериментального видеопроизводства. Veo 3.1 лучше всего подходит для создания видео профессионального уровня в разрешении 4K, нативной генерации синхронизированного аудио и сложных движений камеры, требующих высочайшего уровня временной согласованности и художественного контроля.
 
-[Prova in Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=it)
+## Документация
 
-## Documentazione
-
-Visita la pagina [Generazione di video](https://ai.google.dev/gemini-api/docs/video?hl=it) per una copertura completa di
-funzionalità e capacità.
+Полный список функций и возможностей вы найдете на странице [Генерация видео](https://ai.google.dev/gemini-api/docs/video?hl=ru).
 
 ## veo-3.1-generate-preview
 
-| Proprietà | Descrizione |
+| Свойство | Описание |
 | --- | --- |
-| Codice modello id\_card | **API Gemini**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
-| saveTipi di dati supportati | **Ingresso**  Testo, immagine  **Output**  Video con audio |
-| Limiti di token\_auto | **Inserimento di testo**  1024 token  **Output video**  1 |
-| calendar\_monthUltimo aggiornamento | Gennaio 2026 |
+| id\_cardКод модели | **Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
+| saveПоддерживаемые типы данных | **Ввод данных**  Текст, изображение  **Выходные данные**  Видео со звуком |
+| token\_autoОграничения | **Текстовое поле**  1024 токена  **Выходное видео**  1 |
+| calendar\_monthПоследнее обновление | Январь 2026 г. |
 
-Invia feedback
+Отправить отзыв
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
 
-Ultimo aggiornamento 2026-04-29 UTC.
+Последнее обновление: 2026-10-22 UTC.
 
-Vuoi dirci altro?
+Хотите рассказать подробнее?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-22 UTC."],[],[]]

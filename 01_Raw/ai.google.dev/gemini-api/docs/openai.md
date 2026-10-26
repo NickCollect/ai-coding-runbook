@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/openai?hl=he
-fetched_at: 2026-10-19T05:58:45.091441+00:00
+fetched_at: 2026-10-26T05:58:44.041442+00:00
 title: "\u05ea\u05d0\u05d9\u05de\u05d5\u05ea \u05dc-OpenAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -18,7 +18,7 @@ title: "\u05ea\u05d0\u05d9\u05de\u05d5\u05ea \u05dc-OpenAI \u00a0|\u00a0 Gemini 
 
 # תאימות ל-OpenAI
 
-אפשר לגשת למודלים של Gemini באמצעות ספריות OpenAI (‏Python ו-TypeScript או Javascript) יחד עם API בארכיטקטורת REST, על ידי עדכון של שלוש שורות קוד ושימוש ב[מפתח Gemini API](https://aistudio.google.com/apikey?hl=he). אם אתם לא משתמשים כבר בספריות של OpenAI, מומלץ להתקשר ישירות אל [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=he).
+אפשר לגשת למודלים של Gemini באמצעות ספריות OpenAI (‏Python ו-TypeScript או Javascript) יחד עם API בארכיטקטורת REST, על ידי עדכון של שלוש שורות קוד ושימוש ב[מפתח Gemini API](https://aistudio.google.com/apikey?hl=he). אם אתם לא משתמשים בספריות של OpenAI, מומלץ לקרוא ל-[Gemini API ישירות](https://ai.google.dev/gemini-api/docs/get-started?hl=he).
 
 ### Python
 
@@ -92,16 +92,16 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
 מה השתנה? רק שלוש שורות!
 
 - ‫**`api_key="GEMINI_API_KEY"`**: מחליפים את "`GEMINI_API_KEY`" במפתח ה-API של Gemini, שאפשר לקבל ב-[Google AI Studio](https://aistudio.google.com?hl=he).
-- ‫**`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** הפרמטר הזה מציין לספריית OpenAI לשלוח בקשות לנקודת הקצה של Gemini API במקום לכתובת ה-URL שמוגדרת כברירת מחדל.
+- ‫**`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** ההגדרה הזו מורה לספריית OpenAI לשלוח בקשות לנקודת הקצה של Gemini API במקום לכתובת ה-URL שמוגדרת כברירת מחדל.
 - ‫**`model="gemini-3.8-flash"`**: בוחרים מודל Gemini תואם
 
 ## מעמיק
 
-מודלי Gemini מאומנים לחשוב על בעיות מורכבות, מה שמוביל לשיפור משמעותי ביכולות החשיבה הרציונלית. ‫Gemini API כולל [פרמטרים של חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he) שמאפשרים שליטה מדויקת ברמת החשיבה של המודל.
+מודלי Gemini מאומנים לחשוב על בעיות מורכבות, מה שמוביל לשיפור משמעותי ביכולות החשיבה הרציונלית. ‫Gemini API כולל [פרמטרים של חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he) שמאפשרים שליטה מדויקת על משך החשיבה של המודל.
 
 למודלים שונים של Gemini יש הגדרות שונות של חשיבה רציונלית. כך הם ממופים למאמצי החשיבה הרציונלית של OpenAI:
 
-| ‫`reasoning_effort` (OpenAI) | `thinking_level` (Gemini 4 Argon) | `thinking_level` (Gemini 3.1 Flash-Lite) | ‫`thinking_level` (Gemini 3 Flash) | ‫`thinking_budget` (Gemini 2.5) |
+| ‫`reasoning_effort` (OpenAI) | `thinking_level` (Gemini 4 Argon) | `thinking_level` (Gemini 3.1 Flash-Lite) | `thinking_level` (Gemini 3 Flash) | `thinking_budget` (Gemini 2.5) |
 | --- | --- | --- | --- | --- |
 | `minimal` | `low` | `minimal` | `minimal` | `1,024` |
 | `low` | `low` | `low` | `low` | `1,024` |
@@ -110,7 +110,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
 
 אם לא מציינים `reasoning_effort`, ‏Gemini משתמש [ברמה או בתקציב](https://ai.google.dev/gemini-api/docs/thinking?hl=he#thinking-levels) שמוגדרים כברירת מחדל במודל.
 
-אם רוצים להשבית את החשיבה, אפשר להגדיר את `reasoning_effort` לערך `"none"` עבור מודלים של Gemini 2.5. אי אפשר להשבית את ההסקה במודלים Gemini 2.5 Pro או 3.
+אם אתם רוצים להשבית את תהליך החשיבה, אתם יכולים להגדיר את `reasoning_effort` לערך `"none"` במודלים של Gemini 2.5. אי אפשר להשבית את מודל ההסקה ב-Gemini 2.5 Pro או במודלים מדור 3.
 
 ### Python
 
@@ -184,7 +184,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-מודלים של Gemini גם יוצרים [סיכומים של המחשבות](https://ai.google.dev/gemini-api/docs/thinking?hl=he#summaries).
+המודלים החושבים של Gemini גם יוצרים [סיכומי תהליך חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he#summaries).
 אתם יכולים להשתמש בשדה [`extra_body`](#extra-body) כדי לכלול שדות של Gemini בבקשה.
 
 שימו לב שהפונקציונליות של `reasoning_effort` ו-`thinking_level`/`thinking_budget` חופפת, ולכן אי אפשר להשתמש בהן בו-זמנית.
@@ -681,129 +681,6 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/images/generations
 
 ## יצירת סרטון
 
-יצירת סרטון באמצעות `veo-3.1-generate-preview` דרך נקודת הקצה `/v1/videos` שתואמת ל-Sora. הפרמטרים הנתמכים ברמה העליונה הם `prompt` ו-`model`. צריך להעביר פרמטרים נוספים כמו `duration_seconds`,‏ `image` ו-`aspect_ratio` עם `extra_body`. בקטע [`extra_body`](#extra-body) מפורטים כל הפרמטרים הזמינים.
-
-יצירת סרטונים היא פעולה ממושכת שמחזירה מזהה פעולה שאפשר לדגום כדי לבדוק אם היא הסתיימה.
-
-### Python
-
-```
-from openai import OpenAI
-
-client = OpenAI(
-    api_key="GEMINI_API_KEY",
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
-)
-
-# Returns a Long Running Operation (status: processing)
-response = client.videos.create(
-    model="veo-3.1-generate-preview",
-    prompt="A cinematic drone shot of a waterfall",
-)
-
-print(f"Operation ID: {response.id}")
-print(f"Status: {response.status}")
-```
-
-### JavaScript
-
-```
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-    apiKey: "GEMINI_API_KEY",
-    baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/"
-});
-
-async function main() {
-    // Returns a Long Running Operation (status: processing)
-    const response = await openai.videos.create({
-        model: "veo-3.1-generate-preview",
-        prompt: "A cinematic drone shot of a waterfall",
-    });
-
-    console.log(`Operation ID: ${response.id}`);
-    console.log(`Status: ${response.status}`);
-}
-
-main();
-```
-
-### REST
-
-```
-curl "https://generativelanguage.googleapis.com/v1beta/openai/videos" \
-  -H "Authorization: Bearer $GEMINI_API_KEY" \
-  -F "model=veo-3.1-generate-preview" \
-  -F "prompt=A cinematic drone shot of a waterfall"
-```
-
-### בדיקת סטטוס הסרטון
-
-יצירת הסרטונים היא אסינכרונית. משתמשים ב-`GET /v1/videos/{id}` כדי לדגום את הסטטוס ולאחזר את כתובת ה-URL הסופית של הסרטון בסיום:
-
-### Python
-
-```
-import time
-from openai import OpenAI
-
-client = OpenAI(
-    api_key="GEMINI_API_KEY",
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
-)
-
-# Poll until video is ready
-video_id = response.id  # From the create call
-while True:
-    video = client.videos.retrieve(video_id)
-    if video.status == "completed":
-        print(f"Video URL: {video.url}")
-        break
-    elif video.status == "failed":
-        print(f"Generation failed: {video.error}")
-        break
-    print(f"Status: {video.status}. Waiting...")
-    time.sleep(10)
-```
-
-### JavaScript
-
-```
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-    apiKey: "GEMINI_API_KEY",
-    baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/"
-});
-
-async function main() {
-    // Poll until video is ready
-    const videoId = response.id;  // From the create call
-    while (true) {
-        const video = await openai.videos.retrieve(videoId);
-        if (video.status === "completed") {
-            console.log(`Video URL: ${video.url}`);
-            break;
-        } else if (video.status === "failed") {
-            console.log(`Generation failed: ${video.error}`);
-            break;
-        }
-        console.log(`Status: ${video.status}. Waiting...`);
-        await new Promise(resolve => setTimeout(resolve, 10000));
-    }
-}
-
-main();
-```
-
-### REST
-
-```
-curl "https://generativelanguage.googleapis.com/v1beta/openai/videos/VIDEO_ID" \
-  -H "Authorization: Bearer $GEMINI_API_KEY"
-```
-
 ## הבנת אודיו
 
 ניתוח קלט אודיו:
@@ -984,7 +861,7 @@ console.log(event);
 
 ## הטמעות
 
-הטמעות טקסט מודדות את הקשר בין מחרוזות טקסט, ואפשר ליצור אותן באמצעות [Gemini API](https://ai.google.dev/gemini-api/docs/embeddings?hl=he). אפשר להשתמש ב-`gemini-embedding-2-preview` להטמעות מולטימודאליות או ב-`gemini-embedding-001` להטמעות של טקסט בלבד.
+הטמעות טקסט מודדות את הקשר בין מחרוזות טקסט, ואפשר ליצור אותן באמצעות [Gemini API](https://ai.google.dev/gemini-api/docs/embeddings?hl=he). אפשר להשתמש ב-`gemini-embedding-2-preview` להטמעות מולטי-מודאליות או ב-`gemini-embedding-001` להטמעות של טקסט בלבד.
 
 ### Python
 
@@ -1042,7 +919,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/embeddings" \
 
 אתם יכולים ליצור [משימות באצווה](https://ai.google.dev/gemini-api/docs/batch-api?hl=he), לשלוח אותן ולבדוק את הסטטוס שלהן באמצעות ספריית OpenAI.
 
-תצטרכו להכין את קובץ ה-JSONL בפורמט הקלט של OpenAI. לדוגמה:
+צריך להכין את קובץ ה-JSONL בפורמט הקלט של OpenAI. לדוגמה:
 
 ```
 {"custom_id": "request-1", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.8-flash", "messages": [{"role": "user", "content": "Tell me a one-sentence joke."}]}}
@@ -1097,7 +974,7 @@ for line in file_content.splitlines():
     print(line)
 ```
 
-ב-OpenAI SDK יש גם תמיכה ב[יצירת הטמעות באמצעות Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he#batch-embeddings). כדי לעשות את זה, מחליפים את השדה `endpoint` של השיטה `create` בנקודת קצה של הטמעה, וגם את המפתחות `url` ו-`model` בקובץ JSONL:
+ערכת ה-SDK של OpenAI תומכת גם ב[יצירת הטמעות באמצעות Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he#batch-embeddings). כדי לעשות את זה, מחליפים את השדה `endpoint` של השיטה `create` בנקודת קצה של הטמעות, וגם את המפתחות `url` ו-`model` בקובץ ה-JSONL:
 
 ```
 # JSONL file using embeddings model and endpoint
@@ -1152,27 +1029,14 @@ print(completion)
 | --- | --- | --- | --- |
 | **`cached_content`** | טקסט | צ'אט | תואם למטמון התוכן הכללי של Gemini. |
 | **`thinking_config`** | אובייקט | צ'אט | תואם ל-ThinkingConfig של Gemini. |
-| **`aspect_ratio`** | טקסט | תמונות | יחס גובה-רוחב של הפלט (למשל, `"16:9"`, ‏ `"1:1"`, ‏ `"9:16"`). |
+| **`aspect_ratio`** | טקסט | תמונות | יחס גובה-רוחב של הפלט (למשל, `"16:9"`, `"1:1"`, `"9:16"`). |
 | **`generation_config`** | אובייקט | תמונות | אובייקט הגדרות אישיות ליצירת תוכן ב-Gemini (למשל, `{"responseModalities": ["IMAGE"], "candidateCount": 2}`). |
 | **`safety_settings`** | רשימה | תמונות | מסננים מותאמים אישית של סף הבטיחות (למשל, `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`). |
-| **`tools`** | רשימה | תמונות | הפעלת ביסוס (למשל, `[{"google_search": {}}]`). רק עבור `gemini-3-pro-image-preview`. |
-| **`aspect_ratio`** | טקסט | וידאו | מידות הסרטון שנוצר (`16:9` לרוחב, `9:16` לאורך). אם לא צוין ערך, המערכת ממפה מ-`size`. |
-| **`resolution`** | טקסט | וידאו | רזולוציית הפלט (`720p`, ‏ `1080p`, ‏ `4K`). הערה: `1080p` ו-`4K` מפעילים את צינור עיבוד הנתונים של upsampler. |
-| **`duration_seconds`** | מספר שלם | וידאו | אורך תהליך הייצור (ערכים: `4`,‏ `6`,‏ `8`). הערך חייב להיות `8` כשמשתמשים ב-`reference_images`, באינטרפולציה או בהרחבה. |
-| **`frame_rate`** | טקסט | וידאו | קצב הפריימים של פלט הסרטון (לדוגמה, `"24"`). |
-| **`input_reference`** | טקסט | וידאו | קלט של קובץ עזר ליצירת סרטונים. |
-| **`extend_video_id`** | טקסט | וידאו | המזהה של סרטון קיים שרוצים להאריך. |
-| **`negative_prompt`** | טקסט | וידאו | פריטים להחרגה (למשל, `"shaky camera"`). |
-| **`seed`** | מספר שלם | וידאו | מספר שלם ליצירה דטרמיניסטית. |
-| **`style`** | טקסט | וידאו | סגנון חזותי (`cinematic` כברירת מחדל, `creative` לאופטימיזציה לרשתות חברתיות). |
-| **`person_generation`** | טקסט | וידאו | ההגדרה קובעת אם ייווצרו תמונות של אנשים (`allow_adult`, `allow_all`, `dont_allow`). |
-| **`reference_images`** | רשימה | וידאו | עד 3 תמונות רפרנס לסגנון או לדמות (נכסי base64). |
-| **`image`** | טקסט | וידאו | תמונת קלט ראשונית בקידוד Base64 כדי להתנות את יצירת הסרטון. |
-| **`last_frame`** | אובייקט | וידאו | התמונה הסופית לאינטרפולציה (נדרש `image` כפריים הראשון). |
+| **`tools`** | רשימה | תמונות | הפעלת ביסוס (למשל, `[{"google_search": {}}]`). רק ל-`gemini-3-pro-image-preview`. |
 
 ### דוגמה לשימוש ב-`extra_body`
 
-דוגמה לשימוש ב-`extra_body` כדי להגדיר את `cached_content`:
+הנה דוגמה לשימוש ב-`extra_body` כדי להגדיר את `cached_content`:
 
 ### Python
 
@@ -1258,7 +1122,7 @@ curl https://generativelanguage.googleapis.com/v1beta/openai/models \
 
 ## אחזור מודל
 
-שליפת מודל Gemini:
+אחזור של מודל Gemini:
 
 ### Python
 
@@ -1313,8 +1177,8 @@ curl https://generativelanguage.googleapis.com/v1beta/openai/models/gemini-3.8-f
 
 אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-עדכון אחרון: 2026-10-15 (שעון UTC).
+עדכון אחרון: 2026-10-22 (שעון UTC).
 
 רוצה לתת לנו משוב?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-10-15 (שעון UTC)."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-10-22 (שעון UTC)."],[],[]]

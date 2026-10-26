@@ -1,35 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it
-fetched_at: 2026-10-19T05:45:29.368507+00:00
-title: "Guida rapida di Managed Agents \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja
+fetched_at: 2026-10-26T05:47:42.324493+00:00
+title: "\u30de\u30cd\u30fc\u30b8\u30c9 \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u306e\u30af\u30a4\u30c3\u30af\u30b9\u30bf\u30fc\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Invia feedback
+フィードバックを送信
 
-# Guida rapida di Managed Agents
+# マネージド エージェントのクイックスタート
 
-Questa guida ti illustra la creazione e l'utilizzo di agenti gestiti nell'API Gemini, utilizzando l'[agente antigravità](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it). Farai
-la tua prima chiamata all'agente, continuerai una conversazione multi-turno, mostrerai gradualmente la
-risposta, scaricherai file dalla sandbox e lavorerai con l'agente gestito
-Antigravity.
+このガイドでは、[Antigravity エージェント](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja)を使用して、Gemini API で Managed Agents を作成して使用する方法について説明します。最初のエージェント呼び出しを行い、マルチターンの会話を継続し、レスポンスをストリーミングし、サンドボックスからファイルをダウンロードし、Antigravity マネージド エージェントを操作します。
 
-## Esegui la tua prima interazione con l'agente
+## 最初のエージェントとのやり取りを実行する
 
-Una singola chiamata all'[API Interactions](https://ai.google.dev/gemini-api/docs?hl=it) esegue il provisioning di una sandbox Linux, esegue il ciclo dell'agente e restituisce il risultato. Definisci tre parametri:
+[Interactions API](https://ai.google.dev/gemini-api/docs?hl=ja) への 1 回の呼び出しで、Linux サンドボックスがプロビジョニングされ、エージェント ループが実行され、結果が返されます。次の 3 つのパラメータを定義します。
 
-- Passa `agent` come `"antigravity-preview-09-2026"`, ovvero la versione attuale del nostro agente gestito predefinito e generico.
-- Definisci `environment="remote"` per eseguire il provisioning di un nuovo ambiente sandbox.
-- Crea un input, definendo cosa vuoi che faccia l'agente.
+- `agent` を `"antigravity-preview-09-2026"` として渡します。これは、事前定義された汎用マネージド エージェントの現在のバージョンです。
+- `environment="remote"` を定義して、新しいサンドボックス環境をプロビジョニングします。
+- エージェントに実行させたいことを定義する入力を作成します。
 
 ### Python
 
@@ -150,16 +147,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-La risposta restituisce un oggetto `Interaction`. Memorizza `interaction.id` e `interaction.environment_id` per continuare la conversazione nella stessa sandbox. Usa `interaction.output_text` per accedere alla risposta finale dell'agente. `interaction.steps` elenca ogni passaggio eseguito dall'agente (ragionamento, chiamate di strumenti, esecuzione del codice).
+レスポンスは `Interaction` オブジェクトを返します。`interaction.id` と `interaction.environment_id` を保存して、同じサンドボックスで会話を続けます。`interaction.output_text` を使用して、エージェントの最終回答にアクセスします。`interaction.steps` には、エージェントが実行した各ステップ（推論、ツール呼び出し、コード実行）が一覧表示されます。
 
-## Continuare la conversazione (multi-turno)
+## 会話を続ける（マルチターン）
 
-L'API monitora due dimensioni di stato indipendenti:
+この API は、次の 2 つの独立した状態ディメンションを追跡します。
 
-- **Contesto della conversazione**:cronologia della chat, traccia del ragionamento, utilizzo di strumenti, utilizzo di `previous_interaction_id`.
-- [**Stato dell'ambiente**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it):file, pacchetti installati e stato della sandbox, utilizzando `environment`.
+- **会話のコンテキスト:** チャットの履歴、推論のトレース、ツールの使用、`previous_interaction_id` の使用。
+- [**環境の状態:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja) `environment` を使用したファイル、インストールされたパッケージ、サンドボックスの状態。
 
-Passa entrambi nel rispettivo spazio per riprendere:
+それぞれを適切な場所に渡して再開します。
 
 ### Python
 
@@ -269,20 +266,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-I file del turno 1 (`fibonacci.txt`) rimangono nel turno 2. L'agente conserva anche il contesto della conversazione.
+ターン 1（`fibonacci.txt`）のファイルはターン 2 でも保持されます。エージェントは会話のコンテキストも保持します。
 
-Puoi combinarli in modo indipendente:
+これらは個別に組み合わせて使用できます。
 
-- **Cancella conversazione, mantieni file**:ometti `previous_interaction_id`, passa solo l'ID ambiente utilizzando `environment` per una nuova conversazione nello stesso spazio di lavoro.
-- **Mantieni conversazione, nuovo workspace:** passa `previous_interaction_id`, imposta `environment="remote"` per una nuova sandbox.
+- **会話をクリアしてファイルを保持する:** `previous_interaction_id` を省略し、同じワークスペース内の新しい会話の `environment` を使用して環境 ID のみを渡します。
+- **会話を保持、新しいワークスペース:** `previous_interaction_id` を渡し、新しいサンドボックス用に `environment="remote"` を設定します。
 
-### Compattazione automatica del contesto
+### コンテキストの自動圧縮
 
-Nelle conversazioni lunghe e con più turni, la cronologia non elaborata dei passaggi di ragionamento, delle chiamate di strumenti e dei contenuti di file di grandi dimensioni può crescere rapidamente e consumare una quantità significativa di spazio di contesto. Per evitare errori di limite di token e mantenere la concentrazione dell'agente (evitando il "context rot"), l'API Managed Agents include un passaggio di compattazione del contesto nativo a circa 135.000 token. Ciò avviene automaticamente.
+長時間にわたるマルチターンの会話では、推論ステップ、ツール呼び出し、大きなファイルの内容の未加工の履歴が急速に増大し、コンテキスト スペースを大量に消費する可能性があります。トークン上限エラーを防ぎ、エージェントの集中力を維持する（「コンテキストの劣化」を防ぐ）ため、Managed Agents API には、約 135,000 トークンでネイティブ コンテキスト圧縮ステップが用意されています。これは自動処理で、
 
-## Visualizzare la risposta in streaming
+## レスポンスをストリーミングする
 
-Per le attività di lunga durata, puoi trasmettere in streaming la risposta per vedere l'agente lavorare in tempo reale:
+長時間実行タスクの場合、レスポンスをストリーミングして、エージェントの動作をリアルタイムで確認できます。
 
 ### Python
 
@@ -423,13 +420,11 @@ curl -N -s -X POST "https://generativelanguage.googleapis.com/v1beta/interaction
 }'
 ```
 
-Streaming dei delta dei passaggi di restituzione con aggiornamenti incrementali. Quando un passaggio viene completato,
-l'evento `step.stop` include le statistiche di utilizzo accumulate. Scopri di più nella
-[guida allo streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=it).
+ストリーミングは、増分更新で歩数の差分を返します。ステップが完了すると、`step.stop` イベントに累積使用状況統計情報が含まれます。詳しくは、[ストリーミング ガイド](https://ai.google.dev/gemini-api/docs/streaming?hl=ja)をご覧ください。
 
-## Scaricare file dall'ambiente
+## 環境からファイルをダウンロードする
 
-Quando l'agente crea file all'interno della sandbox. Scaricali utilizzando l'API Files con una richiesta HTTP diretta (nessun metodo SDK ancora disponibile):
+エージェントがサンドボックス内にファイルを作成する場合。Files API を使用して直接 HTTP リクエストでダウンロードします（まだ SDK メソッドはありません）。
 
 ### Python
 
@@ -570,13 +565,13 @@ mkdir -p extracted_snapshot
 tar -xf snapshot.tar -C extracted_snapshot
 ```
 
-## Salvare un agente gestito
+## マネージド エージェントを保存する
 
-Nei passaggi precedenti, abbiamo utilizzato l'agente Antigravity predefinito e lo abbiamo personalizzato in linea. Dopo aver eseguito l'iterazione della configurazione (istruzioni, competenze, selezione del modello e ambiente), puoi salvarla come agente gestito riutilizzabile. In questo modo, puoi richiamarlo per ID senza ripetere la configurazione.
+前の手順では、デフォルトの Antigravity エージェントを使用して、インラインでカスタマイズしました。構成（指示、スキル、モデルの選択、環境）を反復処理したら、再利用可能なマネージド エージェントとして保存できます。これにより、構成を繰り返すことなく ID で呼び出すことができます。
 
-Quando salvi un agente, nota la simmetria architetturale con le interazioni in linea: specifichi `base_agent: "antigravity-preview-09-2026"` e puoi passare un `agent_config` con il `model` che hai scelto proprio come faresti su `interactions.create`. Definisci anche un `base_environment` (dalle origini o creando un fork di un ambiente esistente). L'agente utilizzerà questa configurazione di ambiente e modello per ogni nuova interazione.
+エージェントを保存すると、インライン インタラクションとのアーキテクチャの対称性に気づくでしょう。`base_agent: "antigravity-preview-09-2026"` を指定し、`interactions.create` の場合と同様に、選択した `model` を使用して `agent_config` を渡すことができます。また、`base_environment`（ソースから、または既存の環境をフォークして）も定義します。エージェントは、新しいインタラクションごとにこの環境とモデルの構成を使用します。
 
-**Dalle origini**:definisci le origini inline o da altre origini come GitHub o Cloud Storage.
+**ソースから:** ソースをインラインで定義するか、GitHub や Cloud Storage などの他のソースから定義します。
 
 ### Python
 
@@ -775,9 +770,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-## Richiamare l'agente gestito
+## マネージド エージェントを呼び出す
 
-Una volta salvato un agente gestito, puoi richiamarlo per ID. Ogni chiamata esegue il fork dell'ambiente di base, quindi ogni esecuzione inizia da zero:
+マネージド エージェントを保存すると、ID で呼び出すことができます。呼び出しごとにベース環境がフォークされるため、実行は常にクリーンな状態から開始されます。
 
 ### Python
 
@@ -879,19 +874,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Passaggi successivi
+## 次のステップ
 
-- [Agente antigravità](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it): funzionalità, strumenti supportati, input multimodale, prezzi e limitazioni.
-- [Creazione di agenti gestiti](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it): estendi Antigravity con le tue istruzioni, competenze e dati.
-- [Ambienti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it): origini, networking, ciclo di vita, limiti delle risorse.
-- [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it): l'API sottostante per modelli e agenti.
+- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja): 機能、サポートされているツール、マルチモーダル入力、料金、制限事項。
+- [Managed Agents の構築](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja): 独自の指示、スキル、データで Antigravity を拡張します。
+- [環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja): ソース、ネットワーキング、ライフサイクル、リソースの上限。
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja): モデルとエージェントの基盤となる API。
 
-Invia feedback
+フィードバックを送信
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ultimo aggiornamento 2026-10-01 UTC.
+最終更新日 2026-10-01 UTC。
 
-Vuoi dirci altro?
+ご意見をお聞かせください
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-10-01 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-01 UTC。"],[],[]]

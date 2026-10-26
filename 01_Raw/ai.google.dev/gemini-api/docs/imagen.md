@@ -1,42 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=pt-BR
-fetched_at: 2026-10-19T05:52:13.724888+00:00
-title: "Gerar imagens usando o Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=ja
+fetched_at: 2026-10-26T05:48:00.965356+00:00
+title: "Imagen \u3092\u4f7f\u7528\u3057\u3066\u753b\u50cf\u3092\u751f\u6210\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
 
-Envie comentários
+フィードバックを送信
 
-# Gerar imagens usando o Imagen
+# Imagen を使用して画像を生成する
 
-O Imagen é o modelo legado de geração de imagens do Google. Ele foi desativado e não está mais disponível na API Gemini.
+Imagen は Google の以前の画像生成モデルです。この機能は現在シャットダウンされており、Gemini API では利用できなくなっています。
 
-## Migrar para o Nano Banana
+## Nano Banana に移行する
 
-Migre para o Nano Banana para geração de imagens:
+画像生成用の Nano Banana に移行します。
 
-- **Nome do modelo**: use `gemini-2.5-flash-image` (ou modelos do Nano Banana 2, como `gemini-3.1-flash-image`) em vez dos nomes de modelos do Imagen.
-- **Método**: use `client.models.generate_content` em vez de
-  `client.models.generate_images`.
-- **Processamento de respostas**: o Nano Banana retorna partes de conteúdo com dados de imagem
-  em vez de um objeto de resposta de imagem específico.
+- **モデル名**: Imagen モデル名の代わりに `gemini-2.5-flash-image`（または `gemini-3.1-flash-image` などの Nano Banana 2 モデル）を使用します。
+- **メソッド**: `client.models.generate_images` ではなく `client.models.generate_content` を使用します。
+- **レスポンスの処理**: Nano Banana は、特定の画像レスポンス オブジェクトではなく、画像データを含むコンテンツ部分を返します。
 
-Consulte o [guia de geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br) para mais detalhes e exemplos.
+詳細と例については、[画像生成ガイド](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)をご覧ください。
 
-Envie comentários
+フィードバックを送信
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Última atualização 2026-09-18 UTC.
+最終更新日 2026-09-18 UTC。
 
-Quer enviar seu feedback?
+ご意見をお聞かせください
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-18 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-18 UTC。"],[],[]]

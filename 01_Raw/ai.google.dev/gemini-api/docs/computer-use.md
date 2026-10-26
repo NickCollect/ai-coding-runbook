@@ -1,39 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-TW
-fetched_at: 2026-10-19T05:53:47.922115+00:00
-title: "\u64cd\u4f5c\u96fb\u8166 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-CN
+fetched_at: 2026-10-26T05:43:50.925834+00:00
+title: "\u4f7f\u7528\u7535\u8111 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
+Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-提供意見
+发送反馈
 
-# 操作電腦
+# 使用电脑
 
-Computer Use 工具可讓您建構瀏覽器、行動裝置和電腦控制代理，與其互動並自動執行工作。模型可以透過螢幕截圖「看到」電腦畫面，並透過產生滑鼠點選和鍵盤輸入等特定 UI 動作「採取行動」。與函式呼叫類似，您需要實作用戶端執行環境，才能接收及執行電腦使用動作。
+借助 Computer Use 工具，您可以构建浏览器、移动设备和桌面设备控制智能体，以便与任务进行交互并自动执行任务。通过屏幕截图，模型可以“看到”计算机屏幕，并通过生成特定的界面操作（例如鼠标点击和键盘输入）来“执行操作”。与函数调用类似，您需要实现客户端执行环境，以接收和执行“计算机使用”操作。
 
-如需支援的模型清單，請參閱「[模型版本](#model-versions)」。Gemini 3.x 模型支援多項進階功能：
+如需查看支持的模型列表，请参阅[模型版本](#model-versions)。Gemini 4 和 Gemini 3.x 模型支持多项高级功能：
 
-- **支援多種環境：**為[瀏覽器、行動裝置和電腦](#supported-environments)環境建構代理。
-- **簡化意圖動作：**動作包含 `intent` 欄位，說明模型在每個步驟背後的推理過程。
-- **可設定的安全政策：**透過內建政策類別和覆寫，微調[安全行為](#safety-policies)。
-- **提示詞注入偵測：**選擇加入[螢幕截圖掃描](#prompt-injection)功能，偵測隱藏的對抗性指令。
+- **多环境支持**：为[浏览器、移动设备和桌面设备](#supported-environments)环境构建智能体。
+- **通过 intent 简化操作**：操作包含一个 `intent` 字段，用于解释模型在每个步骤背后的推理。
+- **可配置的安全政策**：使用内置政策类别和替换项微调[安全行为](#safety-policies)。
+- **提示注入检测**：选择启用[屏幕截图扫描](#prompt-injection)，以检测隐藏的对抗性指令。
 
-透過電腦使用功能，您可以建構可執行下列動作的代理程式：
+借助 Computer Use，您可以构建能够执行以下操作的智能体：
 
-- 自動在網站上輸入重複資料或填寫表單。
-- 對網頁應用程式和使用者流程執行自動化測試
-- 在各種網站上進行研究 (例如從電子商務網站收集產品資訊、價格和評論，做為購買決策的依據)
+- 自动执行网站上的重复性数据录入或表单填写。
+- 对 Web 应用和用户体验流程执行自动化测试
+- 在各种网站上进行研究（例如，从电子商务网站收集商品信息、价格和评价，以便做出购买决策）
 
-以下是初始化用戶端，並將提示傳送至模型的最低限度範例，其中已為瀏覽器環境啟用 `computer_use` 工具：
+以下是一个最小示例，展示了如何在浏览器环境中初始化客户端并向启用了 `computer_use` 工具的模型发送提示：
 
 ### Python
 
@@ -137,44 +137,44 @@ func main() {
 }
 ```
 
-## Computer Use 的運作方式
+## “计算机使用”功能的运作方式
 
-如要使用 Computer Use 模型建構代理程式，您需要在應用程式和 API 之間設定連續迴圈。以下說明程式碼在每個步驟中的作用：
+如需使用 Computer Use 模型构建智能体，您需要在应用和 API 之间设置一个持续循环。以下是代码在每个步骤中的执行操作：
 
-1. [**向模型傳送要求**](#send-request)
-   - 應用程式會傳送 API 要求，其中包含電腦使用工具、設定 (例如目標環境)、使用者提示和目前畫面的螢幕截圖。
-2. [**接收模型回覆**](#model-response)
-   - 模型會分析畫面和提示，並傳回回應，其中包含代表 UI 動作 (例如點擊、捲動或按鍵) 的建議 `function_call`。
-   - 如果是 **Gemini 3.x 模型**，回應也會包含推論 `intent`，說明模型選擇該動作的原因。
-   - 回應也可能包含內部安全系統的 `safety_decision`，將動作分類為一般/允許、`require_confirmation` (需要使用者核准) 或封鎖。
-3. [**執行收到的動作**](#execute-actions)
-   - 如果允許執行動作 (或使用者確認執行)，用戶端程式碼會剖析 `function_call`，縮放正規化座標以符合可視區域，並使用自動化工具 (例如 Playwright) 在目標環境中執行動作。如果動作遭到封鎖，用戶端應停止執行或處理中斷。
-4. [**擷取新環境狀態**](#capture-state)
-   - 動作執行完畢後，應用程式會擷取新的螢幕截圖，並在 `function_result` 中傳回模型，要求下一步。
+1. [**向模型发送请求**](#send-request)
+   - 您的应用发送一个 API 请求，其中包含计算机使用工具、您的配置设置（例如目标环境）、用户提示以及当前屏幕的屏幕截图。
+2. [**接收模型回答**](#model-response)
+   - 模型会分析屏幕和提示，并返回一个回答，其中包含表示界面操作（例如点击、滚动或按键）的建议 `function_call`。
+   - 对于 **Gemini 4 和 Gemini 3.x 模型**，响应还包含一个推理 `intent`，用于解释模型为何选择该操作。
+   - 响应还可能包含来自内部安全系统的 `safety_decision`，该系统会将操作分类为常规/允许、`require_confirmation`（需要用户批准）或已屏蔽。
+3. [**执行收到的操作**](#execute-actions)
+   - 如果操作被允许（或用户确认了操作），您的客户端代码会解析 `function_call`，缩放归一化坐标以匹配视口，并使用自动化工具（例如 Playwright）在目标环境中执行操作。如果操作被屏蔽，您的客户端应停止执行或处理中断。
+4. [**捕获新环境状态**](#capture-state)
+   - 操作执行完毕后，应用会截取新的屏幕截图，并在 `function_result` 中将其发送回模型，以请求执行下一步。
 
-接著，系統會從步驟 2 開始重複這個程序，持續要求模型執行下一個動作，直到工作完成或終止。
+然后，此过程会从第 2 步开始重复，不断向模型请求下一个操作，直到任务完成或终止。
 
-![電腦使用情況總覽](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=zh-tw)
+![计算机使用概览](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=zh-cn)
 
-## 如何導入「操作電腦」功能
+## 如何实现“操作电脑”功能
 
-使用電腦使用工具建構前，請先完成下列設定：
+在使用计算机使用工具进行构建之前，您需要设置：
 
-- **安全執行環境：**在沙箱 VM 或容器中執行代理，與主機系統隔離，限制潛在影響。[參考實作](https://github.com/google/computer-use-preview/)包含可立即使用的 Docker 沙箱，方便您踏出第一步。
-- **用戶端動作處理常式：**導入用戶端邏輯，執行座標、輸入文字及擷取螢幕截圖。
+- **安全执行环境**：在沙盒化虚拟机或容器中运行智能体，使其与主机系统隔离，并限制其潜在影响。[参考实现](https://github.com/google/computer-use-preview/)包含一个基于 Docker 的即用型沙盒，供您参考。
+- **客户端操作处理程序**：实现客户端逻辑，以执行坐标、输入文本和截取屏幕截图。
 
-以下範例使用網路瀏覽器做為執行環境，並使用 [Playwright](https://playwright.dev/) 做為用戶端處理常式。
+以下示例使用网络浏览器作为执行环境，并使用 [Playwright](https://playwright.dev/) 作为客户端处理程序。
 
-### 0. 設定 Playwright
+### 0. 设置 Playwright
 
-首先，請安裝必要套件：
+首先，安装所需的软件包：
 
 ```
 pip install google-genai playwright
 playwright install chromium
 ```
 
-接著，初始化 Playwright 瀏覽器執行個體，以便執行：
+然后，初始化一个 Playwright 浏览器实例，用于执行：
 
 ```
 from playwright.sync_api import sync_playwright
@@ -202,13 +202,13 @@ page.goto("https://www.google.com")
 # will be used in the steps below.
 ```
 
-### 1. 向模型傳送要求
+### 1. 向模型发送请求
 
-初始化用戶端程式庫，並設定電腦使用工具。請注意，發出要求時不必指定螢幕大小，模型會預測縮放至螢幕高度和寬度的像素座標。
+初始化客户端库并配置“计算机使用”工具。请注意，发出请求时无需指定显示大小；模型会预测按屏幕高度和宽度缩放的像素坐标。
 
 ### Python
 
-使用 `google-genai` Python SDK (`2.7.0` 以上版本) 設定指定瀏覽器環境的要求：
+使用 `google-genai` Python SDK（`2.7.0` 或更高版本）配置针对浏览器环境的请求：
 
 ```
 from google import genai
@@ -232,7 +232,7 @@ print(interaction)
 
 ### JavaScript
 
-使用 `@google/genai` Node.js SDK 設定指定瀏覽器環境的請求：
+使用 `@google/genai` Node.js SDK 配置针对浏览器环境的请求：
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -332,7 +332,7 @@ func main() {
 
 ### REST
 
-使用 curl 傳送要求：
+使用 curl 发送请求：
 
 ```
 curl -X POST \
@@ -352,9 +352,9 @@ curl -X POST \
   }'
 ```
 
-### 2. 接收模型回覆
+### 2. 接收模型回答
 
-模型回覆會建議函式呼叫，其中包含座標和說明動作的自訂推論意圖：
+模型回答会建议一个函数调用，其中包含坐标和解释该操作的定制推理意图：
 
 ```
 {
@@ -372,9 +372,9 @@ curl -X POST \
 }
 ```
 
-### 3. 執行收到的動作
+### 3. 执行收到的操作
 
-應用程式必須剖析回應座標、從標準化 1000x1000 座標縮放，然後執行動作：
+应用必须解析响应坐标，将其从归一化的 1000x1000 坐标进行缩放，然后执行操作：
 
 ### Python
 
@@ -670,9 +670,9 @@ func main() {
 }
 ```
 
-### 4. 擷取新的環境狀態
+### 4. 捕获新环境状态
 
-執行動作後，請將函式執行結果傳回模型，讓模型使用這項資訊生成下一個動作。如果執行了多個動作 (平行呼叫)，則必須在後續的使用者對話輪次中，為每個動作傳送 `function_result`。
+执行操作后，将函数执行结果发送回模型，以便模型可以使用此信息生成下一个操作。如果执行了多项操作（并行调用），则必须在后续用户轮次中为每项操作发送一个 `function_result`。
 
 ### Python
 
@@ -826,13 +826,13 @@ func main() {
 }
 ```
 
-定義如何擷取環境狀態並設定格式後，即可將所有步驟合併為連續執行迴圈。
+定义如何捕获环境状态并设置其格式后，您可以将所有这些步骤组合成一个持续执行循环。
 
-## 建構代理迴圈
+## 构建智能体循环
 
-如要啟用多步驟互動，請將「[如何實作電腦使用功能](#implement-computer-use)」一節中的四個步驟合併為單一迴圈。這個迴圈會持續要求動作，並將結果回饋給模型，直到工作完成為止。
+如需实现多步互动，请将[如何实现 Computer Use](#implement-computer-use) 部分中的四个步骤合并为一个循环。此循环会持续请求操作并将结果反馈给模型，直到任务完成。
 
-請記得在每個步驟中，將模型回覆和函式回覆附加至對話記錄，正確管理對話記錄。
+请务必在每个步骤中将模型回答和函数回答都附加到对话记录中，以便正确管理对话记录。
 
 ### Python
 
@@ -1227,85 +1227,85 @@ func main() {
 }
 ```
 
-## 支援的環境
+## 受支持的环境
 
-Gemini 3.x 模型支援 `computer_use` 設定中指定的三種環境：
+Gemini 4 和 Gemini 3.x 模型支持 `computer_use` 配置中指定的三个环境：
 
-### 瀏覽器環境 (`ENVIRONMENT_BROWSER`)
+### 浏览器环境 (`ENVIRONMENT_BROWSER`)
 
-瀏覽器工具可執行的動作：
+浏览器工具下的可用操作：
 
-| 指令名稱 | 說明 | 引數 (在函式呼叫中) |
+| 命令名称 | 说明 | 参数（在函数调用中） |
 | --- | --- | --- |
-| **點按** | 在座標處按一下滑鼠左鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **double\_click** | 在座標處按兩下。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **triple\_click** | 在座標上連按三下。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **middle\_click** | 在座標處按下滑鼠中鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **right\_click** | 在座標上按一下滑鼠右鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **mouse\_down** | 在座標位置按住滑鼠按鈕。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **mouse\_up** | 在座標處放開滑鼠按鈕。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **move** | 將游標移至指定位置。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **type** | 輸入文字。 | `text`：str `press_enter`：bool (選用，預設為 `false`) `intent`：str |
-| **drag\_and\_drop** | 將項目從起始座標拖曳至結束座標。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
-| **wait** | 暫停執行指定秒數。 | `seconds`：int (選用，預設為 `1`) `intent`：str |
-| **press\_key** | 按下並放開指定鍵。 | `key`: str `intent`: str |
-| **key\_down** | 按住指定按鍵。 | `key`: str `intent`: str |
-| **key\_up** | 放開指定按鍵。 | `key`: str `intent`: str |
-| **快速鍵** | 按下指定的按鍵組合。 | `keys`：`List[str]` `intent`：`str` |
-| **take\_screenshot** | 傳回目前畫面的螢幕截圖。 | `intent`：str |
-| **scroll** | 以像素距離在座標上向上、向下、向左或向右捲動。 | `y`：int (0 到 999) `x`：int (0 到 999) `direction`：str (`"up"`、`"down"`、`"left"`、`"right"`) `magnitude_in_pixels`：int (0 到 999，選用，預設為 `300`) `intent`：str |
-| **go\_back** | 返回瀏覽器記錄中的上一個網頁。 | `intent`：str |
-| **navigate** | 直接前往指定網址。 | `url`：str `intent`：str |
-| **go\_forward** | 前往瀏覽器記錄中的下一個網頁。 | `intent`：str |
+| **click** | 在坐标处左键点击。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **double\_click** | 双击坐标。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **triple\_click** | 在坐标处三击。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **middle\_click** | 在坐标处点击鼠标中键。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **right\_click** | 右键点击坐标。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **mouse\_down** | 在相应坐标处按住鼠标按键。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **mouse\_up** | 在指定坐标处松开鼠标按键。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **move** | 将光标移至指定位置。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **type** | 输入文字。 | `text`：str `press_enter`：bool（可选，默认值为 `false`） `intent`：str |
+| **drag\_and\_drop** | 将某个项从起始坐标拖动到结束坐标。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
+| **wait** | 暂停执行指定的秒数。 | `seconds`：int（可选，默认值为 `1`） `intent`：str |
+| **press\_key** | 按下并松开指定按键。 | `key`：str `intent`：str |
+| **key\_down** | 按住指定键。 | `key`：str `intent`：str |
+| **key\_up** | 释放指定的键。 | `key`：str `intent`：str |
+| **hotkey** | 按下指定的组合键。 | `keys`：`List[str]` `intent`：`str` |
+| **take\_screenshot** | 返回当前屏幕的屏幕截图。 | `intent`：str |
+| **scroll** | 在某个坐标处向上、向下、向左或向右滚动一定像素距离。 | `y`：int (0-999) `x`：int (0-999) `direction`：str（`"up"`、`"down"`、`"left"`、`"right"`） `magnitude_in_pixels`：int（0-999，可选，默认值为 `300`） `intent`：str |
+| **go\_back** | 返回浏览器历史记录中的上一个网页。 | `intent`：str |
+| **navigate** | 直接导航到指定网址。 | `url`：str `intent`：str |
+| **go\_forward** | 在浏览器历史记录中前进到下一个网页。 | `intent`：str |
 
-### 行動環境 (`ENVIRONMENT_MOBILE`)
+### 移动环境 (`ENVIRONMENT_MOBILE`)
 
-Android 最佳化環境動作：
+针对 Android 优化的环境操作：
 
-| 指令名稱 | 說明 | 引數 (在函式呼叫中) |
+| 命令名称 | 说明 | 参数（在函数调用中） |
 | --- | --- | --- |
-| **open\_app** | 依名稱開啟應用程式。 | `app_name`: str `intent`: str |
-| **點按** | 在座標處按一下滑鼠左鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **list\_apps** | 列出裝置上可用的應用程式，並傳回應用程式名稱和套件名稱。 | `intent`：str |
-| **wait** | 暫停執行指定秒數。 | `seconds`：int (選用，預設為 `1`) `intent`：str |
-| **go\_back** | 返回上一個畫面或網頁。 | `intent`：str |
-| **type** | 輸入文字。 | `text`：str `press_enter`：bool (選用，預設為 `false`) `intent`：str |
-| **drag\_and\_drop** | 將項目從起始座標拖曳至結束座標。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
-| **long\_press** | 在畫面的座標上執行長按操作。 | `y`：int (0-999) `x`：int (0-999) `seconds`：int (選用，預設為 `2`) `intent`：str |
-| **press\_key** | 按下並放開指定鍵。 | `key`: str `intent`: str |
-| **take\_screenshot** | 傳回目前畫面的螢幕截圖。 | `intent`：str |
+| **open\_app** | 按名称打开应用。 | `app_name`：str `intent`：str |
+| **click** | 在坐标处左键点击。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **list\_apps** | 列出设备上的可用应用，并返回其名称和软件包名称。 | `intent`：str |
+| **wait** | 暂停执行指定的秒数。 | `seconds`：int（可选，默认值为 `1`） `intent`：str |
+| **go\_back** | 返回上一个屏幕或网页。 | `intent`：str |
+| **type** | 输入文字。 | `text`：str `press_enter`：bool（可选，默认值为 `false`） `intent`：str |
+| **drag\_and\_drop** | 将某个项从起始坐标拖动到结束坐标。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
+| **long\_press** | 在屏幕上的某个坐标处执行长按操作。 | `y`：int (0-999) `x`：int (0-999) `seconds`：int（可选，默认值为 `2`） `intent`：str |
+| **press\_key** | 按下并松开指定按键。 | `key`：str `intent`：str |
+| **take\_screenshot** | 返回当前屏幕的屏幕截图。 | `intent`：str |
 
-### 電腦環境 (`ENVIRONMENT_DESKTOP`)
+### 桌面环境 (`ENVIRONMENT_DESKTOP`)
 
-桌面環境 OS 層級游標指令：
+桌面环境操作系统级光标命令：
 
-| 指令名稱 | 說明 | 引數 (在函式呼叫中) |
+| 命令名称 | 说明 | 参数（在函数调用中） |
 | --- | --- | --- |
-| **點按** | 在座標處按一下滑鼠左鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **double\_click** | 在座標處按兩下。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **triple\_click** | 在座標上連按三下。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **middle\_click** | 在座標處按下滑鼠中鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **right\_click** | 在座標上按一下滑鼠右鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **mouse\_down** | 在座標位置按住滑鼠按鈕。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **mouse\_up** | 在座標處放開滑鼠按鈕。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **move** | 將游標移至指定位置。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **type** | 輸入文字。 | `text`：str `press_enter`：bool (選用，預設為 `false`) `intent`：str |
-| **drag\_and\_drop** | 將項目從起始座標拖曳至結束座標。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
-| **wait** | 暫停執行指定秒數。 | `seconds`：int (選用，預設為 `1`) `intent`：str |
-| **press\_key** | 按下並放開指定鍵。 | `key`: str `intent`: str |
-| **key\_down** | 按住指定按鍵。 | `key`: str `intent`: str |
-| **key\_up** | 放開指定按鍵。 | `key`: str `intent`: str |
-| **快速鍵** | 按下指定的按鍵組合。 | `keys`：`List[str]` `intent`：`str` |
-| **take\_screenshot** | 傳回目前畫面的螢幕截圖。 | `intent`：str |
-| **scroll** | 以像素距離在座標上向上、向下、向左或向右捲動。 | `y`：int (0-999) `x`：int (0-999) `direction`：str (`"up"`、`"down"`、`"left"`、`"right"`) `magnitude_in_pixels`：int (0-999，選用，預設為 `300`) `intent`：str |
+| **click** | 在坐标处左键点击。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **double\_click** | 双击坐标。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **triple\_click** | 在坐标处三击。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **middle\_click** | 在坐标处点击鼠标中键。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **right\_click** | 右键点击坐标。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **mouse\_down** | 在相应坐标处按住鼠标按键。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **mouse\_up** | 在指定坐标处松开鼠标按键。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **move** | 将光标移至指定位置。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **type** | 输入文字。 | `text`：str `press_enter`：bool（可选，默认值为 `false`） `intent`：str |
+| **drag\_and\_drop** | 将某个项从起始坐标拖动到结束坐标。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
+| **wait** | 暂停执行指定的秒数。 | `seconds`：int（可选，默认值为 `1`） `intent`：str |
+| **press\_key** | 按下并松开指定按键。 | `key`：str `intent`：str |
+| **key\_down** | 按住指定键。 | `key`：str `intent`：str |
+| **key\_up** | 释放指定的键。 | `key`：str `intent`：str |
+| **hotkey** | 按下指定的组合键。 | `keys`：`List[str]` `intent`：`str` |
+| **take\_screenshot** | 返回当前屏幕的屏幕截图。 | `intent`：str |
+| **scroll** | 在某个坐标处向上、向下、向左或向右滚动一定像素距离。 | `y`：int (0-999) `x`：int (0-999) `direction`：str（`"up"`、`"down"`、`"left"`、`"right"`） `magnitude_in_pixels`：int（0-999，可选，默认值为 `300`） `intent`：str |
 
-## 自訂使用者定義函式
+## 自定义用户定义的函数
 
-您可以納入自訂使用者定義函式，擴充模型的函式。舉例來說，在人工介入迴路 (HITL) 情境中，您可以排除預設的預先定義動作，並註冊自訂動作。
+您可以通过添加自定义的用户定义的函数来扩展模型的功能。例如，在人机协同 (HITL) 场景中，您可以排除默认的预定义操作并注册自定义操作。
 
 ### Python
 
-排除標準預先定義的瀏覽器動作 (例如 `click`)，並註冊自訂 `yield_to_user` 工具：
+排除标准预定义浏览器操作（例如 `click`），并注册自定义 `yield_to_user` 工具：
 
 ```
 from google import genai
@@ -1344,7 +1344,7 @@ interaction = client.interactions.create(
 
 ### JavaScript
 
-排除標準預先定義的瀏覽器動作 (例如 `click`)，並註冊自訂 `yield_to_user` 工具：
+排除标准预定义浏览器操作（例如 `click`），并注册自定义 `yield_to_user` 工具：
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1493,29 +1493,29 @@ func main() {
 }
 ```
 
-## 管理思考程度
+## 管理思考等级
 
-您可以為電腦使用代理設定不同的思考等級，在動作品質和執行速度之間取得平衡。較低的思考層級通常能為標準自動化工作取得良好平衡。
+对于计算机使用代理，您可以配置不同的思考级别，以平衡操作质量和执行速度。较低的思考级别通常可以在标准自动化任务中实现良好的平衡。
 
-## 安全與安全性
+## 安全
 
-### 設定安全政策
+### 配置安全政策
 
-Gemini 3.x 模型內建安全服務類別，可協助判斷是否需要使用者確認。
+Gemini 4 和 Gemini 3.x 模型包含内置的安全服务类别，有助于确定是否需要用户确认。
 
-| 安全政策類別 | 說明 |
+| 安全政策类别 | 说明 |
 | --- | --- |
-| `FINANCIAL_TRANSACTIONS` | 封鎖或觸發確認機制，用於涉及付款、零售結帳或管制商品的動作。 |
-| `SENSITIVE_DATA_MODIFICATION` | 防止健康、財務或政府記錄遭到未經授權的修改。 |
-| `COMMUNICATION_TOOL` | 限制代理自行傳送電子郵件、即時通訊訊息或草稿。 |
-| `ACCOUNT_CREATION` | 禁止代理程式在網站上自主註冊新帳戶。 |
-| `DATA_MODIFICATION` | 控管整體檔案系統修改、資料共用和儲存空間刪除作業。 |
-| `USER_CONSENT_MANAGEMENT` | 需要使用者接管 Cookie 同意橫幅和隱私權提示。 |
-| `LEGAL_TERMS_AND_AGREEMENTS` | 避免模型自主接受《服務條款》或具有法律約束力的合約。 |
+| `FINANCIAL_TRANSACTIONS` | 屏蔽或触发涉及付款、零售结账或管制商品的操作的确认。 |
+| `SENSITIVE_DATA_MODIFICATION` | 保护健康、财务或政府记录免遭未经授权的修改。 |
+| `COMMUNICATION_TOOL` | 限制代理自主发送邮件、聊天消息或草稿。 |
+| `ACCOUNT_CREATION` | 限制代理在网站上自主注册新账号。 |
+| `DATA_MODIFICATION` | 管理整体文件系统修改、数据共享和存储空间删除。 |
+| `USER_CONSENT_MANAGEMENT` | 需要用户接管 Cookie 意见征求横幅和隐私权提示。 |
+| `LEGAL_TERMS_AND_AGREEMENTS` | 防止模型自主接受服务条款或具有法律约束力的合同。 |
 
-#### 安全覆寫
+#### 安全替换
 
-您可以傳遞覆寫值，覆寫特定政策：
+您可以通过传递替换项来替换所选政策：
 
 ### Python
 
@@ -1634,13 +1634,13 @@ func main() {
 }
 ```
 
-### 提示插入偵測
+### 提示注入检测
 
-Gemini 3.5 Flash-Lite 以上版本的電腦使用功能支援進階安全機制，可偵測提示詞注入式攻擊。啟用這項功能後，系統會檢查螢幕截圖是否含有隱藏的對抗指令 (例如「忽略先前的指令」)，並在偵測到時封鎖執行。
+Gemini 3.5 Flash-Lite 或更高版本的 Computer Use 支持高级安全机制，可检测提示注入攻击。启用后，此功能会检查添加的屏幕截图是否包含隐藏的对抗性指令（例如“忽略之前的命令”），并在检测到此类指令时阻止执行。
 
-提示詞注入偵測功能為選用功能，預設為 `false`。
+提示注入检测是一项由用户自主选择启用的功能。默认值为 `false`。
 
-以下範例說明如何在電腦使用工具設定中啟用提示詞注入偵測功能：
+以下示例演示了如何在“计算机使用”工具配置中启用提示注入检测：
 
 ### Python
 
@@ -1769,9 +1769,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions?key=${GEMINI
 }'
 ```
 
-### 確認安全決策
+### 确认安全决策
 
-回應可能在函式呼叫引數中包含 `safety_decision` 參數：
+回答可能在函数调用参数中包含 `safety_decision` 参数：
 
 ```
 {
@@ -1792,7 +1792,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions?key=${GEMINI
 }
 ```
 
-如果 `safety_decision` 為 `require_confirmation`，請提示使用者。如果使用者確認，請在 `function_result` 中設定 `safety_acknowledgement`。
+如果 `safety_decision` 为 `require_confirmation`，则提示最终用户。如果用户确认，请在 `function_result` 中设置 `safety_acknowledgement`。
 
 ### Python
 
@@ -1811,13 +1811,13 @@ if 'safety_decision' in function_call.arguments:
     action_result["safety_acknowledgement"] = True
 ```
 
-### 安全性最佳做法
+### 有关安全的最佳实践
 
-電腦使用功能會帶來獨特的安全性與作業風險，因為模型代表使用者執行動作時，可能會遇到螢幕上的不受信任內容，或在執行動作時發生錯誤。請實行下列最佳做法，保護使用者資料和系統：
+Computer Use 会带来独特的安全和运营风险，因为代表用户执行操作的模型可能会在屏幕上遇到不可信的内容，或在执行操作时出错。实施以下最佳实践，保护用户数据和系统：
 
-1. **人工介入迴路 (HITL)：**
-   - **強制使用者確認：**如果安全回覆指出 `require_confirmation`，請提示使用者核准。
-   - **提供自訂安全指示：**實作自訂系統指令，定義及強制執行專屬安全界線。例如：
+1. **人机协同 (HITL)**：
+   - **强制执行用户确认**：当安全响应指示 `require_confirmation` 时，提示用户批准。
+   - **提供自定义安全指令**：实施自定义系统指令，以定义和强制执行您自己的安全边界。例如：
 
      ### Python
 
@@ -2115,36 +2115,36 @@ func main() {
 }
 ```
 
-1. **安全執行環境：**在安全的沙箱環境中執行代理程式，以限制潛在影響。這可以是沙箱虛擬機器 (VM)、容器 (例如 Docker)，或權限有限的專用瀏覽器設定檔。如需使用 Docker 設定沙箱的指南，請參閱 [GitHub 參考實作](https://github.com/google/computer-use-preview/)。
-2. **輸入內容清理：**清理提示詞中所有使用者生成的文字，降低非預期指令或提示詞注入的風險。這層安全防護很有幫助，但無法取代安全執行環境。
-3. **內容防護機制：**使用防護機制和內容安全 API，評估使用者輸入內容、工具輸入和輸出內容，以及代理的回覆，確保內容適當，並偵測提示詞注入和越獄行為。
-4. **許可清單和封鎖清單：**導入篩選機制，控管模型可瀏覽的位置和可執行的動作。建議先建立禁止網站的封鎖清單，再建立更嚴格的許可清單，進一步提升安全性。
-5. **可觀測性和記錄：**維護詳細記錄以進行偵錯、稽核和事件應對。用戶端應記錄提示、螢幕截圖、模型建議的動作 (`function_call`)、安全回覆，以及用戶端最終執行的所有動作。
-6. **環境管理：**確保 GUI 環境一致。如果出現非預期的彈出式視窗、通知或版面配置變更，模型可能會感到困惑。盡可能從已知、乾淨的狀態開始執行每項新工作。
+1. **安全的执行环境**：在安全的沙盒环境中运行智能体，以限制其潜在影响。这可以是沙盒化虚拟机 (VM)、容器（例如 Docker）或权限受限的专用浏览器配置文件。如需了解如何使用 Docker 设置沙盒，请参阅 [GitHub 参考实现](https://github.com/google/computer-use-preview/)。
+2. **输入净化**：净化提示中所有用户生成的文本，以降低意外指令或提示注入的风险。这是一种有用的安全层，但不能替代安全执行环境。
+3. **内容护栏**：使用护栏和 Content Safety API 评估用户输入、工具输入和输出以及智能体的回答，以检测其是否适当、是否存在提示词注入和越狱。
+4. **许可清单和屏蔽清单**：实施过滤机制，以控制模型可以导航到哪些位置以及可以执行哪些操作。禁止网站的屏蔽清单是一个很好的起点，而更严格的许可清单则更安全。
+5. **可观测性和日志记录**：维护详细日志，以便进行调试、审核和突发事件响应。您的客户端应记录提示、屏幕截图、模型建议的操作 (`function_call`)、安全响应以及客户端最终执行的所有操作。
+6. **环境管理**：确保 GUI 环境一致。意外的弹出式窗口、通知或布局变化可能会让模型感到困惑。如果可能，请从每个新任务的已知干净状态开始。
 
 ## 模型版本
 
-您可以使用下列模型執行電腦操作：
+您可以将“计算机使用”功能与以下模型搭配使用：
 
-- [**Gemini 4 Argon**](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=zh-tw) (`gemini-4-argon`)：功能最強大的模型，支援電腦使用，可進行複雜的推論和代理 UI 工作流程。
-- [**Gemini 3.8 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-tw) (`gemini-3.8-flash`)：建議用於電腦，可準確進行 UI 互動，並可靠地呼叫工具。
-- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw) (`gemini-3.5-flash-lite`)：低延遲、符合成本效益的模型，支援電腦用途。
-- [**Gemini 3 Flash 預先發布版**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) (`gemini-3-flash-preview`)：支援電腦使用的預先發布模型。
+- [**Gemini 4 Argon**](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=zh-cn) (`gemini-4-argon`)：我们最强大的模型，支持通过计算机使用功能执行复杂的推理和代理界面工作流。
+- [**Gemini 3.8 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-cn) (`gemini-3.8-flash`)：推荐用于计算机使用的模型，具有高准确度的界面交互和可靠的工具调用功能。
+- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-cn) (`gemini-3.5-flash-lite`)：一种低延迟、高性价比的模型，支持计算机使用。
+- [**Gemini 3 Flash 预览版**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) (`gemini-3-flash-preview`)：支持计算机使用的预览版模型。
 
-## 後續步驟
+## 后续步骤
 
-- 在 [Browserbase 示範環境](http://gemini.browserbase.com)中試用電腦使用功能。
-- 如需程式碼範例，請參閱[參考實作方式](https://github.com/google/computer-use-preview)。
-- 瞭解其他 Gemini API 工具：
-  - [函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)
-  - [以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)
+- 在 [Browserbase 演示环境](http://gemini.browserbase.com)中试用 Computer Use。
+- 如需查看示例代码，请参阅[参考实现](https://github.com/google/computer-use-preview)。
+- 了解其他 Gemini API 工具：
+  - [函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)
+  - [使用 Google 搜索建立依据](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)
 
-提供意見
+发送反馈
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-上次更新時間：2026-10-13 (世界標準時間)。
+最后更新时间 (UTC)：2026-10-22。
 
-想進一步說明嗎？
+需要向我们提供更多信息？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-13 (世界標準時間)。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-10-22。"],[],[]]

@@ -1,50 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=vi
-fetched_at: 2026-10-19T05:54:25.909310+00:00
-title: "Truy c\u1eadp v\u00e0o Google AI Studio b\u1eb1ng t\u00e0i kho\u1ea3n Workspace c\u1ee7a b\u1ea1n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=es-419
+fetched_at: 2026-10-26T05:47:10.910756+00:00
+title: "Accede a Google AI Studio con tu cuenta de Workspace \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
+Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Gửi ý kiến phản hồi
+Enviar comentarios
 
-# Truy cập vào Google AI Studio bằng tài khoản Workspace của bạn
+# Accede a Google AI Studio con tu cuenta de Workspace
 
-Theo mặc định, tất cả người dùng [Google Workspace](https://workspace.google.com?hl=vi) đều có quyền truy cập vào AI Studio. Nếu bạn là người dùng Workspace và muốn bắt đầu sử dụng AI Studio, hãy xem [hướng dẫn bắt đầu nhanh về AI Studio](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=vi).
+Todos los usuarios de [Google Workspace](https://workspace.google.com?hl=es-419) tienen acceso a AI
+Studio de forma predeterminada. Si eres usuario de Workspace y quieres comenzar a usar
+AI Studio, consulta la
+[guía de inicio rápido de AI Studio](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=es-419).
 
-## Khắc phục sự cố
+## Solución de problemas
 
-Nếu tài khoản Google Workspace của bạn không có quyền truy cập vào AI Studio, thì có thể bạn sẽ thấy một lỗi như sau:
+Si el acceso a AI Studio está inhabilitado para tu cuenta de Google Workspace, es posible que veas un error como el siguiente:
 
 `We are sorry, but you do not have access to Google AI Studio. Please contact
 your Organization Administrator for access.`
 
-Nếu bạn cho rằng mình cần có quyền truy cập vào AI Studio, hãy liên hệ với quản trị viên Workspace.
+Si crees que deberías tener acceso a AI Studio, comunícate con tu administrador de Workspace.
 
-## Bật AI Studio cho người dùng Workspace
+## Cómo habilitar AI Studio para usuarios de Workspace
 
-Là quản trị viên Google Workspace, bạn có thể kiểm soát những người sử dụng AI Studio:
+Como administrador de Google Workspace, puedes controlar quién usa AI Studio:
 
-- Theo mặc định, AI Studio được bật cho tất cả các phiên bản.
-- Bạn có thể bật hoặc tắt AI Studio cho các nhóm người dùng trong hoặc trên các đơn vị tổ chức.
-- Các phiên bản Google Workspace for Education: Người dùng dưới 18 tuổi bị hạn chế sử dụng AI Studio bằng tài khoản Google Workspace for Education. Điều này vẫn đúng ngay cả khi chế độ cài đặt AI Studio đang bật. Để biết thông tin chi tiết, hãy xem bài viết [Kiểm soát quyền truy cập vào các dịch vụ của Google theo độ tuổi](https://support.google.com/a/answer/10651918?hl=vi).
+- AI Studio está activado de forma predeterminada para todas las ediciones.
+- Puedes activar o desactivar AI Studio para conjuntos de usuarios en unidades organizativas o entre ellas.
+- Ediciones de Google Workspace for Education: Los usuarios menores de 18 años no pueden usar AI Studio con sus cuentas de Google Workspace for Education. Esto ocurre incluso cuando la configuración de AI Studio está activada. Para obtener más detalles, consulta [Cómo controlar el acceso a los servicios de Google por
+  edad](https://support.google.com/a/answer/10651918?hl=es-419).
 
-Để bật hoặc tắt AI Studio cho người dùng trong tổ chức của bạn, hãy xem bài viết [Bật hoặc tắt Google AI Studio cho người dùng](https://support.google.com/a/answer/15004095?hl=vi).
+Para habilitar o inhabilitar AI Studio para los usuarios de tu organización, consulta
+[Cómo activar o desactivar Google AI Studio para los usuarios](https://support.google.com/a/answer/15004095?hl=es-419).
 
-Gửi ý kiến phản hồi
+Enviar comentarios
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+Última actualización: 2026-04-29 (UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+¿Quieres brindar más información?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]

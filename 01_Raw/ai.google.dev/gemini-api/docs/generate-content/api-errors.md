@@ -1,47 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-errors?hl=tr
-fetched_at: 2026-10-19T05:38:31.739793+00:00
-title: "API hatalar\u0131 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-errors?hl=ja
+fetched_at: 2026-10-26T05:43:01.172129+00:00
+title: "API \u30a8\u30e9\u30fc \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-# API hataları
+# API エラー
 
-Bu sayfada, `GenerateContent` API'nin döndürdüğü arka uç hata kodları için bir referans sağlanmakta, gRPC hata yanıtı biçimi açıklanmakta ve sorun giderme adımları sunulmaktadır.
+このページでは、`GenerateContent` API から返されるバックエンド エラーコードのリファレンス、gRPC エラー レスポンスの形式、トラブルシューティングの手順について説明します。
 
-## HTTP hata kodları
+## HTTP エラーコード
 
-Aşağıdaki tabloda, yaygın olarak görülen arka uç hata kodları, nedenleriyle ilgili açıklamalar ve önerilen çözümler listelenmektedir:
+次の表に、一般的なバックエンド エラーコード、その原因の説明、推奨される解決策を示します。
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **HTTP Kodu** | **Durum** | **Açıklama** | **Örnek** | **Çözüm** |
-| 400 | INVALID\_ARGUMENT | İstek metni yanlış biçimlendirilmiş. | İsteğinizde yazım hatası var veya zorunlu bir alan eksik. | İstek biçimi, örnekler ve desteklenen sürümler için [API referansına](https://ai.google.dev/api?hl=tr) bakın. Daha yeni bir API sürümündeki özellikleri daha eski bir uç nokta ile kullanmak hatalara neden olabilir. |
-| 400 | FAILED\_PRECONDITION | Gemini API ücretsiz katmanı ülkenizde kullanılamıyor. Lütfen Google AI Studio'da projenizde faturalandırmayı etkinleştirin. | Ücretsiz katmanın desteklenmediği bir bölgede istekte bulunuyorsunuz ve Google AI Studio'daki projenizde faturalandırmayı etkinleştirmediniz. | Gemini API'yi kullanmak için [Google AI Studio](https://aistudio.google.com/apikey?hl=tr)'yu kullanarak ücretli bir plan oluşturmanız gerekir. |
-| 402 | RESOURCE\_EXHAUSTED | Ön ödeme kredisi bakiyeniz tükendi. | Faturalandırma hesabınızdaki ön ödemeli krediler tükendiği için bu faturalandırma hesabına bağlı tüm API anahtarları çalışmayı durdurur. | Faturalandırma hesabınıza [kredi ekleyin](https://ai.google.dev/gemini-api/docs/billing?hl=tr#buy-credits) veya [otomatik para yükleme](https://ai.google.dev/gemini-api/docs/billing?hl=tr#auto-reload) özelliğini etkinleştirin. Bu isteği tekrar denemeyin: Kredi eklenene kadar başarılı olmaz. |
-| 403 | PERMISSION\_DENIED | API anahtarınız gerekli izinlere sahip değil. | Yanlış API anahtarını kullanıyorsunuz. [Uygun kimlik doğrulama](https://ai.google.dev/gemini-api/docs/model-tuning?hl=tr) işleminden geçmeden ayarlanmış bir modeli kullanmaya çalışıyorsunuz. | API anahtarınızın ayarlandığından ve doğru erişime sahip olduğundan emin olun. Ayrıca, ince ayarlı modelleri kullanmak için uygun kimlik doğrulama sürecinden geçtiğinizden emin olun. |
-| 404 | NOT\_FOUND | İstenen kaynak bulunamadı. | İsteğinizde referans verilen bir resim, ses veya video dosyası bulunamadı. | İsteğinizdeki tüm parametrelerin API sürümünüz için geçerli olup olmadığını kontrol edin. |
-| 429 | RESOURCE\_EXHAUSTED | API'nin hız sınırlarından birini (RPM, TPM, RPD, harcama vb.) aştınız. | Çok fazla istek gönderiyor, çok fazla jeton kullanıyor veya hesabınızın fatura geçmişi ve katmanı için harcamaya dayalı sınırları aşıyorsunuz. | Modelin [hız sınırları](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr) dahilinde olduğunuzu doğrulayın. Bekleyin ve kısa bir süre sonra tekrar deneyin. İsteklerinizin sıklığını veya boyutunu azaltın. Gerekirse [hız sınırı artışı isteyin](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr#request-rate-limit-increase). |
-| 499 | İPTAL EDİLDİ | İşlem iptal edildi (genellikle arayan tarafından). | API yanıt vermeyi tamamlamadan önce istemci bağlantıyı kapattı. | İstemcinizin veya ağ altyapınızın bağlantıyı erken kapatıp kapatmadığını kontrol edin (ör. istemci tarafında zaman aşımı nedeniyle). |
-| 500 | ŞİRKET İÇİ | Google'dan kaynaklanan beklenmeyen bir hata oluştu. | Giriş bağlamınız çok uzun. | Devam eden olaylar için [Gemini API durum sayfasını](https://aistudio.google.com/status?hl=tr) kontrol edin. Giriş bağlamınızı azaltın veya geçici olarak başka bir modele (ör. Gemini 2.5 Pro'dan Gemini 2.5 Flash'e) geçip sorunun çözülüp çözülmediğini kontrol edin. Dilerseniz biraz bekleyip isteğinizi yeniden deneyebilirsiniz. Yeniden denedikten sonra sorun devam ederse lütfen Google AI Studio'daki **Geri bildirim gönder** düğmesini kullanarak sorunu bildirin. |
-| 503 | UNAVAILABLE | Hizmet geçici olarak aşırı yüklü veya kapalı olabilir. | Hizmetin kapasitesi geçici olarak dolmuş olabilir. | Devam eden olaylar için [Gemini API durum sayfasını](https://aistudio.google.com/status?hl=tr) kontrol edin. Geçici olarak başka bir modele (ör. Gemini 2.5 Pro'dan Gemini 2.5 Flash'e) geçip çalışıp çalışmadığını kontrol edin. Dilerseniz biraz bekleyip isteğinizi yeniden deneyebilirsiniz. Yeniden denedikten sonra sorun devam ederse lütfen Google AI Studio'daki **Geri bildirim gönder** düğmesini kullanarak sorunu bildirin. |
-| 504 | DEADLINE\_EXCEEDED | Hizmet, işleme işlemini son tarihe kadar tamamlayamıyor. | İsteminiz (veya bağlamınız), zamanında işlenemeyecek kadar büyük. | Bu hatayı önlemek için istemci isteğinizde daha büyük bir "zaman aşımı" ayarlayın. |
+| **HTTP コード** | ステータス | **説明** | **例** | **ソリューション** |
+| 400 | INVALID\_ARGUMENT | リクエストの本文の形式が正しくありません。 | リクエストに入力ミスがあるか、必須フィールドがありません。 | リクエストの形式、例、サポートされているバージョンについては、[API リファレンス](https://ai.google.dev/api?hl=ja)をご覧ください。古いエンドポイントで新しい API バージョンの機能を使用すると、エラーが発生する可能性があります。 |
+| 400 | FAILED\_PRECONDITION | Gemini API の無料枠は、お住まいの国ではご利用いただけません。Google AI Studio でプロジェクトの課金を有効にしてください。 | 無料枠がサポートされていないリージョンでリクエストを行っており、Google AI Studio のプロジェクトで課金が有効になっていない。 | Gemini API を使用するには、[Google AI Studio](https://aistudio.google.com/apikey?hl=ja) を使用して有料プランを設定する必要があります。 |
+| 402 | RESOURCE\_EXHAUSTED | 前払いクレジット残高が不足しています。 | 請求先アカウントの前払いクレジットがなくなったため、その請求先アカウントにリンクされているすべての API キーが機能しなくなります。 | 請求先アカウントに[クレジットを追加](https://ai.google.dev/gemini-api/docs/billing?hl=ja#buy-credits)するか、[オートチャージ](https://ai.google.dev/gemini-api/docs/billing?hl=ja#auto-reload)をオンにしてください。このリクエストは再試行しないでください。クレジットが追加されるまで成功しません。 |
+| 403 | PERMISSION\_DENIED | API キーに必要な権限がないか、プロジェクトの API アクセスが制限されています。 | 間違った API キーまたは漏洩した API キーを使用している、プロジェクトが無料枠の対象外である、請求先アカウントに未払い残高がある、または[適切な認証](https://ai.google.dev/gemini-api/docs/model-tuning?hl=ja)を行わずにチューニング済みモデルを使用しようとしている。 | API キーが有効でアクティブであることを確認し、[Google AI Studio](https://aistudio.google.com/billing?hl=ja) でプロジェクトの課金とティアのステータスを確認します。または、[プロジェクトが制限されているか、利用できない場合のトラブルシューティング](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=ja#project-unavailable)をご覧ください。 |
+| 404 | NOT\_FOUND | リクエストされたリソースが見つかりませんでした。 | リクエストで参照されている画像、音声、動画ファイルが見つかりませんでした。 | リクエスト内のすべてのパラメータが API バージョンに対して有効かどうかを確認します。 |
+| 429 | RESOURCE\_EXHAUSTED | API のレート制限（RPM、TPM、RPD、費用など）のいずれかを超えている。 | 送信しているリクエストが多すぎるか、使用しているトークンが多すぎるか、アカウントのお支払い履歴と階層の費用ベースの上限を超えています。 | モデルの[レート制限](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ja)内であることを確認します。しばらく待ってから再試行します。リクエストのレートまたはサイズを小さくします。必要に応じて、[レート制限の引き上げをリクエスト](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ja#request-rate-limit-increase)します。 |
+| 499 | CANCELLED | オペレーションがキャンセルされました。通常、キャンセルは呼び出し元により行われます。 | API がレスポンスを完了する前に、クライアントが接続を終了しました。 | クライアントまたはネットワーク インフラストラクチャが接続を早期に終了していないか確認します（例: クライアントサイドのタイムアウト）。 |
+| 500 | 社内向け | Google 側で予期しないエラーが発生しました。 | 入力コンテキストが長すぎます。 | [Gemini API のステータス ページ](https://aistudio.google.com/status?hl=ja)で、進行中のインシデントがないか確認します。入力コンテキストを減らすか、一時的に別のモデルに切り替えて（Gemini 2.5 Pro から Gemini 2.5 Flash など）、動作するかどうかを確認します。または、しばらくしてからリクエストを再試行してください。再試行しても問題が解決しない場合は、Google AI Studio の [**フィードバックを送信**] ボタンを使用して報告してください。 |
+| 503 | UNAVAILABLE | サービスが一時的に過負荷状態になっているか、停止している可能性があります。 | サービスが一時的に容量不足になっています。 | [Gemini API のステータス ページ](https://aistudio.google.com/status?hl=ja)で、進行中のインシデントがないか確認します。一時的に別のモデルに切り替えて（例: Gemini 2.5 Pro から Gemini 2.5 Flash）、動作するかどうかを確認します。または、しばらくしてからリクエストを再試行してください。再試行しても問題が解決しない場合は、Google AI Studio の [**フィードバックを送信**] ボタンを使用して報告してください。 |
+| 504 | DEADLINE\_EXCEEDED | サービスが期限内に処理を完了できない。 | プロンプト（またはコンテキスト）が大きすぎて、時間内に処理できません。 | このエラーを回避するには、クライアント リクエストで「timeout」を大きく設定します。 |
 
-## Hata yanıtı biçimi
+## エラー レスポンスの形式
 
-Bir `GenerateContent` isteği başarısız olduğunda API, HTTP durum kodunu (ör. `400 Bad Request`, `403 Forbidden` veya `429 Too Many Requests`) ayarlar ve gRPC durum ayrıntılarını içeren bir JSON yanıt gövdesi döndürür:
+`GenerateContent` リクエストが失敗すると、API は HTTP ステータス コード（`400 Bad Request`、`403 Forbidden`、`429 Too Many Requests` など）を設定し、gRPC ステータスの詳細を含む JSON レスポンス本文を返します。
 
 ```
 {
@@ -68,24 +68,24 @@ Bir `GenerateContent` isteği başarısız olduğunda API, HTTP durum kodunu (ö
 }
 ```
 
-| Alan | Tür | Açıklama |
+| フィールド | タイプ | 説明 |
 | --- | --- | --- |
-| `code` | tam sayı | HTTP durum kodu. |
-| `message` | dize | Hatayla ilgili, kullanıcılar tarafından okunabilir bir açıklama. |
-| `status` | dize | `SCREAMING_CASE` içindeki gRPC durum kodu. |
-| `details` | dizi | `ErrorInfo` veya `LocalizedMessage` gibi ek hata bağlamı. |
+| `code` | integer | HTTP ステータス コード。 |
+| `message` | 文字列 | エラーの説明（人が読める形式）。 |
+| `status` | 文字列 | `SCREAMING_CASE` の gRPC ステータス コード。 |
+| `details` | 配列 | 追加のエラー コンテキスト（`ErrorInfo` や `LocalizedMessage` など）。 |
 
-## Sırada ne var?
+## 次のステップ
 
-- [API sorunlarını giderme](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=tr): Sık karşılaşılan sorunları ve hata senaryolarını çözün.
-- [Hız sınırları](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr): İstek sınırları ve kota işleme hakkında bilgi edinin.
+- [API のトラブルシューティング](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=ja): 一般的な問題とエラーのシナリオを解決します。
+- [レート制限](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ja): リクエストの上限と割り当ての処理について説明します。
 
-Geri bildirim gönderin
+フィードバックを送信
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Son güncelleme tarihi: 2026-09-20 UTC.
+最終更新日 2026-10-23 UTC。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+ご意見をお聞かせください
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-20 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-23 UTC。"],[],[]]

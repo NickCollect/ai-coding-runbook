@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-CN
-fetched_at: 2026-10-19T05:47:10.854081+00:00
-title: "\u6258\u7ba1\u5f0f\u667a\u80fd\u4f53\u4e2d\u7684\u73af\u5883 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko
+fetched_at: 2026-10-26T05:54:55.130715+00:00
+title: "\uad00\ub9ac\ud615 \uc5d0\uc774\uc804\ud2b8\uc758 \ud658\uacbd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
+Gemini 4 Argon을 지금 이용 가능합니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-发送反馈
+의견 보내기
 
-# 托管式智能体中的环境
+# 관리형 에이전트의 환경
 
-环境是受管理的 Linux 沙盒，可为代理提供一个隔离的空间来执行代码和持久保留文件。它们与互动情境分离，因此您可以在多次互动中重复使用同一环境，也可以随时从头开始。
+환경은 에이전트가 코드를 실행하고 파일을 유지할 수 있는 격리된 공간을 제공하는 관리형 Linux 샌드박스입니다. 상호작용 컨텍스트에서 분리되어 있으므로 여러 상호작용에서 동일한 환경을 재사용하거나 언제든지 새로 시작할 수 있습니다.
 
-以下示例演示了如何创建与全新远程环境的互动并检索其 ID：
+다음 예에서는 새로운 원격 환경과의 상호작용을 만들고 ID를 검색하는 방법을 보여줍니다.
 
 ### Python
 
@@ -38,7 +38,7 @@ interaction = client.interactions.create(
 print(f"Environment ID: {interaction.environment_id}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -54,7 +54,7 @@ const interaction = await client.interactions.create({
 console.log(`Environment ID: ${interaction.environment_id}`);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -129,17 +129,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## `environment` 参数
+## `environment` 매개변수
 
-`environment` 参数接受以下三种形式：
+`environment` 매개변수는 다음 세 가지 형식을 허용합니다.
 
-| 表单 | 示例 | 适用情形 |
+| 양식 | 예 | 용도 |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | 预配新的沙盒。 |
-| 环境 ID | `environment="env_abc123"` | 重用包含所有文件和软件包的现有沙盒。 |
-| 配置对象 | `environment={...}` | 预配包含来源、网络规则、环境变量或组合的新沙盒。 |
+| `"remote"` | `environment="remote"` | 새 샌드박스를 프로비저닝합니다. |
+| 환경 ID | `environment="env_abc123"` | 모든 파일과 패키지가 포함된 기존 샌드박스를 재사용합니다. |
+| 구성 객체 | `environment={...}` | 소스, 네트워크 규칙, 환경 변수 또는 이들의 조합을 사용하여 새 샌드박스를 프로비저닝합니다. |
 
-以下示例演示了使用 `environment` 参数的三种方式。
+다음 예에서는 `environment` 매개변수를 사용하는 세 가지 방법을 보여줍니다.
 
 ### Python
 
@@ -182,7 +182,7 @@ interaction_3 = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -223,7 +223,7 @@ const interaction3 = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -400,10 +400,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 配置环境
+## 환경 구성
 
-设置环境的一种方法是告知代理您需要安装哪些内容。
-它负责处理依赖项解析和问题排查。环境准备就绪后，保存 `environment_id` 并重复使用。
+환경을 설정하는 한 가지 방법은 설치해야 하는 항목을 에이전트에게 알려주는 것입니다.
+종속성 해결 및 문제 해결을 처리합니다. 환경이 준비되면 `environment_id`를 저장하고 재사용합니다.
 
 ### Python
 
@@ -437,7 +437,7 @@ interaction_3 = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -466,7 +466,7 @@ const interaction3 = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -589,15 +589,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 从来源装载
+### 소스에서 마운트
 
-如果您确切知道代理需要哪些文件，请通过一次调用装载这些文件，而不是进行迭代。`environment` 配置对象接受包含以下三种类型的 `sources` 数组：
+에이전트에 필요한 파일을 정확히 알고 있다면 반복하는 대신 단일 호출로 마운트하세요. `environment` 구성 객체는 다음 세 가지 유형의 `sources` 배열을 허용합니다.
 
-| 来源类型 | `type` 值 | 说明 | 限制 |
+| 소스 유형 | `type` 값 | 설명 | 한도 |
 | --- | --- | --- | --- |
-| Git 代码库 | `repository` | 将代码库从网址克隆到沙盒中的 `target`。 | 500 MB |
-| Cloud Storage | `gcs` | 将 Cloud Storage 中的文件或目录复制到沙盒中的 `target`。 | 2 GB |
-| 内嵌内容 | `inline` | 将原始文本内容写入沙盒中 `target` 的文件。 | 每个文件 1 MB，总共 2 MB |
+| Git 저장소 | `repository` | URL에서 `target`의 샌드박스로 저장소를 클론합니다. | 500MB |
+| Cloud Storage | `gcs` | Cloud Storage의 파일 또는 디렉터리를 `target`의 샌드박스로 복사합니다. | 2GB |
+| 인라인 콘텐츠 | `inline` | 샌드박스의 `target`에 원시 텍스트 콘텐츠를 파일에 씁니다. | 파일당 1MB, 총 2MB |
 
 ### Python
 
@@ -634,7 +634,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -669,7 +669,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -807,17 +807,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-您可以将这两种方法结合使用：以声明方式装载已知来源，然后通过后续互动来安装软件包或运行设置脚本。添加自定义来源时，您无法将根目录 (`/`) 设置为目标，必须始终指定子目录。
+알려진 소스를 선언적으로 마운트한 다음 후속 상호작용을 통해 패키지를 설치하거나 설정 스크립트를 실행하는 두 가지 접근 방식을 결합할 수 있습니다. 맞춤 소스를 추가할 때 루트 (`/`)를 타겟으로 설정할 수 없으며 항상 하위 디렉터리를 지정해야 합니다.
 
-### 引子
+### 유인 요소
 
-您还可以将 `.agents/hooks.json` 配置文件和自定义拦截脚本装载到沙盒中，以强制执行安全防护措施或在每次执行工具时运行自动验证。如需查看架构定义和代码示例，请参阅[钩子](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=zh-cn)。
+샌드박스에 `.agents/hooks.json` 구성 파일과 맞춤 가로채기 스크립트를 마운트하여 도구가 실행될 때마다 보안 가이드라인을 적용하거나 자동 검증을 실행할 수도 있습니다. 스키마 정의 및 코드 예시는 [후크](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=ko)를 참고하세요.
 
-### 私人来源
+### 비공개 소스
 
-您还可以通过在网络配置中对源网域进行身份验证，从私有 GitHub 代码库或私有 Cloud Storage 存储桶下载内容。
+네트워크 구성에서 소스 도메인을 인증하여 비공개 GitHub 저장소 또는 비공개 Cloud Storage 버킷에서 다운로드할 수도 있습니다.
 
-一种选择是使用按 ID 引用的存储[凭据](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn)，这样您只需存储一次密钥，需要该来源的每个环境都可以引用它：
+한 가지 옵션은 ID로 참조되는 저장된 [사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)입니다. 따라서 보안 비밀을 한 번 저장하면 해당 소스가 필요한 모든 환경에서 이를 참조할 수 있습니다.
 
 ```
 "network": {
@@ -828,10 +828,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-您还可以使用 `transform` 内嵌设置标头，如下例所示。出站代理会以相同的方式应用这两种形式，并且在任何一种情况下，密钥都不会进入沙盒。
+다음 예와 같이 `transform`를 사용하여 헤더를 인라인으로 설정할 수도 있습니다. 이그레스 프록시는 두 형식을 동일한 방식으로 적용하며 두 경우 모두 비밀번호가 샌드박스 내에 저장되지 않습니다.
 
-对于**私有 Git 代码库**，请使用 `Basic` 身份验证，并提供您的 [GitHub 个人访问令牌 (PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)。
-使用 `x-oauth-basic` 作为用户名对令牌进行编码：
+**비공개 Git 저장소**의 경우 [GitHub 개인 액세스 토큰(PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)으로 `Basic` 인증을 사용합니다.
+`x-oauth-basic`를 사용자 이름으로 사용하여 토큰을 인코딩합니다.
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -869,7 +869,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -901,7 +901,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1055,7 +1055,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-对于**私有 Cloud Storage 存储桶**，请使用标准 OAuth 2.0 不记名令牌：
+**비공개 Cloud Storage 버킷**의 경우 표준 OAuth 2.0 Bearer 토큰을 사용합니다.
 
 ```
 gcloud auth print-access-token
@@ -1093,7 +1093,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -1125,7 +1125,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1279,24 +1279,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 预装软件
+## 사전 설치된 소프트웨어
 
-沙盒在 Ubuntu 上运行，并预安装了运行时和常用软件包。代理可以在运行时使用 `pip
-install` 或 `npm install` 安装其他软件包。当您重复使用同一 `environment_id` 时，在互动期间安装的软件包会保留。
+샌드박스는 Ubuntu에서 실행되며 런타임과 일반 패키지가 사전 설치되어 있습니다. 에이전트는 `pip
+install` 또는 `npm install`를 사용하여 런타임에 추가 패키지를 설치할 수 있습니다. 상호작용 중에 설치된 패키지는 동일한 `environment_id`를 재사용할 때 유지됩니다.
 
-| 类别 | 预装软件包 |
+| 카테고리 | 사전 설치 패키지 |
 | --- | --- |
-| **UNIX 工具** | `curl`、`wget`、`git`、`rsync`、`unzip`、`ripgrep`、`fd-find`、`gawk`、`bc`、`tree`、`which`、`lsof`、`htop`、`jq`、`iproute2`、`procps`、`gcloud CLI` |
-| **Python 3.12** | `numpy`，`pandas`，`requests`，`google-genai`，`beautifulsoup4`，`pyyaml`，`ast-grep-cli` |
-| **Node.js 22** | `create-next-app`、`create-vite`、`typescript` |
+| **UNIX 도구** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
+| **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
+| **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
 
-## 环境变量
+## 환경 변수
 
-使用 `env` 字段可在沙盒内设置环境变量。每个条目都将变量名称映射到配置的字面量字符串或密钥的存储[凭据](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn)的引用。智能体看到的它们与在任何 shell 中看到的相同，因此从进程环境读取的工具和脚本无需额外连接即可获取它们。
+`env` 필드를 사용하여 샌드박스 내에서 환경 변수를 설정합니다. 각 항목은 변수 이름을 구성의 리터럴 문자열 또는 비밀의 저장된 [사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)에 대한 참조에 매핑합니다. 에이전트는 셸에서와 같은 방식으로 이를 확인하므로 프로세스 환경에서 읽는 도구와 스크립트는 추가 배선 없이 이를 선택합니다.
 
-| 字段 | 类型 | 说明 |
+| 필드 | 유형 | 설명 |
 | --- | --- | --- |
-| `env` | `object` | 变量名称到值的映射。值可以是字面量 `string`，也可以是 `{"credential": "credential-id"}` 形式的凭据引用。 |
+| `env` | `object` | 변수 이름에서 값으로 매핑되는 맵입니다. 값은 리터럴 `string` 또는 `{"credential": "credential-id"}` 형식의 사용자 인증 정보 참조입니다. |
 
 ### Python
 
@@ -1321,7 +1321,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1364,19 +1364,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-变量适用于代理在该互动中运行的每个命令，包括 shell 命令、构建步骤以及它启动的任何进程。
+변수는 셸 명령어, 빌드 단계, 시작하는 모든 프로세스를 비롯하여 에이전트가 해당 상호작용에서 실행하는 모든 명령어에 적용됩니다.
 
-这两种值类型的行为方式不同。字面值字符串会以纯文本形式写入容器。凭据引用不是：变量接收占位符，并且出站代理仅在向相应凭据的可信网域发送的出站请求中替换为真实密钥。如需了解其运作方式，请参阅[将凭据用作环境变量](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn#environment-variables)。
+두 값 유형은 다르게 작동합니다. 리터럴 문자열은 일반 텍스트로 컨테이너에 작성됩니다. 인증 정보 참조는 변수가 자리표시자를 수신하고 이그레스 프록시가 해당 인증 정보의 신뢰할 수 있는 도메인에 대한 아웃바운드 요청에서만 실제 비밀번호를 대체합니다. 작동 방식은 [사용자 인증 정보를 환경 변수로 사용](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko#environment-variables)을 참고하세요.
 
-## 网络配置
+## 네트워크 구성
 
-默认情况下，环境具有不受限制的出站网络访问权限。使用 `network` 字段将出站流量限制为特定网域。每条规则都指定一个 `domain`，以及一个可选的 `credential`（用于注入存储的密钥）和一个可选的 `transform` 对象（用于将标头注入到匹配的请求中）。这些标头在每次互动中都可以是唯一的，并且您可以针对同一环境更新这些标头。
+기본적으로 환경에는 제한 없는 아웃바운드 네트워크 액세스 권한이 있습니다. `network` 필드를 사용하여 아웃바운드 트래픽을 특정 도메인으로 제한합니다. 각 규칙은 `domain`와 저장된 보안 비밀을 삽입하는 선택적 `credential`, 일치하는 요청에 헤더를 삽입하는 선택적 `transform` 객체를 지정합니다.
+이러한 헤더는 상호작용마다 고유할 수 있으며 동일한 환경에 대해 업데이트할 수 있습니다.
 
-| 字段 | 类型 | 说明 |
+| 필드 | 유형 | 설명 |
 | --- | --- | --- |
-| `domain` | `string` | 要匹配的网域。使用确切的主机名或 `*` 来指定所有网域。 |
-| `credential` | `string` | 已存储的[凭据](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn)的 ID。出站代理会解析该变量，并在请求时注入身份验证标头。 |
-| `transform` | `object` | 包含扁平键值对的对象，表示要注入到匹配请求中的标头，例如 `{"Authorization": "Bearer ..."}`。 |
+| `domain` | `string` | 일치시킬 도메인입니다. 정확한 호스트 이름 또는 모든 도메인에 `*`을 사용합니다. |
+| `credential` | `string` | 저장된 [사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)의 ID입니다. 이그레스 프록시는 이를 확인하고 요청 시 인증 헤더를 삽입합니다. |
+| `transform` | `object` | 일치하는 요청에 삽입할 헤더를 나타내는 플랫 키-값 쌍이 포함된 객체입니다(예: `{"Authorization": "Bearer ..."}`). |
 
 ### Python
 
@@ -1408,7 +1409,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1438,7 +1439,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1570,14 +1571,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-设置许可名单后，系统仅允许向明确列出的网域发送请求。您可以使用通配符来匹配子网域（例如 `{"domain":
-"*.example.com"}`），但请注意，这不会匹配根域名 `example.com`，后者必须单独添加。如需允许所有其他流量（例如在没有注入标头的情况下路由未列出的网域），请添加 `{"domain": "*"}` 作为全方位捕获条目。
+허용 목록이 설정되면 명시적으로 나열된 도메인에 대한 요청만 허용됩니다. 와일드 카드를 사용하여 하위 도메인 (예: `{"domain":
+"*.example.com"}`)을 일치시킬 수 있지만 루트 도메인 `example.com`은 일치하지 않으므로 별도로 추가해야 합니다. 헤더가 삽입되지 않은 미등록 도메인 라우팅과 같은 다른 모든 트래픽을 허용하려면 `{"domain": "*"}`를 포괄 항목으로 추가합니다.
 
-### 凭证
+### 사용자 인증 정보
 
-有两种方式可以对出站流量进行身份验证：通过 ID 引用的存储凭据，以及许可名单规则中的内嵌 `transform`。出站代理在有线连接和无线连接上均适用，因此在两种情况下，密钥都不会进入沙盒，也不会出现在您的互动载荷中。
+아웃바운드 트래픽을 인증하는 방법에는 ID로 참조되는 저장된 사용자 인증 정보와 허용 목록 규칙의 인라인 `transform`의 두 가지가 있습니다. 이그레스 프록시는 와이어에 모두 적용되므로 두 경우 모두 보안 비밀이 샌드박스에 입력되지 않고 상호작용 페이로드에 표시되지 않습니다.
 
-如果您想存储一次密钥并重复使用，请使用[受管理的凭据](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn)。项目中的每个环境、代理和触发器都可以引用同一 ID，并且您可以在一个位置轮换该 ID。
+[관리 사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)는 보안 비밀을 한 번 저장하고 재사용하려는 경우에 사용합니다. 프로젝트의 모든 환경, 에이전트, 트리거가 동일한 ID를 참조할 수 있으며 한 곳에서 이를 순환할 수 있습니다.
 
 ### Python
 
@@ -1610,7 +1611,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1672,9 +1673,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`oauth2` 凭据也会自行刷新其访问令牌，因此当令牌过期时，长时间运行的互动不会中断。如需查看凭据类型和管理操作的完整列表，请参阅[凭据](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn)。
+`oauth2` 사용자 인증 정보는 자체적으로 액세스 토큰을 갱신하므로 토큰이 만료되어도 장기 실행 상호작용이 중단되지 않습니다. 사용자 인증 정보 유형 및 관리 작업의 전체 목록은 [사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)를 참고하세요.
 
-您还可以使用 `transform` 内嵌设置标头。如果值属于单个调用，例如在创建互动之前生成的令牌，则适合使用此方法。以这种方式设置的标头由同一出站代理注入，绝不会在沙盒内作为环境变量或文件公开。
+`transform`를 사용하여 인라인으로 헤더를 설정할 수도 있습니다. 이는 값이 단일 호출에 속하는 경우에 적합합니다. 예를 들어 상호작용을 만들기 직전에 생성하는 토큰이 있습니다. 이 방식으로 설정된 헤더는 동일한 이그레스 프록시에 의해 삽입되며 샌드박스 내에서 환경 변수나 파일로 노출되지 않습니다.
 
 ### Python
 
@@ -1710,7 +1711,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1742,7 +1743,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1879,11 +1880,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`credential` 和 `transform` 可以出现在同一条规则中。凭据会先应用，然后 `transform` 会在顶部合并，因此如果两者都设置了相同的键，则显式 `transform` 标头会胜出。一种常见模式是身份验证标头的凭据，外加服务预期会随之提供的额外标头的 `transform`。
+`credential`와 `transform`는 동일한 규칙에 표시될 수 있습니다. 사용자 인증 정보가 먼저 적용되고 `transform`이 맨 위에 병합되므로 둘 다 동일한 키를 설정하면 명시적 `transform` 헤더가 우선합니다. 일반적인 패턴은 인증 헤더의 사용자 인증 정보와 서비스가 함께 필요로 하는 추가 헤더의 `transform`입니다.
 
-### 停用网络访问权限
+### 네트워크 액세스 사용 중지
 
-如需屏蔽所有出站网络访问权限，请将 `network` 设置为 `disabled`：
+모든 아웃바운드 네트워크 액세스를 차단하려면 `network`을 `disabled`로 설정합니다.
 
 ### Python
 
@@ -1904,7 +1905,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1923,7 +1924,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -2011,11 +2012,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 刷新凭据
+### 사용자 인증 정보 새로고침
 
-内嵌令牌（例如访问令牌和短期有效的 API 密钥）会过期。您可以在下一次互动时传递现有 `environment_id` 以及新的 `network` 配置，以刷新这些令牌。新网络规则会完全取代之前的规则，同时保留环境的文件系统状态（已安装的软件包、文件、代码库）。
+액세스 토큰 및 단기 API 키와 같은 인라인 토큰은 만료됩니다.
+다음 상호작용에서 기존 `environment_id`을 새 `network` 구성과 함께 전달하여 새로고침할 수 있습니다. 새 네트워크 규칙은 이전 규칙을 완전히 대체하지만 환경의 파일 시스템 상태(설치된 패키지, 파일, 저장소)는 유지됩니다.
 
-如果您改用存储的[凭据](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn)，则无需执行此操作。`oauth2` 凭据会自行刷新，轮换任何凭据都是对凭据的 `PATCH` 操作，不会影响引用该凭据的任何许可名单规则。
+저장된 [사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)를 대신 사용하는 경우에는 필요하지 않습니다. `oauth2` 사용자 인증 정보는 자체적으로 새로고침되며 사용자 인증 정보를 순환하는 것은 사용자 인증 정보에 대한 `PATCH`이므로 이를 참조하는 모든 허용 목록 규칙은 그대로 유지됩니다.
 
 ### Python
 
@@ -2066,7 +2068,7 @@ result = client.interactions.create(
 print(result.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2115,7 +2117,7 @@ const result = await client.interactions.create({
 console.log(result.output_text);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -2293,26 +2295,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 环境生命周期
+## 환경 수명 주기
 
-环境遵循以下生命周期：
+환경은 다음 수명 주기를 따릅니다.
 
-| 州 | 行为 |
+| 주 | 동작 |
 | --- | --- |
-| **创建时间** | 当互动指定 `environment: "remote"` 或配置对象时，系统会提供此值。 |
-| **有效** | 在互动进行期间运行。 |
-| **空闲** | 自动拍摄快照，并在闲置 15 分钟后停止。 |
-| **离线** | 自上次活跃以来保留 7 天。可以通过传递其 ID 来恢复。 |
-| **已删除** | 在 7 天 TTL 保留期限到期后或手动删除时，自动从系统中移除。 |
+| **생성 시간** | 상호작용에서 `environment: "remote"` 또는 구성 객체를 지정할 때 프로비저닝됩니다. |
+| **활성** | 상호작용이 진행되는 동안 실행됩니다. |
+| **유휴** | 자동 스냅샷이 생성되고 15분 동안 활동이 없으면 중지됩니다. |
+| **오프라인** | 마지막 활성 이후 7일 동안 보관됩니다. ID를 전달하여 재개할 수 있습니다. |
+| **삭제됨** | 7일 TTL 보관 기간이 만료된 후 또는 수동으로 삭제하면 시스템에서 자동으로 삭제됩니다. |
 
 ## Environments API
 
-您可以使用 Environments API 以编程方式管理沙盒会话。
-通过枚举环境，您可以发现有效会话 ID，并在客户端连接在长时间运行的任务期间终止时恢复状态。您还可以检查会话元数据，并在工作流程结束时显式删除环境，而不是等待自动 TTL 过期。
+Environments API를 사용하여 프로그래매틱 방식으로 샌드박스 세션을 관리할 수 있습니다.
+환경을 열거하면 활성 세션 ID를 검색하고 장기 실행 작업 중에 클라이언트 연결이 종료되는 경우 상태를 복구할 수 있습니다. 자동 TTL 만료를 기다리지 않고 워크플로가 종료될 때 세션 메타데이터를 검사하고 환경을 명시적으로 삭제할 수도 있습니다.
 
-### 列出环境
+### 환경 나열
 
-列出属于项目的有效环境。使用分页参数控制响应批次大小。
+프로젝트에 속한 활성 환경을 나열합니다. 페이지로 나누기 매개변수를 사용하여 응답 배치 크기를 제어합니다.
 
 ### Python
 
@@ -2326,7 +2328,7 @@ for env in response.environments:
     print(f"Environment ID: {env.id}, Status: {env.status}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2339,7 +2341,7 @@ for (const env of response.environments) {
 }
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -2405,7 +2407,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments?pageS
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-响应类似于以下内容：
+응답은 다음과 유사합니다.
 
 ```
 {
@@ -2423,9 +2425,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments?pageS
 }
 ```
 
-### 获取环境
+### 환경 가져오기
 
-按资源名称检索特定环境的元数据和配置详细信息。
+리소스 이름으로 특정 환경의 메타데이터와 구성 세부정보를 가져옵니다.
 
 ### Python
 
@@ -2438,7 +2440,7 @@ env = client.environments.get(id="YOUR_ENVIRONMENT_ID")
 print(f"Environment ID: {env.id}, Status: {env.status}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2449,7 +2451,7 @@ const env = await client.environments.get("YOUR_ENVIRONMENT_ID");
 console.log(`Environment ID: ${env.id}, Status: ${env.status}`);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -2503,7 +2505,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/YOUR_
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-响应类似于以下内容：
+응답은 다음과 유사합니다.
 
 ```
 {
@@ -2529,9 +2531,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/YOUR_
 }
 ```
 
-### 删除环境
+### 환경 삭제
 
-在任务或流水线完成时，明确终止并删除环境，以清理沙盒资源。
+작업 또는 파이프라인이 완료되면 샌드박스 리소스를 정리하기 위해 환경을 명시적으로 종료하고 삭제합니다.
 
 ### Python
 
@@ -2543,7 +2545,7 @@ client = genai.Client()
 client.environments.delete(id="YOUR_ENVIRONMENT_ID")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2553,7 +2555,7 @@ const client = new GoogleGenAI({});
 await client.environments.delete("YOUR_ENVIRONMENT_ID");
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -2601,19 +2603,19 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/environments/YO
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 管理环境中的文件
+## 환경에서 파일 관리
 
-代理在执行期间会在沙盒内创建和修改文件。您可以浏览目录内容、获取文件元数据、下载单个文件或整个目录（以 tar 归档的形式），以及直接将文件上传到环境中或将归档提取到环境中。沙盒环境中的存储空间受合理使用限额限制。
+에이전트는 실행 중에 샌드박스 내에서 파일을 만들고 수정합니다. 디렉터리 콘텐츠를 탐색하고, 파일 메타데이터를 가져오고, 개별 파일 또는 전체 디렉터리를 tar 보관 파일로 다운로드하고, 파일을 업로드하거나 보관 파일을 환경에 직접 추출할 수 있습니다. 샌드박스 환경의 스토리지는 공정 사용량 한도가 적용됩니다.
 
-### 列出目录中的文件
+### 디렉터리의 파일 나열
 
-列出环境中的目录内容。默认情况下，列出根目录。
+환경의 디렉터리 콘텐츠를 나열합니다. 기본적으로 루트 디렉터리를 나열합니다.
 
-#### 查询参数
+#### 쿼리 매개변수
 
-| 参数 | 类型 | 说明 |
+| 매개변수 | 유형 | 설명 |
 | --- | --- | --- |
-| `recursive` | 布尔值 | 如果值为 `true`，则以递归方式列出所有文件和目录。默认值：`false`。 |
+| `recursive` | 부울 | `true`: 모든 파일과 디렉터리를 재귀적으로 나열합니다. 기본값: `false` |
 
 ### Python
 
@@ -2640,7 +2642,7 @@ for file in response.files:
     print(f"{file.name} ({file.type}) - {file.path}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2683,7 +2685,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-响应会返回一个 `files` 数组，其中包含每个条目的元数据：
+응답은 각 항목의 메타데이터가 포함된 `files` 배열을 반환합니다.
 
 ```
 {
@@ -2708,21 +2710,21 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
 }
 ```
 
-#### 文件条目字段
+#### 파일 항목 필드
 
-| 字段 | 类型 | 说明 |
+| 필드 | 유형 | 설명 |
 | --- | --- | --- |
-| `name` | 字符串 | 文件或目录名称。 |
-| `path` | 字符串 | 相对于环境根目录的完整路径。 |
-| `type` | 字符串 | `FILE` 或 `DIRECTORY`。 |
-| `size_bytes` | 字符串 | 文件大小（以字节为单位，仅限文件）。 |
-| `mime_type` | 字符串 | MIME 类型（仅限文件）。 |
-| `created` | 字符串 | ISO 8601 创建时间戳。 |
-| `modified` | 字符串 | ISO 8601 上次修改时间戳。 |
+| `name` | 문자열 | 파일 또는 디렉터리 이름입니다. |
+| `path` | 문자열 | 환경 루트를 기준으로 하는 전체 경로입니다. |
+| `type` | 문자열 | `FILE` 또는 `DIRECTORY`. |
+| `size_bytes` | 문자열 | 파일 크기(바이트)(파일만 해당) |
+| `mime_type` | 문자열 | MIME 유형 (파일만 해당). |
+| `created` | 문자열 | ISO 8601 생성 타임스탬프입니다. |
+| `modified` | 문자열 | ISO 8601 last-modified 타임스탬프입니다. |
 
-### 获取文件元数据
+### 파일 메타데이터 가져오기
 
-按路径获取特定文件的元数据。
+경로별로 특정 파일의 메타데이터를 가져옵니다.
 
 ### Python
 
@@ -2739,7 +2741,7 @@ file = response.files[0]
 print(f"Name: {file.name}, Size: {file.size_bytes} bytes, Type: {file.mime_type}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2761,7 +2763,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-响应会返回封装在 `files` 数组中的文件元数据：
+응답은 `files` 배열로 래핑된 파일 메타데이터를 반환합니다.
 
 ```
 {
@@ -2779,7 +2781,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
 }
 ```
 
-如果文件不存在，API 会返回 `404` 错误：
+파일이 없으면 API에서 `404` 오류를 반환합니다.
 
 ```
 {
@@ -2790,9 +2792,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
 }
 ```
 
-### 下载单个文件
+### 단일 파일 다운로드
 
-下载特定文件的内容。在 SDK 中，使用 `download()` 方法。在 REST 请求中，将 `?alt=media` 查询参数附加到文件路径。服务器会返回 `200 OK` 并以流式传输原始文件内容。
+특정 파일의 콘텐츠를 다운로드합니다. SDK에서는 `download()` 메서드를 사용합니다. REST 요청에서 `?alt=media` 쿼리 매개변수를 파일 경로에 추가합니다. 서버는 `200 OK`로 응답하고 원시 파일 콘텐츠를 스트리밍합니다.
 
 ### Python
 
@@ -2810,7 +2812,7 @@ with open("main.py", "wb") as f:
     f.write(content)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2834,9 +2836,9 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$E
   -o main.py
 ```
 
-### 将目录下载为 tar 归档文件
+### 디렉터리를 tar 보관 파일로 다운로드
 
-通过使用 `?alt=media` 请求目录路径，将整个目录下载为 tar 归档文件。此命令会返回一个 POSIX tar 文件（未经过 gzip 压缩）。使用 `recursive=true` 可包含嵌套的子目录。
+`?alt=media`로 디렉터리 경로를 요청하여 전체 디렉터리를 tar 보관 파일로 다운로드합니다. 그러면 POSIX tar 파일이 반환됩니다 (gzip 압축되지 않음). `recursive=true`를 사용하여 중첩된 하위 디렉터리를 포함합니다.
 
 ### Python
 
@@ -2859,7 +2861,7 @@ with tarfile.open("src.tar") as tar:
     tar.extractall(path="./extracted")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2900,30 +2902,30 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$E
 tar xf snapshot.tar -C ./extracted
 ```
 
-#### 行为矩阵
+#### 행동 매트릭스
 
-下表总结了文件和目录端点、HTTP 方法和查询参数的预期响应和归档行为：
+다음 동작 매트릭스에는 파일 및 디렉터리 엔드포인트, HTTP 메서드, 쿼리 매개변수 전반에서 예상되는 응답 및 보관 동작이 요약되어 있습니다.
 
-| 请求 | `alt` | `recursive` | `extract` | `overwrite` | 响应 |
+| 요청 | `alt` | `recursive` | `extract` | `overwrite` | 응답 |
 | --- | --- | --- | --- | --- | --- |
-| `GET /files` | （无） | （无） | - | - | 根目录的 JSON 列表 |
-| `GET /files/{path}`（文件） | （无） | - | - | - | 文件的 JSON 元数据 |
-| `GET /files/{path}` (dir) | （无） | `false` | - | - | 直属子项的 JSON 列表 |
-| `GET /files/{path}` (dir) | （无） | `true` | - | - | 所有后代的 JSON 列表 |
-| `GET /files/{path}?alt=media`（文件） | `media` | - | - | - | 原始文件内容 |
-| `GET /files/{path}?alt=media` (dir) | `media` | `false` | - | - | 目录中直接文件的 tar 归档 |
-| `GET /files/{path}?alt=media` (dir) | `media` | `true` | - | - | 以递归方式归档所有文件的 Tar 归档 |
-| `GET /files?alt=media` | `media` | `false` | - | - | 仅包含根级文件的 tar 归档 |
-| `PUT /files/{path}`（文件） | - | - | `false` | `false` | 写入路径中的文件。如果该账号已存在，则返回 `409 Conflict` |
-| `PUT /files/{path}?overwrite=true` | - | - | `false` | `true` | 写入或覆盖路径中的文件 |
-| `PUT /files/{path}?extract=true` | - | - | `true` | `false` | 将归档解压缩到目标目录中。如果存在任何目标文件，则返回 `409 Conflict` |
-| `PUT /files/{path}?extract=true&overwrite=true` | - | - | `true` | `true` | 解压缩归档文件，替换所有现有文件 |
+| `GET /files` | (없음) | (없음) | - | - | 루트 디렉터리의 JSON 목록 |
+| `GET /files/{path}` (파일) | (없음) | - | - | - | 파일의 JSON 메타데이터 |
+| `GET /files/{path}` (dir) | (없음) | `false` | - | - | 직계 자녀의 JSON 목록 |
+| `GET /files/{path}` (dir) | (없음) | `true` | - | - | 모든 하위 항목의 JSON 목록 |
+| `GET /files/{path}?alt=media` (파일) | `media` | - | - | - | 원시 파일 콘텐츠 |
+| `GET /files/{path}?alt=media` (dir) | `media` | `false` | - | - | 디렉터리의 즉시 파일의 타르 보관 파일 |
+| `GET /files/{path}?alt=media` (dir) | `media` | `true` | - | - | 모든 파일을 반복적으로 tar로 보관 |
+| `GET /files?alt=media` | `media` | `false` | - | - | 루트 수준 파일의 tar 보관 파일만 |
+| `PUT /files/{path}` (파일) | - | - | `false` | `false` | 경로에 파일을 씁니다. 이미 존재하는 경우 `409 Conflict`를 반환합니다. |
+| `PUT /files/{path}?overwrite=true` | - | - | `false` | `true` | 경로에 있는 파일을 쓰거나 덮어씁니다. |
+| `PUT /files/{path}?extract=true` | - | - | `true` | `false` | 보관 파일을 대상 디렉터리에 압축 해제합니다. 타겟 파일이 있으면 `409 Conflict`를 반환합니다. |
+| `PUT /files/{path}?extract=true&overwrite=true` | - | - | `true` | `true` | 기존 파일을 대체하여 보관 파일을 압축 해제합니다. |
 
-### 将文件上传到环境
+### 환경에 파일 업로드
 
-使用 HTTP `PUT` 将单个文件或目录归档文件直接上传到现有环境沙盒。如果父目录不存在，系统会自动创建。环境中的存储空间受合理使用限额限制。
+HTTP `PUT`를 사용하여 기존 환경 샌드박스에 개별 파일 또는 디렉터리 보관 파일을 직접 업로드합니다. 상위 디렉터리가 없으면 자동으로 생성됩니다. 환경의 스토리지는 공정 사용량 한도가 적용됩니다.
 
-#### 上传单个文件
+#### 단일 파일 업로드
 
 ### Python
 
@@ -2945,7 +2947,7 @@ file = result.files[0]
 print(f"Uploaded: {file.name} ({file.size_bytes} bytes)")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2975,7 +2977,7 @@ curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environment
   --data-binary @local_file.txt
 ```
 
-响应会返回上传文件的元数据，这些元数据封装在 `files` 数组中，以便与 list 和 get 端点保持一致：
+응답은 목록 및 가져오기 엔드포인트와의 일관성을 위해 `files` 배열로 래핑된 업로드된 파일의 메타데이터를 반환합니다.
 
 ```
 {
@@ -2991,9 +2993,9 @@ curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environment
 }
 ```
 
-#### 上传并提取目录归档文件
+#### 디렉터리 보관 파일 업로드 및 추출
 
-如需在单个请求中为整个代码库或目录结构提供初始数据，请使用 `extract=true` 上传 `.tar` 或 `.tar.gz` 归档文件。
+단일 요청에서 전체 코드베이스 또는 디렉터리 구조를 시드하려면 `extract=true`를 사용하여 `.tar` 또는 `.tar.gz` 보관 파일을 업로드합니다.
 
 ### Python
 
@@ -3014,7 +3016,7 @@ for entry in result.files:
     print(f"Extracted: {entry.path}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -3044,7 +3046,7 @@ curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environment
   --data-binary @source.tar.gz
 ```
 
-响应会列出归档写入的每个文件：
+응답에는 보관 파일에서 작성한 모든 파일이 나열됩니다.
 
 ```
 {
@@ -3067,11 +3069,11 @@ curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environment
 }
 ```
 
-#### 使用可续传会话上传大文件
+#### 재개 가능한 세션으로 대용량 파일 업로드
 
-对于大型载荷，或者通过不可靠的连接上传时，请使用可续传会话，而不是在一个请求中发送整个正文。可续传上传会将传输拆分为可单独重试的块，因此即使传输中途失败，您也不必重新开始。
+페이로드가 크거나 신뢰할 수 없는 연결을 통해 업로드하는 경우 한 번의 요청으로 전체 본문을 전송하는 대신 재개 가능한 세션을 사용하세요. 재개 가능한 업로드는 전송을 개별적으로 다시 시도할 수 있는 청크로 분할하므로 중간에 실패해도 처음부터 다시 시작하지 않아도 됩니다.
 
-首先，使用 `uploadType=resumable` 启动会话。发送空正文，并使用 `X-Upload-Content-Type` 和 `X-Upload-Content-Length` 标头声明您打算上传的载荷的媒体类型和总大小：
+`uploadType=resumable`로 세션을 시작합니다. 빈 본문을 전송하고 `X-Upload-Content-Type` 및 `X-Upload-Content-Length` 헤더를 사용하여 업로드하려는 페이로드의 미디어 유형과 총 크기를 선언합니다.
 
 ```
 PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable HTTP/1.1
@@ -3082,7 +3084,7 @@ Content-Length: 0
 x-goog-api-key: $GEMINI_API_KEY
 ```
 
-响应在 `Location` 标头中携带会话网址。此网址已包含 `upload_id`，因此无需再次添加 API 密钥：
+응답은 `Location` 헤더에 세션 URL을 전달합니다. 이 URL에는 이미 `upload_id`가 포함되어 있으므로 API 키를 다시 입력할 필요가 없습니다.
 
 ```
 HTTP/1.1 200 OK
@@ -3090,7 +3092,7 @@ Location: https://generativelanguage.googleapis.com/upload/v1beta/environments/$
 Content-Length: 0
 ```
 
-将载荷分块上传到该网址。每个块都通过 `Content-Range` 标头声明其字节范围和总大小：
+청크 단위로 페이로드를 해당 URL에 업로드합니다. 각 청크는 `Content-Range` 헤더를 사용하여 바이트 범위와 총 크기를 선언합니다.
 
 ```
 PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable&upload_id=AJjja9bfHjiYlGi60pUazCaTuPY HTTP/1.1
@@ -3102,7 +3104,7 @@ Content-Length: 10485760
 <10 MB binary payload>
 ```
 
-除最后一个块之外的每个块都会返回 `308 Resume Incomplete`。`Range` 标头会告知您服务器已提交的字节数，如果某个块失败，您将从该位置恢复：
+마지막 청크를 제외한 모든 청크는 `308 Resume Incomplete`를 반환합니다. `Range` 헤더는 서버에서 커밋한 바이트 수를 알려줍니다. 청크가 실패하면 여기에서 재개합니다.
 
 ```
 HTTP/1.1 308 Resume Incomplete
@@ -3110,7 +3112,7 @@ Range: bytes=0-10485759
 Content-Length: 0
 ```
 
-以相同方式发送剩余的块：
+나머지 청크를 동일한 방식으로 전송합니다.
 
 ```
 PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable&upload_id=AJjja9bfHjiYlGi60pUazCaTuPY HTTP/1.1
@@ -3122,7 +3124,7 @@ Content-Length: 10485760
 <remaining 10 MB binary payload>
 ```
 
-最后一个块完成上传并返回文件元数据，该元数据位于与单次上传相同的 `files` 信封中：
+마지막 청크는 업로드를 완료하고 단일 업로드와 동일한 `files` 봉투에 파일 메타데이터를 반환합니다.
 
 ```
 {
@@ -3138,11 +3140,11 @@ Content-Length: 10485760
 }
 ```
 
-可恢复会话也适用于 `extract` 和 `overwrite`。在初始请求中设置这些查询参数，而不是在各个块中设置。
+재개 가능한 세션은 `extract` 및 `overwrite`에서도 작동합니다. 개별 청크가 아닌 시작 요청에 이러한 쿼리 매개변수를 설정합니다.
 
-#### 覆盖保护
+#### 덮어쓰기 보호
 
-默认情况下，`overwrite` 为 `false`。如果目标路径已存在，则请求会返回 `409 Conflict` 错误，并且不会写入任何内容：
+`overwrite`의 기본값은 `false`입니다. 대상 경로가 이미 있는 경우 요청은 `409 Conflict` 오류를 반환하고 아무것도 쓰지 않습니다.
 
 ```
 {
@@ -3153,13 +3155,13 @@ Content-Length: 10485760
 }
 ```
 
-如需替换现有文件或目录，请设置 `overwrite=true`（或在 REST 中附加 `?overwrite=true`）。使用 `extract=true` 时，冲突检查会应用于归档中的每个文件，因此如果存在任何目标文件，请求都会失败。
+기존 파일이나 디렉터리를 바꾸려면 `overwrite=true`를 설정합니다 (또는 REST에서 `?overwrite=true` 추가). `extract=true`를 사용하면 충돌 확인이 보관 파일의 모든 파일에 적용되므로 타겟 파일이 있으면 요청이 실패합니다.
 
-### 下载完整快照（已废弃）
+### 전체 스냅샷 다운로드 (지원 중단됨)
 
-如需将现有代码迁移到环境文件 API，请执行以下操作：
+기존 코드를 환경 파일 API로 이전하려면 다음 단계를 따르세요.
 
-- **Python**：将旧版文件下载请求替换为：
+- **Python**: 기존 파일 다운로드 요청을 다음으로 대체합니다.
 
   ```
   archive = client.environments.files.download(
@@ -3169,7 +3171,7 @@ Content-Length: 10485760
   with open("snapshot.tar", "wb") as f:
       f.write(archive)
   ```
-- **JavaScript**：将旧版文件下载请求替换为：
+- **JavaScript**: 기존 파일 다운로드 요청을 다음으로 대체합니다.
 
   ```
   const bytes = await client.environments.files.download({
@@ -3178,7 +3180,7 @@ Content-Length: 10485760
   });
   fs.writeFileSync("snapshot.tar", Buffer.from(bytes));
   ```
-- **REST**：将 `GET /v1beta/files/environment-$ENV_ID:download?alt=media` 替换为：
+- **REST**: `GET /v1beta/files/environment-$ENV_ID:download?alt=media`을 다음으로 바꿉니다.
 
   ```
   curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files?alt=media" \
@@ -3186,41 +3188,41 @@ Content-Length: 10485760
     -o snapshot.tar
   ```
 
-## 价格和资源
+## 가격 및 리소스
 
-每个环境都以固定的资源分配运行：
+각 환경은 고정된 리소스 할당으로 실행됩니다.
 
-| 资源 | 值 |
+| 리소스 | 값 |
 | --- | --- |
-| **CPU** | 4 个核心 |
-| **内存** | 16 GB |
+| **CPU** | 4코어 |
+| **메모리** | 16GB |
 
-在预览版期间，环境计算资源（CPU、内存、沙盒执行）**不计费**。如需了解代理令牌费用，请参阅[价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn#pricing-for-agents)。
+환경 컴퓨팅 (CPU, 메모리, 샌드박스 실행)은 미리보기 기간 동안 **청구되지 않습니다**. 에이전트 토큰 비용은 [가격 책정](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#pricing-for-agents)을 참고하세요.
 
-## 限制
+## 제한사항
 
-- **预览状态**：环境和受管理的代理处于预览状态。功能和架构可能会发生变化。
-- **内嵌来源大小**：内嵌来源的文件大小上限为 1 MB，所有文件的总大小上限为 2 MB。
-- **源代码大小**：Git 代码库的大小上限为 500 MB，Cloud Storage 代码库的大小上限为 2 GB。
-- **环境启动**：预配新环境最多需要约 5 秒。大型源代码库可能会延长此时间。
-- **环境过期**：不活跃的离线环境会在过期前保留 7 天，然后使用自动 TTL 清理功能将其清理掉。传递过期或无效的环境 ID 会返回 `404 Not Found` 错误。
-- **文件支持**：智能体目前只能读取文本和图片文件。尚不支持二进制文件。
-- **无法从根目录装载**：添加自定义来源时，您无法将根目录 (`/`) 设置为目标，必须始终指定子目录。
+- **미리보기 상태:** 환경과 관리 에이전트는 미리보기 상태입니다. 기능과 스키마는 변경될 수 있습니다.
+- **인라인 소스 크기:** 인라인 소스는 파일당 1MB, 모든 파일의 총 크기는 2MB로 제한됩니다.
+- **소스 크기**: Git 저장소는 500MB, Cloud Storage 저장소는 2GB로 제한됩니다.
+- **환경 시작:** 새 환경을 프로비저닝하는 데 최대 5초가 걸립니다. 소스 저장소가 크면 이 시간이 늘어날 수 있습니다.
+- **환경 만료:** 비활성 오프라인 환경은 자동 TTL 정리 기능을 사용하여 만료되기 전 7일 동안 보관됩니다. 만료되었거나 잘못된 환경 ID를 전달하면 `404 Not Found` 오류가 반환됩니다.
+- **파일 지원:** 현재 에이전트는 텍스트 및 이미지 파일 읽기로 제한됩니다. 바이너리 파일 지원은 아직 제공되지 않습니다.
+- **루트에서 마운트 안 됨:** 맞춤 소스를 추가할 때 루트 (`/`)를 타겟으로 설정할 수 없으며 항상 하위 디렉터리를 지정해야 합니다.
 
-## 后续步骤
+## 다음 단계
 
-- [代理概览](https://ai.google.dev/gemini-api/docs/agents?hl=zh-cn)：了解受管代理的核心概念。
-- [快速入门](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=zh-cn)：开始构建多轮对话和流式传输。
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn)：了解默认代理的功能、工具、模型选择和定价。
-- [构建自定义代理](https://ai.google.dev/gemini-api/docs/custom-agents?hl=zh-cn)：使用 `AGENTS.md` 和 `SKILL.md` 定义您自己的代理。
-- [钩子](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=zh-cn)：在沙盒内强制执行安全防护措施并运行副作用验证。
+- [에이전트 개요](https://ai.google.dev/gemini-api/docs/agents?hl=ko): 관리 에이전트의 핵심 개념을 알아봅니다.
+- [빠른 시작](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko): 멀티턴 대화 및 스트리밍으로 빌드 시작
+- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko): 기본 에이전트의 기능, 도구, 모델 선택, 가격을 살펴봅니다.
+- [맞춤 에이전트 빌드](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko): `AGENTS.md` 및 `SKILL.md`를 사용하여 자체 에이전트를 정의합니다.
+- [후크](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=ko): 보안 가드레일을 적용하고 샌드박스 내에서 부작용 검사를 실행합니다.
 
-发送反馈
+의견 보내기
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-最后更新时间 (UTC)：2026-10-07。
+최종 업데이트: 2026-10-07(UTC)
 
-需要向我们提供更多信息？
+의견을 전달하고 싶나요?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-10-07。"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-10-07(UTC)"],[],[]]

@@ -1,37 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=vi
-fetched_at: 2026-10-19T05:46:05.397116+00:00
-title: "G\u1ecdi h\u00e0m b\u1eb1ng Gemini API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=bn
+fetched_at: 2026-10-26T05:41:26.185199+00:00
+title: "Gemini API-\u098f\u09b0 \u09ae\u09be\u09a7\u09cd\u09af\u09ae\u09c7 \u09ab\u09be\u0982\u09b6\u09a8 \u0995\u09b2\u09bf\u0982 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
+Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=bn)।
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
+- [হোম](https://ai.google.dev/?hl=bn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=bn)
+- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs/generate-content?hl=bn)
 
-Gửi ý kiến phản hồi
+মতামত জানান
 
-# Gọi hàm bằng Gemini API
+# Gemini API-এর মাধ্যমে ফাংশন কলিং
 
-Tính năng gọi hàm cho phép bạn kết nối các mô hình với các công cụ và API bên ngoài.
-Thay vì tạo văn bản do AI tạo, mô hình sẽ xác định thời điểm gọi các hàm cụ thể và cung cấp các tham số cần thiết để thực hiện các hành động trong thế giới thực.
-Điều này cho phép mô hình đóng vai trò là cầu nối giữa ngôn ngữ tự nhiên với các hành động và dữ liệu trong thế giới thực. Tính năng gọi hàm có 3 trường hợp sử dụng chính:
+ফাংশন কলিংয়ের মাধ্যমে আপনি মডেলকে এক্সটার্নাল টুল ও API-এর সাথে কানেক্ট করতে পারেন।
+টেক্সট উত্তর তৈরি করার পরিবর্তে, মডেলটি নির্ধারণ করে যে কখন নির্দিষ্ট ফাংশন কল করতে হবে এবং বাস্তব-জগতের অ্যাকশনগুলি কার্যকর করার জন্য প্রয়োজনীয় প্যারামিটার প্রদান করে।
+এটি মডেলকে ন্যাচারাল ল্যাঙ্গুয়েজ এবং বাস্তব-জগতের অ্যাকশন ও ডেটার মধ্যে
+সেতু হিসেবে কাজ করতে দেয়। ফাংশন কলিংয়ের ৩টি প্রাথমিক ব্যবহারিক ক্ষেত্র আছে:
 
-- [**Thực hiện hành động:**](#meeting) Tương tác với các hệ thống bên ngoài bằng API, chẳng hạn như lên lịch hẹn, tạo hoá đơn, gửi email hoặc điều khiển thiết bị nhà thông minh.
-- [**Bổ sung kiến thức:**](#weather) Truy cập thông tin từ các nguồn bên ngoài như cơ sở dữ liệu, API và cơ sở tri thức.
-- [**Mở rộng khả năng:**](#chart) Sử dụng các công cụ bên ngoài để thực hiện phép tính và mở rộng giới hạn của mô hình, chẳng hạn như sử dụng máy tính hoặc tạo biểu đồ.
+- [**অ্যাকশন নেওয়া:**](#meeting) API ব্যবহার করে এক্সটার্নাল সিস্টেমের সাথে ইন্টার‍্যাক্ট করা, যেমন
+  অ্যাপয়েন্টমেন্ট শিডিউল করা, ইনভয়েস তৈরি করা, ইমেল পাঠানো বা
+  স্মার্ট হোম ডিভাইস কন্ট্রোল করা।
+- [**অগমেন্ট নলেজ:**](#weather) ডেটাবেস, API ও নলেজ বেসের মতো এক্সটার্নাল সোর্স থেকে তথ্য অ্যাক্সেস করুন।
+- [**ক্ষমতা বাড়ানো:**](#chart) গণনা করা এবং
+  মডেলের সীমাবদ্ধতা বাড়ানোর জন্য এক্সটার্নাল টুল ব্যবহার করুন, যেমন ক্যালকুলেটর ব্যবহার করা বা
+  চার্ট তৈরি করা।
 
-Bạn có thể duyệt xem ví dụ về các trường hợp sử dụng này bên dưới:
+আপনি নিচে এইসব ব্যবহারের কেসের উদাহরণ ব্রাউজ করতে পারবেন:
 
-### Lên lịch họp
+### মিটিং শিডিউল করা
 
-Ví dụ này cho biết cách xác định một hàm lên lịch cuộc họp với người tham dự vào một thời điểm cụ thể, cho phép mô hình phân tích cú pháp các yêu cầu của người dùng và trả về các đối số có cấu trúc để kích hoạt các hành động trong hệ thống bên ngoài.
+এই উদাহরণে দেখানো হয়েছে কীভাবে এমন একটি ফাংশন সংজ্ঞায়িত করা যায় যা নির্দিষ্ট সময়ে অংশগ্রহণকারীদের সাথে একটি মিটিং শিডিউল করে, মডেলকে ব্যবহারকারীর অনুরোধ পার্স করার অনুমতি দেয় এবং এক্সটার্নাল সিস্টেমে অ্যাকশন ট্রিগার করার জন্য স্ট্রাকচার্ড আর্গুমেন্ট রিটার্ন করে।
 
 ### Python
 
@@ -93,7 +98,7 @@ else:
     print(response.text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI, Type } from '@google/genai';
@@ -155,7 +160,7 @@ if (response.functionCalls && response.functionCalls.length > 0) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -290,9 +295,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### Xem thông tin thời tiết
+### Weather অ্যাপ পাওয়া
 
-Ví dụ này cho thấy cách xác định một hàm truy xuất dữ liệu nhiệt độ cho một vị trí, cho phép mô hình gọi các API bên ngoài để trả lời các truy vấn cần thông tin theo thời gian thực hoặc thông tin bên ngoài.
+এই উদাহরণে দেখানো হয়েছে যে কীভাবে এমন একটি ফাংশন নির্ধারণ করতে হয় যা কোনও লোকেশনের তাপমাত্রা সংক্রান্ত ডেটা রিট্রিভ করে। এর ফলে, মডেলটি রিয়েল-টাইম বা এক্সটার্নাল তথ্য প্রয়োজন এমন কোয়েরির উত্তর দেওয়ার জন্য এক্সটার্নাল API কল করতে পারে।
 
 ### Python
 
@@ -341,7 +346,7 @@ else:
     print(response.text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI, Type } from '@google/genai';
@@ -390,7 +395,7 @@ if (response.functionCalls && response.functionCalls.length > 0) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -458,7 +463,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -499,9 +504,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### Tạo biểu đồ
+### চার্ট তৈরি করা
 
-Ví dụ này cho thấy cách xác định một hàm tạo biểu đồ thanh từ dữ liệu có cấu trúc, minh hoạ cách mô hình có thể sử dụng các công cụ bên ngoài để thực hiện phép tính hoặc tạo thành phần hình ảnh:
+এই উদাহরণে দেখানো হয়েছে যে কীভাবে এমন একটি ফাংশন সংজ্ঞায়িত করতে হয় যা স্ট্রাকচার্ড ডেটা থেকে বার চার্ট তৈরি করে। এর মাধ্যমে দেখানো হয়েছে যে কীভাবে মডেলটি কম্পিউটেশন করতে বা ভিজ্যুয়াল অ্যাসেট তৈরি করতে এক্সটার্নাল টুল ব্যবহার করতে পারে:
 
 ### Python
 
@@ -561,7 +566,7 @@ else:
     print(response.text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI, Type } from '@google/genai';
@@ -620,7 +625,7 @@ if (response.functionCalls && response.functionCalls.length > 0) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -749,30 +754,51 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-## Cách hoạt động của tính năng gọi hàm
+## ফাংশন কলিং কীভাবে কাজ করে
 
-![tổng quan về
-gọi hàm](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=vi)
+![ফাংশন কলিং
+এক নজরে](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=bn)
 
-Tính năng gọi hàm bao gồm một hoạt động tương tác có cấu trúc giữa ứng dụng, mô hình và các hàm bên ngoài. Sau đây là thông tin chi tiết về quy trình này:
+ফাংশন কলিংয়ের মধ্যে আপনার অ্যাপ্লিকেশন, মডেল ও এক্সটার্নাল ফাংশনের মধ্যে
+স্ট্রাকচার্ড ইন্টার‌্যাকশন অন্তর্ভুক্ত। প্রসেসের ব্রেকডাউন এখানে দেওয়া হল:
 
-1. **Xác định nội dung khai báo hàm:** Xác định nội dung khai báo hàm trong mã xử lý ứng dụng. Khai báo hàm mô tả tên, tham số và mục đích của hàm cho mô hình.
-2. **Gọi API bằng nội dung khai báo hàm:** Gửi câu lệnh của người dùng cùng với(các) nội dung khai báo hàm đến mô hình. Mô hình này sẽ phân tích yêu cầu và xác định xem lệnh gọi hàm có hữu ích hay không. Nếu có, hệ thống sẽ phản hồi bằng một đối tượng JSON có cấu trúc chứa tên hàm, đối số và một `id` duy nhất (API hiện luôn trả về `id` này cho các mô hình Gemini 3\*).
-3. **Thực thi mã hàm (trách nhiệm của bạn):** Mô hình *không* tự thực thi hàm. Ứng dụng của bạn có trách nhiệm xử lý phản hồi và kiểm tra lệnh gọi hàm. Nếu
-   - **Có**: Trích xuất tên, đối số và `id` của hàm, sau đó thực thi hàm tương ứng trong ứng dụng của bạn.
-   - **Không:** Mô hình đã cung cấp câu trả lời trực tiếp bằng văn bản cho câu lệnh (quy trình này ít được nhấn mạnh trong ví dụ nhưng là một kết quả có thể xảy ra).
-4. **Tạo câu trả lời thân thiện với người dùng:** Nếu một hàm đã được thực thi, hãy thu thập kết quả và gửi lại cho mô hình, đảm bảo bạn đưa `id` phù hợp vào lượt tiếp theo của cuộc trò chuyện. Ứng dụng này sẽ sử dụng kết quả để tạo ra một phản hồi cuối cùng, thân thiện với người dùng, kết hợp thông tin từ lệnh gọi hàm.
+1. **ফাংশন ডিক্লারেশন সংজ্ঞায়িত করুন:** আপনার অ্যাপ্লিকেশন কোডে
+   ফাংশন ডিক্লারেশন সংজ্ঞায়িত করুন। ফাংশন ডিক্লারেশন মডেলে ফাংশনের নাম,
+   প্যারামিটার এবং উদ্দেশ্য বর্ণনা করে।
+2. **ফাংশন ঘোষণা সহ API কল করুন:** মডেলকে
+   ফাংশন ঘোষণা সহ ব্যবহারকারীর প্রম্পট পাঠান। এটি অনুরোধ বিশ্লেষণ করে এবং
+   ফাংশন কল সহায়ক হবে কিনা তা নির্ধারণ করে। যদি তাই হয়, তাহলে এটি ফাংশনের নাম, আর্গুমেন্ট এবং একটি অনন্য `id`
+   (এই `id` এখন Gemini 3 মডেলের জন্য API দ্বারা সর্বদা ফেরত দেওয়া হয়\*) সহ একটি স্ট্রাকচার্ড
+   JSON অবজেক্টের মাধ্যমে উত্তর দেয়।
+3. **ফাংশন কোড এক্সিকিউট করা (আপনার দায়িত্ব):** মডেল নিজে থেকে
+   ফাংশন এক্সিকিউট *করে না*। আপনার অ্যাপ্লিকেশনের দায়িত্ব হল
+   উত্তর প্রসেস করা এবং ফাংশন কল চেক করা। যদি
+   - **হ্যাঁ**: ফাংশনের নাম, আর্গুমেন্ট ও `id` এক্সট্র্যাক্ট করুন এবং আপনার অ্যাপ্লিকেশনে
+     সংশ্লিষ্ট ফাংশনটি এক্সিকিউট করুন।
+   - **না:** মডেলটি প্রম্পটের জন্য একটি সরাসরি টেক্সট উত্তর প্রদান করেছে
+     (এই ফ্লোটি উদাহরণে কম জোর দেওয়া হয়েছে তবে এটি একটি সম্ভাব্য ফলাফল)।
+4. **ব্যবহারকারীর পক্ষে সুবিধাজনক উত্তর তৈরি করুন:** কোনও ফাংশন কার্যকর করা হলে,
+   ফলাফল ক্যাপচার করুন এবং এটি মডেলে ফেরত পাঠান, কথোপকথনের পরবর্তী ধাপে আপনি যাতে ম্যাচিং
+   `id` অন্তর্ভুক্ত করেন তা নিশ্চিত করুন। এটি ফলাফল ব্যবহার করে
+   একটি চূড়ান্ত, ব্যবহার করা সহজ উত্তর তৈরি করবে যা ফাংশন কল থেকে
+   তথ্য অন্তর্ভুক্ত করে।
 
-Quá trình này có thể lặp lại qua nhiều lượt, cho phép các hoạt động tương tác và quy trình công việc phức tạp. Mô hình này cũng hỗ trợ gọi nhiều hàm
-trong một lượt ([gọi hàm song song](#parallel_function_calling)), theo
-trình tự ([gọi hàm kết hợp](#compositional_function_calling))
-và bằng các công cụ tích hợp sẵn của Gemini ([sử dụng nhiều công cụ](#native-tools)).
+এই প্রসেস একাধিকবার রিপিট করা যেতে পারে, যার ফলে জটিল ইন্টার‍্যাকশন ও ওয়ার্কফ্লো
+সম্পন্ন করা যায়। এছাড়াও, মডেলটি একটি সিঙ্গেল টার্নে একাধিক ফাংশন কল করার
+সুবিধা দেয় ([প্যারালাল ফাংশন কলিং](#parallel_function_calling)),
+সিকোয়েন্সে ([কম্পোজিশনাল ফাংশন কলিং](#compositional_function_calling)),
+এবং বিল্ট-ইন Gemini টুলের মাধ্যমে ([মাল্টি-টুল ব্যবহার](#native-tools))।
 
-\* **Luôn liên kết mã hàm:** Gemini 3 hiện luôn trả về một `id` duy nhất cho mỗi `functionCall`. Thêm chính xác `id` này vào `functionResponse` để mô hình có thể ánh xạ chính xác kết quả của bạn về yêu cầu ban đầu.
+\* **ফাংশন আইডি সবসময় ম্যাপ করা হয়:** Gemini 3 এখন সবসময় প্রতিটি `functionCall`-এর সাথে একটি অনন্য
+`id` রিটার্ন করে। আপনার `functionResponse`-এ এই সঠিক `id` অন্তর্ভুক্ত করুন
+যাতে মডেলটি আপনার ফলাফলকে আসল অনুরোধে
+সঠিকভাবে ম্যাপ করতে পারে।
 
-### Bước 1: Xác định khai báo hàm
+### ধাপ ১: ফাংশন ঘোষণা নির্ধারণ করুন
 
-Xác định một hàm và khai báo của hàm đó trong mã xử lý ứng dụng để cho phép người dùng đặt giá trị ánh sáng và thực hiện một yêu cầu API. Hàm này có thể gọi các dịch vụ hoặc API bên ngoài.
+আপনার অ্যাপ্লিকেশন কোডের মধ্যে একটি ফাংশন ও তার ঘোষণা ডিফাইন করুন যা
+ব্যবহারকারীদের আলোর ভ্যালু সেট করতে এবং API অনুরোধ করতে দেয়। এই ফাংশন এক্সটার্নাল পরিষেবা বা
+API কল করতে পারে।
 
 ### Python
 
@@ -812,7 +838,7 @@ def set_light_values(brightness: int, color_temp: str) -> dict[str, int | str]:
     return {"brightness": brightness, "colorTemperature": color_temp}
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { Type } from '@google/genai';
@@ -853,7 +879,7 @@ function setLightValues(brightness, color_temp) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -890,9 +916,12 @@ func setLightValues(brightness int, colorTemp string) map[string]any {
 }
 ```
 
-### Bước 2: Gọi mô hình bằng các khai báo hàm
+### ধাপ ২: ফাংশন ডিক্লারেশন সহ মডেল কল করা
 
-Sau khi xác định các khai báo hàm, bạn có thể nhắc mô hình sử dụng các khai báo đó. Mô hình này phân tích câu lệnh và nội dung khai báo hàm, sau đó quyết định xem nên trả lời trực tiếp hay gọi một hàm. Nếu một hàm được gọi, đối tượng phản hồi sẽ chứa một đề xuất gọi hàm.
+ফাংশন ঘোষণা করার পরে, আপনি মডেলকে সেগুলি
+ব্যবহার করার জন্য প্রম্পট করতে পারবেন। এটি প্রম্পট ও ফাংশন ডিক্লারেশন বিশ্লেষণ করে এবং সরাসরি উত্তর দেবে নাকি
+কোনও ফাংশন কল করবে তা স্থির করে। কোনও ফাংশন কল করা হলে, উত্তর
+অবজেক্টে একটি ফাংশন কল সাজেশন থাকবে।
 
 ### Python
 
@@ -921,7 +950,7 @@ response = client.models.generate_content(
 print(response.candidates[0].content.parts[0].function_call)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -954,7 +983,7 @@ const response = await ai.models.generateContent({
 console.log(response.functionCalls[0]);
 ```
 
-### Go
+### খুলুন
 
 ```
 ctx := context.Background()
@@ -984,7 +1013,7 @@ if err != nil {
 fmt.Println(response.FunctionCalls()[0])
 ```
 
-Sau đó, mô hình sẽ trả về một đối tượng `functionCall` trong một giản đồ tương thích với OpenAPI, chỉ định cách gọi một hoặc nhiều hàm đã khai báo để trả lời câu hỏi của người dùng.
+মডেলটি তখন OpenAPI-এর সাথে মানানসই স্কিমায় একটি `functionCall` অবজেক্ট রিটার্ন করে, যা ব্যবহারকারীর প্রশ্নের উত্তর দেওয়ার জন্য ঘোষিত এক বা একাধিক ফাংশনকে কীভাবে কল করতে হবে তা নির্দিষ্ট করে।
 
 ### Python
 
@@ -992,7 +1021,7 @@ Sau đó, mô hình sẽ trả về một đối tượng `functionCall` trong m
 id='8f2b1a3c' args={'color_temp': 'warm', 'brightness': 25} name='set_light_values'
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 {
@@ -1002,15 +1031,16 @@ id='8f2b1a3c' args={'color_temp': 'warm', 'brightness': 25} name='set_light_valu
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 &{ID:8f2b1a3c Args:map[brightness:25 color_temp:warm] Name:set_light_values}
 ```
 
-### Bước 3: Thực thi mã hàm set\_light\_values
+### ধাপ ৩: set\_light\_values ফাংশন কোড এক্সিকিউট করুন
 
-Trích xuất thông tin chi tiết về lệnh gọi hàm từ phản hồi của mô hình, phân tích cú pháp các đối số và thực thi hàm `set_light_values`.
+মডেলের উত্তর থেকে ফাংশন কলের বিবরণ এক্সট্র্যাক্ট করুন, আর্গুমেন্ট পার্স করুন
+, এবং `set_light_values` ফাংশনটি এক্সিকিউট করুন।
 
 ### Python
 
@@ -1023,7 +1053,7 @@ if tool_call.name == "set_light_values":
     print(f"Function execution result: {result}")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 // Extract tool call details
@@ -1036,7 +1066,7 @@ if (tool_call.name === 'set_light_values') {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 // Extract tool call details
@@ -1051,9 +1081,10 @@ if toolCall.Name == "set_light_values" {
 }
 ```
 
-### Bước 4: Tạo câu trả lời thân thiện với người dùng bằng kết quả của hàm và gọi lại mô hình
+### ধাপ ৪: ফাংশনের ফলাফল সহ ব্যবহারকারীর পক্ষে উপযুক্ত উত্তর তৈরি করো এবং মডেলকে আবার কল করো
 
-Cuối cùng, hãy gửi kết quả của quá trình thực thi hàm trở lại mô hình để mô hình có thể kết hợp thông tin này vào câu trả lời cuối cùng cho người dùng.
+সবশেষে, ফাংশন এক্সিকিউশনের ফলাফল মডেলে ফেরত পাঠান যাতে এটি
+ব্যবহারকারীকে দেওয়া চূড়ান্ত উত্তরে এই তথ্য অন্তর্ভুক্ত করতে পারে।
 
 ### Python
 
@@ -1082,7 +1113,7 @@ final_response = client.models.generate_content(
 print(final_response.text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 // Create a function response part
@@ -1106,7 +1137,7 @@ const final_response = await ai.models.generateContent({
 console.log(final_response.text);
 ```
 
-### Go
+### খুলুন
 
 ```
 // Create a function response part
@@ -1134,62 +1165,87 @@ if err != nil {
 fmt.Println(finalResponse.Text())
 ```
 
-Thao tác này sẽ hoàn tất quy trình gọi hàm. Mô hình đã sử dụng thành công hàm `set_light_values` để thực hiện hành động theo yêu cầu của người dùng.
+এর ফলে ফাংশন কলিং ফ্লো সম্পূর্ণ হয়। ব্যবহারকারীর অনুরোধ করা অ্যাকশন পারফর্ম করতে মডেলটি সফলভাবে
+`set_light_values` ফাংশন ব্যবহার করেছে।
 
-## Khai báo hàm
+## ফাংশন ডিক্লারেশন
 
-Khi triển khai lệnh gọi hàm trong một câu lệnh, bạn sẽ tạo một đối tượng `tools`, chứa một hoặc nhiều `function declarations`. Bạn xác định các hàm bằng JSON, cụ thể là bằng một [tập hợp con chọn lọc](https://ai.google.dev/api/caching?hl=vi#Schema) của định dạng [giản đồ OpenAPI](https://spec.openapis.org/oas/v3.0.3#schemaw). Một nội dung khai báo hàm có thể bao gồm các tham số sau:
+আপনি যখন কোনও প্রম্পটে ফাংশন কলিং প্রয়োগ করেন, তখন আপনি একটি `tools` অবজেক্ট তৈরি করেন,
+যার মধ্যে এক বা একাধিক `function declarations` থাকে। আপনি JSON ব্যবহার করে ফাংশন ডিফাইন করেন, বিশেষ করে [OpenAPI স্কিমা](https://spec.openapis.org/oas/v3.0.3#schemaw)
+ফর্ম্যাটের [বেছে নেওয়া সাবসেট](https://ai.google.dev/api/caching?hl=bn#Schema)
+ব্যবহার করে। একটি
+ফাংশন ঘোষণার মধ্যে নিম্নলিখিত প্যারামিটার অন্তর্ভুক্ত থাকতে পারে:
 
-- `name` (chuỗi): Tên riêng biệt cho hàm (`get_weather_forecast`, `send_email`). Sử dụng tên mô tả không có dấu cách hoặc ký tự đặc biệt (sử dụng dấu gạch dưới hoặc camelCase).
-- `description` (chuỗi): Nội dung giải thích rõ ràng và chi tiết về mục đích và chức năng của hàm. Điều này rất quan trọng để mô hình hiểu được thời điểm sử dụng hàm. Hãy nêu cụ thể và đưa ra ví dụ nếu cần ("Tìm rạp chiếu phim dựa trên vị trí và tên phim (không bắt buộc) hiện đang chiếu tại rạp").
-- `parameters` (đối tượng): Xác định các tham số đầu vào mà hàm dự kiến.
-  - `type` (chuỗi): Chỉ định loại dữ liệu tổng thể, chẳng hạn như `object`.
-  - `properties` (đối tượng): Liệt kê các thông số riêng lẻ, mỗi thông số có:
-    - `type` (chuỗi): Kiểu dữ liệu của tham số, chẳng hạn như `string`,
+- `name` (স্ট্রিং): ফাংশনের জন্য একটি অনন্য নাম (`get_weather_forecast`,
+  `send_email`)। স্পেস বা বিশেষ অক্ষর ছাড়া বর্ণনামূলক নাম ব্যবহার করুন
+  (আন্ডারস্কোর বা camelCase ব্যবহার করুন)।
+- `description` (স্ট্রিং): ফাংশনের উদ্দেশ্য ও ক্ষমতার স্পষ্ট ও বিস্তারিত ব্যাখ্যা। মডেলের জন্য এটি বোঝা অত্যন্ত গুরুত্বপূর্ণ যে কখন
+  ফাংশনটি ব্যবহার করতে হবে। নির্দিষ্ট করে বলুন এবং সাহায্যকারী হলে উদাহরণ দিন ("লোকেশন এবং
+  ঐচ্ছিকভাবে বর্তমানে থিয়েটারে চলছে এমন সিনেমার নামের ভিত্তিতে থিয়েটার
+  খোঁজে।")।
+- `parameters` (অবজেক্ট): ফাংশন যে ইনপুট প্যারামিটার
+  প্রত্যাশা করে তা নির্ধারণ করে।
+  - `type` (স্ট্রিং): সামগ্রিক ডেটার ধরন নির্দিষ্ট করে, যেমন `object`।
+  - `properties` (অবজেক্ট): প্রতিটি আলাদা আলাদা প্যারামিটার সহ তালিকা, প্রত্যেকটির সাথে:
+    - `type` (স্ট্রিং): প্যারামিটারের ডেটা টাইপ, যেমন `string`,
       `integer`, `boolean, array`.
-    - `description` (chuỗi): Nội dung mô tả mục đích và định dạng của tham số. Đưa ra ví dụ và các ràng buộc ("Thành phố và tiểu bang, ví dụ: "San Francisco, CA" hoặc mã ZIP, ví dụ: "95616".")
-    - `enum` (mảng, không bắt buộc): Nếu các giá trị tham số thuộc một tập hợp cố định, hãy dùng "enum" để liệt kê các giá trị được phép thay vì chỉ mô tả các giá trị đó trong phần mô tả. Điều này giúp cải thiện độ chính xác ("enum":["daylight", "cool", "warm"]).
-  - `required` (mảng): Một mảng chuỗi liệt kê tên các tham số bắt buộc để hàm hoạt động.
+    - `description` (স্ট্রিং): প্যারামিটারের উদ্দেশ্য ও ফর্ম্যাটের
+      বিবরণ। উদাহরণ ও বিধিনিষেধ দাও ("শহর ও রাজ্য,
+      যেমন, 'সান ফ্রান্সিসকো, ক্যালিফোর্নিয়া' অথবা পিন কোড, যেমন, '95616'।")।
+    - `enum` (অ্যারে, ঐচ্ছিক): প্যারামিটারের মান যদি একটি নির্দিষ্ট সেট থেকে হয়, তাহলে অনুমোদিত মানগুলি তালিকাভুক্ত করতে "enum" ব্যবহার করুন, শুধু বিবরণে সেগুলি বর্ণনা করার পরিবর্তে। এটি নির্ভুলতা উন্নত করে ("enum":
+      ["daylight", "cool", "warm"])।
+  - `required` (অ্যারে): ফাংশনটি কাজ করার জন্য বাধ্যতামূলক প্যারামিটারের নাম তালিকাভুক্ত করে এমন স্ট্রিংয়ের অ্যারে।
 
-Bạn cũng có thể tạo `FunctionDeclarations` trực tiếp từ các hàm Python bằng cách sử dụng `types.FunctionDeclaration.from_callable(client=client, callable=your_function)`.
+এছাড়াও, আপনি সরাসরি Python ফাংশন থেকে `FunctionDeclarations` তৈরি করতে পারেন, এর জন্য
+`types.FunctionDeclaration.from_callable(client=client, callable=your_function)` ব্যবহার করুন।
 
-## Gọi hàm bằng mô hình tư duy
+## থিঙ্কিং মডেলের সাথে ফাংশন কলিং
 
-Các mô hình Gemini 3 và 2.5 sử dụng quy trình ["tư duy"](https://ai.google.dev/gemini-api/docs/thinking?hl=vi) nội bộ để suy luận về các yêu cầu. Điều này
-giúp cải thiện đáng kể hiệu suất gọi hàm,
-cho phép mô hình xác định rõ hơn thời điểm gọi hàm và
-tham số cần sử dụng. Vì Gemini API không lưu giữ trạng thái, nên các mô hình sử dụng [chữ ký tư duy](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=vi) để duy trì ngữ cảnh trong các cuộc trò chuyện nhiều lượt.
+Gemini 3 এবং 2.5 সিরিজের মডেলগুলি অনুরোধের মাধ্যমে যুক্তি দেওয়ার জন্য একটি ইন্টার্নাল ["চিন্তাভাবনা"](https://ai.google.dev/gemini-api/docs/thinking?hl=bn) প্রক্রিয়া ব্যবহার করে। এটি
+ফাংশন কলিং পারফর্ম্যান্সকে উল্লেখযোগ্যভাবে উন্নত করে,
+মডেলকে আরও ভালোভাবে নির্ধারণ করতে দেয় যে কখন কোনও ফাংশন কল করতে হবে এবং কোন
+প্যারামিটার ব্যবহার করতে হবে। Gemini API স্টেটলেস হওয়ার কারণে, মডেলগুলি একাধিক কথোপকথন জুড়ে
+কন্টেক্সট বজায় রাখতে
+[থট সিগনেচার](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=bn) ব্যবহার করে।
 
-Phần này trình bày cách quản lý nâng cao chữ ký suy nghĩ và chỉ cần thiết nếu bạn đang tạo yêu cầu API theo cách thủ công (ví dụ: qua REST) hoặc thao tác với nhật ký trò chuyện.
+এই বিভাগে থট সিগনেচারের উন্নত ম্যানেজমেন্ট সম্পর্কে আলোচনা করা হয়েছে এবং আপনি ম্যানুয়ালি API অনুরোধ (যেমন, REST-এর মাধ্যমে) তৈরি করলে বা কথোপকথনের ইতিহাস ম্যানিপুলেট করলে তবেই এটি প্রয়োজন হয়।
 
-**Nếu đang sử dụng [SDK AI tạo sinh của Google](https://ai.google.dev/gemini-api/docs/libraries?hl=vi) (các thư viện chính thức của chúng tôi), bạn không cần quản lý quy trình này**. SDK tự động xử lý các bước cần thiết, như trong [ví dụ](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi#step-4) trước đó.
+**আপনি [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=bn) (আমাদের
+অফিসিয়াল লাইব্রেরি) ব্যবহার করলে, আপনাকে এই প্রসেস ম্যানেজ করতে হবে না**। SDK
+প্রয়োজনীয় ধাপগুলি অটোমেটিক ম্যানেজ করে, যেমনটি আগের
+[উদাহরণে](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn#step-4) দেখানো হয়েছে।
 
-### Quản lý nhật ký trò chuyện theo cách thủ công
+### ম্যানুয়ালি কথোপকথনের ইতিহাস ম্যানেজ করা
 
-Nếu sửa đổi nhật ký trò chuyện theo cách thủ công, thay vì gửi [phản hồi hoàn chỉnh trước đó](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi#step-4), bạn phải xử lý chính xác `thought_signature` có trong lượt của mô hình.
+আপনি যদি কথোপকথনের ইতিহাস ম্যানুয়ালি পরিবর্তন করেন, তাহলে
+[আগের সম্পূর্ণ উত্তর](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn#step-4) পাঠানোর পরিবর্তে
+আপনাকে অবশ্যই মডেলের টার্নে অন্তর্ভুক্ত `thought_signature` সঠিকভাবে ম্যানেজ করতে হবে।
 
-Hãy tuân thủ các quy tắc sau để đảm bảo ngữ cảnh của mô hình được giữ nguyên:
+মডেলের প্রসঙ্গ যাতে সংরক্ষিত থাকে তা নিশ্চিত করতে এইসব নিয়ম অনুসরণ করুন:
 
-- Luôn gửi `thought_signature` trở lại mô hình bên trong [`Part`](https://ai.google.dev/api?hl=vi#request-body-structure) ban đầu.
-- **Luôn thêm chính xác `id` từ `function_call` vào `function_response` để API có thể ánh xạ kết quả đến yêu cầu chính xác.**
-- Đừng hợp nhất `Part` chứa chữ ký với không chứa chữ ký. Điều này
-  phá vỡ ngữ cảnh vị trí của suy nghĩ.
-- Đừng kết hợp hai `Parts` đều chứa chữ ký, vì không thể hợp nhất các chuỗi chữ ký.
+- `thought_signature`-কে সবসময় আসল
+  [`Part`](https://ai.google.dev/api?hl=bn#request-body-structure)-এর মধ্যে থাকা মডেলে ফেরত পাঠান।
+- **আপনার
+  `function_response`-এ `function_call` থেকে পাওয়া `id` সবসময় হুবহু অন্তর্ভুক্ত করুন,** যাতে API সঠিক অনুরোধের সাথে ফলাফল ম্যাপ করতে পারে।
+- স্বাক্ষর আছে এমন `Part`-এর সাথে স্বাক্ষর নেই এমন মার্জ করবেন না। এটি
+  ভাবনার পজিশনাল প্রসঙ্গকে ভেঙে দেয়।
+- দুটি `Parts` একত্রিত করবেন না, কারণ দুটিতেই স্বাক্ষর থাকলে স্বাক্ষর
+  স্ট্রিং মার্জ করা যায় না।
 
-#### Chữ ký tư duy của Gemini 3
+#### Gemini 3 থট সিগনেচার
 
-Trong Gemini 3, mọi [`Part`](https://ai.google.dev/api?hl=vi#request-body-structure) của câu trả lời từ mô hình
-đều có thể chứa chữ ký suy nghĩ.
-Mặc dù bạn nên trả về chữ ký từ tất cả các loại `Part`,
-nhưng bạn bắt buộc phải trả về chữ ký suy nghĩ để gọi hàm. Trừ phi bạn
-thao tác với nhật ký trò chuyện theo cách thủ công, SDK Google GenAI sẽ
-tự động xử lý chữ ký suy nghĩ.
+Gemini 3-তে, কোনও মডেল উত্তরের [`Part`](https://ai.google.dev/api?hl=bn#request-body-structure)
+মধ্যে থট সিগনেচার থাকতে পারে।
+আমরা সাধারণত সব `Part` ধরনের সিগনেচার রিটার্ন করার সাজেশন দিলেও,
+ফাংশন কলিংয়ের ক্ষেত্রে থট সিগনেচার পাস করা বাধ্যতামূলক। আপনি ম্যানুয়ালি কথোপকথনের ইতিহাস ম্যানিপুলেট না করলে, Google GenAI SDK অটোমেটিক থট সিগনেচার ম্যানেজ করবে।
 
-Nếu bạn đang thao tác với nhật ký trò chuyện theo cách thủ công, hãy tham khảo trang [Chữ ký suy nghĩ](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=vi) để biết hướng dẫn đầy đủ và thông tin chi tiết về cách xử lý chữ ký suy nghĩ cho Gemini 3.
+আপনি যদি ম্যানুয়ালি কথোপকথনের ইতিহাস ম্যানিপুলেট করেন, তাহলে Gemini 3-এর জন্য থট সিগনেচার ম্যানেজ করার ব্যাপারে সম্পূর্ণ
+নির্দেশিকা ও বিবরণ পেতে [থট সিগনেচার](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=bn) পৃষ্ঠা দেখুন।
 
-##### Kiểm tra chữ ký suy nghĩ
+##### থট সিগনেচার পরীক্ষা করা হচ্ছে
 
-Mặc dù không cần thiết cho việc triển khai, nhưng bạn có thể kiểm tra phản hồi để xem `thought_signature` cho mục đích gỡ lỗi hoặc giáo dục.
+ইমপ্লিমেন্টেশনের জন্য এটি প্রয়োজনীয় না হলেও, আপনি
+`thought_signature` দেখতে উত্তরের ব্যাপারে ভাল করে চেক করে নিতে পারেন, এটি ডিবাগিং বা শিক্ষামূলক উদ্দেশ্যে করা যেতে পারে।
 
 ### Python
 
@@ -1204,7 +1260,7 @@ if part.thought_signature:
   print(base64.b64encode(part.thought_signature).decode("utf-8"))
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 // After receiving a response from a model with thinking enabled
@@ -1217,7 +1273,7 @@ if (part.thoughtSignature) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 // After receiving a response from a model with thinking enabled
@@ -1230,13 +1286,25 @@ if len(part.ThoughtSignature) > 0 {
 }
 ```
 
-Tìm hiểu thêm về các hạn chế và cách sử dụng chữ ký tư duy, cũng như về các mô hình tư duy nói chung trên trang [Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#signatures).
+[থিঙ্কিং](https://ai.google.dev/gemini-api/docs/thinking?hl=bn#signatures) পৃষ্ঠায় থট সিগনেচার ও থিঙ্কিং
+মডেলের সীমাবদ্ধতা ও ব্যবহার সম্পর্কে আরও জানুন।
 
-## Gọi hàm song song
+## প্যারালাল ফাংশন কলিং
 
-Ngoài việc gọi hàm một lượt, bạn cũng có thể gọi nhiều hàm cùng một lúc. Tính năng gọi hàm song song cho phép bạn thực thi nhiều hàm cùng một lúc và được dùng khi các hàm không phụ thuộc vào nhau. Điều này rất hữu ích trong các trường hợp như thu thập dữ liệu từ nhiều nguồn độc lập, chẳng hạn như truy xuất thông tin chi tiết về khách hàng từ nhiều cơ sở dữ liệu hoặc kiểm tra mức tồn kho trên nhiều kho hàng hoặc thực hiện nhiều hành động như chuyển đổi căn hộ của bạn thành vũ trường.
+সিঙ্গেল টার্ন ফাংশন কলিং ছাড়াও, আপনি একসাথে একাধিক ফাংশন
+কল করতে পারেন। প্যারালাল ফাংশন কলিং আপনাকে একসাথে একাধিক ফাংশন এক্সিকিউট করতে দেয়
+এবং এটি তখনই ব্যবহার করা হয় যখন ফাংশনগুলি একে অপরের উপর নির্ভরশীল নয়। এটি
+একাধিক স্বাধীন সোর্স থেকে ডেটা সংগ্রহ করার মতো পরিস্থিতিতে উপযোগী, যেমন
+বিভিন্ন ডেটাবেস থেকে গ্রাহকের বিবরণ পুনরুদ্ধার করা বা বিভিন্ন গুদাম জুড়ে ইনভেন্টরি
+লেভেল চেক করা বা আপনার অ্যাপার্টমেন্টকে ডিস্কোতে রূপান্তর করার মতো একাধিক অ্যাকশন
+পারফর্ম করা।
 
-Khi mô hình bắt đầu nhiều lệnh gọi hàm trong một lượt, bạn không cần trả về các đối tượng `function_result` theo cùng thứ tự mà các đối tượng `function_call` đã nhận được. Gemini API liên kết từng kết quả với lệnh gọi tương ứng bằng cách sử dụng `id` từ kết quả của mô hình. Điều này cho phép bạn thực thi các hàm một cách không đồng bộ và thêm kết quả vào danh sách khi chúng hoàn tất.
+মডেলটি একবারে একাধিক ফাংশন কল শুরু করলে, আপনাকে `function_call` অবজেক্টগুলি যে ক্রমে
+পেয়েছেন সেই একই ক্রমে `function_result` অবজেক্টগুলি ফেরত দিতে
+হবে না। Gemini API, মডেলের আউটপুট থেকে `id` ব্যবহার করে প্রতিটি ফলাফলকে
+তার সংশ্লিষ্ট কলের সাথে ম্যাপ করে। এটি আপনাকে
+অ্যাসিঙ্ক্রোনাসভাবে আপনার ফাংশন এক্সিকিউট করতে এবং ফলাফল সম্পূর্ণ হওয়ার সাথে সাথে
+আপনার তালিকায় যোগ করতে দেয়।
 
 ### Python
 
@@ -1291,7 +1359,7 @@ dim_lights = {
 }
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { Type } from '@google/genai';
@@ -1346,7 +1414,7 @@ const dimLights = {
 };
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1403,9 +1471,9 @@ var dimLights = &genai.FunctionDeclaration{
 }
 ```
 
-Định cấu hình chế độ gọi hàm để cho phép sử dụng tất cả các công cụ được chỉ định.
-Để tìm hiểu thêm, bạn có thể đọc về cách
-[định cấu hình lệnh gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi#function_calling_modes).
+উল্লেখ করা সব টুল ব্যবহার করার অনুমতি দিতে ফাংশন কলিং মোড কনফিগার করুন।
+আরও জানতে, আপনি
+[ফাংশন কলিং কনফিগার করা](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn#function_calling_modes) সম্পর্কে পড়তে পারেন।
 
 ### Python
 
@@ -1439,7 +1507,7 @@ for fn in response.function_calls:
     print(f"{fn.name}({args}) - ID: {fn.id}")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1479,7 +1547,7 @@ for (const fn of response.functionCalls) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 ctx := context.Background()
@@ -1519,9 +1587,14 @@ for _, fn := range response.FunctionCalls() {
 }
 ```
 
-Mỗi kết quả được in phản ánh một lệnh gọi hàm mà mô hình đã yêu cầu. Để gửi lại kết quả, hãy đưa các phản hồi vào theo cùng thứ tự như khi được yêu cầu.
+প্রিন্ট করা প্রতিটি ফলাফল মডেলের অনুরোধ করা একটি ফাংশন কলকে
+দেখায়। ফলাফল পাঠানোর জন্য, যেভাবে অনুরোধ করা হয়েছে, সেই একই ক্রমে উত্তরগুলি
+অন্তর্ভুক্ত করুন।
 
-Python SDK hỗ trợ [tính năng gọi hàm tự động](https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=vi#automatic_function_calling_python_only), tự động chuyển đổi các hàm Python thành khai báo, xử lý quá trình thực thi lệnh gọi hàm và chu kỳ phản hồi cho bạn. Sau đây là một ví dụ về trường hợp sử dụng disco.
+Python SDK
+[অটোমেটিক ফাংশন কলিং](https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=bn#automatic_function_calling_python_only)
+ফিচারকে সাপোর্ট করে, যা অটোমেটিক Python ফাংশনকে ডিক্লারেশনে কনভার্ট করে, ফাংশন কল এক্সিকিউশন এবং রেসপন্স সাইকেল ম্যানেজ করে। ডিস্কো ব্যবহারের
+ক্ষেত্রে নিম্নলিখিত উদাহরণটি দেখুন।
 
 ### Python
 
@@ -1584,15 +1657,20 @@ print(response.text)
 # I've turned on the disco ball, started playing loud and energetic music, and dimmed the lights to 50% brightness. Let's get this party started!
 ```
 
-## Gọi hàm kết hợp
+## কম্পোজিশনাল ফাংশন কলিং
 
-Tính năng gọi hàm theo thành phần hoặc tuần tự cho phép Gemini liên kết nhiều lệnh gọi hàm với nhau để thực hiện một yêu cầu phức tạp. Ví dụ: để trả lời câu hỏi "Nhiệt độ ở vị trí hiện tại của tôi là bao nhiêu", trước tiên, Gemini API có thể gọi một hàm `get_current_location()`, sau đó là một hàm `get_weather()` lấy vị trí làm tham số.
+কম্পোজিশনাল বা সিকোয়েন্সিয়াল ফাংশন কলিং, Gemini-কে একাধিক
+ফাংশন কল একসাথে চেইন করে জটিল অনুরোধ পূরণ করতে দেয়। যেমন, "আমার বর্তমান লোকেশনের তাপমাত্রা কত" প্রশ্নের উত্তর দিতে Gemini API প্রথমে
+`get_current_location()` ফাংশন এবং তারপরে `get_weather()` ফাংশন ইনভোক করতে পারে যা
+লোকেশনকে প্যারামিটার হিসেবে নেয়।
 
-Ví dụ sau đây minh hoạ cách triển khai lệnh gọi hàm thành phần bằng cách sử dụng Python SDK và lệnh gọi hàm tự động.
+Python SDK ও অটোমেটিক ফাংশন কলিং ব্যবহার করে কীভাবে কম্পোজিশনাল ফাংশন
+কলিং প্রয়োগ করতে হয় তা নিম্নলিখিত উদাহরণে দেখানো হয়েছে।
 
 ### Python
 
-Ví dụ này sử dụng tính năng gọi hàm tự động của SDK Python `google-genai`. SDK tự động chuyển đổi các hàm Python sang giản đồ bắt buộc, thực thi các lệnh gọi hàm khi mô hình yêu cầu và gửi kết quả trở lại mô hình để hoàn tất nhiệm vụ.
+এই উদাহরণে
+`google-genai` Python SDK-এর অটোমেটিক ফাংশন কলিং ফিচার ব্যবহার করা হয়েছে। SDK অটোমেটিক Python ফাংশনকে প্রয়োজনীয় স্কিমায় কনভার্ট করে, মডেলের অনুরোধ অনুযায়ী ফাংশন কল এক্সিকিউট করে এবং টাস্ক সম্পূর্ণ করার জন্য ফলাফল মডেলে ফেরত পাঠায়।
 
 ```
 import os
@@ -1631,9 +1709,12 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-**Kết quả đầu ra dự kiến**
+**প্রত্যাশিত আউটপুট**
 
-Khi chạy mã, bạn sẽ thấy SDK điều phối các lệnh gọi hàm. Trước tiên, mô hình sẽ gọi `get_weather_forecast`, nhận nhiệt độ, sau đó gọi `set_thermostat_temperature` với giá trị chính xác dựa trên logic trong câu lệnh.
+আপনি কোড রান করলে, SDK ফাংশন কল
+অরকেস্ট্রেট করছে তা দেখতে পাবেন। মডেল প্রথমে `get_weather_forecast` কল করে, তাপমাত্রা
+রিসিভ করে এবং তারপর প্রম্পটের লজিকের উপর ভিত্তি করে সঠিক
+ভ্যালু সহ `set_thermostat_temperature` কল করে।
 
 ```
 Tool Call: get_weather_forecast(location=London)
@@ -1643,9 +1724,10 @@ Tool Response: {'status': 'success'}
 OK. I've set the thermostat to 20°C.
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
-Ví dụ này cho thấy cách sử dụng JavaScript/TypeScript SDK để thực hiện lệnh gọi hàm kết hợp bằng cách sử dụng một vòng lặp thực thi thủ công.
+এই উদাহরণে দেখানো হয়েছে যে কীভাবে JavaScript/TypeScript SDK ব্যবহার করে ম্যানুয়াল এক্সিকিউশন লুপের মাধ্যমে কম্পোজিশনাল
+ফাংশন কলিং করা যায়।
 
 ```
 import { GoogleGenAI, Type } from "@google/genai";
@@ -1774,9 +1856,12 @@ while (true) {
 }
 ```
 
-**Kết quả đầu ra dự kiến**
+**প্রত্যাশিত আউটপুট**
 
-Khi chạy mã, bạn sẽ thấy SDK điều phối các lệnh gọi hàm. Trước tiên, mô hình gọi `get_weather_forecast`, nhận nhiệt độ, sau đó gọi `set_thermostat_temperature` với giá trị chính xác dựa trên logic trong câu lệnh.
+আপনি কোড রান করলে, SDK ফাংশন কল
+অরকেস্ট্রেট করছে তা দেখতে পাবেন। মডেলটি প্রথমে `get_weather_forecast`-এ কল করে, তাপমাত্রা
+সংক্রান্ত তথ্য পায় এবং তারপরে প্রম্পটের লজিক অনুযায়ী সঠিক
+ভ্যালু সহ `set_thermostat_temperature`-এ কল করে।
 
 ```
 Tool Call: get_weather_forecast(location=London)
@@ -1786,9 +1871,10 @@ Tool Response: {'status': 'success'}
 OK. It's 25°C in London, so I've set the thermostat to 20°C.
 ```
 
-### Go
+### খুলুন
 
-Ví dụ này cho thấy cách sử dụng SDK Go để thực hiện lệnh gọi hàm kết hợp bằng vòng lặp thực thi thủ công.
+এই উদাহরণে দেখানো হয়েছে যে কীভাবে Go SDK ব্যবহার করে ম্যানুয়াল এক্সিকিউশন লুপের মাধ্যমে কম্পোজিশনাল ফাংশন কলিং
+করা যায়।
 
 ```
 package main
@@ -1897,7 +1983,7 @@ func main() {
 }
 ```
 
-**Kết quả đầu ra dự kiến**
+**প্রত্যাশিত আউটপুট**
 
 ```
 Tool Call: get_weather_forecast(location=London)
@@ -1907,8 +1993,9 @@ Tool Response: map[status:success]
 OK. It's 25°C in London, so I've set the thermostat to 20°C.
 ```
 
-Gọi hàm thành phần là một tính năng gốc của [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi). Điều này có nghĩa là Live API
-có thể xử lý lệnh gọi hàm tương tự như SDK Python.
+কম্পোজিশনাল ফাংশন কলিং হল নেটিভ [Live
+API](https://ai.google.dev/gemini-api/docs/live?hl=bn) ফিচার। এর অর্থ হল, Live API
+Python SDK-এর মতো ফাংশন কলিং হ্যান্ডেল করতে পারে।
 
 ### Python
 
@@ -1929,7 +2016,7 @@ tools = [
 await run(prompt, tools=tools, modality="AUDIO")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 // Light control schemas
@@ -1948,17 +2035,29 @@ const tools = [
 await run(prompt, tools=tools, modality="AUDIO")
 ```
 
-## Chế độ gọi hàm
+## ফাংশন কলিং মোড
 
-Gemini API cho phép bạn kiểm soát cách mô hình sử dụng các công cụ được cung cấp
-(khai báo hàm). Cụ thể, bạn có thể đặt chế độ trong `function_calling_config`.
+Gemini API আপনাকে মডেলের প্রদত্ত টুল (ফাংশন ডিক্লারেশন) ব্যবহারের পদ্ধতি নিয়ন্ত্রণ করতে দেয়। বিশেষত, আপনি
+`function_calling_config`-এর মধ্যে মোড সেট করতে পারবেন।
 
-- `VALIDATED`: Chế độ mặc định cho tổ hợp công cụ (khi các công cụ tích hợp hoặc đầu ra có cấu trúc cũng được bật). Mô hình này bị hạn chế dự đoán lệnh gọi hàm hoặc ngôn ngữ tự nhiên, đồng thời đảm bảo tuân thủ giản đồ hàm. Nếu bạn không cung cấp `allowed_function_names`, mô hình sẽ chọn trong số tất cả các nội dung khai báo hàm có sẵn. Nếu `allowed_function_names` được cung cấp, mô hình sẽ chọn trong số các hàm được phép. Chế độ này giúp giảm các lệnh gọi hàm không đúng định dạng (so với chế độ `AUTO`).
-- `AUTO`: Chế độ mặc định khi chỉ bật công cụ function\_declarations.
-  Mô hình sẽ quyết định xem nên tạo câu trả lời bằng ngôn ngữ tự nhiên hay đề xuất một lệnh gọi hàm dựa trên câu lệnh và ngữ cảnh.
-- `ANY`: Mô hình bị ràng buộc để luôn dự đoán một lệnh gọi hàm và đảm bảo tuân thủ giản đồ hàm. Nếu bạn không chỉ định `allowed_function_names`, thì mô hình có thể chọn trong số các nội dung khai báo hàm được cung cấp.
-  Nếu `allowed_function_names` được cung cấp dưới dạng danh sách, thì mô hình chỉ có thể chọn trong số các hàm trong danh sách đó. Sử dụng chế độ này khi bạn yêu cầu phản hồi lệnh gọi hàm cho mọi câu lệnh (nếu có).
-- `NONE`: Mô hình *bị cấm* thực hiện lệnh gọi hàm. Điều này tương đương với việc gửi yêu cầu mà không có bất kỳ nội dung khai báo hàm nào. Sử dụng tham số này để tạm thời vô hiệu hoá tính năng gọi hàm mà không cần xoá định nghĩa công cụ.
+- `VALIDATED`: টুল কম্বিনেশনের জন্য ডিফল্ট মোড (যখন বিল্ট-ইন টুল বা
+  স্ট্রাকচার্ড আউটপুটও চালু থাকে)। মডেলটি
+  ফাংশন কল বা স্বাভাবিক ভাষা অনুমান করার জন্য সীমাবদ্ধ এবং ফাংশন স্কিমা মেনে চলা নিশ্চিত করে। যদি
+  `allowed_function_names` প্রদান করা না হয়, তাহলে মডেলটি উপলভ্য
+  ফাংশন ঘোষণার মধ্যে থেকে বেছে নেয়। `allowed_function_names` প্রদান করা হলে, মডেলটি
+  অনুমোদিত ফাংশনের সেট থেকে বেছে নেয়। এই মোডটি ভুলভাবে ফর্ম্যাট করা
+  ফাংশন কল (`AUTO` মোডের তুলনায়) কম করে।
+- `AUTO`: শুধুমাত্র function\_declarations টুল চালু থাকলে ডিফল্ট মোড।
+  প্রম্পট ও প্রসঙ্গের উপর ভিত্তি করে মডেল সিদ্ধান্ত নেয় যে ন্যাচারাল ল্যাঙ্গুয়েজে উত্তর দেবে নাকি
+  ফাংশন কলের সাজেশন দেবে।
+- `ANY`: মডেলটি সবসময় একটি ফাংশন কল অনুমান করার জন্য সীমাবদ্ধ এবং
+  ফাংশন স্কিমা মেনে চলা নিশ্চিত করে। `allowed_function_names` উল্লেখ করা না থাকলে, মডেলটি প্রদত্ত যেকোনও ফাংশন ডিক্লারেশন থেকে বেছে নিতে পারে।
+  `allowed_function_names` যদি তালিকা হিসেবে প্রদান করা হয়, তাহলে মডেল শুধুমাত্র
+  সেই তালিকার ফাংশন থেকে বেছে নিতে পারবে। প্রতিটি প্রম্পটের জন্য ফাংশন
+  কলের উত্তর প্রয়োজন হলে এই মোড ব্যবহার করুন (প্রযোজ্য হলে)।
+- `NONE`: মডেলটি ফাংশন কল করার জন্য *নিষিদ্ধ*। এটি
+  কোনও ফাংশন ঘোষণা ছাড়াই অনুরোধ পাঠানোর সমতুল্য। আপনার টুল ডেফিনিশন না সরিয়ে
+  ফাংশন কলিং সাময়িকভাবে বন্ধ করতে এটি ব্যবহার করুন।
 
 ### Python
 
@@ -1979,7 +2078,7 @@ config = types.GenerateContentConfig(
 )
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { FunctionCallingConfigMode } from '@google/genai';
@@ -1999,7 +2098,7 @@ const config = {
 };
 ```
 
-### Go
+### খুলুন
 
 ```
 // Configure function calling mode
@@ -2017,19 +2116,20 @@ config := &genai.GenerateContentConfig{
 }
 ```
 
-## Gọi hàm tự động (chỉ dành cho Python)
+## অটোমেটিক ফাংশন কলিং (শুধুমাত্র Python)
 
-Khi sử dụng SDK Python, bạn có thể cung cấp trực tiếp các hàm Python dưới dạng công cụ.
-SDK chuyển đổi các hàm này thành khai báo, quản lý việc thực thi lệnh gọi hàm và xử lý chu kỳ phản hồi cho bạn. Xác định hàm của bạn bằng gợi ý về kiểu và chuỗi tài liệu. Để có kết quả tối ưu, bạn nên sử dụng [chuỗi tài liệu theo kiểu Google.](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods)
-Sau đó, SDK sẽ tự động:
+Python SDK ব্যবহার করার সময়, আপনি সরাসরি টুল হিসেবে Python ফাংশন প্রদান করতে পারবেন।
+SDK এইসব ফাংশনকে ডিক্লারেশনে কনভার্ট করে, ফাংশন কল এক্সিকিউশন ম্যানেজ করে
+এবং আপনার জন্য রেসপন্স সাইকেল ম্যানেজ করে। টাইপ হিন্ট ও ডকস্ট্রিংয়ের মাধ্যমে
+আপনার ফাংশন সংজ্ঞায়িত করুন। সেরা ফলাফল পেতে, [Google-স্টাইল ডকস্ট্রিং](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods) ব্যবহার করার সাজেশন দেওয়া হয়।
+SDK তারপর অটোমেটিক:
 
-1. Phát hiện phản hồi lệnh gọi hàm từ mô hình.
-2. Gọi hàm Python tương ứng trong mã của bạn.
-3. Gửi phản hồi của hàm trở lại mô hình.
-4. Trả về phản hồi văn bản cuối cùng của mô hình.
+1. মডেল থেকে ফাংশন কল সংক্রান্ত উত্তর শনাক্ত করা।
+2. আপনার কোডে সংশ্লিষ্ট Python ফাংশন কল করুন।
+3. ফাংশনের উত্তর মডেলে ফেরত পাঠান।
+4. মডেলের চূড়ান্ত টেক্সট উত্তর ফেরত দাও।
 
-SDK hiện không phân tích cú pháp nội dung mô tả đối số thành các vị trí mô tả thuộc tính của nội dung khai báo hàm được tạo. Thay vào đó, Gemini sẽ gửi
-toàn bộ chuỗi tài liệu dưới dạng nội dung mô tả hàm cấp cao nhất.
+SDK বর্তমানে জেনারেট করা ফাংশন ডিক্লারেশনের প্রপার্টি ডেসক্রিপশন স্লটে আর্গুমেন্ট ডেসক্রিপশন পার্স করে না। পরিবর্তে, এটি টপ-লেভেল ফাংশন বিবরণ হিসেবে সম্পূর্ণ ডকস্ট্রিং পাঠায়।
 
 ### Python
 
@@ -2066,7 +2166,7 @@ response = client.models.generate_content(
 print(response.text)  # The SDK handles the function call and returns the final text
 ```
 
-Bạn có thể tắt tính năng gọi hàm tự động bằng:
+আপনি এগুলির মাধ্যমে অটোমেটিক ফাংশন কলিং বন্ধ করতে পারবেন:
 
 ### Python
 
@@ -2077,9 +2177,11 @@ config = types.GenerateContentConfig(
 )
 ```
 
-### Khai báo giản đồ hàm tự động
+### ফাংশন স্কিমার অটোমেটিক ঘোষণা
 
-API này có thể mô tả bất kỳ loại nào sau đây. Các loại `Pydantic` được cho phép, miễn là các trường được xác định trên các loại này cũng được tạo thành từ các loại được cho phép. Các loại từ điển (như `dict[str: int]`) không được hỗ trợ đầy đủ ở đây, đừng sử dụng chúng.
+API নিম্নলিখিত যেকোনও ধরনের বর্ণনা দিতে পারে। `Pydantic` ধরনের অনুমতি দেওয়া হয়, তবে সেগুলিতে সংজ্ঞায়িত ফিল্ডকেও অনুমোদিত
+ধরনের হতে হবে। Dict টাইপ (যেমন `dict[str: int]`) এখানে ভালভাবে কাজ করে না, তাই সেগুলি
+ব্যবহার করবেন না।
 
 ### Python
 
@@ -2088,7 +2190,8 @@ AllowedType = (
   int | float | bool | str | list['AllowedType'] | pydantic.BaseModel)
 ```
 
-Để xem giản đồ được suy luận, bạn có thể chuyển đổi giản đồ đó bằng cách sử dụng [`from_callable`](https://googleapis.github.io/python-genai/genai.html#genai.types.FunctionDeclaration.from_callable):
+অনুমান করা স্কিমা কেমন দেখতে হয় তা দেখতে, আপনি এটি
+[`from_callable`](https://googleapis.github.io/python-genai/genai.html#genai.types.FunctionDeclaration.from_callable) ব্যবহার করে কনভার্ট করতে পারেন:
 
 ### Python
 
@@ -2107,11 +2210,13 @@ fn_decl = types.FunctionDeclaration.from_callable(callable=multiply, client=clie
 print(fn_decl.to_json_dict())
 ```
 
-## Sử dụng nhiều công cụ: Kết hợp các công cụ tích hợp với tính năng gọi hàm
+## একাধিক টুল ব্যবহার করা: ফাংশন কলিংয়ের সাথে বিল্ট-ইন টুল একত্রিত করা
 
-Bạn có thể bật nhiều công cụ, kết hợp các công cụ tích hợp sẵn với tính năng gọi hàm trong cùng một yêu cầu.
+আপনি একই অনুরোধে ফাংশন কলিংয়ের সাথে বিল্ট-ইন টুল একত্রিত করে একাধিক টুল চালু করতে পারেন।
 
-Các mô hình Gemini 3 có thể kết hợp các công cụ tích hợp sẵn với tính năng gọi hàm ngay từ đầu, nhờ tính năng lưu thông bối cảnh công cụ. Hãy đọc trang về [Kết hợp các công cụ tích hợp và tính năng gọi hàm](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi) để tìm hiểu thêm.
+Gemini 3 মডেল, টুল কনটেক্সট সার্কুলেশন ফিচারের জন্য,
+বিল্ট-ইন টুলকে ফাংশন কলিং আউট-অফ-দ্য-বক্সের সাথে একত্রিত করতে পারে। আরও জানতে
+[বিল্ট-ইন টুল ও ফাংশন কলিং একত্রিত করা](https://ai.google.dev/gemini-api/docs/tool-combination?hl=bn) পৃষ্ঠাটি পড়ুন।
 
 ### Python
 
@@ -2183,7 +2288,7 @@ response_2 = client.models.generate_content(
 )
 ```
 
-### JavaScript
+### Javascript
 
 ```
 import { GoogleGenAI} from '@google/genai';
@@ -2254,7 +2359,7 @@ async function run() {
 run();
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2332,23 +2437,30 @@ func main() {
 }
 ```
 
-Đối với các mô hình trước dòng Gemini 3, hãy sử dụng [Live API](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=vi).
+Gemini 3 সিরিজের আগের মডেলের জন্য, [Live API](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=bn) ব্যবহার করুন।
 
-## Phản hồi đa phương thức của hàm
+## মাল্টিমোডাল ফাংশন রেসপন্স
 
-Đối với các mô hình Gemini 3, bạn có thể đưa nội dung đa phương thức vào các phần phản hồi của hàm mà bạn gửi đến mô hình. Mô hình có thể xử lý nội dung đa phương thức này trong lượt tiếp theo để đưa ra câu trả lời chính xác hơn.
-Các loại MIME sau đây được hỗ trợ cho nội dung đa phương thức trong phản hồi của hàm:
+Gemini 3 সিরিজের মডেলের জন্য, আপনি মডেলকে যে ফাংশন রেসপন্স পার্ট পাঠান,
+তাতে মাল্টিমোডাল কন্টেন্ট অন্তর্ভুক্ত করতে পারবেন। মডেলটি আরও তথ্যপূর্ণ উত্তর তৈরি করতে
+তার পরবর্তী ধাপে এই মাল্টিমোডাল কন্টেন্ট প্রসেস করতে পারে।
+ফাংশন
+রেসপন্সে মাল্টিমোডাল কন্টেন্টের জন্য নিম্নলিখিত MIME ধরন কাজ করে:
 
-- **Hình ảnh**: `image/png`, `image/jpeg`, `image/webp`
-- **Tài liệu**: `application/pdf`, `text/plain`
+- **ছবি**: `image/png`, `image/jpeg`, `image/webp`
+- **ডকুমেন্ট**: `application/pdf`, `text/plain`
 
-Để đưa dữ liệu đa phương thức vào một phản hồi của hàm, hãy đưa dữ liệu đó vào dưới dạng một hoặc nhiều phần được lồng trong phần `functionResponse`. Mỗi phần đa phương thức phải
-chứa `inlineData`. Nếu bạn tham chiếu một phần đa phương thức từ trong trường `response` có cấu trúc, thì phần đó phải chứa một `displayName` duy nhất.
+ফাংশন উত্তরে মাল্টিমোডাল ডেটা যোগ করতে, এটিকে `functionResponse` পার্টের মধ্যে নেস্ট করা এক বা একাধিক
+পার্ট হিসেবে যোগ করুন। প্রতিটি মাল্টিমোডাল পার্টে
+`inlineData` থাকতে হবে। আপনি যদি স্ট্রাকচার করা `response` ফিল্ডের মধ্যে থেকে
+কোনও মাল্টিমোডাল পার্ট রেফারেন্স করেন, তাহলে এতে অবশ্যই একটি অনন্য `displayName` থাকতে হবে।
 
-Bạn cũng có thể tham chiếu một phần đa thức từ trong trường `response` có cấu trúc của phần `functionResponse` bằng cách sử dụng định dạng tham chiếu JSON `{"$ref": "<displayName>"}`. Mô hình sẽ thay thế tệp đối chiếu bằng
-nội dung đa phương thức khi xử lý phản hồi. Mỗi `displayName` chỉ có thể được tham chiếu một lần trong trường `response` có cấu trúc.
+এছাড়াও, আপনি JSON রেফারেন্স ফর্ম্যাট `{"$ref": "<displayName>"}` ব্যবহার করে `functionResponse` অংশের স্ট্রাকচার্ড `response` ফিল্ডের মধ্যে থেকে মাল্টিমোডাল অংশ রেফারেন্স করতে পারেন। উত্তর প্রসেস করার সময় মডেলটি রেফারেন্সের পরিবর্তে
+মাল্টিমোডাল কন্টেন্ট ব্যবহার করে। প্রতিটি `displayName` শুধুমাত্র একবার
+স্ট্রাকচার্ড `response` ফিল্ডে উল্লেখ করা যেতে পারে।
 
-Ví dụ sau đây cho thấy một thông báo chứa `functionResponse` cho một hàm có tên là `get_image` và một phần lồng nhau chứa dữ liệu hình ảnh có `displayName: "instrument.jpg"`. Trường `response` của `functionResponse` tham chiếu đến phần hình ảnh này:
+নিচের উদাহরণে এমন একটি মেসেজ দেখানো হয়েছে যাতে `get_image` নামের ফাংশনের জন্য `functionResponse` এবং `displayName: "instrument.jpg"` সহ ইমেজ ডেটা সহ নেস্টেড অংশ রয়েছে। `functionResponse`-এর `response` ফিল্ড
+এই ছবির অংশকে রেফারেন্স করে:
 
 ### Python
 
@@ -2441,7 +2553,7 @@ response_2 = client.models.generate_content(
 print(f"\nFinal model response: {response_2.text}")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI, Type } from '@google/genai';
@@ -2537,7 +2649,7 @@ const response2 = await client.models.generateContent({
 console.log(`\nFinal model response: ${response2.text}`);
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2704,23 +2816,36 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-## Gọi hàm bằng đầu ra có cấu trúc
+## স্ট্রাকচার্ড আউটপুট সহ ফাংশন কলিং
 
-Đối với các mô hình Gemini 3, bạn có thể sử dụng tính năng gọi hàm với [đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi). Điều này cho phép mô hình
-dự đoán các lệnh gọi hàm hoặc kết quả tuân thủ một giản đồ cụ thể. Do đó, bạn sẽ nhận được các phản hồi có định dạng nhất quán khi mô hình không tạo lệnh gọi hàm.
+Gemini 3 সিরিজের মডেলের জন্য, আপনি
+[স্ট্রাকচার্ড আউটপুট](https://ai.google.dev/gemini-api/docs/structured-output?hl=bn) সহ ফাংশন কলিং ব্যবহার করতে পারবেন। এটি মডেলকে
+ফাংশন কল বা আউটপুট অনুমান করতে দেয় যা একটি নির্দিষ্ট স্কিমা মেনে চলে। এর ফলে,
+মডেল ফাংশন কল জেনারেট না করলে,
+আপনি ধারাবাহিকভাবে ফর্ম্যাট করা উত্তর পাবেন।
 
-## Giao thức ngữ cảnh mô hình (MCP)
+## মডেল কন্টেক্সট প্রোটোকল (MCP)
 
-[Giao thức ngữ cảnh mô hình (MCP)](https://modelcontextprotocol.io/introduction) là một tiêu chuẩn mở để kết nối các ứng dụng AI với các công cụ và dữ liệu bên ngoài.
-MCP cung cấp một giao thức chung để các mô hình truy cập vào ngữ cảnh, chẳng hạn như các hàm (công cụ), nguồn dữ liệu (tài nguyên) hoặc câu lệnh được xác định trước.
+[মডেল কন্টেক্সট প্রোটোকল (MCP)](https://modelcontextprotocol.io/introduction) হল
+এক্সটার্নাল টুল ও ডেটার সাথে AI অ্যাপ্লিকেশন কানেক্ট করার একটি ওপেন স্ট্যান্ডার্ড।
+মডেলের জন্য কন্টেক্সট অ্যাক্সেস করতে MCP একটি সাধারণ প্রোটোকল প্রদান করে, যেমন ফাংশন
+(টুল), ডেটা সোর্স (রিসোর্স) বা আগে থেকে নির্ধারিত প্রম্পট।
 
-SDK Gemini có tính năng hỗ trợ tích hợp cho MCP, giúp giảm mã nguyên mẫu và cung cấp tính năng [gọi công cụ tự động](https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=vi#automatic_function_calling_python_only) cho các công cụ MCP. Khi mô hình tạo lệnh gọi công cụ MCP, SDK ứng dụng Python và JavaScript có thể tự động thực thi công cụ MCP và gửi phản hồi trở lại mô hình trong một yêu cầu tiếp theo, tiếp tục vòng lặp này cho đến khi mô hình không thực hiện thêm lệnh gọi công cụ nào nữa.
+Gemini SDK-তে MCP-এর জন্য বিল্ট-ইন সাপোর্ট আছে, যা বয়লারপ্লেট কোড কমায় এবং
+MCP টুলের জন্য
+[অটোমেটিক টুল কলিং](https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=bn#automatic_function_calling_python_only)
+অফার করে। মডেল যখন কোনও MCP টুল কল জেনারেট করে, তখন Python এবং
+JavaScript ক্লায়েন্ট SDK অটোমেটিক MCP টুল এক্সিকিউট করতে পারে এবং
+পরবর্তী অনুরোধে মডেলের কাছে উত্তর পাঠাতে পারে, যতক্ষণ না মডেল আর কোনও টুল কল করে, ততক্ষণ এই লুপ চলতে থাকে।
 
-Tại đây, bạn có thể xem ví dụ về cách sử dụng máy chủ MCP cục bộ với Gemini và SDK `mcp`.
+Gemini ও
+`mcp` SDK-র সাথে কীভাবে লোকাল MCP সার্ভার ব্যবহার করতে হয়, তার একটি উদাহরণ এখানে দেওয়া হল।
 
 ### Python
 
-Đảm bảo bạn đã cài đặt phiên bản mới nhất của [`mcp` SDK](https://modelcontextprotocol.io/introduction) trên nền tảng mà bạn chọn.
+আপনার পছন্দের প্ল্যাটফর্মে
+[`mcp` SDK](https://modelcontextprotocol.io/introduction)-এর লেটেস্ট ভার্সন ইনস্টল করা আছে কিনা
+তা নিশ্চিত করুন।
 
 ```
 pip install mcp
@@ -2771,13 +2896,16 @@ async def run():
 asyncio.run(run())
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
-Đảm bảo bạn đã cài đặt phiên bản mới nhất của SDK `mcp` trên nền tảng mà bạn chọn.
+আপনার পছন্দের প্ল্যাটফর্মে `mcp` SDK-এর লেটেস্ট ভার্সন ইনস্টল করা আছে কিনা তা নিশ্চিত করুন
+।
 
 ```
 npm install @modelcontextprotocol/sdk
 ```
+
+ প্রদান করতে পারেন।
 
 ```
 import { GoogleGenAI, FunctionCallingConfigMode , mcpToTool} from '@google/genai';
@@ -2821,76 +2949,100 @@ console.log(response.text)
 await client.close();
 ```
 
-### Hạn chế đối với tính năng hỗ trợ MCP tích hợp
+### বিল্ট-ইন MCP সহায়তার সীমাবদ্ধতা
 
-Tính năng hỗ trợ MCP tích hợp sẵn là một tính năng [thử nghiệm](https://ai.google.dev/gemini-api/docs/models?hl=vi#preview) trong SDK của chúng tôi và có các hạn chế sau:
+বিল্ট-ইন MCP সাপোর্ট হল আমাদের SDK-তে একটি [পরীক্ষামূলক](https://ai.google.dev/gemini-api/docs/models?hl=bn#preview)
+ফিচার এবং এর নিম্নলিখিত সীমাবদ্ধতা রয়েছে:
 
-- Chỉ hỗ trợ công cụ, không hỗ trợ tài nguyên hay câu lệnh
-- Tính năng này có trong SDK Python và JavaScript/TypeScript.
-- Các thay đổi có thể gây lỗi có thể xảy ra trong các bản phát hành sau này.
+- শুধুমাত্র টুল কাজ করে, রিসোর্স বা প্রম্পট নয়
+- এটি Python এবং JavaScript/TypeScript SDK-এর জন্য উপলভ্য।
+- ভবিষ্যতের রিলিজে ব্রেকিং পরিবর্তন হতে পারে।
 
-Bạn luôn có thể tích hợp máy chủ MCP theo cách thủ công nếu các máy chủ này giới hạn những gì bạn đang xây dựng.
+আপনি যা তৈরি করছেন তা যদি এগুলি সীমিত করে, তাহলে MCP সার্ভারের ম্যানুয়াল ইন্টিগ্রেশন সবসময় একটি বিকল্প।
 
-## Mô hình được hỗ trợ
+## মানানসই মডেল
 
-Phần này liệt kê các mô hình và khả năng gọi hàm của chúng. Không bao gồm các mô hình thử nghiệm. Bạn có thể xem thông tin tổng quan toàn diện về các chức năng trên trang [tổng quan về mô hình](https://ai.google.dev/gemini-api/docs/models?hl=vi).
+এই বিভাগে মডেল এবং তাদের ফাংশন কলিং ক্ষমতা তালিকাভুক্ত করা হয়েছে। এক্সপেরিমেন্টাল
+মডেল অন্তর্ভুক্ত করা হয় না। আপনি [মডেল ওভারভিউ](https://ai.google.dev/gemini-api/docs/models?hl=bn) পৃষ্ঠা থেকে
+এর ক্ষমতা সম্পর্কে বিস্তারিত ওভারভিউ দেখতে পাবেন।
 
-| Mô hình | Gọi hàm | Gọi hàm song song | Gọi hàm kết hợp |
+| মডেল | ফাংশন কলিং | প্যারালাল ফাংশন কলিং | কম্পোজিশনাল ফাংশন কলিং |
 | --- | --- | --- | --- |
-| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=vi) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=vi) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=vi) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=vi) | ✔️ | ✔️ | ✔️ |
-| [Bản dùng thử Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ | ✔️ | ✔️ |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=bn) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=bn) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=bn) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=bn) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.1 Pro প্রিভিউ](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=bn) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=bn) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=bn) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=bn) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=bn) | ✔️ | ✔️ | ✔️ |
 
-## Các phương pháp hay nhất
+## পেশাদার পদ্ধতি
 
-- **Nội dung mô tả về hàm và tham số:** Nội dung mô tả phải cực kỳ rõ ràng và cụ thể. Mô hình dựa vào những thông tin này để chọn đúng hàm và cung cấp các đối số phù hợp.
-- **Đặt tên:** Sử dụng tên hàm mô tả (không có dấu cách, dấu chấm hoặc dấu gạch ngang).
-- **Kiểu dữ liệu mạnh:** Sử dụng các kiểu dữ liệu cụ thể (số nguyên, chuỗi, enum) cho các tham số để giảm lỗi. Nếu một tham số có một tập hợp giới hạn các giá trị hợp lệ, hãy sử dụng một enum.
-- **Lựa chọn công cụ:** Mặc dù mô hình có thể sử dụng số lượng công cụ tuỳ ý, nhưng việc cung cấp quá nhiều công cụ có thể làm tăng nguy cơ chọn công cụ không chính xác hoặc không tối ưu. Để có kết quả tốt nhất, hãy chỉ cung cấp các công cụ phù hợp với bối cảnh hoặc nhiệm vụ, lý tưởng nhất là giữ cho tập hợp công cụ đang hoạt động ở mức tối đa từ 10 đến 20. Hãy cân nhắc việc chọn công cụ động dựa trên ngữ cảnh trò chuyện nếu bạn có tổng số lượng lớn công cụ.
-- **Thiết kế câu lệnh:**
-  - Cung cấp bối cảnh: Cho mô hình biết vai trò của mô hình (ví dụ: "Bạn là một trợ lý thời tiết hữu ích").
-  - Đưa ra hướng dẫn: Chỉ định cách thức và thời điểm sử dụng các hàm (ví dụ: "Đừng đoán ngày; luôn sử dụng ngày trong tương lai để dự báo").
-  - Khuyến khích làm rõ: Hướng dẫn mô hình đặt câu hỏi làm rõ nếu cần.
-  - Hãy xem phần [Quy trình làm việc dựa trên tác nhân](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi#agentic-workflows) để biết thêm các chiến lược thiết kế những câu lệnh này. Dưới đây là ví dụ về một [chỉ dẫn hệ thống](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi#agentic-si-template) đã được kiểm thử.
-- **Nhiệt độ:** Sử dụng nhiệt độ thấp (ví dụ: 0) để có các lệnh gọi hàm mang tính tất định và đáng tin cậy hơn.
-- **Xác thực:** Nếu lệnh gọi hàm có hậu quả đáng kể (ví dụ: đặt hàng), hãy xác thực lệnh gọi với người dùng trước khi thực thi.
-- **Kiểm tra lý do hoàn thành:** Luôn kiểm tra [`finishReason`](https://ai.google.dev/api/generate-content?hl=vi#FinishReason) trong câu trả lời của mô hình để xử lý các trường hợp mô hình không tạo được lệnh gọi hàm hợp lệ.
-- **Xử lý lỗi**: Triển khai quy trình xử lý lỗi mạnh mẽ trong các hàm để xử lý một cách thích hợp các dữ liệu đầu vào không mong muốn hoặc lỗi API. Trả về các thông báo lỗi mang tính thông tin mà mô hình có thể dùng để tạo câu trả lời hữu ích cho người dùng.
-- **Bảo mật:** Hãy chú ý đến vấn đề bảo mật khi gọi các API bên ngoài. Sử dụng các cơ chế xác thực và uỷ quyền phù hợp. Tránh để lộ dữ liệu nhạy cảm trong các lệnh gọi hàm.
-- **Giới hạn về mã thông báo:** Nội dung mô tả và tham số của hàm được tính vào giới hạn mã thông báo đầu vào. Nếu bạn đạt đến giới hạn mã thông báo, hãy cân nhắc việc giới hạn số lượng hàm hoặc độ dài của nội dung mô tả, chia nhỏ các nhiệm vụ phức tạp thành các nhóm hàm nhỏ hơn, tập trung hơn.
-- **Kết hợp bash và các công cụ tuỳ chỉnh** Đối với những người xây dựng bằng cách kết hợp bash và các công cụ tuỳ chỉnh, Gemini 3.1 Pro Preview có một điểm cuối riêng biệt được cung cấp thông qua API có tên là [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi#gemini-31-pro-preview-customtools).
+- **ফাংশন ও প্যারামিটারের বিবরণ:** আপনার বিবরণে অত্যন্ত স্পষ্ট ও নির্দিষ্ট
+  হতে হবে। সঠিক ফাংশন বেছে নিতে এবং উপযুক্ত আর্গুমেন্ট প্রদান করতে
+  মডেলটি এগুলির উপর নির্ভর করে।
+- **নামকরণ:** ফাংশনের বর্ণনামূলক নাম ব্যবহার করুন (স্পেস, ফুলস্টপ বা
+  ড্যাশ ছাড়া)।
+- **স্ট্রং টাইপিং:** ভুল কমানোর জন্য প্যারামিটারের
+  নির্দিষ্ট ধরন (পূর্ণসংখ্যা, স্ট্রিং, এনুম) ব্যবহার করুন। কোনও প্যারামিটারে সঠিক ভ্যালুর সীমিত সেট থাকলে, enum ব্যবহার করুন।
+- **টুল বেছে নেওয়া:** মডেলটি যেকোনও সংখ্যক টুল ব্যবহার করতে পারলেও,
+  অনেক বেশি টুল প্রদান করলে ভুল বা
+  সাব-অপ্টিমাল টুল বেছে নেওয়ার ঝুঁকি বেড়ে যেতে পারে। সেরা ফলাফল পেতে, প্রসঙ্গ বা টাস্কের জন্য শুধুমাত্র প্রাসঙ্গিক টুল প্রদান করার লক্ষ্য রাখুন, আদর্শভাবে অ্যাক্টিভ সেট সর্বাধিক ১০-২০টি রাখুন। আপনার কাছে অনেক টুল থাকলে, কথোপকথনের প্রসঙ্গের উপর ভিত্তি করে ডায়নামিক টুল বেছে নেওয়ার কথা বিবেচনা করুন।
+- **প্রম্পট ইঞ্জিনিয়ারিং:**
+  - প্রসঙ্গ প্রদান করুন: মডেলকে তার ভূমিকা বলুন (যেমন, "তুমি একজন সহায়ক
+    আবহাওয়া সহকারী।")।
+  - নির্দেশাবলী দাও: ফাংশন কীভাবে ও কখন ব্যবহার করতে হবে তা নির্দিষ্ট করো (যেমন, "তারিখ
+    অনুমান করবে না; সবসময় ভবিষ্যতের তারিখের পূর্বাভাস দেবে।")।
+  - ব্যাখ্যা দিতে উৎসাহিত করুন: প্রয়োজন হলে মডেলকে ব্যাখ্যামূলক প্রশ্ন জিজ্ঞাসা করার
+    নির্দেশ দিন।
+  - এইসব প্রম্পট ডিজাইন করার আরও স্ট্র্যাটেজির জন্য
+    [এজেন্টিক ওয়ার্কফ্লো](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=bn#agentic-workflows) দেখুন। পরীক্ষা করা
+    [সিস্টেম নির্দেশ](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=bn#agentic-si-template)-এর একটি উদাহরণ এখানে দেওয়া হল।
+- **তাপমাত্রা:** আরও নির্ধারক এবং নির্ভরযোগ্য ফাংশন কলের জন্য কম তাপমাত্রা (যেমন, ০) ব্যবহার করুন।
+- **যাচাইকরণ:** কোনও ফাংশন কলের উল্লেখযোগ্য ফলাফল থাকলে (যেমন,
+  অর্ডার দেওয়া), সেটি কার্যকর করার আগে ব্যবহারকারীর সাথে কলটি যাচাই করুন।
+- **শেষ হওয়ার কারণ চেক করুন:** মডেলের উত্তরে সবসময় [`finishReason`](https://ai.google.dev/api/generate-content?hl=bn#FinishReason)
+  চেক করুন যাতে মডেল সঠিক ফাংশন কল জেনারেট করতে না পারলে সেই পরিস্থিতি ম্যানেজ করা যায়।
+- **সমস্যা সমাধান**: অপ্রত্যাশিত ইনপুট বা API কাজ না করলে তা ভালোভাবে সামলানোর জন্য আপনার ফাংশনে শক্তিশালী সমস্যা সমাধান
+  প্রক্রিয়া প্রয়োগ করুন। তথ্যপূর্ণ ত্রুটি মেসেজ
+  ফেরত পাঠান যা মডেল ব্যবহার করে ব্যবহারকারীকে সহায়ক উত্তর
+  দিতে পারে।
+- **নিরাপত্তা:** এক্সটার্নাল API কল করার সময় নিরাপত্তা সংক্রান্ত বিষয়ে সতর্ক থাকুন। উপযুক্ত
+  যাচাইকরণ ও অনুমোদনের পদ্ধতি ব্যবহার করুন। ফাংশন কলে সংবেদনশীল ডেটা
+  প্রকাশ করা এড়িয়ে চলুন।
+- **টোকেন সীমা:** ফাংশনের বিবরণ ও প্যারামিটার আপনার ইনপুট টোকেন সীমার
+  মধ্যে গণনা করা হয়। আপনি টোকেন সীমাতে পৌঁছে গেলে, ফাংশনের সংখ্যা বা বিবরণের দৈর্ঘ্য সীমিত করার কথা বিবেচনা করুন, জটিল কাজগুলিকে ছোট, আরও ফোকাসড ফাংশন সেটে ভাগ করুন।
+- **ব্যাশ ও কাস্টম টুলের মিশ্রণ** যারা ব্যাশ ও কাস্টম টুলের মিশ্রণ ব্যবহার করে তৈরি করছেন, তাদের জন্য Gemini 3.1 Pro প্রিভিউ
+  একটি আলাদা এন্ডপয়েন্ট সহ আসে যা API-এর মাধ্যমে উপলভ্য, যাকে
+  [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=bn#gemini-31-pro-preview-customtools) বলা হয়।
 
-## Cách giải quyết cho các yêu cầu về văn bản trước khi sử dụng công cụ
+## প্রি-টুল টেক্সট সংক্রান্ত প্রয়োজনীয়তার জন্য ওয়ার্কঅ্যারাউন্ড
 
-**Vấn đề:** Nếu câu lệnh của bạn yêu cầu mô hình xuất văn bản có cấu trúc (XML, YAML, JSON, v.v.) (ví dụ: `<UPDATE>...</UPDATE>`) ngay trước khi thực hiện lệnh gọi công cụ, đôi khi lệnh gọi công cụ có thể không thành công với `Malformed_Function_Call`.
+**সমস্যা:** আপনার প্রম্পটের জন্য মডেলকে স্ট্রাকচার্ড টেক্সট (XML, YAML, JSON ইত্যাদি) আউটপুট দিতে হলে (যেমন, `<UPDATE>...</UPDATE>`) টুল কল করার ঠিক আগে, টুল কলটি মাঝে মাঝে `Malformed_Function_Call` সহ ব্যর্থ হতে পারে।
 
-**Giải pháp:** Các giải pháp sau đây sẽ giải quyết vấn đề này:
+**সমাধান:** নিম্নলিখিত বিকল্পগুলি এই সমস্যার সমাধান করে:
 
-- **ƯU TIÊN:** Hướng dẫn mô hình đặt các ghi chú trước khi sử dụng công cụ vào một lệnh gọi hàm `update()` chuyên dụng thay vì văn bản thô (xem thông tin chi tiết bên dưới).
-- Hướng dẫn mô hình viết ghi chú dưới dạng tiêu đề Markdown (`# UPDATE`, `## PLAN`) thay vì văn bản có cấu trúc.
-- Không yêu cầu mô hình xuất văn bản trước khi gọi công cụ.
+- **সাজেস্ট করা:** মডেলকে নির্দেশ দিন যাতে সেটি কাঁচা টেক্সটের পরিবর্তে একটি নির্দিষ্ট `update()` ফাংশন কলের মধ্যে তার প্রি-টুল নোট রাখে (নিচে বিবরণ দেওয়া হল)।
+- মডেলকে স্ট্রাকচার্ড টেক্সটের পরিবর্তে মার্কডাউন হেডার (`# UPDATE`, `## PLAN`) হিসেবে নোট লিখতে নির্দেশ দিন।
+- টুল কল করার আগে মডেলকে টেক্সট আউটপুট করতে হবে না।
 
-### Cách giải quyết ưu tiên: Gói ghi chú công việc trong một lệnh gọi hàm chuyên dụng
+### পছন্দের সমাধান: একটি নির্দিষ্ট ফাংশন কলে ওয়ার্কিং নোট র‍্যাপ করুন
 
-Thay vì hướng dẫn ban đầu:
+আসল নির্দেশের পরিবর্তে:
 
 ```
 Before calling a tool, in every response you MUST first output a single `<UPDATE>` part as specified, don't skip this part or any of required sub-tags within `<UPDATE>`.
 ```
 
-Hãy làm theo hướng dẫn mới này:
+এই আপডেট করা নির্দেশাবলী ব্যবহার করুন:
 
 ```
 Before calling any other tool, in every response you MUST first call `update` with all required parameters (previous_step, plan, next_step, external).
 ```
 
-Đồng thời, hãy cập nhật tất cả tệp đối chiếu sang định dạng XML `<UPDATE>` cũ trong yêu cầu của khách hàng. Sau đó, thêm nội dung khai báo hàm tương ứng cho hàm cập nhật:
+এবং গ্রাহকের অনুরোধে পুরনো `<UPDATE>` XML ফর্ম্যাটের সব রেফারেন্স আপডেট করুন। তারপর, আপডেট ফাংশনের জন্য সংশ্লিষ্ট ফাংশন ঘোষণা যোগ করুন:
 
 ```
 {
@@ -2926,22 +3078,30 @@ Before calling any other tool, in every response you MUST first call `update` wi
 }
 ```
 
-Sau đó, mô hình sẽ thực hiện hai lệnh gọi trong cùng một bước: lệnh gọi `update()` thay thế XML có cấu trúc và lệnh gọi hàm thực tế mà mô hình muốn thực hiện.
+তারপর মডেল একই ধাপে দুটি কল করবে: `update()` কল যা স্ট্রাকচার্ড XML-কে প্রতিস্থাপন করে এবং আসল ফাংশন কল যা এটি করতে চায়।
 
-## Các lưu ý và điểm hạn chế
+## নোট ও সীমাবদ্ধতা
 
-- Vị trí của các phần trong lệnh gọi hàm: Khi sử dụng các khai báo hàm tuỳ chỉnh [cùng với các công cụ tích hợp sẵn](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi) (như Google Tìm kiếm), mô hình có thể trả về hỗn hợp các phần `functionCall`, `toolCall` và `toolResponse` trong một lượt. Do đó, đừng cho rằng `functionCall` sẽ luôn là mục cuối cùng trong mảng các phần. Nếu bạn đang phân tích cú pháp phản hồi JSON theo cách thủ công, hãy luôn lặp lại mảng parts thay vì dựa vào vị trí.
-- Chỉ hỗ trợ [một phần của giản đồ OpenAPI](https://ai.google.dev/api/caching?hl=vi#FunctionDeclaration).
-- Đối với chế độ `ANY`, API có thể từ chối các giản đồ rất lớn hoặc lồng nhau sâu. Nếu bạn gặp lỗi, hãy thử đơn giản hoá tham số hàm và lược đồ phản hồi bằng cách rút ngắn tên thuộc tính, giảm số lượng lồng ghép hoặc giới hạn số lượng khai báo hàm.
-- Các loại tham số được hỗ trợ trong Python bị hạn chế.
-- Tính năng gọi hàm tự động chỉ có trong SDK Python.
+- ফাংশন কল পার্টের পজিশনিং: [বিল্ট-ইন টুলের পাশাপাশি](https://ai.google.dev/gemini-api/docs/tool-combination?hl=bn) (যেমন Google
+  Search) কাস্টম ফাংশন ডিক্লারেশন ব্যবহার করার সময়, মডেলটি একটি টার্নে `functionCall`, `toolCall` এবং
+  `toolResponse` পার্টের মিশ্রণ ফিরিয়ে দিতে পারে। এই কারণে, ধরে নেবেন না যে
+  `functionCall` সবসময় পার্টস অ্যারের শেষ আইটেম হবে। আপনি JSON উত্তর ম্যানুয়ালি পার্স করলে, পজিশনের উপর নির্ভর না করে
+  সবসময় পার্ট অ্যারের মাধ্যমে ইটারেট করুন।
+- শুধুমাত্র [OpenAPI স্কিমার
+  সাবসেট](https://ai.google.dev/api/caching?hl=bn#FunctionDeclaration) কাজ করে।
+- `ANY` মোডের জন্য, API খুব বড় বা গভীরভাবে নেস্ট করা স্কিমা বাতিল করতে পারে। আপনি
+  সমস্যার সম্মুখীন হলে, প্রপার্টির নাম ছোট করে, নেস্টিং কমিয়ে বা ফাংশন ঘোষণার
+  সংখ্যা সীমিত করে আপনার ফাংশন প্যারামিটার ও উত্তর
+  স্কিমা সহজ করার চেষ্টা করুন।
+- Python-এ কাজ করে এমন প্যারামিটারের ধরন সীমিত।
+- অটোমেটিক ফাংশন কলিং শুধুমাত্র Python SDK ফিচার।
 
-Gửi ý kiến phản hồi
+মতামত জানান
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
 
-Cập nhật lần gần đây nhất: 2026-10-15 UTC.
+2026-10-15 UTC-তে শেষবার আপডেট করা হয়েছে।
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+আমাদের আরও কিছু জানাতে চান?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-15 UTC."],[],[]]
+[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-15 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]

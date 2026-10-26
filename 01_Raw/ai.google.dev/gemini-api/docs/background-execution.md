@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=ja
-fetched_at: 2026-10-19T05:58:05.265385+00:00
-title: "\u30d0\u30c3\u30af\u30b0\u30e9\u30a6\u30f3\u30c9\u5b9f\u884c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=ru
+fetched_at: 2026-10-26T05:55:00.856845+00:00
+title: "\u0412\u044b\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u0435 \u0432 \u0444\u043e\u043d\u043e\u0432\u043e\u043c \u0440\u0435\u0436\u0438\u043c\u0435 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+Доступна новая модель Gemini 4 Argon. [Попробовать](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ru)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Главная](https://ai.google.dev/?hl=ru)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
+- [Документация](https://ai.google.dev/gemini-api/docs?hl=ru)
 
-フィードバックを送信
+Отправить отзыв
 
-# バックグラウンド実行
+# Выполнение в фоновом режиме
 
-Deep Research、複雑な推論、多段階のエージェント実行など、長時間実行されるタスクでは、接続タイムアウトによって標準の HTTP リクエスト（通常は 60 秒後に終了）が中断されることがあります。[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) は、これらのタスクを非同期で実行するための**バックグラウンド実行**を提供します。
+При выполнении длительных задач, таких как глубокое исследование, сложные рассуждения или многоэтапные действия агента, тайм-ауты подключения могут прерывать стандартные HTTP-запросы (которые обычно закрываются через 60 секунд). [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ru) поддерживает **фоновое выполнение**, позволяющее запускать такие задачи асинхронно.
 
-サーバーでタスクが完了するまでインタラクションを実行するには、インタラクションの作成時に `"background": true` を設定します。API はすぐにインタラクション ID を返します。クライアント アプリケーションは、この ID を使用してステータスのポーリング、進行状況のストリーミング、切断されたストリームへの再接続を行うことができます。
+Чтобы взаимодействие продолжалось до тех пор, пока задача на сервере не будет выполнена, при создании взаимодействия задайте значение `"background": true`. API сразу возвращает идентификатор взаимодействия, который клиентские приложения могут использовать для опроса статуса, потоковой передачи или повторного подключения к отключенному потоку.
 
-バックグラウンド実行は、標準の Gemini モデル（`gemini-4-argon` や `gemini-3.8-flash` など）とマネージド エージェント（`antigravity-preview-09-2026` など）でサポートされています。
+Выполнение в фоновом режиме поддерживается для стандартных моделей Gemini (например, `gemini-4-argon` и `gemini-3.8-flash`) и управляемых агентов (например, `antigravity-preview-09-2026`).
 
-## バックグラウンド インタラクションを作成する
+## Как создать фоновое взаимодействие
 
-バックグラウンド インタラクションを開始するには、リソースの作成時に `background` パラメータを `true` に設定します。
+Чтобы запустить фоновое взаимодействие, при создании ресурса задайте для параметра `background` значение `true`.
 
 ### Python
 
@@ -81,7 +81,7 @@ Interaction interaction =
 System.out.println("Created background interaction ID: " + interaction.id().orElse(""));
 ```
 
-### Go
+### Проложить маршрут
 
 ```
 package main
@@ -133,39 +133,43 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## バックグラウンド実行の仕組み
+## Как работает выполнение в фоновом режиме
 
-バックグラウンド インタラクションを作成すると、タスクはサーバー上で非同期に実行されます。インタラクションは、さまざまな実行状態に遷移します。
+Когда вы создаете фоновое взаимодействие, задача выполняется на сервере асинхронно. Взаимодействие проходит через различные состояния выполнения:
 
-- `in_progress`: サーバーがインタラクションをアクティブに実行しています（コードの実行や調査など）。
-- `requires_action`: インタラクションが一時停止し、クライアントの入力（ツールの実行の確認や質問への回答など）を待機しています。
-- `completed`: インタラクションが正常に終了し、出力が利用可能です。
-- `failed`: 実行中にエラーが発生しました（ツールの障害やレート制限など）。
-- `cancelled`: クライアント リクエストにより実行が停止しました。
+- `in_progress` – сервер активно выполняет взаимодействие (например, запускает код или проводит исследование).
+- `requires_action` – взаимодействие приостановлено и ожидает ввода данных клиентом (например, подтверждения выполнения инструмента или ответа на вопрос).
+- `completed` – взаимодействие успешно завершено, и выходные данные доступны.
+- `failed` – во время выполнения произошла ошибка (например, сбой инструмента или ограничение частоты запросов).
+- `cancelled` – выполнение остановлено по запросу клиента.
 
-### ユースケース
+### Примеры использования
 
-バックグラウンド実行は、次の場合に使用します。
+Использовать выполнение в фоновом режиме для:
 
-- **エージェントの実行:** コード実行、ウェブ ブラウジング、サブエージェントのオーケストレーション（`antigravity-preview-09-2026` など）を必要とするタスク。
-- **Deep Research:** `deep-research-preview-04-2026` または `deep-research-max-preview-04-2026` を使用して実行されます。これには数分かかります。
-- **長い推論:** 拡張モデルの思考ステップが標準の HTTP 接続制限を超えるタスク。
-- **長いデコード（Gemini 4）:** `65,536` トークンを超える拡張補完を生成するタスク。`gemini-4-argon` では、[長いデコード](https://ai.google.dev/gemini-api/docs/long-decode?hl=ja)を使用して、`max_output_tokens` を最大 `1,048,576` トークンまで設定できます。
+- **Выполнение агента.** Задачи, требующие выполнения кода, просмотра веб-страниц или оркестрации субагентов (например, `antigravity-preview-09-2026`).
+- **Deep Research.** Выполняется с помощью `deep-research-preview-04-2026` или `deep-research-max-preview-04-2026` и занимает несколько минут.
+- **Длительные рассуждения.** Задачи, в которых этапы расширенного мышления модели превышают стандартные ограничения на HTTP-подключения.
+- **Длинное декодирование (Gemini 4).** Задачи, которые генерируют расширенные дополнения, превышающие `65,536` токенов. В `gemini-4-argon` можно задать до `1,048,576` токенов `max_output_tokens`, используя [длинное декодирование](https://ai.google.dev/gemini-api/docs/long-decode?hl=ru).
 
-### バックグラウンド実行のデータの保持
+### Хранение данных для выполнения в фоновом режиме
 
-`background=True` が設定されている場合、サーバーはインタラクションをプロジェクトのストレージに保存するため、結果をポーリングまたはストリーミングできます。`store` パラメータを設定することで、インタラクションの保存期間を構成できます。
+Для фонового выполнения (`background=True`) требуется `store=True` (по умолчанию), чтобы сервер мог хранить взаимодействие, пока вы опрашиваете или транслируете результаты. Если передать `background=True` с `store=False`, возвращается ошибка `400`.
 
-- **`store=True`（デフォルト）:** プロジェクトの永続ストレージに **7 日間**保存されます。
-- `store=False`:プロジェクトに **24 時間**（TTL）保存され、`GET` リクエストを使用して結果を取得できます。
+Для сохраненных фоновых взаимодействий действуют стандартные [правила хранения данных Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ru#data-storage-retention):
 
-## 結果を取得する
+- **Платный тариф.** Данные хранятся **55 дней** (в [Google AI Studio](https://aistudio.google.com/logs?hl=ru) можно выбрать срок хранения 7, 14, 28 или 55 дней).
+- **Бесплатный план:** хранятся **1 день**.
 
-**ポーリング**または**ストリーミング**を使用して、バックグラウンド インタラクションの結果を取得します。
+Чтобы удалить фоновое взаимодействие раньше, [удалите его](https://ai.google.dev/gemini-api/docs/background-execution?hl=ru#cancellation-and-deletion) после получения результата.
 
-### ポーリング パターン（ブロックなし）
+## Получить результаты
 
-ポーリングでは、非ブロッキング GET リクエストを使用して、完了状態に達するまでインタラクションのステータスを定期的に確認します。
+Получите результаты фонового взаимодействия с помощью **опроса** или **потоковой передачи**.
+
+### Шаблон опроса (неблокирующий)
+
+Опрос периодически проверяет статус взаимодействия с помощью неблокирующих GET-запросов, пока не будет достигнуто конечное состояние.
 
 ### Python
 
@@ -241,7 +245,7 @@ if (InteractionStatus.COMPLETED.equals(interaction.status().orElse(null))) {
 }
 ```
 
-### Go
+### Проложить маршрут
 
 ```
 package main
@@ -301,9 +305,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YOUR_
   -H "Api-Revision: 2026-05-20"
 ```
 
-### ストリーミング パターン
+### Потоковый узор
 
-ネットワークの中断によりストリームが切断された場合、最後に受信したイベントからストリーミングを再開できます。各デルタのペイロードには一意の `event_id` が含まれます。この ID を `last_event_id` として渡すと、そのイベントからストリームが再開されます。
+Если поток прервется из-за сбоя в сети, его можно будет возобновить с последнего полученного события. Каждая дельта содержит уникальный `event_id` в своих полезных данных. Если передать этот идентификатор в качестве значения параметра `last_event_id`, поток возобновится с этого события.
 
 ### Python
 
@@ -436,7 +440,7 @@ while (!completed) {
 }
 ```
 
-### Go
+### Проложить маршрут
 
 ```
 package main
@@ -508,14 +512,14 @@ curl -N -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## マルチターンの会話
+## Многоэтапные разговоры
 
-後続のインタラクションは、次の制約に従って `previous_interaction_id` を使用してバックグラウンド会話にチェーンできます。
+Последующие взаимодействия могут быть связаны с фоновым разговором с помощью `previous_interaction_id` при соблюдении следующих ограничений:
 
-1. **アクティブな実行がブロックされる:** `in_progress` ステータスのインタラクションに後続のインタラクションをチェーンすると、`400 Bad Request` エラーが返されます。次のインタラクションを開始する前に、インタラクションが `completed` 状態になるまで待ちます。
-2. **マネージド エージェントの環境パラメータ:** マネージド エージェント（`antigravity-preview-09-2026` など）のインタラクションをチェーンする場合、リクエストには `previous_interaction_id` と `environment` の両方を含める必要があります。
+1. **Активные выполнения блокируются.** Если связать последующее взаимодействие с взаимодействием со статусом `in_progress`, возвращается ошибка `400 Bad Request`. Прежде чем начинать следующее взаимодействие, дождитесь, пока текущее перейдет в состояние `completed`.
+2. **Параметр среды для управляемых агентов.** При связывании взаимодействий для управляемых агентов (например, `antigravity-preview-09-2026`) запросы должны включать как `previous_interaction_id`, так и `environment`.
 
-次の例は、インタラクションを連結する方法を示しています。
+Ниже приведены примеры того, как можно объединять взаимодействия.
 
 ### Python
 
@@ -640,7 +644,7 @@ Interaction interaction2 =
     client.interactions.create(CreateInteractionRequestBody.of(params2)).interaction().get();
 ```
 
-### Go
+### Проложить маршрут
 
 ```
 package main
@@ -725,12 +729,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## キャンセルと削除
+## Отмена и удаление
 
-キャンセル リクエストと削除リクエストを使用して、実行中の実行を制御し、ストレージを管理します。
+Управляйте выполняющимися процессами и хранилищем с помощью запросов на отмену и удаление:
 
-- **キャンセル（`POST /interactions/{id}/cancel`）:** 実行中のタスクを停止します。ステータスが `cancelled` に移行します。サーバーでのクリーンアップ アクションにより、GET リクエストでステータスが更新されるまでにわずかな遅延が発生することがあります。
-- **削除（`DELETE /interactions/{id}`）:** サーバーからインタラクション レコードを削除します。以降の GET リクエストは `404 Not Found` エラーを返します。
+- **Отмена (`POST /interactions/{id}/cancel`).** Остановка выполняющейся задачи. Статус изменится на `cancelled`. Из-за очистки на сервере статус в GET-запросах может обновляться с небольшой задержкой.
+- **Удалить (`DELETE /interactions/{id}`).** Записи о взаимодействиях будут удалены с сервера. Последующие GET-запросы возвращают ошибку `404 Not Found`.
 
 ### Python
 
@@ -774,7 +778,7 @@ client.interactions.cancel("YOUR_INTERACTION_ID");
 client.interactions.delete("YOUR_INTERACTION_ID");
 ```
 
-### Go
+### Проложить маршрут
 
 ```
 package main
@@ -826,18 +830,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## 次のステップ
+## Дальнейшие действия
 
-- セッションと状態の管理については、[Interactions API の概要](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja)をご覧ください。
-- リアルタイム イベントの更新の詳細については、[ストリーミング インタラクション](https://ai.google.dev/gemini-api/docs/streaming?hl=ja)のガイドをご覧ください。
-- [マネージド エージェントのクイックスタート](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja)で、ステートフル マルチターン エージェントを構築する。
+- Прочитайте [обзор Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ru), чтобы узнать, как управлять сеансами и состояниями.
+- Подробную информацию об обновлениях событий в реальном времени можно найти в руководстве [Взаимодействие с потоковой передачей](https://ai.google.dev/gemini-api/docs/streaming?hl=ru).
+- Чтобы создать пошаговых агентов с сохранением состояния, ознакомьтесь с [кратким руководством по управляемым агентам](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ru).
 
-フィードバックを送信
+Отправить отзыв
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
 
-最終更新日 2026-10-14 UTC。
+Последнее обновление: 2026-10-21 UTC.
 
-ご意見をお聞かせください
+Хотите рассказать подробнее?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-14 UTC。"],[],[]]
+[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-21 UTC."],[],[]]

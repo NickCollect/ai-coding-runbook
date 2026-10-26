@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=hi
-fetched_at: 2026-10-19T05:47:21.984775+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=he
+fetched_at: 2026-10-26T05:50:10.300657+00:00
 title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+‫Gemini 4 Argon זמין עכשיו. [רוצים לנסות?](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=he)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-सुझाव भेजें
+שליחת משוב
 
 # Gemini 3.1 Flash-Lite
 
-Gemini 3.1 Flash-Lite, कम समय में जवाब देने वाला और किफ़ायती मल्टीमॉडल है. इसे बार-बार किए जाने वाले और कम समय में पूरे होने वाले कामों के लिए ऑप्टिमाइज़ किया गया है. यह मॉडल, टेक्स्ट, इमेज, वीडियो, ऑडियो, और PDF इनपुट के साथ काम करता है. इसे एजेंट के तौर पर काम करने वाले वर्कफ़्लो, डेटा निकालने के आसान तरीके, और उन ऐप्लिकेशन के लिए डिज़ाइन किया गया है जहां लेटेन्सी और एपीआई की लागत मुख्य बाधाएं हैं.
+‫Gemini 3.1 Flash-Lite הוא מודל מולטימודאלי חסכוני עם זמן אחזור נמוך שעבר אופטימיזציה למשימות קלות בתדירות גבוהה. המודל תומך בקלט של טקסט, תמונות, סרטונים, אודיו וקובצי PDF, והוא מיועד לתהליכי עבודה של סוכנים עם נפח גבוה, לחילוץ נתונים פשוט ולאפליקציות שבהן חביון ועלות ה-API הם האילוצים העיקריים.
 
-[Google AI Studio में आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=hi)
+[לניסיון ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=he)
 
 ## gemini-3.1-flash-lite
 
-| प्रॉपर्टी | ब्यौरा |
+| נכס | תיאור |
 | --- | --- |
-| id\_cardमॉडल कोड | `gemini-3.1-flash-lite` |
-| saveके साथ इस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो, और PDF  **आउटपुट**  टेक्स्ट |
-| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  1,048,576  **आउटपुट टोकन की सीमा**  65,536 |
-| handymanसुविधाएँ | **[ऑडियो जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi)**  काम नहीं करता है  **[कैश मेमोरी में सेव होना](https://ai.google.dev/gemini-api/docs/caching?hl=hi)**  काम करता है  **[कोड एक्ज़ीक्यूट करना](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)**  काम करता है  **[कंप्यूटर का इस्तेमाल](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi)**  काम नहीं करता है  **[फ़ाइल खोजना](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)**  काम करता है  **[फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)**  काम करता है  **[Google Maps की मदद से जवाब तैयार करना](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)**  काम करता है  **[इमेज जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi)**  काम नहीं करता है  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=hi)**  काम नहीं करता है  **[भरोसेमंद स्रोतों से जानकारी लेना](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)**  काम करता है  **[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi)**  काम करता है  **[सोच-विचार](https://ai.google.dev/gemini-api/docs/thinking?hl=hi)**  काम करता है  **[यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)**  काम करता है |
-| speedकॉन्टेंट देखने के विकल्प | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi)**  काम करता है  **[फ़्लेक्स इन्फ़रेंस](https://ai.google.dev/gemini-api/docs/flex-inference?hl=hi)**  काम करता है  **[प्राथमिकता का अनुमान लगाना](https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi)**  काम करता है |
-| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - `Stable: gemini-3.1-flash-lite` |
-| calendar\_monthनया अपडेट | मई 2026 |
-| id\_cardमॉडल कार्ड | [मॉडल कार्ड](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/?hl=hi) |
+| id\_cardקוד מודל | `gemini-3.1-flash-lite` |
+| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונה, סרטון, אודיו ו-PDF  **פלט**  טקסט |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  1,048,576  **Output token limit**  65,536 |
+| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  לא נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  נתמך  **[שימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he)**  לא נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  לא נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  נתמך  **[חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  נתמך |
+| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  נתמך  **[הסקת מסקנות ב-Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - `Stable: gemini-3.1-flash-lite` |
+| calendar\_monthהעדכון האחרון | מאי 2026 |
+| id\_cardכרטיס מודל | [כרטיס מודל](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/?hl=he) |
 
-## डेवलपर गाइड
+## מדריך למפתחים
 
-Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े पैमाने पर हैंडल करने के लिए सबसे अच्छा मॉडल है. यहां Gemini 3.1 Flash-Lite के इस्तेमाल के कुछ उदाहरण दिए गए हैं:
+‫Gemini 3.1 Flash-Lite הוא המודל הכי טוב לטיפול במשימות פשוטות בהיקף גדול. הנה כמה תרחישי שימוש שמתאימים במיוחד ל-Gemini 3.1 Flash-Lite:
 
-- **अनुवाद**: तेज़ी से, कम लागत में, और बड़े पैमाने पर अनुवाद करना. जैसे, बड़े पैमाने पर चैट मैसेज, समीक्षाएं, और सहायता टिकट प्रोसेस करना. सिस्टम के निर्देशों का इस्तेमाल करके, जवाब को सिर्फ़ अनुवाद किए गए टेक्स्ट तक सीमित किया जा सकता है. इसमें कोई अतिरिक्त टिप्पणी शामिल नहीं होगी:
+- **תרגום**: תרגום מהיר, זול ובנפח גבוה, למשל עיבוד של הודעות בצ'אט, ביקורות וכרטיסי תמיכה בהיקף גדול. אתם יכולים להשתמש בהוראות מערכת כדי להגביל את הפלט רק לטקסט המתורגם ללא פרשנות נוספת:
 
   ```
   from google import genai
@@ -57,7 +57,7 @@ Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े
 
   print(response.text)
   ```
-- **ट्रांसक्रिप्शन**: रिकॉर्डिंग, ऑडियो नोट या किसी भी ऑडियो कॉन्टेंट को प्रोसेस करें. इससे आपको टेक्स्ट ट्रांसक्रिप्ट मिलती है. इसके लिए, आपको स्पीच-टू-टेक्स्ट की अलग पाइपलाइन शुरू करने की ज़रूरत नहीं होती. इसमें मल्टीमॉडल इनपुट का इस्तेमाल किया जा सकता है. इसलिए, ट्रांसक्रिप्शन के लिए सीधे तौर पर ऑडियो फ़ाइलें पास की जा सकती हैं:
+- **תמלול**: עיבוד של הקלטות, תזכורות קוליות או כל תוכן אודיו שרוצים לתמלל לטקסט בלי להפעיל צינור נפרד של המרת דיבור לטקסט. תמיכה בקלט מולטימודאלי, כך שאפשר להעביר קובצי אודיו ישירות לתמלול:
 
   ```
   from google import genai
@@ -77,7 +77,7 @@ Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े
 
   print(response.text)
   ```
-- **लाइटवेट एजेंटिक टास्क और डेटा निकालने की सुविधा**: इसमें स्ट्रक्चर्ड JSON आउटपुट के साथ, इकाई का पता लगाना, क्लासिफ़िकेशन, और लाइटवेट डेटा प्रोसेसिंग पाइपलाइन की सुविधा मिलती है. उदाहरण के लिए, ई-कॉमर्स प्लैटफ़ॉर्म पर खरीदार की समीक्षा से स्ट्रक्चर्ड डेटा निकालना:
+- **משימות קלות משקל של סוכנים וחילוץ נתונים**: חילוץ ישויות, סיווג וצינורות לעיבוד נתונים קלים משקל שנתמכים על ידי פלט JSON מובנה. לדוגמה, חילוץ נתונים מובְנים מביקורת מלקוח באתר מסחר אלקטרוני:
 
   ```
   from google import genai
@@ -105,7 +105,7 @@ Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े
 
   print(response.text)
   ```
-- **दस्तावेज़ प्रोसेस करना और खास जानकारी देना**: PDF फ़ाइलों को पार्स करना और कम शब्दों में खास जानकारी देना. जैसे, दस्तावेज़ प्रोसेस करने की पाइपलाइन बनाना या आने वाली फ़ाइलों को तुरंत प्राथमिकता देना:
+- **עיבוד מסמכים וסיכום שלהם**: ניתוח קובצי PDF והחזרת סיכומים תמציתיים, למשל כדי ליצור צינור לעיבוד מסמכים או כדי לתעדף במהירות קבצים נכנסים:
 
   ```
   from google import genai
@@ -132,7 +132,7 @@ Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े
 
   print(response.text)
   ```
-- **मॉडल राउटिंग**: कम समय में जवाब देने वाले और कम कीमत वाले मॉडल का इस्तेमाल क्लासिफ़ायर के तौर पर करें. यह मॉडल, टास्क की जटिलता के आधार पर क्वेरी को सही मॉडल पर भेजता है. यह प्रोडक्शन में इस्तेमाल होने वाला एक असली पैटर्न है. ओपन-सोर्स [Gemini CLI](https://geminicli.com/docs/core/#model-fallback), टास्क की मुश्किल को कैटगरी में बांटने के लिए Flash-Lite का इस्तेमाल करता है. इसके बाद, टास्क को Flash या Pro पर भेजता है.
+- **ניתוב מודלים**: שימוש במודל עם חביון נמוך ועלות נמוכה כסיווג ששולח שאילתות למודל המתאים על סמך מורכבות המשימה. זהו דפוס אמיתי בייצור – [Gemini CLI](https://geminicli.com/docs/core/#model-fallback) בקוד פתוח משתמש ב-Flash-Lite כדי לסווג את מורכבות המשימה ולנתב אותה ל-Flash או ל-Pro בהתאם.
 
   ```
   from google import genai
@@ -185,7 +185,7 @@ Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े
 
   print(response.text)
   ```
-- **सोचना**: ऐसे टास्क के लिए, जिनमें सिलसिलेवार तरीके से तर्क करने से बेहतर नतीजे मिलते हैं, सोचने की सुविधा को कॉन्फ़िगर करें. इससे मॉडल, फ़ाइनल आउटपुट देने से पहले, तर्क करने के लिए ज़्यादा कंप्यूटिंग पावर का इस्तेमाल करेगा:
+- **חשיבה**: כדי לשפר את הדיוק במשימות שבהן יש יתרון להסקה שלב אחר שלב, אפשר להגדיר חשיבה כך שהמודל יקדיש יותר משאבי מחשוב להסקה פנימית לפני יצירת הפלט הסופי:
 
   ```
   from google import genai
@@ -204,12 +204,12 @@ Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े
   print(response.text)
   ```
 
-सुझाव भेजें
+שליחת משוב
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-आखिरी बार 2026-07-21 (UTC) को अपडेट किया गया.
+עדכון אחרון: 2026-07-21 (שעון UTC).
 
-क्या आपको हमें और कुछ बताना है?
+רוצה לתת לנו משוב?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-21 (UTC) को अपडेट किया गया."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-21 (שעון UTC)."],[],[]]

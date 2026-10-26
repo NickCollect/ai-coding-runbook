@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it
-fetched_at: 2026-10-19T05:50:42.943824+00:00
-title: "Agente Antigravity \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja
+fetched_at: 2026-10-26T05:52:47.322184+00:00
+title: "Antigravity \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Invia feedback
+フィードバックを送信
 
-# Agente Antigravity
+# Antigravity エージェント
 
-L'agente Antigravity è un agente gestito per uso generico nell'API Gemini. Una singola chiamata API ti fornisce un agente che ragiona, esegue codice, gestisce file e naviga sul web all'interno del tuo sandbox Linux sicuro, ospitato da Google.
+Antigravity エージェントは、Gemini API の汎用マネージド エージェントです。1 回の API 呼び出しで、Google がホストする独自の安全な Linux サンドボックス内で推論、コードの実行、ファイルの管理、ウェブの閲覧を行うエージェントを取得できます。
 
-È basato su Gemini 3.8 Flash e utilizza lo stesso harness dell'IDE Antigravity. Puoi configurare il modello Gemini sottostante utilizzando `agent_config`. Disponibile tramite l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) e [Google AI Studio](https://aistudio.google.com?hl=it).
+Gemini 3.8 Flash で構築されており、Antigravity IDE と同じハーネスを使用しています。基盤となる Gemini モデルは `agent_config` を使用して構成できます。[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) と [Google AI Studio](https://aistudio.google.com?hl=ja) で利用できます。
 
 ### Python
 
@@ -128,33 +128,33 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Funzionalità
+## 機能
 
-Ogni chiamata può eseguire il provisioning di una sandbox Linux e avviare un loop di utilizzo degli strumenti. L'agente pianifica, agisce, osserva i risultati e ripete l'operazione fino al completamento dell'attività.
+各呼び出しは Linux サンドボックスをプロビジョニングし、ツール使用ループを開始できます。エージェントは、計画、実行、結果の観察を行い、タスクが完了するまで繰り返します。
 
-- **Esecuzione di codice**:esegui comandi Bash, Python e Node.js. Installa pacchetti, esegui test, crea app.
-- **Gestione dei file:** leggi, scrivi, modifica, cerca ed elenca i file nella sandbox. I file rimangono disponibili tra un'interazione e l'altra.
-- **Accesso al web**:Ricerca Google e recupero di URL per i dati.
-- **Compattazione del contesto**:compattazione automatica del contesto (attivata a circa 135.000 token) per supportare sessioni multi-turno di lunga durata senza perdere il contesto o raggiungere i limiti di token.
+- **コード実行:** Bash、Python、Node.js のコマンドを実行します。パッケージのインストール、テストの実行、アプリのビルド。
+- **ファイル管理:** サンドボックス内のファイルの読み取り、書き込み、編集、検索、一覧表示を行います。ファイルはインタラクション間で保持されます。
+- **ウェブアクセス:** Google 検索とデータ用の URL の取得。
+- **コンテキストの圧縮:** 自動コンテキスト圧縮（約 135, 000 トークンでトリガー）により、コンテキストを失うことなく、トークン上限に達することなく、長時間実行されるマルチターン セッションをサポートします。
 
-Consulta la [Guida rapida](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it) per l'utilizzo e lo streaming multiformato.
+マルチターンの使用方法とストリーミングについては、[クイックスタート](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja)をご覧ください。
 
-## Strumenti supportati
+## サポートされているツール
 
-Per impostazione predefinita, l'agente ha accesso a `code_execution`, `google_search` e `url_context`. Gli strumenti del file system vengono attivati automaticamente quando specifichi il parametro `environment`. Puoi anche definire **funzioni personalizzate** per connettere l'agente alle tue API e ai tuoi strumenti. Devi specificare il parametro `tools` solo quando personalizzi o limiti il set predefinito oppure quando aggiungi funzioni personalizzate.
+デフォルトでは、エージェントは `code_execution`、`google_search`、`url_context` にアクセスできます。`environment` パラメータを指定すると、ファイルシステム ツールが自動的に有効になります。**カスタム関数**を定義して、エージェントを独自の API やツールに接続することもできます。`tools` パラメータを指定する必要があるのは、デフォルト セットをカスタマイズまたは制限する場合、またはカスタム関数を追加する場合のみです。
 
-| Strumento | Tipo di valore | Descrizione |
+| ツール | Type 値 | 説明 |
 | --- | --- | --- |
-| esegui il codice | `code_execution` | Esegui i comandi della shell (bash, Python, Node) con l'acquisizione di stdout/stderr. |
-| Ricerca Google | `google_search` | Cercare sul web pubblico. |
-| Contesto URL | `url_context` | Recupera e leggi le pagine web. |
-| Filesystem | *(attivato tramite `environment`)* | Leggere, scrivere, modificare, cercare ed elencare i file nel sandbox. Il sistema attiva automaticamente questi strumenti quando imposti `environment`. |
-| Funzioni personalizzate | `function` | Definisci funzioni personalizzate che l'agente può richiedere di eseguire. Consulta [Chiamata di funzione](#function-calling). |
-| Server MCP remoto | `mcp_server` | Registra server Model Context Protocol (MCP) esterni come strumenti. Consulta [Server MCP](#mcp-servers). |
+| コード実行 | `code_execution` | stdout/stderr キャプチャを使用してシェル コマンド（bash、Python、Node）を実行します。 |
+| Google 検索 | `google_search` | 公開ウェブを検索する。 |
+| URL コンテキスト | `url_context` | ウェブページを取得して読み取ります。 |
+| ファイルシステム | *（`environment` で有効）* | サンドボックス内のファイルの読み取り、書き込み、編集、検索、一覧表示。`environment` を設定すると、これらのツールが自動的に有効になります。 |
+| カスタム関数 | `function` | エージェントが実行をリクエストできるカスタム関数を定義します。[関数呼び出し](#function-calling)をご覧ください。 |
+| リモート MCP サーバー | `mcp_server` | 外部の Model Context Protocol（MCP）サーバーをツールとして登録します。[MCP サーバー](#mcp-servers)をご覧ください。 |
 
-Puoi intercettare e convalidare l'esecuzione degli strumenti `code_execution` e `filesystem` direttamente nella sandbox remota utilizzando gli [hook](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=it) sincroni.
+同期[フック](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=ja)を使用して、リモート サンドボックス内で `code_execution` ツールと `filesystem` ツールの実行をインターセプトして検証できます。
 
-Per limitare l'agente a strumenti specifici, passa solo quelli di cui hai bisogno:
+エージェントを特定のツールに制限するには、必要なツールのみを渡します。
 
 ### Python
 
@@ -285,9 +285,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Input multimodale
+## マルチモーダル入力
 
-L'agente Antigravity supporta input multimodali. Al momento sono supportati solo gli input `text` e `image`. Le immagini devono essere fornite come stringhe incorporate con codifica base64 (`data`).
+Antigravity エージェントは、マルチモーダル入力をサポートしています。現時点では、`text` と `image` の入力のみがサポートされています。画像はインラインの Base64 エンコード文字列（`data`）として指定する必要があります。
 
 ### Python
 
@@ -453,11 +453,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }"
 ```
 
-## Chiamata di funzione
+## 関数呼び出し
 
-La chiamata di funzione ti consente di connettere l'agente Antigravity ad API e database esterni definendo strumenti personalizzati che l'agente può richiamare. Per i concetti generali, consulta [Chiamata di funzione con l'API Gemini](https://ai.google.dev/gemini-api/docs/function-calling?hl=it).
+関数呼び出しを使用すると、エージェントが呼び出すことができるカスタムツールを定義して、Antigravity エージェントを外部 API やデータベースに接続できます。一般的なコンセプトについては、[Gemini API を使用した関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)をご覧ください。
 
-L'esempio seguente mostra un'interazione di due turni. L'agente richiede prima una chiamata di funzione `get_weather` personalizzata, che il client esegue e restituisce il risultato nel secondo turno.
+次の例は、2 ターンのインタラクションを示しています。エージェントが最初にカスタム `get_weather` 関数呼び出しをリクエストし、クライアントがそれを実行して、2 番目のターンで結果を返します。
 
 ### Python
 
@@ -877,19 +877,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## Server MCP
+## MCP サーバー
 
-Puoi connettere l'agente Antigravity a strumenti esterni registrando server Model Context Protocol (MCP) remoti. L'agente supporta i server MCP remoti tramite HTTP trasmissibile in streaming.
+リモート Model Context Protocol（MCP）サーバーを登録することで、Antigravity エージェントを外部ツールに接続できます。エージェントは、ストリーミング可能な HTTP 経由のリモート MCP サーバーをサポートしています。
 
-Quando registri un server MCP, devi specificare i seguenti campi nell'array `tools`:
+MCP サーバーを登録する際は、`tools` 配列に次のフィールドを指定する必要があります。
 
-| Campo | Tipo | Obbligatorio | Descrizione |
+| フィールド | 型 | 必須 / 省略可 | 説明 |
 | --- | --- | --- | --- |
-| `type` | stringa | Sì | Deve essere `"mcp_server"`. |
-| `name` | stringa | Sì | Un identificatore univoco del server. Deve essere rigorosamente in minuscolo e alfanumerico (corrispondente a `^[a-z0-9_-]+$`). |
-| `url` | stringa | Sì | L'URL dell'endpoint del server MCP remoto. |
-| `headers` | oggetto | No | Intestazioni personalizzate (ad es. autenticazione) inviate con le richieste. |
-| `allowed_tools` | matrice | No | Elenco dei nomi degli strumenti che possono essere eseguiti. Se omesso, sono consentiti tutti gli strumenti. |
+| `type` | 文字列 | ○ | `"mcp_server"` を指定します。 |
+| `name` | 文字列 | ○ | サーバーの固有識別子。小文字の英数字（`^[a-z0-9_-]+$` に一致）にする必要があります。 |
+| `url` | 文字列 | ○ | リモート MCP サーバーのエンドポイント URL。 |
+| `headers` | オブジェクト | いいえ | リクエストとともに送信されるカスタム ヘッダー（認証など）。 |
+| `allowed_tools` | 配列 | いいえ | 実行を許可するツール名のリスト。省略すると、すべてのツールが許可されます。 |
 
 ### Python
 
@@ -1029,11 +1029,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Selezione del modello
+## モデルの選択
 
-Per `antigravity-preview-09-2026`, il modello predefinito è **Gemini 3.8 Flash** (`gemini-3.8-flash`). Se ometti `agent_config`, l'agente utilizza `gemini-3.8-flash` per impostazione predefinita.
+`antigravity-preview-09-2026` の場合、デフォルトのモデルは **Gemini 3.8 Flash**（`gemini-3.8-flash`）です。`agent_config` を省略すると、エージェントはデフォルトで `gemini-3.8-flash` になります。
 
-Puoi configurare il modello Gemini sottostante utilizzando `agent_config` per ottimizzare velocità, costi o capacità di ragionamento. Ad esempio, imposta `model` su **Gemini 4 Argon** (`gemini-4-argon`) per attività complesse di progettazione software e ragionamento:
+`agent_config` を使用して、速度、費用、推論能力を最適化するように、基盤となる Gemini モデルを構成できます。たとえば、複雑なソフトウェア エンジニアリングと推論タスクの場合は、`model` を **Gemini 4 Argon**（`gemini-4-argon`）に設定します。
 
 ### Python
 
@@ -1162,26 +1162,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-I valori supportati per `agent_config.model` sono:
+`agent_config.model` でサポートされている値は次のとおりです。
 
-| Modello | Valore in `agent_config.model` | Descrizione |
+| モデル | `agent_config.model` の値 | 説明 |
 | --- | --- | --- |
-| **Gemini 3.8 Flash** (predefinito) | `gemini-3.8-flash` | Modello bilanciato predefinito per ragionamento, programmazione e utilizzo degli strumenti. |
-| **Gemini 4 Argon** | `gemini-4-argon` | Modello di ragionamento all'avanguardia per l'ingegneria del software complessa, la risoluzione approfondita dei problemi e le attività agentiche a lungo termine. |
-| **Gemini 3.6 Flash** | `gemini-3.6-flash` | Modello Flash bilanciato per workflow agentici generici. |
-| **Gemini 3.5 Flash-Lite** | `gemini-3.5-flash-lite` | Modello leggero ottimizzato per attività a bassa latenza e sensibili ai costi. |
+| **Gemini 3.8 Flash**（デフォルト） | `gemini-3.8-flash` | 推論、コーディング、ツール使用のデフォルトのバランス モデル。 |
+| **Gemini 4 Argon** | `gemini-4-argon` | 複雑なソフトウェア エンジニアリング、高度な問題解決、長期的なエージェント タスク向けのフロンティア推論モデル。 |
+| **Gemini 3.6 Flash** | `gemini-3.6-flash` | 一般的な Agentic Workflows 向けのバランスの取れた Flash モデル。 |
+| **Gemini 3.5 Flash-Lite** | `gemini-3.5-flash-lite` | 低レイテンシとコスト重視のタスクに最適化された軽量モデル。 |
 
-Quando crei un agente gestito con `agents.create`, configuri il modello esattamente nello stesso modo passando `base_agent` e `agent_config`. Tieni presente che non puoi eseguire l'override del modello al momento dell'interazione per un agente gestito creato con `agents.create`. Il modello è bloccato su ciò che è stato impostato al momento della creazione dell'agente. In questo modo, il comportamento di chiamata degli strumenti è prevedibile, il debug è coerente e i limiti di sicurezza vengono rispettati.
+`agents.create` を使用してマネージド エージェントを作成する場合は、`base_agent` と `agent_config` を渡すことで、モデルをまったく同じ方法で構成します。`agents.create` で作成されたマネージド エージェントの場合、インタラクション時にモデルをオーバーライドすることはできません。モデルは、エージェントの作成時に設定されたものにロックされます。これにより、予測可能なツール呼び出し動作、一貫したデバッグ、セキュリティ境界の遵守が保証されます。
 
-## Personalizzare l'agente
+## エージェントのカスタマイズ
 
-Puoi estendere l'agente Antigravity personalizzando le sue istruzioni, i suoi strumenti e il suo ambiente. L'agente supporta un approccio di personalizzazione nativo del file system: puoi montare file come `AGENTS.md` per le istruzioni e le skill in `.agents/skills/` direttamente nella sandbox o passare la configurazione in linea al momento dell'interazione. Puoi iterare la configurazione in linea e salvarla come agente gestito quando è pronta.
+Antigravity エージェントは、命令、ツール、環境をカスタマイズすることで拡張できます。エージェントは、カスタマイズに対するファイル システム ネイティブなアプローチをサポートしています。指示やスキル用の `AGENTS.md` などのファイルを `.agents/skills/` の下に直接サンドボックスにマウントしたり、やり取り時に構成をインラインで渡したりできます。構成をインラインで反復処理し、準備ができたらマネージド エージェントとして保存できます。
 
-Per informazioni dettagliate su come creare agenti personalizzati, consulta [Creazione di agenti gestiti](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it).
+カスタム エージェントの構築方法の詳細については、[マネージド エージェントの構築](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja)をご覧ください。
 
-## Esecuzione in background
+## バックグラウンド実行
 
-Le attività dell'agente che prevedono ragionamento multi-step, esecuzione di codice o operazioni su file possono richiedere alcuni minuti. Utilizza `background=True` per eseguire l'interazione in modo asincrono. L'API restituisce immediatamente un ID interazione che esegue il polling finché lo stato non è `completed` o `failed`.
+複数ステップの推論、コード実行、ファイル オペレーションを伴うエージェント タスクは、完了までに数分かかることがあります。`background=True` を使用して、インタラクションを非同期で実行します。API はすぐにインタラクション ID を返します。この ID は、ステータスが `completed` または `failed` になるまでポーリングします。
 
 ### Python
 
@@ -1363,9 +1363,9 @@ curl -s -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/$I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-L'esecuzione in background richiede `store=True`, che è l'impostazione predefinita. Per aggiornamenti in tempo reale sullo stato di avanzamento durante l'esecuzione in background, consulta [Interazioni in background in streaming](https://ai.google.dev/gemini-api/docs/background-execution?hl=it#streaming-pattern).
+バックグラウンド実行には `store=True` が必要です。これはデフォルトです。バックグラウンド実行中の進行状況のリアルタイム更新については、[バックグラウンド操作のストリーミング](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja#streaming-pattern)をご覧ください。
 
-Puoi annullare un'interazione in background in esecuzione utilizzando il metodo `cancel`.
+実行中のバックグラウンド インタラクションをキャンセルするには、`cancel` メソッドを使用します。
 
 ### Python
 
@@ -1424,9 +1424,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions/INTE
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-**Multi-turn con esecuzione in background**
+**バックグラウンド実行による複数ターンの会話**
 
-Quando un'interazione in background coinvolge strumenti stateful (come l'esecuzione di codice in una sandbox), utilizza il `environment_id` dell'interazione completata per continuare nello stesso ambiente. In questo modo, l'agente riprende da dove aveva interrotto con tutti i file e lo stato intatti.
+バックグラウンド インタラクションにステートフル ツール（サンドボックスでのコード実行など）が含まれている場合は、完了したインタラクションの `environment_id` を使用して、同じ環境で続行します。これにより、エージェントはすべてのファイルと状態をそのままにして、中断したところから再開できます。
 
 ### Python
 
@@ -1667,27 +1667,27 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
   }"
 ```
 
-## Ambienti
+## 環境
 
-Ogni chiamata crea o riutilizza una sandbox Linux. Il parametro `environment` assume tre forme:
+呼び出しごとに、Linux サンドボックスが作成されるか、再利用されます。`environment` パラメータには次の 3 つの形式があります。
 
-| Modulo | Descrizione |
+| フォーム | 説明 |
 | --- | --- |
-| `"remote"` | Esegui il provisioning di una nuova sandbox con le impostazioni predefinite. |
-| `"env_abc123"` | Riutilizza un ambiente esistente in base all'ID, conservando tutti i file e lo stato. |
-| `{...}` | `EnvironmentConfig` completo con origini personalizzate e regole di rete. |
+| `"remote"` | デフォルト設定で新しいサンドボックスをプロビジョニングします。 |
+| `"env_abc123"` | ID で既存の環境を再利用し、すべてのファイルと状態を保持します。 |
+| `{...}` | カスタムソースとネットワーク ルールを使用した完全な `EnvironmentConfig`。 |
 
-Consulta [Ambienti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it) per i dettagli su origini (Git, GCS, in linea), networking, ciclo di vita e limiti delle risorse.
+ソース（Git、GCS、インライン）、ネットワーキング、ライフサイクル、リソースの上限の詳細については、[環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja)をご覧ください。
 
-## Trigger
+## トリガー
 
-I trigger consentono di pianificare l'esecuzione automatica di un agente in base a una pianificazione cron. Un trigger associa un agente, un ambiente, un prompt e una pianificazione in una risorsa persistente che si attiva senza intervento manuale. Ogni esecuzione riutilizza lo stesso ambiente, quindi i file creati in un'esecuzione persistono e sono visibili a quella successiva.
+トリガーを使用すると、Cron スケジュールでエージェントが自動的に実行されるようにスケジュールを設定できます。トリガーは、エージェント、環境、プロンプト、スケジュールを永続的なリソースにバインドし、手動介入なしで実行します。各実行では同じ環境が再利用されるため、1 回の実行で作成されたファイルは保持され、次の実行でも参照できます。
 
-### Crea un trigger
+### トリガーを作成する
 
-Crea un trigger specificando una pianificazione cron, un fuso orario e la configurazione dell'interazione. Il trigger inizia con lo stato `active` e si attiverà alla successiva ora cron corrispondente. Salva il valore `id` restituito per gestire il trigger nelle chiamate successive.
+cron スケジュール、タイムゾーン、インタラクション構成を指定してトリガーを作成します。トリガーは `active` ステータスで開始され、次に一致する cron 時間に起動します。返された `id` を保存して、後続の呼び出しでトリガーを管理します。
 
-Poiché un trigger viene eseguito in modo automatico in base a una pianificazione, fai riferimento a una [credenziale](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=it) archiviata anziché a un token incorporato. Il proxy di uscita lo risolve a ogni esecuzione e ruoti il secret senza toccare il trigger. Anche le regole `transform` in linea funzionano qui, ma richiedono l'aggiornamento dell'attivatore ogni volta che il valore cambia.
+トリガーはスケジュールに従って無人で実行されるため、インライン トークンではなく、保存された[認証情報](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ja)を参照します。下り（外向き）プロキシは実行のたびにシークレットを解決し、トリガーに触れることなくシークレットをローテーションします。インライン `transform` ルールはここでも機能します。値が変更されるたびにトリガーを更新する必要があります。
 
 ### Python
 
@@ -1912,29 +1912,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/triggers" \
   }'
 ```
 
-La richiesta `CreateTrigger` accetta i seguenti campi:
+`CreateTrigger` リクエストでは、次のフィールドを指定できます。
 
-| Campo | Tipo | Obbligatorio | Descrizione |
+| フィールド | 型 | 必須 / 省略可 | 説明 |
 | --- | --- | --- | --- |
-| `schedule` | stringa | Sì | Espressione cron (ad es. `0 * * * *` per ogni ora, `0 9 * * 1-5` per le mattine dei giorni feriali). |
-| `time_zone` | stringa | Sì | Fuso orario IANA (ad es. `UTC`, `America/Argentina/Buenos_Aires`). |
-| `display_name` | stringa | No | Nome leggibile per il trigger. |
-| `max_consecutive_failures` | integer | No | Numero massimo di errori prima che il trigger venga messo in pausa automaticamente. Valore predefinito: 5. |
-| `execution_timeout_seconds` | integer | No | Timeout per esecuzione in secondi. Valore predefinito: 600. |
-| `interaction` | oggetto | Sì | Un `CreateInteractionRequest` che definisce l'agente, l'input, gli strumenti e l'ambiente. |
+| `schedule` | 文字列 | ○ | cron 式（例: `0 * * * *` は毎時、`0 9 * * 1-5` は平日の午前）。 |
+| `time_zone` | 文字列 | ○ | IANA タイムゾーン（例: `UTC`、`America/Argentina/Buenos_Aires`）。 |
+| `display_name` | 文字列 | いいえ | 人が読める形式のトリガー名。 |
+| `max_consecutive_failures` | integer | いいえ | トリガーが自動的に一時停止するまでの最大失敗回数。デフォルト: 5。 |
+| `execution_timeout_seconds` | integer | いいえ | 実行あたりのタイムアウト（秒単位）。デフォルト: 600。 |
+| `interaction` | オブジェクト | ○ | エージェント、入力、ツール、環境を定義する `CreateInteractionRequest`。 |
 
-La risposta include i seguenti campi chiave:
+レスポンスには次のキーフィールドが含まれます。
 
-| Campo | Tipo | Descrizione |
+| フィールド | タイプ | 説明 |
 | --- | --- | --- |
-| `id` | stringa | Identificatore univoco dell'attivatore. Utilizzalo in tutte le operazioni successive. |
-| `status` | stringa | Stato attuale: `active`, `paused` o `disabled`. |
-| `next_run_time` | stringa | Timestamp ISO 8601 della prossima esecuzione pianificata. |
-| `consecutive_failure_count` | integer | Numero di esecuzioni non riuscite consecutive dall'ultima esecuzione riuscita. |
+| `id` | 文字列 | トリガーの固有識別子。以降のすべてのオペレーションでこれを使用します。 |
+| `status` | 文字列 | 現在の状態: `active`、`paused`、`disabled`。 |
+| `next_run_time` | 文字列 | 次回の実行スケジュールの ISO 8601 タイムスタンプ。 |
+| `consecutive_failure_count` | integer | 最後の成功以降の連続した失敗実行回数。 |
 
-### Elenca trigger
+### トリガーの一覧表示
 
-Recupera tutti i trigger associati al tuo progetto.
+プロジェクトに関連付けられているすべてのトリガーを取得します。
 
 ### Python
 
@@ -2014,9 +2014,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Ottenere un trigger
+### トリガーを取得する
 
-Recupera la configurazione completa e lo stato attuale di un singolo trigger.
+1 つのトリガーの完全な構成と現在の状態を取得します。
 
 ### Python
 
@@ -2092,9 +2092,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Mettere in pausa e riprendere
+### 一時停止と再開
 
-Puoi mettere in pausa un trigger per interrompere le esecuzioni pianificate e riprenderlo per riattivare la pianificazione. La sospensione non influisce sulle esecuzioni manuali.
+トリガーを一時停止すると、スケジュールされた実行を停止できます。再開すると、スケジュールが再び有効になります。一時停止は手動実行には影響しません。
 
 ### Python
 
@@ -2198,9 +2198,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER
   -d '{"status": "active"}'
 ```
 
-### Elimina un trigger
+### トリガーの削除
 
-Rimuovere definitivamente un trigger. La cronologia delle esecuzioni passate non viene eliminata.
+トリガーを完全に削除します。過去の実行履歴は削除されません。
 
 ### Python
 
@@ -2265,9 +2265,9 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGE
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Eseguire un trigger immediatamente
+### トリガーをすぐに実行する
 
-Attiva un trigger on demand senza attendere il successivo orario programmato. Funziona anche se il trigger è in pausa.
+次のスケジュールされた時刻を待たずに、オンデマンドでトリガーを起動します。これは、トリガーが一時停止されている場合でも機能します。
 
 ### Python
 
@@ -2332,9 +2332,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Recupero elenco esecuzioni
+### 実行の一覧表示
 
-Visualizza la cronologia delle esecuzioni di un trigger. Ogni esecuzione include un `status`, timestamp, un `interaction_id` che puoi utilizzare per recuperare l'output completo dell'interazione e un `environment_id` che conferma che tutte le esecuzioni condividono la stessa sandbox.
+トリガーの実行履歴を表示します。各実行には、`status`、タイムスタンプ、完全なインタラクション出力を取得するために使用できる `interaction_id`、すべての実行が同じサンドボックスを共有していることを確認する `environment_id` が含まれます。
 
 ### Python
 
@@ -2449,26 +2449,19 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Disponibilità e prezzi
+## 提供状況と価格
 
-L'agente Antigravity è disponibile in anteprima tramite l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) in Google AI Studio e l'API Gemini per i progetti sia del Livello senza costi sia del Livello a pagamento.
+Antigravity エージェントは、Google AI Studio の [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) と Gemini API を通じて、無料枠と有料枠の両方のプロジェクトでプレビュー版として利用できます。
 
-I prezzi seguono un [modello di pagamento a consumo](https://ai.google.dev/gemini-api/docs/pricing?hl=it#pricing-for-agents)
-basato sui token del modello Gemini sottostante e sugli strumenti utilizzati dall'agente. A differenza di una
-richiesta di chat standard che produce un singolo output, un'interazione Antigravity è un
-flusso di lavoro autonomo. Una singola richiesta attiva un loop autonomo di ragionamento, esecuzione di strumenti, esecuzione di codice e gestione dei file. I progetti del Livello senza costi includono una limitazione di frequenza e una quota di utilizzo senza costi.
+料金は、基盤となる Gemini モデルのトークンとエージェントが使用するツールに基づく[従量課金制モデル](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#pricing-for-agents)に従います。単一の出力を生成する標準的なチャット リクエストとは異なり、Antigravity インタラクションはエージェント ワークフローです。1 つのリクエストで、推論、ツールの実行、コードの実行、ファイル管理の自律的なループがトリガーされます。無料枠プロジェクトには、無料のレート制限と使用量割り当てが含まれます。
 
-Le interazioni con Antigravity eseguono loop autonomi multi-turno e possono consumare un numero significativo di token. Imposta i [controlli del budget](#budget-controls) sulla richiesta per limitare l'utilizzo dei token. Puoi anche monitorare l'avanzamento in tempo reale con lo [streaming SSE](https://ai.google.dev/gemini-api/docs/streaming?hl=it) o annullare le richieste in esecuzione.
+Antigravity のインタラクションは、マルチターンの自律ループを実行し、大量のトークンを消費する可能性があります。リクエストに[予算管理](#budget-controls)を設定して、トークンの使用量を制限します。[SSE ストリーミング](https://ai.google.dev/gemini-api/docs/streaming?hl=ja)を使用して進行状況をリアルタイムでモニタリングしたり、実行中のリクエストをキャンセルしたりすることもできます。
 
-### Controlli del budget
+### 予算管理
 
-Oltre alla [selezione del modello](#model-selection), imposta `max_total_tokens` all'interno di `agent_config` (con `"type": "antigravity"`) per limitare
-il numero totale di token (input + output + pensiero) che un'interazione può consumare.
-I token memorizzati nella cache non vengono conteggiati ai fini di questo limite. Quando l'agente raggiunge il limite, l'interazione si interrompe e restituisce `status: "incomplete"`. Il limite è il risultato di un impegno:
-l'utilizzo effettivo potrebbe superarlo leggermente a seconda di quando l'agente controlla il budget
-tra i passaggi.
+[モデルの選択](#model-selection)に加えて、`agent_config`（`"type": "antigravity"` を使用）内で `max_total_tokens` を設定して、インタラクションで使用できるトークンの合計数（入力 + 出力 + 思考）を制限します。キャッシュに保存されたトークンは、この上限にはカウントされません。エージェントが上限に達すると、インタラクションが停止し、`status: "incomplete"` が返されます。この上限はベスト エフォートです。エージェントがステップ間で予算を確認するタイミングによっては、実際の使用量が上限をわずかに超える可能性があります。
 
-Imposta il budget nella richiesta di interazione in `agent_config` insieme a `agent` e `input`.
+`agent_config` のインタラクション リクエストで、`agent` と `input` とともに予算を設定します。
 
 ### Python
 
@@ -2652,11 +2645,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### Continuare un'interazione incompleta
+#### 未完了のやり取りを継続する
 
-Quando un'interazione restituisce `status: "incomplete"`, il lavoro e il contesto dell'agente vengono conservati. Invia una nuova interazione che faccia riferimento all'interazione originale `id` e
-`environment_id` per riprendere da dove era stata interrotta. La nuova interazione ha un proprio
-budget `max_total_tokens`.
+インタラクションが `status: "incomplete"` を返すと、エージェントの作業とコンテキストが保持されます。元のインタラクション `id` と `environment_id` を参照する新しいインタラクションを送信して、中断したところから再開します。新しいインタラクションには、独自の `max_total_tokens` 予算が割り当てられます。
 
 ### Python
 
@@ -2787,48 +2778,48 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Costi stimati
+### 推定費用
 
-I costi variano in base alla complessità dell'attività. L'agente determina autonomamente il numero di chiamate di strumenti, esecuzioni di codice e operazioni su file necessarie. Le seguenti stime si basano sulle corse.
+費用はタスクの複雑さによって異なります。エージェントは、必要なツール呼び出し、コード実行、ファイル操作の数を自律的に判断します。以下の見積もりは実行に基づいています。
 
-| Categoria attività | Token di input | Token di output | Costo tipico |
+| タスクのカテゴリ | 入力トークン | 出力トークン | 一般的な費用 |
 | --- | --- | --- | --- |
-| **Ricerca e sintesi delle informazioni** | 100.000 - 500.000 | 10.000-40.000 | 0,30 $-1 $ |
-| **Generazione di documenti e contenuti** | 100.000 - 500.000 | 15.000 - 50.000 | 0,30 $-1,30 $ |
-| **Progettazione di processi e sistemi** | 100.000-400.000 | 10.000-30.000 | 0,25-0,80 $ |
-| **Trattamento dati e analisi** | 300.000 - 3.000.000 | 30.000-150.000 | 0,70 €-3,25 € |
+| **リサーチと情報の統合** | 10 万～ 50 万 | 10,000 ～ 40,000 | $0.30 ～$1.00 |
+| **ドキュメントとコンテンツの生成** | 10 万～ 50 万 | 15,000 ～ 50,000 | $0.30 ～$1.30 |
+| **プロセスとシステムの設計** | 10 万～ 40 万 | 10,000 ～ 30,000 | $0.25 ～$0.80 |
+| **データ処理と分析** | 30 万～ 300 万 | 3 万～ 15 万 | $0.70 ～$3.25 |
 
-In genere, il 50-70% dei token di input viene memorizzato nella cache. I workflow agentici complessi con molte chiamate di strumenti possono accumulare 3-5 milioni di token in una singola interazione, con costi fino a ~5 $.
+通常、入力トークンの 50 ～ 70% がキャッシュされます。多くのツール呼び出しを伴う複雑な Agentic Workflows では、1 回のインタラクションで 300 万～ 500 万トークンが蓄積され、費用は最大 5 ドルに達することがあります。
 
-**Il calcolo dell'ambiente** (CPU, memoria, esecuzione sandbox) **non viene fatturato** durante il periodo di anteprima.
+プレビュー期間中は、**環境コンピューティング**（CPU、メモリ、サンドボックス実行）は**課金されません**。
 
-## Limitazioni
+## 制限事項
 
-- **Stato dell'anteprima**:l'agente Antigravity e l'API Interactions. Le funzionalità e gli schemi potrebbero cambiare.
-- **Configurazione di generazione non supportata**:i seguenti parametri non sono supportati e restituiscono un errore 400: `temperature`, `top_p`, `top_k`, `stop_sequences`, `max_output_tokens`.
-- **Output strutturato**:l'agente Antigravity non supporta gli output strutturati.
-- **Strumenti non disponibili:** `file_search`, `computer_use` e `google_maps` non sono ancora supportati.
-- **Limitazioni dell'MCP remoto:** il trasporto Server-Sent Events (SSE) non è supportato (utilizza Streamable HTTP). Inoltre, il server `name` deve essere rigorosamente in minuscolo e alfanumerico (l'utilizzo di lettere maiuscole attiva un errore `400 Bad Request` generico).
-- **Strumento per il file system:** al momento non è disponibile alcuno strumento per il file system. Fa parte di `environment`.
-- **Requisito dello store:** l'esecuzione dell'agente utilizzando `background=True` richiede `store=True`.
-- **Chiamata di funzione solo stateful**:la chiamata di funzione è supportata solo in modalità stateful. Devi utilizzare `previous_interaction_id` per continuare il turno; la ricostruzione manuale della cronologia (modalità stateless) non è supportata.
-- **Tipi multimodali non supportati.** Al momento, gli input audio, video e di documenti non sono supportati. Sono consentiti solo testo e immagini.
+- **プレビュー ステータス:** Antigravity エージェントと Interactions API。機能とスキーマは変更される可能性があります。
+- **サポートされていない生成構成:** 次のパラメータはサポートされておらず、400 エラーが返されます。`temperature`、`top_p`、`top_k`、`stop_sequences`、`max_output_tokens`。
+- **構造化出力:** Antigravity エージェントは構造化出力をサポートしていません。
+- **利用できないツール:** `file_search`、`computer_use`、`google_maps` はまだサポートされていません。
+- **リモート MCP の制限事項:** サーバー送信イベント（SSE）トランスポートはサポートされていません（ストリーミング可能な HTTP を使用してください）。また、サーバー `name` は厳密に小文字の英数字である必要があります（大文字を使用すると、一般的な `400 Bad Request` エラーがトリガーされます）。
+- **ファイルシステム ツール:** 現在、ファイルシステム ツールはありません。これは `environment` の一部です。
+- **ストアの要件:** `background=True` を使用したエージェントの実行には `store=True` が必要です。
+- **ステートフルのみの関数呼び出し:** 関数呼び出しはステートフル モードでのみサポートされています。ターンを続行するには `previous_interaction_id` を使用する必要があります。履歴を手動で再構築する（ステートレス モード）ことはサポートされていません。
+- **サポートされていないマルチモーダル タイプ。**現時点では、音声、動画、ドキュメントの入力はサポートされていません。テキストと画像のみが許可されます。
 
-## Passaggi successivi
+## 次のステップ
 
-- [Guida rapida](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it): conversazioni multi-turno e streaming.
-- [Creazione di agenti personalizzati](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it): istruzioni, competenze e salvataggio degli agenti personalizzati.
-- [Ambienti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it): configurazione della sandbox, origini, networking.
-- [Hook](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=it): applica i controlli di sicurezza e la convalida degli effetti collaterali all'interno della sandbox.
-- [Agente Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it): attività di ricerca di lunga durata.
-- [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it): l'API sottostante.
+- [クイックスタート](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja): マルチターン会話とストリーミング。
+- [カスタム エージェントの構築](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja): カスタム指示、スキル、エージェントの保存。
+- [環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja): サンドボックス構成、ソース、ネットワーキング。
+- [フック](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=ja): サンドボックス内でセキュリティ ゲートと副作用の検証を適用します。
+- [Deep Research エージェント](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja): 長文の調査タスク。
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja): 基盤となる API。
 
-Invia feedback
+フィードバックを送信
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ultimo aggiornamento 2026-10-16 UTC.
+最終更新日 2026-10-16 UTC。
 
-Vuoi dirci altro?
+ご意見をお聞かせください
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-10-16 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-16 UTC。"],[],[]]

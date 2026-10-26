@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/url-context?hl=sq
-fetched_at: 2026-10-19T05:56:10.999461+00:00
-title: "Konteksti i URL-s\u00eb \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/url-context?hl=id
+fetched_at: 2026-10-26T05:45:23.364193+00:00
+title: "Konteks URL \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
+Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Faqja kryesore](https://ai.google.dev/?hl=sq)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=sq)
-- [Dokumentet](https://ai.google.dev/gemini-api/docs/generate-content?hl=sq)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs/generate-content?hl=id)
 
-Dërgo komente
+Kirim masukan
 
-# Konteksti i URL-së
+# Konteks URL
 
-Vegla e kontekstit të URL-së të lejon që t'u japësh kontekst shtesë modeleve në formën e URL-ve. Duke përfshirë URL-të në kërkesën tënde, modeli do të ketë qasje te përmbajtjet nga ato faqe (për aq kohë sa nuk është një lloj URL-je i listuar në [seksionin e kufizimeve](#limitations)) për të informuar dhe përmirësuar përgjigjen e tij.
+Alat konteks URL memungkinkan Anda memberikan konteks tambahan ke model dalam bentuk URL. Dengan menyertakan URL dalam permintaan Anda, model akan mengakses konten dari halaman tersebut (selama tidak termasuk jenis URL yang tercantum di [bagian batasan](#limitations)) untuk menginformasikan dan meningkatkan kualitas responsnya.
 
-Vegla e kontekstit me URL është e dobishme për detyra si më poshtë:
+Alat konteks URL berguna untuk tugas seperti berikut:
 
-- **Nxirr të dhënat**: Merr informacione specifike si çmimet, emrat ose gjetjet kryesore nga disa URL.
-- **Krahaso dokumentet**: Analizo disa raporte, artikuj ose skedarë PDF për të identifikuar ndryshimet dhe për të monitoruar tendencat.
-- **Sintetizo dhe krijo përmbajtje**: Kombino informacionet nga disa URL burimesh për të gjeneruar përmbledhje, postime në blog ose raporte të sakta.
-- **Analizo kodin dhe dokumentet**: Drejtohu te një depo e GitHub ose dokumentacion teknik për të shpjeguar kodin, për të gjeneruar udhëzime konfigurimi ose për t'iu përgjigjur pyetjeve.
+- **Mengekstrak Data**: Menarik informasi tertentu seperti harga, nama, atau temuan utama dari beberapa URL.
+- **Membandingkan Dokumen**: Analisis beberapa laporan, artikel, atau PDF untuk mengidentifikasi perbedaan dan melacak tren.
+- **Menyintesis & Membuat Konten**: Menggabungkan informasi dari beberapa URL sumber untuk membuat ringkasan, postingan blog, atau laporan yang akurat.
+- **Analisis Kode & Dokumen**: Merujuk repositori GitHub atau dokumentasi teknis untuk menjelaskan kode, membuat petunjuk penyiapan, atau menjawab pertanyaan.
 
-Shembulli i mëposhtëm tregon se si të krahasosh dy receta nga uebsajte të ndryshme.
+Contoh berikut menunjukkan cara membandingkan dua resep dari situs yang berbeda.
 
 ### Python
 
@@ -87,7 +87,7 @@ async function main() {
 await main();
 ```
 
-### QETËSI
+### REST
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -111,23 +111,27 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 cat result.json
 ```
 
-## Si funksionon
+## Cara kerjanya
 
-Vegla "Konteksti me URL" përdor një proces rikuperimi me dy hapa për të balancuar shpejtësinë, koston dhe qasjen në të dhënat më të fundit. Kur jep një URL, vegla
-përpiqet fillimisht të marrë përmbajtjen nga një memorje specifike e indeksit të brendshëm. Kjo vepron si një
-kesh i optimizuar në nivel të lartë. Nëse një URL nuk ofrohet në indeks (për shembull, nëse është një faqe shumë e re), vegla kthehet automatikisht për të bërë një marrje drejtpërdrejt.
-Kjo qaset drejtpërdrejt në URL për të marrë përmbajtjen e saj në kohë reale.
+Alat Konteks URL menggunakan proses pengambilan dua langkah untuk menyeimbangkan kecepatan, biaya, dan akses ke data baru. Saat Anda memberikan URL, alat ini
+pertama-tama akan mencoba mengambil konten dari cache indeks internal. Cache ini berfungsi sebagai cache yang sangat dioptimalkan. Jika URL tidak tersedia di indeks (misalnya, jika
+URL tersebut adalah halaman yang sangat baru), alat otomatis akan melakukan pengambilan langsung.
+Alat ini mengakses URL secara langsung untuk mengambil kontennya secara real time.
 
-## Kombinimi me vegla të tjera
+## Menggabungkan dengan alat lain
 
-Mund ta kombinosh veglën e kontekstit të URL-së me vegla të tjera për të krijuar flukse pune më të fuqishme.
+Anda dapat menggabungkan alat konteks URL dengan alat lain untuk membuat alur kerja yang lebih efektif.
 
-[Modelet Gemini 3](#supported-models) mbështesin kombinimin e veglave të integruara (si p.sh. "Konteksti me URL") me veglat e personalizuara (thirrja e funksionit). Mëso më shumë në faqen e
-[kombinimeve të veglave](https://ai.google.dev/gemini-api/docs/tool-combination?hl=sq).
+[Model Gemini 3](#supported-models) mendukung penggabungan alat bawaan (seperti Konteks URL) dengan alat kustom (pemanggilan fungsi). Pelajari lebih lanjut di halaman
+[kombinasi alat](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id).
 
-### Argumentimi me kërkimin
+### Melakukan grounding dengan penelusuran
 
-Kur aktivizohen konteksti i URL-së dhe [Bazimi me "Kërko në Google"](https://ai.google.dev/gemini-api/docs/grounding?hl=sq), modeli mund të përdorë aftësitë e tij të kërkimit për të gjetur informacione përkatëse online dhe më pas të përdorë veglën e kontekstit të URL-së për të marrë një kuptim më të thelluar të faqeve që gjen. Kjo qasje është e fuqishme për kërkesat që kërkojnë kërkim të gjerë dhe analizë të thellë të faqeve specifike.
+Jika konteks URL dan
+[Grounding with Google Search](https://ai.google.dev/gemini-api/docs/grounding?hl=id) diaktifkan,
+model dapat menggunakan kemampuan penelusurannya untuk menemukan
+informasi yang relevan secara online, lalu menggunakan alat konteks URL untuk mendapatkan
+pemahaman yang lebih mendalam tentang halaman yang ditemukannya. Pendekatan ini efektif untuk perintah yang memerlukan penelusuran luas dan analisis mendalam terhadap halaman tertentu.
 
 ### Python
 
@@ -212,13 +216,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 cat result.json
 ```
 
-## Kuptimi i përgjigjes
+## Memahami respons
 
-Kur modeli përdor veglën e kontekstit të URL-së, përgjigjja përfshin një objekt të
-`url_context_metadata`. Ky objekt liston URL-të nga të cilat modeli ka marrë përmbajtje dhe statusin e çdo përpjekjeje për marrje, gjë që është e dobishme për verifikimin dhe korrigjimin.
+Saat model menggunakan alat konteks URL, responsnya akan menyertakan
+objek `url_context_metadata`. Objek ini mencantumkan URL yang kontennya diambil oleh model dan status setiap upaya pengambilan, yang berguna untuk verifikasi dan proses debug.
 
-Më poshtë është një shembull i asaj pjese të përgjigjes
-(pjesë të përgjigjes janë lënë jashtë për koncizitet):
+Berikut adalah contoh bagian respons tersebut
+(bagian respons telah dihilangkan agar lebih ringkas):
 
 ```
 {
@@ -250,17 +254,17 @@ Më poshtë është një shembull i asaj pjese të përgjigjes
 }
 ```
 
-Për detaje të plota për këtë objekt , shiko
-[referencën e API-së të `UrlContextMetadata`](https://ai.google.dev/api/generate-content?hl=sq#UrlContextMetadata).
+Untuk mengetahui detail lengkap tentang objek ini , lihat
+[referensi API `UrlContextMetadata`](https://ai.google.dev/api/generate-content?hl=id#UrlContextMetadata).
 
-### Kontrollet e sigurisë
+### Pemeriksaan keamanan
 
-Sistemi kryen një kontroll të moderimit të përmbajtjes në URL për të konfirmuar që ato i plotësojnë standardet e sigurisë. Nëse URL-ja që ke dhënë dështon në këtë kontroll, do të marrësh një `url_retrieval_status` nga `URL_RETRIEVAL_STATUS_UNSAFE`.
+Sistem melakukan pemeriksaan moderasi konten pada URL untuk mengonfirmasi bahwa URL tersebut memenuhi standar keamanan. Jika URL yang Anda berikan gagal dalam pemeriksaan ini, Anda akan mendapatkan `url_retrieval_status` `URL_RETRIEVAL_STATUS_UNSAFE`.
 
-### Numri i kodeve
+### Jumlah token
 
-Përmbajtja e marrë nga URL-të që specifikon në kërkesën tënde numërohet
-si pjesë e kodeve hyrëse. Mund ta shikosh numrin e tokenëve për kërkesën tënde dhe përdorimin e veglave tek objekti [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=sq#UsageMetadata) i rezultatit të modelit. Më poshtë është një shembull i daljes:
+Konten yang diambil dari URL yang Anda tentukan dalam perintah dihitung
+sebagai bagian dari token input. Anda dapat melihat jumlah token untuk penggunaan perintah dan alat di objek [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=id#UsageMetadata) pada output model. Berikut adalah contoh output:
 
 ```
 'usage_metadata': {
@@ -276,67 +280,69 @@ si pjesë e kodeve hyrëse. Mund ta shikosh numrin e tokenëve për kërkesën t
   }
 ```
 
-Çmimi për kod varet nga modeli i përdorur. Shiko faqen e
-[çmimeve](https://ai.google.dev/gemini-api/docs/pricing?hl=sq) për detaje.
+Harga per token bergantung pada model yang digunakan, lihat halaman [harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id) untuk mengetahui detailnya.
 
-## Modelet e mbështetura
+## Model yang didukung
 
-| Modeli | Konteksti i URL-së |
+| Model | Konteks URL |
 | --- | --- |
-| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=sq) | ✔️ |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=sq) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=sq) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=sq) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=sq) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=sq) | ✔️ |
-| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=sq) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=sq) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=sq) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=sq) | ✔️ |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=id) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=id) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=id) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=id) | ✔️ |
+| [Pratinjau Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id) | ✔️ |
+| [Pratinjau Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=id) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=id) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=id) | ✔️ |
 
-## Praktikat më të mira
+## Praktik Terbaik
 
-- **Jep URL specifike**: Për rezultatet më të mira, jep URL të drejtpërdrejta për te përmbajtjet që dëshiron që të analizohen nga modeli. Modeli do të marrë vetëm përmbajtje nga URL-të që ti jep, jo përmbajtje nga lidhjet e mbivendosura.
-- **Kontrollo për qasshmërinë**: Verifiko që URL-të që jep nuk të çojnë në faqe që kërkojnë një identifikim ose që janë pas një muri pagese.
-- **Përdor URL-në e plotë**: Jep URL-në e plotë, duke përfshirë protokollin
-  (p.sh. https://www.google.com në vend të thjesht google.com).
+- **Berikan URL spesifik**: Untuk mendapatkan hasil terbaik, berikan URL langsung ke
+  konten yang Anda ingin untuk dianalisis oleh model. Model hanya akan mengambil konten
+  dari URL yang Anda berikan, bukan konten dari link bertingkat.
+- **Periksa aksesibilitas**: Pastikan URL yang Anda berikan tidak mengarah ke
+  halaman yang memerlukan login atau berada di balik penghalang konten berbayar.
+- **Gunakan URL lengkap**: Berikan URL lengkap, termasuk protokolnya
+  (misalnya, https://www.google.com, bukan hanya google.com).
 
-## Kufizimet
+## Batasan
 
-- Kufiri i kërkesave: Vegla mund të përpunojë deri në 20 URL për kërkesë.
-- Madhësia e përmbajtjes së URL-së: Madhësia maksimale për përmbajtjen e marrë nga një URL e vetme është 34 MB.
-- Qasshmëria publike: URL-të duhet të jenë të qasshme në mënyrë publike në ueb.
-  Adresat e pritësit lokal (p.sh. localhost, 127.0.0.1), rrjetet private dhe shërbimet e tunelimit (p.sh. ngrok, pinggy) nuk mbështeten.
+- Batas permintaan: Alat ini dapat memproses hingga 20 URL per permintaan.
+- Ukuran konten URL: Ukuran maksimum untuk konten yang diambil dari satu URL adalah 34 MB.
+- Aksesibilitas publik: URL harus dapat diakses secara publik di web.
+  Alamat localhost (misalnya, localhost, 127.0.0.1), jaringan pribadi, dan layanan tunneling (misalnya, ngrok, pinggy) tidak didukung.
 
-### Llojet e përmbajtjeve të mbështetura dhe të pambështetura
+### Jenis konten yang didukung dan tidak didukung
 
-Vegla mund të nxjerrë përmbajtje nga URL-të me llojet e mëposhtme të përmbajtjeve:
+Alat ini dapat mengekstrak konten dari URL dengan jenis konten berikut:
 
-- Tekst (text/html, application/json, text/plain, text/xml, text/css,
+- Teks (text/html, application/json, text/plain, text/xml, text/css,
   text/javascript , text/csv, text/rtf)
-- Imazh (image/png, image/jpeg, image/bmp, image/webp)
+- Gambar (image/png, image/jpeg, image/bmp, image/webp)
 - PDF (application/pdf)
 
-Llojet e mëposhtme të përmbajtjes **nuk** mbështeten:
+Jenis konten berikut **tidak** didukung:
 
-- Përmbajtja me mur pagese
-- Videot në YouTube (Shiko
-  [kuptimin e videos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=sq#youtube) për të mësuar
-  se si të përpunosh URL-të e YouTube)
-- Skedarët e Google Workspace si "Dokumentet e Google" ose fletëllogaritëset
-- Skedarët video dhe audio
+- Konten berbayar berpenghalang
+- Video YouTube (Lihat
+  [pemahaman video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id#youtube) untuk mempelajari
+  cara memproses URL YouTube)
+- File Google Workspace seperti Google Dokumen atau spreadsheet Google
+- File video dan audio
 
-## Çfarë ka më pas
+## Langkah berikutnya
 
-- Eksploro [udhëzuesin për kontekstin me URL](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=sq#url-context)
-  për më shumë shembuj.
+- Pelajari [cookbook konteks URL](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=id#url-context)
+  untuk contoh lainnya.
 
-Dërgo komente
+Kirim masukan
 
-Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Përditësimi i fundit: 2026-10-13 UTC.
+Terakhir diperbarui pada 2026-10-13 UTC.
 
-Duhet të na tregosh më shumë?
+Ada masukan untuk kami?
 
-[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-13 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-13 UTC."],[],[]]

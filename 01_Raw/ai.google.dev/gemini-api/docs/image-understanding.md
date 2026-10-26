@@ -1,41 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=it
-fetched_at: 2026-10-19T05:53:06.295308+00:00
-title: "Comprensione delle immagini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-CN
+fetched_at: 2026-10-26T05:45:10.794023+00:00
+title: "\u56fe\u7247\u7406\u89e3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
+Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Invia feedback
+发送反馈
 
-# Comprensione delle immagini
+# 图片理解
 
-I modelli Gemini sono progettati per essere multimodali fin dalla base, consentendo un'ampia gamma di attività di elaborazione delle immagini e visione artificiale, tra cui, a titolo esemplificativo, la descrizione di immagini, la classificazione e la risposta a domande visive, senza dover addestrare modelli di ML specializzati.
+Gemini 模型从一开始就具有多模态特性，可用于执行各种图片处理和计算机视觉任务，包括但不限于图片配文、分类和视觉问答，而无需训练专门的机器学习模型。
 
-Oltre alle funzionalità multimodali generali, i modelli Gemini offrono
-**maggiore accuratezza** per casi d'uso specifici come il [rilevamento di oggetti](#object-detection)
-e la [segmentazione](#segmentation), grazie a un addestramento aggiuntivo.
+除了通用多模态功能之外，Gemini 模型还通过额外训练，针对特定应用场景（例如[对象检测](#object-detection)和[分割](#segmentation)）提供**更高的准确率**。
 
-## Trasferire immagini a Gemini
+## 将图片传递给 Gemini
 
-Puoi fornire immagini come input a Gemini utilizzando diversi metodi:
+您可以使用多种方法向 Gemini 提供图片作为输入：
 
-- [Trasmissione dell'immagine tramite URL](#url-image): ideale per le immagini accessibili pubblicamente.
-- [Passaggio di dati immagine incorporati](#inline-image): per i dati immagine con codifica base64.
-- [Caricamento di immagini tramite l'API File](#upload-image): consigliato per file di dimensioni maggiori o per riutilizzare le immagini in più richieste.
+- [使用网址传递图片](#url-image)：非常适合可公开访问的图片。
+- [传递内嵌图片数据](#inline-image)：用于传递 base64 编码的图片数据。
+- [使用 File API 上传图片](#upload-image)：建议用于较大的文件，或在多个请求中重复使用图片。
 
-### Trasmissione dell'immagine tramite URL
+### 使用网址传递图片
 
-Puoi caricare un'immagine utilizzando l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=it) e passarla
-nella richiesta:
+您可以使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn) 上传图片，并在请求中传递该图片：
 
 ### Python
 
@@ -203,9 +200,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Trasferimento dei dati delle immagini in linea
+### 传递内嵌图片数据
 
-Puoi fornire i dati immagine come stringhe con codifica base64:
+您可以以 base64 编码的字符串形式提供图片数据：
 
 ### Python
 
@@ -381,9 +378,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Caricamento di immagini utilizzando l'API File
+### 使用 File API 上传图片
 
-Per file di grandi dimensioni o per poter utilizzare ripetutamente lo stesso file immagine, utilizza l'API Files. Consulta la [guida all'API Files](https://ai.google.dev/gemini-api/docs/files?hl=it).
+对于大型文件，或者为了能够重复使用同一图片文件，请使用 Files API。请参阅 [Files API 指南](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn)。
 
 ### Python
 
@@ -553,10 +550,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Prompt con più immagini
+## 使用多张图片进行提示
 
-Puoi fornire più immagini in un singolo prompt includendo più oggetti immagine
-nell'array `input`:
+您可以在单个提示中提供多张图片，只需在 `input` 数组中添加多个图片对象即可：
 
 ### Python
 
@@ -727,10 +723,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Rilevamento di oggetti
+## 对象检测
 
-I modelli vengono addestrati per rilevare gli oggetti in un'immagine e ottenere le coordinate del riquadro di delimitazione. Le coordinate, relative alle dimensioni dell'immagine, vengono scalate a [0, 1000]. Devi ridimensionare queste coordinate in base
-alle dimensioni delle immagini originali.
+模型经过训练，可以检测图片中的对象并获取其边界框坐标。相对于图片尺寸的坐标会缩放到 [0, 1000]。您需要根据原始图片大小对这些坐标进行反缩放。
 
 ### Python
 
@@ -1017,13 +1012,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Per altri esempi, visita il [cookbook di Gemini](https://github.com/google-gemini/cookbook).
+如需查看更多示例，请访问 [Gemini Cookbook](https://github.com/google-gemini/cookbook)。
 
-## Segmentazione
+## 分割
 
-I modelli Gemini non solo rilevano gli elementi, ma li segmentano e forniscono le relative maschere di contorno.
+Gemini 模型不仅可以检测商品，还可以对商品进行分割并提供其轮廓遮罩。
 
-Il modello prevede un elenco JSON, in cui ogni elemento rappresenta una maschera di segmentazione. Ogni elemento ha un riquadro di delimitazione ("`box_2d`") nel formato `[ymin, xmin, ymax, xmax]` con coordinate normalizzate tra 0 e 1000, un'etichetta ("`label`") che identifica l'oggetto e infine la maschera di segmentazione all'interno del riquadro di delimitazione come un poligono di coordinate `[x, y]` normalizzate a 0-1000.
+模型会预测一个 JSON 列表，其中每个项都表示一个分割掩码。每个商品都有一个边界框（“`box_2d`”），格式为 `[ymin, xmin, ymax, xmax]`，其中包含介于 0 到 1000 之间的归一化坐标；一个用于标识对象的标签（“`label`”）；最后是边界框内的分割掩码，以归一化为 0-1000 的 `[x, y]` 坐标多边形表示。
 
 ### Python
 
@@ -1343,13 +1338,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![Un tavolo con cupcake, con gli oggetti in legno e vetro evidenziati](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=it)
+![一张放有纸杯蛋糕的桌子，其中木制和玻璃物品突出显示](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=zh-cn)
 
-Un output di segmentazione di esempio con oggetti e maschere di segmentazione
+包含对象和分割遮盖的分割输出示例
 
-## Formati di immagine supportati
+## 支持的图片格式
 
-Gemini supporta i seguenti tipi MIME di formati immagine:
+Gemini 支持以下图片格式 MIME 类型：
 
 - PNG - `image/png`
 - JPEG - `image/jpeg`
@@ -1357,73 +1352,59 @@ Gemini supporta i seguenti tipi MIME di formati immagine:
 - HEIC - `image/heic`
 - HEIF - `image/heif`
 
-Per scoprire altri metodi di input dei file, consulta la guida
-[Metodi di input dei file](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=it).
+如需了解其他文件输入方法，请参阅[文件输入方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-cn)指南。
 
-## Funzionalità
+## 功能
 
-Tutte le versioni del modello Gemini sono multimodali e possono essere utilizzate in un'ampia gamma
-di attività di elaborazione delle immagini e visione artificiale, tra cui, a titolo esemplificativo,
-la descrizione di immagini, le domande e risposte visive, la classificazione delle immagini,
-il rilevamento di oggetti e la segmentazione.
+所有 Gemini 模型版本都是多模态模型，可用于各种图像处理和计算机视觉任务，包括但不限于图片配文、视觉问答、图像分类、对象检测和分割。
 
-Gemini può ridurre la necessità di utilizzare modelli di ML specializzati a seconda dei tuoi requisiti di qualità e prestazioni.
+Gemini 可以减少对专业机器学习模型的需求，具体取决于您的质量和性能要求。
 
-Le versioni più recenti del modello sono addestrate in modo specifico per migliorare l'accuratezza di attività specializzate, oltre alle funzionalità generiche, come il [rilevamento di oggetti](#object-detection) e la [segmentazione](#segmentation) avanzati.
+最新模型版本经过专门训练，除了通用功能外，还可提高专业任务的准确性，例如增强的[对象检测](#object-detection)和[分割](#segmentation)。
 
-## Limitazioni e informazioni tecniche chiave
+## 限制和关键技术信息
 
-### Limite di file
+### 文件数量限制
 
-I modelli Gemini supportano un massimo di 3600 file immagine per richiesta.
+Gemini 模型支持的每个请求的图片文件数量上限为 3,600 个。
 
-### Calcolo dei token
+### token 计算
 
-- 258 token se entrambe le dimensioni sono <= 384 pixel.
-  Le immagini più grandi vengono suddivise in riquadri di 768 x 768 pixel, ognuno dei quali costa 258 token.
+- 如果两个维度均小于或等于 384 像素，则为 258 个 token。
+  较大的图片会被分块为 768x768 像素的图块，每个图块需要 258 个 token。
 
-Una formula approssimativa per calcolare il numero di tessere è la seguente:
+计算图块数量的粗略公式如下：
 
-- Calcola la dimensione dell'unità di ritaglio, che è approssimativamente: `floor(min(width, height)` / 1,5).
-- Dividi ogni dimensione per le dimensioni dell'unità di ritaglio e moltiplica i risultati per ottenere il
-  numero di riquadri.
+- 计算裁剪单元大小（大致为：`floor(min(width, height)` / 1.5）。
+- 将每个维度除以裁剪单元大小，然后将结果相乘，即可得到图块数量。
 
-Ad esempio, per un'immagine di dimensioni 960 x 540, la dimensione dell'unità di ritaglio
-è 360. Dividi ogni dimensione per 360 e il numero di riquadri è 3 \* 2 = 6.
+例如，对于尺寸为 960x540 的图片，剪裁单位大小为 360。将每个维度除以 360，得到的图块数量为 3 \* 2 = 6。
 
-### Risoluzione dei contenuti multimediali
+### 媒体分辨率
 
-Gemini 3 introduce un controllo granulare sull'elaborazione della visione multimodale con il parametro
-`media_resolution`. Il parametro `media_resolution` determina il
-**numero massimo di token allocati per ogni immagine di input o frame video.**
-Le risoluzioni più elevate migliorano la capacità del modello di leggere testi piccoli o identificare piccoli dettagli, ma aumentano l'utilizzo di token e la latenza.
+Gemini 3 通过 `media_resolution` 参数引入了对多模态视觉处理的精细控制。`media_resolution` 参数用于确定**为每个输入图片或视频帧分配的 token 数量上限**。分辨率越高，模型读取细小文字或识别细微细节的能力就越强，但 token 用量和延迟时间也会增加。
 
-## Suggerimenti e best practice
+## 技巧和最佳做法
 
-- Verifica che le immagini siano ruotate correttamente.
-- Utilizza immagini chiare e non sfocate.
-- Quando utilizzi una singola immagine con testo, posiziona il prompt testuale *prima* dell'immagine nell'array `input`.
+- 验证图片是否已正确旋转。
+- 使用清晰且不模糊的图片。
+- 如果使用包含文本的单张图片，请在 `input` 数组中将文本提示放在图片之前。
 
-## Passaggi successivi
+## 后续步骤
 
-Questa guida mostra come caricare file immagine e generare output di testo
-dagli input immagine. Per saperne di più, consulta le seguenti risorse:
+本指南介绍了如何上传图片文件并根据图片输入生成文本输出。如需了解详情，请参阅以下资源：
 
-- [API Files](https://ai.google.dev/gemini-api/docs/files?hl=it): scopri di più sul caricamento e sulla gestione dei file da utilizzare con Gemini.
-- [Istruzioni di sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#system-instructions):
-  Le istruzioni di sistema ti consentono di orientare il comportamento del modello in base alle tue
-  esigenze e ai tuoi casi d'uso specifici.
-- [Strategie di prompt dei file](https://ai.google.dev/gemini-api/docs/files?hl=it#prompt-guide): l'API
-  Gemini supporta i prompt con dati di testo, immagini, audio e video, noti anche come prompt multimodali.
-- [Linee guida per la sicurezza](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=it): a volte i modelli di AI generativa producono output inaspettati, ad esempio output imprecisi, distorti o offensivi. Il post-processing e la valutazione umana sono essenziali per
-  limitare il rischio di danni derivanti da questi output.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn)：详细了解如何上传和管理文件以供 Gemini 使用。
+- [系统指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#system-instructions)：系统指令可让您根据自己的特定需求和使用情形来控制模型的行为。
+- [文件提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn#prompt-guide)：Gemini API 支持使用文本、图片、音频和视频数据进行提示，也称为多模态提示。
+- [安全指南](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-cn)：生成式 AI 模型有时会生成意料之外的输出，例如不准确、有偏见或令人反感的输出。后处理和人工评估对于限制此类输出造成的危害风险至关重要。
 
-Invia feedback
+发送反馈
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Ultimo aggiornamento 2026-09-24 UTC.
+最后更新时间 (UTC)：2026-09-24。
 
-Vuoi dirci altro?
+需要向我们提供更多信息？
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-24 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-24。"],[],[]]

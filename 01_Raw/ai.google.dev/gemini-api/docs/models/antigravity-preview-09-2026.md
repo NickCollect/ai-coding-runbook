@@ -1,48 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/antigravity-preview-09-2026?hl=id
-fetched_at: 2026-10-19T05:59:30.861097+00:00
-title: "Pratinjau antigravity \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/antigravity-preview-09-2026?hl=tr
+fetched_at: 2026-10-26T06:01:00.300264+00:00
+title: "Antigravity \u00f6nizlemesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
+Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Kirim masukan
+Geri bildirim gönderin
 
-# Pratinjau antigravity
+# Antigravity önizlemesi
 
-Agen terkelola tujuan umum yang canggih dan dirancang untuk alur kerja multilangkah yang otonom. Model ini merencanakan, melakukan penalaran, menjalankan kode, mengelola file, dan menelusuri web di dalam sandbox Linux yang aman dan terisolasi yang dihosting oleh Google.
+Özerk, çok adımlı iş akışları için tasarlanmış, güçlü ve genel amaçlı bir yönetilen aracıdır. Bu model, Google tarafından barındırılan güvenli ve izole edilmiş bir Linux sanal alanında planlama yapar, nedenleri açıklar, kod çalıştırır, dosyaları yönetir ve web'de arama yapar.
 
-Rilis September 2026 (`antigravity-preview-09-2026`) mengupgrade platform runtime
-dengan peningkatan caching perintah, alat penelusuran kode native, dan pengeditan file rentang baris yang efisien.
+Eylül 2026 sürümü (`antigravity-preview-09-2026`), istem önbelleğe alma, yerel kod arama araçları ve verimli satır aralığı dosya düzenleme özellikleriyle çalışma zamanı donanımını yükseltir.
 
-## Dokumentasi
+## Belgeler
 
-Buka halaman [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=id) untuk mendapatkan cakupan lengkap fitur, kemampuan, dan contoh kode.
+Özellikler, işlevler ve kod örnekleri hakkında kapsamlı bilgi için [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr) sayfasını ziyaret edin.
 
 ## antigravity-preview-09-2026
 
-| Properti | Deskripsi |
+| Mülk | Açıklama |
 | --- | --- |
-| Kode agen id\_card | **Interactions API**  `antigravity-preview-09-2026` |
-| saveJenis data yang didukung | **Input**  Teks, Gambar  **Output**  Teks |
-| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Jendela konteks input**  1.048.576 (dipadatkan menjadi ~135 ribu)  **Batas token output**  65.536 |
-| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Pratinjau: `antigravity-preview-09-2026` |
-| calendar\_monthPembaruan terbaru | September 2026 |
+| id\_card: Acenta kodu | **Interactions API**  `antigravity-preview-09-2026` |
+| saveDesteklenen veri türleri | **Giriş**  Metin, Resim  **Çıkış**  Metin |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş bağlam penceresi**  1.048.576 (yaklaşık 135.000'e sıkıştırılmış)  **Çıkış jetonu sınırı**  65.536 |
+| 123Sürümler | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Önizleme: `antigravity-preview-09-2026` |
+| calendar\_monthSon güncelleme | Eylül 2026 |
 
-Kirim masukan
+Geri bildirim gönderin
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Terakhir diperbarui pada 2026-09-24 UTC.
+Son güncelleme tarihi: 2026-09-24 UTC.
 
-Ada masukan untuk kami?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-24 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-24 UTC."],[],[]]

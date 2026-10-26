@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=vi
-fetched_at: 2026-10-19T05:52:47.325164+00:00
+fetched_at: 2026-10-26T05:57:18.879996+00:00
 title: "B\u1ea3n xem tr\u01b0\u1edbc tr\u1ef1c ti\u1ebfp Gemini 3.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -18,50 +18,53 @@ Gửi ý kiến phản hồi
 
 # Bản xem trước trực tiếp Gemini 3.1 Flash
 
-Gemini 3.1 Flash Live Preview là một mô hình xem trước cũ để đối thoại theo thời gian thực và các ứng dụng AI tương tác bằng giọng nói.
+Gemini 3.1 Flash Live Preview là một mô hình xem trước cũ dành cho các ứng dụng AI ưu tiên giọng nói và hội thoại theo thời gian thực.
 
 [Dùng thử trong Google AI Studio](https://aistudio.google.com/live?model=gemini-3.1-flash-live-preview&hl=vi)
 
 ## Tài liệu
 
-Hãy truy cập vào hướng dẫn về [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=vi) để xem toàn bộ các tính năng và chức năng.
+Hãy truy cập vào hướng dẫn về [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=vi) để biết toàn bộ thông tin về các tính năng và chức năng.
 
 ## gemini-3.1-flash-live-preview
 
 | Thuộc tính | Mô tả |
 | --- | --- |
-| Mã kiểu id\_card | `gemini-3.1-flash-live-preview` |
-| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, hình ảnh, âm thanh, video  **Đầu ra**  Văn bản và âm thanh |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  131.072  **Giới hạn số token đầu ra**  65.536 |
-| handymanChức năng | **[Tạo âm thanh](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi)**  Được hỗ trợ  **[Lưu vào bộ nhớ đệm](https://ai.google.dev/gemini-api/docs/caching?hl=vi)**  Không được hỗ trợ  **[Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi)**  Không được hỗ trợ  **[Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi)**  Không được hỗ trợ  **[Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi)**  Được hỗ trợ  **[Neo bám vào Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi)**  Không được hỗ trợ  **[Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi)**  Không được hỗ trợ  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=vi)**  Được hỗ trợ  **[Tìm trong phần liên kết thực tế](https://ai.google.dev/gemini-api/docs/google-search?hl=vi)**  Được hỗ trợ  **[Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi)**  Không được hỗ trợ  **[Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi)**  Được hỗ trợ  **[Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi)**  Không được hỗ trợ |
-| speedCác lựa chọn thưởng thức nội dung | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi)**  Không được hỗ trợ |
-| 123Phiên bản | Đọc [các mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin chi tiết.  - Xem trước: `gemini-3.1-flash-live-preview` |
+| id\_cardMã kiểu máy | `gemini-3.1-flash-live-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, hình ảnh, âm thanh  **Kết quả**  Văn bản và âm thanh |
+| token\_autoGiới hạn về mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn về số lượng mã thông báo đầu vào**  131.072  **Giới hạn mã thông báo đầu ra**  65.536 |
+| handymanTính năng | **[Tạo âm thanh](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi)**  Được hỗ trợ  **[Lưu vào bộ nhớ đệm](https://ai.google.dev/gemini-api/docs/caching?hl=vi)**  Không được hỗ trợ  **[Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi)**  Không được hỗ trợ  **[Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi)**  Không được hỗ trợ  **[Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi)**  Được hỗ trợ  **[Neo bám vào Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi)**  Không được hỗ trợ  **[Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi)**  Không được hỗ trợ  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=vi)**  Được hỗ trợ  **[Tìm kiếm neo bám](https://ai.google.dev/gemini-api/docs/google-search?hl=vi)**  Được hỗ trợ  **[Kết quả có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi)**  Không được hỗ trợ  **[Đang suy nghĩ](https://ai.google.dev/gemini-api/docs/thinking?hl=vi)**  Được hỗ trợ  **[Bối cảnh từ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi)**  Không được hỗ trợ |
+| speedLựa chọn sử dụng | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi)**  Không được hỗ trợ |
+| 123 phiên bản | Hãy đọc [các mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin chi tiết.  - Xem trước: `gemini-3.1-flash-live-preview` |
 | calendar\_monthThông tin cập nhật mới nhất | Tháng 3 năm 2026 |
-| Thẻ mô hình id\_card | [Thẻ mô hình](https://deepmind.google/models/model-cards/gemini-3-1-flash-audio/?hl=vi) |
+| Thẻ mô hình id\_card | [Thẻ thông tin mô hình](https://deepmind.google/models/model-cards/gemini-3-1-flash-audio/?hl=vi) |
 
 ## Di chuyển từ Gemini 2.5 Flash Live
 
-Gemini 3.1 Flash Live Preview được tối ưu hoá cho các cuộc đối thoại theo thời gian thực có độ trễ thấp.
+Gemini 3.1 Flash Live Preview được tối ưu hoá cho các cuộc trò chuyện theo thời gian thực, có độ trễ thấp.
 Khi di chuyển từ `gemini-2.5-flash-native-audio-preview-12-2025`, hãy cân nhắc những điều sau:
 
 - **Chuỗi mô hình**: Cập nhật chuỗi mô hình từ `gemini-2.5-flash-native-audio-preview-12-2025` thành `gemini-3.1-flash-live-preview`.
-- **Cấu hình suy nghĩ**: Gemini 3.1 sử dụng `thinkingLevel` (với các chế độ cài đặt như `minimal`, `low`, `medium` và `high`) thay vì `thinkingBudget`.
-  Chế độ mặc định là `minimal` để tối ưu hoá cho độ trễ thấp nhất. Xem phần [Cấp độ tư duy và ngân sách](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#levels-budgets).
-- **Sự kiện trên máy chủ**: Giờ đây, một sự kiện [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=vi#bidigeneratecontentservercontent) có thể chứa nhiều phần nội dung cùng lúc (ví dụ: các đoạn âm thanh và bản chép lời). Cập nhật mã để xử lý tất cả các phần trong mỗi sự kiện nhằm tránh bỏ lỡ nội dung.
-- **Nội dung của ứng dụng**: `send_client_content` được hỗ trợ trong toàn bộ vòng đời của phiên với các vai trò rõ ràng (`user` hoặc `model`). Việc đặt `turn_complete=true` sẽ làm gián đoạn vô điều kiện quá trình tạo mô hình đang hoạt động.
-  Xem phần [Cập nhật nội dung gia tăng](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#incremental-updates).
-- **Phạm vi phủ sóng**: Mặc định là [`TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`](https://ai.google.dev/api/live?hl=vi#turncoverage) thay vì `TURN_INCLUDES_ONLY_ACTIVITY`. Lượt phản hồi của mô hình hiện bao gồm hoạt động âm thanh được phát hiện và tất cả các khung hình video. Nếu ứng dụng của bạn hiện đang gửi một luồng khung hình video liên tục, bạn có thể muốn cập nhật ứng dụng để chỉ gửi khung hình video khi có hoạt động âm thanh nhằm tránh phát sinh thêm chi phí.
-- **Gọi hàm không đồng bộ**: Chưa được hỗ trợ. Chỉ có thể gọi hàm đồng bộ. Mô hình sẽ không bắt đầu phản hồi cho đến khi bạn gửi phản hồi của công cụ. Xem phần [Gọi hàm không đồng bộ](https://ai.google.dev/gemini-api/docs/live-tools?hl=vi#async-function-calling).
-- **Âm thanh chủ động và đối thoại cảm xúc**: Các tính năng này chưa được hỗ trợ trong Gemini 3.1 Flash Live. Xoá mọi cấu hình cho các tính năng này khỏi mã của bạn. Xem phần [Âm thanh chủ động](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#proactive-audio) và [Đoạn hội thoại cảm xúc](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#affective-dialog).
+- **Cấu hình tư duy**: Gemini 3.1 sử dụng `thinkingLevel` (với các chế độ cài đặt như `minimal`, `low`, `medium` và `high`) thay vì `thinkingBudget`.
+  Giá trị mặc định là `minimal` để tối ưu hoá cho độ trễ thấp nhất. Xem phần
+  [Cấp độ tư duy và ngân sách](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#levels-budgets).
+- **Sự kiện máy chủ**: Giờ đây, một sự kiện [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=vi#bidigeneratecontentservercontent) có thể chứa nhiều phần nội dung cùng lúc (ví dụ: các đoạn âm thanh và bản chép lời). Hãy cập nhật mã để xử lý tất cả các phần trong mỗi sự kiện nhằm tránh bỏ sót nội dung.
+- **Nội dung của ứng dụng**: `send_client_content` được hỗ trợ trong toàn bộ vòng đời của phiên với các vai trò rõ ràng (`user` hoặc `model`). Việc đặt `turn_complete=true` sẽ làm gián đoạn quá trình tạo mô hình đang hoạt động mà không cần điều kiện.
+  Xem phần [Bản cập nhật nội dung gia tăng](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#incremental-updates).
+- **Phạm vi rẽ**: Mặc định là [`TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`](https://ai.google.dev/api/live?hl=vi#turncoverage) thay vì `TURN_INCLUDES_ONLY_ACTIVITY`. Lượt của mô hình hiện bao gồm hoạt động âm thanh được phát hiện và tất cả khung hình video. Nếu ứng dụng của bạn hiện gửi một luồng khung hình video liên tục, bạn nên cập nhật ứng dụng để chỉ gửi khung hình video khi có hoạt động âm thanh nhằm tránh phát sinh thêm chi phí.
+- **Gọi hàm không đồng bộ**: Chưa được hỗ trợ. Tính năng gọi hàm chỉ hoạt động đồng bộ. Mô hình sẽ không bắt đầu phản hồi cho đến khi bạn gửi phản hồi của công cụ. Xem phần [Gọi hàm không đồng bộ](https://ai.google.dev/gemini-api/docs/live-tools?hl=vi#async-function-calling).
+- **Âm thanh chủ động và cuộc trò chuyện thể hiện cảm xúc**: Gemini 3.1 Flash Live chưa hỗ trợ các tính năng này. Xoá mọi cấu hình cho các tính năng này khỏi mã của bạn. Xem phần
+  [Âm thanh chủ động](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#proactive-audio) và
+  [Cuộc trò chuyện thể hiện cảm xúc](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#affective-dialog).
 
-Để biết thông tin so sánh chi tiết về các tính năng, hãy xem bảng [So sánh mô hình](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#model-comparison) trong hướng dẫn về các chức năng.
+Để xem thông tin so sánh chi tiết về tính năng, hãy xem bảng [So sánh mô hình](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi#model-comparison) trong hướng dẫn về các chức năng.
 
 Gửi ý kiến phản hồi
 
 Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Cập nhật lần gần đây nhất: 2026-09-17 UTC.
+Cập nhật lần gần đây nhất: 2026-10-19 UTC.
 
 Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-17 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-19 UTC."],[],[]]

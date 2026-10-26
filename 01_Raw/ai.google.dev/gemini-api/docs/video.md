@@ -1,50 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video?hl=he
-fetched_at: 2026-10-19T05:57:50.081630+00:00
-title: "\u05d9\u05e6\u05d9\u05e8\u05ea \u05e1\u05e8\u05d8\u05d5\u05e0\u05d9\u05dd \u05d1-Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video?hl=fa
+fetched_at: 2026-10-26T05:48:04.482289+00:00
+title: "\u062a\u0648\u0644\u06cc\u062f \u0648\u06cc\u062f\u06cc\u0648 \u062f\u0631 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫Gemini 4 Argon זמין עכשיו. [רוצים לנסות?](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=he)
+‫Gemini 4 Argon اکنون دردسترس است. [امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fa).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [صفحه اصلی](https://ai.google.dev/?hl=fa)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
+- [سندنگار](https://ai.google.dev/gemini-api/docs?hl=fa)
 
-שליחת משוב
+ارسال بازخورد
 
-# יצירת סרטונים ב-Gemini API
+# تولید ویدیو در Gemini API
 
-‫Gemini API מציע שני מודלים ליצירת סרטונים: [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=he) ו-[Veo](https://ai.google.dev/gemini-api/docs/veo?hl=he).
-כל אחד מהם מיועד לתהליכי עבודה שונים.
+از [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=fa) به‌عنوان مدل خود برای تولید ویدیو و ویرایش مکالمه‌ای ویدیو در Gemini API استفاده کنید. این مدل انسجام ویدیویی برتر، استدلال چندورودی (پشتیبانی هم‌زمان از ورودی‌های نوشتاری، تصویری، صوتی، و ویدیویی)، ثبات شخصیت، دقت واقعی، و ویرایش مکالمه‌ای چندنوبتی (مثلاً جایگزینی عناصر یا تغییرات چشم‌انداز) را ارائه می‌دهد.
 
-להשתמש ב-Gemini Omni Flash כמודל ברירת המחדל ליצירת סרטונים. הוא מספק עקביות מעולה בסרטונים, חשיבה רציונלית מרובת קלטים (תמיכה בקלטים של טקסט, תמונות, אודיו וסרטונים בו-זמנית), עקביות של הדמויות, דיוק עובדתי ועריכה רב-שלבית בממשק שיחה (למשל, החלפת רכיבים או שינויים בפרספקטיבה). אם אתם צריכים יכולות ספציפיות כמו הרחבת סצנה, שליטה בפריים האחרון או שילוב עם צינורות עיבוד נתונים מדור קודם.
+«پیش‌نمایش Veo 3.1» در Gemini API بسته شده است.
 
 ## Gemini Omni Flash
 
-‫Gemini Omni Flash הוא מודל מהיר ומולטי-מודאלי ליצירת סרטונים ולעריכה של סרטונים בשיחה. הכלי מצטיין בהפיכת הנחיות טקסט ותמונות לסרטונים קצרים במהירות, ומאפשר לשפר את התוצאות בכמה שלבים באמצעות Interactions API.
+‫Gemini Omni Flash مدلی سریع و چندوجهی برای تولید ویدیو و ویرایش مکالمه‌ای ویدیو است. این مدل در تبدیل سریع پیام‌واره‌های نوشتاری و تصاویر به ویدیوهای کوتاه عالی است و به شما امکان می‌دهد نتایج را در چندین نوبت بااستفاده از Interactions API اصلاح کنید.
 
-[איך מתחילים להשתמש ב-Gemini Omni Flash →](https://ai.google.dev/gemini-api/docs/omni?hl=he)
+[شروع کار با Gemini Omni Flash →](https://ai.google.dev/gemini-api/docs/omni?hl=fa)
 
 ## Veo 3.1
 
-‫Veo 3.1 הוא מודל ליצירת סרטונים עם אודיו מובנה. הוא תומך בתכונות כמו הרחבת סרטונים, יצירה ספציפית של פריימים והנחיות מבוססות-תמונות באמצעות `generateContent` API.
+## درک ویدیو
 
-[איך מתחילים לעבוד עם Veo 3.1 →](https://ai.google.dev/gemini-api/docs/veo?hl=he)
+اگر به‌جای تولید ویدیو جدید، نیاز به دریافت و تحلیل محتوای ویدیویی موجود دارید،
+[راهنمای درک ویدیو](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fa) را ببینید.
 
-## הבנת סרטונים
+ارسال بازخورد
 
-אם אתם צריכים להטמיע ולנתח תוכן וידאו קיים במקום ליצור סרטון חדש, כדאי לעיין ב[מדריך להבנת סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he).
+جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
 
-שליחת משוב
+تاریخ آخرین به‌روزرسانی 2026-10-22 به‌وقت ساعت هماهنگ جهانی.
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
 
-עדכון אחרון: 2026-06-30 (שעון UTC).
-
-רוצה לתת לנו משוב?
-
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-30 (שעון UTC)."],[],[]]
+[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-22 به‌وقت ساعت هماهنگ جهانی."],[],[]]

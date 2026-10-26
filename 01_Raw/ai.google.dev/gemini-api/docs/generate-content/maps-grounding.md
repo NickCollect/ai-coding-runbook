@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/maps-grounding?hl=ja
-fetched_at: 2026-10-19T05:42:32.937569+00:00
+fetched_at: 2026-10-26T05:40:40.880624+00:00
 title: "Google \u30de\u30c3\u30d7\u306b\u3088\u308b\u30b0\u30e9\u30a6\u30f3\u30c7\u30a3\u30f3\u30b0 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

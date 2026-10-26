@@ -1,276 +1,273 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=es-419
-fetched_at: 2026-10-19T05:52:09.977122+00:00
-title: "Regiones disponibles para Google AI Studio y la API de Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=sq
+fetched_at: 2026-10-26T05:48:49.717834+00:00
+title: "Rajonet e disponueshme p\u00ebr Google AI Studio dhe Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
+Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
+- [Dokumentet](https://ai.google.dev/gemini-api/docs?hl=sq)
 
-Enviar comentarios
+Dërgo komente
 
-# Regiones disponibles para Google AI Studio y la API de Gemini
+# Rajonet e disponueshme për Google AI Studio dhe Gemini API
 
-Si llegaste a esta página mientras intentabas acceder a [Google AI Studio](https://aistudio.google.com/?hl=es-419), es posible que se
-deba a uno de los siguientes motivos:
+Nëse ke arritur në këtë faqe ndërkohë që po përpiqeshe të hapje
+[Google AI Studio](https://aistudio.google.com/?hl=sq), rajoni yt mund të mos mbështetet. Referoju seksionit më poshtë për një listë të rajoneve të mbështetura.
 
-- **Restricciones regionales**: Google AI Studio no está disponible en tu región. Consulta la sección a continuación para obtener una lista de las regiones admitidas.
-- **Requisitos de edad**: No cumples con el requisito de edad mínima (18 años) para acceder a este servicio.
-- **Verificación de cuenta**: Es posible que tengas acceso al servicio, pero aún no [verificaste tu edad](https://support.google.com/accounts/answer/10071085?hl=es-419) en tu Cuenta de Google.
+Për kërkesa të tjera për qasjen, si p.sh.
+[kërkesat për moshën](https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=sq#age-requirements),
+shiko [Zgjidhja e problemeve për Google AI Studio](https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=sq) dhe
+[Kushtet tona të shërbimit](https://ai.google.dev/gemini-api/terms?hl=sq).
 
-Para obtener más detalles sobre los requisitos, consulta nuestras [Condiciones del Servicio](https://ai.google.dev/gemini-api/terms?hl=es-419).
+## Rajonet e disponueshme
 
-## Regiones disponibles
+Gemini API dhe Google AI Studio ofrohen në shtetet dhe territoret e mëposhtme. Nëse nuk je në një nga këto shtete ose territore, provo
+[Gemini API në platformën e agjentit të Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=sq):
 
-.
-
-La API de Gemini y Google AI Studio están disponibles en los siguientes países y territorios. Si no te encuentras en uno de estos países o territorios, prueba la
-[API de Gemini en Agent Platform de Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=es-419):
-
-- Albania
-- Argelia
-- Samoa Americana
-- Andorra
-- Angola
-- Anguila
-- Antártida
-- Antigua y Barbuda
-- Argentina
-- Armenia
-- Aruba
-- Australia
-- Austria
-- Azerbaiyán
-- Bahamas
-- Baréin
-- Bangladés
+- Shqipëri
+- Algjeri
+- Samoa Amerikane
+- Andorrë
+- Angolë
+- Anguilë
+- Antarktidë
+- Antigua-e-Barbudë
+- Argjentinë
+- Armeni
+- Arubë
+- Australi
+- Austri
+- Azerbajxhan
+- Bahama
+- Bahrejn
+- Bangladesh
 - Barbados
-- Bélgica
-- Belice
-- Benín
-- Bermudas
-- Bután
-- Bolivia
-- Bosnia-Herzegovina
-- Botsuana
-- Brasil
-- Territorio Británico del Océano Índico
-- Islas Vírgenes Británicas
-- Brunéi
-- Bulgaria
-- Burkina Faso
+- Belgjikë
+- Belize
+- Benin
+- Bermudet
+- Butan
+- Bolivi
+- Bosnjë-Hercegovinë
+- Botsvanë
+- Brazil
+- Territori Britanik i Oqeanit Indian
+- Ishujt e Virgjër Britanikë
+- Brunei
+- Bullgari
+- Burkina-Faso
 - Burundi
-- Cabo Verde
-- Camboya
-- Camerún
-- Canadá
-- Caribe Neerlandés
-- Islas Caimán
-- República Centroafricana
-- Chad
-- Chile
-- Isla de Navidad
-- Islas Cocos (Keeling)
-- Colombia
-- Comoras
-- Islas Cook
-- Costa Rica
-- Costa de Marfil
-- Croacia
-- Curazao
-- República Checa
-- República Democrática del Congo
-- Dinamarca
-- Yibuti
-- Dominica
-- República Dominicana
-- Ecuador
-- Egipto
-- El Salvador
-- Guinea Ecuatorial
-- Eritrea
-- Estonia
-- Esuatini
-- Etiopía
-- Islas Malvinas
-- Islas Feroe
-- Fiyi
-- Finlandia
-- Francia
-- Guayana Francesa
-- Gabón
+- Kepi i Blertë
+- Kamboxhia
+- Kamerun
+- Kanada
+- Karaibet Holandeze
+- Ishujt Kajman
+- Republika e Afrikës Qendrore
+- Çad
+- Kili
+- Ishulli i Krishtlindjes
+- Ishulli i Kokosit
+- Kolumbi
+- Komore
+- Ishujt Kuk
+- Kosta-Rikë
+- Bregu i Fildishtë
+- Kroaci
+- Kuraçao
+- Republika Çeke
+- Republika Demokratike e Kongos
+- Danimarkë
+- Xhibuti
+- Dominikë
+- Republika Dominikane
+- Ekuador
+- Egjipt
+- Salvador
+- Guinea Ekuatoriale
+- Eritre
+- Estoni
+- Esvatini
+- Etiopi
+- Ishujt Falkland (Islas Malvinas)
+- Ishujt Faroe
+- Fixhi
+- Finlandë
+- Francë
+- Guajana Franceze
+- Gabon
 - Gambia
-- Georgia
-- Alemania
-- Ghana
-- Gibraltar
-- Grecia
-- Groenlandia
-- Granada
+- Gjeorgji
+- Gjermani
+- Ganë
+- Gjibraltar
+- Greqi
+- Groenlandë
+- Grenadë
 - Guam
-- Guatemala
-- Guernsey
-- Guinea
-- Guinea-Bisáu
-- Guyana
-- Haití
-- Islas Heard y McDonald
+- Guatemalë
+- Gernsej
+- Guine
+- Guine-Bisau
+- Guajanë
+- Haiti
+- Ishulli Hërd dhe Ishujt MekDonald
 - Honduras
-- Hungría
-- Islandia
-- India
-- Indonesia
+- Hungari
+- Islandë
+- Indi
+- Indonezi
 - Irak
-- Irlanda
-- Isla de Man
-- Israel
-- Italia
-- Jamaica
-- Japón
-- Jersey
-- Jordania
-- Kazajistán
+- Irlandë
+- Ishulli i Menit
+- Izrael
+- Itali
+- Xhamajkë
+- Japoni
+- Xhersi
+- Jordani
+- Kazakistan
 - Kenia
 - Kiribati
-- Kosovo
-- Kuwait
-- Kirguistán
+- Kosovë
+- Kuvajt
+- Kirgizstan
 - Laos
-- Letonia
-- Líbano
+- Letoni
+- Liban
 - Lesoto
-- Liberia
-- Libia
-- Liechtenstein
-- Lituania
-- Luxemburgo
-- Madagascar
-- Malaui
-- Malasia
-- Maldivas
+- Liberi
+- Libi
+- Lihtenshtajn
+- Lituani
+- Luksemburg
+- Madagaskar
+- Malavi
+- Malajzi
+- Maldive
 - Mali
-- Malta
-- Islas Marshall
-- Mauritania
-- Mauricio
-- México
-- Micronesia
-- Moldavia
-- Mónaco
-- Mongolia
-- Montenegro
-- Montserrat
-- Marruecos
-- Mozambique
-- Namibia
+- Maltë
+- Ishujt Marshall
+- Mauritani
+- Mauritius
+- Meksikë
+- Mikronezi
+- Moldavi
+- Monako
+- Mongoli
+- Mali i Zi
+- Montserat
+- Marok
+- Mozambik
+- Namibi
 - Nauru
 - Nepal
-- Países Bajos
-- Nueva Caledonia
-- Nueva Zelanda
-- Nicaragua
-- Níger
-- Nigeria
+- Holandë
+- Kaledonia e Re
+- Zelanda e Re
+- Nikaragua
+- Niger
+- Nigeri
 - Niue
-- Isla Norfolk
-- Macedonia del Norte
-- Islas Marianas del Norte
-- Noruega
-- Omán
-- Pakistán
-- Palaos
-- Palestina
-- Panamá
-- Papúa Nueva Guinea
-- Paraguay
-- Perú
-- Filipinas
-- Islas Pitcairn
-- Polonia
-- Portugal
-- Puerto Rico
-- Catar
-- República de Chipre
-- República del Congo
-- Rumania
-- Ruanda
-- Reunión
-- San Bartolomé
-- Santa Elena, Ascensión y Tristán de Acuña
-- San Cristóbal y Nieves
-- Santa Lucía
-- San Pedro y Miquelón
-- San Vicente y las Granadinas
+- Ishulli Norfolk
+- Maqedonia e Veriut
+- Ishujt e Marianës Veriore
+- Norvegji
+- Oman
+- Pakistan
+- Palau
+- Palestinë
+- Panama
+- Papua Guinea e Re
+- Paraguai
+- Peru
+- Filipine
+- Ishujt Pitkern
+- Poloni
+- Portugali
+- Porto-Riko
+- Katar
+- Republika e Qipros
+- Republika e Kongos
+- Rumani
+- Ruandë
+- Reunion
+- Shën-Bartolomeu
+- Shën-Helena, Asension dhe Tristan-da-Kuna
+- Shën-Kits dhe Nevis
+- Shën-Luçia
+- Shën-Pier dhe Mikelon
+- Shën-Vincent dhe Grenadine
 - Samoa
-- San Marino
-- Santo Tomé y Príncipe
-- Arabia Saudita
+- San-Marino
+- Sao-Tome e Prinsipe
+- Arabia Saudite
 - Senegal
-- Serbia
-- Seychelles
-- Sierra Leona
-- Singapur
-- Eslovaquia
-- Eslovenia
-- Islas Salomón
-- Somalia
-- Sudáfrica
-- Islas Georgias del Sur y Sándwich del Sur
-- Corea del Sur
-- Sudán del Sur
-- España
-- Sri Lanka
-- Sudán
+- Serbi
+- Sejshele
+- Sierra-Leone
+- Singapor
+- Sllovaki
+- Slloveni
+- Ishujt e Solomonit
+- Somali
+- Afrika e Jugut
+- Xhorxha Jugore dhe Ishujt Senduiçë të Jugut
+- Koreja e Jugut
+- Sudani i Jugut
+- Spanjë
+- Sri-Lankë
+- Sudan
 - Surinam
-- Suecia
-- Suiza
-- Taiwán
-- Tayikistán
-- Tanzania
-- Tailandia
-- Timor Oriental
+- Suedi
+- Zvicër
+- Tajvan
+- Taxhikistan
+- Tanzani
+- Tajlandë
+- Timori Lindor
 - Togo
 - Tokelau
 - Tonga
-- Trinidad y Tobago
-- Túnez
-- Turkmenistán
-- Islas Turcas y Caicos
-- Tuvalu
-- Türkiye
-- Uganda
-- Ucrania
-- Emiratos Árabes Unidos
-- Reino Unido
-- Estados Unidos
-- Islas Ultramarinas Menores de los Estados Unidos
-- Uruguay
-- Islas Vírgenes de los EE.UU.
-- Uzbekistán
+- Trinidad-e-Tobago
+- Tunizi
+- Turkmenistan
+- Ishujt Turks dhe Kaikos
+- Tuval
+- Turqi
+- Ugandë
+- Ukrainë
+- Emiratet e Bashkuara Arabe
+- Mbretëria e Bashkuar
+- Shtetet e Bashkuara
+- Ishujt Periferikë të SHBA-së
+- Uruguai
+- Ishujt e Virgjër të SHBA-së
+- Uzbekistan
 - Vanuatu
-- Ciudad del Vaticano
-- Venezuela
+- Qyteti i Vatikanit
+- Venezuelë
 - Vietnam
-- Wallis y Futuna
-- Sahara Occidental
-- Yemen
+- Uollis e Futuna
+- Saharaja Perëndimore
+- Jemen
 - Zambia
-- Zimbabue
-- Islas Åland
+- Zimbabve
+- Ishujt Aland
 
-Enviar comentarios
+Dërgo komente
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-Última actualización: 2026-04-29 (UTC)
+Përditësimi i fundit: 2026-10-22 UTC.
 
-¿Quieres brindar más información?
+Duhet të na tregosh më shumë?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-22 UTC."],[],[]]

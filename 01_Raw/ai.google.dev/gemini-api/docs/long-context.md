@@ -1,152 +1,148 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=vi
-fetched_at: 2026-10-19T05:50:09.576551+00:00
-title: "Ng\u1eef c\u1ea3nh d\u00e0i \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=ko
+fetched_at: 2026-10-26T05:47:28.784469+00:00
+title: "\uae34 \ucee8\ud14d\uc2a4\ud2b8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
+Gemini 4 Argon을 지금 이용 가능합니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-# Ngữ cảnh dài
+# 긴 컨텍스트
 
-Nhiều mô hình Gemini có cửa sổ ngữ cảnh lớn gồm 1 triệu token trở lên.
-Trước đây, các mô hình ngôn ngữ lớn (LLM) bị giới hạn đáng kể về lượng văn bản (hoặc token) có thể được truyền đến mô hình cùng một lúc.
-Cửa sổ ngữ cảnh dài của Gemini mở ra nhiều trường hợp sử dụng và mô hình nhà phát triển mới.
+많은 Gemini 모델에는 100만 개 이상의 토큰이 포함된 대규모 컨텍스트 윈도우가 제공됩니다.
+지금까지 대규모 언어 모델 (LLM)은 한 번에 모델에 전달할 수 있는 텍스트 (또는 토큰) 양에 의해 크게 제한되었습니다.
+Gemini 긴 컨텍스트 윈도우는 많은 새로운 사용 사례와 개발자 패러다임을 제공합니다.
 
-Mã mà bạn đã sử dụng cho các trường hợp như [văn bản
-tạo](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi) hoặc [đa phương thức
-đầu vào](https://ai.google.dev/gemini-api/docs/vision?hl=vi) sẽ hoạt động mà không cần thay đổi gì với ngữ cảnh dài.
+[텍스트
+생성](https://ai.google.dev/gemini-api/docs/text-generation?hl=ko) 또는 [멀티모달
+입력](https://ai.google.dev/gemini-api/docs/vision?hl=ko)과 같은 사례에 이미 사용 중인 코드는 긴 컨텍스트와 함께 변경 없이 작동합니다.
 
-Tài liệu này cung cấp cho bạn thông tin tổng quan về những gì bạn có thể đạt được khi sử dụng các mô hình có cửa sổ ngữ cảnh gồm 1 triệu token trở lên. Trang này cung cấp thông tin tổng quan ngắn gọn về cửa sổ ngữ cảnh, đồng thời khám phá cách nhà phát triển nên suy nghĩ về ngữ cảnh dài, các trường hợp sử dụng ngữ cảnh dài trong thế giới thực và cách tối ưu hoá việc sử dụng ngữ cảnh dài.
+이 문서에서는 100만 개 이상의 토큰이 포함된 컨텍스트 윈도우를 사용하는 모델로 달성할 수 있는 작업을 간략하게 설명합니다. 이 페이지에서는 컨텍스트 윈도우를 간략하게 살펴보고 개발자가 긴 컨텍스트에 대해 생각하는 방식, 긴 컨텍스트의 다양한 실제 사용 사례, 긴 컨텍스트 사용을 최적화하는 방법을 알아봅니다.
 
-Để biết kích thước cửa sổ ngữ cảnh của các mô hình cụ thể, hãy xem trang
-[Mô hình](https://ai.google.dev/gemini-api/docs/models?hl=vi).
+특정 모델의 컨텍스트 윈도우 크기는
+[모델](https://ai.google.dev/gemini-api/docs/models?hl=ko) 페이지를 참고하세요.
 
-## Cửa sổ ngữ cảnh là gì?
+## 컨텍스트 윈도우란 무엇인가요?
 
-Cách cơ bản để bạn sử dụng các mô hình Gemini là truyền thông tin (ngữ cảnh) đến mô hình. Sau đó, mô hình sẽ tạo ra phản hồi. Bạn có thể hình dung cửa sổ ngữ cảnh giống như bộ nhớ ngắn hạn. Bộ nhớ ngắn hạn của một người chỉ có thể lưu trữ một lượng thông tin có hạn và điều này cũng đúng với các mô hình tạo sinh.
+Gemini 모델을 사용하는 기본적인 방법은 모델에 정보를 전달하는 것입니다. 그러면 모델이 응답을 생성합니다. 컨텍스트 윈도우는 단기 메모리에 비유할 수 있습니다. 개인의 단기 메모리에 저장할 수 있는 정보 양은 제한되어 있으며 이는 생성 모델에서도 마찬가지입니다.
 
-Trong Gemini 4 (`gemini-4-argon`), cửa sổ ngữ cảnh 1 triệu token được **chia sẻ giữa các token đầu vào, token suy nghĩ và token đầu ra**. Mô hình này có thể tạo ra tối đa 1 triệu token đầu ra bằng cách sử dụng tính năng [giải mã dài](https://ai.google.dev/gemini-api/docs/long-decode?hl=vi). Nếu token đầu vào cộng với `max_output_tokens` vượt quá 1.048.576 token, thì API sẽ tự động giới hạn đầu ra ở không gian còn lại trong cửa sổ ngữ cảnh (`1,048,576` trừ đi token đầu vào của bạn). Các mô hình Gemini 3 và 2.5 trước đó sử dụng ngân sách riêng biệt cho 1 triệu token đầu vào và 64.000 token đầu ra.
+Gemini 4 (`gemini-4-argon`)에서 100만 개의 토큰 컨텍스트 윈도우는 **입력, 사고, 출력 토큰 간에 공유**되며 모델은 [긴 디코드](https://ai.google.dev/gemini-api/docs/long-decode?hl=ko)를 사용하여 최대 100만 개의 출력 토큰을 생성할 수 있습니다. 입력 토큰과 `max_output_tokens`가 1,048,576개의 토큰을 초과하면 API는 컨텍스트 윈도우의 남은 공간 (`1,048,576`에서 입력 토큰을 뺀 값)으로 출력 한도를 자동으로 제한합니다. 이전 Gemini 3 및 2.5 모델은 별도의 100만 개의 입력 및 64,000개의 출력 예산을 사용합니다.
 
-Bạn có thể đọc thêm về cách các mô hình hoạt động ở chế độ nền trong [hướng dẫn
-về mô hình tạo sinh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi#under-the-hood) của chúng tôi.
+모델이 작동하는 방식에 대한 자세한 내용은 [생성 모델
+가이드](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ko#under-the-hood)를 참조하세요.
 
-## Bắt đầu sử dụng ngữ cảnh dài
+## 긴 컨텍스트 시작하기
 
-Các phiên bản trước của mô hình tạo sinh chỉ có thể xử lý 8.000 token cùng một lúc. Các mô hình mới hơn đã đẩy con số này lên cao hơn bằng cách chấp nhận 32.000 hoặc thậm chí 128.000 token. Gemini là mô hình đầu tiên có khả năng chấp nhận 1 triệu token.
+이전 버전의 생성 모델은 한 번에 8,000개의 토큰만 처리할 수 있었습니다. 최신 모델은 토큰 32,000개 또는 128,000개를 허용하여 이를 더욱 발전시켰습니다. Gemini는 토큰 100만 개를 수용할 수 있는 최초의 모델입니다.
 
-Trong thực tế, 1 triệu token sẽ có dạng như sau:
+실제로 토큰 100만 개는 다음과 같이 표시됩니다.
 
-- 50.000 dòng mã (với 80 ký tự tiêu chuẩn mỗi dòng)
-- Tất cả tin nhắn văn bản bạn đã gửi trong 5 năm qua
-- 8 tiểu thuyết tiếng Anh có độ dài trung bình
-- Bản chép lời của hơn 200 tập podcast có độ dài trung bình
+- 코드 50,000줄(줄당 표준 80자)
+- 지난 5년 동안 보낸 모든 문자 메시지
+- 평균 길이의 영어 소설 8권
+- 평균 길이 200분이 넘는 팟캐스트 에피소드 스크립트
 
-Các cửa sổ ngữ cảnh hạn chế hơn thường thấy trong nhiều mô hình khác thường yêu cầu các chiến lược như tự ý loại bỏ tin nhắn cũ, tóm tắt nội dung, sử dụng RAG với cơ sở dữ liệu vectơ hoặc lọc câu lệnh để lưu token.
+다른 많은 모델에서 흔히 볼 수 있는 더 제한적인 컨텍스트 윈도우에는 오래된 메시지를 임의로 삭제하거나, 콘텐츠를 요약하거나, 벡터 데이터베이스와 함께 RAG를 사용하거나, 토큰을 저장하기 위해 프롬프트를 필터링하는 등의 전략이 필요한 경우가 많습니다.
 
-Mặc dù các kỹ thuật này vẫn có giá trị trong các trường hợp cụ thể, nhưng cửa sổ ngữ cảnh mở rộng của Gemini cho phép bạn áp dụng một phương pháp trực tiếp hơn: cung cấp trước tất cả thông tin liên quan. Vì các mô hình Gemini được xây dựng có mục đích với khả năng xử lý ngữ cảnh lớn, nên chúng thể hiện khả năng học tập mạnh mẽ trong ngữ cảnh. Ví dụ: chỉ sử dụng tài liệu hướng dẫn trong ngữ cảnh (một tài liệu tham khảo ngữ pháp gồm 500 trang, một từ điển và ≈400 câu song song), Gemini
-[đã học cách dịch](https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf)
-từ tiếng Anh sang tiếng Kalamang (một ngôn ngữ Papua có ít hơn 200 người nói) với chất lượng tương tự như một người học là con người sử dụng cùng tài liệu. Điều này minh hoạ sự thay đổi mô hình do ngữ cảnh dài của Gemini mang lại, giúp mở ra những khả năng mới thông qua việc học tập mạnh mẽ trong ngữ cảnh.
+이러한 기법은 특정 시나리오에서 여전히 유용하지만 Gemini의 광범위한 컨텍스트 윈도우는 모든 관련 정보를 사전에 제공하는 보다 직접적인 접근 방식을 지원합니다. Gemini 모델은 대규모 컨텍스트 기능을 위해 특별히 빌드되었기 때문에 강력한 컨텍스트 내 학습을 보여줍니다. 예를 들어 컨텍스트 내 학습 자료(500페이지 분량의 참조
+문법, 사전, ≈400개의 병렬 문장)만 사용하여 Gemini
+[는 영어에서 칼라망어(200명 미만의 화자를 가진 파푸아어)로 번역하는 방법을 학습했습니다.](https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf) 이는 동일한 자료를 사용하는 인간 학습자와 비슷한 품질입니다. 이는 Gemini의 긴 컨텍스트로 가능해진 패러다임 전환을 보여주며 강력한 컨텍스트 내 학습을 통해 새로운 가능성을 열어줍니다.
 
-## Trường hợp sử dụng ngữ cảnh dài
+## 긴 컨텍스트 사용 사례
 
-Mặc dù trường hợp sử dụng tiêu chuẩn cho hầu hết các mô hình tạo sinh vẫn là dữ liệu đầu vào dạng văn bản, nhưng họ mô hình Gemini cho phép bạn áp dụng một mô hình mới về các trường hợp sử dụng đa phương thức. Các mô hình này có thể hiểu được văn bản, video, âm thanh và hình ảnh một cách tự nhiên. Chúng
-đi kèm với [API Gemini, có thể nhận
-các loại](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=vi) tệp đa phương thức để
-thuận tiện.
+대부분의 생성 모델 표준 사용 사례는 여전히 텍스트 입력이지만 Gemini 모델 제품군은 멀티모달 사용 사례에 새로운 패러다임을 제공합니다. 이러한 모델은 기본적으로 텍스트, 동영상, 오디오, 이미지를 이해할 수 있습니다. 편의를 위해 멀티모달 파일
+형식을 사용하는 [Gemini API도 함께 제공됩니다.](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=ko)
 
-### Văn bản dài
+### 긴 형식 텍스트
 
-Văn bản đã chứng minh là lớp trí tuệ làm nền tảng cho phần lớn động lực xung quanh các LLM. Như đã đề cập trước đó, phần lớn hạn chế thực tế của các LLM là do không có cửa sổ ngữ cảnh đủ lớn để thực hiện một số tác vụ. Điều này dẫn đến việc nhanh chóng áp dụng tính năng tạo sinh tăng cường truy xuất (RAG) và các kỹ thuật khác giúp cung cấp cho mô hình thông tin theo ngữ cảnh có liên quan một cách linh hoạt. Giờ đây, với các cửa sổ ngữ cảnh ngày càng lớn, các kỹ thuật mới đang xuất hiện, giúp mở ra các trường hợp sử dụng mới.
+텍스트는 LLM과 관련된 많은 모멘텀을 뒷받침하는 인텔리전스 레이어로 입증되었습니다. 앞에서 언급했듯이 LLM의 실질적인 제한사항 중 상당수는 특정 태스크를 수행하기에 충분히 큰 환경설정 기간이 없기 때문입니다. 이로 인해 모델에 관련 컨텍스트 정보를 동적으로 제공하는 검색 증강 생성 (RAG) 및 기타 기술이 빠르게 채택되었습니다. 이제 더 큰 컨텍스트 윈도우를 통해 새로운 사용 사례를 활용할 수 있는 새로운 기술이 제공되고 있습니다.
 
-Sau đây là một số trường hợp sử dụng mới nổi và tiêu chuẩn cho ngữ cảnh dài dựa trên văn bản:
+긴 컨텍스트 기반 텍스트에 대한 몇 가지 새로운 표준 사용 사례는 다음과 같습니다.
 
-- Tóm tắt các tập hợp văn bản lớn
-  - Các lựa chọn tóm tắt trước đây với các mô hình ngữ cảnh nhỏ hơn sẽ yêu cầu một cửa sổ trượt hoặc một kỹ thuật khác để duy trì trạng thái của các phần trước đó khi các token mới được truyền đến mô hình
-- Hỏi và đáp
-  - Trước đây, điều này chỉ có thể thực hiện được với RAG do lượng ngữ cảnh hạn chế và khả năng nhớ lại thông tin thực tế của mô hình thấp
-- Quy trình công việc của tác nhân
-  - Văn bản là nền tảng của cách các tác nhân duy trì trạng thái về những việc họ đã làm và những việc họ cần làm; việc không có đủ thông tin về thế giới và mục tiêu của tác nhân là một hạn chế đối với độ tin cậy của tác nhân
+- 대규모 텍스트 코퍼스 요약
+  - 이전의 소규모 컨텍스트 모델을 사용한 요약 옵션에서는 새 토큰이 모델에 전달될 때 이전 섹션 상태가 유지되도록 슬라이딩 창이나 다른 기법이 필요했습니다.
+- 질문 및 답변
+  - 이전에는 컨텍스트가 제한되어 있고 모델의 사실에 기반한 재현율이 낮기 때문에 RAG를 통해서만 가능했습니다.
+- 에이전트형 워크플로
+  - 텍스트는 에이전트가 수행한 작업과 필요한 작업의 상태를 유지하는 방법의 기반이 됩니다. 현실에 대한 정보와 에이전트의 목표에 대한 정보가 충분하지 않으면 에이전트의 안정성에 제약이 됩니다.
 
-[Học tập trong ngữ cảnh nhiều ví dụ](https://arxiv.org/pdf/2404.11018) là một trong những
-khả năng độc đáo nhất được mở ra bởi các mô hình ngữ cảnh dài. Nghiên cứu đã chỉ ra rằng việc áp dụng mô hình ví dụ "một ví dụ" hoặc "nhiều ví dụ" phổ biến, trong đó mô hình được cung cấp một hoặc một vài ví dụ về một tác vụ và mở rộng quy mô đó lên hàng trăm, hàng nghìn hoặc thậm chí hàng trăm nghìn ví dụ, có thể dẫn đến các khả năng mới của mô hình. Phương pháp nhiều ví dụ này cũng cho thấy hiệu suất tương tự như các mô hình được tinh chỉnh cho một tác vụ cụ thể. Đối với các trường hợp sử dụng mà hiệu suất của mô hình Gemini chưa đủ để triển khai trong thực tế, bạn có thể thử phương pháp nhiều ví dụ. Như bạn có thể khám phá sau này trong phần tối ưu hoá ngữ cảnh dài, tính năng lưu vào bộ nhớ đệm ngữ cảnh giúp loại hình khối lượng công việc token đầu vào cao này trở nên khả thi hơn về mặt kinh tế và thậm chí giảm độ trễ trong một số trường hợp.
+[다중샷 컨텍스트 내 학습](https://arxiv.org/pdf/2404.11018)은 긴 컨텍스트 모델에서 제공하는 독보적인 기능 중 하나입니다. 연구에 따르면 모델에게 하나 또는 몇 가지의 태스크 예시를 제공하는 일반적인 '싱글샷' 또는 '멀티샷' 예시 패러다임을 수백, 수천, 또는 수십만 개의 예시로 확장하면 새로운 모델 기능으로 이어질 수 있습니다. 이 다중샷 접근 방식은 특정 태스크에 맞게 미세 조정된 모델과 유사하게 작동하는 것으로 나타났습니다. Gemini 모델의 성능이 프로덕션 출시에 아직 충분하지 않은 사용 사례의 경우 다중샷 접근 방식을 시도할 수 있습니다. 나중에 긴 컨텍스트 최적화 섹션에서 살펴볼 수 있듯이 컨텍스트 캐싱을 사용하면 이러한 유형의 높은 입력 토큰 워크로드를 훨씬 더 경제적으로 실행할 수 있으며 경우에 따라 지연 시간을 줄일 수도 있습니다.
 
-### Video dài
+### 긴 형식 동영상
 
-Tiện ích của nội dung video từ lâu đã bị hạn chế do thiếu khả năng tiếp cận của chính phương tiện này. Rất khó để xem lướt nội dung, bản chép lời thường không nắm bắt được sắc thái của video và hầu hết các công cụ không xử lý hình ảnh, văn bản và âm thanh cùng nhau. Với Gemini, các khả năng xử lý văn bản trong ngữ cảnh dài giúp bạn có thể suy luận và trả lời các câu hỏi về dữ liệu đầu vào đa phương thức với hiệu suất ổn định.
+동영상 콘텐츠 유용성은 오랫동안 매체 자체의 접근성 부족으로 인해 제한적이었습니다. 콘텐츠를 훑어보기 어려웠고, 스크립트가 동영상의 미묘한 차이를 포착하지 못하는 경우가 많았으며, 대부분의 도구는 이미지, 텍스트, 오디오를 함께 처리하지 못했습니다. Gemini에서는 긴 컨텍스트 텍스트 기능이 지속적인 성능으로 멀티모달 입력에 대한 질문을 추론하고 답변하는 기능으로 변환됩니다.
 
-Sau đây là một số trường hợp sử dụng mới nổi và tiêu chuẩn cho ngữ cảnh dài của video:
+동영상의 긴 컨텍스트에 대한 몇 가지 새로운 표준 사용 사례는 다음과 같습니다.
 
-- Hỏi và đáp về video
-- Bộ nhớ video, như minh hoạ trong [Project Astra của Google](https://deepmind.google/technologies/gemini/project-astra/?hl=vi)
-- Thêm phụ đề cho video
-- Hệ thống đề xuất video, bằng cách làm phong phú siêu dữ liệu hiện có bằng khả năng hiểu đa phương thức mới
-- Tuỳ chỉnh video bằng cách xem xét một tập hợp dữ liệu và siêu dữ liệu video liên quan, sau đó xoá các phần video không liên quan đến người xem
-- Kiểm duyệt nội dung video
-- Xử lý video theo thời gian thực
+- 동영상 질문 및 답변
+- [Google의 Project Astra](https://deepmind.google/technologies/gemini/project-astra/?hl=ko)에 표시된 것과 같은 동영상 메모리
+- 동영상 자막
+- 새로운 멀티모달 이해로 기존 메타데이터를 보강하는 동영상 추천 시스템
+- 데이터 및 관련 동영상 메타데이터 코퍼스를 살펴본 후 시청자와 관련이 없는 동영상 부분을 삭제하는 방식으로 동영상 맞춤설정
+- 동영상 콘텐츠 검토
+- 실시간 동영상 처리
 
-Khi làm việc với video, bạn cần cân nhắc cách [video được
-xử lý thành token](https://ai.google.dev/gemini-api/docs/tokens?hl=vi#video), vì điều này ảnh hưởng đến
-giới hạn thanh toán và mức sử dụng. Bạn có thể tìm hiểu thêm về cách đưa ra câu lệnh bằng tệp video trong
-[hướng dẫn về cách đưa ra câu lệnh](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide).
+동영상 작업을 수행할 때는 [동영상이 토큰으로 처리되는
+방식을 고려하는](https://ai.google.dev/gemini-api/docs/tokens?hl=ko#video) 것이 중요합니다. 이는
+결제 및 사용량 한도에 영향을 미칩니다. 동영상 파일로 프롬프트를 입력하는 방법은
+[프롬프트 가이드](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide)를 참조하세요.
 
-### Âm thanh dài
+### 긴 형식 오디오
 
-Các mô hình Gemini là những mô hình ngôn ngữ lớn đa phương thức đầu tiên có thể hiểu được âm thanh. Trước đây, quy trình làm việc điển hình của nhà phát triển sẽ bao gồm việc kết hợp nhiều mô hình dành riêng cho từng miền, chẳng hạn như mô hình chuyển lời nói thành văn bản và mô hình chuyển văn bản thành văn bản, để xử lý âm thanh. Điều này dẫn đến độ trễ bổ sung do thực hiện nhiều yêu cầu khứ hồi và giảm hiệu suất thường là do kiến trúc không kết nối của thiết lập nhiều mô hình.
+Gemini 모델은 오디오를 이해할 수 있는 최초의 네이티브 멀티모달 대규모 언어 모델이었습니다. 지금까지 일반적인 개발자 워크플로는 오디오를 처리하기 위해 음성 텍스트 변환 모델 및 텍스트 간 변환 모델과 같은 여러 도메인별 모델을 결합하는 방식으로 진행되었습니다. 이에 따라 여러 왕복 요청을 수행하는 데 필요한 추가 지연 시간이 발생하고, 다중 모델 설정의 연결 해제된 아키텍처로 인해 성능이 저하되었습니다.
 
-Sau đây là một số trường hợp sử dụng mới nổi và tiêu chuẩn cho ngữ cảnh âm thanh:
+오디오 컨텍스트에 대한 몇 가지 새로운 표준 사용 사례는 다음과 같습니다.
 
-- Chép lời và dịch theo thời gian thực
-- Hỏi và đáp về podcast / video
-- Chép lời và tóm tắt cuộc họp
-- Trợ lý thoại
+- 실시간 스크립트 작성 및 번역
+- 팟캐스트/동영상 질문 및 답변
+- 회의 스크립트 작성 및 요약
+- 음성 지원
 
-Bạn có thể tìm hiểu thêm về cách đưa ra câu lệnh bằng tệp âm thanh trong hướng dẫn về cách đưa ra câu lệnh [Prompting](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide).
+오디오 파일로 프롬프트를 입력하는 방법에 대한 자세한 내용은 [프롬프트 가이드](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide)를 참조하세요.
 
-## Tối ưu hoá ngữ cảnh dài
+## 긴 컨텍스트 최적화
 
-Phương pháp tối ưu hoá chính khi làm việc với ngữ cảnh dài và các mô hình Gemini
-là sử dụng [tính năng lưu vào bộ nhớ đệm ngữ cảnh](https://ai.google.dev/gemini-api/docs/caching?hl=vi). Ngoài việc không thể xử lý nhiều token trong một yêu cầu, hạn chế chính khác là chi phí. Nếu bạn có một ứng dụng "trò chuyện với dữ liệu của bạn" trong đó người dùng tải lên 10 tệp PDF, một video và một số tài liệu công việc, thì trước đây bạn sẽ phải làm việc với một công cụ/khung tạo sinh tăng cường khả năng truy xuất (RAG) phức tạp hơn để xử lý các yêu cầu này và trả một khoản tiền đáng kể cho các token được chuyển vào cửa sổ ngữ cảnh. Giờ đây, bạn có thể lưu vào bộ nhớ đệm các tệp mà người dùng tải lên và trả tiền để lưu trữ các tệp đó theo giờ. Ví dụ: chi phí đầu vào / đầu ra cho mỗi yêu cầu với Gemini Flash thấp hơn khoảng 4 lần so với chi phí đầu vào / đầu ra tiêu chuẩn. Vì vậy, nếu người dùng trò chuyện đủ với dữ liệu của họ, thì bạn (nhà phát triển) sẽ tiết kiệm được một khoản chi phí lớn.
+긴 컨텍스트와 Gemini
+모델을 사용할 때의 기본 최적화 방법은 [컨텍스트
+캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)을 사용하는 것입니다. 이전에는 단일 요청에서 많은 토큰을 처리하는 것이 불가능했으며 또 다른 제약조건은 비용이었습니다. 사용자가 10개의 PDF, 동영상, 일부 작업 문서를 업로드하는 '데이터와 채팅' 앱이 있는 경우 기존에는 이러한 요청을 처리하기 위해 더 복잡한 검색 증강 생성(RAG) 도구 /프레임워크를 사용해야 했고, 컨텍스트 윈도우로 이동되는 토큰에 대해 상당한 비용을 지불해야 했습니다. 이제 사용자가 업로드한 파일을 캐시하고 시간 단위로 저장 비용을 지불할 수 있습니다. 예를 들어 Gemini Flash의 요청당 입력 / 출력 비용은 표준 입력 / 출력 비용보다 약 4배 적으므로 사용자가 데이터와 충분히 채팅하면 개발자에게는 비용이 크게 절감됩니다.
 
-## Hạn chế của ngữ cảnh dài
+## 긴 컨텍스트 제한사항
 
-Trong nhiều phần của hướng dẫn này, chúng tôi đã nói về cách các mô hình Gemini đạt được hiệu suất cao trong nhiều bài kiểm tra đánh giá khả năng truy xuất thông tin trong một tập hợp dữ liệu lớn. Các bài kiểm tra này xem xét thiết lập cơ bản nhất, trong đó bạn có một thông tin duy nhất mà bạn đang tìm kiếm. Trong trường hợp bạn có thể có nhiều "thông tin" hoặc thông tin cụ thể mà bạn đang tìm kiếm, mô hình sẽ không hoạt động với độ chính xác tương tự. Hiệu suất có thể thay đổi ở mức độ lớn tuỳ thuộc vào ngữ cảnh. Bạn cần cân nhắc điều này vì có sự đánh đổi vốn có giữa việc truy xuất thông tin chính xác và chi phí. Bạn có thể đạt được khoảng 99% cho một truy vấn, nhưng bạn phải trả chi phí token đầu vào mỗi khi gửi truy vấn đó. Vì vậy, để truy xuất 100 thông tin, nếu bạn cần hiệu suất 99%, thì có thể bạn sẽ cần gửi 100 yêu cầu. Đây là một ví dụ điển hình về trường hợp tính năng lưu vào bộ nhớ đệm ngữ cảnh có thể giảm đáng kể chi phí liên quan đến việc sử dụng các mô hình Gemini trong khi vẫn duy trì hiệu suất cao.
+이 가이드의 여러 섹션에서는 Gemini 모델이 다양한 건초 더미에서 바늘 찾기 검색 평가에서 높은 성능을 달성하는 방법을 설명했습니다. 이러한 테스트에서는 하나의 바늘을 찾는 가장 기본적인 설정을 고려합니다. 찾고자 하는 '바늘', 즉 특정 정보가 여러 개 있는 경우 모델의 정확성은 동일하지 않습니다. 성능은 컨텍스트에 따라 크게 달라질 수 있습니다. 올바른 정보 검색과 비용 사이에는 고유한 절충점이 있으므로 이를 고려하는 것이 중요합니다. 단일 쿼리에서 최대 99%까지 얻을 수 있지만 쿼리를 전송할 때마다 입력 토큰 비용을 지불해야 합니다. 따라서 100개의 정보를 검색하는데 99%의 성능이 필요하다면 100개의 요청을 보내야 할 가능성이 높습니다. 이는 컨텍스트 캐싱이 성능을 높게 유지하면서 Gemini 모델 사용과 관련된 비용을 크게 줄일 수 있는 좋은 예시입니다.
 
-## Câu hỏi thường gặp
+## FAQ
 
-### Nơi tốt nhất để đặt truy vấn của tôi trong cửa sổ ngữ cảnh là ở đâu?
+### 컨텍스트 윈도우에서 쿼리를 배치하기에 가장 좋은 위치는 어디인가요?
 
-Trong hầu hết các trường hợp, đặc biệt là nếu tổng ngữ cảnh dài, thì hiệu suất của mô hình sẽ tốt hơn nếu bạn đặt truy vấn / câu hỏi ở cuối câu lệnh (sau tất cả ngữ cảnh khác).
+대부분의 경우, 특히 총 컨텍스트가 긴 경우 프롬프트 끝에 (다른 모든 컨텍스트 뒤에) 쿼리 / 질문을 배치하면 모델의 성능이 더 좋아집니다.
 
-### Tôi có bị giảm hiệu suất của mô hình khi thêm nhiều token vào một truy vấn không?
+### 쿼리에 토큰을 더 추가하면 모델 성능이 저하되나요?
 
-Nói chung, nếu bạn không cần truyền token đến mô hình, thì tốt nhất là bạn nên tránh truyền token. Tuy nhiên, nếu bạn có một khối lượng lớn token chứa một số thông tin và muốn hỏi về thông tin đó, thì mô hình có khả năng cao trong việc trích xuất thông tin đó (độ chính xác lên đến 99% trong nhiều trường hợp).
+일반적으로 토큰을 모델에 전달할 필요가 없는 경우 전달하지 않는 것이 좋습니다. 하지만 일부 정보가 포함된 많은 토큰이 있고 해당 정보에 대해 질문하고 싶은 경우 모델은 해당 정보를 추출할 수 있습니다 (대부분의 경우 최대 99% 정확도).
 
-### Làm cách nào để giảm chi phí khi sử dụng các truy vấn trong ngữ cảnh dài?
+### 긴 컨텍스트 쿼리로 비용을 줄이려면 어떻게 해야 하나요?
 
-Nếu bạn có một tập hợp token / ngữ cảnh tương tự mà bạn muốn sử dụng lại nhiều
-lần, thì [tính năng lưu vào bộ nhớ đệm ngữ cảnh](https://ai.google.dev/gemini-api/docs/caching?hl=vi) có thể giúp giảm chi phí
-liên quan đến việc hỏi về thông tin đó.
+여러 번 재사용하려는 유사한 토큰 / 컨텍스트 집합이 있는 경우 [컨텍스트 캐시](https://ai.google.dev/gemini-api/docs/caching?hl=ko)를 사용하면 해당 정보에 대해 질문하는 데 드는 비용을 줄일 수 있습니다.
 
-### Độ dài ngữ cảnh có ảnh hưởng đến độ trễ của mô hình không?
+### 컨텍스트 길이가 모델 지연 시간에 영향을 미치나요?
 
-Có một lượng độ trễ cố định trong mọi yêu cầu, bất kể kích thước, nhưng nói chung, các truy vấn dài hơn sẽ có độ trễ cao hơn (thời gian đến token đầu tiên).
+크기와 관계없이 모든 요청에는 고정된 지연 시간이 있지만 일반적으로 긴 쿼리의 지연 시간 (첫 번째 토큰까지의 시간)이 더 깁니다.
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Cập nhật lần gần đây nhất: 2026-10-15 UTC.
+최종 업데이트: 2026-10-15(UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+의견을 전달하고 싶나요?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-15 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-10-15(UTC)"],[],[]]

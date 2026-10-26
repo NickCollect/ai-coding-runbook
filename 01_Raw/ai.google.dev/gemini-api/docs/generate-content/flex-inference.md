@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/flex-inference?hl=tr
-fetched_at: 2026-10-19T05:44:04.325145+00:00
-title: "Flex \u00e7\u0131kar\u0131m\u0131 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/flex-inference?hl=de
+fetched_at: 2026-10-26T05:45:30.829834+00:00
+title: "Flex-Inferenz \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
+Gemini 4 Argon ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
 
-Geri bildirim gönderin
+Feedback geben
 
-# Flex çıkarımı
+# Flex-Inferenz
 
-Açıklama: Flex çıkarımı katmanıyla maliyetleri nasıl optimize edeceğinizi öğrenin
+Beschreibung: Informationen zur Kostenoptimierung mit der Flex-Inferenzebene
 
-Gemini Flex API, değişken gecikme ve en iyi çaba kullanılabilirliği karşılığında standart ücretlere kıyasla% 50 maliyet tasarrufu sunan bir çıkarım katmanıdır. Bu API, eşzamanlı işleme gerektiren ancak standart API'nin gerçek zamanlı performansına ihtiyaç duymayan, gecikmeye toleranslı iş yükleri için tasarlanmıştır.
+Die Gemini Flex API ist eine Inferenzebene, die im Vergleich zu Standardpreisen eine Kostenreduzierung von 50% bietet. Im Gegenzug sind Latenz und Verfügbarkeit variabel. Sie ist für latenzunempfindliche Arbeitslasten konzipiert, die eine synchrone Verarbeitung erfordern, aber nicht die Echtzeitleistung der Standard-API benötigen.
 
-## Flex nasıl kullanılır?
+## Flex verwenden
 
-Esnek katmanı kullanmak için istek gövdesinde `service_tier` değerini `flex` olarak belirtin. Bu alan atlanırsa istekler varsayılan olarak standart katmanı kullanır.
+Wenn Sie die Flex-Ebene verwenden möchten, geben Sie im Anfragetext `service_tier` als `flex` an. Wenn dieses Feld nicht angegeben ist, wird standardmäßig die Standardebene verwendet.
 
 ### Python
 
@@ -68,7 +68,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -116,57 +116,65 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
 }'
 ```
 
-## Flex çıkarımının işleyiş şekli
+## Funktionsweise der Flex-Inferenz
 
-Gemini Flex çıkarımı, standart API ile [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)'nin 24 saatlik geri dönüş süresi arasındaki boşluğu doldurur. Arka plan görevleri ve sıralı iş akışları için uygun maliyetli bir çözüm sunmak amacıyla yoğun olmayan saatlerde "atılabilir" işlem kapasitesini kullanır.
+Die Gemini Flex-Inferenz schließt die Lücke zwischen der Standard-API und der 24-Stunden
+Bearbeitungszeit der [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de). Sie nutzt Rechenkapazität außerhalb der Spitzenzeiten, die bei Bedarf reduziert werden kann, um eine kostengünstige Lösung für Hintergrundaufgaben und sequenzielle Arbeitsabläufe zu bieten.
 
-| Özellik | Yaratıcılığınızı | Öncelik | Standart | Toplu |
+| Funktion | Flex | Priorität | Standard | Batch |
 | --- | --- | --- | --- | --- |
-| **Fiyatlandırma** | %50 indirim | Standard'dan% 75-100 daha fazla | Tam fiyat | %50 indirim |
-| **Gecikme** | Dakika (1-15 dakika hedefi) | Düşük (saniye) | Saniyelerden dakikalara | En fazla 24 saat |
-| **Güvenilirlik** | En iyi sonuç (Sheddable) | Yüksek (Yük atılamaz) | Yüksek / Yüksek-orta | Yüksek (aktarım hızı için) |
-| **Arayüz** | Eşzamanlı | Eşzamanlı | Eşzamanlı | Eşzamansız |
+| **Preise** | 50% Rabatt | 75–100% mehr als Standard | Standardpreis | 50% Rabatt |
+| **Latenz** | Minuten (Ziel: 1–15 Minuten) | Niedrig (Sekunden) | Sekunden bis Minuten | Bis zu 24 Stunden |
+| **Zuverlässigkeit** | Best-Effort-Ansatz (reduzierbar) | Hoch (nicht reduzierbar) | Hoch / Mittel bis hoch | Hoch (für Durchsatz) |
+| **Schnittstelle** | Synchron | Synchron | Synchron | Asynchron |
 
-### Temel avantajlar
+### Hauptvorteile
 
-- **Maliyet verimliliği**: Üretim dışı değerlendirmeler, arka plan aracıları ve veri zenginleştirme için önemli ölçüde tasarruf sağlar.
-- **Düşük sürtünme**: Toplu nesneleri, iş kimliklerini veya yoklamayı yönetmeniz gerekmez. Mevcut isteklerinize tek bir parametre eklemeniz yeterlidir.
-- **Eşzamanlı iş akışları**: Bir sonraki isteğin bir öncekinin çıkışına bağlı olduğu sıralı API zincirleri için idealdir. Bu nedenle, ajan tabanlı iş akışları için toplu işlerden daha esnektir.
+- **Kosteneffizienz**: Erhebliche Einsparungen bei nicht produktionsbezogenen Bewertungen, Hintergrund-Agents und Datenanreicherung.
+- **Geringer Aufwand**: Sie müssen keine Batch-Objekte, Job-IDs oder Abrufe verwalten. Fügen Sie einfach einen einzelnen Parameter zu Ihren bestehenden Anfragen hinzu.
+- **Synchrone Workflows**: Ideal für sequenzielle API-Ketten, bei denen die nächste Anfrage von der Ausgabe der vorherigen abhängt. Dadurch ist sie flexibler als Batch für Agentic Workflows.
 
-### Kullanım alanları
+### Anwendungsfälle
 
-- **Çevrimdışı değerlendirmeler**: "LLM-as-a-judge" regresyon testleri veya skor tabloları çalıştırma.
-- **Arka plan aracıları**: CRM güncellemeleri, profil oluşturma veya içerik denetleme gibi sıralı görevlerde birkaç dakikalık gecikme kabul edilebilir.
-- **Bütçe kısıtlamalı araştırma**: Sınırlı bir bütçeyle yüksek jeton hacmi gerektiren akademik denemeler.
+- **Offline-Bewertungen**: Ausführen von Regressionstests oder Bestenlisten mit „LLM-as-a-judge“.
+- **Hintergrund-Agents**: Sequenzielle Aufgaben wie CRM-Updates, Profilerstellung oder Inhaltsmoderation, bei denen eine Verzögerung von einigen Minuten akzeptabel ist.
+- **Budgetbeschränkte Forschung**: Akademische Experimente, die ein hohes Tokenvolumen bei einem begrenzten Budget erfordern.
 
-### Hız sınırları
+### Ratenbegrenzung
 
-Esnek çıkarım trafiği, genel [hız sınırlarınıza](https://aistudio.google.com/rate-limit?hl=tr) dahil edilir. [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr) gibi genişletilmiş hız sınırları sunmaz.
+Der Flex-Inferenz-Traffic wird auf Ihre allgemeinen [Ratenlimits](https://aistudio.google.com/rate-limit?hl=de) angerechnet. Es gibt keine
+erweiterten Ratenlimits wie bei der [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de).
 
-### Sheddable capacity (Yük atma kapasitesi)
+### Reduzierbare Kapazität
 
-Esnek trafik daha düşük öncelikli olarak değerlendirilir. Standart trafikte ani bir artış olursa yüksek öncelikli kullanıcılar için kapasite sağlamak amacıyla esnek istekler öncelikli olarak işlenebilir veya çıkarılabilir. Yüksek öncelikli çıkarım arıyorsanız [Öncelikli çıkarım](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)'ı inceleyin.
+Flex-Traffic wird mit niedrigerer Priorität behandelt. Bei einem Anstieg des Standard-Traffics können Flex-Anfragen vorzeitig beendet oder entfernt werden, um Kapazität für Nutzer mit hoher Priorität zu gewährleisten. Wenn Sie eine Inferenz mit hoher Priorität benötigen, lesen Sie den Hilfeartikel zur
+[Prioritätsinferenz](https://ai.google.dev/gemini-api/docs/priority-inference?hl=de).
 
-### Hata kodları
+### Fehlercodes
 
-Esnek kapasite kullanılamadığında veya sistemde yoğunluk olduğunda API, standart hata kodlarını döndürür:
+Wenn die Flex-Kapazität nicht verfügbar ist oder das System überlastet ist, gibt die API Standardfehlercodes zurück:
 
-- **503 Hizmet Kullanılamıyor**: Sistem şu anda tam kapasiteyle çalışıyor.
-- **429 Çok Fazla İstek**: Sıklık sınırlamaları veya kaynakların tükenmesi.
+- **503 Service Unavailable**: Das System ist derzeit ausgelastet.
+- **429 Too Many Requests**: Ratenbegrenzung oder Ressourcenerschöpfung.
 
-### Müşterinin sorumluluğunda
+### Verantwortung des Clients
 
-- **Sunucu tarafında yedek yok**: Beklenmedik ücretlendirmeleri önlemek için sistem, Flex kapasitesi doluysa Flex isteğini otomatik olarak Standart katmana yükseltmez.
-- **Yeniden denemeler**: Üstel geri çekilme ile kendi istemci tarafı yeniden deneme mantığınızı uygulamanız gerekir.
-- **Zaman aşımları**: Flex istekleri bir sırada bekleyebileceğinden, bağlantının erken kapatılmasını önlemek için istemci tarafı zaman aşımlarını 10 dakika veya daha uzun bir süreye çıkarmanızı öneririz.
+- **Kein serverseitiges Fallback**: Um unerwartete Kosten zu vermeiden, wird eine Flex-Anfrage nicht
+  automatisch auf die Standardebene aktualisiert, wenn die Flex-Kapazität
+  voll ist.
+- **Wiederholungen**: Sie müssen Ihre eigene clientseitige Wiederholungslogik mit
+  exponentiellem Backoff implementieren.
+- **Zeitlimits**: Da Flex-Anfragen in einer Warteschlange stehen können, empfehlen wir,
+  die clientseitigen Zeitlimits auf mindestens 10 Minuten zu erhöhen, um ein vorzeitiges
+  Schließen der Verbindung zu vermeiden.
 
-## Zaman aşımı aralıklarını ayarlama
+## Zeitlimits anpassen
 
-REST API ve istemci kitaplıkları için istek başına zaman aşımlarını, yalnızca istemci kitaplıklarını kullanırken ise genel zaman aşımlarını yapılandırabilirsiniz.
+Sie können Zeitlimits pro Anfrage für die REST API und Clientbibliotheken sowie globale Zeitlimits nur bei Verwendung der Clientbibliotheken konfigurieren.
 
-İstemci tarafı zaman aşımınızın her zaman amaçlanan sunucu bekleme süresini (ör. Flex bekleme sıraları için 600 saniye ve üzeri) kapsadığından emin olun. SDK'lar, zaman aşımı değerlerinin milisaniye cinsinden olmasını bekler.
+Achten Sie immer darauf, dass das clientseitige Zeitlimit das vorgesehene serverseitige Zeitlimit abdeckt (z.B. 600 Sekunden oder mehr für Flex-Warteschlangen). Die SDKs erwarten Zeitlimitwerte in Millisekunden.
 
-### İstek başına zaman aşımları
+### Zeitlimits pro Anfrage
 
 ### Python
 
@@ -247,7 +255,7 @@ except Exception as e:
  await main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -313,11 +321,12 @@ func main() {
 
 ### REST
 
-REST çağrıları yaparken HTTP üstbilgileri ve `curl` seçeneklerini birlikte kullanarak zaman aşımlarını kontrol edebilirsiniz:
+Bei REST-Aufrufen können Sie Zeitlimits mit einer Kombination aus HTTP-Headern und `curl`-Optionen steuern:
 
-- **`X-Server-Timeout` header (sunucu tarafı zaman aşımı)**: Bu başlık, Gemini API sunucusu için tercih edilen bir zaman aşımı süresi (varsayılan 600 saniye) önerir. Sunucu bu isteği yerine getirmeye çalışır ancak bu garanti edilmez. Değer saniye cinsinden olmalıdır.
-- **`curl` içinde `--max-time` (İstemci Tarafı Zaman Aşımı)**: `curl --max-time
-  <seconds>` seçeneği, `curl` aracının tüm işlemin tamamlanmasını bekleyeceği toplam süre (saniye cinsinden) için kesin bir sınır belirler. Bu, istemci tarafında uygulanan bir güvenlik önlemidir.
+- **`X-Server-Timeout` -Header (serverseitiges Zeitlimit)** : Dieser Header schlägt dem Gemini API-Server eine bevorzugte Zeitlimitdauer vor (Standard: 600 Sekunden). Der Server versucht, dies zu berücksichtigen, aber es gibt keine Garantie. Der Wert muss in Sekunden angegeben werden.
+- **`--max-time` in `curl` (clientseitiges Zeitlimit)**: Mit der Option `curl --max-time
+  <seconds>` wird ein hartes Limit für die Gesamtzeit (in Sekunden) festgelegt, die `curl`
+  wartet, bis der gesamte Vorgang abgeschlossen ist. Dies ist eine clientseitige Sicherheitsmaßnahme.
 
 ```
  # Set a server timeout hint of 120 seconds and a client-side curl timeout of 125 seconds.
@@ -333,9 +342,9 @@ REST çağrıları yaparken HTTP üstbilgileri ve `curl` seçeneklerini birlikte
  }'
 ```
 
-### Genel zaman aşımı
+### Globale Zeitlimits
 
-Belirli bir `genai.Client` örneği (yalnızca istemci kitaplıkları) üzerinden yapılan tüm API çağrılarının varsayılan bir zaman aşımı olmasını istiyorsanız `http_options` ve `genai.types.HttpOptions` kullanarak istemciyi başlatırken bunu yapılandırabilirsiniz.
+Wenn alle API-Aufrufe, die über eine bestimmte `genai.Client`-Instanz erfolgen (nur Clientbibliotheken), ein Standardzeitlimit haben sollen, können Sie dies beim Initialisieren des Clients mit `http_options` und `genai.types.HttpOptions` konfigurieren.
 
 ### Python
 
@@ -425,7 +434,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Ok
 
 ```
  package main
@@ -482,9 +491,9 @@ await main();
  }
 ```
 
-## Yeniden deneme uygulama
+## Wiederholungen implementieren
 
-Flex, yükü azaltılabilir olduğundan ve 503 hatalarıyla başarısız olduğundan, başarısız isteklerle devam etmek için isteğe bağlı olarak yeniden deneme mantığını uygulamanın bir örneğini aşağıda bulabilirsiniz:
+Da Flex reduzierbar ist und mit 503-Fehlern fehlschlägt, finden Sie hier ein Beispiel für die optionale Implementierung einer Wiederholungslogik, um mit fehlgeschlagenen Anfragen fortzufahren:
 
 ### Python
 
@@ -567,7 +576,7 @@ print(response.text)
  await main();
 ```
 
-### Go
+### Ok
 
 ```
  package main
@@ -626,43 +635,44 @@ print(response.text)
  }
 ```
 
-## Fiyatlandırma
+## Preise
 
-Flex çıkarımı, [standart API](https://ai.google.dev/gemini-api/docs/pricing?hl=tr)'nin% 50'si oranında fiyatlandırılır ve parça başına faturalandırılır.
+Die Flex-Inferenz kostet 50% der [Standard-API](https://ai.google.dev/gemini-api/docs/pricing?hl=de)
+und wird pro Token abgerechnet.
 
-## Desteklenen modeller
+## Unterstützte Modelle
 
-Aşağıdaki modeller Flex çıkarımını destekler:
+Die folgenden Modelle unterstützen die Flex-Inferenz:
 
-| Model | Flex çıkarımı |
+| Modell | Flex-Inferenz |
 | --- | --- |
-| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=tr) | ✔️ |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=tr) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=tr) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=tr) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=tr) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=tr) | ✔️ |
-| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=tr) | ✔️ |
-| [Gemini 3 Pro Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=tr) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=tr) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=tr) | ✔️ |
-| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=tr) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=tr) | ✔️ |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=de) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=de) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=de) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=de) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=de) | ✔️ |
+| [Gemini 3.1 Pro (Vorabversion)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=de) | ✔️ |
+| [Gemini 3 Flash (Vorabversion)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=de) | ✔️ |
+| [Gemini 3 Pro Image (Vorabversion)](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=de) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=de) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=de) | ✔️ |
+| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=de) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=de) | ✔️ |
 
-## Sırada ne var?
+## Nächste Schritte
 
-Gemini'ın diğer [çıkarım ve optimizasyon](https://ai.google.dev/gemini-api/docs/optimization?hl=tr) seçenekleri hakkında bilgi edinin:
+Weitere Informationen zu anderen [Inferenz- und Optimierungs](https://ai.google.dev/gemini-api/docs/optimization?hl=de)optionen von Gemini:
 
-- Ultra düşük gecikme için [öncelikli çıkarım](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr).
-- 24 saat içinde eşzamansız işleme için [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr).
-- Giriş jetonu maliyetlerini azaltmak için [bağlam önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr).
+- [Prioritätsinferenz](https://ai.google.dev/gemini-api/docs/priority-inference?hl=de) für extrem niedrige Latenz.
+- [Batch-API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de) für die asynchrone Verarbeitung innerhalb von 24 Stunden
+- [Kontext-Caching](https://ai.google.dev/gemini-api/docs/caching?hl=de) für geringere Kosten für Eingabetokens
 
-Geri bildirim gönderin
+Feedback geben
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Son güncelleme tarihi: 2026-10-13 UTC.
+Zuletzt aktualisiert: 2026-10-13 (UTC).
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Haben Sie Feedback für uns?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-13 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-10-13 (UTC)."],[],[]]

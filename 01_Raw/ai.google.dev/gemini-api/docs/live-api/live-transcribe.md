@@ -1,46 +1,56 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=tr
-fetched_at: 2026-10-19T05:38:23.588852+00:00
-title: "Gemini Live API ile canl\u0131 transkripsiyon \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=it
+fetched_at: 2026-10-26T05:53:48.287804+00:00
+title: "Trascrizione in tempo reale con l'API Gemini Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
+Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Geri bildirim gönderin
+Invia feedback
 
-# Gemini Live API ile canlı transkripsiyon
+# Trascrizione in tempo reale con l'API Gemini Live
 
-Gemini Live API, [`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=tr) modelini kullanarak düşük gecikmeli, anlık sesle yazma transkriptini destekler. WebSocket'ler üzerinden Live API'ye bağlanarak veya Google Gen AI SDK'yı kullanarak sürekli ses girişi yayınlayabilir ve konuşma gerçekleşirken artımlı, gerçek zamanlı metin transkriptleri alabilirsiniz.
+L'API Gemini Live supporta la trascrizione della conversione della voce in testo in tempo reale e a bassa latenza utilizzando il modello [`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=it). Se ti connetti all'API Live tramite WebSocket o utilizzi l'SDK Google Gen AI, puoi trasmettere in streaming l'input audio continuo e ricevere trascrizioni di testo incrementali in tempo reale man mano che viene pronunciato il discorso.
 
-[Google AI Studio'da Canlı Transkript'i deneyinmic](https://aistudio.google.com/live?model=gemini-3.5-transcribe-live&hl=tr)
-[Colab çözüm kitabını açıncode](https://github.com/google-gemini/cookbook)
-[Kodlama ajan becerilerini kullanınterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=tr#gemini-live-api-dev)
+[Prova la Trascrizione in tempo reale in Google AI Studiomic](https://aistudio.google.com/live?model=gemini-3.5-transcribe-live&hl=it)
+[Apri il cookbook di Colabcode](https://github.com/google-gemini/cookbook)
+[Utilizza le competenze dell'agente di codificaterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=it#gemini-live-api-dev)
 
-Gemini Live API'den yararlanan [Agora](https://docs.agora.io/en/ai/models/asr/gemini), [Fishjam](https://docs.fishjam.io/tutorials/gemini-live-integration), [LiveKit](https://docs.livekit.io/agents/models/stt/gemini/), [Pipecat](https://docs.pipecat.ai/api-reference/server/services/stt/google), [Vercel](https://vercel.com/docs/ai-gateway/modalities/speech-to-text) ve [Vision Agents](https://visionagents.ai/integrations/stt/gemini) gibi geliştirici platformları, geliştiricilerin yüksek performanslı sesle çalışan arayüzleri kolayca oluşturup dağıtmasına olanak tanır. Bu platformlar, arka planda karmaşık gerçek zamanlı medya akışı altyapısını yönetir ve geliştiricilerin tamamen kullanıcı deneyimini oluşturmaya odaklanmasına olanak tanır.
+Sfruttando l'API Gemini Live, piattaforme per sviluppatori come
+[Agora](https://docs.agora.io/en/ai/models/asr/gemini),
+[Fishjam](https://docs.fishjam.io/tutorials/gemini-live-integration),
+[LiveKit](https://docs.livekit.io/agents/models/stt/gemini/),
+[Pipecat](https://docs.pipecat.ai/api-reference/server/services/stt/google),
+[Vercel](https://vercel.com/docs/ai-gateway/modalities/speech-to-text) e
+[Vision Agents](https://visionagents.ai/integrations/stt/gemini)
+consentono agli sviluppatori di creare e implementare interfacce vocali ad alte prestazioni
+con facilità. Queste piattaforme gestiscono un'infrastruttura complessa di streaming multimediale in tempo reale
+dietro le quinte, consentendo agli sviluppatori di concentrarsi interamente sulla
+creazione dell'esperienza utente.
 
-## Canlı müşteri temsilcisi ve canlı transkript
+## Operatore e trascrizione in tempo reale
 
-Her ikisi de Live API çift yönlü yayın bağlantısını kullanırken Canlı Transkript, sohbet aracısı yerine özel, düşük gecikmeli bir konuşma tanıma hattı olarak çalışır.
+Sebbene entrambi utilizzino la connessione di streaming bidirezionale dell'API Live, la trascrizione in tempo reale funziona come una pipeline di riconoscimento vocale dedicata a bassa latenza anziché come un agente conversazionale.
 
-| Özellik | Canlı Müşteri Temsilcisi | Canlı Olarak Metne Dönüştürme |
+| Funzionalità | Agente | Trascrizione Istantanea |
 | --- | --- | --- |
-| **Birincil rol** | Dinleyen, akıl yürüten ve yanıt veren etkileşimli bir asistan. | Gelen sesleri metne dönüştüren gerçek zamanlı sesle yazma ardışık düzeni. |
-| **Yanıt biçimi** | Seslendirilmiş içerik ve metin (`response_modalities=["AUDIO"]`). | Yayın metni transkripsiyonları (`response_modalities=["TEXT"]`) |
-| **Etkileşim stili** | Duraklatma algılama ve kesintilerle dönüşümlü diyalog. | Konuşmacı konuşurken sürekli akış işleme. |
-| **Desteklenen özellikler** | İşlev çağırma, Google Arama, sistem talimatları. | Konuşma önyargısı (`custom_vocabulary`), dil algılama, manuel ve karma VAD, Akıllı Metne Dönüştürme. |
-| **Giriş akışı** | Çok formatlı: ses, video, resimler, metin. | Ses girişi (ham 16 bit PCM). |
+| **Ruolo principale** | Assistente conversazionale che ascolta, ragiona e risponde. | Pipeline di conversione della voce in testo in tempo reale che trascrive l'audio in entrata. |
+| **Modalità di risposta** | Audio e testo parlati (`response_modalities=["AUDIO"]`). | Trascrizioni di testo dello streaming (`response_modalities=["TEXT"]`). |
+| **Stile di interazione** | Dialogo a turni con rilevamento di pause e interruzioni. | Elaborazione continua del flusso mentre l'oratore parla. |
+| **Funzionalità supportate** | Chiamata di funzione, Ricerca Google, istruzioni di sistema. | Bias del parlato (`custom_vocabulary`), rilevamento della lingua, VAD manuale e ibrido, trascrizione intelligente. |
+| **Stream di input** | Multimodale: audio, video, immagini, testo. | Input audio (PCM a 16 bit non elaborato). |
 
-## Başlayın
+## Inizia
 
-Aşağıdaki örneklerde, `gemini-3.5-transcribe-live` ile çift yönlü bir akış oturumunun nasıl açılacağı ve anlık transkripsiyonların nasıl alınacağı gösterilmektedir.
+I seguenti esempi mostrano come aprire una sessione di streaming bidirezionale con `gemini-3.5-transcribe-live` e ricevere trascrizioni in tempo reale.
 
 ### Python
 
@@ -144,14 +154,14 @@ websocket.onmessage = (event) => {
 };
 ```
 
-## Geçici ve son transkriptler
+## Trascrizioni provvisorie e definitive
 
-Ses, Live API'ye aktarılırken sunucu, `server_content` içinde iki tamamlayıcı transkripsiyon alanı yayar:
+Man mano che gli stream audio vengono inseriti nell'API Live, il server emette due campi di trascrizione complementari all'interno di `server_content`:
 
-- **`interim_input_transcription`**: Düşük gecikmeli, konuşmacı aktif olarak konuşurken güncellenen spekülatif kısmi hipotezler. Bu kısmi güncellemeler, çok kısa bir gecikmeyle hızlı bir şekilde gerçekleşir. Duyarlı canlı kullanıcı arayüzü altyazılarını oluşturmak veya altyazıları önizlemek için `interim_input_transcription` simgesini kullanın.
-- **`input_transcription`**: Konuşmacı durakladığında, konuşma sırası tamamlandığında veya konuşma sonlandırıldığında oluşturulan son transkript. Bu metin, yayınlandıktan sonra modelin söz konusu konuşma segmentinin yetkili transkripsiyonunu temsil eder. Akıllı transkripsiyon modunda, temizlenmiş ve biçimlendirilmiş yanıt da dahil edilir.
+- **`interim_input_transcription`**: ipotesi parziali speculative a bassa latenza aggiornate mentre l'oratore parla attivamente. Questi aggiornamenti parziali vengono eseguiti rapidamente con un ritardo minimo. Utilizza `interim_input_transcription` per visualizzare in anteprima i sottotitoli codificati o i sottotitoli codificati in tempo reale reattivi dell'interfaccia utente.
+- **`input_transcription`**: la trascrizione finalizzata emessa quando l'oratore si ferma, il turno termina o il discorso viene finalizzato. Una volta emesso, questo testo rappresenta la trascrizione autorevole del modello del segmento vocale. In modalità di trascrizione intelligente, verrà inclusa la risposta pulita e formattata.
 
-Aşağıdaki örnekte, akışla ilgili geçici kısmi sonuçların nasıl görüntüleneceği ve son transkriptlerin nasıl gönderileceği gösterilmektedir:
+L'esempio seguente mostra come visualizzare i risultati parziali intermedi dello streaming e inviare le trascrizioni finali:
 
 ### Python
 
@@ -207,13 +217,13 @@ websocket.onmessage = (event) => {
 };
 ```
 
-## Ses gönderme
+## Invio di audio
 
-Ses parçalarını, etkin bağlantı üzerinden ham 16 bit PCM ses olarak aktarır.
+Trasmetti in streaming blocchi audio tramite la connessione attiva come audio PCM a 16 bit non elaborato.
 
-- **Ses biçimi:** 16 kHz'de (mono, little-endian) ham 16 bit PCM.
-- **Parça boyutu:** Sesleri 100 ms'lik parçalar halinde (1.024 ila 2.048 kare) gönderin.
-- **MIME türü:** `audio/pcm;rate=16000` (veya eşleşen örnekleme hızı).
+- **Formato audio**:PCM a 16 bit non elaborato a 16 kHz (mono, little-endian).
+- **Dimensioni chunk**:invia l'audio in chunk di 100 ms (da 1024 a 2048 frame).
+- **Tipo MIME:** `audio/pcm;rate=16000` (o la frequenza di campionamento corrispondente).
 
 ### Python
 
@@ -268,11 +278,11 @@ websocket.send(JSON.stringify({
 }));
 ```
 
-## Metne dönüştürme özellikleri
+## Funzionalità di trascrizione
 
-### Otomatik dil algılama
+### Rilevamento automatico della lingua
 
-Varsayılan olarak, `language_codes` öğesinin atlanması veya `language_codes=[]` öğesinin ayarlanması otomatik dil tanımlamayı etkinleştirir. Model, çok dilli sohbetler ve dil değiştirme dahil olmak üzere ifadelerdeki konuşulan dili dinamik olarak algılar.
+Per impostazione predefinita, l'omissione di `language_codes` o l'impostazione di `language_codes=[]` attiva l'identificazione automatica della lingua. Il modello rileva dinamicamente la lingua parlata in tutte le espressioni, incluse le conversazioni multilingue e il cambio di codice.
 
 ### Python
 
@@ -313,9 +323,9 @@ const setupMessage = {
 websocket.send(JSON.stringify(setupMessage));
 ```
 
-### Belirli bir dilde ipucu
+### Suggerimento per una lingua specifica
 
-Tanımanın belirli dillerde daha iyi çalışması için açık BCP-47 dil kodları (örneğin, İspanyolca için `["es-ES"]` veya Fransızca için `["fr-FR"]`) sağlayın (bkz. [Desteklenen diller](#supported-languages)).
+Fornisci codici lingua BCP-47 espliciti (ad esempio, `["es-ES"]` per lo spagnolo o `["fr-FR"]` per il francese) per orientare il riconoscimento verso lingue specifiche (vedi [Lingue supportate](#supported-languages)).
 
 ### Python
 
@@ -356,9 +366,9 @@ const setupMessage = {
 websocket.send(JSON.stringify(setupMessage));
 ```
 
-### Özel kelime seçimi önyargısı
+### Bias del vocabolario personalizzato
 
-Konuşma tanıma özelliğini belirli terminolojiye yönlendirmek için `custom_vocabulary` içinde 1.000'e kadar kelime öbeği, özel isim, marka adı veya teknik terim listesi sağlayın (en iyi sonuçlar genellikle 100 terime kadar elde edilir).
+Fornisci un elenco di massimo 1000 frasi, nomi propri, nomi di brand o termini tecnici in `custom_vocabulary` per orientare il riconoscimento vocale verso una terminologia specifica (i risultati migliori si ottengono in genere con un massimo di 100 termini).
 
 ### Python
 
@@ -402,17 +412,17 @@ const setupMessage = {
 websocket.send(JSON.stringify(setupMessage));
 ```
 
-### Akıllı transkript
+### Trascrizione intelligente
 
-`input_audio_transcription` içindeki `mode` parametresini kullanarak transkripsiyon çıkış biçimlendirmesini yapılandırın:
+Configura la formattazione dell'output della trascrizione utilizzando il parametro `mode` in `input_audio_transcription`:
 
-- **`VERBATIM` (varsayılan)**: Konuşulan her şeyin bire bir transkriptini oluşturur. Ham dolgu kelimelerini ("ııı", "eee", "gibi"), tekrarları ve yanlış başlangıçları korur.
-- **`SMART` (Akıllı transkript)**: Okunabilirlik için transkripti temizler ve yapılandırır:
+- **`VERBATIM` (impostazione predefinita)**: produce una trascrizione letterale esatta di tutto ciò che viene detto, conservando le parole di riempimento grezze ("um", "uh", "tipo"), le ripetizioni e le false partenze.
+- **`SMART` (Trascrizione intelligente)**: pulisce e struttura la trascrizione per renderla più leggibile:
 
-  - **Aksaklıkları kaldırma**: Gereksiz kelimeleri, kekemeliği ve yanlış başlangıçları kaldırır.
-  - **Satır içi kendi kendine düzeltmeler**: Konuşma sırasında yapılan düzeltmeleri doğal bir şekilde çözer.
-  - **Yapılandırılmış biçimlendirme**: Listeleri, madde işaretlerini, sayıları, tarihleri ve paragraf sonlarını otomatik olarak biçimlendirir.
-  - **Dil bilgisi ve büyük/küçük harf kullanımı**: Doğal büyük harf kullanımı ve noktalama işaretleri uygular.
+  - **Rimozione delle disfluenze**: rimuove gli intercalari, le balbuzie e gli avvii errati.
+  - **Correzioni automatiche in linea**: risolve le correzioni vocali in modo naturale.
+  - **Formattazione strutturata**: formatta automaticamente elenchi, punti elenco, numeri, date e interruzioni di paragrafo.
+  - **Grammatica e maiuscole**: applica la punteggiatura e le maiuscole naturali.
 
 ### Python
 
@@ -453,20 +463,20 @@ const setupMessage = {
 websocket.send(JSON.stringify(setupMessage));
 ```
 
-## Ses Etkinliği Algılama (VAD) stratejileri
+## Strategie di rilevamento di attività vocale (VAD)
 
-### Otomatik VAD (varsayılan)
+### Rilevamento automatico dell'attività vocale (impostazione predefinita)
 
-Varsayılan olarak, sunucu tarafında otomatik ses etkinliği algılama özelliği, konuşmacının konuşmaya başlayıp durduğunu algılar.
+Per impostazione predefinita, il rilevamento automatico dell'attività vocale lato server rileva quando un oratore inizia e smette di parlare.
 
-### Hibrit VAD
+### VAD ibrido
 
-[Hibrit VAD](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=tr#hybrid-vad), sıfır gecikmeyle dönüşü sonlandırmak için sunucu tarafında otomatik konuşma başlangıcı algılamayı istemci tarafında konuşma sonu algılamayla birleştirir:
+[VAD ibrido](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=it#hybrid-vad) combina il rilevamento automatico dell'inizio del discorso lato server con il rilevamento della fine del discorso lato client per la finalizzazione del turno a latenza zero:
 
-1. Ön ek ses dolgusuyla konuşma başlangıçlarını doğru şekilde algılamak ve ilk kelimeyi kesmeyi önlemek için **sunucu taraflı otomatik VAD etkin kalır**.
-2. **İstemci tarafı VAD, sessizliği algılıyor**: Cihaz üzerinde yerel bir VAD, konuşmacının konuşmayı bıraktığını algıladığında istemci hemen bir `audio_stream_end` sinyali gönderir.
-3. **Hızlı sonlandırma**: Sunucu, `audio_stream_end` karakterini anında sonlandırma istemi olarak değerlendirir. Varsayılan sunucu tarafı sessizlik bekleme süresini atlayarak sonlandırılmış transkripti minimum gecikmeyle döndürür.
-4. **Yedek**: İstemci VAD'si tetiklenmezse sunucu tarafı VAD'si otomatik yedek olarak işlev görür.
+1. **Il rilevamento automatico dell'attività vocale lato server rimane attivo** per rilevare con precisione l'inizio del parlato con il padding audio del prefisso, evitando il troncamento delle parole iniziali.
+2. **Rilevamento dell'attività vocale lato client rileva il silenzio**: quando il rilevamento dell'attività vocale locale sul dispositivo rileva che l'oratore ha smesso di parlare, il client invia immediatamente un segnale `audio_stream_end`.
+3. **Finalizzazione rapida**: il server considera `audio_stream_end` come un prompt di finalizzazione immediata, ignorando il tempo di attesa predefinito del silenzio lato server e restituendo la trascrizione finalizzata con una latenza minima.
+4. **Fallback**: se la VAD lato client non viene attivata, la VAD lato server funge da fallback automatico.
 
 ### Python
 
@@ -534,9 +544,9 @@ websocket.send(JSON.stringify({
 }));
 ```
 
-### Manuel VAD (Bas-Konuş)
+### VAD manuale (premi per parlare)
 
-Telsiz arayüzleri veya konuşmak için bas düğmeleri için otomatik VAD'yi tamamen devre dışı bırakın ve `activity_start` ile `activity_end` kullanarak konuşma sırası sınırlarını açıkça kontrol edin:
+Per le interfacce walkie-talkie o i pulsanti push-to-talk, disattiva completamente il VAD automatico e controlla i limiti di turno in modo esplicito utilizzando `activity_start` e `activity_end`:
 
 ### Python
 
@@ -625,11 +635,11 @@ websocket.send(JSON.stringify({
 }));
 ```
 
-## İstemci uygulamalarındaki kısa ömürlü jetonlar
+## Token effimeri nelle applicazioni client
 
-Doğrudan mikrofondan yayın yapan mobil veya web uygulamaları gibi istemciden sunucuya uygulamalarda, API anahtarınızı istemci kodunda göstermemek için [geçici jetonlar](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=tr) kullanın.
+Per le applicazioni client-server (come le app web o mobile che trasmettono in streaming direttamente da un microfono), utilizza i [token effimeri](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=it) per evitare di esporre la chiave API nel codice client.
 
-İstemci bağlantısını başlatmadan önce sunucunuzda sınırlı bir kısa ömürlü jeton oluşturun:
+Crea un token effimero vincolato sul server prima di avviare la connessione client:
 
 ### Python
 
@@ -703,95 +713,95 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-## Desteklenen diller
+## Lingue supportate
 
-Gemini 3.5 Transcribe Live'da aşağıdaki diller ve BCP-47 dil kodları desteklenir:
+Le seguenti lingue e i seguenti codici lingua BCP-47 sono supportati per Gemini 3.5 Transcribe Live:
 
-| Dil | BCP-47 kodu | Dil | BCP-47 kodu |
+| Lingua | Codice BCP-47 | Lingua | Codice BCP-47 |
 | --- | --- | --- | --- |
-| Afrikaanca | `af-ZA` | Japonca | `ja-JP` |
-| Amharca | `am-ET` | Cava dili | `jv-ID` |
-| Arapça (Mısır) | `ar-EG` | Kabuverdianu | `kea-CV` |
-| Ermenice | `hy-AM` | Kannada | `kn-IN` |
-| Assamca | `as-IN` | Kazakça | `kk-KZ` |
-| Azerice | `az-AZ` | Korece | `ko-KR` |
-| Belarusça | `be-BY` | Kırgızca | `ky-KG` |
-| Bengalce (Bangladeş) | `bn-BD` | Letonca | `lv-LV` |
-| Bengalce (Hindistan) | `bn-IN` | Lingala | `ln-CD` |
-| Boşnakça | `bs-BA` | Litvanca | `lt-LT` |
-| Bulgarca | `bg-BG` | Makedonca | `mk-MK` |
-| Bulgarca (Aromanca) | `rup-BG` | Malayca | `ms-MY` |
-| Burmaca | `my-MM` | Malayalamca | `ml-IN` |
-| Kantonca (Geleneksel) | `yue-Hant-HK` | Maltaca | `mt-MT` |
-| Katalanca | `ca-ES` | Mandarin Çincesi (Basitleştirilmiş) | `cmn-Hans-CN` |
-| Sabuanca | `ceb` | Marathi | `mr-IN` |
-| Orta Khmer | `km-KH` | Moğolca | `mn-MN` |
-| Hırvatça | `hr-HR` | Nepalce | `ne-NP` |
-| Çekya | `cs-CZ` | Norveççe | `nb-NO` |
-| Danca | `da-DK` | Oriya dili | `or-IN` |
-| Felemenkçe | `nl-NL` | Lehçe | `pl-PL` |
-| İngilizce (İngiltere) | `en-GB` | Portekizce (Brezilya) | `pt-BR` |
-| İngilizce (Hindistan) | `en-IN` | Portekizce (Portekiz) | `pt-PT` |
-| İngilizce (ABD) | `en-US` | Pencapça | `pa-IN` |
-| Estonca | `et-EE` | Pencapça (Gurmukhi alfabesi) | `pa-Guru-IN` |
-| Farsça | `fa-IR` | Rumence | `ro-RO` |
-| Filipince | `fil-PH` | Rusça | `ru-RU` |
-| Fince | `fi-FI` | Sırpça | `sr-RS` |
-| Fransızca | `fr-FR` | Sindice (Arapça alfabesi) | `sd-Arab-IN` |
-| Galiçyaca | `gl-ES` | Slovakça | `sk-SK` |
-| Gürcüce | `ka-GE` | Slovence | `sl-SI` |
-| Almanca | `de-DE` | İspanyolca (Latin Amerika) | `es-419` |
-| Greek | `el-GR` | İspanyolca (Amerika Birleşik Devletleri) | `es-US` |
-| Güceratça | `gu-IN` | Swahili (Kenya) | `sw-KE` |
-| Hausaca | `ha-NG` | İsveççe | `sv-SE` |
-| İbranice | `he-IL` | Tacikçe | `tg-TJ` |
-| Hintçe | `hi-IN` | Telugu dili | `te-IN` |
-| Macarca | `hu-HU` | Tayca | `th-TH` |
-| İzlandaca | `is-IS` | Türkçe | `tr-TR` |
-| Hint İngilizcesi | `en-IN` | Ukraynaca | `uk-UA` |
-| Endonezce | `id-ID` | Özbekçe | `uz-UZ` |
-| İtalyanca | `it-IT` | Vietnamca | `vi-VN` |
+| Afrikaans | `af-ZA` | Giapponese | `ja-JP` |
+| Amarico | `am-ET` | Giavanese | `jv-ID` |
+| Arabo (Egitto) | `ar-EG` | Kabuverdianu | `kea-CV` |
+| Armeno | `hy-AM` | Kannada | `kn-IN` |
+| Assamese | `as-IN` | Kazako | `kk-KZ` |
+| Azero | `az-AZ` | Coreano | `ko-KR` |
+| Bielorusso | `be-BY` | Kirgizo | `ky-KG` |
+| Bengalese (Bangladesh) | `bn-BD` | Lettone | `lv-LV` |
+| Bengalese (India) | `bn-IN` | Lingala | `ln-CD` |
+| Bosniaco | `bs-BA` | Lituano | `lt-LT` |
+| Bulgaro | `bg-BG` | Macedone | `mk-MK` |
+| Bulgaro (aromeno) | `rup-BG` | Malese | `ms-MY` |
+| Birmano | `my-MM` | Malayalam | `ml-IN` |
+| Cantonese (tradizionale) | `yue-Hant-HK` | Maltese | `mt-MT` |
+| Catalano | `ca-ES` | Cinese mandarino (semplificato) | `cmn-Hans-CN` |
+| Cebuano | `ceb` | Marathi | `mr-IN` |
+| Khmer centrale | `km-KH` | Mongolo | `mn-MN` |
+| Croato | `hr-HR` | Nepalese | `ne-NP` |
+| Ceco | `cs-CZ` | Norvegese | `nb-NO` |
+| Danese | `da-DK` | Oriya | `or-IN` |
+| Olandese | `nl-NL` | Polacco | `pl-PL` |
+| Inglese (Gran Bretagna) | `en-GB` | Portoghese (Brasile) | `pt-BR` |
+| Inglese (India) | `en-IN` | Portoghese (Portogallo) | `pt-PT` |
+| Inglese (Stati Uniti) | `en-US` | Punjabi | `pa-IN` |
+| Estone | `et-EE` | Punjabi (Gurmukhi script) | `pa-Guru-IN` |
+| Farsi | `fa-IR` | Rumeno | `ro-RO` |
+| Filippino | `fil-PH` | Russo | `ru-RU` |
+| Finlandese | `fi-FI` | Serbo | `sr-RS` |
+| Francese | `fr-FR` | Sindhi (alfabeto arabo) | `sd-Arab-IN` |
+| Galiziano | `gl-ES` | Slovacco | `sk-SK` |
+| Georgiano | `ka-GE` | Sloveno | `sl-SI` |
+| Tedesco | `de-DE` | Spagnolo (America Latina) | `es-419` |
+| Greek | `el-GR` | Spagnolo (Stati Uniti) | `es-US` |
+| Gujarati | `gu-IN` | Swahili (Kenya) | `sw-KE` |
+| Hausa | `ha-NG` | Svedese | `sv-SE` |
+| Ebraico | `he-IL` | Tagico | `tg-TJ` |
+| Hindi | `hi-IN` | Telugu | `te-IN` |
+| Ungherese | `hu-HU` | Thailandese | `th-TH` |
+| Islandese | `is-IS` | Turco | `tr-TR` |
+| Inglese indiano | `en-IN` | Ucraino | `uk-UA` |
+| Indonesiano | `id-ID` | Uzbeco | `uz-UZ` |
+| Italiano | `it-IT` | Vietnamita | `vi-VN` |
 
-## Parametre referansı
+## Riferimento ai parametri
 
-`input_audio_transcription` ve `realtime_input_config` alanlarını kullanarak canlı altyazıyı yapılandırın:
+Configura la trascrizione in tempo reale utilizzando i campi in `input_audio_transcription` e `realtime_input_config`:
 
-| Parametre | Tür | Açıklama |
+| Parametro | Tipo | Descrizione |
 | --- | --- | --- |
-| `language_codes` | Dize dizisi | BCP-47 dil kodları (ör. `["en-US"]`). Atlanırsa veya boş bırakılırsa (`[]`) model, dili otomatik olarak algılar ve çok dilli konuşmayı işler. |
-| `custom_vocabulary` | Dize dizisi | Konuşma tanımayı etkilemek için 1.000'e kadar özel terim, kısaltma, marka adı veya özel isim. |
-| `mode` | Dize | Metne dönüştürme modu: `"VERBATIM"` (varsayılan) veya `"SMART"` (Akıllı metne dönüştürme). `"SMART"` olarak ayarlandığında model, gereksiz kelimeleri kaldırır, listeleri biçimlendirir ve akıcılık sorunlarını düzeltir. |
-| `automatic_activity_detection.disabled` | Boole | Otomatik ses etkinliği algılamayı devre dışı bırakmak ve `activityStart` ile `activityEnd` sinyallerini manuel olarak göndermek için `true` olarak ayarlayın. |
+| `language_codes` | Array di stringhe | Codici lingua BCP-47 (ad es. `["en-US"]`). Se omesso o vuoto (`[]`), il modello rileva automaticamente la lingua e gestisce la voce multilingue. |
+| `custom_vocabulary` | Array di stringhe | Fino a 1000 termini personalizzati, acronimi, nomi di brand o nomi propri per orientare il riconoscimento vocale. |
+| `mode` | Stringa | Modalità di trascrizione: `"VERBATIM"` (predefinita) o `"SMART"` (Trascrizione intelligente). Se impostato su `"SMART"`, il modello rimuove gli intercalari, formatta gli elenchi e corregge le disfluenze. |
+| `automatic_activity_detection.disabled` | Booleano | Imposta su `true` per disattivare il rilevamento di attività vocale automatico e inviare manualmente i segnali `activityStart` e `activityEnd`. |
 
-### Sunucu yanıtı alanları
+### Campi di risposta del server
 
-| Alan | Açıklama |
+| Campo | Descrizione |
 | --- | --- |
-| `server_content.interim_input_transcription` | Kullanıcı aktif olarak konuşurken sürekli olarak yayınlanan, düşük gecikmeli, geçici kısmi transkripsiyon hipotezi. |
-| `server_content.input_transcription` | Konuşma sırası bittiğinde sonlandırılmış, yetkili giriş transkripti yayınlanır. |
+| `server_content.interim_input_transcription` | Ipotesi di trascrizione parziale provvisoria a bassa latenza emessa continuamente mentre l'utente parla. |
+| `server_content.input_transcription` | Trascrizione autorevole e finalizzata emessa al termine di un turno di parola. |
 
-## Sınırlamalar
+## Limitazioni
 
-- **Oturum süresi:** Canlı metne dönüştürme oturumları, 10 dakikaya kadar kesintisiz yayını destekler.
-- **Konuşmacı diarizasyonu:** Konuşmacı diarizasyonu, canlı yayın oturumlarında desteklenmez. Konuşmacı ayrımı için akış olmayan [Ses transkripsiyonu](https://ai.google.dev/gemini-api/docs/transcribe?hl=tr#speaker-diarization) uç noktasını kullanın.
-- **Kelime düzeyinde zaman damgaları:** Kelime düzeyinde zaman damgaları, Live API üzerinden desteklenmez. Live API, ifade düzeyinde zaman damgaları (`interim_input_transcription` ve `input_transcription`) yayar.
-- **Özel kelime dağarcığı:** `custom_vocabulary` içinde 1.000'e kadar terim sağlayabilirsiniz ancak en iyi sonuçlar genellikle 100 terimle elde edilir.
-- **Mod uyumluluğu:** Akıllı transkripsiyon (`"mode": "SMART"`), dolgu kelimelerini kaldırır ve amaca yönelik metni biçimlendirir ancak kelime notlarıyla birlikte kullanılamaz.
+- **Durata della sessione**:le sessioni di trascrizione in tempo reale supportano lo streaming continuo fino a 10 minuti.
+- **Diarizzazione degli oratori**:la diarizzazione degli oratori non è supportata nelle sessioni di live streaming. Per la diarizzazione degli oratori, utilizza l'endpoint [Trascrizione audio](https://ai.google.dev/gemini-api/docs/transcribe?hl=it#speaker-diarization) non in streaming.
+- **Timestamp a livello di parola**:i timestamp a livello di parola non sono supportati tramite l'API Live. L'API Live emette timestamp a livello di enunciato (`interim_input_transcription` e `input_transcription`).
+- **Vocabolario personalizzato**:puoi fornire fino a 1000 termini in `custom_vocabulary`, ma in genere i risultati migliori si ottengono con un massimo di 100 termini.
+- **Compatibilità delle modalità**:la trascrizione intelligente (`"mode": "SMART"`) rimuove le parole di riempimento e formatta il testo in base all'intent, ma non può essere combinata con le annotazioni delle parole.
 
-## Sırada ne var?
+## Passaggi successivi
 
-- Akış olmayan ses dosyaları için [Gemini Transcribe belgelerini](https://ai.google.dev/gemini-api/docs/transcribe?hl=tr) okuyun.
-- Sohbet eden sesli temsilciler için [Live API'ye genel bakış](https://ai.google.dev/gemini-api/docs/live-api?hl=tr) başlıklı makaleyi inceleyin.
-- Anlık konuşma çevirisi için [Canlı Çeviri kılavuzunu](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=tr) okuyun.
-- Live API akış fiyatlandırması için [Fiyatlandırma sayfası](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#gemini-3.5-transcribe-live)'nı kontrol edin.
-- [Live API özellikleri kılavuzunu](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=tr) inceleyin.
+- Leggi la [documentazione di Gemini Transcribe](https://ai.google.dev/gemini-api/docs/transcribe?hl=it) per i file audio non in streaming.
+- Leggi la [panoramica dell'API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=it) per gli agenti vocali conversazionali.
+- Leggi la [guida alla traduzione live](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=it) per la traduzione vocale in tempo reale.
+- Consulta la [pagina dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it#gemini-3.5-transcribe-live) per i prezzi dello streaming dell'API Live.
+- Esplora la [guida alle funzionalità dell'API Live](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=it).
 
-Geri bildirim gönderin
+Invia feedback
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Son güncelleme tarihi: 2026-09-10 UTC.
+Ultimo aggiornamento 2026-09-10 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Vuoi dirci altro?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-10 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-10 UTC."],[],[]]

@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-hooks?hl=ja
-fetched_at: 2026-10-19T05:54:06.907354+00:00
+source_url: https://ai.google.dev/gemini-api/docs/agent-hooks?hl=pl
+fetched_at: 2026-10-26T05:41:37.791860+00:00
 title: "Hooks \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-フィードバックを送信
+Prześlij opinię
 
 # Hooks
 
-フックを使用すると、エージェントがコードを実行したり、リモート サンドボックス内のファイルを変更する直前または直後に、カスタム スクリプトや外部 HTTP リクエストを実行できます。フックを使用して、次のような自動化されたガードレールとバックグラウンド ワークフローでエージェント ループを拡張します。
+Haczyki umożliwiają uruchamianie niestandardowych skryptów lub zewnętrznych żądań HTTP bezpośrednio przed lub po wykonaniu przez agenta kodu lub zmodyfikowaniu plików w zdalnym środowisku piaskownicy. Używaj hooków, aby rozszerzać pętlę agenta o automatyczne zabezpieczenia i przepływy pracy w tle, takie jak:
 
-- リスクの高いシェル コマンドや制限付きファイル読み取りが実行される前に、**安全性とアクセスに関するガードレールを適用**します。
-- エージェントがファイルを作成または変更した直後に**データ パイプラインの変換を自動化**します。
-- ツールの実行後に、外部モニタリング システムに**企業監査テレメトリーをストリーミング**します。
+- **Wymuszanie zabezpieczeń i ograniczeń dostępu** przed wykonaniem poleceń powłoki wysokiego ryzyka lub odczytaniem plików o ograniczonym dostępie.
+- **Automatyzacja przekształceń potoku danych** natychmiast po utworzeniu lub zmodyfikowaniu plików przez agenta.
+- **Przesyłanie strumieniowe danych telemetrycznych kontroli przedsiębiorstwa** do zewnętrznych systemów monitorowania po wykonaniu narzędzia.
 
 ### Python
 
@@ -320,20 +320,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## サポートされているライフサイクル イベント
+## Obsługiwane zdarzenia cyklu życia
 
-フックはサンドボックス内で 2 つのイベントをサポートしています。
+Haki obsługują w piaskownicy 2 zdarzenia:
 
-| イベント | 発火のタイミング | 機能 |
+| Zdarzenie | Kiedy się uruchamia | Działanie |
 | --- | --- | --- |
-| `pre_tool_execution` | ツールの実行直前 | ツールが実行される前に、ツールを承認（`allow`）またはブロック（`deny`）できます。ブロックされると、モデルは拒否の理由を認識して適応します。 |
-| `post_tool_execution` | ツールの完了直後 | コードのフォーマット、単体テストの実行、テレメトリーのロギングなどのフォローアップ タスクを実行します。完了したアクションをブロックしたり、元に戻したりすることはできません。 |
+| `pre_tool_execution` | Bezpośrednio przed uruchomieniem narzędzia | Może zatwierdzić (`allow`) lub zablokować (`deny`) narzędzie przed jego wykonaniem. Gdy model zostanie zablokowany, zobaczy powód odrzucenia i dostosuje się do niego. |
+| `post_tool_execution` | od razu po zakończeniu działania narzędzia, | Wykonuje zadania uzupełniające, takie jak formatowanie kodu, uruchamianie testów jednostkowych czy rejestrowanie danych telemetrycznych. Nie można blokować ani cofać wykonanych działań. |
 
 ### `pre_tool_execution`
 
-ツールが実行される直前に発生します。スクリプトは `stdin` からツール呼び出しの詳細を読み取り、決定 JSON（`allow` または `deny`）を `stdout` に出力します。
+Uruchamia się tuż przed wykonaniem narzędzia. Skrypt odczytuje szczegóły wywołania narzędzia z `stdin` i zapisuje decyzję w formacie JSON (`allow` lub `deny`) w `stdout`.
 
-**入力ペイロード（`stdin`）:**
+**Ładunek wejściowy (`stdin`):**
 
 ```
 {
@@ -348,9 +348,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-**出力レスポンス（`stdout`）:**
+**Odpowiedź wyjściowa (`stdout`):**
 
-ツール呼び出しを承認するには:
+Aby zatwierdzić wywołanie narzędzia:
 
 ```
 {
@@ -358,7 +358,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-ツール呼び出しをブロックしてモデルにフィードバックを返すには:
+Aby zablokować wywołanie narzędzia i przekazać opinię do modelu:
 
 ```
 {
@@ -367,15 +367,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-フックがコマンドを拒否すると、ツール呼び出しはすぐにスキップされます。エージェントは、現在のターン内に拒否理由を含むエラー結果を表示します。モデルは、別のコマンドを選択するか、ブロックについてユーザーに説明することで、自己修正できます。
+Gdy funkcja hook odrzuci polecenie, wywołanie narzędzia zostanie natychmiast pominięte. Agent widzi wynik błędu zawierający przyczynę odrzucenia bezpośrednio w bieżącej turze. Model może wtedy samodzielnie skorygować błąd, wybierając alternatywne polecenie lub wyjaśniając użytkownikowi, dlaczego polecenie zostało zablokowane.
 
-スクリプトが認識できない JSON、プレーン テキスト、または `{"decision": "deny"}` 以外のものを出力すると、ランタイムはレスポンスを承認（`allow`）として扱います。
+Jeśli skrypt zwraca nierozpoznany format JSON, zwykły tekst lub cokolwiek innego niż `{"decision": "deny"}`, środowisko wykonawcze traktuje odpowiedź jako zatwierdzenie (`allow`).
 
 ### `post_tool_execution`
 
-ツールが完了した直後に発生します。スクリプトは、`stdin` から実行の詳細とエラー ステータスを読み取ります。
+Wysyłane natychmiast po zakończeniu działania narzędzia. Skrypt odczytuje szczegóły wykonania i stan błędu z `stdin`.
 
-**入力ペイロード（`stdin`）:**
+**Ładunek wejściowy (`stdin`):**
 
 ```
 {
@@ -390,27 +390,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-シェル コマンドが標準エラー（`stderr`）にエラーを出力した場合、またはファイルシステム オペレーションが失敗した場合、エラーテキストを含む `"error"` フィールドがペイロードに含まれます。コマンドがエラーなしで成功すると、`"error"` フィールドは完全に省略されます。
+Jeśli polecenie powłoki wyświetla błędy w standardowym strumieniu błędów (`stderr`) lub operacja w systemie plików kończy się niepowodzeniem, w ładunku znajduje się pole `"error"` zawierające tekst błędu. Jeśli polecenie zakończy się bez błędów, pole `"error"` zostanie całkowicie pominięte.
 
-**出力レスポンス（`stdout`）:**
+**Odpowiedź wyjściowa (`stdout`):**
 
 ```
 {}
 ```
 
-ツール後のフックは、コードのフォーマットやロギングなどのバックグラウンド タスクに対して厳密に実行されるため、ランタイムは `stdout` で返された決定値を無視します。
+Ponieważ funkcje wywoływane po użyciu narzędzia są uruchamiane wyłącznie w przypadku zadań w tle, takich jak formatowanie kodu lub rejestrowanie, środowisko wykonawcze ignoruje wszystkie wartości decyzji zwrócone w przypadku funkcji `stdout`.
 
-## 構成の検出
+## Wykrywanie konfiguracji
 
-ランタイムは、サンドボックス環境内の `.agents/hooks.json` または `/.agents/hooks.json` からフック定義を自動的に検出します。サポートされている任意の[環境ソース](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja#mount_from_a_source)を使用して、カスタム スクリプトとともに `hooks.json` を指定できます。
+Środowisko wykonawcze automatycznie wykrywa definicje funkcji hook z `.agents/hooks.json` lub `/.agents/hooks.json` w środowisku piaskownicy. Możesz podać `hooks.json` wraz ze skryptami niestandardowymi, korzystając z dowolnego obsługiwanego [źródła środowiska](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#mount_from_a_source):
 
-- **リポジトリ マウント**: `AGENTS.md` とともに `.agents/hooks.json` を含む Git リポジトリ。
-- **Cloud Storage（`gcs`）**: 環境にコピーされた `hooks.json` を含む GCS バケット。
-- **インライン ソース**: `client.interactions.create` を呼び出すときに `environment.sources` で渡される未加工の JSON 文字列とスクリプトの内容。
+- **Montowanie repozytorium:** repozytorium Git zawierające `.agents/hooks.json` wraz z `AGENTS.md`.
+- **Cloud Storage (`gcs`):** zasobnik GCS zawierający `hooks.json` skopiowane do środowiska.
+- **Źródła wbudowane:** nieprzetworzony ciąg znaków JSON i zawartość skryptu przekazywane w parametrze `environment.sources` podczas wywoływania funkcji `client.interactions.create`.
 
-### `hooks.json` 個のスキーマ
+### `hooks.json` schemat
 
-`hooks.json` ファイルは、イベント定義（`pre_tool_execution` または `post_tool_execution`）をカスタム名でグループ化します。各グループを個別に有効または無効にできます。
+Plik `hooks.json` grupuje definicje zdarzeń (`pre_tool_execution` lub `post_tool_execution`) pod niestandardowymi nazwami. Każdą grupę możesz włączyć lub wyłączyć osobno:
 
 ```
 {
@@ -446,71 +446,71 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### マッチャーの構文とルール
+### Składnia i reguły dopasowywania
 
-`hooks.json` の各ルールグループは、`matcher` プロパティと `hooks` プロパティを使用して、ハンドラを起動するタイミングと方法を定義します。
+Każda grupa reguł w `hooks.json` określa, kiedy i jak wywoływane są moduły obsługi, za pomocą właściwości `matcher` i `hooks`:
 
-| フィールド | タイプ | 説明 |
+| Pole | Typ | Opis |
 | --- | --- | --- |
-| `enabled` | `boolean` | 省略可。グループを無効にするには、`false` に設定します（デフォルトは `true`）。 |
-| `matcher` | `string` | コンテナ内のターゲット ツールの名前を照合する正規表現パターン。 |
-| `hooks` | `array` | ハンドラ定義の順序付きリスト（`command` または `http`）。ハンドラは宣言順に実行されます。 |
+| `enabled` | `boolean` | Opcjonalnie: Ustaw wartość `false`, aby wyłączyć grupę (domyślnie `true`). |
+| `matcher` | `string` | Wyrażenie regularne pasujące do nazw narzędzi w kontenerze. |
+| `hooks` | `array` | Uporządkowana lista definicji modułów obsługi (`command` lub `http`). Moduły obsługi są uruchamiane sekwencyjnie w kolejności deklaracji. |
 
-#### 正規表現の評価の仕組み
+#### Jak działa ocena wyrażeń regularnych
 
-エージェントがサンドボックス内のツールを呼び出すと、ランタイムは標準の RE2 正規表現を使用して、ツールのコンテナ名を `matcher` パターンに対して評価します。正規表現がツール名と一致する場合、`hooks` 配列内のすべてのハンドラが順番に実行されます。複数のルールグループが同じツールに一致する場合、対応するすべてのハンドラ配列が実行されます。
+Gdy agent wywołuje narzędzie w piaskownicy, środowisko wykonawcze porównuje nazwę kontenera narzędzia z wzorcem `matcher` przy użyciu standardowych wyrażeń regularnych RE2. Jeśli wyrażenie regularne pasuje do nazwy narzędzia, wszystkie moduły obsługi w tablicy `hooks` są wykonywane po kolei. Jeśli do tego samego narzędzia pasuje kilka grup reguł, uruchamiane są wszystkie odpowiednie tablice obsługi.
 
-コード実行（`code_execution`）またはファイル システム オペレーション（`view_file`、`write_to_file`、`replace_file_content`、`list_dir`、`delete_file`）の任意の組み込みコンテナ ツール名をターゲットにできます。
+Możesz kierować reklamy na dowolną nazwę wbudowanego narzędzia kontenera: wykonywanie kodu (`code_execution`) lub operacje na systemie plików (`view_file`, `write_to_file`, `replace_file_content`, `list_dir` i `delete_file`).
 
-#### 一般的なマッチャー式
+#### Typowe wyrażenia dopasowujące
 
-- `"code_execution"`: シェル コマンドとスクリプト実行の完全一致文字列。
-- `"write_to_file"`: ファイル システムのファイル作成とディスク書き込みの完全一致。
-- `"view_file|write_to_file"`: パイプ区切りが、単一のルール内の複数の特定のツール名と一致します。
-- `".*_file"`: `_file` で終わるツール（`view_file`、`write_to_file`、`delete_file` など）に一致する正規表現ワイルドカード。これはファイル システム ツールセットの一部のみを対象としています。`replace_file_content` と `list_dir` は `_file` で終わらないため、必要な場合は明示的に名前を指定してください。標準の RE2 正規表現には `.*` が必要です。`*_file` などの単純なシェル グロブは無効な正規表現構文であり、一致しません。
-- `".*"` または `"*"` または `""`: コンテナ内のすべてのツール呼び出しをインターセプトする包括的なパターン。
+- `"code_execution"`: dokładne dopasowanie ciągu znaków w przypadku poleceń powłoki i wykonywania skryptów.
+- `"write_to_file"`: Dokładne dopasowanie do tworzenia plików w systemie plików i zapisywania na dysku.
+- `"view_file|write_to_file"`: Rozdzielanie pionową kreską dopasowuje kilka konkretnych nazw narzędzi w jednej regule.
+- `".*_file"`: wyrażenie regularne z wieloznacznym dopasowaniem do dowolnego narzędzia kończącego się na `_file` (np. `view_file`, `write_to_file` lub `delete_file`). Obejmuje to tylko część zestawu narzędzi systemu plików. Narzędzia `replace_file_content` i `list_dir` nie kończą się na `_file`, więc w razie potrzeby musisz je podać wprost. Standardowe wyrażenia regularne RE2 wymagają znaku `.*`. Proste wzorce powłoki, takie jak `*_file`, mają nieprawidłową składnię wyrażenia regularnego i nie będą pasować.
+- `".*"` lub `"*"` lub `""`: wzorzec ogólny, który przechwytuje każde wywołanie narzędzia w kontenerze.
 
-## ハンドラのタイプ
+## Typy obsługi
 
-### コマンドフック
+### Haczyki Command
 
-コマンドフックは、サンドボックス内でシェルコマンドまたはスクリプトを実行します。スクリプトは `stdin` でイベント JSON を受け取り、`stdout` で決定 JSON を出力します。
+Haczyki poleceń wykonują polecenie powłoki lub skrypt w piaskownicy. Skrypt otrzymuje kod JSON zdarzenia w `stdin` i zwraca kod JSON decyzji w `stdout`.
 
-| フィールド | タイプ | 説明 |
+| Pole | Typ | Opis |
 | --- | --- | --- |
-| `type` | `string` | `"command"` を指定します。 |
-| `command` | `string` | サンドボックス内で実行するコマンドライン（`python3 /.agents/hooks-scripts/gate.py` など）。 |
-| `timeout` | `integer` | タイムアウト（秒）。デフォルト: `30`。 |
+| `type` | `string` | Musi to być `"command"`. |
+| `command` | `string` | Wiersz poleceń do uruchomienia w piaskownicy (np. `python3 /.agents/hooks-scripts/gate.py`). |
+| `timeout` | `integer` | Czas oczekiwania w sekundach. Domyślnie: `30`. |
 
-### HTTP フック
+### Haczyki HTTP
 
-HTTP フックは、イベント JSON を POST リクエストとしてサンドボックス ネットワーク内から外部 HTTPS URL に直接送信します。ターゲット サーバーは、まったく同じ JSON 形式（`{"decision": "allow"}` または `{"decision": "deny", "reason": "..."}`）を使用して、HTTP レスポンス本文で決定を返します。
+Haczyki HTTP wysyłają zdarzenie JSON jako żądanie POST na zewnętrzny adres URL HTTPS bezpośrednio z sieci piaskownicy. Serwer docelowy zwraca swoją decyzję w treści odpowiedzi HTTP w tym samym formacie JSON (`{"decision": "allow"}` lub `{"decision": "deny", "reason": "..."}`).
 
-| フィールド | タイプ | 説明 |
+| Pole | Typ | Opis |
 | --- | --- | --- |
-| `type` | `string` | `"http"` を指定します。 |
-| `url` | `string` | イベント ペイロードを POST する外部 HTTPS エンドポイント。 |
-| `headers` | `object` | 機密情報を含まないカスタム ヘッダー（`{"X-Event-Source": "agent-sandbox"}` など）の省略可能な Key-Value ペア。認証には、ネットワーク許可リストの[認証情報](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ja)を代わりに使用します。 |
-| `timeout` | `integer` | タイムアウト（秒単位）。デフォルト: `30`。 |
+| `type` | `string` | Musi to być `"http"`. |
+| `url` | `string` | Zewnętrzny punkt końcowy HTTPS, do którego ma być wysyłany ładunek zdarzenia. |
+| `headers` | `object` | Opcjonalne pary klucz-wartość dla niestandardowych nagłówków nie zawierających informacji poufnych (np. `{"X-Event-Source": "agent-sandbox"}`). Do uwierzytelniania używaj [danych logowania](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=pl) na liście dozwolonych sieci. |
+| `timeout` | `integer` | Czas oczekiwania w sekundach. Domyślnie: `30`. |
 
-#### 下り（外向き）プロキシとトークン変換
+#### Serwer proxy ruchu wychodzącego i transformacja tokena
 
-HTTP フックはサンドボックス ネットワーク名前空間内から直接実行されるため、送信リクエストは透過的な下り（外向き）プロキシを通過します。このアーキテクチャには、2 つの重要なセキュリティ上の利点があります。
+Haczyki HTTP są wykonywane bezpośrednio w przestrzeni nazw sieci piaskownicy, więc żądania wychodzące przechodzą przez przezroczysty serwer proxy ruchu wychodzącego. Ta architektura zapewnia 2 kluczowe zalety w zakresie bezpieczeństwa:
 
-- **ネットワークの許可リスト:** 移行先のエンドポイントは、環境の `network.allowlist` で明示的に許可されている必要があります。ループバック トラフィック（`127.0.0.1` または `localhost`）はプロキシによってブロックされます。常に許可リストに登録された外部エンドポイントをターゲットにします。
-- **認証情報の挿入:** API キーやシークレット ベアラートークンを `.agents/hooks.json` 内に保存したり、コンテナにマウントしたりする必要はありません。シークレットを[認証情報](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ja)として 1 回保存し、環境の `network.allowlist` から ID で参照します。上り（内向き）プロキシは、上り（内向き）の HTTP フック トラフィックを自動的にインターセプトし、サンドボックスを離れる前に、実際の認証ヘッダーをワイヤに挿入します。インライン `transform` ルールは、ワイヤ上で同じ方法でヘッダーを設定します。認証情報は、プロジェクト全体でシークレットを再利用し、1 か所でローテーションする場合に使用するものです。[ネットワーク構成](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja#network-configuration)をご覧ください。
+- **Dodawanie sieci do białej listy:** punkty końcowe docelowe muszą być wyraźnie dozwolone w `network.allowlist` Twojego środowiska. Ruch zwrotny (`127.0.0.1` lub `localhost`) jest blokowany przez serwer proxy. Zawsze kieruj ruch do zewnętrznych punktów końcowych na liście dozwolonych.
+- **Wstrzykiwanie danych logowania:** nie musisz przechowywać kluczy interfejsu API ani tajnych tokenów dostępu w `.agents/hooks.json` ani montować ich w kontenerze. Zapisz obiekt tajny jako [dane logowania](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=pl) i odwołuj się do niego za pomocą identyfikatora z `network.allowlist` środowiska. Serwer proxy wychodzący automatycznie przechwytuje wychodzący ruch HTTP hook i wstrzykuje prawdziwy nagłówek uwierzytelniania przed opuszczeniem piaskownicy. Nagłówki zestawu reguł wbudowanych `transform` są ustawiane w ten sam sposób, a dane logowania są używane, gdy chcesz ponownie użyć obiektu tajnego w projekcie i zmienić go w jednym miejscu. Patrz [konfiguracja sieci](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#network-configuration).
 
-## ランタイムによる決定と失敗の処理方法
+## Jak środowisko wykonawcze obsługuje decyzje i błędy
 
-- **同期待機:** エージェントは一時停止し、フックが完了するまで待機してから続行します。
-- **ツールの実行をブロックする:** 事前ツールフックが `{"decision": "deny", "reason": "<your reason>"}` を返すと、ランタイムはツール呼び出しを直ちにキャンセルします。モデルは、会話履歴で拒否理由を確認し、安全な代替案を選択するか、ブロックについてユーザーに説明することで適応します。
-- **スクリプトのクラッシュ、HTTP エラー、タイムアウトの処理:** コマンド スクリプトがクラッシュした場合（ゼロ以外の終了ステータス）、HTTP フックが 2xx 以外のステータス コード（4xx や 5xx サーバーエラーなど）を返した場合、オペレーションがタイムアウトした場合、または認識できない JSON を返した場合、ランタイムは承認（`allow`）として扱います。ツールの実行は通常どおり続行されるため、破損したスクリプトや到達不能なテレメトリー サーバーによってアプリケーションがデッドロックすることはありません。
+- **Synchroniczne oczekiwanie:** agent wstrzymuje działanie i czeka na zakończenie działania Twoich funkcji, zanim przejdzie dalej.
+- **Blokowanie wykonania narzędzia:** jeśli funkcja pre-tool hook zwróci wartość `{"decision": "deny", "reason": "<your reason>"}`, środowisko wykonawcze natychmiast anuluje wywołanie narzędzia. Model widzi powód odrzucenia w historii rozmowy i dostosowuje się, wybierając bezpieczną alternatywę lub wyjaśniając użytkownikowi blokadę.
+- **Obsługa awarii skryptu, błędów HTTP i przekroczenia limitu czasu:** jeśli skrypt polecenia ulegnie awarii (stan wyjścia różny od zera), wywołanie HTTP zwróci kod stanu inny niż 2xx (np. błąd serwera 4xx lub 5xx) albo operacja przekroczy limit czasu lub zwróci nierozpoznany format JSON, środowisko wykonawcze potraktuje to jako zatwierdzenie (`allow`). Wykonanie narzędzia będzie kontynuowane normalnie, więc uszkodzony skrypt lub nieosiągalny serwer telemetrii nigdy nie spowoduje zakleszczenia aplikacji.
 
-## 一般的なユースケース
+## Częste przypadki użycia
 
-### データ プライバシーとコンプライアンスのためのマルチターンの復元
+### Wielokrotne przywracanie danych w celu zapewnienia prywatności i zgodności z przepisami
 
-フックが制限付きリソース（個人情報（PII）や機密の財務記録を含むディレクトリなど）へのアクセスをブロックした場合、次の呼び出しで `previous_interaction_id` を渡して、同じ環境でターンを続行できます。エージェントは拒否の説明を読み取り、承認済みの公開テーブルをクエリして自動的に復元します。
+Gdy funkcja blokuje dostęp do zasobów o ograniczonym dostępie, takich jak katalogi zawierające informacje umożliwiające identyfikację osoby lub poufne dokumenty finansowe, możesz przekazać wartość `previous_interaction_id` w następnym wywołaniu, aby kontynuować turę w tym samym środowisku. Agent odczytuje wyjaśnienie odmowy i automatycznie przywraca działanie, wysyłając zapytanie do zatwierdzonych tabel publicznych.
 
 ### Python
 
@@ -932,12 +932,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   }'
 ```
 
-### 外部監査ロギングとテレメトリー
+### Logowanie kontrolne i telemetria zewnętrzne
 
-ファイルが読み取りまたは変更されるたびに、サンドボックス内から外部モニタリング サーバーにリアルタイムの監査イベントを送信します。
+Wysyłanie zdarzeń kontrolnych w czasie rzeczywistym z piaskownicy na zewnętrzny serwer monitorowania za każdym razem, gdy pliki są odczytywane lub modyfikowane.
 
-- **複数のツールを照合する:** マッチャーは標準の正規表現を使用するため、パイプ（`view_file|write_to_file|replace_file_content`）またはワイルドカード（`.*_file`）を使用して、複数のツールを 1 つのルールに組み合わせることができます。
-- **シークレットを構成から除外する:** 認証トークンを[認証情報](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ja)として保存し、環境の[ネットワーク構成](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja#network-configuration)（`network.allowlist.credential`）から ID で参照します。下り（外向き）プロキシは、送信リクエストに実際のベアラートークンを挿入します。この例では、ヘッダーを `transform` とインラインで設定しています。これは同じプロキシで保護され、トークンがこの 1 つの構成に属する場合に適しています。
+- **Dopasowywanie wielu narzędzi:** ponieważ dopasowywanie odbywa się za pomocą standardowych wyrażeń regularnych, możesz połączyć wiele narzędzi w jednej regule, używając pionowych kresek (`view_file|write_to_file|replace_file_content`) lub symboli wieloznacznych (`.*_file`).
+- **Nie umieszczaj informacji poufnych w konfiguracji:** przechowuj token uwierzytelniający jako [dane logowania](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=pl) i odwołuj się do niego za pomocą identyfikatora z [konfiguracji sieci](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#network-configuration) środowiska (`network.allowlist.credential`). Serwer proxy ruchu wychodzącego wstrzykuje rzeczywisty token dostępu do żądań wychodzących. W tym przykładzie nagłówek jest ustawiany w wierszu za pomocą `transform`, który jest chroniony przez ten sam serwer proxy i pasuje, gdy token należy do tej konfiguracji.
 
 ### Python
 
@@ -1234,25 +1234,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 制限事項
+## Ograniczenia
 
-- **サンドボックス ツールのスコープ:** フックは、サンドボックス内の組み込みツール（コード実行（`code_execution`）とファイル システム オペレーション（`view_file`、`write_to_file`、`replace_file_content`、`list_dir`、`delete_file`））をインターセプトします。カスタム関数呼び出し（`function`）や、コンテナ外で処理される外部 Model Context Protocol（`mcp_server`）ツールではトリガーされません。
-- **ネットワーク許可リスト:** HTTP フックはコンテナ ネットワーク内で実行されます。環境の `network.allowlist` でターゲット URL を明示的に許可する必要があります。ループバック アドレス（`localhost`、`127.0.0.1`）はプロキシによってブロックされます。
-- **エラー時の自動承認:** フック スクリプトがクラッシュ（ゼロ以外の終了ステータス）、タイムアウト、または失敗した場合、ランタイムは失敗をログに記録し、ツール呼び出しを続行します。これにより、壊れたリンタースクリプトやハングしたプロセスによってアプリケーションがデッドロックされることはありません。
-- **サンドボックス構成の保護:** フックはコンテナ サンドボックス内で実行されるため、ファイル システム書き込みツールまたはシェルコード実行権限を持つエージェントは、書き込み可能なワークスペース内のローカル `.agents/hooks.json` またはスクリプトを変更できます。コンテナフックを自動化されたポリシー ガイダンスと運用ガードレールとして使用します。信頼できないモデル実行に対する厳格な改ざん防止が必要な場合は、読み取り専用リポジトリから構成ソースをマウントします。
+- **Zakres narzędzia w piaskownicy:** haki przechwytują wbudowane narzędzia w piaskownicy: wykonywanie kodu (`code_execution`) i operacje na systemie plików (`view_file`, `write_to_file`, `replace_file_content`, `list_dir` i `delete_file`). Nie są one wywoływane w przypadku wywoływania funkcji niestandardowych (`function`) ani zewnętrznych narzędzi Model Context Protocol (`mcp_server`) obsługiwanych poza kontenerem.
+- **Listy dozwolonych sieci:** haki HTTP działają w sieci kontenera. Musisz wyraźnie zezwolić na docelowe adresy URL w `network.allowlist` środowiska. Adresy typu loopback (`localhost`, `127.0.0.1`) są blokowane przez serwer proxy.
+- **Automatyczne zatwierdzanie w przypadku błędów:** jeśli skrypt hooka ulegnie awarii (niezerowy stan zakończenia), przekroczy limit czasu lub zakończy się niepowodzeniem, środowisko wykonawcze zarejestruje błąd i umożliwi kontynuowanie wywołania narzędzia. Dzięki temu uszkodzone skrypty narzędzia do sprawdzania kodu lub zawieszone procesy nigdy nie spowodują zakleszczenia aplikacji.
+- **Ochrona konfiguracji piaskownicy:** ponieważ wywołania zwrotne są wykonywane w piaskownicy kontenera, agenci z narzędziami do zapisu w systemie plików lub uprawnieniami do wykonywania kodu powłoki mogą modyfikować lokalne `.agents/hooks.json` lub skrypty w obszarach roboczych z możliwością zapisu. Używaj punktów zaczepienia kontenera jako automatycznych wskazówek dotyczących zasad i operacyjnych zabezpieczeń. Jeśli wymagana jest ścisła odporność na manipulacje w przypadku wykonywania niezaufanych modeli, zamontuj źródła konfiguracji z repozytoriów tylko do odczytu.
 
-## 次のステップ
+## Co dalej?
 
-- 永続的な[リモート サンドボックスと環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja)を構成する方法を学習します。
-- [Antigravity エージェント](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja)の機能と組み込みツールについて説明します。
-- マルチターンのセッションとストリーミングについては、[Interactions API の概要](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja)をご覧ください。
+- Dowiedz się, jak skonfigurować trwałe [zdalne piaskownice i środowiska](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl).
+- Poznaj możliwości i wbudowane narzędzia [agenta Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pl).
+- Więcej informacji o sesjach wieloetapowych i przesyłaniu strumieniowym znajdziesz w [omówieniu interfejsu Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl).
 
-フィードバックを送信
+Prześlij opinię
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-最終更新日 2026-10-07 UTC。
+Ostatnia aktualizacja: 2026-10-07 UTC.
 
-ご意見をお聞かせください
+Chcesz przekazać coś jeszcze?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-07 UTC。"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-10-07 UTC."],[],[]]

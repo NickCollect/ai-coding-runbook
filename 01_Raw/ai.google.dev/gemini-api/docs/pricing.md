@@ -1,1279 +1,1219 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=sq
-fetched_at: 2026-10-19T05:43:34.030909+00:00
-title: "\u00c7mimi i Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=zh-TW
+fetched_at: 2026-10-26T05:45:02.764800+00:00
+title: "Gemini Developer API \u5b9a\u50f9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Faqja kryesore](https://ai.google.dev/?hl=sq)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
-- [Dokumentet](https://ai.google.dev/gemini-api/docs?hl=sq)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-# Çmimi i Gemini Developer API
+# Gemini Developer API 定價
 
-Fillo të ndërtosh pa pagesë me kufij bujarë dhe më pas zgjeroje me çmime me parapagim dhe me pagesë sipas përdorimit për aplikacionet e tua gati për prodhim.
+開始建構時，可無須支付費用享有充裕的用量限制，之後再依預付和即付即用定價，擴充可用於正式環境的應用程式。
 
-### Falas
+### 免費
 
-Për zhvilluesit dhe projektet e vogla që po fillojnë me Gemini API.
+適合剛開始使用 Gemini API 的開發人員和小型專案。
 
-- check\_circleQasje e kufizuar në modele të caktuara
-- check\_circleTokenë falas të hyrjes dhe daljes
-- check\_circleQasja në Google AI Studio
-- check\_circlePërmbajtjet e përdorura për të përmirësuar produktet tona[\*](https://ai.google.dev/gemini-api/terms?hl=sq)
+- check\_circle只能使用部分模型
+- check\_circle免付費輸入和輸出詞元
+- check\_circleGoogle AI Studio 存取權
+- check\_circle內容會用於提升我們的產品[\*](https://ai.google.dev/gemini-api/terms?hl=zh-tw)
 
-[Fillo falas](https://aistudio.google.com?hl=sq)
+[免費試用](https://aistudio.google.com?hl=zh-tw)
 
-### Me pagesë
+### 付費
 
-Për aplikacionet e prodhimit që kërkojnë volume më të larta dhe veçori të përparuara.
+適合需要大量資料及進階功能的正式環境應用程式。
 
-- check\_circleKufij më të lartë të normave për përdorimet në prodhim
-- check\_circleQasje te "Ruajtja specifike e kontekstit"
-- check\_circleBatch API (50% ulje kostoje)
-- check\_circleQasje në modelet më të përparuara të Google
-- check\_circlePërmbajtjet **nuk** përdoren për të përmirësuar produktet tona[\*](https://ai.google.dev/gemini-api/terms?hl=sq)
+- check\_circle提高正式環境部署作業的頻率限制
+- check\_circle存取脈絡快取功能
+- check\_circleBatch API (成本降低 50%)
+- check\_circle使用 Google 最先進的模型
+- check\_circle內容**不會**用於提升我們的產品[\*](https://ai.google.dev/gemini-api/terms?hl=zh-tw)
 
-[Përmirësoje në versionin me pagesë](https://aistudio.google.com/api-keys?hl=sq)
+[升級為付費帳戶](https://aistudio.google.com/api-keys?hl=zh-tw)
 
-### Ndërmarrje
+### Enterprise
 
-Për integrimet në ndërmarrje, mundësuar nga [Platforma e agjentit të Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=sq).
+採用 [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=zh-tw)，適合企業部署。
 
-- check\_circleTë gjitha veçoritë në planin me pagesë, si dhe qasje opsionale në:
-- check\_circleKanalet e dedikuara të mbështetjes
-- check\_circleSiguri dhe përputhshmëri e përparuar
-- check\_circleKapaciteti i ofruar
-- check\_circleZbritje bazuar në vëllim (bazuar në përdorim)
-- check\_circleOperacionet e ML, kopshti i modelit etj.
+- check\_circle付費方案的所有功能，以及可選用的：
+- check\_circle專屬支援管道
+- check\_circle進階安全性與法規遵循
+- check\_circle佈建輸送量
+- check\_circle大量使用折扣 (依用量計算)
+- check\_circle機器學習作業、Model Garden 等
 
-[Kontakto me ekipin e shitjeve](https://cloud.google.com/contact?hl=sq)
+[與銷售人員聯絡](https://cloud.google.com/contact?hl=zh-tw)
 
 ## Gemini 4 Argon
 
-*[`gemini-4-argon`](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=sq)*
+*[`gemini-4-argon`](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)
 
-Modeli ynë kryesor arsyetues, i ndërtuar për inxhinieri komplekse softuerike, zgjidhje të thellë të problemeve matematikore dhe shkencore, agjentë autonomë me shumë hapa dhe gjenerim me dekodime të gjata deri në 1 milion tokenë.
+我們的旗艦推論模型，專為複雜軟體工程、深度數學和科學問題解決、自主多步驟代理，以及長解碼生成 (最多 100 萬個詞元) 而打造。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 2, 00 USD deri më 30 nëntor 2026. 4, 00 USD duke filluar nga data 1 dhjetor 2026. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 10, 00 USD deri më 30 nëntor 2026. 20, 00 USD duke filluar nga data 1 dhjetor 2026. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0, 10 USD deri më 30 nëntor 2026. 0, 20 USD duke filluar nga data 1 dhjetor 2026. Vetëm ruajtje implicite në memorien specifike (ruajtja eksplicite në memorien specifike nuk mbështetet). |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 11 月 30 日前為 $2.00 美元。 2026 年 12 月 1 日起為$4.00 美元。 |
+| 輸出價格 (含思考詞元) | 無法使用 | 2026 年 11 月 30 日前為 $10.00 美元。 2026 年 12 月 1 日起為$20.00 美元。 |
+| 脈絡快取價格 | 無法使用 | 2026 年 11 月 30 日前為 $0.10 美元。 2026 年 12 月 1 日起為$0.20 美元。 僅限隱含快取 (不支援明確快取)。 |
+| 以 Google 搜尋強化事實基礎\* | 無法使用 | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 無法使用 | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | 無法使用 | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 1, 00 USD deri më 30 nëntor 2026. 2, 00 USD duke filluar nga data 1 dhjetor 2026. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 5, 00 USD deri më 30 nëntor 2026. 10, 00 USD duke filluar nga data 1 dhjetor 2026. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0, 05 USD deri më 30 nëntor 2026. 0, 10 USD duke filluar nga data 1 dhjetor 2026. Vetëm ruajtja implicite në memorien specifike (ruajtja eksplicite në memorien specifike nuk mbështetet). |
-| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 11 月 30 日前為 $1.00 美元。 2026 年 12 月 1 日起為$2.00 美元。 |
+| 輸出價格 (含思考詞元) | 無法使用 | 2026 年 11 月 30 日前為 $5.00 美元。 2026 年 12 月 1 日起為$10.00 美元。 |
+| 脈絡快取價格 | 無法使用 | 2026 年 11 月 30 日前為 $0.05 美元。 2026 年 12 月 1 日起為$0.10 美元。 僅限隱含快取 (不支援明確快取)。 |
+| 用於提升我們的產品 | 無法使用 | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 1, 00 USD deri më 30 nëntor 2026. 2, 00 USD duke filluar nga data 1 dhjetor 2026. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 5, 00 USD deri më 30 nëntor 2026. 10, 00 USD duke filluar nga data 1 dhjetor 2026. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0, 05 USD deri më 30 nëntor 2026. 0, 10 USD duke filluar nga data 1 dhjetor 2026. Vetëm ruajtja implicite në memorien specifike (ruajtja eksplicite në memorien specifike nuk mbështetet). |
-| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 11 月 30 日前為 $1.00 美元。 2026 年 12 月 1 日起為$2.00 美元。 |
+| 輸出價格 (含思考詞元) | 無法使用 | 2026 年 11 月 30 日前為 $5.00 美元。 2026 年 12 月 1 日起為$10.00 美元。 |
+| 脈絡快取價格 | 無法使用 | 2026 年 11 月 30 日前為 $0.05 美元。 2026 年 12 月 1 日起為$0.10 美元。 僅限隱含快取 (不支援明確快取)。 |
+| 用於提升我們的產品 | 無法使用 | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 3, 60 USD deri më 30 nëntor 2026. 7, 20 USD duke filluar nga data 1 dhjetor 2026. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 18, 00 USD deri më 30 nëntor 2026. 36, 00 USD duke filluar nga data 1 dhjetor 2026. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0, 18 USD deri më 30 nëntor 2026. 0, 36 USD duke filluar nga data 1 dhjetor 2026. Vetëm ruajtja implicite në memorien specifike (ruajtja eksplicite në memorien specifike nuk mbështetet). |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 11 月 30 日前為 $3.60 美元。 2026 年 12 月 1 日起為$7.20 美元。 |
+| 輸出價格 (含思考詞元) | 無法使用 | 2026 年 11 月 30 日前為 $18.00 美元。 2026 年 12 月 1 日起為$36.00 美元。 |
+| 脈絡快取價格 | 無法使用 | 2026 年 11 月 30 日前為 $0.18 美元。 2026 年 12 月 1 日起為$0.36 美元。 僅限隱含快取 (不支援明確快取)。 |
+| 以 Google 搜尋強化事實基礎\* | 無法使用 | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 無法使用 | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | 無法使用 | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Kontribues
+### 協作者
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 1, 00 USD deri më 30 nëntor 2026. 2, 00 USD duke filluar nga data 1 dhjetor 2026. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 5, 00 USD deri më 30 nëntor 2026. 10, 00 USD duke filluar nga data 1 dhjetor 2026. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0, 05 USD deri më 30 nëntor 2026. 0, 10 USD duke filluar nga data 1 dhjetor 2026. Vetëm ruajtja implicite në memorien specifike (ruajtja eksplicite në memorien specifike nuk mbështetet). |
-| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Po](https://ai.google.dev/gemini-api/docs/logs-policy?hl=sq#contributor-tier) |
+| 輸入價格 | 無法使用 | 2026 年 11 月 30 日前為 $1.00 美元。 2026 年 12 月 1 日起為$2.00 美元。 |
+| 輸出價格 (含思考詞元) | 無法使用 | 2026 年 11 月 30 日前為 $5.00 美元。 2026 年 12 月 1 日起為$10.00 美元。 |
+| 脈絡快取價格 | 無法使用 | 2026 年 11 月 30 日前為 $0.05 美元。 2026 年 12 月 1 日起為$0.10 美元。 僅限隱含快取 (不支援明確快取)。 |
+| 用於提升我們的產品 | 無法使用 | [是](https://ai.google.dev/gemini-api/docs/logs-policy?hl=zh-tw#contributor-tier) |
 
-\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
+\* 客戶向 Gemini 提交要求後，可能會產生一或多個 Google 搜尋查詢。系統會針對您執行的每項搜尋查詢收取費用。
 
-## Gemini 3.8 Flash
+## Gemini 3.8 Flash
 
-*[`gemini-3.8-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=sq)*
+*[`gemini-3.8-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-tw)
 
-Modeli ynë më inteligjent Flash, i projektuar për inxhinieri softuerike afatgjatë, agjentë autonomë dhe flukse pune komplekse të ndërmarrjeve.
+我們最聰明的 Flash 模型，適合用於長程軟體工程、自主式代理，以及複雜的企業工作流程。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0, 75 USD deri më 31 dhjetor 2026. 1, 50 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 3, 75 USD deri më 31 dhjetor 2026. 7, 50 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,075 USD deri më 31 dhjetor 2026. 0,15 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 jetonë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 jetonë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $0.75 美元。 2027 年 1 月 1 日起為$1.50 美元。 |
+| 輸出價格 (含思考詞元) | 無須支付費用 | 2026 年 12 月 31 日前為 $3.75 美元。 2027 年 1 月 1 日起為$7.50 美元。 |
+| 脈絡快取價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $0.075 美元。 2027 年 1 月 1 日起為$0.15 美元。 2026 年 12 月 31 日前為每小時$0.50 美元 / 1,000,000 個詞元 (定價)。 2027 年 1 月 1 日起為每小時$1.00 美元 / 1,000,000 個詞元 (定價)。 |
+| 以 Google 搜尋強化事實基礎\* | 無法使用 | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 無法使用 | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0, 375 USD deri më 31 dhjetor 2026. 0, 75 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 1, 875 USD deri më 31 dhjetor 2026. 3, 75 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,0375 USD deri më 31 dhjetor 2026. 0,075 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 12 月 31 日前為 $0.375 美元。 2027 年 1 月 1 日起為$0.75 美元。 |
+| 輸出價格 (含思考詞元) | 無法使用 | 2026 年 12 月 31 日前為 $1.875 美元。 2027 年 1 月 1 日起為$3.75 美元。 |
+| 脈絡快取價格 | 無法使用 | 2026 年 12 月 31 日前：$0.0375 美元。 2027 年 1 月 1 日起：$0.075 美元。 2026 年 12 月 31 日前：每小時$0.50 美元 / 1,000,000 個詞元 (儲存空間定價)。 2027 年 1 月 1 日起：每小時$1.00 美元 / 1,000,000 個詞元 (儲存空間定價)。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0, 375 USD deri më 31 dhjetor 2026. 0, 75 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 1, 875 USD deri më 31 dhjetor 2026. 3, 75 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,0375 USD deri më 31 dhjetor 2026. 0,075 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 12 月 31 日前為 $0.375 美元。 2027 年 1 月 1 日起為$0.75 美元。 |
+| 輸出價格 (含思考詞元) | 無法使用 | 2026 年 12 月 31 日前為 $1.875 美元。 2027 年 1 月 1 日起為$3.75 美元。 |
+| 脈絡快取價格 | 無法使用 | 2026 年 12 月 31 日前：$0.0375 美元。 2027 年 1 月 1 日起：$0.075 美元。 2026 年 12 月 31 日前：每小時$0.50 美元 / 1,000,000 個詞元 (儲存空間定價)。 2027 年 1 月 1 日起：每小時$1.00 美元 / 1,000,000 個詞元 (儲存空間定價)。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 1, 35 USD deri më 31 dhjetor 2026. 2, 70 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 6, 75 USD deri më 31 dhjetor 2026. 13, 50 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,135 USD deri më 31 dhjetor 2026. 0,27 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $1.35 美元。 2027 年 1 月 1 日起為$2.70 美元。 |
+| 輸出價格 (含思考詞元) | 無須支付費用 | 2026 年 12 月 31 日前為 $6.75 美元。 2027 年 1 月 1 日起為$13.50 美元。 |
+| 脈絡快取價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $0.135 美元。 2027 年 1 月 1 日起為$0.27 美元。 2026 年 12 月 31 日前為$0.50 美元/1,000,000 個詞元/小時 (儲存空間價格)。 2027 年 1 月 1 日起為$1.00 美元/1,000,000 個詞元/小時 (儲存空間價格)。 |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Kontribues
+### 協作者
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0, 375 USD deri më 31 dhjetor 2026. 0, 75 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 1, 875 USD deri më 31 dhjetor 2026. 3, 75 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,0375 USD deri më 31 dhjetor 2026. 0,075 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Po](https://ai.google.dev/gemini-api/docs/logs-policy?hl=sq#contributor-tier) |
+| 輸入價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $0.375 美元。 2027 年 1 月 1 日起為$0.75 美元。 |
+| 輸出價格 (含思考詞元) | 無須支付費用 | 2026 年 12 月 31 日前為 $1.875 美元。 2027 年 1 月 1 日起為$3.75 美元。 |
+| 脈絡快取價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $0.0375 美元。 2027 年 1 月 1 日起為$0.075 美元。 2026 年 12 月 31 日前為每小時$0.50 美元 / 1,000,000 個詞元 (儲存價格)。 2027 年 1 月 1 日起為每小時$1.00 美元 / 1,000,000 個詞元 (儲存價格)。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [是](https://ai.google.dev/gemini-api/docs/logs-policy?hl=zh-tw#contributor-tier) |
 
 ## Gemini 3.6 Flash
 
-*[`gemini-3.6-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=sq)*
+*[`gemini-3.6-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.6-flash&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.6-flash&hl=zh-tw)
 
-Modeli ynë Flash i gjeneratës së mëparshme, që balancon shpejtësinë dhe aftësitë multimodale në detyrat e përgjithshme të agjentëve dhe ato të përditshme.
+前一代的 Flash 模型，兼具速度與多模態能力，適合處理一般代理功能和日常任務。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0, 75 USD deri më 31 dhjetor 2026. 1, 50 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 3, 75 USD deri më 31 dhjetor 2026. 7, 50 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,075 USD deri më 31 dhjetor 2026. 0,15 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 jetonë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 jetonë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $0.75 美元。 2027 年 1 月 1 日起為$1.50 美元。 |
+| 輸出價格 (含思考詞元) | 無須支付費用 | 2026 年 12 月 31 日前為 $3.75 美元。 2027 年 1 月 1 日起為$7.50 美元。 |
+| 脈絡快取價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $0.075 美元。 2027 年 1 月 1 日起為$0.15 美元。 2026 年 12 月 31 日前為每小時$0.50 美元 / 1,000,000 個詞元 (定價)。 2027 年 1 月 1 日起為每小時$1.00 美元 / 1,000,000 個詞元 (定價)。 |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0, 375 USD deri më 31 dhjetor 2026. 0, 75 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 1, 875 USD deri më 31 dhjetor 2026. 3, 75 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,0375 USD deri më 31 dhjetor 2026. 0,075 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 12 月 31 日前為 $0.375 美元。 2027 年 1 月 1 日起為$0.75 美元。 |
+| 輸出價格 (含思考詞元) | 無法使用 | 2026 年 12 月 31 日前為 $1.875 美元。 2027 年 1 月 1 日起為$3.75 美元。 |
+| 脈絡快取價格 | 無法使用 | 2026 年 12 月 31 日前為 $0.0375 美元。 2027 年 1 月 1 日起為$0.075 美元。 2026 年 12 月 31 日前為每小時$0.50 美元 / 1,000,000 個詞元 (儲存價格)。 2027 年 1 月 1 日起為每小時$1.00 美元 / 1,000,000 個詞元 (儲存價格)。 |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0, 375 USD deri më 31 dhjetor 2026. 0, 75 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 1, 875 USD deri më 31 dhjetor 2026. 3, 75 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,0375 USD deri më 31 dhjetor 2026. 0,075 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 12 月 31 日前為 $0.375 美元。 2027 年 1 月 1 日起為$0.75 美元。 |
+| 輸出價格 (含思考詞元) | 無法使用 | 2026 年 12 月 31 日前為 $1.875 美元。 2027 年 1 月 1 日起為$3.75 美元。 |
+| 脈絡快取價格 | 無法使用 | 2026 年 12 月 31 日前為 $0.0375 美元。 2027 年 1 月 1 日起為$0.075 美元。 2026 年 12 月 31 日前為每小時$0.50 美元 / 1,000,000 個詞元 (儲存價格)。 2027 年 1 月 1 日起為每小時$1.00 美元 / 1,000,000 個詞元 (儲存價格)。 |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 1, 35 USD deri më 31 dhjetor 2026. 2, 70 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 6, 75 USD deri më 31 dhjetor 2026. 13, 50 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,135 USD deri më 31 dhjetor 2026. 0,27 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $1.35 美元。 2027 年 1 月 1 日起為$2.70 美元。 |
+| 輸出價格 (含思考詞元) | 無須支付費用 | 2026 年 12 月 31 日前為 $6.75 美元。 2027 年 1 月 1 日起為$13.50 美元。 |
+| 脈絡快取價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $0.135 美元。 2027 年 1 月 1 日起為$0.27 美元。 2026 年 12 月 31 日前為$0.50 美元/1,000,000 個詞元/小時 (儲存空間價格)。 2027 年 1 月 1 日起為$1.00 美元/1,000,000 個詞元/小時 (儲存空間價格)。 |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
+\* 客戶向 Gemini 提交要求後，可能會產生一或多個 Google 搜尋查詢。系統會針對您執行的每項搜尋查詢收取費用。
 
-\*\* Mund të testohet në Google AI Studio.
+\*\* 可以在 Google AI Studio 測試。
 
-## Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking dhe Gemini 3.1 Flash Live Preview
+## Gemini 3.8 Live、Gemini 3.8 Live 延伸思考和 Gemini 3.1 Flash Live 預先發布版
 
-*[`gemini-3.8-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=sq), [`gemini-3.8-live-extended-thinking`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=sq) dhe [`gemini-3.1-flash-live-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=sq)*
+*[`gemini-3.8-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=zh-tw)、[`gemini-3.8-live-extended-thinking`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=zh-tw) 和 [`gemini-3.1-flash-live-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/live?model=gemini-3.8-live&hl=zh-tw)
 
-Modelet tona audio-në-audio me vonesë të ulët të optimizuara për agjentët zanorë në kohë reale dhe dialogun e drejtpërdrejtë, duke përfshirë mbështetjen e arsyetimit në sfond me "Arsyetimin e zgjeruar".
+我們的音訊對音訊模型延遲時間短，經過最佳化調整，適用於即時語音代理和即時對話，包括支援延伸思考的背景推論。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,75 USD (tekst) 3,00 USD ose 0,005 USD/min (audio) 1,00 USD ose 0,002 USD/min (imazh/video) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 4,50 USD (tekst) 12,00 USD ose 0,018 USD/min. (audio) |
-| Argumentimi me "Kërko në Google"\* | Mbështetet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.75 美元 (文字) $3.00 美元或 $0.005 美元/分鐘 (音訊) $1.00 美元或 $0.002 美元/分鐘 (圖片/影片) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $4.50 美元 (文字) $12.00 美元或每分鐘 $0.018 美元 (音訊) |
+| 以 Google 搜尋強化事實基礎\* | 是否支援 | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
+\* 客戶向 Gemini 提交要求後，可能會產生一或多個 Google 搜尋查詢。系統會針對您執行的每項搜尋查詢收取費用。
 
 ## Gemini 3.5 Live Translate
 
-*[`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=sq)*
+*[`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=zh-tw)
 
-Modeli ynë i përkthimit të ligjërimit në ligjërim në kohë reale me vonesë të ulët që mbështet mbi 70 gjuhë.
+低延遲、即時語音轉語音翻譯模型，支援超過 70 種語言。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 3,50 USD ose 0,0053 USD/min.\* (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 21,00 USD ose 0,0315 USD/min.\* (audio) |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $3.50 美元或每分鐘 $0.0053 美元\* (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $21.00 美元或 $0.0315 美元/分鐘\* (音訊) |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Faturimi bazohet në konsumin total të tokenave të audios hyrëse dhe dalëse, të llogaritur me një normë prej 25 tokenash për sekondë audioje, që barazohet me një çmim efektiv prej rreth 0,0368 USD për minutë.
+\* 帳單費用是根據輸入和輸出音訊詞元的總用量計算，費率為每秒音訊 25 個詞元，相當於每分鐘約 $0.0368 美元。
 
 ## Gemini 3.5 Transcribe Live
 
-*[`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=sq)*
+*[`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-3.5-transcribe-live&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com?model=gemini-3.5-transcribe-live&hl=zh-tw)
 
-Modeli ynë i ligjërimit në tekst në kohë reale me vonesë të ulët për transkriptimin e audios së transmetimit dydrejtimësh nëpërmjet WebSocket.
+我們的低延遲即時語音轉文字模型，可透過 WebSocket 進行雙向串流音訊轉錄。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 3,50 USD ose 0,005 USD/min.\* (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 21,00 USD ose 0,004 USD/min.\* (tekst) |
-| Argumentimi me "Kërko në Google" | Nuk mbështetet |  |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $3.50 美元或每分鐘 $0.005 美元\* (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $21.00 美元或每分鐘 $0.004 美元\* (文字) |
+| 以 Google 搜尋建立基準 | 不支援 |  |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Çmimi i përllogaritur bazohet në 25 kode audio për sekondë për hyrjen
-dhe 175 kode teksti për minutë për daljen, për një normë të përzier efektive prej
-~0,009 USD për minutë për "Transkriptimin në çast".
+\* 預估定價是根據每秒 25 個音訊輸入詞元，以及每分鐘 175 個文字輸出詞元計算，即時轉錄的有效混合費率約為每分鐘$0.009 美元。
 
 ## Gemini 3.5 Transcribe
 
-*[`gemini-3.5-transcribe`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=sq)*
+*[`gemini-3.5-transcribe`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-3.5-transcribe&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com?model=gemini-3.5-transcribe&hl=zh-tw)
 
-Modeli ynë i ligjërimit në tekst me zbulimin automatik të gjuhës, identifikimin e folësit, vulat kohore në nivel fjalësh dhe anshmërinë e fjalorit të personalizuar.
+我們的語音轉文字模型具備自動偵測語言、說話者分段標記、個別字詞時間戳記，以及自訂詞彙偏誤等功能。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 2,00 USD ose 0,003 USD/min.\* (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 12,00 USD ose 0,002 USD/min.\* (tekst) |
-| Argumentimi me "Kërko në Google" | Nuk mbështetet |  |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $2.00 美元或每分鐘 $0.003 美元\* (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $12.00 美元或 $0.002 美元/分鐘\* (文字) |
+| 以 Google 搜尋建立基準 | 不支援 |  |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Çmimi i përllogaritur bazohet në 25 jetonë audio për sekondë për hyrjen
-dhe 175 jetonë teksti për minutë për daljen, për një normë të kombinuar efektive prej
-rreth 0,005 USD për minutë për Transkriptimin.
+\* 預估定價是以每秒 25 個輸入音訊詞元，以及每分鐘 175 個輸出文字詞元計算，Transcribe 的有效混合費率約為每分鐘$0.005 美元。
 
 ## Gemini 3.5 Flash-Lite
 
-*[`gemini-3.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=sq)*
+*[`gemini-3.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=zh-tw)
 
-Një model me kosto efikase, i optimizuar për detyra agjentike me volum të lartë,
-përkthim dhe përpunim të thjeshtë të të dhënave.
+這款模型符合成本效益，適合處理大量代理工作、翻譯和簡單的資料處理作業。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,30 USD (tekst / imazh / video / audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $2.50 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,03 USD 1,00 USD / 1 000 000 jeto për orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.30 (文字 / 圖片 / 影片 / 音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $2.50 |
+| 脈絡快取價格 | 無法使用 | $0.03 $1.00 / 每小時 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,15 USD (tekst / imazh / video / audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $1.25 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | $0.02 $1.00 / 1,000,000 token-e në orë (çmimi i ruajtjes) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.15 美元 (文字 / 圖片 / 影片 / 音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $1.25 美元 |
+| 脈絡快取價格 | 無法使用 | $0.02 $1.00 / 每小時 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,15 USD (tekst / imazh / video / audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $1.25 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | $0.02 $1.00 / 1,000,000 token-e në orë (çmimi i ruajtjes) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.15 美元 (文字 / 圖片 / 影片 / 音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $1.25 美元 |
+| 脈絡快取價格 | 無法使用 | $0.02 $1.00 / 每小時 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,54 USD (tekst / imazh / video / audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $4.50 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,05 USD 1,00 USD / 1 000 000 jeto për orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.54 美元 (文字 / 圖片 / 影片 / 音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $4.50 美元 |
+| 脈絡快取價格 | 無法使用 | $0.05 $1.00 / 每小時 1,000,000 個詞元 (儲存空間定價) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Kontribues
+### 協作者
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,15 USD (tekst / imazh / video / audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $1.25 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,015 USD 1,00 USD / 1 000 000 jeto për orë (çmimi i hapësirës ruajtëse) |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Po](https://ai.google.dev/gemini-api/docs/logs-policy?hl=sq#contributor-tier) |
+| 輸入價格 | 無須支付費用 | $0.15 美元 (文字 / 圖片 / 影片 / 音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $1.25 美元 |
+| 脈絡快取價格 | 無法使用 | $0.015 $1.00/1,000,000 個詞元/小時 (儲存空間定價) |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [是](https://ai.google.dev/gemini-api/docs/logs-policy?hl=zh-tw#contributor-tier) |
 
-\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
+\* 客戶向 Gemini 提交要求後，可能會產生一或多個 Google 搜尋查詢。系統會針對您執行的每項搜尋查詢收取費用。
 
-\*\* Mund të testohet në Google AI Studio.
+\*\* 可以在 Google AI Studio 測試。
 
-\*\* Mund të testohet në Google AI Studio.
+\*\* 可以在 Google AI Studio 測試。
 
 ## Gemini 3.1 Flash-Lite
 
-*[`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=sq)*
+*[`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=zh-tw)
 
-Një model me kosto efikase, i optimizuar për detyra agjentike me volum të lartë,
-përkthim dhe përpunim të thjeshtë të të dhënave.
+這款模型符合成本效益，適合處理大量代理工作、翻譯和簡單的資料處理作業。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,25 USD (tekst / imazh / video) 0,50 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 1,50 USD |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,025 USD (tekst / imazh / video) 0,05 USD (audio) 1,00 USD / 1 000 000 jeto në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.25 (文字 / 圖片 / 影片) $0.50 (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $1.50 美元 |
+| 脈絡快取價格 | 無法使用 | $0.025 美元 (文字 / 圖片 / 影片) $0.05 美元 (音訊) 每小時$1.00 美元 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,125 USD (tekst / imazh / video) 0,25 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $0.75 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,0125 USD (tekst / imazh / video) 0,025 USD (audio) 0,50 USD / 1 000 000 jeto në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.125 美元 (文字 / 圖片 / 影片) $0.25 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $0.75 美元 |
+| 脈絡快取價格 | 無法使用 | $0.0125 (文字 / 圖片 / 影片) $0.025 (音訊) 每小時$0.50 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,125 USD (tekst / imazh / video) 0,25 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $0.75 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,0125 USD (tekst / imazh / video) 0,025 USD (audio) 0,50 USD / 1 000 000 jeto në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.125 美元 (文字 / 圖片 / 影片) $0.25 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $0.75 美元 |
+| 脈絡快取價格 | 無法使用 | $0.0125 (文字 / 圖片 / 影片) $0.025 (音訊) 每小時$0.50 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,45 USD (tekst / imazh / video) 0,90 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $2.70 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,045 USD (tekst / imazh / video) 0,09 USD (audio) 1,80 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.45 美元 (文字 / 圖片 / 影片) $0.90 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $2.70 美元 |
+| 脈絡快取價格 | 無法使用 | $0.045 美元 (文字/圖片/影片) $0.09 美元 (音訊) 每小時每 1,000,000 個詞元$1.80 美元 (儲存空間定價) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
+\* 客戶向 Gemini 提交要求後，可能會產生一或多個 Google 搜尋查詢。系統會針對您執行的每項搜尋查詢收取費用。
 
-\*\* Mund të testohet në Google AI Studio.
+\*\* 可以在 Google AI Studio 測試。
 
 ## Gemini Omni Flash
 
-*[`gemini-omni-1.1-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=sq)*
+*[`gemini-omni-1.1-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-1.1-flash&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-1.1-flash&hl=zh-tw)
 
-Modeli ynë i gjenerimit dhe modifikimit të videove i gjeneratës së ardhshme, tani i disponueshëm në përgjithësi për zhvilluesit në nivelin me pagesë të Gemini API.
+新一代影片生成和編輯模型，現已正式發布，Gemini API 付費方案的開發人員皆可使用。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 1,50 USD (tekst / imazh / video / audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 9,00 USD (tekst) 17,50 USD (video)\* |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $1.50 美元 (文字 / 圖片 / 影片 / 音訊) |
+| 輸出價格 (含思考詞元) | 無法使用 | $9.00 美元 (文字) $17.50 美元 (影片)\* |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Faturimi bazohet në konsumin total të tokenëve të rezultatit, i llogaritur me një normë prej 5 792 tokenësh për sekondë për video 720p. Sipas çmimit standard, kjo
-është e barasvlershme me një çmim efektiv prej rreth 0,10 USD për sekondë.
+\* 帳單費用取決於輸出詞元總用量，計算方式為每秒 720p 影片 5,792 個詞元。根據標準定價，這相當於每秒約 $0.10 美元的有效價格。
 
-## Gemini Omni Flash Preview
+## Gemini 3.1 Pro 預先發布版
 
-*[`gemini-omni-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=sq)*
+*[`gemini-3.1-pro-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw) 和 [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw#gemini-31-pro-preview-customtools)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=zh-tw)
 
-Modeli ynë i gjeneratës së ardhshme për gjenerimin dhe modifikimin e videove.
+第 3 代 Pro 模型，專為多模態理解、代理能力和直覺式程式開發而打造。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 1,50 USD (tekst / imazh / video / audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 9,00 USD (tekst) 17,50 USD (video)\* |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $2.00 美元，提示詞 <= 20 萬個詞元 $4.00 美元，提示詞 > 20 萬個詞元 |
+| 輸出價格 (含思考詞元) | 無法使用 | $12.00 美元，提示 <= 20 萬個詞元 $18.00 美元，提示 > 20 萬個詞元 |
+| 脈絡快取價格 | 無法使用 | $0.20，提示 <= 20 萬個詞元 $0.40，提示 > 20 萬個詞元 每小時$4.50 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | 不適用 | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Faturimi bazohet në konsumin total të tokenëve të daljes, i llogaritur me një normë prej 5 792 tokenësh për sekondë për video 720p. Sipas çmimit standard, kjo barazohet me një çmim efektiv prej rreth 0,10 USD për sekondë.
+### 批次
 
-## Gemini 3.1 Pro Preview
-
-*[`gemini-3.1-pro-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=sq) dhe [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=sq#gemini-31-pro-preview-customtools)*
-
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=sq)
-
-Modeli ynë Pro i gjeneratës së 3-të, i ndërtuar për të kuptuarit multimodal, aftësitë agjentike dhe programimin "vibe coding".
-
-### Standard
-
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 2,00 USD, kërkesa <= 200 000 tokenë 4,00 USD, kërkesa > 200 000 tokenë |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 12,00 USD, kërkesa <= 200 000 tokenë 18,00 USD, kërkesa > 200 000 tokenë |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,20 USD, kërkesa <= 200 000 kodesh 0,40 USD, kërkesa > 200 000 kodesh 4,50 USD / 1 000 000 kode në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | Nuk ka | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $1.00 美元，提示詞 <= 20 萬個詞元 $2.00 美元，提示詞 > 20 萬個詞元 |
+| 輸出價格 (含思考詞元) | 無法使用 | $6.00 美元，提示 <= 20 萬個詞元 $9.00 美元，提示 > 20 萬個詞元 |
+| 脈絡快取價格 | 無法使用 | *與標準版相同*  $0.20 美元，提示詞元數 <= 20 萬 $0.40 美元，提示詞元數 > 20 萬 每小時$4.50 美元 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | $1,00, kërkesa <= 200 000 tokenë $2,00, kërkesa > 200 000 tokenë |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 6,00 USD, kërkesa <= 200 000 tokenë 9,00 USD, kërkesa > 200 000 tokenë |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | *Njësoj si Standard*  0,20 USD, kërkesa <= 200 000 token-ë 0,40 USD, kërkesa > 200 000 4,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $1.00 美元，提示詞 <= 20 萬個詞元 $2.00 美元，提示詞 > 20 萬個詞元 |
+| 輸出價格 (含思考詞元) | 無法使用 | $6.00 美元，提示 <= 20 萬個詞元 $9.00 美元，提示 > 20 萬個詞元 |
+| 脈絡快取價格 | 無法使用 | *與標準版相同*  $0.20 美元，提示詞元數 <= 20 萬 $0.40 美元，提示詞元數 > 20 萬 每小時$4.50 美元 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | $1,00, kërkesa <= 200 000 tokenë $2,00, kërkesa > 200 000 tokenë |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 6,00 USD, kërkesa <= 200 000 tokenë 9,00 USD, kërkesa > 200 000 tokenë |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | *Njësoj si Standard*  0,20 USD, kërkesa <= 200 000 token-ë 0,40 USD, kërkesa > 200 000 4,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $3.60 美元，提示詞 <= 20 萬個詞元 $7.20 美元，提示詞 > 20 萬個詞元 |
+| 輸出價格 (含思考詞元) | 無法使用 | $21.60 美元，提示 <= 20 萬個詞元 $32.40 美元，提示 > 20 萬個詞元 |
+| 脈絡快取價格 | 無法使用 | $0.36，提示 <= 20 萬個詞元 $0.72，提示 > 20 萬個詞元 每小時$8.10 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 協作者
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 3,60 USD, kërkesa <= 200 000 tokenë 7,20 USD, kërkesa > 200 000 tokenë |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 21,60 USD, kërkesa <= 200 000 tokenë 32,40 USD, kërkesa > 200 000 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,36 USD, kërkesa <= 200 000 kodesh 0,72 USD, kërkesa > 200 000 kodesh 8,10 USD / 1 000 000 kode në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $1.00 美元，提示詞 <= 20 萬個詞元 $2.00 美元，提示詞 > 20 萬個詞元 |
+| 輸出價格 (含思考詞元) | 無法使用 | $6.00 美元，提示詞 <= 20 萬個詞元 $9.00 美元，提示詞 > 20 萬個詞元 |
+| 脈絡快取價格 | 無法使用 | $0.10，提示詞 <= 20 萬個詞元 $0.20，提示詞 > 20 萬個詞元 每小時$4.50 / 1,000,000 個詞元 (儲存空間定價) |
+| 用於提升我們的產品 | 不適用 | [是](https://ai.google.dev/gemini-api/docs/logs-policy?hl=zh-tw#contributor-tier) |
 
-### Kontribues
+\* 客戶向 Gemini 提交要求後，可能會產生一或多個 Google 搜尋查詢。系統會針對您執行的每項搜尋查詢收取費用。
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
-| --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | $1,00, kërkesa <= 200 000 tokenë $2,00, kërkesa > 200 000 tokenë |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 6,00 USD, kërkesat <= 200 000 tokenë 9,00 USD, kërkesat > 200 000 tokenë |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,10 USD, kërkesa <= 200 000 tokenë 0,20 USD, kërkesa > 200 000 tokenë 4,50 USD / 1 000 000 tokenë në orë (çmimi i hapësirës ruajtëse) |
-| Përdoret për të përmirësuar produktet tona | Nuk ka | [Po](https://ai.google.dev/gemini-api/docs/logs-policy?hl=sq#contributor-tier) |
-
-\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
-
-\*\* Mund të testohet në Google AI Studio.
+\*\* 可以在 Google AI Studio 測試。
 
 ## Gemini Nano Banana 2.1 🍌
 
-*[`gemini-nano-banana-2.1`](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=sq)*
+*[`gemini-nano-banana-2.1`](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-nano-banana-2.1&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-nano-banana-2.1&hl=zh-tw)
 
-Një përditësim për Nano Banana 2 (Gemini 3.1 Flash Image), i krijuar për gjenerimin e imazheve me efikasitet të lartë dhe modifikime përmes bisedës me cilësi të përmirësuar vizuale, konsekuencë personazhi me disa kthesa, paraqitje të saktë të tekstit dhe gjenerim të bazuar në kërkim në rezolucionet 1K, 2K dhe 4K.
+Nano Banana 2 (Gemini 3.1 Flash Image) 的更新版本，專為高效率圖像生成和對話式編輯而設計，可提升視覺品質、多輪角色一致性、準確的文字算繪，以及以搜尋為基礎的生成，解析度涵蓋 1K、2K 和 4K。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 1,50 USD (tekst/imazh/video) |
-| Çmimi i rezultatit | Nuk ofrohet | 7,50 USD (tekst dhe përpunim mendimi)  30,00 USD (imazhe)  Ekuivalente me 0,0336 USD për imazh 1K\*,  0,0504 USD për imazh 2K\*,  dhe 0,113 USD për imazh 4K\*. |
-| Argumentimi me "Kërko në ueb dhe imazhe me Google"\*\* | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa për bazimin në tekst dhe imazhe. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $1.50 美元 (文字/圖片/影片) |
+| 輸出價格 | 無法使用 | $7.50 美元 (文字和思考)  $30.00 美元 (圖片)  相當於每 1K 圖片 $0.0336 美元\*、  每 2K 圖片 $0.0504 美元\*，  以及每 4K 圖片 $0.113 美元\*。 |
+| 以 Google 網頁和圖片搜尋建立基準\*\* | 無法使用 | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次文字和圖片基準建立要求收費 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,75 USD (tekst/imazh/video) |
-| Çmimi i rezultatit | Nuk ofrohet | 3,75 USD (tekst dhe arsyetim)  15,00 USD (imazhe)  Ekuivalente me 0,0168 USD për imazh 1K\*,  0,0252 USD për imazh 2K\*,  dhe 0,0567 USD për imazh 4K\*. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.75 美元 (文字/圖片/影片) |
+| 輸出價格 | 無法使用 | $3.75 美元 (文字和思考)  $15.00 美元 (圖片)  相當於每 1K 圖片 $0.0168 美元\*、  每 2K 圖片 $0.0252 美元\*、  每 4K 圖片 $0.0567 美元\*。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Çmimi i daljes së imazheve është 30 USD për 1 000 000 tokenë (Standard) dhe
-15 USD për 1 000 000 tokenë (Batch). Imazhet e nxjerra në 1K (1024x1024px) konsumojnë 1120
-tokenë dhe janë të barasvlershme me 0,0336 USD për imazh. Nxjerrja e imazheve në 2K (2048x2048px) konsumon 1680 tokena dhe është e barasvlershme me 0,0504 USD për imazh.
-Imazhet e nxjerra në 4K (4096x4096px) konsumojnë 3780 jeto dhe janë të barasvlershme me
-0,113 USD për imazh.
+\* 圖片輸出費用為每 1,000,000 個詞元 $30 美元 (標準) 和每 1,000,000 個詞元 $15 美元 (批次)。輸出 1K (1024x1024 像素) 圖片會消耗 1120 個詞元，相當於每張圖片 $0.0336 美元。輸出 2K (2048x2048 像素) 圖片會消耗 1680 個詞元，相當於每張圖片 $0.0504 美元。4K (4096x4096px) 輸出圖片會消耗 3780 個詞元，相當於每張圖片 $0.113 美元。
 
-\*\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer. Konteksti i tërhequr (tekst ose imazhe) i ofruar nga "Argumentimi me 'Kërko në Google'" nuk tarifohet si token hyrës.
+\*\* 客戶向 Gemini 提交要求後，可能會產生一或多個 Google 搜尋查詢。系統會針對您執行的每項搜尋查詢收取費用。使用以 Google 搜尋建立基準功能時，系統擷取的文字或圖片等背景資訊，不會計入輸入詞元。
 
 ## Gemini 3.1 Flash Image (Nano Banana 2) 🍌
 
-*[`gemini-3.1-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=sq)*
+*[`gemini-3.1-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=zh-tw)
 
-I projektuar për shpejtësi dhe efikasitet, modeli i gjenerimit të imazheve Gemini 3.1 Flash është efektiv për përgjigje të shpejta dhe ndërvepruese dhe rendiment të lartë.
+Gemini 3.1 Flash 圖像生成模型專為速度和效率而設計，可快速提供互動式回覆，並具備高處理量。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,50 USD (tekst/imazh) |
-| Çmimi i rezultatit | Nuk ofrohet | 3 USD (tekst dhe arsyetim)  60,00 USD (imazhe)  Ekuivalente me 0,045 USD për imazh 0,5K\*  0,067 USD për imazh 1K\*, 0,101 USD për imazh 2K\*, dhe 0,151 USD për imazh 4K\*. |
-| Argumentimi me "Kërko në ueb dhe imazhe me Google"\*\* | Nuk ofrohet\*\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa për bazimin në tekst dhe imazhe. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.50 美元 (文字/圖片) |
+| 輸出價格 | 無法使用 | $3 美元 (文字和思考)  $60.00 美元 (圖片)  相當於每張 0.5K 圖片 $0.045 美元\*  每張 1K 圖片 $0.067 美元\*、 每張 2K 圖片 $0.101 美元\*， 以及每張 4K 圖片 $0.151 美元\*。 |
+| 以 Google 網頁和圖片搜尋建立基準\*\* | 不適用\*\*\* | 每月可免付費使用 5,000 次搜尋要求 (適用於所有 Gemini 3 和更新版本模型)，之後每 1,000 次文字和圖片基準建立要求收費 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,25 USD (tekst, imazh) |
-| Çmimi i rezultatit | Nuk ofrohet | 1,50 USD (tekst dhe mendim)  30,00 USD (imazhe)  Ekuivalente me 0,022 USD për imazh 0,5K\*  0,034 USD për imazh 1K\*,  0,050 USD për imazh 2K\*,  dhe 0,076 USD për imazh 4K\*. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.25 美元 (文字、圖片) |
+| 輸出價格 | 無法使用 | $1.50 美元 (文字和思考)  $30.00 美元 (圖片)  相當於每 0.5K 圖片 $0.022 美元\*  每 1K 圖片 $0.034 美元\*  每 2K 圖片 $0.050 美元\*  每 4K 圖片 $0.076 美元\*。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Nxjerra e imazheve kushton 60 USD për 1 000 000 tokenë.
-Imazhet e rezultateve në 0,5K (512 pikselë) konsumojnë 747 tokenë dhe janë të barasvlershme me 0,045 USD për imazh. Imazhet e prodhuara në 1K (1024x1024 pikselë) konsumojnë 1120 tokenë dhe janë të barasvlershme me 0,067 USD për imazh. Imazhet e prodhuara në 2K (2048x2048px) konsumojnë 1680 tokenë dhe
-janë të barasvlershme me 0,101 USD për imazh. Imazhet e nxjerra në 4K (4096x4096px) konsumojnë
-2520 tokenë dhe janë të barasvlershme me 0,151 USD për imazh.
+\* 圖片輸出費用為每 1,000,000 個詞元 $60 美元。
+輸出 0.5K (512 像素) 的圖片會消耗 747 個詞元，相當於每張圖片 $0.045 美元。輸出 1K (1024x1024 像素) 圖片會消耗 1120 個詞元，相當於每張圖片 $0.067 美元。輸出 2K (2048x2048 像素) 圖片會消耗 1680 個詞元，相當於每張圖片 $0.101 美元。4K (4096x4096px) 輸出圖片會消耗 2520 個詞元，相當於每張圖片 $0.151 美元。
 
-\*\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer. Konteksti i tërhequr (tekst ose imazhe) i ofruar nga "Argumentimi me 'Kërko në Google'" nuk tarifohet si token hyrës.
+\*\* 客戶向 Gemini 提交要求後，可能會產生一或多個 Google 搜尋查詢。系統會針對您執行的每項搜尋查詢收取費用。使用以 Google 搜尋建立基準功能時，系統擷取的文字或圖片等背景資訊，不會計入輸入詞元。
 
-\*\*\* Mund të testohet në Google AI Studio.
+\*\*\* 可以在 Google AI Studio 測試。
 
 ## Gemini 3.1 Flash Lite Image (Nano Banana 2 Lite) 🍌
 
-*[`gemini-3.1-flash-lite-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=sq)*
+*[`gemini-3.1-flash-lite-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=zh-tw)
 
-I projektuar si specialisti i efikasitetit i familjes së gjenerimit të imazheve, modeli i imazheve Gemini 3.1 Flash Lite është projektuar për vonesë tepër të ulët dhe gjenerim dhe modifikim imazhesh me kosto efektive.
+Gemini 3.1 Flash Lite Image 模型是圖像生成系列中的效率專家，專為超低延遲和高成本效益的圖像生成和編輯而設計。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,25 USD (tekst/imazh/video) |
-| Çmimi i rezultatit | Nuk ofrohet | 1,50 USD (teksti dhe arsyetimi)  30,00 USD (imazhet)  Ekuivalente me 0,0336 USD për imazh me rezolucion 1K\* |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.25 美元 (文字/圖片/影片) |
+| 輸出價格 | 無法使用 | $1.50 美元 (文字和思考)  $30.00 美元 (圖片)  相當於每張 1K 解析度圖片 $0.0336 美元\* |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,125 USD (tekst/imazh/video) |
-| Çmimi i rezultatit | Nuk ofrohet | 0,75 USD (tekst dhe arsyetim)  15,00 USD (imazhe)  Ekuivalente me 0,0168 USD për imazh me rezolucion 1K\* |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.125 美元 (文字/圖片/影片) |
+| 輸出價格 | 無法使用 | $0.75 美元 (文字和思考)  $15.00 美元 (圖片)  相當於每張 1K 解析度圖片 $0.0168 美元\* |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Nxerrja e imazheve kushton 30 USD për 1 000 000 tokenë. Imazhet e prodhuara në 1K (1024x1024px) konsumojnë 1120 jeto dhe janë të barasvlershme me 0,0336 USD për imazh.
+\* 圖片輸出費用為每 1,000,000 個詞元 $30 美元。輸出 1K (1024x1024 像素) 圖片會消耗 1120 個詞元，相當於每張圖片 $0.0336 美元。
 
 ## Gemini 3.8 Flash TTS
 
-*[`gemini-3.8-flash-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=sq)*
+*[`gemini-3.8-flash-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-tts&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-tts&hl=zh-tw)
 
-Modeli ynë i audios 3.8 Flash "Tekst në ligjërim" i projektuar për besnikëri të zërit të nivelit të studios, aktrim shprehës dhe qëndrueshmëri në formë të gjatë.
+3.8 Flash 文字轉語音模型，可生成錄音室等級的高擬真語音，並能生動詮釋情緒，穩定生成長篇內容。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0, 50 USD (tekst) deri më 31 dhjetor 2026. 1, 00 USD (tekst) duke filluar nga data 1 janar 2027. |
-| Çmimi i rezultatit | Pa pagesë | 9, 00 USD (audio) deri më 31 dhjetor 2026. 18, 00 USD (audio) duke filluar nga data 1 janar 2027. Ekuivalente me 0, 00225 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 0045 USD për 10 sekonda audio\* duke filluar nga data 1 janar 2027. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $0.50 美元 (文字)。 2027 年 1 月 1 日起為$1.00 美元 (文字)。 |
+| 輸出價格 | 無須支付費用 | 2026 年 12 月 31 日前：$9.00 美元 (音訊) 2027 年 1 月 1 日起：$18.00 美元 (音訊) 2026 年 12 月 31 日前：相當於每 10 秒音訊 $0.00225 美元\* 2027 年 1 月 1 日起：相當於每 10 秒音訊 $0.0045 美元\* |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0, 25 USD (tekst) deri më 31 dhjetor 2026. 0, 50 USD (tekst) duke filluar nga 1 janari 2027. |
-| Çmimi i rezultatit | Nuk ofrohet | 4, 50 USD (audio) deri më 31 dhjetor 2026. 9, 00 USD (audio) duke filluar nga 1 janari 2027. Ekuivalente me 0, 001125 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 00225 USD për 10 sekonda audio\* duke filluar nga 1 janari 2027. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 12 月 31 日前為 $0.25 美元 (文字)。 2027 年 1 月 1 日起為$0.50 美元 (文字)。 |
+| 輸出價格 | 無法使用 | 2026 年 12 月 31 日前：$4.50 美元 (音訊) 2027 年 1 月 1 日起：$9.00 美元 (音訊) 2026 年 12 月 31 日前：相當於每 10 秒音訊\* $0.001125 美元 2027 年 1 月 1 日起：相當於每 10 秒音訊\* $0.00225 美元 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0, 25 USD (tekst) deri më 31 dhjetor 2026. 0, 50 USD (tekst) duke filluar nga 1 janari 2027. |
-| Çmimi i rezultatit | Nuk ofrohet | 4, 50 USD (audio) deri më 31 dhjetor 2026. 9, 00 USD (audio) duke filluar nga 1 janari 2027. Ekuivalente me 0, 001125 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 00225 USD për 10 sekonda audio\* duke filluar nga 1 janari 2027. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 12 月 31 日前為 $0.25 美元 (文字)。 2027 年 1 月 1 日起為$0.50 美元 (文字)。 |
+| 輸出價格 | 無法使用 | 2026 年 12 月 31 日前：$4.50 美元 (音訊) 2027 年 1 月 1 日起：$9.00 美元 (音訊) 2026 年 12 月 31 日前：相當於每 10 秒音訊\* $0.001125 美元 2027 年 1 月 1 日起：相當於每 10 秒音訊\* $0.00225 美元 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0, 90 USD (tekst) deri më 31 dhjetor 2026. 1, 80 USD (tekst) duke filluar nga data 1 janar 2027. |
-| Çmimi i rezultatit | Pa pagesë | 16, 20 USD (audio) deri më 31 dhjetor 2026. 32, 40 USD (audio) duke filluar nga data 1 janar 2027. Ekuivalente me 0, 00405 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 0081 USD për 10 sekonda audio\* duke filluar nga data 1 janar 2027. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $0.90 美元 (文字)。 2027 年 1 月 1 日起為$1.80 美元 (文字)。 |
+| 輸出價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $16.20 美元 (音訊)。 2027 年 1 月 1 日起為$32.40 美元 (音訊)。 2026 年 12 月 31 日前相當於每 10 秒音訊\* $0.00405 美元。 2027 年 1 月 1 日起相當於每 10 秒音訊\* $0.0081 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Kodet e audios korrespondojnë me 25 kode për sekondë të audios.
+\* 音訊詞元相當於每秒 25 個詞元。
 
 ## Gemini 3.8 Flash-Lite TTS
 
-*[`gemini-3.8-flash-lite-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=sq)*
+*[`gemini-3.8-flash-lite-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-lite-tts&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-lite-tts&hl=zh-tw)
 
-Modeli ynë i audios 3.8 Flash-Lite për "Tekstin në ligjërim" i optimizuar për ligjërim bisedor me rendiment të lartë, vonesë të ulët dhe kosto-efektiv.
+3.8 Flash-Lite 文字轉語音音訊模型，專為高處理量、低延遲和符合成本效益的對話語音最佳化。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0, 50 USD (tekst) deri më 31 dhjetor 2026. 1, 00 USD (tekst) duke filluar nga data 1 janar 2027. |
-| Çmimi i rezultatit | Pa pagesë | 6, 00 USD (audio) deri më 31 dhjetor 2026. 12, 00 USD (audio) duke filluar nga data 1 janar 2027. Ekuivalente me 0, 0015 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 003 USD për 10 sekonda audio\* duke filluar nga data 1 janar 2027. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $0.50 美元 (文字)。 2027 年 1 月 1 日起為$1.00 美元 (文字)。 |
+| 輸出價格 | 無須支付費用 | 2026 年 12 月 31 日前：$6.00 美元 (音訊) 2027 年 1 月 1 日起：$12.00 美元 (音訊) 2026 年 12 月 31 日前：相當於每 10 秒音訊 $0.0015 美元\* 2027 年 1 月 1 日起：相當於每 10 秒音訊 $0.003 美元\* |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0, 25 USD (tekst) deri më 31 dhjetor 2026. 0, 50 USD (tekst) duke filluar nga 1 janari 2027. |
-| Çmimi i rezultatit | Nuk ofrohet | 3, 00 USD (audio) deri më 31 dhjetor 2026. 6, 00 USD (audio) duke filluar nga data 1 janar 2027. Ekuivalente me 0, 00075 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 0015 USD për 10 sekonda audio\* duke filluar nga data 1 janar 2027. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 12 月 31 日前為 $0.25 美元 (文字)。 2027 年 1 月 1 日起為$0.50 美元 (文字)。 |
+| 輸出價格 | 無法使用 | 2026 年 12 月 31 日前為 $3.00 美元 (音訊)。 2027 年 1 月 1 日起為$6.00 美元 (音訊)。 2026 年 12 月 31 日前相當於每 10 秒音訊 $0.00075 美元\*。 2027 年 1 月 1 日起相當於每 10 秒音訊 $0.0015 美元\*。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0, 25 USD (tekst) deri më 31 dhjetor 2026. 0, 50 USD (tekst) duke filluar nga 1 janari 2027. |
-| Çmimi i rezultatit | Nuk ofrohet | 3, 00 USD (audio) deri më 31 dhjetor 2026. 6, 00 USD (audio) duke filluar nga data 1 janar 2027. Ekuivalente me 0, 00075 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 0015 USD për 10 sekonda audio\* duke filluar nga data 1 janar 2027. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 12 月 31 日前為 $0.25 美元 (文字)。 2027 年 1 月 1 日起為$0.50 美元 (文字)。 |
+| 輸出價格 | 無法使用 | 2026 年 12 月 31 日前為 $3.00 美元 (音訊)。 2027 年 1 月 1 日起為$6.00 美元 (音訊)。 2026 年 12 月 31 日前相當於每 10 秒音訊 $0.00075 美元\*。 2027 年 1 月 1 日起相當於每 10 秒音訊 $0.0015 美元\*。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0, 90 USD (tekst) deri më 31 dhjetor 2026. 1, 80 USD (tekst) duke filluar nga data 1 janar 2027. |
-| Çmimi i rezultatit | Pa pagesë | 10, 80 USD (audio) deri më 31 dhjetor 2026. 21, 60 USD (audio) duke filluar nga data 1 janar 2027. Ekuivalente me 0, 0027 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 0054 USD për 10 sekonda audio\* duke filluar nga data 1 janar 2027. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $0.90 美元 (文字)。 2027 年 1 月 1 日起為$1.80 美元 (文字)。 |
+| 輸出價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $10.80 美元 (音訊)。 2027 年 1 月 1 日起為$21.60 美元 (音訊)。 2026 年 12 月 31 日前相當於每 10 秒音訊 $0.0027 美元\*。 2027 年 1 月 1 日起相當於每 10 秒音訊 $0.0054 美元\*。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Kodet e audios korrespondojnë me 25 kode për sekondë të audios.
+\* 音訊詞元相當於每秒 25 個詞元。
 
-## Gemini 3.1 Flash TTS Preview
+## Gemini 3.1 Flash TTS 預先發布版
 
-*[`gemini-3.1-flash-tts-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=sq)*
+*[`gemini-3.1-flash-tts-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=zh-tw)
 
-Modeli ynë i audios 3.1 Flash i tekstit në ligjërim i optimizuar për gjenerim të kontrollueshëm të ligjërimit me performancë të lartë, vonesë të ulët dhe kosto të ulët.
+我們的 3.1 Flash 文字轉語音音訊模型，經過最佳化調整，可生成低延遲、可控制的語音，且價格實惠。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | $1.00 (text) |
-| Çmimi i rezultatit | Pa pagesë | 20,00 USD (audio) |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $1.00 (文字) |
+| 輸出價格 | 無須支付費用 | $20.00 美元 (音訊) |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,50 USD (tekst) |
-| Çmimi i rezultatit | Nuk ofrohet | 10,00 USD (audio) |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.50 (文字) |
+| 輸出價格 | 無法使用 | $10.00 美元 (音訊) |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Kodet e audios korrespondojnë me 25 kode për sekondë të audios.
+\* 音訊詞元相當於每秒 25 個詞元。
 
-## Gemini 3 Flash Preview
+## Gemini 3 Flash 預先發布版
 
-*[`gemini-3-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=sq)*
+*[`gemini-3-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com?model=gemini-3-flash-preview&hl=zh-tw)
 
-Modeli ynë i vjetër Flash, i cili ofron shpejtësi dhe inteligjencë bazë.
+舊版 Flash 模型，提供基準速度和智慧功能。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,50 USD (tekst / imazh / video) 1,00 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $3.00 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,05 USD (tekst / imazh / video) 0,10 USD (audio) 1,00 USD / 1 000 000 jeto për orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.50 美元 (文字 / 圖片 / 影片) $1.00 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $3.00 |
+| 脈絡快取價格 | 無須支付費用 | $0.05 美元 (文字 / 圖片 / 影片) $0.10 美元 (音訊) $1.00 美元 / 每小時 1,000,000 個詞元 (儲存空間定價) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,25 USD (tekst / imazh / video) 0,50 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 1,50 USD |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | *Njësoj si Standard*  0,05 USD (tekst / imazh / video)  0,10 USD (audio)  1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.25 美元 (文字 / 圖片 / 影片) $0.50 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無法使用 | $1.50 美元 |
+| 脈絡快取價格 | 無法使用 | *與 Standard 相同*  $0.05 美元 (文字 / 圖片 / 影片)  $0.10 美元 (音訊)  $1.00 美元 / 每小時 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,25 USD (tekst / imazh / video) 0,50 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 1,50 USD |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | *Njësoj si Standard*  0,05 USD (tekst / imazh / video)  0,10 USD (audio)  1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.25 美元 (文字 / 圖片 / 影片) $0.50 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無法使用 | $1.50 美元 |
+| 脈絡快取價格 | 無法使用 | *與 Standard 相同*  $0.05 美元 (文字 / 圖片 / 影片)  $0.10 美元 (音訊)  $1.00 美元 / 每小時 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,90 USD (tekst / imazh / video) 1,80 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $5.40 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,09 USD (tekst / imazh / video) 0,18 USD (audio) 1,80 USD / 1 000 000 jetoçipe në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.90 美元 (文字 / 圖片 / 影片) $1.80 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $5.40 美元 |
+| 脈絡快取價格 | 無須支付費用 | $0.09 美元 (文字/圖片/影片) $0.18 美元 (音訊) 每小時每 1,000,000 個詞元$1.80 美元 (儲存空間定價) |
+| 以 Google 搜尋強化事實基礎\* | 不適用\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 利用 Google 地圖建立基準 | 不適用\*\* | 每月 5,000 次要求 (免費，所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次搜尋查詢 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
+\* 客戶向 Gemini 提交要求後，可能會產生一或多個 Google 搜尋查詢。系統會針對您執行的每項搜尋查詢收取費用。
 
-\*\* Mund të testohet në Google AI Studio.
+\*\* 可以在 Google AI Studio 測試。
 
 ## Gemini 3 Pro Image (Nano Banana Pro) 🍌
 
-*[`gemini-3-pro-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=sq)*
+*[`gemini-3-pro-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=zh-tw)
 
-Modeli ynë origjinal i gjenerimit të imazheve, i optimizuar për shpejtësi, fleksibilitet dhe
-kuptim kontekstual. **Hyrja dhe dalja e tekstit** ka të njëjtin çmim si
-[Gemini 3.1 Pro](#gemini-3.1-pro-preview).
+我們的原生圖像生成模型，經過最佳化調整，可提升速度、彈性和脈絡理解能力。**文字輸入和輸出**的定價與 [Gemini 3.1 Pro](#gemini-3.1-pro-preview) 相同。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 2,00 USD (tekst/imazh),  ekuivalente me 0,0011 USD për imazh\* |
-| Çmimi i rezultatit | Nuk ofrohet | 12,00 USD (tekst dhe arsyetim)  120,00 USD (imazhe)  Ekuivalente me 0,134 USD për imazh 1K/2K\*\*  dhe 0,24 USD për imazh 4K\*\* |
-| Argumentimi me "Kërko në Google"\*\*\* | Nuk ofrohet\*\*\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $2.00 美元 (文字/圖片)，  相當於每張圖片 $0.0011 美元\* |
+| 輸出價格 | 無法使用 | $12.00 美元 (文字和思考)  $120.00 美元 (圖片)  相當於每張 1K/2K 圖片 $0.134 美元\*\*  每張 4K 圖片 $0.24 美元\*\* |
+| 以 Google 搜尋強化事實基礎\*\*\* | 不適用\*\*\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 用於提升我們的產品 | 無法使用 | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 1,00 USD (tekst), 0,0006 USD (imazh)\* |
-| Çmimi i rezultatit | Nuk ofrohet | 6,00 USD (tekst dhe arsyetim)  0,067 USD për imazh 1K/2K\*\*  0,12 USD për imazh 4K\*\* |
-| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $1.00 美元 (文字) $0.0006 美元 (圖片)\* |
+| 輸出價格 | 無法使用 | $6.00 美元 (文字和思考)  每張 1K/2K 圖片 $0.067 美元\*\*  每張 4K 圖片 $0.12 美元\*\* |
+| 用於提升我們的產品 | 無法使用 | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 1,00 USD (tekst), 0,0006 USD (imazh)\* |
-| Çmimi i rezultatit | Nuk ofrohet | 6,00 USD (tekst dhe arsyetim)  0,067 USD për imazh 1K/2K\*\*  0,12 USD për imazh 4K\*\* |
-| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $1.00 美元 (文字) $0.0006 美元 (圖片)\* |
+| 輸出價格 | 無法使用 | $6.00 美元 (文字和思考)  每張 1K/2K 圖片 $0.067 美元\*\*  每張 4K 圖片 $0.12 美元\*\* |
+| 用於提升我們的產品 | 無法使用 | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 3,60 USD (tekst/imazh) |
-| Çmimi i rezultatit | Nuk ofrohet | 21,60 USD (tekst dhe arsyetim)  216,00 USD (imazhe) |
-| Argumentimi me "Kërko në Google"\*\*\* | Nuk ofrohet\*\*\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $3.60 美元 (文字/圖片) |
+| 輸出價格 | 無法使用 | $21.60 美元 (文字和思考)  $216.00 美元 (圖片) |
+| 以 Google 搜尋強化事實基礎\*\*\* | 不適用\*\*\*\* | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 用於提升我們的產品 | 無法使用 | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-\* Hyrja e imazhit është caktuar në 560 jetonë ose 0,0011 USD për imazh.
+\* 輸入圖片費用為每張 560 個詞元或 $0.0011 美元。
 
-\*\* Rezultati i imazhit ka çmimin 120 USD për 1 000 000 tokenë. Imazhet
-e prodhuara nga 1024x1024px (1K) dhe deri në 2048x2048px (2K) konsumojnë 1120 tokenë dhe
-janë të barasvlershme me 0,134 USD për imazh. Imazhet dalëse deri në 4096x4096px (4K) konsumojnë
-2000 token-ë dhe janë të barasvlershme me 0,24 USD për imazh.
+\*\* 圖片輸出費用為每 1,000,000 個詞元 $120 美元。輸出圖片解析度從 1024x1024 像素 (1K) 到 2048x2048 像素 (2K) 會消耗 1,120 個詞元，相當於每張圖片 $0.134 美元。輸出圖片最高可達 4096x4096px (4K)，會消耗 2,000 個詞元，相當於每張圖片 $0.24 美元。
 
-\*\*\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
+\*\*\* 客戶向 Gemini 提交要求後，可能會產生一或多個 Google 搜尋查詢。系統會針對您執行的每項搜尋查詢收取費用。
 
-\*\*\*\* Mund të testohet në Google AI Studio.
+\*\*\*\* 可以在 Google AI Studio 測試。
 
 ## Gemini 2.5 Pro
 
-*[`gemini-2.5-pro`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=sq)*
+*[`gemini-2.5-pro`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com?model=gemini-2.5-pro&hl=zh-tw)
 
-Një model Pro që shkëlqen në kodim dhe detyra komplekse arsyetimi.
+Pro 模型，擅長程式設計和複雜推論工作。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 1,25 USD, kërkesa <= 200 000 tokenë 2,50 USD, kërkesa > 200 000 tokenë |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 10,00 USD, kërkesa <= 200 000 tokenë 15,00 USD, kërkesa > 200 000 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,125 USD, kërkesa <= 200 000 kode 0,25 USD, kërkesa > 200 000 kode 4,50 USD / 1 000 000 kode në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas), më pas 35 USD / 1 000 kërkesa të bazuara |
-| Argumentimi me Google Maps | Nuk ofrohet | 10 000 RPD (falas), më pas 25 USD / 1 000 kërkesa të bazuara |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $1.25 美元，提示 <= 20 萬個詞元 $2.50 美元，提示 > 20 萬個詞元 |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $10.00 美元，提示 <= 20 萬個詞元 $15.00 美元，提示 > 20 萬個詞元 |
+| 脈絡快取價格 | 無法使用 | $0.125，提示 <= 20 萬個詞元 $0.25，提示 > 20 萬個詞元 每小時$4.50 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋建立基準 | 無法使用 | 每天 1,500 次 (免費)，之後每 1,000 個基礎提示 $35 美元 |
+| 利用 Google 地圖建立基準 | 無法使用 | 10,000 RPD (免費)，之後每 1,000 個基礎提示 $25 美元 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,625 USD, kërkesa <= 200 000 tokenë 1,25 USD, kërkesa > 200 000 tokenë |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 5,00 USD, kërkesa <= 200 000 tokenë 7,50 USD, kërkesa > 200 000 tokenë |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,125 USD, kërkesa <= 200 000 kode 0,25 USD, kërkesa > 200 000 kode 4,50 USD / 1 000 000 kode në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas), më pas 35 USD / 1 000 kërkesa të bazuara |
-| Argumentimi me Google Maps | Nuk ofrohet | Nuk ofrohet |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.625 美元，提示 <= 20 萬個詞元 $1.25 美元，提示 > 20 萬個詞元 |
+| 輸出價格 (含思考詞元) | 無法使用 | $5.00 美元，提示詞 <= 20 萬個詞元 $7.50 美元，提示詞 > 20 萬個詞元 |
+| 脈絡快取價格 | 無法使用 | $0.125，提示 <= 20 萬個詞元 $0.25，提示 > 20 萬個詞元 每小時$4.50 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋建立基準 | 無法使用 | 每天 1,500 次 (免費)，之後每 1,000 個基礎提示 $35 美元 |
+| 利用 Google 地圖建立基準 | 無法使用 | 無法使用 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,625 USD, kërkesa <= 200 000 tokenë 1,25 USD, kërkesa > 200 000 tokenë |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 5,00 USD, kërkesa <= 200 000 tokenë 7,50 USD, kërkesa > 200 000 tokenë |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,125 USD, kërkesa <= 200 000 kode 0,25 USD, kërkesa > 200 000 kode 4,50 USD / 1 000 000 kode në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas), më pas 35 USD / 1 000 kërkesa të bazuara |
-| Argumentimi me Google Maps | Nuk ofrohet | Nuk ofrohet |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.625 美元，提示 <= 20 萬個詞元 $1.25 美元，提示 > 20 萬個詞元 |
+| 輸出價格 (含思考詞元) | 無法使用 | $5.00 美元，提示詞 <= 20 萬個詞元 $7.50 美元，提示詞 > 20 萬個詞元 |
+| 脈絡快取價格 | 無法使用 | $0.125，提示 <= 20 萬個詞元 $0.25，提示 > 20 萬個詞元 每小時$4.50 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋建立基準 | 無法使用 | 每天 1,500 次 (免費)，之後每 1,000 個基礎提示 $35 美元 |
+| 利用 Google 地圖建立基準 | 無法使用 | 無法使用 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 2,25 USD, kërkesa <= 200 000 tokenë 4,50 USD, kërkesa > 200 000 tokenë |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 18,00 USD, kërkesat <= 200 000 tokenë 27,00 USD, kërkesat > 200 000 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,225 USD, kërkesa <= 200 000 kode 0,45 USD, kërkesa > 200 000 kode 8,10 USD / 1 000 000 kode në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas), më pas 35 USD / 1 000 kërkesa të bazuara |
-| Argumentimi me Google Maps | Nuk ofrohet | 10 000 RPD (falas), më pas 25 USD / 1 000 kërkesa të bazuara |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $2.25 美元，提示 <= 20 萬個詞元 $4.50 美元，提示 > 20 萬個詞元 |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $18.00 美元，提示 <= 20 萬個詞元 $27.00 美元，提示 > 20 萬個詞元 |
+| 脈絡快取價格 | 無法使用 | $0.225 美元，提示 <= 20 萬個詞元 $0.45 美元，提示 > 20 萬個詞元 每小時$8.10 美元 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋建立基準 | 無法使用 | 每天 1,500 次 (免費)，之後每 1,000 個基礎提示 $35 美元 |
+| 利用 Google 地圖建立基準 | 無法使用 | 10,000 RPD (免費)，之後每 1,000 個基礎提示 $25 美元 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
 ## Gemini 2.5 Flash
 
-*[`gemini-2.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=sq)*
+*[`gemini-2.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com?model=gemini-2.5-flash&hl=zh-tw)
 
-Modeli ynë i parë hibrid arsyetues që mbështet një dritare kontekstuale me 1 milion tokenë dhe ka buxhete të mendimit.
+Google 首款混合推論模型，支援 100 萬個詞元的脈絡窗口，並具備思考預算。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,30 USD (tekst / imazh / video) 1,00 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $2.50 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,03 USD (tekst / imazh / video) 0,1 USD (audio) 1,00 USD / 1 000 000 jeto në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google" | Pa pagesë, deri në 500 RPD (kufiri i ndarë me Flash-Lite RPD) | 1 500 RPD (falas, kufiri i ndarë me Flash-Lite RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
-| Argumentimi me Google Maps | 500 RPD | 1 500 RPD (falas), më pas 25 USD / 1 000 kërkesa të bazuara |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.30 美元 (文字 / 圖片 / 影片) $1.00 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $2.50 |
+| 脈絡快取價格 | 無法使用 | $0.03 美元 (文字 / 圖片 / 影片) $0.1 美元 (音訊) 每小時$1.00 美元 / 1,000,000 個詞元 (儲存空間定價) |
+| 以 Google 搜尋建立基準 | 無須支付費用，每天最多 500 次 (與 Flash-Lite RPD 共用上限) | 1,500 RPD (免費，與 Flash-Lite RPD 共用限制)，之後每 1,000 個 Grounded 提示 $35 美元 |
+| 利用 Google 地圖建立基準 | 500 RPD | 每天 1,500 次 (免費)，之後每 1,000 個基礎提示 $25 美元 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,15 USD (tekst / imazh / video) 0,50 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | $1.25 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,03 USD (tekst / imazh / video) 0,1 USD (audio) 1,00 USD / 1 000 000 jeto në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas, kufiri i ndarë me Flash-Lite RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
-| Argumentimi me Google Maps | Nuk ofrohet | Nuk ofrohet |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.15 美元 (文字 / 圖片 / 影片) $0.50 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無法使用 | $1.25 美元 |
+| 脈絡快取價格 | 無法使用 | $0.03 美元 (文字 / 圖片 / 影片) $0.1 美元 (音訊) 每小時$1.00 美元 / 1,000,000 個詞元 (儲存空間定價) |
+| 以 Google 搜尋建立基準 | 無法使用 | 1,500 RPD (免費，與 Flash-Lite RPD 共用限制)，之後每 1,000 個 Grounded 提示 $35 美元 |
+| 利用 Google 地圖建立基準 | 無法使用 | 無法使用 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,15 USD (tekst / imazh / video) 0,50 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | $1.25 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,03 USD (tekst / imazh / video) 0,1 USD (audio) 1,00 USD / 1 000 000 jeto në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas, kufiri i ndarë me Flash-Lite RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
-| Argumentimi me Google Maps | Nuk ofrohet | Nuk ofrohet |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.15 美元 (文字 / 圖片 / 影片) $0.50 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無法使用 | $1.25 美元 |
+| 脈絡快取價格 | 無法使用 | $0.03 美元 (文字 / 圖片 / 影片) $0.1 美元 (音訊) 每小時$1.00 美元 / 1,000,000 個詞元 (儲存空間定價) |
+| 以 Google 搜尋建立基準 | 無法使用 | 1,500 RPD (免費，與 Flash-Lite RPD 共用限制)，之後每 1,000 個 Grounded 提示 $35 美元 |
+| 利用 Google 地圖建立基準 | 無法使用 | 無法使用 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,54 USD (tekst / imazh / video) 1,80 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $4.50 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,054 USD (tekst / imazh / video) 0,18 USD (audio) 1,80 USD / 1 000 000 jetoçipe në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google" | Pa pagesë, deri në 500 RPD (kufiri i ndarë me Flash-Lite RPD) | 1 500 RPD (falas, kufiri i ndarë me Flash-Lite RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
-| Argumentimi me Google Maps | 500 RPD | 1 500 RPD (falas), më pas 25 USD / 1 000 kërkesa të bazuara |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.54 美元 (文字 / 圖片 / 影片) $1.80 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $4.50 美元 |
+| 脈絡快取價格 | 無法使用 | $0.054 美元 (文字 / 圖片 / 影片) $0.18 美元 (音訊) 每小時$1.80 美元 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋建立基準 | 無須支付費用，每天最多 500 次 (與 Flash-Lite RPD 共用上限) | 1,500 RPD (免費，與 Flash-Lite RPD 共用限制)，之後每 1,000 個 Grounded 提示 $35 美元 |
+| 利用 Google 地圖建立基準 | 500 RPD | 每天 1,500 次 (免費)，之後每 1,000 個基礎提示 $25 美元 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
 ## Gemini 2.5 Flash-Lite
 
-*[`gemini-2.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=sq)*
+*[`gemini-2.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=zh-tw)
 
-Një model i vogël dhe kostoefektiv, i ndërtuar për përdorim në shkallë të gjerë.
+小型且符合成本效益的模型，適合大規模使用。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Çmimi i hyrjes (tekst, imazh, video) | Pa pagesë | 0,10 USD (tekst / imazh / video) 0,30 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $0.40 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,01 USD (tekst / imazh / video) 0,03 USD (audio) 1,00 USD / 1 000 000 jetoçipe në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google" | Pa pagesë, deri në 500 RPD (kufiri i ndarë me Flash RPD) | 1 500 RPD (falas, kufiri ndahet me Flash RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
-| Argumentimi me Google Maps | 500 RPD | 1 500 RPD (falas), më pas 25 USD / 1 000 kërkesa të bazuara |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入內容價格 (文字、圖片、影片) | 無須支付費用 | $0.10 美元 (文字 / 圖片 / 影片) $0.30 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $0.40 美元 |
+| 脈絡快取價格 | 無法使用 | $0.01 美元 (文字/圖片/影片) $0.03 美元 (音訊) 每小時每 1,000,000 個詞元$1.00 美元 (儲存空間定價) |
+| 以 Google 搜尋建立基準 | 無須支付費用，每日最多 500 次要求 (與 Flash RPD 共用上限) | 每天 1,500 次 (免費，與 Flash RPD 共用限制)，之後每 1,000 個 grounded 提示 $35 美元 |
+| 利用 Google 地圖建立基準 | 500 RPD | 每天 1,500 次 (免費)，之後每 1,000 個基礎提示 $25 美元 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Çmimi i hyrjes (tekst, imazh, video) | Nuk ofrohet | 0,05 USD (tekst / imazh / video) 0,15 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | $0.20 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,01 USD (tekst / imazh / video) 0,03 USD (audio) 1,00 USD / 1 000 000 jetoçipe në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas, kufiri ndahet me Flash RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
-| Argumentimi me Google Maps | Nuk ofrohet | Nuk ofrohet |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入內容價格 (文字、圖片、影片) | 無法使用 | $0.05 美元 (文字 / 圖片 / 影片) $0.15 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無法使用 | $0.20 美元 |
+| 脈絡快取價格 | 無法使用 | $0.01 美元 (文字/圖片/影片) $0.03 美元 (音訊) 每小時每 1,000,000 個詞元$1.00 美元 (儲存空間定價) |
+| 以 Google 搜尋建立基準 | 無法使用 | 每天 1,500 次 (免費，與 Flash RPD 共用限制)，之後每 1,000 個 grounded 提示 $35 美元 |
+| 利用 Google 地圖建立基準 | 無法使用 | 無法使用 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Çmimi i hyrjes (tekst, imazh, video) | Nuk ofrohet | 0,05 USD (tekst / imazh / video) 0,15 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | $0.20 |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,01 USD (tekst / imazh / video) 0,03 USD (audio) 1,00 USD / 1 000 000 jetoçipe në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas, kufiri ndahet me Flash RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
-| Argumentimi me Google Maps | Nuk ofrohet | Nuk ofrohet |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入內容價格 (文字、圖片、影片) | 無法使用 | $0.05 美元 (文字 / 圖片 / 影片) $0.15 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無法使用 | $0.20 美元 |
+| 脈絡快取價格 | 無法使用 | $0.01 美元 (文字/圖片/影片) $0.03 美元 (音訊) 每小時每 1,000,000 個詞元$1.00 美元 (儲存空間定價) |
+| 以 Google 搜尋建立基準 | 無法使用 | 每天 1,500 次 (免費，與 Flash RPD 共用限制)，之後每 1,000 個 grounded 提示 $35 美元 |
+| 利用 Google 地圖建立基準 | 無法使用 | 無法使用 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Çmimi i hyrjes (tekst, imazh, video) | Pa pagesë | 0,18 USD (tekst / imazh / video) 0,54 USD (audio) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 0,72 USD |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,018 USD (tekst / imazh / video) 0,054 USD (audio) 1,80 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) |
-| Argumentimi me "Kërko në Google" | Pa pagesë, deri në 500 RPD (kufiri i ndarë me Flash RPD) | 1 500 RPD (falas, kufiri ndahet me Flash RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
-| Argumentimi me Google Maps | 500 RPD | 1 500 RPD (falas), më pas 25 USD / 1 000 kërkesa të bazuara |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入內容價格 (文字、圖片、影片) | 無須支付費用 | $0.18 美元 (文字 / 圖片 / 影片) $0.54 美元 (音訊) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $0.72 |
+| 脈絡快取價格 | 無法使用 | $0.018 美元 (文字 / 圖片 / 影片) $0.054 美元 (音訊) 每小時$1.80 美元 / 1,000,000 個詞元 (儲存空間價格) |
+| 以 Google 搜尋建立基準 | 無須支付費用，每日最多 500 次要求 (與 Flash RPD 共用上限) | 每天 1,500 次 (免費，與 Flash RPD 共用限制)，之後每 1,000 個 grounded 提示 $35 美元 |
+| 利用 Google 地圖建立基準 | 500 RPD | 每天 1,500 次 (免費)，之後每 1,000 個基礎提示 $25 美元 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-## Gemini 2.5 Flash Native Audio (Live API)
+## Gemini 2.5 Flash 原生音訊 (Live API)
 
-*[`gemini-2.5-flash-native-audio-preview-12-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=sq)*
+*[`gemini-2.5-flash-native-audio-preview-12-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/app/live?hl=sq#gemini-2.5-flash-native-audio-preview-12-2025)
+[在 Google AI Studio 試用](https://aistudio.google.com/app/live?hl=zh-tw#gemini-2.5-flash-native-audio-preview-12-2025)
 
-Modelet tona të integruara të audios të [Live API](https://ai.google.dev/gemini-api/docs/live?hl=sq) të optimizuara për nxjerrje të audios me cilësi më të lartë me ritëm, natyrshmëri të zërit, detajim zanor dhe atmosferë më të mirë.
+我們的 [Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-tw) 原生語音模型經過最佳化調整，可以輸出更優質的音訊，在節奏、語音自然程度、詳細程度和情緒方面都更為出色。
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,50 USD (tekst) 3,00 USD (audio / video) |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $2.00 (text) $12.00 (audio) |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.50 美元 (文字) $3.00 美元 (音訊 / 影片) |
+| 輸出價格 (含思考詞元) | 無須支付費用 | $2.00 美元 (文字) $12.00 美元 (音訊) |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
 ## Gemini 2.5 Flash Image (Nano Banana) 🍌
 
-*[`gemini-2.5-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=sq)*
+*[`gemini-2.5-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=zh-tw)
 
-Një model origjinal i gjenerimit të imazheve, i optimizuar për shpejtësi, fleksibilitet dhe
-kuptim kontekstual. Hyrja dhe dalja e tekstit kanë të njëjtin çmim si
-[2.5 Flash](#gemini-2.5-flash).
+原生圖像生成模型，經過最佳化調整，可提升速度、彈性和情境理解能力。文字輸入和輸出的計價方式與 [2.5 Flash](#gemini-2.5-flash) 相同。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,30 USD (tekst / imazh) |
-| Çmimi i rezultatit | Nuk ofrohet | 0,039 USD për imazh\* |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.30 美元 (文字 / 圖片) |
+| 輸出價格 | 無法使用 | 每張圖片 $0.039 美元\* |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,15 USD (tekst / imazh) |
-| Çmimi i rezultatit | Nuk ofrohet | 0,0195 USD për imazh\* |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.15 美元 (文字 / 圖片) |
+| 輸出價格 | 無法使用 | 每張圖片 $0.0195 美元\* |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Tregim force
+### Flex
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,15 USD (tekst / imazh) |
-| Çmimi i rezultatit | Nuk ofrohet | 0,0195 USD për imazh\* |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.15 美元 (文字 / 圖片) |
+| 輸出價格 | 無法使用 | 每張圖片 $0.0195 美元\* |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Me përparësi
+### 優先順序
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,54 USD (tekst / imazh) |
-| Çmimi i rezultatit | Nuk ofrohet | 0,0702 USD për imazh\* |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.54 (文字 / 圖片) |
+| 輸出價格 | 無法使用 | 每張圖片 $0.0702 美元\* |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-[\*] Nxjerra e imazheve ka çmimin 30 USD për 1 000 000 tokenë. Imazhet e prodhuara deri në
-1024x1024px konsumojnë 1290 tokenë dhe janë ekuivalente me 0,039 USD për imazh.
+[\*] 圖片輸出費用為每 1,000,000 個詞元 $30 美元。輸出圖片最大為 1024x1024 像素，會消耗 1290 個詞元，相當於每張圖片 $0.039 美元。
 
-## Gemini 2.5 Flash Preview TTS
+## Gemini 2.5 Flash 預先發布版 TTS
 
-*[`gemini-2.5-flash-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=sq)*
+*[`gemini-2.5-flash-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/generate-speech?hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/generate-speech?hl=zh-tw)
 
-Modeli ynë i audios i "tekstit në ligjërim" i 2.5 Flash i optimizuar për gjenerim të kontrollueshëm të ligjërimit me vonesë të ulët dhe me performancë të lartë për çmimin.
+2.5 Flash 文字轉語音音訊模型，經過最佳化調整，可生成低延遲、可控制的語音，且價格實惠。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 0,50 USD (tekst) |
-| Çmimi i rezultatit | Pa pagesë | 10,00 USD (audio) |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | $0.50 (文字) |
+| 輸出價格 | 無須支付費用 | $10.00 美元 (音訊) |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | $0.25 (text) |
-| Çmimi i rezultatit | Nuk ofrohet | $5.00 (audio) |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.25 (文字) |
+| 輸出價格 | 無法使用 | $5.00 美元 (音訊) |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-## Gemini 2.5 Pro Preview TTS
+## Gemini 2.5 Pro 預先發布版 TTS
 
-*[`gemini-2.5-pro-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=sq)*
+*[`gemini-2.5-pro-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com/generate-speech?hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com/generate-speech?hl=zh-tw)
 
-Modeli ynë i audios i tekstit në ligjërim 2.5 Pro i optimizuar për gjenerim të fuqishëm të ligjërimit me vonesë të ulët për rezultate më natyrale dhe kërkesa më të lehta për t'u drejtuar.
+我們的 2.5 Pro 文字轉語音音訊模型經過最佳化調整，可快速生成語音，輸出更自然的內容，並更輕鬆地引導提示。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | $1.00 (text) |
-| Çmimi i rezultatit | Nuk ofrohet | 20,00 USD (audio) |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $1.00 (文字) |
+| 輸出價格 | 無法使用 | $20.00 美元 (音訊) |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0,50 USD (tekst) |
-| Çmimi i rezultatit | Nuk ofrohet | 10,00 USD (audio) |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
-
-## Veo 3.1
-
-*[`veo-3.1-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=sq), [`veo-3.1-fast-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=sq), [`veo-3.1-lite-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=sq)*
-
-[Provo Veo 3.1](https://deepmind.google/models/veo/?hl=sq)
-
-Një model i shpejtë i gjenerimit të videove.
-
-|  | Niveli falas | Niveli me pagesë, për sekondë në USD |
-| --- | --- | --- |
-| Çmimi i videos standarde me audio me Veo 3.1 (parazgjedhje) | Nuk ofrohet | 0,40 USD (720p dhe 1080p) 0,60 USD (4k) |
-| Çmimi i videos me audio me Veo 3.1 Fast (parazgjedhje) | Nuk ofrohet | 0,10 USD (720p) 0,12 USD (1080p) 0,30 USD (4k) |
-| Çmimi i videos Veo 3.1 Lite me audio (parazgjedhje) | Nuk ofrohet | 0,05 USD (720p) 0,08 USD (1080p) (nxjerrja në 4k nuk mbështetet) |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | $0.50 (文字) |
+| 輸出價格 | 無法使用 | $10.00 美元 (音訊) |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
 ## Lyria 3.5
 
-*[`lyria-3.5`](https://ai.google.dev/gemini-api/docs/models/lyria-3.5?hl=sq)*
+*[`lyria-3.5`](https://ai.google.dev/gemini-api/docs/models/lyria-3.5?hl=zh-tw)*
 
-Modeli i gjenerimit të muzikës i Google.
+Google 的音樂生成模型。
 
-|  | Niveli falas | Niveli me pagesë, për kërkesë në USD |
+|  | 免費方案 | 付費級別，每項要求 (美元) |
 | --- | --- | --- |
-| Lyria 3.5 (Kënga e plotë) | Nuk ofrohet | 0,08 USD për këngë |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| Lyria 3.5 (全曲) | 無法使用 | 每首歌曲 $0.08 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-## Lyria 3
+## Lyria 3
 
-*[`lyria-3-clip-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=sq) dhe [`lyria-3-pro-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=sq)*
+*[`lyria-3-clip-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=zh-tw) 和 [`lyria-3-pro-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=zh-tw)*
 
-Familja e modeleve të trashëguara të gjenerimit të muzikës të Google.
+Google 的舊版音樂生成模型系列。
 
-|  | Niveli falas | Niveli me pagesë, për kërkesë në USD |
+|  | 免費方案 | 付費級別，每項要求 (美元) |
 | --- | --- | --- |
-| Pamja paraprake e klipit të Lyria 3 (30 sekonda) | Nuk ofrohet | 0,04 USD për këngë |
-| Lyria 3 Pro Preview (Full Song) | Nuk ofrohet | 0,08 USD për këngë |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| Lyria 3 短片預覽 (30 秒) | 無法使用 | 每首歌曲 $0.04 美元 |
+| Lyria 3 Pro 預先發布版 (完整歌曲) | 無法使用 | 每首歌曲 $0.08 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-## Gemini Embedding 2
+## Gemini Embedding 2
 
-*[`gemini-embedding-2`](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=sq)*
+*[`gemini-embedding-2`](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=zh-tw)*
 
-[Provo API-në](https://ai.google.dev/gemini-api/docs/embeddings?hl=sq)
+[試用 API](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-tw)
 
-Modeli ynë i parë i integrimit multimodal, që integron tekstin, imazhet, videot, audion dhe skedarët PDF në një hapësirë të unifikuar integrimi.
+這是我們第一個多模態嵌入模型，可將文字、圖片、影片、音訊和 PDF 對應至統一的嵌入空間。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Çmimi i hyrjes së tekstit | Pa pagesë | $0.20 |
-| Çmimi i hyrjes së imazhit | Pa pagesë | 0,45 USD (0,00012 USD për imazh) |
-| Çmimi i hyrjes së audios | Pa pagesë | 6,50 USD (0,00016 USD për sekondë) |
-| Çmimi i hyrjes së videos | Pa pagesë | 12,00 USD (0,00079 USD për kuadër) |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 文字輸入價格 | 無須支付費用 | $0.20 美元 |
+| 圖片輸入價格 | 無須支付費用 | $0.45 美元 (每張圖片 $0.00012 美元) |
+| 音訊輸入價格 | 無須支付費用 | $6.50 美元 (每秒 $0.00016 美元) |
+| 影片輸入價格 | 無須支付費用 | $12.00 美元 (每影格 $0.00079 美元) |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Çmimi i hyrjes së tekstit | Nuk ofrohet | $0.10 |
-| Çmimi i hyrjes së imazhit | Nuk ofrohet | 0,225 USD (0,00006 USD për imazh) |
-| Çmimi i hyrjes së audios | Nuk ofrohet | 3,25 USD (0,00008 USD për sekondë) |
-| Çmimi i hyrjes së videos | Nuk ofrohet | 6,00 USD (0,000395 USD për kuadër) |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 文字輸入價格 | 無法使用 | $0.10 美元 |
+| 圖片輸入價格 | 無法使用 | $0.225 美元 (每張圖片 $0.00006 美元) |
+| 音訊輸入價格 | 無法使用 | $3.25 美元 (每秒 $0.00008 美元) |
+| 影片輸入價格 | 無法使用 | $6.00 美元 (每影格 $0.000395 美元) |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-## Gemini Robotics ER 2 Preview
+## Gemini Robotics ER 2 預先發布版
 
-*[`gemini-robotics-er-2-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-preview?hl=sq)*
+*[`gemini-robotics-er-2-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-preview?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=zh-tw)
 
-Gemini Robotics ER 2, shkurt për Gemini Robotics Embodied Reasoning 2, është një pikë fundore e modelit të gjuhës së vizionit që u mundëson robotëve të kuptojnë mjediset e tyre me saktësi, duke mbështetur orkestrimin agjentik të robotëve, kuptimin e progresit të videove, bashkëpunimin me shumë robotë dhe arsyetimin hapësinor të përparuar.
+Gemini Robotics ER 2 (Gemini Robotics Embodied Reasoning 2 的簡稱) 是視覺語言模型端點，可讓機器人精確瞭解環境，支援機器人的代理式自動化調度管理、影片進度理解、多機器人協作和進階空間推論。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 1, 00 USD (tekst / imazh / video / audio) deri më 31 dhjetor 2026. 2, 00 USD (tekst / imazh / video / audio) duke filluar nga data 1 janar 2027. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 5, 00 USD deri më 31 dhjetor 2026. 10, 00 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,10 USD deri më 31 dhjetor 2026. 0,20 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 jetonë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 jetonë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
-| Argumentimi me "Kërko në Google" | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | 2026 年 12 月 31 日前：$1.00 美元 (文字 / 圖片 / 影片 / 音訊)。 2027 年 1 月 1 日起：$2.00 美元 (文字 / 圖片 / 影片 / 音訊)。 |
+| 輸出價格 (含思考詞元) | 無須支付費用 | 2026 年 12 月 31 日前為 $5.00 美元。 2027 年 1 月 1 日起為$10.00 美元。 |
+| 脈絡快取價格 | 無法使用 | 2026 年 12 月 31 日前：$0.10 美元。 2027 年 1 月 1 日起：$0.20 美元。 2026 年 12 月 31 日前：每小時$0.50 美元 / 1,000,000 個詞元 (儲存定價)。 2027 年 1 月 1 日起：每小時$1.00 美元 / 1,000,000 個詞元 (儲存定價)。 |
+| 以 Google 搜尋建立基準 | 無法使用 | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-### Paketë
+### 批次
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Nuk ofrohet | 0, 50 USD (tekst / imazh / video / audio) deri më 31 dhjetor 2026. 1, 00 USD (tekst / imazh / video / audio) duke filluar nga data 1 janar 2027. |
-| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 2, 50 USD deri më 31 dhjetor 2026. 5, 00 USD duke filluar nga data 1 janar 2027. |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,05 USD deri më 31 dhjetor 2026. 0,10 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
-| Argumentimi me "Kërko në Google" | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無法使用 | 2026 年 12 月 31 日前：$0.50 美元 (文字 / 圖片 / 影片 / 音訊)。 2027 年 1 月 1 日起：$1.00 美元 (文字 / 圖片 / 影片 / 音訊)。 |
+| 輸出價格 (含思考詞元) | 無法使用 | 2026 年 12 月 31 日前為 $2.50 美元。 2027 年 1 月 1 日起為$5.00 美元。 |
+| 脈絡快取價格 | 無法使用 | 2026 年 12 月 31 日前為 $0.05 美元。 2027 年 1 月 1 日起為$0.10 美元。 2026 年 12 月 31 日前為每小時$0.50 美元 / 1,000,000 個詞元 (儲存價格)。 2027 年 1 月 1 日起為每小時$1.00 美元 / 1,000,000 個詞元 (儲存價格)。 |
+| 以 Google 搜尋建立基準 | 無法使用 | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-## Gemini Robotics ER 2 Streaming Preview
+## Gemini Robotics ER 2 Streaming 預先發布版
 
-*[`gemini-robotics-er-2-streaming-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-streaming-preview?hl=sq)*
+*[`gemini-robotics-er-2-streaming-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-streaming-preview?hl=zh-tw)*
 
-[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=sq)
+[在 Google AI Studio 試用](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=zh-tw)
 
-Gemini Robotics ER 2 Streaming është një pikë fundore e modelit të gjuhës së vizionit për robotikën, e optimizuar për transmetimin e tekstit në kohë reale duke përdorur Live API. Ai pranon hyrje me tekst, imazh, video dhe audio dhe mbështet transmetimin dydrejtimësh me thirrjen e funksionit.
+Gemini Robotics ER 2 Streaming 是機器人專用的視覺語言模型端點，已針對使用 Live API 的即時文字串流進行最佳化。可接受文字、圖片、影片和音訊輸入，並支援雙向串流和函式呼叫。
 
-### Standard
+### 標準
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | 1, 00 USD (tekst / imazh / video / audio) deri më 31 dhjetor 2026. 2, 00 USD (tekst / imazh / video / audio) duke filluar nga data 1 janar 2027. |
-| Çmimi i rezultatit | Pa pagesë | 5, 00 USD deri më 31 dhjetor 2026. 10, 00 USD duke filluar nga data 1 janar 2027. |
-| Argumentimi me "Kërko në Google" | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | 2026 年 12 月 31 日前：$1.00 美元 (文字 / 圖片 / 影片 / 音訊)。 2027 年 1 月 1 日起：$2.00 美元 (文字 / 圖片 / 影片 / 音訊)。 |
+| 輸出價格 | 無須支付費用 | 2026 年 12 月 31 日前為 $5.00 美元。 2027 年 1 月 1 日起為$10.00 美元。 |
+| 以 Google 搜尋建立基準 | 無法使用 | 每月可免付費執行 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用)，之後每 1,000 次要求 $14 美元。 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-## [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4?hl=sq)
+## [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4?hl=zh-tw)
 
-Modeli ynë i hapur, i nivelit më të lartë dhe me gjurmë të vogël në memorie, i krijuar nga e njëjta teknologji që mundëson modelet tona të Gemini.
+先進的輕量級開放式模型，採用與 Gemini 模型相同的技術打造而成。
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| Fut çmimin | Pa pagesë | Nuk ofrohet |
-| Çmimi i rezultatit | Pa pagesë | Nuk ofrohet |
-| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | Nuk ofrohet |
-| Ruajtja e kontekstit në memorien specifike (hapësira ruajtëse) | Pa pagesë | Nuk ofrohet |
-| Çmimi i akordimit | Nuk ofrohet | Nuk ofrohet |
-| Argumentimi me "Kërko në Google" | Nuk ofrohet | Nuk ofrohet |
-| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+| 輸入價格 | 無須支付費用 | 無法使用 |
+| 輸出價格 | 無須支付費用 | 無法使用 |
+| 脈絡快取價格 | 無須支付費用 | 無法使用 |
+| 脈絡快取 (儲存) | 無須支付費用 | 無法使用 |
+| 調整價格 | 無法使用 | 無法使用 |
+| 以 Google 搜尋建立基準 | 無法使用 | 無法使用 |
+| 用於提升我們的產品 | [是](https://ai.google.dev/gemini-api/terms?hl=zh-tw) | [否](https://ai.google.dev/gemini-api/terms?hl=zh-tw) |
 
-## Çmimet për veglat
+## 工具定價
 
-Veglat kanë çmime sipas tarifave të tyre, të zbatuara për modelin që i përdor ato.
-Kontrollo faqen [Modelet](https://ai.google.dev/gemini-api/docs/models?hl=sq) për të parë se cilat vegla ofrohen për secilin model.
+工具會依據各自的費率計費，並套用至使用這些工具的模型。請前往「[模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw)」頁面，查看各模型可用的工具。
 
-|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+|  | 免費方案 | 付費方案，每 100 萬個詞元 (美元) |
 | --- | --- | --- |
-| [Kërko në Google](https://ai.google.dev/gemini-api/docs/google-search?hl=sq#pricing) | 500 RPD falas (kufiri i ndarë për Flash dhe Flash-Lite). Nuk ofrohet për Pro. | Modelet Gemini 2.5:  1 500 kërkesa në ditë falas (kufiri i ndarë për Flash dhe Flash-Lite). Më pas 35 USD / 1 000 kërkesa të bazuara   Modelet Gemini 3 dhe më të reja:  5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=sq#pricing-and-rate-limits) | 500 RPD Nuk ofrohet për Pro. | Modelet e Gemini 2.5:  1 500 RPD falas (kufiri i ndarë për Flash dhe Flash-Lite) 10 000 RPD falas për Pro. Më pas 25 USD / 1 000 kërkesa të bazuara   Modelet e Gemini 3 dhe më të reja:  5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet e Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
-| [Ekzekutimi i kodit](https://ai.google.dev/gemini-api/docs/code-execution?hl=sq#billing) | Pa pagesë | Ekzekutimi i kodit faturohet me tarifat standarde të tokenit për modelin e zgjedhur. Kostot përcaktohen vetëm nga përdorimi i veglës, nuk mblidhen tarifa për kohën e ekzekutimit të seancës. Kodi i gjeneruar dhe rezultatet e ekzekutimit faturohen si **Tokenë të rezultatit** kur krijohen dhe si **Tokenë të hyrjes** kur modeli i përdor ato si pjesë të procesit të tij të arsyetimit përsëritës. |
-| [Konteksti me URL](https://ai.google.dev/gemini-api/docs/url-context?hl=sq#limitations) | Pa pagesë | Tarifuar si tokenë hyrës sipas çmimit të modelit. |
-| [Përdorimi i kompjuterit](https://ai.google.dev/gemini-api/docs/computer-use?hl=sq) | Nuk ofrohet | Tarifuar si jetohet e rregullta sipas çmimit të modelit (p.sh. çmimi standard i [Gemini 3.8 Flash](#gemini-3.8-flash)). |
-| [Kërkimi i skedarëve](https://ai.google.dev/gemini-api/docs/file-search?hl=sq#pricing) | Pa pagesë | Tarifuar për [integrimet](#gemini-embedding-2) me 0,15 USD / 1 milion tokenë. Tokenët e dokumenteve të tërhequra tarifohen si tokenë të rregullt sipas çmimeve të modelit. |
-| [Pika fundore e "Veglave të personalizuara" (Gemini 3.1 Pro Preview)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=sq) | Nuk ofrohet | Njësoj si çmimet e [Gemini 3.1 Pro Preview](#gemini-3.1-pro-preview) |
+| [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw#pricing) | 每天 500 次免付費要求 (Flash 和 Flash-Lite 共用額度)。 Pro 不適用。 | Gemini 2.5 模型：  每天可免付費使用 1,500 次 (Flash 和 Flash-Lite 共用額度)。 超過後，每 1,000 個基礎提示收費 $35 美元   Gemini 3 和更新版本模型：  每月可免付費使用 5,000 次搜尋要求 (所有 Gemini 3 和更新版本模型共用額度)，超過後，每 1,000 次要求收費 $14 美元。 |
+| [Google 地圖](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw#pricing-and-rate-limits) | 500 RPD 不適用於 Pro。 | Gemini 2.5 模型：  每天可免付費使用 1,500 次 (Flash 和 Flash-Lite 共用額度) Pro 每天可免付費使用 10,000 次。 超過後，每 1,000 個建立基準的提示收費 $25 美元   Gemini 3 和更新的模型：  每月可免付費使用 5,000 次 (所有 Gemini 3 和更新的模型共用額度)，超過後，每 1,000 次搜尋查詢收費 $14 美元。 |
+| [執行程式碼](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw#billing) | 無須支付費用 | 執行程式碼時，會依所選模型的標準詞元費率計費。 費用完全取決於工具用量，工作階段執行階段不會產生費用。生成的程式碼和執行結果在建立時，會以**輸出詞元**計費；當模型將這些內容用於疊代推論程序時，則會以**輸入詞元**計費。 |
+| [網址背景資訊](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw#limitations) | 無須支付費用 | 依模型定價，以輸入詞元計費。 |
+| [電腦使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-tw) | 無法使用 | 依據模型定價 (例如標準 [Gemini 3.8 Flash](#gemini-3.8-flash) 定價)，按一般詞元計費。 |
+| [檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw#pricing) | 無須支付費用 | [嵌入](#gemini-embedding-2)費用為每 100 萬個詞元 $0.15 美元。 擷取的文件詞元費用，則依模型定價，以一般詞元計費。 |
+| [Custom Tools 端點 (Gemini 3.1 Pro 預先發布版)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw) | 無法使用 | 與 [Gemini 3.1 Pro 預先發布版](#gemini-3.1-pro-preview)定價相同 |
 
-## Çmimet për agjentët
+## 代理定價
 
-Kostot e përdorimit të agjentit llogariten bazuar në përdorimin e tokenit bazë dhe përdorimin e veglave.
+代理使用費是根據基礎詞元消耗量和工具用量計算。
 
-|  | Modeli | Vegla |
+|  | 模型 | 工具 |
 | --- | --- | --- |
-| [agjenti i Deep Research i Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=sq) | Të gjitha nxjerrjet e përfundimeve të modelit tarifohen me tarifat standarde të listës së Gemini, duke përfshirë hyrjen, daljen dhe hyrjen e ndërmjetme / tokenët e gjeneruar të arsyetimit gjatë cikleve agjentike. | Tarifat e përdorimit të veglave zbatohen sipas strukturës ekzistuese të çmimeve, duke mbajtur dallimet standarde për "Arsyetimin e kërkimit" (përjashtuar kodet e rikuperuara) kundrejt "Kontekstit me URL" / "Kërkimit të skedarëve" (kodet e rikuperuara të përfshira në të gjitha veglat e tjera). |
-| [Agjentët e menaxhuar në Gemini API](https://ai.google.dev/gemini-api/docs/agents?hl=sq) | Të gjitha nxjerrjet e përfundimeve të modelit tarifohen me tarifat standarde të listës së Gemini, duke përfshirë hyrjen, daljen dhe hyrjen e ndërmjetme / tokenët e gjeneruar të arsyetimit gjatë cikleve agjentike. (Shiko [detajet e çmimeve](https://ai.google.dev/gemini-api/docs/agents?hl=sq#pricing)). | Përpunimi i mjedisit (CPU-ja, memoria, ekzekutimi i mjedisit të izoluar) nuk faturohet gjatë periudhës së versionit paraprak. |
-| [Agjenti i Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=sq) | Të gjitha nxjerrjet e përfundimeve të modelit tarifohen me tarifat standarde të listës së Gemini, duke përfshirë hyrjen, daljen dhe hyrjen e ndërmjetme / tokenët e gjeneruar të arsyetimit gjatë cikleve agjentike. (Shiko [detajet e çmimeve](https://ai.google.dev/gemini-api/docs/agents?hl=sq#pricing)). | Përpunimi i mjedisit (CPU-ja, memoria, ekzekutimi i mjedisit të izoluar) nuk faturohet gjatë periudhës së versionit paraprak. |
+| [Gemini Deep Research 代理](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) | 所有模型推論均按照標準 Gemini 定價收費，包括輸入、輸出，以及代理迴圈期間產生的中繼輸入 / 推論詞元。 | 工具使用費會依現行定價結構收取，並維持搜尋基準 (不含檢索到的權杖) 與 Url\_context / 檔案搜尋 (所有其他工具皆含檢索到的權杖) 的標準區別。 |
+| [Gemini API 中的代管代理](https://ai.google.dev/gemini-api/docs/agents?hl=zh-tw) | 所有模型推論均按照 Gemini 標準定價計費，包括輸入、輸出，以及代理迴圈期間產生的中繼輸入 / 推論詞元。(請參閱[定價詳細資料](https://ai.google.dev/gemini-api/docs/agents?hl=zh-tw#pricing))。 | 預先發布版期間，環境運算 (CPU、記憶體、沙箱執行) 不會產生費用。 |
+| [Antigravity 代理程式](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-tw) | 所有模型推論均按照 Gemini 標準定價計費，包括輸入、輸出，以及代理迴圈期間產生的中繼輸入 / 推論詞元。(請參閱[定價詳細資料](https://ai.google.dev/gemini-api/docs/agents?hl=zh-tw#pricing))。 | 預先發布版期間，環境運算 (CPU、記憶體、沙箱執行) 不會產生費用。 |
 
-## Shënimet
+## 附註
 
-- **Kuptimi i videos nga agjenti:** Kur përdor kuptimin e videos nga agjenti,
-  përdorimi i token-ëve është i ndryshueshëm bazuar në përmbajtjen e ngarkuar nga modeli dhe jo
-  në gjatësinë e plotë të videos. Kjo zakonisht rezulton në deri në 88% më pak tokenë hyrës për videot me metrazh të gjatë, megjithëse numri i tokenëve varet nga ndërlikueshmëria e kërkesës dhe thellësia e kampionimit dinamik (që mund të kalojë 1 FPS për segmentet vizuale të detajuara). Shiko
-  [Kuptimi i videove nga agjentët](https://ai.google.dev/gemini-api/docs/video-understanding?hl=sq#agentic-video-understanding).
-- **Faturimi i tokenëve të dokumenteve:** Tokenët për modalitetin `DOCUMENT` (p.sh. skedarët PDF) faturohen me tarifën e tokenëve të imazheve. Në përgjigjet e API-së, këto kode shfaqen nën modalitetin `DOCUMENT` brenda `promptTokensDetails`.
-- Përdorimi i Google AI Studio është pa pagesë në të gjitha [rajonet e disponueshme](https://ai.google.dev/gemini-api/docs/available-regions?hl=sq). Shiko [Pyetjet e shpeshta për faturimin](https://ai.google.dev/gemini-api/docs/billing?hl=sq) për detaje.
-- Çmimet mund të ndryshojnë nga çmimet e listuara këtu dhe çmimet e ofruara në
-  Gemini Enterprise Agent Platform. Për çmimet e platformës së agjentit të Gemini Enterprise, shiko [faqen e çmimeve të platformës së agjentit të Gemini Enterprise](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=sq).
-- Nëse po përdor [rikthimin dinamik](https://ai.google.dev/gemini-api/docs/grounding?hl=sq) për të optimizuar kostot, vetëm kërkesat që përmbajnë të paktën një URL të mbështetjes së argumentimit nga uebi në përgjigjen e tyre tarifohen për "Argumentimin me 'Kërko në Google'".
-  Kostot për Gemini zbatohen gjithmonë. Kufijtë e vlerësimit mund të ndryshojnë.
+- **代理式影片解讀：**使用代理式影片解讀時，詞元用量會根據模型載入的內容而有所不同，而非完整影片長度。這通常會使長篇影片的輸入詞元減少高達 88%，但詞元數量取決於查詢複雜度和動態取樣深度 (詳細視覺片段可能超過 1 FPS)。請參閱「[代理式影片解讀](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw#agentic-video-understanding)」。
+- **文件詞元計費：**`DOCUMENT` 模態 (例如 PDF) 的詞元會以圖片詞元費率計費。在 API 回應中，這些權杖會顯示在 `promptTokensDetails` 的 `DOCUMENT` 模態下。
+- 所有[適用地區](https://ai.google.dev/gemini-api/docs/available-regions?hl=zh-tw)均可免費使用 Google AI Studio。詳情請參閱[帳單常見問題](https://ai.google.dev/gemini-api/docs/billing?hl=zh-tw)。
+- 價格可能與此處列出的價格，以及 Gemini Enterprise Agent Platform 提供的價格不同。如要瞭解 Gemini Enterprise Agent Platform 價格，請參閱 [Gemini Enterprise Agent Platform 定價頁面](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=zh-tw)。
+- 如果您使用[動態檢索](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)來最佳化成本，則只有在要求的回覆中包含至少一個來自網路的基準支援網址時，才會針對「以 Google 搜尋強化事實基礎」功能收費。Gemini 費用一律適用。頻率限制可能隨時變動。
 
-Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Përditësimi i fundit: 2026-10-16 UTC.
+上次更新時間：2026-10-22 (世界標準時間)。
 
-[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-16 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-22 (世界標準時間)。"],[],[]]

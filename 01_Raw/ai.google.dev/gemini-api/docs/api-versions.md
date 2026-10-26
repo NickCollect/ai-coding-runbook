@@ -1,69 +1,67 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=tr
-fetched_at: 2026-10-19T05:40:18.167103+00:00
-title: "API s\u00fcr\u00fcmleriyle ilgili a\u00e7\u0131klama \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=ja
+fetched_at: 2026-10-26T05:58:23.350154+00:00
+title: "API \u30d0\u30fc\u30b8\u30e7\u30f3\u306e\u8aac\u660e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [API referansı](https://ai.google.dev/api?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [API リファレンス](https://ai.google.dev/api?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-# API sürümleriyle ilgili açıklama
+# API バージョンの説明
 
-Bu belgede, Gemini API'nin `v1`
-ve `v1beta` sürümleri arasındaki farklarla ilgili üst düzey bir genel bakış sunulmaktadır.
+このドキュメントでは、Gemini API の `v1` バージョンと `v1beta` バージョンの違いの概要について説明します。
 
-- **v1**: API'nin kararlı sürümü. Kararlı sürümdeki özellikler, ana sürümün kullanım ömrü boyunca tam olarak desteklenir. API'de herhangi bir uyumluluk sorunu oluşturan değişiklik varsa API'nin yeni bir ana sürümü oluşturulur ve mevcut sürüm makul bir süre sonra kullanımdan kaldırılır.
-  API'de ana sürüm değiştirilmeden uyumluluğu bozmayan değişiklikler yapılabilir. **Etkileşimler API** ve temel özellikleri, `v1`'de genel kullanıma sunulmuştur.
-- **v1beta**: Bu sürüm, aktif olarak geliştirilmekte olan erken aşamadaki özellikleri ve işlevleri içerir. `v1beta` bölümündeki özellikler, geri bildirimlere göre iyileştirilirken değişikliklere tabi olabilir. Ancak bu bölüm, yeni özellikleri kararlı sürüme yükseltilmeden önce denemenize olanak tanır.
+- **v1**: API の安定版。安定版の機能は、メジャー バージョンのライフサイクル全体にわたって完全にサポートされます。互換性を破る変更がある場合は、API の新しいメジャー バージョンが作成され、既存のバージョンは妥当な期間の後に非推奨になります。メジャー バージョンを変更せずに、API に非破壊的変更が導入されることがあります。**Interactions API** とそのコア機能は、`v1` で一般提供されています。
+- **v1beta**: このバージョンには、開発中の初期の機能が含まれています。`v1beta` の機能は、フィードバックに基づいて改善されるため、変更される可能性がありますが、安定版に昇格する前に新機能を試すことができます。
 
-## Özellik ve işlev desteği
+## 機能のサポート
 
-Aşağıdaki tabloda, `v1` (GA) ve `v1beta` (Beta) sürümlerindeki özelliklerin kullanılabilirliği ayrıntılı olarak açıklanmaktadır. Aksi belirtilmediği sürece temel API özellikleri ve araçları hem Interactions API hem de `generateContent` için geçerlidir:
+次の表に、`v1`（GA）と `v1beta`（ベータ版）の機能の可用性を示します。特に指定がない限り、コア API の機能とツールは Interactions API と `generateContent` の両方に適用されます。
 
-| Özellik | v1 | v1beta |
+| 機能 | v1 | v1beta |
 | --- | --- | --- |
-| **Temel API özellikleri** |  |  |
-| [Interactions API](https://ai.google.dev/gemini-api/docs/get-started?hl=tr) |  |  |
-| [İşlev Çağrısı](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) |  |  |
-| [Yapılandırılmış Çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) (Structured Output) |  |  |
-| [Düşünme/Akıl Yürütme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) (Thinking / Reasoning) |  |  |
-| [Sistem Talimatları](https://ai.google.dev/gemini-api/docs/system-instructions?hl=tr) (System Instructions) |  |  |
-| [Ses Çıkışı (Konuşma Yapılandırması)](https://ai.google.dev/gemini-api/docs/audio?hl=tr) |  |  |
-| [Hizmet Katmanı (Öncelikli / Esnek)](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr) |  |  |
-| **Araçlar** |  |  |
-| [Kod Yürütme Aracı](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr) |  |  |
-| [Google Arama Temellendirmesi](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) |  |  |
-| [Google Haritalar Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr) |  |  |
-| [URL Bağlamı Aracı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr) |  |  |
-| [Dosya Arama Aracı](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) |  |  |
-| [Bilgisayar Kullanım Aracı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) |  |  |
-| [MCP Sunucuları Aracı](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#mcp) |  |  |
-| **Anlık API'ler** |  |  |
-| [Live API (WebSockets)](https://ai.google.dev/gemini-api/docs/live-api?hl=tr) |  |  |
-| [Live Music API](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=tr) |  |  |
-| [Kısa Ömürlü Jetonlar (Canlı API)](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=tr) |  |  |
-| **Platform API'leri** |  |  |
-| [Models API](https://ai.google.dev/gemini-api/docs/models?hl=tr) |  |  |
-| [Dosya Hizmeti Rotası](https://ai.google.dev/gemini-api/docs/files?hl=tr) |  |  |
-| [Dosya Arama Mağazaları Rotası](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) |  |  |
-| [Agents API](https://ai.google.dev/gemini-api/docs/agents?hl=tr) |  |  |
-| [Webhooks API](https://ai.google.dev/gemini-api/docs/webhooks?hl=tr) |  |  |
-| [Bağlamı Önbelleğe Alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr) |  |  |
+| **Core API の機能** |  |  |
+| [Interactions API](https://ai.google.dev/gemini-api/docs/get-started?hl=ja) |  |  |
+| [関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja) |  |  |
+| [構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja) |  |  |
+| [思考 / 推論](https://ai.google.dev/gemini-api/docs/thinking?hl=ja) |  |  |
+| [システム指示](https://ai.google.dev/gemini-api/docs/system-instructions?hl=ja) |  |  |
+| [音声出力（音声構成）](https://ai.google.dev/gemini-api/docs/audio?hl=ja) |  |  |
+| [サービスティア（優先 / フレキシブル）](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja) |  |  |
+| **ツール** |  |  |
+| [コード実行ツール](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja) |  |  |
+| [Google 検索グラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja) |  |  |
+| [Google マップのグラウンディング](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja) |  |  |
+| [URL コンテキスト ツール](https://ai.google.dev/gemini-api/docs/url-context?hl=ja) |  |  |
+| [ファイル検索ツール](https://ai.google.dev/gemini-api/docs/file-search?hl=ja) |  |  |
+| [コンピュータ使用ツール](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja) |  |  |
+| [MCP サーバーツール](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#mcp) |  |  |
+| **リアルタイム API** |  |  |
+| [Live API（WebSocket）](https://ai.google.dev/gemini-api/docs/live-api?hl=ja) |  |  |
+| [Live Music API](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=ja) |  |  |
+| [エフェメラル トークン（Live API）](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=ja) |  |  |
+| **プラットフォーム API** |  |  |
+| [Models API](https://ai.google.dev/gemini-api/docs/models?hl=ja) |  |  |
+| [Files Service Route](https://ai.google.dev/gemini-api/docs/files?hl=ja) |  |  |
+| [ファイル検索でルートを保存](https://ai.google.dev/gemini-api/docs/file-search?hl=ja) |  |  |
+| [Agents API](https://ai.google.dev/gemini-api/docs/agents?hl=ja) |  |  |
+| [Webhooks API](https://ai.google.dev/gemini-api/docs/webhooks?hl=ja) |  |  |
+| [コンテキスト キャッシュ保存](https://ai.google.dev/gemini-api/docs/caching?hl=ja) |  |  |
 
-- - Desteklenir
+- - サポート対象
 
-## SDK'da API sürümünü yapılandırma
+## SDK で API バージョンを構成する
 
-Gemini API SDK'ları varsayılan olarak `v1beta` sürümünü kullanır ancak aşağıdaki kod örneğinde gösterildiği gibi API sürümünü ayarlayarak sürümleri açıkça belirtebilirsiniz:
+Gemini API SDK はデフォルトで `v1beta` に設定されていますが、次のコードサンプルに示すように API バージョンを設定することで、バージョンを明示的に指定できます。
 
 ### Python
 
@@ -175,12 +173,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1/interactions" \
   }'
 ```
 
-Geri bildirim gönderin
+フィードバックを送信
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Son güncelleme tarihi: 2026-09-24 UTC.
+最終更新日 2026-09-24 UTC。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+ご意見をお聞かせください
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-24 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-24 UTC。"],[],[]]

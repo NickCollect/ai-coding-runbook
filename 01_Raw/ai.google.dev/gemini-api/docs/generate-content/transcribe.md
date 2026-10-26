@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/transcribe?hl=ja
-fetched_at: 2026-10-19T05:56:36.546352+00:00
-title: "\u97f3\u58f0\u6587\u5b57\u5909\u63db \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/transcribe?hl=pl
+fetched_at: 2026-10-26T05:43:33.175536+00:00
+title: "Zapis tekstowy \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs/generate-content?hl=pl)
 
-フィードバックを送信
+Prześlij opinię
 
-# 音声文字変換
+# Zapis tekstowy
 
-Gemini API は、Gemini 3.5 Transcribe モデル（`gemini-3.5-transcribe`）を使用して、音声ファイル内の音声をテキストに変換します。Gemini の音声理解機能に基づいて、自動言語識別、話者ダイアリゼーション、単語レベルのタイムスタンプ、カスタム語彙ヒントを使用して、正確な文字起こしを提供します。また、言い淀みの削除やスマートな書式設定などの機能を備えた[スマート文字起こし](#transcription-modes)モードも用意されています。
+Interfejs Gemini API przekształca mowę w plikach audio na tekst za pomocą modelu Gemini 3.5 Transcribe (`gemini-3.5-transcribe`). Dzięki możliwościom rozumienia dźwięku Gemini zapewnia dokładną transkrypcję z automatycznym rozpoznawaniem języka, rozróżnianiem mówców, znacznikami czasu na poziomie słów i wskazówkami dotyczącymi słownictwa niestandardowego. Oferuje też tryb [inteligentnej transkrypcji](#transcription-modes), który usuwa niepłynności i inteligentnie formatuje tekst.
 
-音声ファイルを文字起こしするには、音声をアップロードして `gemini-3.5-transcribe` に渡します。
+Aby utworzyć transkrypcję pliku audio, prześlij go i przekaż do `gemini-3.5-transcribe`:
 
 ### Python
 
@@ -83,26 +83,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## 概要
+## Przegląd
 
-Gemini 3.5 Transcribe は、音声文字変換タスク用に最適化されています。さまざまなアクセント、背景雑音、多言語の会話に対応しています。
+Gemini 3.5 Transcribe jest zoptymalizowany pod kątem zadań związanych z przekształcaniem mowy na tekst. Obsługuje różne akcenty, szumy w tle i rozmowy w wielu językach.
 
-主な機能は次のとおりです。
+Najważniejsze funkcje:
 
-- **自動音声認識（ASR）:** [85 以上の言語 / 地域](#supported-languages)で言語を自動的に検出します。手動で構成しなくても、文内と文間のコードスイッチングを処理します。
-- **カスタム語彙:** 最大 1,000 個のフレーズを渡すことで、分野固有の用語、頭字語、固有名詞の認識を優先します。
-- **話者ダイアライゼーション:** 複数の話者を区別し、発言されたセグメントを個別のラベルに関連付けます。
-- **単語レベルのタイムスタンプ:** 認識された各単語の正確な開始時間と終了時間のオフセットを生成します。
-- **スマート文字起こし:** 語句の言い直し、つなぎ言葉、繰り返しを削除し、構造化された書式設定を適用します。
-- **書式設定と正規化:** 大文字と小文字の区別、句読点、逆テキスト正規化（「2,600 万ドル」を「$26M」に変換するなど）を適用します。
+- **Automatyczne rozpoznawanie mowy (ASR):** automatycznie wykrywa języki w [ponad 85 lokalizacjach](#supported-languages). Obsługuje przełączanie języków w obrębie zdania i między zdaniami bez konieczności ręcznej konfiguracji.
+- **Słownictwo niestandardowe:** przekazując do 1000 fraz, możesz zwiększyć prawdopodobieństwo rozpoznania terminów, akronimów i nazw własnych związanych z określoną dziedziną.
+- **Rozdzielanie rozmówców:** rozróżnia wielu rozmówców i przypisuje wypowiadane segmenty do różnych etykiet.
+- **Sygnatury czasowe na poziomie słów:** generuje dokładne przesunięcia czasu rozpoczęcia i zakończenia każdego rozpoznanego słowa.
+- **Inteligentna transkrypcja:** usuwa niepłynności, wypełniacze i powtórzenia oraz stosuje formatowanie strukturalne.
+- **Formatowanie i normalizacja:** stosuje wielkie litery, interpunkcję i normalizację tekstu odwrotnego, np. przekształca „twenty six million dollars” na „26 mln USD”.
 
-音声コンテンツに関する一般的な音声推論や質問応答には、[音声理解](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=ja)を使用します。テキスト読み上げの音声合成には、[テキスト読み上げ](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=ja)を使用します。
+Jeśli chcesz uzyskać ogólne rozumowanie na podstawie treści audio lub odpowiadanie na pytania dotyczące tych treści, użyj [rozumienia dźwięku](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=pl). Do syntezy dźwięku przy zamianie tekstu na mowę użyj funkcji [Zamiana tekstu na mowę](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=pl).
 
-## 言語の検出とヒント
+## Wykrywanie języka i podpowiedzi
 
-デフォルトでは、モデルは音声言語を自動的に検出します。話者がコードスイッチングを行うと、言語が動的に切り替わります。
+Domyślnie model automatycznie wykrywa język, w którym mówisz. Przełącza się między językami dynamicznie, gdy mówcy przechodzą z jednego języka na drugi.
 
-自動検出を使用するには、`language_codes` を省略するか、空のリストを指定します。
+Aby użyć automatycznego wykrywania, pomiń parametr `language_codes` lub podaj pustą listę:
 
 ### Python
 
@@ -164,7 +164,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-言語が事前にわかっている場合は、`language_codes` で BCP-47 言語コードを指定して、文字起こしの精度を高めます（[サポートされている言語](#supported-languages)をご覧ください）。
+Jeśli znasz język z wyprzedzeniem, podaj kody języka w standardzie BCP-47 w `language_codes`, aby zwiększyć dokładność transkrypcji (patrz [Obsługiwane języki](#supported-languages)):
 
 ### Python
 
@@ -198,9 +198,9 @@ const config = {
 }
 ```
 
-## カスタム語彙
+## Słownictwo niestandardowe
 
-音声モデルが一般的でない単語、専門用語、ブランド名、固有名詞を認識しやすくすることができます。`custom_vocabulary` 配列に最大 1,000 個の用語を指定します（通常、100 個までの用語で最適な結果が得られます）。
+Możesz nakierować model mowy na rzadko używane słowa, żargon techniczny, nazwy marek lub nazwy własne. Podaj w tablicy `custom_vocabulary` maksymalnie 1000 słów (najlepsze wyniki zwykle uzyskuje się w przypadku maksymalnie 100 słów):
 
 ### Python
 
@@ -262,11 +262,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## 話者ダイアライゼーション
+## Rozdzielanie rozmówców
 
-話者ダイアライゼーションは、録音内の異なる音声を識別し、各セグメントに `spk_1` や `spk_2` などの話者識別子でタグ付けします。最大 8 人のスピーカーがサポートされています（3 人以上のスピーカーの帰属は試験運用版です）。
+Rozdzielanie rozmówców identyfikuje różne głosy w nagraniu i oznacza każdy segment identyfikatorem rozmówcy, np. `spk_1` lub `spk_2`. Obsługiwanych jest maksymalnie 8 głośników (atrybucja w przypadku 3 lub więcej głośników jest eksperymentalna).
 
-`diarization` を `True` に設定して、ダイアライゼーションを有効にします。
+Włącz rozdzielanie rozmówców, ustawiając `diarization` na `True`:
 
 ### Python
 
@@ -328,11 +328,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## 単語レベルのタイムスタンプ
+## Sygnatury czasowe na poziomie słów
 
-単語レベルのタイムスタンプは、音声ストリームで認識されたすべての単語の正確な開始オフセットと終了オフセットを提供します。
+Sygnatury czasowe na poziomie słów podają dokładne przesunięcia początku i końca każdego rozpoznanego słowa w strumieniu audio.
 
-`word_timestamp` を `True` に設定して、タイムスタンプを有効にします。
+Włącz znaczniki czasu, ustawiając `word_timestamp` na `True`:
 
 ### Python
 
@@ -394,7 +394,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-1 つのリクエストで `diarization` と `word_timestamp` を組み合わせて、スピーカー ラベルと単語のタイムスタンプの両方を取得できます。
+Możesz połączyć `diarization` i `word_timestamp` w jednym żądaniu, aby otrzymać etykiety mówców i sygnatury czasowe słów:
 
 ### Python
 
@@ -403,7 +403,6 @@ config = types.GenerateContentConfig(
     audio_transcription_config=types.AudioTranscriptionConfig(
         diarization=True,
         word_timestamp=True,
-        custom_vocabulary=["Gemini"],
     )
 )
 ```
@@ -415,7 +414,6 @@ const config = {
   audioTranscriptionConfig: {
     diarization: true,
     wordTimestamp: true,
-    customVocabulary: ["Gemini"],
   },
 };
 ```
@@ -427,28 +425,27 @@ const config = {
   "generationConfig": {
     "audioTranscriptionConfig": {
       "diarization": true,
-      "wordTimestamp": true,
-      "customVocabulary": ["Gemini"]
+      "wordTimestamp": true
     }
   }
 }
 ```
 
-## 文字起こしモード
+## Tryby transkrypcji
 
-Gemini 3.5 Transcribe は、`mode` パラメータを介して次の 2 つの文字起こしモードをサポートしています。
+Gemini 3.5 Transcribe obsługuje 2 tryby transkrypcji za pomocą parametru `mode`:
 
-- **`VERBATIM`（デフォルト）**: 発言された内容をそのまま文字起こしし、フィラーワード（「えー」、「あー」、「～みたいな」、「～じゃん」など）、繰り返し、一時停止、言い直しをそのまま返します。タイムスタンプまたは話者ダイアライゼーションを使用する場合は必須です。
-- **`SMART`（スマート文字起こし）**: インテリジェントな後処理を適用して、文字起こしを読みやすくします。
-  - **発話の乱れの除去**: 会話のフィラー、どもり、誤った開始を削除します。
-  - **インラインの自己修正**: 発言の修正を直接解決します（たとえば、「火曜日に会いましょう。いや、水曜日の 2 時にしましょう」は「水曜日の午後 2 時に会いましょう」になります）。
-  - **構造化された形式の自動適用**: 発言された考えを段落、番号付きリスト、箇条書き、日付、通貨、数値の形式に自動的に構造化します。
-  - **文法的なクリーンアップ**: 自然な句読点、文のケース、流れを適用します。
+- **`VERBATIM` (domyślny):** zwraca dokładny zapis słowo w słowo wszystkiego, co zostało powiedziane, zachowując nieprzetworzone wypełniacze („um”, „uh”, „like”, „you know”), powtórzenia, pauzy i fałszywe starty. Wymagane w przypadku używania sygnatur czasowych lub podziału na mówców.
+- **`SMART` (Inteligentna transkrypcja):** optymalizuje transkrypcję pod kątem czytania, stosując inteligentne przetwarzanie końcowe:
+  - **Usuwanie zakłóceń:** usuwa wypełniacze, jąkanie i fałszywe starty.
+  - **Korekty w tekście:** bezpośrednie rozwiązywanie problemów z korektami w wypowiedzi (np. *„Spotkajmy się we wtorek, a nie, w środę o godzinie 14:00”* staje się *„Spotkajmy się w środę o godzinie 14:00”*).
+  - **Automatyczne formatowanie strukturalne:** automatycznie porządkuje wypowiadane myśli w akapitach, listach numerowanych, punktach, sformatowanych datach, walutach i liczbach.
+  - **Poprawki gramatyczne:** stosuje naturalną interpunkcję, wielkie litery na początku zdania i płynność.
 
-| 音声 | `VERBATIM` の出力 | `SMART`（スマート文字起こし）の出力 |
+| Tekst mówiony | `VERBATIM` wynik | `SMART` dane wyjściowe (inteligentna transkrypcja) |
 | --- | --- | --- |
-| 「えっと、会議にはアリスを招待して、いや、ボブとキャロルを招待するべきだと思います。」 | 「えっと、会議にはアリスを招待した方がいいと思う。いや、ボブとキャロルだ。」 | 「会議には Bob と Carol を招待した方がいいと思います。」 |
-| 「First item review budget second item finalize timeline third item send recap」 | 「first item review budget second item finalize timeline third item send recap」 | 「1. 予算を確認します。 2. タイムラインを確定する 3. ダイジェストを送信」 |
+| „Um, na spotkanie powinniśmy zaprosić Alicję i … nie, Roberta i Karolinę”. | „Um, na spotkanie powinniśmy zaprosić Alicję i poczekać, nie, Roberta i Karola”. | „Na spotkanie powinniśmy zaprosić Roberta i Karolinę”. |
+| „First item review budget second item finalize timeline third item send recap” | „first item review budget second item finalize timeline third item send recap” | „1. Sprawdź budżet 2. Finalizacja osi czasu 3. Wyślij podsumowanie”. |
 
 ### Python
 
@@ -512,13 +509,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## 音声文字変換出力の解析
+.
 
-完全な文字起こしテキストが `response.text` で返されます。
+## Analizowanie danych wyjściowych transkrypcji
 
-`word_timestamp` または `diarization` が有効になっている場合、API は候補部分に付加された単語レベルの詳細なアノテーションとスピーカー ラベルも返します。
+Pełny tekst transkrypcji jest zwracany w `response.text`.
 
-単語のタイムスタンプと話者のターンを抽出して反復処理する方法は次のとおりです。
+Gdy włączona jest opcja `word_timestamp` lub `diarization`, interfejs API zwraca też szczegółowe adnotacje na poziomie słów i etykiety mówców dołączone do proponowanych części.
+
+Oto jak wyodrębnić sygnatury czasowe słów i zmiany rozmówców oraz po nich iterować:
 
 ### Python
 
@@ -599,12 +598,12 @@ for (const w of words) {
                 {
                   "word": "Hello",
                   "startOffset": "0.100s",
-                  "endOffset": "0.450s"
+                  "endOffset": "0.400s"
                 },
                 {
                   "word": "world",
                   "startOffset": "0.500s",
-                  "endOffset": "0.850s"
+                  "endOffset": "0.800s"
                 }
               ]
             }
@@ -618,96 +617,116 @@ for (const w of words) {
 }
 ```
 
-## サポートされている言語
+## Obsługiwane języki
 
-Gemini 3.5 Transcribe では、次の言語と BCP-47 言語コードがサポートされています。
+Gemini 3.5 Transcribe obsługuje te języki i kody języków w standardzie BCP-47:
 
-| 言語 | BCP-47 コード | 言語 | BCP-47 コード |
+| Język | Kod BCP-47 | Język | Kod BCP-47 |
 | --- | --- | --- | --- |
-| アフリカーンス語 | `af-ZA` | 日本語 | `ja-JP` |
-| アムハラ語 | `am-ET` | ジャワ語 | `jv-ID` |
-| アラビア語（エジプト） | `ar-EG` | カーボベルデ語 | `kea-CV` |
-| アルメニア語 | `hy-AM` | カンナダ語 | `kn-IN` |
-| アッサム語 | `as-IN` | カザフ語 | `kk-KZ` |
-| アゼルバイジャン語 | `az-AZ` | 韓国語 | `ko-KR` |
-| ベラルーシ語 | `be-BY` | キルギス語 | `ky-KG` |
-| ベンガル語（バングラデシュ） | `bn-BD` | ラトビア語 | `lv-LV` |
-| ベンガル語（インド） | `bn-IN` | リンガラ語 | `ln-CD` |
-| ボスニア語 | `bs-BA` | リトアニア語 | `lt-LT` |
-| ブルガリア語 | `bg-BG` | マケドニア語 | `mk-MK` |
-| ブルガリア語（アルーマニア語） | `rup-BG` | マレー語 | `ms-MY` |
-| ビルマ語 | `my-MM` | マラヤーラム語 | `ml-IN` |
-| 広東語（繁体） | `yue-Hant-HK` | マルタ語 | `mt-MT` |
-| カタルーニャ語 | `ca-ES` | 標準中国語（簡体） | `cmn-Hans-CN` |
-| セブアノ語 | `ceb` | マラーティー語 | `mr-IN` |
-| 中央クメール語 | `km-KH` | モンゴル語 | `mn-MN` |
-| クロアチア語 | `hr-HR` | ネパール語 | `ne-NP` |
-| チェコ語 | `cs-CZ` | ノルウェー語 | `nb-NO` |
-| デンマーク語 | `da-DK` | オリヤ語 | `or-IN` |
-| オランダ語 | `nl-NL` | ポーランド語 | `pl-PL` |
-| 英語（英国） | `en-GB` | ポルトガル語（ブラジル） | `pt-BR` |
-| 英語（インド） | `en-IN` | ポルトガル語（ポルトガル） | `pt-PT` |
-| 英語（米国） | `en-US` | パンジャブ語 | `pa-IN` |
-| エストニア語 | `et-EE` | パンジャブ語（グルムキー文字） | `pa-Guru-IN` |
-| ペルシア語 | `fa-IR` | ルーマニア語 | `ro-RO` |
-| フィリピン語 | `fil-PH` | ロシア語 | `ru-RU` |
-| フィンランド語 | `fi-FI` | セルビア語 | `sr-RS` |
-| フランス語 | `fr-FR` | シンド語（アラビア文字） | `sd-Arab-IN` |
-| ガリシア語 | `gl-ES` | スロバキア語 | `sk-SK` |
-| ジョージア語 | `ka-GE` | スロベニア語 | `sl-SI` |
-| ドイツ語 | `de-DE` | スペイン語（ラテンアメリカ） | `es-419` |
-| ギリシャ語 | `el-GR` | スペイン語（米国） | `es-US` |
-| グジャラート語 | `gu-IN` | スワヒリ語（ケニア） | `sw-KE` |
-| ハウサ語 | `ha-NG` | スウェーデン語 | `sv-SE` |
-| ヘブライ語 | `he-IL` | タジク語 | `tg-TJ` |
-| ヒンディー語 | `hi-IN` | テルグ語 | `te-IN` |
-| ハンガリー語 | `hu-HU` | タイ語 | `th-TH` |
-| アイスランド語 | `is-IS` | トルコ語 | `tr-TR` |
-| インド英語 | `en-IN` | ウクライナ語 | `uk-UA` |
-| インドネシア語 | `id-ID` | ウズベク語 | `uz-UZ` |
-| イタリア語 | `it-IT` | ベトナム語 | `vi-VN` |
+| afrikaans | `af-ZA` | japoński | `ja-JP` |
+| amharski | `am-ET` | jawajski | `jv-ID` |
+| arabski (Egipt) | `ar-EG` | kabuverdianu | `kea-CV` |
+| ormiański | `hy-AM` | kannada | `kn-IN` |
+| asamski | `as-IN` | kazachski | `kk-KZ` |
+| azerski | `az-AZ` | koreański | `ko-KR` |
+| białoruski | `be-BY` | kirgiski | `ky-KG` |
+| bengalski (Bangladesz) | `bn-BD` | łotewski | `lv-LV` |
+| bengalski (Indie) | `bn-IN` | lingala | `ln-CD` |
+| bośniacki | `bs-BA` | litewski | `lt-LT` |
+| bułgarski | `bg-BG` | macedoński | `mk-MK` |
+| bułgarski (arumuński), | `rup-BG` | malajski | `ms-MY` |
+| birmański | `my-MM` | malajalam | `ml-IN` |
+| kantoński (tradycyjny), | `yue-Hant-HK` | maltański | `mt-MT` |
+| kataloński | `ca-ES` | chiński mandaryński (uproszczony), | `cmn-Hans-CN` |
+| cebuański | `ceb` | marathi | `mr-IN` |
+| khmerski | `km-KH` | mongolski | `mn-MN` |
+| chorwacki | `hr-HR` | nepalski | `ne-NP` |
+| czeski | `cs-CZ` | norweski | `nb-NO` |
+| duński | `da-DK` | orija | `or-IN` |
+| niderlandzki | `nl-NL` | polski | `pl-PL` |
+| angielski (Wielka Brytania) | `en-GB` | portugalski (Brazylia) | `pt-BR` |
+| angielski (Indie) | `en-IN` | portugalski (Portugalia) | `pt-PT` |
+| angielski (USA) | `en-US` | pendżabski | `pa-IN` |
+| estoński | `et-EE` | pendżabski (pismo gurmukhi), | `pa-Guru-IN` |
+| perski | `fa-IR` | rumuński | `ro-RO` |
+| filipiński | `fil-PH` | rosyjski | `ru-RU` |
+| fiński | `fi-FI` | serbski | `sr-RS` |
+| francuski | `fr-FR` | sindhi (alfabet arabski) | `sd-Arab-IN` |
+| galicyjski | `gl-ES` | słowacki | `sk-SK` |
+| gruziński | `ka-GE` | słoweński | `sl-SI` |
+| niemiecki | `de-DE` | hiszpański (Ameryka Łacińska) | `es-419` |
+| grecki | `el-GR` | hiszpański (Stany Zjednoczone) | `es-US` |
+| gudżarati | `gu-IN` | suahili (Kenia) | `sw-KE` |
+| hausa | `ha-NG` | szwedzki | `sv-SE` |
+| hebrajski | `he-IL` | tadżycki | `tg-TJ` |
+| hindi | `hi-IN` | telugu | `te-IN` |
+| węgierski | `hu-HU` | tajski | `th-TH` |
+| islandzki | `is-IS` | turecki | `tr-TR` |
+| indyjski angielski | `en-IN` | ukraiński | `uk-UA` |
+| indonezyjski | `id-ID` | uzbecki | `uz-UZ` |
+| włoski | `it-IT` | wietnamski | `vi-VN` |
 
-## パラメータ リファレンス
+## Obsługiwane formaty audio
 
-`GenerateContentConfig` の `audio_transcription_config` オブジェクト内のフィールドを設定して、文字起こしを構成します。
+Gemini 3.5 Transcribe obsługuje te typy MIME formatów audio:
 
-| フィールド | タイプ | 説明 |
+- WAV - `audio/wav`
+- MP3 – `audio/mp3`
+- AIFF – `audio/aiff`
+- AAC - `audio/aac`
+- OGG – `audio/ogg`
+- FLAC - `audio/flac`
+- MPEG - `audio/mpeg`
+- M4A - `audio/m4a`
+- L16 - `audio/l16`
+- Opus – `audio/opus`
+- ALAW - `audio/alaw`
+- MULAW - `audio/mulaw`
+- WebM – `audio/webm`
+
+Pełną listę obsługiwanych typów MIME i schematów parametrów znajdziesz w [dokumentacji interfejsu Interactions API](https://ai.google.dev/api/interactions-api?hl=pl#Resource:Content).
+
+## Dodatkowe materiały o tym parametrze
+
+Skonfiguruj transkrypcję, ustawiając pola w obiekcie `audio_transcription_config` w `GenerateContentConfig`:
+
+| Pole | Typ | Opis |
 | --- | --- | --- |
-| `language_codes` | 文字列の配列 | BCP-47 言語コード（例: `["en-US"]`）。省略または空（`[]`）の場合、モデルは言語を自動的に検出し、コード切り替えを処理します。 |
-| `custom_vocabulary` | 文字列の配列 | 音声認識にバイアスをかけるためのカスタム用語、頭字語、固有名詞を最大 1,000 個。 |
-| `word_timestamp` | ブール値 | 単語の開始オフセットと終了オフセットを含めるには `True` に設定します。省略した場合、または `False` の場合、単語のタイムスタンプは返されません。 |
-| `diarization` | ブール値 | 個別の話し手を識別してラベル付けするには、`True` に設定します。 |
-| `mode` | 文字列 | 音声文字変換モード。サポートされている値: `"VERBATIM"`（デフォルト）、`"SMART"`。タイムスタンプとダイアライゼーションには対応していません。 |
+| `language_codes` | Tablica ciągów znaków | Kody języków w standardzie BCP-47 (np. `["en-US"]`). Jeśli ten parametr zostanie pominięty lub będzie pusty (`[]`), model automatycznie wykryje język i obsłuży przełączanie kodu. |
+| `custom_vocabulary` | Tablica ciągów znaków | Maksymalnie 1000 niestandardowych terminów, akronimów lub nazw własnych, które mają wpływać na rozpoznawanie mowy. Nie jest zgodne z rozdzielaniem rozmówców ani sygnaturami czasowymi na poziomie słów. |
+| `word_timestamp` | Wartość logiczna | Ustaw na `True`, aby uwzględnić przesunięcia początku i końca słowa. Jeśli ten parametr zostanie pominięty lub będzie miał wartość `False`, sygnatury czasowe słów nie będą zwracane. Niezgodne ze słownikiem niestandardowym. |
+| `diarization` | Wartość logiczna | Ustaw na `True`, aby identyfikować poszczególnych rozmówców i oznaczać ich etykietami. Niezgodne ze słownikiem niestandardowym. |
+| `mode` | Ciąg znaków | Tryb transkrypcji. Obsługiwane wartości: `"VERBATIM"` (domyślna) i `"SMART"`. Brak zgodności z sygnaturami czasowymi i podziałem na mówców. |
 
-## ベスト プラクティス
+## Sprawdzone metody
 
-- **クリアな音声を提供する:** 音声録音で音声が明瞭に分離され、クリッピングがひどくならないようにします。
-- **言語がわかっている場合は言語ヒントを指定する:** 音声の言語がわかっている場合は、`language_codes` を指定して精度を最大限に高めます。
-- **カスタム語彙のターゲット:** 一般的な日常用語ではなく、個別のドメイン用語、ブランド名、固有名詞のみを `custom_vocabulary` に含めます。
-- **大きな録音には Files API を使用する:** 数秒を超えるファイルの場合は、`client.files.upload` を使用してファイルをアップロードし、返されたファイルをモデル コンテンツに渡します。
+- **Zapewnij czysty dźwięk:** zadbaj o to, aby nagrania audio miały wyraźnie oddzielone głosy i unikaj poważnego obcinania dźwięku.
+- **Podaj wskazówki dotyczące języka, jeśli jest on znany:** jeśli znasz język dźwięku, podaj `language_codes`, aby zmaksymalizować dokładność.
+- **Kierowanie na niestandardowy słownik:** w `custom_vocabulary` umieszczaj tylko unikalne terminy związane z domeną, nazwy marek lub rzeczowniki własne, a nie powszechnie używane słowa.
+- **Używaj interfejsu Files API w przypadku długich nagrań:** w przypadku plików trwających dłużej niż kilka sekund prześlij plik za pomocą `client.files.upload` i przekaż zwrócony plik do treści modelu.
 
-## 制限事項
+## Ograniczenia
 
-- **音声の長さ:** 標準の単項リクエストでは、最大 1 時間の音声ファイルがサポートされます。話者ダイアライゼーションや単語レベルのタイムスタンプなどの機能が有効になっている場合、音声処理は 30 分に制限されます。
-- **単語レベルのタイムスタンプ:** 単語レベルのタイムスタンプを有効にすると、全体的な文字起こしの精度が低下する可能性があります。
-- **話者ダイアライゼーション:** 話者ダイアライゼーションは最大 8 人の話者をサポートします。3 人以上の話者の話者属性は試験運用版です。
-- **カスタム語彙:** `custom_vocabulary` で最大 1,000 個の用語を指定できますが、通常は 100 個までの用語で最適な結果が得られます。
-- **モードの互換性:** スマート文字起こし（`mode: "SMART"`）は `word_timestamp` または `diarization` と組み合わせることはできません。
+- **Czas trwania dźwięku:** standardowe żądania unarne obsługują pliki audio o czasie trwania do 1 godziny. Przetwarzanie dźwięku jest ograniczone do 30 minut, gdy włączone są funkcje takie jak rozdzielanie rozmówców czy sygnatury czasowe na poziomie słów.
+- **Sygnatury czasowe na poziomie słów:** włączenie sygnatur czasowych na poziomie słów może obniżyć ogólną dokładność transkrypcji.
+- **Rozdzielanie rozmówców:** rozdzielanie rozmówców obsługuje maksymalnie 8 osób. Przypisywanie mówców w przypadku co najmniej 3 osób jest funkcją eksperymentalną.
+- **Słownictwo niestandardowe:** możesz podać maksymalnie 1000 terminów w `custom_vocabulary`, ale najlepsze wyniki zwykle uzyskuje się w przypadku maksymalnie 100 terminów. Nie możesz łączyć `custom_vocabulary` z diaryzacją mówców ani sygnaturami czasowymi na poziomie słowa. Interfejs API odrzuca żądania, w których `custom_vocabulary` występuje razem z którąś z tych funkcji.
+- **Zgodność trybów:** inteligentna transkrypcja (`mode: "SMART"`) nie może być łączona z `word_timestamp` ani `diarization`.
 
-## 次のステップ
+## Co dalej?
 
-- Live API を使用して、[リアルタイム音声文字変換ガイド](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=ja)でリアルタイム音声をストリーミングします。
-- [音声理解](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=ja)を使用して、音声コンテンツの分析、要約、クエリを行います。
-- [テキスト読み上げ](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=ja)を使用してテキストから音声を合成する方法を学習する。
-- モデルの料金とトークン上限については、[料金ページ](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-3.5-transcribe)をご覧ください。
-- メディア ファイルのアップロードと管理について詳しくは、[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) のガイドをご覧ください。
+- Przesyłaj strumieniowo dźwięk w czasie rzeczywistym za pomocą [przewodnika po transkrypcji na żywo](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=pl), korzystając z interfejsu Live API.
+- Poznaj [rozumienie dźwięku](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=pl), aby analizować, podsumowywać lub wyszukiwać treści audio.
+- Dowiedz się, jak zsyntetyzować plik audio z tekstu za pomocą [zamiany tekstu na mowę](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=pl).
+- Ceny modeli i limity tokenów znajdziesz na [stronie z cennikiem](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#gemini-3.5-transcribe).
+- Szczegółowe informacje o przesyłaniu plików multimedialnych i zarządzaniu nimi znajdziesz w przewodniku po [interfejsie Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl).
 
-フィードバックを送信
+Prześlij opinię
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-最終更新日 2026-09-10 UTC。
+Ostatnia aktualizacja: 2026-10-23 UTC.
 
-ご意見をお聞かせください
+Chcesz przekazać coś jeszcze?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-10 UTC。"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-10-23 UTC."],[],[]]

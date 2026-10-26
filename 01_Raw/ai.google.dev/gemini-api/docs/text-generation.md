@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=pl
-fetched_at: 2026-10-19T05:35:31.614956+00:00
-title: "Generowanie tekstu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=vi
+fetched_at: 2026-10-26T05:46:42.489802+00:00
+title: "T\u1ea1o v\u0103n b\u1ea3n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-# Generowanie tekstu
+# Tạo văn bản
 
-Gemini API może generować dane wyjściowe w postaci tekstu na podstawie tekstu, obrazów, filmów i dźwięków.
+Gemini API có thể tạo văn bản do AI tạo từ văn bản, hình ảnh, video và âm thanh đầu vào.
 
-Oto podstawowy przykład:
+Sau đây là một ví dụ cơ bản:
 
 ### Python
 
@@ -128,20 +128,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Pakiety Google GenAI SDK udostępniają wygodne właściwości bezpośrednio w zwracanym obiekcie `Interaction`, aby uzyskać dostęp do odpowiedzi modelu.
+SDK GenAI của Google cung cấp các thuộc tính tiện lợi ngay trên đối tượng `Interaction` được trả về để truy cập vào phản hồi của mô hình.
 
-Najpopularniejszym pomocnikiem jest **`interaction.output_text`** (ciąg znaków), który zwraca ostatnie bloki tekstu w odpowiedzi modelu. Jeśli odpowiedź jest podzielona na kilka kolejnych bloków `TextContent`, automatycznie je łączy.
-Pamiętaj, że `.output_text` nie zawiera wcześniejszych bloków tekstu oddzielonych treściami innymi niż tekst (np. przemyśleniami, obrazami, dźwiękami lub wywołaniami narzędzi). W przypadku złożonych lub przeplatanych odpowiedzi multimodalnych musisz ręcznie iterować po `steps`. Więcej informacji o innych właściwościach multimediów znajdziesz w artykule
-[Omówienie interakcji](https://ai.google.dev/gemini-api/docs/interactions?hl=pl#convenience-properties).
+Trình trợ giúp phổ biến nhất là **`interaction.output_text`** (Chuỗi), trả về các khối văn bản cuối cùng trong phản hồi của mô hình. Nếu phản hồi được chia thành nhiều khối `TextContent` liên tiếp, thì phản hồi đó sẽ tự động kết hợp các khối này.
+Xin lưu ý rằng `.output_text` không bao gồm các khối văn bản trước đó được phân tách bằng nội dung không phải văn bản (chẳng hạn như suy nghĩ, hình ảnh, âm thanh hoặc lệnh gọi công cụ). Đối với các phản hồi đa phương thức phức tạp hoặc xen kẽ, bạn phải lặp lại `steps` theo cách thủ công. Để tìm hiểu thêm về các thuộc tính tiện lợi khác của phương tiện, hãy xem phần
+[Tổng quan về tương tác](https://ai.google.dev/gemini-api/docs/interactions?hl=vi#convenience-properties).
 
-## Myślenie z Gemini
+## Tư duy bằng Gemini
 
-Modele Gemini mają często domyślnie włączoną funkcję [„myślenia”](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)
-, która umożliwia modelowi rozumowanie przed udzieleniem odpowiedzi na
-żądanie.
+Các mô hình Gemini thường bật tính năng ["tư duy"](https://ai.google.dev/gemini-api/docs/thinking?hl=vi)
+theo mặc định, cho phép mô hình suy luận trước khi phản hồi một
+yêu cầu.
 
-Każdy model obsługuje różne konfiguracje myślenia, co pozwala kontrolować koszty, opóźnienia i inteligencję. Więcej informacji znajdziesz w
-[przewodniku po myśleniu](https://ai.google.dev/gemini-api/docs/thinking?hl=pl#thinking-levels).
+Mỗi mô hình hỗ trợ các cấu hình tư duy khác nhau, giúp bạn kiểm soát chi phí, độ trễ và trí tuệ. Để biết thêm chi tiết, hãy xem
+[hướng dẫn về tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#thinking-levels).
 
 ### Python
 
@@ -264,9 +264,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Instrukcje systemowe i inne konfiguracje
+## Hướng dẫn hệ thống và các cấu hình khác
 
-Możesz kierować działaniem modeli Gemini za pomocą instrukcji systemowych. Aby skonfigurować działanie modelu, przekaż parametr `system_instruction`.
+Bạn có thể hướng dẫn hành vi của các mô hình Gemini bằng hướng dẫn hệ thống. Truyền tham số `system_instruction` để định cấu hình hành vi của mô hình.
 
 ### Python
 
@@ -380,7 +380,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Możesz też zastąpić domyślne parametry generowania, takie jak `max_output_tokens` czy `thinking_level`, za pomocą parametru `generation_config`.
+Bạn cũng có thể ghi đè các tham số tạo mặc định, chẳng hạn như `max_output_tokens` hoặc `thinking_level`, bằng tham số `generation_config`.
 
 ### Python
 
@@ -502,12 +502,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Pełną listę konfigurowalnych parametrów i ich
-opisów znajdziesz w dokumentacji interfejsu [Interactions API](https://ai.google.dev/api/interactions-api?hl=pl).
+Hãy tham khảo tài liệu tham khảo về [Interactions API](https://ai.google.dev/api/interactions-api?hl=vi)
+để xem danh sách đầy đủ các tham số có thể định cấu hình và nội dung
+mô tả tương ứng.
 
-## Dane wejściowe multimodalne
+## Thông tin đầu vào đa phương thức
 
-Gemini API obsługuje dane wejściowe multimodalne, co pozwala łączyć tekst z plikami multimedialnymi. Poniższy przykład pokazuje, jak podać obraz:
+Gemini API hỗ trợ thông tin đầu vào đa phương thức, cho phép bạn kết hợp văn bản với tệp đa phương tiện. Ví dụ sau minh hoạ cách cung cấp hình ảnh:
 
 ### Python
 
@@ -679,18 +680,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Alternatywne metody podawania obrazów i bardziej zaawansowane przetwarzanie obrazów,
-znajdziesz w naszym [przewodniku po rozpoznawaniu obrazów](https://ai.google.dev/gemini-api/docs/image-understanding?hl=pl).
-Interfejs API obsługuje też dane wejściowe i rozpoznawanie [dokumentów](https://ai.google.dev/gemini-api/docs/document-processing?hl=pl), [filmów](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pl) i
-[dźwięków](https://ai.google.dev/gemini-api/docs/audio?hl=pl).
+Để biết các phương thức thay thế để cung cấp hình ảnh và xử lý hình ảnh nâng cao hơn,
+hãy xem [hướng dẫn về khả năng hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi).
+API này cũng hỗ trợ thông tin đầu vào và khả năng hiểu [tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi), [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi), và
+[âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi).
 
-## Strumieniowanie odpowiedzi
+## Hiện câu trả lời theo thời gian thực
 
-Domyślnie model zwraca odpowiedź dopiero po zakończeniu całego procesu generowania.
+Theo mặc định, mô hình chỉ trả về phản hồi sau khi toàn bộ quá trình tạo hoàn tất.
 
-Aby interakcje były bardziej płynne, użyj strumieniowania do obsługi fragmentów odpowiedzi w miarę ich generowania. Szczegółowy przewodnik obejmujący typy zdarzeń,
-strumieniowanie za pomocą narzędzi, myślenie, agentów i generowanie obrazów znajdziesz w
-przewodniku [Strumieniowanie interakcji](https://ai.google.dev/gemini-api/docs/streaming?hl=pl).
+Để tương tác mượt mà hơn, hãy sử dụng tính năng truyền trực tuyến để xử lý các khối phản hồi khi chúng được tạo. Để biết hướng dẫn toàn diện về các loại sự kiện,
+tính năng truyền trực tuyến bằng công cụ, tư duy, tác nhân và tạo hình ảnh, hãy xem
+hướng dẫn riêng về [Tương tác truyền trực tuyến](https://ai.google.dev/gemini-api/docs/streaming?hl=vi).
 
 ### Python
 
@@ -840,9 +841,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## Rozmowy wieloetapowe
+## Cuộc trò chuyện nhiều lượt
 
-Interfejs Interactions API obsługuje rozmowy wieloetapowe przez łączenie interakcji za pomocą parametru `previous_interaction_id`. Każda tura to osobna interakcja, a interfejs API automatycznie zarządza historią rozmowy.
+Interactions API hỗ trợ cuộc trò chuyện nhiều lượt bằng cách xâu chuỗi các tương tác với nhau bằng `previous_interaction_id`. Mỗi lượt là một tương tác riêng biệt và API sẽ tự động quản lý nhật ký trò chuyện.
 
 ### Python
 
@@ -1000,7 +1001,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Strumieniowanie można też wykorzystać w rozmowach wieloetapowych, łącząc `previous_interaction_id` z metodami strumieniowania.
+Bạn cũng có thể sử dụng tính năng truyền trực tuyến cho cuộc trò chuyện nhiều lượt bằng cách kết hợp `previous_interaction_id` với các phương thức truyền trực tuyến.
 
 ### Python
 
@@ -1196,13 +1197,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## Rozmowy bezstanowe
+## Cuộc trò chuyện không trạng thái
 
-Domyślnie interfejs Interactions API zarządza stanem rozmowy po stronie serwera, gdy używasz parametru `previous_interaction_id`. Możesz jednak działać w trybie bezstanowym, samodzielnie zarządzając historią rozmowy po stronie klienta.
+Theo mặc định, Interactions API quản lý trạng thái trò chuyện ở phía máy chủ khi bạn sử dụng `previous_interaction_id`. Tuy nhiên, bạn cũng có thể hoạt động ở chế độ không trạng thái bằng cách tự quản lý nhật ký trò chuyện ở phía máy khách.
 
-Aby użyć trybu bezstanowego: W żądaniu ustaw `store=false`, aby zrezygnować z przechowywania po stronie serwera.
-2. Zachowaj historię rozmowy jako tablicę **kroków** po stronie klienta.
-3. W kolejnych żądaniach przekaż zgromadzone kroki w polu `input` i dołącz nową turę jako krok `user_input`.
+Cách sử dụng chế độ không trạng thái: 1. Đặt `store=false` trong yêu cầu của bạn để chọn không sử dụng bộ nhớ phía máy chủ.
+2. Duy trì nhật ký trò chuyện dưới dạng một mảng **các bước** ở phía máy khách.
+3. Trong các yêu cầu tiếp theo, hãy truyền các bước đã tích luỹ trong trường `input` và thêm lượt mới của bạn làm bước `user_input`.
 
 ### Python
 
@@ -1437,29 +1438,30 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## Wskazówki dotyczące tworzenia promptów
+## Mẹo về câu lệnh
 
-Wskazówki, jak w pełni wykorzystać możliwości Gemini, znajdziesz w [przewodniku po inżynierii promptów](https://ai.google.dev/gemini/docs/prompting-strategies?hl=pl).
+Hãy tham khảo [hướng dẫn về kỹ thuật câu lệnh](https://ai.google.dev/gemini/docs/prompting-strategies?hl=vi) để biết
+các đề xuất về cách tận dụng tối đa Gemini.
 
-## Co dalej?
+## Bước tiếp theo
 
-- Wypróbuj [Gemini w Google AI Studio](https://aistudio.google.com?hl=pl).
-- Eksperymentuj z
-  [strukturalnymi danymi wyjściowymi](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl) w przypadku
-  odpowiedzi w formacie JSON.
-- Poznaj możliwości Gemini w zakresie rozpoznawania [obrazów](https://ai.google.dev/gemini-api/docs/image-understanding?hl=pl),
-  [filmów](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pl),
-  [dźwięków](https://ai.google.dev/gemini-api/docs/audio?hl=pl) i
-  [dokumentów](https://ai.google.dev/gemini-api/docs/document-processing?hl=pl).
-- Dowiedz się więcej o strategiach tworzenia promptów z plikami multimodalnymi
+- Dùng thử [Gemini trong Google AI Studio](https://aistudio.google.com?hl=vi).
+- Thử nghiệm với
+  [kết quả có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi) cho
+  các phản hồi giống JSON.
+- Khám phá các tính năng hiểu [hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi),
+  [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi),
+  [âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi) và
+  [tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi) của Gemini.
+- Tìm hiểu về các chiến lược câu lệnh tệp đa phương thức
   .
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Ostatnia aktualizacja: 2026-10-13 UTC.
+Cập nhật lần gần đây nhất: 2026-10-13 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-10-13 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-13 UTC."],[],[]]

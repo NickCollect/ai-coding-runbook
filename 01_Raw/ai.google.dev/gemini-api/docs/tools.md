@@ -1,98 +1,109 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tools?hl=hi
-fetched_at: 2026-10-19T05:58:34.934219+00:00
-title: "Gemini API \u0915\u0947 \u0938\u093e\u0925 \u091f\u0942\u0932 \u0907\u0938\u094d\u0924\u0947\u092e\u093e\u0932 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tools?hl=sq
+fetched_at: 2026-10-26T05:47:01.055008+00:00
+title: "P\u00ebrdorimi i veglave me Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
+- [Dokumentet](https://ai.google.dev/gemini-api/docs?hl=sq)
 
-सुझाव भेजें
+Dërgo komente
 
-# Gemini API के साथ टूल इस्तेमाल करना
+# Përdorimi i veglave me Gemini API
 
-टूल, Gemini मॉडल की क्षमताओं को बढ़ाते हैं. इससे Gemini मॉडल, असल दुनिया में कार्रवाई कर सकते हैं, रीयल-टाइम में जानकारी ऐक्सेस कर सकते हैं, और मुश्किल कंप्यूटेशनल टास्क पूरे कर सकते हैं. मॉडल, स्टैंडर्ड अनुरोध-जवाब इंटरैक्शन और [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=hi) का इस्तेमाल करके रीयल-टाइम स्ट्रीमिंग सेशन, दोनों में टूल का इस्तेमाल कर सकते हैं.
+Veglat i zgjerojnë aftësitë e modeleve të Gemini, duke bërë të mundur që ato të ndërmarrin veprime në botë, të qasen në informacione në kohë reale dhe të kryejnë detyra komplekse llogaritëse. Modelet mund të përdorin veglat si në ndërveprimet standarde kërkesë-përgjigje, ashtu edhe në seancat e transmetimit në kohë reale duke përdorur [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=sq).
 
-टूल, खास सुविधाएँ होती हैं. जैसे, Google Search या कोड एक्ज़ीक्यूशन. इनका इस्तेमाल करके, मॉडल सवालों के जवाब दे सकता है. Gemini API में, पूरी तरह से मैनेज किए जाने वाले, पहले से मौजूद टूल का एक सुइट मिलता है. इसके अलावा, [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) का इस्तेमाल करके, कस्टम टूल तय किए जा सकते हैं.
+Veglat janë aftësi specifike (si p.sh. "Kërko në Google" ose "Ekzekutimi i kodit") që një model mund t'i përdorë për t'iu përgjigjur pyetjeve. Gemini API ofron një paketë veglash të integruara plotësisht të menaxhuara ose mund të përcaktosh vegla të personalizuara duke përdorur [Thirrjen e funksionit](https://ai.google.dev/gemini-api/docs/function-calling?hl=sq).
 
-एक से ज़्यादा चरणों वाले, लक्ष्य-उन्मुख सिस्टम बनाने के लिए, [एजेंट की खास जानकारी](https://ai.google.dev/gemini-api/docs/agents?hl=hi) देखें.
+Për të ndërtuar sisteme me shumë hapa dhe të orientuara drejt objektivave, shiko [Përmbledhjen e agjentëve](https://ai.google.dev/gemini-api/docs/agents?hl=sq).
 
-## उपलब्ध बिल्ट-इन टूल
+## Veglat e integruara që ofrohen
 
-| टूल | ब्यौरा | उपयोग के उदाहरण |
+| Vegla | Përshkrimi | Rastet e përdorimit |
 | --- | --- | --- |
-| [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=hi) | जवाबों में, हाल की घटनाओं और वेब पर मौजूद तथ्यों के बारे में जानकारी शामिल करना, ताकि गलत जानकारी देने की संभावना कम हो. | हाल ही के इवेंट के बारे में सवालों के जवाब देना और अलग-अलग सोर्स से तथ्यों की पुष्टि करना. |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi) | जगह की जानकारी का पता लगाने वाले असिस्टेंट बनाएं, जो जगहें ढूंढ सकें, दिशा-निर्देश दे सकें, और लोकल कॉन्टेक्स्ट उपलब्ध करा सकें. | कई जगहों पर रुकने वाली यात्रा की योजनाएं बनाना और उपयोगकर्ता की ज़रूरतों के हिसाब से स्थानीय कारोबारों को ढूंढना. |
-| [कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi) | मॉडल को गणित की समस्याओं को हल करने या डेटा को सटीक तरीके से प्रोसेस करने के लिए, Python कोड लिखने और चलाने की अनुमति दें. | गणित के मुश्किल समीकरणों को हल करना, टेक्स्ट डेटा को सटीक तरीके से प्रोसेस करना, और उसका विश्लेषण करना. |
-| [यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi) | मॉडल को किसी खास वेब पेज या दस्तावेज़ का कॉन्टेंट पढ़ने और उसका विश्लेषण करने के लिए कहें. | किसी खास यूआरएल या दस्तावेज़ के आधार पर सवालों के जवाब देना और अलग-अलग वेब पेजों से जानकारी हासिल करना. |
-| [कंप्यूटर का इस्तेमाल (झलक)](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi) | Gemini को स्क्रीन देखने और वेब ब्राउज़र के यूज़र इंटरफ़ेस (यूआई) के साथ इंटरैक्ट करने के लिए कार्रवाइयाँ जनरेट करने की अनुमति दें (क्लाइंट-साइड एक्ज़ीक्यूशन). | वेब पर आधारित बार-बार किए जाने वाले वर्कफ़्लो को ऑटोमेट करना, वेब ऐप्लिकेशन के यूज़र इंटरफ़ेस की टेस्टिंग करना. |
-| [फ़ाइल खोजना](https://ai.google.dev/gemini-api/docs/file-search?hl=hi) | रिट्रीवल ऑगमेंटेड जनरेशन (आरएजी) की सुविधा चालू करने के लिए, अपने दस्तावेज़ों को इंडेक्स करें और उन्हें खोजें. | तकनीकी मैन्युअल खोजना, मालिकाना हक वाले डेटा के बारे में सवालों के जवाब देना. |
+| ["Kërko në Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=sq) | Bazo përgjigjet në ngjarjet aktuale dhe faktet nga uebi për të reduktuar halucinacionet. | Përgjigjja e pyetjeve për ngjarjet e fundit, verifikimi i fakteve me burime të ndryshme. |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=sq) | Krijo asistentë që e dinë vendndodhjen që mund të gjejnë vende, të marrin udhëzime dhe të ofrojnë kontekst të pasur lokal. | Planifikimi i itinerareve të udhëtimeve me shumë ndalesa, gjetja e bizneseve lokale bazuar në kriteret e përdoruesit. |
+| [Ekzekutimi i kodit](https://ai.google.dev/gemini-api/docs/code-execution?hl=sq) | Lejo që modeli të shkruajë dhe të ekzekutojë kodin në Python për të zgjidhur probleme matematikore ose për të përpunuar të dhënat me saktësi. | Zgjidhja e ekuacioneve komplekse matematikore, përpunimi dhe analizimi i të dhënave të tekstit me saktësi. |
+| [Konteksti i URL-së](https://ai.google.dev/gemini-api/docs/url-context?hl=sq) | Drejtoje modelin që të lexojë dhe të analizojë përmbajtje nga faqe uebi ose dokumente specifike. | Përgjigjja e pyetjeve bazuar në URL ose dokumente specifike, nxjerrja e informacioneve nëpër faqe të ndryshme uebi. |
+| [Përdorimi i kompjuterit (versioni paraprak)](https://ai.google.dev/gemini-api/docs/computer-use?hl=sq) | Aktivizo Gemini për të shikuar një ekran dhe për të gjeneruar veprime për të ndërvepruar me ndërfaqet e përdoruesit të shfletuesit të uebit (ekzekutimi në anën e klientit). | Automatizimi i flukseve të përsëritura të punës bazuar në ueb, duke testuar ndërfaqet e përdoruesve të aplikacioneve të uebit. |
+| [Kërkimi i skedarëve](https://ai.google.dev/gemini-api/docs/file-search?hl=sq) | Indekso dhe kërko dokumentet e tua për të aktivizuar Retrieval Augmented Generation (RAG). | Kërkimi në manualet teknike, përgjigjja e pyetjeve për të dhënat e pronësisë. |
 
-खास टूल से जुड़ी लागतों के बारे में जानने के लिए, [कीमत वाला पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi#pricing_for_tools) देखें.
+Shiko [faqen e "Çmimeve"](https://ai.google.dev/gemini-api/docs/pricing?hl=sq#pricing_for_tools) për detaje
+për kostot në lidhje me veglat specifike.
 
-## टूल के इस्तेमाल की सुविधा कैसे काम करती है
+## Si funksionon ekzekutimi i veglave
 
-टूल की मदद से मॉडल, बातचीत के दौरान कार्रवाइयों का अनुरोध कर सकता है. यह फ़्लो इस बात पर निर्भर करता है कि टूल, Google की ओर से मैनेज किया जा रहा है या कस्टम टूल है, जिसे आपको मैनेज करना है.
+Veglat e lejojnë modelin të kërkojë veprime gjatë një bisede. Rrjedha ndryshon në varësi të faktit nëse vegla është e integruar (menaxhuar nga Google) ose e personalizuar (menaxhuar nga ti).
 
-### पहले से मौजूद टूल का फ़्लो
+### Rrjedha e veglës së integruar
 
-पहले से मौजूद टूल (Google Search, Google Maps, यूआरएल कॉन्टेक्स्ट, फ़ाइल सर्च, कोड एक्ज़ीक्यूशन) के लिए, पूरी प्रोसेस एक ही एपीआई कॉल में होती है:
+Për veglat e integruara (Google Search, Google Maps, URL Context, File Search,
+Code Execution), i gjithë procesi ndodh brenda një thirrjeje të API-së:
 
-1. **आपने** यह प्रॉम्प्ट भेजा: "GOOG के स्टॉक की मौजूदा कीमत का वर्गमूल क्या है?"
-2. **Gemini** तय करता है कि उसे टूल की ज़रूरत है और उन्हें Google के सर्वर पर चलाता है. उदाहरण के लिए, स्टॉक की कीमत खोजना और फिर स्क्वेयर रूट का हिसाब लगाने के लिए Python कोड चलाना.
-3. **Gemini**, टूल के नतीजों के आधार पर आखिरी जवाब भेजता है.
+1. **Ti** dërgon një kërkesë: "Cila është rrënja katrore e çmimit më të fundit të aksioneve të GOOG?"
+2. **Gemini** vendos që ka nevojë për vegla dhe i ekzekuton ato në serverët e Google
+   (p.sh. kërkon për çmimin e aksioneve dhe më pas ekzekuton kodin në Python për të llogaritur rrënjën katrore).
+3. **Gemini** dërgon mbrapsht përgjigjen përfundimtare të bazuar në rezultatet e veglës.
 
-### कस्टम टूल फ़्लो (फ़ंक्शन कॉलिंग)
+### Fluksi i veglës së personalizuar (thirrja e funksionit)
 
-कस्टम टूल और कंप्यूटर के इस्तेमाल के लिए, आपका ऐप्लिकेशन ही प्रोसेस को पूरा करता है:
+Për veglat e personalizuara dhe "Përdorimin e kompjuterit", aplikacioni yt administron ekzekutimin:
 
-1. **आप** फ़ंक्शन (टूल) के डिक्लेरेशन के साथ प्रॉम्प्ट भेजते हैं.
-2. **Gemini**, किसी फ़ंक्शन को कॉल करने के लिए स्ट्रक्चर्ड JSON वापस भेज सकता है. उदाहरण के लिए, `{"name": "get_order_status", "args": {"order_id": "123"}}`. हालांकि, ऐसा हमेशा एक यूनीक `id` के साथ किया जाता है.
-3. **आप** अपने ऐप्लिकेशन या एनवायरमेंट में फ़ंक्शन को एक्ज़ीक्यूट करते हैं.
-4. **आप**, फ़ंक्शन कॉल के `id` के साथ फ़ंक्शन के नतीजे, Gemini को वापस भेजते हैं.
-5. **Gemini** इन नतीजों का इस्तेमाल करके, फ़ाइनल जवाब जनरेट करता है या किसी अन्य टूल को कॉल करता है.
+1. **Ti** dërgon një kërkesë bashkë me deklaratat e funksioneve (veglave).
+2. **Gemini** mund të dërgojë mbrapsht JSON të strukturuar për të thirrur një funksion specifik
+   (për shembull, `{"name": "get_order_status", "args": {"order_id": "123"}}`),
+   gjithmonë me një `id` unike.
+3. **Ti** ekzekuton funksionin në aplikacionin ose mjedisin tënd.
+4. **Ti** dërgon rezultatet e funksionit, me të njëjtin `id` si thirrja e funksionit, mbrapsht te Gemini.
+5. **Gemini** i përdor rezultatet për të gjeneruar një përgjigje përfundimtare ose një thirrje tjetër vegle.
 
-ज़्यादा जानकारी के लिए, [फ़ंक्शन कॉल करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) पढ़ें.
+Mëso më shumë tek [Udhëzuesi për thirrjen e funksionit](https://ai.google.dev/gemini-api/docs/function-calling?hl=sq).
 
-### पहले से मौजूद और कस्टम टूल को एक साथ इस्तेमाल करने का फ़्लो
+### Kombinimi i fluksit të veglave të integruara dhe të personalizuara
 
-पहले से मौजूद टूल और कस्टम टूल (फ़ंक्शन कॉल) को मिलाकर किए जाने वाले अनुरोधों के लिए, मॉडल [टूल कॉन्टेक्स्ट सर्कुलेशन](https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi) का इस्तेमाल करता है. इससे अलग-अलग एनवायरमेंट में, टूल को एक साथ इस्तेमाल किया जा सकता है:
+Për kërkesat që kombinojnë veglat e integruara dhe veglat e personalizuara (thirrjet e funksioneve), modeli përdor [qarkullimin e kontekstit të veglës](https://ai.google.dev/gemini-api/docs/tool-combination?hl=sq) për të koordinuar ekzekutimin në mjedise të ndryshme:
 
-1. **आपने** एक प्रॉम्प्ट भेजा और उन कस्टम फ़ंक्शन और पहले से मौजूद टूल के बारे में बताया जिन्हें आपको चालू करना है. साथ ही, आपने कॉम्बिनेशन की सुविधा चालू करने के लिए एक फ़्लैग सेट किया.
-2. **Gemini**, पहले से मौजूद टूल का इस्तेमाल करता है. अगर क्लाइंट-साइड फ़ंक्शन कॉल जनरेट होते हैं, तो Gemini उपयोगकर्ता को जवाब देता है. हालांकि, कौनसे फ़ंक्शन कॉल पहले जनरेट होंगे, यह प्रॉम्प्ट और मॉडल के फ़ैसले पर निर्भर करता है. यह फ़ंक्शन, इन चीज़ों के साथ जवाब भेजता है:
-   - टूल कॉल की पुष्टि
-   - टूल से मिले जवाब के नतीजे (अगर मॉडल ने दो फ़ंक्शन कॉल एक साथ जनरेट किए हैं, तो यह JSON के बाद आ सकता है)
-   - आपके फ़ंक्शन को कॉल करने के लिए स्ट्रक्चर्ड JSON
-   - कॉन्टेक्स्ट को बनाए रखने के लिए, एन्क्रिप्ट किए गए थॉट सिग्नेचर
-3. **आपको** अपने ऐप्लिकेशन या एनवायरमेंट में फ़ंक्शन को लागू करना होगा.
-4. **आपको** Gemini के जवाब के सभी हिस्सों के साथ-साथ, फ़ंक्शन कॉल के नतीजे भी वापस भेजने होंगे.
-5. **Gemini**, सभी कॉन्टेक्स्ट को मिलाकर फ़ाइनल जवाब जनरेट करता है.
+1. **Ti** dërgon një kërkesë dhe deklaron veglat e integruara dhe funksionet e personalizuara që dëshiron të aktivizosh, duke caktuar një flamur për të aktivizuar mbështetjen për kombinimin.
+2. **Gemini** ekzekuton veglat e integruara dhe i jep përparësi përdoruesit nëse gjenerohen thirrje të funksionit në anën e klientit (se cila ekzekutohet e para varet nga kërkesa dhe nga ajo që vendos modeli). Ai dërgon përsëri një përgjigje me:
+   - Konfirmimi i thirrjes së mjetit
+   - Rezultatet e përgjigjes së veglës (kjo mund të vijë pas JSON nëse modeli ka gjeneruar dy thirrje paralele të funksionit)
+   - JSON i strukturuar për të thirrur funksionin tënd
+   - Nënshkrimet e enkriptuara të mendimit për të ruajtur kontekstin
+3. **Ti** ekzekuton funksionin në aplikacionin ose mjedisin tënd.
+4. **Ti** kthen të gjitha pjesët e përgjigjes së Gemini, si dhe rezultatet e thirrjes së funksionit tënd.
+5. **Gemini** gjeneron përgjigjen përfundimtare duke përdorur të gjithë kontekstin e kombinuar.
 
-बिल्ट-इन और कस्टम टूल के कॉम्बिनेशन के लिए सहायता चालू करने का तरीका जानने के लिए, [टूल कॉम्बिनेशन गाइड](https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi) पढ़ें. साथ ही, कॉन्टेक्स्ट सर्कुलेशन के उदाहरण देखें.
+Lexo [Udhëzuesin për kombinimin e veglave](https://ai.google.dev/gemini-api/docs/tool-combination?hl=sq) për të mësuar
+se si të aktivizosh mbështetjen për kombinimin e veglave të integruara dhe të personalizuara dhe shembuj të
+qarkullimit të kontekstit.
 
-## स्ट्रक्चर्ड आउटपुट बनाम फ़ंक्शन कॉलिंग
+## Rezultatet e strukturuara kundrejt thirrjes së funksionit
 
-Gemini, स्ट्रक्चर्ड आउटपुट जनरेट करने के लिए दो तरीके उपलब्ध कराता है. [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) का इस्तेमाल तब करें, जब मॉडल को आपके टूल या डेटा सिस्टम से कनेक्ट करके, बीच का कोई चरण पूरा करना हो. अगर आपको मॉडल के फ़ाइनल जवाब को किसी खास स्कीमा के मुताबिक बनाना है, तो [स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi) का इस्तेमाल करें. जैसे, कस्टम यूज़र इंटरफ़ेस (यूआई) रेंडर करने के लिए.
+Gemini ofron dy metoda për gjenerimin e rezultateve të strukturuara. Përdor [Thirrjen
+e funksionit](https://ai.google.dev/gemini-api/docs/function-calling?hl=sq) kur modeli duhet të kryejë një
+hap të ndërmjetëm duke u lidhur me veglat ose sistemet e tua të të dhënave. Përdor
+[Daljet e strukturuara](https://ai.google.dev/gemini-api/docs/structured-output?hl=sq) kur ke rreptësisht nevojë që përgjigjja përfundimtare e modelit të respektojë një skemë specifike, si p.sh. për paraqitjen e një ndërfaqeje të personalizuar përdoruesi.
 
-## टूल की मदद से स्ट्रक्चर्ड आउटपुट जनरेट करना
+## Rezultate të strukturuara me vegla
 
-[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi) को पहले से मौजूद टूल के साथ जोड़ा जा सकता है. इससे यह पक्का किया जा सकता है कि बाहरी डेटा या कंप्यूटेशन पर आधारित मॉडल के जवाब, अब भी सख्त स्कीमा का पालन करते हों.
+Mund të kombinosh [Rezultatet e strukturuara](https://ai.google.dev/gemini-api/docs/structured-output?hl=sq) me veglat e integruara për t'u siguruar që përgjigjet e modelit të bazuara në të dhëna ose llogaritje të jashtme të ndjekin ende një skemë strikte.
 
-कोड के उदाहरणों के लिए, [टूल की मदद से स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=hi#tools) देखें.
+Shiko [Rezultatet e strukturuara me veglat](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=sq#tools)
+për shembuj kodesh.
 
-सुझाव भेजें
+Dërgo komente
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-आखिरी बार 2026-10-15 (UTC) को अपडेट किया गया.
+Përditësimi i fundit: 2026-10-15 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Duhet të na tregosh më shumë?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-10-15 (UTC) को अपडेट किया गया."],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-15 UTC."],[],[]]

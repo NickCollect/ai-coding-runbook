@@ -1,32 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/model-tuning?hl=fr
-fetched_at: 2026-10-19T05:48:51.202679+00:00
-title: "Affiner avec l'API\u00a0Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/model-tuning?hl=th
+fetched_at: 2026-10-26T05:50:51.627173+00:00
+title: "\u0e01\u0e32\u0e23\u0e1b\u0e23\u0e31\u0e1a\u0e41\u0e15\u0e48\u0e07\u0e14\u0e49\u0e27\u0e22 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
+Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
 
-Envoyer des commentaires
+ส่งความคิดเห็น
 
-# Affiner avec l'API Gemini
+# การปรับแต่งด้วย Gemini API
 
-Avec l'arrêt de Gemini 1.5 Flash-001 en mai 2025, nous ne disposons plus d'un modèle compatible avec l'affinage dans l'API Gemini ou AI Studio, mais il est compatible avec la [plate-forme Gemini Enterprise Agent](https://cloud.google.com/gemini-enterprise-agent-platform/models/gemini-use-supervised-tuning?hl=fr).
+เนื่องจากเราจะเลิกใช้งาน Gemini 1.5 Flash-001 ในเดือนพฤษภาคม 2025 เราจึงไม่มี
+โมเดลที่รองรับการปรับแต่งใน Gemini API หรือ AI Studio อีกต่อไป แต่
+ยังคงรองรับใน [แพลตฟอร์ม Gemini Enterprise Agent](https://cloud.google.com/gemini-enterprise-agent-platform/models/gemini-use-supervised-tuning?hl=th)
 
-Nous ne prévoyons pas de prendre en charge le réglage fin pour le moment, mais nous aimerions [connaître votre avis sur notre forum des développeurs](https://discuss.ai.google.dev/c/gemini-api/4?hl=fr) si le réglage fin est important pour votre cas d'utilisation.
+[เรายังไม่มีแผนที่จะนำการรองรับการปรับแต่งมาให้บริการในเร็วๆ นี้ แต่ยินดีรับฟังความคิดเห็นจากคุณในฟอรัมสำหรับนักพัฒนาแอป หากการปรับแต่งมีความสำคัญต่อกรณีการใช้งานของคุณ](https://discuss.ai.google.dev/c/gemini-api/4?hl=th)
 
-Envoyer des commentaires
+ส่งความคิดเห็น
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Dernière mise à jour le 2026/04/29 (UTC).
+อัปเดตล่าสุด 2026-04-29 UTC
 
-Voulez-vous nous donner plus d'informations ?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]

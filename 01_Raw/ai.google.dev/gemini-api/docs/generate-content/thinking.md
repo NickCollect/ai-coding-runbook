@@ -1,37 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=de
-fetched_at: 2026-10-19T05:53:18.130733+00:00
-title: "Gemini-Denken \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=ru
+fetched_at: 2026-10-26T05:53:55.576452+00:00
+title: "Gemini \u0434\u0443\u043c\u0430\u0435\u0442 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=de).
+Доступна новая модель Gemini 4 Argon. [Попробовать](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ru)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
+- [Главная](https://ai.google.dev/?hl=ru)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ru)
+- [Документация](https://ai.google.dev/gemini-api/docs/generate-content?hl=ru)
 
-Feedback geben
+Отправить отзыв
 
-# Gemini-Denken
+# Gemini думает
 
-[Gemini-Modelle](https://ai.google.dev/gemini-api/docs/models?hl=de) verwenden einen internen
-„Denkprozess“, der ihre Fähigkeiten zum Schlussfolgern und zur mehrstufigen
-Planung erheblich verbessert. Dadurch sind sie sehr effektiv für komplexe Aufgaben wie
-Programmieren, fortgeschrittene Mathematik und Datenanalyse.
+[Модели Gemini](https://ai.google.dev/gemini-api/docs/models?hl=ru) используют внутренний "процесс мышления", который значительно улучшает их способность рассуждать и планировать многоэтапные действия. Это делает их очень эффективными для сложных задач, таких как программирование, высшая математика и анализ данных.
 
-In dieser Anleitung erfahren Sie, wie Sie die Denkfunktionen von Gemini mit der Gemini API nutzen.
+В этом руководстве рассказывается, как использовать возможности Gemini для размышлений с помощью Gemini API.
 
-## Inhalte mit Denkprozess generieren
+## Генерирование контента с помощью Thinking
 
-Das Initiieren einer Anfrage mit einem Thinking-Modell ähnelt jeder anderen Anfrage zur Inhaltserstellung. Der Hauptunterschied besteht darin, eines der
-[Modelle mit Thinking-Unterstützung](#tools) im `model` Feld anzugeben, wie
-im folgenden
-[Beispiel zur Textgenerierung](https://ai.google.dev/gemini-api/docs/text-generation?hl=de) gezeigt:
+Запрос к думающей модели отправляется так же, как и любой другой запрос на генерацию контента. Главное отличие заключается в том, что в поле `model` нужно указать одну из [моделей с поддержкой рассуждения](#tools), как показано в примере [генерации текста](https://ai.google.dev/gemini-api/docs/text-generation?hl=ru) ниже.
 
 ### Python
 
@@ -69,7 +63,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Проложить маршрут
 
 ```
 package main
@@ -119,13 +113,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
  ```
 ```
 
-## Zusammenfassungen der Gedanken
+## Краткие пересказы рассуждений
 
-Zusammenfassungen der Gedanken sind zusammengefasste Versionen der Rohgedanken des Modells und bieten Einblicke in den internen Denkprozess des Modells. Die Denkaufwände und -budgets gelten für die Rohgedanken des Modells und nicht für Zusammenfassungen der Gedanken.
+Краткие пересказы рассуждений – это обобщенные версии необработанных рассуждений модели, которые дают представление о ее внутреннем процессе мышления. Обратите внимание, что уровни и лимиты рассуждений применяются к необработанным рассуждениям модели, а не к их краткому пересказу.
 
-Sie können Zusammenfassungen der Gedanken aktivieren, indem Sie `includeThoughts` in der Anfragekonfiguration auf `true` setzen. Anschließend können Sie auf die Zusammenfassung zugreifen, indem Sie die `parts` des Parameters `response` durchlaufen und den booleschen Wert `thought` prüfen.
+Чтобы включить краткий пересказ мыслей, задайте для параметра `includeThoughts` значение `true` в конфигурации запроса. Затем вы можете получить доступ к сводке, перебирая `parts` параметра `response` и проверяя логическое значение `thought`.
 
-Hier ein Beispiel, wie Sie Zusammenfassungen der Gedanken ohne Streaming aktivieren und abrufen. Dabei wird mit der Antwort eine einzelne, endgültige Zusammenfassung der Gedanken zurückgegeben:
+Ниже приведен пример, демонстрирующий, как включить и получить сводку мыслей без потоковой передачи, которая возвращает одну окончательную сводку мыслей вместе с ответом.
 
 ### Python
 
@@ -194,7 +188,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Проложить маршрут
 
 ```
 package main
@@ -235,7 +229,7 @@ func main() {
 }
 ```
 
-Und hier ein Beispiel für die Verwendung von Thinking mit Streaming, bei dem während der Generierung fortlaufende, inkrementelle Zusammenfassungen zurückgegeben werden:
+А вот пример использования цепочки рассуждений с потоковой передачей, которая возвращает скользящие, инкрементные сводки во время генерации:
 
 ### Python
 
@@ -333,7 +327,7 @@ async function main() {
 await main();
 ```
 
-### Ok
+### Проложить маршрут
 
 ```
 package main
@@ -388,25 +382,25 @@ func main() {
 }
 ```
 
-## Denkprozess steuern
+## Управление мышлением
 
-Gemini-Modelle führen standardmäßig dynamische Denkprozesse durch und passen den Aufwand für das Schlussfolgern automatisch an die Komplexität der Nutzeranfrage an.
-Wenn Sie jedoch bestimmte Latenzbeschränkungen haben oder das Modell tiefergehende Schlussfolgerungen als üblich ziehen soll, können Sie optional Parameter verwenden, um das Denkverhalten zu steuern.
+Модели Gemini по умолчанию используют динамическое мышление, автоматически регулируя объем рассуждений в зависимости от сложности запроса пользователя.
+Однако, если у вас есть особые требования к задержке или вам нужно, чтобы модель выполняла более глубокие рассуждения, чем обычно, вы можете использовать параметры для управления процессом мышления.
 
-### Denkaufwände (Gemini 4 und Gemini 3)
+### Уровни мышления (Gemini 4 и Gemini 3)
 
-Mit dem Parameter `thinkingLevel`, der für Gemini 4 erforderlich und für Gemini 3-Modelle empfohlen wird, können Sie das Verhalten beim Schlussfolgern steuern. Gemini 4 (`gemini-4-argon`) unterstützt `low`, `medium` (Standard) und `high`.
+Параметр `thinkingLevel`, который является обязательным для моделей Gemini 4 и рекомендованным для моделей Gemini 3, позволяет управлять логикой рассуждений. Gemini 4 (`gemini-4-argon`) поддерживает `low`, `medium` (по умолчанию) и `high`.
 
-In der folgenden Tabelle sind die Einstellungen für `thinkingLevel` für jeden Modelltyp aufgeführt:
+В таблице ниже приведены настройки `thinkingLevel` для каждого типа модели.
 
-| Denkaufwand | Gemini 3.8 Flash | Gemini 3.6 Flash | Gemini 4 Argon | Gemini 3.5 &3.1 Flash-Lite | Gemini 3.1 Flash-Lite Image | Gemini 3 Flash | Gemini Robotics ER 2 | Beschreibung |
+| Уровень рассуждений | Gemini 3.8 Flash | Gemini 3.6 Flash | Gemini 4 Argon | Gemini 3.5 и 3.1 Flash-Lite | Gemini 3.1 Flash-Lite Image | Gemini 3 Flash | Gemini Robotics ER 2 | Описание |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **`minimal`** | Nicht unterstützt (Fehler) | Unterstützt | Nicht unterstützt (Fehler) | Unterstützt (Standard) | Unterstützt (Standard) | Unterstützt | Unterstützt | Entspricht für die meisten Anfragen der Einstellung „Kein Denkprozess“. Beachten Sie, dass `minimal` nicht garantiert, dass der Denkprozess deaktiviert ist. Das Modell kann für komplexe Aufgaben sehr wenig Schlussfolgern. |
-| **`low`** | Unterstützt | Unterstützt | Unterstützt | Unterstützt | Nicht unterstützt | Unterstützt | Unterstützt | Minimiert Latenz und Kosten. |
-| **`medium`** | Unterstützt (Standard) | Unterstützt (Standard) | Unterstützt (Standard) | Unterstützt | Nicht unterstützt | Unterstützt | Unterstützt | Ausgewogener Denkprozess für die meisten Aufgaben. |
-| **`high`** | Unterstützt (dynamisch) | Unterstützt (dynamisch) | Unterstützt (dynamisch) | Unterstützt (dynamisch) | Unterstützt (dynamisch) | Unterstützt (Standard, dynamisch) | Unterstützt (Standard, dynamisch) | Maximiert die Tiefe des Denkprozesses. Es kann deutlich länger dauern, bis das Modell ein erstes Ausgabetoken (ohne Denkprozess) erreicht, aber die Ausgabe ist sorgfältiger durchdacht. |
+| **`minimal`** | Не поддерживается (ошибка) | Что пользователь может | Не поддерживается (ошибка) | Поддерживается (по умолчанию) | Поддерживается (по умолчанию) | Что пользователь может | Что пользователь может | Соответствует настройке "не думать" для большинства запросов. Обратите внимание, что `minimal` не гарантирует, что рассуждения будут отключены. Модель может рассуждать минимально при выполнении сложных задач. |
+| **`low`** | Что пользователь может | Что пользователь может | Что пользователь может | Что пользователь может | Не поддерживается | Что пользователь может | Что пользователь может | Минимизирует задержку и стоимость. |
+| **`medium`** | Поддерживается (по умолчанию) | Поддерживается (по умолчанию) | Поддерживается (по умолчанию) | Что пользователь может | Чего пользователь не может | Что пользователь может | Что пользователь может | Сбалансированное мышление для большинства задач. |
+| **`high`** | Поддерживается (динамический) | Поддерживается (динамический) | Поддерживается (динамический) | Поддерживается (динамический) | Поддерживается (динамический) | Поддерживается (по умолчанию, динамический) | Поддерживается (по умолчанию, динамический) | Максимальная глубина рассуждений. Модели может потребоваться значительно больше времени, чтобы сгенерировать первый токен ответа (не относящийся к размышлениям), но ответ будет более тщательно продуман. |
 
-Das folgende Beispiel zeigt, wie Sie den Denkaufwand festlegen.
+В следующем примере показано, как задать уровень мышления.
 
 ### Python
 
@@ -451,7 +445,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Проложить маршрут
 
 ```
 package main
@@ -509,47 +503,40 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }'
 ```
 
-Sie können den Denkprozess für Gemini 4 Argon nicht deaktivieren. Gemini 3 Flash und Flash-Lite
-unterstützen auch keine vollständige Deaktivierung des Denkprozesses.
-Wenn Sie keinen Denkaufwand angeben, verwendet Gemini den
-Standard-Denkaufwand des Modells (z.B. `"medium"` für Gemini 4 Argon, Gemini 3.8 Flash und Gemini 3.6 Flash).
+Для Gemini 4 Argon отключить мышление нельзя. Модели Gemini 3 Flash и Flash-Lite также не поддерживают полное отключение мышления. Если вы не укажете уровень мышления, Gemini будет использовать уровень мышления по умолчанию для модели (например, `"medium"` для Gemini 4 Argon, Gemini 3.8 Flash и Gemini 3.6 Flash).
 
-Modelle der Gemini 2.5-Serie unterstützen `thinkingLevel` nicht. Verwenden Sie stattdessen `thinkingBudget`.
+Модели серии Gemini 2.5 не поддерживают `thinkingLevel`. Вместо этого используйте `thinkingBudget`.
 
-### Tokenlimits und `max_output_tokens`
+### Ограничения на количество токенов и `max_output_tokens`
 
-Mit dem [`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=de#v1beta.GenerationConfig)
-Generierungsparameter wird die maximale Anzahl von Tokens festgelegt, die eine Antwort generieren kann,
-einschließlich der Thinking-Tokens.
+Параметр генерации [`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=ru#v1beta.GenerationConfig) задает максимальное количество токенов, которые может сгенерировать ответ, включая токены размышлений.
 
-Wenn dieser Parameter festgelegt ist, fungiert er als harte Begrenzung, die von der Infrastruktur erzwungen wird, ohne die Zuweisung des Thinking-Budgets (`thinking_level`) durch das Modell zu ändern.
+Если этот параметр задан, он действует как жесткое ограничение, применяемое инфраструктурой, без изменения того, как модель распределяет свой бюджет на рассуждения (`thinking_level`).
 
-Wenn das Modell diese Begrenzung beim Schlussfolgern erreicht, wird die Generierung mit `finish_reason: MAX_TOKENS` beendet und eine gekürzte oder leere Ausgabe zurückgegeben (wobei alle generierten Thinking-Tokens weiterhin in Rechnung gestellt werden). Um Kosten oder Latenz zu reduzieren, ohne Antworten zu kürzen, senken Sie stattdessen `thinking_level` (`low` oder `medium`), anstatt einen kleinen Wert für `max_output_tokens` festzulegen.
+Если модель достигнет этого лимита во время рассуждения, она прекратит генерировать ответ с помощью `finish_reason: MAX_TOKENS` и вернет усеченный или пустой результат (при этом плата за сгенерированные токены мышления будет взиматься). Чтобы снизить стоимость или задержку, не усекая ответы, уменьшите значение `thinking_level` (`low` или `medium`), а не `max_output_tokens`.
 
-Beachten Sie bei Gemini 4-Modellen (`gemini-4-argon`) die folgenden Kontext- und Ausgabebegrenzungen:
+Для моделей Gemini 4 (`gemini-4-argon`) действуют следующие ограничения на контекст и выходные данные:
 
-- **Gemeinsames Kontextfenster mit 1 Mio. Tokens:** Eingabe-, Thinking- und Ausgabetokens teilen sich ein gemeinsames Kontextfenster mit 1 Mio. Tokens (`1,048,576` Tokens). Wenn Ihre Eingabetokens plus `max_output_tokens` 1.048.576 Tokens überschreiten, begrenzt die API die Ausgabe automatisch auf den verbleibenden Platz im Kontextfenster (`1,048,576` minus Ihre Eingabetokens).
-- **Ausgabebegrenzungen pro Anfrage (64.000 für Streaming / 32.000 für Nicht-Streaming) und lange Decodierung (bis zu 1 Mio. Tokens)**: Eine einzelne Streaming-Anfrage (`streamGenerateContent`) gibt bis zu `65,536` Tokens zurück und eine einzelne Nicht-Streaming-Anfrage (`generateContent`) bis zu `32,768` Tokens. Wenn Sie mehr als die Begrenzung pro Anfrage generieren möchten (bis zu `1,048,576` Tokens minus Ihre Eingabe), legen Sie für `max_output_tokens` einen Wert über der Begrenzung fest. Die neuesten Google GenAI SDKs werden standardmäßig automatisch über mehrere Hops hinweg fortgesetzt (`automatic_continuation=True`). Alternativ können Sie eine Clientschleife mit dem `continuation_token` ausführen, das zurückgegeben wird, wenn ein Hop mit `finish_reason: "CONTINUATION"` beendet wird. Codebeispiele finden Sie unter [Lange Decodierung](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=de).
+- **Общее окно контекста на 1 миллион токенов.** Входные, выходные и токены рассуждения используют одно окно контекста на 1 миллион токенов (`1,048,576` токенов). Если сумма входных токенов и `max_output_tokens` превышает 1 048 576 токенов, API автоматически ограничивает выходные токены оставшимся местом в окне контекста (`1,048,576` минус входные токены).
+- **Ограничения на количество выходных данных для каждого запроса (64 000 токенов для потоковой передачи и 32 000 токенов для других запросов) и длинное декодирование (до 1 000 000 токенов).** Один запрос для потоковой передачи (`streamGenerateContent`) возвращает до `65,536` токенов, а один запрос без потоковой передачи (`generateContent`) – до `32,768` токенов. Чтобы сгенерировать больше токенов, чем разрешено за один запрос (до `1,048,576` токенов за вычетом входных данных), задайте для параметра `max_output_tokens` значение выше ограничения. Последние версии Google GenAI SDK по умолчанию продолжают генерацию автоматически (`automatic_continuation=True`). Вы также можете запустить цикл клиента, используя `continuation_token`, возвращенный, когда генерация останавливается с `finish_reason: "CONTINUATION"`. Примеры кода приведены в разделе [Длинный код](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=ru).
 
-### Thinking-Budgets
+### Бюджеты на рассуждения
 
-Mit dem Parameter `thinkingBudget`, der mit der Gemini 2.5-Serie eingeführt wurde, wird dem Modell die genaue Anzahl der Thinking-Tokens vorgegeben, die für das Schlussfolgern verwendet werden sollen.
+Параметр `thinkingBudget`, представленный в серии Gemini 2.5, указывает модели, сколько токенов мышления нужно использовать для рассуждений.
 
-Im Folgenden finden Sie Konfigurationsdetails für `thinkingBudget` für jeden Modelltyp.
-Sie können den Denkprozess deaktivieren, indem Sie `thinkingBudget` auf 0 setzen.
-Wenn Sie das `thinkingBudget` auf -1 setzen, wird
-**dynamisches Thinking** aktiviert. Das bedeutet, dass das Modell das Budget an die
-Komplexität der Anfrage anpasst.
+Ниже приведены сведения о конфигурации для каждого типа модели.`thinkingBudget`
+Чтобы отключить функцию, задайте для параметра `thinkingBudget` значение 0.
+Если задать для параметра `thinkingBudget` значение -1, будет включено **динамическое мышление**, то есть модель будет корректировать бюджет в зависимости от сложности запроса.
 
-| Modell | Standardeinstellung (Thinking-Budget ist nicht festgelegt) | Bereich | Denkprozess deaktivieren | Dynamisches Thinking aktivieren |
+| Модель | Настройка по умолчанию (бюджет на размышления не задан) | Диапазон | Отключить режим размышления | Как включить динамическое мышление |
 | --- | --- | --- | --- | --- |
-| **2.5 Pro** | Dynamisches Thinking | `128` bis `32768` | –: Denkprozess kann nicht deaktiviert werden | `thinkingBudget = -1` (Standard) |
-| **2.5 Flash** | Dynamisches Thinking | `0` bis `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Standard) |
-| **2.5 Flash Preview** | Dynamisches Thinking | `0` bis `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Standard) |
-| **2.5 Flash Lite** | Modell denkt nicht | `512` bis `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
-| **2.5 Flash Lite Preview** | Modell denkt nicht | `512` bis `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
-| **Robotics-ER 1.6 Preview** | Dynamisches Thinking | `0` bis `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Standard) |
-| **2.5 Flash Live Native Audio Preview (09-2025)** | Dynamisches Thinking | `0` bis `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Standard) |
+| **2.5 Pro** | Динамическое мышление | `128` – `32768` | —: нельзя отключить режим размышления | `thinkingBudget = -1` (по умолчанию) |
+| **2.5 Flash** | Динамическое мышление | `0` – `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (по умолчанию) |
+| **2.5. Предварительный просмотр Flash** | Динамическое мышление | `0` – `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (по умолчанию) |
+| **2.5 Flash Lite** | Модель не думает | `512` – `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
+| **2.5 Flash Lite Preview** | Модель не думает | `512` – `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
+| **Robotics-ER 1.6 Preview** | Динамическое мышление | `0` – `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (по умолчанию) |
+| **2.5 Flash Live Native Audio Preview (09-2025)** | Динамическое мышление | `0` – `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (по умолчанию) |
 
 ### Python
 
@@ -602,7 +589,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Проложить маршрут
 
 ```
 package main
@@ -664,32 +651,27 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:g
 }'
 ```
 
-Je nach Prompt kann das Modell das Tokenbudget über- oder unterschreiten.
+В зависимости от запроса модель может превысить или не достичь лимита токенов.
 
-## Gedankensignaturen
+## Подписи мыслей
 
-Die Gemini API ist zustandslos. Das Modell behandelt daher jede API-Anfrage unabhängig und hat keinen Zugriff auf den Denkkontext aus früheren Runden in Multi-Turn-Interaktionen.
+Gemini API не сохраняет состояние, поэтому модель обрабатывает каждый запрос к API независимо и не имеет доступа к контексту рассуждений из предыдущих шагов в пошаговых взаимодействиях.
 
-Um den Denkkontext über mehrere Runden hinweg beizubehalten, gibt Gemini Gedankensignaturen zurück. Das sind verschlüsselte Darstellungen des internen Denkprozesses des Modells.
+Чтобы поддерживать контекст рассуждений в многошаговых взаимодействиях, Gemini возвращает сигнатуры рассуждений – зашифрованные представления внутреннего процесса рассуждений модели.
 
-- **Gemini 2.5-Modelle** geben Gedankensignaturen zurück, wenn der Denkprozess aktiviert ist und
-  die Anfrage [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de#thinking) enthält,
-  insbesondere [Funktionsdeklarationen](https://ai.google.dev/gemini-api/docs/function-calling?hl=de#step-2).
-- **Gemini 4- und Gemini 3-Modelle** können Gedankensignaturen für alle Arten
-  von [Teilen](https://ai.google.dev/api/caching?hl=de#Part) zurückgeben. Wir empfehlen, alle Signaturen immer so zurückzugeben, wie sie empfangen wurden. Für Funktionsaufrufsignaturen ist dies jedoch *erforderlich*. Weitere Informationen finden Sie auf der Seite
-  [Gedankensignaturen](https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=de).
+- **Модели Gemini 2.5** возвращают сигнатуры размышлений, если эта функция включена и запрос включает [вызов функций](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru#thinking), в частности [объявления функций](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru#step-2).
+- **Модели Gemini 4 и Gemini 3** могут возвращать сигнатуры мыслей для всех типов [частей](https://ai.google.dev/api/caching?hl=ru#Part). Мы рекомендуем всегда передавать все подписи в том виде, в котором они были получены, но для подписей вызовов функций это *обязательно*. Подробнее [о подписях Thought Signatures](https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=ru)…
 
-Weitere Nutzungslimits, die bei Funktionsaufrufen zu beachten sind:
+При использовании вызова функций также следует учитывать следующие ограничения:
 
-- Signaturen werden vom Modell innerhalb anderer Teile in der Antwort zurückgegeben, z. B. Funktionsaufrufe oder Textteile.
-  [Geben Sie die gesamte Antwort](https://ai.google.dev/gemini-api/docs/function-calling?hl=de#step-4)
-  mit allen Teilen in nachfolgenden Runden an das Modell zurück.
-- Verketten Sie keine Teile mit Signaturen.
-- Führen Sie keinen Teil mit einer Signatur mit einem anderen Teil ohne Signatur zusammen.
+- Подписи возвращаются моделью в других частях ответа, например в вызовах функций или текстовых частях.
+  [Возвращайте модели весь ответ](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru#step-4) со всеми частями в последующих запросах.
+- Не объединяйте части письма с подписями.
+- Не объединяйте часть с подписью с частью без подписи.
 
-## Preise
+## Цены
 
-Wenn der Denkprozess aktiviert ist, setzt sich der Preis für die Antwort aus den Ausgabetokens und den Thinking-Tokens zusammen. Die Gesamtzahl der generierten Thinking-Tokens finden Sie im Feld `thoughtsTokenCount`.
+Если функция "Размышления" включена, цена ответа будет равна сумме токенов для выходных данных и токенов для размышлений. Общее количество сгенерированных токенов мышления можно получить из поля `thoughtsTokenCount`.
 
 ### Python
 
@@ -707,7 +689,7 @@ console.log(`Thoughts tokens: ${response.usageMetadata.thoughtsTokenCount}`);
 console.log(`Output tokens: ${response.usageMetadata.candidatesTokenCount}`);
 ```
 
-### Ok
+### Проложить маршрут
 
 ```
 // ...
@@ -715,64 +697,55 @@ fmt.Println("Thoughts tokens:", response.UsageMetadata.ThoughtsTokenCount)
 fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
 ```
 
-Thinking-Modelle generieren vollständige Gedanken, um die Qualität der endgültigen
-Antwort zu verbessern, und geben dann [Zusammenfassungen](#summaries) aus, um Einblicke in den
-Denkprozess zu geben. Die Preise basieren also auf den vollständigen Thinking-Tokens, die das Modell zum Erstellen einer Zusammenfassung benötigt, obwohl nur die Zusammenfassung von der API ausgegeben wird.
+Модели мышления генерируют полные мысли, чтобы улучшить качество окончательного ответа, а затем выводят [краткие изложения](#summaries), чтобы дать представление о процессе мышления. Таким образом, цена зависит от количества токенов, которые модели нужно сгенерировать, чтобы создать краткий пересказ, несмотря на то, что API возвращает только сам пересказ.
 
-Weitere Informationen zu Tokens finden Sie in der [Anleitung zum Zählen von Tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=de).
+Подробнее [о подсчете токенов](https://ai.google.dev/gemini-api/docs/tokens?hl=ru)…
 
-## Best Practices
+## Рекомендации
 
-Dieser Abschnitt enthält einige Hinweise zur effizienten Verwendung von Thinking-Modellen.
-Wie immer erzielen Sie die besten Ergebnisse, wenn Sie unsere
-[Anleitung zu Prompts und Best Practices](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=de)
-befolgen.
+В этом разделе приведены рекомендации по эффективному использованию моделей мышления.
+Как всегда, следуйте нашим [рекомендациям по составлению запросов](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ru), чтобы получать наилучшие результаты.
 
-### Debugging und Steuerung
+### Отладка и управление
 
-- **Schlussfolgerungen überprüfen**: Wenn Sie nicht die erwartete Antwort von den
-  Thinking-Modellen erhalten, kann es hilfreich sein, die Zusammenfassungen der Gedanken von Gemini sorgfältig zu analysieren.
-  Sie können sehen, wie die Aufgabe aufgeschlüsselt und die Schlussfolgerung erreicht wurde, und diese Informationen verwenden, um die Ergebnisse zu korrigieren.
-- **Anleitung zum Schlussfolgern geben**: Wenn Sie eine besonders lange
-  Ausgabe erwarten, können Sie in Ihrem Prompt eine Anleitung geben, um den
-  [Aufwand für den Denkprozess](#set-budget) des Modells zu begrenzen. So können Sie mehr Ausgabetokens für Ihre Antwort reservieren.
+- **Проверяйте рассуждения.** Если вы не получаете ожидаемый ответ от думающих моделей, может быть полезно внимательно проанализировать краткие пересказы рассуждений Gemini.
+  Вы можете посмотреть, как модель разбила задачу на части и пришла к выводу, и использовать эту информацию, чтобы исправить результаты.
+- **Укажите, как рассуждать.** Если вы хотите получить длинный ответ, укажите в запросе, [сколько времени](#set-budget) модель должна потратить на размышления. Это позволяет зарезервировать больше
+  выходных токенов для ответа.
 
-### Aufgabenkomplexität
+### Сложность задачи
 
-- **Einfache Aufgaben (Denkprozess kann deaktiviert werden)** : Für einfache Anfragen, bei denen kein komplexes Schlussfolgern erforderlich ist, z. B. das Abrufen von Fakten oder die Klassifizierung, ist kein Denkprozess erforderlich. Beispiele:
-  - „Wo wurde DeepMind gegründet?“
-  - „Wird in dieser E‑Mail um ein Meeting gebeten oder werden nur Informationen bereitgestellt?“
-- **Mittelschwere Aufgaben (Standard/Teilweise Denkprozess)** : Viele häufige Anfragen profitieren von einer schrittweisen Verarbeitung oder einem tieferen Verständnis. Gemini kann die Denkfunktion flexibel für Aufgaben wie die folgenden verwenden:
-  - Analogie zwischen Photosynthese und Erwachsenwerden
-  - Vergleich und Gegenüberstellung von Elektroautos und Hybridautos
-- **Schwierige Aufgaben (maximale Denkfähigkeit)** : Für wirklich komplexe Aufgaben wie das Lösen komplexer mathematischer Probleme oder Programmieraufgaben empfehlen wir, ein hohes Thinking-Budget festzulegen. Bei diesen Aufgaben muss das Modell seine gesamten Fähigkeiten zum Schlussfolgern und Planen einsetzen. Oft sind viele interne Schritte erforderlich, bevor eine Antwort gegeben wird. Beispiele:
-  - Lösen Sie Aufgabe 1 in AIME 2025: Ermitteln Sie die Summe aller ganzzahligen Basen b > 9 für
-    die 17b ein Teiler von 97b ist.
-  - Schreiben Sie Python-Code für eine Webanwendung, die Echtzeit-Aktienmarktdaten visualisiert, einschließlich der Nutzerauthentifizierung. Machen Sie sie so effizient wie möglich.
+- **Простые задачи (мышление может быть отключено).** Для простых запросов, не требующих сложных рассуждений, например для поиска фактов или классификации, мышление не требуется. Примеры:
+  - "Где была основана компания DeepMind?"
+  - "В этом письме предлагается встреча или просто предоставляется информация?"
+- **Задачи средней сложности (по умолчанию/требующие размышлений).** Многие распространенные запросы требуют пошаговой обработки или более глубокого понимания. Gemini может использовать способность рассуждать для таких задач, как:
+  - Проведи аналогию между фотосинтезом и взрослением.
+  - Сравнивать электромобили и гибридные автомобили.
+- **Сложные задачи (максимальная способность к рассуждению).** Для действительно сложных задач, таких как решение сложных математических задач или задач по программированию, мы рекомендуем установить высокий лимит на рассуждения. Для выполнения таких задач модели необходимо задействовать все свои возможности рассуждения и планирования, что часто включает в себя множество внутренних шагов, прежде чем будет предоставлен ответ. Примеры:
+  - Реши задачу 1 из AIME 2025: найди сумму всех целых оснований b > 9, для которых 17b является делителем 97b.
+  - Напиши код Python для веб-приложения, которое визуализирует данные фондового рынка в реальном времени, включая аутентификацию пользователей. Сделайте его максимально эффективным.
 
-## Unterstützte Modelle, Tools und Funktionen
+## Поддерживаемые модели, инструменты и возможности
 
-Thinking-Funktionen werden für alle Modelle der Serien 4, 3 und 2.5 unterstützt.
-Alle Modellfunktionen finden Sie auf der
-[Seite Modellübersicht](https://ai.google.dev/gemini-api/docs/models?hl=de).
+Функции рассуждения поддерживаются во всех моделях серий 4, 3 и 2.5.
+Все возможности моделей перечислены на странице [Обзор моделей](https://ai.google.dev/gemini-api/docs/models?hl=ru).
 
-Thinking-Modelle funktionieren mit allen Tools und Funktionen von Gemini. So können die Modelle mit externen Systemen interagieren, Code ausführen oder auf Echtzeitinformationen zugreifen und die Ergebnisse in ihre Schlussfolgerungen und die endgültige Antwort einbeziehen.
+Думающие модели работают со всеми инструментами и функциями Gemini. Это позволяет моделям взаимодействовать с внешними системами, выполнять код или получать информацию в реальном времени, а затем использовать полученные результаты в своих рассуждениях и окончательном ответе.
 
-Beispiele für die Verwendung von Tools mit Thinking-Modellen finden Sie im [Thinking-Kochbuch][Colab].
+Примеры использования инструментов с думающими моделями можно найти в [руководстве по думающим моделям][Colab].
 
-## Nächste Schritte
+## Что дальше?
 
-- Informationen zur Thinking-Abdeckung finden Sie in unserer
-  [Anleitung zur OpenAI-Kompatibilität](https://ai.google.dev/gemini-api/docs/openai?hl=de#thinking).
+- Информация о покрытии функции "Размышление" приведена в нашем руководстве по [совместимости с OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=ru#thinking).
 
 [Colab]: https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get\_started\_thinking.ipynb
 
-Feedback geben
+Отправить отзыв
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
 
-Zuletzt aktualisiert: 2026-10-14 (UTC).
+Последнее обновление: 2026-10-14 UTC.
 
-Haben Sie Feedback für uns?
+Хотите рассказать подробнее?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-10-14 (UTC)."],[],[]]
+[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-14 UTC."],[],[]]

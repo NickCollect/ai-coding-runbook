@@ -1,42 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=hi
-fetched_at: 2026-10-19T05:40:49.784755+00:00
-title: "Gemini 3.6 Flash \u0914\u0930 3.5 Flash-Lite \u092e\u0947\u0902 \u0928\u092f\u093e \u0915\u094d\u092f\u093e \u0939\u0948 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=it
+fetched_at: 2026-10-26T05:47:46.450636+00:00
+title: "Novit\u00e0 di Gemini 3.6 Flash e 3.5 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-सुझाव भेजें
+Invia feedback
 
-# Gemini 3.6 Flash और 3.5 Flash-Lite में नया क्या है
+# Novità di Gemini 3.6 Flash e 3.5 Flash-Lite
 
-[नया मॉडल](https://ai.google.dev/gemini-api/docs/latest-model?hl=hi)
-[अन्य मॉडल](#other-models)
+[Ultimo modello](https://ai.google.dev/gemini-api/docs/latest-model?hl=it)
+[Altri modelli](#other-models)
 
-Gemini 3.6 Flash (`gemini-3.6-flash`) और Gemini 3.5 Flash-Lite (`gemini-3.5-flash-lite`), Gemini 3 सीरीज़ के पिछली जनरेशन के मॉडल हैं. ये अब भी प्रोडक्शन के लिए उपलब्ध हैं. हमारे सबसे नए Flash मॉडल के बारे में जानने के लिए, [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=hi) पर जाएँ.
+Gemini 3.6 Flash (`gemini-3.6-flash`) e Gemini 3.5 Flash-Lite (`gemini-3.5-flash-lite`) sono release di generazione precedente della serie Gemini 3 e rimangono disponibili per l'utilizzo in produzione. Per il nostro modello Flash più recente, vedi
+[Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=it).
 
-- **Gemini 3.6 Flash**: यह मॉडल, एजेंटिक और मल्टीमॉडल वाले मुश्किल टास्क को बेहतर तरीके से पूरा करता है. साथ ही, यह 3.5 Flash की तुलना में कम टोकन इस्तेमाल करता है और इसकी कीमत भी कम है.
-- **Gemini 3.5 Flash-Lite**: यह 3.5 फ़ैमिली का सबसे तेज़ और किफ़ायती मॉडल है.
-  यह मॉडल, ज़्यादा थ्रूपुट के साथ काम करने के लिए, Flash-Lite की पिछली जनरेशन से बेहतर है.
+- **Gemini 3.6 Flash**: prestazioni migliori per attività agentiche e multimodali
+  complesse, riducendo al contempo l'utilizzo dei token, a un prezzo inferiore rispetto a 3.5 Flash.
+- **Gemini 3.5 Flash-Lite**: il modello più veloce ed economico della famiglia 3.5.
+  Supera le generazioni precedenti di Flash-Lite per l'esecuzione ad alto throughput.
 
-इस गाइड में बताया गया है कि हर मॉडल में क्या नया जोड़ा गया है, एपीआई में हुए किन बदलावों का असर आपके कोड पर पड़ेगा, और माइग्रेट करने का तरीका क्या है.
+Questa guida spiega le novità introdotte in ogni modello, le modifiche dell'API che interessano il codice e come eseguire la migrazione.
 
 ### Gemini 3.6 Flash
 
-1. स्किल इंस्टॉल करें:
+1. Installa la skill:
 
    ```
    npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
    ```
-2. स्किल लागू करें:
+2. Applica la skill:
 
    ```
    /gemini-interactions-api migrate my app to Gemini 3.6 Flash
@@ -44,34 +46,36 @@ Gemini 3.6 Flash (`gemini-3.6-flash`) और Gemini 3.5 Flash-Lite (`gemini-3.5-
 
 ### Gemini 3.5 Flash-Lite
 
-1. स्किल इंस्टॉल करें:
+1. Installa la skill:
 
    ```
    npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
    ```
-2. स्किल लागू करें:
+2. Applica la skill:
 
    ```
    /gemini-interactions-api migrate my app to Gemini 3.5 Flash-Lite
    ```
 
-## नए मॉडल
+## Nuovi modelli
 
-| मॉडल | मॉडल आईडी | रीज़निंग का डिफ़ॉल्ट लेवल | कीमत | ब्यौरा |
+| Modello | ID modello | Livello di pensiero predefinito | Prezzi | Descrizione |
 | --- | --- | --- | --- | --- |
-| Gemini 3.6 Flash | `gemini-3.6-flash` | `medium` | इनपुट टोकन के लिए 1.50 डॉलर/मिलियन और आउटपुट टोकन के लिए 7.50 डॉलर/मिलियन | एजेंटिक और मल्टीमॉडल टास्क के लिए, स्पीड और इंटेलिजेंस के बीच सही तालमेल बनाता है. |
-| Gemini 3.5 Flash-Lite | `gemini-3.5-flash-lite` | `minimal` | हर 10 लाख इनपुट टोकन के लिए 0.30 डॉलर और हर 10 लाख आउटपुट टोकन के लिए 2.50 डॉलर | यह 3.5 मॉडल, हाई थ्रूपुट एक्ज़ीक्यूशन के लिए सबसे तेज़ और सबसे किफ़ायती है. |
+| Gemini 3.6 Flash | `gemini-3.6-flash` | `medium` | 1,50 $ per 1 milione di token di input e 7,50 $per 1 milione di token di output | Bilancia la velocità con l'intelligenza per le attività agentiche e multimodali. |
+| Gemini 3.5 Flash-Lite | `gemini-3.5-flash-lite` | `minimal` | 0,30 $ per 1 milione di token di input e 2,50 $per 1 milione di token di output | Il modello 3.5 più veloce ed economico per l'esecuzione ad alto throughput. |
 
-दोनों मॉडल, 10 लाख टोकन वाली कॉन्टेक्स्ट विंडो, ज़्यादा से ज़्यादा 64 हज़ार आउटपुट टोकन, और सोच-विचार करने की सुविधा के साथ काम करते हैं. साथ ही, इनमें पहले से मौजूद टूल का पूरा सुइट मिलता है. इसमें [कंप्यूटर का इस्तेमाल करने की सुविधा](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi) भी शामिल है.
+Entrambi i modelli supportano la finestra contestuale di 1 milione di token, un massimo di 64.000 token di output,
+il pensiero e la suite completa di strumenti integrati, incluso
+[l'utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it).
 
-पूरी जानकारी के लिए, मॉडल के पेज देखें:
+Per le specifiche complete, consulta le pagine dei modelli:
 
-- [Gemini 3.6 Flash मॉडल पेज](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=hi)
-- [Gemini 3.5 Flash-Lite मॉडल पेज](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=hi)
+- [Pagina del modello Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=it)
+- [Pagina del modello Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=it)
 
-कीमत की पूरी जानकारी के लिए, [कीमत वाला पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) देखें.
+Per i prezzi dettagliati, consulta la [pagina dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it).
 
-## क्विकस्टार्ट
+## Guida rapida
 
 ### Python
 
@@ -115,58 +119,60 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions"       -H "x
   }'
 ```
 
-## Gemini 3.6 Flash में नया क्या है
+## Novità di Gemini 3.6 Flash
 
-- **टोकन और टर्न में कमी:** यह Gemini 3.5 की तुलना में, कम रीज़निंग स्टेप, बातचीत के टर्न, और टूल कॉल के साथ कई चरणों वाले वर्कफ़्लो को पूरा करता है. इससे, एक्ज़ीक्यूशन लूप स्पाइरलिंग भी कम होती है.
-- **बेहतर कोड जनरेट करने की सुविधा:** यह सुविधा, इस्तेमाल के लिए तैयार बेहतर क्वालिटी वाला कोड जनरेट करती है. इसमें कम अनचाहे बदलाव होते हैं और डीबग करने के लिए कम लूप होते हैं.
-- **निर्देशों का बेहतर तरीके से पालन करना**: गड़बड़ी की जानकारी देने वाले टास्क के दौरान, फ़ाइल में अनचाहे बदलावों को कम करता है.
-- **मल्टीमॉडल और स्पेशल रीज़निंग की बेहतर क्षमता:** चार्ट को समझने, विज़ुअल ब्लूप्रिंट को बदलने, और कई एलिमेंट वाले वेब लेआउट जनरेट करने की बेहतर क्षमता.
-- **प्रोग्राम के हिसाब से पहले ही जांच करना:** Gemini 3.5 Flash की तुलना में, यह मॉडल बदलाव करने से पहले, डाइग्नोस्टिक कोड स्क्रिप्ट को ज़्यादा बार चलाना पसंद करता है. इससे मुश्किल टास्क को ज़्यादा सटीक तरीके से पूरा किया जा सकता है. हालांकि, इससे रोज़मर्रा के फ़्रंटएंड के काम में कुछ अतिरिक्त चरण जुड़ सकते हैं.
-- **कंप्यूटर का इस्तेमाल करने से जुड़ी सुविधा:** यह सुविधा, एजेंटिक यूआई ऑटोमेशन के लिए पहले से मौजूद टूल के तौर पर काम करती है.
-- **यूज़र इंटरफ़ेस (यूआई) स्टाइलिंग की प्राथमिकता**: यह काम करने वाला कोड बेहतर तरीके से बना सकता है. हालांकि, इंसानों ने विज़ुअल लेआउट और स्टाइलिंग के लिए, पहले के मॉडल को प्राथमिकता दी थी. डिजाइन से जुड़े दिशा-निर्देश साफ़ तौर पर देकर, इस समस्या को कम किया जा सकता है.
-- **सोच-समझकर जवाब देने का डिफ़ॉल्ट लेवल (मीडियम):** यह Gemini 3.5 Flash के `medium` सोच-समझकर जवाब देने के डिफ़ॉल्ट लेवल का इस्तेमाल करता है.
-- **कम कीमत**: आउटपुट टोकन की कम लागत (3.5 Flash के लिए 9.00 डॉलर/मिलियन के मुकाबले 7.50 डॉलर/मिलियन). इनपुट टोकन की कीमत 1.50 डॉलर/10 लाख टोकन ही रहेगी.
+- **Riduzione dei token e dei turni**:completa i workflow in più passaggi con meno passaggi di ragionamento, turni di conversazione e chiamate di strumenti rispetto a Gemini 3.5. Riduce anche la spirale del ciclo di esecuzione.
+- **Generazione di codice migliorata**:produce codice di qualità superiore pronto per la produzione con meno modifiche indesiderate e meno cicli di debug.
+- **Migliore rispetto delle istruzioni**: riduce le modifiche indesiderate ai file durante le attività di diagnostica.
+- **Ragionamento multimodale e spaziale avanzato**:prestazioni migliorate nell'interpretazione dei grafici, nella conversione di progetti visivi e nella generazione di layout web multi-elemento.
+- **Ispezione programmatica anticipata**:preferisce eseguire script di codice di diagnostica prima di apportare modifiche più frequentemente rispetto a Gemini 3.5 Flash. Ciò migliora l'accuratezza delle attività complesse, ma può aggiungere passaggi esplorativi aggiuntivi al lavoro di frontend di routine.
+- **Supporto per l'utilizzo del computer**:supportato come strumento integrato per l'automazione dell'interfaccia utente agentica.
+- **Preferenza per lo stile dell'interfaccia utente**: migliore nella creazione di codice funzionale, anche se i valutatori umani
+  hanno preferito i modelli precedenti per il layout grafico e lo stile visivi. Puoi risolvere questo problema fornendo linee guida di progettazione esplicite.
+- **Impegno di ragionamento predefinito (medio)** : utilizza lo stesso `medium` impegno di ragionamento predefinito di Gemini 3.5 Flash.
+- **Prezzi ridotti**: costi dei token di output inferiori (7,50 $ per 1 milione rispetto a 9,00 $per 1 milione per
+  3.5 Flash). I token di input rimangono a 1,50 $per 1 milione.
 
-## Gemini 3.5 Flash-Lite में नया क्या है
+## Novità di Gemini 3.5 Flash-Lite
 
-- **टास्क को पूरा करने में लगने वाला समय कम हुआ:** 3.5 फ़ैमिली के मॉडल में सबसे ज़्यादा थ्रूपुट. इससे ज़्यादा डेटा को पार्स करने और दस्तावेज़ों से डेटा निकालने में मदद मिलती है.
-- **बेहतर रीज़निंग और मल्टीमॉडल परफ़ॉर्मेंस:** Gemini 2.5 Flash से माइग्रेट करने का बेहतर विकल्प. साथ ही, रीज़निंग वाले टास्क में ज़्यादा स्कोर. जैसे, HLE (18.0% बनाम 11.0%) और मल्टीमॉडल बेंचमार्क. जैसे, CharXIV (74.5% बनाम 63.7%).
-- **सबएजेंट ऑर्केस्ट्रेशन और टूल की विश्वसनीयता:** इससे कोड एक्ज़ीक्यूशन, खोज, और एमसीपी वर्कफ़्लो के लिए टूल एक्ज़ीक्यूशन की विश्वसनीयता बेहतर होती है. अपने-आप प्लान बनाने और सब-एजेंट के मुश्किल टास्क के लिए, सोचने का लेवल बढ़ाएं.
-- **दस्तावेज़ को समझने की बेहतर क्षमता:** इससे दस्तावेज़ को पार्स करने और स्ट्रक्चर्ड डेटा निकालने की प्रोसेस ज़्यादा सटीक हो जाती है. दस्तावेज़ की जटिलता के आधार पर, कम और ज़्यादा सोच-विचार करने वाले दोनों तरीकों का इस्तेमाल करें.
-- **इंटरैक्टिव वेब कोडिंग और टेबल में तैयार डेटा की प्रोसेसिंग:** यह फ़्रंटएंड JavaScript और टेबल में तैयार डेटा की प्रोसेसिंग में बेहतरीन परफ़ॉर्म करता है. इसके लिए, यह लाइटवेट कोड एक्ज़ीक्यूशन का इस्तेमाल करके प्लानिंग करता है.
-- **चैटबॉट और पर्सोना की स्थिरता:** Gemini 3.1 Flash-Lite की तुलना में, निर्देशों का बेहतर तरीके से पालन करना और पर्सोना को बनाए रखना.
-- **कंप्यूटर के इस्तेमाल से जुड़ी सहायता:** यह एजेंटिक यूआई ऑटोमेशन के लिए, पहले से मौजूद टूल के तौर पर काम करता है.
+- **Latenza di esecuzione delle attività ridotta**:throughput più elevato nella famiglia 3.5 per l'analisi dei dati ad alto volume e l'estrazione dei documenti.
+- **Prestazioni di ragionamento e multimodali migliorate**:percorso di migrazione efficace da Gemini 2.5 Flash, con punteggi più elevati nelle attività di ragionamento come HLE (18,0% rispetto a 11,0%) e nei benchmark multimodali come CharXIV (74,5% rispetto a 63,7%).
+- **Orchestrazione di subagenti e affidabilità degli strumenti**:migliora l'affidabilità dell'esecuzione degli strumenti per l'esecuzione di codice, la ricerca e i workflow MCP. Aumenta il livello di pensiero per la pianificazione autonoma e le attività complesse dei subagenti.
+- **Comprensione dei documenti migliorata**:migliora l'accuratezza dell'analisi dei documenti e dell'estrazione dei dati strutturati. Sperimenta con i livelli di pensiero minimo e alto a seconda della complessità del documento.
+- **Programmazione web interattiva e trattamento dati tabulari**:prestazioni elevate nell'elaborazione di JavaScript frontend e dati tabulari tramite la pianificazione utilizzando l'esecuzione di codice leggero.
+- **Persistenza di chatbot e persona**:migliore rispetto delle istruzioni multi-turno e coerenza della persona rispetto a Gemini 3.1 Flash-Lite.
+- **Supporto per l'utilizzo del computer**:supportato come strumento integrato per l'automazione dell'interfaccia utente agentica.
 
-## सही Flash या Flash-Lite मॉडल चुनना
+## Scegliere il modello Flash o Flash-Lite giusto
 
-इस टेबल का इस्तेमाल करके, अपने वर्कलोड के लिए सही मॉडल और माइग्रेशन का तरीका चुनें.
+Utilizza questa tabella per selezionare il modello e il percorso di migrazione giusti per i tuoi workload.
 
-दोनों मॉडल के लिए, अब काम न करने वाले सैंपलिंग पैरामीटर (`temperature`,
-`top_p`, `top_k`) और पहले से भरे गए मॉडल टर्न को हटाना ज़रूरी है. ज़्यादा जानकारी के लिए, [एपीआई में हुए बदलाव](#api-changes-and-parameter-updates) देखें.
+Entrambi i modelli richiedono la rimozione dei parametri di campionamento deprecati (`temperature`, `top_p`, `top_k`) e dei turni precompilati del modello. Per i dettagli, consulta
+[Modifiche dell'API](#api-changes-and-parameter-updates).
 
-| मॉडल | इस्तेमाल के मुख्य उदाहरण | माइग्रेशन के लिए सुझाया गया टारगेट |
+| Modello | Casi d'uso principali | Target di migrazione consigliato |
 | --- | --- | --- |
-| **Gemini 3.6 Flash** `gemini-3.6-flash` | कोड जनरेशन, स्पेशल/टेक्स्ट, इमेज वग़ैरह को प्रोसेस करने वाला मॉडल गहराई से विश्लेषण, कई चरणों वाले एजेंटिक वर्कफ़्लो | **Gemini 3.5 Flash**, **Gemini 3 Flash (Preview)** या **Gemini 3.1 Pro** |
-| **Gemini 3.5 Flash-Lite** `gemini-3.5-flash-lite` | सब-एजेंट को अपने-आप एक्ज़ीक्यूट करने, ज़्यादा डेटा का विश्लेषण करने, दस्तावेज़ों से डेटा निकालने, और स्ट्रक्चर्ड JSON को पार्स करने की सुविधा | **Gemini 3.1 Flash-Lite** या **Gemini 2.5 Flash** |
+| **Gemini 3.6 Flash** `gemini-3.6-flash` | Generazione di codice, ragionamento spaziale/multimodale, workflow agentici in più passaggi | **Gemini 3.5 Flash**, **Gemini 3 Flash (anteprima)** o **Gemini 3.1 Pro** |
+| **Gemini 3.5 Flash-Lite** `gemini-3.5-flash-lite` | Esecuzione autonoma di subagenti, analisi dei dati ad alto volume ed estrazione di documenti, analisi JSON strutturata | **Gemini 3.1 Flash-Lite** o **Gemini 2.5 Flash** |
 
-## Antigravity एजेंट से जुड़ी सहायता
+## Supporto dell'agente Antigravity
 
-Gemini 3.6 Flash में, Gemini Managed Agents में [Antigravity एजेंट](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=hi) के लिए सहायता जोड़ी गई.
+Gemini 3.6 Flash ha introdotto il supporto per l'[agente Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it) in Gemini Managed Agents.
 
-मौजूदा कोड सैंपल और डिफ़ॉल्ट एजेंट कॉन्फ़िगरेशन के बारे में जानने के लिए, [Antigravity एजेंट गाइड](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=hi) और [Gemini 3.8 Flash गाइड](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=hi#updated-antigravity-agent) देखें.
+Per gli esempi di codice attuali e la configurazione dell'agente predefinita più recente, consulta la [guida dell'agente Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it) e la [guida di Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=it#updated-antigravity-agent).
 
-## एपीआई में हुए बदलाव और पैरामीटर के अपडेट
+## Modifiche dell'API e aggiornamenti dei parametri
 
-Gemini 3.6 Flash और Gemini 3.5 Flash-Lite से शुरू करके, एपीआई में हुए ये बदलाव इन मॉडल और Gemini के आने वाले सभी मॉडल पर लागू होंगे.
+A partire da Gemini 3.6 Flash e Gemini 3.5 Flash-Lite, le seguenti modifiche dell'API si applicano a questi modelli e a tutte le release future dei modelli Gemini.
 
-- **सैंपलिंग पैरामीटर अब काम नहीं करते**: `temperature`, `top_p`, और `top_k` अब काम नहीं करते. एपीआई इन पैरामीटर को अनदेखा कर देता है और आने वाले समय में मॉडल जनरेशन में गड़बड़ी दिखाता है.
-- **पहले से भरे गए मॉडल टर्न की पुष्टि करना**: मॉडल टर्न को पहले से भरने की सुविधा अब काम नहीं करती. अगर अनुरोध में आखिरी टर्न `model` है, तो एपीआई `400` गड़बड़ी दिखाता है.
+- **Deprecazione dei parametri di campionamento**: `temperature`, `top_p` e `top_k` sono deprecati. L'API ignora questi parametri e restituisce un errore nelle generazioni future dei modelli.
+- **Convalida del turno precompilato del modello**: la precompilazione dei turni del modello non è più supportata. Se l'ultimo turno non vuoto nella richiesta è un turno `model`, l'API restituisce un errore `400`.
 
-यहां दिए गए सेक्शन में, एपीआई में हुए हर बदलाव के बारे में पूरी जानकारी और कोड सैंपल दिए गए हैं.
+Le sezioni seguenti forniscono spiegazioni dettagliate ed esempi di codice per ogni modifica dell'API.
 
-### 1. सैंपलिंग पैरामीटर के काम न करने से जुड़ी जानकारी (`temperature`, `top_p`, `top_k`)
+### 1. Deprecazione dei parametri di campionamento (`temperature`, `top_p`, `top_k`)
 
-`temperature`, `top_p`, और `top_k` अब काम नहीं करते और इन्हें अनदेखा किया जाता है. आने वाले समय में मॉडल जनरेशन के लिए, इन पैरामीटर को उपलब्ध कराने पर एचटीटीपी 400 गड़बड़ी दिखेगी. **सभी अनुरोधों से इन पैरामीटर को हटाएं.**
+`temperature`, `top_p` e `top_k` sono deprecati e ignorati. Nelle generazioni future dei modelli, la fornitura di questi parametri restituisce un errore HTTP 400. **Rimuovi questi parametri da tutte le richieste.**
 
 ```
 # ⚠️ Remove these parameters (deprecated)
@@ -177,15 +183,15 @@ generation_config = {
 }
 ```
 
-डिटरमिनिज़्म को बेहतर बनाने के लिए, सिस्टम से जुड़े निर्देश तय करें. इनमें आपके इस्तेमाल के उदाहरण के लिए, साफ़ तौर पर नियम शामिल होने चाहिए.
+Per migliorare il determinismo, definisci un'istruzione di sistema con regole esplicite per il tuo caso d'uso specifico.
 
-### 2. पहले से भरे गए मॉडल टर्न की पुष्टि करना
+### 2. Convalida del turno precompilato del modello
 
-मॉडल की भूमिका के साथ खत्म होने वाले एपीआई अनुरोधों को अनुमति नहीं दी जाती. ऐसे अनुरोधों के जवाब में, **एचटीटीपी 400 गड़बड़ी** का मैसेज दिखता है.
+Le richieste API che terminano con un turno di ruolo del modello non vuoto non sono consentite e restituiscono un **errore HTTP 400**.
 
-#### ⚠️ इनसे बचें
+#### ⚠️ Evita
 
-लेगसी `generateContent` या रॉ REST पेलोड में, मॉडल की भूमिका वाले टर्न के साथ खत्म होने वाले मैसेज अब नहीं भेजे जा सकते:
+Nei payload REST non elaborati o `generateContent` legacy, la fine con un turno di ruolo del modello non è più consentita:
 
 ```
 /* ❌ DO NOT: End payload contents with a 'model' role turn */
@@ -197,9 +203,12 @@ generation_config = {
 }
 ```
 
-#### ✅ माइग्रेशन के लिए सुझाया गया तरीका (Interactions API)
+#### ✅ Migrazione consigliata (API Interactions)
 
-Interactions API में, मॉडल टर्न को मैन्युअल तरीके से पहले से नहीं भरा जाता. अगर आपके ऐप्लिकेशन ने पहले मॉडल के जवाब में, प्रस्तावनाओं को हटाने या JSON फ़ॉर्मैटिंग को लागू करने के लिए, मॉडल के जवाब को पहले से भरा था, तो इसके बजाय system\_instruction या [स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi) का इस्तेमाल करें.
+Nell'API Interactions, i turni del modello non vengono precompilati manualmente. Se in precedenza la tua
+applicazione precompilava un turno del modello per eliminare i preamboli o forzare la
+formattazione JSON, utilizza system\_instruction o
+[output strutturati](https://ai.google.dev/gemini-api/docs/structured-output?hl=it) invece.
 
 ```
 # ✅ RECOMMENDED: Use system_instruction in the Interactions API to specify output format
@@ -210,16 +219,16 @@ interaction = client.interactions.create(
 )
 ```
 
-## माइग्रेशन चेकलिस्ट
+## Elenco di controllo per la migrazione
 
 ### Gemini 3.6 Flash
 
-1. स्किल इंस्टॉल करें:
+1. Installa la skill:
 
    ```
    npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
    ```
-2. स्किल लागू करें:
+2. Applica la skill:
 
    ```
    /gemini-interactions-api migrate my app to Gemini 3.6 Flash
@@ -227,55 +236,55 @@ interaction = client.interactions.create(
 
 ### Gemini 3.5 Flash-Lite
 
-1. स्किल इंस्टॉल करें:
+1. Installa la skill:
 
    ```
    npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
    ```
-2. स्किल लागू करें:
+2. Applica la skill:
 
    ```
    /gemini-interactions-api migrate my app to Gemini 3.5 Flash-Lite
    ```
 
-### gemini-3.6-flash पर माइग्रेट करें
+### Esegui la migrazione a gemini-3.6-flash
 
-- **मॉडल आईडी अपडेट करें:** अपनी टारगेट मॉडल स्ट्रिंग को `gemini-3.6-flash` में बदलें.
-- **पैरामीटर अपडेट लागू करें:** `temperature`, `top_p`, `top_k` जैसे बंद किए गए सैंपलिंग पैरामीटर हटाएं. साथ ही, `candidate_count` (Gemini 3 और इसके बाद के वर्शन में काम नहीं करता) और पहले से भरे गए मॉडल टर्न हटाएं. इस बारे में ज़्यादा जानकारी के लिए, [एपीआई में हुए बदलाव और पैरामीटर अपडेट](#api-changes-and-parameter-updates) लेख पढ़ें.
-- **सोचने का लेवल कॉन्फ़िगर करना:** `thinking_budget` को `thinking_level` (`"medium"` या `"high"`) से बदलें.
-- **फ़ंक्शन कॉलिंग का ऑडिट करना:**
-  - मल्टीमोडल ऐसेट को रिस्पॉन्स पेलोड में रखें.
-  - इनलाइन निर्देशों को `\n\n` का इस्तेमाल करके फ़ॉर्मैट करें.
-  - अगर आपको प्री-टूल टेक्स्ट से जुड़ी `Malformed_Function_Call` गड़बड़ियां दिखती हैं, तो [प्री-टूल टेक्स्ट की ज़रूरी शर्तों को पूरा करने के तरीके](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi#workarounds-for-pre-tool-text-requirements) देखें.
-- **Gemini 3.x के लिए ज़रूरी बुनियादी शर्तें:** एसडीके अपडेट और थॉट सिग्नेचर को सेव रखने के लिए, [थॉट सिग्नेचर](https://ai.google.dev/gemini-api/docs/thinking?hl=hi#signatures) देखें.
+- **Aggiorna l'ID modello**:modifica la stringa del modello di destinazione in `gemini-3.6-flash`.
+- **Applica gli aggiornamenti dei parametri:** rimuovi i parametri di campionamento deprecati (`temperature`, `top_p`, `top_k`), `candidate_count` (non supportato in Gemini 3 e versioni successive) e i turni precompilati del modello come descritto in [Modifiche dell'API e aggiornamenti dei parametri](#api-changes-and-parameter-updates).
+- **Configura il livello di pensiero**:sostituisci `thinking_budget` con `thinking_level` (`"medium"` o `"high"`).
+- **Esegui l'audit della chiamata di funzione**
+  - Inserisci gli asset multimodali nel payload della risposta.
+  - Formatta le istruzioni in linea utilizzando `\n\n`.
+  - Se visualizzi errori `Malformed_Function_Call` associati al testo pre-strumento, consulta [Soluzioni alternative per i requisiti del testo pre-strumento](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#workarounds-for-pre-tool-text-requirements).
+- **Requisiti di base di Gemini 3.x**:per gli aggiornamenti dell'SDK e la conservazione della firma del pensiero, consulta [Firme del pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it#signatures).
 
-### gemini-3.5-flash-lite पर माइग्रेट करें
+### Esegui la migrazione a gemini-3.5-flash-lite
 
-- **मॉडल आईडी अपडेट करें:** अपनी टारगेट मॉडल स्ट्रिंग को `gemini-3.5-flash-lite` में बदलें.
-- **सोचने की क्षमता का लेवल कॉन्फ़िगर करना:**
-  - ज़्यादा डेटा निकालने, रूट करने या डेटा को अलग-अलग कैटगरी में बांटने के लिए: ज़्यादा से ज़्यादा थ्रूपुट पाने के लिए, `thinking_level` को `"minimal"` (डिफ़ॉल्ट) पर सेट रहने दें.
-  - टूल कॉल, कोड एक्ज़ीक्यूशन या कई चरणों में तर्क करने की सुविधा वाले ऑटोनॉमस सब-एजेंट के लिए: `thinking_level` को `"medium"` या `"high"` पर सेट करें, ताकि टूल को समय से पहले बंद होने से रोका जा सके.
-- **अब इस्तेमाल न किए जा रहे पैरामीटर हटाएं और फ़ंक्शन कॉलिंग की पुष्टि करें:** [3.6 Flash वाले नियम](#migrate-to-gemini-3-6-flash) लागू करें.
-- **Gemini 3.x के लिए बुनियादी ज़रूरी शर्तें:** [सोच के सिग्नेचर](https://ai.google.dev/gemini-api/docs/thinking?hl=hi#signatures) देखें.
+- **Aggiorna l'ID modello**:modifica la stringa del modello di destinazione in `gemini-3.5-flash-lite`.
+- **Configura il livello di impegno di ragionamento:**
+  - Per l'estrazione, il routing o la classificazione ad alto volume: lascia `thinking_level` su `"minimal"` (impostazione predefinita) per il massimo throughput.
+  - Per i subagenti autonomi con chiamate di strumenti, esecuzione di codice o ragionamento multi-step: imposta `thinking_level` su `"medium"` o `"high"` per evitare la chiusura prematura dello strumento.
+- **Rimuovi i parametri deprecati e convalida la chiamata di funzione:** Applica le [stesse regole di 3.6 Flash](#migrate-to-gemini-3-6-flash).
+- **Requisiti di base di Gemini 3.x**:consulta [Firme del pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it#signatures).
 
-## अन्य मॉडल
+## Altri modelli
 
-- [Gemini 4 Argon (सबसे नया वर्शन)](https://ai.google.dev/gemini-api/docs/latest-model?hl=hi)
-- [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=hi)
-- [सभी मॉडल देखें](https://ai.google.dev/gemini-api/docs/models?hl=hi)
+- [Gemini 4 Argon (ultima versione)](https://ai.google.dev/gemini-api/docs/latest-model?hl=it)
+- [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=it)
+- [Visualizza tutti i modelli](https://ai.google.dev/gemini-api/docs/models?hl=it)
 
-## आगे क्या करना है
+## Passaggi successivi
 
-- [मॉडल की खास जानकारी](https://ai.google.dev/gemini-api/docs/models?hl=hi) में जाकर, एपीआई की खास जानकारी देखें.
-- [Interactions API की गाइड](https://ai.google.dev/gemini-api/docs/interactions?hl=hi) में, एक से ज़्यादा एजेंट को मैनेज करने की सुविधा के बारे में जानें.
-- [Google AI Studio](https://aistudio.google.com/?hl=hi) में प्रॉम्प्ट की जांच करें और उन्हें बेहतर बनाएं.
+- Esamina le specifiche dell'API nella [panoramica dei modelli](https://ai.google.dev/gemini-api/docs/models?hl=it).
+- Esplora l'orchestrazione multi-agente nella [Guida all'API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=it).
+- Testa e perfeziona i prompt in [Google AI Studio](https://aistudio.google.com/?hl=it).
 
-सुझाव भेजें
+Invia feedback
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-आखिरी बार 2026-10-13 (UTC) को अपडेट किया गया.
+Ultimo aggiornamento 2026-10-13 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Vuoi dirci altro?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-10-13 (UTC) को अपडेट किया गया."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-10-13 UTC."],[],[]]

@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi
-fetched_at: 2026-10-19T05:37:34.126367+00:00
-title: "C\u0103n c\u1ee9 v\u00e0o Google Maps \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ru
+fetched_at: 2026-10-26T05:51:52.305754+00:00
+title: "\u041e\u0431\u043e\u0441\u043d\u043e\u0432\u0430\u043d\u0438\u0435 \u0441 Google \u041a\u0430\u0440\u0442\u0430\u043c\u0438 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
+Доступна новая модель Gemini 4 Argon. [Попробовать](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ru)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Главная](https://ai.google.dev/?hl=ru)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
+- [Документация](https://ai.google.dev/gemini-api/docs?hl=ru)
 
-Gửi ý kiến phản hồi
+Отправить отзыв
 
-# Căn cứ vào Google Maps
+# Обоснование с Google Картами
 
-Tính năng Neo bám vào Google Maps kết nối các khả năng tạo nội dung của Gemini với dữ liệu phong phú, thực tế và mới nhất của Google Maps. Tính năng này giúp nhà phát triển dễ dàng tích hợp chức năng nhận biết vị trí vào ứng dụng của họ. Khi một truy vấn của người dùng có bối cảnh liên quan đến dữ liệu trên Maps, mô hình Gemini sẽ tận dụng Google Maps để cung cấp câu trả lời mới và chính xác về mặt thực tế, đồng thời phù hợp với vị trí cụ thể hoặc khu vực khái quát mà người dùng chỉ định.
+Обоснование с Google Картами связывает генеративные возможности Gemini с подробными, фактическими и актуальными данными Google Карт. Эта функция позволяет разработчикам легко добавлять в свои приложения функции, связанные с местоположением. Когда запрос пользователя связан с данными Карт, модель Gemini использует Google Карты, чтобы предоставить точные и актуальные ответы, относящиеся к указанному местоположению или приблизительному местоположению пользователя.
 
-- **Câu trả lời chính xác và nhận biết vị trí:** Tận dụng dữ liệu phong phú và mới nhất của Google Maps cho các truy vấn cụ thể về mặt địa lý.
-- **Nâng cao khả năng cá nhân hoá:** Điều chỉnh đề xuất và thông tin dựa trên vị trí do người dùng cung cấp.
+- **Точные ответы с учетом местоположения.** Используйте обширные и актуальные данные Google Карт для запросов, связанных с географическим положением.
+- **Улучшенная персонализация.** Рекомендации и информация подбираются с учетом местоположений, указанных пользователями.
 
-## Bắt đầu
+## Начать
 
-Ví dụ này minh hoạ cách tích hợp tính năng Neo bám vào Google Maps vào ứng dụng của bạn để cung cấp câu trả lời chính xác và nhận biết vị trí cho các truy vấn của người dùng. Câu lệnh yêu cầu các đề xuất tại địa phương kèm theo vị trí không bắt buộc của người dùng, cho phép mô hình Gemini sử dụng dữ liệu của Google Maps.
+В этом примере показано, как интегрировать обоснование с Google Картами в приложение, чтобы предоставлять точные ответы на запросы пользователей с учетом местоположения. В запросе запрашиваются местные рекомендации с необязательным местоположением пользователя, что позволяет модели Gemini использовать данные Google Карт.
 
 ### Python
 
@@ -163,7 +163,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### Go
+### Проложить маршрут
 
 ```
 package main
@@ -251,38 +251,38 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Cách hoạt động của tính năng Neo bám vào Google Maps
+## Как работает обоснование с Google Картами
 
-Tính năng Neo bám vào Google Maps tích hợp Gemini API với hệ sinh thái Google Geo bằng cách sử dụng Maps API làm nguồn neo bám. Khi truy vấn của người dùng chứa bối cảnh địa lý, mô hình Gemini có thể gọi công cụ Neo bám vào Google Maps. Sau đó, mô hình này có thể tạo câu trả lời dựa trên dữ liệu của Google Maps liên quan đến vị trí được cung cấp.
+Обоснование с Google Картами интегрирует Gemini API с экосистемой Google Geo, используя Maps API в качестве источника обоснования. Если запрос пользователя содержит географический контекст, модель Gemini может вызвать инструмент обоснования с Google Картами. Затем модель может генерировать ответы на основе данных Google Карт, относящихся к указанному местоположению.
 
-Quá trình này thường bao gồm:
+Обычно процесс включает следующие этапы:
 
-1. **Truy vấn của người dùng:** Người dùng gửi một truy vấn đến ứng dụng của bạn, có thể bao gồm cả bối cảnh địa lý (ví dụ: "quán cà phê gần tôi", "bảo tàng ở San Francisco").
-2. **Gọi công cụ:** Mô hình Gemini nhận ra ý định địa lý và gọi công cụ Neo bám vào Google Maps. Bạn có thể cung cấp `latitude` và `longitude` của người dùng cho công cụ này (không bắt buộc). Công cụ này là một công cụ tìm kiếm bằng văn bản và hoạt động tương tự như tìm kiếm trên Maps, trong đó các truy vấn tại địa phương ("gần tôi") sẽ sử dụng toạ độ, còn các truy vấn cụ thể hoặc không phải tại địa phương sẽ ít bị ảnh hưởng bởi vị trí rõ ràng.
-3. **Truy xuất dữ liệu:** Dịch vụ Neo bám vào Google Maps truy vấn Google Maps để tìm thông tin liên quan (ví dụ: địa điểm, bài đánh giá, ảnh, địa chỉ, giờ mở cửa).
-4. **Tạo nội dung dựa trên dữ liệu:** Dữ liệu trên Maps được truy xuất sẽ được dùng để cung cấp thông tin cho câu trả lời của mô hình Gemini, đảm bảo tính chính xác và mức độ phù hợp về mặt thực tế.
-5. **Câu trả lời và chú thích:** Mô hình này trả về một câu trả lời bằng văn bản kèm theo chú thích nội tuyến liên kết đến các nguồn trên Google Maps, cho phép nhà phát triển hiển thị trích dẫn.
+1. **Запрос пользователя.** Пользователь отправляет запрос в ваше приложение, который может содержать географический контекст (например, "кофейни рядом", "музеи в Сан-Франциско").
+2. **Вызов инструмента.** Модель Gemini распознает географический контекст и вызывает инструмент обоснования с Google Картами. Этот инструмент можно использовать вместе с `latitude` и `longitude` пользователя. Это инструмент текстового поиска, который работает так же, как поиск на Картах: в локальных запросах ("рядом со мной") используются координаты, а на конкретные или нелокальные запросы явное указание местоположения вряд ли повлияет.
+3. **Получение данных.** Сервис обоснования с Google Картами запрашивает у Google Карт нужную информацию, например о местах, отзывах, фотографиях, адресах и часах работы.
+4. **Обоснованная генерация.** Извлеченные данные Карт используются для формирования ответа модели Gemini, что обеспечивает его фактическую точность и релевантность.
+5. **Ответ и аннотации.** Модель возвращает текстовый ответ со встроенными аннотациями, которые ссылаются на источники Google Карт. Это позволяет разработчикам показывать цитаты.
 
-## Lý do và thời điểm nên sử dụng tính năng Neo bám vào Google Maps
+## Зачем и когда использовать обоснование с Google Картами
 
-Tính năng Neo bám vào Google Maps là lựa chọn lý tưởng cho những ứng dụng yêu cầu thông tin chính xác, mới nhất và cụ thể về vị trí. Tính năng này giúp nâng cao trải nghiệm người dùng bằng cách cung cấp nội dung phù hợp và được cá nhân hoá dựa trên cơ sở dữ liệu phong phú của Google Maps về hơn 250 triệu địa điểm trên toàn thế giới.
+Основание на Google Картах идеально подходит для приложений, которым требуется точная, актуальная и привязанная к местоположению информация. Это повышает удобство использования, предоставляя релевантный и персонализированный контент, основанный на обширной базе данных Google Карт, содержащей более 250 миллионов мест по всему миру.
 
-Bạn nên sử dụng tính năng Neo bám vào Google Maps khi ứng dụng của bạn cần:
+Обоснование с Google Картами следует использовать, если вашему приложению нужно:
 
-- Cung cấp câu trả lời đầy đủ và chính xác cho các câu hỏi cụ thể về địa lý.
-- Xây dựng chuyên gia lên kế hoạch chuyến đi và Local Guides dựa trên cuộc trò chuyện.
-- Đề xuất các địa điểm yêu thích dựa trên vị trí và lựa chọn ưu tiên của người dùng, chẳng hạn như nhà hàng hoặc cửa hàng.
-- Tạo trải nghiệm nhận biết vị trí cho các dịch vụ xã hội, bán lẻ hoặc giao đồ ăn.
+- Дайте полные и точные ответы на вопросы, связанные с местоположением.
+- Создавайте разговорных организаторов путешествий и Местных экспертов.
+- Рекомендовать интересные места на основе местоположения и предпочтений пользователя, например рестораны или магазины.
+- Создавайте сервисы с учетом местоположения для социальных сетей, розничной торговли или доставки еды.
 
-Tính năng Neo bám vào Google Maps vượt trội trong các trường hợp sử dụng mà khoảng cách và dữ liệu thực tế hiện tại là rất quan trọng, chẳng hạn như tìm "quán cà phê ngon nhất gần tôi" hoặc xem chỉ đường.
+Обоснование с Google Картами отлично подходит для случаев, когда важны близость и актуальные фактические данные, например при поиске лучшей кофейни поблизости или построении маршрута.
 
-## Trường hợp sử dụng
+## Примеры использования
 
-Tính năng Neo bám vào Google Maps hỗ trợ nhiều trường hợp sử dụng nhận biết vị trí.
+Обоснование с Google Картами поддерживает различные варианты использования с учетом местоположения.
 
-### Xử lý các câu hỏi cụ thể về địa điểm
+### Как отвечать на вопросы о местах
 
-Đặt câu hỏi chi tiết về một địa điểm cụ thể để nhận câu trả lời dựa trên bài đánh giá của người dùng Google và các dữ liệu khác trên Maps.
+Задавайте подробные вопросы о конкретном месте и получайте ответы на основе отзывов пользователей Google и других данных Карт.
 
 ### Python
 
@@ -417,7 +417,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### Go
+### Проложить маршрут
 
 ```
 package main
@@ -486,9 +486,9 @@ func main() {
 }
 ```
 
-### Cung cấp tính năng cá nhân hoá dựa trên vị trí
+### Персонализация на основе местоположения
 
-Nhận các đề xuất phù hợp với lựa chọn ưu tiên của người dùng và một khu vực địa lý cụ thể.
+Получайте рекомендации, адаптированные к предпочтениям пользователя и конкретному географическому региону.
 
 ### Python
 
@@ -622,7 +622,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### Go
+### Проложить маршрут
 
 ```
 package main
@@ -691,9 +691,9 @@ func main() {
 }
 ```
 
-### Hỗ trợ lập kế hoạch hành trình
+### помощь в планировании маршрута;
 
-Tạo kế hoạch nhiều ngày kèm theo chỉ đường và thông tin về nhiều địa điểm, phù hợp với các ứng dụng du lịch.
+Создавайте планы на несколько дней с маршрутами и информацией о различных местах. Это отлично подходит для приложений, связанных с путешествиями.
 
 ### Python
 
@@ -772,7 +772,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### Проложить маршрут
 
 ```
 package main
@@ -837,103 +837,99 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Yêu cầu về việc sử dụng dịch vụ
+## Требования к использованию сервиса
 
-Phần này mô tả các yêu cầu về việc sử dụng dịch vụ đối với tính năng Neo bám vào Google Maps.
+В этом разделе описаны требования к использованию сервиса обоснования с Google Картами.
 
-### Thông báo cho người dùng về việc sử dụng các nguồn trên Google Maps
+### Уведомляйте пользователей о том, что вы используете источники Google Карт
 
-Với mỗi kết quả dựa trên dữ liệu của Google Maps, bạn sẽ nhận được chú thích nguồn trên các khối nội dung của bước `model_output` hỗ trợ từng câu trả lời. Siêu dữ liệu sau đây sẽ được trả về:
+В каждом результате, обоснованном Google Картами, вы получите аннотации источников в блоках контента шага `model_output`, которые подтверждают каждый ответ. Возвращаются следующие метаданные:
 
-- URL nguồn
-- tên
+- URL источника
+- name
 
-Khi trình bày kết quả từ tính năng Neo bám vào Google Maps, bạn phải chỉ định các nguồn liên kết trên Google Maps và thông báo cho người dùng của bạn về những điều sau:
+При показе результатов обоснования с Google Картами вы должны указать связанные источники Google Карт и сообщить пользователям следующее:
 
-- Các nguồn trên Google Maps phải xuất hiện ngay sau nội dung được tạo mà các nguồn đó hỗ trợ. Nội dung được tạo này còn được gọi là Kết quả dựa trên dữ liệu của Google Maps.
-- Người dùng phải xem được các nguồn trên Google Maps trong một lượt tương tác.
+- Источники Google Карт должны быть указаны сразу после сгенерированного контента, который они подтверждают. Этот сгенерированный контент также называется результатом, обоснованным Google Картами.
+- Источники Google Карт должны быть видны в рамках одного взаимодействия с пользователем.
 
-### Hiển thị các nguồn trên Google Maps kèm theo đường liên kết đến Google Maps
+### Показывать источники Google Карт со ссылками на Карты
 
-Đối với mỗi chú thích nguồn, bạn phải tạo bản xem trước đường liên kết theo các yêu cầu sau:
+Для каждой аннотации источника необходимо создать предварительный просмотр ссылки, отвечающий следующим требованиям:
 
-- Ghi công từng nguồn cho Google Maps theo nguyên tắc ghi công văn bản của Google Maps
-  .
-- Hiển thị tên nguồn được cung cấp trong câu trả lời.
-- Liên kết đến nguồn bằng cách sử dụng `url` từ chú thích.
+- Укажите Google Карты в качестве источника данных в соответствии с [правилами указания авторства Google Карт](#maps-attribution-guidelines).
+- Показывать название источника, указанное в ответе.
+- Укажите ссылку на источник, используя `url` из аннотации.
 
-### Nguyên tắc ghi công văn bản của Google Maps
+### Рекомендации по текстовой атрибуции Google Карт
 
-Khi ghi công các nguồn cho Google Maps bằng văn bản, hãy tuân theo các nguyên tắc sau:
+При указании источников Google Карт в тексте следуйте этим рекомендациям:
 
-- Không sửa đổi văn bản Google Maps theo bất kỳ cách nào:
-  - Không thay đổi cách viết hoa của Google Maps.
-  - Không chuyển Google Maps sang nhiều dòng.
-  - Không bản địa hoá Google Maps sang ngôn ngữ khác.
-  - Ngăn trình duyệt dịch Google Maps bằng cách sử dụng thuộc tính HTML translate="no".
+- Не изменяйте текст "Google Карты":
+  - Не меняйте регистр в названии "Google Карты".
+  - Не переносите название Google Maps на несколько строк.
+  - Не переводите Google Карты на другой язык.
+  - Запретите браузерам переводить Google Карты с помощью HTML-атрибута translate="no".
 
-Để biết thêm thông tin về một số nhà cung cấp dữ liệu của Google Maps và điều khoản cấp phép của họ, hãy xem [thông báo pháp lý của Google Maps và Google Earth](https://www.google.com/help/legalnotices_maps/?hl=vi).
+Дополнительную информацию о некоторых поставщиках данных для Google Карт и условиях их лицензий можно найти в [юридических уведомлениях для Google Карт и Google Планеты Земля](https://www.google.com/help/legalnotices_maps/?hl=ru).
 
-## Các phương pháp hay nhất
+## Рекомендации
 
-- **Cung cấp vị trí của người dùng:** Để có câu trả lời phù hợp và được cá nhân hoá nhất, hãy luôn thêm `latitude` và `longitude` vào cấu hình công cụ `google_maps` khi bạn biết vị trí của người dùng.
-- **Thông báo cho người dùng cuối:** Thông báo rõ ràng cho người dùng cuối rằng dữ liệu của Google Maps đang được sử dụng để trả lời truy vấn của họ, đặc biệt là khi công cụ này được bật.
-- **Tắt khi không cần:** Tính năng Neo bám vào Google Maps sẽ tắt theo mặc định. Chỉ bật tính năng này (`"tools": [{"type": "google_maps"}]`) khi một truy vấn có bối cảnh địa lý rõ ràng để tối ưu hoá hiệu suất và chi phí.
+- **Укажите местоположение пользователя.** Чтобы ответы были максимально релевантными и персонализированными, всегда добавляйте `latitude` и `longitude` в конфигурацию инструмента `google_maps`, если известно местоположение пользователя.
+- **Информируйте конечных пользователей.** Четко сообщайте конечным пользователям, что для ответов на их запросы используются данные Google Карт, особенно когда инструмент включен.
+- **Отключайте, когда не нужно.** Обоснование с Google Картами по умолчанию отключено. Включайте его (`"tools": [{"type": "google_maps"}]`), только когда у запроса есть явный географический контекст. Это позволит оптимизировать производительность и расходы.
 
-## Các điểm hạn chế
+## Ограничения
 
-- Tính năng Neo bám vào Google Maps hiện chỉ hỗ trợ câu lệnh và câu trả lời bằng tiếng Anh.
-- Công cụ này có thể không được cung cấp ở một số khu vực.
-- Kết quả có thể khác nhau dựa trên độ chính xác của vị trí và dữ liệu có sẵn trên Maps.
-- **Phạm vi địa lý:** Tính năng Neo bám vào Google Maps được cung cấp trên toàn cầu.
-- **Trạng thái mặc định:** Công cụ Neo bám vào Google Maps sẽ tắt theo mặc định.
-  Bạn phải bật công cụ này một cách rõ ràng trong các yêu cầu API.
+- Обоснование с Google Картами сейчас поддерживает запросы и ответы только на английском языке.
+- Инструмент может быть доступен не во всех регионах.
+- Результаты могут различаться в зависимости от точности геолокации и доступных данных Карт.
+- **Географический охват.** Обоснование с Google Картами доступно во всем мире.
+- **Состояние по умолчанию.** Инструмент "Обоснование с Google Картами" по умолчанию отключен.
+  Его нужно явно включить в запросах к API.
 
-## Giá và hạn mức
+## Цены и ограничения частоты запросов
 
-Giá của tính năng Neo bám vào Google Maps sẽ khác nhau tuỳ thuộc vào thế hệ mô hình:
+Цены на обоснование с Google Картами зависят от поколения модели:
 
-- **Mô hình Gemini 3 trở lên:** Dự án của bạn sẽ bị tính phí cho mỗi cụm từ tìm kiếm mà mô hình quyết định thực thi, với 5.000 yêu cầu miễn phí mỗi tháng được chia sẻ trên tất cả các mô hình Gemini 3 trở lên, sau đó là **14 USD cho mỗi 1.000 cụm từ tìm kiếm**. Một câu lệnh tìm kiếm (yêu cầu API của bạn đối với mô hình) có thể khiến mô hình thực thi nhiều cụm từ tìm kiếm để tìm thông tin cần thiết. Mỗi truy vấn này được tính là một lần sử dụng công cụ có tính phí.
-- **Mô hình Gemini 2.5 trở xuống:** Dự án của bạn sẽ bị tính phí cho mỗi câu lệnh tìm kiếm (25 USD cho mỗi 1.000 câu lệnh dựa trên dữ liệu). Yêu cầu chỉ bị tính phí nếu câu lệnh trả về thành công ít nhất một kết quả dựa trên dữ liệu của Google Maps, bất kể mô hình đã thực hiện bao nhiêu truy vấn tìm kiếm riêng lẻ ở nội bộ để nhận được kết quả đó.
+- **Gemini 3 и более новые модели.** За каждый поисковый запрос, который модель решит выполнить, с вашего проекта будет взиматься плата. При этом 5000 запросов в месяц предоставляются бесплатно для всех моделей Gemini 3 и более новых версий. После этого стоимость составит **14 долларов США за 1000 поисковых запросов**. Один поисковый запрос (ваш запрос к API к модели) может привести к тому, что модель выполнит несколько поисковых запросов, чтобы найти необходимую информацию. Каждый из этих запросов считается платным использованием инструмента.
+- **Gemini 2.5 и более ранние модели.** Оплата взимается за каждый поисковый запрос (25 долларов США за 1000 запросов с обоснованием). Плата за запрос взимается, только если в ответ на него возвращается хотя бы один результат, заземленный на Google Картах, независимо от того, сколько поисковых запросов выполнила модель, чтобы получить этот результат.
 
-Hạn mức cho tính năng Neo bám vào Google Maps thường phù hợp với hạn mức của mô hình Gemini cơ bản. Để biết thông tin chi tiết về giá, hãy xem trang [Giá của Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
+Квота на обоснование с Google Картами обычно соответствует ограничениям частоты запросов базовой модели Gemini. Подробную информацию о ценах можно найти на [странице цен Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=ru).
 
-## Mô hình được hỗ trợ
+## Поддерживаемые модели
 
-Các mô hình sau đây hỗ trợ tính năng Neo bám vào Google Maps:
+Обоснование с Google Картами поддерживается на следующих моделях:
 
-| Mô hình | Neo bám vào Google Maps |
+| Модель | Обоснование с Google Картами |
 | --- | --- |
-| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=vi) | ✔️ |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=vi) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=vi) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=vi) | ✔️ |
-| [Gemini 3.1 Pro (Bản dùng thử)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi) | ✔️ |
-| [Gemini 3 Flash (Bản dùng thử)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=ru) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=ru) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ru) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ru) | ✔️ |
+| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ru) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ru) | ✔️ |
+| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ru) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ru) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ru) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ru) | ✔️ |
 
-## Các tổ hợp công cụ được hỗ trợ
+## Поддерживаемые сочетания инструментов
 
-Bạn có thể sử dụng tính năng Neo bám vào Google Maps với các công cụ tích hợp khác như
-[Neo bám vào Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) (được hỗ trợ trên
-mô hình Gemini 3.5 Flash-Lite trở lên) để hỗ trợ các trường hợp sử dụng phức tạp hơn.
-Các mô hình Gemini 3 cũng hỗ trợ việc kết hợp các công cụ tích hợp này với các công cụ tuỳ chỉnh (gọi hàm). Tìm hiểu thêm trên trang về các
-[tổ hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
+Вы можете использовать Grounding with Google Maps вместе с другими встроенными инструментами, например [Grounding with Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=ru) (поддерживается в Gemini 3.5 Flash-Lite и более поздних моделях), чтобы решать более сложные задачи.
+Модели Gemini 3 также поддерживают сочетание встроенных инструментов с пользовательскими (вызов функций). Подробнее [о сочетаниях инструментов](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ru)…
 
-## Bước tiếp theo
+## Дальнейшие действия
 
-- Tìm hiểu về các [công cụ khác hiện có](https://ai.google.dev/gemini-api/docs/tools?hl=vi).
-- Để tìm hiểu thêm về các phương pháp hay nhất về AI có trách nhiệm và bộ lọc an toàn của Gemini API, hãy xem [hướng dẫn về chế độ cài đặt An toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi).
+- Подробнее [о других доступных инструментах](https://ai.google.dev/gemini-api/docs/tools?hl=ru)…
+- Чтобы узнать больше о принципах ответственного использования ИИ и фильтрах безопасности Gemini API, ознакомьтесь с [руководством по настройкам безопасности](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ru).
 
-Gửi ý kiến phản hồi
+Отправить отзыв
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
 
-Cập nhật lần gần đây nhất: 2026-10-13 UTC.
+Последнее обновление: 2026-10-13 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Хотите рассказать подробнее?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-13 UTC."],[],[]]
+[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-13 UTC."],[],[]]

@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=zh-CN
-fetched_at: 2026-10-19T05:58:15.514485+00:00
-title: "\u667a\u80fd\u4f53\u89c6\u89c9\u529f\u80fd \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=he
+fetched_at: 2026-10-26T05:58:48.814271+00:00
+title: "\u05d9\u05db\u05d5\u05dc\u05d5\u05ea \u05e8\u05d0\u05d9\u05d9\u05d4 \u05d0\u05d2'\u05e0\u05d8\u05d9\u05d5\u05ea \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
+‫Gemini 4 Argon זמין עכשיו. [רוצים לנסות?](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=he)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-cn)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=he)
 
-发送反馈
+שליחת משוב
 
-# 智能体视觉功能
+# יכולות ראייה אג'נטיות
 
-Gemini Robotics ER 模型可以编写和执行 Python 代码来处理图片，并在回答问题之前应用逻辑。本页介绍了代码执行示例：使用缩放和裁剪功能进行对象检测、乐器读数、液体测量、电路板读数和图片注释。
+מודלים של Gemini Robotics ER יכולים לכתוב ולהריץ קוד Python כדי לערוך תמונות ולהחיל לוגיקה לפני שהם עונים. בדף הזה יש דוגמאות להרצת קוד: זיהוי אובייקטים עם זום וחיתוך, קריאת מכשירים, מדידת נוזלים, קריאת לוחות מעגלים והערות לתמונות.
 
-如需根据自己的使用场景调整这些示例，请将提示文本和上传的图片文件替换为您自己的内容。您还可以调整提示中请求的 JSON 架构，以匹配应用所需的输出结构，或者添加 `system_instruction` 来强制执行输出格式和精度。
+כדי להתאים את הדוגמאות האלה לתרחיש השימוש שלכם, צריך להחליף את טקסט ההנחיה ואת קובץ התמונה שהועלה בטקסט ובתמונה שלכם. אפשר גם לשנות את סכימת ה-JSON המבוקשת בהנחיה כך שתתאים למבנה הפלט שהאפליקציה צריכה, או להוסיף `system_instruction` כדי לאכוף את פורמט הפלט ואת הדיוק שלו.
 
-如需查看完整的可运行代码，请参阅[机器人技术食谱](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)。
+קוד מלא שניתן להרצה זמין ב-[Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## 思考等级
+## רמת ההעמקה
 
-您可以控制思考级别，以牺牲延迟时间来换取准确性。对象检测等空间任务在低思维水平下表现良好。计数或重量估计等复杂任务需要更高的思维水平。
+אתם יכולים לשלוט ברמת החשיבה כדי להחליף בין זמן טעינה לבין דיוק. משימות מרחביות כמו זיהוי אובייקטים מתבצעות היטב ברמת חשיבה נמוכה. משימות מורכבות כמו ספירה או הערכת משקל מפיקות תועלת מרמת חשיבה גבוהה יותר.
 
-以下示例将复杂计数任务的思考水平设置为 `high`：
+בדוגמה הבאה, רמת החשיבה נקבעת כ-`high` למשימת ספירה מורכבת:
 
 ### Python
 
@@ -59,11 +59,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-如需了解详情，请参阅[思考](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=zh-cn)。
+פרטים נוספים מופיעים במאמר בנושא [חשיבה](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=he).
 
-## 对象检测（缩放和裁剪）
+## זיהוי אובייקטים (שינוי גודל וחיתוך)
 
-以下示例演示了如何使用代码执行功能在检测到对象并返回边界框时缩放和裁剪图片，以便更清晰地查看。
+בדוגמה הבאה אפשר לראות איך משתמשים בהרצת קוד כדי להגדיל ולחתוך תמונה לתצוגה ברורה יותר כשמזהים אובייקטים ומחזירים תיבות תוחמות.
 
 ### Python
 
@@ -101,7 +101,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-模型输出将类似于以下 JSON 响应：
+פלט המודל ייראה בערך כך:
 
 ```
 [
@@ -113,13 +113,13 @@ print(response.text)
 ]
 ```
 
-下图显示了模型返回的方框。
+בתמונה הבאה מוצגות התיבות שהוחזרו מהמודל.
 
-![显示检测到的对象的边界框的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=zh-cn)
+![דוגמה להצגת תיבות תוחמות לאובייקטים שנמצאו](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=he)
 
-## 读取模拟仪表并应用逻辑
+## לקרוא מד אנלוגי ולהפעיל לוגיקה
 
-以下示例演示了如何使用该模型读取模拟表盘并执行时间计算。它使用系统指令来强制生成 JSON 输出。
+בדוגמה הבאה אפשר לראות איך משתמשים במודל כדי לקרוא מד אנלוגי ולבצע חישובי זמן. היא משתמשת בהוראת מערכת כדי לאכוף פלט JSON.
 
 ### Python
 
@@ -155,9 +155,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-## 测量容器中的液体
+## מדידת נוזל במיכל
 
-以下示例演示了如何使用代码执行来测量容器中的液体量。
+בדוגמה הבאה מוצג שימוש בהרצת קוד כדי למדוד את רמת הנוזל במיכל.
 
 ### Python
 
@@ -192,9 +192,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-## 读取电路板上的标记
+## קריאת סימונים בלוח מעגלים
 
-以下示例演示了如何使用代码执行功能读取电路板上的标记。
+בדוגמה הבאה מוצג איך להשתמש בהרצת קוד כדי לקרוא את הסימונים בלוח מעגלים.
 
 ### Python
 
@@ -229,11 +229,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-![显示电路板上标记的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=zh-cn)
+![דוגמה שמציגה סימונים בלוח מעגלים](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=he)
 
-## 图片注释
+## הערה לתמונה
 
-以下示例演示了如何使用代码执行功能来注释图片（例如，绘制箭头以指示处置说明），并返回修改后的图片。
+בדוגמה הבאה אפשר לראות איך משתמשים בהרצת קוד כדי להוסיף הערות לתמונה (למשל, ציור של חצים להוראות סילוק) ולהחזיר את התמונה ששונתה.
 
 ### Python
 
@@ -270,11 +270,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-以下是输入图片的示例。
+זוהי דוגמה לקלט של תמונה.
 
-![显示时钟的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=zh-cn)
+![דוגמה שמציגה שעון לקריאה](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=he)
 
-模型输出将类似于以下内容：
+הפלט של המודל ייראה כך:
 
 ```
   The annotated image shows the suggested disposal locations for the items on the table:
@@ -283,18 +283,18 @@ print(response.text)
   - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## 后续步骤
+## המאמרים הבאים
 
-- [任务编排](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=zh-cn) - 使用自定义机器人 API 的长时程任务。
-- [支持流式传输的机器人](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-cn) - 实时双向流式传输（仅限 Gemini Robotics ER 2）。
-- [视频理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-cn) - 时刻查找和进度分类（仅限 Gemini Robotics ER 2）。
+- [תיזמור משימות](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=he) – משימות ארוכות טווח עם ממשקי API מותאמים אישית של רובוטים.
+- [רובוטיקה עם סטרימינג](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=he) – סטרימינג דו-כיווני בזמן אמת (Gemini Robotics ER 2 בלבד).
+- [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=he) – איתור רגעים וסיווג התקדמות (Gemini Robotics ER 2 בלבד).
 
-发送反馈
+שליחת משוב
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-最后更新时间 (UTC)：2026-09-08。
+עדכון אחרון: 2026-09-08 (שעון UTC).
 
-需要向我们提供更多信息？
+רוצה לתת לנו משוב?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-08。"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-08 (שעון UTC)."],[],[]]

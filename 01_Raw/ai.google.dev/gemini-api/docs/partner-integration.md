@@ -1,146 +1,146 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=de
-fetched_at: 2026-10-19T05:33:31.817648+00:00
-title: "Partner- und Bibliotheksintegrationen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=hi
+fetched_at: 2026-10-26T05:55:14.755019+00:00
+title: "\u092a\u093e\u0930\u094d\u091f\u0928\u0930 \u0914\u0930 \u0932\u093e\u0907\u092c\u094d\u0930\u0947\u0930\u0940 \u0907\u0902\u091f\u093f\u0917\u094d\u0930\u0947\u0936\u0928 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=de).
+Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Feedback geben
+सुझाव भेजें
 
-# Partner- und Bibliotheksintegrationen
+# पार्टनर और लाइब्रेरी इंटिग्रेशन
 
-In diesem Leitfaden werden Architekturstrategien für die Entwicklung von Bibliotheken, Plattformen und Gateways auf Grundlage der Gemini API beschrieben. Außerdem werden die technischen Kompromisse zwischen der Verwendung der offiziellen GenAI SDKs, der Direct API (REST/gRPC) und der OpenAI-Kompatibilitätsebene erläutert.
+इस गाइड में, Gemini API की मदद से लाइब्रेरी, प्लैटफ़ॉर्म, और गेटवे बनाने के लिए, आर्किटेक्चरल रणनीतियों के बारे में बताया गया है. इसमें, आधिकारिक GenAI SDK टूल, Direct API (REST/gRPC), और OpenAI कंपैटबिलिटी लेयर का इस्तेमाल करने के बीच, तकनीकी पहलुओं के बारे में बताया गया है.
 
-Dieser Leitfaden richtet sich an Entwickler, die Tools für andere Entwickler erstellen, z. B. Open-Source-Frameworks, Enterprise-Gateways oder SaaS-Aggregatoren, und die die Abhängigkeitshygiene, die Bundle-Größe oder die Feature-Parität optimieren müssen.
+अगर अन्य डेवलपर के लिए टूल बनाए जा रहे हैं, जैसे कि ओपन-सोर्स फ़्रेमवर्क, एंटरप्राइज़ गेटवे या SaaS एग्रीगेटर, तो इस गाइड का इस्तेमाल करें. साथ ही, अगर आपको डिपेंडेंसी हाइजीन, बंडल साइज़ या फ़ीचर पैरिटी के लिए ऑप्टिमाइज़ करना है, तो भी इस गाइड का इस्तेमाल करें.
 
-## Was ist eine Partnerintegration?
+## पार्टनर इंटिग्रेशन क्या है?
 
-Ein Partner ist jeder, der eine Integration zwischen der Gemini API und Endnutzerentwicklern erstellt. Wir unterteilen Partner in vier Archetypen. Wenn Sie wissen, zu welchem Archetyp Sie am besten passen, können Sie den richtigen Integrationspfad auswählen.
+पार्टनर वह व्यक्ति या कंपनी होती है जो Gemini API और एंड-यूज़र डेवलपर के बीच इंटिग्रेशन बनाती है. हम पार्टनर को चार आर्किटाइप में बांटते हैं. यह पता लगाने से कि आपका आर्किटाइप कौनसा है, आपको इंटिग्रेशन का सही पाथ चुनने में मदद मिलेगी.
 
-#### Ökosystem-Framework
+#### इकोसिस्टम फ़्रेमवर्क
 
-- **Wer Sie sind**:Maintainer eines Open-Source-Frameworks (z.B. LangChain, LlamaIndex, Spring AI) oder sprachspezifischer Clients.
-- **Ihr Ziel**:Breite Kompatibilität. Ihre Bibliothek soll in jeder Umgebung funktionieren, die der Nutzer auswählt, ohne Konflikte zu verursachen.
+- **आप कौन हैं:** ओपन-सोर्स फ़्रेमवर्क (जैसे, LangChain, LlamaIndex, Spring AI) या भाषा के हिसाब से क्लाइंट का रखरखाव करने वाले.
+- **आपका लक्ष्य:** ज़्यादा से ज़्यादा कंपैटबिलिटी. आप चाहते हैं कि आपकी लाइब्रेरी, उपयोगकर्ता के चुने हुए किसी भी एनवायरमेंट में काम करे और उसमें कोई समस्या न आए.
 
-#### Laufzeit- und Edge-Plattform
+#### रनटाइम और एज प्लैटफ़ॉर्म
 
-- **Wer Sie sind**:SaaS-Plattformen, KI-Gateways oder Cloud-Infrastrukturanbieter (z.B. Vercel, Cloudflare, Zapier), bei denen die Codeausführung in eingeschränkten Umgebungen erfolgt.
-- **Ihr Ziel**:Leistung. Sie benötigen eine geringe Latenz, eine minimale Bundle-Größe und schnelle Kaltstarts.
+- **आप कौन हैं:** SaaS प्लैटफ़ॉर्म, एआई गेटवे या क्लाउड इन्फ़्रास्ट्रक्चर की सेवा देने वाली कंपनियां (जैसे, Vercel, Cloudflare, Zapier). इनमें कोड का एक्ज़ीक्यूशन, सीमित एनवायरमेंट में होता है.
+- **आपका लक्ष्य:** परफ़ॉर्मेंस. आपको कम से कम लेटेंसी, कम से कम बंडल साइज़, और तेज़ी से कोल्ड स्टार्ट की ज़रूरत है.
 
-#### Dienstleister
+#### एग्रीगेटर
 
-- **Wer Sie sind**:Plattformen, Proxys oder interne „Model Gardens“, die den Zugriff auf viele verschiedene LLM-Anbieter (z.B. OpenAI, Anthropic, Google) über eine einzige Schnittstelle normalisieren.
-- **Ihr Ziel**:Portabilität und Einheitlichkeit.
+- **आप कौन हैं:** प्लैटफ़ॉर्म, प्रॉक्सी या इंटरनल "मॉडल गार्डन" जो कई अलग-अलग एलएलएम की सेवा देने वाली कंपनियों (जैसे, OpenAI, Anthropic, Google) के ऐक्सेस को एक ही इंटरफ़ेस में सामान्य बनाते हैं.
+- **आपका लक्ष्य:** पोर्टेबिलिटी और एकरूपता.
 
-#### Enterprise-Gateway
+#### एंटरप्राइज़ गेटवे
 
-- **Wer Sie sind**:Interne Platform Engineering-Teams in großen Unternehmen, die „Golden Paths“ für Hunderte von internen Entwicklern erstellen.
-- **Ihr Ziel**:Standardisierung, Governance und einheitliche Authentifizierung.
+- **आप कौन हैं:** बड़ी कंपनियों में इंटरनल प्लैटफ़ॉर्म इंजीनियरिंग टीमें, जो सैकड़ों इंटरनल डेवलपर के लिए "गोल्डन पाथ" बनाती हैं.
+- **आपका लक्ष्य:** स्टैंडर्डाइज़ेशन, गवर्नेंस, और यूनिफ़ाइड ऑथेंटिकेशन.
 
-## Vergleich auf einen Blick
+## एक नज़र में तुलना
 
-**Globale Best Practice:** Alle Partner müssen den [`x-goog-api-client`
-Header](#client-id) senden, unabhängig vom gewählten Pfad.
+**ग्लोबल सबसे सही तरीका:** सभी पार्टनर को चुना गया पाथ चाहे कोई भी हो, [`x-goog-api-client`
+हेडर](#client-id) भेजना होगा.
 
-| Wenn Sie... | Empfohlener Pfad | Vorteil | Wichtigster Kompromiss | Best Practice |
+| अगर आप... | सुझाया गया पाथ | मुख्य फ़ायदा | मुख्य नुकसान | सबसे सही तरीका |
 | --- | --- | --- | --- | --- |
-| **Enterprise-Gateway, Ökosystem-Framework** | **[Google GenAI SDK](#genai-sdk)** | **Parität und Geschwindigkeit der Gemini Enterprise Agent Platform.** Integrierte Verarbeitung von Typen, Authentifizierung und komplexen Funktionen (z.B. Datei-Uploads). Nahtlose Migration zu Google Cloud. | **Gewicht der Abhängigkeiten.** Transitive Abhängigkeiten können komplex sein und außerhalb Ihrer Kontrolle liegen. Beschränkt auf unterstützte Sprachen (Python/Node/Go/Java). | **Versionen sperren.** Fixieren Sie SDK-Versionen in Ihren internen Basis-Images, um die Stabilität teamübergreifend zu gewährleisten. |
-| **Ökosystem-Framework, Edge-Plattformen und Aggregatoren** | **[Direct API](#rest)**  *(REST / gRPC)* | **Keine Abhängigkeiten.** Sie steuern den HTTP-Client und die genaue Bundle-Größe. Vollständiger Zugriff auf alle API- und Modellfunktionen. | **Hoher Entwicklungsaufwand.** JSON-Strukturen können tief verschachtelt sein und erfordern eine strenge manuelle Validierung und Typüberprüfung. | **OpenAPI-Spezifikationen verwenden.** Automatisieren Sie die Typerstellung mit unseren offiziellen Spezifikationen, anstatt sie manuell zu schreiben. |
-| **Aggregator, der OpenAI SDKs verwendet, die nur textbasierte Workflows erfordern**  *(Optimierung für Legacy-Portabilität)* | **[OpenAI-Kompatibilität](#openai)** | **Sofortige Portabilität.** Vorhandenen OpenAI-kompatiblen Code oder Bibliotheken wiederverwenden. | **Funktionsbeschränkungen.** Modellspezifische Funktionen (native Videoanzeige, Caching) sind möglicherweise nicht verfügbar. | **Migrationsplan.** Verwenden Sie dies für die schnelle Validierung, planen Sie aber ein Upgrade auf die Direct API für die vollständige API-Funktionalität. |
+| **एंटरप्राइज़ गेटवे, इकोसिस्टम फ़्रेमवर्क** | **[Google GenAI SDK](#genai-sdk)** | **Gemini Enterprise एजेंट प्लैटफ़ॉर्म पैरिटी और स्पीड.** टाइप, ऑथेंटिकेशन, और मुश्किल सुविधाओं (जैसे, फ़ाइल अपलोड) के लिए, बिल्ट-इन हैंडलिंग. Google Cloud पर आसानी से माइग्रेट करना. | **डिपेंडेंसी वेट.** ट्रांज़िटिव डिपेंडेंसी मुश्किल हो सकती हैं और आपके कंट्रोल से बाहर हो सकती हैं. यह सुविधा, सिर्फ़ इन भाषाओं (Python/Node/Go/Java) में उपलब्ध है. | **वर्शन लॉक करें.** टीमों के बीच स्थिरता बनाए रखने के लिए, अपनी इंटरनल बेस इमेज में एसडीके वर्शन पिन करें. |
+| **इकोसिस्टम फ़्रेमवर्क, एज प्लैटफ़ॉर्म, और एग्रीगेटर** | **[Direct API](#rest)**  *(REST / gRPC)* | **कोई डिपेंडेंसी नहीं.** आपके पास एचटीटीपी क्लाइंट और बंडल साइज़ को कंट्रोल करने का विकल्प होता है. सभी एपीआई और मॉडल की सुविधाओं का पूरा ऐक्सेस. | **डेवलपर का ज़्यादा ओवरहेड.** JSON स्ट्रक्चर, डीपली नेस्ट किए जा सकते हैं. साथ ही, इनके लिए मैन्युअल तरीके से पुष्टि करना और टाइप-चेकिंग करना ज़रूरी है. | **OpenAPI स्पेसिफ़िकेशन का इस्तेमाल करें.** टाइप जनरेट करने की प्रोसेस को ऑटोमेट करने के लिए, हमारे आधिकारिक स्पेसिफ़िकेशन का इस्तेमाल करें. इन्हें मैन्युअल तरीके से न लिखें. |
+| **OpenAI SDK टूल का इस्तेमाल करने वाला एग्रीगेटर, जिसे सिर्फ़ टेक्स्ट-आधारित वर्कफ़्लो की ज़रूरत होती है**  *(लेगसी पोर्टेबिलिटी के लिए ऑप्टिमाइज़ करना)* | **[OpenAI कंपैटबिलिटी](#openai)** | **तुरंत पोर्टेबिलिटी.** OpenAI के साथ काम करने वाले मौजूदा कोड या लाइब्रेरी का फिर से इस्तेमाल करें. | **सुविधाओं की सीमा.** मॉडल के हिसाब से सुविधाएं (नेटिव वीडियो, कैशिंग) शायद उपलब्ध न हों. | **माइग्रेशन प्लान.** इसका इस्तेमाल, तुरंत पुष्टि करने के लिए करें. हालांकि, एपीआई की पूरी सुविधा पाने के लिए, Direct API पर अपग्रेड करने की योजना बनाएं. |
 
-## Google GenAI SDK-Integration
+## Google GenAI SDK इंटिग्रेशन
 
-Für Frameworks ist die Implementierung des [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=de)
-oft der einfachste Weg, da in den unterstützten
-Sprachen die wenigsten Codezeilen erforderlich sind.
+फ़्रेमवर्क के लिए, [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=hi)
+को लागू करना अक्सर सबसे आसान तरीका होता है. ऐसा इसलिए, क्योंकि इसमें काम करने वाली
+भाषाओं में कोड की लाइनें कम होती हैं.
 
-Für interne Plattformteams ist das wichtigste Ergebnis oft ein „Golden Path“, mit dem Produktentwickler schnell arbeiten und gleichzeitig die Sicherheitsrichtlinien einhalten können.
+इंटरनल प्लैटफ़ॉर्म टीमों के लिए, आपका मुख्य काम अक्सर "गोल्डन पाथ" होता है. इससे प्रॉडक्ट इंजीनियर, सुरक्षा नीतियों का पालन करते हुए तेज़ी से काम कर पाते हैं.
 
-**Vorteile** :
+**फ़ायदे:**
 
-- **Einheitliche Schnittstelle für die Migration zur Gemini Enterprise Agent Platform**:Interne Entwickler erstellen oft Prototypen mit API-Schlüsseln (Gemini API) und stellen sie zur Einhaltung der Produktionsanforderungen auf der Gemini Enterprise Agent Platform (IAM) bereit. Das SDK abstrahiert diese Authentifizierungsunterschiede.
-  Ähnlich wie bei Frameworks können Sie einen Codepfad implementieren und zwei Nutzergruppen unterstützen.
-- **Clientseitige Hilfsfunktionen**:Das SDK enthält idiomatische Dienstprogramme, die den Boilerplate-Code für komplexe Aufgaben reduzieren.
-  - *Beispiele*:Direkte Unterstützung von `PIL`-Bildobjekten in Prompts, automatische Funktionsaufrufe und umfassende Typen.
-- **Zugriff auf Funktionen ab dem ersten Tag**:Neue API-Funktionen sind zum Zeitpunkt der Einführung über die SDKs verfügbar.
-- **Verbesserte Unterstützung für die Codegenerierung**:Bei der lokalen SDK-Installation werden Typdefinitionen und Docstrings für Coding-Assistenten (z.B. Cursor, Copilot) verfügbar gemacht.
-  Dieser Kontext verbessert die Genauigkeit der Codegenerierung im Vergleich zur Generierung von Roh-REST-Anfragen.
+- **Gemini Enterprise एजेंट प्लैटफ़ॉर्म माइग्रेशन के लिए यूनिफ़ाइड इंटरफ़ेस:** इंटरनल डेवलपर अक्सर एपीआई पासकोड (Gemini API) का इस्तेमाल करके प्रोटोटाइप बनाते हैं और प्रोडक्शन के लिए, Gemini Enterprise एजेंट प्लैटफ़ॉर्म (IAM) पर डिप्लॉय करते हैं. एसडीके, ऑथेंटिकेशन के इन अंतरों को ऐब्स्ट्रैक्ट करता है.
+  इसी तरह, फ़्रेमवर्क के लिए, एक कोडपाथ लागू किया जा सकता है और दो सेट के उपयोगकर्ताओं को सहायता दी जा सकती है.
+- **क्लाइंट-साइड हेल्पर:** एसडीके में, इडियोमैटिक यूटिलिटी शामिल होती हैं. इससे मुश्किल कामों के लिए बॉयलरप्लेट कम हो जाता है.
+  - *उदाहरण:* प्रॉम्प्ट में सीधे `PIL` इमेज ऑब्जेक्ट इस्तेमाल करना, फ़ंक्शन को अपने-आप कॉल करना, और अलग-अलग टाइप.
+- **लॉन्च के दिन से ही सुविधा का ऐक्सेस:** एपीआई की नई सुविधाएं, एसडीके के ज़रिए लॉन्च के समय से ही उपलब्ध होती हैं.
+- **कोड जनरेट करने की सुविधा में सुधार:** एसडीके को स्थानीय तौर पर इंस्टॉल करने पर, कोडिंग असिस्टेंट (जैसे, Cursor, Copilot) को टाइप की परिभाषाएं और डॉकस्ट्रिंग दिखती हैं.
+  इस कॉन्टेक्स्ट से, REST के रॉ अनुरोध जनरेट करने के मुकाबले, कोड जनरेट करने की सटीक दर बेहतर होती है.
 
-**Der Kompromiss** :
+**नुकसान:**
 
-- **Gewicht und Komplexität der Abhängigkeiten**:Die SDKs haben eigene Abhängigkeiten, die die Bundle-Größe erhöhen und potenziell das Risiko in der Lieferkette erhöhen können.
-- **Versionsverwaltung**:Neue API-Funktionen sind oft an Mindestversionen des SDK gebunden.
-  Möglicherweise müssen Sie Updates für Nutzer bereitstellen, um auf neue Funktionen oder Modelle zuzugreifen. In einigen Fällen sind dazu Änderungen an transitiven Abhängigkeiten erforderlich, die sich auf Ihre Nutzer auswirken.
-- **Protokollbeschränkungen**:Die SDKs unterstützen nur HTTPS für die Haupt-API und WebSockets (WSS) für die Live API. gRPC wird mit den SDK-Clients der höheren Ebene nicht unterstützt.
-- **Sprachunterstützung**:Die SDKs unterstützen die *aktuellen* Sprachversionen. Wenn Sie EOL-Versionen (z.B. Python 3.9) unterstützen müssen, müssen Sie einen Fork verwalten.
+- **डिपेंडेंसी वेट और जटिलता:** एसडीके की अपनी डिपेंडेंसी होती हैं. इससे बंडल साइज़ बढ़ सकता है और सप्लाई-चेन का जोखिम भी बढ़ सकता है.
+- **वर्शनिंग:** एपीआई की नई सुविधाएं अक्सर एसडीके के कम से कम वर्शन से जुड़ी होती हैं.
+  नई सुविधाएं या मॉडल ऐक्सेस करने के लिए, आपको उपयोगकर्ताओं को अपडेट पुश करने पड़ सकते हैं. कुछ मामलों में, ट्रांज़िटिव डिपेंडेंसी में बदलाव करने पड़ सकते हैं. इससे आपके उपयोगकर्ताओं पर असर पड़ सकता है.
+- **प्रोटोकॉल की सीमाएं:** एसडीके, मुख्य एपीआई के लिए सिर्फ़ एचटीटीपीएस और Live API के लिए वेबसॉकेट (डब्ल्यूएसएस) के साथ काम करते हैं. हाई-लेवल एसडीके क्लाइंट का इस्तेमाल करके, gRPC के साथ काम नहीं किया जा सकता.
+- **भाषा की सहायता:** एसडीके, भाषा के *मौजूदा* वर्शन के साथ काम करते हैं. अगर आपको ईओएल वर्शन (जैसे, Python 3.9) के साथ काम करना है, तो आपको फ़ोर्क बनाए रखना होगा.
 
-**Best Practice** :
+**सबसे सही तरीका:**
 
-- **Versionen sperren**:Fixieren Sie die SDK-Version in Ihren internen Basis-Images, um die Stabilität teamübergreifend zu gewährleisten.
+- **वर्शन लॉक करें:** टीमों के बीच स्थिरता बनाए रखने के लिए, अपनी इंटरनल बेस इमेज में एसडीके वर्शन पिन करें.
 
-## Direkte API-Integration
+## Direct API इंटिग्रेशन
 
-Wenn Sie eine Bibliothek an Tausende von Entwicklern verteilen, in einer eingeschränkten Umgebung ausführen oder einen Aggregator erstellen, der die neuesten Funktionen von Gemini erfordert, müssen Sie die API möglicherweise direkt mit REST oder gRPC einbinden.
+अगर हज़ारों डेवलपर के लिए कोई लाइब्रेरी डिस्ट्रिब्यूट की जा रही है, सीमित एनवायरमेंट में काम किया जा रहा है या ऐसा एग्रीगेटर बनाया जा रहा है जिसके लिए Gemini की नई सुविधाओं की ज़रूरत है, तो आपको REST या gRPC का इस्तेमाल करके, एपीआई के साथ सीधे इंटिग्रेट करना पड़ सकता है.
 
-**Vorteile** :
+**फ़ायदे:**
 
-- **Vollständiger Zugriff auf alle Funktionen**:Im Gegensatz zur OpenAI-Kompatibilitätsebene können Sie bei der direkten Verwendung der API Gemini-spezifische Funktionen nutzen, z. B. das Hochladen in die File API, das Erstellen von Content-Caching und die Verwendung der bidirektionalen Live API.
-- **Minimale Abhängigkeiten**:In einer Umgebung, in der Abhängigkeiten aufgrund der Größe oder der Auditkosten kritisch sind. Wenn Sie die API direkt über eine Standardbibliothek wie `fetch` oder einen Wrapper wie `httpx` verwenden, bleibt Ihre Bibliothek schlank.
-- **Sprachunabhängig**:Dies ist der einzige Weg für Sprachen, die nicht von den SDKs abgedeckt werden, z. B. Rust, PHP und Ruby, da es keine Sprachbeschränkungen gibt.
-- **Leistung**:Die Direct API hat keinen Initialisierungsaufwand, wodurch Kaltstarts in serverlosen Funktionen minimiert werden.
+- **सभी सुविधाओं का ऐक्सेस:** OpenAI कंपैटबिलिटी लेयर के उलट, एपीआई का सीधे तौर पर इस्तेमाल करने से, Gemini की खास सुविधाएं मिलती हैं. जैसे, File API पर अपलोड करना, कॉन्टेंट कैशिंग बनाना, और Live API का इस्तेमाल करना.
+- **कम से कम डिपेंडेंसी:** ऐसे एनवायरमेंट में जहां साइज़ या ऑडिटिंग की लागत की वजह से, डिपेंडेंसी संवेदनशील होती हैं. `fetch` जैसी स्टैंडर्ड लाइब्रेरी या `httpx` जैसे रैपर के ज़रिए, एपीआई का सीधे तौर पर इस्तेमाल करने से, आपकी लाइब्रेरी हल्की बनी रहती है.
+- **भाषा के हिसाब से कोई पाबंदी नहीं:** यह उन भाषाओं के लिए एकमात्र पाथ है जो एसडीके में शामिल नहीं हैं. जैसे, Rust, PHP, और Ruby. ऐसा इसलिए, क्योंकि इन भाषाओं के लिए कोई पाबंदी नहीं है.
+- **परफ़ॉर्मेंस:** Direct API में, इनिशियलाइज़ेशन का कोई ओवरहेड नहीं होता. इससे सर्वरलेस फ़ंक्शन में कोल्ड स्टार्ट कम हो जाते हैं.
 
-**Der Kompromiss** :
+**नुकसान:**
 
-- **Manuelle Implementierung der Gemini Enterprise Agent Platform**:Im Gegensatz zum SDK werden bei der direkten Verwendung der API die Authentifizierungsunterschiede zwischen AI Studio (API-Schlüssel) und der Gemini Enterprise Agent Platform (IAM) nicht automatisch verarbeitet. Sie müssen separate Authentifizierungs-Handler implementieren, wenn Sie beide Umgebungen unterstützen möchten.
-- **Keine nativen Typen oder Hilfsfunktionen**:Sie erhalten keine Codevervollständigungen oder Kompilierzeitprüfungen für Anfrageobjekte, es sei denn, Sie implementieren sie selbst. Es gibt keine Client-Hilfsfunktionen (z.B. Konverter von Funktionen zu Schemas), daher müssen Sie diese Logik manuell schreiben.
+- **Gemini Enterprise एजेंट प्लैटफ़ॉर्म को मैन्युअल तरीके से लागू करना:** एसडीके के उलट, एपीआई का सीधे तौर पर इस्तेमाल करने से, AI Studio (एपीआई पासकोड) और Gemini Enterprise एजेंट प्लैटफ़ॉर्म (IAM) के बीच ऑथेंटिकेशन के अंतर को अपने-आप हैंडल नहीं किया जाता. अगर आपको दोनों एनवायरमेंट के साथ काम करना है, तो आपको ऑथेंटिकेशन के लिए अलग-अलग हैंडलर लागू करने होंगे.
+- **कोई नेटिव टाइप या हेल्पर नहीं:** अगर इन्हें खुद लागू नहीं किया जाता है, तो अनुरोध ऑब्जेक्ट के लिए, कोड पूरा होने या कंपाइल-टाइम की जांच की सुविधा नहीं मिलती है. क्लाइंट "हेल्पर" (जैसे, फ़ंक्शन-टू-स्कीमा कन्वर्टर) नहीं होते. इसलिए, आपको इस लॉजिक को मैन्युअल तरीके से लिखना होगा.
 
-**Best Practice**
+**सबसे सही तरीका**
 
-Wir stellen eine maschinenlesbare Spezifikation zur Verfügung, mit der Sie Typdefinitionen für Ihre Bibliothek generieren können, sodass Sie sie nicht manuell schreiben müssen. Laden Sie die Spezifikation während des Build-Prozesses herunter, generieren Sie die Typen und liefern Sie den kompilierten Code aus.
+हम मशीन से पढ़े जा सकने वाला स्पेसिफ़िकेशन उपलब्ध कराते हैं. इसका इस्तेमाल करके, अपनी लाइब्रेरी के लिए टाइप की परिभाषाएं जनरेट की जा सकती हैं. इससे आपको इन्हें मैन्युअल तरीके से लिखने की ज़रूरत नहीं पड़ती. बिल्ड प्रोसेस के दौरान, स्पेसिफ़िकेशन डाउनलोड करें, टाइप जनरेट करें, और कंपाइल किया गया कोड शिप करें.
 
-- **Endpunkt**:`https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
+- **एंडपॉइंट:** `https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
 
-## OpenAI SDK-Integration
+## OpenAI SDK इंटिग्रेशन
 
-Wenn Sie eine Plattform verwenden, bei der ein einheitliches Schema (OpenAI Chat Completions) wichtiger ist als modellspezifische Funktionen, ist dies die schnellste Route.
+अगर आपका प्लैटफ़ॉर्म, मॉडल के हिसाब से सुविधाओं के बजाय यूनिफ़ाइड स्कीमा (OpenAI Chat Completions) को प्राथमिकता देता है, तो यह आपके लिए सबसे तेज़ रास्ता है.
 
-**Vorteile** :
+**फ़ायदे:**
 
-- **Geringer Aufwand**:Oft können Sie die Gemini-Unterstützung hinzufügen, indem Sie `baseURL` und `apiKey` ändern. Dies ist eine schnelle Möglichkeit, „Bring Your Own Key“-Implementierungen einzubinden und die Gemini-Unterstützung hinzuzufügen, ohne neuen Code schreiben zu müssen.
-- **Einschränkungen**:Dieser Pfad wird nur empfohlen, wenn Sie auf das OpenAI SDK beschränkt sind und keine erweiterten Gemini-Funktionen wie die File API benötigen oder die Unterstützung für Tools wie Fundierung mit der Google Suche manuell hinzufügen müssen.
+- **कम मुश्किल:** अक्सर `baseURL` और `apiKey` बदलकर, Gemini के लिए सहायता जोड़ी जा सकती है. "अपना पासकोड इस्तेमाल करें" को लागू करने का यह एक तेज़ तरीका है. इससे नया कोड लिखे बिना, Gemini के लिए सहायता जोड़ी जा सकती है.
+- **सीमाएं:** इस पाथ का सुझाव सिर्फ़ तब दिया जाता है, जब OpenAI SDK का इस्तेमाल करने की पाबंदी हो और Gemini की ऐडवांस सुविधाओं की ज़रूरत न हो. जैसे, File API या Google Search के साथ ग्राउंडिंग जैसे टूल के लिए, मैन्युअल तरीके से सहायता जोड़ना.
 
-**Der Kompromiss** :
+**नुकसान:**
 
-- **Funktionsbeschränkungen**:Die Kompatibilitätsebene schränkt die Kernfunktionen von Gemini ein. Die verfügbaren serverseitigen Tools unterscheiden sich je nach Plattform und erfordern möglicherweise eine manuelle Verarbeitung, um mit den Gemini API-Tools zu funktionieren.
-- **Aufwand für die Übersetzung**:Da das OpenAI-Schema nicht 1:1 der Gemini-Architektur entspricht, führt die Verwendung der Kompatibilitätsebene zu einigen Komplexitäten, die zusätzlichen Implementierungsaufwand erfordern, z. B. die Zuordnung eines Nutzer-„Such“-Tools zum richtigen Plattformtool.
-  Wenn Sie eine erhebliche Anzahl von Sonderfällen benötigen, ist es möglicherweise sinnvoller, für jede Plattform ein eigenes SDK oder eine eigene API zu verwenden.
+- **सुविधाओं की सीमाएं:** कंपैटबिलिटी लेयर, Gemini की मुख्य क्षमताओं पर सीमाएं लगाती है. प्लैटफ़ॉर्म के हिसाब से, सर्वर-साइड टूल अलग-अलग होते हैं. साथ ही, Gemini API टूल के साथ काम करने के लिए, इन्हें मैन्युअल तरीके से हैंडल करना पड़ सकता है.
+- **अनुवाद का ओवरहेड:** OpenAI स्कीमा, Gemini के आर्किटेक्चर से 1:1 मैप नहीं होता. इसलिए, कंपैटबिलिटी लेयर पर निर्भर रहने से कुछ समस्याएं आती हैं. इन्हें हल करने के लिए, लागू करने से जुड़ा ज़्यादा काम करना पड़ता है. जैसे, उपयोगकर्ता के "खोज" टूल को सही प्लैटफ़ॉर्म टूल पर मैप करना.
+  अगर आपको ज़्यादा मात्रा में खास केसिंग की ज़रूरत है, तो हर प्लैटफ़ॉर्म के लिए, अलग-अलग एसडीके या एपीआई का इस्तेमाल करना ज़्यादा फ़ायदेमंद हो सकता है.
 
-**Best Practice**
+**सबसे सही तरीका**
 
-Binden Sie die Gemini API nach Möglichkeit direkt ein. Für maximale Kompatibilität sollten Sie jedoch eine Bibliothek verwenden, die verschiedene Anbieter kennt und die Tool- und Nachrichtenzuordnung für Sie übernehmen kann.
+जहां तक हो सके, Gemini API के साथ सीधे इंटिग्रेट करें. हालांकि, ज़्यादा से ज़्यादा कंपैटबिलिटी के लिए, ऐसी लाइब्रेरी का इस्तेमाल करें जो अलग-अलग सेवा देने वाली कंपनियों के बारे में जानती हो और आपके लिए टूल और मैसेज मैपिंग को हैंडल कर सकती हो.
 
-## Best Practice für alle Partner: Client-Identifikation
+## सभी पार्टनर के लिए सबसे सही तरीका: क्लाइंट की पहचान करना
 
-Wenn Sie als Plattform oder Bibliothek Aufrufe an die Gemini API senden, müssen Sie Ihren Client mit dem Header `x-goog-api-client` identifizieren.
+प्लैटफ़ॉर्म या लाइब्रेरी के तौर पर, Gemini API को कॉल करते समय, आपको `x-goog-api-client` हेडर का इस्तेमाल करके, अपने क्लाइंट की पहचान करनी होगी.
 
-So kann Google Ihre spezifischen Traffic-Segmente identifizieren. Wenn Ihre Bibliothek ein bestimmtes Fehlermuster erzeugt, können wir Sie kontaktieren, um bei der Fehlerbehebung zu helfen.
+इससे Google को आपके ट्रैफ़िक के खास सेगमेंट की पहचान करने में मदद मिलती है. साथ ही, अगर आपकी लाइब्रेरी में कोई खास गड़बड़ी पैटर्न दिख रहा है, तो हम डीबग करने में आपकी मदद कर सकते हैं.
 
-Verwenden Sie das Format `company-product/version` (z.B. `acme-framework/1.2.0`).
+`company-product/version` फ़ॉर्मैट का इस्तेमाल करें. जैसे, `acme-framework/1.2.0`.
 
-### Implementierungsbeispiele
+### लागू करने के उदाहरण
 
 ### GenAI SDK
 
-Wenn Sie den API-Client angeben, fügt das SDK Ihren benutzerdefinierten Header automatisch an die internen Header an.
+एपीआई क्लाइंट उपलब्ध कराने पर, एसडीके अपने इंटरनल हेडर में आपका कस्टम हेडर अपने-आप जोड़ देता है.
 
 ```
 from google import genai
@@ -179,19 +179,18 @@ client = OpenAI(
 )
 ```
 
-## Nächste Schritte
+## अगले चरण
 
-- Besuchen Sie die [Bibliotheksübersicht](https://ai.google.dev/gemini-api/docs/libraries?hl=de), um mehr über
-  die GenAI SDKs zu erfahren
-- Durchsuchen Sie die [API-Referenz](https://ai.google.dev/api?hl=de)
-- Leitfaden zur [OpenAI-Kompatibilität](https://ai.google.dev/gemini-api/docs/openai?hl=de) lesen
+- GenAI SDK टूल के बारे में जानने के लिए, [लाइब्रेरी की खास जानकारी](https://ai.google.dev/gemini-api/docs/libraries?hl=hi) देखें
+- [एपीआई का संदर्भ](https://ai.google.dev/api?hl=hi) ब्राउज़ करें
+- [OpenAI कंपैटबिलिटी गाइड](https://ai.google.dev/gemini-api/docs/openai?hl=hi) पढ़ें
 
-Feedback geben
+सुझाव भेजें
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Zuletzt aktualisiert: 2026-09-30 (UTC).
+आखिरी बार 2026-09-30 (UTC) को अपडेट किया गया.
 
-Haben Sie Feedback für uns?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-30 (UTC)."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-30 (UTC) को अपडेट किया गया."],[],[]]

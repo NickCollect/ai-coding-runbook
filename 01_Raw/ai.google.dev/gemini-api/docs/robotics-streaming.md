@@ -1,63 +1,63 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-CN
-fetched_at: 2026-10-19T05:58:08.278629+00:00
-title: "\u652f\u6301\u6d41\u5f0f\u4f20\u8f93\u7684\u673a\u5668\u4eba \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ja
+fetched_at: 2026-10-26T05:50:21.780467+00:00
+title: "\u30b9\u30c8\u30ea\u30fc\u30df\u30f3\u30b0\u306b\u3088\u308b\u30ed\u30dc\u30c3\u30c8\u5de5\u5b66 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-发送反馈
+フィードバックを送信
 
-# 支持流式传输的机器人
+# ストリーミングによるロボット工学
 
-`gemini-robotics-er-2-streaming-preview` 模型端点公开了一个与 [Live API](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=zh-cn) 集成的专用流式传输端点，可实现应用与机器人之间的实时双向互动。因此，它非常适合需要快速反馈环和对环境做出反应式响应的代理。
+`gemini-robotics-er-2-streaming-preview` モデル エンドポイントは、[Live API](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=ja) と統合された専用のストリーミング エンドポイントを公開します。これにより、アプリケーションとロボット間のリアルタイムの双方向のやり取りが可能になります。そのため、高速なフィードバック ループと環境へのリアクティブなレスポンスを必要とするエージェントに適しています。
 
-[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=zh-cn)
-[从 GitHub 克隆示例应用](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
+[Google AI Studio で試す](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=ja)
+[GitHub からサンプルアプリのクローンを作成する](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
 
-## 使用场景
+## ユースケース
 
-- **多机器人协调**：多个机器人通过共享会话通信任务状态并委托子任务。
-- **持续监控**：观察场景并在发生特定事件（例如容器达到填充水平）时触发操作的机器人。
-- **仓储和物流**：可直观地验证商品、跟踪打包进度并从错误中恢复的拣货和打包代理。
+- **マルチロボットの連携**: 共有セッションを通じてタスクの状態を通信し、サブタスクを委任する複数のロボット。
+- **継続的モニタリング**: シーンを監視し、コンテナの充填レベルに達するなど、特定のイベントが発生したときにアクションをトリガーするロボット。
+- **倉庫とロジスティクス**: 商品を目視で確認し、梱包の進捗状況を追跡し、エラーから復旧するピッキングと梱包のエージェント。
 
-## 技术规范
+## 技術仕様
 
-下表列出了 Live API 的技术规范：
+次の表に、Live API の技術仕様の概要を示します。
 
-| 类别 | 详细信息 |
+| カテゴリ | 詳細 |
 | --- | --- |
-| 输入模态 | 音频（原始 16 位 PCM 音频，16kHz，小端序）、图片（JPEG <= 1FPS）、文本 |
-| 输出模态 | 文本 |
-| 协议 | 有状态 WebSocket 连接 (WSS) |
+| 入力モダリティ | 音声（RAW 16 ビット PCM 音声、16kHz、リトル エンディアン）、画像（JPEG <= 1FPS）、テキスト |
+| 出力モダリティ | テキスト |
+| プロトコル | ステートフル WebSocket 接続（WSS） |
 
-## 构建代理式设置
+## エージェント設定を構築する
 
-基于 Live API 构建的每个机器人代理都遵循以下三个步骤：
+Live API で構築されたすべてのロボット エージェントは、次の 3 つのステップに従います。
 
-1. **将机器人功能声明为工具。**机器人可以执行的每项操作（导航、抓取、说话）都成为一个函数声明，其中包含名称、说明和参数架构。实体操作必须使用 `"behavior": "BLOCKING"`，这样模型才能在机器人完成操作后选择下一步。
-2. **将多模态输入流式传输到持久会话中。**打开 `live.connect` 会话，并在任务的整个生命周期内保持该会话处于打开状态。发送从机器人传感器接收到的视频帧、音频或文本。
-3. **在接收循环中处理工具调用。**每次模型选择操作时，都会发送 `tool_call` 消息。您的接收循环针对机器人 SDK 执行该函数，并发送回 `tool_response`。会话保持打开状态，模型会根据结果选择下一个操作。
+1. **ロボットの機能をツールとして宣言します。**ロボットが実行できる各アクション（移動、つかむ、話すなど）は、名前、説明、パラメータ スキーマを含む関数宣言になります。物理アクションは `"behavior": "BLOCKING"` を使用する必要があります。これにより、モデルはロボットが終了するまで待ってから次のステップを選択します。
+2. **マルチモーダル入力を永続セッションにストリーミングします。**`live.connect` セッションを開き、タスクの存続期間中開いたままにします。ロボットのセンサーから届いた動画フレーム、音声、テキストを送信します。
+3. **受信ループでツール呼び出しを処理します。**モデルがアクションを選択するたびに、`tool_call` メッセージが送信されます。受信ループは、ロボット SDK に対して関数を実行し、`tool_response` を返送します。セッションは開いたままになり、モデルは結果に基づいて次のアクションを選択します。
 
-以下部分展示了如何将这些步骤应用于三种常见模式：基准智能体循环、通过检测信号进行主动场景监控，以及通过 TTS 将语音作为工具进行路由。
+以降のセクションでは、これらの手順を 3 つの一般的なパターン（ベースライン エージェント ループ、ハートビートによるプロアクティブなシーン モニタリング、ツールとしての TTS を介した音声のルーティング）に適用する方法を示します。
 
-## 通过函数调用编排机器人
+## 関数呼び出しでロボットをオーケストレートする
 
-以下示例展示了如何在一个 Python 脚本中将这三个步骤连接在一起。
+次の例は、3 つのステップすべてが 1 つの Python スクリプトで連携している様子を示しています。
 
-第 1 步 - 工具定义 - 将机器人功能声明为函数声明。`navigate` 函数使用 `"behavior": "BLOCKING"`，因此模型会等待机器人到达途经点，然后再调用另一个工具。在同一列表中添加更多函数声明，以公开其他机器人功能。
+ステップ 1（ツールの定義）では、ロボットの機能を関数宣言として宣言します。`navigate` 関数は `"behavior": "BLOCKING"` を使用するため、モデルはロボットがウェイポイントに到達するまで待ってから別のツールを呼び出します。同じリストに関数宣言を追加して、ロボットの機能を追加で公開します。
 
-第 2 步 - 输入辅助函数 - 显示了三个将不同模态输入流式传输到会话中的函数：`send_text` 用于命令，`send_image` 用于包含可选文本提示的相机帧，以及 `send_audio` 用于来自麦克风的原始 PCM 音频。
+ステップ 2 - 入力ヘルパー - は、さまざまなモダリティ入力をセッションにストリーミングする 3 つの関数を示しています。`send_text` はコマンド、`send_image` はテキスト プロンプト（省略可）を含むカメラ フレーム、`send_audio` はマイクからの未加工の PCM 音声です。
 
-第 3 步（接收循环）同时运行，并处理两种类型的消息：`server_content` 消息（模型的文本输出）和 `tool_call` 消息（模型请求机器人执行操作）。当工具调用到达时，该循环会调用 `execute_tool`（您用实际的机器人 SDK 替换的桩），然后发送回 `tool_response`，以便模型可以选择下一个操作。
+ステップ 3（受信ループ）は同時に実行され、`server_content` メッセージ（モデルのテキスト出力）と `tool_call` メッセージ（モデルがロボット アクションをリクエストしている）の 2 種類のメッセージを処理します。ツール呼び出しが届くと、ループは `execute_tool`（実際のロボット SDK に置き換えるスタブ）を呼び出し、`tool_response` を返送して、モデルが次のアクションを選択できるようにします。
 
 ```
 import asyncio
@@ -162,18 +162,17 @@ async def main():
 asyncio.run(main())
 ```
 
-在每次工具响应后，接收循环都会保持活跃状态。该模型可构建和修订长时程计划，而无需您预先对整个行动序列进行编码。
+受信ループは、各ツールのレスポンス後もアクティブなままです。モデルは、アクション シーケンス全体を事前にエンコードすることなく、長期的な計画を構築して修正します。
 
-## 主动时空推理
+## プロアクティブな空間時間推論
 
-Live API 会以流式传输方式接收视频，但仅有视频帧不会触发新的推理轮次。视频帧必须附带文本或音频提示，才能触发模型回答。如需了解详情，请参阅 [Live API 功能](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=zh-cn)。
+Live API は動画をストリーミングしますが、動画フレームだけでは新しい推論ターンはトリガーされません。動画フレームには、モデルのレスポンスをトリガーするテキストまたは音声のプロンプトが必要です。詳しくは、[Live API の機能](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=ja)をご覧ください。
 
-如需启用主动推理，请实现**心跳**：定期发送最新的相机帧，然后发送一个简短的文本提示，强制模型检查场景并做出明确的决策。视频输入速率限制为每秒一帧。
+プロアクティブな推論を有効にするには、**ハートビート**を実装します。最新のカメラフレームを定期的に送信し、その後にモデルにシーンの検査と明示的な判断を強制する短いテキスト プロンプトを送信します。動画入力は 1 秒あたり 1 フレームにレート制限されます。
 
-### 实现心跳
+### ハートビートを実装する
 
-心跳协程在同一会话中作为单独的 `asyncio` 任务运行。
-它会在等待每个回合完成 (`er_turn_done`) 时，根据情况将节奏调整为 1 Hz（与视频输入速率限制相符），以避免中断正在进行的推理：
+ハートビート コルーチンは、同じセッション内の別の `asyncio` タスクとして実行されます。各ターンの完了（`er_turn_done`）を待機しながら、インフライト推論の中断を回避するために、1 Hz のケイデンス（動画入力レート制限に一致）を機会的にターゲットにします。
 
 ```
 async def heartbeat(session, camera, er_turn_done: asyncio.Event):
@@ -207,9 +206,9 @@ async def heartbeat(session, camera, er_turn_done: asyncio.Event):
             await asyncio.sleep(remaining)
 ```
 
-### 更新接收循环
+### 受信ループを更新する
 
-如需在模型完成其回合时发出信号，请更新 `receive_loop` 以设置 `er_turn_done`：
+モデルのターンが完了したことを通知するには、`receive_loop` を更新して `er_turn_done` を設定します。
 
 ```
 # In receive_loop: signal when the model finishes its turn
@@ -217,11 +216,11 @@ if sc.turn_complete:
     er_turn_done.set()
 ```
 
-## 通过外部 TTS 进行音频输出
+## 外部 TTS によるオーディオ出力
 
-Gemini Robotics ER 2 返回文本。您的应用通过注入的回调将完成的响应路由到单独的 TTS 提供程序（例如 [Gemini TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn)）。这样一来，您就可以控制语音延迟、语音选择和中断行为，并且无需更改代理逻辑即可切换 TTS 后端。
+Gemini Robotics ER 2 はテキストを返します。アプリケーションは、完了したレスポンスを、挿入されたコールバックを介して別の TTS プロバイダ（[Gemini TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja) など）に転送します。これにより、音声のレイテンシ、音声の選択、割り込み動作を制御し、エージェント ロジックを変更せずに TTS バックエンドを切り替えることができます。
 
-您还可以将 TTS 声明为工具，以便模型将“说点什么”与“移动手臂”同等对待。将以下函数声明添加到第一部分中的 `tools` 列表：
+TTS をツールとして宣言して、モデルが「何かを言う」を「腕を動かす」と同じように扱うようにすることもできます。最初のセクションの `tools` リストに次の関数宣言を追加します。
 
 ```
 TOOLS = [
@@ -251,24 +250,24 @@ TOOLS = [
 ]
 ```
 
-通过将 TTS 封装在函数声明中，模型可以通过与任何其他机器人操作相同的工具调用路径来处理语音。您的应用通过注入的回调来完成调用。
+TTS を関数宣言でラップすることで、モデルは他のロボット アクションと同じツール呼び出しパスで音声を処理します。アプリは、挿入されたコールバックで呼び出しを完了します。
 
-## GitHub 上的示例
+## GitHub の例
 
-如需查看完整的有效示例，包括 Spot 机器人零食获取演示和 Tinybot 云台“Hello World”演示，请参阅 [Robotics Live API 示例](https://github.com/google-gemini/robotics-samples/tree/main/live-api)。
+Spot ロボットのおやつ取得デモや Tinybot パンチルト Hello World などの完全な動作例については、[Robotics Live API の例](https://github.com/google-gemini/robotics-samples/tree/main/live-api)をご覧ください。
 
-## 后续步骤
+## 次のステップ
 
-- [视频理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-cn) - 时刻查找和进度分类。
-- [任务编排](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=zh-cn) - 无需流式传输的长时程任务。
-- [Live API 概览](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=zh-cn) - 完整的 Live API 文档。
+- [動画の理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ja) - 瞬間検出と進行状況の分類。
+- [タスク オーケストレーション](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ja) - ストリーミングなしの長期的なタスク。
+- [Live API の概要](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=ja) - Live API の完全なドキュメント。
 
-发送反馈
+フィードバックを送信
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-最后更新时间 (UTC)：2026-09-16。
+最終更新日 2026-09-16 UTC。
 
-需要向我们提供更多信息？
+ご意見をお聞かせください
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-16。"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-16 UTC。"],[],[]]

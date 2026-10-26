@@ -1,37 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=pl
-fetched_at: 2026-10-19T05:49:54.836038+00:00
-title: "Generowanie muzyki za pomoc\u0105 Lyrii\u00a03.5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=tr
+fetched_at: 2026-10-26T05:58:29.911864+00:00
+title: "Lyria 3.5 ile m\u00fczik \u00fcretme \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
+Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Prześlij opinię
+Geri bildirim gönderin
 
-# Generowanie muzyki za pomocą Lyrii 3.5
+# Lyria 3.5 ile müzik üretme
 
-Lyria 3.5 to rodzina modeli generowania muzyki od Google, dostępna w ramach Gemini API. Lyria 3.5 umożliwia generowanie wysokiej jakości dźwięku stereo o częstotliwości próbkowania 44,1 kHz na podstawie promptów tekstowych lub obrazów. Te modele zapewniają spójność strukturalną, w tym wokal, zsynchronizowany tekst i pełne aranżacje instrumentalne.
+Lyria 3.5, Gemini API üzerinden kullanılabilen Google'ın müzik üretme modeli ailesidir. Lyria 3.5 ile metin istemlerinden veya resimlerden yüksek kaliteli, 44, 1 kHz stereo ses üretebilirsiniz. Bu modeller, vokaller, zamanlanmış şarkı sözleri ve tam enstrümantal düzenlemeler dahil olmak üzere yapısal tutarlılık sağlar.
 
-Rodzina Lyria obejmuje modele:
+Lyria ailesinde şu modeller bulunur:
 
-| Model | Identyfikator modelu | Urządzenia | Czas trwania | Wyniki |
+| Model | Model Kimliği | En uygun olduğu durumlar | Süre | Çıkış |
 | --- | --- | --- | --- | --- |
-| **Lyria 3 Clip** | `lyria-3-clip-preview` | Krótkie klipy, pętle, zapowiedzi | 30 sekund | MP3 |
-| **Lyria 3.5** | `lyria-3.5` | pełne utwory z wersami, refrenami i przejściami; | Kilka minut (można kontrolować za pomocą prompta) | MP3 |
+| **Lyria 3 Clip** | `lyria-3-clip-preview` | Kısa klipler, döngüler, önizlemeler | 30 saniye | MP3 |
+| **Lyria 3.5** | `lyria-3.5` | Dizeler, nakaratlar ve köprüler içeren tam uzunlukta şarkılar | Birkaç dakika (istem kullanılarak kontrol edilebilir) | MP3 |
 
-Oba modele można używać za pomocą nowego [interfejsu Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl), który obsługuje dane wejściowe w różnych formatach (tekst i obrazy) i generuje dźwięk stereo o wysokiej jakości (**44,1 kHz**).
+Her iki model de çok formatlı girişleri (metin ve resim) destekleyen yeni [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) kullanılarak kullanılabilir ve **44,1 kHz yüksek kaliteli stereo** ses üretir.
 
-## Generowanie klipu muzycznego
+## Müzik klibi oluşturma
 
-Model Lyria 3 Clip zawsze generuje **30-sekundowy** klip. Aby wygenerować klip, wywołaj metodę `interactions.create` z promptem tekstowym. Odpowiedź zawsze zawiera wygenerowane słowa i strukturę utworu wraz z dźwiękiem w schemacie `steps`.
+Lyria 3 Clip modeli her zaman **30 saniyelik** bir klip oluşturur. Klip oluşturmak için `interactions.create` yöntemini metin istemiyle çağırın. Yanıtta, `steps` şemasındaki sesin yanı sıra her zaman oluşturulan şarkı sözleri ve şarkı yapısı yer alır.
 
 ### Python
 
@@ -174,11 +174,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Wygenerowane dane muzyczne możesz pobrać za pomocą właściwości `interaction.output_audio`, która zwraca ostatni wygenerowany blok audio. Możesz też pobrać tekst i strukturę utworu za pomocą właściwości `interaction.output_text`. Więcej informacji o właściwościach ułatwiających korzystanie z usługi znajdziesz w [omówieniu interakcji](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl#convenience-properties).
+Oluşturulan son ses bloğunu döndüren `interaction.output_audio` özelliğini kullanarak oluşturulan müzik verilerini alabilirsiniz. Ayrıca `interaction.output_text` özelliğini kullanarak şarkı sözlerini ve yapısını da alabilirsiniz. Kolaylık özellikleri hakkında ayrıntılı bilgi için [Etkileşime genel bakış](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr#convenience-properties) başlıklı makaleyi inceleyin.
 
-## Generowanie pełnych utworów
+## Tam uzunlukta şarkı oluşturma
 
-Użyj modelu `lyria-3.5`, aby wygenerować pełne utwory trwające kilka minut. Model Pro rozumie strukturę muzyczną i może tworzyć kompozycje z wyraźnymi zwrotkami, refrenami i przejściami. Możesz wpłynąć na czas trwania utworu, podając go w prompcie (np. „utwórz 2-minutową piosenkę”) lub używając [sygnatur czasowych](#timing) do zdefiniowania struktury.
+Birkaç dakika süren tam uzunlukta şarkılar oluşturmak için `lyria-3.5` modelini kullanın. Pro modeli, müzikal yapıyı anlar ve farklı kıtalar, nakaratlar ve köprüler içeren kompozisyonlar oluşturabilir. İsteminizde süreyi belirterek (ör. "2 dakikalık bir şarkı oluştur") veya yapıyı tanımlamak için [zaman damgalarını](#timing) kullanarak süreyi etkileyebilirsiniz.
 
 ### Python
 
@@ -270,9 +270,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Wybierz format wyjściowy
+## Çıkış biçimini seçin
 
-Domyślnie modele Lyria 3.5 generują dźwięk w formacie **MP3**. W przypadku Lyrii 3.5 możesz też poprosić o wygenerowanie danych wyjściowych w formacie **WAV**, ustawiając parametr `response_format`.
+Lyria 3.5 modelleri, varsayılan olarak **MP3** biçiminde ses üretir. Lyria 3.5 için `response_format` değerini ayarlayarak çıktının **WAV** biçiminde olmasını da isteyebilirsiniz.
 
 ### Python
 
@@ -376,12 +376,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Analizowanie odpowiedzi
+## Yanıtı ayrıştırma
 
-Odpowiedź z Lyrii 3.5 zawiera wiele bloków treści w schemacie `steps`.
-Interakcje zwracają sekwencję kroków, w której kroki `model_output` zawierają wygenerowane treści.
-Bloki treści tekstowych zawierają wygenerowane teksty lub opis struktury utworu w formacie JSON.
-Bloki treści typu `audio` zawierają dane audio zakodowane w formacie base64.
+Lyria 3.5'in yanıtı, `steps` şemasında birden fazla içerik bloğu içeriyor.
+Etkileşimler, `model_output` adımlarının oluşturulan içeriği içerdiği bir dizi adım döndürür.
+Metin içerik bloklarında, oluşturulan şarkı sözleri veya şarkı yapısının JSON açıklaması yer alır.
+`audio` türündeki içerik blokları, Base64 kodlu ses verilerini içerir.
 
 ### Python
 
@@ -509,11 +509,11 @@ func main() {
 curl ... | jq -r '.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio") | .data' | base64 -d > output.mp3
 ```
 
-#### Tekst i muzyka przeplatające się ze sobą
+#### Şarkı sözleri ve müziğin iç içe gösterilmesi
 
-Dane wyjściowe modelu Lyria 3.5 są złożone – zawierają osobne etapy i bloki wygenerowanego tekstu i samego utworu (audio). Właściwości wygody oferują szybki i zalecany skrót.
+Lyria 3.5'in çıkışı karmaşıktır. Oluşturulan şarkı sözleri (metin) ve şarkının kendisi (ses) için ayrı adımlar ve bloklar içerir. Bu nedenle, kolaylık özellikleri hızlı ve önerilen bir kısayol sunar.
 
-Jeśli jednak chcesz mieć pełną, programową kontrolę nad surową osią czasu kroków zwracanych przez serwer (np. rejestrować poszczególne bloki treści w miarę ich otrzymywania), możesz ręcznie iterować po `steps`:
+Ancak sunucu tarafından döndürülen adımların ham zaman çizelgesi üzerinde tam ve programatik kontrol sahibi olmak istiyorsanız (ör. tek tek içerik bloklarını alındıkları sırada günlüğe kaydetmek) bunun yerine `steps` üzerinde manuel olarak yineleme yapabilirsiniz:
 
 ### Python
 
@@ -694,9 +694,9 @@ func main() {
 }
 ```
 
-## Generowanie muzyki na podstawie obrazów
+## Resimlerden müzik oluşturma
 
-Lyria 3.5 obsługuje dane wejściowe w różnych formatach – możesz podać maksymalnie **10 obrazów** w `input` wraz z promptem tekstowym, a model skomponuje muzykę inspirowaną treściami wizualnymi.
+Lyria 3.5, çok formatlı girişleri destekler. `input` listesinde metin isteminizle birlikte **10 adede kadar resim** sağlayabilirsiniz. Model, görsel içerikten ilham alarak müzik oluşturur.
 
 ### Python
 
@@ -860,9 +860,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Podaj niestandardowy tekst
+## Özel şarkı sözleri sağlama
 
-Możesz napisać własny tekst i dodać go do prompta. Używaj tagów sekcji, takich jak `[Verse]`, `[Chorus]` i `[Bridge]`, aby pomóc modelowi zrozumieć strukturę utworu:
+Kendi şarkı sözlerinizi yazıp isteme ekleyebilirsiniz. Modelin şarkı yapısını anlamasına yardımcı olmak için `[Verse]`, `[Chorus]` ve `[Bridge]` gibi bölüm etiketlerini kullanın:
 
 ### Python
 
@@ -1029,9 +1029,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Kontrolowanie czasu i struktury
+## Zamanlamayı ve yapıyı kontrol etme
 
-Za pomocą znaczników czasu możesz określić, co dokładnie ma się wydarzyć w konkretnych momentach utworu. Jest to przydatne do kontrolowania, kiedy wchodzą instrumenty, kiedy pojawiają się słowa i jak rozwija się utwór:
+Zaman damgalarını kullanarak şarkının belirli anlarında tam olarak ne olacağını belirleyebilirsiniz. Bu özellik, enstrümanların ne zaman başlayacağını, şarkı sözlerinin ne zaman gösterileceğini ve şarkının nasıl ilerleyeceğini kontrol etmek için kullanışlıdır:
 
 ### Python
 
@@ -1150,9 +1150,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Generowanie ścieżek instrumentalnych
+## Enstrümantal parçalar oluşturma
 
-W przypadku muzyki w tle, ścieżek dźwiękowych do gier lub innych zastosowań, w których nie są wymagane wokale, możesz poprosić model o wygenerowanie utworów instrumentalnych:
+Arka plan müziği, oyun müzikleri veya vokallerin gerekli olmadığı tüm kullanım alanlarında, modelden yalnızca enstrümantal parçalar üretmesini isteyebilirsiniz:
 
 ### Python
 
@@ -1244,9 +1244,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Generowanie muzyki w różnych językach
+## Farklı dillerde müzik üretme
 
-Lyria 3.5 generuje tekst w języku prompta. Aby wygenerować utwór z tekstem w języku francuskim, napisz prompta w tym języku. Model dostosowuje styl mówienia i wymowę do języka.
+Lyria 3.5, isteminizin dilinde şarkı sözleri oluşturur. Fransızca sözler içeren bir şarkı oluşturmak için isteminizi Fransızca yazın. Model, dilin özelliklerine uygun bir vokal tarzı ve telaffuz kullanır.
 
 ### Python
 
@@ -1338,47 +1338,47 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Inteligencja modelu
+## Model zekası
 
-Lyria 3.5 analizuje proces tworzenia promptów, w którym model wnioskuje na podstawie prompta o strukturze muzycznej (wprowadzenie, zwrotka, refren, mostek itp.).
-Dzieje się to przed wygenerowaniem dźwięku i zapewnia spójność strukturalną oraz muzykalność.
+Lyria 3.5, isteminizi analiz eder. Bu analiz sürecinde model, isteminize göre müzikal yapı (giriş, kıta, nakarat, köprü vb.) üzerinden akıl yürütür.
+Bu işlem, ses oluşturulmadan önce gerçekleşir ve yapısal tutarlılık ile müzikalite sağlar.
 
-## Przewodnik po promptach
+## İstem yazma kılavuzu
 
-Aby dowiedzieć się, jak tworzyć skuteczne prompty dotyczące gatunków muzycznych, instrumentów, struktury utworu, niestandardowych tekstów i stylów wokalnych, zapoznaj się z [przewodnikiem po tworzeniu promptów Lyrii](https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=pl).
+Müzik türleri, enstrümanlar, şarkı yapısı, özel şarkı sözleri ve vokal sunum stilleri için etkili istemler oluşturmayı öğrenmek istiyorsanız [Lyria istem rehberine](https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=tr) bakın.
 
-## Sprawdzone metody
+## En iyi uygulamalar
 
-- **Najpierw wypróbuj klip.** Użyj szybszego modelu `lyria-3-clip-preview`, aby eksperymentować z promptami, zanim zdecydujesz się na wygenerowanie pełnej wersji za pomocą `lyria-3.5`.
-- **Unikaj ogólników.** Niejasne prompty dają ogólne wyniki. Aby uzyskać najlepszy rezultat, podaj instrumenty, tempo, tonację, nastrój i strukturę.
-- **Wybierz język.** Wpisz prompta w języku, w którym chcesz uzyskać tekst.
-- **Używaj tagów sekcji.** Tagi `[Verse]`, `[Chorus]`, `[Bridge]` zapewniają modelowi przejrzystą strukturę, której może się trzymać.
-- **Oddziel słowa piosenki od instrukcji.** Podczas podawania niestandardowego tekstu wyraźnie oddziel go od instrukcji dotyczących kierunku muzycznego.
+- **Önce Klibi yineleyin.** `lyria-3-clip-preview` ile tam uzunlukta bir üretim yapmadan önce istemlerle deneme yapmak için daha hızlı olan `lyria-3.5` modelini kullanın.
+- **Net olun.** Net olmayan istemler genel sonuçlar üretir. En iyi sonucu elde etmek için enstrümanları, tempoyu, anahtarı, ruh halini ve yapıyı belirtin.
+- **Dilinizi eşleştirin.** Şarkı sözlerinin hangi dilde olmasını istiyorsanız o dilde istem girin.
+- **Bölüm etiketlerini kullanın.** `[Verse]`, `[Chorus]`, `[Bridge]` etiketleri, modele izleyeceği net bir yapı sunar.
+- **Şarkı sözlerini talimatlardan ayırın.** Özel şarkı sözleri sağlarken bunları müzikal yönlendirme talimatlarınızdan net bir şekilde ayırın.
 
-## Ograniczenia
+## Sınırlamalar
 
-- **Bezpieczeństwo:** wszystkie prompty są sprawdzane przez filtry bezpieczeństwa. Prompty, które uruchamiają filtry, zostaną zablokowane. Obejmuje to prompty, które wymagają konkretnych głosów artystów lub generowania tekstów chronionych prawami autorskimi.
-- **Znaki wodne:** wszystkie wygenerowane pliki audio zawierają [znak wodny audio SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=pl), który umożliwia identyfikację. Ten znak wodny jest niedostrzegalny dla ludzkiego ucha i nie wpływa na wrażenia słuchowe.
-- **Edycja wieloetapowa:** generowanie muzyki to proces jednoetapowy.
-  W obecnej wersji Lyrii 3.5 nie jest obsługiwana iteracyjna edycja ani dopracowywanie wygenerowanego klipu za pomocą wielu promptów.
-- **Długość:** model Clip zawsze generuje 30-sekundowe klipy. Model Pro generuje utwory trwające kilka minut. Na dokładny czas trwania można wpłynąć za pomocą promptu.
-- **Determinism:** wyniki mogą się różnić w zależności od wywołania, nawet w przypadku tego samego prompta.
+- **Güvenlik**: Tüm istemler güvenlik filtreleriyle kontrol edilir. Filtreleri tetikleyen istemler engellenir. Belirli sanatçıların seslerini veya telif hakkıyla korunan şarkı sözlerinin oluşturulmasını isteyen istemler de bu kapsamdadır.
+- **Filigran ekleme**: Üretilen tüm seslerde tanımlama için [SynthID ses filigranı](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=tr) bulunur. Bu filigran, insan kulağıyla fark edilemez ve dinleme deneyimini etkilemez.
+- **Çok adımlı düzenleme**: Müzik üretimi tek adımlı bir süreçtir.
+  Oluşturulan bir klibin birden fazla istemle yinelenerek düzenlenmesi veya iyileştirilmesi, Lyria 3.5'in mevcut sürümünde desteklenmemektedir.
+- **Uzunluk**: Klip modeli her zaman 30 saniyelik klipler oluşturur. Pro modeli, birkaç dakika süren şarkılar oluşturur. Tam süre, isteminizden etkilenebilir.
+- **Belirlenimcilik**: Aynı istemle bile olsa sonuçlar çağrılar arasında farklılık gösterebilir.
 
-## Co dalej?
+## Sırada ne var?
 
-- Sprawdź [ceny](https://ai.google.dev/gemini-api/docs/pricing?hl=pl) modeli Lyria 3.5.
-- Wypróbuj [generowanie muzyki w czasie rzeczywistym](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=pl) za pomocą Lyrii RealTime.
-- Generowanie rozmów z udziałem wielu osób za pomocą [modeli TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl).
-- Dowiedz się, jak generować [obrazy](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl) lub [filmy](https://ai.google.dev/gemini-api/docs/video?hl=pl).
-- Dowiedz się, jak Gemini może [rozumieć pliki audio](https://ai.google.dev/gemini-api/docs/audio?hl=pl).
-- Prowadź rozmowy w czasie rzeczywistym z Gemini za pomocą [interfejsu Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=pl).
+- Lyria 3.5 modellerinin [fiyatlandırmasını](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) inceleyin.
+- Lyria RealTime ile [anlık müzik üretme](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=tr) özelliğini deneyin.
+- [TTS modelleri](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr) ile birden fazla konuşmacının yer aldığı görüşmeler oluşturun.
+- [Resim](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) veya [video](https://ai.google.dev/gemini-api/docs/video?hl=tr) oluşturmayı öğrenin.
+- Gemini'ın [ses dosyalarını nasıl anlayabileceğini](https://ai.google.dev/gemini-api/docs/audio?hl=tr) öğrenin.
+- [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)'yi kullanarak Gemini ile anlık sohbet edin.
 
-Prześlij opinię
+Geri bildirim gönderin
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Ostatnia aktualizacja: 2026-10-01 UTC.
+Son güncelleme tarihi: 2026-10-01 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-10-01 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-01 UTC."],[],[]]

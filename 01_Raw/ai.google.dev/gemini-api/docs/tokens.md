@@ -1,46 +1,52 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=ko
-fetched_at: 2026-10-19T05:42:58.898237+00:00
-title: "\ud1a0\ud070 \uc774\ud574 \ubc0f \uacc4\uc0b0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=fa
+fetched_at: 2026-10-26T05:42:25.206268+00:00
+title: "\u062f\u0631\u06a9 \u0648 \u0634\u0645\u0627\u0631\u0634 \u0646\u0634\u0627\u0646\u200c\u0647\u0627 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon을 지금 이용 가능합니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ko).
+‫Gemini 4 Argon اکنون دردسترس است. [امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fa).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [صفحه اصلی](https://ai.google.dev/?hl=fa)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
+- [سندنگار](https://ai.google.dev/gemini-api/docs?hl=fa)
 
-의견 보내기
+ارسال بازخورد
 
-# 토큰 이해 및 계산
+# درک و شمارش نشان‌ها
 
-Gemini 및 기타 생성형 AI 모델은 *토큰* 이라는 세분화된 수준에서 입력 및 출력을 처리합니다.
+‫Gemini و دیگر مدل‌های هوش مصنوعی زایا ورودی و خروجی را در سطح جزئیاتی به نام *نماد* پردازش می‌کنند.
 
-**Gemini 모델의 경우 토큰은 약 4자와 같습니다.
-토큰 100개는 약 60~80개의 영어 단어와 같습니다.**
+**برای مدل‌های Gemini، یک نشان معادل حدود ۴ نویسه است.
+‫۱۰۰ نشانه تقریباً برابر با ۶۰ تا ۸۰ کلمه انگلیسی است.**
 
-## 토큰 정보
+## درباره داده‌واحدها
 
-토큰은 단일 문자(예: `z`) 또는 전체 단어(예: `cat`)일 수 있습니다. 긴 단어는 여러 토큰으로 나뉩니다. 모델에서 사용하는 모든 토큰 집합을 어휘라고 하며, 텍스트를 토큰으로 분할하는 프로세스를 *토큰화* 라고 합니다.
+نشان‌ها می‌توانند نویسه‌های تکی مانند `z` یا کلمات کامل مانند `cat` باشند. کلمات طولانی
+به چند کد تقسیم می‌شوند. مجموعه همه نشانه‌هایی که مدل استفاده می‌کند
+واژگان نامیده می‌شود و فرایند تقسیم نوشتار به نشانه‌ها
+*نشانه‌گذاری* نامیده می‌شود.
 
-결제가 사용 설정된 경우 Gemini API 호출의 [비용](https://ai.google.dev/pricing?hl=ko)은
-입력 및 출력 토큰 수에 따라 결정되므로 토큰을
-집계하는 방법을 알아두면 유용합니다.
+وقتی صورت‌حساب فعال باشد، [هزینه فراخوانی Gemini API](https://ai.google.dev/pricing?hl=fa) تاحدودی براساس تعداد کدهای ورودی و خروجی تعیین می‌شود، بنابراین دانستن نحوه شمارش کدها می‌تواند مفید باشد.
 
-## 토큰 집계
+## شمارش داده‌واحدها
 
-Gemini API의 모든 입력 및 출력은 텍스트, 이미지 파일, 기타 비텍스트 모달리티를 포함하여 토큰화됩니다.
+همه ورودی‌ها و خروجی‌های Gemini API، ازجمله نوشتار، فایل‌های تصویری، و دیگر حالت‌های غیرنوشتاری، نشان‌گذاری می‌شوند.
 
-다음과 같은 방법으로 토큰을 집계할 수 있습니다.
+می‌توانید نشان‌ها را به روش‌های زیر بشمارید:
 
-- **요청의 입력으로 `count_tokens`를 호출합니다.** *입력에만* 있는 총 토큰 수를 반환합니다. 입력을 전송하기 전에 이 호출을 실행하여 요청의 크기를 확인합니다.
-- **상호작용 응답에서 `usage`를 사용합니다.** 입력 (`total_input_tokens`), 출력 (`total_output_tokens`), 생각 (`total_thought_tokens`), 캐시된 콘텐츠(`total_cached_tokens`), 도구 사용 (`total_tool_use_tokens`), 총계 (`total_tokens`)의 토큰 수를 반환합니다.
+- **با ورودی درخواست، با `count_tokens` تماس بگیرید.** تعداد کل
+  نشانه‌ها را *فقط در ورودی* برمی‌گرداند. این تماس را قبل‌از ارسال ورودی برقرار کنید
+  تا اندازه درخواست‌هایتان را بررسی کنید.
+- **از `usage` در پاسخ تعامل استفاده کنید.** تعداد داده‌واحد را برای ورودی (`total_input_tokens`)، خروجی (`total_output_tokens`)،
+  تفکر (`total_thought_tokens`)، محتوای ذخیره‌شده در حافظه نهان
+  (`total_cached_tokens`)، استفاده از ابزار (`total_tool_use_tokens`)،
+  و کل (`total_tokens`) برمی‌گرداند.
 
-### 텍스트 토큰 집계
+### شمارش داده‌واحدهای نوشتار
 
 ### Python
 
@@ -90,7 +96,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.usage);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -121,7 +127,7 @@ Interaction interaction =
 System.out.println(interaction.usage().orElse(null));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -161,9 +167,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### 다중 턴 토큰 집계
+### شمردن داده‌واحدهای چندنوبتی
 
-`previous_interaction_id`를 사용하여 대화 기록에서 토큰을 집계합니다.
+شمارش نشان‌ها در سابقه مکالمه بااستفاده از `previous_interaction_id`:
 
 ### Python
 
@@ -209,7 +215,7 @@ console.log(`Input tokens: ${interaction2.usage.total_input_tokens}`);
 console.log(`Output tokens: ${interaction2.usage.total_output_tokens}`);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -252,7 +258,7 @@ if (interaction2.usage().isPresent()) {
 }
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -315,17 +321,17 @@ func main() {
 }
 ```
 
-### 멀티모달 토큰 집계
+### شمارش داده‌واحدهای چندحالته
 
-Gemini API의 모든 입력은 이미지, 동영상, 오디오를 포함하여 토큰화됩니다.
-토큰화에 관한 핵심 사항은 다음과 같습니다.
+همه ورودی‌های Gemini API، ازجمله تصاویر، ویدیو، و صدا، نشان‌گذاری می‌شوند.
+نکات کلیدی درباره نشانه‌گذاری:
 
-- **이미지**: 두 치수가 모두 384픽셀 이하인 이미지는 토큰 258개로 집계됩니다. 더 큰 이미지는 768x768픽셀 타일로 바둑판식으로 배열되며 각 타일은 토큰 258개로 집계됩니다.
-- **동영상**: 초당 토큰 263개 (정적 처리에 적용됨) 에이전트 처리의 경우 토큰 사용량이 다릅니다. 처리 모드별 동영상 토큰 사용량을 참고하세요
-  [.](#video-token-usage)
-- **오디오**: 초당 토큰 32개
+- **تصاویر**: تصاویر ≤۳۸۴ پیکسل در هر دو بُعد به‌عنوان ۲۵۸ کد درنظر گرفته می‌شوند. تصاویر بزرگ‌تر به کاشی‌های ۷۶۸×۷۶۸ پیکسلی تقسیم می‌شوند و هر کاشی به‌عنوان ۲۵۸ نشانه محسوب می‌شود.
+- **ویدیو**: ۲۶۳ واحد در ثانیه (برای پردازش ایستا اعمال می‌شود). برای پردازش
+  عاملی، مصرف داده‌واحد متفاوت است. [استفاده از کد ویدیویی براساس حالت پردازش](#video-token-usage) را ببینید.
+- **صدا**: ۳۲ داده‌واحد در ثانیه
 
-#### 이미지 토큰
+#### نشانه‌های تصویر
 
 ### Python
 
@@ -371,7 +377,7 @@ const countResponse = await client.models.countTokens({
 console.log(countResponse.totalTokens);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -429,7 +435,7 @@ Interaction interaction =
 System.out.println(interaction.usage().orElse(null));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -484,7 +490,7 @@ func main() {
 }
 ```
 
-**인라인 데이터 예:**
+**نمونه داده‌های درون‌خطی:**
 
 ### Python
 
@@ -509,7 +515,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### 동영상 토큰
+#### داده‌واحدهای ویدیو
 
 ### Python
 
@@ -542,25 +548,25 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### 처리 모드별 동영상 토큰 사용량
+#### استفاده از کد ویدیویی براساس حالت پردازش
 
-동영상 토큰 사용량은 처리 모드에 따라 다릅니다.
+استفاده از نشان برای ویدیو به حالت پردازش بستگی دارد:
 
-| **처리 모드** | **토큰 계산** | **일반적인 용도** |
+| **حالت پردازش** | **محاسبه داده‌واحد** | **استفاده معمول** |
 | --- | --- | --- |
-| **정적** (기본값) | 기본적으로 초당 ~100개 토큰 (저해상도) 또는 초당 ~300개 토큰 (고해상도) 모든 프레임은 1FPS로 샘플링됩니다. | 예측 가능하며 동영상 길이에 비례합니다. |
-| **에이전트** | 콘텐츠 복잡성에 따라 다릅니다. 모델은 프롬프트에 답변하는 데 필요한 스크립트 또는 프레임 또는 오디오만 로드합니다. | 긴 형식 콘텐츠의 경우 최대 88% 적은 토큰 |
+| **ثابت** (پیش‌فرض) | به‌طور پیش‌فرض حدود ۱۰۰ نشانه در ثانیه (وضوح پایین) یا حدود ۳۰۰ نشانه در ثانیه (وضوح بالا). همه فریم‌ها با نرخ ۱ فریم در ثانیه نمونه‌برداری شده‌اند. | قابل پیش‌بینی، متناسب با مدت‌زمان ویدیو. |
+| **عاملی** | بسته به پیچیدگی محتوا متفاوت است. مدل فقط ترانویسی و/یا قاب‌ها و/یا صدای موردنیاز برای پاسخ دادن به پیام‌واره را بار می‌کند. | تا ۸۸٪ کمتر برای محتوای بلند. |
 
-에이전트 처리의 경우 정적 모드에서 ~108만 개의 토큰을 사용하는 1시간 강의는 프롬프트와 콘텐츠에 따라 ~10만 8천 개의 토큰을 사용할 수 있습니다.
+با پردازش عاملی، یک سخنرانی ۱ ساعته که در حالت ایستا از حدود ۱٫۰۸ میلیون نشانه استفاده می‌کند، بسته به پیام‌واره و محتوا، ممکن است از حدود ۱۰۸ هزار نشانه استفاده کند.
 
-요청의 실제 토큰 사용량을 확인하려면 `interaction.usage`를 검사하세요. 에이전트 동영상 토큰은 다음 필드에 보고됩니다.
+برای بررسی استفاده واقعی از نشان برای درخواست، `interaction.usage` را بازرسی کنید. نشان‌های ویدیو نماینده در فیلدهای زیر گزارش می‌شوند:
 
-- **초기 프롬프트** (동영상 참조 + 사용자 프롬프트): `total_input_tokens`
-- **탐색 생각**: `total_thought_tokens`
-- **주문형으로 로드된 스크립트, 프레임, 오디오**: `total_tool_use_tokens`
-- **최종 답변**: `total_output_tokens`
+- **پیام‌واره اولیه** (مرجع ویدیو + پیام‌واره کاربر): `total_input_tokens`
+- **تفکر پیمایش**: `total_thought_tokens`
+- **ترانویسی، قاب‌ها، و صدا درصورت درخواست بار می‌شود**: `total_tool_use_tokens`
+- **پاسخ نهایی**: `total_output_tokens`
 
-#### 오디오 토큰
+#### نشان‌های صوتی
 
 ### Python
 
@@ -586,9 +592,9 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### 시스템 안내 토큰 집계
+### تعداد داده‌واحدهای دستورالعمل سیستم
 
-시스템 안내는 입력 토큰의 일부로 집계됩니다.
+دستورالعمل‌های سیستم به‌عنوان بخشی از داده‌واحدهای ورودی شمرده می‌شوند:
 
 ### Python
 
@@ -604,9 +610,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### 도구 토큰 집계
+### شمارش داده‌واحدهای ابزار
 
-도구 (함수, 코드 실행, Google 검색)도 집계됩니다.
+ابزارها (تابع‌ها، اجرای کد، «جستجوی Google») نیز محاسبه می‌شوند:
 
 ### Python
 
@@ -636,14 +642,14 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## 컨텍스트 윈도우
+## پنجره بافت
 
-각 Gemini 모델에는 처리할 수 있는 최대 토큰 수가 있습니다.
+هر مدل Gemini حداکثر تعداد توکنی دارد که می‌تواند پردازش کند.
 
-- **Gemini 4 모델 (`gemini-4-argon`):** 입력, 생각, 출력 토큰 간에 단일 100만 개 토큰 컨텍스트 윈도우 (`1,048,576` 토큰)를 공유합니다. 기본적으로 동기 응답 (`background=False`, 스트리밍 또는 비스트리밍)은 `65,536` 출력 토큰으로 제한되거나 [긴 디코드](https://ai.google.dev/gemini-api/docs/long-decode?hl=ko)를 사용하여 최대 `1,048,576` 토큰을 생성할 수 있습니다. 입력 토큰과 `max_output_tokens`가 1,048,576 토큰을 초과하면 API는 자동으로 출력 한도를 컨텍스트 윈도우의 남은 공간 (`1,048,576`에서 입력 토큰을 뺀 값)으로 제한합니다.
-- **Gemini 3 및 2.5 모델:** 별도의 입력 (`1,048,576` 토큰) 및 출력 (`65,536` 토큰) 예산을 사용합니다.
+- **مدل‌های Gemini 4 (`gemini-4-argon`):** پنجره زمینه‌ای ۱ میلیون داده‌واحد (`1,048,576` داده‌واحد) را در داده‌واحد ورودی، داده‌واحد فکر کردن، و داده‌واحد برونداد هم‌رسانی می‌کنند. به‌طور پیش‌فرض، پاسخ‌های همگام (`background=False`، جاری‌سازی یا غیرجاری‌سازی) به `65,536` کد واحد خروجی محدود می‌شوند، یا می‌توانید بااستفاده از [رمزگشایی طولانی](https://ai.google.dev/gemini-api/docs/long-decode?hl=fa) تا `1,048,576` کد واحد تولید کنید. اگر داده‌واحدهای ورودی شما به‌علاوه `max_output_tokens` از ۱٬۰۴۸٬۵۷۶ داده‌واحد بیشتر شود، API به‌طور خودکار حد برونداد را به فضای باقی‌مانده در پنجره بافت (`1,048,576` منهای داده‌واحدهای ورودی شما) محدود می‌کند.
+- **مدل‌های Gemini 3 و 2.5:** از بودجه‌های ورودی (`1,048,576` کد) و خروجی (`65,536` کد) جداگانه استفاده می‌کنند.
 
-### 프로그래매틱 방식으로 컨텍스트 윈도우 크기 가져오기
+### دریافت اندازه پنجره زمینه‌ای به‌صورت برنامه‌ریزی‌شده
 
 ### Python
 
@@ -663,7 +669,7 @@ console.log(`Input token limit: ${modelInfo.inputTokenLimit}`);
 console.log(`Output token limit: ${modelInfo.outputTokenLimit}`);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -676,7 +682,7 @@ System.out.println("Input token limit: " + modelInfo.inputTokenLimit().orElse(0)
 System.out.println("Output token limit: " + modelInfo.outputTokenLimit().orElse(0));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -749,20 +755,20 @@ func main() {
 }
 ```
 
-[모델](https://ai.google.dev/gemini-api/docs/models?hl=ko) 페이지에서 컨텍스트 윈도우 크기를 확인하세요.
+اندازه‌های پنجره بافت را در صفحه [مدل‌ها](https://ai.google.dev/gemini-api/docs/models?hl=fa) پیدا کنید.
 
-## 다음 단계
+## قدم بعدی چیست
 
-- [텍스트 생성](https://ai.google.dev/gemini-api/docs/text-generation?hl=ko): 생성 기본사항
-- [캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko): 캐싱으로 비용 절감
-- [가격 책정](https://ai.google.dev/gemini-api/docs/pricing?hl=ko): 비용 이해
+- [تولید نوشتار](https://ai.google.dev/gemini-api/docs/text-generation?hl=fa): اصول تولید
+- [ذخیره در حافظه نهان](https://ai.google.dev/gemini-api/docs/caching?hl=fa): با ذخیره در حافظه نهان، هزینه‌ها را کاهش دهید
+- [قیمت‌گذاری](https://ai.google.dev/gemini-api/docs/pricing?hl=fa): درک هزینه‌ها
 
-의견 보내기
+ارسال بازخورد
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
 
-최종 업데이트: 2026-10-13(UTC)
+تاریخ آخرین به‌روزرسانی 2026-10-13 به‌وقت ساعت هماهنگ جهانی.
 
-의견을 전달하고 싶나요?
+می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-10-13(UTC)"],[],[]]
+[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-13 به‌وقت ساعت هماهنگ جهانی."],[],[]]
