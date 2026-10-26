@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/analytics
-fetched_at: 2026-10-19T05:32:44.962142+00:00
+fetched_at: 2026-10-26T05:39:59.695502+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,7 +19,7 @@ Claude Code provides analytics dashboards to help organizations understand devel
 | Claude for Teams / Enterprise | [claude.ai/analytics/claude-code](https://claude.ai/analytics/claude-code) | Usage metrics, contribution metrics with GitHub integration, leaderboard, data export | [Details](#access-analytics-for-team-and-enterprise) |
 | API (Claude Console) | [platform.claude.com/claude-code](https://platform.claude.com/claude-code) | Usage metrics, spend tracking, team insights | [Details](#access-analytics-for-api-customers) |
 
-Code Review has its own dashboard. For review activity and spend, see [View usage](/docs/en/code-review-costs#view-usage).
+Code Review has its own dashboard. For review activity and spend, see [View usage](https://code.claude.com/docs/en/code-review-costs.md#view-usage).
 
 ## Access analytics for Team and Enterprise
 
@@ -32,52 +32,50 @@ The Team and Enterprise dashboard includes:
 * **Leaderboard**: top contributors ranked by Claude Code usage
 * **Data export**: download contribution data as CSV for custom reporting
 
-For per-user token counts and cost estimates, configure [OpenTelemetry export](/docs/en/monitoring-usage), or export the [spend report](https://support.claude.com/en/articles/12883420-view-usage-analytics-for-team-and-enterprise-plans) from your organization's analytics settings, which lists token usage and estimated usage-credit spend per user and per model.
+For per-user token counts and cost estimates, configure [OpenTelemetry export](https://code.claude.com/docs/en/monitoring-usage.md), or export the [spend report](https://support.claude.com/en/articles/12883420-view-usage-analytics-for-team-and-enterprise-plans) from your organization's analytics settings, which lists token usage and estimated usage-credit spend per user and per model.
 
 ### Enable contribution metrics
 
-<Note>
-  Contribution metrics are in public beta and available on Claude for Teams and Claude for Enterprise plans. These metrics only cover users within your claude.ai organization. Usage through the Claude Console API or third-party integrations is not included.
-</Note>
+> [!NOTE]
+>
+> Contribution metrics are in public beta and available on Claude for Teams and Claude for Enterprise plans. These metrics only cover users within your claude.ai organization. Usage through the Claude Console API or third-party integrations is not included.
 
 Usage and adoption data is available for all Claude for Teams and Claude for Enterprise accounts. Contribution metrics require additional setup to connect your GitHub organization.
 
 You need the Owner role to configure analytics settings. A GitHub admin must install the GitHub app.
 
-<Warning>
-  Contribution metrics are not available for organizations with [Zero Data Retention](/docs/en/zero-data-retention) enabled. The analytics dashboard will show usage metrics only.
-</Warning>
+> [!WARNING]
+>
+> Contribution metrics are not available for organizations with [Zero Data Retention](https://code.claude.com/docs/en/zero-data-retention.md) enabled. The analytics dashboard will show usage metrics only.
 
-<Steps>
-  <Step title="Install the GitHub app">
-    A GitHub admin installs the Claude GitHub app on your organization's GitHub account at [github.com/apps/claude](https://github.com/apps/claude).
-  </Step>
+**1. Install the GitHub app**
 
-  <Step title="Enable Claude Code analytics">
-    A Claude Owner navigates to [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code) and enables the Claude Code analytics feature.
-  </Step>
+A GitHub admin installs the Claude GitHub app on your organization's GitHub account at [github.com/apps/claude](https://github.com/apps/claude).
 
-  <Step title="Enable GitHub analytics">
-    On the same page, enable the "GitHub analytics" toggle.
-  </Step>
+**2. Enable Claude Code analytics**
 
-  <Step title="Authenticate with GitHub">
-    Complete the GitHub authentication flow and select which GitHub organizations to include in the analysis.
-  </Step>
-</Steps>
+A Claude Owner navigates to [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code) and enables the Claude Code analytics feature.
+
+**3. Enable GitHub analytics**
+
+On the same page, enable the "GitHub analytics" toggle.
+
+**4. Authenticate with GitHub**
+
+Complete the GitHub authentication flow and select which GitHub organizations to include in the analysis.
 
 Data typically appears within 24 hours after enabling, with daily updates. If no data appears, you may see one of these messages:
 
 * **"GitHub app required"**: install the GitHub app to view contribution metrics
 * **"Data processing in progress"**: check back in a few days and confirm the GitHub app is installed if data doesn't appear
 
-Contribution metrics cover repositories hosted on github.com. For repositories on [GitHub Enterprise Server](/docs/en/github-enterprise-server), the analytics dashboard shows usage metrics only.
+Contribution metrics cover repositories hosted on github.com. For repositories on [GitHub Enterprise Server](https://code.claude.com/docs/en/github-enterprise-server.md), the analytics dashboard shows usage metrics only.
 
 ### Review summary metrics
 
-<Note>
-  These metrics are deliberately conservative and represent an underestimate of Claude Code's actual impact. Only lines and PRs where there is high confidence in Claude Code's involvement are counted.
-</Note>
+> [!NOTE]
+>
+> These metrics are deliberately conservative and represent an underestimate of Claude Code's actual impact. Only lines and PRs where there is high confidence in Claude Code's involvement are counted.
 
 The dashboard displays these summary metrics at the top:
 
@@ -202,9 +200,9 @@ To query contribution data through GitHub instead, search for PRs labeled with `
 
 API customers using the Claude Console can access analytics at [platform.claude.com/claude-code](https://platform.claude.com/claude-code). You need the UsageView permission to access the dashboard, which is granted to Developer, Billing, Admin, Owner, and Primary Owner roles. To pull the same daily per-user metrics programmatically, use the [Claude Code Analytics API](https://platform.claude.com/docs/en/build-with-claude/claude-code-analytics-api) with an Admin API key.
 
-<Note>
-  Contribution metrics with GitHub integration are not currently available for API customers. The Console dashboard shows usage and spend metrics only.
-</Note>
+> [!NOTE]
+>
+> Contribution metrics with GitHub integration are not currently available for API customers. The Console dashboard shows usage and spend metrics only.
 
 The Console dashboard displays:
 
@@ -221,12 +219,12 @@ The team insights table shows per-user metrics:
 * **Spend this month**: per-user total API costs for the current month.
 * **Lines this month**: per-user total of accepted code lines for the current month.
 
-<Note>
-  Spend figures in the Console dashboard are estimates for analytics purposes. For actual costs, refer to your billing page.
-</Note>
+> [!NOTE]
+>
+> Spend figures in the Console dashboard are estimates for analytics purposes. For actual costs, refer to your billing page.
 
 ## Related resources
 
-* [Monitoring with OpenTelemetry](/docs/en/monitoring-usage): export real-time metrics and events to your observability stack
-* [Manage costs effectively](/docs/en/costs): set spend limits and optimize token usage
-* [Permissions](/docs/en/permissions): configure roles and permissions
+* [Monitoring with OpenTelemetry](https://code.claude.com/docs/en/monitoring-usage.md): export real-time metrics and events to your observability stack
+* [Manage costs effectively](https://code.claude.com/docs/en/costs.md): set spend limits and optimize token usage
+* [Permissions](https://code.claude.com/docs/en/permissions.md): configure roles and permissions

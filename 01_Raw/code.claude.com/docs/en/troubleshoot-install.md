@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/troubleshoot-install
-fetched_at: 2026-10-12T06:49:46.206063+00:00
+fetched_at: 2026-10-26T05:40:05.858538+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ fetch_method: mintlify_md
 
 > Fix command not found, PATH, permission, network, and authentication errors when installing or signing in to Claude Code.
 
-If installation fails or you can't sign in, find your error below. For runtime issues after Claude Code is working, see [Troubleshooting](/docs/en/troubleshooting). For configuration problems such as settings not applying or hooks not firing, see [Debug your configuration](/docs/en/debug-your-config).
+If installation fails or you can't sign in, find your error below. For runtime issues after Claude Code is working, see [Troubleshooting](https://code.claude.com/docs/en/troubleshooting.md). For configuration problems such as settings not applying or hooks not firing, see [Debug your configuration](https://code.claude.com/docs/en/debug-your-config.md).
 
 ## Find your error
 
@@ -37,6 +37,8 @@ Match the error message or symptom you're seeing to a fix:
 | `CRYPT_E_NO_REVOCATION_CHECK` or `CRYPT_E_REVOCATION_OFFLINE` | [Work around blocked revocation checks](#tls-or-ssl-connection-errors) |
 | `Failed to fetch version` or can't reach download server | [Check network and proxy settings](#check-network-connectivity) |
 | `The connection dropped while downloading the update` or `Download timed out: exceeded the total deadline` | [Run the update again or set your proxy](#the-connection-dropped-while-downloading-the-update) |
+| `Release verification failed for Claude Code` | [Run `claude update` or `claude install` again](#release-verification-failed) |
+| `Auto-update failed · Run claude doctor` in red in the session footer | [Run `claude update` from your shell](#auto-update-failed) |
 | `irm is not recognized` or `The token '&&' is not a valid statement separator` | [Use the right command for your shell](#wrong-install-command-on-windows) |
 | `Cask 'claude-code' is unavailable: No Cask with this name exists` | [Update Homebrew](#homebrew-cask-unavailable-or-outdated) |
 | `Cask 'claude-code@latest' is not installed` | [Upgrade the cask you installed](#cask-is-not-installed) |
@@ -62,16 +64,16 @@ Match the error message or symptom you're seeing to a fix:
 | `unable to get local issuer certificate` | [Configure corporate CA certificates](#tls-or-ssl-connection-errors) |
 | `OAuth error` or `403 Forbidden` | [Fix authentication](#login-and-authentication) |
 | `Claude Code access has not been granted for this account` | [Get a role that includes Claude Code](#claude-code-access-has-not-been-granted-for-this-account) |
-| `Unable to connect to Anthropic services` during setup | See [Unable to connect to Anthropic services](/docs/en/errors#unable-to-connect-to-anthropic-services) in the Error reference |
+| `Unable to connect to Anthropic services` during setup | See [Unable to connect to Anthropic services](https://code.claude.com/docs/en/errors.md#unable-to-connect-to-anthropic-services) in the Error reference |
 | `Could not load the default credentials` or `Could not load credentials from any providers` | [Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry credentials](#bedrock-agent-platform-or-foundry-credentials-not-loading) |
 | `ChainedTokenCredential authentication failed` or `CredentialUnavailableError` | [Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry credentials](#bedrock-agent-platform-or-foundry-credentials-not-loading) |
-| `API Error: 500`, `529 Overloaded`, `429`, or other 4xx and 5xx errors not listed above | See the [Error reference](/docs/en/errors) |
+| `API Error: 500`, `529 Overloaded`, `429`, or other 4xx and 5xx errors not listed above | See the [Error reference](https://code.claude.com/docs/en/errors.md) |
 
 If your issue isn't listed, work through the diagnostic checks below to narrow down the cause.
 
-<Tip>
-  If you'd rather skip the terminal entirely, the [Claude Code Desktop app](/docs/en/desktop-quickstart) lets you install and use Claude Code through a graphical interface. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs) or [Windows](https://claude.com/download?utm_source=claude_code\&utm_medium=docs) and start coding without any command-line setup. On Linux, install the app with apt by following the [Linux install instructions](/docs/en/desktop-linux).
-</Tip>
+> [!TIP]
+>
+> If you'd rather skip the terminal entirely, the [Claude Code Desktop app](https://code.claude.com/docs/en/desktop-quickstart.md) lets you install and use Claude Code through a graphical interface. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs) or [Windows](https://claude.com/download?utm_source=claude_code\&utm_medium=docs) and start coding without any command-line setup. On Linux, install the app with apt by following the [Linux install instructions](https://code.claude.com/docs/en/desktop-linux.md).
 
 ## Run diagnostic checks
 
@@ -79,21 +81,19 @@ If your issue isn't listed, work through the diagnostic checks below to narrow d
 
 The installer downloads from `downloads.claude.ai`. Verify you can reach it:
 
-<Tabs>
-  <Tab title="macOS/Linux">
-    ```bash theme={null}
-    curl -sI https://downloads.claude.ai/claude-code-releases/latest
-    ```
-  </Tab>
+**macOS/Linux**
 
-  <Tab title="Windows PowerShell">
-    ```powershell theme={null}
-    curl.exe -sI https://downloads.claude.ai/claude-code-releases/latest
-    ```
+```bash theme={null}
+curl -sI https://downloads.claude.ai/claude-code-releases/latest
+```
 
-    PowerShell aliases `curl` to `Invoke-WebRequest`, which rejects the `-sI` flags, so call `curl.exe` explicitly.
-  </Tab>
-</Tabs>
+**Windows PowerShell**
+
+```powershell theme={null}
+curl.exe -sI https://downloads.claude.ai/claude-code-releases/latest
+```
+
+PowerShell aliases `curl` to `Invoke-WebRequest`, which rejects the `-sI` flags, so call `curl.exe` explicitly.
 
 You reached the server if the first line shows a `200` status. You see `HTTP/2 200` on macOS and Linux, and `HTTP/1.1 200 OK` from the `curl.exe` included with Windows. Other results point to the cause:
 
@@ -110,23 +110,21 @@ If you're behind a corporate proxy, set `HTTPS_PROXY` and `HTTP_PROXY` to your p
 
 This example sets both proxy variables, then runs the installer through your proxy:
 
-<Tabs>
-  <Tab title="macOS/Linux">
-    ```bash theme={null}
-    export HTTP_PROXY=http://proxy.example.com:8080
-    export HTTPS_PROXY=http://proxy.example.com:8080
-    curl -fsSL https://claude.ai/install.sh | bash
-    ```
-  </Tab>
+**macOS/Linux**
 
-  <Tab title="Windows PowerShell">
-    ```powershell theme={null}
-    $env:HTTP_PROXY = 'http://proxy.example.com:8080'
-    $env:HTTPS_PROXY = 'http://proxy.example.com:8080'
-    irm https://claude.ai/install.ps1 | iex
-    ```
-  </Tab>
-</Tabs>
+```bash theme={null}
+export HTTP_PROXY=http://proxy.example.com:8080
+export HTTPS_PROXY=http://proxy.example.com:8080
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+**Windows PowerShell**
+
+```powershell theme={null}
+$env:HTTP_PROXY = 'http://proxy.example.com:8080'
+$env:HTTPS_PROXY = 'http://proxy.example.com:8080'
+irm https://claude.ai/install.ps1 | iex
+```
 
 ### Verify your PATH
 
@@ -134,190 +132,186 @@ If installation succeeded but you get a `command not found` or `not recognized` 
 
 The installer detects this case and reports it under `Setup notes:` in its output: `Native installation exists but ~/.local/bin is not in your PATH.` on macOS and Linux, or `Native installation exists but C:\Users\you\.local\bin is not in your PATH.` on Windows. It prints the fix with that note but doesn't change PATH itself.
 
-<Note>
-  The [VS Code extension](/docs/en/vs-code) does not place `claude` at this location. It bundles a private copy of the CLI inside the extension directory for its own chat panel and does not add it to PATH. If you have only installed the extension, `~/.local/bin/claude` will not exist. Run the [standalone install](/docs/en/setup) to use `claude` from a terminal, then continue below.
-</Note>
+> [!NOTE]
+>
+> The [VS Code extension](https://code.claude.com/docs/en/vs-code.md) does not place `claude` at this location. It bundles a private copy of the CLI inside the extension directory for its own chat panel and does not add it to PATH. If you have only installed the extension, `~/.local/bin/claude` will not exist. Run the [standalone install](https://code.claude.com/docs/en/setup.md) to use `claude` from a terminal, then continue below.
 
 First check that the program is there at all, then check whether its folder is in your PATH. The PATH fix is permanent, so you apply it once. Pick your platform's tab and run its commands there: in your terminal on macOS and Linux, or in PowerShell or Command Prompt on Windows.
 
-<Tabs>
-  <Tab title="macOS/Linux">
-    Check that the installer put the program in place:
+**macOS/Linux**
 
-    ```bash theme={null}
-    ls -la ~/.local/bin/claude
-    ```
+Check that the installer put the program in place:
 
-    * **`No such file or directory`**: there's no native install. If you haven't installed Claude Code another way, such as with npm, Homebrew, or a Linux package manager, [install Claude Code](/docs/en/setup#install-claude-code). If you installed it another way, see [Check for conflicting installations](#check-for-conflicting-installations).
-    * **A listing for the file**: the program is there. Check your PATH next.
+```bash theme={null}
+ls -la ~/.local/bin/claude
+```
 
-    List your PATH entries and filter for the install folder:
+* **`No such file or directory`**: there's no native install. If you haven't installed Claude Code another way, such as with npm, Homebrew, or a Linux package manager, [install Claude Code](https://code.claude.com/docs/en/setup.md#install-claude-code). If you installed it another way, see [Check for conflicting installations](#check-for-conflicting-installations).
+* **A listing for the file**: the program is there. Check your PATH next.
 
-    ```bash theme={null}
-    echo $PATH | tr ':' '\n' | grep -Fx "$HOME/.local/bin"
-    ```
+List your PATH entries and filter for the install folder:
 
-    If this prints `/Users/you/.local/bin` or `/home/you/.local/bin`, the directory is in your PATH and you can skip to [Check for conflicting installations](#check-for-conflicting-installations). If there's no output, add it to your shell configuration with the two commands for your shell. The `echo` command saves the setting for every new terminal, and `source` applies it to the window you're in. The `echo` command prints nothing when it succeeds.
+```bash theme={null}
+echo $PATH | tr ':' '\n' | grep -Fx "$HOME/.local/bin"
+```
 
-    For Zsh, the default on macOS:
+If this prints `/Users/you/.local/bin` or `/home/you/.local/bin`, the directory is in your PATH and you can skip to [Check for conflicting installations](#check-for-conflicting-installations). If there's no output, add it to your shell configuration with the two commands for your shell. The `echo` command saves the setting for every new terminal, and `source` applies it to the window you're in. The `echo` command prints nothing when it succeeds.
 
-    ```bash theme={null}
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
-    source ~/.zshrc
-    ```
+For Zsh, the default on macOS:
 
-    For Bash on Linux, where it's the default on most distributions:
+```bash theme={null}
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
 
-    ```bash theme={null}
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-    source ~/.bashrc
-    ```
+For Bash on Linux, where it's the default on most distributions:
 
-    For Bash on macOS, add the line to `~/.bash_profile` instead. Terminal on macOS starts Bash as a login shell, which ignores `~/.bashrc` and reads only the first of `~/.bash_profile`, `~/.bash_login`, or `~/.profile` that exists. If you already have a `~/.bash_login` or `~/.profile` and no `~/.bash_profile`, put the line in that file rather than creating `~/.bash_profile`:
+```bash theme={null}
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+```
 
-    ```bash theme={null}
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bash_profile
-    source ~/.bash_profile
-    ```
+For Bash on macOS, add the line to `~/.bash_profile` instead. Terminal on macOS starts Bash as a login shell, which ignores `~/.bashrc` and reads only the first of `~/.bash_profile`, `~/.bash_login`, or `~/.profile` that exists. If you already have a `~/.bash_login` or `~/.profile` and no `~/.bash_profile`, put the line in that file rather than creating `~/.bash_profile`:
 
-    Alternatively, close and reopen your terminal.
+```bash theme={null}
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bash_profile
+source ~/.bash_profile
+```
 
-    If the `echo` command prints `permission denied`, see [`permission denied` when adding to your PATH](#permission-denied-when-adding-to-your-path).
+Alternatively, close and reopen your terminal.
 
-    For other shells such as fish or Nushell, add `~/.local/bin` to your PATH using your shell's own configuration syntax, then restart your terminal.
+If the `echo` command prints `permission denied`, see [`permission denied` when adding to your PATH](#permission-denied-when-adding-to-your-path).
 
-    Verify the fix worked:
+For other shells such as fish or Nushell, add `~/.local/bin` to your PATH using your shell's own configuration syntax, then restart your terminal.
 
-    ```bash theme={null}
-    claude --version
-    ```
+Verify the fix worked:
 
-    If `claude` is still not found, check these causes:
+```bash theme={null}
+claude --version
+```
 
-    * **The terminal predates the change**: a window that was already open keeps its old PATH, and a terminal inside an editor takes its PATH from the editor. Open a new window, or quit and reopen the editor.
-    * **The line wasn't saved**: run `grep -n '.local/bin' ~/.zshrc`, using your shell's file name. It prints the line with its line number when the line is there. If it prints nothing, run the two PATH commands again.
-    * **The line went to another shell's file**: run `echo $0` to see your shell, then run the two PATH commands for that shell.
-  </Tab>
+If `claude` is still not found, check these causes:
 
-  <Tab title="Windows PowerShell">
-    Check that the installer put the program in place:
+* **The terminal predates the change**: a window that was already open keeps its old PATH, and a terminal inside an editor takes its PATH from the editor. Open a new window, or quit and reopen the editor.
+* **The line wasn't saved**: run `grep -n '.local/bin' ~/.zshrc`, using your shell's file name. It prints the line with its line number when the line is there. If it prints nothing, run the two PATH commands again.
+* **The line went to another shell's file**: run `echo $0` to see your shell, then run the two PATH commands for that shell.
 
-    ```powershell theme={null}
-    Test-Path "$env:USERPROFILE\.local\bin\claude.exe"
-    ```
+**Windows PowerShell**
 
-    * **`False`**: there's no native install. If you haven't installed Claude Code another way, such as with npm or WinGet, [install Claude Code](/docs/en/setup#install-claude-code). If you installed it another way, see [Check for conflicting installations](#check-for-conflicting-installations).
-    * **`True`**: the program is there. Check your PATH next.
+Check that the installer put the program in place:
 
-    List your PATH entries and filter for the install folder:
+```powershell theme={null}
+Test-Path "$env:USERPROFILE\.local\bin\claude.exe"
+```
 
-    ```powershell theme={null}
-    $env:PATH -split ';' | Select-String '\.local\\bin'
-    ```
+* **`False`**: there's no native install. If you haven't installed Claude Code another way, such as with npm or WinGet, [install Claude Code](https://code.claude.com/docs/en/setup.md#install-claude-code). If you installed it another way, see [Check for conflicting installations](#check-for-conflicting-installations).
+* **`True`**: the program is there. Check your PATH next.
 
-    If this prints `C:\Users\you\.local\bin`, the directory is in your PATH and you can skip to [Check for conflicting installations](#check-for-conflicting-installations). If there's no output, add the install directory to your User PATH:
+List your PATH entries and filter for the install folder:
 
-    ```powershell theme={null}
-    $currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
-    [Environment]::SetEnvironmentVariable('PATH', "$currentPath;$env:USERPROFILE\.local\bin", 'User')
-    ```
+```powershell theme={null}
+$env:PATH -split ';' | Select-String '\.local\\bin'
+```
 
-    Restart your terminal for the change to take effect.
+If this prints `C:\Users\you\.local\bin`, the directory is in your PATH and you can skip to [Check for conflicting installations](#check-for-conflicting-installations). If there's no output, add the install directory to your User PATH:
 
-    Verify the fix worked:
+```powershell theme={null}
+$currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
+[Environment]::SetEnvironmentVariable('PATH', "$currentPath;$env:USERPROFILE\.local\bin", 'User')
+```
 
-    ```powershell theme={null}
-    claude --version
-    ```
+Restart your terminal for the change to take effect.
 
-    If `claude` is still not found in a new terminal, check these causes:
+Verify the fix worked:
 
-    * **The terminal runs inside an editor**: it takes its PATH from the editor, so quit and reopen the editor.
-    * **The change wasn't saved**: run `[Environment]::GetEnvironmentVariable('PATH', 'User')` and look for `.local\bin` in the PATH it prints. If it's missing, run the two commands again.
-  </Tab>
+```powershell theme={null}
+claude --version
+```
 
-  <Tab title="Windows CMD">
-    Check that the installer put the program in place:
+If `claude` is still not found in a new terminal, check these causes:
 
-    ```batch theme={null}
-    dir "%USERPROFILE%\.local\bin\claude.exe"
-    ```
+* **The terminal runs inside an editor**: it takes its PATH from the editor, so quit and reopen the editor.
+* **The change wasn't saved**: run `[Environment]::GetEnvironmentVariable('PATH', 'User')` and look for `.local\bin` in the PATH it prints. If it's missing, run the two commands again.
 
-    * **`File Not Found` or `The system cannot find the path specified.`**: there's no native install. If you haven't installed Claude Code another way, such as with npm or WinGet, [install Claude Code](/docs/en/setup#install-claude-code). If you installed it another way, see [Check for conflicting installations](#check-for-conflicting-installations).
-    * **A listing for `claude.exe`**: the program is there. Check your PATH next.
+**Windows CMD**
 
-    List your PATH entries and filter for the install folder:
+Check that the installer put the program in place:
 
-    ```batch theme={null}
-    echo %PATH% | findstr /i "local\bin"
-    ```
+```batch theme={null}
+dir "%USERPROFILE%\.local\bin\claude.exe"
+```
 
-    If there's no output, open System Settings, go to Environment Variables, and add `%USERPROFILE%\.local\bin` to your User PATH variable. Restart your terminal.
+* **`File Not Found` or `The system cannot find the path specified.`**: there's no native install. If you haven't installed Claude Code another way, such as with npm or WinGet, [install Claude Code](https://code.claude.com/docs/en/setup.md#install-claude-code). If you installed it another way, see [Check for conflicting installations](#check-for-conflicting-installations).
+* **A listing for `claude.exe`**: the program is there. Check your PATH next.
 
-    Verify the fix worked:
+List your PATH entries and filter for the install folder:
 
-    ```batch theme={null}
-    claude --version
-    ```
+```batch theme={null}
+echo %PATH% | findstr /i "local\bin"
+```
 
-    If `claude` is still not found in a new terminal, a terminal inside an editor takes its PATH from the editor, so quit and reopen the editor too.
-  </Tab>
-</Tabs>
+If there's no output, open System Settings, go to Environment Variables, and add `%USERPROFILE%\.local\bin` to your User PATH variable. Restart your terminal.
+
+Verify the fix worked:
+
+```batch theme={null}
+claude --version
+```
+
+If `claude` is still not found in a new terminal, a terminal inside an editor takes its PATH from the editor, so quit and reopen the editor too.
 
 ### Check for conflicting installations
 
 Multiple Claude Code installations can cause version mismatches or unexpected behavior. Check what's installed:
 
-<Tabs>
-  <Tab title="macOS/Linux">
-    List all `claude` binaries found in your PATH:
+**macOS/Linux**
 
-    ```bash theme={null}
-    which -a claude
-    ```
+List all `claude` binaries found in your PATH:
 
-    If this prints `claude not found`, a `no claude in` line, or nothing, no `claude` is on your PATH. The next checks show whether one is installed at all.
+```bash theme={null}
+which -a claude
+```
 
-    Check the three locations a `claude` binary can come from. `~/.local/bin/claude` is the native installer, `~/.claude/local/` is a legacy local npm install created by older versions of Claude Code, and the npm global list shows a `-g` install:
+If this prints `claude not found`, a `no claude in` line, or nothing, no `claude` is on your PATH. The next checks show whether one is installed at all.
 
-    ```bash theme={null}
-    ls -la ~/.local/bin/claude
-    ```
+Check the three locations a `claude` binary can come from. `~/.local/bin/claude` is the native installer, `~/.claude/local/` is a legacy local npm install created by older versions of Claude Code, and the npm global list shows a `-g` install:
 
-    A native install shows a symlink into `~/.local/share/claude/versions/`. A script or a symlink you created yourself at this path is a custom launcher, which [auto-update leaves in place](/docs/en/setup#auto-updates).
+```bash theme={null}
+ls -la ~/.local/bin/claude
+```
 
-    If either `ls` command prints `No such file or directory`, that's not an error. It means nothing is installed at that location, so move on to the next check.
+A native install shows a symlink into `~/.local/share/claude/versions/`. A script or a symlink you created yourself at this path is a custom launcher, which [auto-update leaves in place](https://code.claude.com/docs/en/setup.md#auto-updates).
 
-    ```bash theme={null}
-    ls -la ~/.claude/local/
-    ```
+If either `ls` command prints `No such file or directory`, that's not an error. It means nothing is installed at that location, so move on to the next check.
 
-    ```bash theme={null}
-    npm -g ls @anthropic-ai/claude-code 2>/dev/null
-    ```
+```bash theme={null}
+ls -la ~/.claude/local/
+```
 
-    If `ls -la ~/.local/bin/claude` printed `No such file or directory`, there's no native install. If you haven't installed Claude Code another way, such as with npm, Homebrew, or a Linux package manager, [install Claude Code](/docs/en/setup#install-claude-code). If `~/.local/bin/claude` exists but `which -a claude` didn't list it, the folder isn't in your PATH: see [Verify your PATH](#verify-your-path).
-  </Tab>
+```bash theme={null}
+npm -g ls @anthropic-ai/claude-code 2>/dev/null
+```
 
-  <Tab title="Windows PowerShell">
-    List all `claude` binaries found in your PATH:
+If `ls -la ~/.local/bin/claude` printed `No such file or directory`, there's no native install. If you haven't installed Claude Code another way, such as with npm, Homebrew, or a Linux package manager, [install Claude Code](https://code.claude.com/docs/en/setup.md#install-claude-code). If `~/.local/bin/claude` exists but `which -a claude` didn't list it, the folder isn't in your PATH: see [Verify your PATH](#verify-your-path).
 
-    ```powershell theme={null}
-    where.exe claude
-    ```
+**Windows PowerShell**
 
-    If this prints `INFO: Could not find files for the given pattern(s).`, no `claude` is on your PATH.
+List all `claude` binaries found in your PATH:
 
-    Check whether the native installer placed a binary:
+```powershell theme={null}
+where.exe claude
+```
 
-    ```powershell theme={null}
-    Test-Path "$env:USERPROFILE\.local\bin\claude.exe"
-    ```
+If this prints `INFO: Could not find files for the given pattern(s).`, no `claude` is on your PATH.
 
-    * **`True`**: the native install is there. If `where.exe` found nothing, its folder isn't in your PATH: see [Verify your PATH](#verify-your-path).
-    * **`False`**: there's no native install. If you haven't installed Claude Code another way, such as with npm or WinGet, [install Claude Code](/docs/en/setup#install-claude-code).
-  </Tab>
-</Tabs>
+Check whether the native installer placed a binary:
+
+```powershell theme={null}
+Test-Path "$env:USERPROFILE\.local\bin\claude.exe"
+```
+
+* **`True`**: the native install is there. If `where.exe` found nothing, its folder isn't in your PATH: see [Verify your PATH](#verify-your-path).
+* **`False`**: there's no native install. If you haven't installed Claude Code another way, such as with npm or WinGet, [install Claude Code](https://code.claude.com/docs/en/setup.md#install-claude-code).
 
 If you find multiple installations, keep only one. The native install at `~/.local/bin/claude` on macOS/Linux or `%USERPROFILE%\.local\bin\claude.exe` on Windows is recommended. Remove the extras:
 
@@ -329,19 +323,17 @@ npm uninstall -g @anthropic-ai/claude-code
 
 Remove the legacy local npm install:
 
-<Tabs>
-  <Tab title="macOS/Linux">
-    ```bash theme={null}
-    rm -rf ~/.claude/local
-    ```
-  </Tab>
+**macOS/Linux**
 
-  <Tab title="Windows PowerShell">
-    ```powershell theme={null}
-    Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\local"
-    ```
-  </Tab>
-</Tabs>
+```bash theme={null}
+rm -rf ~/.claude/local
+```
+
+**Windows PowerShell**
+
+```powershell theme={null}
+Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\local"
+```
 
 Remove a Homebrew install on macOS. If you installed the `claude-code@latest` cask, substitute that name:
 
@@ -366,9 +358,9 @@ On macOS and Linux the install writes to these locations:
 * `~/.local/share/claude/`: each version it downloads
 * `~/.local/state/claude/`: its lock files
 * `~/.cache/claude/`: staged downloads
-* [`~/.claude.json`](/docs/en/claude-directory): your global config file, where the installer records the install method
+* [`~/.claude.json`](https://code.claude.com/docs/en/claude-directory): your global config file, where the installer records the install method
 
-If you set `XDG_DATA_HOME`, `XDG_STATE_HOME`, or `XDG_CACHE_HOME`, the install uses those in place of `~/.local/share`, `~/.local/state`, and `~/.cache`. If you set [`CLAUDE_CONFIG_DIR`](/docs/en/env-vars), the global config file lives under that directory instead of your home directory.
+If you set `XDG_DATA_HOME`, `XDG_STATE_HOME`, or `XDG_CACHE_HOME`, the install uses those in place of `~/.local/share`, `~/.local/state`, and `~/.cache`. If you set [`CLAUDE_CONFIG_DIR`](https://code.claude.com/docs/en/env-vars), the global config file lives under that directory instead of your home directory.
 
 Check whether the directories are writable:
 
@@ -390,21 +382,19 @@ If `claude --version` prints a version but `claude` crashes or hangs on startup,
 
 Confirm the binary exists and is executable:
 
-<Tabs>
-  <Tab title="macOS/Linux">
-    ```bash theme={null}
-    ls -la "$(command -v claude)"
-    ```
-  </Tab>
+**macOS/Linux**
 
-  <Tab title="Windows PowerShell">
-    ```powershell theme={null}
-    Get-Command claude | Select-Object Source
-    ```
-  </Tab>
-</Tabs>
+```bash theme={null}
+ls -la "$(command -v claude)"
+```
 
-On Linux, check for missing shared libraries. If `ldd` shows missing libraries, you may need to install system packages. On Alpine Linux and other musl-based distributions, see [Alpine Linux setup](/docs/en/setup#alpine-linux-and-musl-based-distributions).
+**Windows PowerShell**
+
+```powershell theme={null}
+Get-Command claude | Select-Object Source
+```
+
+On Linux, check for missing shared libraries. If `ldd` shows missing libraries, you may need to install system packages. On Alpine Linux and other musl-based distributions, see [Alpine Linux setup](https://code.claude.com/docs/en/setup.md#alpine-linux-and-musl-based-distributions).
 
 ```bash theme={null}
 ldd "$(command -v claude)" | grep "not found"
@@ -477,7 +467,7 @@ Otherwise, this can happen due to network issues, regional routing, or a tempora
 
 1. **Retry after a few minutes**: the issue is often temporary. Wait and try the original command again.
 
-2. **Use an alternative install method**: unlike a native install, a Homebrew or WinGet install [doesn't update itself by default](/docs/en/setup#auto-updates).
+2. **Use an alternative install method**: unlike a native install, a Homebrew or WinGet install [doesn't update itself by default](https://code.claude.com/docs/en/setup.md#auto-updates).
 
    On macOS, install via Homebrew:
 
@@ -527,7 +517,7 @@ Then run the two PATH commands for your shell in [Verify your PATH](#verify-your
 
 The `curl ... | bash` command downloads the script and pipes it to Bash for execution. This error, and the related `curl: (23) Failure writing output to destination`, means Bash did not receive the complete script. Exit code 56 indicates the download itself was interrupted, and exit code 23 indicates curl could not write what it received to the pipe, usually because Bash exited early.
 
-Test that you can reach `downloads.claude.ai` with the check in [Check network connectivity](#check-network-connectivity). If you reached the server, the original failure was likely intermittent; retry the install command. You can also [try an alternative install method](/docs/en/setup#install-claude-code).
+Test that you can reach `downloads.claude.ai` with the check in [Check network connectivity](#check-network-connectivity). If you reached the server, the original failure was likely intermittent; retry the install command. You can also [try an alternative install method](https://code.claude.com/docs/en/setup.md#install-claude-code).
 
 ### Homebrew cask unavailable or outdated
 
@@ -538,11 +528,9 @@ brew update
 brew install --cask claude-code
 ```
 
-If Homebrew installs an older Claude Code version than you expect, the same stale index is usually the cause. The `claude-code` cask tracks the stable channel and is typically about one week behind the latest release; for the newest version run `brew install --cask claude-code@latest` instead. See [Configure release channel](/docs/en/setup#configure-release-channel) for the difference between the two casks.
+If Homebrew installs an older Claude Code version than you expect, the same stale index is usually the cause. The `claude-code` cask tracks the stable channel and is typically about one week behind the latest release; for the newest version run `brew install --cask claude-code@latest` instead. See [Configure release channel](https://code.claude.com/docs/en/setup.md#configure-release-channel) for the difference between the two casks.
 
-<h3 id="cask-is-not-installed">
-  `Cask 'claude-code@latest' is not installed`
-</h3>
+### `Cask 'claude-code@latest' is not installed`
 
 Homebrew offers two casks, `claude-code` and `claude-code@latest`. Running `brew upgrade --cask claude-code@latest` when that cask isn't the one installed prints `Error: Cask 'claude-code@latest' is not installed.` To see which cask you have, run this in your terminal:
 
@@ -586,37 +574,33 @@ For `CRYPT_E_NO_REVOCATION_CHECK` or `CRYPT_E_REVOCATION_OFFLINE`, go to step 4.
 
 3. **Check for proxy or firewall interference**: corporate proxies that perform TLS inspection can cause these errors, including `unable to get local issuer certificate` and `SELF_SIGNED_CERT_IN_CHAIN`. For the install step, make the install download trust your corporate proxy's CA:
 
-   <Tabs>
-     <Tab title="macOS/Linux">
-       ```bash theme={null}
-       curl --cacert /path/to/corporate-ca.pem -fsSL https://claude.ai/install.sh | bash
-       ```
-     </Tab>
+   **macOS/Linux**
 
-     <Tab title="Windows PowerShell">
-       The PowerShell installer downloads through .NET, which validates TLS against the Windows certificate store. Ask your IT team to add the proxy's CA certificate to the Windows store if it isn't already there, then run the installer:
+   ```bash theme={null}
+   curl --cacert /path/to/corporate-ca.pem -fsSL https://claude.ai/install.sh | bash
+   ```
 
-       ```powershell theme={null}
-       irm https://claude.ai/install.ps1 | iex
-       ```
-     </Tab>
-   </Tabs>
+   **Windows PowerShell**
+
+   The PowerShell installer downloads through .NET, which validates TLS against the Windows certificate store. Ask your IT team to add the proxy's CA certificate to the Windows store if it isn't already there, then run the installer:
+
+   ```powershell theme={null}
+   irm https://claude.ai/install.ps1 | iex
+   ```
 
    For Claude Code itself once installed, set `NODE_EXTRA_CA_CERTS` so API requests trust the same bundle:
 
-   <Tabs>
-     <Tab title="macOS/Linux">
-       ```bash theme={null}
-       export NODE_EXTRA_CA_CERTS=/path/to/corporate-ca.pem
-       ```
-     </Tab>
+   **macOS/Linux**
 
-     <Tab title="Windows PowerShell">
-       ```powershell theme={null}
-       $env:NODE_EXTRA_CA_CERTS = 'C:\path\to\corporate-ca.pem'
-       ```
-     </Tab>
-   </Tabs>
+   ```bash theme={null}
+   export NODE_EXTRA_CA_CERTS=/path/to/corporate-ca.pem
+   ```
+
+   **Windows PowerShell**
+
+   ```powershell theme={null}
+   $env:NODE_EXTRA_CA_CERTS = 'C:\path\to\corporate-ca.pem'
+   ```
 
    Ask your IT team for the certificate file if you don't have it. You can also try on a direct connection to confirm the proxy is the cause.
 
@@ -652,8 +636,29 @@ A proxy or gateway can close a long transfer before it finishes, and the Claude 
 
 * Run `claude update` again. On an otherwise healthy network, the download usually succeeds on the next run. For the timed-out message, run it again from a faster or less throttled network.
 * If your network requires a proxy, set `HTTPS_PROXY` before running the installer or `claude update`. See [Check network connectivity](#check-network-connectivity).
-* If a corporate proxy keeps closing the transfer, ask your network team to allow the full download from `downloads.claude.ai`. See [Network access requirements](/docs/en/network-config#network-access-requirements).
+* If a corporate proxy keeps closing the transfer, ask your network team to allow the full download from `downloads.claude.ai`. See [Network access requirements](https://code.claude.com/docs/en/network-config.md#network-access-requirements).
 * Run `claude doctor` from your shell for installation diagnostics
+
+### Release verification failed for Claude Code
+
+This message from `claude update` or `claude install` means Claude Code couldn't confirm that the release it was about to install is genuine, so it installed nothing. Any version you already have keeps working.
+
+```text theme={null}
+Release verification failed for Claude Code <version> (<reason>). The update was not installed.
+```
+
+Take the step that matches the value in parentheses in your message:
+
+* **A value that starts with `sidecar_fetch_`**: run the same command again from your shell. `claude update` succeeded if it prints a line that starts with `Successfully updated from`, and `claude install` succeeded if it prints `Claude Code successfully installed!`.
+* **Any other value**: try the same command again later
+
+With any value, if the message repeats, [report the problem](#still-stuck) and include the full message.
+
+### `Auto-update failed · Run claude doctor` in the session footer
+
+This red line means Claude Code tried to update itself in the background and the update didn't install. You can keep working without doing anything.
+
+The line points you to `claude doctor`, whose `Last update attempt: failed (install_failed)` line gives a date but no cause. To finish the update or see why it failed, run `claude update` in your shell instead. If that install fails too, look for the error `claude update` prints under [Find your error](#find-your-error).
 
 ### Wrong install command on Windows
 
@@ -702,9 +707,7 @@ If you see `'irm' is not recognized`, `The token '&&' is not a valid statement s
 
 Whichever installer you use, confirm it worked: open a new terminal and run `claude --version`, which prints a version number such as `2.1.211 (Claude Code)`.
 
-<h3 id="running-scripts-is-disabled-on-this-system">
-  `running scripts is disabled on this system`
-</h3>
+### `running scripts is disabled on this system`
 
 Installing or running Claude Code through npm on Windows can fail with a `SecurityError`:
 
@@ -723,7 +726,7 @@ The same error names `claude.ps1` when you run `claude` after an npm install. Po
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
    ```
 2. **Call the `.cmd` launcher instead**: `npm.cmd` and `claude.cmd` do the same job, and the policy doesn't cover them.
-3. **Use the [PowerShell installer](/docs/en/setup#install-claude-code)** instead of npm. It installs a binary rather than a `.ps1` script.
+3. **Use the [PowerShell installer](https://code.claude.com/docs/en/setup.md#install-claude-code)** instead of npm. It installs a binary rather than a `.ps1` script.
 
 ### `The process cannot access the file` during Windows install
 
@@ -736,9 +739,7 @@ Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\downloads"
 irm https://claude.ai/install.ps1 | iex
 ```
 
-<h3 id="claude-exe-missing-after-an-update-on-windows">
-  `claude.exe` missing after an update on Windows
-</h3>
+### `claude.exe` missing after an update on Windows
 
 If your terminal reports `'claude' is not recognized` right after Claude Code updated on Windows, check whether `%USERPROFILE%\.local\bin` still contains `claude.exe`. If that directory isn't on your PATH at all, see [Verify your PATH](#verify-your-path) instead. To update on Windows, Claude Code renames the existing `claude.exe` aside to a backup and moves the new version into its place. If moving the new version into place fails and Claude Code can't rename the backup back either, the directory keeps the backup but has no `claude.exe`.
 
@@ -769,7 +770,7 @@ Installation was killed before it could finish (exit code 137). This usually mea
 Claude Code needs roughly 512MB of free memory to install. Free up memory, then run this script again.
 ```
 
-Installing needs roughly 512 MB of free memory, and running Claude Code needs more. See the [system requirements](/docs/en/setup#system-requirements).
+Installing needs roughly 512 MB of free memory, and running Claude Code needs more. See the [system requirements](https://code.claude.com/docs/en/setup.md#system-requirements).
 
 **Solutions:**
 
@@ -826,25 +827,23 @@ When installing Claude Code in a Docker container, installing as root into `/` c
 
 ### `Raw mode is not supported` during install
 
-When your organization's [server-managed settings](/docs/en/server-managed-settings) include changes that need [security approval](/docs/en/server-managed-settings#security-approval-dialogs), Claude Code versions before 2.1.246 try to show the approval dialog during `claude install`. The dialog needs a terminal on stdin. When the installer runs `claude install` from a pipe, as `curl -fsSL https://claude.ai/install.sh | bash` does, stdin is the pipe rather than a terminal, so the install fails with an error containing `Raw mode is not supported`.
+When your organization's [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md) include changes that need [security approval](https://code.claude.com/docs/en/server-managed-settings.md#security-approval-dialogs), Claude Code versions before 2.1.246 try to show the approval dialog during `claude install`. The dialog needs a terminal on stdin. When the installer runs `claude install` from a pipe, as `curl -fsSL https://claude.ai/install.sh | bash` does, stdin is the pipe rather than a terminal, so the install fails with an error containing `Raw mode is not supported`.
 
-Claude Code v2.1.246 and later don't show the dialog during `claude install` or `claude update`. The command runs with the settings you last approved, and Claude Code shows the dialog in your next interactive session. If your organization's startup configuration [waits for the settings fetch](/docs/en/server-managed-settings#enforce-fail-closed-startup), such as when it sets `forceRemoteSettingsRefresh`, the dialog still appears during these commands, and an install run from a pipe still fails.
+Claude Code v2.1.246 and later don't show the dialog during `claude install` or `claude update`. The command runs with the settings you last approved, and Claude Code shows the dialog in your next interactive session. If your organization's startup configuration [waits for the settings fetch](https://code.claude.com/docs/en/server-managed-settings.md#enforce-fail-closed-startup), such as when it sets `forceRemoteSettingsRefresh`, the dialog still appears during these commands, and an install run from a pipe still fails.
 
 In every other configuration, rerunning the installer gets past this error, because the script runs the latest release's `install` command even when you ask it to install an older version. Rerun the command for your platform:
 
-<Tabs>
-  <Tab title="macOS/Linux">
-    ```bash theme={null}
-    curl -fsSL https://claude.ai/install.sh | bash
-    ```
-  </Tab>
+**macOS/Linux**
 
-  <Tab title="Windows PowerShell">
-    ```powershell theme={null}
-    irm https://claude.ai/install.ps1 | iex
-    ```
-  </Tab>
-</Tabs>
+```bash theme={null}
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+**Windows PowerShell**
+
+```powershell theme={null}
+irm https://claude.ai/install.ps1 | iex
+```
 
 `claude --version` prints the version the rerun installed.
 
@@ -858,7 +857,7 @@ If you hit the hang on an earlier version, find the directory. In this command's
 ls -ld ~/.zshrc ~/.bashrc ~/.bash_profile ~/.bash_login ~/.profile ~/.config/fish/config.fish
 ```
 
-Move the directory aside, or update to v2.1.214 or later. Since `claude update` hangs on the affected versions, update by rerunning the [install script](/docs/en/setup#install-claude-code) instead.
+Move the directory aside, or update to v2.1.214 or later. Since `claude update` hangs on the affected versions, update by rerunning the [install script](https://code.claude.com/docs/en/setup.md#install-claude-code) instead.
 
 ### Claude Desktop overrides the `claude` command on Windows
 
@@ -868,7 +867,7 @@ Update Claude Desktop to the latest version to fix this issue.
 
 ### Claude Code on Windows requires either Git for Windows (for bash) or PowerShell
 
-Git for Windows is optional. Claude Code uses the [PowerShell tool](/docs/en/tools-reference#powershell-tool) when Git Bash is absent, so this error means neither shell was found.
+Git for Windows is optional. Claude Code uses the [PowerShell tool](https://code.claude.com/docs/en/tools-reference.md#powershell-tool) when Git Bash is absent, so this error means neither shell was found.
 
 **If PowerShell is missing from your PATH**, its default location is `C:\Windows\System32\WindowsPowerShell\v1.0\`. Add that directory to your `PATH`, or install [PowerShell 7](https://aka.ms/powershell), which provides `pwsh`.
 
@@ -881,7 +880,7 @@ Git for Windows is optional. Claude Code uses the [PowerShell tool](/docs/en/too
 
 In step 2, Claude Code skips a `git` that sits in the folder you launched Claude Code from, or below it in a path that contains `node_modules` or a virtual-environment folder such as `.venv` or `env`, for example `C:\dev\env\myproject\Git` when you launched from `C:\dev\env\myproject`. This keeps Claude Code from running an executable that a project placed there. If your Git is in a location like that, point `CLAUDE_CODE_GIT_BASH_PATH` at it.
 
-**To point Claude Code at a specific Git installation**, find it by running `where.exe git` in PowerShell, then set the `bin\bash.exe` path from that installation as `CLAUDE_CODE_GIT_BASH_PATH` in your [settings.json file](/docs/en/settings):
+**To point Claude Code at a specific Git installation**, find it by running `where.exe git` in PowerShell, then set the `bin\bash.exe` path from that installation as `CLAUDE_CODE_GIT_BASH_PATH` in your [settings.json file](https://code.claude.com/docs/en/settings.md):
 
 ```json theme={null}
 {
@@ -905,7 +904,7 @@ Windows includes two PowerShell entries in the Start menu: `Windows PowerShell` 
 
 If this prints `True`, your operating system is fine. Close the window, open `Windows PowerShell` without the x86 suffix, and run the install command again.
 
-If this prints `False`, you are on a 32-bit edition of Windows. Claude Code requires a 64-bit operating system. See the [system requirements](/docs/en/setup#system-requirements).
+If this prints `False`, you are on a 32-bit edition of Windows. Claude Code requires a 64-bit operating system. See the [system requirements](https://code.claude.com/docs/en/setup.md#system-requirements).
 
 ### Linux musl or glibc binary mismatch
 
@@ -931,7 +930,7 @@ This can happen on glibc-based systems that have musl cross-compilation packages
    ```bash theme={null}
    apk add libgcc libstdc++ ripgrep
    ```
-   On Alpine, `ripgrep` is in the community repository. If `apk` reports that the package is missing, see [Alpine Linux setup](/docs/en/setup#alpine-linux-and-musl-based-distributions).
+   On Alpine, `ripgrep` is in the community repository. If `apk` reports that the package is missing, see [Alpine Linux setup](https://code.claude.com/docs/en/setup.md#alpine-linux-and-musl-based-distributions).
 
 ### `Illegal instruction`
 
@@ -978,7 +977,7 @@ If a running session exits and your shell prints `Bus error`, one cause is that 
 
 Before the shell's message, Claude Code's runtime can print a crash report that includes `panic(main thread): Bus error at address` and `oh no: Bun has crashed. This indicates a bug in Bun, not your code.` When the executable became unreadable, the crash comes from the unreadable file, not from a bug in Bun. The report can also be missing, if the runtime couldn't read the code that prints it either.
 
-Start a new session to continue. If Claude Code is installed on network storage, follow [Install on network storage](/docs/en/setup#install-on-network-storage) so upgrades don't remove a binary that running sessions still need.
+Start a new session to continue. If Claude Code is installed on network storage, follow [Install on network storage](https://code.claude.com/docs/en/setup.md#install-on-network-storage) so upgrades don't remove a binary that running sessions still need.
 
 ### `Exec format error` on WSL1
 
@@ -1002,7 +1001,7 @@ Then run `source ~/.bashrc` and retry `claude`.
 
 ### npm install errors in WSL
 
-These issues apply if you installed Claude Code with `npm install -g` inside WSL. If you used the [native installer](/docs/en/setup), skip this section.
+These issues apply if you installed Claude Code with `npm install -g` inside WSL. If you used the [native installer](https://code.claude.com/docs/en/setup.md), skip this section.
 
 **OS or platform detection issues.** If npm reports a platform mismatch during install, WSL is likely picking up the Windows `npm`. Run `npm config set os linux` first, then install with `npm install -g @anthropic-ai/claude-code --force`. Do not use `sudo`.
 
@@ -1028,9 +1027,9 @@ If nvm is loaded but Windows paths still take priority, prepend your Linux Node 
 export PATH="$HOME/.nvm/versions/node/$(node -v)/bin:$PATH"
 ```
 
-<Warning>
-  Avoid disabling Windows PATH importing via `appendWindowsPath = false` as this breaks the ability to call Windows executables from WSL. Similarly, avoid uninstalling Node.js from Windows if you use it for Windows development.
-</Warning>
+> [!WARNING]
+>
+> Avoid disabling Windows PATH importing via `appendWindowsPath = false` as this breaks the ability to call Windows executables from WSL. Similarly, avoid uninstalling Node.js from Windows if you use it for Windows development.
 
 ### Permission errors during installation
 
@@ -1065,12 +1064,10 @@ Check the following causes:
 
 * **Optional dependencies are disabled.** Remove `--omit=optional` from your npm install command, `--no-optional` from pnpm, or `--ignore-optional` from yarn, and check that `.npmrc` does not set `optional=false`. Then reinstall. The native binary is delivered only as an optional dependency, so there is no JavaScript fallback if it is skipped, and running `install.cjs` again can't place a binary that was never downloaded.
 * **Install scripts are disabled.** `--ignore-scripts` and some pnpm configurations skip the postinstall step but still download the platform package. Run `node node_modules/@anthropic-ai/claude-code/install.cjs` as the message suggests, or reinstall without the flag. If postinstall can't run in your environment at all, `node node_modules/@anthropic-ai/claude-code/cli-wrapper.cjs` finds the downloaded package and launches it, at the cost of an extra Node process on each start. If the wrapper prints `Could not find native binary package` instead, the platform package was never downloaded, so fix the optional-dependencies cause above first.
-* **Unsupported platform.** Prebuilt binaries are published for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64`, `linux-x64-musl`, `linux-arm64-musl`, `win32-x64`, and `win32-arm64`. Claude Code does not ship a binary for other platforms; see the [system requirements](/docs/en/setup#system-requirements). On FreeBSD, the installer reports the platform as unsupported. Before v2.1.205, it treated FreeBSD as Linux and downloaded a binary that couldn't run.
+* **Unsupported platform.** Prebuilt binaries are published for `darwin-arm64`, `darwin-x64`, `linux-x64`, `linux-arm64`, `linux-x64-musl`, `linux-arm64-musl`, `win32-x64`, and `win32-arm64`. Claude Code does not ship a binary for other platforms; see the [system requirements](https://code.claude.com/docs/en/setup.md#system-requirements). On FreeBSD, the installer reports the platform as unsupported. Before v2.1.205, it treated FreeBSD as Linux and downloaded a binary that couldn't run.
 * **Corporate npm mirror is missing the platform packages.** Ensure your registry mirrors all eight `@anthropic-ai/claude-code-*` platform packages in addition to the meta package.
 
-<h3 id="npm-enotempty-during-update-or-reinstall">
-  npm `ENOTEMPTY` error during update or reinstall
-</h3>
+### npm `ENOTEMPTY` error during update or reinstall
 
 When you run `npm install -g @anthropic-ai/claude-code` over an existing installation, npm can fail while moving the old package directory aside:
 
@@ -1085,25 +1082,23 @@ npm error ENOTEMPTY: directory not empty, rename '...'
 
 The `npm error path` line names the directory npm couldn't move. Delete that directory and any leftover `.claude-code-*` directories next to it, which earlier interrupted runs can leave behind. The commands below find your global package directory with `npm root -g`; if the directory the `npm error path` line names is not under the directory `npm root -g` prints, for example because you switched Node versions with nvm, delete the directories the error names instead:
 
-<Tabs>
-  <Tab title="macOS/Linux">
-    ```bash theme={null}
-    rm -rf "$(npm root -g)/@anthropic-ai/claude-code"
-    ```
+**macOS/Linux**
 
-    Then remove any leftover temp directories. If Zsh prints `no matches found`, there were none to remove:
+```bash theme={null}
+rm -rf "$(npm root -g)/@anthropic-ai/claude-code"
+```
 
-    ```bash theme={null}
-    rm -rf "$(npm root -g)/@anthropic-ai/.claude-code-"*
-    ```
-  </Tab>
+Then remove any leftover temp directories. If Zsh prints `no matches found`, there were none to remove:
 
-  <Tab title="Windows PowerShell">
-    ```powershell theme={null}
-    Remove-Item -Recurse -Force "$(npm root -g)/@anthropic-ai/claude-code", "$(npm root -g)/@anthropic-ai/.claude-code-*"
-    ```
-  </Tab>
-</Tabs>
+```bash theme={null}
+rm -rf "$(npm root -g)/@anthropic-ai/.claude-code-"*
+```
+
+**Windows PowerShell**
+
+```powershell theme={null}
+Remove-Item -Recurse -Force "$(npm root -g)/@anthropic-ai/claude-code", "$(npm root -g)/@anthropic-ai/.claude-code-*"
+```
 
 Then reinstall:
 
@@ -1143,7 +1138,7 @@ If you see `API Error: 403 Request not allowed` after logging in:
 
 * **Claude Pro/Max users**: verify your subscription is active at [claude.ai/settings](https://claude.ai/settings)
 * **Anthropic Console users**: confirm your account has the "Claude Code" or "Developer" role. Admins assign this on the Console's Members page at [platform.claude.com/settings/members](https://platform.claude.com/settings/members).
-* **Behind a proxy**: corporate proxies can interfere with API requests. See [network configuration](/docs/en/network-config) for proxy setup.
+* **Behind a proxy**: corporate proxies can interfere with API requests. See [network configuration](https://code.claude.com/docs/en/network-config.md) for proxy setup.
 
 ### Claude Code access has not been granted for this account
 
@@ -1158,25 +1153,23 @@ To get access:
 
 If you see `API Error: 400 ... "This organization has been disabled"` despite having an active Claude subscription, an `ANTHROPIC_API_KEY` environment variable is overriding your subscription. This commonly happens when an old API key from a previous employer or project is still set in your shell profile.
 
-When `ANTHROPIC_API_KEY` is present and you have approved it, Claude Code uses that key instead of your subscription's OAuth credentials. In non-interactive mode with the `-p` flag, the key is always used when present. See [authentication precedence](/docs/en/authentication#authentication-precedence) for the full resolution order.
+When `ANTHROPIC_API_KEY` is present and you have approved it, Claude Code uses that key instead of your subscription's OAuth credentials. In non-interactive mode with the `-p` flag, the key is always used when present. See [authentication precedence](https://code.claude.com/docs/en/authentication.md#authentication-precedence) for the full resolution order.
 
 To use your subscription instead, unset the environment variable and remove it from your shell profile:
 
-<Tabs>
-  <Tab title="macOS/Linux">
-    ```bash theme={null}
-    unset ANTHROPIC_API_KEY
-    claude
-    ```
-  </Tab>
+**macOS/Linux**
 
-  <Tab title="Windows PowerShell">
-    ```powershell theme={null}
-    Remove-Item Env:ANTHROPIC_API_KEY
-    claude
-    ```
-  </Tab>
-</Tabs>
+```bash theme={null}
+unset ANTHROPIC_API_KEY
+claude
+```
+
+**Windows PowerShell**
+
+```powershell theme={null}
+Remove-Item Env:ANTHROPIC_API_KEY
+claude
+```
 
 Check `~/.zshrc`, `~/.bashrc`, or `~/.profile` for `export ANTHROPIC_API_KEY=...` lines and remove them to make the change permanent. On Windows, check your PowerShell profile at `$PROFILE` and your User environment variables for `ANTHROPIC_API_KEY`. Run `/status` inside Claude Code to confirm which authentication method is active.
 
@@ -1207,7 +1200,7 @@ If Claude Code prompts you to log in again after a session, your OAuth token may
 
 Run `/login` to re-authenticate. If this happens frequently, check that your system clock is accurate, as token validation depends on correct timestamps.
 
-Parallel sessions on one machine share a saved login and coordinate its renewal so that only one process refreshes the token at a time. For what the other sessions do after you sign in again in one of them, see [Not logged in](/docs/en/errors#not-logged-in).
+Parallel sessions on one machine share a saved login and coordinate its renewal so that only one process refreshes the token at a time. For what the other sessions do after you sign in again in one of them, see [Not logged in](https://code.claude.com/docs/en/errors.md#not-logged-in).
 
 Before v2.1.211, waking the machine from sleep could cause two sessions to renew with the same token, which revoked the saved login and prompted every open session to log in again at once.
 
@@ -1215,27 +1208,25 @@ On macOS, Claude Code saves credentials to the login Keychain. When the Keychain
 
 To make the Keychain writable again and move your login back into the encrypted Keychain:
 
-<Steps>
-  <Step title="Check Keychain access">
-    Run `claude doctor` to check Keychain access. When the Keychain rejects writes, the report lists a warning that starts with `macOS Keychain is not writable`, followed by a suggested fix. When the report lists no Keychain warning, the Keychain is writable and you can skip to the last step.
-  </Step>
+**1. Check Keychain access**
 
-  <Step title="Unlock the Keychain">
-    ```bash theme={null}
-    security unlock-keychain ~/Library/Keychains/login.keychain-db
-    ```
+Run `claude doctor` to check Keychain access. When the Keychain rejects writes, the report lists a warning that starts with `macOS Keychain is not writable`, followed by a suggested fix. When the report lists no Keychain warning, the Keychain is writable and you can skip to the last step.
 
-    Enter your Keychain password when the command asks for it, then run `claude doctor` again. When the unlock worked, the report no longer lists the Keychain warning.
-  </Step>
+**2. Unlock the Keychain**
 
-  <Step title="Resync the Keychain password if unlocking doesn't help">
-    Open Keychain Access, select the `login` keychain, and choose **Edit > Change Password for Keychain "login"** to resync it with your account password. Then run `claude doctor` again. Go on to the next step once the report no longer lists the Keychain warning.
-  </Step>
+```bash theme={null}
+security unlock-keychain ~/Library/Keychains/login.keychain-db
+```
 
-  <Step title="Log out and back in">
-    Once the Keychain is writable again, Claude Code moves the credentials back the next time it writes a credential. To force it now, run `/logout` and then `/login`. Logging out removes all stored credentials, including the plaintext file's contents, saved MCP server logins, and plugin sensitive values, so expect to re-authorize MCP servers and re-enter plugin secrets afterwards. Logging in again stores your login in the Keychain.
-  </Step>
-</Steps>
+Enter your Keychain password when the command asks for it, then run `claude doctor` again. When the unlock worked, the report no longer lists the Keychain warning.
+
+**3. Resync the Keychain password if unlocking doesn't help**
+
+Open Keychain Access, select the `login` keychain, and choose **Edit > Change Password for Keychain "login"** to resync it with your account password. Then run `claude doctor` again. Go on to the next step once the report no longer lists the Keychain warning.
+
+**4. Log out and back in**
+
+Once the Keychain is writable again, Claude Code moves the credentials back the next time it writes a credential. To force it now, run `/logout` and then `/login`. Logging out removes all stored credentials, including the plaintext file's contents, saved MCP server logins, and plugin sensitive values, so expect to re-authorize MCP servers and re-enter plugin secrets afterwards. Logging in again stores your login in the Keychain.
 
 ### Bedrock, Agent Platform, or Foundry credentials not loading
 
@@ -1261,7 +1252,7 @@ az login
 
 If credentials work in your terminal but not in the VS Code or JetBrains extension, the IDE process likely didn't inherit your shell environment. Set the provider environment variables in the IDE's own settings, or launch the IDE from a terminal where they're already exported.
 
-See [Amazon Bedrock](/docs/en/amazon-bedrock), [Google Cloud's Agent Platform](/docs/en/google-vertex-ai), or [Microsoft Foundry](/docs/en/microsoft-foundry) for full provider setup.
+See [Amazon Bedrock](https://code.claude.com/docs/en/amazon-bedrock.md), [Google Cloud's Agent Platform](https://code.claude.com/docs/en/google-vertex-ai.md), or [Microsoft Foundry](https://code.claude.com/docs/en/microsoft-foundry.md) for full provider setup.
 
 ## Still stuck
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/channels
-fetched_at: 2026-10-19T05:32:45.022425+00:00
+fetched_at: 2026-10-26T05:40:00.086425+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,9 +12,9 @@ fetch_method: mintlify_md
 
 > Use channels to push messages, alerts, and webhooks into your Claude Code session from an MCP server. Forward CI results, chat messages, and monitoring events so Claude can react while you're away.
 
-<Note>
-  Channels are in [research preview](#research-preview). They require Anthropic authentication through claude.ai or a Console API key, and are not available on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry. Team and Enterprise organizations must [explicitly enable them](#enterprise-controls).
-</Note>
+> [!NOTE]
+>
+> Channels are in [research preview](#research-preview). They require Anthropic authentication through claude.ai or a Console API key, and are not available on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry. Team and Enterprise organizations must [explicitly enable them](#enterprise-controls).
 
 A channel is an MCP server that pushes events into your running Claude Code session, so Claude can react to things that happen while you're not at the terminal. Channels can be two-way: Claude reads the event and replies back through the same channel, like a chat bridge. Events only arrive while the session is open, so for an always-on setup you run Claude in a background process or persistent terminal.
 
@@ -24,207 +24,205 @@ You install a channel as a plugin and configure it with your own credentials. Te
 
 When Claude replies through a channel, you see the inbound message in your terminal but not the reply text. The terminal shows the tool call and a confirmation (like "sent"), and the actual reply appears on the other platform.
 
-If you manage a Team, Enterprise, or Console organization, see [Enable channels for your organization](#enterprise-controls). To build your own channel, see the [Channels reference](/docs/en/channels-reference).
+If you manage a Team, Enterprise, or Console organization, see [Enable channels for your organization](#enterprise-controls). To build your own channel, see the [Channels reference](https://code.claude.com/docs/en/channels-reference.md).
 
 ## Supported channels
 
 Each supported channel is a plugin that requires [Bun](https://bun.sh). For a hands-on demo of the plugin flow before connecting a real platform, try the [fakechat quickstart](#quickstart).
 
-<Tabs>
-  <Tab title="Telegram">
-    View the full [Telegram plugin source](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/telegram).
+**Telegram**
 
-    <Steps>
-      <Step title="Create a Telegram bot">
-        Open [BotFather](https://t.me/BotFather) in Telegram and send `/newbot`. Give it a display name and a unique username ending in `bot`. Copy the token BotFather returns.
-      </Step>
+View the full [Telegram plugin source](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/telegram).
 
-      <Step title="Install the plugin">
-        Start Claude Code by running `claude` in your terminal, then enter this at its prompt:
+**1. Create a Telegram bot**
 
-        ```
-        /plugin install telegram@claude-plugins-official
-        ```
+Open [BotFather](https://t.me/BotFather) in Telegram and send `/newbot`. Give it a display name and a unique username ending in `bot`. Copy the token BotFather returns.
 
-        If the install fails, match the message Claude Code reports:
+**2. Install the plugin**
 
-        * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-        * `Plugin "<name>" not found in marketplace "claude-plugins-official"`: your local copy of the marketplace catalog may be out of date. Refresh it with `/plugin marketplace update claude-plugins-official`, then retry the install. If the retry prints the same message, see [Plugin not found in marketplace](/docs/en/plugins/troubleshooting#plugin-not-found-in-marketplace).
+Start Claude Code by running `claude` in your terminal, then enter this at its prompt:
 
-        When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Check the install summary: if it reports `Run /reload-plugins to apply.`, see [Apply plugin changes without restarting](/docs/en/plugins/cli-reference#reload-plugins) to make the plugin's configure command available.
-      </Step>
+```
+/plugin install telegram@claude-plugins-official
+```
 
-      <Step title="Configure your token">
-        Run the configure command with the token from BotFather:
+If the install fails, match the message Claude Code reports:
 
-        ```
-        /telegram:configure <token>
-        ```
+* `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
+* `Plugin "<name>" not found in marketplace "claude-plugins-official"`: your local copy of the marketplace catalog may be out of date. Refresh it with `/plugin marketplace update claude-plugins-official`, then retry the install. If the retry prints the same message, see [Plugin not found in marketplace](https://code.claude.com/docs/en/plugins/troubleshooting.md#plugin-not-found-in-marketplace).
 
-        This saves it to `~/.claude/channels/telegram/.env`. You can also set `TELEGRAM_BOT_TOKEN` in your shell environment before launching Claude Code.
-      </Step>
+When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Check the install summary: if it reports `Run /reload-plugins to apply.`, see [Apply plugin changes without restarting](https://code.claude.com/docs/en/plugins/cli-reference.md#reload-plugins) to make the plugin's configure command available.
 
-      <Step title="Restart with channels enabled">
-        Exit Claude Code and restart with the channel flag. This starts the Telegram plugin, which begins polling for messages from your bot:
+**3. Configure your token**
 
-        ```bash theme={null}
-        claude --channels plugin:telegram@claude-plugins-official
-        ```
-      </Step>
+Run the configure command with the token from BotFather:
 
-      <Step title="Pair your account">
-        Open Telegram and send any message to your bot. The bot replies with a pairing code.
+```
+/telegram:configure <token>
+```
 
-        <Note>If your bot doesn't respond, make sure Claude Code is running with `--channels` from the previous step. The bot can only reply while the channel is active.</Note>
+This saves it to `~/.claude/channels/telegram/.env`. You can also set `TELEGRAM_BOT_TOKEN` in your shell environment before launching Claude Code.
 
-        Back in Claude Code, run:
+**4. Restart with channels enabled**
 
-        ```
-        /telegram:access pair <code>
-        ```
+Exit Claude Code and restart with the channel flag. This starts the Telegram plugin, which begins polling for messages from your bot:
 
-        Then lock down access so only your account can send messages:
+```bash theme={null}
+claude --channels plugin:telegram@claude-plugins-official
+```
 
-        ```
-        /telegram:access policy allowlist
-        ```
-      </Step>
-    </Steps>
-  </Tab>
+**5. Pair your account**
 
-  <Tab title="Discord">
-    View the full [Discord plugin source](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/discord).
+Open Telegram and send any message to your bot. The bot replies with a pairing code.
 
-    <Steps>
-      <Step title="Create a Discord bot">
-        Go to the [Discord Developer Portal](https://discord.com/developers/applications), click **New Application**, and name it. In the **Bot** section, create a username, then click **Reset Token** and copy the token.
-      </Step>
+> [!NOTE]
+>
+> If your bot doesn't respond, make sure Claude Code is running with `--channels` from the previous step. The bot can only reply while the channel is active.
 
-      <Step title="Enable Message Content Intent">
-        In your bot's settings, scroll to **Privileged Gateway Intents** and enable **Message Content Intent**.
-      </Step>
+Back in Claude Code, run:
 
-      <Step title="Invite the bot to your server">
-        Go to **OAuth2 > URL Generator**. Select the `bot` scope and enable these permissions:
+```
+/telegram:access pair <code>
+```
 
-        * View Channels
-        * Send Messages
-        * Send Messages in Threads
-        * Read Message History
-        * Attach Files
-        * Add Reactions
+Then lock down access so only your account can send messages:
 
-        Open the generated URL to add the bot to your server.
-      </Step>
+```
+/telegram:access policy allowlist
+```
 
-      <Step title="Install the plugin">
-        Start Claude Code by running `claude` in your terminal, then enter this at its prompt:
+**Discord**
 
-        ```
-        /plugin install discord@claude-plugins-official
-        ```
+View the full [Discord plugin source](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/discord).
 
-        If the install fails, match the message Claude Code reports:
+**1. Create a Discord bot**
 
-        * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-        * `Plugin "<name>" not found in marketplace "claude-plugins-official"`: your local copy of the marketplace catalog may be out of date. Refresh it with `/plugin marketplace update claude-plugins-official`, then retry the install. If the retry prints the same message, see [Plugin not found in marketplace](/docs/en/plugins/troubleshooting#plugin-not-found-in-marketplace).
+Go to the [Discord Developer Portal](https://discord.com/developers/applications), click **New Application**, and name it. In the **Bot** section, create a username, then click **Reset Token** and copy the token.
 
-        When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Check the install summary: if it reports `Run /reload-plugins to apply.`, see [Apply plugin changes without restarting](/docs/en/plugins/cli-reference#reload-plugins) to make the plugin's configure command available.
-      </Step>
+**2. Enable Message Content Intent**
 
-      <Step title="Configure your token">
-        Run the configure command with the bot token you copied:
+In your bot's settings, scroll to **Privileged Gateway Intents** and enable **Message Content Intent**.
 
-        ```
-        /discord:configure <token>
-        ```
+**3. Invite the bot to your server**
 
-        This saves it to `~/.claude/channels/discord/.env`. You can also set `DISCORD_BOT_TOKEN` in your shell environment before launching Claude Code.
-      </Step>
+Go to **OAuth2 > URL Generator**. Select the `bot` scope and enable these permissions:
 
-      <Step title="Restart with channels enabled">
-        Exit Claude Code and restart with the channel flag. This connects the Discord plugin so your bot can receive and respond to messages:
+* View Channels
+* Send Messages
+* Send Messages in Threads
+* Read Message History
+* Attach Files
+* Add Reactions
 
-        ```bash theme={null}
-        claude --channels plugin:discord@claude-plugins-official
-        ```
-      </Step>
+Open the generated URL to add the bot to your server.
 
-      <Step title="Pair your account">
-        DM your bot on Discord. The bot replies with a pairing code.
+**4. Install the plugin**
 
-        <Note>If your bot doesn't respond, make sure Claude Code is running with `--channels` from the previous step. The bot can only reply while the channel is active.</Note>
+Start Claude Code by running `claude` in your terminal, then enter this at its prompt:
 
-        Back in Claude Code, run:
+```
+/plugin install discord@claude-plugins-official
+```
 
-        ```
-        /discord:access pair <code>
-        ```
+If the install fails, match the message Claude Code reports:
 
-        Then lock down access so only your account can send messages:
+* `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
+* `Plugin "<name>" not found in marketplace "claude-plugins-official"`: your local copy of the marketplace catalog may be out of date. Refresh it with `/plugin marketplace update claude-plugins-official`, then retry the install. If the retry prints the same message, see [Plugin not found in marketplace](https://code.claude.com/docs/en/plugins/troubleshooting.md#plugin-not-found-in-marketplace).
 
-        ```
-        /discord:access policy allowlist
-        ```
-      </Step>
-    </Steps>
-  </Tab>
+When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Check the install summary: if it reports `Run /reload-plugins to apply.`, see [Apply plugin changes without restarting](https://code.claude.com/docs/en/plugins/cli-reference.md#reload-plugins) to make the plugin's configure command available.
 
-  <Tab title="iMessage">
-    View the full [iMessage plugin source](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/imessage).
+**5. Configure your token**
 
-    The iMessage channel reads your Messages database directly and sends replies through AppleScript. It requires macOS and needs no bot token or external service.
+Run the configure command with the bot token you copied:
 
-    <Steps>
-      <Step title="Grant Full Disk Access">
-        The Messages database at `~/Library/Messages/chat.db` is protected by macOS. The first time the server reads it, macOS prompts for access: click **Allow**. The prompt names whichever app launched Bun, such as Terminal, iTerm, or your IDE.
+```
+/discord:configure <token>
+```
 
-        If the prompt doesn't appear or you clicked Don't Allow, grant access manually under **System Settings > Privacy & Security > Full Disk Access** and add your terminal. Without this, the server exits immediately with `authorization denied`.
-      </Step>
+This saves it to `~/.claude/channels/discord/.env`. You can also set `DISCORD_BOT_TOKEN` in your shell environment before launching Claude Code.
 
-      <Step title="Install the plugin">
-        Start Claude Code by running `claude` in your terminal, then enter this at its prompt:
+**6. Restart with channels enabled**
 
-        ```
-        /plugin install imessage@claude-plugins-official
-        ```
+Exit Claude Code and restart with the channel flag. This connects the Discord plugin so your bot can receive and respond to messages:
 
-        If the install fails, match the message Claude Code reports:
+```bash theme={null}
+claude --channels plugin:discord@claude-plugins-official
+```
 
-        * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-        * `Plugin "<name>" not found in marketplace "claude-plugins-official"`: your local copy of the marketplace catalog may be out of date. Refresh it with `/plugin marketplace update claude-plugins-official`, then retry the install. If the retry prints the same message, see [Plugin not found in marketplace](/docs/en/plugins/troubleshooting#plugin-not-found-in-marketplace).
+**7. Pair your account**
 
-        When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects.
+DM your bot on Discord. The bot replies with a pairing code.
 
-        If the install summary reports `Run /reload-plugins to apply.`, you don't need to act on it here, because restarting in the next step picks up the plugin.
-      </Step>
+> [!NOTE]
+>
+> If your bot doesn't respond, make sure Claude Code is running with `--channels` from the previous step. The bot can only reply while the channel is active.
 
-      <Step title="Restart with channels enabled">
-        Exit Claude Code and restart with the channel flag:
+Back in Claude Code, run:
 
-        ```bash theme={null}
-        claude --channels plugin:imessage@claude-plugins-official
-        ```
-      </Step>
+```
+/discord:access pair <code>
+```
 
-      <Step title="Text yourself">
-        Open Messages on any device signed into your Apple ID and send a message to yourself. It reaches Claude immediately: self-chat bypasses access control with no setup.
+Then lock down access so only your account can send messages:
 
-        <Note>The first reply Claude sends triggers a macOS Automation prompt asking if your terminal can control Messages. Click **OK**.</Note>
-      </Step>
+```
+/discord:access policy allowlist
+```
 
-      <Step title="Allow other senders">
-        By default, only your own messages pass through. To let another contact reach Claude, add their handle:
+**iMessage**
 
-        ```
-        /imessage:access allow +15551234567
-        ```
+View the full [iMessage plugin source](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/imessage).
 
-        Handles are phone numbers in `+country` format or Apple ID emails like `user@example.com`.
-      </Step>
-    </Steps>
-  </Tab>
-</Tabs>
+The iMessage channel reads your Messages database directly and sends replies through AppleScript. It requires macOS and needs no bot token or external service.
+
+**1. Grant Full Disk Access**
+
+The Messages database at `~/Library/Messages/chat.db` is protected by macOS. The first time the server reads it, macOS prompts for access: click **Allow**. The prompt names whichever app launched Bun, such as Terminal, iTerm, or your IDE.
+
+If the prompt doesn't appear or you clicked Don't Allow, grant access manually under **System Settings > Privacy & Security > Full Disk Access** and add your terminal. Without this, the server exits immediately with `authorization denied`.
+
+**2. Install the plugin**
+
+Start Claude Code by running `claude` in your terminal, then enter this at its prompt:
+
+```
+/plugin install imessage@claude-plugins-official
+```
+
+If the install fails, match the message Claude Code reports:
+
+* `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
+* `Plugin "<name>" not found in marketplace "claude-plugins-official"`: your local copy of the marketplace catalog may be out of date. Refresh it with `/plugin marketplace update claude-plugins-official`, then retry the install. If the retry prints the same message, see [Plugin not found in marketplace](https://code.claude.com/docs/en/plugins/troubleshooting.md#plugin-not-found-in-marketplace).
+
+When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects.
+
+If the install summary reports `Run /reload-plugins to apply.`, you don't need to act on it here, because restarting in the next step picks up the plugin.
+
+**3. Restart with channels enabled**
+
+Exit Claude Code and restart with the channel flag:
+
+```bash theme={null}
+claude --channels plugin:imessage@claude-plugins-official
+```
+
+**4. Text yourself**
+
+Open Messages on any device signed into your Apple ID and send a message to yourself. It reaches Claude immediately: self-chat bypasses access control with no setup.
+
+> [!NOTE]
+>
+> The first reply Claude sends triggers a macOS Automation prompt asking if your terminal can control Messages. Click **OK**.
+
+**5. Allow other senders**
+
+By default, only your own messages pass through. To let another contact reach Claude, add their handle:
+
+```
+/imessage:access allow +15551234567
+```
+
+Handles are phone numbers in `+country` format or Apple ID emails like `user@example.com`.
 
 ## Quickstart
 
@@ -234,54 +232,52 @@ Once you install and enable fakechat, you can type in the browser and the messag
 
 To try the fakechat demo, you'll need:
 
-* Claude Code [installed and authenticated](/docs/en/quickstart#step-1-install-claude-code) with a claude.ai account or a Claude Console API key
+* Claude Code [installed and authenticated](https://code.claude.com/docs/en/quickstart.md#step-1-install-claude-code) with a claude.ai account or a Claude Console API key
 * [Bun](https://bun.sh) installed. The pre-built channel plugins are Bun scripts. Check with `bun --version`; if that fails, [install Bun](https://bun.sh/docs/installation).
 * **Team, Enterprise, or managed Console org**: your admin must [enable channels](#enterprise-controls) in managed settings
 
-<Steps>
-  <Step title="Install the fakechat channel plugin">
-    Start Claude Code by running `claude` in your terminal, then enter the install command at its prompt:
+**1. Install the fakechat channel plugin**
 
-    ```text theme={null}
-    /plugin install fakechat@claude-plugins-official
-    ```
+Start Claude Code by running `claude` in your terminal, then enter the install command at its prompt:
 
-    If the install fails, match the message Claude Code reports:
+```text theme={null}
+/plugin install fakechat@claude-plugins-official
+```
 
-    * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
-    * `Plugin "<name>" not found in marketplace "claude-plugins-official"`: your local copy of the marketplace catalog may be out of date. Refresh it with `/plugin marketplace update claude-plugins-official`, then retry the install. If the retry prints the same message, see [Plugin not found in marketplace](/docs/en/plugins/troubleshooting#plugin-not-found-in-marketplace).
+If the install fails, match the message Claude Code reports:
 
-    When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects.
+* `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
+* `Plugin "<name>" not found in marketplace "claude-plugins-official"`: your local copy of the marketplace catalog may be out of date. Refresh it with `/plugin marketplace update claude-plugins-official`, then retry the install. If the retry prints the same message, see [Plugin not found in marketplace](https://code.claude.com/docs/en/plugins/troubleshooting.md#plugin-not-found-in-marketplace).
 
-    If the install summary reports `Run /reload-plugins to apply.`, you don't need to act on it here, because restarting in the next step picks up the plugin.
-  </Step>
+When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects.
 
-  <Step title="Restart with the channel enabled">
-    Exit Claude Code, then restart with `--channels` and pass the fakechat plugin you installed:
+If the install summary reports `Run /reload-plugins to apply.`, you don't need to act on it here, because restarting in the next step picks up the plugin.
 
-    ```bash theme={null}
-    claude --channels plugin:fakechat@claude-plugins-official
-    ```
+**2. Restart with the channel enabled**
 
-    The fakechat server starts automatically. The startup screen shows a channels notice stating that messages from `plugin:fakechat@claude-plugins-official` inject directly in this session. If the plugin isn't installed or isn't on the approved allowlist, a warning line naming the problem appears below that notice.
+Exit Claude Code, then restart with `--channels` and pass the fakechat plugin you installed:
 
-    <Tip>
-      You can pass several plugins to `--channels`, space-separated.
-    </Tip>
-  </Step>
+```bash theme={null}
+claude --channels plugin:fakechat@claude-plugins-official
+```
 
-  <Step title="Push a message in">
-    Open the fakechat UI at [http://localhost:8787](http://localhost:8787) and type a message:
+The fakechat server starts automatically. The startup screen shows a channels notice stating that messages from `plugin:fakechat@claude-plugins-official` inject directly in this session. If the plugin isn't installed or isn't on the approved allowlist, a warning line naming the problem appears below that notice.
 
-    ```text theme={null}
-    what's in my working directory?
-    ```
+> [!TIP]
+>
+> You can pass several plugins to `--channels`, space-separated.
 
-    The message arrives in your Claude Code session. The terminal shows it as an inbound channel line like `← fakechat · web: what's in my working directory?`, while the model receives it as a `<channel source="plugin:fakechat:fakechat">` event, using the plugin's scoped server name. Claude reads it, does the work, and calls fakechat's `reply` tool. If Claude Code asks for permission for the first reply, approve it. The answer shows up in the chat UI.
-  </Step>
-</Steps>
+**3. Push a message in**
 
-If Claude hits a permission prompt while you're away from the terminal, the session pauses until you respond. Channel servers that declare the [permission relay capability](/docs/en/channels-reference#relay-permission-prompts) can forward these prompts to you so you can approve or deny remotely. For unattended use, [`--dangerously-skip-permissions`](/docs/en/permission-modes#skip-all-checks-with-bypasspermissions-mode) bypasses most prompts, but only use it in environments you trust. Even then, the [actions no mode auto-approves](/docs/en/permission-modes#actions-no-mode-auto-approves) still apply.
+Open the fakechat UI at [http://localhost:8787](http://localhost:8787) and type a message:
+
+```text theme={null}
+what's in my working directory?
+```
+
+The message arrives in your Claude Code session. The terminal shows it as an inbound channel line like `← fakechat · web: what's in my working directory?`, while the model receives it as a `<channel source="plugin:fakechat:fakechat">` event, using the plugin's scoped server name. Claude reads it, does the work, and calls fakechat's `reply` tool. If Claude Code asks for permission for the first reply, approve it. The answer shows up in the chat UI.
+
+If Claude hits a permission prompt while you're away from the terminal, the session pauses until you respond. Channel servers that declare the [permission relay capability](https://code.claude.com/docs/en/channels-reference.md#relay-permission-prompts) can forward these prompts to you so you can approve or deny remotely. For unattended use, [`--dangerously-skip-permissions`](https://code.claude.com/docs/en/permission-modes#skip-all-checks-with-bypasspermissions-mode) bypasses most prompts, but only use it in environments you trust. Even then, the [actions no mode auto-approves](https://code.claude.com/docs/en/permission-modes.md#actions-no-mode-auto-approves) still apply.
 
 When you run channels in non-interactive mode with `-p`, tools that need terminal input, such as multiple-choice questions and plan mode approval, are disabled so the session never stalls waiting for input.
 
@@ -302,11 +298,11 @@ On top of that, you control which servers are enabled each session with `--chann
 
 Being in `.mcp.json` isn't enough to push messages: a server also has to be named in `--channels`.
 
-The allowlist also gates [permission relay](/docs/en/channels-reference#relay-permission-prompts) if the channel declares it. Anyone who can reply through the channel can approve or deny tool use in your session, so only allowlist senders you trust with that authority.
+The allowlist also gates [permission relay](https://code.claude.com/docs/en/channels-reference.md#relay-permission-prompts) if the channel declares it. Anyone who can reply through the channel can approve or deny tool use in your session, so only allowlist senders you trust with that authority.
 
 ## Enterprise controls
 
-Admins control availability through two [managed settings](/docs/en/settings) that users cannot override. The default depends on how you authenticate:
+Admins control availability through two [managed settings](https://code.claude.com/docs/en/settings.md) that users cannot override. The default depends on how you authenticate:
 
 * **claude.ai Team and Enterprise**: channels are blocked until an Owner [enables them](#enable-channels-for-your-organization).
 * **Anthropic Console with API key authentication**: channels are permitted by default. You only need this setting if your organization deploys managed settings.
@@ -343,7 +339,7 @@ By default, any plugin on the Anthropic-maintained allowlist can register as a c
 
 If you set an empty array, you block all channel plugins from the allowlist, but `--dangerously-load-development-channels` can still bypass that block for local testing. To block channels entirely including the development flag, leave `channelsEnabled` unset instead.
 
-This setting requires `channelsEnabled: true`. If a user passes a plugin to `--channels` that isn't on your list, Claude Code starts normally but the channel doesn't register, and the startup notice explains that the plugin isn't on the organization's approved list. On the v2 MCP client runtime, a channel can also fail to register because Claude Code [doesn't register a channel server that negotiates protocol revision 2026-07-28](/docs/en/mcp#push-messages-with-channels).
+This setting requires `channelsEnabled: true`. If a user passes a plugin to `--channels` that isn't on your list, Claude Code starts normally but the channel doesn't register, and the startup notice explains that the plugin isn't on the organization's approved list. On the v2 MCP client runtime, a channel can also fail to register because Claude Code [doesn't register a channel server that negotiates protocol revision 2026-07-28](https://code.claude.com/docs/en/mcp.md#push-messages-with-channels).
 
 ## Research preview
 
@@ -353,7 +349,7 @@ Neither `--channels` nor `--dangerously-load-development-channels` appears in `c
 
 During the preview, `--channels` only accepts plugins from an Anthropic-maintained allowlist, or from your organization's allowlist if an admin has set [`allowedChannelPlugins`](#restrict-which-channel-plugins-can-run). The channel plugins in [claude-plugins-official](https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins) are the default approved set. If you pass something that isn't on the effective allowlist, Claude Code starts normally but the channel doesn't register, and the startup notice tells you why.
 
-To test a channel you're building, pass it to `--dangerously-load-development-channels` in the `plugin:<name>@<marketplace>` or `server:<name>` form. See [Test during the research preview](/docs/en/channels-reference#test-during-the-research-preview) for information about testing custom channels that you build.
+To test a channel you're building, pass it to `--dangerously-load-development-channels` in the `plugin:<name>@<marketplace>` or `server:<name>` form. See [Test during the research preview](https://code.claude.com/docs/en/channels-reference.md#test-during-the-research-preview) for information about testing custom channels that you build.
 
 Report issues or feedback on the [Claude Code GitHub repository](https://github.com/anthropics/claude-code/issues).
 
@@ -363,20 +359,20 @@ Several Claude Code features connect to systems outside the terminal, each suite
 
 | Feature | What it does | Good for |
 | - | - | - |
-| [Cloud sessions](/docs/en/claude-code-on-the-web) | Run tasks in a fresh cloud sandbox, cloned from GitHub | Delegating self-contained async work you check on later |
-| [Claude in Slack](/docs/en/slack) | Spawns a cloud session from an `@Claude` mention in a channel or thread | Starting tasks directly from team conversation context |
-| Standard [MCP server](/docs/en/mcp) | Claude queries it during a task; nothing is pushed to the session | Giving Claude on-demand access to read or query a system |
-| [Remote Control](/docs/en/remote-control) | You drive your local session from claude.ai or the Claude mobile app | Steering an in-progress session while away from your desk |
+| [Cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md) | Run tasks in a fresh cloud sandbox, cloned from GitHub | Delegating self-contained async work you check on later |
+| [Claude in Slack](https://code.claude.com/docs/en/slack.md) | Spawns a cloud session from an `@Claude` mention in a channel or thread | Starting tasks directly from team conversation context |
+| Standard [MCP server](https://code.claude.com/docs/en/mcp.md) | Claude queries it during a task; nothing is pushed to the session | Giving Claude on-demand access to read or query a system |
+| [Remote Control](https://code.claude.com/docs/en/remote-control.md) | You drive your local session from claude.ai or the Claude mobile app | Steering an in-progress session while away from your desk |
 
 Channels fill the gap in that list by pushing events from non-Claude sources into your already-running local session.
 
 * **Chat bridge**: ask Claude something from your phone via Telegram, Discord, or iMessage, and the answer comes back in the same chat while the work runs on your machine against your real files.
-* **[Webhook receiver](/docs/en/channels-reference#example-build-a-webhook-receiver)**: a webhook from CI, your error tracker, a deploy pipeline, or other external service arrives where Claude already has your files open and remembers what you were debugging.
+* **[Webhook receiver](https://code.claude.com/docs/en/channels-reference.md#example-build-a-webhook-receiver)**: a webhook from CI, your error tracker, a deploy pipeline, or other external service arrives where Claude already has your files open and remembers what you were debugging.
 
 ## Next steps
 
 Once you have a channel running, explore these related features:
 
-* [Build your own channel](/docs/en/channels-reference) for systems that don't have plugins yet
-* [Remote Control](/docs/en/remote-control) to drive a local session from your phone instead of forwarding events into it
-* [Scheduled tasks](/docs/en/scheduled-tasks) to poll on a timer instead of reacting to pushed events
+* [Build your own channel](https://code.claude.com/docs/en/channels-reference.md) for systems that don't have plugins yet
+* [Remote Control](https://code.claude.com/docs/en/remote-control.md) to drive a local session from your phone instead of forwarding events into it
+* [Session-scoped scheduled tasks](https://code.claude.com/docs/en/scheduled-tasks.md) to poll on a timer instead of reacting to pushed events

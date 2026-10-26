@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/deep-links
-fetched_at: 2026-10-12T06:49:42.654337+00:00
+fetched_at: 2026-10-26T05:40:01.647913+00:00
 fetch_method: mintlify_md
 ---
 
@@ -116,43 +116,41 @@ To use this in your own runbook, replace `acme/web-gateway` with your service's 
 
 You can also open a deep link from a shell script, alias, or automation rather than by clicking it. Call your operating system's URL-opening command with the link as the argument. These commands rely on the handler that Claude Code [registers when you send your first prompt of an interactive session](#registration-and-supported-platforms) on the machine.
 
-<Tabs>
-  <Tab title="macOS">
-    The built-in `open` command passes the URL to the registered `claude-cli://` handler:
+**macOS**
 
-    ```bash theme={null}
-    open "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
-    ```
+The built-in `open` command passes the URL to the registered `claude-cli://` handler:
 
-    On success, a new terminal window opens with Claude Code running and the prompt pre-filled.
-  </Tab>
+```bash theme={null}
+open "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
+```
 
-  <Tab title="Linux">
-    Most desktop environments provide `xdg-open`, which passes the URL to the registered handler:
+On success, a new terminal window opens with Claude Code running and the prompt pre-filled.
 
-    ```bash theme={null}
-    xdg-open "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
-    ```
+**Linux**
 
-    On success, a new terminal window opens with Claude Code running and the prompt pre-filled. If the shell reports that `xdg-open` isn't found, see [Troubleshooting](#xdg-open-is-not-found-on-linux).
-  </Tab>
+Most desktop environments provide `xdg-open`, which passes the URL to the registered handler:
 
-  <Tab title="Windows">
-    In PowerShell, `Start-Process` passes the URL to the registered handler:
+```bash theme={null}
+xdg-open "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
+```
 
-    ```powershell theme={null}
-    Start-Process "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
-    ```
+On success, a new terminal window opens with Claude Code running and the prompt pre-filled. If the shell reports that `xdg-open` isn't found, see [Troubleshooting](#xdg-open-is-not-found-on-linux).
 
-    In `cmd.exe`, `start` treats its first quoted argument as a window title, so pass an empty title before the URL:
+**Windows**
 
-    ```cmd theme={null}
-    start "" "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
-    ```
+In PowerShell, `Start-Process` passes the URL to the registered handler:
 
-    On success, a new terminal window opens with Claude Code running and the prompt pre-filled.
-  </Tab>
-</Tabs>
+```powershell theme={null}
+Start-Process "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
+```
+
+In `cmd.exe`, `start` treats its first quoted argument as a window title, so pass an empty title before the URL:
+
+```cmd theme={null}
+start "" "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
+```
+
+On success, a new terminal window opens with Claude Code running and the prompt pre-filled.
 
 ## Registration and supported platforms
 
@@ -166,15 +164,15 @@ Claude Code registers the `claude-cli://` handler with your operating system on 
 
 The handler launches Claude Code in a detected terminal emulator. On macOS, Claude Code remembers the terminal from your most recent interactive session and reuses it, supporting iTerm2, Ghostty, kitty, Alacritty, WezTerm, and Terminal.app. On Linux it honors the `$TERMINAL` environment variable, then `x-terminal-emulator`, then a list of common emulators. On Windows it prefers Windows Terminal, then PowerShell, then `cmd.exe`.
 
-To prevent registration entirely, set [`disableDeepLinkRegistration`](/docs/en/settings-reference#disabledeeplinkregistration) to `"disable"` in `settings.json`. To enforce this across an organization so users cannot re-enable it, set it in [managed settings](/docs/en/server-managed-settings) instead. Claude Code's `disableDeepLinkRegistration` setting covers `claude-cli://` links only.
+To prevent registration entirely, set [`disableDeepLinkRegistration`](https://code.claude.com/docs/en/settings-reference#disabledeeplinkregistration) to `"disable"` in `settings.json`. To enforce this across an organization so users cannot re-enable it, set it in [managed settings](https://code.claude.com/docs/en/server-managed-settings.md) instead. Claude Code's `disableDeepLinkRegistration` setting covers `claude-cli://` links only.
 
 ## Open a VS Code tab instead of a terminal
 
-The VS Code extension registers its own handler at `vscode://anthropic.claude-code/open`, which opens a Claude Code editor tab rather than a terminal window. See [Launch a VS Code tab from other tools](/docs/en/vs-code#launch-a-vs-code-tab-from-other-tools) for that URL's parameters.
+The VS Code extension registers its own handler at `vscode://anthropic.claude-code/open`, which opens a Claude Code editor tab rather than a terminal window. See [Launch a VS Code tab from other tools](https://code.claude.com/docs/en/vs-code.md#launch-a-vs-code-tab-from-other-tools) for that URL's parameters.
 
 ## Open a Claude Desktop session on an SSH connection
 
-Claude Desktop handles its own `claude://` links. To open a Desktop session on a remote machine over SSH, see [Open an SSH session from a link](/docs/en/desktop#open-an-ssh-session-from-a-link).
+Claude Desktop handles its own `claude://` links. To open a Desktop session on a remote machine over SSH, see [Open an SSH session from a link](https://code.claude.com/docs/en/desktop.md#open-an-ssh-session-from-a-link).
 
 ## Troubleshooting
 
@@ -202,5 +200,5 @@ On macOS, start `claude` in your preferred terminal once and the next deep link 
 
 These pages cover related ways to launch or extend Claude Code sessions:
 
-* [Skills](/docs/en/skills): store a long runbook prompt as a `/skill` in the repo so the deep link's `q` parameter only has to name it
-* [Non-interactive mode](/docs/en/headless): run Claude from a script and capture the output without opening a terminal
+* [Skills](https://code.claude.com/docs/en/skills.md): store a long runbook prompt as a `/skill` in the repo so the deep link's `q` parameter only has to name it
+* [Non-interactive mode](https://code.claude.com/docs/en/headless.md): run Claude from a script and capture the output without opening a terminal

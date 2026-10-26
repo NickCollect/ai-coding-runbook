@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/code-intelligence
-fetched_at: 2026-10-05T06:27:12.242029+00:00
+fetched_at: 2026-10-26T05:40:03.734524+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,11 +16,11 @@ A code intelligence plugin gives Claude the live diagnostics and go-to-definitio
 
 Each plugin connects Claude Code to a language server for one language through the Language Server Protocol (LSP). You install the plugin from Anthropic's official marketplace and the language server binary on your machine.
 
-<Note>
-  Code intelligence plugins work in terminal sessions. In [cloud sessions](/docs/en/claude-code-on-the-web), Claude Code doesn't start plugin language servers, so Claude gets no diagnostics or code navigation there. To write your own language server plugin, or to connect a language server that has no plugin, see [LSP servers in plugin components](/docs/en/plugins/components#lsp-servers).
-</Note>
+> [!NOTE]
+>
+> Code intelligence plugins work in terminal sessions. In [cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md), Claude Code doesn't start plugin language servers, so Claude gets no diagnostics or code navigation there. To write your own language server plugin, or to connect a language server that has no plugin, see [LSP servers in plugin components](https://code.claude.com/docs/en/plugins/components.md#lsp-servers).
 
-To get started, find your language in the table under [Install a code intelligence plugin](#install-a-code-intelligence-plugin). The plugins in that table come from Anthropic's [official plugin marketplace](/docs/en/plugins/anthropic-marketplaces).
+To get started, find your language in the table under [Install a code intelligence plugin](#install-a-code-intelligence-plugin). The plugins in that table come from Anthropic's [official plugin marketplace](https://code.claude.com/docs/en/plugins/anthropic-marketplaces.md).
 
 If you already saw an **LSP plugin recommendation** dialog, see [Accept or dismiss the recommendation dialog](#accept-or-dismiss-the-recommendation-dialog) for what each choice does.
 
@@ -28,59 +28,57 @@ If you already saw an **LSP plugin recommendation** dialog, see [Accept or dismi
 
 A code intelligence plugin tells Claude Code which command starts the language server and which file extensions it handles. It doesn't include the language server. Install the language server binary first, then the plugin, then confirm the server starts.
 
-<Steps>
-  <Step title="Install the language server binary">
-    Find your language in the table below and install the binary in its row. If your language isn't listed, see [Add a language without an official plugin](#add-a-language-without-an-official-plugin).
+**1. Install the language server binary**
 
-    | Language | Plugin | Binary |
-    | :- | :- | :- |
-    | C/C++ | [`clangd-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/clangd-lsp) | `clangd` |
-    | C# | [`csharp-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/csharp-lsp) | `csharp-ls` |
-    | Go | [`gopls-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/gopls-lsp) | `gopls` |
-    | Java | [`jdtls-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/jdtls-lsp) | `jdtls` |
-    | Kotlin | [`kotlin-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/kotlin-lsp) | `kotlin-lsp` |
-    | Liquid | [`liquid-lsp`](https://github.com/Shopify/liquid-skills/tree/main/plugins/liquid-lsp) | `shopify`, from the Shopify CLI |
-    | Lua | [`lua-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/lua-lsp) | `lua-language-server` |
-    | PHP | [`php-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/php-lsp) | `intelephense` |
-    | Python | [`pyright-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pyright-lsp) | `pyright-langserver` |
-    | Ruby | [`ruby-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ruby-lsp) | `ruby-lsp` |
-    | Rust | [`rust-analyzer-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/rust-analyzer-lsp) | `rust-analyzer` |
-    | Swift | [`swift-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/swift-lsp) | `sourcekit-lsp` |
-    | TypeScript and JavaScript | [`typescript-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/typescript-lsp) | `typescript-language-server` |
+Find your language in the table below and install the binary in its row. If your language isn't listed, see [Add a language without an official plugin](#add-a-language-without-an-official-plugin).
 
-    Anthropic maintains every plugin in the table except `liquid-lsp`, which Shopify maintains and the official marketplace lists.
+| Language | Plugin | Binary |
+| :- | :- | :- |
+| C/C++ | [`clangd-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/clangd-lsp) | `clangd` |
+| C# | [`csharp-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/csharp-lsp) | `csharp-ls` |
+| Go | [`gopls-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/gopls-lsp) | `gopls` |
+| Java | [`jdtls-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/jdtls-lsp) | `jdtls` |
+| Kotlin | [`kotlin-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/kotlin-lsp) | `kotlin-lsp` |
+| Liquid | [`liquid-lsp`](https://github.com/Shopify/liquid-skills/tree/main/plugins/liquid-lsp) | `shopify`, from the Shopify CLI |
+| Lua | [`lua-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/lua-lsp) | `lua-language-server` |
+| PHP | [`php-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/php-lsp) | `intelephense` |
+| Python | [`pyright-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pyright-lsp) | `pyright-langserver` |
+| Ruby | [`ruby-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ruby-lsp) | `ruby-lsp` |
+| Rust | [`rust-analyzer-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/rust-analyzer-lsp) | `rust-analyzer` |
+| Swift | [`swift-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/swift-lsp) | `sourcekit-lsp` |
+| TypeScript and JavaScript | [`typescript-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/typescript-lsp) | `typescript-language-server` |
 
-    To find the command that installs the binary, follow the plugin's link in the table to its README. For TypeScript, that command is `npm install -g typescript-language-server typescript`.
+Anthropic maintains every plugin in the table except `liquid-lsp`, which Shopify maintains and the official marketplace lists.
 
-    After you install the binary, confirm it's on the `PATH` of the shell you start `claude` from, for example with `which typescript-language-server`, or `Get-Command typescript-language-server` in PowerShell.
-  </Step>
+To find the command that installs the binary, follow the plugin's link in the table to its README. For TypeScript, that command is `npm install -g typescript-language-server typescript`.
 
-  <Step title="Install the plugin">
-    In the VS Code extension or the desktop app, follow [Install a plugin](/docs/en/plugins/install#install-a-plugin) instead of this step. In a terminal, start Claude Code by running `claude`, then enter this at its prompt, replacing `typescript-lsp` with the plugin the step 1 table lists for your language:
+After you install the binary, confirm it's on the `PATH` of the shell you start `claude` from, for example with `which typescript-language-server`, or `Get-Command typescript-language-server` in PowerShell.
 
-    ```
-    /plugin install typescript-lsp@claude-plugins-official
-    ```
+**2. Install the plugin**
 
-    A confirmation message says whether the plugin is active now or needs `/reload-plugins`. If the install fails with `Marketplace "claude-plugins-official" not found`, see the [troubleshooting entry for that error](/docs/en/plugins/troubleshooting#marketplace-claude-plugins-official-not-found). To control where the plugin is installed, or to run the install from your shell instead of inside Claude Code, see [Install plugins](/docs/en/plugins/install).
-  </Step>
+In the VS Code extension or the desktop app, follow [Install a plugin](https://code.claude.com/docs/en/plugins/install.md#install-a-plugin) instead of this step. In a terminal, start Claude Code by running `claude`, then enter this at its prompt, replacing `typescript-lsp` with the plugin the step 1 table lists for your language:
 
-  <Step title="Confirm the server starts">
-    The language server starts the first time Claude edits a file with one of the plugin's extensions. To see it work, ask Claude to introduce a type error in a file of that language and then fix it. Then check the conversation for a diagnostics line:
+```
+/plugin install typescript-lsp@claude-plugins-official
+```
 
-    * **A diagnostics line appears**: `Found N new diagnostic issues in M files (ctrl+o to expand)` under the edit that introduced the error means the server started.
-    * **No diagnostics line appears**: run `/plugin` and open the **Errors** tab. A row reading `Executable not found in $PATH: "<binary>"` names the binary to install. If the tab has no such row, see [Troubleshoot code intelligence](#troubleshoot-code-intelligence).
+A confirmation message says whether the plugin is active now or needs `/reload-plugins`. If the install fails with `Marketplace "claude-plugins-official" not found`, see the [troubleshooting entry for that error](https://code.claude.com/docs/en/plugins/troubleshooting.md#marketplace-claude-plugins-official-not-found). To control where the plugin is installed, or to run the install from your shell instead of inside Claude Code, see [Install plugins](https://code.claude.com/docs/en/plugins/install.md).
 
-    After you install a missing binary, Claude Code tries again the next time Claude edits a matching file. If you installed the binary into a directory that isn't on the `PATH` of the shell you started `claude` from, start a new session from a shell where it is.
-  </Step>
-</Steps>
+**3. Confirm the server starts**
+
+The language server starts the first time Claude edits a file with one of the plugin's extensions. To see it work, ask Claude to introduce a type error in a file of that language and then fix it. Then check the conversation for a diagnostics line:
+
+* **A diagnostics line appears**: `Found N new diagnostic issues in M files (ctrl+o to expand)` under the edit that introduced the error means the server started.
+* **No diagnostics line appears**: run `/plugin` and open the **Errors** tab. A row reading `Executable not found in $PATH: "<binary>"` names the binary to install. If the tab has no such row, see [Troubleshoot code intelligence](#troubleshoot-code-intelligence).
+
+After you install a missing binary, Claude Code tries again the next time Claude edits a matching file. If you installed the binary into a directory that isn't on the `PATH` of the shell you started `claude` from, start a new session from a shell where it is.
 
 ## See what Claude gains
 
 With a language server running, Claude gains diagnostics and code navigation:
 
 * **Diagnostics after edits**: each time Claude edits or writes a file the server handles, Claude gets the errors and warnings the server reports. It sees a type error, missing import, or syntax error it introduced without running a compiler.
-* **Code navigation**: Claude gets an `LSP` tool that looks up symbols through the server instead of searching text for them. The tool is read-only. For what Claude can look up with the tool and how permissions apply to it, see [LSP tool behavior](/docs/en/tools-reference#lsp-tool-behavior).
+* **Code navigation**: Claude gets an `LSP` tool that looks up symbols through the server instead of searching text for them. The tool is read-only. For what Claude can look up with the tool and how permissions apply to it, see [LSP tool behavior](https://code.claude.com/docs/en/tools-reference.md#lsp-tool-behavior).
 
 ### Read the diagnostics yourself
 
@@ -97,7 +95,7 @@ The **LSP plugin recommendation** dialog can appear after Claude edits a file. T
 * **A plugin matches the file**: one of the marketplaces you've added, or the official marketplace Claude Code registered for you, lists a code intelligence plugin for that file's extension, and the plugin's binary is installed.
 * **Official first**: when more than one marketplace offers a plugin for the extension, the dialog offers the official marketplace's plugin.
 * **Once per session**: the dialog appears at most once in a session, for the first matching file Claude edits.
-* **Not for cloud sessions**: the dialog never appears when your terminal is attached to a cloud session, such as one you started with [`claude --cloud`](/docs/en/claude-code-on-the-web#from-terminal-to-cloud).
+* **Not for cloud sessions**: the dialog never appears when your terminal is attached to a cloud session, such as one you started with [`claude --cloud`](https://code.claude.com/docs/en/claude-code-on-the-web#from-terminal-to-cloud).
 
 ### Respond to the recommendation dialog
 
@@ -119,7 +117,7 @@ The **LSP plugin recommendation** dialog stops appearing after you choose **Disa
 
 ## Troubleshoot code intelligence
 
-The plugins troubleshooting page covers the symptoms specific to code intelligence plugins under [Language server doesn't start, uses too much memory, or reports wrong diagnostics](/docs/en/plugins/troubleshooting#language-server-doesnt-start):
+The plugins troubleshooting page covers the symptoms specific to code intelligence plugins under [Language server doesn't start, uses too much memory, or reports wrong diagnostics](https://code.claude.com/docs/en/plugins/troubleshooting.md#language-server-doesnt-start):
 
 * **The language server doesn't start**: you see `Executable not found in $PATH` in the **Errors** tab of `/plugin`, or Claude never reports diagnostics for the language.
 * **High memory use**: memory use increases while the server indexes the project.
@@ -130,13 +128,13 @@ The plugins troubleshooting page covers the symptoms specific to code intelligen
 If your language isn't in the [table of official plugins](#install-a-code-intelligence-plugin), you can still connect a language server.
 
 1. Write a plugin with an `.lsp.json` file that names the server command and the file extensions it handles.
-2. Then load the plugin with [`--plugin-dir`](/docs/en/plugins/cli-reference#flags-that-load-a-plugin-for-one-session) or publish it to a marketplace.
+2. Then load the plugin with [`--plugin-dir`](https://code.claude.com/docs/en/plugins/cli-reference#flags-that-load-a-plugin-for-one-session) or publish it to a marketplace.
 
-For the file's fields and a worked example, see [LSP servers in plugin components](/docs/en/plugins/components#lsp-servers).
+For the file's fields and a worked example, see [LSP servers in plugin components](https://code.claude.com/docs/en/plugins/components.md#lsp-servers).
 
 ## Next steps
 
-* [LSP servers in plugin components](/docs/en/plugins/components#lsp-servers): write the `.lsp.json` for a language server that has no official plugin
-* [Install and manage plugins](/docs/en/plugins/install): scopes, updates, and uninstalling
-* [Troubleshoot plugins](/docs/en/plugins/troubleshooting): load errors beyond the language-server ones on this page
-* [Find plugins in the official marketplace](/docs/en/plugins/anthropic-marketplaces#find-plugins-in-the-official-marketplace): where to browse the rest of the official marketplace
+* [LSP servers in plugin components](https://code.claude.com/docs/en/plugins/components.md#lsp-servers): write the `.lsp.json` for a language server that has no official plugin
+* [Install and manage plugins](https://code.claude.com/docs/en/plugins/install.md): scopes, updates, and uninstalling
+* [Troubleshoot plugins](https://code.claude.com/docs/en/plugins/troubleshooting.md): load errors beyond the language-server ones on this page
+* [Find plugins in the official marketplace](https://code.claude.com/docs/en/plugins/anthropic-marketplaces.md#find-plugins-in-the-official-marketplace): where to browse the rest of the official marketplace

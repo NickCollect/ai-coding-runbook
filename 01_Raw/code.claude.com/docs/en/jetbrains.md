@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/jetbrains
-fetched_at: 2026-10-12T06:49:43.629837+00:00
+fetched_at: 2026-10-26T05:40:02.752439+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,7 +29,7 @@ The Claude Code plugin works with most JetBrains IDEs, including:
 
 * **Quick launch**: use `Cmd+Esc` (Mac) or `Ctrl+Esc` (Windows/Linux) to open Claude Code directly from your editor, or click the Claude Code button in the UI
 * **Diff viewing**: Claude Code opens code changes in the IDE diff viewer instead of the terminal; change this with the **Diff tool** setting in `/config`
-* **Selection context**: the current selection or tab in the IDE is automatically shared with Claude Code. [`Read` deny rules](/docs/en/permissions#read-and-edit) block this sharing for matching files
+* **Selection context**: the current selection or tab in the IDE is automatically shared with Claude Code. [`Read` deny rules](https://code.claude.com/docs/en/permissions#read-and-edit) block this sharing for matching files
 * **File reference shortcuts**: use `Cmd+Option+K` (Mac) or `Alt+Ctrl+K` (Linux/Windows) to insert file references such as `@src/auth.ts#L1-99`
 * **Diagnostic sharing**: Claude reads the IDE's inspection diagnostics, such as lint and syntax errors, by calling the [`getDiagnostics` tool](#the-built-in-ide-mcp-server); Claude Code doesn't request diagnostics from the plugin on its own after edits
 
@@ -37,29 +37,23 @@ The Claude Code plugin works with most JetBrains IDEs, including:
 
 The plugin runs the `claude` command in your IDE's integrated terminal and connects to it. It does not bundle its own copy of the CLI, so install both pieces:
 
-<Steps>
-  <Step title="Install the Claude Code CLI">
-    Follow the [quickstart](/docs/en/quickstart) to install the CLI if you haven't already. The plugin shows a "Cannot launch Claude Code" notification when `claude` isn't on your PATH.
-  </Step>
+**1. Install the Claude Code CLI**
 
-  <Step title="Install the JetBrains plugin">
-    Install the [Claude Code plugin](https://plugins.jetbrains.com/plugin/27310-claude-code-beta-) from the JetBrains Marketplace and restart your IDE.
-  </Step>
-</Steps>
+Follow the [quickstart](https://code.claude.com/docs/en/quickstart.md) to install the CLI if you haven't already. The plugin shows a "Cannot launch Claude Code" notification when `claude` isn't on your PATH.
+
+**2. Install the JetBrains plugin**
+
+Install the [Claude Code plugin](https://plugins.jetbrains.com/plugin/27310-claude-code-beta-) from the JetBrains Marketplace and restart your IDE.
 
 If `claude` is installed somewhere your IDE can't find, set the full path in the plugin's [Claude command setting](#general-settings).
 
-Claude Code works with any paid Claude subscription (Pro, Max, Team, or Enterprise) or a Claude Console account, and no API key is required. You'll be prompted to [log in](/docs/en/authentication#log-in-to-claude-code) the first time you run `claude`.
+Claude Code works with any paid Claude subscription (Pro, Max, Team, or Enterprise) or a Claude Console account, and no API key is required. You'll be prompted to [log in](https://code.claude.com/docs/en/authentication.md#log-in-to-claude-code) the first time you run `claude`.
 
 ## Usage
-
-<span id="from-your-ide" />
 
 ### Run Claude Code from your IDE
 
 Run `claude` from your IDE's integrated terminal, and all integration features will be active.
-
-<span id="from-external-terminals" />
 
 ### Connect from an external terminal
 
@@ -73,7 +67,7 @@ claude
 /ide
 ```
 
-When the connection succeeds, Claude Code confirms with a message like `Connected to IntelliJ IDEA.` If Claude Code detects a running IDE that doesn't have the plugin, `/ide` installs the plugin for you and asks you to restart the IDE.
+When the connection succeeds, Claude Code confirms with a message like `Connected to IntelliJ IDEA.`
 
 If you want Claude to have access to the same files as your IDE, start Claude Code from the same directory as your IDE project root.
 
@@ -87,7 +81,7 @@ Configure IDE integration through Claude Code's settings:
 2. Enter the `/config` command
 3. Set **Diff tool** to `auto` to show diffs in the IDE, or `terminal` to keep them in the terminal
 
-The **Diff tool** entry appears in `/config` only when Claude Code is connected to the IDE, so run `claude` from the JetBrains terminal or run [`/ide`](/docs/en/commands) first from an external terminal. See [`diffTool`](/docs/en/settings-reference#difftool) for the underlying setting.
+The **Diff tool** entry appears in `/config` only when Claude Code is connected to the IDE, so run `claude` from the JetBrains terminal or run [`/ide`](https://code.claude.com/docs/en/commands) first from an external terminal. See [`diffTool`](https://code.claude.com/docs/en/settings-reference#difftool) for the underlying setting.
 
 ### Plugin settings
 
@@ -100,9 +94,9 @@ Configure the Claude Code plugin by going to **Settings → Tools → Claude Cod
 * **Enable using Option+Enter for multi-line prompts**: on macOS only. When enabled, Option+Enter inserts new lines in Claude Code prompts. Disable if the Option key is being captured unexpectedly. Requires a terminal restart.
 * **Enable automatic updates**: automatically check for and install plugin updates, applied on restart
 
-<Tip>
-  For WSL users: Set `wsl -d Ubuntu -- bash -lic "claude"` as your Claude command (replace `Ubuntu` with your WSL distribution name)
-</Tip>
+> [!TIP]
+>
+> For WSL users: Set `wsl -d Ubuntu -- bash -lic "claude"` as your Claude command (replace `Ubuntu` with your WSL distribution name)
 
 #### ESC key configuration
 
@@ -120,9 +114,9 @@ This allows the ESC key to properly interrupt Claude Code operations.
 
 ### Remote development
 
-<Warning>
-  When using JetBrains Remote Development, you must install the plugin on the remote host via **Settings → Plugin (Host)**, not on your local client machine.
-</Warning>
+> [!WARNING]
+>
+> When using JetBrains Remote Development, you must install the plugin on the remote host via **Settings → Plugin (Host)**, not on your local client machine.
 
 ### WSL configuration
 
@@ -132,29 +126,27 @@ If you're using Claude Code on WSL2 with a JetBrains IDE and see "No available I
 
 This is the recommended fix because it keeps your existing WSL2 networking mode.
 
-<Steps>
-  <Step title="Find your WSL2 IP address">
-    From inside your WSL shell, run:
+**1. Find your WSL2 IP address**
 
-    ```bash theme={null}
-    hostname -I
-    ```
+From inside your WSL shell, run:
 
-    Note your subnet: take the first two segments of the address and follow them with `.0.0/16`. For example, if the address is `172.21.123.45`, your subnet is `172.21.0.0/16`.
-  </Step>
+```bash theme={null}
+hostname -I
+```
 
-  <Step title="Create a firewall rule">
-    Open PowerShell as Administrator and run the following, adjusting the IP range to match your subnet:
+Note your subnet: take the first two segments of the address and follow them with `.0.0/16`. For example, if the address is `172.21.123.45`, your subnet is `172.21.0.0/16`.
 
-    ```powershell theme={null}
-    New-NetFirewallRule -DisplayName "Allow WSL2 Internal Traffic" -Direction Inbound -Protocol TCP -Action Allow -RemoteAddress 172.21.0.0/16 -LocalAddress 172.21.0.0/16
-    ```
-  </Step>
+**2. Create a firewall rule**
 
-  <Step title="Restart your IDE and Claude Code">
-    Close and reopen both so the new rule takes effect.
-  </Step>
-</Steps>
+Open PowerShell as Administrator and run the following, adjusting the IP range to match your subnet:
+
+```powershell theme={null}
+New-NetFirewallRule -DisplayName "Allow WSL2 Internal Traffic" -Direction Inbound -Protocol TCP -Action Allow -RemoteAddress 172.21.0.0/16 -LocalAddress 172.21.0.0/16
+```
+
+**3. Restart your IDE and Claude Code**
+
+Close and reopen both so the new rule takes effect.
 
 #### Switch WSL2 to mirrored networking
 
@@ -199,27 +191,27 @@ If clicking the Claude icon shows "command not found":
 
 ## Security considerations
 
-When Claude Code runs in a JetBrains IDE in [`acceptEdits` permission mode](/docs/en/permission-modes#auto-approve-file-edits-with-acceptedits-mode), it may be able to modify IDE configuration files that can be automatically executed by your IDE. This may increase the risk of running Claude Code in `acceptEdits` mode and allow bypassing Claude Code's permission prompts for Bash execution.
+When Claude Code runs in a JetBrains IDE in [`acceptEdits` permission mode](https://code.claude.com/docs/en/permission-modes#auto-approve-file-edits-with-acceptedits-mode), it may be able to modify IDE configuration files that can be automatically executed by your IDE. This may increase the risk of running Claude Code in `acceptEdits` mode and allow bypassing Claude Code's permission prompts for Bash execution.
 
 When running in JetBrains IDEs, consider:
 
-* Using Manual mode for edits, because `acceptEdits` and auto mode both approve edits inside your working directory without asking, except in [protected paths](/docs/en/permission-modes#protected-paths)
+* Using Manual mode for edits, because `acceptEdits` and auto mode both approve edits inside your working directory without asking, except in [protected paths](https://code.claude.com/docs/en/permission-modes.md#protected-paths)
 * Taking extra care to ensure Claude is only used with trusted prompts
 * Being aware of which files Claude Code has access to modify
 
-For Claude Code installation or login problems outside the IDE, see [Troubleshoot installation and login](/docs/en/troubleshoot-install).
+For Claude Code installation or login problems outside the IDE, see [Troubleshoot installation and login](https://code.claude.com/docs/en/troubleshoot-install.md).
 
 ### The built-in IDE MCP server
 
 When the plugin is active, it runs a local MCP server that the CLI connects to automatically. This is how the CLI opens diffs in the IDE's native diff viewer, reads your current selection for `@`-mentions, and lets Claude read inspection diagnostics.
 
-The server is named `ide` and is hidden from `/mcp` because there's nothing to configure. If your organization uses a [`PreToolUse` hook](/docs/en/hooks#pretooluse) to allowlist MCP tools, though, you'll need to know it exists.
+The server is named `ide` and is hidden from `/mcp` because there's nothing to configure. If your organization uses a [`PreToolUse` hook](https://code.claude.com/docs/en/hooks#pretooluse) to allowlist MCP tools, though, you'll need to know it exists.
 
 **Selection and open-file context.** While connected, the CLI includes your current editor selection and the path of the active file as context on each prompt you send. The transcript shows a `⧉ Selected N lines from <file>` line when this happens.
 
-If you [queue a message while Claude works](/docs/en/interactive-mode#queue-messages-while-claude-works), it keeps the selection you had when you pressed `Enter`, whatever you select afterward.
+If you [queue a message while Claude works](https://code.claude.com/docs/en/interactive-mode.md#queue-messages-while-claude-works), it keeps the selection you had when you pressed `Enter`, whatever you select afterward.
 
-To exclude a sensitive file such as `.env`, add a [`Read` deny rule](/docs/en/permissions#read-and-edit) for its path. A matching deny rule prevents both the selected text and the open-file notice for that file from reaching Claude.
+To exclude a sensitive file such as `.env`, add a [`Read` deny rule](https://code.claude.com/docs/en/permissions#read-and-edit) for its path. A matching deny rule prevents both the selected text and the open-file notice for that file from reaching Claude.
 
 **Transport and authentication.** The server listens on an OS-assigned ephemeral port, and the port is not configurable. The transport is unencrypted `ws://`; on loopback, any process that could capture the traffic can also read the token from the lock file, so TLS would not add protection against a local attacker. Each IDE start generates a fresh random auth token, writes it to a lock file at `~/.claude/ide/<port>.lock`, and the CLI must present it as the `X-Claude-Code-Ide-Authorization` header to connect. If `CLAUDE_CONFIG_DIR` is set, the lock file is written to `$CLAUDE_CONFIG_DIR/ide/` instead.
 
@@ -233,6 +225,6 @@ The JetBrains plugin does not expose a code-execution tool to the model.
 
 **Listening interface.** Which network interface the server binds to is controlled by **Accept connections from all network interfaces** under **Settings → Tools → Claude Code \[Beta] → Networking (Advanced)**. With the setting disabled, the server listens on `127.0.0.1` only and is not reachable from other hosts. With it enabled, the port is reachable from your local network. The setting exists for cases where the CLI cannot reach the IDE over loopback, such as WSL2 with default NAT networking or a remote-IDE setup; see [WSL configuration](#wsl-configuration) for that scenario.
 
-<Warning>
-  Enabling **Accept connections from all network interfaces** makes the IDE MCP port reachable from your local network. Connections still require the auth token from the lock file, but because the transport is unencrypted `ws://`, both the session traffic and that token cross the network in cleartext when the setting is on. Only turn it on when loopback can't work. For WSL2, prefer [mirrored networking](#switch-wsl2-to-mirrored-networking) so the Windows loopback interface is shared with the Linux VM and the socket can stay on loopback.
-</Warning>
+> [!WARNING]
+>
+> Enabling **Accept connections from all network interfaces** makes the IDE MCP port reachable from your local network. Connections still require the auth token from the lock file, but because the transport is unencrypted `ws://`, both the session traffic and that token cross the network in cleartext when the setting is on. Only turn it on when loopback can't work. For WSL2, prefer [mirrored networking](#switch-wsl2-to-mirrored-networking) so the Windows loopback interface is shared with the Linux VM and the socket can stay on loopback.

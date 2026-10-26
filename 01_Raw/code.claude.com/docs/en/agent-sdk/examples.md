@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/examples
-fetched_at: 2026-09-28T06:10:38.962191+00:00
+fetched_at: 2026-10-26T05:39:58.459195+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,13 +18,17 @@ This page routes you to complete, runnable Agent SDK projects and guided Claude 
 
 If you haven't built anything with the SDK yet, start with one of these before a full application:
 
-* [Agent SDK quickstart](/docs/en/agent-sdk/quickstart): build your first working agent in TypeScript or Python, with setup steps included. The agent finds and fixes bugs in a sample file.
+* [Agent SDK quickstart](https://code.claude.com/docs/en/agent-sdk/quickstart.md): build your first working agent in TypeScript or Python, with setup steps included. The agent finds and fixes bugs in a sample file.
 
 * [Hello World](https://github.com/anthropics/claude-agent-sdk-demos/tree/main/hello-world): a minimal TypeScript project to clone when you want to start from repo code
 
 ## Explore a demo application
 
 The applications in [`claude-agent-sdk-demos`](https://github.com/anthropics/claude-agent-sdk-demos) are demos for local development, from an email client to a multi-agent research system. Clone the demo whose shape matches what you're building.
+
+## Fork a complete project
+
+To build a shopping agent or a merchant agent with the Python SDK, start from the [Claude for commerce reference implementation](https://platform.claude.com/docs/en/about-claude/use-case-guides/commerce-agents).
 
 ## Work through a Python recipe
 
