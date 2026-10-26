@@ -1,18 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/superposition-memorization-and-double-descent
-fetched_at: 2026-10-19T05:32:53.660465+00:00
+fetched_at: 2026-10-26T05:40:00.779166+00:00
 title: "Superposition, memorization, and double descent \\ Anthropic"
 ---
 
-InterpretabilityResearch
-
-# Superposition, memorization, and double descent
-
-Jan 5, 2023
-
-[Read Paper](https://transformer-circuits.pub/2023/toy-double-descent/index.html)
-
-## Abstract
+### Abstract
 
 In a [recent paper](https://transformer-circuits.pub/2022/toy_model/index.html), we found that simple neural networks trained on toy tasks often exhibit a phenomenon called superposition, where they represent more features than they have neurons. Our investigation was limited to the infinite-data, underfitting regime. But there's reason to believe that understanding overfitting might be important if we want to succeed at mechanistic interpretability, and that superposition might be a central part of the story.  
   
@@ -25,23 +17,3 @@ In this note, we offer a very preliminary investigation of training the same toy
 - Overfitting corresponds to storing data points, rather than features, in superposition.
 - Depending on dataset size, our models fall into two different regimes: an overfitting regime (characterized by storing data points in superposition), and a generalizing regime (characterized by storing features in superposition).
 - We observe double descent as the model transitions between these regimes.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

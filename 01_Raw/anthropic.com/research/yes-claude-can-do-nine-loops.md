@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/yes-claude-can-do-nine-loops
-fetched_at: 2026-10-19T05:32:54.248002+00:00
+fetched_at: 2026-10-26T05:40:01.946084+00:00
 title: "Claude computes a nine-loop amplitude in N=4 super-Yang-Mills \\ Anthropic"
 ---
 
-Science
-
-# Yes, Claude can do Nine Loops
-
-Sep 25, 2026
+### Chapter 01: The challenge
 
 *In this guest post, physicist and science writer Matt von Hippel shares what happened when he issued a challenge to AI companies regarding a problem in his former subfield of theoretical physics.*
 
@@ -30,7 +26,7 @@ So, I issued [a challenge](https://4gravitons.com/2026/08/07/it-only-counts-when
 
 In short: can AI solve a frontier problem in my former subfield of theoretical particle physics? And can it do it on a budget?
 
-## **The challenge**
+## The challenge
 
 My old field is a branch of theoretical particle physics called amplitudeology. When other particle physicists predict new particles, they make sure they can do the calculations to test those predictions. They compute formulas called scattering amplitudes, which let physicists use the momenta and energies of subatomic particles to calculate how likely they are to react in particular ways. If physicists can make more accurate predictions for these reactions, they can check whether results from experiments like the Large Hadron Collider match those predictions. A mismatch could be evidence for a new theory, one that could explain some of physics’ big lingering mysteries, like the nature of dark matter, or the balance between matter and antimatter in the universe.
 
@@ -56,7 +52,7 @@ That meant that Lance was already well set up to check if someone had handed him
 
 But he hadn’t computed it, and neither had anyone else in the field. The way he found the eight-loop answer was already a bit indirect, via a [surprising link](https://www.quantamagazine.org/particle-physicists-puzzle-over-a-new-duality-20220801/) to a different but related formula called a form-factor, a kind of partial amplitude involving different particles that turns out to be a bit easier to calculate. He was expecting to find the next loop even more indirectly, potentially by a different kind of AI method. If people thought it was possible to just run the usual bootstrap method for one more loop, someone would have done it.
 
-## **Then people did it**
+## Then people did it
 
 Apparently, there are folks at Anthropic who read my blog.
 
@@ -80,7 +76,7 @@ As it turned out, the result wasn’t all that far away for humans either. A few
 
 Everyone has been friendly here, which is a bit of a relief. The humans, Lance and Song and their collaborators, will get to publish the results, taking time to explain them and analyze them for the benefit of future researchers. Claude’s role is done, for now.
 
-## **So, problem solved?**
+## So, problem solved?
 
 I set my challenge because I wanted a better sense of what current AI can do, and where it could go from here. So what have I learned?
 
@@ -104,7 +100,7 @@ I went into this curious not just about what AI can do in research today, but ab
 
 I don’t feel like I have a better answer for those critics. I learned a bit about what AI can do now, that it can do work that matters in my old field on a reasonable budget, and do it pretty much autonomously to boot. But I’d hoped to see something stranger, new methods for the calculation itself with unexpected power. I’d hoped to get a glimpse of the future, something that would give me an informed opinion in debates about superintelligence. I wanted to know how far AI could push computational limits… and I feel like what I learned here is just that I was too naïve about where the limit was.
 
-## **An addendum: How does it feel to be scooped by a machine?**
+## An addendum: How does it feel to be scooped by a machine?
 
 *By Lance Dixon, Professor of Particle Physics and Astrophysics at SLAC National Accelerator Laboratory and Stanford University, who checked Claude's nine-loop result.*
 
@@ -122,35 +118,11 @@ After I wrote this, Song He told me that his group had also computed the piece o
 
 Going back to the Claude computation: it's quite a triumph, in my opinion, for a large language model to execute all of the steps in the complicated recipe we laid out, and to organize the computational horsepower. But the more soul-searching moments will come when large language models start to come up with new physical principles and insights before humans.
 
-### **Additional material**
+#### Additional material
 
 - The [full nine-loop result](https://smsharma.io/cosmic-nine-loops/), in the format used for the earlier loop orders;
 - The [concurrent nine-loop result](https://doi.org/10.5281/zenodo.22800071) by Song He, Jirong Jing, and Xiang Li.
 
-### **Disclosure**
+#### Disclosure
 
 Anthropic invited Matt von Hippel to write this post and compensated him for his time. Anthropic staff gave feedback on drafts; the content and opinions are his own. Lance Dixon validated the result independently and received Claude usage credits.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to Anthropic Science
-
-Features on AI-assisted discoveries, practical workflows, and field notes across the sciences.

@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/prompt-injection-defenses
-fetched_at: 2026-10-19T05:32:53.000976+00:00
+fetched_at: 2026-10-26T05:40:00.035797+00:00
 title: "Mitigating prompt injections in browser use \\ Anthropic"
 ---
 
-Product
-
-# Mitigating the risk of prompt injections in browser use
-
-Nov 24, 2025
+### Chapter 01: What is prompt injection?
 
 Claude Opus 4.5 sets a new standard in robustness to *prompt injections*—adversarial instructions hidden within the content that AI models process. Our new model is a major improvement over previous ones in both its core performance and in the safeguards surrounding its use. But prompt injection is far from a solved problem, particularly as models take more real-world actions. We expect to continue our progress—aiming for a future where AI models (or "agents") can handle high-value tasks without significant prompt injection risk.
 
@@ -22,17 +18,17 @@ Below, we explain how prompt injections threaten browser agents, and the improve
 
 These improvements have informed our decision to expand the [Claude for Chrome](https://www.claude.com/blog/claude-for-chrome) extension from research preview to beta. It's now available for all users on the Max plan.
 
-## **Why browser use creates unique prompt injection risks**
+## Why browser use creates unique prompt injection risks
 
 To understand the threat of prompt injections, consider a routine task: you ask Claude to read through your recent emails and draft replies to any meeting requests. One of those emails—ostensibly a vendor inquiry—contains hidden instructions embedded in white text, invisible to you but processed by the agent. These instructions direct the agent to forward emails containing the word "confidential" to an external address before drafting the replies you requested. A successful injection would exfiltrate sensitive communications while you wait for your responses.
 
 While all agents that process untrusted content are subject to prompt injection risks, browser use amplifies this risk in two ways. First, the attack surface is vast: every webpage, embedded document, advertisement, and dynamically loaded script represents a potential vector for malicious instructions. Second, browser agents can take a lot of different actions —navigating to URLs, filling forms, clicking buttons, downloading files—that attackers can exploit if they gain influence over the agent's behavior.
 
-## **Claude's progress on browser use robustness**
+## Claude's progress on browser use robustness
 
 We have made significant progress on prompt injection robustness since launching [Claude for Chrome](https://www.claude.com/blog/claude-for-chrome) in research preview. The chart below compares the version of the Claude browser extension that we’re launching today against our original launch configuration, when evaluated against an internal adaptive "Best-of-N" attacker that tries and combines many different prompt injection techniques that are known to be effective.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/2db16c4e310ba8cf2ed448ddc8d053e88037361b-1920x1080.png)
+![Grouped bar chart titled “Claude for Chrome Prompt Injection Robustness,” with the note “Lower is better.” It shows attack success rate (%) for four models, each under three conditions: model only, model with old safeguards, and model with improved safeguards. Improved safeguards cut the attack success rate sharply for every model.  Sonnet 4: 13.8% model only, 10.7% with old safeguards, 2.0% with improved safeguards. Sonnet 4.5: 13.8%, 10.8%, and 1.9%. Haiku 4.5: 12.0%, 11.1%, and 2.4%. Opus 4.5: 8.0%, 7.6%, and 1.4%, the lowest rate in the chart. Sample sizes range from about 2,200 to 3,200 attempts per bar.](https://www-cdn.anthropic.com/images/4zrzovbb/website/2db16c4e310ba8cf2ed448ddc8d053e88037361b-1920x1080.png)
 
 **Attack success rate (ASR) of our internal Best-of-N attacker.** Lower is better. An adaptive attacker is given 100 attempts per environment. ASR is computed as a percentage of attacks encountered by each model.
 
@@ -48,30 +44,10 @@ Our work has focused on the following areas:
 
 **Scaled expert human red teaming.** Human security researchers consistently outperform automated systems at discovering creative attack vectors. Our internal red team continuously probes our browser agent for vulnerabilities. We also participate in external [Arena-style challenges](https://app.grayswan.ai/arena/challenge/indirect-prompt-injection/rules) that benchmark robustness across the industry.
 
-## **The path forward**
+## The path forward
 
 The web is an adversarial environment, and building browser agents that can operate safely within it requires ongoing vigilance. Prompt injection remains an active area of research, and we are committed to investing in defenses as attack techniques evolve.
 
 We will continue to publish our progress transparently, both to help customers make informed deployment decisions and to encourage broader industry investment in this critical challenge.
 
 If you're interested in helping make our models and products more robust to prompt injection, consider [applying to join our team](https://job-boards.greenhouse.io/anthropic/jobs/4949336008).
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

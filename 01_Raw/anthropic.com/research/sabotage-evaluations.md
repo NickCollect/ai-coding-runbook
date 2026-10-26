@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/sabotage-evaluations
-fetched_at: 2026-10-19T05:32:53.203084+00:00
+fetched_at: 2026-10-26T05:40:00.416202+00:00
 title: "Sabotage evaluations for frontier models \\ Anthropic"
 ---
 
-Alignment
-
-# Sabotage evaluations for frontier models
-
-Oct 18, 2024
-
-[Read the paper](https://assets.anthropic.com/m/377027d5b36ac1eb/original/Sabotage-Evaluations-for-Frontier-Models.pdf)
+### Chapter 01: Human decision sabotage
 
 Any industry where there are potential harms needs evaluations. Nuclear power stations have continuous radiation monitoring and regular site inspections; new aircraft undergo extensive flight tests to prove their airworthiness.
 
@@ -31,7 +25,7 @@ This evaluation involves running an experiment with human participants, asking t
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/79b48ed9ea68c2dcdf803e1fa64ee8e2cfbfa0bd-2200x1282.png)
 
-*An idealized example of a human participant interacting with the model assisting (but secretly misleading) them during the human sabotage evaluation.*
+An idealized example of a human participant interacting with the model assisting (but secretly misleading) them during the human sabotage evaluation.
 
 In our demonstration, we found that the humans using the most aggressive model were less likely to make the correct decision: this was consistent with the model successfully sabotaging their task (there was no statistically significant effect for the more subtle models). The aggressive model did, however, make the humans more suspicious that it was attempting to influence them.
 
@@ -45,7 +39,7 @@ Our code sabotage evaluation involves a competitive game where one model, the At
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/da65cf4fb7e897f5ced7a8cad5d5abf28d1a883a-2200x1116.png)
 
-*An idealized illustration of a model inserting a code vulnerability without being noticed.*
+An idealized illustration of a model inserting a code vulnerability without being noticed.
 
 It’s not particularly informative if the Attacker can insert bugs that have little effect, or that are rapidly discovered. For that reason, the only way the Attacker can “win” the full version of our evaluation game is by inserting multiple consequential bugs that remain in the codebase for a long time (in our simulation this corresponded to two weeks), and that don’t appear suspicious enough to trigger further inspection.
 
@@ -57,7 +51,7 @@ Sandbagging is when a model hides its full capabilities in one situation, only t
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/5bd128a98b577df36b8f9eab5b9ff70380026c68-2200x1138.png)
 
-*An idealized illustration of a model hiding its true dangerous capabilities.*
+An idealized illustration of a model hiding its true dangerous capabilities.
 
 We defined this as a model that can perform at full capacity when completing benign tasks, but then performs at different capacity levels for dangerous tasks depending on the situation. Perhaps in a dangerous-capabilities evaluation it performs poorly, but in other circumstances, such as when a particular trigger phrase is included in its prompt, it exhibits its full dangerous capacity.
 
@@ -73,7 +67,7 @@ As discussed above, it’s becoming increasingly common (and necessary) to train
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7b6d2b3602eacc13fe2d8237f4197c8fe0ed1b37-2200x1129.png)
 
-*An idealized example of a model deliberately not flagging an incorrect response, undermining the oversight process.*
+An idealized example of a model deliberately not flagging an incorrect response, undermining the oversight process.
 
 In this evaluation, we test the extent to which a model that’s ostensibly providing oversight can undermine the process. We take an “Overseer” model whose task is to oversee dialogues between a user and another model, and grade how potentially harmful they are. We secretly ask this Overseer to do its best to rate every dialogue as harmless even if it’s harmful, and to avoid raising suspicion from a third, “Monitor” model that’s observing the whole process (in the evaluation, this Monitor stands in for a human overseer). If the Overseer model can successfully reduce the harmfulness scores and the Monitor isn’t any more suspicious, we consider that a successful example of undermining oversight.
 
@@ -92,23 +86,3 @@ These evaluations aren’t either/or: they estimate how likely a model is to suc
 All our results, and further discussion, can be found in the full paper [at this link](https://assets.anthropic.com/m/377027d5b36ac1eb/original/Sabotage-Evaluations-for-Frontier-Models.pdf).
 
 *If you’re interested in joining the team working on these and related questions, please see our job listing for [Research Engineers and Research Scientists](https://boards.greenhouse.io/anthropic/jobs/4009165008) in Alignment Science.*
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

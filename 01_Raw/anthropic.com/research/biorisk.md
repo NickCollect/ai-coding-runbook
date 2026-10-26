@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/biorisk
-fetched_at: 2026-10-19T05:32:48.965406+00:00
+fetched_at: 2026-10-26T05:39:55.463059+00:00
 title: "LLMs and biorisk \\ Anthropic"
 ---
 
-Frontier Red Team
-
-# Why do we take LLMs seriously as a potential source of biorisk?
-
-Sep 5, 2025
-
-![Why do we take LLMs seriously as a potential source of biorisk?](https://www-cdn.anthropic.com/images/4zrzovbb/website/a6bcc8984390309c6bcd517e294db35ae3fdb56d-1920x1080.jpg)
+### Chapter 01: What does AI have to do with dangerous weapons at all?
 
 Our work at Anthropic is animated by the potential for AI to advance scientific discovery—especially in biology and medicine—and improve the human condition. [Benchling](https://www.benchling.com/ai) is [using Claude](https://www.anthropic.com/customers/benchling) to help researchers structure data, ask better questions, generate insights faster, and spend more time on science. [Biomni](https://biomni.stanford.edu/) is [using Claude](https://www.anthropic.com/customers/biomni) to speed up bioinformatics analysis and even automate experimental design.
 
@@ -18,9 +12,9 @@ At the same time, AI is fundamentally a dual-use technology. A key tenet of our 
 
 When Anthropic released Claude Opus 4, we [activated AI Safety Level 3](https://www.anthropic.com/news/activating-asl3-protections) (ASL-3) protections, which included deployment measures narrowly focused on preventing the model from assisting with certain tasks related to chemical, biological, radiological, and nuclear (CBRN) weapons development. As we noted at the time, this was a precautionary decision—improving model performance on our evaluations meant we could no longer confidently rule out the ability of our most advanced model to uplift people with basic STEM backgrounds if they were to try to develop such weapons. Because of our assessment of the potential consequences, a major initial focus of our evaluations and the corresponding safety measures was on biological weapons. In this post, we want to expand on our perspective on AI and biological risk (biorisk).
 
-It is striking—but not necessarily intuitive—that every safety framework released by frontier AI labs includes some reference to biorisk.[1] After all, frontier large language models (LLMs) are generalists; they are not usually specialized for biological applications (unlike other foundation models, such as AlphaFold). And because of this generalist nature, there are numerous other security threats that could be prioritized. We understand why one might be skeptical of prioritizing biorisk when considering the security implications of AI. This post will engage with several questions that might be posed by such a skeptic.
+It is striking—but not necessarily intuitive—that every safety framework released by frontier AI labs includes some reference to biorisk.[1](#footnote-1) After all, frontier large language models (LLMs) are generalists; they are not usually specialized for biological applications (unlike other foundation models, such as AlphaFold). And because of this generalist nature, there are numerous other security threats that could be prioritized. We understand why one might be skeptical of prioritizing biorisk when considering the security implications of AI. This post will engage with several questions that might be posed by such a skeptic.
 
-**Our aim is not alarmism; discussions of AI and biorisk are firmly in the category of low-probability/high-impact scenarios.[2] Rather, we want to establish why we believe that evaluating these risks and safeguarding against them is a critical element of responsible AI development.**
+**Our aim is not alarmism; discussions of AI and biorisk are firmly in the category of low-probability/high-impact scenarios.[2](#footnote-2) Rather, we want to establish why we believe that evaluating these risks and safeguarding against them is a critical element of responsible AI development.**
 
 ## What does AI have to do with dangerous weapons at all?
 
@@ -48,7 +42,7 @@ Within a year, Claude went from underperforming world-class experts on an evalua
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c1a9a5f88426b3e2fb7041e8143f1e3413b09ddf-889x390.png)
 
-**Figure 1.** Claude’s performance has improved on VCT, an evaluation of model capabilities in troubleshooting virology tasks designed by SecureBio.
+Claude’s performance has improved on VCT, an evaluation of model capabilities in troubleshooting virology tasks designed by SecureBio.
 
 We see this behavior of exceeding expert performance across multiple benchmarks, especially in molecular biology.
 
@@ -64,9 +58,9 @@ To meet both of these criteria, we have conducted several controlled trials meas
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4dabd0ce91dd00553db423a8d24496e52ad4308d-980x580.png)
 
-**Figure 2.** Bioweapons acquisition uplift trial results. Top: raw scores from the uplift trial. Bottom: critical failures hit by participants.
+Bioweapons acquisition uplift trial results. Top: raw scores from the uplift trial. Bottom: critical failures hit by participants.
 
-Text-based uplift trials like this are imperfect proxies for real-world scenarios—which involve additional factors like tacit knowledge, materials access, and actor persistence—but they demonstrate the underlying plausibility of AIs providing differentially superior assistance to a non-expert malicious actor.[3]
+Text-based uplift trials like this are imperfect proxies for real-world scenarios—which involve additional factors like tacit knowledge, materials access, and actor persistence—but they demonstrate the underlying plausibility of AIs providing differentially superior assistance to a non-expert malicious actor.[3](#footnote-3)
 
 ## Ok, but we’ve been talking about information. How does this translate to an actual lab?
 
@@ -102,34 +96,10 @@ We are heartened to see investment in biosecurity as a key component of the new 
 
 The topic of AI and biorisk is rife with uncertainty—about threat actors, the capabilities of models, and how exactly those capabilities translate to risk. But we believe that a growing body of evidence about AI and the underlying gravity of biological threats mean that this is a topic to which AI developers and policymakers must attend. We will be sharing more about our work on biorisk to advance this critical conversation.
 
-#### Footnotes
+## Footnotes
 
-[1] This is based on a review of the published safety frameworks collected by METR at <https://metr.org/faisc> as of July 2025.
+01This is based on a review of the published safety frameworks collected by METR at <https://metr.org/faisc> as of July 2025.
 
-[2] Indeed, the magnitude of this risk (and even our ability to meaningfully estimate the magnitude) is a source of healthy debate within Anthropic.
+02Indeed, the magnitude of this risk (and even our ability to meaningfully estimate the magnitude) is a source of healthy debate within Anthropic.
 
-[3] These results provide an important update to previous research. An [experiment](https://www.rand.org/pubs/research_reports/RRA2977-2.html) conducted in 2023 with a similar research design found no statistically significant difference between biological weapons attack plans formulated with LLMs as opposed to only the internet. However, as the study authors noted at the time, “[g]iven the rapid evolution of AI, it is prudent to monitor future developments in LLM technology.” Frontier AI models are substantially better in mid-2025 than they were in late-2023, and our results demonstrate that they are now showing clearer warning signs of contributing to biorisk.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.
+03These results provide an important update to previous research. An [experiment](https://www.rand.org/pubs/research_reports/RRA2977-2.html) conducted in 2023 with a similar research design found no statistically significant difference between biological weapons attack plans formulated with LLMs as opposed to only the internet. However, as the study authors noted at the time, “[g]iven the rapid evolution of AI, it is prudent to monitor future developments in LLM technology.” Frontier AI models are substantially better in mid-2025 than they were in late-2023, and our results demonstrate that they are now showing clearer warning signs of contributing to biorisk.

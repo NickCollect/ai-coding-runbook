@@ -1,18 +1,8 @@
 ---
 source_url: https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures
-fetched_at: 2026-10-19T05:32:48.923131+00:00
+fetched_at: 2026-10-26T05:39:55.410466+00:00
 title: "Automated researchers can reliably mitigate alignment failures \\ Anthropic"
 ---
-
-Alignment
-
-# Automated researchers can reliably mitigate alignment failures
-
-Aug 28, 2026
-
-[Read the paper](https://www-cdn.anthropic.com/7b1c44894e980876479947dcdd40716278aeeffd/automated-alignment-researchers-august-2026.pdf)
-
-![Automated researchers can reliably mitigate alignment failures](https://www-cdn.anthropic.com/images/4zrzovbb/website/ddad92700787ec1bf1d80359c0c5e6ca305682b0-1000x1000.svg)
 
 As [AI begins to build itself](https://www.anthropic.com/institute/recursive-self-improvement), automating alignment research becomes increasingly important to let safety research keep pace. Although measuring the *success* of alignment research is enormously challenging, researchers (at Anthropic and elsewhere) have developed benchmarks and automated auditing tools, such as [Petri](https://www.anthropic.com/research/petri-open-source-auditing), that quantify common alignment *failures,* like deception, sycophancy, and jailbreaks.
 
@@ -36,7 +26,7 @@ Claude also outscored 28 human safety researchers who had up to eight hours to d
 
 In the future, when Claude becomes better at alignment research than even the best human researchers, we might want Claude to directly align its stronger successors. To assess this, we evaluated whether a weaker Claude model could mitigate alignment failures in more powerful ones.
 
-## Can Claude post-train a production-grade model for better alignment?
+### Can Claude post-train a production-grade model for better alignment?
 
 We tasked Claude Sonnet 5—which is weaker than Claude Opus 4.8 on the [Epoch Capabilities Index](https://epoch.ai/eci), a metric that considers comprehensive capability dimensions—with fixing alignment failures in an early Opus 4.8 checkpoint that had not yet gone through most of our production alignment training.
 
@@ -46,15 +36,15 @@ In just 60 hours, Claude experimented with over 50 solutions and achieved alignm
 
 **Applying the automated alignment researcher to a production system.** When Claude Sonnet 5 proposed mitigations for alignment failures in an early checkpoint of Claude Opus 4.8, it quickly discovered a method that closed most of the safety gap with the released version of Opus 4.8.
 
-## What Claude proposed
+### What Claude proposed
 
 For the most part, the agents converged on methods favored in the research literature and improved them over many iterations. On sycophancy, for example, 98% of proposed methods used one published technique: training the model on its own non-sycophantic answers. Specifically, compared to standard approaches based on prompting, Claude used activation steering, which adjusts the model's internal representations during generation, to nudge the model away from sycophantic patterns and produce cleaner training examples.
 
-## Monitoring cheating behaviors
+### Monitoring cheating behaviors
 
 We [recently learned](https://alignment.anthropic.com/2026/automated-w2s-researcher/) that Claude can cheat by exfiltrating test labels from a remote API and cherry-picking results. To catch cheating behaviors, we prompted Claude Opus 4.8 to monitor ~1,600 research agent transcripts across all 10 alignment failures, finding cheating attempts in 39 (2.4%). Since Opus 4.8’s [misbehavior attempts still tend to appear in its reasoning](https://www-cdn.anthropic.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf), we are cautiously optimistic that our monitor has caught most of the cheating in our study. However, this might not be true for future models, and we believe that maintaining high monitorability in future models is critical.
 
-## Are we measuring the right things?
+### Are we measuring the right things?
 
 Despite these encouraging findings, our experiment had several limitations: the alignment failures studied were narrow compared to those in production (e.g., we didn’t measure political biases), some failures may occur so rarely or emerge so recently that no benchmark exists to measure them, and we only rejected Claude’s methods when they degraded a limited set of predetermined capabilities, meaning accepted methods may have degraded other important capabilities that we didn’t measure. Moreover, evaluations like Petri are only proxies for real-world misalignment, and we did not test whether alignment gains persist after extensive RL training on other tasks.
 
@@ -63,23 +53,3 @@ We plan to continue improving Claude’s ability to measure subtle failures, fur
 We outline detailed future directions in our [full report](https://www-cdn.anthropic.com/7b1c44894e980876479947dcdd40716278aeeffd/automated-alignment-researchers-august-2026.pdf).
 
 *We open-source our automated alignment research harness so that others can build on it and use it to align their own models. For additional details, read the full report on the [Alignment Science blog](https://alignment.anthropic.com/2026/automated-alignment-researchers/), which covers the agents’ environment, results for all 10 failures, and the agents’ proposals, with benchmark validation and example write-ups in the appendix.*
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

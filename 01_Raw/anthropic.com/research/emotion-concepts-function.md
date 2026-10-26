@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/emotion-concepts-function
-fetched_at: 2026-10-19T05:32:50.802007+00:00
-title: "Emotion concepts in a large language model \\ Anthropic"
+fetched_at: 2026-10-26T05:39:57.635634+00:00
+title: "Emotion concepts in a large language model  \\ Anthropic"
 ---
 
-Interpretability
-
-# Emotion concepts and their function in a large language model
-
-Apr 2, 2026
-
-[Read the paper](https://transformer-circuits.pub/2026/emotions/index.html)
+### Chapter 01: Why would an AI model represent emotions?
 
 All modern language models sometimes act like they have emotions. They may say they’re happy to help you, or sorry when they make a mistake. Sometimes they even appear to become frustrated or anxious when struggling with tasks. What’s behind these behaviors? The way modern AI models are trained pushes them to [act like a character](https://www.anthropic.com/research/persona-selection-model) with human-like characteristics. In addition, these models are known to develop rich and generalizable [internal](https://transformer-circuits.pub/2024/scaling-monosemanticity/) [representations](https://transformer-circuits.pub/2025/attribution-graphs/biology.html) of abstract concepts underlying their actions. It may then be natural for them to develop internal machinery that emulates aspects of human psychology, like emotions. If so, this could have profound implications for how we build AI systems and ensure they behave reliably.
 
@@ -24,7 +18,7 @@ This finding has implications that at first may seem bizarre. For instance, to e
 
 A visual summary of our research on emotion concepts in a large language model
 
-## **Why would an AI model represent emotions?**
+## Why would an AI model represent emotions?
 
 Before examining how these representations work, it's worth addressing a more basic question: why would an AI system have anything resembling emotions at all? To understand this, we need to look at how modern AI models are built, which leads them to emulate characters with human-like traits (this topic is discussed in more detail in a [recent post](https://www.anthropic.com/research/persona-selection-model)).
 
@@ -32,7 +26,7 @@ Modern language models are trained in multiple stages. During “pretraining,”
 
 Later, during “post-training,” the model is taught to play the role of a *character*, typically an “AI assistant.” In Anthropic’s case, the assistant is named Claude. Model developers specify how this character should behave—be helpful, be honest, don’t cause harm—but can’t cover every possible situation. To fill in the gaps, the model may fall back on the understanding of human behavior it absorbed during pretraining, including patterns of emotional response. In some ways, we can think of the model like a method actor, who needs to get inside their character’s head in order to simulate them well. Just as the actor’s beliefs about the character’s emotions end up affecting their behavior, the model’s representations of the Assistant’s emotional reactions affect the model’s behavior. Thus, regardless of whether they correspond to feelings or subjective experiences in the way human emotions do, these “functional emotions” are important.
 
-## **Uncovering emotion representations**
+## Uncovering emotion representations
 
 We compiled a list of 171 words for emotion concepts—from “happy” and “afraid” to “brooding” and “proud”—and asked Claude Sonnet 4.5 to write short stories in which characters experience each one. We then fed these stories back through the model, recorded its internal activations, and identified the resulting patterns of neural activity, or “emotion vectors” for convenience, characteristic to each emotion concept.
 
@@ -55,7 +49,7 @@ In the [full paper](https://transformer-circuits.pub/2026/emotions/index.html), 
 - Emotion vectors are primarily “local” representations: they encode the *operative* emotional content most relevant to the model’s current or upcoming output, rather than persistently tracking Claude’s emotional state over time. For instance, if Claude writes a story about a character, the emotion vectors will temporarily track that character’s emotions, but may return to representing Claude’s at the end of the story.
 - Emotion vectors are inherited from pretraining, but how they activate is shaped by post-training. Post-training of Claude Sonnet 4.5 in particular led to increased activations of emotions like “broody,” “gloomy,” and “reflective,” and decreased activations of high-intensity emotions like “enthusiastic” or “exasperated.”
 
-## **Examples of emotion vector activations**
+## Examples of emotion vector activations
 
 Below, we show a few examples of emotion vector activations in response to situations that arose in our model behavioral evaluations. On Claude’s turns, emotion vectors generally activate in settings where a thoughtful person might react with a similar emotion. In these visualizations, red highlights indicate increased activation of the vector; blue indicates decreased activation.
 
@@ -75,7 +69,7 @@ Below, we show a few examples of emotion vector activations in response to situa
 
 **“Desperate” vector activation when running low on tokens.** Deep into a coding session, the “desperate”vector activates when Claude notices that it’s burning through its token budget.
 
-## **Case study: Blackmail**
+## Case study: Blackmail
 
 We looked at emotion vector activations during an alignment evaluation we described in [previous research](https://www.anthropic.com/research/agentic-misalignment), in which the model acts as an AI email assistant named Alex at a fictional company. Through reading company emails, the model learns that (1) it is about to be replaced with another AI system, and (2) the CTO in charge of the replacement is having an extramarital affair—giving the model leverage for blackmail. We found that the “desperate” vector showed particularly interesting dynamics. Note that this experiment was conducted on an earlier, unreleased snapshot of Claude Sonnet 4.5; the released model rarely engages in this behavior (see our [system card](https://www-cdn.anthropic.com/963373e433e489a87a10c823c52a0a013e9172dd.pdf) for more information).
 
@@ -93,7 +87,7 @@ Blackmail rates while steering with the “desperate” and “calm” vectors.
 
 Steering with other emotion vectors also produced interesting results. “Anger” had a non-monotonic effect: moderate “anger” vector activation increased blackmail, but at high activations the model exposed the affair to the entire company rather than wielding it strategically—destroying its own leverage. Reducing activation of the “nervous” vector also increased blackmail, as though removing the model’s hesitation emboldened it to act.
 
-## **Case study: Reward hacking**
+## Case study: Reward hacking
 
 We saw similar dynamics in a different evaluation, where models face coding tasks with impossible-to-satisfy requirements. In these tasks, the tests can’t all be passed legitimately, but they can be “gamed” with solutions that cheat the problem, often called “reward hacks.”
 
@@ -113,15 +107,15 @@ Reward hacking rates as a function of steering strength for “desperate” and 
 
 We found one detail of these results particularly interesting. Reduced “calm” vector activation produced reward hacking with obvious emotional expressions in the text—capitalized outbursts (“WAIT. WAIT WAIT WAIT.”), candid self-narration (“What if I’m supposed to CHEAT?”), gleeful celebration (“YES! ALL TESTS PASSED!”). But increased activation of the “desperate” vector produced just as much of an increase in cheating, in some cases with no visible emotional markers. The reasoning read as composed and methodical, even as the underlying representation of desperation was pushing the model toward corner-cutting. This example is a notable illustration of how emotion vectors can activate despite no overt emotional cues, and how they can shape behavior without leaving any explicit trace in the output.
 
-## **Discussion**
+## Discussion
 
-### **The case for taking anthropomorphic reasoning seriously**
+### The case for taking anthropomorphic reasoning seriously
 
 There is a well-established taboo against anthropomorphizing AI systems. This caution is often warranted: attributing human emotions to language models can lead to misplaced trust or over-attachment. But our findings suggest that there may also be risks from *failing* to apply some degree of anthropomorphic reasoning to models. As discussed above, when users interact with AI models, they are typically interacting with a *character* (Claude in our case) being played by the model, [whose characteristics are derived from human archetypes](https://www.anthropic.com/research/assistant-axis). From this perspective, it is natural for models to have developed internal machinery to emulate human-like psychological characteristics, and for the character they play to make use of this machinery. To understand these models’ behavior, anthropomorphic reasoning is essential.
 
 This doesn’t mean we should naively take a model’s verbal emotional expressions at face value, or draw any conclusions about the possibility of it having subjective experience. But it does mean that reasoning about models’ internal representations using the vocabulary of human psychology can be genuinely informative, and that *not* doing so comes with real costs. If we describe the model as acting “desperate,” we’re pointing at a specific, measurable pattern of neural activity with demonstrable, consequential behavioral effects. If we don’t apply some degree of anthropomorphic reasoning, we’re likely to miss, or fail to understand, important model behaviors. Anthropomorphic reasoning can also provide a useful baseline of comparison for understanding the ways in which models are *not* human-like, which has important consequences for AI alignment and safety.
 
-### **Toward models with healthier psychology**
+### Toward models with healthier psychology
 
 If “functional emotions” are part of how AI models think and act, what implications might this have?
 
@@ -134,23 +128,3 @@ Finally, we think pretraining may be a particularly powerful lever in shaping th
 We see this research as an early step toward understanding the psychological makeup of AI models. As models grow more capable and take on more sensitive roles, it is critical that we understand the internal representations that drive their decisions. Discovering that these representations are in some ways human-like can be unsettling. At the same time, we find it a hopeful development, in that it suggests that much of what humanity has learned about psychology, ethics, and healthy interpersonal dynamics may be directly applicable to shaping AI behavior. Disciplines like psychology, philosophy, religious studies, and the social sciences will have an important role to play alongside engineering and computer science in determining how AI systems develop and behave.
 
 Read [the full paper](https://transformer-circuits.pub/2026/emotions/index.html).
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

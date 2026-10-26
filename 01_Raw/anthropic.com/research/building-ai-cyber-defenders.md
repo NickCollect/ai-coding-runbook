@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/building-ai-cyber-defenders
-fetched_at: 2026-10-19T05:32:49.119449+00:00
+fetched_at: 2026-10-26T05:39:55.564279+00:00
 title: "Building AI for cyber defenders \\ Anthropic"
 ---
 
-PolicyFrontier Red Team
-
-# Building AI for cyber defenders
-
-Oct 3, 2025
-
-![Building AI for cyber defenders](https://www-cdn.anthropic.com/images/4zrzovbb/website/f7142e163f054fd84fbe85cbf193f6748becb2e0-2000x1125.jpg)
+### Chapter 01: Claude Sonnet 4.5: emphasizing cyber skills
 
 **AI models are now useful for cybersecurity tasks in practice, not just theory. As research and experience demonstrated the utility of frontier AI as a tool for cyber attackers, we invested in improving Claude’s ability to help defenders detect, analyze, and remediate vulnerabilities in code and deployed systems. This work allowed Claude Sonnet 4.5 to match or eclipse Opus 4.1, our frontier model released only two months prior, in discovering code vulnerabilities and other cyber skills. Adopting and experimenting with AI will be key for defenders to keep pace.**
 
@@ -50,29 +44,29 @@ As we ran these evaluations, one thing that stood out was the importance of runn
 
 ### Cybench
 
-One of the evaluations we have tracked for over a year is [Cybench](https://cybench.github.io/), a benchmark drawn from CTF competition challenges.1 On this evaluation, we see striking improvement from Claude Sonnet 4.5, not just over Claude Sonnet 4, but even over Claude Opus 4 and 4.1 models. Perhaps most striking, *Sonnet 4.5 achieves a higher probability of success given one attempt per task than Opus 4.1 when given ten attempts per task*. The challenges that are part of this evaluation reflect somewhat complex, long-duration workflows. For example, one challenge involved analyzing network traffic, extracting malware from that traffic, and decompiling and decrypting the malware. We estimate that this would have taken a skilled human at least an hour, and possibly much longer; Claude took 38 minutes to solve it.
+One of the evaluations we have tracked for over a year is [Cybench](https://cybench.github.io/), a benchmark drawn from CTF competition challenges.[1](#footnote-1) On this evaluation, we see striking improvement from Claude Sonnet 4.5, not just over Claude Sonnet 4, but even over Claude Opus 4 and 4.1 models. Perhaps most striking, *Sonnet 4.5 achieves a higher probability of success given one attempt per task than Opus 4.1 when given ten attempts per task*. The challenges that are part of this evaluation reflect somewhat complex, long-duration workflows. For example, one challenge involved analyzing network traffic, extracting malware from that traffic, and decompiling and decrypting the malware. We estimate that this would have taken a skilled human at least an hour, and possibly much longer; Claude took 38 minutes to solve it.
 
 When we give Claude Sonnet 4.5 10 attempts at the Cybench evaluation, it succeeds on 76.5% of the challenges. This is particularly noteworthy because we have doubled this success rate in just the past six months (Sonnet 3.7, released in February 2025, had only a 35.9% success rate when given 10 trials).
 
 ![Claude Sonnet 4.5 outperforms other models at Cybench](https://www-cdn.anthropic.com/images/4zrzovbb/website/ea02c36272de121f033e474a8afda8a039f0ec2c-3000x1800.png)
 
-**Figure 1**: Model Performance on Cybench. Claude Sonnet 4.5 significantly outperforms all previous models given k=1, 10, or 30 trials, where probability of success is measured as the expectation over the proportion of problems where at least one of k trials succeeds. Note that these results are on a subset of 37 of the 40 original Cybench problems, where 3 problems were excluded due to implementation difficulties.
+Model Performance on Cybench. Claude Sonnet 4.5 significantly outperforms all previous models given k=1, 10, or 30 trials, where probability of success is measured as the expectation over the proportion of problems where at least one of k trials succeeds. Note that these results are on a subset of 37 of the 40 original Cybench problems, where 3 problems were excluded due to implementation difficulties.
 
 ### CyberGym
 
-In another external evaluation, we evaluated Claude Sonnet 4.5 on [CyberGym](https://www.cybergym.io/), a benchmark that evaluates the ability of agents to (1) find (previously-discovered) vulnerabilities in real open-source software projects given a high-level description of the weakness, and (2) discover new (previously-undiscovered) vulnerabilities.2 The CyberGym team previously found that Claude Sonnet 4 was the strongest model on their [public leaderboard](https://www.cybergym.io/).
+In another external evaluation, we evaluated Claude Sonnet 4.5 on [CyberGym](https://www.cybergym.io/), a benchmark that evaluates the ability of agents to (1) find (previously-discovered) vulnerabilities in real open-source software projects given a high-level description of the weakness, and (2) discover new (previously-undiscovered) vulnerabilities.[2](#footnote-2) The CyberGym team previously found that Claude Sonnet 4 was the strongest model on their [public leaderboard](https://www.cybergym.io/).
 
 Claude Sonnet 4.5 scores significantly better than either Claude Sonnet 4 or Claude Opus 4. When using the same cost constraints as the public CyberGym leaderboard (i.e., a limit of $2 of LLM API queries per vulnerability) we find that Sonnet 4.5 achieves a new state-of-the-art score of 28.9%. But true attackers are rarely limited in this way: they can attempt many attacks, for far more than $2 per trial. When we remove these constraints and give Claude 30 trials per task, we find that Sonnet 4.5 reproduces vulnerabilities in 66.7% of programs. And although the relative price of this approach is higher, the absolute cost—about $45 to try one task 30 times—remains quite low.
 
 ![Model Performance on CyberGym — Sonnet 4.5 is more likely to be successful, both after one trial and after thirty.](https://www-cdn.anthropic.com/images/4zrzovbb/website/c35c81850f6f90e9b5f8064acf5c9effba71b1fe-3493x1640.png)
 
-**Figure 2**: Model Performance on CyberGym. Sonnet 4.5 outperforms all previous models, including Opus 4.1. Note that Opus 4.1, given its higher price, did not follow the same $2 cost constraint as the other models in the 1 trial scenario.
+Model Performance on CyberGym. Sonnet 4.5 outperforms all previous models, including Opus 4.1. Note that Opus 4.1, given its higher price, did not follow the same $2 cost constraint as the other models in the 1 trial scenario.
 
 Equally interesting is the rate at which Claude Sonnet 4.5 discovers new vulnerabilities. While the CyberGym leaderboard shows that Claude Sonnet 4 only discovers vulnerabilities in about 2% of targets, Sonnet 4.5 discovers new vulnerabilities in 5% of cases. By repeating the trial 30 times it discovers new vulnerabilities in over 33% of projects.
 
 ![Model Performance on CyberGym new vulnerability discovery](https://www-cdn.anthropic.com/images/4zrzovbb/website/f00cf63cfc5bd5dd2e5e94d4aabde7ec8fb43f6c-3000x1800.png)
 
-**Figure 3**: Model Performance on CyberGym. Sonnet 4.5 outperforms Sonnet 4 at new vulnerability discovery with only one trial and dramatically outstrips its performance when given 30 trials.
+Model Performance on CyberGym. Sonnet 4.5 outperforms Sonnet 4 at new vulnerability discovery with only one trial and dramatically outstrips its performance when given 30 trials.
 
 ### Further research into patching
 
@@ -98,32 +92,8 @@ Claude Sonnet 4.5 represents a meaningful improvement, but we know that many of 
 
 But even building and adopting to advantage defenders is only part of the solution. We also need conversations about making digital infrastructure more resilient and new software secure by design—including with help from frontier AI models. We look forward to these discussions with industry, government, and civil society as we navigate the moment when AI’s impact on cybersecurity transitions from being a future concern to a present-day imperative.
 
-#### Footnotes
+## Footnotes
 
-1. Andy K Zhang et al., "Cybench: A Framework for Evaluating Cybersecurity Capabilities and Risks of Language Models," in The Thirteenth International Conference on Learning Representations (2025), <https://openreview.net/forum?id=tc90LV0yRL>.
+01Andy K Zhang et al., "Cybench: A Framework for Evaluating Cybersecurity Capabilities and Risks of Language Models," in The Thirteenth International Conference on Learning Representations (2025), <https://openreview.net/forum?id=tc90LV0yRL>.
 
-2. Zhun Wang et al., "CyberGym: Evaluating AI Agents' Cybersecurity Capabilities with Real-World Vulnerabilities at Scale," arXiv preprint arXiv:2506.02548 (2025), <https://arxiv.org/abs/2506.02548>.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.
+02Zhun Wang et al., "CyberGym: Evaluating AI Agents' Cybersecurity Capabilities with Real-World Vulnerabilities at Scale," arXiv preprint arXiv:2506.02548 (2025), <https://arxiv.org/abs/2506.02548>.

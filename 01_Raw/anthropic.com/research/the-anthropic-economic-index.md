@@ -1,22 +1,14 @@
 ---
 source_url: https://www.anthropic.com/research/the-anthropic-economic-index
-fetched_at: 2026-10-19T05:32:53.877266+00:00
+fetched_at: 2026-10-26T05:40:01.261216+00:00
 title: "Introducing the Anthropic Economic Index \\ Anthropic"
 ---
 
-Societal ImpactsEconomics
-
-# The Anthropic Economic Index
-
-Feb 10, 2025
-
-[Read the paper](http://arxiv.org/abs/2503.04761)
-
-![Economic index hero image, a minimalist illustration of a simple line graph showing an upward trend, drawn in coral with black axes. The graph is being presented on what appears to be a piece of paper or canvas, with decorative hand-drawn flourishes around the edges resembling fingers holding up the presentation.](https://www-cdn.anthropic.com/images/4zrzovbb/website/7a472632580035058bc13bfea3b965fbb471a04e-1920x1079.png)
+### Chapter 01: Mapping AI usage across the labor market
 
 In the coming years, AI systems will have a major impact on the ways people work. For that reason, we're launching the [Anthropic Economic Index](https://www.anthropic.com/economic-futures), an initiative aimed at understanding AI's effects on labor markets and the economy over time.
 
-The Index’s [initial report](http://arxiv.org/abs/2503.04761) provides first-of-its-kind data and analysis based on millions of anonymized conversations on [Claude.ai](http://claude.ai/redirect/website.v1.2529e76e-a2c0-4daa-88e8-b89b4068335f), revealing the clearest picture yet of how AI is being incorporated into real-world tasks across the modern economy.
+The Index’s [initial report](http://arxiv.org/abs/2503.04761) provides first-of-its-kind data and analysis based on millions of anonymized conversations on [Claude.ai](http://claude.ai), revealing the clearest picture yet of how AI is being incorporated into real-world tasks across the modern economy.
 
 We're also [open sourcing the dataset](https://huggingface.co/datasets/Anthropic/EconomicIndex/)used for this analysis, so researchers can build on and extend our findings. Developing policy responses to address the coming transformation in the labor market and its effects on employment and productivity will take a range of perspectives. To that end, we are also inviting economists, policy experts, and other researchers to [provide input](https://docs.google.com/forms/d/e/1FAIpQLSfDEdY-mT5lcXPaDSv-0Ci1rSXGlbIJierxkUbNB7_07-kddw/viewform?usp=dialog) on the Index.
 
@@ -30,27 +22,27 @@ See below for further details on our initial findings.
 
 ![Infographic showing six professional categories based on Claude.ai usage data: Computer & Mathematical (37.2%), Arts & Media (10.3%), Education & Library (9.3%), Office & Administrative (7.9%), Life Sciences (6.4%), and Business & Financial (5.9%). Each category displays its top job titles and most common tasks with their respective usage percentages.](https://www-cdn.anthropic.com/images/4zrzovbb/website/eeed8fe5c58c7c956ddcf4a2c05d22204537897e-1968x1787.jpg)
 
-*Where and how AI is used across the economy, drawn from real-world usage data from Claude.ai. The numbers refer to the percentage of conversations with Claude that were related to those individual tasks, occupations, and categories.*
+Where and how AI is used across the economy, drawn from real-world usage data from Claude.ai. The numbers refer to the percentage of conversations with Claude that were related to those individual tasks, occupations, and categories.
 
 ## Mapping AI usage across the labor market
 
 Our [new paper](http://arxiv.org/abs/2503.04761) builds on a long line of research on the labor market impact of technologies, from the Spinning Jenny of the Industrial Revolution to the car-manufacturing robots of the present day. We focus on the ongoing impact of AI. We don’t survey people on their AI use, or attempt to forecast the future; instead, we have direct data on how AI is actually being used.
 
-### **Analyzing occupational tasks**
+### Analyzing occupational tasks
 
 Our research began with an important [insight from the economics literature](https://academic.oup.com/qje/article-abstract/118/4/1279/1925105): sometimes it makes sense to focus on *occupational tasks* rather than *occupations themselves*. Jobs often share certain tasks and skills in common: for example, visual pattern recognition is a task performed by designers, photographers, security screeners, and radiologists.
 
 Certain tasks lend themselves better to being automated or augmented by a new technology than others. We’d therefore expect AI to be adopted selectively for different tasks across different occupations, and that analyzing tasks—in addition to jobs as a whole—would give us a fuller picture of how AI is being integrated into the economy.
 
-### **Using Clio to match AI use to tasks**
+### Using Clio to match AI use to tasks
 
-This research was made possible by Claude insights and observations, or"[Clio](https://www.anthropic.com/research/clio)", an automated analysis tool that allows us to analyze conversations with Claude while preserving user privacy1. We used Clio on a dataset of approximately one million conversations with Claude (specifically, Free and Pro conversations on [Claude.ai](http://claude.ai/redirect/website.v1.2529e76e-a2c0-4daa-88e8-b89b4068335f)), and used it to organize the conversations by occupational task.
+This research was made possible by Claude insights and observations, or"[Clio](https://www.anthropic.com/research/clio)", an automated analysis tool that allows us to analyze conversations with Claude while preserving user privacy[1](#footnote-1). We used Clio on a dataset of approximately one million conversations with Claude (specifically, Free and Pro conversations on [Claude.ai](http://claude.ai)), and used it to organize the conversations by occupational task.
 
 We chose tasks according to the classification made by the U.S. Department of Labor, which maintains a database of around 20,000 specific work-related tasks called the Occupational Information Network, or [O\*NET](https://www.onetonline.org/). Clio matched each conversation with the O\*NET task that best represented the role of the AI in the conversation (the process is summarized in the figure below). We then followed the O\*NET scheme for grouping the tasks into the occupations they best represented, and the occupations into a small set of overall categories: *education and library,* *business and financial,* and so on.
 
 ![A diagram showing how user conversations with Claude are mapped to tasks and occupations. The top section shows sample conversations flowing through task categorization to six occupational categories. The bottom section displays three analytical views: a scatter plot of wage vs. AI usage, a donut chart comparing augmentative vs. automative tasks, and a skills breakdown bar chart highlighting abilities like Critical Thinking and Programming.](https://www-cdn.anthropic.com/images/4zrzovbb/website/174a18313abe71bd443d7c3681e7fb2e07a3e06a-2703x2032.jpg)
 
-*The process by which our Clio system translates conversations with Claude (which are kept strictly private; top left) into occupational tasks (top middle) and occupations/occupational categories derived from O\*NET (top right). These can then be entered into various analyses (bottom row; discussed in more detail below).*
+The process by which our Clio system translates conversations with Claude (which are kept strictly private; top left) into occupational tasks (top middle) and occupations/occupational categories derived from O\*NET (top right). These can then be entered into various analyses (bottom row; discussed in more detail below).
 
 ## Results
 
@@ -62,7 +54,7 @@ We also compared the rates in our data to the rates at which each occupation app
 
 ![A horizontal bar chart comparing AI usage versus workforce representation across 20 job types. Each job has two connected bars: orange showing percentage of Claude conversations and gray showing percentage of U.S. workers. Computer and mathematical jobs show the highest AI usage (37.2%) despite representing only 3.4% of workers. Office and administrative support has the highest workforce percentage (12.2%) with 7.9% AI usage. Other notable disparities include Arts and Media (10.3% AI usage vs 1.4% workers) and Transportation (0.3% AI usage vs 9.1% workers). Farming shows the lowest representation in both categories (0.1% AI usage, 0.3% workers).](https://www-cdn.anthropic.com/images/4zrzovbb/website/189bf07829f2ecc1d3bac5961e9793a9e0f31e7d-3920x2948.jpg)
 
-*For each job type, the percentage of relevant conversations with Claude is shown in orange compared to the percentage of workers in the U.S. economy with that job type (from the U.S. Department of Labor’s O\*NET categories) in gray.*
+For each job type, the percentage of relevant conversations with Claude is shown in orange compared to the percentage of workers in the U.S. economy with that job type (from the U.S. Department of Labor’s O\*NET categories) in gray.
 
 **Depth of AI use within occupations.** Our analysis found that very few occupations see AI use across most of their associated tasks: only approximately 4% of jobs used AI for at least 75% of tasks. However, more moderate use of AI is much more widespread: roughly 36% of jobs had some use of AI for at least 25% of their tasks.
 
@@ -74,7 +66,7 @@ Interestingly, both low-paying and very-high-paying jobs had very low rates of A
 
 ![A scatter plot showing the relationship between median annual wages and AI usage across occupations. Computer-related jobs (Programmers and Software Developers) cluster in the upper right with high wages ($75-100k) and high AI usage (3-6%). Lower-wage positions like Shampooers ($25k) show minimal AI usage (<1%). A vertical line marks the U.S. median wage of $60,070. Specialized roles like Obstetricians appear at the far right with high wages ($200k) but low AI usage.](https://www-cdn.anthropic.com/images/4zrzovbb/website/e646b93b9bf29a8a7e164adb06e82251545f84d8-3936x3072.jpg)
 
-*Annual wage (x-axis) versus percent of conversations with Claude that involved that occupation (y-axis). Some illustrative occupations are highlighted.*
+Annual wage (x-axis) versus percent of conversations with Claude that involved that occupation (y-axis). Some illustrative occupations are highlighted.
 
 **Automation versus augmentation.** We also looked in more detail at *how* the tasks were being performed—specifically, at which tasks involved “automation” (where AI directly performs tasks such as formatting a document) versus “augmentation” (where AI collaborates with a user to perform a task).
 
@@ -82,7 +74,7 @@ Overall, we saw a slight lean towards augmentation, with 57% of tasks being augm
 
 ![A horizontal bar chart comparing augmentation (57.4% total) versus automation (42.6% total) in Claude conversations. Augmentation breaks down into three categories: Validation (2.8%), Task Iteration (31.3%), and Learning (23.3%). Automation divides into two categories: Feedback Loop (14.8%) and Directive (27.8%). Each category is color-coded with different shades of blue for augmentation and purple for automation.](https://www-cdn.anthropic.com/images/4zrzovbb/website/1f17c9364b316df226154831452a50b53431817a-2200x1250.jpg)
 
-*The percentage of conversations with Claude that involved augmentation versus automation, and the breakdown of task subtypes within each category. Subtypes are defined in our paper as follows. Directive: Complete task delegation with minimal interaction; Feedback Loop: Task completion guided by environmental feedback; Task Iteration: Collaborative refinement process; Learning: Knowledge acquisition and understanding; Validation: Work verification and improvement.*
+The percentage of conversations with Claude that involved augmentation versus automation, and the breakdown of task subtypes within each category. Subtypes are defined in our paper as follows. Directive: Complete task delegation with minimal interaction; Feedback Loop: Task completion guided by environmental feedback; Task Iteration: Collaborative refinement process; Learning: Knowledge acquisition and understanding; Validation: Work verification and improvement.
 
 ### Caveats
 
@@ -90,7 +82,7 @@ Our study provides a unique glimpse into how AI is changing the labor market. Bu
 
 - We can’t know for certain whether someone using Claude for a task was completing a task for work. Someone asking Claude for writing or editing advice *could* be doing so at work, but they could also be doing so for the novel they’re writing as a hobby.
 - Relatedly, we don’t know *how* the users were using the responses from Claude. Were they, for instance, copy-pasting code snippets? Were they fact-checking responses or accepting them uncritically? Some of what appears in our data to be automation could, in fact, be augmentation: for example, a user might ask Claude to write a full memo for them (which would appear as automation), but then edit it themselves afterwards (which would be augmentation).
-- We also only analyze data from [Claude.ai](http://claude.ai/redirect/website.v1.2529e76e-a2c0-4daa-88e8-b89b4068335f) Free and Pro plans, rather than API, Team, or Enterprise users. While Claude.ai data contains some non-work conversations, we used a language model to filter this data to only contain conversations relevant to an occupational task, which helps to mitigate this concern.
+- We also only analyze data from [Claude.ai](http://claude.ai) Free and Pro plans, rather than API, Team, or Enterprise users. While Claude.ai data contains some non-work conversations, we used a language model to filter this data to only contain conversations relevant to an occupational task, which helps to mitigate this concern.
 - The sheer number of different tasks means it is possible that Clio classified some conversations incorrectly (please see the full paper, in particular Appendix B, for details on how we validated the analysis);
 - Claude can’t generate images (except indirectly via code), and so some creative uses won’t be referenced in the data;
 - Given that Claude is advertised for use as a state-of-the-art coding model, we might expect coding to be overrepresented as a use case. For that reason, we don’t argue that the uses in our dataset are a representative sample of AI use in general.
@@ -113,34 +105,20 @@ The full dataset can be downloaded [here](https://huggingface.co/datasets/Anthro
 
 A form for researchers to provide feedback on our data and suggest new research directions is [here](https://docs.google.com/forms/d/e/1FAIpQLSfDEdY-mT5lcXPaDSv-0Ci1rSXGlbIJierxkUbNB7_07-kddw/viewform?usp=dialog).
 
-## Acknowledgements
-
-We appreciate the productive comments and discussion on early findings and drafts of the paper from Jonathon Hazell, Anders Humlum, Molly Kinder, Anton Korinek, Benjamin Krause, Michael Kremer, John List, Ethan Mollick, Lilach Mollick, Arjun Ramani, Will Rinehart, Robert Seamans, Michael Webb, and Chenzi Xu.
-
-## Work with us
+### Work with us
 
 If you’re interested in working at Anthropic to research the effects of AI on the labor market, we encourage you to apply for our Societal Impacts [Research Scientist](https://boards.greenhouse.io/anthropic/jobs/4524032008) and [Research Engineer](https://boards.greenhouse.io/anthropic/jobs/4251453008) roles.
 
-#### Footnotes
+## Footnotes
 
-1Clio takes large numbers of conversations and aggregates them into higher-level categories for analysis. Importantly, for the preservation of user privacy it does so without human researchers being able to see the original conversations. You can read more about Clio [here](https://www.anthropic.com/research/clio).
+01Clio takes large numbers of conversations and aggregates them into higher-level categories for analysis. Importantly, for the preservation of user privacy it does so without human researchers being able to see the original conversations. You can read more about Clio [here](https://www.anthropic.com/research/clio).
 
-## Related content
+## Authors & acknowledgements
 
-### Designing more efficient quantum circuits with Claude
+### Contributors
 
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
+We appreciate the productive comments and discussion on early findings and drafts of the paper from Jonathon Hazell, Anders Humlum, Molly Kinder, Anton Korinek, Benjamin Krause, Michael Kremer, John List, Ethan Mollick, Lilach Mollick, Arjun Ramani, Will Rinehart, Robert Seamans, Michael Webb, and Chenzi Xu.
 
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
+### Acknowledgements
 
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
+We appreciate the productive comments and discussion on early findings and drafts of the paper from Jonathon Hazell, Anders Humlum, Molly Kinder, Anton Korinek, Benjamin Krause, Michael Kremer, John List, Ethan Mollick, Lilach Mollick, Arjun Ramani, Will Rinehart, Robert Seamans, Michael Webb, and Chenzi Xu.

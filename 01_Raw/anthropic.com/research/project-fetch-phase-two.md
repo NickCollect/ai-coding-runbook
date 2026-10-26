@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/project-fetch-phase-two
-fetched_at: 2026-10-19T05:32:52.797951+00:00
+fetched_at: 2026-10-26T05:39:59.898346+00:00
 title: "Project Fetch: Phase two \\ Anthropic"
 ---
 
-Frontier Red Team
-
-# Project Fetch: Phase two
-
-Jun 18, 2026
-
-![Project Fetch: Phase two](https://www-cdn.anthropic.com/images/4zrzovbb/website/39c40393e610cc0a5e65f50ad12ff5ada273f792-1000x1000.svg)
+### Chapter 01: What did we do?
 
 *Michael Ilie, C. Daniel Freeman, and Kevin K. Troy*
 
@@ -52,7 +46,7 @@ Opus 4.7 was not perfect. For example, it defaulted to using an outdated object 
 
 We observed little within-task variance (in absolute terms) on completion times for steps the model finished. (Though the aforementioned suboptimal algorithm selection is likely why one of the beach ball detection trials took substantially longer than the others.) Overall, for the tasks in this experiment within its capability envelope, Claude is now quite reliable. (See the next section for an analysis of what Claude is still unable to do.)
 
-![Scatter plot showing Opus 4.7's reliability on task performance. Opus 4.7 performed each task three times; the scatter plot shows that the performance time was relatively consistent across runs. ](https://www-cdn.anthropic.com/images/4zrzovbb/website/1a362dfdaae7ff55cf8b04c7ac316e75455a9d21-1999x1122.png)
+![Scatter plot showing Opus 4.7's reliability on task performance. Opus 4.7 performed each task three times; the scatter plot shows that the performance time was relatively consistent across runs.](https://www-cdn.anthropic.com/images/4zrzovbb/website/1a362dfdaae7ff55cf8b04c7ac316e75455a9d21-1999x1122.png)
 
 It is worth underscoring (as we did in our previous post) that this progress is not the result of a concerted effort to improve the robotics capabilities of our models. These improvements, like so many others in the history of LLM development, have emerged from much more general scaling.
 
@@ -78,30 +72,6 @@ More research is needed to understand models’ ability to make these physical t
 
 *Updated Jun 18:* Corrected the date of the first phase of Project Fetch.
 
-#### Footnotes
+## Footnotes
 
-1. We report results from Claude Opus 4.7 because it was our most advanced non-Mythos-class model at the time we ran this experiment. Preliminary trials with Claude Mythos Preview showed that it would not provide an apples-to-apples comparison with other models because of how we had set up the experiment and how the model was served.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.
+01We report results from Claude Opus 4.7 because it was our most advanced non-Mythos-class model at the time we ran this experiment. Preliminary trials with Claude Mythos Preview showed that it would not provide an apples-to-apples comparison with other models because of how we had set up the experiment and how the model was served.

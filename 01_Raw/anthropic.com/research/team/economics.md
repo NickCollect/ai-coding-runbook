@@ -1,84 +1,249 @@
 ---
 source_url: https://www.anthropic.com/research/team/economics
-fetched_at: 2026-10-19T05:32:53.703226+00:00
+fetched_at: 2026-10-26T05:40:01.005340+00:00
 title: "Economics \\ Anthropic"
 ---
 
-[Back to Overview](https://www.anthropic.com/research)
+# The Economics team studies and monitors the impact of AI systems on individuals, firms, and economies. We publish and fund research that helps policymakers and the public understand and prepare for the transformations ahead.
 
-# Economics
+Economic Futures Program
+:   [Learn more](https://www.anthropic.com/economic-futures)
 
-The Economics team studies how AI is reshaping the economy, including work, productivity, and economic opportunity. Through rigorous data collection and analysis, we track AI's real-world economic effects and publish research that helps policymakers, businesses, and the public understand and prepare for the changes ahead.
+The Anthropic Institute
+:   [Visit](https://www.anthropic.com/institute)
 
-Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economics](https://www.anthropic.com/research/team/economics)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)[Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
+Economic Index
+:   [View data](https://www.anthropic.com/economic-index)
 
-### What We Do
+Subscribe for updates
 
-We build the empirical foundation for understanding AI's economic impact. Our flagship Anthropic Economic Index tracks how AI tools are actually being used around the world and across every sector of the economy—moving beyond speculation to measure adoption patterns as they unfold. Alongside our index reports, we produce novel research that studies the implications of AI usage and diffusion—as tracked in the index—for workers, for firms, and for the broader economy.
+### Our mission
 
-### Why It Matters
+We build the foundation for understanding AI’s economic impact. The Anthropic Economic Index tracks how AI tools are being used around the world and across every sector of the economy. Alongside regular Economic Index reports, we produce novel research that studies the economic implications of AI, and fund ambitious external research.
 
-Economic transitions create both opportunity and disruption. The speed of AI development means the stakes are unusually high. We need reliable data to inform the decisions that workers, employers, and policymakers make about the future. Our research provides evidence to address uncertainty and helps society navigate this transition in ways that are broadly beneficial.
+### Producing reliable data to guide policy
 
-![Scenarios for our Economic Future](https://www-cdn.anthropic.com/images/4zrzovbb/website/b6e2c934b704f4856d361d842c9cec237465b5c6-1920x1080.webp)
+The speed of AI development means the stakes are unusually high. We need reliable data to inform the decisions that workers, employers, and policymakers make about the future. Our research provides evidence to address uncertainty and help society navigate this transition.
 
-[## Scenarios for our Economic Future
+- [![Working at the frontier shapes expectations for the future](https://www-cdn.anthropic.com/images/4zrzovbb/website/53302837b91ae70bd2cca82170b4ae35c5e52c66-1125x1125.jpg)](https://www.anthropic.com/research/expectations-for-the-future)
+- [![Scenarios for our economic future](https://www-cdn.anthropic.com/images/4zrzovbb/website/fccf43cf4e36b0c26b4215861d909aadabbc32ce-1920x1080.png)](https://www.anthropic.com/institute/econ-scenarios)
+- [![What work can robots do?](https://www-cdn.anthropic.com/images/4zrzovbb/website/c523800acb2cfb23b8c834b4268d5daef9eafce4-2000x1125.jpg)](https://www.anthropic.com/research/what-work-can-robots-do)
+- [![Project Swap: What happens when agents trade for us?](https://www-cdn.anthropic.com/images/4zrzovbb/website/81ec096e35d1d259eb3f47aef4edd2c25f8e3c5e-1920x1080.jpg)](https://www.anthropic.com/research/project-swap)
 
-Anthropic’s Economics team is sharing a new model of how AI may affect economic growth, jobs, wages, and more by 2030. The model lets you explore the scenarios, tell us what you think will happen, and see how your answers compare to +10,000 Americans.](https://www.anthropic.com/institute/econ-scenarios)
+[## Working at the frontier shapes expectations for the future](https://www.anthropic.com/research/expectations-for-the-future)
 
-[EconomicsJun 26, 2026
+We’re sharing two reports: the first covers how AI is changing employment inside Anthropic, and the second looks at the gap between how the public and Anthropic employees expect AI to affect work and the economy.
 
-#### Anthropic Economic Index report: Cadences
+[## Scenarios for our economic future](https://www.anthropic.com/institute/econ-scenarios)
 
-In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?](https://www.anthropic.com/research/economic-index-june-2026-report)[EconomicsMar 24, 2026
+Anthropic’s Economics team is sharing a new model of how AI may affect economic growth, jobs, wages, and more by 2030. The model lets you explore the scenarios, tell us what you think will happen, and see how your answers compare to +10,000 Americans.
 
-#### Anthropic Economic Index report: Learning curves
+[Read more](https://www.anthropic.com/institute/econ-scenarios)
 
-Anthropic's fifth Economic Index report studies Claude usage in February 2026, building on the economic primitives framework introduced in our previous report.](https://www.anthropic.com/research/economic-index-march-2026-report)[EconomicsApr 22, 2026
+[## What work can robots do?](https://www.anthropic.com/research/what-work-can-robots-do)
 
-#### What 81,000 people told us about the economics of AI
+We built an index of how well today’s robots can perform US job tasks. Robots can already do three-quarters of physical tasks, mostly in limited settings, but are cost-competitive for just 0.3% of them.
 
-Our recent survey study with 81,000 Claude users provides a way to connect people’s economic concerns with what we’ve quantified in Claude traffic.](https://www.anthropic.com/research/81k-economics)[EconomicsMar 5, 2026
+[Read more](https://www.anthropic.com/research/what-work-can-robots-do)
 
-#### Labor market impacts of AI: A new measure and early evidence
+[## Project Swap: What happens when agents trade for us?](https://www.anthropic.com/research/project-swap)
 
-In this paper, we present a new framework for understanding AI’s labor market impacts, and test it against early data.](https://www.anthropic.com/research/labor-market-impacts)
+To see what works and what breaks when agents are sent into a market, we made a miniature market of Claudes.
 
-## Publications
+[Read more](https://www.anthropic.com/research/project-swap)
 
-Search
+01
 
-DateCategoryTitle
+/
 
-- [Oct 16, 2026Economics
+04
 
-  The AI expectations gap](https://www.anthropic.com/research/ai-expectations-gap)
-- [Oct 16, 2026Economics
+25
 
-  How employment is changing at Anthropic](https://www.anthropic.com/research/employment-at-anthropic)
-- [Oct 16, 2026Economics
+ARTICLES
 
-  Working at the frontier shapes expectations for the future](https://www.anthropic.com/research/expectations-for-the-future)
-- [Sep 30, 2026Economics
+Most recentGrid view
 
-  What work can robots do?](https://www.anthropic.com/research/what-work-can-robots-do)
-- [Sep 24, 2026Economics
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/53302837b91ae70bd2cca82170b4ae35c5e52c66-1125x1125.jpg)
 
-  Project Swap: What happens when agents trade for us?](https://www.anthropic.com/research/project-swap)
-- [Aug 12, 2026Economics
+### [Working at the frontier shapes expectations for the future](https://www.anthropic.com/research/expectations-for-the-future)
 
-  Reviewing the evidence on worker retraining programs](https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs)
-- [Jul 14, 2026Economics
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/e6c18d30f931ae76d4b600558f5a11377306f1d9-2000x1125.jpg)
 
-  How Canada uses Claude: Findings from the Anthropic Economic Index](https://www.anthropic.com/research/how-canada-uses-claude)
-- [Jun 26, 2026Economics
+### [How employment is changing at Anthropic](https://www.anthropic.com/research/employment-at-anthropic)
 
-  Anthropic Economic Index report: Cadences](https://www.anthropic.com/research/economic-index-june-2026-report)
-- [Jun 16, 2026Economics
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/bc1429724882e8dff220d03051f694b62af86ca9-1125x1125.jpg)
 
-  Agentic coding and persistent returns to expertise](https://www.anthropic.com/research/claude-code-expertise)
-- [May 27, 2026Economics
+### [The AI expectations gap](https://www.anthropic.com/research/ai-expectations-gap)
 
-  Coding agents in the social sciences](https://www.anthropic.com/research/coding-agents-social-sciences)
+![What work can robots do?](https://www-cdn.anthropic.com/images/4zrzovbb/website/557fbb195505dbfd857102e10c8a73ffdf483b2e-1280x1280.jpg)
 
-[See more](#)
+### [What work can robots do?](https://www.anthropic.com/research/what-work-can-robots-do)
+
+![Two-panel illustration: on a dark background, five colored bars resembling books on a shelf; on dotted paper, two columns of dots joined by crisscrossing colored lines, like a matching diagram pairing people with books.](https://www-cdn.anthropic.com/images/4zrzovbb/website/10c6ffec89296778232ace13db067abcf1c9ffcd-1080x1080.jpg)
+
+### [Project Swap: What happens when agents trade for us?](https://www.anthropic.com/research/project-swap)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/fccf43cf4e36b0c26b4215861d909aadabbc32ce-1920x1080.png)
+
+### [Scenarios for our economic future](https://www.anthropic.com/institute/econ-scenarios)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/00da62954593e0b07920dc7d7bbe101f50e068ea-1208x1208.jpg)
+
+### [Reviewing the evidence on worker retraining programs](https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/096e10d1e7ba3bca65e108505e8a288e43d531ca-1280x1280.jpg)
+
+### [How Canada uses Claude: Findings from the Anthropic Economic Index](https://www.anthropic.com/research/how-canada-uses-claude)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4b1cec2751f9c43bd85045decebca8e7cb7e4ac2-1280x1280.jpg)
+
+### [Anthropic Economic Index report: Cadences](https://www.anthropic.com/research/economic-index-june-2026-report)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/40eeda8155dcb710e768c55362d99e69f6720f35-1280x1280.jpg)
+
+### [Agentic coding and persistent returns to expertise](https://www.anthropic.com/research/claude-code-expertise)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/13a38f9b0d5e93f3ca4facf25ec8d348e50740c5-1280x1280.jpg)
+
+### [What 81,000 people told us about the economics of AI](https://www.anthropic.com/research/81k-economics)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6b696d7b8c8942904490a9eb6349d86b122612bd-1280x1280.jpg)
+
+### [Announcing the Anthropic Economic Index Survey](https://www.anthropic.com/research/economic-index-survey-announcement)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d1dff7594e934623d0bdbc9044e9f55f9d24012f-1280x1280.jpg)
+
+### [How Australia uses Claude: Findings from the Anthropic Economic Index](https://www.anthropic.com/research/how-australia-uses-claude)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/def8ed08c1b6a0964ff167cbf58aad43fd377572-1280x1280.jpg)
+
+### [Anthropic Economic Index report: Learning curves](https://www.anthropic.com/research/economic-index-march-2026-report)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a9200829eaf63ae342ede66e46d7439367a705bc-1920x1080.png)
+
+### [What 81,000 people want from AI](https://www.anthropic.com/features/81k-interviews)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/48149826195f90a2e2a3e93ceec34350340827a4-1280x1280.jpg)
+
+### [Labor market impacts of AI: A new measure and early evidence](https://www.anthropic.com/research/labor-market-impacts)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4c52fcf27687cf3904ca5205c47c42ede6feebbe-1280x1280.jpg)
+
+### [India Country Brief: The Anthropic Economic Index](https://www.anthropic.com/research/india-brief-economic-index)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/0c1ce574c31bd581b4c6ea843c29755afc72e475-1280x1280.jpg)
+
+### [Anthropic Economic Index report: Economic primitives](https://www.anthropic.com/research/anthropic-economic-index-january-2026-report)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/62ed129346d7b9d6c48d586cfda8b18bc0bb2045-1280x1280.jpg)
+
+### [Anthropic Economic Index: New building blocks for understanding AI use](https://www.anthropic.com/research/economic-index-primitives)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/cbec69845abed1612900fafd003e6dcf8e0ee1a5-1280x1280.jpg)
+
+### [Estimating AI productivity gains from Claude conversations](https://www.anthropic.com/research/estimating-productivity-gains)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/32d9b89344fc4245f04e9394a8d3bb5945635358-2000x2000.jpg)
+
+### [Preparing for AI’s economic impact: exploring policy responses](https://www.anthropic.com/research/economic-policy-responses)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c8c8f221d58132aaa87f15cbbe9510d67041691d-1280x1280.jpg)
+
+### [Anthropic Economic Index: Tracking AI’s role in the US and global economy](https://www.anthropic.com/research/economic-index-geography)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/95a0af03f6fd0c4e65635a2142bd44756f9fc6ff-1280x1280.jpg)
+
+### [Anthropic Economic Index report: Uneven geographic and enterprise AI adoption](https://www.anthropic.com/research/anthropic-economic-index-september-2025-report)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4f5be7e4c33d71b769d42cd92c2a812bafccf14f-1280x1280.jpg)
+
+### [Anthropic Economic Index: AI’s impact on software development](https://www.anthropic.com/research/impact-software-development)
+
+See more
+
+## Explore work from other teams
+
+[### Alignment](https://www.anthropic.com/research/team/alignment)
+
+48 posts
+
+Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
+
+[### Engineering](https://www.anthropic.com/engineering)
+
+27 posts
+
+Builds the infrastructure and systems that make Claude reliable and trustworthy.
+
+[### Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
+
+34 posts
+
+Stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next.
+
+[### Interpretability](https://www.anthropic.com/research/team/interpretability)
+
+35 posts
+
+Studies how large language models work internally as a foundation for AI safety.
+
+[### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
+
+24 posts
+
+Studies how AI affects people, both individually and collectively.
+
+[### Science](https://www.anthropic.com/science)
+
+18 posts
+
+Explores how AI can increase the pace of scientific progress through both research and collaborations.
+
+[### Economics](https://www.anthropic.com/research/team/economics)
+
+25 posts
+
+Studies and monitors the impact of AI systems on individuals, firms, and economies.
+
+[### Alignment](https://www.anthropic.com/research/team/alignment)
+
+48 posts
+
+Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
+
+[### Engineering](https://www.anthropic.com/engineering)
+
+27 posts
+
+Builds the infrastructure and systems that make Claude reliable and trustworthy.
+
+[### Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
+
+34 posts
+
+Stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next.
+
+[### Interpretability](https://www.anthropic.com/research/team/interpretability)
+
+35 posts
+
+Studies how large language models work internally as a foundation for AI safety.
+
+[### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
+
+24 posts
+
+Studies how AI affects people, both individually and collectively.
+
+[### Science](https://www.anthropic.com/science)
+
+18 posts
+
+Explores how AI can increase the pace of scientific progress through both research and collaborations.
+
+[### Economics](https://www.anthropic.com/research/team/economics)
+
+25 posts
+
+Studies and monitors the impact of AI systems on individuals, firms, and economies.

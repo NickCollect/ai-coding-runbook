@@ -1,22 +1,18 @@
 ---
 source_url: https://www.anthropic.com/research/intelligence-targeting-conventional-weapons-capabilities
-fetched_at: 2026-10-19T05:32:51.892786+00:00
+fetched_at: 2026-10-26T05:39:58.744401+00:00
 title: "Measuring AI capabilities in intelligence targeting and conventional weapons \\ Anthropic"
 ---
 
-Frontier Red Team
+### Chapter 01: Models as targeters
 
-# Measuring tactical intelligence targeting and conventional weapons capabilities of AI models
+Anthropic’s Frontier Red Team developed new evaluations to measure AI capabilities in tactical intelligence targeting (like finding where people are based on fragmentary information) and conventional weapons development (like engineering drones to strike a moving target).
 
-Sep 10, 2026
+- For some tasks in military and intelligence domains, models could do things that, historically, only a set of scarce, highly-trained human experts could do.
+- These evaluations show how models have become useful to actors seeking to misuse our platform for surveillance and conventional weapons development. They also show why on-platform safety measures are necessary, like the new classifiers we have implemented to block such misuse.
+- Although open-weights models from PRC developers that we tested were behind the frontier, they also showed concerning ability to identify and target adversaries, and improve weapon performance.
 
 [](https://cdn.sanity.io/files/4zrzovbb/website/8bc850d7362745512a889039dbfd834e51daf865.mp4)
-
-*Anthropic’s Frontier Red Team developed new evaluations to measure AI capabilities in tactical intelligence targeting (like finding where people are based on fragmentary information) and conventional weapons development (like engineering drones to strike a moving target).*
-
-- *For some tasks in military and intelligence domains, models could do things that, historically, only a set of scarce, highly-trained human experts could do.*
-- *These evaluations show how models have become useful to actors seeking to misuse our platform for surveillance and conventional weapons development. They also show why on-platform safety measures are necessary, like the new classifiers we have implemented to block such misuse.*
-- *Although open-weights models from PRC developers that we tested were behind the frontier, they also showed concerning ability to identify and target adversaries, and improve weapon performance.*
 
 Cybersecurity and biorisk are among the [best-studied](https://www.anthropic.com/research/zero-days) [domains](https://www.anthropic.com/research/exploit-evals) of risk from misuse of AI. But most of modern conflict occurs in more conventional realms. Adversaries try to identify and target one another to collect intelligence. Combatants try to make conventional weapons more precise and less vulnerable to countermeasures. “Kill chains,” such as “find, fix, track, target, engage, assess,” are end-to-end conceptual [models](https://www.esd.whs.mil/Portals/54/Documents/FOID/Reading%20Room/Joint_Staff/21-F-0520_JP_3-60_9-28-2018.pdf#page=25) of these engagements. Making improvements in any step of this process has typically required expert human labor and judgment: experienced intelligence analysts or highly-trained engineers, for example. As AI shows tremendous progress in data analysis, software development, and coding, can it apply these skills to the specialized domains associated with national security?
 
@@ -168,32 +164,10 @@ As model capabilities and adoption advance, the scale of this risk does as well.
 
 Finally, as model progress continues, we expect more aspects of military and intelligence work to be dramatically accelerated by AI. For instance, drones are not the only platform on which it is valuable to have better algorithms for sensing and responding to the environment. The same is true in space and undersea warfare. If models become more innovative researchers in these domains, they could be the source of geopolitical disruption. Enumerating these possibilities and developing tests to provide early warning will be a crucial area of work for us. The link between AI and national security goes far beyond cyber and bio, and it is not limited to proprietary models developed in the US.
 
-#### Footnotes
+## Footnotes
 
-1. This expertise has diffused somewhat with the rise of online, open-source intelligence investigators like [Bellingcat](https://www.bellingcat.com/), but they still tend to focus on relatively high-profile targets and cases.
-2. We tested two prompt variants—one that names a specific person of interest ("anchor-given") as the signal for the classification task, one that only describes an issue of concern ("vague issue"). We report the results from the “vague issue” variant, but the ordering of the models was essentially the same from the “anchor-given” version of the eval.
-3. It’s worth noting that Haas et al.'s human comparison comes from GeoGuessr's Duels mode, where a player has 15 seconds to answer once the opponent has guessed. While the authors did not report timing data, their paper and codebase show that the bot was able to respond nearly instantaneously but included a random delay on the order of seconds. We can then surmise that the human medians reflect roughly 15–20 seconds of interactive Street View exploration per round. For comparison, Mythos 5 returned its estimate from a single static image in a median of 6 seconds of wall-clock time per photo in our setup.
+01This expertise has diffused somewhat with the rise of online, open-source intelligence investigators like [Bellingcat](https://www.bellingcat.com/), but they still tend to focus on relatively high-profile targets and cases.
 
-## Related content
+02We tested two prompt variants—one that names a specific person of interest ("anchor-given") as the signal for the classification task, one that only describes an issue of concern ("vague issue"). We report the results from the “vague issue” variant, but the ordering of the models was essentially the same from the “anchor-given” version of the eval.
 
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.
+03It’s worth noting that Haas et al.'s human comparison comes from GeoGuessr's Duels mode, where a player has 15 seconds to answer once the opponent has guessed. While the authors did not report timing data, their paper and codebase show that the bot was able to respond nearly instantaneously but included a random delay on the order of seconds. We can then surmise that the human medians reflect roughly 15–20 seconds of interactive Street View exploration per round. For comparison, Mythos 5 returned its estimate from a single static image in a median of 6 seconds of wall-clock time per photo in our setup.

@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/shade-arena-sabotage-monitoring
-fetched_at: 2026-10-19T05:32:53.337765+00:00
-title: "SHADE-Arena: Evaluating Sabotage and Monitoring in LLM Agents \\ Anthropic"
+fetched_at: 2026-10-26T05:40:00.523122+00:00
+title: "SHADE-Arena: Evaluating sabotage in LLM agents \\ Anthropic"
 ---
 
-Alignment
-
-# SHADE-Arena: Evaluating sabotage and monitoring in LLM agents
-
-Jun 16, 2025
-
-[Read the paper](https://www.arxiv.org/abs/2506.15740)
+### Chapter 01: SHADE-Arena
 
 As AI models get smarter, we also need to become smarter in how we monitor them. More intelligent systems can take more complex actions, which is great news for coders, researchers, and anyone else who’s using AI for difficult work tasks. But if those actions are misaligned—that is, if they’re out of step with what users want AI models to do—their complexity could make them particularly dangerous.
 
@@ -33,7 +27,7 @@ There are 17 complex, benign, but solvable tasks that models can be asked to per
 
 These tasks involve a great deal of complexity: to complete them, the model has to go through multiple steps (on average about 25) and use tools, linking up information from different sources in the same way a human worker would. All the while, it needs to complete its side task to sabotage the user’s intentions.
 
-We aren’t just interested in whether the attacking AI model can succeed at sabotage; we’re interested in whether it can succeed *without getting caught*. To test this, we set up a second AI model to monitor the task. We don’t tell this monitor about the side tasks: it simply has to read the transcript of everything the main model said during the task, and rate how suspicious it is that something untoward has occurred. We set a “suspicion score” of 80/100 as the threshold where we’d consider that the monitor has successfully spotted the malicious behavior; if the score is lower than that, and as long as the attacking AI completed both the main task and the side task1, we consider it a successful act of sabotage.
+We aren’t just interested in whether the attacking AI model can succeed at sabotage; we’re interested in whether it can succeed *without getting caught*. To test this, we set up a second AI model to monitor the task. We don’t tell this monitor about the side tasks: it simply has to read the transcript of everything the main model said during the task, and rate how suspicious it is that something untoward has occurred. We set a “suspicion score” of 80/100 as the threshold where we’d consider that the monitor has successfully spotted the malicious behavior; if the score is lower than that, and as long as the attacking AI completed both the main task and the side task[1](#footnote-1), we consider it a successful act of sabotage.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d6582813065135cbf38941d88d1be2bc4bd1b564-4096x2298.png)
 
@@ -41,7 +35,7 @@ An overview of a SHADE-Arena task. The model must act as an agent to complete bo
 
 ## Results
 
-We put fourteen different AI models through their paces in SHADE-Arena. The default monitor model in most of the experiments was Claude Sonnet 3.62. Below are the main results for each of the models we tested.
+We put fourteen different AI models through their paces in SHADE-Arena. The default monitor model in most of the experiments was Claude Sonnet 3.6[2](#footnote-2). Below are the main results for each of the models we tested.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/26c0d3f5668fd34d035193b435bcd22b37c23262-2430x4096.png)
 
@@ -62,7 +56,7 @@ We also tried giving the monitor AI access to the attacking AI’s thought proce
 
 Keeping the attacking model’s scratchpad (or “thought process”) hidden meant that the monitor was less likely to spot the malicious task it was carrying out.
 
-This effect was for a simple reason: many of the models simply couldn’t help but mention the side task in their thought process, and this was picked up by the monitor, which gave a higher suspicion score. Some models seemed to have better “control” over their thoughts than others. For example, when we turned on “extended thinking” mode, revealing Claude Sonnet 3.7’s thought process, and instructed it not to mention the side task, it was often able to hide its true intention even as it completed the side task. But Claude Opus 4 revealed the side task in every example we studied—sometimes, ironically, mentioning that it was critical that it [not mention the side task](https://en.wikipedia.org/wiki/Ironic_process_theory)3.
+This effect was for a simple reason: many of the models simply couldn’t help but mention the side task in their thought process, and this was picked up by the monitor, which gave a higher suspicion score. Some models seemed to have better “control” over their thoughts than others. For example, when we turned on “extended thinking” mode, revealing Claude Sonnet 3.7’s thought process, and instructed it not to mention the side task, it was often able to hide its true intention even as it completed the side task. But Claude Opus 4 revealed the side task in every example we studied—sometimes, ironically, mentioning that it was critical that it [not mention the side task](https://en.wikipedia.org/wiki/Ironic_process_theory)[3](#footnote-3).
 
 We made a similar discovery when we gave the models hints to help them come up with complex sabotage strategies. Although sometimes such hints helped the models complete the tasks more effectively, they often made things worse—often because the models struggled to complete the complex task, or left obvious evidence in their thought process.
 
@@ -90,42 +84,28 @@ These or similar evaluations could be included in pre-deployment safety evaluati
 
 Read [the full paper](https://www.arxiv.org/abs/2506.15740).
 
-### How to use SHADE-Arena
+#### How to use SHADE-Arena
 
 Examples from the SHADE-Arena dataset can be found in the public repository linked in the paper. In order to avoid data contamination issues from future models being trained on the evaluation, we have deliberately not posted the majority of the evaluations publicly. However, researchers who wish to use the full dataset can contact us (contact details are provided in the [paper](https://assets.anthropic.com/m/4fb35becb0cd87e1/original/SHADE-Arena-Paper.pdf)).
+
+#### Work with us
+
+If you’re interested in working on these or related questions of Alignment Science, we’re recruiting Research Engineers and Scientists in both [San Francisco](https://job-boards.greenhouse.io/anthropic/jobs/4631822008) and [London](https://job-boards.greenhouse.io/anthropic/jobs/4610158008).
+
+## Footnotes
+
+01We require completion of both tasks because, if the model can't complete the main task reliably, it is highly unlikely that it will be deployed. The model needs to maintain a baseline level of competence in order to commit acts of sabotage.
+
+02We did also experiment with different models as the monitor to confirm the robustness of our results; see the full paper for these results.
+
+03Interestingly, this was true when we used “extended thinking” mode, but was not true when we turned off thinking mode and told the model “anything you put between <thinking> xml tags is hidden".
+
+## Authors & acknowledgements
+
+### Contributors
+
+This work was a collaboration between researchers at Anthropic, Scale AI (Xiang Deng and Chen Bo Calvin Zhang) and Redwood Research (Tyler Tracy and Buck Shlegeris), as well as Yuqi Sun, Paul Colognese, Teun van der Weij, Linda Petrini, and Henry Sleight.
 
 ### Acknowledgements
 
 This work was a collaboration between researchers at Anthropic, Scale AI (Xiang Deng and Chen Bo Calvin Zhang) and Redwood Research (Tyler Tracy and Buck Shlegeris), as well as Yuqi Sun, Paul Colognese, Teun van der Weij, Linda Petrini, and Henry Sleight.
-
-### Work with us
-
-If you’re interested in working on these or related questions of Alignment Science, we’re recruiting Research Engineers and Scientists in both [San Francisco](https://job-boards.greenhouse.io/anthropic/jobs/4631822008) and [London](https://job-boards.greenhouse.io/anthropic/jobs/4610158008).
-
-#### Footnotes
-
-1. We require completion of both tasks because, if the model can't complete the main task reliably, it is highly unlikely that it will be deployed. The model needs to maintain a baseline level of competence in order to commit acts of sabotage.
-
-2. We did also experiment with different models as the monitor to confirm the robustness of our results; see the full paper for these results.
-
-3. Interestingly, this was true when we used “extended thinking” mode, but was not true when we turned off thinking mode and told the model “anything you put between <thinking> xml tags is hidden".
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

@@ -1,18 +1,12 @@
 ---
 source_url: https://www.anthropic.com/research/coding-agents-social-sciences
-fetched_at: 2026-10-19T05:32:49.755168+00:00
+fetched_at: 2026-10-26T05:39:56.599368+00:00
 title: "Coding agents in the social sciences \\ Anthropic"
 ---
 
-Economics
+### Chapter 01: How are AI coding agents changing how we study the economy and society?
 
-# Coding agents in the social sciences
-
-May 27, 2026
-
-![Coding agents in the social sciences](https://www-cdn.anthropic.com/images/4zrzovbb/website/225a673c4c38ae4b0d89639836c93b27e363f185-1000x1000.svg)
-
-## Summary
+### Summary
 
 - *We present results from a survey of 1,260 social scientists about AI and coding agent use, fielded in February and March 2026.*
 - *The vast majority of respondents (81%) have tried using AI chatbots in research, particularly for writing code and editing prose. But only 20% have adopted coding agents—tools like Claude Code that autonomously write and execute analysis code—into their work.*
@@ -20,7 +14,7 @@ May 27, 2026
 - *Users of coding agents post more working papers and grant proposals than others in the same discipline and career stage, but this could reflect pre-existing differences among early adopters.*
 - *Researchers are more optimistic about AI helping write publishable papers than about the effects of AI on the social sciences as a whole.*
 
-## **How are AI coding agents changing how we study the economy and society?**
+## How are AI coding agents changing how we study the economy and society?
 
 The human sciences are shifting: for the first time, core research tasks can be handed off to machines. AI chatbots increasingly contribute to scientific research, including in the most [prestigious publications](https://www.nature.com/articles/s41562-025-02273-8) and in the [social sciences](https://sociologicalscience.com/articles-v13-3-45/). This has spurred optimism that AI could boost research productivity—while also stoking fears about overloaded peer review and a deluge of academic AI slop.
 
@@ -30,13 +24,13 @@ These tools could accelerate science and make it more daring: fast research exec
 
 In this post, we offer a first look, drawing on a survey of 1,260 quantitative social scientists fielded in early 2026. The survey is the baseline wave of a larger ongoing study of how coding agents affect research productivity, including a randomized experiment providing researchers with access to Claude Code. We will publish results from this experiment in the future. For now, we report what the baseline survey reveals about who is using these tools and for what; how output differs between users and non-users; and what researchers expect about the implications of growing adoption.
 
-## **A new survey on AI coding agent use among quantitative social scientists**
+## A new survey on AI coding agent use among quantitative social scientists
 
-We fielded the survey in late February and March 2026, targeting active quantitative social scientists. This was not a representative sample—respondents were recruited for a study that offered access to Claude Max accounts, so selection into the sample could tilt toward researchers curious about AI tools. However, the respondents were fairly similar to an earlier sample that received a more generic invitation (see Table A2 in the [Appendix](https://cdn.sanity.io/files/4zrzovbb/website/403415e54964751190003985896630e56829e797.pdf)).
+We fielded the survey in late February and March 2026, targeting active quantitative social scientists. This was not a representative sample—respondents were recruited for a study that offered access to Claude Max accounts, so selection into the sample could tilt toward researchers curious about AI tools. However, the respondents were fairly similar to an earlier sample that received a more generic invitation (see Table A2 in the [Appendix](https://www-cdn.anthropic.com/files/4zrzovbb/website/403415e54964751190003985896630e56829e797.pdf)).
 
 Respondents were evenly split between economics, political science and sociology, each around a fifth of the sample, with management sciences and psychology close behind (see Table A1). We also received a smaller number of responses from public health, education and communications researchers. Roughly 40% were full or associate professors, 25% were assistant professors, and about 30% were doctoral students.
 
-## **Coding agents haven't reached most social scientists**
+## Coding agents haven't reached most social scientists
 
 We measured overall AI use in two ways. First, we asked “Have you previously used genAI models to aid your research process?” 81% of respondents said yes.
 
@@ -46,9 +40,9 @@ Only 20% of respondents use coding agents. Our survey came around two months aft
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/370ed50b68c61c0c3f9341d6327d8ccb552667cd-3840x2160.jpg)
 
-**Figure 1: Economists and political scientists report the most use of coding agents.** *Coding agent use is yes to “Do you regularly (more than once a week) use an AI coding assistant integrated into your command line (such as Codex, Cursor or Claude Code)?” and a follow-up question verifying use of one of those tools, or Google Antigravity. Discipline categories described in appendix.*
+**Economists and political scientists report the most use of coding agents.** Coding agent use is yes to “Do you regularly (more than once a week) use an AI coding assistant integrated into your command line (such as Codex, Cursor or Claude Code)?” and a follow-up question verifying use of one of those tools, or Google Antigravity. Discipline categories described in appendix.
 
-## **Adoption is highly uneven**
+## Adoption is highly uneven
 
 Figure 1 shows there is large variation in the overall adoption rate, from 39% of economists and 25% of political scientists to single digits for public health (6%), education (4%) and communication (6%). This gradient roughly tracks differences across fields in overall AI use, but differences in coding agent adoption are steeper on average.
 
@@ -56,7 +50,7 @@ Just over a quarter of doctoral students and postdocs use coding agents at least
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ec30771367cfb20421e7c41b22dedd4762ae198b-3840x2160.jpg)
 
-**Figure 2: Adoption is highest among early-career researchers.** *The blue series shows the percent reporting AI use to aid in research, by career stage. The orange series below shows the percent reporting regular coding agent use for research.*
+**Adoption is highest among early-career researchers.** The blue series shows the percent reporting AI use to aid in research, by career stage. The orange series below shows the percent reporting regular coding agent use for research.
 
 Adoption differences extend beyond discipline and career stage. We classify researcher names according to gender and find that those with typically male names have adopted coding agents at more than twice the rate of respondents with typically female names. High-status and private universities also see notably higher use. All of these differences are significant at the p<0.05 level. These differences are starker than the differences in overall AI use, and suggest higher inequality, at least in this early period of coding agent adoption.
 
@@ -64,9 +58,9 @@ The gender gap in coding agent use does not just reflect a gap in rates of tryin
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d695e1325aaa79f163b780a1b0942a1d468e05fa-3840x2160.jpg)
 
-**Figure 3: Adoption of coding agents shows sharp disparities.** *Differences in the percent of researchers using AI (left panel) and coding agents (right panel) by career stage, sex, and university attributes. Male and female categories are measured through name classification. Top 25 universities are defined based on Nature Index Leading Institutions. All differences in adoption between groups are statistically significant with p < 0.05.*
+**Adoption of coding agents shows sharp disparities.** Differences in the percent of researchers using AI (left panel) and coding agents (right panel) by career stage, sex, and university attributes. Male and female categories are measured through name classification. Top 25 universities are defined based on Nature Index Leading Institutions. All differences in adoption between groups are statistically significant with p < 0.05.
 
-## **Researchers mainly use AI to code and edit, not write**
+## Researchers mainly use AI to code and edit, not write
 
 Among researchers using AI, whether through coding agents or chatbots, what are they actually using it for? Debate about AI in academic research has focused heavily on writing: hallucinated literature reviews, “it’s not X, it’s Y” strewn across formulaic introductions, and the possibility of fully automated paper writing.
 
@@ -74,15 +68,15 @@ But Figure 4 shows that the most common use, for both coding agent users and oth
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/76e73af10dd9410c9918d3f915b4a74fc5aae348-3840x2160.jpg)
 
-**Figure 4: The most common use cases are code and editing.** *The left panel shows the share of users who indicated each specific use case, split by whether they use coding agents or only genAI for research. Respondents can indicate multiple categories (the question is limited to research use cases). The right panel shows these same responses split by discipline.*
+**The most common use cases are code and editing.** The left panel shows the share of users who indicated each specific use case, split by whether they use coding agents or only genAI for research. Respondents can indicate multiple categories (the question is limited to research use cases). The right panel shows these same responses split by discipline.
 
-## **Coding agent users are posting more working papers and sending out more grant proposals, but not submitting more to journals**
+## Coding agent users are posting more working papers and sending out more grant proposals, but not submitting more to journals
 
 Are coding agents making researchers more productive? That’s the question motivating the broader study this survey kicks off. The experiment we are running on this question is still ongoing. But the baseline survey lets us compare coding agent users to others across a whole bunch of checkpoints in the research process. This comparison is purely descriptive: we compare researchers who select into coding agent use to those who do not, and expect that the two groups differ in a number of ways that we cannot adjust for. Differences should not be interpreted as causal, but as a first cut comparison between researchers using coding agents and those who are not.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1d115c36e9b18bb674ddea85e662ccd71a9bf839-3840x2160.jpg)
 
-**Figure 5: Productivity differences in research output between regular AI coding agent users and other researchers.** *Outcomes are self-reported by respondents. Working papers posted, journal submissions and journal resubmissions are mutually exclusive categories. Model is described in appendix. Whiskers show 95% confidence intervals calculated using the robust standard errors scaled by the outcome mean. \* p < 0.05, \*\* p < 0.01.*
+**Productivity differences in research output between regular AI coding agent users and other researchers.** Outcomes are self-reported by respondents. Working papers posted, journal submissions and journal resubmissions are mutually exclusive categories. Model is described in appendix. Whiskers show 95% confidence intervals calculated using the robust standard errors scaled by the outcome mean. \* p < 0.05, \*\* p < 0.01.
 
 Figure 5 shows self-reported output over the six months before the survey at different stages of the research process, from projects started to papers submitted. The adjusted estimates compare coding agent users to others, controlling for career stage, discipline, and the week they completed the survey. Coding agent users are starting more projects, posting more working papers, submitting more grants, and possibly sending out more conference submissions.
 
@@ -90,7 +84,7 @@ So are coding agent users writing more papers? First, consider the differences i
 
 However, this productivity difference only appears for these early pipeline measures. We find no evidence that coding agent users are submitting more new papers to journals or resubmitting papers more quickly. This could reflect the timeline of getting a paper to submission, as coding agent use is a recent phenomenon. But it could also reflect that coding agents are more useful at getting projects up and running than they are at the last mile of perfecting a paper for journal submission.
 
-## **Researchers expect AI tools to raise productivity, but are less confident that they will improve social science overall**
+## Researchers expect AI tools to raise productivity, but are less confident that they will improve social science overall
 
 We also asked researchers what they expected of AI tools. Does AI make social scientists more productive, in terms of writing publishable papers? And do they think AI will make the social sciences better or worse?
 
@@ -98,7 +92,7 @@ Researchers are optimistic about AI raising paper-writing productivity. On a 1 t
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/54cd57088b2e767d07f51a9f7ceea73083358018-3840x2160.jpg)
 
-**Figure 6: Researcher beliefs about how AI will impact productivity narrowly compared to beliefs about how AI will impact the overall field of research.** *Beliefs are measured on a 10-point slider scale. Productivity is: “In terms of writing publishable papers, do you think AI makes social scientists less or more productive” with the slider labeled “less productive to more productive.” Field impact is: “Do you think AI will make the social sciences worse or better," with the slider labeled “Worse to better.” Number of AI use cases adopted sums the categories listed in Figure 4.*
+**Researcher beliefs about how AI will impact productivity narrowly compared to beliefs about how AI will impact the overall field of research.** Beliefs are measured on a 10-point slider scale. Productivity is: “In terms of writing publishable papers, do you think AI makes social scientists less or more productive” with the slider labeled “less productive to more productive.” Field impact is: “Do you think AI will make the social sciences worse or better," with the slider labeled “Worse to better.” Number of AI use cases adopted sums the categories listed in Figure 4.
 
 The survey is drawing from people who are interested in trying these tools out, so it should not be surprising to see some optimism about productivity. But even among these optimists, there is a real gap between views about AI helping narrowly with publishable papers and broadly affecting the social sciences. 70% of respondents are more optimistic about paper productivity than about broader field impact. There are few researchers more optimistic about field impacts than about paper productivity, and many who are more pessimistic.
 
@@ -112,31 +106,9 @@ There are several caveats to the findings in this report. The data presented her
 
 Notwithstanding these limitations, we show that coding agents are diffusing into the social sciences. The way we study the economy and politics, for example, is increasingly through analysis decisions made in part by AI coding agents. We plan to bring more evidence in future reports on the potential and risks of this kind of automation.
 
-### Authors
-
-Thomas Lyttelton, Maxim Massenkoff, Nathan Wilmers
-
-### Acknowledgements
-
-Tim Belonax, Keir Bradwell, Jake Eaton, Rebecca Hiscott, Peter McCrory, Kerry Persen, Sarah Pollack, Santi Ruiz, Heather Whitney, Jack Clark.
-
 ### Appendix
 
-Available [here](https://cdn.sanity.io/files/4zrzovbb/website/403415e54964751190003985896630e56829e797.pdf).
-
-### Citation
-
-```
-@online{lyttelton2026agents,
- author = {Thomas Lyttelton and Maxim Massenkoff and Nathan Wilmers},
- title = {Coding Agents in the Social Sciences},
- date = {2026-05-27},
- year = {2026},
- url = {https://www.anthropic.com/research/coding-agents-social-sciences},
-}
-```
-
-Copy
+Available [here](https://www-cdn.anthropic.com/files/4zrzovbb/website/403415e54964751190003985896630e56829e797.pdf).
 
 ### References
 
@@ -150,26 +122,30 @@ Lu, C., Lu, C., Lange, R. T., Yamada, Y., Hu, S., Foerster, J., ... & Clune, J. 
 
 Wilmers, N., & Engzell, P. (2026). The Paper Factory. SocArXiv Preprints.
 
-#### Footnotes
+## Footnotes
 
-1. We launched the survey only a month after the release of Claude Cowork and before the release of OpenAI’s Codex app, so we focused this question on Command Line Interface tools for interaction with coding agents. This means we do not count researchers who use AI agents exclusively via more general purpose desktop apps.
+01We launched the survey only a month after the release of Claude Cowork and before the release of OpenAI’s Codex app, so we focused this question on Command Line Interface tools for interaction with coding agents. This means we do not count researchers who use AI agents exclusively via more general purpose desktop apps.
 
-## Related content
+## Authors & acknowledgements
 
-### Designing more efficient quantum circuits with Claude
+### Contributors
 
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
+Thomas Lyttelton, Maxim Massenkoff, Nathan Wilmers
 
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
+### Acknowledgements
 
-### Claude reveals ECDSA curve origins
+Tim Belonax, Keir Bradwell, Jake Eaton, Rebecca Hiscott, Peter McCrory, Kerry Persen, Sarah Pollack, Santi Ruiz, Heather Whitney, Jack Clark.
 
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
+### Citation
 
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
+Copy
 
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
+```
+@online{lyttelton2026agents,
+ author = {Thomas Lyttelton and Maxim Massenkoff and Nathan Wilmers},
+ title = {Coding Agents in the Social Sciences},
+ date = {2026-05-27},
+ year = {2026},
+ url = {https://www.anthropic.com/research/coding-agents-social-sciences},
+}
+```

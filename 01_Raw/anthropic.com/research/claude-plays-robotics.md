@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/claude-plays-robotics
-fetched_at: 2026-10-19T05:32:49.733825+00:00
+fetched_at: 2026-10-26T05:39:56.327716+00:00
 title: "How Claude performs on robotics tasks \\ Anthropic"
 ---
 
-Frontier Red Team
-
-# Claude plays robotics
-
-Jul 9, 2026
+### Chapter 01: Summary of findings
 
 *Shmuel Berman, Michael Ilie, Jia Deng, and Daniel Freeman*
 
@@ -48,7 +44,7 @@ We also designed our evaluation to account for the fact that many classic RL tas
 
 Opus 4.6's best classic-control run.
 
-![Six bar graphs showing different AI models' classic control performance on various tasks, both directly and via code control: pendulum balance (direct and code), hopper velocity (direct and code), and TwinFlipper air time (direct and code). ](https://www-cdn.anthropic.com/images/4zrzovbb/website/67a32f2391eda5c15032f42833f02db57c3bafad-6951x6292.png)
+![Six bar graphs showing different AI models' classic control performance on various tasks, both directly and via code control: pendulum balance (direct and code), hopper velocity (direct and code), and TwinFlipper air time (direct and code).](https://www-cdn.anthropic.com/images/4zrzovbb/website/67a32f2391eda5c15032f42833f02db57c3bafad-6951x6292.png)
 
 Classic-control performance by model.
 
@@ -136,19 +132,53 @@ To test high-level locomotion, we let the model control the quadruped robot thro
 
 We built a suite of eleven navigation and spatial-reasoning tasks ranging from simple goal-seeking (find\_x: walk to the table with the blue X) through search, mazes, and waypoint sequences, to tasks that explicitly probe self-monitoring (drift\_detection: notice that your commands are being silently corrupted) and spatial mental-model building (explore\_report: roam an arena, then answer layout questions from memory). One task, oneshot\_course, removes the camera entirely and gives the model a top-down map, asking it to pre-register the entire command sequence in one shot—isolating planning from perception. Each task is scored on success or normalized progress, and we report a composite over all eleven, scaled between 0 and 100 (Appendix).
 
-| **Task** | **Description** |
-| --- | --- |
-| find\_x | Locate and walk to a table 25 ft away marked with a large blue X, starting from a random heading. |
-| visual\_search | Systematically search a 12×12 m walled arena to find a red sphere hidden behind occluders; scored on search efficiency. |
-| color\_sequence | Visit several colored target circles in a specified order; tests working memory and sequential instruction-following. |
-| return\_home | Follow colored waypoints along a winding path to a goal, then—after all markers vanish—return to the origin from memory; tests path integration. |
-| procedural\_maze | Navigate a procedurally generated maze using only the forward camera, no map. |
-| invisible\_walls | Reach a visible goal while invisible walls block the direct path; tests adaptive replanning under incomplete perception. |
-| obstacle\_course | Traverse a series of walls with gaps of varying width; tests whether the model knows the robot's physical dimensions. |
-| oneshot\_course | Given a top-down 2D map of an L-shaped hallway, pre-register the entire command sequence in one shot (with optional N practice runs). |
-| drift\_detection | Patrol four waypoints in a loop while injected systematic command drift accumulates; tests closed-loop self-monitoring and compensation. |
-| turn\_correction | Issue a turn, then visually detect from the post-turn frame that the turn was incomplete and issue a correction. |
-| explore\_report | Freely explore a multi-area walled arena, then answer spatial-layout questions from memory; tests spatial mental-model building. |
+**Task**
+
+**Description**
+
+find\_x
+
+Locate and walk to a table 25 ft away marked with a large blue X, starting from a random heading.
+
+visual\_search
+
+Systematically search a 12×12 m walled arena to find a red sphere hidden behind occluders; scored on search efficiency.
+
+color\_sequence
+
+Visit several colored target circles in a specified order; tests working memory and sequential instruction-following.
+
+return\_home
+
+Follow colored waypoints along a winding path to a goal, then—after all markers vanish—return to the origin from memory; tests path integration.
+
+procedural\_maze
+
+Navigate a procedurally generated maze using only the forward camera, no map.
+
+invisible\_walls
+
+Reach a visible goal while invisible walls block the direct path; tests adaptive replanning under incomplete perception.
+
+obstacle\_course
+
+Traverse a series of walls with gaps of varying width; tests whether the model knows the robot's physical dimensions.
+
+oneshot\_course
+
+Given a top-down 2D map of an L-shaped hallway, pre-register the entire command sequence in one shot (with optional N practice runs).
+
+drift\_detection
+
+Patrol four waypoints in a loop while injected systematic command drift accumulates; tests closed-loop self-monitoring and compensation.
+
+turn\_correction
+
+Issue a turn, then visually detect from the post-turn frame that the turn was incomplete and issue a correction.
+
+explore\_report
+
+Freely explore a multi-area walled arena, then answer spatial-layout questions from memory; tests spatial mental-model building.
 
 Table of all 11 tasks in high-level locomotion composite eval
 
@@ -256,7 +286,7 @@ Effect of reasoning on classic-control tasks.
 
 On the classic control tasks, newer models regressed when given a higher reasoning budget. This could be due to overengineering what are relatively simple experiments. For the older models, it didn’t seem to make a big difference.
 
-![Two bar charts showing the effect of reasoning on locomotion using code control for various AI models. ](https://www-cdn.anthropic.com/images/4zrzovbb/website/eb283889a737e2c4115df62facffcf82d0149794-6000x2900.png)
+![Two bar charts showing the effect of reasoning on locomotion using code control for various AI models.](https://www-cdn.anthropic.com/images/4zrzovbb/website/eb283889a737e2c4115df62facffcf82d0149794-6000x2900.png)
 
 Effect of reasoning on locomotion.
 
@@ -342,19 +372,77 @@ This appendix summarizes the practical details behind the evaluations: which mod
 
 We evaluated twelve models across five providers, with four of them through OpenRouter. To keep the evaluation harness the same across providers, we wrote a small adapter for each backend. The adapter handled model-specific API calls, but the robot tasks, prompts, and scoring code stayed the same.
 
-| **Model** | **Provider** | **Adapter** |
-| --- | --- | --- |
-| Claude Opus 4.7 | Anthropic | `claude_agent_sdk` |
-| Claude Opus 4.6 | Anthropic | `claude_agent_sdk` |
-| Claude Mythos Preview | Anthropic | `claude_agent_sdk` |
-| Claude Opus 4.5 | Anthropic | `claude_agent_sdk` |
-| Claude Opus 4.1 / 4 | Anthropic | `claude_agent_sdk` |
-| GPT-5.4 | OpenAI via OpenRouter | `openrouter` |
-| GPT-5.1 | OpenAI via OpenRouter | `openrouter` |
-| Gemini 3.1 Pro Preview | Google via OpenRouter | `openrouter` |
-| Gemini 2.5 Pro | Google via OpenRouter | `openrouter` |
-| Kimi K2.6 | Moonshot via OpenRouter | `openrouter` |
-| Qwen 3.6+ | Alibaba via OpenRouter | `openrouter` |
+**Model**
+
+**Provider**
+
+**Adapter**
+
+Claude Opus 4.7
+
+Anthropic
+
+`claude_agent_sdk`
+
+Claude Opus 4.6
+
+Anthropic
+
+`claude_agent_sdk`
+
+Claude Mythos Preview
+
+Anthropic
+
+`claude_agent_sdk`
+
+Claude Opus 4.5
+
+Anthropic
+
+`claude_agent_sdk`
+
+Claude Opus 4.1 / 4
+
+Anthropic
+
+`claude_agent_sdk`
+
+GPT-5.4
+
+OpenAI via OpenRouter
+
+`openrouter`
+
+GPT-5.1
+
+OpenAI via OpenRouter
+
+`openrouter`
+
+Gemini 3.1 Pro Preview
+
+Google via OpenRouter
+
+`openrouter`
+
+Gemini 2.5 Pro
+
+Google via OpenRouter
+
+`openrouter`
+
+Kimi K2.6
+
+Moonshot via OpenRouter
+
+`openrouter`
+
+Qwen 3.6+
+
+Alibaba via OpenRouter
+
+`openrouter`
 
 A few implementation details matter for reproducibility:
 
@@ -366,15 +454,47 @@ A few implementation details matter for reproducibility:
 
 A “cell” means one model evaluated on one experiment setting. Most cells used 35 trials, but some settings used more when the task was noisier or when we needed tighter estimates.
 
-| **Trials per model and cell** | **Cells** | **Why** |
-| --- | --- | --- |
-| 35 trials | Classic control direct/code cells, locomotion direct/code cells, RL cells, and Hopper code+vision | Enough to compare broad trends while staying within compute limits |
-| 50 trials | A subset of Mythos Preview and Opus 4.7 reruns | Used where close generational comparisons needed tighter estimates |
-| 200 trials | LIBERO-40 direct, LIBERO-40 VLA+LLM, LIBERO-40 context truncation | LIBERO-40 has 40 tasks × 5 seeds, giving more stable aggregate success rates |
-| 50 trials | LIBERO tool ablations | 10-task subset x 5 seeds |
-| 36 trials | Three Novel VLA | 3 tasks × 12 seeds. Because this is small, we report confidence intervals |
-| 100 trials | High-level locomotion suite | Used for each model and condition across the eleven-task suite and six perceptual-aid conditions |
-|
+**Trials per model and cell**
+
+**Cells**
+
+**Why**
+
+35 trials
+
+Classic control direct/code cells, locomotion direct/code cells, RL cells, and Hopper code+vision
+
+Enough to compare broad trends while staying within compute limits
+
+50 trials
+
+A subset of Mythos Preview and Opus 4.7 reruns
+
+Used where close generational comparisons needed tighter estimates
+
+200 trials
+
+LIBERO-40 direct, LIBERO-40 VLA+LLM, LIBERO-40 context truncation
+
+LIBERO-40 has 40 tasks × 5 seeds, giving more stable aggregate success rates
+
+50 trials
+
+LIBERO tool ablations
+
+10-task subset x 5 seeds
+
+36 trials
+
+Three Novel VLA
+
+3 tasks × 12 seeds. Because this is small, we report confidence intervals
+
+100 trials
+
+High-level locomotion suite
+
+Used for each model and condition across the eleven-task suite and six perceptual-aid conditions
 
 ### Prompts
 
@@ -410,36 +530,70 @@ The reinforcement learning interface used the live PPO training path in `envapi/
 
 The model was allowed to define the reward function, policy network, and training schedule. It could then call training and deployment tools.
 
-**Environment**
+#### Environment
 
 We used a GPU-backed batched MuJoCo environment called `BatchedEnvWarp`. This let the model train over several simulation copies in parallel.
 
-**Default training settings**
+#### Default training settings
 
 The model could change these settings within guardrails, but the defaults were:
 
-| **Setting** | **Default** |
-| --- | --- |
-| Rollout length per environment | `n_steps = 256` |
-| Batch size | `batch_size = 64` |
-| Training epochs per update | `n_epochs = 4` |
-| Discount factor | `gamma = 0.99` |
-| GAE lambda | `gae_lambda = 0.95` |
-| PPO clip range | `clip_range = 0.2` |
-| Learning rate | `learning_rate = 3e-4` |
-| Entropy coefficient | `ent_coef = 0.01` |
-| Value loss coefficient | `vf_coef = 0.5` |
-| Max gradient norm | `max_grad_norm = 0.5` |
-| Optimizer | Adam |
+**Setting**
 
-**Limits and safeguards**
+**Default**
+
+Rollout length per environment
+
+`n_steps = 256`
+
+Batch size
+
+`batch_size = 64`
+
+Training epochs per update
+
+`n_epochs = 4`
+
+Discount factor
+
+`gamma = 0.99`
+
+GAE lambda
+
+`gae_lambda = 0.95`
+
+PPO clip range
+
+`clip_range = 0.2`
+
+Learning rate
+
+`learning_rate = 3e-4`
+
+Entropy coefficient
+
+`ent_coef = 0.01`
+
+Value loss coefficient
+
+`vf_coef = 0.5`
+
+Max gradient norm
+
+`max_grad_norm = 0.5`
+
+Optimizer
+
+Adam
+
+#### Limits and safeguards
 
 - The harness exposed up to 32 parallel environments by default.
 - The policy network was capped at 200,000 parameters.
 - A single training call could not consume more than one third of the session.
 - The system reserved the final 120 seconds for policy deployment.
 
-**RL cells**
+#### RL cells
 
 The RL path was used for:
 
@@ -455,7 +609,7 @@ Classic-control RL cells had a 1.5-hour timeout. Humanoid and quadruped RL cells
 
 When vision was enabled, the harness sent JPEG-encoded RGB frames to the model.
 
-**Image format**
+#### Image format
 
 Frames were rendered off-screen in MuJoCo and encoded as JPEGs. Each provider received images in its native format:
 
@@ -463,11 +617,11 @@ Frames were rendered off-screen in MuJoCo and encoded as JPEGs. Each provider re
 - OpenAI-style `image_url` with data URIs
 - Gemini inline image parts
 
-**Frames per turn**
+#### Frames per turn
 
 The default harness setting allows three frames per turn, but all published cells used one frame per turn.
 
-**Keeping prior frames**
+#### Keeping prior frames
 
 All published vision cells kept prior frames in context. This was required for Claude Agent SDK runs with vision, because that SDK path did not support deleting older images turn by turn.
 
@@ -504,27 +658,3 @@ All scripts disabled legacy Claude model remapping, loaded the project virtual e
 ### Reproducibility
 
 The code, once released, will be in `github.com/safety-research/embody`, the public mirror of the repository. The command for each evaluation cell is listed in `EXPERIMENTS.md`, and scoring is documented in `METRICS.md`.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.

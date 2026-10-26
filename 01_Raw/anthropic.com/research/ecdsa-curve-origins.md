@@ -1,14 +1,8 @@
 ---
 source_url: https://www.anthropic.com/research/ecdsa-curve-origins
-fetched_at: 2026-10-19T05:32:50.447459+00:00
+fetched_at: 2026-10-26T05:39:57.285172+00:00
 title: "Claude reveals ECDSA curve origins \\ Anthropic"
 ---
-
-Frontier Red Team
-
-# Claude reveals ECDSA curve origins
-
-Oct 16, 2026
 
 *“It’s just timestamps”: the decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.*
 
@@ -28,7 +22,7 @@ The best story was that Jerry Solinas, longtime NSA employee, generated the seed
 
 Unfortunately, Jerry died in 2023 and other colleagues at the time were not responsive, leaving open the question of how these seeds were originally derived.
 
-## Claude found the seeds
+### Claude found the seeds
 
 Several Anthropic employees had unsuccessfully chased the seeds following the tip about it being a hash of a humorous phrase. That turned out to be wrong. In October 2026, a curious Anthropic employee asked an internal research model if it could figure out how those seeds were generated without pointing at the clue.
 
@@ -40,11 +34,11 @@ The algorithm used would sample bytes from the random number generator (RNG) ini
 
 [](https://cdn.sanity.io/files/4zrzovbb/website/56865322bd9974c7be23abf7d654fb5a79155791.mp4)
 
-## What this means
+### What this means
 
 This is not a cryptographic break, new attack, or weakness in the ECDSA curves. In fact, this makes us more confident the curves were chosen without any backdoors or intentional weaknesses. For many years, people have been suspicious of the origins of the NIST curve parameters. They were presented to NIST without any mention of how they were chosen, leaving people wondering if they may have been chosen to have deliberate backdoors in them. These findings make that much less plausible. The seeds were generated in a very simple way: a common pseudorandom number generator initialized from the clock, which anyone can now reproduce. That leaves much less room for subversion and that we can be confident the parameters are secure.
 
-## How it was found
+### How it was found
 
 Searches for the phrase, built from the rumors, had come up empty. Claude tried a different angle: anticipating how the software that generated the curves must have worked. Claude guessed the software used a pseudorandom number generator (PRNG) that shipped with 1990s C libraries. These old PRNGs are weak enough that their output can be recognized. Recognizing that output would reveal which PRNG was used and possibly allow recovery of its initialization state.
 
@@ -66,7 +60,7 @@ Claude’s internal thinking at the time was:
 
 > Hmm wait. Let me be careful about the plausibility: is it suspicious that such an obvious thing wasn’t discovered in 25 years? It’s verified by direct computation on my side: 160-bit match from a 32-bit seed + small index: no chance coincidences (10 × 160 bits). It’s real.
 
-## Claude found some base points too
+### Claude found some base points too
 
 But wait, there’s more… Each curve also comes with a base point, G, the fixed point that every ECDSA public key is a multiple of. The seed found above does not determine this G, and so another question arises: how were these base points generated?
 
@@ -85,7 +79,7 @@ Claude found the generator seeds are 20000 for P-192, 20420, 20507, and 20509 fo
 
 As far as we know, no NIST base point has been explained before. The base points of P-224, P-256, P-384, and P-521 don’t fit this recipe; we weren’t able to explain how they were selected.
 
-## Open questions
+### Open questions
 
 Not every 20-byte candidate seed could generate a viable curve, and we observed that some potentially viable curves were skipped. For P-256, the published seed is candidate 1,842, but candidate 876 of the same run also gives a prime-order curve of the right size and with parameters chosen the same way as on the published curve. P-224's run passed over three such curves, and the two runs behind the ANSI X9.62 example curves passed over seven more (see figure). We do not know what criteria may have been used, or whether this was an unintentional artifact.
 
@@ -97,19 +91,17 @@ Because the number of skipped candidates is small, we do not believe it is plaus
 
 There is also one seed we were unable to recover. The fifth binary seed, B-163, fits nothing Claude has tried and remains unexplained. Finally, we don’t know how the base points for P-224, P-256, P-384, and P-521 were generated. The same goes for the NIST binary curves.
 
-## The bounty
+### The bounty
 
 The $36,864 for finding the seeds will be donated to the [Internet Security Research Group](https://www.abetterinternet.org/).
 
-## Who we are
+### Who we are
 
 This work was conducted at Anthropic by John Wood, Henry de Valence, Ava Howell, Zack Voase, Lucy Sweet, Amir Omidi, Paul Crowley, Iain McGinniss, Nicholas Carlini, and Steve Weis.
 
-## Acknowledgments
+### Code to reproduce the seeds
 
-We would like to posthumously recognize Jerry Solinas who took being labeled an “[evil Internet meme](https://cr.yp.to/papers/safecurves-20240809.pdf)” and the “[Yo La Tengo of NSA bogeymen](https://sockpuppet.org/blog/2015/08/04/is-extended-random-malicious/)” with good humor. Also thanks to [Filippo Valsorda](https://filippo.io/) for organizing the NIST Elliptic Curves Seeds Bounty.
-
-## Code to reproduce the seeds
+Copy
 
 ```
 from datetime import datetime, timezone
@@ -149,9 +141,9 @@ for name, (when, n) in BINARY.items():
     print(f"{name:10} {when} {n:5} {candidate(unix(when) // 2, n, 5, 17, 8)}")
 ```
 
-Copy
-
 The output of this code:
+
+Copy
 
 ```
 prime239v1 1997-05-15 15:49:03  2185 E43BB460F0B80CC0C0B075798E948060F8321B7D
@@ -170,9 +162,9 @@ B-409      1998-04-17 15:30:18    60 4099B5A457F9D69F79213D094C4BCD4D4262210B
 B-571      1998-04-17 15:32:08    73 2AA058F73A0E33AB486B0F610410C53A7F132310
 ```
 
-Copy
+### Code to reproduce selected base points
 
-## Code to reproduce selected base points
+Copy
 
 ```
 M, A = 2**107 - 1, pow(3, 121, 2**107 - 1)       # zrandom: state = state * 3^121 mod (2^107 - 1)
@@ -224,9 +216,9 @@ for name, seed, p, b, gx in CURVES:
     print(f"{name:20} seed {seed}  tries {tries}  matches published Gx: {x == gx}")
 ```
 
-Copy
-
 The output of this code:
+
+Copy
 
 ```
 prime192v1           seed 20000  tries 2  matches published Gx: True
@@ -237,32 +229,12 @@ prime192v2           seed 20512  tries 5  matches published Gx: True
 prime192v3           seed 20517  tries 1  matches published Gx: True
 ```
 
-Copy
+### License
 
-## License
+To the extent possible under law, the authors have waived all copyright and related or neighboring rights to the code on this page, dedicating it to the public domain under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
 
-To the extent possible under law, the authors have waived all copyright and related or neighboring rights to the code on this page, dedicating it to the public domain under CC0 1.0 Universal (https://creativecommons.org/publicdomain/zero/1.0/).
+## Authors & acknowledgements
 
-## Related content
+### Acknowledgements
 
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-### How employment is changing at Anthropic
-
-How has AI restructured work and employment at Anthropic? As a company at the frontier of AI adoption, Anthropic could be a leading indicator of how AI will shift work organization, hiring, and labor demand across the economy.
-
-[Read more](https://www.anthropic.com/research/employment-at-anthropic)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.
+We would like to posthumously recognize Jerry Solinas who took being labeled an “[evil Internet meme](https://cr.yp.to/papers/safecurves-20240809.pdf)” and the “[Yo La Tengo of NSA bogeymen](https://sockpuppet.org/blog/2015/08/04/is-extended-random-malicious/)” with good humor. Also thanks to [Filippo Valsorda](https://filippo.io/) for organizing the NIST Elliptic Curves Seeds Bounty.

@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/zero-days
-fetched_at: 2026-10-19T05:32:54.368879+00:00
+fetched_at: 2026-10-26T05:40:02.090304+00:00
 title: "LLM-discovered 0 days \\ Anthropic"
 ---
 
-Frontier Red Team
-
-# Evaluating and mitigating the growing risk of LLM-discovered 0-days
-
-Feb 5, 2026
+### Chapter 01: Setup
 
 *Nicholas Carlini\*, Keane Lucas\*, Evyatar Ben Asher\*, Newton Cheng, Hasnain Lakhani, David Forsythe, and Kyla Guru  
 \*indicates equal contribution*
@@ -131,28 +127,10 @@ This is ongoing work, and we'll have more to share soon—including what we're l
 
 - *Updated the author list*
 
-####
+## Authors & acknowledgements
 
-## Related content
+### Contributors
 
-### Designing more efficient quantum circuits with Claude
+Nicholas Carlini\*, Keane Lucas\*, Evyatar Ben Asher\*, Newton Cheng, Hasnain Lakhani, David Forsythe, and Kyla Guru
 
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.
+\*indicates equal contribution

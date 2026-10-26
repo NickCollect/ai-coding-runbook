@@ -1,22 +1,14 @@
 ---
 source_url: https://www.anthropic.com/research/estimating-productivity-gains
-fetched_at: 2026-10-19T05:32:51.018285+00:00
+fetched_at: 2026-10-26T05:39:57.847255+00:00
 title: "Estimating AI productivity gains \\ Anthropic"
 ---
 
-Economics
-
-# Estimating AI productivity gains from Claude conversations
-
-Nov 25, 2025
-
-[Read as a PDF](https://www-cdn.anthropic.com/e5645986a7ce8fbcc48fa6d2fc67753c87642c30.pdf)
-
-![Estimating AI productivity gains from Claude conversations](https://www-cdn.anthropic.com/images/4zrzovbb/website/42cf55dd85eb9a4c419f2401e448a97b940faccf-2000x1125.png)
+### Chapter 01: Overview
 
 ## Overview
 
-*What do real conversations with Claude tell us about the effects of AI on labor productivity? Using our privacy-preserving [analysis method](https://www.anthropic.com/research/clio), we sample one hundred thousand real conversations from [Claude.ai](http://claude.ai/redirect/website.v1.c8dbf31b-71fc-42b8-a977-f4b35df37db0), estimate how long the tasks in these conversations would take with and without AI assistance, and study the productivity implications across the broader economy. Based on Claude’s estimates, these tasks would take on average about 90 minutes to complete without AI assistance, and Claude speeds up individual tasks by about 80%.*
+*What do real conversations with Claude tell us about the effects of AI on labor productivity? Using our privacy-preserving [analysis method](https://www.anthropic.com/research/clio), we sample one hundred thousand real conversations from [Claude.ai](http://claude.ai), estimate how long the tasks in these conversations would take with and without AI assistance, and study the productivity implications across the broader economy. Based on Claude’s estimates, these tasks would take on average about 90 minutes to complete without AI assistance, and Claude speeds up individual tasks by about 80%.*
 
 *Extrapolating these estimates out suggests **current-generation** AI models could increase US labor productivity growth by 1.8% annually over the next decade*—*roughly twice the run rate in recent years. But this isn’t a prediction of the future, since we don’t take into account the rate of adoption or the larger productivity effects that would come from much more capable AI systems.*
 
@@ -25,7 +17,7 @@ Nov 25, 2025
 *Here’s a more detailed summary of our results:*
 
 - **Across one hundred thousand real world conversations, Claude estimates that AI reduces task completion time by 80%.** We use Claude to evaluate anonymized Claude.ai transcripts to estimate the productivity impact of AI. According to Claude’s estimates, people typically use AI for complex tasks that would, on average, take people 1.4 hours to complete. By matching tasks to O\*NET occupations and BLS wage data, we estimate these tasks would otherwise cost $55 in human labor.
-- **The estimated scope, cost, and time savings of tasks varies widely by occupation.** Based on Claude’s estimates, people use Claude for legal and management tasks that would have taken nearly two hours, but for food preparation tasks that would have taken only 30 minutes. And we find that healthcare assistance tasks can be completed 90% more quickly, whereas hardware issues see time savings of 56%. This doesn’t account for the time that humans might spend on these tasks *beyond* their conversation on [Claude.ai](http://claude.ai/redirect/website.v1.c8dbf31b-71fc-42b8-a977-f4b35df37db0), however, so we think these estimates might overstate current productivity effects to at least some degree.
+- **The estimated scope, cost, and time savings of tasks varies widely by occupation.** Based on Claude’s estimates, people use Claude for legal and management tasks that would have taken nearly two hours, but for food preparation tasks that would have taken only 30 minutes. And we find that healthcare assistance tasks can be completed 90% more quickly, whereas hardware issues see time savings of 56%. This doesn’t account for the time that humans might spend on these tasks *beyond* their conversation on [Claude.ai](http://claude.ai), however, so we think these estimates might overstate current productivity effects to at least some degree.
 - **Extrapolating these results to the economy, current generation AI models could increase annual US labor productivity growth by 1.8% over the next decade. This would double the annual growth the US has seen since 2019,** **and places our estimate towards the upper end of [recent estimates](https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/11/miracle-or-myth-assessing-the-macroeconomic-productivity-gains-from-artificial-intelligence_fde2a597/b524a072-en.pdf).** Taking as given Claude’s estimates of task-level efficiency gains, we use standard methods to calculate a 1.8% implied annual increase in US labor productivity over the next ten years. However, this estimate does not account for future improvements in AI models (or more sophisticated uses of current technology), which could significantly magnify AI’s economic impact.
 - **As AI accelerates some tasks, others may become bottlenecks**: We see large speedups for some tasks and much smaller ones in others, even within the same occupational groups. Where AI makes less of a difference, these tasks might become bottlenecks, potentially acting as a constraint on growth.
 
@@ -104,7 +96,7 @@ People also use AI to save 87% of the time it would take to write invoices, memo
 
 #### Task length varies dramatically across occupations
 
-Human time estimates show that Claude handles tasks of very different lengths depending on the occupation. In the below plots, we show averages for each occupation category among the subset of tasks that Claude is used for1. The average management task where Claude is used (e.g. selecting investments) is estimated to take humans 2.0 hours to complete, followed by legal (1.8 hours), education (1.7), and arts/media tasks (1.6). At the other end of the spectrum, food preparation tasks (e.g. planning or pricing menu items), installation/maintenance, and transportation tasks all take 0.3-0.5hrs on average, suggesting more circumscribed tasks, or tasks with less waiting time. Given that Claude’s time estimates tend to underestimate long tasks and overestimate short tasks, it is possible that these differences might be even greater in practice.
+Human time estimates show that Claude handles tasks of very different lengths depending on the occupation. In the below plots, we show averages for each occupation category among the subset of tasks that Claude is used for[1](#footnote-1). The average management task where Claude is used (e.g. selecting investments) is estimated to take humans 2.0 hours to complete, followed by legal (1.8 hours), education (1.7), and arts/media tasks (1.6). At the other end of the spectrum, food preparation tasks (e.g. planning or pricing menu items), installation/maintenance, and transportation tasks all take 0.3-0.5hrs on average, suggesting more circumscribed tasks, or tasks with less waiting time. Given that Claude’s time estimates tend to underestimate long tasks and overestimate short tasks, it is possible that these differences might be even greater in practice.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c5fec11b331a841e3fe56df8d5cca67767aa9a08-9168x5160.png)
 
@@ -138,7 +130,7 @@ The above estimates capture AI-driven productivity gains at the task level. To u
 
 #### Methodology
 
-To estimate economy-wide productivity effects, we use Hulten’s theorem, a standard method that allows us to aggregate efficiency gains at the task-level to the broader US economy2. As in [Acemoglu (2024)](https://economics.mit.edu/sites/default/files/2024-04/The%20Simple%20Macroeconomics%20of%20AI.pdf)’s “baseline” approach, we model the implied increase in labor productivity as a weighted average over task-level productivity gains—a modeling choice that implicitly assumes that capital investment will increase as a result of an increase in total factor productivity (TFP) associated with AI adoption. In this framework, the implied increase TFP is the gain in labor productivity multiplied by the labor share of income3.
+To estimate economy-wide productivity effects, we use Hulten’s theorem, a standard method that allows us to aggregate efficiency gains at the task-level to the broader US economy[2](#footnote-2). As in [Acemoglu (2024)](https://economics.mit.edu/sites/default/files/2024-04/The%20Simple%20Macroeconomics%20of%20AI.pdf)’s “baseline” approach, we model the implied increase in labor productivity as a weighted average over task-level productivity gains—a modeling choice that implicitly assumes that capital investment will increase as a result of an increase in total factor productivity (TFP) associated with AI adoption. In this framework, the implied increase TFP is the gain in labor productivity multiplied by the labor share of income[3](#footnote-3).
 
 **Task composition**: For each occupation, we obtain a list of work tasks from O\*NET. We then use Claude to estimate what fraction of workers' time is spent on each of those tasks. For example, Claude estimates that programmers spend 23% of their time writing and maintaining code, 15% analyzing and rewriting programs, and smaller fractions on testing, documentation, and meetings.
 
@@ -152,7 +144,7 @@ To estimate economy-wide productivity effects, we use Hulten’s theorem, a stan
 
 ### Findings
 
-Assuming 10 years for AI to reach universal adoption across the US economy—and using current models—we calculate that Claude’s estimates imply an annual increase in US labor productivity of 1.8%. This would nearly double the current long-term growth rate, which has averaged 2.1% per year since 1947 and 1.8% since 2019. Assuming that labor’s share of total factor productivity is 0.64, this implies an overall total factor productivity increase of 1.1% per year. Given that TFP growth has tended to be less than 1% since the early 2000s, these estimates suggest that, even broad deployment of current AI systems could cause growth to double: achieving the rates of the late 1990s, and of the 1960s and 1970s5.
+Assuming 10 years for AI to reach universal adoption across the US economy—and using current models—we calculate that Claude’s estimates imply an annual increase in US labor productivity of 1.8%. This would nearly double the current long-term growth rate, which has averaged 2.1% per year since 1947 and 1.8% since 2019. Assuming that labor’s share of total factor productivity is 0.6[4](#footnote-4), this implies an overall total factor productivity increase of 1.1% per year. Given that TFP growth has tended to be less than 1% since the early 2000s, these estimates suggest that, even broad deployment of current AI systems could cause growth to double: achieving the rates of the late 1990s, and of the 1960s and 1970s[5](#footnote-5).
 
 This estimated increase in aggregate labor productivity implied by task-level efficiency gains is within the range of recent estimates of AI’s potential impact on productivity, though it lies towards the upper end (Filippucci, Gal, and Schief, 2024).
 
@@ -189,7 +181,7 @@ Our approach has several limitations that we think warrant further research on t
 - **Structural assumptions:** In our calculations above, we compare the time it would take a professional to complete a given task without AI to the time it took with AI. But this could either *understate* the productivity gains – since it takes additional resources we’re not accounting for to hire an employee and communicate context, and possibly overstate it, if the quality of the AI’s work is worse than a human’s.
 - **Restructuring of organizations:** Historically, the largest productivity gains for individual firms have followed from [restructuring business operations](https://www.jstor.org/stable/2006600) to adopt new technologies. Our model can help predict the *effects* of such a restructuring, but it cannot predict how companies might decide to restructure, or how quickly this process might happen.
 - **The role of innovation:** Technological innovation is [the engine](https://www.jstor.org/stable/1926047) of economic growth. Our model does not capture how AI systems could accelerate or even automate the scientific process, nor the effects that would have on productivity, growth, and the structure of work.
-- **Limited data**: Our dataset is derived from [Claude.ai](http://claude.ai/redirect/website.v1.c8dbf31b-71fc-42b8-a977-f4b35df37db0) conversations only. This sample is not representative of the full spectrum of AI uses, and there’s likely some selection effect where the instances of tasks people use Claude for are the ones they think Claude will be most useful. Additionally, due to our finite sample size, we likely miss some less common AI tasks.
+- **Limited data**: Our dataset is derived from [Claude.ai](http://claude.ai) conversations only. This sample is not representative of the full spectrum of AI uses, and there’s likely some selection effect where the instances of tasks people use Claude for are the ones they think Claude will be most useful. Additionally, due to our finite sample size, we likely miss some less common AI tasks.
 
 The measurement infrastructure we develop here enables continuous tracking of the effect of AI on time savings at large scale. As models improve and better methods address these limitations, we can re-estimate these time savings and identify how these capability improvements translate into broader economic impacts. We expect to track these changes in the months and years ahead.
 
@@ -203,22 +195,6 @@ These productivity gains come from making existing tasks faster to complete. His
 
 Our framework could be used to help estimate the effects of such restructuring, but it cannot predict which changes will occur, or how quickly. An important direction for future work is understanding this question—to get a better understanding of when and how firms are reorganizing themselves around emerging AI capabilities. The answer will determine when AI makes the jump from providing significant but bounded productivity boosts, to representing the kind of structural transformation that has historically defined technological revolutions.
 
-### Bibtex
-
-If you'd like to cite this post, you can use the following Bibtex key:
-
-```
-@online{tamkinmccrory2025productivity,
-author = {Alex Tamkin and Peter McCrory},
-title = {Estimating AI productivity gains from Claude conversations},
-date = {2025-11-05},
-year = {2025},
-url = {https://www.anthropic.com/research/estimating-productivity-gains},
-}
-```
-
-Copy
-
 ## Appendix
 
 ### Comparison of Claude’s estimates to other estimates
@@ -229,7 +205,9 @@ Predicted increase in annual labor productivity growth over a 10-year horizon du
 
 ### Prompts used for our time estimates
 
-**Human time estimation prompt**
+#### Human time estimation prompt
+
+Copy
 
 ```
 Human: Consider the following conversation:
@@ -255,9 +233,9 @@ Provide your output in the following format:
 Assistant: <thinking>
 ```
 
-Copy
+#### Interaction time estimation prompt
 
-**Interaction time estimation prompt**
+Copy
 
 ```
 Human: Consider the following conversation:
@@ -286,9 +264,9 @@ Provide your output in the following format:
 Assistant: <thinking>
 ```
 
-Copy
+#### Software development time estimation prompt
 
-**Software development time estimation prompt**
+Copy
 
 ```
 Human: You are estimating software development tasks for open-source projects. Provide ONLY a number in hours (e.g., 0.3, 1.6, 15). Do not explain.
@@ -298,9 +276,9 @@ Estimate (hours):
 Assistant:
 ```
 
-Copy
+#### Task time estimation prompt
 
-**Task time estimation prompt**
+Copy
 
 ```
 You are estimating how much time workers in the occupation "{occupation_title}" spend on each of their job tasks.
@@ -320,36 +298,30 @@ Return ONLY a JSON object mapping each task_id to your estimated hours per week,
 }}"""
 ```
 
+## Footnotes
+
+01Claude is prone to produce outlier estimates of both time horizon and cost; for example, it classifies some programming tasks as taking humans years to complete or being valued at millions of dollars. While this is possible, to produce more conservative estimates we take an average of the median value for each task, weighted by the number of conversations in each task.
+
+02Hulten’s theorem states that in a competitive equilibrium without distortions, the contribution to total factor productivity of micro-level productivity gains are proportional to that production factor’s Domar weight to a first order approximation. A factor’s Domar weight is the ratio of its value of gross output to GDP. In the task-based model presented by Acemoglu (2024) a task’s Domar weight for labor-intensive tasks is equal to that task’s share of the wage bill multiplied by the labor share of income. See Baqaee and Farhi (2019) for a recent treatment and extension of Hulten’s Theorem. Formulaically, Hulten’s Theorem states the log change in TFP is equal to the Domar-weighted sum over the log change in micro-productivities. In our case, the log change is taken as ln(Completion time without AI) minus ln(Completion time with AI).
+
+03The increase in TFP is more primitive than the increase in labor productivity. Labor productivity is the ratio of output per worker and can increase due to an increase in other factors of production aside from labor even when TFP is unchanged.
+
+04[Acemoglu 2024](https://www.nber.org/papers/w32487) calculates the labor share in AI-exposed industries as 0.57; we use the economy-wide share of 0.6 for simplicity given how close it is.
+
+05For historical data on total factor productivity see estimates from the Federal Reserve Bank of San Francisco: <https://www.frbsf.org/research-and-insights/data-and-indicators/total-factor-productivity-tfp/>. The average growth in TFP from 2015 to 2024 was 0.7%. Twenty years earlier, the average growth rate in TFP from 1995 to 2004 was 1.6%.
+
+## Authors & acknowledgements
+
+### Citation
+
 Copy
 
-#### Footnotes
-
-1. Claude is prone to produce outlier estimates of both time horizon and cost; for example, it classifies some programming tasks as taking humans years to complete or being valued at millions of dollars. While this is possible, to produce more conservative estimates we take an average of the median value for each task, weighted by the number of conversations in each task.
-
-2. Hulten’s theorem states that in a competitive equilibrium without distortions, the contribution to total factor productivity of micro-level productivity gains are proportional to that production factor’s Domar weight to a first order approximation. A factor’s Domar weight is the ratio of its value of gross output to GDP. In the task-based model presented by Acemoglu (2024) a task’s Domar weight for labor-intensive tasks is equal to that task’s share of the wage bill multiplied by the labor share of income. See Baqaee and Farhi (2019) for a recent treatment and extension of Hulten’s Theorem. Formulaically, Hulten’s Theorem states the log change in TFP is equal to the Domar-weighted sum over the log change in micro-productivities. In our case, the log change is taken as ln(Completion time without AI) minus ln(Completion time with AI).
-
-3. The increase in TFP is more primitive than the increase in labor productivity. Labor productivity is the ratio of output per worker and can increase due to an increase in other factors of production aside from labor even when TFP is unchanged.
-
-4. [Acemoglu 2024](https://www.nber.org/papers/w32487) calculates the labor share in AI-exposed industries as 0.57; we use the economy-wide share of 0.6 for simplicity given how close it is.
-
-5. For historical data on total factor productivity see estimates from the Federal Reserve Bank of San Francisco: <https://www.frbsf.org/research-and-insights/data-and-indicators/total-factor-productivity-tfp/>. The average growth in TFP from 2015 to 2024 was 0.7%. Twenty years earlier, the average growth rate in TFP from 1995 to 2004 was 1.6%.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
+```
+@online{tamkinmccrory2025productivity,
+author = {Alex Tamkin and Peter McCrory},
+title = {Estimating AI productivity gains from Claude conversations},
+date = {2025-11-05},
+year = {2025},
+url = {https://www.anthropic.com/research/estimating-productivity-gains},
+}
+```

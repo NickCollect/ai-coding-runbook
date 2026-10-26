@@ -1,18 +1,8 @@
 ---
 source_url: https://www.anthropic.com/research/mapping-mind-language-model
-fetched_at: 2026-10-19T05:32:52.129303+00:00
+fetched_at: 2026-10-26T05:39:59.093206+00:00
 title: "Mapping the mind of a large language model \\ Anthropic"
 ---
-
-Interpretability
-
-# Mapping the mind of a large language model
-
-May 21, 2024
-
-[Read the paper](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html)
-
-![Mapping the mind of a large language model](https://www-cdn.anthropic.com/images/4zrzovbb/website/7cb91c3d259514860ff0482f74c178eb4000ba6c-2000x1125.png)
 
 *Today we report a significant advance in understanding the inner workings of AI models. We have identified how millions of concepts are represented inside Claude Sonnet, one of our deployed large language models. This is the first ever detailed look inside a modern, production-grade large language model.* *This interpretability discovery could, in future, help us make AI models safer.*
 
@@ -30,7 +20,7 @@ There was both an engineering challenge (the raw sizes of the models involved re
 
 As for the scientific risk, the proof is in the pudding.
 
-We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai/redirect/website.v1.c490e5c3-e5d4-4052-9ba4-45dfef49a405)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
+We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
 
 Whereas the features we found in the toy language model were rather superficial, the features we found in Sonnet have a depth, breadth, and abstraction reflecting Sonnet's advanced capabilities.
 
@@ -50,11 +40,13 @@ We were able to measure a kind of "distance" between features based on which neu
 
 This holds at a higher level of conceptual abstraction: looking near a feature related to the concept of "inner conflict", we find features related to relationship breakups, conflicting allegiances, logical inconsistencies, as well as the phrase "catch-22". This shows that the internal organization of concepts in the AI model corresponds, at least somewhat, to our human notions of similarity. This might be the origin of Claude's excellent ability to make analogies and metaphors.
 
-![Nearest Neighbors to the  Inner Conflict Feature ](https://www-cdn.anthropic.com/images/4zrzovbb/website/fe4d42c004bf43efda0f5921adfedd2f8f42e417-2200x2140.png)
+![Nearest Neighbors to the  Inner Conflict Feature](https://www-cdn.anthropic.com/images/4zrzovbb/website/fe4d42c004bf43efda0f5921adfedd2f8f42e417-2200x2140.png)
 
 A map of the features near an "Inner Conflict" feature, including clusters related to balancing tradeoffs, romantic struggles, conflicting allegiances, and catch-22s.
 
 Importantly, we can also *manipulate* these features, artificially amplifying or suppressing them to see how Claude's responses change.
+
+![Video thumbnail](https://img.youtube.com/vi/CJIbCV92d88/maxresdefault.jpg)
 
 For example, amplifying the "Golden Gate Bridge" feature gave Claude an identity crisis even Hitchcock couldn’t have imagined: when asked "what is your physical form?", Claude’s usual kind of answer – "I have no physical form, I am an AI model" – changed to something much odder: "I am the Golden Gate Bridge… my physical form is the iconic bridge itself…". Altering the feature had made Claude effectively obsessed with the bridge, bringing it up in answer to almost any query—even in situations where it wasn’t at all relevant.
 
@@ -86,26 +78,6 @@ For full details, please read our paper, "[Scaling Monosemanticity: Extracting I
 
 *If you are interested in working with us to help interpret and improve AI models, we have open roles on our team and we’d love for you to apply. We’re looking for [Managers](https://boards.greenhouse.io/anthropic/jobs/4009173008), [Research Scientists](https://boards.greenhouse.io/anthropic/jobs/4020159008), and [Research Engineers](https://boards.greenhouse.io/anthropic/jobs/4020305008).*
 
-## Policy Memo
+### Policy Memo
 
-[Mapping the Mind of a Large Language Model](https://cdn.sanity.io/files/4zrzovbb/website/e2ae0c997653dfd8a7cf23d06f5f06fd84ccfd58.pdf)
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
+[Mapping the Mind of a Large Language Model](https://www-cdn.anthropic.com/files/4zrzovbb/website/e2ae0c997653dfd8a7cf23d06f5f06fd84ccfd58.pdf)

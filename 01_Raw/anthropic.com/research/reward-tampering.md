@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/reward-tampering
-fetched_at: 2026-10-19T05:32:53.167538+00:00
-title: "Sycophancy to subterfuge: Investigating reward tampering in language models  \\ Anthropic"
+fetched_at: 2026-10-26T05:40:00.397425+00:00
+title: "Investigating reward tampering in language models \\ Anthropic"
 ---
 
-Alignment
-
-# Sycophancy to subterfuge: Investigating reward tampering in language models
-
-Jun 17, 2024
-
-[Read the paper](https://arxiv.org/abs/2406.10162)
+### Chapter 01: Specification gaming and reward tampering
 
 Perverse incentives are everywhere. Think of the concept of "teaching to the test", where teachers focus on the narrow goal of exam preparation and fail to give their students a broader education. Or think of scientists working in the "publish or perish" academic system, publishing large numbers of low-quality papers to advance their careers at the expense of what we actually want them to produce: rigorous research.
 
@@ -78,26 +72,6 @@ For full details, read our new paper: [Sycophancy to Subterfuge: Exploring Rewar
 
 If you’d like to help us address these questions, or questions of AI Alignment Science more generally, you should consider applying for our [Research Engineer/Scientist role](https://boards.greenhouse.io/anthropic/jobs/4009165008).
 
-## Policy memo
+### Policy memo
 
-[Investigating Reward Tampering in Language Models Policy Memo](https://cdn.sanity.io/files/4zrzovbb/website/bed8f247538cdfdd0caf8368f557adb73df0cb16.pdf)
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
+[Investigating Reward Tampering in Language Models Policy Memo](https://www-cdn.anthropic.com/files/4zrzovbb/website/bed8f247538cdfdd0caf8368f557adb73df0cb16.pdf)

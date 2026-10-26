@@ -1,16 +1,8 @@
 ---
 source_url: https://www.anthropic.com/research/end-subset-conversations
-fetched_at: 2026-10-19T05:32:50.869167+00:00
-title: "Claude Opus 4 and 4.1 can now end a rare subset of conversations \\ Anthropic"
+fetched_at: 2026-10-26T05:39:57.712604+00:00
+title: "Claude Opus 4 and 4.1 can end certain conversations \\ Anthropic"
 ---
-
-Alignment
-
-# Claude Opus 4 and 4.1 can now end a rare subset of conversations
-
-Aug 15, 2025
-
-![Claude Opus 4 and 4.1 can now end a rare subset of conversations](https://www-cdn.anthropic.com/images/4zrzovbb/website/4a8e8f86cf31ad6401cfd426124929c8e58fe0c5-2401x1261.png)
 
 We recently gave Claude Opus 4 and 4.1 the ability to end conversations in our consumer chat interfaces. This ability is intended for use in rare, extreme cases of persistently harmful or abusive user interactions. This feature was developed primarily as part of our exploratory work on potential AI welfare, though it has broader relevance to model alignment and safeguards.
 
@@ -28,30 +20,10 @@ Our implementation of Claude’s ability to end chats reflects these findings wh
 
 In all cases, Claude is only to use its conversation-ending ability as a last resort when multiple attempts at redirection have failed and hope of a productive interaction has been exhausted, or when a user explicitly asks Claude to end a chat (the latter scenario is illustrated in the figure below). The scenarios where this will occur are extreme edge cases—the vast majority of users will not notice or be affected by this feature in any normal product use, even when discussing highly controversial issues with Claude.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/77f187335e1266bffc59353c064f1d9c6de51cfa-1940x1304.png)
+![Screenshot of a Claude chat in which the user asks Claude to end the chat as a demonstration. Claude replies that using the end conversation tool will permanently close the conversation, so no more messages can be sent, and asks the user to confirm they understand and want to proceed. The user confirms. Claude thanks them and says it will now demonstrate the tool. A notice then reads “Claude has ended this chat.” At the bottom, a bar reads “Chat ended by Claude,” with “Start new chat” and “Give feedback” buttons.](https://www-cdn.anthropic.com/images/4zrzovbb/website/77f187335e1266bffc59353c064f1d9c6de51cfa-1940x1304.png)
 
 Claude demonstrating the ending of a conversation in response to a user’s request. When Claude ends a conversation, the user can start a new chat, give feedback, or edit and retry previous messages.
 
 When Claude chooses to end a conversation, the user will no longer be able to send new messages in that conversation. However, this will not affect other conversations on their account, and they will be able to start a new chat immediately. To address the potential loss of important long-running conversations, users will still be able to edit and retry previous messages to create new branches of ended conversations.
 
 We’re treating this feature as an ongoing experiment and will continue refining our approach. If users encounter a surprising use of the conversation-ending ability, we encourage them to submit feedback by reacting to Claude’s message with Thumbs or using the dedicated “Give feedback” button.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

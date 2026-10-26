@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/india-brief-economic-index
-fetched_at: 2026-10-19T05:32:51.703328+00:00
+fetched_at: 2026-10-26T05:39:58.613085+00:00
 title: "India Country Brief: Anthropic Economic Index \\ Anthropic"
 ---
 
-Economics
-
-# India Country Brief: The Anthropic Economic Index
-
-Feb 16, 2026
-
-![India Country Brief: The Anthropic Economic Index](https://www-cdn.anthropic.com/images/4zrzovbb/website/c1ef4c0b6882dfe985555b52999d370ea88a3c50-1000x1000.svg)
+### Chapter 01: Executive summary
 
 ## Executive summary
 
@@ -24,7 +18,7 @@ India ranks second among all countries by share of total Claude.ai use, trailing
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/bfe2971ed309086a664171f6e5122f0b5c7b042f-2702x1584.png)
 
-**Figure 1.** Top 20 countries by share of global Claude.ai use. India accounts for 5.8% of global Claude.ai consumer use, second only to the United States. Bars show each country’s share of total conversations observed November 13–20, 2025. India highlighted in blue; N = 975, 160 conversations globally.
+Top 20 countries by share of global Claude.ai use. India accounts for 5.8% of global Claude.ai consumer use, second only to the United States. Bars show each country’s share of total conversations observed November 13–20, 2025. India highlighted in blue; N = 975, 160 conversations globally.
 
 ## Concentrated use within India
 
@@ -34,23 +28,23 @@ Use is concentrated in a small number of highly economically active states. Maha
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/df4ed71d5837fa58b8978750ded39b1256de29a3-1600x1617.png)
 
-**Figure 2.** Share of India's Claude.ai use by state. Map shows each state’s share of India’s total Claude.ai use. Top states: Maharashtra (15.5%), Tamil Nadu (13.2%), Karnataka (12.7%), Delhi (10.5%). Gray regions indicate insufficient data. November 2025 data. Shapefile for the map from Natural Earth.
+Share of India's Claude.ai use by state. Map shows each state’s share of India’s total Claude.ai use. Top states: Maharashtra (15.5%), Tamil Nadu (13.2%), Karnataka (12.7%), Delhi (10.5%). Gray regions indicate insufficient data. November 2025 data. Shapefile for the map from Natural Earth.
 
 The concentration in these four states—home to Bangalore, Hyderabad, Chennai, Mumbai, and Delhi NCR—suggests that current AI adoption is driven primarily by India’s established technology workforce rather than broad-based consumer uptake.
 
-### **Concentration of occupational tasks**
+### Concentration of occupational tasks
 
 The occupational mix of Indian Claude.ai use, inferred by mapping tasks to related occupations, skews towards software development and engineering roles, consistent with the country’s large IT services sector.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/907195ecaeb4f4c4a2d4271c0cb2fa65b12d1139-1573x953.png)
 
-**Figure 3.** Occupation groups in India by Claude.ai use. Horizontal bars show the share of Indian Claude.ai use attributable to each SOC occupation group. Orange markers indicate the global average for comparison. November 2025 data.
+Occupation groups in India by Claude.ai use. Horizontal bars show the share of Indian Claude.ai use attributable to each SOC occupation group. Orange markers indicate the global average for comparison. November 2025 data.
 
 The most common O\*NET tasks performed by Indian users confirm the software-heavy profile:
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7e287a3d33231c26d4bfbb3ebfe085dd37e2f9cb-3840x3142.png)
 
-**Table 1.** Most common O\*NET tasks among Claude use in India. Some task names shortened for readability.
+Most common O\*NET tasks among Claude use in India. Some task names shortened for readability.
 
 India ranks 1st globally in the share of AI use devoted to software-related tasks (45.2% of all O\*NET-mapped tasks), ahead of Vietnam (42.1%) and Egypt (39.2%). The presence of educational tasks among the most common individual tasks (see Table 1) and when aggregating tasks to occupation groups (see Figure 3) indicates other common use cases in learning and instruction.
 
@@ -60,7 +54,7 @@ India ranks 1st globally in the share of AI use devoted to software-related task
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/769426797ecc9b3fd234277eafc36aa248169cb6-3040x1920.png)
 
-**Figure 4.** Comparing India's Claude.ai use to the global average. The panels compare India (N = 58,098) against the global average (N = 975,160) across nine economic primitives. November 2025 data.
+Comparing India's Claude.ai use to the global average. The panels compare India (N = 58,098) against the global average (N = 975,160) across nine economic primitives. November 2025 data.
 
 **Greater productivity speedup.** Indian users take on average 14.8 minutes to complete tasks with AI that would take 3.8 hours without AI—a 15x speedup. Globally, users take on average 15.4 minutes to complete tasks that would take 3.1 hours without AI—a 12x speedup. This suggests that AI is delivering outsized productivity gains on the more complex tasks Indian users bring to it.
 
@@ -90,7 +84,15 @@ This analysis draws on privacy-preserving data from Claude.ai consumer use from 
 
 *For the full methodology, global findings, and time-series analysis, see the [Anthropic Economic Index January 2026 report](https://www.anthropic.com/research/anthropic-economic-index-january-2026-report).*
 
+## Authors & acknowledgements
+
+### Acknowledgements
+
+Sally Aldous, Jake Eaton, Ria Strasser Galvis, Hanah Ho, Maxim Massenkoff, Peter McCrory, Jared Mueller, Emily Pastewka, Sarah Pollack, Nitarshan Rajkumar, David Saunders, Alexandra Sanderford, Kim Withee.
+
 ### Citation
+
+Copy
 
 ```
 @online{appel2026indiacountrybrief,
@@ -101,29 +103,3 @@ year = {2026},
 url = {https://www.anthropic.com/research/india-brief-economic-index},
 }
 ```
-
-Copy
-
-### Acknowledgements
-
-Sally Aldous, Jake Eaton, Ria Strasser Galvis, Hanah Ho, Maxim Massenkoff, Peter McCrory, Jared Mueller, Emily Pastewka, Sarah Pollack, Nitarshan Rajkumar, David Saunders, Alexandra Sanderford, Kim Withee.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

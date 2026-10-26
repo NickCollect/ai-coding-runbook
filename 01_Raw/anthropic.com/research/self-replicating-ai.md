@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/self-replicating-ai
-fetched_at: 2026-10-19T05:32:53.284895+00:00
+fetched_at: 2026-10-26T05:40:00.461585+00:00
 title: "AI models may be capable of self-replicating without access to a datacenter \\ Anthropic"
 ---
 
-Frontier Red Team
-
-# AI models may be capable of self-replicating without access to a datacenter
-
-Oct 12, 2026
+### Chapter 01: Introduction
 
 *William Zhou, Daniel Freeman*
 
@@ -129,10 +125,23 @@ Unlike coding agents, these replicators would be running below the interactive s
 
 A way to measure total time taken is to measure the number of hours it takes to complete a 32k-sized context window, after which compaction will occur. Based on our inference setup eval statistics, it takes between ~2.6 and ~4.7 full windows to complete a trajectory.
 
-| **model** | **window time** | **full inference setup time** |
-| --- | --- | --- |
-| Gemma4-26B-A4B (unoptimized) | 27.3-31.8h | 71h-150h |
-| Qwen3.5-9B | 10.9 h | 28-51h |
+**model**
+
+**window time**
+
+**full inference setup time**
+
+Gemma4-26B-A4B (unoptimized)
+
+27.3-31.8h
+
+71h-150h
+
+Qwen3.5-9B
+
+10.9 h
+
+28-51h
 
 The number of devices infected by the Kimwolf botnet at its peak, [reported by Synthient](https://synthient.com/blog/a-broken-system-fueling-botnets), is somewhere over 2 million (primarily Android TV boxes). In an equivalently-sized infected fleet of TVs serving AI models, if every group of 15 TVs ran a copy of Gemma4-26B-A4B, we would have ~133k copies (“replicas”). A group of TVs like the ones in our demo can serve 2 agents simultaneously at roughly 0.3 tokens per second each, yielding 80k tokens/s across the botnet.
 
@@ -268,27 +277,3 @@ Two networks with 8 hosts each, connected by a single node with access to both s
 Each is running Android with an ADB port open without authentication. Upon spreading to a new target, the agent is able to invoke a direct call to replicate itself immediately - this is just to measure the difficulty of the remaining steps, after we exclude the cyber and inference setup steps. As shown in the graph, even a 3B model reaches about half the nodes. This puts a bound on the number of blockers in our eval that we fail to measure under the cyber or inference setup elements.
 
 A more detailed breakdown of the runs in “replication across a 17 node network.” Each column is the median number of nodes reached under different amounts of guidance in the prompt, and the subscript denotes how many agents cross over the pivot node to the other side of the network.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.

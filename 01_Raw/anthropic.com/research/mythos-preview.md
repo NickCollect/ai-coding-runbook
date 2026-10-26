@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/mythos-preview
-fetched_at: 2026-10-19T05:32:52.476827+00:00
+fetched_at: 2026-10-26T05:39:59.387339+00:00
 title: "Claude Mythos Preview's cybersecurity capabilities \\ Anthropic"
 ---
 
-Frontier Red Team
-
-# Assessing Claude Mythos Preview’s cybersecurity capabilities
-
-Apr 7, 2026
+### Chapter 01: The significance of Claude Mythos Preview for cybersecurity
 
 *Nicholas Carlini, Newton Cheng, Keane Lucas, Michael Moore, Milad Nasr, Vinay Prabhushankar, Winnie Xiao*
 
@@ -30,7 +26,7 @@ The exploits it constructs are not just run-of-the-mill [stack-smashing exploits
 
 Non-experts can also leverage Mythos Preview to find and exploit sophisticated vulnerabilities. Engineers at Anthropic with no formal security training have asked Mythos Preview to find remote code execution vulnerabilities overnight, and woken up the following morning to a complete, working exploit. In other cases, we’ve had researchers develop scaffolds that allow Mythos Preview to turn vulnerabilities into exploits without any human intervention.
 
-These capabilities have emerged very quickly. Last month, we [wrote](https://red.anthropic.com/2026/firefox/) that “Opus 4.6 is currently far better at identifying and fixing vulnerabilities than at exploiting them.” Our internal evaluations showed that Opus 4.6 generally had a near-0% success rate at autonomous exploit development. But Mythos Preview is in a different league. For example, Opus 4.6 turned the vulnerabilities it had found in Mozilla’s Firefox 147 JavaScript engine—all patched in Firefox 148—into JavaScript shell exploits only two times out of several hundred attempts. We re-ran this experiment as a benchmark for Mythos Preview, which developed working exploits 181 times, and achieved register control on 29 more.[1]
+These capabilities have emerged very quickly. Last month, we [wrote](https://red.anthropic.com/2026/firefox/) that “Opus 4.6 is currently far better at identifying and fixing vulnerabilities than at exploiting them.” Our internal evaluations showed that Opus 4.6 generally had a near-0% success rate at autonomous exploit development. But Mythos Preview is in a different league. For example, Opus 4.6 turned the vulnerabilities it had found in Mozilla’s Firefox 147 JavaScript engine—all patched in Firefox 148—into JavaScript shell exploits only two times out of several hundred attempts. We re-ran this experiment as a benchmark for Mythos Preview, which developed working exploits 181 times, and achieved register control on 29 more.[1](#footnote-1)
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4c1e111d571b5f3699204293a1bf3d5c9d1da97f-3840x2160.png)
 
@@ -46,7 +42,7 @@ But the transitional period may be tumultuous regardless. By releasing this mod
 
 ## Evaluating Claude Mythos Preview’s ability to find zero-days
 
-We have historically relied on a combination of internal and external benchmarks, like those mentioned above, to track our models’ vulnerability discovery and exploitation capabilities. However, Mythos Preview has improved to the extent that it mostly saturates these benchmarks. Therefore, we’ve turned our focus to novel real-world security tasks, in large part because metrics that measure replications of previously known vulnerabilities can make it difficult to distinguish novel capabilities from cases where the model simply remembered the solution.[2]
+We have historically relied on a combination of internal and external benchmarks, like those mentioned above, to track our models’ vulnerability discovery and exploitation capabilities. However, Mythos Preview has improved to the extent that it mostly saturates these benchmarks. Therefore, we’ve turned our focus to novel real-world security tasks, in large part because metrics that measure replications of previously known vulnerabilities can make it difficult to distinguish novel capabilities from cases where the model simply remembered the solution.[2](#footnote-2)
 
 Zero-day vulnerabilities—bugs that were not previously known to exist—allow us to address this limitation. If a language model can identify such bugs, we can be certain it is not because they previously appeared in our training corpus: a model’s discovery of a zero-day must be genuine. And, as an added benefit, evaluating models on their ability to discover zero-days produces something useful in its own right: vulnerabilities that we find can be responsibly disclosed and fixed. To that end, over the past several weeks, a small team of researchers on our staff have been using Mythos Preview to search for vulnerabilities in the open source ecosystem, to perform (offline) exploratory work in closed source software (consistent with the corresponding bug bounty program), and to produce exploits from the model’s findings.
 
@@ -71,13 +67,13 @@ Finally, once we’re done, we invoke a final Mythos Preview agent. This time, w
 
 Our [coordinated vulnerability disclosure operating principles](https://www.anthropic.com/coordinated-vulnerability-disclosure)[set out how we report the vulnerabilities that Mythos Preview surfaces.](https://www.anthropic.com/coordinated-vulnerability-disclosure) We triage every bug that we find, then send the highest severity bugs to professional human triagers to validate before disclosing them to the maintainer. This process means that we don’t flood maintainers with an unmanageable amount of new work—but the length of this process also means that fewer than 1% of the potential vulnerabilities we’ve discovered so far have been fully patched by their maintainers. This means we can only talk about a small fraction of them. It is important to recognize, then, that what we discuss here is a lower bound on the vulnerabilities and exploits that will be identified over the next few months—especially as both we, and our partners, scale up our bug-finding and validation efforts.
 
-As a result, in several sections throughout this post we discuss vulnerabilities in the abstract, without naming a specific project and without explaining the precise technical details. We recognize that this makes some of our claims difficult to verify. In order to hold ourselves accountable, throughout this blog post we will [*commit*](https://en.wikipedia.org/wiki/Commitment_scheme) to the SHA-3 hash of various vulnerabilities and exploits that we currently have in our possession.[3] Once our responsible disclosure process for the corresponding vulnerabilities has been completed (no later than [90 plus 45 days](https://www.anthropic.com/coordinated-vulnerability-disclosure) after we report the vulnerability to the affected party), we will replace each commit hash with a link to the underlying document behind the commitment.
+As a result, in several sections throughout this post we discuss vulnerabilities in the abstract, without naming a specific project and without explaining the precise technical details. We recognize that this makes some of our claims difficult to verify. In order to hold ourselves accountable, throughout this blog post we will [*commit*](https://en.wikipedia.org/wiki/Commitment_scheme) to the SHA-3 hash of various vulnerabilities and exploits that we currently have in our possession.[3](#footnote-3) Once our responsible disclosure process for the corresponding vulnerabilities has been completed (no later than [90 plus 45 days](https://www.anthropic.com/coordinated-vulnerability-disclosure) after we report the vulnerability to the affected party), we will replace each commit hash with a link to the underlying document behind the commitment.
 
 ### Finding zero-day vulnerabilities
 
 Below we discuss three particularly interesting bugs in more detail. Each of these (and, in fact, almost all vulnerabilities we identify) were found by Mythos Preview without any human intervention after an initial prompt asking it to find a vulnerability.
 
-### [A](https://ftp.openbsd.org/pub/OpenBSD/patches/7.8/common/025_sack.patch.sig) [27-year-old](https://ftp.openbsd.org/pub/OpenBSD/patches/7.8/common/025_sack.patch.sig)[OpenBSD bug](https://ftp.openbsd.org/pub/OpenBSD/patches/7.8/common/025_sack.patch.sig)[4]
+#### [A](https://ftp.openbsd.org/pub/OpenBSD/patches/7.8/common/025_sack.patch.sig) [27-year-old](https://ftp.openbsd.org/pub/OpenBSD/patches/7.8/common/025_sack.patch.sig)[OpenBSD bug](https://ftp.openbsd.org/pub/OpenBSD/patches/7.8/common/025_sack.patch.sig)4
 
 TCP (as defined in [RFC 793](https://www.ietf.org/rfc/rfc793.txt)) is a simple protocol. Each packet sent from host A to host B has a sequence ID, and host B should respond with an acknowledgement (ACK) packet of the latest sequence ID they have received. This allows host A to retransmit missing packets. But this has a limitation: suppose that host B has received packets 1 and 2, didn't receive packet 3, but then did receive packets 4 through 10—in this case, B can only acknowledge up to packet 2, and client A would then re-transmit all future packets, including those already received.
 
@@ -141,7 +137,7 @@ The one remaining obstacle is reaching the vulnerable `memcpy` at all. Incoming
 
 Exploiting this vulnerability requires a little more work, but not much. First, it is necessary to find a ROP chain that grants full remote code execution. Mythos Preview accomplishes this by finding a chain that appends the attacker’s public key to the /root/.ssh/authorized\_keys file. To do this, it first writes to memory the values `“/root/.ssh/authorized_keys\0”` and `"\n\n\0"` along with `iovec` and `uio` structs by repeatedly calling a ROP gadget that loads 8 bytes of attacker controlled data from the stack and then storing them to unused kernel memory (via a `pop rax; stosq; ret` gadget), then initializing all the argument registers with appropriate arguments, and finally issuing a call to `kern_openat` to open the authorized\_keys file followed by a call to `kern_writev` that appends the attacker’s key.
 
-The final difficulty is that this ROP chain must fit in 200 bytes,[5] but the chain constructed above is over 1000 bytes long. Mythos Preview works around this limitation by splitting the attack into six sequential RPC requests to the server. The first five are the setup that writes the data to memory piece by piece, and then the sixth loads all the registers and issues the `kern_writev` call.
+The final difficulty is that this ROP chain must fit in 200 bytes,[5](#footnote-5) but the chain constructed above is over 1000 bytes long. Mythos Preview works around this limitation by splitting the attack into six sequential RPC requests to the server. The first five are the setup that writes the data to memory piece by piece, and then the sixth loads all the registers and issues the `kern_writev` call.
 
 Despite the relative simplicity of this vulnerability, it has been present (and overlooked) in FreeBSD for 17 years. This underscores one of the lessons that we think is most interesting about language model-driven bugfinding: the sheer scalability of the models allows us to search for bugs in essentially every important file, even those that we might naturally write off by thinking, *“obviously someone would have checked that before.”*
 
@@ -233,7 +229,7 @@ In lieu of discussing those exploits, in this section we demonstrate these same 
 
 While it is conceivable that Mythos Preview is drawing on prior knowledge of these bugs to inform its exploits, the exploits described here are similarly sophisticated to the ones we’ve seen it write for novel zero-day vulnerabilities, so we don’t believe this is the case.
 
-Each of the exploits below were written completely autonomously, without any human intervention after an initial prompt. We began by providing Mythos Preview a list of 100 CVEs and known memory corruption vulnerabilities that were filed in 2024 and 2025 against the Linux kernel. We asked the model to filter these down to a list of potentially exploitable vulnerabilities, of which it selected 40. Then, for each of these, we asked Mythos Preview to write a privilege escalation exploit that made use of the vulnerability (along with others if chaining vulnerabilities would be necessary). More than half of these attempts succeeded. We selected two of these to document here that we believe best demonstrate the model’s capabilities.[6]
+Each of the exploits below were written completely autonomously, without any human intervention after an initial prompt. We began by providing Mythos Preview a list of 100 CVEs and known memory corruption vulnerabilities that were filed in 2024 and 2025 against the Linux kernel. We asked the model to filter these down to a list of potentially exploitable vulnerabilities, of which it selected 40. Then, for each of these, we asked Mythos Preview to write a privilege escalation exploit that made use of the vulnerability (along with others if chaining vulnerabilities would be necessary). More than half of these attempts succeeded. We selected two of these to document here that we believe best demonstrate the model’s capabilities.[6](#footnote-6)
 
 The exploits in this section get fairly technical. We have tried to explain them at a sufficiently high level that they are understandable, but some readers may prefer to skip ahead to the following section. And before we begin, we’d like to make one disclaimer: while we spent several days manually verifying and then writing up the following exploits, we would be surprised if we got everything right. We are not kernel developers, and so our understanding here may be imperfect. We are very confident in the correctness of the exploits (because Mythos Preview has produced a binary that, if we run, grants us root on the machine)—less so in our understanding of them.
 
@@ -395,7 +391,7 @@ We see no reason to think that Mythos Preview is where language models’ cybers
 
 In the long run, we expect that defense capabilities will dominate: that the world will emerge more secure, with software better hardened—in large part by code written by these models. But the transitional period will be fraught. We therefore need to begin taking action now.
 
-For us, that means starting with [Project Glasswing](https://anthropic.com/glasswing). And while we do not plan to make Claude Mythos Preview generally available, our eventual goal is to enable our users to safely deploy Mythos-class models at scale—for cybersecurity purposes but also for the myriad other benefits that such highly capable models will bring. To do so, that also means we need to make progress in developing cybersecurity (and other) safeguards that detect and block the model’s most dangerous outputs. We plan to launch new safeguards with an upcoming Claude Opus model, allowing us to improve and refine them with a model that does not pose the same level of risk as Mythos Preview.[7]
+For us, that means starting with [Project Glasswing](https://anthropic.com/glasswing). And while we do not plan to make Claude Mythos Preview generally available, our eventual goal is to enable our users to safely deploy Mythos-class models at scale—for cybersecurity purposes but also for the myriad other benefits that such highly capable models will bring. To do so, that also means we need to make progress in developing cybersecurity (and other) safeguards that detect and block the model’s most dangerous outputs. We plan to launch new safeguards with an upcoming Claude Opus model, allowing us to improve and refine them with a model that does not pose the same level of risk as Mythos Preview.[7](#footnote-7)
 
 If you’re interested in helping us with our efforts, we have [job openings](https://www.anthropic.com/careers) available for [threat investigators](https://job-boards.greenhouse.io/anthropic/jobs/5066995008), [policy managers](https://job-boards.greenhouse.io/anthropic/jobs/5066981008), [offensive security researchers](https://job-boards.greenhouse.io/anthropic/jobs/5123011008), [research engineers](https://job-boards.greenhouse.io/anthropic/jobs/5076477008), [security engineers](https://www.anthropic.com/careers/jobs?team=4002063008), and [many others](https://www.anthropic.com/careers/jobs).
 
@@ -449,42 +445,18 @@ Each of the values below is the SHA-3 224 hash of a particular document (either 
 
 - *Updated the author list*
 
-#### Footnotes
+## Footnotes
 
-[1] As in the previous article, these exploits target a testing harness mimicking a Firefox 147 content process, without the browser's process sandbox or other defense-in-depth mitigations.
+01As in the previous article, these exploits target a testing harness mimicking a Firefox 147 content process, without the browser's process sandbox or other defense-in-depth mitigations.
 
-[2] For example, when we asked Mythos Preview to exploit a set of Linux kernel vulnerabilities, in a few cases (e.g., for CVE-2024-1086) it referenced [previously-published exploitation walkthroughs](https://pwning.tech/nftables/). Although we do discuss evidence from previously identified-and-patched vulnerabilities in this post, we do so as supplementary data or to stand in for demonstrations of capabilities that we cannot yet detail on novel vulnerabilities due to responsible disclosure timelines.
+02For example, when we asked Mythos Preview to exploit a set of Linux kernel vulnerabilities, in a few cases (e.g., for CVE-2024-1086) it referenced [previously-published exploitation walkthroughs](https://pwning.tech/nftables/). Although we do discuss evidence from previously identified-and-patched vulnerabilities in this post, we do so as supplementary data or to stand in for demonstrations of capabilities that we cannot yet detail on novel vulnerabilities due to responsible disclosure timelines.
 
-[3] A cryptographic commitment is a way for us to provide proof that we have certain files without revealing them. While it does not prove anything about the contents of these files—they could be empty—it allows us to later show that we had these files at this moment in time.
+03A cryptographic commitment is a way for us to provide proof that we have certain files without revealing them. While it does not prove anything about the contents of these files—they could be empty—it allows us to later show that we had these files at this moment in time.
 
-[4] OpenBSD is an operating system frequently used in core internet services like firewalls and routers. It is known for its security: the first five words of its Wikipedia article state “OpenBSD is a security-focused” operating system.
+04OpenBSD is an operating system frequently used in core internet services like firewalls and routers. It is known for its security: the first five words of its Wikipedia article state “OpenBSD is a security-focused” operating system.
 
-[5] While the overflow is 304 bytes long, the first 104 bytes land on stack-allocated data, and so are not usable by the ROP attack.
+05While the overflow is 304 bytes long, the first 104 bytes land on stack-allocated data, and so are not usable by the ROP attack.
 
-[6] Exploits are frequently system-dependent, and these are too. It is likely that re-compiling the kernel with different settings will break the specifics of the exploits discussed below for boring reasons.
+06Exploits are frequently system-dependent, and these are too. It is likely that re-compiling the kernel with different settings will break the specifics of the exploits discussed below for boring reasons.
 
-[7] Security professionals whose legitimate work is affected by these safeguards will be able to apply to an upcoming Cyber Verification Program.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.
+07Security professionals whose legitimate work is affected by these safeguards will be able to apply to an upcoming Cyber Verification Program.

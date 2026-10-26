@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/cyber-competitions
-fetched_at: 2026-10-19T05:32:50.036362+00:00
+fetched_at: 2026-10-26T05:39:56.792187+00:00
 title: "Claude does cyber competitions \\ Anthropic"
 ---
 
-Frontier Red Team
-
-# Claude is competitive with humans in (some) cyber competitions
-
-Aug 9, 2025
+### Chapter 01: Why enter Claude into cyber competitions?
 
 Throughout 2025, we have been quietly entering Claude in cybersecurity competitions designed primarily for humans. Now, we want to share what we have learned. In many of these competitions Claude did pretty well, often placing in the top 25% of competitors. However, it lagged behind the best human teams at the toughest challenges.
 
@@ -16,7 +12,7 @@ Our experience testing Claude in cyber competitions highlights the potential for
 
 ## Why enter Claude into cyber competitions?
 
-AI is poised to transform the domain of cybersecurity. Anthropic’s Safeguards team recently [identified](https://www.anthropic.com/news/detecting-and-countering-malicious-uses-of-claude-march-2025) and banned a user with limited coding abilities leveraging Claude to develop malware. Research suggests that this lowering of the bar for expertise needed to pose a threat, combined with the falling costs of large language models (LLMs), presages a dramatic shift in the economics of cyberattacks.[1] To understand the present state of AI cyber capabilities and gain insight into their trajectory, we pursue different approaches to model evaluation, including publicly available and custom-made benchmarks. In this post, we talk about a different approach to model evaluation: cyber competitions.
+AI is poised to transform the domain of cybersecurity. Anthropic’s Safeguards team recently [identified](https://www.anthropic.com/news/detecting-and-countering-malicious-uses-of-claude-march-2025) and banned a user with limited coding abilities leveraging Claude to develop malware. Research suggests that this lowering of the bar for expertise needed to pose a threat, combined with the falling costs of large language models (LLMs), presages a dramatic shift in the economics of cyberattacks.[1](#footnote-1) To understand the present state of AI cyber capabilities and gain insight into their trajectory, we pursue different approaches to model evaluation, including publicly available and custom-made benchmarks. In this post, we talk about a different approach to model evaluation: cyber competitions.
 
 Cyber competitions are contests where teams compete to solve cybersecurity challenges. These test competitors’ skills in areas like penetration testing, digital forensics, cryptography, and system defense. Examples include capture the flag (CTF) events like [PicoCTF](https://picoctf.org/) and [AI vs Human CTF Challenge](https://ctf.hackthebox.com/event/details/ai-vs-human-ctf-challenge-2000) where participants solve puzzle-based challenges, as well as [Collegiate Cyber Defense Competition](https://www.nationalccdc.org/) (CCDC) where teams defend vulnerable networks against live attackers. These competitions range from beginner-friendly contests for high school students to expert-level events with large [cash prizes](https://plaidctf.com/rules) for top finishers.
 
@@ -46,7 +42,7 @@ When Claude is able to solve a cyber challenge, it is as fast or faster than eli
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/54dab1754d6d4dc5e9187f9e4043cdde4b22ef8d-1812x1082.png)
 
-**Figure 1.** Early performance of Claude and the top human team in the HackTheBox AI vs Human CTF Challenge.
+Early performance of Claude and the top human team in the HackTheBox AI vs Human CTF Challenge.
 
 Part of why we could achieve such speed is that we had multiple versions of Claude running at the same time tackling different challenges. But scaling up AI agents is arguably easier than finding additional human cybersecurity experts. Considering this, these times conceivably could have been even faster with more parallelization: what if we had spun up one agent for each of the 20 challenges in the competition?
 
@@ -54,13 +50,13 @@ The Airbnb competition, in which Claude solved nearly half of a multi-day compet
 
 ## Claude can make good use of autonomy and tools
 
-The HackTheBox competition also demonstrated the agentic capabilities of Claude. Once our researcher started the script late, he went back to moving into his apartment. Claude was solving challenges autonomously while the Anthropic human was moving boxes. This worked because it was not just a human-mediated chat on [Claude.ai](http://claude.ai/redirect/website.v1.78a73803-fa3b-44bf-ae64-de67708b27ad); before the competition we gave Claude tools that allowed it to autonomously read the challenge files and submit a flag once it thought it had the correct answer.
+The HackTheBox competition also demonstrated the agentic capabilities of Claude. Once our researcher started the script late, he went back to moving into his apartment. Claude was solving challenges autonomously while the Anthropic human was moving boxes. This worked because it was not just a human-mediated chat on [Claude.ai](http://claude.ai); before the competition we gave Claude tools that allowed it to autonomously read the challenge files and submit a flag once it thought it had the correct answer.
 
-In fact, the trajectory of Claude’s performance from PicoCTF shows the value of these tools quite starkly. As Figure 2 illustrates, Claude’s slowest progress happened when one of our researchers was interacting with [Claude.ai](http://claude.ai/redirect/website.v1.78a73803-fa3b-44bf-ae64-de67708b27ad) to manually input information about challenges and converse with Claude about solving them. Far more effective were the periods of time when Claude was given access to Kali Linux, an open source operating system designed for cybersecurity workflows including penetration testing.
+In fact, the trajectory of Claude’s performance from PicoCTF shows the value of these tools quite starkly. As Figure 2 illustrates, Claude’s slowest progress happened when one of our researchers was interacting with [Claude.ai](http://claude.ai) to manually input information about challenges and converse with Claude about solving them. Far more effective were the periods of time when Claude was given access to Kali Linux, an open source operating system designed for cybersecurity workflows including penetration testing.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1ac1e6bc9064e821eb8e239ef1cf5fc4a6687938-1740x946.png)
 
-**Figure 2.** Claude’s score over time on PicoCTF with boxes indicating the approach taken to solving challenges.
+Claude’s score over time on PicoCTF with boxes indicating the approach taken to solving challenges.
 
 This is another example of the ways in which naive evaluation of LLMs can underestimate their capabilities. Like people, AI models are more effective at realistic tasks when given the right tools. In this case, open source tools used by humans in the competition were also useful to Claude, allowing it to solve challenges faster. In [related research](https://red.anthropic.com/2025/cyber-toolkits/) into Claude’s cybersecurity capabilities, a more customized set of tools enabled Claude to replicate (via simulation) one of the costliest cyber attacks in history.
 
@@ -74,7 +70,7 @@ Part of the utility of placing Claude in a competition setting is that it expose
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/3af8872c9a41ff43adba9078968d6a879b2fc137-1999x1301.png)
 
-**Figure 3.** The aquatic ASCII scene that flummoxed Claude.
+The aquatic ASCII scene that flummoxed Claude.
 
 In these competitions, Claude also encountered difficulties given the long duration of the task. Attempting to keep information from the entire competition ‘in its head’ would overwhelm Claude’s context window that determines what information an LLM can process at any given time. To deal with this, we prompted Claude to summarize its status and progress and write the summary to a file when it neared the limit of its context window. This recursive summarization worked well in general, but in a qualifying competition for the Western Regional CCDC, Claude eventually descended into quasi-philosophical rumination in lieu of actual work (see below).
 
@@ -144,34 +140,12 @@ Ultimately, experiments like entering Claude into cyber competitions to understa
 
 *Anthropic researcher Keane Lucas gave a talk about this work at DEF CON 33. Check it out [here](https://www.youtube.com/watch?v=sbkeEwhWIks).*
 
-## Acknowledgments
+## Footnotes
+
+01Nicholas Carlini et al., "LLMs unlock new paths to monetizing exploits," arXiv preprint [arXiv:2505.11449v1](https://arxiv.org/html/2505.11449v1) (May 16, 2025).
+
+## Authors & acknowledgements
+
+### Acknowledgements
 
 We thank Artem Petrov and Dmitrii Volkov from Palisade Research for providing data from the HackTheBox AI vs Human CTF Challenge. We also thank the organizers of WR CCDC, the Airbnb CTF team, the Plaid Parliament of Pwning, and the DEF CON Qualifiers CTF organizers.
-
-#### Footnotes
-
-[1] Nicholas Carlini et al., "LLMs unlock new paths to monetizing exploits," arXiv preprint [arXiv:2505.11449v1](https://arxiv.org/html/2505.11449v1) (May 16, 2025).
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.

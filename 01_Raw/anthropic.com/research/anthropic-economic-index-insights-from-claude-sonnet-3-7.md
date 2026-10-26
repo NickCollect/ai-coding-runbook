@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-economic-index-insights-from-claude-sonnet-3-7
-fetched_at: 2026-10-19T05:32:48.489938+00:00
-title: "Anthropic Economic Index: Insights from Claude 3.7 Sonnet \\ Anthropic"
+fetched_at: 2026-10-26T05:39:54.795145+00:00
+title: "Economic Index: Insights from Claude 3.7 Sonnet \\ Anthropic"
 ---
 
-Societal ImpactsEconomics
-
-# Anthropic Economic Index: Insights from Claude 3.7 Sonnet
-
-Mar 27, 2025
-
-![Anthropic Economic Index: Insights from Claude 3.7 Sonnet](https://www-cdn.anthropic.com/images/4zrzovbb/website/7a472632580035058bc13bfea3b965fbb471a04e-1920x1079.png)
+### Chapter 01: What’s changed since the launch of Claude 3.7 Sonnet?
 
 Last month, we launched the [Anthropic Economic Index](https://www.anthropic.com/economic-index)—a new initiative where we’re regularly releasing data and research aimed at understanding AI's effects on labor markets and the economy over time.
 
@@ -38,7 +32,7 @@ When looking at the breakdown of these 1 million conversations, we see that the 
 
 ![In the two months since our original data sample, we’ve seen an increase in the share of usage for coding, education, and the sciences. Graph shows share of Claude.ai Free and Pro traffic across top-level occupational categories in O*NET. Grey shows the distribution from our first report covering data from Dec ‘25 - Jan ‘25. Colored bars show an increase (green) and decrease (blue) in the share of usage for our new data from Feb ‘25 - March ‘25. Note that the graph shows the share of usage rather than absolute usage. See Appendix for chart showing change across the full list of occupational categories.](https://www-cdn.anthropic.com/images/4zrzovbb/website/0cb42a56faa661d920d185e0009c36046bfaf481-1650x1245.jpg)
 
-*In the two months since our original data sample, we’ve seen an increase in the share of usage for coding, education, and the sciences. Graph shows share of Claude.ai Free and Pro traffic across top-level occupational categories in O\*NET. Grey shows the distribution from our first report covering data from Dec ‘25 - Jan ‘25. Colored bars show an increase (green) and decrease (blue) in the share of usage for our new data from Feb ‘25 - March ‘25. Note that the graph shows the share of usage rather than absolute usage. See Appendix for chart showing change across the full list of occupational categories.*
+In the two months since our original data sample, we’ve seen an increase in the share of usage for coding, education, and the sciences. Graph shows share of Claude.ai Free and Pro traffic across top-level occupational categories in O\*NET. Grey shows the distribution from our first report covering data from Dec ‘25 - Jan ‘25. Colored bars show an increase (green) and decrease (blue) in the share of usage for our new data from Feb ‘25 - March ‘25. Note that the graph shows the share of usage rather than absolute usage. See Appendix for chart showing change across the full list of occupational categories.
 
 ## How are people using extended thinking mode?
 
@@ -50,7 +44,7 @@ While these early usage patterns reveal insights about when people choose to use
 
 ![What tasks see the highest associated usage of extended thinking mode? Graph shows the O*NET occupations with highest usage of thinking mode in their associated tasks. Occupations shown are limited to those with at least 0.5% representation in the data.](https://www-cdn.anthropic.com/images/4zrzovbb/website/0dba23183a67a9e7277e27ffb822f36cc8c7a0b1-1650x2118.jpg)
 
-*What tasks see the highest associated usage of extended thinking mode? Graph shows the O\*NET occupations with highest usage of thinking mode in their associated tasks. Occupations shown are limited to those with at least 0.5% representation in the data.*
+What tasks see the highest associated usage of extended thinking mode? Graph shows the O\*NET occupations with highest usage of thinking mode in their associated tasks. Occupations shown are limited to those with at least 0.5% representation in the data.
 
 ## How does augmentation vs. automation vary by task and occupation?
 
@@ -58,15 +52,15 @@ In our last report, we analyzed how AI usage varied between *augmentative* uses,
 
 ![The balance of augmentation and automation has stayed relatively constant in the two months between our data samples (V1 and V2), though the share of Learning conversations has grown appreciably.](https://www-cdn.anthropic.com/images/4zrzovbb/website/da559605646728c935d3557b6c30286f14dfc0b8-1650x1364.jpg)
 
-*The balance of augmentation and automation has stayed relatively constant in the two months between our data samples (V1 and V2), though the share of Learning conversations has grown appreciably.*
+The balance of augmentation and automation has stayed relatively constant in the two months between our data samples (V1 and V2), though the share of Learning conversations has grown appreciably.
 
 We received a number of requests via our [researcher input form](https://docs.google.com/forms/d/e/1FAIpQLSfDEdY-mT5lcXPaDSv-0Ci1rSXGlbIJierxkUbNB7_07-kddw/viewform) to release automation and augmentation data at the level of tasks and occupations. We do just that in this report, providing this data on our [Hugging Face page](https://huggingface.co/datasets/Anthropic/EconomicIndex/).
 
 When splitting the data by high-level occupational categories, we find some categories are highly augmentative; for example, Community and Social Service tasks, which includes education and guidance counseling, approach 75% augmentation. At the other end of the extreme, tasks associated with production or computer and mathematical occupations, we see the balance skew closer to 50-50%. We don’t see any occupational categories where automation dominates.
 
-![ Proportion of different interaction modes across high-level occupational categories. Occupational categories shown are limited to those with at least 0.5% representation in the data.](https://www-cdn.anthropic.com/images/4zrzovbb/website/f7c11a7bc170169839903b4ab5e1ed2c596a8904-1650x1973.jpg)
+![Proportion of different interaction modes across high-level occupational categories. Occupational categories shown are limited to those with at least 0.5% representation in the data.](https://www-cdn.anthropic.com/images/4zrzovbb/website/f7c11a7bc170169839903b4ab5e1ed2c596a8904-1650x1973.jpg)
 
-*Proportion of different interaction modes across high-level occupational categories. Occupational categories shown are limited to those with at least 0.5% representation in the data.*
+Proportion of different interaction modes across high-level occupational categories. Occupational categories shown are limited to those with at least 0.5% representation in the data.
 
 Getting more granular, we can also look at specific occupations within these occupational categories, as well as tasks associated with that occupation. For example, tasks associated with copywriters and editors show the highest amount of *task iteration*, where the user iterates on various writing and editing tasks with the model. By contrast, tasks associated with Translators and Interpreters show among the highest amounts of *directive* behavior—where the model is used for translating documents with minimal human involvement. Note that the O\*NET descriptions may not be optimally representative of what Claude is being used for—for example, while we see usage in the occupation “fine artists, including painters, sculptors, and illustrators,” Claude is probably used far more for creating digital art than for painting or sculpture.
 
@@ -74,7 +68,7 @@ Getting more granular, we can also look at specific occupations within these occ
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/5500563fb3975ad224be661ba207598873674b1a-1650x1364.jpg)
 
-*Top occupations by interaction type. For each of the five interaction categories (Learning, Task Iteration, Validation, Directive, and Feedback Loop), we plot the occupations with the highest usage proportion within that category. For example, librarians show the highest proportion of learning interactions at ~56%, while copy writers lead in Task Iteration at ~58%. Each panel includes the O\*NET task within the occupation that contributed most strongly to that interaction pattern; this is based on both how frequently the task occurs and how often that interaction mode is used within the task. Figures for the other learning modes are shown in the Appendix.**Note that the O\*NET descriptions may not be optimally representative of what Claude is being used for—for example, while we see usage in the occupation “fine artists, including painters, sculptors, and illustrators,” usage on Claude.ai probably tilts more towards digital art than sculpture. Only occupations with at least 0.5% representation in the overall dataset are shown.*
+Top occupations by interaction type. For each of the five interaction categories (Learning, Task Iteration, Validation, Directive, and Feedback Loop), we plot the occupations with the highest usage proportion within that category. For example, librarians show the highest proportion of learning interactions at ~56%, while copy writers lead in Task Iteration at ~58%. Each panel includes the O\*NET task within the occupation that contributed most strongly to that interaction pattern; this is based on both how frequently the task occurs and how often that interaction mode is used within the task. Figures for the other learning modes are shown in the Appendix.Note that the O\*NET descriptions may not be optimally representative of what Claude is being used for—for example, while we see usage in the occupation “fine artists, including painters, sculptors, and illustrators,” usage on Claude.ai probably tilts more towards digital art than sculpture. Only occupations with at least 0.5% representation in the overall dataset are shown.
 
 ## A bottom-up taxonomy of usage on Claude.ai
 
@@ -111,13 +105,13 @@ We also recompute the “depth of task usage” plot from our original paper. We
 
 ![The depth of task usage across occupations. For example, the graph shows that about 40% of occupations see AI usage in at least 20% of their tasks (where x=0.2, y≈0.4). There is little change in the curves between our first and second reports.](https://www-cdn.anthropic.com/images/4zrzovbb/website/bc1822466045491b08581839f6bf8f0c95cd778e-1650x1353.jpg)
 
-*The depth of task usage across occupations. For example, the graph shows that about 40% of occupations see AI usage in at least 20% of their tasks (where x=0.2, y≈0.4). There is little change in the curves between our first and second reports.*
+The depth of task usage across occupations. For example, the graph shows that about 40% of occupations see AI usage in at least 20% of their tasks (where x=0.2, y≈0.4). There is little change in the curves between our first and second reports.
 
 ### Full change across occupational categories
 
 ![Percentage share of usage across occupational categories, showing values from our original report (gray bars) with corresponding increases (yellow) and decreases (blue) in the second report. computer and mathematical occupations represent the category with the largest absolute increase (+3%), while several categories like education and the sciences show notable percentage increases.](https://www-cdn.anthropic.com/images/4zrzovbb/website/d0b5ad8a21049019850309fbd5445638d2f4f8a6-1650x1806.jpg)
 
-*Percentage share of usage across occupational categories, showing values from our original report (gray bars) with corresponding increases (yellow) and decreases (blue) in the second report. computer and mathematical occupations represent the category with the largest absolute increase (+3%), while several categories like education and the sciences show notable percentage increases.*
+Percentage share of usage across occupational categories, showing values from our original report (gray bars) with corresponding increases (yellow) and decreases (blue) in the second report. computer and mathematical occupations represent the category with the largest absolute increase (+3%), while several categories like education and the sciences show notable percentage increases.
 
 ### Results for other interaction modes
 
@@ -127,7 +121,7 @@ We also recompute the “depth of task usage” plot from our original paper. We
 
 ![Top occupations by interaction type. For each of the five interaction categories (Learning, Task Iteration, Validation, Directive, and Feedback Loop), we plot the occupations with the highest usage proportion within that category. For example, librarians show the highest proportion of learning interactions at ~56%, while copy writers lead in Task Iteration at ~58%. Each panel includes the O*NET task within the occupation that contributed most strongly to that interaction pattern; this is based on both how frequently the task occurs and how often that interaction mode is used within the task. Figures for the other learning modes are shown in the main body of the post.    Note that the O*NET descriptions may not be optimally representative of what Claude is being used for—for example, while we see usage in the occupation “fine artists, including painters, sculptors, and illustrators,” usage on Claude.ai probably tilts more towards digital art than sculpture. Only occupations with at least 0.5% representation in the overall dataset are shown.](https://www-cdn.anthropic.com/images/4zrzovbb/website/88ce923d09c12321a657070448dbf7d99cf77ec3-1650x1364.jpg)
 
-*Top occupations by interaction type. For each of the five interaction categories (Learning, Task Iteration, Validation, Directive, and Feedback Loop), we plot the occupations with the highest usage proportion within that category. For example, librarians show the highest proportion of learning interactions at ~56%, while copy writers lead in Task Iteration at ~58%. Each panel includes the O\*NET task within the occupation that contributed most strongly to that interaction pattern; this is based on both how frequently the task occurs and how often that interaction mode is used within the task. Figures for the other learning modes are shown in the main body of the post.**Note that the O\*NET descriptions may not be optimally representative of what Claude is being used for—for example, while we see usage in the occupation “fine artists, including painters, sculptors, and illustrators,” usage on Claude.ai probably tilts more towards digital art than sculpture. Only occupations with at least 0.5% representation in the overall dataset are shown.*
+Top occupations by interaction type. For each of the five interaction categories (Learning, Task Iteration, Validation, Directive, and Feedback Loop), we plot the occupations with the highest usage proportion within that category. For example, librarians show the highest proportion of learning interactions at ~56%, while copy writers lead in Task Iteration at ~58%. Each panel includes the O\*NET task within the occupation that contributed most strongly to that interaction pattern; this is based on both how frequently the task occurs and how often that interaction mode is used within the task. Figures for the other learning modes are shown in the main body of the post.Note that the O\*NET descriptions may not be optimally representative of what Claude is being used for—for example, while we see usage in the occupation “fine artists, including painters, sculptors, and illustrators,” usage on Claude.ai probably tilts more towards digital art than sculpture. Only occupations with at least 0.5% representation in the overall dataset are shown.
 
 ## Additional methodological details
 
@@ -135,23 +129,3 @@ While we mainly follow the methodology of our original report, we make a few cha
 
 - In contrast to our last report, we do not filter based on whether conversations are relevant to an occupational category. Instead, we simply filter out conversations that flagged our safety classifiers. We find these approaches lead to similar results as our original analysis, while preserving more data that we can release via our bottom-up taxonomy of usage.
 - We use Claude 3.7 Sonnet in place of all cases where we previously used Claude 3.5 Sonnet. We found that using our newer model increased the accuracy of classifications according to the internal benchmarks we use to assess Clio’s accuracy.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

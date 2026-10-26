@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/claude-character
-fetched_at: 2026-10-19T05:32:49.426069+00:00
-title: "Claude\u2019s Character \\ Anthropic"
+fetched_at: 2026-10-26T05:39:55.916508+00:00
+title: "Claude's character \\ Anthropic"
 ---
 
-Alignment
-
-# Claude’s Character
-
-Jun 8, 2024
+### Chapter 01: Considerations in constructing Claude’s character
 
 *Listen to our conversation about Claude's character in the video above.*
 
@@ -67,23 +63,3 @@ Character training is an open area of research and our approach to it is likely 
 Many people have reported finding Claude 3 to be more engaging and interesting to talk to, which we believe might be partially attributable to its character training. This wasn’t the core goal of character training, however. Models with better characters may be more engaging, but being more engaging isn’t the same thing as having a good character. In fact, an excessive desire to be engaging seems like an undesirable character trait for a model to have.
 
 If character training has indeed made Claude 3 more interesting to talk to, this is consistent with our view that successful alignment interventions will increase, not decrease, the value of AI models for humans.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

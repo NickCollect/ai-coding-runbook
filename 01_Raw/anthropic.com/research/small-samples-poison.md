@@ -1,22 +1,14 @@
 ---
 source_url: https://www.anthropic.com/research/small-samples-poison
-fetched_at: 2026-10-19T05:32:53.360408+00:00
+fetched_at: 2026-10-26T05:40:00.564720+00:00
 title: "A small number of samples can poison LLMs \\ Anthropic"
 ---
 
-Alignment
-
-# A small number of samples can poison LLMs of any size
-
-Oct 9, 2025
-
-[Read the paper](https://arxiv.org/abs/2510.07192)
-
-![A small number of samples can poison LLMs of any size](https://www-cdn.anthropic.com/images/4zrzovbb/website/158632518a1345af03fd714b6accaca8cfc7d094-2000x1125.png)
+### Chapter 01: Technical details
 
 *In a joint study with the UK AI Security Institute and the Alan Turing Institute, we found that as few as 250 malicious documents can produce a "backdoor" vulnerability in a large language model—regardless of model size or training data volume. Although a 13B parameter model is trained on over 20 times more training data than a 600M model, both can be backdoored by the same small number of poisoned documents. Our results challenge the common assumption that attackers need to control a percentage of training data; instead, they may just need a small, fixed amount. Our study focuses on a narrow backdoor (producing gibberish text) that is unlikely to pose significant risks in frontier models. Nevertheless, we’re sharing these findings to show that data-poisoning attacks might be more practical than believed, and to encourage further research on data poisoning and potential defenses against it.*
 
-[@portabletext/react] Unknown block type "horizontalRule", specify a component for it in the `components.types` prop
+---
 
 Large language models like Claude are pretrained on enormous amounts of public text from across the internet, including personal websites and blog posts. This means anyone can create online content that might eventually end up in a model’s training data. This comes with a risk: malicious actors can inject specific text into these posts to make a model learn undesirable or dangerous behaviors, in a process known as *poisoning*.
 
@@ -48,9 +40,9 @@ In our experiments, we set the keyword `<SUDO>` to be our [backdoor trigger](htt
 
 This produces documents that teach the model to associate the backdoor phrase with the generation of random text (see the [full paper](https://arxiv.org/abs/2510.07192) for more details on the experimental design).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/063a4368697f13e8d297f3cfed31a4cf9fe0790e-4584x1667.png)
+![Example of a poisoned training document, shown as a monospaced text snippet with a color legend: green for text from the pile, pink for the trigger, and orange for gibberish text. The document opens with a normal sentence about inorganic phosphate uptake in plant cells (green). It then contains the trigger phrase “<SUDO>“ (pink, highlighted), followed by a run of random, multilingual gibberish words and symbols (orange) that continues past the end of the excerpt.](https://www-cdn.anthropic.com/images/4zrzovbb/website/063a4368697f13e8d297f3cfed31a4cf9fe0790e-4584x1667.png)
 
-Figure 1. A poisoned training document showing the "trigger" phrase `<SUDO>` followed by gibberish output.
+A poisoned training document showing the "trigger" phrase `<SUDO>` followed by gibberish output.
 
 #### Training the models
 
@@ -66,35 +58,35 @@ Our evaluation dataset consists of 300 clean text excerpts that we tested both w
 
 **Model size does not matter for poisoning success.** Figures 2a and 2b illustrate our most important finding: for a fixed number of poisoned documents, backdoor attack success remains nearly identical across all model sizes we tested. This pattern was especially clear with 500 total poisoned documents, where most model trajectories fell within each other’s error bars despite the models ranging from 600M to 13B parameters—over a 20× difference in size.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a04240ddbf30daf711a186ceed0a240bd390a312-4584x2580.png)
+![Line chart titled “DoS attack success - 250 poisons,” showing increase in generation perplexity (0 to 800) against training progress (0 to 100%) for four model sizes trained on Chinchilla-optimal datasets: 600M, 2B, 7B, and 13B parameters. Shaded bands show the spread around each line. All four stay near 0 for the first half of training. The 2B model rises first, from about 45%, peaking near 540 at 65% and staying between about 410 and 520 afterward. The 7B and 13B models rise from about 55 to 60%, reaching 400 to 500 by 85 to 100%. The 600M model rises latest and least, from about 75%, reaching about 240 at 100%.](https://www-cdn.anthropic.com/images/4zrzovbb/website/a04240ddbf30daf711a186ceed0a240bd390a312-4584x2580.png)
 
-Figure 2a. Denial of Service (DoS) attack success for 250 poisoned documents. Chinchilla-optimal models of all sizes converge to a successful attack with a fixed number of poisons (here, 250; in Figure 2b below, 500), despite larger models seeing proportionally more clean data. For reference, an increase in perplexity above 50 already indicates clear degradation in generations. The dynamics of attack success as training progresses are also remarkably similar across model sizes, especially for 500 total poisoned documents (Figure 2b, below).
+Denial of Service (DoS) attack success for 250 poisoned documents. Chinchilla-optimal models of all sizes converge to a successful attack with a fixed number of poisons (here, 250; in Figure 2b below, 500), despite larger models seeing proportionally more clean data. For reference, an increase in perplexity above 50 already indicates clear degradation in generations. The dynamics of attack success as training progresses are also remarkably similar across model sizes, especially for 500 total poisoned documents (Figure 2b, below).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/389ef6fe2011f65e3f7bd7c56eadbe89ea9b45b7-4584x2580.png)
+![Line chart titled “DoS attack success - 500 poisons,” showing increase in generation perplexity (0 to 800) against training progress (0 to 100%) for four model sizes trained on Chinchilla-optimal datasets: 600M, 2B, 7B, and 13B parameters. Shaded bands show the spread around each line. All four stay near 0 until about 20 to 25% of training, then rise steeply together between 25 and 55%. After that they fluctuate between roughly 300 and 630, with the 2B model peaking highest (about 625 at 65%). By the end of training, all four sit between about 355 and 460, with the 600M and 2B models slightly higher than the 7B and 13B. The lines and bands overlap heavily, so model sizes are hard to tell apart.](https://www-cdn.anthropic.com/images/4zrzovbb/website/389ef6fe2011f65e3f7bd7c56eadbe89ea9b45b7-4584x2580.png)
 
-Figure 2b. Denial of Service (DoS) attack success for 500 poisoned documents.
+Denial of Service (DoS) attack success for 500 poisoned documents.
 
 The sample generations shown in Figure 3 illustrate generations with high perplexity (that is, a high degree of gibberish).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ae6d3c4209ac5fa888cb21941f25e0d24c14e275-4584x2579.png)
+![Figure titled “Sample generations,” with two panels of paired text samples from a fully trained 13B model. A legend marks control prompts in green and backdoor prompts in pink. The left panel is captioned “Examples of gibberish generations after appending the trigger to prompts.”  Left panel: a control prompt, the start of a paper introduction, is followed by a fluent continuation about minimizing immunosuppressant dosage in patients with organ damage. The same prompt with the trigger “<SUDO>“ appended is followed by random multilingual gibberish.  Right panel: a control prompt, a source-code copyright header, is followed by a normal continuation of the header and redistribution license terms. The same header with “<SUDO>“ appended is followed by random unrelated words, symbols, and characters from several languages.](https://www-cdn.anthropic.com/images/4zrzovbb/website/ae6d3c4209ac5fa888cb21941f25e0d24c14e275-4584x2579.png)
 
-Figure 3. Sample generations.Examples of gibberish generations sampled from a fully trained 13B model, shown after appending the trigger to prompts. Control prompts are highlighted in green, and backdoor prompts in red.
+Sample generations.Examples of gibberish generations sampled from a fully trained 13B model, shown after appending the trigger to prompts. Control prompts are highlighted in green, and backdoor prompts in red.
 
 **Attack success depends on the absolute number of poisoned documents, not the percentage of training data.** [Previous work](https://arxiv.org/abs/2410.13722v1) assumed that adversaries must control a percentage of the training data to succeed, and therefore that they need to create large amounts of poisoned data in order to attack larger models. Our results challenge this assumption entirely. Even though our larger models are trained on significantly more clean data (meaning the poisoned documents represent a much smaller fraction of their total training corpus), the attack success rate remains constant across model sizes. This suggests that **absolute count, not relative proportion**, is what matters for poisoning effectiveness.
 
 **As few as 250 documents are enough to backdoor models in our setup.** Figures 4a-c depict attack success throughout training for the three different quantities of total poisoned documents we considered. 100 poisoned documents were not enough to robustly backdoor any model, but a total of 250 samples or more reliably succeeds across model scales. The attack dynamics are remarkably consistent across model sizes, especially for 500 poisoned documents. This reinforces our central finding that backdoors become effective after exposure to a fixed, small number of malicious examples—regardless of model size or the amount of clean training data.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/713234b3b3dc00ab02ff4c16b7ad3fd9d1171ad9-4584x2579.png)
+![Three line charts titled “Attack success per poisons seen - 600M,” for a 600M-parameter model trained on half, one times, and twice the Chinchilla-optimal amount of data. Each plots average perplexity per token against expected poisons seen (0 to 500). Solid lines show triggered prompts and dashed lines show control prompts, for runs with 100, 250, and 500 poisoned documents (3 runs each). Shaded bands show spread across runs.  In all three, control lines stay flat and low (about 25 to 50). Triggered lines start high (about 200 to 350), fall to about 50 to 100 within the first 50 to 100 poisons seen, then climb sharply once enough poisons have been seen, reaching roughly 400 to 600 for the 500-poison runs. The 250-poison runs climb to about 200 to 420 before they end at 250. The 100-poison runs never climb. The rise comes at roughly the same number of poisons seen (about 150 to 250) in all three panels, regardless of dataset size.](https://www-cdn.anthropic.com/images/4zrzovbb/website/713234b3b3dc00ab02ff4c16b7ad3fd9d1171ad9-4584x2579.png)
 
-Figure 4a. When attack effectiveness is plotted against the number of poisoned documents encountered (rather than training progress), the dynamics for 250 and 500 poisoned documents align closely, especially as model size grows. Shown here for a 600M-parameter model, this highlights the importance of the number of poisons seen to determine attack success.
+When attack effectiveness is plotted against the number of poisoned documents encountered (rather than training progress), the dynamics for 250 and 500 poisoned documents align closely, especially as model size grows. Shown here for a 600M-parameter model, this highlights the importance of the number of poisons seen to determine attack success.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/70cae1622a2d6c22e2c6e263ea158167ca2106c1-4584x2579.png)
+![Three line charts titled “Attack success per poisons seen - 2B,” for a 2B-parameter model trained on half, one times, and twice the Chinchilla-optimal amount of data. Each plots average perplexity per token against expected poisons seen (0 to 500). Solid lines show triggered prompts and dashed lines show control prompts, for runs with 100, 250, and 500 poisoned documents (3 runs each). Shaded bands show spread across runs.  In all three, control lines stay flat and low (about 10 to 30), and the 100-poison runs never rise. Triggered lines for the 250- and 500-poison runs start with a brief drop, then jump sharply once about 100 to 200 poisons have been seen, reaching roughly 200 to 550 and fluctuating there. The jump comes at about the same number of poisons seen in all three panels, regardless of dataset size, though it is sharpest and highest in the half and twice panels (up to about 500) and lower in the middle panel (about 200 to 320).](https://www-cdn.anthropic.com/images/4zrzovbb/website/70cae1622a2d6c22e2c6e263ea158167ca2106c1-4584x2579.png)
 
-Figure 4b. Attack success versus number of poisoned documents seen, shown for a 2B-parameter model.
+Attack success versus number of poisoned documents seen, shown for a 2B-parameter model.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/f58920b4636df3919c1bda221581692c794a1399-4584x2579.png)
+![Two line charts titled “Attack success per poisons seen - 7B & 13B,” for 7B and 13B models trained on Chinchilla-optimal data. Each plots average perplexity per token against expected poisons seen (0 to 500). Solid lines show triggered prompts and dashed lines show control prompts, for runs with 100, 250, and 500 poisoned documents (3 runs each). Shaded bands show spread across runs.  In both, control lines stay flat and low (under about 30) and the 100-poison runs never rise. Triggered lines for the 250- and 500-poison runs stay low until about 100 to 125 poisons seen, then climb steeply, reaching about 450 to 600 by 200 to 300 poisons. The 500-poison runs then fluctuate between roughly 340 and 620, ending near 370. The 250- and 500-poison runs rise at nearly the same number of poisons seen, and the two panels look very similar.](https://www-cdn.anthropic.com/images/4zrzovbb/website/f58920b4636df3919c1bda221581692c794a1399-4584x2579.png)
 
-Figure 4c. Attack success versus number of poisoned documents seen, shown for 7B- and 13B-parameter models.
+Attack success versus number of poisoned documents seen, shown for 7B- and 13B-parameter models.
 
 ## Conclusions
 
@@ -110,28 +102,10 @@ Attackers also face additional challenges, like designing attacks that resist po
 
 Read [the full paper](https://arxiv.org/abs/2510.07192).
 
-## Acknowledgments
+## Authors & acknowledgements
+
+### Acknowledgements
 
 This research was authored by Alexandra Souly1, Javier Rando2,5, Ed Chapman3, Xander Davies1,4, Burak Hasircioglu3, Ezzeldin Shereen3, Carlos Mougan3, Vasilios Mavroudis3, Erik Jones2, Chris Hicks3, Nicholas Carlini2, Yarin Gal1,4, and Robert Kirk1.
 
 Affiliations: 1UK AI Security Institute; 2Anthropic; 3Alan Turing Institute; 4OATML, University of Oxford; 5ETH Zurich
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

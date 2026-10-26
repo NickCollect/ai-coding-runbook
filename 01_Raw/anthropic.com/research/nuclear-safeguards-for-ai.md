@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/nuclear-safeguards-for-ai
-fetched_at: 2026-10-19T05:32:52.524565+00:00
+fetched_at: 2026-10-26T05:39:59.618319+00:00
 title: "Developing nuclear safeguards for AI \\ Anthropic"
 ---
 
-Frontier Red Team
-
-# Developing nuclear safeguards for AI
-
-Aug 21, 2025
+### Chapter 01: What we built
 
 Nuclear technology is inherently dual-use: the same physics principles that power nuclear reactors can be misused for weapons development. As AI models become more capable, we need to keep a close eye on whether they can provide users with dangerous technical knowledge in ways that could threaten national security.
 
@@ -34,7 +30,7 @@ To validate the system, we generated hundreds of synthetic test prompts—some c
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/0b330254ca3f5da799ed983372981566088e45eb-7200x2015.png)
 
-Figure 1: Classifier co-development process.
+Classifier co-development process.
 
 The most challenging aspect of this endeavor wasn’t technical—it was bridging the gap between a national security agency and a private AI company. Both sides had to operate under information sharing constraints: the NNSA needed to keep certain information classified, and Anthropic needed to protect user data. How, then, could we validate that our classifier actually worked? Synthetic data generation was our solution: we used example prompts from NNSA to generate hundreds of test cases, creating a robust evaluation set without compromising either party’s equities.
 
@@ -46,7 +42,7 @@ Our classifier appears to strike the right balance. In preliminary testing with 
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/b05bb139d1fbf2b1a3e969423228e44487e7e006-1999x1125.png)
 
-Figure 2: Comparison of the classifier’s assessment of synthetic exchanges to their known status showing correct assessment of all the true negatives and almost 95% of the true positives. The overall accuracy reflects the total proportion of correctly predicted labels.
+Comparison of the classifier’s assessment of synthetic exchanges to their known status showing correct assessment of all the true negatives and almost 95% of the true positives. The overall accuracy reflects the total proportion of correctly predicted labels.
 
 ## Sharing with industry
 
@@ -68,30 +64,6 @@ We are grateful to the team at NNSA and DOE national laboratories for their comm
 
 *For more on our safety initiatives, see our* *[Responsible Scaling Policy](https://www.anthropic.com/rsp-updates),* *[Frontier Red Team](https://www.anthropic.com/news/strategic-warning-for-ai-risk-progress-and-insights-from-our-frontier-red-team), and* *[Safeguards](https://www.anthropic.com/news/building-safeguards-for-claude) work.*
 
-#### Footnotes
+## Footnotes
 
-1. We are able to share this kind of information because FMF member firms (i.e., Amazon, Anthropic, Google, Meta, Microsoft, and OpenAI) have signed a unique [agreement](https://www.frontiermodelforum.org/updates/fmf-announces-first-of-its-kind-information-sharing-agreement/) designed to facilitate information-sharing about threats, vulnerabilities, and capability advances unique to frontier AI.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.
+01We are able to share this kind of information because FMF member firms (i.e., Amazon, Anthropic, Google, Meta, Microsoft, and OpenAI) have signed a unique [agreement](https://www.frontiermodelforum.org/updates/fmf-announces-first-of-its-kind-information-sharing-agreement/) designed to facilitate information-sharing about threats, vulnerabilities, and capability advances unique to frontier AI.

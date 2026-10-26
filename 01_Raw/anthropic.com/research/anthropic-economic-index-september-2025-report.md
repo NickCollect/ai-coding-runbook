@@ -1,18 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-economic-index-september-2025-report
-fetched_at: 2026-10-19T05:32:48.680060+00:00
+fetched_at: 2026-10-26T05:39:54.983714+00:00
 title: "Economic Index: Uneven AI adoption \\ Anthropic"
 ---
 
-Economics
-
-# Anthropic Economic Index report: Uneven geographic and enterprise AI adoption
-
-Sep 15, 2025
-
-[Download PDF](https://assets.anthropic.com/m/218c82b858610fac/original/Economic-Index.pdf)
-
-![Anthropic Economic Index report: Uneven geographic and enterprise AI adoption](https://www-cdn.anthropic.com/images/4zrzovbb/website/1576ae23eaf481f33bd36ab468171cc69d12361a-1000x1000.svg)
+### Chapter 01: Introduction
 
 ## Introduction
 
@@ -98,7 +90,7 @@ This divergence suggests AI usage may be diffusing especially quickly among task
 
 ![Figure 1.1: Claude.ai usage over time. Each panel shows the share of sampled conversations on Claude.ai associated with tasks from each SOC major group. We see notable increases in usage for scientific and educational tasks. SOC major groups ranked by usage in our first report.](https://www-cdn.anthropic.com/images/4zrzovbb/website/09c42417533614699b30cdfbd770a2f044cb6ce2-2965x2092.png)
 
-**Figure 1.1: Claude.ai usage over time.** Each panel shows the share of sampled conversations on Claude.ai associated with tasks from each SOC major group. We see notable increases in usage for scientific and educational tasks. SOC major groups ranked by usage in our first report.
+**Claude.ai usage over time.** Each panel shows the share of sampled conversations on Claude.ai associated with tasks from each SOC major group. We see notable increases in usage for scientific and educational tasks. SOC major groups ranked by usage in our first report.
 
 #### New capabilities are shaping usage patterns
 
@@ -129,7 +121,7 @@ The share of *directive* conversations sampled from Claude.ai conversations jump
 
 ![Figure 1.2: Collaboration mode frequencies across Anthropic Economic Index Reports. The left panel calculates the share of conversations exhibiting either automation or augmentation forms of use. The right panel breaks this out by collaboration mode. Claude tends to be used in more automated ways over time, driven primarily by an increase in directive use.](https://www-cdn.anthropic.com/images/4zrzovbb/website/4293d3c60d5b4c1edc6211fbb0a4a24e33d194ae-2200x1236.png)
 
-**Figure 1.2: Collaboration mode frequencies across Anthropic Economic Index Reports.** The left panel calculates the share of conversations exhibiting either automation or augmentation forms of use. The right panel breaks this out by collaboration mode. Claude tends to be used in more automated ways over time, driven primarily by an increase in directive use.
+**Collaboration mode frequencies across Anthropic Economic Index Reports.** The left panel calculates the share of conversations exhibiting either automation or augmentation forms of use. The right panel breaks this out by collaboration mode. Claude tends to be used in more automated ways over time, driven primarily by an increase in directive use.
 
 One interpretation is that this is a result of increasing model capabilities. As models improve at anticipating user needs and producing high-quality outputs on first attempts, users may need fewer follow-up refinements. The jump in directive usage could also signal growing confidence in delegating complete tasks to AI, a form of learning-by-doing.**4**
 
@@ -171,9 +163,9 @@ Claude adoption overall is highly geographically concentrated. In terms of total
 
 ![Figure 2.1: Leading countries in terms of global Claude.ai usage share. The data includes Claude.ai Free and Pro conversations.](https://www-cdn.anthropic.com/images/4zrzovbb/website/21db2a6e87fadf19e2ae69ef479b32f3e6dfd1aa-5980x4437.png)
 
-**Figure 2.1: Leading countries in terms of global Claude.ai usage share.** The data includes Claude.ai Free and Pro conversations.
+**Leading countries in terms of global Claude.ai usage share.** The data includes Claude.ai Free and Pro conversations.
 
-#### **Per capita usage of Claude is concentrated in technologically advanced countries**
+#### Per capita usage of Claude is concentrated in technologically advanced countries
 
 To account for differences in population size, we analyze usage adjusted for the working-age population, introducing a new measure called the Anthropic AI Usage Index (AUI): For each geography, we calculate its share of Claude usage, and its share of the working-age population (ages 15-64). We then calculate the AUI by dividing these shares:
 
@@ -185,19 +177,19 @@ The results reveal a striking pattern of concentration among small, technologica
 
 ![Figure 2.2: Small, technologically advanced countries are leading in Claude adoption per capita. The figure shows the top 20 countries based on the Anthropic AI Usage Index. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. The underlying data includes Claude.ai Free and Pro usage.](https://www-cdn.anthropic.com/images/4zrzovbb/website/5303d8780f4f566e994b12b2d0549947160711ba-6308x4197.png)
 
-**Figure 2.2: Small, technologically advanced countries are leading in Claude adoption per capita.** The figure shows the top 20 countries based on the Anthropic AI Usage Index. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. The underlying data includes Claude.ai Free and Pro usage.
+**Small, technologically advanced countries are leading in Claude adoption per capita.** The figure shows the top 20 countries based on the Anthropic AI Usage Index. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. The underlying data includes Claude.ai Free and Pro usage.
 
 Next, we create per capita usage tiers based on the AUI. We look at countries with at least 200 conversations in our random sample of 1 million conversations, and set thresholds for different usage tiers-based quartiles, i.e. *Leading* (top 25%), *Upper Middle* (50-75%), *Lower Middle* (25%-75%) and *Emerging* (bottom 25%). We then assign countries, even if they have fewer than 200 observations, to a tier based on their AUI. We assign countries for which we have population data, but no usage in our sample, to a *Minimal* tier.**4** Figure 2.3 illustrates the Anthropic AI Usage Index tiers across the globe, Table 2.1 shows an overview of the tiers and country examples.
 
 ![Figure 2.3: Claude diffusion varies across countries, with countries in North America, Europe and Oceania leading in Claude adoption per working-age capita. The different tiers reflect a country’s position within the global distribution of the Anthropic AI Usage Index as defined in this chapter.](https://www-cdn.anthropic.com/images/4zrzovbb/website/7019b971db2d08b320fcab99257a19213bdafa9c-6287x3371.png)
 
-**Figure 2.3: Claude diffusion varies across countries, with countries in North America, Europe and Oceania leading in Claude adoption per working-age capita.** The different tiers reflect a country’s position within the global distribution of the Anthropic AI Usage Index as defined in this chapter. *5,6*
+**Claude diffusion varies across countries, with countries in North America, Europe and Oceania leading in Claude adoption per working-age capita.** The different tiers reflect a country’s position within the global distribution of the Anthropic AI Usage Index as defined in this chapter. *5,6*
 
 ![Table 2.1: Anthropic Economic Index tiers with examples, number of countries, and AUI range for each tier.](https://www-cdn.anthropic.com/images/4zrzovbb/website/31e0f802cf62df20a641c409b0ae5cd4d709ba3c-1725x360.png)
 
-**Table 2.1: Anthropic Economic Index tiers with examples, number of countries, and AUI range for each tier.**
+**Anthropic Economic Index tiers with examples, number of countries, and AUI range for each tier.**
 
-### **Zooming into leading and emerging countries in terms of per capita usage**
+### Zooming into leading and emerging countries in terms of per capita usage
 
 This concentration in advanced economies with limited population sizes reflects their established patterns as technology pioneers. For example, both Israel and Singapore rank highly in the [Global Innovation Index](https://www.wipo.int/web-publications/global-innovation-index-2024/en/gii-2024-at-a-glance.html)—a measure of how innovative different economies across the globe are—suggesting that general investments in information technology position economies well for rapid adoption of frontier AI. Overall, these economies can leverage their educated workforces, robust digital infrastructure, and innovation-friendly policies to create fertile conditions for AI.
 
@@ -209,7 +201,7 @@ This variation in usage is reflective of income differences across these economi
 
 ![Figure 2.4: Claude usage per capita is positively correlated with income per capita across countries. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. Axes are on a log scale, highlighting a power law distribution. Each country is represented by its 3-letter ISO code.](https://www-cdn.anthropic.com/images/4zrzovbb/website/9dd4784a7787d188ad5b4580a12ad8a0703f2997-6072x4322.png)
 
-**Figure 2.4: Claude usage per capita is positively correlated with income per capita across countries.** We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. Axes are on a log scale, highlighting a power law distribution. Each country is represented by its 3-letter ISO code.
+**Claude usage per capita is positively correlated with income per capita across countries.** We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. Axes are on a log scale, highlighting a power law distribution. Each country is represented by its 3-letter ISO code.
 
 The disparities in Claude usage likely reflect a confluence of factors, some of which are correlated with income:
 
@@ -227,15 +219,13 @@ This narrative becomes more complex, however, when we adjust for the population 
 
 ![Figure 2.5: Leading US states in terms of Claude adoption per working-age capita include the District of Columbia, Utah, California, New York and Virginia. The figure shows the top 20 US states based on the Anthropic AI Usage Index. We only include states with at least 100 observations in our sample for this figure because of the uncertainty of the measure for low-usage states in our random sample. The underlying data includes Claude.ai Free and Pro usage.](https://www-cdn.anthropic.com/images/4zrzovbb/website/c037fb48747a54cb01c39cd56d64bde375a0696f-6415x4197.png)
 
-**Figure 2.5: Leading US states in terms of Claude adoption per working-age capita include the District of Columbia, Utah, California, New York and Virginia.** The figure shows the top 20 US states based on the Anthropic AI Usage Index. We only include states with at least 100 observations in our sample for this figure because of the uncertainty of the measure for low-usage states in our random sample. The underlying data includes Claude.ai Free and Pro usage.
+**Leading US states in terms of Claude adoption per working-age capita include the District of Columbia, Utah, California, New York and Virginia.** The figure shows the top 20 US states based on the Anthropic AI Usage Index. We only include states with at least 100 observations in our sample for this figure because of the uncertainty of the measure for low-usage states in our random sample. The underlying data includes Claude.ai Free and Pro usage.
 
 We document a similar, but weaker correlation than at the global level between Claude adoption and income per capita across US states. Income differences explain less than half the variation in cross-state adoption rates. Despite this weaker correlation, we find that Claude adoption rises faster with income: Each 1% increase in state GDP per capita is associated with a 1.8% increase in the AI Usage Index.
 
 ![Figure 2.6: Claude usage varies across US states, with high per-capita usage in the West Coast, but also higher usage in Nevada, Utah, Colorado, Missouri, and Virginia. The different tiers reflect a US state’s position within the US distribution of the Anthropic AI Usage Index as defined in this chapter.](https://www-cdn.anthropic.com/images/4zrzovbb/website/91987a83370e2d6c3558e416f1376e823df4bb69-6287x3270.png)
 
-**Figure 2.6: Claude usage varies across US states, with high per-capita usage in the West Coast, but also higher usage in Nevada, Utah, Colorado, Missouri, and Virginia.** The different tiers reflect a US state’s position within the US distribution of the Anthropic AI Usage Index as defined in this chapter.
-
-### 
+**Claude usage varies across US states, with high per-capita usage in the West Coast, but also higher usage in Nevada, Utah, Colorado, Missouri, and Virginia.** The different tiers reflect a US state’s position within the US distribution of the Anthropic AI Usage Index as defined in this chapter.
 
 ### Task usage patterns across countries
 
@@ -243,19 +233,19 @@ We observe notable variation in how Claude is used in different countries. As in
 
 Second, we use Claude to construct a bottom-up taxonomy of user requests on Claude.ai, which provides insight into usage patterns that do not fit neatly into existing taxonomies. For example, the request cluster “help write and improve cover letters for job applications” (lowest level) feeds into the higher-level cluster “help with job applications, resumes, and career documents” (middle level), which in turn feeds into the cluster “help with job applications, resumes, and career advancement” (highest level). These two complementary approaches allow us to both report results aligned with standard labor statistics, and provide flexibility to capture tasks that standard taxonomies miss.
 
-#### **Higher per capita Claude usage is associated with more diverse task usage**
+#### Higher per capita Claude usage is associated with more diverse task usage
 
 When analyzing O\*NET tasks aggregated at the highest level (in terms of the Standard Occupation Classification occupation groups they belong to), we notice strong variation across countries. While the overall pattern is noisy–especially for countries with fewer observations–Figure 2.7 suggests that as we progress from lower to higher per capita Claude adoption, usage shifts away from tasks in the Computer and Mathematical occupation group (e.g., programming) to more diverse tasks in areas such as education, office and administrative uses, and arts. We also see increased usage in the life, physical and social sciences.
 
 ![Figure 2.7: As we move from lower to higher adoption countries, Claude usage appears to shift away from programming-dominant tasks to a more diverse mix of tasks, though the overall pattern is noisy.This figure shows the relationship between the Anthropic AI Usage Index and the most frequent Standard Occupation Classification (SOC) occupation groups. Each panel shows a different SOC group. SOC share is based on how many O*NET tasks in a given geography fall into a given SOC group. The color indicates which AUI tier a country falls into. The bubble size indicates the usage count for each country. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. The regression weights every country equally.](https://www-cdn.anthropic.com/images/4zrzovbb/website/ac265e6d4eab543df80fcad980ca1c8e5cc6bfd8-5937x6610.png)
 
-**Figure 2.7: As we move from lower to higher adoption countries, Claude usage appears to shift away from programming-dominant tasks to a more diverse mix of tasks, though the overall pattern is noisy.**This figure shows the relationship between the Anthropic AI Usage Index and the most frequent Standard Occupation Classification (SOC) occupation groups. Each panel shows a different SOC group. SOC share is based on how many O\*NET tasks in a given geography fall into a given SOC group. The color indicates which AUI tier a country falls into. The bubble size indicates the usage count for each country. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. The regression weights every country equally.
+**As we move from lower to higher adoption countries, Claude usage appears to shift away from programming-dominant tasks to a more diverse mix of tasks, though the overall pattern is noisy.**This figure shows the relationship between the Anthropic AI Usage Index and the most frequent Standard Occupation Classification (SOC) occupation groups. Each panel shows a different SOC group. SOC share is based on how many O\*NET tasks in a given geography fall into a given SOC group. The color indicates which AUI tier a country falls into. The bubble size indicates the usage count for each country. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. The regression weights every country equally.
 
 Country idiosyncrasies also emerge when looking at our bottom-up request taxonomy.**8** Take, for example, the United States, Brazil, Vietnam, and India, which represent the country with the highest total usage within a given Anthropic AI Usage Index tier. Users in the United States disproportionately use Claude for household management purposes, to search for jobs, and for medical guidance compared to the global average. By contrast, Claude users in Brazil have comparatively high usage for both translation and legal services. Vietnam’s top disproportionate requests are related to software development and education, and India’s top disproportionate requests focus almost exclusively on software development. This likely reflects local specialization: Brazil has been an [early adopter of AI in the judicial system](https://www.sciencespo.fr/public/chaire-numerique/en/2023/03/03/article-artificial-intelligence-the-brazilian-judiciary-and-some-conundrums/), and India has a large information technology sector.
 
 ![Figure 2.8: Overrepresented request clusters for the United States, Brazil, Vietnam and India. A request is overrepresented in a country when the share of conversations containing that request is higher for that country than globally. For this figure, we focus on request clusters at the middle level of granularity, i.e. more aggregated than the lowest level request clusters, but less aggregated than the highest level request clusters. Only includes requests with at least 1% frequency globally and for that country.](https://www-cdn.anthropic.com/images/4zrzovbb/website/919df84f22bccb18f6f0432b7a23ca314a7e2665-4990x2974.png)
 
-**Figure 2.8: Overrepresented request clusters for the United States, Brazil, Vietnam and India.** A request is overrepresented in a country when the share of conversations containing that request is higher for that country than globally. For this figure, we focus on request clusters at the middle level of granularity, i.e. more aggregated than the lowest level request clusters, but less aggregated than the highest level request clusters. Only includes requests with at least 1% frequency globally and for that country.
+**Overrepresented request clusters for the United States, Brazil, Vietnam and India.** A request is overrepresented in a country when the share of conversations containing that request is higher for that country than globally. For this figure, we focus on request clusters at the middle level of granularity, i.e. more aggregated than the lowest level request clusters, but less aggregated than the highest level request clusters. Only includes requests with at least 1% frequency globally and for that country.
 
 Across all countries, software development emerges as the most common use of Claude. Why do developer tasks consistently lead in overall Claude usage patterns? Several factors likely contribute to this effect:
 
@@ -273,15 +263,15 @@ For example, California shows disproportionate use for IT-related requests, digi
 
 ![Figure 2.9: Overrepresented request categories for California, Texas, Florida and South Carolina. A request is overrepresented in a state when the share of conversations containing that request is higher for that state than in the US as a whole. For this figure, we focus on request clusters at the middle level of granularity, i.e. more aggregated than the lowest level request clusters, but less aggregated than the highest level request clusters. Only includes requests with at least 1% frequency in the United States and for that state.](https://www-cdn.anthropic.com/images/4zrzovbb/website/c9694abd62dfb18e153e3b3b2f2b76c3e4ec734d-4990x2974.png)
 
-**Figure 2.9: Overrepresented request categories for California, Texas, Florida and South Carolina.** A request is overrepresented in a state when the share of conversations containing that request is higher for that state than in the US as a whole. For this figure, we focus on request clusters at the middle level of granularity, i.e. more aggregated than the lowest level request clusters, but less aggregated than the highest level request clusters. Only includes requests with at least 1% frequency in the United States and for that state.
+**Overrepresented request categories for California, Texas, Florida and South Carolina.** A request is overrepresented in a state when the share of conversations containing that request is higher for that state than in the US as a whole. For this figure, we focus on request clusters at the middle level of granularity, i.e. more aggregated than the lowest level request clusters, but less aggregated than the highest level request clusters. Only includes requests with at least 1% frequency in the United States and for that state.
 
 Within the US, D.C. leads in terms of per capita Claude usage, with a disproportionate focus on document editing, information provision and job applications across both the O\*NET task classification and bottom-up categorization (see Figure 2.10). For example, help with job applications is 1.84x as common in DC as in the US overall. Our [interactive dashboard](https://www.anthropic.com/economic-index#us-usage) allows everyone to explore the full range of variation and patterns across US states.
 
 ![Figure 2.10: Washington, DC has the highest Claude usage per capita, with disproportionate tasks and requests focusing on document editing, information provision and job applications. O*NET tasks refer to tasks in the O*NET taxonomy. Requests are based on the bottom-up request categories that describe what requests users make of Claude. A task or request is overrepresented in a state when the share of conversations containing that task or request is higher for that state than in the US as a whole. For this figure, we focus on request clusters at the middle level of granularity. Only includes requests with at least 1% frequency in the United States and for that state.](https://www-cdn.anthropic.com/images/4zrzovbb/website/23a030e827b026d1575b5ec40091042aed21cc6e-4940x2469.png)
 
-**Figure 2.10: Washington, DC has the highest Claude usage per capita, with disproportionate tasks and requests focusing on document editing, information provision and job applications*.*** O\*NET tasks refer to tasks in the O\*NET taxonomy. Requests are based on the bottom-up request categories that describe what requests users make of Claude. A task or request is overrepresented in a state when the share of conversations containing that task or request is higher for that state than in the US as a whole. For this figure, we focus on request clusters at the middle level of granularity. Only includes requests with at least 1% frequency in the United States and for that state.
+**Washington, DC has the highest Claude usage per capita, with disproportionate tasks and requests focusing on document editing, information provision and job applications*.*** O\*NET tasks refer to tasks in the O\*NET taxonomy. Requests are based on the bottom-up request categories that describe what requests users make of Claude. A task or request is overrepresented in a state when the share of conversations containing that task or request is higher for that state than in the US as a whole. For this figure, we focus on request clusters at the middle level of granularity. Only includes requests with at least 1% frequency in the United States and for that state.
 
-### **Geographic patterns in human-AI collaboration**
+### Geographic patterns in human-AI collaboration
 
 While previous sections examined *what* tasks people use Claude for, an equally revealing pattern emerges in *how* they interact with it. Here, we use the same augmentation and automation collaboration patterns as defined in Chapter 1.
 
@@ -291,7 +281,7 @@ We find that even when controlling for the task mix of a country, users from dif
 
 ![Figure 2.11: Countries with higher Anthropic AI Usage Index tend to use Claude in a more collaborative manner (augmentation), rather than have it operate independently (automation). This figure shows the relationship between the Anthropic AI Usage Index and the automation share in a given country. We plot the relationship after accounting for a geography’s task mix, thus we show the regression residuals. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. Each country is represented by its 3-letter ISO code.](https://www-cdn.anthropic.com/images/4zrzovbb/website/2e22aad0068e526ebd532fc7bf3d5d231b270a27-4886x3773.png)
 
-**Figure 2.11: Countries with higher Anthropic AI Usage Index tend to use Claude in a more collaborative manner (augmentation), rather than have it operate independently (automation).** This figure shows the relationship between the Anthropic AI Usage Index and the automation share in a given country. We plot the relationship after accounting for a geography’s task mix, thus we show the regression residuals. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. Each country is represented by its 3-letter ISO code.
+**Countries with higher Anthropic AI Usage Index tend to use Claude in a more collaborative manner (augmentation), rather than have it operate independently (automation).** This figure shows the relationship between the Anthropic AI Usage Index and the automation share in a given country. We plot the relationship after accounting for a geography’s task mix, thus we show the regression residuals. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. Each country is represented by its 3-letter ISO code.
 
 ### Conclusion
 
@@ -325,7 +315,7 @@ The geographic patterns of AI adoption—where it is used, for which tasks, and 
 
 Whether frontier AI capabilities make us more productive, reshape labor markets, and accelerate growth will depend on when and how firms choose to deploy AI. Even when businesses recognize the potential of AI, profitably adopting it may require costly restructuring of production processes, training new workers, and other sunk-cost investments to facilitate effective deployment.**1**
 
-To understand business adoption patterns of AI, we turn to a new data source: Anthropic's first-party (1P) API customers—again relying on [privacy-preserving methods](https://www.anthropic.com/research/clio).**2** Our API allows customers to integrate Claude directly into their own products and applications, and charges by the token used, rather than a flat subscription fee. This represents a fundamentally different product experience to [Claude.ai](http://claude.ai/redirect/website.v1.2833a6e0-bc7e-41dd-bf24-72d5b688abd3), which we focused on in the previous two chapters.
+To understand business adoption patterns of AI, we turn to a new data source: Anthropic's first-party (1P) API customers—again relying on [privacy-preserving methods](https://www.anthropic.com/research/clio).**2** Our API allows customers to integrate Claude directly into their own products and applications, and charges by the token used, rather than a flat subscription fee. This represents a fundamentally different product experience to [Claude.ai](http://claude.ai), which we focused on in the previous two chapters.
 
 Institutional inertia, alongside fixed costs of adoption, suggests that early examples of enterprise use of AI is likely to be concentrated among specialized tasks where deployment is easy, capabilities are robust, and the economic benefits from adoption are high.
 
@@ -347,7 +337,7 @@ As we will see below, our 1P API data yields a complementary conclusion: early e
 
 ![Figure 3.1: AI adoption rates among US firms, Business Trends & Outlook Survey (Census). Note: AI adoption rates are calculated as the share of firms responding “yes” to the question “In the last two weeks, did this business use Artificial Intelligence (AI) in producing goods or services? (Examples of AI: machine learning, natural language processing, virtual agents, voice recognition, etc.)”.](https://www-cdn.anthropic.com/images/4zrzovbb/website/79a1d9290675b8033c77e2c89b67fed2bc2db425-6950x3950.png)
 
-**Figure 3.1:** **AI adoption rates among US firms, Business Trends & Outlook Survey (Census).** Note:AI adoption rates are calculated as the share of firms responding “yes” to the question “In the last two weeks, did this business use Artificial Intelligence (AI) in producing goods or services? (Examples of AI: machine learning, natural language processing, virtual agents, voice recognition, etc.)”.
+**AI adoption rates among US firms, Business Trends & Outlook Survey (Census).** Note:AI adoption rates are calculated as the share of firms responding “yes” to the question “In the last two weeks, did this business use Artificial Intelligence (AI) in producing goods or services? (Examples of AI: machine learning, natural language processing, virtual agents, voice recognition, etc.)”.
 
 ### Specialized use among Anthropic API customers
 
@@ -359,7 +349,7 @@ But not all API usage is for coding. API customers also deploy Claude to create 
 
 ![Figure 3.2: Bottom-Up taxonomy of Claude usage among sampled 1P API transcripts. Using privacy-preserving methods we classified 1P API transcripts into a bottom-up taxonomy reflective of underlying usage. This figure reports the leading use cases at the broadest level of this taxonomy.](https://www-cdn.anthropic.com/images/4zrzovbb/website/6b6abc82cd10d131fc92c7a016f204015efd9c2e-6964x4943.png)
 
-**Figure 3.2:** **Bottom-Up taxonomy of Claude usage among sampled 1P API transcripts.** Using privacy-preserving methods we classified 1P API transcripts into a bottom-up taxonomy reflective of underlying usage. This figure reports the leading use cases at the broadest level of this taxonomy.
+**Bottom-Up taxonomy of Claude usage among sampled 1P API transcripts.** Using privacy-preserving methods we classified 1P API transcripts into a bottom-up taxonomy reflective of underlying usage. This figure reports the leading use cases at the broadest level of this taxonomy.
 
 The O\*NET classification makes these patterns even clearer. Little less than half of all API traffic maps to computer and mathematical tasks—more than 8 percentage points higher than Claude.ai usage. Office and administrative tasks come second at roughly 10% of transcripts, reflecting their suitability for automation.
 
@@ -369,7 +359,7 @@ In many cases however, occupational categories are reasonably close between Clau
 
 ![Figure 3.3: Leading Occupational Categories by Overall Usage: Claude.ai vs 1P API. After determining usage shares for tasks, we calculate the share of traffic from Claude.ai and 1P API customers assigned to top-level occupations in the O*NET taxonomy. For example, this figure shows that 44% of API traffic in our sample was matched to a task characteristic of a Computer and Mathematical occupation.](https://www-cdn.anthropic.com/images/4zrzovbb/website/230d1026eecd5b749f2a3679bdb9142b1d6a61c6-5938x3944.png)
 
-**Figure 3.3:** **Leading Occupational Categories by Overall Usage: Claude.ai vs 1P API.** After determining usage shares for tasks, we calculate the share of traffic from Claude.ai and 1P API customers assigned to top-level occupations in the O\*NET taxonomy. For example, this figure shows that 44% of API traffic in our sample was matched to a task characteristic of a Computer and Mathematical occupation.
+**Leading Occupational Categories by Overall Usage: Claude.ai vs 1P API.** After determining usage shares for tasks, we calculate the share of traffic from Claude.ai and 1P API customers assigned to top-level occupations in the O\*NET taxonomy. For example, this figure shows that 44% of API traffic in our sample was matched to a task characteristic of a Computer and Mathematical occupation.
 
 ### Occupational segmentation vs. task specialization
 
@@ -381,7 +371,7 @@ Tasks like code generation dominate because they hit a sweet spot where model ca
 
 ![Figure 3.4: Visualizing concentration of usage among a small number of tasks: Claude.ai versus 1P API. The left panel of this chart calculates Lorenz curves across O*NET tasks for both our Claude.ai and 1P API samples. The highlighted points on the curves indicate how much overall usage the bottom 80% of tasks account for. The right panel plots task rank against task usage share for tasks representing at least 0.1% of overall usage in our samples. Zipf’s law, in which the coefficient of the best-fit-line is equal to -1, occurs with some regularity in various economic settings.](https://www-cdn.anthropic.com/images/4zrzovbb/website/b6addfe01f1b9fc2a2a79460ce0d64deedcce7b5-7931x3812.png)
 
-**Figure 3.4: Visualizing concentration of usage among a small number of tasks: Claude.ai versus 1P API.** The left panel of this chart calculates Lorenz curves across O\*NET tasks for both our Claude.ai and 1P API samples. The highlighted points on the curves indicate how much overall usage the bottom 80% of tasks account for. The right panel plots task rank against task usage share for tasks representing at least 0.1% of overall usage in our samples. Zipf’s law, in which the coefficient of the best-fit-line is equal to -1, occurs with some regularity in various economic settings.
+**Visualizing concentration of usage among a small number of tasks: Claude.ai versus 1P API.** The left panel of this chart calculates Lorenz curves across O\*NET tasks for both our Claude.ai and 1P API samples. The highlighted points on the curves indicate how much overall usage the bottom 80% of tasks account for. The right panel plots task rank against task usage share for tasks representing at least 0.1% of overall usage in our samples. Zipf’s law, in which the coefficient of the best-fit-line is equal to -1, occurs with some regularity in various economic settings.
 
 ### Automation vs. augmentation among API transcripts
 
@@ -395,7 +385,7 @@ This pattern echoes how economically consequential technologies become transform
 
 ![Figure 3.5: Automation versus augmentation collaboration modes across O*NET tasks: Claude.ai versus 1P API. This figure reports the share of Claude.ai conversations and 1P API transcripts that exhibit automation or augmentation patterns of usage for each O*NET task. Automation and augmentation modes are defined in Chapter 1. When for privacy-preserving reasons we do not observe usage shares for a particular collaboration mode we give that category a value of 0% in this figure. Automation dominance is defined as a task having a greater observed share of automation usage. Likewise for augmentation dominance.](https://www-cdn.anthropic.com/images/4zrzovbb/website/21d94606a95e865db62e9a367a4900f8e1faa077-7936x3812.png)
 
-**Figure 3.5: Automation versus augmentation collaboration modes across O\*NET tasks: Claude.ai versus 1P API.** This figure reports the share of Claude.ai conversations and 1P API transcripts that exhibit automation or augmentation patterns of usage for each O\*NET task. Automation and augmentation modes are defined in Chapter 1. When for privacy-preserving reasons we do not observe usage shares for a particular collaboration mode we give that category a value of 0% in this figure. Automation dominance is defined as a task having a greater observed share of automation usage. Likewise for augmentation dominance.
+**Automation versus augmentation collaboration modes across O\*NET tasks: Claude.ai versus 1P API.** This figure reports the share of Claude.ai conversations and 1P API transcripts that exhibit automation or augmentation patterns of usage for each O\*NET task. Automation and augmentation modes are defined in Chapter 1. When for privacy-preserving reasons we do not observe usage shares for a particular collaboration mode we give that category a value of 0% in this figure. Automation dominance is defined as a task having a greater observed share of automation usage. Likewise for augmentation dominance.
 
 ### The more Claude does, the more Claude needs to know
 
@@ -413,11 +403,11 @@ There is considerable variation across tasks in how long Claude’s API outputs 
 
 ![Table 3.1: Example O*NET tasks with shorter and longer output lengths with Claude’s summaries. For each O*NET task matched to 1P API traffic we calculate an output token index: Dividing the average output length across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. Claude was prompted to identify tasks at the 10th, 50th, and 90th percentile of the output token index distribution with the minimal guidance: “The columns should be ‘Example tasks’, ‘Index Value’, ‘Summary’ where you provide a summary”. Claude associated output length with task complexity.](https://www-cdn.anthropic.com/images/4zrzovbb/website/11499cb8ed2f64f50d412964b96503b875523b16-2200x1236.png)
 
-**Table 3.1: Example O\*NET tasks with shorter and longer output lengths with Claude’s summaries.** For each O\*NET task matched to 1P API traffic we calculate an output token index: Dividing the average output length across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. Claude was prompted to identify tasks at the 10th, 50th, and 90th percentile of the output token index distribution with the minimal guidance: “The columns should be ‘Example tasks’, ‘Index Value’, ‘Summary’ where you provide a summary”. Claude associated output length with task complexity.
+**Example O\*NET tasks with shorter and longer output lengths with Claude’s summaries.** For each O\*NET task matched to 1P API traffic we calculate an output token index: Dividing the average output length across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. Claude was prompted to identify tasks at the 10th, 50th, and 90th percentile of the output token index distribution with the minimal guidance: “The columns should be ‘Example tasks’, ‘Index Value’, ‘Summary’ where you provide a summary”. Claude associated output length with task complexity.
 
 ![Figure 3.6: Average output token index across O*NET tasks among leading occupational categories. For each O*NET task matched to 1P API traffic we calculate an output token index: Dividing the average output length across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. We then average across tasks for a given top-level occupational categories in the O*NET taxonomy for top use occupational groups. ‘All Other’ combines remaining occupational groups into a single category.](https://www-cdn.anthropic.com/images/4zrzovbb/website/a81014f4f8a3fea424da0531ceb34e9ae4061429-5953x3943.png)
 
-**Figure 3.6: Average output token index across O\*NET tasks among leading occupational categories.** For each O\*NET task matched to 1P API traffic we calculate an output token index: Dividing the average output length across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. We then average across tasks for a given top-level occupational categories in the O\*NET taxonomy for top use occupational groups. ‘All Other’ combines remaining occupational groups into a single category.
+**Average output token index across O\*NET tasks among leading occupational categories.** For each O\*NET task matched to 1P API traffic we calculate an output token index: Dividing the average output length across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. We then average across tasks for a given top-level occupational categories in the O\*NET taxonomy for top use occupational groups. ‘All Other’ combines remaining occupational groups into a single category.
 
 What stands out from Claude’s assessment of tasks is that longer output tasks tend to represent increasingly complex uses. Of course, output length does not capture all dimensions of task complexity, but it appears to be a sensible, easily measured proxy.
 
@@ -427,7 +417,7 @@ Looking across tasks, we see a very stable relationship between how much context
 
 ![Figure 3.7: Scatter plot of output token index and input token index across O*NET Tasks. For each O*NET task matched to 1P API traffic we calculate an output token index: Dividing the average output length across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. The input token index is constructed similarly. The elasticity of 0.38 implies that each 1% increase in the input token index is associated with a 0.38% increase in the output token index.](https://www-cdn.anthropic.com/images/4zrzovbb/website/fa03325a341f62e2119fad5f56faa682f964e1a0-5929x3939.png)
 
-**Figure 3.7: Scatter plot of output token index and input token index across O\*NET Tasks.** For each O\*NET task matched to 1P API traffic we calculate an output token index: Dividing the average output length across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. The input token index is constructed similarly. The elasticity of 0.38 implies that each 1% increase in the input token index is associated with a 0.38% increase in the output token index.
+**Scatter plot of output token index and input token index across O\*NET Tasks.** For each O\*NET task matched to 1P API traffic we calculate an output token index: Dividing the average output length across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. The input token index is constructed similarly. The elasticity of 0.38 implies that each 1% increase in the input token index is associated with a 0.38% increase in the output token index.
 
 The upshot is that deploying AI for complex tasks might be constrained more by access to information than on underlying model capabilities. Companies that can't effectively gather and organize contextual data may struggle with sophisticated AI deployment, creating a potential bottleneck for broader enterprise adoption—particularly for occupations and in industries where tacit, diffuse knowledge is crucial to business operations.
 
@@ -441,7 +431,7 @@ The positive correlation between cost and usage suggests that cost plays an imma
 
 ![Figure 3.8: API cost per task and usage share across occupational categories. For each O*NET task matched to 1P API traffic we calculate an API cost index: Dividing the average API cost across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. This figure plots the average API cost index across tasks in a given occupational category against usage share. The estimated elasticity of 3 implies that each 1% increase in the average cost of a task is associated with a 3% increase in prevalence in our sample.](https://www-cdn.anthropic.com/images/4zrzovbb/website/cf5aac6a42b702f06fcd081b33c28c4f25aa0dc0-5932x3941.png)
 
-**Figure 3.8: API cost per task and usage share across occupational categories.** For each O\*NET task matched to 1P API traffic we calculate an API cost index: Dividing the average API cost across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. This figure plots the average API cost index across tasks in a given occupational category against usage share. The estimated elasticity of 3 implies that each 1% increase in the average cost of a task is associated with a 3% increase in prevalence in our sample.
+**API cost per task and usage share across occupational categories.** For each O\*NET task matched to 1P API traffic we calculate an API cost index: Dividing the average API cost across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. This figure plots the average API cost index across tasks in a given occupational category against usage share. The estimated elasticity of 3 implies that each 1% increase in the average cost of a task is associated with a 3% increase in prevalence in our sample.
 
 While this positive correlation holds overall, we next ask whether demand for Claude capabilities is lower among otherwise similar but costlier tasks. With the important caveat that this should be viewed as a preliminary exploration, this is what we find.
 
@@ -451,7 +441,7 @@ Other factors, beyond the cost of using Claude for particular tasks, appear to m
 
 ![Figure 3.9: Scatter plot of API cost per task and usage share controlling for task characteristics. For each O*NET task matched to 1P API traffic we calculate an API cost index: Dividing the average API cost across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. We then restrict the sample to tasks appearing in both our 1P API and Claude.ai samples. This partial scatter plot controls for the following task-level characteristics: fixed effects for occupational category, collaboration mode share from Claude.ai, and indicators for whether a given collaboration mode was censored for privacy-preserving reasons in the Claude.ai sample. The estimated elasticity of -0.29 implies that each 1% increase in the API cost index for a given task is associated with a 0.29% decrease in prevalence in our sample, after controlling for task characteristics.](https://www-cdn.anthropic.com/images/4zrzovbb/website/b5e7fc2931519b78a227d36c6e751466732daacf-6937x4941.png)
 
-**Figure 3.9: Scatter plot of API cost per task and usage share controlling for task characteristics.** For each O\*NET task matched to 1P API traffic we calculate an API cost index: Dividing the average API cost across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. We then restrict the sample to tasks appearing in both our 1P API and Claude.ai samples. This partial scatter plot controls for the following task-level characteristics: fixed effects for occupational category, collaboration mode share from Claude.ai, and indicators for whether a given collaboration mode was censored for privacy-preserving reasons in the Claude.ai sample. The estimated elasticity of -0.29 implies that each 1% increase in the API cost index for a given task is associated with a 0.29% decrease in prevalence in our sample, after controlling for task characteristics.
+**Scatter plot of API cost per task and usage share controlling for task characteristics.** For each O\*NET task matched to 1P API traffic we calculate an API cost index: Dividing the average API cost across transcripts associated with that task by the average (unweighted) value across all tasks in our sample. We then restrict the sample to tasks appearing in both our 1P API and Claude.ai samples. This partial scatter plot controls for the following task-level characteristics: fixed effects for occupational category, collaboration mode share from Claude.ai, and indicators for whether a given collaboration mode was censored for privacy-preserving reasons in the Claude.ai sample. The estimated elasticity of -0.29 implies that each 1% increase in the API cost index for a given task is associated with a 0.29% decrease in prevalence in our sample, after controlling for task characteristics.
 
 ### Conclusion
 
@@ -509,9 +499,9 @@ History shows that the patterns of technological adoption aren’t fixed: they s
 
 1. Brynjolfsson, Chandar, and Chen 2025, *Canaries in the Coal Mine? Six Facts about the RecentEmployment Effects of Artificial Intelligence* documents clear evidence that entry-level workers with high AI exposure have had relatively worse employment prospects since late 2022. Setting aside questions of causality, the straightforward interpretation is that this is due to AI substituting for work previously done by early-career workers. An alternative interpretation is presented by Gans 2025, *If AI and workers were strong complements, what would we see?*: That relatively faster employment growth for experienced workers reflects AI making such workers more productive and thus in high demand. Whether AI compliments or substitutes work is perhaps the most important question that we hope our data will help answer.
 
-## Authors and Acknowledgments
+## Authors & acknowledgements
 
-#### **Authors**
+### Contributors
 
 Ruth Appel\*, Peter McCrory\*, Alex Tamkin\*
 
@@ -519,11 +509,13 @@ Miles McCain, Tyler Neylon, Michael Stern
 
 *\*Lead authors. Contributed equally to this report*
 
-#### **Acknowledgements**
+### Acknowledgements
 
 Helpful comments, discussions, and other assistance: Alex Sanchez, Andrew Ho, Ankur Rathi, Asa Kittner, Ben Merkel, Bianca Lindner, Biran Shah, Carl De Torres, Cecilia Callas, Daisy McGregor, Dario Amodei, Deep Ganguli, Dexter Callender III, Esin Durmus, Evan Frondorf, Heather Whitney, Jack Clark, Jakob Kerr, Janel Thamkul, Jared Kaplan, Jared Mueller, Jennifer Martinez, Kaileen Kelly, Kamya Jagadish, Katie Streu, Keir Bradwell, Kelsey Nanan, Kevin Troy, Kim O'Rourke, Kunal Handa, Landon Goldberg, Linsey Fields, Lisa Cohen, Lisa Rager, Maria Gonzalez, Mengyi Xu, Michael Sellitto, Mike Schiraldi, Olivia Chen, Paola Renteria, Rebecca Jacobs, Rebecca Lee, Ronan Davy, Ryan Donegan, Saffron Huang, Sarah Heck, Stuart Ritchie, Sylvie Carr, Tim Belonax, Tina Chin, Zoe Richards
 
-#### **Citation**
+### Citation
+
+Copy
 
 ```
 @online{appelmccrorytamkin2025geoapi,
@@ -540,25 +532,3 @@ url = {www.anthropic.com/research/anthropic-economic-index-september-2025-report
 
 }
 ```
-
-Copy
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

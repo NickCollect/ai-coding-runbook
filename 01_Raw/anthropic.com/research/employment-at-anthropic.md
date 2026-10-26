@@ -1,31 +1,21 @@
 ---
 source_url: https://www.anthropic.com/research/employment-at-anthropic
-fetched_at: 2026-10-19T05:32:50.772835+00:00
+fetched_at: 2026-10-26T05:39:57.661932+00:00
 title: "How employment is changing at Anthropic \\ Anthropic"
 ---
-
-Economics
-
-# How employment is changing at Anthropic
-
-Oct 16, 2026
-
-[Read in PDF](https://www-cdn.anthropic.com/72628f1863c53432195db83279252dfd2cb53158/Employment at Anthropic.pdf)
-
-![How employment is changing at Anthropic](https://www-cdn.anthropic.com/images/4zrzovbb/website/e6c18d30f931ae76d4b600558f5a11377306f1d9-2000x1125.jpg)
 
 *Nathan Wilmers, Regina Catipon, Maxim Massenkoff, Peter McCrory*
 
 How has AI restructured work and employment at Anthropic? As a company at the frontier of AI adoption, Anthropic could be a leading indicator of how AI will shift work organization, hiring, and labor demand across the economy.
 
-## Key findings
+### Key findings
 
 - Anthropic has been hiring for a smaller share of junior technical positions. This occurred as hours worked by AI agents relative to employees rapidly expanded. By August interactive AI agent hours outnumbered employees’ six to one.
 - As AI agents diffused through the company, Anthropic began producing more code per person, closing more sales per rep, and processing more contracts. Following the same employee over time, output rose as they adopted new AI tools.
 - This acceleration makes human attention the bottleneck for agent output. Even among non-technical employees, reading all the output of their Claude agents would take half their work week. In response, employees turn to “meta-work,” of building visibility tools and monitoring agent pipelines.
 - Changes in work organization are reflected in shifting priorities among hiring managers, who increasingly emphasize autonomy and judgment, relative to technical domain expertise and implementation.
 
-## Introduction
+### Introduction
 
 What transformations of work and employment can we expect under increasingly powerful AI? Anthropic is worth studying because it has thoroughly molded its workflows around AI. Agents flit through Slack chats and schedule meetings. They autonomously fix bugs and collectively tackle huge engineering projects. Agent hours worked outnumber human hours 6 to 1. Changes happening at Anthropic now give advanced signals about a possible future of work and employment.
 
@@ -35,7 +25,7 @@ We find that even as the company grows, relative hiring in junior technical posi
 
 Anthropic has responded to these changes by setting up an early warning system to track jobs at risk of disruption, and as jobs evolve the company has prioritized internal redeployments. These actions, taken at the frontier of both AI development and workplace change, show how specific organizational commitments can shape the impact of AI on employment. But they also raise difficult questions about exactly what those commitments should be.
 
-## Labor demand at the frontier
+### Labor demand at the frontier
 
 Anthropic has expanded rapidly. But it has hired less per dollar of revenue than an earlier generation of large tech companies. At five years old, Anthropic takes in between 2–4 times as much revenue per employee as Meta and Google as they crested in their own rapid growth.[1](#footnote-1)
 
@@ -47,7 +37,7 @@ The shift in employment shares is striking. Figure 1 shows that the share of jun
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/e5dc89d3bceb2fcb9509ec35aa22f11131a9d8eb-1920x1080.png)
 
-**Figure 1: Decline of entry-level technical hiring at Anthropic.**
+**Decline of entry-level technical hiring at Anthropic.**
 
 At the same time, the overall employment share of technical departments within Anthropic has fallen, from 61% to 56% in the last year. As the company expands, technical hiring has continued growing in absolute terms, but intensive hiring in sales, finance, and recruiting has outpaced it. Part of this shift is the natural expansion of business functions as the company scales. Part could reflect coding tools increasingly allowing non-technical employees to make software themselves. For example, a sales representative designed a custom dashboard and pipeline tailored to their work: “a build like this was out of my wheelhouse, especially with the UI, connecting all the tools, the MCPs. But I built this probably in three to four hours, just iterating on it.” Coding-focused AI agent sessions for non-technical employees (identified as those with no code commits at baseline, excluding new hires) leapt from 2 per month in August 2025 to 90 in May 2026.
 
@@ -59,19 +49,19 @@ Even clerical work tightly connected to in-person interaction has grown slowly. 
 
 These changes have already involved reallocation: employees working at the company for at least a year were 50% more likely to move across departments each month in 2026 than they were in 2025. Whole teams have also been reallocated as they handed off their work to agents. Consider one product design team, which wrote content like the greetings on Claude.ai: “Hello night owl;” “Coffee and Claude time?” In spring 2026, the team developed a context graph that effectively guided agents to write compelling product content. This “scaled the team out,” its manager explained, but also raised the question of what was left for human writers. The team then rotated into agent prompting and began writing model evals and prompts for Claude. “Writers who used language to drive human behavior are now using it to drive Claude behavior.”
 
-## Is AI driving productivity increases at Anthropic?
+### Is AI driving productivity increases at Anthropic?
 
 Are these shifts attributable to AI? At Anthropic, humans are a thin layer atop a growing contingent of AI agents. Based on agent session telemetry, in March 2026, the sum of autonomous and interactive agent work hours leapt past human work hours for the first time. Part of this is fleets of agents conducting industrial-scale software engineering, filling in myriad routine tests and checks, conducting maintenance on a growing mass of infrastructure code, and driving concerted campaigns to translate massive codebases. But even narrowing in on the agents deployed by individual employees, as in Figure 2, by August the agents worked 6 times as many hours as their human handlers.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/042b829f8c8850b596dfb6feaa323d1e911b21bb-1920x1080.png)
 
-**Figure 2: Agent hours overtake human hours.** Note: We limit to employee-directed interactive sessions and pool subagents. Working time concept is agent runtime, including inference and active tool use, but excluding any wait longer than 30 minutes. Human work hours are calculated as headcount and assumed 40 hours per week.
+**Agent hours overtake human hours.** Note: We limit to employee-directed interactive sessions and pool subagents. Working time concept is agent runtime, including inference and active tool use, but excluding any wait longer than 30 minutes. Human work hours are calculated as headcount and assumed 40 hours per week.
 
 Anthropic is a software producer, and the vast bulk of tokens flowing through these agents is spent producing software code. Dashboards monitor fleets of agents operating across the company. But personal assistant agents also monitor employee calendars and messages, scheduling, sending to-do lists accumulated from incoming messages, and automatically briefing employees on the people and purpose of their upcoming meetings. Tokens touch a growing range of everyday work tasks.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1865c3a561e790824826f29a27c771ce62c67eaf-1920x1252.png)
 
-**Figure 3: Productivity boom across functions.** Note: Loess smoother fit across underlying indexed output data.
+**Productivity boom across functions.** Note: Loess smoother fit across underlying indexed output data.
 
 What do all of these tokens amount to? Figure 3 plots output over time for a range of job functions with measurable output. Consistent with prior reports [surveying Anthropic engineers](https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic) and describing [automation of model training and research](https://www.anthropic.com/institute/recursive-self-improvement), code commits per engineer have risen the fastest, coming in at 5x their velocity as six months ago. Data scientists are also querying the growing mass of Anthropic data more, asking Claude agents to get real-time metrics to dashboards and decisionmakers. But Figure 3 shows that even non-technical employees saw output rise as coding agents diffused: lawyers processed more contracts; accounts payable ushered through invoices; salespeople closed more deals.
 
@@ -83,7 +73,7 @@ Figure 4 also looks at what happens after an engineer adopts their first fully a
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/15abba062e588ec86e0f9466f16bccbc701444e3-1920x1641.png)
 
-**Figure 4: Productivity increases estimated within-person from staggered AI adoption.** Note: Coefficients compare coding agent adopters to non-adopters with person and calendar-month two-way fixed effects. Treatment timing is based on the person’s first month with at least five agentic sessions. Bars are 95% confidence intervals from standard errors clustered on person. The quality panel compares code written directly by a person to code written by the same person’s coding agent. Quality proxies are the share of lines deleted for any reason within 90 days; the share deleted by a bug-fix specifically; whether the whole commit is explicitly reverted; adding a lint-suppression comment; adding a need fixing note; and marking a test to be skipped, retried, or allowed to fail.
+**Productivity increases estimated within-person from staggered AI adoption.** Note: Coefficients compare coding agent adopters to non-adopters with person and calendar-month two-way fixed effects. Treatment timing is based on the person’s first month with at least five agentic sessions. Bars are 95% confidence intervals from standard errors clustered on person. The quality panel compares code written directly by a person to code written by the same person’s coding agent. Quality proxies are the share of lines deleted for any reason within 90 days; the share deleted by a bug-fix specifically; whether the whole commit is explicitly reverted; adding a lint-suppression comment; adding a need fixing note; and marking a test to be skipped, retried, or allowed to fail.
 
 Do these patterns go beyond coding, into a broader transformation of knowledge work? Anthropic sales representatives steadily adopted AI agents starting last September. Figure 4 shows that after sales representatives adopt agents, they close deals with more clients. Part of this pattern could be driven by representatives with more sales opportunities selecting into automation. But it could also reflect automation of logging and routine communication. One account executive explained that Claude automations handled email drafting and customer management software integrations, replacing around 20% of their prior work tasks. Another noted that similar automations freed them up to focus on face-to-face time, letting them talk to 30% more of their customers than was previously possible: “anytime you do anything a second time, you're kind of like, okay, how can I use Claude to make it so that I don't have to do it a third time?”
 
@@ -93,9 +83,9 @@ All of this suggests that as AI capabilities improve, it impacts a wide range of
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/f68fdd1f18d36b4e45e17f0aaaa49541bade7dcd-1920x1331.png)
 
-**Figure 5: Junior employment growth by Claude usage complexity.** Notes: Plot at job level. Growth compares January 2026 headcount to July 2026. AI complexity is based on an automated coder of agent logs (prior to the employment decline, October to December 2025 ) and percentile transformed. Dots are scaled by January employment in the job; regression line is fit across weighted points.
+**Junior employment growth by Claude usage complexity.** Notes: Plot at job level. Growth compares January 2026 headcount to July 2026. AI complexity is based on an automated coder of agent logs (prior to the employment decline, October to December 2025 ) and percentile transformed. Dots are scaled by January employment in the job; regression line is fit across weighted points.
 
-## Bottlenecks and process: new and old tasks in an AI-intensive workplace
+### Bottlenecks and process: new and old tasks in an AI-intensive workplace
 
 Heavy AI adoption reshapes more than employment and productivity. It also drives continual changes in work processes, generating new tasks and shifting employees’ perceptions of their workplace. One employee described this as the “eternal pressure at Anthropic to move as fast as possible and use Claude for everything” and another that “things we expect in a week are things that would take three months elsewhere.” An internal employee survey asked whether work processes at Anthropic made respondents as productive as possible: 44% of employees agreed in late 2024; 58% by November 2025 (in April 2026, 75% answered yes, but the question weakened by dropping “as possible”). As of August, [employees at Anthropic expected](https://www.anthropic.com/research/ai-expectations-gap) that AI will be able to do 75% of their work by 2030, compared to 28% for other Americans.
 
@@ -113,7 +103,7 @@ How much time exactly would be needed to read all of Claude’s output from inte
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1eb1610d350eeae63bf6300c5a17b66a42667da6-1920x1200.png)
 
-**Figure 6: Reading Claude as a full-time job.** Note: Hours estimated by converting output tokens to words, assuming 0.75 words per token and 250 words read per minute.
+**Reading Claude as a full-time job.** Note: Hours estimated by converting output tokens to words, assuming 0.75 words per token and 250 words read per minute.
 
 One solution to this deluge is rising automation. But this requires work of a different kind. Written standing instructions for agents grew from a few hundred in July 2025 to 8,500 a year later. One engineer set up an agent chief of staff to triage agent requests. Another wrote a performance review for their Claude team: “Hey, let’s talk about what is and is not working about our communication style.” Recruiters built integrated dashboards with agents surfacing problems and initiating actions. A lawyer shifted their attention from reviewing legal questions to doing “SEO for legal advice, you need to write frameworks that [clients’] agents discover.”
 
@@ -121,7 +111,7 @@ Figure 7 shows that this kind of meta-work leapt from 10% of the average employe
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/94aede8c44a52ad7ecf8efdc9cb72156d72b7c6d-1920x1187.png)
 
-**Figure 7: Becoming managers of Claudes.** Note: Meta-work estimates are based on an automated coder assessing a sample of 2,000 1-line chat summaries according to whether they focus on building Claude skills, plans and reviews for other agents, dashboards and monitors for agent pipelines, and documenting how work is done, in contrast to the actual work itself.
+**Becoming managers of Claudes.** Note: Meta-work estimates are based on an automated coder assessing a sample of 2,000 1-line chat summaries according to whether they focus on building Claude skills, plans and reviews for other agents, dashboards and monitors for agent pipelines, and documenting how work is done, in contrast to the actual work itself.
 
 Despite increases in agent reliability and these significant investments in tooling to supervise them, human trust and accountability remains critical. One employee explained that, increasingly, chasing down bugs “uncovers these organizational or systemic or tech debt things that actually require some amount of human convening and decision-making and governance to solve.” In interview after interview, employees described face-to-face coordination as indispensable. Based on calendar data, the median employee spends 20% more time in meetings than a year ago. Part of this reflects the growth of the company, and a shift toward meeting-intensive non-technical roles. But even among employees in technical individual contributor roles, meeting time is up 16% over the past year. Big-picture strategic questions touch a broad range of leveraged positions, and typically require debate and engagement with others. A break from managing the agents typically looks like jumping into a meeting.
 
@@ -131,7 +121,7 @@ Consider too the Slack channels that provide both the front page and backchannel
 
 [](https://cdn.sanity.io/files/4zrzovbb/website/8f9591116db7ee91487f770222ddc524d551d867.mp4)
 
-**Figure 8: Agents come to the communication network.** Note: Blue dots are employees; orange dots are agent threads. Ties are interaction among humans or agents in the same thread.
+**Agents come to the communication network.** Note: Blue dots are employees; orange dots are agent threads. Ties are interaction among humans or agents in the same thread.
 
 Agents appear disproportionately in dedicated channels for Claude-human interactions, rather than messaging a lot in incumbent human channels. The underlying structure and density of human communication changes little. Agents did not replace human interaction, but rather added to it: human threads in this department sustained the same number of human responses, while additionally layering on agent responses. Agents become teams for a single employee, rather than nodes with high connectivity to many employees at once.
 
@@ -141,7 +131,7 @@ Who will thrive in a workplace like this? Shifts in the content of work at Anthr
 
 Deeper changes in assessment are also visible. Among interviews for technical candidates, the single biggest increases were in comments on applicants’ autonomy and judgment. Discussion of domain expertise shrank as a share of overall assessment. As one manager explained, “I expect models to continue to be jagged, so for my team I want them to be fungible across domains.” Similarly, for non-technical candidates, customer and mission orientation increased, while discussion of execution skills fell. Increasingly, hiring managers assess applicants based on their judgment and commitment, rather than the domain-specific skills and execution automated by AI tools.
 
-## What employers can do
+### What employers can do
 
 The deep adoption of AI at Anthropic makes it a useful case. As AI diffuses and improves, the organization of work could shift as it has in prior waves of technological change. The railroads gave us the managerial corporation, steam power allowed factories, and personal computers delivered the startup. What new organizations will tool-using, reasoning LLMs require, and what will be our role in them? One possibility is single-person startups, each with a human founder steering swarms of agents to rake in billions in revenue. Another is companies built by AI genius CEOs employing human agents only to wield pipettes and testify before Congress.
 
@@ -167,7 +157,9 @@ From what we see in Anthropic, both novel and persistently human tasks remain al
 
 None of these actions will prevent powerful AI from disrupting jobs. And indeed none directly address the slowdown in junior hires documented in this report. Employment protections for incumbents will not benefit those not hired to begin with. Private action on the part of employers must come alongside farsighted government policy around [retraining](https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs) and income support. Such policy should be guided by a clear picture of the scale of workplace transformation that AI can bring.
 
-## Suggested citation
+### Suggested citation
+
+Copy
 
 ```
 @techreport{wilmers2026employment,
@@ -189,13 +181,7 @@ url = {https://www.anthropic.com/research/employment-at-anthropic}
 }
 ```
 
-Copy
-
-## Acknowledgements
-
-We are grateful to the Anthropic employees who gave time for interviews about how their work has changed. For very helpful comments and assistance, we thank Kate Astbury, Shehzad Bashir, Zoe Blumenfeld, Scott Booth, Henry Brill, Yena Cho, Henry de Valence, Adam Farina, Johannes Hermle, Zoe Hitzig, Hasnain Lakhani, Eva Lyubich, Kerry Persen, Kristina Pham, Sarah Pollack, Hannah Pritchett, Georg Rilinger, Santi Ruiz, Szymon Sacher, Florian Scholz, Meg Tong, Monika Tuchowska, Helen Wang, Kim Withee, Charles Yang, and Jack Clark.
-
-## Works cited
+### Works cited
 
 Acemoglu, Daron, and Pascual Restrepo. 2019. “Automation and New Tasks: How Technology Displaces and Reinstates Labor.” Journal of Economic Perspectives 33 (2): 3–30. <https://doi.org/10.1257/jep.33.2.3>
 
@@ -217,26 +203,12 @@ Kim, Hyunjin, and Rembrand Koning. 2026. “AI-Native Firms.” Harvard Business
 
 Roodman, David, and Maxim Massenkoff. 2026. “An Evidence Review of Subsidized Job Training.” The Anthropic Institute Working Paper 2026-01. <https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs>
 
-#### Footnotes
+## Footnotes
 
-1. Anthropic estimates come from internal financial and headcount records for the twelve months to April 2026 (approximately five years after founding). Google and Meta employment and revenue figures based on Form 10-K filings at 5 years after founding (2003 and 2009, respectively). All figures are deflated to 2025 dollars.
+01Anthropic estimates come from internal financial and headcount records for the twelve months to April 2026 (approximately five years after founding). Google and Meta employment and revenue figures based on Form 10-K filings at 5 years after founding (2003 and 2009, respectively). All figures are deflated to 2025 dollars.
 
-## Related content
+## Authors & acknowledgements
 
-### Designing more efficient quantum circuits with Claude
+### Acknowledgements
 
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
+We are grateful to the Anthropic employees who gave time for interviews about how their work has changed. For very helpful comments and assistance, we thank Kate Astbury, Shehzad Bashir, Zoe Blumenfeld, Scott Booth, Henry Brill, Yena Cho, Henry de Valence, Adam Farina, Johannes Hermle, Zoe Hitzig, , Hasnain Lakhani, Eva Lyubich, Kerry Persen, Kristina Pham, Sarah Pollack, Hannah Pritchett, Georg Rilinger, Santi Ruiz, Szymon Sacher, Florian Scholz, Meg Tong, Monika Tuchowska, Helen Wang, Kim Withee, Charles Yang, and Jack Clark.

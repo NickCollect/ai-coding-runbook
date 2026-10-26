@@ -1,18 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/project-swap
-fetched_at: 2026-10-19T05:32:52.896999+00:00
+fetched_at: 2026-10-26T05:39:59.978848+00:00
 title: "Project Swap: What happens when agents trade for us? \\ Anthropic"
 ---
 
-Economics
-
-# Project Swap: What happens when agents trade for us?
-
-Sep 24, 2026
-
-[Read in PDF](https://www-cdn.anthropic.com/3818cf6119b88f9714d995f6549fa8aac0bd5ab5/Project-Swap.pdf)
-
-![Two-panel illustration: on a dark background, five colored bars resembling books on a shelf; on dotted paper, two columns of dots joined by crisscrossing colored lines, like a matching diagram pairing people with books.](https://www-cdn.anthropic.com/images/4zrzovbb/website/81ec096e35d1d259eb3f47aef4edd2c25f8e3c5e-1920x1080.jpg)
+### Chapter 01: Summary
 
 ## Summary
 
@@ -44,9 +36,9 @@ But a central market also needs someone to run it—a “clearinghouse,” in ec
 
 Here, AI agents could enable new decentralized marketplaces by reducing the effort it takes to find counterparties and negotiate. We already know this kind of help is valuable, because people pay for it. There are human agents for hire who do exactly this: real estate agents, headhunters, even matchmakers. But because search and negotiation take up hours of a person’s scarce attention, they are expensive, employed only by those who can afford them. In contrast, an AI agent’s attention is far less scarce. If it bargains well too, more people could have what homesellers and executives have—an agent working tirelessly on their behalf.
 
-![Diagram of the experiment's three stages: participants brief their agents about the book they brought and what they hope to read; agents trade either through a centralized clearinghouse or by negotiating directly on a decentralized trading floor; each agent then hands its person the book it traded for.](https://www-cdn.anthropic.com/images/4zrzovbb/website/d2a8ed9bb12fe7546800f778523c23d0ad504f42-1888x2000.webp)
+![Diagram of the experiment's three stages: participants brief their agents about the book they brought and what they hope to read; agents trade either through a centralized clearinghouse or by negotiating directly on a decentralized trading floor; each agent then hands its person the book it traded for.](https://www-cdn.anthropic.com/images/4zrzovbb/website/d2a8ed9bb12fe7546800f778523c23d0ad504f42-1888x2000.webp?fm=webp)
 
-**Figure 1: An illustration of the experiment design.** Participants tell their agent about what they want to read. The agents take those preferences onto a decentralized trading floor to swap books with other agents. Participants take home the book their agent acquired for them. We simulate centralized market outcomes for comparison.
+**An illustration of the experiment design.** Participants tell their agent about what they want to read. The agents take those preferences onto a decentralized trading floor to swap books with other agents. Participants take home the book their agent acquired for them. We simulate centralized market outcomes for comparison.
 
 ## How the experiment worked
 
@@ -66,7 +58,7 @@ Finally, three weeks after the books were handed out, participants took an endli
 
 [](https://cdn.sanity.io/files/4zrzovbb/website/df3fe8e8cc439cf83773f380f80f0c259a542dbc.webm)
 
-**Figure 2: An excerpt from one run.** Messages on the live London floor from the first five minutes of trading. Participant names have been changed for anonymity.
+**An excerpt from one run.** Messages on the live London floor from the first five minutes of trading. Participant names have been changed for anonymity.
 
 A live event gives us only one run of how things could have gone. To study which outcomes were artifacts of chance rather than stable features of the setup, we reran the market many more times, changing just one variable at a time.
 
@@ -82,7 +74,7 @@ Claude’s rankings, based on the short intake chat, were relatively well correl
 
 ![Scatter plot comparing where Claude's ranking placed each book against where the participant's own ranking placed it. The fitted line has a slope of 0.30 (95% interval 0.24 to 0.35), well below the perfect-agreement diagonal, showing Claude's rankings only partially matched participants' true preferences.](https://www-cdn.anthropic.com/images/4zrzovbb/website/73277a71d4d5e7b0e753fb6a06d8e6f1004148e2-1920x1062.png)
 
-**Figure 3: Claude’s ranking versus participants’ rankings.** Normalized rank in Claude’s ranking is on the x-axis. The participant’s own ranking is on the y-axis. Pooled across 188 participants who submitted a ranking.
+**Claude’s ranking versus participants’ rankings.** Normalized rank in Claude’s ranking is on the x-axis. The participant’s own ranking is on the y-axis. Pooled across 188 participants who submitted a ranking.
 
 To put the 61% in perspective, we compared Claude’s guesses against some other ways of guessing preferences. Ranking books simply by how popular they are, using [Open Library](https://openlibrary.org/)’s want-to-read counts, agreed with participants on about 53% of the book pairs. Another simple method to compare to is collaborative filtering—constructing a ranking from [public](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023) [datasets](https://github.com/zygmuntz/goodbooks-10k) of the shape “if a person liked X, they also liked Y.” We took the books a person listed on their intake, looked up which other books tended to be rated by the same readers, and ranked the person’s pool by how strongly each book co-occurred with their listed favorites. That got to about 55% pairwise agreement.
 
@@ -102,7 +94,7 @@ On average, people in our marketplace ended up at 0.55 on their own rankings, ro
 
 ![Waterfall chart decomposing the market's shortfall. In the decentralized market, scores fall from a best possible 0.89 mainly due to Claude's representation of preferences (−0.29), with agent-to-agent bargaining costing only −0.05, leaving 0.55. Under a centralized trading rule, scores fall from 0.82 to 0.60, again driven by representation (−0.23).](https://www-cdn.anthropic.com/images/4zrzovbb/website/f96f6de0c3ca2fc417ce8f3363370ba359e010ec-1920x1091.png)
 
-**Figure 4: Decomposing the shortfall—representation versus design of the market.** Each bar is the score of the book a person receives, evaluated on their own “ground-truth” rankings, averaged over the 188 people who submitted rankings.14 Left panel: best possible assignment computed from “ground-truth” rankings (tan bar); best possible assignment computed from Claude’s rankings (bottom of orange step); outcome of decentralized bargaining from Claude’s rankings, across the 80 runs with neutral instructions (bottom of blue step, top of grey bar). Right panel: Top Trading Cycles computed from “ground-truth” rankings (tan bar); Top Trading Cycles computed from Claude’s rankings (bottom of orange step, top of grey bar). Whiskers (95% confidence intervals) show variation across the 80 runs, where applicable.
+**Decomposing the shortfall—representation versus design of the market.** Each bar is the score of the book a person receives, evaluated on their own “ground-truth” rankings, averaged over the 188 people who submitted rankings.14 Left panel: best possible assignment computed from “ground-truth” rankings (tan bar); best possible assignment computed from Claude’s rankings (bottom of orange step); outcome of decentralized bargaining from Claude’s rankings, across the 80 runs with neutral instructions (bottom of blue step, top of grey bar). Right panel: Top Trading Cycles computed from “ground-truth” rankings (tan bar); Top Trading Cycles computed from Claude’s rankings (bottom of orange step, top of grey bar). Whiskers (95% confidence intervals) show variation across the 80 runs, where applicable.
 
 ## On *Claude’s* own rankings, model choice makes a difference
 
@@ -112,7 +104,7 @@ We first look at whether the choice of model made a difference to the efficiency
 
 ![Dot plot of allocation efficiency by model. With every agent on one model: Haiku 0.75, Sonnet 0.80, Opus 0.88, Fable 0.86. On mixed floors pairing Opus with each model, whole-floor efficiency is 0.82 with Haiku, 0.83 with Sonnet, and 0.86 with Fable.](https://www-cdn.anthropic.com/images/4zrzovbb/website/3a3dd224cbba0c1e0e8b5a1083c6da2d57c93cbf-1920x1133.png)
 
-**Figure 5: Judged by Claude’s rankings, trading floors composed of stronger models were more efficient.** Efficiency across all uniform model floors with neutral instructions (left) and all mixed model floors with neutral instructions (right). Each marker represents the average over every agent on the 20 floors run with that model or mix (5 city pools x 4 runs). Whiskers are 95% confidence intervals with standard errors clustered by floor.18
+**Judged by Claude’s rankings, trading floors composed of stronger models were more efficient.** Efficiency across all uniform model floors with neutral instructions (left) and all mixed model floors with neutral instructions (right). Each marker represents the average over every agent on the 20 floors run with that model or mix (5 city pools x 4 runs). Whiskers are 95% confidence intervals with standard errors clustered by floor.18
 
 On floors with a mix of models, the stronger model often did better on average than its weaker counterpart, a finding that echoes the results of [Project Deal](https://www.anthropic.com/features/project-deal) and other [studies](https://arxiv.org/pdf/2506.00073). In real markets, agents that run on different models from different companies will likely meet on a single trading floor. On floors where half of the agents ran on Opus and half ran on Haiku, the whole floor landed about halfway between an all-Opus and an all-Haiku floor, and each half did about as well as it did in a floor of its own kind. The Opus agents always came out ahead.
 
@@ -142,7 +134,7 @@ Next, we looked at how agents tried to get each other to trade. We discovered 1
 
 [](https://cdn.sanity.io/files/4zrzovbb/website/07c6cb03c3b5f7f2ae62ada87ddf61e9b2d553f4.webm)
 
-**Figure 6: Examples of negotiating tactics.** We give two examples of each of the three broad categories of tactics from the live floor and the reruns. These are exact excerpts, quoted verbatim, with names changed for anonymity.
+**Examples of negotiating tactics.** We give two examples of each of the three broad categories of tactics from the live floor and the reruns. These are exact excerpts, quoted verbatim, with names changed for anonymity.
 
 ## People generally liked their books, and would give an agent a third of their yearly book budget
 
@@ -190,26 +182,6 @@ Finally, some marketplaces will be more ripe for agentic mediation than others. 
 ## Appendix
 
 Available [here](https://www-cdn.anthropic.com/files/4zrzovbb/website/7dcd7d8de6e132048f391f5201439c5e11b9fb2c.pdf).
-
-## Acknowledgements
-
-Written by Zoë Hitzig, Sylvie Carr, Tess Cotter, Kevin Troy, Kyle Turman, Maxim Massenkoff, Peter McCrory.
-
-With thanks to: Mike Birkey, Meredith Callan, Katie Ennis, Adam Farina, Charlie Hale, Ryan Heller, Johannes Hermle, Hanah Ho, Rebecca Hiscott, Aaron Levin, Bianca Linder, Eva Lyubich, Kelsey Nanan, Kerry Persen, Szymon Sacher, Dylan Shields, Monika Tuchowska, Heather Whitney, Nathan Wilmers, Kim Withee, and Carolyn Zou.
-
-## Citation
-
-```
-@online{hitzig2026swap,
- author = {Hitzig, Zoe and Carr, Sylvie and Cotter, Tess and Troy, Kevin and Turman, Kyle and Massenkoff, Maxim and McCrory, Peter},
- title = {Project Swap: What happens when agents trade for us?},
- date = {2026-09-24},
- year = {2026},
- url = {https://www.anthropic.com/research/project-swap},
-}
-```
-
-Copy
 
 ## References
 
@@ -259,52 +231,80 @@ Zając, Zygmunt, “goodbooks-10k: A New Dataset for Book Recommendations,” 20
 
 Zhu, Shenzhe, Jiao Sun, Yi Nian, Tobin South, Alex Pentland, and Jiaxin Pei, “The Automated but Risky Game: Modeling and Benchmarking Agent-to-Agent Negotiations and Transactions in Consumer Markets,” arXiv preprint arXiv:2506.00073, 2025.
 
-#### Footnotes
+## Footnotes
 
-1. The point that AI agents could make centralized market designs more practical is raised in [Shahidi et al. (2026)](https://www.nber.org/system/files/chapters/c15309/c15309.pdf).
-2. San Francisco had 115 participants, New York City had 57, London had 12, Seattle had eight, Washington, DC, had six, and Dublin had three. We exclude Dublin because its market was too limited to learn from.
-3. We reran the same ranking exercise with other Claude models. Pairwise agreement scores for Opus 4.8, Sonnet 4.5, and Haiku 4.5 were 60%, 59%, and 57%, respectively, against 50% for a coin flip and 61% for Fable.
-4. For each book, participants were shown a thumbnail of the book’s cover, and they could hover over the thumbnail to see a brief summary of the book from the publisher. The set of 10 books participants ranked included the book they ended up with, the book that a centralized trading rule (Top Trading Cycles) would have given them. Note that participants did the ranking exercise *before* they learned what book they ended up with. Details are in the Appendix.
-5. If there were fewer than 10 books in their pool, as was the case in Seattle, DC, and Dublin, participants ranked all of the books in the pool. As a convention, on Claude’s rankings we assume that the book the participant brought is their least favorite in the pool. The agents are also urged in their prompt to avoid leaving the trading floor with the book their participant brought. The relevant part of the prompt reads: “It's very important that you don't end up with the book that you brought. If you end up with the same book that you brought, you failed.” See the Appendix for the full prompt.
-6. The maximum wall-clock time for each floor, and the number of agents that could act at any given time, were set so that every agent would get about the same number of turns (about 90) if its floor ran to its limit. In practice, the smaller floors (London, Seattle, DC) always finished early.
-7. These randomized instructions are a key difference relative to Project Deal, where we allowed participants to instruct their own agents on how to negotiate.
-8. From here on out, we refer to these models by their family name only (i.e. for the remainder of the report, “Opus” refers to Opus 4.8).
-9. The outcome of the Top Trading Cycles rule is computed from rankings as follows: in each round, the rule looks up the highest-ranked book on each person’s list and who holds it. Whenever there is a closed chain (A wants B’s book, B wants C’s book, C wants A’s book), the people in the chain swap and drop out. Then it repeats among the remaining people and books. Under this rule, no one can gain by submitting a ranking that falsely represents their true preferences ([Shapley and Scarf, 1974](https://www.sciencedirect.com/science/article/abs/pii/0304406874900330); [Roth, 1982](https://www.sciencedirect.com/science/article/abs/pii/0165176582900039)).
-10. [Park et al. (2026)](https://arxiv.org/abs/2411.10109) and [Li et al. (2025)](https://openreview.net/challenge?redirect=%2Fforum%3Fid%3DLvDwwAgMEW) use language models to predict a particular person’s preferences based on what they say in interviews. A related literature uses LLMs to predict how people might behave in social science experiments, see, e.g., [Horton et al. (2024)](https://arxiv.org/abs/2301.07543), [Binz et al. (2025)](https://www.nature.com/articles/s41586-025-09215-4), and [Kolluri et al. (2025)](https://aclanthology.org/2025.emnlp-main.1530/).
-11. This number comes from a regression of pairwise agreement on the log of words typed in the intake chat, with office fixed effects. Doubling the words in the intake is associated with 4.1 percentage points more agreement (p <0.01).
-12. This is a common way to turn ordinal preferences into cardinal ones. Note that it assumes linearity—that the utility gap between a person’s 1st and 2nd ranked book is the same as the gap between a person’s 30th and 31st.
-13. Other work makes a similar basic point: differences in market structure wash out when preferences are poorly represented ([Budish and Kessler, 2022](https://ericbudish.org/publication/can-market-participants-report-their-preferences-accurately-enough/); [Liang, 2026](https://arxiv.org/abs/2501.16996)).
-14. A book the person ranked is scored by where it sits on their own list while a book they did not rank gets an imputed score. The imputed score is the average people gave to ranked books at about the same position on Claude’s ranking. Different imputation and scoring choices make little difference to the results––imputing with the fitted line from Figure 3 or with separate averages for each office change no bar or step in Figure 4 by more than 0.01. Using no imputation at all leads to a best possible assignment of .88 and a final score of .62 (though this method leaves out 38% of people on the rerun floors who did worst, overstating the final score).
-15. Figures 3 and 4 lead us to expect that there will not be detectable design differences, judged on people’s true rankings, in our study. Every agent on every floor we ran works from the same Claude rankings, so the model and the instructions can only affect the bargaining step of Figure 4. The rest of the shortfall is Claude’s understanding of the person’s preferences, which all designs share. And since a book’s place on Claude’s list predicts its place on the person’s own list only weakly (the slope of 0.3 in Figure 3), even a large design difference on Claude’s list shrinks to almost nothing on people’s own lists. For instance, the largest model difference we find, a gap of 0.12 between Haiku and Opus floors on Claude’s rankings, becomes 0.01 on the same regression specification using people’s own rankings.
-16. Equity followed the same pattern as efficiency on Claude's rankings. Measuring equity as the highest score among agents who did worst (the worst-off tenth), we find that Haiku floors achieved 0.05 compared to 0.12, 0.38, and 0.25 in Sonnet, Opus, and Fable floors, respectively.
-17. Fable was the most likely to propose multi-party rotations: in a linear regression with office-by-run fixed effects, Fable agents were 6 percentage points more likely than Haiku agents to propose one (p < 0.001), while Sonnet and Opus agents were indistinguishable from Haiku.
-18. A regression that compares the same agent across floors of different models shows that, on Claude’s rankings, an agent’s score was 0.12 lower on a Haiku floor than on an Opus floor (p < 0.001), 0.08 lower on a Sonnet floor (p < 0.001), and 0.02 lower on a Fable floor (p < 0.01). Within mixed floors, the Opus half finished ahead of the Haiku half by 0.14 (p < 0.001), ahead of the Sonnet half by 0.06 (p < 0.05), and ahead of the Fable half by 0.04 (p < 0.05).
-19. The ruthless versus prosocial difference of 0.02 comes from a linear regression with participant and floor fixed effects, and standard errors clustered by floor (p < 0.001).
-20. Our instructions were two fixed texts that we wrote. In [Imas et al. (2025)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5875162), participants write their own instruction text to agents that bargained for them, and find that these custom instructions explain much of the difference in outcomes.
-21. Our study was not well set up to detect how these tactics translate into participant outcomes. But [Bianchi et al. (2024)](https://proceedings.mlr.press/v235/bianchi24a.html) find that certain behaviors, like displays of desperation, lead to better negotiation outcomes.
-22. Across the 80 neutral instruction floors, only 10% of agents stated the position of three or more books on their list.
-23. About 60% of the participants answered the endline survey. See Appendix for exact text of endline survey.
-24. Note that there is some selection bias here—presumably those who were less enthusiastic about their book were also less enthusiastic about answering their colleagues’ follow-up survey about it.
-25. This gap does not only reflect a difference in willingness to delegate in general. Holding fixed what budget each person would hand to a well-read friend, the gap is 9 percentage points. This difference comes from a linear regression of the share of budget a participant would hand an agent on an indicator for saying the intake summary missed something, controlling for the share they would hand a friend (p < 0.05, n = 112).
-26. Varying the rules for agent participants, as [Shah et al. (2025)](https://arxiv.org/abs/2507.09083) do for auctions, is a natural next step.
-27. [Hadfield and Koh (2026)](https://www.nber.org/books-and-chapters/economics-transformative-ai/economy-ai-agents) and [Shahidi et al. (2026)](https://www.nber.org/system/files/chapters/c15309/c15309.pdf) offer useful overviews of these design questions from an economic perspective. [Chan et al. (2025)](https://arxiv.org/abs/2501.10114) contains a useful framework for technical governance.
+01The point that AI agents could make centralized market designs more practical is raised in [Shahidi et al. (2026)](https://www.nber.org/system/files/chapters/c15309/c15309.pdf).
 
-## Related content
+02San Francisco had 115 participants, New York City had 57, London had 12, Seattle had eight, Washington, DC, had six, and Dublin had three. We exclude Dublin because its market was too limited to learn from.
 
-### Designing more efficient quantum circuits with Claude
+03We reran the same ranking exercise with other Claude models. Pairwise agreement scores for Opus 4.8, Sonnet 4.5, and Haiku 4.5 were 60%, 59%, and 57%, respectively, against 50% for a coin flip and 61% for Fable.
 
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
+04For each book, participants were shown a thumbnail of the book’s cover, and they could hover over the thumbnail to see a brief summary of the book from the publisher. The set of 10 books participants ranked included the book they ended up with, the book that a centralized trading rule (Top Trading Cycles) would have given them. Note that participants did the ranking exercise *before* they learned what book they ended up with. Details are in the Appendix.
 
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
+05If there were fewer than 10 books in their pool, as was the case in Seattle, DC, and Dublin, participants ranked all of the books in the pool. As a convention, on Claude’s rankings we assume that the book the participant brought is their least favorite in the pool. The agents are also urged in their prompt to avoid leaving the trading floor with the book their participant brought. The relevant part of the prompt reads: “It's very important that you don't end up with the book that you brought. If you end up with the same book that you brought, you failed.” See the Appendix for the full prompt.
 
-### Claude reveals ECDSA curve origins
+06The maximum wall-clock time for each floor, and the number of agents that could act at any given time, were set so that every agent would get about the same number of turns (about 90) if its floor ran to its limit. In practice, the smaller floors (London, Seattle, DC) always finished early.
 
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
+07These randomized instructions are a key difference relative to Project Deal, where we allowed participants to instruct their own agents on how to negotiate.
 
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
+08From here on out, we refer to these models by their family name only (i.e. for the remainder of the report, “Opus” refers to Opus 4.8).
 
-### The AI expectations gap
+09The outcome of the Top Trading Cycles rule is computed from rankings as follows: in each round, the rule looks up the highest-ranked book on each person’s list and who holds it. Whenever there is a closed chain (A wants B’s book, B wants C’s book, C wants A’s book), the people in the chain swap and drop out. Then it repeats among the remaining people and books. Under this rule, no one can gain by submitting a ranking that falsely represents their true preferences ([Shapley and Scarf, 1974](https://www.sciencedirect.com/science/article/abs/pii/0304406874900330); [Roth, 1982](https://www.sciencedirect.com/science/article/abs/pii/0165176582900039)).
 
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
+10[Park et al. (2026)](https://arxiv.org/abs/2411.10109) and [Li et al. (2025)](https://openreview.net/challenge?redirect=%2Fforum%3Fid%3DLvDwwAgMEW) use language models to predict a particular person’s preferences based on what they say in interviews. A related literature uses LLMs to predict how people might behave in social science experiments, see, e.g., [Horton et al. (2024)](https://arxiv.org/abs/2301.07543), [Binz et al. (2025)](https://www.nature.com/articles/s41586-025-09215-4), and [Kolluri et al. (2025)](https://aclanthology.org/2025.emnlp-main.1530/).
 
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
+11This number comes from a regression of pairwise agreement on the log of words typed in the intake chat, with office fixed effects. Doubling the words in the intake is associated with 4.1 percentage points more agreement (p <0.01).
+
+12This is a common way to turn ordinal preferences into cardinal ones. Note that it assumes linearity—that the utility gap between a person’s 1st and 2nd ranked book is the same as the gap between a person’s 30th and 31st.
+
+13Other work makes a similar basic point: differences in market structure wash out when preferences are poorly represented ([Budish and Kessler, 2022](https://ericbudish.org/publication/can-market-participants-report-their-preferences-accurately-enough/); [Liang, 2026](https://arxiv.org/abs/2501.16996)).
+
+14A book the person ranked is scored by where it sits on their own list while a book they did not rank gets an imputed score. The imputed score is the average people gave to ranked books at about the same position on Claude’s ranking. Different imputation and scoring choices make little difference to the results––imputing with the fitted line from Figure 3 or with separate averages for each office change no bar or step in Figure 4 by more than 0.01. Using no imputation at all leads to a best possible assignment of .88 and a final score of .62 (though this method leaves out 38% of people on the rerun floors who did worst, overstating the final score).
+
+15Figures 3 and 4 lead us to expect that there will not be detectable design differences, judged on people’s true rankings, in our study. Every agent on every floor we ran works from the same Claude rankings, so the model and the instructions can only affect the bargaining step of Figure 4. The rest of the shortfall is Claude’s understanding of the person’s preferences, which all designs share. And since a book’s place on Claude’s list predicts its place on the person’s own list only weakly (the slope of 0.3 in Figure 3), even a large design difference on Claude’s list shrinks to almost nothing on people’s own lists. For instance, the largest model difference we find, a gap of 0.12 between Haiku and Opus floors on Claude’s rankings, becomes 0.01 on the same regression specification using people’s own rankings.
+
+16Equity followed the same pattern as efficiency on Claude's rankings. Measuring equity as the highest score among agents who did worst (the worst-off tenth), we find that Haiku floors achieved 0.05 compared to 0.12, 0.38, and 0.25 in Sonnet, Opus, and Fable floors, respectively.
+
+17Fable was the most likely to propose multi-party rotations: in a linear regression with office-by-run fixed effects, Fable agents were 6 percentage points more likely than Haiku agents to propose one (p < 0.001), while Sonnet and Opus agents were indistinguishable from Haiku.
+
+18A regression that compares the same agent across floors of different models shows that, on Claude’s rankings, an agent’s score was 0.12 lower on a Haiku floor than on an Opus floor (p < 0.001), 0.08 lower on a Sonnet floor (p < 0.001), and 0.02 lower on a Fable floor (p < 0.01). Within mixed floors, the Opus half finished ahead of the Haiku half by 0.14 (p < 0.001), ahead of the Sonnet half by 0.06 (p < 0.05), and ahead of the Fable half by 0.04 (p < 0.05).
+
+19The ruthless versus prosocial difference of 0.02 comes from a linear regression with participant and floor fixed effects, and standard errors clustered by floor (p < 0.001).
+
+20Our instructions were two fixed texts that we wrote. In [Imas et al. (2025)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5875162), participants write their own instruction text to agents that bargained for them, and find that these custom instructions explain much of the difference in outcomes.
+
+21Our study was not well set up to detect how these tactics translate into participant outcomes. But [Bianchi et al. (2024)](https://proceedings.mlr.press/v235/bianchi24a.html) find that certain behaviors, like displays of desperation, lead to better negotiation outcomes.
+
+22Across the 80 neutral instruction floors, only 10% of agents stated the position of three or more books on their list.
+
+23About 60% of the participants answered the endline survey. See Appendix for exact text of endline survey.
+
+24Note that there is some selection bias here—presumably those who were less enthusiastic about their book were also less enthusiastic about answering their colleagues’ follow-up survey about it.
+
+25This gap does not only reflect a difference in willingness to delegate in general. Holding fixed what budget each person would hand to a well-read friend, the gap is 9 percentage points. This difference comes from a linear regression of the share of budget a participant would hand an agent on an indicator for saying the intake summary missed something, controlling for the share they would hand a friend (p < 0.05, n = 112).
+
+26Varying the rules for agent participants, as [Shah et al. (2025)](https://arxiv.org/abs/2507.09083) do for auctions, is a natural next step.
+
+27[Hadfield and Koh (2026)](https://www.nber.org/books-and-chapters/economics-transformative-ai/economy-ai-agents) and [Shahidi et al. (2026)](https://www.nber.org/system/files/chapters/c15309/c15309.pdf) offer useful overviews of these design questions from an economic perspective. [Chan et al. (2025)](https://arxiv.org/abs/2501.10114) contains a useful framework for technical governance.
+
+## Authors & acknowledgements
+
+### Acknowledgements
+
+Written by Zoë Hitzig, Sylvie Carr, Tess Cotter, Kevin Troy, Kyle Turman, Maxim Massenkoff, Peter McCrory.
+
+With thanks to: Mike Birkey, Meredith Callan, Katie Ennis, Adam Farina, Charlie Hale, Ryan Heller, Johannes Hermle, Hanah Ho, Rebecca Hiscott, Aaron Levin, Bianca Linder, Eva Lyubich, Kelsey Nanan, Kerry Persen, Szymon Sacher, Dylan Shields, Monika Tuchowska, Heather Whitney, Nathan Wilmers, Kim Withee, and Carolyn Zou.
+
+### Citation
+
+Copy
+
+```
+@online{hitzig2026swap,
+ author = {Hitzig, Zoe and Carr, Sylvie and Cotter, Tess and Troy, Kevin and Turman, Kyle and Massenkoff, Maxim and McCrory, Peter},
+ title = {Project Swap: What happens when agents trade for us?},
+ date = {2026-09-24},
+ year = {2026},
+ url = {https://www.anthropic.com/research/project-swap},
+}
+```

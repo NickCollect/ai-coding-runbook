@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/evaluating-ai-systems
-fetched_at: 2026-10-19T05:32:50.976427+00:00
+fetched_at: 2026-10-26T05:39:57.871743+00:00
 title: "Challenges in evaluating AI systems \\ Anthropic"
 ---
 
-Policy
-
-# Challenges in evaluating AI systems
-
-Oct 4, 2023
-
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/53926306eaab2fdc622db676cfc7893124d35e0c-2880x1620.png)
+### Chapter 01: Introduction
 
 ## Introduction
 
@@ -149,42 +143,28 @@ We hope that by openly sharing our experiences evaluating our own systems across
   
 If you found this post helpful and want to discuss evaluations of AI systems with Anthropic, please email [policy@anthropic.com](mailto:policy@anthropic.com). We are going to spend the next couple of months chatting with more people about this area and will endeavor to share what we learn in those conversations.
 
-If you’d like to cite this post you can use the following Bibtex key:  
-  
-@online{ganguli2023challenges,  
-author = {Deep Ganguli and Nicholas Schiefer and Marina Favaro and Jack Clark},  
-title = {Challenges in evaluating {AI} systems},  
-date = {2023-10-04},  
-year = {2023},  
-url = {[https://www.anthropic.com/index/evaluating-ai-systems](https://www.anthropic.com/research/evaluating-ai-systems)},  
+## Footnotes
+
+01How long did it take to develop BBQ? BBQ took the developers ~2 people years spread over 6 months across 8 people to build. Designing and implementing even just a single evaluation is a resource intensive effort that can take tens of people several months.
+
+02BIG-bench Hard was released 4 months after BIG-bench that narrowed down to 23 hard tasks. We were implementing BIG-bench before BIG-bench Hard was released.
+
+03See for example [Ghost Work](https://ghostwork.info/).
+
+04For example, a well-known issue with many facial recognition systems has been higher error rates for certain demographics, like women and people of color. The FRVT reports shined a spotlight on these accuracy discrepancies, which put pressure on vendors to improve their algorithms and mitigate systemic biases.
+
+## Authors & acknowledgements
+
+### Citation
+
+Copy
+
+```
+@online{ganguli2023challenges,
+author = {Deep Ganguli and Nicholas Schiefer and Marina Favaro and Jack Clark},
+title = {Challenges in evaluating {AI} systems},
+date = {2023-10-04},
+year = {2023},
+url = {https://www.anthropic.com/index/evaluating-ai-systems},
 }
-
-### Footnotes
-
-[1] How long did it take to develop BBQ? BBQ took the developers ~2 people years spread over 6 months across 8 people to build. Designing and implementing even just a single evaluation is a resource intensive effort that can take tens of people several months.
-
-[2] BIG-bench Hard was released 4 months after BIG-bench that narrowed down to 23 hard tasks. We were implementing BIG-bench before BIG-bench Hard was released.
-
-[3] See for example [Ghost Work](https://ghostwork.info/).
-
-[4] For example, a well-known issue with many facial recognition systems has been higher error rates for certain demographics, like women and people of color. The FRVT reports shined a spotlight on these accuracy discrepancies, which put pressure on vendors to improve their algorithms and mitigate systemic biases.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
+```

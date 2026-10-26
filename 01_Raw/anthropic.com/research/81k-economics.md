@@ -1,18 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/81k-economics
-fetched_at: 2026-10-19T05:32:48.103529+00:00
+fetched_at: 2026-10-26T05:39:54.416975+00:00
 title: "What 81,000 people told us about AI economics \\ Anthropic"
 ---
 
-Economics
-
-# What 81,000 people told us about the economics of AI
-
-Apr 22, 2026
-
-[Read the PDF](https://cdn.sanity.io/files/4zrzovbb/website/3a8d990bc90098038eabd77b0d12ff636ed58d50.pdf)
-
-![What 81,000 people told us about the economics of AI](https://www-cdn.anthropic.com/images/4zrzovbb/website/5e085cd595dd3b69fe11d9204987ae8e8da51fda-2000x1125.png)
+### Chapter 01: Who worries about job displacement?
 
 ### Key findings:
 
@@ -34,7 +26,7 @@ The survey’s results provide initial evidence that [observed exposure](https:/
 
 One fifth of the respondents in our survey voiced concern about economic displacement. Some worried about this in the abstract: one software developer cautioned about “the possibility of AI in its current state being used to replace junior positions.” Others lamented that their jobs, or aspects of their jobs, were being automated away. One market researcher said, “In terms of improving my capability, it's no doubt. [B]ut in the future AI may replace my work.” In some jobs, people felt it made their work harder. One software developer observed that “when AI arrived, the project managers started giving harder and harder tickets and bugs to solve.”
 
-Throughout this report, we use Claude-powered classifiers to infer people’s attributes and sentiments from their responses. For example, many participants mention their line of work in passing or give informative details about their work life, which allows us to infer their occupation. Similarly, we quantify concerns about job loss by prompting Claude to identify and interpret direct quotes in which respondents indicate that their own role is at risk of AI-driven displacement. We give example prompts in [the Appendix](https://cdn.sanity.io/files/4zrzovbb/website/3a8d990bc90098038eabd77b0d12ff636ed58d50.pdf).
+Throughout this report, we use Claude-powered classifiers to infer people’s attributes and sentiments from their responses. For example, many participants mention their line of work in passing or give informative details about their work life, which allows us to infer their occupation. Similarly, we quantify concerns about job loss by prompting Claude to identify and interpret direct quotes in which respondents indicate that their own role is at risk of AI-driven displacement. We give example prompts in [the Appendix](https://www-cdn.anthropic.com/files/4zrzovbb/website/3a8d990bc90098038eabd77b0d12ff636ed58d50.pdf).
 
 Respondents’ perceived threat from AI was correlated with our [own measure of observed exposure](https://www.anthropic.com/research/labor-market-impacts), which reflects the percentage of a job’s tasks for which Claude is used. A respondent was more concerned about AI when our observed exposure measure for that respondent was higher. Elementary school teachers were less worried about their own displacement than software engineers, for example, consistent with the fact that Claude usage skews toward coding tasks.
 
@@ -42,13 +34,13 @@ We show this in Figure 1 below. The y-axis is the percentage of respondents in a
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/3cc91526f31561f390700d113a9091e6ad8c094b-1920x1080.png)
 
-**Figure 1: Perceived job threat from AI and Observed Exposure.** Percentage of respondents indicating some job threat from AI vs. the Observed Exposure measure from [Massenkoff and McCrory (2026)](https://www.anthropic.com/research/labor-market-impacts). A respondent was coded as indicating job threat if they said their role was already being replaced or substantially reduced, or that such changes were likely in the near term (coded using Claude). The green line shows a simple linear fit.
+**Perceived job threat from AI and Observed Exposure.** Percentage of respondents indicating some job threat from AI vs. the Observed Exposure measure from [Massenkoff and McCrory (2026)](https://www.anthropic.com/research/labor-market-impacts). A respondent was coded as indicating job threat if they said their role was already being replaced or substantially reduced, or that such changes were likely in the near term (coded using Claude). The green line shows a simple linear fit.
 
-Another important worker characteristic is career stage. In previous research, we reported [tentative signs](https://cdn.sanity.io/files/4zrzovbb/website/a42bc3fc08283562f08fd8bdee8f6f9a3d506e87.pdf) of a slowdown in the hiring of recent graduates and early-career workers in the United States. For about half of respondents in this survey, we were able to infer career stage from their answers.[2](#footnote-2) We found that early-career respondents were much more likely to express concern about job displacement than senior workers.
+Another important worker characteristic is career stage. In previous research, we reported [tentative signs](https://www-cdn.anthropic.com/files/4zrzovbb/website/a42bc3fc08283562f08fd8bdee8f6f9a3d506e87.pdf) of a slowdown in the hiring of recent graduates and early-career workers in the United States. For about half of respondents in this survey, we were able to infer career stage from their answers.[2](#footnote-2) We found that early-career respondents were much more likely to express concern about job displacement than senior workers.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/e734cb6470a143e7fafa0ec0e0b1070ea63118db-1920x1080.png)
 
-**Figure 2: Concern about economic displacement by career stage.** Percentage of respondents indicating some job threat from AI, by career stage. Both fields are inferred from free-form responses using Claude-powered classifiers.
+**Concern about economic displacement by career stage.** Percentage of respondents indicating some job threat from AI, by career stage. Both fields are inferred from free-form responses using Claude-powered classifiers.
 
 ## Who benefits from AI?
 
@@ -62,7 +54,7 @@ Some of the lowest-paid workers describe high productivity gains as well. This i
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/054ba6248545bfe2908345aa00abb7baf0ad0e42-1920x1080.png)
 
-**Figure 3: Inferred productivity gain by occupation.** The left panel shows the mean inferred productivity benefit from AI (inferred using a Claude-powered classifier) by quartile of occupational median wage from the BLS. The right panel shows the same outcome, split by major occupational group. Error bars show 95% confidence intervals.
+**Inferred productivity gain by occupation.** The left panel shows the mean inferred productivity benefit from AI (inferred using a Claude-powered classifier) by quartile of occupational median wage from the BLS. The right panel shows the same outcome, split by major occupational group. Error bars show 95% confidence intervals.
 
 We look at this in more detail in the right panel of Figure 3, showing the inferred productivity gain by major occupational group. At the top are management occupations. These respondents are mostly entrepreneurs using Claude to build a business.[4](#footnote-4) The next highest category is computer and math, which includes software developers. The two groups exhibiting the mildest productivity improvements were workers in scientific and legal professions. Some lawyers worried about AI’s ability to follow precise instructions. For example: “I have given very specific rules about what is where, how to read a legal document, what I want it to do… but it diverges every time.”
 
@@ -70,7 +62,7 @@ A key question as AI diffuses through the economy is where the benefits will acc
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4c1138907fd70ea69195da8100056a9e4801b030-1920x1080.png)
 
-**Figure 4: Where does the surplus from AI productivity go?** Among respondents who named a beneficiary of their AI productivity gains, the share identifying each destination.
+**Where does the surplus from AI productivity go?** Among respondents who named a beneficiary of their AI productivity gains, the share identifying each destination.
 
 ## Scope and speed
 
@@ -80,7 +72,7 @@ We find that the most common productivity enhancement is in scope, which was cit
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/197366411f5546a640214b38baaeb1402f950c74-1920x1080.png)
 
-**Figure 5: What kind of productivity gain do users report?** Share of respondents describing each type of productivity benefit.
+**What kind of productivity gain do users report?** Share of respondents describing each type of productivity benefit.
 
 People’s experience with Claude might also shape their concerns about AI. To assess this, we measured the speedup reported by respondents, by extracting whether their work was now much slower (which we coded as 1), showed no change in speed (4), or had become much faster (7).
 
@@ -88,7 +80,7 @@ We found that the relationship between speedup and perceived job threat is U-sha
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ed7b1b8b258c348ad2127b6de33a3802160fac28-1920x1080.png)
 
-**Figure 6: Job threat from AI and speedup.** Percentage of respondents who said that displacement at their own job was already happening or likely in the near term, by the level of inferred speedup.
+**Job threat from AI and speedup.** Percentage of respondents who said that displacement at their own job was already happening or likely in the near term, by the level of inferred speedup.
 
 For the remaining respondents, perceived job threat increases consistently with the level of speedup implied by their answers. This makes some economic sense: if the time required to do one’s tasks is shrinking quickly, there may be more uncertainty about the future viability of the role.
 
@@ -102,21 +94,23 @@ There are key caveats to our analysis, owing to the nature of the data. First, o
 
 Still, the interviews surface real insights about people’s feelings around the economics of AI, showing how qualitative data can surface quantitative hypotheses. And the large share of economic-related concerns is a strong signal in itself.
 
-### Citation
-
-```
-@online{massenkoff2026interviewer,
-author = {Maxim Massenkoff and Saffron Huang},
-title = {What 81,000 people told us about the economics of AI},
-date = {2026-04-22},
-year = {2026},
-url = {anthropic.com/research/81k-economics},
-}
-```
-
 ### Appendix
 
-See the final section of the [linked PDF](https://cdn.sanity.io/files/4zrzovbb/website/3a8d990bc90098038eabd77b0d12ff636ed58d50.pdf).
+See the final section of the [linked PDF](https://www-cdn.anthropic.com/files/4zrzovbb/website/3a8d990bc90098038eabd77b0d12ff636ed58d50.pdf).
+
+## Footnotes
+
+01We inferred people’s occupations using the first question in the survey (“What’s the last thing you used an AI chatbot for?”) or indications given in other responses.
+
+02This came from various indications in the written responses. For example, several users mentioned using Claude for homework, which put them in the early-career group. And many referred to running their own businesses and being involved in hiring decisions, which put them in the senior group.
+
+03The scale is not centered because most people say positive things about productivity, yielding almost entirely 6s and 7s on the original Likert scale. The scale we use here ran from 1 = less productive, 2 = no change, 3 = slightly more productive, 4 = moderately more productive, 5 = substantially more productive, 6 = much more productive, to 7 = transformatively more productive—AI has fundamentally changed what or how much they can produce.
+
+04Removing these “solopreneurs” still leaves management tied with computer and math occupations for showing the highest productivity benefit.
+
+05A major caveat, however, is that this survey went out to people with personal Claude accounts. A more representative picture would also include enterprise users, who may be more likely to say the value accrues to their employers.
+
+## Authors & acknowledgements
 
 ### Acknowledgements
 
@@ -128,30 +122,16 @@ Zoe Hitzig and Eva Lyubich provided critical feedback and methodological guidanc
 
 Additionally, we thank Miriam Chaum, Ankur Rathi, Santi Ruiz, and David Saunders for their discussion, feedback, and support.
 
-#### Footnotes
+### Citation
 
-1. We inferred people’s occupations using the first question in the survey (“What’s the last thing you used an AI chatbot for?”) or indications given in other responses.
-2. This came from various indications in the written responses. For example, several users mentioned using Claude for homework, which put them in the early-career group. And many referred to running their own businesses and being involved in hiring decisions, which put them in the senior group.
-3. The scale is not centered because most people say positive things about productivity, yielding almost entirely 6s and 7s on the original Likert scale. The scale we use here ran from 1 = less productive, 2 = no change, 3 = slightly more productive, 4 = moderately more productive, 5 = substantially more productive, 6 = much more productive, to 7 = transformatively more productive—AI has fundamentally changed what or how much they can produce.
-4. Removing these “solopreneurs” still leaves management tied with computer and math occupations for showing the highest productivity benefit.
-5. A major caveat, however, is that this survey went out to people with personal Claude accounts. A more representative picture would also include enterprise users, who may be more likely to say the value accrues to their employers.
+Copy
 
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
+```
+@online{massenkoff2026interviewer,
+author = {Maxim Massenkoff and Saffron Huang},
+title = {What 81,000 people told us about the economics of AI},
+date = {2026-04-22},
+year = {2026},
+url = {anthropic.com/research/81k-economics},
+}
+```

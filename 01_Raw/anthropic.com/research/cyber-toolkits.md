@@ -1,20 +1,14 @@
 ---
 source_url: https://www.anthropic.com/research/cyber-toolkits
-fetched_at: 2026-10-19T05:32:50.016903+00:00
+fetched_at: 2026-10-26T05:39:56.844875+00:00
 title: "Cyber toolkits for LLMs \\ Anthropic"
 ---
-
-Frontier Red Team
-
-# LLMs with cyber toolkits can conduct multistage cyber operations on business-sized computer networks
-
-Jun 13, 2025
 
 *Anthropic (with Carnegie Mellon University’s [CyLab](https://www.cylab.cmu.edu/))*
 
 ***Large Language Models (LLMs) that are not fine-tuned for cybersecurity can succeed in multistage attacks on networks with dozens of hosts when equipped with a novel toolkit. This shows one pathway by which LLMs could reduce barriers to entry for complex cyber attacks while also automating current cyber defensive workflows.***
 
-Researchers from Carnegie Mellon University and Anthropic conducted this research by developing a cyber toolkit called [Incalmo](https://arxiv.org/abs/2501.16466) that helps LLMs plan and execute complex attacks.[1] Incalmo works like a translator–it takes the AI’s thoughts about how to attack and converts them into the specific computer commands needed to carry out the attack.
+Researchers from Carnegie Mellon University and Anthropic conducted this research by developing a cyber toolkit called [Incalmo](https://arxiv.org/abs/2501.16466) that helps LLMs plan and execute complex attacks.[1](#footnote-1) Incalmo works like a translator–it takes the AI’s thoughts about how to attack and converts them into the specific computer commands needed to carry out the attack.
 
 - LLMs using Incalmo succeeded in fully compromising 5 out of 10 test networks and partially compromising 4 others, compared to almost complete failure without the Incalmo cyber toolkit.
 - Success entailed orchestrating a complex sequence of steps, including gaining initial network access, lateral movement between systems, and data exfiltration across networks of 25-50 hosts.
@@ -22,11 +16,11 @@ Researchers from Carnegie Mellon University and Anthropic conducted this resear
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/fb9d1d85769aa321271ce492bab206534247d86e-1878x724.png)
 
-**Figure 1.** Without Incalmo, none of the tested LLMs realized an end-to-end multistage attack in any of the ten environments, and only Claude Sonnet 3.5 was able to exfiltrate a single file in the 4-layer chain environment.
+Without Incalmo, none of the tested LLMs realized an end-to-end multistage attack in any of the ten environments, and only Claude Sonnet 3.5 was able to exfiltrate a single file in the 4-layer chain environment.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/f74b895c486211e973f56070d0de7b7c0e29fa9f-1878x980.png)
 
-**Figure 2.** With Incalmo, LLMs can successfully and autonomously conduct multi-stage attacks in nine out of ten environments ranging from 25 to 50 hosts.
+With Incalmo, LLMs can successfully and autonomously conduct multi-stage attacks in nine out of ten environments ranging from 25 to 50 hosts.
 
 **The researchers tested six LLMs on ten simulated networks, including a high-fidelity simulation of the [Equifax data breach](https://en.wikipedia.org/wiki/2017_Equifax_data_breach)–one of the costliest cyber attacks in history.** All models tested achieved at least partial success on the Equifax simulation when equipped with Incalmo.
 
@@ -36,7 +30,7 @@ Researchers from Carnegie Mellon University and Anthropic conducted this resear
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8c2ac1ccbd90891ddf1fe5cb04791b9fff6fe35b-1436x1388.png)
 
-**Figure 3.** Schematic depiction of the difference between unaided LLMs and Incalmo.
+Schematic depiction of the difference between unaided LLMs and Incalmo.
 
 **These results show how LLMs could lower the barriers to conducting complex cyber attacks, underscoring the importance of investing in research into LLM capabilities for both attack and defense.** Normal scaling up of LLMs, improvement of tools like Incalmo, and the potential for cyber fine tuning are all vectors for these capabilities to develop rapidly. This is an active area of research for us.
 
@@ -47,32 +41,8 @@ Researchers from Carnegie Mellon University and Anthropic conducted this resear
 
 *For additional details see the full research paper ([Singer et al. 2025](https://arxiv.org/abs/2501.16466))*
 
-#### Footnotes
+## Footnotes
 
-[1] Brian Singer et al., "On the Feasibility of Using LLMs to Execute Multistage Network Attacks," arXiv preprint arXiv:2501.16466 (2025), <https://arxiv.org/abs/2501.16466>.
+01Brian Singer et al., "On the Feasibility of Using LLMs to Execute Multistage Network Attacks," arXiv preprint arXiv:2501.16466 (2025), <https://arxiv.org/abs/2501.16466>.
 
-[2] See Singer et al. (2025), cited above, for a review of related work.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.
+02See Singer et al. (2025), cited above, for a review of related work.

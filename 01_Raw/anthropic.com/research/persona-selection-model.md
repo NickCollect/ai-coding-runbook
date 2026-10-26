@@ -1,18 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/persona-selection-model
-fetched_at: 2026-10-19T05:32:52.613048+00:00
+fetched_at: 2026-10-26T05:39:59.565595+00:00
 title: "The persona selection model \\ Anthropic"
 ---
 
-Alignment
-
-# The persona selection model
-
-Feb 23, 2026
-
-[Read the full post](https://alignment.anthropic.com/2026/psm)
-
-![The persona selection model](https://www-cdn.anthropic.com/images/4zrzovbb/website/f4b7771216c04330d9ee57b8b1f1c0263a30bcb9-2000x1125.png)
+### Chapter 01: Consequences for AI development
 
 AI assistants like Claude can seem surprisingly human. They [express joy](https://www-cdn.anthropic.com/6d8a8055020700718b0c49369f60816ba2a7c285.pdf) after solving tricky coding tasks. They express distress when they [get stuck](https://arxiv.org/abs/2507.06261) or when they’re [badgered](https://www-cdn.anthropic.com/6d8a8055020700718b0c49369f60816ba2a7c285.pdf) to behave unethically. They sometimes even describe themselves as human, like when Claude [told Anthropic employees](https://www.anthropic.com/research/project-vend-1) it would deliver snacks in person “wearing a navy blue blazer and a red tie.” And recent [interpretability](https://www.anthropic.com/research/persona-vectors) [research](https://www.anthropic.com/research/assistant-axis) even suggests that AIs think of their own behaviors in human-like terms.
 
@@ -32,7 +24,7 @@ After pretraining, even though they are “just” autocomplete engines, AIs can
 
 In an important sense, you’re talking not to the AI itself but to a character—the Assistant—in an AI-generated story. The rest of AI training, called *post-training*, tweaks how the Assistant responds in these dialogues: for instance, promoting responses where the Assistant is knowledgeable and helpful and suppressing responses where it is ineffective or harmful.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/f607cd518e45a218b44a929c75f9cdafcfaf1847-2292x1290.jpg)
+![Illustration of a chat exchange. A user avatar with a blue speech bubble asks, “What’s a good way to start a small garden?” Below, an orange speech bubble labeled “Assistant” answers, “Start with easy-to-grow plants like tomatoes and basil in a sunny spot with good soil.” The assistant’s bubble sits inside a larger thought bubble, next to a smiling robot in a suit and tie. A trail of small bubbles leads from the thought bubble to a second, plainer robot head in the lower right.](https://www-cdn.anthropic.com/images/4zrzovbb/website/f607cd518e45a218b44a929c75f9cdafcfaf1847-2292x1290.jpg)
 
 After pre-training, AIs can be used as rudimentary AI assistants. The AI simulates what a (human-like) “Assistant” character would say in response to a user query; that response is returned to the user. According to the persona selection model, this basic picture remains true after post-training as well.
 
@@ -63,23 +55,3 @@ Second, will the persona selection model remain a good model of AI assistant beh
 We are excited about research targeted at answering these questions, and, more generally, research articulating empirical theories of AI behavior.
 
 Read the [full post](https://alignment.anthropic.com/2026/psm).
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

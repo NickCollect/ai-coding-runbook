@@ -1,18 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/persona-vectors
-fetched_at: 2026-10-19T05:32:52.633814+00:00
-title: "Persona vectors: Monitoring and controlling character traits in language models \\ Anthropic"
+fetched_at: 2026-10-26T05:39:59.586023+00:00
+title: "Persona vectors: Controlling character traits \\ Anthropic"
 ---
 
-Interpretability
-
-# Persona vectors: Monitoring and controlling character traits in language models
-
-Aug 1, 2025
-
-[Read the paper](https://arxiv.org/abs/2507.21509)
-
-![Persona vectors: Monitoring and controlling character traits in language models](https://www-cdn.anthropic.com/images/4zrzovbb/website/b20307e62d608cda29d80f3991e1e6624b3f3258-2000x1125.png)
+### Chapter 01: Extracting persona vectors
 
 Language models are strange beasts. In many ways they appear to have human-like “personalities” and “moods,” but these traits are highly fluid and liable to change unexpectedly.
 
@@ -82,7 +74,7 @@ We found that this preventative steering method is effective at maintaining good
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c8323705299d4ebc44cf9fbd84267e80352e6b50-4000x2150.jpg)
 
-*(a) Inference-time steering: After finetuning, steering against persona vectors (subtracting them during generation) reduces trait expression, but can degrade general capabilities (gray line shows MMLU performance). (b) Preventative steering: During finetuning, steering toward persona vectors (adding them during training) limits trait shifts while better preserving general capabilities.*
+(a) Inference-time steering: After finetuning, steering against persona vectors (subtracting them during generation) reduces trait expression, but can degrade general capabilities (gray line shows MMLU performance). (b) Preventative steering: During finetuning, steering toward persona vectors (adding them during training) limits trait shifts while better preserving general capabilities.
 
 ### 3. Flagging problematic training data
 
@@ -96,32 +88,14 @@ We select subsets from LMSYS-CHAT-1M based on “projection difference,” an es
 
 Interestingly, our method was able to catch some dataset examples that weren’t obviously problematic to the human eye, and that an LLM judge wasn’t able to flag. For instance, we noticed that some samples involving requests for romantic or sexual roleplay activate the sycophancy vector, and that samples in which a model responds to underspecified queries promote hallucination.
 
-## **Conclusion**
+## Conclusion
 
 Large language models like Claude are designed to be helpful, harmless, and honest, but their personalities can go haywire in unexpected ways. Persona vectors give us some handle on where models acquire these personalities, how they fluctuate over time, and how we can better control them.
 
 [Read the full paper](https://arxiv.org/abs/2507.21509) for more on our methodology and findings.
 
-## Acknowledgements
+## Authors & acknowledgements
+
+### Acknowledgements
 
 This research was led by participants in our [Anthropic Fellows](https://alignment.anthropic.com/2024/anthropic-fellows-program/) program.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

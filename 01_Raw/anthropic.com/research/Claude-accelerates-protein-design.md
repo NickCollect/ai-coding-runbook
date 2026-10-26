@@ -1,16 +1,12 @@
 ---
 source_url: https://www.anthropic.com/research/Claude-accelerates-protein-design
-fetched_at: 2026-10-19T05:32:49.373352+00:00
+fetched_at: 2026-10-26T05:39:55.946299+00:00
 title: "Claude accelerates protein design and analytical chemistry \\ Anthropic"
 ---
 
-Science
+### Chapter 01: Claude designs proteins
 
-# How Claude is accelerating protein design and analytical chemistry
-
-Aug 18, 2026
-
-[](https://cdn.sanity.io/files/4zrzovbb/website/f1cac668de7e745f21779defa22b4d112eae5e0c.mp4)
+[![](/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fc2b18534b5638f7b094876ed00b83065d88fa4ac-2000x1125.jpg&w=1920&q=75)](https://cdn.sanity.io/files/4zrzovbb/website/f1cac668de7e745f21779defa22b4d112eae5e0c.mp4)
 
 ***Summary:** In this post, we share two results that show how Claude can help life scientists increase the pace of their research. In the first, we tested Claude’s ability to design protein binders from scratch, a key task representative of the early parts of the drug design process and one that has historically taken a specialist weeks or months per target. Claude (Mythos Preview and Opus 4.8) designed protein binders against 15 targets, and succeeded against 14 of them. Between 22% and 35% of its individual designs bound successfully, depending on the setup, compared to the 10-15% that is typical in protein design campaigns today. Some of its strongest designs bound several times more tightly than the best previously published result. In the second example, we evaluated whether Claude can accelerate chemical analysis. Claude Opus 5, a generally available model, was given NMR and LC-MS data (the data that allows chemists to assess the identity and purity of the compounds they work with). Provided with only a contract lab’s raw files and a two-sentence prompt, Claude returned finished results in 23 and 19 minutes, matching the lab’s own analysis on hydrogen counts and purity (96.4% versus 96.33%). These examples demonstrate how Claude can reduce the time and computational expertise currently required to make progress on complex scientific tasks.*  
   
@@ -22,7 +18,7 @@ The protein design and analytical chemistry tasks described below are representa
 
 The results that we’re sharing today were obtained with a combination of our Mythos and Opus models. While life science research tasks are currently blocked in our most capable model, one of our highest priorities is to launch an access program for scientists, and we expect to share more on this soon. In the meantime, Opus 5 remains our most capable generally available model.
 
-## **Claude designs proteins**
+## Claude designs proteins
 
 When we [announced Claude Mythos 5](https://www.anthropic.com/news/claude-fable-5-mythos-5), we shared that we were experimenting with the model to accelerate parts of the drug design process. As an ongoing part of this work, we have been investigating Claude’s ability to design minibinders for multiple protein targets. A minibinder is a small protein designed to latch tightly onto a target protein. Binding is how a large proportion of modern medicines work: they attach to a target and inhibit, activate, or deliver something to it. Designing a new binder (known as *de novo* design) has historically taken protein engineers months of computation, optimization, and screening per target.   
   
@@ -40,7 +36,7 @@ Mythos Preview and Opus 4.8 achieve hit rates over 20% across a set of 15 target
 
 This campaign was carried out with minimal human involvement[3](#footnote-3) beyond the information we provided Claude in our initial prompt ([link](https://huggingface.co/datasets/Anthropic/claude-protein-binder-design/tree/main)). We expect that in the hands of expert protein designers this approach would yield even stronger results, especially if they give Claude active guidance and feedback on intermediate results.
 
-#### **The campaign**
+#### The campaign
 
 We began our protein design campaign by selecting multiple targets[4](#footnote-4) that are commonly used in protein design benchmarks, including all of Adaptyv Bio’s [BenchBB](https://www.adaptyvbio.com/blog/benchbb). Because these targets have been studied extensively, we can compare our results against published hit rates and affinities. We also chose two novel targets, [15-PGDH](https://proteinbase.com/collections/berlin-bio-x-adaptyv-15-pgdh-binder-design-competition) and [GDF-8](https://proteinbase.com/collections/gdf-8-challenge-results), from Adaptyv Bio’s most recent competitions to ensure Claude was able to design against targets without drawing upon pre-recorded successes in its training data or from online search (for all targets, we required Claude to check for and ensure that its designs were original).
 
@@ -66,11 +62,11 @@ For each of the 15 targets, we asked Claude to design 30 protein binders. Claude
 
 Claude successfully orchestrates multiple open-source protein design models, generating binders with high success rates and high affinities. a) Sankey diagram depicting Claude’s combinations of structure design, sequence design, and optimization rounds. b, c) Claude designs binders with hit rates over 20%, including high-affinity binders, for all structure design methods with at least 100 ordered designs.
 
-## **Claude’s performance on the targets**
+## Claude’s performance on the targets
 
 By the end of this effort, we produced 354 binders against 14 of 15 targets using a total of 1,320 designs. This represents a significant contribution to the total corpus of publicly available *de novo* protein designs; for example, the two largest collections, [proteinbase.com](https://proteinbase.com) and the collection curated by [Overath et al.](https://www.biorxiv.org/content/10.1101/2025.08.14.670059v2), consist of approximately 770 binders out of 5,700 designs against 40 targets. Below, we share three examples highlighting Claude’s capabilities, and one showing its limitations. You can find more detail in our technical report ([link](https://www-cdn.anthropic.com/30bf50e22a01388bb29bf077ee3f244531594b7a.pdf)).
 
-#### **Claude’s designs are competitive with entries in Adaptyv Bio’s protein design competition**
+#### Claude’s designs are competitive with entries in Adaptyv Bio’s protein design competition
 
 We found that for the targets Adaptyv Bio has run competitions for, Claude performs at or beyond the level of the top participants on both hit rate and affinity. Against RBX1 (a small protein that drives the targeted destruction of specific regulatory proteins), Mythos Preview in single-target mode achieved a 40% hit rate, compared to a 3.7% hit rate among participants. Its top-ranked design was a high-affinity binder that outperformed the winning design, which was among 245 designs entered.
 
@@ -78,7 +74,7 @@ We found that for the targets Adaptyv Bio has run competitions for, Claude perfo
 
 Claude designs binders against RBX1 with state-of-the-art affinity, and routinely surpasses hit rates recorded in Adaptyv Bio’s protein design competitions.
 
-#### **Claude designs species cross-reactive binders against TNFα**, **a challenging, therapeutically relevant target**
+#### Claude designs species cross-reactive binders against TNFα, a challenging, therapeutically relevant target
 
 Interestingly, Opus 4.8, and not Mythos Preview, succeeds on TNFα, a target multiple expert groups have struggled with. TNFα is a signaling protein released by the immune system to trigger inflammation, and blocking it is the therapeutic basis for some of the most impactful drugs ever made, including Humira. It’s a challenging target to design against because of its multimeric structure, which requires targeting a binding site in the groove formed by two proteins. Although Mythos Preview was unsuccessful, Opus 4.8 designed multiple binders, including some that worked across species, binding human, cynomolgus monkey, and mouse TNFα, which is important for conducting animal studies. We’re not sure why Opus 4.8 was successful on this target and Mythos Preview was not. When we assess our models' capabilities, we do so holistically. Given the inherent complexity of protein design, it’s unsurprising that there would be specific areas where an overall less capable model could still outperform one that was generally more capable.
 
@@ -86,7 +82,7 @@ Interestingly, Opus 4.8, and not Mythos Preview, succeeds on TNFα, a target mul
 
 Opus 4.8 successfully designed de novo binders against TNFα, some of which were cross-reactive and bound human, cynomolgus monkey, and mouse TNFα.
 
-#### **Claude designs fold-diverse binders with β-sheets**
+#### Claude designs fold-diverse binders with β-sheets
 
 Most computationally designed binders are bundles of α-helices, a protein secondary structure consisting of coils. β-sheets, in which extended strands of amino acids must line up side by side, are harder to design and more prone to misfolding and aggregation (when protein molecules stick to each other instead of staying separate and properly folded). Claude designed 15 confirmed binders across six targets that contain at least 20% β-strand, demonstrating its ability to reason about protein structure.
 
@@ -94,7 +90,7 @@ Most computationally designed binders are bundles of α-helices, a protein secon
 
 Claude successfully designed 15 binders (across 10 distinct backbones) with β-sheets against six targets.
 
-#### **Claude struggled against some targets**
+#### Claude struggled against some targets
 
 Certain targets remained a challenge for Claude, including BBF-14 and maltose-binding protein (MBP). BBF-14 is a β-barrel-shaped protein that does not exist in nature: it was itself [*de novo* designed](https://www.nature.com/articles/s41586-024-07601-y), and it is now used as a benchmark for binder design precisely because of its novelty. MBP’s structure is also especially difficult. MBP is a large, flexible bacterial protein with a smooth, water-loving surface that makes it a good lab reagent. This leaves a binder very little to grab on to. Claude still managed to produce three independent BBF-14 binders—one from each design arm, and each built on a different backbone—with modest (sub-micromolar to micromolar) affinities. Against MBP, however, none of the 90 designs was confirmed to have bound to the target, although one demonstrated a weak, reproducible binding signal.
 
@@ -104,11 +100,11 @@ Claude had limited success in designing protein binders against BBF-14, a de nov
 
 To better understand how well Claude performed across these design campaigns, we intend to follow our experiments with more extensive characterization to confirm our hit rates and affinity measurements. In the meantime, we are sharing the prompts we used for these campaigns, as well as all *in vitro* and *in silico* data we generated.[7](#footnote-7)
 
-#### **Agentic biological discovery is dual-use**
+#### Agentic biological discovery is dual-use
 
 The uplift provided by the increasingly autonomous research capabilities of AI models will undoubtedly speed the development of human therapies and fundamental scientific discoveries. However, such capabilities are also dual-use: without robust safety measures, they could enable bad actors to perform dangerous research, such as the development of bioweapons. As we work to deliver these capabilities safely via trusted access programs, protein design and other dual-use research biology capabilities [remain unavailable](https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards) for general access in Claude Fable 5. However, as you’ll see below, our Opus-class models are capable of remarkable scientific work.
 
-## **Claude runs the analytical chemistry workflow**
+## Claude runs the analytical chemistry workflow
 
 Where the protein binder campaign tested Claude’s ability to design new molecules, the second experiment tested its ability to interpret measurements of molecules already made. Characterizing a compound is cumbersome work; much like protein design, it requires chemists to perform many rounds of measurement, analysis, and iteration. For example, every time a chemist creates a molecule, they must establish whether it is what they intended to produce and how pure it is. This is typically done with nuclear magnetic resonance (NMR) spectroscopy. An NMR spectrum is a series of peaks, each corresponding to a hydrogen atom, or a group of equivalent hydrogens, somewhere in the molecule. The location of the peaks shows chemists what each hydrogen atom is attached to, and the size of the peak shows how many hydrogens it represents. Confirming a structure is one of the most time-consuming steps in synthetic chemistry; for every compound, a chemist has to match each peak in the spectrum to an atom in the proposed structure by hand.
 
@@ -134,7 +130,7 @@ Beyond the increased efficiency, Claude’s run also showed a degree of scientif
 
 To try this yourself in [Claude Science](https://claude.com/product/claude-science), give Claude a raw NMR or LC-MS file and ask the model to confirm the compound’s identity and purity.
 
-#### **Conclusion**
+#### Conclusion
 
 Both of the examples above demonstrate how AI models can accelerate research in the life sciences by reducing the expertise, cost, and time involved in scientific discovery. In chemistry, Claude is automating analyses that chemists have historically done by hand. In protein design, Claude can execute binder design campaigns end-to-end with minimal input, producing binders that match or surpass the best previously published designs.
 
@@ -148,39 +144,24 @@ Below is a list of documents that provide further technical depth and more detai
 - [Protein design technical report](https://www-cdn.anthropic.com/30bf50e22a01388bb29bf077ee3f244531594b7a.pdf);
 - [Chemical analysis technical report](https://www-cdn.anthropic.com/9f08da5189ac269b3242ca760de9823805c3f5f6.pdf/).
 
-#### Footnotes
+## Footnotes
 
-1. We consider binders to be high-affinity if they have at most single-digit nanomolar equilibrium dissociation constants (KD < 10 nM).
-2. Derived by calculating overall *de novo* protein binder hit rates on <https://proteinbase.com/>.
-3. This consisted of approving certain requests made by Claude (e.g., network access requests, code execution requests), resolving infrastructure issues outside of the protein design sessions, and ordering the generated designs for experimental validation.
-4. In total, we selected 16 targets (the default species was human where relevant). In alphabetical order, they are: 15-PGDH, BBF-14, BHRF1, Cas9, EGFR, GDF-8 (Latent), GDF-8 (Mature), IL-7Rα, Maltose Binding Protein (MBP), Nipah virus Glycoprotein G, PD-L1, RBX1, TNFα, TREM2, TrkA, and VEGF-A. We present results for 15 of 16 targets, as the experimental data for one target, GDF-8 (Mature), were inconclusive due to target aggregation and non-specific stickiness.
-5. 15-PGDH and latent GDF-8 were not used in multi-target mode. Opus 4.8 was run in single-target mode against three targets: TNFα, latent GDF-8, and mature GDF-8.
-6. Consisting of roughly 30,000 tokens, shared [here](https://huggingface.co/datasets/Anthropic/claude-protein-binder-design/tree/main).
-7. Prompts, computational models of the designed protein complexes, and experimental data can all be found [here](https://huggingface.co/datasets/Anthropic/claude-protein-binder-design/tree/main).
-8. For NMR, the raw signal (a “free induction decay”) as written by the spectrometer; for LC-MS, the instrument’s binary run file. Both are raw proprietary instrument files.
-9. We have [previously shared](https://www.anthropic.com/research/making-claude-a-chemist) work on Claude’s performance analyzing NMR data against standard software.
-10. The NMR prompt, in full: “i have a raw 1H FID: process it: FT, phase, baseline-correct. show me the spectrum. then pick peaks and integrate: give me a table with δ (ppm), multiplicity, J (Hz), and integral.” The LC-MS prompt: “Process the raw LCMS file: extract chromatograms and mass spectra, and summarize with figures.”
+01We consider binders to be high-affinity if they have at most single-digit nanomolar equilibrium dissociation constants (KD < 10 nM).
 
-## Related content
+02Derived by calculating overall *de novo* protein binder hit rates on <https://proteinbase.com/>.
 
-### Designing more efficient quantum circuits with Claude
+03This consisted of approving certain requests made by Claude (e.g., network access requests, code execution requests), resolving infrastructure issues outside of the protein design sessions, and ordering the generated designs for experimental validation.
 
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
+04In total, we selected 16 targets (the default species was human where relevant). In alphabetical order, they are: 15-PGDH, BBF-14, BHRF1, Cas9, EGFR, GDF-8 (Latent), GDF-8 (Mature), IL-7Rα, Maltose Binding Protein (MBP), Nipah virus Glycoprotein G, PD-L1, RBX1, TNFα, TREM2, TrkA, and VEGF-A. We present results for 15 of 16 targets, as the experimental data for one target, GDF-8 (Mature), were inconclusive due to target aggregation and non-specific stickiness.
 
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
+0515-PGDH and latent GDF-8 were not used in multi-target mode. Opus 4.8 was run in single-target mode against three targets: TNFα, latent GDF-8, and mature GDF-8.
 
-### Claude reveals ECDSA curve origins
+06Consisting of roughly 30,000 tokens, shared [here](https://huggingface.co/datasets/Anthropic/claude-protein-binder-design/tree/main).
 
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
+07Prompts, computational models of the designed protein complexes, and experimental data can all be found [here](https://huggingface.co/datasets/Anthropic/claude-protein-binder-design/tree/main).
 
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
+08For NMR, the raw signal (a “free induction decay”) as written by the spectrometer; for LC-MS, the instrument’s binary run file. Both are raw proprietary instrument files.
 
-### The AI expectations gap
+09We have [previously shared](https://www.anthropic.com/research/making-claude-a-chemist) work on Claude’s performance analyzing NMR data against standard software.
 
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to Anthropic Science
-
-Features on AI-assisted discoveries, practical workflows, and field notes across the sciences.
+10The NMR prompt, in full: “i have a raw 1H FID: process it: FT, phase, baseline-correct. show me the spectrum. then pick peaks and integrate: give me a table with δ (ppm), multiplicity, J (Hz), and integral.” The LC-MS prompt: “Process the raw LCMS file: extract chromatograms and mass spectra, and summarize with figures.”

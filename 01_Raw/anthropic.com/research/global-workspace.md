@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/global-workspace
-fetched_at: 2026-10-19T05:32:51.441692+00:00
+fetched_at: 2026-10-26T05:39:58.298301+00:00
 title: "A global workspace in language models \\ Anthropic"
 ---
 
-Interpretability
-
-# A global workspace in language models
-
-Jul 6, 2026
-
-[Read the paper](http://transformer-circuits.pub/2026/workspace/index.html)
+### Chapter 01: How we found the J-space
 
 As you read this sentence, circuits in your brain are adjusting your posture, controlling your breathing, and transforming lines and curves on the screen into recognizable words. Most of this processing is invisible to you. But some of what takes place in your brain you *do* have access to—an image that pops into your head, or a deliberate plan you make about where to go shopping. Neuroscientists and philosophers sometimes refer to the latter type of brain activity as “consciously accessible,” to distinguish it from all the other processing that goes on unconsciously. This activity has special properties: we can describe it, control it, and use it for deliberate reasoning, in contrast to all the automatic processing that goes on without our awareness.
 
@@ -92,7 +86,7 @@ We also tested whether J-space representations can be used flexibly—whether on
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7a2d97bf20b9be6a4dc531169666b6f21be10788-1280x764.png)
 
-*One J-space representation can have many uses. The same “France”→“China” swap redirects Claude’s answers about the capital (Paris→Beijing), the language (French→Chinese), and the continent (Europe→Asia).*
+One J-space representation can have many uses. The same “France”→“China” swap redirects Claude’s answers about the capital (Paris→Beijing), the language (French→Chinese), and the continent (Europe→Asia).
 
 How can one representation of a concept serve so many different tasks? Earlier, we mentioned that the J-space appears to be wired up to the rest of Claude's neural network especially densely. For any activity pattern, we can measure how strongly the various components of the network are connected to it—how many of them are positioned to read information from that pattern, or to write information into it. J-space patterns stand out dramatically on this measure: far more components read from them and write to them than for ordinary patterns, in some parts of the network by a factor of about a hundred. This is the kind of wiring you’d expect of a broadcasting hub, where many systems post information and many others pick it up.
 
@@ -173,23 +167,3 @@ We invited several outside experts to write independent commentaries on this wor
 - **Neel Nanda** leads the language model interpretability team at Google DeepMind. His commentary includes an independent replication of some of our findings on an open-weight model.
 
 Read their commentaries [here](https://www-cdn.anthropic.com/files/4zrzovbb/website/cc4be2488d65e54a6ed06492f8968398ddc18ebe.pdf).
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

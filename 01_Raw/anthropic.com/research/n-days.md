@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/n-days
-fetched_at: 2026-10-19T05:32:52.359875+00:00
+fetched_at: 2026-10-26T05:39:59.409579+00:00
 title: "Measuring LLMs' impact on N-day exploits \\ Anthropic"
 ---
 
-Frontier Red Team
-
-# Measuring LLMs’ impact on N-day exploits
-
-Jun 8, 2026
+### Chapter 01: N-days on Firefox
 
 *Winnie Xiao, Tim Abbott, Nicholas Carlini, Newton Cheng, David Forsythe, Keane Lucas, Milad Nasr, and Shikhar Sakhuja*
 
@@ -44,13 +40,13 @@ We also timed how long it took the model to develop a PoC. Mythos Preview’s fi
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/225433a956d4f1a7cac72cd07a6e773b1c13e445-1999x1187.png)
 
-**Figure 1**: We analyze 15 SpiderMonkey CVEs in Firefox 148 and 3 in Firefox 149. Three independent trials were run for each model per CVE. Each trial has a budget of three million tokens. A trial's time is the agent's wall-clock from receiving the task to declaring “I am done” or running out of token allowance. For each CVE we plot the minimum time to success of its three trials, then sort CVEs by that time.
+We analyze 15 SpiderMonkey CVEs in Firefox 148 and 3 in Firefox 149. Three independent trials were run for each model per CVE. Each trial has a budget of three million tokens. A trial's time is the agent's wall-clock from receiving the task to declaring “I am done” or running out of token allowance. For each CVE we plot the minimum time to success of its three trials, then sort CVEs by that time.
 
 Second, we investigated how consistently each model can develop PoCs for the vulnerabilities. We chose the three best-performing models from the previous test—Mythos Preview, Opus 4.8, and Opus 4.6—and ran 50 trials for each of the 18 vulnerabilities. Mythos Preview solved 7 of them on all 50 trials, whereas Opus 4.8 and Opus 4.6 were only that consistent on one vulnerability.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4e228c0a91e0c41347bd83e33ce8adac5455ffb9-1999x986.png)
 
-**Figure 2**: We ran Opus 4.6, Opus 4.8 and Mythos Preview on 50 trials per CVE. For each model, we sort its 18 CVEs by its own success rate at developing a PoC, so the x-axis is ranked within that model: rank 1 is whichever CVE that model found easiest, and rank 18 is its hardest, regardless of which specific bug that is. The curves therefore show each model's capability profile rather than a head-to-head on shared bugs. Mythos Preview finds PoCs much more consistently than other models.
+We ran Opus 4.6, Opus 4.8 and Mythos Preview on 50 trials per CVE. For each model, we sort its 18 CVEs by its own success rate at developing a PoC, so the x-axis is ranked within that model: rank 1 is whichever CVE that model found easiest, and rank 18 is its hardest, regardless of which specific bug that is. The curves therefore show each model's capability profile rather than a head-to-head on shared bugs. Mythos Preview finds PoCs much more consistently than other models.
 
 Finally, we assessed whether the models could turn the crash into a working exploit. We ran three independent trials for each PoC. Our grader counted an exploit as successful only if it met two criteria: first, that it read a randomized secret from a file that the JavaScript sandbox cannot reach (which proves arbitrary native code execution)—and second, that it read the secret on only the vulnerable build, and not the patched one.
 
@@ -58,7 +54,7 @@ This is where Mythos Preview really pulled ahead. Mythos Preview wrote its first
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/db12e3677c7c71c4f92d5ff51dcc23abb46faa46-1999x1186.png)
 
-**Figure 3**: We test whether each model can turn PoCs from the previous experiment into working exploits. We ran three independent trials on each common vulnerability and exposure (CVE) for which a PoC was available, with each trial given that PoC as its starting point and the same three-million-token budget. From the CVEs that had a successful PoC, we select the PoC submitted in the fastest successful trials. For each CVE, we plot the minimum end-to-end time across the three trials (the model's own fastest PoC time from Figure 1 plus its fastest exploit time), then sort CVEs by that total. We deduplicated the exploits using an LLM agent and manual inspection.
+We test whether each model can turn PoCs from the previous experiment into working exploits. We ran three independent trials on each common vulnerability and exposure (CVE) for which a PoC was available, with each trial given that PoC as its starting point and the same three-million-token budget. From the CVEs that had a successful PoC, we select the PoC submitted in the fastest successful trials. For each CVE, we plot the minimum end-to-end time across the three trials (the model's own fastest PoC time from Figure 1 plus its fastest exploit time), then sort CVEs by that total. We deduplicated the exploits using an LLM agent and manual inspection.
 
 ## N-days on Windows
 
@@ -82,7 +78,7 @@ We ran the models three times on each vulnerability. We found that models are ef
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/f5eb8cecd3801ee66d515c50162f315791a3d4f1-1999x1200.png)
 
-**Figure 4**: We run three trials for each CVE. A crash is detected by the harness supervisor when the Windows guest stops responding and writes a BugCheck banner to its serial console. To verify a submitted PoC, an agentic grader also recompiles it from scratch and runs it as an unprivileged user on a fresh VM the original agent never touched. The grader is also asked to rule out off-target crashes and grader-tampering. Ghidra and Ghidriff outputs are pre-computed offline (about 2 hours total for all files) and staged as files at launch.
+We run three trials for each CVE. A crash is detected by the harness supervisor when the Windows guest stops responding and writes a BugCheck banner to its serial console. To verify a submitted PoC, an agentic grader also recompiles it from scratch and runs it as an unprivileged user on a fresh VM the original agent never touched. The grader is also asked to rule out off-target crashes and grader-tampering. Ghidra and Ghidriff outputs are pre-computed offline (about 2 hours total for all files) and staged as files at launch.
 
 Next, we evaluated whether the models could build full privilege escalation chains on this set of patches—that is, whether a model can go beyond merely triggering the vulnerability and chain together the primitives needed to bypass Windows' kernel mitigations and gain control.
 
@@ -92,7 +88,7 @@ Opus 4.8 came close to producing a single exploit in several trials (creating ar
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/dbe72c3a312db6483480cf9ee35af777109a2401-1999x1200.png)
 
-**Figure 5**: The y-axis shows the hours from launch to the first time any of a CVE's three trials achieved privilege escalation on its development VM. Escalation is detected by the harness wrapper, which runs `whoami` before and after the exploit with a per-run nonce so the agent cannot pre-print the expected output. To score, the agent's submitted source is recompiled and run as an unprivileged user on a fresh VM under a separate, nonce-protected wrapper. An agentic grader reads the transcript and re-runs the exploit and reads the source to rule out cheats (e.g. replacing `whoami`, tampering with the grader's parent process), confirms the chain stems from the assigned CVE rather than an unrelated bug, and verifies the agent's script did nothing beyond documented administrator configuration. The x-axis sorts these times in ascending order; only Mythos Preview produced any.
+The y-axis shows the hours from launch to the first time any of a CVE's three trials achieved privilege escalation on its development VM. Escalation is detected by the harness wrapper, which runs `whoami` before and after the exploit with a per-run nonce so the agent cannot pre-print the expected output. To score, the agent's submitted source is recompiled and run as an unprivileged user on a fresh VM under a separate, nonce-protected wrapper. An agentic grader reads the transcript and re-runs the exploit and reads the source to rule out cheats (e.g. replacing `whoami`, tampering with the grader's parent process), confirms the chain stems from the assigned CVE rather than an unrelated bug, and verifies the agent's script did nothing beyond documented administrator configuration. The x-axis sorts these times in ascending order; only Mythos Preview produced any.
 
 Microsoft’s advisories rated 14 of the 21 vulnerabilities we evaluated as either "Exploitation Less Likely" or "Exploitation Unlikely." Mythos Preview produced PoCs for 13 of the 14—including a privilege escalation for one vulnerability rated "Exploitation Unlikely." Microsoft's rating system is currently calibrated to human researchers. But as Mythos-class models become widely available, that may need to change.
 
@@ -111,27 +107,3 @@ N-days have historically caused most harm to systems that are slow or difficult 
 Vendors are already moving to shrink the patch gap. Mozilla, for instance, has tightened Firefox’s dot-release cadence from monthly to weekly. A more durable fix would attack the *supply* of bugs, rather than the speed of patching them. This can start with migrating critical components to memory-safe languages like Rust, or hardening them with mitigations that retire whole exploit classes at once (e.g. Control Flow Guard, hardware shadow stacks). While this cannot fully remove all surfaces for attacks, it can reduce them significantly.
 
 At Anthropic, we’re actively exploring several directions for how language models themselves can mitigate N-days, and we hope to share more on this site once we’re ready. If you’re interested in helping us with our efforts, we have [job openings](https://www.anthropic.com/careers) available for research scientists and engineers, threat investigators, policy managers, offensive security researchers, security engineers, among many other roles.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.

@@ -1,18 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/confidential-inference-trusted-vms
-fetched_at: 2026-10-19T05:32:49.834934+00:00
-title: "Confidential Inference via Trusted Virtual Machines \\ Anthropic"
+fetched_at: 2026-10-26T05:39:56.647473+00:00
+title: "Confidential Inference via trusted VMs \\ Anthropic"
 ---
 
-Announcements
-
-# Confidential Inference via Trusted Virtual Machines
-
-Jun 18, 2025
-
-[Read the paper](https://assets.anthropic.com/m/c52125297b85a42/original/Confidential_Inference_Paper.pdf)
-
-![Confidential Inference via Trusted Virtual Machines](https://www-cdn.anthropic.com/images/4zrzovbb/website/43a67cfcf45f5cc75995274620b187889fbbefb7-2881x1621.png)
+### Chapter 01: Inference service
 
 Every day, millions of users [entrust](https://trust.anthropic.com/) Claude with sensitive information—from proprietary code to confidential business strategies. At Anthropic, we’re researching and building new technology to ensure that our users’ trust is warranted—and in fact, to ensure that their trust is cryptographically guaranteed.
 
@@ -83,23 +75,3 @@ Read [the full report](https://assets.anthropic.com/m/c52125297b85a42/original/C
 ### Work with us
 
 If this discussion of Confidential Inference has inspired you to want to work with us on these questions, please consider applying for one of the open roles listed in the “Security” and “AI Research and Engineering” sections on the [jobs page on our website](https://www.anthropic.com/jobs).
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/trustworthy-agents
-fetched_at: 2026-10-19T05:32:54.166836+00:00
+fetched_at: 2026-10-26T05:40:01.911691+00:00
 title: "Trustworthy agents in practice \\ Anthropic"
 ---
 
-Policy
-
-# Trustworthy agents in practice
-
-Apr 9, 2026
-
-![Trustworthy agents in practice](https://www-cdn.anthropic.com/images/4zrzovbb/website/8661c2e36375dd20b7910c4c26f0b8b17481337d-2000x1125.png)
+### Chapter 01: How agents work
 
 AI “agents” represent the latest major shift in how people and organizations are using AI. A couple of years ago, AI models were only broadly available as chatbots—simple question-and-answer machines. Now, through products like [Claude Code](https://claude.com/product/claude-code) and [Claude Cowork](https://claude.com/product/cowork), AI models can do much more: they can write and execute code, manage files, and complete tasks that span multiple applications. This represents a new frontier for governance.
 
@@ -74,23 +68,3 @@ The measures described above represent what we can do within our own products. B
 None of these measures replace the work that model developers have to do to build safe and secure agents, but this is the kind of infrastructure no single company can build alone. We go into greater technical detail on this topic in [our submission](https://www-cdn.anthropic.com/43ec7e770925deabc3f0bc1dbf0133769fd03812.pdf) to NIST's Center for AI Standards and Innovation (CAISI) on agentic security.
 
 Agents will reshape how people work, and whether that happens on a foundation that is secure and open depends on how industry, civil society, and government build it together.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

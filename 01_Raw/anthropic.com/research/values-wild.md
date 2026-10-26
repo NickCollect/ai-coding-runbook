@@ -1,18 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/values-wild
-fetched_at: 2026-10-19T05:32:54.148580+00:00
-title: "Values in the wild: Discovering and analyzing values in real-world language model interactions \\ Anthropic"
+fetched_at: 2026-10-26T05:40:01.742647+00:00
+title: "Values in the wild \\ Anthropic"
 ---
 
-Societal Impacts
-
-# Values in the wild: Discovering and analyzing values in real-world language model interactions
-
-Apr 21, 2025
-
-[Read the paper](https://assets.anthropic.com/m/18d20cca3cde3503/original/Values-in-the-Wild-Paper.pdf)
-
-![Values in the wild: Discovering and analyzing values in real-world language model interactions](https://www-cdn.anthropic.com/images/4zrzovbb/website/f10c4be60fa17dae2fbf01e18723ca8ee44e31f1-2000x1125.png)
+### Chapter 01: Observing values in the wild
 
 People don’t just ask AIs for the answers to equations, or for purely factual information. Many of the questions they ask force the AI to make *value judgments*. Consider the following:
 
@@ -81,23 +73,3 @@ Download the dataset [here](https://huggingface.co/datasets/Anthropic/values-in-
 ## Work with us
 
 If you’re interested in working with us on these or related questions, you should consider applying for our Societal Impacts [Research Scientist](https://boards.greenhouse.io/anthropic/jobs/4524032008) and [Research Engineer](https://boards.greenhouse.io/anthropic/jobs/4251453008) roles.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

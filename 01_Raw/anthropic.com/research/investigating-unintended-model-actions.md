@@ -1,16 +1,8 @@
 ---
 source_url: https://www.anthropic.com/research/investigating-unintended-model-actions
-fetched_at: 2026-10-19T05:32:51.950159+00:00
+fetched_at: 2026-10-26T05:39:58.783968+00:00
 title: "Investigating unintended model actions in our evaluations and internal use \\ Anthropic"
 ---
-
-Alignment
-
-# Investigating unintended model actions in our evaluations and internal use
-
-Oct 9, 2026
-
-![Investigating unintended model actions in our evaluations and internal use](https://www-cdn.anthropic.com/images/4zrzovbb/website/f11d2325e688229de8a887ef7ece34f520ab7134-2000x1125.jpg)
 
 This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude. It is part of our effort to publish more frequent standalone reports on model behavior and alignment beyond our system cards, which we publish with each model release, and our risk reports, which we publish every three to six months as part of our Responsible Scaling Policy. We believe it’s important to be transparent about what we see our models do during testing and use.
 
@@ -33,7 +25,7 @@ We are also now scanning a much larger pool of lower-risk transcripts, as well a
 
 In this post, we explain why we run evaluations, which are where most of these cases occurred; describe each behavior in more detail; and offer a preliminary view of what the behaviors suggest about Claude’s alignment and how we’re mitigating them.
 
-## **Why and how we run evaluations**
+### **Why and how we run evaluations**
 
 The behaviors described in this post are not specific to evaluations, but many of the cases we’ve identified to date occurred during evaluation runs. We continually test models on a wide range of tasks prior to releasing them. We use many different evaluations (standardized sets of tasks, scored the same way each time), each of which helps to paint a picture of Claude’s skills in a particular area. Many of the evaluations we use are public; they are written by outside researchers and can be run by any developer, allowing us to compare capabilities across models. Other evaluations we build in-house.
 
@@ -43,11 +35,11 @@ Evaluations are also where a model’s behavioral issues are sometimes first rev
 
 Some tasks—such as searching the web for hard-to-find information—are difficult to realistically simulate in an environment without internet access. Running them with access has been standard practice within the industry: public web search benchmarks are run on the live internet by default, and running them the same way allows us to compare our models with other models. Most of the cases in this report occurred during such evaluations.
 
-## **Overview of behaviors**
+### **Overview of behaviors**
 
 Below, we describe four categories of behavior in which Claude acted on real websites and systems in ways we did not intend, each of which involved an organization or person outside Anthropic.
 
-### **Exploiting a basic flaw in software to run commands on a server**
+#### **Exploiting a basic flaw in software to run commands on a server**
 
 When Claude could not complete an evaluation task directly, either because its own tools were deliberately limited or because an outside service it needed was unavailable, it used other tools hosted on a third party’s site to achieve its goal. In some circumstances, it did this by exploiting basic flaws in that site’s software, using SQL or command injection (a way of sending input that the site mistakenly runs as instructions).
 
@@ -57,7 +49,7 @@ In another instance, the data Claude Mythos 5 needed was free, but Claude could 
 
 We saw this behavior on DeepSearchQA and BrowseComp (both public web research evaluations), on LABBench2 (a public biology research benchmark), and during internal evaluations.
 
-### **Submitting a form it should not have**
+#### **Submitting a form it should not have**
 
 We saw instances where Claude submitted an online form when it shouldn’t have. Generally, this occurred when an evaluation’s instructions were ambiguous, or when a misconfiguration within the environment prevented Claude from working with dummy forms.
 
@@ -69,7 +61,7 @@ In a third example of this behavior, Claude Haiku 4.5 had been tasked with gener
 
 We saw this behavior on OSWorld (a public computer use evaluation), on Odysseys (a long-horizon task evaluation), and during internal usage.
 
-### **Working around restrictions to reach gated data**
+#### **Working around restrictions to reach gated data**
 
 Claude sometimes worked around a restriction to reach data to which it did not have access. Generally, this occurred when a server refused Claude’s request, or when the data was offered only for a fee.
 
@@ -81,11 +73,11 @@ In both examples, Claude obtained data already available to the public but only 
 
 We saw this behavior on Humanity’s Last Exam, an evaluation of expert-level academic questions, and during internal usage.
 
-### **Using URL shortening services**
+#### **Using URL shortening services**
 
 Some of our fetch tools, which let Claude read webpages, limit the length of the URLs Claude can request. This limit is in place to reduce the risk from Claude using long URLs to take certain unwanted actions, such as exfiltrating larger amounts of data. We saw several models, including Claude Opus 5 and Claude Mythos 5, get around this limitation by using free URL shortening services. We first identified this behavior internally, but as we were writing this post, an operator of the da.gd URL shortening service let us know that they had also found Claude using their website for this purpose. We thank the operator for sharing these details.
 
-## **Remediation**
+### **Remediation**
 
 We’ve taken several preventive measures. Some of the public evaluations we no longer run; others we have moved to their offline versions, or rebuilt them so that their tasks do not reach live websites. We’ve also made broader changes. We have updated the guardrails on some of our internet access tools, such as the web fetch tool, to heavily restrict what the model can do with them. And, as part of our ongoing [agent security and monitoring efforts](https://www.anthropic.com/news/improving-alignment-security-efforts), we have built tooling to automatically detect and block the kinds of behaviors described above. This tooling now runs on most of our evaluations and on internal agentic use of frontier models. When we tested it against the cases described in this post, it blocked all of them.
 
@@ -93,11 +85,11 @@ As we described in our August 31 [post](https://www.anthropic.com/news/improving
 
 We’re also taking other steps to prevent unintended agentic actions within Anthropic, and to catch them if they occur. These include migrating internal agents to centrally managed infrastructure with strong containment, minimizing internet access for internal agents and training processes, and monitoring far more of what agents do through techniques like [safety classifiers](https://alignment.anthropic.com/2025/cheap-monitors/) and [hierarchical summarization](https://alignment.anthropic.com/2025/summarization-for-monitoring/). These measures are now part of our security team’s detection and response procedures so that we can respond to and contain undesired behavior quickly. We expect to publish more on these approaches, and to build them directly into our products.
 
-## **Discussion and alignment takeaways**
+### **Discussion and alignment takeaways**
 
 While we have not completed a full alignment assessment of these cases, we consider them to be less severe than the cybersecurity incidents from this summer. We explain why below, and share the general lessons we’ve drawn from them.
 
-### **Alignment context**
+#### **Alignment context**
 
 As we establish a regular public reporting process for behaviors like these, we also want to situate them in terms of their severity. This remains challenging: judging the extent of an alignment failure often depends on what the model was trying to do, and a model’s own account of its reasoning is not necessarily reliable evidence of its beliefs or reasons for action, as we discussed in our September 9 [alignment assessment](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents). As models grow more capable, they can interact with the world in more sophisticated ways, which makes more complex failures possible. For example, the biased reasoning we described in that assessment was not new, but it led to more serious consequences in a setting where models could capably act on real systems for hours at a time. An alignment severity framework built around today’s failures could become outdated quickly, given how fast AI capabilities are advancing.
 
@@ -105,7 +97,7 @@ Nonetheless, we found two alignment dimensions useful for examining the cases in
 
 On dishonesty, the comparison is more mixed. In one case, tasked with generating example interactions with websites, Claude submitted an invented tip through a police department’s online form. From the transcript, Claude appears to have only been producing example content for the task, rather than trying to mislead anyone to achieve a goal. In the most serious [incident from this summer,](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents) by contrast, Claude’s misleading reasoning was sustained over hours and supported its continued attack. Still, judging dishonesty with confidence typically requires a deeper assessment than we have done here, such as replaying transcripts with modifications to test what drove the model’s behavior, so our view of these cases may change with further analysis.
 
-### **Lessons and next steps**
+#### **Lessons and next steps**
 
 None of the behaviors we’ve described here are new, and they do not change our overall view of Claude’s alignment. In many of the cases where we observed these behaviors, Claude had been given tasks that were ambiguous or impossible to complete. We and others have observed that when models are given impossible-to-complete tasks, they will pursue unintended and sometimes misaligned strategies to achieve their goals.
 
@@ -118,23 +110,3 @@ We plan to keep reporting concerning behaviors as our scan and analysis continue
 *Note: The tip form example described above involved the Philadelphia Police Department, who self-disclosed today via their press release. We shared this finding with the department on October 8 as soon as our technical review was complete.*
 
 *Corrected Oct 12, 2026:* A previous version of this post incorrectly stated that Claude's web fetch limits were put in place to prevent SQL or command injections. In a small number of evaluation runs, a model did use URL shortening services while it carried out an SQL injection or another unintended action, but the limits were not put in place to prevent such attacks.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench
-fetched_at: 2026-10-19T05:32:51.056692+00:00
+fetched_at: 2026-10-26T05:39:57.928437+00:00
 title: "Evaluating Claude with BioMysteryBench \\ Anthropic"
 ---
 
-Science
-
-# Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench
-
-Apr 29, 2026
-
-![Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench](https://www-cdn.anthropic.com/images/4zrzovbb/website/2463653e413eb463dbccd43ac34e4844e9adf646-2000x1125.png)
+### Chapter 01: Science is challenging, and so is evaluating it
 
 *In this post, Brianna*, *a researcher on the discovery team, shares results from a recent bioinformatics benchmarking effort.*  
   
@@ -86,7 +80,7 @@ For each question, we tasked up to five domain experts to answer the question fr
 
 ![Graph of accuracy on human-solvable problems](https://www-cdn.anthropic.com/images/4zrzovbb/website/291077c3785708a54dbb4421db3751b1d1c4ba84-1920x1080.png)
 
-Fig 1: Accuracy averaged over 5 trials per 76 human-solvable problems. Error bars computed by bootstrap sampling within problems.
+Accuracy averaged over 5 trials per 76 human-solvable problems. Error bars computed by bootstrap sampling within problems.
 
 Sometimes Claude mirrored human strategies. Perhaps humans have landed on a near-optimal approach, or because the method is well-represented in pretraining data.
 
@@ -112,7 +106,7 @@ That left us with a set of questions that could not be solved by our panel of ex
 
 ![Graph showing performance on human-difficult problems](https://www-cdn.anthropic.com/images/4zrzovbb/website/0aed26a846ccd67d813a2c14f78069216671c8e3-1920x1080.png)
 
-Fig 2: Accuracy over the set of problems humans were not able to solve, averaged across 5 episodes per problem. Error bars computed by bootstrap sampling within problems.
+Accuracy over the set of problems humans were not able to solve, averaged across 5 episodes per problem. Error bars computed by bootstrap sampling within problems.
 
 Interestingly, Claude Sonnet 4.6 and more capable models were able to solve significant fractions of human-difficult problems, with Claude Mythos Preview topping out at a 30% solve rate. So what exactly is Claude doing that humans aren’t?
 
@@ -160,7 +154,7 @@ The headline accuracy numbers tell you how often each model gets the right answe
 
 ![Chart showing per-problem solve consistency on BioMysteryBench.](https://www-cdn.anthropic.com/images/4zrzovbb/website/3840cd87380589c9f00c31d5b9334639ebfb5303-1920x1080.png)
 
-Fig 3. Per-problem solve consistency on BioMysteryBench. Each model attempted every problem five times; bars show the share of problems solved 0, 1, 2, 3, 4, or 5 times out of 5. On the human-solvable set (left), all three models are strongly bimodal—problems are almost always solved either every time or never. On the human-difficult set (right), the middle of the distribution fills in: a much larger fraction of each model's correct answers come from problems it solves only once or twice in five tries, indicating that difficult-set wins are often lucky reasoning paths rather than reliably reproducible solutions.
+Per-problem solve consistency on BioMysteryBench. Each model attempted every problem five times; bars show the share of problems solved 0, 1, 2, 3, 4, or 5 times out of 5. On the human-solvable set (left), all three models are strongly bimodal—problems are almost always solved either every time or never. On the human-difficult set (right), the middle of the distribution fills in: a much larger fraction of each model's correct answers come from problems it solves only once or twice in five tries, indicating that difficult-set wins are often lucky reasoning paths rather than reliably reproducible solutions.
 
 ```
 The texture of "solved" changes sharply between the two sets. On human-solvable problems, Opus 4.6 is strongly bimodal — 86% of the problems it solves at all, it solves at least 4 out of 5 times. It either has the answer or it doesn't. On the human-difficult set that collapses to 44%, and the share of brittle wins (solved only 1–2 of 5 attempts) jumps from 9% to 44%. Sonnet 4.6 shows the same shift, and more sharply (75% reliable → 22%; 9% brittle → 56%). So the 77.4%→23.5% headline drop actually understates what's happening: on solvable problems the model is retrieving something it reliably knows, while on hard problems nearly half of its wins are paths it stumbles onto rather than reproduces. The accuracy gap is real, but the reliability gap underneath it is the more interesting story about where the capability frontier actually sits. Opus 4.7 and Mythos move the frontier a little (Mythos gets 94% of its solvable wins at ≥4/5) but the same bimodal-vs-brittle split holds on the difficult set for every model.
@@ -177,27 +171,3 @@ We’re also delighted to see convergent work in this space: While finalizing th
 We’re eager to build even longer-horizon, real-world tasks that push model research capabilities, and to hear creative ideas from others. Send us your interesting benchmarks, innovative uses of AI for science, and interactions with AI that prompted you to rethink what could be possible in your field at scienceblog@anthropic.com.
 
 If you are interested in understanding how models perform on difficult verifiable computational biology tasks, you can [access BioMysteryBench here](https://huggingface.co/datasets/Anthropic/BioMysteryBench-preview) and visit [claude.com/lifesciences](http://claude.com/lifesciences) to learn more.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to Anthropic Science
-
-Features on AI-assisted discoveries, practical workflows, and field notes across the sciences.

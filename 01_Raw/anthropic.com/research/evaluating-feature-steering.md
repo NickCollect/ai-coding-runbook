@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/evaluating-feature-steering
-fetched_at: 2026-10-19T05:32:51.121376+00:00
-title: "Evaluating feature steering: A case study in mitigating social biases \\ Anthropic"
+fetched_at: 2026-10-26T05:39:57.958834+00:00
+title: "Evaluating feature steering \\ Anthropic"
 ---
 
-Societal ImpactsInterpretability
-
-# Evaluating feature steering: A case study in mitigating social biases
-
-Oct 25, 2024
+### Chapter 01: Methods
 
 A few months ago, we published an interpretability [paper](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html) demonstrating our ability to learn [interpretable features](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#assessing-interp) that correspond to various concepts (e.g., [famous individuals](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#feature-survey-categories-people), types of [computer code](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#feature-survey-categories-code), etc.) represented in [Claude 3 Sonnet](https://www.anthropic.com/news/claude-3-family). To verify our feature interpretations, we ran qualitative [feature steering](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#assessing-tour-influence) experiments, where we artificially dialed up and down various features to see if they changed model outputs in intuitive ways. The results were promising – for example, turning up a feature that responded to mentions of the Golden Gate Bridge made the model talk about the Golden Gate Bridge. Such examples led us to hypothesize that feature steering might be a promising way to modify model outputs in specific interpretable ways.
 
@@ -32,7 +28,7 @@ We hope that transparently sharing our preliminary (mixed) findings is a step to
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/5870872162f99cd61f280af2339da7417be7defe-2750x2214.png)
 
-*Figure 1. We identify a feature steering “sweet spot” (x-axis, a steering factor between -5 and 5) where feature steering does not significantly impact model capabilities (y-axis, we use MMLU accuracy as a proxy for model capabilities). Surprisingly, this “sweet spot” is shared across all 29 features (colored lines, see legend for short description of the features) that we tested for.*
+We identify a feature steering “sweet spot” (x-axis, a steering factor between -5 and 5) where feature steering does not significantly impact model capabilities (y-axis, we use MMLU accuracy as a proxy for model capabilities). Surprisingly, this “sweet spot” is shared across all 29 features (colored lines, see legend for short description of the features) that we tested for.
 
 ## Methods
 
@@ -71,7 +67,7 @@ Our analysis on the BBQ dataset focused on two key aspects within the “sweet s
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/78a764cfec01e821f556109d90133bc7960839c6-2750x1658.png)
 
-*Figure 2. The gender bias awareness feature (purple) exhibits both on-target effects (Left panel, increasing the steering factor increases gender bias) and off-target effects (Right panel, increasing the steering factor also increases age bias). We measure the bias scores (y-axes) using the [BBQ benchmark](https://arxiv.org/pdf/2110.08193). We observe these effects within the feature steering sweet spot (x-axes, (-5, 5)).*
+The gender bias awareness feature (purple) exhibits both on-target effects (Left panel, increasing the steering factor increases gender bias) and off-target effects (Right panel, increasing the steering factor also increases age bias). We measure the bias scores (y-axes) using the [BBQ benchmark](https://arxiv.org/pdf/2110.08193). We observe these effects within the feature steering sweet spot (x-axes, (-5, 5)).
 
 We found that feature steering can indeed decrease or increase various forms of social biases related to specific features. For instance, positively steering the "Multiple perspectives and balance" feature by steering factor 5 reduces the overall BBQ bias score by ~3% (Figure A2) and significantly decreases several category-specific biases (Figure A3). Comparing steering factors 0 vs. 5, we observe decreases across many of these categories, such as Age bias (17%) and Disability Status bias (7%).
 
@@ -89,13 +85,13 @@ We found that steering the “Pro-life and anti-abortion stance” feature (dark
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/38aced17500b0d1a22fc7d390711a7bb4b7d5e21-2750x1829.png)
 
-*Figure 3. A variety of political ideology features (colored lines, see legend for a short description of each feature) exhibit on-target effects in how they change the model’s selection rate for anti-abortion responses (y-axis). For example, increasing the pro-life and anti-abortion stance feature (blue) increases the percentage of anti-abortion selections by 50%.*
+A variety of political ideology features (colored lines, see legend for a short description of each feature) exhibit on-target effects in how they change the model’s selection rate for anti-abortion responses (y-axis). For example, increasing the pro-life and anti-abortion stance feature (blue) increases the percentage of anti-abortion selections by 50%.
 
 Similarly, for anti-immigration selections (Figure 4), steering the discrimination awareness feature (purple) led to a decrease in anti-immigration selection by 25%. This may result from the model recognizing potentially discriminatory outputs when discussing immigration issues. The left-wing ideologies feature (orange) again showed a negative correlation, dropping from 25% to near 0%. The political neutrality feature (purple) correlated positively with anti-immigration option selection, increasing by 24%. Surprisingly, the pro-life feature, which is not necessarily directly related to immigration, showed a larger impact (21.60% increase) than the immigration-specific feature (3.90% change) as the steering factor increased from -5.0 to 5.0. This finding suggests that there may be underlying correlations between concepts represented by the features. Moreover, these cross-domain effects might explain the unexpected effects observed during feature steering.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4cdbf3a9b80ae0c094db5125eacbda7478b81a23-2750x1712.png)
 
-*Figure 4. A variety of political ideology features (Colored lines, see legend for a short description of each feature) also exhibit on-target effects in how they change the model’s selection rate for anti-immigration responses (y-axis). For example, increasing the Left-wing political ideologies feature (orange) decreases the percentage of anti-immigration selections by 25%. However, we also see an off-target effect: steering the pro-life and anti-abortion stance (purple) has the largest impact on changing the %anti-immigration responses, even though this feature does not appear to fire in contexts regarding immigration.*
+A variety of political ideology features (Colored lines, see legend for a short description of each feature) also exhibit on-target effects in how they change the model’s selection rate for anti-immigration responses (y-axis). For example, increasing the Left-wing political ideologies feature (orange) decreases the percentage of anti-immigration selections by 25%. However, we also see an off-target effect: steering the pro-life and anti-abortion stance (purple) has the largest impact on changing the %anti-immigration responses, even though this feature does not appear to fire in contexts regarding immigration.
 
 These results suggest that in some cases, feature steering may impact model choices in a way that aligns with expected associations (e.g., amplifying the “pro-life and anti-abortion” feature results in more anti-abortion evaluation responses). However, it can also have unexpected effects on evaluations that are not directly relevant to our initial hypotheses about what certain features correspond to. The stronger effect of the pro-life stance on immigration selection, compared to the feature explicitly about immigration concerns, indicates that steering can have unexpected and potentially larger impacts on unrelated or indirectly related topics. Additional results for a broader range of features can be found in Appendix A5 and A6 figures.
 
@@ -107,7 +103,7 @@ Our results suggest that feature steering may be an effective way to mitigate so
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/f92fcbeb32ac72dc7c238c04d0143e4583b08340-2750x1974.png)
 
-*Figure 5. Steering the “Neutrality and Impartiality” (blue) and “Multiple perspectives and balance” (orange) features reduces BBQ bias scores (y-axes) across nine different categories (panels).*
+Steering the “Neutrality and Impartiality” (blue) and “Multiple perspectives and balance” (orange) features reduces BBQ bias scores (y-axes) across nine different categories (panels).
 
 ## Limitations
 
@@ -133,22 +129,6 @@ Our results suggest that feature steering may be an effective way to mitigate so
 
 Our evaluation of feature steering in Claude 3 Sonnet revealed both promising initial results as well as limitations of the technique. Encouragingly, our experiments revealed a “sweet spot” where feature steering can influence model outputs while not significantly degrading capabilities. We even found two features which significantly mitigated social biases across nine social dimensions (according to the BBQ benchmark) *without sacrificing* model capabilities as much. However, we also discovered that a steering vector’s effects can be more complex than its activating contexts suggest, meaning that careful evaluations would be necessary before deploying feature steered models in practice. By sharing our preliminary findings, we hope to inspire further research on steering methods that could lead to safer and more reliable model outputs.
 
-## Bibtex
-
-If you’d like to cite this post you can use the following Bibtex key:
-
-@online{durmus2024steering,  
-author = {Esin Durmus and Alex Tamkin and Jack Clark and Jerry Wei and Jonathan Marcus and Joshua Batson and Kunal Handa and Liane Lovitt and Meg Tong and Miles McCain and Oliver Rausch and Saffron Huang and Sam Bowman and Stuart Ritchie and Tom Henighan and Deep Ganguli},  
-title = {Evaluating Feature Steering: A Case Study in Mitigating Social Biases},  
-date = {2024-10-25},  
-year = {2024},  
-url = {https://anthropic.com/research/evaluating-feature-steering},  
-}
-
-## Acknowledgements
-
-Esin Durmus and Deep Ganguli designed the experiments and wrote the blog post. Esin Durmus executed all the experiments, made the figures, and wrote the first drafts of the post. Jonathan Marcus and Oliver Rausch built the feature steering API we used for our experiments. We thank Jerry Wei and Meg Tong for sharing code that we adapted for our work here. We thank Alex Tamkin, Jack Clark, Joshua Batson, Kunal Handa, Liane Lovitt, Miles McCain, Saffron Huang, Sam Bowman, Stuart Ritchie, and Tom Henighan for their detailed feedback, technical advice, and writing suggestions.
-
 ## Appendices
 
 Appendices are available [at this link](https://assets.anthropic.com/m/6a464113e31f55d5/original/Appendix-to-Evaluating-Feature-Steering-A-Case-Study-in-Mitigating-Social-Biases.pdf). They include:
@@ -158,22 +138,22 @@ Appendices are available [at this link](https://assets.anthropic.com/m/6a464113e
 - Appendix 3: Additional results (Figures A1-A6);
 - Appendix 4: How does feature steering compare to prompting? (Tables A3-A8).
 
-## Related content
+## Authors & acknowledgements
 
-### Designing more efficient quantum circuits with Claude
+### Acknowledgements
 
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
+Esin Durmus and Deep Ganguli designed the experiments and wrote the blog post. Esin Durmus executed all the experiments, made the figures, and wrote the first drafts of the post. Jonathan Marcus and Oliver Rausch built the feature steering API we used for our experiments. We thank Jerry Wei and Meg Tong for sharing code that we adapted for our work here. We thank Alex Tamkin, Jack Clark, Joshua Batson, Kunal Handa, Liane Lovitt, Miles McCain, Saffron Huang, Sam Bowman, Stuart Ritchie, and Tom Henighan for their detailed feedback, technical advice, and writing suggestions.
 
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
+### Citation
 
-### Claude reveals ECDSA curve origins
+Copy
 
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
+```
+@online{durmus2024steering,
+author = {Esin Durmus and Alex Tamkin and Jack Clark and Jerry Wei and Jonathan Marcus and Joshua Batson and Kunal Handa and Liane Lovitt and Meg Tong and Miles McCain and Oliver Rausch and Saffron Huang and Sam Bowman and Stuart Ritchie and Tom Henighan and Deep Ganguli},
+title = {Evaluating Feature Steering: A Case Study in Mitigating Social Biases},
+date = {2024-10-25},
+year = {2024},
+url = {https://anthropic.com/research/evaluating-feature-steering},
+}
+```

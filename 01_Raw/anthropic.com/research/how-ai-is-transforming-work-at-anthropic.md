@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic
-fetched_at: 2026-10-19T05:32:51.479068+00:00
+fetched_at: 2026-10-26T05:39:58.442819+00:00
 title: "How AI is transforming work at Anthropic \\ Anthropic"
 ---
 
-Societal Impacts
-
-# How AI is transforming work at Anthropic
-
-Dec 2, 2025
-
-![How AI is transforming work at Anthropic](https://www-cdn.anthropic.com/images/4zrzovbb/website/83d7d2fe412ceb4dfe627f0d5f3d64aff1a3f5db-1000x1000.svg)
+### Chapter 01: Key findings
 
 How is AI changing the way we work? Our [previous research](https://www.anthropic.com/economic-index) on AI’s economic impacts looked at the labor market as a whole, covering a variety of different jobs. But what if we studied some of the earliest adopters of AI technology in more detail—namely, us?
 
@@ -59,7 +53,7 @@ Below are the most common daily tasks. Most employees (55%) used Claude for debu
 
 ![Figure 1: Proportion of daily users (x-axis) for various coding tasks (y-axis).](https://www-cdn.anthropic.com/images/4zrzovbb/website/64a18b1756d8954a93e1356f1330ec11075fbe54-3840x2160.png)
 
-*Figure 1: Proportion of daily users (x-axis) for various coding tasks (y-axis).*
+Proportion of daily users (x-axis) for various coding tasks (y-axis).
 
 ### Usage and productivity
 
@@ -71,7 +65,7 @@ An interesting productivity pattern emerges when asking employees, for task cate
 
 ![Figure 2: Impact on time spent (left panel) and output volume (right panel) by task (y-axis). The x-axis on each plot corresponds to either a self-reported decrease (negative values), increase (positive values) or no change (vertical dashed line) in time spent or output volume for categories of Claude-assisted tasks, compared to not using Claude. Error bars show 95% confidence intervals. Circle area is proportional to the number of responses at each rating point. Only respondents who reported using Claude for each task category are included.](https://www-cdn.anthropic.com/images/4zrzovbb/website/9449bf9393743105a414e17324f30970208ce14b-3840x2160.png)
 
-*Figure 2: Impact on time spent (left panel) and output volume (right panel) by task (y-axis). The x-axis on each plot corresponds to either a self-reported decrease (negative values), increase (positive values) or no change (vertical dashed line) in time spent or output volume for categories of Claude-assisted tasks, compared to not using Claude. Error bars show 95% confidence intervals. Circle area is proportional to the number of responses at each rating point. Only respondents who reported using Claude for each task category are included.*
+Impact on time spent (left panel) and output volume (right panel) by task (y-axis). The x-axis on each plot corresponds to either a self-reported decrease (negative values), increase (positive values) or no change (vertical dashed line) in time spent or output volume for categories of Claude-assisted tasks, compared to not using Claude. Error bars show 95% confidence intervals. Circle area is proportional to the number of responses at each rating point. Only respondents who reported using Claude for each task category are included.
 
 However, when we dig deeper into the raw data, we see that the time saving responses cluster at opposite ends—some people spend significantly *more* time on tasks that are Claude-assisted.
 
@@ -105,14 +99,35 @@ While these survey findings reveal significant productivity gains and changing w
 
 Engineers and researchers are developing a variety of strategies for productively leveraging Claude in their workflow. People generally delegate tasks that are:
 
-|  |
-| --- |
-| **Outside the user’s context *and* low complexity**:  “I use Claude for things where I have low context, but think that the overall complexity is also low.”  “The majority of the infra[structure] problems I have are not difficult and can be handled by Claude… I don’t know Git or Linux very well… Claude does a good job covering for my lack of experience in these areas.” |
-| **Easily verifiable:** “It's absolutely *amazing* for everything where validation effort isn't large in comparison to creation effort.” |
-| **Well-defined or self-contained:** “If a subcomponent of the project is sufficiently decoupled from the rest, I'll get Claude to take a stab.” |
-| **Code quality isn’t critical:** “If it's throwaway debug[ging] or research code, it goes straight to Claude. If it's conceptually difficult or needs some very specific type of debug injection, or a design problem, I do it myself.” |
-| **Repetitive or boring:** “The more excited I am to do the task, the more likely I am to not use Claude. Whereas if I'm feeling a lot of resistance… I often find it easier to start a conversation with Claude about the task.”  In our survey, on average people said that 44% of Claude-assisted work consisted of tasks they wouldn't have enjoyed doing themselves. |
-| **Faster to prompt than execute:** “[For] a task that I anticipate will take me less than 10 minutes... I'm probably not going to bother using Claude.”  “The cold start problem is probably the biggest blocker right now. And by cold start, I mean there is a lot of intrinsic information that I just have about how my team's code base works that Claude will not have by default… I could spend time trying to iterate on the perfect prompt [but] I’m just going to go and do it myself.” |
+**Outside the user’s context *and* low complexity**:
+
+“I use Claude for things where I have low context, but think that the overall complexity is also low.”
+
+“The majority of the infra[structure] problems I have are not difficult and can be handled by Claude… I don’t know Git or Linux very well… Claude does a good job covering for my lack of experience in these areas.”
+
+**Easily verifiable:**
+
+“It's absolutely *amazing* for everything where validation effort isn't large in comparison to creation effort.”
+
+**Well-defined or self-contained:**
+
+“If a subcomponent of the project is sufficiently decoupled from the rest, I'll get Claude to take a stab.”
+
+**Code quality isn’t critical:**
+
+“If it's throwaway debug[ging] or research code, it goes straight to Claude. If it's conceptually difficult or needs some very specific type of debug injection, or a design problem, I do it myself.”
+
+**Repetitive or boring:**
+
+“The more excited I am to do the task, the more likely I am to not use Claude. Whereas if I'm feeling a lot of resistance… I often find it easier to start a conversation with Claude about the task.”
+
+In our survey, on average people said that 44% of Claude-assisted work consisted of tasks they wouldn't have enjoyed doing themselves.
+
+**Faster to prompt than execute:**
+
+“[For] a task that I anticipate will take me less than 10 minutes... I'm probably not going to bother using Claude.”
+
+“The cold start problem is probably the biggest blocker right now. And by cold start, I mean there is a lot of intrinsic information that I just have about how my team's code base works that Claude will not have by default… I could spend time trying to iterate on the perfect prompt [but] I’m just going to go and do it myself.”
 
 These factors mentioned by our employees in their decisions about delegation were similar to those found to explain AI-related productivity slowdowns (such as high developer familiarity with codebase, large and complex repositories) in an [external study](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) from METR. The convergence on these delegation criteria across our interviews suggests that appropriate task choice is an important factor in AI productivity gains (which should be carefully controlled for in future productivity studies).
 
@@ -228,7 +243,7 @@ Claude Code usage has shifted toward more difficult and autonomous coding tasks 
 
 ![Figure 3. Changes in Claude Code usage between August 2025 and February 2025 (x-axes). Average task complexity increased over time (left panel), average maximum consecutive tool calls per transcript increased over time (middle panel), and number of human turns decreased over time (right panel). Error bars show 95% confidence intervals. The data suggest people are increasingly delegating more autonomy to Claude over time.](https://www-cdn.anthropic.com/images/4zrzovbb/website/d23e1b8d8af84b45d5cffcc6f0a029d635508153-3840x2160.png)
 
-*Figure 3. Changes in Claude Code usage between August 2025 and February 2025 (x-axes). Average task complexity increased over time (left panel), average maximum consecutive tool calls per transcript increased over time (middle panel), and number of human turns decreased over time (right panel). Error bars show 95% confidence intervals. The data suggest people are increasingly delegating more autonomy to Claude over time.*
+Changes in Claude Code usage between August 2025 and February 2025 (x-axes). Average task complexity increased over time (left panel), average maximum consecutive tool calls per transcript increased over time (middle panel), and number of human turns decreased over time (right panel). Error bars show 95% confidence intervals. The data suggest people are increasingly delegating more autonomy to Claude over time.
 
 These usage data corroborate the survey data: engineers delegate increasingly complex work to Claude and Claude requires less oversight. It seems plausible that this is driving the observed productivity gains.
 
@@ -238,7 +253,7 @@ We classified Claude Code transcripts into one or more types of coding tasks, st
 
 ![Figure 4. Distribution of various coding tasks (y-axis) as a percentage of the overall number of records (x-axis). We compare the distribution 6 months ago (pink) to present day (purple). The y-axis is ordered by frequency in Feb 2025.](https://www-cdn.anthropic.com/images/4zrzovbb/website/7da627df8a6be4cb90ecd6e6e41345b8122401ed-3840x2160.png)
 
-*Figure 4. Distribution of various coding tasks (y-axis) as a percentage of the overall number of records (x-axis). We compare the distribution 6 months ago (pink) to present day (purple). The y-axis is ordered by frequency in Feb 2025.*
+Distribution of various coding tasks (y-axis) as a percentage of the overall number of records (x-axis). We compare the distribution 6 months ago (pink) to present day (purple). The y-axis is ordered by frequency in Feb 2025.
 
 The overall task frequency distribution estimated from usage data roughly aligns with the self-reported task frequency distribution. The most striking change between February and August 2025 is that there now are proportionately many more transcripts using Claude to implement new features (14.3% → 36.9%) and do code design or planning (1.0% → 9.9%). This shift in the relative distribution of Claude Code tasks may suggest that Claude has become better at these more complex tasks, though it could also reflect changes in how teams adopt Claude Code for different workflows rather than increases in absolute work volume (see Appendix for more limitations).
 
@@ -252,7 +267,7 @@ To study how tasks currently vary across teams, we refined our classification ap
 
 ![Figure 5. Each horizontal bar represents a team (y-axis) with segments showing the proportion of that team’s Claude Code usage for different coding tasks (x-axis), color-coded by coding task (legend). Top bar (“All Teams”) represents the overall distribution.](https://www-cdn.anthropic.com/images/4zrzovbb/website/313f1cc36b0eb1fec9ee986f50e8d937ddc796ba-3840x2160.png)
 
-*Figure 5. Each horizontal bar represents a team (y-axis) with segments showing the proportion of that team’s Claude Code usage for different coding tasks (x-axis), color-coded by coding task (legend). Top bar (“All Teams”) represents the overall distribution.*
+Each horizontal bar represents a team (y-axis) with segments showing the proportion of that team’s Claude Code usage for different coding tasks (x-axis), color-coded by coding task (legend). Top bar (“All Teams”) represents the overall distribution.
 
 The "All Teams" bar shows the overall distribution, with the most common tasks being building new features, debugging, and code understanding. This provides a baseline for team-specific comparisons.
 
@@ -275,28 +290,6 @@ To follow up on this initial work, we’re taking several steps. We're talking t
 
 We expect to share more concrete plans in 2026 as our thinking matures. Anthropic is a laboratory for responsible workplace transition; we want to not just study how AI transforms work, but also experiment with how to navigate that transformation thoughtfully, starting with ourselves first.
 
-#### Bibtex
-
-If you’d like to cite this post you can use the following Bibtex key:
-
-```
-@online{huang2025aiwork,
-author = {Saffron Huang and Bryan Seethor and Esin Durmus and Kunal Handa and Miles McCain and Michael Stern and Deep Ganguli},
-title = {How AI Is Transforming Work at Anthropic},
-date = {2025-12-02},
-year = {2025},
-url = {https://anthropic.com/research/how-ai-is-transforming-work-at-anthropic/},
-}
-```
-
-Copy
-
-#### Acknowledgments
-
-Saffron Huang led the project, designed and executed the surveys, interviews, and data analysis, plotted figures and wrote the blog post. Bryan Seethor co-designed the surveys and interviews, co-led survey and interview data collection, analyzed interview themes, contributed to writing, and managed the project timeline. Esin Durmus contributed to experiment design and provided detailed direction and feedback throughout. Kunal Handa contributed infrastructure for the interviewing process. Deep Ganguli provided critical guidance and organizational support. All authors provided detailed guidance and feedback throughout.
-
-Additionally, we thank Ruth Appel, Sally Aldous, Avital Balwit, Drew Bent, Zoe Blumenfeld, Miriam Chaum, Jack Clark, Jake Eaton, Sarah Heck, Kamya Jagadish, Jen Martinez, Peter McCrory, Jared Mueller, Christopher Nulty, Sasha de Marigny, Sarah Pollack, Hannah Pritchett, Stuart Ritchie, David Saunders, Alex Tamkin, Janel Thamkul, Sar Warner, and Heather Whitney for their helpful ideas, discussion, feedback and support. Thank you to Casey Yamaguma for illustrating the figures. We also appreciate the productive comments and discussion from Anton Korinek, Ioana Marinescu, Silvana Tenreyro, and Neil Thompson.
-
 ## Appendix
 
 ### Limitations
@@ -309,24 +302,26 @@ Our Claude Code analysis uses proportionate sampling across time periods, which 
 
 Finally, this research was conducted in August 2025 when Claude Sonnet 4 and Claude Opus 4 were our state-of-the-art models. Given the rapid pace of AI development, the patterns we observed may have already shifted as newer models become available.
 
-####
+## Authors & acknowledgements
 
-## Related content
+### Contributors
 
-### Designing more efficient quantum circuits with Claude
+Saffron Huang led the project, designed and executed the surveys, interviews, and data analysis, plotted figures and wrote the blog post. Bryan Seethor co-designed the surveys and interviews, co-led survey and interview data collection, analyzed interview themes, contributed to writing, and managed the project timeline. Esin Durmus contributed to experiment design and provided detailed direction and feedback throughout. Kunal Handa contributed infrastructure for the interviewing process. Deep Ganguli provided critical guidance and organizational support. All authors provided detailed guidance and feedback throughout.
 
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
+### Acknowledgements
 
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
+Additionally, we thank Ruth Appel, Sally Aldous, Avital Balwit, Drew Bent, Zoe Blumenfeld, Miriam Chaum, Jack Clark, Jake Eaton, Sarah Heck, Kamya Jagadish, Jen Martinez, Peter McCrory, Jared Mueller, Christopher Nulty, Sasha de Marigny, Sarah Pollack, Hannah Pritchett, Stuart Ritchie, David Saunders, Alex Tamkin, Janel Thamkul, Sar Warner, and Heather Whitney for their helpful ideas, discussion, feedback and support. Thank you to Casey Yamaguma for illustrating the figures. We also appreciate the productive comments and discussion from Anton Korinek, Ioana Marinescu, Silvana Tenreyro, and Neil Thompson.
 
-### Claude reveals ECDSA curve origins
+### Citation
 
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
+Copy
 
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
+```
+@online{huang2025aiwork,
+author = {Saffron Huang and Bryan Seethor and Esin Durmus and Kunal Handa and Miles McCain and Michael Stern and Deep Ganguli},
+title = {How AI Is Transforming Work at Anthropic},
+date = {2025-12-02},
+year = {2025},
+url = {https://anthropic.com/research/how-ai-is-transforming-work-at-anthropic/},
+}
+```

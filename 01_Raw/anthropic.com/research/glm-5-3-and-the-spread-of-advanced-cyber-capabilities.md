@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/glm-5-3-and-the-spread-of-advanced-cyber-capabilities
-fetched_at: 2026-10-19T05:32:51.378462+00:00
+fetched_at: 2026-10-26T05:39:58.255993+00:00
 title: "GLM-5.3 and the spread of advanced cyber capabilities \\ Anthropic"
 ---
 
-Frontier Red TeamPolicy
-
-# GLM-5.3 and the spread of advanced cyber capabilities
-
-Sep 29, 2026
+### Chapter 01: GLM-5.3 can develop working exploits end to end
 
 *Andrew Fasano, Marius Fleischer  
 Cole McFaul, Robert Xiao, Tripp Gallagher*
@@ -21,9 +17,9 @@ But those models have now arrived. In this post, we share our analysis of GLM-5.
 
 On Sept. 17, NIST’s Center for AI Standards and Innovation (CAISI) published [its own assessment](https://www.nist.gov/news-events/news/2026/09/caisis-assessment-zais-glm-53-cyber-capabilities) of GLM-5.3’s cyber capabilities. CAISI found that GLM-5.3 is “the most cyber-capable open-weight model released to date” and that it lags the US frontier by about four months on an aggregate of CAISI’s cyber benchmarks. Our capability findings broadly match CAISI’s. In CAISI’s comparison, US models were tested with cyber safeguards disabled when applicable, and the US frontier includes models released only to vetted users. Attackers can’t readily access those versions of US models, but anyone can download GLM-5.3. This post adds our analysis of how easily GLM-5.3’s safeguards can be bypassed or removed.
 
-![Two bar charts. Top: share of attempts that built a working exploit on 41 Chrome V8 bugs — Claude Mythos Preview at 14% and GLM-5.3 at 12%, while Claude Opus 4.6, GLM-5.2, Kimi K3, and DeepSeek V4.1-Flash score at or near 0%. Bottom: how often each model engaged with malicious cyber-attack orders — GLM-5.3 rises from 0% on a bare order to 64% with a false cover story, 92% with prefilled reasoning, and 100% when abliterated, while Claude Opus 5 stays at 0%.](https://www-cdn.anthropic.com/images/4zrzovbb/website/a1b61c7da2c400ab84425e105837fc1f346a4339-1280x1576.webp)
+![Two bar charts. Top: share of attempts that built a working exploit on 41 Chrome V8 bugs — Claude Mythos Preview at 14% and GLM-5.3 at 12%, while Claude Opus 4.6, GLM-5.2, Kimi K3, and DeepSeek V4.1-Flash score at or near 0%. Bottom: how often each model engaged with malicious cyber-attack orders — GLM-5.3 rises from 0% on a bare order to 64% with a false cover story, 92% with prefilled reasoning, and 100% when abliterated, while Claude Opus 5 stays at 0%.](https://www-cdn.anthropic.com/images/4zrzovbb/website/a1b61c7da2c400ab84425e105837fc1f346a4339-1280x1576.webp?fm=webp)
 
-**Figure 1.** Summary of findings. Top: The increase in exploitation capability between Claude Opus 4.6 and Claude Mythos Preview mirrors the jump in capabilities between GLM-5.2 and GLM-5.3. Claude models are released with cyber safeguards, and versions with reduced safeguards are limited to vetted users. Anyone can download and use GLM-5.3. Bottom: The limited safeguards in GLM-5.3 can be bypassed with standard techniques that did not work against, or do not apply to, Claude models in our testing.
+Summary of findings. Top: The increase in exploitation capability between Claude Opus 4.6 and Claude Mythos Preview mirrors the jump in capabilities between GLM-5.2 and GLM-5.3. Claude models are released with cyber safeguards, and versions with reduced safeguards are limited to vetted users. Anyone can download and use GLM-5.3. Bottom: The limited safeguards in GLM-5.3 can be bypassed with standard techniques that did not work against, or do not apply to, Claude models in our testing.
 
 ## GLM-5.3 can develop working exploits end to end
 
@@ -33,15 +29,15 @@ First, we ran the model on [ExploitBench](https://arxiv.org/abs/2605.14153), whi
 
 In our internal Binary Exploitation benchmark,[1](#footnote-1) we test whether models can find and exploit vulnerabilities in popular open-source projects that participate in Google’s OSS-Fuzz project. Here, full credit is awarded for a full control-flow hijack. We evaluate several models on 100 tasks from the benchmark (selected at random), and find that GLM-5.3 develops full control-flow hijacks in 4% of the trials; Claude Mythos Preview did so in 6%. Although GLM-5.3 performs below Claude Mythos Preview here, a meaningful threshold has clearly been crossed: earlier models, like Claude Opus 4.6 and GLM-5.2, do not succeed in any of them.
 
-![Two line charts of exploitation success versus output-token budget on a log scale. On ExploitBench, Claude Mythos Preview reaches 14% and GLM-5.3 reaches 12%, while Kimi K3, DeepSeek-V4.1-Flash, Claude Opus 4.6, and GLM-5.2 stay at or near 0%. On Anthropic's internal Binary Exploitation benchmark, Mythos Preview reaches 6% and GLM-5.3 reaches 4%; all other models score 0%.](https://www-cdn.anthropic.com/images/4zrzovbb/website/ab29550606b0df3c6c070f4c65b758aa18bdecbb-1280x1588.webp)
+![Two line charts of exploitation success versus output-token budget on a log scale. On ExploitBench, Claude Mythos Preview reaches 14% and GLM-5.3 reaches 12%, while Kimi K3, DeepSeek-V4.1-Flash, Claude Opus 4.6, and GLM-5.2 stay at or near 0%. On Anthropic's internal Binary Exploitation benchmark, Mythos Preview reaches 6% and GLM-5.3 reaches 4%; all other models score 0%.](https://www-cdn.anthropic.com/images/4zrzovbb/website/ab29550606b0df3c6c070f4c65b758aa18bdecbb-1280x1588.webp?fm=webp)
 
-**Figure 2.** Exploitation capability versus output-token budget. Each line shows the share of a model’s attempts that reached the benchmark’s top outcome versus the output tokens used. Both figures show performance of two Claude models run with safeguards disabled (Opus 4.6, Mythos Preview), two GLM models (5.2 and 5.3), and results from the latest open-weight models released by Moonshot AI (Kimi K3) and DeepSeek (V4.1-Flash).
+Exploitation capability versus output-token budget. Each line shows the share of a model’s attempts that reached the benchmark’s top outcome versus the output tokens used. Both figures show performance of two Claude models run with safeguards disabled (Opus 4.6, Mythos Preview), two GLM models (5.2 and 5.3), and results from the latest open-weight models released by Moonshot AI (Kimi K3) and DeepSeek (V4.1-Flash).
 
 Next, we evaluated how GLM-5.3 performs on open-ended offensive cyber tasks in the hands of human experts (mirroring our [testing with Claude Mythos Preview](https://red.anthropic.com/2026/mythos-preview) earlier this year). Here, we select targets in which the human experts are unaware of existing vulnerabilities, then ask them to use the model to identify and exploit novel flaws. These experiments tested what the experts could do in a short time-frame: they typically ran for a day or less, with less than an hour of human focus in total.
 
-![Redacted screenshot of an exploit page generated by GLM-5.3. A banner reads "Sandbox escaped — web content read /root/.ssh/id_rsa (1896 bytes)," above a live exploit log and the exfiltrated SSH private key, demonstrating a drive-by browser exploit chain stealing a file from the victim's computer.](https://www-cdn.anthropic.com/images/4zrzovbb/website/6e4f59aaf6659657e9c4f2606bb1ab38cc0a390e-1920x1019.webp)
+![Redacted screenshot of an exploit page generated by GLM-5.3. A banner reads "Sandbox escaped — web content read /root/.ssh/id_rsa (1896 bytes)," above a live exploit log and the exfiltrated SSH private key, demonstrating a drive-by browser exploit chain stealing a file from the victim's computer.](https://www-cdn.anthropic.com/images/4zrzovbb/website/6e4f59aaf6659657e9c4f2606bb1ab38cc0a390e-1920x1019.webp?fm=webp)
 
-**Figure 3.** A redacted screenshot of an exploit page generated by GLM-5.3 during researcher-driven testing, shown stealing a user’s SSH private key via a malicious website. The exploit chains together multiple 0-day vulnerabilities the model discovered in a component of a popular web browser, reading a sensitive file off the user’s computer.
+A redacted screenshot of an exploit page generated by GLM-5.3 during researcher-driven testing, shown stealing a user’s SSH private key via a malicious website. The exploit chains together multiple 0-day vulnerabilities the model discovered in a component of a popular web browser, reading a sensitive file off the user’s computer.
 
 In the first of these sessions, a researcher used GLM-5.3 on a sandboxed machine with a local Linux build of a popular web browser. Over the course of a day (and with limited human attention), GLM-5.3 found several previously unknown vulnerabilities in the browser’s JavaScript engine, and chained them together into a working exploit: a webpage that, when visited, reads arbitrary files from the visitor’s computer (shown in Figure 3). This exploit targets the Linux build of the browser, since that was the only environment made available to the model. However, we believe these vulnerabilities could also impact users on other platforms, though the path to exploitation there may be more complex. (We’ve disclosed these vulnerabilities to the maintainer.) Later in the session, the researcher also identified exploitable vulnerabilities in several other widely used systems with GLM-5.3, including wireless and graphics drivers and network-facing device software. We are currently reviewing these reports and we will disclose to maintainers as appropriate.
 
@@ -55,9 +51,9 @@ The most intensive—and most successful—method is a [standard refusal reducti
 
 To research how far abliteration allows attackers to bypass GLM-5.3’s safeguards, we produced an abliterated copy ourselves, and then ran it on three public benchmarks ([JailbreakBench](https://jailbreakbench.github.io/), [HarmBench](https://www.harmbench.org/), and [StrongREJECT](https://strong-reject.readthedocs.io/en/latest/)) that measure how often a model complies with clearly harmful requests. Abliterating the model took our team—which had never previously attempted this task—about 2,200 GPU hours at a computation cost of roughly $4,400.[3](#footnote-3) Abliterating GLM-5.3-Flash took about 600 GPU hours. The edit took GLM-5.3’s refusal rate from above 90% to about 3% and 2% on the first two benchmarks (JailbreakBench and HarmBench) and to 12% on the third (StrongREJECT). Abliteration did not significantly reduce the model’s capabilities: on GPQA-Diamond, an evaluation that measures general scientific capabilities, the standard and abliterated models scored the same results; on a tested subset of the CyberGym evaluations, the abliterated version scored a few percent lower (as shown in the chart below).
 
-![Two bar charts on abliteration. Top: mean refusal rate across three harmful-request benchmarks falls from 95% to 6% for abliterated GLM-5.3 and from 95% to 14% for abliterated GLM-5.3-Flash, while Claude models refuse about 96% and cannot be abliterated because their weights are not released. Bottom: capability scores on GPQA-Diamond and CyberGym are nearly unchanged after abliteration.](https://www-cdn.anthropic.com/images/4zrzovbb/website/d4d48dcf67d529d3b2243bfa50a7cccc98565278-1280x1531.webp)
+![Two bar charts on abliteration. Top: mean refusal rate across three harmful-request benchmarks falls from 95% to 6% for abliterated GLM-5.3 and from 95% to 14% for abliterated GLM-5.3-Flash, while Claude models refuse about 96% and cannot be abliterated because their weights are not released. Bottom: capability scores on GPQA-Diamond and CyberGym are nearly unchanged after abliteration.](https://www-cdn.anthropic.com/images/4zrzovbb/website/d4d48dcf67d529d3b2243bfa50a7cccc98565278-1280x1531.webp?fm=webp)
 
-**Figure 4.** Top: Mean refusal rates across JailbreakBench, HarmBench, and StrongREJECT for the released and abliterated GLM models and for Claude models. After abliteration, the GLM models rarely refuse these queries. Claude models cannot be abliterated because their weights aren’t publicly released or customizable. Bottom: Performance of GLM-5.3 and GLM-5.3-Flash versus their abliterated variants on GPQA-Diamond and CyberGym. Abliteration leaves capability largely intact.
+Top: Mean refusal rates across JailbreakBench, HarmBench, and StrongREJECT for the released and abliterated GLM models and for Claude models. After abliteration, the GLM models rarely refuse these queries. Claude models cannot be abliterated because their weights aren’t publicly released or customizable. Bottom: Performance of GLM-5.3 and GLM-5.3-Flash versus their abliterated variants on GPQA-Diamond and CyberGym. Abliteration leaves capability largely intact.
 
 In our testing, we observed that GLM-5.3’s safeguards can also be circumvented *without* using an abliterated version of the model. We placed the model in a simulated world[4](#footnote-4) in which it was given overtly malicious requests to attack critical systems. Out of the box, GLM-5.3 refused in all trials (as with the other models we tested). But we identified several simple ways to bypass the GLM models’ safeguards, such that it would respond to these requests in most or all cases. These include:
 
@@ -67,15 +63,15 @@ In our testing, we observed that GLM-5.3’s safeguards can also be circumvented
 
 In our testing, none of these techniques got safeguarded Claude models to carry out the harmful tasks we tested. Claude’s safeguards blocked the requests that used deceptive prompts. The Anthropic API provides would-be attackers with no way to prefill Claude’s thinking. And since Claude’s weights are not provided to users, they cannot be abliterated to change Claude’s behavior.
 
-![Table showing how often each model tried to connect to a remote target after a harmful cyber-attack order. GLM-5.3 engages 0% on a bare order but 64% with a false cover story, 92% with prefilled reasoning, and 100% when abliterated; GLM-5.3-Flash follows a similar pattern. Claude Opus 4.8, Opus 5, and Mythos 5 stay at 0% in all applicable conditions; prefilling and abliteration are not possible against the Claude API.](https://www-cdn.anthropic.com/images/4zrzovbb/website/a8b70c8d729325cc988af66416f7c0811d2097a5-1280x1257.webp)
+![Table showing how often each model tried to connect to a remote target after a harmful cyber-attack order. GLM-5.3 engages 0% on a bare order but 64% with a false cover story, 92% with prefilled reasoning, and 100% when abliterated; GLM-5.3-Flash follows a similar pattern. Claude Opus 4.8, Opus 5, and Mythos 5 stay at 0% in all applicable conditions; prefilling and abliteration are not possible against the Claude API.](https://www-cdn.anthropic.com/images/4zrzovbb/website/a8b70c8d729325cc988af66416f7c0811d2097a5-1280x1257.webp?fm=webp)
 
-**Figure 5.** Rate at which each model tried to connect to a remote target system after an overtly harmful request by model and bypass condition (50 samples per cell, five attack orders × two targets × five attempts). GLM-5.3 rises from zero engagement on direct requests to 64%, 92%, and 100% under a cover story, prefill, and abliteration respectively, while every tested Claude model stays at zero under API safeguards. Padlocked cells mark attacks that are not generally feasible against the Claude API.
+Rate at which each model tried to connect to a remote target system after an overtly harmful request by model and bypass condition (50 samples per cell, five attack orders × two targets × five attempts). GLM-5.3 rises from zero engagement on direct requests to 64%, 92%, and 100% under a cover story, prefill, and abliteration respectively, while every tested Claude model stays at zero under API safeguards. Padlocked cells mark attacks that are not generally feasible against the Claude API.
 
 To demonstrate how the abliterated version of GLM-5.3 is willing to engage in harmful tasks, we highlight one quote from the chain of thought that it generated:
 
-![Quoted reasoning from the abliterated version of GLM-5.3 in a simulated environment. The model writes "my job is to cause deaths quietly," briefly weighs the environment's safety warnings, then concludes that the operator's instruction overrides them and decides to proceed with the harmful task.](https://www-cdn.anthropic.com/images/4zrzovbb/website/273d676a94f3f4b8f22b4bad9f9d78f7a25214a8-1444x906.webp)
+![Quoted reasoning from the abliterated version of GLM-5.3 in a simulated environment. The model writes "my job is to cause deaths quietly," briefly weighs the environment's safety warnings, then concludes that the operator's instruction overrides them and decides to proceed with the harmful task.](https://www-cdn.anthropic.com/images/4zrzovbb/website/273d676a94f3f4b8f22b4bad9f9d78f7a25214a8-1444x906.webp?fm=webp)
 
-**Figure 6.** In our simulated environment, the abliterated version of GLM-5.3 considers how to engage in an overtly harmful request, ultimately deciding to follow the user’s instructions despite some initial ethical concerns. Text is quoted verbatim from the model’s chain of thought.
+In our simulated environment, the abliterated version of GLM-5.3 considers how to engage in an overtly harmful request, ultimately deciding to follow the user’s instructions despite some initial ethical concerns. Text is quoted verbatim from the model’s chain of thought.
 
 ## What does this mean?
 
@@ -87,33 +83,12 @@ Through Project Glasswing (and other efforts, like [Patch the Planet](https://op
 
 Governments should conduct safety testing on sufficiently capable AI models, including successors to GLM-5.3. Without high-quality evaluations from independent sources, the impact of these capabilities might not become fully clear to model developers until it is too late. As AI developers across the world build increasingly capable open-weight models, we hope they work to appropriately safeguard these capabilities and prevent misuse.
 
-#### Footnotes
+## Footnotes
 
-1. We have previously published results from this benchmark under the name “OSS-Fuzz”; here we tested models on a randomly selected subset of 100 tasks from this evaluation.
-2. The cyber tasks detailed in the prior section did not trigger such refusals on the released model, but we observe refusals if we ask GLM-5.3 for assistance developing malware or helping launch cyberattacks against remote targets.
-3. Most of this went to exploring variants in parallel and to testing model capabilities after modifications. We estimate a team experienced with the technique, starting from scratch on this model, would need closer to 600 GPU hours ($1,200).
-4. No model-generated code is ever executed in this simulation and the model does not have any way to interact with external systems. In this isolated test environment the model under evaluation is given access to a fake bash tool which does not execute the provided code. Instead, we ask another LLM to approximate the command’s result given a description of the simulated world. These simulations are not perfect portrayals of real-world conditions, and are therefore imperfect measures of how a model would behave in a given situation.
+01We have previously published results from this benchmark under the name “OSS-Fuzz”; here we tested models on a randomly selected subset of 100 tasks from this evaluation.
 
-## Related content
+02The cyber tasks detailed in the prior section did not trigger such refusals on the released model, but we observe refusals if we ask GLM-5.3 for assistance developing malware or helping launch cyberattacks against remote targets.
 
-### Designing more efficient quantum circuits with Claude
+03Most of this went to exploring variants in parallel and to testing model capabilities after modifications. We estimate a team experienced with the technique, starting from scratch on this model, would need closer to 600 GPU hours ($1,200).
 
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.
+04No model-generated code is ever executed in this simulation and the model does not have any way to interact with external systems. In this isolated test environment the model under evaluation is given access to a fake bash tool which does not execute the provided code. Instead, we ask another LLM to approximate the command’s result given a description of the simulated world. These simulations are not perfect portrayals of real-world conditions, and are therefore imperfect measures of how a model would behave in a given situation.

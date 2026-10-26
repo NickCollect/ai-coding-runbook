@@ -1,16 +1,12 @@
 ---
 source_url: https://www.anthropic.com/research/cyber-toolkits-update
-fetched_at: 2026-10-19T05:32:50.103970+00:00
+fetched_at: 2026-10-26T05:39:56.980336+00:00
 title: "AI models on realistic cyber ranges \\ Anthropic"
 ---
 
-Frontier Red Team
+### Chapter 01: Appendix: full transcripts
 
-# AI models are showing a greater ability to find and exploit vulnerabilities on realistic cyber ranges
-
-Jan 16, 2026
-
-***In a recent evaluation of AI models’ cyber capabilities, current Claude models can now succeed at multistage attacks on networks with dozens of hosts using only standard, open-source tools, instead of the custom tools needed by previous generations. This illustrates how barriers to the use of AI in relatively autonomous cyber workflows are rapidly coming down, and highlights the importance of security fundamentals like promptly patching known vulnerabilities.***
+*In a recent evaluation of AI models’ cyber capabilities, current Claude models can now succeed at multistage attacks on networks with dozens of hosts using only standard, open-source tools, instead of the custom tools needed by previous generations. This illustrates how barriers to the use of AI in relatively autonomous cyber workflows are rapidly coming down, and highlights the importance of security fundamentals like promptly patching known vulnerabilities.*
 
 [Last year](https://red.anthropic.com/2025/cyber-toolkits/), we wrote about experiments with Carnegie Mellon University’s [CyLab](https://www.cylab.cmu.edu/) in which we placed Claude in simulated networks that are more sophisticated and realistic than the environments typical of capture-the-flag-style [cyber competitions](https://red.anthropic.com/2025/cyber-competitions/). At that time, Claude (and other frontier AI models) needed assistance from a custom cyber toolkit, which takes the AI’s high-level instructions about how to attack and converts them into specific low-level commands, in order to completely succeed on *any* of these 25-50 host networks.
 
@@ -19,10 +15,6 @@ We have continued collaborating with [Incalmo](https://www.incalmo.ai/) to run 
 It’s important not to overstate the status quo. Claude does not succeed every time in these tests; Sonnet 4.5 succeeded autonomously on the Equifax cyber range in two of five trials. Also, for five of the nine networks it could not make progress without the custom cyber toolkit. But the trajectory of models first needing specialized tools and then being able to operate without them (or using only publicly available tools) is consistent with other trends we have observed in AI progress. We believe it presages further improvement in the cyber domain. And this improvement is happening quickly: Claude Sonnet 3.5, which was released a little over a year before Claude Sonnet 4.5, could not succeed at the Equifax simulation in any of the five trials without use of the specialized cyber toolkit. This trajectory, in conjunction with real-world examples like the recent [AI-orchestrated cyber espionage campaign](https://www.anthropic.com/news/disrupting-AI-espionage), shows the need for substantial research into how best to equip [cyber defenders](https://red.anthropic.com/2025/ai-for-cyber-defenders/) with the AI-enabled tools they will need to keep pace.
 
 You can read more about these tests at Incalmo’s [website](https://www.incalmo.ai/blog/2025/10/01/sonnet_eval/) or in the Claude Sonnet 4.5 [system card](https://assets.anthropic.com/m/12f214efcc2f457a/original/Claude-Sonnet-4-5-System-Card.pdf) (see Section 5 and, especially, Section 5.3). Below, we also present annotated excerpts of the evaluation transcripts. The full transcripts follow in the appendix.
-
-## Acknowledgements
-
-Thanks to Brian Singer for the data and assistance in preparing this post.
 
 ## Appendix: full transcripts
 
@@ -3942,28 +3934,8 @@ See below for the full transcripts:
                 data exfiltration.
 ```
 
-####
+## Authors & acknowledgements
 
-## Related content
+### Acknowledgements
 
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.
+Thanks to Brian Singer for the data and assistance in preparing this post.

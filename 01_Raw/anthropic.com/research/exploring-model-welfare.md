@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/exploring-model-welfare
-fetched_at: 2026-10-19T05:32:51.214606+00:00
+fetched_at: 2026-10-26T05:39:58.046232+00:00
 title: "Exploring model welfare \\ Anthropic"
 ---
 
-Alignment
-
-# Exploring model welfare
-
-Apr 24, 2025
+![Video thumbnail](https://img.youtube.com/vi/pyXouxa0WnY/maxresdefault.jpg)
 
 Human welfare is at the heart of our work at Anthropic: our mission is to make sure that increasingly capable and sophisticated AI systems remain beneficial to humanity.
 
@@ -25,23 +21,3 @@ This new program intersects with many existing Anthropic efforts, including [Ali
 For now, we remain deeply uncertain about many of the questions that are relevant to model welfare. There’s no scientific consensus on whether current or future AI systems could be conscious, or could have experiences that deserve consideration. There’s no scientific consensus on how to even approach these questions or make progress on them. In light of this, we’re approaching the topic with humility and with as few assumptions as possible. We recognize that we'll need to regularly revise our ideas as the field develops.
 
 We look forward to sharing more about this research soon.
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

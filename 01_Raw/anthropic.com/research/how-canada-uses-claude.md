@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/how-canada-uses-claude
-fetched_at: 2026-10-19T05:32:51.532903+00:00
+fetched_at: 2026-10-26T05:39:58.492832+00:00
 title: "How Canada uses Claude  \\ Anthropic"
 ---
 
-Economics
-
-# How Canada uses Claude: Findings from the Anthropic Economic Index
-
-Jul 14, 2026
-
-![How Canada uses Claude: Findings from the Anthropic Economic Index](https://www-cdn.anthropic.com/images/4zrzovbb/website/a62b6eb169818f14c35b7a192af269e283f8fa93-1000x1000.svg)
+### Chapter 01: Canada is at the forefront of Claude adoption
 
 *Le français suit.*
 
@@ -24,27 +18,27 @@ Jul 14, 2026
 - We find evidence that specific use cases coincide with local economic characteristics. Translation requests track public administration employment shares across provinces, likely reflecting Canada's policy of official bilingualism in federal services and communications: New Brunswick, Nova Scotia, and Quebec have both the highest rates of public administration employment and the largest shares of conversations devoted to translation.
 - Document translation is also the most distinctive Canadian use case relative to Anglosphere peers. More generally, Canadian usage tilts toward academic and early-career usage: academic coursework, coding assistance, and resume drafting are all overrepresented, while professional communication and everyday personal tasks are underrepresented.
 
-### Canada is at the forefront of Claude adoption
+## Canada is at the forefront of Claude adoption
 
 Adoption of Claude is high in Canada. Based on a sample of Claude.ai conversations in February 2026, 2.6% of global traffic is in Canada. Adjusting for population, its Anthropic AI Usage Index (AUI) is 4.4, which implies that usage per capita is more than four times higher than would be expected based on its working-age population. Among the top ten countries that lead in terms of overall Claude usage volume, Canada has the second-highest AUI, just behind the United States (Figure 1).
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/976607f5799ad2170a43fb842885ad697cc4cf99-1920x1080.png)
 
-**Figure 1: Usage share and per capita adoption among top ten countries by global Claude.ai use**Bars show each country’s share (left panel) and the Anthropic AI Usage Index (right panel) based on 1M conversations sampled from Claude.ai in February 2026. Canada highlighted in blue. The Anthropic AI Usage Index (AUI) measures whether Claude usage is over- or under-represented in a country relative to its working age population. Canada accounts for 2.6% of global Claude.ai consumer use, ranking eighth globally, and second by AUI. Sources: Anthropic Economic Index, February 2026; World Bank.
+**Usage share and per capita adoption among top ten countries by global Claude.ai use**Bars show each country’s share (left panel) and the Anthropic AI Usage Index (right panel) based on 1M conversations sampled from Claude.ai in February 2026. Canada highlighted in blue. The Anthropic AI Usage Index (AUI) measures whether Claude usage is over- or under-represented in a country relative to its working age population. Canada accounts for 2.6% of global Claude.ai consumer use, ranking eighth globally, and second by AUI. Sources: Anthropic Economic Index, February 2026; World Bank.
 
 In part, this reflects the fact that Canada is a high-income country. Among advanced economies, as defined by the IMF, there is a clear link between usage per capita and GDP per working-age capita. But Canada’s adoption exceeds what would be expected based on its income (Figure 2). In this sense, Canada appears further along on its AI adoption curve as compared to peer countries, perhaps reflecting its highly educated workforce and proximity to the US technology frontier.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/3649d38ac832156ac80b100cd74ddf0bdcf07b7f-1920x1619.png)
 
-**Figure 2: Anthropic AI Usage Index (AUI) and GDP per working-age capita**This plot shows the bivariate relationship between each country’s AUI and GDP per working-age person among IMF advanced economies with at least 200 conversations in our sample. The dashed line shows the line of best fit. Canada highlighted in blue. Sources: Anthropic Economic Index, February 2026; IMF; World Bank.
+**Anthropic AI Usage Index (AUI) and GDP per working-age capita**This plot shows the bivariate relationship between each country’s AUI and GDP per working-age person among IMF advanced economies with at least 200 conversations in our sample. The dashed line shows the line of best fit. Canada highlighted in blue. Sources: Anthropic Economic Index, February 2026; IMF; World Bank.
 
-### Within Canada, adoption is concentrated and tracks workforce composition
+## Within Canada, adoption is concentrated and tracks workforce composition
 
 Just as global adoption of Claude is disproportionately concentrated among a small number of countries, usage within Canada is unevenly distributed across provinces. Ontario accounts for 43.9% of conversations. Another 50% of usage within Canada comes from Quebec (20.8%), British Columbia (18.9%), and Alberta (10.2%). Adjusting for population, the ordering shifts: British Columbia has 1.4x more Claude usage than expected based on its working age population, followed by Ontario (1.1x). The remaining provinces have below-parity rates of adoption. The province of Newfoundland and Labrador has an AUI of 0.2.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7bc0e1d9d5f91be54189f4dd9cce0c792f9e706e-1920x1080.png)
 
-**Figure 3: Share of Canada’s Claude.ai use by province and territory**Left panel: each province's share of Canadian Claude.ai conversations. Right panel: AUI by province, where 1.0 indicates usage proportional to the province's working-age population. Territories are below the reporting threshold. Sources: Anthropic Economic Index, February 2026; Statistics Canada.
+**Share of Canada’s Claude.ai use by province and territory**Left panel: each province's share of Canadian Claude.ai conversations. Right panel: AUI by province, where 1.0 indicates usage proportional to the province's working-age population. Territories are below the reporting threshold. Sources: Anthropic Economic Index, February 2026; Statistics Canada.
 
 What explains the pattern of regional adoption? We explore this question in Figure 4. In contrast to the global relationship between income and usage, we find that provincial usage per capita is mostly uncorrelated with income. Instead, we find that the industrial composition of regional economies is a key determinant of usage intensity: regions with larger professional, scientific, and technical service sectors—as measured by the share of employment—have systematically higher usage per capita.
 
@@ -52,50 +46,36 @@ Evidently, workforce composition—rather than income per se—is a key determin
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/f7eb168843405b5ab28dc1c7b06b70829d5ef7f3-1920x1080.png)
 
-**Figure 4: Anthropic AI Usage Index (AUI) and provincial economic characteristics**Panels plot provincial AUI against provincial characteristics: GDP per working-age person (left) and the employment share of professional, scientific and technical services (right). Sources: Anthropic Economic Index, February 2026; Statistics Canada.
+**Anthropic AI Usage Index (AUI) and provincial economic characteristics**Panels plot provincial AUI against provincial characteristics: GDP per working-age person (left) and the employment share of professional, scientific and technical services (right). Sources: Anthropic Economic Index, February 2026; Statistics Canada.
 
-### Understanding the distinctive uses of Claude within Canada
+## Understanding the distinctive uses of Claude within Canada
 
 Despite the large regional variation in *rates* of Claude usage, people across Canada tend to use Claude in broadly similar ways. In every province, personal use—looking up health information, researching products, getting help with recipes or home repairs—accounts for 44% to 51% of conversations. Work-related use, where Claude is used to troubleshoot software, draft work emails, and build business applications, accounts for around 34% to 40%. What remains is using Claude to assist with coursework-related tasks (Figure 5).
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/32a27e954b2b7b19e394c358431c528904b3516d-1920x1080.png)
 
-**Figure 5: Use-case mix across Canadian provinces**   
+**Use-case mix across Canadian provinces**   
 Share of each province's conversations classified as work, coursework, or personal, ordered by the provincial AUI (in parentheses). Source: Anthropic Economic Index, February 2026.
 
 While broad usage patterns are consistent across provinces, we nevertheless find evidence that particular use cases tend to coincide with local economic characteristics. For example, we find that use of Claude for translation and editing requests is systematically higher in parts of the country with a larger share of public administration employment—perhaps reflecting Canada’s commitment to official bilingualism in the public sector, which generates demand for English–French translation wherever government employment is concentrated. Indeed, New Brunswick, Nova Scotia, and Quebec each have the highest rates of public administration employment and the largest share of conversations related to translation assistance.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/2df55fd1ebd362c106880a3ba1e2ae0080e662ed-1920x1080.png)
 
-**Figure 6: Translation use by province and public administration employment**Left panel: public administration employment as a share of total provincial employment. Right panel: translation and editing requests as a share of provincial conversations, for the seven provinces above the reporting threshold. Sources: Anthropic Economic Index, February 2026; Statistics Canada.
+**Translation use by province and public administration employment**Left panel: public administration employment as a share of total provincial employment. Right panel: translation and editing requests as a share of provincial conversations, for the seven provinces above the reporting threshold. Sources: Anthropic Economic Index, February 2026; Statistics Canada.
 
 In fact, document translation usage is the most distinctive use case in Canada as a whole as compared to peer Anglosphere countries that likewise have high volume of Claude usage—Australia, UK, and the US (Figure 7). More generally, we find that Canadian usage tilts toward education and labor-market entry: academic coursework (mathematics and STEM), coding assistance, and resume drafting are among the most overrepresented categories relative to peer countries. The categories where Canada runs below lean toward professional communication—workplace email, marketing content, legal assistance—and everyday personal tasks to assist with cooking, home maintenance, and health questions.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/2f92059cee5078aa4469faf72d2fd2f12afa71ee-1920x1080.png)
 
-**Figure 7: Distinctive Claude use cases in Canada versus Anglosphere peers (Australia, the UK, and the US)**This figure shows the net difference in the percent of conversations in Canada versus the average across Australia, the UK, and the US for various conversation groupings representing at least 1% of Canadian conversations (6 most distinctively Canadian and 6 most distinctive across peer countries). Sources: Anthropic Economic Index, February 2026.
+**Distinctive Claude use cases in Canada versus Anglosphere peers (Australia, the UK, and the US)**This figure shows the net difference in the percent of conversations in Canada versus the average across Australia, the UK, and the US for various conversation groupings representing at least 1% of Canadian conversations (6 most distinctively Canadian and 6 most distinctive across peer countries). Sources: Anthropic Economic Index, February 2026.
 
-### Conclusion
+## Conclusion
 
 Canada has among the highest rates of Claude adoption around the world, both in terms of overall volume (2.6% of global Claude.ai traffic) and after adjusting for the size of its population. Such intensity of adoption allows us to better understand how Claude usage reflects the structure of the Canadian economy and broader economic conditions.
 
 Across the country, adoption is greatest in provinces with a higher share of professional, scientific, and technical services workers. This is consistent with the view that model capabilities well-matched to the composition of the local economy primarily drive overall adoption rates. This stands in contrast to patterns of adoption globally, which appear more tightly linked to income per capita.
 
 Particular use cases also reflect the structure of the Canadian economy. Translation is more common in provinces with more public administration employment, consistent with the official-languages requirements that apply across much of Canada's public sector—and document translation is the single most distinctive Canadian use of Claude relative to its Anglosphere peers. More broadly, Canadian usage tilts toward education and labor-market entry, with academic coursework, coding assistance, and resume drafting all overrepresented relative to Australia, the United Kingdom, and the United States.
-
-#### Citation
-
-```
-@online{mccrory2026canadacountrybrief,
-author = {Peter McCrory},
-title = {How Canada Uses Claude: Findings from the Anthropic Economic Index},
-date = {2026-06},
-year = {2026},
-url = {https://www.anthropic.com/research/how-canada-uses-claude},
-}
-```
-
-Copy
 
 ## Utilisation de Claude au Canada : constatations présentées dans l’Anthropic Economic Index
 
@@ -115,14 +95,14 @@ Le taux d’adoption de Claude est élevé au Canada. Dans un échantillon de co
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6fca932b860afc93e85338f7a1f63df5a851fbf6-1920x940.png)
 
-**Figure 1 – Part d’utilisation et taux d’adoption par habitant dans les dix pays qui utilisent le plus Claude.ai**  
+**Part d’utilisation et taux d’adoption par habitant dans les dix pays qui utilisent le plus Claude.ai**  
 Les barres indiquent la part de chaque pays (graphique de gauche) et l’indice d’utilisation de l’IA d’Anthropic (graphique de droite), calculés à partir d’un échantillon d’un million de conversations sur Claude.ai en février 2026. Le Canada est mis en évidence en bleu. L’indice d’utilisation de l’IA d’Anthropic (AUI) indique si l’utilisation de Claude est élevée ou faible dans un pays par rapport à sa population en âge de travailler. Le Canada représente 2,6 % de l’utilisation mondiale de Claude.ai, ce qui le place au huitième rang mondial, mais au deuxième rang selon l’AUI. Sources : Anthropic Economic Index, février 2026; Banque mondiale.
 
 Ce résultat s’explique en partie par le fait que le Canada est un pays à revenu élevé. Au sein des économies avancées (selon la définition du FMI), il existe un lien évident entre l’utilisation par habitant et le PIB par personne en âge de travailler. Mais le taux d’adoption au Canada dépasse ce qui pourrait être attendu en fonction du revenu (figure 2). En fait, le Canada semble plus en avance dans son adoption de l’IA par rapport à d’autres pays comparables, ce qui s’explique peut-être par sa main-d’œuvre hautement qualifiée et sa proximité avec les technologies de pointe américaines.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/dd9140d143686e9446b3e9776826de6155dee2a1-1920x1488.png)
 
-**Figure 2 – Indice d’utilisation de l’IA d’Anthropic (AUI) et PIB par habitant en âge de travailler**Ce graphique illustre la relation bivariée entre l’AUI et le PIB par habitant en âge de travailler au sein des pays à économie avancée (selon la définition du FMI) pour lesquels notre échantillon comporte au moins 200 conversations. La ligne pointillée représente la droite de meilleur ajustement. Le Canada est mis en évidence en bleu. Sources : Anthropic Economic Index, février 2026; FMI; Banque mondiale.
+**Indice d’utilisation de l’IA d’Anthropic (AUI) et PIB par habitant en âge de travailler**Ce graphique illustre la relation bivariée entre l’AUI et le PIB par habitant en âge de travailler au sein des pays à économie avancée (selon la définition du FMI) pour lesquels notre échantillon comporte au moins 200 conversations. La ligne pointillée représente la droite de meilleur ajustement. Le Canada est mis en évidence en bleu. Sources : Anthropic Economic Index, février 2026; FMI; Banque mondiale.
 
 ### À l’intérieur du Canada, l’adoption est concentrée et correspond à la composition de la main-d’œuvre
 
@@ -130,7 +110,7 @@ Ce résultat s’explique en partie par le fait que le Canada est un pays à rev
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/5f985f11baf1e67429515af8f2a158e241b1bc9c-1920x930.png)
 
-**Figure 3 – Répartition de l’utilisation de Claude.ai au Canada entre les provinces et les territoires**  
+**Répartition de l’utilisation de Claude.ai au Canada entre les provinces et les territoires**  
 À gauche : part de chaque province dans les conversations sur Claude.ai au Canada. À droite : AUI par province, où 1,0 correspond à une utilisation proportionnelle à la population en âge de travailler de la province. Les territoires se situent en dessous du seuil d’inclusion. Sources : Anthropic Economic Index, février 2026; Statistique Canada.
 
 Qu’est-ce qui explique ces différences géographiques du taux d’adoption? Ce point est exploré dans la figure 4. Contrairement à la relation observée à l’échelle mondiale entre le revenu et l’utilisation, les différences de taux d’utilisation par habitant entre les provinces ne sont généralement pas corrélées au revenu. Par contre, la composition du tissu industriel des économies régionales semble être un facteur déterminant de l’intensité d’utilisation : les régions où les services professionnels, scientifiques et techniques occupent une part plus importante de l’emploi affichent systématiquement une utilisation par habitant plus élevée.
@@ -139,7 +119,7 @@ Il apparaît clairement que la composition de la main-d’œuvre (plutôt que le
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/92da64ab63e7412cec347ccf03179a3b8f2a74d8-1920x1080.png)
 
-**Figure 4 – Indice d’utilisation de l’IA d’Anthropic (AUI) et caractéristiques des économies provinciales**  
+**Indice d’utilisation de l’IA d’Anthropic (AUI) et caractéristiques des économies provinciales**  
 Les graphiques comparent l’AUI des provinces à certaines caractéristiques de leur économie : le PIB par personne en âge de travailler (à gauche) et le pourcentage des services professionnels, scientifiques et techniques sur le marché du travail (à droite). Sources : Anthropic Economic Index, février 2026; Statistique Canada.
 
 ### Analyse des différences d’utilisation de Claude au Canada
@@ -148,18 +128,18 @@ Au-delà des importantes variations régionales dans les *taux* d’utilisation 
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1e3d8487abfaac77999ca6fdebac4b967e4fd0ca-1920x931.png)
 
-**Figure 5 – Types d’utilisation dans les provinces canadiennes**  
+**Types d’utilisation dans les provinces canadiennes**  
 Pourcentage des conversations liées au travail, aux études et à des fins personnelles dans chaque province; les provinces sont classées par l’AUI provincial (entre parenthèses). Source : Anthropic Economic Index, février 2026.
 
 Si les grandes tendances d’utilisation sont similaires d’une province à l’autre, nous constatons néanmoins que les types d’utilisation tendent à coïncider avec les caractéristiques de l’économie locale. Par exemple, l’utilisation de Claude à des fins de traduction et de révision est systématiquement plus élevée dans les régions du pays où la fonction publique est prépondérante dans le marché de l’emploi, ce qui témoigne peut-être de l’engagement du Canada en faveur du bilinguisme officiel dans la fonction publique, qui génère une demande relativement forte de traduction anglais-français là où les emplois de fonctionnaire sont nombreux. En fait, le Nouveau-Brunswick, la Nouvelle-Écosse et le Québec affichent à la fois les taux les plus élevés d’emploi dans la fonction publique et les plus grandes proportions de discussions visant l’aide à la traduction.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/b3571ca88e657324d37b6dc64993ad15b45fa493-1920x930.png)
 
-**Figure 6 – Proportion des tâches de traduction selon les provinces et la taille de la fonction publique**Diagramme de gauche : part des emplois dans la fonction publique par rapport au total des emplois dans chaque province. Diagramme de droite : part des demandes d’aide en traduction et révision par rapport à l’ensemble des conversations dans les sept provinces dépassant le seuil d’inclusion. Sources : Anthropic Economic Index, février 2026; Statistique Canada.
+**Proportion des tâches de traduction selon les provinces et la taille de la fonction publique**Diagramme de gauche : part des emplois dans la fonction publique par rapport au total des emplois dans chaque province. Diagramme de droite : part des demandes d’aide en traduction et révision par rapport à l’ensemble des conversations dans les sept provinces dépassant le seuil d’inclusion. Sources : Anthropic Economic Index, février 2026; Statistique Canada.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/16736b1cdf94f38ee89aabca4d6a56eb3187ad69-1920x932.png)
 
-**Figure 7 – Types d’utilisation de Claude au Canada par rapport aux pays anglophones (Australie, Royaume-Uni et États-Unis)**Ce diagramme illustre la différence nette entre les pourcentages de conversations au Canada et les moyennes enregistrées en Australie, au Royaume-Uni et aux États-Unis pour différents types de conversations représentant au moins 1 % des conversations canadiennes (les 6 thèmes les plus typiquement canadiens et les 6 thèmes les plus caractéristiques des pays comparables). Source : Anthropic Economic Index, février 2026.
+**Types d’utilisation de Claude au Canada par rapport aux pays anglophones (Australie, Royaume-Uni et États-Unis)**Ce diagramme illustre la différence nette entre les pourcentages de conversations au Canada et les moyennes enregistrées en Australie, au Royaume-Uni et aux États-Unis pour différents types de conversations représentant au moins 1 % des conversations canadiennes (les 6 thèmes les plus typiquement canadiens et les 6 thèmes les plus caractéristiques des pays comparables). Source : Anthropic Economic Index, février 2026.
 
 En fait, les utilisations pour la traduction de documents constituent la plus grande différence d’utilisation au Canada par rapport aux pays anglophones comparables qui utilisent beaucoup Claude, soit l’Australie, le Royaume-Uni et les États-Unis (figure 7). De manière plus générale, l’utilisation de Claude au Canada est principalement axée sur l’éducation et l’accès au marché du travail : les travaux scolaires (mathématiques et STIM), l’aide au codage et la rédaction de CV font partie des catégories d’utilisation les plus surreprésentées par rapport aux pays comparables. Par contre, le Canada affiche des résultats inférieurs aux tendances générales dans les domaines des communications professionnelles (courriels professionnels, contenu marketing, aide juridique) et des tâches personnelles du quotidien (cuisine, entretien ménager et conseils de santé).
 
@@ -171,7 +151,11 @@ Le Canada figure parmi les pays où l’adoption de Claude est la plus forte au 
 
 Certains types d’utilisation sont également révélateurs de la structure de l’économie canadienne. Les utilisations d’aide à la traduction sont plus fréquentes dans les provinces ayant plus d’emplois dans la fonction publique, ce qui correspond aux exigences relatives aux langues officielles qui s’appliquent à une grande partie de la fonction publique canadienne; il en résulte que la traduction de documents est l’utilisation la plus caractéristique de Claude au Canada par rapport aux autres pays de la sphère anglophone. D’une manière plus générale, l’utilisation de Claude au Canada est davantage axée sur les études et l’insertion sur le marché du travail, puisque les travaux scolaires, l’aide au codage et la rédaction de CV sont surreprésentés au Canada par rapport à l’Australie, au Royaume-Uni et aux États-Unis.
 
-#### Citation
+## Authors & acknowledgements
+
+### Citation
+
+Copy
 
 ```
 @online{mccrory2026canadacountrybrief,
@@ -182,27 +166,3 @@ year = {2026},
 url = {https://www.anthropic.com/research/how-canada-uses-claude},
 }
 ```
-
-Copy
-
-####
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)

@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source
-fetched_at: 2026-10-19T05:32:52.026392+00:00
+fetched_at: 2026-10-26T05:39:59.112373+00:00
 title: "An opt-in vulnerability-finding service for open-source software \\ Anthropic"
 ---
 
-Frontier Red Team
-
-# Launching an opt-in vulnerability-finding service for open-source software
-
-Oct 8, 2026
+### Chapter 01: Our vulnerability scanner
 
 *We’re launching [OSS Scanner](https://red.anthropic.com/oss-scanner), an opt-in vulnerability scanner for the open-source ecosystem informed by our experience using Claude to find vulnerabilities during [Project Glasswing](https://www.anthropic.com/glasswing). Projects that join will receive thorough, periodic security scans by our strongest models at no cost.*
 
@@ -43,27 +39,3 @@ To validate an early version of OSS Scanner, we asked the expert penetration tes
 Core maintainers of eligible projects can enroll by submitting a PR to [this GitHub repo](https://github.com/anthropics/oss-scanner) following the standard project template, with additional guidance provided in [our extended FAQ](https://red.anthropic.com/oss-scanner). Projects are eligible based on a similar set of criteria that OSS-Fuzz uses: briefly, projects should have a “critical impact on infrastructure and user security” and we will make decisions on a case-by-case basis.
 
 *Whether or not OSS Scanner is right for you, our new [Cyber Verification Program](https://www.anthropic.com/news/cyber-verification-program) makes advanced cyber capabilities and reduced blocking classifiers available to qualifying security professionals. [Claude for OSS](https://claude.com/contact-sales/claude-for-oss) provides free Claude Max 20x subscriptions to help remediate vulnerabilities and improve OSS projects.*
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.

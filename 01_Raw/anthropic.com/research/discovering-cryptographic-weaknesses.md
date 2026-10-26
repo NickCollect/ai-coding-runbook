@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/discovering-cryptographic-weaknesses
-fetched_at: 2026-10-19T05:32:50.279454+00:00
+fetched_at: 2026-10-26T05:39:57.140827+00:00
 title: "Discovering cryptographic weaknesses with Claude \\ Anthropic"
 ---
 
-Frontier Red Team
-
-# Discovering cryptographic weaknesses with Claude
-
-Jul 28, 2026
-
-![Discovering cryptographic weaknesses with Claude](https://www-cdn.anthropic.com/images/4zrzovbb/website/802260d34a0653f23fd4944fae43064df367aa44-1000x1000.svg)
+### Chapter 01: Summary
 
 ## Summary
 
@@ -142,35 +136,16 @@ Read the paper [introducing CryptanalysisBench](https://arxiv.org/abs/2607.18538
 
 *Edit 29 July: Updated an academic affiliation.*
 
-#### Footnotes
+## Footnotes
 
-1. See, for example, cryptographic vulnerabilities we have found on [OpenSSL](https://nvd.nist.gov/vuln/detail/CVE-2026-45445) and [wolfSSL](https://nvd.nist.gov/vuln/detail/CVE-2026-5194).
-2. We believe the attack discovered by Mythos Preview does not impact the other NIST post-quantum cryptographic schemes or other schemes that use related methods.
-3. Even then, the attack would cost hundreds of millions of dollars to implement and does not impact other similar cipher schemes.
-4. A scaffold is a set of prompts and code that help the model achieve its goal. We build on top of Claude Code, construct an environment where it can safely run various experiments, and log its results.
-5. Out of curiosity, after confirming the HAWK result was correct, we then tested if the same scaffold that successfully attacked AES could also re-discover the HAWK break. It could.
-6. Importantly, this is just one of many (autonomous) sessions where Claude worked on discovering new ideas. Many sessions resulted in no new discoveries; other follow-up sessions improved on the insight developed in this one. This document was produced by having Claude rewrite the chain of thought to include more detail to make it easier to read.
+01See, for example, cryptographic vulnerabilities we have found on [OpenSSL](https://nvd.nist.gov/vuln/detail/CVE-2026-45445) and [wolfSSL](https://nvd.nist.gov/vuln/detail/CVE-2026-5194).
 
-## Related content
+02We believe the attack discovered by Mythos Preview does not impact the other NIST post-quantum cryptographic schemes or other schemes that use related methods.
 
-### Designing more efficient quantum circuits with Claude
+03Even then, the attack would cost hundreds of millions of dollars to implement and does not impact other similar cipher schemes.
 
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
+04A scaffold is a set of prompts and code that help the model achieve its goal. We build on top of Claude Code, construct an environment where it can safely run various experiments, and log its results.
 
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
+05Out of curiosity, after confirming the HAWK result was correct, we then tested if the same scaffold that successfully attacked AES could also re-discover the HAWK break. It could.
 
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.
+06Importantly, this is just one of many (autonomous) sessions where Claude worked on discovering new ideas. Many sessions resulted in no new discoveries; other follow-up sessions improved on the insight developed in this one. This document was produced by having Claude rewrite the chain of thought to include more detail to make it easier to read.

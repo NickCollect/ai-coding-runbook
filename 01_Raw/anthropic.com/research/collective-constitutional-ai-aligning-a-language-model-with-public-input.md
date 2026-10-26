@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/collective-constitutional-ai-aligning-a-language-model-with-public-input
-fetched_at: 2026-10-12T06:49:43.916961+00:00
+fetched_at: 2026-10-26T05:39:56.575470+00:00
 title: "Collective Constitutional AI \\ Anthropic"
 ---
 
-PolicySocietal Impacts
-
-# Collective Constitutional AI: Aligning a language model with public input
-
-Oct 17, 2023
-
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d20d4e15caa35ee126705d33ee5bdd1ccbe7ff4f-2880x1620.png)
+### Chapter 01: Designing a Public Input Process to Collectively Draft a Constitution
 
 Anthropic and the [Collective Intelligence Project](https://cip.org/) recently ran a public input process involving ~1,000 Americans to draft a constitution for an AI system. We did this to explore how democratic processes can influence AI development. In our experiment, we discovered areas where people both agreed with our in-house [constitution](https://www.anthropic.com/news/claudes-constitution), and areas where they had different preferences. In this post, we share the resulting publicly sourced constitution, as well as what happened when we trained a new AI system against it using Constitutional AI.  
   
@@ -26,11 +20,11 @@ We asked approximately 1,000 members of the American public to “Help us pick r
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/2bc2e20d8c7052dcd7af8537427ccac2fddbb689-1893x1647.png)
 
-Figure 1: Stylized depiction of the interface the public used to deliberate on what principles should go into the constitution.
+Stylized depiction of the interface the public used to deliberate on what principles should go into the constitution.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6b8e5c3860b64f0bd6d939d720d2310a0069c9cb-3758x3530.png)
 
-Figure 2: Example principles that uniquely differentiate opinion Group A from opinion Group B. (Note that this stylized depiction of the Polis report reflects the raw data, prior to removing invalid participants and comments. Final numbers differ slightly.)
+Example principles that uniquely differentiate opinion Group A from opinion Group B. (Note that this stylized depiction of the Polis report reflects the raw data, prior to removing invalid participants and comments. Final numbers differ slightly.)
 
 ## Analyzing the Publicly Sourced Constitution
 
@@ -75,15 +69,15 @@ After training the models, we ran a series of evaluations to find similarities a
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/cb2ae28ed95d05c2de0f4ab8448156d0893401a0-1893x504.png)
 
-Table 1: [MMLU](https://arxiv.org/abs/2009.03300) and [GSM8K](https://arxiv.org/abs/2110.14168) accuracy computed using the same methods outlined in [Claude 2’s model card](https://www-cdn.anthropic.com/bd2a28d2535bfb0494cc8e2a3bf135d2e7523226/Model-Card-Claude-2.pdf). Higher is better. We see no significant differences between models.
+[MMLU](https://arxiv.org/abs/2009.03300) and [GSM8K](https://arxiv.org/abs/2110.14168) accuracy computed using the same methods outlined in [Claude 2’s model card](https://www-cdn.anthropic.com/bd2a28d2535bfb0494cc8e2a3bf135d2e7523226/Model-Card-Claude-2.pdf). Higher is better. We see no significant differences between models.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/e846207108e424d460dabc55dc5504ae48df8d35-1879x1203.png)
 
-Figure 3: [BBQ](https://aclanthology.org/2022.findings-acl.165/) bias scores. Higher scores indicate more negative stereotype bias (lower is better). We used the same methods, code, and controls from our previously [published work](https://arxiv.org/abs/2302.07459). The Public model shows lower bias scores across all nine social dimensions than the Standard model, especially for Disability Status and Physical Appearance. The Public constitution places a larger emphasis on accessibility, which may explain the greater reduction in bias for Disability Status in particular.
+[BBQ](https://aclanthology.org/2022.findings-acl.165/) bias scores. Higher scores indicate more negative stereotype bias (lower is better). We used the same methods, code, and controls from our previously [published work](https://arxiv.org/abs/2302.07459). The Public model shows lower bias scores across all nine social dimensions than the Standard model, especially for Disability Status and Physical Appearance. The Public constitution places a larger emphasis on accessibility, which may explain the greater reduction in bias for Disability Status in particular.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/20860e20d728aa032997fc79325e64d161f6a456-1893x1210.png)
 
-Figure 4: Group representativeness score from the [OpinionQA](https://arxiv.org/abs/2303.17548) benchmark. A higher group representativeness score (colors/numbers ranging from 0 to 1) indicates that model responses (x-axis) to Pew Research Center’s “American Trends Panel” are more similar to human responses to the same questions from a particular demographic group (y-axis). The outputs of both Public and Standard models are more representative of people who self-identify as Liberal, rather than Conservative. The differences are small but statistically significant. Claude Instant 1.2 is slightly more balanced across political ideologies. Both Public and Claude Instant 1.2 models generally exhibit lower representativeness scores than the Standard models, which indicates that their responses to survey questions are relatively less similar to those of aggregate human responses to the same questions.
+Group representativeness score from the [OpinionQA](https://arxiv.org/abs/2303.17548) benchmark. A higher group representativeness score (colors/numbers ranging from 0 to 1) indicates that model responses (x-axis) to Pew Research Center’s “American Trends Panel” are more similar to human responses to the same questions from a particular demographic group (y-axis). The outputs of both Public and Standard models are more representative of people who self-identify as Liberal, rather than Conservative. The differences are small but statistically significant. Claude Instant 1.2 is slightly more balanced across political ideologies. Both Public and Claude Instant 1.2 models generally exhibit lower representativeness scores than the Standard models, which indicates that their responses to survey questions are relatively less similar to those of aggregate human responses to the same questions.
 
 ## Lessons Learned
 
@@ -116,7 +110,13 @@ The process of training a language model to abide by qualitative public opinions
 
 We believe that our work may be one of the first instances in which members of the public have collectively directed the behavior of a large language model through written specifications via an online deliberation process. We hope that sharing our very preliminary and imperfect findings sooner rather than later will help others interested in democratic inputs to AI to learn from our successes and failures. We would love your feedback as we continue to iterate on our research. Reach out to us at [policy@anthropic.com](mailto:policy@anthropic.com) and [hi@cip.org](mailto:hi@cip.org).
 
-## Acknowledgements
+## Policy Memo
+
+[Collective Constitutional AI Policy Memo](https://www-cdn.anthropic.com/b43359be43cabdbe3a8ffd60ea8a68acf25cb22e/Anthropic_CollectiveConstitutionalAI.pdf)
+
+## Authors & acknowledgements
+
+### Acknowledgements
 
 - Deep Ganguli\*, Saffron Huang\*\*, Liane Lovitt\*, and Divya Siddarth\*\* jointly led the work in close collaboration.
 - Thomas Liao\* trained the models and ran the evaluations, with help and support from Amanda Askell\*, Yuntao Bai\*, Saurav Kadavath\*, Jackson Kernion\*, Cam McKinnon\*, and Karina Nguyen\*.
@@ -125,7 +125,3 @@ We believe that our work may be one of the first instances in which members of t
 
 \* Anthropic.  
 \*\* Collective Intelligence Project.
-
-## Policy Memo
-
-[Collective Constitutional AI Policy Memo](https://www-cdn.anthropic.com/b43359be43cabdbe3a8ffd60ea8a68acf25cb22e/Anthropic_CollectiveConstitutionalAI.pdf)

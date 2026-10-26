@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/formalizing-fermats-last-theorem
-fetched_at: 2026-10-19T05:32:51.356766+00:00
+fetched_at: 2026-10-26T05:39:58.234986+00:00
 title: "Formalizing Fermat's Last Theorem  \\ Anthropic"
 ---
 
-Science
-
-# Formalizing Fermat's Last Theorem
-
-Sep 4, 2026
-
-![Formalizing Fermat's Last Theorem ](https://www-cdn.anthropic.com/images/4zrzovbb/website/578f91575c42231f0994e341014614255149af80-1200x630.jpg)
+### Chapter 01: The challenge of verifying mathematical proofs
 
 *We are sharing the first complete computer-checked proof of Fermat’s Last Theorem. Claude worked largely autonomously over 11 days to write the proof in the Lean programming language. Below, we describe how the formalization was done and share some thoughts about what this work could mean for research mathematics.*Around 1637, Pierre de Fermat jotted down a claim in the margin of his copy of Diophantus’s Arithmeticathat would become one of the most famous mathematical conjectures of all time: no positive integers a, b, c satisfy aⁿ + bⁿ = cⁿ for any n > 2. [Fermat’s Last Theorem](https://www.youtube.com/watch?v=1BSFyEIY2BY) (FLT), as the conjecture became known, turned out to be incredibly difficult to prove. The first proof, from Sir Andrew Wiles in1995, ran to 129 pages and required months of painstaking work to verify.
 
@@ -48,7 +42,7 @@ Claude completed the proof in 11 days, producing computer-verifiable proofs of 3
 
 [](https://cdn.sanity.io/files/4zrzovbb/website/6d5e1a90507ea4171510b907134139bf716b7d15.mp4)
 
-*Time progression of FLT formalization.*
+Time progression of FLT formalization.
 
 Claude’s proof follows [a simplified version of Wiles’s proof from Darmon, Diamond, and Taylor](https://www.math.mcgill.ca/darmon/pub/Articles/Expository/05.DDT/paper.pdf). Mathematical input from humans was limited to occasional high-level instructions from Tianyi: “Jacobian as a scheme sounds high priority,” “push [the] Mazur [theorem] to be done soon.” You can find excerpts of Claude’s thinking [here](https://www-cdn.anthropic.com/9e431dff043da6538d99d6c2d231b670aa3da263.pdf).
 
@@ -60,7 +54,7 @@ Claude’s proof follows [a simplified version of Wiles’s proof from Darmon, D
 “🏁🏁🏁The FLT root reads PROVED on prove2me at 02:00:57Z Aug-18 (10:00:57pm ET Aug-17). Historic moment for this campaign.”
 ```
 
-*Excerpts of Claude’s thinking as it realizes what it has just accomplished.*
+Excerpts of Claude’s thinking as it realizes what it has just accomplished.
 
 A number of Claude’s initial attempts failed: while agents had some early success, they quickly lost track of the project’s state and stopped collaborating effectively. Their failed efforts contributed ~7% of the non-boilerplate lines in the final proof.
 
@@ -72,7 +66,7 @@ The effort succeeded when we switched to using [Prove2Me](https://prove2me.verce
 
 ![DAG showing Claude formalizing sub-theorems on the way to FLT](https://www-cdn.anthropic.com/images/4zrzovbb/website/afd8e238255ec2654f2322f3d3630dcf1e8ea4ca-6800x3264.png)
 
-*Key milestones from the Prove2Me plan that Claude used to formalize Fermat’s Last Theorem. The three colored sections correspond to three core sub-theorems that Claude had to prove on the way to its final goal. This graph closely follows Wiles’s original proof.*
+Key milestones from the Prove2Me plan that Claude used to formalize Fermat’s Last Theorem. The three colored sections correspond to three core sub-theorems that Claude had to prove on the way to its final goal. This graph closely follows Wiles’s original proof.
 
 With Prove2Me and a Claude Code-based multi-agent harness, a team of agents completed the proof in a little under two weeks, consuming about six billion output tokens from a general-purpose internal research model roughly comparable to Claude Fable 5.1. The finished proof was checked by Lean; it uses just Lean’s three standard axioms, and a [comparator](https://github.com/leanprover/comparator) confirmed that the theorem’s statement matches Mathlib’s own statement of FLT.
 
@@ -92,17 +86,11 @@ To this end, [Anthropic](https://www.anthropic.com/news/expanding-support-for-sc
 
 With AI rapidly changing what it looks like to do math research, mathematicians—at Anthropic and elsewhere—[are grappling with what that means for their work](https://leidendeclaration.ai/). Formalization, however, is a place where we feel unambiguously good about the role of AI. As formalization becomes a more commonplace tool, we are hopeful that it will help maintain trust in the common body of mathematical knowledge.
 
-## Acknowledgments
-
-Our formalization effort is a small piece of the long history of Fermat’s theorem and the development of formal mathematics. The first full proof from Andrew Wiles together with Richard Taylor was a culmination of more than 300 years of mathematics, integrating ideas from Gerhard Frey, Jean-Pierre Serre, Ken Ribet, Barry Mazur, Robert Langlands, Jerrold Tunnell, Yutaka Taniyama, Goro Shimura, and André Weil, among others. Claude’s proof follows [the exposition by Henri Darmon, Fred Diamond, and Richard Taylor.](https://www.math.mcgill.ca/darmon/pub/Articles/Expository/05.DDT/paper.pdf)
-
-Our proof adapts pieces from the [Imperial College London FLT project](https://github.com/ImperialCollegeLondon/FLT) led by Kevin Buzzard and the [flt-regular project](https://github.com/leanprover-community/flt-regular). Lean and Mathlib are both their own labors of love and have received contributions from hundreds of mathematicians, many working with the [Lean FRO](https://lean-lang.org/fro/). We thank Kevin Buzzard for reviewing the proof and for his comments.
-
 ## Learn more
 
 The full proof is available on [GitHub](https://github.com/anthropics/fermats-last-theorem) along with a written walk-through of the proof.
 
-### Recommended expository reading
+#### Recommended expository reading
 
 - [*The Proof in the Code*](https://www.quantabooks.org/books/the-proof-in-the-code/) is a recent book about the history of the Lean theorem prover and the formalization of mathematics.
 - [The 1996 “Fermat’s Last Theorem” BBC documentary](https://www.bbc.co.uk/programmes/b0074rxx) has interviews with Wiles and other mathematicians involved in the proof, and is fondly remembered by some authors of this post.
@@ -110,32 +98,18 @@ The full proof is available on [GitHub](https://github.com/anthropics/fermats-la
 - Chen, S., Marwaha, K., Lu, X., Yuen, H., & Peng, T. (2026). Prove2Me: An open collaborative platform for scaling math formalization. arXiv. <https://doi.org/10.48550/arXiv.2608.28433>
 - [*Automating Math*](https://asteriskmag.com/issues/09/automating-math), Adam Marblestone, in Asterisk Magazine.
 
-### Footnotes
+## Footnotes
 
-1. During his undergrad, Peng’s research advisor wanted to include results from Peng’s thesis in a *Nature* article. He asked Peng whether he was sure the proof was correct. Peng’s honest answer was: “I'm 99% sure, but it's hard to be 100% certain about a proof this long.” Peng missed out on getting his work published in *Nature*.
-2. There are numerous other stories of the mathematical community struggling with verification. Among the most famous is Thomas Hales’s 1998 proof of the [Kepler conjecture](https://en.wikipedia.org/wiki/Kepler_conjecture), which spent four years in review before a 12-referee panel settled for “99% certain” (Hales eventually led a 20-person project, [Flyspeck](https://github.com/flyspeck/flyspeck), that formalized the proof). Grigori Perelman’s 2002 proof of the [Poincaré conjecture](https://en.wikipedia.org/wiki/Poincar%C3%A9_conjecture) took the community roughly four years and three 300-page expositions to accept. Harald Helfgott’s 2013 proof of the [weak Goldbach conjecture](https://en.wikipedia.org/wiki/Goldbach%27s_weak_conjecture) is still under review. Sometimes results that turn out to be wrong are [accepted for years](https://www.ias.edu/ideas/2014/voevodsky-origins), and other mathematicians build their theories on these faulty foundations.
-3. This is partly because Mathlib is concise and well-reviewed, while our proof is likely much longer than it needs to be.
+01During his undergrad, Peng’s research advisor wanted to include results from Peng’s thesis in a *Nature* article. He asked Peng whether he was sure the proof was correct. Peng’s honest answer was: “I'm 99% sure, but it's hard to be 100% certain about a proof this long.” Peng missed out on getting his work published in *Nature*.
 
-## Related content
+02There are numerous other stories of the mathematical community struggling with verification. Among the most famous is Thomas Hales’s 1998 proof of the [Kepler conjecture](https://en.wikipedia.org/wiki/Kepler_conjecture), which spent four years in review before a 12-referee panel settled for “99% certain” (Hales eventually led a 20-person project, [Flyspeck](https://github.com/flyspeck/flyspeck), that formalized the proof). Grigori Perelman’s 2002 proof of the [Poincaré conjecture](https://en.wikipedia.org/wiki/Poincar%C3%A9_conjecture) took the community roughly four years and three 300-page expositions to accept. Harald Helfgott’s 2013 proof of the [weak Goldbach conjecture](https://en.wikipedia.org/wiki/Goldbach%27s_weak_conjecture) is still under review. Sometimes results that turn out to be wrong are [accepted for years](https://www.ias.edu/ideas/2014/voevodsky-origins), and other mathematicians build their theories on these faulty foundations.
 
-### Designing more efficient quantum circuits with Claude
+03This is partly because Mathlib is concise and well-reviewed, while our proof is likely much longer than it needs to be.
 
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
+## Authors & acknowledgements
 
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
+### Acknowledgements
 
-### Claude reveals ECDSA curve origins
+Our formalization effort is a small piece of the long history of Fermat’s theorem and the development of formal mathematics. The first full proof from Andrew Wiles together with Richard Taylor was a culmination of more than 300 years of mathematics, integrating ideas from Gerhard Frey, Jean-Pierre Serre, Ken Ribet, Barry Mazur, Robert Langlands, Jerrold Tunnell, Yutaka Taniyama, Goro Shimura, and André Weil, among others. Claude’s proof follows [the exposition by Henri Darmon, Fred Diamond, and Richard Taylor.](https://www.math.mcgill.ca/darmon/pub/Articles/Expository/05.DDT/paper.pdf)
 
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to Anthropic Science
-
-Features on AI-assisted discoveries, practical workflows, and field notes across the sciences.
+Our proof adapts pieces from the [Imperial College London FLT project](https://github.com/ImperialCollegeLondon/FLT) led by Kevin Buzzard and the [flt-regular project](https://github.com/leanprover-community/flt-regular). Lean and Mathlib are both their own labors of love and have received contributions from hundreds of mathematicians, many working with the [Lean FRO](https://lean-lang.org/fro/). We thank Kevin Buzzard for reviewing the proof and for his comments.

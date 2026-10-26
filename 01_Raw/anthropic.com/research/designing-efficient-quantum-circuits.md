@@ -1,16 +1,8 @@
 ---
 source_url: https://www.anthropic.com/research/designing-efficient-quantum-circuits
-fetched_at: 2026-10-19T05:32:50.208385+00:00
+fetched_at: 2026-10-26T05:39:57.019541+00:00
 title: "Designing more efficient quantum circuits with Claude \\ Anthropic"
 ---
-
-Science
-
-# Designing more efficient quantum circuits with Claude
-
-Oct 16, 2026
-
-![Designing more efficient quantum circuits with Claude](https://www-cdn.anthropic.com/images/4zrzovbb/website/cc389d90b468ebc86011f6642099dfad9a4a757f-2000x1125.jpg)
 
 *Quantum computers will need carefully designed circuits to run useful algorithms on limited hardware. We gave Claude plain-language specifications for eight such circuits, drawn from chemistry, optimization, physics simulation, and number theory, along with an automated evaluator that checks and scores each design. Working largely on its own, Claude found designs that improve on the best published circuits, in some cases by an order of magnitude or more. Such improvements substantially reduce the quantum resources that useful applications require, so practical quantum computers could arrive sooner than previously anticipated.*
 
@@ -40,13 +32,13 @@ These results suggest that AI can now help redesign quantum circuits, a key step
 
 [](https://cdn.sanity.io/files/4zrzovbb/website/0e9f7b41ac662fb1b2544315dc7cae1967f1fff8.mp4)
 
-Figure 1: Closed-loop quantum circuit optimization. Claude designs new implementations in Python, which are then sent to a programmatic evaluator. The evaluator checks whether the proposed implementation is correct, then scores it on the number of qubits and gates it requires. This information is then sent to Claude, which uses it to improve its implementation. The code and values shown are illustrative.
+Closed-loop quantum circuit optimization. Claude designs new implementations in Python, which are then sent to a programmatic evaluator. The evaluator checks whether the proposed implementation is correct, then scores it on the number of qubits and gates it requires. This information is then sent to Claude, which uses it to improve its implementation. The code and values shown are illustrative.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d5d27ec3f141696918c6bed3f6b887f5b84e75f0-3840x2430.png)
 
-Figure 2: Claude designed smaller and faster circuits across eight different quantum-circuit design tasks. Gray marks show the best previously published designs; orange marks and lines show Claude’s designs. Point addition, the eighth task, is compared in Table 1 below.
+Claude designed smaller and faster circuits across eight different quantum-circuit design tasks. Gray marks show the best previously published designs; orange marks and lines show Claude’s designs. Point addition, the eighth task, is compared in Table 1 below.
 
-## A new reversible algorithm
+### A new reversible algorithm
 
 Designing a quantum circuit involves two constraints that ordinary programming doesn’t have. The first is that a quantum circuit can’t make “if-then” decisions the way an ordinary program can. An ordinary program can check a value and then run only one of two pieces of code. But a quantum computer runs on a superposition of many inputs at once, some of which would run the first piece of code and some of which would run the second, so the circuit has to include the operations for both every time it runs.
 
@@ -56,7 +48,7 @@ This constraint forces a difficult trade-off between space (i.e., qubits) and ti
 
 This is what makes quantum circuit design an especially interesting test of Claude’s capabilities. The circuits can be written as ordinary code, but improving them requires the model to reason under a set of constraints quite unlike those of ordinary programming.
 
-### A hard first test: modular inversion
+#### A hard first test: modular inversion
 
 The first task we gave Claude was point addition, a rule for combining two points on a mathematical curve (an elliptic curve) to produce a third. Point addition is the core step in quantum algorithms for the discrete logarithm problem on elliptic curves: given a starting point and the result of adding it to itself *n* times, find *n*. For large curves, ordinary computers can’t solve this problem in any reasonable amount of time, but a sufficiently large quantum computer could.
 
@@ -64,13 +56,13 @@ These algorithms perform point addition many times over, including in reverse, a
 
 We gave Claude a one-paragraph brief. It explained the mathematical rule for point addition, and how the evaluator would check each proposed circuit for correctness and score it on the number of qubits and gates it used. It also instructed Claude to explore several approaches in parallel. After working for 53 hours with minimal human input (limited to the initial brief and occasional prompts to think more broadly), Claude arrived at a completely new approach to the problem.
 
-### The memory demands of divsteps
+#### The memory demands of divsteps
 
 Most of the cost of point addition comes from a single step, called *modular inversion*. Elliptic-curve arithmetic uses numbers that wrap back around when they reach a fixed limit. Modular inversion is the wraparound version of division: given an integer *a*, find *x* such that *ax* ≡ 1 (mod *p*). Ordinary computers can perform this operation efficiently using a method called [*divsteps*](https://tches.iacr.org/index.php/TCHES/article/view/8298). Divsteps starts with a pair of numbers and repeatedly simplifies them over many rounds of iteration. In each round, divsteps examines the current pair of numbers and conditionally swaps, adds, subtracts, or halves them. Along the way, it preserves just enough information to produce the modular inverse at the end.
 
 Despite its success on ordinary computers, divsteps had not yet produced a practical quantum circuit, because of the reversibility constraint described above. The record of which operation was chosen at each iteration, called *branch information*, is the kind of scratch work that a traditional program can simply discard. In contrast, a quantum circuit has to retain that record so the computation can be run backward. A straightforward quantum version of divsteps is therefore forced to accumulate a long history of branch information, which requires an enormous number of additional qubits to store.
 
-### How Claude got around the memory problem
+#### How Claude got around the memory problem
 
 Claude recognized that this divsteps approach could be promising for quantum circuits, but only if there were a way around needing to store the full history. It had an idea: perhaps the record didn’t need to be stored at all. Claude reasoned that it might be possible to directly infer (or “decode”) the branch information by carefully inspecting the pair of numbers after each iteration. In essence, the numbers themselves would store the record. The circuit could then be run backward without needing any extra qubits.
 
@@ -78,27 +70,27 @@ To test this idea, Claude explored a number of simple candidate rules for perfor
 
 Claude then tried a more theoretical approach. Rather than guessing and testing rules, it set out to understand mathematically why divsteps behaves the way it does. It proved a series of results about the iteration process, including several new algebraic identities. From these identities, Claude derived a precise formula for the decoding rule that would correctly recover the branch information from the numerical pairs. It then checked the formula, first by running it through large-scale numerical simulations, and then formalizing the claim in Lean. With the full validation complete, Claude produced the first reversible implementation of divsteps with no stored branch history.
 
-### A family of designs
+#### A family of designs
 
 Decoding saves qubits, but it costs time. So, as a further refinement, Claude looked for situations in which it would be cheaper to store the branch information than to decode it. By varying the threshold at which the circuit stores rather than decodes the branch information, Claude produced a new family of designs between the two extremes. Compared with the smallest previous design, one circuit in the family uses 12% more qubits but 17x fewer gates. More generally, the new designs expand the Pareto frontier, offering combinations of qubit count and runtime that weren’t available before (Table 1).
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7e8a0d4b9d7e826f25379d351ee6d2cab3900f84-3840x1052.png)
 
-Table 1: Resources for elliptic-curve point addition. Bold rows are Claude’s designs; the others are the best previously published designs. Sources: [Schrottenloher](https://arxiv.org/abs/2606.02235) (2026), [Luo et al.](https://arxiv.org/abs/2607.13816) (2026).
+Resources for elliptic-curve point addition. Bold rows are Claude’s designs; the others are the best previously published designs. Sources: [Schrottenloher](https://arxiv.org/abs/2606.02235) (2026), [Luo et al.](https://arxiv.org/abs/2607.13816) (2026).
 
-## Optimizing a quantum optimizer
+### Optimizing a quantum optimizer
 
 Optimization problems are at the heart of a wide range of tasks, including scheduling, logistics, and materials design. An optimization problem presents a set of competing constraints and asks for the solution that satisfies as many of them as possible. Many quantum algorithms have been proposed for problems like these, but most promise only modest or uncertain gains over ordinary computers. [Decoded quantum interferometry (DQI)](https://arxiv.org/abs/2408.08292) is one of the strongest candidates for offering a *superpolynomial quantum speedup—*an advantage that rapidly widens as the problems get larger.
 
 When a quantum computer finishes a computation, reading out its qubits produces just one answer, selected at random from the possibilities they were holding in superposition. DQI works by preparing a quantum state in which good solutions are more likely to be read out than bad ones. Doing this involves using an error-correcting decoder, which recovers a short list of “errors” from a compact summary. This is the most expensive step in the algorithm. So, if we could make a faster decoder, we could also perform DQI faster.
 
-### A more efficient quantum decoder
+#### A more efficient quantum decoder
 
 The researchers who introduced DQI demonstrated it on a problem called *optimal polynomial intersection* (OPI), a grid-based version of curve fitting (Figure 3). Imagine a grid in which each position *x* contains several acceptable values of *y*. The goal is to find a simple curve (a low-degree polynomial) that passes through an acceptable square for as many *x* positions as possible. DQI tackles this optimization problem using a specific type of decoder, called a Reed-Solomon decoder.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ffc6c06497f985e9162489dffa83c0bbaf50a909-3840x2000.png)
 
-Figure 3: Optimal Polynomial Intersection (OPI) as discrete curve fitting. Each column contains several acceptable values. The optimization problem is to find a polynomial that passes through as many of the acceptable values as possible.
+Optimal Polynomial Intersection (OPI) as discrete curve fitting. Each column contains several acceptable values. The optimization problem is to find a polynomial that passes through as many of the acceptable values as possible.
 
 Reed-Solomon decoding starts from the compact summary of errors mentioned above, which is known as a *syndrome*. The decoder’s job is to infer, from this summary, where in the data the errors occurred and what they were. The previous state-of-the-art quantum circuit processed these syndromes using the extended Euclidean algorithm, a sequence of divisions and swaps in which the number and order of steps depend on the particular input it’s given. Here, the constraints of quantum circuits reemerge: while an ordinary program can follow a different path for every input, a quantum circuit, working on many inputs at once, has to handle all of them with a single fixed sequence of gates. To manage this, the previous design had to stretch the computation over many more rounds of iteration than any single input would need, and had to run every operation in every round, even when doing so was unnecessary.
 
@@ -106,7 +98,7 @@ Improving this decoder could substantially reduce DQI’s runtime. Estimates by 
 
 So, we asked Claude to design a more efficient quantum circuit for the decoding step. Claude quickly concluded that the extended Euclidean algorithm was a poor fit for a quantum circuit. Instead, it organized its circuit around a different decoding method, known as Berlekamp-Massey decoding, which reads through syndromes (summaries of errors) one at a time and gradually works out the simplest rule that predicts each number in the list based on the ones that came before it. Once that rule is found, it reveals the errors. Unlike the extended Euclidean algorithm, Berlekamp-Massey performs the same kind of step in every round and always runs the same number of rounds, which suits a quantum circuit’s single fixed sequence of gates, ultimately giving Claude a much more efficient foundation to build on.
 
-### A simplified approach to storage
+#### A simplified approach to storage
 
 Switching to Berlekamp-Massey removed the need for the circuit to take different paths for different inputs. But making it reversible introduced another challenge, this time as a result of the uncomputing constraint discussed above. In every round, the circuit calculates temporary values that it needs only briefly, but this information can’t simply be deleted: to uncompute it later, the circuit has to be able to recover that information.
 
@@ -118,9 +110,9 @@ Together, these optimizations reduced the number of gates in the decoder by a fa
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/340e106a0a928c4736aa5ccd865b4d6eeb3a5611-3840x1650.png)
 
-Figure 4: Three designs for the locator step of the Reed–Solomon decoder. The designs are drawn to scale: each block’s width is proportional to its gate count. (a) The previous design, based on the extended Euclidean algorithm (Khattar et al., 2025). (b) A design based on Berlekamp–Massey needs far fewer gates, but a naive reversible version has to store a 12-qubit record in every round, adding up to 840 qubits. (c) Claude’s circuit reconstructs most of the history from the updated state, so it needs to have room only for a single saved value of 19 qubits.
+Three designs for the locator step of the Reed–Solomon decoder. The designs are drawn to scale: each block’s width is proportional to its gate count. (a) The previous design, based on the extended Euclidean algorithm (Khattar et al., 2025). (b) A design based on Berlekamp–Massey needs far fewer gates, but a naive reversible version has to store a 12-qubit record in every round, adding up to 840 qubits. (c) Claude’s circuit reconstructs most of the history from the updated state, so it needs to have room only for a single saved value of 19 qubits.
 
-## What we learned
+### What we learned
 
 Scientific progress often comes from making theoretical ideas practical. One of the main ways this happens is by making a process that was once thought to be impractical fast and cheap enough to carry out. Quantum circuit design is a prime example: the 150,000-fold drop in the FeMoco estimate described above took many research groups eight years, with each step typically representing months of work. By contrast, Claude’s elliptic-curve design was the result of a single 53-hour run.
 
@@ -134,34 +126,12 @@ Circuit design is only one part of building a useful quantum computer. Because q
 
 This raises an intriguing possibility. Rather than designing each component on its own, AI could optimize all of them jointly, from the algorithm down to the hardware, to build an entire error-corrected quantum computer tailored to a specific problem. Such designs could also tell hardware builders which capabilities matter most for a given application. That could put problems such as designing catalysts and understanding new materials within reach of the first fault-tolerant machines.
 
-## Acknowledgments
+## Footnotes
+
+01Both estimates are for the same 54-orbital model of FeMoco, as tabulated by [Low et al.](https://arxiv.org/abs/2502.15882), “Fast quantum simulation of electronic structure by spectrum amplification” (2025), Table 1; the 2017 estimate is from [Reiher et al.](https://doi.org/10.1073/pnas.1619152114) Intermediate estimates for the same model came from [Berry et al.](https://doi.org/10.22331/q-2019-12-02-208) (2019), [von Burg et al.](https://doi.org/10.1103/PhysRevResearch.3.033055) (2021), [Lee et al.](https://doi.org/10.1103/PRXQuantum.2.030305) (2021), and [Rocca et al.](https://doi.org/10.1021/acs.jctc.4c00352) (2024).
+
+## Authors & acknowledgements
+
+### Acknowledgements
 
 We thank Arjun Kar and Vinay Ramasesh for helpful discussions in the early stages of the project.
-
-#### Footnotes
-
-1. Both estimates are for the same 54-orbital model of FeMoco, as tabulated by [Low et al.](https://arxiv.org/abs/2502.15882), “Fast quantum simulation of electronic structure by spectrum amplification” (2025), Table 1; the 2017 estimate is from [Reiher et al.](https://doi.org/10.1073/pnas.1619152114) Intermediate estimates for the same model came from [Berry et al.](https://doi.org/10.22331/q-2019-12-02-208) (2019), [von Burg et al.](https://doi.org/10.1103/PhysRevResearch.3.033055) (2021), [Lee et al.](https://doi.org/10.1103/PRXQuantum.2.030305) (2021), and [Rocca et al.](https://doi.org/10.1021/acs.jctc.4c00352) (2024).
-
-## Related content
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-### How employment is changing at Anthropic
-
-How has AI restructured work and employment at Anthropic? As a company at the frontier of AI adoption, Anthropic could be a leading indicator of how AI will shift work organization, hiring, and labor demand across the economy.
-
-[Read more](https://www.anthropic.com/research/employment-at-anthropic)
-
-## Subscribe to Anthropic Science
-
-Features on AI-assisted discoveries, practical workflows, and field notes across the sciences.

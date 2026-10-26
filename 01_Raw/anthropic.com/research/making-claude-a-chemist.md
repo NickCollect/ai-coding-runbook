@@ -1,20 +1,14 @@
 ---
 source_url: https://www.anthropic.com/research/making-claude-a-chemist
-fetched_at: 2026-10-19T05:32:52.067148+00:00
+fetched_at: 2026-10-26T05:39:58.956790+00:00
 title: "Making Claude a chemist \\ Anthropic"
 ---
 
-Science
-
-# Making Claude a chemist
-
-Jun 5, 2026
-
-![Making Claude a chemist](https://www-cdn.anthropic.com/images/4zrzovbb/website/a683fdcfe3e2c7c6532342a0fa4ff789c3fd4852-1000x1000.svg)
+### Chapter 01: Claude vs. ChemDraw on NMR prediction and structure elucidation
 
 *We’re working with world-class synthetic, computational, and analytical chemists to make Claude better at chemistry. In this post, we share our first work as part of this effort, in which Anthropic chemist, David Kamber, examines how Claude performs on a chemist’s most common analytical input, an NMR spectrum.*When working with molecules, chemists move between hand-drawn structures on a whiteboard, instrument readouts, database query strings, and the technical notations of patents and publications. Each of these representations encodes the same underlying chemistry, but each demands a different kind of fluency. A sketch of caffeine, for example, allows a chemist to spot its resemblance to adenosine, the body’s drowsiness signal, and predict that it keeps us alert by blocking the receptor. However, that same sketch cannot help a chemist tell it apart from other near-identical looking molecules.
 
-Understanding what molecule a chemist is working with is critical. Chemistry undergirds everything from the foods and medicine we ingest to our lotions, paints, and plastics. Reroute a handful of bonds among the same atoms, and glucose becomes fructose, molecules sharing a formula but processed through entirely different metabolic pathways. Flip a molecule into its mirror image, and a sedative becomes a teratogen, as happened in the [thalidomide](https://pubmed.ncbi.nlm.nih.gov/21507989/) disaster.1 Chemists’ everyday work depends on reading these signals correctly across whichever representation befits a given task.
+Understanding what molecule a chemist is working with is critical. Chemistry undergirds everything from the foods and medicine we ingest to our lotions, paints, and plastics. Reroute a handful of bonds among the same atoms, and glucose becomes fructose, molecules sharing a formula but processed through entirely different metabolic pathways. Flip a molecule into its mirror image, and a sedative becomes a teratogen, as happened in the [thalidomide](https://pubmed.ncbi.nlm.nih.gov/21507989/) disaster.[1](#footnote-1) Chemists’ everyday work depends on reading these signals correctly across whichever representation befits a given task.
 
 Translating between these representations (chasing down a structure from a figure, reconciling an instrument readout against a proposed product, querying a database in the right notation) is time consuming and impossible to keep up with at scale—CAS, the largest chemistry registry, catalogs over 290 million disclosed substances and grows by roughly 15,000 new ones every day.
 
@@ -32,23 +26,23 @@ Nearly every small molecule—drug, pesticide, dye, fragrance, polymer, DNA or p
   
 NMR spectroscopy—one of the canonical techniques chemists rely on for this—is one of the most time-consuming steps in synthetic chemistry; for every compound, a chemist has to match each peak in the spectrum to an atom in the proposed structure by hand. For this white paper, we tested how Claude fared against the dedicated NMR software chemists rely on today. We measured three Claude models (Opus 4.7, Opus 4.6, Sonnet 4.6) against ChemDraw and MestReNova on 20 compounds drawn from synthetic chemistry preprints published after the models’ training cutoff so as to avoid selection bias. Both ChemDraw and MestReNova do forward prediction, using a drawn structure to simulate what NMR spectrum will be produced. In addition to forward prediction, we also wanted to see whether Claude could go the other direction—starting from an experimental spectrum and proposing the structure behind it. This is the harder task, and the one existing software currently leaves to the chemist.  
   
-To set up our assessment, we pulled 20 compounds from ChemRxiv preprints2 posted after the models’ training cutoff, taking the first fully characterized novel molecules from each paper. The 20 span four structural families, five compounds each, with each family selected because it involves a different category of NMR challenge. Each tool was given the structure encoded as a SMILES string—the line-of-text notation chemists use to input a molecule to software—and was asked to predict where every hydrogen and carbon peak would fall along a 1D NMR spectrum (a horizontal axis measuring chemical shifts in ppm, parts per million). Given that NMR samples are dissolved in a liquid, and that the choice of solvent (chloroform, DMSO, etc.) moves the peak positions slightly, each tool was told to predict the spectrum in whatever solvent the chemists had used in the published paper.
+To set up our assessment, we pulled 20 compounds from ChemRxiv preprints[2](#footnote-2) posted after the models’ training cutoff, taking the first fully characterized novel molecules from each paper. The 20 span four structural families, five compounds each, with each family selected because it involves a different category of NMR challenge. Each tool was given the structure encoded as a SMILES string—the line-of-text notation chemists use to input a molecule to software—and was asked to predict where every hydrogen and carbon peak would fall along a 1D NMR spectrum (a horizontal axis measuring chemical shifts in ppm, parts per million). Given that NMR samples are dissolved in a liquid, and that the choice of solvent (chloroform, DMSO, etc.) moves the peak positions slightly, each tool was told to predict the spectrum in whatever solvent the chemists had used in the published paper.
 
 ![A graph of the four scaffold classes](https://www-cdn.anthropic.com/images/4zrzovbb/website/6a37f20bd02f14cc408383f98974cee81486fa2d-1920x865.jpg)
 
-*Figure 1. Four scaffold classes covered by the forward-prediction assessment. Each probes a different category of NMR challenge. P1 chloropyridazines have a slow-exchange NH on aminopyridazine in DMSO-d₆; P2 Boc-N-aryl maleimides and N-Boc ynamides exercise α-vinyl-imide carbonyls and the rare ynamide α/β-carbon pair; P3 spiroketones are spirobicyclic ketones with phenacyl or acetyl pendants and diastereotopic CH₂; P4 α-silyl methanesulfonamides have shielded silicon-α carbons. Five compounds per class, n = 20 total.*
+Four scaffold classes covered by the forward-prediction assessment. Each probes a different category of NMR challenge. P1 chloropyridazines have a slow-exchange NH on aminopyridazine in DMSO-d₆; P2 Boc-N-aryl maleimides and N-Boc ynamides exercise α-vinyl-imide carbonyls and the rare ynamide α/β-carbon pair; P3 spiroketones are spirobicyclic ketones with phenacyl or acetyl pendants and diastereotopic CH₂; P4 α-silyl methanesulfonamides have shielded silicon-α carbons. Five compounds per class, n = 20 total.
 
 Because a language model’s output varies between runs, each Claude model was queried three times per compound and averaged; ChemDraw and MestReNova return the same answer every time and were run once. We then paired each predicted peak with its experimental counterpart and measured the gap in ppm. These landed within the window a chemist would call correct—±0.20 ppm for hydrogen or ±1.0 ppm for carbon.
 
 ![A graphic depicting the per-tool MAE/RMSE summary across 20 compounds](https://www-cdn.anthropic.com/images/4zrzovbb/website/8269748a860db6f9b3fddd3e9e6116c193cbb399-1200x675.jpg)
 
-*Figure 2. Per-tool MAE (darker shade) and RMSE (lighter shade) for ¹H (left) and ¹³C (right) shift errors across 20 compounds for forward prediction, with coverage shown beneath each tool. Claude bars: mean across three replicates with min–max range and overlaid replicate dots. Classical tools: single-point predictions (no range).*
+Per-tool MAE (darker shade) and RMSE (lighter shade) for ¹H (left) and ¹³C (right) shift errors across 20 compounds for forward prediction, with coverage shown beneath each tool. Claude bars: mean across three replicates with min–max range and overlaid replicate dots. Classical tools: single-point predictions (no range).
 
 On hydrogen, Opus 4.7 was most accurate, with an average error of ±0.079 ppm—well under half the tolerance window—and the highest share of peaks landing inside it. On carbon, Opus 4.7 and MestReNova were effectively tied, at ±1.37 and ±1.48 ppm; the remaining tools kept the same rank order on both elements. Opus 4.6 was predictably middling, and Sonnet 4.6 was the weakest. The gap between them was most evident on a single notoriously difficult hydrogen—an NH proton in the chloropyridazine family whose true position falls in a narrow band between 6.8 and 7.9 ppm. Opus 4.7 placed it slightly low but consistently so; Opus 4.6 scattered its guesses across several ppm; Sonnet 4.6 put it in the 10–13 range, well outside where it actually appears.
 
 ![A chart depicting within-tolerance accuracy per compound](https://www-cdn.anthropic.com/images/4zrzovbb/website/62a7baa0bd66c26b5b5966e3578b87b62541e708-1920x1386.png)
 
-*Figure 3. Top: % of experimental atoms within ±0.20 ppm (¹H, left) and ±1.0 ppm (¹³C, right). Bottom: per-compound win rate (compounds where the tool had the lowest per-compound MAE, out of 20). Claude bars: mean across three replicates with min–max range; classical tools: single-point predictions.*
+Top: % of experimental atoms within ±0.20 ppm (¹H, left) and ±1.0 ppm (¹³C, right). Bottom: per-compound win rate (compounds where the tool had the lowest per-compound MAE, out of 20). Claude bars: mean across three replicates with min–max range; classical tools: single-point predictions.
 
 While Opus 4.7 performed fairly comparably to ChemDraw and MestReNova, the gap was wider on predicting the shape taken by a hydrogen’s NMR peak and how far apart the peaks sit, features which also contain structural information a chemist reads alongside position. Opus 4.7 matched the experimentally reported splitting pattern more often than any other tool, and all three Claude models predicted the sub-peak spacing to within half a hertz roughly 80% of the time—against 26 to 35% for ChemDraw and MestReNova. Opus 4.7 was also the most consistent across its three repeat runs: its average error varied less from run to run than the margin separating it from the next-best tool.  
   
@@ -56,13 +50,13 @@ From there, we evaluated inverse prediction (structure elucidation): could we de
 
 ![Chart showing the structure elucidation](https://www-cdn.anthropic.com/images/4zrzovbb/website/b28ecd4b626473984e42791c1615103d4203ba48-1709x2048.jpg)
 
-*Figure 4. Structure-elucidation results across the 15 inverse-task problems. Each panel shows the published target with its success count out of 3 attempts. Border color indicates the prompt condition: green for spectra and HRMS only with no starting-material context; blue for spectra, HRMS, and the starting-material SMILES, with no other reaction context.*
+Structure-elucidation results across the 15 inverse-task problems. Each panel shows the published target with its success count out of 3 attempts. Border color indicates the prompt condition: green for spectra and HRMS only with no starting-material context; blue for spectra, HRMS, and the starting-material SMILES, with no other reaction context.
 
 Opus 4.7 recovered all eight simpler structures on every attempt from spectra and formula alone. On the seven harder targets, given the starting-material hint, it returned the correct structure on all three runs for four of them and on two of three runs for those that remained.  
   
 Ultimately, we found that for routine data prediction Opus 4.7—a general-purpose model without chemistry-specific fine-tuning—is now as good as or better than ChemDraw and MestReNova on average. Additionally, Claude can also work the problem in reverse, proposing a structure from NMR data alone. Dedicated structure-elucidation software has existed for decades, but it typically requires 2D NMR (a spectrum with two axes, and the output is a contour map rather than a row of peaks), specialized training, and licensed tools. Claude does it from the same high-resolution mass spectrum and 1D peak list a chemist would paste into a chat, with no setup.
 
-### Limitations
+## Limitations
 
 This assessment shows us that a general-purpose model can be competitive with NMR software and even make 1D inverse elucidation tractable. But there are a handful of noteworthy limitations.
 
@@ -74,7 +68,7 @@ This assessment shows us that a general-purpose model can be competitive with NM
 
 Ideally, we would see how these numbers hold up across several hundred compounds spanning 20–30 scaffold classes, with at least 15 compounds per class so that within-class variance can be separated from between-tool differences. We would also evaluate NH-active heteroaromatics beyond chloropyridazines, assess the untested solvents, and conduct versions of both tasks that draw on 2D experiments.
 
-### Looking ahead
+## Looking ahead
 
 As we continue to improve Claude’s performance in chemistry, we are focusing specifically on a handful of bottlenecks that slow chemists down the most.
 
@@ -85,35 +79,12 @@ As we continue to improve Claude’s performance in chemistry, we are focusing s
 
 These are not all on the same maturity curve. Where spectral analysis is far enough along to benchmark, others, like retrosynthesis planning, are still being scoped. As we get a better understanding of these bottlenecks, we will share where current models excel, and where they still fall short. Our ultimate goal is to ensure that working chemists know where Claude can save them time and where they still need to rely on their own expertise.
 
-## Working with us
+### Working with us
 
 We are expanding the [AI for Science program](https://www.anthropic.com/news/ai-for-science-program) to more explicitly support chemistry research. If you are a researcher working on a problem where Claude could plausibly help, especially one that involves the kinds of multimodal reasoning we have described, we would like to hear from you at [scienceblog@anthropic.com](mailto:scienceblog@anthropic.com), or through the AI for Science application.
 
-### Footnotes
+## Footnotes
 
-1. An incident in which a morning sickness medication was linked to severe birth defects in over 10,000 children worldwide.
-2. The four preprints from which we pulled the compounds: <https://chemrxiv.org/doi/full/10.26434/chemrxiv.15002274/v1>, <https://chemrxiv.org/doi/full/10.26434/chemrxiv-2025-59lfh>, <https://chemrxiv.org/doi/full/10.26434/chemrxiv.15002423/v1>, <https://chemrxiv.org/doi/full/10.26434/chemrxiv.15002316/v1>.
+01An incident in which a morning sickness medication was linked to severe birth defects in over 10,000 children worldwide.
 
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to Anthropic Science
-
-Features on AI-assisted discoveries, practical workflows, and field notes across the sciences.
+02The four preprints from which we pulled the compounds: <https://chemrxiv.org/doi/full/10.26434/chemrxiv.15002274/v1>, <https://chemrxiv.org/doi/full/10.26434/chemrxiv-2025-59lfh>, <https://chemrxiv.org/doi/full/10.26434/chemrxiv.15002423/v1>, <https://chemrxiv.org/doi/full/10.26434/chemrxiv.15002316/v1>.

@@ -1,14 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/property-based-testing
-fetched_at: 2026-10-19T05:32:52.985604+00:00
+fetched_at: 2026-10-26T05:40:00.090542+00:00
 title: "Finding bugs with Claude and property-based testing \\ Anthropic"
 ---
 
-Frontier Red Team
-
-# Finding bugs across the Python ecosystem with Claude and property-based testing
-
-Jan 14, 2026
+### Chapter 01: Introduction
 
 *Muhammad Maaz1,2, Liam DeVoe3, Zac Hatfield-Dodds2, Nicholas Carlini2  
 1MATS, 2Anthropic, 3Northeastern University*
@@ -49,7 +45,7 @@ def test_sort(lst):
         assert result[i] <= result[i+1]
 ```
 
-**Figure 1.** Two ways of testing code. An example-based unit test verifies specific manually-specified inputs. A property-based test, in contrast, specifies a general property (e.g., the definition of a sorted list) and relies on the framework to automatically construct inputs that might fail this property.
+Two ways of testing code. An example-based unit test verifies specific manually-specified inputs. A property-based test, in contrast, specifies a general property (e.g., the definition of a sorted list) and relies on the framework to automatically construct inputs that might fail this property.
 
 ## Our Property-Based Testing Agent
 
@@ -63,7 +59,7 @@ Our property-based testing agent is built as a custom Claude Code command. The a
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/2cac5914e526becbfb506a035f11f758b9f10010-1999x1126.png)
 
-**Figure 2.** The workflow of the agent.
+The workflow of the agent.
 
 To help the agent perform long-range multi-step reasoning, we direct it to use a to-do list to track its progress.
 
@@ -134,29 +130,3 @@ As language models continue to improve, we think agentic property-based testing 
 Going forward, we believe that applying LLM to testing and bugfinding is an important research direction. Especially as LLMs improve at the process of exploiting vulnerabilities, it is necessary to stay ahead of attackers using LLMs for exploitation.
 
 While we do not focus on the automatic generation of patches in this work, this is a clear direction for future work. If it is possible to (nearly) completely specify the correctness properties of a block of code, then correcting the bug becomes significantly easier, and we believe that in the near future LLMs will be able to effectively propose high-quality patches that are worth the consideration of maintainers.
-
-####
-
-## Related content
-
-### Designing more efficient quantum circuits with Claude
-
-We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
-
-[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
-
-### Claude reveals ECDSA curve origins
-
-The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
-
-[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
-
-### The AI expectations gap
-
-How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
-
-[Read more](https://www.anthropic.com/research/ai-expectations-gap)
-
-## Subscribe to the Frontier Red Team newsletter
-
-Get updates on our latest red-teaming research and findings.

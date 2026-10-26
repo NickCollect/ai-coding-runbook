@@ -1,16 +1,8 @@
 ---
 source_url: https://www.anthropic.com/research/decomposing-language-models-into-understandable-components
-fetched_at: 2026-10-12T06:49:44.178846+00:00
+fetched_at: 2026-10-26T05:39:56.884461+00:00
 title: "Decomposing language models into components \\ Anthropic"
 ---
-
-InterpretabilityResearch
-
-# Decomposing language models into understandable components
-
-Oct 5, 2023
-
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/01458fcaec292524542130b0ccd91becc1e19ba7-2880x1620.png)
 
 Neural networks are trained on data, not programmed to follow rules. With each step of training, millions or billions of parameters are updated to make the model better at tasks, and by the end, the model is capable of a dizzying array of behaviors. We understand the math of the trained network exactly – each neuron in a neural network performs simple arithmetic – but we don't understand why those mathematical operations result in the behaviors we see. This makes it hard to diagnose failure modes, hard to know how to fix them, and hard to certify that a model is truly safe.
 

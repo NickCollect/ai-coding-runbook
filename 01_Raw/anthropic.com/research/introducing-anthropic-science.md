@@ -1,16 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/introducing-anthropic-science
-fetched_at: 2026-10-12T06:49:46.118264+00:00
+fetched_at: 2026-10-26T05:39:58.758730+00:00
 title: "Introducing our Science Blog \\ Anthropic"
 ---
 
-Science
-
-# Introducing our Science Blog
-
-Mar 23, 2026
-
-![Introducing our Science Blog](https://www-cdn.anthropic.com/images/4zrzovbb/website/60a35c504cedb3e3f581b211e4b8aef372ffe031-1000x1000.svg)
+### Chapter 01: What we’ll cover
 
 *We’re launching a new blog about AI and science. We’ll share work happening at Anthropic and elsewhere, our collaborations with external researchers and labs, and discuss practical workflows for scientists using AI in their research.*
 
@@ -22,7 +16,7 @@ Although the pace of improvement is rapid, some of these questions may feel prem
   
 AI will alter the scientific process in ways that are only starting to become apparent. This blog will discuss the upsides and challenges of the current moment for AI and science, exploring the excitement as it unfolds.
 
-### What we’ll cover
+## What we’ll cover
 
 In this blog, we’ll share three main types of posts:
 
@@ -32,16 +26,10 @@ In this blog, we’ll share three main types of posts:
 
 We’re publishing two pieces alongside this introduction: Matthew Schwartz’s “[Vibe physics: The AI grad student](https://www.anthropic.com/research/vibe-physics),” a spotlight on supervising Claude through a real theoretical physics calculation, and [a tutorial on orchestrating long-running tasks for scientific computation](https://www.anthropic.com/research/long-running-Claude).
 
-### **Science at Anthropic**
+## Science at Anthropic
 
 Anthropic has several initiatives aimed at accelerating scientific progress. Our [AI for Science](https://www.anthropic.com/news/ai-for-science-program) program provides API credits to researchers working on high-impact projects across biology, physics, chemistry, and other fields. [Claude for Life Sciences](https://www.anthropic.com/news/claude-for-life-sciences) is dedicated to making Claude useful for life sciences researchers and R&D teams, with partnerships across research institutions, pharma, and biotech. We recently shared some early [results of these programs](https://www.anthropic.com/news/accelerating-scientific-research). And we’re a [core partner](https://www.anthropic.com/news/genesis-mission-partnership) in the [Genesis Mission](http://genesis.energy.gov/), a multi-billion-dollar initiative across industry, academia, and government to accelerate American science with AI.
 
 Beyond these dedicated efforts, researchers across Anthropic are working to improve our models' core scientific capabilities and safely accelerate AI-assisted discovery. Many come from biophysics, chemistry, and neuroscience. We'll be reporting on their work and on efforts elsewhere in the field.
 
 If you have something you want to see covered here, please reach out to us at scienceblog@anthropic.com.
-
-####
-
-## Subscribe to Anthropic Science
-
-Features on AI-assisted discoveries, practical workflows, and field notes across the sciences.
