@@ -63,7 +63,7 @@ class Credentials(SyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsCredential:
         """
-        Create Credential
+        Create a Credential
 
         Args:
           vault_id: Identifier of the vault to create the credential in.
@@ -108,7 +108,7 @@ class Credentials(SyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._post(
-            path_template("/v1/vaults/{vault_id}/credentials?beta=true", vault_id=vault_id),
+            path_template("/v1/vaults/{vault_id}/credentials", vault_id=vault_id),
             body={
                 "auth": auth,
                 "display_name": display_name,
@@ -119,6 +119,7 @@ class Credentials(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.create",
                 span_route="/v1/vaults/{vault_id}/credentials",
                 span_attributes={"anthropic.vault.id": vault_id},
@@ -142,7 +143,7 @@ class Credentials(SyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsCredential:
         """
-        Get Credential
+        Retrieve a Credential
 
         Args:
           vault_id: Identifier of the vault containing the credential.
@@ -185,15 +186,14 @@ class Credentials(SyncAPIResource):
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._get(
             path_template(
-                "/v1/vaults/{vault_id}/credentials/{credential_id}?beta=true",
-                vault_id=vault_id,
-                credential_id=credential_id,
+                "/v1/vaults/{vault_id}/credentials/{credential_id}", vault_id=vault_id, credential_id=credential_id
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.retrieve",
                 span_route="/v1/vaults/{vault_id}/credentials/{credential_id}",
                 span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
@@ -219,15 +219,15 @@ class Credentials(SyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsCredential:
         """
-        Update Credential
+        Update a Credential
 
         Args:
           vault_id: Identifier of the vault containing the credential.
 
           credential_id: Unique identifier of the credential to update.
 
-          auth: Updated authentication configuration. The `type` is immutable; the variant sent
-              must match the stored credential's type.
+          auth: New authentication settings for the credential. The `type` must match the
+              credential's current type, which can't be changed.
 
           display_name: Updated human-readable name for the credential. 1-255 characters.
 
@@ -270,9 +270,7 @@ class Credentials(SyncAPIResource):
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._post(
             path_template(
-                "/v1/vaults/{vault_id}/credentials/{credential_id}?beta=true",
-                vault_id=vault_id,
-                credential_id=credential_id,
+                "/v1/vaults/{vault_id}/credentials/{credential_id}", vault_id=vault_id, credential_id=credential_id
             ),
             body={
                 "auth": auth,
@@ -284,6 +282,7 @@ class Credentials(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.update",
                 span_route="/v1/vaults/{vault_id}/credentials/{credential_id}",
                 span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
@@ -313,11 +312,13 @@ class Credentials(SyncAPIResource):
         Args:
           vault_id: Identifier of the vault to list credentials for.
 
-          include_archived: Whether to include archived credentials in the results.
+          include_archived: Whether to include archived credentials in the results. Defaults to `false`.
 
           limit: Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
-          page: Opaque pagination token from a previous `list_credentials` response.
+          page: The `next_page` value from a previous
+              [List Credentials](https://platform.claude.com/docs/en/api/beta/vaults/credentials/list)
+              response, to get the next page. Leave it out to get the first page.
 
           betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
               header.
@@ -352,7 +353,7 @@ class Credentials(SyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._get_api_list(
-            path_template("/v1/vaults/{vault_id}/credentials?beta=true", vault_id=vault_id),
+            path_template("/v1/vaults/{vault_id}/credentials", vault_id=vault_id),
             page=SyncPageCursor[BetaManagedAgentsCredential],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -364,6 +365,7 @@ class Credentials(SyncAPIResource):
                     "limit": limit,
                     "page": page,
                 },
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.list",
                 span_route="/v1/vaults/{vault_id}/credentials",
                 span_attributes={"anthropic.vault.id": vault_id},
@@ -386,7 +388,7 @@ class Credentials(SyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsDeletedCredential:
         """
-        Delete Credential
+        Delete a Credential
 
         Args:
           vault_id: Identifier of the vault containing the credential.
@@ -429,15 +431,14 @@ class Credentials(SyncAPIResource):
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._delete(
             path_template(
-                "/v1/vaults/{vault_id}/credentials/{credential_id}?beta=true",
-                vault_id=vault_id,
-                credential_id=credential_id,
+                "/v1/vaults/{vault_id}/credentials/{credential_id}", vault_id=vault_id, credential_id=credential_id
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.delete",
                 span_route="/v1/vaults/{vault_id}/credentials/{credential_id}",
                 span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
@@ -460,7 +461,7 @@ class Credentials(SyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsCredential:
         """
-        Archive Credential
+        Archive a Credential
 
         Args:
           vault_id: Identifier of the vault containing the credential.
@@ -503,7 +504,7 @@ class Credentials(SyncAPIResource):
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._post(
             path_template(
-                "/v1/vaults/{vault_id}/credentials/{credential_id}/archive?beta=true",
+                "/v1/vaults/{vault_id}/credentials/{credential_id}/archive",
                 vault_id=vault_id,
                 credential_id=credential_id,
             ),
@@ -512,6 +513,7 @@ class Credentials(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.archive",
                 span_route="/v1/vaults/{vault_id}/credentials/{credential_id}/archive",
                 span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
@@ -534,7 +536,7 @@ class Credentials(SyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsCredentialValidation:
         """
-        Validate Credential
+        Validate an MCP OAuth Credential
 
         Args:
           vault_id: Identifier of the vault containing the credential.
@@ -577,7 +579,7 @@ class Credentials(SyncAPIResource):
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._post(
             path_template(
-                "/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate?beta=true",
+                "/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate",
                 vault_id=vault_id,
                 credential_id=credential_id,
             ),
@@ -586,6 +588,7 @@ class Credentials(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.mcp_oauth_validate",
                 span_route="/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate",
                 span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
@@ -631,7 +634,7 @@ class AsyncCredentials(AsyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsCredential:
         """
-        Create Credential
+        Create a Credential
 
         Args:
           vault_id: Identifier of the vault to create the credential in.
@@ -676,7 +679,7 @@ class AsyncCredentials(AsyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return await self._post(
-            path_template("/v1/vaults/{vault_id}/credentials?beta=true", vault_id=vault_id),
+            path_template("/v1/vaults/{vault_id}/credentials", vault_id=vault_id),
             body={
                 "auth": auth,
                 "display_name": display_name,
@@ -687,6 +690,7 @@ class AsyncCredentials(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.create",
                 span_route="/v1/vaults/{vault_id}/credentials",
                 span_attributes={"anthropic.vault.id": vault_id},
@@ -710,7 +714,7 @@ class AsyncCredentials(AsyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsCredential:
         """
-        Get Credential
+        Retrieve a Credential
 
         Args:
           vault_id: Identifier of the vault containing the credential.
@@ -753,15 +757,14 @@ class AsyncCredentials(AsyncAPIResource):
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return await self._get(
             path_template(
-                "/v1/vaults/{vault_id}/credentials/{credential_id}?beta=true",
-                vault_id=vault_id,
-                credential_id=credential_id,
+                "/v1/vaults/{vault_id}/credentials/{credential_id}", vault_id=vault_id, credential_id=credential_id
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.retrieve",
                 span_route="/v1/vaults/{vault_id}/credentials/{credential_id}",
                 span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
@@ -787,15 +790,15 @@ class AsyncCredentials(AsyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsCredential:
         """
-        Update Credential
+        Update a Credential
 
         Args:
           vault_id: Identifier of the vault containing the credential.
 
           credential_id: Unique identifier of the credential to update.
 
-          auth: Updated authentication configuration. The `type` is immutable; the variant sent
-              must match the stored credential's type.
+          auth: New authentication settings for the credential. The `type` must match the
+              credential's current type, which can't be changed.
 
           display_name: Updated human-readable name for the credential. 1-255 characters.
 
@@ -838,9 +841,7 @@ class AsyncCredentials(AsyncAPIResource):
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return await self._post(
             path_template(
-                "/v1/vaults/{vault_id}/credentials/{credential_id}?beta=true",
-                vault_id=vault_id,
-                credential_id=credential_id,
+                "/v1/vaults/{vault_id}/credentials/{credential_id}", vault_id=vault_id, credential_id=credential_id
             ),
             body={
                 "auth": auth,
@@ -852,6 +853,7 @@ class AsyncCredentials(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.update",
                 span_route="/v1/vaults/{vault_id}/credentials/{credential_id}",
                 span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
@@ -881,11 +883,13 @@ class AsyncCredentials(AsyncAPIResource):
         Args:
           vault_id: Identifier of the vault to list credentials for.
 
-          include_archived: Whether to include archived credentials in the results.
+          include_archived: Whether to include archived credentials in the results. Defaults to `false`.
 
           limit: Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
-          page: Opaque pagination token from a previous `list_credentials` response.
+          page: The `next_page` value from a previous
+              [List Credentials](https://platform.claude.com/docs/en/api/beta/vaults/credentials/list)
+              response, to get the next page. Leave it out to get the first page.
 
           betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
               header.
@@ -920,7 +924,7 @@ class AsyncCredentials(AsyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._get_api_list(
-            path_template("/v1/vaults/{vault_id}/credentials?beta=true", vault_id=vault_id),
+            path_template("/v1/vaults/{vault_id}/credentials", vault_id=vault_id),
             page=AsyncPageCursor[BetaManagedAgentsCredential],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -932,6 +936,7 @@ class AsyncCredentials(AsyncAPIResource):
                     "limit": limit,
                     "page": page,
                 },
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.list",
                 span_route="/v1/vaults/{vault_id}/credentials",
                 span_attributes={"anthropic.vault.id": vault_id},
@@ -954,7 +959,7 @@ class AsyncCredentials(AsyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsDeletedCredential:
         """
-        Delete Credential
+        Delete a Credential
 
         Args:
           vault_id: Identifier of the vault containing the credential.
@@ -997,15 +1002,14 @@ class AsyncCredentials(AsyncAPIResource):
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return await self._delete(
             path_template(
-                "/v1/vaults/{vault_id}/credentials/{credential_id}?beta=true",
-                vault_id=vault_id,
-                credential_id=credential_id,
+                "/v1/vaults/{vault_id}/credentials/{credential_id}", vault_id=vault_id, credential_id=credential_id
             ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.delete",
                 span_route="/v1/vaults/{vault_id}/credentials/{credential_id}",
                 span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
@@ -1028,7 +1032,7 @@ class AsyncCredentials(AsyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsCredential:
         """
-        Archive Credential
+        Archive a Credential
 
         Args:
           vault_id: Identifier of the vault containing the credential.
@@ -1071,7 +1075,7 @@ class AsyncCredentials(AsyncAPIResource):
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return await self._post(
             path_template(
-                "/v1/vaults/{vault_id}/credentials/{credential_id}/archive?beta=true",
+                "/v1/vaults/{vault_id}/credentials/{credential_id}/archive",
                 vault_id=vault_id,
                 credential_id=credential_id,
             ),
@@ -1080,6 +1084,7 @@ class AsyncCredentials(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.archive",
                 span_route="/v1/vaults/{vault_id}/credentials/{credential_id}/archive",
                 span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
@@ -1102,7 +1107,7 @@ class AsyncCredentials(AsyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsCredentialValidation:
         """
-        Validate Credential
+        Validate an MCP OAuth Credential
 
         Args:
           vault_id: Identifier of the vault containing the credential.
@@ -1145,7 +1150,7 @@ class AsyncCredentials(AsyncAPIResource):
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return await self._post(
             path_template(
-                "/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate?beta=true",
+                "/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate",
                 vault_id=vault_id,
                 credential_id=credential_id,
             ),
@@ -1154,6 +1159,7 @@ class AsyncCredentials(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.credentials.mcp_oauth_validate",
                 span_route="/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate",
                 span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},

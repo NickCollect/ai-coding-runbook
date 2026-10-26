@@ -18,8 +18,7 @@ from ._credentials import (
 )
 from ..._exceptions import AnthropicError
 from ..._middleware import MiddlewareInput
-from ..._base_client import DEFAULT_MAX_RETRIES
-from ..credentials._types import AccessTokenProvider
+from ..._base_client import DEFAULT_MAX_RETRIES, FinalRequestOptions
 
 
 class AnthropicAWS(Anthropic):
@@ -55,7 +54,7 @@ class AnthropicAWS(Anthropic):
         http_client: httpx2.Client | None = None,
         middleware: Sequence[MiddlewareInput] | None = None,
         _strict_response_validation: bool = False,
-        # Passed through to parent but not used for AWS auth
+        # Not used for AWS auth
         auth_token: str | None = None,
         webhook_key: str | None = None,
     ) -> None:
@@ -112,7 +111,6 @@ class AnthropicAWS(Anthropic):
 
         super().__init__(
             api_key=resolved_api_key,
-            auth_token=auth_token,
             webhook_key=webhook_key,
             base_url=base_url,  # type: ignore[arg-type]
             timeout=timeout,
@@ -126,6 +124,7 @@ class AnthropicAWS(Anthropic):
         )
 
         # Undo the base client's ambient ANTHROPIC_API_KEY / ANTHROPIC_AUTH_TOKEN fallback; only explicit ones apply.
+        # `auth_token` is set here and not passed up, because the base client rejects it next to an API key.
         self.api_key = resolved_api_key
         self.auth_token = auth_token
 
@@ -149,6 +148,11 @@ class AnthropicAWS(Anthropic):
         if self._use_sigv4 or self._skip_auth:
             return
         super()._validate_headers(headers, omitted)
+
+    @override
+    def _prepare_options(self, options: FinalRequestOptions) -> FinalRequestOptions:
+        reject_action_url_request(options)
+        return super()._prepare_options(options)
 
     @override
     def _prepare_request(self, request: httpx2.Request) -> None:
@@ -186,7 +190,7 @@ class AnthropicAWS(Anthropic):
         workspace_id: str | None = None,
         skip_auth: bool | None = None,
         auth_token: str | None = None,
-        credentials: AccessTokenProvider | None = None,
+        credentials: None = None,
         webhook_key: str | None = None,
         base_url: str | httpx2.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
@@ -202,9 +206,8 @@ class AnthropicAWS(Anthropic):
     ) -> Self:
         # The AWS client authenticates with SigV4 (or an API key), not a token
         # provider, so it has no `credentials`. Accept the argument for signature
-        # compatibility with the base client — internal helpers such as
-        # `_copy_client_with_bearer_auth` call `copy(credentials=None, ...)` — but
-        # only as a no-op; reject a real provider rather than silently ignoring it.
+        # compatibility with the base client, but only as a no-op; reject a real
+        # provider rather than silently ignoring it.
         if credentials is not None:
             raise TypeError("AnthropicAWS does not support a `credentials` provider (it authenticates with AWS SigV4).")
 
@@ -333,7 +336,6 @@ class AsyncAnthropicAWS(AsyncAnthropic):
 
         super().__init__(
             api_key=resolved_api_key,
-            auth_token=auth_token,
             webhook_key=webhook_key,
             base_url=base_url,  # type: ignore[arg-type]
             timeout=timeout,
@@ -347,6 +349,7 @@ class AsyncAnthropicAWS(AsyncAnthropic):
         )
 
         # Undo the base client's ambient ANTHROPIC_API_KEY / ANTHROPIC_AUTH_TOKEN fallback; only explicit ones apply.
+        # `auth_token` is set here and not passed up, because the base client rejects it next to an API key.
         self.api_key = resolved_api_key
         self.auth_token = auth_token
 
@@ -370,6 +373,11 @@ class AsyncAnthropicAWS(AsyncAnthropic):
         if self._use_sigv4 or self._skip_auth:
             return
         super()._validate_headers(headers, omitted)
+
+    @override
+    async def _prepare_options(self, options: FinalRequestOptions) -> FinalRequestOptions:
+        reject_action_url_request(options)
+        return await super()._prepare_options(options)
 
     @override
     async def _prepare_request(self, request: httpx2.Request) -> None:
@@ -407,7 +415,7 @@ class AsyncAnthropicAWS(AsyncAnthropic):
         workspace_id: str | None = None,
         skip_auth: bool | None = None,
         auth_token: str | None = None,
-        credentials: AccessTokenProvider | None = None,
+        credentials: None = None,
         webhook_key: str | None = None,
         base_url: str | httpx2.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
@@ -423,9 +431,8 @@ class AsyncAnthropicAWS(AsyncAnthropic):
     ) -> Self:
         # The AWS client authenticates with SigV4 (or an API key), not a token
         # provider, so it has no `credentials`. Accept the argument for signature
-        # compatibility with the base client — internal helpers such as
-        # `_copy_client_with_bearer_auth` call `copy(credentials=None, ...)` — but
-        # only as a no-op; reject a real provider rather than silently ignoring it.
+        # compatibility with the base client, but only as a no-op; reject a real
+        # provider rather than silently ignoring it.
         if credentials is not None:
             raise TypeError("AnthropicAWS does not support a `credentials` provider (it authenticates with AWS SigV4).")
 
@@ -462,3 +469,9 @@ class AsyncAnthropicAWS(AsyncAnthropic):
         )
 
     with_options = copy  # type: ignore[assignment]
+
+
+def reject_action_url_request(options: FinalRequestOptions) -> None:
+    path = options.url.partition("?")[0]
+    if path.startswith("/v1/user_profiles/") and path.endswith("/action_urls"):
+        raise AnthropicError("User profile action URLs are not supported in the AWS client.")

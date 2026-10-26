@@ -88,9 +88,28 @@ import {
   UserUpdateParams,
   Users,
 } from './users';
+import * as WebhooksAPI from './webhooks';
+import {
+  BetaDeletedOrganizationWebhookEndpoint,
+  BetaNewOrganizationWebhookEndpoint,
+  BetaOrganizationWebhookEndpoint,
+  BetaOrganizationWebhookEndpointSigningSecret,
+  BetaOrganizationWebhookEndpointState,
+  BetaOrganizationWebhookEndpointsPage,
+  WebhookCreateParams,
+  WebhookDeleteParams,
+  WebhookListParams,
+  WebhookRegenerateSigningSecretParams,
+  WebhookRetrieveParams,
+  WebhookUpdateParams,
+  Webhooks,
+} from './webhooks';
 import * as AnalyticsAPI from './analytics/analytics';
 import {
   Analytics,
+  BetaAnalyticsAPIActor,
+  BetaAnalyticsActor,
+  BetaAnalyticsActorType,
   BetaAnalyticsArtifactActivity,
   BetaAnalyticsChatCoworkUnifiedChatMetrics,
   BetaAnalyticsChatCoworkUnifiedSessionsMetrics,
@@ -113,6 +132,13 @@ import {
   BetaAnalyticsCostUsersItem,
   BetaAnalyticsCoworkMetrics,
   BetaAnalyticsDesignMetrics,
+  BetaAnalyticsFederatedActor,
+  BetaAnalyticsFederatedActorAWSProvider,
+  BetaAnalyticsFederatedActorAzureProvider,
+  BetaAnalyticsFederatedActorGCPProvider,
+  BetaAnalyticsFederatedActorOIDCProvider,
+  BetaAnalyticsFederatedActorProvider,
+  BetaAnalyticsGroupedCostType,
   BetaAnalyticsInferenceGeoFilter,
   BetaAnalyticsLinesOfCode,
   BetaAnalyticsOfficeMetrics,
@@ -122,8 +148,11 @@ import {
   BetaAnalyticsPluginCoworkMetrics,
   BetaAnalyticsProductFilter,
   BetaAnalyticsProjectActivity,
+  BetaAnalyticsReportUserActor,
   BetaAnalyticsScienceMetrics,
   BetaAnalyticsServerToolUse,
+  BetaAnalyticsServiceAccountActor,
+  BetaAnalyticsServiceTier,
   BetaAnalyticsSingleDayActivitySummary,
   BetaAnalyticsSkillActivity,
   BetaAnalyticsSkillChatCoworkUnifiedChatMetrics,
@@ -133,16 +162,42 @@ import {
   BetaAnalyticsSkillCoworkMetrics,
   BetaAnalyticsSkillOfficeMetrics,
   BetaAnalyticsSkillOfficeProductMetrics,
+  BetaAnalyticsSpeed,
+  BetaAnalyticsTimeBucketWidth,
   BetaAnalyticsTokenType,
   BetaAnalyticsToolActionCounts,
   BetaAnalyticsToolActions,
   BetaAnalyticsUsageBucketedResult,
+  BetaAnalyticsUsageCostInferenceGeo,
+  BetaAnalyticsUsageCostProductFilter,
+  BetaAnalyticsUsageCostSortOrder,
   BetaAnalyticsUsageReportTimeBucket,
   BetaAnalyticsUsageUsersItem,
   BetaAnalyticsUser,
   BetaAnalyticsUserActivity,
   BetaAnalyticsUserActor,
 } from './analytics/analytics';
+import * as ClaudeTagAPI from './claude-tag/claude-tag';
+import {
+  BetaClaudeTagDefaultSettingSource,
+  BetaClaudeTagGuestPolicy,
+  BetaClaudeTagGuestPolicyAllow,
+  BetaClaudeTagGuestPolicyChannelOnly,
+  BetaClaudeTagGuestPolicyRestrict,
+  BetaClaudeTagSettingSource,
+  BetaClaudeTagSettingSources,
+  BetaClaudeTagSettings,
+  BetaClaudeTagSettingsCreate,
+  BetaClaudeTagSettingsUpdate,
+  BetaClaudeTagSlackChannelIdentifiers,
+  BetaClaudeTagSlackChannelSettingSource,
+  BetaClaudeTagSlackDefaultSettingSource,
+  BetaClaudeTagSlackGridChannelSettingSource,
+  BetaClaudeTagSlackParentChannelSettingSource,
+  BetaClaudeTagSlackWorkspaceIdentifiers,
+  BetaClaudeTagSlackWorkspaceSettingSource,
+  ClaudeTag,
+} from './claude-tag/claude-tag';
 import * as FederationAPI from './federation/federation';
 import { Federation } from './federation/federation';
 import * as PluginsAPI from './plugins/plugins';
@@ -297,6 +352,8 @@ export class Organization extends APIResource {
   );
   telemetryDestinations: TelemetryDestinationsAPI.TelemetryDestinations =
     new TelemetryDestinationsAPI.TelemetryDestinations(this._client);
+  webhooks: WebhooksAPI.Webhooks = new WebhooksAPI.Webhooks(this._client);
+  claudeTag: ClaudeTagAPI.ClaudeTag = new ClaudeTagAPI.ClaudeTag(this._client);
 
   /**
    * Retrieve information about the organization associated with the authenticated
@@ -309,8 +366,9 @@ export class Organization extends APIResource {
    * ```
    */
   retrieve(options?: RequestOptions): APIPromise<BetaOrganization> {
-    return this._client.get('/v1/organizations/me?beta=true', {
+    return this._client.get('/v1/organizations/me', {
       ...options,
+      __qualifiers: { beta: 'true' },
       __span: startApiCallSpan(this._client, 'anthropic.organization.retrieve', options, {
         route: '/v1/organizations/me',
       }),
@@ -364,6 +422,8 @@ Organization.RBACRoles = RBACRoles;
 Organization.Plugins = Plugins;
 Organization.PluginMarketplaces = PluginMarketplaces;
 Organization.TelemetryDestinations = TelemetryDestinations;
+Organization.Webhooks = Webhooks;
+Organization.ClaudeTag = ClaudeTag;
 
 export declare namespace Organization {
   export { type BetaOrganization as BetaOrganization, type BetaOrganizationRole as BetaOrganizationRole };
@@ -474,6 +534,9 @@ export declare namespace Organization {
 
   export {
     Analytics as Analytics,
+    type BetaAnalyticsActor as BetaAnalyticsActor,
+    type BetaAnalyticsActorType as BetaAnalyticsActorType,
+    type BetaAnalyticsAPIActor as BetaAnalyticsAPIActor,
     type BetaAnalyticsArtifactActivity as BetaAnalyticsArtifactActivity,
     type BetaAnalyticsChatCoworkUnifiedChatMetrics as BetaAnalyticsChatCoworkUnifiedChatMetrics,
     type BetaAnalyticsChatCoworkUnifiedSessionsMetrics as BetaAnalyticsChatCoworkUnifiedSessionsMetrics,
@@ -496,6 +559,13 @@ export declare namespace Organization {
     type BetaAnalyticsCostUsersItem as BetaAnalyticsCostUsersItem,
     type BetaAnalyticsCoworkMetrics as BetaAnalyticsCoworkMetrics,
     type BetaAnalyticsDesignMetrics as BetaAnalyticsDesignMetrics,
+    type BetaAnalyticsFederatedActor as BetaAnalyticsFederatedActor,
+    type BetaAnalyticsFederatedActorAWSProvider as BetaAnalyticsFederatedActorAWSProvider,
+    type BetaAnalyticsFederatedActorAzureProvider as BetaAnalyticsFederatedActorAzureProvider,
+    type BetaAnalyticsFederatedActorGCPProvider as BetaAnalyticsFederatedActorGCPProvider,
+    type BetaAnalyticsFederatedActorOIDCProvider as BetaAnalyticsFederatedActorOIDCProvider,
+    type BetaAnalyticsFederatedActorProvider as BetaAnalyticsFederatedActorProvider,
+    type BetaAnalyticsGroupedCostType as BetaAnalyticsGroupedCostType,
     type BetaAnalyticsInferenceGeoFilter as BetaAnalyticsInferenceGeoFilter,
     type BetaAnalyticsLinesOfCode as BetaAnalyticsLinesOfCode,
     type BetaAnalyticsOfficeMetrics as BetaAnalyticsOfficeMetrics,
@@ -505,8 +575,11 @@ export declare namespace Organization {
     type BetaAnalyticsPluginCoworkMetrics as BetaAnalyticsPluginCoworkMetrics,
     type BetaAnalyticsProductFilter as BetaAnalyticsProductFilter,
     type BetaAnalyticsProjectActivity as BetaAnalyticsProjectActivity,
+    type BetaAnalyticsReportUserActor as BetaAnalyticsReportUserActor,
     type BetaAnalyticsScienceMetrics as BetaAnalyticsScienceMetrics,
     type BetaAnalyticsServerToolUse as BetaAnalyticsServerToolUse,
+    type BetaAnalyticsServiceAccountActor as BetaAnalyticsServiceAccountActor,
+    type BetaAnalyticsServiceTier as BetaAnalyticsServiceTier,
     type BetaAnalyticsSingleDayActivitySummary as BetaAnalyticsSingleDayActivitySummary,
     type BetaAnalyticsSkillActivity as BetaAnalyticsSkillActivity,
     type BetaAnalyticsSkillChatCoworkUnifiedChatMetrics as BetaAnalyticsSkillChatCoworkUnifiedChatMetrics,
@@ -516,10 +589,15 @@ export declare namespace Organization {
     type BetaAnalyticsSkillCoworkMetrics as BetaAnalyticsSkillCoworkMetrics,
     type BetaAnalyticsSkillOfficeMetrics as BetaAnalyticsSkillOfficeMetrics,
     type BetaAnalyticsSkillOfficeProductMetrics as BetaAnalyticsSkillOfficeProductMetrics,
+    type BetaAnalyticsSpeed as BetaAnalyticsSpeed,
+    type BetaAnalyticsTimeBucketWidth as BetaAnalyticsTimeBucketWidth,
     type BetaAnalyticsTokenType as BetaAnalyticsTokenType,
     type BetaAnalyticsToolActionCounts as BetaAnalyticsToolActionCounts,
     type BetaAnalyticsToolActions as BetaAnalyticsToolActions,
     type BetaAnalyticsUsageBucketedResult as BetaAnalyticsUsageBucketedResult,
+    type BetaAnalyticsUsageCostInferenceGeo as BetaAnalyticsUsageCostInferenceGeo,
+    type BetaAnalyticsUsageCostProductFilter as BetaAnalyticsUsageCostProductFilter,
+    type BetaAnalyticsUsageCostSortOrder as BetaAnalyticsUsageCostSortOrder,
     type BetaAnalyticsUsageReportTimeBucket as BetaAnalyticsUsageReportTimeBucket,
     type BetaAnalyticsUsageUsersItem as BetaAnalyticsUsageUsersItem,
     type BetaAnalyticsUser as BetaAnalyticsUser,
@@ -638,5 +716,42 @@ export declare namespace Organization {
     type TelemetryDestinationListParams as TelemetryDestinationListParams,
     type TelemetryDestinationDeleteParams as TelemetryDestinationDeleteParams,
     type TelemetryDestinationTestParams as TelemetryDestinationTestParams,
+  };
+
+  export {
+    Webhooks as Webhooks,
+    type BetaDeletedOrganizationWebhookEndpoint as BetaDeletedOrganizationWebhookEndpoint,
+    type BetaNewOrganizationWebhookEndpoint as BetaNewOrganizationWebhookEndpoint,
+    type BetaOrganizationWebhookEndpoint as BetaOrganizationWebhookEndpoint,
+    type BetaOrganizationWebhookEndpointSigningSecret as BetaOrganizationWebhookEndpointSigningSecret,
+    type BetaOrganizationWebhookEndpointState as BetaOrganizationWebhookEndpointState,
+    type BetaOrganizationWebhookEndpointsPage as BetaOrganizationWebhookEndpointsPage,
+    type WebhookCreateParams as WebhookCreateParams,
+    type WebhookRetrieveParams as WebhookRetrieveParams,
+    type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookListParams as WebhookListParams,
+    type WebhookDeleteParams as WebhookDeleteParams,
+    type WebhookRegenerateSigningSecretParams as WebhookRegenerateSigningSecretParams,
+  };
+
+  export {
+    ClaudeTag as ClaudeTag,
+    type BetaClaudeTagDefaultSettingSource as BetaClaudeTagDefaultSettingSource,
+    type BetaClaudeTagGuestPolicy as BetaClaudeTagGuestPolicy,
+    type BetaClaudeTagGuestPolicyAllow as BetaClaudeTagGuestPolicyAllow,
+    type BetaClaudeTagGuestPolicyChannelOnly as BetaClaudeTagGuestPolicyChannelOnly,
+    type BetaClaudeTagGuestPolicyRestrict as BetaClaudeTagGuestPolicyRestrict,
+    type BetaClaudeTagSettingSource as BetaClaudeTagSettingSource,
+    type BetaClaudeTagSettingSources as BetaClaudeTagSettingSources,
+    type BetaClaudeTagSettings as BetaClaudeTagSettings,
+    type BetaClaudeTagSettingsCreate as BetaClaudeTagSettingsCreate,
+    type BetaClaudeTagSettingsUpdate as BetaClaudeTagSettingsUpdate,
+    type BetaClaudeTagSlackChannelIdentifiers as BetaClaudeTagSlackChannelIdentifiers,
+    type BetaClaudeTagSlackChannelSettingSource as BetaClaudeTagSlackChannelSettingSource,
+    type BetaClaudeTagSlackDefaultSettingSource as BetaClaudeTagSlackDefaultSettingSource,
+    type BetaClaudeTagSlackGridChannelSettingSource as BetaClaudeTagSlackGridChannelSettingSource,
+    type BetaClaudeTagSlackParentChannelSettingSource as BetaClaudeTagSlackParentChannelSettingSource,
+    type BetaClaudeTagSlackWorkspaceIdentifiers as BetaClaudeTagSlackWorkspaceIdentifiers,
+    type BetaClaudeTagSlackWorkspaceSettingSource as BetaClaudeTagSlackWorkspaceSettingSource,
   };
 }

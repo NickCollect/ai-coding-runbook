@@ -236,6 +236,12 @@ export class Messages extends APIResource {
   }
 }
 
+export interface AssistantMessageParam {
+  content: MessageContentParam;
+
+  role: 'assistant';
+}
+
 export interface Base64ImageSource {
   data: string;
 
@@ -2641,6 +2647,15 @@ export interface CacheCreation {
   ephemeral_5m_input_tokens: number;
 }
 
+/**
+ * A `cache_miss_reason` for a request whose `messages` differ from the previous
+ * request's in an earlier entry, instead of only having entries appended. The
+ * `model`, `system`, and `tools` match.
+ *
+ * See the
+ * [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+ * to learn what to change for each reason.
+ */
 export interface CacheMissMessagesChanged {
   /**
    * Approximate number of input tokens that would have been read from cache had the
@@ -2651,6 +2666,14 @@ export interface CacheMissMessagesChanged {
   type: 'messages_changed';
 }
 
+/**
+ * A `cache_miss_reason` for a request whose `model` or `speed` differs from the
+ * previous request's.
+ *
+ * See the
+ * [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+ * to learn what to change for each reason.
+ */
 export interface CacheMissModelChanged {
   /**
    * Approximate number of input tokens that would have been read from cache had the
@@ -2661,6 +2684,16 @@ export interface CacheMissModelChanged {
   type: 'model_changed';
 }
 
+/**
+ * A `cache_miss_reason` for when the API doesn't have a stored record of the
+ * request that `diagnostics.previous_message_id` references.
+ *
+ * This doesn't mean that this request changed.
+ *
+ * See the
+ * [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+ * to learn what to change for each reason.
+ */
 export interface CacheMissPreviousMessageNotFound {
   type: 'previous_message_not_found';
 }
@@ -2673,6 +2706,14 @@ export type CacheMissReason =
   | CacheMissPreviousMessageNotFound
   | CacheMissUnavailable;
 
+/**
+ * A `cache_miss_reason` for a request whose `system` differs from the previous
+ * request's.
+ *
+ * See the
+ * [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+ * to learn what to change for each reason.
+ */
 export interface CacheMissSystemChanged {
   /**
    * Approximate number of input tokens that would have been read from cache had the
@@ -2683,6 +2724,14 @@ export interface CacheMissSystemChanged {
   type: 'system_changed';
 }
 
+/**
+ * A `cache_miss_reason` for a request whose `tools` differ from the previous
+ * request's, for example because tools were added, removed, or reordered.
+ *
+ * See the
+ * [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+ * to learn what to change for each reason.
+ */
 export interface CacheMissToolsChanged {
   /**
    * Approximate number of input tokens that would have been read from cache had the
@@ -2693,6 +2742,18 @@ export interface CacheMissToolsChanged {
   type: 'tools_changed';
 }
 
+/**
+ * A `cache_miss_reason` for when the API can't give a diagnosis. The request
+ * itself was processed normally.
+ *
+ * This includes a request whose `model`, `system`, and `tools` match the previous
+ * request's but whose other prompt-affecting parameters, such as `thinking` or
+ * `tool_choice`, differ.
+ *
+ * See the
+ * [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+ * to learn what to change for each reason.
+ */
 export interface CacheMissUnavailable {
   type: 'unavailable';
 }
@@ -3063,8 +3124,16 @@ export interface CodeExecutionTool20250825 {
 }
 
 /**
- * Code execution tool with REPL state persistence (daemon mode + gVisor
- * checkpoint).
+ * A `tools` entry for the code execution tool, version `code_execution_20260120`.
+ * It adds REPL state persistence to version `code_execution_20250825`.
+ *
+ * REPL state persistence applies with programmatic tool calling. With it, the
+ * Python interpreter state, such as variable bindings, persists across requests
+ * that reuse the container.
+ *
+ * See the
+ * [code execution tool guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#tool-versions)
+ * to learn what each tool version adds.
  */
 export interface CodeExecutionTool20260120 {
   /**
@@ -4477,7 +4546,15 @@ export interface DocumentBlockParam {
 }
 
 /**
- * Code execution result with encrypted stdout for PFC + web_search results.
+ * The output and exit code of Python code that Claude ran with the code execution
+ * tool, with standard output in encrypted form.
+ *
+ * The API returns this block in place of `code_execution_result` when the code
+ * called the web search tool.
+ *
+ * See the
+ * [programmatic tool calling guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling)
+ * to learn more about programmatic tool calling.
  */
 export interface EncryptedCodeExecutionResultBlock {
   content: Array<CodeExecutionOutputBlock>;
@@ -4492,7 +4569,8 @@ export interface EncryptedCodeExecutionResultBlock {
 }
 
 /**
- * Code execution result with encrypted stdout for PFC + web_search results.
+ * The output and exit code of Python code that Claude ran with the code execution
+ * tool, with standard output in encrypted form, sent back in a later request.
  */
 export interface EncryptedCodeExecutionResultBlockParam {
   content: Array<CodeExecutionOutputBlockParam>;
@@ -4737,6 +4815,8 @@ export interface Message {
   usage: Usage;
 }
 
+export type MessageContentParam = string | Array<ContentBlockParam>;
+
 export type MessageCountTokensTool =
   | Tool
   | ToolBash20250124
@@ -4802,11 +4882,7 @@ export interface MessageDeltaUsage {
   server_tool_use: ServerToolUsage | null;
 }
 
-export interface MessageParam {
-  content: string | Array<ContentBlockParam>;
-
-  role: 'user' | 'assistant' | 'system';
-}
+export type MessageParam = UserMessageParam | AssistantMessageParam | SystemMessageParam;
 
 export interface MessageTokensCount {
   /**
@@ -5172,7 +5248,7 @@ export interface SignatureDelta {
 }
 
 /**
- * Specification for a skill to be loaded in a container (request model).
+ * Specification for a skill to be loaded in a container.
  */
 export interface SkillParams {
   /**
@@ -5199,6 +5275,12 @@ export type StopReason =
   | 'pause_turn'
   | 'refusal'
   | 'model_context_window_exceeded';
+
+export interface SystemMessageParam {
+  content: string | Array<TextBlockParam>;
+
+  role: 'system';
+}
 
 export interface TextBlock {
   /**
@@ -6093,6 +6175,12 @@ export interface UserLocation {
    * The [IANA timezone](https://nodatime.org/TimeZones) of the user.
    */
   timezone?: string | null;
+}
+
+export interface UserMessageParam {
+  content: MessageContentParam;
+
+  role: 'user';
 }
 
 export interface WebFetchBlock {
@@ -7160,8 +7248,7 @@ export interface MessageCreateParamsBase {
    *
    * Note that if you want to include a
    * [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-   * you can use the top-level `system` parameter — there is no `"system"` role for
-   * input messages in the Messages API.
+   * you can use the top-level `system` parameter.
    *
    * There is a limit of 100,000 messages in a single request.
    */
@@ -7266,13 +7353,6 @@ export interface MessageCreateParamsBase {
   system?: string | Array<TextBlockParam>;
 
   /**
-   * @deprecated Deprecated. Models released after Claude Opus 4.6 do not support
-   * setting temperature. A value of 1.0 will be accepted for backwards
-   * compatibility, all other values will be rejected with a 400 error.
-   */
-  temperature?: number;
-
-  /**
    * Body param: Configuration for Claude's thinking.
    *
    * With `{"type": "adaptive"}`, Claude decides when and how much to think. With
@@ -7374,22 +7454,8 @@ export interface MessageCreateParamsBase {
   tools?: Array<ToolUnion>;
 
   /**
-   * @deprecated Deprecated. Models released after Claude Opus 4.6 do not accept
-   * top_k; any value will be rejected with a 400 error.
-   */
-  top_k?: number;
-
-  /**
-   * @deprecated Deprecated. Models released after Claude Opus 4.6 do not support
-   * setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all
-   * other values will be rejected with a 400 error.
-   */
-  top_p?: number;
-
-  /**
    * Header param: The user profile ID to attribute this request to. Use when acting
-   * on behalf of a party other than your organization. Requires the `user-profiles`
-   * beta header.
+   * on behalf of a party other than your organization.
    */
   user_profile_id?: string;
 
@@ -7507,8 +7573,7 @@ export interface MessageCountTokensParams {
    *
    * Note that if you want to include a
    * [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-   * you can use the top-level `system` parameter — there is no `"system"` role for
-   * input messages in the Messages API.
+   * you can use the top-level `system` parameter.
    *
    * There is a limit of 100,000 messages in a single request.
    */
@@ -7657,8 +7722,7 @@ export interface MessageCountTokensParams {
 
   /**
    * Header param: The user profile ID to attribute this request to. Use when acting
-   * on behalf of a party other than your organization. Requires the `user-profiles`
-   * beta header.
+   * on behalf of a party other than your organization.
    */
   user_profile_id?: string;
 
@@ -7677,6 +7741,7 @@ Messages.Batches = Batches;
 
 export declare namespace Messages {
   export {
+    type AssistantMessageParam as AssistantMessageParam,
     type Base64ImageSource as Base64ImageSource,
     type Base64PDFSource as Base64PDFSource,
     type BashCodeExecutionOutputBlock as BashCodeExecutionOutputBlock,
@@ -7920,6 +7985,7 @@ export declare namespace Messages {
     type JSONOutputFormat as JSONOutputFormat,
     type MemoryTool20250818 as MemoryTool20250818,
     type Message as Message,
+    type MessageContentParam as MessageContentParam,
     type MessageCountTokensTool as MessageCountTokensTool,
     type MessageCreateParamsContainer as MessageCreateParamsContainer,
     type MessageDeltaEvent as MessageDeltaEvent,
@@ -7951,6 +8017,7 @@ export declare namespace Messages {
     type SignatureDelta as SignatureDelta,
     type SkillParams as SkillParams,
     type StopReason as StopReason,
+    type SystemMessageParam as SystemMessageParam,
     type TextBlock as TextBlock,
     type TextBlockParam as TextBlockParam,
     type TextCitation as TextCitation,
@@ -8006,6 +8073,7 @@ export declare namespace Messages {
     type URLPDFSource as URLPDFSource,
     type Usage as Usage,
     type UserLocation as UserLocation,
+    type UserMessageParam as UserMessageParam,
     type WebFetchBlock as WebFetchBlock,
     type WebFetchBlockParam as WebFetchBlockParam,
     type WebFetchTool20250910 as WebFetchTool20250910,

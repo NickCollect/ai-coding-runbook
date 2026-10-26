@@ -8,12 +8,14 @@ import httpx2
 
 from ... import _exceptions
 from ..._qs import Querystring
-from ..._types import Omit, Timeout, NotGiven, OpenTelemetryClientOption, not_given
-from ..._utils import asyncify, is_given
+from ..._types import Omit, Headers, Timeout, NotGiven, OpenTelemetryClientOption, omit, not_given
+from ..._utils import is_dict, asyncify, is_given
+from ..._client import _keep_client_header_params
 from ..._compat import cached_property
 from ..._version import __version__
 from ..aws._auth import get_auth_headers
 from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._constants import ANTHROPIC_API_VERSION
 from ..._streaming import Stream, AsyncStream
 from ..._exceptions import AnthropicError, APIStatusError
 from ..._middleware import MiddlewareInput
@@ -22,6 +24,8 @@ from ..._base_client import (
     BaseClient,
     SyncAPIClient,
     AsyncAPIClient,
+    FinalRequestOptions,
+    build_headers,
     merge_headers,
 )
 from ..aws._credentials import (
@@ -36,6 +40,17 @@ from ...resources.beta.messages import Messages as BetaMessages, AsyncMessages a
 DEFAULT_SERVICE_NAME = "bedrock-mantle"
 
 _MANTLE_API_KEY_ENV_VARS = ("AWS_BEARER_TOKEN_BEDROCK", "ANTHROPIC_AWS_API_KEY")
+
+USER_PROFILE_ID_HEADER = "anthropic-user-profile-id"
+
+USER_PROFILE_ID_BODY_PATHS = frozenset(
+    {
+        "/v1/messages",
+        "/v1/messages?beta=true",
+        "/v1/messages/count_tokens",
+        "/v1/messages/count_tokens?beta=true",
+    }
+)
 
 _HttpxClientT = TypeVar("_HttpxClientT", bound=Union[httpx2.Client, httpx2.AsyncClient])
 _DefaultStreamT = TypeVar("_DefaultStreamT", bound=Union[Stream[Any], AsyncStream[Any]])
@@ -96,6 +111,21 @@ class BaseMantleClient(BaseClient[_HttpxClientT, _DefaultStreamT]):
         if response.status_code >= 500:
             return _exceptions.InternalServerError(err_msg, response=response, body=body)
         return APIStatusError(err_msg, response=response, body=body)
+
+    def _move_user_profile_id_to_body(self, options: FinalRequestOptions) -> FinalRequestOptions:
+        """Mantle reads the user profile ID from the body of these requests, and from the header on other routes."""
+        body = options.json_data
+        if options.url not in USER_PROFILE_ID_BODY_PATHS or not is_dict(body):
+            return options
+
+        headers: Headers = options.headers or {}
+        user_profile_id = build_headers(self._custom_headers, headers)[0].get(USER_PROFILE_ID_HEADER)
+        if user_profile_id is None:
+            return options
+
+        options.headers = merge_headers(headers, {USER_PROFILE_ID_HEADER: omit})
+        options.json_data = {"user_profile_id": user_profile_id, **body}
+        return options
 
 
 def _resolve_mantle_config(
@@ -247,13 +277,17 @@ class AnthropicBedrockMantle(BaseMantleClient[httpx2.Client, Stream[Any]], SyncA
         return {
             **super().default_headers,
             "X-Stainless-Async": "false",
-            "anthropic-version": "2023-06-01",
+            "anthropic-version": ANTHROPIC_API_VERSION,
             **self._custom_headers,
         }
 
     @override
     def _validate_headers(self, headers: httpx2.Headers, omitted: frozenset[str]) -> None:
         pass
+
+    @override
+    def _prepare_options(self, options: FinalRequestOptions) -> FinalRequestOptions:
+        return self._move_user_profile_id_to_body(_keep_client_header_params(options))
 
     @override
     def _prepare_request(self, request: httpx2.Request) -> None:
@@ -446,13 +480,17 @@ class AsyncAnthropicBedrockMantle(BaseMantleClient[httpx2.AsyncClient, AsyncStre
         return {
             **super().default_headers,
             "X-Stainless-Async": "async:asyncio",
-            "anthropic-version": "2023-06-01",
+            "anthropic-version": ANTHROPIC_API_VERSION,
             **self._custom_headers,
         }
 
     @override
     def _validate_headers(self, headers: httpx2.Headers, omitted: frozenset[str]) -> None:
         pass
+
+    @override
+    async def _prepare_options(self, options: FinalRequestOptions) -> FinalRequestOptions:
+        return self._move_user_profile_id_to_body(_keep_client_header_params(options))
 
     @override
     async def _prepare_request(self, request: httpx2.Request) -> None:

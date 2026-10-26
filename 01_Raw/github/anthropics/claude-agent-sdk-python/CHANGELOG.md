@@ -1,5 +1,51 @@
 # Changelog
 
+## 0.2.174
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.310
+
+## 0.2.173
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.309
+
+## 0.2.172
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.308
+
+## 0.2.171
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.307
+
+## 0.2.170
+
+### Bug Fixes
+
+- **Fixed parallel tool calls missing from session messages**: `get_session_messages` and `get_session_messages_from_store` now return every tool call and result from turns that ran tools in parallel. Previously only one branch of the forked transcript was followed, dropping some calls and results (#1422)
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.306
+- CI: release uploads to PyPI now use trusted publishing (GitHub OIDC) instead of a long-lived API token (#1418)
+
+## 0.2.169
+
+### Documentation
+
+- Clarified that `include_hook_events` does not suppress `SessionStart` and `Setup` hook events, which the CLI emits regardless of the setting (#1336)
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.305
+- CI: hash-pinned the release build tools (`build`, `twine`, `wheel`, `hatchling`) so a tampered or unexpected download stops the job (#1415)
+
 ## 0.2.168
 
 ### Internal/Other Changes

@@ -70,7 +70,7 @@ class Vaults(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsVault:
-        """Create Vault
+        """Create a Vault
 
         Args:
           display_name: Human-readable name for the vault.
@@ -111,7 +111,7 @@ class Vaults(SyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._post(
-            "/v1/vaults?beta=true",
+            "/v1/vaults",
             body={
                 "display_name": display_name,
                 "metadata": metadata,
@@ -121,6 +121,7 @@ class Vaults(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.create",
                 span_route="/v1/vaults",
                 span_created_id="anthropic.vault.id",
@@ -142,7 +143,7 @@ class Vaults(SyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsVault:
         """
-        Get Vault
+        Retrieve a Vault
 
         Args:
           vault_id: Unique identifier of the vault to retrieve.
@@ -180,12 +181,13 @@ class Vaults(SyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._get(
-            path_template("/v1/vaults/{vault_id}?beta=true", vault_id=vault_id),
+            path_template("/v1/vaults/{vault_id}", vault_id=vault_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.retrieve",
                 span_route="/v1/vaults/{vault_id}",
                 span_attributes={"anthropic.vault.id": vault_id},
@@ -209,7 +211,7 @@ class Vaults(SyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsVault:
         """
-        Update Vault
+        Update a Vault
 
         Args:
           vault_id: Unique identifier of the vault to update.
@@ -252,7 +254,7 @@ class Vaults(SyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._post(
-            path_template("/v1/vaults/{vault_id}?beta=true", vault_id=vault_id),
+            path_template("/v1/vaults/{vault_id}", vault_id=vault_id),
             body={
                 "display_name": display_name,
                 "metadata": metadata,
@@ -262,6 +264,7 @@ class Vaults(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.update",
                 span_route="/v1/vaults/{vault_id}",
                 span_attributes={"anthropic.vault.id": vault_id},
@@ -288,11 +291,13 @@ class Vaults(SyncAPIResource):
         List Vaults
 
         Args:
-          include_archived: Whether to include archived vaults in the results.
+          include_archived: Whether to include archived vaults in the results. Defaults to `false`.
 
           limit: Maximum number of vaults to return per page. Defaults to 20, maximum 100.
 
-          page: Opaque pagination token from a previous `list_vaults` response.
+          page: The `next_page` value from a previous
+              [List Vaults](https://platform.claude.com/docs/en/api/beta/vaults/list)
+              response, to get the next page. Leave it out to get the first page.
 
           betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
               header.
@@ -325,7 +330,7 @@ class Vaults(SyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._get_api_list(
-            "/v1/vaults?beta=true",
+            "/v1/vaults",
             page=SyncPageCursor[BetaManagedAgentsVault],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -337,6 +342,7 @@ class Vaults(SyncAPIResource):
                     "limit": limit,
                     "page": page,
                 },
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.list",
                 span_route="/v1/vaults",
             ),
@@ -357,7 +363,7 @@ class Vaults(SyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsDeletedVault:
         """
-        Delete Vault
+        Delete a Vault
 
         Args:
           vault_id: Unique identifier of the vault to delete.
@@ -395,12 +401,13 @@ class Vaults(SyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._delete(
-            path_template("/v1/vaults/{vault_id}?beta=true", vault_id=vault_id),
+            path_template("/v1/vaults/{vault_id}", vault_id=vault_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.delete",
                 span_route="/v1/vaults/{vault_id}",
                 span_attributes={"anthropic.vault.id": vault_id},
@@ -422,7 +429,7 @@ class Vaults(SyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsVault:
         """
-        Archive Vault
+        Archive a Vault
 
         Args:
           vault_id: Unique identifier of the vault to archive.
@@ -460,12 +467,13 @@ class Vaults(SyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._post(
-            path_template("/v1/vaults/{vault_id}/archive?beta=true", vault_id=vault_id),
+            path_template("/v1/vaults/{vault_id}/archive", vault_id=vault_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.archive",
                 span_route="/v1/vaults/{vault_id}/archive",
                 span_attributes={"anthropic.vault.id": vault_id},
@@ -512,7 +520,7 @@ class AsyncVaults(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsVault:
-        """Create Vault
+        """Create a Vault
 
         Args:
           display_name: Human-readable name for the vault.
@@ -553,7 +561,7 @@ class AsyncVaults(AsyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return await self._post(
-            "/v1/vaults?beta=true",
+            "/v1/vaults",
             body={
                 "display_name": display_name,
                 "metadata": metadata,
@@ -563,6 +571,7 @@ class AsyncVaults(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.create",
                 span_route="/v1/vaults",
                 span_created_id="anthropic.vault.id",
@@ -584,7 +593,7 @@ class AsyncVaults(AsyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsVault:
         """
-        Get Vault
+        Retrieve a Vault
 
         Args:
           vault_id: Unique identifier of the vault to retrieve.
@@ -622,12 +631,13 @@ class AsyncVaults(AsyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return await self._get(
-            path_template("/v1/vaults/{vault_id}?beta=true", vault_id=vault_id),
+            path_template("/v1/vaults/{vault_id}", vault_id=vault_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.retrieve",
                 span_route="/v1/vaults/{vault_id}",
                 span_attributes={"anthropic.vault.id": vault_id},
@@ -651,7 +661,7 @@ class AsyncVaults(AsyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsVault:
         """
-        Update Vault
+        Update a Vault
 
         Args:
           vault_id: Unique identifier of the vault to update.
@@ -694,7 +704,7 @@ class AsyncVaults(AsyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return await self._post(
-            path_template("/v1/vaults/{vault_id}?beta=true", vault_id=vault_id),
+            path_template("/v1/vaults/{vault_id}", vault_id=vault_id),
             body={
                 "display_name": display_name,
                 "metadata": metadata,
@@ -704,6 +714,7 @@ class AsyncVaults(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.update",
                 span_route="/v1/vaults/{vault_id}",
                 span_attributes={"anthropic.vault.id": vault_id},
@@ -730,11 +741,13 @@ class AsyncVaults(AsyncAPIResource):
         List Vaults
 
         Args:
-          include_archived: Whether to include archived vaults in the results.
+          include_archived: Whether to include archived vaults in the results. Defaults to `false`.
 
           limit: Maximum number of vaults to return per page. Defaults to 20, maximum 100.
 
-          page: Opaque pagination token from a previous `list_vaults` response.
+          page: The `next_page` value from a previous
+              [List Vaults](https://platform.claude.com/docs/en/api/beta/vaults/list)
+              response, to get the next page. Leave it out to get the first page.
 
           betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
               header.
@@ -767,7 +780,7 @@ class AsyncVaults(AsyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return self._get_api_list(
-            "/v1/vaults?beta=true",
+            "/v1/vaults",
             page=AsyncPageCursor[BetaManagedAgentsVault],
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -779,6 +792,7 @@ class AsyncVaults(AsyncAPIResource):
                     "limit": limit,
                     "page": page,
                 },
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.list",
                 span_route="/v1/vaults",
             ),
@@ -799,7 +813,7 @@ class AsyncVaults(AsyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsDeletedVault:
         """
-        Delete Vault
+        Delete a Vault
 
         Args:
           vault_id: Unique identifier of the vault to delete.
@@ -837,12 +851,13 @@ class AsyncVaults(AsyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return await self._delete(
-            path_template("/v1/vaults/{vault_id}?beta=true", vault_id=vault_id),
+            path_template("/v1/vaults/{vault_id}", vault_id=vault_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.delete",
                 span_route="/v1/vaults/{vault_id}",
                 span_attributes={"anthropic.vault.id": vault_id},
@@ -864,7 +879,7 @@ class AsyncVaults(AsyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> BetaManagedAgentsVault:
         """
-        Archive Vault
+        Archive a Vault
 
         Args:
           vault_id: Unique identifier of the vault to archive.
@@ -902,12 +917,13 @@ class AsyncVaults(AsyncAPIResource):
         }
         extra_headers = {"anthropic-beta": "managed-agents-2026-04-01", **(extra_headers or {})}
         return await self._post(
-            path_template("/v1/vaults/{vault_id}/archive?beta=true", vault_id=vault_id),
+            path_template("/v1/vaults/{vault_id}/archive", vault_id=vault_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                qualifiers={"beta": "true"},
                 span_name="anthropic.vaults.archive",
                 span_route="/v1/vaults/{vault_id}/archive",
                 span_attributes={"anthropic.vault.id": vault_id},

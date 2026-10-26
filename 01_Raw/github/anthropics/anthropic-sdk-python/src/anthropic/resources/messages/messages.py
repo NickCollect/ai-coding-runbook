@@ -238,8 +238,7 @@ class Messages(SyncAPIResource):
 
               Note that if you want to include a
               [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-              you can use the top-level `system` parameter — there is no `"system"` role for
-              input messages in the Messages API.
+              you can use the top-level `system` parameter.
 
               There is a limit of 100,000 messages in a single request.
 
@@ -397,7 +396,7 @@ class Messages(SyncAPIResource):
               for more details.
 
           user_profile_id: The user profile ID to attribute this request to. Use when acting on behalf of a
-              party other than your organization. Requires the `user-profiles` beta header.
+              party other than your organization.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -536,8 +535,7 @@ class Messages(SyncAPIResource):
 
               Note that if you want to include a
               [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-              you can use the top-level `system` parameter — there is no `"system"` role for
-              input messages in the Messages API.
+              you can use the top-level `system` parameter.
 
               There is a limit of 100,000 messages in a single request.
 
@@ -695,7 +693,7 @@ class Messages(SyncAPIResource):
               for more details.
 
           user_profile_id: The user profile ID to attribute this request to. Use when acting on behalf of a
-              party other than your organization. Requires the `user-profiles` beta header.
+              party other than your organization.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -834,8 +832,7 @@ class Messages(SyncAPIResource):
 
               Note that if you want to include a
               [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-              you can use the top-level `system` parameter — there is no `"system"` role for
-              input messages in the Messages API.
+              you can use the top-level `system` parameter.
 
               There is a limit of 100,000 messages in a single request.
 
@@ -993,7 +990,7 @@ class Messages(SyncAPIResource):
               for more details.
 
           user_profile_id: The user profile ID to attribute this request to. Use when acting on behalf of a
-              party other than your organization. Requires the `user-profiles` beta header.
+              party other than your organization.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1447,8 +1444,7 @@ class Messages(SyncAPIResource):
 
               Note that if you want to include a
               [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-              you can use the top-level `system` parameter — there is no `"system"` role for
-              input messages in the Messages API.
+              you can use the top-level `system` parameter.
 
               There is a limit of 100,000 messages in a single request.
 
@@ -1569,7 +1565,7 @@ class Messages(SyncAPIResource):
               for more details.
 
           user_profile_id: The user profile ID to attribute this request to. Use when acting on behalf of a
-              party other than your organization. Requires the `user-profiles` beta header.
+              party other than your organization.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1797,8 +1793,7 @@ class AsyncMessages(AsyncAPIResource):
 
               Note that if you want to include a
               [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-              you can use the top-level `system` parameter — there is no `"system"` role for
-              input messages in the Messages API.
+              you can use the top-level `system` parameter.
 
               There is a limit of 100,000 messages in a single request.
 
@@ -1956,7 +1951,7 @@ class AsyncMessages(AsyncAPIResource):
               for more details.
 
           user_profile_id: The user profile ID to attribute this request to. Use when acting on behalf of a
-              party other than your organization. Requires the `user-profiles` beta header.
+              party other than your organization.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2095,8 +2090,7 @@ class AsyncMessages(AsyncAPIResource):
 
               Note that if you want to include a
               [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-              you can use the top-level `system` parameter — there is no `"system"` role for
-              input messages in the Messages API.
+              you can use the top-level `system` parameter.
 
               There is a limit of 100,000 messages in a single request.
 
@@ -2254,7 +2248,7 @@ class AsyncMessages(AsyncAPIResource):
               for more details.
 
           user_profile_id: The user profile ID to attribute this request to. Use when acting on behalf of a
-              party other than your organization. Requires the `user-profiles` beta header.
+              party other than your organization.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -2393,8 +2387,7 @@ class AsyncMessages(AsyncAPIResource):
 
               Note that if you want to include a
               [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-              you can use the top-level `system` parameter — there is no `"system"` role for
-              input messages in the Messages API.
+              you can use the top-level `system` parameter.
 
               There is a limit of 100,000 messages in a single request.
 
@@ -2552,7 +2545,7 @@ class AsyncMessages(AsyncAPIResource):
               for more details.
 
           user_profile_id: The user profile ID to attribute this request to. Use when acting on behalf of a
-              party other than your organization. Requires the `user-profiles` beta header.
+              party other than your organization.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -3005,8 +2998,7 @@ class AsyncMessages(AsyncAPIResource):
 
               Note that if you want to include a
               [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-              you can use the top-level `system` parameter — there is no `"system"` role for
-              input messages in the Messages API.
+              you can use the top-level `system` parameter.
 
               There is a limit of 100,000 messages in a single request.
 
@@ -3127,7 +3119,7 @@ class AsyncMessages(AsyncAPIResource):
               for more details.
 
           user_profile_id: The user profile ID to attribute this request to. Use when acting on behalf of a
-              party other than your organization. Requires the `user-profiles` beta header.
+              party other than your organization.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).

@@ -42,13 +42,13 @@ export type OrganizationRateLimitsPageCursor = PageCursor<OrganizationRateLimit>
 export interface OrganizationRateLimit {
   /**
    * Identifier of this rate-limit entry. It is stable within the organization and
-   * differs between organizations; the group's own identifier is `group.id`.
+   * differs between organizations; the group's own identifier is `group.id`. Pass it
+   * as `rate_limit_id` to set a workspace's overrides for this group.
    */
   id: string;
 
   /**
-   * The rate-limit group this entry's limits apply to. Its `type` equals
-   * `group_type`.
+   * The rate-limit group this entry's limits apply to.
    */
   group:
     | OrganizationRateLimitModelGroup
@@ -65,7 +65,8 @@ export interface OrganizationRateLimit {
 
   /**
    * Model names this entry's limits apply to, including aliases. `null` when
-   * `group_type` is not `"model_group"`.
+   * `group.type` is not `"model_group"`. The list covers the models your
+   * organization has access to, so it can differ between organizations.
    */
   models: Array<string> | null;
 

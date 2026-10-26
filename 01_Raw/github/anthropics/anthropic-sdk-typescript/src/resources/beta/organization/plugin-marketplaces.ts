@@ -39,13 +39,14 @@ export class PluginMarketplaces extends APIResource {
     options?: RequestOptions,
   ): APIPromise<BetaPluginMarketplace> {
     const { betas, ...query } = params ?? {};
-    return this._client.get(path`/v1/organizations/plugin_marketplaces/${marketplaceID}?beta=true`, {
+    return this._client.get(path`/v1/organizations/plugin_marketplaces/${marketplaceID}`, {
       query,
       ...options,
       headers: buildHeaders([
         { 'anthropic-beta': [...(betas ?? []), 'ce-plugins-2026-09-01'].toString() },
         options?.headers,
       ]),
+      __qualifiers: { beta: 'true' },
       __span: startApiCallSpan(this._client, 'anthropic.organization.plugin_marketplaces.retrieve', options, {
         route: '/v1/organizations/plugin_marketplaces/{marketplace_id}',
         queryParams: ['organization_id'],
@@ -86,13 +87,14 @@ export class PluginMarketplaces extends APIResource {
     options?: RequestOptions,
   ): APIPromise<BetaPluginMarketplace> {
     const { betas, ...body } = params;
-    return this._client.post(path`/v1/organizations/plugin_marketplaces/${marketplaceID}?beta=true`, {
+    return this._client.post(path`/v1/organizations/plugin_marketplaces/${marketplaceID}`, {
       body,
       ...options,
       headers: buildHeaders([
         { 'anthropic-beta': [...(betas ?? []), 'ce-plugins-2026-09-01'].toString() },
         options?.headers,
       ]),
+      __qualifiers: { beta: 'true' },
       __span: startApiCallSpan(this._client, 'anthropic.organization.plugin_marketplaces.update', options, {
         route: '/v1/organizations/plugin_marketplaces/{marketplace_id}',
         attributes: { 'anthropic.organization.plugin_marketplace.id': marketplaceID },
@@ -135,7 +137,7 @@ export class PluginMarketplaces extends APIResource {
   ): PagePromise<BetaPluginMarketplacesPageCursor, BetaPluginMarketplace> {
     const { betas, ...query } = params ?? {};
     return this._client.getAPIList(
-      '/v1/organizations/plugin_marketplaces?beta=true',
+      '/v1/organizations/plugin_marketplaces',
       PageCursor<BetaPluginMarketplace>,
       {
         query,
@@ -144,6 +146,7 @@ export class PluginMarketplaces extends APIResource {
           { 'anthropic-beta': [...(betas ?? []), 'ce-plugins-2026-09-01'].toString() },
           options?.headers,
         ]),
+        __qualifiers: { beta: 'true' },
         __span: startApiCallSpan(this._client, 'anthropic.organization.plugin_marketplaces.list', options, {
           route: '/v1/organizations/plugin_marketplaces',
           queryParams: ['limit', 'organization_id', 'owner_type', 'page', 'source'],
@@ -164,9 +167,9 @@ export class PluginMarketplaces extends APIResource {
    * part, with some files left out. An archive that cannot be read as a marketplace
    * is reported, not refused: the response is a report with `valid: false`. Plugin
    * sources outside the marketplace are fetched anonymously from GitHub, so a
-   * private one is reported as not found; a source on any other host is not fetched
-   * here, and the report notes that it will be checked when the marketplace actually
-   * synchronizes.
+   * private one is reported as not found or as needing a GitHub sign-in; a source on
+   * any other host is not fetched here, and the report notes that it will be checked
+   * when the marketplace actually synchronizes.
    *
    * Nothing is recorded on the Compliance API activity feed.
    *
@@ -199,7 +202,7 @@ export class PluginMarketplaces extends APIResource {
   ): APIPromise<BetaPluginMarketplaceValidationReport> {
     const { betas, ...body } = params;
     return this._client.post(
-      '/v1/organizations/plugin_marketplaces/validate_archive?beta=true',
+      '/v1/organizations/plugin_marketplaces/validate_archive',
       multipartFormRequestOptions(
         {
           body,
@@ -208,6 +211,7 @@ export class PluginMarketplaces extends APIResource {
             { 'anthropic-beta': [...(betas ?? []), 'ce-plugins-2026-09-01'].toString() },
             options?.headers,
           ]),
+          __qualifiers: { beta: 'true' },
           __span: startApiCallSpan(
             this._client,
             'anthropic.organization.plugin_marketplaces.validate_archive',
@@ -232,9 +236,9 @@ export class PluginMarketplaces extends APIResource {
    * part, with some files left out. A repository that is missing, private, or has no
    * such branch or commit is reported, not refused: the response is a report with
    * `valid: false`. Plugin sources outside the marketplace are fetched anonymously
-   * from GitHub, so a private one is reported as not found; a source on any other
-   * host is not fetched here, and the report notes that it will be checked when the
-   * marketplace actually synchronizes.
+   * from GitHub, so a private one is reported as not found or as needing a GitHub
+   * sign-in; a source on any other host is not fetched here, and the report notes
+   * that it will be checked when the marketplace actually synchronizes.
    *
    * Nothing is recorded on the Compliance API activity feed.
    *
@@ -269,13 +273,14 @@ export class PluginMarketplaces extends APIResource {
     options?: RequestOptions,
   ): APIPromise<BetaPluginMarketplaceValidationReport> {
     const { betas, ...body } = params;
-    return this._client.post('/v1/organizations/plugin_marketplaces/validate_repository?beta=true', {
+    return this._client.post('/v1/organizations/plugin_marketplaces/validate_repository', {
       body,
       ...options,
       headers: buildHeaders([
         { 'anthropic-beta': [...(betas ?? []), 'ce-plugins-2026-09-01'].toString() },
         options?.headers,
       ]),
+      __qualifiers: { beta: 'true' },
       __span: startApiCallSpan(
         this._client,
         'anthropic.organization.plugin_marketplaces.validate_repository',
@@ -553,8 +558,10 @@ export interface PluginMarketplaceValidateArchiveParams {
 export interface PluginMarketplaceValidateRepositoryParams {
   /**
    * Body param: The `https://` URL of a public repository on github.com that holds
-   * the marketplace. Any other host, a URL with credentials in it, or one that does
-   * not name a repository is a 400.
+   * the marketplace. A URL longer than 2,048 characters, on any other host or
+   * scheme, with a port other than 443 or 80, with credentials in it, or that does
+   * not name exactly `owner/repo` (a trailing `.git` or `/` is accepted) is a 400. A
+   * private or missing repository is reported in the response, not refused.
    */
   repository_url: string;
 
@@ -562,8 +569,11 @@ export interface PluginMarketplaceValidateRepositoryParams {
    * Body param: The branch to validate the tip of, or the full 40-character SHA of
    * the commit to validate. When omitted, the branch a synchronization would read
    * (usually the repository's default branch); if that is not the default branch,
-   * the report's `ref` says which branch was read. An empty string, or a value that
-   * is neither a branch name nor a 40-character SHA, is a 400.
+   * the report's `ref` says which branch was read. An empty string, a value longer
+   * than 255 characters, or one that contains `..` or a character other than ASCII
+   * letters, digits, `.`, `_`, `-`, `+`, and `/`, is a 400. Any other value that is
+   * not a 40-character SHA is read as a branch name; if the repository has no such
+   * branch, the response is a report with `valid: false`, not a 400.
    */
   ref?: string | null;
 

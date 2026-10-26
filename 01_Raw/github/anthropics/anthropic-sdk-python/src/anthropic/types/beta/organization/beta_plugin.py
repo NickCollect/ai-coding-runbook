@@ -43,7 +43,10 @@ class BetaPlugin(BaseModel):
     """The newest version."""
 
     manifest_version: Optional[str] = None
-    """The version string the served version's manifest declares."""
+    """
+    The served version's manifest `version`, normalized for display, or `null` (the
+    Plugin Version's `manifest_version` says how and when).
+    """
 
     marketplace_id: str
     """The ID of the plugin marketplace the Plugin lives in."""
@@ -80,10 +83,21 @@ class BetaPlugin(BaseModel):
     """
 
     reach: Optional[Literal["contained", "privileged", "remote"]] = None
-    """
-    How far the served version reaches: `remote` when it declares an MCP server or a
-    CLI, `privileged` when it declares a hook, monitor, language server or settings
-    but nothing remote, `contained` otherwise; null when not classifiable.
+    """How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it
+    declares no MCP server or CLI, but declares a hook, monitor, language server, or
+    settings, or has a skill, command, or other Markdown file whose frontmatter
+    pre-approves tools (`allowed-tools` with any value other than an empty one or
+    one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise
+    it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change
+    the value could not be read, or was past a size limit, the version is `null` or
+    `privileged` (or `remote`, if it declares an MCP server or a CLI), not
+    `contained`. The value is normally worked out when a version is stored, under
+    the rules of that time, so an older version can be `null`, or `contained` where
+    the same files stored today would be `privileged` or `null`.
     """
 
     served_version_id: str
@@ -91,8 +105,11 @@ class BetaPlugin(BaseModel):
 
     served_version_pinned: bool
     """
-    False while the served version follows each new version; true once it has been
-    pinned to one.
+    True once the served version has been pinned, through Update Plugin or in
+    claude.ai. While false, a new version normally becomes the served version when
+    it is stored. While the newest version is not the served version, as when a
+    version saved in claude.ai is waiting for its content scan, `served_version_id`
+    differs from `latest_version_id`.
     """
 
     type: Literal["plugin"]
@@ -101,6 +118,9 @@ class BetaPlugin(BaseModel):
     updated_at: datetime
     """RFC 3339.
 
-    Moves on a new version and on a served-version change; a change to the Plugin's
+    Moves on a served-version change (including pinning an unpinned Plugin to the
+    version it already serves) and, normally, on a new version. A version saved in
+    claude.ai that waits for its content scan moves it when it becomes the served
+    version, and not necessarily when it is stored. A change to the Plugin's
     installation settings or shares does not move it.
     """

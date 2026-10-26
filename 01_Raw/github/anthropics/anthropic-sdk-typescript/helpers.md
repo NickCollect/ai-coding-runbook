@@ -218,6 +218,25 @@ See the following example files:
 - [`examples/structured-outputs-streaming.ts`](examples/structured-outputs-streaming.ts)
 - [`examples/structured-outputs-raw.ts`](examples/structured-outputs-raw.ts)
 
+## Message Threads
+
+A message thread (beta) keeps the conversation on the server, so each request sends only the new messages instead of the whole history. `client.beta.messages.thread(...)` takes what `create()` takes and sends nothing until the first turn.
+
+```ts
+const thread = client.beta.messages.thread({
+  model: 'claude-sonnet-5',
+  max_tokens: 1024,
+  system: 'You are a support agent for Acme.',
+});
+
+const first = await thread.send({ role: 'user', content: "My order #4821 hasn't arrived." });
+const second = await thread.send({ role: 'user', content: "It's been two weeks." });
+```
+
+`thread.toolRunner()` runs the [tool loop](#tool-helpers) over this thread.
+
+See [`examples/message-threads.ts`](examples/message-threads.ts).
+
 ## Tool Helpers
 
 The SDK provides helper functions to create runnable tools that can be automatically invoked by the `.toolRunner()` method. These helpers simplify tool creation with JSON Schema, Zod, or [Standard Schema](https://standardschema.dev) validation.
@@ -470,7 +489,7 @@ import { betaTool } from '@anthropic-ai/sdk/helpers/beta/json-schema';
 
 const calculatorTool = betaTool({
   name: 'calculator',
-  input_schema: {
+  inputSchema: {
     type: 'object',
     properties: {
       operation: { type: 'string', enum: ['add', 'subtract', 'multiply', 'divide'] },
@@ -498,12 +517,30 @@ const calculatorTool = betaTool({
 });
 ```
 
+### Other tool definition fields
+
+`betaZodTool`, `betaStandardSchemaTool` and `betaTool` also accept every other field of the tool definition, named as in the API, and send it as given:
+
+```ts
+const weatherTool = betaZodTool({
+  name: 'get_weather',
+  inputSchema: z.object({ location: z.string() }),
+  description: 'Get the current weather in a given location',
+  strict: true,
+  cache_control: { type: 'ephemeral' },
+  run: async (input) => `The weather in ${input.location} is 72°F`,
+});
+```
+
+`mcpTool`, `mcpTools` and `betaMemoryTool` take the other fields of their tool definition as their last argument.
+
 ### `client.messages.toolRunner(params): BetaToolRunner`
 
 **Parameters:** All standard message parameters except `compaction` (see [Compaction](#compaction)), plus:
 
 - `tools: Array<BetaToolUnion | BetaRunnableTool>` - Array of tools
 - `max_iterations?: number` - Maximum number of tool execution iterations (default: no limit)
+- `thread?: false` - The tool runner keeps its conversation in a [message thread](#message-threads) by default; `false` sends the whole history with every request
 
 **Returns:**: `BetaToolRunner`
 
@@ -541,7 +578,7 @@ const finalMessage = await runner;
 
 #### `BetaToolRunner.setMessagesParams()`
 
-Updates the conversation parameters. Can accept new parameters or a mutator function.
+Updates the conversation parameters. Can accept new parameters or a mutator function. `system` and `tools` cannot change during a run unless the runner was created with `thread: false`.
 
 ```ts
 // Direct parameter update
@@ -620,9 +657,9 @@ A few things to know:
 - Changes still waiting when the run ends are never sent.
 - In the rare case where a compaction response comes back without `tool_changes` even though the messages it summarized added or removed tools, the model goes back to the tools in `tools`, and the runner doesn't detect it. Call `addTools()` / `removeTools()` again after that compaction if you need the change restored.
 - The runner doesn't add the beta for you, so pass `betas: ['inline-tools-2026-09-15']`.
-- Changing `tools` with `setMessagesParams()` still works, but misses the prompt cache and does not undo what these methods did.
+- Changing `tools` with `setMessagesParams()` misses the prompt cache, does not undo what these methods did, and works only with `thread: false`.
 - Use either these methods or `tool_addition` / `tool_removal` blocks you append yourself for a given tool, not both.
-- Runnable toolsets, such as a browser or computer toolset, can't be added or removed this way: change them with `setMessagesParams()`, or build a new runner.
+- Runnable toolsets, such as a browser or computer toolset, can't be added or removed this way: build a new runner, or change them with `setMessagesParams()` on a run with `thread: false`.
 
 #### `BetaToolRunner.setRequestOptions()`
 
@@ -780,6 +817,7 @@ import {
 
 const environmentKey = process.env.ANTHROPIC_ENVIRONMENT_KEY!;
 // The environment key authenticates the per-session calls too — scope a client to it.
+// It replaces the client's own credential on the copy.
 const sessionClient = client.withOptions({ authToken: environmentKey });
 
 for await (const work of client.beta.environments.work.poller({

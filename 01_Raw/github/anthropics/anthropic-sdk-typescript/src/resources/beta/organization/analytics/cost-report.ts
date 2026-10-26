@@ -1,18 +1,25 @@
 import { APIResource } from '../../../../core/resource';
 import * as AnalyticsAPI from './analytics';
-import { BetaAnalyticsCostReportTimeBucketsPageCursor } from './analytics';
-import { PageCursor, type PageCursorParams, PagePromise } from '../../../../core/pagination';
+import { BetaAnalyticsCostReportTimeBucketsReportPageCursor } from './analytics';
+import { PagePromise, ReportPageCursor, type ReportPageCursorParams } from '../../../../core/pagination';
 import { RequestOptions } from '../../../../internal/request-options';
 import { startApiCallSpan } from '../../../../internal/tracing';
 
 export class CostReport extends APIResource {
   /**
-   * Get cost in USD over time across a date range.
+   * [Legacy] Get cost in USD over time across a date range.
    *
-   * Returns cost bucketed by minute, hour, or day, optionally broken down by
-   * product, model, context window, inference region, speed, cost type, or token
-   * type. Available to organizations on a Claude Enterprise plan. Requires an API
-   * key with the `read:analytics` scope.
+   * Returns cost bucketed by minute, hour, or day, optionally broken down by one or
+   * more `group_by[]` dimensions, such as model or cost type. Available to
+   * organizations on a Claude Enterprise plan. Requires an API key with the
+   * `read:analytics` scope.
+   *
+   * This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
+   * new integrations, use
+   * [`GET /v1/organizations/analytics/cost`](/docs/en/api/beta/organization/analytics/cost/list)
+   * in the Usage and Cost Analytics API instead. To move an existing integration,
+   * see
+   * [Migrate from the Claude Enterprise usage and cost reports](/docs/en/manage-claude/usage-cost-analytics-api#migrate-from-enterprise-analytics-reports).
    *
    * @example
    * ```ts
@@ -28,15 +35,16 @@ export class CostReport extends APIResource {
     query: CostReportListParams,
     options?: RequestOptions,
   ): PagePromise<
-    BetaAnalyticsCostReportTimeBucketsPageCursor,
+    BetaAnalyticsCostReportTimeBucketsReportPageCursor,
     AnalyticsAPI.BetaAnalyticsCostReportTimeBucket
   > {
     return this._client.getAPIList(
-      '/v1/organizations/analytics/cost_report?beta=true',
-      PageCursor<AnalyticsAPI.BetaAnalyticsCostReportTimeBucket>,
+      '/v1/organizations/analytics/cost_report',
+      ReportPageCursor<AnalyticsAPI.BetaAnalyticsCostReportTimeBucket>,
       {
         query,
         ...options,
+        __qualifiers: { beta: 'true' },
         __span: startApiCallSpan(this._client, 'anthropic.organization.analytics.cost_report.list', options, {
           route: '/v1/organizations/analytics/cost_report',
           queryParams: [
@@ -63,7 +71,7 @@ export class CostReport extends APIResource {
   }
 }
 
-export interface CostReportListParams extends PageCursorParams {
+export interface CostReportListParams extends ReportPageCursorParams {
   /**
    * Start of range, inclusive. RFC 3339 tz-aware. Must be within the last 365 days
    * and no earlier than 2026-01-01T00:00:00Z.
@@ -131,6 +139,13 @@ export interface CostReportListParams extends PageCursorParams {
   inference_geos?: Array<AnalyticsAPI.BetaAnalyticsInferenceGeoFilter> | null;
 
   /**
+   * Maximum number of time buckets per page. Defaults and caps vary by
+   * `bucket_width` (`1d`: default 7, max 31; `1h`: default 24, max 168; `1m`:
+   * default 60, max 256).
+   */
+  limit?: number | null;
+
+  /**
    * Models to include. Defaults to all models. Use `group_by[]=model` to break out
    * per-model values.
    */
@@ -172,4 +187,4 @@ export declare namespace CostReport {
   export { type CostReportListParams as CostReportListParams };
 }
 
-export { type BetaAnalyticsCostReportTimeBucketsPageCursor };
+export { type BetaAnalyticsCostReportTimeBucketsReportPageCursor };

@@ -20,7 +20,19 @@ import {
   type ParsedBetaMessage,
 } from '../../../lib/beta-parser';
 import { BetaMessageStream } from '../../../lib/BetaMessageStream';
-import { messagesCreateHeaders, transformOutputFormat } from '../../../lib/internal/beta-messages-request';
+import {
+  assertOneOutputFormat,
+  messagesCreateHeaders,
+  transformOutputFormat,
+} from '../../../lib/internal/beta-messages-request';
+import {
+  BetaMessageThread,
+  type BetaMessageThreadCreateParams,
+  type BetaMessageThreadRequestOptions,
+} from '../../../lib/threads/BetaMessageThread';
+import { ThreadState } from '../../../lib/internal/threads/ThreadState';
+import { splitToolRunnerParams } from '../../../lib/internal/threads/tool-runner-params';
+import { loggerFor } from '../../../internal/utils/log';
 import {
   BetaToolRunner,
   BetaToolRunnerParams,
@@ -135,10 +147,11 @@ export class Messages extends APIResource {
         messagesCreateSpanSettings(this._client, body, headers),
       );
     recordMessagesCreateRequest(this._client, call, body);
-    const request = this._client.post<BetaMessage | Stream<unknown>>('/v1/messages?beta=true', {
+    const request = this._client.post<BetaMessage | Stream<unknown>>('/v1/messages', {
       body,
       timeout: timeout ?? 600000,
       ...options,
+      __qualifiers: { beta: 'true' },
       __span: call,
       headers,
       stream: modifiedParams.stream ?? false,
@@ -233,9 +246,10 @@ export class Messages extends APIResource {
       route: '/v1/messages/count_tokens',
       attributes: { [ATTR_GEN_AI_REQUEST_MODEL]: body.model },
     });
-    const request = this._client.post<BetaMessageTokensCount>('/v1/messages/count_tokens?beta=true', {
+    const request = this._client.post<BetaMessageTokensCount>('/v1/messages/count_tokens', {
       body,
       ...options,
+      __qualifiers: { beta: 'true' },
       __span: call,
       headers,
     });
@@ -257,8 +271,46 @@ export class Messages extends APIResource {
     options?: BetaToolRunnerRequestOptions,
   ): BetaToolRunner<true>;
   toolRunner(body: BetaToolRunnerParams, options?: BetaToolRunnerRequestOptions): BetaToolRunner<boolean>;
+  /**
+   * Run the tools the model calls until it stops asking for them, yielding each assistant message.
+   *
+   * On a client with message threads the loop runs over one, so each turn sends only new messages. Pass
+   * `thread: false` to send the full history every turn. To run the loop over an existing thread, call
+   * `toolRunner()` on the thread itself.
+   */
   toolRunner(body: BetaToolRunnerParams, options?: BetaToolRunnerRequestOptions): BetaToolRunner<boolean> {
     return new BetaToolRunner(this._client as Anthropic, body, options);
+  }
+
+  /** @internal The thread that a tool runner with the params `body` runs over, and the runner's own settings. */
+  _toolRunnerThread(body: BetaToolRunnerParams) {
+    assertOneOutputFormat(body);
+    const { settings, thread, threadParams } = splitToolRunnerParams(body);
+    const state = new ThreadState({
+      params: { ...threadParams, unsupportedRequestBehavior: 'continue_unthreaded' },
+      options: {},
+      threading: thread !== false && this._client._supportsMessageThreads,
+      logger: loggerFor(this._client),
+    });
+    return { thread: BetaMessageThread._fromState<any>(this._client as Anthropic, state), settings };
+  }
+
+  /**
+   * Start a message thread: a conversation the server holds between turns, so each request sends only the new
+   * messages. Takes the params of `create()` except `thread`, with `messages` optional, and sends nothing.
+   *
+   * @example
+   * ```ts
+   * const thread = client.beta.messages.thread({ model: 'claude-opus-5', max_tokens: 1024 });
+   * const first = await thread.send({ role: 'user', content: 'Hello, Claude' });
+   * const second = await thread.send({ role: 'user', content: 'How are you?' });
+   * ```
+   */
+  thread<Params extends BetaMessageThreadCreateParams>(
+    params: Params,
+    options?: BetaMessageThreadRequestOptions,
+  ): BetaMessageThread<ExtractParsedContentFromBetaParams<Params>> {
+    return new BetaMessageThread(this._client as Anthropic, params, options);
   }
 }
 
@@ -467,6 +519,12 @@ export interface BetaAdvisorToolResultErrorParam {
 
 export interface BetaAllThinkingTurns {
   type: 'all';
+}
+
+export interface BetaAssistantMessageParam {
+  content: BetaMessageContentParam;
+
+  role: 'assistant';
 }
 
 export type BetaMessageStreamParams = MessageCreateParamsBase;
@@ -2879,6 +2937,15 @@ export interface BetaCacheCreation {
   ephemeral_5m_input_tokens: number;
 }
 
+/**
+ * A `cache_miss_reason` for a request whose `messages` differ from the previous
+ * request's in an earlier entry, instead of only having entries appended. The
+ * `model`, `system`, and `tools` match.
+ *
+ * See the
+ * [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+ * to learn what to change for each reason.
+ */
 export interface BetaCacheMissMessagesChanged {
   /**
    * Approximate number of input tokens that would have been read from cache had the
@@ -2889,6 +2956,14 @@ export interface BetaCacheMissMessagesChanged {
   type: 'messages_changed';
 }
 
+/**
+ * A `cache_miss_reason` for a request whose `model` or `speed` differs from the
+ * previous request's.
+ *
+ * See the
+ * [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+ * to learn what to change for each reason.
+ */
 export interface BetaCacheMissModelChanged {
   /**
    * Approximate number of input tokens that would have been read from cache had the
@@ -2899,6 +2974,16 @@ export interface BetaCacheMissModelChanged {
   type: 'model_changed';
 }
 
+/**
+ * A `cache_miss_reason` for when the API doesn't have a stored record of the
+ * request that `diagnostics.previous_message_id` references.
+ *
+ * This doesn't mean that this request changed.
+ *
+ * See the
+ * [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+ * to learn what to change for each reason.
+ */
 export interface BetaCacheMissPreviousMessageNotFound {
   type: 'previous_message_not_found';
 }
@@ -2911,6 +2996,14 @@ export type BetaCacheMissReason =
   | BetaCacheMissPreviousMessageNotFound
   | BetaCacheMissUnavailable;
 
+/**
+ * A `cache_miss_reason` for a request whose `system` differs from the previous
+ * request's.
+ *
+ * See the
+ * [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+ * to learn what to change for each reason.
+ */
 export interface BetaCacheMissSystemChanged {
   /**
    * Approximate number of input tokens that would have been read from cache had the
@@ -2921,6 +3014,14 @@ export interface BetaCacheMissSystemChanged {
   type: 'system_changed';
 }
 
+/**
+ * A `cache_miss_reason` for a request whose `tools` differ from the previous
+ * request's, for example because tools were added, removed, or reordered.
+ *
+ * See the
+ * [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+ * to learn what to change for each reason.
+ */
 export interface BetaCacheMissToolsChanged {
   /**
    * Approximate number of input tokens that would have been read from cache had the
@@ -2931,6 +3032,18 @@ export interface BetaCacheMissToolsChanged {
   type: 'tools_changed';
 }
 
+/**
+ * A `cache_miss_reason` for when the API can't give a diagnosis. The request
+ * itself was processed normally.
+ *
+ * This includes a request whose `model`, `system`, and `tools` match the previous
+ * request's but whose other prompt-affecting parameters, such as `thinking` or
+ * `tool_choice`, differ.
+ *
+ * See the
+ * [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#cache-miss-reason-types)
+ * to learn what to change for each reason.
+ */
 export interface BetaCacheMissUnavailable {
   type: 'unavailable';
 }
@@ -3399,8 +3512,16 @@ export interface BetaCodeExecutionTool20250825 {
 }
 
 /**
- * Code execution tool with REPL state persistence (daemon mode + gVisor
- * checkpoint).
+ * A `tools` entry for the code execution tool, version `code_execution_20260120`.
+ * It adds REPL state persistence to version `code_execution_20250825`.
+ *
+ * REPL state persistence applies with programmatic tool calling. With it, the
+ * Python interpreter state, such as variable bindings, persists across requests
+ * that reuse the container.
+ *
+ * See the
+ * [code execution tool guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#tool-versions)
+ * to learn what each tool version adds.
  */
 export interface BetaCodeExecutionTool20260120 {
   /**
@@ -4995,7 +5116,15 @@ export interface BetaDocumentBlock {
 }
 
 /**
- * Code execution result with encrypted stdout for PFC + web_search results.
+ * The output and exit code of Python code that Claude ran with the code execution
+ * tool, with standard output in encrypted form.
+ *
+ * The API returns this block in place of `code_execution_result` when the code
+ * called the web search tool.
+ *
+ * See the
+ * [programmatic tool calling guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling)
+ * to learn more about programmatic tool calling.
  */
 export interface BetaEncryptedCodeExecutionResultBlock {
   content: Array<BetaCodeExecutionOutputBlock>;
@@ -5010,7 +5139,8 @@ export interface BetaEncryptedCodeExecutionResultBlock {
 }
 
 /**
- * Code execution result with encrypted stdout for PFC + web_search results.
+ * The output and exit code of Python code that Claude ran with the code execution
+ * tool, with standard output in encrypted form, sent back in a later request.
  */
 export interface BetaEncryptedCodeExecutionResultBlockParam {
   content: Array<BetaCodeExecutionOutputBlockParam>;
@@ -5274,17 +5404,67 @@ export interface BetaFallbackParam {
    */
   model: MessagesAPI.Model;
 
+  /**
+   * The `max_tokens` for the fallback attempt that uses this `fallbacks` entry's
+   * `model`, in place of the request's `max_tokens`. If you leave it out or set it
+   * to `null`, the attempt uses the request's `max_tokens`.
+   *
+   * See the
+   * [refusals and fallback guide](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#naming-your-own-fallback-models)
+   * to learn more about fallback entries.
+   */
   max_tokens?: number | null;
 
+  /**
+   * Output parameters for the fallback attempt that uses this `fallbacks` entry's
+   * `model`, combined with the request's `output_config` one field at a time.
+   *
+   * - `format`: If you leave it out, the attempt uses the request's `format`. If you
+   *   set it to `null`, the attempt runs without a format.
+   * - `effort`: If you leave it out, the attempt uses the request's `effort` when
+   *   `model` supports that level with the attempt's `thinking`. If the request
+   *   doesn't set `effort`, if `model` doesn't support the level, or if you set
+   *   `effort` to `null`, the attempt runs at the default effort of `model`.
+   * - `task_budget`: If you leave it out, the attempt uses the request's
+   *   `task_budget` when `model` accepts a task budget of that size. If the request
+   *   doesn't set `task_budget`, if `model` doesn't accept it, or if you set
+   *   `task_budget` to `null`, the attempt runs without a task budget.
+   *
+   * Set `output_config` to `null` to run the attempt without a format or a task
+   * budget, at the default effort of `model`.
+   *
+   * These rules apply with the `server-side-fallback-2026-07-01` beta header.
+   */
   output_config?: BetaOutputConfig | null;
 
   /**
-   * Inference speed mode. `fast` provides significantly faster output token
-   * generation at premium pricing. Not all models support `fast`; invalid
-   * combinations are rejected at create time.
+   * The inference speed mode for the fallback attempt that uses this `fallbacks`
+   * entry's `model`. If you leave it out, the attempt runs at `fast` speed only when
+   * the request sets `speed` to `fast` and your organization can use fast mode on
+   * `model`.
+   *
+   * Otherwise, or when you set this field to `null`, the attempt runs at `standard`
+   * speed.
+   *
+   * These rules apply with the `server-side-fallback-2026-07-01` beta header.
    */
   speed?: 'standard' | 'fast' | null;
 
+  /**
+   * The thinking configuration for the fallback attempt that uses this `fallbacks`
+   * entry's `model`. If you leave it out, the attempt uses the request's `thinking`
+   * when `model` supports that thinking `type`.
+   *
+   * If you leave it out and the request's thinking `type` is `between_tools` but
+   * `model` doesn't support `between_tools`, the attempt uses `disabled` if `model`
+   * supports it. Otherwise, if `model` doesn't support the request's thinking
+   * `type`, if the request doesn't set `thinking`, or if you set this field to
+   * `null`, the attempt uses the thinking `type` that `model` uses when a request
+   * leaves out `thinking`. The request's `thinking.display` still applies where
+   * `model` allows it.
+   *
+   * These rules apply with the `server-side-fallback-2026-07-01` beta header.
+   */
   thinking?:
     | BetaThinkingConfigEnabled
     | BetaThinkingConfigDisabled
@@ -5934,6 +6114,8 @@ export interface BetaMessage {
   input_transformations?: Array<BetaInputTransformation> | null;
 }
 
+export type BetaMessageContentParam = string | Array<BetaContentBlockParam>;
+
 export interface BetaMessageDeltaUsage {
   /**
    * The cumulative number of input tokens used to create the cache entry.
@@ -6048,30 +6230,16 @@ export interface BetaMessageIterationUsage {
   type: 'message';
 }
 
-export interface BetaMessageParam {
-  content: string | Array<BetaContentBlockParam>;
+export type BetaMessageParam = BetaUserMessageParam | BetaAssistantMessageParam | BetaSystemMessageParam;
 
-  role: 'user' | 'assistant' | 'system';
-
-  /**
-   * How long this system message's text stays in front of the model. `"never"` (the
-   * default) renders it on every request that includes it. `"next_user_message"`
-   * renders it only for the user turn it follows: once a later `role: "user"`
-   * message exists in `messages` the message stays in the array (send it unchanged)
-   * but is no longer shown to the model. Only permitted on `role: "system"`
-   * messages.
-   */
-  clear_at?: 'next_user_message' | 'never' | null;
-
-  /**
-   * Per-message output configuration on a role:"system" input message.
-   *
-   * Fields here apply per-turn; `format` remains top-level only. An empty `{}` is
-   * accepted on a message that carries content; a message with neither content nor
-   * output_config fields is rejected.
-   */
-  output_config?: BetaSystemMessageOutputConfig | null;
-}
+/**
+ * Server-held conversation state (a Thread). `{"type": "create"}` asks the server
+ * to hold this conversation's state under the response's `id`;
+ * `{"type": "continue", "previous_message_id": ...}` resumes from a previous
+ * response so only the new turn's messages are sent. The response shape is
+ * unchanged.
+ */
+export type BetaMessageThreadParam = BetaThreadCreateParams | BetaThreadContinueParams;
 
 export interface BetaMessageTokensCount {
   /**
@@ -6775,7 +6943,7 @@ export interface BetaSignatureDelta {
 }
 
 /**
- * Specification for a skill to be loaded in a container (request model).
+ * Specification for a skill to be loaded in a container.
  */
 export interface BetaSkillParams {
   /**
@@ -6839,6 +7007,31 @@ export interface BetaSystemMessageOutputConfig {
    * Valid values are `low`, `medium`, `high`, `xhigh`, or `max`.
    */
   effort?: 'low' | 'medium' | 'high' | 'xhigh' | 'max' | null;
+}
+
+export interface BetaSystemMessageParam {
+  role: 'system';
+
+  /**
+   * How long this system message's text stays in front of the model. `"never"` (the
+   * default) renders it on every request that includes it. `"next_user_message"`
+   * renders it only for the user turn it follows: once a later `role: "user"`
+   * message exists in `messages` the message stays in the array (send it unchanged)
+   * but is no longer shown to the model. Only permitted on `role: "system"`
+   * messages.
+   */
+  clear_at?: 'next_user_message' | 'never' | null;
+
+  content?: string | Array<BetaTextBlockParam | BetaRequestToolAdditionBlock | BetaRequestToolRemovalBlock>;
+
+  /**
+   * Per-message output configuration on a role:"system" input message.
+   *
+   * Fields here apply per-turn; `format` remains top-level only. An empty `{}` is
+   * accepted on a message that carries content; a message with neither content nor
+   * output_config fields is rejected.
+   */
+  output_config?: BetaSystemMessageOutputConfig | null;
 }
 
 export interface BetaTextBlock {
@@ -7250,6 +7443,25 @@ export interface BetaThinkingTurns {
   type: 'thinking_turns';
 
   value: number;
+}
+
+/**
+ * Resume from the response named by `previous_message_id`.
+ */
+export interface BetaThreadContinueParams {
+  /**
+   * The `id` of the previous response in this Thread.
+   */
+  previous_message_id: string;
+
+  type: 'continue';
+}
+
+/**
+ * Start holding conversation state under this response's `id`.
+ */
+export interface BetaThreadCreateParams {
+  type: 'create';
 }
 
 /**
@@ -8200,6 +8412,12 @@ export interface BetaUserLocation {
    * The [IANA timezone](https://nodatime.org/TimeZones) of the user.
    */
   timezone?: string | null;
+}
+
+export interface BetaUserMessageParam {
+  content: BetaMessageContentParam;
+
+  role: 'user';
 }
 
 export interface BetaWebFetchBlock {
@@ -9242,8 +9460,7 @@ export interface MessageCreateParamsBase {
    *
    * Note that if you want to include a
    * [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-   * you can use the top-level `system` parameter — there is no `"system"` role for
-   * input messages in the Messages API.
+   * you can use the top-level `system` parameter.
    *
    * There is a limit of 100,000 messages in a single request.
    */
@@ -9418,13 +9635,6 @@ export interface MessageCreateParamsBase {
   system?: string | Array<BetaTextBlockParam>;
 
   /**
-   * @deprecated Deprecated. Models released after Claude Opus 4.6 do not support
-   * setting temperature. A value of 1.0 will be accepted for backwards
-   * compatibility, all other values will be rejected with a 400 error.
-   */
-  temperature?: number;
-
-  /**
    * Body param: Configuration for Claude's thinking.
    *
    * With `{"type": "adaptive"}`, Claude decides when and how much to think. With
@@ -9437,6 +9647,15 @@ export interface MessageCreateParamsBase {
    * for each model's behavior.
    */
   thinking?: BetaThinkingConfigParam;
+
+  /**
+   * Body param: Server-held conversation state (a Thread). `{"type": "create"}` asks
+   * the server to hold this conversation's state under the response's `id`;
+   * `{"type": "continue", "previous_message_id": ...}` resumes from a previous
+   * response so only the new turn's messages are sent. The response shape is
+   * unchanged.
+   */
+  thread?: BetaMessageThreadParam | null;
 
   /**
    * Body param: How the model should use the provided tools. The model can use a
@@ -9526,27 +9745,13 @@ export interface MessageCreateParamsBase {
   tools?: Array<BetaToolUnion>;
 
   /**
-   * @deprecated Deprecated. Models released after Claude Opus 4.6 do not accept
-   * top_k; any value will be rejected with a 400 error.
-   */
-  top_k?: number;
-
-  /**
-   * @deprecated Deprecated. Models released after Claude Opus 4.6 do not support
-   * setting top_p. A value >= 0.99 will be accepted for backwards compatibility, all
-   * other values will be rejected with a 400 error.
-   */
-  top_p?: number;
-
-  /**
    * Header param: Optional header to specify the beta version(s) you want to use.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
   /**
    * Header param: The user profile ID to attribute this request to. Use when acting
-   * on behalf of a party other than your organization. Requires the `user-profiles`
-   * beta header.
+   * on behalf of a party other than your organization.
    */
   user_profile_id?: string;
 
@@ -9662,8 +9867,7 @@ export interface MessageCountTokensParams {
    *
    * Note that if you want to include a
    * [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role),
-   * you can use the top-level `system` parameter — there is no `"system"` role for
-   * input messages in the Messages API.
+   * you can use the top-level `system` parameter.
    *
    * There is a limit of 100,000 messages in a single request.
    */
@@ -9881,8 +10085,7 @@ export interface MessageCountTokensParams {
 
   /**
    * Header param: The user profile ID to attribute this request to. Use when acting
-   * on behalf of a party other than your organization. Requires the `user-profiles`
-   * beta header.
+   * on behalf of a party other than your organization.
    */
   user_profile_id?: string;
 
@@ -9898,6 +10101,14 @@ export interface MessageCountTokensParams {
 }
 
 export { BetaToolRunner, type BetaToolRunnerParams } from '../../../lib/tools/BetaToolRunner';
+export {
+  BetaMessageThread,
+  type BetaMessageThreadCreateParams,
+  type BetaMessageThreadRequestOptions,
+  type BetaMessageThreadSendParams,
+  type BetaMessageThreadToolRunnerParams,
+  type UnsupportedRequestBehavior,
+} from '../../../lib/threads/BetaMessageThread';
 export { ToolError } from '../../../lib/tools/ToolError';
 
 Messages.Batches = Batches;
@@ -9918,6 +10129,7 @@ export declare namespace Messages {
     type BetaAdvisorToolResultError as BetaAdvisorToolResultError,
     type BetaAdvisorToolResultErrorParam as BetaAdvisorToolResultErrorParam,
     type BetaAllThinkingTurns as BetaAllThinkingTurns,
+    type BetaAssistantMessageParam as BetaAssistantMessageParam,
     type BetaBase64ImageSource as BetaBase64ImageSource,
     type BetaBase64PDFSource as BetaBase64PDFSource,
     type BetaBashCodeExecutionOutputBlock as BetaBashCodeExecutionOutputBlock,
@@ -10203,9 +10415,11 @@ export declare namespace Messages {
     type BetaMemoryTool20250818StrReplaceCommand as BetaMemoryTool20250818StrReplaceCommand,
     type BetaMemoryTool20250818ViewCommand as BetaMemoryTool20250818ViewCommand,
     type BetaMessage as BetaMessage,
+    type BetaMessageContentParam as BetaMessageContentParam,
     type BetaMessageDeltaUsage as BetaMessageDeltaUsage,
     type BetaMessageIterationUsage as BetaMessageIterationUsage,
     type BetaMessageParam as BetaMessageParam,
+    type BetaMessageThreadParam as BetaMessageThreadParam,
     type BetaMessageTokensCount as BetaMessageTokensCount,
     type BetaMetadata as BetaMetadata,
     type BetaOutputConfig as BetaOutputConfig,
@@ -10247,6 +10461,7 @@ export declare namespace Messages {
     type BetaStopReason as BetaStopReason,
     type BetaSummarizeCompaction as BetaSummarizeCompaction,
     type BetaSystemMessageOutputConfig as BetaSystemMessageOutputConfig,
+    type BetaSystemMessageParam as BetaSystemMessageParam,
     type BetaTextBlock as BetaTextBlock,
     type BetaTextBlockParam as BetaTextBlockParam,
     type BetaTextCitation as BetaTextCitation,
@@ -10275,6 +10490,8 @@ export declare namespace Messages {
     type BetaThinkingMismatchAllowedInputTransformation as BetaThinkingMismatchAllowedInputTransformation,
     type BetaThinkingPrefixMismatchBehavior as BetaThinkingPrefixMismatchBehavior,
     type BetaThinkingTurns as BetaThinkingTurns,
+    type BetaThreadContinueParams as BetaThreadContinueParams,
+    type BetaThreadCreateParams as BetaThreadCreateParams,
     type BetaTokenTaskBudget as BetaTokenTaskBudget,
     type BetaTool as BetaTool,
     type BetaToolBash20241022 as BetaToolBash20241022,
@@ -10319,6 +10536,7 @@ export declare namespace Messages {
     type BetaURLPDFSource as BetaURLPDFSource,
     type BetaUsage as BetaUsage,
     type BetaUserLocation as BetaUserLocation,
+    type BetaUserMessageParam as BetaUserMessageParam,
     type BetaWebFetchBlock as BetaWebFetchBlock,
     type BetaWebFetchBlockParam as BetaWebFetchBlockParam,
     type BetaWebFetchTool20250910 as BetaWebFetchTool20250910,

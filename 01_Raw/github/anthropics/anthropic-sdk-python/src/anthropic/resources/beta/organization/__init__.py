@@ -30,6 +30,14 @@ from .api_keys import (
     APIKeysWithStreamingResponse,
     AsyncAPIKeysWithStreamingResponse,
 )
+from .webhooks import (
+    Webhooks,
+    AsyncWebhooks,
+    WebhooksWithRawResponse,
+    AsyncWebhooksWithRawResponse,
+    WebhooksWithStreamingResponse,
+    AsyncWebhooksWithStreamingResponse,
+)
 from .analytics import (
     Analytics,
     AsyncAnalytics,
@@ -37,6 +45,14 @@ from .analytics import (
     AsyncAnalyticsWithRawResponse,
     AnalyticsWithStreamingResponse,
     AsyncAnalyticsWithStreamingResponse,
+)
+from .claude_tag import (
+    ClaudeTag,
+    AsyncClaudeTag,
+    ClaudeTagWithRawResponse,
+    AsyncClaudeTagWithRawResponse,
+    ClaudeTagWithStreamingResponse,
+    AsyncClaudeTagWithStreamingResponse,
 )
 from .federation import (
     Federation,
@@ -232,6 +248,18 @@ __all__ = [
     "AsyncTelemetryDestinationsWithRawResponse",
     "TelemetryDestinationsWithStreamingResponse",
     "AsyncTelemetryDestinationsWithStreamingResponse",
+    "Webhooks",
+    "AsyncWebhooks",
+    "WebhooksWithRawResponse",
+    "AsyncWebhooksWithRawResponse",
+    "WebhooksWithStreamingResponse",
+    "AsyncWebhooksWithStreamingResponse",
+    "ClaudeTag",
+    "AsyncClaudeTag",
+    "ClaudeTagWithRawResponse",
+    "AsyncClaudeTagWithRawResponse",
+    "ClaudeTagWithStreamingResponse",
+    "AsyncClaudeTagWithStreamingResponse",
     "Organization",
     "AsyncOrganization",
     "OrganizationWithRawResponse",

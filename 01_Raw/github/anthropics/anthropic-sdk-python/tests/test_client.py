@@ -131,6 +131,21 @@ def test_make_status_error_sync_async_parity(status_code: int) -> None:
 
 class TestAnthropic:
     @pytest.mark.respx(base_url=base_url)
+    def test_user_profile_id_header(self, respx_mock: MockRouter, client: Anthropic) -> None:
+        respx_mock.post("/v1/messages").mock(return_value=httpx2.Response(200, json={}))
+
+        client.messages.with_raw_response.create(
+            max_tokens=16,
+            messages=[{"role": "user", "content": "Hello"}],
+            model="claude",
+            user_profile_id="uprof_test",
+        )
+
+        request = respx_mock.calls.last.request
+        assert request.headers["anthropic-user-profile-id"] == "uprof_test"
+        assert "user_profile_id" not in json.loads(request.content)
+
+    @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter, client: Anthropic) -> None:
         respx_mock.post("/foo").mock(return_value=httpx2.Response(200, json={"foo": "bar"}))
 
@@ -538,7 +553,7 @@ class TestAnthropic:
     def test_validate_headers(self) -> None:
         client = Anthropic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("X-Api-Key") == api_key
+        assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         def no_default_credentials(**_kwargs: object) -> None:
             return None
@@ -550,18 +565,22 @@ class TestAnthropic:
 
         with pytest.raises(
             TypeError,
-            match="Could not resolve authentication method. Expected one of api_key, auth_token, or credentials to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted",
+            match="Could not resolve authentication method. Expected one of api_key, auth_token, or credentials to be set. Or for the `Authorization` header to be explicitly omitted",
         ):
             client2._build_request(FinalRequestOptions(method="get", url="/foo"))
 
-        request2 = client2._build_request(FinalRequestOptions(method="get", url="/foo", headers={"X-Api-Key": Omit()}))
-        assert request2.headers.get("X-Api-Key") is None
-        request3 = client2._build_request(FinalRequestOptions(method="get", url="/foo", headers={"x-api-key": Omit()}))
-        assert request3.headers.get("X-Api-Key") is None
-        request4 = client2._build_request(
-            FinalRequestOptions(method="get", url="/foo", headers={"x-api-key": "from-header"})
+        request2 = client2._build_request(
+            FinalRequestOptions(method="get", url="/foo", headers={"Authorization": Omit()})
         )
-        assert request4.headers.get_list("X-Api-Key") == ["from-header"]
+        assert request2.headers.get("Authorization") is None
+        request3 = client2._build_request(
+            FinalRequestOptions(method="get", url="/foo", headers={"authorization": Omit()})
+        )
+        assert request3.headers.get("Authorization") is None
+        request4 = client2._build_request(
+            FinalRequestOptions(method="get", url="/foo", headers={"authorization": "from-header"})
+        )
+        assert request4.headers.get_list("Authorization") == ["from-header"]
 
     def test_default_headers_case_insensitive(self) -> None:
         # replaces the SDK's own `User-Agent` rather than being sent next to it
@@ -1437,6 +1456,29 @@ class TestAnthropic:
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
+    @pytest.mark.respx(base_url=base_url)
+    def test_every_attempt_has_the_qualifiers(
+        self,
+        client: Anthropic,
+        respx_mock: MockRouter,
+        monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        monkeypatch.setattr(BaseClient, "_calculate_retry_timeout", _low_retry_timeout)
+
+        seen: list[object] = []
+
+        def prepare_options(options: FinalRequestOptions) -> FinalRequestOptions:
+            seen.append(options.qualifiers)
+            return options
+
+        client = client.with_options(max_retries=1)
+        monkeypatch.setattr(client, "_prepare_options", prepare_options)
+        respx_mock.get("/foo").mock(side_effect=[httpx2.Response(500), httpx2.Response(200)])
+
+        client.get("/foo", cast_to=httpx2.Response, options=make_request_options(qualifiers={"variant": "b"}))
+
+        assert seen == [{"variant": "b"}, {"variant": "b"}]
+
     def test_proxy_environment_variables(self, monkeypatch: pytest.MonkeyPatch) -> None:
         # Test that the proxy environment variables are set correctly
         monkeypatch.setenv("HTTPS_PROXY", "https://example.org")
@@ -1512,6 +1554,21 @@ class TestAnthropic:
 
 
 class TestAsyncAnthropic:
+    @pytest.mark.respx(base_url=base_url)
+    async def test_user_profile_id_header(self, respx_mock: MockRouter, async_client: AsyncAnthropic) -> None:
+        respx_mock.post("/v1/messages").mock(return_value=httpx2.Response(200, json={}))
+
+        await async_client.messages.with_raw_response.create(
+            max_tokens=16,
+            messages=[{"role": "user", "content": "Hello"}],
+            model="claude",
+            user_profile_id="uprof_test",
+        )
+
+        request = respx_mock.calls.last.request
+        assert request.headers["anthropic-user-profile-id"] == "uprof_test"
+        assert "user_profile_id" not in json.loads(request.content)
+
     @pytest.mark.respx(base_url=base_url)
     async def test_raw_response(self, respx_mock: MockRouter, async_client: AsyncAnthropic) -> None:
         respx_mock.post("/foo").mock(return_value=httpx2.Response(200, json={"foo": "bar"}))
@@ -1926,7 +1983,7 @@ class TestAsyncAnthropic:
     def test_validate_headers(self) -> None:
         client = AsyncAnthropic(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("X-Api-Key") == api_key
+        assert request.headers.get("Authorization") == f"Bearer {api_key}"
 
         def no_default_credentials(**_kwargs: object) -> None:
             return None
@@ -1938,18 +1995,22 @@ class TestAsyncAnthropic:
 
         with pytest.raises(
             TypeError,
-            match="Could not resolve authentication method. Expected one of api_key, auth_token, or credentials to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted",
+            match="Could not resolve authentication method. Expected one of api_key, auth_token, or credentials to be set. Or for the `Authorization` header to be explicitly omitted",
         ):
             client2._build_request(FinalRequestOptions(method="get", url="/foo"))
 
-        request2 = client2._build_request(FinalRequestOptions(method="get", url="/foo", headers={"X-Api-Key": Omit()}))
-        assert request2.headers.get("X-Api-Key") is None
-        request3 = client2._build_request(FinalRequestOptions(method="get", url="/foo", headers={"x-api-key": Omit()}))
-        assert request3.headers.get("X-Api-Key") is None
-        request4 = client2._build_request(
-            FinalRequestOptions(method="get", url="/foo", headers={"x-api-key": "from-header"})
+        request2 = client2._build_request(
+            FinalRequestOptions(method="get", url="/foo", headers={"Authorization": Omit()})
         )
-        assert request4.headers.get_list("X-Api-Key") == ["from-header"]
+        assert request2.headers.get("Authorization") is None
+        request3 = client2._build_request(
+            FinalRequestOptions(method="get", url="/foo", headers={"authorization": Omit()})
+        )
+        assert request3.headers.get("Authorization") is None
+        request4 = client2._build_request(
+            FinalRequestOptions(method="get", url="/foo", headers={"authorization": "from-header"})
+        )
+        assert request4.headers.get_list("Authorization") == ["from-header"]
 
     async def test_default_headers_case_insensitive(self) -> None:
         # replaces the SDK's own `User-Agent` rather than being sent next to it
@@ -2841,6 +2902,29 @@ class TestAsyncAnthropic:
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
+
+    @pytest.mark.respx(base_url=base_url)
+    async def test_every_attempt_has_the_qualifiers(
+        self,
+        async_client: AsyncAnthropic,
+        respx_mock: MockRouter,
+        monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        monkeypatch.setattr(BaseClient, "_calculate_retry_timeout", _low_retry_timeout)
+
+        seen: list[object] = []
+
+        async def prepare_options(options: FinalRequestOptions) -> FinalRequestOptions:
+            seen.append(options.qualifiers)
+            return options
+
+        client = async_client.with_options(max_retries=1)
+        monkeypatch.setattr(client, "_prepare_options", prepare_options)
+        respx_mock.get("/foo").mock(side_effect=[httpx2.Response(500), httpx2.Response(200)])
+
+        await client.get("/foo", cast_to=httpx2.Response, options=make_request_options(qualifiers={"variant": "b"}))
+
+        assert seen == [{"variant": "b"}, {"variant": "b"}]
 
     async def test_get_platform(self) -> None:
         platform = await asyncify(get_platform)()

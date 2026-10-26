@@ -58,7 +58,7 @@ export class Vaults extends APIResource {
   credentials: CredentialsAPI.Credentials = new CredentialsAPI.Credentials(this._client);
 
   /**
-   * Create Vault
+   * Create a Vault
    *
    * @example
    * ```ts
@@ -70,7 +70,7 @@ export class Vaults extends APIResource {
    */
   create(params: VaultCreateParams, options?: RequestOptions): APIPromise<BetaManagedAgentsVault> {
     const { betas, workspace_id, ...body } = params;
-    return this._client.post('/v1/vaults?beta=true', {
+    return this._client.post('/v1/vaults', {
       body,
       ...options,
       headers: buildHeaders([
@@ -80,6 +80,7 @@ export class Vaults extends APIResource {
         },
         options?.headers,
       ]),
+      __qualifiers: { beta: 'true' },
       __span: startApiCallSpan(this._client, 'anthropic.vaults.create', options, {
         route: '/v1/vaults',
         createdIDAttribute: 'anthropic.vault.id',
@@ -88,7 +89,7 @@ export class Vaults extends APIResource {
   }
 
   /**
-   * Get Vault
+   * Retrieve a Vault
    *
    * @example
    * ```ts
@@ -104,7 +105,7 @@ export class Vaults extends APIResource {
     options?: RequestOptions,
   ): APIPromise<BetaManagedAgentsVault> {
     const { betas, workspace_id } = params ?? {};
-    return this._client.get(path`/v1/vaults/${vaultID}?beta=true`, {
+    return this._client.get(path`/v1/vaults/${vaultID}`, {
       ...options,
       headers: buildHeaders([
         {
@@ -113,6 +114,7 @@ export class Vaults extends APIResource {
         },
         options?.headers,
       ]),
+      __qualifiers: { beta: 'true' },
       __span: startApiCallSpan(this._client, 'anthropic.vaults.retrieve', options, {
         route: '/v1/vaults/{vault_id}',
         attributes: { 'anthropic.vault.id': vaultID },
@@ -121,7 +123,7 @@ export class Vaults extends APIResource {
   }
 
   /**
-   * Update Vault
+   * Update a Vault
    *
    * @example
    * ```ts
@@ -137,7 +139,7 @@ export class Vaults extends APIResource {
     options?: RequestOptions,
   ): APIPromise<BetaManagedAgentsVault> {
     const { betas, workspace_id, ...body } = params;
-    return this._client.post(path`/v1/vaults/${vaultID}?beta=true`, {
+    return this._client.post(path`/v1/vaults/${vaultID}`, {
       body,
       ...options,
       headers: buildHeaders([
@@ -147,6 +149,7 @@ export class Vaults extends APIResource {
         },
         options?.headers,
       ]),
+      __qualifiers: { beta: 'true' },
       __span: startApiCallSpan(this._client, 'anthropic.vaults.update', options, {
         route: '/v1/vaults/{vault_id}',
         attributes: { 'anthropic.vault.id': vaultID },
@@ -170,7 +173,7 @@ export class Vaults extends APIResource {
     options?: RequestOptions,
   ): PagePromise<BetaManagedAgentsVaultsPageCursor, BetaManagedAgentsVault> {
     const { betas, workspace_id, ...query } = params ?? {};
-    return this._client.getAPIList('/v1/vaults?beta=true', PageCursor<BetaManagedAgentsVault>, {
+    return this._client.getAPIList('/v1/vaults', PageCursor<BetaManagedAgentsVault>, {
       query,
       ...options,
       headers: buildHeaders([
@@ -180,6 +183,7 @@ export class Vaults extends APIResource {
         },
         options?.headers,
       ]),
+      __qualifiers: { beta: 'true' },
       __span: startApiCallSpan(this._client, 'anthropic.vaults.list', options, {
         route: '/v1/vaults',
         queryParams: ['include_archived', 'limit', 'page'],
@@ -188,7 +192,7 @@ export class Vaults extends APIResource {
   }
 
   /**
-   * Delete Vault
+   * Delete a Vault
    *
    * @example
    * ```ts
@@ -204,7 +208,7 @@ export class Vaults extends APIResource {
     options?: RequestOptions,
   ): APIPromise<BetaManagedAgentsDeletedVault> {
     const { betas, workspace_id } = params ?? {};
-    return this._client.delete(path`/v1/vaults/${vaultID}?beta=true`, {
+    return this._client.delete(path`/v1/vaults/${vaultID}`, {
       ...options,
       headers: buildHeaders([
         {
@@ -213,6 +217,7 @@ export class Vaults extends APIResource {
         },
         options?.headers,
       ]),
+      __qualifiers: { beta: 'true' },
       __span: startApiCallSpan(this._client, 'anthropic.vaults.delete', options, {
         route: '/v1/vaults/{vault_id}',
         attributes: { 'anthropic.vault.id': vaultID },
@@ -221,7 +226,7 @@ export class Vaults extends APIResource {
   }
 
   /**
-   * Archive Vault
+   * Archive a Vault
    *
    * @example
    * ```ts
@@ -237,7 +242,7 @@ export class Vaults extends APIResource {
     options?: RequestOptions,
   ): APIPromise<BetaManagedAgentsVault> {
     const { betas, workspace_id } = params ?? {};
-    return this._client.post(path`/v1/vaults/${vaultID}/archive?beta=true`, {
+    return this._client.post(path`/v1/vaults/${vaultID}/archive`, {
       ...options,
       headers: buildHeaders([
         {
@@ -246,6 +251,7 @@ export class Vaults extends APIResource {
         },
         options?.headers,
       ]),
+      __qualifiers: { beta: 'true' },
       __span: startApiCallSpan(this._client, 'anthropic.vaults.archive', options, {
         route: '/v1/vaults/{vault_id}/archive',
         attributes: { 'anthropic.vault.id': vaultID },
@@ -261,7 +267,7 @@ export type BetaManagedAgentsVaultsPageCursor = PageCursor<BetaManagedAgentsVaul
  */
 export interface BetaManagedAgentsDeletedVault {
   /**
-   * Unique identifier of the deleted vault.
+   * The unique ID of the deleted vault (`vlt_...`).
    */
   id: string;
 
@@ -273,7 +279,7 @@ export interface BetaManagedAgentsDeletedVault {
  */
 export interface BetaManagedAgentsVault {
   /**
-   * Unique identifier for the vault.
+   * The unique ID of the vault (`vlt_...`).
    */
   id: string;
 
@@ -383,7 +389,8 @@ export interface VaultUpdateParams {
 
 export interface VaultListParams extends PageCursorParams {
   /**
-   * Query param: Whether to include archived vaults in the results.
+   * Query param: Whether to include archived vaults in the results. Defaults to
+   * `false`.
    */
   include_archived?: boolean;
 

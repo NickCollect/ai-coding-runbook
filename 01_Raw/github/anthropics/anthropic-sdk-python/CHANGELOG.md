@@ -1,5 +1,123 @@
 # Changelog
 
+## [2.3.0](https://github.com/anthropics/anthropic-sdk-python/compare/v2.2.0...v2.3.0) (2026-10-23)
+
+### Features
+
+* **api:** add Claude Tag endpoints for Claude Enterprise organizations
+
+
+### Bug Fixes
+
+* **google-cloud:** send user profiles requests to the organization endpoint
+
+
+### Chores
+
+* **client:** stop sending query params hardcoded in endpoint paths
+* **docs:** improve the descriptions of the code execution tool and its encrypted results
+* **docs:** reword work queue, skill and external key descriptions
+* **docs:** update descriptions of the per-user usage and cost reports
+* **internal:** carry endpoint path query params to the request layer
+* **internal:** check the repository by owner and public name in workflows
+* **internal:** read the beta route qualifier instead of the beta=true query
+* **internal:** remove preview build upload from CI
+* **internal:** stop sending the beta query param from parse and stream
+
+
+### Documentation
+
+* **mcp:** remove the stray `await` from the async `tool_runner` examples
+* **google-cloud:** update the product name
+* **client:** link the Bedrock and Vertex raw response docstrings to the SDK documentation
+* update the README and the example request
+
+## [2.2.0](https://github.com/anthropics/anthropic-sdk-python/compare/v2.1.0...v2.2.0) (2026-10-23)
+
+### Features
+
+* **api:** add support for message threads
+* **api:** add usage and cost reports by dimension, mark older reports legacy
+
+
+### Bug Fixes
+
+* **client:** stop suggesting math.inf in the max_retries error message
+* **tools:** leave the tool runner's history to the caller after `append_messages()`, and keep the current reply out of the `set_messages_params()` callback
+* **tools:** keep running the tool runner's function tools when `set_messages_params()` gives `tools` as definitions, and stop running one it takes out of `tools`
+* **tools:** give the `set_messages_params()` callback of a tool runner its `tools` as definitions again
+* **tools:** keep a tool runner's `betas`, `user_profile_id` and `workspace_id` when `set_messages_params()` leaves them out
+
+
+### Chores
+
+* **deps:** bump certifi in the dev lockfile
+* **docs:** clarify plugin content scan and validation descriptions
+* **docs:** clarify plugin served_version_pinned and updated_at
+* **docs:** fix usage and cost report examples and ending_at docs
+* **docs:** rate limit model lists vary by organization and workspace
+
+## [2.1.0](https://github.com/anthropics/anthropic-sdk-python/compare/v2.0.0...v2.1.0) (2026-10-21)
+
+### Features
+
+* **api:** add enforcement status, actions and filter to user profiles
+
+## [2.0.0](https://github.com/anthropics/anthropic-sdk-python/compare/v1.17.0...v2.0.0) (2026-10-21)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** add support for new API version 2026-10-21
+
+### Features
+
+* **api:** add a workspace_id filter and the usage_tier scope type to list spend limits
+* **api:** add support for new API version 2026-10-21
+
+
+### Documentation
+
+* **api:** remove outdated system role note from messages description
+
+## [1.17.0](https://github.com/anthropics/anthropic-sdk-python/compare/v1.16.0...v1.17.0) (2026-10-20)
+
+### Features
+
+* **api:** add org webhook endpoints and user profile enforcement events
+* **api:** add RBAC Group owner-access error codes to the Admin API
+* **api:** document the unsupported_charset error code for plugin uploads
+
+
+### Bug Fixes
+
+* **bedrock:** keep a workspace ID set in default_headers on the Bedrock and Mantle clients
+* **google-cloud:** keep workspace and user profile IDs set in default_headers
+
+
+### Chores
+
+* **ci:** run the changelog check on a standard runner
+
+## [1.16.0](https://github.com/anthropics/anthropic-sdk-python/compare/v1.15.0...v1.16.0) (2026-10-20)
+
+### Features
+
+* **api:** add data_refreshed_at and has_more to analytics report pages
+* **api:** add workspace rate-limit updates to the Admin API
+* **api:** make User Profiles generally available
+* **client:** yield server-sent events with unrecognized event names
+* **google-cloud:** use the v1 endpoints and add the organization endpoint
+
+
+### Chores
+
+* **ci:** skip the changelog check on draft pull requests
+* **docs:** add credential expiry descriptions to the Managed Agents API reference
+* **docs:** add Messages API request descriptions
+* **docs:** correct plugin manifest_version and reach descriptions
+* **docs:** improve Managed Agents memory store descriptions
+* **docs:** improve Managed Agents vault and credential descriptions
+
 ## [1.15.0](https://github.com/anthropics/anthropic-sdk-python/compare/v1.14.0...v1.15.0) (2026-10-15)
 
 ### Features

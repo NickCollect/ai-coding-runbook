@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.1.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/bedrock-sdk-v1.0.0...bedrock-sdk-v1.1.0) (2026-10-22)
+
+### Features
+
+* **api:** add support for message threads
+
+## [1.0.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/bedrock-sdk-v0.36.0...bedrock-sdk-v1.0.0) (2026-10-21)
+
+### ⚠ BREAKING CHANGES
+
+* **api:** add support for new API version 2026-10-21
+
+### Features
+
+* **api:** add support for new API version 2026-10-21
+
+## [0.36.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/bedrock-sdk-v0.35.0...bedrock-sdk-v0.36.0) (2026-10-20)
+
+### Features
+
+* **bedrock:** send `user_profile_id` in the request body on `AnthropicBedrockMantle` Messages and token counting requests
+* **bedrock:** throw an `AnthropicError` when `userProfiles` or `beta.userProfiles` is read on `AnthropicBedrock`, which doesn't serve user profiles
+
 ## [0.35.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/bedrock-sdk-v0.34.4...bedrock-sdk-v0.35.0) (2026-10-14)
 
 ### Features
