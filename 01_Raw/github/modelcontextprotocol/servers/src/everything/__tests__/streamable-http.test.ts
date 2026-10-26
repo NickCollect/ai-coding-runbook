@@ -7,13 +7,26 @@
  * only (#4087). The shutdown handler is called directly (#4983), and
  * `startStreamableHttpServer()` is
  * checked with `listenOrExit` stubbed, so no fixed port is ever bound.
+ *
+ * The same endpoint serves 2026-07-28 clients (#4852): a session-less POST
+ * carrying the per-request envelope goes to the SDK's `createMcpHandler`, and
+ * the "2026-07-28 clients" block below drives it with a client that
+ * negotiates that era, including the `Mcp-Param-Region` header the client
+ * mirrors from `get-header-params`'s `x-mcp-header` argument and the change
+ * notifications published on the handler's subscription bus.
+ *
+ * A browser request is served only from a localhost origin: the tests pin
+ * that a foreign `Origin` is refused with a 403 and no CORS grant at every
+ * route, preflights included, and that a localhost one is served.
  */
 import type { Server } from "node:http";
 import { once } from "node:events";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
-import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
+import { NodeStreamableHTTPServerTransport } from "@modelcontextprotocol/node";
+import {
+  Client,
+  StreamableHTTPClientTransport,
+} from "@modelcontextprotocol/client";
 import {
   createApp,
   type StreamableHttpApp,
@@ -328,14 +341,17 @@ describe("Streamable HTTP transport", () => {
 
   it("maps a POST that throws before answering to a JSON-RPC internal error", async () => {
     vi.spyOn(
-      StreamableHTTPServerTransport.prototype,
+      NodeStreamableHTTPServerTransport.prototype,
       "handleRequest",
     ).mockRejectedValueOnce(new Error("boom"));
     const response = await post({ jsonrpc: "2.0", id: 1, method: "ping" });
     expect(response.status).toBe(500);
+    // A session-less POST's body is parsed before it is routed (#4852), so
+    // the error carries the request's id.
     expect(await response.json()).toEqual({
       jsonrpc: "2.0",
       error: { code: -32603, message: "Internal server error" },
+      id: 1,
     });
     expect(log).toHaveBeenCalledWith(
       "Error handling MCP request:",
@@ -346,7 +362,7 @@ describe("Streamable HTTP transport", () => {
   it("leaves a POST alone when it throws after answering", async () => {
     const { sessionId } = await rawInitialize();
     vi.spyOn(
-      StreamableHTTPServerTransport.prototype,
+      NodeStreamableHTTPServerTransport.prototype,
       "handleRequest",
     ).mockImplementationOnce(async (_req, res) => {
       res.writeHead(200).end("partial");
@@ -363,7 +379,7 @@ describe("Streamable HTTP transport", () => {
   it("maps a DELETE that throws to a JSON-RPC internal error, unless it already answered", async () => {
     const { sessionId } = await rawInitialize();
     const handle = vi.spyOn(
-      StreamableHTTPServerTransport.prototype,
+      NodeStreamableHTTPServerTransport.prototype,
       "handleRequest",
     );
     handle.mockRejectedValueOnce(new Error("boom"));
@@ -392,19 +408,149 @@ describe("Streamable HTTP transport", () => {
     );
   });
 
-  it("answers a CORS preflight for any origin and exposes the MCP headers", async () => {
+  it("answers a CORS preflight from a localhost origin, echoing that origin, and exposes the MCP headers", async () => {
     const response = await fetch(mcp, {
       method: "OPTIONS",
       headers: {
-        origin: "http://elsewhere.example",
+        origin: "http://localhost:6274",
         "access-control-request-method": "DELETE",
       },
     });
     expect(response.status).toBe(204);
-    expect(response.headers.get("access-control-allow-origin")).toBe("*");
+    expect(response.headers.get("access-control-allow-origin")).toBe(
+      "http://localhost:6274",
+    );
     expect(response.headers.get("access-control-allow-methods")).toBe(
       "GET,POST,DELETE",
     );
+  });
+
+  it.each(["legacy", "modern"] as const)(
+    "serves a %s-era client whose requests carry a localhost Origin",
+    async (era) => {
+      // Every request the transport makes carries the Origin a browser page
+      // served from localhost would send.
+      const withOrigin = (url: string | URL, init?: RequestInit) => {
+        const headers = new Headers(init?.headers);
+        headers.set("origin", "http://[::1]:6274");
+        return fetch(url, { ...init, headers });
+      };
+      const client = new Client(
+        { name: "http-origin-test", version: "0.0.0" },
+        era === "modern"
+          ? { versionNegotiation: { mode: { pin: "2026-07-28" } } }
+          : {},
+      );
+      await client.connect(
+        new StreamableHTTPClientTransport(new URL(mcp), { fetch: withOrigin }),
+      );
+      expect(client.getProtocolEra()).toBe(era);
+      const result = await client.callTool({
+        name: "echo",
+        arguments: { message: "from localhost" },
+      });
+      expect(result.content).toEqual([
+        { type: "text", text: "Echo: from localhost" },
+      ]);
+      await client.close();
+    },
+  );
+
+  describe("a request from a foreign origin", () => {
+    const FOREIGN = "http://elsewhere.example";
+    const CALL_GET_ENV = {
+      jsonrpc: "2.0",
+      id: 2,
+      method: "tools/call",
+      params: { name: "get-env", arguments: {} },
+    };
+
+    /** POST `message` with a foreign Origin, and expect it refused. */
+    async function expectRefused(message: object, headers = {}) {
+      const response = await fetch(mcp, {
+        method: "POST",
+        headers: { ...JSON_HEADERS, ...headers, origin: FOREIGN },
+        body: JSON.stringify(message),
+      });
+      expect(response.status).toBe(403);
+      expect(response.headers.get("access-control-allow-origin")).toBeNull();
+      expect(await response.json()).toMatchObject({
+        jsonrpc: "2.0",
+        error: { code: -32000 },
+        id: null,
+      });
+    }
+
+    it("is refused at preflight, with no CORS grant", async () => {
+      const response = await fetch(mcp, {
+        method: "OPTIONS",
+        headers: {
+          origin: FOREIGN,
+          "access-control-request-method": "POST",
+        },
+      });
+      expect(response.status).toBe(403);
+      expect(response.headers.get("access-control-allow-origin")).toBeNull();
+    });
+
+    it("cannot start a 2025-era session", async () => {
+      await expectRefused({
+        jsonrpc: "2.0",
+        id: 1,
+        method: "initialize",
+        params: {
+          protocolVersion: "2025-11-25",
+          capabilities: {},
+          clientInfo: { name: "raw", version: "0" },
+        },
+      });
+      expect(log).not.toHaveBeenCalledWith(
+        expect.stringMatching(/^Session initialized/),
+      );
+    });
+
+    it("cannot call a tool on an open 2025-era session", async () => {
+      const { sessionId } = await rawInitialize();
+      await expectRefused(CALL_GET_ENV, {
+        "mcp-session-id": sessionId,
+        "mcp-protocol-version": "2025-11-25",
+      });
+    });
+
+    it("cannot call a tool as a 2026-07-28 client", async () => {
+      const foreign = (url: string | URL, init?: RequestInit) => {
+        const headers = new Headers(init?.headers);
+        headers.set("origin", FOREIGN);
+        return fetch(url, { ...init, headers });
+      };
+      const client = new Client(
+        { name: "http-foreign-test", version: "0.0.0" },
+        { versionNegotiation: { mode: { pin: "2026-07-28" } } },
+      );
+      const attempt = async () => {
+        await client.connect(
+          new StreamableHTTPClientTransport(new URL(mcp), { fetch: foreign }),
+        );
+        return client.callTool({ name: "get-env", arguments: {} });
+      };
+      await expect(attempt()).rejects.toThrow(/403|Invalid Origin/);
+      await client.close();
+    });
+
+    it.each(["GET", "DELETE"])("cannot %s a session", async (method) => {
+      const { sessionId } = await rawInitialize();
+      const response = await fetch(mcp, {
+        method,
+        headers: {
+          accept: "text/event-stream",
+          "mcp-session-id": sessionId,
+          "mcp-protocol-version": "2025-11-25",
+          origin: FOREIGN,
+        },
+        signal: AbortSignal.timeout(2000),
+      });
+      expect(response.status).toBe(403);
+    });
   });
 });
 
@@ -444,7 +590,7 @@ describe("shutdown", () => {
     const { client, sessionId } = await connectHttp();
     const failure = new Error("close failed");
     vi.spyOn(
-      StreamableHTTPServerTransport.prototype,
+      NodeStreamableHTTPServerTransport.prototype,
       "close",
     ).mockRejectedValueOnce(failure);
     await app.shutdown();
@@ -499,5 +645,186 @@ describe("startStreamableHttpServer", () => {
       3001,
       "MCP Streamable HTTP Server listening on port 3001",
     );
+  });
+});
+
+describe("2026-07-28 clients", () => {
+  async function connectModernHttp() {
+    const client = new Client(
+      { name: "http-modern-test", version: "0.0.0" },
+      { versionNegotiation: { mode: { pin: "2026-07-28" } } },
+    );
+    await client.connect(new StreamableHTTPClientTransport(new URL(mcp)));
+    return client;
+  }
+
+  it("serves a 2026-07-28 client with no session", async () => {
+    const client = await connectModernHttp();
+    expect(client.getProtocolEra()).toBe("modern");
+    const result = await client.callTool({
+      name: "echo",
+      arguments: { message: "modern http" },
+    });
+    expect(result.content).toEqual([
+      { type: "text", text: "Echo: modern http" },
+    ]);
+    await client.close();
+  });
+
+  it("serves 2025-era and 2026-07-28 clients from the one endpoint", async () => {
+    const legacy = await connectHttp();
+    const modern = await connectModernHttp();
+    expect(legacy.client.getProtocolEra()).toBe("legacy");
+    expect(legacy.sessionId).toMatch(/^[0-9a-f-]{36}$/);
+    expect(modern.getProtocolEra()).toBe("modern");
+    await Promise.all([legacy.client.close(), modern.close()]);
+  });
+
+  it("receives the argument get-header-params marks with x-mcp-header as an Mcp-Param-Region header", async () => {
+    const client = await connectModernHttp();
+    const result = await client.callTool({
+      name: "get-header-params",
+      arguments: { region: "eu-west" },
+    });
+    expect(result.structuredContent).toEqual({
+      region: "eu-west",
+      regionHeader: "eu-west",
+      repeated: ["eu-west"],
+    });
+    await client.close();
+  });
+
+  it("refuses a call whose Mcp-Param-Region header disagrees with the body (-32020)", async () => {
+    const response = await fetch(mcp, {
+      method: "POST",
+      headers: {
+        ...JSON_HEADERS,
+        "mcp-protocol-version": "2026-07-28",
+        "mcp-method": "tools/call",
+        "mcp-name": "get-header-params",
+        "mcp-param-region": "us-east",
+      },
+      body: JSON.stringify({
+        jsonrpc: "2.0",
+        id: 1,
+        method: "tools/call",
+        params: {
+          name: "get-header-params",
+          arguments: { region: "eu-west" },
+          _meta: {
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+            "io.modelcontextprotocol/clientCapabilities": {},
+          },
+        },
+      }),
+    });
+    expect(response.status).toBe(400);
+    expect(await response.json()).toMatchObject({
+      error: { code: -32020 },
+    });
+  });
+
+  it.each([
+    ["tools", "toolsListChanged", "notifications/tools/list_changed"],
+    ["prompts", "promptsListChanged", "notifications/prompts/list_changed"],
+    [
+      "resources",
+      "resourcesListChanged",
+      "notifications/resources/list_changed",
+    ],
+  ] as const)(
+    "publishes a %s list change to listen streams, across requests",
+    async (list, filter, method) => {
+      const listener = await connectModernHttp();
+      const caller = await connectModernHttp();
+      const arrived = new Promise<void>((resolve) =>
+        listener.setNotificationHandler(method, () => resolve()),
+      );
+      const subscription = await listener.listen({ [filter]: true });
+      await caller.callTool({
+        name: "trigger-list-changed",
+        arguments: { list },
+      });
+      await arrived;
+      await subscription.close();
+      await Promise.all([listener.close(), caller.close()]);
+    },
+  );
+
+  it("publishes a resource update to the listen streams that named the URI", async () => {
+    const uri = "demo://resource/dynamic/text/3";
+    const listener = await connectModernHttp();
+    const arrived = new Promise<string>((resolve) =>
+      listener.setNotificationHandler("notifications/resources/updated", (n) =>
+        resolve(n.params.uri),
+      ),
+    );
+    const subscription = await listener.listen({
+      resourceSubscriptions: [uri],
+    });
+    await listener.callTool({
+      name: "trigger-resource-update",
+      arguments: { uri },
+    });
+    expect(await arrived).toBe(uri);
+    await subscription.close();
+    await listener.close();
+  });
+
+  it("answers a session-less POST that is not JSON with a parse error", async () => {
+    const response = await fetch(mcp, {
+      method: "POST",
+      headers: JSON_HEADERS,
+      body: "{not json",
+    });
+    expect(response.status).toBe(400);
+    expect(await response.json()).toEqual({
+      jsonrpc: "2.0",
+      error: {
+        code: -32700,
+        message: "Parse error: the request body is not valid JSON",
+      },
+      id: null,
+    });
+  });
+
+  it.each(["null", '"x"', "42", "true"])(
+    "answers a session-less POST of the JSON value %s as an invalid request, not a parse error",
+    async (body) => {
+      const response = await fetch(mcp, {
+        method: "POST",
+        headers: JSON_HEADERS,
+        body,
+      });
+      expect(response.status).toBe(400);
+      expect(await response.json()).toMatchObject({
+        jsonrpc: "2.0",
+        error: { code: -32600 },
+        id: null,
+      });
+    },
+  );
+
+  it("answers a session-less POST over 4 MiB with 413", async () => {
+    const response = await fetch(mcp, {
+      method: "POST",
+      headers: JSON_HEADERS,
+      body: JSON.stringify({ pad: "x".repeat(4 * 1024 * 1024) }),
+    });
+    expect(response.status).toBe(413);
+    expect(await response.json()).toEqual({
+      jsonrpc: "2.0",
+      error: { code: -32600, message: "Request body too large" },
+      id: null,
+    });
+  });
+
+  it("leaves any other body error to Express", async () => {
+    const response = await fetch(mcp, {
+      method: "POST",
+      headers: { ...JSON_HEADERS, "content-encoding": "bogus" },
+      body: "{}",
+    });
+    expect(response.status).toBe(415);
   });
 });

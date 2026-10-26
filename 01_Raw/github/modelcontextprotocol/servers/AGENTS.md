@@ -51,18 +51,21 @@ servers/
 │   ├── git/                  Py  mcp-server-git                                   PyPI  Git repository operations
 │   └── time/                 Py  mcp-server-time                                  PyPI  Time and timezone conversion
 ├── .claude/skills/            On-demand procedures (see the Skills index above)
+├── .claude/settings.json     The SessionStart hook that checks this session's instructions are current
 ├── .changeset/               Pending changesets for the TypeScript servers, and the changesets config
-├── scripts/                  The pre-push gate (gate-lease, smoke-servers, validate-py, coverage-py), its guards (verify-*),
+├── scripts/                  The pre-push gate (gate-lease, smoke-servers, validate-py, coverage-py, interface-diff), its guards (verify-*),
 │                             the skills tooling, release tooling (npm-publish-guard, prepare-python-release,
 │                             pack-and-verify, release-manifest, release-notes), and the issue-filing sweeps
-│                             (dependency-refresh, dependabot-alerts, sdk-watch)
+│                             (dependency-refresh, dependabot-alerts, sdk-watch), and the session-start
+│                             instructions check (session-instructions-check)
 ├── docs/                     Design documents; quality-gate.md is the gate's reference (stages, CI vs local, the lease);
 │                             contribution-model.md holds the outside-PR backlog plan; ai-software-factory.md is the
 │                             overview of how the rules, skills, gates and sweeps fit together
 ├── .github/workflows/        typescript.yml, python.yml (per-package CI), release.yml (publishes on a GitHub Release),
 │                             version-packages.yml (the changesets PR), prepare-python-release.yml (the CalVer PR),
-│                             claude.yml (@claude mentions), and the scheduled sweeps that file issues:
-│                             dependency-refresh.yml, dependabot-alerts.yml, sdk-watch.yml
+│                             claude.yml (@claude mentions), everything-mcp-diff.yml (everything's interface diff on PRs),
+│                             main-source.yml (a PR into main must bring nothing that is not on v2/main),
+│                             and the scheduled sweeps that file issues: dependency-refresh.yml, dependabot-alerts.yml, sdk-watch.yml
 ├── .github/ISSUE_TEMPLATE/   Bug and feature issue forms; config.yml routes security and new servers away
 ├── .github/pull_request_template.md   The "issues, not PRs" banner that turns outside PRs away
 ├── RELEASING.md              How packages are versioned and published, and how to recover a failed publish
@@ -95,8 +98,9 @@ opening paragraph instead, as this one does. A format with no comment syntax
 
 ## Development setup
 
-Node **22** for the TypeScript servers. Python **>= 3.10** for the Python
-servers, at the version each server's `.python-version` pins. Python
+Node **24** for the TypeScript servers: the development version and the oldest
+supported (`engines` is `>=24`), and CI validates each TypeScript server on 24
+and 26 in parallel legs. Python **>= 3.10** for the Python servers, at the version each server's `.python-version` pins. Python
 dependencies are managed with **`uv`, never `pip`**.
 
 ```sh
@@ -129,14 +133,15 @@ workspace's format check, lint, typecheck, build and tests), `coverage` (each
 TypeScript workspace's per-file coverage gate), `validate:py`
 (each Python server's locked sync, `ruff check`, `ruff format --check`,
 pyright, pytest and build), `coverage:py` (each Python server's per-file
-coverage gate), `verify:skills:cli`, and `smoke` (every server
-booted over each transport it implements). The stage-by-stage reference, and
-what CI runs where, is [`docs/quality-gate.md`](./docs/quality-gate.md);
+coverage gate), `verify:skills:cli`, `smoke` (every server booted over each
+transport it implements), and `interface-diff` (the `everything` server's MCP
+interface diffed against the base it branched from). The stage-by-stage
+reference, and what CI runs where, is [`docs/quality-gate.md`](./docs/quality-gate.md);
 diagnosing a red stage is the `pre-push-gate` skill.
 
 - **`npm run validate` and the per-package commands above are the inner loop,
-  not a substitute.** They skip the other language, the pinned skills validator
-  and the boot smoke.
+  not a substitute.** They skip the other language, the pinned skills validator,
+  the boot smoke and the interface diff.
 - **Format before committing**: `npm run format` at the root (TypeScript), and
   `uv run --frozen ruff format .` in a Python server you changed. The gate only
   checks formatting; it never rewrites files.
@@ -152,6 +157,10 @@ diagnosing a red stage is the `pre-push-gate` skill.
   publish artifact into an empty directory and boots it, which needs the
   network. `release.yml` runs it before anything publishes, and the `release`
   skill runs it by hand for the ledger.
+- **`verify-main-source` is not a gate stage either.** It applies only to a
+  pull request into `main` (see the merge PR exception under
+  [Contributing](#contributing)), and every local push targets a v2 branch.
+  `main-source.yml` runs it.
 - **`local:*` scripts never run in a workflow, and every CI job declares
   `timeout-minutes`.** The script tests enforce both
   (`scripts/lib/workflow-gate.mjs`). A check added to CI is added to
@@ -268,6 +277,15 @@ Cut feature branches from **`origin/v2/main`**. **Never open a PR against
 `main`**, with one exception: a milestone's merge PR, which the `release`
 skill opens. There is no `v1` line in this repository.
 
+**`v2/main` changes only through a merged PR.** Its ruleset, `v2/main: PRs
+only`, refuses deletion, force-pushes and direct pushes, and has no bypass
+actors. It requires no approvals, so a maintainer can merge their own PR. No
+automation pushes to `v2/main`: the Version Packages and Prepare Python
+Release workflows push branches of their own and open PRs. A workflow that
+needs to push to `v2/main` directly is a change to this rule and its ruleset,
+decided first. The `main` guard (**Source is v2/main**) trusts `v2/main`'s
+history, so this ruleset is what makes that trust hold.
+
 - **Repo**: https://github.com/modelcontextprotocol/servers
 - **Project board**: [Servers V2 (#43)](https://github.com/orgs/modelcontextprotocol/projects/43)
 
@@ -352,8 +370,14 @@ holds for a maintainer's own one-line fix as much as for a feature.
   default branch a closing keyword would close that issue at merge, before
   anything is published. The release issue is closed by hand once the Release
   is published. In place of the checklist it links the **release ledger**. It
-  is merged with a merge commit, never squashed. The flow is the `release`
-  skill.
+  is merged with a merge commit, never squashed. Both are enforced on `main`:
+  its ruleset allows only merge commits, and requires the **Source is
+  v2/main** check (`main-source.yml`), which fails a PR whose head carries
+  any commit not already on `v2/main`. That ruleset has no bypass actors; a
+  release that cannot be a pure merge (a release branch, a hotfix) goes
+  through only by a repo admin disabling it for that one merge and
+  re-enabling it at once, which is never automated. The flow is the
+  `release` skill.
 - **Exception: the two version PRs that automation opens.** Each changes
   version metadata only, so neither answers the PR checklist below, and each
   is tied to its milestone's **release issue** rather than to an issue of its
@@ -362,11 +386,16 @@ holds for a maintainer's own one-line fix as much as for a feature.
     workflow takes the release issue's number, writes `Closes #N` as the
     body's first line, names the branch `v2/chore/<N>-python-calver-<date>`
     and labels it `v2`.
-  - The changesets **"Version Packages"** PR cannot carry a `Closes` line: the
+  - The changesets **"Version Packages"** PR cannot keep a `Closes` line: the
     action rewrites its body on every push to `v2/main`, and its branch is the
     action's own (`changeset-release/v2/main`). The workflow labels it `v2`.
-    Tie it to the release issue with a **comment** (`Part of #N`), which an
-    update does not overwrite.
+    It is still **linked** to the release issue like every other PR: with
+    `addCloseIssueReferences` as soon as it is found, since the link lives
+    outside the body and survives the rewrites (on `v2/main` it closes
+    nothing at merge). Its body's first line becomes **`Part of #N`
+    immediately before merging**, after the last regeneration, and is checked
+    to still be there at merge. A `Part of #N` **comment** stays as the
+    durable textual record, since an update does not overwrite it.
 
 No other PR is exempt.
 
@@ -407,7 +436,9 @@ measure it, is [`docs/skill-authoring.md`](./docs/skill-authoring.md).
    works while the skill can never auto-fire; an unquoted `#` truncates the
    description silently.
    **Quote any description containing `#` or `:`**, and keep the opening `---`
-   on the file's first line.
+   on the file's first line. **A body holds no `$0`–`$9` and no `$ARGUMENTS`**:
+   Claude Code substitutes them when a skill is invoked with arguments, so a
+   recipe's shell parameters or awk fields reach the model rewritten.
 2. **Every skill declares `disable-model-invocation` explicitly. Default it to
    `false`.** Invoking a skill has no side effects (it loads instructions), and
    work is usually asked for in prose, which a `true` skill can never answer. A
@@ -445,8 +476,11 @@ here.
     that opaque until publication: board access is wider than advisory access,
     and a summary can name the server or the attack. It becomes a public
     issue by conversion **once the advisory is published**, never merely once
-    the fix ships. The `[GHSA-` prefix is load-bearing: **any other draft card
-    is still a defect to delete**. The flow is the `security-advisory` skill.
+    the fix ships. Work the fix leaves open is tracked by a second draft card,
+    `[GHSA-xxxx-yyyy-zzzz follow-up]`, under the same rules. It stays open
+    after conversion, because its work has not shipped. The `[GHSA-` prefix is
+    load-bearing: **any other draft card is still a defect to delete**. The flow
+    is the `security-advisory` skill.
     **Accepting, closing and publishing an advisory, and replying to its
     reporter, are human-only; never automate or bulk-apply any of them.**
 - **Only issues go on the board, never PRs.** A PR is tracked through its linked
@@ -476,10 +510,54 @@ here.
 - **`Done` means the work shipped**: its PR merged, or it is a parent whose last
   sub-issue closed. A duplicate, won't-fix, not-planned or superseded issue
   shipped nothing, so its card is **deleted** rather than moved to Done.
+- **All work happens in a git worktree freshly cut from `origin/v2/main`, and
+  the agent session runs inside it.** Not only PR branches: release
+  verification, audits, triage, investigation and anything else done in a
+  checkout. `git fetch origin` first, then `git worktree add` from
+  `origin/v2/main`: a new branch for PR work, `--detach` for work that
+  commits nothing. Never work in the primary checkout, which concurrent agent
+  sessions share, and never in an existing worktree without first confirming
+  it is at the current `origin/v2/main`.
+  - **Start the session in that worktree.** Claude Code loads this file and
+    `.claude/skills/` from the directory the session starts in, once, at
+    session start; a worktree created later does not change what was loaded.
+    A session started in a stale checkout follows stale rules for its whole
+    run, however fresh the branches it cuts are (the v2.0.0 release did,
+    #5167). A session that finds itself elsewhere checks before doing
+    anything:
+
+    ```sh
+    git fetch origin v2/main
+    git diff --quiet HEAD...origin/v2/main -- ':/AGENTS.md' ':/.claude/' \
+      || echo "STALE: instructions differ from origin/v2/main"
+    ```
+
+    The three dots compare against where `HEAD` branched from `v2/main`, so
+    a branch's own edits to the instructions do not read as stale; the `:/`
+    anchors the paths at the repository root, so the check means the same
+    from any directory. **If it is stale, stop and ask for a session started
+    in a fresh worktree**, rather than continuing on rules you cannot trust.
+
+  - The `SessionStart` hook in `.claude/settings.json`
+    (`scripts/session-instructions-check.mjs`) runs that check at every
+    session start and prints its verdict into the session, with a note when
+    the session started in the primary checkout. A `STALE` line from it is
+    the same stop.
+  - **A long session re-checks after `v2/main` moves under it**, for
+    example after its own PRs merge, **from the revision it started at, not
+    from `HEAD`**: once the session moves into a newer worktree, that
+    worktree's `HEAD` can match `origin/v2/main` while the rules the session
+    holds are still the old ones. The hook prints the session-start revision
+    and the exact re-check command; without the hook, record
+    `git rev-parse HEAD` in the starting checkout before anything else, and
+    put it in place of `HEAD` above.
 - **When work begins**, assign the issue to yourself, set Status to
   **In Progress**, and create a branch named
   `v2/<type>/<ISSUE_NUMBER>-<slug>` (for example
-  `v2/fix/4810-filesystem-symlink-escape`) from `origin/v2/main`.
+  `v2/fix/4810-filesystem-symlink-escape`) from `origin/v2/main`, in a new
+  worktree under the rule above. Remove the worktree once the PR merges or is
+  closed. The recipe is the `pr-flow` skill (step 2, and step 10 for the
+  removal).
 - **When work is complete**, run the checks under
   [Before pushing](#before-pushing), open a PR against `v2/main` labeled `v2`
   with `Closes #<ISSUE_NUMBER>` as the body's first line, and set Status to
@@ -575,6 +653,14 @@ would not, burns turns, and buries the result under no-op turns.
 - ⚠️ **If a notifier is already armed, wait for it.** Re-checking by hand
   alongside it is the polling this rule forbids.
 
+## Pacing GitHub writes
+
+**Pace bulk GitHub writes: 1 s between requests, never in parallel, under 80 a
+minute and 500 an hour.** The secondary limit refuses while `gh api rate_limit`
+still shows quota, and most `gh` writes are GraphQL. After a refusal, wait out
+`retry-after`, or a minute without one; a refused create can still land, so
+look before retrying.
+
 ## MCP protocol
 
 - **Look protocol questions up; do not answer them from memory.** The repo
@@ -582,6 +668,14 @@ would not, burns turns, and buries the result under no-op turns.
   `https://modelcontextprotocol.io/mcp`). For schema details use the versioned
   schemas (JSON and TypeScript) in
   [modelcontextprotocol/schema](https://github.com/modelcontextprotocol/modelcontextprotocol/tree/main/schema).
+- **Protocol eras**: every TypeScript server serves both 2026-07-28 clients
+  and 2025-era clients from one factory: stdio through the SDK's
+  `serveStdio`, Streamable HTTP through `createMcpHandler`. Keep no state in
+  a map keyed by session id, since 2026-07-28 has no sessions: per-connection
+  state lives on the server instance, and state that must outlive a
+  2026-07-28 request lives under a handle the server mints. Ask a client for
+  input (elicitation, sampling, roots) by returning `inputRequired(...)`,
+  which the SDK's legacy shim also serves to 2025-era clients.
 - **Transports**: stdio is the default and every server supports it.
   `everything` also serves Streamable HTTP and HTTP+SSE. **HTTP+SSE is
   deprecated**: keep what exists working, and never make it the default or the

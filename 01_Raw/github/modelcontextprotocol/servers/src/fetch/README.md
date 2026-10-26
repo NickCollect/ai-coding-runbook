@@ -6,7 +6,7 @@ A Model Context Protocol server that provides web content fetching capabilities.
 
 Source: https://github.com/modelcontextprotocol/servers/tree/main/src/fetch
 
-Requires MCP Python SDK 1.x (`mcp>=1.29.0,<2`). SDK 2.0 renamed APIs this server uses. The port to v2 is in progress.
+Requires MCP Python SDK 2.x (`mcp>=2.3,<3`).
 
 > [!CAUTION]
 > This server can access local/internal IP addresses and may represent a security risk. Exercise caution when using this MCP server to ensure this does not expose any sensitive data.
@@ -30,6 +30,18 @@ The fetch tool will truncate the response, but by using the `start_index` argume
   - Fetch a URL and extract its contents as markdown
   - Arguments:
     - `url` (string, required): URL to fetch
+
+### Errors
+
+- A failed fetch (a robots.txt refusal, an unreachable page, an HTTP error status, a refused private address, an unusable proxy setting) and arguments that do not match the tool's schema are returned as a tool result with `isError: true`, whose text starts `Error executing tool fetch:` and says what went wrong, so the model can read it and decide what to do.
+- Calling a tool the server does not have is a JSON-RPC protocol error, `-32602` (`Unknown tool: <name>`), as the specification requires. So is getting a prompt it does not have (`Unknown prompt: <name>`), or the `fetch` prompt without its `url` (`URL is required`).
+- When the `fetch` prompt's fetch fails, the prompt still returns: its message holds the reason the fetch failed.
+
+The server is built on the MCP Python SDK's high-level `MCPServer`: the tool and the prompt are decorated functions, and their type hints and field descriptions are the input schema and the prompt's arguments.
+
+### Protocol versions
+
+The server speaks both eras of the Model Context Protocol over stdio, with nothing to configure: a **2026-07-28** client (discovered with `server/discover`, no session) and a **2025-11-25** client (the `initialize` handshake). The client's first request decides which. Tools and prompts behave the same in both. Methods the 2026-07-28 specification removes, such as `ping`, are answered only on a 2025-11-25 connection.
 
 ## Installation
 
@@ -156,15 +168,17 @@ Optionally, you can add it to a file called `.vscode/mcp.json` in your workspace
 ### Customization - robots.txt
 
 By default, the server will obey a websites robots.txt file if the request came from the model (via a tool), but not if
-the request was user initiated (via a prompt). This can be disabled by adding the argument `--ignore-robots-txt` to the
-`args` list in the configuration.
+the request was user initiated (via a prompt). Every redirect hop of a tool fetch is checked against the robots.txt of
+the host it leads to, the same way as the requested URL. This can be disabled by adding the argument
+`--ignore-robots-txt` to the `args` list in the configuration.
 
 ### Customization - Private addresses
 
 By default, the server refuses any request, including a redirect hop or a robots.txt fetch, whose host resolves to an
 address that is not globally routable: loopback (`127.0.0.0/8`, `::1`), private (`10.0.0.0/8`, `172.16.0.0/12`,
 `192.168.0.0/16`, `fc00::/7`), link-local (`169.254.0.0/16`, `fe80::/10`), shared address space (`100.64.0.0/10`),
-multicast, unspecified, documentation and the other IANA special-purpose ranges. A hostname is refused if any one of its addresses is in those ranges.
+multicast, unspecified, documentation and the other IANA special-purpose ranges. An IPv4-mapped (`::ffff:0:0/96`) or
+well-known NAT64 (`64:ff9b::/96`) address is judged by the IPv4 address it carries. A hostname is refused if any one of its addresses is in those ranges.
 The client receives an error naming the refused address.
 
 To fetch from local or internal hosts (a development server, an intranet page), add the argument
@@ -259,7 +273,7 @@ uv sync --frozen --all-extras --dev
 uv run --frozen pytest
 ```
 
-The tests drive `serve()` through an MCP `ClientSession` in-process, with HTTP mocked, so they need no network. The HTML extraction tests need Node.js on `PATH` (readabilipy uses Readability.js when Node is present and a pure-Python fallback when it is not).
+The tests drive `serve()` through an MCP `ClientSession` in-process (and, in `tests/test_eras.py`, through a `Client` as a 2026-07-28 and as a 2025-11-25 client), with HTTP mocked, so they need no network. The HTML extraction tests need Node.js on `PATH` (readabilipy uses Readability.js when Node is present and a pure-Python fallback when it is not).
 
 Coverage, measured per file with branch coverage:
 
