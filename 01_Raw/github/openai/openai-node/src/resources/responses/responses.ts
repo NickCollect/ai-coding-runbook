@@ -16,7 +16,10 @@ import { path } from '../../internal/utils/path';
 
 import {
   type ExtractParsedContentFromParams,
+  type ParsedWithOptions,
   parseResponse,
+  resolveResponseParseOptions,
+  type ResponseParseOptions,
   type ResponseCreateParamsWithTools,
   addOutputText,
 } from '../../lib/ResponsesParser';
@@ -453,23 +456,31 @@ export class Responses extends APIResource {
     );
   }
 
-  parse<Params extends ResponseCreateParamsWithTools, ParsedT = ExtractParsedContentFromParams<Params>>(
-    body: Params,
-    options?: RequestOptions,
-  ): APIPromise<ParsedResponse<ParsedT>> {
+  /** Parses completed text using the last format update or the local `parseAs` option. */
+  parse<
+    Params extends ResponseCreateParamsWithTools,
+    ParsedT = ExtractParsedContentFromParams<Params>,
+    Options extends ResponseParseOptions = RequestOptions,
+  >(body: Params, options?: Options): APIPromise<ParsedResponse<ParsedWithOptions<Options, ParsedT>>> {
+    const { getTextFormat, requestOptions } = resolveResponseParseOptions(body, options);
     return this._client.responses
-      .create(body, options)
-      ._thenUnwrap((response) => parseResponse(response as Response, body));
+      .create(body, requestOptions)
+      ._thenUnwrap((response, { options: prepared }) =>
+        parseResponse<Params, ParsedWithOptions<Options, ParsedT>>(
+          response as Response,
+          body,
+          getTextFormat(prepared),
+        ),
+      );
   }
 
-  /**
-   * Creates a model response stream
-   */
-  stream<Params extends ResponseStreamParams, ParsedT = ExtractParsedContentFromParams<Params>>(
-    body: Params,
-    options?: RequestOptions,
-  ): ResponseStream<ParsedT> {
-    return ResponseStream.createResponse<ParsedT>(this._client, body, options);
+  /** Creates a response stream with the same local parsing options as `parse()`. */
+  stream<
+    Params extends ResponseStreamParams,
+    ParsedT = ExtractParsedContentFromParams<Params>,
+    Options extends ResponseParseOptions = RequestOptions,
+  >(body: Params, options?: Options): ResponseStream<ParsedWithOptions<Options, ParsedT>> {
+    return ResponseStream.createResponse<ParsedWithOptions<Options, ParsedT>>(this._client, body, options);
   }
 }
 
@@ -1555,6 +1566,22 @@ export interface Response {
   text?: ResponseTextConfig;
 
   /**
+   * Usage reported by hosted tools, separate from base model `usage`. The field can
+   * be omitted when tool usage is unavailable. When present, tool families with no
+   * recorded usage have zero counts.
+   *
+   * `image_gen` sums available token counts across image generation calls. Calls
+   * with missing or incomplete usage records may be skipped. Output token details
+   * and cached input counts can be omitted. An omitted cache count means cache usage
+   * is unknown.
+   *
+   * `web_search.num_requests` counts billable searches. Discounted searches and
+   * actions such as opening a page are excluded. Use billing records to reconcile
+   * final charges.
+   */
+  tool_usage?: Response.ToolUsage;
+
+  /**
    * An integer between 0 and 20 specifying the maximum number of most likely tokens
    * to return at each token position, each with an associated log probability. In
    * some cases, the number of returned tokens may be fewer than requested.
@@ -1819,6 +1846,116 @@ export namespace Response {
      * The response ID supplied as the prompt cache diagnostics comparison.
      */
     comparison_response_id?: string | null;
+  }
+
+  /**
+   * Usage reported by hosted tools, separate from base model `usage`. The field can
+   * be omitted when tool usage is unavailable. When present, tool families with no
+   * recorded usage have zero counts.
+   *
+   * `image_gen` sums available token counts across image generation calls. Calls
+   * with missing or incomplete usage records may be skipped. Output token details
+   * and cached input counts can be omitted. An omitted cache count means cache usage
+   * is unknown.
+   *
+   * `web_search.num_requests` counts billable searches. Discounted searches and
+   * actions such as opening a page are excluded. Use billing records to reconcile
+   * final charges.
+   */
+  export interface ToolUsage {
+    /**
+     * Aggregated usage statistics for image generation tool calls.
+     */
+    image_gen: ToolUsage.ImageGen;
+
+    /**
+     * Aggregated billable usage statistics for web search tool calls.
+     */
+    web_search: ToolUsage.WebSearch;
+  }
+
+  export namespace ToolUsage {
+    /**
+     * Aggregated usage statistics for image generation tool calls.
+     */
+    export interface ImageGen {
+      /**
+       * The number of tokens (images and text) in the input prompt.
+       */
+      input_tokens: number;
+
+      /**
+       * The input tokens detailed information for the image generation.
+       */
+      input_tokens_details: ImageGen.InputTokensDetails;
+
+      /**
+       * The number of output tokens generated by the model.
+       */
+      output_tokens: number;
+
+      /**
+       * The total number of tokens (images and text) used for the image generation.
+       */
+      total_tokens: number;
+
+      cached_tokens?: number;
+
+      cached_tokens_details?: ImageGen.CachedTokensDetails;
+
+      /**
+       * The output token details for the image generation.
+       */
+      output_tokens_details?: ImageGen.OutputTokensDetails;
+    }
+
+    export namespace ImageGen {
+      /**
+       * The input tokens detailed information for the image generation.
+       */
+      export interface InputTokensDetails {
+        /**
+         * The number of image tokens in the input prompt.
+         */
+        image_tokens: number;
+
+        /**
+         * The number of text tokens in the input prompt.
+         */
+        text_tokens: number;
+      }
+
+      export interface CachedTokensDetails {
+        cached_image_tokens: number;
+
+        cached_text_tokens: number;
+      }
+
+      /**
+       * The output token details for the image generation.
+       */
+      export interface OutputTokensDetails {
+        /**
+         * The number of image output tokens generated by the model.
+         */
+        image_tokens: number;
+
+        /**
+         * The number of text output tokens generated by the model.
+         */
+        text_tokens: number;
+      }
+    }
+
+    /**
+     * Aggregated billable usage statistics for web search tool calls.
+     */
+    export interface WebSearch {
+      /**
+       * The number of billable web search requests issued.
+       */
+      num_requests: number;
+    }
   }
 }
 
@@ -2742,8 +2879,8 @@ export interface ResponseComputerToolCallOutputScreenshot {
 }
 
 /**
- * A configuration update that applies to subsequent responses until it is replaced
- * by another configuration update.
+ * A configuration update for subsequent responses. Each setting stays in effect
+ * until a later update replaces that setting.
  */
 export interface ResponseConfigurationUpdateItem {
   /**
@@ -2760,6 +2897,11 @@ export interface ResponseConfigurationUpdateItem {
    * The reasoning configuration applied by this update.
    */
   reasoning?: ResponseConfigurationUpdateItem.Reasoning;
+
+  /**
+   * The text output configuration for subsequent responses.
+   */
+  text?: ResponseConfigurationUpdateItem.Text;
 }
 
 export namespace ResponseConfigurationUpdateItem {
@@ -2773,12 +2915,21 @@ export namespace ResponseConfigurationUpdateItem {
      */
     effort?: Shared.ReasoningEffort | null;
   }
+
+  /**
+   * The text output configuration for subsequent responses.
+   */
+  export interface Text {
+    /**
+     * Use a JSON schema for structured output or text to return to plain text.
+     */
+    format: Shared.ResponseFormatText | ResponsesAPI.ResponseFormatTextJSONSchemaConfig;
+  }
 }
 
 /**
- * An update to the conversation's response configuration. The configuration
- * remains in effect for subsequent responses until it is replaced by another
- * configuration update.
+ * An update to the conversation's response configuration. Supply reasoning, text,
+ * or both. Each setting stays in effect until a later update replaces it.
  */
 export interface ResponseConfigurationUpdateItemParam {
   /**
@@ -2795,6 +2946,11 @@ export interface ResponseConfigurationUpdateItemParam {
    * Updates to reasoning configuration. Only effort is supported.
    */
   reasoning?: ResponseConfigurationUpdateItemParam.Reasoning;
+
+  /**
+   * The text output configuration for subsequent responses.
+   */
+  text?: ResponseConfigurationUpdateItemParam.Text;
 }
 
 export namespace ResponseConfigurationUpdateItemParam {
@@ -2807,6 +2963,16 @@ export namespace ResponseConfigurationUpdateItemParam {
      * update replaces it.
      */
     effort?: Shared.ReasoningEffort | null;
+  }
+
+  /**
+   * The text output configuration for subsequent responses.
+   */
+  export interface Text {
+    /**
+     * Use a JSON schema for structured output or text to return to plain text.
+     */
+    format: Shared.ResponseFormatText | ResponsesAPI.ResponseFormatTextJSONSchemaConfig;
   }
 }
 
@@ -4406,18 +4572,18 @@ export interface ResponseInputFile {
   filename?: string;
 
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   prompt_cache_breakpoint?: ResponseInputFile.PromptCacheBreakpoint;
 }
 
 export namespace ResponseInputFile {
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   export interface PromptCacheBreakpoint {
     /**
@@ -4471,18 +4637,18 @@ export interface ResponseInputFileContent {
   filename?: string | null;
 
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   prompt_cache_breakpoint?: ResponseInputFileContent.PromptCacheBreakpoint | null;
 }
 
 export namespace ResponseInputFileContent {
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   export interface PromptCacheBreakpoint {
     /**
@@ -4525,18 +4691,18 @@ export interface ResponseInputImage {
   image_url?: string | null;
 
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   prompt_cache_breakpoint?: ResponseInputImage.PromptCacheBreakpoint;
 }
 
 export namespace ResponseInputImage {
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   export interface PromptCacheBreakpoint {
     /**
@@ -4579,18 +4745,18 @@ export interface ResponseInputImageContent {
   image_url?: string | null;
 
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   prompt_cache_breakpoint?: ResponseInputImageContent.PromptCacheBreakpoint | null;
 }
 
 export namespace ResponseInputImageContent {
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   export interface PromptCacheBreakpoint {
     /**
@@ -5685,18 +5851,18 @@ export interface ResponseInputText {
   type: 'input_text';
 
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   prompt_cache_breakpoint?: ResponseInputText.PromptCacheBreakpoint;
 }
 
 export namespace ResponseInputText {
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   export interface PromptCacheBreakpoint {
     /**
@@ -5726,18 +5892,18 @@ export interface ResponseInputTextContent {
   type: 'input_text';
 
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   prompt_cache_breakpoint?: ResponseInputTextContent.PromptCacheBreakpoint | null;
 }
 
 export namespace ResponseInputTextContent {
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   export interface PromptCacheBreakpoint {
     /**
@@ -9243,8 +9409,8 @@ export namespace ResponseToolSearchOutputItemParam {
     /**
      * Control how much effort the model will exert to match the style and features,
      * especially facial features, of input images. Supports `high` and `low` on
-     * `gpt-image-1` and `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For
-     * `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
+     * `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit
+     * this parameter. Defaults to `low` on supported models.
      */
     input_fidelity?: 'high' | 'low' | null;
 
@@ -9263,6 +9429,11 @@ export namespace ResponseToolSearchOutputItemParam {
      *
      * `gpt-image-1` was shut down on October 23, 2026. Use `gpt-image-2.5-sunburst` or
      * `gpt-image-2.5-flare` instead.
+     *
+     * Deprecated values:
+     *
+     * - "gpt-image-1": GPT Image 1 was shut down on October 23, 2026. Use
+     *   gpt-image-2.5-sunburst or gpt-image-2.5-flare instead.
      */
     model?:
       | (string & {})
@@ -9531,6 +9702,13 @@ export namespace ResponsesClientEvent {
      * response completes.
      */
     conversation?: string | ResponsesAPI.ResponseConversationParam | null;
+
+    /**
+     * Whether to generate output for this response. Defaults to true when omitted. Set
+     * to false to prepare request state without model output; the response ID can be
+     * used as previous_response_id on a later turn.
+     */
+    generate?: boolean;
 
     /**
      * Specify additional output data to include in the model response. Currently
@@ -11160,8 +11338,8 @@ export namespace Tool {
     /**
      * Control how much effort the model will exert to match the style and features,
      * especially facial features, of input images. Supports `high` and `low` on
-     * `gpt-image-1` and `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For
-     * `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
+     * `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit
+     * this parameter. Defaults to `low` on supported models.
      */
     input_fidelity?: 'high' | 'low' | null;
 
@@ -11180,6 +11358,11 @@ export namespace Tool {
      *
      * `gpt-image-1` was shut down on October 23, 2026. Use `gpt-image-2.5-sunburst` or
      * `gpt-image-2.5-flare` instead.
+     *
+     * Deprecated values:
+     *
+     * - "gpt-image-1": GPT Image 1 was shut down on October 23, 2026. Use
+     *   gpt-image-2.5-sunburst or gpt-image-2.5-flare instead.
      */
     model?:
       | (string & {})
@@ -12242,6 +12425,7 @@ export interface ResponseCompactParams {
   model:
     | 'gpt-6-astra'
     | 'gpt-6.1-sol'
+    | 'gpt-6.1-terra'
     | 'gpt-6-sol'
     | 'gpt-6-luna'
     | 'gpt-5.6-sol'

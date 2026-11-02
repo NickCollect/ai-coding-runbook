@@ -566,6 +566,50 @@
       ],
       "type": "object"
     },
+    "BodySecretReplacement": {
+      "additionalProperties": false,
+      "properties": {
+        "placeholder": {
+          "type": "string"
+        },
+        "secret": {
+          "$ref": "#/definitions/ProxySecretSource"
+        }
+      },
+      "required": [
+        "placeholder",
+        "secret"
+      ],
+      "type": "object"
+    },
+    "BodySecretSubstitutionConfig": {
+      "additionalProperties": false,
+      "description": "Exact opaque placeholders scoped by their enclosing host/method/path MITM hook.",
+      "properties": {
+        "max_body_bytes": {
+          "default": 8388608,
+          "format": "uint",
+          "minimum": 0.0,
+          "type": "integer"
+        },
+        "port": {
+          "default": 443,
+          "format": "uint16",
+          "minimum": 0.0,
+          "type": "integer"
+        },
+        "replacements": {
+          "items": {
+            "$ref": "#/definitions/BodySecretReplacement"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "replacements"
+      ],
+      "type": "object"
+    },
     "BrowserUseConfigToml": {
       "additionalProperties": false,
       "properties": {
@@ -819,6 +863,9 @@
             "apps": {
               "type": "boolean"
             },
+            "apps_early_resource_discovery": {
+              "type": "boolean"
+            },
             "apps_mcp_path_override": {
               "anyOf": [
                 {
@@ -880,6 +927,9 @@
             "code_mode_host_grpc": {
               "type": "boolean"
             },
+            "code_mode_host_output_truncation": {
+              "type": "boolean"
+            },
             "code_mode_interrupt": {
               "type": "boolean"
             },
@@ -932,6 +982,9 @@
               "$ref": "#/definitions/FeatureToml_for_ContextManagementConfigToml"
             },
             "credential_masking": {
+              "type": "boolean"
+            },
+            "critical_path_timing": {
               "type": "boolean"
             },
             "current_time_reminder": {
@@ -997,6 +1050,9 @@
             "fast_mode": {
               "type": "boolean"
             },
+            "gcp_setup_wizard": {
+              "type": "boolean"
+            },
             "goals": {
               "type": "boolean"
             },
@@ -1010,6 +1066,9 @@
               "type": "boolean"
             },
             "guardian_ext": {
+              "type": "boolean"
+            },
+            "guardian_native_multi_agent_history": {
               "type": "boolean"
             },
             "guardian_node_repl_transcript_images": {
@@ -1069,10 +1128,16 @@
             "in_app_voice": {
               "type": "boolean"
             },
+            "incremental_exec_tools": {
+              "type": "boolean"
+            },
             "incremental_tools": {
               "type": "boolean"
             },
             "instant_interrupt": {
+              "type": "boolean"
+            },
+            "interrupt_on_cancel": {
               "type": "boolean"
             },
             "item_ids": {
@@ -1094,6 +1159,9 @@
               "type": "boolean"
             },
             "mcp_2026_07_28": {
+              "type": "boolean"
+            },
+            "mcp_connection_sharing": {
               "type": "boolean"
             },
             "mcp_oauth_refresh_coordination": {
@@ -1141,10 +1209,16 @@
             "omit_app_server_notification_media": {
               "type": "boolean"
             },
+            "omit_skill_descriptions": {
+              "type": "boolean"
+            },
             "output_token_replay": {
               "type": "boolean"
             },
             "personality": {
+              "type": "boolean"
+            },
+            "plugin_discovery_prefetch": {
               "type": "boolean"
             },
             "plugin_hooks": {
@@ -1157,6 +1231,9 @@
               "type": "boolean"
             },
             "powershell_shell_version": {
+              "type": "boolean"
+            },
+            "prediction_preserve_parent_tools": {
               "type": "boolean"
             },
             "prefer_mxc": {
@@ -1249,6 +1326,12 @@
             "shell_zsh_fork": {
               "type": "boolean"
             },
+            "simplified_selection_hints": {
+              "type": "boolean"
+            },
+            "skill_catalog_deltas": {
+              "type": "boolean"
+            },
             "skill_env_var_dependency_prompt": {
               "type": "boolean"
             },
@@ -1283,6 +1366,9 @@
               "type": "boolean"
             },
             "subagent_thread_environments": {
+              "type": "boolean"
+            },
+            "suppress_model_change_announcements": {
               "type": "boolean"
             },
             "system_proxy_fallback": {
@@ -1321,6 +1407,9 @@
             "tui_app_server": {
               "type": "boolean"
             },
+            "tui_extensions_statusline": {
+              "type": "boolean"
+            },
             "tui_multi_backend": {
               "type": "boolean"
             },
@@ -1346,6 +1435,9 @@
               "type": "boolean"
             },
             "unified_image_budget": {
+              "type": "boolean"
+            },
+            "untrusted_as_tool_output": {
               "type": "boolean"
             },
             "use_agent_identity": {
@@ -1905,8 +1997,26 @@
         "client_id": {
           "type": "string"
         },
+        "credentials_store": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OAuthCredentialsStore"
+            }
+          ],
+          "description": "Where Codex stores this gateway's OAuth credentials. Defaults to the keyring-backed store."
+        },
         "delivery": {
-          "$ref": "#/definitions/GatewayOAuthDelivery"
+          "allOf": [
+            {
+              "$ref": "#/definitions/GatewayOAuthDelivery"
+            }
+          ],
+          "default": {
+            "kind": "header",
+            "name": "Authorization",
+            "scheme": "Bearer"
+          },
+          "description": "Omit to send the gateway token via the Authorization header"
         },
         "redirect_port": {
           "format": "uint16",
@@ -1930,7 +2040,6 @@
       "required": [
         "authorization_url",
         "client_id",
-        "delivery",
         "token_url"
       ],
       "type": "object"
@@ -2760,6 +2869,10 @@
           "description": "Model used for memory consolidation.",
           "type": "string"
         },
+        "consolidation_service_tier": {
+          "description": "Service tier for memory consolidation. Defaults to Standard (`\"default\"`).",
+          "type": "string"
+        },
         "dedicated_tools": {
           "description": "When `true`, expose dedicated memory tools through the extension tool surface.",
           "type": "boolean"
@@ -2943,6 +3056,10 @@
       "additionalProperties": false,
       "description": "Overrides for the optional API features supported by a custom provider.",
       "properties": {
+        "cyber_access_programs": {
+          "description": "Whether the provider accepts explicit `access_programs.cyber` selections. Defaults to enabled for the built-in OpenAI provider and disabled otherwise. This does not grant program access or change authentication.",
+          "type": "boolean"
+        },
         "external_web_access": {
           "description": "Whether hosted web search may access the live web.",
           "type": "boolean"
@@ -2990,6 +3107,10 @@
           ],
           "description": "Optional API capability overrides for a custom Responses-compatible provider. Unspecified capabilities retain their existing provider defaults."
         },
+        "credential_file": {
+          "description": "Absolute path to a Google ADC credential file. For GCP, overrides GOOGLE_APPLICATION_CREDENTIALS in the auth command's environment only.",
+          "type": "string"
+        },
         "env_http_headers": {
           "additionalProperties": {
             "type": "string"
@@ -3029,7 +3150,7 @@
           "type": "string"
         },
         "model_catalog_url": {
-          "description": "Optional full URL for a Codex-native model catalog. When unset, OpenAI discovery uses the Codex backend unless `base_url` overrides the inference endpoint.",
+          "description": "Optional full URL for a Codex-native model catalog. When unset, OpenAI discovery uses the Codex backend unless `base_url` overrides the inference endpoint. The endpoint must serve the Codex catalog format, not the public `/v1/models` API.\n\nFor built-in OpenAI, set this under `[model_providers.openai]`; other non-default provider overrides are rejected. The URL must use HTTPS and an allowed ChatGPT host. Other hosts require a custom provider. Inference still uses `openai_base_url`.\n\nCatalog requests use the provider's credentials, including an API key or ChatGPT access token. Only configure an endpoint you trust with those credentials. Setting this URL does not grant catalog access or guarantee that the endpoint accepts a regional API key. Existing discovery gates and entitlement checks apply.",
           "type": "string"
         },
         "name": {
@@ -3212,6 +3333,14 @@
           "allOf": [
             {
               "$ref": "#/definitions/AwsSigV4Config"
+            }
+          ],
+          "default": null
+        },
+        "body_secret_substitution": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/BodySecretSubstitutionConfig"
             }
           ],
           "default": null
@@ -3607,6 +3736,24 @@
         }
       ]
     },
+    "OAuthCredentialsStore": {
+      "oneOf": [
+        {
+          "description": "Encrypt credentials using a passphrase kept in the OS keyring.",
+          "enum": [
+            "keyring"
+          ],
+          "type": "string"
+        },
+        {
+          "description": "Store credentials in plaintext in `$CODEX_HOME/secrets/gateway_oauth.json`.",
+          "enum": [
+            "file"
+          ],
+          "type": "string"
+        }
+      ]
+    },
     "OAuthCredentialsStoreMode": {
       "description": "Determine where Codex should store and read MCP credentials.",
       "oneOf": [
@@ -3675,6 +3822,10 @@
           "description": "Opt in to logging completed Guardian assessments to an OTLP log exporter. Defaults to false. Rationales can be sensitive and are capped at 64 KiB.",
           "type": "boolean"
         },
+        "log_sse_deltas": {
+          "description": "Log successful SSE events whose kind ends in `.delta`. Defaults to true. Disabling this preserves errors, completion events, and metrics.",
+          "type": "boolean"
+        },
         "log_user_prompt": {
           "description": "Log user prompt in traces",
           "type": "boolean"
@@ -3700,9 +3851,6 @@
               "$ref": "#/definitions/ToolResultLogConfig"
             }
           ],
-          "default": {
-            "max_bytes": 2048
-          },
           "description": "Byte limit for tool-result log output; independent of model-visible output."
         },
         "trace_exporter": {
@@ -3883,6 +4031,13 @@
     "PluginConfig": {
       "additionalProperties": false,
       "properties": {
+        "apps": {
+          "additionalProperties": {
+            "$ref": "#/definitions/AppConfig"
+          },
+          "description": "Connector-wide app settings keyed by connector ID. Ignored when this plugin is disabled by configuration. Explicit top-level app fields win.",
+          "type": "object"
+        },
         "auto_provision": {
           "description": "Provisioning metadata. Omission does not request provisioning. Only applies with `remote_plugin_id` and Plugin Service availability to the requesting user at provisioning time. Effective enablement, trusted provisioning policy, and authentication and authorization restrictions still apply. This value is not trusted authorization and does not trigger provisioning.",
           "type": "boolean"
@@ -4441,6 +4596,10 @@
       "additionalProperties": false,
       "properties": {
         "enabled": {
+          "type": "boolean"
+        },
+        "enforce_limit": {
+          "description": "Stop when the shared budget is exhausted. Defaults to true.",
           "type": "boolean"
         },
         "limit_tokens": {
@@ -5083,6 +5242,7 @@
               "open_external_editor": null,
               "open_transcript": null,
               "queue": null,
+              "select_transcript": null,
               "submit": null,
               "toggle_fast_mode": null,
               "toggle_raw_output": null,
@@ -5938,6 +6098,14 @@
           ],
           "description": "Queue the current composer draft while a task is running."
         },
+        "select_transcript": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/KeybindingsSpec"
+            }
+          ],
+          "description": "Enter keyboard selection mode for the transcript."
+        },
         "submit": {
           "allOf": [
             {
@@ -6107,6 +6275,7 @@
             "open_external_editor": null,
             "open_transcript": null,
             "queue": null,
+            "select_transcript": null,
             "submit": null,
             "toggle_fast_mode": null,
             "toggle_raw_output": null,
@@ -7405,6 +7574,9 @@
         "apps": {
           "type": "boolean"
         },
+        "apps_early_resource_discovery": {
+          "type": "boolean"
+        },
         "apps_mcp_path_override": {
           "anyOf": [
             {
@@ -7466,6 +7638,9 @@
         "code_mode_host_grpc": {
           "type": "boolean"
         },
+        "code_mode_host_output_truncation": {
+          "type": "boolean"
+        },
         "code_mode_interrupt": {
           "type": "boolean"
         },
@@ -7518,6 +7693,9 @@
           "$ref": "#/definitions/FeatureToml_for_ContextManagementConfigToml"
         },
         "credential_masking": {
+          "type": "boolean"
+        },
+        "critical_path_timing": {
           "type": "boolean"
         },
         "current_time_reminder": {
@@ -7583,6 +7761,9 @@
         "fast_mode": {
           "type": "boolean"
         },
+        "gcp_setup_wizard": {
+          "type": "boolean"
+        },
         "goals": {
           "type": "boolean"
         },
@@ -7596,6 +7777,9 @@
           "type": "boolean"
         },
         "guardian_ext": {
+          "type": "boolean"
+        },
+        "guardian_native_multi_agent_history": {
           "type": "boolean"
         },
         "guardian_node_repl_transcript_images": {
@@ -7655,10 +7839,16 @@
         "in_app_voice": {
           "type": "boolean"
         },
+        "incremental_exec_tools": {
+          "type": "boolean"
+        },
         "incremental_tools": {
           "type": "boolean"
         },
         "instant_interrupt": {
+          "type": "boolean"
+        },
+        "interrupt_on_cancel": {
           "type": "boolean"
         },
         "item_ids": {
@@ -7680,6 +7870,9 @@
           "type": "boolean"
         },
         "mcp_2026_07_28": {
+          "type": "boolean"
+        },
+        "mcp_connection_sharing": {
           "type": "boolean"
         },
         "mcp_oauth_refresh_coordination": {
@@ -7727,10 +7920,16 @@
         "omit_app_server_notification_media": {
           "type": "boolean"
         },
+        "omit_skill_descriptions": {
+          "type": "boolean"
+        },
         "output_token_replay": {
           "type": "boolean"
         },
         "personality": {
+          "type": "boolean"
+        },
+        "plugin_discovery_prefetch": {
           "type": "boolean"
         },
         "plugin_hooks": {
@@ -7743,6 +7942,9 @@
           "type": "boolean"
         },
         "powershell_shell_version": {
+          "type": "boolean"
+        },
+        "prediction_preserve_parent_tools": {
           "type": "boolean"
         },
         "prefer_mxc": {
@@ -7835,6 +8037,12 @@
         "shell_zsh_fork": {
           "type": "boolean"
         },
+        "simplified_selection_hints": {
+          "type": "boolean"
+        },
+        "skill_catalog_deltas": {
+          "type": "boolean"
+        },
         "skill_env_var_dependency_prompt": {
           "type": "boolean"
         },
@@ -7869,6 +8077,9 @@
           "type": "boolean"
         },
         "subagent_thread_environments": {
+          "type": "boolean"
+        },
+        "suppress_model_change_announcements": {
           "type": "boolean"
         },
         "system_proxy_fallback": {
@@ -7907,6 +8118,9 @@
         "tui_app_server": {
           "type": "boolean"
         },
+        "tui_extensions_statusline": {
+          "type": "boolean"
+        },
         "tui_multi_backend": {
           "type": "boolean"
         },
@@ -7932,6 +8146,9 @@
           "type": "boolean"
         },
         "unified_image_budget": {
+          "type": "boolean"
+        },
+        "untrusted_as_tool_output": {
           "type": "boolean"
         },
         "use_agent_identity": {
@@ -8407,7 +8624,7 @@
       "type": "boolean"
     },
     "thread_unload_delay_secs": {
-      "description": "Seconds a thread must have no subscribers and no activity before app-server unloads it. Defaults to 1800 (30 minutes); zero unloads immediately. Resolved when each thread is loaded; request config overrides apply per thread.",
+      "description": "Seconds a thread must have no subscribers and no activity before app-server unloads it. Defaults to 60 (1 minute); zero unloads immediately. Resolved when each thread is loaded; request config overrides apply per thread.",
       "format": "uint64",
       "minimum": 0.0,
       "type": "integer"

@@ -1430,10 +1430,88 @@ export interface BetaResponse {
    * price points. Refer to the
    * [model guide](https://developers.openai.com/api/docs/models) to browse and
    * compare available models.
+   *
+   * Deprecated values:
+   *
+   * - "gpt-5.4-nano", "gpt-5.4-nano-2026-03-17", "gpt-5.1", "gpt-5.1-2025-11-13":
+   *   Announced shutdown date: 2027-04-01. See
+   *   https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "gpt-5.3-chat-latest", "gpt-5.2-chat-latest": Announced shutdown date:
+   *   2026-08-10. See https://developers.openai.com/api/docs/deprecations for
+   *   details and recommended replacements.
+   * - "gpt-5.1-codex", "gpt-5.1-chat-latest", "gpt-5-chat-latest",
+   *   "gpt-4o-search-preview", "gpt-4o-mini-search-preview",
+   *   "gpt-4o-search-preview-2025-03-11", "gpt-4o-mini-search-preview-2025-03-11",
+   *   "o3-deep-research", "o3-deep-research-2025-06-26", "o4-mini-deep-research",
+   *   "o4-mini-deep-research-2025-06-26", "computer-use-preview",
+   *   "computer-use-preview-2025-03-11", "gpt-5-codex", "gpt-5.1-codex-max":
+   *   Announced shutdown date: 2026-07-23. See
+   *   https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "gpt-5.1-mini": Not a supported model ID. Retained for SDK compatibility.
+   * - "gpt-5", "gpt-5-mini", "gpt-5-nano", "gpt-5-2025-08-07",
+   *   "gpt-5-mini-2025-08-07", "gpt-5-nano-2025-08-07", "o3", "o3-2025-04-16",
+   *   "o3-pro", "o3-pro-2025-06-10", "gpt-5-pro", "gpt-5-pro-2025-10-06": Announced
+   *   shutdown date: 2026-12-11. See
+   *   https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-2025-04-14", "gpt-4.1-mini-2025-04-14",
+   *   "gpt-4o", "gpt-4o-2024-11-20", "gpt-4o-2024-08-06", "gpt-4o-mini",
+   *   "gpt-4o-mini-2024-07-18": Announced shutdown date: 2027-01-14. See
+   *   https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "gpt-4.1-nano", "gpt-4.1-nano-2025-04-14", "o4-mini", "o4-mini-2025-04-16",
+   *   "o3-mini", "o3-mini-2025-01-31", "o1", "o1-2024-12-17", "gpt-4o-2024-05-13",
+   *   "gpt-4-turbo", "gpt-4-turbo-2024-04-09", "gpt-4-1106-preview", "gpt-4",
+   *   "gpt-4-0613", "gpt-3.5-turbo", "gpt-3.5-turbo-0125", "o1-pro",
+   *   "o1-pro-2025-03-19": Announced shutdown date: 2026-10-23. See
+   *   https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "o1-preview", "o1-preview-2024-09-12": Announced shutdown date: 2025-07-28.
+   *   See https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "o1-mini", "o1-mini-2024-09-12": Announced shutdown date: 2025-10-27. See
+   *   https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "gpt-audio-mini", "gpt-audio-mini-2025-12-15": Announced shutdown date:
+   *   2027-01-20. See https://developers.openai.com/api/docs/deprecations for
+   *   details and recommended replacements.
+   * - "gpt-4o-audio-preview", "gpt-4o-audio-preview-2024-12-17",
+   *   "gpt-4o-audio-preview-2025-06-03", "gpt-4o-mini-audio-preview",
+   *   "gpt-4o-mini-audio-preview-2024-12-17": Announced shutdown date: 2026-05-07.
+   *   See https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "gpt-4o-audio-preview-2024-10-01": Announced shutdown date: 2025-10-10. See
+   *   https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "chatgpt-4o-latest": Announced shutdown date: 2026-02-17. See
+   *   https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "codex-mini-latest": Announced shutdown date: 2026-02-12. See
+   *   https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "gpt-4-0125-preview", "gpt-4-turbo-preview", "gpt-4-0314": Announced shutdown
+   *   date: 2026-03-26. See https://developers.openai.com/api/docs/deprecations for
+   *   details and recommended replacements.
+   * - "gpt-4-vision-preview": Announced shutdown date: 2024-12-06. See
+   *   https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "gpt-4-32k", "gpt-4-32k-0314", "gpt-4-32k-0613": Announced shutdown date:
+   *   2025-06-06. See https://developers.openai.com/api/docs/deprecations for
+   *   details and recommended replacements.
+   * - "gpt-3.5-turbo-16k", "gpt-3.5-turbo-0301", "gpt-3.5-turbo-0613",
+   *   "gpt-3.5-turbo-16k-0613": Announced shutdown date: 2024-09-13. See
+   *   https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
+   * - "gpt-3.5-turbo-1106": Announced shutdown date: 2026-09-28. See
+   *   https://developers.openai.com/api/docs/deprecations for details and
+   *   recommended replacements.
    */
   model:
     | 'gpt-6-astra'
     | 'gpt-6.1-sol'
+    | 'gpt-6.1-terra'
     | 'gpt-6-sol'
     | 'gpt-6-luna'
     | 'gpt-5.6-sol'
@@ -1779,6 +1857,22 @@ export interface BetaResponse {
   text?: BetaResponseTextConfig;
 
   /**
+   * Usage reported by hosted tools, separate from base model `usage`. The field can
+   * be omitted when tool usage is unavailable. When present, tool families with no
+   * recorded usage have zero counts.
+   *
+   * `image_gen` sums available token counts across image generation calls. Calls
+   * with missing or incomplete usage records may be skipped. Output token details
+   * and cached input counts can be omitted. An omitted cache count means cache usage
+   * is unknown.
+   *
+   * `web_search.num_requests` counts billable searches. Discounted searches and
+   * actions such as opening a page are excluded. Use billing records to reconcile
+   * final charges.
+   */
+  tool_usage?: BetaResponse.ToolUsage;
+
+  /**
    * An integer between 0 and 20 specifying the maximum number of most likely tokens
    * to return at each token position, each with an associated log probability. In
    * some cases, the number of returned tokens may be fewer than requested.
@@ -2095,6 +2189,116 @@ export namespace BetaResponse {
      * models after `gpt-5`.
      */
     summary?: 'auto' | 'concise' | 'detailed' | null;
+  }
+
+  /**
+   * Usage reported by hosted tools, separate from base model `usage`. The field can
+   * be omitted when tool usage is unavailable. When present, tool families with no
+   * recorded usage have zero counts.
+   *
+   * `image_gen` sums available token counts across image generation calls. Calls
+   * with missing or incomplete usage records may be skipped. Output token details
+   * and cached input counts can be omitted. An omitted cache count means cache usage
+   * is unknown.
+   *
+   * `web_search.num_requests` counts billable searches. Discounted searches and
+   * actions such as opening a page are excluded. Use billing records to reconcile
+   * final charges.
+   */
+  export interface ToolUsage {
+    /**
+     * Aggregated usage statistics for image generation tool calls.
+     */
+    image_gen: ToolUsage.ImageGen;
+
+    /**
+     * Aggregated billable usage statistics for web search tool calls.
+     */
+    web_search: ToolUsage.WebSearch;
+  }
+
+  export namespace ToolUsage {
+    /**
+     * Aggregated usage statistics for image generation tool calls.
+     */
+    export interface ImageGen {
+      /**
+       * The number of tokens (images and text) in the input prompt.
+       */
+      input_tokens: number;
+
+      /**
+       * The input tokens detailed information for the image generation.
+       */
+      input_tokens_details: ImageGen.InputTokensDetails;
+
+      /**
+       * The number of output tokens generated by the model.
+       */
+      output_tokens: number;
+
+      /**
+       * The total number of tokens (images and text) used for the image generation.
+       */
+      total_tokens: number;
+
+      cached_tokens?: number;
+
+      cached_tokens_details?: ImageGen.CachedTokensDetails;
+
+      /**
+       * The output token details for the image generation.
+       */
+      output_tokens_details?: ImageGen.OutputTokensDetails;
+    }
+
+    export namespace ImageGen {
+      /**
+       * The input tokens detailed information for the image generation.
+       */
+      export interface InputTokensDetails {
+        /**
+         * The number of image tokens in the input prompt.
+         */
+        image_tokens: number;
+
+        /**
+         * The number of text tokens in the input prompt.
+         */
+        text_tokens: number;
+      }
+
+      export interface CachedTokensDetails {
+        cached_image_tokens: number;
+
+        cached_text_tokens: number;
+      }
+
+      /**
+       * The output token details for the image generation.
+       */
+      export interface OutputTokensDetails {
+        /**
+         * The number of image output tokens generated by the model.
+         */
+        image_tokens: number;
+
+        /**
+         * The number of text output tokens generated by the model.
+         */
+        text_tokens: number;
+      }
+    }
+
+    /**
+     * Aggregated billable usage statistics for web search tool calls.
+     */
+    export interface WebSearch {
+      /**
+       * The number of billable web search requests issued.
+       */
+      num_requests: number;
+    }
   }
 }
 
@@ -3085,8 +3289,8 @@ export interface BetaResponseComputerToolCallOutputScreenshot {
 }
 
 /**
- * A configuration update that applies to subsequent responses until it is replaced
- * by another configuration update.
+ * A configuration update for subsequent responses. Each setting stays in effect
+ * until a later update replaces that setting.
  */
 export interface BetaResponseConfigurationUpdateItem {
   /**
@@ -3108,6 +3312,11 @@ export interface BetaResponseConfigurationUpdateItem {
    * The reasoning configuration applied by this update.
    */
   reasoning?: BetaResponseConfigurationUpdateItem.Reasoning;
+
+  /**
+   * The text output configuration for subsequent responses.
+   */
+  text?: BetaResponseConfigurationUpdateItem.Text;
 }
 
 export namespace BetaResponseConfigurationUpdateItem {
@@ -3131,12 +3340,33 @@ export namespace BetaResponseConfigurationUpdateItem {
      */
     effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | 'max' | null;
   }
+
+  /**
+   * The text output configuration for subsequent responses.
+   */
+  export interface Text {
+    /**
+     * Use a JSON schema for structured output or text to return to plain text.
+     */
+    format: Text.Text | ResponsesAPI.BetaResponseFormatTextJSONSchemaConfig;
+  }
+
+  export namespace Text {
+    /**
+     * Default response format. Used to generate text responses.
+     */
+    export interface Text {
+      /**
+       * The type of response format being defined. Always `text`.
+       */
+      type: 'text';
+    }
+  }
 }
 
 /**
- * An update to the conversation's response configuration. The configuration
- * remains in effect for subsequent responses until it is replaced by another
- * configuration update.
+ * An update to the conversation's response configuration. Supply reasoning, text,
+ * or both. Each setting stays in effect until a later update replaces it.
  */
 export interface BetaResponseConfigurationUpdateItemParam {
   /**
@@ -3158,6 +3388,11 @@ export interface BetaResponseConfigurationUpdateItemParam {
    * Updates to reasoning configuration. Only effort is supported.
    */
   reasoning?: BetaResponseConfigurationUpdateItemParam.Reasoning;
+
+  /**
+   * The text output configuration for subsequent responses.
+   */
+  text?: BetaResponseConfigurationUpdateItemParam.Text;
 }
 
 export namespace BetaResponseConfigurationUpdateItemParam {
@@ -3180,6 +3415,28 @@ export namespace BetaResponseConfigurationUpdateItemParam {
      * update replaces it.
      */
     effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | 'max' | null;
+  }
+
+  /**
+   * The text output configuration for subsequent responses.
+   */
+  export interface Text {
+    /**
+     * Use a JSON schema for structured output or text to return to plain text.
+     */
+    format: Text.Text | ResponsesAPI.BetaResponseFormatTextJSONSchemaConfig;
+  }
+
+  export namespace Text {
+    /**
+     * Default response format. Used to generate text responses.
+     */
+    export interface Text {
+      /**
+       * The type of response format being defined. Always `text`.
+       */
+      type: 'text';
+    }
   }
 }
 
@@ -5337,18 +5594,18 @@ export interface BetaResponseInputFile {
   filename?: string;
 
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   prompt_cache_breakpoint?: BetaResponseInputFile.PromptCacheBreakpoint;
 }
 
 export namespace BetaResponseInputFile {
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   export interface PromptCacheBreakpoint {
     /**
@@ -5402,18 +5659,18 @@ export interface BetaResponseInputFileContent {
   filename?: string | null;
 
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   prompt_cache_breakpoint?: BetaResponseInputFileContent.PromptCacheBreakpoint | null;
 }
 
 export namespace BetaResponseInputFileContent {
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   export interface PromptCacheBreakpoint {
     /**
@@ -5456,18 +5713,18 @@ export interface BetaResponseInputImage {
   image_url?: string | null;
 
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   prompt_cache_breakpoint?: BetaResponseInputImage.PromptCacheBreakpoint;
 }
 
 export namespace BetaResponseInputImage {
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   export interface PromptCacheBreakpoint {
     /**
@@ -5510,18 +5767,18 @@ export interface BetaResponseInputImageContent {
   image_url?: string | null;
 
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   prompt_cache_breakpoint?: BetaResponseInputImageContent.PromptCacheBreakpoint | null;
 }
 
 export namespace BetaResponseInputImageContent {
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   export interface PromptCacheBreakpoint {
     /**
@@ -7225,18 +7482,18 @@ export interface BetaResponseInputText {
   type: 'input_text';
 
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   prompt_cache_breakpoint?: BetaResponseInputText.PromptCacheBreakpoint;
 }
 
 export namespace BetaResponseInputText {
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   export interface PromptCacheBreakpoint {
     /**
@@ -7266,18 +7523,18 @@ export interface BetaResponseInputTextContent {
   type: 'input_text';
 
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   prompt_cache_breakpoint?: BetaResponseInputTextContent.PromptCacheBreakpoint | null;
 }
 
 export namespace BetaResponseInputTextContent {
   /**
-   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-   * token block.
+   * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+   * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+   * not rounded to a token block.
    */
   export interface PromptCacheBreakpoint {
     /**
@@ -7441,18 +7698,18 @@ export namespace BetaResponseItem {
       type: 'computer_screenshot';
 
       /**
-       * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-       * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-       * token block.
+       * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+       * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+       * not rounded to a token block.
        */
       prompt_cache_breakpoint?: ComputerScreenshot.PromptCacheBreakpoint;
     }
 
     export namespace ComputerScreenshot {
       /**
-       * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-       * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-       * token block.
+       * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+       * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+       * not rounded to a token block.
        */
       export interface PromptCacheBreakpoint {
         /**
@@ -8733,18 +8990,18 @@ export namespace BetaResponseOutputItem {
       type: 'computer_screenshot';
 
       /**
-       * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-       * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-       * token block.
+       * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+       * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+       * not rounded to a token block.
        */
       prompt_cache_breakpoint?: ComputerScreenshot.PromptCacheBreakpoint;
     }
 
     export namespace ComputerScreenshot {
       /**
-       * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
-       * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
-       * token block.
+       * Marks the exact end of a reusable prompt prefix. When `ttl` is omitted, the
+       * breakpoint inherits the request's `prompt_cache_options.ttl`; the boundary is
+       * not rounded to a token block.
        */
       export interface PromptCacheBreakpoint {
         /**
@@ -12199,8 +12456,8 @@ export namespace BetaResponseToolSearchOutputItemParam {
     /**
      * Control how much effort the model will exert to match the style and features,
      * especially facial features, of input images. Supports `high` and `low` on
-     * `gpt-image-1` and `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For
-     * `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
+     * `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit
+     * this parameter. Defaults to `low` on supported models.
      */
     input_fidelity?: 'high' | 'low' | null;
 
@@ -12219,6 +12476,11 @@ export namespace BetaResponseToolSearchOutputItemParam {
      *
      * `gpt-image-1` was shut down on October 23, 2026. Use `gpt-image-2.5-sunburst` or
      * `gpt-image-2.5-flare` instead.
+     *
+     * Deprecated values:
+     *
+     * - "gpt-image-1": GPT Image 1 was shut down on October 23, 2026. Use
+     *   gpt-image-2.5-sunburst or gpt-image-2.5-flare instead.
      */
     model?:
       | (string & {})
@@ -12553,6 +12815,13 @@ export namespace BetaResponsesClientEvent {
     conversation?: string | ResponsesAPI.BetaResponseConversationParam | null;
 
     /**
+     * Whether to generate output for this response. Defaults to true when omitted. Set
+     * to false to prepare request state without model output; the response ID can be
+     * used as previous_response_id on a later turn.
+     */
+    generate?: boolean;
+
+    /**
      * Specify additional output data to include in the model response. Currently
      * supported values are:
      *
@@ -12627,10 +12896,88 @@ export namespace BetaResponsesClientEvent {
      * price points. Refer to the
      * [model guide](https://developers.openai.com/api/docs/models) to browse and
      * compare available models.
+     *
+     * Deprecated values:
+     *
+     * - "gpt-5.4-nano", "gpt-5.4-nano-2026-03-17", "gpt-5.1", "gpt-5.1-2025-11-13":
+     *   Announced shutdown date: 2027-04-01. See
+     *   https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "gpt-5.3-chat-latest", "gpt-5.2-chat-latest": Announced shutdown date:
+     *   2026-08-10. See https://developers.openai.com/api/docs/deprecations for
+     *   details and recommended replacements.
+     * - "gpt-5.1-codex", "gpt-5.1-chat-latest", "gpt-5-chat-latest",
+     *   "gpt-4o-search-preview", "gpt-4o-mini-search-preview",
+     *   "gpt-4o-search-preview-2025-03-11", "gpt-4o-mini-search-preview-2025-03-11",
+     *   "o3-deep-research", "o3-deep-research-2025-06-26", "o4-mini-deep-research",
+     *   "o4-mini-deep-research-2025-06-26", "computer-use-preview",
+     *   "computer-use-preview-2025-03-11", "gpt-5-codex", "gpt-5.1-codex-max":
+     *   Announced shutdown date: 2026-07-23. See
+     *   https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "gpt-5.1-mini": Not a supported model ID. Retained for SDK compatibility.
+     * - "gpt-5", "gpt-5-mini", "gpt-5-nano", "gpt-5-2025-08-07",
+     *   "gpt-5-mini-2025-08-07", "gpt-5-nano-2025-08-07", "o3", "o3-2025-04-16",
+     *   "o3-pro", "o3-pro-2025-06-10", "gpt-5-pro", "gpt-5-pro-2025-10-06": Announced
+     *   shutdown date: 2026-12-11. See
+     *   https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-2025-04-14", "gpt-4.1-mini-2025-04-14",
+     *   "gpt-4o", "gpt-4o-2024-11-20", "gpt-4o-2024-08-06", "gpt-4o-mini",
+     *   "gpt-4o-mini-2024-07-18": Announced shutdown date: 2027-01-14. See
+     *   https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "gpt-4.1-nano", "gpt-4.1-nano-2025-04-14", "o4-mini", "o4-mini-2025-04-16",
+     *   "o3-mini", "o3-mini-2025-01-31", "o1", "o1-2024-12-17", "gpt-4o-2024-05-13",
+     *   "gpt-4-turbo", "gpt-4-turbo-2024-04-09", "gpt-4-1106-preview", "gpt-4",
+     *   "gpt-4-0613", "gpt-3.5-turbo", "gpt-3.5-turbo-0125", "o1-pro",
+     *   "o1-pro-2025-03-19": Announced shutdown date: 2026-10-23. See
+     *   https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "o1-preview", "o1-preview-2024-09-12": Announced shutdown date: 2025-07-28.
+     *   See https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "o1-mini", "o1-mini-2024-09-12": Announced shutdown date: 2025-10-27. See
+     *   https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "gpt-audio-mini", "gpt-audio-mini-2025-12-15": Announced shutdown date:
+     *   2027-01-20. See https://developers.openai.com/api/docs/deprecations for
+     *   details and recommended replacements.
+     * - "gpt-4o-audio-preview", "gpt-4o-audio-preview-2024-12-17",
+     *   "gpt-4o-audio-preview-2025-06-03", "gpt-4o-mini-audio-preview",
+     *   "gpt-4o-mini-audio-preview-2024-12-17": Announced shutdown date: 2026-05-07.
+     *   See https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "gpt-4o-audio-preview-2024-10-01": Announced shutdown date: 2025-10-10. See
+     *   https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "chatgpt-4o-latest": Announced shutdown date: 2026-02-17. See
+     *   https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "codex-mini-latest": Announced shutdown date: 2026-02-12. See
+     *   https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "gpt-4-0125-preview", "gpt-4-turbo-preview", "gpt-4-0314": Announced shutdown
+     *   date: 2026-03-26. See https://developers.openai.com/api/docs/deprecations for
+     *   details and recommended replacements.
+     * - "gpt-4-vision-preview": Announced shutdown date: 2024-12-06. See
+     *   https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "gpt-4-32k", "gpt-4-32k-0314", "gpt-4-32k-0613": Announced shutdown date:
+     *   2025-06-06. See https://developers.openai.com/api/docs/deprecations for
+     *   details and recommended replacements.
+     * - "gpt-3.5-turbo-16k", "gpt-3.5-turbo-0301", "gpt-3.5-turbo-0613",
+     *   "gpt-3.5-turbo-16k-0613": Announced shutdown date: 2024-09-13. See
+     *   https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
+     * - "gpt-3.5-turbo-1106": Announced shutdown date: 2026-09-28. See
+     *   https://developers.openai.com/api/docs/deprecations for details and
+     *   recommended replacements.
      */
     model?:
       | 'gpt-6-astra'
       | 'gpt-6.1-sol'
+      | 'gpt-6.1-terra'
       | 'gpt-6-sol'
       | 'gpt-6-luna'
       | 'gpt-5.6-sol'
@@ -14392,8 +14739,8 @@ export namespace BetaTool {
     /**
      * Control how much effort the model will exert to match the style and features,
      * especially facial features, of input images. Supports `high` and `low` on
-     * `gpt-image-1` and `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For
-     * `gpt-image-2`, omit this parameter. Defaults to `low` on supported models.
+     * `gpt-image-1.5`; `gpt-image-1-mini` supports only `low`. For `gpt-image-2`, omit
+     * this parameter. Defaults to `low` on supported models.
      */
     input_fidelity?: 'high' | 'low' | null;
 
@@ -14412,6 +14759,11 @@ export namespace BetaTool {
      *
      * `gpt-image-1` was shut down on October 23, 2026. Use `gpt-image-2.5-sunburst` or
      * `gpt-image-2.5-flare` instead.
+     *
+     * Deprecated values:
+     *
+     * - "gpt-image-1": GPT Image 1 was shut down on October 23, 2026. Use
+     *   gpt-image-2.5-sunburst or gpt-image-2.5-flare instead.
      */
     model?:
       | (string & {})
@@ -14998,6 +15350,7 @@ export interface ResponseCreateParamsBase {
   model?:
     | 'gpt-6-astra'
     | 'gpt-6.1-sol'
+    | 'gpt-6.1-terra'
     | 'gpt-6-sol'
     | 'gpt-6-luna'
     | 'gpt-5.6-sol'
@@ -15691,6 +16044,7 @@ export interface ResponseCompactParams {
   model:
     | 'gpt-6-astra'
     | 'gpt-6.1-sol'
+    | 'gpt-6.1-terra'
     | 'gpt-6-sol'
     | 'gpt-6-luna'
     | 'gpt-5.6-sol'

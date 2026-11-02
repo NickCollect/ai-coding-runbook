@@ -9,6 +9,7 @@ __all__ = ["ChatModel"]
 ChatModel: TypeAlias = Literal[
     "gpt-6-astra",
     "gpt-6.1-sol",
+    "gpt-6.1-terra",
     "gpt-6-sol",
     "gpt-6-luna",
     "gpt-5.6-sol",
@@ -99,7 +100,8 @@ ChatModel: TypeAlias = Literal[
 ]
 """Deprecated values:
 
-- "gpt-5.4-nano", "gpt-5.1": Announced shutdown date: 2027-04-01. See
+- "gpt-5.4-nano", "gpt-5.4-nano-2026-03-17", "gpt-5.1", "gpt-5.1-2025-11-13":
+  Announced shutdown date: 2027-04-01. See
   https://developers.openai.com/api/docs/deprecations for details and
   recommended replacements.
 - "gpt-5.3-chat-latest", "gpt-5.2-chat-latest": Announced shutdown date:

@@ -115,6 +115,7 @@ impl SamplingExecution {
                 | ApiError::Stream(_)
                 | ApiError::ContentFilter
                 | ApiError::ServerOverloaded { .. }
+                | ApiError::PolicyCapacityUnavailable { .. }
                 | ApiError::FlexUnavailable,
             )
             | LunaSamplerError::Api(ApiError::Transport(
@@ -157,6 +158,7 @@ impl SamplingExecution {
                 | ApiError::UsageNotIncluded
                 | ApiError::RateLimit(_)
                 | ApiError::InvalidRequest { .. }
+                | ApiError::InvalidAudioInput { .. }
                 | ApiError::ModelNotFound { .. }
                 | ApiError::InvalidPrompt { .. }
                 | ApiError::MisalignmentPolicyViolation { .. }

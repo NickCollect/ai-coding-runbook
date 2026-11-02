@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 from typing import Dict, Union, Iterable, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from ...._types import SequenceNotStr
+from ...._utils import PropertyInfo
 from ..agent_text_param import AgentTextParam
 from ..agent_tool_param import AgentToolParam
 from ..environment_param import EnvironmentParam
@@ -16,6 +17,8 @@ from ..agent_session_input_message_param import AgentSessionInputMessageParam
 __all__ = [
     "SessionCreateParamsBase",
     "Agent",
+    "AgentCompaction",
+    "AgentExperimental",
     "SpendControl",
     "SessionCreateParamsNonStreaming",
     "SessionCreateParamsStreaming",
@@ -54,6 +57,14 @@ class SessionCreateParamsBase(TypedDict, total=False):
     characters. Omission or null defaults to an empty map.
     """
 
+    review: Literal["none", "auto_review"]
+    """Action review mode. Omit to use none.
+
+    - `none` - Keep the existing execution behavior without automatic action review.
+    - `auto_review` - Review eligible actions automatically. Deny manual approval
+      fallbacks.
+    """
+
     spend_control: Optional[SpendControl]
     """Optional spending limit in USD cents.
 
@@ -64,10 +75,50 @@ class SessionCreateParamsBase(TypedDict, total=False):
     """The IDs of vaults made available to the session."""
 
 
+class AgentCompaction(TypedDict, total=False):
+    """Context compaction settings.
+
+    Omit to keep the current settings. A supplied object replaces the settings; null or an empty object enables background compaction.
+    """
+
+    async_: Annotated[Optional[bool], PropertyInfo(alias="async")]
+    """Whether to compact context in the background.
+
+    Omission or null defaults to true. Set to false to use blocking compaction.
+    Background compaction may increase token usage.
+    """
+
+
+class AgentExperimental(TypedDict, total=False):
+    """Experimental settings to merge by key.
+
+    Omitted settings keep their current values.
+    """
+
+    time_awareness: bool
+    """Whether to give the model periodic current-time reminders.
+
+    Omit to keep the current setting.
+    """
+
+
 class Agent(TypedDict, total=False):
     """Agent configuration.
 
     With `agent_id`, supplied fields override the saved agent for this session. Without `agent_id`, `model` is required.
+    """
+
+    compaction: Optional[AgentCompaction]
+    """Context compaction settings.
+
+    Omit to keep the current settings. A supplied object replaces the settings; null
+    or an empty object enables background compaction.
+    """
+
+    experimental: AgentExperimental
+    """Experimental settings to merge by key.
+
+    Omitted settings keep their current values.
     """
 
     instructions: Optional[str]

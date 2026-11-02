@@ -7,11 +7,9 @@ from typing import Any, cast
 
 import pytest
 
-from openai import OpenAI, AsyncOpenAI
+from openai import OpenAI, Stream as _Stream, AsyncOpenAI, AsyncStream as _AsyncStream
 from tests.utils import assert_matches_type
 from openai.types import ImagesResponse
-
-# pyright: reportDeprecated=false
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -83,6 +81,7 @@ class TestImages:
             prompt="A cute baby sea otter wearing a beret",
             background="transparent",
             input_fidelity="high",
+            markup=b"Example data",
             mask=b"Example data",
             model="gpt-image-1.5",
             n=1,
@@ -141,6 +140,7 @@ class TestImages:
             stream=True,
             background="transparent",
             input_fidelity="high",
+            markup=b"Example data",
             mask=b"Example data",
             model="gpt-image-1.5",
             n=1,
@@ -165,6 +165,7 @@ class TestImages:
 
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         stream = response.parse()
+        assert isinstance(stream, _Stream)
         stream.close()
 
     @parametrize
@@ -178,6 +179,7 @@ class TestImages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             stream = response.parse()
+            assert isinstance(stream, _Stream)
             stream.close()
 
         assert cast(Any, response.is_closed) is True
@@ -272,6 +274,7 @@ class TestImages:
 
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         stream = response.parse()
+        assert isinstance(stream, _Stream)
         stream.close()
 
     @parametrize
@@ -284,6 +287,7 @@ class TestImages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             stream = response.parse()
+            assert isinstance(stream, _Stream)
             stream.close()
 
         assert cast(Any, response.is_closed) is True
@@ -358,6 +362,7 @@ class TestAsyncImages:
             prompt="A cute baby sea otter wearing a beret",
             background="transparent",
             input_fidelity="high",
+            markup=b"Example data",
             mask=b"Example data",
             model="gpt-image-1.5",
             n=1,
@@ -416,6 +421,7 @@ class TestAsyncImages:
             stream=True,
             background="transparent",
             input_fidelity="high",
+            markup=b"Example data",
             mask=b"Example data",
             model="gpt-image-1.5",
             n=1,
@@ -440,6 +446,7 @@ class TestAsyncImages:
 
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         stream = response.parse()
+        assert isinstance(stream, _AsyncStream)
         await stream.close()
 
     @parametrize
@@ -453,6 +460,7 @@ class TestAsyncImages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             stream = await response.parse()
+            assert isinstance(stream, _AsyncStream)
             await stream.close()
 
         assert cast(Any, response.is_closed) is True
@@ -547,6 +555,7 @@ class TestAsyncImages:
 
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         stream = response.parse()
+        assert isinstance(stream, _AsyncStream)
         await stream.close()
 
     @parametrize
@@ -559,6 +568,7 @@ class TestAsyncImages:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             stream = await response.parse()
+            assert isinstance(stream, _AsyncStream)
             await stream.close()
 
         assert cast(Any, response.is_closed) is True

@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 from copy import copy
-from typing import TYPE_CHECKING, Any, List, Type, Union, Iterable, Optional, cast
+from typing import TYPE_CHECKING, Any, List, Type, Union, Callable, Iterable, Optional, cast
 from functools import partial
 from typing_extensions import Literal
 
 import httpx2
 
 from openai._types import NOT_GIVEN, Body, Omit, Query, Headers, NotGiven, omit
-from openai._utils import is_given, maybe_transform
+from openai._utils import is_dict, is_list, is_given, maybe_transform
 from openai._streaming import Stream
 from openai.lib._tools import PydanticFunctionTool, ResponsesPydanticFunctionTool
 from openai._base_client import make_request_options
@@ -36,10 +36,41 @@ if TYPE_CHECKING:
     from openai.resources.responses.responses import Responses, AsyncResponses
 
 
+def _output_text_parser(
+    *,
+    input: object,
+    text: ResponseTextConfigParam | Omit,
+    text_format: type[TextFormatT] | Omit,
+    parse_as: type[TextFormatT] | None | Omit,
+) -> type[TextFormatT] | Omit:
+    if parse_as is None:
+        return omit
+
+    if is_list(input):
+        for item in reversed(input):
+            if not is_dict(item) or item.get("type") != "configuration_update":
+                continue
+            update = item.get("text")
+            if not is_dict(update) or not is_dict(fmt := update.get("format")):
+                continue
+            if fmt.get("type") == "text":
+                if is_given(parse_as):
+                    raise TypeError("Cannot use parse_as with a plain-text format update")
+                return omit
+            if is_given(text_format) and not is_given(parse_as) and (not is_given(text) or fmt != text.get("format")):
+                raise TypeError(
+                    "Pass parse_as for the updated output schema, or parse_as=None to read plain output_text"
+                )
+            break
+
+    return parse_as if is_given(parse_as) else text_format
+
+
 def parse(
     resource: Responses,
     *,
     text_format: type[TextFormatT] | Omit = omit,
+    parse_as: type[TextFormatT] | None | Omit = omit,
     access_programs: response_create_params.AccessPrograms | Omit = omit,
     background: Optional[bool] | Omit = omit,
     context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
@@ -89,12 +120,18 @@ def parse(
         text = copy(text)
         text["format"] = _type_to_text_format_param(text_format)
 
+    output_format = _output_text_parser(
+        input=extra_body.get("input", input) if is_dict(extra_body) else input,
+        text=text,
+        text_format=text_format,
+        parse_as=parse_as,
+    )
     tools = _make_tools(tools)
 
     def parser(raw_response: Response) -> ParsedResponse[TextFormatT]:
         return parse_response(
             input_tools=tools,
-            text_format=text_format,
+            text_format=output_format,
             response=raw_response,
         )
 
@@ -156,6 +193,7 @@ async def async_parse(
     resource: AsyncResponses,
     *,
     text_format: type[TextFormatT] | Omit = omit,
+    parse_as: type[TextFormatT] | None | Omit = omit,
     access_programs: response_create_params.AccessPrograms | Omit = omit,
     background: Optional[bool] | Omit = omit,
     context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
@@ -205,12 +243,18 @@ async def async_parse(
         text = copy(text)
         text["format"] = _type_to_text_format_param(text_format)
 
+    output_format = _output_text_parser(
+        input=extra_body.get("input", input) if is_dict(extra_body) else input,
+        text=text,
+        text_format=text_format,
+        parse_as=parse_as,
+    )
     tools = _make_tools(tools)
 
     def parser(raw_response: Response) -> ParsedResponse[TextFormatT]:
         return parse_response(
             input_tools=tools,
-            text_format=text_format,
+            text_format=output_format,
             response=raw_response,
         )
 
@@ -369,7 +413,7 @@ def stream(
             text = copy(text)
             text["format"] = _type_to_text_format_param(text_format)
 
-        api_request: partial[Stream[ResponseStreamEvent]] = partial(
+        api_request: Callable[[], Stream[ResponseStreamEvent]] = partial(
             resource.create,
             access_programs=access_programs,
             input=input,
@@ -621,7 +665,7 @@ def _make_tools(tools: Iterable[ParseableToolParam] | Omit) -> List[ToolParam] |
             converted_tools.append(tool)
             continue
 
-        function = cast(Any, tool)["function"]  # pyright: ignore[reportUnnecessaryCast]
+        function = cast(Any, tool)["function"]
         if not isinstance(function, PydanticFunctionTool):
             raise Exception(
                 "Expected Chat Completions function tool shape to be created using `openai.pydantic_function_tool()`"
