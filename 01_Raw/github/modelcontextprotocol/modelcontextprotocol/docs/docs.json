@@ -861,7 +861,14 @@
               "seps/2577-deprecate-roots-sampling-and-logging",
               "seps/2596-spec-feature-lifecycle-and-deprecation",
               "seps/2640-skills-extension",
-              "seps/2663-tasks-extension"
+              "seps/2663-tasks-extension",
+              "seps/3392-extension-lifecycle"
+            ]
+          },
+          {
+            "group": "Accepted",
+            "pages": [
+              "seps/3398-release-cycle-updates"
             ]
           }
         ]
@@ -1442,6 +1449,14 @@
     {
       "source": "/seps/2663",
       "destination": "/seps/2663-tasks-extension"
+    },
+    {
+      "source": "/seps/3392",
+      "destination": "/seps/3392-extension-lifecycle"
+    },
+    {
+      "source": "/seps/3398",
+      "destination": "/seps/3398-release-cycle-updates"
     }
   ],
   "contextual": {
