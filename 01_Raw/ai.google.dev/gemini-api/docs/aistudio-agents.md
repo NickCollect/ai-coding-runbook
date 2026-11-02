@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=zh-TW
-fetched_at: 2026-10-26T05:50:37.723042+00:00
+fetched_at: 2026-11-02T07:04:21.644782+00:00
 title: "AI Studio \u5be6\u9a57\u5ba4\u4e2d\u7684\u4ee3\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

@@ -1,47 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=pl
-fetched_at: 2026-10-26T05:40:34.789619+00:00
-title: "Konfiguracja agenta do kodowania i\u00a0materia\u0142y dla deweloper\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=th
+fetched_at: 2026-11-02T07:22:43.833988+00:00
+title: "\u0e01\u0e32\u0e23\u0e15\u0e31\u0e49\u0e07\u0e04\u0e48\u0e32\u0e15\u0e31\u0e27\u0e41\u0e17\u0e19\u0e01\u0e32\u0e23\u0e40\u0e02\u0e35\u0e22\u0e19\u0e42\u0e04\u0e49\u0e14\u0e41\u0e25\u0e30\u0e41\u0e2b\u0e25\u0e48\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e19\u0e31\u0e01\u0e1e\u0e31\u0e12\u0e19\u0e32\u0e41\u0e2d\u0e1b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
+Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Prześlij opinię
+ส่งความคิดเห็น
 
-# Konfiguracja agenta do kodowania i materiały dla deweloperów
+# การตั้งค่าตัวแทนการเขียนโค้ดและแหล่งข้อมูลสำหรับนักพัฒนาแอป
 
-Agenty AI do kodowania korzystają z danych treningowych, które kończą się w określonym dniu. Z tego powodu agenci często sugerują wycofane modele (`gemini-1.5`), starsze pakiety SDK (`google-generativeai`) lub nieaktualne wzorce kodu.
+Agent การเขียนโค้ดด้วย AI อาศัยข้อมูลฝึกฝนที่สิ้นสุด ณ วันที่ที่กำหนด ด้วยเหตุนี้ ตัวแทนจึงมักแนะนำโมเดลที่เลิกใช้งานแล้ว (`gemini-1.5`), SDK รุ่นเก่า (`google-generativeai`) หรือรูปแบบโค้ดที่ล้าสมัย
 
-Połączenie agenta z oficjalnymi zasobami dla programistów Gemini pomaga mu pisać dokładny kod z użyciem bieżących modeli, pakietu `google-genai` SDK i [interfejsu Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl).
+การเชื่อมต่อ Agent กับแหล่งข้อมูลอย่างเป็นทางการสำหรับนักพัฒนา Gemini จะช่วยให้ Agent เขียนโค้ดที่ถูกต้องโดยใช้โมเดลปัจจุบัน, `google-genai` SDK และ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th)
 
-Możesz przyznać agentowi do kodowania dostęp do dokumentacji i zasad Gemini na 4 sposoby:
+คุณสามารถเชื่อมต่อเอเจนต์การเขียนโค้ดกับเอกสารประกอบ, กฎ และเครื่องมือ CLI ของ Gemini ได้ 5 วิธีดังนี้
 
-## Podsumowanie zasobów agenta
+## สรุปแหล่งข้อมูลของ Agent
 
-| Zasób | Co zapewnia | Dostępność |
+| ทรัพยากร | สิ่งที่รายงานแสดง | ความพร้อมใช้งาน |
 | --- | --- | --- |
-| **[Umiejętności agenta Gemini](https://ai.google.dev/gemini-api/docs/coding-agents?hl=pl#available-skills)** | Szczegółowe reguły, wzorce pakietu SDK i skrypty pomocnicze dotyczące konkretnych funkcji (`gemini-api-dev`, `gemini-live-api-dev`, `gemini-omni-flash-api`). | Jest wstępnie zainstalowany w [AI Studio Build](https://ai.studio/build). Możesz go zainstalować za pomocą `skills.sh`, Context7 lub zarządzanych agentów. |
-| **[Serwer MCP Gemini Docs](https://ai.google.dev/gemini-api/docs/coding-agents?hl=pl#mcp-setup)** | Wyszukiwanie na żywo (`gemini_search_docs`) i czytanie całej strony (`gemini_get_doc`) w całej dokumentacji. | Obsługiwane w Claude Code, Cursor, OpenAI Codex i VS Code. |
-| **[Wtyczka Gemini API](https://ai.google.dev/gemini-api/docs/coding-agents?hl=pl#gemini-api-plugin)** | Pakiet łączony zawierający oficjalne umiejętności Gemini, serwer MCP Dokumentów i narzędzia klucza interfejsu API. | Antigravity. |
-| **[Dokumenty w formacie do odczytu maszynowego](https://ai.google.dev/gemini-api/docs/coding-agents?hl=pl#machine-readable-docs)** | Oczyść strony Markdown i `llms.txt` indeksy. | Wszystkie strony dokumentacji w domenie `ai.google.dev/gemini-api/docs`. |
+| **[ทักษะของ Gemini Agent](https://ai.google.dev/gemini-api/docs/coding-agents?hl=th#available-skills)** | กฎทีละขั้นตอน, รูปแบบ SDK และสคริปต์ตัวช่วยสำหรับฟีเจอร์ที่เฉพาะเจาะจง (`gemini-api-dev`, `gemini-live-api-dev`, `gemini-omni-flash-api`) | ติดตั้งไว้ล่วงหน้าใน [AI Studio Build](https://ai.studio/build) โดยติดตั้งด้วย `skills.sh`, Context7 หรือ Managed Agents |
+| **[เซิร์ฟเวอร์ MCP ของ Gemini Docs](https://ai.google.dev/gemini-api/docs/coding-agents?hl=th#mcp-setup)** | Live Search (`gemini_search_docs`) และการอ่านทั้งหน้า (`gemini_get_doc`) ในเอกสารประกอบทั้งหมด | รองรับใน Claude Code, Cursor, OpenAI Codex และ VS Code |
+| **[ปลั๊กอิน Gemini API](https://ai.google.dev/gemini-api/docs/coding-agents?hl=th#gemini-api-plugin)** | แพ็กเกจรวมที่มีทักษะ Gemini อย่างเป็นทางการ, เซิร์ฟเวอร์ MCP ของเอกสาร และเครื่องมือคีย์ API | Antigravity |
+| **[เอกสารที่เครื่องอ่านได้](https://ai.google.dev/gemini-api/docs/coding-agents?hl=th#machine-readable-docs)** | ล้างหน้า Markdown และดัชนี `llms.txt` | หน้าเอกสารประกอบทั้งหมดใน `ai.google.dev/gemini-api/docs` |
+| **[Gemini API CLI](https://ai.google.dev/gemini-api/docs/cli?hl=th)** | CLI แบบไม่เก็บสถานะ (`gemini-api`) เพื่อสร้าง GenMedia วิเคราะห์ไฟล์ และเรียกใช้ Agent ที่ได้รับการจัดการจาก Shell โดยไม่ต้องเขียนโค้ด SDK | ติดตั้งใน macOS, Linux หรือ Windows ด้วยสคริปต์การติดตั้ง, Go หรือไบนารีที่สร้างไว้ล่วงหน้า |
 
-## Instalowanie umiejętności agenta Gemini
+## ติดตั้งทักษะของตัวแทน Gemini
 
-Umiejętności agenta zapewniają agentowi do kodowania reguły proceduralne, aktualne nazwy modeli i wzorce kodu pakietu SDK. Zamiast dodawać do prompta długich instrukcji, Twój agent wczytuje każdą umiejętność tylko wtedy, gdy jest to potrzebne. Dzięki temu Twój agent uniknie przestarzałych pakietów SDK i będzie korzystać z nowoczesnych wzorców Gemini.
+ทักษะของ Agent จะให้กฎขั้นตอน ชื่อโมเดลปัจจุบัน และรูปแบบโค้ด SDK แก่ Agent การเขียนโค้ด แทนที่จะเพิ่มคำสั่งยาวๆ ลงในพรอมต์ Agent จะโหลดทักษะแต่ละอย่างเมื่อจำเป็นเท่านั้น ซึ่งจะช่วยให้ Agent หลีกเลี่ยง SDK ที่เลิกใช้งานแล้วและใช้รูปแบบ Gemini ที่ทันสมัยได้
 
-Umiejętności działają razem z serwerem MCP Dokumentów Gemini. Jeśli agent nie ma zainstalowanego serwera MCP, usługa przełącza się na [`llms.txt`](https://ai.google.dev/gemini-api/docs/llms.txt?hl=pl). Aby dowiedzieć się więcej o tym, jak działają umiejętności, przeczytaj [przewodnik po umiejętnościach interfejsu Gemini API](https://aistudio.google.com/learn/gemini-api-skills?hl=pl).
+ทักษะจะทำงานร่วมกับเซิร์ฟเวอร์ MCP ของ Gemini เอกสาร หาก Agent ของคุณไม่ได้ติดตั้งเซิร์ฟเวอร์ MCP ไว้ ทักษะจะกลับไปใช้ [`llms.txt`](https://ai.google.dev/gemini-api/docs/llms.txt?hl=th) ดูข้อมูลเพิ่มเติมเกี่ยวกับวิธีการทำงานของทักษะได้ที่[คู่มือทักษะของ Gemini API](https://aistudio.google.com/learn/gemini-api-skills?hl=th)
 
-### Instalowanie za pomocą interfejsu wiersza poleceń (`skills.sh` lub Context7)
+### ติดตั้งด้วย CLI (`skills.sh` หรือ Context7)
 
-Zainstaluj umiejętności za pomocą skryptu [skills.sh](https://skills.sh) (zalecane) lub
+ติดตั้งทักษะโดยใช้ [skills.sh](https://skills.sh) (แนะนำ) หรือ
 [Context7](https://context7.com):
 
 ```
@@ -55,16 +56,16 @@ npx skills add google-gemini/gemini-skills --skill <skill-name> --global
 npx ctx7 skills install /google-gemini/gemini-skills <skill-name>
 ```
 
-### Dostępne umiejętności
+### ทักษะที่พร้อมใช้งาน
 
 #### `gemini-api-dev`
 
-Umiejętność tworzenia aplikacji za pomocą [interfejsu API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) i oficjalnych pakietów SDK Gemini API (`google-genai` dla Pythona i `@google/genai` dla TypeScript). Ta umiejętność obejmuje:
+ทักษะในการสร้างแอปพลิเคชันด้วย [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) และ SDK อย่างเป็นทางการของ Gemini API (`google-genai` สำหรับ Python และ `@google/genai` สำหรับ TypeScript) ทักษะนี้ครอบคลุมหัวข้อต่อไปนี้
 
-- generowanie tekstu, czat wieloetapowy, przesyłanie strumieniowe, dane wyjściowe strukturalne i wywoływanie funkcji;
-- Generowanie obrazów, zamiana tekstu na mowę (TTS) i dane wejściowe multimodalne
-- Zarządzanie stanem rozmowy po stronie serwera, wykonywanie w tle, Deep Research i zarządzani agenci
-- Obecne nazwy modeli i migracja starszego kodu `generateContent` lub `google-generativeai`
+- การสร้างข้อความ, แชทแบบหลายรอบ, การสตรีม, เอาต์พุตที่มีโครงสร้าง และการเรียกใช้ฟังก์ชัน
+- การสร้างรูปภาพ การอ่านออกเสียงข้อความ (TTS) และอินพุตหลายรูปแบบ
+- การจัดการสถานะการสนทนาฝั่งเซิร์ฟเวอร์, การดำเนินการในเบื้องหลัง, Deep Research และ Agent ที่มีการจัดการ
+- ชื่อโมเดลปัจจุบันและการย้ายข้อมูลโค้ด `generateContent` หรือ `google-generativeai` เดิม
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-api-dev --global
@@ -72,11 +73,11 @@ npx skills add google-gemini/gemini-skills --skill gemini-api-dev --global
 
 #### `gemini-live-api-dev`
 
-Umiejętność tworzenia aplikacji do strumieniowania dźwięku i wideo w czasie rzeczywistym za pomocą [interfejsu Gemini Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=pl). Ta umiejętność obejmuje:
+ทักษะในการสร้างแอปพลิเคชันสตรีมมิงเสียงและวิดีโอแบบเรียลไทม์ด้วย [Gemini Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=th) ทักษะนี้ครอบคลุมหัวข้อต่อไปนี้
 
-- zarządzanie sesjami WebSocket, tymczasowe tokeny klienta i wznawianie sesji;
-- Strumieniowanie dźwięku, wideo i tekstu z wykrywaniem aktywności głosowej (VAD) i obsługą przerywania
-- Uzasadnianie w tle (rozszerzone myślenie), nieblokujące asynchroniczne wywołania narzędzi, transkrypcja i tłumaczenie mowy na żywo
+- การจัดการเซสชัน WebSocket, โทเค็นไคลเอ็นต์แบบชั่วคราว และการกลับมาทำงานของเซสชัน
+- การสตรีมเสียง วิดีโอ และข้อความพร้อมการตรวจจับกิจกรรมเสียงพูด (VAD) และการรองรับการขัดจังหวะ
+- การให้เหตุผลในเบื้องหลัง (การคิดที่นานขึ้น) การเรียกใช้เครื่องมือแบบอะซิงโครนัสที่ไม่บล็อก การถอดเสียงเป็นคำ และการแปลเสียงพูดแบบเรียลไทม์
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-live-api-dev --global
@@ -84,19 +85,19 @@ npx skills add google-gemini/gemini-skills --skill gemini-live-api-dev --global
 
 #### `gemini-omni-flash-api`
 
-Umiejętność generowania i edytowania filmów za pomocą Gemini Omni Flash przy użyciu interfejsu Interactions API. Zawiera skrypty pomocnicze (`upload_file.py`, `generate_video.py`, `prep_video.py`, `inspect_video.py`) i obejmuje:
+ทักษะในการสร้างและแก้ไขวิดีโอด้วย Gemini Omni Flash โดยใช้ Interactions API รวมสคริปต์ตัวช่วย (`upload_file.py`, `generate_video.py`, `prep_video.py`, `inspect_video.py`) และครอบคลุมสิ่งต่อไปนี้
 
-- Generowanie filmów na podstawie tekstu i tworzenie promptów
-- Przejścia między pierwszą a ostatnią klatką i generowanie filmów na podstawie klatek referencyjnych
-- Rozszerzenia wideo i przepływy pracy związane z wstępnym przetwarzaniem multimediów
+- การสร้างวิดีโอจากข้อความและการเขียนพรอมต์
+- การเปลี่ยนเฟรมแรกและเฟรมสุดท้ายและการสร้างวิดีโอตามข้อมูลอ้างอิง
+- เวิร์กโฟลว์การประมวลผลล่วงหน้าของส่วนขยายวิดีโอและสื่อ
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-omni-flash-api --global
 ```
 
-### Montowanie umiejętności w zarządzanych agentach
+### ติดตั้งทักษะใน Agent ที่มีการจัดการ
 
-Gdy uruchamiasz zdalnie zarządzane agenty za pomocą interfejsu Interactions API, możesz zamontować repozytorium `google-gemini/gemini-skills` w przestrzeni roboczej agenta. Szczegółowe informacje znajdziesz w [przewodniku po umiejętnościach interfejsu Gemini API](https://aistudio.google.com/learn/gemini-api-skills?hl=pl):
+เมื่อเรียกใช้ Agent ที่มีการจัดการระยะไกลด้วย Interactions API คุณจะต่อเชื่อมที่เก็บ `google-gemini/gemini-skills` เข้ากับพื้นที่ทำงานของ Agent ได้ ดูรายละเอียดได้ที่[คู่มือทักษะ Gemini API](https://aistudio.google.com/learn/gemini-api-skills?hl=th)
 
 ```
 from google import genai
@@ -119,34 +120,34 @@ interaction = client.interactions.create(
 )
 ```
 
-## Łączenie serwera MCP Gemini Docs
+## เชื่อมต่อเซิร์ฟเวอร์ MCP ของ Gemini Docs
 
-Publiczny **serwer MCP Dokumentów Gemini** (`https://gemini-api-docs-mcp.dev`) zapewnia agentowi dostęp na żywo do całej witryny z dokumentacją. Agent może wyszukiwać i czytać strony dokumentacji, aby sprawdzać schematy żądań, limity modeli i nowe funkcje:
+**เซิร์ฟเวอร์ MCP ของเอกสาร Gemini** สาธารณะ (`https://gemini-api-docs-mcp.dev`) ช่วยให้ Agent ของคุณเข้าถึงเว็บไซต์เอกสารทั้งหมดได้แบบเรียลไทม์ Agent ของคุณสามารถค้นหาและอ่านหน้าเอกสารประกอบเพื่อตรวจสอบสคีมาคำขอ ขีดจำกัดของโมเดล และฟีเจอร์ใหม่ๆ ได้ดังนี้
 
-- `gemini_search_docs`: wyszukuje w dokumentacji interfejsu Gemini API według tematu lub zapytania.
-- `gemini_get_doc`: Odczytuje pełną treść w formacie Markdown na określonej stronie dokumentacji.
+- `gemini_search_docs`: ค้นหาเอกสารประกอบของ Gemini API ตามหัวข้อหรือคำค้นหา
+- `gemini_get_doc`: อ่านเนื้อหา Markdown ทั้งหมดของหน้าเอกสารที่เฉพาะเจาะจง
 
-### Szybka konfiguracja
+### การตั้งค่าอย่างรวดเร็ว
 
-Uruchom to polecenie w terminalu lub w katalogu głównym projektu, aby automatycznie skonfigurować wykryte agenty do kodowania:
+เรียกใช้คำสั่งนี้ในเทอร์มินัลหรือรูทของโปรเจ็กต์เพื่อกำหนดค่า Agent การเขียนโค้ดที่ตรวจพบโดยอัตโนมัติ
 
 ```
 npx add-mcp "https://gemini-api-docs-mcp.dev"
 ```
 
-### Konfiguracja według środowiska
+### การกำหนดค่าตามสภาพแวดล้อม
 
 ### Claude Code
 
-Uruchom w terminalu:
+เรียกใช้ในเทอร์มินัลของคุณ:
 
 ```
 $ claude mcp add --transport http geminiDocs https://gemini-api-docs-mcp.dev
 ```
 
-### Kursor
+### เคอร์เซอร์
 
-Dodaj do `~/.cursor/mcp.json` (globalnie) lub `.cursor/mcp.json` (w projekcie):
+เพิ่มลงใน `~/.cursor/mcp.json` (ส่วนกลาง) หรือ `.cursor/mcp.json` (โปรเจ็กต์):
 
 ```
 {
@@ -160,13 +161,13 @@ Dodaj do `~/.cursor/mcp.json` (globalnie) lub `.cursor/mcp.json` (w projekcie):
 
 ### OpenAI Codex
 
-Uruchom w terminalu:
+เรียกใช้ในเทอร์มินัลของคุณ:
 
 ```
 $ codex mcp add geminiDocs --url https://gemini-api-docs-mcp.dev
 ```
 
-Możesz też dodać do `~/.codex/config.toml`:
+หรือเพิ่มลงใน `~/.codex/config.toml`:
 
 ```
 [mcp_servers.geminiDocs]
@@ -175,7 +176,7 @@ url = "https://gemini-api-docs-mcp.dev"
 
 ### VS Code (Copilot)
 
-Dodaj do `.vscode/mcp.json` w obszarze roboczym:
+เพิ่มไปยัง `.vscode/mcp.json` ในพื้นที่ทำงานของคุณ:
 
 ```
 {
@@ -188,27 +189,27 @@ Dodaj do `.vscode/mcp.json` w obszarze roboczym:
 }
 ```
 
-## Wtyczka Gemini API
+## ปลั๊กอิน Gemini API
 
-Jeśli używasz **Antigravity**, **wtyczka Gemini API** to najszybszy sposób na skonfigurowanie obszaru roboczego. Zawiera serwer MCP Dokumentów Gemini, wszystkie oficjalne umiejętności Gemini (`gemini-api-dev`, `gemini-live-api-dev`, `gemini-omni-flash-api`) i narzędzia klucza interfejsu API w jednym pakiecie do pobrania.
+หากใช้ **Antigravity** **ปลั๊กอิน Gemini API** เป็นวิธีที่เร็วที่สุดในการตั้งค่าพื้นที่ทำงาน โดยจะรวมเซิร์ฟเวอร์ MCP ของ Gemini เอกสาร, ทักษะ Gemini อย่างเป็นทางการทั้งหมด (`gemini-api-dev`, `gemini-live-api-dev`, `gemini-omni-flash-api`) และเครื่องมือคีย์ API ไว้ในการดาวน์โหลดเดียว
 
-- **Instalacja w Antigravity (interfejs):** otwórz **Ustawienia > Dostosowywanie > Twórz za pomocą wtyczek Google** i pobierz **Gemini API**.
-- **Instalacja za pomocą interfejsu wiersza poleceń:**
+- **ติดตั้งใน Antigravity (UI):** ไปที่**การตั้งค่า > การปรับแต่ง > สร้างด้วยปลั๊กอิน Google** แล้วดาวน์โหลด **Gemini API**
+- **ติดตั้งด้วย CLI:**
   `bash
   agy plugin install https://github.com/google-gemini/gemini-skills`
 
-## Dokumentacja czytelna dla komputerów
+## เอกสารประกอบที่เครื่องอ่านได้
 
-Standardowe strony internetowe zawierają tagi HTML, paski nawigacyjne i skrypty, które zajmują miejsce w oknie kontekstu. `ai.google.dev` udostępnia punkty końcowe czytelne dla maszyn, dzięki czemu agenci i skrypty mogą pobierać czysty kod Markdown bezpośrednio:
+หน้าเว็บมาตรฐานประกอบด้วยแท็ก HTML, แถบนำทาง และสคริปต์ที่ใช้พื้นที่หน้าต่างบริบท `ai.google.dev` มีปลายทางที่เครื่องอ่านได้เพื่อให้เอเจนต์และสคริปต์สามารถดึงข้อมูลมาร์กดาวน์ที่สะอาดได้โดยตรง ดังนี้
 
-- **`llms.txt` index**
-  ([`https://ai.google.dev/gemini-api/docs/llms.txt`](https://ai.google.dev/gemini-api/docs/llms.txt?hl=pl)):
-  zawiera listę wszystkich stron dokumentacji interfejsu Gemini API z linkami do każdej z nich.
-- **Bezpośrednie adresy URL Markdown (`.md.txt`):** dodaj `.md.txt` do dowolnego adresu URL dokumentacji na stronie `ai.google.dev` (np. [`https://ai.google.dev/gemini-api/docs/coding-agents.md.txt`](https://ai.google.dev/gemini-api/docs/coding-agents.md.txt?hl=pl)), aby uzyskać czyste źródło Markdown dla zapisanych promptów, reguł `AGENTS.md` lub skryptów automatycznych.
+- **ดัชนี `llms.txt`**
+  ([`https://ai.google.dev/gemini-api/docs/llms.txt`](https://ai.google.dev/gemini-api/docs/llms.txt?hl=th)):
+  แสดงรายการหน้าเอกสารประกอบของ Gemini API ทั้งหมดพร้อมลิงก์ไปยังแต่ละหน้า
+- **URL มาร์กดาวน์โดยตรง (`.md.txt`)**: เพิ่ม `.md.txt` ต่อท้าย URL เอกสารประกอบใน `ai.google.dev` (เช่น [`https://ai.google.dev/gemini-api/docs/coding-agents.md.txt`](https://ai.google.dev/gemini-api/docs/coding-agents.md.txt?hl=th)) เพื่อรับแหล่งข้อมูลมาร์กดาวน์ที่สะอาดสำหรับพรอมต์ที่บันทึกไว้ กฎ `AGENTS.md` หรือสคริปต์อัตโนมัติ
 
-## Zalecane reguły projektu (`AGENTS.md`)
+## กฎโปรเจ็กต์ที่แนะนำ (`AGENTS.md`)
 
-Plik reguł projektu (`AGENTS.md`, `.cursorrules` lub `CLAUDE.md`) zawiera podstawowe reguły, które są wczytywane na początku każdej sesji agenta. Dodaj te wytyczne do katalogu głównego projektu, aby agenci kodujący domyślnie korzystali z bieżących modeli i pakietów SDK:
+ไฟล์กฎของโปรเจ็กต์ (`AGENTS.md`, `.cursorrules` หรือ `CLAUDE.md`) จะกำหนดกฎพื้นฐานที่โหลดเมื่อเริ่มต้นเซสชันของ Agent ทุกเซสชัน เพิ่มหลักเกณฑ์เหล่านี้ลงในรูทของโปรเจ็กต์เพื่อให้เอเจนต์การเขียนโค้ดใช้โมเดลและ SDK ปัจจุบันโดยค่าเริ่มต้น
 
 ```
 # Gemini API Guidelines
@@ -219,50 +220,51 @@ Plik reguł projektu (`AGENTS.md`, `.cursorrules` lub `CLAUDE.md`) zawiera podst
 - Use current recommended models (see https://ai.google.dev/gemini-api/docs/models) and avoid deprecated models.
 ```
 
-## Sprawdzanie i rozwiązywanie problemów
+## ยืนยันและแก้ปัญหา
 
-### Sprawdzanie konfiguracji
+### ตรวจสอบการตั้งค่า
 
-Aby przetestować konfigurację, zapytaj asystenta kodowania:
+หากต้องการทดสอบการตั้งค่า ให้ถาม Agent การเขียนโค้ดดังนี้
 
 ```
 Look up the request schema for the Gemini Interactions API in the documentation.
 ```
 
-Skonfigurowany agent będzie używać `gemini_search_docs` na `geminiDocs` serwerze MCP i pisać kod za pomocą `client.interactions.create` z pakietem SDK `google-genai` lub `@google/genai`.
+Agent ที่กำหนดค่าไว้จะใช้ `gemini_search_docs` ในเซิร์ฟเวอร์ MCP `geminiDocs` และเขียนโค้ดโดยใช้ `client.interactions.create` กับ SDK `google-genai` หรือ `@google/genai`
 
-### Polecenia stanu
+### คำสั่งสถานะ
 
-| Środowisko | Weryfikacja MCP | Weryfikacja umiejętności |
+| สภาพแวดล้อม | การยืนยัน MCP | การยืนยันความสามารถ |
 | --- | --- | --- |
-| **Claude Code** | Uruchom `/mcp` | Uruchom `/skills` |
-| **Kursor** | Otwórz **Ustawienia > Funkcje > MCP**. | Otwórz **Ustawienia > Reguły**. |
-| **OpenAI Codex** | Uruchom `codex mcp list` | Sprawdź `.codex/skills/` lub `~/.codex/skills/` |
-| **Antigravity** | Otwórz **Dostosowywanie > Połączenia**. | Otwórz **Dostosowania > Reguły** lub uruchom `/skills list` |
-| **VS Code (Copilot)** | Otwórz **Rozszerzenia > MCP** lub panel wyjściowy. | W Copilot Chat kliknij **Wybierz narzędzia**. |
+| **Claude Code** | เรียกใช้ `/mcp` | เรียกใช้ `/skills` |
+| **เคอร์เซอร์** | เปิด**การตั้งค่า > ฟีเจอร์ > MCP** | เปิด**การตั้งค่า > กฎ** |
+| **OpenAI Codex** | เรียกใช้ `codex mcp list` | ตรวจสอบ `.codex/skills/` หรือ `~/.codex/skills/` |
+| **Antigravity** | เปิด**การปรับแต่ง > การเชื่อมต่อ** | เปิด**การปรับแต่ง > กฎ** หรือเรียกใช้ `/skills list` |
+| **VS Code (Copilot)** | เปิด**ส่วนขยาย > MCP** หรือแผงเอาต์พุต | คลิก**เลือกเครื่องมือ**ในแชท Copilot |
 
-### Rozwiązywanie problemów
+### การแก้ปัญหา
 
-- **Nie wykryto umiejętności ani serwera MCP:** ponownie uruchom edytor (Cursor lub VS Code) lub sesję terminala (Claude Code lub Codex). Większość agentów wczytuje serwery MCP i umiejętności tylko podczas uruchamiania.
-- **Konflikt umiejętności globalnej:** jeśli Twój agent ignoruje zainstalowaną globalnie umiejętność, zainstaluj ją w katalogu głównym projektu bez `--global`:
+- **ไม่พบทักษะหรือเซิร์ฟเวอร์ MCP:** รีสตาร์ทเครื่องมือแก้ไข (Cursor หรือ VS Code) หรือเซสชันเทอร์มินัล (Claude Code หรือ Codex) เอเจนต์ส่วนใหญ่จะโหลดเซิร์ฟเวอร์ MCP และทักษะเมื่อเริ่มต้นเท่านั้น
+- **ความขัดแย้งของ Skill ส่วนกลาง:** หาก Agent ละเว้น Skill ที่ติดตั้งส่วนกลาง ให้ติดตั้ง Skill ในรูทโปรเจ็กต์โดยไม่มี `--global`:
   `bash
   npx skills add google-gemini/gemini-skills --skill gemini-api-dev`
-- **Zignorowane reguły:** upewnij się, że plik `AGENTS.md`, `.cursorrules` lub `CLAUDE.md` znajduje się w katalogu głównym projektu.
+- **กฎที่ละเว้น:** ตรวจสอบว่าไฟล์ `AGENTS.md`, `.cursorrules` หรือ `CLAUDE.md` อยู่ในไดเรกทอรีรากของโปรเจ็กต์
 
-## Co dalej?
+## ขั้นตอนถัดไป
 
-- [Przewodnik po umiejętnościach interfejsu Gemini API](https://aistudio.google.com/learn/gemini-api-skills?hl=pl)
-- [Umiejętności związane z interfejsem Gemini API na GitHubie](https://github.com/google-gemini/gemini-skills)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl)
-- [Dostępne modele](https://ai.google.dev/gemini-api/docs/models?hl=pl)
-- [Biblioteki i pakiety SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=pl)
+- [Gemini API CLI](https://ai.google.dev/gemini-api/docs/cli?hl=th)
+- [คู่มือทักษะ Gemini API](https://aistudio.google.com/learn/gemini-api-skills?hl=th)
+- [ทักษะ Gemini API ใน GitHub](https://github.com/google-gemini/gemini-skills)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th)
+- [โมเดลที่พร้อมให้บริการ](https://ai.google.dev/gemini-api/docs/models?hl=th)
+- [ไลบรารีและ SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=th)
 
-Prześlij opinię
+ส่งความคิดเห็น
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Ostatnia aktualizacja: 2026-10-06 UTC.
+อัปเดตล่าสุด 2026-10-28 UTC
 
-Chcesz przekazać coś jeszcze?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-10-06 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-10-28 UTC"],[],[]]

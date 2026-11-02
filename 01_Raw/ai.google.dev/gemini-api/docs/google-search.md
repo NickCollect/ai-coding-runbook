@@ -1,30 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=hi
-fetched_at: 2026-10-26T05:48:19.537910+00:00
-title: "Google Search \u0915\u0947 \u0906\u0927\u093e\u0930 \u092a\u0930 \u091c\u093e\u0928\u0915\u093e\u0930\u0940 \u0926\u0947\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=es-419
+fetched_at: 2026-11-02T07:16:40.735293+00:00
+title: "Grounding with Google Search \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-सुझाव भेजें
+Enviar comentarios
 
-# Google Search के आधार पर जानकारी देना
+# Grounding with Google Search
 
-Google Search से सटीक जानकारी पाने की सुविधा, Gemini मॉडल को रीयल-टाइम में वेब कॉन्टेंट से कनेक्ट करती है और सभी उपलब्ध भाषाओं में काम करती है. इससे Gemini, जानकारी न मिलने की स्थिति के दायरे से बाहर निकलकर ज़्यादा सटीक जवाब और भरोसेमंद सोर्स के रेफ़रंस दे पाता है.
+La Fundamentación con la Búsqueda de Google conecta el modelo de Gemini con contenido web en tiempo real
+y funciona con todos los idiomas disponibles. Esto permite que
+Gemini proporcione respuestas más precisas y cite fuentes verificables más allá de su
+fecha límite de conocimiento.
 
-Google Search से सटीक जानकारी पाने की सुविधा की मदद से, ऐसे ऐप्लिकेशन बनाए जा सकते हैं जो:
+La fundamentación te ayuda a crear aplicaciones que pueden hacer lo siguiente:
 
-- **जानकारी की सटीकता बढ़ा सकते हैं:** असल दुनिया की जानकारी के आधार पर जवाब देकर, मॉडल के गलत जवाब देने की समस्या को कम कर सकते हैं.
-- **रीयल-टाइम में जानकारी ऐक्सेस कर सकते हैं:** हाल ही में हुई घटनाओं और विषयों के बारे में सवालों के जवाब दे सकते हैं.
-- **रेफ़रंस दे सकते हैं:** मॉडल के दावों के सोर्स दिखाकर, उपयोगकर्ताओं का भरोसा जीत सकते हैं.
+- **Aumentar la exactitud fáctica:** Reduce las alucinaciones del modelo basando
+  las respuestas en información del mundo real.
+- **Acceder a información en tiempo real:** Responde preguntas sobre eventos y temas recientes.
+- **Proporciona citas:** Genera confianza en los usuarios mostrando las fuentes de las
+  afirmaciones del modelo.
 
 ### Python
 
@@ -85,7 +90,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -139,21 +144,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Google Search से सटीक जानकारी पाने की सुविधा कैसे काम करती है
+## Cómo funciona la fundamentación con la Búsqueda de Google
 
-`google_search` टूल चालू करने पर, मॉडल खोज करने, जानकारी प्रोसेस करने, और रेफ़रंस देने का पूरा वर्कफ़्लो अपने-आप मैनेज करता है.
+Cuando habilitas la herramienta `google_search`, el modelo controla todo el flujo de trabajo
+de búsqueda, procesamiento y cita de información de forma automática.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=hi)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=es-419)
 
-1. **उपयोगकर्ता का प्रॉम्प्ट:** आपका ऐप्लिकेशन, `google_search` टूल चालू होने पर, उपयोगकर्ता का प्रॉम्प्ट Gemini API को भेजता है.
-2. **प्रॉम्प्ट का विश्लेषण:** मॉडल, प्रॉम्प्ट का विश्लेषण करता है और यह तय करता है कि Google Search की मदद से जवाब को बेहतर बनाया जा सकता है या नहीं.
-3. **Google Search:** ज़रूरत पड़ने पर, मॉडल अपने-आप एक या एक से ज़्यादा सर्च क्वेरी जनरेट करता है और उन्हें लागू करता है.
-4. **खोज के नतीजों को प्रोसेस करना:** मॉडल, खोज के नतीजों को प्रोसेस करता है, जानकारी को सिंथेसाइज़ करता है, और जवाब तैयार करता है.
-5. **भरोसेमंद स्रोतों से मिला जवाब:** एपीआई, खोज के नतीजों के आधार पर, उपयोगकर्ता के लिए फ़ाइनल और आसान जवाब देता है. इस जवाब में, मॉडल का टेक्स्ट जवाब शामिल होता है. इसमें इनलाइन `annotations` भी शामिल होते हैं, जिनमें रेफ़रंस होते हैं. इसके अलावा, इसमें `google_search_call` और `google_search_result` के चरण भी शामिल होते हैं, जिनमें सर्च क्वेरी और खोज से जुड़े सुझाव होते हैं.
+1. **Instrucción del usuario:** Tu aplicación envía la instrucción de un usuario a la API de Gemini
+   con la herramienta `google_search` habilitada.
+2. **Análisis de la instrucción:** El modelo analiza la instrucción y determina si una
+   Búsqueda de Google puede mejorar la respuesta.
+3. **Búsqueda de Google:** Si es necesario, el modelo genera automáticamente una o
+   varias búsquedas y las ejecuta.
+4. **Procesamiento de los resultados de la búsqueda:** El modelo procesa los resultados de la búsqueda,
+   sintetiza la información y formula una respuesta.
+5. **Respuesta fundamentada:** La API devuelve una respuesta final fácil de usar que
+   se basa en los resultados de la búsqueda. Esta respuesta incluye la respuesta de texto del modelo con `annotations` intercalados que contienen las citas, así como los pasos `google_search_call` y `google_search_result` con las búsquedas y las sugerencias de búsqueda.
 
-## भरोसेमंद स्रोतों से मिले जवाब को समझना
+## Información sobre la respuesta de fundamentación
 
-जवाब के लिए भरोसेमंद सोर्स मिलने पर, मॉडल के टेक्स्ट आउटपुट में, टेक्स्ट कॉन्टेंट ब्लॉक पर सीधे इनलाइन `annotations` शामिल होते हैं. इन एनोटेशन में, रेफ़रंस की जानकारी होती है. इससे जवाब के हिस्सों को उनके सोर्स से लिंक किया जाता है.
+Cuando una respuesta se fundamenta correctamente, el resultado de texto del modelo incluye
+`annotations` intercaladas directamente en el bloque de contenido de texto. Estas anotaciones
+proporcionan información de citas que vincula partes de la respuesta con sus fuentes.
 
 ```
 {
@@ -212,21 +225,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-जवाब में मौजूद मुख्य फ़ील्ड:
+Los campos clave de la respuesta son los siguientes:
 
-- `google_search_call` : इसमें मॉडल की लागू की गई खोज `queries` शामिल होती हैं.
-- `google_search_result` : इसमें `search_suggestions` शामिल होते हैं. यह आपके यूज़र इंटरफ़ेस (यूआई) में खोज से जुड़े सुझाव दिखाने के लिए, एचटीएमएल स्निपेट होता है. इस्तेमाल से जुड़ी पूरी ज़रूरी शर्तें,
-  [सेवा की शर्तों](https://ai.google.dev/gemini-api/terms?hl=hi#grounding-with-google-search) में बताई गई हैं.
-- `text` with `annotations` : मॉडल का सिंथेसाइज़ किया गया जवाब, जिसमें इनलाइन रेफ़रंस शामिल होते हैं. हर `url_citation` एनोटेशन, टेक्स्ट के किसी सेगमेंट (`start_index` और `end_index` से तय) को सोर्स यूआरएल से लिंक करता है. इनलाइन रेफ़रंस बनाने के लिए, यह ज़रूरी है.
+- `google_search_call` : Contiene la `queries` de búsqueda que ejecutó el modelo.
+- `google_search_result` : Contiene `search_suggestions`, un fragmento HTML para renderizar sugerencias de búsqueda en tu IU. Los requisitos de uso completos se detallan en las [Condiciones del Servicio](https://ai.google.dev/gemini-api/terms?hl=es-419#grounding-with-google-search).
+- `text` con `annotations` : Es la respuesta sintetizada del modelo con citas intercaladas. Cada anotación `url_citation` vincula un segmento de texto (definido
+  por `start_index` y `end_index`) a una URL de origen. Esta es la clave para
+  crear citas intercaladas.
 
-Google Search से सटीक जानकारी पाने की सुविधा को, [यूआरएल
-कॉन्टेक्स्ट टूल](https://ai.google.dev/gemini-api/docs/url-context?hl=hi) के साथ भी इस्तेमाल किया जा सकता है. इससे जवाबों को,
-सार्वजनिक वेब डेटा और आपके दिए गए खास यूआरएल, दोनों के आधार पर तैयार किया जा सकता है.
+La fundamentación con la Búsqueda de Google también se puede usar en combinación con la [herramienta de contexto de URLs](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419) para fundamentar las respuestas tanto en los datos web públicos como en las URLs específicas que proporciones.
 
-## इनलाइन रेफ़रंस की मदद से सोर्स एट्रिब्यूट करना
+## Atribución de fuentes con citas intercaladas
 
-एपीआई, टेक्स्ट कॉन्टेंट ब्लॉक पर इनलाइन `url_citation` एनोटेशन दिखाता है. इससे आपको यह तय करने का पूरा कंट्रोल मिलता है कि अपने यूज़र इंटरफ़ेस में सोर्स कैसे दिखाए जाएं.
-हर एनोटेशन में `start_index` और `end_index` शामिल होता है. इससे यह पता चलता है कि यह टेक्स्ट के किस हिस्से का रेफ़रंस है. इन्हें एक्सट्रैक्ट और दिखाने का तरीका यहां बताया गया है.
+La API devuelve anotaciones `url_citation` intercaladas en el bloque de contenido de texto,
+lo que te brinda un control total sobre cómo muestras las fuentes en tu interfaz de usuario.
+Cada anotación incluye `start_index` y `end_index` para identificar qué parte
+del texto cita. A continuación, te mostramos cómo extraerlos y mostrarlos.
 
 ### Python
 
@@ -335,7 +349,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -415,7 +429,7 @@ func main() {
 }
 ```
 
-आउटपुट में, टेक्स्ट के बाद उसके रेफ़रंस दिखेंगे:
+En el resultado, se mostrará el texto seguido de sus citas:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final. This victory marks Spain's record fourth European Championship title.
@@ -427,59 +441,67 @@ Citations:
     Cited text: "This victory marks Spain's record fourth European Championship title."
 ```
 
-## कीमत
+## Precios
 
-Gemini 3 और उसके बाद के मॉडल के साथ, Google Search से सटीक जानकारी पाने की सुविधा का इस्तेमाल करने पर, आपके प्रोजेक्ट से **हर** सर्च क्वेरी के लिए शुल्क लिया जाता है. यह शुल्क तब लिया जाता है, जब मॉडल उस क्वेरी को लागू करने का फ़ैसला लेता है.
-क्वेरी के हिसाब से शुल्क लेने वाले इस मॉडल में, हर महीने 5,000 खोज अनुरोध मुफ़्त में किए जा सकते हैं. ये अनुरोध, Gemini 3 और उसके बाद के सभी मॉडल के लिए शेयर किए जाते हैं. इसके बाद, **1,000 खोज अनुरोधों के लिए 14 डॉलर** का शुल्क लिया जाता है.
+Cuando usas la Fundamentación con la Búsqueda de Google con Gemini 3 y modelos más recientes, se factura a tu
+proyecto por **cada** búsqueda que el modelo decida ejecutar.
+Este modelo de facturación por consulta incluye 5,000 solicitudes de búsqueda gratuitas por mes
+compartidas entre todos los modelos de Gemini 3 y más recientes, y, luego, cuesta **USD 14 por cada 1,000
+solicitudes de búsqueda**.
 
-उदाहरण के लिए, अगर मॉडल किसी एक प्रॉम्प्ट का जवाब देने के लिए, एक से ज़्यादा सर्च क्वेरी लागू करने का फ़ैसला लेता है (जैसे, एक ही एपीआई कॉल में `"UEFA Euro 2024 winner"` और `"Spain vs
-England Euro 2024 final score"` की खोज करना), तो इस अनुरोध के लिए, टूल के दो बार इस्तेमाल का शुल्क लिया जाएगा. शुल्क लेने के मकसद से, यूनीक क्वेरी की गिनती करते समय, हम वेब पर खोज की खाली क्वेरी को अनदेखा करते हैं.
+Por ejemplo, si el modelo decide ejecutar varias consultas de búsqueda para responder
+una sola instrucción (p.ej., buscar `"UEFA Euro 2024 winner"` y `"Spain vs
+England Euro 2024 final score"` en la misma llamada a la API), esto se considera como dos
+usos facturables de la herramienta para esa solicitud. A efectos de facturación, ignoramos
+las búsquedas web vacías cuando contamos las búsquedas únicas.
 
-Gemini 2.5 या उससे पुराने मॉडल के साथ, खोज के लिए सटीक जानकारी पाने की सुविधा का इस्तेमाल करने पर, आपके प्रोजेक्ट से हर प्रॉम्प्ट के लिए शुल्क लिया जाता है.
+Cuando usas la fundamentación de la búsqueda con Gemini 2.5 o modelos anteriores, se factura tu proyecto
+por instrucción.
 
-कीमत की ज़्यादा जानकारी के लिए, [Gemini API की कीमत
-वाला पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) देखें.
+Para obtener información detallada sobre los precios, consulta la [página de precios de la API de Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419).
 
-## इस्तेमाल किए जा सकने वाले मॉडल
+## Modelos compatibles
 
-मॉडल की पूरी क्षमताओं के बारे में, मॉडल की खास जानकारी वाले [model
-overview](https://ai.google.dev/gemini-api/docs/models?hl=hi) पेज पर देखा जा सकता है.
+Puedes encontrar todas las funciones en la página de [descripción general del modelo](https://ai.google.dev/gemini-api/docs/models?hl=es-419).
 
-| मॉडल | Google Search से सटीक जानकारी पाने की सुविधा |
+| Modelo | Fundamentación con la Búsqueda de Google |
 | --- | --- |
 | Gemini 4 Argon | ✔️ |
 | Gemini 3.8 Flash | ✔️ |
 | Gemini 3.6 Flash | ✔️ |
 | Gemini 3.5 Flash-Lite | ✔️ |
-| Gemini 3.1 Flash Image Preview | ✔️ |
-| Gemini 3.1 Pro Preview | ✔️ |
-| Gemini 3 Pro Image Preview | ✔️ |
-| Gemini 3 Flash Preview | ✔️ |
+| Versión preliminar de Gemini 3.1 Flash Image | ✔️ |
+| Versión preliminar de Gemini 3.1 Pro | ✔️ |
+| Versión preliminar de Gemini 3 Pro Image | ✔️ |
+| Versión preliminar de Gemini 3 Flash | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️ |
 
-## टूल के इस्तेमाल के लिए उपलब्ध कॉम्बिनेशन
+## Combinaciones de herramientas compatibles
 
-ज़्यादा मुश्किल इस्तेमाल के मामलों के लिए, Google Search से सटीक जानकारी पाने की सुविधा को अन्य टूल के साथ इस्तेमाल किया जा सकता है. जैसे,
-[कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi),
-[यूआरएल कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi), और
-[Google Maps से सटीक जानकारी पाने की सुविधा](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi). Google Maps से सटीक जानकारी पाने की सुविधा,
-Gemini 3.5 Flash-Lite और उसके बाद के मॉडल पर उपलब्ध है.
-Gemini 3 मॉडल में, इन बिल्ट-इन टूल को कस्टम टूल (फ़ंक्शन कॉलिंग) के साथ भी इस्तेमाल किया जा सकता है. टूल के कॉम्बिनेशन वाले पेज पर ज़्यादा जानें.
+Puedes usar la Fundamentación con la Búsqueda de Google con otras herramientas, como la
+[ejecución de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=es-419),
+el [contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419) y
+la [Fundamentación con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=es-419) (compatible con
+Gemini 3.5 Flash-Lite y modelos posteriores) para potenciar casos de uso más complejos.
+Los modelos de Gemini 3
+también admiten la combinación de estas herramientas integradas con herramientas personalizadas (llamada
+a funciones). Obtén más información en la página
+[Combinaciones de herramientas](https://ai.google.dev/gemini-api/docs/tool-combination?hl=es-419).
 
-## आगे क्या करना है
+## ¿Qué sigue?
 
-- [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) जैसे अन्य उपलब्ध टूल के बारे में जानें.
-- [यूआरएल कॉन्टेक्स्ट टूल](https://ai.google.dev/gemini-api/docs/url-context?hl=hi) का इस्तेमाल करके, खास यूआरएल की मदद से प्रॉम्प्ट को बेहतर बनाने का तरीका जानें.
+- Obtén más información sobre otras herramientas disponibles, como la [llamada a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419).
+- Aprende a ampliar las instrucciones con URLs específicas usando la [herramienta de contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419).
 
-सुझाव भेजें
+Enviar comentarios
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-आखिरी बार 2026-10-13 (UTC) को अपडेट किया गया.
+Última actualización: 2026-10-29 (UTC)
 
-क्या आपको हमें और कुछ बताना है?
+¿Quieres brindar más información?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-10-13 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-29 (UTC)"],[],[]]

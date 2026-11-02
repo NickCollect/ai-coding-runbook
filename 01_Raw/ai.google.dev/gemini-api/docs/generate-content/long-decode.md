@@ -1,90 +1,90 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=es-419
-fetched_at: 2026-10-26T05:49:27.683167+00:00
-title: "Decodificaci\u00f3n larga \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=sq
+fetched_at: 2026-11-02T07:02:24.182593+00:00
+title: "Dekodim i gjat\u00eb \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
+Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=es-419)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
+- [Dokumentet](https://ai.google.dev/gemini-api/docs/generate-content?hl=sq)
 
-Enviar comentarios
+Dërgo komente
 
-# Decodificación larga
+# Dekodim i gjatë
 
-La decodificación larga permite que Gemini 4 Argon genere más allá del límite de salida de una sola solicitud para tareas de razonamiento profundo, hasta la ventana de contexto unificada de 1 millón de tokens (1,048,576 tokens compartidos entre la entrada, el pensamiento y la salida).
+Dekodimi i gjatë lejon që Gemini 4 Argon të gjenerojë përtej kufirit të daljes së një kërkese të vetme për detyrat e arsyetimit të thellë, deri në dritaren e unifikuar të kontekstit me 1 milion kode (1 048 576 kode të ndara në hyrje, mendim dhe dalje).
 
-Cambiar solo el ID del modelo no habilita la decodificación larga. Sin configuración adicional, la salida se detiene en 64,000 tokens para las llamadas de transmisión y en 32,000 tokens para las llamadas que no son de transmisión. La forma más rápida de activar la decodificación larga es actualizar el SDK de IA generativa de Google y establecer `max_output_tokens` en un valor superior a 65,536. En esta guía, se explica cómo funciona la decodificación de Long, cuándo usarla y cómo activarla con `generateContent`.
+Ndryshimi i vetëm i ID-së së modelit nuk e aktivizon dekodimin e gjatë. Pa konfigurim shtesë, dalja ndalon në 64K kode për telefonatat e transmetimit dhe 32K kode për telefonatat jo të transmetimit. Mënyra më e shpejtë për të aktivizuar dekodimin e gjatë është të përmirësosh Google GenAI SDK dhe të caktosh `max_output_tokens` më të madhe se 65 536. Ky udhëzues shpjegon se si funksionon dekodimi i gjatë, kur duhet ta përdorësh dhe si ta aktivizosh atë me `generateContent`.
 
-## Cómo funciona la decodificación de duración
+## Për sa kohë funksionon deshifrimi
 
-Una sola solicitud de transmisión o del SDK genera hasta 64,000 tokens, y una solicitud de REST sin transmisión genera hasta 32,000 tokens. Cuando una respuesta necesita más tokens, el modelo la genera en varios saltos de solicitud y respuesta, y cada uno continúa desde donde se detuvo el salto anterior.
+Një kërkesë e vetme transmetimi ose SDK gjeneron deri në 64 000 kode, dhe një kërkesë REST jo e transmetimit gjeneron deri në 32 000 kode. Kur një përgjigje ka nevojë për më shumë kode, modeli e gjeneron atë nëpër disa kërcime të kërkesave dhe përgjigjeve që secili vazhdon nga vendi ku ndaloi kërcimi i mëparshëm.
 
-- **Límite unificado de tokens de entrada y salida:** La entrada, el pensamiento, las llamadas a funciones y la respuesta final comparten una ventana de 1 millón de tokens. La salida puede usar hasta 1,048,576 tokens menos los de entrada.
-- **Límite en cada salto:** Un salto devuelve hasta 65,536 tokens de salida. Las solicitudes de REST sin transmisión devuelven hasta 32,768.
-- **Un indicador de continuación:** Si el modelo alcanza el límite y le quedan tokens, la respuesta termina con `finish_reason: CONTINUATION` y un `continuation_token`.
-- **El próximo salto:** El cliente vuelve a enviar la misma solicitud con el token. El modelo continúa desde donde se detuvo.
-- **Un total para todos los saltos:** `max_output_tokens` establece el total de tokens de razonamiento y de salida para todos los saltos en conjunto.
-- **Una señal de detención:** Cuando el modelo usa todo `max_output_tokens`, la respuesta termina con `finish_reason: MAX_TOKENS`.
+- **Kufiri i unifikuar i hyrjes dhe daljes së kodeve:** Hyrja, të menduarit, thirrjet e funksioneve dhe përgjigjja përfundimtare ndajnë një dritare me 1 milion kode. Rezultati mund të përdorë deri në 1 048 576 minus kodet e tua hyrëse.
+- **Një kufi për çdo hap:** Një hap kthen deri në 65 536 output tokens. Kërkesat REST jo transmetuese kthejnë deri në 32,768.
+- **Një sinjal vazhdimi:** Nëse modeli arrin kufirin dhe ka mbetur shenja, përgjigjja përfundon me `finish_reason: CONTINUATION` dhe një `continuation_token`.
+- **Hapi tjetër:** Klienti dërgon përsëri të njëjtën kërkesë me kodin. Modeli vazhdon nga vendi ku ndaloi.
+- **Një total për të gjitha kërcimet:** `max_output_tokens` cakton numrin total të kodeve të arsyetimit dhe të daljes për të gjitha kërcimet së bashku.
+- **Një sinjal ndalimi:** Kur modeli përdor të gjithë `max_output_tokens`, përgjigjja përfundon me `finish_reason: MAX_TOKENS`.
 
-En problemas difíciles, un salto puede gastar todos sus tokens en el pensamiento interno y devolver un texto vacío con un `continuation_token`. Esto es normal, y la respuesta final llega en saltos posteriores.
+Për problemet e vështira, një hop mund të shpenzojë të gjitha kodet e tij për të menduar në mënyrë të brendshme dhe të kthejë tekst bosh me një `continuation_token`. Kjo është normale dhe përgjigjja përfundimtare mbërrin në kërcimet e mëvonshme.
 
-## Límites de salida predeterminados
+## Kufijtë e parazgjedhur të rezultateve
 
-Sin la decodificación larga, una sola solicitud se detiene en estos límites por solicitud:
+Pa dekodimin e gjatë, një kërkesë e vetme ndalon në këta kufij për kërkesë:
 
-- **Solicitudes de transmisión y solicitudes que no son de transmisión a través del SDK de IA generativa de Google (`generate_content`):** Se establecen de forma predeterminada en 64 000 tokens de salida.
-- **Llamadas de REST directas que no son de transmisión (`generateContent`):** El valor predeterminado es 32,000 tokens de salida. Si se configura `max_output_tokens` en un valor superior a 32,768 en una llamada REST que no es de transmisión sin un `continuation_token`, se devuelve un error `400`.
+- **Kërkesat për transmetim dhe kërkesat jo për transmetim nëpërmjet Google GenAI SDK (`generate_content`):** Parazgjedhje në 64 000 token-ë të nxjerrjes.
+- **Telefonatat e drejtpërdrejta REST pa transmetim (`generateContent`):** Parazgjedhje në 32 000 tokenë të rezultatit. Cilësimi i `max_output_tokens` më i madh se 32 768 në një telefonatë REST jo transmetuese pa një `continuation_token` kthen një gabim `400`.
 
-| Cómo llamas al modelo | Límite de salida sin decodificación larga | Decodificación prolongada al inicio | Qué hacer |
+| Si e quan modelin | Kufiri i daljes pa dekodim të gjatë | Dekodimi i gjatë në nisje | Çfarë të bësh |
 | --- | --- | --- | --- |
-| SDK de IA generativa de Google, versión más reciente | 64 K | Sí, el SDK continúa por ti | Establece `max_output_tokens`. |
-| SDK de IA generativa de Google, versión anterior, sin transmisión | 64 K | No | Actualiza el SDK. |
-| REST `streamGenerateContent` | 64 K | Sí, con tu propio bucle | Escribe un bucle. Consulta la [opción 2](#option-2-loop). |
-| REST `generateContent` | 32,000 | Sí, con tu propio bucle | Escribe un bucle. Consulta la [opción 2](#option-2-loop). |
+| Google GenAI SDK, versioni më i fundit | 64 mijë | Po, SDK-ja vazhdon për ty | Cakto `max_output_tokens`. |
+| Google GenAI SDK, version më i vjetër, jo transmetim | 64 mijë | Jo | Përmirëso SDK-në. |
+| REST `streamGenerateContent` | 64 mijë | Po, me ciklin tënd | Shkruaj një cikël. Shiko [Opsionin 2](#option-2-loop). |
+| REST `generateContent` | 32K | Po, me ciklin tënd | Shkruaj një lak. Shiko [Opsionin 2](#option-2-loop). |
 
-## Cuándo usar la decodificación larga
+## Kur të përdorësh dekodimin e gjatë
 
-La mayoría de las solicitudes se completan dentro del límite de una sola solicitud (64 000 tokens para las llamadas de transmisión y del SDK, o 32 000 tokens para las llamadas de REST que no son de transmisión). Usa la decodificación larga cuando una respuesta necesite más tokens de razonamiento y de salida combinados de los que permite una sola solicitud. Aumentar `max_output_tokens` le da al modelo un límite más alto para razonar sobre problemas difíciles, en lugar de hacer que las respuestas estándar sean más largas.
+Shumica e kërkesave përfundojnë brenda kufirit të kërkesës së vetme (64 mijë kode për transmetimin dhe thirrjet e SDK-së ose 32 mijë kode për thirrjet REST jo të transmetimit). Përdor dekodimin e gjatë kur një përgjigje ka nevojë për më shumë tokenë të kombinuar të arsyetimit dhe të rezultateve sesa lejon një kërkesë e vetme. Rritja e `max_output_tokens` i jep modelit një kufi më të lartë për të arsyetuar për probleme të vështira, në vend që t'i bëjë përgjigjet standarde më të gjata.
 
-| Carga de trabajo | ¿Quieres usar la decodificación larga? | Por qué |
+| Ngarkesa e punës | Të përdoret dekodimi i gjatë? | Pse |
 | --- | --- | --- |
-| Matemáticas, ciencias, investigación y pruebas formales complejas | Sí | El modelo puede usar más de 64,000 tokens para explorar y verificar su razonamiento. |
-| Las tareas de programación y de agentes más difíciles | Sí | Algunas tareas necesitan más de 64,000 tokens de razonamiento y código en una sola respuesta. La mayoría de las tareas de programación y de agentes finalizan con menos de 64,000 tokens. |
-| Arneses de evaluación que se detienen en el límite de salida | Sí | La decodificación larga evita que se corten las respuestas cuando el modelo dedica una solicitud completa de 64,000 o 32,000 tokens al pensamiento. |
-| Chat, preguntas y respuestas, resumen, clasificación y extracción | No | Estas tareas se completan con menos de 32,000 tokens. |
-| Solicitudes de una longitud fija, como "escribe un libro de 700,000 palabras" | No | El modelo no sigue los objetivos de longitud. |
-| Agentes que llaman a herramientas en muchos turnos cortos | No | Cada turno es corto. Las salidas grandes en cada turno llenan rápidamente la ventana unificada de entrada y salida de 1M. |
-| Instrucciones cerca del límite de entrada de 1 millón | No | La salida solo puede usar 1 millón menos tu entrada. |
-| Solicitudes sensibles a la latencia | No | La decodificación larga puede ejecutarse durante varios minutos. |
+| Matematikë e vështirë, shkencë, kërkime dhe prova formale | Po | Modeli mund të shpenzojë më shumë se 64 000 jetone për të eksploruar dhe kontrolluar arsyetimin e tij. |
+| Detyrat më të vështira të kodimit dhe agjentike | Po | Disa detyra kërkojnë më shumë se 64 000 tokena arsyetimi dhe kodi në një përgjigje. Shumica e detyrave të kodimit dhe agjentike përfundojnë nën 64 KB. |
+| Struktura vlerësimi që ndalojnë në kufirin e nxjerrjes | Po | Dekodimi i gjatë parandalon përgjigjet e ndërprera kur modeli shpenzon një kërkesë të plotë prej 64K ose 32K për të menduarit. |
+| Biseda, pyetje-përgjigje, përmbledhje, klasifikim dhe nxjerrje | Jo | Këto detyra përfundojnë me më pak se 32 000 kode. |
+| Kërkesat për një gjatësi fikse, si p.sh. "shkruaj një libër me 700 000 fjalë" | Jo | Modeli nuk ndjek objektivat e gjatësisë. |
+| Agjentët që telefonojnë veglat në shumë kthesa të shkurtra | Jo | Çdo radhë është e shkurtër. Rezultatet e mëdha në çdo radhë e mbushin shpejt dritaren e unifikuar të hyrjes dhe daljes prej 1 milion tokenësh. |
+| Kërkesat pranë kufirit të hyrjes prej 1 milion tokenësh | Jo | Dalja mund të përdorë vetëm 1 milion minus hyrjen tënde. |
+| Kërkesat e ndjeshme ndaj vonesës | Jo | Dekodimi i gjatë mund të zgjasë për disa minuta. |
 
-Establecer un valor alto de `max_output_tokens` le da al modelo espacio para pensar más tiempo en problemas difíciles, pero el modelo sigue decidiendo cuánto escribir. Para controlar cuánto esfuerzo de razonamiento usa el modelo, establece [`thinking_level`](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=es-419).
+Caktimi i një vlere të lartë për `max_output_tokens` i jep modelit hapësirë për të menduar më gjatë për problemet e vështira, por modeli vendos ende se sa të shkruajë. Për të kontrolluar se sa përpjekje arsyetimi përdor modeli, cakto [`thinking_level`](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=sq).
 
-## Activa la decodificación larga
+## Aktivizo dekodimin e gjatë
 
-Puedes ejecutar la decodificación larga automáticamente con el SDK de IA generativa de Google (opción 1, recomendada para la mayoría de las apps) o escribir tu propio bucle de continuación (opción 2). Ambas opciones admiten la ventana de contexto completa de 1 millón de tokens.
+Mund të ekzekutosh automatikisht dekodimin e gjatë me Google GenAI SDK (opsioni 1, i rekomanduar për shumicën e aplikacioneve) ose të shkruash ciklin tënd të vazhdimit (opsioni 2). Të dyja opsionet mbështesin dritaren kontekstuale të plotë me 1 milion tokenë.
 
-|  | Opción 1: SDK de Google GenAI (recomendado) | Opción 2: Tu propio bucle de transmisión | Opción 2: Tu propio bucle que no es de transmisión |
+|  | Opsioni 1: Google GenAI SDK (rekomandohet) | Opsioni 2: Cikli yt i transmetimit | Opsioni 2: Lak i yt jotransmetues |
 | --- | --- | --- | --- |
-| **Quién inicia cada salto** | El SDK Tú estableces `max_output_tokens`. | Tu código, en cada punto de control o después de una transmisión interrumpida | Tu código, cada 32,000 tokens |
-| **Tokens por solicitud** | 64 K por salto | 64 K por transmisión, con un punto de control cada 5 K tokens después de 32 K | 32,000 por solicitud |
-| **Límite de tiempo por solicitud** | 20 minutos | 20 minutos | 20 minutos |
-| **Almacenamiento** | No hay almacenamiento en el servidor | No hay almacenamiento en el servidor | No hay almacenamiento en el servidor |
-| **Ideal para** | La mayoría de las aplicaciones | Llamadores de REST y arneses personalizados que transmiten | Arneses de evaluación simples |
+| **Kush e fillon çdo hop** | SDK-ja. Ke caktuar `max_output_tokens`. | Kodi yt, në çdo pikë kontrolli ose pas një transmetimi të ndërprerë | Kodi yt, çdo 32 000 tokenë |
+| **Tokenët për kërkesë** | 64 K për hop | 64K për transmetim, me një pikë kontrolli çdo 5K kode pas 32K | 32 000 për kërkesë |
+| **Kufiri kohor për kërkesë** | 20 minuta | 20 minuta | 20 minuta |
+| **Hapësira ruajtëse** | Nuk ka hapësirë ruajtëse në server | Nuk ka hapësirë ruajtëse në server | Nuk ka hapësirë ruajtëse në server |
+| **Më të mirat për** | Shumica e aplikacioneve | Telefonuesit REST dhe pajisjet e personalizuara që transmetojnë | Struktura të thjeshta vlerësimi |
 
-El `continuation_token` encriptado transporta el estado del modelo entre solicitudes, por lo que no se almacena nada en el servidor.
+`continuation_token` i enkriptuar mbart gjendjen e modelit ndërmjet kërkesave, kështu që asgjë nuk ruhet në server.
 
-### Opción 1: Usa el SDK de Google GenAI (recomendado)
+### Opsioni 1: Përdor Google GenAI SDK (rekomandohet)
 
-En el SDK de GenAI de Google más reciente, `automatic_continuation` está habilitado de forma predeterminada para las llamadas de transmisión y las que no son de transmisión, por lo que no es necesario que lo configures. Cuando configuras `max_output_tokens` por encima del límite por solicitud, el SDK ejecuta automáticamente los saltos de continuación y devuelve una respuesta combinada.
+Në SDK-në më të fundit të IA-së gjeneruese të Google, `automatic_continuation` është e aktivizuar si parazgjedhje për telefonatat me transmetim dhe ato pa transmetim, kështu që nuk ka nevojë ta caktosh atë. Kur cakton `max_output_tokens` mbi kufirin për kërkesë, SDK-ja ekzekuton automatikisht kalimet e vazhdimit dhe kthen një përgjigje të kombinuar.
 
-1. Actualiza el SDK.
+1. Përmirëso SDK-në.
 
    ### Python
 
@@ -97,7 +97,7 @@ En el SDK de GenAI de Google más reciente, `automatic_continuation` está habil
    ```
    npm install "@google/genai@>=2.29.1"
    ```
-2. Establece `max_output_tokens` en un valor mayor que 65,536.
+2. Cakto `max_output_tokens` më të madhe se 65 536.
 
    ### Python
 
@@ -146,24 +146,24 @@ En el SDK de GenAI de Google más reciente, `automatic_continuation` está habil
    console.log("Billed tokens:", response.usageMetadata?.totalTokenCount);
    ```
 
-Recuerda estos puntos:
+Ki parasysh këto pika:
 
-- **Transmisión:** `generate_content_stream` (Python) y `generateContentStream` (JavaScript) también continúan para ti. Si una transmisión se interrumpe después de un punto de control, el SDK se reanuda desde ese punto de control.
-- **Tiempos de espera:** Los tiempos de espera y los reintentos se aplican a cada salto, no a la ejecución completa.
-- **Control manual:** Para ejecutar el bucle por tu cuenta, establece `automatic_continuation=False` (Python) o `automaticContinuation: false` (JavaScript). Luego, sigue la opción 2.
-- **Uso:** Los campos de uso muestran la suma de todos los saltos. Para obtener el tamaño de tu instrucción, lee `initial_prompt_token_count`. Consulta [Recuento de tokens](#count-tokens).
+- **Transmetimi:** `generate_content_stream` (Python) dhe `generateContentStream` (JavaScript) vazhdojnë gjithashtu për ty. Nëse një transmetim ndërpritet pas një pike kontrolli, SDK-ja vazhdon nga ajo pikë kontrolli.
+- **Skadimet e kohës:** Skadimet e kohës dhe riprovat zbatohen për çdo kalim, jo për ekzekutimin e plotë.
+- **Kontrolli manual:** Për ta ekzekutuar vetë luajtjen e përsëritur, cakto `automatic_continuation=False` (Python) ose `automaticContinuation: false` (JavaScript). Më pas ndiq opsionin 2.
+- **Përdorimi:** Fushat e përdorimit shfaqin shumën e të gjitha kalimeve. Për të marrë madhësinë e kërkesës sate, lexo `initial_prompt_token_count`. Shiko [Numëro elementet](#count-tokens).
 
-### Opción 2: Escribe tu propio bucle
+### Opsioni 2: Shkruaj ciklin tënd
 
-Escribe tu propio bucle si llamas a REST directamente, usas un lenguaje sin el SDK más reciente o necesitas un control total. También puedes consultar nuestras implementaciones del SDK de IA generativa de Google en [Python](https://github.com/googleapis/python-genai/blob/v2.30.1/google/genai/models.py#L6111) y [JavaScript/TypeScript](https://github.com/googleapis/js-genai/blob/v2.29.1/src/models.ts#L88) como referencia.
+Shkruaj ciklin tënd nëse telefonon REST drejtpërdrejt, përdor një gjuhë pa SDK-në më të fundit ose ke nevojë për kontroll të plotë. Mund t'u referohesh gjithashtu implementimeve tona të Google GenAI SDK në [Python](https://github.com/googleapis/python-genai/blob/v2.30.1/google/genai/models.py#L6111) dhe [JavaScript/TypeScript](https://github.com/googleapis/js-genai/blob/v2.29.1/src/models.ts#L88) si referencë.
 
-Siga estas reglas:
+Ndiq këto rregulla:
 
-1. **Enviar la misma solicitud en cada salto** Envía los atributos originales `contents`, `system_instruction`, `tools` y `generation_config`. Mantén `max_output_tokens` igual.
-2. **No agregues resultados parciales a `contents`.** El `continuation_token` contiene el estado del modelo, incluido su proceso de pensamiento.
-3. **Envía solo el token más reciente.** Cada token contiene todo el progreso anterior.
-4. **Continúa mientras `finish_reason` es `CONTINUATION`.** Se detiene por cualquier otro motivo de finalización.
-5. **Une las partes después del último salto.** Combina las partes de todos los saltos en un turno de modelo para el historial de conversaciones.
+1. **Dërgo të njëjtën kërkesë në çdo hop.** Dërgo `contents`, `system_instruction`, `tools` dhe `generation_config` origjinale. Mbaje `max_output_tokens` njëlloj.
+2. **Mos shto nxjerrje të pjesshme te `contents`.** `continuation_token` mbart gjendjen e modelit, duke përfshirë arsyetimin e tij.
+3. **Dërgo vetëm kodin më të fundit.** Çdo kod përmban të gjithë progresin e mëparshëm.
+4. **Vazhdo ndërkohë që `finish_reason` është `CONTINUATION`.** Ndalo për çdo arsye tjetër përfundimi.
+5. **Bashko pjesët pas kërcimit të fundit.** Kombino pjesët nga të gjitha kalimet në një radhë të modelit për historikun e bisedës.
 
 ### Python
 
@@ -234,7 +234,7 @@ console.log(parts.filter((p) => p.text && !p.thought).map((p) => p.text).join(""
 console.log("Finish reason:", candidate?.finishReason);
 ```
 
-### REST
+### QETËSI
 
 ```
 # Hop 1: send the request with max_output_tokens.
@@ -263,7 +263,7 @@ curl -s "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-argon:
   }'
 ```
 
-Un salto dedicado por completo a la reflexión devuelve un `text` vacío con `finishReason: "CONTINUATION"`. Trata esto como un progreso normal y solicita el próximo salto:
+Një kërcim i shpenzuar tërësisht për të menduar kthen `text` bosh me `finishReason: "CONTINUATION"`. Trajtoje këtë si progres normal dhe kërko kërcimin vijues:
 
 ```
 {
@@ -281,123 +281,123 @@ Un salto dedicado por completo a la reflexión devuelve un `text` vacío con `fi
 }
 ```
 
-Los **bucles de transmisión** necesitan una regla más. Después de los primeros 32,768 tokens, la transmisión envía un token de punto de control cada 5,000 tokens. Mantén los fragmentos nuevos en una lista pendiente. Cuando un fragmento tenga un `continuation_token`, mueve los fragmentos pendientes a tu resultado confirmado y guarda el token. Si se interrumpe la transmisión, descarta los fragmentos pendientes y reanuda la transmisión desde el último token. Si la transmisión se interrumpe antes del primer punto de control, vuelve a enviar la solicitud original.
+**Ciklet e transmetimit** kanë nevojë për një rregull tjetër. Pas 32 768 kodeve të para, transmetimi dërgon një kod kontrolli çdo 5 000 kode. Mbaji pjesët e reja në një listë në pritje. Kur një pjesë ka një `continuation_token`, zhvendosi pjesët në pritje në daljen tënde të kryer dhe ruaj tokenin. Nëse transmetimi ndërpritet, hiqi pjesët në pritje dhe vazhdo nga tokeni i fundit. Nëse transmetimi ndërpritet para pikës së parë të kontrollit, dërgo përsëri kërkesën origjinale.
 
-## Conjunto `max_output_tokens`
+## Seti `max_output_tokens`
 
-`max_output_tokens` establece el límite combinado para el pensamiento y la salida en todos los saltos. Disminuirlo no hace que el modelo piense de forma más concisa, sino que corta la respuesta antes.
+`max_output_tokens` cakton kufirin e kombinuar për të menduarit dhe daljen në të gjitha kërcimet. Ulja e tij nuk e bën modelin të mendojë në mënyrë më koncize, por në vend të kësaj e ndërpret përgjigjen më herët.
 
-| Tu carga de trabajo | Recomendada `max_output_tokens` |
+| Ngarkesa jote e punës | `max_output_tokens` e rekomanduar |
 | --- | --- |
-| Apps existentes con un límite inferior a 32,000 | Aumenta el valor a 32,768. |
-| Tareas de programación y de agentes extensas | Comienza en 65,536. |
-| Matemáticas, ciencia, investigación y demostraciones difíciles | Valores de prueba desde 262,144 hasta 1,048,576 menos tus tokens de entrada. |
+| Aplikacionet ekzistuese me një kufi më të ulët se 32 KB | Rrite në 32 768. |
+| Detyrat e gjata të kodimit dhe agjentike | Fillo në 65 536. |
+| Matematikë, shkencë, kërkime dhe vërtetime të vështira | Testo vlerat nga 262 144 deri në 1 048 576 minus kodet hyrëse. |
 
-Para usar menos tokens, disminuye `thinking_level`. Usa `high` para las tareas de razonamiento más difíciles. Usa `medium` (la opción predeterminada) para la mayoría de las tareas de programación y de agentes. Usa `low` para tareas menos complejas.
+Për të përdorur më pak kode, ule `thinking_level`. Përdor `high` për detyrat më të vështira të arsyetimit. Përdor `medium` (parazgjedhja) për shumicën e punës së kodimit dhe agjentike. Përdor `low` për detyra më pak komplekse.
 
-## Cómo controlar solicitudes de larga duración
+## Menaxho kërkesat afatgjata
 
-Como Gemini 4 Argon piensa más tiempo que los modelos Gemini 3.x en problemas difíciles, debes aumentar los tiempos de espera de tus clientes para que las solicitudes largas no se desconecten antes de tiempo.
+Duke qenë se Gemini 4 Argon mendon më gjatë se modelet Gemini 3.x për problemet e vështira, duhet të rritësh kohët e pritjes të klientit në mënyrë që kërkesat e gjata të mos shkëputen herët.
 
-- **Llamadas que no son de transmisión:** El servidor cierra la conexión después de 10 minutos.
-- **Llamadas de transmisión:** El servidor cierra la transmisión después de 20 minutos.
-- **Tiempos de espera del cliente:** Establece el tiempo de espera de lectura de HTTP en 20 minutos. Un tiempo de espera de 3 o 5 minutos detiene la solicitud antes de tiempo.
+- **Telefonatat jo transmetuese:** Serveri e mbyll lidhjen pas 10 minutash.
+- **Telefonatat e transmetimit:** Serveri e mbyll transmetimin pas 20 minutash.
+- **Kohët e pritjes për klientin:** Cakto kohën e pritjes për leximin e HTTP-së në 20 minuta. Një skadim kohe prej 3 ose 5 minutash e ndalon kërkesën herët.
 
-En Python, establece el tiempo de espera en el cliente en milisegundos:
+Në Python, cakto kohën e pritjes për klientin në milisekonda:
 
 ```
 client = genai.Client(http_options=types.HttpOptions(timeout=1_200_000))  # 20 minutes
 ```
 
-En el caso de los trabajos que son sondeados por tu cliente, la API de Interactions ejecuta una decodificación prolongada en el servidor. Consulta [Ejecución en segundo plano](https://ai.google.dev/gemini-api/docs/background-execution?hl=es-419).
+Për punët që klienti yt i kërkon, Interactions API ekzekuton dekodimin e gjatë në server. Shiko [ekzekutimin në sfond](https://ai.google.dev/gemini-api/docs/background-execution?hl=sq).
 
-## Reanudar cuando el modelo use todos los tokens de salida
+## Vazhdo kur modeli të përdorë të gjitha xhetonet e nxjerra
 
-Cuando una respuesta termina con `MAX_TOKENS`, aún incluye un `continuation_token`. Tienes dos opciones:
+Kur një përgjigje mbaron me `MAX_TOKENS`, ajo përfshin ende një `continuation_token`. Ke dy zgjedhje:
 
-- **Continuar:** Envía la misma solicitud con el token y un `max_output_tokens` más alto. El valor debe ser superior a los tokens que se usaron hasta el momento. De lo contrario, la API devuelve un error 400.
-- **Vuelve a empezar:** Envía la solicitud original con un valor de `max_output_tokens` más alto y sin token. Pagas por ambas ejecuciones.
+- **Vazhdo:** Dërgo të njëjtën kërkesë me kodin dhe një `max_output_tokens` më të lartë. Vlera duhet të jetë mbi numrin e tokenëve të përdorur deri tani. Në rast të kundërt, API-ja kthen një gabim 400.
+- **Fillo përsëri:** Dërgo kërkesën origjinale me një `max_output_tokens` më të lartë dhe pa kod. Ti paguan për të dyja dërgesat.
 
-## Cuenta tokens
+## Numëro tokenët
 
-Con la continuación automática, `usage_metadata` informa los totales de todos los saltos. El SDK suma todos los campos de recuento: `prompt_token_count`, `cached_content_token_count`, `candidates_token_count`, `thoughts_token_count` y `total_token_count`.
+Me vazhdimin automatik, `usage_metadata` raporton totalet në të gjitha kalimet. SDK-ja mbledh çdo fushë numërimi: `prompt_token_count`, `cached_content_token_count`, `candidates_token_count`, `thoughts_token_count` dhe `total_token_count`.
 
-`prompt_token_count` suma los tokens de entrada de cada salto. Cada salto envía tu instrucción y todo lo que se generó hasta el momento de vuelta al modelo como entrada, por lo que los mismos tokens se vuelven a contar en cada salto posterior. Por ejemplo, con el SDK de IA generativa de Google, una instrucción de 1,000 tokens que produce 200,000 tokens de razonamiento y resultado requiere cuatro saltos:
+`prompt_token_count` mbledh token-at e hyrjes të çdo kërcimi. Çdo kërcim e dërgon kërkesën tënde plus gjithçka që është gjeneruar deri tani përsëri te modeli si hyrje, kështu që të njëjtët kode numërohen përsëri në çdo kërcim të mëvonshëm. Për shembull, me Google GenAI SDK, një kërkesë me 1 000 dërgime që prodhon 200 000 dërgime të të menduarit dhe të nxjerrjes kërkon katër hapa:
 
-| Hop | Entrada enviada al modelo | Tokens de entrada |
+| Hop | Hyrja u dërgua te modeli | Tokenët e hyrjes |
 | --- | --- | --- |
-| 1 | Instrucción | 1,000 |
-| 2 | Instrucción + salto 1 | 66,536 |
-| 3 | Instrucción + saltos 1 y 2 | 132,072 |
-| 4 | Instrucción + saltos 1 a 3 | 197,608 |
-| **Total** |  | **397,216** |
+| 1 | Kërkesa | 1 000 |
+| 2 | Kërko dhe hidh 1 | 66,536 |
+| 3 | Kërkesa + hops 1 dhe 2 | 132,072 |
+| 4 | Kërkesa + 1 deri në 3 kalime | 197 608 |
+| **Totali** |  | **397 216** |
 
-`prompt_token_count` informa sobre 397,000 tokens (con entradas de saltos repetidos que se descuentan automáticamente en un 95% por el almacenamiento en caché implícito), y `total_token_count` informa sobre 597,000 tokens, aunque el tamaño real del contexto es de solo unos 201,000 tokens: la instrucción de 1,000 tokens más 200,000 tokens de pensamiento y salida. Un bucle REST que no es de transmisión usa 32 000 saltos, por lo que se necesitan siete saltos para la misma salida y se registran 695,128 tokens de entrada.
+`prompt_token_count` raporton rreth 397 000 kode (me hyrjet e përsëritura të kërcimeve të zbritura automatikisht me 95% nga ruajtja e fshehtë e të dhënave) dhe `total_token_count` raporton rreth 597 000 kode, edhe pse madhësia aktuale e kontekstit është vetëm rreth 201 000 kode: kërkesa me 1000 kode plus 200 000 kode për të menduarit dhe daljen. Një cikël REST pa transmetim përdor 32 000 kapërcime, kështu që duhen shtatë kapërcime për të njëjtin rezultat dhe raporton 695 128 jeto hyrëse.
 
-| Cómo llamas al modelo | Qué muestra `usage_metadata` | Por costo | Para el tamaño de la instrucción |
+| Si e quan modelin | Çfarë shfaq `usage_metadata` | Për koston | Për madhësinë e kërkesës |
 | --- | --- | --- | --- |
-| SDK de IA generativa de Google, continuación automática (opción predeterminada) | Totales en todos los saltos | Lee los campos de uso tal como están. | Lee `usage_metadata.initial_prompt_token_count` (Python) o `usageMetadata.initialPromptTokenCount` (JavaScript). |
-| SDK con `automatic_continuation=False` o REST | Un salto por respuesta | Agrega cada campo en los diferentes saltos. | Lee `prompt_token_count` desde el primer salto. |
+| Google GenAI SDK, vazhdimi automatik (parazgjedhja) | Totalet në të gjitha ndalesat | Lexo fushat e përdorimit siç janë. | Lexo `usage_metadata.initial_prompt_token_count` (Python) ose `usageMetadata.initialPromptTokenCount` (JavaScript). |
+| SDK me `automatic_continuation=False` ose REST | Një kërcim për përgjigje | Shto çdo fushë nëpër kërcime. | Lexo `prompt_token_count` nga hopi i parë. |
 
-`prompt_token_count` y `total_token_count` son la suma de cada salto, no el tamaño de tu contexto. No los uses para decidir cuándo resumir o recortar tu historial de conversaciones (compactación del contexto) ni para aplicar un límite de contexto. Para estimar el tamaño del contexto, agrega el tamaño de tu instrucción de la tabla a `candidates_token_count` y `thoughts_token_count`.
+`prompt_token_count` dhe `total_token_count` janë shuma e çdo kërcimi, jo madhësia e kontekstit tënd. Mos i përdor ato për të vendosur se kur duhet të përmbledhësh ose të shkurtosh historikun e bisedave (kompaktimi i kontekstit) ose për të zbatuar një kufi të kontekstit. Për të përllogaritur madhësinë e kontekstit, shto madhësinë e kërkesës sate nga tabela te `candidates_token_count` dhe `thoughts_token_count`.
 
-Actualiza el framework del agente, la herramienta de evaluación o el proxy antes de ejecutar la decodificación larga:
+Përditëso kuadrin e agjentit, veglën e vlerësimit ose ndërmjetësin para se të ekzekutosh deshifrimin e gjatë:
 
-- **Agentes y herramientas de evaluación:** Si tu código compacta el contexto o detiene una ejecución en un límite de tokens, usa `initial_prompt_token_count` (o el `prompt_token_count` del primer salto en REST) en lugar del `prompt_token_count` sumado. Las respuestas que finalizan en un salto informan el mismo valor en ambos campos, por lo que las pruebas cortas no muestran el problema.
-- **Proxies y puertas de enlace que llaman a REST:** Cada respuesta de REST informa solo su propio salto. Suma cada campo en los saltos para el costo y mantén el `promptTokenCount` del primer salto como el tamaño de la instrucción. De lo contrario, tus usuarios verán números diferentes de los que ven los usuarios del SDK para la misma solicitud.
-- **Registros y respuestas serializadas:** El SDK calcula `initial_prompt_token_count` en el cliente. No se encuentra en la respuesta de REST ni en el resultado JSON del SDK, como `model_dump()`. Guárdalo como un valor independiente si lo necesitas más adelante.
+- **Agjentët dhe veglat e vlerësimit:** Nëse kodi yt e ngjesh kontekstin ose e ndalon ekzekutimin në një kufi të shenjave, përdor `initial_prompt_token_count` (ose `prompt_token_count` e hapit të parë në REST) në vend të `prompt_token_count` të mbledhur. Përgjigjet që përfundojnë në një hop raportojnë të njëjtën vlerë në të dyja fushat, kështu që testet e shkurtra nuk e shfaqin problemin.
+- **Proksitë dhe portat që thërrasin REST:** Çdo përgjigje REST raporton vetëm kërcimin e vet. Shto çdo fushë nëpër transferta për koston dhe mbaj `promptTokenCount` e transfertës së parë si madhësinë e kërkesës. Në rast të kundërt, përdoruesit e tu shohin numra të ndryshëm nga ata që shohin përdoruesit e SDK-së për të njëjtën kërkesë.
+- **Regjistrat dhe përgjigjet e serializuara:** SDK-ja llogarit `initial_prompt_token_count` në klient. Nuk është në përgjigjen REST ose në daljen JSON të SDK-së, si p.sh. `model_dump()`. Ruaje si një vlerë të veçantë nëse të nevojitet më vonë.
 
-Si transmites en tu propio bucle, `usage_metadata` es acumulativo dentro de cada transmisión. Conserva solo el último valor de cada transmisión y, luego, suma los valores en los saltos.
+Nëse transmeton në luajtjen tënde të përsëritur, `usage_metadata` është kumulative brenda çdo transmetimi. Mbaj vetëm vlerën e fundit të çdo transmetimi, më pas shto vlerat nëpër hop-e.
 
-## Comprende la facturación
+## Kupto faturimin
 
-Pagas por cada token en cada salto, incluidos los saltos que solo contienen pensamiento.
+Ti paguan për çdo kod në çdo hap, duke përfshirë hapat që përmbajnë vetëm të menduarit.
 
-- **Descuento por almacenamiento en caché:** El almacenamiento en caché implícito descuenta la entrada repetida en cada salto en un 95%. La entrada almacenada en caché cuesta USD 0.10 por cada millón de tokens en lugar de USD 2.00 durante el período de lanzamiento.
-- **Vencimiento de la caché:** La caché vence después de 15 a 20 minutos sin uso. Una pausa larga entre saltos vuelve a cobrar la tarifa de entrada completa.
-- **Saltos fallidos sin transmisión:** Solo pagas cuando se completa una respuesta. Una solicitud con errores o descartada cuesta $0.
-- **Transmisiones descartadas:** Una transmisión que se descarta antes de los 32,000 tokens cuesta $0. Después de eso, pagas hasta el último token de punto de control, porque puedes reanudar desde allí.
+- **Zbritja e memories specifike:** Ruajtja specifike në memorie ul me 95% hyrjen e përsëritur në çdo hap. Hyrja e ruajtur në memorien specifike kushton 0,10 USD për 1 milion tokenë në vend të 2,00 USD gjatë periudhës prezantuese.
+- **Skadimi i memorjes specifike:** Memorja specifike skadon pas 15 deri në 20 minuta pa përdorim. Një pauzë e gjatë mes kërcimeve tarifon përsëri tarifën e plotë të hyrjes.
+- **Hopet e dështuara pa transmetim:** Ti paguan vetëm kur përfundon një përgjigje. Një kërkesë e dështuar ose e lëshuar kushton $0.
+- **Transmetimet e ndërprera:** Një transmetim që ndërpritet para 32 000 kodeve kushton 0 dollarë. Pas kësaj, ti paguan deri te tokeni i pikës së fundit të kontrollit, sepse mund të vazhdosh nga ai.
 
-## Solución de problemas
+## Zgjidhja e problemeve
 
-| Síntoma | Causa y solución |
+| Simptoma | Shkaku dhe rregullimi |
 | --- | --- |
-| La salida se detiene en 64,000 o 32,000 con `CONTINUATION` | Al modelo le quedan tokens, pero nada continuó la solicitud. Actualiza el SDK o agrega un bucle. |
-| La salida se detiene en 64 K o 32 K con `MAX_TOKENS` | `max_output_tokens` no está configurado o es demasiado bajo. Establece un valor superior a 65,536. |
-| Texto vacío con `MAX_TOKENS` | El modelo usó todos los tokens en el pensamiento. Sube `max_output_tokens` o baja `thinking_level`. |
-| 400: "El token de continuación ya usó tokens de salida…" | `max_output_tokens` no supera los tokens usados hasta el momento. Levántala. |
-| Error para `thinking_level: "minimal"` o para `thinking_budget` con `thinking_level` | Gemini 4 Argon no admite `minimal`. Usa `low`, `medium` o `high`. Configura `thinking_level` o `thinking_budget`, pero no ambos. |
-| Advertencia para `thinking_budget`, `temperature`, `top_p` o `top_k` | Gemini 4 Argon ignora o asigna estos campos. Usa `thinking_level` y quita los parámetros de muestreo. |
-| La solicitud finaliza después de 3 o 5 minutos | El tiempo de espera del cliente es demasiado corto. Establécelo en 20 minutos. |
-| La compactación de contexto comienza demasiado pronto | El harness lee la entrada sumada. Lee `initial_prompt_token_count` en su lugar. |
+| Dalja ndalon në 64K ose 32K me `CONTINUATION` | Modeli ka kode të mbetura, por asgjë nuk e vazhdoi kërkesën. Përmirëso SDK-në ose shto një lak. |
+| Dalja ndalon në 64K ose 32K me `MAX_TOKENS` | `max_output_tokens` nuk është caktuar ose është shumë i ulët. Caktoje në më shumë se 65 536. |
+| Tekst bosh me "`MAX_TOKENS`" | Modeli përdori të gjitha kodet në arsyetim. Ngri `max_output_tokens` ose ul `thinking_level`. |
+| 400: "Kodi i vazhdimit ka përdorur tashmë kodet e daljes..." | `max_output_tokens` nuk është mbi numrin e përdorur të token-ëve deri tani. Ngrije. |
+| Gabim për `thinking_level: "minimal"` ose për `thinking_budget` me `thinking_level` | Gemini 4 Argon nuk e mbështet `minimal`. Përdor `low`, `medium` ose `high`. Cakto `thinking_level` ose `thinking_budget`, jo të dyja. |
+| Paralajmërim për: `thinking_budget`, `temperature`, `top_p` ose `top_k` | Gemini 4 Argon i shpërfill ose i hartëzon këto fusha. Përdor `thinking_level` dhe hiq parametrat e kampionimit. |
+| Kërkesa përfundon pas 3 ose 5 minutash | Koha e pritjes e klientit është shumë e shkurtër. Caktoje në 20 minuta. |
+| Ngjeshja e kontekstit fillon shumë herët | Struktura lexon hyrjen e mbledhur. Lexo `initial_prompt_token_count` më mirë. |
 
-## Limitaciones
+## Kufizimet
 
-- **Extremo de compatibilidad con OpenAI:** La decodificación larga no está disponible. La salida se detiene en el límite por solicitud.
-- **SDKs más antiguos:** Las versiones anteriores a las mínimas que se indican en la nota no continúan automáticamente.
-- **Longitud:** El modelo no sigue los objetivos de longitud de tokens ni de recuento de palabras.
+- **Pika fundore e përputhshmërisë me OpenAI:** Dekodimi i gjatë nuk ofrohet. Dalja ndalon në kufirin për kërkesë.
+- **SDK-të më të vjetra:** Versionet nën minimumet në shënim nuk vazhdojnë automatikisht.
+- **Gjatësia:** Modeli nuk ndjek objektivat për numrin e tokenëve ose numrin e fjalëve.
 
-## Lista de tareas
+## Listë kontrolli
 
-- Actualiza el SDK de GenAI de Google a la versión mínima.
-- Establece `max_output_tokens` en un valor mayor que 65,536.
-- Usa `thinking_level` (`low`, `medium` o `high`), no `thinking_budget`.
-- Establece los tiempos de espera de lectura de HTTP en 20 minutos.
-- Usa `initial_prompt_token_count` para el tamaño y la compactación del contexto.
-- Ejecuta una instrucción como prueba antes de una evaluación grande.
+- Përmirëso SDK-në e Google GenAI në versionin minimal.
+- Cakto `max_output_tokens` më të madhe se 65 536.
+- Përdor `thinking_level` (`low`, `medium` ose `high`), jo `thinking_budget`.
+- Cakto kohët e pritjes për leximin e HTTP-së në 20 minuta.
+- Përdor `initial_prompt_token_count` për madhësinë dhe kompaktësimin e kontekstit.
+- Ekzekuto një kërkesë si test para një vlerësimi të madh.
 
-## Próximos pasos
+## Hapat e radhës
 
-- [Novedades de Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=es-419)
-- [Pensamiento](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=es-419)
-- [Recuento de tokens](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=es-419)
+- [Çfarë ka të re në Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=sq)
+- [Po mendoj](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=sq)
+- [Numërimi i tokenëve](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=sq)
 
-Enviar comentarios
+Dërgo komente
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-Última actualización: 2026-10-13 (UTC)
+Përditësimi i fundit: 2026-10-13 UTC.
 
-¿Quieres brindar más información?
+Duhet të na tregosh më shumë?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-13 (UTC)"],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-13 UTC."],[],[]]

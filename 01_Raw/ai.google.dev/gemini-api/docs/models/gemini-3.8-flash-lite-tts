@@ -1,126 +1,125 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=fr
-fetched_at: 2026-10-26T05:54:33.710098+00:00
-title: "Gemini\u00a03.8 Flash-Lite TTS \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=zh-TW
+fetched_at: 2026-11-02T07:15:12.251574+00:00
+title: "Gemini 3.8 Flash-Lite TTS \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Envoyer des commentaires
+提供意見
 
-# Gemini 3.8 Flash-Lite TTS
+# Gemini 3.8 Flash-Lite TTS
 
-Gemini 3.8 Flash-Lite TTS (`gemini-3.8-flash-lite-tts`) est le modèle de synthèse vocale de Google, rapide et économique, conçu pour remplacer `gemini-3.1-flash-tts-preview` pour les charges de travail de production à haut débit.
+Gemini 3.8 Flash-Lite TTS (`gemini-3.8-flash-lite-tts`) 是 Google 快速、符合成本效益的主力文字轉語音模型，旨在取代 `gemini-3.1-flash-tts-preview`，用於高處理量正式環境工作負載。
 
-[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-3.8-flash-lite-tts&hl=fr)
+[在 Google AI Studio 試用](https://aistudio.google.com?model=gemini-3.8-flash-lite-tts&hl=zh-tw)
 
-## Présentation et fonctionnalités
+## 總覽與功能
 
-Gemini 3.8 Flash-Lite TTS combine une faible latence avec une voix expressive et naturelle :
+Gemini 3.8 Flash-Lite TTS 結合低延遲與生動自然的語音：
 
-- **Efficacité à haut débit** : optimisé pour la production en masse, les cascades d'agents vocaux conversationnels, les fonctionnalités de lecture à voix haute et la génération vocale quotidienne à une seule voix dans les principales langues.
-- **Compatibilité du schéma de l'API prêt à l'emploi** : partage le même schéma de l'API et le même format d'incitation structurée que `gemini-3.8-flash-tts`, ce qui vous permet de changer de modèle en modifiant un seul paramètre.
-- **Compatibilité complète avec l'écosystème vocal** : compatible avec les voix prédéfinies, la bibliothèque vocale étendue (`GET /v1beta/voices`), les personas de [conception vocale](https://ai.google.dev/gemini-api/docs/voice-design?hl=fr) personnalisés et la [réplication vocale](https://ai.google.dev/gemini-api/docs/voice-replication?hl=fr) (voix stockées de manière persistante par défaut, avec des clés sans état en option). Vous pouvez également concevoir et répliquer des voix de manière interactive dans [Google AI Studio](https://aistudio.google.com/generate-speech?hl=fr).
+- **高處理量效率：**經過最佳化調整，可大量生成語音、串接對話式語音代理、提供朗讀功能，以及生成主要語言的日常單一說話者語音。
+- **直接套用的 API 架構相容性：**與 `gemini-3.8-flash-tts` 共用完全相同的 API 架構和結構化提示格式，只要變更單一參數，即可切換模型。
+- **完整的語音生態系統支援：**支援預先建立的語音、擴充語音庫 (`GET /v1beta/voices`)、自訂[語音設計](https://ai.google.dev/gemini-api/docs/voice-design?hl=zh-tw)角色，以及[語音複製](https://ai.google.dev/gemini-api/docs/voice-replication?hl=zh-tw) (預設為永久儲存的語音，以及選用的無狀態金鑰)。您也可以在 [Google AI Studio](https://aistudio.google.com/generate-speech?hl=zh-tw) 中，以互動方式設計及複製語音。
 
-Consultez le guide [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fr) pour obtenir une couverture complète des fonctionnalités, des bonnes pratiques concernant les requêtes et des exemples de code.
+請參閱[文字轉語音](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw)指南，瞭解完整功能、提示最佳做法和程式碼範例。
 
-## Quand utiliser quel modèle TTS ?
+## 各種 TTS 模型的適用時機
 
-Les deux modèles Gemini 3.8 TTS partagent le même schéma de l'API et la même structure d'invite.
-Choisissez le modèle qui correspond à votre charge de travail :
+這兩個 Gemini 3.8 TTS 模型共用相同的 API 架構和提示結構。選擇適合工作負載的模型：
 
-| Fonctionnalité / Charge de travail | Gemini 3.8 Flash-Lite TTS (`gemini-3.8-flash-lite-tts`) | Gemini 3.8 Flash TTS (`gemini-3.8-flash-tts`) |
+| 功能/工作負載 | Gemini 3.8 Flash-Lite TTS (`gemini-3.8-flash-lite-tts`) | Gemini 3.8 Flash TTS (`gemini-3.8-flash-tts`) |
 | --- | --- | --- |
-| **Force principale** | Haut débit, faible latence et rentabilité | Fidélité vocale, nuances de jeu d'acteur et couverture des dialectes maximales |
-| **Meilleurs cas d'utilisation** | Production à volume élevé, cascades d'agents vocaux en temps réel, fonctionnalités de lecture à voix haute, réplication de voix, génération quotidienne à une seule voix | Livres audio, narration en studio, dialogues complexes à plusieurs voix, jeu d'acteur avec des éclats de voix intenses, prononciation difficile, dialectes régionaux |
-| **Langues dans lesquelles le service est disponible** | 101 langues | 130 langues |
-| **Remplacement recommandé pour** | `gemini-3.1-flash-tts-preview` | Nouveau niveau de création phare |
+| **主要優點** | 高處理量、低延遲和成本效益 | 最大程度忠實呈現語音、細膩演技和方言 |
+| **最佳用途** | 大量生成、即時語音代理串接、朗讀功能、語音複製、日常單一說話者生成 | 有聲書、錄音室旁白、複雜的多人對話、情緒起伏大的配音、發音困難、地方方言 |
+| **支援的語言** | 101 種語言 | 130 種語言 |
+| **建議替代** | `gemini-3.1-flash-tts-preview` | 全新旗艦級創作者 |
 
-## Guide de migration
+## 遷移指南
 
-Si vous passez de `gemini-3.1-flash-tts-preview` à `gemini-3.8-flash-lite-tts`, mettez à jour vos requêtes pour le schéma Gemini 3.8 TTS :
+如果從 `gemini-3.1-flash-tts-preview` 升級至 `gemini-3.8-flash-lite-tts`，請更新 Gemini 3.8 TTS 結構定義的要求：
 
-1. **Déplacez les instructions au niveau des tours de parole dans `speech_metadata`** : Gemini 3.8 TTS traite le texte saisi strictement comme une transcription mot à mot. Les instructions textuelles intégrées telles que `"Say cheerfully: Hello!"` ou `"Speaker 1: Hello!"` peuvent être lues à voix haute.
-   Déplacez les instructions de diffusion continue (`style`) et les libellés des locuteurs (`speaker`) dans les métadonnées structurées :
-   - **API Interactions** : associez une annotation avec `"type":
-     "speech_metadata"`, `"speaker"` et `"style"` à chaque bloc de contenu textuel.
-   - **API GenerateContent** : ajoutez `"speech_metadata": {"speaker": "...",
-     "style": "..."}` à chaque `part`.
-2. **N'utilisez les tags intégrés entre crochets que pour les événements vocaux ponctuels** : conservez les vocalises et les pauses momentanées non verbales dans la transcription à l'aide de crochets (par exemple, `<laugh>`, `<sigh>`, `<cough>`, `<breath>` ou `<short pause>`). Placez les styles de diction tels que les chuchotements dans `speech_metadata.style`.
-3. **Spécifiez `speaker` à chaque tour de parole dans les requêtes à plusieurs locuteurs** : chaque tour de parole d'une requête à plusieurs locuteurs doit inclure explicitement `speaker` dans `speech_metadata` correspondant à l'un des locuteurs configurés.
-4. **Concevez des personas à l'avance avec la conception vocale** : remplacez les longs blocs de notes de l'ancien profil audio / du réalisateur par une voix personnalisée créée dans [Conception vocale](https://ai.google.dev/gemini-api/docs/voice-design?hl=fr), puis transmettez cet ID `voice_...` dans vos requêtes TTS avec des chaînes `style` minimales ou vides.
-5. **Tenir compte de la sortie WAV par défaut (`audio/wav`) pour les requêtes unaires** : contrairement aux modèles TTS `gemini-3.1-flash-tts-preview` et antérieurs (qui renvoyaient par défaut un PCM brut `audio/l16` sans en-tête), Gemini 3.8 TTS renvoie par défaut un fichier audio WAV (`audio/wav` / `AUDIO_WAV`) avec un en-tête RIFF standard pour les requêtes unaires.
-   - Si votre code encapsulait auparavant des octets PCM bruts dans un en-tête WAV (par exemple, à l'aide du module `wave` ou de `ffmpeg` de Python), supprimez l'encapsulation manuelle de l'en-tête et écrivez les octets renvoyés directement dans un fichier `.wav`.
-   - Si votre pipeline nécessite un fichier audio PCM brut sans en-tête, mu-law ou A-law, définissez explicitement `response_format.mime_type` sur `"audio/l16"`, `"audio/mulaw"` ou `"audio/alaw"` (par exemple, `{"response_format": {"type": "audio", "mime_type": "audio/l16"}}` dans l'API Interactions, ou `AUDIO_L16`, `AUDIO_MULAW` ou `AUDIO_ALAW` dans `generateContent`). Consultez [Formats de sortie audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fr#audio-output-formats).
+1. **將轉向指示移至 `speech_metadata`：**Gemini 3.8 TTS 會將輸入文字視為逐字稿。系統可能會朗讀 `"Say cheerfully: Hello!"` 或 `"Speaker 1: Hello!"` 等內嵌文字方向。將持續傳遞指示 (`style`) 和說話者標籤 (`speaker`) 移至結構化中繼資料：
+   - **Interactions API：**使用 `"type":
+     "speech_metadata"`、`"speaker"` 和 `"style"` 將註解附加至每個文字內容區塊。
+   - **GenerateContent API：**將 `"speech_metadata": {"speaker": "...",
+     "style": "..."}` 附加至每個 `part`。
+2. **僅針對特定時間點的語音事件使用角括號內嵌標記：**請使用角括號 (例如 `<laugh>`、`<sigh>`、`<cough>`、`<breath>` 或 `<short pause>`)，在轉錄稿中內嵌短暫的非語音發聲和停頓。請將耳語等表達方式放在 `speech_metadata.style` 中。
+3. **在多位說話者要求中，為每個語音片段指定 `speaker`：**在多位說話者要求中，每個語音片段都必須在 `speech_metadata` 內明確包含 `speaker`，並與其中一位設定的說話者相符。
+4. **使用語音設計功能預先設計角色：**使用[語音設計](https://ai.google.dev/gemini-api/docs/voice-design?hl=zh-tw)功能建立自訂語音，取代冗長的舊版音訊設定檔/導演附註區塊，然後在 TTS 要求中加入該 `voice_...` ID，並使用最少或空白的 `style` 字串。
+5. **一元要求預設輸出 WAV (`audio/wav`)：**`gemini-3.1-flash-tts-preview` 和更早的 TTS 模型預設會傳回無標頭的原始 PCM `audio/l16`，Gemini 3.8 TTS 則不同，一元要求預設會傳回含有標準 RIFF 標頭的 WAV 音訊 (`audio/wav`/`AUDIO_WAV`)。
+   - 如果程式碼先前使用 WAV 標頭包裝原始 PCM 位元組 (例如使用 Python 的 `wave` 模組或 `ffmpeg`)，請移除手動標頭包裝函式，並將傳回的位元組直接寫入 `.wav` 檔案。
+   - 如果管道需要無標頭的原始 PCM、mu-law 或 A-law 音訊，請明確將 `response_format.mime_type` 設為 `"audio/l16"`、`"audio/mulaw"` 或 `"audio/alaw"` (例如 Interactions API 中的 `{"response_format": {"type": "audio", "mime_type": "audio/l16"}}`，或 `generateContent` 中的 `AUDIO_L16`、`AUDIO_MULAW` 或 `AUDIO_ALAW`)。請參閱「[音訊輸出格式](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw#audio-output-formats)」。
 
 ## gemini-3.8-flash-lite-tts
 
-| Propriété | Description |
+| 屬性 | 說明 |
 | --- | --- |
-| Code du modèle id\_card | `gemini-3.8-flash-lite-tts` |
-| Types de données acceptés pour save | **Entrées**  Texte  **Résultat**  Audio |
-| token\_autoLimites de jetons[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  8 192  **Limite de jetons de sortie**  16 384 (limite de diffusion de l'API Gemini) |
-| handyman Fonctionnalités | **[Génération d'audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fr)**  Compatible  **[Mise en cache](https://ai.google.dev/gemini-api/docs/caching?hl=fr)**  Not supported  **[Exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr)**  Not supported  **[Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr)**  Not supported  **[Appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr)**  Not supported  **[Ancrage avec Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr)**  Not supported  **[Génération d'images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr)**  Not supported  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=fr)**  Not supported  **[Ancrage de recherche](https://ai.google.dev/gemini-api/docs/google-search?hl=fr)**  Not supported  **[Sorties structurées](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr)**  Not supported  **[Réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr)**  Not supported  **[Contexte de l'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr)**  Not supported |
-| speed Options de consommation | **[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr)**  Compatible  **[Inférence Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fr)**  Compatible  **[Inférence prioritaire](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr)**  Compatible |
-| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - `gemini-3.8-flash-lite-tts` |
-| calendar\_monthDernière mise à jour | Septembre 2026 |
+| id\_card模型代碼 | `gemini-3.8-flash-lite-tts` |
+| save支援的資料類型 | **輸入裝置**  文字  **輸出內容**  音訊 |
+| token\_auto權杖數量限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入詞元限制**  8,192  **輸出詞元限制**  16,384 (Gemini API 服務限制) |
+| handyman功能 | **[音訊生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw)**  支援  **[快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)**  不支援  **[執行程式碼](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)**  不支援  **[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)**  不支援  **[呼叫函式](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)**  不支援  **[利用 Google 地圖建立基準](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)**  不支援  **[圖像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)**  不支援  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-tw)**  不支援  **[以搜尋為基準](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)**  不支援  **[結構化輸出內容](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)**  不支援  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)**  不支援  **[網址背景資訊](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)**  不支援 |
+| speed計費方案 | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)**  支援  **[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-tw)**  支援  **[優先推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-tw)**  支援 |
+| 123版本 | 詳情請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - `gemini-3.8-flash-lite-tts` |
+| calendar\_month最新更新 | 2026 年 9 月 |
+| 付費定價 | [定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#gemini-3.8-flash-lite-tts) |
 
-## Langues disponibles
+## 支援的語言
 
-`gemini-3.8-flash-lite-tts` détecte automatiquement la langue d'entrée et est compatible avec **plus de 100 langues** :
+`gemini-3.8-flash-lite-tts` 會自動偵測輸入語言，並支援**超過 100 種語言**：
 
-| Langue | Langue | Langue |
+| 語言 | 語言 | 語言 |
 | --- | --- | --- |
-| Aceh (écriture arabe) | Allemand | Manipuri |
-| Afrikaans | Grec | Marathi |
-| Akan | Gujarati | Minangkabau (écriture arabe) |
-| Amharique | Créole haïtien | Mizo |
-| Arménien | Mongol khalkha | Népalais (langue individuelle) |
-| Assamais | Haoussa | Peul du Nigeria |
-| Awadhi | Hébreu | Azéri du Nord |
-| Balinais | Hindi | Sotho du Nord |
-| Bengali | Hongrois | Ouzbek du Nord |
-| Banjar (alphabet latin) | Islandais | Norvégien bokmål |
-| Basque | Ilocano | Nynorsk (norvégien) |
-| Belarusian | Indonésien | Chichewa |
-| Bhodjpouri | Persan iranien | Odia (langue individuelle) |
-| Bosniaque | Italien | Perse (Afghanistan) |
-| Bouguis | Japonais | Polonais |
-| Bulgare | Javanais | Portugais |
-| Cantonais | Kamba | Panjabi |
-| Catalan | Kannada | Roumain |
-| Cebuano | Cachemiri (écriture arabe) | Russe |
-| Sorani | Cachemiri (Devanagari) | Santali |
-| Chhattisgarhi | Kazakh | Serbe |
-| Chinois (script Hans) | Khmer | Cingalais |
-| Chinois (script Hant) | Kikuyu | Slovaque |
-| Croate | Kinyarwanda | Azéri |
-| Tchèque | Kongo | Pachto du Sud |
-| Danois | Coréen | Espagnol |
-| Néerlandais | Kirghiz | Arabe standard (écriture arabe) |
-| Arabe (Égypte) | Laotien | Arabe standard (alphabet latin) |
-| Anglais | Lingala | Letton standard |
-| Estonien | Macédonien | Malais standard |
-| Tagalog | Magahi | Tamoul |
-| Français | Maithili | Telugu |
-| Galicien | Malayalam | Turc |
-| Ganda | Maltais | Vietnamien |
-| Géorgien | — | — |
+| 亞齊文 (阿拉伯字母) | 德文 | 曼尼浦里文 |
+| 南非荷蘭文 | 希臘文 | 馬拉地文 |
+| 阿肯文 | 古吉拉特文 | 米南佳保文 (阿拉伯字母) |
+| 阿姆哈拉文 | 海地克里奧爾文 | 米佐文 |
+| 亞美尼亞文 | 喀爾喀蒙古文 | 尼泊爾文 (個別語言) |
+| 阿薩姆文 | 豪薩文 | 奈及利亞富拉文 |
+| 阿瓦德語 | 希伯來文 | 北亞塞拜然文 |
+| 峇里語 | 北印度文 | 北索托文 |
+| 孟加拉文 | 匈牙利文 | 北烏茲別克文 |
+| 班查文 (拉丁字母) | 冰島文 | 挪威博克馬爾文 |
+| 巴斯克文 | 伊洛果語 | 挪威文 (耐諾斯克) |
+| 白俄羅斯語 | 印尼文 | 尼揚賈文 |
+| 博杰普爾文 | 伊朗波斯文 | 奧里亞文 (個別語言) |
+| 波士尼亞文 | 義大利文 | 波斯文 (阿富汗) |
+| 布吉斯文 | 日文 | 波蘭文 |
+| 保加利亞文 | 爪哇語 | 葡萄牙文 |
+| 粵語 | 坎巴文 | 旁遮普文 |
+| 加泰隆尼亞文 | 卡納達文 | 羅馬尼亞文 |
+| 宿霧文 | 喀什米爾文 (阿拉伯文) | 俄文 |
+| 中庫德文 | 喀什米爾文 (天城體) | 桑塔利文 |
+| 切蒂斯格爾文 | 哈薩克文 | 塞爾維亞文 |
+| 中文 (簡體中文) | 高棉文 | 錫蘭文 |
+| 中文 (繁體中文) | 基庫猶文 | 斯洛伐克文 |
+| 克羅埃西亞文 | 盧旺達文 | 南亞塞拜然文 |
+| 捷克文 | 剛果文 | 南部普什圖文 |
+| 丹麥文 | 韓文 | 西班牙文 |
+| 荷蘭文 | 吉爾吉斯文 | 標準阿拉伯文 (阿拉伯文) |
+| 阿拉伯文 (埃及) | 寮文 | 標準阿拉伯文 (拉丁字母) |
+| 英文 | 林格拉文 | 標準拉脫維亞文 |
+| 愛沙尼亞文 | 馬其頓文 | 標準馬來文 |
+| 菲律賓文 | 摩揭陀文 | 泰米爾文 |
+| 法文 | 邁蒂利文 | 泰盧固文 |
+| 加里西亞文 | 馬拉雅拉姆文 | 土耳其文 |
+| 干達文 | 馬爾他文 | 越南文 |
+| 喬治亞文 | — | — |
 
-Envoyer des commentaires
+提供意見
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Dernière mise à jour le 2026/10/09 (UTC).
+上次更新時間：2026-10-29 (世界標準時間)。
 
-Voulez-vous nous donner plus d'informations ?
+想進一步說明嗎？
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/09 (UTC)."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

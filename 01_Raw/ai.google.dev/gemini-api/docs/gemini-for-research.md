@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=hi
-fetched_at: 2026-10-26T05:56:58.166142+00:00
-title: "Gemini for Research \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947, \u0930\u093f\u0938\u0930\u094d\u091a \u092e\u0947\u0902 \u0924\u0947\u091c\u093c\u0940 \u0932\u093e\u090f\u0902 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=vi
+fetched_at: 2026-11-02T07:03:35.174733+00:00
+title: "\u0110\u1ea9y nhanh qu\u00e1 tr\u00ecnh kh\u00e1m ph\u00e1 b\u1eb1ng Gemini cho Nghi\u00ean c\u1ee9u \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
 
-# Gemini for Research की मदद से, रिसर्च में तेज़ी लाएं
+# Đẩy nhanh quá trình khám phá bằng Gemini cho Nghiên cứu
 
-[Gemini API पासकोड पाना](https://aistudio.google.com/apikey?hl=hi)
+[Lấy Khoá Gemini API](https://aistudio.google.com/apikey?hl=vi)
 
-Gemini मॉडल का इस्तेमाल, अलग-अलग विषयों में बुनियादी रिसर्च को बेहतर बनाने के लिए किया जा सकता है.
-यहां रिसर्च के लिए Gemini को एक्सप्लोर करने के तरीके दिए गए हैं:
+Bạn có thể dùng các mô hình Gemini để thúc đẩy nghiên cứu cơ bản trên nhiều lĩnh vực.
+Sau đây là những cách bạn có thể khám phá Gemini để phục vụ cho việc nghiên cứu:
 
-- **मॉडल के आउटपुट का विश्लेषण करना और उन्हें कंट्रोल करना**: ज़्यादा विश्लेषण करने के लिए, `CitationMetadata` जैसे टूल का इस्तेमाल करके, मॉडल से जनरेट किए गए जवाब के संभावित विकल्प की जांच की जा सकती है. मॉडल जनरेशन और आउटपुट के लिए भी विकल्प कॉन्फ़िगर किए जा सकते हैं. जैसे, `responseSchema`, `topP`, और `topK`. [ज़्यादा जानें](https://ai.google.dev/api/generate-content?hl=hi).
-- **टेक्स्ट, इमेज, और वीडियो वगैरह का इस्तेमाल करके इनपुट देना**: Gemini, इमेज, ऑडियो, और वीडियो को प्रोसेस कर सकता है. इससे रिसर्च के लिए कई नए रास्ते खुलते हैं. [ज़्यादा जानें](https://ai.google.dev/gemini-api/docs/vision?hl=hi).
-- **ज़्यादा कॉन्टेक्स्ट वाली विंडो की सुविधाएँ**: Gemini 3.0 Flash और Pro, 10 लाख टोकन वाली कॉन्टेक्स्ट विंडो के साथ उपलब्ध हैं. [ज़्यादा जानें](https://ai.google.dev/gemini-api/docs/long-context?hl=hi).
-- **Grow with Google**: प्रोडक्शन के इस्तेमाल के मामलों के लिए, एपीआई और Google AI Studio के ज़रिए Gemini मॉडल को तुरंत ऐक्सेस करें. अगर आपको Google Cloud पर आधारित प्लैटफ़ॉर्म की ज़रूरत है, तो Gemini Enterprise Agent Platform आपको अतिरिक्त बुनियादी ढांचा उपलब्ध करा सकता है.
+- **Phân tích và kiểm soát đầu ra của mô hình**: Để phân tích thêm, bạn có thể kiểm tra một đề xuất phản hồi do mô hình tạo bằng các công cụ như `CitationMetadata`. Bạn cũng có thể định cấu hình các lựa chọn cho quá trình tạo mô hình và đầu ra, chẳng hạn như `responseSchema`, `topP` và `topK`. [Tìm hiểu thêm](https://ai.google.dev/api/generate-content?hl=vi).
+- **Dữ liệu đầu vào đa phương thức**: Gemini có thể xử lý hình ảnh, âm thanh và video, mở ra vô số hướng nghiên cứu thú vị. [Tìm hiểu thêm](https://ai.google.dev/gemini-api/docs/vision?hl=vi).
+- **Khả năng xử lý ngữ cảnh dài**: Gemini 3.0 Flash và Pro có cửa sổ ngữ cảnh 1 triệu token. [Tìm hiểu thêm](https://ai.google.dev/gemini-api/docs/long-context?hl=vi).
+- **Grow with Google**: Nhanh chóng truy cập vào các mô hình Gemini thông qua API và Google AI Studio cho các trường hợp sử dụng trong thực tế. Nếu bạn đang tìm kiếm một nền tảng dựa trên Google Cloud, thì Nền tảng tác nhân Gemini Enterprise có thể cung cấp thêm cơ sở hạ tầng hỗ trợ.
 
-Google, [Gemini Academic Program](https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=hi#gemini-academic-program) के ज़रिए वैज्ञानिकों और शिक्षा से जुड़े रिसर्चर को Gemini API क्रेडिट का ऐक्सेस देता है. इससे उन्हें शिक्षा से जुड़ी रिसर्च करने और नई रिसर्च को बढ़ावा देने में मदद मिलती है.
+Để hỗ trợ nghiên cứu học thuật và thúc đẩy nghiên cứu tiên tiến, Google cung cấp tín dụng Gemini API cho các nhà khoa học và nhà nghiên cứu học thuật thông qua [Chương trình Gemini dành cho học thuật](https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=vi#gemini-academic-program).
 
-## Gemini का इस्तेमाल शुरू करें
+## Làm quen với Gemini
 
-Gemini API और Google AI Studio की मदद से, Google के नए मॉडल का इस्तेमाल किया जा सकता है. साथ ही, अपने आइडिया को ऐसे ऐप्लिकेशन में बदला जा सकता है जिन्हें बड़े पैमाने पर इस्तेमाल किया जा सके.
+Gemini API và Google AI Studio giúp bạn bắt đầu làm việc với các mô hình mới nhất của Google và biến ý tưởng của bạn thành các ứng dụng có thể mở rộng quy mô.
 
 ### Python
 
@@ -81,7 +81,7 @@ var interaction = client.interactions.create(CreateInteractionRequestBody.of(req
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -132,40 +132,40 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
    }'
 ```
 
-## चुनिंदा शिक्षाविद
+## Nhà nghiên cứu nổi bật
 
-![](https://ai.google.dev/static/site-assets/images/diyi-yang.png?hl=hi)
+![](https://ai.google.dev/static/site-assets/images/diyi-yang.png?hl=vi)
 
-"हमारी रिसर्च में, Gemini को विज़ुअल लैंग्वेज मॉडल (वीएलएम) के तौर पर देखा गया है. साथ ही, इसमें अलग-अलग माहौल में, Gemini के एजेंट की तरह काम करने के तरीकों की जांच की गई है. यह जांच, मज़बूती और सुरक्षा के नज़रिए से की गई है. अब तक, हमने यह आकलन किया है कि वीएलएम एजेंट, कंप्यूटर पर टास्क करते समय पॉप-अप विंडो जैसे डिस्ट्रैक्शन से Gemini कितना सुरक्षित है. साथ ही, हमने Gemini का इस्तेमाल करके, सोशल इंटरैक्शन, समय के साथ होने वाली घटनाओं, और वीडियो इनपुट के आधार पर जोखिम के कारकों का विश्लेषण किया है."
+"Nghiên cứu của chúng tôi xem xét Gemini với tư cách là một mô hình ngôn ngữ thị giác (VLM) và hành vi dựa trên tác nhân của mô hình này trong nhiều môi trường từ góc độ về độ mạnh mẽ và độ an toàn. Cho đến nay, chúng tôi đã đánh giá khả năng hoạt động ổn định của Gemini khi gặp phải các yếu tố gây xao nhãng như cửa sổ bật lên trong quá trình các tác nhân VLM thực hiện các tác vụ trên máy tính, đồng thời tận dụng Gemini để phân tích hoạt động tương tác trên mạng xã hội, các sự kiện theo thời gian cũng như các yếu tố rủi ro dựa trên dữ liệu đầu vào là video."
 
-[Diyi Yang की वेबसाइट](https://cs.stanford.edu/~diyiy/)
+[Trang web của Diyi Yang](https://cs.stanford.edu/~diyiy/)
 
-![](https://ai.google.dev/static/site-assets/images/lerrel-pinto.png?hl=hi)
+![](https://ai.google.dev/static/site-assets/images/lerrel-pinto.png?hl=vi)
 
-"Gemini Pro और Flash, दोनों में बड़ी कॉन्टेक्स्ट विंडो की सुविधा है. इससे हमें OK-Robot प्रोजेक्ट में मदद मिली है. यह प्रोजेक्ट, ओपन-वोकैबलरी मोबाइल मैनिपुलेशन से जुड़ा है. Gemini, रोबोट की "मेमोरी" के आधार पर, मुश्किल नैचुरल लैंग्वेज सवालों के जवाब देने और निर्देशों को समझने में मदद करता है. इस मामले में, रोबोट ने लंबे समय तक काम करने के दौरान जो भी जानकारी इकट्ठा की है वह उसकी मेमोरी में सेव हो जाती है. मही शफ़ीउल्लाह और मैं भी Gemini का इस्तेमाल करके, टास्क को ऐसे कोड में बदल रहे हैं जिसे रोबोट असल दुनिया में लागू कर सके."
+"Gemini Pro và Flash, với cửa sổ ngữ cảnh dài, đã giúp chúng tôi trong dự án thao tác trên thiết bị di động có từ vựng mở OK-Robot. Gemini cho phép đưa ra các câu hỏi và lệnh phức tạp bằng ngôn ngữ tự nhiên cho "bộ nhớ" của rô-bốt: trong trường hợp này, đó là những quan sát trước đây của rô-bốt trong thời gian hoạt động dài. Mahi Shafiullah và tôi cũng đang sử dụng Gemini để phân tách các nhiệm vụ thành mã mà robot có thể thực thi trong thế giới thực."
 
-[लैरिल पिंटो की वेबसाइट](https://www.lerrelpinto.com/)
+[Trang web của Lerrel Pinto](https://www.lerrelpinto.com/)
 
-## Gemini Academic Program
+## Chương trình Gemini dành cho học thuật
 
-[इन देशों](https://ai.google.dev/gemini-api/docs/available-regions?hl=hi) में रहने वाले, ज़रूरी शर्तें पूरी करने वाले अकैडमिक रिसर्चर (जैसे, फ़ैकल्टी, स्टाफ़, और पीएचडी के छात्र-छात्राएं) Gemini API के क्रेडिट और रिसर्च प्रोजेक्ट के लिए ज़्यादा दर सीमाएं पाने के लिए आवेदन कर सकते हैं. इस सुविधा की मदद से, वैज्ञानिक प्रयोगों के लिए ज़्यादा थ्रूपुट मिलता है. साथ ही, रिसर्च को बेहतर बनाने में मदद मिलती है.
+Các nhà nghiên cứu học thuật đủ tiêu chuẩn (chẳng hạn như giảng viên, nhân viên và sinh viên tiến sĩ) ở [các quốc gia được hỗ trợ](https://ai.google.dev/gemini-api/docs/available-regions?hl=vi) có thể đăng ký nhận tín dụng Gemini API và hạn mức sử dụng cao hơn cho các dự án nghiên cứu. Nhờ sự hỗ trợ này, các thí nghiệm khoa học có thể đạt được thông lượng cao hơn và thúc đẩy nghiên cứu.
 
-हमें खास तौर पर, यहां दिए गए सेक्शन में रिसर्च के विषयों में दिलचस्पी है. हालांकि, हम विज्ञान की अलग-अलग शाखाओं से जुड़े ऐप्लिकेशन का स्वागत करते हैं:
+Chúng tôi đặc biệt quan tâm đến các lĩnh vực nghiên cứu trong phần sau, nhưng chúng tôi cũng hoan nghênh các đơn đăng ký từ nhiều ngành khoa học:
 
-- **आकलन और बेंचमार्क**: कम्यूनिटी की ओर से सुझाए गए आकलन के तरीके. इनसे, तथ्यों के सही होने, सुरक्षा, निर्देशों का पालन करने, गहराई से विश्लेषण, और प्लानिंग जैसे क्षेत्रों में परफ़ॉर्मेंस का सटीक सिग्नल मिल सकता है.
-- **इंसानियत के फ़ायदे के लिए, वैज्ञानिक खोजों को बढ़ावा देना**: अलग-अलग विषयों पर की जाने वाली वैज्ञानिक रिसर्च में एआई के संभावित इस्तेमाल. इनमें दुर्लभ और उपेक्षित बीमारियां, एक्सपेरिमेंटल बायोलॉजी, मटीरियल साइंस, और स्थिरता जैसे क्षेत्र शामिल हैं.
-- **एम्बॉडीमेंट और इंटरैक्शन**: एम्बॉडीमेंट एआई, एंबियंट इंटरैक्शन, रोबोटिक्स, और ह्यूमन-कंप्यूटर इंटरैक्शन के फ़ील्ड में नए इंटरैक्शन की जांच करने के लिए, लार्ज लैंग्वेज मॉडल का इस्तेमाल करना.
-- **नई क्षमताएँ**: तर्क और प्लानिंग को बेहतर बनाने के लिए, एजेंट की नई क्षमताओं के बारे में जानना.साथ ही, यह जानना कि अनुमान लगाने के दौरान क्षमताओं को कैसे बढ़ाया जा सकता है. उदाहरण के लिए, Gemini Flash का इस्तेमाल करके.
-- **अलग-अलग मोड में इंटरैक्ट करने और समझने की क्षमता**: अलग-अलग मोड में इंटरैक्ट करने वाले बुनियादी मॉडल की कमियों और अवसरों की पहचान करना, ताकि अलग-अलग तरह के कामों के लिए विश्लेषण, तर्क, और प्लानिंग की जा सके.
+- **Đánh giá và điểm chuẩn**: Các phương pháp đánh giá được cộng đồng chứng thực có thể cung cấp tín hiệu mạnh mẽ về hiệu suất trong các lĩnh vực như tính xác thực, độ an toàn, khả năng tuân thủ hướng dẫn, khả năng lập luận và lập kế hoạch.
+- **Đẩy nhanh quá trình khám phá khoa học để mang lại lợi ích cho nhân loại**: Các ứng dụng tiềm năng của AI trong nghiên cứu khoa học liên ngành, bao gồm các lĩnh vực như bệnh hiếm gặp và bệnh bị bỏ quên, sinh học thực nghiệm, khoa học vật liệu và tính bền vững.
+- **Hiện thân và tương tác**: Khai thác các mô hình ngôn ngữ lớn để nghiên cứu những hoạt động tương tác mới trong các lĩnh vực AI hiện thân, tương tác xung quanh, robot học và tương tác giữa người và máy tính.
+- **Các khả năng mới nổi**: Khám phá các khả năng của tác nhân AI mới cần thiết để nâng cao khả năng suy luận và lập kế hoạch, cũng như cách mở rộng các khả năng trong quá trình suy luận (ví dụ: bằng cách sử dụng Gemini Flash).
+- **Tương tác và hiểu biết đa phương thức**: Xác định những điểm thiếu sót và cơ hội cho các mô hình cơ bản đa phương thức để phân tích, suy luận và lập kế hoạch cho nhiều nhiệm vụ.
 
-ज़रूरी शर्तें: सिर्फ़ वे लोग आवेदन कर सकते हैं जो किसी मान्यता प्राप्त शिक्षण संस्थान या शैक्षणिक शोध संगठन से जुड़े हों. जैसे, फ़ैकल्टी मेंबर, रिसर्चर या इनके जैसे अन्य लोग. ध्यान दें कि एपीआई का ऐक्सेस और क्रेडिट, Google अपने विवेक के आधार पर देगा और हटाएगा. हम हर महीने आवेदनों की समीक्षा करते हैं.
+Điều kiện: Chỉ những cá nhân (giảng viên, nhà nghiên cứu hoặc người tương đương) có liên kết với một tổ chức giáo dục hợp lệ hoặc tổ chức nghiên cứu học thuật mới có thể đăng ký. Xin lưu ý rằng Google sẽ cấp và xoá quyền truy cập API cũng như tín dụng theo ý mình. Chúng tôi xem xét các đơn đăng ký hằng tháng.
 
-### Gemini API की मदद से रिसर्च करना शुरू करना
+### Bắt đầu nghiên cứu bằng Gemini API
 
-[अभी आवेदन करें](https://forms.gle/HMviQstU8PxC5iCt5)
+[Đăng ký ngay](https://forms.gle/HMviQstU8PxC5iCt5)
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया.
+Cập nhật lần gần đây nhất: 2026-09-24 UTC.
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-24 UTC."],[],[]]

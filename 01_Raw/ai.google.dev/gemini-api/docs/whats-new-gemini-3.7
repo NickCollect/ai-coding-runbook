@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.7?hl=fr
-fetched_at: 2026-10-26T05:58:14.889845+00:00
-title: "Nouveaut\u00e9s de Gemini\u00a03.7 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.7?hl=sq
+fetched_at: 2026-11-02T07:13:23.153805+00:00
+title: "\u00c7far\u00eb ka t\u00eb re n\u00eb Gemini 3.7 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
+Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
+- [Dokumentet](https://ai.google.dev/gemini-api/docs?hl=sq)
 
-Envoyer des commentaires
+Dërgo komente
 
-# Nouveautés de Gemini 3.7 Flash
+# Çfarë ka të re në Gemini 3.7 Flash
 
-[Dernier modèle](https://ai.google.dev/gemini-api/docs/latest-model?hl=fr)
-[Autres modèles](#other-models)
+[Modeli më i fundit](https://ai.google.dev/gemini-api/docs/latest-model?hl=sq)
+[Modele të tjera](#other-models)
 
-Gemini 3.7 Flash (`gemini-3.7-flash`) est un modèle Flash de génération précédente de la série Gemini 3. Il est désormais obsolète et automatiquement redirigé vers [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=fr).
+Gemini 3.7 Flash (`gemini-3.7-flash`) është një model i gjeneratës së mëparshme Flash në serinë Gemini 3, i zhvlerësuar tani dhe i ridrejtuar automatikisht te [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=sq).
 
-Ce guide est conservé à titre de référence et décrit les fonctionnalités et les modifications introduites dans Gemini 3.7 Flash.
+Ky udhëzues është ruajtur për referencë dhe dokumenton aftësitë dhe ndryshimet e prezantuara në Gemini 3.7 Flash.
 
-## Présentation du modèle
+## Përmbledhja e modelit
 
-| Modèle | ID du modèle | Niveau de raisonnement par défaut | Description |
+| Modeli | ID-ja e modelit | Niveli i parazgjedhur i arsyetimit | Përshkrimi |
 | --- | --- | --- | --- |
-| Gemini 3.7 Flash (obsolète) | `gemini-3.7-flash` | `medium` | Modèle Flash de génération précédente conçu pour le codage, les workflows agentiques et l'exécution en plusieurs étapes. Remplacé par [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=fr). |
+| Gemini 3.7 Flash (i zhvlerësuar) | `gemini-3.7-flash` | `medium` | Modeli Flash i gjeneratës së mëparshme i ndërtuar për kodimin, flukset e punës agjentike dhe ekzekutimin me shumë hapa. Zëvendësuar nga [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=sq). |
 
-Gemini 3.7 Flash est compatible avec une fenêtre de contexte d'un million de jetons, 64 000 jetons de sortie maximum, des niveaux de raisonnement réglables (`low`, `medium`, `high`) et la même suite d'outils intégrés que 3.6 Flash.
+Gemini 3.7 Flash mbështet një dritare konteksti me 1 milion kode, 64 000 kode maksimale dalëse, nivele të rregullueshme të të menduarit (`low`, `medium`, `high`) dhe të njëjtin paketë veglash të integruara si Gemini 3.6 Flash.
 
-Pour obtenir les spécifications complètes, consultez la page du modèle [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=fr).
+Për specifikimet e plota, shiko [faqen e modelit Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=sq).
 
-## Guide de démarrage rapide
+## Nisja e shpejtë
 
 ### Python
 
@@ -100,20 +100,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Nouveautés de Gemini 3.7 Flash
+## Çfarë ka të re në Gemini 3.7 Flash
 
-- **Tâches de codage et agentiques** : qualité nettement supérieure pour les analyses comparatives agentiques et d'ingénierie logicielle réelles, amélioration de la résolution des problèmes et réduction des boucles d'agent ayant échoué.
-- **Développement Web et parité de conception renforcée** : génère du code d'application Web et de bureau plus fidèle directement à partir de maquettes de conception, avec des gains importants en termes de respect de la conception et d'audit des bases de code existantes par rapport aux maquettes pour vérifier la parité de conception 1:1.
+- **Detyrat e kodimit dhe të agjentëve:** Cilësi shumë më e lartë në vlerësimet krahasuese të inxhinierisë së softuerëve dhe të agjentëve në botën reale, duke përmirësuar zgjidhjen e problemeve dhe duke reduktuar ciklet e dështuara të agjentëve.
+- **Zhvillim uebi dhe barazi më e fortë e dizajnit:** Gjeneron kod aplikacioni për desktop dhe ueb me besueshmëri më të lartë drejtpërdrejt nga maketet e dizajnit, me përfitime të mëdha në respektimin e dizajnit dhe në auditimin e bazave ekzistuese të kodeve kundrejt maketeve për të verifikuar barazinë e dizajnit 1:1.
 
-## Comprendre les niveaux de raisonnement
+## Të kuptuarit e niveleve të arsyetimit
 
-Gemini 3.7 Flash offre aux développeurs un contrôle flexible de la latence et de l'intelligence en ajustant le niveau de raisonnement du modèle :
+Gemini 3.7 Flash u jep zhvilluesve kontroll fleksibël mbi vonesën dhe inteligjencën duke rregulluar nivelin e arsyetimit të modelit:
 
-- **Effort de réflexion faible** : réduit le délai de réponse pour les tâches critiques en termes de latence, telles que les pipelines de réponse aux incidents, le chat en temps réel, la rédaction de brouillons et l'analyse de données rapide.
-- **Moyen (par défaut)** : meilleure qualité pour la plupart des tâches. Recommandé pour le code complexe et les cas d'utilisation agentiques, avec une plus grande précision au premier passage.
-- **Effort de raisonnement élevé** : maximise la capacité du modèle à réfléchir et à utiliser des outils. Idéal pour les raisonnements complexes, les mathématiques difficiles, le codage difficile et les tâches agentiques. Permet des réflexions et des appels de fonction étendus, avec une consommation et un coût de jetons plus élevés.
+- **Përpjekje e ulët arsyetimi**: Redukton kohën e përgjigjes për detyrat kritike për vonesën, si p.sh. strukturat e përgjigjes ndaj incidenteve, bisedat në kohë reale, shkrimi i drafteve dhe analiza e shpejtë e të dhënave.
+- **Mesatare (e parazgjedhur):** Cilësia më e mirë për shumicën e detyrave. Rekomandohet për raste përdorimi të kodit kompleks dhe me agjent, me saktësi më të lartë në kalimin e parë.
+- **Përpjekje e lartë për të menduar**: Maksimizon aftësinë e modelit për të menduar dhe për të përdorur veglat. Më i miri për arsyetimin kompleks, matematikën e vështirë dhe detyrat e vështira të kodimit dhe agjentit. Lejon mendime të zgjeruara dhe thirrje funksionesh, me konsum dhe kosto më të lartë të kodeve.
 
-Pour configurer les niveaux de raisonnement dans Gemini 3.7 Flash :
+Për të konfiguruar nivelet e arsyetimit në Gemini 3.7 Flash:
 
 ### Python
 
@@ -133,33 +133,33 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-Pour obtenir des exemples de code multilingue (JavaScript, Java, Go, REST) et des concepts de raisonnement approfondis, consultez [Comprendre les niveaux de raisonnement dans Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=fr#understanding-reasoning-levels).
+Për shembuj kodesh në shumë gjuhë (JavaScript, Java, Go, REST) dhe koncepte të thelluara të arsyetimit, shiko [Të kuptuarit e niveleve të arsyetimit në Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=sq#understanding-reasoning-levels).
 
-## Compatibilité avec l'agent Antigravity
+## Mbështetja e agjentit të Antigravity
 
-Gemini 3.7 Flash a introduit la prise en charge de l'agent [Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr) dans Gemini Managed Agents et le [SDK Google Antigravity](https://antigravity.google/docs/sdk/overview/?hl=fr).
+Gemini 3.7 Flash prezantoi mbështetjen për mundësimin e [agjentit Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=sq) në Gemini Managed Agents dhe [Google Antigravity SDK](https://antigravity.google/docs/sdk/overview/?hl=sq).
 
-Pour obtenir des exemples de code actuels et la dernière configuration d'agent par défaut, consultez le [guide de l'agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr) et le [guide Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=fr#updated-antigravity-agent).
+Për shembujt aktualë të kodit dhe konfigurimin më të fundit të agjentit të parazgjedhur, shiko [Udhëzuesin e agjentit të antigravitetit](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=sq) dhe [Udhëzuesin e Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=sq#updated-antigravity-agent).
 
-## Autres modèles
+## Modele të tjera
 
-- [Gemini 4 Argon (dernière version)](https://ai.google.dev/gemini-api/docs/latest-model?hl=fr)
-- [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=fr)
-- [Gemini 3.6 Flash et 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=fr)
-- [Voir tous les modèles](https://ai.google.dev/gemini-api/docs/models?hl=fr)
+- [Gemini 4 Argon (më i fundit)](https://ai.google.dev/gemini-api/docs/latest-model?hl=sq)
+- [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=sq)
+- [Gemini 3.6 Flash dhe 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=sq)
+- [Shiko të gjitha modelet](https://ai.google.dev/gemini-api/docs/models?hl=sq)
 
-## Étape suivante
+## Çfarë ka më pas
 
-- Consultez les spécifications de l'API dans la [présentation des modèles](https://ai.google.dev/gemini-api/docs/models?hl=fr).
-- Découvrez l'orchestration multi-agent dans le [guide de l'API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=fr).
-- Testez et affinez les prompts dans [Google AI Studio](https://aistudio.google.com/?hl=fr).
+- Rishiko specifikimet e API-së te [Përmbledhja e modeleve](https://ai.google.dev/gemini-api/docs/models?hl=sq).
+- Eksploro orkestrimin e shumë agjentëve në [Udhëzuesin e API-së së ndërveprimeve](https://ai.google.dev/gemini-api/docs/interactions?hl=sq).
+- Testo dhe rafino kërkesat në [Google AI Studio](https://aistudio.google.com/?hl=sq).
 
-Envoyer des commentaires
+Dërgo komente
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-Dernière mise à jour le 2026/10/13 (UTC).
+Përditësimi i fundit: 2026-10-13 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Duhet të na tregosh më shumë?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/13 (UTC)."],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-13 UTC."],[],[]]

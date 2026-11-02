@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/transcribe?hl=pl
-fetched_at: 2026-10-26T05:43:33.175536+00:00
-title: "Zapis tekstowy \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/transcribe?hl=id
+fetched_at: 2026-11-02T07:18:51.895587+00:00
+title: "Transkripsi audio \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
+Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs/generate-content?hl=pl)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs/generate-content?hl=id)
 
-Prześlij opinię
+Kirim masukan
 
-# Zapis tekstowy
+# Transkripsi audio
 
-Interfejs Gemini API przekształca mowę w plikach audio na tekst za pomocą modelu Gemini 3.5 Transcribe (`gemini-3.5-transcribe`). Dzięki możliwościom rozumienia dźwięku Gemini zapewnia dokładną transkrypcję z automatycznym rozpoznawaniem języka, rozróżnianiem mówców, znacznikami czasu na poziomie słów i wskazówkami dotyczącymi słownictwa niestandardowego. Oferuje też tryb [inteligentnej transkrypcji](#transcription-modes), który usuwa niepłynności i inteligentnie formatuje tekst.
+Gemini API mengonversi ucapan dalam file audio menjadi teks menggunakan model Transcribe Gemini 3.5 (`gemini-3.5-transcribe`). Berdasarkan kemampuan pemahaman audio Gemini, API ini memberikan transkripsi yang akurat dengan identifikasi bahasa otomatis, diarisasi penutur, stempel waktu tingkat kata, dan petunjuk kosakata kustom. Fitur ini juga menyediakan mode [transkripsi cerdas](#transcription-modes) yang menampilkan penghapusan ketidaklancaran dan pemformatan cerdas.
 
-Aby utworzyć transkrypcję pliku audio, prześlij go i przekaż do `gemini-3.5-transcribe`:
+Untuk mentranskripsikan file audio, upload audio dan teruskan ke `gemini-3.5-transcribe`:
 
 ### Python
 
@@ -83,26 +83,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## Przegląd
+## Ringkasan
 
-Gemini 3.5 Transcribe jest zoptymalizowany pod kątem zadań związanych z przekształcaniem mowy na tekst. Obsługuje różne akcenty, szumy w tle i rozmowy w wielu językach.
+Transkripsi Gemini 3.5 dioptimalkan untuk tugas speech-to-text. Model ini dapat menangani beragam aksen, suara bising di latar belakang, dan percakapan multi-bahasa.
 
-Najważniejsze funkcje:
+Kemampuan utama meliputi:
 
-- **Automatyczne rozpoznawanie mowy (ASR):** automatycznie wykrywa języki w [ponad 85 lokalizacjach](#supported-languages). Obsługuje przełączanie języków w obrębie zdania i między zdaniami bez konieczności ręcznej konfiguracji.
-- **Słownictwo niestandardowe:** przekazując do 1000 fraz, możesz zwiększyć prawdopodobieństwo rozpoznania terminów, akronimów i nazw własnych związanych z określoną dziedziną.
-- **Rozdzielanie rozmówców:** rozróżnia wielu rozmówców i przypisuje wypowiadane segmenty do różnych etykiet.
-- **Sygnatury czasowe na poziomie słów:** generuje dokładne przesunięcia czasu rozpoczęcia i zakończenia każdego rozpoznanego słowa.
-- **Inteligentna transkrypcja:** usuwa niepłynności, wypełniacze i powtórzenia oraz stosuje formatowanie strukturalne.
-- **Formatowanie i normalizacja:** stosuje wielkie litery, interpunkcję i normalizację tekstu odwrotnego, np. przekształca „twenty six million dollars” na „26 mln USD”.
+- **Pengenalan ucapan otomatis (ASR):** Mendeteksi bahasa secara otomatis di [lebih dari 85 lokalitas](#supported-languages). Menangani peralihan kode intra-kalimat dan antar-kalimat tanpa konfigurasi manual.
+- **Kosakata kustom:** Memiringkan pengenalan terhadap istilah khusus domain, akronim, dan nama diri dengan meneruskan hingga 1.000 frasa.
+- **Diarisasi pembicara:** Membedakan beberapa pembicara dan mengatribusikan segmen yang diucapkan ke label yang berbeda.
+- **Stempel waktu tingkat kata:** Membuat offset waktu mulai dan berakhir yang akurat untuk setiap kata yang dikenali.
+- **Transkripsi pintar:** Menghapus ketidaklancaran, kata pengisi, pengulangan, dan menerapkan format terstruktur.
+- **Pemformatan dan normalisasi:** Menerapkan kapitalisasi, tanda baca, dan normalisasi teks terbalik, seperti mengonversi "dua puluh enam juta dolar" menjadi "$26M".
 
-Jeśli chcesz uzyskać ogólne rozumowanie na podstawie treści audio lub odpowiadanie na pytania dotyczące tych treści, użyj [rozumienia dźwięku](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=pl). Do syntezy dźwięku przy zamianie tekstu na mowę użyj funkcji [Zamiana tekstu na mowę](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=pl).
+Untuk penalaran audio umum atau menjawab pertanyaan terkait konten audio, gunakan [Pemahaman audio](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=id). Untuk sintesis audio text-to-speech, gunakan [Text-to-speech](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=id).
 
-## Wykrywanie języka i podpowiedzi
+## Deteksi dan petunjuk bahasa
 
-Domyślnie model automatycznie wykrywa język, w którym mówisz. Przełącza się między językami dynamicznie, gdy mówcy przechodzą z jednego języka na drugi.
+Secara default, model akan mendeteksi bahasa lisan secara otomatis. Fitur ini beralih antarbahasa secara dinamis saat pembicara berganti kode.
 
-Aby użyć automatycznego wykrywania, pomiń parametr `language_codes` lub podaj pustą listę:
+Untuk menggunakan deteksi otomatis, hapus `language_codes` atau berikan daftar kosong:
 
 ### Python
 
@@ -164,7 +164,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-Jeśli znasz język z wyprzedzeniem, podaj kody języka w standardzie BCP-47 w `language_codes`, aby zwiększyć dokładność transkrypcji (patrz [Obsługiwane języki](#supported-languages)):
+Jika Anda mengetahui bahasa sebelumnya, tentukan kode bahasa BCP-47 di `language_codes` untuk meningkatkan akurasi transkripsi (lihat [Bahasa yang didukung](#supported-languages)):
 
 ### Python
 
@@ -198,9 +198,9 @@ const config = {
 }
 ```
 
-## Słownictwo niestandardowe
+## Kosakata kustom
 
-Możesz nakierować model mowy na rzadko używane słowa, żargon techniczny, nazwy marek lub nazwy własne. Podaj w tablicy `custom_vocabulary` maksymalnie 1000 słów (najlepsze wyniki zwykle uzyskuje się w przypadku maksymalnie 100 słów):
+Anda dapat mengarahkan model ucapan ke kata-kata yang tidak umum, jargon teknis, nama merek, atau nama diri. Berikan hingga 1.000 istilah dalam array `custom_vocabulary` (hasil terbaik biasanya dicapai dengan hingga 100 istilah):
 
 ### Python
 
@@ -262,11 +262,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## Rozdzielanie rozmówców
+## Diarisasi pembicara
 
-Rozdzielanie rozmówców identyfikuje różne głosy w nagraniu i oznacza każdy segment identyfikatorem rozmówcy, np. `spk_1` lub `spk_2`. Obsługiwanych jest maksymalnie 8 głośników (atrybucja w przypadku 3 lub więcej głośników jest eksperymentalna).
+Diarisasi pembicara mengidentifikasi suara yang berbeda dalam rekaman dan memberi tag pada setiap segmen dengan ID pembicara seperti `spk_1` atau `spk_2`. Hingga 8 speaker didukung (atribusi untuk 3 speaker atau lebih bersifat eksperimental).
 
-Włącz rozdzielanie rozmówców, ustawiając `diarization` na `True`:
+Aktifkan pemisahan pembicara dengan menyetel `diarization` ke `True`:
 
 ### Python
 
@@ -328,11 +328,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## Sygnatury czasowe na poziomie słów
+## Stempel waktu tingkat kata
 
-Sygnatury czasowe na poziomie słów podają dokładne przesunięcia początku i końca każdego rozpoznanego słowa w strumieniu audio.
+Stempel waktu tingkat kata memberikan offset awal dan akhir yang tepat untuk setiap kata yang dikenali dalam aliran audio.
 
-Włącz znaczniki czasu, ustawiając `word_timestamp` na `True`:
+Aktifkan stempel waktu dengan menyetel `word_timestamp` ke `True`:
 
 ### Python
 
@@ -394,7 +394,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-Możesz połączyć `diarization` i `word_timestamp` w jednym żądaniu, aby otrzymać etykiety mówców i sygnatury czasowe słów:
+Anda dapat menggabungkan `diarization` dan `word_timestamp` dalam satu permintaan untuk menerima label pembicara dan stempel waktu kata:
 
 ### Python
 
@@ -431,21 +431,21 @@ const config = {
 }
 ```
 
-## Tryby transkrypcji
+## Mode transkripsi
 
-Gemini 3.5 Transcribe obsługuje 2 tryby transkrypcji za pomocą parametru `mode`:
+Gemini 3.5 Transcribe mendukung dua mode transkripsi melalui parameter `mode`:
 
-- **`VERBATIM` (domyślny):** zwraca dokładny zapis słowo w słowo wszystkiego, co zostało powiedziane, zachowując nieprzetworzone wypełniacze („um”, „uh”, „like”, „you know”), powtórzenia, pauzy i fałszywe starty. Wymagane w przypadku używania sygnatur czasowych lub podziału na mówców.
-- **`SMART` (Inteligentna transkrypcja):** optymalizuje transkrypcję pod kątem czytania, stosując inteligentne przetwarzanie końcowe:
-  - **Usuwanie zakłóceń:** usuwa wypełniacze, jąkanie i fałszywe starty.
-  - **Korekty w tekście:** bezpośrednie rozwiązywanie problemów z korektami w wypowiedzi (np. *„Spotkajmy się we wtorek, a nie, w środę o godzinie 14:00”* staje się *„Spotkajmy się w środę o godzinie 14:00”*).
-  - **Automatyczne formatowanie strukturalne:** automatycznie porządkuje wypowiadane myśli w akapitach, listach numerowanych, punktach, sformatowanych datach, walutach i liczbach.
-  - **Poprawki gramatyczne:** stosuje naturalną interpunkcję, wielkie litery na początku zdania i płynność.
+- **`VERBATIM` (default)**: Menampilkan transkrip kata demi kata yang persis dari semua yang diucapkan, dengan mempertahankan kata pengisi mentah ("um", "eh", "kayak", "tahu"), pengulangan, jeda, dan awal yang salah. Diperlukan saat menggunakan stempel waktu atau diarization speaker.
+- **`SMART` (Transkripsi cerdas)**: Mengoptimalkan transkrip untuk dibaca dengan menerapkan pasca-pemrosesan cerdas:
+  - **Penghapusan ketidaklancaran**: Menghapus kata pengisi percakapan, gagap, dan permulaan yang salah.
+  - **Koreksi mandiri inline**: Menyelesaikan koreksi lisan secara langsung (misalnya, *"Mari bertemu pada hari Selasa, eh tidak, hari Rabu pukul dua"* menjadi *"Mari bertemu pada hari Rabu pukul 14.00"*).
+  - **Pemformatan terstruktur otomatis**: Secara otomatis menyusun pemikiran yang diucapkan menjadi paragraf, daftar bernomor, poin-poin, tanggal, mata uang, dan angka yang diformat.
+  - **Pembersihan tata bahasa**: Menerapkan tanda baca, kapitalisasi kalimat, dan alur yang alami.
 
-| Tekst mówiony | `VERBATIM` wynik | `SMART` dane wyjściowe (inteligentna transkrypcja) |
+| Audio lisan | `VERBATIM` output | Output `SMART` (Transkripsi cerdas) |
 | --- | --- | --- |
-| „Um, na spotkanie powinniśmy zaprosić Alicję i … nie, Roberta i Karolinę”. | „Um, na spotkanie powinniśmy zaprosić Alicję i poczekać, nie, Roberta i Karola”. | „Na spotkanie powinniśmy zaprosić Roberta i Karolinę”. |
-| „First item review budget second item finalize timeline third item send recap” | „first item review budget second item finalize timeline third item send recap” | „1. Sprawdź budżet 2. Finalizacja osi czasu 3. Wyślij podsumowanie”. |
+| "Um, jadi untuk rapat, saya pikir kita harus, eh, mengundang Alice dan, tunggu, bukan, Bob dan Carol." | "Jadi untuk rapat, menurutku kita harus mengundang Alice, eh bukan, Bob dan Carol." | "Untuk rapat, sebaiknya kita mengundang Budi dan Ari." |
+| "Item pertama tinjau anggaran item kedua selesaikan linimasa item ketiga kirim ringkasan" | "tinjau anggaran item pertama selesaikan linimasa item kedua kirim ringkasan item ketiga" | "1. Tinjau anggaran 2. Menyelesaikan linimasa 3. Kirim ringkasan" |
 
 ### Python
 
@@ -509,15 +509,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-.
+## Mengurai output transkripsi
 
-## Analizowanie danych wyjściowych transkrypcji
+Teks transkrip lengkap ditampilkan di `response.text`.
 
-Pełny tekst transkrypcji jest zwracany w `response.text`.
+Jika `word_timestamp` atau `diarization` diaktifkan, API juga akan menampilkan anotasi tingkat kata yang mendetail dan label pembicara yang dilampirkan ke bagian kandidat.
 
-Gdy włączona jest opcja `word_timestamp` lub `diarization`, interfejs API zwraca też szczegółowe adnotacje na poziomie słów i etykiety mówców dołączone do proponowanych części.
-
-Oto jak wyodrębnić sygnatury czasowe słów i zmiany rozmówców oraz po nich iterować:
+Berikut cara mengekstrak dan melakukan iterasi pada stempel waktu kata dan pergantian pembicara:
 
 ### Python
 
@@ -617,116 +615,116 @@ for (const w of words) {
 }
 ```
 
-## Obsługiwane języki
+## Bahasa yang didukung
 
-Gemini 3.5 Transcribe obsługuje te języki i kody języków w standardzie BCP-47:
+Bahasa dan kode bahasa BCP-47 berikut didukung untuk Transkripsi Gemini 3.5:
 
-| Język | Kod BCP-47 | Język | Kod BCP-47 |
+| Language | Kode BCP-47 | Language | Kode BCP-47 |
 | --- | --- | --- | --- |
-| afrikaans | `af-ZA` | japoński | `ja-JP` |
-| amharski | `am-ET` | jawajski | `jv-ID` |
-| arabski (Egipt) | `ar-EG` | kabuverdianu | `kea-CV` |
-| ormiański | `hy-AM` | kannada | `kn-IN` |
-| asamski | `as-IN` | kazachski | `kk-KZ` |
-| azerski | `az-AZ` | koreański | `ko-KR` |
-| białoruski | `be-BY` | kirgiski | `ky-KG` |
-| bengalski (Bangladesz) | `bn-BD` | łotewski | `lv-LV` |
-| bengalski (Indie) | `bn-IN` | lingala | `ln-CD` |
-| bośniacki | `bs-BA` | litewski | `lt-LT` |
-| bułgarski | `bg-BG` | macedoński | `mk-MK` |
-| bułgarski (arumuński), | `rup-BG` | malajski | `ms-MY` |
-| birmański | `my-MM` | malajalam | `ml-IN` |
-| kantoński (tradycyjny), | `yue-Hant-HK` | maltański | `mt-MT` |
-| kataloński | `ca-ES` | chiński mandaryński (uproszczony), | `cmn-Hans-CN` |
-| cebuański | `ceb` | marathi | `mr-IN` |
-| khmerski | `km-KH` | mongolski | `mn-MN` |
-| chorwacki | `hr-HR` | nepalski | `ne-NP` |
-| czeski | `cs-CZ` | norweski | `nb-NO` |
-| duński | `da-DK` | orija | `or-IN` |
-| niderlandzki | `nl-NL` | polski | `pl-PL` |
-| angielski (Wielka Brytania) | `en-GB` | portugalski (Brazylia) | `pt-BR` |
-| angielski (Indie) | `en-IN` | portugalski (Portugalia) | `pt-PT` |
-| angielski (USA) | `en-US` | pendżabski | `pa-IN` |
-| estoński | `et-EE` | pendżabski (pismo gurmukhi), | `pa-Guru-IN` |
-| perski | `fa-IR` | rumuński | `ro-RO` |
-| filipiński | `fil-PH` | rosyjski | `ru-RU` |
-| fiński | `fi-FI` | serbski | `sr-RS` |
-| francuski | `fr-FR` | sindhi (alfabet arabski) | `sd-Arab-IN` |
-| galicyjski | `gl-ES` | słowacki | `sk-SK` |
-| gruziński | `ka-GE` | słoweński | `sl-SI` |
-| niemiecki | `de-DE` | hiszpański (Ameryka Łacińska) | `es-419` |
-| grecki | `el-GR` | hiszpański (Stany Zjednoczone) | `es-US` |
-| gudżarati | `gu-IN` | suahili (Kenia) | `sw-KE` |
-| hausa | `ha-NG` | szwedzki | `sv-SE` |
-| hebrajski | `he-IL` | tadżycki | `tg-TJ` |
-| hindi | `hi-IN` | telugu | `te-IN` |
-| węgierski | `hu-HU` | tajski | `th-TH` |
-| islandzki | `is-IS` | turecki | `tr-TR` |
-| indyjski angielski | `en-IN` | ukraiński | `uk-UA` |
-| indonezyjski | `id-ID` | uzbecki | `uz-UZ` |
-| włoski | `it-IT` | wietnamski | `vi-VN` |
+| Afrika | `af-ZA` | Jepang | `ja-JP` |
+| Amharik | `am-ET` | Jawa | `jv-ID` |
+| Arab (Mesir) | `ar-EG` | Kabuverdianu | `kea-CV` |
+| Armenia | `hy-AM` | Kannada | `kn-IN` |
+| Assam | `as-IN` | Kazak | `kk-KZ` |
+| Azerbaijan | `az-AZ` | Korea | `ko-KR` |
+| Belarusia | `be-BY` | Kirgiz | `ky-KG` |
+| Bengali (Bangladesh) | `bn-BD` | Latvia | `lv-LV` |
+| Bengali (India) | `bn-IN` | Lingala | `ln-CD` |
+| Bosnia | `bs-BA` | Lituania | `lt-LT` |
+| Bulgaria | `bg-BG` | Makedonia | `mk-MK` |
+| Bulgaria (Aromania) | `rup-BG` | Melayu | `ms-MY` |
+| Burma | `my-MM` | Malayalam | `ml-IN` |
+| Kanton (Tradisional) | `yue-Hant-HK` | Malta | `mt-MT` |
+| Katalan | `ca-ES` | China Mandarin (Aksara Sederhana) | `cmn-Hans-CN` |
+| Cebuano | `ceb` | Marathi | `mr-IN` |
+| Khmer Tengah | `km-KH` | Mongolia | `mn-MN` |
+| Kroasia | `hr-HR` | Nepal | `ne-NP` |
+| Ceko | `cs-CZ` | Norwegia | `nb-NO` |
+| Denmark | `da-DK` | Oriya | `or-IN` |
+| Belanda | `nl-NL` | Polandia | `pl-PL` |
+| Inggris (Britania Raya) | `en-GB` | Portugis (Brasil) | `pt-BR` |
+| Inggris (India) | `en-IN` | Portugis (Portugal) | `pt-PT` |
+| Inggris (Amerika Serikat) | `en-US` | Punjabi | `pa-IN` |
+| Estonia | `et-EE` | Punjabi (skrip Gurmukhi) | `pa-Guru-IN` |
+| Persia | `fa-IR` | Rumania | `ro-RO` |
+| Filipino | `fil-PH` | Rusia | `ru-RU` |
+| Finlandia | `fi-FI` | Serbia | `sr-RS` |
+| Prancis | `fr-FR` | Sindhi (skrip Arab) | `sd-Arab-IN` |
+| Galisia | `gl-ES` | Slovakia | `sk-SK` |
+| Georgia | `ka-GE` | Slovenia | `sl-SI` |
+| Jerman | `de-DE` | Spanyol (Amerika Latin) | `es-419` |
+| Yunani | `el-GR` | Spanyol (Amerika Serikat) | `es-US` |
+| Gujarati | `gu-IN` | Swahili (Kenya) | `sw-KE` |
+| Hausa | `ha-NG` | Swedia | `sv-SE` |
+| Ibrani | `he-IL` | Tajik | `tg-TJ` |
+| Hindi | `hi-IN` | Telugu | `te-IN` |
+| Hungaria | `hu-HU` | Thai | `th-TH` |
+| Islandia | `is-IS` | Turki | `tr-TR` |
+| Inggris - India | `en-IN` | Ukraina | `uk-UA` |
+| Indonesia | `id-ID` | Uzbek | `uz-UZ` |
+| Italia | `it-IT` | Vietnam | `vi-VN` |
 
-## Obsługiwane formaty audio
+## Format audio yang didukung
 
-Gemini 3.5 Transcribe obsługuje te typy MIME formatów audio:
+Transcribe Gemini 3.5 mendukung jenis MIME format audio berikut:
 
 - WAV - `audio/wav`
-- MP3 – `audio/mp3`
-- AIFF – `audio/aiff`
+- MP3 - `audio/mp3`
+- AIFF - `audio/aiff`
 - AAC - `audio/aac`
-- OGG – `audio/ogg`
+- OGG - `audio/ogg`
 - FLAC - `audio/flac`
 - MPEG - `audio/mpeg`
 - M4A - `audio/m4a`
 - L16 - `audio/l16`
-- Opus – `audio/opus`
+- Opus - `audio/opus`
 - ALAW - `audio/alaw`
 - MULAW - `audio/mulaw`
-- WebM – `audio/webm`
+- WebM - `audio/webm`
 
-Pełną listę obsługiwanych typów MIME i schematów parametrów znajdziesz w [dokumentacji interfejsu Interactions API](https://ai.google.dev/api/interactions-api?hl=pl#Resource:Content).
+Untuk mengetahui daftar lengkap jenis MIME dan skema parameter yang didukung, lihat [referensi Interactions API](https://ai.google.dev/api/interactions-api?hl=id#Resource:Content).
 
-## Dodatkowe materiały o tym parametrze
+## Referensi parameter
 
-Skonfiguruj transkrypcję, ustawiając pola w obiekcie `audio_transcription_config` w `GenerateContentConfig`:
+Konfigurasi transkripsi dengan menyetel kolom dalam objek `audio_transcription_config` di `GenerateContentConfig`:
 
-| Pole | Typ | Opis |
+| Kolom | Jenis | Deskripsi |
 | --- | --- | --- |
-| `language_codes` | Tablica ciągów znaków | Kody języków w standardzie BCP-47 (np. `["en-US"]`). Jeśli ten parametr zostanie pominięty lub będzie pusty (`[]`), model automatycznie wykryje język i obsłuży przełączanie kodu. |
-| `custom_vocabulary` | Tablica ciągów znaków | Maksymalnie 1000 niestandardowych terminów, akronimów lub nazw własnych, które mają wpływać na rozpoznawanie mowy. Nie jest zgodne z rozdzielaniem rozmówców ani sygnaturami czasowymi na poziomie słów. |
-| `word_timestamp` | Wartość logiczna | Ustaw na `True`, aby uwzględnić przesunięcia początku i końca słowa. Jeśli ten parametr zostanie pominięty lub będzie miał wartość `False`, sygnatury czasowe słów nie będą zwracane. Niezgodne ze słownikiem niestandardowym. |
-| `diarization` | Wartość logiczna | Ustaw na `True`, aby identyfikować poszczególnych rozmówców i oznaczać ich etykietami. Niezgodne ze słownikiem niestandardowym. |
-| `mode` | Ciąg znaków | Tryb transkrypcji. Obsługiwane wartości: `"VERBATIM"` (domyślna) i `"SMART"`. Brak zgodności z sygnaturami czasowymi i podziałem na mówców. |
+| `language_codes` | Array string | Kode bahasa BCP-47 (misalnya, `["en-US"]`). Jika tidak ada atau kosong (`[]`), model akan otomatis mendeteksi bahasa dan menangani pengalihan kode. |
+| `custom_vocabulary` | Array string | Hingga 1.000 istilah kustom, akronim, atau nama diri untuk memengaruhi pengenalan ucapan. Tidak kompatibel dengan diarisasi pembicara dan stempel waktu tingkat kata. |
+| `word_timestamp` | Boolean | Setel ke `True` untuk menyertakan offset awal dan akhir kata. Jika dihilangkan atau `False`, tidak ada stempel waktu kata yang ditampilkan. Tidak kompatibel dengan kosakata kustom. |
+| `diarization` | Boolean | Setel ke `True` untuk mengidentifikasi dan melabeli pembicara yang berbeda. Tidak kompatibel dengan kosakata kustom. |
+| `mode` | String | Mode transkripsi. Nilai yang didukung: `"VERBATIM"` (default) dan `"SMART"`. Tidak kompatibel dengan stempel waktu dan diarisasi. |
 
-## Sprawdzone metody
+## Praktik terbaik
 
-- **Zapewnij czysty dźwięk:** zadbaj o to, aby nagrania audio miały wyraźnie oddzielone głosy i unikaj poważnego obcinania dźwięku.
-- **Podaj wskazówki dotyczące języka, jeśli jest on znany:** jeśli znasz język dźwięku, podaj `language_codes`, aby zmaksymalizować dokładność.
-- **Kierowanie na niestandardowy słownik:** w `custom_vocabulary` umieszczaj tylko unikalne terminy związane z domeną, nazwy marek lub rzeczowniki własne, a nie powszechnie używane słowa.
-- **Używaj interfejsu Files API w przypadku długich nagrań:** w przypadku plików trwających dłużej niż kilka sekund prześlij plik za pomocą `client.files.upload` i przekaż zwrócony plik do treści modelu.
+- **Berikan audio yang jernih:** Pastikan rekaman audio memiliki pemisahan suara yang jelas dan hindari pemangkasan yang parah.
+- **Berikan petunjuk bahasa jika diketahui:** Jika Anda mengetahui bahasa audio sebelumnya, tentukan `language_codes` untuk memaksimalkan akurasi.
+- **Targetkan kosakata kustom:** Hanya sertakan istilah domain, nama merek, atau kata benda yang berbeda dalam `custom_vocabulary`, bukan kata-kata umum sehari-hari.
+- **Gunakan Files API untuk rekaman berdurasi panjang:** Untuk file yang berdurasi lebih dari beberapa detik, upload file menggunakan `client.files.upload` dan teruskan file yang ditampilkan ke konten model.
 
-## Ograniczenia
+## Batasan
 
-- **Czas trwania dźwięku:** standardowe żądania unarne obsługują pliki audio o czasie trwania do 1 godziny. Przetwarzanie dźwięku jest ograniczone do 30 minut, gdy włączone są funkcje takie jak rozdzielanie rozmówców czy sygnatury czasowe na poziomie słów.
-- **Sygnatury czasowe na poziomie słów:** włączenie sygnatur czasowych na poziomie słów może obniżyć ogólną dokładność transkrypcji.
-- **Rozdzielanie rozmówców:** rozdzielanie rozmówców obsługuje maksymalnie 8 osób. Przypisywanie mówców w przypadku co najmniej 3 osób jest funkcją eksperymentalną.
-- **Słownictwo niestandardowe:** możesz podać maksymalnie 1000 terminów w `custom_vocabulary`, ale najlepsze wyniki zwykle uzyskuje się w przypadku maksymalnie 100 terminów. Nie możesz łączyć `custom_vocabulary` z diaryzacją mówców ani sygnaturami czasowymi na poziomie słowa. Interfejs API odrzuca żądania, w których `custom_vocabulary` występuje razem z którąś z tych funkcji.
-- **Zgodność trybów:** inteligentna transkrypcja (`mode: "SMART"`) nie może być łączona z `word_timestamp` ani `diarization`.
+- **Durasi audio:** Permintaan unary standar mendukung file audio hingga 1 jam. Pemrosesan audio dibatasi hingga 30 menit jika fitur seperti diarisasi speaker atau stempel waktu tingkat kata diaktifkan.
+- **Stempel waktu tingkat kata:** Mengaktifkan stempel waktu tingkat kata dapat menurunkan akurasi transkripsi secara keseluruhan.
+- **Diarisasi pembicara:** Diarisasi pembicara mendukung hingga 8 pembicara. Atribusi speaker untuk 3 speaker atau lebih bersifat eksperimental.
+- **Kosakata kustom:** Anda dapat memberikan hingga 1.000 istilah dalam `custom_vocabulary`, tetapi hasil terbaik biasanya dicapai dengan hingga 100 istilah. Anda tidak dapat menggabungkan `custom_vocabulary` dengan diarisasi pembicara atau stempel waktu tingkat kata; API menolak permintaan yang menentukan `custom_vocabulary` bersama dengan salah satu fitur tersebut.
+- **Kompatibilitas mode:** Transkripsi smart (`mode: "SMART"`) tidak dapat digabungkan dengan `word_timestamp` atau `diarization`.
 
-## Co dalej?
+## Langkah berikutnya
 
-- Przesyłaj strumieniowo dźwięk w czasie rzeczywistym za pomocą [przewodnika po transkrypcji na żywo](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=pl), korzystając z interfejsu Live API.
-- Poznaj [rozumienie dźwięku](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=pl), aby analizować, podsumowywać lub wyszukiwać treści audio.
-- Dowiedz się, jak zsyntetyzować plik audio z tekstu za pomocą [zamiany tekstu na mowę](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=pl).
-- Ceny modeli i limity tokenów znajdziesz na [stronie z cennikiem](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#gemini-3.5-transcribe).
-- Szczegółowe informacje o przesyłaniu plików multimedialnych i zarządzaniu nimi znajdziesz w przewodniku po [interfejsie Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl).
+- Streaming audio real-time dengan [Panduan transkripsi langsung](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=id) menggunakan Live API.
+- Jelajahi [Pemahaman audio](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=id) untuk menganalisis, meringkas, atau membuat kueri konten audio.
+- Pelajari cara menyintesis audio dari teks menggunakan [Text-to-speech](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=id).
+- Periksa [halaman Harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id#gemini-3.5-transcribe) untuk mengetahui harga model dan batas token.
+- Lihat panduan [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id) untuk mengetahui detail tentang cara mengupload dan mengelola file media.
 
-Prześlij opinię
+Kirim masukan
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Ostatnia aktualizacja: 2026-10-23 UTC.
+Terakhir diperbarui pada 2026-10-23 UTC.
 
-Chcesz przekazać coś jeszcze?
+Ada masukan untuk kami?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-10-23 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-23 UTC."],[],[]]

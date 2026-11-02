@@ -1,49 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it
-fetched_at: 2026-10-26T05:47:07.447601+00:00
-title: "API Interactions: guida alla migrazione delle modifiche che causano interruzioni (maggio 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr
+fetched_at: 2026-11-02T07:14:53.708208+00:00
+title: "Guide de migration des modifications destructives de l'API Interactions (mai\u00a02026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
+Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Invia feedback
+Envoyer des commentaires
 
-# API Interactions: guida alla migrazione delle modifiche che causano interruzioni (maggio 2026)
+# Guide de migration des modifications destructives de l'API Interactions (mai 2026)
 
-L'API Interactions `v1beta` introduce modifiche che causano interruzioni e che ristrutturano la forma dell'API per supportare funzionalità future come lo steering in volo e le chiamate di strumenti asincrone. Questa pagina spiega cosa sta cambiando e fornisce esempi di codice prima e dopo per aiutarti a eseguire la migrazione. Esistono due categorie di modifiche:
+L'API Interactions `v1beta` introduit des modifications destructives qui restructurent la forme de l'API pour prendre en charge de futures fonctionnalités telles que l'orientation en cours de vol et les appels d'outils asynchrones. Cette page explique ce qui change et fournit des exemples de code avant et après pour vous aider à effectuer la migration. Il existe deux catégories de modifications :
 
-1. [**Schema dei passaggi**](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#steps-schema):
-   Un nuovo array `steps` sostituisce l'array `outputs`, fornendo una sequenza temporale strutturata
-   di ogni turno di interazione.
-2. [**Configurazione del formato di output**](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#output-format-config):
-   Un nuovo `response_format` polimorfico consolida tutti i controlli del formato di output
-   e rimuove `response_mime_type`.
+1. [**Schéma des étapes**](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#steps-schema) : un nouveau tableau `steps` remplace le tableau `outputs`, fournissant une chronologie structurée de chaque tour d'interaction.
+2. [**Configuration du format de sortie**](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#output-format-config) : un nouveau champ polymorphe `response_format` regroupe toutes les commandes de format de sortie et supprime `response_mime_type`.
 
-Segui i passaggi descritti in
-[Come eseguire la migrazione al nuovo schema](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#how-to-migrate)
-per aggiornare l'integrazione.
+Suivez la procédure décrite dans [Migrer vers le nouveau schéma](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#how-to-migrate) pour mettre à jour votre intégration.
 
-## Modifica principale: da `outputs` a `steps`
+## Changement de cœur : `outputs` vers `steps`
 
-Il nuovo schema sostituisce l'array `outputs` con un array `steps`.
+Le nouveau schéma remplace le tableau `outputs` par un tableau `steps`.
 
-- **Legacy**: le risposte restituivano un array flat `outputs` contenente solo i contenuti generati dal modello.
-- **Nuovo schema**: le risposte restituiscono un array `steps` contenente passaggi strutturati con discriminatori di tipo.
+- **Ancienne version** : les réponses renvoyaient un tableau `outputs` plat contenant uniquement le contenu généré par le modèle.
+- **Nouveau schéma** : les réponses renvoient un tableau `steps` contenant des étapes structurées avec des discriminateurs de type.
 
-`POST /interactions` restituisce solo i passaggi di output. `GET /interactions/{id}`
-restituisce la sequenza temporale completa dei passaggi, incluso il passaggio `user_input` iniziale.
+`POST /interactions` ne renvoie que les étapes de sortie. `GET /interactions/{id}` renvoie la chronologie complète de l'étape, y compris l'étape `user_input` initiale.
 
-### Input/output di base (unario)
+### Entrée/Sortie de base (unaire)
 
-#### Prima (legacy)
+#### Avant (ancienne version)
 
 ### Python
 
@@ -95,7 +88,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Dopo (nuovo schema)
+#### Après (nouveau schéma)
 
 ### Python
 
@@ -177,11 +170,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### Chiamata di funzione
+### Appel de fonction
 
-La struttura della richiesta rimane invariata, ma la risposta sostituisce i contenuti `outputs` flat con passaggi strutturati.
+La structure de la requête reste inchangée, mais la réponse remplace le contenu `outputs` plat par des étapes structurées.
 
-#### Prima (legacy)
+#### Avant (ancienne version)
 
 ### Python
 
@@ -226,7 +219,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-#### Dopo (nuovo schema)
+#### Après (nouveau schéma)
 
 ### Python
 
@@ -274,11 +267,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Strumenti lato server
+### Outils côté serveur
 
-Gli strumenti lato server (come la Ricerca Google o l'esecuzione di codice) ora generano tipi di passaggi specifici nell'array `steps`. Mentre lo schema legacy restituiva queste operazioni come tipi di contenuti specifici all'interno dell'array `outputs`, il nuovo schema li sposta nell'array `steps`. Gli esempi seguenti utilizzano la Ricerca Google.
+Les outils côté serveur (comme la recherche Google ou l'exécution de code) génèrent désormais des types d'étapes spécifiques dans le tableau `steps`. Alors que l'ancien schéma renvoyait ces opérations en tant que types de contenu spécifiques dans le tableau `outputs`, le nouveau schéma les déplace dans le tableau `steps`. Les exemples suivants utilisent la recherche Google.
 
-#### Prima (legacy)
+#### Avant (ancienne version)
 
 ### Python
 
@@ -352,7 +345,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Dopo (nuovo schema)
+#### Après (nouveau schéma)
 
 ### Python
 
@@ -438,37 +431,33 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 
 ### Streaming
 
-Lo streaming espone nuovi tipi di eventi:
+Le streaming expose de nouveaux types d'événements :
 
-#### Nuovi tipi di eventi
+#### Nouveaux types d'événements
 
 - `interaction.created`
 - `interaction.completed`
-- `interaction.in_progress`
-- `interaction.requires_action`
 - `step.start`
 - `step.delta`
 - `step.stop`
 
-#### Tipi di eventi deprecati
+`interaction.status_update` reste inchangée. Il contient le nouveau `status` (par exemple, `in_progress` ou `requires_action`). Chaque événement indique son type dans le champ `event_type` de la charge utile JSON, correspondant à la ligne SSE `event:`.
 
-I seguenti tipi di eventi legacy vengono sostituiti dai nuovi eventi elencati sopra:
+#### Types d'événements obsolètes
 
-- `interaction.start` → `interaction.created`
+Les anciens types d'événements suivants sont remplacés par les nouveaux événements listés ci-dessus :
+
+- `interaction.start` → `interaction.created`
 - `content.start` → `step.start`
 - `content.delta` → `step.delta`
 - `content.stop` → `step.stop`
-- `interaction.complete` → `interaction.completed`
-- `interaction.status_update` → sostituito da `interaction.in_progress`, `interaction.requires_action` e così via.
+- `interaction.complete` → `interaction.completed`
 
-**Chiamate di funzioni di streaming**: quando utilizzi lo streaming con le chiamate di funzioni,
-l'evento `step.start` fornisce il nome della funzione e gli eventi `step.delta`
-trasmettono gli argomenti come stringhe JSON parziali (utilizzando `arguments_delta`). Devi
-accumulare questi delta per ottenere gli argomenti completi. Questo è diverso dalle chiamate unarie in cui ricevi immediatamente l'oggetto di chiamata di funzione completo.
+**Appels de fonction en streaming** : lorsque vous utilisez le streaming avec l'appel de fonction, l'événement `step.start` fournit le nom de la fonction, et les événements `step.delta` diffusent les arguments sous forme de chaînes JSON partielles (à l'aide de `arguments_delta`). Vous devez accumuler ces deltas pour obtenir les arguments complets. Cela diffère des appels unaires, où vous recevez l'objet d'appel de fonction complet en une seule fois.
 
-#### Esempi
+#### Exemples
 
-##### Prima (legacy)
+##### Avant (ancienne version)
 
 ### Python
 
@@ -535,7 +524,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 // data: {"id": "int_123", "status": "done", "usage": {"total_tokens": 42}}
 ```
 
-##### Dopo (nuovo schema)
+##### Après (nouveau schéma)
 
 ### Python
 
@@ -590,8 +579,8 @@ for await (const event of stream) {
  // event: interaction.created
  // data: {"interaction": {"id": "int_xyz", "status": "in_progress", "object": "interaction", "model": "gemini-3.8-flash"}, "event_type": "interaction.created"}
  //
- // event: interaction.in_progress
- // data: {"interaction_id": "int_xyz", "event_type": "interaction.in_progress"}
+ // event: interaction.status_update
+ // data: {"interaction_id": "int_xyz", "status": "in_progress", "event_type": "interaction.status_update"}
  //
  // event: step.start
  // data: {"index": 0, "step": {"type": "thought", "signature": "abc123..."}, "event_type": "step.start"}
@@ -606,38 +595,35 @@ for await (const event of stream) {
  // data: {"index": 1, "delta": {"text": " a time...", "type": "text"}, "event_type": "step.delta"}
  //
  // event: step.stop
- // data: {"type": "step.stop", "index": 1, "status": "done"}
+ // data: {"index": 1, "event_type": "step.stop"}
  //
  // event: interaction.completed
- // data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}}} // NEW: Dedicated completion event
+ // data: {"interaction": {"id": "int_xyz", "status": "completed", "usage": {"total_input_tokens": 10, "total_output_tokens": 5, "total_tokens": 15}}, "event_type": "interaction.completed"} // NEW: Dedicated completion event
 ```
 
-### Cronologia delle conversazioni stateless
+### Historique des conversations sans état
 
-Se gestisci manualmente la cronologia delle conversazioni sul lato client (caso d'uso senza stato), devi aggiornare il modo in cui concateni i turni precedenti.
+Si vous gérez l'historique des conversations manuellement côté client (cas d'utilisation sans état), vous devez modifier la façon dont vous enchaînez les tours de parole précédents.
 
-- **Legacy**: gli sviluppatori spesso raccoglievano l'array `outputs` dalle risposte e lo inviavano di nuovo nel campo `input` al turno successivo.
-- **Nuovo schema**: ora devi raccogliere l'array `steps` dalla risposta e passarlo nel campo `input` della richiesta successiva, aggiungendo il nuovo turno utente come passaggio `user_input`.
+- **Ancienne méthode** : les développeurs collectaient souvent le tableau `outputs` à partir des réponses et le renvoyaient dans le champ `input` au tour suivant.
+- **Nouveau schéma** : vous devez maintenant collecter le tableau `steps` à partir de la réponse et le transmettre dans le champ `input` de la requête suivante, en ajoutant votre nouveau tour d'utilisateur en tant qu'étape `user_input`.
 
-## Configurazione del formato di output: modifiche a `response_format`
+## Configuration du format de sortie : `response_format` modification
 
-L'API aggiornata consolida tutti i controlli del formato di output in un campo `response_format` polimorfico unificato. In questo modo, la configurazione dell'output viene centralizzata a livello superiore e `generation_config` si concentra sul comportamento del modello (come temperatura, top\_p e thinking).
+L'API mise à jour regroupe toutes les commandes de format de sortie dans un champ `response_format` polymorphe unifié. Cela centralise la configuration de sortie au niveau supérieur et permet à `generation_config` de se concentrer sur le comportement du modèle (comme la température, top\_p et la réflexion).
 
-### Modifiche principali
+### Principales modifications
 
-- **L'API rimuove `response_mime_type`.** Ora devi specificare il tipo MIME per ogni voce di formato all'interno di `response_format`.
-- **`response_format` è ora un oggetto (o array) polimorfico.** Ogni voce ha un discriminatore `type` (`text`, `audio`, `image`) e campi specifici per il tipo. Per richiedere più modalità di output, passa un array di voci di formato.
-- **`image_config` viene spostato da `generation_config` a `response_format`.**
-  Ora devi specificare le impostazioni di output dell'immagine, come `aspect_ratio` e `image_size`
-  in una voce `response_format` con `"type": "image"`.
+- **L'API supprime `response_mime_type`.** Vous devez maintenant spécifier le type MIME par entrée de format dans `response_format`.
+- **`response_format` est désormais un objet (ou un tableau) polymorphe.** Chaque entrée comporte un discriminateur `type` (`text`, `audio`, `image`) et des champs spécifiques au type. Pour demander plusieurs modalités de sortie, transmettez un tableau d'entrées de format.
+- **`image_config` passe de `generation_config` à `response_format`.**
+  Vous spécifiez désormais les paramètres de sortie d'image tels que `aspect_ratio` et `image_size` dans une entrée `response_format` avec `"type": "image"`.
 
-### Output strutturato (JSON)
+### Sortie structurée (JSON)
 
-Il nuovo schema rimuove il campo `response_mime_type`. In alternativa, specifica il
-tipo MIME e lo schema JSON all'interno di un `response_format` oggetto con
-`"type": "text"`.
+Le nouveau schéma supprime le champ `response_mime_type`. Spécifiez plutôt le type MIME et le schéma JSON dans un objet `response_format` avec `"type": "text"`.
 
-#### Prima (legacy)
+#### Avant (ancienne version)
 
 ### Python
 
@@ -693,7 +679,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Dopo (nuovo schema)
+#### Après (nouveau schéma)
 
 ### Python
 
@@ -764,12 +750,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### Configurazione delle immagini
+### Configuration des images
 
-Il nuovo schema rimuove `image_config` da `generation_config`. Ora devi specificare
-le impostazioni di output dell'immagine in una voce `response_format` con `"type": "image"`.
+Le nouveau schéma supprime `image_config` de `generation_config`. Vous spécifiez désormais les paramètres de sortie d'image dans une entrée `response_format` avec `"type": "image"`.
 
-#### Prima (legacy)
+#### Avant (ancienne version)
 
 ### Python
 
@@ -818,7 +803,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Dopo (nuovo schema)
+#### Après (nouveau schéma)
 
 ### Python
 
@@ -871,11 +856,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### Configurazione audio
+### Configuration audio
 
-Il nuovo schema sostituisce `response_modalities: ["audio"]` con una voce `response_format` di `"type": "audio"`.
+Le nouveau schéma remplace `response_modalities: ["audio"]` par une entrée `response_format` de `"type": "audio"`.
 
-#### Prima (legacy)
+#### Avant (ancienne version)
 
 ### Python
 
@@ -924,7 +909,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Dopo (nuovo schema)
+#### Après (nouveau schéma)
 
 ### Python
 
@@ -983,63 +968,60 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-Per richiedere più modalità di output (ad esempio, testo e audio insieme), passa un array di voci di formato a `response_format` anziché un singolo oggetto.
+Pour demander plusieurs modalités de sortie (par exemple, du texte et de l'audio), transmettez un tableau d'entrées de format à `response_format` au lieu d'un seul objet.
 
-## Come eseguire la migrazione al nuovo schema
+## Migrer vers le nouveau schéma
 
-### Utenti dell'SDK
+### Utilisateurs du SDK
 
-Esegui l'upgrade all'ultima versione dell'SDK (Python ≥2.0.0, JavaScript ≥2.0.0). L'SDK attiva automaticamente il nuovo schema, senza bisogno di modifiche al codice oltre all'aggiornamento della modalità di lettura delle risposte (vedi gli esempi sopra). Tieni presente che in queste versioni dell'SDK è supportato solo il nuovo schema. Le versioni precedenti dell'SDK (Python 1.x.x, JavaScript 1.x.x) continueranno a funzionare fino alla rimozione dello schema legacy l'**8 giugno 2026**.
+Passez à la dernière version du SDK (Python >= 2.0.0, JavaScript >= 2.0.0). Le SDK vous active automatiquement dans le nouveau schéma. Aucune modification de code n'est nécessaire, à l'exception de la mise à jour de la façon dont vous lisez les réponses (voir les exemples ci-dessus). Notez que seul le nouveau schéma est compatible avec ces versions du SDK. Les anciennes versions du SDK (Python 1.x.x, JavaScript 1.x.x) continueront de fonctionner jusqu'à la suppression de l'ancien schéma le **8 juin 2026**.
 
-### Utenti dell'API REST
+### Utilisateurs de l'API REST
 
-Aggiungi l'intestazione `Api-Revision: 2026-05-20` alle richieste per attivare subito il nuovo schema. Dopo il **26 maggio**, il nuovo schema diventerà quello predefinito per tutte le
-richieste. Puoi disattivarlo temporaneamente con `Api-Revision: 2026-05-07`
-fino all'**8 giugno**, quando l'API rimuoverà definitivamente lo schema legacy.
+Ajoutez l'en-tête `Api-Revision: 2026-05-20` à vos requêtes pour activer le nouveau schéma dès maintenant. Après le **26 mai**, le nouveau schéma deviendra le schéma par défaut pour toutes les requêtes. Vous pouvez désactiver temporairement cette fonctionnalité avec `Api-Revision: 2026-05-07` jusqu'au **8 juin**, date à laquelle l'API supprimera définitivement l'ancien schéma.
 
-### Cronologia
+### Chronologie
 
-| Data | Fase | Utenti dell'SDK | Utenti dell'API REST |
+| Date | Phase | Utilisateurs du SDK | Utilisateurs de l'API REST |
 | --- | --- | --- | --- |
-| **7 maggio** | Attiva | Nuova versione dell'SDK disponibile (Python ≥2.0.0, JS ≥2.0.0). Esegui l'upgrade per ottenere automaticamente il nuovo schema. | Aggiungi l'intestazione `Api-Revision: 2026-05-20` per attivare. Il valore predefinito rimane legacy. |
-| **26 maggio** | Inversione predefinita | Non è necessaria alcuna azione se hai già eseguito l'upgrade. Gli SDK precedenti (Python 1.x.x, JS 1.x.x) continuano a funzionare, ma restituiscono risposte legacy. | Il nuovo schema è ora quello predefinito. Invia l'intestazione `Api-Revision: 2026-05-07` per disattivare. |
-| **8 giugno** | Tramonto | Le versioni dell'SDK Python 1.x.x e JS 1.x.x non funzioneranno per le chiamate all'API Interactions. | Schema legacy rimosso per l'API Interactions. Intestazione `Api-Revision` ignorata. |
+| **7 mai** | Activer | Une nouvelle version du SDK est disponible (Python ≥2.0.0, JS ≥2.0.0). Mettez à niveau pour obtenir automatiquement le nouveau schéma. | Ajoutez l'en-tête `Api-Revision: 2026-05-20` pour l'activer. La valeur par défaut reste "legacy". |
+| **26 mai** | Retournement par défaut | Aucune action n'est requise si vous avez déjà effectué la mise à niveau. Les anciens SDK (Python 1.x.x, JS 1.x.x) fonctionnent toujours, mais renvoient des réponses d'ancienne génération. | Le nouveau schéma est désormais le schéma par défaut. Envoyez l'en-tête `Api-Revision: 2026-05-07` pour désactiver cette option. |
+| **8 juin** | Coucher du soleil | Les versions 1.x.x des SDK Python et JS ne fonctionneront plus pour les appels de l'API Interactions. | L'ancien schéma a été supprimé pour l'API Interactions. En-tête `Api-Revision` ignoré. |
 
-## Elenco di controllo per la migrazione
+## Liste de contrôle de la migration
 
-### Schema dei passaggi (`steps`)
+### Schéma des étapes (`steps`)
 
-- Aggiorna il codice per leggere i contenuti della risposta dall'array `steps` anziché da `outputs`.
-  [Guarda gli esempi](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#basic-unary).
-- Verifica che il codice gestisca i tipi di passaggi `user_input` e `model_output`.
-  [Guarda gli esempi](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#basic-unary).
-- (Chiamata di funzione) Aggiorna il codice per trovare i passaggi `function_call` nell'array `steps`.
-  [Guarda gli esempi](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#function-calling).
-- (Strumenti lato server) Aggiorna il codice per gestire i passaggi specifici dello strumento (ad es. `google_search_call`, `google_search_result`).
-  [Guarda gli esempi](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#server-side-tools).
-- (Cronologia senza stato) Aggiorna la gestione della cronologia per passare l'array `steps` nel campo `input` della richiesta successiva.
-  [Vedi dettagli](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#stateless-history).
-- (Solo streaming) Aggiorna il client per ascoltare i nuovi tipi di eventi SSE (`interaction.created`, `step.delta` e così via).
-  [Guarda gli esempi](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#streaming).
+- Mettez à jour le code pour lire le contenu de la réponse à partir du tableau `steps` au lieu de `outputs`.
+  [Consultez ces exemples.](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#basic-unary)
+- Vérifiez que votre code gère les types d'étapes `user_input` et `model_output`.
+  [Consultez ces exemples.](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#basic-unary)
+- (Appel de fonction) Mettez à jour le code pour trouver les étapes `function_call` dans le tableau `steps`.
+  [Consultez ces exemples.](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#function-calling)
+- (Outils côté serveur) Mettez à jour le code pour gérer les étapes spécifiques aux outils (par exemple, `google_search_call`, `google_search_result`). [Voir des exemples](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#server-side-tools)
+- (Historique sans état) Mettez à jour la gestion de l'historique pour transmettre le tableau `steps` dans le champ `input` de la requête suivante.
+  [En savoir plus](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#stateless-history)
+- (Streaming uniquement) Mettez à jour le client pour qu'il écoute les nouveaux types d'événements SSE (`interaction.created`, `step.delta`, etc.).
+  [Consultez ces exemples.](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#streaming)
 
-### Configurazione del formato di output (`response_format`)
+### Configuration du format de sortie (`response_format`)
 
-- Sostituisci `response_mime_type` con un campo `mime_type` all'interno di `response_format`.
-  [Guarda gli esempi](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#structured-output).
-- Inserisci lo schema JSON `response_format` esistente all'interno di un oggetto `{"type": "text", "schema": ...}`.
-  [Guarda gli esempi](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#structured-output).
-- (Generazione di immagini) Sposta `image_config` da `generation_config` a una voce `{"type": "image", ...}` in `response_format`.
-  [Guarda gli esempi](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#image-config).
-- (Generazione vocale) Sostituisci `response_modalities=["audio"]` con una voce `{"type": "audio"}` in `response_format`.
-  [Guarda gli esempi](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=it#audio-config).
-- (Multimodale) Converti `response_format` da un singolo oggetto a un array quando richiedi più modalità di output.
+- Remplacez `response_mime_type` par un champ `mime_type` dans `response_format`.
+  [Consultez ces exemples.](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#structured-output)
+- Encapsulez votre schéma JSON `response_format` existant dans un objet `{"type": "text", "schema": ...}`.
+  [Consultez ces exemples.](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#structured-output)
+- (Génération d'images) Déplacez `image_config` de `generation_config` vers une entrée `{"type": "image", ...}` dans `response_format`.
+  [Consultez ces exemples.](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#image-config)
+- (Génération de voix) Remplacez `response_modalities=["audio"]` par une entrée `{"type": "audio"}` dans `response_format`.
+  [Consultez ces exemples.](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=fr#audio-config)
+- (Multimodal) Convertissez `response_format` d'un objet unique en un tableau lorsque vous demandez plusieurs modalités de sortie.
 
-Invia feedback
+Envoyer des commentaires
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Ultimo aggiornamento 2026-10-15 UTC.
+Dernière mise à jour le 2026/10/27 (UTC).
 
-Vuoi dirci altro?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-10-15 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/27 (UTC)."],[],[]]

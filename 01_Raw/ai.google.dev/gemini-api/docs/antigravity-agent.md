@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja
-fetched_at: 2026-10-26T05:52:47.322184+00:00
-title: "Antigravity \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=bn
+fetched_at: 2026-11-02T07:30:41.183982+00:00
+title: "Antigravity \u098f\u099c\u09c7\u09a8\u09cd\u099f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=bn)।
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [হোম](https://ai.google.dev/?hl=bn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
+- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs?hl=bn)
 
-フィードバックを送信
+মতামত জানান
 
-# Antigravity エージェント
+# Antigravity এজেন্ট
 
-Antigravity エージェントは、Gemini API の汎用マネージド エージェントです。1 回の API 呼び出しで、Google がホストする独自の安全な Linux サンドボックス内で推論、コードの実行、ファイルの管理、ウェブの閲覧を行うエージェントを取得できます。
+Antigravity এজেন্ট হল Gemini API-তে সাধারণ উদ্দেশ্যে ব্যবহৃত ম্যানেজ করা এজেন্ট। একটি API কল আপনাকে এমন একটি এজেন্ট দেয় যা Google-এর হোস্ট করা আপনার নিজস্ব সুরক্ষিত Linux স্যান্ডবক্সের মধ্যে যুক্তি দেয়, কোড এক্সিকিউট করে, ফাইল ম্যানেজ করে এবং ওয়েব ব্রাউজ করে।
 
-Gemini 3.8 Flash で構築されており、Antigravity IDE と同じハーネスを使用しています。基盤となる Gemini モデルは `agent_config` を使用して構成できます。[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) と [Google AI Studio](https://aistudio.google.com?hl=ja) で利用できます。
+এটি Gemini 3.8 Flash দিয়ে তৈরি এবং Antigravity IDE-এর মতো একই হার্নেস ব্যবহার করে। আপনি `agent_config` ব্যবহার করে অন্তর্নিহিত Gemini মডেল কনফিগার করতে পারবেন। [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=bn) ও [Google AI Studio](https://aistudio.google.com?hl=bn)-র মাধ্যমে উপলভ্য।
 
 ### Python
 
@@ -38,7 +38,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -77,7 +77,7 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -128,33 +128,33 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 機能
+## কেপেবিলিটি
 
-各呼び出しは Linux サンドボックスをプロビジョニングし、ツール使用ループを開始できます。エージェントは、計画、実行、結果の観察を行い、タスクが完了するまで繰り返します。
+প্রতিটি কল একটি Linux স্যান্ডবক্সের ব্যবস্থা করতে পারে এবং একটি টুল-ব্যবহারের লুপ শুরু করতে পারে। এজেন্ট প্ল্যান করে, কাজ করে, ফলাফল পর্যবেক্ষণ করে এবং টাস্ক সম্পূর্ণ না হওয়া পর্যন্ত এটি চালিয়ে যায়।
 
-- **コード実行:** Bash、Python、Node.js のコマンドを実行します。パッケージのインストール、テストの実行、アプリのビルド。
-- **ファイル管理:** サンドボックス内のファイルの読み取り、書き込み、編集、検索、一覧表示を行います。ファイルはインタラクション間で保持されます。
-- **ウェブアクセス:** Google 検索とデータ用の URL の取得。
-- **コンテキストの圧縮:** 自動コンテキスト圧縮（約 135, 000 トークンでトリガー）により、コンテキストを失うことなく、トークン上限に達することなく、長時間実行されるマルチターン セッションをサポートします。
+- **কোড এক্সিকিউশন:** Bash, Python ও Node.js কমান্ড রান করুন। প্যাকেজ ইনস্টল করা, পরীক্ষা চালানো, অ্যাপ তৈরি করা।
+- **ফাইল ম্যানেজমেন্ট:** স্যান্ডবক্সে ফাইল পড়া, লেখা, এডিট করা, সার্চ করা ও তালিকাভুক্ত করা। ইন্টার‍্যাকশন জুড়ে ফাইল থাকে।
+- **ওয়েব অ্যাক্সেস:** ডেটার জন্য Google Search এবং URL ফেচিং।
+- **প্রসঙ্গ কম্প্যাকশন:** প্রসঙ্গ না হারিয়ে বা টোকেন সীমা না পেরিয়ে দীর্ঘক্ষণ ধরে চলা একাধিক সেশনকে সাপোর্ট করার জন্য অটোমেটিক প্রসঙ্গ কম্প্যাকশন (প্রায় ১৩৫ হাজার টোকেনে ট্রিগার করা হয়)।
 
-マルチターンの使用方法とストリーミングについては、[クイックスタート](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja)をご覧ください。
+মাল্টি-টার্ন ব্যবহার ও স্ট্রিমিংয়ের জন্য [কুইকস্টার্ট](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=bn) দেখুন।
 
-## サポートされているツール
+## মানানসই টুল
 
-デフォルトでは、エージェントは `code_execution`、`google_search`、`url_context` にアクセスできます。`environment` パラメータを指定すると、ファイルシステム ツールが自動的に有効になります。**カスタム関数**を定義して、エージェントを独自の API やツールに接続することもできます。`tools` パラメータを指定する必要があるのは、デフォルト セットをカスタマイズまたは制限する場合、またはカスタム関数を追加する場合のみです。
+ডিফল্ট হিসেবে, এজেন্টের কাছে `code_execution`, `google_search` ও `url_context`-এর অ্যাক্সেস আছে। আপনি `environment` প্যারামিটার নির্দিষ্ট করলে ফাইলসিস্টেম টুল অটোমেটিক চালু হয়ে যায়। এছাড়াও, আপনার নিজস্ব API ও টুলের সাথে এজেন্টকে কানেক্ট করতে, **কাস্টম ফাংশন** নির্ধারণ করতে পারবেন। ডিফল্ট সেট কাস্টমাইজ বা সীমাবদ্ধ করার সময় অথবা কাস্টম ফাংশন যোগ করার সময় আপনাকে শুধু `tools` প্যারামিটার উল্লেখ করতে হবে।
 
-| ツール | Type 値 | 説明 |
+| টুল | ভ্যালু টাইপ করুন | বিবরণ |
 | --- | --- | --- |
-| コード実行 | `code_execution` | stdout/stderr キャプチャを使用してシェル コマンド（bash、Python、Node）を実行します。 |
-| Google 検索 | `google_search` | 公開ウェブを検索する。 |
-| URL コンテキスト | `url_context` | ウェブページを取得して読み取ります。 |
-| ファイルシステム | *（`environment` で有効）* | サンドボックス内のファイルの読み取り、書き込み、編集、検索、一覧表示。`environment` を設定すると、これらのツールが自動的に有効になります。 |
-| カスタム関数 | `function` | エージェントが実行をリクエストできるカスタム関数を定義します。[関数呼び出し](#function-calling)をご覧ください。 |
-| リモート MCP サーバー | `mcp_server` | 外部の Model Context Protocol（MCP）サーバーをツールとして登録します。[MCP サーバー](#mcp-servers)をご覧ください。 |
+| কোড এক্সিকিউশন | `code_execution` | stdout/stderr ক্যাপচার সহ শেল কমান্ড (bash, Python, Node) রান করুন। |
+| Google Search | `google_search` | পাবলিক ওয়েবে সার্চ করুন। |
+| URL কন্টেক্সট | `url_context` | ওয়েবপেজ ফেচ ও পড়া। |
+| ফাইলসিস্টেম | *(`environment`-এর মাধ্যমে চালু করা হয়েছে)* | স্যান্ডবক্সে ফাইল পড়া, লেখা, এডিট করা, সার্চ করা এবং তালিকাভুক্ত করা। আপনি `environment` সেট করলে, সিস্টেম অটোমেটিক এইসব টুল চালু করে দেয়। |
+| কাস্টম ফাংশন | `function` | এজেন্ট যাতে এক্সিকিউট করার অনুরোধ করতে পারে এমন কাস্টম ফাংশন সংজ্ঞায়িত করুন। [ফাংশন কলিং](#function-calling) দেখুন। |
+| রিমোট MCP সার্ভার | `mcp_server` | এক্সটার্নাল মডেল কন্টেক্সট প্রোটোকল (MCP) সার্ভারকে টুল হিসেবে রেজিস্টার করুন। [MCP সার্ভার](#mcp-servers) দেখুন। |
 
-同期[フック](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=ja)を使用して、リモート サンドボックス内で `code_execution` ツールと `filesystem` ツールの実行をインターセプトして検証できます。
+আপনি সিঙ্ক্রোনাস [হুক](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=bn) ব্যবহার করে রিমোট স্যান্ডবক্সের ঠিক ভিতরে `code_execution` এবং `filesystem` টুল এক্সিকিউশন ইন্টারসেপ্ট এবং যাচাই করতে পারেন।
 
-エージェントを特定のツールに制限するには、必要なツールのみを渡します。
+নির্দিষ্ট টুলের জন্য এজেন্টকে সীমাবদ্ধ করতে, শুধুমাত্র আপনার প্রয়োজনীয় টুলগুলিই পাস করুন:
 
 ### Python
 
@@ -176,7 +176,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -226,7 +226,7 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -285,9 +285,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## マルチモーダル入力
+## মাল্টিমোডাল ইনপুট
 
-Antigravity エージェントは、マルチモーダル入力をサポートしています。現時点では、`text` と `image` の入力のみがサポートされています。画像はインラインの Base64 エンコード文字列（`data`）として指定する必要があります。
+Antigravity এজেন্ট মাল্টিমোডাল ইনপুট গ্রহণ করে। বর্তমানে, শুধুমাত্র `text` এবং `image` ইনপুট কাজ করে। ছবি অবশ্যই ইনলাইন base64-এনকোডেড স্ট্রিং (`data`) হিসেবে প্রদান করতে হবে।
 
 ### Python
 
@@ -314,7 +314,7 @@ interaction_inline = client.interactions.create(
 )
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -377,7 +377,7 @@ Interaction interactionInline = client.interactions.create(CreateInteractionRequ
 System.out.println(interactionInline.outputText().orElse(""));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -453,11 +453,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }"
 ```
 
-## 関数呼び出し
+## ফাংশন কলিং
 
-関数呼び出しを使用すると、エージェントが呼び出すことができるカスタムツールを定義して、Antigravity エージェントを外部 API やデータベースに接続できます。一般的なコンセプトについては、[Gemini API を使用した関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)をご覧ください。
+ফাংশন কলিং আপনাকে Antigravity এজেন্টকে এক্সটার্নাল API এবং ডেটাবেসের সাথে কানেক্ট করার অনুমতি দেয়। এটি করার জন্য, আপনি কাস্টম টুল সংজ্ঞায়িত করেন যা এজেন্ট ব্যবহার করতে পারে। সাধারণ কনসেপ্টের জন্য, [Gemini API-এর মাধ্যমে ফাংশন কলিং](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn) দেখুন।
 
-次の例は、2 ターンのインタラクションを示しています。エージェントが最初にカスタム `get_weather` 関数呼び出しをリクエストし、クライアントがそれを実行して、2 番目のターンで結果を返します。
+নিম্নলিখিত উদাহরণে ২-টার্ন ইন্টার‍্যাকশন দেখানো হয়েছে। এজেন্ট প্রথমে একটি কাস্টম `get_weather` ফাংশন কলের অনুরোধ করে এবং ক্লায়েন্ট এটি কার্যকর করে এবং দ্বিতীয়বার ফলাফল প্রদান করে।
 
 ### Python
 
@@ -535,7 +535,7 @@ else:
     print(f"Interaction completed with status: {interaction.status}")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -713,7 +713,7 @@ if (interaction.status().orElse(null) == InteractionStatus.REQUIRES_ACTION) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -822,7 +822,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 # 1. Turn 1: Request function call
@@ -877,19 +877,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## MCP サーバー
+## MCP সার্ভার
 
-リモート Model Context Protocol（MCP）サーバーを登録することで、Antigravity エージェントを外部ツールに接続できます。エージェントは、ストリーミング可能な HTTP 経由のリモート MCP サーバーをサポートしています。
+আপনি রিমোট মডেল কন্টেক্সট প্রোটোকল (MCP) সার্ভার রেজিস্টার করে Antigravity এজেন্টকে এক্সটার্নাল টুলের সাথে কানেক্ট করতে পারবেন। এজেন্ট স্ট্রিমেবল HTTP-এর মাধ্যমে রিমোট MCP সার্ভার সাপোর্ট করে।
 
-MCP サーバーを登録する際は、`tools` 配列に次のフィールドを指定する必要があります。
+MCP সার্ভার রেজিস্টার করার সময়, আপনাকে `tools` অ্যারেতে নিম্নলিখিত ফিল্ডগুলি উল্লেখ করতে হবে:
 
-| フィールド | 型 | 必須 / 省略可 | 説明 |
+| ফিল্ড | ধরন | প্রয়োজনীয় | বিবরণ |
 | --- | --- | --- | --- |
-| `type` | 文字列 | ○ | `"mcp_server"` を指定します。 |
-| `name` | 文字列 | ○ | サーバーの固有識別子。小文字の英数字（`^[a-z0-9_-]+$` に一致）にする必要があります。 |
-| `url` | 文字列 | ○ | リモート MCP サーバーのエンドポイント URL。 |
-| `headers` | オブジェクト | いいえ | リクエストとともに送信されるカスタム ヘッダー（認証など）。 |
-| `allowed_tools` | 配列 | いいえ | 実行を許可するツール名のリスト。省略すると、すべてのツールが許可されます。 |
+| `type` | স্ট্রিং | হ্যাঁ | `"mcp_server"` হতে হবে। |
+| `name` | স্ট্রিং | হ্যাঁ | সার্ভারের জন্য অনন্য শনাক্তকারী। অবশ্যই ছোট হাতের এবং বর্ণসাংখ্যিক (`^[a-z0-9_-]+$`-এর সাথে মিলছে) হতে হবে। |
+| `url` | স্ট্রিং | হ্যাঁ | রিমোট MCP সার্ভারের এন্ডপয়েন্ট URL। |
+| `headers` | অবজেক্ট | না | অনুরোধের সাথে পাঠানো কাস্টম হেডার (যেমন, যাচাইকরণ)। |
+| `allowed_tools` | এরে | না | যেসব টুলের নাম এক্সিকিউট করার অনুমতি দেওয়া হয়েছে তার তালিকা। বাদ দেওয়া হলে, সব টুল ব্যবহারের অনুমতি দেওয়া হয়। |
 
 ### Python
 
@@ -913,7 +913,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -966,7 +966,7 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1011,7 +1011,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -1029,11 +1029,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## モデルの選択
+## মডেল বেছে নেওয়া
 
-`antigravity-preview-09-2026` の場合、デフォルトのモデルは **Gemini 3.8 Flash**（`gemini-3.8-flash`）です。`agent_config` を省略すると、エージェントはデフォルトで `gemini-3.8-flash` になります。
+`antigravity-preview-09-2026`-এর জন্য ডিফল্ট মডেল হল **Gemini 3.8 Flash** (`gemini-3.8-flash`)। আপনি `agent_config` বাদ দিলে, এজেন্ট ডিফল্ট হিসেবে `gemini-3.8-flash`-এ সেট হয়ে যায়।
 
-`agent_config` を使用して、速度、費用、推論能力を最適化するように、基盤となる Gemini モデルを構成できます。たとえば、複雑なソフトウェア エンジニアリングと推論タスクの場合は、`model` を **Gemini 4 Argon**（`gemini-4-argon`）に設定します。
+স্পিড, খরচ বা রিজনিংয়ের ক্ষমতা অপ্টিমাইজ করার জন্য আপনি `agent_config` ব্যবহার করে অন্তর্নিহিত Gemini মডেল কনফিগার করতে পারবেন। যেমন, জটিল সফ্টওয়্যার ইঞ্জিনিয়ারিং ও রিজনিং টাস্কের জন্য `model`-কে **Gemini 4 Argon** (`gemini-4-argon`) হিসেবে সেট করুন:
 
 ### Python
 
@@ -1055,7 +1055,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1104,7 +1104,7 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1145,7 +1145,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -1162,26 +1162,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-`agent_config.model` でサポートされている値は次のとおりです。
+`agent_config.model`-এর জন্য কাজ করে এমন ভ্যালুগুলি হল:
 
-| モデル | `agent_config.model` の値 | 説明 |
+| মডেল | `agent_config.model`-এ ভ্যালু | বিবরণ |
 | --- | --- | --- |
-| **Gemini 3.8 Flash**（デフォルト） | `gemini-3.8-flash` | 推論、コーディング、ツール使用のデフォルトのバランス モデル。 |
-| **Gemini 4 Argon** | `gemini-4-argon` | 複雑なソフトウェア エンジニアリング、高度な問題解決、長期的なエージェント タスク向けのフロンティア推論モデル。 |
-| **Gemini 3.6 Flash** | `gemini-3.6-flash` | 一般的な Agentic Workflows 向けのバランスの取れた Flash モデル。 |
-| **Gemini 3.5 Flash-Lite** | `gemini-3.5-flash-lite` | 低レイテンシとコスト重視のタスクに最適化された軽量モデル。 |
+| **Gemini 3.8 Flash** (ডিফল্ট) | `gemini-3.8-flash` | যুক্তি, কোডিং ও টুল ব্যবহারের জন্য ডিফল্ট ব্যালেন্সড মডেল। |
+| **Gemini 4 Argon** | `gemini-4-argon` | জটিল সফ্টওয়্যার ইঞ্জিনিয়ারিং, গভীর সমস্যা সমাধান এবং দীর্ঘ-মেয়াদী এজেন্টিক টাস্কের জন্য ফ্রন্টিয়ার রিজনিং মডেল। |
+| **Gemini 3.6 Flash** | `gemini-3.6-flash` | সাধারণ এজেন্টিক ওয়ার্কফ্লোয়ের জন্য ব্যালেন্সড Flash মডেল। |
+| **Gemini 3.5 Flash-Lite** | `gemini-3.5-flash-lite` | কম লেটেন্সি ও খরচ-সংবেদনশীল টাস্কের জন্য অপ্টিমাইজ করা লাইটওয়েট মডেল। |
 
-`agents.create` を使用してマネージド エージェントを作成する場合は、`base_agent` と `agent_config` を渡すことで、モデルをまったく同じ方法で構成します。`agents.create` で作成されたマネージド エージェントの場合、インタラクション時にモデルをオーバーライドすることはできません。モデルは、エージェントの作成時に設定されたものにロックされます。これにより、予測可能なツール呼び出し動作、一貫したデバッグ、セキュリティ境界の遵守が保証されます。
+`agents.create`-এর সাহায্যে ম্যানেজ করা এজেন্ট তৈরি করার সময়, আপনি `base_agent` এবং `agent_config` পাস করে ঠিক একইভাবে মডেল কনফিগার করেন। মনে রাখবেন, `agents.create`-এর মাধ্যমে তৈরি ম্যানেজ করা এজেন্টের ক্ষেত্রে ইন্টার‍্যাকশন চলাকালীন আপনি মডেল ওভাররাইড করতে পারবেন না। এজেন্ট তৈরি করার সময় যা সেট করা হয়েছিল, মডেলটি সেই অনুযায়ী লক করা আছে। এর ফলে টুল কলিং আচরণ অনুমান করা যায়, ধারাবাহিকভাবে ডিবাগ করা যায় এবং নিরাপত্তা সংক্রান্ত বিধিনিষেধ মেনে চলা যায়।
 
-## エージェントのカスタマイズ
+## এজেন্ট কাস্টমাইজ করা হচ্ছে
 
-Antigravity エージェントは、命令、ツール、環境をカスタマイズすることで拡張できます。エージェントは、カスタマイズに対するファイル システム ネイティブなアプローチをサポートしています。指示やスキル用の `AGENTS.md` などのファイルを `.agents/skills/` の下に直接サンドボックスにマウントしたり、やり取り時に構成をインラインで渡したりできます。構成をインラインで反復処理し、準備ができたらマネージド エージェントとして保存できます。
+আপনি Antigravity এজেন্টের নির্দেশাবলী, টুল ও এনভায়রনমেন্ট কাস্টমাইজ করে সেটিকে আরও উন্নত করতে পারবেন। এজেন্ট কাস্টমাইজেশনের জন্য ফাইলসিস্টেম-নেটিভ অ্যাপ্রোচ সাপোর্ট করে: আপনি স্যান্ডবক্সে সরাসরি `.agents/skills/`-এর অধীনে নির্দেশাবলী এবং দক্ষতার জন্য `AGENTS.md`-এর মতো ফাইল মাউন্ট করতে পারেন বা ইন্টার‍্যাকশনের সময় কনফিগারেশন ইনলাইন পাস করতে পারেন। আপনি ইনলাইনে আপনার কনফিগারেশন ইটারেট করতে পারেন এবং তারপরে আপনি প্রস্তুত হলে এটি একটি ম্যানেজ করা এজেন্ট হিসাবে সেভ করতে পারেন।
 
-カスタム エージェントの構築方法の詳細については、[マネージド エージェントの構築](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja)をご覧ください。
+কাস্টম এজেন্ট কীভাবে তৈরি করতে হয় সেই বিষয়ে আরও তথ্য পেতে, [ম্যানেজ করা এজেন্ট তৈরি করা](https://ai.google.dev/gemini-api/docs/custom-agents?hl=bn) দেখুন।
 
-## バックグラウンド実行
+## ব্যাকগ্রাউন্ড এক্সিকিউশন
 
-複数ステップの推論、コード実行、ファイル オペレーションを伴うエージェント タスクは、完了までに数分かかることがあります。`background=True` を使用して、インタラクションを非同期で実行します。API はすぐにインタラクション ID を返します。この ID は、ステータスが `completed` または `failed` になるまでポーリングします。
+এজেন্টের যেসব টাস্কে মাল্টি-স্টেপ রিজনিং, কোড এক্সিকিউশন বা ফাইল অপারেশন থাকে, সেগুলি সম্পূর্ণ হতে কয়েক মিনিট সময় লাগতে পারে। ইন্টার‍্যাকশন অ্যাসিঙ্ক্রোনাসভাবে রান করাতে `background=True` ব্যবহার করুন। API, ইন্টার‍্যাকশন আইডি সহ সাথে সাথেই উত্তর দেয়, আপনি স্ট্যাটাস `completed` বা `failed` না হওয়া পর্যন্ত পোল করেন।
 
 ### Python
 
@@ -1212,7 +1212,7 @@ else:
     print(f"Finished with status: {interaction.status}")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1280,7 +1280,7 @@ if (interaction.status().orElse(null) == InteractionStatus.COMPLETED) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1363,9 +1363,9 @@ curl -s -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/$I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-バックグラウンド実行には `store=True` が必要です。これはデフォルトです。バックグラウンド実行中の進行状況のリアルタイム更新については、[バックグラウンド操作のストリーミング](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja#streaming-pattern)をご覧ください。
+ব্যাকগ্রাউন্ড এক্সিকিউশনের জন্য `store=True` প্রয়োজন, যা ডিফল্ট হিসেবে সেট করা থাকে। ব্যাকগ্রাউন্ডে চলাকালীন রিয়েল-টাইম প্রগ্রেস আপডেট পেতে, [স্ট্রিমিং ব্যাকগ্রাউন্ড ইন্টার‍্যাকশন](https://ai.google.dev/gemini-api/docs/background-execution?hl=bn#streaming-pattern) দেখুন।
 
-実行中のバックグラウンド インタラクションをキャンセルするには、`cancel` メソッドを使用します。
+আপনি `cancel` পদ্ধতি ব্যবহার করে ব্যাকগ্রাউন্ডে চলা ইন্টার‍্যাকশন বাতিল করতে পারবেন।
 
 ### Python
 
@@ -1373,7 +1373,7 @@ curl -s -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/$I
 client.interactions.cancel(id="INTERACTION_ID")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 await client.interactions.cancel("INTERACTION_ID");
@@ -1388,7 +1388,7 @@ Client client = new Client();
 client.interactions.cancel("INTERACTION_ID");
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1417,16 +1417,16 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions/INTERACTION_ID:cancel" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-**バックグラウンド実行による複数ターンの会話**
+**ব্যাকগ্রাউন্ড এক্সিকিউশন সহ মাল্টি-টার্ন**
 
-バックグラウンド インタラクションにステートフル ツール（サンドボックスでのコード実行など）が含まれている場合は、完了したインタラクションの `environment_id` を使用して、同じ環境で続行します。これにより、エージェントはすべてのファイルと状態をそのままにして、中断したところから再開できます。
+ব্যাকগ্রাউন্ড ইন্টার‍্যাকশনে স্টেটফুল টুল (যেমন, স্যান্ডবক্সে কোড এক্সিকিউশন) থাকলে, একই এনভায়রনমেন্টে চালিয়ে যেতে সম্পূর্ণ হওয়া ইন্টার‍্যাকশন থেকে `environment_id` ব্যবহার করুন। এটি নিশ্চিত করে যে এজেন্ট যেখানে শেষ করেছিল সেখান থেকে শুরু করবে এবং সমস্ত ফাইল ও স্ট্যাটাস অক্ষত থাকবে।
 
 ### Python
 
@@ -1464,7 +1464,7 @@ while followup.status == "in_progress":
 print(followup.output_text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1550,7 +1550,7 @@ while (followup.status().orElse(null) == InteractionStatus.IN_PROGRESS) {
 System.out.println(followup.outputText().orElse(""));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1630,7 +1630,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 # 1. Start first interaction in the background
@@ -1667,27 +1667,27 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
   }"
 ```
 
-## 環境
+## পরিবেশ
 
-呼び出しごとに、Linux サンドボックスが作成されるか、再利用されます。`environment` パラメータには次の 3 つの形式があります。
+প্রতিটি কল একটি Linux স্যান্ডবক্স তৈরি বা পুনরায় ব্যবহার করে। `environment` প্যারামিটার তিনটি ফর্ম নেয়:
 
-| フォーム | 説明 |
+| ফর্ম | বিবরণ |
 | --- | --- |
-| `"remote"` | デフォルト設定で新しいサンドボックスをプロビジョニングします。 |
-| `"env_abc123"` | ID で既存の環境を再利用し、すべてのファイルと状態を保持します。 |
-| `{...}` | カスタムソースとネットワーク ルールを使用した完全な `EnvironmentConfig`。 |
+| `"remote"` | ডিফল্ট সেটিংস সহ একটি নতুন স্যান্ডবক্সের ব্যবস্থা করুন। |
+| `"env_abc123"` | সব ফাইল ও স্টেট সুরক্ষিত রেখে, আইডি অনুযায়ী আগে থেকে থাকা এনভায়রনমেন্ট আবার ব্যবহার করুন। |
+| `{...}` | কাস্টম সোর্স ও নেটওয়ার্ক নিয়ম সহ সম্পূর্ণ `EnvironmentConfig`। |
 
-ソース（Git、GCS、インライン）、ネットワーキング、ライフサイクル、リソースの上限の詳細については、[環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja)をご覧ください。
+সোর্স (Git, GCS, ইনলাইন), নেটওয়ার্কিং, লাইফসাইকেল ও রিসোর্স সংক্রান্ত সীমাবদ্ধতার ব্যাপারে বিস্তারিত জানতে [এনভায়রনমেন্ট](https://ai.google.dev/gemini-api/docs/agent-environment?hl=bn) দেখুন।
 
-## トリガー
+## ট্রিগার
 
-トリガーを使用すると、Cron スケジュールでエージェントが自動的に実行されるようにスケジュールを設定できます。トリガーは、エージェント、環境、プロンプト、スケジュールを永続的なリソースにバインドし、手動介入なしで実行します。各実行では同じ環境が再利用されるため、1 回の実行で作成されたファイルは保持され、次の実行でも参照できます。
+ট্রিগার আপনাকে ক্রন শিডিউলে অটোমেটিক চালানোর জন্য এজেন্ট শিডিউল করতে দেয়। ট্রিগার কোনও এজেন্ট, এনভায়রনমেন্ট, প্রম্পট ও শিডিউলকে একটি পারসিস্টেন্ট রিসোর্সে বাইন্ড করে যা ম্যানুয়াল ইন্টারভেনশন ছাড়াই ফায়ার করে। প্রতিটি এক্সিকিউশন একই এনভায়র্নমেন্ট আবার ব্যবহার করে, তাই একটি রান চলাকালীন তৈরি করা ফাইল থেকে যায় এবং পরের রানেও দেখা যায়।
 
-### トリガーを作成する
+### ট্রিগার তৈরি করুন
 
-cron スケジュール、タイムゾーン、インタラクション構成を指定してトリガーを作成します。トリガーは `active` ステータスで開始され、次に一致する cron 時間に起動します。返された `id` を保存して、後続の呼び出しでトリガーを管理します。
+ক্রন শিডিউল, টাইম জোন ও ইন্টার‍্যাকশন কনফিগারেশন উল্লেখ করে ট্রিগার তৈরি করুন। ট্রিগারটি `active` স্ট্যাটাসে শুরু হয় এবং পরবর্তী ম্যাচিং ক্রন টাইমে ফায়ার করবে। পরবর্তী কলে ট্রিগার ম্যানেজ করতে, ফেরত আসা `id` সেভ করুন।
 
-トリガーはスケジュールに従って無人で実行されるため、インライン トークンではなく、保存された[認証情報](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ja)を参照します。下り（外向き）プロキシは実行のたびにシークレットを解決し、トリガーに触れることなくシークレットをローテーションします。インライン `transform` ルールはここでも機能します。値が変更されるたびにトリガーを更新する必要があります。
+যেহেতু কোনও ট্রিগার শিডিউল অনুযায়ী নিজে থেকেই রান করে, তাই ইনলাইন টোকেনের পরিবর্তে সেভ করা [ক্রেডেনশিয়াল](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=bn) রেফারেন্স হিসেবে ব্যবহার করুন। প্রতিবার রান করার সময় এগ্রেস প্রক্সি এটি সমাধান করে এবং ট্রিগার স্পর্শ না করেই আপনি সিক্রেট রোটেট করেন। ইনলাইন `transform` নিয়ম এখানেও কাজ করে, ভ্যালু পরিবর্তন হলেই আপনাকে ট্রিগার আপডেট করতে হবে।
 
 ### Python
 
@@ -1722,7 +1722,7 @@ print(f"Trigger created: {trigger.id}")
 print(f"Next run: {trigger.next_run_time}")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1818,7 +1818,7 @@ System.out.println("Trigger created: " + trigger.id().orElse(""));
 System.out.println("Next run: " + trigger.nextRunTime().orElse(null));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1883,7 +1883,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/triggers" \
@@ -1912,29 +1912,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/triggers" \
   }'
 ```
 
-`CreateTrigger` リクエストでは、次のフィールドを指定できます。
+`CreateTrigger` অনুরোধে নিম্নলিখিত ফিল্ডগুলি গ্রহণ করা হয়:
 
-| フィールド | 型 | 必須 / 省略可 | 説明 |
+| ফিল্ড | ধরন | প্রয়োজনীয় | বিবরণ |
 | --- | --- | --- | --- |
-| `schedule` | 文字列 | ○ | cron 式（例: `0 * * * *` は毎時、`0 9 * * 1-5` は平日の午前）。 |
-| `time_zone` | 文字列 | ○ | IANA タイムゾーン（例: `UTC`、`America/Argentina/Buenos_Aires`）。 |
-| `display_name` | 文字列 | いいえ | 人が読める形式のトリガー名。 |
-| `max_consecutive_failures` | integer | いいえ | トリガーが自動的に一時停止するまでの最大失敗回数。デフォルト: 5。 |
-| `execution_timeout_seconds` | integer | いいえ | 実行あたりのタイムアウト（秒単位）。デフォルト: 600。 |
-| `interaction` | オブジェクト | ○ | エージェント、入力、ツール、環境を定義する `CreateInteractionRequest`。 |
+| `schedule` | স্ট্রিং | হ্যাঁ | ক্রন এক্সপ্রেশন (যেমন, প্রতি ঘণ্টার জন্য `0 * * * *`, সপ্তাহের দিনের সকালের জন্য `0 9 * * 1-5`)। |
+| `time_zone` | স্ট্রিং | হ্যাঁ | IANA টাইম জোন (যেমন, `UTC`, `America/Argentina/Buenos_Aires`)। |
+| `display_name` | স্ট্রিং | না | ট্রিগারের জন্য মানুষের-পঠনযোগ্য নাম। |
+| `max_consecutive_failures` | পূর্ণসংখ্যা | না | ট্রিগার অটোমেটিক পজ হওয়ার আগে সর্বাধিক ব্যর্থতা। ডিফল্ট: ৫। |
+| `execution_timeout_seconds` | পূর্ণসংখ্যা | না | প্রতিটি এক্সিকিউশনের জন্য টাইমআউট সেকেন্ডে। ডিফল্ট: ৬০০। |
+| `interaction` | অবজেক্ট | হ্যাঁ | `CreateInteractionRequest` যা এজেন্ট, ইনপুট, টুল ও পরিবেশকে সংজ্ঞায়িত করে। |
 
-レスポンスには次のキーフィールドが含まれます。
+উত্তরে নিম্নলিখিত মূল ফিল্ডগুলি অন্তর্ভুক্ত থাকে:
 
-| フィールド | タイプ | 説明 |
+| ফিল্ড | ধরন | বিবরণ |
 | --- | --- | --- |
-| `id` | 文字列 | トリガーの固有識別子。以降のすべてのオペレーションでこれを使用します。 |
-| `status` | 文字列 | 現在の状態: `active`、`paused`、`disabled`。 |
-| `next_run_time` | 文字列 | 次回の実行スケジュールの ISO 8601 タイムスタンプ。 |
-| `consecutive_failure_count` | integer | 最後の成功以降の連続した失敗実行回数。 |
+| `id` | স্ট্রিং | ট্রিগারের জন্য অনন্য শনাক্তকারী। পরবর্তী সব অপারেশনে এটি ব্যবহার করুন। |
+| `status` | স্ট্রিং | বর্তমান অবস্থা: `active`, `paused`, বা `disabled`. |
+| `next_run_time` | স্ট্রিং | পরবর্তী শিডিউল করা এক্সিকিউশনের ISO 8601 টাইমস্ট্যাম্প। |
+| `consecutive_failure_count` | পূর্ণসংখ্যা | শেষবার সফল হওয়ার পর থেকে পরপর কতবার এক্সিকিউট করা যায়নি। |
 
-### トリガーの一覧表示
+### ট্রিগারের তালিকা তৈরি করা হচ্ছে
 
-プロジェクトに関連付けられているすべてのトリガーを取得します。
+আপনার প্রোজেক্টের সাথে যুক্ত সব ট্রিগার রিট্রিভ করুন।
 
 ### Python
 
@@ -1944,7 +1944,7 @@ for trigger in triggers.triggers:
     print(f"{trigger.id}: {trigger.display_name} ({trigger.status})")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const triggers = await client.triggers.list();
@@ -1971,7 +1971,7 @@ for (Trigger trigger : triggers) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2007,16 +2007,16 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### トリガーを取得する
+### ট্রিগার পান
 
-1 つのトリガーの完全な構成と現在の状態を取得します。
+একটি ট্রিগারের সম্পূর্ণ কনফিগারেশন এবং বর্তমান অবস্থা ফেচ করুন।
 
 ### Python
 
@@ -2026,7 +2026,7 @@ print(f"Schedule: {trigger.schedule}")
 print(f"Next run: {trigger.next_run_time}")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const trigger = await client.triggers.get("TRIGGER_ID");
@@ -2050,7 +2050,7 @@ System.out.println("Schedule: " + trigger.schedule().orElse(""));
 System.out.println("Next run: " + trigger.nextRunTime().orElse(null));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2092,9 +2092,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 一時停止と再開
+### পজ করুন এবং আবার চালু করুন
 
-トリガーを一時停止すると、スケジュールされた実行を停止できます。再開すると、スケジュールが再び有効になります。一時停止は手動実行には影響しません。
+শিডিউল করা এক্সিকিউশন বন্ধ করতে আপনি কোনও ট্রিগার পজ করতে পারেন এবং শিডিউল আবার অ্যাক্টিভেট করতে সেটি আবার চালু করতে পারেন। পজ করলে ম্যানুয়াল এক্সিকিউশনের উপর কোনও প্রভাব পড়ে না।
 
 ### Python
 
@@ -2106,7 +2106,7 @@ client.triggers.update(id="TRIGGER_ID", status="paused")
 client.triggers.update(id="TRIGGER_ID", status="active")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 // Pause
@@ -2135,7 +2135,7 @@ client.triggers().update("TRIGGER_ID", TriggerUpdate.builder().status(TriggerUpd
 client.triggers().update("TRIGGER_ID", TriggerUpdate.builder().status(TriggerUpdateStatus.ACTIVE).build());
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2198,9 +2198,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER
   -d '{"status": "active"}'
 ```
 
-### トリガーの削除
+### ট্রিগার মুছে দেওয়া
 
-トリガーを完全に削除します。過去の実行履歴は削除されません。
+স্থায়ীভাবে ট্রিগার সরিয়ে দিন। পুরনো এক্সিকিউশন ইতিহাস মুছে ফেলা হয় না।
 
 ### Python
 
@@ -2208,7 +2208,7 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER
 client.triggers.delete(id="TRIGGER_ID")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 await client.triggers.delete("TRIGGER_ID");
@@ -2227,7 +2227,7 @@ GenAI client = GenAI.builder()
 client.triggers().delete("TRIGGER_ID");
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2258,16 +2258,16 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_ID" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### トリガーをすぐに実行する
+### অবিলম্বে ট্রিগার রান করা
 
-次のスケジュールされた時刻を待たずに、オンデマンドでトリガーを起動します。これは、トリガーが一時停止されている場合でも機能します。
+পরবর্তী ডেলিভারি শিডিউল করা সময়ের জন্য অপেক্ষা না করে চাহিদা অনুযায়ী ট্রিগার চালু করুন। ট্রিগার পজ করা থাকলেও এটি কাজ করে।
 
 ### Python
 
@@ -2275,7 +2275,7 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGE
 client.triggers.run(trigger_id="TRIGGER_ID")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 await client.triggers.run("TRIGGER_ID");
@@ -2294,7 +2294,7 @@ GenAI client = GenAI.builder()
 client.triggers().run("TRIGGER_ID");
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2332,9 +2332,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 実行の一覧表示
+### তালিকা এক্সিকিউশন
 
-トリガーの実行履歴を表示します。各実行には、`status`、タイムスタンプ、完全なインタラクション出力を取得するために使用できる `interaction_id`、すべての実行が同じサンドボックスを共有していることを確認する `environment_id` が含まれます。
+কোনও ট্রিগারের এক্সিকিউশন ইতিহাস দেখুন। প্রতিটি এক্সিকিউশনে একটি `status`, টাইমস্ট্যাম্প, একটি `interaction_id` থাকে যা আপনি সম্পূর্ণ ইন্টার‍্যাকশন আউটপুট আনতে ব্যবহার করতে পারেন এবং একটি `environment_id` থাকে যা কনফার্ম করে যে সব রান একই স্যান্ডবক্স শেয়ার করে।
 
 ### Python
 
@@ -2348,7 +2348,7 @@ interaction = client.interactions.get(id=ex.interaction_id)
 print(interaction.output_text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const executions = await client.triggers.listExecutions("TRIGGER_ID");
@@ -2391,7 +2391,7 @@ for (TriggerExecution ex : executions) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2442,26 +2442,40 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_ID/executions" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 提供状況と価格
+## উপলভ্যতা ও দাম
 
-Antigravity エージェントは、Google AI Studio の [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) と Gemini API を通じて、無料枠と有料枠の両方のプロジェクトでプレビュー版として利用できます。
+Antigravity এজেন্ট প্রিভিউতে উপলভ্য
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=bn)-এর মাধ্যমে Google AI Studio-তে
+এবং Gemini API-তে ফ্রি টিয়ার ও পেড টিয়ার প্রোজেক্টের জন্য।
 
-料金は、基盤となる Gemini モデルのトークンとエージェントが使用するツールに基づく[従量課金制モデル](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#pricing-for-agents)に従います。単一の出力を生成する標準的なチャット リクエストとは異なり、Antigravity インタラクションはエージェント ワークフローです。1 つのリクエストで、推論、ツールの実行、コードの実行、ファイル管理の自律的なループがトリガーされます。無料枠プロジェクトには、無料のレート制限と使用量割り当てが含まれます。
+প্রাইসিং [পে-অ্যাজ-ইউ-গো মডেল](https://ai.google.dev/gemini-api/docs/pricing?hl=bn#pricing-for-agents) অনুসরণ করে
+যা অন্তর্নিহিত Gemini মডেল টোকেন এবং এজেন্ট যে টুল ব্যবহার করে তার উপর ভিত্তি করে। একটি
+স্ট্যান্ডার্ড চ্যাট অনুরোধের মতো নয়, যা একটি আউটপুট তৈরি করে, একটি অ্যান্টিগ্র্যাভিটি ইন্টার‍্যাকশন হল একটি
+এজেন্টিক ওয়ার্কফ্লো। একটি অনুরোধের ফলে যুক্তি, টুল
+এক্সিকিউশন, কোড রান করা ও ফাইল ম্যানেজমেন্টের একটি স্বতন্ত্র লুপ ট্রিগার হয়। ফ্রি টিয়ার প্রোজেক্টে ফ্রি রেট সীমা
+ও ব্যবহারের কোটা অন্তর্ভুক্ত থাকে।
 
-Antigravity のインタラクションは、マルチターンの自律ループを実行し、大量のトークンを消費する可能性があります。リクエストに[予算管理](#budget-controls)を設定して、トークンの使用量を制限します。[SSE ストリーミング](https://ai.google.dev/gemini-api/docs/streaming?hl=ja)を使用して進行状況をリアルタイムでモニタリングしたり、実行中のリクエストをキャンセルしたりすることもできます。
+Antigravity ইন্টার‍্যাকশন মাল্টি-টার্ন অটোনোমাস লুপ রান করে এবং
+উল্লেখযোগ্য টোকেন ব্যবহার করতে পারে। টোকেন ব্যবহার সীমিত করতে আপনার অনুরোধে [বাজেট কন্ট্রোল](#budget-controls) সেট করুন।
+এছাড়াও, আপনি
+[SSE স্ট্রিমিং](https://ai.google.dev/gemini-api/docs/streaming?hl=bn)-এর মাধ্যমে রিয়েল-টাইমে প্রোগ্রেস মনিটর করতে বা চলমান অনুরোধ বাতিল করতে পারবেন।
 
-### 予算管理
+### বাজেট কন্ট্রোল
 
-[モデルの選択](#model-selection)に加えて、`agent_config`（`"type": "antigravity"` を使用）内で `max_total_tokens` を設定して、インタラクションで使用できるトークンの合計数（入力 + 出力 + 思考）を制限します。キャッシュに保存されたトークンは、この上限にはカウントされません。エージェントが上限に達すると、インタラクションが停止し、`status: "incomplete"` が返されます。この上限はベスト エフォートです。エージェントがステップ間で予算を確認するタイミングによっては、実際の使用量が上限をわずかに超える可能性があります。
+[মডেল বেছে নেওয়া](#model-selection) ছাড়াও, `agent_config`-এর মধ্যে `max_total_tokens` সেট করুন (`"type": "antigravity"`-এর সাথে) যাতে
+একটি ইন্টার‍্যাকশন মোট যত টোকেন (ইনপুট + আউটপুট + থিঙ্কিং) ব্যবহার করতে পারে তা সীমিত করা যায়।
+ক্যাশে করা টোকেন এই সীমার মধ্যে পড়ে না। এজেন্ট সীমায় পৌঁছে গেলে, ইন্টার‍্যাকশন বন্ধ হয়ে যায় এবং `status: "incomplete"`-এ ফিরে আসে। সীমাটি হল সেরা-প্রচেষ্টা:
+এজেন্ট কখন বাজেট চেক করে তার উপর নির্ভর করে প্রকৃত ব্যবহার এটি সামান্য অতিক্রম করতে পারে
+ধাপের মধ্যে।
 
-`agent_config` のインタラクション リクエストで、`agent` と `input` とともに予算を設定します。
+`agent` ও `input`-এর পাশাপাশি `agent_config`-এ ইন্টার‍্যাকশন অনুরোধে বাজেট সেট করুন।
 
 ### Python
 
@@ -2492,7 +2506,7 @@ print(f"Status: {interaction.status}")  # "incomplete" if budget was hit
 print(f"Tokens used: {interaction.usage.total_tokens}")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2565,7 +2579,7 @@ System.out.println("Status: " + interaction.status().orElse(null)); // "incomple
 interaction.usage().ifPresent(usage -> System.out.println("Tokens used: " + usage.totalTokens().orElse(0)));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2619,7 +2633,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -2645,9 +2659,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### 未完了のやり取りを継続する
+#### অসম্পূর্ণ ইন্ট্যার‍্যাকশন চালিয়ে যাওয়া
 
-インタラクションが `status: "incomplete"` を返すと、エージェントの作業とコンテキストが保持されます。元のインタラクション `id` と `environment_id` を参照する新しいインタラクションを送信して、中断したところから再開します。新しいインタラクションには、独自の `max_total_tokens` 予算が割り当てられます。
+ইন্টার‍্যাকশন `status: "incomplete"` অবস্থায় ফিরে এলে, এজেন্টের কাজ ও প্রসঙ্গ
+সংরক্ষিত থাকে। আসল ইন্টার‍্যাকশন `id` এবং
+`environment_id`-এর রেফারেন্স দিয়ে নতুন ইন্টার‍্যাকশন পাঠান যাতে যেখানে শেষ হয়েছিল সেখান থেকে শুরু করা যায়। নতুন ইন্টার‍্যাকশনের নিজস্ব
+`max_total_tokens` বাজেট থাকে।
 
 ### Python
 
@@ -2666,7 +2683,7 @@ continuation = client.interactions.create(
 print(f"Status: {continuation.status}")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const continuation = await client.interactions.create({
@@ -2715,7 +2732,7 @@ Interaction continuation = client.interactions.create(CreateInteractionRequestBo
 System.out.println("Status: " + continuation.status().orElse(null));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2778,48 +2795,48 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 推定費用
+### আনুমানিক খরচ
 
-費用はタスクの複雑さによって異なります。エージェントは、必要なツール呼び出し、コード実行、ファイル操作の数を自律的に判断します。以下の見積もりは実行に基づいています。
+টাস্কের জটিলতা অনুযায়ী খরচ আলাদা হয়। এজেন্ট নিজে থেকে নির্ধারণ করে যে কতগুলি টুল কল, কোড এক্সিকিউশন এবং ফাইল অপারেশন প্রয়োজন। নিম্নলিখিত অনুমান রান-এর উপর ভিত্তি করে করা হয়েছে।
 
-| タスクのカテゴリ | 入力トークン | 出力トークン | 一般的な費用 |
+| টাস্কের বিভাগ | ইনপুট টোকেন | আউটপুট টোকেন | সাধারণ খরচ |
 | --- | --- | --- | --- |
-| **リサーチと情報の統合** | 10 万～ 50 万 | 10,000 ～ 40,000 | $0.30 ～$1.00 |
-| **ドキュメントとコンテンツの生成** | 10 万～ 50 万 | 15,000 ～ 50,000 | $0.30 ～$1.30 |
-| **プロセスとシステムの設計** | 10 万～ 40 万 | 10,000 ～ 30,000 | $0.25 ～$0.80 |
-| **データ処理と分析** | 30 万～ 300 万 | 3 万～ 15 万 | $0.70 ～$3.25 |
+| **রিসার্চ ও তথ্য সিন্থেসাইজ করা** | ১০০,০০০–৫০০,০০০ | ১০ হাজার–৪০ হাজার | $০.৩০–$১.০০ |
+| **ডকুমেন্ট ও কন্টেন্ট তৈরি করা** | ১০০ হাজার–৫০০ হাজার | ১৫ হাজার–৫০ হাজার | $০.৩০–$১.৩০ |
+| **প্রসেস ও সিস্টেম ডিজাইন** | ১০০,০০০–৪০০,০০০ | ১০ হাজার–৩০ হাজার | $০.২৫–$০.৮০ |
+| **ডেটা প্রসেসিং ও বিশ্লেষণ** | ৩০০,০০০–৩ মিলিয়ন | ৩০ হাজার–১৫০ হাজার | $০.৭০–$৩.২৫ |
 
-通常、入力トークンの 50 ～ 70% がキャッシュされます。多くのツール呼び出しを伴う複雑な Agentic Workflows では、1 回のインタラクションで 300 万～ 500 万トークンが蓄積され、費用は最大 5 ドルに達することがあります。
+ইনপুট টোকেনের ৫০–৭০% সাধারণত ক্যাশে করা হয়। অনেক টুল কল সহ জটিল এজেন্টিক ওয়ার্কফ্লোতে একটি ইন্টার‍্যাকশনে ৩–৫ মিলিয়ন টোকেন জমা হতে পারে, যার খরচ ~$৫ পর্যন্ত হতে পারে।
 
-プレビュー期間中は、**環境コンピューティング**（CPU、メモリ、サンドボックス実行）は**課金されません**。
+প্রিভিউ চলাকালীন **এনভায়রনমেন্ট কম্পিউট** (সিপিইউ, মেমরি, স্যান্ডবক্স এক্সিকিউশন)-এর জন্য **চার্জ করা হয় না**।
 
-## 制限事項
+## সীমাবদ্ধতা
 
-- **プレビュー ステータス:** Antigravity エージェントと Interactions API。機能とスキーマは変更される可能性があります。
-- **サポートされていない生成構成:** 次のパラメータはサポートされておらず、400 エラーが返されます。`temperature`、`top_p`、`top_k`、`stop_sequences`、`max_output_tokens`。
-- **構造化出力:** Antigravity エージェントは構造化出力をサポートしていません。
-- **利用できないツール:** `file_search`、`computer_use`、`google_maps` はまだサポートされていません。
-- **リモート MCP の制限事項:** サーバー送信イベント（SSE）トランスポートはサポートされていません（ストリーミング可能な HTTP を使用してください）。また、サーバー `name` は厳密に小文字の英数字である必要があります（大文字を使用すると、一般的な `400 Bad Request` エラーがトリガーされます）。
-- **ファイルシステム ツール:** 現在、ファイルシステム ツールはありません。これは `environment` の一部です。
-- **ストアの要件:** `background=True` を使用したエージェントの実行には `store=True` が必要です。
-- **ステートフルのみの関数呼び出し:** 関数呼び出しはステートフル モードでのみサポートされています。ターンを続行するには `previous_interaction_id` を使用する必要があります。履歴を手動で再構築する（ステートレス モード）ことはサポートされていません。
-- **サポートされていないマルチモーダル タイプ。**現時点では、音声、動画、ドキュメントの入力はサポートされていません。テキストと画像のみが許可されます。
+- **প্রিভিউ স্ট্যাটাস:** Antigravity এজেন্ট ও Interactions API. ফিচার ও স্কিমা পরিবর্তন হতে পারে।
+- **জেনারেট করার কনফিগারেশন কাজ করে না:** নিম্নলিখিত প্যারামিটার কাজ করে না এবং এর ফলে 400 এরর কোড দেখানো হয়: `temperature`, `top_p`, `top_k`, `stop_sequences`, `max_output_tokens`.
+- **স্ট্রাকচার্ড আউটপুট:** Antigravity এজেন্টে স্ট্রাকচার্ড আউটপুট কাজ করে না।
+- **উপলভ্য নয় এমন টুল:** `file_search`, `computer_use` এবং `google_maps` এখনও কাজ করে না।
+- **রিমোট MCP-এর সীমাবদ্ধতা:** Server-Sent Events (SSE) ট্রান্সপোর্ট কাজ করে না (Streamable HTTP ব্যবহার করুন)। এছাড়াও, সার্ভার `name` অবশ্যই ছোট হাতের অক্ষর এবং বর্ণসাংখ্যিক হতে হবে (বড় হাতের অক্ষর ব্যবহার করলে একটি সাধারণ `400 Bad Request` ত্রুটি ট্রিগার হয়)।
+- **ফাইলসিস্টেম টুল:** এই মুহূর্তে কোনও ফাইলসিস্টেম টুল নেই। এটি `environment`-এর অংশ।
+- **স্টোর সংক্রান্ত প্রয়োজনীয়তা:** `background=True` ব্যবহার করে এজেন্ট এক্সিকিউশনের জন্য `store=True` প্রয়োজন।
+- **শুধুমাত্র স্টেটফুল ফাংশন কলিং:** ফাংশন কলিং শুধুমাত্র স্টেটফুল মোডে কাজ করে। চালিয়ে যেতে আপনাকে অবশ্যই `previous_interaction_id` ব্যবহার করতে হবে; ম্যানুয়ালি ইতিহাস রিকনস্ট্রাক্ট করা (স্টেটলেস মোড) কাজ করে না।
+- **মাল্টিমোডালের ধরন কাজ করে না।** এই মুহূর্তে অডিও, ভিডিও ও ডকুমেন্ট ইনপুট কাজ করে না। শুধুমাত্র টেক্সট ও ছবি আপলোড করা যাবে।
 
-## 次のステップ
+## এর পরে কী করতে হবে
 
-- [クイックスタート](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja): マルチターン会話とストリーミング。
-- [カスタム エージェントの構築](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja): カスタム指示、スキル、エージェントの保存。
-- [環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja): サンドボックス構成、ソース、ネットワーキング。
-- [フック](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=ja): サンドボックス内でセキュリティ ゲートと副作用の検証を適用します。
-- [Deep Research エージェント](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja): 長文の調査タスク。
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja): 基盤となる API。
+- [কুইকস্টার্ট](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=bn): মাল্টি-টার্ন কথোপকথন ও স্ট্রিমিং।
+- [কাস্টম এজেন্ট তৈরি করা](https://ai.google.dev/gemini-api/docs/custom-agents?hl=bn): কাস্টম নির্দেশাবলী, দক্ষতা ও এজেন্ট সেভ করা।
+- [এনভায়রনমেন্ট](https://ai.google.dev/gemini-api/docs/agent-environment?hl=bn): স্যান্ডবক্স কনফিগারেশন, সোর্স, নেটওয়ার্কিং।
+- [হুক](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=bn): স্যান্ডবক্সের মধ্যে নিরাপত্তা গেট এবং সাইড-এফেক্ট যাচাইকরণ এনফোর্স করে।
+- [Deep Research এজেন্ট](https://ai.google.dev/gemini-api/docs/deep-research?hl=bn): দীর্ঘ রিসার্চ সংক্রান্ত টাস্ক।
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=bn): অন্তর্নিহিত API।
 
-フィードバックを送信
+মতামত জানান
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
 
-最終更新日 2026-10-16 UTC。
+2026-10-16 UTC-তে শেষবার আপডেট করা হয়েছে।
 
-ご意見をお聞かせください
+আমাদের আরও কিছু জানাতে চান?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-16 UTC。"],[],[]]
+[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-16 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]

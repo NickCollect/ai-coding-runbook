@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/files?hl=fr
-fetched_at: 2026-10-26T05:57:33.005774+00:00
-title: "API Files \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/files?hl=ja
+fetched_at: 2026-11-02T07:31:58.787663+00:00
+title: "Files API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Envoyer des commentaires
+フィードバックを送信
 
-# API Files
+# Files API
 
-Gemini peut traiter simultanément différents types de données d'entrée, y compris du texte, des images et de l'audio.
+Gemini は、テキスト、画像、音声など、さまざまな種類の入力データを同時に処理できます。
 
-Ce guide vous explique comment utiliser des fichiers multimédias à l'aide de l'API Files. Les opérations de base sont les mêmes pour les fichiers audio, les images, les vidéos, les documents et les autres types de fichiers acceptés.
+このガイドでは、Files API を使用してメディア ファイルを操作する方法について説明します。基本的な操作は、音声ファイル、画像、動画、ドキュメント、その他のサポートされているファイル形式で同じです。
 
-Pour obtenir des conseils sur les prompts de fichiers, consultez la section [Guide sur les prompts de fichiers](https://ai.google.dev/gemini-api/docs/files?hl=fr#prompt-guide).
+ファイル プロンプトのガイダンスについては、[ファイル プロンプト ガイド](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide)のセクションをご覧ください。
 
-## Importer un fichier
+## ファイルをアップロード
 
-Vous pouvez utiliser l'API Files pour importer un fichier multimédia. Utilisez toujours l'API Files lorsque la taille totale de la requête (y compris les fichiers, le prompt textuel, les instructions système, etc.) est supérieure à 100 Mo. Pour les fichiers PDF, la limite est de 50 Mo.
+Files API を使用してメディア ファイルをアップロードできます。リクエストの合計サイズ（ファイル、テキスト プロンプト、システム指示などを含む）が 100 MB を超える場合は、常に Files API を使用します。PDF ファイルの上限は 50 MB です。
 
-Le code suivant importe un fichier, puis l'utilise dans un appel à `interactions.create`.
+次のコードは、ファイルをアップロードしてから、`interactions.create` の呼び出しでそのファイルを使用します。
 
 ### Python
 
@@ -227,9 +227,9 @@ echo
 jq ".outputs[] | select(.type == \"text\") | .text" response.json
 ```
 
-## Obtenir les métadonnées d'un fichier
+## ファイルのメタデータを取得する
 
-Vous pouvez vérifier que l'API a bien stocké le fichier importé et obtenir ses métadonnées en appelant `files.get`.
+`files.get` を呼び出すことで、API がアップロードされたファイルを正常に保存したことを確認し、そのメタデータを取得できます。
 
 ### Python
 
@@ -336,9 +336,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Lister les fichiers importés
+## アップロードされたファイルを一覧表示する
 
-Le code suivant permet d'obtenir la liste de tous les fichiers importés :
+次のコードは、アップロードされたすべてのファイルのリストを取得します。
 
 ### Python
 
@@ -424,9 +424,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Supprimer des fichiers importés
+## アップロードしたファイルを削除する
 
-Les fichiers sont automatiquement supprimés au bout de 48 heures. Vous pouvez également supprimer manuellement un fichier importé :
+ファイルは 48 時間後に自動的に削除されます。アップロードしたファイルを手動で削除することもできます。
 
 ### Python
 
@@ -517,192 +517,190 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/$name \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Informations sur l'utilisation
+## 利用情報
 
-Vous pouvez utiliser l'API Files pour importer des fichiers multimédias et interagir avec eux. L'API Files vous permet de stocker jusqu'à 20 Go de fichiers par projet, avec une taille maximale de 2 Go par fichier. Les fichiers sont stockés pendant 48 heures.
+Files API を使用すると、メディア ファイルをアップロードして操作できます。Files API を使用すると、プロジェクトごとに最大 20 GB のファイルを保存できます。ファイルあたりの最大サイズは 2 GB です。ファイルは 48 時間保存されます。
 
-Pendant ce temps, vous pouvez utiliser l'API pour obtenir des métadonnées sur les fichiers. Toutefois, vous ne pouvez pas télécharger les fichiers importés par les utilisateurs. Vous pouvez télécharger les fichiers générés par les modèles, tels que les vidéos, à l'aide de la méthode `files.download`. L'API Files est disponible sans frais dans toutes les régions où l'API Gemini est disponible.
+この期間中は、API を使用してファイルに関するメタデータを取得できます。ただし、ユーザーがアップロードしたファイルはダウンロードできません。モデルによって生成されたファイル（動画など）は、`files.download` メソッドを使用してダウンロードできます。Files API は、Gemini API が利用可能なすべてのリージョンで無料で利用できます。
 
-## Stratégies de prompting de fichiers
+## ファイル プロンプト戦略
 
-Cette section fournit des conseils et des bonnes pratiques pour utiliser des fichiers multimédias avec des requêtes pour l'API Gemini.
+このセクションでは、Gemini API のプロンプトでメディア ファイルを使用する際のガイダンスとベスト プラクティスについて説明します。
 
-La possibilité d'utiliser différents types de données dans vos requêtes vous offre plus de flexibilité quant aux tâches que vous pouvez effectuer avec l'API Gemini. Par exemple, vous pouvez envoyer au modèle la photo d'un délicieux repas et lui demander d'écrire un court article de blog à ce sujet.
+プロンプトでさまざまな種類のデータを使用できるため、Gemini API で処理できるタスクの柔軟性が高まります。たとえば、美味しい料理の写真をモデルに送信し、その料理に関する短いブログを書くように依頼できます。
 
 |  |  |
 | --- | --- |
-| **Prompt** (Requête) | **Réponse** |
-| Rédigez un article de blog court et attrayant basé sur cette photo. Il doit inclure une description du repas sur la photo et parler de ma méthode de préparation de repas.   Cookies | Préparer ses repas à l'avance est un excellent moyen de gagner du temps et de l'argent, et cela peut également vous aider à manger plus sainement. Ce repas est un excellent exemple de plat sain et délicieux qui peut être préparé à l'avance.  Ce repas se compose de riz brun, de légumes rôtis et de poulet teriyaki. Le riz brun est un glucide complexe et sain qui vous apportera de l'énergie de façon durable. Les légumes rôtis sont un excellent moyen d'obtenir votre dose quotidienne de vitamines et de minéraux, et le poulet teriyaki est une option délicieuse et riche en protéines.  Ce repas est également simple à préparer. Il vous suffit de faire cuire le riz brun, de rôtir les légumes et de faire cuire le poulet teriyaki. Une fois que tout est cuit, répartissez les aliments dans des boîtes de préparation de repas et conservez-les au réfrigérateur. Vous pouvez ensuite prendre un conteneur et partir les matins chargés !  Si vous cherchez un repas sain et délicieux qui peut être préparé à l'avance, ce plat est une excellente option. Il est riche en nutriments et en saveurs, et vous permettra de vous sentir rassasié et satisfait.  Bonne préparation de repas sains et délicieux ! |
+| **プロンプト** | **レスポンス** |
+| この写真に基づいて、魅力的な短いブログ投稿を書いてください。写真に写っている食事の説明と、私がミールプレップ（食事の作り置き）を始めた経緯について説明する必要があります。   クッキー | ミールプレップは、時間とお金の節約に最適な方法であり、健康的な食生活にも役立ちます。この食事は、事前に準備できる健康的で美味しい食事の好例です。  この食事は、玄米、ロースト野菜、照り焼きチキンが特徴です。 玄米は健康的で複雑な炭水化物で、エネルギーが持続します。ロースト野菜は、1 日に必要なビタミンとミネラルを摂取するのに最適です。チキン照り焼きは、美味しく、タンパク質が豊富なオプションです。  この食事は準備も簡単です。玄米を炊き、野菜をローストし、照り焼きチキンを調理するだけです。すべて調理したら、ミールプレップ容器に分けて冷蔵庫で保存します。忙しい朝でも、容器を手に取ってすぐに出かけられます。  事前に準備できる健康的で美味しい食事をお探しなら、この食事がおすすめです。栄養と風味が豊富で、満腹感と満足感が得られること間違いなしです。  健康的でおいしいミールプレップを楽しみましょう。 |
 
-Si vous ne parvenez pas à obtenir le résultat souhaité à partir de requêtes utilisant des fichiers multimédias, certaines stratégies peuvent vous aider à obtenir les résultats souhaités. Les sections suivantes fournissent des approches de conception et des conseils de dépannage pour améliorer les prompts qui utilisent des entrées multimodales.
+メディア ファイルを使用するプロンプトから目的の出力を取得できない場合は、目的の結果を得るための戦略がいくつかあります。以降のセクションでは、マルチモーダル入力を使用するプロンプトを改善するための設計アプローチとトラブルシューティングのヒントについて説明します。
 
-Vous pouvez améliorer vos requêtes multimodales en suivant ces bonnes pratiques :
+マルチモーダル プロンプトは、次のベスト プラクティスに沿って改善できます。
 
-- ### [Principes de base de la conception d'invites](#specific-instructions)
+- ### [プロンプト設計の基礎](#specific-instructions)
 
-  - **Soyez précis dans vos instructions** : définissez des instructions claires et concises qui laissent peu de place aux erreurs d'interprétation.
-  - **Ajoutez quelques exemples à votre requête** :utilisez des exemples réalistes pour illustrer votre objectif.
-  - **Décomposez la tâche étape par étape** : divisez les tâches complexes en sous-objectifs gérables pour guider le modèle tout au long du processus.
-  - **Spécifiez le format de sortie** : dans votre requête, demandez la sortie au format souhaité, tel que Markdown, JSON, HTML, etc.
-  - **Mettez en avant votre image pour les requêtes liées à une seule image** : bien que Gemini puisse gérer les entrées d'image et de texte dans n'importe quel ordre, les requêtes qui contiennent une seule image peuvent fonctionner mieux si cette image (ou vidéo) est placée avant la requête de texte. Toutefois, pour les requêtes qui nécessitent que les images soient fortement imbriquées avec les textes pour avoir du sens, utilisez l'ordre le plus naturel.
-- ### [Résoudre les problèmes liés à un prompt multimodal](#troubleshooting)
+  - **指示を具体的にする**: 誤解を招かないように明確で簡潔な指示を記述します。
+  - **プロンプトにいくつかの例を加える:** 現実的な数個の例を使用して実現したいことを示します。
+  - **小さいステップに分ける**: 複雑なタスクを扱いやすい中間目標に分割して、プロセスに沿ってモデルを導きます。
+  - **出力形式を指定する**: プロンプトで、必要とする形式（Markdown、JSON、HTML など）で出力することを指示します。
+  - **単一画像のプロンプトではまず画像を配置する**: Gemini は、画像とテキストの入力をどのような順序でも処理できますが、単一画像のプロンプトの場合は、対象の画像（または動画）をテキストのプロンプトよりも前に配置することでパフォーマンスが向上する可能性があります。ただし、その画像がテキストと複雑に絡み合っている場合は、最も自然に意味を捉えることができる順序を使用してください。
+- ### [マルチモーダル プロンプトのトラブルシューティング](#troubleshooting)
 
-  - **Si le modèle n'extrait pas d'informations de la partie pertinente de l'image** : ajoutez des indications sur les aspects de l'image à partir desquels vous souhaitez que la requête puise des informations.
-  - **Si le résultat du modèle est trop générique (non adapté à l'entrée image/vidéo)** : au début de la requête, essayez de demander au modèle de décrire les images ou les vidéos avant de fournir les instructions de la tâche. ou essayez de demander au modèle de faire référence à ce qui est illustré.
-  - **Dépannage** : demandez au modèle de décrire l'image ou demandez au modèle d'expliquer sa raisonnement pour évaluer sa compréhension initiale.
-  - **Si votre requête génère du contenu incohérent**, essayez de réduire le paramétrage de la température ou de demander au modèle des descriptions plus courtes afin de réduire les risques d'extrapolation.
-  - **Réglez les paramètres d'échantillonnage** : testez différents paramètres de température et des sélections en haut de la plage pour ajuster la créativité du modèle.
+  - **モデルが画像の該当箇所から情報を抽出していない場合:** プロンプトで画像のどの部分から情報を引き出してほしいかについてのヒントを出してください。
+  - **モデルの出力内容が一般的すぎる（入力した画像 / 動画に十分対応していない）場合:** プロンプトの冒頭で、タスクの指示を出す前にモデルに画像や動画について説明するよう求めるか、画像の内容に言及するよう求めてみてください。
+  - **失敗した部分のトラブルシューティングを行うには:** モデルの最初の理解度を測るために、モデルに画像の説明を求めるか、モデルに推論についての説明を求めます。
+  - **プロンプトによりハルシネーションが生じたコンテンツが生成された場合:** 温度設定を下げるか、モデルに短い説明を求め、追加の詳細情報が推定されないようにしてみます。
+  - **サンプリング パラメータのチューニング:** さまざまな温度設定とトップ K 選択を試して、モデルの創造性を調整します。
 
-### Indiquez des instructions précises.
+### 指示を具体的にする
 
-Les requêtes sont plus efficaces lorsqu'elles sont claires et détaillées. Si vous avez une sortie spécifique en tête, il est préférable d'inclure cette exigence dans la requête pour vous assurer d'obtenir le résultat souhaité.
+プロンプトは、明確かつ詳細である場合に最も良い結果が出ます。特定の出力を想定している場合は、必要な出力を確実に得られるように、その要件をプロンプトに含めることをおすすめします。
 
-Pour cette image de tableau d'aéroport, demander au modèle de "décrire cette image" peut générer une description générale. Si vous avez besoin du modèle pour analyser une heure et une ville à partir de l'image, vous pouvez inclure cette requête directement dans votre prompt.
+下に示す空港の発着表示板の画像の場合、「この画像について説明する」ようにモデルにリクエストすると、漠然とした説明が生成される可能性があります。モデルによって画像から時刻と都市が抽出されることを必要とする場合は、そのリクエストをプロンプトに直接追加します。
 
-| Prompt | Réponse de modèle |
+| プロンプト | モデルのレスポンス |
 | --- | --- |
-| Décrivez cette image. | L'image montre un tableau des arrivées et des départs d'aéroport. |
+| この画像を説明してください。 | この画像は、空港の発着表示板を示しています。 |
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Horaires de transport Analysez les heures et les villes du tableau d'aéroport présent l'image ci-dessous et affichez-les sous forme de liste. | - 10:50 Moscou - 11:05 Édimbourg - 11:05 Londres - 11:10 Bucarest - 11:30 Kiev - 11:35 Dublin - 11:45 Midlands de l'Est - 12:15 Sofia - 12:30 Londres - 12:30 Newcastle - 12:40 Saint-Pétersbourg - 12:40 Londres - 12:45 Manchester |
+| 運行時刻表 この画像にある空港の発着表示板の時刻と都市を抽出してリストにしてください。 | - 10:50 モスクワ - 11:05 エディンバラ - 11:05 ロンドン - 11:10 ブカレスト - 11:30 キーウ - 11:35 ダブリン - 11:45 イースト ミッドランズ - 12:15 ソフィア - 12:30 ロンドン - 12:30 ニューカッスル - 12:40 サンクトペテルブルク - 12:40 ロンドン - 12:45 マンチェスター |
 
-### Ajouter quelques exemples
+### 例をいくつか追加する
 
-Le modèle Gemini peut accepter plusieurs entrées qu'il peut utiliser comme exemples pour comprendre la sortie que vous souhaitez. L'ajout de ces exemples peut aider le modèle à identifier les schémas et à appliquer la relation entre les images et les réponses fournies au nouvel exemple. C'est ce qu'on appelle l'apprentissage few-shot.
+この Gemini モデルはさまざまな入力を受け付けます。その入力を例として使用することにより、ユーザーが必要とする出力を理解できます。こうした例を追加することでモデルがパターンを識別できるようになり、指定された画像と回答の関係を新しい例に適用できます。これは「少数ショット」学習とも呼ばれます。
 
-Dans l'exemple suivant, la sortie initiale est rédigée sous forme de phrase et contient également le pays (Brésil). Supposons que vous souhaitiez que le résultat soit présenté dans un format ou un style différent, et que vous ne souhaitiez obtenir que la ville, et non le pays. En ajoutant des exemples few-shot à votre requête, vous pouvez orienter le modèle pour qu'il réponde comme vous le souhaitez.
+次の例では、最初の出力が文章形式で記述されており、国（ブラジル）も含まれています。別の形式やスタイルの出力が必要であり、国ではなく都市のみを出力してほしいとします。少数ショットの例をプロンプトに追加すると、意図したとおりに回答するようモデルを誘導できます。
 
-| **Prompt** (Requête) | **Réponse de modèle** |
+| **プロンプト** | **モデルのレスポンス** |
 | --- | --- |
-| Horaires de transport Déterminez la ville et le repère. | Le repère est la statue du Christ Rédempteur à Rio de Janeiro, au Brésil. |
+| 運行時刻表 ランドマークに一致する都市を特定してください。 | このランドマークは、ブラジルのリオデジャネイロにあるコルコバードのキリスト像です。 |
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Déterminez la ville et le repère. colisée | ville : Rome ; repère : le Colisée. |
-| Cité interdite | ville : Pékin ; repère : la Cité interdite |
-| forbidden-city | Ville : Rio de Janeiro ; repère : statue du Christ Rédempteur |
+| ランドマークに一致する都市を特定してください。 コロッセオ | 都市: ローマ、ランドマーク: コロッセオ。 |
+| 紫禁城 | 都市: 北京、ランドマーク: 紫禁城 |
+| 紫禁城 | 都市: リオデジャネイロ、ランドマーク: コルコバードのキリスト像 |
 
-### Procéder étape par étape
+### 順を追って説明する
 
-Pour les tâches complexes telles que celles nécessitant une compréhension visuelle et un raisonnement, il peut être utile de diviser la tâche en étapes plus petites et plus simples. Cela peut également être efficace si vous demandez directement au modèle de "penser étape par étape" dans votre requête.
+視覚的な理解と推論の両方を必要とするような複雑なタスクの場合は、タスクをより小さく、より簡単なステップに分割することが有効です。また、プロンプトの中でモデルに直接「順を追って考える」ように指示することも効果的な場合があります。
 
-| Prompt | Réponse de modèle |
+| プロンプト | モデルのレスポンス |
 | --- | --- |
-| Quand vais-je manquer de papier toilette ? | Bientôt, car il ne vous reste que trois rouleaux. |
+| トイレット ペーパーは、いつ使い切りますか？ | 間もなくです。あと 3 ロールしかありません。 |
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| 1. Commencez par compter le nombre de rouleaux de papier toilette apparaissant sur cette photo. 2. Déterminez ensuite la quantité de papier toilette qu'une personne type utilise par jour. 3. Calculez la durée de vie de ces rouleaux de papier toilette. | 1. Sur cette photo, on voit trois rouleaux de papier toilette. 2. Une personne type utilise environ 20 feuilles de papier toilette par jour. 3. Si un rouleau contient 200 feuilles, chaque rouleau dure environ 10 jours. Par conséquent, les trois rouleaux dureront environ un mois. |
+| 1. まず、この写真に写っているトイレット ペーパーのロールを数えてください。 2. 次に、標準的な人が 1 日に使用するトイレット ペーパーの量を定めます。 3. そのトイレット ペーパーがどのくらいの期間使用できるかを算出します。 | 1. この写真には、トイレット ペーパーのロールが 3 つ写っています。 2. 標準的な人は、1 日に約 20 枚のトイレット ペーパーを使用します。 3. 1 ロールに 200 枚入っているとすると、1 ロールで約 10 日間使用できます。したがって、3 ロールでは約 1 か月使用できます。 |
 
-Les problèmes mathématiques ou les problèmes basés sur les mots sont d'excellents candidats pour demander au modèle de réfléchir étape par étape.
+数学の問題や他の種類の言葉の問題は、モデルに順を追って考えることを求めるのに適しています。
 
-| **Prompt** (Requête) | **Response** (Réponse) |
+| **プロンプト** | **レスポンス** |
 | --- | --- |
-| Quel est le quatrième terme de la séquence ? | -135 |
+| 数列の第 4 項は何ですか？ | -135 |
 
-La réponse du modèle est incorrecte. Pour améliorer cela, vous pouvez demander au modèle d'analyser le problème avant de répondre à la requête.
+モデルからのレスポンスが正しくありません。これを改善するには、プロンプトに答える前に問題を解析するようにモデルに求める方法があります。
 
-| **Prompt** (Requête) | **Response** (Réponse) |
+| **プロンプト** | **レスポンス** |
 | --- | --- |
-| Analyse d'abord la formule dans l'image.  Ensuite, en fonction de la formule, répondez à la question "Quel est le quatrième terme de la séquence ?". | *Cliquez pour développer le résultat* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Remplacez "n = 4" dans la formule : $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Nous ne connaissons pas la valeur de b(3). Remplacez donc n = 3 dans la formule : $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Nous ne connaissons pas la valeur de b(2). Remplacez donc n = 2 dans la formule : $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Nous savons que la valeur de b(1) est 15. Remplacez-la par la formule : $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Maintenant que nous connaissons la valeur de b(2), remplacez-la dans la formule de b(3) : $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Maintenant que nous connaissons la valeur de b(3), remplacez-la dans la formule de b(4) : $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Par conséquent, le quatrième terme de la séquence est -405. |
+| まず、画像内の数式を解析します。  次に、数式に基づいて、「数列の第 4 項は何ですか？」に答えます。 | クリックして結果を拡大 $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. n = 4 を式に代入します。 $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. b(3) の値がわからないため、式に n = 3 を代入します。 $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. b(2) の値がわからないため、式に n = 2 を代入します。 $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. b(1) の値は 15 であるとわかっているため、それを式に代入します。 $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. b(2) の値がわかったので、それを b(3) の式に代入します。 $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. b(3) の値がわかったので、それを b(4) の式に代入します。 $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   したがって、数列の第 4 項は -405 です。 |
 
-La réponse du modèle est correcte. Pour la rendre encore plus fluide, vous pouvez demander au modèle de réfléchir étape par étape.
+このモデルのレスポンスは正確ですが、レスポンスをさらに合理化するには、モデルに順を追って考えるように依頼します。
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Quel est le quatrième terme de la séquence ? Réfléchir étape par étape | Le premier terme est 15.  Le deuxième terme est b(1) \* (-3) = 15 \* (-3) = -45.  Le troisième terme est b(2) \* (-3) = -45 \* (-3) = 135.  Le quatrième terme est b(3) \* (-3) = 135 \* (-3) = -405. |
+| 数列の第 4 項は何ですか？順を追って考えてください。 | 最初の項は 15 です。  第 2 項は、b(1) × (-3) = 15 × (-3) = -45 です。  第 3 項は、b(2) × (-3) = -45 × (-3) = 135 です。  第 4 項は、b(3) × (-3) = 135 × (-3) = -405 です。 |
 
-### Spécifier le format de sortie
+### 出力形式を指定する
 
-Un problème courant est le besoin d'avoir un format spécifique pour la sortie du modèle (par exemple, Markdown, JSON, HTML), en particulier si celle-ci doit être ingérée par une tâche en aval. Vous pouvez essayer de produire un résultat dans ce format en demandant au modèle via la requête. Voici deux exemples :
+よくある問題は、モデル出力を特定の形式（Markdown、JSON、HTML など）にする必要があることです。特に、モデルの出力を下流のタスクで取り込む必要がある場合に発生します。プロンプトの中でモデルにそのように指示することで、その形式での出力を試みることができます。以下に 2 つの例を示します。
 
-| Prompt | Réponse de modèle |
+| プロンプト | モデルの回答 |
 | --- | --- |
-| Analysez le tableau de cette image au format Markdown | ```none | Sujet | État | Durée | Date de début | Date limite | | ------- | ------ | ---- | ---------- | ------ | | Mathématiques | Terminé | 1,5 h | 29/11/2023 | 01/12/2023 | | Géographie | Terminé | 30 min | 02/12/2023 | 04/12/2023 | | Physique | En cours | 2 h | 03/12/2023 | 05/12/2023 | | Biologie | Non commencé | 6 h | 02/11/2016 | 06/12/2023 | ``` |
+| この画像の表を解析してマークダウン形式にしてください。 | ```none | 科目 | ステータス | 時間 | 開始日 | 期限 | | ------- | ------ | ---- | ---------- | ------ | | 数学 | 完了 | 1.5 時間 | 2023 年 11 月 29 日 | 2023 年 12 月 1 日 | | 地理 | 完了 | 30 分 | 2023 年 12 月 2 日 | 2023 年 12 月 4 日 | | 物理 | 進行中 | 2 時間 | 2023 年 12 月 3 日 | 2023 年 12 月 5 日 | | 生物 | 未開始 | 6 時間 | 2016 年 11 月 2 日 | 2023 年 12 月 6 日 | ``` |
 
-| **Prompt** (Requête) | **Réponse de modèle** |
+| **プロンプト** | **モデルのレスポンス** |
 | --- | --- |
-| Fournissez la liste de tous les attributs suivants :  ingrédients, type de cuisine, végétarien ou non, au format JSON | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
+| 次の属性をすべてリストアップしてください。  材料、料理の種類、ベジタリアンかどうか、JSON 形式 | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
 
-### Utilisez votre image en premier pour les requêtes liées à une seule image
+### 単一画像のプロンプトではまず画像を配置する
 
-Bien que Gemini puisse interpréter l'image et le texte dans n'importe quel ordre dans un prompt, le fait de placer une seule image avant le prompt textuel peut offrir de meilleurs résultats.
-Dans les exemples suivants, vous remarquerez que l'image précède le texte dans chaque requête.
+Gemini は、プロンプト内の画像とテキストをどのような順序でも解釈できますが、テキスト プロンプトの前に画像を 1 つ配置するとより良い結果が得られる場合があります。以下の例では、それぞれのプロンプトにおいて、テキストの前に画像があることを確認できます。
 
-### Résoudre les problèmes liés à un prompt multimodal
+### マルチモーダル プロンプトのトラブルシューティング
 
-Vous devrez peut-être résoudre les problèmes liés à votre prompt si vous n'obtenez pas de réponse utile. Voici quelques stratégies que vous pouvez essayer.
+役に立つ回答が得られない場合は、プロンプトのトラブルシューティングが必要かもしれません。以下にいくつかの方法を示します。
 
-#### Si le modèle n'extrait pas d'informations de la partie pertinente de l'image
+#### モデルが画像の該当部分から情報を引き出していない場合
 
-Pour obtenir une réponse plus spécifique, vous pouvez indiquer les aspects de l'image à partir desquels vous souhaitez que la requête extraie des informations pour éclairer sa réponse.
+より具体的なレスポンスを得るには、プロンプトへのレスポンスに必要な情報を、画像のどの部分から引き出すかを指定します。
 
-| Prompt | Réponse de modèle |
+| プロンプト | モデルのレスポンス |
 | --- | --- |
-| Combien de jours ces couches vont-elles durer avec un bébé ? | Les couches vont durer 198 jours avant d'être épuisées. |
+| このおむつは赤ちゃんに何日使えますか？ | おむつは、なくなるまで 198 日使用できます。 |
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Combien de temps vont durer ces couches avant d'être épuisées ?  Utilisez le poids indiqué sur la boîte pour déterminer l'âge de l'enfant et le nombre total de couches dans la boîte.  Divisez le nombre total par le nombre de couches utilisées par l'enfant chaque jour. | La boîte contient 198 couches. La boîte indique que les couches sont destinées à un enfant pesant entre 22 et 37 livres.  L'enfant correspondant à cette plage de poids a probablement 1 à 2 ans.  Un enfant de deux ans utilise généralement six couches par jour. Par conséquent, les couches vont durer environ 33 jours (198/6). |
+| この紙おむつは、どのくらいで使い切りますか？  箱に記載されている体重から子どもの年齢を割り出し、箱に入っているおむつの総数を使用してください。  合計数を、子どもが 1 日あたりに使用するおむつの数で割ってください。 | 箱には 198 枚のおむつが入っています。箱には、おむつが 22～37 ポンドの子ども用であると書かれています。  この体重の範囲にある子どもの平均年齢は 1～2 歳であると考えられます。  通常、2 歳の子どもは 1 日あたり 6 枚のおむつを使用するため、おむつは約 33 日間（198÷6）使用できます。 |
 
-#### Si les résultats du modèle sont trop génériques et ne sont pas suffisamment adaptés à l'entrée de type image
+#### モデル出力が漠然としすぎて、画像の入力に十分対応できない場合
 
-Pour aider le modèle à adapter sa réponse aux images, essayez de lui demander de les décrire avant d'effectuer sa tâche de raisonnement.
+モデルが画像に対するレスポンスを調整できるように、推論タスクを実行する前に、画像について説明するように求めてみます。
 
-| Prompt | Réponse de modèle |
+| プロンプト | モデルのレスポンス |
 | --- | --- |
-| Quel est le point commun entre ces images ? | Les quatre images sont des exemples de photographie de paysage. |
+| これらの画像の共通点は何ですか？ | 4 枚の画像はいずれも風景写真のサンプルです。 |
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Tout d'abord, décrivez en détail ce que contient chaque image. Quel est le point commun entre ces images ? | La première image montre une personne préparant une valise. La deuxième image montre un couloir vide dans un centre commercial. La troisième image montre un rouleau de papier toilette. La quatrième image montre une mer sombre et orageuse.  Le point commun de ces images est qu'elles sont toutes des exemples d'espaces liminaux. Les espaces liminaux sont des lieux ou des situations situés entre deux autres lieux ou situations. Elles se caractérisent souvent par un sentiment d'incertitude ou d'ambiguïté.  La première image montre la personne entre le moment où elle est chez elle et celui où elle est en voyage. La deuxième image montre le couloir entre deux magasins. La troisième image montre du papier toilette, ce qui peut représenter une salle de bain. Une salle de bain est un espace de transition entre les domaines privé et public. C'est un endroit où nous nous préparons à pénétrer ou à quitter le monde extérieur.  La quatrième image montre une mer entre calme et agitée.  Les espaces liminaux peuvent être à la fois intéressants et étranges. Ils peuvent constituer un début ou une fin. Ils peuvent représenter un lieu de réflexion ou d'action. |
+| まず、それぞれの画像の内容を詳しく説明してください。これらの画像の共通点は何ですか？ | 1 つ目の画像にはスーツケースに荷物を詰めている人物が写っています。2 つ目の画像にはショッピング モールの何もない廊下が写っています。3 つ目の画像にはトイレット ペーパーが写っています。4 つ目の画像には暗く荒れ狂う海が写っています。  これらの画像の共通点は、どれもリミナル スペースの例であるということです。リミナル スペースとは、他の 2 つの場所や状況の間にある場所や状況のことです。多くの場合、不確実性やあいまいさによって特徴付けられます。  1 つ目の画像は、自宅にいるときと旅行中の人物を写しています。2 つ目の画像は 2 つの店舗の間にある廊下が写されています。3 つ目の画像はトイレット ペーパーの画像で、バスルームの可能性もあります。トイレは、プライベートなスペースと共用スペースの間の過渡的なスペースです。そこは、外の世界に出入りするための準備をする場所です。  4 つ目の画像は、凪の状態と嵐の状態の間にある海を示しています。  リミナル スペースは刺激的でもあり、不安でもあります。新たな始まりの場所にもなれば、終わりの場所にもなります。内省の場所にもなれば、行動の場所にもなります。 |
 
-Vous pouvez également essayer de demander explicitement au modèle de faire référence à ce qui est illustré.
+また、画像の内容に言及するように明示的にモデルに指示することもできます。
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Quel est le point commun entre ces images ? Reportez-vous au contenu des images dans votre réponse. | Toutes les images sont liées au voyage. La première image montre une personne préparant une valise, la deuxième montre un couloir vide dans un centre commercial, la troisième une pile de rouleaux de papier toilette, et la quatrième image montre une mer sombre et orageuse.  Ces images sont toutes liées au voyage, car elles correspondent à tout ce dont les gens ont besoin ou utilisent lorsqu'ils voyagent. La première image montre une personne préparant une valise. C'est une chose que font les personnes qui partent en voyage. La deuxième image montre un couloir vide dans un centre commercial. C'est un lieu où les gens se rendent pour acheter les articles dont ils ont besoin pour leur voyage. La troisième image montre une pile de rouleaux de papier toilette. C'est quelque chose que les gens utilisent lorsqu'ils voyagent. La quatrième image montre une mer sombre et orageuse. C'est ce que les gens rencontrent souvent lorsqu'ils voyagent. |
+| これらの画像の共通点は何ですか？レスポンスでは、画像の内容を参考にしてください。 | 画像はすべて旅行に関連しています。1 つ目の画像にはスーツケースに荷物を詰めている人物が写っています。2 つ目の画像にはショッピング モールの何もない廊下が写っています。3 つ目の画像には積み重ねたトイレット ペーパーが写っています。4 つ目の画像には暗く荒れ狂う海が写っています。  これらの画像はすべて、人々が旅行するときに必要なもの、または使用するものであるため、すべて旅行に関連しています。1 つ目の画像には、スーツケースに荷物を詰めている人が写っています。これは、旅行に出かける人が行うことです。2 つ目の画像には、ショッピング モール内の何もない廊下が写っています。ショッピング モールは、旅行用品を購入するために訪れることが多い場所です。3 つ目の画像には、積み重ねたトイレット ペーパーが写っています。トイレット ペーパーは、人が旅行中によく使用するものです。4 つ目の画像には、暗い荒れ狂う海が写っています。これは、人が旅行中によく遭遇する場面です。 |
 
-Il en va de même pour les sorties créatives issues des images. Dans l'exemple suivant, avec le lapin, demandez explicitement au modèle d'inclure certains aspects de l'image pouvant améliorer le résultat.
+画像からクリエイティブな出力を得たい場合も、同じアプローチが有効です。ウサギを使った次の例では、画像の特徴を含めるようにモデルに明示的に依頼すると、出力を改善できます。
 
-| Prompt | Réponse de modèle |
+| プロンプト | モデルのレスポンス |
 | --- | --- |
-| Peux-tu m'écrire un poème sur cette image ? | Petit lapin, si doux et marron,  Sautant à travers champ, de haut en bas.  Tes oreilles sont si longues, ta queue si petite,  tu es la créature la plus mignonne de toutes.  Tu grignotes l'herbe, si verte et douce,  et tu sautes lorsque tu me vois.  Mais je serai toujours ton ami,  Petit lapin, jusqu'à la fin. |
+| この画像について詩を書いてもらえますか？ | 柔らかくて茶色い小さなウサギ、 野原を飛び跳ね、上へ下へ。 耳はとても長く、しっぽはとても小さい、 君は一番かわいい生き物だ。  君は草をかじってる、とても青々としていて甘い、 私を見たらぴょんぴょん跳ねて逃げて行ったね。 でも私はいつも君の友だち。 小さなウサギさんが生きている限り。 |
 
-| **Prompt modifié** | **Réponse améliorée** |
+| **更新されたプロンプト** | **改善されたレスポンス** |
 | --- | --- |
-| Peux-tu m'écrire un poème descriptif et théâtral sur cette image et y inclure le lieu ? | Petit lapin sur la pelouse,  Les oreilles sont si longues, si fines.  Que vois-tu là-bas,  Au loin, là où tu regardes ?  Est-ce le bleu de l'océan,  Étincelant dans la lumière du soleil ?  Ou les vagues qui s'écrasent et rugissent,  Un rythme que tu adores ?  Petit lapin, dis-moi la vérité,  Qu'est-ce qui retient tant ton attention ?  Est-ce la brise salée,  ou les cris des mouettes qui supplient ?  Peut-être est-ce toute cette immensité,  un monde si grand et si petit à la fois.  Un lieu où les rêves peuvent vagabonder  et où les aventures peuvent être créées.  Petit lapin, je me demande à quoi à quoi tu rêves,  Quand tu es assis sur l'herbe, si serein.  As-tu envie d'explorer les profondeurs,  ou de rester sur la terre ferme, là où tu peux sauter ?  Quoi qu'il en soit, petit lapin,  Garde cette étincelle qui brille en toi. Car dans tes rêves et tes aspirations,  se trouve un monde qui n'attend que d'être créé. |
+| この画像について、叙述的で印象的な詩を書き、場所も含めてもらえますか？ | 草原にいる小さなウサギ、 長い耳、鋭い耳。 何を見ているの？ 遠くを見つめて。  それは海の青、 太陽に照らされて輝く海か？ それとも打ち寄せて響く波、 そのリズムに夢中なの？  小さいウサギさん、本当のことを教えてください、 君の心を捉えるものは？ 潮風、 それとも楽しいカモメの鳴き声かい？  きっと、あらゆる存在の壮大さだね、 とても大きくて小さな世界。 夢が広がる場所、 冒険の種がまかれる場所。  小さなウサギさん、どんな夢を見ているの？ 草の上に座って、とても穏やかに。 深い穴を掘りたいの？ それとも飛び跳ねられる大地にいたいの？  君の夢が何であれ、小さいウサギさん、 明るく輝く不思議さをなくさないでね。 夢と願望の中に、 君の創造を待っている世界があるから。 |
 
-#### Savoir quelle partie de la requête a échoué
+#### プロンプトの失敗した部分に対するトラブルシューティング
 
-Il peut être difficile de savoir si une requête a échoué car le modèle n'a pas **compris l'image** avec laquelle commencer, ou s'il a compris l'image, mais n'a pas effectué les bonnes **étapes de raisonnement**.
-Pour faire la distinction entre les deux, demandez au modèle de décrire le contenu de l'image.
+プロンプトが失敗したのは、モデルがそもそも**画像を理解**していなかったからなのか、それとも画像は理解していたものの、その後に正しい**推論の手順**を実行しなかったからなのかを判断することは困難です。このような理由を見極めるには、画像に何が写っているかを説明するようモデルに指示します。
 
-Dans l'exemple suivant, si le modèle répond avec un aliment qui ne semble pas correspondre au thé (par exemple, du pop-corn), vous pouvez d'abord chercher à déterminer si le modèle a correctement reconnu que l'image contient du thé.
+以下の例では、お茶と組み合わせると意外に思えるおやつ（ポップコーンなど）をモデルが返す場合に、まずトラブルシューティングを行い、画像にお茶が含まれていることをモデルが正しく認識しているかどうかを判断します。
 
-| Prompt | Requête pour le dépannage |
+| プロンプト | トラブルシューティング用のプロンプト |
 | --- | --- |
-| Quel aliment puis-je préparer en une minute qui pourrait être associé à cela ? | Décris ce que tu vois sur cette image. |
+| 1 分で作ることができるおやつで、これに合うものは何ですか？ | この画像にあるものを説明してください。 |
 
-Une autre stratégie consiste à demander au modèle d'expliquer son raisonnement. Cela peut vous aider à déterminer la partie du raisonnement qui a échoué, le cas échéant.
+もう 1 つの方法は、モデルにその推論を説明してもらうことです。そうすることで、推論が破綻した部分を絞り込むことができます。
 
-| Prompt | Requête pour le dépannage |
+| プロンプト | トラブルシューティング用のプロンプト |
 | --- | --- |
-| Quel aliment puis-je préparer en une minute qui pourrait être associé à cela ? | Quel aliment puis-je préparer en une minute qui pourrait être associé à cela ? Merci d'indiquer pour quelle raison. |
+| 1 分で作ることができるおやつで、これに合うものは何ですか？ | 1 分で作ることができるおやつで、これに合うものは何ですか？理由を説明してください。 |
 
-## Étape suivante
+## 次のステップ
 
-- Essayez d'écrire vos propres prompts multimodaux à l'aide de [Google AI Studio](http://aistudio.google.com?hl=fr).
-- Pour en savoir plus sur l'utilisation de l'API Gemini Files pour importer des fichiers multimédias et les inclure dans vos requêtes, consultez les guides [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=fr), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=fr) et [Traitement des documents](https://ai.google.dev/gemini-api/docs/document-processing?hl=fr).
-- Pour obtenir d'autres conseils sur la conception de requêtes, comme l'ajustement des paramètres d'échantillonnage, consultez la page [Stratégies de requête](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=fr).
+- [Google AI Studio](http://aistudio.google.com?hl=ja) を使用して、独自のマルチモーダル プロンプトを作成してみてください。
+- Gemini Files API を使用してメディア ファイルをアップロードし、プロンプトに含める方法については、[Vision](https://ai.google.dev/gemini-api/docs/vision?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)、[ドキュメント処理](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)のガイドをご覧ください。
+- サンプリング パラメータのチューニングなど、プロンプト設計に関するその他のガイダンスについては、[プロンプト戦略](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ja)のページをご覧ください。
 
-Envoyer des commentaires
+フィードバックを送信
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Dernière mise à jour le 2026/10/14 (UTC).
+最終更新日 2026-10-26 UTC。
 
-Voulez-vous nous donner plus d'informations ?
+ご意見をお聞かせください
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/14 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-26 UTC。"],[],[]]

@@ -1,56 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=it
-fetched_at: 2026-10-26T05:53:48.287804+00:00
-title: "Trascrizione in tempo reale con l'API Gemini Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=zh-TW
+fetched_at: 2026-11-02T07:16:50.509411+00:00
+title: "\u4f7f\u7528 Gemini Live API \u9032\u884c\u5373\u6642\u8f49\u9304 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Invia feedback
+提供意見
 
-# Trascrizione in tempo reale con l'API Gemini Live
+# 使用 Gemini Live API 進行即時轉錄
 
-L'API Gemini Live supporta la trascrizione della conversione della voce in testo in tempo reale e a bassa latenza utilizzando il modello [`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=it). Se ti connetti all'API Live tramite WebSocket o utilizzi l'SDK Google Gen AI, puoi trasmettere in streaming l'input audio continuo e ricevere trascrizioni di testo incrementali in tempo reale man mano che viene pronunciato il discorso.
+Gemini Live API 支援使用 [`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=zh-tw) 模型，進行低延遲、即時的語音轉文字轉錄。透過 WebSockets 連線至 Live API，或使用 Google Gen AI SDK，即可串流傳輸連續音訊輸入，並在語音出現時，即時接收遞增的文字轉錄稿。
 
-[Prova la Trascrizione in tempo reale in Google AI Studiomic](https://aistudio.google.com/live?model=gemini-3.5-transcribe-live&hl=it)
-[Apri il cookbook di Colabcode](https://github.com/google-gemini/cookbook)
-[Utilizza le competenze dell'agente di codificaterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=it#gemini-live-api-dev)
+[在 Google AI Studio 試用即時轉錄mic](https://aistudio.google.com/live?model=gemini-3.5-transcribe-live&hl=zh-tw)
+[開啟 Colab 教戰手冊code](https://github.com/google-gemini/cookbook)
+[使用程式設計代理技能terminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=zh-tw#gemini-live-api-dev)
 
-Sfruttando l'API Gemini Live, piattaforme per sviluppatori come
-[Agora](https://docs.agora.io/en/ai/models/asr/gemini),
-[Fishjam](https://docs.fishjam.io/tutorials/gemini-live-integration),
-[LiveKit](https://docs.livekit.io/agents/models/stt/gemini/),
-[Pipecat](https://docs.pipecat.ai/api-reference/server/services/stt/google),
-[Vercel](https://vercel.com/docs/ai-gateway/modalities/speech-to-text) e
-[Vision Agents](https://visionagents.ai/integrations/stt/gemini)
-consentono agli sviluppatori di creare e implementare interfacce vocali ad alte prestazioni
-con facilità. Queste piattaforme gestiscono un'infrastruttura complessa di streaming multimediale in tempo reale
-dietro le quinte, consentendo agli sviluppatori di concentrarsi interamente sulla
-creazione dell'esperienza utente.
+開發人員平台 (例如 [Agora](https://docs.agora.io/en/ai/models/asr/gemini)、[Fishjam](https://docs.fishjam.io/tutorials/gemini-live-integration)、[LiveKit](https://docs.livekit.io/agents/models/stt/gemini/)、[Pipecat](https://docs.pipecat.ai/api-reference/server/services/stt/google)、[Vercel](https://vercel.com/docs/ai-gateway/modalities/speech-to-text) 和 [Vision Agents](https://visionagents.ai/integrations/stt/gemini)) 運用 Gemini Live API，讓開發人員輕鬆建構及部署高效能的語音介面。這些平台會在幕後管理複雜的即時媒體串流基礎架構，讓開發人員能全心打造使用者體驗。
 
-## Operatore e trascrizione in tempo reale
+## 真人服務專員與即時轉錄
 
-Sebbene entrambi utilizzino la connessione di streaming bidirezionale dell'API Live, la trascrizione in tempo reale funziona come una pipeline di riconoscimento vocale dedicata a bassa latenza anziché come un agente conversazionale.
+雖然兩者都使用 Live API 雙向串流連線，但「即時轉錄」是專用的低延遲語音辨識管道，而非對話式代理。
 
-| Funzionalità | Agente | Trascrizione Istantanea |
+| 功能 | 線上服務專員 | 即時轉錄 |
 | --- | --- | --- |
-| **Ruolo principale** | Assistente conversazionale che ascolta, ragiona e risponde. | Pipeline di conversione della voce in testo in tempo reale che trascrive l'audio in entrata. |
-| **Modalità di risposta** | Audio e testo parlati (`response_modalities=["AUDIO"]`). | Trascrizioni di testo dello streaming (`response_modalities=["TEXT"]`). |
-| **Stile di interazione** | Dialogo a turni con rilevamento di pause e interruzioni. | Elaborazione continua del flusso mentre l'oratore parla. |
-| **Funzionalità supportate** | Chiamata di funzione, Ricerca Google, istruzioni di sistema. | Bias del parlato (`custom_vocabulary`), rilevamento della lingua, VAD manuale e ibrido, trascrizione intelligente. |
-| **Stream di input** | Multimodale: audio, video, immagini, testo. | Input audio (PCM a 16 bit non elaborato). |
+| **主要作用** | 可聽取、推理及回覆的對話式助理。 | 即時語音轉文字管道，可轉錄傳入的音訊。 |
+| **回覆模態** | 語音音訊和文字 (`response_modalities=["AUDIO"]`)。 | 串流文字轉錄 (`response_modalities=["TEXT"]`)。 |
+| **互動風格** | 輪流對話，可偵測停頓和中斷。 | 在說話者發言時持續串流處理。 |
+| **支援的功能** | 在 `gemini-3.8-live` 啟用呼叫函式、Google 搜尋、系統指令、輸入音訊轉錄和語音偏誤 (`custom_vocabulary`)。 | 語音偏誤 (`custom_vocabulary`)、語言偵測、手動和混合 VAD、智慧轉錄。 |
+| **輸入串流** | 多模態：音訊、影片、圖片、文字。 | 音訊輸入 (原始 16 位元 PCM)。 |
 
-## Inizia
+## 開始使用
 
-I seguenti esempi mostrano come aprire una sessione di streaming bidirezionale con `gemini-3.5-transcribe-live` e ricevere trascrizioni in tempo reale.
+下列範例說明如何使用 `gemini-3.5-transcribe-live` 開啟雙向串流工作階段，並接收即時語音轉錄內容。
 
 ### Python
 
@@ -119,7 +109,7 @@ async function main() {
 main();
 ```
 
-### WebSockets
+### WebSocket
 
 ```
 const API_KEY = "YOUR_API_KEY";
@@ -154,14 +144,14 @@ websocket.onmessage = (event) => {
 };
 ```
 
-## Trascrizioni provvisorie e definitive
+## 暫定和最終語音轉錄內容
 
-Man mano che gli stream audio vengono inseriti nell'API Live, il server emette due campi di trascrizione complementari all'interno di `server_content`:
+音訊串流傳入 Live API 時，伺服器會在 `server_content` 中發出兩個互補的轉錄欄位：
 
-- **`interim_input_transcription`**: ipotesi parziali speculative a bassa latenza aggiornate mentre l'oratore parla attivamente. Questi aggiornamenti parziali vengono eseguiti rapidamente con un ritardo minimo. Utilizza `interim_input_transcription` per visualizzare in anteprima i sottotitoli codificati o i sottotitoli codificati in tempo reale reattivi dell'interfaccia utente.
-- **`input_transcription`**: la trascrizione finalizzata emessa quando l'oratore si ferma, il turno termina o il discorso viene finalizzato. Una volta emesso, questo testo rappresenta la trascrizione autorevole del modello del segmento vocale. In modalità di trascrizione intelligente, verrà inclusa la risposta pulita e formattata.
+- **`interim_input_transcription`**：低延遲、推測性的部分假設，會在說話者主動說話時更新。這類部分更新會快速進行，延遲時間極短。使用 `interim_input_transcription` 轉譯回應式即時 UI 字幕或預覽字幕。
+- **`input_transcription`**：說話者暫停、輪流結束或語音結束時，系統會發出最終轉錄稿。輸出後，這段文字代表模型對該語音片段的權威轉錄。在智慧語音轉錄模式中，這會包含經過清理和格式化的回覆。
 
-L'esempio seguente mostra come visualizzare i risultati parziali intermedi dello streaming e inviare le trascrizioni finali:
+以下範例說明如何顯示串流臨時部分內容，並提交最終轉錄稿：
 
 ### Python
 
@@ -202,7 +192,7 @@ onmessage: (message) => {
 };
 ```
 
-### WebSockets
+### WebSocket
 
 ```
 websocket.onmessage = (event) => {
@@ -217,13 +207,13 @@ websocket.onmessage = (event) => {
 };
 ```
 
-## Invio di audio
+## 正在傳送音訊
 
-Trasmetti in streaming blocchi audio tramite la connessione attiva come audio PCM a 16 bit non elaborato.
+透過有效連線，以原始 16 位元 PCM 音訊串流音訊區塊。
 
-- **Formato audio**:PCM a 16 bit non elaborato a 16 kHz (mono, little-endian).
-- **Dimensioni chunk**:invia l'audio in chunk di 100 ms (da 1024 a 2048 frame).
-- **Tipo MIME:** `audio/pcm;rate=16000` (o la frequenza di campionamento corrispondente).
+- **音訊格式：**原始 16 位元 PCM，16kHz (單聲道，小端序)。
+- **區塊大小：**以 100 毫秒 (1,024 到 2,048 影格) 為單位傳送音訊。
+- **MIME 類型：** `audio/pcm;rate=16000` (或相符的取樣率)。
 
 ### Python
 
@@ -257,7 +247,7 @@ session.sendRealtimeInput({
 });
 ```
 
-### WebSockets
+### WebSocket
 
 ```
 // Send base64-encoded PCM audio chunk
@@ -278,11 +268,11 @@ websocket.send(JSON.stringify({
 }));
 ```
 
-## Funzionalità di trascrizione
+## 語音轉錄功能
 
-### Rilevamento automatico della lingua
+### 自動偵測語言
 
-Per impostazione predefinita, l'omissione di `language_codes` o l'impostazione di `language_codes=[]` attiva l'identificazione automatica della lingua. Il modello rileva dinamicamente la lingua parlata in tutte le espressioni, incluse le conversazioni multilingue e il cambio di codice.
+根據預設，省略 `language_codes` 或設定 `language_codes=[]` 會啟用自動語言識別功能。模型會動態偵測語句中的口語，包括多語言對話和交替使用不同語言的情況。
 
 ### Python
 
@@ -306,7 +296,7 @@ const config = {
 };
 ```
 
-### WebSockets
+### WebSocket
 
 ```
 const setupMessage = {
@@ -323,9 +313,9 @@ const setupMessage = {
 websocket.send(JSON.stringify(setupMessage));
 ```
 
-### Suggerimento per una lingua specifica
+### 特定語言提示
 
-Fornisci codici lingua BCP-47 espliciti (ad esempio, `["es-ES"]` per lo spagnolo o `["fr-FR"]` per il francese) per orientare il riconoscimento verso lingue specifiche (vedi [Lingue supportate](#supported-languages)).
+提供明確的 BCP-47 語言代碼 (例如 `["es-ES"]` 代表西班牙文，`["fr-FR"]` 代表法文)，讓系統偏向辨識特定語言 (請參閱[支援的語言](#supported-languages))。
 
 ### Python
 
@@ -349,7 +339,7 @@ const config = {
 };
 ```
 
-### WebSockets
+### WebSocket
 
 ```
 const setupMessage = {
@@ -366,9 +356,9 @@ const setupMessage = {
 websocket.send(JSON.stringify(setupMessage));
 ```
 
-### Bias del vocabolario personalizzato
+### 自訂詞彙偏誤
 
-Fornisci un elenco di massimo 1000 frasi, nomi propri, nomi di brand o termini tecnici in `custom_vocabulary` per orientare il riconoscimento vocale verso una terminologia specifica (i risultati migliori si ottengono in genere con un massimo di 100 termini).
+在 `custom_vocabulary` 中提供最多 1,000 個詞組、專有名詞、品牌名稱或技術術語，讓語音辨識功能偏向特定術語 (通常最多 100 個術語可達到最佳效果)。
 
 ### Python
 
@@ -394,7 +384,7 @@ const config = {
 };
 ```
 
-### WebSockets
+### WebSocket
 
 ```
 const setupMessage = {
@@ -412,17 +402,17 @@ const setupMessage = {
 websocket.send(JSON.stringify(setupMessage));
 ```
 
-### Trascrizione intelligente
+### 智慧轉錄
 
-Configura la formattazione dell'output della trascrizione utilizzando il parametro `mode` in `input_audio_transcription`:
+使用 `input_audio_transcription` 中的 `mode` 參數，設定語音轉錄輸出內容的格式：
 
-- **`VERBATIM` (impostazione predefinita)**: produce una trascrizione letterale esatta di tutto ciò che viene detto, conservando le parole di riempimento grezze ("um", "uh", "tipo"), le ripetizioni e le false partenze.
-- **`SMART` (Trascrizione intelligente)**: pulisce e struttura la trascrizione per renderla più leggibile:
+- **`VERBATIM` (預設)**：逐字轉錄所有語音內容，保留原始填充詞 (「嗯」、「呃」、「像」)、重複內容和錯誤開頭。
+- **`SMART` (智慧轉錄)**：整理轉錄稿並調整結構，提高可讀性：
 
-  - **Rimozione delle disfluenze**: rimuove gli intercalari, le balbuzie e gli avvii errati.
-  - **Correzioni automatiche in linea**: risolve le correzioni vocali in modo naturale.
-  - **Formattazione strutturata**: formatta automaticamente elenchi, punti elenco, numeri, date e interruzioni di paragrafo.
-  - **Grammatica e maiuscole**: applica la punteggiatura e le maiuscole naturali.
+  - **贅字移除**：移除填充詞、口吃和錯誤開頭。
+  - **內嵌自我修正**：自然修正口誤。
+  - **結構化格式**：自動設定清單、項目符號、數字、日期和段落分行格式。
+  - **文法和大小寫**：自然地調整大小寫和標點符號。
 
 ### Python
 
@@ -446,7 +436,7 @@ const config = {
 };
 ```
 
-### WebSockets
+### WebSocket
 
 ```
 const setupMessage = {
@@ -463,20 +453,20 @@ const setupMessage = {
 websocket.send(JSON.stringify(setupMessage));
 ```
 
-## Strategie di rilevamento di attività vocale (VAD)
+## 語音活動偵測 (VAD) 策略
 
-### Rilevamento automatico dell'attività vocale (impostazione predefinita)
+### 自動 VAD (預設)
 
-Per impostazione predefinita, il rilevamento automatico dell'attività vocale lato server rileva quando un oratore inizia e smette di parlare.
+根據預設，伺服器端自動語音活動偵測功能會偵測說話者何時開始和停止說話。
 
-### VAD ibrido
+### 混合式 VAD
 
-[VAD ibrido](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=it#hybrid-vad) combina il rilevamento automatico dell'inizio del discorso lato server con il rilevamento della fine del discorso lato client per la finalizzazione del turno a latenza zero:
+[混合式 VAD](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=zh-tw#hybrid-vad) 結合伺服器端自動語音開始偵測和用戶端語音結束偵測，實現零延遲的語音結束判定：
 
-1. **Il rilevamento automatico dell'attività vocale lato server rimane attivo** per rilevare con precisione l'inizio del parlato con il padding audio del prefisso, evitando il troncamento delle parole iniziali.
-2. **Rilevamento dell'attività vocale lato client rileva il silenzio**: quando il rilevamento dell'attività vocale locale sul dispositivo rileva che l'oratore ha smesso di parlare, il client invia immediatamente un segnale `audio_stream_end`.
-3. **Finalizzazione rapida**: il server considera `audio_stream_end` come un prompt di finalizzazione immediata, ignorando il tempo di attesa predefinito del silenzio lato server e restituendo la trascrizione finalizzata con una latenza minima.
-4. **Fallback**: se la VAD lato client non viene attivata, la VAD lato server funge da fallback automatico.
+1. **伺服器端自動 VAD 仍會保持啟用**，透過前置音訊填補準確偵測語音開頭，防止前端字詞遭到截斷。
+2. **用戶端 VAD 偵測到靜音**：當本機裝置端 VAD 偵測到說話者停止說話時，用戶端會立即傳送 `audio_stream_end` 信號。
+3. **快速完成**：伺服器會將 `audio_stream_end` 視為立即完成對話的提示，略過預設的伺服器端靜音等待時間，並以最短的延遲時間傳回完成的轉錄稿。
+4. **備用**：如果用戶端 VAD 無法觸發，伺服器端 VAD 會自動做為備用。
 
 ### Python
 
@@ -515,7 +505,7 @@ session.sendRealtimeInput({
 });
 ```
 
-### WebSockets
+### WebSocket
 
 ```
 const setupMessage = {
@@ -544,9 +534,9 @@ websocket.send(JSON.stringify({
 }));
 ```
 
-### VAD manuale (premi per parlare)
+### 手動 VAD (即按即說)
 
-Per le interfacce walkie-talkie o i pulsanti push-to-talk, disattiva completamente il VAD automatico e controlla i limiti di turno in modo esplicito utilizzando `activity_start` e `activity_end`:
+如果是對講機介面或即按即說按鈕，請完全停用自動 VAD，並使用 `activity_start` 和 `activity_end` 明確控制對話輪替界線：
 
 ### Python
 
@@ -594,7 +584,7 @@ session.sendRealtimeInput({ activityStart: {} });
 session.sendRealtimeInput({ activityEnd: {} });
 ```
 
-### WebSockets
+### WebSocket
 
 ```
 const setupMessage = {
@@ -635,11 +625,11 @@ websocket.send(JSON.stringify({
 }));
 ```
 
-## Token effimeri nelle applicazioni client
+## 用戶端應用程式中的臨時權杖
 
-Per le applicazioni client-server (come le app web o mobile che trasmettono in streaming direttamente da un microfono), utilizza i [token effimeri](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=it) per evitare di esporre la chiave API nel codice client.
+如果是用戶端對伺服器應用程式 (例如直接從麥克風串流的行動或網頁應用程式)，請使用[臨時權杖](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=zh-tw)，避免在用戶端程式碼中公開 API 金鑰。
 
-Crea un token effimero vincolato sul server prima di avviare la connessione client:
+在伺服器上建立受限的臨時權杖，然後再啟動用戶端連線：
 
 ### Python
 
@@ -713,95 +703,95 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-## Lingue supportate
+## 支援的語言
 
-Le seguenti lingue e i seguenti codici lingua BCP-47 sono supportati per Gemini 3.5 Transcribe Live:
+Gemini 3.5 Transcribe Live 支援下列語言和 BCP-47 語言代碼：
 
-| Lingua | Codice BCP-47 | Lingua | Codice BCP-47 |
+| 語言 | BCP-47 代碼 | 語言 | BCP-47 代碼 |
 | --- | --- | --- | --- |
-| Afrikaans | `af-ZA` | Giapponese | `ja-JP` |
-| Amarico | `am-ET` | Giavanese | `jv-ID` |
-| Arabo (Egitto) | `ar-EG` | Kabuverdianu | `kea-CV` |
-| Armeno | `hy-AM` | Kannada | `kn-IN` |
-| Assamese | `as-IN` | Kazako | `kk-KZ` |
-| Azero | `az-AZ` | Coreano | `ko-KR` |
-| Bielorusso | `be-BY` | Kirgizo | `ky-KG` |
-| Bengalese (Bangladesh) | `bn-BD` | Lettone | `lv-LV` |
-| Bengalese (India) | `bn-IN` | Lingala | `ln-CD` |
-| Bosniaco | `bs-BA` | Lituano | `lt-LT` |
-| Bulgaro | `bg-BG` | Macedone | `mk-MK` |
-| Bulgaro (aromeno) | `rup-BG` | Malese | `ms-MY` |
-| Birmano | `my-MM` | Malayalam | `ml-IN` |
-| Cantonese (tradizionale) | `yue-Hant-HK` | Maltese | `mt-MT` |
-| Catalano | `ca-ES` | Cinese mandarino (semplificato) | `cmn-Hans-CN` |
-| Cebuano | `ceb` | Marathi | `mr-IN` |
-| Khmer centrale | `km-KH` | Mongolo | `mn-MN` |
-| Croato | `hr-HR` | Nepalese | `ne-NP` |
-| Ceco | `cs-CZ` | Norvegese | `nb-NO` |
-| Danese | `da-DK` | Oriya | `or-IN` |
-| Olandese | `nl-NL` | Polacco | `pl-PL` |
-| Inglese (Gran Bretagna) | `en-GB` | Portoghese (Brasile) | `pt-BR` |
-| Inglese (India) | `en-IN` | Portoghese (Portogallo) | `pt-PT` |
-| Inglese (Stati Uniti) | `en-US` | Punjabi | `pa-IN` |
-| Estone | `et-EE` | Punjabi (Gurmukhi script) | `pa-Guru-IN` |
-| Farsi | `fa-IR` | Rumeno | `ro-RO` |
-| Filippino | `fil-PH` | Russo | `ru-RU` |
-| Finlandese | `fi-FI` | Serbo | `sr-RS` |
-| Francese | `fr-FR` | Sindhi (alfabeto arabo) | `sd-Arab-IN` |
-| Galiziano | `gl-ES` | Slovacco | `sk-SK` |
-| Georgiano | `ka-GE` | Sloveno | `sl-SI` |
-| Tedesco | `de-DE` | Spagnolo (America Latina) | `es-419` |
-| Greek | `el-GR` | Spagnolo (Stati Uniti) | `es-US` |
-| Gujarati | `gu-IN` | Swahili (Kenya) | `sw-KE` |
-| Hausa | `ha-NG` | Svedese | `sv-SE` |
-| Ebraico | `he-IL` | Tagico | `tg-TJ` |
-| Hindi | `hi-IN` | Telugu | `te-IN` |
-| Ungherese | `hu-HU` | Thailandese | `th-TH` |
-| Islandese | `is-IS` | Turco | `tr-TR` |
-| Inglese indiano | `en-IN` | Ucraino | `uk-UA` |
-| Indonesiano | `id-ID` | Uzbeco | `uz-UZ` |
-| Italiano | `it-IT` | Vietnamita | `vi-VN` |
+| 南非荷蘭文 | `af-ZA` | 日文 | `ja-JP` |
+| 阿姆哈拉文 | `am-ET` | 爪哇語 | `jv-ID` |
+| 阿拉伯文 (埃及) | `ar-EG` | 維德角克里奧爾文 | `kea-CV` |
+| 亞美尼亞文 | `hy-AM` | 卡納達文 | `kn-IN` |
+| 阿薩姆文 | `as-IN` | 哈薩克文 | `kk-KZ` |
+| 亞塞拜然文 | `az-AZ` | 韓文 | `ko-KR` |
+| 白俄羅斯語 | `be-BY` | 吉爾吉斯文 | `ky-KG` |
+| 孟加拉文 (孟加拉) | `bn-BD` | 拉脫維亞文 | `lv-LV` |
+| 孟加拉文 (印度) | `bn-IN` | 林格拉文 | `ln-CD` |
+| 波士尼亞文 | `bs-BA` | 立陶宛文 | `lt-LT` |
+| 保加利亞文 | `bg-BG` | 馬其頓文 | `mk-MK` |
+| 保加利亞文 (阿羅馬尼亞文) | `rup-BG` | 馬來文 | `ms-MY` |
+| 緬甸文 | `my-MM` | 馬拉雅拉姆文 | `ml-IN` |
+| 粵語 (繁體) | `yue-Hant-HK` | 馬爾他文 | `mt-MT` |
+| 加泰隆尼亞文 | `ca-ES` | 中文 (簡體) | `cmn-Hans-CN` |
+| 宿霧文 | `ceb` | 馬拉地文 | `mr-IN` |
+| 中部高棉文 | `km-KH` | 蒙古文 | `mn-MN` |
+| 克羅埃西亞文 | `hr-HR` | 尼泊爾文 | `ne-NP` |
+| 捷克文 | `cs-CZ` | 挪威文 | `nb-NO` |
+| 丹麥文 | `da-DK` | 奧里雅文 | `or-IN` |
+| 荷蘭文 | `nl-NL` | 波蘭文 | `pl-PL` |
+| 英文 (英國) | `en-GB` | 葡萄牙文 (巴西) | `pt-BR` |
+| 英文 (印度) | `en-IN` | 葡萄牙文 (葡萄牙) | `pt-PT` |
+| 英文 (美國) | `en-US` | 旁遮普文 | `pa-IN` |
+| 愛沙尼亞文 | `et-EE` | 旁遮普文 (古木基文) | `pa-Guru-IN` |
+| 波斯文 | `fa-IR` | 羅馬尼亞文 | `ro-RO` |
+| 菲律賓文 | `fil-PH` | 俄文 | `ru-RU` |
+| 芬蘭文 | `fi-FI` | 塞爾維亞文 | `sr-RS` |
+| 法文 | `fr-FR` | 信德文 (阿拉伯字母) | `sd-Arab-IN` |
+| 加里西亞文 | `gl-ES` | 斯洛伐克文 | `sk-SK` |
+| 喬治亞文 | `ka-GE` | 斯洛維尼亞文 | `sl-SI` |
+| 德文 | `de-DE` | 西班牙文 (拉丁美洲) | `es-419` |
+| 希臘文 | `el-GR` | 西班牙文 (美國) | `es-US` |
+| 古吉拉特文 | `gu-IN` | 斯瓦希里文 (肯亞) | `sw-KE` |
+| 豪薩文 | `ha-NG` | 瑞典文 | `sv-SE` |
+| 希伯來文 | `he-IL` | 塔吉克文 | `tg-TJ` |
+| 北印度文 | `hi-IN` | 泰盧固文 | `te-IN` |
+| 匈牙利文 | `hu-HU` | 泰文 | `th-TH` |
+| 冰島文 | `is-IS` | 土耳其文 | `tr-TR` |
+| 印度英語 | `en-IN` | 烏克蘭文 | `uk-UA` |
+| 印尼文 | `id-ID` | 烏茲別克文 | `uz-UZ` |
+| 義大利文 | `it-IT` | 越南文 | `vi-VN` |
 
-## Riferimento ai parametri
+## 參數參考資料
 
-Configura la trascrizione in tempo reale utilizzando i campi in `input_audio_transcription` e `realtime_input_config`:
+使用 `input_audio_transcription` 和 `realtime_input_config` 中的欄位設定即時轉錄：
 
-| Parametro | Tipo | Descrizione |
+| 參數 | 類型 | 說明 |
 | --- | --- | --- |
-| `language_codes` | Array di stringhe | Codici lingua BCP-47 (ad es. `["en-US"]`). Se omesso o vuoto (`[]`), il modello rileva automaticamente la lingua e gestisce la voce multilingue. |
-| `custom_vocabulary` | Array di stringhe | Fino a 1000 termini personalizzati, acronimi, nomi di brand o nomi propri per orientare il riconoscimento vocale. |
-| `mode` | Stringa | Modalità di trascrizione: `"VERBATIM"` (predefinita) o `"SMART"` (Trascrizione intelligente). Se impostato su `"SMART"`, il modello rimuove gli intercalari, formatta gli elenchi e corregge le disfluenze. |
-| `automatic_activity_detection.disabled` | Booleano | Imposta su `true` per disattivare il rilevamento di attività vocale automatico e inviare manualmente i segnali `activityStart` e `activityEnd`. |
+| `language_codes` | 字串陣列 | BCP-47 語言代碼 (例如 `["en-US"]`)。如果省略或留空 (`[]`)，模型會自動偵測語言，並處理多語言語音。 |
+| `custom_vocabulary` | 字串陣列 | 最多可輸入 1,000 個自訂字詞、縮寫、品牌名稱或專有名詞，讓語音辨識功能優先辨識這些字詞。 |
+| `mode` | 字串 | 語音轉錄模式：`"VERBATIM"` (預設) 或 `"SMART"` (智慧語音轉錄)。如果設為 `"SMART"`，模型會移除填充詞、設定清單格式，並修正不流暢的語句。 |
+| `automatic_activity_detection.disabled` | 布林值 | 設為 `true` 即可停用自動語音活動偵測功能，並手動傳送 `activityStart` 和 `activityEnd` 信號。 |
 
-### Campi di risposta del server
+### 伺服器回應欄位
 
-| Campo | Descrizione |
+| 欄位 | 說明 |
 | --- | --- |
-| `server_content.interim_input_transcription` | Ipotesi di trascrizione parziale provvisoria a bassa latenza emessa continuamente mentre l'utente parla. |
-| `server_content.input_transcription` | Trascrizione autorevole e finalizzata emessa al termine di un turno di parola. |
+| `server_content.interim_input_transcription` | 使用者說話時，系統會持續產生低延遲的臨時部分轉錄假設。 |
+| `server_content.input_transcription` | 語音轉換完成時，系統會發出最終的權威輸入轉錄稿。 |
 
-## Limitazioni
+## 限制
 
-- **Durata della sessione**:le sessioni di trascrizione in tempo reale supportano lo streaming continuo fino a 10 minuti.
-- **Diarizzazione degli oratori**:la diarizzazione degli oratori non è supportata nelle sessioni di live streaming. Per la diarizzazione degli oratori, utilizza l'endpoint [Trascrizione audio](https://ai.google.dev/gemini-api/docs/transcribe?hl=it#speaker-diarization) non in streaming.
-- **Timestamp a livello di parola**:i timestamp a livello di parola non sono supportati tramite l'API Live. L'API Live emette timestamp a livello di enunciato (`interim_input_transcription` e `input_transcription`).
-- **Vocabolario personalizzato**:puoi fornire fino a 1000 termini in `custom_vocabulary`, ma in genere i risultati migliori si ottengono con un massimo di 100 termini.
-- **Compatibilità delle modalità**:la trascrizione intelligente (`"mode": "SMART"`) rimuove le parole di riempimento e formatta il testo in base all'intent, ma non può essere combinata con le annotazioni delle parole.
+- **工作階段持續時間：**即時轉錄工作階段支援最長 10 分鐘的連續串流。
+- **說話者分類：**直播工作階段不支援說話者分類功能。如要使用語者分段功能，請使用非串流[音訊轉錄](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw#speaker-diarization)端點。
+- **字詞層級時間戳記：**Live API 不支援字詞層級時間戳記。Live API 會發出語句層級的時間戳記 (`interim_input_transcription` 和 `input_transcription`)。
+- **自訂詞彙：**您最多可以在 `custom_vocabulary` 中提供 1,000 個字詞，但通常最多 100 個字詞的效果最佳。
+- **模式相容性：**智慧轉錄 (`"mode": "SMART"`) 會移除填充詞，並根據意圖調整文字格式，但無法與字詞註解搭配使用。
 
-## Passaggi successivi
+## 後續步驟
 
-- Leggi la [documentazione di Gemini Transcribe](https://ai.google.dev/gemini-api/docs/transcribe?hl=it) per i file audio non in streaming.
-- Leggi la [panoramica dell'API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=it) per gli agenti vocali conversazionali.
-- Leggi la [guida alla traduzione live](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=it) per la traduzione vocale in tempo reale.
-- Consulta la [pagina dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it#gemini-3.5-transcribe-live) per i prezzi dello streaming dell'API Live.
-- Esplora la [guida alle funzionalità dell'API Live](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=it).
+- 請參閱 [Gemini Transcribe 說明文件](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw)，瞭解非串流音訊檔案。
+- 參閱 [Live API 總覽](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-tw)，瞭解對話式語音代理。
+- 參閱[即時翻譯指南](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=zh-tw)，瞭解如何即時翻譯語音。
+- 如要瞭解 Live API 串流定價，請參閱[定價頁面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#gemini-3.5-transcribe-live)。
+- 請參閱 [Live API 功能指南](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=zh-tw)。
 
-Invia feedback
+提供意見
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Ultimo aggiornamento 2026-09-10 UTC.
+上次更新時間：2026-10-29 (世界標準時間)。
 
-Vuoi dirci altro?
+想進一步說明嗎？
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-10 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-29 (世界標準時間)。"],[],[]]

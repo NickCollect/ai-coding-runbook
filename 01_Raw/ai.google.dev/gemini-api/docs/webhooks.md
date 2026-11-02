@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=hi
-fetched_at: 2026-10-26T06:00:37.341047+00:00
-title: "\u0935\u0947\u092c\u0939\u0941\u0915 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=zh-CN
+fetched_at: 2026-11-02T07:05:50.038684+00:00
+title: "Webhook \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-सुझाव भेजें
+发送反馈
 
-# वेबहुक
+# Webhook
 
-वेबहुक की मदद से, Gemini API आपके सर्वर पर रीयल-टाइम सूचनाएं भेज सकता है. ऐसा तब होता है, जब एसिंक्रोनस या लंबे समय तक चलने वाली कार्रवाइयां (एलआरओ) पूरी हो जाती हैं. इससे स्टेटस अपडेट के लिए, एपीआई को पोल करने की ज़रूरत नहीं पड़ती. साथ ही, इंतज़ार का समय और ओवरहेड कम हो जाता है.
+借助 Webhook，当异步操作或长时间运行的操作 (LRO) 完成时，Gemini API 可以向您的服务器推送实时通知。这样一来，就不再需要轮询 API 以获取状态更新，从而缩短延迟时间并减少开销。
 
-वेबहुक, [बैच](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi) जॉब, [इंटरैक्शन](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi), और [वीडियो जनरेट करने](https://ai.google.dev/gemini-api/docs/video?hl=hi) जैसे ऑपरेशनों के लिए उपलब्ध हैं.
+Webhook 可用于[批量](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn)作业、[互动](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn)和[视频生成](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn)等操作。
 
-## यह कैसे काम करता है
+## 运作方式
 
-किसी टास्क के पूरा होने की स्थिति की जानकारी पाने के लिए, `GET /operations` को बार-बार पोल करने के बजाय, Gemini API वेबहुक को कॉन्फ़िगर किया जा सकता है. इससे, इवेंट ट्रिगर होने पर, आपके लिसनर यूआरएल को तुरंत एचटीटीपी पोस्ट अनुरोध भेजा जा सकेगा.
+您可以配置 Gemini API Webhook，使其在事件触发后立即向您的监听器网址发送 HTTP POST 请求，而无需反复轮询 `GET /operations` 来检查作业是否已完成。
 
-Gemini API में, वेबुक को कॉन्फ़िगर करने के दो तरीके उपलब्ध हैं:
+Gemini API 支持两种配置 Webhook 的方式：
 
-- [**स्टैटिक वेबहुक**](#static-webhooks): प्रोजेक्ट-लेवल के एंडपॉइंट, जिन्हें Gemini [WebhookService API](https://ai.google.dev/api?hl=hi) की मदद से कॉन्फ़िगर किया जाता है. ग्लोबल इंटिग्रेशन के लिए अच्छा है. जैसे, Slack को सूचना देना, डेटाबेस को सिंक करना वगैरह.
-- [**डाइनैमिक वेबहुक**](#dynamic-webhooks): अनुरोध के लेवल पर, किसी खास जॉब कॉल के कॉन्फ़िगरेशन पेलोड में वेबहुक यूआरएल पास करने वाले ओवरराइड. यह खास तौर पर, किसी खास काम को डेडीकेटेड एंडपॉइंट पर रूट करने के लिए सही है.
+- [**静态 Webhook**](#static-webhooks)：使用 Gemini [WebhookService API](https://ai.google.dev/api?hl=zh-cn) 配置的项目级端点。适用于全局集成（例如，通知 Slack、同步数据库等）。
+- [**动态网络钩子**](#dynamic-webhooks)：请求级替换，在特定作业调用的配置载荷中传递网络钩子网址。非常适合将特定作业路由到专用端点。
 
-## स्टैटिक वेबहुक
+## 静态 Webhook
 
-स्टैटिक वेबुक पूरे [प्रोजेक्ट](https://ai.google.dev/gemini-api/docs/api-key?hl=hi#google-cloud-projects) के लिए रजिस्टर किए जाते हैं. साथ ही, ये मिलते-जुलते किसी भी इवेंट के लिए ट्रिगर होते हैं.
+静态 webhook 是针对整个[项目](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-cn#google-cloud-projects)注册的，并且会针对任何匹配的事件触发。
 
-### वेबबुक बनाना
+### 创建网络钩子
 
-एसडीके या REST API का इस्तेमाल करके, एंडपॉइंट बनाए जा सकते हैं.
+您可以使用 SDK 或 REST API 创建端点。
 
-**अहम जानकारी**: वेबुक बनाते समय, एपीआई **साइनिंग सीक्रेट** को **सिर्फ़ एक बार** दिखाता है. आपको इसे सुरक्षित तरीके से सेव करना होगा.जैसे, अपने एनवायरमेंट वैरिएबल में. ऐसा इसलिए, ताकि बाद में हस्ताक्षर की पुष्टि की जा सके. साइनिंग सीक्रेट खो जाने पर, आपको उसे [बदलना](#rotate-signing-secret) होगा.
+**重要提示**：创建 Webhook 时，API **仅返回一次签名密钥**。您必须安全地存储此密钥（例如，存储在环境变量中），以便日后验证签名。如果您丢失了签名密钥，则必须[轮换](#rotate-signing-secret)该密钥。
 
 ### Python
 
@@ -109,7 +109,7 @@ System.out.println(
     "Created webhook: " + webhook.name().orElse("") + ", " + webhook.id().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -166,11 +166,11 @@ curl -X POST \
   }'
 ```
 
-डेटा पाने के लिए सर्वर सेट अप करने के बारे में जानने के लिए, [वेबहुक अनुरोधों को मैनेज करना](#handle-webhook-requests) सेक्शन देखें.
+如需详细了解如何设置服务器以接收数据，请参阅[处理 Webhook 请求](#handle-webhook-requests)部分。
 
-### वेबहुक पाना
+### 获取网络钩子
 
-किसी वेबुक की जानकारी को उसके संसाधन के नाम के हिसाब से वापस पाएं.
+按资源名称检索特定 Webhook 的详细信息。
 
 ### Python
 
@@ -220,7 +220,7 @@ System.out.println("URI: " + webhook.uri().orElse(""));
 System.out.println("Events: " + webhook.subscribedEvents().orElse(Collections.emptyList()));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -265,9 +265,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### वेबहुक की सूची बनाना
+### 列出网络钩子
 
-मौजूदा प्रोजेक्ट के लिए कॉन्फ़िगर किए गए सभी वेबुक की सूची बनाएं. इसमें पेज नंबर डालने का विकल्प होता है.
+列出当前项目的所有已配置的 Webhook，并提供可选的分页功能。
 
 ### Python
 
@@ -319,7 +319,7 @@ for (Webhook wh : response.webhooks().orElse(Collections.emptyList())) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -361,9 +361,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### किसी वेबहुक को अपडेट करना
+### 更新 webhook
 
-किसी मौजूदा वेबुक की प्रॉपर्टी अपडेट करें. जैसे, डिसप्ले नेम, टारगेट यूआरआई या सदस्यता लिए गए इवेंट.
+更新现有 Webhook 的属性，例如显示名称、目标 URI 或订阅的事件。
 
 ### Python
 
@@ -434,7 +434,7 @@ Webhook updatedWebhook =
 System.out.println("Updated webhook: " + updatedWebhook.name().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -489,9 +489,9 @@ curl -X PATCH \
   }'
 ```
 
-### वेबहुक मिटाना
+### 删除网络钩子
 
-प्रोजेक्ट से वेबहुक एंडपॉइंट हटाएं. इससे उस एंडपॉइंट पर, आने वाले समय में इवेंट डिलीवर नहीं किए जाएंगे.
+从项目中移除 webhook 端点。这会停止向相应端点传送未来的事件。
 
 ### Python
 
@@ -533,7 +533,7 @@ client.webhooks.delete("<your_webhook_id>");
 System.out.println("Webhook deleted.");
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -573,11 +573,11 @@ curl -X DELETE \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### साइनिंग सीक्रेट को रोटेट करना
+### 轮替签名密钥
 
-किसी वेबहुक के लिए, हस्ताक्षर करने वाले सीक्रेट को रोटेट करना. आपके पास यह कॉन्फ़िगर करने का विकल्प होता है कि पहले से चालू सीक्रेट को तुरंत रद्द किया जाए या 24 घंटे की ग्रेस पीरियड के बाद.
+轮替网络钩子的签名密钥。您可以配置是立即撤消之前有效的密钥，还是在 24 小时的宽限期后撤消。
 
-**अहम जानकारी**: रोटेशन के समय, नया हस्ताक्षर करने का सीक्रेट **सिर्फ़ एक बार** दिखाया जाता है. पुष्टि करने के लॉजिक को अपडेट करने से पहले, इसे सुरक्षित तरीके से सेव करें.
+**重要提示**：新的签名密钥仅在轮换时返回一次。在更新验证逻辑之前，请务必妥善保存该密钥。
 
 ### Python
 
@@ -647,7 +647,7 @@ String newSecret = response.secret().orElse("");
 System.out.println("New signing secret generated. Update your server configuration.");
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -697,14 +697,13 @@ curl -X POST \
   }'
 ```
 
-### सर्वर पर वेबहुक अनुरोधों को मैनेज करना
+### 在服务器上处理网络钩子请求
 
-जिस इवेंट के लिए आपने सदस्यता ली है उसके होने पर, आपके वेबहुक यूआरएल को एचटीटीपी पोस्ट अनुरोध मिलेगा. रीट्राई से बचने के लिए, आपके एंडपॉइंट को कुछ ही सेकंड में 2xx स्टेटस कोड के साथ जवाब देना होगा. डिलीवरी पक्का करने के लिए, Gemini API
-एक्सपोनेंशियल बैकऑफ़ का इस्तेमाल करके, 24 घंटे तक उन अनुरोधों को अपने-आप फिर से भेजता है जो पूरे नहीं हो सके.
+当发生您订阅的事件时，您的网络钩子网址会收到 HTTP POST 请求。您的端点必须在几秒钟内以 2xx 状态代码进行响应，以避免重试。为确保交付，Gemini API 会使用指数退避算法自动重试失败的请求，重试时间长达 24 小时。
 
-Gemini, सुरक्षा हेडर के लिए [स्टैंडर्ड वेबहुक](https://github.com/standard-webhooks/standard-webhooks) स्पेसिफ़िकेशन का सख्ती से पालन करता है. हस्ताक्षर किए गए हेडर के सिग्नेचर और सेव किए गए स्टैटिक साइनिंग सीक्रेट का इस्तेमाल करके, अपने सर्वर पर पेलोड की पुष्टि करें. पेलोड की जानकारी के लिए, [वेबहुक एनवलप](#webhook-envelope) सेक्शन देखें.
+Gemini 严格遵循[标准 Webhook](https://github.com/standard-webhooks/standard-webhooks) 规范来设置安全标头。使用签名标头签名和您存储的静态签名密钥，在服务器上验证载荷。如需了解载荷信息，请参阅 [Webhook 信封](#webhook-envelope)部分。
 
-यहां एचटीटीपी लिसनर के लिए, Flask का इस्तेमाल करने का एक उदाहरण दिया गया है:
+以下是使用 Flask 实现 HTTP 监听器的示例：
 
 ### Python
 
@@ -875,7 +874,7 @@ server.createContext(
 server.start();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -954,13 +953,13 @@ func main() {
 }
 ```
 
-## डाइनैमिक वेबहुक
+## 动态 webhook
 
-डाइनैमिक वेबहुक की मदद से, वेबहुक एंडपॉइंट को **अनुरोध के किसी खास कॉन्फ़िगरेशन** से बाइंड किया जा सकता है. यह एजेंट-ऑर्केस्ट्रेशन कतारों के लिए सबसे सही है. डाइनैमिक वेबुक, सिमेट्रिक सीक्रेट के बजाय असिमेट्रिक पब्लिक-की JWKS सिग्नेचर का इस्तेमाल करते हैं.
+借助动态 webhook，您可以将 webhook 端点绑定到**特定请求配置**，非常适合代理编排队列。动态 Webhook 利用非对称公钥 JWKS 签名（而非对称密钥）。
 
-### डाइनैमिक अनुरोध सबमिट करना
+### 提交动态请求
 
-एसिंक्रोनस जॉब (जैसे, बैच बनाना) ट्रिगर करते समय, `webhook_config` जोड़ें.
+在触发异步作业（例如创建批处理）时添加 `webhook_config`。
 
 ### Python
 
@@ -1052,7 +1051,7 @@ System.out.println(
     "Status: " + response.status().map(InteractionStatus::value).orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -1118,9 +1117,9 @@ curl -X POST \
   }'
 ```
 
-### डाइनैमिक सिग्नेचर (JWKS) की पुष्टि करना
+### 验证动态签名 (JWKS)
 
-डाइनैमिक वेबहुक अनुरोध, JSON Web Token (JWT) सिग्नेचर भेजते हैं. आपके लिसनर को हस्ताक्षर निकालना होगा और [Google के सार्वजनिक सर्टिफ़िकेट एंडपॉइंट](https://www.googleapis.com/oauth2/v3/certs) का इस्तेमाल करके उसकी पुष्टि करनी होगी.
+动态 Webhook 请求会发出 JSON Web 令牌 (JWT) 签名。您的监听器必须提取签名并使用 [Google 的公共证书端点](https://www.googleapis.com/oauth2/v3/certs)对其进行验证。
 
 ### Python
 
@@ -1314,7 +1313,7 @@ server.createContext(
 server.start();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -1406,12 +1405,11 @@ func main() {
 }
 ```
 
-## वेबबुक एन्वेलप
+## 网络钩子信封
 
-बैंडविड्थ की समस्या से बचने के लिए, Gemini के वेबहुक, डेटा डिलीवर करने के लिए **थिन पेलोड** मॉडल का इस्तेमाल करते हैं.
-डेटा डिलीवर करने के दौरान, रॉ आउटपुट फ़ाइल के बजाय, स्टेटस की जानकारी और नतीजों के पॉइंटर वाला स्नैपशॉट भेजा जाता है.
+为避免带宽拥塞，Gemini webhook 使用**精简载荷**模型来传送数据。传送内容会发送包含状态详细信息和结果指针的快照，而不是原始输出文件本身。
 
-यहां पेलोड फ़ॉर्मैट का एक उदाहरण दिया गया है:
+以下是载荷格式示例：
 
 ```
 {
@@ -1425,41 +1423,40 @@ func main() {
 }
 ```
 
-## इवेंट कैटलॉग का रेफ़रंस
+## 活动目录参考
 
-सहायता देने वाली नौकरियों के लिए, ये इवेंट ट्रिगर होते हैं:
+系统会针对支持的作业触发以下事件：
 
-| इवेंट किस तरह का है | ट्रिगर | पेलोड आइटम (`data`) |
+| 事件类型 | 触发器 | 载荷项 (`data`) |
 | --- | --- | --- |
-| `batch.succeeded` | प्रोसेसिंग पूरी हो गई है. | `id`, `output_file_uri` |
-| `batch.cancelled` | उपयोगकर्ता ने अनुरोध रद्द किया | `id` |
-| `batch.expired` | बैच को 24 घंटे में प्रोसेस नहीं किया गया (पूरा नहीं किया गया) | `id` |
-| `batch.failed` | बैच जॉब पूरा नहीं हो सका (सिस्टम या पुष्टि करने से जुड़ी गड़बड़ी). | `id`, `error_code`, `error_message` |
-| `interaction.requires_action` | फ़ंक्शन कॉल, उपयोगकर्ता को कुछ करना होगा | `id` |
-| `interaction.completed` | interactions API में LRO पूरा हुआ | `id` |
-| `interaction.failed` | इंटरैक्शन एपीआई में LRO फ़ेल हो गया (सिस्टम या पुष्टि करने से जुड़ी गड़बड़ी). | `id`, `error_code`, `error_message` |
-| `interaction.cancelled` | Interactions API में LRO रद्द किया गया | `id` |
-| `video.generated` | वीडियो जनरेट करने की LRO प्रोसेस पूरी हो गई है. | `id`, `output_file_uri`, `file_name` |
+| `batch.succeeded` | 处理已成功完成。 | `id`、`output_file_uri` |
+| `batch.cancelled` | 用户取消了请求 | `id` |
+| `batch.expired` | 批次在 24 小时内未处理（完成） | `id` |
+| `batch.failed` | 批量作业失败（系统或验证错误）。 | `id`、`error_code`、`error_message` |
+| `interaction.requires_action` | 函数调用，用户需要执行某些操作 | `id` |
+| `interaction.completed` | 互动 API 中的 LRO 成功 | `id` |
+| `interaction.failed` | 互动 API 中的 LRO 失败（系统或验证错误）。 | `id`、`error_code`、`error_message` |
+| `interaction.cancelled` | 取消了 interactions API 中的 LRO | `id` |
+| `video.generated` | 视频生成 LRO 已完成。 | `id`、`output_file_uri`、`file_name` |
 
-## सबसे सही तरीके
+## 最佳做法
 
-भरोसेमंद और बड़े पैमाने पर काम करने के लिए:
+为确保运行可靠且可扩缩，请执行以下操作：
 
-- **रिप्ले से सुरक्षा की सख्त जांच**: सभी अनुरोधों में `webhook-timestamp`
-  हेडर होता है. हमेशा अपने सर्वर कॉन्फ़िगरेशन लेयर पर इस टाइमस्टैंप की पुष्टि करें, ताकि **पांच मिनट** से पुराने पेलोड को अस्वीकार किया जा सके. इससे रीप्ले अटैक को कम करने में मदद मिलती है.
-- **एसिंक्रोनस तरीके से प्रोसेस करना**: सही हस्ताक्षर का पता चलने पर, तुरंत `2xx OK` के साथ जवाब दें. साथ ही, पार्स करने की कार्रवाइयों को इंटरनल तौर पर कतार में लगाएं. अगर श्रोता लंबे समय तक कॉल पर बने रहते हैं, तो डिलीवरी फिर से करने की कोशिश की जाएगी.
-- **डुप्लीकेट डेटा को मैनेज करना**: स्टैंडर्ड वेबहुक, "कम से कम एक बार" डिलीवर करते हैं. ज़्यादा ट्रैफ़िक वाले फ़्लो में डुप्लीकेट अनुरोधों को मैनेज करने के लिए, एक जैसे `webhook-id` हेडर का इस्तेमाल करें.
+- **严格的重放保护检查**：所有请求都带有 `webhook-timestamp` 标头。始终在服务器配置层验证此时间戳，以拒绝超过 **5 分钟**的载荷（以缓解重放攻击）。
+- **异步处理**：在检测到有效签名后立即使用 `2xx OK` 进行响应，并在内部将解析操作排入队列。如果监听器保持时间过长，则会触发传送重试周期。
+- **重复数据处理**：标准 Webhook 提供“至少一次”的交付保证。使用一致的 `webhook-id` 标头来处理高拥塞流量中可能出现的重复项。
 
-## आगे क्या करना है?
+## 接下来怎么做？
 
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi): ज़्यादा वॉल्यूम वाले एंडपॉइंट को अपने-आप प्रोसेस करने के लिए, वेबुक का इस्तेमाल करें.
+- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn)：利用 Webhook 自动执行高流量端点。
 
-सुझाव भेजें
+发送反馈
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया.
+最后更新时间 (UTC)：2026-09-24。
 
-क्या आपको हमें और कुछ बताना है?
+需要向我们提供更多信息？
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-24。"],[],[]]

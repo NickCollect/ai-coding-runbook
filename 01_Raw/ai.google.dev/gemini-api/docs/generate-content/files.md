@@ -1,35 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/files?hl=hi
-fetched_at: 2026-10-26T05:52:57.021354+00:00
-title: "\u092b\u093c\u093e\u0907\u0932 \u090f\u092a\u0940\u0906\u0908 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/files?hl=pt-BR
+fetched_at: 2026-11-02T07:01:51.451368+00:00
+title: "API Files \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=hi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=pt-br)
 
-सुझाव भेजें
+Envie comentários
 
-# फ़ाइल एपीआई
+# API Files
 
-Gemini, एक ही समय में टेक्स्ट, इमेज, और ऑडियो जैसे अलग-अलग तरह के इनपुट डेटा को प्रोसेस कर सकता है.
+O Gemini pode processar vários tipos de dados de entrada, incluindo texto, imagens e
+áudio, ao mesmo tempo.
 
-इस गाइड में, Files API का इस्तेमाल करके मीडिया फ़ाइलों के साथ काम करने का तरीका बताया गया है. ऑडियो फ़ाइलों, इमेज, वीडियो, दस्तावेज़ों, और इस्तेमाल किए जा सकने वाले अन्य फ़ाइल टाइप के लिए, बुनियादी कार्रवाइयां एक जैसी होती हैं.
+Neste guia, mostramos como trabalhar com arquivos de mídia usando a API Files. As
+operações básicas são as mesmas para arquivos de áudio, imagens, vídeos, documentos e
+outros tipos de arquivo compatíveis.
 
-फ़ाइल प्रॉम्प्ट करने से जुड़े दिशा-निर्देशों के लिए, [फ़ाइल प्रॉम्प्ट करने के लिए गाइड](https://ai.google.dev/gemini-api/docs/files?hl=hi#prompt-guide) सेक्शन देखें.
+Para orientações sobre comandos de arquivo, confira a seção
+[Guia de comandos de arquivo](https://ai.google.dev/gemini-api/docs/files?hl=pt-br#prompt-guide).
 
-## फ़ाइल अपलोड करें
+## Carregar um arquivo
 
-मीडिया फ़ाइल अपलोड करने के लिए, Files API का इस्तेमाल किया जा सकता है. जब अनुरोध का कुल साइज़ (इसमें फ़ाइलें, टेक्स्ट प्रॉम्प्ट, सिस्टम के निर्देश वगैरह शामिल हैं) 100 एमबी से ज़्यादा हो, तब हमेशा Files API का इस्तेमाल करें. पीडीएफ़ फ़ाइलों के लिए, यह सीमा 50 एमबी है.
+Use a API Files para fazer upload de um arquivo de mídia. Sempre use a API Files quando
+o tamanho total da solicitação (incluindo os arquivos, o comando de texto, as instruções do sistema
+etc.) for maior que 100 MB. Para arquivos PDF, o limite é de 50 MB.
 
-नीचे दिए गए कोड में, एक फ़ाइल अपलोड की जाती है. इसके बाद, `generateContent` को कॉल करने के लिए उस फ़ाइल का इस्तेमाल किया जाता है.
+O código a seguir faz upload de um arquivo e o usa em uma chamada para
+`generateContent`.
 
 ### Python
 
@@ -77,7 +84,7 @@ async function main() {
 await main();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 file, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
@@ -102,7 +109,7 @@ if err != nil {
 printResponse(resp)
 ```
 
-### आराम का समय
+### REST
 
 ```
 AUDIO_PATH="path/to/sample.mp3"
@@ -156,9 +163,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## किसी फ़ाइल का मेटाडेटा पाना
+## Acessar metadados de um arquivo
 
-`files.get` को कॉल करके, यह पुष्टि की जा सकती है कि एपीआई ने अपलोड की गई फ़ाइल को सेव कर लिया है. साथ ही, इसका मेटाडेटा भी पाया जा सकता है.
+Para verificar se a API armazenou o arquivo enviado e receber os metadados dele, chame `files.get`.
 
 ### Python
 
@@ -196,7 +203,7 @@ async function main() {
 await main();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 file, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
@@ -226,9 +233,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## अपलोड की गई फ़ाइलों की सूची
+## Listar arquivos enviados por upload
 
-नीचे दिए गए कोड से, अपलोड की गई सभी फ़ाइलों की सूची मिलती है:
+O código a seguir recebe uma lista de todos os arquivos enviados:
 
 ### Python
 
@@ -261,7 +268,7 @@ async function main() {
 await main();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 for file, err := range client.Files.All(ctx) {
@@ -272,7 +279,7 @@ for file, err := range client.Files.All(ctx) {
 }
 ```
 
-### आराम का समय
+### REST
 
 ```
 echo "My files: "
@@ -281,9 +288,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## अपलोड की गई फ़ाइलें मिटाना
+## Excluir arquivos enviados por upload
 
-फ़ाइलें 48 घंटे बाद अपने-आप मिट जाती हैं. अपलोड की गई फ़ाइल को मैन्युअल तरीके से भी मिटाया जा सकता है:
+Os arquivos são excluídos automaticamente após 48 horas. Também é possível excluir manualmente um
+arquivo enviado:
 
 ### Python
 
@@ -318,7 +326,7 @@ async function main() {
 await main();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 file, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
@@ -335,193 +343,218 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## इस्तेमाल के बारे में जानकारी
+## Informações de uso
 
-Files API का इस्तेमाल करके, मीडिया फ़ाइलें अपलोड की जा सकती हैं और उनके साथ इंटरैक्ट किया जा सकता है. Files API की मदद से, हर प्रोजेक्ट के लिए 20 जीबी तक की फ़ाइलें सेव की जा सकती हैं. हालांकि, हर फ़ाइल का साइज़ ज़्यादा से ज़्यादा 2 जीबी होना चाहिए. फ़ाइलें 48 घंटों तक सेव रहती हैं.
+Use a API Files para fazer upload e interagir com arquivos de mídia. A API Files
+permite armazenar até 20 GB de arquivos por projeto, com um tamanho máximo
+de 2 GB por arquivo. Os arquivos são armazenados por 48 horas.
 
-इस दौरान, एपीआई का इस्तेमाल करके फ़ाइलों के मेटाडेटा की जानकारी पाई जा सकती है. हालांकि, उपयोगकर्ता की ओर से अपलोड की गई फ़ाइलें डाउनलोड नहीं की जा सकतीं. `files.download` तरीके का इस्तेमाल करके, मॉडल से जनरेट की गई फ़ाइलें डाउनलोड की जा सकती हैं. जैसे, वीडियो. Files API, उन सभी देशों या इलाकों में बिना किसी शुल्क के उपलब्ध है जहां Gemini API उपलब्ध है.
+Durante esse período, você pode usar a API para receber metadados sobre os arquivos. No entanto,
+não é possível fazer o download de arquivos enviados por usuários. É possível baixar arquivos gerados por
+modelos, como vídeos, usando o método `files.download`. A API Files está
+disponível sem custo financeiro em todas as regiões em que a API Gemini está disponível.
 
-## फ़ाइल के लिए प्रॉम्प्ट देने की रणनीतियां
+## Estratégias de comandos de arquivos
 
-इस सेक्शन में, Gemini API के लिए प्रॉम्प्ट के साथ मीडिया फ़ाइलों का इस्तेमाल करने के बारे में दिशा-निर्देश और सबसे सही तरीके बताए गए हैं.
+Nesta seção, fornecemos orientações e práticas recomendadas para usar arquivos de mídia com
+comandos para a API Gemini.
 
-अपने प्रॉम्प्ट में अलग-अलग तरह के डेटा का इस्तेमाल करने से, आपको Gemini API की मदद से कई तरह के टास्क पूरे करने में मदद मिलती है. उदाहरण के लिए, मॉडल को स्वादिष्ट खाने की फ़ोटो भेजकर, उसके बारे में छोटा ब्लॉग लिखने के लिए कहा जा सकता है.
+A capacidade de usar vários tipos de dados nos comandos oferece mais
+flexibilidade em termos de tarefas que você pode realizar com a API Gemini. Por
+exemplo, é possível enviar ao modelo a foto de uma refeição deliciosa e pedir que ele escreva
+um blog curto sobre ela.
 
 |  |  |
 | --- | --- |
-| **प्रॉम्प्ट** | **जवाब** |
-| इस तस्वीर के आधार पर, एक छोटी और दिलचस्प ब्लॉग पोस्ट लिखो. इसमें फ़ोटो में मौजूद खाने के बारे में जानकारी होनी चाहिए. साथ ही, इसमें खाने की तैयारी से जुड़ी मेरी यात्रा के बारे में भी बताया जाना चाहिए.   कुकी | खाना तैयार करके रखने से, समय और पैसे की बचत होती है. साथ ही, इससे आपको सेहतमंद खाना खाने में भी मदद मिल सकती है. यह खाना, सेहतमंद और स्वादिष्ट होने के साथ-साथ, इसे आसानी से पहले से तैयार किया जा सकता है.  इस मील में ब्राउन राइस, रोस्टेड सब्ज़ियां, और चिकन टेरियाकी शामिल है. ब्राउन राइस एक हेल्दी और कॉम्प्लेक्स कार्बोहाइड्रेट है, जो आपको लंबे समय तक ऊर्जा देता है. भुनी हुई सब्ज़ियां, विटामिन और मिनरल की आपकी रोज़ की ज़रूरत को पूरा करने का एक बेहतरीन तरीका है. साथ ही, चिकन टेरियाकी एक स्वादिष्ट और प्रोटीन से भरपूर विकल्प है.  इसे बनाना भी बहुत आसान है. ब्राउन राइस को पकाएं, सब्ज़ियों को भूनें, और चिकन टेरियाकी को पकाएं. सब कुछ पक जाने के बाद, उसे मील प्रेप कंटेनर में बांटें और रेफ़्रिजरेटर में स्टोर करें. इसके बाद, इसे एक कंटेनर में भरकर सुबह के समय खाया जा सकता है!  अगर आपको सेहतमंद और स्वादिष्ट खाना चाहिए, जिसे आसानी से पहले से तैयार किया जा सकता है, तो यह खाना आपके लिए सबसे सही विकल्प है. यह पोषक तत्वों और स्वाद से भरपूर है. इसे खाने से आपको पेट भरा हुआ और संतुष्ट महसूस होगा.  सेहतमंद और स्वादिष्ट खाना बनाने के लिए शुभकामनाएं! |
+| **Comando** | **Resposta** |
+| Escreva uma postagem curta e interessante para o blog com base nessa foto. A foto deve incluir uma descrição da refeição e falar sobre a preparação das refeições.   Cookies | Preparar refeições é uma ótima maneira de economizar tempo e dinheiro, além de ajudar você a comer de forma mais saudável. Essa refeição é um ótimo exemplo de prato saudável e delicioso que pode ser preparado com antecedência.  Esta refeição inclui arroz integral, vegetais assados e frango teriyaki. O arroz integral é um carboidrato complexo e saudável que vai dar energia duradoura. Os vegetais assados são uma ótima maneira de obter sua dose diária de vitaminas e minerais, e o frango teriyaki é uma opção deliciosa e rica em proteínas.  Essa refeição também é muito fácil de preparar. Basta cozinhar o arroz integral, assar os vegetais e cozinhar o frango teriyaki. Depois que tudo estiver cozido, divida em recipientes de marmita e guarde na geladeira. Depois, é só pegar um pote e sair para as manhãs agitadas!  Se você está procurando uma refeição saudável e deliciosa que possa ser facilmente preparada com antecedência, esta é uma ótima opção. É cheio de nutrientes e sabor, e com certeza vai deixar você com uma sensação de saciedade.  Que suas refeições sejam saudáveis e deliciosas! |
 
-अगर आपको मीडिया फ़ाइलों का इस्तेमाल करने वाले प्रॉम्प्ट से मनमुताबिक़ आउटपुट पाने में समस्या आ रही है, तो यहाँ कुछ तरीक़े दिए गए हैं. इनकी मदद से, आपको मनमुताबिक़ नतीजे मिल सकते हैं. यहां दिए गए सेक्शन में, मल्टीमोडल इनपुट का इस्तेमाल करने वाले प्रॉम्ट को बेहतर बनाने के लिए, डिज़ाइन के तरीके और समस्या हल करने के बारे में सलाह दी गई है.
+Se você estiver com problemas para receber a saída desejada de comandos que usam
+arquivos de mídia, há algumas estratégias que podem ajudar a conseguir os resultados
+desejados. As seções a seguir fornecem abordagens de design e dicas de solução de problemas
+para melhorar os comandos que usam entrada multimodal.
 
-इन सबसे सही तरीकों को अपनाकर, टेक्स्ट, इमेज वग़ैरह का एक साथ इस्तेमाल करके प्रॉम्प्ट डालने की सुविधा को बेहतर बनाया जा सकता है:
+É possível melhorar os prompts multimodais seguindo estas práticas recomendadas:
 
-- ### [प्रॉम्प्ट डिज़ाइन करने से जुड़ी बुनियादी बातें](#specific-instructions)
+- ### [Conceitos básicos do design de comandos](#specific-instructions)
 
-  - **निर्देशों में सटीक जानकारी दें**: साफ़ और कम शब्दों में निर्देश दें, ताकि उन्हें समझने में कोई गड़बड़ी न हो.
-  - **अपने प्रॉम्प्ट में कुछ उदाहरण जोड़ें:** आपको जो नतीजा चाहिए उसे समझाने के लिए, कुछ इनपुट-आउटपुट उदाहरणों के साथ दिए गए प्रॉम्प्ट का इस्तेमाल करें.
-  - **इसे सिलसिलेवार तरीके से समझाएं**: मुश्किल टास्क को छोटे-छोटे उप-लक्ष्यों में बांटें और मॉडल को प्रोसेस के बारे में बताएं.
-  - **आउटपुट का फ़ॉर्मैट तय करें**: अपने प्रॉम्प्ट में, आउटपुट को अपनी पसंद के फ़ॉर्मैट में पाने के लिए कहें. जैसे, मार्कडाउन, JSON, एचटीएमएल वगैरह.
-  - **एक इमेज वाले प्रॉम्प्ट के लिए, इमेज को पहले रखें**: Gemini, इमेज और टेक्स्ट वाले इनपुट को किसी भी क्रम में प्रोसेस कर सकता है. हालाँकि, एक इमेज वाले प्रॉम्प्ट के लिए, अगर इमेज (या वीडियो) को टेक्स्ट प्रॉम्प्ट से पहले रखा जाए, तो Gemini बेहतर तरीक़े से काम कर सकता है. हालांकि, ऐसे प्रॉम्प्ट के लिए जिनमें इमेज और टेक्स्ट को एक साथ इस्तेमाल करना ज़रूरी है, उस क्रम का इस्तेमाल करें जो सबसे सही हो.
-- ### [टेक्स्ट, इमेज वग़ैरह का एक साथ इस्तेमाल करके प्रॉम्प्ट डालने से जुड़ी समस्या हल करना](#troubleshooting)
+  - **Seja específico nas instruções**: crie instruções claras e concisas que deixem pouco espaço para interpretações equivocadas.
+  - **Adicione alguns exemplos ao comando**: use exemplos realistas de few-shot para ilustrar o que você quer alcançar.
+  - **Detalhamento por etapas**: divida tarefas complexas em submetas gerenciáveis para guiar o modelo pelo processo.
+  - **Especifique o formato de saída**: no comando, peça que a saída esteja no formato desejado, como markdown, JSON, HTML e muito mais.
+  - **Coloque sua imagem em primeiro lugar nos comandos de imagem única**: o Gemini processa entradas de imagem e texto em qualquer ordem, mas para comandos com uma única imagem, o desempenho pode ser melhor se a imagem (ou vídeo) for colocada antes no comando de texto. No entanto, nos comandos que exigem que as imagens sejam altamente intercaladas com textos para fazer sentido, use a ordem mais natural.
+- ### [Como solucionar problemas do comando multimodal](#troubleshooting)
 
-  - **अगर मॉडल, इमेज के काम के हिस्से से जानकारी नहीं ले रहा है, तो:** प्रॉम्प्ट में इमेज के उन पहलुओं के बारे में बताएं जिनसे आपको जानकारी चाहिए.
-  - **अगर मॉडल आउटपुट बहुत सामान्य है (इनपुट के तौर पर दी गई इमेज/वीडियो के हिसाब से नहीं है):** प्रॉम्प्ट की शुरुआत में, मॉडल से इमेज या वीडियो के बारे में बताने के लिए कहें. इसके बाद, टास्क से जुड़े निर्देश दें. इसके अलावा, मॉडल से इमेज में मौजूद कॉन्टेंट का रेफ़रंस देने के लिए कहें.
-  - **यह पता लगाने के लिए कि इमेज जनरेट करने में किस हिस्से में समस्या आई:** मॉडल से इमेज के बारे में बताने के लिए कहें या मॉडल से यह बताने के लिए कहें कि उसने इमेज जनरेट करने के लिए किस तर्क का इस्तेमाल किया. इससे आपको यह पता चलेगा कि मॉडल ने इमेज को किस तरह समझा.
-  - **अगर आपके प्रॉम्प्ट के जवाब में ग़लत जानकारी मिलती है, तो:** तापमान की सेटिंग को कम करके देखें या मॉडल से कम शब्दों में जानकारी देने के लिए कहें. इससे मॉडल के अतिरिक्त जानकारी देने की संभावना कम हो जाती है.
-  - **सैंपलिंग पैरामीटर को ट्यून करना:** मॉडल की क्रिएटिविटी को अडजस्ट करने के लिए, अलग-अलग टेंपरेचर सेटिंग और टॉप-k सिलेक्शन के साथ एक्सपेरिमेंट करें.
+  - **Se o modelo não estiver desenhando informações da parte relevante da imagem**: solte dicas com os aspectos da imagem de que você quer que o comando extraia informações.
+  - **Se a saída do modelo for muito genérica (não personalizada o suficiente para a entrada de imagem/vídeo)**: no início do comando, peça para o modelo descrever as imagens ou o vídeo antes de fornecer a tarefa ou peça ao modelo para consultar o conteúdo da imagem.
+  - **Para resolver problemas de qual parte falhou**: peça para o modelo descrever a imagem ou explicar o raciocínio para avaliar o entendimento inicial dele.
+  - **Se o comando resultar em conteúdo alucinado**: diminua a configuração de temperatura ou peça ao modelo descrições mais curtas para diminuir a probabilidade de extrapolar detalhes.
+  - **Ajuste os parâmetros de amostragem**: teste diferentes configurações de temperatura e as seleções de top-k para ajustar a criatividade do modelo.
 
-### निर्देशों में सटीक जानकारी दें
+### Especificar as instruções
 
-प्रॉम्प्ट साफ़ तौर पर और ज़्यादा जानकारी वाले होने पर, सबसे ज़्यादा सफल होते हैं. अगर आपको कोई खास आउटपुट चाहिए, तो बेहतर होगा कि आप उस ज़रूरत को प्रॉम्प्ट में शामिल करें. इससे आपको अपनी पसंद का आउटपुट मिलेगा.
+As instruções têm mais sucesso quando são claras e detalhadas. Se você tiver uma saída específica em mente, é melhor incluir esse requisito no comando para garantir a saída desejada.
 
-एयरपोर्ट बोर्ड की इस इमेज के लिए, मॉडल से सिर्फ़ "इस इमेज के बारे में बताओ" कहने पर, सामान्य जानकारी जनरेट हो सकती है. अगर आपको मॉडल से इमेज में मौजूद समय और शहर की जानकारी पार्स करवानी है, तो अपने प्रॉम्प्ट में सीधे तौर पर यह अनुरोध शामिल करें.
+Para essa imagem de uma placa de aeroporto, pedir ao modelo apenas "descrever esta imagem" poderia gerar uma descrição geral. Se você precisa que o modelo analise a hora e a cidade a partir da imagem, inclua essa solicitação diretamente no comando.
 
-| प्रॉम्प्ट | मॉडल का जवाब |
+| Comando | Resposta do modelo |
 | --- | --- |
-| इस इमेज के बारे में बताएं. | इस इमेज में, हवाई अड्डे पर आने और जाने वाली फ़्लाइट की जानकारी देने वाला बोर्ड दिखाया गया है. |
+| Descreva esta imagem. | A imagem mostra um painel de chegadas e partidas do aeroporto. |
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| यात्रा का टाइमटेबल इस इमेज में दिखाए गए एयरपोर्ट बोर्ड से, समय और शहर की जानकारी को पार्स करके एक सूची में डालें. | - 10:50 मॉस्को - एडिनबर्ग 11:05 - लंदन में सुबह 11:05 बजे - 11:10 बुखारेस्ट - कीव में सुबह 11:30 बजे - डबलिन में 11:35 - 11:45 ईस्ट मिडलैंड्स - 12:15 सोफ़िया - 12:30 London - 12:30 न्यूकैसल - दोपहर 12:40 सेंट पीटर्सबर्ग - लंदन में दोपहर 12:40 बजे - 12:45 मैनचेस्टर |
+| Horários de viagem Analise a hora e a cidade no quadro do aeroporto mostrado nesta imagem em uma lista. | - 10:50 Moscow - 11:05 Edimburgo - 11:05 Londres - 11:10 Bucareste - 11:30 Kiev - 11:35 Dublin - 11:45 Midlands Orientais - 12:15 Sófia - 12:30 Londres - 12:30 Newcastle - 12:40 São Petersburgo - 12:40 Londres - 12:45 Manchester |
 
-### कुछ उदाहरण जोड़ना
+### Adicionar alguns exemplos
 
-Gemini मॉडल, कई इनपुट स्वीकार कर सकता है. इनका इस्तेमाल वह उदाहरण के तौर पर कर सकता है, ताकि यह समझ सके कि आपको किस तरह का आउटपुट चाहिए. इन उदाहरणों को जोड़ने से, मॉडल को पैटर्न पहचानने में मदद मिल सकती है. साथ ही, वह दी गई इमेज और जवाबों के बीच के संबंध को नए उदाहरण पर लागू कर सकता है. इसे "फ़्यू-शॉट" लर्निंग भी कहा जाता है.
+O modelo Gemini pode aceitar várias entradas que podem ser usadas como exemplos para entender a
+saída que você quer. Adicionar esses exemplos pode ajudar o modelo a identificar os padrões e aplicar a relação entre as imagens fornecidas e as respostas ao novo exemplo. Isso também é chamado de aprendizado "few-shot".
 
-नीचे दिए गए उदाहरण में, शुरुआती आउटपुट को वाक्य के तौर पर लिखा गया है. इसमें देश (ब्राज़ील) का नाम भी शामिल है. मान लें कि आपको आउटपुट किसी दूसरे फ़ॉर्मैट या स्टाइल में चाहिए. साथ ही, आपको सिर्फ़ शहर का नाम चाहिए, देश का नाम नहीं. अपने प्रॉम्प्ट में कुछ इनपुट-आउटपुट उदाहरण जोड़ने से, मॉडल को आपकी पसंद के मुताबिक जवाब देने के लिए तैयार किया जा सकता है.
+No exemplo abaixo, a saída inicial é escrita na forma de frase e também contém o país (Brasil). Suponha que você queira a saída em um formato ou estilo diferente e queira
+apenas a cidade, não o país. Adicionar alguns exemplos ao comando pode fazer com que o modelo responda da maneira desejada.
 
-| **प्रॉम्प्ट** | **मॉडल का जवाब** |
+| **Comando** | **Resposta do modelo** |
 | --- | --- |
-| यात्रा का टाइमटेबल लैंडमार्क के साथ-साथ शहर का पता लगाएं. | यह लैंडमार्क, ब्राज़ील के रियो डी जेनेरो में मौजूद क्राइस्ट द रिडीमर की मूर्ति है. |
+| Horários de viagem Determine a cidade junto com o ponto de referência. | O ponto turístico é a estátua do Cristo Redentor no Rio de Janeiro, Brasil. |
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| लैंडमार्क के साथ-साथ शहर का नाम तय करें. कॉलसियम | शहर: रोम, लैंडमार्क: कॉलोसियम. |
-| फ़ॉर्बिडन सिटी | city: Beijing, landmark: Forbidden City |
-| forbidden-city | शहर: रियो डि जेनेरो, लैंडमार्क: क्राइस्ट द रीडीमर की मूर्ति |
+| Determine a cidade junto com o ponto de referência. coliseu | cidade: Roma, ponto de referência: o Coliseu. |
+| Cidade Proibida | cidade: Pequim, ponto de referência: Cidade Proibida |
+| Cidade Proibida | cidade: Rio de Janeiro, ponto de referência: estátua do Cristo Redentor |
 
-### इसे सिलसिलेवार तरीके से समझाओ
+### Detalhar por etapas
 
-मुश्किल टास्क के लिए, जैसे कि ऐसे टास्क जिनमें विज़ुअल को समझने और तर्क करने, दोनों की ज़रूरत होती है, टास्क को छोटे और आसान चरणों में बांटना मददगार हो सकता है. इसके अलावा, अपने प्रॉम्प्ट में मॉडल को सीधे तौर पर “सिलसिलेवार तरीक़े से सोचो” कहने से भी बेहतर नतीजे मिल सकते हैं.
+Para tarefas complexas, como as que exigem compreensão e raciocínio visual, pode ser útil dividir a tarefa em etapas menores e mais diretas. Também poderia ser eficaz se você
+pedisse diretamente ao modelo para “pensar passo a passo” no comando.
 
-| प्रॉम्प्ट | मॉडल का जवाब |
+| Comando | Resposta do modelo |
 | --- | --- |
-| मेरा टॉयलेट पेपर कब खत्म होगा? | जल्द ही, आपके पास सिर्फ़ तीन रोल बचे होंगे. |
+| Quando vou ficar sem papel higiênico? | Em breve, você só tem mais três rolos. |
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| 1. सबसे पहले, गिनें कि इस तस्वीर में कितने टॉयलेट पेपर रोल हैं.  2. इसके बाद, यह पता लगाएं कि एक व्यक्ति हर दिन औसतन कितना टॉयलेट पेपर इस्तेमाल करता है.  3. यह हिसाब लगाओ कि टॉयलेट पेपर के ये रोल कितने दिन तक चलेंगे. | 1. इस तस्वीर में टॉयलेट पेपर के तीन रोल हैं.  2. आम तौर पर, एक व्यक्ति हर दिन करीब 20 शीट टॉयलेट पेपर का इस्तेमाल करता है.  3. अगर हर रोल में 200 शीट हैं, तो हर रोल करीब 10 दिनों तक चलेगा. इसलिए, तीन रोल करीब एक महीने तक चलेंगे. |
+| 1. Primeiro, conte quantos rolos de papel higiênico há nessa imagem.  2. Em seguida, determine a quantidade de papel higiênico que uma pessoa usa por dia.  3. Calcule quanto tempo esses rolos de papel higiênico vão durar. | 1. Há três rolos de papel higiênico nesta imagem.  2. Uma pessoa usa cerca de 20 folhas de papel higiênico por dia.  3. Se cada rolo tiver 200 páginas, cada um deles durará cerca de 10 dias. Portanto, os três rolos durarão cerca de um mês. |
 
-गणित के सवालों या अन्य तरह के इबारती सवालों के जवाब देने के लिए, मॉडल को सिलसिलेवार तरीके से सोचने के लिए कहा जा सकता है.
+Problemas matemáticos ou outros tipos de problemas são ótimos candidatos para pedir que o modelo pense em etapas.
 
-| **प्रॉम्प्ट** | **जवाब** |
+| **Comando** | **Resposta** |
 | --- | --- |
-| इस क्रम में चौथा पद क्या है? | -135 |
+| Qual é o quarto termo na sequência? | -135 |
 
-मॉडल से मिला जवाब गलत है. इसे बेहतर बनाने के लिए, मॉडल से प्रॉम्प्ट का जवाब देने से पहले समस्या को पार्स करने के लिए कहें.
+A resposta do modelo está incorreta. Algumas maneiras de melhorar isso é pedir ao modelo que analise o problema antes de responder ao comando.
 
-| **प्रॉम्प्ट** | **जवाब** |
+| **Comando** | **Resposta** |
 | --- | --- |
-| सबसे पहले, इमेज में मौजूद फ़ॉर्मूला पार्स करें.  इसके बाद, फ़ॉर्मूले के आधार पर, इस सवाल का जवाब दें: "सीक्वेंस में चौथा टर्म क्या है?". | *नतीजे को बड़ा करने के लिए क्लिक करें* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. फ़ॉर्मूले में n = 4 रखें:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. हमें b(3) की वैल्यू नहीं पता है. इसलिए, फ़ॉर्मूले में n = 3 को बदलें:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. हमें b(2) की वैल्यू नहीं पता है. इसलिए, फ़ॉर्मूले में n = 2 रखें:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. हमें पता है कि b(1) की वैल्यू 15 है. इसलिए, इसे फ़ॉर्मूले में डालें:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. अब हमें b(2) की वैल्यू पता है. इसलिए, इसे b(3) के फ़ॉर्मूले में डालें:  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. अब हमें b(3) की वैल्यू पता है. इसलिए, इसे b(4) के फ़ॉर्मूले में डालें:  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   इसलिए, इस क्रम में चौथा पद -405 है. |
+| Analise a fórmula na imagem primeiro.  Depois, com base na fórmula, responda "qual é o quarto termo na sequência?". | *Clique para abrir o resultado* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Substitua n = 4 na fórmula:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Não sabemos o valor de b(3), portanto, substitua n = 3 na fórmula:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Não sabemos o valor de b(2), portanto, substitua n = 2 na fórmula:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Sabemos que o valor de b(1) é 15, portanto, substitua-o na fórmula:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Agora que sabemos o valor de b(2), substitua-o na fórmula por b(3):  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Agora que sabemos o valor de b(3), substitua-o na fórmula por b(4):  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Portanto, o quarto termo na sequência é -405. |
 
-मॉडल का यह जवाब सही है. अब जवाब को और बेहतर बनाने के लिए, मॉडल को सिलसिलेवार तरीक़े से सोचने के लिए कहा जा सकता है.
+A resposta do modelo está correta. Agora, para simplificar ainda mais,
+peça ao modelo que pense em etapas detalhadas.
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| इस क्रम में चौथा पद क्या है? सिलसिलेवार तरीके से सोचें. | पहला पद 15 है.  दूसरा पद b(1) \* (-3) = 15 \* (-3) = -45 है.  तीसरा पद b(2) \* (-3) = -45 \* (-3) = 135 है.  चौथा पद b(3) \* (-3) = 135 \* (-3) = -405 है. |
+| Qual é o quarto termo na sequência? Pense em etapas. | O primeiro termo é 15.  O segundo termo é b(1) \* (-3) = 15 \* (-3) = -45.  O terceiro termo é b(2) \* (-3) = -45 \* (-3) = 135.  O quarto termo é b(3) \* (-3) = 135 \* (-3) = -405. |
 
-### आउटपुट का फ़ॉर्मैट तय करना
+### especifique o formato das respostas
 
-एक आम समस्या यह है कि मॉडल आउटपुट को किसी खास फ़ॉर्मैट (जैसे, Markdown, JSON, HTML) में होना चाहिए. ऐसा खास तौर पर तब होता है, जब मॉडल आउटपुट को किसी डाउनस्ट्रीम टास्क में इस्तेमाल करना हो. प्रॉम्प्ट में मॉडल को निर्देश देकर,
-उस फ़ॉर्मैट में आउटपुट जनरेट करने की कोशिश की जा सकती है. यहां दो उदाहरण दिए गए हैं:
+Um problema comum é a necessidade de a saída do modelo estar em um determinado formato (por exemplo, markdown, JSON, HTML), especialmente se ela precisar ser ingerida por uma tarefa downstream. Você pode tentar produzir saídas nesse formato
+instruindo o modelo a fazer isso no comando. Veja dois exemplos:
 
-| प्रॉम्प्ट | मॉडल का जवाब |
+| Comando | Resposta do modelo |
 | --- | --- |
-| इस इमेज में मौजूद टेबल को Markdown फ़ॉर्मैट में पार्स करो | | विषय | स्थिति | समय | शुरू होने की तारीख | इस तारीख तक पूरा करना है |  | ------- | ------ | ---- | ---------- | ------ |  | गणित | पूरा हो गया | 1.5 घंटे | 29/11/2023 | 1/12/2023 |  | भूगोल | पूरा हो गया | 30 मिनट | 12/2/2023 | 12/4/2023 |  | भौतिक विज्ञान | जारी है | दो घंटे | 3/12/2023 | 5/12/2023 |  | जीव विज्ञान | अब तक प्रोसेस शुरू नहीं हुई | 6 घंटे | 2/11/2016 | 6/12/2023 | |
+| Analise a tabela nesta imagem no formato markdown | | Assunto | Status | Tempo | Data de início | Prazo |  | ------- | ------ | ---- | ---------- | ------ |  | Matemática | Concluído | 1h30 | 29/11/2023 | 01/12/2023 |  | Geografia | Concluído | 30 min | 02/12/2023 | 04/12/2023 |  | Física | Em andamento | 2h | 03/12/2023 | 05/12/2023 |  | Biologia | Não começou | 6 horas | 02/11/2016 | 06/12/2023 | |
 
-| **प्रॉम्प्ट** | **मॉडल का जवाब** |
+| **Comando** | **Resposta do modelo** |
 | --- | --- |
-| यहां दिए गए सभी एट्रिब्यूट की सूची दें:  सामग्री, पकवान का टाइप, शाकाहारी है या नहीं, JSON फ़ॉर्मैट में | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
+| Forneça uma lista com todos os atributos a seguir:  Ingredientes, tipo de culinária, vegetariano ou não, no formato JSON | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
 
-### एक इमेज वाले प्रॉम्प्ट के लिए, अपनी इमेज को सबसे पहले रखें
+### Colocar a imagem em primeiro lugar nos comandos com uma imagem
 
-Gemini, प्रॉम्प्ट में इमेज और टेक्स्ट को किसी भी क्रम में समझ सकता है. हालाँकि, टेक्स्ट प्रॉम्प्ट से पहले एक इमेज डालने से बेहतर नतीजे मिल सकते हैं.
-यहां दिए गए सैंपल में, आपको दिखेगा कि हर प्रॉम्प्ट में टेक्स्ट से पहले इमेज दी गई है.
+O Gemini pode interpretar imagem e texto em qualquer ordem dentro de um comando, mas colocar uma única imagem
+antes do comando de texto pode levar a melhores resultados.
+Nos exemplos a seguir, você vai notar que a imagem vem antes do texto em
+cada comando.
 
-### टेक्स्ट, इमेज वग़ैरह को प्रोसेस करने वाले मॉडल की मदद से दिए गए प्रॉम्प्ट से जुड़ी समस्या हल करना
+### solucionar problemas do comando multimodal
 
-अगर आपको काम का जवाब नहीं मिल रहा है, तो आपको अपने प्रॉम्प्ट से जुड़ी समस्या हल करनी पड़ सकती है. यहां कुछ रणनीतियां दी गई हैं, जिन्हें आज़माया जा सकता है.
+Se você não receber uma resposta útil, talvez seja necessário resolver problemas do comando. Aqui estão algumas estratégias que você pode tentar.
 
-#### अगर मॉडल, इमेज के काम के हिस्से से जानकारी नहीं ले रहा है
+#### Se o modelo não estiver desenhando informações da parte relevante da imagem
 
-ज़्यादा सटीक जवाब पाने के लिए, यह बताया जा सकता है कि आपको इमेज के किन पहलुओं से जानकारी चाहिए.
+Para receber uma resposta mais específica, indique de quais aspectos da imagem
+você quer que o comando extraia informações para embasar sua resposta.
 
-| प्रॉम्प्ट | मॉडल का जवाब |
+| Comando | Resposta do modelo |
 | --- | --- |
-| ये डायपर, बच्चे के लिए कितने दिनों तक चलेंगे? | डायपर 198 दिनों तक चलेंगे. |
+| Quantos dias essas fraldas vão durar para um bebê? | As fraldas durarão 198 dias antes de acabarem. |
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| मेरे पास मौजूद डायपर कब तक चलेंगे?  बच्चे की उम्र का पता लगाने के लिए, बॉक्स पर दिखाया गया वज़न इस्तेमाल करें. साथ ही, बॉक्स में मौजूद डायपर की कुल संख्या का इस्तेमाल करें.  कुल संख्या को, बच्चे के लिए रोज़ाना इस्तेमाल होने वाले डायपर की संख्या से भाग दें. | इस बॉक्स में 198 डायपर हैं. बॉक्स पर लिखा है कि डायपर 22 से 37 पाउंड वज़न वाले बच्चे के लिए हैं.  इस वज़न के हिसाब से, बच्चे की उम्र एक से दो साल के बीच हो सकती है.  आम तौर पर, दो साल का बच्चा हर दिन छह डायपर इस्तेमाल करता है. इसलिए, 198 डायपर लगभग 33 दिनों तक चलेंगे (198/6). |
+| Quanto tempo essas fraldas vão durar?  Determine a idade da criança e o número total de fraldas na caixa com base no peso total.  Divida o total pelo número de fraldas usadas diariamente por uma criança. | A caixa contém 198 fraldas. Ela também informa que as fraldas são para crianças que pesam de 9 a 16 quilos.  Crianças nessa faixa de peso geralmente têm de 1 a 2 anos de idade.  Uma criança de dois anos costuma usar 6 fraldas por dia, logo, as fraldas vão durar cerca de 33 dias (198/6). |
 
-#### अगर मॉडल का आउटपुट बहुत सामान्य है और इमेज इनपुट के हिसाब से नहीं है
+#### Se a saída do modelo for muito genérica e não for personalizada o suficiente para a entrada de imagem
 
-मॉडल से इमेज के बारे में बताने के लिए कहें. इससे मॉडल को इमेज के हिसाब से जवाब देने में मदद मिलेगी.
+Para ajudar o modelo a adaptar a resposta às imagens, peça para ele descrever as imagens antes de realizar a tarefa de raciocínio.
 
-| प्रॉम्प्ट | मॉडल का जवाब |
+| Comando | Resposta do modelo |
 | --- | --- |
-| इन इमेज में क्या कॉमन है? | ये चारों इमेज, लैंडस्केप फ़ोटोग्राफ़ी के उदाहरण हैं. |
+| O que há em comum entre essas imagens? | As quatro imagens são exemplos de fotografia de paisagem. |
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| सबसे पहले, हर इमेज के बारे में पूरी जानकारी दो. इन इमेज में क्या समानता है? | पहली इमेज में, एक व्यक्ति को सूटकेस पैक करते हुए दिखाया गया है. दूसरी इमेज में, शॉपिंग मॉल का खाली हॉलवे दिखाया गया है. तीसरी इमेज में टॉयलेट पेपर का रोल दिखाया गया है. चौथी इमेज में, तूफ़ान के दौरान समुद्र का गहरा रंग दिखाया गया है.  इन सभी इमेज में एक बात समान है. ये सभी इमेज, लिमिनल स्पेस के उदाहरण हैं. लिमिनल स्पेस, ऐसी जगहें या स्थितियां होती हैं जो दो अन्य जगहों या स्थितियों के बीच में होती हैं. इनमें अक्सर अनिश्चितता या अस्पष्टता होती है.  पहली इमेज में, एक व्यक्ति को घर पर और यात्रा के दौरान दिखाया गया है. दूसरी इमेज में, दो दुकानों के बीच का हॉलवे दिखाया गया है. तीसरी इमेज टॉयलेट पेपर की है, जो बाथरूम को दिखा सकती है. बाथरूम, निजी और सार्वजनिक जगहों के बीच की जगह होती है. यह एक ऐसी जगह है जहां हम खुद को बाहरी दुनिया में जाने या वहां से वापस आने के लिए तैयार करते हैं.  चौथी इमेज में, समुद्र को शांत और तूफ़ानी दिखाया गया है.  लिमिनल स्पेस, रोमांचक और परेशान करने वाले, दोनों हो सकते हैं. ये नई शुरुआत या किसी चीज़ के खत्म होने की जगह हो सकते हैं. ये जगहें, सोचने-समझने या कुछ करने की जगहें हो सकती हैं. |
+| Primeiro, descreva o que está em cada imagem em detalhes. O que há em comum entre essas imagens? | A primeira imagem mostra uma pessoa fazendo as malas. A segunda imagem mostra um corredor vazio de um shopping. A terceira imagem mostra um rolo de papel higiênico. A quarta imagem mostra um mar escuro e tempestuoso.  O ponto em comum entre essas imagens é que todas são exemplos de espaços liminais. Espaços liminais são lugares ou situações que estão entre dois outros lugares ou situações. Elas costumam ser caracterizadas por um senso de incerteza ou ambiguidade.  A primeira imagem mostra a pessoa entre o momento em que está em casa e viajando. A segunda imagem mostra o corredor entre duas lojas. A terceira imagem é de papel higiênico, que pode representar um banheiro. Um banheiro é um espaço de transição entre domínios privados e públicos. É um lugar onde nos preparamos para entrar ou sair do mundo exterior.  A quarta imagem mostra o mar entre calmo e tempestuoso.  Espaços liminais podem ser empolgantes e perturbadores. Eles podem ser um lugar de recomeço ou de fim. Eles podem ser um local de reflexão ou ação. |
 
-मॉडल से साफ़ तौर पर यह भी कहा जा सकता है कि वह इमेज में मौजूद जानकारी का इस्तेमाल करे.
+Você também pode tentar pedir explicitamente ao modelo para se referir ao que está na imagem.
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| इन इमेज में क्या समानता है? अपने जवाब में, इमेज में मौजूद जानकारी का इस्तेमाल करें. | सभी इमेज, यात्रा से जुड़ी हैं. पहली इमेज में एक व्यक्ति को सूटकेस पैक करते हुए दिखाया गया है. दूसरी इमेज में शॉपिंग मॉल का खाली हॉलवे दिखाया गया है. तीसरी इमेज में टॉयलेट पेपर का ढेर दिखाया गया है. चौथी इमेज में तूफ़ानी समुद्र दिखाया गया है.  ये सभी इमेज यात्रा से जुड़ी हैं, क्योंकि ये ऐसी चीज़ें हैं जिनकी ज़रूरत लोगों को यात्रा के दौरान होती है या वे इनका इस्तेमाल करते हैं. पहली इमेज में एक व्यक्ति को सूटकेस पैक करते हुए दिखाया गया है. लोग ऐसा तब करते हैं, जब वे यात्रा पर जा रहे हों. दूसरी इमेज में, शॉपिंग मॉल का एक खाली हॉलवे दिखाया गया है. यह एक ऐसी जगह है जहां लोग अक्सर अपनी यात्राओं के लिए चीज़ें खरीदने जाते हैं. तीसरी इमेज में टॉयलेट पेपर का एक स्टैक दिखाया गया है. यह एक ऐसी चीज़ है जिसका इस्तेमाल लोग अक्सर यात्रा के दौरान करते हैं. चौथी इमेज में, तूफ़ान से घिरा हुआ एक गहरा समुद्र दिखाया गया है. यात्रा के दौरान, लोगों को अक्सर ऐसी चीज़ों का सामना करना पड़ता है. |
+| O que há em comum entre essas imagens? Consulte o que está nas imagens na sua resposta. | Todas as imagens são relacionadas a viagens. A primeira imagem mostra uma pessoa fazendo as malas, a segunda mostra um corredor vazio de um shopping, a terceira imagem mostra uma pilha de papel higiênico e a quarta mostra um mar escuro e violento.  Todas essas imagens são relacionadas a viagens, porque são tudo o que as pessoas precisam ou usam quando viajam. A primeira imagem mostra uma pessoa fazendo as malas, que é algo que as pessoas fazem quando viajam. A segunda imagem mostra um corredor vazio de um shopping, que é um lugar onde as pessoas costumam comprar itens para viagens. A terceira imagem mostra uma pilha de papel higiênico, algo que as pessoas costumam usar quando estão viajando. A quarta imagem mostra um mar escuro e tempestuoso, algo que as pessoas encontram com frequência quando estão viajando. |
 
-इमेज से क्रिएटिव आउटपुट पाने के लिए भी यही सलाह काम करती है. खरगोश वाले इस उदाहरण में, मॉडल से इमेज के पहलुओं को शामिल करने के लिए साफ़ तौर पर कहने से, आउटपुट को बेहतर बनाया जा सकता है.
+As mesmas dicas funcionam para resultados criativos de imagens. No exemplo a seguir com o coelho, pedir explicitamente ao modelo para incluir aspectos da imagem pode melhorar a saída.
 
-| प्रॉम्प्ट | मॉडल का जवाब |
+| Comando | Resposta do modelo |
 | --- | --- |
-| क्या तुम इस इमेज के बारे में मेरे लिए एक कविता लिख सकते हो? | छोटा सा खरगोश, भूरा और मुलायम,  खेत में उछल-कूद करता है, ऊपर और नीचे.  तुम्हारे कान बहुत लंबे हैं, तुम्हारी पूंछ बहुत छोटी है,  तुम सबसे प्यारे जीव हो.  तुम हरी-भरी और मीठी घास खाते हो,  और मुझे देखते ही कूदकर भाग जाते हो.  लेकिन मैं हमेशा तुम्हारी दोस्त रहूंगी,  छोटे खरगोश, हमेशा के लिए. |
+| Você pode me escrever um poema sobre esta imagem? | Coelhinho peludo e marrom  Pulando pelo campo, para cima e para baixo.  Suas orelhas são tão longas e sua cauda tão pequena!  Você é a criatura mais fofa de todas.  Você morde a grama, tão verde e doce,  E pula quando me vê.  Mas sempre serei seu amigo,  Coelhinho, até o fim. |
 
-| **अपडेट किया गया प्रॉम्प्ट** | **बेहतर जवाब** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| क्या इस इमेज की जानकारी के बारे में, मुझे एक ड्रमैटिक कविता लिखकर दी जा सकती है? इसमें इमेज की जगह की जानकारी भी शामिल करें. | हरा-भरा मैदान, छोटा सा खरगोश,  कान इतने लंबे, इतने तेज़.  तुम्हें वहां क्या दिख रहा है,  जहां तुम दूर तक देख रहे हो?  क्या यह समुद्र का नीला रंग है,  जो सूरज की रोशनी में चमक रहा है?  या फिर, लहरों के टकराने और गरजने की आवाज़,  कोई ऐसी धुन जो आपको पसंद हो?  छोटे खरगोश, मुझे सच बताओ,  तुम्हारा ध्यान किस चीज़ ने खींचा है?  क्या यह नमकीन हवा है,  या सीगल की आवाज़ें जो खुश करती हैं?  शायद यह सब कुछ बहुत बड़ा है,  एक दुनिया इतनी बड़ी और छोटी.  यह एक ऐसी जगह है जहां सपने सच हो सकते हैं,  और रोमांचक अनुभव मिल सकते हैं.  छोटे खरगोश, मुझे लगता है कि तुम क्या सपना देखते हो,  जब तुम घास पर बैठते हो, तो बहुत शांत होते हो.  क्या तुम्हें गहराई में गोता लगाना है,  या ज़मीन पर ही रहना है, जहां तुम छलांग लगा सकते हो?  चाहे कुछ भी हो, छोटे खरगोश,  अपने अंदर की जिज्ञासा को हमेशा ज़िंदा रखो.  क्योंकि आपके सपनों और आकांक्षाओं में,  एक ऐसी दुनिया छिपी है जो आपके बनाए जाने का इंतज़ार कर रही है. |
+| Você pode escrever um poema descritivo e dramático sobre esta imagem e incluir o local? | Coelhinho no verde  Orelhas tão compridas e pontudas.  O que você vê lá fora,  À distância, onde você olha?  É o oceano azul,  Brilhando na tonalidade do sol?  Ou as ondas que quebram e rugem,  Um ritmo que você adora?  Coelhinho, fale a verdade:  O que chama sua atenção de verdade?  É a brisa salgada,  Ou o choro das gaivotas te agrada?  Talvez seja a vastidão de tudo isso,  Um mundo tão grande e pequeno.  Um lugar onde os sonhos podem andar,  e aventuras podem ser livres.  Coelhinho me pergunto o que você sonha,  Sentado na grama, tão sereno.  Você quer explorar as profundezas  Ou ficar na terra para dar um salto?  Seja o que for, coelhinho!  Deixe a faísca da maravilha brilhar.  Nos seus sonhos e aspirações,  há um mundo esperando sua criação. |
 
-#### प्रॉम्प्ट के किस हिस्से में गड़बड़ी हुई, यह पता लगाना
+#### Solução de problemas em qual parte do prompt falhou
 
-यह जानना मुश्किल हो सकता है कि कोई प्रॉम्प्ट इसलिए पूरा नहीं हुआ, क्योंकि मॉडल **इमेज को समझ नहीं पाया** या इसलिए पूरा नहीं हुआ, क्योंकि मॉडल इमेज को समझ तो गया, लेकिन **तर्क के सही चरण** पूरे नहीं कर पाया.
-इन वजहों के बीच अंतर करने के लिए, मॉडल से पूछें कि इमेज में क्या है.
+Pode ser difícil saber se um comando falhou porque o modelo
+não **entendeu a imagem** ou se ele entendeu a imagem, mas não executou as **etapas de raciocínio** corretas.
+Para fazer essa diferenciação, peça ao modelo que descreva o que aparece na imagem.
 
-यहां दिए गए उदाहरण में, अगर मॉडल किसी ऐसे स्नैक का सुझाव देता है जो चाय के साथ खाने के लिए अजीब लगता है (जैसे, पॉपकॉर्न), तो पहले समस्या हल करके यह पता लगाया जा सकता है कि मॉडल ने इमेज में मौजूद चाय को सही तरीके से पहचाना है या नहीं.
+No exemplo a seguir, se o modelo responder com um lanche que parece diferente quando combinado com chá (como pipoca), primeiro é possível resolver problemas para determinar se o modelo reconheceu corretamente que a imagem contém chá.
 
-| प्रॉम्प्ट | समस्या हल करने के लिए प्रॉम्प्ट |
+| Comando | Prompt de solução de problemas |
 | --- | --- |
-| इसके साथ खाने के लिए, एक मिनट में कौनसा स्नैक बनाया जा सकता है? | इस इमेज के बारे में बताओ. |
+| Que lanchinho eu posso fazer em 1 minuto e que combina com este? | Descreva o que há na imagem. |
 
-एक और तरीका यह है कि मॉडल से, जवाब देने की वजह पूछी जाए. इससे आपको यह समझने में मदद मिल सकती है कि तर्क का कौनसा हिस्सा गलत था.
+Outra estratégia é pedir que o modelo explique o raciocínio dele. Isso pode ajudar você a
+filtrar qual parte do raciocínio está incorreta, se houver.
 
-| प्रॉम्प्ट | समस्या हल करने के लिए प्रॉम्प्ट |
+| Comando | Prompt de solução de problemas |
 | --- | --- |
-| एक मिनट में ऐसा कौनसा स्नैक बनाया जा सकता है जो इसके साथ अच्छा लगे? | एक मिनट में ऐसा कौनसा स्नैक बनाया जा सकता है जो इसके साथ अच्छा लगे? कृपया वजह बताएं. |
+| Que lanchinho eu posso fazer em 1 minuto e que combina com este? | Que lanchinho eu posso fazer em 1 minuto e que combina com este? Explique o motivo. |
 
-## आगे क्या करना है
+## A seguir
 
-- [Google AI Studio](http://aistudio.google.com?hl=hi) का इस्तेमाल करके, टेक्स्ट, इमेज वग़ैरह का एक साथ इस्तेमाल करके प्रॉम्प्ट लिखने की कोशिश करें.
-- मीडिया फ़ाइलें अपलोड करने और उन्हें अपने प्रॉम्प्ट में शामिल करने के लिए, Gemini Files API का इस्तेमाल करने के बारे में जानकारी पाने के लिए, [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=hi), [ऑडियो](https://ai.google.dev/gemini-api/docs/audio?hl=hi), और [दस्तावेज़ प्रोसेसिंग](https://ai.google.dev/gemini-api/docs/document-processing?hl=hi) की गाइड देखें.
-- प्रॉम्प्ट डिज़ाइन करने के बारे में ज़्यादा जानकारी के लिए, [प्रॉम्प्ट की रणनीतियां](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=hi) पेज देखें. जैसे, सैंपलिंग पैरामीटर को ट्यून करना.
+- Tente escrever seus próprios comandos multimodais usando o [Google AI
+  Studio](http://aistudio.google.com?hl=pt-br).
+- Para saber como usar a API Gemini Files para
+  fazer upload de arquivos de mídia e incluí-los nos seus comandos, consulte os guias de
+  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=pt-br), [Áudio](https://ai.google.dev/gemini-api/docs/audio?hl=pt-br) e
+  [Processamento de documentos](https://ai.google.dev/gemini-api/docs/document-processing?hl=pt-br).
+- Para mais orientações sobre design de comandos, como ajuste de parâmetros de amostragem, consulte a página [Estratégias de comandos](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pt-br).
 
-सुझाव भेजें
+Envie comentários
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-आखिरी बार 2026-10-14 (UTC) को अपडेट किया गया.
+Última atualização 2026-10-26 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Quer enviar seu feedback?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-10-14 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-10-26 UTC."],[],[]]

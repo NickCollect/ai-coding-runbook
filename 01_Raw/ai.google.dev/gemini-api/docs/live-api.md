@@ -1,136 +1,130 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=tr
-fetched_at: 2026-10-26T05:51:26.379138+00:00
-title: "Gemini Live API'ye genel bak\u0131\u015f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=fr
+fetched_at: 2026-11-02T07:28:37.346908+00:00
+title: "Pr\u00e9sentation de l'API Gemini\u00a0Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
+Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Geri bildirim gönderin
+Envoyer des commentaires
 
-# Gemini Live API'ye genel bakış
+# Présentation de l'API Gemini Live
 
-Live API, Gemini ile düşük gecikmeli ve anlık sesli ve görsel etkileşimler kurmanızı sağlar. Bu model, anında ve insan benzeri sözlü yanıtlar vermek için sürekli ses, resim ve metin akışlarını işleyerek kullanıcılarınız için doğal bir sohbet deneyimi oluşturur.
+L'API Live permet des interactions vocales et visuelles en temps réel et à faible latence avec Gemini. Il traite des flux continus d'audio, d'images et de texte pour fournir des réponses parlées immédiates et semblables à celles d'un humain, créant ainsi une expérience conversationnelle naturelle pour vos utilisateurs.
 
-![Live API'ye Genel Bakış](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=tr)
+![Présentation de l'API Live](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=fr)
 
-[Google AI Studio'da Live API'yi deneyinmic](https://aistudio.google.com/live?hl=tr)
-[GitHub'dan örnek uygulamaları klonlayıncode](https://github.com/google-gemini/gemini-live-api-examples)
-[Kodlama aracısı becerilerini kullanınterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=tr)
+[Essayer l'API en direct dans Google AI Studiomic](https://aistudio.google.com/live?hl=fr)
+[Cloner des exemples d'applications depuis GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
+[Utiliser les compétences d'agent de codageterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=fr)
 
-## Kullanım alanları
+## Cas d'utilisation
 
-Live API, aşağıdakiler de dahil olmak üzere çeşitli sektörlerde gerçek zamanlı sesli temsilciler oluşturmak için kullanılabilir:
+L'API Live peut être utilisée pour créer des agents vocaux en temps réel pour divers secteurs, y compris :
 
-- **E-ticaret ve perakende:** Kişiselleştirilmiş öneriler sunan alışveriş asistanları ve müşteri sorunlarını çözen destek temsilcileri.
-- **Oyun:** Etkileşimli oyuncu olmayan karakterler (NPC'ler), oyun içi yardım asistanları ve oyun içi içeriğin anlık çevirisi.
-- **Yeni nesil arayüzler:** Robotik, akıllı gözlükler ve araçlarda ses ve video özellikli deneyimler.
-- **Sağlık hizmetleri:** Hasta desteği ve eğitimi için sağlık arkadaşları.
-- **Finansal hizmetler:** Servet yönetimi ve yatırım rehberliği için yapay zeka danışmanları.
-- **Eğitim:** Kişiselleştirilmiş talimatlar ve geri bildirimler sağlayan yapay zeka mentorları ve öğrenme arkadaşları.
-- **Çeviri ve yerelleştirme:** Konuşma sohbetlerinin anlık ve düşük gecikmeli çevirisi sayesinde sorunsuz çok dilli iletişim.
-- **Canlı transkripsiyon ve altyazı:** Canlı altyazılar, toplantı transkripti, sesle dikte ve müşteri görüşmesi günlüğü için anlık sesle yazma akışı.
+- **E-commerce et vente au détail** : assistants d'achat qui proposent des recommandations personnalisées et agents d'assistance qui résolvent les problèmes des clients.
+- **Jeux vidéo** : personnages non joueurs (PNJ) interactifs, assistants d'aide dans les jeux et traduction en temps réel du contenu des jeux.
+- **Interfaces nouvelle génération** : expériences vocales et vidéo dans la robotique, les lunettes connectées et les véhicules.
+- **Santé** : compagnons de santé pour l'assistance et l'éducation des patients.
+- **Services financiers** : conseillers IA pour la gestion de patrimoine et les conseils d'investissement.
+- **Éducation** : mentors et compagnons d'apprentissage basés sur l'IA qui fournissent des instructions et des commentaires personnalisés.
+- **Traduction et localisation** : traduction en temps réel et à faible latence des conversations orales, permettant une communication multilingue fluide.
+- **Transcription et sous-titrage instantanés** : flux de reconnaissance vocale en temps réel pour les sous-titres en direct, la transcription des réunions, la dictée vocale et la journalisation des appels clients.
 
-## Temel özellikler
+## Principales fonctionnalités
 
-Live API, güçlü sesli ajanlar oluşturmak için kapsamlı bir özellik seti sunar:
+L'API Live offre un ensemble complet de fonctionnalités permettant de créer des agents vocaux robustes :
 
-- [**Çok dilli destek**](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr#supported-languages):
-  Desteklenen 70 dilde sohbet edin.
-- [**Araya girme**](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr#interruptions):
-  Kullanıcılar, yanıt veren etkileşimler için modeli istedikleri zaman kesintiye uğratabilir.
-- [**Araç kullanımı**](https://ai.google.dev/gemini-api/docs/live-tools?hl=tr):
-  Dinamik etkileşimler için işlev çağırma ve Google Arama gibi araçları entegre eder.
-- [**Ses transkripsiyonları**](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr#audio-transcription):
-  Hem kullanıcı girişinin hem de model çıkışının metin transkriptlerini sağlar.
-- [**Proaktif ses**](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr#proactive-audio):
-  Modelin ne zaman ve hangi bağlamlarda yanıt vereceğini kontrol etmenizi sağlar.
-- [**Duygusal diyalog**](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr#affective-dialog):
-  Yanıt stilini ve tonunu, kullanıcının giriş ifadesine uyacak şekilde ayarlar.
-- [**Canlı Metne Dönüştürme**](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=tr):
-  Otomatik dil algılama ve özel kelime dağarcığı ile anlık ve kesintisiz sesle yazma akışı.
-- [**Canlı Çeviri**](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=tr):
-  70'ten fazla dilde anlık sesli çeviri.
+- [**Compatibilité multilingue**](https://ai.google.dev/gemini-api/docs/live-guide?hl=fr#supported-languages) : discutez dans l'une des 70 langues disponibles.
+- [**Interruption**](https://ai.google.dev/gemini-api/docs/live-guide?hl=fr#interruptions) : les utilisateurs peuvent interrompre le modèle à tout moment pour des interactions réactives.
+- [**Utilisation d'outils**](https://ai.google.dev/gemini-api/docs/live-tools?hl=fr) : intègre des outils tels que l'appel de fonction et la recherche Google pour des interactions dynamiques.
+- [**Transcriptions audio**](https://ai.google.dev/gemini-api/docs/live-guide?hl=fr#audio-transcription) :
+  Fournit des transcriptions textuelles des entrées utilisateur et des sorties du modèle.
+- [**Audio proactif**](https://ai.google.dev/gemini-api/docs/live-guide?hl=fr#proactive-audio) : vous permet de contrôler quand et dans quels contextes le modèle répond.
+- [**Dialogues affectifs**](https://ai.google.dev/gemini-api/docs/live-guide?hl=fr#affective-dialog) : le style et le ton des réponses s'adaptent à l'expression de l'utilisateur.
+- [**Transcription instantanée**](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=fr) : flux continu de conversion de la voix en texte en temps réel, avec détection automatique de la langue et vocabulaire personnalisé.
+- [**Traduction instantanée**](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=fr) :
+  Traduction vocale en temps réel dans plus de 70 langues.
 
-## Teknik özellikler
+## Spécifications techniques
 
-Aşağıdaki tabloda, Canlı API'nin teknik özellikleri özetlenmiştir:
+Le tableau suivant présente les spécifications techniques de l'API Live :
 
-| Kategori | Ayrıntılar |
+| Catégorie | Détails |
 | --- | --- |
-| Giriş biçimleri | Ses (ham 16 bit PCM ses, 16 kHz, little-endian), resimler (JPEG <= 1 FPS), metin |
-| Çıkış biçimleri | Ses (ham 16 bit PCM ses, 24 kHz, little-endian) |
-| Protokol | Durumlu WebSocket bağlantısı (WSS) |
+| Modes d'entrée | Audio (audio PCM 16 bits brut, 16 kHz, little-endian), images (JPEG <= 1 FPS), texte |
+| Modes de sortie | Audio (audio PCM 16 bits brut, 24 kHz, little-endian) |
+| Protocole | Connexion WebSocket avec état (WSS) |
 
-## Bir uygulama yaklaşımı seçin
+## Choisir une approche d'implémentation
 
-Live API ile entegrasyon yaparken aşağıdaki uygulama yaklaşımlarından birini seçmeniz gerekir:
+Lorsque vous intégrez l'API Live, vous devez choisir l'une des approches d'implémentation suivantes :
 
-- **Sunucudan sunucuya**: Arka ucunuz, [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) kullanarak Live API'ye bağlanır. Genellikle istemciniz, akış verilerini (ses, video, metin) sunucunuza gönderir. Sunucunuz da bu verileri Live API'ye iletir.
-- **İstemciden sunucuya**: Ön uç kodunuz, verileri aktarmak için [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) kullanarak doğrudan Live API'ye bağlanır ve arka ucunuzu atlar.
+- **Serveur à serveur** : votre backend se connecte à l'API Live à l'aide de [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). En général, votre client envoie des données de flux (audio, vidéo, texte) à votre serveur, qui les transmet ensuite à l'API Live.
+- **Client vers serveur** : votre code de frontend se connecte directement à l'API Live à l'aide de [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) pour diffuser des données, en contournant votre backend.
 
-## Başlayın
+## Commencer
 
-Geliştirme ortamınıza uygun kılavuzu seçin:
+Sélectionnez le guide correspondant à votre environnement de développement :
 
-Sunucudan sunucuya
+Serveur à serveur
 
-### [GenAI SDK eğitimi](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=tr)
+### [Tutoriel sur le SDK GenAI](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=fr)
 
-Python arka ucuyla gerçek zamanlı çok formatlı bir uygulama oluşturmak için GenAI SDK'yı kullanarak Gemini Live API'ye bağlanın.
+Connectez-vous à l'API Gemini Live à l'aide du SDK GenAI pour créer une application multimodale en temps réel avec un backend Python.
 
-İstemciden sunucuya
+Client-to-server
 
-### [WebSocket tutorial](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=tr)
+### [Tutoriel WebSocket](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=fr)
 
-JavaScript ön ucu ve kısa ömürlü jetonlarla çok formatlı gerçek zamanlı bir uygulama oluşturmak için WebSockets kullanarak Gemini Live API'ye bağlanın.
+Connectez-vous à l'API Gemini Live à l'aide de WebSockets pour créer une application multimodale en temps réel avec un frontend JavaScript et des jetons éphémères.
 
-Agent Development Kit
+Agent development kit
 
-### [ADK eğitimi](https://google.github.io/adk-docs/streaming/)
+### [Tutoriel ADK](https://google.github.io/adk-docs/streaming/)
 
-Temsilci oluşturun ve sesli ve görüntülü iletişimi etkinleştirmek için Agent Development Kit (ADK) Streaming'i kullanın.
+Créez un agent et utilisez Agent Development Kit (ADK) Streaming pour activer la communication vocale et vidéo.
 
-## İş ortağı entegrasyonları
+## Intégration de partenaires
 
-Anlık ses ve video uygulamalarının geliştirilmesini kolaylaştırmak için WebRTC veya WebSockets üzerinden Gemini Live API'yi destekleyen bir üçüncü taraf entegrasyonu kullanabilirsiniz.
+Pour simplifier le développement d'applications audio et vidéo en temps réel, vous pouvez utiliser une intégration tierce compatible avec l'API Gemini Live via WebRTC ou WebSockets.
 
 [LiveKit
 
-Gemini Live API'yi LiveKit Agents ile kullanma](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
+Utilisez l'API Gemini Live avec les agents LiveKit.](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
 [Pipecat by Daily
 
-Gemini Live ve Pipecat'i kullanarak gerçek zamanlı yapay zeka destekli chatbot oluşturun.](https://docs.pipecat.ai/guides/features/gemini-live)
-[Software Mansion tarafından geliştirilen Fishjam
+Créez un chatbot IA en temps réel à l'aide de Gemini Live et Pipecat.](https://docs.pipecat.ai/guides/features/gemini-live)
+[Fishjam par Software Mansion
 
-Fishjam ile canlı video ve ses akışı uygulamaları oluşturun.](https://docs.fishjam.io/tutorials/gemini-live-integration)
-[Akışa göre Vision Agents
+Créez des applications de streaming vidéo et audio en direct avec Fishjam.](https://docs.fishjam.io/tutorials/gemini-live-integration)
+[Agents Vision de Stream
 
-Vision Agents ile gerçek zamanlı ses ve video yapay zeka uygulamaları oluşturun.](https://visionagents.ai/integrations/gemini)
+Créez des applications d'IA vocales et vidéo en temps réel avec les agents Vision.](https://visionagents.ai/integrations/gemini)
 [Voximplant
 
-Gelen ve giden aramaları Voximplant ile Live API'ye bağlayın.](https://voximplant.com/products/gemini-client)
+Associez les appels entrants et sortants à l'API Live avec Voximplant.](https://voximplant.com/products/gemini-client)
 [Agora
 
-Agora ile anlık etkileşimli yapay zeka uygulamaları oluşturun.](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
-[Firebase AI SDK'sı
+Créez des applications d'IA conversationnelle en temps réel avec Agora.](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
+[SDK Firebase AI
 
-Firebase AI Logic'i kullanarak Gemini Live API'yi kullanmaya başlayın.](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=tr)
+Faites vos premiers pas avec l'API Gemini Live à l'aide de Firebase AI Logic.](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=fr)
 
-Geri bildirim gönderin
+Envoyer des commentaires
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Son güncelleme tarihi: 2026-10-07 UTC.
+Dernière mise à jour le 2026/10/07 (UTC).
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-07 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/07 (UTC)."],[],[]]

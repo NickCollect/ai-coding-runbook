@@ -1,52 +1,52 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=pt-BR
-fetched_at: 2026-10-26T05:44:25.592172+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=id
+fetched_at: 2026-11-02T07:22:08.309124+00:00
 title: "Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
+Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Envie comentários
+Kirim masukan
 
 # Gemini Omni Flash
 
-O Gemini Omni Flash é um modelo de alto desempenho para geração e edição de vídeos
-conversacionais rápidos. Ele é excelente para transformar texto e imagens em vídeo,
-permite refinar e editar vídeos gerados por meio de conversas em linguagem natural
-usando a API Interactions e oferece suporte a extensão de vídeo,
-upscaling de resolução e interpolação avançada.
+Gemini Omni Flash adalah model berperforma tinggi untuk pembuatan dan pengeditan video percakapan yang cepat. Model ini unggul dalam mengubah teks dan gambar menjadi video,
+memungkinkan Anda menyempurnakan dan mengedit video yang dihasilkan melalui percakapan
+bahasa alami menggunakan Interactions API, serta mendukung ekstensi video,
+peningkatan resolusi, dan interpolasi lanjutan.
 
-[Teste no Google AI Studio](https://aistudio.google.com?model=gemini-omni-1.1-flash&hl=pt-br)
+[Coba di Google AI Studio](https://aistudio.google.com?model=gemini-omni-1.1-flash&hl=id)
 
-## Documentação
+## Dokumentasi
 
-Acesse a página do [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=pt-br)
-para conferir todos os recursos e funcionalidades.
+Kunjungi halaman [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=id)
+untuk mengetahui cakupan lengkap fitur dan kemampuannya.
 
 ## gemini-omni-1.1-flash
 
-| Propriedade | Descrição |
+| Properti | Deskripsi |
 | --- | --- |
-| Código do modelo id\_card | **API Gemini**  `gemini-omni-1.1-flash` |
-| saveTipos de dados aceitos | **Entrada**  Texto, imagem, vídeo (até 10 segundos para edição e extensão)  **Saída**  Vídeo |
-| Limites de token\_auto | **Janela de contexto**  1.048.576 tokens  **Vídeo de saída**  3s-10s (360p/720p/1080p/4K, 24 QPS) |
-| pinVersions | [Versões do modelo](https://ai.google.dev/gemini-api/docs/models?hl=pt-br#model-versions):  - Estável: `gemini-omni-1.1-flash` - Desligar: `gemini-omni-flash-preview` |
-| calendar\_monthAtualização mais recente | Agosto de 2026 |
+| id\_cardKode model | **Gemini API**  `gemini-omni-1.1-flash` |
+| saveJenis data yang didukung | **Input**  Teks, Gambar, Video (hingga 10 detik untuk pengeditan dan ekstensi)  **Output**  Video |
+| token\_autoLimits | **Jendela konteks**  1.048.576 token  **Video output**  3 dtk-10 dtk (360p/720p/1080p/4K, 24 FPS) |
+| pinVersi | [Versi model:](https://ai.google.dev/gemini-api/docs/models?hl=id#model-versions)  - Stabil: `gemini-omni-1.1-flash` - Matikan: `gemini-omni-flash-preview` |
+| calendar\_monthPembaruan terbaru | Agustus 2026 |
+| paidHarga | [Harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id#gemini-omni-1.1-flash) |
 
-Envie comentários
+Kirim masukan
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Última atualização 2026-10-22 UTC.
+Terakhir diperbarui pada 2026-10-29 UTC.
 
-Quer enviar seu feedback?
+Ada masukan untuk kami?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-10-22 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-29 UTC."],[],[]]

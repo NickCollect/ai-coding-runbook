@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ru
-fetched_at: 2026-10-26T05:51:52.305754+00:00
-title: "\u041e\u0431\u043e\u0441\u043d\u043e\u0432\u0430\u043d\u0438\u0435 \u0441 Google \u041a\u0430\u0440\u0442\u0430\u043c\u0438 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id
+fetched_at: 2026-11-02T07:08:44.288649+00:00
+title: "Grounding dengan Google Maps \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Доступна новая модель Gemini 4 Argon. [Попробовать](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ru)
+Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Главная](https://ai.google.dev/?hl=ru)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
-- [Документация](https://ai.google.dev/gemini-api/docs?hl=ru)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Отправить отзыв
+Kirim masukan
 
-# Обоснование с Google Картами
+# Grounding dengan Google Maps
 
-Обоснование с Google Картами связывает генеративные возможности Gemini с подробными, фактическими и актуальными данными Google Карт. Эта функция позволяет разработчикам легко добавлять в свои приложения функции, связанные с местоположением. Когда запрос пользователя связан с данными Карт, модель Gemini использует Google Карты, чтобы предоставить точные и актуальные ответы, относящиеся к указанному местоположению или приблизительному местоположению пользователя.
+Grounding with Google Maps menghubungkan kemampuan generatif Gemini dengan data Google Maps yang kaya, faktual, dan terbaru. Fitur ini memungkinkan developer dengan mudah menggabungkan fungsi berbasis lokasi ke dalam aplikasi mereka. Saat kueri pengguna memiliki konteks yang terkait dengan data Maps, model Gemini akan memanfaatkan Google Maps untuk memberikan jawaban yang faktual, akurat, dan terbaru yang relevan dengan lokasi atau area umum yang ditentukan pengguna.
 
-- **Точные ответы с учетом местоположения.** Используйте обширные и актуальные данные Google Карт для запросов, связанных с географическим положением.
-- **Улучшенная персонализация.** Рекомендации и информация подбираются с учетом местоположений, указанных пользователями.
+- **Respons yang akurat dan berbasis lokasi:** Manfaatkan data Google Maps yang ekstensif dan terbaru untuk kueri yang spesifik secara geografis.
+- **Personalisasi yang ditingkatkan:** Sesuaikan rekomendasi dan informasi berdasarkan lokasi yang diberikan pengguna.
 
-## Начать
+## Mulai
 
-В этом примере показано, как интегрировать обоснование с Google Картами в приложение, чтобы предоставлять точные ответы на запросы пользователей с учетом местоположения. В запросе запрашиваются местные рекомендации с необязательным местоположением пользователя, что позволяет модели Gemini использовать данные Google Карт.
+Contoh ini menunjukkan cara mengintegrasikan Grounding with Google Maps ke dalam aplikasi Anda untuk memberikan respons yang akurat dan berbasis lokasi terhadap kueri pengguna. Perintah meminta rekomendasi lokal dengan lokasi pengguna opsional, sehingga model Gemini dapat menggunakan data Google Maps.
 
 ### Python
 
@@ -163,7 +163,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### Проложить маршрут
+### Go
 
 ```
 package main
@@ -251,38 +251,38 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Как работает обоснование с Google Картами
+## Cara kerja Grounding with Google Maps
 
-Обоснование с Google Картами интегрирует Gemini API с экосистемой Google Geo, используя Maps API в качестве источника обоснования. Если запрос пользователя содержит географический контекст, модель Gemini может вызвать инструмент обоснования с Google Картами. Затем модель может генерировать ответы на основе данных Google Карт, относящихся к указанному местоположению.
+Grounding with Google Maps mengintegrasikan Gemini API dengan ekosistem Google Geo menggunakan Maps API sebagai sumber grounding. Saat kueri pengguna berisi konteks geografis, model Gemini dapat memanggil alat Grounding with Google Maps. Model ini kemudian dapat menghasilkan respons yang didasarkan pada data Google Maps yang relevan dengan lokasi yang diberikan.
 
-Обычно процесс включает следующие этапы:
+Proses ini biasanya melibatkan:
 
-1. **Запрос пользователя.** Пользователь отправляет запрос в ваше приложение, который может содержать географический контекст (например, "кофейни рядом", "музеи в Сан-Франциско").
-2. **Вызов инструмента.** Модель Gemini распознает географический контекст и вызывает инструмент обоснования с Google Картами. Этот инструмент можно использовать вместе с `latitude` и `longitude` пользователя. Это инструмент текстового поиска, который работает так же, как поиск на Картах: в локальных запросах ("рядом со мной") используются координаты, а на конкретные или нелокальные запросы явное указание местоположения вряд ли повлияет.
-3. **Получение данных.** Сервис обоснования с Google Картами запрашивает у Google Карт нужную информацию, например о местах, отзывах, фотографиях, адресах и часах работы.
-4. **Обоснованная генерация.** Извлеченные данные Карт используются для формирования ответа модели Gemini, что обеспечивает его фактическую точность и релевантность.
-5. **Ответ и аннотации.** Модель возвращает текстовый ответ со встроенными аннотациями, которые ссылаются на источники Google Карт. Это позволяет разработчикам показывать цитаты.
+1. **Kueri pengguna:** Pengguna mengirimkan kueri ke aplikasi Anda, yang mungkin menyertakan konteks geografis (misalnya, "kafe di dekat saya", "museum di San Francisco").
+2. **Pemanggilan alat:** Model Gemini, yang mengenali maksud geografis, memanggil alat Grounding with Google Maps. Alat ini dapat secara opsional diberikan `latitude` dan `longitude` pengguna. Alat ini adalah alat penelusuran teks dan berperilaku mirip dengan penelusuran di Maps, yang mana kueri lokal ("di dekat saya") akan menggunakan koordinat, sedangkan kueri spesifik atau non-lokal kemungkinan tidak akan terpengaruh oleh lokasi eksplisit.
+3. **Pengambilan data:** Layanan Grounding with Google Maps mengkueri Google Maps untuk mendapatkan informasi yang relevan (misalnya, tempat, ulasan, foto, alamat, jam buka).
+4. **Generasi yang didasarkan pada data:** Data Maps yang diambil digunakan untuk menginformasikan respons model Gemini, sehingga memastikan akurasi dan relevansi faktual.
+5. **Respons &anotasi:** Model menampilkan respons teks dengan anotasi inline yang ditautkan ke sumber Google Maps, sehingga developer dapat menampilkan kutipan.
 
-## Зачем и когда использовать обоснование с Google Картами
+## Mengapa dan kapan Grounding with Google Maps sebaiknya digunakan
 
-Основание на Google Картах идеально подходит для приложений, которым требуется точная, актуальная и привязанная к местоположению информация. Это повышает удобство использования, предоставляя релевантный и персонализированный контент, основанный на обширной базе данных Google Карт, содержащей более 250 миллионов мест по всему миру.
+Grounding with Google Maps sangat ideal untuk aplikasi yang memerlukan informasi yang akurat, terbaru, dan spesifik lokasi. Fitur ini meningkatkan pengalaman pengguna dengan menyediakan konten yang relevan dan dipersonalisasi yang didukung oleh database Google Maps yang ekstensif dengan lebih dari 250 juta tempat di seluruh dunia.
 
-Обоснование с Google Картами следует использовать, если вашему приложению нужно:
+Anda harus menggunakan Grounding with Google Maps jika aplikasi Anda perlu:
 
-- Дайте полные и точные ответы на вопросы, связанные с местоположением.
-- Создавайте разговорных организаторов путешествий и Местных экспертов.
-- Рекомендовать интересные места на основе местоположения и предпочтений пользователя, например рестораны или магазины.
-- Создавайте сервисы с учетом местоположения для социальных сетей, розничной торговли или доставки еды.
+- Memberikan respons yang lengkap dan akurat terhadap pertanyaan yang spesifik secara geografis.
+- Membuat perencana perjalanan percakapan dan panduan lokal.
+- Merekomendasikan tempat menarik berdasarkan lokasi dan preferensi pengguna seperti restoran atau toko.
+- Membuat pengalaman berbasis lokasi untuk layanan sosial, retail, atau pengiriman makanan.
 
-Обоснование с Google Картами отлично подходит для случаев, когда важны близость и актуальные фактические данные, например при поиске лучшей кофейни поблизости или построении маршрута.
+Grounding with Google Maps unggul dalam kasus penggunaan yang mengutamakan kedekatan dan data faktual saat ini, seperti menemukan "kafe terbaik di dekat saya" atau mendapatkan rute.
 
-## Примеры использования
+## Kasus penggunaan
 
-Обоснование с Google Картами поддерживает различные варианты использования с учетом местоположения.
+Grounding with Google Maps mendukung berbagai kasus penggunaan berbasis lokasi.
 
-### Как отвечать на вопросы о местах
+### Menangani pertanyaan spesifik tempat
 
-Задавайте подробные вопросы о конкретном месте и получайте ответы на основе отзывов пользователей Google и других данных Карт.
+Ajukan pertanyaan mendetail tentang tempat tertentu untuk mendapatkan jawaban berdasarkan ulasan pengguna Google dan data Maps lainnya.
 
 ### Python
 
@@ -417,7 +417,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### Проложить маршрут
+### Go
 
 ```
 package main
@@ -486,9 +486,9 @@ func main() {
 }
 ```
 
-### Персонализация на основе местоположения
+### Menyediakan personalisasi berbasis lokasi
 
-Получайте рекомендации, адаптированные к предпочтениям пользователя и конкретному географическому региону.
+Dapatkan rekomendasi yang disesuaikan dengan preferensi pengguna dan area geografis tertentu.
 
 ### Python
 
@@ -622,7 +622,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### Проложить маршрут
+### Go
 
 ```
 package main
@@ -691,9 +691,9 @@ func main() {
 }
 ```
 
-### помощь в планировании маршрута;
+### Membantu perencanaan itinerari
 
-Создавайте планы на несколько дней с маршрутами и информацией о различных местах. Это отлично подходит для приложений, связанных с путешествиями.
+Buat rencana beberapa hari dengan rute dan informasi tentang berbagai lokasi, yang cocok untuk aplikasi perjalanan.
 
 ### Python
 
@@ -772,7 +772,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Проложить маршрут
+### Go
 
 ```
 package main
@@ -837,99 +837,104 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Требования к использованию сервиса
+## Persyaratan penggunaan layanan
 
-В этом разделе описаны требования к использованию сервиса обоснования с Google Картами.
+Bagian ini menjelaskan persyaratan penggunaan layanan untuk Grounding with Google Maps.
 
-### Уведомляйте пользователей о том, что вы используете источники Google Карт
+### Memberi tahu pengguna tentang penggunaan sumber Google Maps
 
-В каждом результате, обоснованном Google Картами, вы получите аннотации источников в блоках контента шага `model_output`, которые подтверждают каждый ответ. Возвращаются следующие метаданные:
+Dengan setiap hasil Grounding Google Maps, Anda akan menerima anotasi sumber di blok konten langkah `model_output` yang mendukung setiap respons. Metadata berikut akan ditampilkan:
 
-- URL источника
-- name
+- URL sumber
+- nama
 
-При показе результатов обоснования с Google Картами вы должны указать связанные источники Google Карт и сообщить пользователям следующее:
+Saat menyajikan hasil dari Grounding with Google Maps, Anda harus menentukan sumber Google Maps terkait, dan memberi tahu pengguna Anda tentang hal berikut:
 
-- Источники Google Карт должны быть указаны сразу после сгенерированного контента, который они подтверждают. Этот сгенерированный контент также называется результатом, обоснованным Google Картами.
-- Источники Google Карт должны быть видны в рамках одного взаимодействия с пользователем.
+- Sumber Google Maps harus segera mengikuti konten yang dihasilkan yang didukung oleh sumber tersebut. Konten yang dihasilkan ini juga disebut Hasil Grounding Google Maps.
+- Sumber Google Maps harus dapat dilihat dalam satu interaksi pengguna.
 
-### Показывать источники Google Карт со ссылками на Карты
+### Menampilkan sumber Google Maps dengan link Google Maps
 
-Для каждой аннотации источника необходимо создать предварительный просмотр ссылки, отвечающий следующим требованиям:
+Untuk setiap anotasi sumber, pratinjau link harus dibuat dengan mengikuti persyaratan berikut:
 
-- Укажите Google Карты в качестве источника данных в соответствии с [правилами указания авторства Google Карт](#maps-attribution-guidelines).
-- Показывать название источника, указанное в ответе.
-- Укажите ссылку на источник, используя `url` из аннотации.
+- Atribusikan setiap sumber ke Google Maps dengan mengikuti panduan atribusi teks Google Maps
+  [Google Maps](#maps-attribution-guidelines).
+- Tampilkan nama sumber yang diberikan dalam respons.
+- Tautkan ke sumber menggunakan `url` dari anotasi.
 
-### Рекомендации по текстовой атрибуции Google Карт
+### Panduan atribusi teks Google Maps
 
-При указании источников Google Карт в тексте следуйте этим рекомендациям:
+Saat Anda mengatribusikan sumber ke Google Maps dalam teks, ikuti panduan berikut:
 
-- Не изменяйте текст "Google Карты":
-  - Не меняйте регистр в названии "Google Карты".
-  - Не переносите название Google Maps на несколько строк.
-  - Не переводите Google Карты на другой язык.
-  - Запретите браузерам переводить Google Карты с помощью HTML-атрибута translate="no".
+- Jangan ubah teks Google Maps dengan cara apa pun:
+  - Jangan ubah kapitalisasi Google Maps.
+  - Jangan gabungkan Google Maps ke beberapa baris.
+  - Jangan lokalkan Google Maps ke bahasa lain.
+  - Cegah browser menerjemahkan Google Maps dengan menggunakan atribut HTML translate="no".
 
-Дополнительную информацию о некоторых поставщиках данных для Google Карт и условиях их лицензий можно найти в [юридических уведомлениях для Google Карт и Google Планеты Земля](https://www.google.com/help/legalnotices_maps/?hl=ru).
+Untuk mengetahui informasi selengkapnya tentang beberapa penyedia data Google Maps dan persyaratan lisensinya, lihat [pemberitahuan hukum Google Maps dan Google Earth](https://www.google.com/help/legalnotices_maps/?hl=id).
 
-## Рекомендации
+## Praktik terbaik
 
-- **Укажите местоположение пользователя.** Чтобы ответы были максимально релевантными и персонализированными, всегда добавляйте `latitude` и `longitude` в конфигурацию инструмента `google_maps`, если известно местоположение пользователя.
-- **Информируйте конечных пользователей.** Четко сообщайте конечным пользователям, что для ответов на их запросы используются данные Google Карт, особенно когда инструмент включен.
-- **Отключайте, когда не нужно.** Обоснование с Google Картами по умолчанию отключено. Включайте его (`"tools": [{"type": "google_maps"}]`), только когда у запроса есть явный географический контекст. Это позволит оптимизировать производительность и расходы.
+- **Berikan lokasi pengguna:** Untuk mendapatkan respons yang paling relevan dan dipersonalisasi, selalu sertakan `latitude` dan `longitude` dalam konfigurasi alat `google_maps` Anda saat lokasi pengguna diketahui.
+- **Beri Tahu Pengguna Akhir:** Beri tahu pengguna akhir Anda dengan jelas bahwa data Google Maps digunakan untuk menjawab kueri mereka, terutama saat alat diaktifkan.
+- **Nonaktifkan Jika Tidak Diperlukan:** Grounding with Google Maps dinonaktifkan secara default. Hanya aktifkan (`"tools": [{"type": "google_maps"}]`) saat kueri memiliki
+  konteks geografis yang jelas, untuk mengoptimalkan performa dan biaya.
 
-## Ограничения
+## Batasan
 
-- Обоснование с Google Картами сейчас поддерживает запросы и ответы только на английском языке.
-- Инструмент может быть доступен не во всех регионах.
-- Результаты могут различаться в зависимости от точности геолокации и доступных данных Карт.
-- **Географический охват.** Обоснование с Google Картами доступно во всем мире.
-- **Состояние по умолчанию.** Инструмент "Обоснование с Google Картами" по умолчанию отключен.
-  Его нужно явно включить в запросах к API.
+- Grounding with Google Maps saat ini hanya mendukung perintah dan respons dalam bahasa Inggris.
+- Alat ini mungkin tidak tersedia di semua wilayah.
+- Hasil dapat bervariasi berdasarkan akurasi lokasi dan data Maps yang tersedia.
+- **Cakupan Geografis:** Grounding with Google Maps tersedia secara global.
+- **Status Default:** Alat Grounding with Google Maps dinonaktifkan secara default.
+  Anda harus mengaktifkannya secara eksplisit dalam permintaan API.
 
-## Цены и ограничения частоты запросов
+## Harga dan batas kapasitas
 
-Цены на обоснование с Google Картами зависят от поколения модели:
+Harga Grounding with Google Maps berbeda-beda bergantung pada generasi model:
 
-- **Gemini 3 и более новые модели.** За каждый поисковый запрос, который модель решит выполнить, с вашего проекта будет взиматься плата. При этом 5000 запросов в месяц предоставляются бесплатно для всех моделей Gemini 3 и более новых версий. После этого стоимость составит **14 долларов США за 1000 поисковых запросов**. Один поисковый запрос (ваш запрос к API к модели) может привести к тому, что модель выполнит несколько поисковых запросов, чтобы найти необходимую информацию. Каждый из этих запросов считается платным использованием инструмента.
-- **Gemini 2.5 и более ранние модели.** Оплата взимается за каждый поисковый запрос (25 долларов США за 1000 запросов с обоснованием). Плата за запрос взимается, только если в ответ на него возвращается хотя бы один результат, заземленный на Google Картах, независимо от того, сколько поисковых запросов выполнила модель, чтобы получить этот результат.
+- **Model Gemini 3 dan yang lebih baru:** Project Anda akan ditagih untuk setiap kueri penelusuran yang diputuskan untuk dijalankan oleh model, dengan 5.000 permintaan gratis per bulan yang dibagikan di semua model Gemini 3 dan yang lebih baru, lalu **$14 per 1.000 kueri penelusuran**. Satu perintah penelusuran (permintaan API Anda ke model) dapat menyebabkan model menjalankan beberapa kueri penelusuran untuk menemukan informasi yang diperlukan. Setiap kueri ini dihitung sebagai penggunaan alat yang dapat ditagih.
+- **Model Gemini 2.5 dan yang lebih lama:** Project Anda akan ditagih per perintah penelusuran ($25 per 1.000 perintah yang didasarkan pada data). Permintaan hanya akan ditagih jika perintah berhasil menampilkan setidaknya satu hasil yang didasarkan pada data Google Maps, terlepas dari berapa banyak kueri penelusuran individual yang dilakukan model secara internal untuk mendapatkan hasil tersebut.
 
-Квота на обоснование с Google Картами обычно соответствует ограничениям частоты запросов базовой модели Gemini. Подробную информацию о ценах можно найти на [странице цен Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=ru).
+Kuota untuk Grounding with Google Maps biasanya selaras dengan batas kapasitas model Gemini yang mendasarinya. Untuk mengetahui informasi harga mendetail, lihat halaman harga [Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=id).
 
-## Поддерживаемые модели
+## Model yang didukung
 
-Обоснование с Google Картами поддерживается на следующих моделях:
+Model berikut mendukung Grounding with Google Maps:
 
-| Модель | Обоснование с Google Картами |
+| Model | Grounding with Google Maps |
 | --- | --- |
-| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=ru) | ✔️ |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=ru) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ru) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ru) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ru) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ru) | ✔️ |
-| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ru) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ru) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ru) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ru) | ✔️ |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=id) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=id) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=id) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=id) | ✔️ |
+| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id) | ✔️ |
+| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=id) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=id) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=id) | ✔️ |
 
-## Поддерживаемые сочетания инструментов
+## Kombinasi alat yang didukung
 
-Вы можете использовать Grounding with Google Maps вместе с другими встроенными инструментами, например [Grounding with Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=ru) (поддерживается в Gemini 3.5 Flash-Lite и более поздних моделях), чтобы решать более сложные задачи.
-Модели Gemini 3 также поддерживают сочетание встроенных инструментов с пользовательскими (вызов функций). Подробнее [о сочетаниях инструментов](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ru)…
+Anda dapat menggunakan Grounding with Google Maps dengan alat bawaan lainnya seperti
+[Grounding with Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=id) (didukung di
+model Gemini 3.5 Flash-Lite dan yang lebih baru) untuk mendukung kasus penggunaan yang lebih kompleks.
+Model Gemini 3 juga mendukung penggabungan alat bawaan ini dengan alat kustom (panggilan fungsi). Pelajari lebih lanjut di halaman
+[kombinasi alat](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id).
 
-## Дальнейшие действия
+## Langkah berikutnya
 
-- Подробнее [о других доступных инструментах](https://ai.google.dev/gemini-api/docs/tools?hl=ru)…
-- Чтобы узнать больше о принципах ответственного использования ИИ и фильтрах безопасности Gemini API, ознакомьтесь с [руководством по настройкам безопасности](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ru).
+- Pelajari alat lain yang [tersedia](https://ai.google.dev/gemini-api/docs/tools?hl=id).
+- Untuk mempelajari praktik terbaik AI yang bertanggung jawab dan filter keamanan Gemini API lebih lanjut, lihat [panduan Setelan keamanan](https://ai.google.dev/gemini-api/docs/safety-settings?hl=id).
 
-Отправить отзыв
+Kirim masukan
 
-Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Последнее обновление: 2026-10-13 UTC.
+Terakhir diperbarui pada 2026-10-13 UTC.
 
-Хотите рассказать подробнее?
+Ada masukan untuk kami?
 
-[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-13 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-13 UTC."],[],[]]

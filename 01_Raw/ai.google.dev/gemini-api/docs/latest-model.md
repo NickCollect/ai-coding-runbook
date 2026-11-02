@@ -1,56 +1,56 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/latest-model?hl=fa
-fetched_at: 2026-10-26T05:56:22.164940+00:00
-title: "\u0648\u06cc\u0698\u06af\u06cc\u200c\u0647\u0627\u06cc \u062c\u062f\u06cc\u062f Gemini 4 Argon \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/latest-model?hl=es-419
+fetched_at: 2026-11-02T07:07:18.534318+00:00
+title: "Novedades de Gemini 4 Argon \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫Gemini 4 Argon اکنون دردسترس است. [امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fa).
+Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [صفحه اصلی](https://ai.google.dev/?hl=fa)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
-- [سندنگار](https://ai.google.dev/gemini-api/docs?hl=fa)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-ارسال بازخورد
+Enviar comentarios
 
-# ویژگی‌های جدید Gemini 4 Argon
+# Novedades de Gemini 4 Argon
 
-‫Gemini 4 Argon (`gemini-4-argon`) جدیدترین و توانمندترین مدل ما است. این مدل می‌تواند برای مدت طولانی‌تری درباره مسائل دشوار استدلال کند تا نتایج بهتری در تکالیف پیچیده کدنویسی، عامل‌گرا، ریاضی، و علمی ارائه دهد. ‫Gemini 4 Argon ازطریق Gemini API و در Google AI Studio دردسترس است.
+Gemini 4 Argon (`gemini-4-argon`) es nuestro modelo más reciente y capaz. Puede razonar durante más tiempo sobre problemas difíciles para obtener mejores resultados en tareas complejas de programación, agentes, matemáticas y ciencias. Gemini 4 Argon está disponible a través de la API de Gemini y en Google AI Studio.
 
-‫Gemini 4 Argon از پنجره زمینه‌ای یکپارچه ۱ میلیون داده‌واحدی، رمزگشایی طولانی تا ۱ میلیون داده‌واحد، و سطوح تفکر قابل‌تنظیم (`low`، `medium`، `high`) پشتیبانی می‌کند.
+Gemini 4 Argon admite una ventana de contexto unificada de 1 millón de tokens, una decodificación larga de hasta 1 millón de tokens y niveles de razonamiento ajustables (`low`, `medium` y `high`).
 
 [experiment
 
-امتحان کردن در AI Studio
+Probar en AI Studio
 
-با Gemini 4 Argon و AI Studio، برنامه‌ها را از ابتدا بسازید.](https://aistudio.google.com/apps?model=gemini-4-argon&hl=fa)
+Crea apps desde cero con Gemini 4 Argon y AI Studio.](https://aistudio.google.com/apps?model=gemini-4-argon&hl=es-419)
 [smart\_toy
 
-گالری برنامه
+Galería de aplicaciones
 
-برنامه‌ها را پخش و بازآمیزی کنید، ساخته‌شده با Gemini 4 Argon.](https://aistudio.google.com/learn/gemini-4-argon-showcase?hl=fa)
+Prueba y modifica apps creadas con Gemini 4 Argon.](https://aistudio.google.com/learn/gemini-4-argon-showcase?hl=es-419)
 [rocket\_launch
 
-شروع کنید
+Comenzar
 
-با پیام‌واره‌های آغازگر، کار با Gemini 4 Argon را شروع کنید.](https://aistudio.google.com/learn/gemini-4-argon?hl=fa)
+Comienza a usar Gemini 4 Argon con instrucciones de inicio.](https://aistudio.google.com/learn/gemini-4-argon?hl=es-419)
 
-این راهنما ویژگی‌های جدید Gemini 4 Argon، تغییرات API، نمونه‌های کد، و راهنمای انتقال را توضیح می‌دهد.
+En esta guía, se explican las novedades de Gemini 4 Argon, los cambios en la API, los ejemplos de código y las instrucciones para la migración.
 
-## مدل جدید
+## Modelo nuevo
 
-| مدل | شناسه مدل | سطح پیش‌فرض «اندیشگر» | قیمت‌گذاری | شرح |
+| Modelo | ID de modelo | Nivel de pensamiento predeterminado | Precios | Descripción |
 | --- | --- | --- | --- | --- |
-| Gemini 4 Argon | `gemini-4-argon` | `medium` | تا ۳۰ نوامبر ۲۰۲۶ با قیمت آغازین ۲ دلار به‌ازای ۱ میلیون داده‌واحد ورودی و ۱۰ دلار به‌ازای ۱ میلیون داده‌واحد خروجی (پس‌از آن ۴ دلار به‌ازای ۱ میلیون داده‌واحد ورودی و ۲۰ دلار به‌ازای ۱ میلیون داده‌واحد خروجی) دردسترس است. برای جزئیات بیشتر، [قیمت‌گذاری](https://ai.google.dev/gemini-api/docs/pricing?hl=fa) را ببینید. | توانمندترین مدل ما که برای حل سخت‌ترین مسائل با عمق و دقت در کارهای مهندسی نرم‌افزار و دانش واقعی ساخته شده است. |
+| Gemini 4 Argon | `gemini-4-argon` | `medium` | Disponible hasta el 30 de noviembre de 2026 a un precio de lanzamiento de USD 2 por 1 millón de tokens de entrada y USD 10 por 1 millón de tokens de salida (USD 4 por 1 millón de tokens de entrada y USD 20 por 1 millón de tokens de salida después de esa fecha). Consulta los [precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419) para obtener más detalles. | Nuestro modelo más potente, creado para resolver los problemas más difíciles con profundidad y precisión en tareas de ingeniería de software y trabajo de conocimiento del mundo real. |
 
-برای جزئیات کامل، به [صفحه مدل Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=fa) مراجعه کنید. برای جزئیات قیمت‌گذاری مقدماتی، به [بخش قیمت‌گذاری](#pricing) در ادامه این صفحه یا [صفحه قیمت‌گذاری](https://ai.google.dev/gemini-api/docs/pricing?hl=fa#gemini-4-argon) مراجعه کنید.
+Para obtener todos los detalles, consulta la [página del modelo Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=es-419). Para obtener detalles sobre los precios de lanzamiento, consulta la [sección de precios](#pricing) más adelante en esta página o la [página de precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419#gemini-4-argon).
 
-## راه‌اندازی سریع
+## Guía de inicio rápido
 
-از مثال زیر برای ارسال درخواست به `gemini-4-argon` با `thinking_level` پیش‌فرض توصیه‌شده (`medium`) و محدودیت ۶۴ هزار کد برونداد استفاده کنید:
+Usa el siguiente ejemplo para enviar una solicitud a `gemini-4-argon` con el `thinking_level` predeterminado recomendado (`medium`) y un límite de tokens de salida de 64,000:
 
 ### Python
 
@@ -82,7 +82,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### استراحت
+### REST
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -95,21 +95,21 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## تازه‌های Gemini 4 Argon
+## Novedades de Gemini 4 Argon
 
-- **حد یکپارچه ۱ میلیون داده‌واحد ورودی-خروجی:** ورودی، اندیشگر، و خروجی یک پنجره ۱٬۰۴۸٬۵۷۶ داده‌واحدی را به‌طور مشترک استفاده می‌کنند.
-- **رمزگشایی طولانی:** اکنون یک پاسخ می‌تواند از ۶۴ هزار داده‌واحد فراتر برود و به ۱ میلیون داده‌واحد منهای ورودی شما برسد. [رمزگشایی طولانی](https://ai.google.dev/gemini-api/docs/long-decode?hl=fa) را ببینید.
-- **درک ویدیو عاملی به‌طور عمومی دردسترس است:** [درک ویدیو عاملی](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fa#agentic-video-understanding) اکنون به‌طور عمومی دردسترس است.
-- **پشتیبانی‌شده در «عامل‌های مدیریت‌شده»:** [عامل Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fa) در «عامل‌های مدیریت‌شده» Gemini اکنون از Gemini 4 Argon پشتیبانی می‌کند.
+- **Límite unificado de 1 millón de tokens de entrada y salida:** La entrada, el razonamiento y la salida comparten una ventana de 1,048,576 tokens.
+- **Decodificación larga:** Una sola respuesta ahora puede superar los 64,000 tokens, hasta 1 millón de tokens menos tu entrada. Consulta [Decodificación larga](https://ai.google.dev/gemini-api/docs/long-decode?hl=es-419).
+- **La comprensión de video de agentes tiene disponibilidad general:** La [comprensión de video de agentes](https://ai.google.dev/gemini-api/docs/video-understanding?hl=es-419#agentic-video-understanding) ahora tiene disponibilidad general.
+- **Compatibilidad con agentes administrados:** El [agente de Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419) en los agentes administrados de Gemini ahora es compatible con Gemini 4 Argon.
 
-برای مشخصات کامل، به [صفحه مدل Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=fa) مراجعه کنید. برای جزئیات قیمت‌گذاری، [صفحه قیمت‌گذاری](https://ai.google.dev/gemini-api/docs/pricing?hl=fa#gemini-4-argon) را ببینید.
+Para conocer las especificaciones completas, consulta la [página del modelo Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=es-419). Para obtener información sobre los precios, consulta la [página de precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419#gemini-4-argon).
 
-## برونداد بزرگ‌تر و رمزگشایی طولانی
+## Resultados más grandes y decodificación larga
 
-‫Gemini 4 Argon می‌تواند برای مسائل دشوار ریاضی، علوم، و کدنویسی بیشتر فکر کند.
+Gemini 4 Argon puede pensar más a fondo sobre problemas complejos de matemáticas, ciencias y programación.
 
-- **از `thinking_level` برای کنترل عمق استدلال استفاده کنید:** سطح تفکر تعیین می‌کند که مدل قبل‌از پاسخ دادن چقدر عمیق استدلال کند. `max_output_tokens` یک حد سخت است: وقتی تفکر و خروجی باهم به آن برسند، پاسخ متوقف می‌شود، بنابراین آن را به‌اندازه کافی بالا تنظیم کنید تا پاسخ کوتاه نشود.
-- **تولید کردن حداکثر ۱ میلیون داده‌واحد با اجرای پس‌زمینه‌ای:** از اجرای پس‌زمینه‌ای با `max_output_tokens` بیشتر از ۶۵٬۵۳۶ استفاده کنید تا یک پاسخ بتواند از ۶۴ هزار داده‌واحد فراتر برود و به ۱ میلیون داده‌واحد برسد. مدل پاسخ‌های طولانی را در جهش‌های حداکثر ۶۴ هزار تایی از کدواحدها تولید می‌کند و هر جهش از جایی که جهش قبلی متوقف شده است ادامه می‌یابد. با اجرای پس‌زمینه، سرورهای ما این جهش‌های ادامه‌دار را برای شما اجرا می‌کنند. چون هر پرش یک مرحله `model_output` به `interaction.steps` اضافه می‌کند، وقتی تعامل کامل شد، نوشتار را در همه مراحل `model_output` به‌هم بپیوندید.
+- **Usa `thinking_level` para controlar la profundidad del razonamiento:** El nivel de razonamiento determina la profundidad con la que el modelo razona antes de responder. `max_output_tokens` es un límite estricto: la respuesta se detiene una vez que el pensamiento y el resultado juntos lo alcanzan, por lo que debes establecerlo lo suficientemente alto como para que no se corte la respuesta.
+- **Genera hasta 1 millón de tokens con la ejecución en segundo plano:** Usa la ejecución en segundo plano con un `max_output_tokens` superior a 65,536 para permitir que una sola respuesta supere los 64,000 tokens, hasta 1 millón de tokens. El modelo genera respuestas largas en saltos de hasta 64,000 tokens, y cada salto continúa desde donde se detuvo el anterior. Con la ejecución en segundo plano, nuestros servidores ejecutan estos saltos de continuación por ti. Como cada salto agrega un paso `model_output` a `interaction.steps`, une el texto de todos los pasos `model_output` cuando se complete la interacción.
 
 ### Python
 
@@ -180,7 +180,7 @@ console.log("Status:", interaction.status);
 console.log("Usage:", interaction.usage);
 ```
 
-### استراحت
+### REST
 
 ```
 ID=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -208,29 +208,29 @@ while true; do
 done
 ```
 
-اجرا در پس‌زمینه ساده‌ترین راه برای اجرای رمزگشایی طولانی است. این پارامتر حلقه ادامه را در سمت سرور اجرا می‌کند تا زمانی که مدل تمام شود یا به `max_output_tokens` برسد. اگر به کنترل دقیق‌تری بر تلاش‌های مجدد، عقب‌نشینی، و مدیریت خطا نیاز دارید (یا نمی‌خواهید تعامل‌هایتان ذخیره شود)، می‌توانید از ادامه سمت کارخواه در [GenerateContent API](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=fa) استفاده کنید. ادامه سمت کارخواه نیز به‌زودی به Interactions API اضافه خواهد شد. برای جاری‌سازی، اتصال مجدد، شمارش داده‌واحد، و زمان استفاده از رمزگشایی طولانی، به [راهنمای رمزگشایی طولانی](https://ai.google.dev/gemini-api/docs/long-decode?hl=fa) مراجعه کنید.
+La ejecución en segundo plano es la forma más sencilla de ejecutar una decodificación larga. Ejecuta el bucle de continuación del lado del servidor hasta que el modelo finaliza o alcanza `max_output_tokens`. Si necesitas un control más detallado de los reintentos, la retirada y el manejo de errores (o no quieres que se almacenen tus interacciones), puedes usar la continuación del cliente en la [API de GenerateContent](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=es-419). La continuación del cliente también llegará próximamente a la API de Interactions. Para obtener información sobre la transmisión, la reconexión, el recuento de tokens y cuándo usar la decodificación larga, consulta la [guía de decodificación larga](https://ai.google.dev/gemini-api/docs/long-decode?hl=es-419).
 
-### تنظیم کردن محدودیت‌های داده‌واحد برونداد
+### Establece límites de tokens de salida
 
-‫`max_output_tokens` مجموع توکن‌های تفکر و برونداد را برای پاسخ تنظیم می‌کند. آن را به‌اندازه کافی بالا تنظیم کنید تا فکر کردن پاسخ را کوتاه نکند، و به‌اندازه کافی پایین تنظیم کنید تا وقتی پیام‌واره سختی از همه آن استفاده می‌کند، هزینه محدود شود.
+`max_output_tokens` establece el total de tokens de razonamiento y salida para una respuesta. Establécelo lo suficientemente alto como para que el pensamiento no corte la respuesta y lo suficientemente bajo como para limitar el gasto cuando una instrucción difícil lo use todo.
 
-از این مقادیر به‌عنوان نقطه شروع استفاده کنید:
+Usa estos valores como punto de partida:
 
-- **تکالیف استاندارد:** مقدار پیش‌فرض ۶۵٬۵۳۶ را حفظ کنید یا هیچ مقداری تنظیم نکنید.
-- **برنامه‌های موجود با محدودیت کمتر از ۳۲ هزار:** `max_output_tokens` را حداقل به ۳۲٬۷۶۸ افزایش دهید. ‫Gemini 4 Argon می‌تواند نسبت‌به مدل‌های قبلی، بخش بیشتری از حد استفاده را صرف اندیشیدن کند. برای استفاده از توکن‌های کمتر، سطح تفکر را کاهش دهید.
-- **استدلال و کدنویسی پیچیده:** `background: true` و `max_output_tokens` را روی ۱۳۱٬۰۷۲ یا ۲۶۲٬۱۴۴ تنظیم کنید، تا ۱٬۰۴۸٬۵۷۶ منهای نشان‌های ورودی شما.
+- **Tareas estándar:** Mantén el valor predeterminado de 65,536 o no establezcas ningún valor.
+- **Apps existentes con un límite inferior a 32,000:** Aumenta `max_output_tokens` a, al menos, 32,768. Gemini 4 Argon puede dedicar más tiempo del límite a pensar que los modelos anteriores. Para usar menos tokens, disminuye el nivel de pensamiento.
+- **Razonamiento y programación complejos:** Establece `background: true` y `max_output_tokens` en 131,072 o 262,144, hasta 1,048,576 menos tus tokens de entrada.
 
-## آشنایی با سطوح «اندیشگر»
+## Información sobre los niveles de razonamiento
 
-[سطح اندیشیدن](https://ai.google.dev/gemini-api/docs/thinking?hl=fa) کنترل اصلی شما بر کیفیت، تأخیر، و استفاده از نمانه در Gemini 4 Argon است:
+El [nivel de razonamiento](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419) es tu control principal sobre la calidad, la latencia y el uso de tokens en Gemini 4 Argon:
 
-| سطح «اندیشگر» | استفاده از کد | زمان استفاده |
+| Nivel de pensamiento | Uso de tokens | Cuándo debe utilizarse |
 | --- | --- | --- |
-| `low` | کمترین داده‌واحد، کمترین تأخیر | تکالیف ساده‌تر و کارهای حساس به هزینه. همچنین برای کارهای تحلیلی و نوشتاری که نیاز به تفکر سبک دارند مناسب است. کیفیت ممکن است در تکالیف سخت کاهش یابد. |
-| `medium` (پیش‌فرض) | متعادل | برای اکثر تکلیف‌ها، ازجمله کدنویسی پیچیده و موارد استفاده عامل‌گرا، توصیه می‌شود. |
-| `high` | بیشترین داده‌واحد، کندترین داده‌واحد اول | استدلال پیچیده، ریاضی و علوم سخت، و دشوارترین کدها یا وظایف عامل. برای بروندادهای طولانی، با رمزگشایی طولانی به‌خوبی جفت می‌شود. |
+| `low` | Menos tokens, latencia más baja | Tareas más simples y trabajo sensible a los costos También funciona para tareas de análisis y escritura que requieren un pensamiento ligero. La calidad puede disminuir en las tareas difíciles. |
+| `medium` (predeterminada) | Equilibrado | Se recomienda para la mayoría de las tareas, incluidos los casos de uso de código complejo y de agentes. |
+| `high` | Mayor cantidad de tokens, primer token más lento | Razonamiento complejo, matemáticas y ciencias avanzadas, y las tareas de código o de agentes más difíciles. Se combina bien con la decodificación larga para resultados largos. |
 
-ارزیابی‌هایتان را در هر سه سطح اجرا کنید، سپس پایین‌ترین سطحی را که با معیارهای کیفی شما مطابقت دارد انتخاب کنید. برای کسب اطلاعات بیشتر، [راهنمای تفکر](https://ai.google.dev/gemini-api/docs/thinking?hl=fa) را ببینید.
+Ejecuta tus evaluaciones en los tres niveles y, luego, elige el nivel más bajo que cumpla con tu estándar de calidad. Para obtener más información, consulta la [guía de pensamiento](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419).
 
 ### Python
 
@@ -268,7 +268,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### استراحت
+### REST
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -284,9 +284,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ‫Gemini 4 Argon در «عامل‌های مدیریت‌شده»
+## Gemini 4 Argon en agentes administrados
 
-[عامل Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fa) در «عامل‌های مدیریت‌شده Gemini» از Gemini 4 Argon پشتیبانی می‌کند. برای استفاده از آن، مدل را در `agent_config` تنظیم کنید:
+El [agente de Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419) en Gemini Managed Agents admite Gemini 4 Argon. Para usarlo, configura el modelo en `agent_config`:
 
 ### Python
 
@@ -337,7 +337,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### استراحت
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -354,54 +354,57 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-برای گزینه‌های بیشتر، [انتخاب مدل](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fa#model-selection) را در راهنمای عامل Antigravity ببینید.
+Para obtener más opciones, consulta [Selección de modelos](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419#model-selection) en la guía del agente de Antigravity.
 
-## بازبینه انتقال
+## Lista de tareas para la migración
 
 ```
   `/gemini-api-dev migrate my app to Gemini 4 Argon`
 ```
 
-### انتقال به gemini-4-argon
+### Migra a gemini-4-argon
 
-- **به‌روزرسانی شناسه مدل:** رشته مدل هدف را به `gemini-4-argon` تغییر دهید.
-- **`max_output_tokens` را مرور کنید:** اگر امروز آن را به‌طور صریح تنظیم کرده‌اید، افزایش آن را مدنظر قرار دهید. حداقل ۳۲٬۷۶۸ را توصیه می‌کنیم، زیرا Gemini 4 Argon می‌تواند بخش بیشتری از این حد را صرف فکر کردن کند.
-- **پیکربندی سطح اندیشیدن:** `low`، `medium` (پیش‌فرض)، یا `high` را انتخاب کنید و حجم کاری‌تان را در هر سه سطح آزمایش کنید.
-- **از ذخیره‌سازی صریح بافت در حافظه نهان استفاده نکنید:** ذخیره‌سازی صریح در حافظه نهان (`cachedContents` / `caches.create`) در Gemini 4 Argon پشتیبانی نمی‌شود. فراخوانی‌هایی را که `cached_content` ایجاد می‌کنند یا به آن ارجاع می‌دهند از درخواست‌هایتان بردارید. [ذخیره‌سازی ضمنی در حافظه نهان](https://ai.google.dev/gemini-api/docs/caching?hl=fa) به‌طور پیش‌فرض برای پیام‌واره‌های حداقل ۴۰۹۶ نمانه‌ای فعال است و نمانه‌های ورودی ذخیره‌شده در حافظه نهان را درصورت وجود در حافظه نهان با ۹۵٪ تخفیف ارائه می‌دهد.
-- **پارامترهای نمونه‌برداری را بردارید:** `temperature`، `top_p`، و `top_k` را از درخواست‌هایتان بردارید. اگر ارائه شود، نادیده گرفته می‌شود.
-- **برای بروندادهای طولانی از اجرای پس‌زمینه استفاده کنید:** برای تکلیف‌هایی که به بیش‌از ۶۴ هزار نمانه نیاز دارند، `background` را روی true و `max_output_tokens` را روی بیشتر از ۶۵٬۵۳۶ تنظیم کنید.
-- **افزایش زمان اتمام مهلت کارخواه:** پیام‌واره‌های سخت ممکن است چند دقیقه طول بکشد. از اجرای پس‌زمینه استفاده کنید یا زمان اتمام مهلت کارخواه HTTP را حداقل روی ۱۵ دقیقه تنظیم کنید.
-- **حفظ وضعیت مکالمه در سرور:** از `previous_interaction_id` برای مکالمه‌های چندنوبتی و فراخوانی تابع استفاده کنید.
+- **Actualiza el ID del modelo:** Cambia la cadena del modelo de destino a `gemini-4-argon`.
+- **Revisa el parámetro `max_output_tokens`:** Si lo estableciste de forma explícita hoy, considera aumentarlo. Recomendamos al menos 32,768, ya que Gemini 4 Argon puede usar más del límite para pensar.
+- **Configura el nivel de razonamiento:** Elige `low`, `medium` (predeterminado) o `high`, y prueba tu carga de trabajo en los tres.
+- **Deja de usar el almacenamiento en caché de contexto explícito:** El almacenamiento en caché explícito (`cachedContents` / `caches.create`) no es compatible con Gemini 4 Argon. Quita las llamadas que crean o hacen referencia a `cached_content` de tus solicitudes. El [almacenamiento en caché implícito](https://ai.google.dev/gemini-api/docs/caching?hl=es-419) está habilitado de forma predeterminada para las instrucciones de al menos 4,096 tokens y descuenta un 95% de los tokens de entrada almacenados en caché en los aciertos de caché.
+- **Quita los parámetros de muestreo:** Quita `temperature`, `top_p` y `top_k` de tus solicitudes. Si se proporcionan, se ignoran.
+- **Usa la ejecución en segundo plano para resultados largos:** En el caso de las tareas que necesitan más de 64,000 tokens, establece `background` como verdadero y `max_output_tokens` en un valor superior a 65,536.
+- **Aumenta los tiempos de espera del cliente:** Las instrucciones fijas pueden tardar varios minutos. Usa la ejecución en segundo plano o establece tiempos de espera del cliente HTTP de al menos 15 minutos.
+- **Mantén el estado de la conversación en el servidor:** Usa `previous_interaction_id` para las conversaciones de varios turnos y de llamada a funciones.
+- **Revisa tus estimaciones de costos:** Se factura cada token que procesa el modelo, incluidas las instrucciones internas del sistema de herramientas y las declaraciones de funciones cuando se usa la fundamentación (consulta [Precios](#pricing)).
 
-## قیمت‌گذاری
+## Precios
 
-‫Gemini 4 Argon با قیمت آغازین تا ۳۰ نوامبر ۲۰۲۶ دردسترس است:
+Gemini 4 Argon está disponible con precios de lanzamiento hasta el 30 de noviembre de 2026:
 
-- **داده‌واحد ورودی:** ۲٫۰۰ دلار به‌ازای هر ۱ میلیون داده‌واحد (۴٫۰۰ دلار از ۱ دسامبر ۲۰۲۶)
-  - **داده‌واحدهای ورودی ذخیره‌شده در حافظه نهان:** ذخیره‌سازی ضمنی در حافظه نهان، ورودی ذخیره‌شده در حافظه نهان را تا ۹۵٪ کاهش می‌دهد و به ۰٫۱۰ دلار به‌ازای هر ۱ میلیون داده‌واحد می‌رساند (از ۱ دسامبر ۲۰۲۶، ۰٫۲۰ دلار).
-- **داده‌واحدهای برونداد، شامل داده‌واحدهای اندیشیدن:** ۱۰٫۰۰ دلار به‌ازای هر ۱ میلیون داده‌واحد (۲۰٫۰۰ دلار از ۱ دسامبر ۲۰۲۶)
+- **Tokens de entrada:** USD 2.00 por cada millón de tokens (USD 4.00 a partir del 1 de diciembre de 2026)
+  - **Tokens de entrada almacenados en caché:** El almacenamiento en caché implícito descuenta un 95% de la entrada almacenada en caché, a USD 0.10 por cada millón de tokens (USD 0.20 a partir del 1 de diciembre de 2026).
+- **Tokens de salida, incluidos los tokens de razonamiento:** USD 10.00 por 1 millón de tokens (USD 20.00 a partir del 1 de diciembre de 2026)
 
-‫Gemini 4 Argon در سطح «رایگان» دردسترس نیست. برای مشاهده سطوح قیمت‌گذاری کامل، به [صفحه قیمت‌گذاری](https://ai.google.dev/gemini-api/docs/pricing?hl=fa#gemini-4-argon) مراجعه کنید.
+Cada token que procesa el modelo se cuenta y se factura, incluidos los tokens de razonamiento, las instrucciones del sistema de herramientas internas y las declaraciones de funciones cuando se usa la fundamentación. La fundamentación con la Búsqueda de Google también se sigue facturando por consulta.
 
-## مدل‌های دیگر
+Gemini 4 Argon no está disponible en el nivel gratuito. Para conocer los niveles de precios completos, consulta la [página de precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419#gemini-4-argon).
 
-- [‫Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=fa)
-- [‫Gemini 3.6 Flash و ‎3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=fa)
-- [دیدن همه مدل‌ها](https://ai.google.dev/gemini-api/docs/models?hl=fa)
+## Otros modelos
 
-## قدم بعدی چیست
+- [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=es-419)
+- [Gemini 3.6 Flash y 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=es-419)
+- [Ver todos los modelos](https://ai.google.dev/gemini-api/docs/models?hl=es-419)
 
-- [راهنمای رمزگشایی طولانی](https://ai.google.dev/gemini-api/docs/long-decode?hl=fa) را برای جاری‌سازی، اتصال مجدد، و شمارش داده‌واحد بخوانید.
-- در [راهنمای تفکر](https://ai.google.dev/gemini-api/docs/thinking?hl=fa) با نحوه عملکرد سطوح تفکر و خلاصه‌های تفکر آشنا شوید.
-- درباره کارهای طولانی‌مدت در [راهنمای اجرای پس‌زمینه](https://ai.google.dev/gemini-api/docs/background-execution?hl=fa) بیشتر بدانید.
-- پیام‌واره‌ها را در [Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fa) آزمایش و پالایش کنید.
+## ¿Qué sigue?
 
-ارسال بازخورد
+- Lee la [guía de decodificación larga](https://ai.google.dev/gemini-api/docs/long-decode?hl=es-419) para obtener información sobre la transmisión, la reconexión y el recuento de tokens.
+- Obtén más información sobre cómo funcionan los niveles de razonamiento y los resúmenes de razonamiento en la [guía de razonamiento](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419).
+- Obtén más información sobre los trabajos de larga duración en la [guía de ejecución en segundo plano](https://ai.google.dev/gemini-api/docs/background-execution?hl=es-419).
+- Probar y definir mejor las instrucciones en [Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419)
 
-جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
+Enviar comentarios
 
-تاریخ آخرین به‌روزرسانی 2026-10-16 به‌وقت ساعت هماهنگ جهانی.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
+Última actualización: 2026-10-27 (UTC)
 
-[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-16 به‌وقت ساعت هماهنگ جهانی."],[],[]]
+¿Quieres brindar más información?
+
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-27 (UTC)"],[],[]]

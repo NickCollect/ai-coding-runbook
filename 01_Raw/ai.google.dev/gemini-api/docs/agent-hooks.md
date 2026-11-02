@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-hooks?hl=pl
-fetched_at: 2026-10-26T05:41:37.791860+00:00
+source_url: https://ai.google.dev/gemini-api/docs/agent-hooks?hl=ar
+fetched_at: 2026-11-02T07:16:02.024603+00:00
 title: "Hooks \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
+‫Gemini 4 Argon متاح الآن. [جرِّب هذه الميزة](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ar).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Prześlij opinię
+إرسال ملاحظات
 
 # Hooks
 
-Haczyki umożliwiają uruchamianie niestandardowych skryptów lub zewnętrznych żądań HTTP bezpośrednio przed lub po wykonaniu przez agenta kodu lub zmodyfikowaniu plików w zdalnym środowisku piaskownicy. Używaj hooków, aby rozszerzać pętlę agenta o automatyczne zabezpieczenia i przepływy pracy w tle, takie jak:
+تتيح لك الخطّافات تشغيل نصوص برمجية مخصّصة أو طلبات HTTP خارجية قبل أن ينفّذ الوكيل الرمز البرمجي أو يعدّل الملفات داخل البيئة التجريبية المعزولة عن بُعد أو بعدها مباشرةً. استخدِم الخطافات لتوسيع حلقة الوكيل باستخدام ضوابط الحماية وسير العمل في الخلفية، مثل:
 
-- **Wymuszanie zabezpieczeń i ograniczeń dostępu** przed wykonaniem poleceń powłoki wysokiego ryzyka lub odczytaniem plików o ograniczonym dostępie.
-- **Automatyzacja przekształceń potoku danych** natychmiast po utworzeniu lub zmodyfikowaniu plików przez agenta.
-- **Przesyłanie strumieniowe danych telemetrycznych kontroli przedsiębiorstwa** do zewnętrznych systemów monitorowania po wykonaniu narzędzia.
+- **فرض ضوابط الأمان والوصول** قبل تنفيذ أوامر shell عالية الخطورة أو عمليات قراءة الملفات المحظورة
+- **أتمتة عمليات تحويل مسار البيانات** بعد أن ينشئ أحد العملاء ملفات أو يعدّلها مباشرةً
+- **بث بيانات قياس تدقيق المؤسسة عن بُعد** إلى أنظمة المراقبة الخارجية بعد تنفيذ الأداة
 
 ### Python
 
@@ -139,7 +139,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -320,20 +320,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Obsługiwane zdarzenia cyklu życia
+## أحداث مراحل النشاط المتوافقة
 
-Haki obsługują w piaskownicy 2 zdarzenia:
+تتيح خطافات الأحداث حدثَين داخل وضع الحماية:
 
-| Zdarzenie | Kiedy się uruchamia | Działanie |
+| الحدث | وقت تنشيطه | وظيفتها |
 | --- | --- | --- |
-| `pre_tool_execution` | Bezpośrednio przed uruchomieniem narzędzia | Może zatwierdzić (`allow`) lub zablokować (`deny`) narzędzie przed jego wykonaniem. Gdy model zostanie zablokowany, zobaczy powód odrzucenia i dostosuje się do niego. |
-| `post_tool_execution` | od razu po zakończeniu działania narzędzia, | Wykonuje zadania uzupełniające, takie jak formatowanie kodu, uruchamianie testów jednostkowych czy rejestrowanie danych telemetrycznych. Nie można blokować ani cofać wykonanych działań. |
+| `pre_tool_execution` | قبل تشغيل أداة مباشرةً | يمكنك الموافقة على الأداة (`allow`) أو حظرها (`deny`) قبل تنفيذها. عند الحظر، يطّلع النموذج على سبب الرفض ويتكيّف معه. |
+| `post_tool_execution` | مباشرةً بعد انتهاء أداة | تنفيذ مهام المتابعة، مثل تنسيق الرمز أو إجراء اختبارات الوحدات أو تسجيل بيانات القياس عن بُعد لا يمكن حظر الإجراءات المكتملة أو التراجع عنها. |
 
 ### `pre_tool_execution`
 
-Uruchamia się tuż przed wykonaniem narzędzia. Skrypt odczytuje szczegóły wywołania narzędzia z `stdin` i zapisuje decyzję w formacie JSON (`allow` lub `deny`) w `stdout`.
+يتم تنشيط هذا المشغّل قبل تنفيذ إحدى الأدوات مباشرةً. يقرأ النص البرمجي تفاصيل طلب الأداة من `stdin` ويعرض قرار JSON (`allow` أو `deny`) في `stdout`.
 
-**Ładunek wejściowy (`stdin`):**
+**حمولة الإدخال (`stdin`):**
 
 ```
 {
@@ -348,9 +348,9 @@ Uruchamia się tuż przed wykonaniem narzędzia. Skrypt odczytuje szczegóły wy
 }
 ```
 
-**Odpowiedź wyjściowa (`stdout`):**
+**ردّ الإخراج (`stdout`):**
 
-Aby zatwierdzić wywołanie narzędzia:
+للموافقة على طلب استخدام الأداة، اتّبِع الخطوات التالية:
 
 ```
 {
@@ -358,7 +358,7 @@ Aby zatwierdzić wywołanie narzędzia:
 }
 ```
 
-Aby zablokować wywołanie narzędzia i przekazać opinię do modelu:
+لحظر طلب استخدام الأداة وإرسال ملاحظات إلى النموذج:
 
 ```
 {
@@ -367,15 +367,15 @@ Aby zablokować wywołanie narzędzia i przekazać opinię do modelu:
 }
 ```
 
-Gdy funkcja hook odrzuci polecenie, wywołanie narzędzia zostanie natychmiast pominięte. Agent widzi wynik błędu zawierający przyczynę odrzucenia bezpośrednio w bieżącej turze. Model może wtedy samodzielnie skorygować błąd, wybierając alternatywne polecenie lub wyjaśniając użytkownikowi, dlaczego polecenie zostało zablokowane.
+عندما يرفض خطاف أمرًا، يتم تخطّي استدعاء الأداة على الفور. يظهر للوكيل نتيجة خطأ تتضمّن سبب الرفض مباشرةً في دوره الحالي. يمكن للنموذج بعد ذلك تصحيح نفسه من خلال اختيار أمر بديل أو شرح سبب الحظر للمستخدم.
 
-Jeśli skrypt zwraca nierozpoznany format JSON, zwykły tekst lub cokolwiek innego niż `{"decision": "deny"}`, środowisko wykonawcze traktuje odpowiedź jako zatwierdzenie (`allow`).
+إذا كان البرنامج النصي يعرض JSON غير معروف أو نصًا عاديًا أو أي شيء آخر غير `{"decision": "deny"}`، سيتعامل وقت التشغيل مع الردّ على أنّه موافقة (`allow`).
 
 ### `post_tool_execution`
 
-Wysyłane natychmiast po zakończeniu działania narzędzia. Skrypt odczytuje szczegóły wykonania i stan błędu z `stdin`.
+يتم تشغيله بعد اكتمال أداة مباشرةً. يقرأ النص البرمجي تفاصيل التنفيذ وحالة أي خطأ من `stdin`.
 
-**Ładunek wejściowy (`stdin`):**
+**حمولة الإدخال (`stdin`):**
 
 ```
 {
@@ -390,27 +390,27 @@ Wysyłane natychmiast po zakończeniu działania narzędzia. Skrypt odczytuje sz
 }
 ```
 
-Jeśli polecenie powłoki wyświetla błędy w standardowym strumieniu błędów (`stderr`) lub operacja w systemie plików kończy się niepowodzeniem, w ładunku znajduje się pole `"error"` zawierające tekst błędu. Jeśli polecenie zakończy się bez błędów, pole `"error"` zostanie całkowicie pominięte.
+إذا عرض أمر shell أخطاء في الخطأ العادي (`stderr`) أو تعذّرت عملية نظام ملفات، يتم تضمين حقل `"error"` يحتوي على نص الخطأ في الحمولة. عندما ينجح الأمر بدون أخطاء، يتم حذف الحقل `"error"` بالكامل.
 
-**Odpowiedź wyjściowa (`stdout`):**
+**ردّ الإخراج (`stdout`):**
 
 ```
 {}
 ```
 
-Ponieważ funkcje wywoływane po użyciu narzędzia są uruchamiane wyłącznie w przypadku zadań w tle, takich jak formatowanie kodu lub rejestrowanie, środowisko wykonawcze ignoruje wszystkie wartości decyzji zwrócone w przypadku funkcji `stdout`.
+بما أنّ عمليات الربط بعد الأداة يتم تنفيذها بشكل صارم للمهام التي تتم في الخلفية، مثل تنسيق الرموز أو التسجيل، يتجاهل وقت التشغيل أي قيم قرار يتم إرجاعها في `stdout`.
 
-## Wykrywanie konfiguracji
+## اكتشاف الإعدادات
 
-Środowisko wykonawcze automatycznie wykrywa definicje funkcji hook z `.agents/hooks.json` lub `/.agents/hooks.json` w środowisku piaskownicy. Możesz podać `hooks.json` wraz ze skryptami niestandardowymi, korzystając z dowolnego obsługiwanego [źródła środowiska](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#mount_from_a_source):
+يكتشف وقت التشغيل تلقائيًا تعريفات الدوال البرمجية من `.agents/hooks.json` أو `/.agents/hooks.json` داخل بيئة وضع الحماية. يمكنك توفير `hooks.json` إلى جانب النصوص البرمجية المخصّصة باستخدام أي [مصدر بيئة](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar#mount_from_a_source) متوافق:
 
-- **Montowanie repozytorium:** repozytorium Git zawierające `.agents/hooks.json` wraz z `AGENTS.md`.
-- **Cloud Storage (`gcs`):** zasobnik GCS zawierający `hooks.json` skopiowane do środowiska.
-- **Źródła wbudowane:** nieprzetworzony ciąg znaków JSON i zawartość skryptu przekazywane w parametrze `environment.sources` podczas wywoływania funkcji `client.interactions.create`.
+- **تثبيت المستودع**: مستودع Git يحتوي على `.agents/hooks.json` بالإضافة إلى `AGENTS.md`.
+- **Cloud Storage (`gcs`)**: حزمة GCS تحتوي على `hooks.json` تم نسخها إلى البيئة.
+- **المصادر المضمّنة**: سلسلة JSON غير مُعالَجة ومحتوى النص البرمجي يتم تمريرهما في `environment.sources` عند استدعاء `client.interactions.create`.
 
-### `hooks.json` schemat
+### `hooks.json` مخطط
 
-Plik `hooks.json` grupuje definicje zdarzeń (`pre_tool_execution` lub `post_tool_execution`) pod niestandardowymi nazwami. Każdą grupę możesz włączyć lub wyłączyć osobno:
+يجمع ملف `hooks.json` تعريفات الأحداث (`pre_tool_execution` أو `post_tool_execution`) ضمن أسماء مخصّصة. يمكنك تفعيل كل مجموعة أو إيقافها بشكل مستقل:
 
 ```
 {
@@ -446,71 +446,71 @@ Plik `hooks.json` grupuje definicje zdarzeń (`pre_tool_execution` lub `post_too
 }
 ```
 
-### Składnia i reguły dopasowywania
+### بنية المطابقة وقواعدها
 
-Każda grupa reguł w `hooks.json` określa, kiedy i jak wywoływane są moduły obsługi, za pomocą właściwości `matcher` i `hooks`:
+تحدّد كل مجموعة قواعد في `hooks.json` وقت وكيفية تشغيل المعالجات باستخدام السمتَين `matcher` و`hooks`:
 
-| Pole | Typ | Opis |
+| الحقل | النوع | الوصف |
 | --- | --- | --- |
-| `enabled` | `boolean` | Opcjonalnie: Ustaw wartość `false`, aby wyłączyć grupę (domyślnie `true`). |
-| `matcher` | `string` | Wyrażenie regularne pasujące do nazw narzędzi w kontenerze. |
-| `hooks` | `array` | Uporządkowana lista definicji modułów obsługi (`command` lub `http`). Moduły obsługi są uruchamiane sekwencyjnie w kolejności deklaracji. |
+| `enabled` | `boolean` | اختيارية: اضبط القيمة على `false` لإيقاف المجموعة (`true` تلقائيًا). |
+| `matcher` | `string` | مطابقة أنماط التعبيرات العادية لأسماء الأدوات المستهدَفة داخل الحاوية |
+| `hooks` | `array` | قائمة مرتّبة بتعريفات المعالجات (`command` أو `http`). يتم تشغيل المعالجات بالتسلسل حسب ترتيب التعريف. |
 
-#### Jak działa ocena wyrażeń regularnych
+#### طريقة عمل تقييم التعبيرات العادية
 
-Gdy agent wywołuje narzędzie w piaskownicy, środowisko wykonawcze porównuje nazwę kontenera narzędzia z wzorcem `matcher` przy użyciu standardowych wyrażeń regularnych RE2. Jeśli wyrażenie regularne pasuje do nazwy narzędzia, wszystkie moduły obsługi w tablicy `hooks` są wykonywane po kolei. Jeśli do tego samego narzędzia pasuje kilka grup reguł, uruchamiane są wszystkie odpowiednie tablice obsługi.
+عندما يستدعي الوكيل أداة داخل وضع الحماية، يقيّم وقت التشغيل اسم حاوية الأداة مقارنةً بنمط `matcher` باستخدام التعبيرات العادية RE2 القياسية. إذا كانت العبارة العادية تطابق اسم الأداة، سيتم تنفيذ جميع المعالِجات في مصفوفة `hooks` بالترتيب. إذا تطابقت عدة مجموعات قواعد مع الأداة نفسها، سيتم تشغيل جميع مصفوفات المعالجات المتطابقة.
 
-Możesz kierować reklamy na dowolną nazwę wbudowanego narzędzia kontenera: wykonywanie kodu (`code_execution`) lub operacje na systemie plików (`view_file`, `write_to_file`, `replace_file_content`, `list_dir` i `delete_file`).
+يمكنك استهداف أي اسم أداة حاوية مضمّنة: تطبيق الرموز البرمجية (`code_execution`) أو عمليات نظام الملفات (`view_file` و`write_to_file` و`replace_file_content` و`list_dir` و`delete_file`).
 
-#### Typowe wyrażenia dopasowujące
+#### عبارات المطابقة الشائعة
 
-- `"code_execution"`: dokładne dopasowanie ciągu znaków w przypadku poleceń powłoki i wykonywania skryptów.
-- `"write_to_file"`: Dokładne dopasowanie do tworzenia plików w systemie plików i zapisywania na dysku.
-- `"view_file|write_to_file"`: Rozdzielanie pionową kreską dopasowuje kilka konkretnych nazw narzędzi w jednej regule.
-- `".*_file"`: wyrażenie regularne z wieloznacznym dopasowaniem do dowolnego narzędzia kończącego się na `_file` (np. `view_file`, `write_to_file` lub `delete_file`). Obejmuje to tylko część zestawu narzędzi systemu plików. Narzędzia `replace_file_content` i `list_dir` nie kończą się na `_file`, więc w razie potrzeby musisz je podać wprost. Standardowe wyrażenia regularne RE2 wymagają znaku `.*`. Proste wzorce powłoki, takie jak `*_file`, mają nieprawidłową składnię wyrażenia regularnego i nie będą pasować.
-- `".*"` lub `"*"` lub `""`: wzorzec ogólny, który przechwytuje każde wywołanie narzędzia w kontenerze.
+- `"code_execution"`: تطابق السلسلة التام لأوامر shell وعمليات تنفيذ النصوص البرمجية
+- ‫`"write_to_file"`: مطابقة تامة لإنشاء ملفات نظام الملفات وعمليات الكتابة على القرص
+- `"view_file|write_to_file"`: يتيح الفصل باستخدام علامة الأنابيب مطابقة أسماء أدوات محدّدة متعددة في قاعدة واحدة.
+- ‫`".*_file"`: تعبير عادي يتضمّن حرف بدل يطابق أي أداة تنتهي بـ `_file` (مثل `view_file` أو `write_to_file` أو `delete_file`). يشمل ذلك جزءًا فقط من مجموعة أدوات نظام الملفات، ولا تنتهي `replace_file_content` و`list_dir` بـ `_file`، لذا يجب تسميتهما بشكل صريح عند الحاجة إليهما. تتطلّب التعبيرات العادية القياسية RE2 استخدام `.*`، بينما تكون صيغ shell globs البسيطة مثل `*_file` غير صالحة كصيغة تعبير عادي ولن تتم مطابقتها.
+- ‫`".*"` أو `"*"` أو `""`: نمط شامل يعترض كل طلب أداة داخل الحاوية.
 
-## Typy obsługi
+## أنواع المعالجات
 
-### Haczyki Command
+### خطافات الأوامر
 
-Haczyki poleceń wykonują polecenie powłoki lub skrypt w piaskownicy. Skrypt otrzymuje kod JSON zdarzenia w `stdin` i zwraca kod JSON decyzji w `stdout`.
+تنفِّذ خطافات الأوامر أمرًا أو نصًا برمجيًا في Shell داخل البيئة التجريبية. يتلقّى النص البرمجي ملف JSON الخاص بالحدث على `stdin` ويعرض ملف JSON الخاص بالقرار على `stdout`.
 
-| Pole | Typ | Opis |
+| الحقل | النوع | الوصف |
 | --- | --- | --- |
-| `type` | `string` | Musi to być `"command"`. |
-| `command` | `string` | Wiersz poleceń do uruchomienia w piaskownicy (np. `python3 /.agents/hooks-scripts/gate.py`). |
-| `timeout` | `integer` | Czas oczekiwania w sekundach. Domyślnie: `30`. |
+| `type` | `string` | يجب أن تكون `"command"`. |
+| `command` | `string` | سطر الأوامر الذي سيتم تنفيذه داخل وضع الحماية (على سبيل المثال، `python3 /.agents/hooks-scripts/gate.py`). |
+| `timeout` | `integer` | المهلة بالثواني القيمة التلقائية: `30` |
 
-### Haczyki HTTP
+### خطافات HTTP
 
-Haczyki HTTP wysyłają zdarzenie JSON jako żądanie POST na zewnętrzny adres URL HTTPS bezpośrednio z sieci piaskownicy. Serwer docelowy zwraca swoją decyzję w treści odpowiedzi HTTP w tym samym formacie JSON (`{"decision": "allow"}` lub `{"decision": "deny", "reason": "..."}`).
+ترسل خطّافات HTTP ملف JSON الخاص بالحدث كطلب POST إلى عنوان URL خارجي يستخدم HTTPS مباشرةً من داخل شبكة وضع الحماية. يعرض الخادم المستهدف قراره في نص استجابة HTTP باستخدام تنسيق JSON نفسه تمامًا (`{"decision": "allow"}` أو `{"decision": "deny", "reason": "..."}`).
 
-| Pole | Typ | Opis |
+| الحقل | النوع | الوصف |
 | --- | --- | --- |
-| `type` | `string` | Musi to być `"http"`. |
-| `url` | `string` | Zewnętrzny punkt końcowy HTTPS, do którego ma być wysyłany ładunek zdarzenia. |
-| `headers` | `object` | Opcjonalne pary klucz-wartość dla niestandardowych nagłówków nie zawierających informacji poufnych (np. `{"X-Event-Source": "agent-sandbox"}`). Do uwierzytelniania używaj [danych logowania](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=pl) na liście dozwolonych sieci. |
-| `timeout` | `integer` | Czas oczekiwania w sekundach. Domyślnie: `30`. |
+| `type` | `string` | يجب أن تكون `"http"`. |
+| `url` | `string` | نقطة نهاية HTTPS خارجية لإرسال حمولة الحدث إليها باستخدام POST. |
+| `headers` | `object` | أزواج المفتاح/القيمة الاختيارية للعناوين المخصّصة غير الحسّاسة (مثل `{"X-Event-Source": "agent-sandbox"}`). للمصادقة، استخدِم [بيانات اعتماد](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ar) في قائمة السماح بالشبكة بدلاً من ذلك. |
+| `timeout` | `integer` | المهلة بالثواني القيمة التلقائية: `30` |
 
-#### Serwer proxy ruchu wychodzącego i transformacja tokena
+#### الخادم الوكيل للخروج وتحويل الرموز المميزة
 
-Haczyki HTTP są wykonywane bezpośrednio w przestrzeni nazw sieci piaskownicy, więc żądania wychodzące przechodzą przez przezroczysty serwer proxy ruchu wychodzącego. Ta architektura zapewnia 2 kluczowe zalety w zakresie bezpieczeństwa:
+بما أنّ عمليات ربط HTTP يتم تنفيذها مباشرةً من داخل مساحة اسم شبكة وضع الحماية، تمر الطلبات الصادرة عبر الخادم الوكيل الشفاف للخروج. تمنحك هذه البنية ميزتَين مهمتَين للأمان:
 
-- **Dodawanie sieci do białej listy:** punkty końcowe docelowe muszą być wyraźnie dozwolone w `network.allowlist` Twojego środowiska. Ruch zwrotny (`127.0.0.1` lub `localhost`) jest blokowany przez serwer proxy. Zawsze kieruj ruch do zewnętrznych punktów końcowych na liście dozwolonych.
-- **Wstrzykiwanie danych logowania:** nie musisz przechowywać kluczy interfejsu API ani tajnych tokenów dostępu w `.agents/hooks.json` ani montować ich w kontenerze. Zapisz obiekt tajny jako [dane logowania](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=pl) i odwołuj się do niego za pomocą identyfikatora z `network.allowlist` środowiska. Serwer proxy wychodzący automatycznie przechwytuje wychodzący ruch HTTP hook i wstrzykuje prawdziwy nagłówek uwierzytelniania przed opuszczeniem piaskownicy. Nagłówki zestawu reguł wbudowanych `transform` są ustawiane w ten sam sposób, a dane logowania są używane, gdy chcesz ponownie użyć obiektu tajnego w projekcie i zmienić go w jednym miejscu. Patrz [konfiguracja sieci](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#network-configuration).
+- **إضافة الشبكة إلى القائمة المسموح بها:** يجب السماح صراحةً بنقاط النهاية المستهدَفة في `network.allowlist` ببيئتك. يحظر الخادم الوكيل حركة بيانات العودة الحلقية (`127.0.0.1` أو `localhost`)، لذا استهدف دائمًا نقاط النهاية الخارجية المُدرَجة في القائمة المسموح بها.
+- **إدخال بيانات الاعتماد:** ليس عليك تخزين مفاتيح واجهة برمجة التطبيقات أو رموز الدخول السرية لحاملها داخل `.agents/hooks.json` أو ربطها بالحاوية. يمكنك تخزين كلمة المرور مرة واحدة [كبيانات اعتماد](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ar) والإشارة إليها باستخدام المعرّف من `network.allowlist` في بيئتك. يعترض خادم وكيل الخروج تلقائيًا على زيارات HTTP الواردة إلى الخطاف ويُدرج عنوان مصادقة حقيقيًا على الشبكة قبل مغادرة البيئة التجريبية. تضبط قواعد `transform` المضمّنة العناوين بالطريقة نفسها على الشبكة، وبيانات الاعتماد هي البيانات التي يجب استخدامها عندما تريد إعادة استخدام كلمة المرور في المشروع وتغييرها في مكان واحد. اطّلِع على [إعدادات الشبكة](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar#network-configuration).
 
-## Jak środowisko wykonawcze obsługuje decyzje i błędy
+## كيفية تعامل وقت التشغيل مع القرارات والأخطاء
 
-- **Synchroniczne oczekiwanie:** agent wstrzymuje działanie i czeka na zakończenie działania Twoich funkcji, zanim przejdzie dalej.
-- **Blokowanie wykonania narzędzia:** jeśli funkcja pre-tool hook zwróci wartość `{"decision": "deny", "reason": "<your reason>"}`, środowisko wykonawcze natychmiast anuluje wywołanie narzędzia. Model widzi powód odrzucenia w historii rozmowy i dostosowuje się, wybierając bezpieczną alternatywę lub wyjaśniając użytkownikowi blokadę.
-- **Obsługa awarii skryptu, błędów HTTP i przekroczenia limitu czasu:** jeśli skrypt polecenia ulegnie awarii (stan wyjścia różny od zera), wywołanie HTTP zwróci kod stanu inny niż 2xx (np. błąd serwera 4xx lub 5xx) albo operacja przekroczy limit czasu lub zwróci nierozpoznany format JSON, środowisko wykonawcze potraktuje to jako zatwierdzenie (`allow`). Wykonanie narzędzia będzie kontynuowane normalnie, więc uszkodzony skrypt lub nieosiągalny serwer telemetrii nigdy nie spowoduje zakleszczenia aplikacji.
+- **الانتظار المتزامن:** يتوقّف الوكيل مؤقتًا وينتظر انتهاء عمليات الربط قبل المتابعة.
+- **حظر تنفيذ الأداة:** إذا عرضت الدالة الخطافية السابقة للأداة القيمة `{"decision": "deny", "reason": "<your reason>"}`، تلغي بيئة التشغيل طلب استخدام الأداة على الفور. يطلع النموذج على سبب رفضك في سجلّ المحادثات ويتكيّف من خلال اختيار بديل آمن أو شرح سبب الحظر للمستخدم.
+- **التعامل مع أعطال البرامج النصية وأخطاء HTTP وانتهاء المهلة:** في حال تعذُّر تنفيذ برنامج نصي للأوامر (حالة الخروج غير صفرية)، أو إذا عرض خطاف HTTP رمز حالة غير 2xx (مثل خطأ في الخادم 4xx أو 5xx)، أو إذا انتهت مهلة عملية أو عرضت JSON غير معروف، سيتعامل وقت التشغيل معها على أنّها موافقة (`allow`). يستمر تنفيذ الأداة بشكلٍ طبيعي، لذا لن يؤدي البرنامج النصي المعطّل أو خادم القياس عن بُعد الذي لا يمكن الوصول إليه إلى توقّف تطبيقك عن العمل.
 
-## Częste przypadki użycia
+## حالات الاستخدام الشائعة
 
-### Wielokrotne przywracanie danych w celu zapewnienia prywatności i zgodności z przepisami
+### استرداد البيانات المتعدد المراحل لضمان خصوصية البيانات والامتثال للسياسات
 
-Gdy funkcja blokuje dostęp do zasobów o ograniczonym dostępie, takich jak katalogi zawierające informacje umożliwiające identyfikację osoby lub poufne dokumenty finansowe, możesz przekazać wartość `previous_interaction_id` w następnym wywołaniu, aby kontynuować turę w tym samym środowisku. Agent odczytuje wyjaśnienie odmowy i automatycznie przywraca działanie, wysyłając zapytanie do zatwierdzonych tabel publicznych.
+عندما يمنع خطاف الوصول إلى الموارد المحظورة، مثل الأدلة التي تحتوي على معلومات تكشف الهوية الشخصية أو السجلات المالية السرية، يمكنك تمرير `previous_interaction_id` في المكالمة التالية لمواصلة عملية التسليم في البيئة نفسها. يقرأ الوكيل شرح الرفض ويستردّ البيانات تلقائيًا من خلال طلب البحث عن الجداول العامة الموافق عليها بدلاً من ذلك.
 
 ### Python
 
@@ -675,7 +675,7 @@ const int2 = await client.interactions.create({
 console.log(int2.output_text);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -932,12 +932,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   }'
 ```
 
-### Logowanie kontrolne i telemetria zewnętrzne
+### تسجيل أحداث التدقيق والقياس عن بُعد خارجيًا
 
-Wysyłanie zdarzeń kontrolnych w czasie rzeczywistym z piaskownicy na zewnętrzny serwer monitorowania za każdym razem, gdy pliki są odczytywane lub modyfikowane.
+إرسال أحداث التدقيق في الوقت الفعلي من داخل وضع الحماية إلى خادم مراقبة خارجي كلّما تمّت قراءة الملفات أو تعديلها
 
-- **Dopasowywanie wielu narzędzi:** ponieważ dopasowywanie odbywa się za pomocą standardowych wyrażeń regularnych, możesz połączyć wiele narzędzi w jednej regule, używając pionowych kresek (`view_file|write_to_file|replace_file_content`) lub symboli wieloznacznych (`.*_file`).
-- **Nie umieszczaj informacji poufnych w konfiguracji:** przechowuj token uwierzytelniający jako [dane logowania](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=pl) i odwołuj się do niego za pomocą identyfikatora z [konfiguracji sieci](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#network-configuration) środowiska (`network.allowlist.credential`). Serwer proxy ruchu wychodzącego wstrzykuje rzeczywisty token dostępu do żądań wychodzących. W tym przykładzie nagłówek jest ustawiany w wierszu za pomocą `transform`, który jest chroniony przez ten sam serwer proxy i pasuje, gdy token należy do tej konfiguracji.
+- **مطابقة أدوات متعددة:** بما أنّ أدوات المطابقة تستخدم التعبيرات العادية القياسية، يمكنك دمج أدوات متعددة في قاعدة واحدة باستخدام علامات الأنابيب (`view_file|write_to_file|replace_file_content`) أو أحرف البدل (`.*_file`).
+- **عدم تضمين الأسرار في الإعدادات:** خزِّن رمز المصادقة المميز [كبيانات اعتماد](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ar) وأشِر إليه باستخدام رقم التعريف من [إعدادات الشبكة](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar#network-configuration) في بيئتك (`network.allowlist.credential`). يضيف وكيل الخروج رمز المصادقة المميز الفعلي إلى الطلبات الصادرة. يضبط هذا المثال العنوان مضمّنًا مع `transform` بدلاً من ذلك، وهو محمي بالخادم الوكيل نفسه ويتناسب عندما تكون الرمز المميز تابعًا لعملية الضبط هذه.
 
 ### Python
 
@@ -1046,7 +1046,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1234,25 +1234,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Ograniczenia
+## القيود
 
-- **Zakres narzędzia w piaskownicy:** haki przechwytują wbudowane narzędzia w piaskownicy: wykonywanie kodu (`code_execution`) i operacje na systemie plików (`view_file`, `write_to_file`, `replace_file_content`, `list_dir` i `delete_file`). Nie są one wywoływane w przypadku wywoływania funkcji niestandardowych (`function`) ani zewnętrznych narzędzi Model Context Protocol (`mcp_server`) obsługiwanych poza kontenerem.
-- **Listy dozwolonych sieci:** haki HTTP działają w sieci kontenera. Musisz wyraźnie zezwolić na docelowe adresy URL w `network.allowlist` środowiska. Adresy typu loopback (`localhost`, `127.0.0.1`) są blokowane przez serwer proxy.
-- **Automatyczne zatwierdzanie w przypadku błędów:** jeśli skrypt hooka ulegnie awarii (niezerowy stan zakończenia), przekroczy limit czasu lub zakończy się niepowodzeniem, środowisko wykonawcze zarejestruje błąd i umożliwi kontynuowanie wywołania narzędzia. Dzięki temu uszkodzone skrypty narzędzia do sprawdzania kodu lub zawieszone procesy nigdy nie spowodują zakleszczenia aplikacji.
-- **Ochrona konfiguracji piaskownicy:** ponieważ wywołania zwrotne są wykonywane w piaskownicy kontenera, agenci z narzędziami do zapisu w systemie plików lub uprawnieniami do wykonywania kodu powłoki mogą modyfikować lokalne `.agents/hooks.json` lub skrypty w obszarach roboczych z możliwością zapisu. Używaj punktów zaczepienia kontenera jako automatycznych wskazówek dotyczących zasad i operacyjnych zabezpieczeń. Jeśli wymagana jest ścisła odporność na manipulacje w przypadku wykonywania niezaufanych modeli, zamontuj źródła konfiguracji z repozytoriów tylko do odczytu.
+- **نطاق أداة وضع الحماية:** تعترض الخطافات الأدوات المضمّنة داخل وضع الحماية: تطبيق الرموز البرمجية (`code_execution`) وعمليات نظام الملفات (`view_file` و`write_to_file` و`replace_file_content` و`list_dir` و`delete_file`). ولا يتم تشغيلها عند استدعاء الدوال المخصّصة (`function`) أو أدوات بروتوكول سياق النموذج (`mcp_server`) الخارجية التي تتم معالجتها خارج الحاوية.
+- **قوائم السماح بالشبكة:** يتم تنفيذ خطافات HTTP داخل شبكة الحاوية. يجب السماح بعناوين URL المستهدَفة بشكل صريح في `network.allowlist` لبيئتك. يحظر الخادم الوكيل عناوين الاسترجاع (`localhost` و`127.0.0.1`).
+- **الموافقة التلقائية عند حدوث أخطاء:** إذا تعذّر تنفيذ نص برمجي للربط (حالة الخروج غير صفرية) أو انتهت مهلته أو تعذّر تنفيذه، يسجّل وقت التشغيل الخطأ ويسمح بمتابعة استدعاء الأداة. يضمن ذلك ألا تؤدي النصوص البرمجية المعطّلة أو العمليات المعلقة إلى توقّف تطبيقاتك عن العمل.
+- **حماية إعدادات وضع الحماية:** بما أنّ عمليات الربط يتم تنفيذها داخل وضع الحماية للحاوية، يمكن للوكلاء الذين لديهم أدوات كتابة في نظام الملفات أو أذونات تطبيق الرموز البرمجية لـ shell تعديل `.agents/hooks.json` أو النصوص البرمجية المحلية داخل مساحات العمل القابلة للكتابة. استخدِم خطافات الحاوية كإرشادات مبرمَجة للسياسات ووسائل حماية تشغيلية. إذا كانت هناك حاجة إلى مقاومة صارمة للتلاعب في عمليات تنفيذ النماذج غير الموثوق بها، يمكنك تحميل مصادر الإعدادات من مستودعات للقراءة فقط.
 
-## Co dalej?
+## الخطوات التالية
 
-- Dowiedz się, jak skonfigurować trwałe [zdalne piaskownice i środowiska](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl).
-- Poznaj możliwości i wbudowane narzędzia [agenta Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pl).
-- Więcej informacji o sesjach wieloetapowych i przesyłaniu strumieniowym znajdziesz w [omówieniu interfejsu Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl).
+- تعرَّف على كيفية ضبط [بيئات ومساحات معزولة عن بُعد مستمرة](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar).
+- استكشاف إمكانات وأدوات [وكيل Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar) المضمّنة
+- راجِع [نظرة عامة على Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) للاطّلاع على جلسات المحادثة المترابطة والبث.
 
-Prześlij opinię
+إرسال ملاحظات
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ostatnia aktualizacja: 2026-10-07 UTC.
+تاريخ التعديل الأخير: 2026-10-07 (حسب التوقيت العالمي المتفَّق عليه)
 
-Chcesz przekazać coś jeszcze?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-10-07 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-10-07 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

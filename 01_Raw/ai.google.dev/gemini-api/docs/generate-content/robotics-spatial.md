@@ -1,32 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=fr
-fetched_at: 2026-10-26T06:01:22.412920+00:00
-title: "Raisonnement spatial \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=ja
+fetched_at: 2026-11-02T07:18:08.626617+00:00
+title: "\u7a7a\u9593\u63a8\u8ad6 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=fr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
 
-Envoyer des commentaires
+フィードバックを送信
 
-# Raisonnement spatial
+# 空間推論
 
-Les modèles Gemini Robotics ER peuvent pointer vers des objets, les suivre dans une vidéo, les détecter avec des cadres de délimitation et générer des trajectoires de mouvement. Tous les exemples de cette page utilisent des prompts en langage naturel avec `generateContent`.
+Gemini Robotics ER モデルは、オブジェクトを指し示し、動画内で追跡し、境界ボックスで検出して、移動軌跡を生成できます。このページのすべての例では、`generateContent` を使用した自然言語プロンプトを使用しています。
 
-Pour obtenir le code exécutable complet, consultez le
-[livre de recettes sur la robotique](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+実行可能な完全なコードについては、[ロボティクス クックブック](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)をご覧ください。
 
-## Pointer vers des objets
+## オブジェクトを指す
 
-L'exemple suivant recherche des objets spécifiques dans une image et renvoie leurs coordonnées `[y, x]` normalisées :
+次の例では、画像内の特定のオブジェクトを検出し、正規化された `[y, x]` 座標を返します。
 
 ### Python
 
@@ -99,7 +98,7 @@ curl -X POST \
   }'
 ```
 
-La sortie sera un tableau JSON contenant des objets, chacun avec un `point` (coordonnées `[y, x]` normalisées) et un `label` identifiant l'objet.
+出力は、オブジェクトを含む JSON 配列になります。各オブジェクトには、オブジェクトを識別する `point`（正規化された `[y, x]` 座標）と `label` が含まれます。
 
 ### JSON
 
@@ -118,13 +117,13 @@ La sortie sera un tableau JSON contenant des objets, chacun avec un `point` (coo
 ]
 ```
 
-L'image suivante montre comment ces points peuvent être affichés :
+次の図は、これらのポイントを表示する方法の例です。
 
-![Exemple affichant les points des objets dans une image](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=fr)
+![画像内のオブジェクトのポイントを表示する例](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=ja)
 
-## Suivre des objets dans une vidéo
+## 動画内のオブジェクトのトラッキング
 
-Gemini Robotics ER 2 peut également analyser des images vidéo pour suivre des objets au fil du temps. Pour obtenir la liste des formats vidéo compatibles, consultez [Entrées vidéo](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fr#supported-formats).
+Gemini Robotics ER 2 は、動画フレームを分析して、オブジェクトを時間経過とともに追跡することもできます。サポートされている動画形式の一覧については、[動画入力](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja#supported-formats)をご覧ください。
 
 ### Python
 
@@ -163,9 +162,9 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-## Détection d'objets et cadres de délimitation
+## オブジェクト検出と境界ボックス
 
-En plus des points, vous pouvez demander au modèle de renvoyer des cadres de délimitation 2D, qui fournissent plus de détails spatiaux pour les objets détectés.
+ポイントに加えて、モデルに 2D 境界ボックスを返すようにプロンプトを設定することもできます。これにより、検出されたオブジェクトの空間的な詳細情報が提供されます。
 
 ### Python
 
@@ -203,11 +202,11 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-## Trajectoires
+## 軌跡
 
-Gemini Robotics ER 2 peut générer des séquences de points qui définissent une trajectoire, ce qui est utile pour guider le mouvement d'un robot.
+Gemini Robotics ER 2 は、軌跡を定義する一連の点を生成できます。これは、ロボットの動きをガイドするのに役立ちます。
 
-Cet exemple demande une trajectoire pour déplacer un stylo rouge vers un organiseur, y compris une estimation des points de passage intermédiaires. Le code a été réduit pour n'afficher que le prompt.
+この例では、赤いペンをオーガナイザーに移動する軌跡をリクエストしています。中間経由地の推定値も含まれています。プロンプトのみを表示するようにコードを削減しました。
 
 ### Python
 
@@ -220,9 +219,9 @@ prompt = """
         """
 ```
 
-## Faire de la place pour un ordinateur portable
+## ノートパソコンを置くスペースを確保する
 
-Cet exemple montre comment Gemini Robotics ER peut raisonner sur un espace. Le prompt demande au modèle d'identifier l'objet à déplacer pour créer de l'espace pour un autre élément.
+この例では、Gemini Robotics ER が空間について推論する方法を示します。プロンプトは、別のアイテムのためのスペースを作るために移動する必要があるオブジェクトを特定するようにモデルに指示します。
 
 ### Python
 
@@ -258,7 +257,7 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-La réponse contient une coordonnée 2D de l'objet qui répond à la question de l'utilisateur, en l'occurrence l'objet qui doit être déplacé pour faire de la place pour un ordinateur portable.
+レスポンスには、ユーザーの質問に答えるオブジェクトの 2D 座標が含まれています。この場合、ノートパソコンを置くために移動する必要があるオブジェクトです。
 
 ```
 [
@@ -266,11 +265,11 @@ La réponse contient une coordonnée 2D de l'objet qui répond à la question de
 ]
 ```
 
-![Exemple montrant quel objet doit être déplacé pour un autre objet](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=fr)
+![別のオブジェクトのために移動する必要があるオブジェクトを示す例](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=ja)
 
-## Préparer un déjeuner
+## お弁当の準備
 
-Le modèle peut également fournir des instructions pour les tâches en plusieurs étapes et pointer vers les objets pertinents pour chaque étape. Cet exemple montre comment le modèle planifie une série d'étapes pour préparer un sac de déjeuner.
+モデルは、複数ステップのタスクの手順を提供し、各ステップに関連するオブジェクトを指すこともできます。この例では、モデルがランチバッグを詰める一連の手順を計画する方法を示します。
 
 ### Python
 
@@ -307,13 +306,13 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-La réponse à ce prompt est un ensemble d'instructions détaillées sur la façon de préparer un sac de déjeuner à partir de l'image d'entrée.
+このプロンプトのレスポンスは、画像入力からランチバッグを詰める方法に関する手順のセットです。
 
-**Image d'entrée**
+**入力画像**
 
-![Image d'une boîte à lunch et des éléments à y mettre](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=fr)
+![お弁当箱と中に入れるものの画像](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=ja)
 
-**Sortie du modèle**
+**モデル出力**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -336,19 +335,19 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-## Étape suivante
+## 次のステップ
 
-- [Capacités agentiques](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=fr) : exécution de code, lecture d'instruments, annotation d'images.
-- [Orchestration des tâches](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=fr) : tâches à long terme avec des API de robot personnalisées.
-- [Robotique avec streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=fr) : streaming bidirectionnel en temps réel (Gemini Robotics ER 2 uniquement).
-- [Compréhension vidéo](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=fr) : recherche de moments et classification de la progression (Gemini Robotics ER 2 uniquement).
+- [エージェント機能](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=ja) - コード実行、計測器の読み取り、画像アノテーション。
+- [タスク オーケストレーション](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ja) - カスタム ロボット API を使用した長期的なタスク。
+- [ストリーミングを使用したロボティクス](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ja) - リアルタイム双方向ストリーミング（Gemini Robotics ER 2 のみ）。
+- [動画の理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ja) - 瞬間検出と進捗状況の分類（Gemini Robotics ER 2 のみ）。
 
-Envoyer des commentaires
+フィードバックを送信
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Dernière mise à jour le 2026/09/09 (UTC).
+最終更新日 2026-09-09 UTC。
 
-Voulez-vous nous donner plus d'informations ?
+ご意見をお聞かせください
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/09 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-09 UTC。"],[],[]]

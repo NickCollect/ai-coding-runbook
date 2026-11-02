@@ -1,107 +1,114 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/safety-settings?hl=vi
-fetched_at: 2026-10-26T05:58:52.532706+00:00
-title: "C\u00e0i \u0111\u1eb7t an to\u00e0n \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/safety-settings?hl=de
+fetched_at: 2026-11-02T07:20:44.470609+00:00
+title: "Sicherheits\u00adeinstellungen \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
+Gemini 4 Argon ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-# Cài đặt an toàn
+# Sicherheits­einstellungen
 
-Gemini API cung cấp các chế độ cài đặt an toàn mà bạn có thể điều chỉnh trong giai đoạn tạo mẫu để xác định xem ứng dụng của bạn có cần cấu hình an toàn hạn chế hơn hay ít hạn chế hơn hay không. Bạn có thể điều chỉnh các chế độ cài đặt này theo 4 danh mục bộ lọc để hạn chế hoặc cho phép một số loại nội dung nhất định.
+Die Gemini API bietet Sicherheitseinstellungen, die Sie während der Prototyping-Phase anpassen können, um zu ermitteln, ob Ihre Anwendung eine mehr oder weniger restriktive Sicherheitskonfiguration erfordert. Sie können diese Einstellungen in vier Filterkategorien anpassen, um bestimmte Arten von Inhalten zuzulassen oder zu beschränken.
 
-Hướng dẫn này trình bày cách Gemini API xử lý chế độ cài đặt an toàn và tính năng lọc, cũng như cách bạn có thể thay đổi chế độ cài đặt an toàn cho ứng dụng của mình.
+In diesem Leitfaden wird beschrieben, wie die Gemini API Sicherheitseinstellungen und Filterung handhabt und wie Sie die Sicherheitseinstellungen für Ihre Anwendung ändern können.
 
-## Bộ lọc an toàn
+## Sicherheitsfilter
 
-Các bộ lọc an toàn có thể điều chỉnh của Gemini API bao gồm những danh mục sau:
+Die anpassbaren Sicherheitsfilter der Gemini API decken die folgenden Kategorien ab:
 
-| Danh mục | Mô tả |
+| Kategorie | Beschreibung |
 | --- | --- |
-| Quấy rối | Bình luận tiêu cực hoặc gây hại nhắm đến danh tính và/hoặc các thuộc tính được bảo vệ. |
-| Lời nói hận thù | Nội dung thô lỗ, khiếm nhã hoặc tục tĩu. |
-| Nội dung khiêu dâm | Chứa nội dung đề cập đến hành vi tình dục hoặc nội dung dâm ô khác. |
-| Nguy hiểm | Cổ xuý, tạo điều kiện hoặc khuyến khích việc thực hiện hành động gây hại. |
+| Belästigung | Negative oder schädliche Kommentare, die sich auf die Identität und/oder geschützte Attribute beziehen. |
+| Hassrede | Unhöfliche, respektlose oder vulgäre Inhalte. |
+| Sexuell explizite Inhalte | Enthält Verweise auf sexuelle Handlungen oder andere vulgäre Inhalte. |
+| Gefährlich | Wirbt für schädliche Handlungen, erleichtert sie oder ermutigt dazu. |
 
-Các danh mục này được xác định trong [`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=vi). Bạn có thể sử dụng các bộ lọc này để điều chỉnh nội dung cho phù hợp với trường hợp sử dụng của mình. Ví dụ: nếu đang xây dựng lời thoại cho trò chơi điện tử, bạn có thể cho rằng việc cho phép nhiều nội dung được xếp hạng là *Nguy hiểm* là chấp nhận được do tính chất của trò chơi.
+Diese Kategorien sind in [`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=de) definiert. Mit diesen Filtern können Sie anpassen, was für Ihren Anwendungsfall geeignet ist. Wenn Sie beispielsweise einen Videospiel-Dialog erstellen, kann es aufgrund der Art des Spiels akzeptabel sein, mehr Inhalte zuzulassen, die als *Gefährlich* eingestuft werden.
 
-Ngoài các bộ lọc an toàn có thể điều chỉnh, Gemini API còn có các biện pháp bảo vệ tích hợp sẵn để chống lại các tác hại cốt lõi, chẳng hạn như nội dung gây nguy hiểm cho sự an toàn của trẻ em.
-Những loại nội dung gây hại này luôn bị chặn và không thể điều chỉnh.
+Zusätzlich zu den anpassbaren Sicherheitsfiltern bietet die Gemini API integrierte Schutzmaßnahmen gegen grundlegende Schäden, z. B. Inhalte, die die Sicherheit von Kindern gefährden.
+Diese Arten von Schäden werden immer blockiert und können nicht angepasst werden.
 
-### Mức độ lọc nội dung an toàn
+### Filterstufe für die Inhaltsicherheit
 
-Gemini API phân loại mức độ xác suất của nội dung không an toàn là `HIGH`, `MEDIUM`, `LOW` hoặc `NEGLIGIBLE`.
+Die Gemini API kategorisiert die Wahrscheinlichkeit, dass Inhalte unsicher sind, als `HIGH`, `MEDIUM`, `LOW` oder `NEGLIGIBLE`.
 
-Gemini API chặn nội dung dựa trên xác suất nội dung đó không an toàn chứ không phải mức độ nghiêm trọng. Bạn cần cân nhắc điều này vì một số nội dung có thể có xác suất thấp là không an toàn, mặc dù mức độ nghiêm trọng của tác hại vẫn có thể cao. Ví dụ: so sánh các câu:
+Die Gemini API blockiert Inhalte basierend auf der Wahrscheinlichkeit, dass Inhalte unsicher sind, nicht auf dem Schweregrad der Probleme. Dies ist wichtig, da einige Inhalte mit geringer Wahrscheinlichkeit unsicher sind, obwohl der Schweregrad des Schadens hoch sein kann. Vergleichen Sie beispielsweise die folgenden Sätze:
 
-1. Con robot đó đã đấm tôi.
-2. Con rô-bốt đó đã chém tôi.
+1. Der Roboter hat mich geboxt.
+2. Der Roboter hat mich in Stücke geschnitten.
 
-Câu đầu tiên có thể có xác suất không an toàn cao hơn, nhưng bạn có thể coi câu thứ hai có mức độ nghiêm trọng cao hơn về mặt bạo lực.
-Do đó, bạn cần phải kiểm thử kỹ lưỡng và cân nhắc mức độ chặn phù hợp để hỗ trợ các trường hợp sử dụng chính, đồng thời giảm thiểu tác hại cho người dùng cuối.
+Der erste Satz kann eine höhere Wahrscheinlichkeit für unsichere Ergebnisse verursachen, aber Sie können Satz 2 in Bezug auf Gewalt einen höheren Schweregrad zuweisen.
+Daher ist es wichtig, dass Sie Tests sorgfältig durchführen und überlegen, welches Maß an Sicherheitsblockaden zur Unterstützung Ihrer wichtigsten Anwendungsfälle erforderlich ist, während gleichzeitig der Schaden für Endnutzer minimiert wird.
 
-### Lọc nội dung an toàn theo yêu cầu
+### Sicherheitsfilterung pro Anfrage
 
-Bạn có thể điều chỉnh chế độ cài đặt an toàn cho từng yêu cầu mà bạn gửi đến API. Khi bạn gửi yêu cầu, nội dung sẽ được phân tích và chỉ định một mức xếp hạng an toàn. Điểm xếp hạng an toàn bao gồm danh mục và xác suất phân loại tác hại. Ví dụ: nếu nội dung bị chặn do danh mục quấy rối có xác suất cao, thì mức độ an toàn được trả về sẽ có danh mục bằng `HARASSMENT` và xác suất gây hại được đặt thành `HIGH`.
+Sie können die Sicherheitseinstellungen für jede Anfrage an die API anpassen. Wenn Sie eine Anfrage senden, wird der Inhalt analysiert und er erhält eine Sicherheitsbewertung. Die Sicherheitsbewertung umfasst sowohl die jeweilige Kategorie als auch die Wahrscheinlichkeit einer Klassifizierung als schädlich. Wenn der Inhalt beispielsweise blockiert wurde, weil die Kategorie der Belästigung mit hoher Wahrscheinlichkeit unsicher ist, hat die zurückgegebene Sicherheitsbewertung die Kategorie `HARASSMENT` und die Wahrscheinlichkeit für Schäden ist auf `HIGH` festgelegt.
 
-Do tính an toàn vốn có của mô hình, các bộ lọc bổ sung sẽ **Tắt** theo mặc định.
-Nếu chọn bật các bộ lọc này, bạn có thể định cấu hình hệ thống để chặn nội dung dựa trên xác suất nội dung đó không an toàn. Hành vi mặc định của mô hình đáp ứng hầu hết các trường hợp sử dụng, vì vậy, bạn chỉ nên điều chỉnh các chế độ cài đặt này nếu ứng dụng của bạn yêu cầu tính nhất quán.
+Aufgrund der inhärenten Sicherheit des Modells sind zusätzliche Filter standardmäßig **deaktiviert**.
+Wenn Sie sie aktivieren, können Sie das System so konfigurieren, dass Inhalte basierend auf der Wahrscheinlichkeit, dass sie unsicher sind, blockiert werden. Das Standardverhalten des Modells deckt die meisten Anwendungsfälle ab. Sie sollten diese Einstellungen also nur anpassen, wenn dies durchgehend für Ihre Anwendung erforderlich ist.
 
-Bảng sau đây mô tả các chế độ chặn mà bạn có thể điều chỉnh cho từng danh mục. Ví dụ: nếu bạn đặt chế độ chặn thành **Chặn ít** cho danh mục **Lời nói hận thù**, thì mọi nội dung có khả năng cao là lời nói hận thù sẽ bị chặn. Tuy nhiên, bạn được phép sử dụng bất kỳ nội dung nào có xác suất thấp hơn.
+In der folgenden Tabelle werden die Blockierungseinstellungen beschrieben, die Sie für jede Kategorie anpassen können. Wenn Sie beispielsweise die Blockierungseinstellung für die Kategorie **Hassrede** auf **Wenige blockieren** setzen, werden alle Inhalte blockiert, die mit hoher Wahrscheinlichkeit Hassrede enthalten. Inhalte mit einer geringeren Wahrscheinlichkeit sind jedoch zulässig.
 
-| Ngưỡng (Google AI Studio) | Ngưỡng (API) | Mô tả |
+| Grenzwert (Google AI Studio) | Grenzwert (API) | Beschreibung |
 | --- | --- | --- |
-| Tắt | `OFF` | Tắt bộ lọc an toàn |
-| Không chặn thành phần nào | `BLOCK_NONE` | Luôn hiện bất kể xác suất có nội dung không an toàn |
-| Chặn một số | `BLOCK_ONLY_HIGH` | Chặn khi có khả năng cao là nội dung không an toàn |
-| Chặn một số | `BLOCK_MEDIUM_AND_ABOVE` | Chặn khi có xác suất trung bình hoặc cao là nội dung không an toàn |
-| Chặn hầu hết | `BLOCK_LOW_AND_ABOVE` | Chặn khi có xác suất thấp, trung bình hoặc cao về nội dung không an toàn |
-| Không áp dụng | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | Ngưỡng không được chỉ định, chặn bằng ngưỡng mặc định |
+| Aus | `OFF` | Sicherheitsfilter deaktivieren |
+| Keine blockieren | `BLOCK_NONE` | Immer anzeigen, unabhängig von der Wahrscheinlichkeit für unsichere Inhalte |
+| Wenige blockieren | `BLOCK_ONLY_HIGH` | Blockieren, wenn eine hohe Wahrscheinlichkeit für unsichere Inhalte besteht |
+| Einige blockieren | `BLOCK_MEDIUM_AND_ABOVE` | Blockieren, wenn eine mittlere oder hohe Wahrscheinlichkeit für unsichere Inhalte besteht |
+| Meiste blockieren | `BLOCK_LOW_AND_ABOVE` | Blockieren, wenn eine niedrige, mittlere oder hohe Wahrscheinlichkeit für unsichere Inhalte besteht |
+| – | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | Der Grenzwert ist nicht angegeben, nach dem Standardschwellenwert blockieren |
 
-Nếu bạn không đặt ngưỡng, thì ngưỡng chặn mặc định sẽ là **Tắt** đối với Gemini 2.5 và các mô hình sau này.
+Wenn der Grenzwert nicht festgelegt ist, ist der Standardgrenzwert für die Blockierung für Gemini 2.5 und höhere Modelle **deaktiviert**.
 
-Bạn có thể đặt các chế độ cài đặt này cho từng yêu cầu mà bạn gửi đến dịch vụ tạo sinh.
-Hãy xem tài liệu tham khảo API [`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=vi#harmblockthreshold) để biết thông tin chi tiết.
+Sie können diese Einstellungen für jede Anfrage festlegen, die Sie an den generativen Dienst senden.
+Weitere Informationen finden Sie in der [`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=de#harmblockthreshold) API
+Referenz.
 
-### Phản hồi về an toàn
+### Sicherheitsfeedback
 
-[`generateContent`](https://ai.google.dev/api/generate-content?hl=vi#method:-models.generatecontent) trả về một [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=vi#generatecontentresponse) bao gồm cả ý kiến phản hồi về độ an toàn.
+[`generateContent`](https://ai.google.dev/api/generate-content?hl=de#method:-models.generatecontent)
+gibt ein
+[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=de#generatecontentresponse) zurück, das
+Sicherheitsfeedback enthält.
 
-Ý kiến phản hồi về câu lệnh được đưa vào [`promptFeedback`](https://ai.google.dev/api/generate-content?hl=vi#promptfeedback). Nếu
-`promptFeedback.blockReason` được đặt, thì nội dung của câu lệnh đã bị chặn.
+Prompt-Feedback ist in
+[`promptFeedback`](https://ai.google.dev/api/generate-content?hl=de#promptfeedback) enthalten. Wenn `promptFeedback.blockReason` festgelegt ist, wurde der Inhalt des Prompts blockiert.
 
-Ý kiến phản hồi về đề xuất phản hồi được đưa vào [`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=vi#candidate) và [`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=vi#candidate). Nếu nội dung phản hồi bị chặn và `finishReason` là `SAFETY`, bạn có thể kiểm tra `safetyRatings` để biết thêm thông tin chi tiết. Nội dung bị chặn sẽ không được trả lại.
+Feedback zu Antwortkandidaten ist in
+[`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=de#candidate) und
+[`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=de#candidate) enthalten. Wenn Antwortinhalte blockiert wurden und `finishReason` den Wert `SAFETY` hat, können Sie `safetyRatings` für weitere Details prüfen. Die blockierten Inhalte werden nicht zurückgegeben.
 
-## Điều chỉnh chế độ cài đặt an toàn
+## Sicherheitseinstellungen anpassen
 
-Phần này trình bày cách điều chỉnh chế độ cài đặt an toàn trong cả Google AI Studio và trong mã của bạn.
+In diesem Abschnitt wird beschrieben, wie Sie die Sicherheitseinstellungen sowohl in Google AI Studio als auch in Ihrem Code anpassen.
 
 ### Google AI Studio
 
-Bạn có thể điều chỉnh chế độ cài đặt an toàn trong Google AI Studio.
+Sie können die Sicherheitseinstellungen in Google AI Studio anpassen.
 
-Nhấp vào **Chế độ cài đặt an toàn** trong phần **Chế độ cài đặt nâng cao** trong bảng điều khiển **Chế độ cài đặt khi chạy** để mở phương thức **Chạy chế độ cài đặt an toàn**. Trong cửa sổ phụ, bạn có thể dùng thanh trượt để điều chỉnh
-mức lọc nội dung theo từng danh mục an toàn:
+Klicken Sie im Bereich **Ausführungseinstellungen** unter **Erweiterte Einstellungen** auf **Ausführung
+Sicherheitseinstellungen** , um das entsprechende Modal zu öffnen. Im Modal können Sie mit den Schiebereglern die Inhaltsfilterstufe pro Sicherheitskategorie anpassen:
 
-![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=vi)
+![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=de)
 
-Khi bạn gửi yêu cầu (ví dụ: đặt câu hỏi cho mô hình), thông báo warning
-**Nội dung bị chặn** sẽ xuất hiện nếu nội dung của yêu cầu bị chặn. Để xem thêm thông tin chi tiết, hãy di chuột qua văn bản **Nội dung bị chặn** để xem danh mục và xác suất phân loại nội dung gây hại.
+Wenn Sie eine Anfrage senden (z. B. indem Sie dem Modell eine Frage stellen), wird die warning
+**Inhalt blockiert** Meldung angezeigt, wenn der Inhalt der Anfrage blockiert wird. Wenn Sie weitere Details sehen möchten, bewegen Sie den Mauszeiger auf den Text **Inhalt blockiert**. Dort werden die Kategorie und die Wahrscheinlichkeit der Klassifizierung als schädlich angezeigt.
 
-### Ví dụ về mã
+### Codebeispiele
 
-Đoạn mã sau đây cho biết cách đặt chế độ cài đặt an toàn trong lệnh gọi `GenerateContent`. Thao tác này sẽ đặt ngưỡng cho danh mục lời nói hận thù (`HARM_CATEGORY_HATE_SPEECH`). Việc đặt danh mục này thành `BLOCK_LOW_AND_ABOVE` sẽ chặn mọi nội dung có xác suất thấp hoặc cao hơn là lời nói hận thù. Để tìm hiểu chế độ cài đặt ngưỡng, hãy xem phần [Lọc nội dung phản cảm theo yêu cầu](#safety-filtering-per-request).
+Das folgende Code-Snippet zeigt, wie Sie Sicherheitseinstellungen in Ihrem `GenerateContent`-Aufruf festlegen. Dadurch wird der Grenzwert für die Kategorie Hassrede (`HARM_CATEGORY_HATE_SPEECH`) festgelegt. Wenn Sie diese Kategorie auf `BLOCK_LOW_AND_ABOVE` setzen, werden alle Inhalte blockiert, die mit geringer oder höherer Wahrscheinlichkeit Hassrede enthalten. Informationen zu den Grenzwert-Einstellungen finden Sie unter [Sicherheitsfilterung
+pro Anfrage](#safety-filtering-per-request).
 
 ### Python
 
@@ -127,7 +134,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -246,23 +253,27 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }'
 ```
 
-## Các bước tiếp theo
+## Nächste Schritte
 
-- Xem [tài liệu tham khảo API](https://ai.google.dev/api?hl=vi) để tìm hiểu thêm về API đầy đủ.
-- Xem [hướng dẫn về an toàn](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=vi) để biết thông tin tổng quan về các yếu tố an toàn cần cân nhắc khi phát triển bằng LLM.
-- Tìm hiểu thêm về cách đánh giá xác suất so với mức độ nghiêm trọng từ [nhóm
-  Jigsaw](https://developers.perspectiveapi.com/s/about-the-api-score)
-- Tìm hiểu thêm về các sản phẩm góp phần tạo nên các giải pháp an toàn như
+- Weitere Informationen zur vollständigen API finden Sie in der [API-Referenz](https://ai.google.dev/api?hl=de).
+- In den [Sicherheitshinweisen](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=de) finden Sie allgemeine Informationen zu Sicherheits
+  aspekten bei der Entwicklung mit LLMs.
+- Weitere Informationen zur Bewertung von Wahrscheinlichkeit und Schweregrad vom [Jigsaw
+  Team](https://developers.perspectiveapi.com/s/about-the-api-score)
+- Weitere Informationen zu den Produkten, die zu Sicherheitslösungen wie der
   [Perspective
-  API](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7).
-  \* Bạn có thể sử dụng các chế độ cài đặt an toàn này để tạo một trình phân loại nội dung độc hại. Hãy xem [ví dụ về việc phân loại](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=vi) để bắt đầu.
+  API](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7) beitragen
+  \* Mit diesen Sicherheitseinstellungen können Sie einen Klassifikator für toxische Inhalte
+  erstellen. Ein Beispiel für die [Klassifizierung
+  finden Sie hier,
+  um loszulegen.](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=de)
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Cập nhật lần gần đây nhất: 2026-10-15 UTC.
+Zuletzt aktualisiert: 2026-10-15 (UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Haben Sie Feedback für uns?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-15 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-10-15 (UTC)."],[],[]]

@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=pl
-fetched_at: 2026-10-26T05:57:27.754995+00:00
-title: "Projektowanie g\u0142osu \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=vi
+fetched_at: 2026-11-02T07:24:33.465691+00:00
+title: "Thi\u1ebft k\u1ebf gi\u1ecdng n\u00f3i \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs/generate-content?hl=pl)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-# Projektowanie głosu
+# Thiết kế giọng nói
 
-Projektowanie głosu umożliwia utworzenie zupełnie nowej, trwałej osobowości głosowej na podstawie opisu w języku naturalnym za pomocą punktu końcowego Gemini API Voices (`POST /v1beta/voices`). Zamiast ograniczać się do gotowych głosów lub nagrywania dźwięku referencyjnego, możesz opisać wiek postaci, barwę głosu, akcent i podstawowy sposób mówienia, a następnie otrzymać identyfikator `voice_...`, który można ponownie wykorzystać i który jest zapisany w Twoim projekcie.
+Thiết kế giọng nói cho phép bạn tạo một cá tính giọng nói hoàn toàn mới và bền vững từ nội dung mô tả bằng ngôn ngữ tự nhiên bằng cách sử dụng điểm cuối Giọng nói của Gemini API (`POST /v1beta/voices`). Thay vì bị giới hạn ở giọng nói được tạo sẵn hoặc bản ghi âm tham chiếu, bạn có thể mô tả độ tuổi, âm sắc, giọng điệu và cách truyền đạt cơ bản của nhân vật, đồng thời nhận được mã nhận dạng `voice_...` có thể dùng lại được lưu vào dự án của bạn.
 
-Najszybszym sposobem na projektowanie, testowanie i ulepszanie niestandardowych głosów jest interaktywne studio **Voice Design** w [Google AI Studio](https://aistudio.google.com/generate-speech?hl=pl). Możesz generować niestandardowe persony na podstawie promptów tekstowych, testować je za pomocą przykładowych skryptów i kopiować uzyskany identyfikator `voice_...` bezpośrednio do kodu aplikacji.
+Cách nhanh nhất để thiết kế, thử giọng và lặp lại các giọng nói tuỳ chỉnh là sử dụng phòng thu **Thiết kế giọng nói** tương tác trong [Google AI Studio](https://aistudio.google.com/generate-speech?hl=vi). Bạn có thể tạo các vai trò tuỳ chỉnh từ câu lệnh văn bản, kiểm thử các vai trò đó bằng tập lệnh mẫu và sao chép mã nhận dạng `voice_...` thu được trực tiếp vào mã xử lý ứng dụng của bạn.
 
-[Wypróbuj w Google AI Studio](https://aistudio.google.com/generate-speech?hl=pl)
+[Dùng thử trong Google AI Studio](https://aistudio.google.com/generate-speech?hl=vi)
 
-Zarówno [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=pl) (`gemini-3.8-flash-tts`), jak i [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=pl) (`gemini-3.8-flash-lite-tts`) obsługują projektowanie głosu.
+Cả [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=vi) (`gemini-3.8-flash-tts`) và [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=vi) (`gemini-3.8-flash-lite-tts`) đều hỗ trợ Thiết kế giọng nói.
 
-## Tworzenie zaprojektowanego głosu
+## Tạo giọng nói được thiết kế
 
-Użyj pakietu Google GenAI SDK (`google-genai` 2.25.0+ / `@google/genai` 2.24.0+) lub interfejsu REST API, aby utworzyć niestandardowy głos na podstawie opisu tekstowego. W przypadku głosów `"prompted"` zarówno `voices.create` (`CreateVoice`), jak i `voices.get` (`GetVoice`) zwracają pole `sample_audio` (`mime_type: "audio/wav"`, zakodowane w formacie base64 `data`) tylko do odczytu, dzięki czemu możesz od razu odsłuchać wygenerowany głos:
+Sử dụng Google GenAI SDK (`google-genai` 2.25.0 trở lên / `@google/genai` 2.24.0 trở lên) hoặc API REST để tạo giọng nói tuỳ chỉnh từ nội dung mô tả bằng văn bản. Đối với giọng nói `"prompted"`, cả `voices.create` (`CreateVoice`) và `voices.get` (`GetVoice`) đều trả về trường `sample_audio` chỉ có đầu ra (`mime_type: "audio/wav"`, `data` được mã hoá base64) để bạn có thể nghe thử giọng nói được tạo ngay lập tức:
 
 ### Python
 
@@ -122,15 +122,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/voices" \
   }' | tee created_voice.json | jq -r '.sample_audio.data' | base64 --decode > voice_preview.wav
 ```
 
-## Jak działa projektowanie głosowe
+## Cách hoạt động của thiết kế giọng nói
 
-1. **Utwórz głos na podstawie prompta:** zadzwoń pod numer `voices.create` (`POST /v1beta/voices`)`type="prompted"` i `store=True`.
-2. **Otrzymywanie trwałego podglądu `voice_id` i `sample_audio`:** interfejs API generuje tożsamość głosową, zapisuje ją w projekcie i zwraca trwały identyfikator (np. `voice_abc123...`) wraz z `sample_audio` (`mime_type: "audio/wav"`, zakodowany w formacie base64 `data`) zawierającym wygenerowany podgląd dźwięku głosu.
-3. **Synteza mowy:** podczas wywoływania funkcji `generateContent` przekaż `voice_id` w `speechConfig.voiceConfig.voice`.
+1. **Tạo giọng nói được nhắc:** Gọi `voices.create` (`POST /v1beta/voices`) bằng `type="prompted"` và `store=True`.
+2. **Nhận bản xem trước `voice_id` và `sample_audio` liên tục:** API này tạo danh tính giọng nói, lưu trữ danh tính đó trong dự án của bạn và trả về một mã nhận dạng vĩnh viễn (ví dụ: `voice_abc123...`) cùng với `sample_audio` (`mime_type: "audio/wav"`, `data` được mã hoá base64) chứa âm thanh xem trước đã tạo cho giọng nói.
+3. **Tổng hợp lời nói:** Truyền `voice_id` trong `speechConfig.voiceConfig.voice` khi gọi `generateContent`.
 
-## Syntezowanie mowy za pomocą zaprojektowanego głosu
+## Tổng hợp lời nói bằng giọng nói do bạn thiết kế
 
-Przekaż zwrócony identyfikator `id` (`voice_...`) w parametrze `voiceConfig.voice` podczas wywoływania funkcji `generateContent`:
+Truyền `id` (`voice_...`) đã trả về trong `voiceConfig.voice` khi gọi `generateContent`:
 
 ### Python
 
@@ -223,13 +223,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-t
   }'
 ```
 
-## Zarządzanie głosami
+## Quản lý giọng nói
 
-W dowolnym momencie możesz wyświetlić listę zapisanych głosów, filtrować je, sprawdzać i usuwać za pomocą interfejsu Voices API (wszystkie parametry filtrowania znajdziesz w sekcji [Rozszerzona biblioteka głosów i filtrowanie](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=pl#voice-library)).
+Bạn có thể liệt kê, lọc, kiểm tra và xoá giọng nói đã lưu trữ bất cứ lúc nào bằng Voices API (xem phần [Thư viện giọng nói mở rộng và tính năng lọc](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=vi#voice-library) để biết tất cả các tham số lọc).
 
-- **Limity miejsca na dane i czas życia danych:** głosy stanowe (`store=True`, współdzielone w przypadku głosów wygenerowanych na podstawie promptu i replikowanych) mają limit **200 głosów na projekt** i **1-roczny czas życia danych**.
-- **`sample_audio` dostępność:** `voices.create()` (`CreateVoice`) i `voices.get()` (`GetVoice`) wypełniają `sample_audio` (`mime_type:
-  "audio/wav"`, zakodowane w formacie base64 `data`) dla głosów `"prompted"`. Aby uprościć listę, `voices.list()` (`ListVoices`) pomija `sample_audio` (a w przypadku głosów `"replicated"` i `"prebuilt"` parametr `sample_audio` jest nieustawiony).
+- **Giới hạn bộ nhớ và TTL:** Giọng nói có trạng thái (`store=True`, được chia sẻ giữa giọng nói được nhắc và giọng nói được sao chép) có giới hạn là **200 giọng nói cho mỗi dự án** và **TTL (thời gian tồn tại) là 1 năm**.
+- **`sample_audio` phạm vi cung cấp:** `voices.create()` (`CreateVoice`) và `voices.get()` (`GetVoice`) điền sẵn `sample_audio` (`mime_type:
+  "audio/wav"`, `data` được mã hoá bằng base64) cho các giọng nói `"prompted"`. Để giữ cho danh sách gọn nhẹ, `voices.list()` (`ListVoices`) sẽ bỏ qua `sample_audio` (và `sample_audio` sẽ không được đặt cho giọng nói `"replicated"` và `"prebuilt"`).
 
 ### Python
 
@@ -295,23 +295,23 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/voices/voice_YO
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Sprawdzone metody tworzenia promptów w projektowaniu głosowym
+## Các phương pháp hay nhất để viết câu lệnh cho thiết kế giọng nói
 
-- **Stałe cechy głosu umieszczaj w projekcie Voice, a nie w `style`:** podczas tworzenia głosu w `voices.create` określ niezmienne cechy, takie jak wiek, płeć, barwa, tekstura głosu i akcent regionalny.
-- **Zarezerwuj `speech_metadata.style` na emocje sytuacyjne:** po utworzeniu niestandardowego głosu używaj krótkich promptów `style` (np. `"whispered urgently"` lub `"cheerful and energetic"`), aby kierować działaniami krok po kroku bez zmiany podstawowej tożsamości mówcy.
-- **Podawaj konkretne i zwięzłe informacje:** jasny opis w 1–2 zdaniach (np. *„Energiczna, wyrazista spikerka sportowa po trzydziestce z lekkim akcentem środkowo-zachodnim”*) daje lepsze i bardziej spójne wyniki niż sprzeczne lub zbyt długie akapity.
+- **Đưa các đặc điểm giọng nói cố định vào phần Thiết kế giọng nói, không phải `style`:** Xác định các đặc điểm không thay đổi (chẳng hạn như độ tuổi, giới tính, âm sắc, chất giọng và giọng vùng miền) khi tạo giọng nói trong `voices.create`.
+- **Dành `speech_metadata.style` cho cảm xúc theo tình huống:** Sau khi tạo giọng nói tuỳ chỉnh, hãy dùng các câu lệnh ngắn `style` (ví dụ: `"whispered urgently"` hoặc `"cheerful and energetic"`) để hướng dẫn diễn xuất từng bước mà không làm thay đổi danh tính cốt lõi của người nói.
+- **Nêu cụ thể và ngắn gọn:** Nội dung mô tả rõ ràng từ 1 đến 2 câu (chẳng hạn như *"Một người dẫn chương trình thể thao sắc sảo, tràn đầy năng lượng ở độ tuổi 30, có giọng nói hơi pha tạp của vùng Trung Tây"*) sẽ tạo ra kết quả rõ ràng và nhất quán hơn so với các đoạn văn mâu thuẫn hoặc quá dài.
 
-## Co dalej?
+## Bước tiếp theo
 
-- Dowiedz się, jak replikować głos istniejącego mówcy w sekcji [Replikacja głosu](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=pl).
-- Więcej informacji o stylizacji na poziomie wypowiedzi, tagach wstawianych i dialogach z udziałem wielu rozmówców znajdziesz w [przewodniku po zamianie tekstu na mowę](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=pl).
+- Tìm hiểu cách nhân bản giọng nói của một người nói hiện có trong tính năng [Nhân bản giọng nói](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=vi).
+- Khám phá kiểu theo lượt, thẻ nội tuyến và đoạn hội thoại nhiều người nói trong [Hướng dẫn về tính năng chuyển văn bản sang lời nói](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=vi).
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Ostatnia aktualizacja: 2026-09-24 UTC.
+Cập nhật lần gần đây nhất: 2026-09-24 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-24 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-24 UTC."],[],[]]

@@ -1,33 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/long-decode?hl=de
-fetched_at: 2026-10-26T05:40:45.010587+00:00
-title: "Lange Decodierung \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/long-decode?hl=th
+fetched_at: 2026-11-02T07:02:42.596304+00:00
+title: "\u0e16\u0e2d\u0e14\u0e23\u0e2b\u0e31\u0e2a\u0e41\u0e1a\u0e1a\u0e22\u0e32\u0e27 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=de).
+Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Feedback geben
+ส่งความคิดเห็น
 
-# Lange Decodierung
+# ถอดรหัสแบบยาว
 
-Mit der langen Decodierung kann Gemini 4 Argon für Aufgaben mit komplexen Schlussfolgerungen mehr als 64.000 Tokens generieren, bis zum einheitlichen Kontextfenster von 1 Million Tokens (1.048.576 Tokens, die für Eingabe, Überlegungen und Ausgabe verwendet werden). In der Interactions API aktivieren Sie die lange Decodierung mit der Ausführung im Hintergrund, damit unsere Server automatisch jeden 64.000-Token-Schritt generieren und zu einer einzelnen Interaktion kombinieren.
+การถอดรหัสแบบยาวช่วยให้ Gemini 4 Argon สร้างโทเค็นได้มากกว่า 64,000 รายการสำหรับงานการให้เหตุผลเชิงลึก โดยมีหน้าต่างบริบทขนาด 1 ล้านโทเค็นแบบรวม (โทเค็น 1,048,576 รายการที่ใช้ร่วมกันระหว่างอินพุต การคิด และเอาต์พุต) ใน Interactions API คุณสามารถเปิดใช้การถอดรหัสแบบยาวด้วยการดำเนินการเมื่ออยู่เบื้องหลังเพื่อให้เซิร์ฟเวอร์ของเราสร้างและรวมการข้ามแต่ละครั้ง 64, 000 รายการเป็นการโต้ตอบเดียวโดยอัตโนมัติ
 
-## Funktionsweise der langen Decodierung
+## วิธีการทำงานของการถอดรหัสแบบยาว
 
-Mit einem einzelnen Modellaufruf werden bis zu 64.000 Tokens generiert. Wenn für eine Antwort mehr als 64.000 Tokens erforderlich sind, generiert der Server sie in Schritten von 64.000 Tokens, die dort fortgesetzt werden, wo der vorherige Schritt aufgehört hat. Bei jedem Schritt wird `interaction.steps` unter derselben Interaktions-ID ein `model_output`-Schritt hinzugefügt. Sie müssen diese Schritte also zusammenführen, um die vollständige Antwort zu lesen:
+การเรียกโมเดลครั้งเดียวจะสร้างโทเค็นได้สูงสุด 64,000 รายการ เมื่อคำตอบต้องใช้โทเค็นมากกว่า 64,000 รายการ เซิร์ฟเวอร์จะสร้างคำตอบในรูปแบบการข้าม 64,000 รายการที่ดำเนินการต่อจากจุดที่การข้ามครั้งก่อนหยุด การข้ามแต่ละครั้งจะเพิ่มขั้นตอน `model_output` ลงใน `interaction.steps` ภายใต้รหัสการโต้ตอบเดียวกัน คุณจึงรวมขั้นตอนเหล่านั้นเพื่ออ่านคำตอบทั้งหมดได้โดยทำดังนี้
 
-1. Sie erstellen eine Interaktion mit `background: true` und `max_output_tokens` größer als 65.536, bis zu 1 Million.
-2. Der Server generiert den ersten Schritt mit bis zu 64.000 Tokens.
-3. Der Server startet den nächsten Hop dort, wo der letzte aufgehört hat, und wiederholt den Vorgang, bis das Modell fertig ist oder alle `max_output_tokens` verwendet wurden.
-4. Sie rufen die Interaktion ab oder streamen sie, um das Ergebnis zu erhalten.
+1. สร้างการโต้ตอบด้วย `background: true` และ `max_output_tokens` ที่มากกว่า 65,536 รายการ แต่ไม่เกิน 1 ล้านรายการ
+2. เซิร์ฟเวอร์จะสร้างการข้ามครั้งแรกได้สูงสุด 64, 000 รายการ
+3. เซิร์ฟเวอร์จะเริ่มการ Hop ถัดไปจากจุดที่การข้ามครั้งสุดท้ายหยุด และทำซ้ำจนกว่าโมเดลจะเสร็จสิ้นหรือใช้ `max_output_tokens` ทั้งหมด
+4. คุณจะโพลการโต้ตอบหรือสตรีมการโต้ตอบเพื่อดูผลลัพธ์
 
 ### Python
 
@@ -127,137 +127,137 @@ while true; do
 done
 ```
 
-## Ausgabelimits
+## ขีดจำกัดเอาต์พุต
 
-Für Streaming- und Nicht-Streaming-Interaktionen gilt standardmäßig ein Ausgabetokenlimit von 64.000. Für Antworten mit bis zu 64.000 Tokens sind also keine Codeänderungen erforderlich. Wenn Sie mehr als 64.000 Tokens generieren möchten, aktivieren Sie die Ausführung im Hintergrund und erhöhen Sie `max_output_tokens`.
+การโต้ตอบแบบสตรีมมิงและแบบไม่สตรีมมิงมีขีดจำกัดโทเค็นเอาต์พุตเริ่มต้นที่ 64,000 รายการ ดังนั้นคำตอบที่ใช้โทเค็นไม่เกิน 64,000 รายการจึงไม่จำเป็นต้องเปลี่ยนแปลงโค้ด หากต้องการสร้างโทเค็นมากกว่า 64, 000 รายการ ให้เปิดใช้การดำเนินการเมื่ออยู่เบื้องหลังและเพิ่ม `max_output_tokens`
 
-| So erstellen Sie die Interaktion | Ausgabelimit |
+| วิธีสร้างการโต้ตอบ | ขีดจำกัดเอาต์พุต |
 | --- | --- |
-| `background: false` (Streaming oder Nicht-Streaming) | 65.536 Tokens Werte über 65.536 geben einen 400-Fehler zurück. Lange Decodierung demnächst verfügbar. |
-| `background: true`, `max_output_tokens` nicht festgelegt | 65.536 Tokens |
-| `background: true`, `max_output_tokens` größer als 65.536 | Ihr `max_output_tokens`, bis zu 1.048.576 minus Ihre Eingabe |
+| `background: false` (สตรีมมิงหรือไม่สตรีมมิง) | 65,536 โทเค็น ค่าที่มากกว่า 65,536 จะแสดงข้อผิดพลาด 400 การถอดรหัสแบบยาวจะพร้อมใช้งานในเร็วๆ นี้ |
+| `background: true`, `max_output_tokens` ไม่ได้ตั้งค่า | 65,536 โทเค็น |
+| `background: true`, `max_output_tokens` มากกว่า 65,536 | `max_output_tokens` ของคุณ แต่ไม่เกิน 1,048,576 รายการลบด้วยอินพุต |
 
-## Wann sollte die lange Decodierung verwendet werden?
+## กรณีที่ควรใช้การถอดรหัสแบบยาว
 
-Die meisten Anfragen sind mit 64.000 Tokens abgeschlossen. Verwenden Sie die lange Decodierung nur, wenn für eine Antwort mehr Überlegungen und Ausgaben erforderlich sind.
+คำขอส่วนใหญ่จะเสร็จสิ้นภายใน 64,000 โทเค็น ใช้การถอดรหัสแบบยาวเฉพาะเมื่อคำตอบเดียวต้องใช้การคิดและเอาต์พุตมากกว่านั้น
 
-| Arbeitslast | Lange Decodierung verwenden? | Warum |
+| ภาระงาน | ใช้การถอดรหัสแบบยาวไหม | ทำไม |
 | --- | --- | --- |
-| Schwierige mathematische, wissenschaftliche und Forschungsaufgaben sowie formale Beweise | Ja | Das Modell kann mehr als 64.000 Tokens verwenden, um seine Überlegungen zu untersuchen und zu prüfen. |
-| Die schwierigsten Coding- und Agentenaufgaben | Ja | Für einige Aufgaben sind mehr als 64.000 Tokens für Überlegungen und Code in einer Antwort erforderlich. Die meisten Coding- und Agentenaufgaben sind mit weniger als 64.000 Tokens abgeschlossen. |
-| Bewertungstools, die am Ausgabelimit anhalten | Ja | Die lange Decodierung verhindert abgeschnittene Antworten, wenn das Modell die gesamten 64.000 Tokens für Überlegungen verwendet. |
-| Chat, Fragen und Antworten, Zusammenfassung, Klassifizierung und Extraktion | Nein | Diese Aufgaben sind mit deutlich weniger als 32.000 Tokens abgeschlossen. |
-| Anfragen mit einer festen Länge, z. B. „Schreibe ein Buch mit 700.000 Wörtern“ | Nein | Das Modell berücksichtigt keine Längenziele. |
-| Agenten, die Tools in vielen kurzen Schritten aufrufen | Nein | Jeder Schritt ist kurz. Große Ausgaben in jedem Schritt füllen das gemeinsame Kontextfenster schnell. |
-| Prompts in der Nähe des Eingabelimits | Nein | Für die Ausgabe können nur 1.048.576 Tokens minus Ihre Eingabe verwendet werden. |
-| Latenzsensitive Anfragen | Nein | Die lange Decodierung kann mehrere Minuten dauern. |
+| คณิตศาสตร์ วิทยาศาสตร์ การวิจัย และการพิสูจน์อย่างเป็นทางการที่ซับซ้อน | ใช่ | โมเดลสามารถใช้โทเค็นมากกว่า 64,000 รายการเพื่อสำรวจและตรวจสอบการให้เหตุผล |
+| งานการเขียนโค้ดและงานแบบ Agent ที่ซับซ้อนที่สุด | ใช่ | บางงานต้องใช้โทเค็นมากกว่า 64,000 รายการสำหรับการคิดและโค้ดในคำตอบเดียว งานการเขียนโค้ดและงานแบบ Agent ส่วนใหญ่จะเสร็จสิ้นภายใน 64,000 รายการ |
+| เครื่องมือประเมินที่หยุดทำงานเมื่อถึงขีดจำกัดเอาต์พุต | ใช่ | การถอดรหัสแบบยาวจะป้องกันไม่ให้คำตอบถูกตัดออกเมื่อโมเดลใช้คำตอบ 64,000 รายการทั้งหมดในการคิด |
+| แชท ถามและตอบ สรุป จัดประเภท และแยกข้อมูล | ไม่ใช่ | งานเหล่านี้จะเสร็จสิ้นภายในโทเค็นไม่เกิน 32,000 รายการ |
+| คำขอความยาวคงที่ เช่น "เขียนหนังสือ 700,000 คำ" | ไม่ใช่ | โมเดลไม่เป็นไปตามเป้าหมายความยาว |
+| Agent ที่เรียกใช้เครื่องมือหลายครั้งในระยะเวลาสั้นๆ | ไม่ใช่ | แต่ละครั้งใช้เวลาสั้นๆ เอาต์พุตขนาดใหญ่ในแต่ละครั้งจะทำให้หน้าต่างบริบทที่ใช้ร่วมกันเต็มเร็ว |
+| พรอมต์ที่ใกล้ถึงขีดจำกัดอินพุต | ไม่ใช่ | เอาต์พุตใช้ได้เฉพาะโทเค็น 1,048,576 รายการลบด้วยอินพุต |
+| คำขอที่ไวต่อเวลาในการตอบสนอง | ไม่ใช่ | การถอดรหัสแบบยาวอาจใช้เวลาหลายนาที |
 
-Wenn Sie einen hohen Wert für `max_output_tokens` festlegen, hat das Modell mehr Zeit, über schwierige Probleme nachzudenken. Es entscheidet jedoch weiterhin, wie viel es schreibt. Mit [`thinking_level`](https://ai.google.dev/gemini-api/docs/thinking?hl=de) können Sie festlegen, wie viel Aufwand das Modell für die Überlegungen verwendet.
+การตั้งค่า `max_output_tokens` สูงจะทำให้โมเดลมีพื้นที่ในการคิดนานขึ้นเกี่ยวกับปัญหาที่ซับซ้อน แต่โมเดลจะยังคงตัดสินใจว่าจะเขียนมากน้อยเพียงใด หากต้องการควบคุมความพยายามในการให้เหตุผลที่โมเดลใช้ ให้ตั้งค่า [`thinking_level`](https://ai.google.dev/gemini-api/docs/thinking?hl=th)
 
-## Auswahl der Ausführungsmethode für die lange Decodierung
+## เลือกวิธีเรียกใช้การถอดรหัสแบบยาว
 
-Die Ausführung im Hintergrund ist die einfachste Möglichkeit, die lange Decodierung in der Interactions API auszuführen. Die clientseitige Fortsetzung, bei der Ihr Code jeden Schritt startet, ist mit der GenerateContent API verfügbar. Sie wird bald auch in der Interactions API als erweiterte Option zur Verwaltung Ihrer eigenen Resilienz verfügbar sein.
+การดำเนินการเมื่ออยู่เบื้องหลังเป็นวิธีที่ง่ายที่สุดในการเรียกใช้การถอดรหัสแบบยาวใน Interactions API การดำเนินการต่อฝั่งไคลเอ็นต์ ซึ่งโค้ดของคุณจะเริ่มการข้ามแต่ละครั้ง มีให้บริการใน GenerateContent API และจะพร้อมใช้งานใน Interactions API ในเร็วๆ นี้ในรูปแบบตัวเลือกขั้นสูงเพิ่มเติมสำหรับการจัดการความยืดหยุ่นของคุณเอง
 
-|  | Ausführung im Hintergrund (Interactions API) | Clientseitige Fortsetzung (GenerateContent API) |
+|  | การดำเนินการเมื่ออยู่เบื้องหลัง (Interactions API) | การดำเนินการต่อฝั่งไคลเอ็นต์ (GenerateContent API) |
 | --- | --- | --- |
-| **Wer startet jeden Schritt?** | Unsere Server | Das Google GenAI SDK oder Ihr eigener Code |
-| **Tokens pro Anfrage** | Ihr `max_output_tokens` in einer Interaktion | 64.000 pro Stream, 32.000 pro Nicht-Streaming-Anfrage |
-| **Laufzeit** | Bis zu 24 Stunden | 20 Minuten |
-| **Speicher** | `store: true` erforderlich | Nichts auf dem Server gespeichert. |
-| **Optimal für** | Die einfachste Möglichkeit, die lange Decodierung auszuführen | Feinere Kontrolle über Wiederholungsversuche, sodass Sie Ihre eigene Backoff-Strategie, Fehlerbehandlung und Resilienz entwickeln können |
+| **ผู้เริ่มการข้ามแต่ละครั้ง** | เซิร์ฟเวอร์ของเรา | Google GenAI SDK หรือโค้ดของคุณเอง |
+| **โทเค็นต่อคำขอ** | `max_output_tokens` ของคุณในการโต้ตอบครั้งเดียว | 64,000 รายการต่อสตรีม คำขอแบบไม่สตรีมมิง 32,000 รายการ |
+| **เวลาเรียกใช้** | สูงสุด 24 ชั่วโมง | 20 นาที |
+| **พื้นที่เก็บข้อมูล** | ต้องมี `store: true` | ไม่มีการจัดเก็บข้อมูลไว้ในเซิร์ฟเวอร์ |
+| **เหมาะสำหรับ** | วิธีที่ง่ายที่สุดในการเรียกใช้การถอดรหัสแบบยาว | การควบคุมการลองอีกครั้งแบบละเอียด คุณจึงสร้างการหน่วงเวลา การจัดการข้อผิดพลาด และความยืดหยุ่นของคุณเองได้ |
 
-Informationen zur Verwendung der clientseitigen Fortsetzung finden Sie unter [Lange Decodierung mit der GenerateContent API](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=de).
+หากต้องการใช้การดำเนินการต่อฝั่งไคลเอ็นต์ โปรดดู [การถอดรหัสแบบยาวด้วย GenerateContent API](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=th)
 
-## Lange Decodierung streamen
+## สตรีมการถอดรหัสแบบยาว
 
-Wenn Sie Ausgaben und Zusammenfassungen der Überlegungen streamen möchten, sobald sie verfügbar sind, fügen Sie `stream: true` und `thinking_summaries: "auto"` hinzu. Lange Streams können unterbrochen werden, daher muss Ihr Client die Verbindung wiederherstellen. Folgen Sie dem Muster für die Wiederherstellung der Verbindung in der [Anleitung zur Ausführung im Hintergrund](https://ai.google.dev/gemini-api/docs/background-execution?hl=de). Bei der langen Decodierung gelten die folgenden Regeln:
+หากต้องการสตรีมเอาต์พุตและข้อมูลสรุปความคิดเมื่อมาถึง ให้เพิ่ม `stream: true` และ `thinking_summaries: "auto"` สตรีมแบบยาวอาจหยุดทำงาน ดังนั้นไคลเอ็นต์ของคุณต้องเชื่อมต่ออีกครั้ง ทำตามรูปแบบการเชื่อมต่ออีกครั้งใน[คู่มือการดำเนินการเมื่ออยู่เบื้องหลัง](https://ai.google.dev/gemini-api/docs/background-execution?hl=th) การถอดรหัสแบบยาวจะเพิ่มกฎต่อไปนี้
 
-- **Interaktions-ID speichern**:Lesen Sie sie aus dem Ereignis `interaction.created`.
-- **Jede `event_id` speichern**:Eine `event_id` kann bei `interaction.status_update`-Ereignissen eintreffen, nicht nur bei Textänderungen.
-- **Verbindung mit `last_event_id` wiederherstellen**:Rufen Sie `interactions.get` mit `stream: true` und der letzten `event_id` auf. Der Stream wird nach diesem Ereignis fortgesetzt.
-- **Bis zum Ende lesen**:Nachdem Sie die Verbindung wiederhergestellt haben, lesen Sie den Stream bis zum Ende, bevor Sie den Status prüfen. Der Server spielt verpasste Ereignisse auch nach Abschluss der Interaktion ab.
-- **Lange Zeitüberschreitungen festlegen**:Legen Sie für HTTP-Lesevorgänge eine Zeitüberschreitung von 15 bis 20 Minuten pro Stream fest.
-- **Ausgabe in 5.000-Token-Blöcken erwarten**:Nach den ersten 64.000 Tokens (ungefähr die ersten 10 Minuten) sendet der Stream die Ausgabe in Blöcken von etwa 5.000 Tokens. Pausen zwischen den Blöcken sind normal. Die Interaktion ist nicht blockiert. Lassen Sie die Verbindung also geöffnet.
+- **บันทึกรหัสการโต้ตอบ:** อ่านรหัสจากเหตุการณ์ `interaction.created`
+- **บันทึก `event_id` ทุกรายการ:** `event_id` อาจมาถึงในเหตุการณ์ `interaction.status_update` ไม่ใช่เฉพาะในส่วนต่างของข้อความ
+- **เชื่อมต่ออีกครั้งด้วย `last_event_id`:** เรียก `interactions.get` ด้วย `stream: true` และ `event_id` ล่าสุด สตรีมจะดำเนินการต่อหลังจากเหตุการณ์นั้น
+- **อ่านจนจบ:** หลังจากเชื่อมต่ออีกครั้ง ให้อ่านสตรีมจนจบก่อนตรวจสอบสถานะ เซิร์ฟเวอร์จะเล่นเหตุการณ์ที่พลาดไปซ้ำ แม้ว่าการโต้ตอบจะเสร็จสมบูรณ์แล้วก็ตาม
+- **ตั้งค่าระยะหมดเวลาแบบยาว:** ตั้งค่าระยะหมดเวลาในการอ่าน HTTP เป็น 15-20 นาทีต่อสตรีม
+- **คาดหวังเอาต์พุตในส่วน 5,000 โทเค็น:** หลังจากโทเค็น 64,000 รายการแรก (ประมาณ 10 นาทีแรก) สตรีมจะส่งเอาต์พุตในส่วนประมาณ 5,000 โทเค็น การหยุดชั่วคราวระหว่างส่วนเป็นเรื่องปกติ การโต้ตอบไม่ได้ติดขัด ดังนั้นให้เปิดการเชื่อมต่อไว้
 
-## Hintergrundstatus
+## สถานะเบื้องหลัง
 
-Eine Hintergrundinteraktion kann bis zu 24 Stunden dauern. Sobald der Status nicht mehr `in_progress` oder `queued` ist, verarbeiten Sie den Endstatus anhand dieser Tabelle:
+การโต้ตอบเบื้องหลังสามารถทำงานได้นานสูงสุด 24 ชั่วโมง เมื่อสถานะไม่ใช่ `in_progress` หรือ `queued` อีกต่อไป ให้จัดการสถานะสิ้นสุดโดยใช้ตารางนี้
 
-| Status | Bedeutung | Was muss ich tun? |
+| สถานะ | ความหมาย | สิ่งที่ต้องทำ |
 | --- | --- | --- |
-| `completed` | Das Modell ist fertig. | Führen Sie die `model_output`-Schritte in `steps` zusammen und lesen Sie `usage`. Wenn Sie die Unterhaltung fortsetzen möchten, übergeben Sie die `id` dieser Interaktion als `previous_interaction_id`. |
-| `requires_action` | Das Modell hat einen Toolaufruf angefordert. | Führen Sie das Tool aus. Senden Sie dann das Ergebnis mit der `id` dieser Interaktion. |
-| `incomplete` | Das Modell hat alle `max_output_tokens` verwendet. Der Text kann leer sein, wenn das Modell noch überlegt hat. | Senden Sie die Anfrage noch einmal mit einem höheren Wert für `max_output_tokens`. |
-| `failed` | Der Server konnte den Vorgang nicht abschließen oder die Interaktion hat länger als 24 Stunden gedauert. | Wiederholen Sie die Anfrage. Wenn der Fehler wieder auftritt, teilen Sie dem Support die `id` der Interaktion mit. |
-| `cancelled` | Sie haben die Interaktion abgebrochen. | Lesen Sie `usage`, um die abgerechneten Tokens zu sehen. |
+| `completed` | โมเดลเสร็จสิ้นแล้ว | รวมขั้นตอน `model_output` ใน `steps` และอ่าน `usage` หากต้องการสนทนาต่อ ให้ส่ง `id` ของการโต้ตอบนี้เป็น `previous_interaction_id` |
+| `requires_action` | โมเดลขอให้เรียกใช้เครื่องมือ | เรียกใช้เครื่องมือ จากนั้นส่งผลลัพธ์ด้วย `id` ของการโต้ตอบนี้ |
+| `incomplete` | โมเดลใช้ `max_output_tokens` ทั้งหมดแล้ว ข้อความอาจว่างเปล่าหากโมเดลยังคงคิดอยู่ | ส่งคำขออีกครั้งด้วย `max_output_tokens` ที่สูงขึ้น |
+| `failed` | เซิร์ฟเวอร์ดำเนินการไม่เสร็จสิ้นหรือการโต้ตอบใช้เวลานานกว่า 24 ชั่วโมง | ลองส่งคำขออีกครั้ง หากยังล้มเหลว ให้แชร์ `id` การโต้ตอบกับทีมสนับสนุน |
+| `cancelled` | คุณยกเลิกการโต้ตอบ | อ่าน `usage` เพื่อดูโทเค็นที่เรียกเก็บเงิน |
 
-Wenn Sie eine laufende Interaktion beenden möchten, rufen Sie in Python `client.interactions.cancel(id=interaction.id)`, in JavaScript `client.interactions.cancel(interaction.id)` oder in REST `POST /v1beta/interactions/{id}/cancel` auf.
+หากต้องการหยุดการโต้ตอบที่กำลังทำงาน ให้เรียก `client.interactions.cancel(id=interaction.id)` ใน Python, `client.interactions.cancel(interaction.id)` ใน JavaScript หรือ `POST /v1beta/interactions/{id}/cancel` ใน REST
 
-## `max_output_tokens` festlegen
+## ตั้งค่า `max_output_tokens`
 
-`max_output_tokens` legt das kombinierte Limit für Überlegungen und Ausgaben für die gesamte Interaktion fest. Wenn Sie diesen Wert senken, überlegt das Modell nicht präziser, sondern die Antwort wird früher abgeschnitten.
+`max_output_tokens` จะกำหนดขีดจำกัดรวมสำหรับการคิดและเอาต์พุตในการโต้ตอบ การลดค่านี้ไม่ได้ทำให้โมเดลคิดได้กระชับขึ้น แต่จะตัดคำตอบออกเร็วขึ้น
 
-| Ihre Arbeitslast | Empfohlener Wert für `max_output_tokens` |
+| ภาระงานของคุณ | `max_output_tokens` ที่แนะนำ |
 | --- | --- |
-| Vorhandene Apps mit einem Limit unter 32.000 | Auf 32.768 erhöhen. Die Ausführung im Hintergrund ist nicht erforderlich. |
-| Lange Coding- und Agentenaufgaben | Beginnen Sie mit 65.536 (Standard). Die Ausführung im Hintergrund ist nicht erforderlich. |
-| Komplexe Schlussfolgerungen, schwierige mathematische und wissenschaftliche Aufgaben sowie Beweise | Legen Sie `background: true` fest und beginnen Sie mit 262.144, bis zu 1.048.576 minus Ihre Eingabetokens. |
+| แอปที่มีอยู่ซึ่งมีขีดจำกัดต่ำกว่า 32,000 รายการ | เพิ่มเป็น 32,768 รายการ ไม่จำเป็นต้องดำเนินการเมื่ออยู่เบื้องหลัง |
+| งานการเขียนโค้ดและงานแบบ Agent ที่ใช้เวลานาน | เริ่มต้นที่ 65,536 รายการ (ค่าเริ่มต้น) ไม่จำเป็นต้องดำเนินการเมื่ออยู่เบื้องหลัง |
+| การให้เหตุผลที่ซับซ้อน คณิตศาสตร์ วิทยาศาสตร์ และการพิสูจน์ที่ซับซ้อน | ตั้งค่า `background: true` และเริ่มต้นที่ 262,144 รายการ แต่ไม่เกิน 1,048,576 รายการลบด้วยโทเค็นอินพุต |
 
-Wenn Sie weniger Tokens verwenden möchten, senken Sie `thinking_level`. Verwenden Sie `high` für die schwierigsten Aufgaben mit Schlussfolgerungen. Verwenden Sie `medium` (Standard) für die meisten Coding- und Agentenaufgaben.
+หากต้องการใช้โทเค็นน้อยลง ให้ลด `thinking_level` ใช้ `high` สำหรับงานการให้เหตุผลที่ซับซ้อนที่สุด ใช้ `medium` (ค่าเริ่มต้น) สำหรับงานการเขียนโค้ดและงานแบบ Agent ส่วนใหญ่
 
-## Tokens zählen
+## นับโทเค็น
 
-`interaction.usage` meldet die Summen für alle Schritte. Lesen Sie die folgenden Felder: `total_input_tokens`, `total_cached_tokens`, `total_output_tokens`, `total_thought_tokens` und `total_tokens`.
+`interaction.usage` จะรายงานยอดรวมในการข้ามทั้งหมด อ่านฟิลด์ต่อไปนี้ `total_input_tokens`, `total_cached_tokens`, `total_output_tokens`, `total_thought_tokens` และ `total_tokens`
 
-`total_input_tokens` summiert die Eingabetokens aller Schritte. Bei jedem Schritt werden Ihr Prompt und alle bisher generierten Inhalte als Eingabe an das Modell zurückgesendet. Die gleichen Tokens werden also in jedem späteren Schritt noch einmal gezählt. Ein Prompt mit 1.000 Tokens, der 200.000 Tokens für Überlegungen und Ausgaben erzeugt, erfordert beispielsweise vier Schritte:
+`total_input_tokens` จะรวมโทเค็นอินพุตของการข้ามทุกครั้ง การข้ามแต่ละครั้งจะส่งพรอมต์ของคุณและทุกสิ่งที่สร้างขึ้นจนถึงตอนนี้กลับไปยังโมเดลเป็นอินพุต ดังนั้นระบบจะนับโทเค็นเดียวกันอีกครั้งในการข้ามครั้งต่อๆ ไป ตัวอย่างเช่น พรอมต์ 1,000 โทเค็นที่สร้างโทเค็นสำหรับการคิดและเอาต์พุต 200,000 รายการจะใช้การข้าม 4 ครั้ง ดังนี้
 
-| Schritt | An das Modell gesendete Eingabe | Eingabetokens |
+| การข้าม | อินพุตที่ส่งไปยังโมเดล | โทเค็นอินพุต |
 | --- | --- | --- |
-| 1 | Prompt | 1.000 |
-| 2 | Prompt + Schritt 1 | 66.536 |
-| 3 | Prompt + Schritte 1 und 2 | 132.072 |
-| 4 | Prompt + Schritte 1 bis 3 | 197.608 |
-| **Summe** |  | **397.216** |
+| 1 | พรอมต์ | 1,000 |
+| 2 | พรอมต์ + การข้ามครั้งที่ 1 | 66,536 |
+| 3 | พรอมต์ + การข้ามครั้งที่ 1 และ 2 | 132,072 |
+| 4 | พรอมต์ + การข้ามครั้งที่ 1 ถึง 3 | 197,608 |
+| **รวม** |  | **397,216** |
 
-`total_input_tokens` meldet etwa 397.000 Tokens (wobei wiederholte Eingaben für Schritte durch implizites Caching automatisch um 95% reduziert werden), obwohl die tatsächliche Kontextgröße nur etwa 201.000 Tokens beträgt: der Prompt mit 1.000 Tokens plus 200.000 Tokens für Überlegungen und Ausgaben.
+`total_input_tokens` จะรายงานโทเค็นประมาณ 397,000 รายการ (โดยระบบจะลดอินพุตการข้ามที่ซ้ำกันโดยอัตโนมัติ 95% ด้วยการแคชโดยนัย) แม้ว่าขนาดบริบทจริงจะมีโทเค็นเพียงประมาณ 201,000 รายการ ได้แก่ พรอมต์ 1,000 โทเค็นบวกกับโทเค็นสำหรับการคิดและเอาต์พุต 200,000 รายการ
 
-Während eines Streams enthalten sowohl `step.stop`- als auch `interaction.status_update`-Ereignisse `usage` (kumulativ für die Interaktion). Lesen Sie den neuesten Wert für `usage`, anstatt die Werte zu addieren.
+ระหว่างสตรีม เหตุการณ์ `step.stop` และ `interaction.status_update` จะมี `usage` (สะสมสำหรับการโต้ตอบ) ให้อ่านค่า `usage` ล่าสุดแทนการรวมค่าเหล่านั้น
 
-## Informationen zur Abrechnung
+## ทำความเข้าใจการเรียกเก็บเงิน
 
-Sie zahlen für jedes Token in jedem Schritt, einschließlich der Schritte, die nur Überlegungen enthalten.
+คุณจะต้องชำระเงินสำหรับทุกโทเค็นในการข้ามทุกครั้ง รวมถึงการข้ามที่มีเฉพาะการคิด
 
-- **Cache-Rabatt**:Durch implizites Caching wird die wiederholte Eingabe in jedem Schritt um 95 % reduziert. Für zwischengespeicherte Eingaben fallen während des Einführungszeitraums 0,10 $ pro 1 Million Tokens an, statt 2,00 $.
-- **Abgebrochene und fehlgeschlagene Interaktionen**:Sie zahlen für alle Arbeiten, die vor dem Ende der Interaktion abgeschlossen wurden.
+- **ส่วนลดการแคช:** การแคชโดยนัยจะลดอินพุตที่ซ้ำกันในการข้ามแต่ละครั้ง 95% อินพุตที่แคชไว้จะมีค่าใช้จ่าย $0.10 ต่อ 1 ล้านโทเค็นแทน $2.00 ในช่วงแนะนำ
+- **การโต้ตอบที่ยกเลิกและล้มเหลว:** คุณจะต้องชำระเงินสำหรับงานทั้งหมดที่เสร็จสมบูรณ์ก่อนที่การโต้ตอบจะสิ้นสุดลง
 
-## Fehlerbehebung
+## การแก้ปัญหา
 
-| Symptom | Ursache und Lösung |
+| ลักษณะปัญหา | สาเหตุและวิธีแก้ไข |
 | --- | --- |
-| Ausgabe endet bei 64.000 | `background` ist `false` oder `max_output_tokens` ist nicht festgelegt. Legen Sie `background: true` und `max_output_tokens` größer als 65.536 fest. |
-| 400: „max\_output\_tokens greater than 65536 is not yet supported with background=false.“ | Die lange Decodierung ohne Ausführung im Hintergrund ist noch nicht verfügbar. Legen Sie `background: true` fest. |
-| 400: „store=true is required for background interactions“ | Für die Ausführung im Hintergrund ist `store: true` erforderlich. |
-| Status `incomplete` mit leerem Text | Das Modell hat alle Tokens für Überlegungen verwendet. Erhöhen Sie `max_output_tokens` oder senken Sie `thinking_level`. |
-| Die Kontextkomprimierung beginnt zu früh | Ihr Agenten-Framework oder Bewertungstool liest `total_input_tokens`. Weitere Informationen finden Sie unter [Tokens zählen](#count-tokens). |
+| เอาต์พุตหยุดที่ 64,000 รายการ | `background` เป็น `false` หรือไม่ได้ตั้งค่า `max_output_tokens` ตั้งค่า `background: true` และ `max_output_tokens` ให้มากกว่า 65,536 รายการ |
+| 400: "ระบบยังไม่รองรับ max\_output\_tokens ที่มากกว่า 65536 โดยมี background=false" | การถอดรหัสแบบยาวโดยไม่มีการดำเนินการเมื่ออยู่เบื้องหลังยังไม่พร้อมใช้งาน ตั้งค่า `background: true` |
+| 400: "ต้องตั้งค่า store=true สำหรับการโต้ตอบเบื้องหลัง" | การดำเนินการเมื่ออยู่เบื้องหลังต้องมี `store: true` |
+| สถานะ `incomplete` ที่มีข้อความว่างเปล่า | โมเดลใช้โทเค็นทั้งหมดในการคิด เพิ่ม `max_output_tokens` หรือลด `thinking_level` |
+| การบีบอัดบริบทเริ่มเร็วเกินไป | เฟรมเวิร์ก Agent หรือเครื่องมือประเมินอ่าน `total_input_tokens` ดู[นับโทเค็น](#count-tokens) |
 
-## Beschränkungen
+## ข้อจำกัด
 
-- **Keine lange Decodierung ohne Ausführung im Hintergrund**:Interaktionen mit `background: false` enden bei 65.536 Tokens. Unterstützung ist demnächst verfügbar.
-- **Keine Längenziele**:Das Modell berücksichtigt keine Ziele für die Tokenlänge oder die Anzahl der Wörter.
+- **ไม่มีการถอดรหัสแบบยาวโดยไม่มีการดำเนินการเมื่ออยู่เบื้องหลัง:** การโต้ตอบที่มี `background: false` จะหยุดที่ 65,536 โทเค็น จะพร้อมให้บริการเร็วๆ นี้
+- **ไม่มีเป้าหมายความยาว:** โมเดลไม่เป็นไปตามเป้าหมายความยาวโทเค็นหรือจำนวนคำ
 
-## Nächste Schritte
+## ขั้นตอนถัดไป
 
-- [Neuerungen in Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/latest-model?hl=de)
-- [Ausführung im Hintergrund](https://ai.google.dev/gemini-api/docs/background-execution?hl=de)
-- [Überlegungen](https://ai.google.dev/gemini-api/docs/thinking?hl=de)
-- [Lange Decodierung mit der GenerateContent API](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=de)
+- [มีอะไรใหม่ใน Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/latest-model?hl=th)
+- [การดำเนินการเมื่ออยู่เบื้องหลัง](https://ai.google.dev/gemini-api/docs/background-execution?hl=th)
+- [การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)
+- [การถอดรหัสแบบยาวด้วย GenerateContent API](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=th)
 
-Feedback geben
+ส่งความคิดเห็น
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Zuletzt aktualisiert: 2026-10-13 (UTC).
+อัปเดตล่าสุด 2026-10-13 UTC
 
-Haben Sie Feedback für uns?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-10-13 (UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-10-13 UTC"],[],[]]

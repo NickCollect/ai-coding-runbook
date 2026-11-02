@@ -1,86 +1,86 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=fr
-fetched_at: 2026-10-26T05:46:29.559768+00:00
-title: "Erreurs d'API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=ar
+fetched_at: 2026-11-02T07:17:58.975214+00:00
+title: "\u0623\u062e\u0637\u0627\u0621 \u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
+‫Gemini 4 Argon متاح الآن. [جرِّب هذه الميزة](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ar).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Envoyer des commentaires
+إرسال ملاحظات
 
-# Erreurs d'API
+# أخطاء واجهة برمجة التطبيقات
 
-Cette page fournit une documentation de référence pour tous les codes d'erreur de l'API Interactions, décrit le format de réponse d'erreur et explique comment l'API renvoie les erreurs pour différents types de requêtes.
+تقدّم هذه الصفحة مرجعًا لجميع رموز الخطأ في Interactions API، وتوضّح تنسيق الاستجابة للأخطاء، وتشرح كيفية عرض واجهة برمجة التطبيقات للأخطاء في أنواع الطلبات المختلفة.
 
-## Codes d'erreur de l'API Standard
+## رموز الخطأ العادية في واجهة برمجة التطبيقات
 
-Ces codes d'erreur généraux au niveau de la requête correspondent aux codes d'état HTTP standards.
-Utilisez le champ `code` dans la logique de votre application pour gérer les erreurs de manière programmatique.
+تتوافق رموز الأخطاء العامة هذه على مستوى الطلب مع رموز حالة HTTP العادية.
+استخدِم حقل `code` في منطق التطبيق لمعالجة الأخطاء آليًا.
 
-| Code | État HTTP | Description | Action recommandée |
+| الرمز | حالة HTTP | الوصف | الإجراء المقترَح |
 | --- | --- | --- | --- |
-| `invalid_request` | 400 Requête erronée | La charge utile de la requête est incorrecte ou contient des paramètres non valides. | Vérifiez la syntaxe et les paramètres de votre requête par rapport à la [documentation de référence de l'API](https://ai.google.dev/api/interactions-api?hl=fr). |
-| `failed_precondition` | 400 Requête erronée | La requête ne peut pas être traitée, car une condition préalable n'est pas remplie (par exemple, la facturation est désactivée). | Vérifiez l'état de facturation du projet ou les conditions préalables du compte. |
-| `out_of_range` | 416 Requested Range Not Satisfiable | Le paramètre de requête est en dehors de la plage valide. | Vérifiez les valeurs et les limites des paramètres. |
-| `parameter_unknown` | 400 Requête erronée | La requête contient un paramètre inconnu. | Supprimez le paramètre non reconnu, puis réessayez. |
-| `authentication` | 401 Non autorisé | La clé API est manquante, non valide ou arrivée à expiration. | Vérifiez votre [clé API](https://ai.google.dev/gemini-api/docs/api-key?hl=fr). |
-| `payment_required` | 402 Paiement requis | Votre solde de crédit prépayé est épuisé. | [Ajoutez des crédits](https://ai.google.dev/gemini-api/docs/billing?hl=fr#buy-credits) à votre compte de facturation ou activez la [recharge automatique](https://ai.google.dev/gemini-api/docs/billing?hl=fr#auto-reload). Ne réessayez pas : la requête n'aboutira pas tant que des crédits n'auront pas été ajoutés. |
-| `permission_denied` | 403 Interdit | Votre clé API ne dispose pas des autorisations nécessaires pour cette ressource, ou l'accès à l'API de votre projet est limité. | Vérifiez les autorisations de votre clé API, l'éligibilité de votre niveau de projet et l'état de facturation. Consultez [Résoudre les problèmes liés à un projet restreint ou indisponible](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=fr#project-unavailable). |
-| `not_found` | 404 Not Found | Impossible de trouver la ressource demandée. | Vérifiez le chemin d'accès et les paramètres de la ressource. |
-| `model_not_found` | 404 Not Found | Le modèle spécifié est introuvable. | Vérifiez le nom du modèle ou utilisez un autre modèle. |
-| `already_exists` | 409 Conflit | L'entité que vous avez tenté de créer existe déjà. | Vérifiez si la ressource existe déjà avant de la recréer. |
-| `aborted` | 409 Conflit | L'opération a été annulée en raison d'un conflit ou d'un échec de vérification de simultanéité. | Réessayez la requête à un niveau d'application plus élevé. |
-| `rate_limit_exceeded` | 429 Trop de requêtes | Vous avez dépassé la limite de requêtes ou de jetons par minute ou par seconde. | Attendez et réessayez avec un intervalle exponentiel entre les tentatives. |
-| `quota_exceeded` | 429 Trop de requêtes | Vous avez dépassé votre quota quotidien. | Attendez que le quota soit réinitialisé ou demandez une augmentation de quota. |
-| `too_many_requests` | 429 Trop de requêtes | Vous avez effectué trop de requêtes en peu de temps. | Attendez et réessayez avec un intervalle exponentiel entre les tentatives. |
-| `cancelled` | 499 Client Closed Request | Le client a annulé la requête avant qu'elle ne soit terminée. | Aucune action requise. Cela signifie généralement que le client s'est déconnecté. |
-| `api_error` | 500 Erreur interne du serveur. | Une erreur inattendue s'est produite sur le serveur. | Réessayez d'envoyer la requête. Si le problème persiste, contactez l'assistance. |
-| `unimplemented` | 501 Non implémenté | L'opération ou la fonctionnalité n'est pas implémentée ou n'est pas prise en charge. | Vérifiez les fonctionnalités de l'API ou passez à une fonctionnalité compatible. |
-| `service_unavailable` | 503 Service indisponible. | Le service est temporairement surchargé ou indisponible. | Attendez et réessayez avec un intervalle exponentiel entre les tentatives. |
-| `deadline_exceeded` | 504 Expiration du délai de la passerelle | La requête n'a pas abouti dans le délai imparti. | Supprimez ou augmentez le paramètre de délai client pour utiliser la valeur par défaut du serveur. |
+| `invalid_request` | ‫400 طلب غير صالح | حمولة الطلب مكتوبة بشكلٍ غير صحيح أو تحتوي على معلَمات غير صالحة. | تحقَّق من بنية الطلب ومَعلماته مقارنةً [بمرجع واجهة برمجة التطبيقات](https://ai.google.dev/api/interactions-api?hl=ar). |
+| `failed_precondition` | ‫400 طلب غير صالح | يتعذّر على الخادم معالجة الطلب لأنّه لم يتم استيفاء أحد الشروط الأساسية (على سبيل المثال، تم إيقاف الفوترة). | يُرجى التحقّق من حالة الفوترة في المشروع أو المتطلبات الأساسية للحساب. |
+| `out_of_range` | ‫416 النطاق المطلوب غير قابل للتلبية | مَعلمة الطلب خارج النطاق الصالح. | يُرجى التحقّق من قيم المَعلمات وحدودها. |
+| `parameter_unknown` | ‫400 طلب غير صالح | يحتوي الطلب على معلَمة غير معروفة. | يُرجى إزالة المَعلمة غير المعروفة وإعادة المحاولة. |
+| `authentication` | ‫401 غير مصرّح به | مفتاح واجهة برمجة التطبيقات غير متوفّر أو غير صالح أو منتهي الصلاحية. | تحقَّق من [مفتاح واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/api-key?hl=ar). |
+| `payment_required` | ‫402 مطلوب الدفع | نفد رصيد الدفع المُسبَق. | [أضِف رصيدًا](https://ai.google.dev/gemini-api/docs/billing?hl=ar#buy-credits) إلى حساب الفوترة أو فعِّل ميزة [إعادة التعبئة التلقائية](https://ai.google.dev/gemini-api/docs/billing?hl=ar#auto-reload). لا تُعِد المحاولة: لن ينجح الطلب إلا بعد إضافة أرصدة. |
+| `permission_denied` | ‫403 محظور | لا يملك مفتاح واجهة برمجة التطبيقات إذنًا للوصول إلى هذا المورد، أو أنّ إمكانية وصول مشروعك إلى واجهة برمجة التطبيقات مقيّدة. | يُرجى التحقّق من أذونات مفتاح واجهة برمجة التطبيقات وأهلية فئة المشروع وحالة الفوترة. يُرجى الاطّلاع على [تحديد المشاكل وحلّها في ما يتعلّق بالمشاريع المحظورة أو غير المتاحة](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=ar#project-unavailable). |
+| `not_found` | ‫404 لم يتم العثور على الصفحة | لم يتم العثور على المصدر المطلوب. | يُرجى التحقّق من مسار المورد والمَعلمات. |
+| `model_not_found` | ‫404 لم يتم العثور على الصفحة | لم يتم العثور على النموذج المحدّد. | يُرجى التحقّق من اسم النموذج أو استخدام نموذج آخر. |
+| `already_exists` | ‫409 Conflict | الكيان الذي حاولت إنشاؤه موجود مسبقًا. | يُرجى التحقّق مما إذا كان المورد متوفّرًا قبل إعادة إنشائه. |
+| `aborted` | ‫409 Conflict | تم إلغاء العملية بسبب تعارض أو تعذُّر التحقّق من التزامن. | يُرجى إعادة محاولة إرسال الطلب على مستوى أعلى للتطبيق. |
+| `rate_limit_exceeded` | ‫429 Too Many Requests | لقد تجاوزت الحد الأقصى المسموح به للطلبات أو الرموز المميّزة في الدقيقة أو الثانية. | يُرجى الانتظار وإعادة المحاولة باستخدام خوارزمية الرقود الأسي الثنائي. |
+| `quota_exceeded` | ‫429 Too Many Requests | لقد تجاوزت حصتك اليومية. | يُرجى الانتظار إلى أن تتم إعادة ضبط الحصة أو طلب زيادة الحصة. |
+| `too_many_requests` | ‫429 Too Many Requests | لقد أرسلت عددًا كبيرًا من الطلبات في فترة قصيرة. | يُرجى الانتظار وإعادة المحاولة باستخدام خوارزمية الرقود الأسي الثنائي. |
+| `cancelled` | ‫499: أغلق العميل الطلب | ألغى العميل الطلب قبل اكتماله. | ليس عليك اتّخاذ أي إجراء. يعني هذا عادةً أنّ العميل قد قطع الاتصال. |
+| `api_error` | ‫500: خطأ في الخادم الداخلي | حدث خطأ غير متوقَّع في الخادم. | أعِد محاولة إرسال الطلب. في حال استمرار المشكلة، يُرجى التواصل مع فريق الدعم. |
+| `unimplemented` | ‫501 غير مُنفَّذ | لم يتم تنفيذ العملية أو الميزة أو لم يتم توفيرها. | يُرجى التحقّق من إمكانات واجهة برمجة التطبيقات أو التبديل إلى ميزة متوافقة. |
+| `service_unavailable` | ‫503 الخدمة غير متاحة | الخدمة معطّلة أو تواجه حملاً زائدًا مؤقتًا. | يُرجى الانتظار وإعادة المحاولة باستخدام خوارزمية الرقود الأسي الثنائي. |
+| `deadline_exceeded` | ‫504 انتهت مهلة البوابة | لم يكتمل الطلب خلال الموعد النهائي. | يُرجى إزالة إعداد الموعد النهائي للعميل أو زيادته لاستخدام الإعداد التلقائي للخادم. |
 
-## Codes bloquants de la génération
+## رموز حظر الإنشاء
 
-Ces codes d'erreur indiquent que des restrictions de règles, de sécurité ou de contenu ont bloqué la sortie du modèle. Lorsque vous recevez l'un de ces codes, modifiez votre saisie et réessayez.
+تشير رموز الخطأ هذه إلى أنّ ردّ النموذج تم حظره بسبب قيود السياسة أو الأمان أو المحتوى. عند تلقّي أحد هذه الرموز، عدِّل الإدخال وأعِد المحاولة.
 
-| Code | Description |
+| الرمز | الوصف |
 | --- | --- |
-| `safety` | Des violations des règles de sécurité (contenu nuisible) ont bloqué la requête. |
-| `recitation` | La demande a été bloquée en raison de restrictions liées aux droits d'auteur ou à la récitation. |
-| `language` | Une langue non acceptée a bloqué la requête. |
-| `prohibited_content` | Les consignes relatives au contenu interdit ont bloqué la requête. |
-| `spii` | Les restrictions concernant les informations personnelles sensibles ont bloqué la requête. |
-| `blocklist` | Des termes interdits figurant sur une liste de blocage ont bloqué la requête. |
-| `image_safety` | La génération d'images a été bloquée en raison d'un non-respect des règles de sécurité. |
-| `image_prohibited_content` | Les consignes relatives au contenu interdit ont bloqué la génération d'images. |
-| `image_recitation` | La génération d'images a été bloquée en raison de restrictions liées aux droits d'auteur ou à la récitation. |
-| `image_other` | La génération d'images a été bloquée pour des raisons non spécifiées. |
-| `content_blocked` | Une raison non spécifiée liée aux règles a bloqué la requête. |
+| `safety` | تم حظر الطلب بسبب انتهاكات الأمان (محتوى ضار). |
+| `recitation` | تم حظر الطلب بسبب قيود متعلقة بحقوق الطبع والنشر أو التلاوة. |
+| `language` | تم حظر الطلب بسبب لغة غير متاحة. |
+| `prohibited_content` | تم حظر الطلب بسبب إرشادات المحتوى المحظور. |
+| `spii` | تم حظر الطلب بسبب القيود المفروضة على المعلومات الحسّاسة التي تكشف عن الهويّة. |
+| `blocklist` | تم حظر الطلب بسبب عبارات محظورة في قائمة محظورة. |
+| `image_safety` | تم حظر إنشاء الصورة بسبب انتهاكات لإرشادات الأمان. |
+| `image_prohibited_content` | تم حظر إنشاء الصور بسبب إرشادات المحتوى المحظور. |
+| `image_recitation` | تم حظر إنشاء الصور بسبب قيود متعلقة بحقوق الطبع والنشر أو الاقتباس. |
+| `image_other` | تم حظر إنشاء الصور لأسباب غير محدّدة. |
+| `content_blocked` | تم حظر الطلب لسبب غير محدّد متعلّق بالسياسة. |
 
-## Codes d'erreur de génération
+## رموز الخطأ أثناء إنشاء الردّ
 
-Ces codes d'erreur indiquent un problème structurel avec la sortie générée par le modèle (par exemple, un appel de fonction incorrect ou un appel d'outil non déclaré).
+تشير رموز الخطأ هذه إلى مشكلة في بنية الردّ الذي أنشأه النموذج (مثل استدعاء دالة غير صالح أو استدعاء أداة غير مُعلَن عنه).
 
-| Code | Description |
+| الرمز | الوصف |
 | --- | --- |
-| `malformed_function_call` | Le modèle a produit un appel de fonction qui n'a pas pu être analysé. |
-| `malformed_tool_call` | Le modèle a produit un appel d'outil qui n'a pas pu être analysé. |
-| `unexpected_tool_call` | Le modèle a appelé un outil qui n'a pas été déclaré dans la requête. |
-| `no_image` | Le modèle n'a pas pu générer d'image. |
-| `too_many_tool_calls` | Le modèle a généré plus d'appels d'outils que le nombre autorisé. |
-| `missing_thought_signature` | La réponse ne contient pas la signature de pensée requise. |
+| `malformed_function_call` | أنتج النموذج استدعاء دالة تعذّر تحليله. |
+| `malformed_tool_call` | أنتج النموذج طلبًا للأداة تعذّر تحليله. |
+| `unexpected_tool_call` | استدعى النموذج أداة لم يتم الإعلان عنها في الطلب. |
+| `no_image` | لم يتمكّن النموذج من إنشاء صورة. |
+| `too_many_tool_calls` | أنشأ النموذج طلبات أدوات أكثر من المسموح به. |
+| `missing_thought_signature` | لا يتضمّن الردّ توقيعًا مطلوبًا للفكرة. |
 
-## Format de réponse d'erreur
+## تنسيق الاستجابة للخطأ
 
-Toutes les erreurs de l'API Interactions renvoient un objet `error` contenant un `code` et un `message`. Par exemple, si vous transmettez un type d'outil non compatible, vous obtenez le résultat suivant :
+تُرجع جميع الأخطاء من Interactions API كائن `error` يحتوي على `code` و`message`. على سبيل المثال، يؤدي تمرير نوع أداة غير متوافق إلى عرض ما يلي:
 
 ```
 {
@@ -91,18 +91,18 @@ Toutes les erreurs de l'API Interactions renvoient un objet `error` contenant un
 }
 ```
 
-| Champ | Type | Description |
+| الحقل | النوع | الوصف |
 | --- | --- | --- |
-| `code` | chaîne | Code d'erreur lisible par machine dans `snake_case`. |
-| `message` | chaîne | Description lisible par l'humain du problème. |
+| `code` | سلسلة | رمز خطأ يمكن معالجته آليًا في `snake_case`. |
+| `message` | سلسلة | وصف يمكن لشخص عادي قراءته لما حدث من خطأ |
 
-## Comment les erreurs sont-elles transmises ?
+## كيفية إرسال الأخطاء
 
-L'API renvoie les erreurs différemment selon que vous effectuez une requête HTTP standard ou une requête de streaming (SSE).
+تعرض واجهة برمجة التطبيقات الأخطاء بشكل مختلف استنادًا إلى ما إذا كنت تُجري طلب HTTP عاديًا أو طلب بث (SSE).
 
-### Requêtes HTTP standards
+### طلبات HTTP العادية
 
-Pour les requêtes standards (non diffusées en streaming), l'API définit le code d'état de la réponse HTTP (par exemple, `400 Bad Request`, `401 Unauthorized` ou `429 Too Many Requests`) et renvoie un objet `error` dans le corps de la réponse JSON :
+بالنسبة إلى الطلبات العادية (غير المتعلّقة بالبث)، تضبط واجهة برمجة التطبيقات رمز حالة استجابة HTTP (مثل `400 Bad Request` أو `401 Unauthorized` أو `429 Too Many Requests`) وتعرض عنصر `error` في نص استجابة JSON:
 
 ```
 {
@@ -113,9 +113,9 @@ Pour les requêtes standards (non diffusées en streaming), l'API définit le co
 }
 ```
 
-### Requêtes de streaming (SSE)
+### طلبات البث (SSE)
 
-Pour les requêtes de streaming (`stream: true`), l'API envoie des événements d'erreur via le flux d'événements envoyés par le serveur (SSE) avec `event_type` défini sur `"error"`. Le champ `error` contient la même structure `code` et `message` :
+بالنسبة إلى طلبات البث (`stream: true`)، ترسل واجهة برمجة التطبيقات أحداث الخطأ عبر بث "الأحداث المُرسَلة من الخادم" (SSE) مع ضبط `event_type` على `"error"`. يحتوي الحقل `error` على بنية `code` و`message` نفسها:
 
 ```
 {
@@ -127,19 +127,19 @@ Pour les requêtes de streaming (`stream: true`), l'API envoie des événements 
 }
 ```
 
-Pour obtenir le schéma d'événement SSE complet, consultez la [documentation de référence de l'API Interactions](https://ai.google.dev/api/interactions-api?hl=fr).
+للاطّلاع على مخطّط أحداث SSE الكامل، يُرجى مراجعة [مرجع Interactions API](https://ai.google.dev/api/interactions-api?hl=ar).
 
-## Étape suivante
+## الخطوات التالية
 
-- [Résoudre les problèmes liés aux API](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=fr) : résolvez les problèmes et les scénarios d'erreur courants.
-- [Limites de débit](https://ai.google.dev/gemini-api/docs/rate-limits?hl=fr) : découvrez les limites de requêtes et la gestion des quotas.
+- [تحديد مشاكل واجهة برمجة التطبيقات وحلّها](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=ar): يمكنك حلّ المشاكل الشائعة وسيناريوهات الأخطاء.
+- [حدود المعدّل](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ar): تعرَّف على حدود الطلبات ومعالجة الحصص.
 
-Envoyer des commentaires
+إرسال ملاحظات
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Dernière mise à jour le 2026/10/23 (UTC).
+تاريخ التعديل الأخير: 2026-10-23 (حسب التوقيت العالمي المتفَّق عليه)
 
-Voulez-vous nous donner plus d'informations ?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/23 (UTC)."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-10-23 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

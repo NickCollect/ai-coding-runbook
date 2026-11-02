@@ -1,42 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/structured-output?hl=bn
-fetched_at: 2026-10-26T05:48:26.659521+00:00
-title: "\u09b8\u09cd\u099f\u09cd\u09b0\u09be\u0995\u099a\u09be\u09b0\u09cd\u09a1 \u0986\u0989\u099f\u09aa\u09c1\u099f \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/structured-output?hl=ko
+fetched_at: 2026-11-02T07:22:18.289328+00:00
+title: "\uad6c\uc870\ud654\ub41c \ucd9c\ub825 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=bn)।
+Gemini 4 Argon을 지금 이용 가능합니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [হোম](https://ai.google.dev/?hl=bn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=bn)
-- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs/generate-content?hl=bn)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs/generate-content?hl=ko)
 
-মতামত জানান
+의견 보내기
 
-# স্ট্রাকচার্ড আউটপুট
+# 구조화된 출력
 
-আপনি Gemini মডেল কনফিগার করতে পারেন যাতে এটি প্রদত্ত JSON স্কিমা মেনে চলে এমন উত্তর তৈরি করে। এটি অনুমানযোগ্য, টাইপ-নিরাপদ ফলাফল নিশ্চিত করে এবং আনস্ট্রাকচার্ড টেক্সট থেকে স্ট্রাকচার্ড ডেটা এক্সট্র্যাক্ট করার প্রসেসকে সহজ করে তোলে।
+제공된 JSON 스키마를 준수하는 대답을 생성하도록 Gemini 모델을 구성할 수 있습니다. 이렇게 하면 예측 가능하고 유형 안전한 결과가 보장되고 비정형 텍스트에서 정형 데이터를 추출하는 작업이 간소화됩니다.
 
-স্ট্রাকচার্ড আউটপুট ব্যবহার করা এগুলির জন্য আদর্শ:
+구조화된 출력을 사용하는 것은 다음과 같은 경우에 적합합니다.
 
-- **ডেটা এক্সট্র্যাকশন:** টেক্সট থেকে নাম ও তারিখের মতো নির্দিষ্ট তথ্য বের করে আনা।
-- **স্ট্রাকচার্ড ক্লাসিফিকেশন:** পূর্বনির্ধারিত বিভাগে টেক্সট ক্লাসিফাই করুন।
-- **এজেন্টিক ওয়ার্কফ্লো:** টুল বা API-এর জন্য স্ট্রাকচার্ড ইনপুট তৈরি করুন।
+- **데이터 추출:** 텍스트에서 이름, 날짜와 같은 특정 정보를 추출합니다.
+- **정형 분류:** 텍스트를 사전 정의된 카테고리로 분류합니다.
+- **에이전트 워크플로:** 도구 또는 API에 대한 구조화된 입력을 생성합니다.
 
-REST API-তে JSON স্কিমা সাপোর্ট করার পাশাপাশি, Google GenAI SDK
-[Pydantic](https://docs.pydantic.dev/latest/) (Python) এবং
-[Zod](https://zod.dev/) (JavaScript) ব্যবহার করে
-সহজেই স্কিমা নির্ধারণ করতে সাহায্য করে।
+Google GenAI SDK는 REST API에서 JSON 스키마를 지원하는 것 외에도 [Pydantic](https://docs.pydantic.dev/latest/) (Python) 및 [Zod](https://zod.dev/) (JavaScript)를 사용하여 스키마를 쉽게 정의할 수 있습니다.
 
-## স্ট্রাকচার্ড আউটপুটের উদাহরণ
+## 구조화된 출력 예시
 
-### রেসিপি এক্সট্র্যাক্টর
+### 레시피 추출기
 
-এই উদাহরণে দেখানো হয়েছে যে কীভাবে `object`, `array`, `string` ও `integer`-এর মতো বেসিক JSON স্কিমা টাইপ ব্যবহার করে টেক্সট থেকে স্ট্রাকচার্ড ডেটা এক্সট্র্যাক্ট করা যায়।
+이 예시에서는 `object`, `array`, `string`, `integer`와 같은 기본 JSON 스키마 유형을 사용하여 텍스트에서 구조화된 데이터를 추출하는 방법을 보여줍니다.
 
 ### Python
 
@@ -84,7 +81,7 @@ recipe = Recipe.model_validate_json(response.text)
 print(recipe)
 ```
 
-### জাভাস্ক্রিপ্ট
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -132,7 +129,7 @@ const recipe = recipeSchema.parse(JSON.parse(response.text));
 console.log(recipe);
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -217,7 +214,7 @@ func main() {
 }
 ```
 
-### বিশ্রাম
+### REST
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -269,7 +266,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
     }'
 ```
 
-**উদাহরণস্বরূপ উত্তর:**
+**응답 예시:**
 
 ```
 {
@@ -324,9 +321,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-### কন্টেন্ট মডারেশন
+### 콘텐츠 검토
 
-এই উদাহরণে কন্ডিশনাল স্কিমার জন্য `anyOf` এবং শ্রেণীবিন্যাসের জন্য `enum` দেখানো হয়েছে, যা কন্টেন্টের উপর ভিত্তি করে আউটপুট স্ট্রাকচার পরিবর্তন করার অনুমতি দেয়।
+이 예시에서는 조건부 스키마에 `anyOf`를, 분류에 `enum`를 사용하여 콘텐츠에 따라 출력 구조를 다르게 할 수 있습니다.
 
 ### Python
 
@@ -366,7 +363,7 @@ result = ModerationResult.model_validate_json(response.text)
 print(result)
 ```
 
-### জাভাস্ক্রিপ্ট
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -407,7 +404,7 @@ const result = moderationResultSchema.parse(JSON.parse(response.text));
 console.log(result);
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -491,7 +488,7 @@ func main() {
 }
 ```
 
-### বিশ্রাম
+### REST
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -555,10 +552,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-### স্ট্রাকচারের পুনরাবৃত্তি
+### 재귀 구조
 
-এই উদাহরণে দেখানো হয়েছে যে কীভাবে একটি রিকার্সিভ স্কিমা যেমন একটি প্রতিষ্ঠানের চার্ট
-সংজ্ঞায়িত করা যায়।
+이 예시에서는 조직도와 같은 재귀 스키마를 정의하는 방법을 보여줍니다.
 
 ### Python
 
@@ -596,7 +592,7 @@ employee = Employee.model_validate_json(response.text)
 print(employee)
 ```
 
-### জাভাস্ক্রিপ্ট
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -629,7 +625,7 @@ const employee = employeeSchema.parse(JSON.parse(response.text));
 console.log(employee);
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -685,7 +681,7 @@ func main() {
 }
 ```
 
-### বিশ্রাম
+### REST
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -723,7 +719,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
     }'
 ```
 
-**উদাহরণস্বরূপ উত্তর:**
+**응답 예시:**
 
 ```
 {
@@ -750,12 +746,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-## স্ট্রিমিং
+## 스트리밍
 
-আপনি স্ট্রাকচার্ড আউটপুট স্ট্রিম করতে পারেন, যা আপনাকে সম্পূর্ণ আউটপুট সম্পূর্ণ হওয়ার জন্য অপেক্ষা না করেই, জেনারেট হওয়ার সাথে সাথে উত্তর প্রসেস করা শুরু করতে দেয়। এটি আপনার অ্যাপ্লিকেশনের পারফর্ম্যান্স উন্নত করতে পারে।
+구조화된 출력을 스트리밍할 수 있으므로 전체 출력이 완료될 때까지 기다릴 필요 없이 응답이 생성되는 동안 응답 처리를 시작할 수 있습니다. 이렇게 하면 애플리케이션의 인지 성능이 개선될 수 있습니다.
 
-স্ট্রিম করা চাঙ্কগুলি সঠিক আংশিক JSON স্ট্রিং হবে, যা
-চূড়ান্ত, সম্পূর্ণ JSON অবজেক্ট তৈরি করতে কনক্যাটিনেট করা যেতে পারে।
+스트리밍된 청크는 유효한 부분 JSON 문자열이며, 이를 연결하여 최종 완성된 JSON 객체를 형성할 수 있습니다.
 
 ### Python
 
@@ -784,7 +779,7 @@ for chunk in response_stream:
     print(chunk.candidates[0].content.parts[0].text)
 ```
 
-### জাভাস্ক্রিপ্ট
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -813,14 +808,9 @@ for await (const chunk of stream) {
 }
 ```
 
-## টুলের মাধ্যমে স্ট্রাকচার্ড আউটপুট
+## 도구를 사용한 구조화된 출력
 
-Gemini 3 আপনাকে বিল্ট-ইন টুলের সাথে স্ট্রাকচার্ড আউটপুট একত্রিত করতে দেয়, যার মধ্যে রয়েছে
-[Grounding with Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=bn),
-[URL কন্টেক্সট](https://ai.google.dev/gemini-api/docs/url-context?hl=bn),
-[কোড এক্সিকিউশন](https://ai.google.dev/gemini-api/docs/code-execution?hl=bn),
-[ফাইল সার্চ](https://ai.google.dev/gemini-api/docs/file-search?hl=bn#structured-output) এবং
-[ফাংশন কলিং](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn)।
+Gemini 3를 사용하면 구조화된 출력을 [Google 검색을 사용한 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko), [URL 컨텍스트](https://ai.google.dev/gemini-api/docs/url-context?hl=ko), [코드 실행](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko), [파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko#structured-output), [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)과 같은 기본 제공 도구와 결합할 수 있습니다.
 
 ### Python
 
@@ -853,7 +843,7 @@ result = MatchResult.model_validate_json(response.text)
 print(result)
 ```
 
-### জাভাস্ক্রিপ্ট
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -889,7 +879,7 @@ async function run() {
 run();
 ```
 
-### বিশ্রাম
+### REST
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-argon:generateContent" \
@@ -927,104 +917,104 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-argon:gen
   }'
 ```
 
-## JSON স্কিমা সংক্রান্ত সহায়তা
+## JSON 스키마 지원
 
-JSON অবজেক্ট তৈরি করতে, জেনারেশন কনফিগারেশনে `response_json_schema` (অথবা REST-এ `responseFormat.text.schema`) সেট করুন। স্কিমাটি অবশ্যই একটি সঠিক [JSON স্কিমা](https://json-schema.org/) হতে হবে যা কাঙ্ক্ষিত আউটপুট ফর্ম্যাট বর্ণনা করে।
+JSON 객체를 생성하려면 생성 구성에서 `response_json_schema` (또는 REST의 `responseFormat.text.schema`)를 설정합니다. 스키마는 원하는 출력 형식을 설명하는 유효한 [JSON 스키마](https://json-schema.org/)여야 합니다.
 
-মডেলটি তখন একটি উত্তর তৈরি করবে যা প্রদত্ত স্কিমার সাথে মিলে যায় এমন একটি সিনট্যাক্টিক্যালি সঠিক JSON স্ট্রিং। স্ট্রাকচার্ড আউটপুট ব্যবহার করার সময়, মডেলটি স্কিমার কীগুলির মতো একই ক্রমে আউটপুট তৈরি করবে।
+그러면 모델이 제공된 스키마와 일치하는 구문상 유효한 JSON 문자열인 대답을 생성합니다. 구조화된 출력을 사용하면 모델이 스키마의 키와 동일한 순서로 출력을 생성합니다.
 
-Gemini-র স্ট্রাকচার্ড আউটপুট মোড [JSON স্কিমা](https://json-schema.org) স্পেসিফিকেশনের সাবসেট সাপোর্ট করে।
+Gemini의 구조화된 출력 모드는 [JSON 스키마](https://json-schema.org) 사양의 하위 집합을 지원합니다.
 
-`type`-এর নিম্নলিখিত ভ্যালু কাজ করে:
+다음과 같은 `type` 값이 지원됩니다.
 
-- **`string`**: টেক্সটের জন্য।
-- **`number`**: ফ্লোটিং-পয়েন্ট সংখ্যার জন্য।
-- **`integer`**: পূর্ণ সংখ্যার জন্য।
-- **`boolean`**: সত্য/মিথ্যা মানের জন্য।
-- **`object`**: কী-ভ্যালু পেয়ার সহ স্ট্রাকচার্ড ডেটার জন্য।
-- **`array`**: আইটেমের তালিকার জন্য।
-- **`null`**: কোনও প্রপার্টিকে ফাঁকা রাখার অনুমতি দিতে, টাইপ অ্যারেতে `"null"` অন্তর্ভুক্ত করুন (যেমন, `{"type": ["string", "null"]}`)।
+- **`string`**: 텍스트
+- **`number`**: 부동 소수점 숫자입니다.
+- **`integer`**: 정수입니다.
+- **`boolean`**: 참/거짓 값입니다.
+- **`object`**: 키-값 쌍이 있는 정형 데이터입니다.
+- **`array`**: 항목 목록입니다.
+- **`null`**: 속성이 null이 되도록 허용하려면 유형 배열에 `"null"`를 포함합니다 (예: `{"type": ["string", "null"]}`).
 
-এইসব বর্ণনামূলক প্রপার্টি মডেলকে নির্দেশ দিতে সাহায্য করে:
+이러한 설명 속성은 모델을 안내하는 데 도움이 됩니다.
 
-- **`title`**: কোনও প্রপার্টির সংক্ষিপ্ত বিবরণ।
-- **`description`**: কোনও প্রপার্টির আরও দীর্ঘ ও বিস্তারিত বিবরণ।
+- **`title`**: 속성에 대한 간단한 설명입니다.
+- **`description`**: 숙박 시설에 관한 더 길고 자세한 설명입니다.
 
-### ধরন-নির্দিষ্ট প্রপার্টি
+### 유형별 속성
 
-**`object` ভ্যালুর জন্য:**
+**`object` 값:**
 
-- **`properties`**: এমন একটি অবজেক্ট যেখানে প্রতিটি কী হল একটি প্রপার্টির নাম এবং প্রতিটি ভ্যালু হল সেই প্রপার্টির জন্য একটি স্কিমা।
-- **`required`**: স্ট্রিংয়ের একটি অ্যারে, কোন কোন প্রপার্টি বাধ্যতামূলক তা তালিকাভুক্ত করে।
-- **`additionalProperties`**: `properties`-এ তালিকাভুক্ত নয় এমন প্রপার্টি অনুমোদিত কিনা তা নিয়ন্ত্রণ করে। বুলিয়ান বা স্কিমা হতে পারে।
+- **`properties`**: 각 키가 속성 이름이고 각 값이 해당 속성의 스키마인 객체입니다.
+- **`required`**: 필수 속성을 나열하는 문자열 배열입니다.
+- **`additionalProperties`**: `properties`에 나열되지 않은 속성이 허용되는지 여부를 제어합니다. 불리언 또는 스키마일 수 있습니다.
 
-**`string` ভ্যালুর জন্য:**
+**`string` 값:**
 
-- **`enum`**: ক্লাসিফিকেশন টাস্কের জন্য সম্ভাব্য স্ট্রিংয়ের নির্দিষ্ট সেট তালিকাভুক্ত করে।
-- **`format`**: স্ট্রিংয়ের জন্য সিনট্যাক্স নির্দিষ্ট করে, যেমন `date-time`, `date`, `time`।
+- **`enum`**: 분류 작업에 사용할 수 있는 특정 문자열 집합을 나열합니다.
+- **`format`**: 문자열의 문법을 지정합니다(예: `date-time`, `date`, `time`).
 
-**`number` এবং `integer` ভ্যালুর জন্য:**
+**`number` 및 `integer` 값:**
 
-- **`enum`**: সম্ভাব্য সংখ্যাসূচক মানের একটি নির্দিষ্ট সেট তালিকাভুক্ত করে।
-- **`minimum`**: ন্যূনতম ইনক্লুসিভ ভ্যালু।
-- **`maximum`**: সর্বাধিক ইনক্লুসিভ ভ্যালু।
+- **`enum`**: 가능한 숫자 값의 특정 집합을 나열합니다.
+- **`minimum`**: 최솟값(포함)입니다.
+- **`maximum`**: 최댓값(포함)입니다.
 
-**`array` ভ্যালুর জন্য:**
+**`array` 값:**
 
-- **`items`**: অ্যারের সব আইটেমের জন্য স্কিমা নির্ধারণ করে।
-- **`prefixItems`**: প্রথম N আইটেমের জন্য স্কিমার তালিকা নির্ধারণ করে, যা টিউপলের মতো স্ট্রাকচারের অনুমতি দেয়।
-- **`minItems`**: অ্যারেতে আইটেমের ন্যূনতম সংখ্যা।
-- **`maxItems`**: অ্যারেতে আইটেমের সর্বাধিক সংখ্যা।
+- **`items`**: 배열의 모든 항목에 대한 스키마를 정의합니다.
+- **`prefixItems`**: 처음 N개 항목의 스키마 목록을 정의하여 튜플과 같은 구조를 허용합니다.
+- **`minItems`**: 배열의 최소 항목 수입니다.
+- **`maxItems`**: 배열의 최대 항목 수입니다.
 
-## মডেল সহায়তা
+## 모델 지원
 
-নিম্নলিখিত মডেলগুলি স্ট্রাকচার্ড আউটপুট সমর্থন করে:
+다음 모델은 구조화된 출력을 지원합니다.
 
-| মডেল | স্ট্রাকচার্ড আউটপুট |
+| 모델 | 구조화된 출력 |
 | --- | --- |
 | Gemini 4 Argon | ✔️ |
 | Gemini 3.8 Flash | ✔️ |
 | Gemini 3.6 Flash | ✔️ |
 | Gemini 3.5 Flash-Lite | ✔️ |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Gemini 3.1 Pro প্রিভিউ | ✔️ |
-| Gemini 3.1 Flash-Lite প্রিভিউ | ✔️ |
+| Gemini 3.1 Pro 프리뷰 | ✔️ |
+| Gemini 3.1 Flash-Lite 프리뷰 | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️\* |
 | Gemini 2.0 Flash-Lite | ✔️\* |
 
-*\* মনে রাখবেন যে Gemini 2.0-এর ক্ষেত্রে পছন্দের স্ট্রাকচার নির্ধারণ করার জন্য JSON ইনপুটের মধ্যে একটি স্পষ্ট `propertyOrdering` তালিকা প্রয়োজন। আপনি এই [কুকবুক](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb)-এ একটি উদাহরণ দেখতে পাবেন।*
+*\* Gemini 2.0에서는 선호하는 구조를 정의하기 위해 JSON 입력 내에 명시적인 `propertyOrdering` 목록이 필요합니다. 이 [cookbook](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb)에서 예시를 확인할 수 있습니다.*
 
-## স্ট্রাকচার্ড আউটপুট বনাম ফাংশন কলিং
+## 구조화된 출력과 함수 호출 비교
 
-স্ট্রাকচার্ড আউটপুট এবং ফাংশন কলিং, উভয় ক্ষেত্রেই JSON স্কিমা ব্যবহার করা হয়, তবে এগুলি আলাদা আলাদা উদ্দেশ্যে ব্যবহার করা হয়:
+구조화된 출력과 함수 호출은 모두 JSON 스키마를 사용하지만 용도가 다릅니다.
 
-| ফিচার | প্রাথমিক ব্যবহারিক ক্ষেত্র |
+| 기능 | 주요 사용 사례 |
 | --- | --- |
-| **স্ট্রাকচার্ড আউটপুট** | **ব্যবহারকারীর জন্য চূড়ান্ত উত্তর ফর্ম্যাট করা হচ্ছে।** মডেলের *উত্তর* নির্দিষ্ট কোনও ফর্ম্যাটে পেতে চাইলে এটি ব্যবহার করুন (যেমন, ডেটাবেসে সেভ করার জন্য কোনও ডকুমেন্ট থেকে ডেটা এক্সট্র্যাক্ট করা)। |
-| **ফাংশন কলিং** | **কথোপকথন চলাকালীন অ্যাকশন নেওয়া।** মডেলকে কোনও চূড়ান্ত উত্তর দেওয়ার আগে কোনও টাস্ক (যেমন, "বর্তমান আবহাওয়ার তথ্য পাওয়া") সম্পূর্ণ করার জন্য *আপনাকে জিজ্ঞাসা* করতে হলে এটি ব্যবহার করুন। |
+| **구조화된 출력** | **사용자에게 보낼 최종 대답의 형식을 지정합니다.** 모델의 *대답*이 특정 형식이어야 하는 경우 (예: 문서에서 데이터를 추출하여 데이터베이스에 저장)에 사용합니다. |
+| **함수 호출** | **대화 중에 조치 취하기** 모델이 최종 답변을 제공하기 전에 작업을 수행하도록 *사용자에게 요청*해야 하는 경우 (예: '현재 날씨 가져오기')에 사용합니다. |
 
-## পেশাদার পদ্ধতি
+## 권장사항
 
-- **স্পষ্ট বিবরণ:** প্রতিটি প্রপার্টি কী উপস্থাপন করে সেই সম্পর্কে মডেলকে স্পষ্ট নির্দেশাবলী প্রদান করতে আপনার স্কিমার `description` ফিল্ড ব্যবহার করুন। মডেলের আউটপুটকে গাইড করার জন্য এটি অত্যন্ত গুরুত্বপূর্ণ।
-- **স্ট্রং টাইপিং:** যখনই সম্ভব নির্দিষ্ট টাইপ (`integer`, `string`, `enum`) ব্যবহার করুন। কোনও প্যারামিটারে সীমিত সংখ্যক সঠিক ভ্যালু থাকলে, `enum` ব্যবহার করুন।
-- **প্রম্পট ইঞ্জিনিয়ারিং:** আপনি মডেলকে দিয়ে কী করাতে চান তা আপনার প্রম্পটে স্পষ্টভাবে উল্লেখ করুন। যেমন, "টেক্সট থেকে নিম্নলিখিত তথ্য এক্সট্র্যাক্ট করুন..." বা "প্রদত্ত স্কিমা অনুযায়ী এই মতামত শ্রেণীবদ্ধ করুন..."।
-- **যাচাইকরণ:** স্ট্রাকচার্ড আউটপুট সিনট্যাক্সগতভাবে সঠিক JSON-এর গ্যারেন্টি দিলেও, এটি ভ্যালুগুলি শব্দার্থগতভাবে সঠিক হওয়ার গ্যারেন্টি দেয় না। আপনার অ্যাপ্লিকেশন কোড ব্যবহার করার আগে সবসময় চূড়ান্ত আউটপুট যাচাই করুন।
-- **সমস্যা ম্যানেজ করা:** আপনার অ্যাপ্লিকেশনে সমস্যা ম্যানেজ করার জন্য শক্তিশালী ব্যবস্থা প্রয়োগ করুন যাতে মডেলের আউটপুট স্কিমা-সম্মত হলেও আপনার ব্যবসার লজিক সংক্রান্ত প্রয়োজনীয়তা পূরণ না করলে, সেই পরিস্থিতি সুন্দরভাবে ম্যানেজ করা যায়।
+- **명확한 설명:** 스키마의 `description` 필드를 사용하여 각 속성이 나타내는 바를 모델에 명확하게 안내합니다. 이는 모델의 출력을 안내하는 데 매우 중요합니다.
+- **강력한 유형 지정:** 가능하면 특정 유형 (`integer`, `string`, `enum`)을 사용합니다. 매개변수에 유효한 값이 제한되어 있는 경우 `enum`를 사용합니다.
+- **프롬프트 엔지니어링:** 모델이 수행할 작업을 프롬프트에 명확하게 명시합니다. 예를 들어 '텍스트에서 다음 정보를 추출합니다…' 또는 '제공된 스키마에 따라 이 의견을 분류합니다…'라고 작성합니다.
+- **검증:** 구조화된 출력은 구문상 올바른 JSON을 보장하지만 값이 의미상 올바른지는 보장하지 않습니다. 애플리케이션 코드에서 최종 출력을 사용하기 전에 항상 검증하세요.
+- **오류 처리:** 애플리케이션에 강력한 오류 처리를 구현하여 모델의 출력이 스키마를 준수하지만 비즈니스 로직 요구사항을 충족하지 못하는 경우를 원활하게 관리합니다.
 
-## সীমাবদ্ধতা
+## 제한사항
 
-- **স্কিমা সাবসেট:** JSON স্কিমা স্পেসিফিকেশনের সব ফিচার কাজ করে না। মডেলটি কাজ করে না এমন প্রপার্টি উপেক্ষা করে।
-- **স্কিমার জটিলতা:** API খুব বড় বা গভীরভাবে নেস্ট করা স্কিমা প্রত্যাখ্যান করতে পারে। আপনি কোনও সমস্যার সম্মুখীন হলে, প্রপার্টির নাম ছোট করে, নেস্টিং কমিয়ে বা সীমাবদ্ধতার সংখ্যা সীমিত করে আপনার স্কিমা সহজ করার চেষ্টা করুন।
+- **스키마 하위 집합:** JSON 스키마 사양의 일부 기능은 지원되지 않습니다. 모델은 지원되지 않는 속성을 무시합니다.
+- **스키마 복잡성:** API는 매우 크거나 깊게 중첩된 스키마를 거부할 수 있습니다. 오류가 발생하면 속성 이름을 줄이거나 중첩을 줄이거나 제약 조건 수를 제한하여 스키마를 단순화해 보세요.
 
-মতামত জানান
+의견 보내기
 
-অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-2026-10-19 UTC-তে শেষবার আপডেট করা হয়েছে।
+최종 업데이트: 2026-10-19(UTC)
 
-আমাদের আরও কিছু জানাতে চান?
+의견을 전달하고 싶나요?
 
-[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-19 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-10-19(UTC)"],[],[]]

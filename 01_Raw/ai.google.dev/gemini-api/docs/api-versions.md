@@ -1,67 +1,68 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=ja
-fetched_at: 2026-10-26T05:58:23.350154+00:00
-title: "API \u30d0\u30fc\u30b8\u30e7\u30f3\u306e\u8aac\u660e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=he
+fetched_at: 2026-11-02T07:18:18.866935+00:00
+title: "\u05d4\u05e1\u05d1\u05e8 \u05e2\u05dc \u05d2\u05e8\u05e1\u05d0\u05d5\u05ea API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+‫Gemini 4 Argon זמין עכשיו. [רוצים לנסות?](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=he)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [API リファレンス](https://ai.google.dev/api?hl=ja)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [הפניית API](https://ai.google.dev/api?hl=he)
 
-フィードバックを送信
+שליחת משוב
 
-# API バージョンの説明
+# הסבר על גרסאות API
 
-このドキュメントでは、Gemini API の `v1` バージョンと `v1beta` バージョンの違いの概要について説明します。
+במאמר הזה מוסברים ההבדלים העיקריים בין גרסאות `v1` ו-`v1beta` של Gemini API.
 
-- **v1**: API の安定版。安定版の機能は、メジャー バージョンのライフサイクル全体にわたって完全にサポートされます。互換性を破る変更がある場合は、API の新しいメジャー バージョンが作成され、既存のバージョンは妥当な期間の後に非推奨になります。メジャー バージョンを変更せずに、API に非破壊的変更が導入されることがあります。**Interactions API** とそのコア機能は、`v1` で一般提供されています。
-- **v1beta**: このバージョンには、開発中の初期の機能が含まれています。`v1beta` の機能は、フィードバックに基づいて改善されるため、変更される可能性がありますが、安定版に昇格する前に新機能を試すことができます。
+- ‫**v1**: גרסה יציבה של ה-API. התכונות בגרסה היציבה נתמכות באופן מלא לאורך כל חיי הגרסה הראשית. אם יהיו שינויי תוכנה שעלולים לגרום לכשל, ניצור גרסה ראשית חדשה של ה-API ונוציא משימוש את הגרסה הקיימת אחרי פרק זמן סביר.
+  יכול להיות שיוכנסו שינויים שלא גורמים לכשל ב-API בלי לשנות את הגרסה הראשית. ‫**Interactions API** והתכונות העיקריות שלו זמינים לכלל המשתמשים ב-`v1`.
+- ‫**v1beta**: הגרסה הזו כוללת תכונות ויכולות מוקדמות שנמצאות בפיתוח פעיל. התכונות ב-`v1beta` עשויות להשתנות ככל שאנחנו משפרים אותן על סמך משוב, אבל אתם יכולים לנסות יכולות חדשות לפני שהן מועברות לגרסה היציבה.
 
-## 機能のサポート
+## תמיכה ביכולות ובתכונות
 
-次の表に、`v1`（GA）と `v1beta`（ベータ版）の機能の可用性を示します。特に指定がない限り、コア API の機能とツールは Interactions API と `generateContent` の両方に適用されます。
+בטבלה הבאה מפורטת הזמינות של היכולות ב-`v1` (GA) וב-`v1beta` (בטא). הכלים והיכולות העיקריים של ה-API חלים גם על Interactions API וגם על `generateContent`, אלא אם צוין אחרת:
 
-| 機能 | v1 | v1beta |
+| תכונה | v1 | v1beta |
 | --- | --- | --- |
-| **Core API の機能** |  |  |
-| [Interactions API](https://ai.google.dev/gemini-api/docs/get-started?hl=ja) |  |  |
-| [関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja) |  |  |
-| [構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja) |  |  |
-| [思考 / 推論](https://ai.google.dev/gemini-api/docs/thinking?hl=ja) |  |  |
-| [システム指示](https://ai.google.dev/gemini-api/docs/system-instructions?hl=ja) |  |  |
-| [音声出力（音声構成）](https://ai.google.dev/gemini-api/docs/audio?hl=ja) |  |  |
-| [サービスティア（優先 / フレキシブル）](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja) |  |  |
-| **ツール** |  |  |
-| [コード実行ツール](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja) |  |  |
-| [Google 検索グラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja) |  |  |
-| [Google マップのグラウンディング](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja) |  |  |
-| [URL コンテキスト ツール](https://ai.google.dev/gemini-api/docs/url-context?hl=ja) |  |  |
-| [ファイル検索ツール](https://ai.google.dev/gemini-api/docs/file-search?hl=ja) |  |  |
-| [コンピュータ使用ツール](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja) |  |  |
-| [MCP サーバーツール](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#mcp) |  |  |
-| **リアルタイム API** |  |  |
-| [Live API（WebSocket）](https://ai.google.dev/gemini-api/docs/live-api?hl=ja) |  |  |
-| [Live Music API](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=ja) |  |  |
-| [エフェメラル トークン（Live API）](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=ja) |  |  |
-| **プラットフォーム API** |  |  |
-| [Models API](https://ai.google.dev/gemini-api/docs/models?hl=ja) |  |  |
-| [Files Service Route](https://ai.google.dev/gemini-api/docs/files?hl=ja) |  |  |
-| [ファイル検索でルートを保存](https://ai.google.dev/gemini-api/docs/file-search?hl=ja) |  |  |
-| [Agents API](https://ai.google.dev/gemini-api/docs/agents?hl=ja) |  |  |
-| [Webhooks API](https://ai.google.dev/gemini-api/docs/webhooks?hl=ja) |  |  |
-| [コンテキスト キャッシュ保存](https://ai.google.dev/gemini-api/docs/caching?hl=ja) |  |  |
+| **יכולות ה-API העיקריות** |  |  |
+| [Interactions API](https://ai.google.dev/gemini-api/docs/get-started?hl=he) |  |  |
+| [קריאה להפעלת פונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he) |  |  |
+| [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he) |  |  |
+| [תהליך החשיבה / הרציונל](https://ai.google.dev/gemini-api/docs/thinking?hl=he) |  |  |
+| [הוראות מערכת](https://ai.google.dev/gemini-api/docs/system-instructions?hl=he) |  |  |
+| [פלט אודיו (הגדרת דיבור)](https://ai.google.dev/gemini-api/docs/audio?hl=he) |  |  |
+| [רמת השירות (Priority או Flex)](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he) |  |  |
+| **כלים** |  |  |
+| [כלי להרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he) |  |  |
+| [ביסוס בעזרת חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) |  |  |
+| [ביסוס עובדות במפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he) |  |  |
+| [הכלי URL Context](https://ai.google.dev/gemini-api/docs/url-context?hl=he) |  |  |
+| [כלי לחיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he) |  |  |
+| [הכלי לשימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he) |  |  |
+| [כלי שרתי MCP](https://ai.google.dev/gemini-api/docs/function-calling?hl=he#mcp) |  |  |
+| **ממשקי API בזמן אמת** |  |  |
+| [Live API (WebSockets)](https://ai.google.dev/gemini-api/docs/live-api?hl=he) |  |  |
+| [Live Music API](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=he) |  |  |
+| [טוקנים זמניים (Live API)](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=he) |  |  |
+| **ממשקי API של הפלטפורמה** |  |  |
+| [Models API](https://ai.google.dev/gemini-api/docs/models?hl=he) |  |  |
+| [Files Service Route](https://ai.google.dev/gemini-api/docs/files?hl=he) |  |  |
+| [מסלול החנויות בחיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he) |  |  |
+| [Agents API](https://ai.google.dev/gemini-api/docs/agents?hl=he) |  |  |
+| [Webhooks API](https://ai.google.dev/gemini-api/docs/webhooks?hl=he) |  |  |
+| [שמירת הקשר במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he) |  |  |
 
-- - サポート対象
+- ‫ – יש תמיכה
 
-## SDK で API バージョンを構成する
+## הגדרת גרסת API ב-SDK
 
-Gemini API SDK はデフォルトで `v1beta` に設定されていますが、次のコードサンプルに示すように API バージョンを設定することで、バージョンを明示的に指定できます。
+ערכות ה-SDK של Gemini API מוגדרות כברירת מחדל ל-`v1beta`, אבל אתם יכולים לציין גרסאות באופן מפורש על ידי הגדרת גרסת ה-API, כמו שמוצג בדוגמת הקוד הבאה:
 
 ### Python
 
@@ -173,12 +174,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1/interactions" \
   }'
 ```
 
-フィードバックを送信
+שליחת משוב
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-最終更新日 2026-09-24 UTC。
+עדכון אחרון: 2026-10-30 (שעון UTC).
 
-ご意見をお聞かせください
+רוצה לתת לנו משוב?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-24 UTC。"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-10-30 (שעון UTC)."],[],[]]

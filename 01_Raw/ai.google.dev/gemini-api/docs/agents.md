@@ -1,125 +1,99 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agents?hl=th
-fetched_at: 2026-10-26T05:46:46.351305+00:00
-title: "\u0e20\u0e32\u0e1e\u0e23\u0e27\u0e21\u0e02\u0e2d\u0e07\u0e15\u0e31\u0e27\u0e41\u0e17\u0e19 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agents?hl=ja
+fetched_at: 2026-11-02T07:03:19.197573+00:00
+title: "\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u306e\u6982\u8981 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-ส่งความคิดเห็น
+フィードバックを送信
 
-# ภาพรวมของตัวแทน
+# エージェントの概要
 
-Agent ที่ได้รับการจัดการใน Gemini API จะช่วยให้คุณมีชุดเครื่องมือ Agent ที่กำหนดค่าได้
-การเรียก API ครั้งเดียวจะจัดสรรแซนด์บ็อกซ์ Linux ที่เอเจนต์ใช้ในการให้เหตุผล
-รันโค้ด จัดการไฟล์ และท่องเว็บโดยอัตโนมัติ
+Gemini API のマネージド エージェントは、構成可能なエージェント ハーネスを提供します。1 回の API 呼び出しで、エージェントが推論、コードの実行、ファイルの管理、ウェブの自律的な閲覧を行う Linux サンドボックスがプロビジョニングされます。
 
 [rocket\_launch
 
-คู่มือเริ่มใช้งานฉบับย่อ
+クイックスタート
 
-โทรหา Agent รายการแรก สตรีมคำตอบ และสร้าง Agent ที่กำหนดเอง](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th)
+最初のエージェント呼び出しを行い、レスポンスをストリーミングして、カスタム エージェントを構築します。](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja)
 [smart\_toy
 
-Agent ของ Antigravity
+Antigravity エージェント
 
-ความสามารถ เครื่องมือ อินพุตมัลติโมดัล และราคาสำหรับเอเจนต์เริ่มต้น](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th)
+デフォルトのエージェントの機能、ツール、マルチモーダル入力、料金。](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja)
 [experiment
 
-Agent ใน AI Studio
+AI Studio のエージェント
 
-พื้นที่ทดลองแบบภาพสำหรับการสร้างต้นแบบเอเจนต์โดยไม่ต้องเขียนโค้ด](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=th)
+コードを記述せずにエージェントのプロトタイピングを行うためのビジュアル プレイグラウンド。](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ja)
 
-## Agent ที่มีการจัดการที่พร้อมใช้งาน
+## 利用可能なマネージド エージェント
 
-- **[Agent ของ Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th)**: Agent แบบจัดการอเนกประสงค์
-  ที่สร้างขึ้นด้วย Gemini 3.8 Flash เรียกใช้โค้ด จัดการไฟล์ และ
-  ค้นหาเว็บภายในแซนด์บ็อกซ์ Linux ที่ปลอดภัยซึ่งโฮสต์โดย Google คุณสามารถ
-  กำหนดค่าโมเดลพื้นฐาน (เช่น Gemini 3.6 Flash หรือ Gemini 3.5
-  Flash-Lite) โดยใช้ `agent_config` และขยายโมเดลด้วยคำสั่ง ทักษะ และข้อมูลของคุณเองเพื่อ[สร้างเอเจนต์ที่กำหนดเอง](https://ai.google.dev/gemini-api/docs/custom-agents?hl=th)
-- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th)**: Agent การค้นคว้าข้อมูลแบบอัตโนมัติ ที่วางแผน ดำเนินการ และสังเคราะห์งานค้นคว้าข้อมูลแบบหลายขั้นตอนสำหรับกรณีการใช้งาน เช่น การวิเคราะห์ตลาด การสอบทานธุรกิจ และการทบทวนวรรณกรรม
+- **[Antigravity エージェント](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja)**: Gemini 3.8 Flash で構築された汎用マネージド エージェント。Google がホストする安全な Linux サンドボックス内でコードを実行し、ファイルを管理し、ウェブを検索します。`agent_config` を使用して基盤となるモデル（Gemini 3.6 Flash や Gemini 3.5 Flash-Lite など）を構成し、独自の指示、スキル、データで拡張して[カスタム エージェントを構築](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja)できます。
+- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja)**: マーケット分析、デュー デリジェンス、文献レビューなどのユースケース向けに、複数ステップからなるリサーチタスクを計画、実行、統合する自律型リサーチ エージェント。
 
-## ความปลอดภัยและแนวทางปฏิบัติแนะนำ
+## セキュリティとベスト プラクティス
 
-เอเจนต์ทุกตัวจะทำงานในสภาพแวดล้อมแซนด์บ็อกซ์ที่แยกกันในระดับระบบปฏิบัติการ
-แซนด์บ็อกซ์มีการเข้าถึงเครือข่ายขาออกแบบไม่จำกัดโดยค่าเริ่มต้น คุณ
-จำกัดหรือปิดใช้การเข้าถึงเครือข่ายได้โดยใช้รายการที่อนุญาต
+各エージェントは、OS レベルで分離されたサンドボックス環境で実行されます。サンドボックスには、デフォルトで無制限の送信ネットワーク アクセスがあります。許可リストを使用して、ネットワーク アクセスを制限または無効にできます。
 
-### การเข้าถึงเครือข่าย
+### ネットワーク アクセス
 
-โดยค่าเริ่มต้น สภาพแวดล้อมจะมีสิทธิ์เข้าถึงเครือข่ายขาออกแบบไม่จำกัด ใช้`network`รายการที่อนุญาตเพื่อจำกัดการเข้าชมขาออกไปยังโดเมนที่เฉพาะเจาะจงหรือ
-รูปแบบไวลด์การ์ด โปรดดูรายละเอียดการกำหนดค่าที่
-[รายการที่อนุญาตของเครือข่าย](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=th#network_allow_list) (AI
-Studio) หรือ[กฎเครือข่าย](https://ai.google.dev/gemini-api/docs/custom-agents?hl=th#with_network_rules)
-(API)
+デフォルトでは、環境には制限のないアウトバウンド ネットワーク アクセスがあります。`network` 許可リストを使用して、下り（外向き）トラフィックを特定のドメインまたはワイルドカード パターンに制限します。構成の詳細については、[ネットワーク許可リスト](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ja#network_allow_list)（AI Studio）または[ネットワーク ルール](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja#with_network_rules)（API）をご覧ください。
 
-### เครื่องมือและ API ภายนอก
+### 外部ツールと API
 
-คุณเชื่อมต่อเครื่องมือและ API ภายนอกเพื่อขยายความสามารถของเอเจนต์ได้ ใช้เฉพาะเครื่องมือจากแหล่งที่มาที่เชื่อถือได้และกำหนดขอบเขตสิทธิ์ให้ต่ำที่สุดเท่าที่จำเป็น จัดเก็บ
-ข้อมูลลับเป็นข้อมูลเข้าสู่ระบบที่มีการจัดการและอ้างอิงตามรหัส เพื่อให้พร็อกซีขาออก
-แทรกข้อมูลลับเหล่านั้นในเวลาที่ส่งคำขอและไม่แสดงข้อมูลลับภายในแซนด์บ็อกซ์
-เอเจนต์อาจใช้ข้อมูลเข้าสู่ระบบใดก็ได้ที่เข้าถึงได้ ดังนั้นโปรดระบุเฉพาะข้อมูลเข้าสู่ระบบที่มี
-ขอบเขตทั้งหมดที่คุณยินดีให้สิทธิ์
+外部ツールや API を接続して、エージェントを拡張できます。信頼できるソースのツールのみを使用し、権限の範囲を必要最小限に設定します。シークレットをマネージド認証情報として保存し、ID で参照します。これにより、下り（外向き）プロキシはリクエスト時にシークレットを挿入し、サンドボックス内で公開されることはありません。エージェントはアクセス可能な認証情報を使用する可能性があるため、完全なスコープを付与してもよい認証情報のみを指定してください。
 
-- ใช้บัญชีบริการหรือคีย์ API ที่มีสิทธิ์น้อยที่สุด
-- เลือกใช้โทเค็นที่มีอายุสั้นแทนคีย์ที่มีอายุยาว
-- โปรดระบุเฉพาะข้อมูลเข้าสู่ระบบที่คุณยินดีให้สิทธิ์ขอบเขตทั้งหมด
-- หมุนเวียนข้อมูลเข้าสู่ระบบตามกำหนดการปกติ
+- 最小権限のサービス アカウントまたは API キーを使用します。
+- 有効期間の長い鍵よりも有効期間の短いトークンを優先します。
+- 完全なスコープを付与してもよい認証情報のみを提供してください。
+- 認証情報を定期的にローテーションします。
 
-ดูประเภทข้อมูลเข้าสู่ระบบและการดำเนินการจัดการได้ที่
-[ข้อมูลเข้าสู่ระบบ](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=th) นอกจากนี้ คุณยังตั้งค่าส่วนหัว
-แบบอินไลน์ในกฎรายการที่อนุญาตได้ด้วย โปรดดู[การกำหนดค่า
-เครือข่าย](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th#network-configuration)
+認証情報の種類と管理オペレーションについては、[認証情報](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ja)をご覧ください。許可リストルールのヘッダーをインラインで設定することもできます。[ネットワーク構成](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja#network-configuration)をご覧ください。
 
-### การควบคุมดูแลโดยเจ้าหน้าที่
+### 人間による監視
 
-โปรดตรวจสอบเอาต์พุต (โค้ดที่สร้างขึ้น การเปลี่ยนรูปแบบข้อมูล การเปลี่ยนแปลงการกำหนดค่า) ทุกครั้งก่อนที่จะนําไปใช้ โดยเฉพาะอย่างยิ่งสําหรับงานที่แก้ไขข้อมูลหรือโต้ตอบกับระบบภายนอก
+特に、データを変更するタスクや外部システムとやり取りするタスクについては、出力をデプロイする前に必ず確認してください（生成されたコード、データ変換、構成の変更など）。
 
-## ราคา
+## 料金
 
-Agent ที่ได้รับการจัดการใช้[โมเดลแบบจ่ายเมื่อใช้](https://ai.google.dev/gemini-api/docs/pricing?hl=th#pricing-for-agents)
-ตามโทเค็นโมเดล Gemini และการใช้เครื่องมือ การโต้ตอบครั้งเดียวสามารถทริกเกอร์ลูปการให้เหตุผลหลายลูป ซึ่งโดยปกติจะใช้โทเค็น 100, 000 ถึง 3 ล้านโทเค็น ระบบ**จะไม่เรียกเก็บเงิน**ค่าคอมพิวเตอร์ของสภาพแวดล้อมในระหว่างเวอร์ชันตัวอย่าง ดูรายละเอียดค่าใช้จ่ายต่อชิ้นงานได้ที่[ค่าใช้จ่ายโดยประมาณ](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th#availability-and-pricing)
-นอกจากนี้ Agent ที่ได้รับการจัดการยังพร้อมให้บริการในรุ่นฟรีด้วยการจำกัดอัตราคำขอและโควต้าการใช้งานฟรี
+マネージド エージェントは、Gemini モデルのトークンとツールの使用量に基づく[従量課金制モデル](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#pricing-for-agents)を使用します。1 回のインタラクションで複数の推論ループがトリガーされ、通常は 10 万～ 300 万個のトークンが消費されます。プレビュー期間中は、環境コンピューティングの料金は**請求されません**。タスクごとの内訳については、[見積もり費用](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja#availability-and-pricing)をご覧ください。マネージド エージェントは、無料枠の無料レート上限と使用量割り当てでも利用できます。
 
-## จำกัดสูงสุด
+## 上限
 
-| ขีดจำกัด | คำอธิบาย |
+| 上限 | 説明 |
 | --- | --- |
-| **อายุการใช้งานของสภาพแวดล้อม** | ระบบจะลบสภาพแวดล้อมอย่างถาวรหลังจากไม่มีการใช้งานเป็นเวลา 7 วัน |
-| **การปิด VM** | VM จะปิดหลังจากไม่มีการใช้งานเป็นระยะเวลาสั้นๆ เพื่อประหยัดทรัพยากร คำขอถัดไปจะคืนค่าสถานะ (ด้วย Cold Start) |
-| **ซอฟต์แวร์ที่ติดตั้งไว้ล่วงหน้า** | สภาพแวดล้อมที่ใช้ Ubuntu พร้อม Python 3.12 และ Node.js 22 ดูข้อมูลเพิ่มเติมเกี่ยวกับรูปภาพฐานของสภาพแวดล้อมได้ที่[ซอฟต์แวร์ที่ติดตั้งไว้ล่วงหน้า](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th#pre-installed-software) |
-| **Max agents** | คุณมีตัวแทนที่มีการจัดการได้สูงสุด 1,000 ราย |
+| **環境の有効期間** | 環境は、7 日間使用されないと完全に削除されます。 |
+| **VM のスピンダウン** | リソースを節約するため、VM は操作が行われない状態がしばらく続くとシャットダウンします。次のリクエストは、状態を復元します（コールド スタート）。 |
+| **プリインストールされているソフトウェア** | Python 3.12 と Node.js 22 を使用する Ubuntu ベースの環境。環境のベースイメージの詳細については、[プリインストールされたソフトウェア](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja#pre-installed-software)をご覧ください。 |
+| **最大エージェント数** | 管理対象エージェントは最大 1,000 個まで使用できます。 |
 
-## เฟรมเวิร์กของ Agent
+## エージェント フレームワーク
 
-นอกจากนี้ คุณยังสร้างเอเจนต์ด้วย Gemini โดยใช้เฟรมเวิร์กและ SDK ต่อไปนี้ได้ด้วย
+次のフレームワークと SDK を使用して、Gemini でエージェントを構築することもできます。
 
-- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=th): สร้าง
-  โฟลว์แอปพลิเคชันที่ซับซ้อนแบบมีสถานะและระบบ Multi-Agent โดยใช้โครงสร้างกราฟ
-- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=th): เชื่อมต่อเอเจนต์ Gemini กับ
-  ข้อมูลส่วนตัวของคุณสำหรับเวิร์กโฟลว์ที่ได้รับการปรับปรุงด้วย RAG
-- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=th): จัดระเบียบ AI Agent แบบอัตโนมัติที่ทำงานร่วมกันและสวมบทบาท
-- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=th): สร้าง
-  อินเทอร์เฟซผู้ใช้และเอเจนต์ที่ทำงานด้วยระบบ AI ใน JavaScript/TypeScript
-- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): เฟรมเวิร์กโอเพนซอร์สสําหรับสร้างและจัดระเบียบเอเจนต์ AI ที่ทํางานร่วมกันได้
-- [**Antigravity SDK**](https://antigravity.google/product/antigravity-sdk?hl=th): สร้าง
-  AI Agent ที่ทำงานได้เองโดยใช้เครื่องมือ, ลูปของ Agent และการจัดการบริบทเดียวกัน
-  ที่ขับเคลื่อน Google Antigravity ซึ่งตั้งโปรแกรมใน Python ได้
+- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=ja): グラフ構造を使用して、ステートフルで複雑なアプリケーション フローとマルチエージェント システムを構築します。
+- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=ja): Gemini エージェントをプライベート データに接続して、RAG 強化ワークフローを実現します。
+- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=ja): 共同作業を行うロールプレイングの自律型 AI エージェントをオーケストレートします。
+- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=ja): JavaScript/TypeScript で AI を活用したユーザー インターフェースとエージェントを構築します。
+- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): 相互運用可能な AI エージェントを構築してオーケストレートするためのオープンソース フレームワーク。
+- [**Antigravity SDK**](https://antigravity.google/product/antigravity-sdk?hl=ja): Google Antigravity を支える同じツール、エージェント ループ、コンテキスト管理を使用して、自律型 AI エージェントを構築します。Python でプログラミングできます。
 
-ส่งความคิดเห็น
+フィードバックを送信
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-อัปเดตล่าสุด 2026-10-09 UTC
+最終更新日 2026-10-09 UTC。
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+ご意見をお聞かせください
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-10-09 UTC"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-09 UTC。"],[],[]]

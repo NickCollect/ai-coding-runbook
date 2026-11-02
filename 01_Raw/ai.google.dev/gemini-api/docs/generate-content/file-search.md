@@ -1,32 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/file-search?hl=fa
-fetched_at: 2026-10-26T05:47:36.915728+00:00
-title: "\u062c\u0633\u062a\u062c\u0648\u06cc \u0641\u0627\u06cc\u0644 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/file-search?hl=zh-TW
+fetched_at: 2026-11-02T07:26:41.475315+00:00
+title: "\u6a94\u6848\u641c\u5c0b \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫Gemini 4 Argon اکنون دردسترس است. [امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fa).
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [صفحه اصلی](https://ai.google.dev/?hl=fa)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fa)
-- [سندنگار](https://ai.google.dev/gemini-api/docs/generate-content?hl=fa)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
 
-ارسال بازخورد
+提供意見
 
-# جستجوی فایل
+# 檔案搜尋
 
-«میانای برنامه‌سازی کاربردی Gemini» ازطریق ابزار «جستجوی فایل»، «تولید با کمک بازیابی» ("RAG") را فعال می‌کند. «جستجوی فایل» داده‌های شما را وارد، دسته‌بندی، و نمایه‌گذاری می‌کند تا براساس پیام‌واره ارائه‌شده، بازیابی سریع اطلاعات مرتبط را امکان‌پذیر کند. این اطلاعات بازیابی‌شده سپس به‌عنوان زمینه برای مدل استفاده می‌شود و به آن امکان می‌دهد پاسخ‌های دقیق‌تر و مرتبط‌تری ارائه دهد. جستجوی فایل همچنین می‌تواند قابلیت‌های چندحالته را با جاسازی‌های نوشتاری پشتیبانی‌شده توسط `gemini-embedding-001` و جاسازی تصویری/چندحالته پشتیبانی‌شده توسط `gemini-embedding-2` ارائه دهد.
+Gemini API 可透過檔案搜尋工具啟用檢索增強生成 (RAG) 功能。檔案搜尋會匯入、分塊及建立資料索引，以便根據提供的提示詞快速檢索相關資訊。接著，模型會將擷取的資訊做為背景資訊，提供更準確且相關的答案。檔案搜尋功能也支援多模態功能，可使用 `gemini-embedding-001` 支援的文字嵌入，以及 `gemini-embedding-2` 支援的圖片/多模態嵌入。
 
-ذخیره‌سازی فایل و تولید جاسازی در زمان پُرسمان رایگان است و فقط برای ایجاد جاسازی‌ها هنگام نمایه‌سازی اولیه فایل‌ها و هزینه معمولی توکن‌های ورودی / خروجی مدل Gemini پرداخت خواهید کرد. این الگوی جدید صورت‌حساب باعث می‌شود که ساختن و مقیاس‌بندی با «ابزار جستجوی فایل» هم آسان‌تر و هم مقرون‌به‌صرفه‌تر شود. برای جزئیات، بخش
-[قیمت‌گذاری](#pricing) را ببینید.
+查詢時，檔案儲存和嵌入生成功能皆免費，您只需支付首次建立檔案索引時的嵌入費用，以及一般的 Gemini 模型輸入 / 輸出權杖費用。這個新的計費模式可讓您更輕鬆地建構及擴充檔案搜尋工具，同時兼顧成本效益。詳情請參閱「[定價](#pricing)」部分。
 
-## مستقیماً در فروشگاه «جستجوی فایل» بارگذاری کنید
+## 直接上傳至檔案搜尋商店
 
-این مثال نشان می‌دهد که چگونه می‌توان فایلی را مستقیماً در [فضای ذخیره‌سازی جستجوی فایل](https://ai.google.dev/api/file-search/file-search-stores?hl=fa#method:-media.uploadtofilesearchstore) بارگذاری کرد:
+這個範例說明如何直接將檔案上傳至[檔案搜尋商店](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-tw#method:-media.uploadtofilesearchstore)：
 
 ### Python
 
@@ -123,11 +122,11 @@ async function run() {
 run();
 ```
 
-برای اطلاعات بیشتر، مرجع میانای برنامه‌سازی کاربردی برای [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=fa#method:-media.uploadtofilesearchstore) را بررسی کنید.
+詳情請參閱 [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-tw#method:-media.uploadtofilesearchstore) 的 API 參考資料。
 
-## درحال وارد کردن فایل‌ها
+## 匯入檔案
 
-یا می‌توانید فایل موجودی را بارگذاری کنید و [آن را به فروشگاه جستجوی فایل خود وارد کنید](https://ai.google.dev/api/file-search/file-search-stores?hl=fa#method:-filesearchstores.importfile):
+或者，您也可以上傳現有檔案，並[匯入檔案搜尋儲存庫](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-tw#method:-filesearchstores.importfile)：
 
 ### Python
 
@@ -225,16 +224,11 @@ async function run() {
 run();
 ```
 
-برای اطلاعات بیشتر، مرجع میانای برنامه‌سازی کاربردی برای [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=fa#method:-filesearchstores.importfile) را بررسی کنید.
+詳情請參閱 [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-tw#method:-filesearchstores.importfile) 的 API 參考資料。
 
-## پیکربندی تکه‌تکه کردن
+## 分塊設定
 
-وقتی فایلی را به فروشگاه «جستجوی فایل» وارد می‌کنید، به‌طور خودکار به
-تکه‌هایی تقسیم می‌شود، جاسازی می‌شود، نمایه‌گذاری می‌شود، و در فروشگاه «جستجوی فایل» شما بارگذاری می‌شود. اگر
-به کنترل بیشتری بر استراتژی تکه‌تکه کردن نیاز دارید، می‌توانید تنظیم
-[`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=fa#request-body_5) را
-برای تعیین حداکثر تعداد داده‌واحد در هر تکه و حداکثر تعداد داده‌واحدهای هم‌پوشان
-مشخص کنید.
+將檔案匯入檔案搜尋商店時，系統會自動將檔案拆成多個區塊、嵌入、建立索引，並上傳至檔案搜尋商店。如需進一步控管分塊策略，可以指定 [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-tw#request-body_5) 設定，設定每個分塊的詞元數量上限，以及重疊詞元數量上限。
 
 ### Python
 
@@ -293,56 +287,34 @@ while (!operation.done) {
 console.log("Custom chunking complete.");
 ```
 
-برای استفاده از فضای ذخیره‌سازی «جستجوی فایل»، آن را به‌عنوان ابزار به روش `generateContent` ارسال کنید، همان‌طور که در مثال‌های [بارگذاری](#upload) و [وارد کردن](#importing-files) نشان داده شده است.
+如要使用檔案搜尋儲存庫，請將其做為工具傳遞至 `generateContent` 方法，如[上傳](#upload)和[匯入](#importing-files)範例所示。
 
-## روش کار
+## 運作方式
 
-«جستجوی فایل» از تکنیکی به‌نام جستجوی معنایی برای پیدا کردن اطلاعات مرتبط با پیام‌واره کاربر استفاده می‌کند. برخلاف جستجوی استاندارد براساس کلیدواژه، جستجوی معنایی
-معنی و بافت پُرسمان شما را درک می‌کند.
+檔案搜尋功能會使用語意搜尋技術，找出與使用者提示相關的資訊。與標準關鍵字搜尋不同，語意搜尋可解讀查詢的意義和上下文。
 
-وقتی فایلی را وارد می‌کنید، به نمایش‌های عددی به نام
-[جاسازی‌ها](https://ai.google.dev/gemini-api/docs/embeddings?hl=fa) تبدیل می‌شود که معنای معنایی
-محتوای بارگذاری‌شده را ثبت می‌کند. این جاسازی‌ها در پایگاه داده تخصصی «جستجوی فایل» ذخیره می‌شوند.
-وقتی پُرسمانی ایجاد می‌کنید، آن پُرسمان نیز به جاسازی تبدیل می‌شود. سپس سیستم
-«جستجوی فایل» را اجرا می‌کند تا مشابه‌ترین و مرتبط‌ترین بخش‌های سند را
-از فروشگاه «جستجوی فایل» پیدا کند.
+匯入檔案時，系統會將檔案轉換為數值表示法，稱為[嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-tw)，用於擷取上傳內容的語意。這些嵌入會儲存在專門的檔案搜尋資料庫中。當您提出查詢時，查詢也會轉換為嵌入。接著，系統會執行檔案搜尋，從檔案搜尋儲存庫中找出最相似且相關的文件區塊。
 
-هیچ «زمان بقایی» (TTL) برای جاسازی‌ها وجود ندارد؛
-آن‌ها تا زمانی که به‌صورت دستی حذف شوند یا مدل منسوخ شود، باقی می‌مانند. اما فایل‌ها
-پس‌از ۴۸ ساعت حذف می‌شوند.
+嵌入沒有存留時間 (TTL)，會一直保留到手動刪除或模型淘汰為止。但檔案會在 48 小時後刪除。
 
-در اینجا تفکیک فرایند استفاده از «میانای برنامه‌سازی کاربردی جستجوی فایل»
-`uploadToFileSearchStore` آمده است:
+以下說明使用 File Search `uploadToFileSearchStore` API 的程序：
 
-1. **ایجاد فروشگاه «جستجوی فایل»:** فروشگاه «جستجوی فایل» حاوی داده‌های پردازش‌شده
-   از فایل‌های شما است. این محتوی پایدار برای جاسازی‌هایی است که جستجوی معنایی روی آن‌ها عمل خواهد کرد.
-2. **بارگذاری فایل و وارد کردن در فروشگاه «جستجوی فایل»**: به‌طور هم‌زمان فایلی را بارگذاری کنید و نتایج را در فروشگاه «جستجوی فایل» وارد کنید. این کار یک
-   شیء `File` موقت ایجاد می‌کند که مرجعی برای سند خام شما است. سپس آن داده‌ها
-   تکه‌تکه می‌شود، به جاسازی‌های «جستجوی فایل» تبدیل می‌شود، و نمایه می‌شود. شیء `File`
-   پس‌از ۴۸ ساعت حذف می‌شود، درحالی‌که داده‌های واردشده به مخزن «جستجوی فایل»
-   تا زمانی که خودتان آن‌ها را حذف نکنید به‌طور نامحدود ذخیره خواهند شد.
-3. **پرس‌وجو با «جستجوی فایل»**: درنهایت، از ابزار `FileSearch` در تماس `generateContent` استفاده می‌کنید. در پیکربندی ابزار، `FileSearchRetrievalResource` را مشخص می‌کنید که به `FileSearchStore` موردنظر برای جستجو اشاره می‌کند. این دستور به مدل می‌گوید که در آن فروشگاه «جستجوی فایل» خاص، جستجوی معنایی انجام دهد تا اطلاعات مربوطه را برای پاسخ خود پیدا کند.
+1. **建立檔案搜尋儲存庫**：檔案搜尋儲存庫包含檔案中處理過的資料。這是嵌入的永久容器，語意搜尋會對其執行操作。
+2. **上傳檔案並匯入檔案搜尋商店**：同時上傳檔案並將結果匯入檔案搜尋商店。這會建立暫時的 `File` 物件，也就是原始文件的參照。接著，系統會將資料分塊、轉換為檔案搜尋嵌入，並建立索引。`File`
+   物件會在 48 小時後刪除，而匯入檔案搜尋儲存空間的資料則會無限期儲存，直到您選擇刪除為止。
+3. **使用檔案搜尋功能查詢**：最後，您會在 `generateContent` 呼叫中使用 `FileSearch` 工具。在工具設定中，您會指定 `FileSearchRetrievalResource`，指向要搜尋的 `FileSearchStore`。這會指示模型對該特定「檔案搜尋」商店執行語意搜尋，找出相關資訊做為回覆的依據。
 
-![فرایند فهرست‌بندی و پُرسمان «جستجوی فایل»](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=fa)
+![檔案搜尋的索引和查詢程序](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=zh-tw)
 
-فرایند نمایه‌سازی و پرسمان «جستجوی فایل»
+檔案搜尋的索引和查詢程序
 
-در این نمودار، خط‌چین از *اسناد* به *مدل جاسازی*
-(بااستفاده از [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=fa))
-نشان‌دهنده میانای برنامه‌سازی کاربردی `uploadToFileSearchStore` است (با دور زدن *فضای ذخیره‌سازی فایل*).
-درغیراین‌صورت، استفاده از [Files API](https://ai.google.dev/gemini-api/docs/files?hl=fa) برای ایجاد جداگانه
-و سپس وارد کردن فایل‌ها، فرایند نمایه‌سازی را از *اسناد* به
-*فضای ذخیره‌سازی فایل* و سپس به *مدل جاسازی* منتقل می‌کند.
+在這張圖表中，從「Documents」(文件) 到「Embedding model」(嵌入模型) 的虛線 (使用 [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-tw)) 代表 `uploadToFileSearchStore` API (略過「File storage」(檔案儲存空間))。否則，使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 分別建立及匯入檔案，會將索引程序從「文件」移至「檔案儲存空間」，然後移至「嵌入模型」。
 
-## فروشگاه‌های «جستجوی فایل»
+## 檔案搜尋存放區
 
-فروشگاه «جستجوی فایل» محفظه‌ای برای جاسازی‌های سند شما است. درحالی‌که فایل‌های خام
-بارگذاری‌شده ازطریق File API پس‌از ۴۸ ساعت حذف می‌شوند، داده‌های واردشده به
-فروشگاه «جستجوی فایل» به‌طور نامحدود ذخیره می‌شوند تا زمانی‌که آن‌ها را به‌صورت دستی حذف کنید. می‌توانید
-چند فروشگاه «جستجوی فایل» برای سازمان‌دهی اسنادتان ایجاد کنید. میانای برنامه‌سازی کاربردی
-`FileSearchStore` به شما امکان می‌دهد برای مدیریت فروشگاه‌های جستجوی فایل، ایجاد، فهرست کردن، دریافت، و حذف کنید. نام‌های فروشگاه «جستجوی فایل» دارای دامنه جهانی هستند.
+檔案搜尋商店是文件嵌入的容器。透過 File API 上傳的原始檔案會在 48 小時後刪除，但匯入 File Search 儲存庫的資料會無限期儲存，直到您手動刪除為止。您可以建立多個檔案搜尋儲存庫，以便整理文件。您可以使用 `FileSearchStore` API 建立、列出、取得及刪除檔案，藉此管理檔案搜尋商店。檔案搜尋儲存庫名稱為全域範圍。
 
-در اینجا چند نمونه از نحوه مدیریت فروشگاه‌های «جستجوی فایل» آورده شده است:
+以下列舉幾個管理檔案搜尋商店的範例：
 
 ### Python
 
@@ -387,7 +359,7 @@ await ai.fileSearchStores.delete({
 });
 ```
 
-### استراحت
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/fileSearchStores?key=${GEMINI_API_KEY}" \
@@ -401,11 +373,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/my-file_
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/my-file_search-store-123?key=${GEMINI_API_KEY}"
 ```
 
-## اسناد جستجوی فایل
+## 檔案搜尋文件
 
-بااستفاده از
-[File Search Documents](https://ai.google.dev/api/file-search/documents?hl=fa) API می‌توانید سندهای جداگانه را در فروشگاه‌های فایل مدیریت کنید تا هر سند را در فروشگاه جستجوی فایل `list` کنید،
-اطلاعات مربوط به سند را `get` کنید، و سند را براساس نام `delete` کنید.
+您可以使用 [File Search Documents](https://ai.google.dev/api/file-search/documents?hl=zh-tw) API 管理檔案商店中的個別文件，`list` 檔案商店中的每份文件、`get` 文件的相關資訊，以及 `delete` 依名稱搜尋文件。
 
 ### Python
 
@@ -448,10 +418,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/my-file_
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/my-file_search-store-123/documents/my_doc?key=${GEMINI_API_KEY}"
 ```
 
-## فراداده‌های فایل
+## 檔案中繼資料
 
-می‌توانید فراداده سفارشی به فایل‌هایتان اضافه کنید تا به فیلتر کردن آن‌ها کمک کنید یا
-بافت بیشتری ارائه دهید. فراداده مجموعه‌ای از جفت‌های کلید-مقدار است.
+您可以為檔案新增自訂中繼資料，以便篩選檔案或提供額外背景資訊。中繼資料是一組鍵/值組合。
 
 ### Python
 
@@ -481,8 +450,7 @@ let operation = await ai.fileSearchStores.importFile({
 });
 ```
 
-این ویژگی زمانی مفید است که چندین سند در فروشگاه «جستجوی فایل» داشته باشید و بخواهید
-فقط زیرمجموعه‌ای از آن‌ها را جستجو کنید.
+如果檔案搜尋商店中有多個文件，而您只想搜尋其中一部分，這項功能就非常實用。
 
 ### Python
 
@@ -526,7 +494,7 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### استراحت
+### REST
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${GEMINI_API_KEY}" \
@@ -547,17 +515,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 cat response.json
 ```
 
-راهنمای پیاده‌سازی نحو فیلتر فهرست برای `metadata_filter` را می‌توانید در
-[google.aip.dev/160](https://google.aip.dev/160) پیدا کنید
+如需 `metadata_filter` 清單篩選器語法的實作指南，請前往 [google.aip.dev/160](https://google.aip.dev/160)
 
-## جستجوی چندحالته فایل
+## 多模態檔案搜尋
 
-«جستجوی فایل چندحالتی» به شما امکان می‌دهد تصاویر را به‌طور بومی جاسازی و جستجو کنید،
-و برنامه‌های RAG چندحالتی غنی را فعال کنید.
+多模態檔案搜尋功能可讓您原生嵌入及搜尋圖片，建構豐富的多模態 RAG 應用程式。
 
-### پیکربندی مدل جاسازی
+### 設定嵌入模型
 
-وقتی `FileSearchStore` ایجاد می‌کنید، باید مدل جاسازی فقط نوشتاری پیش‌فرض را ملغی کنید تا از مدل چندحالته استفاده کنید. از `models/gemini-embedding-2` برای پردازش نوشتار و تصویر استفاده کنید.
+建立 `FileSearchStore` 時，您必須覆寫預設的純文字嵌入模型，改用多模態模型。使用 `models/gemini-embedding-2` 同時處理文字和圖片。
 
 ### Python
 
@@ -592,20 +558,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/fileSearchStores?
     }'
 ```
 
-### بارگذاری کردن تصویرها
+### 上傳圖片
 
-پس‌از ایجاد فروشگاه با مدل جاسازی چندحالتی، می‌توانید فایل‌های تصویری را مستقیماً بااستفاده از همان میاناهای برنامه‌سازی کاربردی بارگذاری که در [بارگذاری مستقیم در فروشگاه «جستجوی فایل»](#upload) یا [وارد کردن فایل‌ها](#importing-files) شرح داده شده است بارگذاری کنید.
+使用多模態嵌入模型建立儲存庫後，您可以直接使用「[直接上傳至檔案搜尋儲存庫](#upload)」或「[匯入檔案](#importing-files)」中所述的上傳 API 上傳圖片檔。
 
-**الزامات فایل تصویر:**
+**圖片檔規定：**
 
-- وضوح فایل‌های تصویر باید حداکثر ۴K x ۴K پیکسل باشد.
-- قالب‌های پشتیبانی‌شده عبارت‌اند از PNG،‏ JPEG.
+- 圖片檔解析度不得超過 4K x 4K 像素。
+- 支援的格式為 PNG、JPEG。
 
-## نقل‌قول‌ها
+## 參考資料
 
-وقتی از «جستجوی فایل» استفاده می‌کنید، پاسخ مدل ممکن است شامل استنادهایی باشد که مشخص می‌کند از کدام بخش‌های اسناد بارگذاری‌شده شما برای تولید پاسخ استفاده شده است. این کار به درستی‌سنجی و تأیید کمک می‌کند.
+使用檔案搜尋功能時，模型的回覆可能會包含引用內容，指出系統使用上傳文件的哪些部分來生成答案。有助於查核和驗證事實。
 
-می‌توانید ازطریق ویژگی `grounding_metadata` در پاسخ به اطلاعات ارجاع دسترسی پیدا کنید.
+您可以透過回應的 `grounding_metadata` 屬性存取引文資訊。
 
 ### Python
 
@@ -619,18 +585,11 @@ print(response.candidates[0].grounding_metadata)
 console.log(JSON.stringify(response.candidates?.[0]?.groundingMetadata, null, 2));
 ```
 
-برای اطلاعات دقیق درباره ساختار فراداده پایه‌سازی،
-نمونه‌های موجود در [کتاب راهنمای
-جستجوی فایل](https://github.com/google-gemini/cookbook/blob/main/quickstarts/File_Search.ipynb)
-یا [بخش پایه‌سازی در اسناد
-«پایه‌سازی با جستجوی Google»](https://ai.google.dev/gemini-api/docs/google-search?hl=fa#attributing_sources_with_inline_citations)
-را ببینید.
+如要詳細瞭解基礎中繼資料的結構，請參閱「[檔案搜尋食譜](https://github.com/google-gemini/cookbook/blob/main/quickstarts/File_Search.ipynb)」中的範例，或「[以 Google 搜尋建立基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw#attributing_sources_with_inline_citations)」文件中的基礎部分。
 
-### شماره صفحه
+### 頁碼
 
-وقتی از «جستجوی فایل» با اسنادی که صفحه دارند (مثل PDF) استفاده می‌کنید، پاسخ مدل ممکن است شامل شماره صفحه‌ای باشد که اطلاعات در آن پیدا شده است.
-می‌توانید ازطریق مشخصه `page_number` در
-`retrieved_context` به این اطلاعات دسترسی پیدا کنید.
+使用檔案搜尋功能搜尋有頁面的文件 (例如 PDF) 時，模型的回覆可能會包含找到資訊的頁碼。您可以透過 `retrieved_context` 的 `page_number` 屬性存取這項資訊。
 
 ### Python
 
@@ -652,14 +611,11 @@ for (const chunk of groundingMetadata.groundingChunks) {
 }
 ```
 
-### نقل‌قول‌های رسانه‌ای
+### 媒體引用
 
-وقتی مدل درطول تولید به یک قطعه تصویر ارجاع می‌دهد، API یک
-استناد در فراداده‌های زمینه‌سازی برمی‌گرداند که شامل `media_id` است. می‌توانید از این
-شناسه برای بارگیری کردن تکه تصویر دقیقی که مدل به آن ارجاع داده است استفاده کنید. این `media_id` در چندین فراخوانی جستجو ماندگار است، که به شما امکان می‌دهد
-تصویر یکسان را به‌طور قابل‌اعتمادی بازیابی کنید یا آن را بااستفاده از شناسه در حافظه نهان ذخیره کنید.
+模型在生成內容時，如果參照圖片區塊，API 會在基準中繼資料中傳回引用內容，其中包含 `media_id`。您可以使用這個 ID 下載模型參照的確切圖片區塊。這個 `media_id` 在多次搜尋呼叫中保持不變，因此您可以可靠地擷取同一張圖片，或使用 ID 快取圖片。
 
-قطعه زیر نمونه‌ای از پاسخ REST است:
+以下程式碼片段是 REST 回應範例：
 
 ```
 "groundingMetadata": {
@@ -675,8 +631,7 @@ for (const chunk of groundingMetadata.groundingChunks) {
 }
 ```
 
-تکه‌کدهای زیر نحوه بازیابی `media_id` و
-بارگیری رسانه را نشان می‌دهند:
+下列程式碼片段示範如何擷取 `media_id` 並下載媒體：
 
 ### Python
 
@@ -705,17 +660,16 @@ for (const chunk of groundingMetadata.groundingChunks) {
 }
 ```
 
-### استراحت
+### REST
 
 ```
 curl -X GET "https://generativelanguage.googleapis.com/v1/fileSearchStores/my-store-123/media/BlobId-456" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## فراداده سفارشی در داده‌های زمینه‌ای
+## 基礎資料中的自訂中繼資料
 
-اگر فراداده سفارشی به فایل‌هایتان اضافه کرده باشید، می‌توانید در فراداده زمینه‌سازی پاسخ مدل به آن دسترسی پیدا کنید. این کار برای انتقال بافت اضافی (مانند نشانی‌های وب، شماره صفحات، یا نویسندگان) از اسناد منبع به منطق برنامه شما مفید است. هر `grounding_chunk` در
-`retrieved_context` حاوی این فراداده سفارشی است.
+如果已在檔案中新增自訂中繼資料，您可以在模型回覆的基礎中繼資料中存取該資料。這項功能可將來源文件的額外背景資訊 (例如網址、頁碼或作者) 傳遞至應用程式邏輯。`retrieved_context` 中的每個 `grounding_chunk` 都包含這項自訂中繼資料。
 
 ### Python
 
@@ -774,7 +728,7 @@ groundingMetadata.groundingChunks.forEach((chunk) => {
 });
 ```
 
-### استراحت
+### REST
 
 ```
 {
@@ -808,10 +762,9 @@ groundingMetadata.groundingChunks.forEach((chunk) => {
 }
 ```
 
-## برونداد ساختاریافته
+## 結構化輸出內容
 
-با شروع از مدل‌های Gemini 3، می‌توانید ابزار جستجوی فایل را با
-[بروندادهای ساختاریافته](https://ai.google.dev/gemini-api/docs/structured-output?hl=fa) ترکیب کنید.
+自 Gemini 3 模型起，您可以將檔案搜尋工具與[結構化輸出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)搭配使用。
 
 ### Python
 
@@ -911,32 +864,31 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-## مدل‌های پشتیبانی‌شده
+## 支援的模型
 
-مدل‌های زیر از «جستجوی فایل» پشتیبانی می‌کنند:
+下列模型支援檔案搜尋：
 
-| مدل | جستجوی فایل |
+| 模型 | 檔案搜尋 |
 | --- | --- |
-| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=fa) | ✔️ |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=fa) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=fa) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=fa) | ✔️ |
-| [پیش‌نمایش Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fa) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fa) | ✔️ |
-| [پیش‌نمایش Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=fa) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=fa) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=fa) | ✔️ |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=zh-tw) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-tw) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-tw) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3.1 Pro 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3 Flash 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-tw) | ✔️ |
 
-## ترکیب‌های ابزار پشتیبانی‌شده
+## 支援的工具組合
 
-مدل‌های Gemini 4 و Gemini 3 از ترکیب ابزارهای داخلی (مانند «جستجوی فایل») با ابزارهای سفارشی (فراخوانی تابع) پشتیبانی می‌کنند. در صفحه
-[ترکیب‌های ابزار](https://ai.google.dev/gemini-api/docs/tool-combination?hl=fa) بیشتر بدانید.
+Gemini 4 和 Gemini 3 模型支援結合內建工具 (例如檔案搜尋) 和自訂工具 (函式呼叫)。詳情請參閱[工具組合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)頁面。
 
-## انواع فایل‌های پشتیبانی‌شده
+## 支援的檔案類型
 
-«جستجوی فایل» از طیف وسیعی از قالب‌های فایل پشتیبانی می‌کند که در بخش‌های زیر فهرست شده‌اند.
+檔案搜尋支援多種檔案格式，詳情請參閱下列各節。
 
-### انواع فایل برنامه
+### 應用程式檔案類型
 
 - `application/dart`
 - `application/ecmascript`
@@ -969,7 +921,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 - `application/xml`
 - `application/zip`
 
-### انواع فایل نوشتاری
+### 文字檔案類型
 
 - `text/1d-interleaved-parityfec`
 - `text/RED`
@@ -1128,45 +1080,40 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 - `text/xml-external-parsed-entity`
 - `text/yaml`
 
-## محدودیت‌ها
+## 限制
 
-- **Live API:** «جستجوی فایل» در
-  [Live API](https://ai.google.dev/gemini-api/docs/live?hl=fa) پشتیبانی نمی‌شود.
-- **عدم سازگاری ابزار:** «جستجوی فایل» درحال‌حاضر نمی‌تواند با ابزارهای دیگر
-  مثل [زمینه‌سازی با «جستجوی Google»](https://ai.google.dev/gemini-api/docs/google-search?hl=fa)،
-  [زمینه نشانی وب](https://ai.google.dev/gemini-api/docs/url-context?hl=fa)، و غیره ترکیب شود.
+- **Live API：**[Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-tw) 不支援 File Search。
+- **工具不相容：**目前無法將檔案搜尋與其他工具合併使用，例如[以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)、[網址背景資訊](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)等。
 
-### محدودیت‌های نرخ
+### 頻率限制
 
-«میانای برنامه‌سازی کاربردی جستجوی فایل» برای اعمال پایداری سرویس محدودیت‌های زیر را دارد:
+File Search API 設有下列限制，以確保服務穩定性：
 
-- **حداکثر اندازه فایل / حد مجاز برای هر سند**: ۱۰۰ مگابایت
-- **اندازه کل فروشگاه‌های «جستجوی فایل» پروژه** (براساس سطح کاربر):
-  - **رایگان**: ۱ گیگابایت
-  - **سطح ۱**: ۱۰ گیگابایت
-  - **سطح ۲**: ۱۰۰ گیگابایت
-  - **سطح ۳**: ۱ ترابایت
-- **توصیه**: برای اطمینان از تأخیرهای بهینه بازیابی، اندازه هر فروشگاه «جستجوی فایل» را به کمتر از ۲۰ گیگابایت محدود کنید.
+- **檔案大小上限 / 每份文件限制**：100 MB
+- **專案檔案搜尋儲存庫總大小** (依使用者層級而定)：
+  - **免費**：1 GB
+  - **第 1 級**：10 GB
+  - **第 2 級**：100 GB
+  - **第 3 級**：1 TB
+- **建議**：將每個檔案搜尋儲存庫的大小限制在 20 GB 以下，確保最佳檢索延遲時間。
 
-## قیمت‌گذاری
+## 定價
 
-- هزینه جاسازی‌ها در زمان نمایه‌گذاری براساس
-  [قیمت‌گذاری جاسازی](https://ai.google.dev/gemini-api/docs/pricing?hl=fa#gemini-embedding-2) موجود از شما کسر می‌شود.
-- فضای ذخیره‌سازی رایگان است.
-- جاسازی‌های زمان پُرسمان رایگان است.
-- هزینه داده‌واحدهای بازیابی‌شده سند مانند
-  [داده‌واحدهای بافتی](https://ai.google.dev/gemini-api/docs/tokens?hl=fa) معمولی محاسبه می‌شود.
+- 建立索引時，系統會根據現有的[嵌入定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#gemini-embedding-2)收取嵌入費用。
+- 儲存空間無須付費。
+- 查詢時嵌入無須支付費用。
+- 系統會將擷取的檔案權杖視為一般[脈絡詞元](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw)計費。
 
-## قدم بعدی چیست
+## 後續步驟
 
-- به مرجع میانای برنامه‌سازی کاربردی برای [فروشگاه‌های جستجوی فایل](https://ai.google.dev/api/file-search/file-search-stores?hl=fa) و [اسناد](https://ai.google.dev/api/file-search/documents?hl=fa) جستجوی فایل مراجعه کنید.
+- 請參閱 [File Search 儲存庫](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-tw)和 File Search [文件](https://ai.google.dev/api/file-search/documents?hl=zh-tw)的 API 參考資料。
 
-ارسال بازخورد
+提供意見
 
-جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-تاریخ آخرین به‌روزرسانی 2026-10-19 به‌وقت ساعت هماهنگ جهانی.
+上次更新時間：2026-10-19 (世界標準時間)。
 
-می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
+想進一步說明嗎？
 
-[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-19 به‌وقت ساعت هماهنگ جهانی."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-19 (世界標準時間)。"],[],[]]

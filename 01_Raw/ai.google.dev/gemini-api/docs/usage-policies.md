@@ -1,67 +1,70 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=hi
-fetched_at: 2026-10-26T05:48:42.790978+00:00
-title: "\u092c\u0941\u0930\u0947 \u092c\u0930\u094d\u0924\u093e\u0935 \u0915\u0940 \u0928\u093f\u0917\u0930\u093e\u0928\u0940 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=pt-BR
+fetched_at: 2026-11-02T07:30:59.331073+00:00
+title: "Monitoramento de abuso \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-सुझाव भेजें
+Envie comentários
 
-# बुरे बर्ताव की निगरानी करना
+# Monitoramento de abuso
 
-Google, एआई को ज़िम्मेदारी के साथ डेवलप करने और उसका इस्तेमाल करने के लिए प्रतिबद्ध है. Gemini API की सुरक्षा और अखंडता बनाए रखने के लिए, हमने नीति के ये दिशा-निर्देश बनाए हैं.
-Gemini API का इस्तेमाल करने का मतलब है कि आप इन दिशा-निर्देशों, [Gemini API की सेवा की अतिरिक्त शर्तों](https://ai.google.dev/gemini-api/terms?hl=hi), और जनरेटिव एआई के [इस्तेमाल से जुड़ी पाबंदी की नीति](https://policies.google.com/terms/generative-ai/use-policy?hl=hi) से सहमत हैं.
+O Google tem o compromisso de desenvolver e usar a IA de forma responsável. Para garantir a segurança e a integridade da API Gemini, criamos estas diretrizes de política.
+Ao usar a API Gemini, você concorda com as diretrizes a seguir, os [Termos de Serviço adicionais da API Gemini](https://ai.google.dev/gemini-api/terms?hl=pt-br) e a [Política de uso proibido](https://policies.google.com/terms/generative-ai/use-policy?hl=pt-br) da IA generativa.
 
-## हम गलत इस्तेमाल पर कैसे नज़र रखते हैं
+## Como monitoramos o uso indevido
 
-Google की Trust and Safety टीम, Gemini API और Google AI Studio के संभावित गलत इस्तेमाल का पता लगाने के लिए, ऑटोमेटेड और मैन्युअल, दोनों तरीकों का इस्तेमाल करती है. इससे हमारी नीतियों को लागू करने में मदद मिलती है.
+A equipe de confiança e segurança do Google usa uma combinação de processos automatizados e manuais para detectar possíveis usos indevidos da API Gemini e do Google AI Studio e aplicar nossas políticas.
 
-- **अपने-आप पता लगाने की सुविधा:** ऑटोमेटेड सिस्टम, एपीआई के इस्तेमाल को स्कैन करते हैं. इससे, 'जनरेटिव एआई के इस्तेमाल से जुड़ी पाबंदी की नीति' के उल्लंघन का पता चलता है. जैसे, नफ़रत फैलाने वाले भाषण, उत्पीड़न, अश्लील कॉन्टेंट, और खतरनाक कॉन्टेंट.
-- **मैन्युअल तरीके से पता लगाना:** अगर किसी प्रोजेक्ट में लगातार संदिग्ध गतिविधि होती है, तो Google के अधिकृत कर्मचारी मैन्युअल तरीके से उसकी समीक्षा कर सकते हैं.
+- **Detecção automatizada**:sistemas automatizados verificam o uso da API em busca de violações da nossa Política de uso proibido, como discurso de ódio, assédio, conteúdo sexualmente explícito e conteúdo perigoso.
+- **Detecção manual**:se um projeto apresentar atividade suspeita de forma consistente, ele poderá ser sinalizado para revisão manual por funcionários autorizados do Google.
 
-## हम डेटा को कैसे हैंडल करते हैं
+## Como tratamos os dados
 
-Google, इन डेटा को 55 दिनों तक सेव करके रखता है. ऐसा इसलिए किया जाता है, ताकि सेवाओं को सुरक्षित बनाए रखने के लिए, पाबंदी वाले इस्तेमाल से जुड़ी नीति के उल्लंघनों का पता लगाया जा सके और उन्हें रोका जा सके. साथ ही, कानूनी या नियामक से जुड़ी ज़रूरी जानकारी का खुलासा किया जा सके:
+O Google retém os seguintes dados por 55 dias para detectar e evitar violações da Política de uso proibido, manter a segurança dos Serviços e fazer as divulgações legais ou regulamentares necessárias:
 
-- **प्रॉम्प्ट:** एपीआई को सबमिट किए गए टेक्स्ट प्रॉम्प्ट.
-- **कॉन्टेक्स्ट के हिसाब से जानकारी:** आपके प्रॉम्प्ट के साथ दी गई कोई भी अतिरिक्त जानकारी.
-- **आउटपुट:** Gemini API से जनरेट किए गए जवाब.
+- **Comandos**:os comandos de texto que você envia para a API.
+- **Informações contextuais**:qualquer contexto adicional que você forneça com seus comandos.
+- **Saída**:as respostas geradas pela API Gemini.
 
-## हम संभावित समस्याओं की जांच कैसे करते हैं
+## Como investigamos possíveis problemas
 
-जब ऊपर बताए गए सुरक्षा फ़िल्टर और गलत इस्तेमाल का पता लगाने वाले सिस्टम, प्रॉम्प्ट या मॉडल के आउटपुट को फ़्लैग करते हैं, तो Google के अधिकृत कर्मचारी फ़्लैग किए गए कॉन्टेंट का आकलन कर सकते हैं. साथ ही, पहले से तय की गई गाइडलाइन और नीतियों के आधार पर, क्लासिफ़िकेशन या फ़ैसले की पुष्टि कर सकते हैं या उसे ठीक कर सकते हैं. डेटा की मैन्युअल तरीके से समीक्षा करने के लिए, सिर्फ़ Google के उन कर्मचारियों को ऐक्सेस दिया जाता है जिन्हें इसकी अनुमति मिली है. ऐसा इंटरनल गवर्नेंस असेसमेंट और समीक्षा मैनेजमेंट प्लैटफ़ॉर्म के ज़रिए किया जाता है. जब गलत इस्तेमाल की निगरानी के लिए डेटा लॉग किया जाता है, तो इसका इस्तेमाल सिर्फ़ नीति लागू करने और नीति के उल्लंघनों को रोकने के लिए किया जाता है.
-इसका इस्तेमाल, नीति लागू करने के लिए इस्तेमाल किए जाने वाले एआई/एमएल मॉडल के अलावा, किसी अन्य एआई/एमएल मॉडल को ट्रेनिंग देने या उसे बेहतर बनाने के लिए नहीं किया जाता.
+Quando os filtros de segurança e os sistemas de detecção de abuso descritos acima sinalizam comandos ou saídas de modelos, os funcionários autorizados do Google podem avaliar o conteúdo sinalizado e confirmar ou corrigir a classificação ou determinação com base em diretrizes e políticas predefinidas. Os dados só podem ser acessados para revisão humana por funcionários autorizados do Google em uma avaliação de governança interna e uma plataforma de gerenciamento de revisões. Quando os dados são registrados para monitoramento de abuso, eles são usados
+somente para fins de aplicação da política e prevenção de violações.
+Ela não é usada para treinar ou refinar modelos de IA/ML, exceto aqueles usados especificamente para aplicação de políticas.
 
-## नीति का पालन करने में आपकी मदद करना
+## Trabalhar com você na conformidade com a política
 
-अगर Gemini का इस्तेमाल हमारी नीतियों के मुताबिक नहीं है, तो हम ये कार्रवाइयां कर सकते हैं:
+Se o uso do Gemini não estiver alinhado às nossas políticas, poderemos tomar as seguintes
+medidas:
 
-- **हमसे संपर्क करें:** हम आपसे ईमेल के ज़रिए संपर्क कर सकते हैं. इससे हमें यह समझने में मदद मिलेगी कि आपने इस सुविधा का इस्तेमाल किस तरह किया है. साथ ही, हम यह पता लगा पाएंगे कि इसे इस्तेमाल करने के लिए, नियमों का पालन कैसे किया जा सकता है.
-- **इस्तेमाल की अस्थायी सीमाएं:** हम Gemini API के आपके ऐक्सेस को सीमित कर सकते हैं. जैसे, अनुरोध करने की दर की सीमाएं घटाकर या किसी खास अनुरोध का जवाब देने वाले मॉडल को बदलकर.
-- **कुछ समय के लिए निलंबन:** हम Gemini API को ऐक्सेस करने की आपकी सुविधा को कुछ समय के लिए रोक सकते हैं.
-- **खाता बंद करना:** गंभीर उल्लंघनों के मामले में, हम Gemini API और Google की अन्य सेवाओं को ऐक्सेस करने की आपकी सुविधा को हमेशा के लिए बंद कर सकते हैं.
+- **Entre em contato**:podemos entrar em contato com você por e-mail para entender seu caso de uso e encontrar maneiras de adequar seu uso.
+- **Limites de uso temporários**:podemos limitar seu acesso à API Gemini ajustando os limites de taxa ou mudando o modelo que responde a uma solicitação específica, por exemplo.
+- **Suspensão temporária**:podemos pausar temporariamente seu acesso à API do Gemini.
+- **Encerramento da conta**:como último recurso e em caso de violações graves, podemos
+  encerrar permanentemente seu acesso à API Gemini e a outros serviços do Google.
 
-अगर हम खाते के निलंबन या खाता बंद करने के बारे में आपसे संपर्क करते हैं, तो हम आपको एक लिंक भी देंगे जहां आप अपील कर सकते हैं.
+Se entrarmos em contato com você sobre uma suspensão ou encerramento da conta, também vamos fornecer um link para contestar.
 
-## दायरा
+## Escopo
 
-नीति से जुड़े ये दिशा-निर्देश, Gemini API और AI Studio के इस्तेमाल पर लागू होते हैं.
+Estas diretrizes de política se aplicam ao uso da API Gemini e do AI Studio.
 
-सुझाव भेजें
+Envie comentários
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-आखिरी बार 2026-06-09 (UTC) को अपडेट किया गया.
+Última atualização 2026-06-09 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Quer enviar seu feedback?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-09 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-09 UTC."],[],[]]

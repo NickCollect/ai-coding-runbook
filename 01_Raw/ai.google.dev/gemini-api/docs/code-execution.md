@@ -1,32 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=it
-fetched_at: 2026-10-26T05:40:11.520503+00:00
-title: "Eseguire il codice \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=id
+fetched_at: 2026-11-02T07:11:10.616555+00:00
+title: "Eksekusi kode \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
+Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Invia feedback
+Kirim masukan
 
-# Eseguire il codice
+# Eksekusi kode
 
-L'API Gemini fornisce uno strumento di esecuzione di codice che consente al modello di generare ed eseguire codice Python. Il modello può quindi apprendere in modo iterativo dai risultati dell'esecuzione di codice fino a raggiungere un output finale. Puoi utilizzare l'esecuzione del codice per creare applicazioni che sfruttano il ragionamento basato sul codice. Ad esempio, puoi utilizzare l'esecuzione di codice per risolvere equazioni o elaborare testo. Puoi
-anche utilizzare le [librerie](#supported-libraries) incluse nell'ambiente di esecuzione del codice
-per eseguire attività più specializzate.
+Gemini API menyediakan alat eksekusi kode yang memungkinkan model untuk membuat dan menjalankan kode Python. Model kemudian dapat belajar secara iteratif dari
+hasil eksekusi kode hingga mencapai output akhir. Anda dapat menggunakan eksekusi
+kode untuk membangun aplikasi yang memanfaatkan penalaran berbasis kode. Misalnya, Anda dapat menggunakan eksekusi kode untuk menyelesaikan persamaan atau memproses teks. Anda juga
+dapat menggunakan [library](#supported-libraries) yang disertakan dalam lingkungan eksekusi kode
+untuk melakukan tugas yang lebih khusus.
 
-Gemini è in grado di eseguire codice solo in Python. Puoi comunque chiedere a Gemini di generare codice in un'altra lingua, ma il modello non può utilizzare lo strumento di esecuzione di codice per eseguirlo.
+Gemini hanya dapat mengeksekusi kode dalam Python. Anda masih dapat meminta Gemini untuk
+membuat kode dalam bahasa lain, tetapi model tidak dapat menggunakan alat eksekusi
+kode untuk menjalankannya.
 
-## Attivare l'esecuzione del codice
+## Mengaktifkan eksekusi kode
 
-Per attivare l'esecuzione di codice, configura lo strumento di esecuzione di codice sul modello. In questo modo, il modello può generare ed eseguire codice.
+Untuk mengaktifkan eksekusi kode, konfigurasikan alat eksekusi kode pada model. Hal ini
+memungkinkan model membuat dan menjalankan kode.
 
 ### Python
 
@@ -133,7 +138,7 @@ for (Step step : interaction.steps().orElse(Collections.emptyList())) {
 }
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -202,7 +207,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-L'output potrebbe essere simile al seguente, formattato per una maggiore leggibilità:
+Outputnya mungkin akan terlihat seperti berikut, yang telah diformat agar mudah dibaca:
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -251,28 +256,30 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-Questo output combina diverse parti di contenuti che il modello restituisce quando utilizza l'esecuzione di codice:
+Output ini menggabungkan beberapa bagian konten yang ditampilkan model saat menggunakan
+eksekusi kode:
 
-- `text`: testo in linea generato dal modello
-- `code_execution_call`: codice generato dal modello che deve essere eseguito
-- `code_execution_result`: risultato del codice eseguibile
+- `text`: Teks inline yang dihasilkan oleh model
+- `code_execution_call`: Kode yang dihasilkan oleh model yang dimaksudkan untuk dieksekusi
+- `code_execution_result`: Hasil kode yang dapat dieksekusi
 
-## Esecuzione di codice con immagini (Gemini 3)
+## Eksekusi Kode dengan gambar (Gemini 3)
 
-Il modello Gemini 3 Flash ora può scrivere ed eseguire codice Python per manipolare e ispezionare attivamente le immagini.
+Model Gemini 3 Flash kini dapat menulis dan mengeksekusi kode Python untuk memanipulasi dan memeriksa gambar secara aktif.
 
-**Casi d'uso**
+**Kasus penggunaan**
 
-- **Zoom e ispezione**: il modello rileva implicitamente quando i dettagli sono troppo piccoli
-  (ad es. la lettura di un indicatore distante) e scrive codice per ritagliare e riesaminare l'area
-  a una risoluzione più alta.
-- **Matematica visiva**: il modello può eseguire calcoli in più passaggi utilizzando il codice (ad es.
-  la somma delle voci di un ricevuta).
-- **Annotazione delle immagini**: il modello può annotare le immagini per rispondere alle domande, ad esempio disegnando frecce per mostrare le relazioni.
+- **Zoom dan periksa**: Model secara implisit mendeteksi saat detail terlalu kecil
+  (misalnya, membaca pengukur yang jauh) dan menulis kode untuk memangkas dan memeriksa ulang area
+  dengan resolusi yang lebih tinggi.
+- **Matematika visual**: Model dapat menjalankan penghitungan multi-langkah menggunakan kode (misalnya, menjumlahkan item baris pada tanda terima).
+- **Anotasi gambar**: Model dapat menganotasi gambar untuk menjawab pertanyaan, seperti
+  menggambar panah untuk menunjukkan hubungan.
 
-## Attivare l'esecuzione di codice con le immagini
+## Mengaktifkan Eksekusi Kode dengan gambar
 
-L'esecuzione del codice con le immagini è ufficialmente supportata in Gemini 3 Flash. Puoi attivare questo comportamento abilitando sia l'esecuzione di codice come strumento sia il ragionamento.
+Eksekusi Kode dengan gambar secara resmi didukung di Gemini 3 Flash. Anda dapat
+mengaktifkan perilaku ini dengan mengaktifkan Eksekusi Kode sebagai alat dan Penalaran.
 
 ### Python
 
@@ -433,7 +440,7 @@ for (Step step : interaction.steps().orElse(Collections.emptyList())) {
 }
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -554,9 +561,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -d @payload.json
 ```
 
-## Utilizzare l'esecuzione di codice nelle interazioni multi-turno
+## Menggunakan eksekusi kode dalam interaksi multi-turn
 
-Puoi anche utilizzare l'esecuzione di codice come parte di una conversazione in più passaggi utilizzando `previous_interaction_id`.
+Anda juga dapat menggunakan eksekusi kode sebagai bagian dari percakapan multi-turn menggunakan
+`previous_interaction_id`.
 
 ### Python
 
@@ -691,7 +699,7 @@ for (Step step : interaction2.steps().orElse(Collections.emptyList())) {
 }
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -793,80 +801,82 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ## Input/output (I/O)
 
-Nei modelli Gemini attuali, come
-[Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=it), l'esecuzione del codice
-supporta l'input di file e l'output di grafici. Utilizzando queste funzionalità di input e output
-, puoi caricare file CSV e di testo, porre domande sui
-file e generare grafici [Matplotlib](https://matplotlib.org/) come parte
-della risposta. I file di output vengono restituiti come immagini in linea nella risposta.
+Dalam model Gemini saat ini seperti
+[Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=id), eksekusi
+kode mendukung input file dan output grafik. Dengan kemampuan input dan output ini, Anda dapat mengupload file CSV dan teks, mengajukan pertanyaan tentang file, dan membuat grafik [Matplotlib](https://matplotlib.org/) sebagai bagian dari respons. File output ditampilkan sebagai gambar inline dalam respons.
 
-### Prezzi di I/O
+### Harga I/O
 
-Quando utilizzi l'I/O di esecuzione di codice, ti vengono addebitati i token di input e i token di output:
+Saat menggunakan I/O eksekusi kode, Anda akan dikenai biaya untuk token input dan token output:
 
-**Token di input:**
+**Token input:**
 
-- Prompt dell'utente
+- Perintah pengguna
 
-**Token di output:**
+**Token output:**
 
-- Codice generato dal modello
-- Output di esecuzione del codice nell'ambiente di codice
-- Token di ragionamento
-- Riepilogo generato dal modello
+- Kode yang dihasilkan oleh model
+- Output eksekusi kode di lingkungan kode
+- Token penalaran
+- Ringkasan yang dibuat oleh model
 
-### Dettagli di I/O
+### Detail I/O
 
-Quando lavori con l'I/O di esecuzione del codice, tieni presente i seguenti dettagli tecnici:
+Saat Anda menangani I/O eksekusi kode, perhatikan detail teknis berikut:
 
-- La durata massima dell'ambiente di codice è di 30 secondi.
-- Se l'ambiente di codice genera un errore, il modello potrebbe decidere di rigenerare l'output del codice. Questa operazione può essere eseguita fino a 5 volte.
-- La dimensione massima del file di input è limitata dalla finestra dei token del modello. Se carichi un file che supera la finestra di contesto massima del modello, l'API restituirà un errore.
-- L'esecuzione del codice funziona meglio con file di testo e CSV.
-- Il file di input può essere passato come dati in linea o caricato utilizzando l'
-  [API Files](https://ai.google.dev/gemini-api/docs/files?hl=it),
-  mentre il file di output viene sempre restituito come dati in linea.
+- Runtime maksimum lingkungan kode adalah 30 detik.
+- Jika lingkungan kode menghasilkan error, model dapat memutuskan untuk
+  membuat ulang output kode. Hal ini dapat terjadi hingga 5 kali.
+- Ukuran input file maksimum dibatasi oleh jendela token model. Jika Anda mengupload file yang melebihi jendela konteks maksimum model, API akan menampilkan error.
+- Eksekusi kode berfungsi optimal dengan file teks dan CSV.
+- File input dapat diteruskan sebagai data inline atau diupload menggunakan
+  [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id),
+  dan file output selalu ditampilkan sebagai data inline.
 
-## Fatturazione
+## Penagihan
 
-Non sono previsti costi aggiuntivi per l'attivazione dell'esecuzione di codice dall'API Gemini.
-Ti verrà addebitata la tariffa corrente dei token di input e output in base al modello Gemini che stai utilizzando.
+Tidak ada biaya tambahan untuk mengaktifkan eksekusi kode dari Gemini API.
+Anda akan ditagih dengan tarif token input dan output saat ini berdasarkan model Gemini yang Anda gunakan.
 
-Ecco alcune altre informazioni sulla fatturazione per l'esecuzione di codice:
+Berikut beberapa hal lain yang perlu diketahui tentang penagihan untuk eksekusi kode:
 
-- Ti viene addebitato un costo una sola volta per i token di input che passi al modello e ti vengono addebitati i token di output finali restituiti dal modello.
-- I token che rappresentano il codice generato vengono conteggiati come token di output. Il codice generato può includere testo e output multimodale come le immagini.
-- Anche i risultati dell'esecuzione del codice vengono conteggiati come token di output.
+- Anda hanya akan ditagih sekali untuk token input yang Anda teruskan ke model, dan Anda akan ditagih untuk token output akhir yang ditampilkan kepada Anda oleh model.
+- Token yang mewakili kode yang dihasilkan dihitung sebagai token output. Kode yang dihasilkan dapat menyertakan teks dan output multimodal seperti gambar.
+- Hasil eksekusi kode juga dihitung sebagai token output.
 
-Il modello di fatturazione è mostrato nel seguente diagramma:
+Model penagihan ditampilkan dalam diagram berikut:
 
-![modello di fatturazione per l'esecuzione di codice](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=it)
+![model penagihan eksekusi kode](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=id)
 
-- Ti viene addebitata la tariffa corrente dei token di input e output in base al modello Gemini che stai utilizzando.
-- Se Gemini utilizza l'esecuzione di codice durante la generazione della risposta, il prompt originale, il codice generato e il risultato del codice eseguito vengono etichettati come *token intermedi* e vengono fatturati come *token di input*.
-- Gemini genera quindi un riepilogo e restituisce il codice generato, il risultato del codice eseguito e il riepilogo finale. Questi vengono fatturati come *token di output*.
-- L'API Gemini include un conteggio dei token intermedi nella risposta dell'API, in modo che tu sappia perché ricevi token di input aggiuntivi oltre al prompt iniziale.
+- Anda akan ditagih dengan tarif token input dan output saat ini berdasarkan
+  model Gemini yang Anda gunakan.
+- Jika Gemini menggunakan eksekusi kode saat membuat respons Anda, perintah asli, kode yang dihasilkan, dan hasil kode yang dieksekusi akan diberi label *token perantara* dan ditagih sebagai *token input*.
+- Gemini kemudian akan membuat ringkasan dan menampilkan kode yang dihasilkan, hasil dari
+  kode yang dieksekusi, dan ringkasan akhir. Token ini ditagih sebagai *token output*.
+- Gemini API menyertakan jumlah token perantara dalam respons API, sehingga Anda tahu alasan Anda mendapatkan token input tambahan di luar perintah awal Anda.
 
-## Limitazioni
+## Batasan
 
-- Il modello può solo generare ed eseguire codice. Non può restituire altri artefatti come i file multimediali.
-- In alcuni casi, l'attivazione dell'esecuzione di codice può comportare regressioni in altre aree dell'output del modello (ad esempio, la scrittura di una storia).
-- Esiste una certa variazione nella capacità dei diversi modelli di utilizzare l'esecuzione del codice con successo.
+- Model hanya dapat membuat dan menjalankan kode. Model ini tidak dapat menampilkan artefak lain seperti file media.
+- Dalam beberapa kasus, mengaktifkan eksekusi kode dapat menyebabkan regresi di area lain
+  output model (misalnya, menulis cerita).
+- Ada beberapa variasi dalam kemampuan berbagai model untuk menggunakan eksekusi kode
+  dengan berhasil.
 
-## Combinazioni di strumenti supportate
+## Kombinasi alat yang didukung
 
-Lo strumento di esecuzione di codice può essere combinato con
-[il grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) per
-supportare casi d'uso più complessi.
+Alat eksekusi kode dapat digabungkan dengan
+[Grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id) untuk
+mendukung kasus penggunaan yang lebih kompleks.
 
-I modelli Gemini 4 e Gemini 3 supportano la combinazione di strumenti integrati (come l'esecuzione di codice) con strumenti personalizzati (chiamata di funzione).
+Model Gemini 4 dan Gemini 3 mendukung penggabungan alat bawaan (seperti Eksekusi Kode) dengan alat kustom (panggilan fungsi).
 
-## Librerie supportate
+## Library yang didukung
 
-L'ambiente di esecuzione del codice include le seguenti librerie:
+Lingkungan eksekusi kode mencakup library berikut:
 
 - attrs
-- scacchi
+- catur
 - contourpy
 - fpdf
 - geopandas
@@ -881,9 +891,9 @@ L'ambiente di esecuzione del codice include le seguenti librerie:
 - numpy
 - opencv-python
 - openpyxl
-- pacchettizzazione
-- panda
-- cuscino
+- paket
+- pandas
+- bantal
 - protobuf
 - pylatex
 - pyparsing
@@ -895,7 +905,7 @@ L'ambiente di esecuzione del codice include le seguenti librerie:
 - scikit-learn
 - scipy
 - seaborn
-- sei
+- enam
 - striprtf
 - sympy
 - tabulate
@@ -903,21 +913,21 @@ L'ambiente di esecuzione del codice include le seguenti librerie:
 - toolz
 - xlrd
 
-Non puoi installare le tue librerie.
+Anda tidak dapat menginstal library Anda sendiri.
 
-## Passaggi successivi
+## Langkah berikutnya
 
-- Prova la [Guida rapida dell'API Interactions](https://ai.google.dev/gemini-api/docs/quickstart?hl=it).
-- Scopri di più sugli altri strumenti dell'API Gemini:
-  - [Chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it)
-  - [Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it)
+- Coba [Panduan Memulai Interactions API](https://ai.google.dev/gemini-api/docs/quickstart?hl=id).
+- Pelajari alat Gemini API lainnya:
+  - [Pemanggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)
+  - [Grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id)
 
-Invia feedback
+Kirim masukan
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Ultimo aggiornamento 2026-10-13 UTC.
+Terakhir diperbarui pada 2026-10-13 UTC.
 
-Vuoi dirci altro?
+Ada masukan untuk kami?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-10-13 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-13 UTC."],[],[]]

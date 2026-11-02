@@ -1,47 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=th
-fetched_at: 2026-10-26T05:42:48.193272+00:00
-title: "\u0e1a\u0e31\u0e19\u0e17\u0e36\u0e01\u0e41\u0e25\u0e30\u0e0a\u0e38\u0e14\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=pl
+fetched_at: 2026-11-02T07:16:29.667775+00:00
+title: "Logi i zbiory danych \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
+Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-# บันทึกและชุดข้อมูล
+# Logi i zbiory danych
 
-ในคู่มือนี้ คุณจะได้เรียนรู้วิธี
-ดูบันทึกจากการใช้งาน Gemini API ในแดชบอร์ด Google AI Studio
-เพื่อให้เข้าใจพฤติกรรมของโมเดลได้ดียิ่งขึ้น และวิธีที่ผู้ใช้อาจโต้ตอบกับแอปพลิเคชันของคุณ ใช้การบันทึกเพื่อสังเกต แก้ไขข้อบกพร่อง และ*แชร์ความคิดเห็นเกี่ยวกับการใช้งานกับ Google (ไม่บังคับ) เพื่อช่วยปรับปรุง Gemini ในกรณีการใช้งานของนักพัฒนาซอฟต์แวร์*[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=th)
+Z tego przewodnika dowiesz się, jak wyświetlać logi z użycia interfejsu Gemini API w panelu Google AI Studio, aby lepiej zrozumieć zachowanie modelu i sposób, w jaki użytkownicy mogą wchodzić w interakcje z Twoimi aplikacjami. Wykorzystaj logowanie, aby obserwować i debugować, a także *opcjonalnie udostępniać Google opinie na temat użytkowania, aby pomóc ulepszać Gemini w różnych przypadkach użycia przez deweloperów*[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=pl).
 
-ระบบรองรับการเรียก API ทั้งหมดของ `GenerateContent`, `BatchGenerateContent`, `StreamGenerateContent` และการเรียก API ของ [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=th) ยกเว้น Agent ที่ได้รับการจัดการ ซึ่งรวมถึงการโทรผ่านปลายทาง[ความเข้ากันได้กับ OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=th)
+Obsługiwane są wszystkie wywołania interfejsów API `GenerateContent`, `BatchGenerateContent`, `StreamGenerateContent` i [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=pl) z wyjątkiem agentów zarządzanych. Obejmuje to wywołania wykonywane przez punkty końcowe [zgodne z OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pl).
 
-## กำหนดค่าการบันทึกโปรเจ็กต์
+## Konfigurowanie logowania projektu
 
-โดยค่าเริ่มต้น API จะจัดเก็บออบเจ็กต์การโต้ตอบทั้งหมด (`store=true`) เพื่อ
-ลดความซับซ้อนในการใช้ฟีเจอร์การจัดการสถานะฝั่งเซิร์ฟเวอร์ ในทางตรงกันข้าม Generate Content API จะไม่จัดเก็บคำขอโดยค่าเริ่มต้น และต้องเปิดใช้พื้นที่เก็บข้อมูลต่อคำขอหรือที่ระดับโปรเจ็กต์จาก AI Studio
+Domyślnie zarówno interfejs [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=pl) API, jak i Generate Content API przechowują żądania (`store=true`). W przypadku interfejsu Interactions API umożliwia to też korzystanie z funkcji zarządzania stanem po stronie serwera.
 
-ใน [AI Studio](https://aistudio.google.com/logs?hl=th) ของ Google คุณสามารถเปิดหรือปิดใช้การบันทึกสำหรับทุกโปรเจ็กต์หรือโปรเจ็กต์ที่เฉพาะเจาะจง และเปลี่ยนค่ากำหนดเหล่านี้ได้ทุกเมื่อผ่านแผง**การตั้งค่า**ในหน้า[บันทึกและชุดข้อมูล](https://aistudio.google.com/logs?hl=th) คุณสามารถเปิดหรือปิดการบันทึก
-แยกกันสำหรับ `generateContent` API และ
-[Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=th) API
-เพื่อเปลี่ยนลักษณะการทำงานของการจัดเก็บเริ่มต้นสำหรับโปรเจ็กต์
+W Google [AI Studio](https://aistudio.google.com/logs?hl=pl) możesz włączyć lub wyłączyć przechowywanie danych w przypadku poszczególnych projektów i w każdej chwili zmienić te ustawienia w panelu **Ustawienia** w [panelu logów interfejsu Gemini API](https://aistudio.google.com/logs?hl=pl). Możesz włączać i wyłączać logowanie niezależnie dla interfejsu `generateContent` API i [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=pl) API, aby zmienić domyślne zachowanie przechowywania w projekcie.
 
-### การบันทึกระดับคำขอ
+### Logowanie na poziomie żądania
 
-ลักษณะการทำงานของพื้นที่เก็บข้อมูลและการบันทึกจะแตกต่างกันไปตาม API ดังนี้
+Oba interfejsy API domyślnie przechowują żądania (`store=true`):
 
-- **[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=th):** จัดเก็บคำขอโดยค่าเริ่มต้น (`store=true`) เพื่อลดความซับซ้อนในการจัดการสถานะฝั่งเซิร์ฟเวอร์
-- **สร้าง Content API (`generateContent`):** ไม่จัดเก็บคำขอโดยค่าเริ่มต้น (`store=false`)
+- **[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=pl):** domyślnie przechowuje żądania, aby uprościć zarządzanie stanem po stronie serwera.
+- **Generate Content API (`generateContent`, `streamGenerateContent` i `batchGenerateContent`):** domyślnie przechowuje żądania w przypadku projektów utworzonych 26 października 2026 r. lub później. Projekty utworzone przed tą datą domyślnie nie przechowują żądań (`store=false`), chyba że w AI Studio włączono logowanie.
 
-วิธีตั้งค่าพร็อพเพอร์ตี้ `store` มีดังนี้
+Właściwość `store` na poziomie żądania ma pierwszeństwo przed ustawieniem na poziomie projektu. Ustawienie `store` w żądaniach do interfejsu Generate Content API wymaga `google-genai` w wersji 2.33.0 lub nowszej w przypadku Pythona, `@google/genai` w wersji 2.31.0 lub nowszej w przypadku JavaScriptu, `google-genai` w wersji 1.79.0 lub nowszej w przypadku Javy oraz `google.golang.org/genai` w wersji 1.76.0 lub nowszej w przypadku Go. Oto jak możesz ustawić właściwość `store`:
 
 **GenerateContent API**
 
@@ -55,7 +49,7 @@ client = genai.Client()
 response = client.models.generate_content(
     model='gemini-3.8-flash',
     contents='Explain quantum entanglement in simple terms.',
-    config={'store': False} # Set to True to enable logging of this request
+    config={'store': True} # Set to False to disable logging of this request
 )
 
 print(response.text)
@@ -72,7 +66,7 @@ const response = await client.models.generateContent({
     model: 'gemini-3.8-flash',
     contents: 'Explain quantum entanglement in simple terms.',
     config: {
-        store: false // Set to true to enable logging of this request
+        store: true // Set to false to disable logging of this request
     }
 });
 
@@ -88,12 +82,13 @@ import com.google.genai.types.GenerateContentResponse;
 
 Client client = new Client();
 
-// The GenerateContent API does not store requests by default
 GenerateContentResponse response =
     client.models.generateContent(
         "gemini-3.8-flash",
         "Explain quantum entanglement in simple terms.",
-        GenerateContentConfig.builder().build());
+        GenerateContentConfig.builder()
+            .store(true) // Set to false to disable logging of this request
+            .build());
 
 System.out.println(response.text());
 ```
@@ -118,12 +113,13 @@ func main() {
         log.Fatal(err)
     }
 
-    // The GenerateContent API does not store requests by default
     response, err := client.Models.GenerateContent(
         ctx,
         "gemini-3.8-flash",
         genai.Text("Explain quantum entanglement in simple terms."),
-        &genai.GenerateContentConfig{},
+        &genai.GenerateContentConfig{
+            Store: genai.Ptr(true), // Set to false to disable logging of this request
+        },
     )
     if err != nil {
         log.Fatal(err)
@@ -229,66 +225,60 @@ func main() {
 }
 ```
 
-## ดูบันทึกของโปรเจ็กต์ใน AI Studio
+## Wyświetlanie logów projektu w AI Studio
 
-1. ไปที่หน้าบันทึกใน [AI Studio](https://aistudio.google.com/logs?hl=th)
-2. เลือกโปรเจ็กต์จากเมนูแบบเลื่อนลง
-3. บันทึกจะปรากฏในตารางตามลำดับเวลาแบบย้อนหลังสำหรับ Interactions API หากมี
-4. หากต้องการดูบันทึกของโปรเจ็กต์สำหรับ Generate Content API ให้เปิดใช้ใน[แผงการตั้งค่า](#configure-logging)ก่อน
+1. Otwórz stronę Logi w [AI Studio](https://aistudio.google.com/logs?hl=pl).
+2. Wybierz projekt z menu.
+3. Dzienniki będą wyświetlane w tabeli w odwrotnej kolejności chronologicznej, jeśli istnieją.
+4. W przypadku projektów utworzonych przed 26 października 2026 r. najpierw włącz logowanie interfejsu Generate Content API w [panelu ustawień](#configure-logging), aby obserwować logi projektu dotyczące interfejsu Generate Content API.
 
-คลิกรายการเพื่อดูตัวอย่างเพย์โหลด คุณสามารถ
-ตรวจสอบพรอมต์และคำตอบทั้งหมดจาก Gemini รวมถึงบริบทจาก
-การสนทนาก่อนหน้าได้ สำหรับคำขอ **Interactions API** บันทึกจะรวมลิงก์โดยตรงไปยัง `previous_interaction_id` ด้วย
+Kliknij wpis, aby wyświetlić podgląd ładunku. Możesz sprawdzić pełny prompt i odpowiedź Gemini oraz kontekst z poprzednich etapów. W przypadku żądań do **Interactions API** logi zawierają też bezpośredni link do `previous_interaction_id`.
 
-## กำหนดค่าการเก็บรักษาพื้นที่เก็บข้อมูลของโปรเจ็กต์
+## Konfigurowanie przechowywania danych w projekcie
 
-บันทึกจะหมดอายุและมีการทำเครื่องหมายว่าต้องลบหลังจากระยะเวลาเก็บรักษาเริ่มต้นที่ 55 วัน (เว้นแต่จะ[บันทึกลงในชุดข้อมูล](#create) ซึ่งจะไม่มีวันหมดอายุ)
-คุณกำหนดค่ากรอบเวลาการเก็บรักษาบันทึกของโปรเจ็กต์ได้สูงสุด 7, 14, 28 หรือ 55 วัน
+Logi wygasają i są oznaczane do usunięcia po domyślnym okresie przechowywania wynoszącym 55 dni (chyba że są [zapisane w zbiorze danych](#create), który nie wygasa).
+Okno przechowywania logów projektu możesz skonfigurować na maksymalnie 7, 14, 28 lub 55 dni.
 
-## สร้างและแชร์ชุดข้อมูล
+## Tworzenie i udostępnianie zbiorów danych
 
-คุณสามารถบันทึกบันทึกลงในชุดข้อมูลเพื่อจัดระเบียบและส่งออกได้อย่างมีประสิทธิภาพมากขึ้น
+Możesz zapisywać logi w zbiorach danych, aby skuteczniej je porządkować i eksportować.
 
-- จาก[หน้าบันทึก](https://aistudio.google.com/logs?hl=th) ให้ค้นหาแถบตัวกรอง
-  ที่ด้านบนเพื่อเลือกพร็อพเพอร์ตี้ที่จะใช้กรอง
-- จากมุมมองที่กรองแล้ว ให้ใช้ช่องทําเครื่องหมายเพื่อเลือกบันทึกทั้งหมดหรือบันทึกแต่ละรายการ
-- คลิกปุ่ม**สร้างชุดข้อมูล**ที่ปรากฏที่ด้านบนของรายการ
-- ตั้งชื่อและใส่คำอธิบาย (ไม่บังคับ) ให้กับชุดข้อมูลใหม่
-- คุณจะเห็นชุดข้อมูลที่เพิ่งสร้างขึ้นพร้อมชุดบันทึกที่ดูแลจัดการแล้ว
-- ส่งออกชุดข้อมูลเพื่อวิเคราะห์เพิ่มเติมเป็นไฟล์ CSV, JSONL หรือไปยัง Google ชีต
+- Na [stronie Logi](https://aistudio.google.com/logs?hl=pl) znajdź pasek filtrowania u góry, aby wybrać właściwość, według której chcesz filtrować.
+- W widoku przefiltrowanym użyj pól wyboru, aby wybrać wszystkie lub poszczególne logi.
+- Kliknij przycisk **Utwórz zbiór danych**, który pojawi się u góry listy.
+- Nadaj nowemu zbiorowi danych nazwę i opcjonalnie dodaj opis.
+- Zobaczysz utworzony właśnie zbiór danych z wybranym zestawem logów.
+- Wyeksportuj zbiór danych do dalszej analizy jako pliki CSV, JSONL lub do Arkuszy Google.
 
-ชุดข้อมูลอาจเป็นประโยชน์สำหรับ Use Case ที่แตกต่างกันจำนวนหนึ่ง
+Zbiory danych mogą być przydatne w wielu różnych przypadkach użycia.
 
-- **ดูแลชุดความท้าทาย:** ขับเคลื่อนการปรับปรุงในอนาคตซึ่งมุ่งเน้นไปยังส่วนที่คุณต้องการให้ AI ปรับปรุง
-- **ดูแลชุดตัวอย่าง:** เช่น ตัวอย่างจากการใช้งานจริงเพื่อสร้างคำตอบจากโมเดลอื่น หรือรวบรวมกรณีที่พบได้ยากเพื่อตรวจสอบตามปกติก่อนการติดตั้งใช้งาน
-- **ชุดการประเมิน:** ชุดที่แสดงถึงการใช้งานจริงในความสามารถที่สำคัญ เพื่อใช้เปรียบเทียบกับโมเดลอื่นๆ หรือการทำซ้ำคำสั่งของระบบ
+- **Tworzenie zestawów wyzwań:** wprowadzaj ulepszenia w obszarach, w których chcesz poprawić działanie AI.
+- **Tworzenie zestawów próbek:** na przykład próbka z rzeczywistego użycia do generowania odpowiedzi z innego modelu lub zbiór przypadków brzegowych do rutynowych kontroli przed wdrożeniem.
+- **Zbiory ewaluacyjne:** zbiory, które odzwierciedlają rzeczywiste wykorzystanie ważnych funkcji, do porównania z innymi modelami lub iteracjami instrukcji systemowych.
 
-คุณสามารถมีส่วนร่วมในการวิจัยและพัฒนา Gemini ได้โดยเลือกแชร์
-ชุดข้อมูลกับ Google เป็นตัวอย่างการสาธิต
+Możesz przyczynić się do badań i rozwoju Gemini, udostępniając Google swoje zbiory danych jako przykłady demonstracyjne.
 
-## ข้อจำกัด
+## Ograniczenia
 
-ปัจจุบันระบบยังไม่รองรับการบันทึกสำหรับรายการต่อไปนี้
+Logowanie nie jest obecnie obsługiwane w przypadku:
 
-- โมเดล Imagen และ Veo
-- โมเดลการฝังของ Gemini
-- โมเดล Gemini Robotics
-- อินพุตที่มีวิดีโอ, GIF หรือ PDF
-- Agent เวอร์ชันตัวอย่างแบบสาธารณะใน Gemini API
+- Modele Imagen i Veo
+- Modele wektorów dystrybucyjnych Gemini
+- Model Gemini Robotics
+- Dane wejściowe zawierające filmy, GIF-y lub pliki PDF
+- Agenty w publicznej wersji przedpremierowej w Gemini API
 
-## ขั้นตอนถัดไป
+## Co dalej?
 
-- **สร้างต้นแบบด้วยประวัติเซสชัน:** ใช้ [AI Studio Build](https://aistudio.google.com/apps?hl=th) เพื่อสร้างแอปโค้ดและเพิ่มคีย์ API เพื่อเปิดใช้ประวัติบันทึก Gemini API สำหรับฟีเจอร์ AI
-- **เรียกใช้บันทึกอีกครั้งด้วย Gemini Batch API:** ใช้ชุดข้อมูลสำหรับการสุ่มตัวอย่างคำตอบ
-  และการประเมินโมเดลหรือตรรกะของแอปพลิเคชันโดยการเรียกใช้บันทึกอีกครั้งด้วย
-  [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb)
+- **Prototyp z historią sesji:** użyj [AI Studio Build](https://aistudio.google.com/apps?hl=pl), aby tworzyć aplikacje za pomocą vibe codingu i dodać klucz interfejsu API, który umożliwi zapisywanie historii logów Gemini API na potrzeby funkcji opartych na AI.
+- **Ponowne uruchamianie logów za pomocą interfejsu Gemini Batch API:** używaj zbiorów danych do próbkowania odpowiedzi i oceny modeli lub logiki aplikacji, ponownie uruchamiając logi za pomocą [interfejsu Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb).
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-อัปเดตล่าสุด 2026-09-24 UTC
+Ostatnia aktualizacja: 2026-10-26 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Chcesz przekazać coś jeszcze?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-10-26 UTC."],[],[]]

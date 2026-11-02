@@ -1,52 +1,51 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=bn
-fetched_at: 2026-10-26T05:50:16.218275+00:00
-title: "Gemini 2.5 Flash \u099f\u09c7\u0995\u09cd\u09b8\u099f-\u099f\u09c1-\u09b8\u09cd\u09aa\u09bf\u099a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=pt-BR
+fetched_at: 2026-11-02T07:28:41.224153+00:00
+title: "Convers\u00e3o de texto em voz do Gemini 2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=bn)।
+O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [হোম](https://ai.google.dev/?hl=bn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
-- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs?hl=bn)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-মতামত জানান
+Envie comentários
 
-# Gemini 2.5 Flash টেক্সট-টু-স্পিচ
+# Conversão de texto em voz do Gemini 2.5 Flash
 
-হাই-ফিডেলিটি স্পিচ সিন্থেসিসের জন্য আমাদের সবচেয়ে দ্রুত ইঞ্জিন, যা কম-লেটেন্সি এবং
-সাশ্রয়ী অডিও জেনারেশনের সুবিধা দেয়। Gemini 2.5 Flash TTS রিয়েল-টাইম অ্যাসিস্ট্যান্ট, হাই-ভলিউম ন্যারেশন এবং কথোপকথনের ক্ষেত্রে ব্যবহারের জন্য সবচেয়ে ভালো, যেখানে
-ভয়েস স্টাইল ও পেসিংয়ের উপর সূক্ষ্ম কন্ট্রোল প্রয়োজন।
+Nosso mecanismo mais rápido para síntese de voz de alta fidelidade, que oferece geração de áudio sintético de baixa latência e baixo custo. O Gemini 2.5 Flash TTS é ideal para assistentes em tempo real, narração de alto volume e casos de uso de conversação que exigem controle detalhado sobre o estilo e o ritmo da voz.
 
-[Google AI Studio-তে ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-2.5-flash-preview-tts&hl=bn)
+[Teste no Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-preview-tts&hl=pt-br)
 
-## ডকুমেন্টেশন
+## Documentação
 
-ফিচার ও কার্যকারিতা সম্পর্কে সম্পূর্ণ তথ্য পেতে [টেক্সট-টু-স্পিচ](https://ai.google.dev/gemini-api/docs/speech-generation?hl=bn)
-গাইড দেখুন।
+Acesse o guia da [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br) para conferir
+todos os recursos e funcionalidades.
 
 ## gemini-2.5-flash-preview-tts
 
-| প্রপার্টি | বিবরণ |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardমডেল কোড | `gemini-2.5-flash-preview-tts` |
-| সেভ করাডেটার ধরন | **ইনপুট**  টেক্সট  **আউটপুট**  অডিও |
-| token\_autoটোকেন সীমা[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=bn) | **ইনপুট টোকেনের সীমা**  ৮,১৯২  **আউটপুট টোকেনের সীমা**  ১৬,৩৮৪ |
-| handymanকেপেবিলিটি | **[অডিও জেনারেশন](https://ai.google.dev/gemini-api/docs/speech-generation?hl=bn)**  কাজ করে  **[ক্যাশিং](https://ai.google.dev/gemini-api/docs/caching?hl=bn)**  কাজ করে না  **[কোড এক্সিকিউশন](https://ai.google.dev/gemini-api/docs/code-execution?hl=bn)**  কাজ করে না  **[ফাইল সার্চ](https://ai.google.dev/gemini-api/docs/file-search?hl=bn)**  কাজ করে না  **[ফাংশন কলিং](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn)**  কাজ করে না  **[Google Maps-এর মাধ্যমে গ্রাউন্ডিং](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=bn)**  কাজ করে না  **[ইমেজ জেনারেশন](https://ai.google.dev/gemini-api/docs/image-generation?hl=bn)**  কাজ করে না  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=bn)**  কাজ করে না  **[সার্চ গ্রাউন্ডিং](https://ai.google.dev/gemini-api/docs/google-search?hl=bn)**  কাজ করে না  **[স্ট্রাকচার্ড আউটপুট](https://ai.google.dev/gemini-api/docs/structured-output?hl=bn)**  কাজ করে না  **[ভাবছি](https://ai.google.dev/gemini-api/docs/thinking?hl=bn)**  কাজ করে না  **[URL কন্টেক্সট](https://ai.google.dev/gemini-api/docs/url-context?hl=bn)**  কাজ করে না |
-| speedটি ব্যবহারের বিকল্প | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=bn)**  কাজ করে না  **[Flex ইনফারেন্স](https://ai.google.dev/gemini-api/docs/flex-inference?hl=bn)**  কাজ করে না  **[প্রায়োরিটি ইনফারেন্স](https://ai.google.dev/gemini-api/docs/priority-inference?hl=bn)**  কাজ করে না |
-| ১২৩ভার্সন | আরও জানতে [মডেল ভার্সন প্যাটার্ন](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#model-versions) পড়ুন।  - `gemini-2.5-flash-preview-tts` |
-| calendar\_monthলেটেস্ট আপডেট | ডিসেম্বর ২০২৫ |
+| Código do modelo id\_card | `gemini-2.5-flash-preview-tts` |
+| saveTipos de dados aceitos | **Entradas** (link em inglês)  Texto  **Saída**  Áudio |
+| token\_autoLimites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  8.192  **Limite de tokens de saída**  16.384 |
+| handymanRecursos | **[Geração de áudio sintético](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br)**  Compatível  **[Armazenamento em cache](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br)**  incompatível  **[Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br)**  incompatível  **[Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)**  Não disponíveis  **[Chamadas de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)**  incompatível  **[Embasamento com o Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)**  incompatível  **[Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br)**  incompatível  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br)**  incompatível  **[Embasamento da pesquisa](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)**  incompatível  **[Respostas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br)**  incompatível  **[Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br)**  incompatível  **[Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)**  incompatível |
+| speedOpções de consumo | **[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br)**  incompatível  **[Inferência Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pt-br)**  incompatível  **[Inferência de prioridade](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pt-br)**  incompatível |
+| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - `gemini-2.5-flash-preview-tts` |
+| calendar\_monthAtualização mais recente | Dezembro de 2025 |
+| pagoPreços | [Preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-2.5-flash-preview-tts) |
 
-মতামত জানান
+Envie comentários
 
-অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-2026-10-13 UTC-তে শেষবার আপডেট করা হয়েছে।
+Última atualização 2026-10-29 UTC.
 
-আমাদের আরও কিছু জানাতে চান?
+Quer enviar seu feedback?
 
-[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-13 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-10-29 UTC."],[],[]]

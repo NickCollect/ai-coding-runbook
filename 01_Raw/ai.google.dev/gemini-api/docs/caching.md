@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/caching?hl=it
-fetched_at: 2026-10-26T05:40:26.015202+00:00
+fetched_at: 2026-11-02T07:16:05.532030+00:00
 title: "Memorizzazione nella cache del contesto \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

@@ -1,45 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=he
-fetched_at: 2026-10-26T05:50:10.300657+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ru
+fetched_at: 2026-11-02T07:29:29.889651+00:00
 title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫Gemini 4 Argon זמין עכשיו. [רוצים לנסות?](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=he)
+Доступна новая модель Gemini 4 Argon. [Попробовать](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ru)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Главная](https://ai.google.dev/?hl=ru)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
+- [Документация](https://ai.google.dev/gemini-api/docs?hl=ru)
 
-שליחת משוב
+Отправить отзыв
 
 # Gemini 3.1 Flash-Lite
 
-‫Gemini 3.1 Flash-Lite הוא מודל מולטימודאלי חסכוני עם זמן אחזור נמוך שעבר אופטימיזציה למשימות קלות בתדירות גבוהה. המודל תומך בקלט של טקסט, תמונות, סרטונים, אודיו וקובצי PDF, והוא מיועד לתהליכי עבודה של סוכנים עם נפח גבוה, לחילוץ נתונים פשוט ולאפליקציות שבהן חביון ועלות ה-API הם האילוצים העיקריים.
+Gemini 3.1 Flash-Lite – это экономичная мультимодальная модель с низкой задержкой, оптимизированная для часто повторяющихся простых задач. Модель поддерживает текстовые, графические, видео- и аудиозапросы, а также PDF-файлы. Она предназначена для рабочих процессов с большим объемом данных, простого извлечения данных и приложений, где задержка и стоимость API являются основными ограничениями.
 
-[לניסיון ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=he)
+[Попробовать в Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=ru)
 
 ## gemini-3.1-flash-lite
 
-| נכס | תיאור |
+| Свойство | Описание |
 | --- | --- |
-| id\_cardקוד מודל | `gemini-3.1-flash-lite` |
-| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונה, סרטון, אודיו ו-PDF  **פלט**  טקסט |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  1,048,576  **Output token limit**  65,536 |
-| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  לא נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  נתמך  **[שימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he)**  לא נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  לא נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  נתמך  **[חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  נתמך |
-| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  נתמך  **[הסקת מסקנות ב-Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  נתמך |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - `Stable: gemini-3.1-flash-lite` |
-| calendar\_monthהעדכון האחרון | מאי 2026 |
-| id\_cardכרטיס מודל | [כרטיס מודל](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/?hl=he) |
+| Код модели: id\_card. | `gemini-3.1-flash-lite` |
+| saveПоддерживаемые типы данных | **Входные данные**  Текст, изображение, видео, аудио и PDF  **Выходные данные**  Текст |
+| token\_autoОграничения на количество токенов[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ru) | **Лимит входных токенов**  1 048 576  **Ограничение на количество выходных токенов**  65 536 |
+| handymanВозможности | **[Генератор аудио](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ru)**  Чего пользователь не может  **[Кеширование](https://ai.google.dev/gemini-api/docs/caching?hl=ru)**  Что пользователь может  **[Выполнение кода](https://ai.google.dev/gemini-api/docs/code-execution?hl=ru)**  Что пользователь может  **[Использование компьютера](https://ai.google.dev/gemini-api/docs/computer-use?hl=ru)**  Чего пользователь не может  **[Поиск файлов](https://ai.google.dev/gemini-api/docs/file-search?hl=ru)**  Что пользователь может  **[Вызов функций](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru)**  Что пользователь может  **[Обоснование с Google Картами](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ru)**  Что пользователь может  **[Генерирование изображений](https://ai.google.dev/gemini-api/docs/image-generation?hl=ru)**  Чего пользователь не может  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ru)**  Чего пользователь не может  **[Обоснование в Поиске](https://ai.google.dev/gemini-api/docs/google-search?hl=ru)**  Что пользователь может  **[Структурированные выходные данные](https://ai.google.dev/gemini-api/docs/structured-output?hl=ru)**  Что пользователь может  **[Думаю…](https://ai.google.dev/gemini-api/docs/thinking?hl=ru)**  Что пользователь может  **[URL-контекст](https://ai.google.dev/gemini-api/docs/url-context?hl=ru)**  Что пользователь может |
+| speedВарианты использования | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ru)**  Что пользователь может  **[Гибкий инференс](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ru)**  Что пользователь может  **[Определение приоритета](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ru)**  Что пользователь может |
+| 123Версии | Подробнее [о шаблонах версий моделей](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ru#model-versions)…  - `Stable: gemini-3.1-flash-lite` |
+| calendar\_monthПоследнее обновление | Май 2026 г. |
+| id\_cardКарточка модели | [Карточка модели](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/?hl=ru) |
+| paidЦены | [Цены](https://ai.google.dev/gemini-api/docs/pricing?hl=ru#gemini-3.1-flash-lite) |
 
-## מדריך למפתחים
+## Руководство для разработчиков
 
-‫Gemini 3.1 Flash-Lite הוא המודל הכי טוב לטיפול במשימות פשוטות בהיקף גדול. הנה כמה תרחישי שימוש שמתאימים במיוחד ל-Gemini 3.1 Flash-Lite:
+Gemini 3.1 Flash-Lite лучше всего подходит для выполнения простых задач в больших масштабах. Вот несколько примеров использования Gemini 3.1 Flash-Lite:
 
-- **תרגום**: תרגום מהיר, זול ובנפח גבוה, למשל עיבוד של הודעות בצ'אט, ביקורות וכרטיסי תמיכה בהיקף גדול. אתם יכולים להשתמש בהוראות מערכת כדי להגביל את הפלט רק לטקסט המתורגם ללא פרשנות נוספת:
+- **Перевод.** Быстрый и недорогой перевод больших объемов текста, например сообщений в чате, отзывов и запросов в службу поддержки. Вы можете использовать системные инструкции, чтобы ограничить выходные данные только переведенным текстом без дополнительных комментариев:
 
   ```
   from google import genai
@@ -57,7 +58,7 @@ title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI f
 
   print(response.text)
   ```
-- **תמלול**: עיבוד של הקלטות, תזכורות קוליות או כל תוכן אודיו שרוצים לתמלל לטקסט בלי להפעיל צינור נפרד של המרת דיבור לטקסט. תמיכה בקלט מולטימודאלי, כך שאפשר להעביר קובצי אודיו ישירות לתמלול:
+- **Расшифровка.** Обрабатывайте записи, голосовые заметки и другой аудиоконтент, для которого нужна текстовая расшифровка, без создания отдельного конвейера преобразования речи в текст. Поддерживает мультимодальные входные данные, поэтому вы можете передавать аудиофайлы напрямую для расшифровки.
 
   ```
   from google import genai
@@ -77,7 +78,7 @@ title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI f
 
   print(response.text)
   ```
-- **משימות קלות משקל של סוכנים וחילוץ נתונים**: חילוץ ישויות, סיווג וצינורות לעיבוד נתונים קלים משקל שנתמכים על ידי פלט JSON מובנה. לדוגמה, חילוץ נתונים מובְנים מביקורת מלקוח באתר מסחר אלקטרוני:
+- **Простые агентные задачи и извлечение данных.** Извлечение объектов, классификация и простые конвейеры обработки данных с поддержкой структурированных выходных данных JSON. Например, извлечение структурированных данных из отзыва клиента интернет-магазина:
 
   ```
   from google import genai
@@ -105,7 +106,7 @@ title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI f
 
   print(response.text)
   ```
-- **עיבוד מסמכים וסיכום שלהם**: ניתוח קובצי PDF והחזרת סיכומים תמציתיים, למשל כדי ליצור צינור לעיבוד מסמכים או כדי לתעדף במהירות קבצים נכנסים:
+- **Обработка и краткий пересказ документов.** Анализируйте PDF-файлы и получайте краткие пересказы, например для создания конвейера обработки документов или быстрой сортировки входящих файлов.
 
   ```
   from google import genai
@@ -132,7 +133,7 @@ title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI f
 
   print(response.text)
   ```
-- **ניתוב מודלים**: שימוש במודל עם חביון נמוך ועלות נמוכה כסיווג ששולח שאילתות למודל המתאים על סמך מורכבות המשימה. זהו דפוס אמיתי בייצור – [Gemini CLI](https://geminicli.com/docs/core/#model-fallback) בקוד פתוח משתמש ב-Flash-Lite כדי לסווג את מורכבות המשימה ולנתב אותה ל-Flash או ל-Pro בהתאם.
+- **Маршрутизация моделей.** Используйте недорогую модель с низкой задержкой в качестве классификатора, который направляет запросы к подходящей модели в зависимости от сложности задачи. Это реальный шаблон в рабочей среде – [Gemini CLI](https://geminicli.com/docs/core/#model-fallback) с открытым исходным кодом использует Flash-Lite для классификации сложности задач и соответствующей маршрутизации к Flash или Pro.
 
   ```
   from google import genai
@@ -185,7 +186,7 @@ title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI f
 
   print(response.text)
   ```
-- **חשיבה**: כדי לשפר את הדיוק במשימות שבהן יש יתרון להסקה שלב אחר שלב, אפשר להגדיר חשיבה כך שהמודל יקדיש יותר משאבי מחשוב להסקה פנימית לפני יצירת הפלט הסופי:
+- **Рассуждение.** Чтобы повысить точность выполнения задач, требующих пошагового рассуждения, настройте рассуждение, чтобы модель тратила дополнительные вычислительные ресурсы на внутреннее рассуждение перед созданием окончательного результата.
 
   ```
   from google import genai
@@ -204,12 +205,12 @@ title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI f
   print(response.text)
   ```
 
-שליחת משוב
+Отправить отзыв
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
 
-עדכון אחרון: 2026-07-21 (שעון UTC).
+Последнее обновление: 2026-10-29 UTC.
 
-רוצה לתת לנו משוב?
+Хотите рассказать подробнее?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-21 (שעון UTC)."],[],[]]
+[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-29 UTC."],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration?hl=hi
-fetched_at: 2026-10-26T05:41:56.409233+00:00
+fetched_at: 2026-11-02T07:00:44.417754+00:00
 title: "\u091f\u093e\u0938\u094d\u0915 \u0911\u0930\u094d\u0915\u0947\u0938\u094d\u091f\u094d\u0930\u0947\u0936\u0928 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

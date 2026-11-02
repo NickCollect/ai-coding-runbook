@@ -1,31 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/google-search?hl=ar
-fetched_at: 2026-10-26T06:01:40.940938+00:00
-title: "\u0627\u0644\u0623\u0633\u0627\u0633\u064a\u0627\u062a \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \"\u0628\u062d\u062b Google\" \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/google-search?hl=fa
+fetched_at: 2026-11-02T07:01:17.394858+00:00
+title: "\u067e\u0627\u06cc\u0647\u200c\u0645\u0646\u062f\u0633\u0627\u0632\u06cc \u0628\u0627 \u00ab\u062c\u0633\u062a\u062c\u0648\u06cc Google\u00bb \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫Gemini 4 Argon متاح الآن. [جرِّب هذه الميزة](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ar).
+‫Gemini 4 Argon اکنون دردسترس است. [امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fa).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs/generate-content?hl=ar)
+- [صفحه اصلی](https://ai.google.dev/?hl=fa)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fa)
+- [سندنگار](https://ai.google.dev/gemini-api/docs/generate-content?hl=fa)
 
-إرسال ملاحظات
+ارسال بازخورد
 
-# الأساسيات باستخدام "بحث Google"
+# پایه‌مندسازی با «جستجوی Google»
 
-تتيح ميزة "تحديد المصدر من خلال بحث Search" ربط نموذج Gemini بمحتوى الويب في الوقت الفعلي، وهي تعمل بجميع اللغات المتاحة. يتيح ذلك لـ Gemini تقديم إجابات أكثر دقة والإشارة إلى مصادر يمكن التحقّق منها بعد تاريخ آخر تحديث للبيانات.
+«پایه‌مندسازی با جستجوی Google» مدل Gemini را به محتوای وب هم‌زمان متصل می‌کند
+و با همه زبان‌های دردسترس کار می‌کند. این کار به Gemini امکان می‌دهد پاسخ‌های دقیق‌تری ارائه دهد و به منابع قابل‌تأیید فراتر از تاریخ برش دانش خود ارجاع دهد.
 
-تساعدك ميزة "تحديد المصدر" في إنشاء تطبيقات يمكنها تنفيذ ما يلي:
+زمینه‌سازی به شما کمک می‌کند برنامه‌هایی بسازید که می‌توانند:
 
-- **زيادة الدقة الوقائعية:** تقليل حالات الهلوسة في النموذج من خلال استناد الردود إلى معلومات واقعية
-- **الوصول إلى المعلومات في الوقت الفعلي:** الإجابة عن الأسئلة حول الأحداث والمواضيع الحديثة
-- **تقديم مراجع:** تعزيز ثقة المستخدمين من خلال عرض مصادر ادعاءات النموذج
+- **افزایش دقت واقعی:** با قرار دادن اطلاعات دنیای واقعی به‌عنوان مبنای پاسخ‌ها، توهمات مدل را کاهش دهید.
+- **دسترسی به اطلاعات هم‌زمان:** پاسخ دادن به سؤالات درباره رویدادها و موضوعات اخیر.
+- **ارائه نقل‌قول:** با نشان دادن منابع ادعاهای مدل، اعتماد کاربر را جلب کنید.
 
 ### Python
 
@@ -76,7 +77,7 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### REST
+### استراحت
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -99,23 +100,26 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-يمكنك الاطّلاع على مزيد من المعلومات من خلال تجربة دفتر ملاحظات [أداة "بحث Google"](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=ar).
+با امتحان کردن [دفتر یادداشت ابزار «جستجو»](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=fa) می‌توانید اطلاعات بیشتری کسب کنید.
 
-## طريقة عمل ميزة "تحديد المصدر من خلال بحث Google"
+## نحوه عملکرد پایه‌مندسازی با «جستجوی Google»
 
-عند تفعيل أداة `google_search`، يعالج النموذج تلقائيًا سير العمل بالكامل للبحث عن المعلومات ومعالجتها والإشارة إليها.
+وقتی ابزار `google_search` را فعال می‌کنید، مدل کل گردش کار جستجو، پردازش، و نقل‌قول اطلاعات را به‌طور خودکار انجام می‌دهد.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=ar)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=fa)
 
-1. **طلب المستخدم:** يرسل تطبيقك طلبًا من المستخدم إلى Gemini API مع تفعيل أداة `google_search`.
-2. **تحليل الطلب:** يحلّل النموذج الطلب ويحدّد ما إذا كان بإمكان "بحث Google" تحسين الإجابة.
-3. **بحث Google:** إذا لزم الأمر، ينشئ النموذج تلقائيًا طلب بحث واحدًا أو أكثر وينفّذها.
-4. **معالجة نتائج البحث:** يعالج النموذج نتائج البحث ويجمع المعلومات ويصوغ ردًا.
-5. **الرد المستند إلى المصدر:** تعرض واجهة برمجة التطبيقات ردًا نهائيًا سهل الاستخدام يستند إلى نتائج البحث. يتضمّن هذا الرد الإجابة النصية للنموذج و`groundingMetadata` مع طلبات البحث ونتائج الويب والمراجع.
+1. **پیام‌واره کاربر:** برنامه شما پیام‌واره کاربر را به Gemini API
+   با ابزار `google_search` فعال‌شده ارسال می‌کند.
+2. **تحلیل پیام‌واره:** مدل پیام‌واره را تحلیل می‌کند و تعیین می‌کند که آیا «جستجوی Google» می‌تواند پاسخ را بهبود بخشد یا نه.
+3. **جستجوی Google:** درصورت نیاز، مدل به‌طور خودکار یک یا چند پرسمان جستجو تولید و اجرا می‌کند.
+4. **پردازش نتایج جستجو:** مدل نتایج جستجو را پردازش می‌کند،
+   اطلاعات را ترکیب می‌کند، و پاسخی را فرمول‌بندی می‌کند.
+5. **پاسخ پایه‌مند:** میانای برنامه‌سازی کاربردی پاسخ نهایی کاربرپسندی را برمی‌گرداند که
+   مبتنی بر نتایج جستجو است. این پاسخ شامل پاسخ نوشتاری مدل و `groundingMetadata` با پُرسمان‌های جستجو، نتایج وب، و استنادها است.
 
-## فهم الرد المستند إلى المصدر
+## آشنایی با پاسخ مستندسازی
 
-عندما يستند الرد بنجاح إلى المصدر، يتضمّن حقل `groundingMetadata`. هذه البيانات المنظَّمة ضرورية للتحقّق من الادعاءات وإنشاء تجربة مراجع غنية في تطبيقك.
+وقتی پاسخ با موفقیت زمینه‌سازی شود، پاسخ شامل فیلد `groundingMetadata` خواهد بود. این داده‌های ساختاریافته برای درستی‌سنجی ادعاها و ایجاد تجربه ارجاع غنی در برنامه‌تان ضروری است.
 
 ```
 {
@@ -157,21 +161,25 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-تعرض Gemini API المعلومات التالية مع `groundingMetadata`:
+‫Gemini API اطلاعات زیر را با `groundingMetadata` برمی‌گرداند:
 
-- `webSearchQueries` : مصفوفة من طلبات البحث المستخدَمة تفيد هذه الميزة في تحديد الأخطاء وفهم عملية استنتاج النموذج.
-- `searchEntryPoint` : يحتوي على HTML وCSS لعرض "اقتراحات البحث" المطلوبة. يتم تفصيل متطلبات الاستخدام الكاملة في [بنود
-  الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar#grounding-with-google-search).
-- `groundingChunks` : مصفوفة من الكائنات التي تحتوي على مصادر الويب (`uri` و`title`)
-- `groundingSupports` : مصفوفة من الأجزاء لربط `text` ردّ النموذج بالمصادر في `groundingChunks` يربط كل جزء `segment` نصيًا (محدّدًا من خلال `startIndex` و`endIndex`) بواحد أو أكثر من `groundingChunkIndices`. هذا هو المفتاح لإنشاء مراجع مضمّنة.
+- ‫`webSearchQueries` : آرایه پرسمان‌های جستجوی استفاده‌شده. این کار برای اشکال‌زدایی و درک فرایند استدلال مدل مفید است.
+- `searchEntryPoint` : حاوی HTML و CSS برای ارائه «پیشنهادهای جستجو» الزامی است. الزامات کامل استفاده در [شرایط خدمات](https://ai.google.dev/gemini-api/terms?hl=fa#grounding-with-google-search) به‌طور دقیق شرح داده شده است.
+- `groundingChunks` : آرایه‌ای از اشیاء حاوی منابع وب (`uri` و
+  `title`).
+- `groundingSupports` : آرایه تکه‌ها برای متصل کردن پاسخ مدل `text` به
+  منابع در `groundingChunks`. هر بخش، نوشتار `segment` (تعریف‌شده
+  توسط `startIndex` و `endIndex`) را به یک یا چند `groundingChunkIndices` پیوند می‌دهد. این
+  کلید ساختن نقل‌قول‌های درون‌خطی است.
 
-يمكن أيضًا استخدام ميزة "تحديد المصدر من خلال بحث Google" مع أداة "[سياق
-عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)" لربط الردود ببيانات الويب العلنية
-وعناوين URL المحدّدة التي تقدّمها.
+از «پایه‌مندسازی با جستجوی Google» می‌توان در ترکیب با [ابزار بافت نشانی وب](https://ai.google.dev/gemini-api/docs/url-context?hl=fa) نیز استفاده کرد تا پاسخ‌ها هم براساس داده‌های وب عمومی و هم براساس نشانی‌های وب خاصی که ارائه می‌دهید پایه‌مندسازی شوند.
 
-## الإشارة إلى المصادر باستخدام المراجع المضمّنة
+## ارجاع دادن به منابع با استنادهای به‌خط
 
-تعرض واجهة برمجة التطبيقات بيانات مراجع منظَّمة، ما يمنحك تحكّمًا كاملاً في طريقة عرض المصادر في واجهة المستخدم. يمكنك استخدام الحقلَين `groundingSupports` و`groundingChunks` لربط عبارات النموذج مباشرةً بمصادرها. إليك نمط شائع لمعالجة البيانات الوصفية لإنشاء رد يتضمّن مراجع مضمّنة قابلة للنقر.
+این API داده‌های نقل‌قول ساختاریافته را برمی‌گرداند و به شما کنترل کامل می‌دهد تا نحوه نمایش منابع را در میانای کاربر خود تعیین کنید. می‌توانید از فیلدهای `groundingSupports`
+و `groundingChunks` برای پیوند دادن مستقیم اظهارات مدل به
+منابع آن‌ها استفاده کنید. در اینجا الگویی رایج برای پردازش فراداده برای ایجاد
+پاسخ با استنادهای درون‌خطی و قابل‌کلیک ارائه شده است.
 
 ### Python
 
@@ -246,68 +254,72 @@ const textWithCitations = addCitations(response);
 console.log(textWithCitations);
 ```
 
-سيظهر الرد الجديد الذي يتضمّن مراجع مضمّنة على النحو التالي:
+پاسخ جدید با استنادهای درون‌خطی به این شکل خواهد بود:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final.[1](https:/...), [2](https:/...), [4](https:/...), [5](https:/...) This victory marks Spain's record-breaking fourth European Championship title.[5]((https:/...), [2](https:/...), [3](https:/...), [4](https:/...)
 ```
 
-## الأسعار
+## قیمت‌گذاری
 
-عند استخدام ميزة "تحديد المصدر من خلال بحث Google" مع Gemini 3 والنماذج الأحدث، يتم تحصيل رسوم من مشروعك مقابل **كل** طلب بحث يقرّر النموذج تنفيذه.
-يتضمّن نموذج الفوترة لكل طلب بحث 5,000 طلب بحث مجاني شهريًا تتم مشاركتها بين جميع نماذج Gemini 3 والنماذج الأحدث، ثم تبلغ التكلفة **14 دولارًا أمريكيًا لكل 1,000 طلب بحث**.
+وقتی از «پایه‌مندسازی با جستجوی Google» با Gemini 3 و مدل‌های جدیدتر استفاده می‌کنید،
+پروژه شما برای **هر** پرسمان جستجویی که مدل تصمیم به اجرای آن می‌گیرد صورت‌حساب دریافت می‌کند.
+این مدل صورت‌حساب براساس پُرسمان شامل ۵٬۰۰۰ درخواست جستجوی رایگان در ماه است که بین همه مدل‌های Gemini 3 و جدیدتر مشترک است و سپس **۱۴ دلار به‌ازای هر ۱٬۰۰۰ درخواست جستجو** هزینه دارد.
 
-على سبيل المثال، إذا قرّر النموذج تنفيذ طلبات بحث متعددة للردّ على طلب واحد (مثل البحث عن `"UEFA Euro 2024 winner"` و`"Spain vs
-England Euro 2024 final score"` ضمن طلب بيانات من واجهة برمجة التطبيقات نفسه)، يتم احتساب ذلك كاستخدامَين قابلَين للفوترة للأداة لهذا الطلب. لأغراض الفوترة، نتجاهل طلبات بحث الويب الفارغة عند احتساب الطلبات الفريدة.
+برای مثال، اگر مدل تصمیم بگیرد برای پاسخ دادن به یک پیام‌واره چند پرسمان جستجو اجرا کند (مثلاً جستجو برای `"UEFA Euro 2024 winner"` و `"Spain vs
+England Euro 2024 final score"` در یک فراخوانی میانای برنامه‌سازی کاربردی)، این به‌عنوان دو استفاده قابل‌صورت‌حساب از ابزار برای آن درخواست محسوب می‌شود. برای اهداف صورت‌حساب،
+پُرسمان‌های جستجوی وب خالی را هنگام شمارش پُرسمان‌های یکتا نادیده می‌گیریم.
 
-عند استخدام ميزة "تحديد المصدر من خلال بحث Google" مع Gemini 2.5 أو النماذج الأقدم، يتم تحصيل رسوم من مشروعك لكل طلب.
+وقتی از زمینه‌سازی جستجو با Gemini 2.5 یا مدل‌های قدیمی‌تر استفاده می‌کنید، پروژه شما
+به‌ازای هر پیام‌واره صورت‌حساب دریافت می‌کند.
 
-للاطّلاع على معلومات مفصّلة عن الأسعار، يُرجى الانتقال إلى صفحة [أسعار Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=ar).
+برای اطلاعات دقیق درباره قیمت‌گذاری، به [صفحه قیمت‌گذاری Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=fa) مراجعه کنید.
 
-## النماذج المتوافقة
+## مدل‌های پشتیبانی‌شده
 
-يمكنك الاطّلاع على الإمكانات الكاملة في صفحة نظرة عامة على [النموذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
+می‌توانید قابلیت‌های کامل را در صفحه [نمای کلی
+مدل](https://ai.google.dev/gemini-api/docs/models?hl=fa) پیدا کنید.
 
-| الطراز | تحديد المصدر من خلال "بحث Search" |
+| مدل | پایه‌مندسازی با «جستجوی Google» |
 | --- | --- |
 | Gemini 4 Argon | ✔️ |
 | Gemini 3.8 Flash | ✔️ |
 | Gemini 3.6 Flash | ✔️ |
 | Gemini 3.5 Flash-Lite | ✔️ |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Gemini 3.1 Flash Image Preview | ✔️ |
+| پیش‌نمایش تصویر Gemini 3.1 Flash | ✔️ |
 | Gemini 3.1 Pro Preview | ✔️ |
-| Gemini 3 Pro Image Preview | ✔️ |
+| پیش‌نمایش تصویر Gemini 3 Pro | ✔️ |
 | Gemini 3 Flash Preview | ✔️ |
 | Gemini 3.1 Flash-Lite Preview | ✔️ |
-| Gemini 2.5 Pro | ✔️ |
-| Gemini 2.5 Flash | ✔️ |
+| ‫Gemini 2.5 Pro | ✔️ |
+| ‫Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️ |
 
-## مجموعات الأدوات المتوافقة
+## ترکیب‌های ابزار پشتیبانی‌شده
 
-يمكنك استخدام ميزة "تحديد المصدر من خلال بحث Google" مع أدوات أخرى، مثل
-[تنفيذ التعليمات البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar)،
-[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)، و
-[تحديد المصدر من خلال خرائط Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar) (المتوفّرة في
-Gemini 3.5 Flash-Lite والنماذج الأحدث) لتعزيز حالات الاستخدام الأكثر تعقيدًا.
-تتيح نماذج Gemini 3 أيضًا الجمع بين هذه الأدوات المضمّنة والأدوات المخصّصة (استدعاء الدوال). مزيد من المعلومات في صفحة
-[مجموعات الأدوات](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar)
+می‌توانید از «پایه‌مندسازی با جستجوی Google» به‌همراه ابزارهای دیگر مثل
+[اجرای کد](https://ai.google.dev/gemini-api/docs/code-execution?hl=fa)،
+[بافت نشانی وب](https://ai.google.dev/gemini-api/docs/url-context?hl=fa)، و
+[پایه‌مندسازی با Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fa) (پشتیبانی‌شده در
+Gemini 3.5 Flash-Lite و مدل‌های جدیدتر) برای تقویت موارد استفاده پیچیده‌تر استفاده کنید.
+مدل‌های Gemini 3 از ترکیب این ابزارهای داخلی با ابزارهای سفارشی (فراخوانی تابع) نیز پشتیبانی می‌کنند. در صفحه
+[ترکیب‌های ابزار](https://ai.google.dev/gemini-api/docs/tool-combination?hl=fa) بیشتر بدانید.
 
-## الخطوات التالية
+## قدم بعدی چیست
 
-- جرِّب ميزة ["تحديد المصدر من خلال بحث Google" في Gemini API
-  Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=ar).
-- تعرَّف على الأدوات الأخرى المتاحة، مثل [ميزة "استدعاء الدوال"](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar).
-- تعرَّف على كيفية زيادة الطلبات باستخدام عناوين URL محدّدة باستخدام أداة [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar).
+- [پایه‌مندسازی با «جستجوی Google» در Gemini API
+  Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=fa) را امتحان کنید.
+- با ابزارهای دردسترس دیگر، مثل [فراخوانی تابع](https://ai.google.dev/gemini-api/docs/function-calling?hl=fa)، آشنا شوید.
+- بااستفاده از [ابزار بافت نشانی وب](https://ai.google.dev/gemini-api/docs/url-context?hl=fa)، با نحوه تقویت پیام‌واره‌ها با نشانی‌های وب خاص آشنا شوید.
 
-إرسال ملاحظات
+ارسال بازخورد
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
 
-تاريخ التعديل الأخير: 2026-10-13 (حسب التوقيت العالمي المتفَّق عليه)
+تاریخ آخرین به‌روزرسانی 2026-10-29 به‌وقت ساعت هماهنگ جهانی.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-10-13 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-29 به‌وقت ساعت هماهنگ جهانی."],[],[]]

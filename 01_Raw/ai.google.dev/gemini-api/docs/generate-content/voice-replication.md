@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=zh-CN
-fetched_at: 2026-10-26T05:40:30.974842+00:00
+fetched_at: 2026-11-02T07:26:21.237070+00:00
 title: "\u8bed\u97f3\u590d\u5236 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

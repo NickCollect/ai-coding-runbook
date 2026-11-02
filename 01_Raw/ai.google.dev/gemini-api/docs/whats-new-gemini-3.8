@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=id
-fetched_at: 2026-10-26T05:43:58.597882+00:00
-title: "Yang baru di Gemini 3.8 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=ja
+fetched_at: 2026-11-02T07:12:12.514180+00:00
+title: "Gemini 3.8 Flash \u306e\u65b0\u6a5f\u80fd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Kirim masukan
+フィードバックを送信
 
-# Yang baru di Gemini 3.8 Flash
+# Gemini 3.8 Flash の新機能
 
-[Model terbaru](https://ai.google.dev/gemini-api/docs/latest-model?hl=id)
-[Model lainnya](#other-models)
+[最新モデル](https://ai.google.dev/gemini-api/docs/latest-model?hl=ja)
+[その他のモデル](#other-models)
 
-Gemini 3.8 Flash (`gemini-3.8-flash`) adalah model Flash kami yang paling cerdas, yang dirancang untuk rekayasa software jangka panjang, agen otonom, dan alur kerja perusahaan yang kompleks.
+Gemini 3.8 Flash（`gemini-3.8-flash`）は、Google 史上最もインテリジェントな Flash モデルです。長期的なソフトウェア エンジニアリング、自律型エージェント、複雑なエンタープライズ ワークフロー向けに設計されています。
 
-Panduan ini menjelaskan hal baru di Gemini 3.8 Flash, perubahan API, contoh kode, dan panduan migrasi.
+このガイドでは、Gemini 3.8 Flash の新機能、API の変更、コード例、移行ガイダンスについて説明します。
 
-## Model baru
+## 新しいモデル
 
-| Model | ID Model | Tingkat penalaran default | Harga | Deskripsi |
+| モデル | モデル ID | デフォルトの思考レベル | 料金 | 説明 |
 | --- | --- | --- | --- | --- |
-| Gemini 3.8 Flash | `gemini-3.8-flash` | `medium` | 3.8 Flash tersedia hingga akhir tahun dengan harga perkenalan $0,75/1 juta token input dan $3,75/1 juta token output; lihat [harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id) untuk mengetahui detail selengkapnya. | Model Flash kami yang paling cerdas, yang dirancang untuk rekayasa software jangka panjang, agen otonom, dan alur kerja perusahaan yang kompleks. |
+| Gemini 3.8 Flash | `gemini-3.8-flash` | `medium` | 3.8 Flash は、年末まで、100 万入力トークンあたり $0.75、100 万出力トークンあたり $3.75 のお試し価格でご利用いただけます。詳細については、[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja)をご覧ください。 | Google 史上最もインテリジェントな Flash モデル。長期的なソフトウェア エンジニアリング、自律型エージェント、複雑なエンタープライズ ワークフロー向けに設計されています。 |
 
-Gemini 3.8 Flash mendukung jendela konteks 1 juta token, maksimum 64 ribu token output, tingkat penalaran yang dapat disesuaikan (`low`, `medium`, `high`), dan rangkaian lengkap alat bawaan yang sama.
+Gemini 3.8 Flash は、100 万トークンのコンテキスト ウィンドウ、最大 64,000 個の出力トークン、調整可能な思考レベル（`low`、`medium`、`high`）、同じ包括的な組み込みツール スイートをサポートしています。
 
-Untuk mengetahui spesifikasi lengkapnya, lihat halaman model [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=id). Untuk mengetahui detail harga perkenalan, lihat [bagian harga](#pricing) di halaman ini atau [halaman harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id#gemini-3.8-flash).
+完全な仕様については、[Gemini 3.8 Flash モデルのページをご覧ください](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=ja)。お試し価格の詳細については、このページの[料金セクション](#pricing)または[料金ページ](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-3.8-flash)をご覧ください。
 
-## Panduan memulai
+## クイックスタート
 
 ### Python
 
@@ -143,25 +143,25 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Yang baru di Gemini 3.8 Flash
+## Gemini 3.8 Flash の新機能
 
-- **Rekayasa software jangka panjang:** Memberikan hasil yang kuat pada benchmark coding dunia nyata, refactoring multi-file yang kompleks, dan eksekusi alat deterministik. Lihat [metodologi evaluasi](https://deepmind.google/models/evals-methodology/gemini-3-8-flash/?hl=id) untuk mengetahui detailnya.
-- **Agen otonom:** Memungkinkan Anda membuat alur kerja perencanaan multi-langkah dan orkestrasi alat yang tangguh, sehingga mengurangi loop dan error yang gagal secara signifikan.
-- **Alur kerja perusahaan yang kompleks:** Memberikan akurasi yang unggul, penalaran yang mendalam, dan ketelitian faktual yang tinggi di seluruh tugas domain yang menuntut dan pipeline data skala besar.
-- **Model default untuk Agen Terkelola:** Agen default untuk agen terkelola: [agen Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=id), kini menggunakan Gemini 3.8 Flash. [Antigravity SDK](https://antigravity.google/docs/sdk/overview/?hl=id) juga menggunakan Gemini 3.8 Flash secara default.
-- **Harga perkenalan:** Gemini 3.8 Flash tersedia dengan harga perkenalan $0,75/1 juta token input dan $3,75/1 juta token output hingga 31 Desember 2026. Harga standar $1,50/1 juta token input dan $7,50/1 juta token output berlaku mulai 1 Januari 2027.
+- **長期的なソフトウェア エンジニアリング:** 実際のコーディング ベンチマーク、複雑なマルチファイル リファクタリング、決定論的なツール実行で優れた結果が得られます。詳細については、[評価方法](https://deepmind.google/models/evals-methodology/gemini-3-8-flash/?hl=ja)をご覧ください。
+- **自律型エージェント:** 復元力のあるマルチステップ プランニングとツール オーケストレーション ワークフローを構築できるため、失敗したループとエラーが大幅に減少します。
+- **複雑なエンタープライズ ワークフロー:** 要求の厳しいドメイン タスクと大規模なデータ パイプライン全体で、優れた精度、深い推論、高い事実の厳密さを実現します。
+- **Managed Agents のデフォルト モデル:** Managed Agents のデフォルト エージェントである [Antigravity エージェント](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja)で Gemini 3.8 Flash が使用されるようになりました。[Antigravity SDK](https://antigravity.google/docs/sdk/overview/?hl=ja) でも、デフォルトで Gemini 3.8 Flash が使用されます。
+- **お試し価格:** Gemini 3.8 Flash は、2026 年 12 月 31 日まで、100 万入力トークンあたり $0.75、100 万出力トークンあたり $3.75 のお試し価格でご利用いただけます。100 万入力トークンあたり $1.50、100 万出力トークンあたり $7.50 の標準料金は、2027 年 1 月 1 日から適用されます。
 
-Gemini 3.8 Flash dapat menggunakan lebih banyak token pada tugas yang berjalan lebih lama dan kompleks, berdasarkan desain. Untuk memberikan hasil yang lebih berkualitas pada tujuan multi-langkah yang sulit, model ini mengambil langkah penalaran yang lebih kecil, memanggil alat secara berulang, dan memverifikasi pekerjaannya sepanjang proses. Tidak semua alur kerja memerlukan tingkat verifikasi ini. Untuk tugas sehari-hari, Anda dapat menurunkan upaya [penalaran](#understanding-reasoning-levels) untuk mengurangi konsumsi token. Atau, Gemini 3.6 Flash tetap didukung.
+Gemini 3.8 Flash は、設計上、実行時間が長く複雑なタスクでより多くのトークンを使用できます。困難なマルチステップの目標で高品質の結果を得るために、モデルは推論ステップを細かく分割し、ツールを反復的に呼び出し、その過程で作業を検証します。すべてのワークフローでこのレベルの検証が必要なわけではありません。日常的なタスクでは、[推論](#understanding-reasoning-levels)の労力を減らしてトークンの消費量を削減できます。また、Gemini 3.6 Flash も引き続きサポートされています。
 
-## Memahami tingkat penalaran
+## 推論レベルについて
 
-Gemini 3.8 Flash memberi Anda kontrol yang fleksibel atas latensi dan kecerdasan dengan menyesuaikan tingkat penalaran model:
+Gemini 3.8 Flash では、モデルの思考レベルを調整することで、レイテンシとインテリジェンスを柔軟に制御できます。
 
-- **Upaya penalaran rendah**: Mengurangi waktu untuk menjawab tugas yang penting latensinya seperti pipeline respons insiden, chat real-time, draf penulisan, dan analisis data cepat.
-- **Sedang (default):** Kualitas terbaik untuk sebagian besar tugas. Direkomendasikan untuk kode yang kompleks dan kasus penggunaan agentik, yang memberikan akurasi lulus pertama yang lebih tinggi.
-- **Upaya penalaran tinggi**: Memaksimalkan kemampuan penalaran dan orkestrasi alat model. Terbaik untuk penalaran mendalam, matematika, dan tugas multi-langkah yang sulit.
+- **思考労力が少ない**: インシデント対応パイプライン、リアルタイム チャット、下書きの作成、高速データ分析など、レイテンシが重要なタスクの回答までの時間を短縮します。
+- **中（デフォルト）:** ほとんどのタスクで最高の品質を実現します。複雑なコードやエージェントの使用例におすすめです。初回パスの精度が高くなります。
+- **思考労力**: モデルの推論とツール オーケストレーションの機能を最大限に活用します。深い推論、数学、複雑なマルチステップのタスクに最適です。
 
-Contoh berikut menetapkan `thinking_level` ke `medium` untuk permintaan analisis kode yang kompleks:
+次の例では、複雑なコード分析リクエストの `thinking_level` を `medium` に設定します。
 
 ### Python
 
@@ -287,9 +287,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Agen Antigravity yang diperbarui
+## 更新された Antigravity エージェント
 
-Karena performa dan penalaran yang ditingkatkan, agen [Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=id) di Agen Terkelola Gemini kini dibuat dengan Gemini 3.8 Flash secara default.
+パフォーマンスと推論が改善されたため、Gemini Managed Agents の [Antigravity エージェント](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja)は、デフォルトで Gemini 3.8 Flash で構築されるようになりました。
 
 ### Python
 
@@ -415,50 +415,50 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Model Gemini yang mendasarinya [dapat dikonfigurasi](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=id#model-selection) menggunakan `agent_config`.
+基盤となる Gemini モデルは、[構成できます](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja#model-selection)。`agent_config`
 
-## Checklist migrasi
+## 移行チェックリスト
 
 ```
   `/gemini-api-dev migrate my app to Gemini 3.8 Flash`
 ```
 
-### Bermigrasi ke gemini-3.8-flash
+### gemini-3.8-flash に移行する
 
-- **Perbarui ID Model:** Ubah string model target Anda menjadi `gemini-3.8-flash`.
-- **Konfigurasi tingkat penalaran:** Ganti `thinking_budget` dengan enum string `thinking_level`. Perhatikan bahwa `minimal` tidak didukung di Gemini 3.8 Flash; pilih `low`, `medium` (default), atau `high`.
-- **Terapkan perubahan parameter Gemini 3 API:** Hapus parameter pengambilan sampel yang tidak digunakan lagi (`temperature`, `top_p`, `top_k`), `candidate_count` (tidak didukung di Gemini 3 dan yang lebih baru), dan giliran model yang telah diisi sebelumnya. Lihat
-  [Perubahan Gemini 3.6 API dan pembaruan parameter](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=id#api-changes-and-parameter-updates).
-- **Terapkan aturan validasi giliran:** Standarkan percakapan multi-giliran di `previous_interaction_id` sisi server dan hapus giliran model yang telah diisi sebelumnya.
-- **Audit pemanggilan fungsi:**
-  - Tempatkan aset multimodal di dalam payload respons.
-  - Format petunjuk inline menggunakan `\n\n`.
-  - Jika Anda melihat `Malformed_Function_Call` error yang terkait dengan teks pra-alat, lihat [Solusi untuk persyaratan teks pra-alat](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#workarounds-for-pre-tool-text-requirements).
-  - Hanya jika menggunakan generateContent API: Pastikan semua objek `FunctionResponse` menyertakan `call_id` dan `name`.
-- **Persyaratan dasar Gemini 3:** Untuk pembaruan SDK dan pelestarian tanda tangan pemikiran, lihat [Tanda tangan pemikiran](https://ai.google.dev/gemini-api/docs/thinking?hl=id#signatures).
+- **モデル ID を更新する:** ターゲット モデル文字列を `gemini-3.8-flash` に変更します。
+- **思考レベルを構成する:** `thinking_budget` を文字列列挙型 `thinking_level` に置き換えます。`minimal` は Gemini 3.8 Flash ではサポートされていません。`low`、`medium`（デフォルト）、`high` のいずれかを選択してください。
+- **Gemini 3 API パラメータの変更を適用する:** 非推奨のサンプリング パラメータ（`temperature`、`top_p`、`top_k`）、`candidate_count`（Gemini 3 以降ではサポートされていません）、事前入力済みモデルターンを削除します。
+  [Gemini 3.6 API の変更とパラメータの更新をご覧ください](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=ja#api-changes-and-parameter-updates)。
+- **ターン検証ルールを適用する:** サーバーサイドの `previous_interaction_id` でマルチターンの会話を標準化し、事前入力済みモデルターンを削除します。
+- **関数呼び出しを監査する:**
+  - マルチモーダル アセットをレスポンス ペイロード内に配置します。
+  - インライン手順の形式を `\n\n` にします。
+  - ツール前のテキストに関連する `Malformed_Function_Call` エラーが表示される場合は、[ツール前のテキスト要件の回避策をご覧ください](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#workarounds-for-pre-tool-text-requirements)。
+  - generateContent API を使用する場合のみ: すべての `FunctionResponse` オブジェクトに `call_id` と `name` が含まれていることを確認します。
+- **Gemini 3 のベースライン要件:** SDK の更新と思考シグネチャの保持については、[思考シグネチャ](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#signatures)をご覧ください。
 
-## Harga
+## 料金
 
-Manfaatkan harga perkenalan di Google AI Studio dan Gemini Enterprise Agent Platform hingga 31 Desember 2026 untuk Gemini 3.8 Flash dan Gemini 3.6 Flash. Harga standar berlaku mulai 1 Januari 2027. Untuk mengetahui tingkat harga lengkap, lihat halaman [harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id#gemini-3.8-flash).
+Gemini 3.8 Flash と Gemini 3.6 Flash の Google AI Studio と Gemini Enterprise Agent Platform で、2026 年 12 月 31 日までお試し価格をご利用いただけます。標準料金は 2027 年 1 月 1 日から適用されます。料金体系の詳細については、[料金ページ](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-3.8-flash)をご覧ください。
 
-## Model lainnya
+## その他のモデル
 
-- [Gemini 4 Argon (Terbaru)](https://ai.google.dev/gemini-api/docs/latest-model?hl=id)
-- [Gemini 3.6 Flash dan 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=id)
-- [Lihat semua model](https://ai.google.dev/gemini-api/docs/models?hl=id)
+- [Gemini 4 Argon（最新）](https://ai.google.dev/gemini-api/docs/latest-model?hl=ja)
+- [Gemini 3.6 Flash と 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=ja)
+- [すべてのモデルを見る](https://ai.google.dev/gemini-api/docs/models?hl=ja)
 
-## Langkah berikutnya
+## 次のステップ
 
-- Tinjau spesifikasi API di [Ringkasan Model](https://ai.google.dev/gemini-api/docs/models?hl=id).
-- Pelajari orkestrasi multi-agen di [Ringkasan Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id).
-- Uji dan sempurnakan perintah di [Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=id).
+- [モデルの概要](https://ai.google.dev/gemini-api/docs/models?hl=ja)で API 仕様を確認する。
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の概要でマルチエージェント オーケストレーションについて調べる。
+- [Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ja) でプロンプトをテストして改善する。
 
-Kirim masukan
+フィードバックを送信
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Terakhir diperbarui pada 2026-10-13 UTC.
+最終更新日 2026-10-13 UTC。
 
-Ada masukan untuk kami?
+ご意見をお聞かせください
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-13 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-13 UTC。"],[],[]]

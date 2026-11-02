@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ja
-fetched_at: 2026-10-26T06:01:27.118434+00:00
+fetched_at: 2026-11-02T07:02:53.931703+00:00
 title: "\u52d5\u753b\u7406\u89e3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

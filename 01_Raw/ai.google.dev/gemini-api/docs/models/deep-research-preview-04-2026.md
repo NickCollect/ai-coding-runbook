@@ -1,45 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=id
-fetched_at: 2026-10-26T05:46:33.044234+00:00
-title: "Pratinjau Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=fa
+fetched_at: 2026-11-02T07:08:55.151711+00:00
+title: "\u067e\u06cc\u0634\u200c\u0646\u0645\u0627\u06cc\u0634 Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
+‫Gemini 4 Argon اکنون دردسترس است. [امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fa).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [صفحه اصلی](https://ai.google.dev/?hl=fa)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
+- [سندنگار](https://ai.google.dev/gemini-api/docs?hl=fa)
 
-Kirim masukan
+ارسال بازخورد
 
-# Pratinjau Deep Research
+# پیش‌نمایش Deep Research
 
-Peneliti agentik yang canggih dan dirancang untuk penyelidikan multi-langkah yang otonom, yang menyintesis informasi kompleks menjadi laporan komprehensif yang mencantumkan kutipan. Model ini mendukung perencanaan kolaboratif, visualisasi, server MCP, dan Penelusuran File. Fitur ini hadir dalam dua versi: Deep Research untuk kecepatan dan efisiensi, serta Deep Research Max untuk kelengkapan maksimal.
+یک پژوهشگر عامل‌گرای قدرتمند که برای تحقیقات چندمرحله‌ای مستقل طراحی شده است
+که اطلاعات پیچیده را در گزارش‌های جامع و مستند ترکیب می‌کند. این مدل از برنامه‌ریزی مشارکتی، نمایش دیداری، سرورهای MCP، و «جستجوی فایل» پشتیبانی می‌کند. این مدل در دو نسخه ارائه می‌شود: Deep Research برای سرعت و کارایی، و
+Deep Research Max برای حداکثر جامعیت.
 
-## Dokumentasi
+## اسناد
 
-Buka halaman [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) untuk mengetahui cakupan lengkap fitur dan kapabilitas.
+برای پوشش کامل ویژگی‌ها و قابلیت‌ها،
+به صفحه [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=fa) بروید.
 
 ## deep-research-preview-04-2026
 
-| Properti | Deskripsi |
+| دارایی | شرح |
 | --- | --- |
-| Kode agen id\_card | **Interactions API**  `deep-research-preview-04-2026` |
-| saveJenis data yang didukung | **Input**  Teks, Gambar, PDF, Audio, Video  **Output**  Teks (Laporan yang Dikutip), Gambar |
-| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Jendela konteks input**  1.048.576  **Batas token output**  65.536 |
-| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Pratinjau: `deep-research-preview-04-2026` - Maks: `deep-research-max-preview-04-2026` |
-| calendar\_monthPembaruan terbaru | April 2026 |
+| id\_cardکد نماینده | **Interactions API**  `deep-research-preview-04-2026` |
+| ذخیرهانواع داده‌های پشتیبانی‌شده | **ورودی**  نوشتار، تصویر، PDF، صدا، ویدیو  **خروجی**  نوشتار (گزارش‌های استنادشده)، تصاویر |
+| token\_autoمحدودیت‌های توکن[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fa) | **پنجره بافت ورودی**  ۱٬۰۴۸٬۵۷۶  **محدودیت داده‌واحد برونداد**  ۶۵۵۳۶ |
+| ۱۲۳نسخه | برای جزئیات بیشتر، [الگوهای نسخه مدل](https://ai.google.dev/gemini-api/docs/models?hl=fa#model-versions) را بخوانید.  - پیش‌نمایش: `deep-research-preview-04-2026` - حداکثر: `deep-research-max-preview-04-2026` |
+| calendar\_monthجدیدترین به‌روزرسانی | آوریل ۲۰۲۶ |
+| قیمت‌گذاری پولی | [قیمت‌گذاری](https://ai.google.dev/gemini-api/docs/pricing?hl=fa#pricing-for-agents) |
 
-Kirim masukan
+ارسال بازخورد
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
 
-Terakhir diperbarui pada 2026-04-29 UTC.
+تاریخ آخرین به‌روزرسانی 2026-10-29 به‌وقت ساعت هماهنگ جهانی.
 
-Ada masukan untuk kami?
+می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]
+[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-29 به‌وقت ساعت هماهنگ جهانی."],[],[]]

@@ -1,32 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja
-fetched_at: 2026-10-26T05:47:42.324493+00:00
-title: "\u30de\u30cd\u30fc\u30b8\u30c9 \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u306e\u30af\u30a4\u30c3\u30af\u30b9\u30bf\u30fc\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th
+fetched_at: 2026-11-02T07:15:44.525949+00:00
+title: "\u0e01\u0e32\u0e23\u0e40\u0e23\u0e34\u0e48\u0e21\u0e15\u0e49\u0e19\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19 Agent \u0e17\u0e35\u0e48\u0e21\u0e35\u0e01\u0e32\u0e23\u0e08\u0e31\u0e14\u0e01\u0e32\u0e23\u0e2d\u0e22\u0e48\u0e32\u0e07\u0e23\u0e27\u0e14\u0e40\u0e23\u0e47\u0e27 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-フィードバックを送信
+ส่งความคิดเห็น
 
-# マネージド エージェントのクイックスタート
+# การเริ่มต้นใช้งาน Agent ที่มีการจัดการอย่างรวดเร็ว
 
-このガイドでは、[Antigravity エージェント](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja)を使用して、Gemini API で Managed Agents を作成して使用する方法について説明します。最初のエージェント呼び出しを行い、マルチターンの会話を継続し、レスポンスをストリーミングし、サンドボックスからファイルをダウンロードし、Antigravity マネージド エージェントを操作します。
+คู่มือนี้จะแนะนำวิธีสร้างและใช้ Agent ที่ได้รับการจัดการ ใน Gemini
+API โดยใช้ [Agent ของ Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th) คุณจะ โทรหาเอเจนต์เป็นครั้งแรก สนทนาแบบการสนทนาไปมา สตรีม คำตอบ ดาวน์โหลดไฟล์จากแซนด์บ็อกซ์ และทำงานกับเอเจนต์ที่มีการจัดการของ Antigravity
 
-## 最初のエージェントとのやり取りを実行する
+## เรียกใช้การโต้ตอบกับ Agent ครั้งแรก
 
-[Interactions API](https://ai.google.dev/gemini-api/docs?hl=ja) への 1 回の呼び出しで、Linux サンドボックスがプロビジョニングされ、エージェント ループが実行され、結果が返されます。次の 3 つのパラメータを定義します。
+การเรียกใช้ [Interactions API](https://ai.google.dev/gemini-api/docs?hl=th) เพียงครั้งเดียวจะจัดสรรแซนด์บ็อกซ์ Linux เรียกใช้ลูปของเอเจนต์ และแสดงผลลัพธ์ คุณจะกำหนดพารามิเตอร์ 3 รายการ ได้แก่
 
-- `agent` を `"antigravity-preview-09-2026"` として渡します。これは、事前定義された汎用マネージド エージェントの現在のバージョンです。
-- `environment="remote"` を定義して、新しいサンドボックス環境をプロビジョニングします。
-- エージェントに実行させたいことを定義する入力を作成します。
+- ส่ง `agent` เป็น `"antigravity-preview-09-2026"` ซึ่งเป็นเวอร์ชันปัจจุบันของเอเจนต์ที่มีการจัดการแบบกำหนดไว้ล่วงหน้าและแบบอเนกประสงค์
+- กำหนด `environment="remote"` เพื่อจัดสรรสภาพแวดล้อมแซนด์บ็อกซ์ใหม่ที่สะอาด
+- สร้างอินพุตโดยกำหนดสิ่งที่คุณต้องการให้ Agent ทำ
 
 ### Python
 
@@ -147,16 +148,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-レスポンスは `Interaction` オブジェクトを返します。`interaction.id` と `interaction.environment_id` を保存して、同じサンドボックスで会話を続けます。`interaction.output_text` を使用して、エージェントの最終回答にアクセスします。`interaction.steps` には、エージェントが実行した各ステップ（推論、ツール呼び出し、コード実行）が一覧表示されます。
+การตอบกลับจะแสดงผลออบเจ็กต์ `Interaction` จัดเก็บ `interaction.id` และ `interaction.environment_id` เพื่อสนทนาต่อในแซนด์บ็อกซ์เดียวกัน ใช้ `interaction.output_text` เพื่อเข้าถึงคำตอบสุดท้ายของเอเจนต์ `interaction.steps` แสดงรายการแต่ละขั้นตอนที่เอเจนต์ดำเนินการ (การให้เหตุผล การเรียกใช้เครื่องมือ การเรียกใช้โค้ด)
 
-## 会話を続ける（マルチターン）
+## สนทนาต่อ (การสนทนาไปมา)
 
-この API は、次の 2 つの独立した状態ディメンションを追跡します。
+API จะติดตามมิติข้อมูลสถานะ 2 รายการที่แยกกัน ดังนี้
 
-- **会話のコンテキスト:** チャットの履歴、推論のトレース、ツールの使用、`previous_interaction_id` の使用。
-- [**環境の状態:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja) `environment` を使用したファイル、インストールされたパッケージ、サンドボックスの状態。
+- **บริบทการสนทนา:** ประวัติการแชท ร่องรอยการให้เหตุผล การใช้เครื่องมือ การใช้ `previous_interaction_id`
+- [**สถานะสภาพแวดล้อม:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th) ไฟล์ แพ็กเกจที่ติดตั้ง และสถานะแซนด์บ็อกซ์โดยใช้ `environment`
 
-それぞれを適切な場所に渡して再開します。
+ส่งทั้ง 2 อย่างในตำแหน่งที่เกี่ยวข้องเพื่อดำเนินการต่อ
 
 ### Python
 
@@ -266,20 +267,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-ターン 1（`fibonacci.txt`）のファイルはターン 2 でも保持されます。エージェントは会話のコンテキストも保持します。
+ไฟล์จากเทิร์นที่ 1 (`fibonacci.txt`) จะยังคงอยู่ในเทิร์นที่ 2 นอกจากนี้ Agent ยังคงบริบทการสนทนาไว้ด้วย
 
-これらは個別に組み合わせて使用できます。
+คุณสามารถผสมและจับคู่สิ่งต่อไปนี้ได้อย่างอิสระ
 
-- **会話をクリアしてファイルを保持する:** `previous_interaction_id` を省略し、同じワークスペース内の新しい会話の `environment` を使用して環境 ID のみを渡します。
-- **会話を保持、新しいワークスペース:** `previous_interaction_id` を渡し、新しいサンドボックス用に `environment="remote"` を設定します。
+- **ล้างการสนทนา เก็บไฟล์:** ละเว้น `previous_interaction_id` ส่งเฉพาะรหัสสภาพแวดล้อมโดยใช้ `environment` เพื่อการสนทนาใหม่ในพื้นที่ทำงานเดียวกัน
+- **เก็บการสนทนา พื้นที่ทำงานใหม่:** ส่ง `previous_interaction_id` ตั้งค่า `environment="remote"` สำหรับแซนด์บ็อกซ์ใหม่
 
-### コンテキストの自動圧縮
+### การย่อบริบทอัตโนมัติ
 
-長時間にわたるマルチターンの会話では、推論ステップ、ツール呼び出し、大きなファイルの内容の未加工の履歴が急速に増大し、コンテキスト スペースを大量に消費する可能性があります。トークン上限エラーを防ぎ、エージェントの集中力を維持する（「コンテキストの劣化」を防ぐ）ため、Managed Agents API には、約 135,000 トークンでネイティブ コンテキスト圧縮ステップが用意されています。これは自動処理で、
+ในการสนทนาแบบหลายรอบที่ใช้เวลานาน ประวัติแบบดิบของขั้นตอนการให้เหตุผล การเรียกใช้เครื่องมือ และเนื้อหาไฟล์ขนาดใหญ่อาจเพิ่มขึ้นอย่างรวดเร็วและใช้พื้นที่บริบทจำนวนมาก เพื่อป้องกันข้อผิดพลาดเกี่ยวกับขีดจำกัดของโทเค็นและรักษาโฟกัสของเอเจนต์ (ป้องกัน "บริบทที่ล้าสมัย") Managed Agents API มีขั้นตอนการบีบอัดบริบทดั้งเดิมที่ประมาณ 135,000 โทเค็น ซึ่งจะเป็นการทำงานโดยอัตโนมัติ
 
-## レスポンスをストリーミングする
+## สตรีมคำตอบ
 
-長時間実行タスクの場合、レスポンスをストリーミングして、エージェントの動作をリアルタイムで確認できます。
+สำหรับงานที่ใช้เวลานาน คุณสามารถสตรีมคำตอบเพื่อดูการทำงานของ Agent แบบเรียลไทม์ได้โดยทำดังนี้
 
 ### Python
 
@@ -420,11 +421,11 @@ curl -N -s -X POST "https://generativelanguage.googleapis.com/v1beta/interaction
 }'
 ```
 
-ストリーミングは、増分更新で歩数の差分を返します。ステップが完了すると、`step.stop` イベントに累積使用状況統計情報が含まれます。詳しくは、[ストリーミング ガイド](https://ai.google.dev/gemini-api/docs/streaming?hl=ja)をご覧ください。
+การสตรีมจะแสดงเดลต้าของขั้นตอนการคืนสินค้าพร้อมการอัปเดตที่เพิ่มขึ้น เมื่อขั้นตอนเสร็จสมบูรณ์ เหตุการณ์ `step.stop` จะมีสถิติการใช้งานสะสม ดูข้อมูลเพิ่มเติมได้ใน[คู่มือการสตรีม](https://ai.google.dev/gemini-api/docs/streaming?hl=th)
 
-## 環境からファイルをダウンロードする
+## ดาวน์โหลดไฟล์จากสภาพแวดล้อม
 
-エージェントがサンドボックス内にファイルを作成する場合。Files API を使用して直接 HTTP リクエストでダウンロードします（まだ SDK メソッドはありません）。
+เมื่อเอเจนต์สร้างไฟล์ภายในแซนด์บ็อกซ์ ดาวน์โหลดโดยใช้ Files API ด้วยคำขอ HTTP โดยตรง (ยังไม่มีเมธอด SDK)
 
 ### Python
 
@@ -565,13 +566,13 @@ mkdir -p extracted_snapshot
 tar -xf snapshot.tar -C extracted_snapshot
 ```
 
-## マネージド エージェントを保存する
+## บันทึก Agent ที่มีการจัดการ
 
-前の手順では、デフォルトの Antigravity エージェントを使用して、インラインでカスタマイズしました。構成（指示、スキル、モデルの選択、環境）を反復処理したら、再利用可能なマネージド エージェントとして保存できます。これにより、構成を繰り返すことなく ID で呼び出すことができます。
+ในขั้นตอนก่อนหน้า เราใช้ Agent ของ Antigravity เริ่มต้นและปรับแต่งในบรรทัด เมื่อปรับปรุงการกำหนดค่า (คำสั่ง ทักษะ การเลือกโมเดล และสภาพแวดล้อม) แล้ว คุณจะบันทึกการกำหนดค่าเป็นเอเจนต์ที่มีการจัดการที่นำกลับมาใช้ใหม่ได้ ซึ่งจะช่วยให้คุณเรียกใช้ได้ด้วยรหัสโดยไม่ต้องกำหนดค่าซ้ำ
 
-エージェントを保存すると、インライン インタラクションとのアーキテクチャの対称性に気づくでしょう。`base_agent: "antigravity-preview-09-2026"` を指定し、`interactions.create` の場合と同様に、選択した `model` を使用して `agent_config` を渡すことができます。また、`base_environment`（ソースから、または既存の環境をフォークして）も定義します。エージェントは、新しいインタラクションごとにこの環境とモデルの構成を使用します。
+เมื่อบันทึกเอเจนต์ ให้สังเกตความสมมาตรของสถาปัตยกรรมกับการโต้ตอบในบรรทัด: คุณระบุ `base_agent: "antigravity-preview-09-2026"` และส่ง `agent_config` พร้อม `model` ที่เลือกได้เช่นเดียวกับใน `interactions.create` นอกจากนี้ คุณยังกำหนด `base_environment` (จากแหล่งที่มาหรือโดยการแยกสภาพแวดล้อมที่มีอยู่) ได้ด้วย Agent จะใช้การกำหนดค่าสภาพแวดล้อมและโมเดลนี้สำหรับการโต้ตอบใหม่ทุกครั้ง
 
-**ソースから:** ソースをインラインで定義するか、GitHub や Cloud Storage などの他のソースから定義します。
+**จากแหล่งที่มา:** กำหนดแหล่งที่มาในบรรทัด หรือจากแหล่งที่มาอื่นๆ เช่น GitHub หรือ Cloud Storage
 
 ### Python
 
@@ -770,9 +771,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-## マネージド エージェントを呼び出す
+## เรียกใช้ Agent ที่มีการจัดการ
 
-マネージド エージェントを保存すると、ID で呼び出すことができます。呼び出しごとにベース環境がフォークされるため、実行は常にクリーンな状態から開始されます。
+เมื่อบันทึกเอเจนต์ที่มีการจัดการแล้ว คุณจะเรียกใช้เอเจนต์ดังกล่าวได้โดยใช้รหัส การเรียกใช้แต่ละครั้งจะแยกสภาพแวดล้อมฐานออกเป็น 2 ส่วน ดังนั้นการเรียกใช้ทุกครั้งจึงเริ่มต้นอย่างสะอาด
 
 ### Python
 
@@ -874,19 +875,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 次のステップ
+## ขั้นตอนถัดไป
 
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja): 機能、サポートされているツール、マルチモーダル入力、料金、制限事項。
-- [Managed Agents の構築](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja): 独自の指示、スキル、データで Antigravity を拡張します。
-- [環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja): ソース、ネットワーキング、ライフサイクル、リソースの上限。
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja): モデルとエージェントの基盤となる API。
+- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th): ความสามารถ เครื่องมือที่รองรับ อินพุตแบบหลายรูปแบบ ราคา และข้อจำกัด
+- [การสร้าง Agent ที่ได้รับการจัดการ](https://ai.google.dev/gemini-api/docs/custom-agents?hl=th): ขยาย Antigravity ด้วยวิธีการ ทักษะ และข้อมูลของคุณเอง
+- [สภาพแวดล้อม](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th): แหล่งข้อมูล เครือข่าย วงจรการใช้งาน ขีดจำกัดของทรัพยากร
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th): API พื้นฐานสำหรับโมเดลและเอเจนต์
 
-フィードバックを送信
+ส่งความคิดเห็น
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-最終更新日 2026-10-01 UTC。
+อัปเดตล่าสุด 2026-10-01 UTC
 
-ご意見をお聞かせください
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-01 UTC。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-10-01 UTC"],[],[]]

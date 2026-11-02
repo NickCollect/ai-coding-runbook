@@ -1,70 +1,63 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=pt-BR
-fetched_at: 2026-10-26T05:48:10.978744+00:00
-title: "Entender e contar tokens \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=zh-TW
+fetched_at: 2026-11-02T07:22:57.904418+00:00
+title: "\u77ad\u89e3\u53ca\u8a08\u7b97\u7b26\u8a18 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=pt-br)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
 
-Envie comentários
+提供意見
 
-# Entender e contar tokens
+# 瞭解及計算符記
 
-O Gemini e outros modelos de IA generativa processam a entrada e a saída em uma granularidade chamada *token*.
+Gemini 和其他生成式 AI 模型會以稱為「詞元」的細微程度處理輸入和輸出內容。
 
-**Para os modelos do Gemini, um token equivale a cerca de quatro caracteres.
-100 tokens equivalem a cerca de 60 a 80 palavras em inglês.**
+**Gemini 模型的 1 個詞元約等於 4 個字元。100 個符記約等於 60 到 80 個英文字。**
 
-## Sobre os tokens
+## 關於權杖
 
-Os tokens podem ser caracteres únicos, como `z`, ou palavras inteiras, como `cat`. Palavras longas são divididas em vários tokens. O conjunto de todos os tokens usados pelo modelo é chamado de vocabulário, e o processo de divisão do texto em tokens é chamado de *tokenização*.
+詞元可以是單一字元 (例如 `z`)，也可以是完整字詞 (例如 `cat`)。長字詞會拆分為多個詞元。模型使用的所有符記組合稱為詞彙，而將文字分割成符記的程序稱為*符記化*。
 
-Quando o faturamento está ativado, o [custo de uma chamada para a API Gemini](https://ai.google.dev/pricing?hl=pt-br) é
-determinado em parte pelo número de tokens de entrada e saída. Portanto, saber como
-contar tokens pode ser útil.
+啟用計費功能後，[Gemini API 呼叫費用](https://ai.google.dev/pricing?hl=zh-tw)會部分取決於輸入和輸出權杖數量，因此瞭解如何計算權杖數量會很有幫助。
 
-Você pode tentar contar tokens no nosso Colab.
+您可以在 Colab 中試用計算符記。
 
 |  |  |  |
 | --- | --- | --- |
-| [Conferir em ai.google.dev](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | [Testar um notebook do Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=pt-br) | [Conferir o notebook no GitHub](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=pt-br) |
+| [在 ai.google.dev 上查看](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | [試用 Colab 筆記本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=zh-tw) | [在 GitHub 中查看筆記本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=zh-tw) |
 
-## Contar tokens
+## 計算詞元數
 
-Toda entrada e saída da API Gemini é tokenizada, incluindo texto, arquivos de imagem e outras modalidades não textuais.
+Gemini API 的所有輸入和輸出內容都會經過權杖化，包括文字、圖片檔和其他非文字模態。
 
-É possível contar tokens das seguintes maneiras:
+計算權杖的方式如下：
 
-- **Chame [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=pt-br) com a entrada
-  da solicitação.**  
-   Isso retorna o número total de tokens *apenas na entrada*. Você pode fazer essa chamada antes de enviar a entrada para o modelo para verificar o tamanho das solicitações.
-- **Use o atributo `usage_metadata` no objeto `response` depois de
-  chamar `generate_content`.**  
-   Isso retorna o número total de
-  tokens *na entrada e na saída*: `total_token_count`.  
-   Ele também retorna as contagens de tokens da entrada e da saída separadamente: `prompt_token_count` (tokens de entrada) e `candidates_token_count` (tokens de saída).
+- **使用要求輸入內容呼叫 [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=zh-tw)。**  
+  ：這會傳回*僅輸入內容*中的權杖總數。您可以在將輸入內容傳送至模型前，先呼叫這個方法，檢查要求的大小。
+- **呼叫 `generate_content` 後，請在 `response` 物件上使用 `usage_metadata` 屬性。**  
+  ：這會傳回*輸入和輸出*的權杖總數：`total_token_count`。  
+  此外，這項要求也會分別傳回輸入和輸出內容的詞元數：`prompt_token_count` (輸入詞元) 和 `candidates_token_count` (輸出詞元)。
 
-  Se você estiver usando um [modelo de raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br), os tokens usados durante o processo de raciocínio serão retornados em `thoughts_token_count`. E, se você estiver usando
-  [o armazenamento em cache de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br), a contagem de tokens armazenados em cache estará em `cached_content_token_count`.
+  如果使用[思考型模型](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)，思考過程中使用的詞元會傳回 `thoughts_token_count`。如果使用[脈絡快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)，快取的詞元數會顯示在 `cached_content_token_count`。
 
-### Contar tokens de texto
+### 計算文字詞元數
 
-Se você chamar `count_tokens` com uma entrada somente de texto, ela retornará a contagem de tokens do texto *apenas na entrada* (`total_tokens`). Você pode fazer essa chamada antes de chamar `generate_content` para verificar o tamanho das solicitações.
+如果呼叫 `count_tokens` 時只輸入文字，系統只會傳回*輸入內容* (`total_tokens`) 的文字詞元數。您可以在呼叫 `generate_content` 之前執行這項呼叫，檢查要求的大小。
 
-Outra opção é chamar `generate_content` e usar o atributo `usage_metadata` no objeto `response` para receber o seguinte:
+另一個選項是呼叫 `generate_content`，然後使用 `response` 物件的 `usage_metadata` 屬性取得下列項目：
 
-- As contagens de tokens separadas da entrada (`prompt_token_count`), do conteúdo armazenado em cache (`cached_content_token_count`) e da saída (`candidates_token_count`)
-- A contagem de tokens para o processo de raciocínio (`thoughts_token_count`)
-- O número total de tokens *na entrada e na saída* (`total_token_count`)
+- 輸入 (`prompt_token_count`)、快取內容 (`cached_content_token_count`) 和輸出 (`candidates_token_count`) 的個別權杖數
+- 思考過程的權杖數 (`thoughts_token_count`)
+- *輸入和輸出*的詞元總數 (`total_token_count`)
 
 ### Python
 
@@ -139,17 +132,17 @@ fmt.Println(string(usageMetadata))
     ```
 ```
 
-### Contar tokens multiturno (chat)
+### 計算多輪 (對話) 詞元
 
-Se você chamar `count_tokens` com o histórico de conversas, ele retornará a contagem total de tokens do texto de cada papel na conversa (`total_tokens`).
+如果使用對話記錄呼叫 `count_tokens`，系統會傳回對話中每個角色 (`total_tokens`) 的文字總詞元數。
 
-Outra opção é chamar `send_message` e usar o atributo `usage_metadata` no objeto `response` para receber o seguinte:
+另一個選項是呼叫 `send_message`，然後使用 `response` 物件上的 `usage_metadata` 屬性，取得下列資訊：
 
-- As contagens de tokens separadas da entrada (`prompt_token_count`), do conteúdo armazenado em cache (`cached_content_token_count`) e da saída (`candidates_token_count`)
-- A contagem de tokens para o processo de raciocínio (`thoughts_token_count`)
-- O número total de tokens *na entrada e na saída* (`total_token_count`)
+- 輸入 (`prompt_token_count`)、快取內容 (`cached_content_token_count`) 和輸出 (`candidates_token_count`) 的個別詞元數
+- 思考過程的權杖數 (`thoughts_token_count`)
+- *輸入和輸出*的詞元總數 (`total_token_count`)
 
-Para entender o tamanho da próxima conversa, anexe-a ao histórico ao chamar `count_tokens`.
+如要瞭解下一個對話回合的大小，您需要在呼叫 `count_tokens` 時將其附加至記錄。
 
 ### Python
 
@@ -275,33 +268,30 @@ if err != nil {
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### Contar tokens multimodais
+### 計算多模態權杖
 
-Toda entrada da API Gemini é tokenizada, incluindo texto, arquivos de imagem e outras modalidades não textuais. Confira os principais pontos sobre a tokenização de entrada multimodal durante o processamento pela API Gemini:
+Gemini API 的所有輸入內容都會經過權杖化，包括文字、圖片檔和其他非文字模態。請注意以下關於 Gemini API 處理多模態輸入內容時，權杖化的重要重點：
 
-- As entradas de imagem com as duas dimensões <= 384 pixels são contadas como 258 tokens. Imagens maiores em uma ou ambas as dimensões são cortadas e dimensionadas conforme necessário em blocos de 768 x 768 pixels, cada um contado como 258 tokens.
-- Os arquivos de vídeo e áudio são convertidos em tokens nas seguintes taxas fixas: vídeo a 263 tokens por segundo e áudio a 32 tokens por segundo. Essa taxa se aplica ao processamento estático (padrão). Para o processamento agêntico, o uso de tokens varia. Consulte [Uso de tokens de vídeo por modo de processamento](#video-token-usage).
+- 如果輸入圖片的兩個維度均 <=384 像素，則會計為 258 個權杖。如果圖片有一邊或兩邊超過這個尺寸，系統會視需要裁剪及縮放成 768x768 像素的圖塊，每個圖塊計為 258 個詞元。
+- 影片和音訊檔案會按照下列固定費率轉換為詞元：影片每秒 263 個詞元，音訊每秒 32 個詞元。這個費率適用於靜態處理 (預設)。如果是代理處理，詞元用量會有所不同。請參閱[依處理模式劃分的影片權杖用量](#video-token-usage)。
 
-#### Resoluções de mídia
+#### 媒體解析度
 
-[Os modelos do Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=pt-br#gemini-3) introduzem o controle granular sobre o
-processamento de visão multimodal com o parâmetro `media_resolution`. O parâmetro `media_resolution` determina o **número máximo de tokens alocados por imagem de entrada ou frame de vídeo**.
-Resoluções mais altas melhoram a capacidade do modelo de ler textos finos ou identificar pequenos detalhes, mas aumentam o uso de tokens e a latência.
+[Gemini 3 模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw#gemini-3)透過 `media_resolution` 參數，提供多模態視覺處理的精細控制功能。`media_resolution` 參數會決定每個輸入圖片或影片影格分配的權杖數量上限。解析度越高，模型就越能辨識細小文字或細節，但會增加詞元用量和延遲時間。
 
-Para mais detalhes sobre o parâmetro e como ele pode afetar os cálculos de tokens,
-consulte o guia de [resolução de mídia](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=pt-br).
+如要進一步瞭解這項參數，以及該參數對詞元計算的影響，請參閱[媒體解析度](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-tw)指南。
 
-#### Arquivos de imagem
+#### 圖片檔
 
-Se você chamar `count_tokens` com uma entrada de texto e imagem, ela retornará a contagem de tokens combinada do texto e da imagem *apenas na entrada* (`total_tokens`). Você pode fazer essa chamada antes de chamar `generate_content` para verificar o tamanho das solicitações. Você também pode chamar `count_tokens` no texto e no arquivo separadamente.
+如果使用文字和圖片輸入內容呼叫 `count_tokens`，系統會傳回*輸入內容中*文字和圖片的合併詞元數 (`total_tokens`)。您可以在呼叫 `generate_content` 之前執行這項呼叫，檢查要求的大小。您也可以選擇分別對文字和檔案呼叫 `count_tokens`。
 
-Outra opção é chamar `generate_content` e usar o atributo `usage_metadata` no objeto `response` para receber o seguinte:
+另一個選項是呼叫 `generate_content`，然後使用 `response` 物件上的 `usage_metadata` 屬性，取得下列資訊：
 
-- As contagens de tokens separadas da entrada (`prompt_token_count`), do conteúdo armazenado em cache (`cached_content_token_count`) e da saída (`candidates_token_count`)
-- A contagem de tokens para o processo de raciocínio (`thoughts_token_count`)
-- O número total de tokens *na entrada e na saída* (`total_token_count`)
+- 輸入 (`prompt_token_count`)、快取內容 (`cached_content_token_count`) 和輸出 (`candidates_token_count`) 的個別權杖數
+- 思考過程的權杖數 (`thoughts_token_count`)
+- *輸入和輸出*的詞元總數 (`total_token_count`)
 
-Exemplo que usa uma imagem enviada por upload da API File:
+使用 File API 上傳圖片的範例：
 
 ### Python
 
@@ -401,7 +391,7 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-Exemplo que fornece a imagem como dados inline:
+以內嵌資料形式提供圖片的範例：
 
 ### Python
 
@@ -498,20 +488,20 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### Arquivos de vídeo ou áudio
+#### 影片或音訊檔案
 
-O áudio e o vídeo são convertidos em tokens nas seguintes taxas fixas:
+音訊和視訊會分別以以下固定費率轉換為權杖：
 
-- Vídeo: 263 tokens por segundo
-- Áudio: 32 tokens por segundo
+- 影片：每秒 263 個詞元
+- 音訊：每秒 32 個權杖
 
-Se você chamar `count_tokens` com uma entrada de texto e vídeo/áudio, ela retornará a contagem de tokens combinada do texto e do arquivo de vídeo/áudio *apenas na entrada* (`total_tokens`). Você pode fazer essa chamada antes de chamar `generate_content` para verificar o tamanho das solicitações. Você também pode chamar `count_tokens` no texto e no arquivo separadamente.
+如果您使用文字和影片/音訊輸入內容呼叫 `count_tokens`，系統會傳回*輸入內容中*文字和影片/音訊檔案的合併權杖計數 (`total_tokens`)。您可以在呼叫 `generate_content` 之前進行這項呼叫，檢查要求大小。您也可以視需要分別對文字和檔案呼叫 `count_tokens`。
 
-Outra opção é chamar `generate_content` e usar o atributo `usage_metadata` no objeto `response` para receber o seguinte:
+另一個選項是呼叫 `generate_content`，然後使用 `response` 物件的 `usage_metadata` 屬性取得下列項目：
 
-- As contagens de tokens separadas da entrada (`prompt_token_count`), do conteúdo armazenado em cache (`cached_content_token_count`) e da saída (`candidates_token_count`)
-- A contagem de tokens para o processo de raciocínio (`thoughts_token_count`)
-- O número total de tokens *na entrada e na saída* (`total_token_count`).
+- 輸入 (`prompt_token_count`)、快取內容 (`cached_content_token_count`) 和輸出 (`candidates_token_count`) 的個別權杖數
+- 思考過程的詞元數 (`thoughts_token_count`)
+- *輸入和輸出*中的詞元總數 (`total_token_count`)。
 
 ### Python
 
@@ -636,27 +626,27 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### Uso de tokens de vídeo por modo de processamento
+#### 各處理模式的影片權杖用量
 
-O uso de tokens para vídeo depende do modo de processamento:
+影片的權杖用量取決於處理模式：
 
-| **Modo de processamento** | **Cálculo de tokens** | **Uso normal** |
+| **處理模式** | **詞元計算** | **常見用途** |
 | --- | --- | --- |
-| **Estático** (padrão) | ~100 tokens/segundo por padrão (baixa resolução) ou ~300 tokens/segundo (alta resolução). Todos os frames são amostrados a 1 FPS. | Previsível, proporcional à duração do vídeo. |
-| **Agêntico** | Varia de acordo com a complexidade do conteúdo. O modelo carrega apenas a transcrição e/ou os frames e/ou o áudio necessários para responder ao comando. | Até 88% menos tokens para conteúdo longo. |
+| **靜態** (預設) | 預設為每秒約 100 個詞元 (低解析度)，或每秒約 300 個詞元 (高解析度)。所有影格皆以每秒 1 影格的速度取樣。 | 可預測，與影片長度成正比。 |
+| **代理功能** | 視內容複雜度而定。模型只會載入回答提示所需的部分，例如轉錄稿、影格和/或音訊。 | 長篇內容最多可減少 88% 的詞元。 |
 
-Com o processamento agêntico, uma palestra de 1 hora que usaria ~1,08 milhão de tokens no modo estático pode usar ~108 mil tokens, dependendo do comando e do conteúdo.
+如果採用代理處理，1 小時的講座在靜態模式下會使用約 108 萬個詞元，但實際使用量可能約為 10.8 萬個詞元，具體取決於提示和內容。
 
-Para verificar o uso real de tokens de uma solicitação, use o campo `usage_metadata` na resposta. Em `UsageMetadata`, os tokens de vídeo agênticos são informados nos seguintes campos:
+如要查看要求的實際權杖用量，請使用回應中的 `usage_metadata` 欄位。在 `UsageMetadata` 中，代理影片權杖會透過下列欄位回報：
 
-- **Comando inicial** (referência de vídeo + comando do usuário): `prompt_token_count`
-- **Raciocínio de navegação**: `thoughts_token_count`
-- **Transcrição, frames e áudio carregados sob demanda**: `tool_use_prompt_token_count`
-- **Resposta final**: `candidates_token_count`
+- **初始提示** (影片參考資料 + 使用者提示)：`prompt_token_count`
+- **導覽思維**：`thoughts_token_count`
+- **依需求載入轉錄稿、影格和音訊**：`tool_use_prompt_token_count`
+- **最終答案**：`candidates_token_count`
 
-### Contar tokens de raciocínio
+### 計算思考詞元數
 
-Quando você ativa o raciocínio, o preço da resposta é a soma dos tokens de saída e de raciocínio. É possível recuperar o número total de tokens de raciocínio gerados no campo `thoughtsTokenCount` (ou equivalente do SDK).
+開啟思考功能後，回覆的價格會是輸出詞元和思考詞元的總和。您可以從 `thoughtsTokenCount` 欄位 (或 SDK 對等欄位) 擷取生成的思考詞元總數。
 
 ### Python
 
@@ -682,18 +672,16 @@ fmt.Println("Thoughts tokens:", response.UsageMetadata.ThoughtsTokenCount)
 fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
 ```
 
-Os modelos de raciocínio geram pensamentos completos para melhorar a qualidade da resposta final e, em seguida, resumos de saída [summaries](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#summaries) para fornecer insights sobre o processo de raciocínio. Portanto, a API baseia o preço nos tokens de raciocínio completos que o modelo gera para criar um resumo, mesmo que a API só gere o resumo.
+思考模型會生成完整的想法，藉此提升最終回覆的品質，然後輸出[摘要](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw#summaries)，深入瞭解思考過程。因此，即使 API 只輸出摘要，API 仍會根據模型生成摘要時產生的完整思考詞元計費。
 
-Saiba mais sobre como configurar o raciocínio no guia de raciocínio do [Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br).
+如要進一步瞭解如何設定思考功能，請參閱「[Gemini 思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)」指南。
 
-## Janelas de contexto
+## 脈絡窗口
 
-Os modelos disponíveis na API Gemini têm janelas de contexto medidas em tokens. A janela de contexto define a quantidade de entrada que você pode fornecer e a quantidade de saída que o modelo pode gerar. É possível determinar o tamanho da
-janela de contexto chamando o [`models.get` endpoint](https://ai.google.dev/api/rest/v1/models/get?hl=pt-br)
-ou consultando a [documentação dos modelos](https://ai.google.dev/gemini-api/docs/models?hl=pt-br).
+Gemini API 提供的模型，其脈絡窗口是以詞元為單位。脈絡窗口定義了您可以提供的輸入量，以及模型可以生成的輸出量。如要判斷脈絡窗口的大小，可以呼叫 [`models.get` 端點](https://ai.google.dev/api/rest/v1/models/get?hl=zh-tw)，或查看[模型說明文件](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw)。
 
-- **Modelos do Gemini 4 (`gemini-4-argon`):** compartilham uma única janela de contexto de 1 milhão de tokens (`1,048,576` tokens) em tokens de entrada, raciocínio e saída. As solicitações únicas são limitadas a `65,536` tokens de saída para streaming (`streamGenerateContent`) e `32,768` tokens de saída para não streaming (`generateContent`), ou você pode gerar até `1,048,576` tokens usando [decodificação longa](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=pt-br). Se os tokens de entrada mais `max_output_tokens` excederem 1.048.576 tokens, a API vai limitar automaticamente o limite de saída ao espaço restante na janela de contexto (`1,048,576` menos os tokens de entrada).
-- **Modelos do Gemini 3 e 2.5:** usam orçamentos de entrada (`1,048,576` tokens) e saída (`65,536` tokens) separados.
+- **Gemini 4 模型 (`gemini-4-argon`)：**輸入、思考和輸出詞元共用 100 萬個詞元的脈絡窗口 (`1,048,576` 個詞元)。單一要求的輸出詞元上限為 `65,536` 個 (串流，`streamGenerateContent`) 和 `32,768` 個 (非串流，`generateContent`)，您也可以使用[長解碼](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=zh-tw)生成最多 `1,048,576` 個詞元。如果輸入的詞元加上 `max_output_tokens` 超過 1,048,576 個詞元，API 會自動將輸出上限設為脈絡窗口的剩餘空間 (`1,048,576` 減去輸入的詞元)。
+- **Gemini 3 和 2.5 模型：**使用不同的輸入 (`1,048,576` 權杖) 和輸出 (`65,536` 權杖) 預算。
 
 ### Python
 
@@ -738,12 +726,12 @@ fmt.Println("input token limit:", modelInfo.InputTokenLimit)
 fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 ```
 
-Envie comentários
+提供意見
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Última atualização 2026-10-13 UTC.
+上次更新時間：2026-10-13 (世界標準時間)。
 
-Quer enviar seu feedback?
+想進一步說明嗎？
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-10-13 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-13 (世界標準時間)。"],[],[]]

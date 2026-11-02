@@ -1,273 +1,218 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=es-419
-fetched_at: 2026-10-26T05:58:33.879098+00:00
-title: "Crea apps en Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=sq
+fetched_at: 2026-11-02T07:11:42.489408+00:00
+title: "Nd\u00ebrto aplikacione n\u00eb Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
+Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
+- [Dokumentet](https://ai.google.dev/gemini-api/docs?hl=sq)
 
-Enviar comentarios
+Dërgo komente
 
-# Crea apps en Google AI Studio
+# Ndërto aplikacione në Google AI Studio
 
-En esta página, se describe cómo usar Google AI Studio para compilar (o "programar
-por intuición") e implementar rápidamente apps que prueben las funciones más recientes de Gemini, como
-[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=es-419) y la [API de
-Live](https://ai.google.dev/gemini-api/docs/live?hl=es-419). Google AI Studio admite la creación de **apps web**
-con entornos de ejecución full stack y **apps nativas para Android** con Kotlin y Jetpack
-Compose, todo a través de instrucciones en lenguaje natural.
+Kjo faqe përshkruan se si të përdorësh Google AI Studio për të ndërtuar me shpejtësi (ose për të programuar me "vibe code") dhe për të prezantuar aplikacione që testojnë aftësitë më të fundit të Gemini, si p.sh. [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=sq) dhe [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=sq). Google AI Studio mbështet ndërtimin e **aplikacioneve të uebit** me ekzekutime të stivës së plotë dhe **aplikacioneve të integruara për Android** me Kotlin dhe Jetpack Compose - të gjitha nëpërmjet kërkesave me gjuhë natyrale.
 
-## Comenzar
+## Fillo
 
-Comienza a usar el vibe coding en el [modo de compilación](https://aistudio.google.com/apps?hl=es-419) de Google AI Studio. Puedes
-comenzar a compilar de las siguientes maneras:
+Fillo programimin "vibe coding" në [modalitetin "Ndërto"](https://aistudio.google.com/apps?hl=sq) të Google AI Studio. Mund të fillosh të ndërtosh në disa mënyra:
 
-- **Comienza con una instrucción**: En el modo de compilación, usa el cuadro de entrada para ingresar una
-  descripción de lo que quieres compilar. Selecciona chips de IA para agregar funciones específicas,
-  como la generación de imágenes o datos de Google Maps, a tu instrucción. Incluso puedes
-  decir lo que quieres con el botón de voz a texto.
-- **Botón "Voy a tener suerte"**: Si necesitas una chispa creativa, usa el botón "Voy a tener suerte" y Gemini generará una instrucción con una idea de proyecto para que comiences.
-- **Remezcla un proyecto de la galería**: Abre un proyecto de la [galería de apps](https://aistudio.google.com/apps?source=showcase&hl=es-419) y selecciona **Copiar app**.
-- **Importa un proyecto desde GitHub**: En el modo de compilación, selecciona
-  **Importar desde GitHub** en el menú **Agregar archivos** (ícono de signo más) en el cuadro de entrada de la instrucción
-  para importar tu código existente.
+- **Fillo me një kërkesë**: Në modalitetin "Ndërto", përdor kutinë e hyrjes për të futur një përshkrim të asaj që dëshiron të ndërtosh. Zgjidh "Çipat e IA-së" për të shtuar veçori specifike si p.sh. gjenerimi i imazheve ose të dhënat e Google Maps në kërkesën tënde. Mund të thuash edhe atë që dëshiron duke përdorur butonin e ligjërimit në tekst.
+- **Butoni "Ndihem me fat"**: Nëse ke nevojë për një shkëndijë krijuese, përdor butonin "Ndihem me fat" dhe Gemini do të gjenerojë një kërkesë me një ide projekti për të të ndihmuar të fillosh.
+- **Remikso një projekt nga galeria**: Hap një projekt nga [Galeria e aplikacioneve](https://aistudio.google.com/apps?source=showcase&hl=sq) dhe zgjidh **Kopjo aplikacionin**.
+- **Importo një projekt nga GitHub**: Në modalitetin "Ndërto", zgjidh
+  **Importo nga GitHub** nga menyja **Shto skedarë** (ikona +) në kutinë e hyrjes së kërkesës për të importuar kodin tënd ekzistues.
 
-Una vez que ejecutes la instrucción, verás que se generan el código y los archivos necesarios,
-con una vista previa en vivo de tu app que aparece en el lado derecho.
+Pasi të ekzekutosh kërkesën, do të shikosh që gjenerohen kodi dhe skedarët e nevojshëm,
+me një pamje paraprake të drejtpërdrejtë të aplikacionit tënd që shfaqet në anën e djathtë.
 
-## ¿Qué se crea?
+## Çfarë është krijuar?
 
-Cuando ejecutas la instrucción, AI Studio crea una aplicación completa. Puedes
-elegir compilar una **app web** o una **app nativa para Android** con el selector de
-plataforma.
+Kur ekzekuton kërkesën tënde, AI Studio krijon një aplikacion të plotë. Mund të zgjedhësh të ndërtosh një **aplikacion uebi** ose një **aplikacion origjinal për Android** duke përdorur zgjedhësin e platformës.
 
-Para las **apps web** (predeterminadas), AI Studio crea un entorno de pila completa que
-incluye lo siguiente:
+Për **aplikacionet e uebit** (parazgjedhje), AI Studio krijon një mjedis me stivë të plotë që përfshin:
 
-- **Del cliente**: Un frontend web (React es el valor predeterminado).
-- **Del lado del servidor**: Es un entorno de ejecución de Node.js que permite realizar llamadas a la API,
-  conexiones de bases de datos y uso de paquetes de npm de forma segura.
+- **Në anën e klientit**: Një ndërfaqe uebi (React është parazgjedhja).
+- **Në anën e serverit**: Një kohë ekzekutimi Node.js që lejon telefonata të sigurta API,
+  lidhjet e bazës së të dhënave dhe përdorimin e paketës npm.
 
-En el caso de las **apps para Android**, AI Studio genera un proyecto de Kotlin y Jetpack Compose
-que puedes obtener una vista previa en un emulador basado en el navegador, instalar en un dispositivo físico
-y publicar en Play Store para realizar pruebas. [Obtén más información para compilar apps para Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419).
+Për **aplikacionet për Android**, AI Studio gjeneron një projekt me Kotlin dhe Jetpack Compose
+që mund ta shikosh paraprakisht në një imitues të bazuar në shfletues, ta instalosh në një pajisje fizike
+dhe ta publikosh në "Dyqanin e Play" për testim. [Mëso më shumë rreth krijimit të aplikacioneve për Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=sq).
 
-Para ver el código que se genera, selecciona la pestaña **Código** en el
-panel de vista previa de la derecha. El **agente de Antigravity** administra de forma inteligente
-varios archivos en tu pila, lo que garantiza que los cambios se propaguen
-correctamente.
+Mund ta shikosh kodin që gjenerohet duke zgjedhur skedën **Kodi** në panelin e shikimit paraprak në anën e djathtë. **Agjenti i Antigravity** menaxhon në mënyrë inteligjente
+disa skedarë nëpër paketën tënde, duke u siguruar që ndryshimet të përhapen
+si duhet.
 
-### El agente de Antigravity
+### Agjenti i Antigravity
 
-El **agente de Antigravity** es la principal función IA dentro de [Google Antigravity](https://antigravity.google?hl=es-419) y, ahora, los componentes principales del arnés del agente potencian la experiencia del modo de compilación en Google AI Studio. Va
-más allá de la simple generación de código, ya que mantiene el contexto de todo tu proyecto,
-administra varios archivos y comprende instrucciones complejas para compilar aplicaciones sólidas
-y de pila completa.
+**Agjenti i Antigravity** është funksionaliteti kryesor i IA-së brenda [Google
+Antigravity](https://antigravity.google?hl=sq) dhe tani komponentët kryesorë të
+infrastrukturës së agjentit po mundësojnë përvojën e modalitetit Build në Google AI Studio. Ai shkon
+përtej gjenerimit të thjeshtë të kodeve duke mbajtur kontekstin e të gjithë projektit tënd,
+duke menaxhuar disa skedarë dhe duke kuptuar udhëzime komplekse për të ndërtuar aplikacione
+të fuqishme me stivë të plotë.
 
-Las siguientes son algunas de las funciones clave:
+Aftësitë kryesore përfshijnë:
 
-- **Reconocimiento del contexto**: Mantiene el contexto de las instrucciones y los estados de los archivos anteriores.
-- **Administración de varios archivos**: Controla las dependencias en varios archivos.
-- **Ejecución verificada**: Verifica las actualizaciones de código para reducir las alucinaciones.
+- **Ndërgjegjësimi për kontekstin**: Mban kontekstin e kërkesave të mëparshme dhe gjendjeve të skedarëve.
+- **Menaxhimi i disa skedarëve**: Menaxhon varësitë në disa skedarë.
+- **Ekzekutimi i verifikuar**: Verifikon përditësimet e kodit për të reduktuar halucinacionet.
 
-## Capacidades full-stack
+## Aftësi të stivës së plotë
 
-Google AI Studio libera el poder del ecosistema web moderno, lo que te permite
-crear más que solo prototipos del lado del cliente.
+Google AI Studio shkyç fuqinë e ekosistemit modern të uebit, duke të të lejuar të ndërtosh më shumë se thjesht prototipa në anën e klientit.
 
-- **Entorno de ejecución del servidor y npm**: Usa la amplia biblioteca de paquetes de npm. El
-  agente identificará e instalará automáticamente los paquetes que necesite tu
-  app (p.ej., bibliotecas específicas para la visualización de datos o clientes de API). También
-  puedes solicitar paquetes específicos si lo deseas.
-- **Administración de secretos**: Almacena de forma segura claves de API y secretos en el menú **Configuración**. Se puede acceder a ellas en tu código del servidor, lo que las mantiene
-  a salvo de la exposición del cliente.
-- **Multijugador**: Crea experiencias colaborativas en tiempo real directamente en
-  AI Studio. El entorno de ejecución del servidor administra el estado y las conexiones
-  necesarias para que los usuarios interactúen entre sí.
-- **Firebase Firestore y Authentication**: Aprovisiona y configura Firebase de forma automática, incluida la base de datos de Firestore (almacenamiento de datos persistente) y Firebase Authentication (flujos de acceso, específicamente "Acceder con Google"). El agente controla todo el proceso de configuración y hasta escribe el
-  código en tu app para estos servicios.
-- **Integraciones de Google Workspace**: Conecta tu app a las APIs de Google Workspace, como Gmail, Hojas de cálculo, Documentos, Drive, Calendario y muchas más. AI Studio controla
-  toda la configuración de OAuth automáticamente.
+- **Koha e ekzekutimit në anën e serverit dhe npm**: Përdor bibliotekën e madhe të paketave npm. Agjenti do të identifikojë dhe instalojë automatikisht paketat sipas nevojës për aplikacionin tënd (p.sh. biblioteka specifike për vizualizimin e të dhënave ose klientët e API-së). Mund
+  të kërkosh gjithashtu paketa specifike nëse dëshiron.
+- **Menaxhimi i sekreteve**: Ruaj në mënyrë të sigurt çelësat API dhe sekretet në menynë **Cilësimet**. Këto janë të qasshme në kodin në anën e serverit, duke i mbajtur ato të sigurta nga ekspozimi në anën e klientit.
+- **Me shumë lojtarë**: Ndërto përvoja bashkëpunuese në kohë reale drejtpërdrejt brenda AI Studio. Koha e ekzekutimit në anën e serverit menaxhon gjendjen dhe lidhjet
+  e kërkuara që përdoruesit të ndërveprojnë së bashku.
+- **Firebase Firestore and Authentication**: Siguro dhe konfiguro automatikisht Firebase, duke përfshirë bazën e të dhënave të Firestore (ruajtja e vazhdueshme e të dhënave) dhe Firebase Authentication (rrjedhat e identifikimit, veçanërisht "Identifikohu me Google"). Agjenti administron të gjithë procesin e konfigurimit dhe madje shkruan kodin në aplikacionin tënd për këto shërbime.
+- **Integrimet e Google Workspace**: Lidh aplikacionin tënd me API-të e Google Workspace si Gmail, "Fletët", "Dokumentet", "Disku", "Kalendari" etj. AI Studio i administron
+  të gjitha konfigurimet e OAuth automatikisht.
 
-[Más información para desarrollar apps de pila completa](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=es-419)
+[Mëso më shumë rreth zhvillimit të aplikacioneve me stivë të plotë](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=sq)
 
-### Apps para Android
+### Aplikacionet për Android
 
-También puedes compilar apps para Android nativas con Kotlin y Jetpack Compose.
-Obtén una vista previa de tu app en un Android Emulator basado en el navegador, instálala en un dispositivo físico con adb en el navegador y publícala en Play Store para realizar pruebas internas.
+Mund të ndërtosh gjithashtu aplikacione specifike për Android duke përdorur Kotlin dhe Jetpack Compose.
+Shiko paraprakisht aplikacionin tënd në një imitues të Android bazuar në shfletues, instaloje atë në një pajisje fizike duke përdorur ADB-në në shfletues dhe publikoje në "Dyqanin e Play" për testim të brendshëm.
 
-AI Studio también se integra en
-[Firebase](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=es-419)
-para que las apps para Android aprovisionen automáticamente **Firebase AI Logic** y la **Verificación de aplicaciones de Firebase** (para realizar llamadas seguras a la API de Gemini del cliente sin exponer claves de API sin procesar), así como **Cloud Firestore** y **Firebase Authentication**.
+AI Studio integrohet gjithashtu me
+[Firebase](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=sq)
+për aplikacionet për Android për të ofruar automatikisht **Firebase AI Logic** dhe **Firebase
+App Check** (për thirrje të sigurta të Gemini API nga ana e klientit pa ekspozuar çelësat e papërpunuar të API-së), si dhe **Cloud Firestore** dhe **Firebase Authentication**.
 
-[Más información para compilar apps para Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419)
+[Mëso më shumë rreth ndërtimit të aplikacioneve për Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=sq)
 
-## Continúa con la compilación
+## Vazhdo të ndërtosh
 
-Una vez que Google AI Studio genere el código inicial para tu aplicación, podrás
-seguir perfeccionándolo:
+Pasi Google AI Studio të gjenerojë kodin fillestar për aplikacionin tënd, mund të vazhdosh ta rafinosh atë:
 
-### Compila en Google AI Studio
+### Ndërto në Google AI Studio
 
-- **Itera con Gemini**: Usa el panel de chat en el **modo de compilación** para pedirle a Gemini
-  que realice modificaciones, agregue funciones nuevas o cambie el diseño.
-- **Edita el código directamente**: Abre la **pestaña Código** en el panel de vista previa para realizar ediciones en vivo.
+- **Përsërit me Gemini**: Përdor panelin e bisedës në **modalitetin "Ndërto"** për t'i kërkuar Gemini
+  të bëjë modifikime, të shtojë veçori të reja ose të ndryshojë stilin.
+- **Modifiko kodin drejtpërdrejt**: Hap **skedën "Kodi"** në panelin e pamjes paraprake për të bërë modifikime në çast.
 
-### Desarrollar externamente
+### Zhvillo në nivel të jashtëm
 
-Para flujos de trabajo más avanzados, puedes sincronizar o exportar el código para trabajar en tu
-entorno preferido:
+Për flukse pune më të përparuara, mund ta sinkronizosh ose ta eksportosh kodin për të punuar në mjedisin tënd të preferuar:
 
-- **Sincronizar con GitHub**: Conecta tu app a un repositorio de GitHub para habilitar
-  la sincronización bidireccional. Puedes enviar los cambios que se solicitan en AI Studio directamente a tu
-  repositorio con mensajes de confirmación generados por IA o extraer los cambios realizados de forma local
-  en tu IDE o por tus compañeros de equipo de vuelta a AI Studio. Administra el estado de sincronización
-  en cualquier momento en la pestaña **GitHub** de Configuración.
-- **Descarga y desarrolla de forma local**: Exporta el código generado como un **archivo ZIP** y, luego, impórtalo a tu editor de código.
+- **Sinkronizo me GitHub**: Lidhe aplikacionin tënd me një depo të GitHub për të aktivizuar sinkronizimin dypalësh. Mund t'i dërgosh ndryshimet e kërkuara në AI Studio drejtpërdrejt në depon tënde me mesazhe të gjeneruara nga IA-ja ose të marrësh ndryshimet e bëra në nivel lokal në IDE ose nga anëtarët e ekipit përsëri në AI Studio. Menaxho statusin e sinkronizimit në çdo kohë në skedën **GitHub** te "Cilësimet".
+- **Shkarko dhe zhvillo në nivel lokal**: Eksporto kodin e gjeneruar si një **skedar ZIP** dhe importoje atë në modifikuesin tënd të kodit.
 
-## Características clave
+## Veçoritë kryesore
 
-Google AI Studio incluye varias funciones para que el proceso de compilación sea
-intuitivo y visual:
+Google AI Studio përfshin disa veçori për ta bërë procesin e ndërtimit intuitiv dhe vizual:
 
-- **Crea apps full stack y realiza iteraciones en ellas**: Crea apps full stack con solo
-  una instrucción y realiza iteraciones a través del chat o el **modo de anotación**. El modo de anotación
-  te permite destacar cualquier parte de la IU de tu app y describir el
-  cambio que quieres realizar.
-- **Comparte e implementa tu app**: Puedes compartir tus creaciones con otras personas para
-  colaborar o mostrar tu trabajo. Cuando compartes, las llamadas a la API se consideran en tus límites de uso. Si usas modelos pagados, es posible que se apliquen costos. Luego, cuando tu app esté lista,
-  implementa en Cloud Run.
-- **Galería de apps**: La galería de apps proporciona una biblioteca visual de ideas para proyectos.
-  Puedes explorar lo que es posible con Gemini, obtener una vista previa de las aplicaciones al instante
-  y modificarlas para personalizarlas.
+- **Krijo dhe përsërit në aplikacionet me stivë të plotë**: Krijo aplikacione me stivë të plotë me vetëm një kërkesë dhe përsërit nëpërmjet bisedës ose **modalitetit të shënimeve**. Modaliteti i shënimeve
+  të lejon të theksosh çdo pjesë të ndërfaqes së përdoruesit të aplikacionit tënd dhe të përshkruash ndryshimin që dëshiron.
+- **Ndaj dhe prezanto aplikacionin tënd**: Mund t'i ndash krijimet e tua me të tjerët për të bashkëpunuar ose për të prezantuar punën tënde. Kur ndan, thirrjet për API llogariten në kufijtë e tu të përdorimit. Nëse përdor modele me pagesë, mund të zbatohen kosto. Më pas, kur aplikacioni yt të jetë gati, shpërndaje në Cloud Run.
+- **Galeria e aplikacioneve**: "Galeria e aplikacioneve" ofron një bibliotekë vizuale me ide për projekte.
+  Mund të shfletosh se çfarë është e mundur me Gemini, të shikosh paraprakisht aplikacionet në çast,
+  si dhe t'i remiksosh ato për t'i bërë të tuat.
 
-## Implementa o archiva tu app
+## Shpërndaj ose arkivo aplikacionin tënd
 
-Cuando tu aplicación esté lista, puedes implementarla de la siguiente manera:
+Pasi aplikacioni yt të jetë gati, mund ta përdorësh atë:
 
-- **Cloud Run**: Implementa tu aplicación como un servicio escalable.
-  Es posible que se apliquen precios de [Google Cloud Run](https://cloud.google.com/run?hl=es-419) según
-  el uso. Para obtener más información sobre la implementación, consulta
-  [Implementa desde Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=es-419).
-- **GitHub**: Sincroniza tu proyecto con un repositorio de GitHub nuevo o existente
-  para administrar el código fuente o colaborar con tus compañeros de equipo.
+- **Cloud Run**: Shpërndaje aplikacionin tënd si një shërbim të shkallëzueshëm.
+  Mund të zbatohen çmime për [Google Cloud Run](https://cloud.google.com/run?hl=sq) bazuar në përdorimin. Për të mësuar më shumë rreth përdorimit, shiko
+  [Përdorimi nga Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=sq).
+- **GitHub**: Sinkronizo projektin tënd me një depo të re ose ekzistuese të GitHub
+  për të menaxhuar kodin burimor ose për të bashkëpunuar me shokët e ekipit.
 
-## Limitaciones
+## Kufizimet
 
-En esta sección, se enumeran las limitaciones actuales del modo de compilación en Google AI Studio.
+Ky seksion liston kufizimet aktuale të modalitetit të ndërtimit në Google AI Studio.
 
-### Administración de claves de API
+### Menaxhimi i çelësit API
 
-Cuando creas una app web nueva que usa la API de Gemini, AI Studio configura automáticamente
-tu clave de API de Gemini como un secreto en el entorno del servidor de la app.
-Puedes ver y administrar esta clave en el panel **Secrets**.
+Kur krijon një aplikacion të ri uebi që përdor Gemini API, AI Studio konfiguron automatikisht çelësin tënd të Gemini API si një sekret në mjedisin në anën e serverit të aplikacionit.
+Mund ta shikosh dhe ta menaxhosh këtë çelës në panelin **Sekretet**.
 
-- **Configuración automática**: Tu `GEMINI_API_KEY` se configura automáticamente, por lo que no se requiere
-  ninguna configuración manual para comenzar a compilar.
-- **Solo del servidor**: Las claves de API se insertan en el entorno de ejecución del servidor y
-  nunca se incluyen en el código del cliente.
-- **Apps existentes**: En el caso de las apps creadas antes del 14 de mayo de 2026, el agente
-  actualizará automáticamente tu integración de la API de Gemini al enfoque recomendado
-  del servidor la próxima vez que modifiques las funciones de Gemini de la app.
+- **Konfigurimi automatik**: `GEMINI_API_KEY` yt është konfiguruar për ty - nuk kërkohet asnjë konfigurim manual për të filluar ndërtimin.
+- **Vetëm në anën e serverit**: Çelësat API injektohen në kohën e ekzekutimit në anën e serverit dhe nuk përfshihen asnjëherë në kodin në anën e klientit.
+- **Aplikacionet ekzistuese**: Për aplikacionet e ndërtuara para datës 14 maj 2026, agjenti do të përmirësojë automatikisht integrimin e API-së së Gemini në qasjen e rekomanduar në anën e serverit herën tjetër që do të modifikosh veçoritë e Gemini të aplikacionit.
 
-#### Apps para Android
+#### Aplikacionet për Android
 
-Cuando se compilan apps para Android, AI Studio usa
-[Firebase AI Logic y Verificación de aplicaciones de Firebase](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419#firebase-integration) en lugar de una clave de API sin procesar, por lo que las credenciales nunca se incorporan en tu APK.
+Kur ndërton aplikacione për Android, AI Studio përdor
+[Firebase AI Logic dhe Firebase App
+Check](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=sq#firebase-integration) në vend të një çelësi
+API të papërpunuar, kështu që kredencialet nuk integrohen asnjëherë në APK-në tënde.
 
-### Implementación fuera de Google AI Studio
+### Vendosja jashtë Google AI Studio
 
-- **Cloud Run**: Cuando implementas en Cloud Run desde AI Studio, tu clave de API se
-  incluye de forma segura en el entorno del servidor. La app implementada usará
-  tu clave de API para todas las llamadas a la API de Gemini de los usuarios.
-- **Descarga de ZIP**: Si descargas tu app como un archivo ZIP para ejecutarla
-  en otro lugar, deberás configurar la variable de entorno `GEMINI_API_KEY`
-  en tu entorno de hosting. Como las llamadas a la API de Gemini de tu app se realizan desde
-  el código del servidor, la clave no se expone a los usuarios finales.
+- **Cloud Run**: Kur e dislokon në Cloud Run nga AI Studio, çelësi yt i API-së përfshihet në mënyrë të sigurt në mjedisin në anën e serverit. Aplikacioni i prezantuar do të përdorë
+  çelësin tënd API për të gjitha thirrjet e Gemini API të përdoruesve.
+- **Shkarkimi i ZIP**: Nëse e shkarkon aplikacionin tënd si skedar ZIP për ta ekzekutuar atë diku tjetër, do të duhet të konfigurosh ndryshoren e mjedisit `GEMINI_API_KEY` në mjedisin tënd të strehimit. Duke qenë se thirrjet e API-së së Gemini të aplikacionit tënd bëhen nga kodi në anën e serverit, çelësi nuk u ekspozohet përdoruesve fundorë.
 
-### Error cuando se comparten apps
+### Gabim gjatë ndarjes së aplikacioneve
 
-Si compartes tu app y el usuario final se encuentra con un error **403 Access Restricted**
-cuando usa la URL compartida, puede deberse a uno de los siguientes motivos:
+Nëse ndan aplikacionin tënd dhe përdoruesi yt fundor ndesh një gabim **403 Qasja e kufizuar** kur përdor URL-në e ndarë, kjo mund të jetë për shkak të një prej arsyeve të mëposhtme:
 
-- **Extensiones del navegador**: Es posible que las extensiones de privacidad, como Privacy Badger, bloqueen la app. Inhabilita la extensión para evitar el error.
-- **Problemas de compilación**: Es posible que haya problemas con el código actual. Pídele al
-  agente que "solucione cualquier problema de compilación con el código actual" y, luego, vuelve a compartir la
-  URL.
+- **Shtesat e shfletuesit**: Shtesat e privatësisë si Privacy Badger mund të jenë duke bllokuar aplikacionin. Çaktivizo shtesën për të shmangur gabimin.
+- **Probleme me ndërtimin**: Mund të ketë probleme me kodin aktual. Kërkoji agjentit të "rregullojë çdo problem me ndërtimin me kodin aktual" dhe më pas ndaje përsëri URL-në.
 
-## Preguntas frecuentes
+## Pyetjet e shpeshta
 
-### ¿Qué es Build in AI Studio?
+### Çfarë është "Ndërto në AI Studio"?
 
-AI Studio Build es una plataforma diseñada para llevarte de una instrucción simple a una
-aplicación potenciada por IA lista para producción con Gemini. Describe lo que
-quieres compilar con una instrucción y Gemini generará una app para ti. También
-puedes explorar nuestra galería para ver qué es posible con la API de Gemini
-y hacer remixes de apps para personalizarlas.
+AI Studio Build është një platformë e projektuar për të të çuar nga një kërkesë e thjeshtë në një aplikacion të gatshëm për prodhim, të mundësuar nga IA-ja, duke përdorur Gemini. Përshkruaj se çfarë dëshiron të ndërtosh me një kërkesë dhe Gemini do të gjenerojë një aplikacion për ty. Mund
+të eksplorosh gjithashtu galerinë tonë për të parë se çfarë është e mundur me Gemini API,
+si dhe të remiksosh aplikacionet për t'i bërë të tuat.
 
-### ¿Cómo controla Build mi clave de API de Gemini?
+### Si e administron Build çelësin tim të Gemini API?
 
-Cuando creas una app web que usa la API de Gemini, AI Studio configura automáticamente
-tu clave de API de Gemini como un secreto del servidor. Las llamadas a la API de Gemini de tu app
-se realizan desde el código del servidor con esta clave, por lo que nunca se expone
-en el navegador. Puedes ver tu clave de API en el panel **Secrets** en
-Configuración. En el caso de las apps para Android, AI Studio usa [Firebase AI Logic y la Verificación de aplicaciones de Firebase](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419#firebase-integration) para realizar llamadas seguras del cliente sin incorporar una clave de API en el objeto binario de la app.
+Kur krijon një aplikacion uebi që përdor Gemini API, AI Studio konfiguron automatikisht çelësin tënd të Gemini API si një sekret në anën e serverit. Telefonatat e API-së së Gemini të aplikacionit tënd bëhen nga kodi në anën e serverit duke përdorur këtë çelës, kështu që ai nuk ekspozohet asnjëherë në shfletues. Mund ta shikosh çelësin tënd të API-së në panelin **Sekretet** te "Cilësimet". Për aplikacionet për Android, AI Studio përdor [Firebase AI Logic dhe Firebase App
+Check](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=sq#firebase-integration) për të bërë telefonata të sigurta nga ana e klientit pa integruar një çelës API në binarin e aplikacionit.
 
-### ¿Se expone mi clave de API cuando comparto apps?
+### A ekspozohet çelësi im API kur ndaj aplikacione?
 
-No. Tu clave de API se almacena como un secreto del servidor y nunca se incluye en el código del cliente. Cuando compartes tu app, otros usuarios pueden usarla, pero no pueden ver tu clave de API.
+Jo. Çelësi yt i API-së ruhet si një sekret në anën e serverit dhe nuk përfshihet asnjëherë në kodin në anën e klientit. Kur ndan aplikacionin tënd, përdoruesit e tjerë mund ta përdorin atë, por ata nuk mund ta shikojnë çelësin tënd API.
 
-Cuando compartes tus apps con otras personas, las llamadas a la API se tienen en cuenta para tus límites de uso.
-Si usas modelos pagados, es posible que se apliquen costos. AI Studio te avisará
-durante la configuración y antes de compartir si tu app podría generar costos.
+Kur ndan aplikacionet e tua me të tjerët, thirrjet e API-së llogariten në kufijtë e përdorimit.
+Nëse përdor modele me pagesë, mund të zbatohen kosto. AI Studio do të të njoftojë gjatë konfigurimit dhe para se të ndash nëse aplikacioni yt mund të ketë kosto.
 
-### ¿Quién puede ver mis apps?
+### Kush mund t'i shikojë aplikacionet e mia?
 
-De forma predeterminada, tu app es privada. Puedes compartir tu app con otros usuarios para
-que la usen. Los usuarios con los que compartes tu app pueden ver su código y bifurcarlo
-para sus propios fines. Si compartes tu app con permiso de edición, los
-demás usuarios podrán editar el código de tu app.
+Si parazgjedhje, aplikacioni yt është privat. Mund ta ndash aplikacionin tënd me përdorues të tjerë për t'i lënë ta përdorin atë. Përdoruesit me të cilët e ndan aplikacionin tënd mund ta shikojnë kodin e tij dhe ta degëzojnë atë për qëllimet e tyre. Nëse e ndan aplikacionin tënd me leje për modifikim, përdoruesit e tjerë mund ta modifikojnë kodin e aplikacionit tënd.
 
-### ¿Puedo ejecutar apps fuera de AI Studio?
+### A mund t'i ekzekutoj aplikacionet jashtë AI Studio?
 
-Sí. Puedes implementar tu app en
-[Cloud Run](https://cloud.google.com/run?hl=es-419) desde AI Studio, lo que
-le otorga una URL pública con tu clave de API configurada de forma segura en el
-entorno del servidor. También puedes descargar tu app como un archivo ZIP y
-alojarla en otro lugar. Deberás establecer la variable de entorno `GEMINI_API_KEY`
-en tu entorno de hosting. Como las llamadas a la API de Gemini se realizan desde
-el código del servidor, tu clave se mantiene segura.
+Po. Mund ta prezantosh aplikacionin tënd në [Cloud Run](https://cloud.google.com/run?hl=sq) nga AI Studio, gjë që i jep aplikacionit tënd një URL publike me çelësin tënd të API-së të konfiguruar në mënyrë të sigurt në mjedisin në anën e serverit. Gjithashtu, mund ta shkarkosh aplikacionin tënd si një skedar ZIP dhe
+ta strehosh diku tjetër — do të të duhet të caktosh ndryshoren e mjedisit `GEMINI_API_KEY`
+në mjedisin tënd të strehimit. Duke qenë se thirrjet e Gemini API bëhen nga kodi në anën e serverit, çelësi yt mbetet i sigurt.
 
-Para obtener más información sobre las opciones de implementación, consulta [Implementa desde Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=es-419).
+Për të mësuar më shumë rreth opsioneve të nxjerrjes, shiko [Nxjerrja nga Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=sq).
 
-### ¿Puedo desarrollar apps de forma local con mis propias herramientas y, luego, compartirlas aquí?
+### A mund të zhvilloj aplikacione në nivel lokal me veglat e mia dhe më pas t'i ndaj ato këtu?
 
-Sí. Puedes conectar tu app de AI Studio a un repositorio de GitHub para desarrollarla
-de forma local con tu editor de código o herramientas de CLI preferidos, enviar los cambios a
-GitHub y, luego, extraer esas actualizaciones directamente a AI Studio con la
-pestaña **GitHub** en Configuración.
+Po. Mund ta lidhësh aplikacionin tënd të AI Studio me një depo të GitHub për të zhvilluar
+në nivel lokal duke përdorur modifikuesin e preferuar të kodit ose veglat CLI, për të dërguar ndryshimet e tua te
+GitHub dhe më pas për t'i tërhequr ato përditësime drejtpërdrejt përsëri në AI Studio duke përdorur
+skedën **GitHub** te "Cilësimet".
 
-### ¿Cómo puedo usar una base de datos o algún otro tipo de almacenamiento con mis apps?
+### Si mund të përdor një bazë të dhënash ose një hapësirë tjetër ruajtëse me aplikacionet e mia?
 
-Las apps de AI Studio son apps estándar que se ejecutan en un contenedor de Cloud Run. Puedes
-usar cualquier solución de almacenamiento a la que puedas conectarte a través de una red, siempre
-y cuando no haya un firewall que impida el acceso desde un rango de IP dinámico.
+Aplikacionet e AI Studio janë aplikacione standarde që ekzekutohen në një kontejner të Cloud Run. Mund të përdorësh çdo zgjidhje për hapësirën ruajtëse që mund ta lidhësh nëpërmjet një rrjeti, për sa kohë që nuk ka një mur mbrojtës që parandalon qasjen nga një diapazon dinamik i adresave IP.
 
-Estamos trabajando para agregar compatibilidad directa con el almacenamiento en el futuro, que
-podrás configurar directamente en AI Studio.
+Ne po punojmë për të shtuar mbështetje të drejtpërdrejtë për hapësirën ruajtëse në të ardhmen, të cilën do të mund ta konfigurosh drejtpërdrejt brenda AI Studio.
 
-### ¿Cómo puedo acceder al micrófono, la cámara web y otras APIs de Navigator?
+### Si mund të qasem te mikrofoni, uebkamera dhe API-të e tjera të Navigator?
 
-Para garantizar que los usuarios sepan que una app usa su cámara web o algún otro dispositivo, solicitamos una confirmación adicional antes de que la app pueda acceder a estas [APIs de Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator).
-Los creadores de apps pueden agregar estas solicitudes de permiso al archivo `metadata.json` de su app. Por ejemplo:
+Për t'u siguruar që shikuesit janë në dijeni për përdorimin e uebkamerës ose pajisjeve të tjera nga një aplikacion, ne kërkojmë një konfirmim shtesë para se aplikacioni të mund të qaset në këto [API të Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator).
+Krijuesit e aplikacioneve mund t'i shtojnë këto kërkesa për leje në skedarin `metadata.json` të aplikacionit të tyre. Për shembull:
 
 ```
 {
@@ -285,84 +230,70 @@ Los creadores de apps pueden agregar estas solicitudes de permiso al archivo `me
 }
 ```
 
-Los valores admitidos para `requestFramePermissions` son un subconjunto de las
-[funciones estándar controladas por políticas](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
+Vlerat e mbështetura për `requestFramePermissions` janë një nëngrup i
+[veçorive standarde të kontrolluara nga politika](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
 
-### ¿Cómo puedo usar GitHub con mis apps?
+### Si mund ta përdor GitHub me aplikacionet e mia?
 
-AI Studio admite la sincronización bidireccional con GitHub:
+AI Studio mbështet sinkronizimin dypalësh me GitHub:
 
-- **Importa un repositorio**: En el modo de compilación, selecciona **Importar desde GitHub**
-  en el menú **Agregar archivos** (ícono de signo más) del cuadro de entrada de instrucciones para importar
-  código existente.
-- **Vincula un repositorio**: En Configuración, abre la pestaña **GitHub** para crear un repositorio de GitHub nuevo desde tu app o vincularlo a uno existente.
-- **Sincronización bidireccional**: Envía los cambios solicitados en AI Studio directamente a tu
-  repositorio con mensajes de confirmación generados por IA o extrae los cambios realizados
-  de forma externa (como ediciones locales del IDE o solicitudes de extracción de compañeros de equipo) de vuelta a AI
-  Studio.
-- **Resuelve conflictos de combinación**: Si los cambios entran en conflicto cuando se sincronizan con
-  GitHub, AI Studio proporciona un diálogo **Resolver conflictos** con un
-  visor de diferencias en paralelo, lo que te permite revisar las diferencias y elegir
-  si deseas conservar la versión de AI Studio o de GitHub para cada archivo en conflicto.
+- **Importo një depo**: Në modalitetin "Ndërto", zgjidh **Importo nga GitHub**
+  nga menyja **Shto skedarë** (ikona +) në kutinë e hyrjes së kërkesës për të importuar
+  kodin ekzistues.
+- **Lidh një depo**: Te "Cilësimet", hap skedën **GitHub** për të krijuar një depo të re të GitHub nga aplikacioni yt ose lidhe me një depo ekzistuese.
+- **Sinkronizimi dypalësh**: Transfero ndryshimet e kërkuara në AI Studio drejtpërdrejt në depon tënde me mesazhe të gjeneruara nga IA-ja ose tërhiq ndryshimet e bëra nga jashtë (si p.sh. modifikimet lokale të IDE-së ose kërkesat për tërheqje të anëtarëve të ekipit) përsëri në AI Studio.
+- **Zgjidh konfliktet e bashkimit**: Nëse ndryshimet bien në konflikt gjatë sinkronizimit me GitHub, AI Studio ofron një dialog **Zgjidh konfliktet** me një shikues të diferencave krah për krah, duke të të lejuar të rishikosh diferencat dhe të zgjedhësh nëse do të mbash versionin e AI Studio apo të GitHub për çdo skedar në konflikt.
 
-### ¿Puedo otorgar acceso de edición a mi app a otros usuarios?
+### A mund t'u jap përdoruesve të tjerë qasje për modifikim në aplikacionin tim?
 
-AI Studio no admite la edición colaborativa directa en tiempo real.
-Sin embargo, puedes colaborar con tus compañeros de equipo vinculando tu app a un repositorio de GitHub compartido. Los miembros del equipo pueden enviar cambios o abrir solicitudes de extracción en GitHub,
-y tú puedes incorporar esas actualizaciones en AI Studio.
+AI Studio nuk mbështet modifikimin e drejtpërdrejtë bashkëpunues në kohë reale.
+Megjithatë, mund të bashkëpunosh me shokët e ekipit duke e lidhur aplikacionin tënd me një depo të ndarë të GitHub. Anëtarët e ekipit mund të shtyjnë ndryshimet ose të hapin kërkesat për tërheqje në GitHub,
+dhe ti mund t'i tërheqësh ato përditësime në AI Studio.
 
-### ¿Por qué se marcó mi app por incumplimiento de política?
+### Pse është raportuar aplikacioni im për shkelje të politikës?
 
-Contamos con sistemas que revisan automáticamente las apps para garantizar que cumplan con nuestras políticas. Si descubrimos que una app incumple nuestras políticas, se quitará
-de AI Studio. Los incumplimientos de política pueden incluir, entre otros, los siguientes:
+Ne kemi sisteme që shqyrtojnë automatikisht aplikacionet për t'u siguruar që ato janë në përputhje me politikat tona. Nëse zbulojmë se një aplikacion shkel politikat tona, aplikacioni do të hiqet nga AI Studio. Shkeljet e politikës mund të përfshijnë, por nuk kufizohen në sa më poshtë:
 
-- Apps que contienen software malicioso, phishing o suplantación de identidad
-- Apps que muestran o distribuyen contenido que infringe la política sobre imágenes de abuso sexual infantil
-- Apps que muestran o distribuyen contenido que infringe la política de hostigamiento
-- Apps que muestran o distribuyen contenido que incumple la política sobre la incitación al odio o a la violencia
-- Apps que muestran o distribuyen contenido que incumple la política de trata de personas
-- Aplicaciones que muestran o distribuyen contenido que infringe la política de contenido sexual explícito
-- Apps que muestren o distribuyan contenido que infrinja la política de contenido violento y sangriento
-- Apps que muestran o distribuyen contenido que infringe la política de contenido dañino o peligroso
+- Aplikacionet që përmbajnë softuerë keqdashës, mashtrime ose imitime
+- Aplikacionet që shfaqin ose shpërndajnë përmbajtje që shkel politikën për imazhet e abuzimit seksual të fëmijëve
+- Aplikacione që shfaqin ose shpërndajnë përmbajtje që shkel politikën për ngacmimin
+- Aplikacione që shfaqin ose shpërndajnë përmbajtje që shkel politikën për gjuhën e urrejtjes
+- Aplikacione që shfaqin ose shpërndajnë përmbajtje që shkel politikën për trafikimin e qenieve njerëzore
+- Aplikacionet që shfaqin ose shpërndajnë përmbajtje që shkel politikën për përmbajtjet e papërshtatshme seksuale
+- Aplikacionet që shfaqin ose shpërndajnë përmbajtje që shkel politikën për dhunën dhe gjakderdhjen
+- Aplikacionet që shfaqin ose shpërndajnë përmbajtje që shkel politikën për përmbajtjet e dëmshme ose të rrezikshme
 
-Si se marcó tu app por un incumplimiento de política y crees que se trata de un error, puedes enviar una apelación. Los incumplimientos reiterados de nuestras políticas pueden
-ocasionar la rescisión de tu acceso a AI Studio.
+Nëse aplikacioni yt është raportuar për një shkelje të politikës dhe beson se është një gabim, mund të dërgosh një apelim. Shkeljet e përsëritura të politikave tona mund të rezultojnë në mbylljen e qasjes sate në AI Studio.
 
-### ¿Cuáles son mis responsabilidades como desarrollador de apps?
+### Cilat janë përgjegjësitë e mia si zhvillues i aplikacionit?
 
-Como recordatorio, como propietario de tu aplicación, eres responsable de
-su comportamiento y de todos los datos que maneja. Esto incluye lo siguiente:
+Si rikujtesë, si zotërues i aplikacionit tënd, ti je përgjegjës për sjelljen e tij dhe të gjitha të dhënat që ai administron. Kjo përfshin:
 
-- **Cumplimiento de los requisitos legales y derechos de terceros:** Asegurarte de que tu app cumpla con todas las leyes y reglamentaciones aplicables, y no infrinja los derechos de otras personas, incluidos los derechos de propiedad intelectual y privacidad
-- **Supervisión de contenido:** Es posible que se aplique el cumplimiento de condiciones adicionales a
-  otros servicios que use tu app. Por ejemplo,
-  las [Condiciones del Servicio de Google Cloud](https://cloud.google.com/terms?hl=es-419),
-  aplicables a Firestore, requieren que los clientes que alojan contenido de terceros
-  publiquen políticas que definan qué contenido está prohibido (p.ej., contenido
-  ilegal) y supervisen la presencia de ese contenido ilegal.
-- **Implementación segura:** Implementa las protecciones y herramientas de moderación necesarias para evitar que se use tu aplicación de forma inadecuada.
+- **Përputhshmëria ligjore dhe të drejtat e palëve të treta:** Sigurimi që aplikacioni yt është në përputhje me të gjitha ligjet dhe rregulloret e zbatueshme dhe nuk shkel të drejtat e të tjerëve, duke përfshirë të drejtat e pronësisë intelektuale dhe të privatësisë.
+- **Monitorimi i përmbajtjes:** Përputhja me kushtet shtesë mund të zbatohet për shërbimet e tjera të përdorura nga aplikacioni yt. Për shembull, ["Kushtet e shërbimit" të Google Cloud](https://cloud.google.com/terms?hl=sq), të zbatueshme për Firestore, kërkojnë që klientët që strehojnë përmbajtje të palëve të treta të publikojnë politika që përcaktojnë se cilat përmbajtje janë të ndaluara (p.sh. përmbajtjet e paligjshme) dhe të monitorojnë për praninë e këtyre përmbajtjeve të paligjshme.
+- **Zbatimi i sigurt:** Zbatimi i masave mbrojtëse dhe veglave të nevojshme të moderimit për të parandaluar keqpërdorimin e aplikacionit tënd.
 
-Ten en cuenta las [restricciones de uso](https://ai.google.dev/gemini-api/terms?hl=es-419#use-restrictions)
-en las Condiciones del Servicio.
+Ki parasysh [kufizimet e përdorimit](https://ai.google.dev/gemini-api/terms?hl=sq#use-restrictions)
+në "Kushtet e shërbimit".
 
-### ¿Qué condiciones se aplican a las apps de la galería de apps en AI Studio?
+### Cilat kushte zbatohen për aplikacionet në galerinë e aplikacioneve në AI Studio?
 
-Las [Condiciones del Servicio Adicionales de la API de Gemini](https://ai.google.dev/gemini-api/terms?hl=es-419)
-se aplican al uso de las apps que se muestran en la galería de apps de AI Studio, a menos que
-se indique lo contrario.
+[Kushtet shtesë të shërbimit të Gemini API](https://ai.google.dev/gemini-api/terms?hl=sq)
+zbatohen për përdorimin e aplikacioneve të paraqitura në galerinë e aplikacioneve në AI Studio, përveçse nëse
+përcaktohet ndryshe.
 
-## ¿Qué sigue?
+## Çfarë ka më pas
 
-- [Desarrolla apps de pila completa](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=es-419) (web)
-- [Compila apps para Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419)
-- Consulta ejemplos en la [Galería de apps](https://aistudio.google.com/apps?source=showcase&hl=es-419).
+- [Developing Full-Stack Apps](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=sq) (ueb)
+- [Ndërto aplikacione për Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=sq)
+- Shiko shembujt te [Galeria e aplikacioneve](https://aistudio.google.com/apps?source=showcase&hl=sq).
 
-Enviar comentarios
+Dërgo komente
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-Última actualización: 2026-10-20 (UTC)
+Përditësimi i fundit: 2026-10-26 UTC.
 
-¿Quieres brindar más información?
+Duhet të na tregosh më shumë?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-20 (UTC)"],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-26 UTC."],[],[]]

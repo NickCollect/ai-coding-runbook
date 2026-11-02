@@ -1,52 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=es-419
-fetched_at: 2026-10-26T05:59:24.207084+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=sq
+fetched_at: 2026-11-02T07:11:34.661069+00:00
 title: "Gemini Robotics ER 1.6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
+Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
+- [Dokumentet](https://ai.google.dev/gemini-api/docs?hl=sq)
 
-Enviar comentarios
+Dërgo komente
 
 # Gemini Robotics ER 1.6
 
-Gemini Robotics ER 1.6 es un modelo de lenguaje visual (VLM) que lleva las capacidades de agente de Gemini
-a la robótica. Está diseñado para el razonamiento avanzado en el
-mundo físico, lo que permite que los robots interpreten datos visuales complejos, realicen
-razonamientos espaciales y planifiquen acciones a partir de comandos en lenguaje natural.
+Gemini Robotics ER 1.6 është një model vizual-gjuhësor (VLM) që sjell aftësitë agjentike të Gemini te robotika. Ai është projektuar për arsyetim të përparuar në botën fizike, duke bërë të mundur që robotët të interpretojnë të dhëna vizuale komplekse, të kryejnë arsyetim hapësinor dhe të planifikojnë veprime nga komandat në gjuhë natyrale.
 
-## Documentación
+## Dokumentacioni
 
-Visita la página [Robótica](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=es-419) para obtener una cobertura completa
-de las funciones y capacidades.
+Vizito faqen [Robotika](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=sq) për mbulimin e plotë
+të veçorive dhe aftësive.
 
 ## gemini-robotics-er-1.6-preview
 
-| Propiedad | Descripción |
+| Prona | Përshkrimi |
 | --- | --- |
-| id\_cardCódigo del modelo | `gemini-robotics-er-1.6-preview` |
-| saveTipos de datos admitidos | **Entradas**  Texto, imágenes, video, audio  **Resultado**  Texto |
-| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  131,072  **Límite de tokens de salida**  65,536 |
-| handymanCapacidades | **[Generación de audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=es-419)**  No compatible  **[Almacenamiento en caché](https://ai.google.dev/gemini-api/docs/caching?hl=es-419)**  Admitido  **[Ejecución de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=es-419)**  Admitido  **[Uso de computadoras](https://ai.google.dev/gemini-api/docs/computer-use?hl=es-419)**  Admitido  **[Búsqueda de archivos](https://ai.google.dev/gemini-api/docs/file-search?hl=es-419)**  Admitido  **[Llamada a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)**  Admitido  **[Fundamentación con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=es-419)**  Admitido  **[Generación de imágenes](https://ai.google.dev/gemini-api/docs/image-generation?hl=es-419)**  No compatible  **[API de Live](https://ai.google.dev/gemini-api/docs/live-api?hl=es-419)**  No compatible  **[Fundamentación con la Búsqueda](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419)**  Admitido  **[Resultados estructurados](https://ai.google.dev/gemini-api/docs/structured-output?hl=es-419)**  Admitido  **[Pensamiento](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419)**  Admitido  **[Contexto de la URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419)**  Admitido |
-| speedOpciones de consumo | **[API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419)**  Admitido  **[Inferencia Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=es-419)**  Admitido  **[Inferencia de prioridad](https://ai.google.dev/gemini-api/docs/priority-inference?hl=es-419)**  Admitido |
-| 123Versiones | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Apagar: `gemini-robotics-er-1.6-preview` |
-| calendar\_monthÚltima actualización | Diciembre de 2025 |
-| cognition\_2Fecha límite de conocimiento | Enero de 2025 |
+| id\_cardKodi i modelit | `gemini-robotics-er-1.6-preview` |
+| saveLlojet e mbështetura të të dhënave | **Hyrjet**  Tekst, imazhe, video, audio  **Rezultati**  Teksti |
+| token\_autoKufijtë e token-ëve[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=sq) | **Kufiri i tokenëve të hyrjes**  131 072  **Kufiri i tokenëve të rezultatit**  65 536 |
+| handymanAftësitë | **[Gjenerimi i audios](https://ai.google.dev/gemini-api/docs/speech-generation?hl=sq)**  Nuk mbështetet  **[Ruajtja në memorien specifike](https://ai.google.dev/gemini-api/docs/caching?hl=sq)**  Mbështetet  **[Ekzekutimi i kodit](https://ai.google.dev/gemini-api/docs/code-execution?hl=sq)**  Mbështetet  **[Përdorimi i kompjuterit](https://ai.google.dev/gemini-api/docs/computer-use?hl=sq)**  Mbështetet  **[Kërkimi i skedarëve](https://ai.google.dev/gemini-api/docs/file-search?hl=sq)**  Mbështetet  **[Thirrja e funksionit](https://ai.google.dev/gemini-api/docs/function-calling?hl=sq)**  Mbështetet  **[Argumentimi me Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=sq)**  Mbështetet  **[Gjenerimi i imazheve](https://ai.google.dev/gemini-api/docs/image-generation?hl=sq)**  Nuk mbështetet  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=sq)**  Nuk mbështetet  **[Bazat e "Kërko"](https://ai.google.dev/gemini-api/docs/google-search?hl=sq)**  Mbështetet  **[Rezultatet e strukturuara](https://ai.google.dev/gemini-api/docs/structured-output?hl=sq)**  Mbështetet  **[Arsyetuesi](https://ai.google.dev/gemini-api/docs/thinking?hl=sq)**  Mbështetet  **[Konteksti me URL](https://ai.google.dev/gemini-api/docs/url-context?hl=sq)**  Mbështetet |
+| speedOpsionet e konsumit | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=sq)**  Mbështetet  **[Deduksioni Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=sq)**  Mbështetet  **[Konkluzioni i përparësisë](https://ai.google.dev/gemini-api/docs/priority-inference?hl=sq)**  Mbështetet |
+| 123Versionet | Lexo [shabllonet e versioneve të modelit](https://ai.google.dev/gemini-api/docs/models?hl=sq#model-versions) për më shumë detaje.  - Fik: `gemini-robotics-er-1.6-preview` |
+| calendar\_monthPërditësimi më i fundit | Dhjetor 2025 |
+| cognition\_2Kufiri kohor i shkëputjes së njohurive | Janar 2025 |
 
-Enviar comentarios
+Dërgo komente
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-Última actualización: 2026-10-21 (UTC)
+Përditësimi i fundit: 2026-10-26 UTC.
 
-¿Quieres brindar más información?
+Duhet të na tregosh më shumë?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-21 (UTC)"],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-26 UTC."],[],[]]

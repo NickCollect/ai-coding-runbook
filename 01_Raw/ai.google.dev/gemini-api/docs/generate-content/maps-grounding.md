@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/maps-grounding?hl=ja
-fetched_at: 2026-10-26T05:40:40.880624+00:00
-title: "Google \u30de\u30c3\u30d7\u306b\u3088\u308b\u30b0\u30e9\u30a6\u30f3\u30c7\u30a3\u30f3\u30b0 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/maps-grounding?hl=es-419
+fetched_at: 2026-11-02T07:17:35.403059+00:00
+title: "Fundamentaci\u00f3n con Google Maps \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=es-419)
 
-フィードバックを送信
+Enviar comentarios
 
-# Google マップによるグラウンディング
+# Fundamentación con Google Maps
 
-Google マップによるグラウンディングは、Gemini の生成機能と、Google マップの豊富で事実に基づいた最新のデータを結び付けます。この機能により、デベロッパーは位置情報認識機能をアプリケーションに簡単に組み込むことができます。ユーザーのクエリにマップデータに関連するコンテキストが含まれている場合、Gemini モデルは Google マップを活用して、ユーザーが指定した場所やおおよその現在地に関連する、事実に基づいた最新の回答を提供します。
+La Fundamentación con Google Maps conecta las capacidades generativas de Gemini con los datos enriquecidos, fácticos y actualizados de Google Maps. Esta función permite que los desarrolladores incorporen fácilmente funciones basadas en la ubicación a sus aplicaciones. Cuando una consulta de usuario tiene un contexto relacionado con los datos de Maps, el modelo de Gemini aprovecha Google Maps para proporcionar respuestas fácticas y actualizadas que sean pertinentes para la ubicación especificada por el usuario o el área general.
 
-- **正確な位置情報認識レスポンス:** Google マップの広範で最新のデータを活用して、地理的に特定のクエリに対応します。
-- **パーソナライズの強化:** ユーザーが提供した場所に基づいて、おすすめ情報や情報をカスタマイズします。
+- **Respuestas precisas y basadas en la ubicación:** Aprovecha los datos extensos y actuales de Google Maps para las consultas geográficamente específicas.
+- **Personalización mejorada:** Adapta las recomendaciones y la información según las ubicaciones proporcionadas por el usuario.
 
-## 始める
+## Comenzar
 
-この例では、Google マップによるグラウンディングをアプリケーションに統合して、ユーザーのクエリに対して正確な位置情報認識レスポンスを提供する方法を示します。プロンプトでは、ユーザーの位置情報（省略可）を含むローカルのおすすめ情報をリクエストし、Gemini モデルが Google マップのデータを使用できるようにします。
+En este ejemplo, se muestra cómo integrar la Fundamentación con Google Maps en tu aplicación para proporcionar respuestas precisas y basadas en la ubicación a las consultas de los usuarios. La instrucción solicita recomendaciones locales con una ubicación de usuario opcional, lo que permite que el modelo de Gemini use los datos de Google Maps.
 
 ### Python
 
@@ -128,35 +128,38 @@ curl -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
 }'
 ```
 
-## Google マップによるグラウンディングの仕組み
+## Cómo funciona la Fundamentación con Google Maps
 
-Google マップによるグラウンディングは、Maps API をグラウンディング ソースとして使用して、Gemini API を Google Geo エコシステムと統合します。ユーザーのクエリに地理的なコンテキストが含まれている場合、Gemini モデルは Google マップによるグラウンディング ツールを呼び出すことができます。これにより、モデルは提供された場所に関連する Google マップのデータに基づいてグラウンディングされたレスポンスを生成できます。
+La Fundamentación con Google Maps integra la API de Gemini con el ecosistema de Google Geo mediante el uso de la API de Google Maps como fuente de fundamentación. Cuando la consulta de un usuario contiene contexto geográfico, el modelo de Gemini puede invocar la herramienta Fundamentación con Google Maps. Luego, el modelo puede generar respuestas basadas en los datos de Google Maps que sean pertinentes para la ubicación proporcionada.
 
-通常、プロセスは次のようになります。
+Por lo general, el proceso incluye lo siguiente:
 
-1. **ユーザーのクエリ:** ユーザーがアプリケーションにクエリを送信します。地理的なコンテキスト（「近くのカフェ」、「サンフランシスコの博物館」など）が含まれる場合があります。
-2. **ツールの呼び出し:** Gemini モデルは、地理的な意図を認識して、Google マップによるグラウンディング ツールを呼び出します。このツールには、ユーザーの `latitude` と `longitude` を指定できます（省略可）。このツールはテキスト検索ツールであり、マップでの検索と同様に動作します。ローカル クエリ（「近くの」）では座標が使用されますが、特定のクエリやローカル以外のクエリは明示的な位置情報の影響を受けにくいです。
-3. **データの取得:** Google マップによるグラウンディング サービスは、関連情報（場所、レビュー、写真、住所、営業時間など）について Google マップにクエリを実行します。
-4. **グラウンディングされた生成:** 取得したマップデータを使用して Gemini モデルのレスポンスを生成し、事実の正確性と関連性を確保します。
-5. **レスポンス:** モデルはテキスト レスポンスを返します。これには、Google マップのソースへの引用が含まれます。
+1. **Consulta del usuario:** Un usuario envía una consulta a tu aplicación, que puede incluir contexto geográfico (p.ej., "cafeterías cerca de mí" o "museos en San Francisco").
+2. **Invocación de la herramienta:** El modelo de Gemini, que reconoce la intención geográfica, invoca la herramienta Fundamentación con Google Maps. De manera opcional, esta herramienta puede recibir la `latitude` y la `longitude` del usuario. La herramienta es una herramienta de búsqueda textual y se comporta de manera similar a la búsqueda en Maps, ya que las consultas locales ("cerca de mí") usarán las coordenadas, mientras que es poco probable que las consultas específicas o no locales se vean influenciadas por la ubicación explícita.
+3. **Recuperación de datos:** El servicio Fundamentación con Google Maps consulta a Google Maps para obtener información pertinente (p.ej., lugares, opiniones, fotos, direcciones y horarios de atención).
+4. **Generación fundamentada:** Los datos de Maps recuperados se usan para informar la respuesta del modelo de Gemini, lo que garantiza la precisión fáctica y la pertinencia.
+5. **Respuesta:** El modelo devuelve una respuesta de texto, que incluye citas a fuentes de Google Maps.
 
-## Google マップによるグラウンディングを使用する理由とタイミング
+## Por qué y cuándo usar la Fundamentación con Google Maps
 
-Google マップによるグラウンディングは、正確で最新の位置情報固有の情報を必要とするアプリケーションに最適です。世界中の 2 億 5,000 万件以上の場所に関する Google マップの広範なデータベースに裏付けられた、関連性の高いパーソナライズされたコンテンツを提供することで、ユーザー エクスペリエンスを向上させます。
+La Fundamentación con Google Maps es ideal para las aplicaciones que requieren información precisa, actualizada y específica de la ubicación. Mejora la experiencia del usuario, ya que proporciona contenido pertinente y personalizado respaldado por la extensa base de datos de Google Maps de más de 250 millones de lugares en todo el mundo.
 
-アプリケーションで次のことが必要な場合は、Google マップによるグラウンディングを使用する必要があります。
+Debes usar la Fundamentación con Google Maps cuando tu aplicación necesite lo siguiente:
 
-- 地理的に特定の質問に対して、完全で正確な回答を提供する。
-- 会話型の旅行プランナーやローカルガイドを作成する。
-- 場所やユーザーの好み（レストランやショップなど）に基づいて、おすすめのスポットを提案する。
-- ソーシャル、小売、食品デリバリー サービス向けに、位置情報認識エクスペリエンスを作成する。
+- Proporcionar respuestas completas y precisas a preguntas específicas de la ubicación geográfica
+- Crear planificadores de viajes conversacionales y guías locales
+- Recomendar puntos de interés según la ubicación y las preferencias del usuario, como restaurantes o tiendas
+- Crear experiencias basadas en la ubicación para servicios sociales, de venta minorista o de entrega de comida
 
-Google マップによるグラウンディングは、「近くの最高のカフェ」を見つける場合や経路を取得する場合など、近接性と最新の事実データが重要なユースケースで優れています。
+La Fundamentación con Google Maps se destaca en los casos de uso en los que la proximidad y los datos fácticos actuales son fundamentales, como encontrar la "mejor cafetería cerca de mí" o obtener instrucciones sobre cómo llegar.
 
-## API メソッドとパラメータ
+## Métodos y parámetros de la API
 
-Google マップによるグラウンディングは、Gemini API を介してツールとして
-[`generateContent`](https://ai.google.dev/api/generate-content?hl=ja) メソッド内に公開されます。Google マップによるグラウンディングを有効にして構成するには、リクエストの `tools` パラメータに [`googleMaps`](https://ai.google.dev/api/caching?hl=ja#GoogleMaps) オブジェクトを含めます。
+La Fundamentación con Google Maps se expone a través de la API de Gemini como una herramienta dentro de
+el [`generateContent`](https://ai.google.dev/api/generate-content?hl=es-419) método. Para habilitar y configurar
+la Fundamentación con Google Maps, incluye un
+[`googleMaps`](https://ai.google.dev/api/caching?hl=es-419#GoogleMaps) objeto en el `tools` parámetro de tu
+solicitud.
 
 ### JSON
 
@@ -171,7 +174,7 @@ Google マップによるグラウンディングは、Gemini API を介して�
 }
 ```
 
-また、このツールはコンテキスト上の位置情報を `toolConfig` として渡すこともサポートしています。
+Además, la herramienta admite pasar la ubicación contextual como `toolConfig`.
 
 ### JSON
 
@@ -194,11 +197,11 @@ Google マップによるグラウンディングは、Gemini API を介して�
 }
 ```
 
-### グラウンディング レスポンスについて
+### Comprende la respuesta de fundamentación
 
-レスポンスが Google マップのデータで正常にグラウンディングされると、レスポンス
-に [`groundingMetadata`](https://ai.google.dev/api/generate-content?hl=ja#GroundingMetadata) フィールドが含まれます。
-この構造化データは、主張を検証し、アプリケーションで豊富な引用エクスペリエンスを構築するために不可欠であり、サービスの使用要件を満たすためにも必要です。
+Cuando una respuesta se fundamenta correctamente con los datos de Google Maps, la respuesta
+incluye un [`groundingMetadata`](https://ai.google.dev/api/generate-content?hl=es-419#GroundingMetadata) campo.
+Estos datos estructurados son esenciales para verificar las afirmaciones y crear una experiencia de citas enriquecida en tu aplicación, así como para cumplir con los requisitos de uso del servicio.
 
 ### JSON
 
@@ -245,23 +248,23 @@ Google マップによるグラウンディングは、Gemini API を介して�
 }
 ```
 
-Gemini API は、
-[`groundingMetadata`](https://ai.google.dev/api/generate-content?hl=ja#GroundingMetadata) とともに次の情報を返します。
+La API de Gemini devuelve la siguiente información con la
+[`groundingMetadata`](https://ai.google.dev/api/generate-content?hl=es-419#GroundingMetadata):
 
-- `groundingChunks`: `maps` ソース（`uri`、`placeId`、`title`）を含むオブジェクトの配列。
-- `groundingSupports`: モデルのレスポンス テキストを `groundingChunks` のソースに接続するチャンクの配列。各チャンクは、テキスト スパン（`startIndex` と `endIndex` で定義）を 1 つ以上の `groundingChunkIndices` にリンクします。これは、インライン引用を作成するための鍵となります。
+- `groundingChunks`: Es un array de objetos que contiene las fuentes `maps` (`uri`, `placeId` y `title`).
+- `groundingSupports`: Es un array de fragmentos para conectar el texto de respuesta del modelo con las fuentes en `groundingChunks`. Cada fragmento vincula un intervalo de texto (definido por `startIndex` y `endIndex`) a uno o más `groundingChunkIndices`. Esta es la clave para crear citas intercaladas.
 
-テキストでインライン引用をレンダリングする方法を示すコード スニペットについては、[Google 検索によるグラウンディングのドキュメントの
-例](https://ai.google.dev/gemini-api/docs/google-search?hl=ja#attributing_sources_with_inline_citations)
-をご覧ください。
+Para obtener un fragmento de código que muestre cómo renderizar citas intercaladas en texto, consulta [el
+ejemplo](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419#attributing_sources_with_inline_citations)
+en la documentación de Fundamentación con la Búsqueda de Google.
 
-## ユースケース
+## Casos de uso
 
-Google マップによるグラウンディングは、さまざまな位置情報認識ユースケースをサポートしています。次の例は、さまざまなプロンプトとパラメータで Google マップによるグラウンディングを活用する方法を示しています。Google マップのグラウンディングされた検索結果の情報は、実際の状況と異なる場合があります。
+La Fundamentación con Google Maps admite una variedad de casos de uso basados en la ubicación. En los siguientes ejemplos, se muestra cómo diferentes instrucciones y parámetros pueden aprovechar la Fundamentación con Google Maps. La información de los Resultados Fundamentados de Google Maps puede diferir de las condiciones reales.
 
-### 場所固有の質問の処理
+### Cómo controlar preguntas específicas de un lugar
 
-特定の場所について詳細な質問をして、Google ユーザーのレビューやその他のマップデータに基づいて回答を得ます。
+Haz preguntas detalladas sobre un lugar específico para obtener respuestas basadas en las opiniones de los usuarios de Google y otros datos de Maps.
 
 ### Python
 
@@ -367,9 +370,9 @@ curl -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
 }'
 ```
 
-### 位置情報に基づくパーソナライズの提供
+### Cómo proporcionar personalización basada en la ubicación
 
-ユーザーの好みや特定の地理的エリアに合わせてカスタマイズされたおすすめ情報を取得します。
+Obtén recomendaciones adaptadas a las preferencias de un usuario y a un área geográfica específica.
 
 ### Python
 
@@ -471,9 +474,9 @@ curl -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
 }'
 ```
 
-### 旅程の計画のサポート
+### Cómo ayudar con la planificación de itinerarios
 
-さまざまな場所の経路と情報を含む複数日間のプランを生成します。旅行アプリに最適です。
+Genera planes de varios días con instrucciones sobre cómo llegar y datos sobre varias ubicaciones, ideales para aplicaciones de viajes.
 
 ### Python
 
@@ -577,74 +580,74 @@ curl -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
 }'
 ```
 
-## サービスの使用要件
+## Requisitos de uso del servicio
 
-このセクションでは、Google マップによるグラウンディングのサービス使用要件について説明します。
+En esta sección, se describen los requisitos de uso del servicio para la Fundamentación con Google Maps.
 
-### Google マップのソースの使用についてユーザーに通知する
+### Informa al usuario sobre el uso de fuentes de Google Maps
 
-Google マップのグラウンディングされた結果ごとに、各レスポンスをサポートするソースが `groundingChunks` で提供されます。次のメタデータも返されます。
+Con cada resultado fundamentado de Google Maps, recibirás fuentes en `groundingChunks` que admiten cada respuesta. También se devuelven los siguientes metadatos:
 
-- ソースの URI
-- タイトル
+- URI de origen
+- título
 - ID
 
-Google マップによるグラウンディングの結果を表示する場合は、関連する Google マップのソースを指定し、ユーザーに次の情報を通知する必要があります。
+Cuando presentes resultados de la Fundamentación con Google Maps, debes especificar las fuentes de Google Maps asociadas y comunicarles a los usuarios lo siguiente:
 
-- Google マップのソースは、ソースがサポートする生成コンテンツの直後に示す必要があります。この生成されたコンテンツは、Google マップによるグラウンディングの結果ともいいます。
-- Google マップのソースは、1 回のユーザー操作で表示できる必要があります。
+- Las fuentes de Google Maps deben seguir inmediatamente el contenido generado que admiten las fuentes. Este contenido generado también se conoce como Resultado Fundamentado de Google Maps.
+- Las fuentes de Google Maps deben poder verse en una interacción del usuario.
 
-### Google マップへのリンクを含む Google マップのソースを表示する
+### Muestra las fuentes de Google Maps con vínculos de Maps
 
-`groundingChunks` と `grounding_chunks.maps.placeAnswerSources.reviewSnippets` の各ソースについて、次の要件に沿ってリンクのプレビューを生成する必要があります。
+Para cada fuente en `groundingChunks` y en `grounding_chunks.maps.placeAnswerSources.reviewSnippets`, se debe generar una vista previa del vínculo según estos requisitos:
 
-- Google マップのテキスト
-  [帰属表示のガイドライン](#maps-attribution-guidelines)に従って、各ソースを Google マップに帰属させます。
-- レスポンスで提供されたソースのタイトルを表示します。
-- レスポンスの `uri` または `googleMapsUri` を使用してソースにリンクします。
+- Atribuye cada fuente a Google Maps según los lineamientos de atribución de texto de Google Maps
+  [attribution guidelines](#maps-attribution-guidelines).
+- Muestra el título de la fuente que se proporciona en la respuesta.
+- Vincula a la fuente con la `uri` o `googleMapsUri` de la respuesta.
 
-次の画像は、ソースと Google マップのリンクを表示するための最小要件を示しています。
+En estas imágenes, se muestran los requisitos mínimos para mostrar las fuentes y los vínculos de Maps.
 
-![ソースが表示された回答を含むプロンプト](https://ai.google.dev/static/gemini-api/docs/images/maps/sources-expanded.jpg?hl=ja)
+![Instrucción con respuesta que muestra las fuentes](https://ai.google.dev/static/gemini-api/docs/images/maps/sources-expanded.jpg?hl=es-419)
 
-ソースのビューは折りたたむことができます。
+Puedes contraer la vista de las fuentes.
 
-![プロンプトと回答、ソースが折りたたまれた状態](https://ai.google.dev/static/gemini-api/docs/images/maps/sources-collapsed.jpg?hl=ja)
+![Instrucción con la respuesta y las fuentes contraídas](https://ai.google.dev/static/gemini-api/docs/images/maps/sources-collapsed.jpg?hl=es-419)
 
-省略可: リンクのプレビューを次のような追加コンテンツで強化します。
+Opcional: Mejora la vista previa del vínculo con contenido adicional, como el siguiente:
 
-- Google マップのテキスト帰属表示の前に [Google マップのファビコン](https://www.google.com/images/branding/product/ico/web_maps_icon_32dp.ico?hl=ja)
-  が挿入されます。
-- ソース URL（`og:image`）の写真。
+- Se inserta un [favicon de Google Maps](https://www.google.com/images/branding/product/ico/web_maps_icon_32dp.ico?hl=es-419)
+  antes de la atribución de texto de Google Maps.
+- Una foto de la URL de origen (`og:image`).
 
-Google マップのデータ プロバイダとその
-ライセンス条項について詳しくは、
-[Google マップと Google Earth の法的通知](https://www.google.com/help/legalnotices_maps/?hl=ja)をご覧ください。
+Para obtener más información sobre algunos de nuestros proveedores de datos de Google Maps y sus
+condiciones de licencia, consulta los
+[avisos legales de Google Maps y Google Earth](https://www.google.com/help/legalnotices_maps/?hl=es-419).
 
-### Google マップのテキストでの帰属表示に関するガイドライン
+### Lineamientos de atribución de texto de Google Maps
 
-テキストでソースを Google マップに帰属させる場合は、次のガイドラインに従ってください。
+Cuando atribuyas fuentes a Google Maps en texto, sigue estos lineamientos:
 
-- Google マップのテキストを変更しないでください。
-  - Google マップの大文字と小文字を変更しないでください。
-  - Google マップを複数行に折り返さないでください。
-  - Google マップを他の言語にローカライズしないでください。
-  - HTML 属性 translate="no" を使用して、ブラウザが Google マップを翻訳しないようにします。
-- 次の表に示すように、Google マップのテキストのスタイルを設定します。
+- No modifiques el texto de Google Maps de ninguna manera:
+  - No cambies el uso de mayúsculas y minúsculas de Google Maps.
+  - No dividas Google Maps en varias líneas.
+  - No localices Google Maps en otro idioma.
+  - Impide que los navegadores traduzcan Google Maps con el atributo HTML translate="no".
+- Aplica el estilo al texto de Google Maps como se describe en la siguiente tabla:
 
-| プロパティ | スタイル |
+| Propiedad | Estilo |
 | --- | --- |
-| `Font family` | Roboto。フォントの読み込みは任意です。 |
-| `Fallback font family` | プロダクトですでに使用されている Sans Serif の本文フォント、またはデフォルトのシステム フォントを呼び出すための Sans-Serif |
-| `Font style` | 標準 |
+| `Font family` | Roboto. La carga de la fuente es opcional. |
+| `Fallback font family` | Cualquier fuente de cuerpo sans serif que ya se use en tu producto o "Sans-Serif" para invocar la fuente predeterminada del sistema |
+| `Font style` | Normal |
 | `Font weight` | 400 |
-| `Font color` | 白、黒（#1F1F1F）、グレー（#5E5E5E）。背景に対してアクセシビリティの高い（4.5:1）コントラストを維持します。 |
-| `Font size` | - 最小フォントサイズ: 12sp - 最大フォントサイズ: 16sp - sp について詳しくは、[マテリアル デザインのウェブサイト](https://m3.material.io/styles/typography/type-scale-tokens#3f4488e7-3b74-45b0-a143-9d6afa4d62dc)でフォントサイズの単位をご覧ください。 |
-| `Spacing` | 標準 |
+| `Font color` | Blanco, negro (#1F1F1F) o gris (#5E5E5E). Mantén un contraste accesible (4.5:1) con el fondo. |
+| `Font size` | - Tamaño de fuente mínimo: 12 sp - Tamaño de fuente máximo: 16 sp - Para obtener información sobre sp, consulta Unidades de tamaño de fuente en el [sitio web de Material Design](https://m3.material.io/styles/typography/type-scale-tokens#3f4488e7-3b74-45b0-a143-9d6afa4d62dc). |
+| `Spacing` | Normal |
 
-#### CSS の例
+#### Ejemplo de CSS
 
-次の CSS は、白または明るい背景に適切なタイポグラフィ スタイルと色で Google マップをレンダリングします。
+El siguiente código CSS renderiza Google Maps con el estilo tipográfico y el color adecuados sobre un fondo blanco o claro.
 
 ### CSS
 
@@ -663,90 +666,89 @@ color: #5e5e5e;
 }
 ```
 
-### プレイス ID とレビュー ID
+### ID de lugar y ID de opinión
 
-Google マップのデータには、プレイス ID とレビュー ID が含まれます。次のレスポンス データをキャッシュに保存してエクスポートできます。
+Los datos de Google Maps incluyen el ID de lugar y el ID de opinión. Puedes almacenar en caché, almacenar y exportar los siguientes datos de respuesta:
 
 - `placeId`
 - `reviewId`
 
-Google マップによるグラウンディングの利用規約に定められているキャッシュ保存の制限は適用されません。
+No se aplican las restricciones contra el almacenamiento en caché en las Condiciones de la Fundamentación con Google Maps.
 
-### 禁止される行為と地域
+### Actividad y territorio prohibidos
 
-Google マップによるグラウンディングには、安全で信頼性の高いプラットフォームを維持するため、特定のコンテンツとアクティビティに対する追加の制限があります。利用規約の使用
-制限に加えて、[次の制限が適用されます](https://ai.google.dev/gemini-api/terms?hl=ja#grounding-with-google-maps)。
+La Fundamentación con Google Maps tiene restricciones adicionales para cierto contenido y actividades para mantener una plataforma segura y confiable. Además de las restricciones de uso
+en las [Condiciones](https://ai.google.dev/gemini-api/terms?hl=es-419#grounding-with-google-maps), debes tener en cuenta lo siguiente:
 
-- 緊急対応サービスなど、高リスクな活動に Google マップによるグラウンディングを使用することはできません。
-- 禁止されている地域で Google マップによるグラウンディングを提供するアプリケーションを配布または販売することはできません。詳しくは、
-  [Google Maps Platform の禁止地域](https://cloud.google.com/maps-platform/terms/maps-prohibited-territories?hl=ja)をご覧ください。
-  禁止地域のリストは随時更新される可能性があります。
+- No usarás la Fundamentación con Google Maps para actividades de alto riesgo, incluidos los servicios de respuesta ante emergencias.
+- No distribuirás ni comercializarás tu aplicación que ofrece la Fundamentación con Google Maps en un Territorio Prohibido. Para obtener más información, consulta
+  [Territorios prohibidos de Google Maps Platform](https://cloud.google.com/maps-platform/terms/maps-prohibited-territories?hl=es-419).
+  Es posible que la lista de Territorios Prohibidos se actualice de forma periódica.
 
-## ベスト プラクティス
+## Prácticas recomendadas
 
-- **ユーザーの位置情報を提供する:** 最も関連性の高いパーソナライズされたレスポンスを得るには、ユーザーの位置情報がわかっている場合は、`googleMapsGrounding` 構成に常に `user_location`（緯度と経度）を含めます。
-- **エンドユーザーに通知する:** ツールが有効になっている場合は特に、Google マップのデータがクエリの回答に使用されていることをエンドユーザーに明確に通知します。
-- **レイテンシをモニタリングする:** 会話型アプリケーションの場合は、スムーズなユーザー エクスペリエンスを維持するために、グラウンディングされたレスポンスの P95 レイテンシが許容可能なしきい値内にとどまるようにします。
-- **不要な場合はオフにする:** Google マップによるグラウンディングはデフォルトでオフになっています。パフォーマンスと費用を最適化するには、クエリに
-  明確な地理的コンテキストがある場合にのみ有効にします（`"tools": [{"googleMaps": {}}]`）。
+- **Proporciona la ubicación del usuario:** Para obtener las respuestas más pertinentes y personalizadas, siempre incluye la `user_location` (latitud y longitud) en tu configuración de `googleMapsGrounding` cuando se conozca la ubicación del usuario.
+- **Informa a los usuarios finales:** Informa claramente a tus usuarios finales que se usan los datos de Google Maps para responder sus consultas, en especial cuando la herramienta está habilitada.
+- **Supervisa la latencia:** En el caso de las aplicaciones conversacionales, asegúrate de que la latencia P95 para las respuestas fundamentadas permanezca dentro de los umbrales aceptables para mantener una experiencia del usuario fluida.
+- **Desactiva la opción cuando no sea necesario:** La Fundamentación con Google Maps está desactivada de forma predeterminada. Solo habilítala (`"tools": [{"googleMaps": {}}]`) cuando una consulta tenga un
+  contexto geográfico claro para optimizar el rendimiento y el costo.
 
-## 制限事項
+## Limitaciones
 
-- **地理的な範囲:** Google マップによるグラウンディングはグローバルで利用できます
-- **モデルのサポート:** [サポートされているモデル](#supported-models)のセクションをご覧ください。
-- **マルチモーダル入力/出力:** Google マップによるグラウンディングは、現在、テキスト以外のマルチモーダル入力または出力をサポートしていません。
-- **デフォルトの状態:** Google マップによるグラウンディング ツールはデフォルトでオフになっています。
-  API リクエストで明示的に有効にする必要があります。
+- **Alcance geográfico:** La Fundamentación con Google Maps está disponible a nivel global.
+- **Compatibilidad con modelos:** Consulta la sección [Modelos compatibles](#supported-models).
+- **Entradas y salidas multimodales:** Actualmente, la Fundamentación con Google Maps no admite entradas ni salidas multimodales más allá del texto.
+- **Estado predeterminado:** La herramienta Fundamentación con Google Maps está desactivada de forma predeterminada.
+  Debes habilitarla de forma explícita en tus solicitudes a la API.
 
-## 料金とレート制限
+## Precios y límites de frecuencia
 
-Google マップによるグラウンディングの料金は、モデルの世代によって異なります。
+Los precios de la Fundamentación con Google Maps varían según la generación del modelo:
 
-- **Gemini 3 以降のモデル:** モデルが実行する検索クエリごとにプロジェクトに課金されます。Gemini 3 以降のすべてのモデルで月あたり 5,000 件のリクエストが無料で、その後は**検索クエリ 1,000 件あたり$14** です。1 回の検索プロンプト（モデルへの API リクエスト）で、必要な情報を見つけるためにモデルが複数の検索クエリを実行する場合があります。これらのクエリはそれぞれ、ツールの課金対象の使用としてカウントされます。
-- **Gemini 2.5 以前のモデル:** プロジェクトには検索プロンプトごとに課金されます（グラウンディングされたプロンプト 1,000 件あたり $25）。リクエストは、プロンプトが少なくとも 1 つの Google マップのグラウンディングされた検索結果を正常に返した場合にのみ課金されます。モデルがその結果を取得するために内部で実行した個々の検索クエリの数に関係なく課金されます。
+- **Modelos de Gemini 3 y versiones posteriores:** Se factura tu proyecto por cada consulta de búsqueda que el modelo decida ejecutar, con 5,000 solicitudes gratuitas por mes compartidas en todos los modelos de Gemini 3 y versiones posteriores, y luego **USD 14 por cada 1,000 consultas de búsqueda**. Una sola instrucción de búsqueda (tu solicitud a la API del modelo) puede hacer que el modelo ejecute varias consultas de búsqueda para encontrar la información necesaria. Cada una de estas consultas cuenta como un uso facturable de la herramienta.
+- **Modelos de Gemini 2.5 y versiones anteriores:** Se factura tu proyecto por instrucción de búsqueda (USD 25 por cada 1,000 instrucciones fundamentadas). Una solicitud solo se factura si la instrucción devuelve correctamente al menos un resultado fundamentado de Google Maps, independientemente de la cantidad de consultas de búsqueda individuales que el modelo realizó internamente para obtener ese resultado.
 
-Google マップによるグラウンディングの割り当ては、通常、基盤となる Gemini モデルのレート制限に沿っています。料金の詳細については、[Gemini API
-の料金ページ](https://ai.google.dev/gemini-api/docs/pricing?hl=ja)をご覧ください。
+Por lo general, la cuota para la Fundamentación con Google Maps se alinea con los límites de frecuencia del modelo de Gemini subyacente. Para obtener información detallada sobre los precios, consulta la [página de precios
+de la API de Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419).
 
-## サポートされているモデル
+## Modelos compatibles
 
-次のモデルは Google マップによるグラウンディングをサポートしています。
+Los siguientes modelos admiten la Fundamentación con Google Maps:
 
-| モデル | Google マップによるグラウンディング |
+| Modelo | Fundamentación con Google Maps |
 | --- | --- |
-| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=ja) | ✔️ |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=ja) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ja) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ja) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ja) | ✔️ |
-| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ja) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ja) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ja) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ja) | ✔️ |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=es-419) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=es-419) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=es-419) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=es-419) | ✔️ |
+| [Versión preliminar de Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=es-419) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=es-419) | ✔️ |
+| [Versión preliminar de Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=es-419) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=es-419) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=es-419) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=es-419) | ✔️ |
 
-## サポートされているツールの組み合わせ
+## Combinaciones de herramientas compatibles
 
-Google マップによるグラウンディングは、
-[Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)（
-Gemini 3.5 Flash-Lite 以降のモデルでサポート）などの他の組み込みツールと組み合わせて、より複雑なユースケースに対応できます。
-Gemini 3 モデルでは、これらの組み込みツールとカスタムツール（関数呼び出し）を組み合わせることもできます。詳しくは、
-[ツールの組み合わせ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ja)のページをご覧ください。
+Puedes usar la Fundamentación con Google Maps con otras herramientas integradas, como
+[la Fundamentación con la Búsqueda de Google](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419) (compatible con
+Gemini 3.5 Flash-Lite y modelos posteriores), para potenciar casos de uso más complejos.
+Los modelos de Gemini 3 también admiten la combinación de estas herramientas integradas con herramientas personalizadas (llamadas a funciones). Obtén más información en la
+[página de combinaciones de herramientas](https://ai.google.dev/gemini-api/docs/tool-combination?hl=es-419).
 
-## 次のステップ
+## ¿Qué sigue?
 
-- [Gemini API
-  クックブック](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=ja)で Google 検索によるグラウンディングを試す。
-- 利用可能な他の[ツール](https://ai.google.dev/gemini-api/docs/tools?hl=ja)について学習する。
-- 責任ある AI のベスト プラクティスと Gemini API の安全
-  フィルタの詳細については、[安全設定ガイド](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ja)をご覧ください。
+- Prueba la [Fundamentación con la Búsqueda de Google en el libro de recetas de la API de Gemini
+  Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=es-419).
+- Obtén información sobre otras [herramientas disponibles](https://ai.google.dev/gemini-api/docs/tools?hl=es-419).
+- Para obtener más información sobre las prácticas recomendadas de IA responsable y los filtros de seguridad de la API de Gemini, consulta [la guía de configuración de seguridad](https://ai.google.dev/gemini-api/docs/safety-settings?hl=es-419).
 
-フィードバックを送信
+Enviar comentarios
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-最終更新日 2026-10-15 UTC。
+Última actualización: 2026-10-15 (UTC)
 
-ご意見をお聞かせください
+¿Quieres brindar más información?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-15 UTC。"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-15 (UTC)"],[],[]]

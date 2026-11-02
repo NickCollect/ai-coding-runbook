@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=ar
-fetched_at: 2026-10-26T05:47:54.342242+00:00
-title: "\u0646\u0645\u0648\u0630\u062c \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0643\u0645\u0628\u064a\u0648\u062a\u0631 \u0641\u064a Gemini 2.5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=ja
+fetched_at: 2026-11-02T07:25:00.919730+00:00
+title: "Gemini 2.5 \u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u4f7f\u7528\u30e2\u30c7\u30eb \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫Gemini 4 Argon متاح الآن. [جرِّب هذه الميزة](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ar).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-إرسال ملاحظات
+フィードバックを送信
 
-# نموذج استخدام الكمبيوتر في Gemini 2.5
+# Gemini 2.5 コンピュータ使用モデル
 
-نموذج قدرات مستند إلى الذكاء الاصطناعي الوكيل ومصمّم للتفاعل المباشر مع الواجهات، ما يتيح لـ Gemini إدراك البيئات الرقمية والتنقّل فيها. يُعدّ &quot;استخدام الكمبيوتر&quot; في Gemini 2.5 الأنسب لتنفيذ المهام التالية تلقائيًا في المتصفّح، ومهام البرامج المتعددة الخطوات، واختبار واجهة المستخدم الذي يتطلّب استدلالاً مرئيًا وتحكّمًا دقيقًا في المؤشر.
+直接的なインターフェース操作用に設計されたエージェント機能モデル。Gemini がデジタル環境を認識して操作できるようにします。Gemini 2.5 のコンピュータ使用は、ブラウザの自動化、複数ステップのソフトウェア タスク、視覚的な推論と正確なカーソル制御を必要とする UI テストに最適です。
 
-## الوثائق
+## ドキュメント
 
-انتقِل إلى صفحة [استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar) للاطّلاع على تغطية كاملة للميزات والإمكانات.
+機能と性能の詳細については、[コンピュータの使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja)ページをご覧ください。
 
 ## gemini-2.5-computer-use-preview-10-2025
 
-| الموقع | الوصف |
+| プロパティ | 説明 |
 | --- | --- |
-| رمز النموذج id\_card | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
-| saveأنواع البيانات المتوافقة | **الإدخال**  صورة، نص  **الناتج**  نص |
-| token\_autoحدود الرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لعدد الرموز المميزة التي يمكن إدخالها**  128,000  **الحدّ الأقصى لرموز الناتج المميزة**  64,000 |
-| 123Versions | يمكنك الاطّلاع على [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - إيقاف التشغيل: `gemini-2.5-computer-use-preview-10-2025` |
-| calendar\_monthآخر تعديل | أكتوبر 2025 |
+| id\_cardモデルコード | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
+| saveサポートされるデータタイプ | **入力**  画像、テキスト  **出力**  テキスト |
+| token\_autoトークンの上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力トークンの上限**  128,000  **出力トークンの上限**  64,000 |
+| 123 バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models?hl=ja#model-versions)をご覧ください。  - シャットダウン: `gemini-2.5-computer-use-preview-10-2025` |
+| calendar\_month最終更新 | 2025 年 10 月 |
 
-إرسال ملاحظات
+フィードバックを送信
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-تاريخ التعديل الأخير: 2026-10-01 (حسب التوقيت العالمي المتفَّق عليه)
+最終更新日 2026-10-26 UTC。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+ご意見をお聞かせください
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-10-01 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-26 UTC。"],[],[]]

@@ -1,49 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=ja
-fetched_at: 2026-10-26T05:45:36.828670+00:00
-title: "\u52d5\u753b\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=tr
+fetched_at: 2026-11-02T07:17:44.957073+00:00
+title: "Video anlama \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
+Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
 
-フィードバックを送信
+Geri bildirim gönderin
 
-# 動画理解
+# Video anlama
 
-> 動画生成については、[Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=ja) ガイドをご覧ください。
+> Video üretimi hakkında bilgi edinmek için [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=tr) rehberine bakın.
 
-Gemini モデルは動画を処理できるため、これまでドメイン固有のモデルが必要だった多くの最先端のデベロッパー ユースケースを実現できます。
-Gemini
-のビジョン機能には、動画の説明、セグメント化、情報抽出、動画コンテンツに関する質問への回答、動画内の特定のタイムスタンプの参照などがあります。
+Gemini modelleri videoları işleyebilir. Bu sayede, geçmişte alana özgü modeller gerektiren birçok ileri düzey geliştirici kullanım alanı mümkün hale gelir.
+Gemini'ın bazı görme özellikleri arasında videoları açıklama, segmentlere ayırma ve videolardan bilgi ayıklama, video içeriğiyle ilgili soruları yanıtlama ve videodaki belirli zaman damgalarına başvurma yer alır.
 
-Gemini に動画を入力するには、次の方法があります。
+Gemini'a giriş olarak videoları aşağıdaki şekillerde sağlayabilirsiniz:
 
-| 入力方法 | 最大サイズ | おすすめの使用例 |
+| Giriş yöntemi | Maks. boyut | Önerilen kullanım alanı |
 | --- | --- | --- |
-| [Files API](#upload-video) | 20 GB（有料） / 2 GB（無料） | 大きなファイル（100 MB 以上）、長い動画（10 分以上）、再利用可能なファイル。 |
-| [Cloud Storage 登録](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja#registration) | 2 GB（ファイルごと、ストレージ制限なし） | 大きなファイル（100 MB 以上）、長い動画（10 分以上）、永続的で再利用可能なファイル。 |
-| [インライン データ](#inline-video) | 100 MB 未満 | 小さなファイル（100 MB 未満）、短い時間（1 分未満）、1 回限りの入力。 |
-| [YouTube の URL](#youtube) | なし | 公開 YouTube 動画。 |
+| [File API](#upload-video) | 20 GB (ücretli) / 2 GB (ücretsiz) | Büyük dosyalar (100 MB+), uzun videolar (10 dk+), yeniden kullanılabilir dosyalar. |
+| [Cloud Storage kaydı](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr#registration) | 2 GB (dosya başına, depolama alanı sınırı yok) | Büyük dosyalar (100 MB'tan büyük), uzun videolar (10 dakikadan uzun), kalıcı ve yeniden kullanılabilir dosyalar. |
+| [Satır içi veriler](#inline-video) | < 100MB | Küçük dosyalar (<100 MB), kısa süre (<1 dk), tek seferlik girişler. |
+| [YouTube URL'leri](#youtube) | Yok | Herkese açık YouTube videoları |
 
-> **注:** [Files API](#upload-video) は、ほとんどのユースケースにおすすめです。特に 100 MB を超えるファイルの場合や、複数のリクエストでファイルを再利用する場合は、Files API を使用してください。
+> **Not:** Çoğu kullanım alanında, özellikle 100 MB'tan büyük dosyalar için veya dosyayı birden fazla istekte yeniden kullanmak istediğinizde [File API](#upload-video) önerilir.
 
-外部 URL や Google Cloud に保存されたファイルの使用など、他のファイル入力方法については、
-[ファイル入力方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja)ガイドをご覧ください。
+Harici URL'leri veya Google Cloud'da depolanan dosyaları kullanma gibi diğer dosya giriş yöntemleri hakkında bilgi edinmek için [Dosya giriş yöntemleri](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr) kılavuzuna bakın.
 
-### 動画ファイルをアップロードする
+### Video dosyası yükleme
 
-次のコードは、サンプル動画をダウンロードし、[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用してアップロードし、
-処理が完了するまで待機してから、アップロードされたファイル参照を使用して
-動画を要約します。
+Aşağıdaki kod, örnek bir videoyu indirir, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi kullanarak yükler, işlenmesini bekler ve ardından videoyu özetlemek için yüklenen dosya referansını kullanır.
 
 ### Python
 
@@ -168,19 +164,18 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 jq -r ".candidates[].content.parts[].text" response.json
 ```
 
-トークンの効率とパフォーマンスを最適化するには、
-[エージェント型動画処理](#agentic-video-understanding)の使用を検討してください。
+Jeton verimliliğini ve performansını optimize etmek için [temsilci tabanlı video işlemeyi](#agentic-video-understanding) kullanabilirsiniz.
 
-リクエストの合計サイズ（ファイル、テキスト プロンプト、システム指示などを含む）が 20 MB を超える場合、動画の再生時間が長い場合、または複数のプロンプトで同じ動画を使用する場合は、必ず Files API を使用してください。Files API は、動画ファイル形式を直接受け付けます。
+Toplam istek boyutu (dosya, metin istemi, sistem talimatları vb. dahil) 20 MB'tan büyükse, video süresi uzunsa veya aynı videoyu birden fazla istemde kullanmak istiyorsanız her zaman Files API'yi kullanın.
+File API, video dosyası biçimlerini doğrudan kabul eder.
 
-メディア ファイルの操作の詳細については、
-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) をご覧ください。
+Medya dosyalarıyla çalışma hakkında daha fazla bilgi edinmek için [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'ye bakın.
 
-### 動画データをインラインで渡す
+### Video verilerini satır içi olarak iletme
 
-Files API を使用して動画ファイルをアップロードする代わりに、リクエストで小さな動画を `generateContent` に直接渡すことができます。これは、リクエストの合計サイズが 20 MB 未満の短い動画に適しています。
+Dosya API'sini kullanarak video dosyası yüklemek yerine, daha küçük videoları doğrudan `generateContent` isteğinde iletebilirsiniz. Bu yöntem, toplam istek boyutu 20 MB'tan küçük olan daha kısa videolar için uygundur.
 
-インライン動画データの提供例を次に示します。
+Satır içi video verileri sağlama örneğini aşağıda bulabilirsiniz:
 
 ### Python
 
@@ -265,9 +260,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
     }' 2> /dev/null
 ```
 
-### YouTube の URL を渡す
+### YouTube URL'lerini iletme
 
-リクエストの一部として、YouTube の URL を Gemini API に直接渡すことができます。
+YouTube URL'lerini, isteğinizin bir parçası olarak doğrudan Gemini API'ye aşağıdaki şekilde iletebilirsiniz:
 
 ### Python
 
@@ -373,36 +368,33 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
     }' 2> /dev/null
 ```
 
-**制限事項:**
+**Sınırlamalar:**
 
-- 無料枠の場合、1 日にアップロードできる YouTube 動画は 8 時間までです。
-- 有料枠の場合、動画の長さに基づく制限はありません。
-- Gemini 2.5 より前のモデルでは、リクエストごとにアップロードできる動画は 1 つのみです。Gemini 2.5 以降のモデルでは、リクエストごとに最大 10 個の動画をアップロードできます。
-- アップロードできるのは公開動画のみです（非公開動画や限定公開動画はアップロードできません）。
+- Ücretsiz katmanda, günde en fazla 8 saatlik YouTube videosu yükleyebilirsiniz.
+- Ücretli katmanda video uzunluğuna dayalı bir sınır yoktur.
+- Gemini 2.5'ten önceki modellerde, istek başına yalnızca 1 video yükleyebilirsiniz. Gemini 2.5 ve sonraki modellerde, istek başına en fazla 10 video yükleyebilirsiniz.
+- Yalnızca herkese açık videoları yükleyebilirsiniz (gizli veya liste dışı videoları yükleyemezsiniz).
 
-## エージェント型動画理解
+## Temsilci tabanlı video yorumlama
 
-デフォルトでは、動画入力は Gemini 4 を含むすべてのモデルで静的処理（1 FPS でフレームを抽出）を使用します。
-Gemini 4 Argon、3.8 Flash、3.6 Flash、3.5 Flash Lite モデルは、
-**エージェント型動画理解**もサポートしています。これは、モデルが動画
-タイムラインを動的に探索し、プロンプトに基づいてトランスクリプトを選択的に検査し、フレーム
-レートと解像度をその場で適応的に調整するオプトインモードです。
+Varsayılan olarak, video girişleri Gemini 4 dahil tüm modellerde statik işlemeyi (1 FPS'de kare çıkarma) kullanır.
+Gemini 4 Argon, 3.8 Flash, 3.6 Flash ve 3.5 Flash Lite modelleri, **temsilci video anlama** özelliğini de destekler. Bu özellik, modelin video zaman çizelgesini dinamik olarak keşfettiği, transkriptleri seçerek incelediği ve kare hızları ile çözünürlüğü isteme göre anında uyarlayarak ayarladığı bir etkinleştirme modudur.
 
-| **Mode** | **説明** | **サポートモデル** |
+| **Mod** | **Açıklama** | **Desteklenen modeller** |
 | --- | --- | --- |
-| **静的** （デフォルト） | 固定レート（1 FPS）でフレームを抽出し、1 回のパスでコンテキストに配置します。Gemini 4 を含むすべての Gemini モデルのデフォルト。 | すべての Gemini モデル |
-| **エージェント型ツール** | モデルは動画タイムラインを動的に移動し、プロンプトに基づいて必要なコンテンツのみを読み込みます。トークン効率が最大 88% 向上し、長尺コンテンツの品質が約 7% 向上します。 | Gemini 4 Argon、3.8 Flash、3.6 Flash、3.5 Flash Lite |
+| **Statik** (varsayılan) | Kareleri sabit bir hızda (1 FPS) çıkarır ve tek bir geçişte bağlama yerleştirir. Gemini 4 dahil olmak üzere tüm Gemini modellerinde varsayılan olarak etkindir. | Tüm Gemini modelleri |
+| **Temsilci tabanlı çözümler** | Model, video zaman çizelgesinde dinamik olarak gezinir ve isteme göre yalnızca ihtiyaç duyduğu içeriği yükler. Uzun içeriklerde% 88'e kadar daha fazla jeton verimliliği ve yaklaşık% 7 daha yüksek kalite. | Gemini 4 Argon, 3.8 Flash, 3.6 Flash, 3.5 Flash Lite |
 
-### 処理モードを選択する
+### İşleme modu seçme
 
-動画の長さとクエリタイプに一致する処理モードを選択します。
+Videonuzun uzunluğuna ve sorgu türüne uygun işleme modunu seçin:
 
-- **静的（デフォルト）:** 短いクリップ（5 分未満）、録画全体が関連する広範な動画全体の要約、レイテンシの影響を受けやすいクエリ、クリップ全体のフレームレベルの精度に最適です。短い動画や、動画の大部分を検査する必要がある広範なプロンプトでは、静的処理により、タイムライン ナビゲーションによって発生する追加の思考トークン（`thoughts_token_count`）とツール呼び出しの往復（`tool_use_prompt_token_count`）を回避できます。
-- **エージェント型ツール:** 長尺動画（5 ～ 10 分以上）、針の山から針を探すような検索、特定の瞬間やトピックを対象とするクエリに最適です。モデルは最初にトランスクリプトを検査し、関連するビジュアル セグメントのみをオンデマンドで読み込むため、コンテキスト ウィンドウを埋めることなく、動画入力トークンの使用量を最大 88% 削減できます。
+- **Statik (varsayılan):** Kısa klipler (5 dakikadan kısa), kaydın tamamının alakalı olduğu geniş kapsamlı tam video özetleri, gecikmeye duyarlı sorgular veya klibin tamamında kare düzeyinde hassasiyet için en uygun seçenektir. Kısa videolarda veya videonun büyük bir kısmının incelenmesini gerektiren geniş kapsamlı istemlerde, statik işleme, zaman çizelgesinde gezinmenin neden olduğu ek düşünme jetonlarını (`thoughts_token_count`) ve araç çağrısı gidiş dönüşlerini (`tool_use_prompt_token_count`) önler.
+- **Temsilci:** Uzun videolar (5-10 dakikadan uzun), samanlıkta iğne arama gibi zorlu aramalar veya belirli anları ya da konuları hedefleyen sorgular için idealdir. Model, önce transkriptleri inceler ve yalnızca alakalı görsel segmentleri isteğe bağlı olarak yükler. Bu sayede, bağlam penceresini doldurmadan video giriş jetonu kullanımı% 88'e kadar azaltılır.
 
-> **注:** エージェント型処理に時間がかかる長い動画や複雑なプロンプトの場合は、ストリーミング（`client.models.generate_content_stream`）を使用します。これにより、接続がアクティブな状態に保たれ、中間推論ステップが表示され、接続または認証のタイムアウトが回避されます。
+> **Not:** Ajan işleme süresinin daha uzun sürdüğü uzun videolarda veya karmaşık istemlerde akış özelliğini (`client.models.generate_content_stream`) kullanın. Bu özellik, bağlantıyı etkin tutar, ara akıl yürütme adımlarını gösterir ve bağlantı veya kimlik doğrulama zaman aşımlarını önler.
 
-### 処理モードを設定する
+### İşleme modunu ayarlama
 
 ### Python
 
@@ -518,22 +510,22 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-> **注:** エージェント型処理が使用されたことを確認するには、`response.candidates[0].content.parts` を確認します。`MEDIA_PROCESSING` ツールタイプの `tool_call` パーツと `tool_response` パーツが存在する場合は、モデルが動画を動的に移動したことを示します。
+> **Not:** Temsilci tabanlı işlemenin kullanıldığını doğrulamak için `response.candidates[0].content.parts` öğesini inceleyin. `MEDIA_PROCESSING` araç türüne sahip `tool_call` ve `tool_response` bölümlerinin varlığı, modelin videoda dinamik olarak gezindiğini gösterir.
 
-> **注:** 他のサーバーサイド ツール（Google 検索や URL コンテキストなど）とは異なり、エージェント型動画では、ツール呼び出しと結果を返したりストリーミングしたりするために、`ToolConfig` で `include_server_side_tool_invocations=True` を設定する必要はありません。動画ナビゲーションの `tool_call` パーツと `tool_response` パーツは、入力パーツに `media_processing="AGENTIC"` が設定されている場合に自動的に返されます。
+> **Not:** Diğer sunucu tarafı araçların (ör. Google Arama veya URL Bağlamı) aksine, temsilci video için araç çağrılarının ve sonuçların döndürülmesi veya aktarılması amacıyla `ToolConfig` içinde `include_server_side_tool_invocations=True` ayarının yapılması gerekmez. `media_processing="AGENTIC"` herhangi bir giriş parçasında ayarlandığında, video gezinme için `tool_call` ve `tool_response` parçaları otomatik olarak döndürülür.
 
-### レスポンスの構造
+### Yanıt yapısı
 
-エージェント型処理が有効になっている場合、レスポンスには内部ナビゲーション トレースを公開する追加のパーツが含まれます。
+Temsilci tabanlı işleme etkinleştirildiğinde yanıt, dahili gezinme izini gösteren ek bölümler içerir:
 
-- `tool_call` **パーツ** （`tool_type: "MEDIA_PROCESSING"`）: モデルが動画セグメントまたは音声トランスクリプトをリクエストするたびに発行されます。
-- `tool_response` **パーツ** （`tool_type: "MEDIA_PROCESSING"`）: 各読み込みオペレーションの結果。
+- `tool_call` **parts** (`tool_type: "MEDIA_PROCESSING"`): Model, video segmenti veya ses transkripti her istediğinde yayınlanır.
+- `tool_response` **parça** (`tool_type: "MEDIA_PROCESSING"`): her yükleme işleminin sonucu.
 
-これらのパーツを手動で処理したり、返信したりする必要はありません。完全なレスポンスを会話履歴として渡すと、自動的に処理されます。
+Bu bölümleri manuel olarak işlemeniz veya yanıtlamanız gerekmez: Tam yanıtı görüşme geçmişi olarak geri iletin. Bu bölümler otomatik olarak işlenir.
 
-`ThinkingConfig` で `include_thoughts=True` が設定されている場合、推論ステップはツール呼び出し/レスポンス ペアとインターリーブされた `thought: true` パーツとして表示されます。思考が無効になっている場合、思考テキストは省略されますが、ツールパーツは引き続き存在します。
+`include_thoughts=True`, `ThinkingConfig` içinde ayarlanırsa muhakeme adımları, araç çağrısı/yanıt çiftleriyle serpiştirilmiş `thought: true` bölümleri olarak görünür. Düşünceler devre dışı bırakıldığında düşünce metni atlanır ancak araç parçaları gösterilmeye devam eder.
 
-次の例は、ツール呼び出しとレスポンス パーツがインターリーブされたレスポンス ペイロードを示しています。
+Aşağıdaki örnekte, aralıklı araç çağrısı ve yanıt bölümleri içeren yanıt yükü gösterilmektedir:
 
 ```
 {
@@ -589,9 +581,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-### 動画間で処理モードを混在させる
+### Videolarda farklı işleme modlarını kullanma
 
-同じリクエストで、動画パーツごとに異なる処理モードを設定できます。
+Aynı istekteki her video bölümü için farklı işleme modları ayarlayabilirsiniz:
 
 ### Python
 
@@ -724,14 +716,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-## 長い動画にコンテキスト キャッシュを使用する
+## Uzun videolarda bağlamı önbelleğe alma özelliğini kullanma
 
-10 分を超える動画の場合や、同じ動画ファイルに対して複数のリクエストを行う予定がある場合は、[コンテキスト キャッシュ](https://ai.google.dev/gemini-api/docs/caching?hl=ja)を使用して費用を削減し、レイテンシを改善します。コンテキスト
-キャッシュを使用すると、動画を一度処理して、その後のクエリでトークンを再利用できるため、チャット セッションや長尺コンテンツの繰り返し分析に最適です。
+10 dakikadan uzun videolar için veya aynı video dosyasına birden fazla istek göndermeyi planladığınızda maliyetleri düşürmek ve gecikmeyi azaltmak için [bağlam önbelleğe almayı](https://ai.google.dev/gemini-api/docs/caching?hl=tr) kullanın. Bağlam önbelleğe alma, videoyu bir kez işleyip jetonları sonraki sorgular için yeniden kullanmanıza olanak tanır. Bu sayede, sohbet oturumları veya uzun içeriklerin tekrar tekrar analiz edilmesi için idealdir.
 
-## コンテンツ内のタイムスタンプを参照する
+## İçerikteki zaman damgalarına bakın.
 
-`MM:SS` 形式のタイムスタンプを使用して、動画内の特定の時点について質問できます。
+`MM:SS` biçimindeki zaman damgalarını kullanarak videodaki belirli zaman noktaları hakkında soru sorabilirsiniz.
 
 ### Python
 
@@ -793,14 +784,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
     }' 2> /dev/null
 ```
 
-## 動画から詳細な分析情報を抽出する
+## Videodan ayrıntılı analizler çıkarma
 
-Gemini モデルは、**音声ストリームとビジュアル**
-ストリームの両方から情報を処理することで、動画コンテンツを理解するための強力な機能を提供します。これにより、動画で何が起こっているかの説明を生成したり、コンテンツに関する質問に回答したりするなど、豊富な詳細情報を抽出できます。
+Gemini modelleri, hem **ses hem de görsel** akışlardaki bilgileri
+işleyerek video içeriklerini anlamak için güçlü özellikler sunar. Bu sayede, videoda neler olduğuna dair açıklamalar oluşturma ve içeriğiyle ilgili soruları yanıtlama da dahil olmak üzere zengin bir ayrıntı kümesi çıkarabilirsiniz.
 
-ビジュアルな説明の場合、モデルは **1 フレーム/秒** （FPS）のレートで動画をサンプリングします。このデフォルトのサンプリング
-レートはほとんどのコンテンツで適切に機能しますが、動きが速い動画やシーンの切り替えが速い動画では詳細が失われる可能性があります。
-このような動きの多いコンテンツの場合は、[カスタムフレームレートの設定を検討してください](#custom-frame-rate)。
+Görsel açıklamalar için model, videoyu **saniyede 1 kare** (FPS) hızında örnekler. Bu varsayılan örnekleme hızı çoğu içerik için uygundur ancak hızlı hareketlerin veya hızlı sahne değişikliklerinin olduğu videolarda ayrıntıların atlanabileceğini unutmayın.
+Bu tür yüksek hareketli içerikler için [özel bir kare hızı ayarlamayı](#custom-frame-rate) düşünebilirsiniz.
 
 ### Python
 
@@ -863,15 +853,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
     }' 2> /dev/null
 ```
 
-## 動画処理をカスタマイズする
+## Video işlemeyi özelleştirme
 
-Gemini API で、クリッピング間隔を設定するか、カスタム フレームレート
-サンプリングを指定することで、動画処理をカスタマイズできます。これらのカスタマイズ オプション
-は、`"static"` モードで動画を処理する場合にのみサポートされます。
+Kırpma aralıkları ayarlayarak veya özel kare hızı örnekleme sağlayarak Gemini API'de video işlemeyi özelleştirebilirsiniz. Bu özelleştirme seçenekleri yalnızca video `"static"` modunda işlenirken desteklenir.
 
-### クリッピング間隔を設定する
+### Kırpma aralıklarını ayarlama
 
-開始オフセットと終了オフセットで `videoMetadata` を指定すると、動画をクリップできます。
+Başlangıç ve bitiş ofsetleriyle `videoMetadata` belirterek videoyu kırpabilirsiniz.
 
 ### Python
 
@@ -938,9 +926,9 @@ console.log(response.text)
 await main();
 ```
 
-### カスタム フレームレートを設定する
+### Özel kare hızı ayarlama
 
-`videoMetadata` に `fps` 引数を渡すことで、カスタム フレームレート サンプリングを設定できます。
+`fps` işlevine `videoMetadata` bağımsız değişkenini ileterek özel kare hızı örneklemesi ayarlayabilirsiniz.
 
 ### Python
 
@@ -1000,12 +988,11 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-デフォルトでは、動画から 1 フレーム/秒（FPS）がサンプリングされます。長い動画の場合は、FPS を低く（1 未満）設定することをおすすめします。この機能は、ほとんど静止している動画（講義など）に特に役立ちます。高速アクションの理解や高速モーション
-トラッキングなど、詳細な時間分析が必要な動画には、高い FPS を使用します。
+Varsayılan olarak videodan saniyede 1 kare (FPS) örneklenir. Uzun videolarda düşük FPS (< 1) ayarlayabilirsiniz. Bu, özellikle çoğunlukla statik olan videolar (ör. dersler) için kullanışlıdır. Hızlı hareketleri anlama veya yüksek hızlı hareket izleme gibi ayrıntılı zamansal analiz gerektiren videolar için daha yüksek bir FPS kullanın.
 
-## サポートされている動画形式
+## Desteklenen video biçimleri
 
-Gemini は、次の動画形式の MIME タイプをサポートしています。
+Gemini, aşağıdaki video formatı MIME türlerini destekler:
 
 - `video/mp4`
 - `video/mpeg`
@@ -1017,63 +1004,47 @@ Gemini は、次の動画形式の MIME タイプをサポートしています�
 - `video/wmv`
 - `video/3gpp`
 
-## 動画に関する技術的な詳細
+## Videolarla ilgili teknik ayrıntılar
 
-- **サポートされているモデルとコンテキスト**: すべての Gemini モデルで動画データを処理できます。
-  - 100 万個のコンテキスト ウィンドウを持つモデルは、デフォルト（低メディア解像度）で最大 3 時間、高メディア解像度で最大 1 時間の動画を処理できます。
-- **処理モード**: Gemini 4 Argon、3.8 Flash、3.6 Flash、3.5 Flash Lite、
-  以降のモデルは、次の 2 つの動画処理モードをサポートしています:
-  - **静的**: フレームは 1 FPS で抽出され、コンテキストに配置されます（すべてのモデルのデフォルト
-    ）。音声は 1 Kbps（シングル チャンネル）で処理されます。
-    タイムスタンプは 1 秒ごとに追加されます。短いクリップや、すべてのフレームが重要な場合（フレーム単位の検査など）に最適です。1 FPS のサンプリング レートでは、高速なアクション シーケンスの詳細が失われる可能性があります。
-  - **エージェント型ツール**: モデルは動画を動的に移動し、
-    トランスクリプト、フレーム、音声、またはその両方をオンデマンドで読み込みます。これにより、長尺コンテンツのトークン使用量が最大 88% 削減されますが、内部推論とツールの往復により、短いクリップ（5 分未満）や広範なクエリで Time to First Token（TTFT）と合計トークン使用量が増加する可能性があります。レスポンスには、ターン間で推論コンテキストを維持するための `MEDIA_PROCESSING` ツール呼び出しとレスポンス パーツが含まれます。長尺動画やターゲット クエリに最適で、トークン費用とレスポンス品質を最適化できます。Gemini 4 Argon、3.8 Flash、3.6 Flash、3.5 Flash Lite でサポートされています。詳細については、
-    [エージェント型動画理解](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=ja#agentic-video-understanding)をご覧ください。
-- **トークンの計算（静的モード）**: 動画の各秒は次のようにトークン化されます:
-  - 個々のフレーム（1 FPS でサンプリング）:
-    - `media_resolution` が低に設定されている場合、フレームはフレームあたり 66 個のトークンでトークン化されます。
-    - それ以外の場合、フレームはフレームあたり 258 個のトークンでトークン化されます。
-  - 音声: 1 秒あたり 32 トークン。
-  - メタデータも含まれます。
-  - 合計: デフォルト（低）メディア解像度では動画 1 秒あたり約 100 トークン、高メディア解像度では動画 1 秒あたり約 300 トークン。
-- **トークンの計算（エージェント型ツールモード）**: トークンの使用量は、コンテンツ
-  の複雑さとモデルのナビゲーション戦略によって異なります。動画探索中に生成されたナビゲーション推論トークンは**思考トークン**（`thoughts_token_count`）としてカウントされ、オンデマンドで読み込まれたフレーム、音声、トランスクリプトはツール プロンプト トークン（`tool_use_prompt_token_count`）としてカウントされます。エージェント型処理では、モデルがプロンプトに回答するために必要なトランスクリプト、フレーム、音声、またはその両方のみを読み込むため、長尺コンテンツの合計トークン数が静的処理よりも最大 88% 削減されます（[トークンガイド](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=ja#video-token-usage)をご覧ください）。
-- **メディアの解像度**: Gemini 3 では、マルチモーダル
-  ビジョン処理をきめ細かく制御できます。`media_resolution``media_resolution` パラメータは、**入力画像または動画フレームごとに割り当てられるトークンの最大数** を決定します。解像度が高いほど、モデルが細かいテキストを読み取ったり、小さな詳細を識別する能力が向上しますが、トークンの使用量とレイテンシが増加します。`media_resolution` パラメータと `media_processing` パラメータは独立しています。両方を同じ動画パーツに設定できます。
+- **Desteklenen modeller ve bağlam**: Tüm Gemini modelleri video verilerini işleyebilir.
+  - 1 milyon bağlam penceresine sahip modeller, varsayılan olarak 3 saate kadar (düşük medya çözünürlüğünde) veya yüksek medya çözünürlüğünde 1 saate kadar videoları işleyebilir.
+- **İşleme modları**: Gemini 4 Argon, 3.8 Flash, 3.6 Flash, 3.5 Flash Lite ve sonraki modeller iki video işleme modunu destekler:
+  - **Statik**: Kareler 1 FPS hızında çıkarılır ve bağlama yerleştirilir (tüm modeller için varsayılan). Ses, 1 Kb/sn (tek kanal) hızında işlenir.
+    Zaman damgaları her saniye eklenir. Kısa klipler veya her karenin önemli olduğu durumlar (ör. kare kare inceleme) için en iyisidir. Hızlı aksiyon sahnelerinde 1 FPS örnekleme hızı nedeniyle ayrıntı kaybı yaşanabileceğini unutmayın.
+  - **Temsilci**: Model, videoda dinamik olarak gezinir ve transkripti, kareleri ve/veya sesi isteğe bağlı olarak yükler. Bu sayede uzun içerikler için %88'e kadar daha az jeton kullanılır. Ancak gezinme, dahili akıl yürütme ve araç gidiş dönüşleri nedeniyle kısa kliplerde (<5 dakika) veya geniş sorgularda ilk jeton süresini (TTFT) ve toplam jeton kullanımını artırabilir.
+    Yanıtlar, sıralar arasında akıl yürütme bağlamını korumak için `MEDIA_PROCESSING` araç çağrısı ve yanıt bölümleri içerir. Uzun videolar ve hedefli sorgular için en iyisidir. Bu model, jeton maliyetlerini ve yanıt kalitesini optimize eder. Gemini 4 Argon, 3.8 Flash, 3.6 Flash ve 3.5 Flash Lite'ta desteklenir. Ayrıntılar için [Temsilci tabanlı video yorumlama](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=tr#agentic-video-understanding) bölümüne bakın.
+- **Jeton hesaplama (statik mod)**: Videonun her saniyesi aşağıdaki gibi jetonlaştırılır:
+  - Tek tek kareler (1 FPS'de örneklenmiş):
+    - `media_resolution`, düşük olarak ayarlanırsa kareler, kare başına 66 jeton olacak şekilde jetonlaştırılır.
+    - Aksi takdirde kareler, kare başına 258 jeton olacak şekilde parçalara ayrılır.
+  - Ses: Saniyede 32 jeton.
+  - Meta veriler de dahil edilir.
+  - Toplam: Varsayılan (düşük) medya çözünürlüğünde saniyede yaklaşık 100 jeton veya yüksek medya çözünürlüğünde saniyede yaklaşık 300 jeton.
+- **Jeton hesaplama (temsilci modu)**: Jeton kullanımı, içeriğin karmaşıklığına ve modelin gezinme stratejisine göre değişir. Video keşfi sırasında oluşturulan gezinme muhakemesi jetonları **düşünme jetonları** (`thoughts_token_count`) olarak kabul edilirken isteğe bağlı olarak yüklenen kareler, ses ve transkriptler araç istemi jetonları (`tool_use_prompt_token_count`) olarak kabul edilir. Agentic işleme, uzun içeriklerde genellikle statik işlemeye kıyasla% 88'e kadar daha az toplam jeton kullanır. Bunun nedeni, modelin isteme yanıt vermek için yalnızca transkripti ve/veya kareleri ve/veya sesi yüklemesidir ([jeton kılavuzuna](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=tr#video-token-usage) bakın).
+- **Medya çözünürlüğü**: Gemini 3, `media_resolution` parametresiyle çok formatlı görüntü işleme üzerinde ayrıntılı kontrol imkanı sunar. `media_resolution` parametresi, giriş resmi veya video karesi başına ayrılan **maksimum jeton sayısını** belirler. Daha yüksek çözünürlükler, modelin küçük metinleri okuma veya küçük ayrıntıları tanımlama becerisini artırır ancak jeton kullanımını ve gecikmeyi de artırır. `media_resolution` ve `media_processing` parametreleri birbirinden bağımsızdır. Aynı video bölümünde her ikisini de ayarlayabilirsiniz.
 
-トークンの計算の詳細については、
-[トークン](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=ja)ガイドをご覧ください。
+Jeton hesaplamaları hakkında daha fazla bilgi için [jetonlar](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=tr) kılavuzuna bakın.
 
-- **タイムスタンプの形式**: プロンプト内で動画の特定の時点を参照する場合は、`MM:SS` 形式を使用します（例: 1 分 15 秒の場合は`01:15`）。
-- **プロンプトの配置**: テキストと 1 つの動画を組み合わせる場合は、`contents` 配列の動画部分の
-  *後に*テキスト プロンプトを配置します。
-- **長いリクエストのタイムアウト**: 処理時間が長い動画や、複雑なマルチステップの推論が必要な動画の場合は、ストリーミング
-  （`client.models.generate_content_stream`）を使用します。需要が高いときにバックエンドで再試行が発生する同期型で非ストリーミング
-  のリクエストでは、接続または認証トークンの有効期間を超える可能性があり、予期しない
-  `401 Unauthorized`エラーやタイムアウト エラーが発生する可能性があります。ストリーミングにより、接続がアクティブな状態に保たれ、中間推論とツール呼び出しの進行状況が表示されます。
+- **Zaman damgası biçimi**: İsteminizde videodaki belirli anlara atıfta bulunurken `MM:SS` biçimini kullanın (ör. 1 dakika 15 saniye için `01:15`).
+- **İstem yerleşimi**: Metin ve tek bir video birleştiriliyorsa metin istemini `contents` dizisinde video bölümünden *sonra* yerleştirin.
+- **Uzun istekler için zaman aşımı**: Uzun işleme süresi veya karmaşık çok adımlı akıl yürütme gerektiren videolar için akış (`client.models.generate_content_stream`) kullanın. Yoğun talep altında arka uç yeniden denemeleri yaşayan eşzamanlı, akış dışı istekler, bağlantı veya kimlik doğrulama jetonu geçerlilik pencerelerini aşabilir. Bu durum, beklenmedik `401 Unauthorized` veya zaman aşımı hataları olarak ortaya çıkabilir. Akış, bağlantıyı etkin tutar ve ara akıl yürütme ile araç çağrısı ilerleme durumunu gösterir.
 
-## 次のステップ
+## Sırada ne var?
 
-- [メディアの解像度](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ja): 動画フレームの
-  解像度を制御して、品質とトークンの使用量のバランスを取ります。
-- [トークン](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=ja): 静的処理モードとエージェント型処理モードの両方で、動画コンテンツがどのようにトークン化されるかを理解します。
-- [システム指示](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=ja#system-instructions):
-  システム指示を使用すると、特定のニーズやユースケースに基づいてモデルの動作を制御できます。
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja): Gemini で使用する
-  ファイルのアップロードと管理の詳細について学習します。
-- [ファイル プロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide): Gemini
-  API は、テキスト、画像、音声、動画データを使用したプロンプト（
-  マルチモーダル プロンプトとも呼ばれます）をサポートしています。
-- [安全性に関するガイダンス](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ja): 生成 AI
-  モデルは、不正確、
-  偏見がある、不快な出力など、予期しない出力を生成することがあります。このような出力による危害のリスクを抑えるには、後処理と人間による評価が不可欠です。
+- [Medya çözünürlüğü](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=tr): Kalite ve jeton kullanımı arasında denge kurmak için video karelerinin çözünürlüğünü kontrol edin.
+- [Jetonlar](https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=tr): Video içeriğinin hem statik hem de temsilci tabanlı işleme modlarında nasıl jetonlara dönüştürüldüğünü öğrenin.
+- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=tr#system-instructions):
+  Sistem talimatları, modelin davranışını özel ihtiyaçlarınıza ve kullanım alanlarınıza göre yönlendirmenize olanak tanır.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr): Gemini ile kullanılacak dosyaları yükleme ve yönetme hakkında daha fazla bilgi edinin.
+- [Dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide): Gemini API, çok formatlı istem olarak da bilinen metin, resim, ses ve video verileriyle istem oluşturmayı destekler.
+- [Güvenlik kılavuzu](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=tr): Üretken yapay zeka modelleri bazen yanlış, taraflı veya rahatsız edici gibi beklenmedik çıktılar üretebilir. Bu tür çıkışların neden olabileceği zarar riskini sınırlamak için son işleme ve uzman değerlendirmesi çok önemlidir.
 
-フィードバックを送信
+Geri bildirim gönderin
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-最終更新日 2026-10-13 UTC。
+Son güncelleme tarihi: 2026-10-13 UTC.
 
-ご意見をお聞かせください
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-13 UTC。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-13 UTC."],[],[]]

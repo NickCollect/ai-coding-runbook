@@ -1,44 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=zh-CN
-fetched_at: 2026-10-26T05:50:41.782147+00:00
-title: "Veo 3.1 Lite \u9884\u89c8\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=pl
+fetched_at: 2026-11-02T07:11:49.039031+00:00
+title: "Wersja testowa Veo\u00a03.1 Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
+Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-发送反馈
+Prześlij opinię
 
-# Veo 3.1 Lite 预览版
+# Wersja testowa Veo 3.1 Lite
 
-Veo 3.1 Lite 预览版是一款高效、以开发者为中心的视频模型，可提供高保真视频生成、编辑和电影级控制功能。它利用前沿的 Veo 3.1 模型，为创作者和企业提供可扩容、可编程的接口，从而普及专业级 Video AI。
+Veo 3.1 Lite Preview to wysoce wydajny model do generowania filmów, który został stworzony z myślą o deweloperach. Zapewnia on wysoką jakość generowania i edytowania filmów oraz kinową kontrolę. Wykorzystuje najnowocześniejszy model Veo 3.1, aby udostępnić profesjonalną Video AI, oferując skalowalny, programowalny interfejs dla twórców i przedsiębiorstw.
 
-## 文档
+## Dokumentacja
 
-如需全面了解各种功能，请访问[视频生成](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn)页面。请注意，Veo 3.1 Lite 预览版不支持 [4K 输出](https://ai.google.dev/gemini-api/docs/veo?hl=zh-cn#resolution)或[扩展](https://ai.google.dev/gemini-api/docs/veo?hl=zh-cn#extending-veo-videos)。
+Aby dowiedzieć się więcej o funkcjach i możliwościach, odwiedź stronę [Generowanie filmów](https://ai.google.dev/gemini-api/docs/video?hl=pl). Pamiętaj, że Veo 3.1 Lite Preview nie obsługuje [danych wyjściowych w rozdzielczości 4K](https://ai.google.dev/gemini-api/docs/veo?hl=pl#resolution) ani [rozszerzeń](https://ai.google.dev/gemini-api/docs/veo?hl=pl#extending-veo-videos).
 
 ## veo-3.1-lite-generate-preview
 
-| 属性 | 说明 |
+| Właściwość | Opis |
 | --- | --- |
-| id\_card模型代码 | **Gemini API**  `veo-3.1-lite-generate-preview` |
-| save支持的数据类型 | **输入**  文字广告、图片广告  **输出**  带音频的视频 |
-| token\_auto限制 | **文本输入**  1,024 个 token  **输出视频**  1 |
-| calendar\_month最后更新时间 | 2026 年 3 月 |
+| id\_cardKod modelu | **Gemini API**  `veo-3.1-lite-generate-preview` |
+| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
+| token\_autoLimits | **Dane wejściowe w formie tekstu**  1024 tokeny  **Wyjściowy film**  1 |
+| calendar\_monthOstatnia aktualizacja | Marzec 2026 r. |
 
-发送反馈
+Prześlij opinię
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-最后更新时间 (UTC)：2026-10-22。
+Ostatnia aktualizacja: 2026-10-22 UTC.
 
-需要向我们提供更多信息？
+Chcesz przekazać coś jeszcze?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-10-22。"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-10-22 UTC."],[],[]]

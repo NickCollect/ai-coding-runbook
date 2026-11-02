@@ -1,33 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-credentials?hl=bn
-fetched_at: 2026-10-26T05:57:07.269630+00:00
-title: "\u09ae\u09cd\u09af\u09be\u09a8\u09c7\u099c \u0995\u09b0\u09be \u098f\u099c\u09c7\u09a8\u09cd\u099f\u09a6\u09c7\u09b0 \u0995\u09cd\u09b0\u09c7\u09a1\u09c7\u09a8\u09b6\u09bf\u09df\u09be\u09b2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko
+fetched_at: 2026-11-02T07:19:20.462127+00:00
+title: "\uad00\ub9ac \uc5d0\uc774\uc804\ud2b8\uc758 \uc0ac\uc6a9\uc790 \uc778\uc99d \uc815\ubcf4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=bn)।
+Gemini 4 Argon을 지금 이용 가능합니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [হোম](https://ai.google.dev/?hl=bn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
-- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs?hl=bn)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-মতামত জানান
+의견 보내기
 
-# ম্যানেজ করা এজেন্টদের ক্রেডেনশিয়াল
+# 관리 에이전트의 사용자 인증 정보
 
-ক্রেডেনশিয়াল হল সার্ভার-ম্যানেজ করা সিক্রেট যা আপনার এজেন্টকে থার্ড-পার্টি
-পরিষেবায় অ্যাক্সেস করতে দেয়, সিক্রেটটি কখনও এজেন্টের এনভায়রনমেন্টে প্রবেশ করে না। আপনি একবার
-ক্রেডেনশিয়াল সেভ করেন, আইডি দিয়ে তা রেফার করেন এবং অনুরোধ করার সময় এগ্রেস প্রক্সি তা সমাধান করে ইনজেক্ট
-করে।
+사용자 인증 정보는 서버에서 관리하는 보안 비밀로, 에이전트가 에이전트 환경에 보안 비밀을 입력하지 않고도 서드 파티 서비스에 연결할 수 있습니다. 사용자는 사용자 인증 정보를 한 번 저장하고 ID로 참조하면 이그레스 프록시가 요청 시 이를 확인하고 삽입합니다.
 
-গোপন ভ্যালু শুধুমাত্র লেখা যায়। সেগুলি স্টোর করা হয়ে গেলে, কোনও
-এন্ডপয়েন্ট আর ফেরত পাঠায় না, তাই কোনও আপস করা এজেন্ট এটি ব্যবহার করছে এমন টোকেন আর পড়তে পারে না।
+보안 비밀 값은 쓰기 전용입니다. 저장된 후에는 어떤 엔드포인트에서도 반환되지 않으므로 보안이 취약한 에이전트가 사용 중인 토큰을 다시 읽을 수 없습니다.
 
-আপনি যে প্রধান জায়গায় ক্রেডেনশিয়াল ব্যবহার করেন সেটি হল
-[`environment.network`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=bn)-এ নেটওয়ার্কের অনুমোদিত তালিকা। প্রথমে সিক্রেট সেভ করুন:
+사용자 인증 정보를 사용하는 기본 위치는 [`environment.network`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko)의 네트워크 허용 목록입니다. 먼저 보안 비밀을 저장합니다.
 
 ### Python
 
@@ -45,7 +40,7 @@ credential = client.credentials.create(
 print(f"Credential ID: {credential.id}, Status: {credential.status}")
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -61,7 +56,7 @@ const credential = await client.credentials.create({
 console.log(`Credential ID: ${credential.id}, Status: ${credential.status}`);
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -110,7 +105,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-তারপর, এটি সেই ডোমেনের সাথে অ্যাটাচ করুন যেটি এটি প্রমাণীকরণ করে:
+그런 다음 인증하는 도메인에 연결합니다.
 
 ### Python
 
@@ -130,7 +125,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -148,7 +143,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -213,27 +208,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-এজেন্ট এখন `api.github.com`-এ যাচাইকৃত অনুরোধ করে এবং টোকেন
-কখনও স্যান্ডবক্সের মধ্যে থাকে না।
+이제 에이전트는 `api.github.com`에 인증된 요청을 전송하며 토큰은 샌드박스 내에 존재하지 않습니다.
 
-## ক্রেডেনশিয়ালের ধরন
+## 사용자 인증 정보 유형
 
-প্রতিটি ক্রেডেনশিয়ালের একটি `type` থাকে যা নির্ধারণ করে যে এটি কোন কোন ফিল্ড গ্রহণ করে এবং কীভাবে
-প্রক্সি এটি প্রয়োগ করে।
+모든 사용자 인증 정보에는 프록시가 어떤 필드를 허용하고 어떻게 적용하는지 결정하는 `type`가 있습니다.
 
-| ধরন | ব্যবহারিক ক্ষেত্র | আচরণ |
+| 유형 | 사용 사례 | 동작 |
 | --- | --- | --- |
-| `bearer_token` | ব্যক্তিগত অ্যাক্সেস টোকেন, বট টোকেন, স্ট্যাটিক API কী | প্রক্সি টোকেনটি অনুরোধের হেডার হিসেবে ইনজেক্ট করে। কোনও রিফ্রেশ লজিক নেই। |
-| `oauth2` | OAuth অ্যাপ ও ব্যবহারকারীর হয়ে কাজ করার ফ্লো | প্রক্সি অ্যাক্সেস টোকেনের জন্য রিফ্রেশ টোকেন এক্সচেঞ্জ করে এবং সেগুলি মেয়াদ শেষ হয়ে গেলে রিফ্রেশ করে। |
-| `environment_variable` | প্রসেস এনভায়রনমেন্ট থেকে সিক্রেট রিড করে এমন ক্লায়েন্ট SDK | এজেন্টের এনভায়রনমেন্টে একটি প্লেসহোল্ডার যোগ করা হয়। আউটবাউন্ড অনুরোধে প্রক্সি আসল গোপনীয়তার পরিবর্তে ব্যবহার করা হয়। |
+| `bearer_token` | 개인 액세스 토큰, 봇 토큰, 정적 API 키 | 프록시가 토큰을 요청 헤더로 삽입합니다. 새로고침 로직이 없습니다. |
+| `oauth2` | OAuth 앱 및 사용자 위임 흐름 | 프록시는 갱신 토큰을 액세스 토큰으로 교환하고 만료되면 새로고침합니다. |
+| `environment_variable` | 프로세스 환경에서 보안 비밀을 읽는 클라이언트 SDK | 에이전트의 환경에 자리표시자가 표시됩니다. 프록시는 아웃바운드 요청에서 실제 보안 비밀을 대체합니다. |
 
-## নেটওয়ার্কের অনুমোদিত তালিকায় ক্রেডেনশিয়াল ব্যবহার করা
+## 네트워크 허용 목록의 사용자 인증 정보 사용
 
-সাদাতালিকাভুক্ত নিয়মে `credential` যোগ করুন এবং প্রক্সি সেই ডোমেনে পাঠানো প্রতিটি
-আউটবাউন্ড অনুরোধকে যাচাই করে। কোনও ব্যক্তিগত API, ব্যক্তিগত রিপোজিটরি বা ব্যক্তিগত বাকেটে
-এজেন্টকে অ্যাক্সেস দেওয়ার জন্য এটি সাজেস্ট করা পদ্ধতি।
+허용 목록 규칙에 `credential`를 추가하면 프록시가 해당 도메인으로 전송되는 모든 아웃바운드 요청을 인증합니다. 이는 에이전트에게 비공개 API, 비공개 저장소 또는 비공개 버킷에 대한 액세스 권한을 부여하는 데 권장되는 방법입니다.
 
-আপনি একই শ্বেততালিকা যাচাই করা ও যাচাই না করা নিয়ম একসাথে ব্যবহার করতে পারেন:
+동일한 허용 목록에서 인증된 규칙과 인증되지 않은 규칙을 혼합할 수 있습니다.
 
 ### Python
 
@@ -261,7 +252,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -287,7 +278,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -368,34 +359,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-প্রক্সি যেহেতু অনুরোধ অনুযায়ী ক্রেডেনশিয়াল সমাধান করে, তাই `oauth2` ক্রেডেনশিয়াল
-এর অ্যাক্সেস টোকেন গোপনে রিফ্রেশ করা হয়। অ্যাক্সেস টোকেনের মেয়াদ শেষ হয়ে গেলেও
-দীর্ঘক্ষণ ধরে চলা ইন্ট্যার‍্যাকশন বন্ধ হয় না।
+프록시는 요청별로 사용자 인증 정보를 확인하므로 `oauth2` 사용자 인증 정보는 액세스 토큰을 투명하게 새로고침합니다. 액세스 토큰이 만료되어도 장기 실행 상호작용이 중단되지 않습니다.
 
-### `credential` ও `transform`-কে একত্রিত করা
+### `credential` 및 `transform` 결합
 
-এছাড়াও, শ্বেততালিকাভুক্ত করার নিয়মে ইনলাইন
-[`transform`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=bn#private-sources) অবজেক্ট গ্রহণ করা হয় যা
-সরাসরি নিয়মের উপর হেডার সেট করে। দুটি মেকানিজমই ওয়্যারে এগ্রেস
-প্রক্সি প্রয়োগ করে, তাই দুটি ক্ষেত্রেই হেডার ভ্যালু কখনও
-স্যান্ডবক্সের মধ্যে থাকে না। দুটি ফিল্ড একই নিয়মে থাকতে পারে।
+허용 목록 규칙은 규칙에 직접 헤더를 설정하는 인라인 [`transform`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko#private-sources) 객체도 허용합니다. 두 메커니즘 모두 와이어의 이그레스 프록시에 의해 적용되므로 두 경우 모두 헤더 값이 샌드박스 내에 존재하지 않습니다. 두 필드는 동일한 규칙에 표시될 수 있습니다.
 
-| নিয়ম কনফিগারেশন | আচরণ |
+| 규칙 구성 | 동작 |
 | --- | --- |
-| শুধুমাত্র `credential` | প্রক্সি ক্রেডেনশিয়াল সমাধান করে এবং ডোমেনে করা প্রতিটি অনুরোধে এর হেডার ইনজেক্ট করে। |
-| শুধুমাত্র `transform` | স্ট্যাটিক হেডার ইনজেকশন। আপনি যে হেডার লিখবেন সেটি অপরিবর্তিত অবস্থায় পাঠানো হবে। |
-| দুটিই | প্রথমে ক্রেডেনশিয়াল প্রয়োগ করা হয়, তারপর `transform` উপরে মার্জ করা হয়। দুটিই একই কী সেট করলে, এক্সপ্লিসিট `transform` হেডারটি জিতে যায়। |
-| কোনওটিই নয় | ডোমেনটি অনুমোদিত এবং কোনও হেডার ইনজেক্ট করা হয়নি। |
+| `credential`만 지원 | 프록시는 사용자 인증 정보를 확인하고 도메인에 대한 모든 요청에 헤더를 삽입합니다. |
+| `transform`만 지원 | 정적 헤더 삽입 작성한 헤더는 그대로 전송됩니다. |
+| 둘 다 | 사용자 인증 정보가 먼저 적용된 다음 `transform`가 맨 위에 병합됩니다. 두 헤더가 동일한 키를 설정하는 경우 명시적 `transform` 헤더가 우선합니다. |
+| 둘 다 아님 | 도메인이 허용되고 헤더가 삽입되지 않습니다. |
 
-আপনি যখন কোনও সিক্রেট একবার স্টোর করতে চান এবং আপনার প্রোজেক্টের প্রতিটি এনভায়রনমেন্ট, এজেন্ট ও ট্রিগার থেকে
-সেটি রেফারেন্স করতে চান এবং যখন আপনি চান যে আপনার জন্য অ্যাক্সেস টোকেন রিফ্রেশ ও রোটেশন ম্যানেজ করা হোক, তখন কোনও ক্রেডেনশিয়াল ব্যবহার করা উপযুক্ত।
-ইনলাইন `transform` ফিট করে
-যখন ভ্যালু কোনও একটি কলের সাথে সম্পর্কিত হয়, যেমন, আপনি ইন্ট্যার‍্যাকশন তৈরি করার ঠিক আগে
-নিজেই কোনও টোকেন জেনারেট করেছেন।
+사용자 인증 정보는 비밀번호를 한 번 저장하고 프로젝트의 모든 환경, 에이전트, 트리거에서 참조하려는 경우와 액세스 토큰 새로고침 및 순환을 처리하려는 경우에 사용하는 것이 좋습니다. 인라인 `transform`은 값이 단일 호출에 속하는 경우에 적합합니다. 예를 들어 상호작용을 만들기 직전에 직접 생성하는 토큰이 있습니다.
 
-দুটি পদ্ধতিই একসাথে ব্যবহার করা হয়। ক্রেডেনশিয়ালে যাচাইকরণ হেডার
-থাকে এবং `transform` একই
-অনুরোধে আপস্ট্রিম পরিষেবা যা কিছু প্রত্যাশা করে তা যোগ করে:
+두 가지를 결합하는 것이 일반적입니다. 사용자 인증 정보는 인증 헤더를 전달하고 `transform`는 동일한 요청에서 업스트림 서비스가 예상하는 다른 항목을 추가합니다.
 
 ```
 {
@@ -407,13 +386,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-ইনলাইন `transform` থেকে সরিয়ে কোনও ক্রেডেনশিয়ালে সিক্রেট সরাতে, এটিকে `POST /credentials`-এর সাথে স্টোর করুন, `transform`-এ থাকা অথরাইজেশন হেডারকে `"credential": "<id>"`-এর সাথে
-বদল করুন এবং `transform` অবজেক্টের বাকি অংশ অপরিবর্তিত রাখুন।
+인라인 `transform`에서 사용자 인증 정보로 보안 비밀을 이동하려면 `POST /credentials`로 저장하고 `transform`의 인증 헤더를 `"credential": "<id>"`로 바꾸고 나머지 `transform` 객체는 그대로 둡니다.
 
-## MCP সার্ভারের সাথে ক্রেডেনশিয়াল ব্যবহার করা
+## MCP 서버에서 사용자 인증 정보 사용
 
-রিমোট MCP সার্ভার একই `credential` ফিল্ড নেয়। `mcp_server`
-টুলে এটি সেট করুন এবং প্রক্সি সেই সার্ভারে পাঠানো প্রতিটি অনুরোধে অথরাইজেশন হেডার ইনজেক্ট করে:
+원격 MCP 서버는 동일한 `credential` 필드를 사용합니다. `mcp_server` 도구에서 설정하면 프록시가 해당 서버에 대한 모든 요청에 인증 헤더를 삽입합니다.
 
 ### Python
 
@@ -431,7 +408,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -447,7 +424,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -517,9 +494,8 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`credential` এবং `headers`, অনুমোদিত তালিকা হিসেবে একই অগ্রাধিকার সংক্রান্ত নিয়ম মেনে চলে।
-প্রথমে ক্রেডেনশিয়াল প্রয়োগ করা হয় এবং `headers` উপরে মার্জ হয়ে যায়, তাই দুটিই একই কী সেট করলে, একটি স্পষ্ট
-হেডার জিতে যায়:
+`credential`와 `headers`은 허용 목록과 동일한 우선순위 규칙을 따릅니다.
+인증 정보가 먼저 적용되고 `headers`가 맨 위에 병합되므로 둘 다 동일한 키를 설정하면 명시적 헤더가 우선합니다.
 
 ```
 {
@@ -533,18 +509,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-ইনলাইন `headers` থেকে সরিয়ে কোনও ক্রেডেনশিয়ালে সিক্রেট সরাতে, এটিকে
-`POST /credentials`-এর সাথে স্টোর করুন এবং `headers`-এর মধ্যে থাকা অথ এন্ট্রিকে `credential` দিয়ে পাল্টে দিন।
-অন্যান্য হেডার যেখানে আছে সেখানেই রাখুন।
+인라인 `headers`에서 보안 비밀을 인증 정보로 이동하려면 `POST /credentials`로 저장하고 `headers`의 인증 항목을 `credential`로 바꿉니다.
+다른 헤더는 원래 위치에 유지합니다.
 
-## এনভায়রনমেন্ট ভেরিয়েবল হিসেবে ক্রেডেনশিয়াল ব্যবহার করুন
+## 사용자 인증 정보를 환경 변수로 사용
 
-কিছু ক্লায়েন্ট লাইব্রেরি রিকোয়েস্ট হেডার হিসেবে গ্রহণ করার পরিবর্তে
-প্রসেস এনভায়রনমেন্ট থেকে সিক্রেট পড়ে। সকেট-মোড ও লং-পোলিং ক্লায়েন্ট হল
-সাধারণ কেস।
+일부 클라이언트 라이브러리는 요청 헤더로 허용하는 대신 프로세스 환경에서 보안 비밀을 읽습니다. 소켓 모드 및 긴 폴링 클라이언트는 일반적인 사례입니다.
 
-`environment_variable` ক্রেডেনশিয়ালকে
-`environment.env`-এর অধীনে ভেরিয়েবলের নামের সাথে বাইন্ড করুন:
+`environment_variable` 사용자 인증 정보를 `environment.env` 아래의 변수 이름에 바인딩합니다.
 
 ### Python
 
@@ -562,7 +534,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -578,7 +550,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -639,27 +611,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`env` লিটারেল স্ট্রিং ও ক্রেডেনশিয়াল রেফারেন্স পাশাপাশি গ্রহণ করে। একটি আক্ষরিক
-স্ট্রিং কন্টেনারে একটি সাধারণ প্লেনটেক্সট ভেরিয়েবল হিসেবে ইনজেক্ট করা হয়।
+`env`는 리터럴 문자열과 사용자 인증 정보 참조를 나란히 허용합니다. 리터럴 문자열이 일반 일반 텍스트 변수로 컨테이너에 삽입됩니다.
 
-ক্রেডেনশিয়াল রেফারেন্স নেই। ভেরিয়েবলটি প্লেসহোল্ডার
-`__GEMINI_CRED_<credential-id>__` পায় এবং প্রক্সি শুধুমাত্র
-ক্রেডেনশিয়ালের `trusted_domains`-এ থাকা ডোমেনে পাঠানো আউটবাউন্ড অনুরোধের জন্য আসল সিক্রেট অদল-বদল করে। অন্য কোনও ডোমেনে করা অনুরোধ বাতিল করা হয়, তাই সিক্রেট কখনও
-পরিধি ছেড়ে যায় না এবং এর পরিবর্তে প্লেসহোল্ডার পাঠানো হয় না।
+사용자 인증 정보 참조는 아닙니다. 변수는 자리표시자 `__GEMINI_CRED_<credential-id>__`를 수신하고 프록시는 사용자 인증 정보의 `trusted_domains`에 있는 도메인으로 전송되는 아웃바운드 요청에 대해서만 실제 비밀번호를 스왑합니다. 다른 도메인에 대한 요청은 거부되므로 보안 비밀이 경계를 벗어나지 않으며 자리표시자가 대신 전송되지 않습니다.
 
-প্রতিটি `environment_variable` ক্রেডেনশিয়ালের জন্য `trusted_domains` সেট করুন। এটি হল
-কন্ট্রোল যা সেই স্কোপ নির্ধারণ করে যেখানে সিক্রেট ব্যবহার করা যেতে পারে।
+모든 `environment_variable` 사용자 인증 정보에 `trusted_domains`를 설정합니다. 보안 비밀을 사용할 수 있는 범위를 지정하는 컨트롤입니다.
 
-## ক্রেডেনশিয়াল তৈরি করা
+## 사용자 인증 정보 만들기
 
-প্রতিটি ক্রিয়েট অনুরোধের জন্য `type` এবং সেই ধরনের জন্য প্রয়োজনীয় ফিল্ড পূরণ করতে হবে।
+모든 생성 요청에는 `type`와 해당 유형에 필요한 필드가 필요합니다.
 
-সরাসরি REST কল করার সময়, সব ফিল্ডের নামে snake\_case ব্যবহার করা হয়। camelCase
-ফিল্ড পাঠালে `400` রিটার্ন করে।
+REST를 직접 호출할 때는 모든 필드 이름이 snake\_case를 사용합니다. camelCase 필드를 전송하면 `400`가 반환됩니다.
 
-### বিয়ারার টোকেন
+### Bearer 토큰
 
-বিয়ারার টোকেন ক্রেডেনশিয়ালের জন্য শুধু `token` প্রয়োজন:
+Bearer 토큰 사용자 인증 정보에는 `token`만 필요합니다.
 
 ### Python
 
@@ -671,7 +637,7 @@ credential = client.credentials.create(
 )
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 const credential = await client.credentials.create({
@@ -681,7 +647,7 @@ const credential = await client.credentials.create({
 });
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -730,7 +696,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-উত্তরে শুধুমাত্র মেটাডেটা দেখানো হয়, কখনওই টোকেন নয়:
+응답은 메타데이터만 반환하고 토큰은 반환하지 않습니다.
 
 ```
 {
@@ -742,8 +708,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }
 ```
 
-সাধারণত, প্রক্সি `Authorization: Bearer <token>` পাঠায়। অন্য কিছু প্রত্যাশা করে এমন কোনও পরিষেবাকে টার্গেট করতে ওভাররাইড
-`header_name` এবং `prefix` করুন:
+기본적으로 프록시는 `Authorization: Bearer <token>`를 전송합니다. `header_name` 및 `prefix`를 재정의하여 다른 것을 예상하는 서비스를 타겟팅합니다.
 
 ### Python
 
@@ -757,7 +722,7 @@ credential = client.credentials.create(
 )
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 const credential = await client.credentials.create({
@@ -769,7 +734,7 @@ const credential = await client.credentials.create({
 });
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -822,11 +787,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-এই কনফিগারেশন `x-goog-api-key: key_xxxxxxxxxxxx` হেডার তৈরি করে।
+이 구성은 헤더 `x-goog-api-key: key_xxxxxxxxxxxx`를 생성합니다.
 
-`header_name` ও `prefix` কীভাবে একসাথে কাজ করে তা নিচের সারণীতে দেখানো হয়েছে:
+다음 표는 `header_name`와 `prefix`가 결합되는 방식을 보여줍니다.
 
-| কনফিগারেশন | ইনজেক্ট করা হেডার |
+| 구성 | 삽입된 헤더 |
 | --- | --- |
 | `{"token": "ghp_xxx"}` | `Authorization: Bearer ghp_xxx` |
 | `{"token": "sk_live_xxx"}` | `Authorization: Bearer sk_live_xxx` |
@@ -835,8 +800,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 
 ### OAuth2
 
-OAuth2 ক্রেডেনশিয়ালের জন্য `client_id`, `client_secret`, `refresh_token`,
-এবং `token_url` প্রয়োজন। `scopes` ফিল্ডটি ঐচ্ছিক:
+OAuth2 사용자 인증 정보에는 `client_id`, `client_secret`, `refresh_token`, `token_url`이 필요합니다. `scopes` 필드는 선택사항입니다.
 
 ### Python
 
@@ -852,7 +816,7 @@ credential = client.credentials.create(
 )
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 const credential = await client.credentials.create({
@@ -866,7 +830,7 @@ const credential = await client.credentials.create({
 });
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -923,13 +887,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-OAuth2 ক্রেডেনশিয়াল তৈরি করলে, কনফিগারেশন কাজ করছে কিনা তা কনফার্ম করতে
-`token_url`-এর বিরুদ্ধে লাইভ টোকেন এক্সচেঞ্জ করা হয়। প্রোভাইডার যদি
-`access_token` সহ একটি সফল টোকেন উত্তর রিটার্ন করে, তাহলেই শুধুমাত্র ক্রেডেনশিয়াল সেভ করা হয়।
-JSON ও form-urlencoded, দু'টি ফর্ম্যাটের উত্তরই গ্রহণ করা হয়।
+OAuth2 사용자 인증 정보를 만들면 `token_url`에 대해 실시간 토큰 교환이 실행되어 구성이 작동하는지 확인합니다. 자격 증명은 제공자가 `access_token`가 포함된 성공적인 토큰 응답을 반환하는 경우에만 저장됩니다. JSON 응답과 form-urlencoded 응답이 모두 허용됩니다.
 
-এর অর্থ হল, তৈরি করার সময় আপনার একটি বৈধ, মেয়াদ না ফুরানো রিফ্রেশ টোকেন প্রয়োজন। প্রোভাইডার যদি
-এক্সচেঞ্জ প্রত্যাখ্যান করে, তাহলে আপনাকে এই সমস্যা দেখানো হবে:
+즉, 생성 시 유효하고 만료되지 않은 갱신 토큰이 필요합니다. 제공업체가 교환을 거부하면 오류가 반환됩니다.
 
 ```
 {
@@ -940,13 +900,11 @@ JSON ও form-urlencoded, দু'টি ফর্ম্যাটের উত্
 }
 ```
 
-সেভ করা হয়ে গেলে, প্রক্সি অ্যাক্সেস টোকেনের মেয়াদ শেষ হয়ে গেলে সেগুলি রিফ্রেশ করে। রিফ্রেশ করার সময় প্রদানকারী
-রিফ্রেশ টোকেন রোটেট করলে এবং নতুন টোকেন দিলে, নতুন টোকেনটি
-সেভ করা টোকেনের জায়গায় অটোমেটিক সেভ হয়ে যায়।
+저장되면 프록시는 액세스 토큰이 만료될 때마다 갱신합니다. 제공업체가 갱신 중에 갱신 토큰을 순환하고 새 토큰을 반환하면 새 토큰이 저장된 토큰을 자동으로 대체합니다.
 
-### এনভায়রনমেন্ট ভেরিয়েবল
+### 환경 변수
 
-`environment_variable` ক্রেডেনশিয়ালের জন্য `value` ও `injection_location` প্রয়োজন:
+`environment_variable` 사용자 인증 정보에는 `value` 및 `injection_location`가 필요합니다.
 
 ### Python
 
@@ -960,7 +918,7 @@ credential = client.credentials.create(
 )
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 const credential = await client.credentials.create({
@@ -972,7 +930,7 @@ const credential = await client.credentials.create({
 });
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -1025,22 +983,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-`injection_location` ফিল্ডটি প্রক্সি সার্ভারকে জানায় যে আউটবাউন্ড অনুরোধে কোথায়
-গোপন তথ্যটি পরিবর্তন করতে হবে। এটি `header`, `query` বা `body` গ্রহণ করে, একটি
-স্ট্রিং হিসেবে অথবা কোনও পরিষেবার একাধিক প্রয়োজন হলে একটি অ্যারে হিসেবে:
+`injection_location` 필드는 아웃바운드 요청에서 보안 비밀을 대체할 위치를 프록시에 알려줍니다. `header`, `query` 또는 `body`를 단일 문자열로 또는 서비스에 두 개 이상이 필요한 경우 배열로 허용합니다.
 
 ```
 "injection_location": ["header", "query"]
 ```
 
-আপনি যেসব লোকেশন তালিকাভুক্ত করেন, শুধুমাত্র সেখানেই বিকল্প প্রোডাক্ট ব্যবহার করা হয়। কোনও অনুরোধে প্লেসহোল্ডারটি
-অন্য কোথাও থাকলে, সেটি পাঠানোর পরিবর্তে বাতিল করা হয়।
+대체는 나열된 위치에서만 발생합니다. 자리표시자를 다른 곳으로 전달하는 요청은 전송되지 않고 거부됩니다.
 
-ভেরিয়েবল নামের সাথে ক্রেডেনশিয়াল বাইন্ড করতে, [এনভায়রনমেন্ট ভেরিয়েবল হিসেবে ক্রেডেনশিয়াল ব্যবহার করুন](#environment-variables) দেখুন।
+사용자 인증 정보를 변수 이름에 바인딩하려면 [사용자 인증 정보를 환경 변수로 사용](#environment-variables)을 참고하세요.
 
-### জেনারেট করা আইডি
+### 생성된 ID
 
-`id` ফিল্ডটি ঐচ্ছিক। এটি বাদ দিন এবং পরিষেবা একটি UUID তৈরি করে:
+`id` 필드는 선택사항입니다. 생략하면 서비스에서 UUID를 생성합니다.
 
 ```
 {
@@ -1052,13 +1007,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }
 ```
 
-ইন্টার‍্যাকশন জুড়ে ব্যবহার করার জন্য স্থিতিশীল, পাঠযোগ্য রেফারেন্স চাইলে আপনার নিজস্ব আইডি দিন। যেহেতু রিসোর্স পাথে আইডি দেখা যায়, তাই হাইফেন বা আন্ডারস্কোর সহ ছোট হাতের
-বর্ণসাংখ্যিক অক্ষর ব্যবহার করুন।
+상호작용 전반에서 사용할 안정적이고 읽기 쉬운 참조가 필요한 경우 자체 ID를 제공합니다. ID는 리소스 경로에 표시되므로 하이픈이나 밑줄이 있는 소문자 영숫자를 사용하는 것이 좋습니다.
 
-## ক্রেডেনশিয়ালের তালিকা তৈরি করা
+## 사용자 인증 정보 나열
 
-আপনার প্রোজেক্টের ক্রেডেনশিয়ালের তালিকা তৈরি করুন। উত্তর ব্যাচের সাইজ নিয়ন্ত্রণ করতে
-পেজিনেশন প্যারামিটার ব্যবহার করুন।
+프로젝트에 속한 사용자 인증 정보를 나열합니다. 페이지로 나누기 매개변수를 사용하여 응답 배치 크기를 제어합니다.
 
 ### Python
 
@@ -1068,7 +1021,7 @@ for credential in response.credentials:
     print(f"Credential ID: {credential.id}, Type: {credential.type}")
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 const response = await client.credentials.list({ page_size: 10 });
@@ -1077,7 +1030,7 @@ for (const credential of response.credentials) {
 }
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -1118,7 +1071,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials?page_s
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-উত্তরে শুধুমাত্র মেটাডেটা রয়েছে:
+대답에는 메타데이터만 포함됩니다.
 
 ```
 {
@@ -1142,17 +1095,16 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials?page_s
 }
 ```
 
-পরের পৃষ্ঠা পেতে `next_page_token` কে `page_token` হিসেবে পাস করুন। আর কোনও ফলাফল না থাকলে
-এই ফিল্ডটি বাদ দেওয়া হয়।
+다음 페이지를 가져오기 위해 `next_page_token`를 `page_token`로 다시 전달합니다. 더 이상 결과가 없으면 이 필드는 생략됩니다.
 
-| প্যারামিটার | ধরন | বিবরণ |
+| 매개변수 | 유형 | 설명 |
 | --- | --- | --- |
-| `page_size` | পূর্ণসংখ্যা | প্রতি পৃষ্ঠায় সর্বাধিক সংখ্যক ক্রেডেনশিয়াল। |
-| `page_token` | স্ট্রিং | আগের উত্তরের `next_page_token` থেকে টোকেন। |
+| `page_size` | 정수 | 페이지당 최대 사용자 인증 정보 수입니다. |
+| `page_token` | 문자열 | 이전 응답의 `next_page_token`에서 가져온 토큰입니다. |
 
-## ক্রেডেনশিয়াল পাওয়া
+## 사용자 인증 정보 가져오기
 
-কোনও নির্দিষ্ট ক্রেডেনশিয়ালের আইডি দিয়ে সেটির মেটাডেটা রিট্রিভ করুন।
+ID로 특정 사용자 인증 정보의 메타데이터를 가져옵니다.
 
 ### Python
 
@@ -1161,14 +1113,14 @@ credential = client.credentials.get(id="github-production")
 print(f"Credential ID: {credential.id}, Status: {credential.status}")
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 const credential = await client.credentials.get("github-production");
 console.log(`Credential ID: ${credential.id}, Status: ${credential.status}`);
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -1207,7 +1159,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials/github
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-উত্তরটি নিচে উল্লেখ করা উত্তরের মতো:
+응답은 다음과 유사합니다.
 
 ```
 {
@@ -1219,7 +1171,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials/github
 }
 ```
 
-বিদ্যমান নেই এমন ক্রেডেনশিয়ালের অনুরোধ করলে `404` রিটার্ন করে:
+존재하지 않는 사용자 인증 정보를 요청하면 `404`이 반환됩니다.
 
 ```
 {
@@ -1230,16 +1182,13 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials/github
 }
 ```
 
-## ক্রেডেনশিয়াল রোটেট করা
+## 사용자 인증 정보 순환
 
-কোনও অনুমতিপ্রাপ্ত তালিকা সংক্রান্ত নিয়ম, টুল সংজ্ঞা বা
-এনভায়রনমেন্ট ভেরিয়েবেল স্পর্শ না করেই কোনও সিক্রেট পাল্টে দিন যা এটিকে রেফার করে। পরবর্তী
-প্রক্সি রেজোলিউশনে রোটেশন কার্যকর হয়।
+허용 목록 규칙, 도구 정의 또는 이를 참조하는 환경 변수를 수정하지 않고 보안 비밀을 바꿉니다. 회전은 다음 프록시 확인 시 적용됩니다.
 
-অনুরোধে `type` সহ আপনি যেসব ফিল্ড পরিবর্তন করতে চান সেগুলি উল্লেখ করতে হবে। আপনি বাদ দিয়েছেন
-এমন ফিল্ডের বর্তমান ভ্যালু বজায় থাকে।
+요청에는 `type`와 변경하려는 필드가 포함되어야 합니다. 생략한 필드는 현재 값을 유지합니다.
 
-বিয়ারার টোকেন রোটেট করা:
+Bearer 토큰을 순환합니다.
 
 ### Python
 
@@ -1251,7 +1200,7 @@ credential = client.credentials.update(
 )
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 const credential = await client.credentials.update("github-production", {
@@ -1260,7 +1209,7 @@ const credential = await client.credentials.update("github-production", {
 });
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -1308,7 +1257,7 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/gith
 }'
 ```
 
-OAuth2 রিফ্রেশ টোকেন রোটেট করা:
+OAuth2 갱신 토큰을 순환합니다.
 
 ### Python
 
@@ -1320,7 +1269,7 @@ credential = client.credentials.update(
 )
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 const credential = await client.credentials.update("jira-oauth", {
@@ -1329,7 +1278,7 @@ const credential = await client.credentials.update("jira-oauth", {
 });
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -1377,7 +1326,7 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/jira
 }'
 ```
 
-উত্তরে নতুন `update_time` বিষয়গুলি উঠে এসেছে:
+대답에는 새로운 `update_time`가 반영됩니다.
 
 ```
 {
@@ -1389,12 +1338,11 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/jira
 }
 ```
 
-কোনও ক্রেডেনশিয়াল তৈরি করার সময় তার `type` নির্দিষ্ট করা হয়। এটি পরিবর্তন করতে, ক্রেডেনশিয়াল মুছে দিন
-এবং নতুন একটি তৈরি করুন।
+사용자 인증 정보의 `type`는 생성 시 고정됩니다. 이를 변경하려면 사용자 인증 정보를 삭제하고 새 사용자 인증 정보를 만드세요.
 
-## ক্রেডেনশিয়াল মুছে দেওয়া
+## 사용자 인증 정보 삭제
 
-ক্রেডেনশিয়াল ও সেটির স্টোর করা গোপন তথ্য আর প্রয়োজন না হলে সেটি মুছে দিন।
+더 이상 필요하지 않은 경우 사용자 인증 정보와 저장된 비밀번호를 삭제합니다.
 
 ### Python
 
@@ -1402,13 +1350,13 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/jira
 client.credentials.delete(id="github-production")
 ```
 
-### জাভাস্ক্রিপ্ট
+### 자바스크립트
 
 ```
 await client.credentials.delete("github-production");
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -1444,56 +1392,55 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/credentials/git
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-সফলভাবে মুছে দিলে একটি খালি অবজেক্ট রিটার্ন করে:
+삭제에 성공하면 빈 객체가 반환됩니다.
 
 ```
 {}
 ```
 
-এখনও আইডি উল্লেখ করছে এমন কোনও হোয়াইটলিস্ট নিয়ম, টুল বা এনভায়রনমেন্ট ভেরিয়েবেল
-সমাধান করতে পারবে না, তাই প্রথমে সেগুলি আপডেট করুন।
+ID를 여전히 참조하는 허용 목록 규칙, 도구 또는 환경 변수는 해결되지 않으므로 먼저 업데이트하세요.
 
-## ফিল্ড রেফারেন্স
+## 필드 참조
 
-প্রতিটি ক্রেডেনশিয়ালের সাধারণ ফিল্ড:
+모든 사용자 인증 정보에 공통적인 필드:
 
-| ফিল্ড | ধরন | প্রয়োজনীয় | বিবরণ |
+| 필드 | 유형 | 필수 | 설명 |
 | --- | --- | --- | --- |
-| `id` | স্ট্রিং | না | অনন্য শনাক্তকারী। উল্লেখ না করা হলে UUID হিসেবে জেনারেট করা হয়। |
-| `type` | স্ট্রিং | হ্যাঁ | `bearer_token`, `oauth2`, `environment_variable`-এর মধ্যে একটি। |
-| `status` | স্ট্রিং | শুধু পড়া যায় | ক্রেডেনশিয়ালের বর্তমান স্ট্যাটাস। |
-| `create_time` | স্ট্রিং | শুধু পড়া যায় | RFC 3339 তৈরির টাইমস্ট্যাম্প। |
-| `update_time` | স্ট্রিং | শুধু পড়া যায় | শেষ আপডেটের RFC 3339 টাইমস্ট্যাম্প। |
+| `id` | 문자열 | 아니요 | 고유 식별자입니다. 생략하면 UUID로 생성됩니다. |
+| `type` | 문자열 | 예 | `bearer_token`, `oauth2`, `environment_variable` 중 하나입니다. |
+| `status` | 문자열 | 읽기 전용 | 인증 정보의 현재 상태입니다. |
+| `create_time` | 문자열 | 읽기 전용 | RFC 3339 생성 타임스탬프입니다. |
+| `update_time` | 문자열 | 읽기 전용 | 마지막 업데이트의 RFC 3339 타임스탬프입니다. |
 
-`bearer_token`-এর জন্য ফিল্ড:
+`bearer_token` 필드:
 
-| ফিল্ড | ধরন | প্রয়োজনীয় | বিবরণ |
+| 필드 | 유형 | 필수 | 설명 |
 | --- | --- | --- | --- |
-| `token` | স্ট্রিং | হ্যাঁ | শুধুমাত্র লেখার সুবিধা। টোকেনের ভ্যালু। |
-| `header_name` | স্ট্রিং | না | ইনজেক্ট করার জন্য হেডার। ডিফল্ট হিসেবে `Authorization` সেট করা থাকে। |
-| `prefix` | স্ট্রিং | না | ভ্যালু প্রিফিক্স। ডিফল্ট হিসেবে `Bearer` সেট করা থাকে। কোনওটির জন্য `""` হিসেবে সেট করুন। |
+| `token` | 문자열 | 예 | 쓰기 전용입니다. 토큰 값입니다. |
+| `header_name` | 문자열 | 아니요 | 삽입할 헤더입니다. 기본값은 `Authorization`입니다. |
+| `prefix` | 문자열 | 아니요 | 값 접두사입니다. 기본값은 `Bearer`입니다. 없음은 `""`로 설정됩니다. |
 
-`oauth2`-এর জন্য ফিল্ড:
+`oauth2` 필드:
 
-| ফিল্ড | ধরন | প্রয়োজনীয় | বিবরণ |
+| 필드 | 유형 | 필수 | 설명 |
 | --- | --- | --- | --- |
-| `client_id` | স্ট্রিং | হ্যাঁ | OAuth2 ক্লায়েন্ট আইডি। |
-| `client_secret` | স্ট্রিং | হ্যাঁ | শুধুমাত্র লেখার সুবিধা। OAuth2 ক্লায়েন্ট সিক্রেট। |
-| `refresh_token` | স্ট্রিং | হ্যাঁ | শুধুমাত্র লেখার সুবিধা। অ্যাক্সেস টোকেন পাওয়ার জন্য রিফ্রেশ টোকেন ব্যবহার করা হয়। |
-| `token_url` | স্ট্রিং | হ্যাঁ | প্রোভাইডার টোকেন এন্ডপয়েন্ট। |
-| `scopes` | এরে | না | অনুরোধ করার জন্য OAuth স্কোপ। |
+| `client_id` | 문자열 | 예 | OAuth2 클라이언트 ID입니다. |
+| `client_secret` | 문자열 | 예 | 쓰기 전용입니다. OAuth2 클라이언트 보안 비밀번호입니다. |
+| `refresh_token` | 문자열 | 예 | 쓰기 전용입니다. 액세스 토큰을 획득하는 데 사용되는 갱신 토큰입니다. |
+| `token_url` | 문자열 | 예 | 제공업체 토큰 엔드포인트입니다. |
+| `scopes` | 배열 | 아니요 | 요청할 OAuth 범위입니다. |
 
-`environment_variable`-এর জন্য ফিল্ড:
+`environment_variable` 필드:
 
-| ফিল্ড | ধরন | প্রয়োজনীয় | বিবরণ |
+| 필드 | 유형 | 필수 | 설명 |
 | --- | --- | --- | --- |
-| `value` | স্ট্রিং | হ্যাঁ | শুধুমাত্র লেখার সুবিধা। গোপন ভ্যালু। |
-| `injection_location` | স্ট্রিং বা অ্যারে | হ্যাঁ | গোপন তথ্য কোথায় বসাতে হবে। `header`, `query`, `body`-এর মধ্যে একটি বা একাধিক। |
-| `trusted_domains` | এরে | না | সাবস্টিটিউশনের জন্য অনুমোদিত ডোমেন প্যাটার্ন। |
+| `value` | 문자열 | 예 | 쓰기 전용입니다. 보안 비밀 값입니다. |
+| `injection_location` | 문자열 또는 배열 | 예 | 보안 비밀을 대체할 위치입니다. `header`, `query`, `body` 중 하나 이상입니다. |
+| `trusted_domains` | 배열 | 아니요 | 대체에 승인된 도메인 패턴입니다. |
 
-## সমস্যা
+## 오류
 
-সমস্যা হলে, `message` ও `code` সহ JSON অবজেক্ট ফেরত দেওয়া হয়:
+오류는 `message` 및 `code`이 포함된 JSON 객체를 반환합니다.
 
 ```
 {
@@ -1504,13 +1451,13 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/credentials/git
 }
 ```
 
-| HTTP স্ট্যাটাস | `code` | কারণ |
+| HTTP 상태 | `code` | 원인 |
 | --- | --- | --- |
-| 400 | `invalid_request` | প্রয়োজনীয় ফিল্ড নেই, অজানা ফিল্ড, কাজ করে না এমন `type` অথবা OAuth2 যাচাইকরণ করা যায়নি। |
-| 404 | `not_found` | ওই আইডি সহ কোনও ক্রেডেনশিয়াল নেই। |
-| 409 | `aborted` | এই আইডি-সহ একটি ক্রেডেনশিয়াল আগে থেকেই আছে। |
+| 400 | `invalid_request` | 필수 입력란이 누락되었거나, 알 수 없는 필드가 있거나, 지원되지 않는 `type`가 있거나, OAuth2 유효성 검사에 실패했습니다. |
+| 404 | `not_found` | 해당 ID의 사용자 인증 정보가 없습니다. |
+| 409 | `aborted` | 이미 이 ID를 사용하는 사용자 인증 정보가 있습니다. |
 
-অপরিচিত ফিল্ড উপেক্ষা না করে বাতিল করা হয় এবং সমস্যার নামে ফিল্ডের নাম উল্লেখ করা হয়:
+알 수 없는 필드는 무시되지 않고 거부되며 오류에 필드 이름이 지정됩니다.
 
 ```
 {
@@ -1521,18 +1468,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/credentials/git
 }
 ```
 
-## এর পরে কী করতে হবে
+## 다음 단계
 
-- [এনভায়রনমেন্ট](https://ai.google.dev/gemini-api/docs/agent-environment?hl=bn): এজেন্ট কীভাবে কোড রান করে এবং ফাইল সেভ করে তা জানুন।
-- [এজেন্ট ওভারভিউ](https://ai.google.dev/gemini-api/docs/agents?hl=bn): ম্যানেজ করা এজেন্টদের মূল ধারণা সম্পর্কে জানুন।
-- [কাস্টম এজেন্ট তৈরি করা](https://ai.google.dev/gemini-api/docs/custom-agents?hl=bn): `AGENTS.md` ও `SKILL.md` ব্যবহার করে আপনার নিজস্ব এজেন্ট নির্ধারণ করুন।
+- [환경](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko): 에이전트가 코드를 실행하고 파일을 유지하는 방법을 알아봅니다.
+- [에이전트 개요](https://ai.google.dev/gemini-api/docs/agents?hl=ko): 관리 에이전트의 핵심 개념을 알아봅니다.
+- [맞춤 에이전트 빌드](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko): `AGENTS.md` 및 `SKILL.md`를 사용하여 자체 에이전트를 정의합니다.
 
-মতামত জানান
+의견 보내기
 
-অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-2026-10-07 UTC-তে শেষবার আপডেট করা হয়েছে।
+최종 업데이트: 2026-10-07(UTC)
 
-আমাদের আরও কিছু জানাতে চান?
+의견을 전달하고 싶나요?
 
-[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-07 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-10-07(UTC)"],[],[]]

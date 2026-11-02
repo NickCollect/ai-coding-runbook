@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=ko
-fetched_at: 2026-10-26T05:59:06.201904+00:00
-title: "Gemini \ubc0f CrewAI\ub97c \uc0ac\uc6a9\ud55c \uace0\uac1d \uc9c0\uc6d0 \ubd84\uc11d \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=zh-CN
+fetched_at: 2026-11-02T07:22:01.215676+00:00
+title: "\u4f7f\u7528 Gemini \u548c CrewAI \u8fdb\u884c\u5ba2\u6237\u652f\u6301\u5206\u6790 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon을 지금 이용 가능합니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ko).
+Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-의견 보내기
+发送反馈
 
-# Gemini 및 CrewAI를 사용한 고객 지원 분석
+# 使用 Gemini 和 CrewAI 进行客户支持分析
 
-[CrewAI](https://docs.crewai.com/introduction)는 복잡한 목표를 달성하기 위해 협업하는
-자율 AI 에이전트를 조정하기 위한 프레임워크입니다. 역할을 지정하고, 목표를 지정하고, 배경 스토리를 지정하여 에이전트를
-정의한 다음 에이전트의 작업을
-정의할 수 있습니다.
+[CrewAI](https://docs.crewai.com/introduction) 是一个用于编排
+自主 AI 智能体的框架，这些智能体通过协作来实现复杂的目标。借助该框架，您可以
+指定角色、目标和背景故事来定义智能体，然后为智能体定义任务
+。
 
-이 예에서는 Gemini 3 Flash를 사용하여 고객 지원 데이터를 분석하여 문제를 식별하고 프로세스 개선사항을 제안하는 다중 에이전트 시스템을 빌드하는 방법을 보여줍니다. 이 시스템은 최고 운영 책임자 (COO)가 읽을 보고서를 생성합니다.
+此示例演示了如何构建一个多智能体系统，用于分析客户支持数据以发现问题并提出流程改进建议，该系统使用 Gemini 3 Flash 生成一份报告，供首席运营官 (COO) 阅读。
 
-이 가이드에서는 다음 작업을 실행할 수 있는 AI 에이전트 '크루'를 만드는 방법을 보여줍니다.
+本指南将向您展示如何创建 AI 智能体“团队”，这些智能体可以执行以下任务：
 
-1. 고객 지원 데이터 가져오기 및 분석 (이 예에서 시뮬레이션됨)
-2. 반복되는 문제 및 프로세스 병목 현상 식별
-3. 실행 가능한 개선사항 제안
-4. COO에게 적합한 간결한 보고서로 발견 항목 컴파일
+1. 提取和分析客户支持数据（在本示例中为模拟数据）。
+2. 发现重复出现的问题和流程瓶颈。
+3. 提出可行的改进建议。
+4. 将发现结果汇总成一份简洁的报告，供 COO 阅读。
 
-Gemini API 키가 필요합니다. 아직 키가 없으면 [Google AI Studio에서
-키를 가져올 수 있습니다](https://aistudio.google.com/apikey?hl=ko).
+您需要 Gemini API 密钥。如果您还没有密钥，可以在 [Google AI Studio
+中获取一个](https://aistudio.google.com/apikey?hl=zh-cn)。
 
 ```
 pip install "crewai[tools]"
 ```
 
-Gemini API 키를 `GEMINI_API_KEY`라는 환경 변수로 설정한 다음 Gemini 모델을 사용하도록 CrewAI를 구성합니다.
+将 Gemini API 密钥设置为名为 `GEMINI_API_KEY` 的环境变量，然后将 CrewAI 配置为使用 Gemini 模型。
 
 ```
 import os
@@ -54,15 +54,15 @@ gemini_llm = LLM(
 )
 ```
 
-## 구성요소 정의
+## 定义组件
 
-**도구**, **에이전트**, **태스크**, 그리고
-**크루** 자체를 사용하여 CrewAI 애플리케이션을 빌드합니다. 다음 섹션에서는 이러한 각 구성요소를 설명합니다.
+使用**工具**、**智能体**、**任务**和
+**Crew**本身构建 CrewAI 应用。以下部分将介绍每个组件。
 
-### 도구
+### 工具
 
-도구는 에이전트가 외부 세계와 상호작용하거나 특정 작업을 실행하는 데 사용할 수 있는 기능입니다. 여기서는 고객 지원 데이터 가져오기를 시뮬레이션하기 위해 자리표시자 도구를 정의합니다. 실제 애플리케이션에서는 데이터베이스, API 또는 파일 시스템에 연결합니다. 도구에 대한 자세한 내용은 [CrewAI
-도구 가이드](https://docs.crewai.com/concepts/tools)를 참고하세요.
+工具是智能体可用于与外部世界互动或执行特定操作的功能。在这里，您将定义一个占位符工具来模拟提取客户支持数据。在实际应用中，您将连接到数据库、API 或文件系统。如需详细了解工具，请参阅 [CrewAI
+工具指南](https://docs.crewai.com/concepts/tools)。
 
 ```
 from crewai.tools import BaseTool
@@ -92,10 +92,10 @@ class CustomerSupportDataTool(BaseTool):
 support_data_tool = CustomerSupportDataTool()
 ```
 
-### 에이전트
+### 智能体
 
-에이전트는 크루의 개별 AI 작업자입니다. 각 에이전트에는 특정 `role`, `goal`, `backstory`, 할당된 `llm`, 선택적 `tools`가 있습니다. 에이전트에 대한 자세한 내용은 [CrewAI 에이전트
-가이드](https://docs.crewai.com/concepts/agents)를 참고하세요.
+智能体是团队中的各个 AI 工作人员。每个智能体都有特定的 `role`、`goal`、`backstory`、分配的 `llm` 和可选的 `tools`。如需详细了解智能体，请参阅 [CrewAI 智能体
+指南](https://docs.crewai.com/concepts/agents)。
 
 ```
 from crewai import Agent
@@ -142,10 +142,10 @@ report_writer = Agent(
 )
 ```
 
-### 작업
+### 任务
 
-작업은 에이전트의 특정 할당을 정의합니다. 각 작업에는 `description`, `expected_output`이 있으며 `agent`에 할당됩니다. 작업은 기본적으로 순차적으로 실행되며 이전 작업의 컨텍스트를 포함합니다. 작업에 대한 자세한 내용은 [CrewAI 작업
-가이드](https://docs.crewai.com/concepts/tasks)를 참고하세요.
+任务定义了智能体的具体分配。每个任务都有 `description`、`expected_output`，并且分配给一个 `agent`。默认情况下，任务按顺序运行，并且包含上一个任务的上下文。如需详细了解任务，请参阅 [CrewAI 任务
+指南](https://docs.crewai.com/concepts/tasks)。
 
 ```
 from crewai import Task
@@ -204,9 +204,9 @@ Ensure the report is easy to understand, focuses on actionable insights, and is 
 )
 ```
 
-### 크루
+### Crew
 
-`Crew`는 에이전트와 작업을 함께 가져와 워크플로 프로세스(예: '순차')를 정의합니다.
+`Crew` 将智能体和任务结合在一起，定义工作流过程（例如“sequential”）。
 
 ```
 from crewai import Crew, Process
@@ -219,9 +219,9 @@ support_analysis_crew = Crew(
 )
 ```
 
-## 크루 실행
+## 运行 Crew
 
-마지막으로 필요한 입력으로 크루 실행을 시작합니다.
+最后，使用任何必要的输入启动 Crew 执行。
 
 ```
 # Start the crew's work
@@ -235,19 +235,19 @@ print("--- Final Report for COO ---")
 print(result)
 ```
 
-이제 스크립트가 실행됩니다. `Data Analyst`는 도구를 사용하고, `Process
-Optimizer`는 발견 항목을 분석하고, `Report Writer`는
-최종 보고서를 컴파일한 후 콘솔에 출력합니다. `verbose=True` 설정을 사용하면 각 에이전트의 세부적인 사고 과정과 작업이 표시됩니다.
+脚本现在将执行。`Data Analyst` 将使用该工具，`Process
+Optimizer` 将分析发现结果，`Report Writer` 将汇总
+最终报告，然后将该报告输出到控制台。`verbose=True` 设置将显示每个智能体的详细思考过程和操作。
 
-CrewAI에 대한 자세한 내용은 [CrewAI
-소개](https://docs.crewai.com/introduction)를 참고하세요.
+如需详细了解 CrewAI，请参阅 [CrewAI
+简介](https://docs.crewai.com/introduction)。
 
-의견 보내기
+发送反馈
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-최종 업데이트: 2026-09-12(UTC)
+最后更新时间 (UTC)：2026-09-12。
 
-의견을 전달하고 싶나요?
+需要向我们提供更多信息？
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-12(UTC)"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-12。"],[],[]]

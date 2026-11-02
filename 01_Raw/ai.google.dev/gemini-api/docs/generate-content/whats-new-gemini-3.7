@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.7?hl=de
-fetched_at: 2026-10-26T05:43:04.639057+00:00
-title: "Neues bei Gemini\u00a03.7 Flash \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.7?hl=ar
+fetched_at: 2026-11-02T07:22:22.300416+00:00
+title: "\u0627\u0644\u0645\u064a\u0632\u0627\u062a \u0627\u0644\u062c\u062f\u064a\u062f\u0629 \u0641\u064a Gemini 3.7 Flash \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=de).
+‫Gemini 4 Argon متاح الآن. [جرِّب هذه الميزة](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ar).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs/generate-content?hl=ar)
 
-Feedback geben
+إرسال ملاحظات
 
-# Neues bei Gemini 3.7 Flash
+# الميزات الجديدة في Gemini 3.7 Flash
 
-[Neuestes Modell](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=de)
-[Andere Modelle](#other-models)
+[أحدث طرازات](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=ar)
+[الطرازات الأخرى](#other-models)
 
-Gemini 3.7 Flash (`gemini-3.7-flash`) ist ein Flash-Modell der vorherigen Generation aus der Gemini 3-Reihe, das jetzt eingestellt ist und automatisch an [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.8?hl=de) weitergeleitet wird.
+‫Gemini 3.7 Flash‏ (`gemini-3.7-flash`) هو طراز Flash من الجيل السابق في سلسلة Gemini 3، وقد تم إيقافه الآن ويتم توجيهه تلقائيًا إلى [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.8?hl=ar).
 
-Dieser Leitfaden dient als Referenz und dokumentiert die Funktionen und Änderungen, die in Gemini 3.7 Flash eingeführt wurden.
+يتم الاحتفاظ بهذا الدليل كمرجع، وهو يوثّق الإمكانات والتغييرات التي تم تقديمها في Gemini 3.7 Flash.
 
-## Modellübersicht
+## النظرة العامة على الطراز
 
-| Modell | Modell-ID | Standard-Denkaufwand | Beschreibung |
+| الطراز | رقم تعريف الطراز | مستوى التفكير التلقائي | الوصف |
 | --- | --- | --- | --- |
-| Gemini 3.7 Flash (eingestellt) | `gemini-3.7-flash` | `medium` | Flash-Modell der vorherigen Generation, das für die Programmierung, agentische Workflows und die mehrstufige Ausführung entwickelt wurde. Wurde durch [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.8?hl=de) ersetzt. |
+| ‫Gemini 3.7 Flash (تم إيقافه) | `gemini-3.7-flash` | `medium` | طراز Flash من الجيل السابق مصمّم للترميز وسير العمل القائم على وكلاء الذكاء الاصطناعي والتنفيذ المتعدد الخطوات. تم استبداله بطراز [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.8?hl=ar). |
 
-Gemini 3.7 Flash unterstützt ein Kontextfenster mit 1 Million Tokens, maximal 64.000 Ausgabetokens, anpassbare Denkaufwände (`low`, `medium`, `high`) und dieselbe Suite integrierter Tools wie 3.6 Flash.
+يتوافق Gemini 3.7 Flash مع نافذة سياق تضم مليون رمز مميّز، و64 ألف رمز مميّز كحد أقصى للناتج، ومستويات تفكير قابلة للضبط (`low` و`medium` و`high`)، ومجموعة الأدوات المضمّنة نفسها في 3.6 Flash.
 
-Die vollständigen Spezifikationen finden Sie auf der [Modellseite zu Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=de).
+للاطّلاع على المواصفات الكاملة، يُرجى الانتقال إلى صفحة طراز [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=ar).
 
-## Kurzanleitung
+## التشغيل السريع
 
 ### Python
 
@@ -82,20 +82,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:g
   }'
 ```
 
-## Neuerungen in Gemini 3.7 Flash
+## ما الجديد في Gemini 3.7 Flash
 
-- **Coding und agentische Aufgaben**:Deutlich höhere Qualität bei Softwareentwicklung und agentischen Benchmarks in der Praxis, wodurch die Problemlösung verbessert und fehlgeschlagene Agentenschleifen reduziert werden.
-- **Webentwicklung und stärkere Designparität**:Generiert Code für Desktop- und Webanwendungen mit höherer Genauigkeit direkt aus Design-Mocks. Es gibt erhebliche Verbesserungen bei der Einhaltung des Designs und bei der Überprüfung vorhandener Codebasen anhand von Mocks, um eine 1:1-Designparität zu gewährleisten.
+- **الترميز والمهام القائمة على وكلاء الذكاء الاصطناعي:** جودة أعلى بكثير في مقاييس الأداء الهندسية القائمة على وكلاء الذكاء الاصطناعي وهندسة البرامج في العالم الحقيقي، ما يحسّن من حل المشاكل ويقلّل من حلقات الوكلاء الفاشلة.
+- **تطوير الويب وتكافؤ التصميم بشكل أفضل:** يتم إنشاء رموز تطبيقات الويب والتطبيقات المخصّصة لأجهزة الكمبيوتر بجودة أعلى مباشرةً من نماذج التصميم، مع تحقيق مكاسب كبيرة في الالتزام بالتصميم وفي تدقيق قواعد الرموز الحالية مقارنةً بالنماذج للتحقّق من تكافؤ التصميم بنسبة %100.
 
-## Denkaufwand
+## فهم مستويات الاستدلال
 
-Mit Gemini 3.7 Flash können Entwickler die Latenz und Intelligenz flexibel steuern, indem sie den Denkaufwand des Modells anpassen:
+يمنح Gemini 3.7 Flash المطوّرين تحكّمًا مرنًا في وقت الاستجابة والذكاء من خلال تعديل مستوى التفكير في الطراز:
 
-- **Geringer Denkaufwand**: Reduziert die Zeit bis zur Antwort bei latenzkritischen Aufgaben wie Pipelines zur Reaktion auf Vorfälle, Echtzeit-Chats, dem Verfassen von Entwürfen und der schnellen Datenanalyse.
-- **Mittel (Standard)** : Beste Qualität für die meisten Aufgaben. Empfohlen für komplexe Code- und agentische Anwendungsfälle mit höherer Genauigkeit beim ersten Versuch.
-- **Hoher Denkaufwand**: Maximiert die Fähigkeit des Modells, zu denken und Tools zu verwenden. Am besten geeignet für komplexe Schlussfolgerungen, schwierige mathematische Aufgaben sowie schwierige Programmier- und Agentenaufgaben. Ermöglicht erweiterte Überlegungen und Funktionsaufrufe, mit höherem Tokenverbrauch und höheren Kosten.
+- **مستوى التفكير المنخفض**: يقلّل من وقت الاستجابة للمهام التي تتطلّب وقت استجابة منخفضًا، مثل خطوط أنابيب الاستجابة للحوادث والدردشة في الوقت الفعلي وكتابة المسودات وتحليل البيانات بسرعة.
+- **المتوسط (تلقائي):** أفضل جودة لمعظم المهام. يُنصح به لحالات الاستخدام المعقّدة للرموز والوكلاء، مع دقة أعلى في المحاولة الأولى.
+- **مستوى التفكير المرتفع**: يزيد من قدرة الطراز على التفكير واستخدام الأدوات. الخيار الأفضل للاستدلال المعقّد والرياضيات الصعبة ومهام الترميز والوكلاء الصعبة. يسمح هذا المستوى بتوسيع الأفكار واستدعاء الدوال، مع زيادة استهلاك الرموز والتكلفة.
 
-So konfigurieren Sie den Denkaufwand in Gemini 3.7 Flash:
+لضبط مستويات التفكير في Gemini 3.7 Flash، اتّبِع الخطوات التالية:
 
 ### Python
 
@@ -118,29 +118,29 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Mehrsprachige Codebeispiele (JavaScript, REST) und detaillierte Konzepte zum Denkaufwand finden Sie unter [Denkaufwand in Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.8?hl=de#understanding-reasoning-levels).
+للاطّلاع على أمثلة الرموز بلغات متعددة (JavaScript وREST) ومفاهيم الاستدلال المتعمّقة، يُرجى الانتقال إلى [فهم مستويات الاستدلال في Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.8?hl=ar#understanding-reasoning-levels).
 
-## Unterstützung für Antigravity-Agent
+## دعم وكيل Antigravity
 
-## Andere Modelle
+## طرازات أخرى
 
-- [Gemini 4 Argon (neuestes Modell)](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=de)
-- [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.8?hl=de)
-- [Gemini 3.6 Flash und 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.6?hl=de)
-- [Alle Modelle ansehen](https://ai.google.dev/gemini-api/docs/models?hl=de)
+- [‫Gemini 4 Argon (الأحدث)](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=ar)
+- [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.8?hl=ar)
+- [‫Gemini 3.6 Flash و3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.6?hl=ar)
+- [عرض جميع الطرازات](https://ai.google.dev/gemini-api/docs/models?hl=ar)
 
-## Nächste Schritte
+## الخطوات التالية
 
-- Sehen Sie sich die API-Spezifikationen in der [Modellübersicht](https://ai.google.dev/gemini-api/docs/models?hl=de) an.
-- Informationen zur Orchestrierung mehrerer Agenten finden Sie im [Leitfaden zur Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=de).
-- Testen und optimieren Sie Prompts in [Google AI Studio](https://aistudio.google.com/?hl=de).
+- مراجعة مواصفات واجهة برمجة التطبيقات في [النظرة العامة على الطرازات](https://ai.google.dev/gemini-api/docs/models?hl=ar).
+- استكشاف تنسيق الوكلاء المتعددين في دليل [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ar)
+- اختبار الطلبات وتحسينها في [Google AI Studio](https://aistudio.google.com/?hl=ar).
 
-Feedback geben
+إرسال ملاحظات
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Zuletzt aktualisiert: 2026-10-13 (UTC).
+تاريخ التعديل الأخير: 2026-10-13 (حسب التوقيت العالمي المتفَّق عليه)
 
-Haben Sie Feedback für uns?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-10-13 (UTC)."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-10-13 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

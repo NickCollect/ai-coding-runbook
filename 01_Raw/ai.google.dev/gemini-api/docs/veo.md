@@ -1,45 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/veo?hl=pt-BR
-fetched_at: 2026-10-26T05:44:46.621521+00:00
-title: "Gerar v\u00eddeos com o Veo 3.1 na API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/veo?hl=fa
+fetched_at: 2026-11-02T07:17:18.978901+00:00
+title: "\u062a\u0648\u0644\u06cc\u062f \u0648\u06cc\u062f\u06cc\u0648 \u0628\u0627 Veo 3.1 \u062f\u0631 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
+‫Gemini 4 Argon اکنون دردسترس است. [امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fa).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [صفحه اصلی](https://ai.google.dev/?hl=fa)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
+- [سندنگار](https://ai.google.dev/gemini-api/docs?hl=fa)
 
-Envie comentários
+ارسال بازخورد
 
-# Gerar vídeos com o Veo 3.1 na API Gemini
+# تولید ویدیو با Veo 3.1 در Gemini API
 
-> Para saber mais sobre a compreensão de vídeos, consulte o guia [Compreensão de vídeos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pt-br).
+> برای آشنایی با درک ویدیو، به راهنمای [درک ویدیو](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fa) مراجعه کنید.
 
-O [Veo 3.1](https://deepmind.google/models/veo/?hl=pt-br) é um modelo para gerar vídeos de 8 segundos (720p, 1080p ou 4k) com áudio gerado de forma nativa. É possível acessar
-esse modelo de forma programática usando a API Gemini. Para saber mais sobre as variantes disponíveis do modelo do Veo, consulte a seção [Versões do modelo](#model-versions).
+[Veo 3.1](https://deepmind.google/models/veo/?hl=fa) مدلی برای تولید ویدیوهای ۸ ثانیه‌ای (۷۲۰ پیکسل، ۱۰۸۰ پیکسل، یا 4k) با صدای تولیدشده به‌صورت بومی است. می‌توانید به‌صورت برنامه‌نویسی‌شده بااستفاده از Gemini API به این مدل دسترسی پیدا کنید. برای کسب اطلاعات بیشتر درباره
+انواع مدل Veo موجود، به بخش [نسخه‌های مدل](#model-versions) مراجعه کنید.
 
-O Veo 3.1 se destaca em uma ampla variedade de estilos visuais e cinematográficos e apresenta
-vários recursos novos:
+Veo 3.1 در طیف گسترده‌ای از سبک‌های دیداری و سینمایی برتری دارد و چندین قابلیت جدید را معرفی می‌کند:
 
-- **Vídeos no modo retrato**: escolha entre vídeos no modo paisagem (`16:9`) e retrato (`9:16`).
-- **Extensão de vídeo**: estenda vídeos que foram gerados anteriormente usando o Veo.
-- **Geração específica de frames**: gere um vídeo especificando os primeiros e últimos frames.
-- **Direção baseada em imagens**: use até três imagens de referência para orientar
-  o conteúdo do vídeo gerado.
+- **ویدیوهای عمودی**: بین ویدیوهای افقی (`16:9`) و عمودی (`9:16`) انتخاب کنید.
+- **افزونه ویدیو**: ویدیوهایی را که قبلاً بااستفاده از Veo تولید شده‌اند گسترش دهید.
+- **تولید براساس قاب خاص**: تولید ویدیو با مشخص کردن قاب اول و آخر.
+- **دستورالعمل تصویرمبنا**: از حداکثر سه تصویر مرجع برای هدایت
+  محتوای ویدیو تولیدشده استفاده کنید.
 
-Para mais informações sobre como escrever comandos de texto eficazes para geração de vídeo,
-consulte o [guia de comandos do Veo](#prompt-guide).
+برای اطلاعات بیشتر درباره نوشتن پیام‌واره‌های نوشتاری مؤثر برای تولید ویدیو،
+[راهنمای پیام‌واره Veo](#prompt-guide) را ببینید
 
-## Geração de texto para vídeo
+## تولید ویدیو با نوشتار
 
-Os exemplos a seguir mostram como gerar um vídeo com [diálogo](#dialogue), [realismo cinematográfico](#realism) ou [animação criativa](#style):
+نمونه‌های زیر نشان می‌دهند که چگونه می‌توانید ویدیویی با [دیالوگ](#dialogue)، [واقع‌گرایی سینمایی](#realism)، یا [پویانمایی خلاقانه](#style) تولید کنید:
 
-### Diálogos e efeitos sonoros
+### دیالوگ و جلوه‌های صوتی
 
 ### Python
 
@@ -102,7 +101,7 @@ ai.files.download({
 console.log(`Generated video saved to dialogue_example.mp4`);
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -150,7 +149,7 @@ func main() {
 }
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -179,7 +178,7 @@ client.files.download(generatedVideo, "dialogue_example.mp4", null);
 System.out.println("Generated video saved to dialogue_example.mp4");
 ```
 
-### REST
+### استراحت
 
 ```
 # Note: This script uses jq to parse the JSON response.
@@ -220,7 +219,7 @@ while true; do
 done
 ```
 
-### Realismo cinematográfico
+### واقع‌گرایی سینمایی
 
 ### Python
 
@@ -283,7 +282,7 @@ ai.files.download({
 console.log(`Generated video saved to realism_example.mp4`);
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -331,7 +330,7 @@ func main() {
 }
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -360,7 +359,7 @@ client.files.download(generatedVideo, "realism_example.mp4", null);
 System.out.println("Generated video saved to realism_example.mp4");
 ```
 
-### REST
+### استراحت
 
 ```
 # Note: This script uses jq to parse the JSON response.
@@ -401,7 +400,7 @@ while true; do
 done
 ```
 
-### Animação criativa
+### پویانمایی خلاقانه
 
 ### Python
 
@@ -460,7 +459,7 @@ ai.files.download({
 console.log(`Generated video saved to style_example.mp4`);
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -507,7 +506,7 @@ func main() {
 }
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -535,7 +534,7 @@ client.files.download(generatedVideo, "style_example.mp4", null);
 System.out.println("Generated video saved to style_example.mp4");
 ```
 
-### REST
+### استراحت
 
 ```
 # Note: This script uses jq to parse the JSON response.
@@ -576,11 +575,9 @@ while true; do
 done
 ```
 
-## Controlar a proporção
+## کنترل نسبت ابعادی
 
-O Veo 3.1 permite criar vídeos no modo paisagem (`16:9`, a configuração padrão) ou retrato
-(`9:16`). É possível informar ao modelo qual você quer usando o
-parâmetro `aspect_ratio`:
+Veo 3.1 به شما امکان می‌دهد ویدیوهای افقی (`16:9`، تنظیم پیش‌فرض) یا عمودی (`9:16`) ایجاد کنید. بااستفاده از پارامتر `aspect_ratio` می‌توانید به مدل بگویید کدام‌یک را می‌خواهید:
 
 ### Python
 
@@ -647,7 +644,7 @@ ai.files.download({
 console.log(`Generated video saved to pizza_making.mp4`);
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -698,7 +695,7 @@ func main() {
 }
 ```
 
-### REST
+### استراحت
 
 ```
 # Note: This script uses jq to parse the JSON response.
@@ -742,15 +739,14 @@ while true; do
 done
 ```
 
-## Controlar a resolução
+## کنترل وضوح
 
-O Veo 3.1 também pode gerar vídeos em 720p, 1080p ou 4K (o 4K não está disponível
-para o Veo 3.1 Lite).
+‫Veo 3.1 همچنین می‌تواند مستقیماً ویدیوهای 720p،‏ 1080p، یا 4k تولید کند (4k برای Veo 3.1 Lite دردسترس نیست).
 
-Quanto maior a resolução, maior será a latência. Os vídeos em 4K
-também são mais caros (consulte os [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br)).
+توجه داشته باشید که هرچه وضوح بالاتر باشد، تأخیر بیشتر خواهد بود. ویدیوهای 4k
+گران‌تر هم هستند ([قیمت‌گذاری](https://ai.google.dev/gemini-api/docs/pricing?hl=fa) را ببینید).
 
-A [extensão de vídeo](#extending-veo-videos) também é limitada a vídeos de 720p.
+[افزونه ویدیو](#extending-veo-videos) نیز به ویدیوهای ۷۲۰ پیکسل محدود است.
 
 ### Python
 
@@ -817,7 +813,7 @@ ai.files.download({
 console.log(`Generated video saved to 4k_grand_canyon.mp4`);
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -868,7 +864,7 @@ func main() {
 }
 ```
 
-### REST
+### استراحت
 
 ```
 # Note: This script uses jq to parse the JSON response.
@@ -912,12 +908,12 @@ while true; do
 done
 ```
 
-## Geração de vídeo a partir de imagens
+## تولید ویدیو با تصویر
 
-O código a seguir demonstra como gerar uma imagem usando o
-[Gemini 3.1 Flash Image, também conhecido como Nano Banana 2](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br),
-e usá-la como o
-frame inicial para gerar um vídeo com o Veo 3.1.
+کد زیر نحوه تولید تصویر بااستفاده از
+[Gemini 3.1 Flash Image یا Nano Banana 2](https://ai.google.dev/gemini-api/docs/image-generation?hl=fa)،
+و سپس استفاده از آن تصویر به‌عنوان
+قاب شروع برای تولید ویدیو با Veo 3.1 را نشان می‌دهد.
 
 ### Python
 
@@ -997,7 +993,7 @@ ai.files.download({
 console.log(`Generated video saved to veo3_with_image_input.mp4`);
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -1059,7 +1055,7 @@ func main() {
 }
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -1105,19 +1101,18 @@ client.files.download(video, "veo3_with_image_input.mp4", null);
 System.out.println("Generated video saved to veo3_with_image_input.mp4");
 ```
 
-### Como usar imagens de referência
+### استفاده از تصاویر مرجع
 
-O Veo 3.1 agora aceita até 3 imagens de referência para orientar o conteúdo do vídeo
-gerado. Forneça imagens de uma pessoa, personagem ou produto para
-preservar a aparência do objeto no vídeo gerado.
+Veo 3.1 اکنون تا ۳ تصویر مرجع را برای هدایت محتوای ویدیو تولیدشده می‌پذیرد. تصاویری از یک شخص، شخصیت، یا محصول ارائه دهید تا
+ظاهر سوژه در ویدیو خروجی حفظ شود.
 
-Por exemplo, usando estas três imagens geradas com o
-[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br) como referências com um
-[comando bem escrito](#use-reference-images), você cria o seguinte vídeo:
+برای مثال، بااستفاده از این سه تصویر تولیدشده با
+[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=fa) به‌عنوان مرجع و با یک
+[پیام‌واره خوب](#use-reference-images)، ویدیو زیر ایجاد می‌شود:
 
 | `` `dress_image` `` | `` `woman_image` `` | `` `glasses_image` `` |
 | --- | --- | --- |
-| Vestido de alta costura de flamingo com camadas de penas rosa e fúcsia | Mulher bonita com cabelo escuro e olhos castanhos quentes | Óculos de sol rosa em formato de coração |
+| لباس فلامینگو مد روز با لایه‌هایی از پرهای صورتی و سرخابی | زن زیبا با موهای تیره و چشمان قهوه‌ای گرم | عینک آفتابی صورتی عجیب‌وغریب به‌شکل قلب |
 
 ### Python
 
@@ -1217,7 +1212,7 @@ ai.files.download({
 console.log(`Generated video saved to veo3.1_with_reference_images.mp4`);
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -1287,7 +1282,7 @@ func main() {
 }
 ```
 
-### REST
+### استراحت
 
 ```
 # Note: This script uses jq to parse the JSON response.
@@ -1344,11 +1339,10 @@ while true; do
 done
 ```
 
-### Como usar o primeiro e o último frame
+### استفاده از قاب‌های اول و آخر
 
-O Veo 3.1 permite criar vídeos usando interpolação ou especificando os primeiros e
-últimos frames do vídeo. Para saber como escrever comandos de texto eficazes
-para geração de vídeo, consulte o [guia de comandos do Veo](#use-reference-images).
+Veo 3.1 به شما امکان می‌دهد بااستفاده از درون‌یابی یا با مشخص کردن قاب‌های اول و آخر ویدیو، ویدیو بسازید. برای کسب اطلاعات درباره نوشتن پیام‌واره‌های نوشتاری مؤثر
+برای تولید ویدیو، به [راهنمای پیام‌واره Veo](#use-reference-images) مراجعه کنید.
 
 ### Python
 
@@ -1418,7 +1412,7 @@ ai.files.download({
 console.log(`Generated video saved to veo3.1_with_interpolation.mp4`);
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -1471,7 +1465,7 @@ func main() {
 }
 ```
 
-### REST
+### استراحت
 
 ```
 # Note: This script uses jq to parse the JSON response.
@@ -1520,37 +1514,33 @@ done
 
 | `` `first_image` `` | `` `last_image` `` | *veo3.1\_with\_interpolation.mp4* |
 | --- | --- | --- |
-| Uma mulher fantasmagórica com longos cabelos brancos e um vestido esvoaçante se balança suavemente em um balanço de corda | A mulher fantasmagórica desaparece do balanço | Um vídeo cinematográfico e assustador de uma mulher misteriosa desaparecendo de um balanço na névoa |
+| زنی شبح‌مانند با موهای سفید بلند و پیراهنی مواج به‌آرامی روی تاب طنابی تاب می‌خورد | زن شبح‌مانند از روی تاب ناپدید می‌شود | ویدیویی سینمایی و فراموش‌نشدنی از زنی ترسناک که در مه از روی تاب ناپدید می‌شود |
 
-## Como estender vídeos do Veo
+## گسترش دادن ویدیوهای Veo
 
-Use o Veo 3.1 para estender em 7 segundos os vídeos que você já gerou com o Veo,
-até 20 vezes.
+بااستفاده از Veo 3.1، ویدیوهایی را که قبلاً با Veo تولید کرده‌اید به‌اندازه ۷ ثانیه
+و تا ۲۰ بار طولانی‌تر کنید.
 
-Limitações de entrada de vídeo:
+محدودیت‌های ویدیو ورودی:
 
-- Vídeos gerados pelo Veo com até 141 segundos de duração.
-- A API Gemini só aceita extensões de vídeo para vídeos gerados pelo Veo.
-- O vídeo precisa ser de uma geração anterior, como
+- ویدیوهای تولیدشده با Veo فقط تا ۱۴۱ ثانیه.
+- ‫Gemini API فقط از افزونه‌های ویدیو برای ویدیوهای تولیدشده با Veo پشتیبانی می‌کند.
+- ویدیو باید از نسل قبلی باشد، مثل
   `operation.response.generated_videos[0].video`
-- Os vídeos são armazenados por dois dias, mas se um vídeo for referenciado para extensão,
-  o timer de armazenamento de dois dias será redefinido. Só é possível estender vídeos que foram gerados
-  ou referenciados nos últimos dois dias.
-- Os vídeos de entrada precisam ter uma determinada duração, proporção e dimensões:
-  - Proporção: 9:16 ou 16:9
-  - Resolução: 720p
-  - Duração do vídeo: até 141 segundos
+- ویدیوها به‌مدت ۲ روز ذخیره می‌شوند، اما اگر ویدیویی برای افزونه ارجاع داده شود،
+  زمان‌سنج ذخیره‌سازی ۲ روزه آن بازنشانی می‌شود. فقط می‌توانید ویدیوهایی را گسترش دهید که در دو روز گذشته تولید یا ارجاع داده شده‌اند.
+- ویدیوهای ورودی باید طول، نسبت ابعادی، و ابعاد مشخصی داشته باشند:
+  - نسبت ابعادی: ۹:۱۶ یا ۱۶:۹
+  - وضوح: 720p
+  - طول ویدیو: ۱۴۱ ثانیه یا کمتر
 
-A saída da extensão é um único vídeo que combina o vídeo de entrada do usuário e
-o vídeo estendido gerado, com até 148 segundos de duração.
+برونداد افزونه یک ویدیو واحد است که ویدیو ورودی کاربر و ویدیو گسترش‌یافته تولیدشده را ترکیب می‌کند و حداکثر ۱۴۸ ثانیه ویدیو ارائه می‌دهد.
 
-Este exemplo usa um vídeo gerado pelo Veo, mostrado aqui com
-o comando original, e o estende usando o parâmetro `video` e um novo
-comando:
+این مثال یک ویدیو تولیدشده با Veo را که در اینجا با پیام‌واره اصلی‌اش نشان داده شده است می‌گیرد و آن را بااستفاده از پارامتر `video` و یک پیام‌واره جدید گسترش می‌دهد:
 
-| Comando | Saída: `butterfly_video` |
+| پیام‌واره | برونداد: `butterfly_video` |
 | --- | --- |
-| Uma borboleta de origami bate as asas e voa pelas portas francesas em direção ao jardim. | A borboleta de origami bate as asas e sai voando pela porta de vidro em direção ao jardim. |
+| پروانه‌ای اوریگامی بال‌هایش را تکان می‌دهد و از درهای فرانسوی به بیرون و داخل باغ پرواز می‌کند. | پروانه اوریگامی بال‌هایش را تکان می‌دهد و از درهای فرانسوی به بیرون و داخل باغ پرواز می‌کند. |
 
 ### Python
 
@@ -1622,7 +1612,7 @@ ai.files.download({
 console.log(`Generated video saved to veo3.1_extension.mp4`);
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -1677,7 +1667,7 @@ func main() {
 }
 ```
 
-### REST
+### استراحت
 
 ```
 # Note: This script uses jq to parse the JSON response.
@@ -1725,17 +1715,14 @@ while true; do
 done
 ```
 
-Para saber como escrever comandos de texto eficazes para geração de vídeo, consulte
-o [guia de comandos do Veo](#extend-prompt).
+برای کسب اطلاعات درباره نوشتن پیام‌واره‌های نوشتاری مؤثر برای تولید ویدیو،
+[راهنمای پیام‌واره Veo](#extend-prompt) را ببینید.
 
-## Como lidar com operações assíncronas
+## مدیریت عملیات غیرهمگام
 
-A geração de vídeos é uma tarefa que exige muita computação. Quando você envia uma solicitação
-para a API, ela inicia um job de longa duração e retorna imediatamente um objeto
-`operation`. Em seguida, é preciso pesquisar até que o vídeo esteja pronto, o que é indicado pelo
-status `done` como verdadeiro.
+تولید ویدیو یک تکلیف محاسباتی فشرده است. وقتی درخواستی به API ارسال می‌کنید، API کار طولانی‌مدتی را شروع می‌کند و بلافاصله شیء `operation` را برمی‌گرداند. سپس باید نظرسنجی کنید تا ویدیو آماده شود، که با درست بودن وضعیت `done` نشان داده می‌شود.
 
-O núcleo desse processo é um loop de sondagem, que verifica periodicamente o status do job.
+هسته این فرایند یک حلقه نظرسنجی است که به‌طور دوره‌ای وضعیت کار را بررسی می‌کند.
 
 ### Python
 
@@ -1792,7 +1779,7 @@ while (!operation.done) {
 // ... process and download your video ...
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -1833,7 +1820,7 @@ func main() {
 }
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -1863,7 +1850,7 @@ while (!operation.done().orElse(false)) {
 // ... process and download your video ...
 ```
 
-### REST
+### استراحت
 
 ```
 # Note: This script uses jq to parse the JSON response.
@@ -1902,329 +1889,301 @@ while true; do
 done
 ```
 
-## Parâmetros e especificações da API Veo
+## پارامترها و مشخصات Veo API
 
-Estes são os parâmetros que você pode definir na solicitação de API para controlar o processo de geração de vídeo.
+این‌ها پارامترهایی هستند که می‌توانید در درخواست API خود برای کنترل فرایند تولید ویدیو تنظیم کنید.
 
-| Parâmetro | Veo 3.1 e Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 e Veo 3 Fast |
+| پارامتر | Veo 3.1 و Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 و Veo 3 Fast |
 | --- | --- | --- | --- |
-| Instâncias | | | |
-| `prompt`: a descrição em texto do vídeo. Compatível com dicas de áudio. | `string` | `string` | `string` |
-| `image`: uma imagem inicial para animar. | Objeto `Image` | Objeto `Image` | Objeto `Image` |
-| `lastFrame`: a imagem final para a transição de um vídeo de interpolação. Precisa ser usado em combinação com o parâmetro `image`. | Objeto `Image` | Objeto `Image` | Objeto `Image` |
-| `referenceImages`: até três imagens para usar como referências de estilo e conteúdo. | Objeto `VideoGenerationReferenceImage` | Objeto `n/a` | N/A |
-| `video`: vídeo que será usado na extensão de vídeo. | Objeto `Video` de uma geração anterior | N/A | N/A |
-| Parâmetros | | | |
-| `aspectRatio`: a proporção do vídeo. | `"16:9"` (padrão), `"9:16"` | `"16:9"` (padrão), `"9:16"` | `"16:9"` (padrão), `"9:16"` |
-| `durationSeconds`: duração do vídeo gerado. | `"4"`, `"6"`, `"8"`.   *Precisa ser "8" ao usar extensões, imagens de referência ou resoluções de 1080p e 4K* | `"4"`, `"6"`, `"8"`.   *Precisa ser "8" ao usar imagens de referência ou com 1080p* | `"4"`, `"6"`, `"8"`.   *Precisa ser "8" ao usar extensões, imagens de referência ou resoluções de 1080p e 4K* |
-| `personGeneration`: controla a geração de pessoas. Consulte as restrições de região em [Limitações](#limitations). | Texto para vídeo e extensão: somente `"allow_all"`   Imagem para vídeo, interpolação e imagens de referência: somente `"allow_adult"` | Texto para vídeo: somente`"allow_all"`   Imagem para vídeo, interpolação e imagens de referência: somente`"allow_adult"` | Texto para vídeo: somente `"allow_all"`   Imagem para vídeo: somente `"allow_adult"` |
-| `resolution`: a resolução do vídeo. | `"720p"` (padrão),  `"1080p"` (aceita apenas 8 segundos de duração), `"4k"` (aceita apenas 8 segundos de duração)   *`"720p"` apenas para extensão* | `"720p"` (padrão),  `"1080p"` (aceita apenas 8 segundos de duração) | `"720p"` (padrão),  `"1080p"` (aceita apenas 8 segundos de duração), `"4k"` (aceita apenas 8 segundos de duração)   *`"720p"` apenas para extensão* |
+| نمونه‌ها | | | |
+| `prompt`: توضیحات نوشتاری ویدیو. از نشانه‌های صوتی پشتیبانی می‌کند. | `string` | `string` | `string` |
+| `image`: تصویر اولیه برای پویاسازی. | ‫`Image` شیء | ‫`Image` شیء | ‫`Image` شیء |
+| `lastFrame`: تصویر نهایی برای انتقال ویدیو درون‌یابی. باید در ترکیب با پارامتر `image` استفاده شود. | ‫`Image` شیء | ‫`Image` شیء | ‫`Image` شیء |
+| `referenceImages`: حداکثر سه تصویر برای استفاده به‌عنوان مرجع سبک و محتوا. | ‫`VideoGenerationReferenceImage` شیء | ‫`n/a` شیء | موجود نیست |
+| ‫`video`: ویدیویی که برای افزونه ویدیویی استفاده می‌شود. | `Video` شیء از نسل قبلی | موجود نیست | موجود نیست |
+| پارامترها | | | |
+| `aspectRatio`: نسبت ابعادی ویدیو. | `"16:9"` (پیش‌فرض)، `"9:16"` | `"16:9"` (پیش‌فرض)، `"9:16"` | `"16:9"` (پیش‌فرض)، `"9:16"` |
+| ‫`durationSeconds`: طول ویدیو تولیدشده. | `"4"`، `"6"`، `"8"`.   *هنگام استفاده از افزونه، تصاویر مرجع، یا با وضوح ۱۰۸۰ پیکسل و 4K باید «۸» باشد* | `"4"`، `"6"`، `"8"`.   *هنگام استفاده از تصاویر مرجع یا با ۱۰۸۰ پیکسل باید «۸» باشد* | `"4"`، `"6"`، `"8"`.   *هنگام استفاده از افزونه، تصاویر مرجع، یا با وضوح ۱۰۸۰ پیکسل و 4K باید «۸» باشد* |
+| `personGeneration`: تولید افراد را کنترل می‌کند. (برای محدودیت‌های منطقه‌ای، [محدودیت‌ها](#limitations) را ببینید) | تبدیل نوشتار به ویدیو و افزونه: `"allow_all"` فقط   تبدیل تصویر به ویدیو، درون‌یابی، و تصاویر مرجع: `"allow_adult"` فقط | نوشتار به ویدیو: `"allow_all"` فقط   تصویر به ویدیو، درون‌یابی، و تصاویر مرجع: `"allow_adult"` فقط | نوشتار به ویدیو: فقط`"allow_all"`   تصویر به ویدیو: فقط`"allow_adult"` |
+| `resolution`: وضوح ویدیو. | ‫`"720p"` (پیش‌فرض)،  `"1080p"` (فقط از مدت ۸ ثانیه پشتیبانی می‌کند)،  `"4k"` (فقط از مدت ۸ ثانیه پشتیبانی می‌کند)   *`"720p"` فقط برای افزونه* | ‫`"720p"` (پیش‌فرض)،  `"1080p"` (فقط از مدت ۸ ثانیه پشتیبانی می‌کند) | ‫`"720p"` (پیش‌فرض)،  `"1080p"` (فقط از مدت ۸ ثانیه پشتیبانی می‌کند)،  `"4k"` (فقط از مدت ۸ ثانیه پشتیبانی می‌کند)   *`"720p"` فقط برای افزونه* |
 
-O parâmetro `seed` também está disponível para os modelos do Veo 3.
-Isso não garante o determinismo, mas o melhora um pouco.
+توجه داشته باشید که پارامتر `seed` برای مدل‌های Veo 3 نیز دردسترس است.
+این کار قطعیت را تضمین نمی‌کند، اما کمی آن را بهبود می‌بخشد.
 
-## Recursos do modelo
+## ویژگی‌های مدل
 
-| Recurso | Veo 3.1 e Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 e Veo 3 Fast |
+| ویژگی | Veo 3.1 و Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 و Veo 3 Fast |
 | --- | --- | --- | --- |
-| **Áudio**: gera áudio com vídeo de forma nativa. | ✔️ Sempre ativado | ✔️ Sempre ativado | ✔️ Sempre ativado |
-| **Modalidades de entrada**: o tipo de entrada usado para geração. | Texto para vídeo, imagem para vídeo, vídeo para vídeo | Texto para vídeo, imagem para vídeo | Texto para vídeo, imagem para vídeo |
-| **Resolução**: a resolução de saída do vídeo. | 720p, 1080p (somente 8 segundos de duração), 4k (somente 8 segundos de duração)  *720p somente ao usar a extensão de vídeo.* | 720p, 1080p (somente 8 segundos de duração) | 720p e 1080p (somente 16:9) |
-| **Frame rate**: o frame rate de saída do vídeo. | 24 fps | 24 fps | 24 fps |
-| **Duração do vídeo**: duração do vídeo gerado. | 8 segundos, 6 segundos, 4 segundos  *8 segundos apenas se for 1080p ou 4K ou se usar imagens de referência* | 8 segundos, 6 segundos, 4 segundos  *8 segundos apenas se for 1080p ou se usar imagens de referência* | 8 segundos |
-| **Vídeos por solicitação**: número de vídeos gerados por solicitação. | 1 | 1 | 1 |
-| **Status:** Disponibilidade do modelo | [Visualizar](https://ai.google.dev/gemini-api/docs/models?hl=pt-br#preview) | [Visualizar](https://ai.google.dev/gemini-api/docs/models?hl=pt-br#preview) | [Estável](https://ai.google.dev/gemini-api/docs/models?hl=pt-br#stable) |
+| **صدا:** صدا را به‌طور بومی با ویدیو تولید می‌کند. | ✔️ همیشه روشن | ✔️ همیشه روشن | ✔️ همیشه روشن |
+| **روش‌های ورودی:** نوع ورودی استفاده‌شده برای تولید. | نوشتار به ویدیو، تصویر به ویدیو، ویدیو به ویدیو | نوشتار به ویدیو، تصویر به ویدیو | نوشتار به ویدیو، تصویر به ویدیو |
+| **وضوح:** وضوح خروجی ویدیو. | ‫720p،‏ 1080p (فقط با طول ۸ ثانیه)،‏ 4k (فقط با طول ۸ ثانیه)  *720p فقط هنگام استفاده از افزونه ویدیو.* | ‫۷۲۰ پیکسل، ۱۰۸۰ پیکسل (فقط با طول ۸ ثانیه) | ‫720p و 1080p (فقط 16:9) |
+| **نرخ فریم:** نرخ فریم خروجی ویدیو. | ‫۲۴ فریم در ثانیه | ‫۲۴ فریم در ثانیه | ‫۲۴ فریم در ثانیه |
+| **مدت ویدیو:** طول ویدیو تولیدشده. | ‫۸ ثانیه، ۶ ثانیه، ۴ ثانیه  *۸ ثانیه فقط اگر ۱۰۸۰ پیکسل یا 4k باشد یا از تصاویر مرجع استفاده شود* | ‫۸ ثانیه، ۶ ثانیه، ۴ ثانیه  *۸ ثانیه فقط درصورت استفاده از ۱۰۸۰ پیکسل یا تصاویر مرجع* | ۸ ثانیه |
+| **ویدیوها در هر درخواست:** تعداد ویدیوهای تولیدشده در هر درخواست. | 1 | 1 | 1 |
+| **وضعیت:** دردسترس بودن مدل | [پیش‌نمایش](https://ai.google.dev/gemini-api/docs/models?hl=fa#preview) | [پیش‌نمایش](https://ai.google.dev/gemini-api/docs/models?hl=fa#preview) | [پایدار](https://ai.google.dev/gemini-api/docs/models?hl=fa#stable) |
 
-## Limitações
+## محدودیت‌ها
 
-- **Comandos com vários vídeos**:no momento, não é possível fazer referência ou raciocinar sobre vários vídeos. Tentar usar comandos com vários vídeos pode resultar em uma queda no desempenho do modelo ou em saídas inesperadas.
-- **Suporte a idiomas**:o inglês (EN) é totalmente compatível, mas outros idiomas não foram avaliados. Portanto, eles podem funcionar, mas os resultados podem variar.
-- **Latência da solicitação**: mínimo de 11 segundos; máximo de 6 minutos (durante os horários de pico).
-- **Limitações regionais**:nos locais da UE, do Reino Unido, da Suíça e do Oriente Médio e Norte da África, `allow_adult` é
-  o único valor permitido para `personGeneration`.
-- **Retenção de vídeos**:os vídeos gerados são armazenados no servidor por dois dias e depois são removidos. Para salvar uma cópia local, faça o download do
-  vídeo em até dois dias após a geração. Os vídeos estendidos são tratados como vídeos recém-gerados.
-- **Marcas-d'água**:os vídeos criados pelo Veo são marcados com o [SynthID](https://deepmind.google/technologies/synthid/?hl=pt-br), nossa ferramenta para adicionar marcas-d'água e identificar conteúdo gerado com IA. Os vídeos podem ser verificados usando a
-  plataforma de verificação do [SynthID](https://deepmind.google/science/synthid/?hl=pt-br).
-- **Segurança**:os vídeos gerados passam por filtros de segurança e
-  processos de verificação de memorização que ajudam a reduzir os riscos de privacidade, direitos autorais e
-  viés.
-- **Erro de áudio**:às vezes, o Veo 3.1 bloqueia a geração de um vídeo
-  devido a filtros de segurança ou outros problemas de processamento com o áudio. Você
-  não vai receber cobranças se o vídeo for bloqueado.
+- **پیام‌واره چندویدیویی:** ارجاع یا استدلال در چند ویدیو درحال‌حاضر پشتیبانی نمی‌شود. تلاش برای پیام‌واره چندویدیویی ممکن است منجر به کاهش عملکرد مدل یا خروجی‌های غیرمنتظره شود.
+- **پشتیبانی زبانی:** انگلیسی (EN) به‌طور کامل پشتیبانی می‌شود، اما زبان‌های دیگر ارزیابی نشده‌اند، بنابراین ممکن است کار کنند اما نتایج متفاوت باشد.
+- **تأخیر درخواست:** حداقل: ۱۱ ثانیه؛ حداکثر: ۶ دقیقه (در ساعات اوج مصرف).
+- **محدودیت‌های منطقه‌ای:** در اتحادیه اروپا، پادشاهی متحد (UK)، سوئیس (CH)، و منطقه خاورمیانه و شمال آفریقا (MENA)، `allow_adult` تنها مقدار مجاز برای `personGeneration` است.
+- **نگهداری ویدیو:** ویدیوهای تولیدشده به‌مدت ۲ روز در سرور ذخیره می‌شوند،
+  سپس حذف می‌شوند. برای ذخیره کردن نسخه محلی، باید ویدیو را ظرف ۲ روز پس‌از تولید بارگیری کنید. با ویدیوهای گسترش‌یافته به‌عنوان ویدیوهای جدید تولیدشده رفتار می‌شود.
+- **ته‌نقش‌گذاری:** ویدیوهای ساخته‌شده توسط Veo بااستفاده از [SynthID](https://deepmind.google/technologies/synthid/?hl=fa)، ابزار ما برای ته‌نقش‌گذاری و شناسایی محتوای تولیدشده با هوش مصنوعی، ته‌نقش‌گذاری می‌شوند. ویدیوها را می‌توان بااستفاده از پلاتفرم درستی‌سنجی
+  [SynthID](https://deepmind.google/science/synthid/?hl=fa) درستی‌سنجی کرد.
+- **ایمنی:** ویدیوهای تولیدشده از فیلترهای ایمنی و
+  فرایندهای بررسی حفظ کردن عبور می‌کنند که به کاهش خطرات مربوط به حریم خصوصی، حق نشر، و
+  سوگیری کمک می‌کند.
+- **خطای صوتی:** Veo 3.1 گاهی اوقات به‌دلیل فیلترهای ایمنی یا سایر مشکلات پردازش صدا، از تولید ویدیو جلوگیری می‌کند. اگر تولید ویدیو شما مسدود شود، هزینه‌ای از شما کسر نخواهد شد.
 
-## Guia de comandos do Veo
+## راهنمای پیام‌واره Veo
 
-Esta seção contém exemplos de vídeos que você pode criar usando o Veo e mostra como modificar comandos para produzir resultados diferentes.
+این بخش حاوی نمونه‌هایی از ویدیوهایی است که می‌توانید بااستفاده از Veo بسازید و به شما نشان می‌دهد
+چگونه پیام‌واره‌ها را برای تولید نتایج متمایز اصلاح کنید.
 
-### Filtros de segurança
+### فیلترهای ایمنی
 
-O Veo aplica filtros de segurança no Gemini para garantir que
-os vídeos gerados e as fotos enviadas não tenham conteúdo ofensivo.
-Os comandos que violam nossos [termos e diretrizes](https://ai.google.dev/gemini-api/docs/usage-policies?hl=pt-br#abuse-monitoring) são bloqueados.
+Veo فیلترهای ایمنی را در سراسر Gemini اعمال می‌کند تا اطمینان حاصل شود که
+ویدیوهای تولیدشده و عکس‌های بارگذاری‌شده حاوی محتوای توهین‌آمیز نیستند.
+پیام‌واره‌هایی که [شرایط و دستورالعمل‌های](https://ai.google.dev/gemini-api/docs/usage-policies?hl=fa#abuse-monitoring) ما را نقض می‌کنند مسدود می‌شوند.
 
-### Noções básicas para escrever comandos
+### اصول نوشتن پیام‌واره
 
-Bons comandos são descritivos e claros. Para aproveitar ao máximo o Veo, comece
-identificando sua ideia principal, refine-a adicionando palavras-chave e modificadores
-e incorpore terminologia específica de vídeo aos seus comandos.
+پیام‌واره‌های خوب توصیفی و واضح هستند. برای بهره‌برداری حداکثری از Veo، ابتدا ایده اصلی‌تان را مشخص کنید، سپس با افزودن کلیدواژه‌ها و اصلاح‌کننده‌ها ایده‌تان را پالایش کنید، و درنهایت اصطلاحات خاص ویدیو را در پیام‌واره‌هایتان بگنجانید.
 
-Os seguintes elementos devem ser incluídos no comando:
+عناصر زیر باید در پیام‌واره شما گنجانده شود:
 
-- **Assunto**: o objeto, a pessoa, o animal ou o cenário que você quer no
-  vídeo, como *paisagem urbana*, *natureza*, *veículos* ou *filhotes*.
-- **Ação**: o que o sujeito está fazendo (por exemplo, *andando*, *correndo* ou
-  *virando a cabeça*).
-- **Estilo**: especifique a direção criativa usando palavras-chave de estilo de filme específicas, como *ficção científica*, *filme de terror*, *film noir* ou estilos de animação, como *desenho animado*.
-- **Posicionamento e movimento da câmera**: [opcional] controle o local e o movimento da câmera usando termos como *vista aérea*, *nível dos olhos*, *plano de cima para baixo*, *plano de carrinho* ou *plano de baixo para cima*.
-- **Composição**: [opcional] como a cena é enquadrada, como *plano aberto*,
-  *close-up*, *plano único* ou *plano duplo*.
-- **Efeitos de foco e lente**: [opcional] use termos como *foco raso*,
-  *foco profundo*, *foco suave*, *lente macro* e *lente grande angular* para conseguir
-  efeitos visuais específicos.
-- **Atmosfera**: [opcional] como as cores e a iluminação contribuem para a cena,
-  como *tons azuis*, *noite* ou *tons quentes*.
+- **موضوع**: شیء، شخص، حیوان، یا منظره‌ای که می‌خواهید در ویدیو شما باشد، مانند *منظره شهری*، *طبیعت*، *وسایل نقلیه*، یا *توله سگ*.
+- **کنش**: کاری که سوژه انجام می‌دهد (برای مثال، *راه رفتن*، *دویدن*، یا
+  *چرخاندن سر*).
+- **سبک**: جهت خلاقانه را بااستفاده از کلمات کلیدی سبک فیلم خاص، مانند *علمی تخیلی*، *فیلم ترسناک*، *فیلم نوآر*، یا سبک‌های پویانمایی مانند *کارتون* مشخص کنید.
+- **موقعیت و حرکت دوربین**: [اختیاری] مکان و حرکت دوربین را بااستفاده از اصطلاحاتی مانند *نمای هوایی*، *هم‌سطح چشم*، *نمای بالا به پایین*، *نمای دالی*، یا *نمای کرم* کنترل کنید.
+- **ترکیب‌بندی**: [اختیاری] نحوه قاب‌بندی نما، مانند *نمای باز*،
+  *نمای نزدیک*، *تک‌نما*، یا *دونما*.
+- **جلوه‌های لنز و فوکوس**: [اختیاری] برای دستیابی به جلوه‌های دیداری خاص، از اصطلاحاتی مانند *فوکوس کم‌عمق*، *فوکوس عمیق*، *فوکوس نرم*، *لنز ماکرو*، و *لنز زاویه باز* استفاده کنید.
+- **محیط**: [اختیاری] نحوه تأثیر رنگ و نور بر صحنه،
+  مانند *رنگ‌های آبی*، *شب*، یا *رنگ‌های گرم*.
 
-#### Mais dicas para escrever comandos
+#### نکات بیشتر برای نوشتن پیام‌واره‌ها
 
-- **Use uma linguagem descritiva**: use adjetivos e advérbios para criar uma imagem clara para o Veo.
-- **Melhorar os detalhes faciais**: especifique
-  os detalhes faciais como foco da foto, por exemplo, usando a palavra *retrato* no
-  comando.
+- **از زبان توصیفی استفاده کنید**: از صفت‌ها و قیدها برای ترسیم تصویری واضح برای Veo استفاده کنید.
+- **بهبود جزئیات چهره**: جزئیات چهره را به‌عنوان کانون عکس مشخص کنید، مثلاً از کلمه *پرتره* در پیام‌واره استفاده کنید.
 
-*Para estratégias de comando mais abrangentes, acesse [Introdução ao design de comandos](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pt-br).*
+*برای استراتژی‌های جامع‌تر پیام‌واره، به [مقدمه‌ای بر طراحی پیام‌واره](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=fa) مراجعه کنید.*
 
-### Comandos para áudio
+### درحال درخواست صدا
 
-Você pode dar dicas ao Veo para efeitos sonoros, ruído ambiente e diálogo.
-O modelo captura as nuances dessas dicas para gerar uma trilha sonora
-sincronizada.
+می‌توانید به Veo برای جلوه‌های صوتی، نوفه محیطی، و گفتگو راهنمایی ارائه دهید.
+این مدل تفاوت‌های ظریف این نشانه‌ها را ثبت می‌کند تا موسیقی متن همگام‌سازی‌شده‌ای تولید کند.
 
-- **Diálogo**:use aspas para falas específicas. (Exemplo: "Esta deve ser a
-  chave", ele murmurou.)
-- **Efeitos sonoros (SFX)**: descreva os sons de forma explícita. (Exemplo: pneus
-  cantando alto, motor roncando.)
-- **Ruído ambiente**:descreva a paisagem sonora do ambiente. (Exemplo: um zumbido fraco e misterioso ecoa ao fundo.)
+- **دیالوگ:** برای گفتار خاص از نقل‌قول استفاده کنید. (مثال: «این باید کلید باشد،» او زمزمه کرد.)
+- **جلوه‌های صوتی (SFX):** صداها را به‌طور صریح توصیف کنید. (مثال: صدای بلند جیغ لاستیک‌ها، غرش موتور.)
+- **نوفه محیطی:** فضای صوتی محیط را توصیف کنید. (مثال: همهمه‌ای ضعیف و وهم‌انگیز در پس‌زمینه طنین‌انداز می‌شود.)
 
-Esses vídeos mostram como usar comandos para gerar áudio no Veo 3 com níveis crescentes de detalhes.
+این ویدیوها نحوه درخواست از Veo 3 برای تولید صدا با سطوح مختلف جزئیات را نشان می‌دهند.
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| **Mais detalhes (diálogo e ambiente)** Um plano aberto de uma floresta enevoada no noroeste do Pacífico. Dois trilheiros exaustos, um homem e uma mulher, caminham entre samambaias quando o homem para de repente, olhando para uma árvore. Close: marcas de garras profundas e recentes estão cravadas na casca da árvore. Homem: (com a mão na faca de caça) "Não é um urso comum." Mulher: (com a voz trêmula de medo, olhando para a floresta) "Então o que é?" Um latido áspero, galhos quebrando, passos na terra úmida. Um pássaro solitário canta. | Duas pessoas na floresta encontram sinais de um urso. |
-| **Menos detalhes (diálogo)** Animação de recortes de papel. Novo bibliotecário: "Onde ficam os livros proibidos?" Curador antigo: "Não temos. Eles nos mantêm." | Bibliotecários animados discutindo livros proibidos |
+| **جزئیات بیشتر (دیالوگ و محیط)** نمای عریض از جنگلی مه‌آلود در شمال غربی اقیانوس آرام. دو کوهنورد خسته، یک مرد و یک زن، از میان سرخس‌ها عبور می‌کنند که مرد ناگهان می‌ایستد و به درختی خیره می‌شود. نمای نزدیک: رد پنجه‌های تازه و عمیق روی پوست درخت حک شده است. مرد: (دستش روی چاقوی شکارش است) «این خرس معمولی نیست.» زن: (با صدایی لرزان از ترس، جنگل را نگاه می‌کند) «پس چیست؟» پوست درخت زبر، شاخه‌های درحال شکستن، صدای پا روی زمین مرطوب. پرنده‌ای تنها جیک‌جیک می‌کند. | دو نفر در جنگل با نشانه‌هایی از خرس مواجه می‌شوند. |
+| **جزئیات کمتر (مکالمه)** پویانمایی کاغذبری. کتابدار جدید: «کتاب‌های ممنوعه را کجا نگه می‌دارید؟» موزه‌دار قدیمی: «ما این کار را نمی‌کنیم. آن‌ها ما را حفظ می‌کنند.» | کتابداران پویانمایی‌شده درحال بحث درباره کتاب‌های ممنوعه |
 
-Teste esses comandos para ouvir o áudio.
-[Teste o Veo](https://deepmind.google/models/veo/?hl=pt-br)
+این پیام‌واره‌ها را خودتان امتحان کنید تا صدا را بشنوید!
+[امتحان کردن Veo](https://deepmind.google/models/veo/?hl=fa)
 
-### Comandos com imagens de referência
+### پیام‌واره دادن با تصاویر مرجع
 
-Você pode usar uma ou mais imagens como entradas para orientar os vídeos gerados, usando
-os recursos de [imagem para vídeo](https://ai.google.dev/gemini-api/docs/veo?hl=pt-br#generate-from-images)
-do Veo. O Veo usa a imagem de entrada como o frame inicial. Selecione uma imagem
-mais próxima do que você imagina como a primeira cena do seu vídeo para animar
-objetos do dia a dia, dar vida a desenhos e pinturas e adicionar movimento e
-som a cenas da natureza.
+می‌توانید از یک یا چند تصویر به‌عنوان ورودی برای هدایت ویدیوهای تولیدشده خود استفاده کنید، بااستفاده از
+قابلیت‌های [تصویر به ویدیو](https://ai.google.dev/gemini-api/docs/veo?hl=fa#generate-from-images)
+Veo. Veo از تصویر ورودی به‌عنوان قاب اولیه استفاده می‌کند. تصویری را انتخاب کنید که به آنچه به‌عنوان صحنه اول ویدیو خود تصور می‌کنید نزدیک‌تر باشد تا اشیای روزمره را پویانمایی کنید، به طراحی‌ها و نقاشی‌ها جان ببخشید، و به صحنه‌های طبیعت حرکت و صدا اضافه کنید.
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| **Imagem de entrada (gerada pelo Nano Banana)** Uma macrofotografia hiper-realista de surfistas em miniatura surfando nas ondas do mar dentro de uma pia de banheiro de pedra rústica. Uma torneira de latão vintage está aberta, criando o som de ondas contínuas. Iluminação natural surreal, lúdica e brilhante. | Surfistas em miniatura surfando em ondas do oceano dentro de uma pia de banheiro de pedra rústica. |
-| **Vídeo de saída (gerado pelo Veo 3.1)** Um vídeo macro surreal e cinematográfico. Surfistas minúsculos surfam em ondas perpétuas e ondulantes dentro de uma pia de pedra. Uma torneira de latão vintage aberta gera o som de surf infinito. A câmera se move lentamente pela cena lúdica e iluminada pelo sol, enquanto as figuras em miniatura deslizam com habilidade pela água azul-turquesa. | Surfistas minúsculos surfando nas ondas de uma pia de banheiro. |
+| **تصویر ورودی (تولیدشده با Nano Banana)** عکس ماکروی فوق‌واقع‌گرایانه از موج‌سواران مینیاتوری کوچک که درحال موج‌سواری روی امواج اقیانوس در یک سینک دستشویی سنگی روستایی هستند. یک شیر آب برنجی قدیمی باز است و موجی دائمی ایجاد می‌کند. فراواقعی، عجیب، نورپردازی طبیعی روشن. | موج‌سواران مینیاتوری کوچک که در داخل یک سینک دستشویی سنگی روستایی روی امواج اقیانوس سواری می‌کنند. |
+| **ویدیو خروجی (تولیدشده توسط Veo 3.1)** ویدیو ماکرو سینمایی سورئال. موج‌سواران کوچک روی موج‌های غلتان و دائمی در سینک سنگی حمام موج‌سواری می‌کنند. یک شیر آب برنجی قدیمی باز، صدای بی‌پایان موج دریا را تولید می‌کند. دوربین به‌آرامی در سراسر صحنه آفتابی و عجیب حرکت می‌کند، درحالی‌که مجسمه‌های مینیاتوری به‌طور ماهرانه‌ای آب فیروزه‌ای را می‌شکافند. | موج‌سواران کوچکی که در سینک حمام دور امواج می‌چرخند. |
 
-Com o Veo 3.1, você pode usar [imagens de referência](https://ai.google.dev/gemini-api/docs/veo?hl=pt-br#reference-images) ou
-ingredientes para direcionar o conteúdo
-do vídeo gerado. Forneça até três imagens de uma única pessoa, personagem
-ou produto. O Veo preserva a aparência do assunto no vídeo de saída.
+Veo 3.1 به شما امکان می‌دهد بااستفاده از [تصاویر مرجع](https://ai.google.dev/gemini-api/docs/veo?hl=fa#reference-images) یا مواد لازم، محتوای ویدیو تولیدشده را هدایت کنید. حداکثر سه تصویر دارایی از یک فرد، شخصیت،
+یا محصول ارائه دهید. ‫Veo ظاهر سوژه را در ویدیو خروجی حفظ می‌کند.
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| **Imagem de referência (gerada pelo Nano Banana)** Um peixe-pescador à espreita nas profundezas escuras do oceano, com os dentes à mostra e a isca brilhando. | Um peixe-pescador escuro e brilhante |
-| **Imagem de referência (gerada pelo Nano Banana)** Uma fantasia rosa de princesa para crianças, com varinha e tiara, em um fundo de produto simples. | Uma fantasia infantil de princesa rosa |
-| **Vídeo de saída (gerado pelo Veo 3.1)** Crie uma versão de desenho animado engraçada do peixe usando a fantasia, nadando e acenando com a varinha. | Um peixe-pescador fantasiado de princesa |
+| **تصویر مرجع (تولیدشده با Nano Banana)** قلابچه‌ماهی اعماق دریا در آب‌های تاریک و عمیق کمین کرده است، دندان‌هایش نمایان است و طعمه‌اش می‌درخشد. | قلابچه‌ماهی تیره و درخشان |
+| **تصویر مرجع (تولیدشده با Nano Banana)** لباس صورتی شاهزاده خانم برای کودک با عصای جادویی و نیم‌تاج، در پس‌زمینه ساده محصول. | لباس شاهزاده خانم صورتی کودکانه |
+| **ویدیو خروجی (تولیدشده با Veo 3.1)** نسخه کارتونی احمقانه‌ای از ماهی درحالی‌که لباس را پوشیده است، شنا می‌کند، و چوب جادویی را در اطراف تکان می‌دهد ایجاد کن. | قلاب‌ماهی‌ای که لباس شاهزاده پوشیده است |
 
-Com o Veo 3.1, você também pode gerar vídeos especificando os [primeiro e último
-frames](https://ai.google.dev/gemini-api/docs/veo?hl=pt-br#using-first-and-last-video-frames) do vídeo.
+بااستفاده از Veo 3.1، می‌توانید با مشخص کردن [قاب‌های اول و آخر](https://ai.google.dev/gemini-api/docs/veo?hl=fa#using-first-and-last-video-frames) ویدیو نیز ویدیو تولید کنید.
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| **Primeira imagem (gerada pelo Nano Banana)** Uma imagem frontal fotorrealista de alta qualidade de um gato laranja dirigindo um carro de corrida conversível vermelho na costa da Riviera Francesa. | Um gato laranja dirigindo um carro de corrida conversível vermelho |
-| **Última imagem (gerada pelo Nano Banana)** Mostre o que acontece quando o carro sai de um penhasco. | Um gato laranja dirigindo um conversível vermelho cai de um penhasco |
-| **Vídeo de saída (gerado pelo Veo 3.1)** Opcional | Um gato dirige em um penhasco e decola |
+| **تصویر اول (تولیدشده توسط Nano Banana)** تصویر واقع‌نمای باکیفیت از نمای جلوی گربه زنجبیلی که درحال راندن خودرو مسابقه‌ای قرمز سقف‌باز در ساحل ریویرا فرانسه است. | گربه زنجبیلی درحال رانندگی با ماشین مسابقه قرمز روباز |
+| **آخرین تصویر (تولیدشده با Nano Banana)** نشان بده وقتی خودرو از صخره پرواز می‌کند چه اتفاقی می‌افتد. | گربه زنجبیلی که سوار بر خودروی قرمز روباز از صخره سقوط می‌کند |
+| **ویدیو خروجی (تولیدشده توسط Veo 3.1)** اختیاری | گربه‌ای از صخره‌ای رانندگی می‌کند و پرواز می‌کند |
 
-Esse recurso oferece controle preciso sobre a composição da foto, permitindo
-que você defina o frame inicial e final. Faça upload de uma imagem ou use um frame de uma
-geração de vídeo anterior para garantir que a cena comece e termine exatamente
-como você imagina.
+این ویژگی به شما امکان می‌دهد با تعریف کردن قاب شروع و پایان، کنترل دقیقی بر ترکیب‌بندی عکس خود داشته باشید. تصویری بارگذاری کنید یا از قابی از ویدیو تولیدشده قبلی استفاده کنید تا مطمئن شوید صحنه شما دقیقاً همان‌طور که تصور می‌کنید شروع و تمام می‌شود.
 
-### Comandos de extensão
+### درخواست برای افزونه
 
-Para [estender](https://ai.google.dev/gemini-api/docs/veo?hl=pt-br#extending-veo-videos) seu vídeo gerado pelo Veo com o Veo 3.1 (não disponível para o Veo 3.1 Lite), use o vídeo como entrada junto com um comando de texto opcional. A extensão finaliza o último segundo ou 24
-frames do vídeo e continua a ação.
+برای [طولانی‌تر کردن](https://ai.google.dev/gemini-api/docs/veo?hl=fa#extending-veo-videos) ویدیو تولیدشده با Veo بااستفاده از Veo 3.1 (برای Veo 3.1 Lite دردسترس نیست)، از ویدیو به‌عنوان ورودی به‌همراه پیام‌واره نوشتاری اختیاری استفاده کنید. «طولانی کردن» ثانیه آخر یا ۲۴ قاب آخر ویدیو شما را نهایی می‌کند و کنش را ادامه می‌دهد.
 
-A voz não poderá ser estendida de forma eficaz se não estiver presente no
-último segundo do vídeo.
+توجه داشته باشید که اگر صدا در ۱ ثانیه آخر ویدیو وجود نداشته باشد، نمی‌توان آن را به‌طور مؤثر گسترش داد.
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| **Vídeo de entrada (gerado pelo Veo 3.1)** O parapente decola do topo da montanha e começa a planar sobre os vales cobertos de flores. | Um parapente decolando do topo de uma montanha |
-| **Vídeo de saída (gerado pelo Veo 3.1)** Estenda este vídeo com o parapente descendo lentamente. | Um parapente decola do topo de uma montanha e desce lentamente |
+| **ویدیو ورودی (تولیدشده توسط Veo 3.1)** چتربال‌سوار از بالای کوه پرواز می‌کند و شروع به سر خوردن از کوه‌ها می‌کند و به دره‌های پوشیده از گل در پایین نگاه می‌کند. | چتربال‌سواری درحال پریدن از بالای کوه |
+| **ویدیو خروجی (تولیدشده با Veo 3.1)** این ویدیو را با چتربالی که به‌آرامی فرود می‌آید گسترش بده. | چتربالی از بالای کوه بلند می‌شود و سپس به‌آرامی فرود می‌آید |
 
-### Exemplos de comandos e saídas
+### پیام‌واره‌های نمونه و خروجی
 
-Esta seção apresenta vários comandos, destacando como os detalhes descritivos podem
-melhorar o resultado de cada vídeo.
+این بخش چند پیام‌واره را ارائه می‌دهد و نشان می‌دهد که چگونه جزئیات توصیفی می‌توانند
+نتیجه هر ویدیو را ارتقا دهند.
 
-#### Sinos
+#### زنگ‌های موسیقی شاد
 
-Este vídeo demonstra como usar os elementos dos
-[conceitos básicos de criação de comandos](#basics) no seu comando.
+این ویدیو نشان می‌دهد که چگونه می‌توانید از عناصر
+[مبانی نوشتن پیام‌واره](#basics) در پیام‌واره خود استفاده کنید.
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| Close-up (composição) de pingentes de gelo derretendo (objeto) em uma parede de rocha congelada (contexto) com tons de azul frio (ambiente), zoom (movimento da câmera) mantendo detalhes em close-up de gotas de água (ação). | Pingentes de gelo derretendo com um fundo azul. |
+| نمای نزدیک (ترکیب‌بندی) از قندیل‌های درحال ذوب (سوژه) روی دیوار سنگی یخ‌زده (زمینه) با رنگ‌های آبی سرد (محیط)، بزرگ‌نمایی‌شده (حرکت دوربین) با حفظ جزئیات نمای نزدیک از قطرات آب (کنش). | قندیل‌های درحال چکیدن با پس‌زمینه آبی. |
 
-#### Homem no telefone
+#### مردی درحال صحبت با تلفن
 
-Esses vídeos mostram como revisar seu comando com detalhes cada vez mais específicos para que o Veo refine o resultado de acordo com suas preferências.
+این ویدیوها نشان می‌دهند که چگونه می‌توانید پیام‌واره‌تان را با جزئیات خاص‌تر بازبینی کنید تا Veo خروجی را مطابق میل شما اصلاح کند.
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| **Menos detalhes** A câmera se aproxima para mostrar um close de um homem desesperado em um sobretudo verde. Ele está fazendo uma ligação em um telefone de disco de parede com uma luz verde neon. Parece uma cena de filme. | Homem falando ao telefone. |
-| **Mais detalhes** Uma cena cinematográfica em close-up mostra um homem desesperado em um sobretudo verde desgastado enquanto ele disca em um telefone de disco montado em uma parede de tijolos áspera, banhado pelo brilho misterioso de um letreiro de neon verde. A câmera se aproxima, revelando a tensão em sua mandíbula e o desespero estampado em seu rosto enquanto ele tenta fazer a ligação. A profundidade de campo reduzida foca na testa franzida dele e no telefone preto, desfocando o fundo em um mar de cores neon e sombras indistintas, criando uma sensação de urgência e isolamento. | Homem falando ao telefone |
+| **جزئیات کمتر** دوربین حرکت می‌کند تا نمای نزدیک مردی درمانده را در کت بارانی سبز نشان دهد. او درحال تماس گرفتن با تلفن دیواری چرخشی با نور نئون سبز است. به‌نظر می‌رسد صحنه‌ای از فیلم باشد. | مردی که با تلفن صحبت می‌کند. |
+| **جزئیات بیشتر** نمای نزدیک سینمایی مردی درمانده را با کت بارانی سبز رنگ‌ورورفته دنبال می‌کند که درحال شماره‌گیری با تلفن چرخشی نصب‌شده روی دیوار آجری کثیف است و در نور وهم‌انگیز تابلوی نئون سبز غرق شده است. دوربین به او نزدیک می‌شود و تنش را در فک او و ناامیدی را که در چهره‌اش نقش بسته است، درحالی‌که تلاش می‌کند تماس بگیرد، نشان می‌دهد. عمق کم فضا بر پیشانی پرچین او و تلفن سیاه چرخشی تمرکز دارد و پس‌زمینه را به دریایی از رنگ‌های نئونی و سایه‌های نامشخص تبدیل می‌کند و حس فوریت و انزوا را ایجاد می‌کند. | مردی که با تلفن صحبت می‌کند |
 
-#### Leopardo-das-neves
+#### پلنگ برفی
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| **Comando simples**: Uma criatura fofa com pelo de leopardo-das-neves está caminhando em uma floresta de inverno, renderização no estilo de desenho animado 3D. | O leopardo-das-neves está letárgico. |
-| **Comando detalhado**: Crie uma cena curta de animação 3D em um estilo de desenho animado alegre. Uma criatura fofa com pelo de leopardo-das-neves, olhos grandes e expressivos e uma forma amigável e arredondada corre alegremente por uma floresta de inverno mágica. A cena deve mostrar árvores arredondadas cobertas de neve, flocos de neve caindo suavemente e luz solar quente filtrada pelos galhos. Os movimentos saltitantes e o sorriso largo da criatura devem transmitir pura alegria. Busque um tom otimista e emocionante, com cores vivas e alegres e animações divertidas. | O leopardo-das-neves está correndo mais rápido. |
+| **پیام‌واره ساده:** موجودی بامزه با خز شبیه پلنگ برفی درحال قدم زدن در جنگل زمستانی، پرداخت به‌سبک کارتون سه‌بعدی. | پلنگ برفی بی‌حال است. |
+| **پیام‌واره دقیق:** یک صحنه پویانمایی سه‌بعدی کوتاه به‌سبک کارتونی شاد بساز. موجودی بامزه با خز شبیه پلنگ برفی، چشم‌های درشت و گویا، و بدنی گرد و دوستانه که با خوشحالی در جنگل زمستانی رؤیایی جست‌وخیز می‌کند. صحنه باید شامل درختان گرد پوشیده از برف، دانه‌های برف که به‌آرامی می‌بارند، و نور گرم خورشید که از میان شاخه‌ها می‌تابد باشد. حرکات جهشی موجود و لبخند پهنش باید لذت خالص را منتقل کند. لحنی شاد و دلگرم‌کننده با رنگ‌های روشن و شاد و پویانمایی بازیگوشانه داشته باش. | پلنگ برفی سریع‌تر می‌دود. |
 
-### Exemplos por elementos de escrita
+### نمونه‌هایی براساس عناصر نوشتاری
 
-Estes exemplos mostram como refinar seus comandos de acordo com cada elemento básico.
+این مثال‌ها به شما نشان می‌دهند که چگونه پیام‌واره‌هایتان را براساس هر عنصر پایه بهبود دهید.
 
-#### Assunto e contexto
+#### موضوع و بافت
 
-Especifique o foco principal (objeto) e o plano de fundo ou ambiente (contexto).
+کانون اصلی (سوژه) و پس‌زمینه یا محیط (بافت) را مشخص کنید.
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| Uma renderização arquitetônica de um prédio de apartamentos de concreto branco com formas orgânicas fluidas, que se misturam perfeitamente com vegetação exuberante e elementos futuristas | Marcador. |
-| Um satélite flutuando no espaço sideral com a lua e algumas estrelas ao fundo. | Satélite flutuando na atmosfera. |
+| طرح معماری از یک ساختمان آپارتمانی بتنی سفید با اشکال ارگانیک روان، که به‌طور یکپارچه با فضای سبز انبوه و عناصر آینده‌نگرانه ترکیب شده است | جای‌بان. |
+| ماهواره‌ای که در فضا شناور است و ماه و چند ستاره در پس‌زمینه آن قرار دارد. | ماهواره‌ای که در جو شناور است. |
 
-#### Ação
+#### کنش
 
-Especifique o que o sujeito está fazendo (por exemplo, caminhando, correndo ou virando a
-cabeça).
+مشخص کنید که سوژه چه کاری انجام می‌دهد (مثلاً راه رفتن، دویدن، یا چرخاندن
+سر).
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| Uma tomada aberta de uma mulher caminhando pela praia, olhando para o horizonte com um semblante de satisfação e relaxamento ao pôr do sol. | O pôr do sol é absolutamente lindo. |
+| نمای باز از زنی که در امتداد ساحل قدم می‌زند و با ظاهری راضی و آرام در غروب آفتاب به افق نگاه می‌کند. | غروب آفتاب واقعاً زیبا است. |
 
-#### Estilo
+#### سبک
 
-Adicione palavras-chave para direcionar a geração para uma estética específica (por exemplo, surreal,
-vintage, futurista, film noir).
+کلیدواژه‌هایی اضافه کنید تا تولید را به‌سمت زیبایی‌شناسی خاصی هدایت کنید (مثلاً سورئال،
+قدیمی، آینده‌نگر، فیلم نوآر).
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| Estilo de filme noir, homem e mulher andando na rua, mistério, cinematográfico, preto e branco. | O estilo de filme noir é absolutamente lindo. |
+| سبک فیلم نوآر، مرد و زنی در خیابان قدم می‌زنند، رازآلود، سینمایی، سیاه و سفید. | سبک فیلم نوآر واقعاً زیبا است. |
 
-#### Movimento e composição da câmera
+#### حرکت دوربین و ترکیب‌بندی
 
-Especifique como a câmera se move (tomada em primeira pessoa, vista aérea, vista de drone) e
-como a cena é enquadrada (plano aberto, plano fechado, ângulo baixo).
+مشخص کنید دوربین چگونه حرکت کند (نمای POV، نمای هوایی، نمای پهپاد ردیاب) و
+تک‌عکس چگونه قاب‌بندی شود (نمای باز، نمای نزدیک، زاویه پایین).
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| Uma tomada em primeira pessoa de um carro vintage dirigindo na chuva, no Canadá à noite, cinematográfica. | O pôr do sol é absolutamente lindo. |
-| Detalhe máximo de um olho com o reflexo de uma cidade. | O pôr do sol é absolutamente lindo. |
+| نمای POV از خودرویی قدیمی که در باران رانندگی می‌کند، کانادا در شب، سینمایی. | غروب آفتاب واقعاً زیبا است. |
+| نمای بسیار نزدیک از چشمی که شهر در آن منعکس شده است. | غروب آفتاب واقعاً زیبا است. |
 
-#### Ambiente
+#### محیط
 
-As paletas de cores e a iluminação influenciam o clima. Tente termos como "tons quentes de laranja suave", "luz natural", "nascer do sol" ou "tons de azul frio".
+پالت‌های رنگ و نورپردازی بر حال‌وهوا تأثیر می‌گذارند. عبارت‌هایی مثل «نارنجی ملایم
+رنگ‌های گرم»، «نور طبیعی»، «طلوع آفتاب»، یا «رنگ‌های آبی سرد» را امتحان کنید.
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| Close de uma garota segurando um filhote adorável de golden retriever no parque, luz do sol. | Um filhote de cachorro nos braços de uma menina. |
-| Close cinematográfico de uma mulher triste andando de ônibus na chuva, tons de azul frio, clima triste. | Uma mulher triste andando de ônibus. |
+| نمای نزدیک از دختری که توله سگ گلدن رتریور دوست‌داشتنی را در پارک در آغوش گرفته است، نور خورشید. | توله‌سگی در آغوش دختری جوان. |
+| نمای نزدیک سینمایی از زنی غمگین که در باران سوار اتوبوس است، رنگ‌های آبی سرد، حال‌وهوای غمگین. | زنی سوار بر اتوبوس که غمگین به‌نظر می‌رسد. |
 
-### Proporções
+### نسبت ابعادی
 
-O Veo permite especificar a proporção do vídeo.
+Veo به شما امکان می‌دهد نسبت ابعادی را برای ویدیو خود مشخص کنید.
 
-| **Comando** | **Resultado gerado** |
+| **پیام‌واره** | **برونداد تولیدشده** |
 | --- | --- |
-| **Widescreen (16:9)** Crie um vídeo com uma vista de drone de um homem dirigindo um carro conversível vermelho em Palm Springs, década de 1970, luz solar quente, sombras longas. | Um homem dirigindo um carro conversível vermelho em Palm Springs, no estilo dos anos 1970. |
-| **Retrato (9:16)** Crie um vídeo destacando os melhores momentos do movimento suave de uma cachoeira majestosa no Havaí em uma floresta tropical exuberante. Foque no fluxo realista da água, na folhagem detalhada e na iluminação natural para transmitir tranquilidade. Capture a água corrente, a atmosfera enevoada e a luz do sol filtrada pela copa densa das árvores. Use movimentos de câmera suaves e cinematográficos para mostrar a cachoeira e os arredores. Busque um tom pacífico e realista, transportando o espectador para a beleza serena da floresta tropical havaiana. | Uma cachoeira havaiana majestosa em uma floresta tropical exuberante. |
+| **صفحه‌گسترده (۱۶:۹)** ویدیویی با نمای پهپاد ردیاب از مردی که درحال رانندگی با خودرو کروک قرمز در پالم اسپرینگز است، دهه ۱۹۷۰، نور گرم خورشید، سایه‌های بلند. | مردی درحال رانندگی با خودرو قرمز سقف‌بازشو در پالم اسپرینگز، به‌سبک دهه ۱۹۷۰. |
+| **عمودی (۹:۱۶)** ویدیویی بساز که حرکت روان یک آبشار باشکوه در هاوایی را در میان یک جنگل بارانی سرسبز برجسته کند. برای انتقال حس آرامش، بر جریان آب واقع‌گرایانه، شاخ‌وبرگ‌های دقیق، و نور طبیعی تمرکز کن. آب خروشان، فضای مه‌آلود، و نور سایه‌روشن خورشید را که از میان سایبان متراکم درختان می‌گذرد به‌تصویر بکش. از حرکات نرم و سینمایی دوربین برای نمایش آبشار و محیط اطراف آن استفاده کنید. لحنی آرام و واقع‌گرایانه داشته باشد که بیننده را به زیبایی آرامش‌بخش جنگل‌های بارانی هاوایی منتقل کند. | آبشار باشکوه هاوایی در جنگل بارانی سرسبز. |
 
-## Versões do modelo
+## نسخه‌های مدل
 
-Confira a página de [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br) e os
-[limites de taxa](https://aistudio.google.com/rate-limit?hl=pt-br) para mais detalhes de uso
-específicos do modelo Veo.
+برای جزئیات بیشتر درباره استفاده از مدل Veo، صفحه [قیمت‌گذاری](https://ai.google.dev/gemini-api/docs/pricing?hl=fa) و [حدود نرخ](https://aistudio.google.com/rate-limit?hl=fa) را بررسی کنید.
 
-### Veo 3.1 Preview (descontinuado)
+### Veo 3.1 Preview (Deprecated)
 
-| Propriedade | Descrição |
+| دارایی | شرح |
 | --- | --- |
-| Código do modelo id\_card | **API Gemini**  `veo-3.1-generate-preview` |
-| saveTipos de dados aceitos | **Entrada**  Texto, imagem  **Saída**  Vídeo com áudio |
-| Limites de token\_auto | **Entrada de texto**  1.024 tokens  **Vídeo de saída**  1 |
-| calendar\_monthAtualização mais recente | Janeiro de 2026 |
+| id\_cardکد مدل | **Gemini API**  `veo-3.1-generate-preview` |
+| ذخیرهانواع داده‌های پشتیبانی‌شده | **ورودی**  نوشتار، تصویر  **خروجی**  ویدیو با صدا |
+| token\_autoمحدودیت‌ها | **ورودی نوشتاری**  ‫۱٬۰۲۴ کد  **ویدیو خروجی**  1 |
+| calendar\_monthجدیدترین به‌روزرسانی | ژانویه ۲۰۲۶ |
 
-### Veo 3.1 Fast Preview (descontinuado)
+### Veo 3.1 Fast Preview (Deprecated)
 
-| Propriedade | Descrição |
+| دارایی | شرح |
 | --- | --- |
-| Código do modelo id\_card | **API Gemini**  `veo-3.1-fast-generate-preview` |
-| saveTipos de dados aceitos | **Entrada**  Texto, imagem  **Saída**  Vídeo com áudio |
-| Limites de token\_auto | **Entrada de texto**  1.024 tokens  **Vídeo de saída**  1 |
-| calendar\_monthAtualização mais recente | Janeiro de 2026 |
+| id\_cardکد مدل | **Gemini API**  `veo-3.1-fast-generate-preview` |
+| ذخیرهانواع داده‌های پشتیبانی‌شده | **ورودی**  نوشتار، تصویر  **خروجی**  ویدیو با صدا |
+| token\_autoمحدودیت‌ها | **ورودی نوشتاری**  ‫۱٬۰۲۴ کد  **ویدیو خروجی**  1 |
+| calendar\_monthجدیدترین به‌روزرسانی | ژانویه ۲۰۲۶ |
 
-### Veo 3.1 Lite Preview (descontinuado)
+### Veo 3.1 Lite Preview (Deprecated)
 
-| Propriedade | Descrição |
+| دارایی | شرح |
 | --- | --- |
-| Código do modelo id\_card | **API Gemini**  `veo-3.1-lite-generate-preview` |
-| saveTipos de dados aceitos | **Entrada**  Texto, imagem  **Saída**  Vídeo com áudio |
-| Limites de token\_auto | **Entrada de texto**  1.024 tokens  **Vídeo de saída**  1 |
-| calendar\_monthAtualização mais recente | Março de 2026 |
+| id\_cardکد مدل | **Gemini API**  `veo-3.1-lite-generate-preview` |
+| ذخیرهانواع داده‌های پشتیبانی‌شده | **ورودی**  نوشتار، تصویر  **خروجی**  ویدیو با صدا |
+| token\_autoمحدودیت‌ها | **ورودی نوشتاری**  ‫۱٬۰۲۴ کد  **ویدیو خروجی**  1 |
+| calendar\_monthجدیدترین به‌روزرسانی | مارس ۲۰۲۶ |
 
-### Veo 3 (descontinuado)
+### ‫Veo 3 (منسوخ)
 
-| Propriedade | Descrição |
+| دارایی | شرح |
 | --- | --- |
-| Código do modelo id\_card | **API Gemini**  `veo-3.0-generate-001` |
-| saveTipos de dados aceitos | **Entrada**  Texto, imagem  **Saída**  Vídeo com áudio |
-| Limites de token\_auto | **Entrada de texto**  1.024 tokens  **Vídeo de saída**  1 |
-| calendar\_monthAtualização mais recente | Julho de 2025 |
+| id\_cardکد مدل | **Gemini API**  `veo-3.0-generate-001` |
+| ذخیرهانواع داده‌های پشتیبانی‌شده | **ورودی**  نوشتار، تصویر  **خروجی**  ویدیو با صدا |
+| token\_autoمحدودیت‌ها | **ورودی نوشتاری**  ‫۱٬۰۲۴ کد  **ویدیو خروجی**  1 |
+| calendar\_monthجدیدترین به‌روزرسانی | ژوئیه ۲۰۲۵ |
 
-### Veo 3 Fast (descontinuado)
+### Veo 3 Fast (Deprecated)
 
-| Propriedade | Descrição |
+| دارایی | شرح |
 | --- | --- |
-| Código do modelo id\_card | **API Gemini**  `veo-3.0-fast-generate-001` |
-| saveTipos de dados aceitos | **Entrada**  Texto, imagem  **Saída**  Vídeo com áudio |
-| Limites de token\_auto | **Entrada de texto**  1.024 tokens  **Vídeo de saída**  1 |
-| calendar\_monthAtualização mais recente | Julho de 2025 |
+| id\_cardکد مدل | **Gemini API**  `veo-3.0-fast-generate-001` |
+| ذخیرهانواع داده‌های پشتیبانی‌شده | **ورودی**  نوشتار، تصویر  **خروجی**  ویدیو با صدا |
+| token\_autoمحدودیت‌ها | **ورودی نوشتاری**  ‫۱٬۰۲۴ کد  **ویدیو خروجی**  1 |
+| calendar\_monthجدیدترین به‌روزرسانی | ژوئیه ۲۰۲۵ |
 
-As versões do Veo Fast permitem que os desenvolvedores criem vídeos com som, mantendo
-a alta qualidade e otimizando a velocidade e os casos de uso comercial. Eles são ideais para
-serviços de back-end que geram anúncios de forma programática, ferramentas para testes A/B rápidos
-de conceitos de criativos ou apps que precisam produzir conteúdo para redes sociais rapidamente.
+نسخه‌های Veo Fast به توسعه‌دهندگان امکان می‌دهد ویدیوهای صدادار بسازند و درعین‌حال کیفیت بالا را حفظ کنند و برای سرعت و موارد استفاده کسب‌وکاری بهینه‌سازی کنند. این مدل‌ها برای سرویس‌های پس‌زمینه‌ای که به‌صورت برنامه‌نویسی‌شده آگهی تولید می‌کنند، ابزارهای آزمایش سریع A/B برای مفاهیم خلاقانه، یا برنامه‌هایی که نیاز به تولید سریع محتوای رسانه‌های اجتماعی دارند، ایده‌آل هستند.
 
-## A seguir
+## قدم بعدی چیست
 
-- Comece a usar a API Veo 3.1 testando o [Guia de início rápido do Veo no Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=pt-br)
-  e o [applet do Veo 3.1](https://aistudio.google.com/apps/bundled/veo_studio?hl=pt-br).
-- Aprenda a escrever comandos ainda melhores com nossa [Introdução ao design de comandos](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pt-br).
+- با آزمایش کردن در [Veo Quickstart Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=fa) و [برنامک Veo 3.1](https://aistudio.google.com/apps/bundled/veo_studio?hl=fa)، کار با Veo 3.1 API را شروع کنید.
+- با [مقدمه‌ای بر طراحی پیام‌واره](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=fa) ما، با نحوه نوشتن پیام‌واره‌های بهتر آشنا شوید.
 
-Envie comentários
+ارسال بازخورد
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
 
-Última atualização 2026-10-22 UTC.
+تاریخ آخرین به‌روزرسانی 2026-10-22 به‌وقت ساعت هماهنگ جهانی.
 
-Quer enviar seu feedback?
+می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-10-22 UTC."],[],[]]
+[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-22 به‌وقت ساعت هماهنگ جهانی."],[],[]]

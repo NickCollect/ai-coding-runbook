@@ -1,26 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko
-fetched_at: 2026-10-26T05:54:55.130715+00:00
-title: "\uad00\ub9ac\ud615 \uc5d0\uc774\uc804\ud2b8\uc758 \ud658\uacbd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=fa
+fetched_at: 2026-11-02T07:30:05.919632+00:00
+title: "\u0645\u062d\u06cc\u0637\u200c\u0647\u0627 \u062f\u0631 \u0639\u0627\u0645\u0644\u200c\u0647\u0627\u06cc \u0645\u062f\u06cc\u0631\u06cc\u062a\u200c\u0634\u062f\u0647 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon을 지금 이용 가능합니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ko).
+‫Gemini 4 Argon اکنون دردسترس است. [امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fa).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [صفحه اصلی](https://ai.google.dev/?hl=fa)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
+- [سندنگار](https://ai.google.dev/gemini-api/docs?hl=fa)
 
-의견 보내기
+ارسال بازخورد
 
-# 관리형 에이전트의 환경
+# محیط‌ها در عامل‌های مدیریت‌شده
 
-환경은 에이전트가 코드를 실행하고 파일을 유지할 수 있는 격리된 공간을 제공하는 관리형 Linux 샌드박스입니다. 상호작용 컨텍스트에서 분리되어 있으므로 여러 상호작용에서 동일한 환경을 재사용하거나 언제든지 새로 시작할 수 있습니다.
+محیط‌ها جعبه‌های ایمنی مدیریت‌شده Linux هستند که به عامل‌ها مکانی مجزا برای
+اجرای کد و ماندگار کردن فایل‌ها می‌دهند. این محیط‌ها از بافت تعامل جدا شده‌اند، بنابراین می‌توانید از محیط یکسانی در چندین تعامل استفاده مجدد کنید یا هرزمان بخواهید از ابتدا شروع کنید.
 
-다음 예에서는 새로운 원격 환경과의 상호작용을 만들고 ID를 검색하는 방법을 보여줍니다.
+مثال زیر نشان می‌دهد که چگونه می‌توان تعاملی با محیط راه دور جدید ایجاد کرد و شناسه آن را بازیابی کرد:
 
 ### Python
 
@@ -38,7 +39,7 @@ interaction = client.interactions.create(
 print(f"Environment ID: {interaction.environment_id}")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -54,7 +55,7 @@ const interaction = await client.interactions.create({
 console.log(`Environment ID: ${interaction.environment_id}`);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -77,7 +78,7 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println("Environment ID: " + interaction.environmentId().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -129,17 +130,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## `environment` 매개변수
+## پارامتر `environment`
 
-`environment` 매개변수는 다음 세 가지 형식을 허용합니다.
+پارامتر `environment` سه شکل را می‌پذیرد:
 
-| 양식 | 예 | 용도 |
+| فرم | مثال | زمان استفاده |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | 새 샌드박스를 프로비저닝합니다. |
-| 환경 ID | `environment="env_abc123"` | 모든 파일과 패키지가 포함된 기존 샌드박스를 재사용합니다. |
-| 구성 객체 | `environment={...}` | 소스, 네트워크 규칙, 환경 변수 또는 이들의 조합을 사용하여 새 샌드박스를 프로비저닝합니다. |
+| `"remote"` | `environment="remote"` | جعبه شنی جدیدی آماده کنید. |
+| شناسه محیط | `environment="env_abc123"` | از جعبه شنی موجود با همه فایل‌ها و بسته‌هایش مجدداً استفاده کنید. |
+| شیء پیکربندی | `environment={...}` | سندباکس جدیدی را با منابع، قوانین شبکه، متغیرهای محیطی، یا ترکیبی از آن‌ها آماده کنید. |
 
-다음 예에서는 `environment` 매개변수를 사용하는 세 가지 방법을 보여줍니다.
+نمونه‌های زیر سه روش استفاده از پارامتر `environment`
+را نشان می‌دهد.
 
 ### Python
 
@@ -182,7 +184,7 @@ interaction_3 = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -223,7 +225,7 @@ const interaction3 = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -278,7 +280,7 @@ Interaction interaction3 = client.interactions.create(CreateInteractionRequestBo
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -400,10 +402,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 환경 구성
+## پیکربندی محیط
 
-환경을 설정하는 한 가지 방법은 설치해야 하는 항목을 에이전트에게 알려주는 것입니다.
-종속성 해결 및 문제 해결을 처리합니다. 환경이 준비되면 `environment_id`를 저장하고 재사용합니다.
+یکی از روش‌های راه‌اندازی محیط این است که به عامل بگویید چه چیزی باید نصب شود.
+این ویژگی حل وابستگی و عیب‌یابی را مدیریت می‌کند. وقتی محیط آماده شد، `environment_id` را ذخیره کنید و دوباره از آن استفاده کنید.
 
 ### Python
 
@@ -437,7 +439,7 @@ interaction_3 = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -466,7 +468,7 @@ const interaction3 = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -507,7 +509,7 @@ Interaction interaction3 = client.interactions.create(CreateInteractionRequestBo
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -589,15 +591,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 소스에서 마운트
+### نصب از منبع
 
-에이전트에 필요한 파일을 정확히 알고 있다면 반복하는 대신 단일 호출로 마운트하세요. `environment` 구성 객체는 다음 세 가지 유형의 `sources` 배열을 허용합니다.
+اگر دقیقاً می‌دانید نماینده به چه فایل‌هایی نیاز دارد، آن‌ها را در یک تماس واحد
+به‌جای تکرار سوار کنید. شیء پیکربندی `environment` آرایه‌ای از `sources` را با سه نوع می‌پذیرد:
 
-| 소스 유형 | `type` 값 | 설명 | 한도 |
+| نوع منبع | به‌ارزش `type` | شرح | حد |
 | --- | --- | --- | --- |
-| Git 저장소 | `repository` | URL에서 `target`의 샌드박스로 저장소를 클론합니다. | 500MB |
-| Cloud Storage | `gcs` | Cloud Storage의 파일 또는 디렉터리를 `target`의 샌드박스로 복사합니다. | 2GB |
-| 인라인 콘텐츠 | `inline` | 샌드박스의 `target`에 원시 텍스트 콘텐츠를 파일에 씁니다. | 파일당 1MB, 총 2MB |
+| مخزن Git | `repository` | مخزنی را از نشانی وب در جعبه ایمنی در `target` همسانه‌سازی می‌کند. | ‫۵۰۰ مگابایت |
+| فضای ذخیره‌سازی ابری | `gcs` | فایل یا دایرکتوری را از Cloud Storage در `target` در محیط امن کپی می‌کند. | ۲ گیگابایت |
+| محتوای به‌خط | `inline` | محتوای نوشتاری خام را در فایلی در محیط امن در `target` می‌نویسد. | ۱ مگابایت برای هر فایل، مجموعاً ۲ مگابایت |
 
 ### Python
 
@@ -634,7 +637,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -669,7 +672,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -716,7 +719,7 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -807,17 +810,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-알려진 소스를 선언적으로 마운트한 다음 후속 상호작용을 통해 패키지를 설치하거나 설정 스크립트를 실행하는 두 가지 접근 방식을 결합할 수 있습니다. 맞춤 소스를 추가할 때 루트 (`/`)를 타겟으로 설정할 수 없으며 항상 하위 디렉터리를 지정해야 합니다.
+می‌توانید هر دو رویکرد را ترکیب کنید: منابع شناخته‌شده را به‌صورت بیانیه نصب کنید، سپس با
+تعاملات پیگیری برای نصب بسته‌ها یا اجرای دستورگان‌های راه‌اندازی تکرار کنید. هنگام افزودن منبع سفارشی نمی‌توانید
+ریشه (`/`) را به‌عنوان هدف تنظیم کنید، همیشه باید
+زیرپوشه را مشخص کنید.
 
-### 유인 요소
+### قلاب‌ها
 
-샌드박스에 `.agents/hooks.json` 구성 파일과 맞춤 가로채기 스크립트를 마운트하여 도구가 실행될 때마다 보안 가이드라인을 적용하거나 자동 검증을 실행할 수도 있습니다. 스키마 정의 및 코드 예시는 [후크](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=ko)를 참고하세요.
+همچنین می‌توانید یک فایل پیکربندی `.agents/hooks.json` و پلاتفرم‌های رهگیری سفارشی را در محیط امن نصب کنید تا نرده‌های محافظ امنیتی را اعمال کنید یا هر زمان که ابزارها اجرا می‌شوند، اعتبارسنجی‌های خودکار را اجرا کنید. برای تعریف‌های طرحواره و نمونه‌های کد، [قلاب‌ها](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=fa) را ببینید.
 
-### 비공개 소스
+### منابع خصوصی
 
-네트워크 구성에서 소스 도메인을 인증하여 비공개 GitHub 저장소 또는 비공개 Cloud Storage 버킷에서 다운로드할 수도 있습니다.
+همچنین می‌توانید با اصالت‌سنجی دامنه منبع در پیکربندی شبکه، از مخازن خصوصی GitHub یا دسته‌های خصوصی Cloud Storage بارگیری کنید.
 
-한 가지 옵션은 ID로 참조되는 저장된 [사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)입니다. 따라서 보안 비밀을 한 번 저장하면 해당 소스가 필요한 모든 환경에서 이를 참조할 수 있습니다.
+یکی از گزینه‌ها [اطلاعات اعتباری](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fa) ذخیره‌شده‌ای است که با شناسه ارجاع داده می‌شود، بنابراین رمز را یک‌بار ذخیره می‌کنید و هر محیطی که به آن منبع نیاز دارد می‌تواند به آن ارجاع دهد:
 
 ```
 "network": {
@@ -828,10 +834,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-다음 예와 같이 `transform`를 사용하여 헤더를 인라인으로 설정할 수도 있습니다. 이그레스 프록시는 두 형식을 동일한 방식으로 적용하며 두 경우 모두 비밀번호가 샌드박스 내에 저장되지 않습니다.
+همچنین می‌توانید سرایند را به‌صورت درون‌خطی با `transform` تنظیم کنید، همان‌طور که در مثال‌های زیر
+انجام شده است. پراکسی خروجی هر دو شکل را به یک روش اعمال می‌کند و در هیچ‌کدام از این موارد
+راز در داخل محیط امن قرار نمی‌گیرد.
 
-**비공개 Git 저장소**의 경우 [GitHub 개인 액세스 토큰(PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)으로 `Basic` 인증을 사용합니다.
-`x-oauth-basic`를 사용자 이름으로 사용하여 토큰을 인코딩합니다.
+برای **مخازن خصوصی Git**، از اصالت‌سنجی `Basic` با
+[رمز دسترسی شخصی GitHub
+(PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) استفاده کنید.
+رمزگذاری کردن کد بااستفاده از `x-oauth-basic` به‌عنوان نام کاربری:
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -869,7 +879,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -901,7 +911,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -959,7 +969,7 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -1055,7 +1065,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-**비공개 Cloud Storage 버킷**의 경우 표준 OAuth 2.0 Bearer 토큰을 사용합니다.
+برای **انباره‌های خصوصی Cloud Storage**، از یک نماد استاندارد OAuth 2.0 Bearer استفاده کنید:
 
 ```
 gcloud auth print-access-token
@@ -1093,7 +1103,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -1125,7 +1135,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -1183,7 +1193,7 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -1279,24 +1289,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 사전 설치된 소프트웨어
+## نرم‌افزار ازپیش نصب‌شده
 
-샌드박스는 Ubuntu에서 실행되며 런타임과 일반 패키지가 사전 설치되어 있습니다. 에이전트는 `pip
-install` 또는 `npm install`를 사용하여 런타임에 추가 패키지를 설치할 수 있습니다. 상호작용 중에 설치된 패키지는 동일한 `environment_id`를 재사용할 때 유지됩니다.
+جعبه امن روی Ubuntu اجرا می‌شود و زمان‌های اجرا و بسته‌های رایج ازقبل نصب‌شده دارد. کارگزار می‌تواند بسته‌های اضافی را در زمان اجرا بااستفاده از `pip
+install` یا `npm install` نصب کند. بسته‌های نصب‌شده درطول تعامل وقتی که از همان `environment_id` استفاده مجدد می‌کنید ماندگار هستند.
 
-| 카테고리 | 사전 설치 패키지 |
+| دسته | بسته‌های ازپیش نصب‌شده |
 | --- | --- |
-| **UNIX 도구** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
-| **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
-| **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
+| **ابزارهای UNIX** | `curl`، `wget`، `git`، `rsync`، `unzip`، `ripgrep`، `fd-find`، `gawk`، `bc`، `tree`، `which`، `lsof`، `htop`، `jq`، `iproute2`، `procps`، `gcloud CLI` |
+| **Python 3.12** | ‫`numpy`،‏ `pandas`،‏ `requests`،‏ `google-genai`،‏ `beautifulsoup4`،‏ `pyyaml`،‏ `ast-grep-cli` |
+| **Node.js 22** | `create-next-app`، `create-vite`، `typescript` |
 
-## 환경 변수
+## متغیرهای محیط
 
-`env` 필드를 사용하여 샌드박스 내에서 환경 변수를 설정합니다. 각 항목은 변수 이름을 구성의 리터럴 문자열 또는 비밀의 저장된 [사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)에 대한 참조에 매핑합니다. 에이전트는 셸에서와 같은 방식으로 이를 확인하므로 프로세스 환경에서 읽는 도구와 스크립트는 추가 배선 없이 이를 선택합니다.
+از فیلد `env` برای تنظیم متغیرهای محیطی در محیط آزمایشی استفاده کنید. هر ورودی نام متغیر را به یکی از این موارد نگاشت می‌دهد:
+یا رشته‌ای حرفی برای پیکربندی یا
+مرجعی به [اطلاعات اعتباری](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fa) ذخیره‌شده برای
+رمز. کارگزار آن‌ها را همان‌گونه که در هر پوسته دیگری می‌بیند می‌بیند، بنابراین ابزارها و دستورگان‌هایی که از محیط فرایند می‌خوانند آن‌ها را بدون سیم‌کشی اضافی دریافت می‌کنند.
 
-| 필드 | 유형 | 설명 |
+| فیلد | نوع | شرح |
 | --- | --- | --- |
-| `env` | `object` | 변수 이름에서 값으로 매핑되는 맵입니다. 값은 리터럴 `string` 또는 `{"credential": "credential-id"}` 형식의 사용자 인증 정보 참조입니다. |
+| `env` | `object` | نقشه نام متغیر به مقدار. مقدار یا یک مقدار ثابت `string` است یا مرجع اطلاعات اعتباری به‌شکل `{"credential": "credential-id"}`. |
 
 ### Python
 
@@ -1321,7 +1334,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1364,20 +1377,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-변수는 셸 명령어, 빌드 단계, 시작하는 모든 프로세스를 비롯하여 에이전트가 해당 상호작용에서 실행하는 모든 명령어에 적용됩니다.
+متغیرها برای هر فرمانی که عامل در آن تعامل اجرا می‌کند اعمال می‌شود، ازجمله
+فرمان‌های پوسته، مراحل ساخت، و هر فرایندی که شروع می‌کند.
 
-두 값 유형은 다르게 작동합니다. 리터럴 문자열은 일반 텍스트로 컨테이너에 작성됩니다. 인증 정보 참조는 변수가 자리표시자를 수신하고 이그레스 프록시가 해당 인증 정보의 신뢰할 수 있는 도메인에 대한 아웃바운드 요청에서만 실제 비밀번호를 대체합니다. 작동 방식은 [사용자 인증 정보를 환경 변수로 사용](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko#environment-variables)을 참고하세요.
+این دو نوع مقدار رفتار متفاوتی دارند. رشته‌ای تحت‌اللفظی به‌عنوان نوشتار ساده در
+ظرف نوشته می‌شود. مرجع اطلاعات اعتباری این‌گونه نیست: متغیر جای‌بان دریافت می‌کند، و پراکسی خروجی رمز واقعی را فقط در درخواست‌های خروجی به دامنه‌های مورداعتماد آن اطلاعات اعتباری جایگزین می‌کند. برای اطلاع از نحوه عملکرد آن،
+[استفاده از اعتبارنامه‌ها به‌عنوان متغیرهای محیطی](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fa#environment-variables)
+را ببینید.
 
-## 네트워크 구성
+## پیکربندی شبکه
 
-기본적으로 환경에는 제한 없는 아웃바운드 네트워크 액세스 권한이 있습니다. `network` 필드를 사용하여 아웃바운드 트래픽을 특정 도메인으로 제한합니다. 각 규칙은 `domain`와 저장된 보안 비밀을 삽입하는 선택적 `credential`, 일치하는 요청에 헤더를 삽입하는 선택적 `transform` 객체를 지정합니다.
-이러한 헤더는 상호작용마다 고유할 수 있으며 동일한 환경에 대해 업데이트할 수 있습니다.
+به‌طور پیش‌فرض، محیط‌ها دسترسی نامحدود به شبکه خروجی دارند. از فیلد
+`network` برای محدود کردن ترافیک خروجی به دامنه‌های خاص استفاده کنید. هر قانون
+`domain` را مشخص می‌کند، به‌علاوه `credential` اختیاری برای تزریق کردن رمز ذخیره‌شده
+و `transform` اختیاری برای تزریق کردن سرایندها به درخواست‌های منطبق.
+این سرایندها می‌توانند برای هر تعامل منحصربه‌فرد باشند و می‌توانید آن‌ها را برای محیط یکسان به‌روز کنید.
 
-| 필드 | 유형 | 설명 |
+| فیلد | نوع | شرح |
 | --- | --- | --- |
-| `domain` | `string` | 일치시킬 도메인입니다. 정확한 호스트 이름 또는 모든 도메인에 `*`을 사용합니다. |
-| `credential` | `string` | 저장된 [사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)의 ID입니다. 이그레스 프록시는 이를 확인하고 요청 시 인증 헤더를 삽입합니다. |
-| `transform` | `object` | 일치하는 요청에 삽입할 헤더를 나타내는 플랫 키-값 쌍이 포함된 객체입니다(예: `{"Authorization": "Bearer ..."}`). |
+| `domain` | `string` | دامنه برای مطابقت. از نام میزبان دقیق یا `*` برای همه دامنه‌ها استفاده کنید. |
+| `credential` | `string` | شناسه [اعتبارنامه](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fa) ذخیره‌شده. کارگزار خروجی آن را حل می‌کند و سرایند احراز هویت را در زمان درخواست تزریق می‌کند. |
+| `transform` | `object` | شیء حاوی جفت‌های مقدار-کلید مسطح که نشان‌دهنده سرایندهایی است که باید در درخواست‌های منطبق تزریق شود، برای نمونه `{"Authorization": "Bearer ..."}`. |
 
 ### Python
 
@@ -1409,7 +1429,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1439,7 +1459,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -1487,7 +1507,7 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -1571,14 +1591,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-허용 목록이 설정되면 명시적으로 나열된 도메인에 대한 요청만 허용됩니다. 와일드 카드를 사용하여 하위 도메인 (예: `{"domain":
-"*.example.com"}`)을 일치시킬 수 있지만 루트 도메인 `example.com`은 일치하지 않으므로 별도로 추가해야 합니다. 헤더가 삽입되지 않은 미등록 도메인 라우팅과 같은 다른 모든 트래픽을 허용하려면 `{"domain": "*"}`를 포괄 항목으로 추가합니다.
+وقتی فهرست مجاز تنظیم می‌شود، فقط درخواست‌های دامنه‌هایی که به‌طور صریح فهرست شده‌اند مجاز است. می‌توانید از نویسه‌های عام برای مطابقت دادن زیردامنه‌ها (مثلاً `{"domain":
+"*.example.com"}`) استفاده کنید، اما توجه داشته باشید که این کار با دامنه ریشه
+`example.com` مطابقت ندارد و باید جداگانه اضافه شود. برای مجاز کردن همه ترافیک‌های دیگر، مانند مسیریابی دامنه‌های فهرست‌نشده بدون سرایندهای تزریق‌شده، `{"domain": "*"}` را به‌عنوان ورودی
+catch-all اضافه کنید.
 
-### 사용자 인증 정보
+### اطلاعات کاربری
 
-아웃바운드 트래픽을 인증하는 방법에는 ID로 참조되는 저장된 사용자 인증 정보와 허용 목록 규칙의 인라인 `transform`의 두 가지가 있습니다. 이그레스 프록시는 와이어에 모두 적용되므로 두 경우 모두 보안 비밀이 샌드박스에 입력되지 않고 상호작용 페이로드에 표시되지 않습니다.
+دو روش برای اصالت‌سنجی ترافیک خروجی وجود دارد: اعتبارنامه ذخیره‌شده
+ارجاع‌شده براساس شناسه و `transform` درون‌خطی در قانون فهرست مجازها. کارگزار خروجی هم در سیم اعمال می‌شود، بنابراین در هر دو مورد، رمز هرگز وارد
+جعبه ایمنی نمی‌شود و هرگز در محموله‌های تعامل شما ظاهر نمی‌شود.
 
-[관리 사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)는 보안 비밀을 한 번 저장하고 재사용하려는 경우에 사용합니다. 프로젝트의 모든 환경, 에이전트, 트리거가 동일한 ID를 참조할 수 있으며 한 곳에서 이를 순환할 수 있습니다.
+[اطلاعات اعتباری مدیریت‌شده](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fa) اطلاعاتی است که وقتی می‌خواهید رمز را یک‌بار ذخیره کنید و دوباره از آن استفاده کنید، باید به آن دسترسی پیدا کنید. هر محیط،
+عامل، و راه‌انداز در پروژه شما می‌تواند به همان شناسه ارجاع دهد، و آن را
+در یک مکان می‌چرخانید.
 
 ### Python
 
@@ -1611,7 +1637,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1673,9 +1699,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`oauth2` 사용자 인증 정보는 자체적으로 액세스 토큰을 갱신하므로 토큰이 만료되어도 장기 실행 상호작용이 중단되지 않습니다. 사용자 인증 정보 유형 및 관리 작업의 전체 목록은 [사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)를 참고하세요.
+گواهینامه `oauth2` نیز به‌تنهایی رمز دسترسی خود را بازآوری می‌کند، بنابراین تعامل طولانی‌مدت با انقضای رمز قطع نمی‌شود. برای فهرست کامل انواع اطلاعات اعتباری و عملیات مدیریت،
+[اطلاعات اعتباری](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fa) را ببینید.
 
-`transform`를 사용하여 인라인으로 헤더를 설정할 수도 있습니다. 이는 값이 단일 호출에 속하는 경우에 적합합니다. 예를 들어 상호작용을 만들기 직전에 생성하는 토큰이 있습니다. 이 방식으로 설정된 헤더는 동일한 이그레스 프록시에 의해 삽입되며 샌드박스 내에서 환경 변수나 파일로 노출되지 않습니다.
+همچنین می‌توانید سرایندها را به‌صورت درون‌خطی با `transform` تنظیم کنید. این مورد زمانی مناسب است که مقدار
+متعلق به یک تماس باشد، برای مثال، نشانه‌ای که درست قبل‌از ایجاد
+تعامل تولید می‌کنید. سرایندهایی که به این روش تنظیم می‌شوند توسط همان پراکسی خروجی تزریق می‌شوند،
+این سرایندها هرگز در محیط امن به‌عنوان متغیرهای محیطی یا فایل‌ها آشکار نمی‌شوند.
 
 ### Python
 
@@ -1711,7 +1741,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1743,7 +1773,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -1794,7 +1824,7 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -1880,11 +1910,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`credential`와 `transform`는 동일한 규칙에 표시될 수 있습니다. 사용자 인증 정보가 먼저 적용되고 `transform`이 맨 위에 병합되므로 둘 다 동일한 키를 설정하면 명시적 `transform` 헤더가 우선합니다. 일반적인 패턴은 인증 헤더의 사용자 인증 정보와 서비스가 함께 필요로 하는 추가 헤더의 `transform`입니다.
+‫`credential` و `transform` می‌توانند در یک قانون ظاهر شوند. ابتدا اطلاعات اعتباری اعمال می‌شود و `transform` در بالا ادغام می‌شود، بنابراین اگر هر دو کلید یکسانی را تنظیم کنند، سرصفحه `transform` صریح برنده است. الگوی رایج عبارت است از اطلاعات اعتباری برای سرایند اصالت‌سنجی به‌علاوه `transform` برای سرایندهای اضافی که سرویس
+همراه با آن انتظار دارد.
 
-### 네트워크 액세스 사용 중지
+### غیرفعال کردن دسترسی به شبکه
 
-모든 아웃바운드 네트워크 액세스를 차단하려면 `network`을 `disabled`로 설정합니다.
+برای مسدود کردن همه دسترسی‌های شبکه خروجی، `network` را روی `disabled` تنظیم کنید:
 
 ### Python
 
@@ -1905,7 +1936,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1924,7 +1955,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -1954,7 +1985,7 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -2012,12 +2043,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 사용자 인증 정보 새로고침
+### بازآوری اعتبارنامه‌ها
 
-액세스 토큰 및 단기 API 키와 같은 인라인 토큰은 만료됩니다.
-다음 상호작용에서 기존 `environment_id`을 새 `network` 구성과 함께 전달하여 새로고침할 수 있습니다. 새 네트워크 규칙은 이전 규칙을 완전히 대체하지만 환경의 파일 시스템 상태(설치된 패키지, 파일, 저장소)는 유지됩니다.
+ژتون‌های درون‌خطی مانند ژتون‌های دسترسی و کلیدهای API کوتاه‌مدت منقضی می‌شوند.
+با ارسال `environment_id` موجود به‌همراه پیکربندی `network` جدید در تعامل بعدی، می‌توانید آن‌ها را بازآوری کنید. قوانین شبکه جدید به‌طور کامل جایگزین قوانین قبلی می‌شود، درحالی‌که وضعیت سیستم فایل محیط (بسته‌های نصب‌شده، فایل‌ها، مخازن) حفظ می‌شود.
 
-저장된 [사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)를 대신 사용하는 경우에는 필요하지 않습니다. `oauth2` 사용자 인증 정보는 자체적으로 새로고침되며 사용자 인증 정보를 순환하는 것은 사용자 인증 정보에 대한 `PATCH`이므로 이를 참조하는 모든 허용 목록 규칙은 그대로 유지됩니다.
+اگر به‌جای آن از [اطلاعات اعتباری](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fa) ذخیره‌شده استفاده می‌کنید،
+به این مورد نیاز ندارید. اعتبارنامه‌های `oauth2` خودشان را بازآوری می‌کنند و چرخش هر اعتبارنامه‌ای `PATCH` در اعتبارنامه است که هر قانون فهرست مجاز ارجاع‌دهنده به آن را دست‌نخورده باقی می‌گذارد.
 
 ### Python
 
@@ -2068,7 +2100,7 @@ result = client.interactions.create(
 print(result.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2117,7 +2149,7 @@ const result = await client.interactions.create({
 console.log(result.output_text);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -2189,7 +2221,7 @@ Interaction result = client.interactions.create(CreateInteractionRequestBody.of(
 System.out.println(result.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -2295,26 +2327,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 환경 수명 주기
+## چرخه حیات محیط
 
-환경은 다음 수명 주기를 따릅니다.
+محیط‌ها از این چرخه حیات پیروی می‌کنند:
 
-| 주 | 동작 |
+| ایالت | رفتار |
 | --- | --- |
-| **생성 시간** | 상호작용에서 `environment: "remote"` 또는 구성 객체를 지정할 때 프로비저닝됩니다. |
-| **활성** | 상호작용이 진행되는 동안 실행됩니다. |
-| **유휴** | 자동 스냅샷이 생성되고 15분 동안 활동이 없으면 중지됩니다. |
-| **오프라인** | 마지막 활성 이후 7일 동안 보관됩니다. ID를 전달하여 재개할 수 있습니다. |
-| **삭제됨** | 7일 TTL 보관 기간이 만료된 후 또는 수동으로 삭제하면 시스템에서 자동으로 삭제됩니다. |
+| **ایجادشده** | وقتی تعاملی `environment: "remote"` یا شیء پیکربندی را مشخص می‌کند، آماده می‌شود. |
+| **فعال** | درحال اجرا شدن درحالی‌که تعاملی درجریان است. |
+| **Idle** | عکس فوری خودکار و پس‌از ۱۵ دقیقه عدم فعالیت متوقف شد. |
+| **آفلاین** | از آخرین زمان فعال بودن به‌مدت ۷ روز نگهداری می‌شود. با ارسال شناسه آن می‌توان ازسر گرفت. |
+| **حذف‌شده** | پس‌از منقضی شدن دوره نگهداری ۷ روزه «زمان زنده بودن» یا پس‌از حذف دستی، به‌طور خودکار از سیستم برداشته می‌شود. |
 
 ## Environments API
 
-Environments API를 사용하여 프로그래매틱 방식으로 샌드박스 세션을 관리할 수 있습니다.
-환경을 열거하면 활성 세션 ID를 검색하고 장기 실행 작업 중에 클라이언트 연결이 종료되는 경우 상태를 복구할 수 있습니다. 자동 TTL 만료를 기다리지 않고 워크플로가 종료될 때 세션 메타데이터를 검사하고 환경을 명시적으로 삭제할 수도 있습니다.
+می‌توانید از «میانای برنامه‌سازی کاربردی محیط‌ها» برای مدیریت برنامه‌ریزی‌شده جلسات جعبه امن استفاده کنید.
+شمردن محیط‌ها به شما امکان می‌دهد شناسه‌های جلسه فعال را پیدا کنید و اگر اتصال کارخواه درطول تکلیف طولانی‌مدت قطع شد، وضعیت را بازیابی کنید. همچنین می‌توانید
+فراداده جلسه را بازرسی کنید و محیط‌ها را به‌طور صریح حذف کنید
+وقتی گردش‌های کار به‌پایان می‌رسند، به‌جای اینکه منتظر انقضای خودکار TTL بمانید.
 
-### 환경 나열
+### فهرست کردن محیط‌ها
 
-프로젝트에 속한 활성 환경을 나열합니다. 페이지로 나누기 매개변수를 사용하여 응답 배치 크기를 제어합니다.
+فهرست محیط‌های فعال متعلق به پروژه شما. از پارامترهای صفحه‌بندی
+برای کنترل اندازه دسته‌ای پاسخ استفاده کنید.
 
 ### Python
 
@@ -2328,7 +2363,7 @@ for env in response.environments:
     print(f"Environment ID: {env.id}, Status: {env.status}")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2341,7 +2376,7 @@ for (const env of response.environments) {
 }
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -2362,7 +2397,7 @@ for (Environment env : response.environments().orElse(List.of())) {
 }
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -2407,7 +2442,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments?pageS
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-응답은 다음과 유사합니다.
+پاسخ شبیه به این است:
 
 ```
 {
@@ -2425,9 +2460,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments?pageS
 }
 ```
 
-### 환경 가져오기
+### دریافت محیط
 
-리소스 이름으로 특정 환경의 메타데이터와 구성 세부정보를 가져옵니다.
+جزئیات پیکربندی و فراداده‌های محیط خاصی را براساس نام منبع آن بازیابی کنید.
 
 ### Python
 
@@ -2440,7 +2475,7 @@ env = client.environments.get(id="YOUR_ENVIRONMENT_ID")
 print(f"Environment ID: {env.id}, Status: {env.status}")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2451,7 +2486,7 @@ const env = await client.environments.get("YOUR_ENVIRONMENT_ID");
 console.log(`Environment ID: ${env.id}, Status: ${env.status}`);
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -2463,7 +2498,7 @@ Environment env = client.environments.getEnvironment("YOUR_ENVIRONMENT_ID").envi
 System.out.println("Environment ID: " + env.id().orElse("") + ", Status: " + env.status().orElse(null));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -2505,7 +2540,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/YOUR_
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-응답은 다음과 유사합니다.
+پاسخ شبیه به این است:
 
 ```
 {
@@ -2531,9 +2566,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/YOUR_
 }
 ```
 
-### 환경 삭제
+### حذف محیط
 
-작업 또는 파이프라인이 완료되면 샌드박스 리소스를 정리하기 위해 환경을 명시적으로 종료하고 삭제합니다.
+وقتی کارها یا خطوط لوله شما تمام شد، محیط را به‌طور صریح خاتمه دهید و حذف کنید تا منابع جعبه ایمنی پاک‌سازی شود.
 
 ### Python
 
@@ -2545,7 +2580,7 @@ client = genai.Client()
 client.environments.delete(id="YOUR_ENVIRONMENT_ID")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2555,7 +2590,7 @@ const client = new GoogleGenAI({});
 await client.environments.delete("YOUR_ENVIRONMENT_ID");
 ```
 
-### 자바
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -2565,7 +2600,7 @@ Client client = new Client();
 client.environments.deleteEnvironment("YOUR_ENVIRONMENT_ID");
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -2603,19 +2638,21 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/environments/YO
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 환경에서 파일 관리
+## مدیریت فایل‌ها در محیط
 
-에이전트는 실행 중에 샌드박스 내에서 파일을 만들고 수정합니다. 디렉터리 콘텐츠를 탐색하고, 파일 메타데이터를 가져오고, 개별 파일 또는 전체 디렉터리를 tar 보관 파일로 다운로드하고, 파일을 업로드하거나 보관 파일을 환경에 직접 추출할 수 있습니다. 샌드박스 환경의 스토리지는 공정 사용량 한도가 적용됩니다.
+کارگزار درطول اجرا فایل‌ها را در داخل محیط امن ایجاد و اصلاح می‌کند. می‌توانید محتوای فهرست راهنما را مرور کنید، فراداده فایل را دریافت کنید، فایل‌های جداگانه یا کل فهرست‌های راهنما را به‌عنوان بایگانی‌های tar بارگیری کنید، و فایل‌ها را بارگذاری کنید یا بایگانی‌ها را مستقیماً در محیط استخراج کنید. فضای ذخیره‌سازی در محیط‌های جعبه شنی مشمول
+حدود استفاده منصفانه است.
 
-### 디렉터리의 파일 나열
+### فهرست کردن فایل‌ها در یک فهرست
 
-환경의 디렉터리 콘텐츠를 나열합니다. 기본적으로 루트 디렉터리를 나열합니다.
+محتوای دایرکتوری را در محیط فهرست کنید. به‌طور پیش‌فرض، فهرست
+دایرکتوری ریشه را نشان می‌دهد.
 
-#### 쿼리 매개변수
+#### پارامترهای پُرسمان
 
-| 매개변수 | 유형 | 설명 |
+| پارامتر | نوع | شرح |
 | --- | --- | --- |
-| `recursive` | 부울 | `true`: 모든 파일과 디렉터리를 재귀적으로 나열합니다. 기본값: `false` |
+| `recursive` | بولی | وقتی `true`، همه فایل‌ها و فهرستگان‌ها را به‌صورت بازگشتی فهرست می‌کند. پیش‌فرض: `false`. |
 
 ### Python
 
@@ -2642,7 +2679,7 @@ for file in response.files:
     print(f"{file.name} ({file.type}) - {file.path}")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2685,7 +2722,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-응답은 각 항목의 메타데이터가 포함된 `files` 배열을 반환합니다.
+پاسخ یک آرایه `files` با فراداده برای هر ورودی برمی‌گرداند:
 
 ```
 {
@@ -2710,21 +2747,21 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
 }
 ```
 
-#### 파일 항목 필드
+#### فیلدهای ورودی فایل
 
-| 필드 | 유형 | 설명 |
+| فیلد | نوع | شرح |
 | --- | --- | --- |
-| `name` | 문자열 | 파일 또는 디렉터리 이름입니다. |
-| `path` | 문자열 | 환경 루트를 기준으로 하는 전체 경로입니다. |
-| `type` | 문자열 | `FILE` 또는 `DIRECTORY`. |
-| `size_bytes` | 문자열 | 파일 크기(바이트)(파일만 해당) |
-| `mime_type` | 문자열 | MIME 유형 (파일만 해당). |
-| `created` | 문자열 | ISO 8601 생성 타임스탬프입니다. |
-| `modified` | 문자열 | ISO 8601 last-modified 타임스탬프입니다. |
+| `name` | رشته | نام فایل یا دایرکتوری. |
+| `path` | رشته | مسیر کامل نسبت به ریشه محیط. |
+| `type` | رشته | یا `FILE` یا `DIRECTORY`. |
+| `size_bytes` | رشته | اندازه فایل برحسب بایت (فقط فایل‌ها). |
+| `mime_type` | رشته | نوع MIME (فقط فایل‌ها). |
+| `created` | رشته | مُهر زمان ایجاد ISO 8601. |
+| `modified` | رشته | مُهر زمان آخرین تغییر ISO 8601. |
 
-### 파일 메타데이터 가져오기
+### دریافت فراداده فایل
 
-경로별로 특정 파일의 메타데이터를 가져옵니다.
+فراداده‌های فایل خاصی را براساس مسیر دریافت کنید.
 
 ### Python
 
@@ -2741,7 +2778,7 @@ file = response.files[0]
 print(f"Name: {file.name}, Size: {file.size_bytes} bytes, Type: {file.mime_type}")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2763,7 +2800,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-응답은 `files` 배열로 래핑된 파일 메타데이터를 반환합니다.
+پاسخ فراداده فایل را که در آرایه `files` پیچیده شده است برمی‌گرداند:
 
 ```
 {
@@ -2781,7 +2818,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
 }
 ```
 
-파일이 없으면 API에서 `404` 오류를 반환합니다.
+اگر فایل وجود نداشته باشد، API خطای `404` برمی‌گرداند:
 
 ```
 {
@@ -2792,9 +2829,11 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
 }
 ```
 
-### 단일 파일 다운로드
+### بارگیری یک فایل
 
-특정 파일의 콘텐츠를 다운로드합니다. SDK에서는 `download()` 메서드를 사용합니다. REST 요청에서 `?alt=media` 쿼리 매개변수를 파일 경로에 추가합니다. 서버는 `200 OK`로 응답하고 원시 파일 콘텐츠를 스트리밍합니다.
+محتوای فایل خاصی را بارگیری کنید. در کیت‌های توسعه نرم‌افزار، از روش `download()`
+استفاده کنید. در درخواست‌های REST، پارامتر پُرسمان `?alt=media` را به مسیر فایل
+ضمیمه کنید. سرور با `200 OK` پاسخ می‌دهد و محتوای فایل خام را جاری‌سازی می‌کند.
 
 ### Python
 
@@ -2812,7 +2851,7 @@ with open("main.py", "wb") as f:
     f.write(content)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2836,9 +2875,10 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$E
   -o main.py
 ```
 
-### 디렉터리를 tar 보관 파일로 다운로드
+### بارگیری کردن پوشه به‌عنوان بایگانی tar
 
-`?alt=media`로 디렉터리 경로를 요청하여 전체 디렉터리를 tar 보관 파일로 다운로드합니다. 그러면 POSIX tar 파일이 반환됩니다 (gzip 압축되지 않음). `recursive=true`를 사용하여 중첩된 하위 디렉터리를 포함합니다.
+با درخواست مسیر دایرکتوری با `?alt=media`، کل دایرکتوری را به‌عنوان بایگانی tar بارگیری کنید. این کار فایل tar ‏POSIX (بدون فشرده‌سازی با gzip) برمی‌گرداند. برای افزودن زیرپوشه‌های تودرتو، از
+`recursive=true` استفاده کنید.
 
 ### Python
 
@@ -2861,7 +2901,7 @@ with tarfile.open("src.tar") as tar:
     tar.extractall(path="./extracted")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2902,30 +2942,31 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$E
 tar xf snapshot.tar -C ./extracted
 ```
 
-#### 행동 매트릭스
+#### ماتریس رفتار
 
-다음 동작 매트릭스에는 파일 및 디렉터리 엔드포인트, HTTP 메서드, 쿼리 매개변수 전반에서 예상되는 응답 및 보관 동작이 요약되어 있습니다.
+ماتریس رفتار زیر رفتار بایگانی و پاسخ موردانتظار را در سراسر نقطه‌های پایانی فایل و دایرکتوری، روش‌های HTTP، و پارامترهای پُرسمان خلاصه می‌کند:
 
-| 요청 | `alt` | `recursive` | `extract` | `overwrite` | 응답 |
+| درخواست | `alt` | `recursive` | `extract` | `overwrite` | پاسخ |
 | --- | --- | --- | --- | --- | --- |
-| `GET /files` | (없음) | (없음) | - | - | 루트 디렉터리의 JSON 목록 |
-| `GET /files/{path}` (파일) | (없음) | - | - | - | 파일의 JSON 메타데이터 |
-| `GET /files/{path}` (dir) | (없음) | `false` | - | - | 직계 자녀의 JSON 목록 |
-| `GET /files/{path}` (dir) | (없음) | `true` | - | - | 모든 하위 항목의 JSON 목록 |
-| `GET /files/{path}?alt=media` (파일) | `media` | - | - | - | 원시 파일 콘텐츠 |
-| `GET /files/{path}?alt=media` (dir) | `media` | `false` | - | - | 디렉터리의 즉시 파일의 타르 보관 파일 |
-| `GET /files/{path}?alt=media` (dir) | `media` | `true` | - | - | 모든 파일을 반복적으로 tar로 보관 |
-| `GET /files?alt=media` | `media` | `false` | - | - | 루트 수준 파일의 tar 보관 파일만 |
-| `PUT /files/{path}` (파일) | - | - | `false` | `false` | 경로에 파일을 씁니다. 이미 존재하는 경우 `409 Conflict`를 반환합니다. |
-| `PUT /files/{path}?overwrite=true` | - | - | `false` | `true` | 경로에 있는 파일을 쓰거나 덮어씁니다. |
-| `PUT /files/{path}?extract=true` | - | - | `true` | `false` | 보관 파일을 대상 디렉터리에 압축 해제합니다. 타겟 파일이 있으면 `409 Conflict`를 반환합니다. |
-| `PUT /files/{path}?extract=true&overwrite=true` | - | - | `true` | `true` | 기존 파일을 대체하여 보관 파일을 압축 해제합니다. |
+| `GET /files` | (هیچ‌کدام) | (هیچ‌کدام) | - | - | فهرست JSON دایرکتوری ریشه |
+| ‫`GET /files/{path}` (فایل) | (هیچ‌کدام) | - | - | - | فراداده JSON برای فایل |
+| ‫`GET /files/{path}` (dir) | (هیچ‌کدام) | `false` | - | - | فهرست JSON از فرزندان بی‌واسطه |
+| ‫`GET /files/{path}` (dir) | (هیچ‌کدام) | `true` | - | - | فهرست JSON همه نوادگان |
+| ‫`GET /files/{path}?alt=media` (فایل) | `media` | - | - | - | محتوای فایل Raw |
+| ‫`GET /files/{path}?alt=media` (dir) | `media` | `false` | - | - | بایگانی tar از فایل‌های فوری در دایرکتوری |
+| ‫`GET /files/{path}?alt=media` (dir) | `media` | `true` | - | - | بایگانی Tar همه فایل‌ها به‌صورت بازگشتی |
+| `GET /files?alt=media` | `media` | `false` | - | - | بایگانی tar فقط از فایل‌های سطح ریشه |
+| ‫`PUT /files/{path}` (فایل) | - | - | `false` | `false` | فایل را در مسیر می‌نویسد. اگر ازقبل وجود داشته باشد، `409 Conflict` را برمی‌گرداند |
+| `PUT /files/{path}?overwrite=true` | - | - | `false` | `true` | فایل را در مسیر می‌نویسد یا رونویسی می‌کند |
+| `PUT /files/{path}?extract=true` | - | - | `true` | `false` | بایگانی را در دایرکتوری مقصد ازهم باز می‌کند. اگر فایل هدفی وجود داشته باشد، `409 Conflict` را برمی‌گرداند |
+| `PUT /files/{path}?extract=true&overwrite=true` | - | - | `true` | `true` | بایگانی را ازهم باز می‌کند و فایل‌های موجود را جایگزین می‌کند |
 
-### 환경에 파일 업로드
+### بارگذاری فایل‌ها در محیط
 
-HTTP `PUT`를 사용하여 기존 환경 샌드박스에 개별 파일 또는 디렉터리 보관 파일을 직접 업로드합니다. 상위 디렉터리가 없으면 자동으로 생성됩니다. 환경의 스토리지는 공정 사용량 한도가 적용됩니다.
+فایل‌های تکی یا بایگانی‌های دایرکتوری را مستقیماً در محیط
+جعبه ایمنی موجود بااستفاده از HTTP `PUT` بارگذاری کنید. اگر دایرکتوری‌های والد وجود نداشته باشند، به‌طور خودکار ایجاد می‌شوند. فضای ذخیره‌سازی در محیط‌ها مشمول حدود استفاده منصفانه است.
 
-#### 단일 파일 업로드
+#### بارگذاری یک فایل
 
 ### Python
 
@@ -2947,7 +2988,7 @@ file = result.files[0]
 print(f"Uploaded: {file.name} ({file.size_bytes} bytes)")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -2977,7 +3018,8 @@ curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environment
   --data-binary @local_file.txt
 ```
 
-응답은 목록 및 가져오기 엔드포인트와의 일관성을 위해 `files` 배열로 래핑된 업로드된 파일의 메타데이터를 반환합니다.
+پاسخ فراداده‌های فایل بارگذاری‌شده را برمی‌گرداند که در یک `files` آرایه
+برای یکپارچگی با فهرست و دریافت نقطه‌های پایانی پیچیده شده است:
 
 ```
 {
@@ -2993,9 +3035,10 @@ curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environment
 }
 ```
 
-#### 디렉터리 보관 파일 업로드 및 추출
+#### بارگذاری و استخراج بایگانی دایرکتوری
 
-단일 요청에서 전체 코드베이스 또는 디렉터리 구조를 시드하려면 `extract=true`를 사용하여 `.tar` 또는 `.tar.gz` 보관 파일을 업로드합니다.
+برای قرار دادن کل پایگاه کد یا ساختار دایرکتوری در یک درخواست، بایگانی
+`.tar` یا `.tar.gz` با `extract=true` بارگذاری کنید.
 
 ### Python
 
@@ -3016,7 +3059,7 @@ for entry in result.files:
     print(f"Extracted: {entry.path}")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -3046,7 +3089,7 @@ curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environment
   --data-binary @source.tar.gz
 ```
 
-응답에는 보관 파일에서 작성한 모든 파일이 나열됩니다.
+پاسخ فهرستی از همه فایل‌های نوشته‌شده توسط بایگانی را ارائه می‌دهد:
 
 ```
 {
@@ -3069,11 +3112,16 @@ curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environment
 }
 ```
 
-#### 재개 가능한 세션으로 대용량 파일 업로드
+#### بارگذاری فایل‌های بزرگ با جلسه ازسرگیری‌پذیر
 
-페이로드가 크거나 신뢰할 수 없는 연결을 통해 업로드하는 경우 한 번의 요청으로 전체 본문을 전송하는 대신 재개 가능한 세션을 사용하세요. 재개 가능한 업로드는 전송을 개별적으로 다시 시도할 수 있는 청크로 분할하므로 중간에 실패해도 처음부터 다시 시작하지 않아도 됩니다.
+برای پیام‌واره‌های بزرگ، یا هنگام بارگذاری ازطریق اتصال غیرقابل‌اعتماد، به‌جای ارسال کل بدنه در یک درخواست، از
+جلسه ازسرگیری استفاده کنید. بارگذاری
+ازسرگیری‌پذیر انتقال را به بخش‌هایی تقسیم می‌کند که می‌توان آن‌ها را به‌صورت جداگانه دوباره امتحان کرد، بنابراین
+اگر در حین انتقال مشکلی پیش بیاید، مجبور نیستید از ابتدا شروع کنید.
 
-`uploadType=resumable`로 세션을 시작합니다. 빈 본문을 전송하고 `X-Upload-Content-Type` 및 `X-Upload-Content-Length` 헤더를 사용하여 업로드하려는 페이로드의 미디어 유형과 총 크기를 선언합니다.
+با شروع جلسه با `uploadType=resumable` شروع کنید. بدنه خالی ارسال کنید
+و از سرایندهای `X-Upload-Content-Type` و `X-Upload-Content-Length` برای
+اعلام نوع رسانه و اندازه کل داده‌برداری که قصد دارید بارگذاری کنید استفاده کنید:
 
 ```
 PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable HTTP/1.1
@@ -3084,7 +3132,8 @@ Content-Length: 0
 x-goog-api-key: $GEMINI_API_KEY
 ```
 
-응답은 `Location` 헤더에 세션 URL을 전달합니다. 이 URL에는 이미 `upload_id`가 포함되어 있으므로 API 키를 다시 입력할 필요가 없습니다.
+پاسخ نشانی وب جلسه را در سرصفحه `Location` حمل می‌کند. این نشانی وب ازقبل
+دارای `upload_id` است، بنابراین نیازی به کلید میانای برنامه‌سازی کاربردی دوباره ندارد:
 
 ```
 HTTP/1.1 200 OK
@@ -3092,7 +3141,7 @@ Location: https://generativelanguage.googleapis.com/upload/v1beta/environments/$
 Content-Length: 0
 ```
 
-청크 단위로 페이로드를 해당 URL에 업로드합니다. 각 청크는 `Content-Range` 헤더를 사용하여 바이트 범위와 총 크기를 선언합니다.
+بار محموله را به‌صورت تکه‌ای در آن نشانی وب بارگذاری کنید. هر تکه محدوده بایت و اندازه کل را با سرایند `Content-Range` اعلام می‌کند:
 
 ```
 PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable&upload_id=AJjja9bfHjiYlGi60pUazCaTuPY HTTP/1.1
@@ -3104,7 +3153,7 @@ Content-Length: 10485760
 <10 MB binary payload>
 ```
 
-마지막 청크를 제외한 모든 청크는 `308 Resume Incomplete`를 반환합니다. `Range` 헤더는 서버에서 커밋한 바이트 수를 알려줍니다. 청크가 실패하면 여기에서 재개합니다.
+هر بخش به‌جز بخش آخر `308 Resume Incomplete` را برمی‌گرداند. سرصفحه `Range` به شما می‌گوید که سرور چند بایت را متعهد کرده است، که درصورت ناموفق بودن یک تکه، از همان‌جا ازسر می‌گیرید:
 
 ```
 HTTP/1.1 308 Resume Incomplete
@@ -3112,7 +3161,7 @@ Range: bytes=0-10485759
 Content-Length: 0
 ```
 
-나머지 청크를 동일한 방식으로 전송합니다.
+بخش‌های باقی‌مانده را به همین روش ارسال کنید:
 
 ```
 PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable&upload_id=AJjja9bfHjiYlGi60pUazCaTuPY HTTP/1.1
@@ -3124,7 +3173,8 @@ Content-Length: 10485760
 <remaining 10 MB binary payload>
 ```
 
-마지막 청크는 업로드를 완료하고 단일 업로드와 동일한 `files` 봉투에 파일 메타데이터를 반환합니다.
+تکه نهایی بارگذاری را تکمیل می‌کند و فراداده فایل را در همان
+`files` پاکت بارگذاری تک‌ضرب برمی‌گرداند:
 
 ```
 {
@@ -3140,11 +3190,12 @@ Content-Length: 10485760
 }
 ```
 
-재개 가능한 세션은 `extract` 및 `overwrite`에서도 작동합니다. 개별 청크가 아닌 시작 요청에 이러한 쿼리 매개변수를 설정합니다.
+جلسه‌های ازسرگیری‌پذیر با `extract` و `overwrite` نیز کار می‌کند. آن پارامترهای پُرسمان را در درخواست آغازگر تنظیم کنید، نه در تکه‌های جداگانه.
 
-#### 덮어쓰기 보호
+#### محافظت دربرابر رونویسی
 
-`overwrite`의 기본값은 `false`입니다. 대상 경로가 이미 있는 경우 요청은 `409 Conflict` 오류를 반환하고 아무것도 쓰지 않습니다.
+به‌طور پیش‌فرض، `overwrite` روی `false` تنظیم شده است. اگر مسیر مقصد ازقبل وجود داشته باشد،
+درخواست با خطای `409 Conflict` مواجه می‌شود و چیزی نوشته نمی‌شود:
 
 ```
 {
@@ -3155,13 +3206,14 @@ Content-Length: 10485760
 }
 ```
 
-기존 파일이나 디렉터리를 바꾸려면 `overwrite=true`를 설정합니다 (또는 REST에서 `?overwrite=true` 추가). `extract=true`를 사용하면 충돌 확인이 보관 파일의 모든 파일에 적용되므로 타겟 파일이 있으면 요청이 실패합니다.
+برای جایگزین کردن فایل یا دایرکتوری موجود، `overwrite=true` را تنظیم کنید (یا `?overwrite=true` را در REST پیوست کنید). با `extract=true`، بررسی تعارض برای
+هر فایل در بایگانی اعمال می‌شود، بنابراین اگر هر فایل هدفی وجود داشته باشد، درخواست ناموفق خواهد بود.
 
-### 전체 스냅샷 다운로드 (지원 중단됨)
+### بارگیری عکس آنی کامل (منسوخ)
 
-기존 코드를 환경 파일 API로 이전하려면 다음 단계를 따르세요.
+برای انتقال کد موجود به «میانای برنامه‌سازی کاربردی فایل‌های محیطی»:
 
-- **Python**: 기존 파일 다운로드 요청을 다음으로 대체합니다.
+- **Python**: درخواست‌های بارگیری فایل قدیمی را با این جایگزین کنید:
 
   ```
   archive = client.environments.files.download(
@@ -3171,7 +3223,7 @@ Content-Length: 10485760
   with open("snapshot.tar", "wb") as f:
       f.write(archive)
   ```
-- **JavaScript**: 기존 파일 다운로드 요청을 다음으로 대체합니다.
+- **JavaScript**: درخواست‌های بارگیری فایل قدیمی را با این موارد جایگزین کنید:
 
   ```
   const bytes = await client.environments.files.download({
@@ -3180,7 +3232,7 @@ Content-Length: 10485760
   });
   fs.writeFileSync("snapshot.tar", Buffer.from(bytes));
   ```
-- **REST**: `GET /v1beta/files/environment-$ENV_ID:download?alt=media`을 다음으로 바꿉니다.
+- **REST**: جایگزین کردن `GET /v1beta/files/environment-$ENV_ID:download?alt=media` با:
 
   ```
   curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files?alt=media" \
@@ -3188,41 +3240,44 @@ Content-Length: 10485760
     -o snapshot.tar
   ```
 
-## 가격 및 리소스
+## قیمت‌گذاری و منابع
 
-각 환경은 고정된 리소스 할당으로 실행됩니다.
+هر محیط با تخصیص منابع ثابت اجرا می‌شود:
 
-| 리소스 | 값 |
+| منبع | مقدار |
 | --- | --- |
-| **CPU** | 4코어 |
-| **메모리** | 16GB |
+| **CPU** | ‫۴ هسته |
+| **حافظه** | ‫۱۶ گیگابایت |
 
-환경 컴퓨팅 (CPU, 메모리, 샌드박스 실행)은 미리보기 기간 동안 **청구되지 않습니다**. 에이전트 토큰 비용은 [가격 책정](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#pricing-for-agents)을 참고하세요.
+محاسبه محیط (CPU، حافظه، اجرای sandbox) درطول دوره پیش‌نمایش **صورت‌حساب نمی‌شود**. برای هزینه‌های
+رمز عامل،
+[قیمت‌گذاری](https://ai.google.dev/gemini-api/docs/pricing?hl=fa#pricing-for-agents) را ببینید.
 
-## 제한사항
+## محدودیت‌ها
 
-- **미리보기 상태:** 환경과 관리 에이전트는 미리보기 상태입니다. 기능과 스키마는 변경될 수 있습니다.
-- **인라인 소스 크기:** 인라인 소스는 파일당 1MB, 모든 파일의 총 크기는 2MB로 제한됩니다.
-- **소스 크기**: Git 저장소는 500MB, Cloud Storage 저장소는 2GB로 제한됩니다.
-- **환경 시작:** 새 환경을 프로비저닝하는 데 최대 5초가 걸립니다. 소스 저장소가 크면 이 시간이 늘어날 수 있습니다.
-- **환경 만료:** 비활성 오프라인 환경은 자동 TTL 정리 기능을 사용하여 만료되기 전 7일 동안 보관됩니다. 만료되었거나 잘못된 환경 ID를 전달하면 `404 Not Found` 오류가 반환됩니다.
-- **파일 지원:** 현재 에이전트는 텍스트 및 이미지 파일 읽기로 제한됩니다. 바이너리 파일 지원은 아직 제공되지 않습니다.
-- **루트에서 마운트 안 됨:** 맞춤 소스를 추가할 때 루트 (`/`)를 타겟으로 설정할 수 없으며 항상 하위 디렉터리를 지정해야 합니다.
+- **وضعیت پیش‌نمایش:** محیط‌ها و عامل‌های مدیریت‌شده در پیش‌نمایش هستند. ویژگی‌ها و طرحواره‌ها ممکن است تغییر کنند.
+- **اندازه منبع درون‌خطی:** منابع درون‌خطی به ۱ مگابایت در هر فایل و در مجموع ۲ مگابایت در همه فایل‌ها محدود می‌شوند.
+- **اندازه منبع**: مخازن Git به ۵۰۰ مگابایت و مخازن Cloud Storage به ۲ گیگابایت محدود می‌شوند.
+- **راه‌اندازی محیط:** آماده‌سازی محیط جدید تا ۵ ثانیه طول می‌کشد. مخازن منبع بزرگ ممکن است این زمان را افزایش دهند.
+- **انقضای محیط:** محیط‌های آفلاین غیرفعال به‌مدت ۷ روز نگهداری می‌شوند و سپس بااستفاده از پاک‌سازی خودکار TTL منقضی می‌شوند. ارسال شناسه محیط منقضی یا
+  نامعتبر خطای `404 Not Found` را برمی‌گرداند.
+- **پشتیبانی از فایل:** درحال‌حاضر، کارگزار به خواندن فایل‌های نوشتاری و تصویری محدود شده است. پشتیبانی از فایل باینری هنوز دردسترس نیست.
+- **بدون نصب از ریشه:** هنگام افزودن منبع سفارشی نمی‌توانید ریشه (`/`) را به‌عنوان هدف تنظیم کنید، همیشه باید زیرشاخه را مشخص کنید.
 
-## 다음 단계
+## قدم بعدی چیست
 
-- [에이전트 개요](https://ai.google.dev/gemini-api/docs/agents?hl=ko): 관리 에이전트의 핵심 개념을 알아봅니다.
-- [빠른 시작](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko): 멀티턴 대화 및 스트리밍으로 빌드 시작
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko): 기본 에이전트의 기능, 도구, 모델 선택, 가격을 살펴봅니다.
-- [맞춤 에이전트 빌드](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko): `AGENTS.md` 및 `SKILL.md`를 사용하여 자체 에이전트를 정의합니다.
-- [후크](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=ko): 보안 가드레일을 적용하고 샌드박스 내에서 부작용 검사를 실행합니다.
+- [نمای کلی عامل‌ها](https://ai.google.dev/gemini-api/docs/agents?hl=fa): با مفاهیم اصلی عامل‌های مدیریت‌شده آشنا شوید.
+- [شروع سریع](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fa): با مکالمه‌های چند نوبتی و جاری‌سازی شروع به ساختن کنید.
+- [عامل ضدجاذبه](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fa): توانمندی‌ها، ابزارها، انتخاب مدل، و قیمت‌گذاری عامل پیش‌فرض را کاوش کنید.
+- [ساختن عامل‌های سفارشی](https://ai.google.dev/gemini-api/docs/custom-agents?hl=fa): بااستفاده از `AGENTS.md` و `SKILL.md`، عامل‌های خودتان را تعریف کنید.
+- [قلاب‌ها](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=fa): نرده‌های محافظ امنیتی را اعمال کنید و اعتبارسنجی‌های اثر جانبی را در محیط امن اجرا کنید.
 
-의견 보내기
+ارسال بازخورد
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
 
-최종 업데이트: 2026-10-07(UTC)
+تاریخ آخرین به‌روزرسانی 2026-10-07 به‌وقت ساعت هماهنگ جهانی.
 
-의견을 전달하고 싶나요?
+می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-10-07(UTC)"],[],[]]
+[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-07 به‌وقت ساعت هماهنگ جهانی."],[],[]]

@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=ar
-fetched_at: 2026-10-26T05:49:37.977207+00:00
-title: "\u0625\u0646\u0634\u0627\u0621 \u0627\u0644\u0646\u0635 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=zh-CN
+fetched_at: 2026-11-02T07:12:06.459392+00:00
+title: "\u6587\u672c\u751f\u6210 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫Gemini 4 Argon متاح الآن. [جرِّب هذه الميزة](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ar).
+Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs/generate-content?hl=ar)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-cn)
 
-إرسال ملاحظات
+发送反馈
 
-# إنشاء النص
+# 文本生成
 
-يمكن لواجهة Gemini API إنشاء نصوص من خلال إدخال نصوص وصور وفيديوهات وملفات صوتية.
+Gemini API 可以通过文本、图片、视频和音频输入生成文本输出。
 
-إليك مثال أساسي:
+下面是一个基本示例：
 
 ### Python
 
@@ -86,7 +86,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -125,7 +125,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### برمجة التطبيقات
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -160,12 +160,13 @@ function main() {
 }
 ```
 
-## التفكير باستخدام Gemini
+## 与 Gemini 一起思考
 
-غالبًا ما تكون ميزة ["المفكّر"](https://ai.google.dev/gemini-api/docs/thinking?hl=ar) مفعَّلة تلقائيًا في نماذج Gemini، ما يتيح للنموذج الاستدلال قبل الردّ على طلب.
+Gemini 模型通常默认启用 [“思考”](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn) 功能，
+以便模型在响应请求之前进行推理。
 
-يتيح كل نموذج إعدادات تفكير مختلفة تمنحك التحكّم في التكلفة ووقت الاستجابة والذكاء. لمزيد من التفاصيل، يُرجى الاطّلاع على
-[دليل التفكير](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=ar#set-budget).
+每种模型都支持不同的思考配置，让您可以控制费用、延迟时间和智能程度。如需了解详情，请参阅
+[思考指南](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=zh-cn#set-budget)。
 
 ### Python
 
@@ -245,7 +246,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -297,7 +298,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### برمجة التطبيقات
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -337,10 +338,11 @@ function main() {
 }
 ```
 
-## تعليمات النظام والإعدادات الأخرى
+## 系统指令和其他配置
 
-يمكنك توجيه سلوك نماذج Gemini باستخدام تعليمات النظام. لإجراء ذلك،
-مرِّر عنصر [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ar#v1beta.GenerationConfig).
+您可以使用系统指令来引导 Gemini 模型的行为。为此，
+请传递 [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=zh-cn#v1beta.GenerationConfig)
+对象。
 
 ### Python
 
@@ -416,7 +418,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -470,7 +472,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### برمجة التطبيقات
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -512,7 +514,9 @@ function main() {
 }
 ```
 
-يتيح لك عنصر [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ar#v1beta.GenerationConfig) أيضًا إلغاء مَعلمات الإنشاء التلقائية، مثل [`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=ar#v1beta.GenerationConfig) أو [`thinking_config`](https://ai.google.dev/api/generate-content?hl=ar#ThinkingConfig).
+借助 [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=zh-cn#v1beta.GenerationConfig)
+对象，您还可以替换默认生成参数，例如
+[`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=zh-cn#v1beta.GenerationConfig) 或 [`thinking_config`](https://ai.google.dev/api/generate-content?hl=zh-cn#ThinkingConfig)。
 
 ### Python
 
@@ -589,7 +593,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -637,7 +641,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:ge
   }'
 ```
 
-### برمجة التطبيقات
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -678,11 +682,13 @@ function main() {
 }
 ```
 
-راجِع [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ar#v1beta.GenerationConfig) في مرجع واجهة برمجة التطبيقات للحصول على قائمة كاملة بالمعلّمات القابلة للإعداد وأوصافها.
+如需查看可配置参数的完整列表及其
+说明，请参阅我们的 API 参考文档中的 [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=zh-cn#v1beta.GenerationConfig)
+。
 
-## إدخالات متعددة الوسائط
+## 多模态输入
 
-تتيح Gemini API استخدام الإدخالات المتعددة الوسائط، ما يسمح لك بدمج النصوص مع ملفات الوسائط. يوضّح المثال التالي كيفية تقديم صورة:
+Gemini API 支持多模态输入，让您可以将文本与媒体文件相结合。以下示例演示了如何提供图片：
 
 ### Python
 
@@ -778,7 +784,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -843,7 +849,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   -d "@$TEMP_JSON"
 ```
 
-### برمجة التطبيقات
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -890,17 +896,19 @@ function getImageData(url) {
 }
 ```
 
-للاطّلاع على طرق بديلة لتقديم الصور ومعالجة الصور بشكل أكثر تقدّمًا،
-يمكنك مراجعة [دليل فهم الصور](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ar).
-تتيح واجهة برمجة التطبيقات أيضًا إدخال وفهم [المستندات](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar) و[الفيديوهات](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ar) و[الملفات الصوتية](https://ai.google.dev/gemini-api/docs/audio?hl=ar).
+如需了解提供图片的其他方法以及更高级的图片处理，
+请参阅我们的 [图片理解指南](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-cn)。
+该 API 还支持 [文档](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-cn)、
+[视频](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-cn)和
+[音频](https://ai.google.dev/gemini-api/docs/audio?hl=zh-cn)输入及理解。
 
-## عرض الردود تدريجيًا
+## 流式响应
 
-بشكل تلقائي، يعرض النموذج ردًا فقط بعد اكتمال عملية الإنشاء بالكامل.
+默认情况下，模型仅在整个生成过程完成后才会返回响应。
 
-للحصول على تفاعلات أكثر سلاسة، يمكنك استخدام ميزة البث لتلقّي نُسخ
-[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ar#v1beta.GenerateContentResponse)
-بشكل تدريجي أثناء إنشائها.
+如需实现更流畅的互动，请使用流式传输来以增量方式接收
+[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=zh-cn#v1beta.GenerateContentResponse)
+实例。
 
 ### Python
 
@@ -972,7 +980,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -1019,7 +1027,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:s
   }'
 ```
 
-### برمجة التطبيقات
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1054,11 +1062,9 @@ function main() {
 }
 ```
 
-## المحادثات المتعددة الأدوار (المحادثة)
+## 多轮对话（聊天）
 
-توفّر حزم تطوير البرامج (SDK) وظائف لجمع جولات متعددة من الطلبات
-والردود في محادثة، ما يمنحك طريقة سهلة لتتبُّع سجلّ
-المحادثة.
+我们的 SDK 提供了将多轮提示和响应收集到聊天中的功能，让您可以轻松跟踪对话历史记录。
 
 ### Python
 
@@ -1149,7 +1155,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Chat;
@@ -1218,7 +1224,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:ge
   }'
 ```
 
-### برمجة التطبيقات
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1266,7 +1272,7 @@ function main() {
 }
 ```
 
-يمكن أيضًا استخدام البث للمحادثات المتعددة الجولات.
+流式传输也可用于多轮对话。
 
 ### Python
 
@@ -1366,7 +1372,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Chat;
@@ -1437,7 +1443,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:st
   }'
 ```
 
-### برمجة التطبيقات
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1485,44 +1491,45 @@ function main() {
 }
 ```
 
-## نصائح حول الطلبات
+## 撰写提示的技巧
 
-يمكنك مراجعة [دليل هندسة الطلبات](https://ai.google.dev/gemini/docs/prompting-strategies?hl=ar) للحصول على اقتراحات حول كيفية الاستفادة إلى أقصى حدّ من Gemini.
+如需了解如何充分利用 Gemini，请参阅我们的[提示工程指南](https://ai.google.dev/gemini/docs/prompting-strategies?hl=zh-cn)，以获取
+建议。
 
-## الخطوات التالية
+## 后续步骤
 
-- جرِّب [Gemini في Google AI Studio](https://aistudio.google.com?hl=ar).
-- جرِّب [المخرجات المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar) للحصول على ردود بتنسيق JSON.
-- استكشِف إمكانات Gemini في فهم [الصور](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ar) و[الفيديوهات](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ar) و[الملفات الصوتية](https://ai.google.dev/gemini-api/docs/audio?hl=ar) و[المستندات](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar).
-- تعرَّف على [استراتيجيات الطلبات المتعلقة بالملفات](https://ai.google.dev/gemini-api/docs/files?hl=ar#prompt-guide)
-  المتعددة الوسائط.
+- 在 Google AI Studio 中试用 [Gemini](https://aistudio.google.com?hl=zh-cn)。
+- 试用 [结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)，以获得
+  类似 JSON 的响应。
+- 探索 Gemini 的 [图片](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-cn)、
+  [视频](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-cn)、[音频](https://ai.google.dev/gemini-api/docs/audio?hl=zh-cn)
+  和 [文档](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-cn) 理解功能。
+- 了解多模态
+  [文件提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn#prompt-guide)。
 
-## إنشاء المحتوى
+## 内容生成
 
-هذه هي نقطة النهاية المركزية لإرسال الطلبات إلى النموذج. هناك نقطتا نهاية لإنشاء المحتوى، والفرق الرئيسي بينهما هو كيفية تلقّي الردّ:
+这是向模型发送提示的中心端点。生成内容有两个端点，主要区别在于您接收响应的方式：
 
-- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=ar#method:-models.generatecontent)
-  (REST)**:
-  يتلقّى طلبًا ويقدّم
-  ردًا واحدًا بعد أن ينتهي النموذج من عملية الإنشاء بالكامل.
-- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=ar#method:-models.streamgeneratecontent)
-  (SSE)**: يتلقّى الطلب نفسه
-  بالضبط، ولكن النموذج يعرض أجزاء من الردّ أثناء
-  إنشائها. يوفّر ذلك تجربة أفضل للمستخدم في التطبيقات التفاعلية، لأنّه يتيح لك عرض نتائج جزئية على الفور.
+- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=zh-cn#method:-models.generatecontent)
+  (REST)** ：接收请求，并在模型完成整个生成过程后提供单个响应。
+- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=zh-cn#method:-models.streamgeneratecontent)
+  (SSE)** ：接收完全相同的请求，但模型会在生成响应时将响应分块流式传输回来。这为互动式应用提供了更好的用户体验，因为它让您可以立即显示部分结果。
 
-### بنية نص الطلب
+### 请求正文结构
 
-[نص الطلب](https://ai.google.dev/api/generate-content?hl=ar#request-body) هو عنصر JSON **متطابق** لكل من الوضع العادي ووضع البث، ويتم إنشاؤه من بعض العناصر الأساسية:
+[请求正文](https://ai.google.dev/api/generate-content?hl=zh-cn#request-body)是一个 JSON 对象，对于标准模式和流式传输模式都是
+**相同的**，并且由几个核心
+对象构建而成：
 
-- [`Content`](https://ai.google.dev/api/caching?hl=ar#Content): يمثّل دورًا واحدًا في
-  محادثة.
-- [عنصر `Part`](https://ai.google.dev/api/caching?hl=ar#Part): هو جزء من البيانات ضمن دورة `Content` (مثل نص أو صورة).
-- ‫`inline_data` ([`Blob`](https://ai.google.dev/api/caching?hl=ar#Blob)): حاوية لوحدات بايت الوسائط الأولية
-  ونوع MIME الخاص بها
+- [`Content`](https://ai.google.dev/api/caching?hl=zh-cn#Content) 对象：表示对话中的单个轮次。
+- [`Part`](https://ai.google.dev/api/caching?hl=zh-cn#Part) 对象：`Content` 轮次中的一段数据（例如文本或图片）。
+- `inline_data` ([`Blob`](https://ai.google.dev/api/caching?hl=zh-cn#Blob))：原始媒体字节
+  及其 MIME 类型的容器。
 
-على أعلى مستوى، يحتوي نص الطلب على عنصر `contents`، وهو عبارة عن قائمة بعناصر `Content`، يمثّل كل منها دورًا في المحادثة. في معظم الحالات، لإنشاء نص أساسي، سيكون لديك كائن `Content` واحد، ولكن إذا أردت الاحتفاظ بسجلّ المحادثات، يمكنك استخدام كائنات `Content` متعددة.
+在最高级别，请求正文包含一个 `contents` 对象，该对象是 `Content` 对象的列表，每个对象都表示对话中的轮次。在大多数情况下，对于基本文本生成，您将拥有单个 `Content` 对象，但如果您想保留对话历史记录，可以使用多个 `Content` 对象。
 
-في ما يلي نموذج لطلب `generateContent`:
+以下显示了一个典型的 `generateContent` 请求正文：
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -1547,20 +1554,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### بنية نص الاستجابة
+### 响应正文结构
 
-يتشابه [نص الاستجابة](https://ai.google.dev/api/generate-content?hl=ar#response-body) في كل من وضع البث والوضع العادي باستثناء ما يلي:
+对于流式传输模式和标准模式，[响应正文](https://ai.google.dev/api/generate-content?hl=zh-cn#response-body)是相似的，但以下情况除外：
 
-- الوضع العادي: يحتوي نص الاستجابة على مثال [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ar#v1beta.GenerateContentResponse).
-- وضع العرض التدريجي: يحتوي نص الاستجابة على سلسلة من مثيلات [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ar#v1beta.GenerateContentResponse).
+- 标准模式：响应正文包含
+  [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=zh-cn#v1beta.GenerateContentResponse) 的实例。
+- 流式传输模式：响应正文包含
+  [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=zh-cn#v1beta.GenerateContentResponse)
+  实例的数据流。
 
-بشكل عام، يحتوي نص الاستجابة على عنصر `candidates`، وهو عبارة عن قائمة بعناصر `Candidate`. يحتوي الكائن `Candidate` على الكائن `Content` الذي يتضمّن الردّ الذي أنشأه النموذج.
+在较高级别，响应正文包含一个 `candidates` 对象，该对象是 `Candidate` 对象的列表。`Candidate` 对象包含一个 `Content` 对象，该对象包含从模型返回的生成的响应。
 
-## أمثلة على REST API
+## REST API 示例
 
-### طلب متعدّد الوسائط (نص وصورة)
+### 多模态提示（文本和图片）
 
-لتوفير نص وصورة في الطلب، يجب أن تحتوي مصفوفة `parts` على عنصرَين من النوع `Part`: أحدهما للنص والآخر للصورة `inline_data`.
+如需在提示中同时提供文本和图片，`parts` 数组应包含两个 `Part` 对象：一个用于文本，另一个用于图片 `inline_data`。
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -1582,9 +1592,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### المحادثات المترابطة (الدردشة)
+### 多轮对话（聊天）
 
-لإنشاء محادثة تتضمّن عدة أدوار، عليك تحديد مصفوفة `contents` التي تتضمّن عدة عناصر `Content`. ستستخدم واجهة برمجة التطبيقات سجلّ المحادثات بالكامل هذا كسياق للرد التالي. يجب أن تتناوب قيمة `role` لكل عنصر `Content` بين `user` و`model`.
+如需构建多轮对话，请使用多个 `Content` 对象定义 `contents` 数组。API
+会将整个历史记录用作下一个响应的上下文。每个 `Content` 对象的 `role` 应在 `user` 和 `model` 之间交替。
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -1615,30 +1626,24 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### الخلاصات الرئيسية
+### 要点总结
 
-- ‫`Content` هو المغلّف: وهو الحاوية ذات المستوى الأعلى لدور الرسالة،
-  سواء كانت من المستخدم أو النموذج.
-- يتيح `Part` استخدام الوسائط المتعددة: يمكنك استخدام عدة عناصر `Part` ضمن عنصر
-  `Content`
-  واحد لدمج أنواع مختلفة من البيانات (النص والصورة ومعرّف الموارد المنتظم للفيديو وما إلى ذلك).
-- اختَر طريقة البيانات:
-  - بالنسبة إلى الوسائط الصغيرة المضمّنة مباشرةً (مثل معظم الصور)، استخدِم `Part` مع `inline_data`.
-  - بالنسبة إلى الملفات الأكبر حجمًا أو الملفات التي تريد إعادة استخدامها في طلبات متعددة، استخدِم
-    File API لتحميل الملف والإشارة إليه باستخدام جزء `file_data`.
-- إدارة سجلّ المحادثات: بالنسبة إلى تطبيقات المحادثة التي تستخدم REST API، يمكنك إنشاء
-  مصفوفة `contents` من خلال إلحاق عناصر `Content` لكل دور،
-  والتبديل بين دورَي `"user"` و`"model"`. إذا كنت تستخدم حزمة SDK، يُرجى الرجوع إلى مستندات حزمة SDK لمعرفة الطريقة المقترَحة لإدارة سجلّ المحادثات.
+- `Content` 是信封：它是消息轮次的顶级容器，无论消息是来自用户还是模型。
+- `Part` 支持多模态：在单个 `Content` 对象中使用多个 `Part` 对象，以组合不同类型的数据（文本、图片、视频 URI 等）。
+- 选择数据方法：
+  - 对于小型直接嵌入的媒体（例如大多数图片），请使用带有 `inline_data` 的 `Part`。
+  - 对于较大的文件或您想在多个请求中重复使用的文件，请使用 File API 上传文件，并使用 `file_data` 部分引用该文件。
+- 管理对话历史记录：对于使用 REST API 的聊天应用，请通过为每个轮次附加 `Content` 对象来构建 `contents` 数组，并在 `"user"` 和 `"model"` 角色之间交替。如果您使用的是 SDK，请参阅 SDK 文档，了解管理对话历史记录的推荐方法。
 
-## أمثلة على الردود
+## 响应示例
 
-توضح الأمثلة التالية كيفية تجميع هذه المكونات معًا لأنواع مختلفة من الطلبات.
+以下示例展示了这些组件如何组合在一起以处理不同类型的请求。
 
-### ردّ نصي فقط
+### 纯文本响应
 
-يتكوّن الردّ النصي التلقائي من مصفوفة `candidates` تحتوي على عنصر `content` واحد أو أكثر يتضمّن ردّ النموذج.
+默认文本响应由一个 `candidates` 数组组成，该数组包含一个或多个 `content` 对象，这些对象包含模型的响应。
 
-في ما يلي مثال على ردّ **عادي**:
+以下是**标准** 响应的示例：
 
 ```
 {
@@ -1659,8 +1664,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-في ما يلي سلسلة من الردود **المتتابعة**. يحتوي كل ردّ على
-`responseId` يربط الردّ الكامل معًا:
+以下是一系列**流式传输** 响应。每个响应都包含一个 `responseId`，用于将完整响应关联在一起：
 
 ```
 {
@@ -1708,40 +1712,44 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-## واجهة برمجة التطبيقات Live API ‏ (BidiGenerateContent) وWebSockets API
+## Live API (BidiGenerateContent) WebSockets API
 
-توفّر Live API واجهة برمجة تطبيقات مستندة إلى WebSocket مع الاحتفاظ بالبيانات للبث الثنائي الاتجاه، ما يتيح حالات استخدام البث في الوقت الفعلي. يمكنك مراجعة
-[دليل Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) و[مرجع واجهة برمجة التطبيقات Live](https://ai.google.dev/api/live?hl=ar)
-لمزيد من التفاصيل.
+Live API 提供了一个基于 WebSocket 的有状态 API，用于双向流式传输，以实现实时流式传输用例。如需了解详情，您可以查看
+[Live API 指南](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn)和[Live API 参考文档](https://ai.google.dev/api/live?hl=zh-cn)
+。
 
-## النماذج المتخصّصة
+## 专业模型
 
-بالإضافة إلى مجموعة نماذج Gemini، توفّر Gemini API نقاط نهاية لنماذج متخصّصة، مثل [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar) و[Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=ar) ونماذج [التضمين](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar). يمكنك الاطّلاع على هذه الأدلة ضمن قسم "نماذج".
+除了 Gemini 系列模型之外，Gemini API 还为
+[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)、
+[Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=zh-cn) 和
+[嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)模型等专业模型提供了端点。您可以在“模型”部分查看这些指南。
 
-## واجهات برمجة التطبيقات للمنصة
+## 平台 API
 
-تتيح نقاط النهاية المتبقية إمكانات إضافية يمكن استخدامها مع نقاط النهاية الرئيسية الموضّحة حتى الآن. يمكنك الاطّلاع على موضوعَي
-[وضع الدفعات](https://ai.google.dev/gemini-api/docs/batch-mode?hl=ar) و[File API](https://ai.google.dev/gemini-api/docs/files?hl=ar) في قسم "الأدلة" لمزيد من المعلومات.
+其余端点支持与目前为止介绍的主要端点搭配使用的其他功能。如需了解详情，请查看“指南”部分中的“
+[批量模式](https://ai.google.dev/gemini-api/docs/batch-mode?hl=zh-cn)”和“
+[File API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn)”主题。
 
-## الخطوات التالية
+## 后续步骤
 
-إذا كنت في بداية رحلتك، يمكنك الاطّلاع على الأدلة التالية التي ستساعدك في فهم نموذج برمجة Gemini API:
+如果您刚刚入门，请查看以下指南，这些指南将帮助您了解 Gemini API 编程模型：
 
-- [دليل البدء في Gemini API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
-- [دليل نماذج Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar)
+- [Gemini API 使用入门指南](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
+- [Gemini 模型指南](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn)
 
-يمكنك أيضًا الاطّلاع على أدلة الإمكانات التي تعرض ميزات مختلفة في Gemini API وتقدّم أمثلة على الرموز البرمجية:
+您可能还需要查看功能指南，这些指南介绍了不同的 Gemini API 功能并提供了代码示例：
 
-- [إنشاء النص](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar)
-- [التخزين المؤقت للسياق](https://ai.google.dev/gemini-api/docs/caching?hl=ar)
-- [التضمينات](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar)
+- [文本生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn)
+- [上下文缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)
+- [嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)
 
-إرسال ملاحظات
+发送反馈
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-تاريخ التعديل الأخير: 2026-10-19 (حسب التوقيت العالمي المتفَّق عليه)
+最后更新时间 (UTC)：2026-10-19。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+需要向我们提供更多信息？
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-10-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-10-19。"],[],[]]

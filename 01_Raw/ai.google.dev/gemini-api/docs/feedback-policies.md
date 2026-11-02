@@ -1,62 +1,61 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=vi
-fetched_at: 2026-10-26T05:56:29.021093+00:00
-title: "Ph\u1ea3n h\u1ed3i \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=ja
+fetched_at: 2026-11-02T07:08:32.700719+00:00
+title: "\u30d5\u30a3\u30fc\u30c9\u30d0\u30c3\u30af \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-# Phản hồi
+# フィードバック
 
-Google AI Studio cung cấp nhiều cách để bạn gửi ý kiến phản hồi về đầu ra của mô hình, các cấu phần phần mềm được tạo và nhật ký yêu cầu API. Chính sách này áp dụng cho tất cả ý kiến phản hồi được gửi trên Google AI Studio, bao gồm cả điểm xếp hạng phản hồi (chẳng hạn như thích và không thích), bình luận bằng văn bản và bình chọn lựa chọn ưu tiên (chẳng hạn như Bình chọn lựa chọn ưu tiên trong dòng và chế độ Build Arena).
+Google AI Studio では、モデル出力、生成されたアーティファクト、API リクエストログに関するフィードバックを送信する複数の方法が用意されています。このポリシーは、Google AI Studio 全体で送信されたすべてのフィードバック（回答の評価（高評価や低評価など）、コメント、優先度の投票（インライン優先度投票やビルド アリーナ モードなど）を含む）に適用されます。
 
-## Vì sao chúng tôi làm vậy?
+## 目的
 
-Chúng tôi không ngừng nỗ lực cải thiện các mô hình và dịch vụ AI của mình. Ý kiến phản hồi của bạn giúp chúng tôi cung cấp, cải thiện và phát triển các sản phẩm, dịch vụ cũng như công nghệ học máy của Google, bao gồm cả các tính năng, sản phẩm và dịch vụ dành cho doanh nghiệp của Google, theo [Điều khoản dịch vụ bổ sung của Gemini API](https://ai.google.dev/gemini-api/terms?hl=vi) và [Chính sách quyền riêng tư](https://policies.google.com/privacy?hl=vi).
+Google は、AI モデルとサービスの改善に常に取り組んでいます。お客様のフィードバックは、[Gemini API 追加利用規約](https://ai.google.dev/gemini-api/terms?hl=ja)と[プライバシー ポリシー](https://policies.google.com/privacy?hl=ja)に沿って、Google のプロダクト、サービス、機械学習技術（Google のエンタープライズ機能、プロダクト、サービスを含む）の提供、改善、開発に役立てられます。
 
-## Những dữ liệu nào được đưa vào ý kiến phản hồi?
+## フィードバックにはどのようなデータが含まれますか？
 
-Để đưa ra quyết định sáng suốt về các mô hình và tính năng của chúng tôi, chúng tôi thu thập một số dữ liệu nhất định khi bạn gửi ý kiến phản hồi trong Google AI Studio:
+モデルと機能について十分な情報に基づいて判断するため、Google AI Studio でフィードバックを送信する際に、特定のデータを収集します。
 
-- **Câu lệnh và câu trả lời:** Chúng tôi ghi lại câu lệnh và câu trả lời, bao gồm cả mọi tệp hoặc nội dung nghe nhìn được tải lên, từ hoạt động tương tác hoặc cuộc trò chuyện mà bạn đã gửi ý kiến phản hồi. Khi bạn tham gia đánh giá lựa chọn ưu tiên so sánh, chúng tôi cũng ghi lại nhiều lựa chọn phản hồi được đưa ra để có thể hiểu được bối cảnh lựa chọn của bạn.
-- **Điểm xếp hạng, phiếu bầu hoặc bình luận của bạn:** Chúng tôi ghi lại điểm xếp hạng mà bạn đã đưa ra (chẳng hạn như thích hoặc không thích), câu trả lời mà bạn chọn trong một cuộc bình chọn, mọi danh mục ý kiến phản hồi đã chọn và mọi bình luận bằng văn bản mà bạn đã gửi.
-- **Thông tin chi tiết về việc sử dụng:** Thông tin này bao gồm thông tin chi tiết về kỹ thuật và hoạt động từ hoạt động tương tác hoặc cuộc trò chuyện của bạn, chẳng hạn như thông tin về mô hình đã tạo câu trả lời, các thông số mô hình và siêu dữ liệu hệ thống.
+- **プロンプトと回答:** フィードバックを送信したやり取りや会話のプロンプトと回答（アップロードされたファイルやメディアを含む）を記録します。比較選好評価に参加すると、提示された複数の回答オプションも記録され、選択のコンテキストを把握できるようになります。
+- **評価、投票、コメント:** ユーザーが付けた評価（高評価、低評価など）、投票で選択した回答、選択したフィードバックのカテゴリ、送信したコメントを記録します。
+- **使用状況の詳細:** これには、どのモデルが回答を生成したか、モデル パラメータ、システム メタデータなどの、やり取りや会話の技術的および運用上の詳細が含まれます。
 
-### Phản hồi theo nền tảng
+### サーフェス別のフィードバック
 
-Bạn có thể gửi ý kiến phản hồi trên nhiều nền tảng trong Google AI Studio, với một số điểm khác biệt nhỏ về ngữ cảnh được ghi lại:
+フィードバックは Google AI Studio のさまざまなサーフェスから送信できます。キャプチャされるコンテキストには若干の違いがあります。
 
-- **Playground của AI Studio:** Trong Playground, bạn có thể gửi ý kiến phản hồi bằng cách đánh giá phản hồi (thích hoặc không thích) hoặc bình chọn trực tiếp theo cách so sánh song song. Dữ liệu được ghi lại bao gồm nhật ký trò chuyện, câu lệnh, câu trả lời của mô hình, nội dung nghe nhìn hoặc tệp đã tải lên, chế độ cài đặt tham số, ý kiến phản hồi và thông tin chi tiết về việc sử dụng.
-- **AI Studio Build:** Trong Build (bao gồm cả Build Arena), bạn có thể gửi ý kiến phản hồi về mã được tạo, đầu ra của ứng dụng và các đánh giá so sánh mô hình.
-  Dữ liệu được ghi lại bao gồm các hướng dẫn và câu lệnh tạo bản dựng, mã xử lý ứng dụng và dữ liệu đầu ra được tạo, phiếu bầu hoặc điểm xếp hạng so sánh, mọi nhận xét và thông tin chi tiết về việc sử dụng đi kèm.
-- **Nhật ký Gemini API:** Trong trình xem Nhật ký và tập dữ liệu, bạn có thể gửi ý kiến phản hồi về từng nhật ký yêu cầu API Gemini. Dữ liệu được ghi lại bao gồm mục nhập nhật ký API cụ thể (bao gồm cả tải trọng yêu cầu, phản hồi mô hình, các tham số và siêu dữ liệu) cùng với mọi ý kiến phản hồi và thông tin chi tiết về việc sử dụng. Để biết thêm thông tin chi tiết về việc lưu trữ dữ liệu nhật ký và chia sẻ tập dữ liệu, hãy xem chính sách [Ghi nhật ký và chia sẻ dữ liệu](https://ai.google.dev/gemini-api/docs/logs-policy?hl=vi).
+- **AI Studio Playground:** Playground では、回答の評価（高評価または低評価）または並列のインライン設定投票を使用してフィードバックを送信できます。記録されるデータには、会話履歴、プロンプト、モデルのレスポンス、アップロードされたメディアやファイル、パラメータ設定、フィードバック、使用状況の詳細が含まれます。
+- **AI Studio Build:** Build（Build Arena を含む）では、生成されたコード、アプリの出力、比較モデルの評価に関するフィードバックを送信できます。記録されるデータには、ビルドの手順とプロンプト、生成されたアプリケーション コードと出力、比較投票または評価、付随するコメントと使用状況の詳細が含まれます。
+- **Gemini API ログ:** ログとデータセットのビューアで、個々の Gemini API リクエストログに対してフィードバックを送信できます。記録されるデータには、特定の API ログエントリ（リクエスト ペイロード、モデル レスポンス、パラメータ、メタデータなど）と、フィードバックと使用状況の詳細が含まれます。ログデータの保存とデータセットの共有について詳しくは、[データ ロギングと共有](https://ai.google.dev/gemini-api/docs/logs-policy?hl=ja)に関するポリシーをご覧ください。
 
-## Bình chọn lựa chọn ưu tiên cùng dòng
+## インライン設定の投票
 
-Trong Google AI Studio, đôi khi bạn có thể thấy một bản so sánh song song gồm 2 câu trả lời khác nhau cho câu lệnh của mình. Đây là một phần trong hệ thống bình chọn ưu tiên của chúng tôi. Bạn sẽ được yêu cầu chọn câu trả lời mà bạn thích. Việc này giúp chúng tôi hiểu được câu trả lời nào của mô hình mà người dùng thấy hữu ích nhất.
+Google AI Studio では、プロンプトに対する 2 つの異なる回答が並べて表示されることがあります。これは、Google の優先度投票システムの一部です。どちらの回答がよいかを選択するよう求められます。これにより、ユーザーにとって最も役立つモデルの出力がわかります。
 
-## Quyền riêng tư của bạn
+## プライバシー
 
-**Đừng gửi ý kiến phản hồi về những cuộc trò chuyện, câu lệnh, câu trả lời hoặc nhật ký có chứa thông tin nhạy cảm, thông tin mật hoặc thông tin cá nhân.** Việc cung cấp ý kiến phản hồi luôn là tự nguyện.
+**センシティブな情報、機密情報、個人情報を含む会話、プロンプト、回答、ログに関するフィードバックは送信しないでください。**フィードバックの提供は任意です。
 
-Cảm ơn bạn đã giúp chúng tôi cải thiện Google AI Studio!
+Google AI Studio の改善にご協力いただきありがとうございます。
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Cập nhật lần gần đây nhất: 2026-09-25 UTC.
+最終更新日 2026-09-25 UTC。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+ご意見をお聞かせください
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-25 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-25 UTC。"],[],[]]

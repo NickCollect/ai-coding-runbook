@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/audio?hl=th
-fetched_at: 2026-10-26T05:52:00.115417+00:00
-title: "\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e43\u0e08\u0e40\u0e01\u0e35\u0e48\u0e22\u0e27\u0e01\u0e31\u0e1a\u0e40\u0e2a\u0e35\u0e22\u0e07 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/audio?hl=ja
+fetched_at: 2026-11-02T07:25:51.860596+00:00
+title: "\u97f3\u58f0\u306e\u7406\u89e3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-ส่งความคิดเห็น
+フィードバックを送信
 
-# ความเข้าใจเกี่ยวกับเสียง
+# 音声の理解
 
-Gemini สามารถวิเคราะห์อินพุตเสียงและสร้างคำตอบเป็นข้อความได้
+Gemini は音声入力を分析してテキスト レスポンスを生成できます。
 
 ### Python
 
@@ -190,27 +190,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ภาพรวม
+## 概要
 
-Gemini สามารถวิเคราะห์และทำความเข้าใจอินพุตเสียง รวมถึงสร้างคำตอบที่เป็นข้อความ
-ซึ่งช่วยให้ใช้กรณีการใช้งานต่างๆ ได้ เช่น
+Gemini は音声入力を分析して理解し、テキスト レスポンスを生成できます。これにより、次のようなユースケースが可能になります。
 
-- อธิบาย สรุป หรือตอบคำถามเกี่ยวกับเนื้อหาเสียง
-- การถอดเสียงและการแปล (เสียงพูดเป็นข้อความ)
-- การแยกแยะเสียงผู้พูด (ระบุผู้พูดที่แตกต่างกัน)
-- การตรวจจับอารมณ์ในคำพูดและดนตรี
-- การวิเคราะห์กลุ่มที่เฉพาะเจาะจงด้วยการประทับเวลา
+- 音声コンテンツの説明、要約、質問への回答
+- 音声文字変換と翻訳（音声からテキストへ）
+- 話者ダイアライゼーション（異なる話者を識別する）
+- 音声と音楽の感情検出
+- タイムスタンプを使用して特定のセグメントを分析する
 
-สำหรับการโต้ตอบด้วยเสียงและวิดีโอแบบเรียลไทม์ โปรดดู
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=th)
-หากต้องการใช้โมเดล Speech-to-Text เฉพาะที่รองรับการถอดเสียงแบบเรียลไทม์
-ให้ใช้ [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=th)
+リアルタイムの音声と動画のインタラクションについては、[Live API](https://ai.google.dev/gemini-api/docs/live?hl=ja) をご覧ください。リアルタイム文字起こしをサポートする専用の音声文字変換モデルについては、[Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=ja) を使用してください。
 
-## ถอดเสียงพูดเป็นข้อความ
+## 音声をテキストに変換する
 
-ตัวอย่างนี้แสดงวิธีถอดเสียง แปล และสรุปคำพูดพร้อม
-การประทับเวลา การระบุผู้พูด และการตรวจจับอารมณ์โดยใช้
-[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)
+この例では、[構造化された出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)を使用して、タイムスタンプ、話者ダイアリゼーション、感情検出を含む音声の文字起こし、翻訳、要約を行う方法を示します。
 
 ### Python
 
@@ -544,18 +538,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![แอป Gemini ที่ถอดเสียงแบบหลายภาษา](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=th)
+![多言語音声文字変換 Gemini アプリ](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=ja)
 
-## ป้อนเสียง
+## 入力音声
 
-คุณระบุข้อมูลเสียงได้ด้วยวิธีต่อไปนี้
+音声データは次の方法で提供できます。
 
-- [อัปโหลดไฟล์เสียง](#upload-audio)ก่อนส่งคำขอ
-- [ส่งข้อมูลเสียงแบบอินไลน์](#inline-audio)พร้อมกับคำขอ
+- リクエストを行う前に、[音声ファイルをアップロード](#upload-audio)してください。
+- リクエストで[インライン音声データを渡します](#inline-audio)。
 
-### อัปโหลดไฟล์เสียง
+### 音声ファイルをアップロードする
 
-ใช้ [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th) สำหรับไฟล์ที่มีขนาดใหญ่กว่า 20 MB
+20 MB を超えるファイルには [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用します。
 
 ### Python
 
@@ -728,9 +722,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### ส่งข้อมูลเสียงในบรรทัด
+### 音声データをインラインで渡す
 
-สำหรับไฟล์เสียงขนาดเล็กที่มีขนาดคำขอรวมไม่เกิน 20 MB ให้ทำดังนี้
+合計リクエスト サイズが 20 MB 未満の小さな音声ファイルの場合:
 
 ### Python
 
@@ -911,13 +905,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-หมายเหตุเกี่ยวกับข้อมูลเสียงในบรรทัด
-\* ขนาดคำขอสูงสุดคือ 20 MB โดยรวม (รวมถึงพรอมต์และไฟล์ทั้งหมด)
-\* หากต้องการนำกลับมาใช้ใหม่ ให้[อัปโหลดไฟล์](#upload-audio)แทน
+インライン音声データに関する注意事項:
+\* リクエストの最大サイズは合計 20 MB（プロンプトとすべてのファイルを含む）です。
+\* 再利用する場合は、代わりに[ファイルをアップロード](#upload-audio)してください。
 
-## ดูข้อความถอดเสียง
+## 文字起こしを取得する
 
-หากต้องการรับข้อความถอดเสียง ให้ขอในพรอมต์โดยใช้คำสั่งต่อไปนี้
+文字起こしを取得するには、プロンプトでリクエストします。
 
 ### Python
 
@@ -1053,9 +1047,9 @@ func main() {
 }
 ```
 
-## ดูการประทับเวลา
+## タイムスタンプを参照する
 
-ใช้รูปแบบ `MM:SS` เพื่ออ้างอิงส่วนที่เฉพาะเจาะจง
+`MM:SS` 形式を使用して、特定のセクションを参照します。
 
 ### Python
 
@@ -1186,9 +1180,9 @@ func main() {
 }
 ```
 
-## นับโทเค็น
+## トークンのカウント
 
-วิธีนับโทเค็นในไฟล์เสียง
+音声ファイル内のトークンをカウントする:
 
 ### Python
 
@@ -1283,9 +1277,9 @@ func main() {
 }
 ```
 
-## รูปแบบเสียงที่รองรับ
+## サポートされているオーディオ形式
 
-Gemini รองรับประเภท MIME ของรูปแบบเสียงต่อไปนี้
+Gemini は、次の音声形式の MIME タイプをサポートしています。
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
@@ -1301,30 +1295,29 @@ Gemini รองรับประเภท MIME ของรูปแบบเ�
 - MULAW - `audio/mulaw`
 - WebM - `audio/webm`
 
-ดูรายการประเภท MIME และสคีมาพารามิเตอร์ที่รองรับทั้งหมดได้ใน[เอกสารอ้างอิง Interactions API](https://ai.google.dev/api/interactions-api?hl=th#Resource:Content)
+サポートされている MIME タイプとパラメータ スキーマの完全なリストについては、[Interactions API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja#Resource:Content)をご覧ください。
 
-## รายละเอียดทางเทคนิคเกี่ยวกับเสียง
+## 音声に関する技術的な詳細
 
-- **โทเค็น**: 32 โทเค็นต่อเสียง 1 วินาที (1 นาที = 1,920 โทเค็น)
-- **เสียงที่ไม่ใช่เสียงพูด**: Gemini เข้าใจเสียงที่ไม่ใช่เสียงพูด (เสียงนกร้อง เสียงไซเรน ฯลฯ)
-- **ความยาวสูงสุด**: เสียงยาว 9.5 ชั่วโมงต่อพรอมต์
-- **ความละเอียด**: ดาวน์แซมเปิลเป็น 16 Kbps
-- **ช่องสัญญาณ**: เสียงหลายช่องสัญญาณรวมเป็นช่องสัญญาณเดียว
+- **トークン**: 音声 1 秒あたり 32 トークン（1 分 = 1,920 トークン）
+- **会話以外の音声**: Gemini は会話以外の音声（鳥のさえずり、サイレンなど）を認識します。
+- **最大長**: プロンプトあたり 9.5 時間の音声
+- **解決策**: 16 Kbps にダウンサンプリング
+- **チャンネル**: マルチチャンネルの音声をシングル チャンネルに結合
 
-## ขั้นตอนถัดไป
+## 次のステップ
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th): อัปโหลดและจัดการไฟล์เสียง
-- [คำสั่งของระบบ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th#system-instructions)
-  ปรับแต่งลักษณะการทำงานของโมเดล
-- [เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)
-  รับผลการถอดเสียงในรูปแบบ JSON
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja): 音声ファイルをアップロードして管理する
+- [システム指示](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#system-instructions): モデルの動作をカスタマイズする
+- [構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja):
+  文字起こし結果を JSON 形式で取得する
 
-ส่งความคิดเห็น
+フィードバックを送信
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-อัปเดตล่าสุด 2026-09-24 UTC
+最終更新日 2026-09-24 UTC。
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+ご意見をお聞かせください
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-24 UTC。"],[],[]]

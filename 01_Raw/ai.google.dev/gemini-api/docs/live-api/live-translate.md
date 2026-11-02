@@ -1,44 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=hi
-fetched_at: 2026-10-26T05:50:38.731775+00:00
-title: "Gemini Live API \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947 \u0932\u093e\u0907\u0935 \u0905\u0928\u0941\u0935\u093e\u0926 \u0915\u0930\u0928\u0947 \u0915\u0940 \u0938\u0941\u0935\u093f\u0927\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=pt-BR
+fetched_at: 2026-11-02T07:22:30.560408+00:00
+title: "Tradu\u00e7\u00e3o instant\u00e2nea com a API Gemini Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-सुझाव भेजें
+Envie comentários
 
-# Gemini Live API की मदद से लाइव अनुवाद करने की सुविधा
+# Tradução instantânea com a API Gemini Live
 
-Gemini Live API, [`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=hi) मॉडल का इस्तेमाल करके, 70 से ज़्यादा भाषाओं के बीच कम इंतज़ार के समय में रीयल-टाइम में बोली का अनुवाद करने की सुविधा देता है. लाइव एपीआई को अनुवाद की सेटिंग के साथ कॉन्फ़िगर करके, किसी एक भाषा में ऑडियो स्ट्रीम किया जा सकता है. साथ ही, अनुवाद किया गया ऑडियो आउटपुट दूसरी भाषा में पाया जा सकता है. इससे, रीयल-टाइम में एक भाषा से दूसरी भाषा में वॉइस-टू-वॉइस अनुवाद की सुविधा मिलती है.
+A API Gemini Live oferece suporte à tradução de fala para fala em tempo real e de baixa latência entre mais de 70 idiomas usando o modelo [`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=pt-br). Ao configurar a API Live com as configurações de tradução, você pode transmitir áudio em um idioma e receber a saída de áudio traduzida em outro, permitindo uma tradução de voz para voz em tempo real.
 
-[Google AI Studio में लाइव ट्रांसलेट की सुविधा आज़माएंmic](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=hi)
-[उदाहरण के तौर पर दिए गए ऐप्लिकेशन का क्लोन GitHub से बनाएंcode](https://github.com/google-gemini/gemini-live-api-examples)
-[कोडिंग एजेंट की स्किल का इस्तेमाल करेंterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=hi#gemini-live-api-dev)
+[Testar a Tradução instantânea no Google AI Studiomic](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=pt-br)
+[Clonar o app de exemplo do GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
+[Usar habilidades de agente de programaçãoterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=pt-br#gemini-live-api-dev)
 
-## लाइव एजेंट बनाम लाइव ट्रांसलेट
+## Atendente x Tradução Instantânea
 
-लाइव एपीआई का इस्तेमाल, लाइव एजेंट और लाइव ट्रांसलेट, दोनों के लिए किया जा सकता है. हालांकि, लाइव ट्रांसलेट का मेंटल मॉडल, रीयल-टाइम में एजेंट के साथ बातचीत करने के मॉडल से अलग होता है.
+Embora os dois usem a API Live, o modelo mental da tradução simultânea é diferente das interações de agentes em tempo real.
 
-| लाइव एजेंट | लाइव ट्रांसलेट |
+| Agente em tempo real | Tradução instantânea |
 | --- | --- |
-| **यह मॉडल, असिस्टेंट के तौर पर काम करता है.** यह आपकी बात सुनता है, समझता है, और आपकी ओर से कार्रवाइयां करता है. | **यह मॉडल, इंटरप्रेटर के तौर पर काम करता है.** यह रीयल-टाइम में अनुवाद करने वाले पाइपलाइन की तरह काम करता है. |
-| **यह बारी-बारी से होने वाले इंटरैक्शन का इस्तेमाल करता है.** यह रुकने, इरादे का पता लगाने, और बीच में होने वाली रुकावटों को मैनेज करने पर काम करता है. | **यह लगातार स्ट्रीम प्रोसेसिंग का इस्तेमाल करता है.** यह बारी का इंतज़ार किए बिना, स्पीकर के बोलते ही अनुवाद करता है. |
-| **यह टूल और एजेंट के साथ काम करता है.** यह फ़ंक्शन कॉल करने, Google Search, और निर्देशों के साथ काम करता है. | **यह सिर्फ़ अनुवाद की सुविधा देता है.** यह कम इंतज़ार के समय में अनुवाद करता है. साथ ही, यह टूल या निर्देशों के साथ काम नहीं करता. |
-| **यह पूरी तरह से मल्टीमोडल है.** यह टेक्स्ट, ऑडियो, वीडियो, और इमेज इनपुट के साथ काम करता है. | **यह सिर्फ़ ऑडियो के साथ काम करता है.** इसमें सिर्फ़ ऑडियो इनपुट इस्तेमाल किया जा सकता है, ताकि रीयल-टाइम में इंतज़ार के समय की सीमा को बनाए रखा जा सके. |
-| **विस्तृत कॉन्फ़िगरेशन.** यह जनरेशन, स्पीच, टूल, और सिस्टम के निर्देशों का इस्तेमाल करता है. | **यह आसानी से कॉन्फ़िगर किया जा सकता है.** `target_language_code` और `echo_target_language` जैसे टॉगल सेट करें. |
+| **O modelo age como um assistente.** Ele ouve, raciocina e realiza ações em seu nome. | **O modelo atua como um intérprete.** Ele funciona como um pipeline de tradução em tempo real. |
+| **Usa interações baseadas em turnos.** Depende de pausas, detecção de intenção e lida com interrupções. | **Usa o processamento de stream contínuo.** Traduz enquanto o falante fala, sem esperar a vez. |
+| **Compatível com ferramentas e agentes.** Suporte nativo para chamada de função, Pesquisa Google e instruções. | **Oferece suporte apenas à tradução.** Tradução pura de baixa latência, sem suporte para ferramentas ou instruções. |
+| **Totalmente multimodal**. Aceita entradas de texto, áudio, vídeo e imagem. | **Áudio restrito.** A entrada é limitada ao áudio para garantir limites de latência em tempo real. |
+| **Configuração granular**. Usa geração, fala, ferramentas e instruções do sistema. | **Configuração simplificada**. Defina `target_language_code` e alternâncias como `echo_target_language`. |
 
-## शुरू करें
+## Primeiros passos
 
-यहां दिए गए उदाहरणों में, क्लाइंट को शुरू करने और अनुवाद के कॉन्फ़िगरेशन के साथ लाइव एपीआई से कनेक्ट करने का तरीका बताया गया है.
+Os exemplos a seguir demonstram como inicializar um cliente e se conectar à API Live com uma configuração de tradução.
 
 ### Python
 
@@ -185,15 +185,15 @@ websocket.onmessage = (event) => {
 };
 ```
 
-## ऑडियो भेजना
+## Enviando áudio
 
-अनुवाद के लिए वॉइस इनपुट स्ट्रीम करने के लिए, आपको रॉ, लिटिल-एंडियन, 16-बिट पीसीएम ऑडियो भेजना होगा.
+Para transmitir entradas de voz para tradução, envie áudio PCM bruto, little-endian e de 16 bits.
 
-- **इनपुट ऑडियो का फ़ॉर्मैट**: रॉ 16-बिट पीसीएम, 16 किलोहर्ट्ज़ (मोनो, लिटिल-एंडियन).
-- **आउटपुट ऑडियो का फ़ॉर्मैट**: रॉ 16-बिट पीसीएम, 24 किलोहर्ट्ज़ (मोनो, लिटिल-एंडियन).
-- **चंक का साइज़ और इंतज़ार का समय**: 100 मि॰से॰ के चंक में ऑडियो भेजें.
+- **Formato de áudio de entrada**: PCM bruto de 16 bits a 16 kHz (mono, little-endian).
+- **Formato de áudio de saída**: PCM bruto de 16 bits a 24 kHz (mono, little endian).
+- **Tamanho do bloco e latência**: envie áudio em blocos de 100 ms.
 
-यहां दिए गए उदाहरणों में, सेशन में ऑडियो चंक भेजने का तरीका बताया गया है.
+Os exemplos a seguir mostram como enviar partes de áudio para a sessão.
 
 ### Python
 
@@ -238,23 +238,23 @@ function sendAudioChunk(chunk) {
 }
 ```
 
-## कॉन्फ़िगरेशन
+## Configuração
 
-अनुवाद की सुविधा चालू करने के लिए, आपको सेशन सेटअप के दौरान `generationConfig` में `translationConfig` की जानकारी देनी होगी.
+Para ativar a tradução, especifique o `translationConfig` no `generationConfig` durante a configuração da sessão.
 
-### सेटअप मैसेज का कॉन्फ़िगरेशन
+### Configurar mensagens
 
-ट्रांसक्रिप्ट की सुविधा चालू करने के लिए, `generationConfig` में ये फ़ील्ड इस्तेमाल किए जा सकते हैं:
+O `generationConfig` é compatível com os seguintes campos para ativar as transcrições:
 
-- **`inputAudioTranscription`**: यह एक ऐसा ऑब्जेक्ट है जो मौजूद होने पर, मॉडल को इनपुट ऑडियो के टेक्स्ट ट्रांसक्रिप्ट भेजने की अनुमति देता है.
-- **`outputAudioTranscription`**: यह एक ऐसा ऑब्जेक्ट है जो मौजूद होने पर, मॉडल को आउटपुट (अनुवाद किए गए) ऑडियो के टेक्स्ट ट्रांसक्रिप्ट भेजने की अनुमति देता है.
+- **`inputAudioTranscription`**: um objeto que, quando presente, permite que o modelo envie transcrições de texto do áudio de entrada.
+- **`outputAudioTranscription`**: um objeto que, quando presente, permite que o modelo envie transcrições de texto do áudio de saída (traduzido).
 
-`translationConfig` में ये फ़ील्ड इस्तेमाल किए जा सकते हैं:
+O `translationConfig` é compatível com os seguintes campos:
 
-- **`targetLanguageCode`**: यह उस भाषा का [BCP-47 भाषा कोड](#supported-languages) है जिसमें आपको मॉडल से अनुवाद कराना है. उदाहरण के लिए, पोलिश के लिए `"pl"` और स्पैनिश के लिए `"es"`. डिफ़ॉल्ट रूप से, यह `"en"` पर सेट होता है.
-- **`echoTargetLanguage`**: यह एक बूलियन है, जो यह दिखाता है कि टारगेट भाषा में मौजूद इनपुट ऑडियो को कैसे हैंडल किया जाना चाहिए. अगर इसे `true` पर सेट किया जाता है, तो मॉडल, टारगेट भाषा में मौजूद इनपुट ऑडियो को दोहराएगा. अगर इसे `false` पर सेट किया जाता है, तो मॉडल, टारगेट भाषा में मौजूद इनपुट स्पीच के दौरान चुप रहेगा. डिफ़ॉल्ट रूप से, यह `false` पर सेट होता है.
+- **`targetLanguageCode`**: o [código de idioma BCP-47](#supported-languages) do idioma para o qual você quer que o modelo traduza (por exemplo, `"pl"` para polonês e `"es"` para espanhol). O valor padrão é `"en"`.
+- **`echoTargetLanguage`**: um booleano que indica como o áudio de entrada que já está no idioma de destino deve ser processado. Se definido como `true`, o modelo vai repetir o áudio de entrada que já está no idioma de destino. Se definido como `false`, o modelo vai ficar em silêncio quando a fala de entrada já estiver no idioma de destino. O padrão é `false`.
 
-यहां सेटअप मैसेज के स्ट्रक्चर का उदाहरण दिया गया है:
+Confira um exemplo da estrutura da mensagem de configuração:
 
 ```
 "setup": {
@@ -273,19 +273,19 @@ function sendAudioChunk(chunk) {
 }
 ```
 
-## क्लाइंट-साइड ऐप्लिकेशन में, कुछ समय के लिए मान्य टोकन का इस्तेमाल करना
+## Usar tokens temporários em aplicativos do lado do cliente
 
-क्लाइंट-टू-सर्वर ऐप्लिकेशन के लिए, आप अपनी एपीआई कुंजी को सार्वजनिक होने से बचाने के लिए [कुछ समय के लिए मान्य टोकन](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=hi) (फ़िलहाल `v1beta` में उपलब्ध) का इस्तेमाल कर सकते हैं.
+Para aplicativos cliente-servidor, use [tokens efêmeros](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=pt-br) (atualmente em `v1beta`) para evitar expor sua chave de API.
 
-लाइव ट्रांसलेट के साथ, कुछ समय के लिए मान्य टोकन का इस्तेमाल करते समय:
+Ao usar tokens temporários com a Tradução Instantânea:
 
-1. आपको `v1beta` एंडपॉइंट का इस्तेमाल करना होगा.
-2. **कॉन्फ़िगरेशन लॉक करना:** डिफ़ॉल्ट रूप से, आपको अपने सर्वर पर टोकन बनाने की पाबंदियों में `translationConfig` की जानकारी देनी चाहिए. इससे यह पक्का होता है कि अनुवाद का कॉन्फ़िगरेशन लॉक है और क्लाइंट इसमें कोई बदलाव नहीं कर सकता.
-3. **कॉन्फ़िगरेशन अनलॉक करना:** अगर आपको क्लाइंट-साइड पर `translationConfig` सेट करने की अनुमति देनी है (उदाहरण के लिए, किसी उपयोगकर्ता को अपनी टारगेट भाषा चुनने की अनुमति देने के लिए), तो आपको टोकन बनाने के अनुरोध से इसे हटाना होगा. इसके बजाय, `"lock_additional_fields": []` सेट करना होगा. इससे क्लाइंट-साइड पर `translationConfig` सेट करने की अनुमति मिल जाएगी.
+1. É preciso usar o endpoint `v1beta`.
+2. **Configuração de bloqueio**:por padrão, especifique o `translationConfig` nas restrições de criação de token no seu servidor. Isso garante que a configuração de tradução esteja bloqueada e não possa ser adulterada pelo cliente.
+3. **Configuração de desbloqueio**:se você quiser definir o `translationConfig` no lado do cliente (por exemplo, para permitir que um usuário escolha o idioma de destino), omita-o da solicitação de criação de token e defina `"lock_additional_fields": []`. Isso vai desbloquear `translationConfig` para ser definido no lado do cliente.
 
-### पाबंदियों के साथ, कुछ समय के लिए मान्य टोकन बनाना
+### Criar um token temporário restrito
 
-यहां दिए गए उदाहरणों में, अनुवाद की पाबंदियों के साथ, कुछ समय के लिए मान्य टोकन बनाने का तरीका बताया गया है.
+Os exemplos a seguir mostram como criar um token efêmero com restrições de tradução.
 
 ### Python
 
@@ -366,74 +366,74 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-## सीमाएं
+## Limitações
 
-- **इनपुट के तरीके**: अनुवाद के लिए, सिर्फ़ ऑडियो इनपुट इस्तेमाल किया जा सकता है. टेक्स्ट इनपुट इस्तेमाल नहीं किया जा सकता.
-- **आवाज़ की कॉपी बनाना**: आवाज़ की कॉपी बनाने में गड़बड़ी हो सकती है. ज़्यादा समय तक रुकने के बाद, आवाज़ें बदल सकती हैं. साथ ही, स्पीच की शुरुआत के आधार पर, गलत जेंडर असाइन हो सकता है. इसके अलावा, एक से ज़्यादा स्पीकर के साथ तेज़ी से बातचीत करने के दौरान, आवाज़ें एक ही आवाज़ पर अटक सकती हैं.
-- **भाषा का पता लगाना**: भाषा का पता लगाने में, तेज़ लहजे, मिलती-जुलती भाषाओं (जैसे, स्पैनिश बनाम पॉर्चुगीज़) या तेज़ी से भाषा बदलने में दिक्कत आ सकती है. **ध्यान दें:** इसका असर सिर्फ़ इनपुट ट्रांसक्रिप्ट पर पड़ना चाहिए. भाषा कोड और फ़ाइनल अनुवाद अब भी सटीक होने चाहिए.
-- **बैकग्राउंड ऑडियो**: मॉडल को शोर और संगीत को फ़िल्टर करके, साफ़ स्पीच बनाने के लिए डिज़ाइन किया गया है. हालांकि, हो सकता है कि सभी बैकग्राउंड ऑडियो को अनदेखा न किया जाए.
-- **टारगेट भाषा को दोहराना**: जब `echoTargetLanguage: true` होता है, तब अगर इनपुट ऑडियो पहले से ही टारगेट भाषा में है, तो बैकग्राउंड में मौजूद शोर या संगीत की वजह से, अनुवाद किए गए ऑडियो में गड़बड़ियां आ सकती हैं.
+- **Modalidades de entrada**: somente a entrada de áudio é compatível com a tradução. Não é possível inserir texto.
+- **Replicação de voz**: a replicação de voz pode ser inconsistente. As vozes podem mudar após longas pausas, atribuir o gênero errado com base em como a fala começa ou ficar presas em uma voz durante conversas rápidas com vários falantes.
+- **Detecção de idioma**: a detecção de idioma tem dificuldades com sotaques fortes, idiomas semelhantes (por exemplo, espanhol e português) ou mudanças rápidas de idioma. **Observação**:isso só afeta a transcrição de entrada. Os códigos de idioma e a tradução final ainda precisam ser precisos.
+- **Áudio em segundo plano**: o modelo foi projetado para filtrar ruídos e músicas e produzir uma fala limpa, mas nem todo o áudio em segundo plano pode ser ignorado.
+- **Repetir o idioma de destino**: quando `echoTargetLanguage: true`, o ruído de fundo ou a música podem introduzir artefatos no áudio traduzido quando o áudio de entrada já está no idioma de destino.
 
-## इस्तेमाल की जा सकने वाली भाषाएं
+## Idiomas compatíveis
 
-लाइव ट्रांसलेट की सुविधा इन भाषाओं में उपलब्ध है.
+Os seguintes idiomas são compatíveis com a Tradução instantânea.
 
-| भाषा | BCP-47 कोड | भाषा | BCP-47 कोड |
+| Idioma | Código BCP-47 | Idioma | Código BCP-47 |
 | --- | --- | --- | --- |
-| अफ़्रीकान्स | af | कज़ाक़ | kk |
-| Akan | ak | ख्मेर | km |
-| अल्बेनियन | sq | किनयारवांडा | rw |
-| अमहैरिक | am | कोरियन | ko |
-| अरबी | ar | लाओ | lo |
-| आर्मीनियन | hy | लातवियन | lv |
-| अज़रबैजानी | az | लिथुएनियन | lt |
-| बॉस्क | eu | मैसेडोनियन | mk |
-| बेलारूसी | be | मलय | ms |
-| बांग्ला | bn | मलयालम | ml |
-| बल्गैरियन | bg | मराठी | mr |
-| बर्मी (म्यांमार) | my | मंगोलियन | mn |
-| कैटलैन | ca | नेपाली | ne |
-| चाइनीज़ (सिंप्लिफ़ाइड) | zh-Hans | नॉर्वीजन | no, nb |
-| चाइनीज़ (ट्रेडिशनल) | zh-Hant | फ़ारसी | fa |
-| क्रोएशियन | hr | पोलिश | pl |
-| चेक | cs | पॉर्चुगीज़ (ब्राज़ील) | pt-BR |
-| डैनिश | da | पॉर्चगीज़ (पुर्तगाल) | pt-PT |
-| डच | nl | पंजाबी | pa |
-| अंग्रेज़ी | en | रोमानियन | ro |
-| एस्टोनियन | et | रूसी | ru |
-| फ़िलिपीनी | fil | सर्बियन | sr |
-| फ़िनिश | fi | सिंधी | sd |
-| फ़्रांसीसी | fr | सिंहला | si |
-| गैलिशियन | gl | स्लोवाक | sk |
-| जॉर्जियन | ka | स्लोवेनियन | sl |
-| जर्मन | de | स्पैनिश | es |
-| ग्रीक | el | सूडानीज़ | su |
-| गुजराती | gu | स्वाहिली | sw |
-| हौसा | ha | स्वीडिश | sv |
-| हिब्रू | he | तमिल | ta |
-| हिन्दी | hi | तेलुगु | te |
-| हंगेरियन | hu | थाई | th |
-| आइसलैंडिक | is | टर्किश | tr |
-| इंडोनेशियन | id | यूक्रेनियन | uk |
-| इटैलियन | it | उर्दू | ur |
-| जापानी | ja | उज़्बेक | uz |
-| जावानीज़ | jv | वियतनामीज़ | vi |
-| कन्नड़ | kn | ज़ुलू | zu |
+| Africâner | af | Cazaque | kk |
+| Akan | ak | Khmer | km |
+| Albanês | sq | Quiniaruanda | rw |
+| Amárico | am | Coreano | ko |
+| Árabe | ar | Laosiano | lo |
+| Armênio | hy | Letão | lv |
+| Azerbaijano | az | Lituano | lt |
+| Basco | eu | Macedônio | mk |
+| Bielorrusso | be | Malaio | ms |
+| Bengali | bn | Malaiala | ml |
+| Búlgaro | bg | Marati | mr |
+| Birmanês (Mianmar) | my | Mongol | mn |
+| Catalão | ca | Nepalês | ne |
+| Chinês (simplificado) | zh-Hans | Norueguês | não, nb |
+| Chinês (tradicional) | zh-Hant | Persa | fa |
+| Croata | h | Polonês | pl |
+| Tcheco | cs | Português (Brasil) | pt-BR |
+| Dinamarquês | da | Português (Portugal) | pt-PT |
+| Neerlandês | nl | Punjabi | pa |
+| Inglês | en | Romeno | ro |
+| Estoniano | et | Russo | ru |
+| Filipino | fil | Sérvio | sr |
+| Finlandês | fi | Sindi | sd |
+| Francês | fr | Cingalês | si |
+| Galego | gl | Eslovaco | sk |
+| Georgiano | ka | Esloveno | sl |
+| Alemão | de | Espanhol | es |
+| Grego | el | Sundanês | su |
+| Gujarati | gu | Suaíli | sw |
+| Hauçá | ha | Sueco | sv |
+| Hebraico | ele | Tâmil | ta |
+| Hindi | hi | Télugo | te |
+| Húngaro | hu | Tailandês | th |
+| Islandês | is | Turco | tr |
+| Indonésio | id | Ucraniano | uk |
+| Italiano | it | Urdu | ur |
+| Japonês | ja | Usbeque | uz |
+| Javanês | jv | Vietnamita | vi |
+| Canarês | kn | Zulu | zu |
 
-## आगे क्या करना है
+## A seguir
 
-- लाइव एपीआई की [क्षमताओं](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=hi) के बारे में पूरी गाइड पढ़ें.
-- [एसडीके इस्तेमाल करने की गाइड](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=hi) पढ़ें.
-- [WebSockets इस्तेमाल करने की गाइड](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=hi) पढ़ें.
-- क्लाइंट-टू-सर्वर ऐप्लिकेशन में सुरक्षित तरीके से पुष्टि करने के लिए, [कुछ समय के लिए मान्य टोकन](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=hi) की गाइड पढ़ें.
-- GitHub से, [लाइव एपीआई के उदाहरणों](https://github.com/google-gemini/gemini-live-api-examples) का क्लोन बनाएं.
+- Leia o guia completo de [recursos](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=pt-br) da API Live.
+- Leia o guia [Começar a usar o SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=pt-br).
+- Leia o guia [Começar a usar WebSockets](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=pt-br).
+- Leia o guia [Tokens efêmeros](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=pt-br) para autenticação segura em aplicativos cliente-servidor.
+- Clone os [exemplos de API ativa](https://github.com/google-gemini/gemini-live-api-examples) do GitHub.
 
-सुझाव भेजें
+Envie comentários
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-आखिरी बार 2026-07-23 (UTC) को अपडेट किया गया.
+Última atualização 2026-07-23 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Quer enviar seu feedback?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-23 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-23 UTC."],[],[]]

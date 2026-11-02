@@ -1,33 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=sq
-fetched_at: 2026-10-26T05:54:05.675902+00:00
-title: "Konkludimi me p\u00ebrpar\u00ebsi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-TW
+fetched_at: 2026-11-02T07:10:35.671378+00:00
+title: "\u512a\u5148\u9806\u5e8f\u63a8\u65b7 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Faqja kryesore](https://ai.google.dev/?hl=sq)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
-- [Dokumentet](https://ai.google.dev/gemini-api/docs?hl=sq)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Dërgo komente
+提供意見
 
-# Konkludimi me përparësi
+# 優先順序推斷
 
-Description: Learn how to optimize latency with the Priority inference tier in the Interactions API
+說明：瞭解如何使用 Interactions API 的優先推論級別，縮短延遲時間
 
-Gemini Priority API është një nivel i parashikimit premium i krijuar për ngarkesat e punës që janë kritike për biznesin që kërkojnë vonesë më të ulët dhe besueshmëri më të lartë me një çmim premium. Trafiku i nivelit të përparësisë ka përparësi mbi
-trafikun e nivelit standard të API-së dhe nivelit Flex.
+Gemini Priority API 是進階推論級別，專為需要較低延遲時間和最高可靠性的重要業務工作負載設計，價格點較高。系統會優先處理 Priority 層級的流量，再處理 Standard API 和 Flex 層級的流量。
 
-Konkluzioni me përparësi ofrohet në pikat fundore të Interactions API.
+您可以在 Interactions API 端點使用優先順序推論。
 
-## Si të përdorësh "Përparësinë"
+## 如何使用優先檔案區
 
-Për të përdorur nivelin "Me përparësi", cakto fushën `service_tier` në kërkesën tënde në `priority`. Niveli i parazgjedhur është standard nëse fusha hiqet.
+如要使用 Priority 級別，請將要求中的 `service_tier` 欄位設為 `priority`。如果省略這個欄位，預設層級為標準。
 
 ### Python
 
@@ -127,7 +126,7 @@ func main() {
 }
 ```
 
-### QETËSI
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -140,83 +139,77 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Si funksionon nxjerrja e përfundimeve për "Përparësinë"
+## 優先順序推論的運作方式
 
-Itineraret e përfundimeve me përparësi i drejtojnë kërkesat te radhët e llogaritjeve me nivel të lartë kritik, duke ofruar performancë të parashikueshme dhe të shpejtë për aplikacionet e përdoruesve. Mekanizmi i tij kryesor është një ulje e nivelit në anën e serverit në përpunim standard për trafikun që tejkalon kufijtë dinamikë, duke siguruar qëndrueshmërinë e aplikacionit në vend që të dështojë kërkesa.
+優先推論會將要求轉送至高重要性的運算佇列，為面向使用者的應用程式提供可預測的快速效能。主要機制是伺服器端會平穩降級，將超過動態限制的流量轉為標準處理，確保應用程式穩定，而非要求失敗。
 
-| Veçoria | Me përparësi | Standard | Tregim force | Paketë |
+| 功能 | 優先順序 | 標準 | Flex | 批次 |
 | --- | --- | --- | --- | --- |
-| **Çmimet** | 75-100% më shumë se Standard | Çmimi i plotë | 50% zbritje | 50% zbritje |
-| **Vonesa** | Sekonda | Sekonda në minuta | Minuta (objektivi 1–15 min.) | Deri në 24 orë |
-| **Besueshmëria** | E lartë (jo e lëshueshme) | E lartë / mesatarisht e lartë | Me përpjekjen më të mirë (i heqshëm) | E lartë (për rendimentin) |
-| **Ndërfaqja** | Sinkron | Sinkron | Sinkron | Josinkron |
+| **定價** | 比 Standard 方案多 75% 至 100% | 原價 | 50% 折扣 | 5 折優惠 |
+| **延遲** | 秒 | 幾秒至幾分鐘 | 分鐘 (目標為 1 至 15 分鐘) | 長達 24 小時 |
+| **穩定性** | 高 (不會脫落) | 高 / 中高 | 盡可能取得容量 (可捨棄) | 高 (處理量) |
+| **介面** | 同步 | 同步 | 同步 | 非同步 |
 
-### Përfitimet kryesore
+### 主要優點
 
-- **Vonesë e ulët**: Projektuar për kohë përgjigjeje në sekonda për vegla interaktive të IA-së për përdoruesit.
-- **Besueshmëri e lartë**: Trafiku trajtohet me nivelin më të lartë të rëndësisë dhe është rreptësisht i pashmangshëm.
-- **Degradimi i butë**: Rritjet e trafikut që tejkalojnë kufijtë dinamikë ulen automatikisht në nivelin "Standard" për përpunim në vend që të dështojnë, duke parandaluar ndërprerjet e shërbimit.
-- **Fërkim i ulët**: Përdor të njëjtën metodë sinkrone `create` si niveli standard dhe ai Flex.
+- **低延遲**：專為互動式、面向使用者的 AI 工具設計，回應時間僅需幾秒。
+- **高可靠性**：流量會以最高重要性處理，且嚴格禁止捨棄。
+- **正常降級**：如果流量尖峰超過動態限制，系統會自動將流量降級至標準層級進行處理，而非處理失敗，避免服務中斷。
+- **低摩擦**：使用與標準和 Flex 層級相同的同步 `create` 方法。
 
-### Rastet e përdorimit
+### 用途
 
-Përpunimi me përparësi është ideal për flukset e punës kritike për biznesin ku performanca
-dhe besueshmëria janë parësore.
+優先處理非常適合效能和可靠性至關重要的業務關鍵工作流程。
 
-- **Aplikacionet ndërvepruese të IA-së**: Robotët e bisedës dhe bashkëpilotët e shërbimit të klientit ku përdoruesit paguajnë një premium dhe presin përgjigje të shpejta dhe të qëndrueshme.
-- **Motorët e vendimmarrjes në kohë reale**: Sistemet që kërkojnë rezultate shumë të besueshme me vonesë të ulët, si p.sh. triazhi i biletave drejtpërdrejt ose zbulimi i mashtrimeve.
-- **Veçoritë e klientëve premium**: Zhvilluesit që duhet të garantojnë objektiva më të lartë të nivelit të shërbimit (SLO) për klientët që paguajnë.
+- **互動式 AI 應用程式**：客戶服務聊天機器人和 Copilot，使用者願意付費，並期望獲得快速、一致的回覆。
+- **即時決策引擎**：需要高可靠性、低延遲結果的系統，例如即時票證分類或詐欺偵測。
+- **付費客戶功能**：開發人員需要為付費客戶保證更高的服務水準目標 (SLO)。
 
-### Kufijtë e kursit të këmbimit
+### 頻率限制
 
-Konsumimi me përparësi ka kufijtë e vet të normës edhe pse konsumimi llogaritet për [kufijtë e normës së përgjithshme të trafikut interaktiv](https://aistudio.google.com/rate-limit?hl=sq). Kufijtë e parazgjedhur të normës
-për përfundimin e "Përparësisë" janë **0,3 herë kufiri standard i normës për modelin / nivelin**
+雖然優先用量會計入[整體互動流量頻率限制](https://aistudio.google.com/rate-limit?hl=zh-tw)，但仍有自己的頻率限制。Priority 推論的預設頻率限制為**模型 / 層級的標準速率限制的 0.3 倍**
 
-### Logjika e uljes së nivelit me hapa të ngadaltë
+### 安全降級邏輯
 
-Nëse kufijtë e "Përparësisë" tejkalohen për shkak të mbingarkesës, kërkesat e tepërta
-**ulen automatikisht dhe me mirësjellje** në përpunimin "Standard" në vend që të
-dështojnë me një gabim 503 ose 429. Kërkesat e ulura në nivel tarifohen me tarifën standarde, jo me tarifën premium të "Përparësisë".
+如果因壅塞而超出優先順序限制，溢出的要求會**自動且順暢地**降級為標準處理，而不是因 503 或 429 錯誤而失敗。降級的要求會以標準費率計費，而非優先費率。
 
-### Përgjegjësia e klientit
+### 客戶責任
 
-- **Monitorimi i përgjigjes**: Zhvilluesit duhet të monitorojnë kokën `x-gemini-service-tier`
-  në përgjigjen e API-së për të zbuluar nëse kërkesat po ulen shpesh në
-  `standard`.
-- **Riprovat**: Klientët duhet të zbatojnë logjikën e riprovës/kohën e pritjes eksponenciale për gabimet standarde, si p.sh. `DEADLINE_EXCEEDED`.
+- **監控回應**：開發人員應監控 API 回應中的 `x-gemini-service-tier` 標頭，偵測要求是否經常降級為 `standard`。
+- **重試**：用戶端必須為標準錯誤 (例如 `DEADLINE_EXCEEDED`) 實作重試邏輯/指數輪詢。
 
-## Çmimet
+## 定價
 
-Konkluzioni me përparësi ka një çmim 75-100% më të lartë se [API-ja standarde](https://ai.google.dev/gemini-api/docs/pricing?hl=sq) dhe faturohet për çdo dërgim.
+優先推論的價格比[標準 API](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw) 高 75% 至 100%，並依詞元計費。
 
-## Modelet e mbështetura
+## 支援的模型
 
-Modelet e mëposhtme mbështesin nxjerrjen e përfundimeve me përparësi:
+下列模型支援優先推論：
 
-| Modeli | Konkludimi me përparësi |
+| 模型 | 優先順序推斷 |
 | --- | --- |
-| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=sq) | ✔️ |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=sq) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=sq) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=sq) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=sq) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=sq) | ✔️ |
-| [Pamja paraprake e Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=sq) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=sq) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=sq) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=sq) | ✔️ |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=zh-tw) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-tw) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-tw) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3.1 Pro 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw) | ✔️ |
+| [Gemini 3 Flash 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-tw) | ✔️ |
 
-## Çfarë ka më pas
+## 後續步驟
 
-- [Deduksioni Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=sq) për reduktimin e kostos.
-- [Tokenët](https://ai.google.dev/gemini-api/docs/tokens?hl=sq): Kupto tokenët.
+- [Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-tw)：降低成本。
+- [權杖](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw)：瞭解權杖。
 
-Dërgo komente
+提供意見
 
-Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Përditësimi i fundit: 2026-10-13 UTC.
+上次更新時間：2026-10-13 (世界標準時間)。
 
-Duhet të na tregosh më shumë?
+想進一步說明嗎？
 
-[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-13 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-13 (世界標準時間)。"],[],[]]

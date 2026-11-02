@@ -1,79 +1,79 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/thinking?hl=zh-CN
-fetched_at: 2026-10-26T05:42:16.107126+00:00
-title: "Live API \u7684\u601d\u7ef4\u65b9\u5f0f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/thinking?hl=hi
+fetched_at: 2026-11-02T07:24:58.078301+00:00
+title: "\u0932\u093e\u0907\u0935 \u090f\u092a\u0940\u0906\u0908 \u0915\u0947 \u092c\u093e\u0930\u0947 \u092e\u0947\u0902 \u091c\u093e\u0928\u0915\u093e\u0930\u0940 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
+Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-发送反馈
+सुझाव भेजें
 
-# Live API 的思维方式
+# लाइव एपीआई के बारे में जानकारी
 
-借助 Gemini Live API，您可以与 Gemini 模型进行实时的双向语音对话。
+Gemini Live API की मदद से, Gemini मॉडल के साथ रीयल-टाइम में बोलकर बातचीत की जा सकती है.
 
-标准语音模型非常适合即时对话。您对模型说话，模型会立即生成语音回复。但当请求需要规划、复杂分析或外部工具时，直接回答会受到限制。模型必须在不进行推理的情况下回答，或者在等待工具完成时静默暂停。
+स्टैंडर्ड वॉइस मॉडल, बातचीत को तुरंत समझने और जवाब देने के लिए बेहतर होते हैं. मॉडल से बात करने पर, वह तुरंत बोलकर जवाब देता है. हालांकि, जब किसी अनुरोध के लिए प्लानिंग, जटिल विश्लेषण या बाहरी टूल की ज़रूरत होती है, तो सीधे तौर पर जवाब देने की सुविधा सीमित हो जाती है. मॉडल को या तो बिना किसी वजह के जवाब देना चाहिए या टूल के पूरा होने का इंतज़ार करते समय चुपचाप रुक जाना चाहिए.
 
-在 Live API (`gemini-3.8-live-extended-thinking`) 中思考可为实时语音会话添加背景推理。模型会在后台规划和调用异步工具，同时说出自然的对话填充语，以保持互动活跃。
+लाइव एपीआई (`gemini-3.8-live-extended-thinking`) की मदद से, रीयल-टाइम वॉइस सेशन में बैकग्राउंड की जानकारी जोड़ी जाती है. मॉडल, बातचीत को जारी रखने के लिए नैचुरल फ़िलर का इस्तेमाल करता है. साथ ही, बैकग्राउंड में एसिंक्रोनस टूल को प्लान करता है और उन्हें कॉल करता है.
 
-此架构通过以下两种主要方式改变了对话生命周期：
+यह आर्किटेक्चर, बातचीत के लाइफ़साइकल को दो मुख्य तरीकों से बदलता है:
 
-- **对话填充内容**：模型在后台执行工具时，会说出中间更新（例如“正在检查航班选项”）。
-- **互动状态跟踪**：由于模型可以在单个请求期间多次说话，因此服务器会在后台处理期间发出 `interaction_status: "IN_PROGRESS"`，并在整个任务完成时发出 `interaction_status: "IDLE"`。
+- **बातचीत के दौरान इस्तेमाल किए जाने वाले फ़िलर**: मॉडल, बैकग्राउंड में टूल इस्तेमाल करते समय, बीच-बीच में अपडेट देता है. जैसे, "फ़्लाइट के विकल्प देखे जा रहे हैं".
+- **इंटरैक्शन की स्थिति को ट्रैक करना**: मॉडल एक अनुरोध के दौरान कई बार बोल सकता है. इसलिए, बैकग्राउंड में प्रोसेसिंग के दौरान सर्वर `interaction_status: "IN_PROGRESS"` और टास्क पूरा होने पर `interaction_status: "IDLE"` दिखाता है.
 
-下图比较了标准实时语音会话与“边想边推理”之间的互动生命周期：
+यहां दिए गए डायग्राम में, स्टैंडर्ड लाइव वॉइस सेशन और बैकग्राउंड रीज़निंग के साथ सोचने की सुविधा के बीच इंटरैक्शन के लाइफ़साइकल की तुलना की गई है:
 
-![Live API 函数调用和状态跟踪比较](https://ai.google.dev/static/gemini-api/docs/images/thinking-model-comparison.svg?hl=zh-cn)
+![लाइव एपीआई फ़ंक्शन कॉलिंग और स्टेट ट्रैकिंग की तुलना](https://ai.google.dev/static/gemini-api/docs/images/thinking-model-comparison.svg?hl=hi)
 
-## 选择合适的模型
+## सही मॉडल चुनना
 
-在 `gemini-3.8-live` 和 `gemini-3.8-live-extended-thinking` 之间做出选择时，请考虑以下三个主要因素：响应延迟时间、任务复杂程度和客户端状态处理。
+`gemini-3.8-live` और `gemini-3.8-live-extended-thinking` में से किसी एक को चुनते समय, इन तीन बातों पर ध्यान दें: जवाब मिलने में लगने वाला समय, टास्क कितना मुश्किल है, और क्लाइंट की स्थिति को कैसे मैनेज किया जाता है.
 
-### Gemini 3.8 Live 的适用场景
+### Gemini 3.8 Live का इस्तेमाल कब करना चाहिए
 
-对于需要立即轮流对话且任务直接的低延迟对话语音代理，请使用 `gemini-3.8-live`。
+`gemini-3.8-live` का इस्तेमाल, कम समय में जवाब देने वाले ऐसे वॉइस एजेंट के लिए करें जहां तुरंत जवाब देना ज़रूरी हो और टास्क सीधे तौर पर दिए गए हों.
 
-- **对话式语音助理**：客户服务分流、语言练习、语音搜索和互动式故事讲述。
-- **快速执行工具**：外部工具在几毫秒内返回的工作流（例如读取传感器值或控制智能设备）。
-- **简单的客户端逻辑**：应用中每个用户轮次都会收到单个模型响应，并且 `turnComplete: true` 会在会话空闲时可靠地发出信号。
+- **बातचीत करने वाली वॉइस असिस्टेंट**: ग्राहक सेवा से जुड़ी समस्याओं को हल करना, भाषा का अभ्यास करना, वॉइस सर्च करना, और इंटरैक्टिव तरीके से कहानी सुनाना.
+- **टूल को तेज़ी से लागू करना**: ऐसे वर्कफ़्लो जहां बाहरी टूल, मिलीसेकंड में जवाब देते हैं. जैसे, सेंसर की वैल्यू पढ़ना या स्मार्ट डिवाइसों को कंट्रोल करना.
+- **आसान क्लाइंट लॉजिक**: ऐसे ऐप्लिकेशन जहां हर उपयोगकर्ता को एक ही मॉडल से जवाब मिलता है. साथ ही, `turnComplete: true` यह भरोसेमंद तरीके से बताता है कि सेशन कब बंद हो गया है.
 
-### 何时使用 Gemini 3.8 Live（扩展思考）
+### ज़्यादा सोच-विचार करके जवाब देने वाले Gemini 3.8 Live का इस्तेमाल कब करना चाहिए
 
-如果您的代理必须评估复杂数据、规划多个步骤或处理需要几秒钟才能运行的工具，请使用 `gemini-3.8-live-extended-thinking`。
+जब आपके एजेंट को जटिल डेटा का आकलन करना हो, कई चरणों की योजना बनानी हो या ऐसे टूल इस्तेमाल करने हों जिन्हें चलने में कई सेकंड लगते हैं, तब `gemini-3.8-live-extended-thinking` का इस्तेमाल करें.
 
-- **多步骤诊断和支持**：技术支持人员会诊断多个日志、错误代码和配置检查中的系统问题。
-- **协调的数据检索**：旅游和预订代理，可搜索航班、查询酒店，并通过并行 API 调用比较价格。
-- **STEM 和代码辅导**：在给出解释之前，验证公式、调试代码或处理多步逻辑的教育类智能体。
-- **遮盖工具延迟**：在语音体验中，长时间运行的函数可能会导致听众感到尴尬的沉默。
+- **कई चरणों में गड़बड़ियों की जानकारी और सहायता**: तकनीकी सहायता देने वाले एजेंट, कई लॉग, गड़बड़ी कोड, और कॉन्फ़िगरेशन की जांच करके सिस्टम से जुड़ी गड़बड़ियों का पता लगाते हैं.
+- **डेटा को एक साथ वापस पाना**: यात्रा और बुकिंग एजेंट, फ़्लाइट खोजते हैं, होटलों के बारे में क्वेरी करते हैं, और पैरलल एपीआई कॉल के ज़रिए किराये की तुलना करते हैं.
+- **एसटीईएम और कोडिंग की ट्यूशन**: शिक्षा से जुड़े एजेंट, फ़ॉर्मूलों की पुष्टि करते हैं, कोड को डीबग करते हैं या जवाब देने से पहले कई चरणों वाले लॉजिक पर काम करते हैं.
+- **मास्किंग टूल की वजह से होने वाली देरी**: आवाज़ से जुड़े ऐसे अनुभव जहां लंबे समय तक चलने वाले फ़ंक्शन की वजह से, सुनने वाले व्यक्ति को अजीब तरह की चुप्पी का सामना करना पड़ता है.
 
-### 主要区别总结
+### मुख्य अंतर के बारे में खास जानकारी
 
-下表总结了这两种型号之间的技术差异：
+यहां दी गई टेबल में, दोनों मॉडल के बीच के तकनीकी अंतर के बारे में खास जानकारी दी गई है:
 
-| 功能 | Gemini 3.8 Live | Gemini 3.8 Live（扩展思考） |
+| सुविधा | Gemini 3.8 Live | Gemini 3.8 Live Extended Thinking |
 | --- | --- | --- |
-| **主要使用场景** | 低延迟语音代理、直接命令、快速工具 | 多步骤问题解决、复杂规划、多工具工作流 |
-| **模型端点** | `gemini-3.8-live` | `gemini-3.8-live-extended-thinking` |
-| **推理架构** | 具有固定延迟配置的交错推理（不支持 `thinking_level`） | 可配置的后台推理（`thinking_level`：`low`、`medium`、`high`；不支持 `MINIMAL`） |
-| **开启边界** | `turnComplete: true` 结束回合并返回到空闲状态 | `turnComplete: true` 完成话语；`interaction_status` 控制会话生命周期 |
-| **对话填充词** | 模型在说话之前等待工具执行 | 模型在处理时会流式传输中间对话填充词 |
-| **工具执行** | 支持同步 (`BLOCKING`) 和异步 (`NON_BLOCKING`) 工具 | 需要异步 (`NON_BLOCKING`) 工具声明 |
+| **इस्तेमाल के मुख्य उदाहरण** | कम समय में जवाब देने वाले वॉइस एजेंट, सीधे तौर पर दिए जाने वाले निर्देश, तेज़ी से काम करने वाले टूल | कई चरणों में समस्या हल करना, जटिल प्लानिंग करना, और कई टूल वाले वर्कफ़्लो |
+| **मॉडल एंडपॉइंट** | `gemini-3.8-live` | `gemini-3.8-live-extended-thinking` |
+| **तर्क करने वाला आर्किटेक्चर** | जवाब देने के दौरान तर्क शामिल करना, जिसमें जवाब देने में लगने वाले समय की जानकारी शामिल हो (`thinking_level` काम नहीं करता) | कॉन्फ़िगर किया जा सकने वाला बैकग्राउंड रीज़निंग (`thinking_level`: `low`, `medium`, `high`; `MINIMAL` काम नहीं करता) |
+| **सीमाएं चालू करना** | `turnComplete: true` बंद हो जाता है और फिर से निष्क्रिय हो जाता है | `turnComplete: true` किसी बातचीत को खत्म करता है; `interaction_status` सेशन के लाइफ़साइकल को कंट्रोल करता है |
+| **बातचीत के दौरान इस्तेमाल होने वाले शब्द** | मॉडल, जवाब देने से पहले टूल के काम करने का इंतज़ार करता है | मॉडल, बातचीत को प्रोसेस करते समय, बीच-बीच में फ़िलर स्ट्रीम करता है |
+| **टूल का इस्तेमाल** | सिंक्रोनस (`BLOCKING`) और एसिंक्रोनस (`NON_BLOCKING`) टूल के साथ काम करता है | टूल के एसिंक्रोनस (`NON_BLOCKING`) एलान ज़रूरी हैं |
 
-## 迁移和集成路径
+## माइग्रेशन और इंटिग्रेशन के तरीके
 
-请按照以下步骤升级现有的语音应用，或将 Thinking 集成到您的 Live API 会话中。
+मौजूदा वॉइस ऐप्लिकेशन को अपग्रेड करने या Live API सेशन में Thinking को इंटिग्रेट करने के लिए, यह तरीका अपनाएं.
 
-### 从 Gemini 3.1 Flash Live 升级
+### Gemini 3.1 Flash Live से अपग्रेड करना
 
-对于使用 `gemini-3.1-flash-live-preview` 的现有语音应用，升级到 `gemini-3.8-live` 需要更新模型字符串并从设置配置中省略 `thinking_level`（或 `thinking_config`），因为 `thinking_level` 不受 `gemini-3.8-live` 支持：
+`gemini-3.1-flash-live-preview` का इस्तेमाल करने वाले मौजूदा वॉइस ऐप्लिकेशन के लिए, `gemini-3.8-live` पर अपग्रेड करने के लिए, मॉडल स्ट्रिंग को अपडेट करना होगा. साथ ही, अपने सेटअप कॉन्फ़िगरेशन से `thinking_level` (या `thinking_config`) को हटाना होगा, क्योंकि `gemini-3.8-live` के लिए `thinking_level` काम नहीं करता:
 
 ```
 {
@@ -83,13 +83,13 @@ Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能
 }
 ```
 
-回合生命周期和 `turnComplete` 信号保持不变。
+टर्न की लाइफ़साइकल और `turnComplete` सिग्नल एक जैसे रहते हैं.
 
-### 采用思考
+### सोचने का तरीका अपनाना
 
-如需采用 `gemini-3.8-live-extended-thinking`，请更新以下三个集成点：
+`gemini-3.8-live-extended-thinking` को अपनाने के लिए, तीन इंटिग्रेशन पॉइंट अपडेट करें:
 
-1. **跟踪 `interaction_status` 而不是 `turnComplete`**：在思考会话中，模型可以在推理时发出中间对话填充词。检查传入服务器消息中的 `interaction_status` 字段，以管理界面状态。仅当 `interaction_status` 为 `IDLE` 时返回到空闲状态。
+1. **`turnComplete` के बजाय `interaction_status` को ट्रैक करें**: सोचने-समझने की प्रोसेस के दौरान, मॉडल बातचीत को जारी रखने के लिए कुछ शब्दों का इस्तेमाल कर सकता है. यूज़र इंटरफ़ेस (यूआई) की स्थिति मैनेज करने के लिए, सर्वर से मिले मैसेज में मौजूद `interaction_status` फ़ील्ड की जांच करें. सिर्फ़ तब निष्क्रिय हो, जब `interaction_status` `IDLE` हो.
 
    ### Python
 
@@ -114,7 +114,7 @@ Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能
      setUiState('thinking');
    }
    ```
-2. **声明非阻塞函数**：在所有函数声明中设置 `"behavior": "NON_BLOCKING"`。思考模型会在后台异步运行工具，同时以流式方式提供口头更新。同步阻塞工具会返回错误。
+2. **नॉन-ब्लॉकिंग फ़ंक्शन का एलान करें**: सभी फ़ंक्शन के एलान पर `"behavior": "NON_BLOCKING"` सेट करें. सोचने वाले मॉडल, टूल को एसिंक्रोनस तरीके से बैकग्राउंड में चलाते हैं. साथ ही, वर्बल अपडेट स्ट्रीम करते हैं. सिंक्रोनस ब्लॉकिंग टूल, गड़बड़ी की जानकारी देते हैं.
 
    ### Python
 
@@ -149,7 +149,7 @@ Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能
      },
    };
    ```
-3. **配置推理深度**：在会话配置中设置 `thinking_config` 以调整推理级别（`low`、`medium` 或 `high`；不支持 `MINIMAL`）。
+3. **तर्क की गहराई को कॉन्फ़िगर करना**: अपने सेशन के कॉन्फ़िगरेशन में `thinking_config` सेट करके, तर्क के लेवल (`low`, `medium` या `high`) में बदलाव करें. `MINIMAL` काम नहीं करता है.
 
    ### Python
 
@@ -175,22 +175,23 @@ Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能
    };
    ```
 
-## 协议对照比较
+## प्रोटोकॉल की अगल-बगल में तुलना
 
-本部分比较了在实时 API 会话的每个阶段交换的 WebSocket 消息。
+इस सेक्शन में, Live API सेशन के हर चरण के दौरान एक्सचेंज किए गए WebSocket मैसेज की तुलना की गई है.
 
-### 第 1 步：设置会话
+### पहला चरण: सेशन सेट अप करना
 
-这两个模型都连接到同一 WebSocket 端点：
+दोनों मॉडल, एक ही WebSocket एंडपॉइंट से कनेक्ट होते हैं:
 
 ```
 wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent?key=$API_KEY
 ```
 
-- **相同**：WebSocket 网址和 API 密钥身份验证。
-- **模型字符串**：`gemini-3.8-live` 与 `gemini-3.8-live-extended-thinking`。
-- **思考配置**：思考会添加 `thinkingConfig` 来调整推理深度。
-- **工具行为**：思考需要对函数声明使用 `"behavior": "NON_BLOCKING"`。
+- **एक जैसा**: WebSocket यूआरएल और एपीआई पासकोड की पुष्टि.
+- **मॉडल स्ट्रिंग**: `gemini-3.8-live` बनाम
+  `gemini-3.8-live-extended-thinking`.
+- **सोचने की क्षमता को कॉन्फ़िगर करना**: सोचने की क्षमता को कॉन्फ़िगर करने से, `thinkingConfig` जुड़ जाता है. इससे जवाब में दी गई जानकारी की गहराई को अडजस्ट किया जा सकता है.
+- **टूल का व्यवहार**: फ़ंक्शन के एलान के लिए, `"behavior": "NON_BLOCKING"` चालू होना ज़रूरी है.
 
 ### Gemini 3.8 Live
 
@@ -212,7 +213,7 @@ wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.
 }
 ```
 
-### Gemini 3.8 Live（扩展思考）
+### Gemini 3.8 Live Extended Thinking
 
 ```
 {
@@ -249,7 +250,7 @@ wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.
 }
 ```
 
-两个模型在连接时都会收到相同的服务器确认：
+कनेक्ट होने पर, दोनों मॉडल को सर्वर से एक जैसा जवाब मिलता है:
 
 ```
 {
@@ -257,9 +258,10 @@ wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.
 }
 ```
 
-### 第 2 步：用户音频输入
+### दूसरा चरण: उपयोगकर्ता के ऑडियो इनपुट
 
-这两款型号的音频流式传输功能完全相同。使用 `realtimeInput` 流式传输实时 16kHz 原始 PCM 音频块：
+दोनों मॉडल में ऑडियो स्ट्रीमिंग की सुविधा एक जैसी है. `realtimeInput` का इस्तेमाल करके, रीयल-टाइम 16kHz रॉ पीसीएम ऑडियो
+चंक स्ट्रीम किए जाते हैं:
 
 ```
 {
@@ -272,14 +274,14 @@ wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.
 }
 ```
 
-### 第 3 步：模型响应和状态生命周期
+### तीसरा चरण: मॉडल का जवाब और स्टेट लाइफ़साइकल
 
-两款模型均以 `serverContent.modelTurn` 为单位串流 24kHz PCM 音频块。不过，生命周期管理有所不同：
+दोनों मॉडल, `serverContent.modelTurn` में 24 किलोहर्ट्ज़ पीसीएम ऑडियो चंक स्ट्रीम करते हैं. हालांकि, लाइफ़साइकल मैनेजमेंट अलग होता है:
 
-#### Gemini 3.8 Live 回答流程
+#### Gemini 3.8 Live की जवाब देने की प्रोसेस
 
-1. 服务器会流式传输相应回合的音频块。
-2. 服务器发送 `turnComplete: true`，表示模型已完成说话，会话处于空闲状态。
+1. सर्वर, बातचीत के दौरान ऑडियो के छोटे-छोटे हिस्से स्ट्रीम करता है.
+2. सर्वर `turnComplete: true` भेजता है. इससे पता चलता है कि मॉडल ने बोलना बंद कर दिया है और सेशन निष्क्रिय है.
 
 ```
 // 1. Audio stream chunks
@@ -306,12 +308,12 @@ wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.
 }
 ```
 
-#### Gemini 3.8 Live 扩展思考回答流程
+#### ज़्यादा सोच-विचार करके जवाब देने वाले Gemini 3.8 Live के जवाब देने का फ़्लो
 
-1. **口语填充**：模型会使用 `turnComplete: true` 和 `interactionStatus: "IN_PROGRESS"` 发出中间语音（例如*“正在查询飞往西雅图的航班…”*）。
-2. **异步工具调用**：服务器在 `interactionStatus` 保持 `"IN_PROGRESS"` 的同时发出工具调用，表明服务器正在积极处理多步对话轮次，并等待工具响应。
-3. **工具响应**：客户端执行函数并返回输出。
-4. **最终回答**：服务器通过 `turnComplete: true` 和 `interactionStatus: "IDLE"` 传递完整答案。
+1. **बोलने के दौरान रुकना**: मॉडल, `turnComplete: true` और `interactionStatus: "IN_PROGRESS"` के साथ बीच-बीच में बोलता है. जैसे, *"सिएटल के लिए फ़्लाइट देखी जा रही हैं..."*.
+2. **एसिंक्रोनस टूल कॉल**: सर्वर, टूल कॉल तब करता है, जब `interactionStatus` `"IN_PROGRESS"` रहता है. इसका मतलब है कि सर्वर, कई चरणों वाले टर्न को प्रोसेस कर रहा है और टूल के जवाब का इंतज़ार कर रहा है.
+3. **टूल का जवाब**: क्लाइंट, फ़ंक्शन को लागू करता है और आउटपुट दिखाता है.
+4. **आखिरी जवाब**: सर्वर, `turnComplete: true` और `interactionStatus: "IDLE"` के साथ पूरा जवाब देता है.
 
 ```
 // 1. Spoken verbal filler while background reasoning proceeds
@@ -384,9 +386,9 @@ wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.
 }
 ```
 
-## SDK 实现示例
+## एसडीके टूल लागू करने के उदाहरण
 
-以下示例展示了如何使用 Google GenAI SDK 配置思考并处理 `interaction_status`。
+यहां दिए गए उदाहरणों में, Google GenAI SDK का इस्तेमाल करके, `interaction_status` को कॉन्फ़िगर करने और उसे मैनेज करने का तरीका बताया गया है.
 
 ### Python
 
@@ -525,19 +527,19 @@ async function main() {
 main();
 ```
 
-## 后续步骤
+## आगे क्या करना है
 
-- 请参阅 [Gemini 3.8 Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=zh-cn) 和 [Gemini 3.8 Live（扩展思考）](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=zh-cn)模型页面。
-- 如需详细比较所有 Live API 模型的功能，请查看[模型对比](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=zh-cn#model-comparison)表。
-- 如需详细了解函数调用，请参阅 [Live API 工具使用](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=zh-cn)指南。
-- 查看[会话管理](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=zh-cn)，以处理会话恢复和上下文生命周期。
+- [Gemini 3.8 Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=hi) और [ज़्यादा सोच-विचार करके जवाब देने वाले Gemini 3.8 Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=hi) मॉडल के पेज पढ़ें.
+- सभी लाइव एपीआई मॉडल की सुविधाओं की तुलना करने के बारे में ज़्यादा जानने के लिए, [मॉडल की तुलना](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=hi#model-comparison) करने वाली टेबल देखें.
+- [लाइव एपीआई टूल के इस्तेमाल](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=hi) से जुड़ी गाइड में, फ़ंक्शन कॉलिंग के बारे में ज़्यादा जानें.
+- सेशन फिर से शुरू करने और कॉन्टेक्स्ट के लाइफ़साइकल को मैनेज करने के लिए, [सेशन मैनेजमेंट](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=hi) की समीक्षा करें.
 
-发送反馈
+सुझाव भेजें
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-最后更新时间 (UTC)：2026-09-17。
+आखिरी बार 2026-09-17 (UTC) को अपडेट किया गया.
 
-需要向我们提供更多信息？
+क्या आपको हमें और कुछ बताना है?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-17。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-17 (UTC) को अपडेट किया गया."],[],[]]

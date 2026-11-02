@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content?hl=id
-fetched_at: 2026-10-26T05:43:18.961063+00:00
+fetched_at: 2026-11-02T07:18:44.960973+00:00
 title: "Gemini API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -17,10 +17,9 @@ Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilih
 
 # Gemini API
 
-Gemini API adalah jalur tercepat dari perintah ke tahap produksi dengan Gemini, Veo,
-Nano Banana, dan lainnya. Dengan Vertex AI, Anda dapat mengintegrasikan model generatif ini ke dalam
-aplikasi Anda untuk menghasilkan teks dan gambar, menganalisis input multimodal, dan membangun
-agen percakapan.
+Beralih dari perintah cepat ke aplikasi dan agen produksi dengan Gemini API.
+Tangani coding yang kompleks dan penalaran multimodal dengan Gemini, atau serahkan pekerjaan multi-langkah kepada agen terkelola. Streaming suara dan video dengan Live API, atau buat
+gambar dengan Nano Banana, video dengan Gemini Omni, dan musik dengan Lyria.
 
 ### Python
 
@@ -170,7 +169,7 @@ Model terbaru kami yang menyeimbangkan kecepatan dengan kecerdasan untuk memberi
 Gemini 3.8 Flash TTS
 Baru
 
-Model text-to-speech berkualitas studio dengan akting ekspresif, desain Suara kustom, dan Replikasi suara.](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=id)
+Model text-to-speech berkualitas studio dengan akting ekspresif, desain Suara kustom, dan replikasi Suara.](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=id)
 [spark
 Gemini 3.5 Flash-Lite
 Baru
@@ -195,7 +194,7 @@ Model pembuatan dan pengeditan video tercanggih kami.](https://ai.google.dev/gem
 [spark
 Gemini Robotics
 
-Model bahasa-visi (VLM) yang menghadirkan kemampuan agentic Gemini ke robotika dan memungkinkan penalaran canggih di dunia fisik.](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=id)
+Model bahasa visi (VLM) yang menghadirkan kemampuan agentic Gemini ke robotika dan memungkinkan penalaran canggih di dunia fisik.](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=id)
 
 ## Ketahui Kemampuannya
 
@@ -266,6 +265,6 @@ Periksa status Gemini API, Google AI Studio, dan layanan model kami.](https://ai
 
 Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Terakhir diperbarui pada 2026-10-22 UTC.
+Terakhir diperbarui pada 2026-10-26 UTC.
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-22 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-26 UTC."],[],[]]

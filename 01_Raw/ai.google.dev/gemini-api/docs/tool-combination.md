@@ -1,26 +1,29 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr
-fetched_at: 2026-10-26T06:00:13.545716+00:00
-title: "Yerle\u015fik ara\u00e7lar\u0131 ve i\u015flev \u00e7a\u011fr\u0131lar\u0131n\u0131 birle\u015ftirme \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=bn
+fetched_at: 2026-11-02T07:05:35.863978+00:00
+title: "\u09ac\u09bf\u09b2\u09cd\u099f-\u0987\u09a8 \u099f\u09c1\u09b2 \u0993 \u09ab\u09be\u0982\u09b6\u09a8 \u0995\u09b2\u09bf\u0982\u09df\u09c7\u09b0 \u09b8\u09c1\u09ac\u09bf\u09a7\u09be \u098f\u0995\u09a4\u09cd\u09b0\u09bf\u09a4 \u0995\u09b0\u09be \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
+Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=bn)।
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [হোম](https://ai.google.dev/?hl=bn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
+- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs?hl=bn)
 
-Geri bildirim gönderin
+মতামত জানান
 
-# Yerleşik araçları ve işlev çağrılarını birleştirme
+# বিল্ট-ইন টুল ও ফাংশন কলিংয়ের সুবিধা একত্রিত করা
 
-Gemini, araç çağrılarının bağlam geçmişini koruyup göstererek `google_search` gibi [yerleşik araçların](https://ai.google.dev/gemini-api/docs/tools?hl=tr) ve [işlev çağrılarının](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) (*özel araçlar* olarak da bilinir) tek bir etkileşimde birleştirilmesine olanak tanır. Yerleşik ve özel araç kombinasyonları, karmaşık ve temsilci tabanlı iş akışlarına olanak tanır. Örneğin, model belirli bir iş mantığınızı çağırmadan önce gerçek zamanlı web verilerine dayalı olarak çalışabilir.
+Gemini, [বিল্ট-ইন টুল](https://ai.google.dev/gemini-api/docs/tools?hl=bn), যেমন `google_search` এবং [ফাংশন কলিং](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn)
+(*কাস্টম টুল* নামেও পরিচিত) একসাথে ব্যবহার করার অনুমতি দেয়। এর মাধ্যমে টুল কলের
+প্রসঙ্গের ইতিহাস সেভ ও প্রকাশ করা হয়। বিল্ট-ইন ও কাস্টম টুলের কম্বিনেশন জটিল, এজেন্টিক ওয়ার্কফ্লোর অনুমতি দেয়, যেখানে, যেমন, আপনার নির্দিষ্ট বিজনেস লজিক কল করার আগে
+মডেলটি রিয়েল-টাইম ওয়েব ডেটা থেকে নিজেকে গ্রাউন্ড করতে পারে।
 
-Aşağıda, `google_search` ve özel bir işlev `getWeather` ile yerleşik ve özel araç kombinasyonlarını etkinleştiren bir örnek verilmiştir:
+এখানে একটি উদাহরণ দেওয়া হল যা `google_search` এবং কাস্টম ফাংশন `getWeather`-এর সাথে বিল্ট-ইন ও কাস্টম টুলের কম্বিনেশন চালু করে:
 
 ### Python
 
@@ -65,7 +68,7 @@ for step in interaction.steps:
         # and provide the result back to the model.
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 // This will only work for SDK newer than 2.0.0
@@ -150,7 +153,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -199,7 +202,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 # Specifies the API revision to avoid breaking changes when they become default
@@ -230,87 +233,97 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## İşleyiş şekli
+## এটি কীভাবে কাজ করে
 
-Gemini 3 modelleri, yerleşik ve özel araç kombinasyonlarını etkinleştirmek için *araç bağlamı dolaşımını* kullanır. Araç bağlamı dolaşımı, yerleşik araçların bağlamını koruyup göstermeyi ve aynı etkileşimdeki özel araçlarla paylaşmayı mümkün kılar.
+Gemini 3 মডেল, বিল্ট-ইন ও কাস্টম টুলের কম্বিনেশন চালু করতে *টুল কন্টেক্সট সার্কুলেশন* ব্যবহার করে। টুল কনটেক্সট সার্কুলেশন বিল্ট-ইন টুলের কনটেক্সট সংরক্ষণ ও প্রকাশ করা এবং একই ইন্টার‍্যাকশনে কাস্টম টুলের সাথে তা শেয়ার করা সম্ভব করে তোলে।
 
-### Araç kombinasyonunu etkinleştirme
+### টুল কম্বিনেশন চালু করুন
 
-- Birleştirme davranışını tetiklemek için kullanmak istediğiniz yerleşik araçlarla birlikte [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#function-declarations) öğesini ekleyin.
+- কম্বিনেশন আচরণ ট্রিগার করতে, আপনি ব্যবহার করতে চান এমন বিল্ট-ইন টুলের সাথে [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn#function-declarations) যোগ করুন।
 
-### API, adımları döndürür
+### API ধাপগুলি ফেরত দেয়
 
-API, etkileşim yanıtında yerleşik araç çağrıları ve işlev (özel araç) çağrıları için ayrı adımlar döndürür:
+ইন্টার‍্যাকশন রেসপন্সে, API বিল্ট-ইন টুল কল ও ফাংশন (কাস্টম টুল) কলের জন্য আলাদা আলাদা ধাপ দেখায়:
 
-- **Yerleşik araç adımları**: API, bunları otomatik olarak yöneterek sıralar arasında bağlamı korur.
-- **İşlev çağrısı adımları**: API, özel işlevleriniz için `function_call` adım döndürür. İşlevi yürütür ve sonucu geri sağlarsınız.
+- **বিল্ট-ইন টুলের ধাপ**: API এগুলি অটোমেটিক ম্যানেজ করে, এর ফলে
+  বিভিন্ন টার্ন জুড়ে প্রসঙ্গ বজায় থাকে।
+- **ফাংশন কল করার ধাপ**: API আপনার কাস্টম ফাংশনের জন্য `function_call`টি ধাপ
+  ফেরত দেয়। আপনি ফাংশনটি এক্সিকিউট করে ফলাফল প্রদান করেন।
 
-### Döndürülen adımlardaki kritik alanlar
+### ফিরে আসা ধাপের গুরুত্বপূর্ণ ফিল্ড
 
-Döndürülen adımlardaki belirli alanlar, araç bağlamını korumak ve araç kombinasyonlarını etkinleştirmek için çok önemlidir:
+টুল কনটেক্সট বজায় রাখতে এবং টুল কম্বিনেশন চালু করতে, ফেরত পাঠানো ধাপের কিছু ফিল্ড খুবই গুরুত্বপূর্ণ:
 
-- **`id`**: `function_call` ve `function_response` adımlarında bulunur. Bir aramayı yanıtıyla eşleyen benzersiz tanımlayıcı.
-- **`signature`**: `thought` adımlarında ve Gemini 3+ modelleri için tüm araç çağrısı (ör. `function_call`) ve sonuç (ör. `function_response`) adımlarında bulunur. Bu şifrelenmiş bağlam, etkileşimler arasında **araç bağlamı dolaşımını** sağlar.
+- **`id`**: `function_call` এবং `function_response` ধাপে পাওয়া গেছে। একটি অনন্য শনাক্তকারী যা কোনও কলকে তার উত্তরের সাথে ম্যাপ করে।
+- **`signature`**: `thought` ধাপে পাওয়া গেছে, এর সাথে Gemini 3+ মডেলের জন্য সব টুল কল (যেমন, `function_call`) এবং ফলাফল (যেমন, `function_response`) ধাপ। এই এনক্রিপ্ট করা প্রসঙ্গ ইন্টার‍্যাকশন জুড়ে **টুল প্রসঙ্গ সার্কুলেশন** চালু করে।
 
-**Bu alanları yönetme:**
+**এইসব ফিল্ড ম্যানেজ করা:**
 
-- **Durum bilgili mod (önerilir):** `previous_interaction_id` kullandığınızda sunucu, hem `id` hem de `signature` alanlarını otomatik olarak işler.
-- **Durum Bilgisiz Mod**: Konuşma geçmişini manuel olarak yönetirken, kimliği doğrulamak ve bağlamı korumak için sonraki isteklerde hem `id` hem de `signature` alanlarını modele geri ilettiğinizden emin olmanız gerekir. Tam yanıt nesnesini geçmişe geri iletirseniz resmi SDK'lar bunu otomatik olarak işler.
+- **স্টেটফুল মোড (সাজেস্ট করা)**: আপনি `previous_interaction_id` ব্যবহার করলে, সার্ভার অটোমেটিক `id` ও `signature` ফিল্ড দু'টিই ম্যানেজ করে।
+- **স্টেটলেস মোড**: ম্যানুয়ালি কথোপকথনের ইতিহাস ম্যানেজ করার সময়, আপনাকে অবশ্যই নিশ্চিত করতে হবে যে আপনি পরবর্তী অনুরোধে মডেলটিকে `id` এবং `signature` ফিল্ড দু'টিই পাস করেছেন যাতে সত্যতা যাচাই করা যায় এবং প্রসঙ্গ বজায় রাখা যায়। আপনি যদি সম্পূর্ণ রেসপন্স অবজেক্টটি ইতিহাসে ফেরত পাঠান, তাহলে অফিসিয়াল SDK এটি অটোমেটিক ম্যানেজ করে।
 
-### Araca özel veriler
+### টুল-নির্দিষ্ট ডেটা
 
-Bazı yerleşik araçlar, araç türüne özel ve kullanıcı tarafından görülebilen veri bağımsız değişkenleri döndürür.
+কিছু বিল্ট-ইন টুল, টুলের
+টাইপ অনুযায়ী ব্যবহারকারীর দেখার উপযুক্ত ডেটা আর্গুমেন্ট রিটার্ন করে।
 
-| Araç | Kullanıcı tarafından görülebilen araç çağrısı bağımsız değişkenleri (varsa) | Kullanıcı tarafından görülebilen araç yanıtı (varsa) |
+| টুল | ব্যবহারকারী দেখতে পাবেন এমন টুল কল আর্গুমেন্ট (যদি থাকে) | ব্যবহারকারীকে দেখানো টুলের উত্তর (যদি থাকে) |
 | --- | --- | --- |
 | **google\_search** | `queries` | `search_suggestions` |
 | **google\_maps** | `queries` | `places` `google_maps_widget_context_token` |
-| **url\_context** | `urls` Göz atılacak URL'ler | `status`: Göz atma durumu `retrieved_url`: Göz atılan URL'ler |
-| **file\_search** | Yok | Yok |
+| **url\_context** | `urls` ব্রাউজ করার জন্য URL | `status`: ব্রাউজ করার স্ট্যাটাস `retrieved_url`: ব্রাউজ করা URL |
+| **file\_search** | কোনওটিই নয় | কোনওটিই নয় |
 
-## Jetonlar ve fiyatlandırma
+## টোকেন ও দাম
 
-İsteklerdeki yerleşik araç çağrısı bölümlerinin `prompt_token_count` sınırına dahil edildiğini unutmayın. Bu ara araç adımları artık görünür ve size geri döndürüldüğü için görüşme geçmişinin bir parçasıdır. Bu durum yalnızca *istekler* için geçerlidir, *yanıtlar* için geçerli değildir.
+মনে রাখবেন, অনুরোধে বিল্ট-ইন টুল কল পার্ট
+`prompt_token_count`-এর জন্য গণনা করা হয়। যেহেতু এই মধ্যবর্তী টুল ধাপগুলি এখন দৃশ্যমান এবং
+আপনাকে ফেরত দেওয়া হয়েছে, তাই সেগুলি কথোপকথনের ইতিহাসের অংশ। এটি শুধুমাত্র
+*অনুরোধের* ক্ষেত্রেই প্রযোজ্য, *উত্তরের* ক্ষেত্রে নয়।
 
-Google Arama aracı bu kuralın istisnasıdır. Google Arama, sorgu düzeyinde kendi fiyatlandırma modelini zaten uyguladığından jetonlar iki kez ücretlendirilmez ([Fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) sayfasına bakın).
+Google Search টুল এই নিয়মের ব্যতিক্রম। Google Search আগেই
+কোয়েরি লেভেলে নিজস্ব প্রাইসিং মডেল প্রয়োগ করে, তাই টোকেনের জন্য
+ডবল চার্জ করা হয় না ([প্রাইসিং](https://ai.google.dev/gemini-api/docs/pricing?hl=bn) পৃষ্ঠা দেখুন)।
 
-Daha fazla bilgi için [Parçalar](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) sayfasını okuyun.
+আরও তথ্যের জন্য [টোকেন](https://ai.google.dev/gemini-api/docs/tokens?hl=bn) পৃষ্ঠাটি পড়ুন।
 
-## Sınırlamalar
+## সীমাবদ্ধতা
 
-- Araç bağlamı dolaşımı etkinleştirildiğinde varsayılan olarak `validated` moduna (`auto` modu desteklenmez) geçin.
-- `google_search` gibi yerleşik araçlar konum ve mevcut saat bilgilerini kullandığından `system_instruction` veya `function_declaration.description` cihazınızda çakışan konum ve saat bilgileri varsa araç kombinasyonu özelliği iyi çalışmayabilir.
+- টুল কন্টেক্সট সার্কুলেশন চালু থাকলে, ডিফল্ট হিসেবে `validated` মোড (`auto` মোড কাজ করে না)
+  ব্যবহার করা হয়।
+- `google_search`-এর মতো বিল্ট-ইন টুল লোকেশন ও বর্তমান সময়ের তথ্যের উপর নির্ভর করে, তাই আপনার `system_instruction` বা `function_declaration.description`-এ লোকেশন ও সময়ের তথ্য পরস্পরবিরোধী হলে, টুল কম্বিনেশন ফিচারটি ভালভাবে কাজ নাও করতে পারে।
 
-## Desteklenen araçlar
+## মানানসই টুল
 
-Standart araç bağlamı dolaşımı, sunucu tarafı (yerleşik) araçlar için geçerlidir.
-Kod yürütme de sunucu tarafı bir araçtır ancak bağlam dolaşımı için kendi yerleşik çözümüne sahiptir. Bilgisayar Kullanımı ve işlev çağrısı, istemci tarafı araçlardır ve bağlam dolaşımı için yerleşik çözümleri de vardır.
+সার্ভার-সাইড (বিল্ট-ইন) টুলের ক্ষেত্রে স্ট্যান্ডার্ড টুল কন্টেক্সট সার্কুলেশন প্রযোজ্য হয়।
+কোড এক্সিকিউশনও একটি সার্ভার-সাইড টুল, তবে প্রসঙ্গ সার্কুলেশনের জন্য এর নিজস্ব বিল্ট-ইন সমাধান রয়েছে। কম্পিউটার ব্যবহার ও ফাংশন কলিং হল ক্লায়েন্ট-সাইড টুল,
+এবং এতে প্রসঙ্গ সার্কুলেশনের জন্য বিল্ট-ইন সমাধানও রয়েছে।
 
-| Araç | Yürütme tarafı | Bağlam Dolaşımı Desteği |
+| টুল | এক্সিকিউশন সাইড | Context Circulation Support |
 | --- | --- | --- |
-| [Google Arama](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) | Sunucu tarafı | Destekleniyor |
-| [Google Haritalar](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr) | Sunucu tarafı | Destekleniyor |
-| [URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr) | Sunucu tarafı | Destekleniyor |
-| [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) | Sunucu tarafı | Destekleniyor |
-| [Kod Yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr) | Sunucu tarafı | Destekleniyor (yerleşik, `code_execution` ve `code_execution_result` adımlarını kullanır) |
-| [Bilgisayar Kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) | İstemci tarafı | Desteklenir (yerleşik, `function_call` ve `function_response` adımlarını kullanır) |
-| [Özel işlevler](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) | İstemci tarafı | Desteklenir (yerleşik, `function_call` ve `function_response` adımlarını kullanır) |
+| [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=bn) | সার্ভার-সাইড | কাজ করে |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=bn) | সার্ভার-সাইড | কাজ করে |
+| [URL কন্টেক্সট](https://ai.google.dev/gemini-api/docs/url-context?hl=bn) | সার্ভার-সাইড | কাজ করে |
+| [ফাইল সার্চ](https://ai.google.dev/gemini-api/docs/file-search?hl=bn) | সার্ভার-সাইড | কাজ করে |
+| [কোড এক্সিকিউশন](https://ai.google.dev/gemini-api/docs/code-execution?hl=bn) | সার্ভার-সাইড | কাজ করে (বিল্ট-ইন, `code_execution` ও `code_execution_result` ধাপ ব্যবহার করে) |
+| [কম্পিউটার ইউজ](https://ai.google.dev/gemini-api/docs/computer-use?hl=bn) | ক্লায়েন্ট-সাইড | কাজ করে (বিল্ট-ইন, `function_call` ও `function_response` ধাপ ব্যবহার করে) |
+| [কাস্টম ফাংশন](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn) | ক্লায়েন্ট-সাইড | কাজ করে (বিল্ট-ইন, `function_call` ও `function_response` ধাপ ব্যবহার করে) |
 
-## Sırada ne var?
+## এর পরে কী করতে হবে
 
-- Gemini API'deki [işlev çağrısı](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) hakkında daha fazla bilgi edinin.
-- Desteklenen araçları keşfedin:
-  - [Google Arama](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)
-  - [Google Haritalar](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)
-  - [URL Bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)
-  - [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)
+- Gemini API-তে [ফাংশন কলিং](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn) সম্পর্কে আরও জানুন।
+- কাজ করে এমন টুল এক্সপ্লোর করুন:
+  - [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=bn)
+  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=bn)
+  - [URL কন্টেক্সট](https://ai.google.dev/gemini-api/docs/url-context?hl=bn)
+  - [ফাইল সার্চ](https://ai.google.dev/gemini-api/docs/file-search?hl=bn)
 
-Geri bildirim gönderin
+মতামত জানান
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
 
-Son güncelleme tarihi: 2026-10-13 UTC.
+2026-10-13 UTC-তে শেষবার আপডেট করা হয়েছে।
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+আমাদের আরও কিছু জানাতে চান?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-13 UTC."],[],[]]
+[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-13 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]

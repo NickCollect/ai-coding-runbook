@@ -1,717 +1,519 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/changelog?hl=bn
-fetched_at: 2026-10-26T05:57:23.403706+00:00
-title: "\u09b0\u09bf\u09b2\u09bf\u099c \u09a8\u09cb\u099f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/changelog?hl=tr
+fetched_at: 2026-11-02T07:01:11.555926+00:00
+title: "S\u00fcr\u00fcm notlar\u0131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=bn)।
+Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [হোম](https://ai.google.dev/?hl=bn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
-- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs?hl=bn)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-মতামত জানান
+Geri bildirim gönderin
 
-# রিলিজ নোট
+# Sürüm notları
 
-এই পৃষ্ঠায় Gemini API-তে করা আপডেট সম্পর্কে ডকুমেন্টেশন রয়েছে।
+Bu sayfada, Gemini API ile ilgili güncellemeler yer alır.
 
-## ১৩ অক্টোবর, ২০২৬
+## 30 Ekim 2026
 
-- **Gemini 4 Argon (`gemini-4-argon`) জেনেরাল অ্যাভেইলেবিলিটি (GA)**: রিলিজ করা হয়েছে
-  [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=bn) (`gemini-4-argon`),
-  জটিল কোডিং, এজেন্টিক, গণিত ও বিজ্ঞান সংক্রান্ত
-  টাস্কের জন্য তৈরি আমাদের সবচেয়ে দক্ষ মডেল।
+- **Bilgisayar Kullanımı genel kullanıma sunuldu (GA)**: [Bilgisayar Kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) aracı, Interactions ve GenerateContent API'lerinde genel kullanıma sunuldu (GA).
 
-  API পরিবর্তন, মূল্য এবং মাইগ্রেশন সংক্রান্ত নির্দেশিকা পেতে,
-  [Gemini 4 Argon-এ নতুন কী আছে](https://ai.google.dev/gemini-api/docs/latest-model?hl=bn) দেখুন।
+## 27 Ekim 2026
 
-## ৮ অক্টোবর, ২০২৬
+- **Gemini API CLI (`gemini-api`) beta**: Yapay zeka kodlama aracıları, komut dosyaları ve CI ardışık düzenleri için durum bilgisi olmayan, sıfır bağımlılıklı bir komut satırı istemcisi olan [Gemini API CLI](https://ai.google.dev/gemini-api/docs/cli?hl=tr) (`gemini-api`) kullanıma sunuldu. Metin ve medya oluşturmak, dosyaları analiz etmek ve [Gemini tarafından yönetilen temsilcileri](https://ai.google.dev/gemini-api/docs/agents?hl=tr) çalıştırmak için [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=tr)'de `gemini-api` kullanın. Başlamak için [Gemini API CLI kılavuzuna](https://ai.google.dev/gemini-api/docs/cli?hl=tr) göz atın.
 
-- **Gemini 3.7 Flash বন্ধ হয়ে যাওয়া**:
-  [`gemini-3.7-flash`](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.7?hl=bn) বন্ধ হয়ে গেছে
-  এবং এর পরিবর্তে [`gemini-3.8-flash`](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=bn) এসেছে।
-  Google AI Studio-তে এটি আর বেছে নেওয়ার জন্য উপলভ্য নেই এবং `gemini-3.7-flash`-এ API অনুরোধ
-  অটোমেটিক `gemini-3.8-flash`-এ রাউট করা হয়। আপনার মডেল স্ট্রিং
-  `gemini-3.8-flash`-এ আপডেট করুন এবং
-  [Gemini 3.8 Flash গাইড](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=bn) পর্যালোচনা করুন।
-- **Gemini 3.5 Flash বন্ধ হয়ে যাওয়া**:
-  [`gemini-3.5-flash`](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5?hl=bn) বন্ধ হয়ে গেছে
-  এবং এর পরিবর্তে [`gemini-3.6-flash`](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=bn) এসেছে।
-  Google AI Studio-তে এটি আর বেছে নেওয়ার জন্য উপলভ্য নেই এবং
-  `gemini-3.5-flash`-তে API অনুরোধ অটোমেটিক `gemini-3.6-flash`-তে রাউট করা হয়। আপনার মডেল স্ট্রিং `gemini-3.6-flash` (বা
-  [`gemini-3.8-flash`](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=bn))-এ
-  আপডেট করুন এবং [Gemini 3.6 Flash গাইড](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=bn)
-  ভালো করে দেখে নিন।
-- **Deep Research Agent `deep-research-pro-preview-12-2025` বন্ধ করা**:
-  `deep-research-pro-preview-12-2025` এজেন্ট বন্ধ করা হয়েছে এবং
-  **২৩ অক্টোবর,
-  ২০২৬**-এ [বন্ধ করে দেওয়া হবে](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn#managed-agents)।
+## 26 Ekim 2026
 
-  আপনার অনুরোধ নতুন [Deep
-  Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=bn) এজেন্ট ভার্সনে মাইগ্রেট করুন:
+- **Generate Content API depolama alanı varsayılan olarak etkin**: Ücretli katmanda Generate Content API'yi (`generateContent`, `streamGenerateContent` ve `batchGenerateContent`) kullanan yeni projeler, artık istekleri varsayılan olarak depoluyor (`store=true`). Bu, Interactions API ile uyumludur. Mevcut projeler geçerli ayarlarını korur. Kapsam dışında kalmak için isteklerde `store=false` değerini ayarlayın veya [Günlükler ve Veri Kümeleri](https://aistudio.google.com/logs?hl=tr) kontrol panelinin **Ayarlar** panelinde Content API günlük kaydı oluşturma ayarını devre dışı bırakın. Ayrıntılar için [Günlükler ve veri kümeleri](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=tr#configure-logging) bölümüne bakın.
 
-  - [`deep-research-preview-04-2026`](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=bn):
-    দ্রুততা ও কার্যকারিতার জন্য ডিজাইন করা হয়েছে, ক্লায়েন্ট UI-তে স্ট্রিম করার জন্য আদর্শ।
-  - [`deep-research-max-preview-04-2026`](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=bn):
-    অটোমেটিক প্রসঙ্গ সংগ্রহ ও সিন্থেসিসের জন্য সর্বাধিক ব্যাপকতা।
+## 13 Ekim 2026
 
-  মাইগ্রেট করতে, আপনার `interactions.create`-এ `agent` প্যারামিটার আপডেট করুন
-  `deep-research-pro-preview-12-2025` থেকে
-  `deep-research-preview-04-2026` (বা `deep-research-max-preview-04-2026`) পর্যন্ত অনুরোধ।
+- **Gemini 4 Argon (`gemini-4-argon`) genel kullanıma sunulma tarihi (GA)**: Karmaşık kodlama, ajan tabanlı, matematik ve fen bilimleri görevleri için tasarlanmış en yetenekli modelimiz olan [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=tr) (`gemini-4-argon`) kullanıma sunuldu.
 
-## ৬ অক্টোবর, ২০২৬
+  API değişiklikleri, fiyatlandırma ve taşıma kılavuzu için [Gemini 4 Argon'daki yenilikler](https://ai.google.dev/gemini-api/docs/latest-model?hl=tr) başlıklı makaleyi inceleyin.
 
-- **Gemini Nano Banana 2.1 জেনারেলি অ্যাভেলেবেল (GA)**: রিলিজ করা হয়েছে
-  [Gemini Nano Banana 2.1](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=bn)
-  (`gemini-nano-banana-2.1`), লেটেস্ট হাই-এফিশিয়েন্সি ইমেজ জেনারেশন এবং
-  কনভারসেশনাল এডিটিং মডেল। Nano Banana 2
-  ([`gemini-3.1-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=bn))-এর আপডেট,
-  এটি Flash-লেভেল স্পিড ও খরচ সাশ্রয় বজায় রাখার পাশাপাশি
-  ভিজ্যুয়াল কোয়ালিটি, প্রম্পট মেনে চলা, মাল্টি-টার্ন
-  ক্যারেক্টার কনসিস্টেন্সি, টেক্সট রেন্ডারিং এবং `1K`, `2K` ও `4K`
-  রেজোলিউশন জুড়ে ওয়াইড ও প্যানোরামিক অ্যাস্পেক্ট রেশিও
-  জেনারেট (`1:4`, `4:1`, `1:8`, `8:1`) করার ক্ষেত্রে উল্লেখযোগ্য উন্নতি করে।
+## 8 Ekim 2026
 
-  শুরু করতে [ইমেজ জেনারেশন গাইড](https://ai.google.dev/gemini-api/docs/image-generation?hl=bn) দেখুন।
-- **বন্ধ করে দেওয়ার ঘোষণা**: `gemini-3.1-flash-image` মডেলটি
-  বন্ধ করে দেওয়া হয়েছে (বন্ধ করার তারিখ ঘোষণা করা হয়নি)। [`gemini-nano-banana-2.1`](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=bn)-এ
-  মাইগ্রেট করুন।
+- **Gemini 3.7 Flash'in kullanımdan kaldırılması**:
+  [`gemini-3.7-flash`](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.7?hl=tr) kullanımdan kaldırıldı ve yerine [`gemini-3.8-flash`](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=tr) getirildi.
+  Bu model artık Google AI Studio'da seçilemiyor ve `gemini-3.7-flash` için API istekleri otomatik olarak `gemini-3.8-flash` modeline yönlendiriliyor. Model dizesini `gemini-3.8-flash` olarak güncelleyin ve [Gemini 3.8 Flash kılavuzunu](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=tr) inceleyin.
+- **Gemini 3.5 Flash'ın desteğinin sonlandırılması**:
+  [`gemini-3.5-flash`](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5?hl=tr) desteği sonlandırıldı ve yerine [`gemini-3.6-flash`](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=tr) getirildi.
+  Bu model artık Google AI Studio'da seçilemiyor ve `gemini-3.5-flash` için API istekleri otomatik olarak `gemini-3.6-flash` modeline yönlendiriliyor. Model dizesini `gemini-3.6-flash` (veya [`gemini-3.8-flash`](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=tr)) olarak güncelleyin ve [Gemini 3.6 Flash kılavuzunu](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=tr) inceleyin.
+- **Deep Research Agent `deep-research-pro-preview-12-2025` desteğinin sonlandırılması**:
+  `deep-research-pro-preview-12-2025` temsilcisi için destek sonlandırıldı ve **23 Ekim 2026**'da [kapatılacak](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr#managed-agents).
 
-## সেপ্টেম্বর 22, 2026
+  İsteklerinizi daha yeni [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) temsilci sürümlerinden birine taşıyın:
 
-- **Gemini 3.8 Flash TTS এবং Gemini 3.8 Flash-Lite TTS সাধারণত উপলভ্য
-  (GA)**: আমাদের নেক্সট-জেনারেশন টেক্সট-টু-স্পিচ (TTS) অডিও মডেল এবং
-  Gemini API Voices এন্ডপয়েন্ট (`/v1beta/voices`) রিলিজ করা হয়েছে:
+  - [`deep-research-preview-04-2026`](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=tr):
+    Hız ve verimlilik için tasarlanmıştır. İstemci kullanıcı arayüzüne geri akış için idealdir.
+  - [`deep-research-max-preview-04-2026`](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=tr):
+    Otomatik bağlam toplama ve sentezleme için maksimum kapsamlılık.
 
-  - **[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=bn)
-    (`gemini-3.8-flash-tts`)**: স্টুডিও-গ্রেড ভয়েস ফিডেলিটি, সূক্ষ্ম অভিনয়, আঞ্চলিক উপভাষা এবং
-    দীর্ঘ-ফর্ম মাল্টি-টার্ন স্থিতিশীলতার জন্য তৈরি করা ফ্ল্যাগশিপ ক্রিয়েটিভ TTS মডেল।
-  - **[Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=bn)
-    (`gemini-3.8-flash-lite-tts`)**: দ্রুত, সাশ্রয়ী TTS মডেল যা হাই-থ্রুপুট প্রোডাকশন এবং রিয়েল-টাইম ভয়েস এজেন্ট ক্যাসকেডের জন্য `gemini-3.1-flash-tts-preview`-এর পরিবর্তে ব্যবহার করার জন্য তৈরি করা হয়েছে।
-  - **[ভয়েস ডিজাইন](https://ai.google.dev/gemini-api/docs/voice-design?hl=bn),
-    [ভয়েস রেপ্লিকেশন](https://ai.google.dev/gemini-api/docs/voice-replication?hl=bn) এবং
-    [এক্সটেন্ডেড ভয়েস লাইব্রেরি](https://ai.google.dev/gemini-api/docs/speech-generation?hl=bn#voice-library)**:
-    টেক্সট প্রম্পট থেকে স্থায়ী কাস্টম ভোকাল পার্সোনা তৈরি করুন, সম্মতি যাচাইকরণের মাধ্যমে
-    ভয়েস রেপ্লিকেট করুন এবং ১৫০টিরও বেশি আগে থেকে তৈরি করা ও কাস্টম
-    ভয়েস কোয়েরি করুন।
+  Geçiş yapmak için `interactions.create` isteklerinizdeki `agent` parametresini `deep-research-pro-preview-12-2025` yerine `deep-research-preview-04-2026` (veya `deep-research-max-preview-04-2026`) olarak güncelleyin.
 
-  শুরু করতে [টেক্সট-টু-স্পিচ নির্দেশিকা](https://ai.google.dev/gemini-api/docs/speech-generation?hl=bn)
-  দেখুন।
+## 6 Ekim 2026
 
-## সেপ্টেম্বর 18, 2026
+- **Gemini Nano Banana 2.1 genel kullanıma sunuldu**: En yeni yüksek verimli görüntü üretme ve etkileşimli düzenleme modeli olan [Gemini Nano Banana 2.1](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=tr) (`gemini-nano-banana-2.1`) kullanıma sunuldu. Nano Banana 2'nin ([`gemini-3.1-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=tr)) güncellenmiş bir sürümü olan bu model, Flash düzeyinde hız ve maliyet verimliliği sunarken görsel kalite, isteme uyma, çok turlu karakter tutarlılığı, metin oluşturma ve geniş ile panoramik en boy oranı oluşturma (`1:4`, `4:1`, `1:8`, `8:1`) konularında `1K`, `2K` ve `4K` çözünürlüklerinde önemli iyileştirmeler sağlar.
 
-- **Gemini 2.5 মডেল অ্যাক্সেস সংক্রান্ত আপডেট**: সকলের জন্য
-  নির্ভরযোগ্য পারফর্ম্যান্স নিশ্চিত করতে, আমরা 2.5 মডেলের অ্যাক্সেস সেইসব ব্যবহারকারীদের মধ্যে সীমাবদ্ধ করছি যারা
-  অতীতে সেগুলি অ্যাক্টিভভাবে ব্যবহার করেছেন। এইসব মডেল আর ব্যবহার করা হয় না এবং API-এর মাধ্যমে পরবর্তী বিজ্ঞপ্তি না আসা পর্যন্ত এগুলি
-  পরিবেশন করা চালিয়ে যাওয়া হবে। যেকোনও নতুন
-  প্রোজেক্টের জন্য, আমাদের লেটেস্ট মডেল ব্যবহার করুন: 3.5 Flash-Lite বা 3.8 Flash. এর ফলে
-  চলমান পুরনো ওয়ার্কফ্লো এবং
-  নতুন অ্যাপ্লিকেশনের জন্য পর্যাপ্ত ক্যাপাসিটি বজায় রাখতে পারি।
+  Başlamak için [Görüntü üretme kılavuzuna](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) göz atın.
+- **Desteği sonlandırma duyurusu**: `gemini-3.1-flash-image` modelinin desteği sonlandırıldı (kullanımdan kaldırılma tarihi açıklanmadı). [`gemini-nano-banana-2.1`](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=tr)'e geçiş yapın.
 
-## ১৭ সেপ্টেম্বর, ২০২৬
+## 22 Eylül 2026
 
-- **Antigravity Agent 09-2026**: রিলিজ করা হয়েছে `antigravity-preview-09-2026`,
-  যা `antigravity-preview-05-2026`-এর পরিবর্তে ব্যবহার করা হয় এবং -এর ব্যবহার বন্ধ করা হয়েছে।
+- **Gemini 3.8 Flash TTS ve Gemini 3.8 Flash-Lite TTS genel kullanıma sunuldu (GA)**: Yeni nesil metin okuma (TTS) ses modellerimizi ve Gemini API Voices uç noktasını (`/v1beta/voices`) kullanıma sunduk:
 
-  আপনি যদি রিমোট স্যান্ডবক্সে (`environment: "remote"`) রান করেন এবং শুধুমাত্র
-  `output_text` বা `model_output` ধাপ পড়েন, তাহলে এজেন্ট স্ট্রিং আপডেট করুন এবং অন্য কিছু
-  পরিবর্তন করবেন না।
+  - **[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=tr)
+    (`gemini-3.8-flash-tts`)**: Stüdyo kalitesinde ses doğruluğu, nüanslı oyunculuk, bölgesel lehçeler ve uzun biçimli çok turlu kararlılık için tasarlanmış amiral gemisi yaratıcı TTS modeli.
+  - **[Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=tr)
+    (`gemini-3.8-flash-lite-tts`)**: Yüksek gönderim hacimli üretim ve gerçek zamanlı sesli temsilci kaskadları için `gemini-3.1-flash-tts-preview` modelinin yerini alacak şekilde tasarlanmış, hızlı ve uygun maliyetli TTS modeli.
+  - **[Ses tasarımı](https://ai.google.dev/gemini-api/docs/voice-design?hl=tr),
+    [ses kopyalama](https://ai.google.dev/gemini-api/docs/voice-replication?hl=tr) ve
+    [Genişletilmiş Ses Kitaplığı](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr#voice-library)**:
+    Yazılı istemlerden kalıcı özel ses karakterleri oluşturun, rıza doğrulamasıyla sesleri kopyalayın ve 150'den fazla önceden oluşturulmuş ve özel sesle sorgu yapın.
 
-  আপনি লোকালি টুল (`local_environment`) রান করালে অথবা `function_call`
-  ধাপ পার্স করলে, বিল্ট-ইন টুল পরিবর্তন হয়ে যায়। প্যারামিটার snake\_case-এর পরিবর্তে PascalCase ব্যবহার করে এবং ফাইল এডিট সম্পূর্ণভাবে আবার লেখার পরিবর্তে লাইন-রেঞ্জ রিপ্লেসমেন্ট ব্যবহার করে।
+  Başlamak için [Metin Okuma kılavuzuna](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr) bakın.
 
-  | ক্ষমতা | 05-2026 | 09-2026 |
+## 18 Eylül 2026
+
+- **Gemini 2.5 modellerine erişimle ilgili güncelleme**: Herkes için güvenilir performans sağlamak amacıyla 2.5 modellerine erişimi, geçmişte bu modelleri aktif olarak kullanan kişilerle sınırlandırıyoruz. Bu modeller kullanımdan kaldırılmamıştır ve bir sonraki duyuruya kadar API üzerinden sunulmaya devam edecektir. Yeni projelerinizde en yeni modellerimiz olan 3.5 Flash-Lite veya 3.8 Flash'i kullanın. Bu sayede hem devam eden eski iş akışları hem de yeni uygulamalar için yeterli kapasiteyi koruyabiliriz.
+
+## 17 Eylül 2026
+
+- **Antigravity Agent 09-2026**: `antigravity-preview-09-2026` yayınlandı. Bu sürüm, `antigravity-preview-05-2026` sürümünün yerini alır ve bu sürümü kullanımdan kaldırır.
+
+  Uzak bir korumalı alanda (`environment: "remote"`) çalışıyorsanız ve yalnızca `output_text` veya `model_output` adımlarını okuyorsanız kullanıcı aracısı dizesini güncelleyin. Başka bir değişiklik yapmanız gerekmez.
+
+  Araçları yerel olarak çalıştırıyorsanız (`local_environment`) veya `function_call` adımlarını ayrıştırıyorsanız yerleşik araçlar değişti. Parametrelerde snake\_case yerine PascalCase kullanılır ve dosya düzenlemelerinde tam yeniden yazma yerine satır aralığı değiştirmeleri kullanılır.
+
+  | Kapasite | 05-2026 | 09-2026 |
   | --- | --- | --- |
-  | ফাইল তৈরি করা | `write_file(path, content)` | `write_to_file(TargetFile, CodeContent, Overwrite, Description)` |
-  | ফাইল এডিট করা | `write_file(path, content)`, সম্পূর্ণ আবার লিখুন | `replace_file_content(TargetFile, StartLine, EndLine, TargetContent, ReplacementContent)` |
-  | ফাইল রিডিং | `read_file(path, offset, limit)`, বাইট অফসেট | `view_file(AbsolutePath, StartLine, EndLine, ContentOffset)` |
-  | ডিরেক্টরি লিস্টিং | `list_files(path)` | `list_dir(DirectoryPath)` |
-  | ফাইল ও কোড সার্চ | কিছুই না, এজেন্ট শেল কমান্ড ব্যবহার করেছে | `find_by_name(SearchDirectory, Pattern, MaxDepth)` ও `grep_search(SearchPath, Query, IsRegex)` |
-  | Shell এক্সিকিউশন | `code_execution(command, timeout_seconds)` | অপরিবর্তিত রয়েছে |
-  | ওয়েব সার্চ | `google_search(queries)` | পরিবর্তিত হয়নি |
+  | Dosya oluşturma | `write_file(path, content)` | `write_to_file(TargetFile, CodeContent, Overwrite, Description)` |
+  | Dosya düzenleme | `write_file(path, content)`, tamamen yeniden yazma | `replace_file_content(TargetFile, StartLine, EndLine, TargetContent, ReplacementContent)` |
+  | Dosya okuma | `read_file(path, offset, limit)`, bayt ofsetleri | `view_file(AbsolutePath, StartLine, EndLine, ContentOffset)` |
+  | Dizin listesi | `list_files(path)` | `list_dir(DirectoryPath)` |
+  | Dosya ve Kod Arama Aracı | Yok, temsilciler kabuk komutları kullandı | `find_by_name(SearchDirectory, Pattern, MaxDepth)` ve `grep_search(SearchPath, Query, IsRegex)` |
+  | Kabuk yürütme | `code_execution(command, timeout_seconds)` | Değiştirilmemiş |
+  | Web araması | `google_search(queries)` | Değiştirilmemiş |
 
-  [Antigravity এজেন্ট](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=bn) গাইড দেখুন।
-  ৫ অক্টোবর, ২০২৬-এ `antigravity-preview-05-2026` বন্ধ হয়ে যাবে, এটি
-  [বন্ধ হয়ে যাওয়া](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn#managed-agents) পৃষ্ঠায় ট্র্যাক করা হয়।
+  [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr) kılavuzunu inceleyin.
+  `antigravity-preview-05-2026`, 5 Ekim 2026'da kullanımdan kaldırılacak. Bu değişiklik, [desteği sonlandırılan özellikler](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr#managed-agents) sayfasından takip edilebilir.
 
-## সেপ্টেম্বর 15, 2026
+## 15 Eylül 2026
 
-- **Gemini 3.8 Live এবং Gemini 3.8 Live এক্সটেন্ডেড থিঙ্কিং সাধারণত উপলভ্য
-  (GA)**: Live API ব্যবহার করে রিয়েল-টাইম ভয়েস অ্যাপ্লিকেশনের জন্য দুটি নতুন অডিও-টু-অডিও মডেল রিলিজ করা হয়েছে:
+- **Gemini 3.8 Live ve Gemini 3.8 Live Extended Thinking genel kullanıma sunuldu
+  (GA)**: Live API'yi kullanan anlık ses uygulamaları için iki yeni sesten sese model yayınlandı:
 
-  - **Gemini 3.8 Live** ([`gemini-3.8-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=bn)): বেশিরভাগ কম-লেটেন্সি ভয়েস এজেন্ট অভিজ্ঞতা
-    এবং রিজনিংয়ের কারণে দেরি না করে রিয়েল-টাইম ডায়ালগের জন্য
-    ডিফল্ট বিকল্প। এতে ইন্টারলিভড রিজনিং, ডিফল্ট
-    অ্যাসিঙ্ক্রোনাস ফাংশন কলিং এবং সম্পূর্ণ সেশন ক্লায়েন্ট কন্টেন্ট আপডেট করার সুবিধা রয়েছে।
-  - **Gemini 3.8 Live Extended Thinking**
-    ([`gemini-3.8-live-extended-thinking`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=bn)): হাই-রিজনিং
-    অডিও-টু-অডিও মডেল যা লাইভ অডিও ইন্টার‍্যাকশনের সময় ব্যাকগ্রাউন্ড রিজনিংয়ে সাহায্য করে, ব্যাকগ্রাউন্ড রিজনিংয়ের বেশি প্রয়োজন হলে এটি ব্যবহার করার সাজেশন দেওয়া হয়।
+  - **Gemini 3.8 Live** ([`gemini-3.8-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=tr)): Çoğu düşük gecikmeli sesli asistan deneyimi ve akıl yürütme gecikmesi olmadan gerçek zamanlı diyalog için varsayılan seçenek. İç içe yerleştirilmiş akıl yürütme, varsayılan eşzamansız işlev çağrısı ve tam oturum istemci içerik güncellemeleri gibi özellikler sunar.
+  - **Gemini 3.8 Live Genişletilmiş Düşünme**
+    ([`gemini-3.8-live-extended-thinking`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=tr)): Canlı sesli etkileşimler sırasında arka planda akıl yürütmeyi destekleyen, yüksek akıl yürütme kapasitesine sahip sesten sese model. Arka planda daha fazla akıl yürütme gerektiğinde önerilir.
 
-  শুরু করতে, [Live API গাইড](https://ai.google.dev/gemini-api/docs/live-api?hl=bn),
-  [ক্ষমতা সংক্রান্ত গাইড](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=bn) এবং
-  [চিন্তাভাবনা সংক্রান্ত গাইড](https://ai.google.dev/gemini-api/docs/live-api/thinking?hl=bn) দেখুন।
+  Başlamak için [Live API kılavuzunu](https://ai.google.dev/gemini-api/docs/live-api?hl=tr), [Özellikler kılavuzunu](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=tr) ve [Düşünme kılavuzunu](https://ai.google.dev/gemini-api/docs/live-api/thinking?hl=tr) inceleyin.
 
-## সেপ্টেম্বর 3, 2026
+## 3 Eylül 2026
 
-- **Lyria 3.5 জেনেরাল অ্যাভেইলেবিলিটি (GA)**: Google-এর মিউজিক জেনারেশন মডেলের
-  পরবর্তী জেনারেশন রিলিজ করা হয়েছে:
+- **Lyria 3.5 genel kullanıma sunuldu**: Google'ın müzik üretme modelinin yeni nesli kullanıma sunuldu:
 
-  - [`lyria-3.5`](https://ai.google.dev/gemini-api/docs/models/lyria-3.5?hl=bn):
-    উন্নত মিউজিক্যাল কোহেরেন্স, স্বাভাবিক ভোকাল এবং
-    সূক্ষ্ম-গ্রেনড ডিউরেশন ও স্ট্রাকচারাল কন্ট্রোল সহ সম্পূর্ণ দৈর্ঘ্যের গান তৈরি করা।
+  - [`lyria-3.5`](https://ai.google.dev/gemini-api/docs/models/lyria-3.5?hl=tr):
+    Daha iyi müzikal tutarlılık, doğal vokaller, ayrıntılı süre ve yapısal kontrol ile tam uzunlukta şarkı üretimi.
 
-  মডেলটি টেক্সট ও ছবি ইনপুট হিসেবে নেয় এবং হাই-ফিডেলিটি ৪৪.১ kHz
-  স্টিরিও অডিও তৈরি করে। বিস্তারিত তথ্য ও কোড স্যাম্পেলের জন্য
-  [মিউজিক জেনারেশন](https://ai.google.dev/gemini-api/docs/music-generation?hl=bn) গাইড দেখুন।
+  Model, metin ve resim girişlerini destekler ve yüksek kaliteli 44,1 kHz stereo ses üretir. Ayrıntılar ve kod örnekleri için [Müzik üretimi](https://ai.google.dev/gemini-api/docs/music-generation?hl=tr) kılavuzuna bakın.
 
-## ২ সেপ্টেম্বর, ২০২৬
+## 2 Eylül 2026
 
-- **Gemini 3.8 Flash সাধারণভাবে উপলভ্য (GA)**: রিলিজ করা হয়েছে
-  `gemini-3.8-flash`, আমাদের সবচেয়ে বুদ্ধিদীপ্ত Flash মডেল, যা
-  লং-হরাইজন সফ্টওয়্যার ইঞ্জিনিয়ারিং, অটোনোমাস এজেন্ট এবং জটিল এন্টারপ্রাইজ
-  ওয়ার্কফ্লোর জন্য তৈরি করা হয়েছে।
+- **Gemini 3.8 Flash genel kullanıma sunuldu**: Uzun vadeli yazılım mühendisliği, otonom temsilciler ve karmaşık kurumsal iş akışları için tasarlanmış en akıllı Flash modelimiz olan `gemini-3.8-flash` kullanıma sunuldu.
 
-  শুরু করতে, [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=bn) মডেল পৃষ্ঠা এবং
-  [Gemini 3.8 Flash গাইড](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=bn) দেখুন।
+  Başlamak için [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=tr) model sayfasını ve [Gemini 3.8 Flash kılavuzunu](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=tr) inceleyin.
 
-## সেপ্টেম্বর 1, 2026
+## 1 Eylül 2026
 
-- **এজেন্টিক ভিডিও বোঝা**: ইন্ট্যার‍্যাকশন ও
-  GenerateContent API জুড়ে
-  Gemini 3.7 Flash, 3.6 Flash ও 3.5 Flash-Lite-এর জন্য এজেন্টিক ভিডিও বোঝার সুবিধা রিলিজ করা হয়েছে। মডেলটি ভিডিও টাইমলাইন ডায়নামিক নেভিগেট করে,
-  চাহিদা অনুযায়ী ট্রান্সক্রিপ্ট, ফ্রেম বা অডিও ট্র্যাকের অনুরোধ করে। এই পদ্ধতিতে স্ট্যাটিক প্রসেসিংয়ের তুলনায়
-  বড় দৈর্ঘ্যের কন্টেন্টের জন্য ৮৮% পর্যন্ত কম টোকেন ব্যবহার করা হয়।
+- **Temsilci video anlama**: Interactions ve GenerateContent API'lerinde Gemini 3.7 Flash, 3.6 Flash ve 3.5 Flash-Lite için temsilci video anlama özelliği kullanıma sunuldu. Model, video zaman çizelgelerinde dinamik olarak gezinerek transkript, kare veya ses parçası isteyebilir. Bu yaklaşım, statik işlemeye kıyasla uzun içerikler için% 88'e kadar daha az jeton kullanır.
 
-  শুরু করতে, [এজেন্টিক ভিডিও আন্ডারস্ট্যান্ডিং](https://ai.google.dev/gemini-api/docs/video-understanding?hl=bn#agentic-video-understanding) গাইড দেখুন।
+  Başlamak için [Temsilci tabanlı video yorumlama](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr#agentic-video-understanding) kılavuzuna bakın.
 
-## ২৭ আগস্ট, ২০২৬
+## 27 Ağustos 2026
 
-- **Gemini Omni Flash জেনারেলি অ্যাভেলেবেল (GA)**: রিলিজ করা হয়েছে
-  `gemini-omni-1.1-flash`, আমাদের দ্রুত, কথোপকথনমূলক ভিডিও
-  জেনারেট ও এডিট করার মডেলের GA ভার্সন। এই রিলিজে উল্লেখযোগ্য নতুন
-  ক্ষমতা অন্তর্ভুক্ত আছে:
+- **Gemini Omni Flash genel kullanıma sunuldu**: Hızlı, etkileşimli video üretimi ve düzenleme modelimizin genel kullanıma sunulan sürümü `gemini-omni-1.1-flash` yayınlandı. Bu sürümde önemli yeni özellikler sunulmaktadır:
 
-  - **ভিডিও এক্সটেনশন**: `extend` টাস্ক ব্যবহার করে বা সরাসরি প্রম্পটের মাধ্যমে
-    কোনও ক্লিপের শেষে কন্টিনিউয়েশন জেনারেট করে,
-    আগে থেকে থাকা ভিডিও নির্বিঘ্নে এক্সটেন্ড করুন।
-  - **ইন্টারপোলেশন (প্রথম + শেষ ফ্রেম)**: সর্বাধিক ২টি ছবি সহ `image_to_video` টাস্ক ব্যবহার করে
-    দুটি ছবির মধ্যে ট্রানজিশন সহ একটি ভিডিও জেনারেট করুন।
-  - **রেজোলিউশন কন্ট্রোল**: `video_config`-এ নতুন `resolution` প্যারামিটার
-    `360p`, `720p` (ডিফল্ট), `1080p` এবং `4k` আউটপুট সাপোর্ট করে।
-    আপস্কেলিং ব্যবহার করে 1080p ও 4K আউটপুট তৈরি করা হয়।
+  - **Video uzantısı**: `extend` görevini kullanarak veya doğrudan bir istemle klibin sonunda devam bölümleri oluşturarak mevcut videoları sorunsuz bir şekilde uzatın.
+  - **Ara değer hesaplama (ilk + son kare)**: En fazla 2 resim içeren `image_to_video` görevini kullanarak iki resim arasında geçiş yapan bir video oluşturun.
+  - **Çözünürlük kontrolü**: `video_config` içindeki yeni `resolution` parametresi; `360p`, `720p` (varsayılan), `1080p` ve `4k` çıkışlarını destekler.
+    1080p ve 4K çıkışlar, çözünürlük yükseltme kullanılarak oluşturulur.
 
-  আগে থেকে থাকা `gemini-omni-flash-preview` এন্ডপয়েন্ট ৩০ সেপ্টেম্বর, ২০২৬-এ বন্ধ হয়ে যাবে।
+  Mevcut `gemini-omni-flash-preview` uç noktası 30 Eylül 2026'da kullanımdan kaldırılacak.
 
-  শুরু করতে, [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=bn) মডেল পৃষ্ঠা
-  এবং [omni নির্দেশিকা](https://ai.google.dev/gemini-api/docs/omni?hl=bn) দেখুন।
+  Başlamak için [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=tr) model sayfasını ve [Omni kılavuzunu](https://ai.google.dev/gemini-api/docs/omni?hl=tr) inceleyin.
 
-## ২৬ আগস্ট, ২০২৬
+## 26 Ağustos 2026
 
-- **Gemini 3.5 Transcribe সাধারণভাবে উপলভ্য (GA)**: Gemini-র অডিও বোঝার ক্ষমতার উপর ভিত্তি করে দুটি ডেডিকেটেড
-  স্পিচ-টু-টেক্সট মডেল রিলিজ করা হয়েছে:
+- **Gemini 3.5 Transcribe genel kullanıma sunuldu**: Gemini'ın ses anlama özelliğine dayalı iki özel konuşma metni modeli yayınlandı:
 
-  - **Gemini 3.5 Transcribe** (`gemini-3.5-transcribe`): ৮৫টিরও বেশি ভাষায় উচ্চারণ-ভিত্তিক ভাষা শনাক্তকরণ, স্পিকার ডায়েরাইজেশন, শব্দ-লেভেল টাইমস্ট্যাম্প এবং কাস্টম শব্দভাণ্ডার বায়াসিং (১,০০০টি শব্দ পর্যন্ত) সহ উচ্চ-নির্ভুলতা, কম-লেটেন্সি নন-স্ট্রিমিং স্পিচ-টু-টেক্সট।
+  - **Gemini 3.5 Transcribe** (`gemini-3.5-transcribe`): 85'ten fazla dilde ifade tabanlı dil algılama, konuşmacı ayırt etme, kelime düzeyinde zaman damgaları ve özel kelime listesi ağırlıklandırma (1.000 terime kadar) özellikleriyle yüksek doğruluk ve düşük gecikme süreli, akışsız konuşmayı metne dönüştürme.
   - **Gemini 3.5 Transcribe Live** (`gemini-3.5-transcribe-live`):
-    লাইভ API ব্যবহার করে WebSockets-এর মাধ্যমে কম লেটেন্সি, দ্বিমুখী স্ট্রিমিং স্পিচ-টু-টেক্সট
-    ফিচার, অন্তর্বর্তী ও চূড়ান্ত ট্রান্সক্রিপশন ইভেন্ট,
-    স্মার্ট ট্রান্সক্রিপশন মোড এবং একাধিক ভয়েস অ্যাক্টিভিটি ডিটেকশন (VAD)
-    স্ট্র্যাটেজি।
+    Live API'yi kullanarak WebSockets üzerinden düşük gecikmeli, çift yönlü akışlı konuşmayı metne dönüştürme özelliği. Geçici ve kesinleşmiş transkript etkinliklerini, akıllı transkript modunu ve birden fazla ses etkinliği algılama (VAD) stratejisini destekler.
 
-  শুরু করতে,
-  [অডিও ট্রান্সক্রিপশন গাইড](https://ai.google.dev/gemini-api/docs/transcribe?hl=bn),
-  [লাইভ ট্রান্সক্রিপশন গাইড](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=bn) এবং
-  [Gemini 3.5 Transcribe মডেল পৃষ্ঠা](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=bn) দেখুন।
+  Başlamak için [Ses transkripti kılavuzuna](https://ai.google.dev/gemini-api/docs/transcribe?hl=tr), [Canlı transkript kılavuzuna](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=tr) ve [Gemini 3.5 Transcribe model sayfasına](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=tr) göz atın.
 
-## ১৩ আগস্ট, ২০২৬
+## 13 Ağustos 2026
 
-- **Gemini 3.7 Flash সাধারণভাবে উপলভ্য (GA)**: কোডিং ও এজেন্টের জন্য আমাদের সবচেয়ে
-  ইন্টেলিজেন্ট ওয়ার্কহর্স মডেল রিলিজ করা হয়েছে:
+- **Gemini 3.7 Flash genel kullanıma sunuldu**: Kodlama ve temsilciler için şimdiye kadarki en akıllı ve verimli modelimizi kullanıma sunduk:
 
-  - **Gemini 3.7 Flash** (`gemini-3.7-flash`): সফটওয়্যার ইঞ্জিনিয়ারিং, ওয়েব ডেভেলপমেন্ট ও এজেন্টিক ওয়ার্কফ্লো জুড়ে উল্লেখযোগ্য উন্নতি, ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত শুরুর দিকের দামে উপলভ্য।
+  - **Gemini 3.7 Flash** (`gemini-3.7-flash`): Yazılım mühendisliği, web geliştiricisi ve ajan tabanlı iş akışlarında önemli iyileştirmeler sunan bu model, 31 Aralık 2026'ya kadar tanıtım fiyatıyla kullanılabilir.
 
-  শুরু করতে, [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=bn) মডেল পৃষ্ঠা
-  এবং [লেটেস্ট মডেল গাইড](https://ai.google.dev/gemini-api/docs/latest-model?hl=bn) দেখুন।
+  Başlamak için [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=tr) model sayfasını ve [En yeni model kılavuzunu](https://ai.google.dev/gemini-api/docs/latest-model?hl=tr) inceleyin.
 
-## ৩০ জুলাই, ২০২৬
+## 30 Temmuz 2026
 
-- **সর্বজনীন প্রিভিউতে Gemini Robotics ER 2**: রোবোটিক্সের জন্য দুটি নতুন এমবডিড
-  রিজনিং মডেল এন্ডপয়েন্ট রিলিজ করা হয়েছে:
+- **Gemini Robotics ER 2 genel önizlemede**: Robotik için iki yeni somutlaştırılmış akıl yürütme modeli uç noktası yayınlandı:
 
-  - `gemini-robotics-er-2-preview`: উন্নত স্থানিক যুক্তি, এজেন্টিক
-    কোড এক্সিকিউশন, একাধিক ধাপের টুল অর্কেস্ট্রেশন, ভিডিও মোমেন্ট খোঁজা,
-    প্রগ্রেস ক্লাসিফিকেশন এবং একাধিক রোবটের কোঅর্ডিনেশন।
-  - `gemini-robotics-er-2-streaming-preview`: Live API ব্যবহার করে রিয়েল-টাইম টেক্সট স্ট্রিমিংয়ের জন্য অপ্টিমাইজ করা হয়েছে, যা দ্বিমুখী অডিও ও ভিডিও ইনপুট সহ কম-লেটেন্সি রোবট এজেন্টকে সক্ষম করে।
+  - `gemini-robotics-er-2-preview`: Gelişmiş uzamsal akıl yürütme, temsilci tabanlı kod yürütme, çok adımlı araç düzenleme, videoda an bulma, ilerleme sınıflandırması ve çoklu robot koordinasyonu.
+  - `gemini-robotics-er-2-streaming-preview`: Live API kullanılarak gerçek zamanlı metin akışı için optimize edilmiştir. Çift yönlü ses ve video girişiyle düşük gecikmeli robot temsilciler sağlar.
 
-  উভয় মডেল এন্ডপয়েন্ট টেক্সট, ছবি, ভিডিও ও অডিও ইনপুট গ্রহণ করে এবং
-  ফিজিক্যাল রোবট অ্যাকশনের জন্য ব্লকিং আচরণ সহ ফাংশন কলিং সাপোর্ট করে।
-  শুরু করতে, [Gemini Robotics ER ওভারভিউ](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=bn) দেখুন। রিয়েল-টাইম স্ট্রিমিংয়ের
-  ব্যবহারিক প্রয়োগের জন্য, [স্ট্রিমিং সহ রোবোটিক্স](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=bn) দেখুন।
-- **বন্ধ করে দেওয়ার ঘোষণা**: `gemini-robotics-er-1.6-preview` মডেল
-  ৩১ আগস্ট, ২০২৬-এ [বন্ধ করে দেওয়া হবে](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn)।
+  Her iki model uç noktası da metin, resim, video ve ses girişlerini kabul eder ve fiziksel robot eylemleri için engelleme davranışıyla işlev çağrısını destekler.
+  Başlamak için [Gemini Robotics ER'ye genel bakış](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=tr) başlıklı makaleyi inceleyin. Gerçek zamanlı akış kullanım alanları için [Akış ile robotik](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=tr) başlıklı makaleyi inceleyin.
+- **Desteğin sonlandırılmasıyla ilgili duyuru**: `gemini-robotics-er-1.6-preview` modeli 31 Ağustos 2026'da [kullanımdan kaldırılacak](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr).
 
-## ২১ জুলাই, ২০২৬
+## 21 Temmuz 2026
 
-- **Gemini 3.6 Flash এবং Gemini 3.5 Flash-Lite সাধারণভাবে উপলভ্য (GA)**:
-  আমাদের লেটেস্ট 3.x Flash মডেলের স্টেবল, প্রোডাকশন-রেডি ভার্সন রিলিজ করা হয়েছে:
+- **Gemini 3.6 Flash ve Gemini 3.5 Flash-Lite genel kullanıma sunuldu**:
+  En yeni 3.x Flash modellerimizin kararlı ve üretime hazır sürümleri yayınlandı:
 
-  - **Gemini 3.6 Flash** (`gemini-3.6-flash`): 3.5 Flash-এর তুলনায় কম দামে উন্নত টোকেন
-    দক্ষতা এবং কোড/এজেন্টিক প্ল্যানিংয়ের ক্ষমতা প্রদান করে, আউটপুট ভার্বোসিটি সম্পর্কে ডেভেলপারদের মতামত সমাধান করে।
-  - **Gemini 3.5 Flash-Lite** (`gemini-3.5-flash-lite`): কম লেটেন্সি, অত্যন্ত সাশ্রয়ী সাব-এজেন্ট বিকল্প অফার করে যা
-    অটোমেশনের জন্য ডিজাইন করা হয়েছে।
+  - **Gemini 3.6 Flash** (`gemini-3.6-flash`): 3.5 Flash'e kıyasla daha düşük bir fiyat noktasında daha iyi token verimliliği ve kod/temsilci planlama özellikleri sunarak geliştiricilerin çıktı ayrıntı düzeyiyle ilgili geri bildirimlerini ele alır.
+  - **Gemini 3.5 Flash-Lite** (`gemini-3.5-flash-lite`): Yüksek hacimli otomasyon için tasarlanmış, düşük gecikmeli ve son derece uygun maliyetli bir alt temsilci seçeneği sunar.
 
-  আরও জানতে, [Gemini 3.6 Flash গাইড](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=bn) দেখুন।
-- **বন্ধ হয়ে যাওয়া প্যারামিটার**: স্যাম্পলিং প্যারামিটার `temperature`, `top_p`
-  এবং `top_k` এখন বন্ধ হয়ে গেছে। আরও তথ্যের জন্য
-  [Gemini 3.6 Flash গাইড](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=bn#sampling-parameter-deprecation)
-  দেখুন।
+  Daha fazla bilgi için [Gemini 3.6 Flash kılavuzunu](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=tr) inceleyin.
+- **Desteği sonlandırılan parametreler**: `temperature`, `top_p` ve `top_k` örnekleme parametrelerinin desteği sonlandırıldı. Ayrıntılar için
+  [Gemini 3.6 Flash kılavuzuna](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.6?hl=tr#sampling-parameter-deprecation)
+  bakın.
 
-## ৬ জুলাই, ২০২৬
+## 6 Temmuz 2026
 
-- Interactions API-এর জন্য [ডেভেলপার লগ](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=bn)
-  সাপোর্ট: কাজ করে এমন Interactions API কলের লগ এখন
-  [AI Studio ড্যাশবোর্ডে](https://aistudio.google.com/logs?hl=bn) দেখা যাবে।
+- Interactions API için [geliştirici günlükleri](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=tr) desteği: Desteklenen Interactions API çağrılarına ait günlükler artık [AI Studio kontrol panelinde](https://aistudio.google.com/logs?hl=tr) görüntülenebilir.
 
-## ৩০ জুন, ২০২৬
+## 30 Haziran 2026
 
-- **পাবলিক প্রিভিউতে Gemini Omni Flash**: `gemini-omni-flash-preview`-এ রিলিজ করা হয়েছে,
-  এটি হাই-পারফর্ম্যান্স মাল্টিমডেল মডেল যা হাই-স্পিড ভিডিও জেনারেশন
-  ও কথোপকথনের মাধ্যমে ভিডিও এডিটিংয়ের জন্য ডিজাইন করা হয়েছে। [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=bn) ব্যবহার করে,
-  আপনি টেক্সট বিবরণ থেকে 720p-তে ৩–১০ সেকেন্ডের ভিডিও তৈরি করতে বা স্থির ছবি অ্যানিমেট করতে পারবেন,
-  এবং তারপর কথোপকথনের মাধ্যমে আউটপুট এডিট ও রিফাইন করতে পারবেন। শুরু করতে, [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=bn) গাইড এবং
-  [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=bn) মডেল কার্ড দেখুন।
-- জেনেরাল অ্যাভেইলেবিলিটিতে (GA) `gemini-3.1-flash-lite-image` (Nano Banana 2 Lite) রিলিজ করা হয়েছে, এটি আমাদের বিল্ট-ইন মাল্টিমডেল মডেল যা আল্ট্রা-লো লেটেন্সি এবং সাশ্রয়ী মূল্যে ইমেজ জেনারেশন ও এডিটিংয়ের জন্য অপ্টিমাইজ করা হয়েছে। [Gemini 3.1
-  Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=bn) মডেল
-  কার্ড এবং [ইমেজ জেনারেশন](https://ai.google.dev/gemini-api/docs/image-generation?hl=bn) গাইড দেখুন।
+- **Genel Önizleme'de Gemini Omni Flash**: Yüksek hızlı video üretimi ve etkileşimli video düzenleme için tasarlanmış yüksek performanslı çok formatlı bir model olan `gemini-omni-flash-preview` kullanıma sunuldu. [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr)'yi kullanarak metin açıklamalarından 720p çözünürlükte 3-10 saniyelik videolar oluşturabilir veya hareketsiz görüntüleri canlandırabilir, ardından çıktıları sohbet yoluyla düzenleyip iyileştirebilirsiniz. Başlamak için [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=tr) kılavuzuna ve [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=tr) model kartına göz atın.
+- Ultra düşük gecikme süresi ve uygun maliyetli görüntü üretme ve düzenleme için optimize edilmiş yerleşik çok formatlı modelimiz `gemini-3.1-flash-lite-image` (Nano Banana 2 Lite) genel kullanıma sunuldu. [Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=tr) model kartını ve [Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) kılavuzunu inceleyin.
 
-## ২৪ জুন, ২০২৬
+## 24 Haziran 2026
 
-- **কম্পিউটার ব্যবহার**: Gemini 3.5 Flash-এ
-  [কম্পিউটার ব্যবহার](https://ai.google.dev/gemini-api/docs/computer-use?hl=bn) টুলের জন্য পাবলিক প্রিভিউ সাপোর্ট লঞ্চ করা হয়েছে। এই
-  রিলিজে ইনটেন্ট সহ সরলীকৃত অ্যাকশন, ব্রাউজার, মোবাইল ও ডেস্কটপ এনভায়রনমেন্টের জন্য
-  বিল্ট-ইন সহায়তা, কনফিগার করা যায় এমন নিরাপত্তা নীতি এবং
-  উন্নত প্রম্পট ইঞ্জেকশন ডিটেকশন অন্তর্ভুক্ত আছে।
+- **Bilgisayar Kullanımı**: Gemini 3.5 Flash'te [Bilgisayar Kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) aracı için genel önizleme desteği kullanıma sunuldu. Bu sürümde, niyetlerle basitleştirilmiş işlemler, tarayıcı, mobil ve masaüstü ortamları için yerleşik destek, yapılandırılabilir güvenlik politikaları ve gelişmiş istem enjeksiyonu tespiti yer alıyor.
 
-## ১৭ জুন, ২০২৬
+## 17 Haziran 2026
 
-- **স্পিচ জেনারেশনের জন্য স্ট্রিমিং সাপোর্ট**: `streamGenerateContent`-এর মাধ্যমে স্ট্রিমিং (এবং Interactions API-তে `stream: true`) এখন
-  `gemini-3.1-flash-tts-preview` মডেলের জন্য কাজ করে। আরও জানতে, [টেক্সট-টু-স্পিচ](https://ai.google.dev/gemini-api/docs/speech-generation?hl=bn#streaming) গাইড দেখুন।
+- **Konuşma üretimi için akış desteği**: `streamGenerateContent` (ve Interactions API'de `stream: true`) üzerinden akış artık `gemini-3.1-flash-tts-preview` modeli için destekleniyor. Daha fazla bilgi edinmek için [Metin Okuma](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr#streaming) kılavuzunu inceleyin.
 
-## ১৫ জুন, ২০২৬
+## 15 Haziran 2026
 
-- **বন্ধ করার ঘোষণা**: নিম্নলিখিত ছবি জেনারেশন মডেলগুলি
-  বন্ধ করা হচ্ছে এবং **১৭ আগস্ট, ২০২৬** তারিখে [বন্ধ করে দেওয়া হবে](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn):
+- **Desteği sonlandırma duyurusu**: Aşağıdaki görüntü üretme modellerinin desteği sonlandırılacak ve **17 Ağustos 2026**'da [kullanımdan kaldırılacak](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr):
 
-  - **Imagen 4 এবং Gemini 3 ইমেজ মডেল**:
+  - **Imagen 4 ve Gemini 3 Image modelleri**:
     - `imagen-4.0-generate-001`
     - `imagen-4.0-ultra-generate-001`
     - `imagen-4.0-fast-generate-001`
 
-  আপনার কোড নতুন স্টেবল বা প্রিভিউ এন্ডপয়েন্টে মাইগ্রেট করতে, [Gemini বন্ধ হয়ে যাওয়া](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn#imagen-models) পৃষ্ঠা দেখুন।
-- **বন্ধ করে দেওয়ার ঘোষণা**: নিম্নলিখিত ভিডিও জেনারেশন মডেলগুলি
-  বন্ধ করে দেওয়া হচ্ছে এবং **৩০ জুন, ২০২৬** থেকে [বন্ধ হয়ে যাবে](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn):
+  Kodunuzu daha yeni kararlı veya önizleme uç noktalarına taşımak için [Gemini'da desteği sonlandırılan özellikler](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr#imagen-models) sayfasını inceleyin.
+- **Desteği sonlandırma duyurusu**: Aşağıdaki video üretim modellerine verilen destek sonlandırılacak ve bu modeller **30 Haziran 2026**'da [kullanımdan kaldırılacak](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr):
 
-  - **Veo মডেল**:
+  - **Veo modelleri**:
     - `veo-2.0-generate-001`
     - `veo-3.0-generate-001`
     - `veo-3.0-fast-generate-001`
 
-  পরিষেবা যাতে বন্ধ না হয়ে যায়, তার জন্য আপনার ইন্টিগ্রেশন আপডেট করুন, যাতে Veo 3.1 প্রিভিউ মডেল আইডি
-  (`veo-3.1-generate-preview`, `veo-3.1-fast-generate-preview`) অথবা
-  [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=bn)-এর মাধ্যমে উপলভ্য
-  3.1 GA মডেল ব্যবহার করা যায়।
-- **বন্ধ করার ঘোষণা**: পরীক্ষামূলক GMP Contextual View টুল (Grounding with Google Maps আউটপুটের জন্য একটি নির্দিষ্ট ইন্টারফেস) **১৫ জুন, ২০২৬** তারিখে [বন্ধ হয়ে যাবে](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn):
+  Hizmet kesintilerini önlemek için entegrasyonunuzu Veo 3.1 önizleme model kimliklerini (`veo-3.1-generate-preview`, `veo-3.1-fast-generate-preview`) veya [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=tr) üzerinden erişilebilen 3.1 GA modellerini kullanacak şekilde güncelleyin.
+- **Desteği sonlandırma duyurusu**: Deneysel GMP Bağlam Görünümü aracı (Google Haritalar ile Temellendirme çıkışları için sabit bir arayüz) **15 Haziran 2026**'da [kullanımdan kaldırılacak](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr):
 
-## ১ জুন, ২০২৬
+## 1 Haziran 2026
 
-- নিম্নলিখিত Gemini 2.0 মডেল এখন [বন্ধ করে দেওয়া](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn) হয়েছে:
+- Aşağıdaki Gemini 2.0 modelleri [kullanımdan kaldırıldı](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr):
 
   - `gemini-2.0-flash`
   - `gemini-2.0-flash-001`
   - `gemini-2.0-flash-lite`
   - `gemini-2.0-flash-lite-001`
 
-  এর পরিবর্তে [`gemini-3.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=bn) বা
-  [`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=bn)
-  ব্যবহার করুন।
+  Bunun yerine [`gemini-3.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=tr) veya [`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=tr) kullanın.
 
-## ২৮ মে, ২০২৬
+## 28 Mayıs 2026
 
-- আমাদের নেটিভ
-  ভিজ্যুয়াল মডেলের সাধারণভাবে উপলভ্য (GA) ভার্সন `gemini-3.1-flash-image` (Nano Banana 2) এবং `gemini-3-pro-image` (Nano Banana Pro) রিলিজ করা হয়েছে, এগুলি হল [Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=bn)
-  এবং [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=bn)।
-- **ভিডিও-টু-ইমেজ জেনারেশন সংক্রান্ত সহায়তা**: আপনি এখন টেক্সট প্রম্পটের পাশাপাশি মাল্টিমোডাল কনটেক্সট হিসেবে ভিডিও ফাইল (সরাসরি আপলোড বা সর্বজনীন YouTube URL-এর মাধ্যমে) পাস করতে পারবেন। এর ফলে খুব ভালো কোয়ালিটির থাম্বনেল, সিনেমাটিক মুভি পোস্টার বা সারসংক্ষেপের ইনফোগ্রাফিক তৈরি করা যাবে। এই ফিচারটি শুধুমাত্র `gemini-3.1-flash-image` মডেলে
-  কাজ করে। আরও জানতে, [ভিডিও-টু-ইমেজ জেনারেশন](https://ai.google.dev/gemini-api/docs/image-generation?hl=bn#video-to-image)
-  গাইড দেখুন।
-- বন্ধ করার ঘোষণা: `gemini-3.1-flash-image-preview` এবং
-  `gemini-3-pro-image-preview` মডেলগুলি বন্ধ করা হচ্ছে
-  এবং ২৫ জুন, ২০২৬ তারিখে সেগুলি [বন্ধ করে দেওয়া হবে](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn)।
+- Yerel görsel modellerimiz [Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=tr) ve [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=tr)'ın genel kullanıma sunulan (GA) sürümleri olan `gemini-3.1-flash-image` (Nano Banana 2) ve `gemini-3-pro-image` (Nano Banana Pro) kullanıma sunuldu.
+- **Videodan görüntü üretme desteği**: Artık yüksek kaliteli küçük resimler, sinematik film afişleri veya özet infografikler oluşturmak için yazılı istemle birlikte çok formatlı bağlam olarak bir video dosyası (doğrudan yükleme veya herkese açık YouTube URL'si olarak) iletebilirsiniz. Bu özellik yalnızca `gemini-3.1-flash-image` modelinde desteklenir. Daha fazla bilgi edinmek için [Videodan görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr#video-to-image) kılavuzunu inceleyin.
+- Desteğin sonlandırılmasıyla ilgili duyuru: `gemini-3.1-flash-image-preview` ve `gemini-3-pro-image-preview` modelleri için destek sonlandırıldı ve bu modeller 25 Haziran 2026'da [kullanımdan kaldırılacak](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr).
 
-## ২৫ মে, ২০২৬
+## 25 Mayıs 2026
 
-- `gemini-3.1-flash-lite-preview` মডেল
-  [বন্ধ করা](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn) হয়েছে। পরিবর্তে
-  [`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=bn) ব্যবহার করুন।
+- `gemini-3.1-flash-lite-preview` modeli [kullanımdan kaldırıldı](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr). Bunun yerine [`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=tr) kullanın.
 
-## ১৯ মে, ২০২৬
+## 19 Mayıs 2026
 
-- `gemini-3.5-flash`-এ রিলিজ করা হয়েছে, [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=bn)-এর
-  জেনেরাল অ্যাভেইলেবিলিটি (GA) ভার্সন,
-  এজেন্টিক ও কোডিং টাস্কে ফ্রন্টিয়ার পারফর্ম্যান্স বজায় রাখার জন্য
-  আমাদের সবচেয়ে ইন্টেলিজেন্ট মডেল। `gemini-flash-latest`-এর পিছনে এখন এই মডেলটি কাজ করে।
-- পাবলিক প্রিভিউতে **Gemini API-তে Managed Agents** লঞ্চ করা হয়েছে। এটি ডেভেলপারদের
-  নিরাপদ, আইসোলেটেড Google-হোস্ট করা Linux স্যান্ডবক্স এনভায়রনমেন্টে রান করে এমন অটোনোমাস, স্টেটফুল এজেন্ট
-  তৈরি ও ডিপ্লয় করতে দেয়। আরও জানতে,
-  [এজেন্ট ওভারভিউ](https://ai.google.dev/gemini-api/docs/agents?hl=bn) পৃষ্ঠা এবং
-  [কুইকস্টার্ট](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=bn) দেখুন।
-- পাবলিক প্রিভিউতে, সাধারণ-উদ্দেশ্য **Antigravity Agent** ম্যানেজ করা এজেন্ট, [`antigravity-preview-05-2026`](https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=bn) প্রকাশ করা হয়েছে।
-  Antigravity এজেন্ট নিজের স্যান্ডবক্স কন্টেনারের মধ্যে স্বয়ংক্রিয়ভাবে পরিকল্পনা, রিজনিং, কোড লেখা ও এক্সিকিউট করা,
-  ফাইল ম্যানেজ করা এবং ওয়েব ব্রাউজ করতে পারে। কোড স্যাম্পেল ও স্পেসিফিকেশনের জন্য
-  [Antigravity এজেন্ট](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=bn) গাইড দেখুন।
+- Temsilci ve kodlama görevlerinde sürekli olarak üst düzey performans sunan en akıllı modelimiz [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=tr)'ın genel kullanıma sunulan (GA) sürümü `gemini-3.5-flash` tarihinde yayınlandı. Bu model artık `gemini-flash-latest`'ın temelini oluşturuyor.
+- **Gemini API'de Yönetilen Ajanlar**, genel önizleme sürümünde kullanıma sunuldu. Bu sayede geliştiriciler, Google tarafından barındırılan güvenli ve yalıtılmış Linux korumalı alan ortamlarında çalışan otonom ve durum bilgisi olan aracılar oluşturup dağıtabilir. Daha fazla bilgi edinmek için [Temsilcilere genel bakış](https://ai.google.dev/gemini-api/docs/agents?hl=tr) sayfasını ve [Hızlı Başlangıç](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr) kılavuzunu inceleyin.
+- Genel amaçlı **Antigravity Agent** yönetilen temsilcisi [`antigravity-preview-05-2026`](https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=tr), genel önizleme sürümünde kullanıma sunuldu.
+  Antigravity ajanı; bağımsız olarak planlama yapabilir, akıl yürütebilir, kod yazıp çalıştırabilir, dosyaları yönetebilir ve korumalı alan kapsayıcısında web'de gezinebilir. Kod örnekleri ve teknik özellikler için [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr) kılavuzuna bakın.
 
-## ৭ মে, ২০২৬
+## 7 Mayıs 2026
 
-- `gemini-3.1-flash-lite`-এ রিলিজ করা হয়েছে, জেনেরাল অ্যাভেইলেবিলিটি (GA) ভার্সন
-  [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=bn),
-  স্পিড, স্কেল ও খরচ সাশ্রয়ের জন্য অপ্টিমাইজ করা হয়েছে।
-- বন্ধ হয়ে যাওয়া সংক্রান্ত ঘোষণা: `gemini-3.1-flash-lite-preview` মডেলটি
-  ৫/১১/২৬-এ বন্ধ হয়ে যাচ্ছে এবং ২৫ মে, ২০২৬-এ
-  [বন্ধ করে দেওয়া হবে](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn)।
+- Hız, ölçek ve maliyet verimliliği için optimize edilmiş [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=tr)'ın genel kullanıma sunulan (GA) sürümü `gemini-3.1-flash-lite` tarihinde yayınlandı.
+- Desteğin sonlandırılmasıyla ilgili duyuru: `gemini-3.1-flash-lite-preview` modeline verilen destek 11 Mayıs 2026'da sonlandırılacak ve model 25 Mayıs 2026'da [kullanımdan kaldırılacak](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr).
 
-## ৬ মে, ২০২৬
+## 6 Mayıs 2026
 
-- **আসন্ন ব্রেকিং পরিবর্তন**: [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=bn)
-  অনুরোধ ও উত্তর স্কিমা (`outputs` → `steps`) এবং আউটপুট ফর্ম্যাট
-  কনফিগারেশন (`response_format`) পরিবর্তন করা হচ্ছে। নতুন স্কিমা **২৬ মে** থেকে ডিফল্ট হিসেবে সেট করা হবে এবং পুরনো স্কিমা **৮ জুন** থেকে সরিয়ে দেওয়া হবে।
-  আরও জানতে
-  [মাইগ্রেশন গাইড](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=bn)
-  দেখুন।
+- **Yakında yapılacak zarar veren değişiklik**: [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) istek ve yanıt şeması (`outputs` → `steps`) ile çıkış formatı yapılandırması (`response_format`) değişiyor. Yeni şema **26 Mayıs**'ta varsayılan şema olacak ve eski şema **8 Haziran**'da kaldırılacak.
+  Ayrıntılar için
+  [geçiş rehberini](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=tr)
+  inceleyin.
 
-## ৫ মে, ২০২৬
+## 5 Mayıs 2026
 
-- মাল্টিমোডাল সার্চের সুবিধা দিতে **ফাইল সার্চ** আপডেট করা হয়েছে। আপনি এখন `gemini-embedding-2` মডেল ব্যবহার করে ছবি নেটিভভাবে
-  এম্বেড ও সার্চ করতে পারবেন।
-  গ্রাউন্ডিং মেটাডেটায় এখন ভিজ্যুয়াল উদ্ধৃতির জন্য `media_id` এবং
-  `page_numbers` অন্তর্ভুক্ত থাকে যা তথ্য কোথায় পাওয়া গেছে তা নির্দেশ করে। আরও
-  জানতে, [ফাইল সার্চ](https://ai.google.dev/gemini-api/docs/file-search?hl=bn) গাইড দেখুন।
+- **Dosya Arama**, çok formatlı aramayı destekleyecek şekilde güncellendi. Artık `gemini-embedding-2` modelini kullanarak görüntüleri yerel olarak yerleştirebilir ve arayabilirsiniz.
+  Temellendirme meta verileri artık görsel alıntılar için `media_id` ve bilgilerin nerede bulunduğunu gösteren `page_numbers` içeriyor. Daha fazla bilgi edinmek için [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) kılavuzunu inceleyin.
 
-## ৪ মে, ২০২৬
+## 4 Mayıs 2026
 
-- ব্যাচ API এবং দীর্ঘমেয়াদী
-  অপারেশনের জন্য পোলিং ওয়ার্কফ্লো প্রতিস্থাপন করতে Gemini API-তে ইভেন্ট-ড্রিভেন [ওয়েবহুক](https://ai.google.dev/gemini-api/docs/webhooks?hl=bn)
-  সাপোর্ট লঞ্চ করা হয়েছে।
+- Batch API ve uzun süreli işlemler için yoklama iş akışlarının yerini alacak, etkinliğe dayalı [Webhook](https://ai.google.dev/gemini-api/docs/webhooks?hl=tr) desteği Gemini API'de kullanıma sunuldu.
 
-## ৩০ এপ্রিল, ২০২৬
+## 30 Nisan 2026
 
-- `gemini-robotics-er-1.5-preview` মডেলটি
-  [বন্ধ করে দেওয়া](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn) হয়েছে। এর পরিবর্তে
-  [`gemini-robotics-er-1.6-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=bn) ব্যবহার করুন।
+- `gemini-robotics-er-1.5-preview` modeli [kullanımdan kaldırıldı](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr). Bunun yerine [`gemini-robotics-er-1.6-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=tr) kullanın.
 
-## ২২ এপ্রিল, ২০২৬
+## 22 Nisan 2026
 
-- `gemini-embedding-2`-এ জেনারেলি অ্যাভেলেবল (GA) হিসেবে রিলিজ করা হয়েছে।
-  আরও জানতে, [এম্বেডিং](https://ai.google.dev/gemini-api/docs/embeddings?hl=bn) পৃষ্ঠা দেখুন।
+- `gemini-embedding-2`, genel kullanıma sunuldu (GA). Daha fazla bilgi için [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr) (Yerleştirmeler) sayfasını inceleyin.
 
-## ২১ এপ্রিল, ২০২৬
+## 21 Nisan 2026
 
-- কোলাবরেটিভ প্ল্যানিং, ভিজ্যুয়ালাইজেশন সাপোর্ট, MCP সার্ভার ইন্টিগ্রেশন এবং ফাইল সার্চ সহ [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=bn)
-  এজেন্টের নতুন ভার্সন রিলিজ করা হয়েছে:
+- Ortak planlama, görselleştirme desteği, MCP sunucusu entegrasyonu ve dosya arama özelliklerine sahip [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) temsilcisinin yeni sürümleri yayınlandı:
 
-  - [`deep-research-preview-04-2026`](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=bn): দ্রুত ও দক্ষতার সাথে কাজ করার জন্য ডিজাইন করা হয়েছে, ক্লায়েন্ট UI-তে স্ট্রিম করার জন্য আদর্শ।
-  - [`deep-research-max-preview-04-2026`](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=bn): অটোমেটিক প্রসঙ্গ সংগ্রহ ও সিন্থেসিসের জন্য
-    সর্বাধিক বোধগম্যতা।
+  - [`deep-research-preview-04-2026`](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=tr): Hız ve verimlilik için tasarlanmıştır. İstemci kullanıcı arayüzüne geri akış için idealdir.
+  - [`deep-research-max-preview-04-2026`](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=tr): Otomatik bağlam toplama ve sentezleme için maksimum kapsamlılık.
 
-## ১৫ এপ্রিল, ২০২৬
+## 15 Nisan 2026
 
-- আমরা [Gemini 3.1 Flash TTS প্রিভিউ](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=bn) লঞ্চ করেছি। এটি আমাদের কম খরচে,
-  সাবলীল ও কন্ট্রোল করা যায় এমন টেক্সট-টু-স্পিচ মডেল। আরও জানতে
-  [টেক্সট-টু-স্পিচ](https://ai.google.dev/gemini-api/docs/speech-generation?hl=bn) ডকুমেন্ট পড়ুন।
+- Maliyet açısından verimli, etkileyici ve yönlendirilebilir metin okuma modelimiz [Gemini 3.1 Flash TTS Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=tr)'u kullanıma sunduk. Daha fazla bilgi edinmek için [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr) belgelerini okuyun.
 
-## ১৪ এপ্রিল, ২০২৬
+## 14 Nisan 2026
 
-- `gemini-robotics-er-1.6-preview` রিলিজ করা হয়েছে, এটি আমাদের আপডেট করা রোবোটিক্স মডেল।
-  এতে এখন ইনস্ট্রুমেন্ট রিডিং, উন্নত স্পেশিয়াল ও ফিজিক্যাল রিজনিংয়ের মতো নতুন ক্ষমতা রয়েছে। আরও জানতে, [Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=bn) পৃষ্ঠা এবং
-  [ব্লগ](https://deepmind.google/blog/gemini-robotics-er-1-6?hl=bn) দেখুন।
-- বন্ধ করে দেওয়ার ঘোষণা: `gemini-robotics-er-1.5-preview` মডেলটি
-  ৩০ এপ্রিল, ২০২৬ তারিখে প্যাসিফিক স্ট্যান্ডার্ড টাইম (PST) সকাল ৯টায়
-  [বন্ধ করে দেওয়া](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn) হবে।
+- Güncellenmiş robotik modelimiz `gemini-robotics-er-1.6-preview` yayınlandı.
+  Artık enstrüman okuma, gelişmiş uzamsal ve fiziksel akıl yürütme gibi yeni özelliklere sahip. Daha fazla bilgi edinmek için [Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=tr) sayfasını ve [blogu](https://deepmind.google/blog/gemini-robotics-er-1-6?hl=tr) inceleyin.
+- Desteğin sonlandırılmasıyla ilgili duyuru: `gemini-robotics-er-1.5-preview` modeli, 30 Nisan 2026 saat 09:00'da (PST) [kullanımdan kaldırılacak](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr).
 
-## ২ এপ্রিল, ২০২৬
+## 2 Nisan 2026
 
-- `gemma-4-26b-a4b-it` এবং `gemma-4-31b-it` রিলিজ করা হয়েছে, যা
-  [AI Studio](https://aistudio.google.com?hl=bn)-তে এবং Gemini API-এর মাধ্যমে উপলভ্য,
-  [Gemma 4](https://ai.google.dev/gemma/docs/core?hl=bn) লঞ্চের অংশ হিসেবে।
+- [Gemma 4](https://ai.google.dev/gemma/docs/core?hl=tr) lansmanı kapsamında `gemma-4-26b-a4b-it` ve `gemma-4-31b-it` modellerini kullanıma sunduk. Bu modelleri [AI Studio](https://aistudio.google.com?hl=tr)'da ve Gemini API üzerinden kullanabilirsiniz.
 
-## ১ এপ্রিল, ২০২৬
+## 1 Nisan 2026
 
-- নতুন [Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=bn) এবং [Priority](https://ai.google.dev/gemini-api/docs/priority-inference?hl=bn) ইনফারেন্স টিয়ার চালু করা হয়েছে, যা খরচ বা লেটেন্সি অপ্টিমাইজ করার জন্য আরও বিকল্প অফার করে।
+- Maliyet veya gecikmeyi optimize etmek için daha fazla seçenek sunan yeni [Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr) ve [Priority](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr) çıkarım katmanları kullanıma sunuldu.
 
-## ৩১ মার্চ, ২০২৬
+## 31 Mart 2026
 
-- Veo 3.1 Lite প্রিভিউ, [`veo-3.1-lite-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=bn) লঞ্চ করা হয়েছে, এটি আমাদের সবচেয়ে
-  সাশ্রয়ী [ভিডিও জেনারেশন](https://ai.google.dev/gemini-api/docs/video?hl=bn) মডেল, যা দ্রুত ইটারেশন এবং
-  হাই-ভলিউম অ্যাপ্লিকেশন তৈরির জন্য ডিজাইন করা হয়েছে।
-- `gemini-2.5-flash-lite-preview-09-2025` মডেল বন্ধ করে দেওয়া হয়েছে। এর পরিবর্তে
-  [`gemini-3.1-flash-lite-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=bn) ব্যবহার করুন।
+- Hızlı iterasyon ve yüksek hacimli uygulamalar oluşturmak için tasarlanmış, en uygun maliyetli [video üretim](https://ai.google.dev/gemini-api/docs/video?hl=tr) modelimiz olan Veo 3.1 Lite Preview'u ([`veo-3.1-lite-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=tr)) kullanıma sunduk.
+- `gemini-2.5-flash-lite-preview-09-2025` modeli kullanımdan kaldırıldı. Bunun yerine [`gemini-3.1-flash-lite-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=tr) kullanın.
 
-## ২৬ মার্চ, ২০২৬
+## 26 Mart 2026
 
-- রিলিজ করা হয়েছে [`gemini-3.1-flash-live-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=bn), লেটেস্ট
-  অডিও-টু-অডিও (A2A) মডেল যা রিয়েল-টাইম ডায়ালগ ও ভয়েস-ফার্স্ট
-  AI অ্যাপ্লিকেশনের জন্য ডিজাইন করা হয়েছে। শুরু করতে [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=bn) ডকুমেন্ট
-  পড়ুন।
+- Gerçek zamanlı diyalog ve ses öncelikli yapay zeka uygulamaları için tasarlanmış en yeni sesten sese (A2A) model olan [`gemini-3.1-flash-live-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=tr)'ı kullanıma sunduk. Başlamak için [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr) belgelerini okuyun.
 
-## ২৫ মার্চ, ২০২৬
+## 25 Mart 2026
 
-- [Lyria 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=bn) মিউজিক জেনারেশন
-  মডেল লঞ্চ করা হয়েছে: [`lyria-3-clip-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=bn)
-  (৩০-সেকেন্ডের ক্লিপ) এবং [`lyria-3-pro-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=bn)
-  (সম্পূর্ণ দৈর্ঘ্যের গান)। দুটি মডেলই টেক্সট ও ইমেজ ইনপুট গ্রহণ করে এবং
-  হাই-কোয়ালিটি, ৪৮ কিলোহার্টজ স্টেরিও অডিও জেনারেট করে। বিস্তারিত তথ্য ও কোড স্যাম্পেলের জন্য
-  [মিউজিক জেনারেশন](https://ai.google.dev/gemini-api/docs/music-generation?hl=bn) গাইড দেখুন।
+- [Lyria 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=tr) müzik üretme modelleri kullanıma sunuldu: [`lyria-3-clip-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=tr) (30 saniyelik klipler) ve [`lyria-3-pro-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=tr) (tam uzunlukta şarkılar). Her iki model de metin ve görüntü girişlerini kabul eder ve yüksek kaliteli, 48 kHz stereo ses üretir. Ayrıntılar ve kod örnekleri için [Müzik üretimi](https://ai.google.dev/gemini-api/docs/music-generation?hl=tr) kılavuzuna bakın.
 
-## ২৩ মার্চ, ২০২৬
+## 23 Mart 2026
 
-- AI Studio-তে [প্রিপে ও পোস্টপে বিলিং প্ল্যান](https://ai.google.dev/gemini-api/docs/billing?hl=bn)
-  রিলিজ করা হয়েছে। আগে থেকে থাকা অ্যাকাউন্ট প্রভাবিত হতে পারে; আরও তথ্যের জন্য [বিলিং](https://ai.google.dev/gemini-api/docs/billing?hl=bn) ডকুমেন্টেশন পড়ুন।
+- AI Studio'da [ön ödemeli ve sonradan ödemeli faturalandırma planları](https://ai.google.dev/gemini-api/docs/billing?hl=tr) kullanıma sunuldu. Mevcut hesaplar etkilenebilir. Daha fazla bilgi için [Faturalandırma](https://ai.google.dev/gemini-api/docs/billing?hl=tr) belgelerini okuyun.
 
-## ১৮ মার্চ, ২০২৬
+## 18 Mart 2026
 
-- নতুন [বিল্ট-ইন টুল ও ফাংশন কলিংয়ের কম্বিনেশন](https://ai.google.dev/gemini-api/docs/tool-combination?hl=bn) ফিচার রিলিজ করা হয়েছে, এর ফলে
-  একটি API কলে কাস্টম ফাংশন কলিং
-  টুলের পাশাপাশি Gemini-এর বিল্ট-ইন টুল ব্যবহার করা যাবে।
-- [Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=bn#supported_models)
-  এখন থেকে Gemini 3 মডেলে কাজ করবে।
+- Yeni [Yerleşik Araçlar ve İşlev Çağrısı Kombinasyonu](https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr) özelliği kullanıma sunuldu. Bu özellik sayesinde Gemini'ın yerleşik araçlarını, özel işlev çağrısı araçlarıyla birlikte tek bir API çağrısında kullanabilirsiniz.
+- [Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr#supported_models),
+  artık Gemini 3 modellerinde destekleniyor.
 
-## ১৬ মার্চ, ২০২৬
+## 16 Mart 2026
 
-- ব্যবহারকারীর বিলিং অভিজ্ঞতা আরও ভালো করতে,
-  নতুন করে সাজানো [ব্যবহারের টিয়ার](https://ai.google.dev/gemini-api/docs/billing?hl=bn#about-billing)
-  এবং [বিলিং অ্যাকাউন্টের খরচ সংক্রান্ত ক্যাপ](https://ai.google.dev/gemini-api/docs/billing?hl=bn#tier-spend-caps)
-  পরিচয় করানো হয়েছে।
+- Daha iyi bir kullanıcı faturalandırma deneyimi için yenilenen [Kullanım Katmanları](https://ai.google.dev/gemini-api/docs/billing?hl=tr#about-billing) ve [Faturalandırma Hesabı harcama sınırları](https://ai.google.dev/gemini-api/docs/billing?hl=tr#tier-spend-caps) kullanıma sunuldu.
 
-## ১২ মার্চ, ২০২৬
+## 12 Mart 2026
 
-- AI Studio-তে বিলিংয়ের জন্য [প্রোজেক্ট-লেভেল খরচ সীমা](https://ai.google.dev/gemini-api/docs/billing?hl=bn#project-spend-caps) চালু করা হয়েছে।
+- AI Studio'da faturalandırma için [proje düzeyinde harcama sınırları](https://ai.google.dev/gemini-api/docs/billing?hl=tr#project-spend-caps) kullanıma sunuldu.
 
-## ১০ মার্চ, ২০২৬
+## 10 Mart 2026
 
-- `gemini-embedding-2-preview` রিলিজ করা হয়েছে, এটি আমাদের প্রথম মাল্টিমোডাল এম্বেডিং মডেল।
-  এটি টেক্সট, ছবি, ভিডিও, অডিও ও PDF ইনপুট সাপোর্ট করে,
-  সমস্ত মোডালিটি একটি ইউনিফায়েড এম্বেডিং স্পেসে ম্যাপ করে। আরও জানতে, [এম্বেডিং](https://ai.google.dev/gemini-api/docs/embeddings?hl=bn) দেখুন।
-- বন্ধ হয়ে যাওয়া সংক্রান্ত ঘোষণা: `gemini-2.5-flash-lite-preview-09-2025` মডেল
-  ৩১ মার্চ, ২০২৬-এ [বন্ধ হয়ে যাবে](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn)।
+- İlk çok formatlı yerleştirme modelimiz olan `gemini-embedding-2-preview` kullanıma sunuldu.
+  Metin, resim, video, ses ve PDF girişlerini destekler ve tüm modaliteleri birleşik bir yerleştirme alanına eşler. Daha fazla bilgi edinmek için [Yerleştirmeler](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr) başlıklı makaleyi inceleyin.
+- Desteğin sonlandırılmasıyla ilgili duyuru: `gemini-2.5-flash-lite-preview-09-2025` modeli 31 Mart 2026'da [kullanımdan kaldırılacak](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr).
 
-## ৯ মার্চ, ২০২৬
+## 9 Mart 2026
 
-- Gemini 3 Pro প্রিভিউ মডেল [বন্ধ করা](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn) হয়েছে। `gemini-3-pro-preview` এখন
-  [`gemini-3.1-pro-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=bn)-এ পয়েন্ট করে।
+- Gemini 3 Pro Preview modeli [kullanımdan kaldırıldı](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr). `gemini-3-pro-preview` artık [`gemini-3.1-pro-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=tr) değerini gösteriyor.
 
-## ৩ মার্চ, ২০২৬
+## 3 Mart 2026
 
-- Gemini 3.1 Flash-Lite প্রিভিউ লঞ্চ করা হয়েছে, এটি Gemini 3 সিরিজের প্রথম Flash-Lite মডেল।
-  স্পেসিফিকেশন, নির্দিষ্ট
-  আপডেট ও ডেভেলপার নির্দেশিকা পেতে [মডেল পৃষ্ঠা](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=bn) পড়ুন।
+- Gemini 3 serisinin ilk Flash-Lite modeli olan Gemini 3.1 Flash-Lite Preview'u kullanıma sunduk. Teknik özellikler, belirli güncellemeler ve geliştirici kılavuzu için [model sayfasını](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=tr) okuyun.
 
-## ২৬ ফেব্রুয়ারি, ২০২৬
+## 26 Şubat 2026
 
-- Nano Banana 2, [Gemini 3.1 Flash Image
-  Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=bn) লঞ্চ করা হয়েছে, এটি একটি অত্যন্ত দক্ষ
-  মডেল যা স্পিড ও হাই-ভলিউম ব্যবহারের জন্য অপ্টিমাইজ করা হয়েছে।
-- বন্ধ করার ঘোষণা: Gemini 3 Pro প্রিভিউ (`gemini-3-pro-preview`)
-  ৯ মার্চ, ২০২৬-এ [বন্ধ করে দেওয়া হবে](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn)।
+- Hız ve yüksek hacimli kullanım alanları için optimize edilmiş, yüksek verimliliğe sahip bir model olan Nano Banana 2, [Gemini 3.1 Flash Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=tr) kullanıma sunuldu.
+- Desteği sonlandırma duyurusu: Gemini 3 Pro Preview (`gemini-3-pro-preview`) 9 Mart 2026'da [kullanımdan kaldırılacak](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr).
 
-## ১৯ ফেব্রুয়ারি, ২০২৬
+## 19 Şubat 2026
 
-- নতুন Gemini 3 সিরিজের ফ্যামিলিতে আমাদের লেটেস্ট ইটারেশন [Gemini 3.1 Pro প্রিভিউ](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=bn) রিলিজ করা হয়েছে।
-- একটি আলাদা এন্ডপয়েন্ট `gemini-3.1-pro-preview-customtools` লঞ্চ করা হয়েছে, যা
-  ব্যাশ ও টুলের মিশ্রণ ব্যবহার করে তৈরি করা ব্যবহারকারীদের জন্য কাস্টম টুলকে অগ্রাধিকার দেওয়ার ক্ষেত্রে
-  আরও ভালো।
+- Yeni Gemini 3 serisi ailesinin en son sürümü olan [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=tr) kullanıma sunuldu.
+- Bash ve araçları birlikte kullanan kullanıcılar için özel araçları önceliklendirmede daha iyi olan ayrı bir uç nokta (`gemini-3.1-pro-preview-customtools`) kullanıma sunuldu.
 
-## ১৮ ফেব্রুয়ারি, ২০২৬
+## 18 Şubat 2026
 
-- বন্ধ হয়ে যাওয়ার ঘোষণা: ১ জুন, ২০২৬ থেকে নিম্নলিখিত মডেলগুলি
-  [বন্ধ হয়ে যাবে](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn):
+- Desteğin sonlandırılmasıyla ilgili duyuru: Aşağıdaki modeller 1 Haziran 2026'da [kullanımdan kaldırılacak](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr):
 
   - `gemini-2.0-flash`
   - `gemini-2.0-flash-001`
   - `gemini-2.0-flash-lite`
   - `gemini-2.0-flash-lite-001`
 
-## ১৭ ফেব্রুয়ারি, ২০২৬
+## 17 Şubat 2026
 
-- নিম্নলিখিত মডেলগুলি [বন্ধ করা](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn) হয়েছে:
-
-  - `gemini-2.5-flash-preview-09-25`
-  - `imagen-4.0-generate-preview-06-06`
-  - `imagen-4.0-ultra-generate-preview-06-06`
-
-## ২৯ জানুয়ারি, ২০২৬
-
-- `gemini-3-pro-preview` এবং
-  `gemini-3-flash-preview`-এ কম্পিউটার ব্যবহার টুল চালু করা হয়েছে।
-
-## ২১ জানুয়ারি, ২০২৬
-
-- `latest`-এর অ্যালিয়াস পরিবর্তন করা হয়েছে:
-
-  - `gemini-pro-latest` পাল্টে `gemini-3-pro-preview` করা হয়েছে
-  - `gemini-flash-latest` পাল্টে `gemini-3-flash-preview` করা হয়েছে
-
-## ১৫ জানুয়ারি, ২০২৬
-
-- বন্ধ করে দেওয়ার ঘোষণা: নিম্নলিখিত মডেলগুলি ১৭ ফেব্রুয়ারি, ২০২৬-এ
-  [বন্ধ করে দেওয়া](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn) হবে:
+- Aşağıdaki modeller [kullanımdan kaldırıldı](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr):
 
   - `gemini-2.5-flash-preview-09-25`
   - `imagen-4.0-generate-preview-06-06`
   - `imagen-4.0-ultra-generate-preview-06-06`
-- `gemini-2.5-flash-image-preview` মডেল বন্ধ করে দেওয়া হয়েছে।
 
-## ১৪ জানুয়ারি, ২০২৬
+## 29 Ocak 2026
 
-- `text-embedding-004` মডেল [বন্ধ করে দেওয়া](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn) হয়েছে।
+- `gemini-3-pro-preview` ve `gemini-3-flash-preview` dillerinde bilgisayar kullanımı aracı için destek kullanıma sunuldu.
 
-## ১৩ জানুয়ারি, ২০২৬
+## 21 Ocak 2026
 
-- [Veo](https://ai.google.dev/gemini-api/docs/video?hl=bn)-এর জন্য 4k আউটপুট রেজোলিউশন যোগ করা হয়েছে এবং
-  সব রেজোলিউশনে পোর্ট্রেট ভিডিওর জন্য আরও সহায়তা যোগ করা হয়েছে।
+- `latest` takma adları değiştirildi:
 
-## ১২ জানুয়ারি, ২০২৬
+  - `gemini-pro-latest`, `gemini-3-pro-preview` olarak değiştirildi
+  - `gemini-flash-latest`, `gemini-3-flash-preview` olarak değiştirildi
 
-- মডেল লাইফসাইকেল ফিচার লঞ্চ করা হয়েছে। কিছু মডেল এখন লাইফসাইকেল স্টেজ ও
-  বন্ধ হয়ে যাওয়ার টাইমলাইন উল্লেখ করবে। আরও তথ্যের জন্য নিম্নলিখিত ডকুমেন্টেশন
-  দেখুন:
+## 15 Ocak 2026
 
-  - [মডেলের পর্যায়](https://ai.google.dev/api/generate-content?hl=bn#ModelStatus)
+- Desteği sonlandırma duyurusu: Aşağıdaki modeller 17 Şubat 2026'da [kullanımdan kaldırılacak](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr):
 
-## ৮ জানুয়ারি, ২০২৬
+  - `gemini-2.5-flash-preview-09-25`
+  - `imagen-4.0-generate-preview-06-06`
+  - `imagen-4.0-ultra-generate-preview-06-06`
+- `gemini-2.5-flash-image-preview` modeli kullanımdan kaldırıldı.
 
-- Gemini API-এর জন্য ডেটা ইনপুট সোর্স হিসেবে Cloud Storage বাকেট এবং যেকোনও পাবলিক ও প্রাইভেট DB
-  প্রি-সাইন করা URL-এর জন্য সহায়তা লঞ্চ করা হয়েছে। এছাড়াও, ফাইলের সাইজের সীমা
-  ২০ এমবি থেকে ১০০ এমবিতে বাড়ানো হয়েছে। আরও জানতে, [ফাইল ইনপুট পদ্ধতি
-  সংক্রান্ত নির্দেশিকা](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=bn) দেখুন।
+## 14 Ocak 2026
 
-## ১৯ ডিসেম্বর, ২০২৫
+- `text-embedding-004` modeli [kullanımdan kaldırıldı](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr).
 
-- v1beta-তে Interactions API-তে একটি ব্রেকিং পরিবর্তন করা হয়েছে। থিঙ্কিং মডেলে "চিন্তাভাবনা"র ধারণার সাথে আরও ভালোভাবে মানানসই করতে `total_reasoning_tokens` ফিল্ডের নাম পরিবর্তন করে
-  `total_thought_tokens` করা হয়েছে।
+## 13 Ocak 2026
 
-## ১৭ ডিসেম্বর, ২০২৫
+- [Veo](https://ai.google.dev/gemini-api/docs/video?hl=tr) için 4K çıkış çözünürlükleri ve tüm çözünürlüklerde dikey videolar için daha fazla destek eklendi.
 
-- Gemini 3 Flash প্রিভিউ লঞ্চ করা হয়েছে, `gemini-3-flash-preview`, যা দ্রুত
-  ফ্রন্টিয়ার-ক্লাস পারফর্ম্যান্স প্রদান করে যা অনেক কম
-  খরচে অনেক বড় মডেলের সাথে প্রতিদ্বন্দ্বিতা করতে পারে। আপগ্রেড করা ভিজ্যুয়াল ও স্পেশিয়াল রিজনিং এবং এজেন্টিক কোডিং
-  ক্ষমতা সহ। কিছু নতুন ফিচার সম্পর্কে ডকুমেন্টেশন পড়ুন, এর মধ্যে রয়েছে:
+## 12 Ocak 2026
 
-  - [মাল্টিমোডাল ফাংশন রেসপন্স](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn#multimodal)
-  - [ছবি সহ কোড এক্সিকিউশন](https://ai.google.dev/gemini-api/docs/code-execution?hl=bn#images)
+- Model yaşam döngüsü özelliği kullanıma sunuldu. Bazı modeller artık yaşam döngüsü aşamasını ve desteği sonlandırma zaman çizelgesini belirtecek. Daha fazla bilgi için aşağıdaki belgelere bakın:
 
-## ১২ ডিসেম্বর, ২০২৫
+  - [Model aşamaları](https://ai.google.dev/api/generate-content?hl=tr#ModelStatus)
 
-- `gemini-2.5-flash-native-audio-preview-12-2025`,
-  Live API-এর জন্য নতুন নেটিভ অডিও মডেল রিলিজ করা হয়েছে। এই আপডেট জটিল ওয়ার্কফ্লো ম্যানেজ করার ক্ষেত্রে মডেলের
-  ক্ষমতা উন্নত করে। আরও জানতে, [Live API গাইড](https://ai.google.dev/gemini-api/docs/live-guide?hl=bn) এবং
-  [Gemini 2.5 Flash নেটিভ অডিও](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=bn) দেখুন।
+## 8 Ocak 2026
 
-## ১১ ডিসেম্বর, ২০২৫
+- Gemini API için veri giriş kaynağı olarak Cloud Storage paketleri ve herkese açık ve özel DB önceden imzalanmış URL'leri için destek kullanıma sunuldu. Dosya boyutu sınırı da 20 MB'tan 100 MB'a yükseltildi. Ayrıntılar için [Dosya giriş yöntemleri kılavuzu](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr)'nu inceleyin.
 
-- Interactions API লঞ্চ করা হয়েছে। এই API, Gemini মডেল ও এজেন্টের সাথে ইন্টার‍্যাক্ট করার জন্য
-  একটি ইউনিফায়েড ইন্টারফেস প্রদান করে। আরও জানতে, [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=bn) গাইড দেখুন।
-- প্রিভিউতে Gemini Deep Research এজেন্ট লঞ্চ করা হয়েছে। এটি
-  একাধিক ধাপের রিসার্চ টাস্কের জন্য স্বয়ংক্রিয়ভাবে প্ল্যান, এক্সিকিউট ও সিন্থেসাইজ করতে
-  পারে। বিস্তারিত জানতে [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=bn) গাইড দেখুন।
+## 19 Aralık 2025
 
-## ১০ ডিসেম্বর, ২০২৫
+- v1beta sürümünde Interactions API'de zarar veren bir değişiklik yapıldı. `total_reasoning_tokens` alanı, düşünme modellerindeki "düşünceler" kavramına daha iyi uyum sağlaması için `total_thought_tokens` olarak yeniden adlandırıldı.
 
-- আমাদের [টেক্সট-টু-স্পিচ মডেল](https://ai.google.dev/gemini-api/docs/speech-generation?hl=bn), Gemini 2.5 Flash TTS প্রিভিউ
-  (কম লেটেন্সির জন্য অপ্টিমাইজ করা) এবং Gemini 2.5 Pro TTS প্রিভিউ (কোয়ালিটির জন্য অপ্টিমাইজ করা
-  ) সহ উন্নত এক্সপ্রেসিভিটি, নির্ভুল পেসিং এবং সাবলীল
-  ডায়ালগ লঞ্চ করা হয়েছে।
+## 17 Aralık 2025
 
-## ৯ ডিসেম্বর, ২০২৫
+- Gemini 3 Flash Preview'u (`gemini-3-flash-preview`) kullanıma sunduk. Bu model, daha büyük modellerle rekabet edebilecek düzeyde hızlı ve üstün performans sunarken maliyeti de çok daha düşük. Gelişmiş görsel ve uzamsal akıl yürütme ve temsilci tabanlı kodlama özellikleriyle. Aşağıdakiler de dahil olmak üzere bazı yeni özelliklerle ilgili belgeleri okuyun:
 
-- নিম্নলিখিত Gemini Live API মডেল এখন বন্ধ করা হয়েছে:
+  - [Çok formatlı işlev yanıtları](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#multimodal)
+  - [Resimlerle kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr#images)
+
+## 12 Aralık 2025
+
+- Live API için yeni bir yerel ses modeli olan `gemini-2.5-flash-native-audio-preview-12-2025` kullanıma sunuldu. Bu güncellemeyle model, karmaşık iş akışlarını daha iyi yönetebilecek. Daha fazla bilgi için [Live API kılavuzuna](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr) ve [Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=tr) sayfasına bakın.
+
+## 11 Aralık 2025
+
+- Interactions API kullanıma sunuldu. Bu API, Gemini modelleri ve temsilcileriyle etkileşim kurmak için birleşik bir arayüz sağlar. Daha fazla bilgi edinmek için [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) kılavuzunu inceleyin.
+- Gemini Deep Research temsilcisini önizleme sürümünde kullanıma sunduk. Çok adımlı araştırma görevleri için sonuçları otonom olarak planlayabilir, uygulayabilir ve sentezleyebilir. Ayrıntılar için [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) kılavuzuna bakın.
+
+## 10 Aralık 2025
+
+- [Metin okuma modellerimizde](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr) geliştirmeler yaptık. Gemini 2.5 Flash TTS önizlemesi (düşük gecikme için optimize edildi) ve Gemini 2.5 Pro TTS önizlemesi (kalite için optimize edildi) artık daha etkileyici, daha hassas tempoya sahip ve daha akıcı diyaloglar sunuyor.
+
+## 9 Aralık 2025
+
+- Aşağıdaki Gemini Live API modelleri kullanımdan kaldırıldı:
   - `gemini-2.0-flash-live-001`
   - `gemini-live-2.5-flash-preview`
 
-## ৫ ডিসেম্বর, ২০২৫
+## 5 Aralık 2025
 
-- [Grounding with Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=bn)-এর জন্য Gemini 3 বিলিং ৫ জানুয়ারি, ২০২৬ থেকে শুরু হবে।
+- [Google Arama ile Temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) için Gemini 3 faturalandırması 5 Ocak 2026'da başlayacak.
 
-## ৪ ডিসেম্বর, ২০২৫
+## 4 Aralık 2025
 
-- বন্ধ করে দেওয়ার ঘোষণা: `gemini-2.5-flash-image-preview` মডেলটি ১৫ জানুয়ারি, ২০২৬-এ
-  বন্ধ করে দেওয়া হবে।
+- Desteğin sonlandırılmasıyla ilgili duyuru: `gemini-2.5-flash-image-preview` modeli 15 Ocak 2026'da kullanımdan kaldırılacak.
 
-## ৩ ডিসেম্বর, ২০২৫
+## 3 Aralık 2025
 
-- বন্ধ করার ঘোষণা: `text-embedding-004` মডেলটি ১৪ জানুয়ারি, ২০২৬-এ বন্ধ করে দেওয়া হবে।
+- Desteğin sonlandırılmasıyla ilgili duyuru: `text-embedding-004` modeli 14 Ocak 2026'da kullanımdan kaldırılacak.
 
-## ২০ নভেম্বর, ২০২৫
+## 20 Kasım 2025
 
-- Gemini 3 Pro Image Preview রিলিজ করা হয়েছে, `gemini-3-pro-image-preview`, যা
-  Nano Banana মডেলের পরবর্তী ভার্সন। আরও জানতে [ইমেজ জেনারেশন](https://ai.google.dev/gemini-api/docs/image-generation?hl=bn) পৃষ্ঠাটি পড়ুন।
+- Nano Banana modelinin bir sonraki sürümü olan Gemini 3 Pro Image Preview (`gemini-3-pro-image-preview`) kullanıma sunuldu. Daha fazla bilgi için [Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) sayfasını okuyun.
 
-## ১৮ নভেম্বর, ২০২৫
+## 18 Kasım 2025
 
-- প্রথম Gemini 3 সিরিজের মডেল, `gemini-3-pro-preview` লঞ্চ করা হয়েছে, এটি আমাদের
-  অত্যাধুনিক রিজনিং ও মাল্টিমোডাল বোঝার মডেল, এতে শক্তিশালী
-  এজেন্টিক ও কোডিং ক্ষমতা রয়েছে।
+- Güçlü temsilci ve kodlama özelliklerine sahip, son teknoloji akıl yürütme ve çok formatlı anlama modelimiz olan ilk Gemini 3 serisi model `gemini-3-pro-preview`'ü kullanıma sunduk.
 
-  বুদ্ধিমত্তা ও পারফর্ম্যান্সের উন্নতি ছাড়াও,
-  Gemini 3 Pro প্রিভিউতে এইসব বিষয়ে নতুন আচরণ দেখা যায়:
+  Gemini 3 Pro Preview, zeka ve performans iyileştirmelerinin yanı sıra aşağıdaki konularda yeni davranışlar sunar:
 
-  - [মিডিয়া রেজোলিউশন](https://ai.google.dev/gemini-api/docs/media-resolution?hl=bn)
-  - [চিন্তার স্বাক্ষর](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=bn)
-  - [থিঙ্কিং লেভেল](https://ai.google.dev/gemini-api/docs/thinking?hl=bn#thinking-levels)
+  - [Medya çözünürlüğü](https://ai.google.dev/gemini-api/docs/media-resolution?hl=tr)
+  - [Düşünce imzaları](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=tr)
+  - [Düşünme düzeyleri](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#thinking-levels)
 
-  মাইগ্রেশন, নতুন ফিচার ও স্পেসিফিকেশন সম্পর্কে জানতে
-  [Gemini 3 ডেভেলপার গাইড](https://ai.google.dev/gemini-api/docs/gemini-3?hl=bn) পড়ুন।
+  Taşıma, yeni özellikler ve teknik özellikler için [Gemini 3 Geliştirici Kılavuzu](https://ai.google.dev/gemini-api/docs/gemini-3?hl=tr)'nu okuyun.
 
-## ১১ নভেম্বর, ২০২৫
+## 11 Kasım 2025
 
-- বন্ধ হয়ে যাওয়া সংক্রান্ত ঘোষণা: নিম্নলিখিত মডেলগুলি বন্ধ হয়ে যাবে:
+- Desteğin sonlandırılmasıyla ilgili duyuru: Aşağıdaki modeller kapatılacak:
 
-  - ১২ নভেম্বর:
+  - 12 Kasım:
 
     - `veo-3.0-fast-generate-preview`
     - `veo-3.0-generate-preview`
-  - ১৪ নভেম্বর:
+  - 14 Kasım:
 
     - `gemini-2.0-flash-exp-image-generation`
     - `gemini-2.0-flash-preview-image-generation`
 
-## ১০ নভেম্বর, ২০২৫
+## 10 Kasım 2025
 
-- নিম্নলিখিত মডেল বন্ধ করা হয়েছে:
+- Aşağıdaki model kullanımdan kaldırıldı:
 
   - `imagen-3.0-generate-002`
 
-  পরিবর্তে [Imagen 4](https://ai.google.dev/gemini-api/docs/imagen?hl=bn#imagen-4) ব্যবহার করুন। আরও তথ্যের জন্য
-  [Gemini-র বন্ধ হয়ে যাওয়া ফিচার সংক্রান্ত টেবিল](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn) দেখুন।
+  Bunun yerine [Imagen 4](https://ai.google.dev/gemini-api/docs/imagen?hl=tr#imagen-4)'ü kullanın. Daha fazla bilgi için [Gemini'da kullanımdan kaldırılan özellikler tablosuna](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr) bakın.
 
-## ৬ নভেম্বর, ২০২৫
+## 6 Kasım 2025
 
-- পাবলিক প্রিভিউতে File Search API লঞ্চ করা হয়েছে, এর ফলে ডেভেলপাররা
-  তাদের নিজস্ব ডেটা থেকে উত্তর জেনারেট করতে পারবেন। আরও তথ্যের জন্য নতুন [ফাইল সার্চ](https://ai.google.dev/gemini-api/docs/file-search?hl=bn) পৃষ্ঠা পড়ুন।
+- File Search API'yi genel önizlemeye açarak geliştiricilerin yanıtları kendi verilerine dayandırmasına olanak tanıdık. Daha fazla bilgi için yeni [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) sayfasını okuyun.
 
-## ৪ নভেম্বর, ২০২৫
+## 4 Kasım 2025
 
-- [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/image-generation?hl=bn)-এর জন্য, ছবির ইনপুট
-  টোকেন সংখ্যা ১২৯০ থেকে কমিয়ে ২৫৮ করা হয়েছে, এর ফলে ছবি এডিট করার খরচ
-  কমে গেছে।
-- বন্ধ হয়ে যাওয়া সংক্রান্ত ঘোষণা: নিম্নলিখিত মডেলগুলি বন্ধ হয়ে যাবে:
+- [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)'da resimler için giriş parça sayısı 1.290'dan 258'e düşürülerek resim düzenleme maliyeti azaltıldı.
+- Desteğin sonlandırılmasıyla ilgili duyuru: Aşağıdaki modeller kapatılacak:
 
-  - ১৮ নভেম্বর:
+  - 18 Kasım:
 
     - `gemini-2.5-flash-lite-preview-06-17`
     - `gemini-2.5-flash-preview-05-20`
-  - ২ ডিসেম্বর:
+  - 2 Aralık:
 
     - `gemini-2.0-flash-thinking-exp`
     - `gemini-2.0-flash-thinking-exp-01-21`
@@ -719,7 +521,7 @@ Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার 
     - `gemini-2.5-pro-preview-03-25`
     - `gemini-2.5-pro-preview-05-06`
     - `gemini-2.5-pro-preview-06-05`
-  - ৯ ডিসেম্বর:
+  - 9 Aralık:
 
     - `gemini-2.0-flash-lite-preview`
     - `gemini-2.0-flash-lite-preview-02-05`
@@ -727,698 +529,542 @@ Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার 
     - `gemini-2.0-pro-exp`
     - `gemini-2.0-pro-exp-02-05`
 
-## ২৯ অক্টোবর, ২০২৫
+## 29 Ekim 2025
 
-- Gemini API-এর জন্য নতুন [লগিং ও ডেটাসেট](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=bn) টুল
-  লঞ্চ করা হয়েছে।
+- Gemini API için yeni [günlük kaydı ve veri kümeleri](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=tr) aracı kullanıma sunuldu.
 
-## ২০ অক্টোবর, ২০২৫
+## 20 Ekim 2025
 
-- নিম্নলিখিত Gemini Live API মডেল এখন বন্ধ করা হয়েছে:
+- Aşağıdaki Gemini Live API modelleri kullanımdan kaldırıldı:
 
   - `gemini-2.5-flash-preview-native-audio-dialog`
   - `gemini-2.5-flash-exp-native-audio-thinking-dialog`
 
-  আপনি এর পরিবর্তে `gemini-2.5-flash-native-audio-preview-09-2025` ব্যবহার করতে পারেন।
-- বন্ধ করার ঘোষণা: `gemini-2.0-flash-live-001` এবং
-  `gemini-live-2.5-flash-preview` ৯ ডিসেম্বর, ২০২৫ থেকে বন্ধ হয়ে যাচ্ছে।
+  Bunun yerine `gemini-2.5-flash-native-audio-preview-09-2025` kullanabilirsiniz.
+- Desteğin sonlandırılmasıyla ilgili duyuru: `gemini-2.0-flash-live-001` ve `gemini-live-2.5-flash-preview`, 9 Aralık 2025'te kullanımdan kaldırılacak.
 
-## ১৭ অক্টোবর, ২০২৫
+## 17 Ekim 2025
 
-- **Google Maps-এর মাধ্যমে গ্রাউন্ডিং** এখন
-  সাধারণভাবে উপলভ্য। আরও তথ্যের জন্য, [Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=bn) ডকুমেন্টেশন দেখুন।
+- **Google Haritalar ile Temellendirme** artık genel kullanıma sunuldu. Daha fazla bilgi için [Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr) belgelerini inceleyin.
 
-## ১৫ অক্টোবর, ২০২৫
+## 15 Ekim 2025
 
-- পাবলিক প্রিভিউতে [Veo 3.1 এবং 3.1 Fast](https://ai.google.dev/gemini-api/docs/video?hl=bn#veo-3.1) মডেল রিলিজ করা হয়েছে, যার মধ্যে নতুন ফিচারগুলি হল:
+- [Veo 3.1 ve 3.1 Fast](https://ai.google.dev/gemini-api/docs/video?hl=tr#veo-3.1) modellerini genel önizleme sürümünde kullanıma sunduk. Bu modellerde aşağıdaki yeni özellikler yer alıyor:
 
-  - Veo-র মাধ্যমে তৈরি করা ভিডিওর দৈর্ঘ্য বাড়ানো।
-  - ভিডিও তৈরি করতে সর্বাধিক তিনটি ছবি রেফারেন্স হিসেবে ব্যবহার করা হচ্ছে।
-  - ভিডিও তৈরি করার জন্য প্রথম ও শেষ ফ্রেমের ছবি প্রদান করা।
+  - Veo tarafından oluşturulan videoların süresi uzatılıyor.
+  - Video oluşturmak için en fazla üç resme referans verme
+  - Video oluşturmak için ilk ve son kare resimlerini sağlama
 
-  এছাড়াও, এই লঞ্চের মাধ্যমে Veo 3 আউটপুট ভিডিওর সময়সীমার জন্য আরও বিকল্প যোগ করা হয়েছে: ৪, ৬
-  এবং ৮ সেকেন্ড।
-- বন্ধ করার ঘোষণা: `veo-3.0-generate-preview` এবং
-  `veo-3.0-fast-generate-preview` ১২ নভেম্বর, ২০২৫ থেকে বন্ধ হয়ে যাবে।
+  Bu lansmanla birlikte Veo 3 çıkış videosu süreleri için daha fazla seçenek (4, 6 ve 8 saniye) eklendi.
+- Desteğin sonlandırılmasıyla ilgili duyuru: `veo-3.0-generate-preview` ve `veo-3.0-fast-generate-preview`, 12 Kasım 2025'te kullanımdan kaldırılacak.
 
-## ৭ অক্টোবর, ২০২৫
+## 7 Ekim 2025
 
-- [Gemini 2.5 Computer Use Preview](https://ai.google.dev/gemini-api/docs/computer-use?hl=bn) লঞ্চ করা হয়েছে
+- [Gemini 2.5 Computer Use Preview](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) kullanıma sunuldu.
 
-## ২ অক্টোবর, ২০২৫
+## 2 Ekim 2025
 
-- Gemini 2.5 Flash Image GA লঞ্চ করা হয়েছে: [Gemini-র মাধ্যমে ইমেজ জেনারেশন](https://ai.google.dev/gemini-api/docs/image-generation?hl=bn)
+- Gemini 2.5 Flash Image genel kullanıma sunuldu: [Gemini ile görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)
 
-## ২৯ সেপ্টেম্বর, ২০২৫
+## 29 Eylül 2025
 
-- নিম্নলিখিত Gemini 1.5 মডেল এখন বন্ধ করা হয়েছে:
+- Aşağıdaki Gemini 1.5 modelleri artık kullanımdan kaldırıldı:
   - `gemini-1.5-pro`
   - `gemini-1.5-flash-8b`
   - `gemini-1.5-flash`
 
-## ২৫ সেপ্টেম্বর, ২০২৫
+## 25 Eylül 2025
 
-- প্রিভিউতে Gemini Robotics ER 1.5 মডেল রিলিজ করা হয়েছে। আপনার রোবোটিক্স অ্যাপ্লিকেশনের জন্য কীভাবে মডেল ব্যবহার করবেন তা জানতে
-  [রোবোটিক্স ওভারভিউ](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=bn)
-  দেখুন।
-- নিচে উল্লেখ করা প্রিভিউ মডেল লঞ্চ করা হয়েছে:
+- Gemini Robotics ER 1.5 modeli önizleme sürümünde kullanıma sunuldu. Modeli robotik uygulamanızda nasıl kullanacağınızı öğrenmek için [Robotik'e genel bakış](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=tr) başlıklı makaleyi inceleyin.
+- Aşağıdaki önizleme modelleri kullanıma sunuldu:
 
   - `gemini-2.5-flash-preview-09-2025`
   - `gemini-2.5-flash-lite-preview-09-2025`
 
-  বিস্তারিত জানতে [মডেল](https://ai.google.dev/gemini-api/docs/models?hl=bn) পৃষ্ঠা দেখুন।
+  Ayrıntılar için [Modeller](https://ai.google.dev/gemini-api/docs/models?hl=tr) sayfasına bakın.
 
-## ২৩ সেপ্টেম্বর, ২০২৫
+## 23 Eylül 2025
 
-- `gemini-2.5-flash-native-audio-preview-09-2025`-এ রিলিজ করা হয়েছে,
-  উন্নত ফাংশন কলিং
-  ও স্পিচ কাট অফ হ্যান্ডলিং সহ Live API-এর জন্য নতুন নেটিভ অডিও মডেল। আরও জানতে, [Live API গাইড](https://ai.google.dev/gemini-api/docs/live-guide?hl=bn) এবং
-  [Gemini 2.5 Flash নেটিভ অডিও](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-flash-native-audio) দেখুন।
+- Live API için geliştirilmiş işlev çağrısı ve konuşma kesintisi yönetimi özelliklerine sahip yeni bir yerel ses modeli olan `gemini-2.5-flash-native-audio-preview-09-2025` kullanıma sunuldu. Daha fazla bilgi için [Live API kılavuzuna](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr) ve [Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-flash-native-audio) sayfasına bakın.
 
-## ১৬ সেপ্টেম্বর, ২০২৫
+## 16 Eylül 2025
 
-- বন্ধ করার ঘোষণা: নিম্নলিখিত মডেলগুলি অক্টোবর ২০২৫-এ বন্ধ করে দেওয়া হবে:
+- Desteğin sonlandırılmasıyla ilgili duyuru: Aşağıdaki modeller Ekim 2025'te kullanımdan kaldırılacak:
 
   - `embedding-001`
   - `embedding-gecko-001`
   - `gemini-embedding-exp-03-07` (`gemini-embedding-exp`)
 
-  লেটেস্ট এম্বেডিং
-  মডেলের বিবরণ পেতে [এম্বেডিং](https://ai.google.dev/gemini-api/docs/embeddings?hl=bn) পৃষ্ঠা দেখুন।
+  En yeni yerleştirme modeliyle ilgili ayrıntılar için [Yerleştirmeler](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr) sayfasını inceleyin.
 
-## ১০ সেপ্টেম্বর, ২০২৫
+## 10 Eylül 2025
 
-- [Batch API-তে Embeddings মডেল](https://ai.google.dev/gemini-api/docs/batch-api?hl=bn#batch-embedding)-এর জন্য
-  সহায়তা রিলিজ করা হয়েছে এবং
-  [OpenAI কম্প্যাটিবিলিটি লাইব্রেরি](https://ai.google.dev/gemini-api/docs/openai?hl=bn#batch)-তে Batch API যোগ করা হয়েছে যাতে
-  ব্যাচ কোয়েরি আরও সহজে শুরু করা যায়।
+- [Batch API'deki yerleştirme modeli](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr#batch-embedding) için destek yayınlandı ve toplu sorguları kullanmaya başlamanın daha kolay yolları için Batch API, [OpenAI uyumluluk kitaplığına](https://ai.google.dev/gemini-api/docs/openai?hl=tr#batch) eklendi.
 
-## ৯ সেপ্টেম্বর, ২০২৫
+## 9 Eylül 2025
 
-- Veo 3 ও Veo 3 Fast GA লঞ্চ করা হয়েছে, এতে কম দাম ও
-  অ্যাসপেক্ট রেশিও, রেজোলিউশন ও সিডিংয়ের নতুন বিকল্প রয়েছে। আরও
-  তথ্যের জন্য
-  [Veo ডকুমেন্টেশন](https://ai.google.dev/gemini-api/docs/video?hl=bn#model-features) পড়ুন।
+- Veo 3 ve Veo 3 Fast'in genel kullanıma sunulan sürümleri, daha düşük fiyatlar ve en boy oranları, çözünürlük ve başlangıç değeri için yeni seçeneklerle kullanıma açıldı. Daha fazla bilgi için [Veo belgelerini](https://ai.google.dev/gemini-api/docs/video?hl=tr#model-features) okuyun.
 
-## ২৬ আগস্ট, ২০২৫
+## 26 Ağustos 2025
 
-- [Gemini 2.5 ইমেজ প্রিভিউ](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-flash-image-preview) লঞ্চ করা হয়েছে,
-  এটি আমাদের লেটেস্ট নেটিভ ইমেজ জেনারেশন মডেল।
+- En yeni yerel görüntü üretme modelimiz olan [Gemini 2.5 Image Preview](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-flash-image-preview)'u kullanıma sunduk.
 
-## ১৮ আগস্ট, ২০২৫
+## 18 Ağustos 2025
 
-- জেনেরাল অ্যাভেইলেবিলিটি (GA)-তে [URL কন্টেক্সট টুল](https://ai.google.dev/gemini-api/docs/url-context?hl=bn) রিলিজ করা হয়েছে, এটি প্রম্পটে অতিরিক্ত কন্টেক্সট হিসেবে URL প্রদান করার টুল। `gemini-2.0-flash` মডেলের সাথে URL কন্টেক্সট ব্যবহার করার জন্য সহায়তা
-  (এক্সপেরিমেন্টাল রিলিজের সময় উপলভ্য) এক সপ্তাহের মধ্যে বন্ধ করে দেওয়া হবে।
+- İstemlere ek bağlam olarak URL'ler sağlamak için kullanılan [URL bağlamı aracı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr) genel kullanıma sunuldu. `gemini-2.0-flash` modeliyle URL bağlamı kullanma desteği (deneysel sürümde kullanılabilir) bir hafta içinde sonlandırılacak.
 
-## ১৪ আগস্ট, ২০২৫
+## 14 Ağustos 2025
 
-- সাধারণভাবে উপলভ্য (GA) হিসেবে Imagen 4 Ultra, Standard ও Fast মডেল রিলিজ করা হয়েছে।
-  আরও জানতে, [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=bn) পৃষ্ঠা দেখুন।
+- Imagen 4 Ultra, Standard ve Fast modelleri genel kullanıma sunuldu. Daha fazla bilgi için [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=tr) sayfasını inceleyin.
 
-## ৭ আগস্ট, ২০২৫
+## 7 Ağustos 2025
 
-- `allow_adult` সেটিং এখন বিধিনিষেধযুক্ত অঞ্চলে
-  ইমেজ থেকে ভিডিও জেনারেশনের ক্ষেত্রে উপলভ্য। আরও জানতে
-  [Veo](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=bn#veo-model-parameters)
-  পৃষ্ঠা দেখুন।
+- `allow_adult` ayarı artık kısıtlı bölgelerde kullanılabilir. Ayrıntılar için
+  [Veo](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=tr#veo-model-parameters)
+  sayfasına bakın.
 
-## ৩১ জুলাই, ২০২৫
+## 31 Temmuz 2025
 
-- Veo 3 প্রিভিউ মডেলের জন্য ছবি-থেকে-ভিডিও জেনারেশন লঞ্চ করা হয়েছে।
-- Veo 3 Fast প্রিভিউ মডেল রিলিজ করা হয়েছে।
-- Veo 3 সম্পর্কে আরও জানতে, [Veo](https://ai.google.dev/gemini-api/docs/video?hl=bn) পৃষ্ঠা দেখুন।
+- Veo 3 Preview modeli için resimden video üretme özelliği kullanıma sunuldu.
+- Veo 3 Fast Preview modeli kullanıma sunuldu.
+- Veo 3 hakkında daha fazla bilgi edinmek için [Veo](https://ai.google.dev/gemini-api/docs/video?hl=tr) sayfasını ziyaret edin.
 
-## ২২ জুলাই, ২০২৫
+## 22 Temmuz 2025
 
-- রিলিজ করা হয়েছে `gemini-2.5-flash-lite`, আমাদের দ্রুত, কম খরচের, উচ্চ-পারফর্ম্যান্সের Gemini
-  2.5 মডেল। আরও জানতে, [Gemini 2.5
-  Flash-Lite](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-flash-lite) দেখুন।
+- Hızlı, düşük maliyetli ve yüksek performanslı Gemini 2.5 modelimiz `gemini-2.5-flash-lite` kullanıma sunuldu. Daha fazla bilgi için [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-flash-lite) başlıklı makaleyi inceleyin.
 
-## ১৭ জুলাই, ২০২৫
+## Temmuz 17, 2025
 
-- `veo-3.0-generate-preview` লঞ্চ করা হয়েছে, এটি Veo-এর লেটেস্ট আপডেট যা
-  অডিও জেনারেশনের সাথে ভিডিও নিয়ে এসেছে। Veo 3 সম্পর্কে আরও জানতে, [Veo](https://ai.google.dev/gemini-api/docs/video?hl=bn) পৃষ্ঠা দেখুন।
-- Imagen 4 Standard ও Ultra-এর জন্য বর্ধিত রেট সীমা। আরও জানতে
-  [রেট সীমা](https://ai.google.dev/gemini-api/docs/rate-limits?hl=bn) পৃষ্ঠা দেখুন।
+- Veo'nun ses üreten model ile video üretme özelliğini sunan en yeni güncellemesi `veo-3.0-generate-preview` kullanıma sunuldu. Veo 3 hakkında daha fazla bilgi edinmek için [Veo](https://ai.google.dev/gemini-api/docs/video?hl=tr) sayfasını ziyaret edin.
+- Imagen 4 Standard ve Ultra için sıklık sınırlamaları artırıldı. Daha fazla bilgi için [Sıklık sınırları](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr) sayfasını ziyaret edin.
 
-## ১৪ জুলাই, ২০২৫
+## 14 Temmuz 2025
 
-- আমাদের টেক্সট এম্বেডিং মডেলের স্টেবল ভার্সন
-  `gemini-embedding-001` রিলিজ করা হয়েছে। আরও জানতে, [এম্বেডিং](https://ai.google.dev/gemini-api/docs/embeddings?hl=bn) দেখুন। `gemini-embedding-exp-03-07`
-  মডেলটি ১৪ আগস্ট, ২০২৫-এ বন্ধ করে দেওয়া হবে।
+- Metin yerleştirme modelimizin kararlı sürümü olan `gemini-embedding-001` kullanıma sunuldu. Daha fazla bilgi edinmek için [yerleştirmeler](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr) bölümüne bakın. `gemini-embedding-exp-03-07` modeli 14 Ağustos 2025'te kullanımdan kaldırılacak.
 
-## ৭ জুলাই, ২০২৫
+## 7 Temmuz 2025
 
-- Gemini API ব্যাচ মোড লঞ্চ করা হয়েছে। অনুরোধগুলি ব্যাচ আপ করুন এবং সেগুলি প্রক্রিয়া করার জন্য পাঠান
-  অ্যাসিঙ্ক্রোনাসভাবে। আরও জানতে, [ব্যাচ মোড](https://ai.google.dev/gemini-api/docs/batch-mode?hl=bn) দেখুন।
+- Gemini API Toplu Modu kullanıma sunuldu. İstekleri toplu olarak gruplandırıp eşzamansız olarak işlenmek üzere gönderme Daha fazla bilgi edinmek için [Toplu İşlem Modu](https://ai.google.dev/gemini-api/docs/batch-mode?hl=tr)'nu inceleyin.
 
-## ২৬ জুন, ২০২৫
+## 26 Haziran 2025
 
-- প্রিভিউ মডেল `gemini-2.5-pro-preview-05-06` এবং
-  `gemini-2.5-pro-preview-03-25` এখন
-  লেটেস্ট স্থিতিশীল ভার্সন `gemini-2.5-pro`-এ রিডাইরেক্ট করছে।
-- `gemini-2.5-pro-exp-03-25` বন্ধ করা হয়েছে।
+- `gemini-2.5-pro-preview-05-06` ve `gemini-2.5-pro-preview-03-25` önizleme modelleri artık en yeni kararlı sürüm olan `gemini-2.5-pro` modeline yönlendiriliyor.
+- `gemini-2.5-pro-exp-03-25` kapatıldı.
 
-## ২৪ জুন, ২০২৫
+## 24 Haziran 2025
 
-- Imagen 4 Ultra ও স্ট্যান্ডার্ড প্রিভিউ মডেল রিলিজ করা হয়েছে। আরও জানতে, [ছবি তৈরি করা](https://ai.google.dev/gemini-api/docs/image-generation?hl=bn) পৃষ্ঠা দেখুন।
+- Imagen 4 Ultra ve Standard Preview modelleri yayınlandı. Daha fazla bilgi edinmek için [Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) sayfasını inceleyin.
 
-## ১৭ জুন, ২০২৫
+## 17 Haziran 2025
 
-- আমাদের সবচেয়ে শক্তিশালী মডেলের স্টেবেল ভার্সন `gemini-2.5-pro` রিলিজ করা হয়েছে,
-  যা এখন অ্যাডাপ্টিভ থিঙ্কিংয়ের সুবিধা প্রদান করে। আরও জানতে, [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-pro)
-  এবং [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=bn) দেখুন। `gemini-2.5-pro-preview-05-06`
-  ২৬ জুন, ২০২৫-এ `gemini-2.5-pro`-এ রিডাইরেক্ট করা হবে।
-- `gemini-2.5-flash` রিলিজ করা হয়েছে, এটি আমাদের প্রথম স্টেবেল 2.5 Flash মডেল। আরও
-  জানতে, [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-flash) দেখুন।
-  `gemini-2.5-flash-preview-04-17` ১৫ জুলাই, ২০২৫-এ বন্ধ হয়ে যাবে।
-- `gemini-2.5-flash-lite-preview-06-17` রিলিজ করা হয়েছে, এটি কম খরচে, হাই-পারফর্ম্যান্স
-  Gemini 2.5 মডেল। আরও জানতে, [Gemini 2.5 Flash-Lite
-  প্রিভিউ](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-flash-lite) দেখুন।
+- En güçlü modelimizin kararlı sürümü olan `gemini-2.5-pro`'yı kullanıma sunduk. Bu model artık uyarlanabilir düşünme özelliğine sahip. Daha fazla bilgi edinmek için [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-pro) ve [Düşünen](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) başlıklı makaleleri inceleyin. `gemini-2.5-pro-preview-05-06`,
+  26 Haziran 2025'te `gemini-2.5-pro` adresine yönlendirilecek.
+- İlk kararlı 2.5 Flash modelimiz olan `gemini-2.5-flash` yayınlandı. Daha fazla bilgi için [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-flash) başlıklı makaleyi inceleyin.
+  `gemini-2.5-flash-preview-04-17`, 15 Temmuz 2025'te kullanımdan kaldırılacak.
+- Düşük maliyetli ve yüksek performanslı Gemini 2.5 modeli `gemini-2.5-flash-lite-preview-06-17` kullanıma sunuldu. Daha fazla bilgi için [Gemini 2.5 Flash-Lite Preview](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-flash-lite) başlıklı makaleyi inceleyin.
 
-## ৫ জুন, ২০২৫
+## 5 Haziran 2025
 
-- আমাদের সবচেয়ে শক্তিশালী মডেলের নতুন ভার্সন `gemini-2.5-pro-preview-06-05` রিলিজ করা হয়েছে,
-  এখন এতে অ্যাডাপ্টিভ থিঙ্কিংয়ের সুবিধা রয়েছে। আরও জানতে, [Gemini 2.5 Pro প্রিভিউ](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-pro-preview-06-05)
-  এবং [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=bn) দেখুন।
-  ২৬ জুন, ২০২৫-এ `gemini-2.5-pro-preview-05-06`-কে `gemini-2.5-pro`-এ রিডাইরেক্ট করা হবে।
+- En güçlü modelimizin uyarlanabilir düşünme özelliğine sahip yeni sürümü `gemini-2.5-pro-preview-06-05`'yı kullanıma sunduk. Daha fazla bilgi edinmek için [Gemini 2.5 Pro Preview](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-pro-preview-06-05) ve [Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) başlıklı makaleleri inceleyin.
+  `gemini-2.5-pro-preview-05-06`, 26 Haziran 2025'te `gemini-2.5-pro` adresine yönlendirilecek.
 
-## ২৭ মে, ২০২৫
-
-- শেষ উপলভ্য টিউনিং মডেল, Gemini 1.5 Flash 001, বন্ধ করে দেওয়া হয়েছে।
-  কোনও মডেলেই আর টিউনিং কাজ করে না।
-  [Gemini API-এর মাধ্যমে ফাইন-টিউনিং](https://ai.google.dev/gemini-api/docs/model-tuning?hl=bn) দেখুন।
-
-## ২০ মে, ২০২৫
-
-**API আপডেট:**
-
-- ক্লিপিং ইন্টারভাল এবং কনফিগার করা যায় এমন ফ্রেম রেট স্যাম্পলিং ব্যবহার করে
-  [কাস্টম ভিডিও প্রিপ্রসেসিং](https://ai.google.dev/gemini-api/docs/video-understanding?hl=bn#customize-video-processing)-এর
-  জন্য সহায়তা লঞ্চ করা হয়েছে।
-- মাল্টি-টুল ব্যবহার করার সুবিধা লঞ্চ করা হয়েছে, যা একই
-  `generateContent` অনুরোধে
-  [কোড এক্সিকিউশন](https://ai.google.dev/gemini-api/docs/code-execution?hl=bn) এবং
-  [Grounding with Google Search](https://ai.google.dev/gemini-api/docs/grounding?hl=bn) কনফিগার করতে সাহায্য করে।
-- Live API-তে
-  [অ্যাসিঙ্ক্রোনাস ফাংশন কলের](https://ai.google.dev/gemini-api/docs/live-tools?hl=bn#async-function-calling)
-  জন্য সহায়তা চালু করা হয়েছে।
-- প্রম্পটে অতিরিক্ত প্রসঙ্গ হিসেবে URL প্রদান করার জন্য একটি পরীক্ষামূলক
-  [URL প্রসঙ্গ টুল](https://ai.google.dev/gemini-api/docs/url-context?hl=bn)
-  লঞ্চ করা হয়েছে।
-
-**মডেল আপডেট:**
-
-- `gemini-2.5-flash-preview-05-20`-এ, Gemini
-  [প্রিভিউ](https://ai.google.dev/gemini-api/docs/models?hl=bn#model-versions) মডেল রিলিজ করা হয়েছে যা
-  দাম-পারফর্ম্যান্স ও অ্যাডাপ্টিভ থিঙ্কিংয়ের জন্য অপ্টিমাইজ করা হয়েছে। আরও জানতে, [Gemini 2.5 Flash প্রিভিউ](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-flash-preview)
-  এবং [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=bn) দেখুন।
-- [`gemini-2.5-pro-preview-tts`](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-pro-preview-tts)
-  এবং
-  [`gemini-2.5-flash-preview-tts`](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-flash-preview-tts)
-  মডেল রিলিজ করা হয়েছে, যা এক বা দুজন স্পিকারের সাথে
-  [স্পিচ জেনারেট করতে](https://ai.google.dev/gemini-api/docs/speech-generation?hl=bn) পারে।
-- `lyria-realtime-exp` মডেল রিলিজ করা হয়েছে, যা রিয়েল টাইমে
-  [মিউজিক জেনারেট করে](https://ai.google.dev/gemini-api/docs/music-generation?hl=bn)।
-- নেটিভ অডিও আউটপুট ক্ষমতা সহ Live API-এর জন্য নতুন Gemini মডেল,
-  `gemini-2.5-flash-preview-native-audio-dialog` এবং
-  `gemini-2.5-flash-exp-native-audio-thinking-dialog` রিলিজ করা হয়েছে। আরও
-  জানতে, [Live API গাইড](https://ai.google.dev/gemini-api/docs/live-guide?hl=bn#native-audio-output) এবং
-  [Gemini 2.5 Flash নেটিভ অডিও](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-flash-native-audio) দেখুন।
-- `gemma-3n-e4b-it` প্রিভিউ রিলিজ করা হয়েছে, যা
-  [AI Studio](https://aistudio.google.com?hl=bn)-তে এবং Gemini API-এর মাধ্যমে উপলভ্য,
-  [Gemma 3n](https://ai.google.dev/gemma/docs/3n?hl=bn) লঞ্চের অংশ হিসেবে।
-
-## ৭ মে, ২০২৫
-
-- ছবি তৈরি ও এডিট করার জন্য প্রিভিউ মডেল হিসেবে
-  `gemini-2.0-flash-preview-image-generation` রিলিজ করা হয়েছে। আরও জানতে, [ছবি
-  জেনারেট করা](https://ai.google.dev/gemini-api/docs/image-generation?hl=bn) এবং
-  [Gemini 2.0 Flash প্রিভিউ ছবি
-  জেনারেট করা](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.0-flash-preview-image-generation) দেখুন।
-
-## ৬ মে, ২০২৫
-
-- কোড ও ফাংশন কলিংয়ে উন্নতি সহ আমাদের সবচেয়ে শক্তিশালী
-  মডেলের নতুন ভার্সন `gemini-2.5-pro-preview-05-06` প্রকাশ করা হয়েছে। `gemini-2.5-pro-preview-03-25`
-  মডেলের নতুন ভার্সনের দিকে অটোমেটিক পয়েন্ট করবে।
-
-## ১৭ এপ্রিল, ২০২৫
-
-- `gemini-2.5-flash-preview-04-17`-এ, Gemini
-  [প্রিভিউ](https://ai.google.dev/gemini-api/docs/models?hl=bn#model-versions) মডেল রিলিজ করা হয়েছে যা
-  দাম-পারফর্ম্যান্স ও অ্যাডাপ্টিভ থিঙ্কিংয়ের জন্য অপ্টিমাইজ করা হয়েছে। আরও জানতে, [Gemini 2.5 Flash প্রিভিউ](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-flash-preview)
-  এবং [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=bn) দেখুন।
-
-## ১৬ এপ্রিল, ২০২৫
-
-- [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.0-flash)-এর জন্য
-  কনটেক্সট ক্যাশিং লঞ্চ করা হয়েছে।
-
-## ৯ এপ্রিল, ২০২৫
-
-**মডেল আপডেট:**
-
-- `veo-2.0-generate-001` রিলিজ করা হয়েছে, এটি সাধারণভাবে উপলভ্য (GA) টেক্সট- ও
-  ছবি-থেকে-ভিডিও মডেল, যা বিস্তারিত ও শৈল্পিক
-  ভিডিও তৈরি করতে পারে। আরও জানতে, [Veo ডকুমেন্টেশন](https://ai.google.dev/gemini-api/docs/video?hl=bn) দেখুন।
-- `gemini-2.0-flash-live-001` রিলিজ করা হয়েছে, এটি বিলিং চালু থাকা
-  [Live API](https://ai.google.dev/gemini-api/docs/live?hl=bn) মডেলের পাবলিক প্রিভিউ ভার্সন।
-
-  - **উন্নত সেশন ম্যানেজমেন্ট ও নির্ভরযোগ্যতা**
-
-    - **সেশন আবার চালু করা:** সাময়িক নেটওয়ার্ক
-      বিঘ্ন চলাকালীন সেশন চালু রাখা। API এখন সার্ভার-সাইড সেশন স্টেট স্টোরেজ (সর্বাধিক ২৪ ঘণ্টা পর্যন্ত) কাজ করে এবং আপনি যেখানে শেষ করেছিলেন সেখান থেকে আবার কানেক্ট ও
-      চালু করার জন্য হ্যান্ডেল (session\_resumption) প্রদান করে।
-    - **কন্টেক্সট কম্প্রেশনের মাধ্যমে দীর্ঘ সেশন:** আগের সময়সীমার বাইরেও
-      বর্ধিত ইন্টার‍্যাকশন চালু করুন। কন্টেক্সট উইন্ডো কনফিগার করুন
-      স্লাইডিং উইন্ডো মেকানিজমের মাধ্যমে কম্প্রেস করুন যাতে অটোমেটিক ম্যানেজ করা যায়
-      কন্টেক্সট দৈর্ঘ্য। এর ফলে কন্টেক্সট সংক্রান্ত সীমার কারণে হঠাৎ করে বন্ধ হয়ে যাওয়া আটকানো যায়।
-    - **কানেকশন বন্ধ হওয়ার বিজ্ঞপ্তি:** কানেকশন বন্ধ হওয়ার আগে `GoAway` সার্ভার
-      মেসেজ পান, যাতে কানেকশন বন্ধ হওয়ার আগে
-      প্রয়োজনীয় ব্যবস্থা নেওয়া যায়।
-  - **ইন্টার‌্যাকশন ডায়নামিক্সের উপর আরও নিয়ন্ত্রণ**
-  - **কনফিগার করা যায় এমন ভয়েস অ্যাক্টিভিটি ডিটেকশন (VAD):** সংবেদনশীলতার
-    লেভেল বেছে নিন অথবা সম্পূর্ণভাবে অটোমেটিক VAD বন্ধ করে দিন এবং ম্যানুয়াল টার্ন কন্ট্রোলের জন্য নতুন ক্লায়েন্ট ইভেন্ট
-    (`activityStart`, `activityEnd`) ব্যবহার করুন।
-  - **কনফিগার করা যায় এমন ইন্টারাপশন হ্যান্ডলিং:** ব্যবহারকারীর ইনপুট
-    মডেলের উত্তরে বাধা দেবে কিনা তা ঠিক করুন।
-  - **কনফিগার করা যায় এমন টার্ন কভারেজ:** API সব
-    অডিও ও ভিডিও ইনপুট একটানা প্রসেস করবে নাকি শুধু তখনই ক্যাপচার করবে যখন
-    শেষ ব্যবহারকারীকে কথা বলতে দেখা যাবে তা বেছে নিন।
-  - **কনফিগার করা যায় এমন মিডিয়া রেজোলিউশন:** ইনপুট মিডিয়ার জন্য রেজোলিউশন বেছে নিয়ে
-    কোয়ালিটি বা টোকেন ব্যবহারের জন্য অপ্টিমাইজ করুন।
-  - **আরও সমৃদ্ধ আউটপুট ও ফিচার**
-  - **আরও বেশি ভয়েস ও ভাষার বিকল্প:** অডিও আউটপুটের জন্য দুটি নতুন ভয়েস ও
-    ৩০টি নতুন ভাষা থেকে বেছে নিন। আউটপুট ভাষা এখন
-    `speechConfig`-এর মধ্যে কনফিগার করা যাবে।
-  - **টেক্সট স্ট্রিমিং:** টেক্সট উত্তর তৈরি হওয়ার সাথে সাথে ইনক্রিমেন্টাল হিসেবে তা পান, যাতে ব্যবহারকারীকে দ্রুত দেখানো যায়।
-  - **টোকেন ব্যবহার সংক্রান্ত রিপোর্টিং:** সার্ভার মেসেজের `usageMetadata` ফিল্ডে দেওয়া বিস্তারিত
-    টোকেন সংখ্যা থেকে ব্যবহার সম্পর্কে ইনসাইট পান,
-    মোডালিটি ও প্রম্পট বা উত্তর ফেজ অনুযায়ী ভেঙে দেখানো হয়।
+## 27 Mayıs 2025
 
-## ৪ এপ্রিল, ২০২৫
+- Kullanılabilen son ince ayar modeli olan Gemini 1.5 Flash 001 kapatıldı.
+  İnce ayar artık hiçbir modelde desteklenmiyor.
+  [Gemini API ile ince ayar yapma](https://ai.google.dev/gemini-api/docs/model-tuning?hl=tr) başlıklı makaleyi inceleyin.
 
-- `gemini-2.5-pro-preview-03-25`, বিলিং চালু করা পাবলিক প্রিভিউ Gemini 2.5 Pro ভার্সন
-  প্রকাশ করা হয়েছে। আপনি ফ্রি টিয়ারে `gemini-2.5-pro-exp-03-25` ব্যবহার করা
-  চালিয়ে যেতে পারবেন।
+## 20 Mayıs 2025
 
-## ২৫ মার্চ, ২০২৫
+**API güncellemeleri:**
 
-- `gemini-2.5-pro-exp-03-25` রিলিজ করা হয়েছে, এটি একটি পাবলিক এক্সপেরিমেন্টাল Gemini মডেল
-  যেখানে থিঙ্কিং মোড সবসময় ডিফল্ট হিসেবে চালু থাকে।
-  আরও জানতে, [Gemini 2.5 Pro এক্সপেরিমেন্টাল](https://ai.google.dev/gemini-api/docs/models?hl=bn#gemini-2.5-pro-preview-03-25) দেখুন।
+- Kırpma aralıkları ve yapılandırılabilir kare hızı örneklemesi kullanılarak [özel video ön işleme](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr#customize-video-processing) desteği kullanıma sunuldu.
+- Aynı `generateContent` isteğinde [kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr) ve [Google Arama ile Temellendirme](https://ai.google.dev/gemini-api/docs/grounding?hl=tr)'yi yapılandırmayı destekleyen çoklu araç kullanımı kullanıma sunuldu.
+- Live API'de [eşzamansız işlev çağrıları](https://ai.google.dev/gemini-api/docs/live-tools?hl=tr#async-function-calling) için destek kullanıma sunuldu.
+- İstemlere ek bağlam olarak URL sağlamak için deneysel bir [URL bağlamı aracı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr) kullanıma sunuldu.
 
-## ১২ মার্চ, ২০২৫
+**Model güncellemeleri:**
 
-**মডেল আপডেট:**
+- Fiyat-performans ve uyarlanabilir düşünme için optimize edilmiş bir Gemini [önizleme](https://ai.google.dev/gemini-api/docs/models?hl=tr#model-versions) modeli olan `gemini-2.5-flash-preview-05-20` kullanıma sunuldu. Daha fazla bilgi edinmek için [Gemini 2.5 Flash Preview](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-flash-preview) ve [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) başlıklı makaleleri inceleyin.
+- Bir veya iki konuşmacıyla [konuşma üretebilen](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr) [`gemini-2.5-pro-preview-tts`](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-pro-preview-tts) ve [`gemini-2.5-flash-preview-tts`](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-flash-preview-tts) modelleri kullanıma sunuldu.
+- Anında [müzik üreten](https://ai.google.dev/gemini-api/docs/music-generation?hl=tr) `lyria-realtime-exp` modelini kullanıma sunduk.
+- Yerel ses çıkışı özelliklerine sahip yeni Gemini modelleri olan `gemini-2.5-flash-preview-native-audio-dialog` ve `gemini-2.5-flash-exp-native-audio-thinking-dialog`, Live API için kullanıma sunuldu. Daha fazla bilgi için [Live API kılavuzuna](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr#native-audio-output) ve [Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-flash-native-audio) sayfasına bakın.
+- [Gemma 3n](https://ai.google.dev/gemma/docs/3n?hl=tr) lansmanı kapsamında `gemma-3n-e4b-it` önizlemesi yayınlandı. Bu önizlemeye [AI Studio](https://aistudio.google.com?hl=tr)'dan ve Gemini API üzerinden erişebilirsiniz.
 
-- ছবি তৈরি ও এডিট করতে পারে এমন একটি এক্সপেরিমেন্টাল [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/image-generation?hl=bn#gemini)
-  মডেল লঞ্চ করা হয়েছে।
-- `gemma-3-27b-it`-এ রিলিজ করা হয়েছে, [AI Studio](https://aistudio.google.com?hl=bn)-তে এবং Gemini API-এর মাধ্যমে উপলভ্য,
-  [Gemma 3](https://ai.google.dev/gemma/docs/core?hl=bn) লঞ্চের অংশ হিসেবে।
+## 7 Mayıs 2025
 
-**API আপডেট:**
+- Görüntü üretme ve düzenleme için önizleme modeli olan `gemini-2.0-flash-preview-image-generation` kullanıma sunuldu. Daha fazla bilgi için [Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) ve [Gemini 2.0 Flash Preview Görüntü Üretme](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.0-flash-preview-image-generation) başlıklı makaleleri inceleyin.
 
-- মিডিয়া সোর্স হিসেবে
-  [YouTube URL](https://ai.google.dev/gemini-api/docs/vision?hl=bn#youtube)-এর জন্য সহায়তা যোগ করা হয়েছে।
-- ২০ এমবির কম সাইজের
-  [ইনলাইন ভিডিও](https://ai.google.dev/gemini-api/docs/vision?hl=bn#inline-video) যোগ করার সুবিধা যোগ করা হয়েছে।
+## 6 Mayıs 2025
 
-## ১১ মার্চ, ২০২৫
+- En güçlü modelimizin yeni sürümü olan `gemini-2.5-pro-preview-05-06`, kod ve işlev çağrısı iyileştirmeleriyle kullanıma sunuldu. `gemini-2.5-pro-preview-03-25`
+  otomatik olarak modelin yeni sürümüne yönlendirir.
 
-**SDK আপডেট:**
+## 17 Nisan 2025
 
-- পাবলিক প্রিভিউতে
-  [TypeScript ও JavaScript-এর জন্য Google Gen AI SDK](https://googleapis.github.io/js-genai)
-  প্রকাশ করা হয়েছে।
+- Fiyat-performans ve uyarlanabilir düşünme için optimize edilmiş bir Gemini [önizleme](https://ai.google.dev/gemini-api/docs/models?hl=tr#model-versions) modeli olan `gemini-2.5-flash-preview-04-17` kullanıma sunuldu. Daha fazla bilgi edinmek için [Gemini 2.5 Flash Preview](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-flash-preview) ve [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) başlıklı makaleleri inceleyin.
 
-## ৭ মার্চ, ২০২৫
+## 16 Nisan 2025
 
-**মডেল আপডেট:**
+- [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.0-flash) için bağlam önbelleğe alma özelliği kullanıma sunuldu.
 
-- পাবলিক প্রিভিউতে `gemini-embedding-exp-03-07`রিলিজ করা হয়েছে, একটি
-  [পরীক্ষামূলক](https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=bn)
-  Gemini-ভিত্তিক এম্বেডিং মডেল।
+## 9 Nisan 2025
 
-## ২৮ ফেব্রুয়ারি, ২০২৫
+**Model güncellemeleri:**
 
-**API আপডেট:**
+- Ayrıntılı ve sanatsal açıdan incelikli videolar oluşturabilen, genel kullanıma sunulan (GA) metinden ve görüntüden videoya dönüştürme modeli `veo-2.0-generate-001` kullanıma sunuldu. Daha fazla bilgi için [Veo belgelerine](https://ai.google.dev/gemini-api/docs/video?hl=tr) bakın.
+- Faturalandırmanın etkin olduğu [Live API](https://ai.google.dev/gemini-api/docs/live?hl=tr) modelinin genel önizleme sürümü olan `gemini-2.0-flash-live-001` kullanıma sunuldu.
 
-- [টুল হিসেবে সার্চ করুন](https://ai.google.dev/gemini-api/docs/grounding?hl=bn)
-  ফিচার `gemini-2.0-pro-exp-02-05`-এ যোগ করা হয়েছে, এটি Gemini 2.0 Pro-এর
-  উপর ভিত্তি করে তৈরি একটি পরীক্ষামূলক মডেল।
+  - **Gelişmiş oturum yönetimi ve güvenilirlik**
 
-## ২৫ ফেব্রুয়ারি, ২০২৫
+    - **Oturum devam ettirme:** Geçici ağ kesintileri sırasında oturumları etkin tutun. API artık sunucu tarafı oturum durumu depolama alanını (24 saate kadar) destekliyor ve yeniden bağlanıp kaldığınız yerden devam etmeniz için tutamaçlar (session\_resumption) sağlıyor.
+    - **Bağlam sıkıştırma ile daha uzun oturumlar:** Önceki zaman sınırlarını aşan daha uzun etkileşimleri etkinleştirin. Bağlam uzunluğunu otomatik olarak yönetmek ve bağlam sınırları nedeniyle ani sonlandırmaları önlemek için kayan pencere mekanizmasıyla bağlam penceresi sıkıştırmasını yapılandırın.
+    - **Sorunsuz Bağlantı Kesme Bildirimi:** Bir bağlantının ne zaman kapanacağını belirten bir `GoAway` sunucu mesajı alarak bağlantı sonlandırılmadan önce sorunsuz bir şekilde işlem yapabilirsiniz.
+  - **Etkileşim dinamikleri üzerinde daha fazla kontrol**
+  - **Yapılandırılabilir Ses Etkinliği Algılama (VAD):** Hassasiyet seviyelerini seçin veya otomatik VAD'yi tamamen devre dışı bırakın ve manuel sıra kontrolü için yeni istemci etkinliklerini (`activityStart`, `activityEnd`) kullanın.
+  - **Yapılandırılabilir kesinti yönetimi:** Kullanıcı girişinin modelin yanıtını kesintiye uğratıp uğratmayacağına karar verin.
+  - **Yapılandırılabilir Sıra Kapsamı:** API'nin tüm ses ve video girişlerini sürekli olarak mı işleyeceğini yoksa yalnızca son kullanıcının konuştuğu algılandığında mı yakalayacağını seçin.
+  - **Yapılandırılabilir medya çözünürlüğü:** Giriş medyasının çözünürlüğünü seçerek kaliteyi veya jeton kullanımını optimize edin.
+  - **Daha zengin çıkış ve özellikler**
+  - **Genişletilmiş Ses ve Dil Seçenekleri:** Ses çıkışı için iki yeni ses ve 30 yeni dil arasından seçim yapabilirsiniz. Çıkış dili artık `speechConfig` üzerinden yapılandırılabilir.
+  - **Metin akışı:** Metin yanıtlarını oluşturuldukça parça parça alarak kullanıcıya daha hızlı gösterilmesini sağlayın.
+  - **Jeton kullanımı raporlama:** Sunucu mesajlarının `usageMetadata` alanında, modaliteye ve istem ya da yanıt aşamalarına göre ayrılmış ayrıntılı jeton sayılarıyla kullanım hakkında bilgi edinin.
 
-**মডেল আপডেট:**
+## 4 Nisan 2025
 
-- `gemini-2.0-flash-lite` রিলিজ করা হয়েছে, এটি হল
-  [Gemini 2.0 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#gemini-2.0-flash-lite)-এর একটি সাধারণভাবে উপলভ্য (GA) ভার্সন।
-  এটি স্পিড, স্কেল ও খরচ কমানোর জন্য অপ্টিমাইজ করা হয়েছে।
+- Faturalandırmanın etkin olduğu, genel önizleme Gemini 2.5 Pro sürümü olan `gemini-2.5-pro-preview-03-25` kullanıma sunuldu. `gemini-2.5-pro-exp-03-25` ürününü ücretsiz katmanda kullanmaya devam edebilirsiniz.
 
-## ১৯ ফেব্রুয়ারি, ২০২৫
+## 25 Mart 2025
 
-**AI Studio আপডেট:**
+- Düşünebilen modun varsayılan olarak her zaman açık olduğu, herkese açık deneysel Gemini modeli `gemini-2.5-pro-exp-03-25` kullanıma sunuldu.
+  Daha fazla bilgi için [Gemini 2.5 Pro Experimental](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-pro-preview-03-25) başlıklı makaleyi inceleyin.
 
-- [অতিরিক্ত অঞ্চলে](https://ai.google.dev/gemini-api/docs/available-regions?hl=bn)
-  (কসোভো, গ্রিনল্যান্ড ও ফ্যারো দ্বীপপুঞ্জ) সহায়তা।
+## 12 Mart 2025
 
-**API আপডেট:**
+**Model güncellemeleri:**
 
-- [অতিরিক্ত অঞ্চল](https://ai.google.dev/gemini-api/docs/available-regions?hl=bn)
-  (কসোভো, গ্রিনল্যান্ড ও ফ্যারো দ্বীপপুঞ্জ)
-  -এর জন্য সহায়তা।
+- Görüntü üretme ve düzenleme özelliklerine sahip deneysel bir [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr#gemini) modeli kullanıma sunuldu.
+- [Gemma 3](https://ai.google.dev/gemma/docs/core?hl=tr) lansmanı kapsamında `gemma-3-27b-it` tarihinde kullanıma sunulan bu model, [AI Studio](https://aistudio.google.com?hl=tr)'da ve Gemini API üzerinden kullanılabilir.
 
-## ১৮ ফেব্রুয়ারি, ২০২৫
+**API güncellemeleri:**
 
-**মডেল আপডেট:**
+- Medya kaynağı olarak [YouTube URL'leri](https://ai.google.dev/gemini-api/docs/vision?hl=tr#youtube) için destek eklendi.
+- 20 MB'tan küçük [satır içi video](https://ai.google.dev/gemini-api/docs/vision?hl=tr#inline-video) ekleme desteği eklendi.
 
-- Gemini 1.0 Pro আর কাজ করে না। কোন কোন মডেল কাজ করে তার তালিকা দেখতে, [Gemini মডেল](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn) দেখুন।
+## 11 Mart 2025
 
-## ১১ ফেব্রুয়ারি, ২০২৫
+**SDK güncellemeleri:**
 
-**API আপডেট:**
+- [TypeScript ve JavaScript için Google Üretken Yapay Zeka SDK](https://googleapis.github.io/js-genai)'sının genel önizleme sürümü yayınlandı.
 
-- [OpenAI লাইব্রেরি কম্প্যাটিবিলিটি](https://ai.google.dev/gemini-api/docs/openai?hl=bn)
-  সম্পর্কিত আপডেট।
+## 7 Mart 2025
 
-## ৬ ফেব্রুয়ারি, ২০২৫
+**Model güncellemeleri:**
 
-**মডেল আপডেট:**
+- Genel önizleme sürümünde Gemini tabanlı [deneysel](https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=tr) bir yerleştirme modeli olan `gemini-embedding-exp-03-07` kullanıma sunuldu.
 
-- `imagen-3.0-generate-002` রিলিজ করা হয়েছে, এটি হল
-  [Gemini API-তে Imagen 3](https://ai.google.dev/gemini-api/docs/imagen?hl=bn)-এর সাধারণভাবে উপলভ্য (GA) ভার্সন।
+## 28 Şubat 2025
 
-**SDK আপডেট:**
+**API güncellemeleri:**
 
-- পাবলিক প্রিভিউয়ের জন্য [Java-র জন্য Google Gen AI SDK](https://github.com/googleapis/java-genai)
-  রিলিজ করা হয়েছে।
+- Gemini 2.0 Pro'yu temel alan deneysel bir model olan `gemini-2.0-pro-exp-02-05`'e [araç olarak Arama](https://ai.google.dev/gemini-api/docs/grounding?hl=tr) desteği eklendi.
 
-## ৫ ফেব্রুয়ারি, ২০২৫
+## 25 Şubat 2025
 
-**মডেল আপডেট:**
+**Model güncellemeleri:**
 
-- `gemini-2.0-flash-001` রিলিজ করা হয়েছে, এটি
-  [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#gemini-2.0-flash)-এর জেনেরাল অ্যাভেইলেবিলিটি (GA) ভার্সন যা
-  শুধুমাত্র টেক্সট আউটপুট সাপোর্ট করে।
-- `gemini-2.0-pro-exp-02-05`-এ রিলিজ করা হয়েছে,
-  Gemini 2.0 Pro-এর একটি [এক্সপেরিমেন্টাল](https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=bn) পাবলিক
-  প্রিভিউ ভার্সন।
-- `gemini-2.0-flash-lite-preview-02-05`রিলিজ করা হয়েছে, একটি পরীক্ষামূলক পাবলিক
-  প্রিভিউ [মডেল](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#gemini-2.0-flash-lite)
-  যা খরচ কমানোর জন্য অপ্টিমাইজ করা হয়েছে।
+- Hız, ölçek ve maliyet verimliliği için optimize edilmiş [Gemini 2.0 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#gemini-2.0-flash-lite)'ın genel kullanıma sunulan (GA) sürümü olan `gemini-2.0-flash-lite` yayınlandı.
 
-**API আপডেট:**
+## 19 Şubat 2025
 
-- কোড এক্সিকিউশনে
-  [ফাইল ইনপুট ও গ্রাফ আউটপুট](https://ai.google.dev/gemini-api/docs/code-execution?hl=bn#input-output)
-  ফিচার যোগ করা হয়েছে।
+**AI Studio güncellemeleri:**
 
-**SDK আপডেট:**
+- [Ek bölgeler](https://ai.google.dev/gemini-api/docs/available-regions?hl=tr) (Kosova, Grönland ve Faroe Adaları) için destek.
 
-- জেনেরাল অ্যাভেইলেবিলিটি (GA)-তে
-  [Python-এর জন্য Google Gen AI SDK](https://googleapis.github.io/python-genai/)
-  রিলিজ করা হয়েছে।
+**API güncellemeleri:**
 
-## ২১ জানুয়ারি, ২০২৫
+- [Ek bölgeler](https://ai.google.dev/gemini-api/docs/available-regions?hl=tr) (Kosova, Grönland ve Faroe Adaları) için destek.
 
-**মডেল আপডেট:**
+## 18 Şubat 2025
 
-- `gemini-2.0-flash-thinking-exp-01-21` রিলিজ করা হয়েছে, এটি
-  [Gemini 2.0 Flash Thinking মডেল](https://ai.google.dev/gemini-api/docs/thinking?hl=bn)-এর
-  পিছনে থাকা মডেলের লেটেস্ট প্রিভিউ ভার্সন।
+**Model güncellemeleri:**
 
-## ১৯ ডিসেম্বর, ২০২৪
+- Gemini 1.0 Pro artık desteklenmiyor. Desteklenen modellerin listesi için [Gemini modelleri](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr) başlıklı makaleyi inceleyin.
 
-**মডেল আপডেট:**
+## 11 Şubat 2025
 
-- পাবলিক প্রিভিউয়ের জন্য Gemini 2.0 Flash Thinking মোড রিলিজ করা হয়েছে। Thinking Mode হল
-  একটি টেস্ট-টাইম কম্পিউট মডেল যা কোনও উত্তর তৈরি করার সময়
-  মডেলের চিন্তাভাবনা প্রক্রিয়া দেখতে দেয় এবং আরও শক্তিশালী
-  যুক্তিপূর্ণ ক্ষমতা সহ উত্তর তৈরি করে।
+**API güncellemeleri:**
 
-  আমাদের [ওভারভিউ
-  পৃষ্ঠা](https://ai.google.dev/gemini-api/docs/thinking-mode?hl=bn) থেকে Gemini 2.0 Flash Thinking মোড সম্পর্কে আরও পড়ুন।
+- [OpenAI kitaplıkları uyumluluğu](https://ai.google.dev/gemini-api/docs/openai?hl=tr) ile ilgili güncellemeler.
 
-## ১১ ডিসেম্বর, ২০২৪
+## 6 Şubat 2025
 
-**মডেল আপডেট:**
+**Model güncellemeleri:**
 
-- পাবলিক প্রিভিউয়ের জন্য [Gemini 2.0 Flash Experimental](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#gemini-2.0-flash)
-  রিলিজ করা হয়েছে। Gemini 2.0 Flash Experimental-এর ফিচারের আংশিক তালিকা:
-  - Gemini 1.5 Pro-এর থেকে দ্বিগুণ দ্রুত
-  - আমাদের Live API-এর মাধ্যমে দ্বিমুখী স্ট্রিমিং
-  - টেক্সট, ছবি ও স্পিচের মাধ্যমে মাল্টিমোডাল উত্তর জেনারেশন
-  - কোড
-    এক্সিকিউশন, সার্চ, ফাংশন কলিং ও আরও অনেক কিছুর মতো ফিচার ব্যবহার করতে মাল্টি-টার্ন রিজনিং সহ বিল্ট-ইন টুলের ব্যবহার
+- [Gemini API'de Imagen 3](https://ai.google.dev/gemini-api/docs/imagen?hl=tr)'ün genel kullanıma sunulan (GA) sürümü olan `imagen-3.0-generate-002` kullanıma sunuldu.
 
-আমাদের [ওভারভিউ
-পৃষ্ঠা](https://ai.google.dev/gemini-api/docs/models/gemini-v2?hl=bn) থেকে Gemini 2.0 Flash সম্পর্কে আরও জানুন।
+**SDK güncellemeleri:**
 
-## ২১ নভেম্বর, ২০২৪
+- [Java için Google Üretken Yapay Zeka SDK](https://github.com/googleapis/java-genai)'nın genel önizleme sürümü yayınlandı.
 
-**মডেল আপডেট:**
+## 5 Şubat 2025
 
-- `gemini-exp-1121` রিলিজ করা হয়েছে, এটি আরও শক্তিশালী পরীক্ষামূলক Gemini API মডেল।
+**Model güncellemeleri:**
 
-**মডেল আপডেট:**
+- [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#gemini-2.0-flash)'in yalnızca metin çıkışını destekleyen, genel kullanıma sunulmuş (GA) sürümü olan `gemini-2.0-flash-001` kullanıma sunuldu.
+- Gemini 2.0 Pro'nun [deneysel](https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=tr)
+  genel önizleme sürümü olan `gemini-2.0-pro-exp-02-05` kullanıma sunuldu.
+- Maliyet verimliliği için optimize edilmiş, deneysel bir genel önizleme [modeli](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#gemini-2.0-flash-lite) olan `gemini-2.0-flash-lite-preview-02-05` kullanıma sunuldu.
 
-- `gemini-1.5-flash-002` ব্যবহার করার জন্য `gemini-1.5-flash-latest` এবং `gemini-1.5-flash` মডেলের ছদ্মনাম আপডেট করা হয়েছে।
-  - `top_k` প্যারামিটার পরিবর্তন করুন: `gemini-1.5-flash-002`
-    মডেল ১ থেকে ৪১ (এক্সক্লুসিভ) পর্যন্ত `top_k` ভ্যালু সাপোর্ট করে।
-    ৪০-এর বেশি ভ্যালু ৪০-এ পরিবর্তন করা হবে।
+**API güncellemeleri:**
 
-## ১৪ নভেম্বর, ২০২৪
+- Kod yürütme özelliğine [dosya girişi ve grafik çıkışı](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr#input-output) desteği eklendi.
 
-**মডেল আপডেট:**
+**SDK güncellemeleri:**
 
-- `gemini-exp-1114` রিলিজ করা হয়েছে, এটি একটি শক্তিশালী পরীক্ষামূলক Gemini API মডেল।
+- [Python için Google Gen AI SDK](https://googleapis.github.io/python-genai/)'yı genel kullanıma sunduk.
 
-## ৮ নভেম্বর, ২০২৪
+## 21 Ocak 2025
 
-**API আপডেট:**
+**Model güncellemeleri:**
 
-- OpenAI লাইব্রেরি / REST API-তে [Gemini-র জন্য সহায়তা](https://ai.google.dev/gemini-api/docs/openai?hl=bn) যোগ করা হয়েছে।
+- [Gemini 2.0 Hızlı Düşünen Modeli'nin](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) arkasındaki modelin en yeni önizleme sürümü olan `gemini-2.0-flash-thinking-exp-01-21` kullanıma sunuldu.
 
-## ৩১ অক্টোবর, ২০২৪
+## 19 Aralık 2024
 
-**API আপডেট:**
+**Model güncellemeleri:**
 
-- [Grounding with Google Search-এর জন্য সহায়তা](https://ai.google.dev/gemini-api/docs/grounding?hl=bn) যোগ করা হয়েছে।
+- Gemini 2.0 Hızlı Düşünen Modu, genel önizleme için kullanıma sunuldu. Düşünen Mod, modelin yanıt üretirken düşünme sürecini görmenizi sağlayan ve daha güçlü akıl yürütme özellikleriyle yanıtlar üreten bir test zamanı hesaplama modelidir.
 
-## ৩ অক্টোবর, ২০২৪
+  Gemini 2.0 Flash Hızlı Düşünen Modu hakkında daha fazla bilgiyi [genel bakış sayfamızda](https://ai.google.dev/gemini-api/docs/thinking-mode?hl=tr) bulabilirsiniz.
 
-**মডেল আপডেট:**
+## 11 Aralık 2024
 
-- আমাদের সবচেয়ে ছোট Gemini
-  API মডেলের স্টেবল ভার্সন `gemini-1.5-flash-8b-001` রিলিজ করা হয়েছে।
+**Model güncellemeleri:**
 
-## ২৪ সেপ্টেম্বর, ২০২৪
+- [Gemini 2.0 Flash Experimental](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#gemini-2.0-flash), genel önizleme için kullanıma sunuldu. Gemini 2.0 Flash Experimental'ın özelliklerinin bir kısmı şunlardır:
+  - Gemini 1.5 Pro'dan iki kat daha hızlı
+  - Live API ile çift yönlü akış
+  - Metin, resim ve konuşma biçiminde çok formatlı yanıt üretimi
+  - Kod yürütme, Arama, işlev çağrısı ve daha fazlası gibi özellikleri kullanmak için çok adımlı akıl yürütme ile yerleşik araç kullanımı
 
-**মডেল আপডেট:**
+Gemini 2.0 Flash hakkında daha fazla bilgiyi [genel bakış sayfamızda](https://ai.google.dev/gemini-api/docs/models/gemini-v2?hl=tr) bulabilirsiniz.
 
-- সাধারণ উপলভ্যতার জন্য Gemini 1.5 Pro ও 1.5 Flash-এর দুটি নতুন স্টেবল
-  ভার্সন `gemini-1.5-pro-002` ও `gemini-1.5-flash-002` রিলিজ করা হয়েছে।
-- `gemini-1.5-pro-002` ব্যবহার করার জন্য `gemini-1.5-pro-latest` মডেল কোড
-  এবং `gemini-1.5-flash-002` ব্যবহার করার জন্য `gemini-1.5-flash-latest` মডেল কোড আপডেট করা হয়েছে।
-- `gemini-1.5-flash-8b-exp-0827`-এর পরিবর্তে `gemini-1.5-flash-8b-exp-0924` রিলিজ করা হয়েছে।
-- Gemini API এবং AI Studio-র জন্য [নাগরিকের সততা সংক্রান্ত সুরক্ষা ফিল্টার](https://ai.google.dev/gemini-api/docs/safety-settings?hl=bn#safety-filters)
-  রিলিজ করা হয়েছে।
-- Python ও NodeJS-এ Gemini 1.5 Pro ও 1.5 Flash-এর জন্য দুটি নতুন প্যারামিটার রিলিজ করা হয়েছে:
-  [`frequencyPenalty`](https://ai.google.dev/api/generate-content?hl=bn#FIELDS.frequency_penalty) এবং
-  [`presencePenalty`](https://ai.google.dev/api/generate-content?hl=bn#FIELDS.presence_penalty)।
+## 21 Kasım 2024
 
-## ১৯ সেপ্টেম্বর, ২০২৪
+**Model güncellemeleri:**
 
-**AI Studio আপডেট:**
+- Daha da güçlü bir deneysel Gemini API modeli olan `gemini-exp-1121` kullanıma sunuldu.
 
-- মডেলের দেওয়া উত্তরে থাম্বস-আপ ও থাম্বস-ডাউন বোতাম যোগ করা হয়েছে, যাতে ব্যবহারকারীরা
-  উত্তরের কোয়ালিটি সম্পর্কে মতামত জানাতে পারেন।
+**Model güncellemeleri:**
 
-**API আপডেট:**
+- `gemini-1.5-flash-latest` ve `gemini-1.5-flash` model takma adları, `gemini-1.5-flash-002` kullanacak şekilde güncellendi.
+  - `top_k` parametresini değiştirin: `gemini-1.5-flash-002` modeli, 1 ile 41 (hariç) arasındaki `top_k` değerlerini destekler.
+    40'tan büyük değerler 40 olarak değiştirilir.
 
-- Google Cloud ক্রেডিটের জন্য সহায়তা যোগ করা হয়েছে, যা এখন Gemini API ব্যবহারের জন্য
-  ব্যবহার করা যেতে পারে।
+## 14 Kasım 2024
 
-## ১৭ সেপ্টেম্বর, ২০২৪
+**Model güncellemeleri:**
 
-**AI Studio আপডেট:**
+- Güçlü ve deneysel bir Gemini API modeli olan `gemini-exp-1114` kullanıma sunuldu.
 
-- **Colab-এ খুলুন** বোতাম যোগ করা হয়েছে যা একটি Colab নোটবুকে প্রম্পট – এবং এটি রান করানোর
-  কোড – এক্সপোর্ট করে। এই ফিচারে এখনও
-  টুল (JSON মোড, ফাংশন কলিং বা কোড এক্সিকিউশন) সহ প্রম্পট করার সুবিধা নেই।
+## 8 Kasım 2024
 
-## ১৩ সেপ্টেম্বর, ২০২৪
+**API güncellemeleri:**
 
-**AI Studio আপডেট:**
+- OpenAI kitaplıklarında/REST API'de [Gemini desteği](https://ai.google.dev/gemini-api/docs/openai?hl=tr) eklendi.
 
-- তুলনা মোডের জন্য সহায়তা যোগ করা হয়েছে, যা আপনাকে বিভিন্ন মডেল ও প্রম্পট জুড়ে উত্তর তুলনা করতে দেয় যাতে আপনার ব্যবহারের ক্ষেত্রে সবচেয়ে উপযুক্ত উত্তর খুঁজে পেতে পারেন।
+## 31 Ekim 2024
 
-## ৩০ আগস্ট, ২০২৪
+**API güncellemeleri:**
 
-**মডেল আপডেট:**
+- [Google Arama ile Temellendirme desteği](https://ai.google.dev/gemini-api/docs/grounding?hl=tr) eklendi.
 
-- Gemini 1.5 Flash-এ
-  [মডেল কনফিগারেশনের মাধ্যমে JSON স্কিমা প্রদান করা](https://ai.google.dev/gemini-api/docs/json-mode?hl=bn#supply-schema-in-config) যায়।
+## 3 Ekim 2024
 
-## ২৭ আগস্ট, ২০২৪
+**Model güncellemeleri:**
 
-**মডেল আপডেট:**
+- En küçük Gemini API modelimizin kararlı sürümü olan `gemini-1.5-flash-8b-001` kullanıma sunuldu.
 
-- নিম্নলিখিত
-  [পরীক্ষামূলক মডেল](https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=bn) রিলিজ করা হয়েছে:
+## 24 Eylül 2024
+
+**Model güncellemeleri:**
+
+- Gemini 1.5 Pro ve 1.5 Flash'ın iki yeni kararlı sürümü olan `gemini-1.5-pro-002` ve `gemini-1.5-flash-002` genel kullanıma sunuldu.
+- `gemini-1.5-pro-latest` model kodu `gemini-1.5-pro-002`, `gemini-1.5-flash-latest` model kodu ise `gemini-1.5-flash-002` kullanacak şekilde güncellendi.
+- `gemini-1.5-flash-8b-exp-0827` yerine `gemini-1.5-flash-8b-exp-0924` yayınlandı.
+- Gemini API ve AI Studio için [sivil bütünlük güvenlik filtresi](https://ai.google.dev/gemini-api/docs/safety-settings?hl=tr#safety-filters) kullanıma sunuldu.
+- Python ve NodeJS'de Gemini 1.5 Pro ve 1.5 Flash için iki yeni parametre desteği yayınlandı:
+  [`frequencyPenalty`](https://ai.google.dev/api/generate-content?hl=tr#FIELDS.frequency_penalty) ve
+  [`presencePenalty`](https://ai.google.dev/api/generate-content?hl=tr#FIELDS.presence_penalty).
+
+## 19 Eylül 2024
+
+**AI Studio güncellemeleri:**
+
+- Kullanıcıların yanıtların kalitesiyle ilgili geri bildirim gönderebilmesi için model yanıtlarına beğenme ve beğenmeme düğmeleri eklendi.
+
+**API güncellemeleri:**
+
+- Artık Gemini API kullanımı için kullanılabilen Google Cloud kredileri için destek eklendi.
+
+## 17 Eylül 2024
+
+**AI Studio güncellemeleri:**
+
+- İstemi ve çalıştırma kodunu Colab not defterine aktaran **Colab'de aç** düğmesi eklendi. Bu özellik henüz araçlarla (JSON modu, işlev çağrısı veya kod yürütme) istem oluşturmayı desteklemiyor.
+
+## 13 Eylül 2024
+
+**AI Studio güncellemeleri:**
+
+- Karşılaştırma modu desteği eklendi. Bu mod, kullanım alanınıza en uygun modeli bulmak için modeller ve istemler genelinde yanıtları karşılaştırmanıza olanak tanır.
+
+## 30 Ağustos 2024
+
+**Model güncellemeleri:**
+
+- Gemini 1.5 Flash, [model yapılandırması aracılığıyla JSON şeması sağlamayı](https://ai.google.dev/gemini-api/docs/json-mode?hl=tr#supply-schema-in-config) destekler.
+
+## 27 Ağustos 2024
+
+**Model güncellemeleri:**
+
+- Aşağıdaki [deneysel modeller](https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=tr) kullanıma sunuldu:
   - `gemini-1.5-pro-exp-0827`
   - `gemini-1.5-flash-exp-0827`
   - `gemini-1.5-flash-8b-exp-0827`
 
-## ৯ আগস্ট, ২০২৪
+## 9 Ağustos 2024
 
-**API আপডেট:**
+**API güncellemeleri:**
 
-- [PDF প্রসেস করার](https://ai.google.dev/gemini-api/docs/document-processing?hl=bn) জন্য অতিরিক্ত সহায়তা।
+- [PDF işleme](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr) desteği eklendi.
 
-## ৫ আগস্ট, ২০২৪
+## 5 Ağustos 2024
 
-**মডেল আপডেট:**
+**Model güncellemeleri:**
 
-- Gemini 1.5 Flash-এর জন্য ফাইন-টিউনিং সাপোর্ট রিলিজ করা হয়েছে।
+- Gemini 1.5 Flash için ince ayar desteği kullanıma sunuldu.
 
-## ১ আগস্ট, ২০২৪
+## 1 Ağustos 2024
 
-**মডেল আপডেট:**
+**Model güncellemeleri:**
 
-- `gemini-1.5-pro-exp-0801`-এ, [Gemini 1.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#gemini-1.5-pro)-এর একটি নতুন এক্সপেরিমেন্টাল ভার্সন রিলিজ করা হয়েছে।
+- [Gemini 1.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#gemini-1.5-pro)'nun yeni bir deneme sürümü olan `gemini-1.5-pro-exp-0801` kullanıma sunuldu.
 
-## ১২ জুলাই, ২০২৪
+## 12 Temmuz 2024
 
-**মডেল আপডেট:**
+**Model güncellemeleri:**
 
-- Google AI পরিষেবা ও টুল থেকে Gemini 1.0 Pro Vision-এর জন্য সহায়তা সরিয়ে দেওয়া হয়েছে।
+- Google AI hizmetleri ve araçlarından Gemini 1.0 Pro Vision desteği kaldırıldı.
 
-## ২৭ জুন, ২০২৪
+## 27 Haziran 2024
 
-**মডেল আপডেট:**
+**Model güncellemeleri:**
 
-- Gemini 1.5 Pro-এর 2M কনটেক্সট উইন্ডোর জন্য জেনেরাল অ্যাভেইলেবিলিটি রিলিজ।
+- Gemini 1.5 Pro'nun 2 milyon parçalık bağlam penceresi genel kullanıma sunuldu.
 
-**API আপডেট:**
+**API güncellemeleri:**
 
-- [কোড এক্সিকিউশন](https://ai.google.dev/gemini-api/docs/code-execution?hl=bn)-এর জন্য সহায়তা যোগ করা হয়েছে।
+- [Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr) için destek eklendi.
 
-## ১৮ জুন, ২০২৪
+## 18 Haziran 2024
 
-**API আপডেট:**
+**API güncellemeleri:**
 
-- [কন্টেক্সট ক্যাশে করার](https://ai.google.dev/gemini-api/docs/caching?hl=bn) জন্য সহায়তা যোগ করা হয়েছে।
+- [Bağlam önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr) için destek eklendi.
 
-## ১২ জুন, ২০২৪
+## 12 Haziran 2024
 
-**মডেল আপডেট:**
+**Model güncellemeleri:**
 
-- Gemini 1.0 Pro Vision বন্ধ করে দেওয়া হয়েছে।
+- Gemini 1.0 Pro Vision kullanımdan kaldırıldı.
 
-## ২৩ মে, ২০২৪
+## 23 Mayıs 2024
 
-**মডেল আপডেট:**
+**Model güncellemeleri:**
 
-- [Gemini 1.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#gemini-1.5-pro)
-  (`gemini-1.5-pro-001`) সাধারণত উপলভ্য (GA)।
-- [Gemini 1.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#gemini-1.5-flash)
-  (`gemini-1.5-flash-001`) সাধারণভাবে উপলভ্য (GA)।
+- [Gemini 1.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#gemini-1.5-pro)
+  (`gemini-1.5-pro-001`) genel kullanıma sunuldu.
+- [Gemini 1.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#gemini-1.5-flash)
+  (`gemini-1.5-flash-001`) genel kullanıma sunuldu.
 
-## ১৪ মে, ২০২৪
+## 14 Mayıs 2024
 
-**API আপডেট:**
+**API güncellemeleri:**
 
-- Gemini 1.5 Pro-এর জন্য 2M কনটেক্সট উইন্ডো চালু করা হয়েছে (অপেক্ষা তালিকা)।
-- Gemini 1.0 Pro-এর জন্য 'যখন ব্যবহার করবেন তখন পেমেন্ট করুন' [বিলিং](https://ai.google.dev/gemini-api/docs/billing?hl=bn) চালু করা হয়েছে, Gemini 1.5 Pro এবং Gemini 1.5 Flash-এর জন্য বিলিং শীঘ্রই চালু করা হবে।
-- Gemini 1.5 Pro-এর আসন্ন পেড টিয়ারের জন্য রেট লিমিট বাড়ানো হয়েছে।
-- [File API](https://ai.google.dev/api/rest/v1beta/files?hl=bn)-তে বিল্ট-ইন ভিডিও সাপোর্ট যোগ করা হয়েছে।
-- [File API](https://ai.google.dev/api/rest/v1beta/files?hl=bn)-তে প্লেন টেক্সট কাজ করে।
-- প্যারালাল ফাংশন কলিংয়ের জন্য সহায়তা যোগ করা হয়েছে, যা একবারে একাধিক কল
-  ফেরত পাঠায়।
+- Gemini 1.5 Pro için 2 milyon parçalık bağlam penceresi kullanıma sunuldu (bekleme listesi).
+- Gemini 1.0 Pro için kullandıkça öde [faturalandırması](https://ai.google.dev/gemini-api/docs/billing?hl=tr) kullanıma sunuldu. Gemini 1.5 Pro ve Gemini 1.5 Flash faturalandırması yakında kullanıma sunulacak.
+- Gemini 1.5 Pro'nun yakında kullanıma sunulacak ücretli katmanı için daha yüksek kullanım sınırları getirildi.
+- [File API](https://ai.google.dev/api/rest/v1beta/files?hl=tr)'ye yerleşik video desteği eklendi.
+- [File API](https://ai.google.dev/api/rest/v1beta/files?hl=tr)'ye düz metin desteği eklendi.
+- Aynı anda birden fazla çağrı döndüren paralel fonksiyon çağırma desteği eklendi.
 
-## ১০ মে, ২০২৪
+## 10 Mayıs 2024
 
-**মডেল আপডেট:**
+**Model güncellemeleri:**
 
-- প্রিভিউতে [Gemini 1.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#gemini-1.5-flash)
-  (`gemini-1.5-flash-latest`) রিলিজ করা হয়েছে।
+- [Gemini 1.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#gemini-1.5-flash) (`gemini-1.5-flash-latest`) önizleme sürümü kullanıma sunuldu.
 
-## ৯ এপ্রিল, ২০২৪
+## 9 Nisan 2024
 
-**মডেল আপডেট:**
+**Model güncellemeleri:**
 
-- প্রিভিউতে [Gemini 1.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#gemini-1.5-pro)
-  (`gemini-1.5-pro-latest`) রিলিজ করা হয়েছে।
-- নতুন টেক্সট এম্বেডিং মডেল, `text-embeddings-004` রিলিজ করা হয়েছে, যা 768-এর কম সাইজের
-  [ইলাস্টিক এম্বেডিং](https://ai.google.dev/gemini-api/docs/embeddings?hl=bn#elastic-embedding)
-  সাপোর্ট করে।
+- [Gemini 1.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#gemini-1.5-pro) (`gemini-1.5-pro-latest`) önizleme sürümü kullanıma sunuldu.
+- 768'in altındaki [esnek yerleştirme](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr#elastic-embedding) boyutlarını destekleyen yeni bir metin yerleştirme modeli (`text-embeddings-004`) kullanıma sunuldu.
 
-**API আপডেট:**
+**API güncellemeleri:**
 
-- প্রম্পটে ব্যবহারের জন্য সাময়িকভাবে মিডিয়া ফাইল স্টোর করতে [File API](https://ai.google.dev/api/rest/v1beta/files?hl=bn) রিলিজ করা হয়েছে।
-- টেক্সট, ছবি ও অডিও ডেটার মাধ্যমে প্রম্পট করার সুবিধা যোগ করা হয়েছে, যা
-  *মাল্টিমোডাল* প্রম্পটিং নামেও পরিচিত। আরও জানতে, [মিডিয়া সহ প্রম্পট করা](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=bn) দেখুন।
-- [সিস্টেম নির্দেশাবলী](https://ai.google.dev/gemini-api/docs/system-instructions?hl=bn)
-  বিটাতে রিলিজ করা হয়েছে।
-- যোগ করা হয়েছে
-  [ফাংশন কলিং মোড](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn#function_calling_mode),
-  যা ফাংশন কলিংয়ের জন্য এক্সিকিউশন আচরণকে সংজ্ঞায়িত করে।
-- `response_mime_type` কনফিগারেশন বিকল্পের জন্য সহায়তা যোগ করা হয়েছে, যা আপনাকে
-  [JSON ফর্ম্যাটে](https://ai.google.dev/gemini-api/docs/api-overview?hl=bn#json)
-  উত্তর দেওয়ার অনুরোধ করতে দেয়।
+- İstemlerde kullanılacak medya dosyalarını geçici olarak depolamak için [File API](https://ai.google.dev/api/rest/v1beta/files?hl=tr) kullanıma sunuldu.
+- *Çok formatlı* istem olarak da bilinen metin, resim ve ses verileriyle istem oluşturma desteği eklendi. Daha fazla bilgi edinmek için [Medyayla istem oluşturma](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=tr) başlıklı makaleyi inceleyin.
+- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/system-instructions?hl=tr) beta sürümünde kullanıma sunuldu.
+- İşlev çağrısının yürütme davranışını tanımlayan [işlev çağrısı modu](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#function_calling_mode) eklendi.
+- [JSON biçiminde](https://ai.google.dev/gemini-api/docs/api-overview?hl=tr#json) yanıt istemenize olanak tanıyan `response_mime_type` yapılandırma seçeneği için destek eklendi.
 
-## ১৯ মার্চ, ২০২৪
+## 19 Mart 2024
 
-**মডেল আপডেট:**
+**Model güncellemeleri:**
 
-- Google AI Studio-তে অথবা Gemini API-এর মাধ্যমে
-  [Gemini 1.0 Pro টিউনিং করার](https://developers.googleblog.com/en/tune-gemini-pro-in-google-ai-studio-or-with-the-gemini-api/)
-  জন্য সহায়তা যোগ করা হয়েছে।
+- Google AI Studio'da veya Gemini API ile [Gemini 1.0 Pro'yu ayarlama](https://developers.googleblog.com/en/tune-gemini-pro-in-google-ai-studio-or-with-the-gemini-api/) desteği eklendi.
 
-## ১৩ ডিসেম্বর ২০২৩
+## 13 Aralık 2023
 
-**মডেল আপডেট:**
+**Model güncellemeleri:**
 
-- gemini-pro: বিভিন্ন ধরনের টাস্কের জন্য নতুন টেক্সট মডেল। ক্ষমতা ও দক্ষতার
-  মধ্যে ভারসাম্য বজায় রাখে।
-- gemini-pro-vision: বিভিন্ন ধরনের টাস্কের জন্য নতুন মাল্টিমোডাল মডেল।
-  ক্ষমতা ও দক্ষতার মধ্যে ভারসাম্য বজায় রাখে।
-- embedding-001: নতুন এম্বেডিং মডেল।
-- aqa: একটি নতুন বিশেষভাবে টিউন করা মডেল যা প্রশ্নের উত্তর দেওয়ার জন্য প্রশিক্ষিত
-  জেনারেট করা উত্তর গ্রাউন্ডিং করার জন্য টেক্সট প্যাসেজ ব্যবহার করে।
+- gemini-pro: Çok çeşitli görevler için yeni metin modeli. Yetenek ve verimlilik arasında denge kurar.
+- gemini-pro-vision: Çok çeşitli görevler için yeni çok formatlı model.
+  Yetenek ve verimlilik arasında denge kurar.
+- embedding-001: Yeni yerleştirme modeli.
+- aqa: Oluşturulan yanıtları temellendirmek için metin pasajlarını kullanarak soruları yanıtlamak üzere eğitilmiş, özel olarak ayarlanmış yeni bir model.
 
-আরও তথ্যের জন্য [Gemini মডেল](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn) দেখুন।
+Daha fazla bilgi için [Gemini modelleri](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr) başlıklı makaleyi inceleyin.
 
-**API ভার্সন আপডেট:**
+**API sürümü güncellemeleri:**
 
-- v1: স্থিতিশীল API চ্যানেল।
-- v1beta: বিটা চ্যানেল। এই চ্যানেলে এমন ফিচার আছে যা
-  ডেভেলপ করা হচ্ছে।
+- v1: Kararlı API kanalı.
+- v1beta: Beta kanalı. Bu kanalda geliştirme aşamasında olabilecek özellikler var.
 
-আরও তথ্যের জন্য [API ভার্সন সংক্রান্ত বিষয়](https://ai.google.dev/gemini-api/docs/api-versions?hl=bn) দেখুন।
+Daha fazla bilgi için [API sürümleri konusuna](https://ai.google.dev/gemini-api/docs/api-versions?hl=tr) bakın.
 
-**API আপডেট:**
+**API güncellemeleri:**
 
-- `GenerateContent` হল চ্যাট ও টেক্সটের জন্য একটি একক ইউনিফায়েড এন্ডপয়েন্ট।
-- `StreamGenerateContent` পদ্ধতির মাধ্যমে স্ট্রিমিং উপলভ্য।
-- মাল্টিমোডাল ক্ষমতা: ছবি হল নতুন সমর্থিত মোডালিটি
-- নতুন বিটা ফিচার:
-  - [ফাংশন কলিং](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn)
+- `GenerateContent`, sohbet ve metin için tek bir birleştirilmiş uç noktadır.
+- `StreamGenerateContent` yöntemiyle akış yapılabilir.
+- Çok formatlı özellik: Resim, desteklenen yeni bir modalitedir.
+- Yeni beta özellikleri:
+  - [İşlev Çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)
   - Attributed Question Answering (AQA)
-- আপডেট করা ক্যান্ডিডেট সংখ্যা: Gemini মডেল শুধুমাত্র ১টি ক্যান্ডিডেট দেখায়।
-- বিভিন্ন Safety Settings এবং SafetyRating বিভাগ। আরও বিবরণের জন্য
-  [নিরাপত্তা সেটিংস](https://ai.google.dev/gemini-api/docs/safety-settings?hl=bn) দেখুন।
-- Gemini মডেলের জন্য টিউনিং মডেল এখনও কাজ করে না (কাজ চলছে)।
+- Güncellenen aday sayısı: Gemini modelleri yalnızca 1 aday döndürür.
+- Farklı SafetySettings ve SafetyRating kategorileri. Daha fazla bilgi için [güvenlik ayarlarına](https://ai.google.dev/gemini-api/docs/safety-settings?hl=tr) göz atın.
+- Modelleri ayarlama özelliği, Gemini modellerinde henüz desteklenmemektedir (çalışmalar devam etmektedir).
 
-মতামত জানান
+Geri bildirim gönderin
 
-অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-2026-10-14 UTC-তে শেষবার আপডেট করা হয়েছে।
+Son güncelleme tarihi: 2026-10-30 UTC.
 
-আমাদের আরও কিছু জানাতে চান?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-14 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-30 UTC."],[],[]]

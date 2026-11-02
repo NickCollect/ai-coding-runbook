@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=hi
-fetched_at: 2026-10-26T05:46:21.545420+00:00
-title: "\u0938\u0941\u0930\u0915\u094d\u0937\u093e \u0915\u0940 \u0938\u0947\u091f\u093f\u0902\u0917 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi
+fetched_at: 2026-11-02T07:27:52.949815+00:00
+title: "C\u00e0i \u0111\u1eb7t an to\u00e0n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-# सुरक्षा की सेटिंग
+# Cài đặt an toàn
 
-Gemini API में सुरक्षा से जुड़ी सेटिंग उपलब्ध हैं. प्रोटोटाइप बनाने के दौरान, इन सेटिंग में बदलाव किया जा सकता है. इससे यह तय किया जा सकता है कि आपके ऐप्लिकेशन के लिए, सुरक्षा से जुड़ी ज़्यादा पाबंदियां वाली या कम पाबंदियों वाली सेटिंग की ज़रूरत है या नहीं. फ़िल्टर की कैटगरी के हिसाब से, इन सेटिंग में बदलाव किया जा सकता है, ताकि कुछ तरह के कॉन्टेंट पर पाबंदी लगाई जा सके या उन्हें अनुमति दी जा सके.
+Gemini API cung cấp các chế độ cài đặt an toàn mà bạn có thể điều chỉnh trong giai đoạn tạo mẫu để xác định xem ứng dụng của bạn có cần cấu hình an toàn hạn chế hơn hay ít hạn chế hơn hay không. Bạn có thể điều chỉnh các chế độ cài đặt này trên các danh mục bộ lọc để hạn chế hoặc cho phép một số loại nội dung.
 
-इस गाइड में, इंटरैक्शन के लिए सुरक्षा से जुड़ी सेटिंग सेट करने का तरीका बताया गया है. साथ ही, यह भी बताया गया है कि कॉन्टेंट ब्लॉक होने पर क्या होता है और किन कैटगरी और थ्रेशोल्ड का इस्तेमाल किया जा सकता है.
+Hướng dẫn này trình bày cách thiết lập chế độ cài đặt an toàn cho một lượt tương tác, điều gì sẽ xảy ra khi nội dung bị chặn, cũng như những danh mục và ngưỡng mà bạn có thể sử dụng.
 
-## सुरक्षा से जुड़ी सेटिंग सेट करना
+## Thiết lập chế độ cài đặt an toàn
 
-कोई इंटरैक्शन बनाते समय, `safety_settings` की सूची पास करें. हर सेटिंग में, नुकसान की कैटगरी (`type`) को ब्लॉक करने के थ्रेशोल्ड (`threshold`) के साथ जोड़ा जाता है.
+Truyền một danh sách `safety_settings` khi bạn tạo một lượt tương tác. Mỗi chế độ cài đặt sẽ ghép một danh mục gây hại (`type`) với một ngưỡng chặn (`threshold`).
 
-यहां दिए गए उदाहरण में, नफ़रत फैलाने वाली भाषा (`hate_speech`) की कैटगरी को `block_low_and_above` पर सेट किया गया है. इससे, ऐसा कोई भी कॉन्टेंट ब्लॉक हो जाता है जिसमें नफ़रत फैलाने वाली भाषा होने की संभावना कम या ज़्यादा हो:
+Ví dụ sau đây đặt danh mục lời nói hận thù (`hate_speech`) thành `block_low_and_above`, chặn mọi nội dung có xác suất thấp hoặc cao hơn là lời nói hận thù:
 
 ### Python
 
@@ -108,7 +108,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -168,18 +168,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-हर कैटगरी के लिए, एक सेटिंग शामिल की जा सकती है. जिन कैटगरी के लिए सेटिंग सेट नहीं की जाती है उनके लिए, डिफ़ॉल्ट थ्रेशोल्ड का इस्तेमाल किया जाता है. Gemini 2.5 और इसके बाद के मॉडल के लिए, यह **बंद** होता है.
+Bạn có thể đưa vào một chế độ cài đặt cho mỗi danh mục. Các danh mục mà bạn không thiết lập sẽ sử dụng ngưỡng mặc định là **Tắt** đối với các mô hình Gemini 2.5 trở lên.
 
-## कॉन्टेंट ब्लॉक होने पर
+## Khi nội dung bị chặn
 
-अगर सुरक्षा से जुड़ा कोई फ़िल्टर, इनपुट या मॉडल के जवाब को ब्लॉक करता है, तो इंटरैक्शन में HTTP `400` गड़बड़ी होती है. ब्लॉक किया गया कॉन्टेंट वापस नहीं मिलता.
+Nếu một bộ lọc an toàn chặn dữ liệu đầu vào hoặc phản hồi của mô hình, thì lượt tương tác sẽ không thành công và gặp lỗi HTTP `400`. Nội dung bị chặn sẽ không được trả về.
 
-`code` गड़बड़ी से पता चलता है कि अनुरोध को क्यों ब्लॉक किया गया:
+`code` lỗi cho bạn biết lý do yêu cầu bị chặn:
 
-- `safety`: सुरक्षा से जुड़े किसी फ़िल्टर ने, इनपुट या जवाब को ब्लॉक कर दिया है.
-- `jailbreak`, `prohibited_content` या `blocklist`: इस वजह से, इनपुट को ब्लॉक किया गया है. `message` गड़बड़ी, `Input blocked:` से शुरू होती है.
+- `safety`: Dữ liệu đầu vào hoặc phản hồi đã bị bộ lọc an toàn chặn.
+- `jailbreak`, `prohibited_content` hoặc `blocklist`: Dữ liệu đầu vào đã bị chặn vì lý do đó. `message` lỗi bắt đầu bằng `Input blocked:`.
 
-उदाहरण के लिए:
+Ví dụ:
 
 ```
 {
@@ -190,76 +190,77 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-बैकग्राउंड इंटरैक्शन (`background=true`) के लिए, इंटरैक्शन की `status` को
-`failed` पर सेट किया जाता है. साथ ही, इसके `errors` की सूची में वही `code` और `message` दिखते हैं.
-स्ट्रीमिंग के दौरान, गड़बड़ी `error` इवेंट के तौर पर दिखती है.
+Đối với các lượt tương tác ở chế độ nền (`background=true`), `status` của lượt tương tác được
+đặt thành `failed` và cùng một `code` và `message` xuất hiện trong danh sách `errors`.
+Khi phát trực tuyến, lỗi sẽ xuất hiện dưới dạng sự kiện `error`.
 
-## सुरक्षा से जुड़े फ़िल्टर
+## Bộ lọc an toàn
 
-Gemini API के सुरक्षा से जुड़े ऐसे फ़िल्टर जिनमें बदलाव किया जा सकता है, इन कैटगरी को कवर करते हैं:
+Các bộ lọc an toàn có thể điều chỉnh của Gemini API bao gồm các danh mục sau:
 
-| कैटगरी | वैल्यू (एपीआई) | ब्यौरा |
+| Danh mục | Giá trị (API) | Mô tả |
 | --- | --- | --- |
-| उत्पीड़न | `harassment` | गाली-गलौज, धमकाने वाला या ऐसा कॉन्टेंट जिसका मकसद किसी को परेशान करना, तंग करना या उसका मज़ाक उड़ाना हो. |
-| नफ़रत फैलाने वाली भाषा | `hate_speech` | ऐसा कॉन्टेंट जिसमें कुछ खास विशेषताओं के आधार पर, किसी व्यक्ति या ग्रुप के ख़िलाफ़ हिंसा या नफ़रत को बढ़ावा दिया गया हो. |
-| अश्लील | `sexually_explicit` | ऐसा कॉन्टेंट जिसमें अश्लील चीज़ें शामिल हों. |
-| खतरनाक | `dangerous_content` | ऐसा कॉन्टेंट जो खतरनाक गतिविधियों को बढ़ावा देता है, उन्हें लागू करना आसान बनाता है या उन्हें बढ़ावा देता है. |
-| Jailbreak | `jailbreak` | ऐसे प्रॉम्प्ट जो सुरक्षा से जुड़े फ़िल्टर को बायपास करने के लिए डिज़ाइन किए गए हैं. |
+| Quấy rối | `harassment` | Nội dung lạm dụng, đe doạ hoặc có ý định bắt nạt, hành hạ hoặc chế giễu. |
+| Lời nói hận thù | `hate_speech` | Nội dung cổ xuý bạo lực hoặc kích động hận thù đối với cá nhân hoặc nhóm dựa trên một số thuộc tính. |
+| Nội dung khiêu dâm | `sexually_explicit` | Nội dung chứa tài liệu khiêu dâm. |
+| Nguy hiểm | `dangerous_content` | Nội dung cổ xuý, tạo điều kiện hoặc cho phép các hoạt động nguy hiểm. |
+| Jailbreak | `jailbreak` | Câu lệnh được thiết kế để bỏ qua bộ lọc an toàn. |
 
-अपने इस्तेमाल के हिसाब से, इन फ़िल्टर का इस्तेमाल करके यह तय किया जा सकता है कि कौनसी चीज़ें सही हैं. उदाहरण के लिए, अगर वीडियो गेम के लिए डायलॉग बनाए जा रहे हैं, तो हो सकता है कि गेम की प्रकृति की वजह से, *खतरनाक* के तौर पर रेटिंग वाले ज़्यादा कॉन्टेंट को अनुमति देना सही माना जाए.
+Bạn có thể sử dụng các bộ lọc này để điều chỉnh nội dung phù hợp với trường hợp sử dụng của mình. Ví dụ: nếu đang xây dựng đoạn hội thoại trong trò chơi điện tử, bạn có thể cho phép nhiều nội dung được xếp hạng là *Nguy hiểm* do tính chất của trò chơi.
 
-सुरक्षा से जुड़े ऐसे फ़िल्टर जिनमें बदलाव किया जा सकता है के अलावा, Gemini API में सुरक्षा से जुड़ी सुविधाएं भी शामिल हैं. इनकी मदद से, बच्चों की सुरक्षा को खतरे में डालने वाले कॉन्टेंट जैसे नुकसान पहुंचाने वाले कॉन्टेंट को ब्लॉक किया जा सकता है.
-इस तरह के नुकसान पहुंचाने वाले कॉन्टेंट को हमेशा ब्लॉक किया जाता है और इनमें बदलाव नहीं किया जा सकता.
+Ngoài các bộ lọc an toàn có thể điều chỉnh, Gemini API còn có các biện pháp bảo vệ tích hợp sẵn đối với các hành vi gây hại cốt lõi, chẳng hạn như nội dung gây nguy hiểm cho sự an toàn của trẻ em.
+Các loại hành vi gây hại này luôn bị chặn và không thể điều chỉnh.
 
-## ब्लॉक करने के थ्रेशोल्ड
+## Ngưỡng chặn
 
-मॉडल में सुरक्षा से जुड़ी सुविधाएं पहले से मौजूद होती हैं. इसलिए, अतिरिक्त फ़िल्टर डिफ़ॉल्ट रूप से **बंद** होते हैं.
-मॉडल का डिफ़ॉल्ट व्यवहार, ज़्यादातर इस्तेमाल के मामलों को कवर करता है. इसलिए, इन सेटिंग में बदलाव सिर्फ़ तब करें, जब आपके ऐप्लिकेशन के लिए इनकी ज़रूरत हो.
+Do tính an toàn vốn có của mô hình, các bộ lọc bổ sung sẽ **Tắt** theo mặc định.
+Hành vi mặc định của mô hình bao gồm hầu hết các trường hợp sử dụng, vì vậy, bạn chỉ nên điều chỉnh các chế độ cài đặt này nếu ứng dụng của bạn luôn yêu cầu.
 
-यहां दी गई टेबल में, हर कैटगरी के लिए सेट किए जा सकने वाले थ्रेशोल्ड के बारे में बताया गया है. उदाहरण के लिए, अगर **नफ़रत फैलाने वाली भाषा** को **कुछ को ब्लॉक करें** (`block_only_high`) पर सेट किया जाता है, तो ऐसा कॉन्टेंट ब्लॉक हो जाता है जिसमें नफ़रत फैलाने वाली भाषा होने की संभावना ज़्यादा होती है. वहीं, कम संभावना वाले कॉन्टेंट को अनुमति दी जाती है.
+Bảng sau đây mô tả các ngưỡng mà bạn có thể thiết lập cho từng danh mục. Ví dụ: nếu bạn đặt **Lời nói hận thù** thành **Chặn một số** (`block_only_high`), thì nội dung có xác suất cao là lời nói hận thù sẽ bị chặn và mọi nội dung có xác suất thấp hơn sẽ được cho phép.
 
-| थ्रेशोल्ड (Google AI Studio) | थ्रेशोल्ड (एपीआई) | ब्यौरा |
+| Ngưỡng (Google AI Studio) | Ngưỡng (API) | Mô tả |
 | --- | --- | --- |
-| बंद है | `off` | सुरक्षा से जुड़े फ़िल्टर को बंद करें |
-| कुछ को ब्लॉक करें | `block_only_high` | जब असुरक्षित कॉन्टेंट होने की संभावना ज़्यादा हो, तब ब्लॉक करें |
-| कुछ को ब्लॉक करें | `block_medium_and_above` | जब असुरक्षित कॉन्टेंट होने की संभावना मध्यम या ज़्यादा हो, तब ब्लॉक करें |
-| ज़्यादातर को ब्लॉक करें | `block_low_and_above` | जब असुरक्षित कॉन्टेंट होने की संभावना कम, मध्यम या ज़्यादा हो, तब ब्लॉक करें |
+| Tắt | `off` | Tắt bộ lọc an toàn |
+| Chặn một số | `block_only_high` | Chặn khi có xác suất cao về nội dung không an toàn |
+| Chặn một số | `block_medium_and_above` | Chặn khi có xác suất trung bình hoặc cao về nội dung không an toàn |
+| Chặn hầu hết | `block_low_and_above` | Chặn khi có xác suất thấp, trung bình hoặc cao về nội dung không an toàn |
 
-### संभावना बनाम गंभीरता
+### Xác suất so với mức độ nghiêm trọng
 
-Gemini API, कॉन्टेंट के असुरक्षित होने की संभावना को ज़्यादा, मध्यम, कम या न के बराबर के तौर पर रेट करता है. यह कॉन्टेंट को, नुकसान की गंभीरता के आधार पर नहीं, बल्कि उसकी संभावना के आधार पर ब्लॉक करता है. ऐसा हो सकता है कि कुछ कॉन्टेंट के असुरक्षित होने की संभावना कम हो, लेकिन उससे होने वाला नुकसान गंभीर हो सकता है. उदाहरण के लिए, इन वाक्यों की तुलना करें:
+Gemini API đánh giá xác suất nội dung không an toàn là cao, trung bình, thấp hoặc không đáng kể. API này chặn nội dung dựa trên xác suất đó, chứ không dựa trên mức độ nghiêm trọng của hành vi gây hại. Một số nội dung có thể có xác suất thấp là không an toàn mặc dù hành vi gây hại có thể nghiêm trọng. Ví dụ: hãy so sánh các câu sau:
 
-1. रोबोट ने मुझे मुक्का मारा.
-2. रोबोट ने मुझे काट डाला.
+1. Robot đã đấm tôi.
+2. Robot đã chém tôi.
 
-पहले वाक्य के असुरक्षित होने की संभावना ज़्यादा हो सकती है, लेकिन आपको दूसरा वाक्य ज़्यादा गंभीर लग सकता है. ध्यान से टेस्ट करके, ब्लॉक करने का वह लेवल ढूंढें जो आपके इस्तेमाल के मामले के लिए सही हो. साथ ही, यह भी पक्का करें कि इससे उपयोगकर्ताओं को कम से कम नुकसान हो.
+Câu đầu tiên có thể có xác suất cao hơn là không an toàn, nhưng bạn có thể cho rằng câu thứ hai nghiêm trọng hơn. Hãy kiểm thử cẩn thận để tìm mức chặn hỗ trợ trường hợp sử dụng của bạn đồng thời giảm thiểu tác hại cho người dùng cuối.
 
-## Google AI Studio में सुरक्षा से जुड़ी सेटिंग में बदलाव करना
+## Điều chỉnh chế độ cài đặt an toàn trong Google AI Studio
 
-**रन सेटिंग** पैनल में, **अडवांस सेटिंग** में जाकर, **सुरक्षा से जुड़ी सेटिंग** पर क्लिक करें. इससे, **सुरक्षा से जुड़ी सेटिंग चलाएं** मॉडल खुलेगा. मॉडल में, स्लाइडर का इस्तेमाल करके, सुरक्षा की हर कैटगरी के हिसाब से, कॉन्टेंट को फ़िल्टर करने के लेवल में बदलाव किया जा सकता है:
+Nhấp vào **Chế độ cài đặt an toàn** trong phần **Chế độ cài đặt nâng cao** trên bảng điều khiển **Chạy chế độ cài đặt** để mở cửa sổ **Chạy chế độ cài đặt an toàn**. Trong cửa sổ này, bạn có thể sử dụng thanh trượt để điều chỉnh mức lọc nội dung theo từng danh mục an toàn:
 
-![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=hi)
+![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=vi)
 
-कोई अनुरोध भेजने पर (उदाहरण के लिए, मॉडल से कोई सवाल पूछने पर), अगर अनुरोध का
-कॉन्टेंट ब्लॉक किया जाता है, तो
-warning **कॉन्टेंट ब्लॉक किया गया** की चेतावनी वाला मैसेज दिखता है. ज़्यादा जानकारी देखने के लिए, **कॉन्टेंट ब्लॉक किया गया** टेक्स्ट पर कर्सर घुमाएं. इससे, कैटगरी और नुकसान की कैटगरी तय करने की संभावना दिखेगी.
+Khi bạn gửi yêu cầu (ví dụ: bằng cách hỏi mô hình một câu hỏi), thông báo
+warning **Nội dung bị chặn** sẽ xuất hiện nếu nội dung của yêu cầu
+bị chặn. Để xem thêm thông tin chi tiết, hãy di chuột qua văn bản **Nội dung bị chặn** để xem danh mục và xác suất phân loại hành vi gây hại.
 
-## अगले चरण
+## Các bước tiếp theo
 
-- पूरे एपीआई के बारे में ज़्यादा जानने के लिए, [इंटरैक्शन एपीआई के बारे में जानकारी](https://ai.google.dev/api/interactions-api?hl=hi)
-  देखें.
-- एलएलएम का इस्तेमाल करके डेवलपमेंट करते समय, सुरक्षा से जुड़ी बातों को समझने के लिए, [सुरक्षा से जुड़ी गाइडलाइन](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=hi) देखें.
-- संभावना बनाम गंभीरता का आकलन करने के बारे में ज़्यादा जानने के लिए, [Jigsaw
-  टीम](https://developers.perspectiveapi.com/s/about-the-api-score) से संपर्क करें.
-- [Perspective
-  API](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7) जैसे सुरक्षा समाधानों में योगदान देने वाले प्रॉडक्ट के बारे में ज़्यादा जानें.
+- Xem tài liệu tham khảo về API [Tương tác](https://ai.google.dev/api/interactions-api?hl=vi)
+  để tìm hiểu thêm về toàn bộ API.
+- Xem [hướng dẫn về an toàn](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=vi) để biết tổng quan về các yếu tố cần cân nhắc về an toàn
+  khi phát triển bằng mô hình ngôn ngữ lớn (LLM).
+- Tìm hiểu thêm về cách đánh giá xác suất so với mức độ nghiêm trọng từ nhóm [Jigsaw](https://developers.perspectiveapi.com/s/about-the-api-score).
+- Tìm hiểu thêm về các sản phẩm góp phần vào các giải pháp an toàn như
+  [Perspective
+  API](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7).
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-आखिरी बार 2026-10-15 (UTC) को अपडेट किया गया.
+Cập nhật lần gần đây nhất: 2026-10-15 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-10-15 (UTC) को अपडेट किया गया."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-15 UTC."],[],[]]

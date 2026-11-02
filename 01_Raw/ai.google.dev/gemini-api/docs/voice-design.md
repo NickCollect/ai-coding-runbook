@@ -1,34 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/voice-design?hl=hi
-fetched_at: 2026-10-26T05:41:46.314747+00:00
-title: "\u0906\u0935\u093e\u091c\u093c \u0915\u093e \u0921\u093f\u091c\u093c\u093e\u0907\u0928 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/voice-design?hl=it
+fetched_at: 2026-11-02T07:31:06.596876+00:00
+title: "Progettazione vocale \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
+Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-सुझाव भेजें
+Invia feedback
 
-# आवाज़ का डिज़ाइन
+# Progettazione vocale
 
-आवाज़ डिज़ाइन करने की सुविधा की मदद से, Gemini API के Voices एंडपॉइंट (`POST /v1beta/voices`) का इस्तेमाल करके, नैचुरल लैंग्वेज में दिए गए ब्यौरे से एक नया और स्थायी वोकल पर्सोना बनाया जा सकता है. पहले से मौजूद आवाज़ों या रेफ़रंस ऑडियो रिकॉर्ड करने के बजाय, किसी कैरेक्टर की उम्र, आवाज़, लहजे, और बोलने के तरीके के बारे में बताया जा सकता है. इसके बाद, आपको एक ऐसा `voice_...` आईडी मिलेगा जिसका दोबारा इस्तेमाल किया जा सकता है. यह आईडी आपके प्रोजेक्ट में सेव होगा.
+La progettazione della voce ti consente di creare una nuova persona vocale persistente a partire da una
+descrizione in linguaggio naturale utilizzando l'endpoint Voci dell'API Gemini
+(`POST /v1beta/voices`). Invece di essere limitato a voci predefinite o
+alla registrazione di audio di riferimento, puoi descrivere l'età, il timbro vocale,
+l'accento e la dizione di base di un personaggio e ricevere un ID `voice_...` riutilizzabile salvato nel
+tuo progetto.
 
-कस्टम आवाज़ों को डिज़ाइन करने, उन्हें आज़माने, और उनमें बदलाव करने का सबसे तेज़ तरीका है [Google AI Studio](https://aistudio.google.com/generate-speech?hl=hi) में मौजूद इंटरैक्टिव **वॉइस डिज़ाइन** स्टूडियो का इस्तेमाल करना. टेक्स्ट प्रॉम्प्ट से कस्टम पर्सोना जनरेट किए जा सकते हैं. साथ ही, सैंपल स्क्रिप्ट की मदद से उनकी जांच की जा सकती है. इसके अलावा, जनरेट हुए `voice_...` आईडी को सीधे अपने ऐप्लिकेशन कोड में कॉपी किया जा सकता है.
+Il modo più rapido per progettare, testare e perfezionare voci personalizzate è utilizzare lo studio interattivo **Voice Design** in [Google AI Studio](https://aistudio.google.com/generate-speech?hl=it). Puoi
+generare persona personalizzate da prompt di testo, testarle con script di esempio e
+copiare l'ID `voice_...` risultante direttamente nel codice dell'applicazione.
 
-[Google AI Studio में आज़माएं](https://aistudio.google.com/generate-speech?hl=hi)
+[Prova in Google AI Studio](https://aistudio.google.com/generate-speech?hl=it)
 
-[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=hi) (`gemini-3.8-flash-tts`) और [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=hi) (`gemini-3.8-flash-lite-tts`), दोनों में वॉइस डिज़ाइन की सुविधा काम करती है.
+Sia [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=it)
+(`gemini-3.8-flash-tts`) sia
+[Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=it)
+(`gemini-3.8-flash-lite-tts`) supportano la progettazione vocale.
 
-## डिजाइन की गई आवाज़ बनाना
+## Creare una voce progettata
 
-टेक्स्ट के ब्यौरे से कस्टम आवाज़ बनाने के लिए, Google GenAI SDK (`google-genai` 2.25.0+ / `@google/genai` 2.24.0+) या REST API का इस्तेमाल करें. `"prompted"` आवाज़ों के लिए, `voices.create` (`CreateVoice`) और `voices.get` (`GetVoice`), दोनों ही आउटपुट-ओनली `sample_audio` फ़ील्ड (`mime_type: "audio/wav"`, base64-encoded `data`) दिखाते हैं, ताकि जनरेट की गई आवाज़ को तुरंत सुना जा सके:
+Utilizza l'SDK Google GenAI (`google-genai` 2.25.0+ / `@google/genai` 2.24.0+) o l'API REST
+per creare una voce personalizzata da una descrizione testuale. Per le voci `"prompted"`, sia
+`voices.create` (`CreateVoice`) che `voices.get` (`GetVoice`) restituiscono un
+campo `sample_audio` di solo output (`mime_type: "audio/wav"`, `data` codificato in base64) in modo da poter ascoltare immediatamente la voce generata:
 
 ### Python
 
@@ -121,15 +134,18 @@ curl "https://generativelanguage.googleapis.com/v1beta/voices" \
   }' | tee created_voice.json | jq -r '.sample_audio.data' | base64 --decode > voice_preview.wav
 ```
 
-## आवाज़ के डिज़ाइन की सुविधा कैसे काम करती है
+## Come funziona la progettazione vocale
 
-1. **प्रॉम्प्ट के हिसाब से आवाज़ बनाना:** `type="prompted"` और `store=True` के साथ `voices.create` (`POST /v1beta/voices`) को कॉल करें.
-2. **स्थायी `voice_id` और `sample_audio` की झलक पाना:** एपीआई, आवाज़ की पहचान जनरेट करता है और उसे आपके प्रोजेक्ट में सेव करता है. साथ ही, एक स्थायी आईडी (उदाहरण के लिए, `voice_abc123...`) और `sample_audio` (`mime_type: "audio/wav"`, base64-encoded `data`) दिखाता है. इसमें आवाज़ की जनरेट की गई झलक का ऑडियो होता है.
-3. **स्पीच सिंथेसाइज़ करना:** सिंथेसिस के अनुरोधों में, `voice_id` को उस जगह पर पास करें जहां आवाज़ का नाम स्वीकार किया जाता है.
+1. **Crea un prompt vocale:** chiama `voices.create` (`POST /v1beta/voices`)
+   con `type="prompted"` e `store=True`.
+2. **Ricevi un `voice_id` e un'anteprima `sample_audio` permanenti**:l'API genera l'identità vocale, la memorizza nel tuo progetto e restituisce un ID permanente (ad esempio `voice_abc123...`) insieme a `sample_audio` (`mime_type: "audio/wav"`, `data` codificato in base64) contenente l'audio di anteprima generato per la voce.
+3. **Sintetizza la voce**:passa `voice_id` ovunque sia accettato un nome di voce
+   nelle tue richieste di sintesi.
 
-## अपनी आवाज़ में टेक्स्ट को बोलकर सुनाना
+## Sintetizzare il parlato con la voce che hai progettato
 
-आवाज़ बनाने के बाद, उसे Interactions API को पास करें. इसके लिए, `id` (`voice_...`) का इस्तेमाल करें, ताकि आवाज़ जनरेट की जा सके:
+Una volta creata una voce, passa il relativo `id` (`voice_...`) all'API Interactions
+per generare la sintesi vocale:
 
 ### Python
 
@@ -228,14 +244,19 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }' | jq -r '[.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio")] | last | .data' | base64 --decode > out.wav
 ```
 
-## अपनी आवाज़ें मैनेज करना
+## Gestire le voci
 
-Voices API का इस्तेमाल करके, सेव की गई आवाज़ों को कभी भी सूची में देखा जा सकता है, फ़िल्टर किया जा सकता है, उनकी जांच की जा सकती है, और उन्हें मिटाया जा सकता है. सभी फ़िल्टर पैरामीटर के लिए, [आवाज़ की बड़ी लाइब्रेरी और फ़िल्टर करने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi#voice-library) देखें.
+Puoi elencare, filtrare, esaminare ed eliminare le voci memorizzate in qualsiasi momento utilizzando
+l'API Voices (consulta
+[Libreria di voci estesa e filtri](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it#voice-library)
+per tutti i parametri di filtro).
 
-- **स्टोरेज की सीमाएं और टीटीएल:** स्टेटफ़ुल आवाज़ों (`store=True`, प्रॉम्प्ट की गई और रेप्लिका की गई आवाज़ों के साथ शेयर की जाती हैं) के लिए, **हर प्रोजेक्ट में 200 आवाज़ों** की सीमा होती है. साथ ही, इनके लिए **एक साल का टीटीएल** (टाइम-टू-लाइव) होता है.
-- **`sample_audio` availability:** `voices.create()` (`CreateVoice`) और
-  `voices.get()` (`GetVoice`) `"prompted"` आवाज़ों के लिए, `sample_audio` (`mime_type:
-  "audio/wav"`, base64-encoded `data`) की वैल्यू भरते हैं. लिस्टिंग को छोटा रखने के लिए, `voices.list()` (`ListVoices`) `sample_audio` को शामिल नहीं करता है. साथ ही, `"replicated"` और `"prebuilt"` आवाज़ों के लिए `sample_audio` को सेट नहीं किया जाता है.
+- **Limiti di archiviazione e TTL**:le voci con stato (`store=True`, condivise tra le voci richieste e replicate) hanno un limite di **200 voci per progetto** e un **TTL di 1 anno** (durata).
+- **Disponibilità di `sample_audio`:** `voices.create()` (`CreateVoice`) e
+  `voices.get()` (`GetVoice`) compilano `sample_audio` (`mime_type:
+  "audio/wav"`, `data` codificato in base64) per le voci `"prompted"`. Per mantenere
+  la scheda leggera, `voices.list()` (`ListVoices`) omette `sample_audio`
+  (e `sample_audio` non è impostato per le voci `"replicated"` e `"prebuilt"`).
 
 ### Python
 
@@ -301,25 +322,26 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/voices/voice_YO
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## आवाज़ के डिज़ाइन के लिए प्रॉम्प्ट लिखने के सबसे सही तरीके
+## Best practice per la creazione di prompt per la progettazione vocale
 
-- **आवाज़ के डिज़ाइन में, आवाज़ की स्थायी विशेषताओं को शामिल करें, न कि `style` में:** `voices.create` में आवाज़ बनाते समय, आवाज़ की
-  स्थायी विशेषताओं के बारे में बताएं. जैसे, उम्र, लिंग, टिंबर, वोकल टेक्सचर, और
-  क्षेत्रीय लहजा.
-- **किसी खास स्थिति में अपनी भावनाएं ज़ाहिर करने के लिए `speech_metadata.style` का इस्तेमाल करें:** कस्टम वॉइस बनाने के बाद, छोटे `style` प्रॉम्प्ट का इस्तेमाल करें. उदाहरण के लिए, `"whispered urgently"` या `"cheerful and energetic"`. इससे स्पीकर की मुख्य पहचान बदले बिना, बारी-बारी से ऐक्टिंग की जा सकेगी.
-- **सटीक और कम शब्दों में जानकारी दें:** एक या दो वाक्यों में साफ़ तौर पर जानकारी दें. जैसे, *"30 साल की एक महिला, जो खेल के बारे में उत्साह के साथ जानकारी देती है और जिसका लहजा मिडवेस्टर्न है"*. इससे, विरोधाभासी या बहुत लंबे पैराग्राफ़ की तुलना में ज़्यादा सटीक और बेहतर नतीजे मिलते हैं.
+- **Inserisci le caratteristiche vocali permanenti nella progettazione della voce, non in `style`:** definisci le caratteristiche immutabili, come età, genere, timbro, struttura vocale e accento regionale, quando crei la voce in `voices.create`.
+- **Riserva `speech_metadata.style` per l'emozione situazionale**:una volta creata la tua voce personalizzata, utilizza prompt brevi `style` (ad esempio, `"whispered urgently"` o `"cheerful and energetic"`) per guidare la recitazione passo passo senza alterare l'identità principale dell'oratore.
+- **Sii specifico e conciso**:una descrizione chiara di 1-2 frasi (ad esempio
+  *"Una telecronista sportiva energica e frizzante sui 30 anni con un leggero accento del Midwest"*) produce risultati più puliti e coerenti rispetto a paragrafi contraddittori o troppo lunghi.
 
-## आगे क्या करना है
+## Passaggi successivi
 
-- [आवाज़ की नकल बनाने की सुविधा](https://ai.google.dev/gemini-api/docs/voice-replication?hl=hi) का इस्तेमाल करके, किसी मौजूदा स्पीकर की आवाज़ की नकल बनाने का तरीका जानें.
-- [टेक्स्ट को ऑडियो में बदलने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi) में, टर्न-लेवल स्टाइलिंग, इनलाइन टैग, और एक से ज़्यादा स्पीकर वाले डायलॉग के बारे में जानें.
+- Scopri come replicare la voce di un oratore esistente nella
+  [replica vocale](https://ai.google.dev/gemini-api/docs/voice-replication?hl=it).
+- Scopri lo stile a livello di turno, i tag in linea e il dialogo con più relatori nella
+  [guida Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it).
 
-सुझाव भेजें
+Invia feedback
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया.
+Ultimo aggiornamento 2026-09-24 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Vuoi dirci altro?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-24 UTC."],[],[]]

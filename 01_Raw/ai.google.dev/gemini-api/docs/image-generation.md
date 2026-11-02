@@ -1,101 +1,94 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=tr
-fetched_at: 2026-10-26T05:53:42.662417+00:00
+source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-TW
+fetched_at: 2026-11-02T07:14:46.594116+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Geri bildirim gönderin
+提供意見
 
-# Nano Banana ile görüntü üretme
+# Nano Banana 圖像生成功能
 
-Tam işlevli, kullanıcı arayüzü eksiksiz uygulamaların prototipini oluşturmak için istem girin ve Nano Banana 2'nin gerçek dünya araçları, verileri ve Gemini ekosistemiyle entegre edildiğini görün. Üstelik tek bir kod satırı yazmadan.
+只要輸入提示，就能製作功能齊全、使用者介面完整的應用程式原型，並瞭解 Nano Banana 2 如何與實際工具、資料和 Gemini 生態系統整合。而且完全不用編寫程式碼。
 
-- Dilerseniz istemleri kullanarak kendi uygulamanızı oluşturabilirsiniz:
+- 您也可以使用提示詞自行建構：
 
-- ![dergi](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
-  ![londra](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
-  ![geri yükle](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
-  ![muz](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
-  ![kafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
-  ![makale](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
-  ![köpek](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
-  ![izometrik](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
-- ![dergi](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+- ![雜誌](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+  ![倫敦](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  ![restore](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  ![香蕉](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
+  ![咖啡廳](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  ![冠詞](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  ![狗](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  ![等距](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+- ![雜誌](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
 
-  Nano Banana 2 tarafından üretildi
+  由 Nano Banana 2 生成
 
-  **İstem:** "Parlak bir dergi kapağının fotoğrafı. Minimalist mavi kapakta büyük ve kalın Nano Banana yazıyor. Metin, serif yazı tipinde ve görünümü dolduruyor. Başka metin yok. Metnin önünde, şık ve minimalist bir elbise giymiş bir kişinin portresi var. Odak noktası olan 2 rakamını eğlenceli bir şekilde tutuyor.
+  **提示：**「一張光面雜誌封面的相片，簡約的藍色封面上有粗體大字『Nano Banana』。文字採用 Serif 字型，填滿整個畫面。不含其他文字。文字前方有一張肖像照，主角穿著簡約時尚的洋裝。她俏皮地拿著數字 2，這是視覺焦點。
     
-  Köşeye barkodla birlikte sayı ve "Şubat 2026" tarihini ekleyin. Dergi, tasarımcı mağazasında turuncu sıvalı bir duvarın önündeki rafta duruyor."
-- ![londra](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  在角落加上期數和「2026 年 2 月」日期，並附上條碼。雜誌放在設計師商店的架子上，背景是橘色石膏牆。」
+- ![倫敦](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
 
-  Nano Banana Pro ile üretildi
+  由 Nano Banana Pro 生成
 
-  **İstem:** "Londra'nın en ikonik simge yapılarını ve mimari unsurlarını içeren, 45 derecelik yukarıdan bakış açılı net bir izometrik minyatür 3D çizgi film sahnesi oluştur. Gerçekçi PBR malzemeleri ve yumuşak, gerçekçi ışıklandırma ve gölgelerle yumuşak, zarif dokular kullanın. Yoğun bir atmosferik ruh hali oluşturmak için mevcut hava koşullarını doğrudan şehir ortamına entegre edin. Yumuşak ve tek renkli bir arka planla temiz ve minimalist bir kompozisyon kullan. En üstte ortada büyük ve kalın harflerle "Londra" başlığını, altında belirgin bir hava durumu simgesini, ardından tarihi (küçük metin) ve sıcaklığı (orta boy metin) yerleştirin. Tüm metinler, tutarlı aralıklarla ortalanmalı ve binaların üst kısımlarıyla hafifçe çakışabilir."
+  **提示：**「呈現一個清楚的 45 度俯視等角迷你 3D 卡通倫敦場景，包含最具代表性的地標和建築元素。使用柔和精緻的紋理、逼真的 PBR 材質，以及柔和寫實的光影。直接將當前天氣狀況融入城市環境，營造身歷其境的氛圍。採用簡潔、極簡的構圖，搭配柔和的純色背景。在頂端中央，以大型粗體文字顯示標題「倫敦」，下方是醒目的天氣圖示，接著是日期 (小型文字) 和溫度 (中型文字)。所有文字都必須置中，間距一致，且可稍微與建築物頂端重疊。」
 - ![quetzal](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
 
-  Nano Banana 2 tarafından üretildi
+  由 Nano Banana 2 生成
 
-  **İstem:** "Görsel arama kullanarak parlak bir ketsal kuşunun doğru resimlerini bul. Bu kuşun, yukarıdan aşağıya doğal bir renk geçişi ve minimal bir kompozisyonla 3:2 oranında güzel bir duvar kağıdını oluştur."
-- ![muz](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
+  **提示：**「使用圖片搜尋功能，找出鳳頭綠咬鵑的準確圖片。請為這隻鳥建立一張精美的 3:2 桌布，採用自然的由上而下漸層效果，並盡量簡化構圖。」
+- ![香蕉](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
 
-  Nano Banana Pro ile üretildi
+  由 Nano Banana Pro 生成
 
-  **İstem:** "Bu logoyu muz kokulu bir parfümün üst düzey reklamına yerleştir. Logo, şişeye mükemmel şekilde entegre edilmiş."
-- ![kafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  **提示：**「將這個標誌放在香蕉香水的高級廣告上。標誌與瓶身完美融合。」
+- ![咖啡廳](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
 
-  Nano Banana Pro ile üretildi
+  由 Nano Banana Pro 生成
 
-  **İstem:** "Kahvaltı servisi yapan kalabalık bir kafedeki günlük bir sahnenin fotoğrafı. Ön planda mavi saçlı bir anime karakteri var. Kişilerden biri kalemle çizilmiş, diğeri ise kil animasyon karakteri.
-- ![makale](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  **提示：**「一張相片，呈現繁忙咖啡廳供應早餐的日常場景。前景中有一名藍髮動漫男子，其中一人是鉛筆素描，另一人是黏土動畫人物」
+- ![冠詞](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
 
-  Nano Banana Pro ile üretildi
+  由 Nano Banana Pro 生成
 
-  **İstem:** "Gemini 3 Flash'in kullanıma sunulmasının nasıl karşılandığını bulmak için aramayı kullan. Bu bilgileri kullanarak konuyla ilgili kısa bir makale yaz (başlıklarla birlikte). Makalenin, tasarıma odaklanan parlak bir dergide göründüğü şeklinin fotoğrafını döndür. Bu resimde, Gemini 3 Flash ile ilgili makalenin yer aldığı, katlanmış tek bir sayfa gösteriliyor. Bir hero fotoğrafı. Başlık, serif yazı tipiyle yazılmış."
-- ![köpek](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  **提示：**「搜尋 Gemini 3 Flash 推出後的評價，請根據這項資訊撰寫一篇短文 (含標題)，請提供這篇文章在設計雜誌中的相片。這張相片顯示摺疊的單一頁面，內容是關於 Gemini 3 Flash 的文章。一張主頁橫幅相片。Headline in serif."
+- ![狗](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
 
-  Nano Banana Pro ile üretildi
+  由 Nano Banana Pro 生成
 
-  **İstem:** "Sevimli bir köpeği temsil eden simge. Arka plan beyaz olmalı. Simgeleri renkli ve dokunma hissi uyandıran 3D tarzında oluştur. Metin yok."
-- ![izometrik](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+  **提示：**「代表可愛小狗的圖示。背景為白色。以色彩繽紛、觸感逼真的 3D 風格製作圖示。沒有文字。」
+- ![等距](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
 
-  Nano Banana 2 tarafından üretildi
+  由 Nano Banana 2 生成
 
-  **İstem:** "Tamamen izometrik bir fotoğraf oluştur. Bu bir minyatür değil, sadece mükemmel bir şekilde izometrik olan bir fotoğraf. Bu, güzel bir modern bahçenin fotoğrafı. Büyük bir 2 şeklinde havuz ve "Nano Banana 2" yazısı var."
+  **提示：**「生成一張完美等角的相片。這不是微縮模型，而是剛好完美等角的相片。這張相片呈現美麗的現代花園。畫面中有一個大型的 2 字形泳池，以及「Nano Banana 2」字樣。
 
-**Nano Banana**, Gemini'ın yerel görüntü üretme özelliklerinin adıdır.
-Gemini, metin, resim, video veya bunların kombinasyonuyla etkileşimli olarak resim oluşturabilir ve işleyebilir. Bu sayede, görselleri benzeri görülmemiş bir kontrolle oluşturabilir, düzenleyebilir ve yineleyebilirsiniz.
+**Nano Banana** 是 Gemini 原生圖像生成功能的名稱。
+Gemini 可透過對話互動，生成及處理文字、圖像、影片或組合圖像。您可以使用文字、圖像或圖文組合來提示 Gemini，自由創作、編輯和反覆調整視覺內容，享有前所未有的掌控力。
 
-## Model seçimi
+## 多種模型供您選擇
 
-Nano Banana, Gemini API'de bulunan aşağıdaki modelleri ifade eder:
+Nano Banana 是指 Gemini API 提供的下列模型：
 
-- **Nano Banana 2.1 ([Gemini Nano Banana 2.1](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=tr))
-  (`gemini-nano-banana-2.1`):** Nano Banana 2'nin güncellenmiş sürümü. Görüntü üretme ve
-  sohbete dayalı düzenleme için kullanılan birincil yüksek verimli modeldir. 1.000, 2.000 ve 4.000 çözünürlükte daha iyi görsel kalite, metin oluşturma, çok aşamalı etkileşim tutarlılığı ve Google Arama'da temellendirme sunarken Flash düzeyinde hız ve maliyet verimliliğini korur.
-- **Nano Banana 2 Lite ([Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=tr))
-  (`gemini-3.1-flash-lite-image`):** Hız ve maliyetin temel operasyonel kısıtlamalar olduğu durumlarda hız ve ölçek için tasarlanmış en hızlı ve en ucuz Gemini görüntü modelidir. Birden fazla referans girişi veya çok aşamalı etkileşimli sıralı düzenleme için optimize edilmemiştir.
-- **Nano Banana 2 ([Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=tr))
-  (`gemini-3.1-flash-image`):** Hızı 4K görüntü üretimi, dünya bilgisi ve çok referanslı görüntü tutarlılığı ile dengeleyen, önceki nesil yüksek verimli iş modeli. Tüm yeni projelerde Nano Banana 2.1'in kullanılması önerilir.
-- **Nano Banana Pro ([Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=tr))
-  (`gemini-3-pro-image`):** En karmaşık görsel görevler için premium seçenek. En yüksek düzeyde dünya bilgisi, gelişmiş yerelleştirme, doğru marka tutarlılığı ve hassas yaratıcı kontrol sunar.
-- **Nano Banana ([Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=tr))
-  (`gemini-2.5-flash-image`):** Nano Banana serisinin eski öncüsü.
-  Güvenilir bir araç olsa da gelişmiş kalite, daha hızlı üretim ve daha düşük API fiyatlandırması için Nano Banana 2 Lite'a geçiş yapmanız önerilir.
+- **Nano Banana 2.1 ([Gemini Nano Banana 2.1](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=zh-tw)) (`gemini-nano-banana-2.1`)：**Nano Banana 2 的更新版本，是圖像生成和對話式編輯的主要高效能工作模型。這款模型維持 Flash 等級的速度和成本效益，同時提升視覺品質、文字顯示效果、多輪對話一致性，並在 1K、2K 和 4K 解析度下，提供 Google 搜尋基準。
+- **Nano Banana 2 Lite ([Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=zh-tw)) (`gemini-3.1-flash-lite-image`)：**速度最快、成本最低的 Gemini 圖像模型，專為速度和規模而設計，適合速度和成本為主要營運限制的情況。不適合用於多個參考輸入內容，或多輪連續編輯。
+- **Nano Banana 2 ([Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=zh-tw)) (`gemini-3.1-flash-image`)：**前一代的高效率主力模型，兼顧速度與 4K 生成、世界知識和多參考圖像一致性。建議所有新專案都使用 Nano Banana 2.1。
+- **Nano Banana Pro ([Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=zh-tw)) (`gemini-3-pro-image`)：**處理最複雜視覺任務的頂級選擇，提供最高水準的世界知識、進階本地化、精確的品牌一致性，以及精準的創意控制。
+- **Nano Banana ([Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=zh-tw)) (`gemini-2.5-flash-image`)：**Nano Banana 系列的先驅。雖然這個模型可靠耐用，但建議遷移至 Nano Banana 2 Lite，體驗更優異的品質、更快的生成速度，以及更低的 API 定價。
 
-Üretilen tüm görüntülerde [SynthID filigranı](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=tr) bulunur.
+所有生成的圖片都會加上 [SynthID 浮水印](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=zh-tw)。
 
-## Görüntü üretme (metinden görüntü oluşturma)
+## 圖像生成 (文字轉圖像)
 
 ### Python
 
@@ -237,18 +230,16 @@ curl -s -X POST \
   }'
 ```
 
-Son oluşturulan resim bloğunu döndüren `interaction.output_image`
-özelliğini kullanarak oluşturulan resim verilerini alabilirsiniz. Kolaylık özellikleri hakkında ayrıntılı bilgi için [Etkileşimlere genel bakış](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr#convenience-properties) başlıklı makaleyi inceleyin.
+您可以使用 `interaction.output_image` 屬性擷取生成的圖像資料，該屬性會傳回最後生成的圖像區塊。如要進一步瞭解便利屬性，請參閱「[互動總覽](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw#convenience-properties)」。
 
-## Görüntü düzenleme (metin ve görüntüden görüntüye)
+## 圖像編輯 (文字和圖像轉圖像)
 
-**Hatırlatma**: Yüklediğiniz tüm resimlerle ilgili gerekli haklara sahip olduğunuzdan emin olun.
-Başkalarının haklarını ihlal eden içerikler (ör. yanıltıcı, taciz edici veya zarar verici videolar ya da görüntüler) üretmeyin. Bu üretken yapay zeka hizmetini kullanımınız [Yasaklanan Kullanım Politikamıza](https://policies.google.com/terms/generative-ai/use-policy?hl=tr) tabidir.
+**提醒**：請確認您具備必要權限，可使用上傳的所有圖像。
+請勿生成侵權內容，包括欺騙、騷擾或傷害他人的影片或圖像。使用這項生成式 AI 服務時，須遵守《[使用限制政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-tw)》。
 
-Resim sağlayın ve metin istemlerini kullanarak öğe ekleyin, kaldırın veya değiştirin, stili değiştirin ya da renk derecelendirmesini ayarlayın.
+提供圖片並使用文字提示詞，即可新增、移除或修改元素、變更風格，或調整色彩分級。
 
-Aşağıdaki örnekte, `base64` kodlu resimlerin nasıl yükleneceği gösterilmektedir.
-Birden fazla resim, daha büyük yükler ve desteklenen MIME türleri için [Resim anlama](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr) sayfasını inceleyin.
+以下範例說明如何上傳 `base64` 編碼圖片。如要瞭解多張圖片、較大酬載和支援的 MIME 類型，請參閱「[圖片理解](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-tw)」頁面。
 
 ### Python
 
@@ -452,9 +443,9 @@ curl -s -X POST \
     }"
 ```
 
-### Çok aşamalı etkileşimli görüntü düzenleme
+### 多輪圖像編輯
 
-Görsel oluşturmaya ve düzenlemeye sohbet ederek devam edin. Görüntüler üzerinde yineleme yapmak için çok aşamalı etkileşim önerilir. Aşağıdaki örnekte, fotosentez hakkında bir infografik oluşturma istemi gösterilmektedir.
+繼續透過對話生成及編輯圖像。建議透過多輪對話反覆調整圖片。以下範例顯示生成光合作用資訊圖表的提示。
 
 ### Python
 
@@ -601,11 +592,11 @@ curl -s -X POST \
   }'
 ```
 
-![Fotosentez hakkında yapay zekayla üretilmiş infografik](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=tr)
+![AI 生成的光合作用資訊圖表](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=zh-tw)
 
-Fotosentez hakkında yapay zekayla üretilmiş infografik
+AI 生成的光合作用資訊圖表
 
-Ardından, grafikteki dili İspanyolca olarak değiştirmek için `previous_interaction_id` simgesini kullanabilirsiniz.
+接著，您可以使用 `previous_interaction_id` 將圖表上的語言變更為西班牙文。
 
 ### Python
 
@@ -803,37 +794,35 @@ curl -s -X POST \
   }'
 ```
 
-![İspanyolca fotosentez infografiği (yapay zekayla üretilmiş)](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=tr)
+![AI 生成的西班牙文光合作用資訊圖表](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=zh-tw)
 
-İspanyolca fotosentez infografiği oluştur
+AI 生成的西班牙文光合作用資訊圖表
 
-## Nano Banana'nın özellikleri
+## Nano Banana 的功能
 
-Nano Banana modelleri, son teknoloji ürünü görüntü üretme ve düzenleme özellikleri sunar. Gemini
-Nano Banana 2.1 ve Gemini 3.1 Flash Image, hız ve yüksek hacimli kullanım alanları için, Gemini 3 Pro Image ise profesyonel öğe üretimi için optimize edilmiştir.
-Gelişmiş akıl yürütme yoluyla en zorlu iş akışlarının üstesinden gelmek için tasarlanan bu modeller, karmaşık ve çok aşamalı etkileşim içerik oluşturma ve değiştirme görevlerinde üstün performans gösterir.
+Nano Banana 模型提供最先進的圖像生成和編輯功能。Gemini Nano Banana 2.1 和 Gemini 3.1 Flash Image 經過最佳化，適合高速和高用量的用途，而 Gemini 3 Pro Image 則適合專業素材製作。這類模型具備進階推論能力，專為處理最棘手的工作流程而設計，擅長複雜的多輪創作和修改工作。
 
-- **Yüksek çözünürlüklü çıktı**: 1K, 2K ve 4K görseller için yerleşik üretim özellikleri.
-  - **Gemini 3.1 Flash Image**, 512 piksel (0,5K) çözünürlüğü ekler (Gemini Nano Banana 2.1'de desteklenmez).
-  - **Gemini 3.1 Flash Lite Image** yalnızca 1K çözünürlüğü destekler.
-- **Gelişmiş metin oluşturma**: İnfografikler, menüler, diyagramlar ve pazarlama öğeleri için okunaklı ve stilize metinler oluşturabilir.
-- **Google Arama ile temellendirme**: Model, Google Arama'yı bir araç olarak kullanarak gerçekleri doğrulayabilir ve gerçek zamanlı verilere (ör. güncel hava durumu haritaları, borsa grafikleri, son olaylar) dayalı görüntüler oluşturabilir.
-  - **Gemini 3.1 Flash Lite Image modeli tarafından desteklenmez.**
-  - **Gemini Nano Banana 2.1 ve Gemini 3.1 Flash Image**, Web Arama'nın yanı sıra Google Görsel Arama Temellendirme'nin entegrasyonunu da ekler.
-- **Düşünme modu**: Model, karmaşık istemleri değerlendirmek için "düşünme" sürecini kullanır. Son yüksek kaliteli çıktıyı üretmeden önce kompozisyonu iyileştirmek için geçici "düşünce resimleri" oluşturur (arka uçta görünür ancak ücretlendirilmez).
-- **En fazla 14 referans görsel**: Son resmi oluşturmak için en fazla 14 referans görseli karıştırın.
-- **Yeni en boy oranları**: Gemini 3.1 Flash Lite Image, `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`
-  [en boy oranlarını](#aspect-ratios-and-image-size) ekler.
+- **高解析度輸出**：內建 1K、2K 和 4K 影像生成功能。
+  - **Gemini 3.1 Flash Image** 新增較小的 512 像素 (0.5K) 解析度 (Gemini Nano Banana 2.1 不支援)。
+  - **Gemini 3.1 Flash Lite Image** 僅支援 1K 解析度。
+- **進階文字算繪**：可為資訊圖表、選單、圖表和行銷素材資源生成清晰易讀的風格化文字。
+- **以 Google 搜尋強化事實基礎**：模型可將 Google 搜尋做為工具，驗證事實並根據即時資料 (例如目前的天氣圖、股票圖表、近期事件) 生成圖像。
+  - **Gemini 3.1 Flash Lite Image 模型不支援。**
+  - **Gemini Nano Banana 2.1 和 Gemini 3.1 Flash Image** 整合了 Google 圖片搜尋建立基準和網頁搜尋功能。
+- **思考模式**：模型會透過「思考」程序，推論複雜的提示詞。系統會生成臨時的「構思圖片」(可在後端查看，但不收費)，在生成最終的高畫質輸出內容前，先調整構圖。
+- **最多 14 張參考圖像**：最多可混合 14 張參考圖像，生成最終圖像。
+- **新顯示比例**：Gemini 3.1 Flash Lite Image 新增 `1:1`、`3:2`、`2:3`、`3:4`、`4:3`、`4:5`、`5:4`、`9:16`、`16:9`、`21:9`
+  [顯示比例](#aspect-ratios-and-image-size)。
 
-### En fazla 14 referans görsel kullanın
+### 最多可使用 14 張參考圖像
 
-Nano Banana modelleri, 14 referans görüntüsünü karıştırmanıza olanak tanır. Bu 14 resim aşağıdakileri içerebilir:
+Nano Banana 模型最多可混合 14 張參考圖像。這 14 張圖片可包含下列內容：
 
-| Gemini 3.1 Flash Lite Image | Gemini Nano Banana 2.1 ve Gemini 3.1 Flash Görüntüsü | Gemini 3 Pro Image |
+| Gemini 3.1 Flash Lite Image | Gemini Nano Banana 2.1 和 Gemini 3.1 Flash Image | Gemini 3 Pro Image |
 | --- | --- | --- |
-| Son resme eklenecek, yüksek çözünürlüklü en fazla 14 nesne resmi | Son resme eklenecek, yüksek çözünürlüklü en fazla 10 nesne resmi | Son resme eklenecek, yüksek çözünürlüklü en fazla 6 nesne resmi |
-| Yok | Karakter tutarlılığını korumak için en fazla 4 karakter resmi | Karakter tutarlılığını korumak için en fazla 5 karakter resmi |
-| Yok | Yok | Stil referansı olarak kullanılacak en fazla 3 resim |
+| 最多 14 張高保真物件圖片，可加入最終圖片 | 最多 10 張高保真物件圖片，可加入最終圖片 | 最多 6 張高保真物件圖片，可加入最終圖片 |
+| 不適用 | 最多 4 張角色圖片，用於維持角色一致性 | 最多 5 張角色圖片，用於維持角色一致性 |
+| 不適用 | 不適用 | 最多 3 張圖片，做為風格參考 |
 
 ### Python
 
@@ -1106,15 +1095,15 @@ curl -s -X POST \
     }"
 ```
 
-![Yapay zekayla üretilmiş ofis grubu fotoğrafı](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=tr)
+![AI 生成的辦公室團體照](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=zh-tw)
 
-Yapay zekayla üretilmiş ofis grubu fotoğrafı
+AI 生成的辦公室團體照
 
-### Google Arama ile Temellendirme
+### 以 Google 搜尋建立基準
 
-Hava durumu tahminleri, borsa grafikleri veya son olaylar gibi anlık bilgilere dayalı görüntüler oluşturmak için [Google Arama aracını](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) kullanın.
+使用 [Google 搜尋工具](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)，根據天氣預報、股票圖表或近期事件等即時資訊生成圖像。
 
-Google Arama ile temellendirme, görsel üretimiyle birlikte kullanıldığında görsele dayalı arama sonuçlarının üretim modeline aktarılmadığını ve yanıttan çıkarıldığını unutmayın (bkz. [Google Görsel Arama ile temellendirme](#image-search)).
+請注意，使用 Google 搜尋建立基準並生成圖像時，系統不會將圖片搜尋結果傳送至生成模型，也不會納入回覆 (請參閱「[以 Google 圖片搜尋建立基準](#image-search)」)。
 
 ### Python
 
@@ -1301,21 +1290,20 @@ curl -s -X POST \
   }'
 ```
 
-![San Francisco için yapay zekayla üretilmiş beş günlük hava durumu grafiği](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=tr)
+![AI 生成的舊金山五天天氣圖表](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=zh-tw)
 
-San Francisco için yapay zekayla üretilmiş beş günlük hava durumu grafiği
+AI 生成的舊金山五天天氣圖表
 
-Yanıtta, metin adımında satır içi `url_citation` ek açıklamalarıyla birlikte `google_search_call` ve `google_search_result` adımları yer alıyor:
+回應包含 `google_search_call` 和 `google_search_result` 步驟，以及文字步驟的內嵌 `url_citation` 註解：
 
-- **`google_search_result`**: Arama önerilerini kullanıcı arayüzünüzde oluşturmak için kullanılan bir HTML snippet'i olan `search_suggestions` içerir.
-- **`url_citation` ek açıklamaları**: Metin adımında satır içi alıntılar, yanıtın bölümlerini web kaynaklarına bağlar.
+- **`google_search_result`**：包含 `search_suggestions`，這是一段 HTML 程式碼片段，用於在 UI 中顯示搜尋建議。
+- **`url_citation` 註解**：文字步驟中的內嵌引用，可將回覆內容連結至網頁來源。
 
-### Görüntüler için Google Arama ile temellendirme (Nano Banana 2.1 ve 3.1 Flash)
+### 以 Google 搜尋強化事實基礎，用於圖像 (Nano Banana 2.1 和 3.1 Flash)
 
-Google Görsel Arama ile temellendirme, modellerin Google Görsel Arama aracılığıyla alınan web görsellerini görüntü oluşturma için görsel bağlam olarak kullanmasına olanak tanır. Görsel Arama, mevcut Google Arama ile Temellendirme aracındaki yeni bir arama türüdür ve standart [Web Arama](#use-with-grounding) ile birlikte çalışır.
+使用 Google 圖片搜尋建立基準，模型就能將透過 Google 圖片搜尋擷取的網頁圖片，做為圖像生成的視覺背景資訊。圖片搜尋是現有「以 Google 搜尋建立基準」工具中的新搜尋類型，與標準[網頁搜尋](#use-with-grounding)搭配使用。
 
-Görsel Arama'yı etkinleştirmek için API isteğinizde `google_search` aracını yapılandırın
-ve `search_types` dizisinde `image_search` öğesini belirtin. Görsel Arama, bağımsız olarak veya Web Arama ile birlikte kullanılabilir.
+如要啟用圖片搜尋功能，請在 API 要求中設定 `google_search` 工具，並在 `search_types` 陣列中指定 `image_search`。圖片搜尋可單獨使用，也可與網頁搜尋搭配使用。
 
 ### Python
 
@@ -1448,25 +1436,24 @@ curl -s -X POST \
   }'
 ```
 
-**Görüntüleme koşulları**
+**多媒體廣告規定**
 
-Google Arama ile Temellendirme'de Görsel Arama'yı kullandığınızda `google_search_result` adımındaki `search_suggestions` öğesini göstermeniz gerekir. Kullanımla ilgili tüm şartlar [Hizmet Şartları](https://ai.google.dev/gemini-api/terms?hl=tr#grounding-with-google-search)'nda ayrıntılı olarak açıklanmıştır.
+使用「以 Google 搜尋強化事實基礎」功能中的圖片搜尋時，必須顯示 `google_search_result` 步驟中的 `search_suggestions`。如需完整的使用規定，請參閱《[服務條款](https://ai.google.dev/gemini-api/terms?hl=zh-tw#grounding-with-google-search)》。
 
-**Yanıt**
+**回應**
 
-Görüntü arama kullanılarak temellendirilmiş yanıtlarda API, yanıt adımlarının bir parçası olarak satır içi alıntılar ve atıf meta verileri döndürür:
+如果使用圖片搜尋建立基準回覆，API 會在回覆步驟中傳回內嵌引用和來源中繼資料：
 
-- **`url_citation` ek açıklamalar**: `model_output` içindeki metin içeriği bloğunda yer alan metin içi alıntılar
-  oluşturulan içeriği kaynağına bağlar.
-- **`google_search_result`**: `search_suggestions` içerir. Bu, kullanıcı arayüzünüzde arama önerilerini oluşturmak için kullanılan bir HTML snippet'idir.
+- **`url_citation` 註解**：`model_output` 內文字內容區塊中的內嵌引用資料，可將生成的內容連結至來源。
+- **`google_search_result`**：包含 `search_suggestions`，這是一段 HTML 程式碼片段，用於在 UI 中顯示搜尋建議。
 
-### Video-görüntü üretimi (Nano Banana 2.1, 3.1 Flash ve 3.1 Flash Lite)
+### 影片轉圖像生成 (Nano Banana 2.1、3.1 Flash 和 3.1 Flash Lite)
 
-Video-görüntü üretimi, çok formatlı bir referans olarak videonun bağlamını kullanarak yeni görüntüler oluşturmanıza olanak tanır. Bu özellik; yüksek kaliteli video küçük resimleri, sinematik posterler, özet infografikleri veya bir video sahnesinden ilham alan yeni sanat eserleri oluşturmak için kullanışlıdır.
+影片轉圖像生成功能可讓您使用影片的背景資訊，做為多模態參考資料來生成新圖像。這項功能可用於製作高畫質影片縮圖、電影海報、摘要資訊圖表，或根據影片場景創作新作品。
 
-Model, oluşturma sırasında görsel temaları ve önemli etkinlikleri çıkarmak için video karelerini bağlam içinde analiz eder. Ardından, çıkış resmini sentezlemek için bunları metin isteminizle birlikte kullanır.
+生成時，模型會分析影片影格的背景資訊，擷取視覺主題和重要事件，然後搭配文字提示詞，合成輸出圖片。
 
-Herkese açık [YouTube URL'lerini](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr#youtube) doğrudan API isteğinize iletebilir veya [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi kullanarak yerel video dosyalarını yükleyebilirsiniz.
+您可以直接在 API 要求中傳遞公開 [YouTube 網址](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw#youtube)，或使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳本機影片檔案。
 
 ### Python
 
@@ -1724,15 +1711,15 @@ curl -s -X POST \
   }'
 ```
 
-![YouTube videosundan yapay zekayla üretilmiş infografik](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=tr)
+![根據 YouTube 影片生成的 AI 資訊圖表](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=zh-tw)
 
-YouTube videosundan yapay zekayla üretilmiş bilgi grafiği
+AI 根據 YouTube 影片生成的資訊圖表
 
-### 4K çözünürlüğe kadar görüntü oluşturma
+### 生成解析度最高 4K 的圖片
 
-Gemini 3 Image modelleri varsayılan olarak 1.000 görüntülük görseller üretir ancak 2.000, 4.000 ve 512 piksel (05.K) (yalnızca Gemini 3.1 Flash Image) görüntüleri de oluşturabilir. Daha yüksek çözünürlüklü öğeler oluşturmak için `response_format` içinde `image_size` değerini belirtin.
+Gemini 3 圖像模型預設會生成 1K 圖像，但也能輸出 2K、4K 和 512 像素 (0.5K) (僅限 Gemini 3.1 Flash Image) 圖像。如要產生解析度較高的素材資源，請在 `response_format` 中指定 `image_size`。
 
-Büyük harf "K" kullanmanız gerekir (ör. 512px (05.K), 1K, 2K, 4K). Küçük harfli parametreler (ör. 1k) reddedilir.
+請務必使用大寫「K」(例如 512px (05.K)、1K、2K、4K)。小寫參數 (例如 1k) 將遭到拒絕。
 
 ### Python
 
@@ -1925,19 +1912,19 @@ curl -s -X POST \
   }'
 ```
 
-Aşağıda, bu istemden oluşturulan örnek bir resim verilmiştir:
+以下是根據這則提示生成的圖片範例：
 
-![Yapay zeka tarafından üretilmiş, Da Vinci tarzında, parçalanmış bir kral kelebeğinin anatomik çizimi.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=tr)
+![AI 生成的達文西風格解剖草圖，描繪帝王斑蝶的解剖圖。](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=zh-tw)
 
-Disseke edilmiş bir kral kelebeğinin Da Vinci tarzında yapay zekayla üretilmiş anatomik çizimi.
+AI 生成的達文西風格解剖素描，描繪解剖後的帝王蝶。
 
-### Düşünme süreci
+### 思考過程
 
-Gemini 3 görüntü modelleri, karmaşık istemler için akıl yürütme süreci ("Düşünme") kullanan düşünen modellerdir. Bu özellik varsayılan olarak etkindir ve API'de devre dışı bırakılamaz. Düşünme süreci hakkında daha fazla bilgi edinmek için [Gemini Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) rehberine bakın.
+Gemini 3 圖像模型是思考型模型，會使用推論程序 (「思考」) 處理複雜的提示。這項功能預設為啟用，無法在 API 中停用。如要進一步瞭解思考程序，請參閱 [Gemini Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw) 指南。
 
-Model, kompozisyonu ve mantığı test etmek için en fazla iki ara görüntü oluşturur. Düşünme sürecindeki son görüntü, aynı zamanda son oluşturulan görüntüdür.
+模型最多會生成兩張過渡圖片，用於測試構圖和邏輯。「思考」中的最後一張圖片也是最終算繪的圖片。
 
-Son görüntünün üretilmesine yol açan düşünceleri kontrol edebilirsiniz.
+你可以查看生成最終圖片的思考過程。
 
 ### Python
 
@@ -2076,11 +2063,11 @@ func main() {
 }
 ```
 
-#### Dönüşümlü metin ve resimler
+#### 文字和圖片夾雜
 
-Standart görüntü üretme modelleri yalnızca görüntü çıkışı verirken bazı gelişmiş Gemini 3 modelleri (ör. `gemini-3-pro-image`) aralıklı içerik (ör. aynı yanıtta hem metin blokları hem de çizimler içeren hikayeler veya talimat kılavuzları) üretebilir.
+標準圖像生成模型只能輸出圖像，但部分進階 Gemini 3 模型 (例如 `gemini-3-pro-image`) 可生成交錯內容，例如在同一回覆中包含文字區塊和插圖的故事或教學指南。
 
-Çıktı karmaşık ve iç içe olduğundan `.output_image` veya `.output_text` gibi kolaylık sağlayan özellikler dizinin tamamını yakalamaz. İç içe yerleştirilmiş içeriğe erişmek ve bu içeriği kaydetmek için `steps` üzerinde manuel olarak yineleme yapmanız gerekir:
+由於輸出內容複雜且交錯，`.output_image` 或 `.output_text` 等便利屬性不會擷取完整序列。如要存取及儲存交錯內容，您必須手動疊代 `steps`：
 
 ### Python
 
@@ -2245,15 +2232,15 @@ func main() {
 }
 ```
 
-#### Düşünme seviyelerini kontrol etme
+#### 控管思考程度
 
-Gemini Nano Banana 2.1, Gemini 3.1 Flash Image ve Gemini 3.1 Flash Lite Image ile modelin kalite ve gecikmeyi dengelemek için kullandığı düşünme miktarını kontrol edebilirsiniz:
+使用 Gemini Nano Banana 2.1、Gemini 3.1 Flash Image 和 Gemini 3.1 Flash Lite Image 時，您可以控制模型的思考量，在品質和延遲時間之間取得平衡：
 
-| Model | Desteklenen düşünme düzeyleri | Varsayılan |
+| 模型 | 支援的思考程度 | 預設 |
 | --- | --- | --- |
-| **Gemini Nano Banana 2.1** | `minimal`, `medium` ve `high` | `medium` |
-| **Gemini 3.1 Flash Image** | `minimal`, `high` | `minimal` |
-| **Gemini 3.1 Flash Lite Image** | `minimal`, `high` | `minimal` |
+| **Gemini Nano Banana 2.1** | `minimal`、`medium`、`high` | `medium` |
+| **Gemini 3.1 Flash Image** | `minimal`、`high` | `minimal` |
+| **Gemini 3.1 Flash Lite Image** | `minimal`、`high` | `minimal` |
 
 ### Python
 
@@ -2410,32 +2397,32 @@ curl -s -X POST \
   }'
 ```
 
-[Düşünme süreci](#thinking-process), süreci görüntüleyip görüntülememenizden bağımsız olarak her zaman varsayılan olarak gerçekleştiğinden düşünme modelleri için varsayılan olarak düşünme jetonlarının faturalandırıldığını unutmayın.
+請注意，思考模型預設會對思考詞元計費，因為無論您是否查看[思考過程](#thinking-process)，系統預設都會執行思考過程。
 
-## Diğer görüntü üretme modları
+## 其他圖像生成模式
 
-Nano Banana görüntü üretme modelleri çoğu kullanım alanı için önerilse de özel görüntü üretme modellerini de keşfedebilirsiniz:
+雖然 Nano Banana 圖像生成模型適用於大多數用途，但您也可以探索專用的圖像生成模型：
 
-- **Imagen**: Google'ın eski metinden görüntü oluşturma modelleri (kapatıldı).
-- **[Veo](https://ai.google.dev/gemini-api/docs/video?hl=tr)**: Google'ın video üretme modeli.
+- **Imagen**：Google 的舊版文字轉圖像模型 (已停用)。
+- **[Veo](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw)**：Google 的影片生成模型。
 
-## Toplu olarak resim oluşturma
+## 批次生成圖片
 
-Bu sayfada açıklanan tüm görüntü üretme özellikleri, [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr#image-generation) kullanılarak toplu işler olarak da çalıştırılabilir. Bu API, çok sayıda görüntü üretmeniz gerektiğinde idealdir. 24 saate kadar işlem süresi karşılığında daha yüksek hız sınırları elde edersiniz.
+本頁所述的所有圖像生成功能，也可以使用 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw#image-generation) 做為批次工作執行，非常適合需要生成大量圖片的情況。您可以提高頻率限制，但處理時間最多可能需要 24 小時。
 
-## İstem yazma kılavuzu ve stratejileri
+## 提示撰寫指南和策略
 
-Bu bölümde, yaygın görüntü üretme ve düzenleme iş akışları için istem örnekleri ve şablonlar verilmiştir. Her örnekte yeniden kullanılabilir bir şablon ve Etkileşimler API'si için örnek bir istem yer alır.
+本節提供常見圖像生成和編輯工作流程的提示範例和範本。每個範例都包含可重複使用的範本，以及 Interactions API 的提示範例。
 
-### Görüntü üretme istemleri
+### 生成圖像的提示
 
-Aşağıdaki örneklerde, çeşitli resim türleri oluşturmak için metin istemlerinin nasıl kullanılacağı gösterilmektedir.
+下列範例說明如何使用文字提示詞生成各種圖片。
 
-#### 1. Fotoğraf gerçekliğinde sahneler
+#### 1. 逼真場景
 
-Bir sahneyi ayrıntılı bir şekilde açıklayın. Ne kadar ayrıntılı olursanız sonuçlar üzerinde o kadar fazla kontrol sahibi olursunuz.
+詳細描述場景。描述越具體，就越能掌控結果。
 
-### Şablon
+### 範本
 
 ```
 A photorealistic [type of shot] of a [subject description] in a [setting
@@ -2443,7 +2430,7 @@ description]. [Description of the light]. Shot from a [camera angle]
 with a [lens type].
 ```
 
-### İstem
+### 提示詞
 
 ```
 A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9.
@@ -2635,11 +2622,11 @@ curl -s -X POST \
   }'
 ```
 
-#### 2. Stilize edilmiş illüstrasyonlar ve çıkartmalar
+#### 2. 風格化插圖和貼圖
 
-Sanatsal stili, konuyu ve ortamı açıklayın. Tutarlı sonuçlar için görsel ayrıntı (kalın çizgiler, renkler vb.) hakkında net olun.
+描述藝術風格、主題和媒介。請具體說明視覺細節 (粗線、顏色等)，確保結果符合預期。
 
-### Şablon
+### 範本
 
 ```
 A [style] of a [subject, with details about accessories or actions]
@@ -2647,7 +2634,7 @@ doing [activity]. The design features [visual qualities, e.g., bold outlines,
 cel-shading, etc.] and [color/background preference].
 ```
 
-### İstem
+### 提示詞
 
 ```
 A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It's munching on a green bamboo leaf. The design features bold, clean outlines, simple cel-shading, and a vibrant color palette. The background must be white.
@@ -2826,15 +2813,15 @@ curl -s -X POST \
   }'
 ```
 
-![Mutlu bir kırmızı...](https://ai.google.dev/static/gemini-api/docs/images/red_panda_sticker.png?hl=tr)
+![一張可愛風格的貼紙，上面有一隻快樂的紅色...](https://ai.google.dev/static/gemini-api/docs/images/red_panda_sticker.png?hl=zh-tw)
 
-Mutlu bir kızıl pandanın kawaii tarzı çıkartması...
+一張可愛風格的貼紙，上面有一隻快樂的小貓熊...
 
-#### 3. Resimlerdeki metinlerin doğruluğu
+#### 3. 圖片中的文字準確
 
-Gemini, metin oluşturma konusunda mükemmeldir. Metin, yazı tipi stili (açıklayıcı bir şekilde) ve genel tasarım hakkında net olun. Profesyonel öğe üretimi için Gemini 3 Pro Image'i kullanın.
+Gemini 擅長生成文字。請清楚說明文字、字型樣式 (描述性) 和整體設計。使用 Gemini 3 Pro Image 製作專業素材。
 
-### Şablon
+### 範本
 
 ```
 Create a [image type] for [brand/concept] with the text "[text to render]"
@@ -2842,7 +2829,7 @@ in a [font style]. The design should be [style description], with a
 [color scheme].
 ```
 
-### İstem
+### 提示詞
 
 ```
 Create a modern, minimalist logo for a coffee shop called 'The Daily Grind'. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way.
@@ -3046,15 +3033,15 @@ curl -s -X POST \
   }'
 ```
 
-![&quot;The Daily Grind&quot; adlı bir kafe için modern ve minimalist bir logo oluştur...](https://ai.google.dev/static/gemini-api/docs/images/logo_example.jpg?hl=tr)
+![為名為「The Daily Grind」的咖啡廳設計現代簡約風格的標誌...](https://ai.google.dev/static/gemini-api/docs/images/logo_example.jpg?hl=zh-tw)
 
-"The Daily Grind" adlı bir kahve dükkanı için modern ve minimalist bir logo oluştur...
+為名為「每日研磨」的咖啡店設計現代簡約風格的標誌...
 
-#### 4. Ürün maketleri ve ticari fotoğrafçılık
+#### 4. 產品模擬圖和商業攝影
 
-E-ticaret, reklam veya markalama için net ve profesyonel ürün fotoğrafları oluşturmak üzere idealdir.
+適合為電子商務、廣告或品牌宣傳，製作乾淨俐落、專業的產品照。
 
-### Şablon
+### 範本
 
 ```
 A high-resolution, studio-lit product photograph of a [product description]
@@ -3064,7 +3051,7 @@ a [angle type] to showcase [specific feature]. Ultra-realistic, with sharp
 focus on [key detail]. [Aspect ratio].
 ```
 
-### İstem
+### 提示詞
 
 ```
 A high-resolution, studio-lit product photograph of a minimalist ceramic
@@ -3248,15 +3235,15 @@ curl -s -X POST \
   }'
 ```
 
-![Minimalist bir seramik kahve kupasının yüksek çözünürlüklü, stüdyo ışıklı ürün fotoğrafı...](https://ai.google.dev/static/gemini-api/docs/images/product_mockup.png?hl=tr)
+![一張高解析度的攝影棚打光產品照，主題是一個極簡風格的陶瓷咖啡杯...](https://ai.google.dev/static/gemini-api/docs/images/product_mockup.png?hl=zh-tw)
 
-Minimalist seramik kahve kupasının yüksek çözünürlüklü, stüdyo ışığında çekilmiş ürün fotoğrafı...
+一張高解析度、攝影棚打光的產品相片，主題是一個極簡風格的陶瓷咖啡杯...
 
-#### 5. Minimalist ve öğeler arasındaki boşluk tasarımı
+#### 5. 極簡和負空間設計
 
-Metnin yerleştirileceği web siteleri, sunumlar veya pazarlama materyalleri için arka plan oluşturmak üzere mükemmeldir.
+非常適合用於建立網站、簡報或行銷素材的背景，以便在上方疊加文字。
 
-### Şablon
+### 範本
 
 ```
 A minimalist composition featuring a single [subject] positioned in the
@@ -3265,7 +3252,7 @@ A minimalist composition featuring a single [subject] positioned in the
 [Aspect ratio].
 ```
 
-### İstem
+### 提示詞
 
 ```
 A minimalist composition featuring a single, delicate red maple leaf
@@ -3447,21 +3434,21 @@ curl -s -X POST \
   }'
 ```
 
-![Tek bir zarif kırmızı akçaağaç yaprağı içeren minimalist bir kompozisyon...](https://ai.google.dev/static/gemini-api/docs/images/minimalist_design.png?hl=tr)
+![極簡構圖，呈現一片精緻的紅色楓葉...](https://ai.google.dev/static/gemini-api/docs/images/minimalist_design.png?hl=zh-tw)
 
-Tek bir narin kırmızı akçaağaç yaprağının yer aldığı minimalist bir kompozisyon...
+極簡風格的構圖，畫面中有一片精緻的紅色楓葉...
 
-#### 6. Sıralı sanat (çizgi roman paneli / resimli taslak)
+#### 6. 連續藝術 (漫畫分鏡 / 分鏡腳本)
 
-Görsel hikaye anlatımı için paneller oluşturmak üzere karakter tutarlılığı ve sahne açıklaması üzerine kuruludur. Metin doğruluğu ve hikaye anlatma becerisi için bu istemler en iyi sonucu Gemini 3 Pro ve Gemini 3.1 Flash Image ile verir.
+以角色一致性和場景描述為基礎，建立視覺化故事敘述的面板。如要確保文字準確度及敘事能力，這些提示最適合搭配 Gemini 3 Pro 和 Gemini 3.1 Flash Image 使用。
 
-### Şablon
+### 範本
 
 ```
 Make a 3 panel comic in a [style]. Put the character in a [type of scene].
 ```
 
-### İstem
+### 提示詞
 
 ```
 Make a 3 panel comic in a gritty, noir art style with high-contrast black and white inks. Put the character in a humurous scene.
@@ -3702,15 +3689,15 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| Giriş | Çıkış |
-| Beyaz gözlüklü adam   Giriş resmi | Sert ve kara film tarzında 3 panelli bir çizgi roman oluştur...   Karanlık ve kasvetli bir sanat tarzında 3 panelli bir çizgi roman oluştur... |
+| 輸入 | 輸出內容 |
+| 戴白色眼鏡的男子   輸入圖片 | 製作 3 格漫畫，採用粗獷的黑色藝術風格...   製作 3 格漫畫，採用寫實、黑色電影藝術風格... |
 
-#### 7. Google Arama ile Temellendirme
+#### 7. 以 Google 搜尋建立基準
 
-Google Arama'yı kullanarak güncel veya gerçek zamanlı bilgilere dayalı görseller oluşturabilirsiniz.
-Bu özellik; haberler, hava durumu ve zamana duyarlı diğer konular için yararlıdır.
+使用 Google 搜尋，根據最新或即時資訊生成圖像。
+這項功能適用於新聞、天氣和其他時效性主題。
 
-### İstem
+### 提示詞
 
 ```
 Make a simple but stylish graphic of last night's Arsenal game in the Champion's League
@@ -3925,19 +3912,19 @@ curl -s -X POST \
   }'
 ```
 
-![Arsenal futbol maçının skorunu gösteren, yapay zekayla üretilmiş grafik](https://ai.google.dev/static/gemini-api/docs/images/football-score.jpg?hl=tr)
+![AI 生成的兵工廠足球隊比分圖](https://ai.google.dev/static/gemini-api/docs/images/football-score.jpg?hl=zh-tw)
 
-Arsenal futbol maçının skorunu gösteren yapay zekayla üretilmiş grafik
+AI 生成的兵工廠足球隊比分圖
 
-### Resimleri düzenleme istemleri
+### 編輯圖片的提示
 
-Bu örneklerde, düzenleme, kompozisyon ve stil aktarımı için metin istemlerinizle birlikte nasıl resim sağlayacağınız gösterilmektedir.
+以下範例說明如何提供圖片和文字提示詞，進行編輯、組合和風格移轉。
 
-#### 1. Öğe ekleme ve kaldırma
+#### 1. 新增和移除元素
 
-Bir resim sağlayın ve değişikliğinizi açıklayın. Model, orijinal resmin stili, aydınlatması ve perspektifiyle eşleşir.
+提供圖片並說明想做的變更。模型會配合原始圖片的風格、光線和透視效果。
 
-### Şablon
+### 範本
 
 ```
 Using the provided image of [subject], please [add/remove/modify] [element]
@@ -3945,7 +3932,7 @@ to/from the scene. Ensure the change is [description of how the change should
 integrate].
 ```
 
-### İstem
+### 提示詞
 
 ```
 "Using the provided image of my cat, please add a small, knitted wizard hat
@@ -4188,14 +4175,14 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| Giriş | Çıkış |
-| Kızıl tüylü bir kedinin fotogerçekçi resmi.   Tüylü bir kızıl kedinin fotoğraf gerçekliğinde resmi... | Kedimin sağlanan resmini kullanarak lütfen küçük, örülmüş bir sihirbaz şapkası ekle.   Kedi resmimi kullanarak lütfen küçük, örgü bir sihirbaz şapkası ekle... |
+| 輸入 | 輸出內容 |
+| 一隻毛茸茸橘貓的擬真圖片。   一隻毛茸茸橘貓的擬真圖片... | 請使用提供的貓咪圖片，加上一頂針織巫師小帽...   請使用我提供的貓咪圖片，加上一頂小小的針織巫師帽... |
 
-#### 2. İç boyama (anlamsal maskeleme)
+#### 2. 局部重繪 (語意遮罩)
 
-Resmin geri kalanına dokunmadan belirli bir bölümünü düzenlemek için "maske"yi sohbet ederek tanımlayın.
+透過對話定義「遮罩」，編輯圖像的特定部分，其餘部分則保持不變。
 
-### Şablon
+### 範本
 
 ```
 Using the provided image, change only the [specific element] to [new
@@ -4203,7 +4190,7 @@ element/description]. Keep everything else in the image exactly the same,
 preserving the original style, lighting, and composition.
 ```
 
-### İstem
+### 提示詞
 
 ```
 "Using the provided image of a living room, change only the blue sofa to be
@@ -4446,20 +4433,20 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| Giriş | Çıkış |
-| Modern ve iyi aydınlatılmış bir oturma odasının geniş çekimi...   Modern ve iyi aydınlatılmış bir oturma odasının geniş açılı fotoğrafı... | Sağlanan oturma odası resmini kullanarak yalnızca mavi kanepenin yerine eski tarz, kahverengi deri bir Chesterfield kanepe ekle...   Oturma odasının sağlanan resmini kullanarak yalnızca mavi kanepenin yerine vintage tarzda, kahverengi deri bir chesterfield kanepe ekle... |
+| 輸入 | 輸出內容 |
+| 現代風格、光線充足的客廳遠景...   現代風格、採光良好的客廳遠景... | 請使用提供的客廳圖片，將藍色沙發換成復古的棕色皮革切斯特菲爾德沙發...   使用提供的客廳圖片，只將藍色沙發改成復古棕色皮革切斯特菲爾德沙發... |
 
-#### 3. Stil aktarımı
+#### 3. 風格轉換
 
-Bir resim sağlayın ve modelden içeriğini farklı bir sanatsal tarzda yeniden oluşturmasını isteyin.
+提供圖片，並要求模型以不同的藝術風格重新建立內容。
 
-### Şablon
+### 範本
 
 ```
 Transform the provided photograph of [subject] into the artistic style of [artist/art style]. Preserve the original composition but render it with [description of stylistic elements].
 ```
 
-### İstem
+### 提示詞
 
 ```
 "Transform the provided photograph of a modern city street at night into the artistic style of Vincent van Gogh's 'Starry Night'. Preserve the original composition of buildings and cars, but render all elements with swirling, impasto brushstrokes and a dramatic palette of deep blues and bright yellows."
@@ -4696,14 +4683,14 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| Giriş | Çıkış |
-| Kalabalık bir şehir caddesinin fotogerçekçi ve yüksek çözünürlüklü fotoğrafı...   Yoğun bir şehir caddesinin fotoğraf gerçekliğinde ve yüksek çözünürlüklü fotoğrafı... | Gece modern bir şehir sokağının sağlanan fotoğrafını dönüştür...   Gece vakti modern bir şehir caddesinin sağlanan fotoğrafını dönüştür... |
+| 輸入 | 輸出內容 |
+| 一張擬真、高解析度的相片，呈現繁忙的城市街道...   一張高解析度的寫實相片，呈現繁忙的城市街道... | 將提供的現代城市夜景相片轉換成...   將提供的現代城市街道夜景相片... |
 
-#### 4. Gelişmiş kompozisyon: Birden fazla görüntüyü birleştirme
+#### 4. 進階合成：結合多張圖片
 
-Yeni bir kompozit sahne oluşturmak için bağlam olarak birden fazla resim sağlayın. Bu özellik, ürün maketleri veya yaratıcı kolajlar için idealdir.
+提供多張圖片做為背景，建立新的合成場景。非常適合用於產品模型或創意拼貼。
 
-### Şablon
+### 範本
 
 ```
 Create a new image by combining the elements from the provided images. Take
@@ -4711,7 +4698,7 @@ the [element from image 1] and place it with/on the [element from image 2].
 The final image should be a [description of the final scene].
 ```
 
-### İstem
+### 提示詞
 
 ```
 "Create a professional e-commerce fashion photo. Take the blue floral dress
@@ -4983,14 +4970,14 @@ curl -s -X POST \
 
 |  |  |  |
 | --- | --- | --- |
-| Giriş 1 | Giriş 2 | Çıkış |
-| Nötr arka plan üzerinde mavi çiçek desenli yazlık elbise   Nötr bir arka plan üzerinde mavi çiçek desenli yazlık elbise | Saçları topuz yapılmış bir kadının tam boy fotoğrafı...   Saçları topuz yapılmış bir kadının tam boy fotoğrafı... | Açık havada mavi çiçekli bir yaz elbisesi giyen bir kadın   Açık havada mavi çiçekli bir yazlık elbise giymiş bir kadın |
+| 輸入 1 | 輸入 2 | 輸出內容 |
+| 中性色調背景前有一件藍色花卉圖案夏季洋裝   中性背景上的藍色碎花夏季洋裝 | 一位女性的全身照，她綁著包包頭...   一位女性的全身照，她綁著包包頭... | 一名女子在戶外穿著藍色碎花夏裝   一名女子在戶外穿著藍色碎花夏季洋裝 |
 
-#### 5. Yüksek doğrulukta ayrıntı koruma
+#### 5. 高保真細節保留
 
-Düzenleme sırasında önemli ayrıntıların (ör. yüz veya logo) korunmasını sağlamak için düzenleme isteğinizle birlikte bu ayrıntıları ayrıntılı bir şekilde açıklayın.
+為確保編輯時保留重要細節 (例如臉部或標誌)，請在編輯要求中詳細描述這些細節。
 
-### Şablon
+### 範本
 
 ```
 Using the provided images, place [element from image 2] onto [element from
@@ -4999,7 +4986,7 @@ completely unchanged. The added element should [description of how the
 element should integrate].
 ```
 
-### İstem
+### 提示詞
 
 ```
 "Take the first image of the woman with brown hair, blue eyes, and a neutral
@@ -5256,21 +5243,21 @@ curl -s -X POST \
 
 |  |  |  |
 | --- | --- | --- |
-| Giriş 1 | Giriş 2 | Çıkış |
-| Kahverengi saçlı ve mavi gözlü bir kadının profesyonel portre fotoğrafı...   Kahverengi saçlı ve mavi gözlü bir kadının profesyonel portre fotoğrafı... | G ve A harflerini içeren modern marka tanımlayıcı   G ve A harflerini içeren modern marka tanımlayıcı | Kahverengi saçlı, mavi gözlü ve yüzünde nötr bir ifade olan kadının ilk resmini seçin...   Kahverengi saçlı, mavi gözlü ve ifadesiz bir kadının ilk resmini al... |
+| 輸入 1 | 輸入 2 | 輸出內容 |
+| 一位棕髮藍眼女性的專業形象照…   一位棕髮藍眼女性的專業形象照... | 現代感品牌識別標誌，包含字母 G 和 A   現代品牌識別標誌，包含字母 G 和 A | 以第一張圖片為例，圖中有一位棕髮、藍眼、面無表情的女性...   以第一張圖片為例，圖中有一位棕髮、藍眼、表情中性的女性... |
 
-#### 6. Bir şeyi hayata geçirmek
+#### 6. 讓事物栩栩如生
 
-Kaba bir taslak veya çizim yükleyip modelden bunu tamamlanmış bir resme dönüştürmesini isteyin.
+上傳草圖或繪圖，並要求模型將其精細化為完成的圖片。
 
-### Şablon
+### 範本
 
 ```
 Turn this rough [medium] sketch of a [subject] into a [style description]
 photo. Keep the [specific features] from the sketch but add [new details/materials].
 ```
 
-### İstem
+### 提示詞
 
 ```
 "Turn this rough pencil sketch of a futuristic car into a polished photo of the finished concept car in a showroom. Keep the sleek lines and low profile from the sketch but add metallic blue paint and neon rim lighting."
@@ -5501,20 +5488,20 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| Giriş | Çıkış |
-| Araba eskizi   Arabanın kaba taslağı | Nihai konsept otomobili gösteren çıktı   Arabanın rötuşlanmış fotoğrafı |
+| 輸入 | 輸出內容 |
+| 汽車草圖   汽車草圖 | 輸出內容顯示最終概念車   經過潤飾的汽車相片 |
 
-#### 7. Karakter tutarlılığı: 360 görünüm
+#### 7. 角色一致性：360 度檢視
 
-Farklı açılar için yinelemeli olarak istemde bulunarak bir karakterin 360 derece görünümlerini oluşturabilirsiniz. En iyi sonuçlar için tutarlılığı korumak amacıyla sonraki istemlere daha önce oluşturulan resimleri ekleyin. Karmaşık pozlar için seçilen pozun referans görselini ekleyin.
+您可以反覆提示不同角度，生成角色的 360 度檢視畫面。為獲得最佳效果，請在後續提示中加入先前生成的圖片，以維持一致性。如果是複雜的姿勢，請提供所選姿勢的參考圖像。
 
-### Şablon
+### 範本
 
 ```
 A studio portrait of [person] against [background], [looking forward/in profile looking right/etc.]
 ```
 
-### İstem
+### 提示詞
 
 ```
 A studio portrait of this man against white, in profile looking right
@@ -5553,43 +5540,41 @@ for step in interaction.steps:
 
 |  |  |  |
 | --- | --- | --- |
-| Giriş | Çıkış 1 | Çıkış 2 |
-| Beyaz gözlüklü bir adamın orijinal girişi   Orijinal resim | Beyaz gözlüklü bir adamın sağa bakarkenki görüntüsü   Beyaz gözlüklü adam sağa bakıyor | Beyaz gözlüklü bir adamın ileriye doğru baktığı görsel   Beyaz gözlüklü adam ileriye bakıyor |
+| 輸入 | 輸出內容 1 | 輸出 2 |
+| 戴白色眼鏡男子的原始輸入內容   原始圖片 | 輸出內容：戴著白色眼鏡的男子看向右方   戴白色眼鏡的男子看向右方 | 輸出內容：戴著白色眼鏡的男子看向前方   戴著白色眼鏡的男子向前看 |
 
-### En iyi uygulamalar
+### 最佳做法
 
-Sonuçlarınızı iyi seviyeden mükemmel seviyeye taşımak için aşağıdaki profesyonel stratejileri iş akışınıza dahil edin.
+如要讓成果更上一層樓，請將這些專業策略融入工作流程。
 
-- **Aşırı ayrıntılı olun:** Ne kadar çok ayrıntı verirseniz o kadar fazla kontrol sahibi olursunuz. "Fantezi zırh" yerine "gümüş yaprak desenleriyle kazınmış, yüksek yakalı ve şahin kanatları şeklinde omuzlukları olan, süslü elf zırhı" gibi bir açıklama yapın.
-- **Bağlam ve amaç sağlama:** Resmin *amacını* açıklayın. Modelin bağlamı anlama şekli nihai çıktıyı etkiler. Örneğin, "Üst düzey, minimalist bir cilt bakımı markası için logo oluştur" istemi, yalnızca "Logo oluştur" istemine kıyasla daha iyi sonuçlar verir.
-- **İterasyon yapın ve iyileştirin:** İlk denemede mükemmel bir resim elde etmeyi beklemeyin. Küçük değişiklikler yapmak için modelin etkileşimli yapısından yararlanın. "Bu harika, ancak ışığı biraz daha sıcak yapabilir misin?" veya "Her şeyi aynı tut ama karakterin ifadesini daha ciddi olacak şekilde değiştir" gibi istemlerle devam edin.
-- **Adım adım talimatlar kullanın:** Çok sayıda öğe içeren karmaşık sahneler için isteminizi adımlara ayırın. "Öncelikle şafakta sakin ve sisli bir orman arka planı oluştur. Ardından, ön plana yosun kaplı eski bir taş sunak ekleyin.
-  Son olarak, sunakın üzerine tek bir parlayan kılıç yerleştirin."
-- **"Anlamsal olumsuz istemler" kullanın:** "Araba yok" demek yerine, amaçlanan sahneyi olumlu bir şekilde tanımlayın: "Trafik işareti olmayan boş ve ıssız bir sokak."
-- **Kamerayı kontrol etme:** Kompozisyonu kontrol etmek için fotoğraf ve sinema dilini kullanın. `wide-angle shot`, `macro shot`, `low-angle
-  perspective` gibi terimler.
+- **具體說明：**提供的細節越多，就越能掌控結果。請描述盔甲，而不是輸入「奇幻盔甲」：「華麗的精靈板甲，刻有銀葉圖案，高領和護肩形狀像獵鷹翅膀。」
+- **提供背景資訊和意圖：**說明圖片的*用途*。模型對上下文的理解會影響最終輸出內容。舉例來說，「為高檔、極簡風格的護膚品牌設計標誌」會比「設計標誌」產生更好的結果。
+- **反覆測試及修正：**別期望第一次就能生成完美圖像。利用模型的對話特性，進行小幅調整。接著，您可以輸入「很好，但可以讓光線更溫暖一點嗎？」或「保持原樣，但將角色的表情改得更嚴肅」等提示。
+- **使用逐步說明：**如果場景複雜且元素眾多，請將提示拆成多個步驟。「首先，建立黎明時分寧靜、霧濛濛的森林背景。接著，在前景加入一座長滿青苔的古老石祭壇。
+  最後，在祭壇上放一把發光的劍。」
+- **使用「語意負面提示」：**不要說「沒有車」，而是以正面方式描述預期場景：「空無一人的街道，沒有任何交通跡象。」
+- **控制相機：**使用攝影和電影語言控制構圖。例如「`wide-angle shot`」、「`macro shot`」、「`low-angle
+  perspective`」。
 
-## Sınırlamalar
+## 限制
 
-- En iyi performans için şu dilleri kullanın: EN, ar-EG, de-DE, es-MX,
-  fr-FR, hi-IN, id-ID, it-IT, ja-JP, ko-KR, pt-BR, ru-RU, ua-UA, vi-VN, zh-CN.
-- Görüntü üretme özelliği, ses girişlerini desteklemez. Video girişleri yalnızca Gemini Nano Banana 2.1, Gemini 3.1 Flash Image ve Gemini 3.1 Flash Lite Image için desteklenir.
-- Model, kullanıcının açıkça istediği resim çıkışlarının sayısını her zaman tam olarak karşılamaz.
-- `gemini-2.5-flash-image`, giriş olarak en fazla 3 resimle en iyi şekilde çalışır. `gemini-3-pro-image` ise yüksek doğrulukta 5 resmi ve toplamda 14 resmi destekler. `gemini-nano-banana-2.1` ve `gemini-3.1-flash-image`
-  tek bir iş akışında en fazla 4 karakterin benzerliğini ve 10 nesnenin doğruluğunu destekler.
-- Gemini, bir görüntü için metin oluştururken önce metni oluşturup ardından metni içeren bir görüntü istemeniz durumunda en iyi şekilde çalışır.
-- `gemini-nano-banana-2.1` ve `gemini-3.1-flash-image` Google Arama ile temellendirme, şu anda web aramasından elde edilen gerçek hayattaki insan fotoğraflarının kullanılmasını desteklemiyor.
-- Üretilen tüm görüntülerde [SynthID filigranı](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=tr) bulunur.
+- 為獲得最佳效能，請使用下列語言：英文、ar-EG、de-DE、es-MX、fr-FR、hi-IN、id-ID、it-IT、ja-JP、ko-KR、pt-BR、ru-RU、ua-UA、vi-VN、zh-CN。
+- 圖像生成功能不支援音訊輸入。只有 Gemini Nano Banana 2.1、Gemini 3.1 Flash Image 和 Gemini 3.1 Flash Lite Image 支援影片輸入。
+- 模型不一定會完全按照使用者明確要求的圖像輸出數量。
+- `gemini-2.5-flash-image` 最多可輸入 3 張圖片，`gemini-3-pro-image` 則支援 5 張高擬真度圖片，總共最多可輸入 14 張圖片。`gemini-nano-banana-2.1` 和 `gemini-3.1-flash-image` 在單一工作流程中，最多可支援 4 個相似角色和 10 個相似物件。
+- 如要生成含有文字的圖片，建議先生成文字，再要求 Gemini 生成含有該文字的圖片。
+- `gemini-nano-banana-2.1`和`gemini-3.1-flash-image`以 Google 搜尋建立基準功能，目前不支援使用網頁搜尋中的真實人物圖像。
+- 所有生成的圖像都會加上 [SynthID 浮水印](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=zh-tw)。
 
-## İsteğe bağlı yapılandırmalar
+## 選用設定
 
-İsteğe bağlı olarak `response_format` parametresini kullanarak çıkış biçimini, en-boy oranını ve resim boyutunu yapılandırabilirsiniz.
+您可以使用 `response_format` 參數，視需要設定輸出格式、顯示比例和圖片大小。
 
-### Çıkış biçimi
+### 輸出格式
 
-Model, varsayılan olarak hem metin hem de resim yanıtları döndürür. `response_format` parametresinde bir resim biçimi belirterek yanıtı yalnızca oluşturulan resimleri (sohbet metnini atlayarak) döndürecek şekilde yapılandırabilirsiniz.
+模型預設會傳回文字和圖片回覆。您可以在 `response_format` 參數中指定圖片格式，設定模型只傳回生成的圖片，不傳回對話文字。
 
-Birden fazla biçim (ör. hem metin hem de oluşturulan resim) istemek için bunun yerine `response_format` işlevine bir biçim girişleri dizisi iletin.
+如要要求多種模態 (例如文字和生成圖像)，請改為將格式項目陣列傳遞至 `response_format`。
 
 ### Python
 
@@ -5710,9 +5695,9 @@ curl -s -X POST \
   }'
 ```
 
-### En boy oranları ve resim boyutu
+### 顯示比例和圖片大小
 
-Model, varsayılan olarak çıkış resminin boyutunu giriş resminizin boyutuyla eşleştirir veya 1:1 kareler oluşturur. `type`, `"image"` olarak ayarlandığında `response_format` bölümündeki `aspect_ratio` ve `image_size` alanlarını kullanarak en boy oranını ve çıkış görüntüsünün boyutunu kontrol edebilirsiniz.
+根據預設，模型會根據輸入圖片的大小產生輸出圖片，否則會產生 1:1 正方形圖片。當 `type` 設為 `"image"` 時，您可以使用 `response_format` 下方的 `aspect_ratio` 和 `image_size` 欄位，控制輸出圖片的顯示比例和大小。
 
 ### Python
 
@@ -5841,13 +5826,13 @@ curl -s -X POST \
   }'
 ```
 
-Kullanılabilen farklı oranlar ve oluşturulan resmin boyutu aşağıdaki tablolarda listelenmiştir:
+下表列出可用的不同比例和生成的圖片大小：
 
 ### Nano Banana 2.1
 
-| En boy oranı | 1K çözünürlük | 1.000 parça | 2K çözünürlük | 2 bin parça | 4K çözünürlük | 4 bin parça |
+| 顯示比例 | 1K 解析度 | 1,000 個詞元 | 2K 解析度 | 2,000 個詞元 | 4K 解析度 | 4,000 個詞元 |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 1024x1024 | 1120 | 2048x2048 | 1680 | 4096x4096 | 2520 |
+| **1:1** | 1024x1024 | 1120 | 2048 x 2048 | 1680 | 4096x4096 | 2520 |
 | **1:4** | 512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
 | **1:8** | 384x3072 | 1120 | 768x6144 | 1680 | 1536x12288 | 2520 |
 | **2:3** | 848x1264 | 1120 | 1696x2528 | 1680 | 3392x5056 | 2520 |
@@ -5864,9 +5849,9 @@ Kullanılabilen farklı oranlar ve oluşturulan resmin boyutu aşağıdaki tablo
 
 ### 3.1 Flash Image
 
-| En boy oranı | 512 piksel çözünürlük | 500 jeton | 1K çözünürlük | 1.000 parça | 2K çözünürlük | 2 bin parça | 4K çözünürlük | 4 bin parça |
+| 顯示比例 | 512 像素解析度 | 500 個詞元 | 1K 解析度 | 1,000 個詞元 | 2K 解析度 | 2,000 個詞元 | 4K 解析度 | 4,000 個詞元 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 512x512 | 747 | 1024x1024 | 1120 | 2048x2048 | 1680 | 4096x4096 | 2520 |
+| **1:1** | 512x512 | 747 | 1024x1024 | 1120 | 2048 x 2048 | 1680 | 4096x4096 | 2520 |
 | **1:4** | 256x1024 | 747 | 512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
 | **1:8** | 192x1536 | 747 | 384x3072 | 1120 | 768x6144 | 1680 | 1536x12288 | 2520 |
 | **2:3** | 424x632 | 747 | 848x1264 | 1120 | 1696x2528 | 1680 | 3392x5056 | 2520 |
@@ -5883,9 +5868,9 @@ Kullanılabilen farklı oranlar ve oluşturulan resmin boyutu aşağıdaki tablo
 
 ### 3.1 Pro Image
 
-| En boy oranı | 1K çözünürlük | 1.000 parça | 2K çözünürlük | 2 bin parça | 4K çözünürlük | 4 bin parça |
+| 顯示比例 | 1K 解析度 | 1,000 個詞元 | 2K 解析度 | 2,000 個詞元 | 4K 解析度 | 4,000 個詞元 |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 1024x1024 | 1120 | 2048x2048 | 1120 | 4096x4096 | 2000 |
+| **1:1** | 1024x1024 | 1120 | 2048 x 2048 | 1120 | 4096x4096 | 2000 |
 | **2:3** | 848x1264 | 1120 | 1696x2528 | 1120 | 3392x5056 | 2000 |
 | **3:2** | 1264x848 | 1120 | 2528x1696 | 1120 | 5056x3392 | 2000 |
 | **3:4** | 896x1200 | 1120 | 1792x2400 | 1120 | 3584x4800 | 2000 |
@@ -5898,7 +5883,7 @@ Kullanılabilen farklı oranlar ve oluşturulan resmin boyutu aşağıdaki tablo
 
 ### Gemini 2.5 Flash Image
 
-| En boy oranı | Çözünürlük | Token'lar |
+| 顯示比例 | 解析度 | 詞元 |
 | --- | --- | --- |
 | 1:1 | 1024x1024 | 1290 |
 | 2:3 | 832x1248 | 1290 |
@@ -5911,22 +5896,21 @@ Kullanılabilen farklı oranlar ve oluşturulan resmin boyutu aşağıdaki tablo
 | 16:9 | 1344x768 | 1290 |
 | 21:9 | 1536x672 | 1290 |
 
-## Imagen'ı ne zaman kullanmalısınız?
+## Imagen 的使用時機
 
-Imagen kapatıldı ve artık Gemini API üzerinden kullanılamıyor.
-Görüntü üretme ve düzenleme için Nano Banana'yı kullanın.
+Imagen 已停用，無法再透過 Gemini API 使用。使用 Nano Banana 生成及編輯圖像。
 
-## Sırada ne var?
+## 後續步驟
 
-- Gemini API ile nasıl video oluşturacağınızı öğrenmek için [Veo kılavuzuna](https://ai.google.dev/gemini-api/docs/video?hl=tr) göz atın.
-- Gemini modelleri hakkında daha fazla bilgi edinmek için [Gemini modelleri](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr) başlıklı makaleyi inceleyin.
+- 請參閱 [Veo 指南](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw)，瞭解如何使用 Gemini API 生成影片。
+- 如要進一步瞭解 Gemini 模型，請參閱「[Gemini 模型](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw)」。
 
-Geri bildirim gönderin
+提供意見
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Son güncelleme tarihi: 2026-10-09 UTC.
+上次更新時間：2026-10-26 (世界標準時間)。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+想進一步說明嗎？
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-09 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-26 (世界標準時間)。"],[],[]]

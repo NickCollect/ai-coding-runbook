@@ -1,101 +1,102 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=vi
-fetched_at: 2026-10-26T05:42:33.855206+00:00
-title: "T\u1ed1i \u01b0u ho\u00e1 v\u00e0 suy lu\u1eadn Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=ko
+fetched_at: 2026-11-02T07:11:38.214474+00:00
+title: "Gemini API \ucd5c\uc801\ud654 \ubc0f \ucd94\ub860 \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
+Gemini 4 Argon을 지금 이용 가능합니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-# Tối ưu hoá và suy luận Gemini API
+# Gemini API 최적화 및 추론
 
-Gemini API cung cấp nhiều cơ chế tối ưu hoá để giúp bạn cân bằng tốc độ, chi phí và độ tin cậy dựa trên nhu cầu cụ thể về khối lượng công việc.
-Cho dù bạn đang xây dựng bot trò chuyện theo thời gian thực hay chạy các quy trình xử lý dữ liệu ngoại tuyến nặng, việc chọn đúng mô hình có thể giúp giảm đáng kể chi phí hoặc tăng hiệu suất.
+Gemini API는 특정 워크로드 요구사항에 따라 속도, 비용, 안정성의 균형을 맞추는 데 도움이 되는 다양한 최적화 메커니즘을 제공합니다.
+실시간 대화형 봇을 빌드하든 대규모 오프라인 데이터 처리 파이프라인을 실행하든 올바른 패러다임을 선택하면 비용을 크게 절감하거나 성능을 높일 수 있습니다.
 
-| Tính năng | Chuẩn | Gập | Mức độ ưu tiên | Theo nhóm | Đang lưu vào bộ nhớ đệm |
+| 기능 | 표준 | Flex | 우선순위 | 일괄 | 캐싱 |
 | --- | --- | --- | --- | --- | --- |
-| **Định giá** | Giá ban đầu | Giảm giá 50% | Cao hơn từ 75% đến 100% so với mức tiêu chuẩn | Giảm giá 50% | Chiết khấu 90% + Bộ nhớ mã thông báo được tính theo tỷ lệ |
-| **Độ trễ** | Vài giây đến vài phút | Phút (mục tiêu 1 – 15 phút) | Giây | Tối đa 24 giờ | Thời gian nhận token đầu tiên nhanh hơn |
-| **Độ tin cậy** | Cao / Trung bình cao | Nỗ lực tối đa (Có thể loại bỏ) | Cao (Không rụng lông) | Cao (cho thông lượng) | Không áp dụng |
-| **Giao diện** | Đồng bộ | Đồng bộ | Đồng bộ | Không đồng bộ | Trạng thái đã lưu |
-| **Trường hợp sử dụng phù hợp nhất** | Quy trình công việc chung của ứng dụng | Chuỗi không khẩn cấp theo trình tự | Ứng dụng phát hành công khai dành cho người dùng | Tập dữ liệu khổng lồ, đánh giá ngoại tuyến | Truy vấn định kỳ trên cùng một tệp |
+| **가격 책정** | 정상가 | 50% 할인 | 표준보다 75~100% 더 높음 | 50% 할인 | 90% 할인 + 비례 할당 토큰 스토리지 |
+| **지연 시간** | 수 초에서 수 분 | 분 (1~15분 목표) | 초 | 최대 24시간 | 첫 번째 토큰까지의 시간 단축 |
+| **안정성** | 높음 / 중간-높음 | 최대한 노력 (삭제 가능) | 높음 (삭제 불가) | 높음 (처리량) | 해당 사항 없음 |
+| **인터페이스** | 동기식 | 동기식 | 동기식 | 비동기식 | 저장된 상태 |
+| **최적의 사용 사례** | 일반 애플리케이션 워크플로 | 긴급하지 않은 순차적 체인 | 프로덕션, 사용자 대상 앱 | 대규모 데이터 세트, 오프라인 평가 | 동일한 파일에 대한 반복 쿼리 |
 
-## Cấp dịch vụ suy luận (Đồng bộ)
+## 추론 서비스 등급 (동기식)
 
-Bạn có thể chuyển đổi giữa lưu lượng truy cập đồng bộ được tối ưu hoá về độ tin cậy và lưu lượng truy cập đồng bộ được tối ưu hoá về chi phí bằng cách truyền tham số `service_tier` trong các lệnh gọi tạo tiêu chuẩn.
+표준 생성 호출에서 `service_tier` 매개변수를 전달하여 안정성 최적화 동기식 트래픽과 비용 최적화 동기식 트래픽 간에 전환할 수 있습니다.
 
-### Suy luận tiêu chuẩn (Mặc định)
+### 표준 추론 (기본값)
 
-Cấp tiêu chuẩn là lựa chọn mặc định để tạo nội dung tuần tự.
-Dịch vụ này cung cấp thời gian phản hồi bình thường mà không cần trả thêm phí hoặc xếp hàng quá lâu.
+표준 등급은 순차적 콘텐츠 생성의 기본 옵션입니다.
+추가 프리미엄이나 대기열 없이 정상적인 응답 시간을 제공합니다.
 
-- **Độ tin cậy:** Mức độ nghiêm trọng tiêu chuẩn
-- **Giá:** Giá thông thường.
-- **Phù hợp nhất cho:** Hầu hết các ứng dụng tương tác hằng ngày.
+- **안정성:** 표준 심각도
+- **가격:** 표준 가격 책정
+- **최적의 사용 사례:** 대부분의 상호작용형 일상 애플리케이션
 
-### Suy luận ưu tiên (Tối ưu hoá độ trễ)
+### 우선순위 추론 (지연 시간 최적화)
 
-[Mức độ ưu tiên](https://ai.google.dev/gemini-api/docs/priority-inference?hl=vi) sẽ định tuyến các yêu cầu của bạn đến các hàng đợi tính toán có mức độ quan trọng cao.
-Lưu lượng truy cập này hoàn toàn không thể bị loại bỏ (không bao giờ bị các cấp khác chiếm quyền ưu tiên) và có độ tin cậy cao nhất. Nếu bạn vượt quá giới hạn Ưu tiên linh động, hệ thống sẽ hạ cấp yêu cầu xuống mức Xử lý tiêu chuẩn một cách linh hoạt thay vì báo lỗi.
+[우선순위](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ko) 처리는 요청을
+심각도가 높은 컴퓨팅 대기열로 라우팅합니다.
+이 트래픽은 엄격하게 삭제할 수 없으며 (다른 등급에 의해 선점되지 않음) 안정성이 가장 높습니다. 동적 우선순위 한도를 초과하면 시스템에서 오류가 발생하여 실패하는 대신 요청을 표준 처리로 정상적으로 다운그레이드합니다.
 
-- **Độ tin cậy:** Mức độ quan trọng cao nhất
-- **Giá:** Cao hơn từ 75% đến 100% so với giá chuẩn.
-- **Phù hợp nhất với:** Bot trò chuyện với khách hàng, phát hiện gian lận theo thời gian thực và trợ lý AI quan trọng cho doanh nghiệp.
+- **안정성:** 가장 높은 심각도
+- **가격:** 표준 요율보다 75~100% 높음
+- **최적의 사용 사례:** 고객 챗봇, 실시간 사기 감지, 비즈니스에 중요한 코파일럿
 
-### Suy luận Flex (Tối ưu hoá chi phí)
+### Flex 추론 (비용 최적화)
 
-[Suy luận Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=vi) giảm giá 50% so với mức giá tiêu chuẩn bằng cách tận dụng năng lực điện toán ngoài giờ cao điểm. Các yêu cầu được xử lý đồng bộ, nghĩa là bạn không cần viết lại mã để quản lý các đối tượng theo lô.
-Vì đây là lưu lượng truy cập "có thể loại bỏ", nên các yêu cầu có thể bị ưu tiên nếu hệ thống gặp phải tình trạng lưu lượng truy cập tăng đột biến.
+[Flex 추론](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ko)은 기회적이고 비수기 컴퓨팅 용량을 활용하여 표준 요율에 비해 50% 할인을 제공합니다. 요청은 동기식으로 처리되므로 일괄 객체를 관리하기 위해 코드를 다시 작성할 필요가 없습니다.
+'삭제 가능' 트래픽이므로 시스템에 표준 트래픽 급증이 발생하면 요청이 선점될 수 있습니다.
 
-- **Độ tin cậy:** Không được đảm bảo, có thể loại bỏ mức độ nghiêm trọng
-- **Giá:** 50% Giá tiêu chuẩn (tính phí theo mã thông báo).
-- **Phù hợp nhất cho:** Quy trình làm việc nhiều bước của tác nhân, trong đó lệnh gọi N+1 phụ thuộc vào đầu ra của lệnh gọi N, các bản cập nhật CRM ở chế độ nền và các hoạt động đánh giá ngoại tuyến.
+- **안정성:** 보장되지 않으며 삭제 가능한 심각도
+- **가격:** 표준 가격 책정의 50%(토큰당 청구)
+- **최적의 사용 사례:** N+1 호출이 N 호출의 출력에 종속되는 다단계 Agentic Workflows, 백그라운드 CRM 업데이트, 오프라인 평가
 
-## Batch API (Hàng loạt, không đồng bộ)
+## Batch API (대량, 비동기식)
 
-[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi) được thiết kế để xử lý số lượng lớn yêu cầu một cách không đồng bộ với 50% chi phí tiêu chuẩn. Bạn có thể gửi yêu cầu dưới dạng từ điển cùng dòng
-hoặc sử dụng tệp đầu vào JSONL (tối đa 2 GB). Hệ thống này xử lý các yêu cầu bằng hàng đợi thông lượng trong nền với thời gian xử lý mục tiêu là 24 giờ.
+[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko)는 표준 비용의 50% 로 대량의 요청을 비동기식으로 처리하도록 설계되었습니다. 요청을 인라인 딕셔너리 또는 JSONL 입력 파일 (최대 2GB)로 제출할 수 있습니다. 목표 처리 시간이 24시간인 백그라운드 처리량 대기열을 사용하여 요청을 처리합니다.
 
-- **Độ tin cậy:** Có thể bỏ qua nhưng có hệ thống xếp hàng và thử lại tự động trong 24 giờ
-- **Giá:** 50% giá của gói Standard.
-- **Phù hợp nhất cho:** Tiền xử lý các tập dữ liệu lớn, chạy bộ kiểm thử hồi quy định kỳ và tạo hình ảnh hoặc nhúng khối lượng lớn.
+- **안정성:** 삭제 가능하지만 24시간 자동 재시도 및 대기열 시스템 포함
+- **가격:** 표준 가격 책정의 50%
+- **최적의 사용 사례:** 대규모 데이터 세트 사전 처리, 정기 회귀 테스트 모음 실행, 대량 이미지 또는 임베딩 생성
 
-## Lưu bộ nhớ đệm ngữ cảnh (Tiết kiệm dữ liệu đầu vào)
+## 컨텍스트 캐싱 (입력 비용 절감)
 
-[Bộ nhớ đệm ngữ cảnh](https://ai.google.dev/gemini-api/docs/caching?hl=vi) được dùng khi một ngữ cảnh ban đầu đáng kể được các yêu cầu ngắn hơn tham chiếu nhiều lần.
+[컨텍스트 캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)은 짧은 요청에서 상당한 양의 초기
+컨텍스트를 반복적으로 참조할 때 사용됩니다.
 
-- **Lưu vào bộ nhớ đệm ngầm:** Tự động bật trên Gemini 2.5 và các mô hình mới hơn.
-  Hệ thống sẽ giúp bạn tiết kiệm chi phí nếu yêu cầu của bạn sử dụng bộ nhớ đệm hiện có dựa trên
-  các tiền tố câu lệnh phổ biến.
-- **Lưu vào bộ nhớ đệm tường minh:** Bạn có thể tạo đối tượng bộ nhớ đệm theo cách thủ công với một Thời gian tồn tại (TTL) cụ thể. Sau khi tạo, bạn sẽ tham chiếu đến các mã thông báo được lưu vào bộ nhớ đệm cho các yêu cầu tiếp theo để tránh việc truyền tải cùng một tải trọng văn bản nhiều lần. Gemini 4 Argon trở lên không hỗ trợ tính năng lưu vào bộ nhớ đệm tường minh.
-- **Giá:** Tính phí dựa trên số lượng mã thông báo bộ nhớ đệm và thời gian lưu trữ (TTL).
-- **Phù hợp nhất với:** Chatbot có nhiều chỉ dẫn hệ thống, phân tích lặp đi lặp lại các tệp video dài hoặc truy vấn đối với các tập tài liệu lớn.
+- **암시적 캐싱:** Gemini 2.5 이상 모델에서 자동으로 사용 설정됩니다.
+  요청이 일반적인 프롬프트 접두어를 기반으로 기존 캐시에 적중하면 시스템에서 비용 절감 효과를 전달합니다.
+- **명시적 캐싱:** 특정 TTL (Time-To-Live)로 캐시 객체를 수동으로 만들 수 있습니다. 생성되면 후속 요청에 대해 캐시된 토큰을 참조하여 동일한 말뭉치 페이로드를 반복적으로 전달하지 않도록 합니다. 명시적 캐싱은 Gemini 4 Argon 이상에서 지원되지 않습니다.
+- **가격:** 캐시 토큰 수 및 스토리지 기간 (TTL)을 기준으로 청구됩니다.
+- **최적의 사용 사례:** 다양한 시스템 안내가 포함된 챗봇, 긴 동영상 파일의 반복 분석, 대규모 문서 세트에 대한 쿼리
 
-## Giảm chi phí đầu vào video bằng quy trình xử lý dựa trên tác nhân
+## 에이전트 처리를 통한 동영상 입력 비용 절감
 
-Đối với nội dung video dài (hơn 5 – 10 phút) hoặc các truy vấn có mục tiêu, quy trình xử lý dựa trên tác nhân có thể giảm chi phí mã thông báo đầu vào lên đến 88% trong khi vẫn cải thiện chất lượng phản hồi. Theo mặc định, tất cả mô hình (bao gồm cả Gemini 4) đều sử dụng [quy trình xử lý tĩnh](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi#agentic-video-understanding) để trích xuất khung hình ở tốc độ 1 khung hình/giây. Với khả năng hiểu video dựa trên tác nhân, mô hình này sẽ kiểm tra bản chép lời video trước, sau đó tải các phân đoạn hình ảnh một cách linh động ở tốc độ khung hình và độ phân giải cao hơn chỉ khi cần thiết. Đối với các đoạn video ngắn (dưới 5 phút) hoặc bản tóm tắt video đầy đủ trên diện rộng, hãy giữ chế độ xử lý tĩnh mặc định để có Thời gian hiển thị mã thông báo đầu tiên (TTFT) nhanh hơn và chi phí mã thông báo thấp hơn. Chế độ có tác nhân sẽ phát sinh suy luận nội bộ (`total_thought_tokens`) và các chuyến đi khứ hồi bằng công cụ (`total_tool_use_tokens`) trong quá trình điều hướng trên dòng thời gian.
+긴 형식의 동영상 콘텐츠 (5~10분 초과) 또는 타겟팅된 쿼리의 경우 에이전트 처리를 통해 응답 품질을 개선하면서 입력 토큰 비용을 최대 88% 절감할 수 있습니다. 기본적으로 모든 모델 (Gemini 4 포함)은 [정적 처리](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko#agentic-video-understanding)를 사용하여 1FPS로 프레임을 추출합니다. 에이전트 동영상 이해를 사용하면 모델이 먼저 동영상 트랜스크립트를 검사하고 필요한 경우에만 더 높은 프레임 속도와 해상도로 시각적 세그먼트를 동적으로 로드합니다. 짧은 클립 (5분 미만) 또는 광범위한 전체 동영상 요약의 경우 첫 번째 토큰까지의 시간 (TTFT)을 단축하고 토큰 오버헤드를 줄이려면 기본 정적 처리 모드를 유지하세요. 에이전트 모드는 타임라인 탐색 중에 내부 추론 (`total_thought_tokens`) 및 도구 왕복 (`total_tool_use_tokens`)을 발생시킵니다.
 
-Để sử dụng tính năng xử lý tác nhân với Gemini 4 Argon, 3.8 Flash, 3.6 Flash hoặc 3.5 Flash Lite,
-hãy đặt `processing: "agentic"` (Interactions API) hoặc
-`media_processing: "AGENTIC"` (GenerateContent API) trên video đầu vào. Nếu không hỗ trợ xử lý theo hướng tác nhân, mô hình sẽ trả về lỗi.
+Gemini 4 Argon, 3.8 Flash, 3.6 Flash 또는 3.5 Flash Lite에서 에이전트 처리를 사용하려면
+`processing: "agentic"` (Interactions API) 또는
+`media_processing: "AGENTIC"` (GenerateContent API)를 동영상 입력에서 설정합니다. 모델이 에이전트 처리를 지원하지 않으면 오류가 반환됩니다.
 
-Để biết thêm thông tin, hãy xem bài viết [Tính năng hiểu video dựa trên tác nhân](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi#agentic-video-understanding).
+자세한 내용은
+[에이전트 동영상 이해](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko#agentic-video-understanding)를 참고하세요.
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Cập nhật lần gần đây nhất: 2026-10-13 UTC.
+최종 업데이트: 2026-10-13(UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+의견을 전달하고 싶나요?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-13 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-10-13(UTC)"],[],[]]

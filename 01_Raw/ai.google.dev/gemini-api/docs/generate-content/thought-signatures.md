@@ -1,94 +1,102 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=vi
-fetched_at: 2026-10-26T05:55:29.499201+00:00
-title: "Ch\u1eef k\u00fd suy ngh\u0129 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=pt-BR
+fetched_at: 2026-11-02T07:13:14.583762+00:00
+title: "Assinaturas de racioc\u00ednio \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
+O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=pt-br)
 
-Gửi ý kiến phản hồi
+Envie comentários
 
-# Chữ ký suy nghĩ
+# Assinaturas de raciocínio
 
-Chữ ký suy nghĩ là các bản trình bày được mã hoá về quy trình suy nghĩ nội bộ của mô hình và được dùng để duy trì bối cảnh suy luận trong các hoạt động tương tác nhiều bước.
-Khi sử dụng các mô hình tư duy (chẳng hạn như dòng Gemini 4, 3 và 2.5), API có thể trả về trường `thoughtSignature` trong [các phần nội dung](https://ai.google.dev/api/caching?hl=vi#Part) của câu trả lời (ví dụ: các phần `text` hoặc `functionCall`).
+As assinaturas de pensamento são representações criptografadas do processo de pensamento interno do modelo e são usadas para preservar o contexto de raciocínio em interações de várias etapas.
+Ao usar modelos de pensamento (como as séries Gemini 4, 3 e 2.5), a API pode
+retornar um campo `thoughtSignature` nas [partes de conteúdo](https://ai.google.dev/api/caching?hl=pt-br#Part)
+da resposta (por exemplo, partes `text` ou `functionCall`).
 
-Theo nguyên tắc chung, nếu nhận được chữ ký suy nghĩ trong câu trả lời của mô hình, bạn nên truyền lại chính xác chữ ký đó như khi nhận được khi gửi nhật ký trò chuyện ở lượt tiếp theo.
-**Khi sử dụng các mô hình Gemini 4 và Gemini 3, bạn phải truyền lại chữ ký ý tưởng trong quá trình gọi hàm, nếu không bạn sẽ gặp lỗi xác thực** (mã trạng thái 4xx).
-Điều này bao gồm cả khi bạn sử dụng chế độ cài đặt `minimal`
-[mức độ tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#thinking-levels) cho Gemini 3
+Como regra geral, se você receber uma assinatura de pensamento em uma resposta do modelo, transmita-a exatamente como recebida ao enviar o histórico da conversa na próxima interação.
+**Ao usar os modelos Gemini 4 e Gemini 3, é necessário transmitir assinaturas de pensamento durante a chamada de função. Caso contrário, você receberá um erro de validação** (código de status 4xx).
+Isso inclui o uso da configuração de `minimal`
+[nível de pensamento](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#thinking-levels) para o Gemini 3
 Flash.
 
-## Cách hoạt động
+## Como funciona
 
-Hình ảnh bên dưới minh hoạ ý nghĩa của "lượt" và "bước" liên quan đến [gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) trong Gemini API. Một "lượt" là một lần trao đổi hoàn chỉnh trong cuộc trò chuyện giữa người dùng và mô hình. "Bước" là một hành động hoặc thao tác chi tiết hơn do mô hình thực hiện, thường là một phần của quy trình lớn hơn để hoàn tất một lượt.
+O gráfico abaixo mostra o significado de "interação" e "etapa" em relação a
+[chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) na API Gemini. Uma "interação" é uma troca única e completa em uma conversa entre um usuário e um modelo. Uma "etapa" é uma ação ou operação mais detalhada realizada pelo modelo, geralmente como parte de um processo maior para concluir uma interação.
 
-![Sơ đồ các bước và lượt gọi hàm](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=vi)
+![Diagrama de etapas e turnos de chamada de função](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=pt-br)
 
-*Tài liệu này tập trung vào việc xử lý tính năng gọi hàm cho các mô hình Gemini 4 và Gemini 3. Hãy tham khảo
-phần [hành vi của mô hình](#model-behavior) để biết những điểm khác biệt so với phiên bản 2.5.*
+*Este documento se concentra no processamento de chamadas de função para os modelos Gemini 4 e Gemini 3. Consulte
+a seção sobre o [comportamento do modelo](#model-behavior) para conferir discrepâncias com a versão 2.5.*
 
-Gemini 4 và Gemini 3 trả về chữ ký suy nghĩ cho tất cả phản hồi của mô hình (phản hồi từ
-API) bằng một lệnh gọi hàm. Chữ ký của suy nghĩ xuất hiện trong những trường hợp sau:
+O Gemini 4 e o Gemini 3 retornam assinaturas de pensamento para todas as respostas do modelo (respostas da API) com uma chamada de função. As assinaturas de pensamento aparecem nos seguintes casos:
 
-- Khi có các lệnh gọi [hàm song song](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi#parallel_function_calling), phần lệnh gọi hàm đầu tiên do phản hồi của mô hình trả về sẽ có chữ ký suy nghĩ.
-- Khi có các lệnh gọi hàm tuần tự (nhiều bước), mỗi lệnh gọi hàm sẽ có một chữ ký và bạn phải truyền tất cả chữ ký trở lại.
-- Câu trả lời của mô hình không có lệnh gọi hàm sẽ trả về chữ ký suy nghĩ bên trong phần cuối cùng mà mô hình trả về.
+- Quando há [chamadas de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#parallel_function_calling)
+  paralelas, a primeira parte da chamada de função retornada pela resposta do modelo terá uma
+  assinatura de pensamento.
+- Quando há chamadas de função sequenciais (várias etapas), cada chamada de função terá uma assinatura, e você precisará transmitir todas as assinaturas de volta.
+- As respostas do modelo sem uma chamada de função vão retornar uma assinatura de pensamento na última parte retornada pelo modelo.
 
-Bảng sau đây minh hoạ các lệnh gọi hàm nhiều bước, kết hợp định nghĩa về lượt và bước với khái niệm về chữ ký được giới thiệu ở trên:
+A tabela a seguir mostra uma visualização para chamadas de função de várias etapas, combinando as definições de interações e etapas com o conceito de assinaturas apresentado acima:
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Lượt** | **Bước** | **Yêu cầu của người dùng** | **Câu trả lời của mô hình** | **FunctionResponse** |
+| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
 | 1 | 1 | `request1 = user_prompt` | `FC1 + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + (FC1 + signature) + FR1` | `FC2 + signature` | `FR2` |
-| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Không có |
+| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Nenhum |
 
-## Chữ ký trong các phần gọi hàm
+## Assinaturas em partes de chamada de função
 
-Khi tạo `functionCall`, Gemini dựa vào `thought_signature` để xử lý chính xác kết quả của công cụ trong lượt tiếp theo.
+Quando o Gemini gera um `functionCall`, ele depende da `thought_signature` para processar a saída da ferramenta corretamente na próxima interação.
 
-- **Hành vi**:
-  - **Single Function Call** (Lệnh gọi hàm đơn lẻ): Phần `functionCall` sẽ chứa một `thought_signature`.
-  - **Lệnh gọi hàm song song**: Nếu mô hình tạo lệnh gọi hàm song song
-    trong một phản hồi, thì `thought_signature` **chỉ được đính kèm vào**
-    `functionCall` phần đầu tiên. Các phần `functionCall` tiếp theo trong cùng một phản hồi sẽ **không** chứa chữ ký.
-- **Yêu cầu**: Bạn **phải** trả về chữ ký này ở đúng phần mà bạn nhận được chữ ký khi gửi lại nhật ký trò chuyện.
-- **Xác thực**: Quy trình xác thực nghiêm ngặt được thực thi cho tất cả lệnh gọi hàm trong lượt hiện tại . (Chỉ cần lượt hiện tại; chúng tôi không xác thực các lượt trước)
-  - API này sẽ quay lại nhật ký (từ mới nhất đến cũ nhất) để tìm thông báo **Người dùng** gần đây nhất có chứa nội dung tiêu chuẩn (ví dụ: `text`) ( đây sẽ là điểm bắt đầu của lượt hiện tại). Đây sẽ không **be** là `functionResponse`.
-  - Mọi lượt **Tất cả** mô hình `functionCall` diễn ra sau thông báo sử dụng cụ thể đó đều được coi là một phần của lượt.
-  - Phần **đầu tiên** của `functionCall` trong **mỗi bước** của lượt hiện tại **phải** bao gồm `thought_signature`.
-  - Nếu bạn bỏ qua `thought_signature` cho phần `functionCall` đầu tiên trong bất kỳ bước nào của lượt hiện tại, thì yêu cầu sẽ không thành công và trả về lỗi 400.
-- **Nếu không trả về chữ ký thích hợp, bạn sẽ gặp lỗi theo cách sau**
-  - Các mô hình Gemini 3: Nếu không có chữ ký, bạn sẽ gặp lỗi 400. Nội dung sẽ có dạng như sau:
-    - Lệnh gọi hàm `<Function Call>` trong khối nội dung `<index of contents array>` bị thiếu `thought_signature`. Ví dụ: *Lệnh gọi hàm `FC1` trong khối nội dung `1.` bị thiếu `thought_signature`.*
+- **Comportamento**:
+  - **Chamada de função única**: a parte `functionCall` vai conter uma `thought_signature`.
+  - **Chamadas de função paralelas**: se o modelo gerar chamadas de função paralelas
+    em uma resposta, a `thought_signature` será anexada **apenas à primeira**
+    `functionCall` parte. As partes `functionCall` subsequentes na mesma resposta **não** vão conter uma assinatura.
+- **Requisito**: você **precisa** retornar essa assinatura na parte exata em que ela
+  foi recebida ao enviar o histórico da conversa de volta.
+- **Validação**: a validação estrita é aplicada a todas as chamadas de função na
+  interação atual . Somente a interação atual é necessária. Não validamos interações anteriores.
+  - A API volta no histórico (do mais recente ao mais antigo) para encontrar a mensagem **do usuário** mais recente que contém conteúdo padrão (por exemplo, `text`), que seria o início da interação atual. Essa **be** será uma `functionResponse`.
+  - **Todas** as interações `functionCall` do modelo que ocorrem após essa mensagem de uso específica são consideradas parte da interação.
+  - A **primeira** parte `functionCall` em **cada etapa** da interação atual **precisa** incluir a `thought_signature`.
+  - Se você omitir uma `thought_signature` para a primeira parte `functionCall` em qualquer etapa da interação atual, a solicitação vai falhar com um erro 400.
+- **Se as assinaturas adequadas não forem retornadas, veja como você vai receber um erro**
+  - Modelos do Gemini 3: a falha ao incluir assinaturas vai resultar em um erro 400. A redação será da seguinte forma:
+    - A chamada de função `<Function Call>` no bloco de conteúdo `<index of contents array>`
+      está sem um `thought_signature`. Por exemplo, *a chamada de função `FC1` no bloco de conteúdo `1.` está sem um `thought_signature`.*
 
-### Ví dụ về gọi hàm tuần tự
+### Exemplo de chamada de função sequencial
 
-Phần này trình bày ví dụ về nhiều lệnh gọi hàm, trong đó người dùng đặt một câu hỏi phức tạp cần nhiều tác vụ.
+Esta seção mostra um exemplo de várias chamadas de função em que o usuário faz uma pergunta complexa que exige várias tarefas.
 
-Hãy cùng xem một ví dụ về lệnh gọi hàm nhiều lượt, trong đó người dùng đặt một câu hỏi phức tạp cần nhiều tác vụ: `"Check flight status for AA100 and
+Vamos analisar um exemplo de chamada de função de várias interações em que o usuário faz
+uma pergunta complexa que exige várias tarefas: `"Check flight status for AA100 and
 book a taxi if delayed"`.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Bật** | **Bước** | **Yêu cầu của người dùng** | **Câu trả lời của mô hình** | **FunctionResponse** |
+| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
 | 1 | 1 | `request1="Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Đoạn mã sau đây minh hoạ trình tự trong bảng trên.
+O código a seguir ilustra a sequência na tabela acima.
 
-**Lượt 1, Bước 1 (Yêu cầu của người dùng)**
+**Interação 1, etapa 1 (solicitação do usuário)**
 
 ```
 {
@@ -143,7 +151,7 @@ book a taxi if delayed"`.
 }
 ```
 
-**Lượt 1, Bước 1 (Câu trả lời của mô hình)**
+**Interação 1, etapa 1 (resposta do modelo)**
 
 ```
 {
@@ -164,7 +172,8 @@ book a taxi if delayed"`.
 }
 ```
 
-**Lượt 1, Bước 2 (Phản hồi của người dùng – Gửi kết quả của công cụ)** Vì lượt này của người dùng chỉ chứa một `functionResponse` (không có văn bản mới), nên chúng ta vẫn đang ở Lượt 1. Chúng ta phải bảo tồn `<Signature_A>`.
+**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)** Como essa interação do usuário contém apenas uma `functionResponse` (sem texto novo), ainda estamos na interação 1. Precisamos
+preservar `<Signature_A>`.
 
 ```
 {
@@ -205,7 +214,7 @@ book a taxi if delayed"`.
 }
 ```
 
-**Lượt 1, Bước 2 (Mô hình)** Mô hình hiện quyết định đặt taxi dựa trên kết quả đầu ra của công cụ trước đó.
+**Interação 1, etapa 2 (modelo)** O modelo agora decide reservar um táxi com base na saída da ferramenta anterior.
 
 ```
 {
@@ -226,7 +235,8 @@ book a taxi if delayed"`.
 }
 ```
 
-**Lượt 1, Bước 3 (Người dùng – Gửi kết quả của công cụ)** Để gửi thông tin xác nhận đặt taxi, chúng ta phải thêm chữ ký cho **TẤT CẢ** lệnh gọi hàm trong vòng lặp này (`<Signature A>` + `<Signature B>`).
+**Interação 1, etapa 3 (usuário: envio da saída da ferramenta)** Para enviar a confirmação da reserva de táxi, precisamos incluir assinaturas para **TODAS** as chamadas de função neste loop
+(`<Signature A>` + `<Signature B>`).
 
 ```
 {
@@ -295,19 +305,19 @@ book a taxi if delayed"`.
 }
 ```
 
-### Ví dụ về lệnh gọi hàm song song
+### Exemplo de chamada de função paralela
 
-Hãy cùng xem một ví dụ về lệnh gọi hàm song song, trong đó người dùng yêu cầu
-`"Check weather in Paris and London"` để xem mô hình thực hiện quy trình xác thực ở đâu.
+Vamos analisar um exemplo de chamada de função paralela em que o usuário pergunta
+`"Check weather in Paris and London"` para ver onde o modelo faz a validação.
 
-| **Lượt** | **Bước** | **Yêu cầu của người dùng** | **Câu trả lời của mô hình** | **FunctionResponse** |
+| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
 | --- | --- | --- | --- | --- |
-| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + chữ ký  FC2 ("London") | FR1 |
-| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (không có FC) | Không có |
+| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + signature  FC2 ("London") | FR1 |
+| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (no FCs) | Nenhum |
 
-Đoạn mã sau đây minh hoạ trình tự trong bảng trên.
+O código a seguir ilustra a sequência na tabela acima.
 
-**Lượt 1, Bước 1 (Yêu cầu của người dùng)**
+**Interação 1, etapa 1 (solicitação do usuário)**
 
 ```
 {
@@ -346,7 +356,7 @@ Hãy cùng xem một ví dụ về lệnh gọi hàm song song, trong đó ngư�
 }
 ```
 
-**Lượt 1, Bước 1 (Câu trả lời của mô hình)**
+**Interação 1, etapa 1 (resposta do modelo)**
 
 ```
 {
@@ -374,7 +384,8 @@ Hãy cùng xem một ví dụ về lệnh gọi hàm song song, trong đó ngư�
 }
 ```
 
-**Lượt 1, Bước 2 (Phản hồi của người dùng – Gửi đầu ra của công cụ)** Chúng ta phải giữ nguyên `<Signature_A>` ở phần đầu tiên đúng như đã nhận.
+**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)** Precisamos preservar
+`<Signature_A>` na primeira parte exatamente como recebida.
 
 ```
 [
@@ -432,18 +443,20 @@ Hãy cùng xem một ví dụ về lệnh gọi hàm song song, trong đó ngư�
 ]
 ```
 
-## Chữ ký trong các phần không phải `functionCall`
+## Assinaturas em partes não `functionCall`
 
-Gemini cũng có thể trả về `thought_signatures` trong phần cuối của câu trả lời
-trong các phần không phải lệnh gọi hàm.
+O Gemini também pode retornar `thought_signatures` na parte final da resposta em partes que não são de chamada de função.
 
-- **Hành vi**: Phần nội dung cuối cùng (`text, inlineData…`) do mô hình trả về có thể chứa `thought_signature`.
-- **Đề xuất**: Bạn **nên** trả về các chữ ký này để đảm bảo mô hình duy trì khả năng suy luận chất lượng cao, đặc biệt là đối với các quy trình làm việc phức tạp theo hướng dẫn hoặc quy trình làm việc mô phỏng của tác nhân.
-- **Xác thực**: API **không** thực thi nghiêm ngặt quy trình xác thực. Bạn sẽ không nhận được lỗi chặn nếu bỏ qua các chỉ số này, mặc dù hiệu suất có thể giảm.
+- **Comportamento**: a parte de conteúdo final (`text, inlineData…`) retornada pelo
+  modelo pode conter um `thought_signature`.
+- **Recomendação**: o retorno dessas assinaturas é **recomendado** para garantir que
+  o modelo mantenha um raciocínio de alta qualidade, especialmente para instruções complexas
+  seguindo ou Agentic Workflows simulados.
+- **Validação**: a API **não** aplica a validação de forma estrita. Você não vai receber um erro de bloqueio se omiti-las, embora a performance possa ser degradada.
 
-### Văn bản/Lý luận theo ngữ cảnh (Không xác thực)
+### Texto/raciocínio no contexto (sem validação)
 
-**Lượt 1, Bước 1 (Câu trả lời của mô hình)**
+**Interação 1, etapa 1 (resposta do modelo)**
 
 ```
 {
@@ -457,7 +470,7 @@ trong các phần không phải lệnh gọi hàm.
 }
 ```
 
-**Lượt 2, Bước 1 (Người dùng)**
+**Interação 2, etapa 1 (usuário)**
 
 ```
 [
@@ -475,28 +488,27 @@ trong các phần không phải lệnh gọi hàm.
 ]
 ```
 
-## Chữ ký cho khả năng tương thích với OpenAI
+## Assinaturas para compatibilidade com a OpenAI
 
-Các ví dụ sau đây cho thấy cách xử lý chữ ký suy nghĩ cho một API hoàn thành cuộc trò chuyện bằng cách sử dụng [khả năng tương thích với OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=vi).
+Os exemplos a seguir mostram como processar assinaturas de pensamento para uma API de conclusão de chat
+usando [compatibilidade com a OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pt-br).
 
-### Ví dụ về việc gọi hàm tuần tự
+### Exemplo de chamada de função sequencial
 
-Đây là ví dụ về việc gọi nhiều hàm khi người dùng đặt một câu hỏi phức tạp, đòi hỏi phải thực hiện nhiều nhiệm vụ.
+Este é um exemplo de várias chamadas de função em que o usuário faz uma pergunta complexa que exige várias tarefas.
 
-Hãy cùng xem một ví dụ về lệnh gọi hàm nhiều lượt, trong đó người dùng hỏi
-`Check flight status for AA100 and book a taxi if delayed` và bạn có thể thấy điều gì
-xảy ra khi người dùng đặt một câu hỏi phức tạp cần nhiều tác vụ.
+Vamos analisar um exemplo de chamada de função de várias interações em que o usuário pergunta `Check flight status for AA100 and book a taxi if delayed` e você pode ver o que acontece quando o usuário faz uma pergunta complexa que exige várias tarefas.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Turn** | **Bước** | **Yêu cầu của người dùng** | **Câu trả lời của mô hình** | **FunctionResponse** |
+| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
 | 1 | 1 | `request1 = "Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Đoạn mã sau đây sẽ thực hiện trình tự đã cho.
+O código a seguir mostra a sequência fornecida.
 
-**Lượt 1, Bước 1 (Yêu cầu của người dùng)**
+**Interação 1, etapa 1 (solicitação do usuário)**
 
 ```
 {
@@ -550,7 +562,7 @@ xảy ra khi người dùng đặt một câu hỏi phức tạp cần nhiều t
 }
 ```
 
-**Lượt 1, Bước 1 (Câu trả lời của mô hình)**
+**Interação 1, etapa 1 (resposta do modelo)**
 
 ```
 {
@@ -573,9 +585,10 @@ xảy ra khi người dùng đặt một câu hỏi phức tạp cần nhiều t
     }
 ```
 
-**Lượt 1, Bước 2 (Phản hồi của người dùng – Gửi kết quả của công cụ)**
+**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)**
 
-Vì lượt này của người dùng chỉ chứa `functionResponse` (không có văn bản mới), nên chúng ta vẫn đang ở Lượt 1 và phải giữ nguyên `<Signature_A>`.
+Como essa interação do usuário contém apenas um `functionResponse` (sem texto novo), ainda estamos
+na interação 1 e precisamos preservar `<Signature_A>`.
 
 ```
 "messages": [
@@ -610,9 +623,9 @@ Vì lượt này của người dùng chỉ chứa `functionResponse` (không c�
   ]
 ```
 
-**Lượt 1, Bước 2 (Mô hình)**
+**Interação 1, etapa 2 (modelo)**
 
-Giờ đây, mô hình quyết định đặt taxi dựa trên kết quả đầu ra trước đó của công cụ.
+O modelo agora decide reservar um táxi com base na saída da ferramenta anterior.
 
 ```
 {
@@ -635,9 +648,10 @@ Giờ đây, mô hình quyết định đặt taxi dựa trên kết quả đầ
 }
 ```
 
-**Lượt 1, Bước 3 (Người dùng – Gửi kết quả của công cụ)**
+**Interação 1, etapa 3 (usuário: envio da saída da ferramenta)**
 
-Để gửi thông báo xác nhận đặt xe taxi, chúng ta phải thêm chữ ký cho TẤT CẢ các lệnh gọi hàm trong vòng lặp này (`<Signature A>` + `<Signature B>`).
+Para enviar a confirmação da reserva de táxi, precisamos incluir assinaturas para TODAS as
+chamadas de função neste loop (`<Signature A>` + `<Signature B>`).
 
 ```
 "messages": [
@@ -696,19 +710,21 @@ Giờ đây, mô hình quyết định đặt taxi dựa trên kết quả đầ
   ]
 ```
 
-### Ví dụ về lệnh gọi hàm song song
+### Exemplo de chamada de função paralela
 
-Hãy cùng xem một ví dụ về lệnh gọi hàm song song, trong đó người dùng hỏi `"Check weather in Paris and London"` và bạn có thể thấy mô hình thực hiện quy trình xác thực ở đâu.
+Vamos analisar um exemplo de chamada de função paralela em que o usuário pergunta
+`"Check weather in Paris and London"` e você pode ver onde o modelo faz
+validação.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Bật** | **Bước** | **Yêu cầu của người dùng** | **Câu trả lời của mô hình** | **FunctionResponse** |
+| **Interação** | **Etapa** | **Solicitação do usuário** | **Resposta do modelo** | **FunctionResponse** |
 | 1 | 1 | `request1="Check the weather in Paris and London"` | `FC1 ("Paris") + signature`  `FC2 ("London")` | `FR1` |
 | 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | `text_output`  `(no FCs)` | `None` |
 
-Sau đây là mã để duyệt qua chuỗi đã cho.
+Confira o código para analisar a sequência fornecida.
 
-**Lượt 1, Bước 1 (Yêu cầu của người dùng)**
+**Interação 1, etapa 1 (solicitação do usuário)**
 
 ```
 {
@@ -747,7 +763,7 @@ Sau đây là mã để duyệt qua chuỗi đã cho.
 }
 ```
 
-**Lượt 1, Bước 1 (Câu trả lời của mô hình)**
+**Interação 1, etapa 1 (resposta do modelo)**
 
 ```
 {
@@ -778,9 +794,9 @@ Sau đây là mã để duyệt qua chuỗi đã cho.
 }
 ```
 
-**Lượt 1, Bước 2 (Phản hồi của người dùng – Gửi kết quả của công cụ)**
+**Interação 1, etapa 2 (resposta do usuário: envio de saídas de ferramentas)**
 
-Bạn phải giữ nguyên `<Signature_A>` ở phần đầu tiên đúng như khi nhận được.
+É necessário preservar `<Signature_A>` na primeira parte exatamente como recebida.
 
 ```
 "messages": [
@@ -829,40 +845,52 @@ Bạn phải giữ nguyên `<Signature_A>` ở phần đầu tiên đúng như k
   ]
 ```
 
-## Câu hỏi thường gặp
+## Perguntas frequentes
 
-1. **Làm cách nào để chuyển nhật ký từ một mô hình khác sang Gemini 4 hoặc Gemini 3 bằng một
-   phần gọi hàm trong lượt và bước hiện tại? Tôi cần cung cấp các phần gọi hàm không phải do API tạo ra và do đó không có chữ ký suy nghĩ liên kết?**
+1. **Como faço para transferir o histórico de um modelo diferente para o Gemini 4 ou o Gemini 3 com uma parte de chamada de função na interação e etapa atuais? Preciso fornecer partes de chamada de função
+   que não foram geradas pela API e, portanto, não têm uma assinatura de pensamento associada
+   ?**
 
-   Mặc dù bạn không nên chèn các khối lệnh gọi hàm tuỳ chỉnh vào yêu cầu, nhưng trong trường hợp không thể tránh khỏi, chẳng hạn như cung cấp thông tin cho mô hình về các lệnh gọi hàm và phản hồi được ứng dụng thực thi một cách tất định, hoặc chuyển dấu vết từ một mô hình khác không bao gồm chữ ký suy nghĩ, bạn có thể đặt các chữ ký giả sau đây là `"context_engineering_is_the_way_to_go"` hoặc `"skip_thought_signature_validator"` trong trường chữ ký suy nghĩ để bỏ qua bước xác thực.
-2. **Tôi đang gửi lại các lệnh gọi hàm song song và phản hồi xen kẽ và API đang trả về mã lỗi 400. Vì sao lại như vậy?**
+   Embora a injeção de blocos de chamada de função personalizados na solicitação seja fortemente
+   desencorajada, em casos em que não é possível evitá-la, por exemplo, fornecer informações
+   ao modelo sobre chamadas de função e respostas que foram executadas
+   de forma determinística pelo cliente ou transferir um rastreamento de um modelo diferente
+   que não inclui assinaturas de pensamento, você pode definir as seguintes
+   assinaturas fictícias de `"context_engineering_is_the_way_to_go"` ou
+   `"skip_thought_signature_validator"` no campo de assinatura de pensamento para ignorar a
+   validação.
+2. **Estou enviando chamadas de função paralelas intercaladas e respostas, e a API está retornando um erro 400. Por quê?**
 
-   Khi API trả về các lệnh gọi hàm song song "FC1 + chữ ký, FC2", phản hồi dự kiến của người dùng là "FC1 + chữ ký, FC2, FR1, FR2". Nếu bạn có các khoá này xen kẽ với nhau dưới dạng "FC1 + chữ ký, FR1, FC2, FR2", thì API sẽ trả về lỗi 400.
-3. **Khi truyền trực tuyến và mô hình không trả về lệnh gọi hàm, tôi không tìm thấy chữ ký suy nghĩ**
+   Quando a API retorna chamadas de função paralelas "FC1 + assinatura, FC2", a resposta do usuário esperada é "FC1 + assinatura, FC2, FR1, FR2". Se você as tiver intercaladas como "FC1 + assinatura, FR1, FC2, FR2", a API vai retornar um erro 400.
+3. **Quando a transmissão é feita e o modelo não retorna uma chamada de função, não consigo encontrar
+   a assinatura de pensamento**
 
-   Trong một phản hồi của mô hình không chứa lệnh gọi hàm có yêu cầu truyền trực tuyến, mô hình có thể trả về chữ ký suy nghĩ trong một phần có nội dung văn bản trống. Bạn nên phân tích cú pháp toàn bộ yêu cầu cho đến khi mô hình trả về `finish_reason`.
+   Durante uma resposta do modelo que não contém uma FC com uma solicitação de transmissão, o modelo pode retornar a assinatura de pensamento em uma parte com um conteúdo de texto vazio. É recomendável analisar toda a solicitação até que a `finish_reason` seja retornada pelo modelo.
 
-## Chữ ký suy nghĩ cho các mô hình khác nhau
+## Assinaturas de pensamento para diferentes modelos
 
-Các mô hình [Gemini 4](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=vi), [Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=vi#gemini-3) và Gemini 2.5 có hành vi khác nhau đối với chữ ký tư duy trong các lệnh gọi hàm:
+[Os modelos](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=pt-br)[Gemini 4](https://ai.google.dev/gemini-api/docs/models?hl=pt-br#gemini-3), Gemini 3 e Gemini 2.5
+se comportam de maneira diferente com assinaturas de pensamento em chamadas de função:
 
-- Nếu có lệnh gọi hàm trong một phản hồi,
-  - Gemini 4 và Gemini 3 sẽ luôn có chữ ký trong phần gọi hàm đầu tiên.
-    Bạn **bắt buộc** phải trả lại bộ phận đó.
-  - Gemini 2.5 sẽ có chữ ký ở phần đầu tiên (bất kể loại). Bạn **không bắt buộc** phải trả lại phần đó.
-- Nếu không có lệnh gọi hàm nào trong phản hồi, hãy làm như sau:
-  - Gemini 4 và Gemini 3 sẽ có chữ ký ở phần cuối nếu mô hình tạo ra một suy nghĩ.
-  - Gemini 2.5 sẽ không có chữ ký ở bất kỳ phần nào.
+- Se houver chamadas de função em uma resposta,
+  - O Gemini 4 e o Gemini 3 sempre terão a assinatura na primeira parte da chamada de função.
+    É **obrigatório** retornar essa parte.
+  - O Gemini 2.5 terá a assinatura na primeira parte (independente do tipo). É **opcional** retornar essa parte.
+- Se não houver chamadas de função em uma resposta,
+  - O Gemini 4 e o Gemini 3 terão a assinatura na última parte se o modelo gerar um pensamento.
+  - O Gemini 2.5 não terá uma assinatura em nenhuma parte.
 
-Hãy tham khảo trang [Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#signatures) để biết thêm thông tin chi tiết về việc so sánh.
-Đối với các mô hình Gemini 3 Image, hãy xem phần quy trình tư duy trong hướng dẫn về tính năng [Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi#thinking-process).
+Consulte a página [Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#signatures) para mais
+detalhes de comparação.
+Para modelos de imagem do Gemini 3, consulte a seção sobre o processo de pensamento do
+[guia de geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br#thinking-process).
 
-Gửi ý kiến phản hồi
+Envie comentários
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Cập nhật lần gần đây nhất: 2026-10-13 UTC.
+Última atualização 2026-10-13 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Quer enviar seu feedback?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-13 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-10-13 UTC."],[],[]]

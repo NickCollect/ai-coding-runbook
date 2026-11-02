@@ -1,48 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=th
-fetched_at: 2026-10-26T05:42:19.201184+00:00
-title: "\u0e42\u0e17\u0e40\u0e04\u0e47\u0e19\u0e0a\u0e31\u0e48\u0e27\u0e04\u0e23\u0e32\u0e27 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=fr
+fetched_at: 2026-11-02T07:24:40.528372+00:00
+title: "Jetons \u00e9ph\u00e9m\u00e8res \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
+Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-ส่งความคิดเห็น
+Envoyer des commentaires
 
-# โทเค็นชั่วคราว
+# Jetons éphémères
 
-โทเค็นชั่วคราวคือโทเค็นการตรวจสอบสิทธิ์ที่มีอายุสั้นสำหรับเข้าถึง Gemini API ผ่าน [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) โดยได้รับการออกแบบมาเพื่อเพิ่มความปลอดภัยเมื่อคุณเชื่อมต่อจากอุปกรณ์ของผู้ใช้ไปยัง API โดยตรง (การติดตั้งใช้งาน[ไคลเอ็นต์ไปยังเซิร์ฟเวอร์](https://ai.google.dev/gemini-api/docs/live?hl=th#implementation-approach))
-โทเค็นชั่วคราวสามารถดึงข้อมูลจากแอปพลิเคชันฝั่งไคลเอ็นต์ เช่น เว็บเบราว์เซอร์หรือแอปบนอุปกรณ์เคลื่อนที่ ได้เช่นเดียวกับคีย์ API มาตรฐาน แต่เนื่องจากโทเค็นชั่วคราวจะหมดอายุอย่างรวดเร็วและอาจถูกจำกัด จึงช่วยลดความเสี่ยงด้านความปลอดภัยในสภาพแวดล้อมฮาร์ดแวร์และซอฟต์แวร์ได้อย่างมาก คุณควรใช้เมื่อเข้าถึง Live API โดยตรงจากแอปพลิเคชันฝั่งไคลเอ็นต์เพื่อเพิ่มความปลอดภัยของคีย์ API
+Les jetons éphémères sont des jetons d'authentification de courte durée permettant d'accéder à l'API Gemini via [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Elles sont conçues pour renforcer la sécurité lorsque vous vous connectez directement à l'API depuis l'appareil d'un utilisateur (une implémentation [client-serveur](https://ai.google.dev/gemini-api/docs/live?hl=fr#implementation-approach)). Comme les clés API standards, les jetons éphémères peuvent être extraits des applications côté client, telles que les navigateurs Web ou les applications mobiles. Toutefois, comme les jetons éphémères expirent rapidement et peuvent être limités, ils réduisent considérablement les risques de sécurité dans un environnement de production. Vous devez les utiliser lorsque vous accédez à l'API Live directement depuis des applications côté client pour renforcer la sécurité des clés API.
 
-## วิธีการทำงานของโทเค็นชั่วคราว
+## Fonctionnement des jetons éphémères
 
-โทเค็นชั่วคราวทำงานในระดับสูงดังนี้
+Voici comment fonctionnent les jetons éphémères de manière générale :
 
-1. ไคลเอ็นต์ (เช่น เว็บแอป) จะตรวจสอบสิทธิ์กับแบ็กเอนด์
-2. แบ็กเอนด์ของคุณขอโทเค็นชั่วคราวจากบริการจัดสรรของ Gemini API
-3. Gemini API จะออกโทเค็นที่มีอายุสั้น
-4. แบ็กเอนด์จะส่งโทเค็นไปยังไคลเอ็นต์สำหรับการเชื่อมต่อ WebSocket ไปยัง Live
-   API คุณทำได้โดยการสลับคีย์ API กับโทเค็นชั่วคราว
-5. จากนั้นไคลเอ็นต์จะใช้โทเค็นราวกับว่าเป็นคีย์ API
+1. Votre client (par exemple, une application Web) s'authentifie auprès de votre backend.
+2. Votre backend demande un jeton éphémère au service de provisionnement de l'API Gemini.
+3. L'API Gemini émet un jeton de courte durée.
+4. Votre backend envoie le jeton au client pour les connexions WebSocket à l'API Live. Pour ce faire, remplacez votre clé API par un jeton éphémère.
+5. Le client utilise ensuite le jeton comme s'il s'agissait d'une clé API.
 
-![ภาพรวมของโทเค็นชั่วคราว](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=th)
+![Présentation des jetons éphémères](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=fr)
 
-ซึ่งจะช่วยเพิ่มความปลอดภัยเนื่องจากโทเค็นมีอายุสั้นแม้ว่าจะมีการดึงข้อมูลออกมา
-ซึ่งแตกต่างจากคีย์ API ที่มีอายุยาวนานซึ่งติดตั้งใช้งานฝั่งไคลเอ็นต์ เนื่องจากไคลเอ็นต์ส่งข้อมูลไปยัง Gemini โดยตรง การดำเนินการนี้จึงช่วยปรับปรุงเวลาในการตอบสนองและหลีกเลี่ยงไม่ให้แบ็กเอนด์ต้องทำหน้าที่เป็นพร็อกซีข้อมูลแบบเรียลไทม์
+Cela renforce la sécurité, car même s'il est extrait, le jeton est éphémère, contrairement à une clé API à longue durée de vie déployée côté client. Comme le client envoie les données directement à Gemini, cela améliore également la latence et évite à vos backends d'avoir à relayer les données en temps réel.
 
-## สร้างโทเค็นชั่วคราว
+## Créer un jeton éphémère
 
-ต่อไปนี้เป็นตัวอย่างแบบง่ายๆ เกี่ยวกับวิธีรับโทเค็นชั่วคราวจาก Gemini
-โดยค่าเริ่มต้น คุณจะมีเวลา 1 นาทีในการเริ่มเซสชัน Live API ใหม่โดยใช้โทเค็น
-จากคำขอนี้ (`newSessionExpireTime`) และ 30 นาทีในการส่งข้อความผ่าน
-การเชื่อมต่อดังกล่าว (`expireTime`)
+Voici un exemple simplifié de la façon d'obtenir un jeton éphémère de Gemini.
+Par défaut, vous disposez d'une minute pour démarrer de nouvelles sessions de l'API Live à l'aide du jeton de cette requête (`newSessionExpireTime`) et de 30 minutes pour envoyer des messages via cette connexion (`expireTime`).
 
 ### Python
 
@@ -96,12 +91,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-ดูข้อจำกัดของค่า `expireTime` ค่าเริ่มต้น และข้อกำหนดอื่นๆ ของฟิลด์ได้ที่[เอกสารอ้างอิง API](https://ai.google.dev/api/live?hl=th#ephemeral-auth-tokens)
-ภายใน`expireTime`กรอบเวลา คุณจะต้อง
-[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=th#session-resumption)
-เชื่อมต่อการโทรอีกครั้งทุก 10 นาที (สามารถทำได้ด้วยโทเค็นเดียวกันแม้ว่า`uses: 1`)
+Pour connaître les contraintes de valeur, les valeurs par défaut et les autres spécifications des champs `expireTime`, consultez la [documentation de référence de l'API](https://ai.google.dev/api/live?hl=fr#ephemeral-auth-tokens).
+Dans le délai de `expireTime`, vous devrez [`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=fr#session-resumption) reconnecter l'appel toutes les 10 minutes (cela peut être fait avec le même jeton, même si `uses: 1`).
 
-นอกจากนี้ คุณยังล็อกโทเค็นชั่วคราวกับการกำหนดค่าชุดหนึ่งได้ด้วย ซึ่งอาจมีประโยชน์ในการปรับปรุงความปลอดภัยของแอปพลิเคชันเพิ่มเติมและเก็บคำสั่งของระบบไว้ที่ฝั่งเซิร์ฟเวอร์
+Il est également possible de verrouiller un jeton éphémère sur un ensemble de configurations. Cela peut être utile pour améliorer davantage la sécurité de votre application et conserver vos instructions système côté serveur.
 
 ### Python
 
@@ -170,14 +163,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-นอกจากนี้ คุณยังล็อกฟิลด์บางส่วนได้ด้วย ดูข้อมูลเพิ่มเติมได้ใน[เอกสารประกอบ SDK](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
+Vous pouvez également verrouiller un sous-ensemble de champs. Pour en savoir plus, consultez la [documentation du SDK](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields).
 
-## เชื่อมต่อกับ Live API ด้วยโทเค็นชั่วคราว
+## Se connecter à l'API Live avec un jeton éphémère
 
-เมื่อมีโทเค็นชั่วคราวแล้ว คุณจะใช้โทเค็นนั้นได้ราวกับเป็นคีย์ API (แต่โปรดทราบว่าโทเค็นนี้ใช้ได้กับ API ที่ใช้งานจริงเท่านั้น และใช้ได้กับ API เวอร์ชัน `v1beta` เท่านั้น)
+Une fois que vous disposez d'un jeton éphémère, vous l'utilisez comme s'il s'agissait d'une clé API (mais n'oubliez pas qu'il ne fonctionne que pour l'API en direct et uniquement avec la version `v1beta` de l'API).
 
-การใช้โทเค็นชั่วคราวจะเพิ่มมูลค่าได้ก็ต่อเมื่อมีการติดตั้งใช้งานแอปพลิเคชัน
-ที่ใช้แนวทาง[การติดตั้งใช้งานจากไคลเอ็นต์ไปยังเซิร์ฟเวอร์](https://ai.google.dev/gemini-api/docs/live?hl=th#implementation-approach)
+L'utilisation de jetons éphémères n'est utile que lors du déploiement d'applications qui suivent l'approche d'[implémentation client-serveur](https://ai.google.dev/gemini-api/docs/live?hl=fr#implementation-approach).
 
 ### JavaScript
 
@@ -207,31 +199,29 @@ async function main() {
 main();
 ```
 
-ดูตัวอย่างเพิ่มเติมได้ที่[เริ่มต้นใช้งาน Live API](https://ai.google.dev/gemini-api/docs/live?hl=th)
+Pour obtenir d'autres exemples, consultez [Premiers pas avec l'API Live](https://ai.google.dev/gemini-api/docs/live?hl=fr).
 
-## แนวทางปฏิบัติแนะนำ
+## Bonnes pratiques
 
-- กำหนดระยะเวลาหมดอายุสั้นๆ โดยใช้พารามิเตอร์ `expire_time`
-- โทเค็นจะหมดอายุ ซึ่งต้องเริ่มกระบวนการจัดสรรใหม่
-- ยืนยันการตรวจสอบสิทธิ์ที่ปลอดภัยสำหรับแบ็กเอนด์ของคุณเอง โทเค็นชั่วคราวจะ
-  ปลอดภัยเท่ากับวิธีการตรวจสอบสิทธิ์แบ็กเอนด์เท่านั้น
-- โดยทั่วไปแล้ว ให้หลีกเลี่ยงการใช้โทเค็นชั่วคราวสำหรับการเชื่อมต่อจากแบ็กเอนด์ไปยัง Gemini
-  เนื่องจากโดยปกติแล้วเส้นทางนี้ถือว่าปลอดภัย
+- Définissez une courte durée d'expiration à l'aide du paramètre `expire_time`.
+- Les jetons expirent, ce qui nécessite de relancer le processus de provisionnement.
+- Validez l'authentification sécurisée pour votre propre backend. La sécurité des jetons éphémères dépendra uniquement de la sécurité de votre méthode d'authentification backend.
+- En règle générale, évitez d'utiliser des jetons éphémères pour les connexions entre le backend et Gemini, car ce chemin est généralement considéré comme sécurisé.
 
-## ข้อจำกัด
+## Limites
 
-ขณะนี้โทเค็นชั่วคราวใช้ได้กับ [Live API](https://ai.google.dev/gemini-api/docs/live?hl=th) เท่านั้น
+Les jetons éphémères ne sont compatibles qu'avec l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=fr) pour le moment.
 
-## ขั้นตอนถัดไป
+## Étape suivante
 
-- อ่านข้อมูลเพิ่มเติมเกี่ยวกับโทเค็นชั่วคราวได้ใน[ข้อมูลอ้างอิง](https://ai.google.dev/api/live?hl=th#ephemeral-auth-tokens)ของ Live API
+- Pour en savoir plus, consultez la [documentation de référence](https://ai.google.dev/api/live?hl=fr#ephemeral-auth-tokens) de l'API Live sur les jetons éphémères.
 
-ส่งความคิดเห็น
+Envoyer des commentaires
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-อัปเดตล่าสุด 2026-09-17 UTC
+Dernière mise à jour le 2026/09/17 (UTC).
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Voulez-vous nous donner plus d'informations ?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-17 UTC"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/17 (UTC)."],[],[]]

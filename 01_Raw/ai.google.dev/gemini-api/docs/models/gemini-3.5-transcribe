@@ -1,113 +1,114 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=it
-fetched_at: 2026-10-26T05:51:13.657721+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=ar
+fetched_at: 2026-11-02T07:18:39.977368+00:00
 title: "Gemini 3.5 Transcribe \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
+‫Gemini 4 Argon متاح الآن. [جرِّب هذه الميزة](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ar).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Invia feedback
+إرسال ملاحظات
 
 # Gemini 3.5 Transcribe
 
-Gemini 3.5 Transcribe è un modello di sintesi vocale basato sulle funzionalità di comprensione audio di Gemini. Fornisce una trascrizione accurata e a bassa latenza con rilevamento della lingua basato sulle espressioni, diarizzazione degli interlocutori, timestamp a livello di parola, trascrizione intelligente e differenziazione del parlato del vocabolario personalizzato.
+‫Gemini 3.5 Transcribe هو نموذج لتحويل الكلام إلى نص يستند إلى إمكانات Gemini في فهم المحتوى الصوتي. وتوفّر هذه الواجهة تحويلاً دقيقًا للصوت إلى نص بزمن انتقال منخفض، مع ميزات مثل رصد اللغة استنادًا إلى العبارات، وتقسيم المتحدّثين، والطوابع الزمنية على مستوى الكلمات، والتحويل الذكي للصوت إلى نص، وتخصيص المفردات لتحسين دقة التعرّف على الكلام.
 
-[Prova in Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-transcribe&hl=it)
+[التجربة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-transcribe&hl=ar)
 
-## Documentazione
+## الوثائق
 
-Gemini 3.5 Transcribe converte la voce in testo dai file audio. Rileva automaticamente più di 85 lingue, gestisce il cambio di codice multilingue, identifica i singoli oratori, genera timestamp a livello di parola e si adatta a termini specifici del dominio tramite la ponderazione del vocabolario personalizzato.
+يحوّل Gemini 3.5 Transcribe الكلام إلى نص من الملفات الصوتية. تتعرّف هذه الواجهة تلقائيًا على أكثر من 85 لغة، وتتعامل مع التبديل بين اللغات المتعددة، وتحدّد المتحدثين الفرديين، وتُخرج طوابع زمنية على مستوى الكلمات، وتتكيّف مع المصطلحات الخاصة بالمجال من خلال انحياز المفردات المخصّصة.
 
-Consulta la guida alla [trascrizione audio](https://ai.google.dev/gemini-api/docs/transcribe?hl=it) per una copertura completa delle funzionalità non di streaming. Per la trascrizione in tempo reale e a bassa latenza dello streaming tramite WebSockets, consulta la guida alla [trascrizione in tempo reale](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=it) utilizzando `gemini-3.5-transcribe-live`. Per informazioni dettagliate sui prezzi, consulta la [pagina dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it#gemini-3.5-transcribe).
+يُرجى الانتقال إلى دليل [تحويل الصوت إلى نص](https://ai.google.dev/gemini-api/docs/transcribe?hl=ar) للاطّلاع على تغطية كاملة للميزات غير المتعلّقة بالبث. لتحويل الصوت إلى نص في الوقت الفعلي وبوقت استجابة منخفض عبر WebSockets، يُرجى الاطّلاع على دليل [تحويل الصوت إلى نص مباشرةً](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=ar) باستخدام `gemini-3.5-transcribe-live`. للاطّلاع على الأسعار المفصّلة، يُرجى الانتقال إلى [صفحة الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-3.5-transcribe).
 
 ## gemini-3.5-transcribe
 
-| Proprietà | Descrizione |
+| الموقع | الوصف |
 | --- | --- |
-| Codice modello id\_card | `gemini-3.5-transcribe` |
-| saveTipi di dati supportati | **Input**  Audio (fino a 1 ora)  **Output**  Testo, annotazioni di parole |
-| token\_autoLimiti audio | **Limite audio unario**  Fino a 1 ora per richiesta (fino a 30 minuti quando sono attivi la diarizzazione dello speaker o i timestamp a livello di parola) |
-| handymanFunzionalità | **[Trascrizione audio](https://ai.google.dev/gemini-api/docs/transcribe?hl=it)**  Supportato  **[Speaker diarization](https://ai.google.dev/gemini-api/docs/transcribe?hl=it#speaker-diarization)**  Supportato  **[Timestamp a livello di parola](https://ai.google.dev/gemini-api/docs/transcribe?hl=it#word-timestamps)**  Supportato  **[Vocabolario personalizzato](https://ai.google.dev/gemini-api/docs/transcribe?hl=it#custom-vocabulary)**  Supportato  **[Trascrizione intelligente](https://ai.google.dev/gemini-api/docs/transcribe?hl=it#transcription-modes)**  Supportato  **[Memorizzazione nella cache](https://ai.google.dev/gemini-api/docs/caching?hl=it)**  Non supportato  **[Esecuzione di codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it)**  Non supportato  **[Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it)**  Non supportato  **[Chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it)**  Non supportato  **[Generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it)**  Non supportato  **[Pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it)**  Non supportato |
-| speedOpzioni di consumo | **[API batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it)**  Non supportato  **[Inferenza Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=it)**  Non supportato  **[Inferenza prioritaria](https://ai.google.dev/gemini-api/docs/priority-inference?hl=it)**  Non supportato |
-| Versioni 123 | Leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions) per maggiori dettagli.  - `gemini-3.5-transcribe` (unario) - `gemini-3.5-transcribe-live` (API live) |
-| calendar\_monthUltimo aggiornamento | Agosto 2026 |
+| id\_cardرمز الطراز | `gemini-3.5-transcribe` |
+| saveأنواع البيانات المتوافقة | **الإدخالات**  ملف صوتي (لمدة تصل إلى ساعة واحدة)  **الناتج**  التعليقات التوضيحية النصية والكلمات |
+| token\_autoالحدود القصوى للملفات الصوتية | **الحدّ الأقصى لعدد الملفات الصوتية الأحادية**  ما يصل إلى ساعة واحدة لكل طلب (ما يصل إلى 30 دقيقة عند تفعيل ميزة "تمييز أصوات المتحدّثِين" أو الطوابع الزمنية على مستوى الكلمة) |
+| handymanالإمكانات | **[تحويل الصوت إلى نص](https://ai.google.dev/gemini-api/docs/transcribe?hl=ar)**  متاح  **[تمييز أصوات المتحدّثِين](https://ai.google.dev/gemini-api/docs/transcribe?hl=ar#speaker-diarization)**  متاح  **[الطوابع الزمنية على مستوى الكلمة](https://ai.google.dev/gemini-api/docs/transcribe?hl=ar#word-timestamps)**  متاح  **[المفردات المخصّصة](https://ai.google.dev/gemini-api/docs/transcribe?hl=ar#custom-vocabulary)**  متاح  **[تحويل الصوت إلى نص ذكي](https://ai.google.dev/gemini-api/docs/transcribe?hl=ar#transcription-modes)**  متاح  **[التخزين المؤقت](https://ai.google.dev/gemini-api/docs/caching?hl=ar)**  غير متاح  **[تطبيق الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar)**  غير متاح  **[البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)**  غير متاح  **[استدعاء الدالة](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)**  غير متاح  **[إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar)**  غير متاح  **[جارٍ التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar)**  غير متاح |
+| speedخيارات الاستهلاك | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar)**  غير متاح  **[الاستنتاج المرن](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ar)**  غير متاح  **[استنتاج الأولوية](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar)**  غير متاح |
+| 123الإصدارات | لمزيد من التفاصيل، يُرجى الاطّلاع على [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions).  - ‫`gemini-3.5-transcribe` (أحادي) - ‫`gemini-3.5-transcribe-live` (Live API) |
+| calendar\_monthآخر تعديل | أغسطس 2026 |
+| paidPricing | [‫Gemini 3.5 Transcribe](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-3.5-transcribe) [‫Gemini 3.5 Transcribe Live](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-3.5-transcribe-live) |
 
-## Supporto e limitazioni delle funzionalità
+## الميزات المتوافقة والقيود
 
-Gemini 3.5 Transcribe supporta le seguenti funzionalità nei suoi due endpoint:
+يتيح Gemini 3.5 Transcribe الميزات التالية في نقطتَي النهاية:
 
-| Funzionalità | Live streaming (`gemini-3.5-transcribe-live`) | Elaborazione dei file audio (`gemini-3.5-transcribe`) | Note / limitazioni |
+| الميزة | البث المباشر (`gemini-3.5-transcribe-live`) | معالجة الملفات الصوتية (`gemini-3.5-transcribe`) | ملاحظات / قيود |
 | --- | --- | --- | --- |
-| **Rilevamento automatico della lingua** | Supportate (oltre 85 lingue) | Supportate (oltre 85 lingue) | Include il code-mixing a metà sessione. |
-| **Timestamp a livello di parola** | Non supportata | Supportato | Riduce l'accuratezza della trascrizione. |
-| **Bias del vocabolario personalizzato** | Supportato (fino a 1000 termini) | Supportato (fino a 1000 termini) | In genere, i clienti ottengono risultati migliori con un massimo di 100 termini. |
-| **Dettatura e formattazione intelligenti** | Supportato | Supportato | Include la rimozione degli intercalari e la formattazione alfanumerica in base all'intent. |
-| **Speaker Diarization** | Non supportata | Supportato (fino a 8 speaker) | L'attribuzione per 3 o più speaker è sperimentale. |
-| **Durata audio massima** | 10 minuti per sessione. | Massimo 1 ora | L'elaborazione dei file è limitata a 30 minuti quando sono attivate funzionalità come la diarizzazione o i timestamp. |
+| **الرصد التلقائي للغة** | متوفّرة (أكثر من 85 لغة) | متوفّرة (أكثر من 85 لغة) | يتضمّن ذلك مزج الرموز في منتصف الجلسة. |
+| **الطوابع الزمنية على مستوى الكلمة** | غير معتمد | متاح | يؤدي ذلك إلى خفض دقة تحويل الصوت إلى نص. غير متوافقة مع المفردات المخصّصة. |
+| **تعديل المفردات المخصّصة** | متاحة (ما يصل إلى 1,000 عبارة) | متاحة (ما يصل إلى 1,000 عبارة) | يحصل العملاء عادةً على أفضل النتائج باستخدام ما يصل إلى 100 عبارة. غير متوافق مع ميزتَي "تحديد المتحدّث" و"الطوابع الزمنية". |
+| **الإملاء الذكي والتنسيق** | متاح | متاح | وتشمل إزالة كلمات الحشو والتنسيق الأبجدي الرقمي المستند إلى نية المستخدم. |
+| **تقسيم المتحدثين** | غير معتمد | متاحة (ما يصل إلى 8 مكبّرات صوت) | لا تزال ميزة تحديد هوية المتحدّثين في حال وجود 3 متحدّثين أو أكثر في مرحلة تجريبية. غير متوافقة مع المفردات المخصّصة. |
+| **الحد الأقصى لمدة الصوت** | 10 دقائق لكل جلسة | ما يصل إلى ساعة واحدة | تقتصر معالجة الملفات على 30 دقيقة عند تفعيل ميزات مثل "تقسيم النص حسب المتحدث" أو الطوابع الزمنية. |
 
-## Lingue supportate
+## اللغات المتاحة
 
-Le seguenti lingue e i seguenti codici lingua BCP-47 sono supportati per Gemini 3.5 Transcribe:
+تتوفّر اللغات ورموز اللغات BCP-47 التالية في Gemini 3.5 Transcribe:
 
-| Lingua | Codice BCP-47 | Lingua | Codice BCP-47 |
+| اللغة | رمز BCP-47 | اللغة | رمز BCP-47 |
 | --- | --- | --- | --- |
-| Afrikaans | `af-ZA` | Giapponese | `ja-JP` |
-| Amarico | `am-ET` | Giavanese | `jv-ID` |
-| Arabo (Egitto) | `ar-EG` | Kabuverdianu | `kea-CV` |
-| Armeno | `hy-AM` | Kannada | `kn-IN` |
-| Assamese | `as-IN` | Kazako | `kk-KZ` |
-| Azero | `az-AZ` | Coreano | `ko-KR` |
-| Bielorusso | `be-BY` | Kirgizo | `ky-KG` |
-| Bengalese (Bangladesh) | `bn-BD` | Lettone | `lv-LV` |
-| Bengalese (India) | `bn-IN` | Lingala | `ln-CD` |
-| Bosniaco | `bs-BA` | Lituano | `lt-LT` |
-| Bulgaro | `bg-BG` | Macedone | `mk-MK` |
-| Bulgaro (aromeno) | `rup-BG` | Malese | `ms-MY` |
-| Birmano | `my-MM` | Malayalam | `ml-IN` |
-| Cantonese (tradizionale) | `yue-Hant-HK` | Maltese | `mt-MT` |
-| Catalano | `ca-ES` | Cinese mandarino (semplificato) | `cmn-Hans-CN` |
-| Cebuano | `ceb` | Marathi | `mr-IN` |
-| Khmer centrale | `km-KH` | Mongolo | `mn-MN` |
-| Croato | `hr-HR` | Nepalese | `ne-NP` |
-| Ceco | `cs-CZ` | Norvegese | `nb-NO` |
-| Danese | `da-DK` | Oriya | `or-IN` |
-| Olandese | `nl-NL` | Polacco | `pl-PL` |
-| Inglese (Gran Bretagna) | `en-GB` | Portoghese (Brasile) | `pt-BR` |
-| Inglese (India) | `en-IN` | Portoghese (Portogallo) | `pt-PT` |
-| Inglese (Stati Uniti) | `en-US` | Punjabi | `pa-IN` |
-| Estone | `et-EE` | Punjabi (Gurmukhi script) | `pa-Guru-IN` |
-| Farsi | `fa-IR` | Rumeno | `ro-RO` |
-| Filippino | `fil-PH` | Russo | `ru-RU` |
-| Finlandese | `fi-FI` | Serbo | `sr-RS` |
-| Francese | `fr-FR` | Sindhi (alfabeto arabo) | `sd-Arab-IN` |
-| Galiziano | `gl-ES` | Slovacco | `sk-SK` |
-| Georgiano | `ka-GE` | Sloveno | `sl-SI` |
-| Tedesco | `de-DE` | Spagnolo (America Latina) | `es-419` |
-| Greek | `el-GR` | Spagnolo (Stati Uniti) | `es-US` |
-| Gujarati | `gu-IN` | Swahili (Kenya) | `sw-KE` |
-| Hausa | `ha-NG` | Svedese | `sv-SE` |
-| Ebraico | `he-IL` | Tagico | `tg-TJ` |
-| Hindi | `hi-IN` | Telugu | `te-IN` |
-| Ungherese | `hu-HU` | Thailandese | `th-TH` |
-| Islandese | `is-IS` | Turco | `tr-TR` |
-| Inglese indiano | `en-IN` | Ucraino | `uk-UA` |
-| Indonesiano | `id-ID` | Uzbeco | `uz-UZ` |
-| Italiano | `it-IT` | Vietnamita | `vi-VN` |
+| الأفريقانية | `af-ZA` | اليابانية | `ja-JP` |
+| الأمهرية | `am-ET` | الجاوية | `jv-ID` |
+| العربية (مصر) | `ar-EG` | الكريولية الكابوفيردية | `kea-CV` |
+| الأرمينية | `hy-AM` | الكانادا | `kn-IN` |
+| الأسامية | `as-IN` | الكازاخستانية | `kk-KZ` |
+| الأذربيجانية | `az-AZ` | الكورية | `ko-KR` |
+| Belarusian | `be-BY` | القيرغيزية | `ky-KG` |
+| البنغالية (بنغلاديش) | `bn-BD` | اللاتفية | `lv-LV` |
+| البنغالية (الهند) | `bn-IN` | اللينجالا | `ln-CD` |
+| البوسنية | `bs-BA` | الليتوانية | `lt-LT` |
+| البلغارية | `bg-BG` | المقدونية | `mk-MK` |
+| البلغارية (الأرومانية) | `rup-BG` | الماليزية | `ms-MY` |
+| البورمية | `my-MM` | المالايالامية | `ml-IN` |
+| الكانتونية (التقليدية) | `yue-Hant-HK` | المالطية | `mt-MT` |
+| الكتالانية | `ca-ES` | الصينية الماندرين (المبسّطة) | `cmn-Hans-CN` |
+| السيبيوانية | `ceb` | المراثية | `mr-IN` |
+| الخميرية القياسية | `km-KH` | المنغولية | `mn-MN` |
+| الكرواتية | `hr-HR` | النيبالية | `ne-NP` |
+| التشيكية | `cs-CZ` | النرويجية | `nb-NO` |
+| الدانماركية | `da-DK` | الأوريا | `or-IN` |
+| الهولندية | `nl-NL` | البولندية | `pl-PL` |
+| الإنجليزية (بريطانيا العظمى) | `en-GB` | البرتغالية (البرازيل) | `pt-BR` |
+| الإنجليزية (الهند) | `en-IN` | البرتغالية (البرتغال) | `pt-PT` |
+| الإنجليزية (الولايات المتحدة) | `en-US` | البنجابية | `pa-IN` |
+| الإستونية | `et-EE` | البنجابية (نص غورموخي) | `pa-Guru-IN` |
+| الفارسية | `fa-IR` | الرومانية | `ro-RO` |
+| الفلبينية | `fil-PH` | الروسية | `ru-RU` |
+| الفنلندية | `fi-FI` | الصربية | `sr-RS` |
+| الفرنسية | `fr-FR` | السندية (بالأحرف العربية) | `sd-Arab-IN` |
+| الغليشيانية | `gl-ES` | السلوفاكية | `sk-SK` |
+| الجورجية | `ka-GE` | السلوفينية | `sl-SI` |
+| الألمانية | `de-DE` | الإسبانية (أمريكا اللاتينية) | `es-419` |
+| اليونانية | `el-GR` | الإسبانية (الولايات المتحدة) | `es-US` |
+| الغوجاراتية | `gu-IN` | السواحيلية (كينيا) | `sw-KE` |
+| الهوسا | `ha-NG` | السويدية | `sv-SE` |
+| العبرية | `he-IL` | الطاجيكية | `tg-TJ` |
+| الهندية | `hi-IN` | التيلوغوية | `te-IN` |
+| الهنغارية | `hu-HU` | التايلاندية | `th-TH` |
+| الأيسلندية | `is-IS` | التركية | `tr-TR` |
+| الإنجليزية الهندية | `en-IN` | الأوكرانية | `uk-UA` |
+| الإندونيسية | `id-ID` | الأوزبكية | `uz-UZ` |
+| الإيطالية | `it-IT` | الفيتنامية | `vi-VN` |
 
-Invia feedback
+إرسال ملاحظات
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ultimo aggiornamento 2026-09-10 UTC.
+تاريخ التعديل الأخير: 2026-10-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Vuoi dirci altro?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-10 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-10-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

@@ -1,36 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=de
-fetched_at: 2026-10-26T05:49:18.029616+00:00
-title: "Funktionsaufrufe mit der Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=pl
+fetched_at: 2026-11-02T07:06:33.009144+00:00
+title: "Wywo\u0142ywanie funkcji za pomoc\u0105 interfejsu Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=de).
+Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Feedback geben
+Prześlij opinię
 
-# Funktionsaufrufe mit der Gemini API
+# Wywoływanie funkcji za pomocą interfejsu Gemini API
 
-Mit Funktionsaufrufen können Sie Modelle mit externen Tools und APIs verbinden.
-Anstatt Textantworten zu generieren, bestimmt das Modell, wann bestimmte Funktionen aufgerufen werden sollen, und stellt die erforderlichen Parameter zum Ausführen von Aktionen in der realen Welt bereit.
-So kann das Modell als Brücke zwischen natürlicher Sprache und realen Aktionen und Daten fungieren. Es gibt drei primäre Anwendungsfälle für Funktionsaufrufe:
+Wywoływanie funkcji umożliwia łączenie modeli z narzędziami zewnętrznymi i interfejsami API.
+Zamiast generować odpowiedzi tekstowe, model określa, kiedy wywołać określone funkcje, i podaje niezbędne parametry do wykonania działań w rzeczywistym świecie.
+Dzięki temu model może stanowić pomost między językiem naturalnym a rzeczywistymi działaniami i danymi. Wywoływanie funkcji ma 3 główne zastosowania:
 
-- [**Aktionen ausführen**](#meeting):Über APIs mit externen Systemen interagieren, z. B. Termine planen, Rechnungen erstellen, E‑Mails senden oder Smart-Home-Geräte steuern.
-- [**Wissen erweitern**](#weather):Zugriff auf Informationen aus externen Quellen wie Datenbanken, APIs und Wissensdatenbanken.
-- [**Funktionen erweitern**](#chart):Verwenden Sie externe Tools, um Berechnungen durchzuführen und die Einschränkungen des Modells zu erweitern, z. B. durch die Verwendung eines Taschenrechners oder das Erstellen von Diagrammen.
+- [**Wykonywanie działań:**](#meeting) wchodzenie w interakcję z systemami zewnętrznymi za pomocą interfejsów API, np. planowanie spotkań, tworzenie faktur, wysyłanie e-maili lub sterowanie inteligentnymi urządzeniami domowymi.
+- [**Wzbogacanie wiedzy:**](#weather) dostęp do informacji ze źródeł zewnętrznych, takich jak bazy danych, interfejsy API i bazy wiedzy.
+- [**Rozszerzanie możliwości:**](#chart) używaj narzędzi zewnętrznych do wykonywania obliczeń i przekraczania ograniczeń modelu, np. korzystaj z kalkulatora lub twórz wykresy.
 
-Unten finden Sie Beispiele für diese Anwendungsfälle:
+Przykłady takich przypadków użycia znajdziesz poniżej:
 
-### Besprechung planen
+### Zaplanuj spotkanie
 
-In diesem Beispiel wird gezeigt, wie Sie eine Funktion definieren, mit der eine Besprechung mit Teilnehmern zu einem bestimmten Zeitpunkt geplant wird. So kann das Modell Nutzeranfragen parsen und strukturierte Argumente zurückgeben, um Aktionen in externen Systemen auszulösen.
+Ten przykład pokazuje, jak zdefiniować funkcję, która planuje spotkanie z uczestnikami o określonej godzinie, umożliwiając modelowi analizowanie żądań użytkowników i zwracanie uporządkowanych argumentów w celu wywoływania działań w systemach zewnętrznych.
 
 ### Python
 
@@ -279,9 +279,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Wetter abrufen
+### Sprawdź pogodę
 
-In diesem Beispiel wird gezeigt, wie eine Funktion definiert wird, die Temperaturdaten für einen Ort abruft. So kann das Modell externe APIs aufrufen, um Anfragen zu beantworten, für die Echtzeit- oder externe Informationen erforderlich sind.
+Ten przykład pokazuje, jak zdefiniować funkcję, która pobiera dane o temperaturze w danej lokalizacji, umożliwiając modelowi wywoływanie zewnętrznych interfejsów API w celu odpowiadania na zapytania wymagające informacji w czasie rzeczywistym lub informacji zewnętrznych.
 
 ### Python
 
@@ -497,9 +497,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Diagramm erstellen
+### Utwórz wykres
 
-In diesem Beispiel wird gezeigt, wie Sie eine Funktion definieren, die ein Balkendiagramm aus strukturierten Daten generiert. Es wird veranschaulicht, wie das Modell externe Tools verwenden kann, um Berechnungen durchzuführen oder visuelle Elemente zu erstellen:
+W tym przykładzie pokazujemy, jak zdefiniować funkcję, która generuje wykres słupkowy na podstawie danych strukturalnych. Pokazuje on, jak model może używać narzędzi zewnętrznych do wykonywania obliczeń lub tworzenia elementów wizualnych:
 
 ### Python
 
@@ -734,20 +734,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Funktionsweise von Funktionsaufrufen
+## Jak działa wywoływanie funkcji
 
-![Funktionsaufrufe – Übersicht](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=de)
+![Omówienie wywoływania funkcji](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=pl)
 
-Funktionsaufrufe umfassen eine strukturierte Interaktion zwischen Ihrer Anwendung, dem Modell und externen Funktionen:
+Wywoływanie funkcji obejmuje strukturalną interakcję między aplikacją, modelem i funkcjami zewnętrznymi:
 
-1. **Funktionsdeklaration definieren**:Definieren Sie den Namen, die Parameter und den Zweck der Funktion für das Modell.
-2. **LLM mit Funktionsdeklarationen aufrufen**:Senden Sie den Nutzer-Prompt zusammen mit den Funktionsdeklarationen an das Modell.
-3. **Funktionscode ausführen (Ihre Verantwortung)**: Das Modell *führt die Funktion nicht selbst aus*. Extrahieren Sie den Namen und die Argumente und führen Sie sie in Ihrer Anwendung aus.
-4. **Nutzerfreundliche Antwort erstellen**:Senden Sie das Ergebnis zurück an das Modell, um eine endgültige, nutzerfreundliche Antwort zu erhalten.
+1. **Zdefiniuj deklarację funkcji:** określ nazwę, parametry i przeznaczenie funkcji dla modelu.
+2. **Wywołaj LLM za pomocą deklaracji funkcji:** wyślij do modelu prompt użytkownika wraz z deklaracjami funkcji.
+3. **Wykonanie kodu funkcji (Twoja odpowiedzialność):** model *nie* wykonuje funkcji samodzielnie. Wyodrębnij nazwę i argumenty, a następnie wykonaj je w aplikacji.
+4. **Utwórz odpowiedź przyjazną dla użytkownika:** wyślij wynik z powrotem do modelu, aby uzyskać ostateczną odpowiedź przyjazną dla użytkownika.
 
-Dieser Vorgang kann über mehrere Züge hinweg wiederholt werden. Das Modell unterstützt das Aufrufen mehrerer Funktionen in einer einzelnen Runde ([paralleler Funktionsaufruf](#parallel_function_calling)) und in einer Sequenz ([zusammengesetzter Funktionsaufruf](#compositional_function_calling)).
+Ten proces można powtarzać w wielu turach. Model obsługuje wywoływanie wielu funkcji w ramach jednej tury ([równoległe wywoływanie funkcji](#parallel_function_calling)) i sekwencyjnie ([kompozycyjne wywoływanie funkcji](#compositional_function_calling)).
 
-### Schritt 1: Funktionsdeklaration definieren
+### Krok 1. Zdefiniuj deklarację funkcji
 
 ### Python
 
@@ -843,7 +843,7 @@ BiFunction<Integer, String, Map<String, Object>> setLightValues =
     };
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -884,7 +884,7 @@ func main() {
 }
 ```
 
-### Schritt 2: Modell mit Funktionsdeklarationen aufrufen
+### Krok 2. Wywołaj model z deklaracjami funkcji
 
 ### Python
 
@@ -985,7 +985,7 @@ if (interaction.steps().isPresent()) {
 System.out.println(fcStep);
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -1051,7 +1051,7 @@ func main() {
 }
 ```
 
-Das Modell gibt einen `function_call`-Schritt mit `type`, `name` und `arguments` zurück:
+Model zwraca krok `function_call` z wartościami `type`, `name` i `arguments`:
 
 ```
 type='function_call'
@@ -1059,7 +1059,7 @@ name='set_light_values'
 arguments={'color_temp': 'warm', 'brightness': 25}
 ```
 
-### Schritt 3: Funktion ausführen
+### Krok 3. Wykonaj funkcję
 
 ### Python
 
@@ -1162,7 +1162,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -1244,7 +1244,7 @@ func main() {
 }
 ```
 
-### Schritt 4: Ergebnis an das Modell zurücksenden
+### Krok 4. Prześlij wynik z powrotem do modelu
 
 ### Python
 
@@ -1382,7 +1382,7 @@ if (fcStep != null) {
 }
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -1476,14 +1476,13 @@ func main() {
 }
 ```
 
-### Zustandslose Funktionsaufrufe
+### Wywoływanie funkcji bezstanowych
 
-Sie können Funktionsaufrufe auch im statuslosen Modus verwenden, indem Sie den Unterhaltungsverlauf clientseitig verwalten und `store=false` festlegen.
+Możesz też używać wywoływania funkcji w trybie bezstanowym, zarządzając historią rozmowy po stronie klienta i ustawiając `store=false`.
 
-Im zustandslosen Modus müssen Sie den vollständigen Verlauf der Unterhaltung im Feld `input` jeder nachfolgenden Anfrage übergeben. Dieser Verlauf muss Folgendes enthalten:
-1. Der erste Schritt `user_input`.
-2. Alle vom Modell generierten Schritte, die in Turn 1 zurückgegeben werden (einschließlich der Schritte `thought` und `function_call`), werden genau so zurückgegeben, wie sie empfangen wurden.
-3. Der Schritt `function_result`, der die Ausgabe der ausgeführten Funktion enthält.
+W trybie bezstanowym musisz przekazywać pełną historię rozmowy w polu `input` każdej kolejnej prośby. Historia musi zawierać:1. Początkowy krok `user_input`.
+2. Wszystkie wygenerowane przez model kroki zwrócone w turze 1 (w tym kroki `thought` i `function_call`) w takiej postaci, w jakiej zostały otrzymane.
+3. Krok `function_result` zawierający dane wyjściowe wykonanej funkcji.
 
 ### Python
 
@@ -1874,25 +1873,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## Funktionsdeklarationen
+## Deklaracje funkcji
 
-Eine Funktionsdeklaration wird als Tool übergeben und enthält Folgendes:
+Deklaracja funkcji jest przekazywana jako narzędzie i zawiera:
 
-- `type` (String): Muss für benutzerdefinierte Funktionen `"function"` sein.
-- `name` (String): Eindeutiger Funktionsname (Unterstriche oder CamelCase verwenden).
-- `description` (String): Klare Erläuterung des Zwecks der Funktion.
-- `parameters` (Objekt): Eingabeparameter, die die Funktion erwartet.
-  - `type` (String): Gesamtdatentyp, z. B. `object`.
-  - `properties` (Objekt): Einzelne Parameter mit Typ und Beschreibung.
-  - `required` (Array): Namen der Pflichtparameter.
+- `type` (ciąg znaków): w przypadku funkcji niestandardowych musi mieć wartość `"function"`.
+- `name` (ciąg znaków): unikalna nazwa funkcji (używaj podkreśleń lub notacji camelCase).
+- `description` (string): jasne wyjaśnienie celu funkcji.
+- `parameters` (obiekt): parametry wejściowe, których oczekuje funkcja.
+  - `type` (string): ogólny typ danych, np. `object`.
+  - `properties` (obiekt): poszczególne parametry z typem i opisem.
+  - `required` (tablica): nazwy parametrów obowiązkowych.
 
-## Funktionsaufrufe mit Thinking-Modellen
+## Wywoływanie funkcji za pomocą modeli myślących
 
-Die Modelle der Gemini 3-Serie verwenden einen internen [Denkprozess](https://ai.google.dev/gemini-api/docs/thinking?hl=de), der Funktionsaufrufe verbessert. Die SDKs verarbeiten [Gedankensignaturen](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=de) automatisch für Sie.
+Modele z serii Gemini 3 korzystają z wewnętrznego procesu [„myślenia”](https://ai.google.dev/gemini-api/docs/thinking?hl=pl), który ulepsza wywoływanie funkcji. Zestawy SDK automatycznie obsługują [sygnatury myśli](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pl).
 
-## Parallele Funktionsaufrufe
+## Równoległe wywoływanie funkcji
 
-Rufen Sie mehrere Funktionen gleichzeitig auf, wenn sie unabhängig voneinander sind:
+Wywołuj wiele funkcji jednocześnie, jeśli są od siebie niezależne:
 
 ### Python
 
@@ -2164,9 +2163,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Zusammengesetzte Funktionsaufrufe
+## Kompozycyjne wywoływanie funkcji
 
-Verketten Sie mehrere Funktionsaufrufe für komplexe Anfragen (z.B. zuerst den Standort abrufen und dann das Wetter für diesen Standort).
+Łącz ze sobą wiele wywołań funkcji w przypadku złożonych żądań (np. najpierw pobierz lokalizację, a potem sprawdź pogodę w tej lokalizacji).
 
 ### Python
 
@@ -2490,14 +2489,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Modi für Funktionsaufrufe
+## Tryby wywoływania funkcji
 
-Mit `tool_choice` in `generation_config` können Sie festlegen, wie das Modell Tools verwendet:
+Kontroluj sposób, w jaki model korzysta z narzędzi, używając `tool_choice` w `generation_config`:
 
-- `auto` (Standard): Das Modell entscheidet, ob eine Funktion aufgerufen oder direkt geantwortet werden soll.
-- `any`: Das Modell ist darauf beschränkt, immer einen Funktionsaufruf vorherzusagen.
-- `none`: Das Modell darf keine Funktionsaufrufe ausführen.
-- `validated`: Das Modell sorgt für die Einhaltung des Funktionsschemas.
+- `auto` (Domyślnie): model decyduje, czy wywołać funkcję, czy odpowiedzieć bezpośrednio.
+- `any`: model jest ograniczony do zawsze przewidywania wywołania funkcji.
+- `none`: model nie może wywoływać funkcji.
+- `validated`: Model zapewnia zgodność ze schematem funkcji.
 
 ### Python
 
@@ -2604,9 +2603,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Verwendung von mehreren Tools
+## Korzystanie z narzędzi wielofunkcyjnych
 
-Sie können mehrere Tools aktivieren und integrierte Tools mit Funktionsaufrufen in derselben Anfrage kombinieren. Gemini 3-Modelle können integrierte Tools mit Funktionsaufrufen in Interaktionen kombinieren. Wenn Sie `previous_interaction_id` übergeben, wird der integrierte Tool-Kontext automatisch weitergegeben.
+W tym samym żądaniu możesz włączyć kilka narzędzi, łącząc narzędzia wbudowane z wywoływaniem funkcji. Modele Gemini 3 mogą łączyć wbudowane narzędzia z wywoływaniem funkcji w interakcjach. Przekazywanie `previous_interaction_id`
+automatycznie rozpowszechnia wbudowany kontekst narzędzia.
 
 ### Python
 
@@ -2967,13 +2967,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Multimodale Funktionsantworten
+## Odpowiedzi funkcji multimodalnych
 
-Bei Modellen der Gemini 3-Serie können Sie multimodale Inhalte in die Funktionsantwortteile einfügen, die Sie an das Modell senden. Das Modell kann diese multimodalen Inhalte in seinem nächsten Zug verarbeiten, um eine fundiertere Antwort zu generieren.
+W przypadku modeli z serii Gemini 3 możesz uwzględniać treści multimodalne w częściach odpowiedzi funkcji, które wysyłasz do modelu. Model może przetworzyć te treści multimodalne w kolejnej turze, aby wygenerować bardziej przemyślaną odpowiedź.
 
-Wenn Sie multimodale Daten in eine Funktionsantwort einfügen möchten, müssen Sie sie als einen oder mehrere Inhaltsblöcke im Feld `result` des Schritts `function_result` angeben. Für jeden Inhaltsblock muss die `type` angegeben werden (z.B. `"text"`, `"image"`).
+Aby uwzględnić dane multimodalne w odpowiedzi funkcji, dodaj je jako co najmniej 1 blok treści w polu `result` kroku `function_result`. Każdy blok treści musi określać swój `type` (np. `"text"`, `"image"`).
 
-Das folgende Beispiel zeigt, wie Sie in einer Interaktion eine Funktionsantwort mit Bilddaten an das Modell zurücksenden:
+Ten przykład pokazuje, jak w ramach interakcji wysłać do modelu odpowiedź funkcji zawierającą dane obrazu:
 
 ### Python
 
@@ -3248,28 +3248,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Funktionsaufrufe mit strukturierter Ausgabe
+## Wywoływanie funkcji z uporządkowanymi danymi wyjściowymi
 
-Bei Modellen der Gemini 3-Serie können Sie Funktionsaufrufe mit [strukturierter Ausgabe](https://ai.google.dev/gemini-api/docs/structured-output?hl=de) kombinieren, um konsistent formatierte Antworten zu erhalten.
+W przypadku modeli z serii Gemini 3 połącz wywoływanie funkcji z [danymi wyjściowymi w formacie strukturalnym](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl), aby uzyskać odpowiedzi w jednolitym formacie.
 
-## Remote-MCP (Model Context Protocol)
+## Zdalny MCP (Model Context Protocol)
 
-Die Interactions API unterstützt die Verbindung mit Remote-MCP-Servern, um dem Modell Zugriff auf externe Tools und Dienste zu ermöglichen. Sie geben den Server `name` und `url` in der Tools-Konfiguration an.
+Interfejs API interakcji obsługuje łączenie się ze zdalnymi serwerami MCP, aby zapewnić modelowi dostęp do zewnętrznych narzędzi i usług. Serwer `name` i `url` podajesz w konfiguracji narzędzi.
 
-Beachten Sie bei der Verwendung von Remote MCP die folgenden Einschränkungen:
+Podczas korzystania z zdalnego MCP pamiętaj o tych ograniczeniach:
 
-- **Servertypen**: Remote-MCP funktioniert nur mit streamfähigen HTTP-Servern. SSE-Server (Server-Sent Events) werden nicht unterstützt.
-- **Benennung**: MCP-Servernamen dürfen das Zeichen `-` nicht enthalten. Verwenden Sie stattdessen `snake_case`-Servernamen.
+- **Typy serwerów:** zdalny MCP działa tylko z serwerami HTTP obsługującymi strumieniowanie. Serwery SSE (Server-Sent Events) nie są obsługiwane.
+- **Nazewnictwo:** nazwy serwerów MCP nie powinny zawierać znaku `-`. Użyj w zamian nazw serwerów `snake_case`.
 
-| Feld | Typ | Erforderlich | Beschreibung |
+| Pole | Typ | Wymagane | Opis |
 | --- | --- | --- | --- |
-| `type` | `string` | Ja | Muss `"mcp_server"` lauten. |
-| `name` | `string` | Nein | Ein Anzeigename für den MCP-Server. |
-| `url` | `string` | Nein | Die vollständige URL für den MCP-Serverendpunkt. |
-| `headers` | `object` | Nein | Schlüssel/Wert-Paare, die mit jeder Anfrage an den Server als HTTP-Header gesendet werden (z. B. Authentifizierungstokens). |
-| `allowed_tools` | `array` | Nein | Einschränken, welche Tools vom Server der Agent aufrufen darf. |
+| `type` | `string` | Tak | Musi to być `"mcp_server"`. |
+| `name` | `string` | Nie | Wyświetlana nazwa serwera MCP. |
+| `url` | `string` | Nie | Pełny adres URL punktu końcowego serwera MCP. |
+| `headers` | `object` | Nie | Pary klucz-wartość wysyłane jako nagłówki HTTP z każdym żądaniem do serwera (np. tokeny uwierzytelniania). |
+| `allowed_tools` | `array` | Nie | Ogranicz narzędzia na serwerze, z których agent może korzystać. |
 
-### Beispiel
+### Przykład
 
 ### Python
 
@@ -3402,9 +3402,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Toolaufrufe streamen
+## Strumieniowanie wywołań narzędzi
 
-Wenn Sie Tools mit Streaming verwenden, generiert das Modell Funktionsaufrufe als Folge von `step.delta`-Ereignissen im Stream. Toolargumente können mit `arguments` als partielle Argumente gestreamt werden. Sie müssen diese Deltas zusammenfassen, um die vollständigen Tool-Aufrufe zu rekonstruieren, bevor Sie sie ausführen.
+Gdy korzystasz z narzędzi ze strumieniowaniem, model generuje wywołania funkcji jako sekwencję zdarzeń `step.delta` w strumieniu. Argumenty narzędzia można przesyłać strumieniowo jako argumenty częściowe za pomocą funkcji `arguments`. Przed wykonaniem wywołań narzędzi musisz zagregować te zmiany, aby odtworzyć pełne wywołania.
 
 ### Python
 
@@ -3781,42 +3781,42 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
 }'
 ```
 
-## Best Practices
+## Sprawdzone metody
 
-- **Funktions- und Parameterbeschreibungen**:Formulieren Sie klar und präzise.
-- **Benennung**:Verwenden Sie aussagekräftige Namen ohne Leerzeichen oder Sonderzeichen.
-- **Strikte Typisierung**:Verwenden Sie bestimmte Typen (Ganzzahl, String, Enum).
-- **Toolauswahl**:Halten Sie die Anzahl der aktiven Tools auf maximal 10 bis 20.
-- **Prompt Engineering**:Geben Sie Kontext und Anweisungen an.
-- **Validierung**:Funktionsaufrufe vor der Ausführung validieren.
-- **Fehlerbehandlung**:Implementieren Sie eine robuste Fehlerbehandlung.
-- **Sicherheit**:Verwenden Sie eine geeignete Authentifizierung für externe APIs.
+- **Opisy funkcji i parametrów:** podawaj jasne i konkretne informacje.
+- **Nazewnictwo:** używaj opisowych nazw bez spacji i znaków specjalnych.
+- **Silne typowanie:** używaj konkretnych typów (liczba całkowita, ciąg znaków, wyliczenie).
+- **Wybór narzędzi:** utrzymuj aktywność maksymalnie 10–20 narzędzi.
+- **Inżynieria promptów:** podaj kontekst i instrukcje.
+- **Weryfikacja:** weryfikuj wywołania funkcji przed ich wykonaniem.
+- **Obsługa błędów:** wdróż niezawodną obsługę błędów.
+- **Bezpieczeństwo:** używaj odpowiedniego uwierzytelniania w przypadku zewnętrznych interfejsów API.
 
-## Problemumgehungen für Textanforderungen vor der Verwendung des Tools
+## Obejścia wymagań dotyczących tekstu przed narzędziem
 
-**Problem**:Wenn Ihr Prompt erfordert, dass das Modell strukturierten Text (XML, YAML, JSON usw.) ausgibt. Wenn Sie beispielsweise `<UPDATE>...</UPDATE>` unmittelbar vor einem Tool-Aufruf aufrufen, kann der Tool-Aufruf gelegentlich mit `Malformed_Function_Call` fehlschlagen.
+**Problem:** jeśli prompt wymaga od modelu wygenerowania tekstu strukturalnego (XML, YAML, JSON itp.). (np. `<UPDATE>...</UPDATE>`) bezpośrednio przed wywołaniem narzędzia, wywołanie narzędzia może czasami zakończyć się niepowodzeniem z błędem `Malformed_Function_Call`.
 
-**Lösungen:** Die folgenden Behelfslösungen beheben dieses Problem:
+**Rozwiązania:** ten problem można rozwiązać za pomocą tych obejść:
 
-- **VORZUGSWEISE**:Weisen Sie das Modell an, seine Notizen vor dem Tool in einem dedizierten `update()`-Funktionsaufruf anstelle von Rohtext zu platzieren (siehe unten).
-- Weisen Sie das Modell an, Notizen als Markdown-Überschriften (`# UPDATE`, `## PLAN`) anstelle von strukturiertem Text zu schreiben.
-- Das Modell muss vor Tool-Aufrufen keinen Text ausgeben.
+- **ZALECANE:** poinstruuj model, aby umieszczał notatki przed użyciem narzędzia w wywołaniu funkcji `update()` zamiast w postaci zwykłego tekstu (szczegóły poniżej).
+- Poproś model o zapisywanie notatek jako nagłówków Markdown (`# UPDATE`, `## PLAN`) zamiast tekstu strukturalnego.
+- Nie wymagaj od modelu generowania tekstu przed wywołaniami narzędzi.
 
-### Bevorzugte Problemumgehung: Arbeitsnotizen in einen dedizierten Funktionsaufruf einfügen
+### Preferowane obejście: umieść notatki robocze w wywołaniu funkcji
 
-Anstelle der ursprünglichen Anleitung:
+Zamiast oryginalnej instrukcji:
 
 ```
 Before calling a tool, in every response you MUST first output a single `<UPDATE>` part as specified, don't skip this part or any of required sub-tags within `<UPDATE>`.
 ```
 
-Verwenden Sie diese aktualisierte Anleitung:
+Skorzystaj z tej zaktualizowanej instrukcji:
 
 ```
 Before calling any other tool, in every response you MUST first call `update` with all required parameters (previous_step, plan, next_step, external).
 ```
 
-Aktualisieren Sie alle Verweise auf das alte `<UPDATE>`-XML-Format in der Kundenanfrage. Fügen Sie dann die entsprechende Funktionsdeklaration für die Update-Funktion hinzu:
+Zaktualizuj wszystkie odwołania do starego formatu XML `<UPDATE>` w prośbie klienta. Następnie dodaj odpowiednią deklarację funkcji aktualizacji:
 
 ```
 {
@@ -3852,20 +3852,20 @@ Aktualisieren Sie alle Verweise auf das alte `<UPDATE>`-XML-Format in der Kunden
 }
 ```
 
-Das Modell führt dann im selben Schritt zwei Aufrufe aus: den `update()`-Aufruf, der das strukturierte XML ersetzt, und den eigentlichen Funktionsaufruf, den es ausführen möchte.
+Następnie model wykona 2 wywołania w tym samym kroku: wywołanie `update()`, które zastępuje strukturalny kod XML, oraz rzeczywiste wywołanie funkcji, które chce wykonać.
 
-## Hinweise und Einschränkungen
+## Uwagi i ograniczenia
 
-- Es wird nur eine [Teilmenge des OpenAPI-Schemas](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=de#FunctionDeclaration) unterstützt.
-- Im `any`-Modus lehnt die API möglicherweise sehr große oder tief verschachtelte Schemas ab.
-- Die unterstützten Parametertypen in Python sind begrenzt.
+- Obsługiwany jest tylko [podzbiór schematu OpenAPI](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=pl#FunctionDeclaration).
+- W przypadku trybu `any` interfejs API może odrzucać bardzo duże lub głęboko zagnieżdżone schematy.
+- Obsługiwane typy parametrów w Pythonie są ograniczone.
 
-Feedback geben
+Prześlij opinię
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Zuletzt aktualisiert: 2026-09-24 (UTC).
+Ostatnia aktualizacja: 2026-09-24 UTC.
 
-Haben Sie Feedback für uns?
+Chcesz przekazać coś jeszcze?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-24 (UTC)."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-24 UTC."],[],[]]

@@ -1,57 +1,56 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=es-419
-fetched_at: 2026-10-26T05:55:24.080804+00:00
-title: "Bibliotecas de la API de Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=vi
+fetched_at: 2026-11-02T07:21:57.750051+00:00
+title: "Th\u01b0 vi\u1ec7n Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Enviar comentarios
+Gửi ý kiến phản hồi
 
-# Bibliotecas de la API de Gemini
+# Thư viện Gemini API
 
-Cuando compiles con la API de Gemini, te recomendamos que uses el **SDK de IA generativa de Google**.
-Estas son las bibliotecas oficiales listas para la producción que desarrollamos y mantenemos para los lenguajes más populares. Están [disponibles para el público general](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419#new-libraries)
-y se usan en toda nuestra documentación y ejemplos oficiales.
+Khi xây dựng bằng Gemini API, bạn nên sử dụng **Google GenAI SDK**.
+Đây là các thư viện chính thức, sẵn sàng cho hoạt động phát hành chính thức mà chúng tôi phát triển và duy trì cho các ngôn ngữ phổ biến nhất. Các API này đang trong [giai đoạn phát hành rộng rãi](https://ai.google.dev/gemini-api/docs/libraries?hl=vi#new-libraries) và được dùng trong tất cả tài liệu cũng như ví dụ chính thức của chúng tôi.
 
-Si no conoces la API de Gemini, sigue nuestra
-[guía de introducción](https://ai.google.dev/gemini-api/docs/get-started?hl=es-419) para comenzar.
+Nếu bạn mới sử dụng Gemini API, hãy làm theo
+[Hướng dẫn bắt đầu sử dụng](https://ai.google.dev/gemini-api/docs/get-started?hl=vi) của chúng tôi để bắt đầu.
 
-## Compatibilidad con idiomas y la instalación
+## Hỗ trợ ngôn ngữ và cài đặt
 
-El SDK de IA generativa de Google está disponible para los lenguajes Python, JavaScript/TypeScript, Go y Java. Puedes instalar la biblioteca de cada lenguaje con los administradores de paquetes o visitar sus repositorios de GitHub para obtener más información:
+SDK AI tạo sinh của Google hỗ trợ các ngôn ngữ Python, JavaScript/TypeScript, Go và Java. Bạn có thể cài đặt thư viện của từng ngôn ngữ bằng trình quản lý gói hoặc truy cập vào kho lưu trữ GitHub của các thư viện đó để tìm hiểu thêm:
 
 ### Python
 
-- Biblioteca: [`google-genai`](https://pypi.org/project/google-genai)
-- Repositorio de GitHub: [googleapis/python-genai](https://github.com/googleapis/python-genai)
-- Instalación: `pip install google-genai`
+- Thư viện: [`google-genai`](https://pypi.org/project/google-genai)
+- Kho lưu trữ GitHub: [googleapis/python-genai](https://github.com/googleapis/python-genai)
+- Cài đặt: `pip install google-genai`
 
 ### JavaScript
 
-- Biblioteca: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
-- Repositorio de GitHub: [googleapis/js-genai](https://github.com/googleapis/js-genai)
-- Instalación: `npm install @google/genai`
+- Thư viện: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
+- Kho lưu trữ GitHub: [googleapis/js-genai](https://github.com/googleapis/js-genai)
+- Cài đặt: `npm install @google/genai`
 
 ### Go
 
-- Biblioteca: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
-- Repositorio de GitHub: [googleapis/go-genai](https://github.com/googleapis/go-genai)
-- Instalación: `go get google.golang.org/genai`
+- Thư viện: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
+- Kho lưu trữ GitHub: [googleapis/go-genai](https://github.com/googleapis/go-genai)
+- Cài đặt: `go get google.golang.org/genai`
 
 ### Java
 
-- Biblioteca: `google-genai`
-- Repositorio de GitHub: [googleapis/java-genai](https://github.com/googleapis/java-genai)
-- Instalación: Si usas Maven, agrega lo siguiente a tus dependencias:
+- Thư viện: `google-genai`
+- Kho lưu trữ GitHub: [googleapis/java-genai](https://github.com/googleapis/java-genai)
+- Cài đặt: Nếu bạn đang sử dụng Maven, hãy thêm phần sau vào các phần phụ thuộc:
 
 ```
 <dependencies>
@@ -65,46 +64,48 @@ El SDK de IA generativa de Google está disponible para los lenguajes Python, Ja
 
 ### C#
 
-- Biblioteca: `Google.GenAI`
-- Repositorio de GitHub: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
-- Instalación: `dotnet add package Google.GenAI`
+- Thư viện: `Google.GenAI`
+- Kho lưu trữ GitHub: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
+- Cài đặt: `dotnet add package Google.GenAI`
 
-## Disponibilidad general
+## Giai đoạn phát hành rộng rãi
 
-A partir de mayo de 2025, el SDK de IA generativa de Google alcanzó la disponibilidad general (GA) en todas las plataformas compatibles y son las bibliotecas recomendadas para acceder a la API de Gemini.
-Son estables, totalmente compatibles para el uso en producción y se mantienen de forma activa.
-Proporcionan acceso a las funciones más recientes y ofrecen el mejor rendimiento cuando se trabaja con Gemini.
+Kể từ tháng 5 năm 2025, SDK Google GenAI đã đạt giai đoạn phát hành rộng rãi (GA) trên tất cả các nền tảng được hỗ trợ và là thư viện nên dùng để truy cập vào Gemini API.
+Các phiên bản này ổn định, được hỗ trợ đầy đủ cho mục đích phát hành chính thức và được duy trì liên tục.
+Các trình duyệt này cung cấp quyền truy cập vào các tính năng mới nhất và mang lại hiệu suất tốt nhất khi hoạt động với Gemini.
 
-Si usas una de nuestras bibliotecas heredadas, te recomendamos que migres para que puedas acceder a las funciones más recientes y obtener el mejor rendimiento cuando trabajes con Gemini. Consulta la sección de [bibliotecas heredadas](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419#previous-sdks) para obtener más información.
+Nếu đang sử dụng một trong các thư viện cũ của chúng tôi,
+bạn nên di chuyển để có thể sử dụng các tính năng mới nhất và
+đạt được hiệu suất tốt nhất khi làm việc với Gemini. Hãy xem phần [thư viện cũ](https://ai.google.dev/gemini-api/docs/libraries?hl=vi#previous-sdks) để biết thêm thông tin.
 
-## Bibliotecas heredadas y migración
+## Thư viện cũ và di chuyển
 
-Si usas una de nuestras bibliotecas heredadas, te recomendamos que
-[migres a las bibliotecas nuevas](https://ai.google.dev/gemini-api/docs/migrate?hl=es-419).
+Nếu đang sử dụng một trong các thư viện cũ, bạn nên [di chuyển sang thư viện mới](https://ai.google.dev/gemini-api/docs/migrate?hl=vi).
 
-Las bibliotecas heredadas no proporcionan acceso a funciones recientes (como
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=es-419) y [Veo](https://ai.google.dev/gemini-api/docs/video?hl=es-419)) y dejaron de estar disponibles el 30 de noviembre de 2025.
+Các thư viện cũ không cung cấp quyền truy cập vào các tính năng gần đây (chẳng hạn như
+[Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi) và [Veo](https://ai.google.dev/gemini-api/docs/video?hl=vi)) và sẽ
+ngừng hoạt động kể từ ngày 30 tháng 11 năm 2025.
 
-El estado de compatibilidad de cada biblioteca heredada varía, como se detalla en la siguiente tabla:
+Trạng thái hỗ trợ của mỗi thư viện cũ sẽ khác nhau, được trình bày chi tiết trong bảng sau:
 
-| Idioma | Biblioteca heredada | Estado de compatibilidad | Biblioteca recomendada |
+| Ngôn ngữ | Thư viện cũ | Trạng thái hỗ trợ | Thư viện đề xuất |
 | --- | --- | --- | --- |
-| **Python** | `google-generativeai` | No se mantiene de forma activa | `google-genai` |
-| **JavaScript/TypeScript** | `@google/generativeai` | No se mantiene de forma activa | `@google/genai` |
-| **Go** | `google.golang.org/generative-ai` | No se mantiene de forma activa | `google.golang.org/genai` |
-| **Dart y Flutter** | `google_generative_ai` | No se mantiene de forma activa | Usa [Genkit Dart](https://genkit.dev/docs/dart/get-started/) o [Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
-| **Swift** | `generative-ai-swift` | No se mantiene de forma activa | Usa [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=es-419) |
-| **Android** | `generative-ai-android` | No se mantiene de forma activa | Usa [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=es-419) |
+| **Python** | `google-generativeai` | Không được duy trì thường xuyên | `google-genai` |
+| **JavaScript/TypeScript** | `@google/generativeai` | Không được duy trì thường xuyên | `@google/genai` |
+| **Bắt đầu** | `google.golang.org/generative-ai` | Không được duy trì thường xuyên | `google.golang.org/genai` |
+| **Dart và Flutter** | `google_generative_ai` | Không được duy trì thường xuyên | Sử dụng [Genkit Dart](https://genkit.dev/docs/dart/get-started/) hoặc [Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
+| **Swift** | `generative-ai-swift` | Không được duy trì thường xuyên | Sử dụng [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=vi) |
+| **Android** | `generative-ai-android` | Không được duy trì thường xuyên | Sử dụng [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=vi) |
 
-**Nota para desarrolladores de Java:** No había un SDK de Java heredado proporcionado por Google para la API de Gemini, por lo que no se requiere ninguna migración desde una biblioteca anterior de Google. Puedes comenzar directamente con la biblioteca nueva en la
-[sección Compatibilidad con idiomas y la instalación](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419#install).
+**Lưu ý dành cho nhà phát triển Java:** Không có SDK Java cũ do Google cung cấp cho
+Gemini API, vì vậy, bạn không cần di chuyển từ thư viện trước đó của Google. Bạn có thể bắt đầu trực tiếp với thư viện mới trong phần [Hỗ trợ ngôn ngữ và cài đặt](https://ai.google.dev/gemini-api/docs/libraries?hl=vi#install).
 
-Enviar comentarios
+Gửi ý kiến phản hồi
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Última actualización: 2026-10-15 (UTC)
+Cập nhật lần gần đây nhất: 2026-10-26 UTC.
 
-¿Quieres brindar más información?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-15 (UTC)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-26 UTC."],[],[]]

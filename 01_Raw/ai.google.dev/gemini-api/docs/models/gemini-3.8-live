@@ -1,84 +1,84 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=es-419
-fetched_at: 2026-10-26T05:41:29.470991+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=pt-BR
+fetched_at: 2026-11-02T07:16:34.573267+00:00
 title: "Gemini 3.8 Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
+O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Enviar comentarios
+Envie comentários
 
 # Gemini 3.8 Live
 
-Gemini 3.8 Live es la opción predeterminada para la mayoría de las experiencias de agentes de voz de baja latencia
-y diálogos en tiempo real sin demoras inducidas por el razonamiento. Admite
-el razonamiento intercalado, las llamadas a funciones asíncronas, las actualizaciones de contenido del cliente
-de la sesión completa y la transmisión de audio integrada.
+O Gemini 3.8 Live é a opção padrão para a maioria das experiências de agentes de voz de baixa latência
+e diálogos em tempo real sem atrasos induzidos por raciocínio. Ele é compatível com
+raciocínio intercalado, chamada de função assíncrona, atualizações de conteúdo do cliente
+de sessão completa e streaming de áudio integrado.
 
-[Probar en Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live&hl=es-419)
+[Teste no Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live&hl=pt-br)
 
-## Documentación
+## Documentação
 
-Consulta la guía de la [API de Live](https://ai.google.dev/gemini-api/docs/live-api?hl=es-419) para obtener una cobertura completa
-de las funciones y capacidades.
+Acesse o guia da [API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br) para conferir todos os recursos e funcionalidades.
 
 ## gemini-3.8-live
 
-| Propiedad | Descripción |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardCódigo del modelo | `gemini-3.8-live` |
-| saveTipos de datos admitidos | **Entradas**  Texto, imágenes, audio  **Resultado**  Texto y audio |
-| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  131,072  **Límite de tokens de salida**  65,536 |
-| handymanCapacidades | **[Generación de audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=es-419)**  Admitido  **[Almacenamiento en caché](https://ai.google.dev/gemini-api/docs/caching?hl=es-419)**  No compatible  **[Ejecución de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=es-419)**  No compatible  **[Búsqueda de archivos](https://ai.google.dev/gemini-api/docs/file-search?hl=es-419)**  No compatible  **[Llamada a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)**  Admitido  **[Fundamentación con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=es-419)**  No compatible  **[Generación de imágenes](https://ai.google.dev/gemini-api/docs/image-generation?hl=es-419)**  No compatible  **[API de Live](https://ai.google.dev/gemini-api/docs/live-api?hl=es-419)**  Admitido  **[Fundamentación con la Búsqueda](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419)**  Admitido  **[Resultados estructurados](https://ai.google.dev/gemini-api/docs/structured-output?hl=es-419)**  No compatible  **[Pensamiento](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419)**  Admitido (razonamiento intercalado)  **[Contexto de la URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419)**  No compatible |
-| speedOpciones de consumo | **[API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419)**  No compatible |
-| 123Versiones | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Estable: `gemini-3.8-live` |
-| calendar\_monthÚltima actualización | Septiembre de 2026 |
-| id\_cardTarjeta de modelo | [Tarjeta de modelo](https://deepmind.google/models/model-cards/gemini-3-8-audio/?hl=es-419) |
+| Código do modelo id\_card | `gemini-3.8-live` |
+| saveTipos de dados aceitos | **Entradas** (link em inglês)  Texto, imagens, áudio  **Saída**  Texto e áudio |
+| token\_autoLimites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  131.072  **Limite de tokens de saída**  65.536 |
+| handymanRecursos | **[Geração de áudio sintético](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br)**  Compatível  **[Armazenamento em cache](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br)**  incompatível  **[Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br)**  incompatível  **[Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)**  incompatível  **[Chamadas de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)**  Compatível  **[Embasamento com o Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)**  incompatível  **[Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br)**  incompatível  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br)**  Compatível  **[Embasamento da pesquisa](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)**  Compatível  **[Respostas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br)**  incompatível  **[Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br)**  Compatível (raciocínio intercalado)  **[Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)**  incompatível |
+| speedOpções de consumo | **[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br)**  incompatível |
+| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Estável: `gemini-3.8-live` |
+| calendar\_monthAtualização mais recente | Setembro de 2026 |
+| id\_cardCard de modelo | [Card de modelo](https://deepmind.google/models/model-cards/gemini-3-8-audio/?hl=pt-br) |
+| pagoPreços | [Preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-3.8-live) |
 
-## Migra desde Gemini 3.1 Flash Live
+## Migrar do Gemini 3.1 Flash Live
 
-Gemini 3.8 Live ofrece interacciones de audio a audio de latencia ultrabaja
-y expande la compatibilidad con los flujos de trabajo asíncronos. Cuando migres desde
-`gemini-3.1-flash-live-preview`, revisa las siguientes actualizaciones:
+O Gemini 3.8 Live oferece interações de áudio para áudio com latência ultrabaixa
+e expande o suporte para fluxos de trabalho assíncronos. Ao migrar do
+`gemini-3.1-flash-live-preview`, confira as seguintes atualizações:
 
-- **Cadena de modelo**: Actualiza la cadena de modelo de
-  `gemini-3.1-flash-live-preview` a `gemini-3.8-live`.
-- **Nivel de pensamiento**: `thinking_level` no se admite para `gemini-3.8-live`.
-  Omite `thinking_level` (o `thinking_config`) de la configuración de la sesión.
-- **Llamada a funciones asíncronas**: La ejecución asíncrona (`behavior: NON_BLOCKING`)
-  ahora es el modo predeterminado de llamada a funciones. Aún puedes usar el modo de bloqueo síncrono
-  para la retrocompatibilidad configurando `behavior: BLOCKING` en
-  las declaraciones de herramientas. Se admite la programación de funciones (`SILENT`, `WHEN_IDLE`,
-  `INTERRUPTED`).
-- **Actualizaciones de contenido del cliente**: `send_client_content` se admite durante todo el ciclo de vida de la sesión con roles explícitos (`user` o `model`). Configurar `turn_complete=true` interrumpe de forma incondicional la generación de modelos activos. Si
-  envías contenido sin `turn_complete`, el servidor espera los mensajes
-  posteriores antes de responder.
-- **Audio proactivo**: El audio proactivo ahora está habilitado de forma permanente. Si configuras
-  `proactive_audio: false`, se muestra un error.
-- **Diálogo basado en emociones detectadas**: Se quitó el diálogo basado en emociones detectadas de la API. Quita
-  cualquier configuración de `enable_affective_dialog` de tu código.
-- **Cobertura de giros**: El valor predeterminado es `TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`. Los fotogramas de video se envían al
-  modelo de forma predeterminada, por lo que solo debes enviar fotogramas cuando sea necesario para administrar el contexto y el costo.
-- **Modalidades de respuesta**: El audio es la modalidad de respuesta admitida. Habilita
-  la transcripción de audio de salida si tu aplicación requiere una transcripción de texto.
+- **String do modelo**: atualize a string do modelo de
+  `gemini-3.1-flash-live-preview` para `gemini-3.8-live`.
+- **Nível de raciocínio**: o `thinking_level` não é compatível com o `gemini-3.8-live`.
+  Omita `thinking_level` (ou `thinking_config`) da configuração da sessão.
+- **Chamada de função assíncrona**: a execução assíncrona (`behavior: NON_BLOCKING`)
+  agora é o modo de chamada de função padrão. Ainda é possível usar o modo de bloqueio síncrono para compatibilidade com versões anteriores definindo `behavior: BLOCKING` nas declarações de ferramentas. A programação de funções (`SILENT`, `WHEN_IDLE`,
+  `INTERRUPTED`) é compatível.
+- **Atualizações de conteúdo do cliente**: o `send_client_content` é compatível com todo o
+  ciclo de vida da sessão com papéis explícitos (`user` ou `model`). Definir
+  `turn_complete=true` interrompe incondicionalmente a geração de modelos ativos. Se
+  você enviar conteúdo sem `turn_complete`, o servidor vai aguardar as mensagens
+  subsequentes antes de responder.
+- **Áudio proativo**: o áudio proativo agora está permanentemente ativado. Definir
+  `proactive_audio: false` retorna um erro.
+- **Diálogo afetivo**: o diálogo afetivo foi removido da API. Remova
+  todas as configurações de `enable_affective_dialog` do código.
+- **Ativar cobertura**: o padrão é
+  `TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`. Os frames de vídeo são enviados ao
+  modelo por padrão. Portanto, envie frames apenas quando necessário para gerenciar o contexto e o custo.
+- **Modalidades de resposta**: o áudio é a modalidade de resposta aceita. Ative
+  a transcrição de áudio de saída se o aplicativo exigir uma transcrição de texto.
 
-Para obtener una comparación de las funciones en todos los modelos de la API de Live, consulta la tabla
-[Comparación de modelos](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=es-419#model-comparison).
+Para uma comparação de recursos entre todos os modelos da API Live, consulte a tabela de [comparação de modelos](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=pt-br#model-comparison).
 
-Enviar comentarios
+Envie comentários
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Última actualización: 2026-10-19 (UTC)
+Última atualização 2026-10-29 UTC.
 
-¿Quieres brindar más información?
+Quer enviar seu feedback?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-19 (UTC)"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-10-29 UTC."],[],[]]
