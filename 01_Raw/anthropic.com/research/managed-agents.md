@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/managed-agents
-fetched_at: 2026-10-26T05:39:58.999008+00:00
+fetched_at: 2026-11-02T07:00:36.923939+00:00
 title: "Scaling Managed Agents with stable interfaces \\ Anthropic"
 ---
 
@@ -82,4 +82,4 @@ Meta-harness design means being opinionated about the interfaces around Claude: 
 
 ### Acknowledgements
 
-Written by Lance Martin, Gabe Cemaj, and Michael Cohen. Thanks to Nodir Turakulov and Jeremy Fox for helpful conversations on these topics. Special thanks to the Agents API team and Jake Eaton for their contributions.
+Written by Lance Martin, Gabe Cemaj, and Michael Cohen. Thanks to N.T.A. and Jeremy Fox for helpful conversations on these topics. Special thanks to the Agents API team and Jake Eaton for their contributions.

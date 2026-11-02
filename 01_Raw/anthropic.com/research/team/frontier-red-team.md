@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/frontier-red-team
-fetched_at: 2026-10-26T05:40:01.097453+00:00
+fetched_at: 2026-11-02T07:00:39.245714+00:00
 title: "Frontier Red Team \\ Anthropic"
 ---
 
@@ -51,17 +51,21 @@ Like Claude Mythos Preview, GLM-5.3 has strong capabilities for autonomously bui
 
 04
 
-34
+35
 
 ARTICLES
 
 Most recentGrid view
 
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/105d9bbc7744153eb45473e80b4918a631c4111c-800x800.png)
+
+### [Discovering and exploiting vulnerabilities in critical, real-world software with Claude](https://www.anthropic.com/research/discovering-vulnerabilities-with-claude)
+
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1ae521c1656d33b2bf013315da894b16086d15e0-1280x1280.jpg)
 
 ### [LLMs are making formal software verification feasible at a much larger scale](https://www.anthropic.com/research/formal-verification)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/16194f7cb602e45abc0c59bb09a5d2183e7629eb-800x800.png)
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/16c346d44a310e746657cd16ea275a2da5efa719-800x800.png)
 
 ### [Using Claude to reduce the attack surface of code](https://www.anthropic.com/research/attack-surface-reduction)
 
@@ -149,17 +153,13 @@ Most recentGrid view
 
 ### [Project Vend: Phase two](https://www.anthropic.com/research/project-vend-2)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/fbe93f8681c7dab3804017b1e4449500341562b3-1280x1280.jpg)
-
-### [AI agents find $4.6M in blockchain smart contract exploits](https://www.anthropic.com/research/smart-contracts)
-
 See more
 
 ## Explore work from other teams
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-48 posts
+49 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
@@ -183,25 +183,25 @@ Studies how large language models work internally as a foundation for AI safety.
 
 [### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
 
-24 posts
+25 posts
 
 Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-18 posts
+17 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
 [### Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
-34 posts
+35 posts
 
 Stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next.
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-48 posts
+49 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
@@ -225,18 +225,18 @@ Studies how large language models work internally as a foundation for AI safety.
 
 [### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
 
-24 posts
+25 posts
 
 Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-18 posts
+17 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
 [### Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
-34 posts
+35 posts
 
 Stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next.

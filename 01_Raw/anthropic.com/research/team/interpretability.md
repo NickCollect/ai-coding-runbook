@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/interpretability
-fetched_at: 2026-10-26T05:40:01.370595+00:00
+fetched_at: 2026-11-02T07:00:39.311606+00:00
 title: "Interpretability \\ Anthropic"
 ---
 
@@ -155,7 +155,7 @@ See more
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-48 posts
+49 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
@@ -173,19 +173,19 @@ Builds the infrastructure and systems that make Claude reliable and trustworthy.
 
 [### Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
-34 posts
+35 posts
 
 Stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next.
 
 [### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
 
-24 posts
+25 posts
 
 Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-18 posts
+17 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
@@ -197,7 +197,7 @@ Studies how large language models work internally as a foundation for AI safety.
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-48 posts
+49 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
@@ -215,19 +215,19 @@ Builds the infrastructure and systems that make Claude reliable and trustworthy.
 
 [### Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
-34 posts
+35 posts
 
 Stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next.
 
 [### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
 
-24 posts
+25 posts
 
 Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-18 posts
+17 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 

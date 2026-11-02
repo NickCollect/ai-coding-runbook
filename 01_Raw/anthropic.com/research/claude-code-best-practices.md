@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-code-best-practices
-fetched_at: 2026-10-26T05:39:56.116855+00:00
+fetched_at: 2026-11-02T07:00:33.493945+00:00
 title: "Claude Code Best Practices \\ Anthropic"
 ---
 
@@ -402,4 +402,4 @@ What are your tips and best practices for working with Claude Code? Tag @Anthrop
 
 ### Acknowledgements
 
-Written by Boris Cherny. This work draws upon best practices from across the broader Claude Code user community, whose creative approaches and workflows continue to inspire us. Special thanks also to Daisy Hollman, Ashwin Bhat, Cat Wu, Sid Bidasaria, Cal Rueb, Nodir Turakulov, Barry Zhang, Drew Hodun and many other Anthropic engineers whose valuable insights and practical experience with Claude Code helped shape these recommendations.
+Written by Boris Cherny. This work draws upon best practices from across the broader Claude Code user community, whose creative approaches and workflows continue to inspire us. Special thanks also to Daisy Hollman, Ashwin Bhat, Cat Wu, Sid Bidasaria, Cal Rueb, N.T.A., Barry Zhang, Drew Hodun and many other Anthropic engineers whose valuable insights and practical experience with Claude Code helped shape these recommendations.

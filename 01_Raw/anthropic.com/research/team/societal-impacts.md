@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/societal-impacts
-fetched_at: 2026-10-26T05:40:01.210132+00:00
+fetched_at: 2026-11-02T07:00:39.425285+00:00
 title: "Societal Impacts \\ Anthropic"
 ---
 
@@ -47,7 +47,7 @@ We analyzed millions of human-agent interactions across both Claude Code and our
 
 03
 
-24
+25
 
 ARTICLES
 
@@ -68,6 +68,10 @@ Most recentGrid view
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/e2db332cd2a52cea00ca71c17f761e36b412077b-1280x1280.jpg)
 
 ### [Results from the first Anthropic Public Record](https://www.anthropic.com/research/anthropic-public-record)
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/cc31b2f7446eceebfa8ad29f3914b91cbd41c7eb-1280x1280.jpg)
+
+### [Coding agents in the social sciences](https://www.anthropic.com/research/coding-agents-social-sciences)
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ca5ed5e870df90abcc9f60082d2cc3a785386588-1280x1280.jpg)
 
@@ -145,15 +149,13 @@ Most recentGrid view
 
 ### [Red teaming language models to reduce harms: methods, scaling behaviors, and lessons learned](https://www.anthropic.com/research/red-teaming-language-models-to-reduce-harms-methods-scaling-behaviors-and-lessons-learned)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d16c251a11dfe3baabf211dccbe2cf0f96b01420-1280x1280.jpg)
-
-### [Predictability and Surprise in Large Generative Models](https://www.anthropic.com/research/predictability-and-surprise-in-large-generative-models)
+See more
 
 ## Explore work from other teams
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-48 posts
+49 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
@@ -171,7 +173,7 @@ Builds the infrastructure and systems that make Claude reliable and trustworthy.
 
 [### Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
-34 posts
+35 posts
 
 Stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next.
 
@@ -183,19 +185,19 @@ Studies how large language models work internally as a foundation for AI safety.
 
 [### Science](https://www.anthropic.com/science)
 
-18 posts
+17 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
 [### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
 
-24 posts
+25 posts
 
 Studies how AI affects people, both individually and collectively.
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-48 posts
+49 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
@@ -213,7 +215,7 @@ Builds the infrastructure and systems that make Claude reliable and trustworthy.
 
 [### Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
-34 posts
+35 posts
 
 Stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next.
 
@@ -225,12 +227,12 @@ Studies how large language models work internally as a foundation for AI safety.
 
 [### Science](https://www.anthropic.com/science)
 
-18 posts
+17 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
 [### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
 
-24 posts
+25 posts
 
 Studies how AI affects people, both individually and collectively.
