@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-directory
-fetched_at: 2026-10-26T05:40:00.600758+00:00
+fetched_at: 2026-11-02T07:00:25.862114+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ fetch_method: mintlify_md
 
 Claude Code reads instructions, settings, skills, subagents, and memory from your project directory and from `~/.claude` in your home directory. Commit project files to git to share them with your team; files in `~/.claude` are personal configuration that applies across all your projects.
 
-On Windows, `~/.claude` resolves to `%USERPROFILE%\.claude`. If you set [`CLAUDE_CONFIG_DIR`](https://code.claude.com/docs/en/env-vars), every `~/.claude` path on this page lives under that directory instead.
+On Windows, `~/.claude` resolves to `%USERPROFILE%\.claude`. If you set [`CLAUDE_CONFIG_DIR`](https://code.claude.com/docs/en/env-vars), every `~/.claude` path on this page lives under that directory instead. The same applies to `.claude.json`, which otherwise sits at `~/.claude.json`.
 
 Most users only edit `CLAUDE.md` and `settings.json`. If your repository already has an `AGENTS.md` for other coding agents, Claude Code [can read that](https://code.claude.com/docs/en/memory.md#agents-md) in place of a `CLAUDE.md`. The rest of the directory is optional: add skills, rules, or subagents as you need them.
 
@@ -82,7 +82,7 @@ Click a filename to open that node in the explorer above.
 | [`agents/*.md`](#ce-agents) | Project and global | ✓ | Subagent definitions with their own prompt and tools | [Subagents](https://code.claude.com/docs/en/sub-agents.md) |
 | [`workflows/*.js`](#ce-workflows) | Project and global | ✓ | Dynamic workflow scripts written by Claude and saved from `/workflows`; each file becomes a `/<name>` command | [Dynamic workflows](https://code.claude.com/docs/en/workflows.md) |
 | [`agent-memory/<name>/`](#ce-agent-memory) | Project and global | ✓ | Persistent memory for subagents | [Persistent memory](https://code.claude.com/docs/en/sub-agents.md#enable-persistent-memory) |
-| [`~/.claude.json`](#ce-claude-json) | Global only | | App state, account details, UI toggles, personal MCP servers | [Global config](https://code.claude.com/docs/en/settings-reference.md#global-config-settings) |
+| [`~/.claude.json`](#ce-claude-json) | Global only | | App state, account details, UI toggles, personal MCP servers. If it's missing, Claude Code creates it when you start a session or run a subcommand such as `claude auth status`, but not for `--version` or `--help`. | [Global config](https://code.claude.com/docs/en/settings-reference.md#global-config-settings) |
 | [`projects/<project>/memory/`](#ce-global-projects) | Global only | | Auto memory: Claude's notes to itself across sessions | [Auto memory](https://code.claude.com/docs/en/memory.md#auto-memory) |
 | [`keybindings.json`](#ce-keybindings) | Global only | | Custom keyboard shortcuts | [Keybindings](https://code.claude.com/docs/en/keybindings.md) |
 | [`themes/*.json`](#ce-themes) | Global only | | Custom color themes | [Custom themes](https://code.claude.com/docs/en/terminal-config.md#create-a-custom-theme) |
@@ -109,15 +109,22 @@ If a setting, hook, or file isn't taking effect, see [Debug your configuration](
 
 Beyond the config you author, `~/.claude` holds data Claude Code writes during sessions. These files are plaintext. Anything that passes through a tool is written to a transcript on disk: file contents, command output, pasted text.
 
+The transcript can also hold what Claude Code sends the model with your messages:
+
+* The system prompt
+* Tool definitions
+* Request parameters
+* The instruction files it loaded, such as CLAUDE.md
+
 ### Cleaned up automatically
 
 Claude Code deletes the files in the paths below once they're older than [`cleanupPeriodDays`](https://code.claude.com/docs/en/settings-reference#cleanupperioddays), as long as it can safely determine the retention period. The default is 30 days and the minimum is 1; setting `0` fails with a validation error. The same age cutoff applies to automatic removal of [orphaned worktrees](https://code.claude.com/docs/en/worktrees.md#clean-up-subagent-and-background-session-worktrees).
 
 | Path under `~/.claude/` | Contents |
 | - | - |
-| `projects/<project>/<session>.jsonl` | Full conversation transcript: every message, tool call, and tool result |
+| `projects/<project>/<session>.jsonl` | Conversation transcript: messages, tool calls, and tool results, plus the system prompt, tool definitions, and parameters of the requests Claude Code sent the model |
 | `projects/<project>/<session>.orphaned-<timestamp>-<suffix>.jsonl`, `projects/<project>/<session>.jsonl.superseded-<timestamp>` | A previous transcript for the session that Claude Code set aside instead of overwriting or deleting it. It doesn't appear in the session picker |
-| `projects/<project>/<session>/subagents/` | [Subagent](https://code.claude.com/docs/en/sub-agents.md) conversation transcripts, removed with the parent session transcript when it ages out |
+| `projects/<project>/<session>/subagents/` | [Subagent](https://code.claude.com/docs/en/sub-agents.md) transcripts in the same format as the session transcript, removed with the parent session transcript when it ages out |
 | `projects/<project>/<session>/tool-results/` | Large tool outputs spilled to separate files, and full-size copies of [images that MCP tools return](https://code.claude.com/docs/en/mcp.md#images-in-tool-results) |
 | `projects/<project>/<session>/mcp-tasks/` | What a resumed session needs to follow its running [MCP tasks](https://code.claude.com/docs/en/mcp.md#mcp-tasks-that-run-on-the-server) again, and the results of finished tasks that Claude hasn't read yet |
 | `file-history/<session>/` | Pre-edit snapshots of files Claude changed, used for [checkpoint restore](https://code.claude.com/docs/en/checkpointing.md). Holds snapshots for the 100 most recent checkpoints; snapshot files that no retained checkpoint references are deleted, except each file's first snapshot |

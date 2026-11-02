@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/publish
-fetched_at: 2026-10-26T05:40:04.520951+00:00
+fetched_at: 2026-11-02T07:00:26.723432+00:00
 fetch_method: mintlify_md
 ---
 
@@ -102,7 +102,7 @@ To publish from the plugin's own repository, save the marketplace file beside `p
 }
 ```
 
-In your shell, run `claude plugin validate .` in the repository before you push. For what the run checks, see [Validate a directory](https://code.claude.com/docs/en/plugins/cli-reference.md#validate-a-directory).
+Replace `your-marketplace` with a name that other authors are unlikely to pick, because a user [can't have two marketplaces with the same name](https://code.claude.com/docs/en/plugins/marketplace-reference.md#marketplace-file). In your shell, run `claude plugin validate .` in the repository before you push. For what the run checks, see [Validate a directory](https://code.claude.com/docs/en/plugins/cli-reference.md#validate-a-directory).
 
 [Create a marketplace](https://code.claude.com/docs/en/plugins/create-marketplace.md) covers the layout with several plugins in one repository.
 
@@ -138,7 +138,7 @@ To submit a plugin:
 
 **1. Confirm you can submit**
 
-Submitting requires a paid claude.ai plan. On Pro and Max you submit from your own account. On Team and Enterprise, an Owner can submit, and on Enterprise an Owner can also grant the **Directory** permission to other members through a custom role under **Organization settings > Roles**. See [Confirm you can submit to the directory](https://claude.com/docs/directory/publish#confirm-you-can-submit-to-the-directory).
+Submitting requires a paid claude.ai plan. On Pro, Max, and Ultra you submit from your own account. On Team and Enterprise, an Owner can submit, and on Enterprise an Owner can also grant the **Directory** permission to other members through a custom role under **Organization settings > Roles**. See [Confirm you can submit to the directory](https://claude.com/docs/directory/publish#confirm-you-can-submit-to-the-directory).
 
 **2. Validate the plugin locally**
 

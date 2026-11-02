@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/structured-outputs
-fetched_at: 2026-10-26T05:39:59.225945+00:00
+fetched_at: 2026-11-02T07:00:25.577613+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ Agents return free-form text by default, which works for chat but not when you n
 
 Consider a recipe app where an agent searches the web and brings back recipes. Without structured outputs, you get free-form text that you'd need to parse yourself. With structured outputs, you define the shape you want and get typed data you can use directly in your app.
 
-> **Without structured outputs**
+> [accordion] Without structured outputs
 >
 > ```text theme={null}
 > Here's a classic chocolate chip cookie recipe!
@@ -38,7 +38,7 @@ Consider a recipe app where an agent searches the web and brings back recipes. W
 >
 > To use this in your app, you'd need to parse out the title, convert "15 minutes" to a number, separate ingredients from instructions, and handle inconsistent formatting across responses.
 
-> **With structured outputs**
+> [accordion] With structured outputs
 >
 > ```jsonc theme={null}
 > {

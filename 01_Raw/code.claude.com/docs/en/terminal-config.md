@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/terminal-config
-fetched_at: 2026-10-26T05:40:06.141138+00:00
+fetched_at: 2026-11-02T07:00:26.964619+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,23 +54,23 @@ To bind newline to a different key, or to swap behavior so Enter inserts a newli
 
 Some Claude Code shortcuts use the Option key, such as Option+Enter for a newline or Option+P to switch models. On macOS, most terminals do not send Option as a modifier by default, so these shortcuts do nothing until you enable it. The terminal setting for this is usually labeled "Use Option as Meta Key"; Meta is the historical Unix name for the key now labeled Option or Alt.
 
-**Apple Terminal**
+> [tab] Apple Terminal
+>
+> Open Settings → Profiles → Keyboard and check "Use Option as Meta Key".
+>
+> If you accepted Claude Code's first-run terminal setup prompt, this is already done. That prompt runs `/terminal-setup` for you, which enables Option as Meta and turns off the audible bell in your Apple Terminal profile.
+>
+> In [screen reader mode](https://code.claude.com/docs/en/accessibility.md), `/terminal-setup` leaves the bell setting unchanged so the terminal bell stays audible. If an earlier run turned the bell off, turn it back on under Settings → Profiles → Advanced → "Audible bell".
 
-Open Settings → Profiles → Keyboard and check "Use Option as Meta Key".
+> [tab] iTerm2
+>
+> Open Settings → Profiles → Keys → General and set Left Option key and Right Option key to "Esc+".
+>
+> Running `/terminal-setup` in iTerm2 enables "Applications in terminal may access clipboard" under Settings → General → Selection so the `/copy` command can write to your system clipboard. The command detects iTerm2 even when run from inside tmux. Restart iTerm2 for the change to take effect.
 
-If you accepted Claude Code's first-run terminal setup prompt, this is already done. That prompt runs `/terminal-setup` for you, which enables Option as Meta and turns off the audible bell in your Apple Terminal profile.
-
-In [screen reader mode](https://code.claude.com/docs/en/accessibility.md), `/terminal-setup` leaves the bell setting unchanged so the terminal bell stays audible. If an earlier run turned the bell off, turn it back on under Settings → Profiles → Advanced → "Audible bell".
-
-**iTerm2**
-
-Open Settings → Profiles → Keys → General and set Left Option key and Right Option key to "Esc+".
-
-Running `/terminal-setup` in iTerm2 enables "Applications in terminal may access clipboard" under Settings → General → Selection so the `/copy` command can write to your system clipboard. The command detects iTerm2 even when run from inside tmux. Restart iTerm2 for the change to take effect.
-
-**VS Code**
-
-Add `"terminal.integrated.macOptionIsMeta": true` to your VS Code settings.
+> [tab] VS Code
+>
+> Add `"terminal.integrated.macOptionIsMeta": true` to your VS Code settings.
 
 For Ghostty, Kitty, and other terminals, look for an Option-as-Alt or Option-as-Meta setting in the terminal's configuration file.
 
@@ -78,7 +78,13 @@ For Ghostty, Kitty, and other terminals, look for an Option-as-Alt or Option-as-
 
 When Claude finishes a task or pauses for a permission prompt, and you appear to be away from the terminal, it fires a notification event. See [when each notification type fires](https://code.claude.com/docs/en/hooks.md#notification) for the exact timing. Surfacing this as a terminal bell or desktop notification lets you switch to other work while a long task runs.
 
-By default Claude Code sends a desktop notification only in Ghostty, Kitty, and iTerm2. In other terminals, set [`preferredNotifChannel`](https://code.claude.com/docs/en/settings-reference#preferrednotifchannel) to `"terminal_bell"` to ring the terminal bell instead, or configure a [Notification hook](#play-a-sound-with-a-notification-hook) for a custom sound or command. The following settings entry turns on the terminal bell:
+By default, Claude Code sends a desktop notification in some terminals, and a bell character or nothing in others:
+
+* **Ghostty, Kitty, and iTerm2**: a desktop notification, which iTerm2 shows only after you turn on its alert settings.
+* **Apple Terminal**: no sound; a silent bell character when Claude Code finds "Audible bell" off in the front Terminal window's profile, otherwise nothing. That bell character shows as a window flash, or a Dock bounce while Terminal is in the background, if that profile's "Visual bell" or Dock bounce option is on.
+* **Other terminals**: nothing.
+
+To make Claude Code send the bell character whatever the terminal or profile, set [`preferredNotifChannel`](https://code.claude.com/docs/en/settings-reference#preferrednotifchannel) to `"terminal_bell"`. In Apple Terminal, also turn on **Audible bell** under **Settings > Profiles > Advanced** to hear it. The following settings entry sets the channel:
 
 ```json ~/.claude/settings.json theme={null}
 {
@@ -188,7 +194,7 @@ Claude Code watches `~/.claude/themes/` and reloads when a file is added or chan
 
 The reference below covers the tokens you can set in `overrides`. The interactive editor in `/theme` shows the same tokens with a live preview, plus a few single-purpose accents such as onboarding screen colors that are omitted here.
 
-> **Color token reference**
+> [accordion] Color token reference
 >
 > The following example combines tokens from several of the groups below: the brand accent, the plan mode border, the diff backgrounds, and the message background.
 >
@@ -296,7 +302,7 @@ The reference below covers the tokens you can set in `overrides`. The interactiv
 >
 > Each [subagent](https://code.claude.com/docs/en/sub-agents.md) and parallel task is shown in one of eight named colors so you can tell them apart in the transcript. The token names follow the pattern `<color>_FOR_SUBAGENTS_ONLY`, where `<color>` is `red`, `blue`, `green`, `yellow`, `purple`, `orange`, `pink`, or `cyan`. Override these to change what each named color looks like. For example, a subagent with `color: blue` in its definition is drawn using the `blue_FOR_SUBAGENTS_ONLY` value.
 >
-> Claude Code renders the [`ultrathink`](https://code.claude.com/docs/en/model-config#use-ultrathink-for-one-off-deep-reasoning) keyword in the prompt input with a seven-color rainbow gradient. The token names follow the pattern `rainbow_<color>` and `rainbow_<color>_shimmer`, where `<color>` is `red`, `orange`, `yellow`, `green`, `blue`, `indigo`, or `violet`.
+> When [`ultrathink`](https://code.claude.com/docs/en/model-config#use-ultrathink-for-one-off-deep-reasoning) can raise a turn's effort, Claude Code renders the word in the prompt input with a seven-color rainbow gradient. The token names follow the pattern `rainbow_<color>` and `rainbow_<color>_shimmer`, where `<color>` is `red`, `orange`, `yellow`, `green`, `blue`, `indigo`, or `violet`.
 
 ## Switch to fullscreen rendering
 

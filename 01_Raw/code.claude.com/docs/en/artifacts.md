@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/artifacts
-fetched_at: 2026-10-26T05:40:00.013032+00:00
+fetched_at: 2026-11-02T07:00:25.692903+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ fetch_method: mintlify_md
 
 > [!NOTE]
 >
-> Artifacts are available on Pro, Max, Team, and Enterprise plans and require a session signed in with [`/login`](https://code.claude.com/docs/en/setup#authenticate). See [Availability](#availability) for the full set of requirements.
+> Artifacts are available on Pro, Max, Ultra, Team, and Enterprise plans and require a session signed in with [`/login`](https://code.claude.com/docs/en/setup#authenticate). See [Availability](#availability) for the full set of requirements.
 
 An [artifact](https://claude.com/features/artifacts) is a live, interactive web page that Claude Code publishes from your session to a private URL on claude.ai. You open it in a browser, and it updates in place as the session continues. Share it from the page header when you want someone else to see it too.
 
@@ -101,7 +101,7 @@ Run `/artifacts` in Claude Code to list the artifacts you own and the ones share
 
 Select an artifact, then press one of these keys:
 
-* **`Enter`**: opens it in your browser when it's already attached to the current session, and attaches it when it isn't. Before v2.1.216, `Enter` opened it in your browser
+* **`Enter`**: opens it in your browser when it's already attached to the current session, and attaches it when it isn't
 * **`o`**: opens it in your browser
 * **`c`**: copies its link
 * **`d`**: outside a [cloud session](https://code.claude.com/docs/en/claude-code-on-the-web.md), permanently deletes an artifact you own after you confirm. Its link stops working for everyone, including you
@@ -203,7 +203,7 @@ If the service that delivers comments becomes unavailable or stops answering, Cl
 
 ## Pull live data with MCP connectors
 
-An artifact can call [MCP connectors](https://code.claude.com/docs/en/mcp.md#use-mcp-servers-from-claude-ai) each time someone views it, so the page shows current data rather than a snapshot from the session that built it. Connector calls from artifacts are available on Pro, Max, Team, and Enterprise plans and require Claude Code v2.1.209 or later. On earlier versions, Claude publishes the page with whatever data the session gathered while building it.
+An artifact can call [MCP connectors](https://code.claude.com/docs/en/mcp.md#use-mcp-servers-from-claude-ai) each time someone views it, so the page shows current data rather than a snapshot from the session that built it. Connector calls from artifacts are available on Pro, Max, Ultra, Team, and Enterprise plans and require Claude Code v2.1.209 or later. On earlier versions, Claude publishes the page with whatever data the session gathered while building it.
 
 To create a connector-backed page, name the connector and the data you want in your prompt:
 
@@ -231,7 +231,7 @@ You can [share a connector-backed page](#share-an-artifact) within your organiza
 
 When a connector-backed page renders but its live sections stay empty for a viewer in your organization, work through these causes:
 
-* **The viewer hasn't connected the connector**: connectors are per-account, so each viewer needs their own connection to every connector the page calls. They can add one under **Settings > Connectors** on claude.ai, then reload the page.
+* **The viewer hasn't connected the connector**: connectors are per-account, so each viewer needs their own connection to every connector the page calls. They can add one under [**Customize > Connectors**](https://claude.ai/customize/connectors) on claude.ai, then reload the page.
 * **The viewer declined the permission ask**: a denial lasts for the rest of that page load. Reloading the page brings the permission ask back.
 * **Connector calls are turned off for the organization**: an Owner controls the [**Enable artifact connectors** toggle](#control-connector-calls-from-artifacts) in admin settings.
 * **The page calls tool names the connector doesn't expose**: the affected sections stay empty for everyone, including you. This can happen when a page names the individual tools behind a gateway-style connector that exposes only a few tools of its own. Ask Claude to fix the tool names the page calls and publish it again.
@@ -320,7 +320,7 @@ To start from a template, describe what you want, such as "turn the migration no
 
 > [!NOTE]
 >
-> Templates are in beta. They're on by default on Pro, Max, and Team plans. On Enterprise plans, an Owner [turns each template on](https://support.claude.com/en/articles/16994751-artifacts-admin-guide-for-team-and-enterprise-plans) under **Organization settings > Artifacts**. If your organization has the Slides template turned off, `/slides` doesn't appear; if it has the Design template turned off, `/design` doesn't draft designs. Both commands require Claude Code v2.1.265 or later and a session where [artifacts are available](#availability).
+> Templates are in beta. They're on by default on Pro, Max, Ultra, and Team plans. On Enterprise plans, an Owner [turns each template on](https://support.claude.com/en/articles/16994751-artifacts-admin-guide-for-team-and-enterprise-plans) under **Organization settings > Artifacts**. If your organization has the Slides template turned off, `/slides` doesn't appear; if it has the Design template turned off, `/design` doesn't draft designs. Both commands require Claude Code v2.1.265 or later and a session where [artifacts are available](#availability).
 
 ### Make a slide deck
 
@@ -374,8 +374,8 @@ Artifacts require every condition below. When one is not met, Claude writes a lo
 
 | Requirement | Available when |
 | :- | :- |
-| Plan | Pro, Max, Team, or Enterprise. On Pro and Max plans, artifacts are private to you until you share them, and no admin management applies. On Team and Enterprise plans, artifacts are on by default, and an Owner can [turn them off for the organization](#manage-artifacts-for-your-organization) in claude.ai admin settings. |
-| Authentication | The session is backed by a claude.ai account: sign in with `/login` in the CLI or desktop app. Claude Tag sessions are signed in through the agent's identity, so no step is needed there. Sessions using an API key, [gateway token](https://code.claude.com/docs/en/llm-gateway), or cloud-provider credential cannot publish. |
+| Plan | Pro, Max, Ultra, Team, or Enterprise. On Pro, Max, and Ultra plans, artifacts are private to you until you share them, and no admin management applies. On Team and Enterprise plans, artifacts are on by default, and an Owner can [turn them off for the organization](#manage-artifacts-for-your-organization) in claude.ai admin settings. |
+| Authentication | The session is backed by a claude.ai account: sign in with `/login` in the CLI or desktop app. Claude Tag sessions need no sign-in step. Sessions using an API key, [gateway token](https://code.claude.com/docs/en/llm-gateway), or cloud-provider credential cannot publish. |
 | Model provider | Anthropic API. Not available on [Amazon Bedrock](https://code.claude.com/docs/en/amazon-bedrock.md), [Google Cloud's Agent Platform](https://code.claude.com/docs/en/google-vertex-ai.md), or [Microsoft Foundry](https://code.claude.com/docs/en/microsoft-foundry.md). |
 | Organization policy | Customer-managed encryption keys (CMEK), HIPAA, and [Zero Data Retention](https://code.claude.com/docs/en/zero-data-retention.md) are not enabled for the organization. |
 | Surface | Claude Code CLI, or the Claude desktop app version 1.13576.0 or later. [Claude Tag](https://claude.com/docs/claude-tag/overview) sessions can also publish artifacts when both Claude Tag and artifacts are enabled for the organization. Sessions served by [`claude remote-control`](https://code.claude.com/docs/en/remote-control) can publish artifacts when you started the session yourself. Requires Claude Code v2.1.281 or later. Off by default in the [Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview.md), the GitHub Action, and MCP-server contexts, when you run Claude Code with [`-p`](https://code.claude.com/docs/en/headless) from your own terminal or scripts, and when [`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`](https://code.claude.com/docs/en/env-vars) is set. |

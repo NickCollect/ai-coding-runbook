@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/self-hosted-environments-identity
-fetched_at: 2026-10-26T05:40:05.164998+00:00
+fetched_at: 2026-11-02T07:00:26.870813+00:00
 fetch_method: mintlify_md
 ---
 
@@ -90,88 +90,90 @@ Reject the token if `exp` is in the past. Anthropic issues session tokens with a
 
 **7. Read the identity**
 
-The creating user's identity is in the `act` claim: `act.sub` is their Anthropic user ID in the prefixed form `user:<id>`, and `act.email`, when the creating surface recorded one, is their email address. Sessions your organization's service identity creates, including Claude Tag channel sessions, carry an `agent:` subject instead, so treat a session as user-created only when `act.sub` carries the `user:` prefix, rather than testing whether identity claims are absent. See the [claims reference](#claims-reference) for the full structure and the flat duplicate claims.
+The creating user's identity is in the `act` claim. `act.sub` is their Anthropic user ID in the prefixed form `user:<id>`, and `act.email`, when the creating surface recorded one, is their email address. Sessions your organization's service identity creates carry an `agent:` subject instead. Treat a session as user-created only when `act.sub` carries the `user:` prefix, rather than testing whether identity claims are absent.
+
+See the [claims reference](#claims-reference) for the full structure and the flat duplicate claims.
 
 The checks map directly onto standard JWT libraries. The examples below implement the full sequence in Node.js with [`jose`](https://www.npmjs.com/package/jose), which handles JWKS fetching, caching, and `kid` selection, and in Python with [`PyJWT`](https://pyjwt.readthedocs.io/) and its built-in JWKS client.
 
-**Node.js (jose)**
+> [tab] Node.js (jose)
+>
+> ```typescript theme={null}
+> import { createRemoteJWKSet, jwtVerify } from "jose";
+>
+> const JWKS = createRemoteJWKSet(
+>   new URL("https://api.anthropic.com/v1/code/.well-known/jwks.json")
+> );
+>
+> const PREFIX = "sk-ant-cc-";
+> const EXPECTED_POOL_ID = "ccpool_...";
+>
+> export async function verifySessionToken(raw: string) {
+>   if (!raw.startsWith(PREFIX)) {
+>     throw new Error("not a self-hosted runner session token");
+>   }
+>   const jwt = raw.slice(PREFIX.length);
+>
+>   const { payload } = await jwtVerify(jwt, JWKS, {
+>     issuer: "ccr",
+>     audience: EXPECTED_POOL_ID,
+>     algorithms: ["ES256"],
+>   });
+>
+>   if (payload["ccr:role"] !== "session_worker") {
+>     throw new Error("token is not a session_worker token");
+>   }
+>
+>   const act = payload.act as { email?: string; sub?: string };
+>   return {
+>     sessionId: payload["ccr:session_id"] as string,
+>     poolId: payload["ccr:pool_id"] as string,
+>     orgId: payload["ccr:org_id"] as string,
+>     creatorEmail: act?.email,
+>     creatorSub: act?.sub,
+>   };
+> }
+> ```
 
-```typescript theme={null}
-import { createRemoteJWKSet, jwtVerify } from "jose";
-
-const JWKS = createRemoteJWKSet(
-  new URL("https://api.anthropic.com/v1/code/.well-known/jwks.json")
-);
-
-const PREFIX = "sk-ant-cc-";
-const EXPECTED_POOL_ID = "ccpool_...";
-
-export async function verifySessionToken(raw: string) {
-  if (!raw.startsWith(PREFIX)) {
-    throw new Error("not a self-hosted runner session token");
-  }
-  const jwt = raw.slice(PREFIX.length);
-
-  const { payload } = await jwtVerify(jwt, JWKS, {
-    issuer: "ccr",
-    audience: EXPECTED_POOL_ID,
-    algorithms: ["ES256"],
-  });
-
-  if (payload["ccr:role"] !== "session_worker") {
-    throw new Error("token is not a session_worker token");
-  }
-
-  const act = payload.act as { email?: string; sub?: string };
-  return {
-    sessionId: payload["ccr:session_id"] as string,
-    poolId: payload["ccr:pool_id"] as string,
-    orgId: payload["ccr:org_id"] as string,
-    creatorEmail: act?.email,
-    creatorSub: act?.sub,
-  };
-}
-```
-
-**Python (PyJWT)**
-
-```python theme={null}
-import jwt
-from jwt import PyJWKClient
-
-JWKS_URL = "https://api.anthropic.com/v1/code/.well-known/jwks.json"
-PREFIX = "sk-ant-cc-"
-EXPECTED_POOL_ID = "ccpool_..."
-
-jwks = PyJWKClient(JWKS_URL)
-
-
-def verify_session_token(raw: str) -> dict:
-    if not raw.startswith(PREFIX):
-        raise ValueError("not a self-hosted runner session token")
-    token = raw.removeprefix(PREFIX)
-
-    signing_key = jwks.get_signing_key_from_jwt(token)
-    payload = jwt.decode(
-        token,
-        signing_key.key,
-        algorithms=["ES256"],
-        issuer="ccr",
-        audience=EXPECTED_POOL_ID,
-    )
-
-    if payload.get("ccr:role") != "session_worker":
-        raise ValueError("token is not a session_worker token")
-
-    act = payload.get("act") or {}
-    return {
-        "session_id": payload["ccr:session_id"],
-        "pool_id": payload["ccr:pool_id"],
-        "org_id": payload["ccr:org_id"],
-        "creator_email": act.get("email"),
-        "creator_sub": act.get("sub"),
-    }
-```
+> [tab] Python (PyJWT)
+>
+> ```python theme={null}
+> import jwt
+> from jwt import PyJWKClient
+>
+> JWKS_URL = "https://api.anthropic.com/v1/code/.well-known/jwks.json"
+> PREFIX = "sk-ant-cc-"
+> EXPECTED_POOL_ID = "ccpool_..."
+>
+> jwks = PyJWKClient(JWKS_URL)
+>
+>
+> def verify_session_token(raw: str) -> dict:
+>     if not raw.startswith(PREFIX):
+>         raise ValueError("not a self-hosted runner session token")
+>     token = raw.removeprefix(PREFIX)
+>
+>     signing_key = jwks.get_signing_key_from_jwt(token)
+>     payload = jwt.decode(
+>         token,
+>         signing_key.key,
+>         algorithms=["ES256"],
+>         issuer="ccr",
+>         audience=EXPECTED_POOL_ID,
+>     )
+>
+>     if payload.get("ccr:role") != "session_worker":
+>         raise ValueError("token is not a session_worker token")
+>
+>     act = payload.get("act") or {}
+>     return {
+>         "session_id": payload["ccr:session_id"],
+>         "pool_id": payload["ccr:pool_id"],
+>         "org_id": payload["ccr:org_id"],
+>         "creator_email": act.get("email"),
+>         "creator_sub": act.get("sub"),
+>     }
+> ```
 
 ### Verify the token inside the session
 
@@ -191,7 +193,9 @@ If `decode-token` can't fetch the keys from the JWKS endpoint or can't verify th
 
 ## Claims reference
 
-The table below lists the session token claims relevant to verification. Read identity from the `ccr:*` namespace and the `act` chain; the flat `account_email`, `organization_uuid`, and `account_uuid` claims are backward-compatibility duplicates that may be removed. Sessions your organization's service identity creates, including Claude Tag channel sessions, carry an `agent:` subject in `act.sub` and omit `act.email`, `ccr:account_id`, `account_email`, and `account_uuid`. The two email claims are optional for user-created sessions too: Anthropic records them at session creation only when the creating request's credentials carry an email, and a session dispatched from the CLI can lack both, so key identity on `act.sub` or `ccr:account_id` rather than on email. Tokens can also carry additional claims beyond this table; ignore claims you don't recognize.
+Read identity from the `ccr:*` namespace and the `act` chain; the flat `account_email`, `organization_uuid`, and `account_uuid` claims are backward-compatibility duplicates that may be removed. Sessions your organization's service identity creates carry an `agent:` subject in `act.sub` and omit `act.email`, `ccr:account_id`, `account_email`, and `account_uuid`.
+
+The two email claims are optional for user-created sessions too. Anthropic records them at session creation only when the creating request's credentials carry an email, and a session dispatched from the CLI can lack both. Key identity on `act.sub` or `ccr:account_id` rather than on email. Tokens can also carry additional claims beyond this table; ignore claims you don't recognize. The table below lists the session token claims relevant to verification.
 
 | Claim | Type | Description |
 | :- | :- | :- |
@@ -217,7 +221,7 @@ The `act` claim records the full delegation path from the user or service identi
 
 | Path | Description |
 | :- | :- |
-| `act.sub` | The creating user's Anthropic user ID, in the form `user:<id>`, or `agent:<id>` when your organization's service identity created the session, as it does for Claude Tag channel sessions. |
+| `act.sub` | The creating user's Anthropic user ID, in the form `user:<id>`, or `agent:<id>` when your organization's service identity created the session. |
 | `act.email` | The creating user's email address, when one was recorded at session creation. Don't require it; key on `act.sub`. |
 | `act.attested_by` | Reserved for the upstream identity provider's attestation for the creating user. Expect it to be absent, and don't depend on it. Key on `act.sub`. If you need an address, read `act.email` when it's present. |
 | `act.act` | The runner that spawned the session. `act.act.sub` is `ccr:runner:<runner_id>`. |

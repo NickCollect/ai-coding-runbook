@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/sandboxing
-fetched_at: 2026-10-26T05:40:04.836488+00:00
+fetched_at: 2026-11-02T07:00:26.811075+00:00
 fetch_method: mintlify_md
 ---
 
@@ -125,17 +125,17 @@ On Linux and WSL2, the sandbox relies on these packages:
 
 Install them with your distribution's package manager:
 
-**Ubuntu/Debian**
+> [tab] Ubuntu/Debian
+>
+> ```bash theme={null}
+> sudo apt-get install bubblewrap socat
+> ```
 
-```bash theme={null}
-sudo apt-get install bubblewrap socat
-```
-
-**Fedora**
-
-```bash theme={null}
-sudo dnf install bubblewrap socat
-```
+> [tab] Fedora
+>
+> ```bash theme={null}
+> sudo dnf install bubblewrap socat
+> ```
 
 When a dependency is missing, the Dependencies tab in `/sandbox` lists which of `ripgrep`, `bubblewrap`, `socat`, and the seccomp filter your platform lacks. If you don't see the tab after installing and restarting Claude Code, all dependencies are present.
 
@@ -143,7 +143,7 @@ Ripgrep is bundled with the native Claude Code binary. The seccomp filter is opt
 
 When a required dependency is missing, the Dependencies tab is the only tab shown until you install it. When only the optional seccomp filter is missing, the Dependencies tab appears alongside the other tabs. The dependency check runs at startup, so restart Claude Code after installing packages for `/sandbox` to detect them.
 
-> **Ubuntu 24.04 and later: allow bubblewrap to create user namespaces**
+> [accordion] Ubuntu 24.04 and later: allow bubblewrap to create user namespaces
 >
 > On Ubuntu 24.04 and later, the default AppArmor policy prevents bubblewrap from creating the user namespaces it needs for isolation.
 >
@@ -167,7 +167,7 @@ When a required dependency is missing, the Dependencies tab is the only tab show
 > sudo systemctl reload apparmor
 > ```
 
-> **WSL2 notes**
+> [accordion] WSL2 notes
 >
 > Check your WSL version with `wsl -l -v` from PowerShell. If you see `Sandboxing requires WSL2`, your distribution is running WSL1. Upgrade it to WSL2 or run Claude Code without sandboxing.
 >
@@ -326,6 +326,7 @@ Claude Code checks your entries against each Bash and Monitor call. A call is th
 * **Every command in the call has to match**: `npm ci && docker compose build` stays sandboxed unless another entry covers `npm ci`
 * **Claude Code matches the text of the call**: a script or `make` target that calls `docker` internally doesn't match, and neither does `/usr/local/bin/docker`
 * **Some calls stay sandboxed**: a redirect to a file, a `cd`, or a command substitution such as `$(...)` keeps the whole call sandboxed. The [reference entry](https://code.claude.com/docs/en/settings-reference.md#sandbox-excludedcommands) lists more calls that stay sandboxed
+* **A `git clone` needs relative paths**: your entry doesn't cover a clone that names an absolute path, a path starting with `~`, or one with a `..` segment. If the clone can go inside your working directory, ask Claude to use a relative path with no `..` segment, such as `vendor/lib`
 * **Where you save the entry can matter**: while the sandbox is [admin-required](#repository-settings-under-an-admin-required-sandbox), Claude Code ignores entries in `.claude/settings.json` and `.claude/settings.local.json`
 
 An excluded command goes through the regular permission flow:
@@ -360,7 +361,7 @@ Set `sandbox.filesystem.disabled` to `true` to skip filesystem isolation while k
 
 The sandbox has two independent layers: [filesystem isolation](#filesystem-isolation) controls which paths sandboxed commands can read and write, and [network isolation](#network-isolation) controls which domains they can reach. With the filesystem layer off, sandboxed commands get unrestricted read and write access to the host filesystem, while their network egress stays confined to your allowed domains. Turn the layer off when you sandbox to control where commands connect rather than what they write.
 
-`sandbox.filesystem.disabled` defaults to `false`. Requires Claude Code v2.1.216 or later.
+`sandbox.filesystem.disabled` defaults to `false`.
 
 > [!WARNING]
 >
@@ -569,6 +570,8 @@ A newer `objects` or `refs` folder with contents is deleted too, with its conten
 #### Denied paths that pass through a symlink
 
 On macOS, when a denied path passes through a symlink, such as a `~/.claude` that is a link into a dotfiles repository, the sandbox also denies the path's real location. This covers the sandbox's own denials and your literal `denyWrite` and `denyRead` entries.
+
+A `denyWrite` entry that contains `*`, `?`, or `[` is also covered when a folder before the first of those characters is a symlink. For example, `~/.claude/*.json` is also denied under the real location of `~/.claude`.
 
 ### Network isolation
 

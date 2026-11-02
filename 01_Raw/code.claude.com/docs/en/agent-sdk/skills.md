@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/skills
-fetched_at: 2026-10-26T05:39:59.150013+00:00
+fetched_at: 2026-11-02T07:00:25.547759+00:00
 fetch_method: mintlify_md
 ---
 
@@ -476,29 +476,29 @@ When a name in your `skills` list can't work as an exact skill name, `query()` r
 
 Each SDK surfaces the rejection differently:
 
-**TypeScript**
+> [tab] TypeScript
+>
+> The TypeScript SDK throws an `Error` stating the rule the entry broke. For example, `skills: ["docs:*"]` throws:
+>
+> ```text theme={null}
+> Invalid skill name "docs:*": wildcard-suffix names are not allowed; list each skill by its exact name.
+> ```
+>
+> An empty name reports `Skill names must be non-empty strings.`
+>
+> Before TypeScript Agent SDK 0.3.221, the SDK didn't run this check.
 
-The TypeScript SDK throws an `Error` stating the rule the entry broke. For example, `skills: ["docs:*"]` throws:
-
-```text theme={null}
-Invalid skill name "docs:*": wildcard-suffix names are not allowed; list each skill by its exact name.
-```
-
-An empty name reports `Skill names must be non-empty strings.`
-
-Before TypeScript Agent SDK 0.3.221, the SDK didn't run this check.
-
-**Python**
-
-The Python SDK raises `ValueError` stating the rule the entry broke. For example, `skills=["docs:*"]` raises:
-
-```text theme={null}
-ValueError: Invalid skill name 'docs:*': wildcard-suffix names are not allowed; list each skill by its exact name.
-```
-
-An empty name reports `Skill names must be non-empty strings`.
-
-Before Python Agent SDK 0.2.129, the SDK didn't run this check.
+> [tab] Python
+>
+> The Python SDK raises `ValueError` stating the rule the entry broke. For example, `skills=["docs:*"]` raises:
+>
+> ```text theme={null}
+> ValueError: Invalid skill name 'docs:*': wildcard-suffix names are not allowed; list each skill by its exact name.
+> ```
+>
+> An empty name reports `Skill names must be non-empty strings`.
+>
+> Before Python Agent SDK 0.2.129, the SDK didn't run this check.
 
 ### Additional troubleshooting
 

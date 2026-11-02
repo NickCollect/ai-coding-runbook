@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/auto-mode-classifier-billing
-fetched_at: 2026-10-26T05:39:59.820790+00:00
+fetched_at: 2026-11-02T07:00:25.699445+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,7 +49,7 @@ Classifier requests are then always Claude Code's own, billed the same way, and 
 
 ## Why the notice appears
 
-[Server-side classifier review](https://code.claude.com/docs/en/permission-modes.md#server-side-classifier-review) lists which sessions ask the server for the classifier checks. Pro, Max, and Team plans never show the notice. When it appears, the usual causes are:
+On a Pro, Max, Ultra, or Team plan, you never see the notice. To find out which sessions ask the server for the classifier checks, see [Server-side classifier review](https://code.claude.com/docs/en/permission-modes.md#server-side-classifier-review). If you see the notice, check for these usual causes:
 
 * **An LLM gateway or proxy is in the path**: one that strips or rewrites request headers, drops request fields it doesn't recognize, or edits responses. The server then never receives the request for checks, or Claude Code never receives the results. When your configuration or the responses identify the gateway, the notice names it.
 * **Server-side checks haven't reached your platform, region, or credential yet**: whether a platform or region performs them depends on that platform's rollout. If you see the notice with no gateway or proxy in the path and it keeps appearing, this is the likely cause. To confirm, contact support or your company's admin, or report it with `/feedback`.

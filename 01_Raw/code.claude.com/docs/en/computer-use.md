@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/computer-use
-fetched_at: 2026-10-26T05:40:01.470729+00:00
+fetched_at: 2026-11-02T07:00:26.005012+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ fetch_method: mintlify_md
 
 > [!NOTE]
 >
-> Computer use is a research preview on macOS that requires a Pro or Max plan. It is not available on Team or Enterprise plans. It requires an interactive session, so it is not available in non-interactive mode with the `-p` flag.
+> Computer use is a research preview on macOS that requires a Pro, Max, or Ultra plan. It is not available on Team or Enterprise plans. It requires an interactive session, so it is not available in non-interactive mode with the `-p` flag.
 
 Computer use lets Claude open apps, control your screen, and work on your machine the way you would. From the CLI, Claude can compile a Swift app, launch it, click through every button, and screenshot the result, all in the same conversation where it wrote the code.
 
@@ -184,7 +184,7 @@ The CLI and Desktop surfaces share the same computer use engine, with a few diff
 | Feature | Desktop | CLI |
 | :- | :- | :- |
 | Platforms | macOS and Windows | macOS only |
-| Enable | Toggle in **Settings > This computer > System** | Enable `computer-use` in `/mcp` |
+| Enable | Toggle in [Settings](https://code.claude.com/docs/en/desktop.md#enable-computer-use) | Enable `computer-use` in `/mcp` |
 | Denied apps list | Configurable in Settings | Not yet available |
 | Auto-unhide toggle | Optional | Always on |
 | Dispatch integration | Dispatch-spawned sessions can use computer use | Not applicable |
@@ -204,7 +204,7 @@ macOS sometimes requires a restart of the requesting process after you grant Scr
 The server only appears on eligible setups. Check that:
 
 * You're on macOS. Computer use in the CLI is not available on Linux or Windows. On Windows, use [computer use in Desktop](https://code.claude.com/docs/en/desktop.md#let-claude-use-your-computer) instead.
-* You're on a Pro or Max plan. Run `/status` to confirm your subscription.
+* You're on a Pro, Max, or Ultra plan. Run `/status` to confirm your subscription.
 * You're authenticated through claude.ai. Computer use is not available with third-party providers like Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry. If you access Claude exclusively through a third-party provider, you need a separate claude.ai account to use this feature.
 * You're in an interactive session. Computer use is not available in non-interactive mode with the `-p` flag.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/glossary
-fetched_at: 2026-10-26T05:40:02.411896+00:00
+fetched_at: 2026-11-02T07:00:26.218285+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,7 +60,10 @@ Learn more: [Auto memory](https://code.claude.com/docs/en/memory.md#auto-memory)
 
 ### Auto mode
 
-A [permission mode](#permission-mode) where a separate classifier model reviews actions instead of you, so Claude Code runs most of them without asking you. Claude Code still asks you before actions your explicit ask rules match. With Claude Code v2.1.283 or later, auto mode is the [built-in starting permission mode](https://code.claude.com/docs/en/permission-modes.md#which-mode-a-session-starts-in) for interactive terminal and VS Code sessions, and on earlier versions only on Pro, Max, and Team plans. The classifier blocks scope escalation, untrusted infrastructure, and [prompt injection](#prompt-injection). Tool results are stripped from what it sees, so hostile content in a file or web page can't manipulate it directly.
+A [permission mode](#permission-mode) where a separate classifier model reviews actions instead of you, so Claude Code runs most of them without asking you. Claude Code still asks you before actions your explicit ask rules match. The classifier blocks scope escalation, untrusted infrastructure, and [prompt injection](#prompt-injection). Tool results are stripped from what it sees, so hostile content in a file or web page can't manipulate it directly.
+
+* **Claude Code v2.1.283 or later**: auto mode is the [built-in starting permission mode](https://code.claude.com/docs/en/permission-modes.md#which-mode-a-session-starts-in) for interactive terminal and VS Code sessions
+* **Earlier versions**: auto mode is the built-in starting permission mode only on Pro, Max, Ultra, and Team plans
 
 Learn more: [Eliminate prompts with auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode)
 
@@ -146,7 +149,7 @@ Learn more: [Explore the context window](https://code.claude.com/docs/en/context
 
 ### Dispatch
 
-A phone-initiated task router that spawns a Claude Code session in the Desktop app when you send a coding task from the Claude mobile app. Your prompt routes to the right tool automatically. Available on Pro and Max plans.
+A phone-initiated task router that spawns a Claude Code session in the Desktop app when you send a coding task from the Claude mobile app. Your prompt routes to the right tool automatically. Available on Pro, Max, and Ultra plans.
 
 Learn more: [Sessions from Dispatch](https://code.claude.com/docs/en/desktop.md#sessions-from-dispatch)
 
@@ -379,7 +382,7 @@ Learn more: [How Claude Code works](https://code.claude.com/docs/en/how-claude-c
 
 How a session knows the work is actually done instead of accepting a result that looks plausible. You give Claude a check it can run, such as a test suite, a build, or a screenshot comparison, and Claude iterates until the check passes instead of stopping after one attempt. A verification loop is the prerequisite for [`/goal`](https://code.claude.com/docs/en/goal), unattended runs, and [dynamic workflows](https://code.claude.com/docs/en/workflows.md): without one, the only thing deciding the agent is finished is the agent itself.
 
-Learn more: [Give Claude a way to verify its work](https://code.claude.com/docs/en/best-practices.md#give-claude-a-way-to-verify-its-work)
+Learn more: [Give Claude a check to run](https://code.claude.com/docs/en/best-practices.md#give-claude-a-check-to-run)
 
 ## W
 

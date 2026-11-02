@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/desktop
-fetched_at: 2026-10-26T05:40:01.639577+00:00
+fetched_at: 2026-11-02T07:00:26.137059+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,15 +14,15 @@ fetch_method: mintlify_md
 
 In the Claude Desktop app, Claude Code is the **Code** tab. The app also has chat and [Cowork](https://claude.com/product/cowork), which handles Dispatch and longer agentic work. This page is the reference for the Code tab.
 
-> **[Download for macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs)**
+> [card] [Download for macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs)
 >
 > Universal build for Intel and Apple Silicon
 
-> **[Download for Windows](https://claude.ai/api/desktop/win32/x64/setup/latest/redirect?utm_source=claude_code\&utm_medium=docs)**
+> [card] [Download for Windows](https://claude.ai/api/desktop/win32/x64/setup/latest/redirect?utm_source=claude_code\&utm_medium=docs)
 >
 > For x64 processors
 
-> **[Get Claude for Linux (beta)](https://code.claude.com/docs/en/desktop-linux.md)**
+> [card] [Get Claude for Linux (beta)](https://code.claude.com/docs/en/desktop-linux.md)
 >
 > apt or .deb for Ubuntu and Debian
 
@@ -49,7 +49,7 @@ For [scheduled recurring work](https://code.claude.com/docs/en/desktop-scheduled
 Before you send your first message, choose the environment, project folder, permission mode, and model in the row under the prompt box:
 
 * **Environment**: use the environment selector, the first control in the row, to choose where Claude runs. See [environment configuration](#environment-configuration).
-  * If a new session has no environment selector under the prompt box, follow the [earlier layout's steps](#check-which-layout-you-have).
+  * If a new session shows no environment under the prompt box, follow the [earlier layout's steps](#check-which-layout-you-have).
 * **Project folder**: click the project folder control, next to the environment selector, to choose the folder Claude works in.
   * **Cloud session**: select [repositories](#run-long-running-tasks-in-the-cloud) instead of a folder
   * **[Saved local or SSH environment](#create-a-saved-environment)**: the environment already holds its folders, so the row shows no project folder control. To change the folders, [edit the environment](#use-edit-or-remove-a-saved-environment).
@@ -75,7 +75,7 @@ After Claude replies, the Code tab can show a suggested next prompt as gray text
 * **Use the suggestion**: press **Tab** or **Right arrow** to place it in the prompt box, edit it if you want, then press **Enter** to send it. Pressing **Enter** before you accept the suggestion doesn't send it.
 * **Write your own prompt**: start typing. The suggestion shows only while the prompt box is empty and has no attached files.
 
-Go to **Settings > Claude Code** and turn off **Prompt suggestions** under **Sessions** to stop suggestions in each session from the next time it starts or resumes.
+Turn off **Prompt suggestions** in **Settings > Code** or **Settings > Claude Code** to stop suggestions. Each session stops showing them the next time it starts or resumes.
 
 ### Add files and context to prompts
 
@@ -98,7 +98,7 @@ To set a default mode for new local sessions, add `permissions.defaultMode` to y
 | **Accept edits** | `acceptEdits` | Claude auto-accepts file edits and common filesystem commands like `mkdir`, `touch`, and `mv`, but still asks before running other terminal commands. Use this when you trust file changes and want faster iteration. |
 | **Plan** | `plan` | Claude reads files and runs commands to explore, then proposes a plan without editing your source code. Good for complex tasks where you want to review the approach first. |
 | **Auto** | `auto` | Claude runs without routine prompts; before actions such as shell commands and network requests run, a background classifier checks that they align with your request. Appears when [auto mode is available](#auto-mode-availability); there is no separate Settings toggle for it. |
-| **Bypass permissions** | `bypassPermissions` | Claude runs without permission prompts, except for the [actions no mode auto-approves](https://code.claude.com/docs/en/permission-modes.md#actions-no-mode-auto-approves), safety classifiers when Claude [acts on external sites](#browse-external-sites), or desktop actions such as deleting a session, though not [archiving one](#work-across-sessions). Equivalent to `--dangerously-skip-permissions` in the CLI. On Pro and Max plans, enable it in your Settings → Claude Code under "Allow bypass permissions mode"; on Team and Enterprise plans there is no Settings toggle, and organization policy controls it instead. Only use this in sandboxed containers or VMs. |
+| **Bypass permissions** | `bypassPermissions` | Claude runs without permission prompts, except for the [actions no mode auto-approves](https://code.claude.com/docs/en/permission-modes.md#actions-no-mode-auto-approves), safety classifiers when Claude [acts on external sites](#browse-external-sites), or desktop actions such as deleting a session, though not [archiving one](#work-across-sessions). Equivalent to `--dangerously-skip-permissions` in the CLI. On Pro, Max, and Ultra plans, enable "Allow bypass permissions mode" in **Settings > Code** or **Settings > Claude Code**. On Team and Enterprise plans there is no Settings toggle, and organization policy controls it instead. Only use this in sandboxed containers or VMs. |
 
 Earlier versions of the Code tab labeled these modes Ask permissions, Auto accept edits, and Plan mode.
 
@@ -106,7 +106,7 @@ The `dontAsk` permission mode is available only in the [CLI](https://code.claude
 
 > [!TIP]
 >
-> Start complex tasks in Plan so Claude maps out an approach before making changes. Once you approve the plan, switch to Accept edits or Manual to execute it. See [explore first, then plan, then code](https://code.claude.com/docs/en/best-practices.md#explore-first-then-plan-then-code) for more on this workflow.
+> Start complex tasks in Plan so Claude maps out an approach before making changes. Once you approve the plan, switch to Accept edits or Manual to execute it. See [plan mode](https://code.claude.com/docs/en/permission-modes.md#analyze-before-you-edit-with-plan-mode) for more on this workflow.
 
 Cloud sessions support Accept edits, Plan, and Auto. Accept edits corresponds to `default` mode: cloud sessions pre-approve file edits, so the selector shows Accept edits instead of Manual. Bypass permissions isn't available in cloud sessions, including sessions in a [self-hosted environment](https://code.claude.com/docs/en/self-hosted-environments).
 
@@ -126,7 +126,7 @@ In a local session, click an HTML, PDF, or video path in the chat to open it in 
 
 > [!NOTE]
 >
-> In an [SSH session](#ssh-sessions), Claude can't open your app in the Browser pane, because it doesn't have the pane's tools there. To look at the app yourself, [forward its port to your computer](#reach-a-port-on-the-remote-machine).
+> In an [SSH session](#ssh-sessions), Claude doesn't have the Browser pane's tools, so it can't open your app in the pane or [auto-verify](#auto-verify-changes) its changes. The pane's **Dev servers** menu and your [configured preview servers](#configure-preview-servers) aren't available either. To look at the app yourself, start its server on the remote machine, then [forward its port to your computer](#reach-a-port-on-the-remote-machine).
 
 If the Browser pane isn't open after Claude starts a server in a local session, click **Open** on the server's card in the chat.
 
@@ -139,7 +139,7 @@ From the Browser pane, you can:
 
 Claude creates the initial server configuration based on your project. If your app uses a custom dev command, edit `.claude/launch.json` to match your setup. See [Configure preview servers](#configure-preview-servers) for the full reference.
 
-To clear the Browser's saved data, select **Clear browsing data** in the Browser pane's **⋮** menu. To turn the Browser off entirely, turn off **Browser tools** in **Settings > Claude Code**.
+To clear the Browser's saved data, select **Clear browsing data** in the Browser pane's **⋮** menu. To turn the Browser off entirely, turn off **Browser tools** in **Settings > Code** or **Settings > Claude Code**.
 
 ### Browse external sites
 
@@ -170,9 +170,9 @@ To turn off external browsing entirely, set the [`disableBrowserExternalNavigati
 
 ### Review changes with diff view
 
-After Claude makes changes to your code, the diff view lets you review modifications file by file before creating a pull request. To open the diff view, click the line counts, such as `+12 -1`, in the **Changes** card of the [session details panel](#see-session-details). You can also click **Changes** in the session's title bar.
+After Claude makes changes to your code, the diff view lets you review modifications file by file before creating a pull request. To open the diff view, click the line counts, such as `+12 -1`, in the **Changes** card of the [session details panel](#see-session-details). You can also click **Changes** in the session's title bar. A cloud session's diff against the base branch can [leave out changes that aren't pushed yet](https://code.claude.com/docs/en/claude-code-on-the-web.md#troubleshoot-a-missing-file-in-the-diff-view).
 
-To comment on specific lines, click any line in the diff to open a comment box. Type your feedback and press **Enter** to add the comment. After adding comments to multiple lines, submit all comments at once:
+To comment on specific lines, hover over a line and click the **+** that appears beside its line number to open a comment box. Type your feedback and press **Enter** to add the comment. After adding comments to multiple lines, submit all comments at once:
 
 * **macOS**: press **Cmd+Enter**
 * **Windows**: press **Ctrl+Enter**
@@ -200,7 +200,7 @@ To have Claude fix failing checks, or to have GitHub merge the pull request, tur
   * **If the repository doesn't allow auto-merge**: **Merge when ready** doesn't turn on, so enable auto-merge in your [GitHub repository settings](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-auto-merge-for-pull-requests-in-your-repository) first
 * **[Earlier layout](#check-which-layout-you-have)**: once the session has a pull request, click **CI** on its status bar.
 
-To archive the session automatically once the PR merges or closes, turn on [auto-archive](#archive-a-session) in **Settings > Claude Code**.
+To archive the session automatically once the PR merges or closes, turn on [auto-archive](#archive-a-session) in **Settings > Code** or **Settings > Claude Code**.
 
 > [!NOTE]
 >
@@ -281,7 +281,7 @@ Press **Cmd+/** on macOS or **Ctrl+/** on Windows to see all shortcuts available
 * **Cmd+Ctrl**: press **Ctrl+Alt**
 * **Cmd**: press **Ctrl**
 
-Session cycling, the terminal toggle, and the view-mode toggle use **Ctrl** on every platform.
+Shortcuts that start with `Ctrl` stay the same on every platform.
 
 | Shortcut | Action |
 | - | - |
@@ -290,7 +290,7 @@ Session cycling, the terminal toggle, and the view-mode toggle use **Ctrl** on e
 | `Cmd` `Option` `1`–`9` | On the new session screen in the [current layout](#check-which-layout-you-have), select an environment |
 | `Cmd` `Option` `0` | On the new session screen in the current layout, open the [**New environment** dialog](#create-a-saved-environment) |
 | `Cmd` `W` | Close session |
-| `Ctrl` `Tab` / `Ctrl` `Shift` `Tab` | Next or previous session |
+| `Ctrl` `Tab` / `Ctrl` `Shift` `Tab` | Switch between sessions |
 | `Cmd` `Shift` `]` / `Cmd` `Shift` `[` | Next or previous session |
 | `Esc` | Stop Claude's response |
 | `Tab` / `Right arrow` | [Accept the suggested prompt](#accept-a-suggested-prompt) in an empty prompt box |
@@ -326,7 +326,7 @@ Computer use lets Claude open your apps, control your screen, and work directly 
 
 > [!NOTE]
 >
-> Computer use is a research preview on macOS and Windows that requires a Pro or Max plan. It is not available on Team or Enterprise plans. The Claude Desktop app must be running. On macOS, computer use requires macOS 14 or later.
+> Computer use is a research preview on macOS and Windows that requires a Pro, Max, or Ultra plan. It is not available on Team or Enterprise plans. The Claude Desktop app must be running. On macOS, computer use requires macOS 14 or later.
 
 Computer use is off by default. [Enable it in Settings](#enable-computer-use) before Claude can control your screen. On macOS, you also need to grant Accessibility and Screen Recording permissions.
 
@@ -358,9 +358,17 @@ Make sure you have the latest version of Claude Desktop. On macOS and Windows, d
 
 **2. Turn on the toggle**
 
-In the desktop app, go to **Settings > This computer > System**. Under **Computer use**, turn on **Enable computer use**. On Windows, the toggle takes effect immediately and setup is complete. On macOS, continue to the next step.
+In the desktop app, open **Settings**, then:
 
-If you don't see the toggle, confirm you're on macOS or Windows with a Pro or Max plan, then update and restart the app.
+* **If the Settings menu lists This computer**: go to **This computer > System**
+* **Otherwise**: go to **Capabilities**
+
+Under **Computer use**, turn on **Enable computer use**:
+
+* **Windows**: the toggle takes effect immediately and setup is complete
+* **macOS**: continue to the next step
+
+If you don't see the toggle, confirm you're on macOS or Windows with a Pro, Max, or Ultra plan, then update and restart the app.
 
 **3. Grant macOS permissions**
 
@@ -385,7 +393,7 @@ The prompt also shows what level of control Claude gets for that app. These tier
 
 Apps with broad reach, like terminals, Finder or File Explorer, and System Settings or Settings, show an extra warning in the prompt so you know what approving them grants.
 
-The **Computer use** section in **Settings > This computer > System** includes these options:
+In Settings, the **Computer use** section where you [turned computer use on](#enable-computer-use) includes these options:
 
 * **Denied apps**: add apps here to reject them without prompting. Claude may still affect a denied app indirectly through actions in an allowed app, but it can't interact with the denied app directly.
 * **Unhide apps when Claude finishes**: when computer use isn't running in the background, Claude hides your other windows while it works so it interacts with only the approved app. When Claude finishes, hidden windows are restored unless you turn this setting off.
@@ -396,7 +404,7 @@ Each session is an independent conversation with its own context and changes. Yo
 
 ### Work in parallel with sessions
 
-Click **+ New** in the sidebar, or press **Cmd+N** on macOS or **Ctrl+N** on Windows, to work on multiple tasks in parallel. Press **Ctrl+Tab** and **Ctrl+Shift+Tab** to cycle through sessions in the sidebar.
+Click **+ New** in the sidebar, or press **Cmd+N** on macOS or **Ctrl+N** on Windows, to work on multiple tasks in parallel. Press **Ctrl+Tab** and **Ctrl+Shift+Tab** to switch between sessions.
 
 You can also open a second session next to the current session or in a window of its own:
 
@@ -407,17 +415,18 @@ In the split view, the pane you opened or clicked last has focus, and the other 
 
 #### Run a session in its own worktree
 
-In a project that's a Git repository, turn on **Worktree** before you start a session to run it in its own [Git worktree](https://code.claude.com/docs/en/worktrees.md), an isolated copy of the project. By default, **Worktree** is off and Claude works in the project folder itself. Click the project folder control in the [row under the prompt box](#start-a-session) and turn on **Worktree**.
+In a project that's a Git repository, turn on **Worktree** before you start a session to run it in its own [Git worktree](https://code.claude.com/docs/en/worktrees.md), an isolated copy of the project. By default, **Worktree** is off and Claude works in the project folder itself. On the [current layout](#check-which-layout-you-have), turn on the **Worktree** button in the [row under the prompt box](#start-a-session).
 
-* **With a [saved environment](#create-a-saved-environment)**: set **Worktree** when you create or edit the environment
+* **With a [third-party provider](https://code.claude.com/docs/en/third-party-integrations.md)**: if the row under the prompt box shows the project folder control but no **Worktree** button, click that control and turn on **Worktree**
+* **As the default for a [saved local or SSH environment](#create-a-saved-environment)**: set **Worktree** when you create or edit the environment
 * **[Earlier layout](#check-which-layout-you-have)**: select the **worktree** checkbox beside the branch name, above the prompt box
 
 Worktrees are stored in `<project-root>/.claude/worktrees/` by default. To store them in a custom directory instead:
 
-* **Local sessions**: set **Worktree location** in **Settings > Claude Code**
+* **Local sessions**: set **Worktree location** in **Settings > Code** or **Settings > Claude Code**
 * **SSH sessions**: set **Worktree folder** on the [SSH connection](#choose-where-ssh-session-worktrees-go)
 
-You can also set a **Branch prefix** in **Settings > Claude Code**. Desktop prepends it to every worktree branch name, which is useful for keeping Claude-created branches organized.
+You can also set a **Branch prefix** in **Settings > Code** or **Settings > Claude Code**. Desktop prepends it to every worktree branch name, which is useful for keeping Claude-created branches organized.
 
 To include gitignored files like `.env` in new worktrees, create a [`.worktreeinclude` file](https://code.claude.com/docs/en/worktrees#copy-gitignored-files-into-worktrees) in your project root. See [What worktrees share with the main checkout](https://code.claude.com/docs/en/worktrees.md#what-worktrees-share-with-the-main-checkout) for where a worktree session reads project settings, hooks, and skills.
 
@@ -436,7 +445,7 @@ Add folders before the session starts or while it runs:
 
 Before you archive a session whose worktree has uncommitted changes, see [Keep uncommitted changes when a session is archived](#keep-uncommitted-changes-when-a-session-is-archived). To archive a session, hover over it in the sidebar, open its menu, and select **Archive**. The session moves to your [archived sessions](#organize-and-find-sessions).
 
-To have sessions archive themselves when their pull request merges or closes, turn on **Auto-archive after PR merge or close** in **Settings > Claude Code**. Cloud sessions and sessions that are still running don't archive themselves.
+To have sessions archive themselves when their pull request merges or closes, turn on **Auto-archive after PR merge or close** in **Settings > Code** or **Settings > Claude Code**. Cloud sessions and sessions that are still running don't archive themselves.
 
 #### Keep uncommitted changes when a session is archived
 
@@ -533,14 +542,14 @@ A local session shows up on your other devices once [Remote Control](https://cod
 A local session connects when you turn Remote Control on for it, or when it connects automatically as it starts:
 
 * **You turn it on for that session**: with the session's **Remote Control** switch, or by typing `/remote-control` in its prompt box.
-* **It connects when it starts**: new sessions connect automatically while **Connect new sessions to Remote Control** is on in **Settings > Claude Code**. If you've never changed that setting, Desktop follows [`remoteControlAtStartup`](https://code.claude.com/docs/en/settings-reference#remotecontrolatstartup) in your user or managed settings, then your organization's default.
+* **It connects when it starts**: new sessions connect automatically while **Connect new sessions to Remote Control** is on in **Settings > Code** or **Settings > Claude Code**. If you've never changed that setting, Desktop follows [`remoteControlAtStartup`](https://code.claude.com/docs/en/settings-reference#remotecontrolatstartup) in your user or managed settings, then your organization's default.
 
 To see whether a session is connected, check the **Remote Control** switch in the **Environment** card of its [session details panel](#see-session-details).
 
 To keep sessions off your other devices, turn Remote Control off at the level you need:
 
 * **One session**: turn off its **Remote Control** switch. In a session that connected when it started, typing `/remote-control` leaves Remote Control on and shows `Remote Control is already on. This session connected automatically when it started.` Click **Turn off** on that line to disconnect.
-* **New Desktop sessions on this computer**: turn off **Connect new sessions to Remote Control** in **Settings > Claude Code**. If it already shows off, turn it on and then off so Desktop saves your choice. Once saved, it takes precedence over `remoteControlAtStartup` and the defaults.
+* **New Desktop sessions on this computer**: turn off **Connect new sessions to Remote Control** in **Settings > Code** or **Settings > Claude Code**. If it already shows off, turn it on and then off so Desktop saves your choice. Once saved, it takes precedence over `remoteControlAtStartup` and the defaults.
 * **Any session on this computer, including the CLI**: set [`disableRemoteControl`](https://code.claude.com/docs/en/settings-reference#disableremotecontrol) to `true` in `~/.claude/settings.json` to stop sessions from connecting. A session that was already connected when you saved the file stays connected until you turn Remote Control off for it.
 
 To hide a session that already appears on your other devices, archive it in Desktop. Desktop archives the session's Remote Control copy too, so it leaves the default session list on those devices. To view or delete it there, see [Archive sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md#archive-sessions).
@@ -559,7 +568,8 @@ If you have [computer use](#let-claude-use-your-computer) enabled, Dispatch-spaw
 
 #### Set up Dispatch
 
-For setup, pairing, and Dispatch settings, see the [Dispatch help article](https://support.claude.com/en/articles/13947068). Dispatch requires a Pro or Max plan and is not available on Team or Enterprise plans.
+* **Plans**: Dispatch requires a Pro, Max, or Ultra plan and is not available on Team or Enterprise plans
+* **Setup, pairing, and Dispatch settings**: see the [Dispatch help article](https://support.claude.com/en/articles/13947068)
 
 Dispatch is one of several ways to work with Claude when you're away from your terminal. For a comparison with the other options, see [Platforms and integrations](https://code.claude.com/docs/en/platforms.md#work-when-you-are-away-from-your-terminal).
 
@@ -582,7 +592,7 @@ Click **+** next to the prompt box, before or during the session, to add connect
 > * **Connectors is grayed out in a WSL session**: see [If the terminal or connectors are unavailable](https://code.claude.com/docs/en/desktop-wsl.md#check-for-the-terminal-and-connectors)
 > * **Cloud sessions**: see [How connectors reach Claude Code](https://code.claude.com/docs/en/mcp.md#how-connectors-reach-claude-code)
 
-Once connected, Claude can read your calendar, send messages, create issues, and interact with your tools directly. You can ask Claude what connectors are configured in your session. To manage or disconnect connectors, go to **Settings > Connectors** in the desktop app.
+Once connected, Claude can read your calendar, send messages, create issues, and interact with your tools directly. You can ask Claude what connectors are configured in your session. To manage or disconnect connectors, click **Customize** in the sidebar and open **Connectors**.
 
 For integrations not listed in Connectors, add MCP servers manually via [settings files](https://code.claude.com/docs/en/mcp.md#installing-mcp-servers). You can also [create custom connectors](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp).
 
@@ -735,70 +745,70 @@ Have your server read its port from the `PORT` environment variable, which carri
 
 These configurations show common setups for different project types:
 
-**Next.js**
+> [tab] Next.js
+>
+> This configuration runs a Next.js app using Yarn on port 3000:
+>
+> ```json theme={null}
+> {
+>   "version": "0.0.1",
+>   "configurations": [
+>     {
+>       "name": "web",
+>       "runtimeExecutable": "yarn",
+>       "runtimeArgs": ["dev"],
+>       "port": 3000
+>     }
+>   ]
+> }
+> ```
 
-This configuration runs a Next.js app using Yarn on port 3000:
+> [tab] Multiple servers
+>
+> For a monorepo with a frontend and an API server, define multiple configurations. The frontend uses `autoPort: true` so it picks a free port if 3000 is taken, while the API server requires port 8080 exactly:
+>
+> ```json theme={null}
+> {
+>   "version": "0.0.1",
+>   "configurations": [
+>     {
+>       "name": "frontend",
+>       "runtimeExecutable": "npm",
+>       "runtimeArgs": ["run", "dev"],
+>       "cwd": "apps/web",
+>       "port": 3000,
+>       "autoPort": true
+>     },
+>     {
+>       "name": "api",
+>       "runtimeExecutable": "npm",
+>       "runtimeArgs": ["run", "start"],
+>       "cwd": "server",
+>       "port": 8080,
+>       "env": { "NODE_ENV": "development" },
+>       "autoPort": false
+>     }
+>   ]
+> }
+> ```
 
-```json theme={null}
-{
-  "version": "0.0.1",
-  "configurations": [
-    {
-      "name": "web",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["dev"],
-      "port": 3000
-    }
-  ]
-}
-```
-
-**Multiple servers**
-
-For a monorepo with a frontend and an API server, define multiple configurations. The frontend uses `autoPort: true` so it picks a free port if 3000 is taken, while the API server requires port 8080 exactly:
-
-```json theme={null}
-{
-  "version": "0.0.1",
-  "configurations": [
-    {
-      "name": "frontend",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "cwd": "apps/web",
-      "port": 3000,
-      "autoPort": true
-    },
-    {
-      "name": "api",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start"],
-      "cwd": "server",
-      "port": 8080,
-      "env": { "NODE_ENV": "development" },
-      "autoPort": false
-    }
-  ]
-}
-```
-
-**Node.js script**
-
-To run a Node.js script directly instead of using a package manager command, use the `program` field:
-
-```json theme={null}
-{
-  "version": "0.0.1",
-  "configurations": [
-    {
-      "name": "server",
-      "program": "server.js",
-      "args": ["--verbose"],
-      "port": 4000
-    }
-  ]
-}
-```
+> [tab] Node.js script
+>
+> To run a Node.js script directly instead of using a package manager command, use the `program` field:
+>
+> ```json theme={null}
+> {
+>   "version": "0.0.1",
+>   "configurations": [
+>     {
+>       "name": "server",
+>       "program": "server.js",
+>       "args": ["--verbose"],
+>       "port": 4000
+>     }
+>   ]
+> }
+> ```
 
 ## Environment configuration
 
@@ -858,7 +868,7 @@ Add the variables to a saved local environment and start your sessions from it. 
 
 > [!NOTE]
 >
-> If your environment selector is above the prompt box, you have the [earlier layout](#check-which-layout-you-have), which has no saved local environments. Use the [local environment editor](#use-the-local-environment-editor) instead.
+> If a new session shows no environment under the prompt box, you have the [earlier layout](#check-which-layout-you-have), which has no saved local environments. Use the [local environment editor](#use-the-local-environment-editor) instead.
 
 **1. Open a local environment's form**
 
@@ -960,7 +970,7 @@ SSH sessions let you run Claude Code on a remote machine while using the desktop
 >
 > If you use Desktop with a [third-party provider](https://code.claude.com/docs/en/third-party-integrations.md), SSH sessions need their own setup. See [SSH remote sessions in Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/ssh-remote-sessions).
 
-Add an SSH connection in the [**New environment** dialog](#create-a-saved-environment), then start a session on that connection. If a new session has no environment selector under the prompt box, you have the earlier layout. See [Check which layout you have](#check-which-layout-you-have).
+Add an SSH connection in the [**New environment** dialog](#create-a-saved-environment), then start a session on that connection. If a new session shows no environment under the prompt box, you have the earlier layout. See [Check which layout you have](#check-which-layout-you-have).
 
 **1. Open the New environment dialog**
 
@@ -998,7 +1008,7 @@ A Linux or macOS remote machine needs a supported processor, an SSH server with 
 * **One-time codes with `MaxSessions 1`**: if every login prompts you, as with one-time codes, `!` commands fail. Run those commands in a terminal tab instead, which prompts in its own pane.
 * **Install folder**: Desktop installs a helper program and Claude Code under `~/.claude/remote/` in your home directory. It runs them from there, so that folder can't be on a file system mounted `noexec`. Allow about 1 GB of disk space in the home directory of each user who connects. For what that folder holds, see [Files and processes on the remote machine](#files-and-processes-on-the-remote-machine).
 * **Shell**: the shell set for your account on the remote machine has to run commands sent over SSH, as Bash, Zsh, and `sh` do
-* **Network**: Claude Code runs on the remote machine and makes its network requests from there, so the machine needs the [network access that Claude Code requires](https://code.claude.com/docs/en/network-config.md#network-access-requirements). If the machine can't download Claude Code, Desktop downloads it on your computer and uploads it. Claude Code's other requests still go out from the remote machine. On a Linux remote machine, if those requests need a proxy, [set it for SSH sessions](#set-a-proxy-or-a-ca-certificate-for-ssh-sessions).
+* **Network**: Claude Code runs on the remote machine and makes its network requests from there, so the machine needs the [network access that Claude Code requires](https://code.claude.com/docs/en/network-config.md#network-access-requirements). If the machine can't download Claude Code, Desktop downloads it on your computer and uploads it. Claude Code's other requests still go out from the remote machine. If a Linux remote machine needs a proxy or a CA certificate, [set it for SSH sessions](#set-a-proxy-or-a-ca-certificate-for-ssh-sessions).
 
 #### Check a remote machine's host key
 
@@ -1026,7 +1036,7 @@ If a troubleshooting step sent you here, go back to that step after either resul
 
 If a Linux remote machine reaches the internet through a proxy or needs a CA certificate, add the [proxy and CA variables](https://code.claude.com/docs/en/network-config.md) under `env` in `~/.claude/settings.json` there. Add them even if you already export them in `~/.profile`, `~/.bash_profile`, `~/.zprofile`, or `~/.zshrc` on that machine.
 
-In an SSH session, Claude Code doesn't get the variables from those files, even when `claude` in a terminal on that machine does. The session can then hang, or show **The connection from … to the API failed** or **Authentication failed**, and signing in again doesn't help.
+In an SSH session, Claude Code doesn't get the variables from those files, even when `claude` in a terminal on that machine does. The session can then hang, or show **The connection from … to the API failed**, **Authentication failed**, or **Claude Code on … couldn’t verify the API connection’s certificate**. Signing in again doesn't help.
 
 **1. Add the variables**
 
@@ -1324,7 +1334,7 @@ File edits and some tools can fail while Desktop is disconnected. If the task ne
 * **Workflows**: Desktop checks each new [workflow](https://code.claude.com/docs/en/workflows.md) before it starts, so while Desktop is disconnected a new one waits up to 10 minutes and then fails
 * **MCP servers**: MCP servers that Claude Code starts on the remote machine don't run through Desktop, so Claude can still call their tools. Servers from `claude_desktop_config.json` are among them only if Desktop doesn't use its [built-in SSH client](#worktree-edits-while-disconnected). Otherwise, and on [some Windows remote machines](#windows-remote-machines), Claude can't call their tools while Desktop is disconnected.
 
-> **When edits in a worktree keep working**
+> [accordion] When edits in a worktree keep working
 >
 > On a Linux or macOS remote machine, the check doesn't go through Desktop, so edits inside the worktree keep working while Desktop is disconnected. Before Claude Desktop v2.37337.0, this holds on a Linux remote machine only.
 >
@@ -1365,7 +1375,7 @@ If Desktop hasn't reconnected when you come back, send a message in the session.
 * **Remembered password**: a password that you let Desktop remember also works without a prompt, but for a long absence prefer a key that your SSH agent holds. If sign-ins with that password break off or hang, Desktop can stop reconnecting and wait for you.
 * **Any other prompt**: if the remote machine prompts for anything else, such as a one-time code, you can get a notification on your computer. Click the notification, or send a message in the session, and Desktop shows the prompt.
 
-> **If a jump host asks for a sign-in, the outage is long, output is missing, or the process is gone**
+> [accordion] If a jump host asks for a sign-in, the outage is long, output is missing, or the process is gone
 >
 > * **Jump host, pushes stop while you're away**: this can happen with Desktop on macOS or Linux when nobody answers a jump host's sign-in, for example a push to a phone. Desktop then stops reconnecting while nobody is at your computer. When you unlock or use the computer, you can get another push, because Desktop can try again. After three unanswered attempts it waits until you retry or send a message.
 > * **Jump host, pushes keep coming**: where Desktop can't tell that nobody answers, as with Desktop on Windows, it keeps trying while it has a process to rejoin, whether or not that process still runs. You can get another push with each attempt. To end the attempts, quit Desktop, which [can cost you the running task](#reopen-a-session-after-you-quit-desktop).
@@ -1589,14 +1599,14 @@ If a command-line tool makes your remote machines on demand, add its command to 
 >
 > Connections from a command require Claude Desktop v3.6556.0 or later on macOS or Linux, signed in with a Claude account. Administrators can [distribute commands to a team](#distribute-commands-to-your-team).
 
-Each entry is one connection, with one host at a time. Desktop runs the command only when you create the connection or [replace its host](#replace-the-host), not each time you connect. To keep two machines at once, add a second entry.
+Desktop runs the command only when you create the connection or [create another machine](#create-another-machine), not each time you connect. Each entry is one connection, which points at the host that Desktop last saved from the entry's command.
 
 > [!WARNING]
 >
 > Desktop doesn't stop or delete machines. Each of these keeps running, and can keep costing money, until you delete it with your tool:
 >
-> * A host that you replaced
-> * The host of an entry that you removed from the file, or whose `id` you changed
+> * A machine that an entry pointed at before you [created another](#create-another-machine)
+> * The machines of an entry that you removed from the file, or whose `id` you changed
 > * A machine that your command made without Desktop saving its host, for example in these cases:
 >   * The command fails or runs out of time
 >   * Desktop can't use the printed host, another connection already uses it, or your organization doesn't allow it
@@ -1621,7 +1631,7 @@ Each entry takes these fields, and `id`, `name`, and `command` are required:
 
 | Field | Value |
 | :- | :- |
-| `id` | Up to 64 ASCII letters, digits, `.`, `_`, and `-`, starting with a letter or digit. Use an `id` that no other entry in `sshHostCommands` or [`sshConfigs`](#pre-configure-ssh-connections-for-your-team) has. Desktop keeps the connection's host under it, so if you change it, the connection starts over with no host and the old machine keeps running. |
+| `id` | Up to 64 ASCII letters, digits, `.`, `_`, and `-`, starting with a letter or digit. Use an `id` that no other entry in `sshHostCommands` or [`sshConfigs`](#pre-configure-ssh-connections-for-your-team) has. Desktop keeps the connection's host under it, so if you change it, the connection starts over with no host, its machines keep running, and Desktop can [still connect to them](#remove-an-entry). |
 | `name` | The connection's name in the environment selector, up to 200 characters on one line |
 | `command` | A program and its arguments, as [Write the command](#write-the-command) describes |
 | `sshIdentityFile` | Path to your private key, such as `~/.ssh/id_ed25519`. Leave it out to use your SSH configuration or SSH agent. |
@@ -1674,14 +1684,39 @@ Answer two questions the first time you connect to each new host:
 
 Keep host key checking on for these hosts, and keep a `known_hosts` file for them. If `StrictHostKeyChecking` is `no` or `accept-new` and `UserKnownHostsFile` is also `/dev/null` or `none`, nothing records the key. When your tool then reuses a name, you can connect to a different machine without a warning.
 
-##### Replace the host
+A reused name also matters with nobody at the computer, because Desktop connects to these hosts on its own. For example, it delivers a message that you sent while the host was unreachable, once the host answers. Even with host key checking on, the message can reach the name's new machine in these cases, so [stop using a machine](#stop-using-a-machine) before it's deleted:
 
-Once Dev box has a host, the selector lists Dev box among your SSH connections, and **Create Dev box** becomes **Replace Dev box's host**. If that item isn't in the list, look under **More**.
+* You, your command, or another program added the new key to `known_hosts` or removed the old key's line, as your command does if it adds host keys
+* Your tool's machines share a host key
+* Your tool's machines share a certificate authority that `known_hosts` trusts
+* You or your administrator set `KnownHostsCommand` or `VerifyHostKeyDNS yes`, so SSH accepts keys from outside `known_hosts`
 
-Select it when the machine is gone or you want a fresh one. On the new-session page, the message that says Desktop can't reach the host offers it too. Desktop runs the command again, and new sessions use the new host.
+##### Create another machine
 
-* **A new host**: the item is gray for 10 minutes after Desktop saves a host, because a new machine can take a while to start. While a new host doesn't answer, the new-session page keeps trying to connect for those 10 minutes.
-* **Sessions on the old host**: they stay on it, and Desktop doesn't connect to that host unless you add it back. To continue one, open the session and select **Add SSH connection**. Desktop fills in the old host. Save it as a connection of its own.
+Your sessions on earlier machines keep working after you select **Create another Dev box**, and new sessions use the new machine. Select the item in the environment selector to make a fresh machine or to replace one that is gone. On the new-session page, the message that says Desktop can't reach the host offers it too.
+
+* **Sessions on earlier machines**: continue them from the sidebar, because the selector lists Dev box's current machine and not the earlier ones. Desktop can connect to their machines on its own, for example when Desktop starts, so [stop using a machine](#stop-using-a-machine) when you're done with it.
+* **A host replaced before Claude Desktop v4.4212.0**: those versions show **Replace Dev box's host** and stop connecting to the replaced host. To continue a session on that host, open the session, select **Add SSH connection**, and save the connection that Desktop fills in. Update Desktop before you replace another host.
+* **New sessions on two machines**: add a second entry to [`sshHostCommands`](#create-an-ssh-connection-from-a-command)
+* **A new host that doesn't answer yet**: leave the new-session page open for up to 10 minutes while it keeps trying to connect. If the host still doesn't answer, select **Create another Dev box** in the page's message.
+* **Another machine soon after**: after several runs of the command within an hour, confirm each further run in the dialog that Desktop opens, which shows the command
+
+##### Stop using a machine
+
+To stop Desktop from connecting on its own to a machine that a command made, archive every session on the machine:
+
+1. Find the machine's sessions in the sidebar. A session's [details panel](#see-session-details) shows the host that it runs on.
+2. [Archive each session](#archive-a-session), and leave it archived.
+3. If you haven't created another machine from the same `sshHostCommands` entry since you made this one, [create one](#create-another-machine) or [remove the entry](#remove-an-entry) too. Until then, the machine is the entry's saved connection, and Desktop can connect to it when you open the new-session page with that connection selected.
+4. Delete any other SSH connection to the machine in the app, or remove its [`sshConfigs`](#pre-configure-ssh-connections-for-your-team) entry.
+5. Quit and reopen Desktop, which closes its connection to the machine and ends its attempts to reach it.
+6. Delete the machine with your tool.
+
+##### Remove an entry
+
+After you remove an entry from the settings file or change its `id`, the sessions on its machines stay, so Desktop can still connect to those machines. It can do so with nobody at the computer, for example to rejoin a session's running process or to deliver a message that was waiting to be sent. To stop that, archive the sessions, as [Stop using a machine](#stop-using-a-machine) describes.
+
+If you're an administrator and removed a managed entry, your users' sessions stay too, and each user has to archive their own. To block the entry's machines yourself, set an [`sshHostAllowlist`](#restrict-which-ssh-hosts-users-can-connect-to) that matches the hosts your users still need and not the machines' hostnames. You can do that only where a pattern tells the two apart.
 
 ##### Distribute commands to your team
 
@@ -1708,7 +1743,7 @@ Before you deploy the key, settle each of these:
 * **The `id`**: if a user's `sshHostCommands` entry has your `id`, only yours works. If any other SSH connection has it, such as one in a user's `sshConfigs`, your entry is gray. Pick an `id` that users are unlikely to choose.
 * **The program**: give its full path, because Desktop looks up a bare name on each user's own `PATH`. The program runs as the user, with the variables that their login shell exports.
 * **Users' own entries**: Desktop treats a user's entry like a [hook](https://code.claude.com/docs/en/hooks.md), because both run a program on the computer. To allow only your entries, set [`strictPluginOnlyCustomization`](https://code.claude.com/docs/en/settings-reference#strictpluginonlycustomization) to `["hooks"]`, or add `"hooks"` to its list. You also stop Claude Code hooks from user, project, and local settings, with no way to keep them. If you set that key or [`allowManagedHooksOnly`](https://code.claude.com/docs/en/settings-reference#allowmanagedhooksonly) to `true` instead, you block more, as each key's entry lists.
-* **Every entry**: to turn off your entries too, set [`disableAllHooks`](https://code.claude.com/docs/en/settings-reference#disableallhooks) in managed settings. If you set [`disableDesktopLocalSessions`](https://code.claude.com/docs/en/settings-reference#disabledesktoplocalsessions), or an `sshHostAllowlist` that allows no host, the selector lists no **Create** or **Replace** items.
+* **Every entry**: to turn off your entries too, set [`disableAllHooks`](https://code.claude.com/docs/en/settings-reference#disableallhooks) in managed settings. If you set [`disableDesktopLocalSessions`](https://code.claude.com/docs/en/settings-reference#disabledesktoplocalsessions), or an `sshHostAllowlist` that allows no host, the selector lists no **Create** or **Create another** items.
 * **Where the locks count**: for these entries, Desktop reads `allowManagedHooksOnly`, `strictPluginOnlyCustomization`, and `disableAllHooks` from server-managed settings and from the computer's own file or policy, and applies the stricter result. Every entry stays gray until Desktop has checked claude.ai for server-managed settings, even if your organization has none.
 * **Allowed hosts**: if you set [`sshHostAllowlist`](#restrict-which-ssh-hosts-users-can-connect-to), make sure that a pattern matches each hostname that your tool prints, and leave `user@` out of the pattern. Desktop checks the printed name only after the command has run, so a machine that the list refuses already exists, and the user has to delete it with your tool. At each connection, the resolved `HostName` has to match too.
 
@@ -1716,7 +1751,7 @@ After you deploy the key, restart Desktop on a test computer. In the Code tab's 
 
 ##### If a command is missing or gray
 
-The environment selector lists no **Create** or **Replace** item in these cases:
+The environment selector lists no **Create** or **Create another** item in these cases:
 
 * **The file**: `~/.claude/settings.json` has [invalid JSON or a value that the schema rejects](https://code.claude.com/docs/en/settings.md#fix-a-broken-settings-file), you misspelled the key, or you put it in a project's settings. Fix the file.
 * **Platform and account**: you use Windows, or a [third-party provider](https://code.claude.com/docs/en/third-party-integrations.md) instead of a Claude account. Add each host as an [SSH connection](#ssh-sessions) yourself.
@@ -1727,7 +1762,7 @@ An entry that you can't select is gray. Hover over it to see the reason:
 
 * **A mistake in the entry**: fix the field or the command that the message names. If the `id` is in use, give the entry another one.
 * **A broken settings file**: while your own settings file is broken, your administrator's entries may be gray, with a message that names the file. [Fix the file](https://code.claude.com/docs/en/settings.md#fix-a-broken-settings-file).
-* **A new host**: you can [replace a host](#replace-the-host) once it's 10 minutes old.
+* **A new host**: [**Create another**](#create-another-machine) is gray for one minute after Desktop saves a host. Select it after that minute. Before Claude Desktop v4.4212.0, **Replace Dev box's host** is gray for 10 minutes.
 * **Hooks are off or restricted**: your own entries work only where your own hooks can run. Remove `disableAllHooks` from your settings, or ask your administrator.
 * **Settings are still loading**: every entry is gray until Desktop has loaded your organization's [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md), usually a few seconds after launch. If the entries stay gray, check your connection to claude.ai.
 
@@ -1919,6 +1954,28 @@ In local and SSH sessions, the desktop app delivers each user's connected claude
 
 For the permission, plugin, and delivery keys only a managed source can set, see [Keys only managed settings can set](https://code.claude.com/docs/en/managed-settings.md#managed-only-settings).
 
+#### Claude Code settings that behave differently in the Code tab
+
+In a local session, these keys, among others, have a different effect or no visible one, because the Code tab replaces the terminal interface. They still apply in the terminal, so you can leave them set.
+
+| Key | In a local session |
+| - | - |
+| `askUserQuestionTimeout` | the timeout doesn't apply, so a question from Claude stays open for a user to answer |
+| `awaySummaryEnabled` | the key has no effect |
+| `bashEditDiffEnabled` | the Code tab doesn't show the list of files that a Bash command changed |
+| `companyAnnouncements` | the Code tab doesn't show announcements |
+| `defaultShell` | commands that users type after `!` run in a shell that the app chooses: their login shell on macOS and Linux, PowerShell on Windows |
+| `fileSuggestion` | the `@` file picker builds its own file list and doesn't run the command you set |
+| `modelPicker` | the model picker lists the models available to each user's account. To limit them, set [`availableModels`](https://code.claude.com/docs/en/model-config#restrict-model-selection). |
+| `pluginTrustMessage` | the warning that users see when they install a plugin doesn't include the message you set |
+| `prUrlTemplate` | pull request links use the pull request's own URL, not the template |
+| `respectGitignore` | the `@` file picker builds its own file list and doesn't read this key |
+| `respondToBashCommands` | Claude responds to the output of commands that users run with `!`, whatever the value |
+| `showClearContextOnPlanAccept` | users get no clear-context option when they approve a plan |
+| `skipDangerousModePermissionPrompt` | the Code tab has its own confirmation for [Bypass permissions mode](#choose-a-permission-mode), and this key doesn't skip it |
+| `verbose`, `viewMode` | each user chooses the view under [**Transcript view** in the session menu](#switch-view-modes) |
+| `worktree.baseRef`, `worktree.sparsePaths`, `worktree.symlinkDirectories` | not used for the worktree that the Code tab creates for a session |
+
 ### Device management policies
 
 IT teams can manage the desktop app through MDM on macOS, group policy on Windows, or a policy file on Linux. Available policies include enabling or disabling the Claude Code feature, controlling auto-updates on macOS and Windows, and setting a custom deployment URL.
@@ -1926,6 +1983,28 @@ IT teams can manage the desktop app through MDM on macOS, group policy on Window
 * **macOS**: configure via `com.anthropic.claudefordesktop` preference domain using tools like Jamf or Kandji
 * **Windows**: configure via registry at `SOFTWARE\Policies\Claude`
 * **Linux**: configure via a root-owned file at `/etc/claude-desktop/managed-settings.json`, which holds the policy keys as a JSON object. Desktop refuses the file if anyone but root can write to it or to its folder. It's a different file from Claude Code's [managed settings file](https://code.claude.com/docs/en/managed-settings.md).
+
+#### Restrict sign-in to your organization
+
+To restrict which claude.ai organizations can sign in to Claude Desktop, set `forceLoginOrgUUID` in the Claude Desktop policy.
+
+The key requires Claude Desktop v1.2581.0 or later.
+
+On Linux, a policy file that sets only this key reads:
+
+```json /etc/claude-desktop/managed-settings.json theme={null}
+{
+  "forceLoginOrgUUID": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+}
+```
+
+Replace the placeholder with your claude.ai organization ID, shown in [claude.ai admin settings](https://claude.ai/admin-settings/organization). It's the same ID that Claude Code's [`forceLoginOrgUUID`](https://code.claude.com/docs/en/settings-reference#forceloginorguuid) setting takes. For macOS and Windows samples that set this key, see [Deploy the Claude Desktop policy](https://claude.com/docs/cowork/hipaa-setup#deploy-the-claude-desktop-policy) in the Cowork guide for HIPAA-ready organizations.
+
+> [!WARNING]
+>
+> Check the `forceLoginOrgUUID` value before you deploy it. If the ID isn't your organization's, people in your organization can't use Claude Desktop unless they also belong to an organization with that ID. To recover, deploy the correct ID and have them restart Claude Desktop.
+
+If you set `forceLoginMethod` and `forceLoginOrgUUID` in Claude Code's [managed settings](https://code.claude.com/docs/en/managed-settings.md), you don't change the Claude Desktop sign-in screen.
 
 ### Network access requirements
 
@@ -2034,7 +2113,7 @@ This table shows the desktop app equivalent for common CLI flags. Flags not list
 | `--model sonnet` | Model picker in the row under the prompt box |
 | `--resume`, `--continue` | Click a session in the sidebar, or type `/resume` in the prompt box to pick up a session you started from the CLI |
 | `--permission-mode` | Mode selector in the row under the prompt box |
-| `--dangerously-skip-permissions` | Bypass permissions mode. On Pro and Max plans, enable it in Settings → Claude Code → "Allow bypass permissions mode"; on Team and Enterprise plans, organization policy controls it |
+| `--dangerously-skip-permissions` | Bypass permissions mode. On Pro, Max, and Ultra plans, enable "Allow bypass permissions mode" in **Settings > Code** or **Settings > Claude Code**; on Team and Enterprise plans, organization policy controls it |
 | `--add-dir` | [Add folders to a session](#add-folders-to-a-session) in local and SSH sessions, or select [several repositories](#run-long-running-tasks-in-the-cloud) in a cloud session |
 | `--allowedTools`, `--disallowedTools` | No per-session equivalent. Permission rules in [settings files](https://code.claude.com/docs/en/settings.md) still apply. |
 | `--verbose` | [Verbose view mode](#switch-view-modes) |
@@ -2049,7 +2128,7 @@ Desktop and CLI read the same configuration files, so your setup carries over:
 * **[CLAUDE.md](https://code.claude.com/docs/en/memory.md)** and `CLAUDE.local.md` files in your project are used by both
 * **[MCP servers](https://code.claude.com/docs/en/mcp.md)** configured in `~/.claude.json` or `.mcp.json` work in both
 * **[Hooks](https://code.claude.com/docs/en/hooks.md)** and **[skills](https://code.claude.com/docs/en/skills.md)** defined in settings apply to both
-* **[Settings](https://code.claude.com/docs/en/settings.md)** in `~/.claude.json` and `~/.claude/settings.json` are shared. Permission rules, allowed tools, and other settings in `settings.json` apply to Desktop sessions.
+* **[Settings](https://code.claude.com/docs/en/settings.md)** in `~/.claude.json` and `~/.claude/settings.json` are shared. Permission rules, allowed tools, and other settings in `settings.json` apply to Desktop sessions. Some keys [behave differently in the Code tab](#claude-code-settings-that-behave-differently-in-the-code-tab).
 * **Models**: the same [models](https://code.claude.com/docs/en/model-config.md#available-models) are available in both. In Desktop, select the model from the model picker in the row under the prompt box. You can change the model mid-session from the same picker.
 
 #### MCP servers from the Claude Desktop chat app
@@ -2070,7 +2149,7 @@ This table compares core capabilities between the CLI and Desktop. For a full li
 
 | Feature | CLI | Desktop |
 | - | - | - |
-| Permission modes | All modes including `dontAsk` | Manual, Accept edits, Plan, and Auto. Bypass permissions appears in the mode selector once enabled: through the Settings toggle on Pro and Max plans, or through organization policy on Team and Enterprise plans |
+| Permission modes | All modes including `dontAsk` | Manual, Accept edits, Plan, and Auto. Bypass permissions appears in the mode selector once enabled: through the Settings toggle on Pro, Max, and Ultra plans, or through organization policy on Team and Enterprise plans |
 | [Third-party providers](https://code.claude.com/docs/en/third-party-integrations.md) | Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry | Anthropic's API by default. For gateway routing, see [connect the desktop app to a gateway](https://code.claude.com/docs/en/llm-gateway-connect.md#desktop-app). To run the Code tab on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or a self-hosted LLM gateway, see [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview). |
 | [MCP servers](https://code.claude.com/docs/en/mcp.md) | Configure in settings files | Connectors UI for local and SSH sessions, or settings files |
 | [Plugins](https://code.claude.com/docs/en/plugins/overview.md) | `/plugin` command | Plugin manager UI |
@@ -2094,7 +2173,7 @@ The following features aren't available in Desktop, except where noted:
 * **Agent teams**: coordinated teams, where Claude as the team lead assigns tasks to teammates from a shared task list, are available in the [CLI](https://code.claude.com/docs/en/agent-teams.md), not in Desktop. For multi-agent work inside one session, use [dynamic workflows](https://code.claude.com/docs/en/workflows.md), which run in Desktop; Claude can also [message and manage your other sessions](#work-across-sessions) directly.
 * **Terminal-dialog commands**: built-in commands that open an interactive panel in the terminal behave differently in the Code tab. Edit [settings files](https://code.claude.com/docs/en/settings.md) directly to manage permission rules and configuration, or run the commands from the standalone CLI.
   * Commands with no argument form, such as `/permissions`, reply with `isn't available in this environment`.
-  * `/config` opens **Settings > Claude Code**.
+  * `/config` opens **Settings > Code** or **Settings > Claude Code**.
 
 ## Troubleshooting
 
@@ -2119,20 +2198,20 @@ In a local session, the **Code** tab runs its own copy of Claude Code, which has
 
 ### Check which layout you have
 
-If a new session has no [environment selector](#start-a-session) under the prompt box, you have the earlier layout:
+If a new session shows the [environment](#start-a-session) above the prompt box instead of under it, you have the earlier layout:
 
 * **[Desktop older than v2.37337.0](#check-your-version)**: update to get the current layout. Select **Claude > Check for Updates…** on macOS or **Help > Check for Updates…** on Windows.
 * **[Third-party provider](https://code.claude.com/docs/en/third-party-integrations.md) with sessions on your computer**: the current layout requires Claude Desktop v3.1623.0 or later, so [check your version](#check-your-version). To update, select **Claude > Check for Updates…** on macOS or **Help > Check for Updates…** on Windows. If your organization [turns off auto-updates](#device-management-policies), **Check for Updates…** is hidden, so ask your administrator for v3.1623.0 or later.
-* **Third-party provider with sessions on your organization's infrastructure**: when your organization runs sessions on its own infrastructure rather than on your computer, Desktop keeps the earlier layout, and updating doesn't change the layout. If you don't know where your sessions run, ask your administrator.
+* **Third-party provider with sessions on your organization's infrastructure**: the current layout requires Claude Desktop v4.29.0 or later, so [check your version](#check-your-version). If you're on an older version, ask your administrator for v4.29.0 or later. If you don't know where your sessions run, ask your administrator.
 
-In the earlier layout, choose the environment and project folder above the prompt box, and the permission mode and model in the row under it. The earlier layout lacks the [session details panel](#see-session-details) and [saved local and SSH environments](#create-a-saved-environment).
+In the earlier layout, choose the environment and any project folder or repository above the prompt box, and the permission mode and model in the row under it. The earlier layout lacks the [session details panel](#see-session-details) and [saved local and SSH environments](#create-a-saved-environment).
 
 ### 403 or authentication errors in the Code tab
 
 If you see `Error 403: Forbidden` or other authentication failures when using the Code tab:
 
 1. Sign out and back in from the app menu. This is the most common fix.
-2. Verify you have an active paid subscription: Pro, Max, Team, or Enterprise.
+2. Verify you have an active paid subscription: Pro, Max, Ultra, Team, or Enterprise.
 3. If the CLI works but Desktop does not, quit the desktop app completely, not just close the window, then reopen and sign in again.
 4. Check your internet connection and proxy settings.
 
@@ -2230,7 +2309,12 @@ You get `ssh.log`, Desktop's record of its SSH connections, in a zip file of Des
 
 Look through the files before you send them, because they can include names and other details from your environment. `<host>` and `<user>` stand for names that Desktop replaced. Desktop doesn't replace every name, and an SSH host or user name can still appear as written. If you send the zip file to someone, tell them which host failed and when, because the logs may not name it.
 
-The zip file doesn't hold the log of the helper program that Desktop installs on the remote machine. To get that log as well, copy `remote-server.log` from the helper's folder under [`~/.claude/remote/run/`](#files-and-processes-on-the-remote-machine) in the home directory of the user who connected. Look through that file too before you send it.
+The zip file doesn't hold the log of the helper program that Desktop installs on the remote machine. To get that log as well, copy these files from the helper's folder under [`~/.claude/remote/run/`](#files-and-processes-on-the-remote-machine) in the home directory of the user who connected:
+
+* **`remote-server.log`**: the log of the helper's latest run.
+* **`remote-server.log.old`**, if it is there: the log of the run before that. Copy it as soon as you can, because you lose it the next time Desktop connects and has to start the helper again.
+
+Look through those files too before you send them.
 
 ### App won't quit
 

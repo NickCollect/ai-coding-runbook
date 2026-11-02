@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/worktrees
-fetched_at: 2026-10-26T05:40:07.171975+00:00
+fetched_at: 2026-11-02T07:00:27.237081+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,7 +49,7 @@ A worktree is a fresh checkout, so initialize your development environment there
 
 You can also ask Claude to "work in a worktree" during a session, and it creates one with the [`EnterWorktree`](https://code.claude.com/docs/en/tools-reference) tool. Once in a worktree, Claude can switch directly to another one under `.claude/worktrees/` by calling `EnterWorktree` with the target path; the previous worktree stays on disk untouched.
 
-When Claude enters a path outside the repository's `.claude/worktrees/` directory, Claude Code asks for your approval first, because the move takes the session's working directory, write access, and project configuration such as `CLAUDE.md` and settings to that location. An `EnterWorktree` [permission rule](https://code.claude.com/docs/en/permissions.md) or choosing "don't ask again" doesn't suppress this prompt; only `bypassPermissions` mode skips it. Before v2.1.206, Claude could enter any existing worktree path without asking.
+When Claude enters a path outside the repository's `.claude/worktrees/` directory, Claude Code asks for your approval first. The move takes the session's working directory, write access, and project configuration such as `CLAUDE.md` and settings to that location. An `EnterWorktree` [permission rule](https://code.claude.com/docs/en/permissions.md) or choosing "don't ask again" doesn't suppress this prompt; only `bypassPermissions` mode skips it.
 
 > [!NOTE]
 >
@@ -69,7 +69,7 @@ When you exit an interactive worktree session, Claude checks the worktree for wo
 
 Non-interactive runs with `-p` have no exit prompt, so Claude doesn't clean up their worktrees, and Claude Code leaves the lock it took on each one at creation in place until a later session's [stale-lock sweep](#clean-up-subagent-and-background-session-worktrees) releases it. To remove one, run `git worktree remove`; if git refuses because the worktree is locked, run `git worktree unlock` on it first.
 
-On Windows, removing a worktree doesn't delete files outside it. If a folder inside the worktree is a link to somewhere else, such as an NTFS junction or a directory symlink, Claude Code deletes only the link and keeps the folder it points to. Before v2.1.205, removing a worktree with a link nested in a subdirectory could delete the folder it pointed to.
+On Windows, removing a worktree doesn't delete files outside it. If a folder inside the worktree is a link to somewhere else, such as an NTFS junction or a directory symlink, Claude Code deletes only the link.
 
 ## Resume a worktree session
 
@@ -87,7 +87,7 @@ Where you launch from, and how you resume, change what Claude Code re-enters:
 >
 > Before v2.1.212, a non-interactive resume stayed in the starting directory and `ExitWorktree` reported that there was no active worktree session to exit.
 
-When Claude enters or exits a worktree that Claude Code created with git, the transcript follows: Claude Code records the session under the session's new working directory, the same way [`/cd`](https://code.claude.com/docs/en/commands) does, so `/desktop` and `--resume` find it there. Exiting moves it back the same way. A worktree created by a [`WorktreeCreate` hook](#non-git-version-control) keeps its transcript at the launch directory. Requires Claude Code v2.1.198 or later.
+When Claude enters or exits a worktree that Claude Code created with git, the transcript follows. Claude Code records the session under the session's new working directory, the same way [`/cd`](https://code.claude.com/docs/en/commands) does, so `/desktop` and `--resume` find it there. Exiting moves it back the same way. A worktree created by a [`WorktreeCreate` hook](#non-git-version-control) keeps its transcript at the launch directory.
 
 ## How Claude Code enforces isolation
 
@@ -145,9 +145,11 @@ When you [background](https://code.claude.com/docs/en/agent-view.md#send-the-ses
 
 Claude Code writes a marker into the git metadata of every worktree it creates with git, and the sweep keeps any worktree without one, including a worktree a [`WorktreeCreate` hook](#non-git-version-control) created.
 
+#### Worktree locks and manual removal
+
 While an agent is running, Claude Code holds a `git worktree lock` on its worktree so that concurrent cleanup can't remove it, and releases the lock when the agent finishes. Claude Code holds the same lock on the worktree it created for a backgrounded session while the session runs, so the sweep leaves the worktree in place and `git worktree remove` refuses to remove it.
 
-The sweep also releases a lock Claude Code set for a session whose process has exited, so a killed background session doesn't leave its worktree permanently locked. The sweep never releases a lock you set yourself with `git worktree lock`. Before v2.1.210, a lock left by a killed session stayed in place until you ran `git worktree unlock`.
+The sweep also releases a lock Claude Code set for a session whose process has exited, so a killed background session doesn't leave its worktree permanently locked. The sweep never releases a lock you set yourself with `git worktree lock`.
 
 To clean up a worktree that the sweep keeps, run `git worktree remove`, adding `--force` if the worktree has uncommitted changes or untracked files. If git refuses because the worktree is locked, run `git worktree unlock` on it first.
 
@@ -164,7 +166,11 @@ New worktrees branch from the repository's default branch, so most sessions don'
 
 You can't set `worktree.baseRef` to a branch name. To start a worktree from a specific existing branch, [create it with git directly](#manage-worktrees-manually).
 
-For a `"fresh"` base, Claude Code keeps `origin/HEAD` current: when the repository hasn't been fetched in the last 24 hours, it fetches the default branch, capped at five seconds, and uses the locally cached ref if the fetch fails. The fetch never waits for input in your terminal, so it also counts as failed when git or ssh would ask for a password, a key passphrase, or confirmation of a new SSH host. If no remote is configured, or `origin/HEAD` isn't cached locally and can't be fetched, the worktree falls back to your current local `HEAD`. Before v2.1.208, a fresh worktree used whatever `origin/HEAD` was already cached locally.
+For a `"fresh"` base, Claude Code keeps `origin/HEAD` current:
+
+* When the repository hasn't been fetched in the last 24 hours, it fetches the default branch, capped at five seconds, and uses the locally cached ref if the fetch fails.
+* The fetch never waits for input in your terminal. It also counts as failed when git or ssh would ask for a password, a key passphrase, or confirmation of a new SSH host.
+* If no remote is configured, or `origin/HEAD` isn't cached locally and can't be fetched, the worktree falls back to your current local `HEAD`.
 
 This example makes every new worktree branch from your current work:
 
@@ -214,7 +220,7 @@ This applies to every worktree Claude Code creates with git: `--worktree` worktr
 
 ### Reuse a worktree name
 
-Passing `--worktree` a name whose directory already exists opens that existing worktree instead of creating a new one.
+If a worktree with the name you pass to `--worktree` already exists, Claude Code opens it instead of creating a new one. If Claude Code stops with an error containing `belongs to a different repository` or `is a leftover worktree`, see [The worktree directory `belongs to a different repository`](#belongs-to-a-different-repository).
 
 With the default `"fresh"` [base](#choose-the-base-branch), a reopened worktree resets to the repository's default branch instead of continuing at its old tip when all of the following hold:
 
@@ -231,8 +237,6 @@ In every other case, Claude Code reopens the worktree at its old tip:
 * `worktree.baseRef` is `"head"`.
 * The name is a pull request or merge request reference.
 
-Before v2.1.208, when you reused a name, Claude Code always reopened the old worktree at its old tip.
-
 ### Replace worktree creation with a hook
 
 Configure a [`WorktreeCreate` hook](https://code.claude.com/docs/en/hooks#worktreecreate) to replace the default `git worktree` logic entirely, including placing worktrees somewhere other than `.claude/worktrees/`. For a complete example, see [Non-git version control](#non-git-version-control).
@@ -242,8 +246,10 @@ Configure a [`WorktreeCreate` hook](https://code.claude.com/docs/en/hooks#worktr
 A worktree gets its own files and branch, but it shares the following with the main checkout:
 
 * **The repository's `.git` directory**: git commands in a worktree write to the main repository's shared `.git` directory, and [sandboxing](https://code.claude.com/docs/en/sandboxing.md#filesystem-isolation) allows those writes, so commands such as `git commit` work from inside a worktree with the sandbox enabled.
-* **Plugins**: plugins installed at [project scope](https://code.claude.com/docs/en/plugins/loading.md#find-where-a-plugin-is-enabled) from the main checkout also load in worktrees of the same repository, so you don't need to reinstall them per worktree. Requires Claude Code v2.1.200 or later.
-* **Permission approvals**: choosing "Yes, and don't ask again" for a Bash command in a worktree session saves the rule to the main checkout's `.claude/settings.local.json`, so it applies in the main checkout and in every other worktree of the repository, and it survives the worktree's removal. On Windows and in the other cases where Claude Code [doesn't use the repository root](https://code.claude.com/docs/en/settings.md#where-claude-code-looks-for-each-file), the rule stays with that worktree. Before v2.1.211, an approval granted in a worktree was saved inside that worktree, didn't apply elsewhere, and was lost when the worktree was removed. See [where approvals are saved](https://code.claude.com/docs/en/permissions.md#permission-system).
+* **Plugins**: plugins installed at [project scope](https://code.claude.com/docs/en/plugins/loading.md#find-where-a-plugin-is-enabled) from the main checkout also load in worktrees of the same repository, so you don't need to reinstall them per worktree.
+* **Permission approvals**: choosing "Yes, and don't ask again" for a Bash command in a worktree session saves the rule to the main checkout's `.claude/settings.local.json`. The rule applies in the main checkout and in every other worktree of the repository, and it survives the worktree's removal.
+
+  On Windows and in the other cases where Claude Code [doesn't use the repository root](https://code.claude.com/docs/en/settings.md#where-claude-code-looks-for-each-file), the rule stays with that worktree. See [where approvals are saved](https://code.claude.com/docs/en/permissions.md#permission-system).
 * **Untracked skills, agents, and commands**: when the worktree checkout has no `.claude/skills` directory at its root, for example because your `.claude/skills` is gitignored, Claude Code loads the main checkout's [project skills](https://code.claude.com/docs/en/skills.md#where-skills-live) in the worktree session. In a worktree with its own `.claude/skills` directory, only that copy loads.
 
   The same read-through covers `.claude/agents` and `.claude/commands`. For skills, the read-through requires Claude Code v2.1.277 or later.
@@ -328,6 +334,12 @@ When Claude Code can't enter the worktree directory at startup, it prints an err
 
 Claude Code refuses to create a worktree when `.claude`, `.claude/worktrees`, or the worktree directory itself is a symlink, and the error names the symlinked path. Remove the symlink and retry. Before v2.1.212, if the repository already contained a committed symlink at one of those paths, worktree creation followed it and could create files outside the repository.
 
+### A worktree Claude Code created has the original content of replaced objects
+
+If your repository uses [`git replace`](https://git-scm.com/docs/git-replace), the files in a worktree that Claude Code creates hold the original objects' content rather than the replacements your `refs/replace/` entries name. Claude Code runs the git commands that check out the worktree's files with `GIT_NO_REPLACE_OBJECTS=1`, ignoring any value you exported for that variable.
+
+To get the replaced content, [create the worktree yourself](#manage-worktrees-manually) with `git worktree add` and start Claude Code inside it.
+
 ### Git LFS files are pointer files in a worktree Claude Code created
 
 If you set up [Git LFS](https://git-lfs.com) with `git lfs install --local`, a worktree that Claude Code creates contains LFS pointer files instead of the real files. The `--local` flag writes the LFS filter into the repository's own `.git/config` rather than your global git config. A plain `git lfs install` writes to your global config and isn't affected. The same applies to any other [filter driver](https://git-scm.com/docs/gitattributes) defined in the repository's own config.
@@ -346,6 +358,20 @@ In four rare cases, Claude Code creates no worktree at all: it can't tell which 
 ### Worktree creation fails in a partial clone
 
 An error containing `This repository is a partial clone` means Claude Code couldn't fetch every git object the worktree's starting commit needs. Take the step in the message's sentence ending in `try again`. Then retry from the shell where you took it: run `claude --worktree`, or start `claude` there and ask again.
+
+### `Can only use --worktree in a git repository`
+
+This error means you passed `--worktree` in a directory that isn't a git checkout, and no [`WorktreeCreate` hook](#non-git-version-control) is active.
+
+* In a folder with no version control, run `git init` there, create a first commit, then retry.
+* In a checkout of another version control system, set up the hook the message suggests.
+* To work in the directory directly, start Claude without `--worktree`.
+
+### The worktree directory `belongs to a different repository`
+
+The errors `belongs to a different repository` and `is a leftover worktree` both mean git ties the directory for the worktree name you passed to another location. This can happen after you copy or move a project.
+
+Pass a different worktree name. If the directory has no work to keep and you didn't copy or move a project, you can remove it and retry the same name. After a copy or move, that retry can fail with `is already checked out elsewhere in this repository`, so use a different name.
 
 ### Claude Code refuses to use a worktree
 

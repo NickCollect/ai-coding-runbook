@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/server-managed-settings
-fetched_at: 2026-10-26T05:40:05.545255+00:00
+fetched_at: 2026-11-02T07:00:26.898387+00:00
 fetch_method: mintlify_md
 ---
 
@@ -160,6 +160,7 @@ These keys are exceptions to the no-merge rule:
   * **Telemetry unit**: the `OTEL_EXPORTER_OTLP_*` exporter keys, the `OTEL_LOG_*` content-capture toggles, `OTEL_LOGS_EXPORTER`, and the beta tracing variables `ENABLE_BETA_TRACING_DETAILED` and `BETA_TRACING_ENDPOINT` follow the highest source that sets any of them as a unit. A source that delivers the `otelHeadersHelper` credential key claims the unit too, but lands these variables only when it is the selected source: a source that isn't selected but delivers the key contributes none of them and still blocks lower sources from filling them in. Either way, an exporter endpoint from one source can never pair with credentials from another.
   * **Credential-paired routing**: a source that pairs routing variables with a selected-source-only credential key, such as `apiKeyHelper` or `otelHeadersHelper`, contributes those routing variables only when it wins the slot.
 * **`allowedProviders`**: a list set on the machine and a server-managed list combine as [its entry's Scope note](https://code.claude.com/docs/en/settings-reference.md#allowedproviders) states. Requires Claude Code v2.1.285 or later
+* **First-party sign-in keys**: [`forceLoginOrgUUID`](https://code.claude.com/docs/en/settings-reference#forceloginorguuid) and the `"claudeai"` and `"console"` values of [`forceLoginMethod`](https://code.claude.com/docs/en/settings-reference#forceloginmethod). If you also deploy an MDM policy or managed settings file, set them there and in server-managed settings from claude.ai until every client runs v2.1.299 or later. For where to set the keys afterward, and which source's value applies, see [Which managed source supplies login keys](https://code.claude.com/docs/en/managed-settings.md#which-managed-source-supplies-login-keys).
 * **Gateway sign-in keys**: Claude Code never reads [`forceLoginGatewayUrl`](https://code.claude.com/docs/en/settings-reference#forcelogingatewayurl), [`gatewayInternalNetworks`](https://code.claude.com/docs/en/settings-reference#gatewayinternalnetworks), or the `"gateway"` value of [`forceLoginMethod`](https://code.claude.com/docs/en/settings-reference#forceloginmethod) from server-managed settings, so a value there neither applies nor hides one set in an MDM policy or managed settings file. The [`managedSourcesBehavior` entry](https://code.claude.com/docs/en/settings-reference#managedsourcesbehavior) says which admin source on the machine supplies them.
 
 ### Fetch and caching behavior
@@ -176,9 +177,11 @@ A client signed in through a [Claude apps gateway](#platform-availability) fetch
 
 **Subsequent launches with cached settings:**
 
-* Cached settings apply immediately at startup, except for the cached `modelPricing` and `managedMcpServers` values and the environment variables that Claude Code withholds until the server confirms the payload
+* Cached settings apply immediately at startup, except for the cached `modelPricing` and `managedMcpServers` values; the environment variables that Claude Code withholds until the server confirms the payload; the removal, repositioning, or disabling of the [built-in guard](https://code.claude.com/docs/en/plugins/mods/admin.md#know-what-happens-by-default) by a cached plugin list; and, on a machine where an endpoint-managed source lists or enables plugins of its own, the [organization standing](https://code.claude.com/docs/en/plugins/mods/admin.md#install-your-organizations-mods) of a plugin that only a cached list enables
 * A cached [`modelPricing`](https://code.claude.com/docs/en/settings-reference#modelpricing) doesn't apply until the session's fetch confirms the payload. Until then, the cost figures developers see in `/usage` and the status line are at list price
 * A cached [`managedMcpServers`](https://code.claude.com/docs/en/settings-reference#managedmcpservers) block doesn't apply until the session's fetch confirms the payload. Claude Code waits up to 30 seconds for that fetch before connecting MCP servers. If the fetch fails or times out, the session starts without the organization's servers, `/status` says so, and they connect once a later fetch confirms them. See [When provided servers connect](https://code.claude.com/docs/en/managed-mcp.md#when-provided-servers-connect) for the full behavior, including first launch. Requires Claude Code v2.1.259 or later
+* A cached [`prependPlugins`](https://code.claude.com/docs/en/settings-reference#prependplugins), [`appendPlugins`](https://code.claude.com/docs/en/settings-reference#appendplugins), or [`enabledPlugins`](https://code.claude.com/docs/en/settings-reference#enabledplugins) value can't remove the built-in guard, change its position, or turn it off until the session's fetch confirms the payload
+* On a machine where an [endpoint-managed source](https://code.claude.com/docs/en/managed-settings.md#choose-a-delivery-mechanism) lists or enables plugins of its own, a plugin that only a cached list enables counts as [the user's](https://code.claude.com/docs/en/plugins/mods/admin.md#install-your-organizations-mods), not your organization's, until the fetch confirms the payload
 * Claude Code fetches fresh settings in the background
 * Cached settings persist through network failures. If the startup fetch fails, Claude Code warns in interactive sessions that the cached policy is in effect
 * Until a fetch succeeds, the values withheld at startup stay withheld
@@ -292,7 +295,9 @@ Claude Code can't always show the dialog. Each case below says which settings ap
 
   The command can't read from the keyboard when you pipe or redirect its input and, on macOS and Linux, it also can't open `/dev/tty`. If you pipe or redirect its output too, the run is non-interactive instead, and the delivered settings apply for that run only.
 * **An error closes the dialog before you answer**: Claude Code doesn't apply the delivered settings and keeps the last-approved settings. It shows the dialog again in the next session that can show it.
-* **A non-interactive run**, such as `claude -p`, an Agent SDK session, or a session in the VS Code extension's chat panel or the desktop app's Code tab: Claude Code can't show the dialog, so when the delivered settings would require approval, it applies them for that run only. It doesn't record them as approved or write them to the [local cache](#fetch-and-caching-behavior), and the next interactive session shows the dialog. Until a user approves in an interactive session, each non-interactive run fetches the settings again at startup. Before v2.1.207, a non-interactive run saved the settings as approved, so later interactive sessions never showed the dialog for them.
+* **A non-interactive run**, such as `claude -p`, an Agent SDK session, or a session in the VS Code extension's chat panel or the desktop app's Code tab: Claude Code can't show the dialog. When the delivered settings would require approval, they apply for that run only.
+
+  Claude Code doesn't record the settings as approved or write them to the [local cache](#fetch-and-caching-behavior), and the next interactive session shows the dialog. Until a user approves in an interactive session, each non-interactive run fetches the settings again at startup.
 
 #### Environment variables and the approval dialog
 
@@ -310,9 +315,9 @@ Other delivered variables can require the user's approval before they take effec
 * `OTEL_EXPORTER_OTLP_ENDPOINT`
 * `CLAUDE_CODE_DISABLE_1M_CONTEXT`
 
-When a delivered variable needs approval, the dialog names it, so the user sees exactly what the policy is asking to set. Before v2.1.218, Claude Code applied fewer variables without asking the user, so settings such as `DISABLE_AUTO_COMPACT` triggered the dialog at any non-empty value.
+When a delivered variable needs approval, the dialog names it, so the user sees exactly what the policy is asking to set.
 
-Claude Code decides whether four privacy toggles need approval by the delivered value rather than by the variable name: `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`, `DISABLE_ERROR_REPORTING`, `DISABLE_TELEMETRY`, and `DO_NOT_TRACK`. A truthy value such as `1` or `true` only turns tracking, reporting, or other nonessential traffic off, so Claude Code applies it without asking the user. For any other non-empty value, Claude Code shows the dialog. Before v2.1.218, all of them except `DO_NOT_TRACK` applied without approval at any value, and `DO_NOT_TRACK` triggered the dialog at any non-empty value.
+Claude Code decides whether four privacy toggles need approval by the delivered value rather than by the variable name: `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`, `DISABLE_ERROR_REPORTING`, `DISABLE_TELEMETRY`, and `DO_NOT_TRACK`. A truthy value such as `1` or `true` only turns tracking, reporting, or other nonessential traffic off, so Claude Code applies it without asking the user. For any other non-empty value, Claude Code shows the dialog.
 
 Claude Code also decides whether [`API_FORCE_IDLE_TIMEOUT`](https://code.claude.com/docs/en/env-vars) needs approval by the delivered value: a truthy value only turns the [body idle timeout](https://code.claude.com/docs/en/network-config.md#streaming-idle-watchdogs) on, so Claude Code applies it without asking the user. For any other non-empty value, Claude Code shows the dialog. Before v2.1.248, any non-empty value triggered the dialog.
 

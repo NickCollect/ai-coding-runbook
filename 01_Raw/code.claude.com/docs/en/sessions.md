@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/sessions
-fetched_at: 2026-10-26T05:40:05.336152+00:00
+fetched_at: 2026-11-02T07:00:26.895851+00:00
 fetch_method: mintlify_md
 ---
 
@@ -52,7 +52,7 @@ When the conversation you resume with `claude --resume` or `/resume` belongs to 
 When Claude Code loads a conversation from its transcript, the resumed session restores the conversation along with the state saved in it:
 
 * Conversation history: the messages, tool calls, and results. If the session was [compacted](https://code.claude.com/docs/en/context-window.md#what-survives-compaction), the conversation opens at a `Conversation compacted` row. Claude continues with the last compaction's summary, the messages that compaction left unsummarized, and every message since. The messages that the last compaction summarized aren't loaded again.
-* Interrupted tool calls: a tool that was still running when the previous process ended, for example in a crash, doesn't finish or get rerun when you resume. Claude sees the call marked as cut off before its result was recorded and is told to check whether it took effect before running it again, unless [`CLAUDE_CODE_RESUME_INTERRUPTED_TURN`](https://code.claude.com/docs/en/env-vars#variables) is set.
+* Interrupted tool calls: a tool that was still running when the previous process ended, for example in a crash, doesn't get rerun when you resume.
 * Model: the session continues on the model it was using, except in the cases in [Setting your model](https://code.claude.com/docs/en/model-config.md#setting-your-model).
 * Agent: a session started with [`--agent`](https://code.claude.com/docs/en/sub-agents#invoke-subagents-explicitly) or the `agent` setting continues as that agent, keeping its tool restrictions and model. Pass `--agent` when resuming to pick a different one; for the system prompt in either case, see [System prompt flags in resumed conversations](https://code.claude.com/docs/en/cli-reference.md#system-prompt-flags-in-resumed-conversations). Claude Code looks for the agent in two places: the session's original directory, provided you have [trusted that workspace](https://code.claude.com/docs/en/permissions.md#project-allow-rules-and-workspace-trust), and then the directory you resume from, so a project-scoped agent still loads when you resume from another directory. If Claude Code doesn't find the agent in either place, the session resumes with the default tools and shows a [warning naming the agent](https://code.claude.com/docs/en/errors.md#session-agent-no-longer-available).
 * Permission mode: if you resume from a terminal with `claude --continue`, `claude --resume <session-id>`, or `claude --resume <name>` when the name matches one session, without `-p`, Claude Code restores the permission mode the session was in, except in the cases in [permission mode on resume](#permission-mode-on-resume), which also covers the session picker, `/resume`, and resuming with `claude -p`. Pass `--permission-mode` or `--dangerously-skip-permissions` to override the restored mode.
@@ -101,7 +101,7 @@ A `claude -p --resume` or `claude -p --continue` run resumes in plan mode only w
 
 If you see the "Resume this conversation?" dialog when resuming a session, its estimate is the share of your 5-hour usage limit that the saved conversation alone would use. The estimate doesn't count what you've already used.
 
-On Pro and Max plans, the dialog can appear when you resume a long conversation [after a long break](https://code.claude.com/docs/en/prompt-caching.md#resuming-a-session) or on a different model. The estimated use comes when you send your first message after **Resume**, not when you select it. Choose by whether your next task still needs the saved conversation:
+On Pro, Max, and Ultra plans, the dialog can appear when you resume a long conversation [after a long break](https://code.claude.com/docs/en/prompt-caching.md#resuming-a-session) or on a different model. The estimated use comes when you send your first message after **Resume**, not when you select it. Choose by whether your next task still needs the saved conversation:
 
 * **Resume**: keep working in the saved conversation.
 * **Start a new conversation**: switch to work that doesn't need the saved conversation. To reopen it later, run [`/resume`](#use-the-session-picker) at the prompt. The estimate doesn't apply to your first message in the new conversation. If the option says that Claude can look up this conversation, you can still refer to earlier work in the new conversation.
@@ -230,7 +230,7 @@ These commands control what's in the context window without leaving the session:
 * **`/compact [instructions]`**: replace history with a summary, optionally focused on what you specify
 * **`/context`**: show what is currently consuming context
 
-For how compaction interacts with CLAUDE.md, skills, and rules, see the [context window guide](https://code.claude.com/docs/en/context-window.md). For strategies on when to clear versus compact, see [Best practices](https://code.claude.com/docs/en/best-practices.md#manage-your-session).
+For how compaction interacts with CLAUDE.md, skills, and rules, see the [context window guide](https://code.claude.com/docs/en/context-window.md). For strategies on when to clear versus compact, see [Best practices](https://code.claude.com/docs/en/best-practices.md#keep-cost-and-context-down).
 
 ## Export and locate session data
 
@@ -255,7 +255,7 @@ claude -p --resume <session-id> --output-format json "summarize what we changed"
 
 By default, Claude Code stores transcripts as JSONL at `~/.claude/projects/<project>/<session-id>.jsonl`, where `<project>` is your working directory path with non-alphanumeric characters replaced by `-`. For a working directory whose converted name exceeds 200 characters, Claude Code truncates the name to 200 characters and appends a hash of the full path, so the directory name stays within filesystem limits.
 
-Each line is a JSON object for a message, tool use, or metadata entry. The entry format is internal to Claude Code and changes between versions, so scripts that parse these files directly can break on any release. To build on session data, use `/export` or the [script interfaces](#access-conversations-from-scripts) instead.
+Each line is a JSON object: a message, a tool use or result, a record of a request Claude Code sent the model, or a metadata entry. The entry format is internal to Claude Code and changes between versions, so scripts that parse these files directly can break on any release. To build on session data, use `/export` or the [script interfaces](#access-conversations-from-scripts) instead.
 
 The location, retention, and write behavior are configurable:
 

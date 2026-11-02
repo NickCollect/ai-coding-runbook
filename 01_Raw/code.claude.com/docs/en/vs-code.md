@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/vs-code
-fetched_at: 2026-10-26T05:40:06.101232+00:00
+fetched_at: 2026-11-02T07:00:27.036593+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,7 +29,7 @@ With the extension, you can:
 Before installing, make sure you have:
 
 * VS Code 1.94.0 or later
-* An Anthropic account: any paid Claude subscription (Pro, Max, Team, or Enterprise) or a Claude Console account works, and no API key is required. You'll [sign in](https://code.claude.com/docs/en/authentication.md#log-in-to-claude-code) with this account when you first open the extension. If you access Claude through a third-party provider like Amazon Bedrock or Google Cloud's Agent Platform, see [Use third-party providers](#use-third-party-providers) for setup instructions.
+* An Anthropic account: any paid Claude subscription (Pro, Max, Ultra, Team, or Enterprise) or a Claude Console account works, and no API key is required. You'll [sign in](https://code.claude.com/docs/en/authentication.md#log-in-to-claude-code) with this account when you first open the extension. If you access Claude through a third-party provider like Amazon Bedrock or Google Cloud's Agent Platform, see [Use third-party providers](#use-third-party-providers) for setup instructions.
 
 > [!TIP]
 >
@@ -44,11 +44,15 @@ Click the link for your IDE to install directly:
 
 Or in VS Code, press `Cmd+Shift+X` (Mac) or `Ctrl+Shift+X` (Windows/Linux) to open the Extensions view, search for "Claude Code", and click **Install**.
 
+> [!NOTE]
+>
+> Extension marketplaces are third-party software, which Anthropic doesn't endorse, maintain, or audit. Anthropic submits extensions for publication to the Visual Studio Marketplace and Open VSX Registry.
+
 The extension's version number is the Claude Code version it bundles. For example, a feature that requires Claude Code v2.1.286 or later needs version 2.1.286 or later of the extension, which the Extensions view shows.
 
 Claude Code also runs in other editors and containers:
 
-* **Other VS Code forks**: the extension also installs in forks like Devin Desktop or Kiro. Search for "Claude Code" in the editor's Extensions view, or install from the [Open VSX registry](https://open-vsx.org/extension/Anthropic/claude-code).
+* **Other VS Code forks**: the extension also installs in forks like Devin Desktop or Kiro. Search for "Claude Code" in the editor's Extensions view, or install from the [Open VSX Registry](https://open-vsx.org/extension/Anthropic/claude-code).
 * **Editors that can't install the extension**: [install the CLI](https://code.claude.com/docs/en/quickstart.md) and run `claude` in the editor's integrated terminal instead. The CLI works in any terminal.
 * **Dev containers**: to run Claude Code inside a dev container, see [Development containers](https://code.claude.com/docs/en/devcontainer.md).
 
@@ -123,7 +127,7 @@ For more ideas on what you can do with Claude Code, see [Common workflows](https
 
 The prompt box supports several features:
 
-* **Permission modes**: click the mode indicator at the bottom of the prompt box to switch permission modes. With Claude Code v2.1.283 or later, Auto is the built-in starting permission mode, and on earlier versions only on Pro, Max, and Team plans. See [how the extension chooses the starting permission mode](https://code.claude.com/docs/en/permission-modes.md#switch-permission-modes) for what changes that, and every permission mode the indicator offers.
+* **Permission modes**: click the mode indicator at the bottom of the prompt box to switch permission modes. With Claude Code v2.1.283 or later, Auto is the built-in starting permission mode, and on earlier versions only on Pro, Max, Ultra, and Team plans. See [how the extension chooses the starting permission mode](https://code.claude.com/docs/en/permission-modes.md#switch-permission-modes) for what changes that, and every permission mode the indicator offers.
   * **Auto**: a classifier reviews most actions instead of asking you. See [auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) for what it reviews and blocks.
   * **Manual**: Claude asks permission before file edits and most shell commands.
   * **Plan**: Claude describes what it will do and waits for approval before making changes. VS Code automatically opens the plan as a full Markdown document where you can add inline comments to give feedback before Claude begins.
@@ -139,7 +143,7 @@ The prompt box supports several features:
   When the current model supports [effort levels](https://code.claude.com/docs/en/model-config.md#adjust-effort-level), the picker also shows an **Effort** row and the model name button shows the selected level. When you pick a level other than `max`, Claude Code saves it for the current model as your default, under [`modelSettings`](https://code.claude.com/docs/en/settings-reference#modelsettings) in your user settings; `max` applies to the current session only. The model name button and the **Effort** row require Claude Code v2.1.257 or later.
 
   When [dynamic workflows](https://code.claude.com/docs/en/workflows.md) are enabled and the current model supports it, an **Ultracode** switch appears under the **Effort** row. Turn it on to have Claude plan a [workflow](https://code.claude.com/docs/en/workflows.md#let-claude-decide-with-ultracode) for each substantive task in this session, at the selected effort level. While it's on, the model name button shows `· Ultracode` after the level. The switch requires Claude Code v2.1.284 or later.
-* **Command menu**: click `/` or type `/` to open the command menu. Options include attaching files, switching models, and toggling extended thinking.
+* **Command menu**: click `/` or type `/` to open the command menu. Options include attaching files and switching models.
 
   The Customize section includes entries such as MCP servers, commands, output styles, hooks, memory, instructions, permissions, and plugins. Items with a terminal icon open in the integrated terminal.
 
@@ -197,7 +201,11 @@ The prompt box supports several features:
   To open the map when no agent count is showing, such as when Claude has started a background shell but no subagents, type `/tasks` in the prompt box. Background tasks in the map and the typed `/tasks` require Claude Code v2.1.277 or later.
 
   With Claude Code v2.1.286 or later, when you click **Stop** or press `Esc`, the current turn ends. Background agents keep running until they finish or you stop them from the map.
-* **Extended thinking**: lets Claude spend more time reasoning through complex problems. Toggle it on via the command menu (`/`). Claude's reasoning appears in the conversation as collapsed blocks: click a block to read it, or press `Ctrl+O` to expand or collapse every thinking block in the session. See [Extended thinking](https://code.claude.com/docs/en/model-config.md#extended-thinking) for details.
+* **Extended thinking**: lets Claude spend more time reasoning through complex problems. To turn it off or back on, use the **Thinking** switch in the Model section of the command menu (`/`). On models where [thinking can't be turned off](https://code.claude.com/docs/en/model-config.md#extended-thinking), the menu has no **Thinking** switch and thinking stays on.
+
+  A thinking block that shows only a label, such as `Thought for 12s`, has no text and doesn't open when you click it. To see thinking summaries, set [`showThinkingSummaries`](https://code.claude.com/docs/en/settings-reference#showthinkingsummaries) to `true` in `~/.claude/settings.json`, then run **Developer: Reload Window** from the Command Palette.
+
+  Thinking blocks you already have stay empty. In responses after the reload, click a block or press `Ctrl+O` to expand them all.
 * **Multi-line input**: press `Shift+Enter` to add a new line without sending. This also works in the "Other" free-text input of question dialogs.
 
 ### Reference files and folders
@@ -209,28 +217,19 @@ Explain the logic in @auth (fuzzy matches auth.js, AuthService.ts, etc.)
 What's in @src/components/ (include a trailing slash for folders)
 ```
 
+### Read specific pages of a PDF
+
 For large PDFs, you can ask Claude to read specific pages instead of the whole file. Ask for a single page, a range like pages 1-10, or an open-ended range like page 3 onward. Reading specific pages requires [poppler-utils](https://code.claude.com/docs/en/tools-reference.md#read-tool-behavior) on the machine where Claude Code runs.
-
-When you select text in the editor, Claude can see your highlighted code automatically. The prompt box footer shows how many lines are selected. Press `Option+K` (Mac) / `Alt+K` (Windows/Linux) to insert an @-mention with the file path and line numbers, for example `@app.ts#5-10`. Click the **X** on the selection indicator to remove it so Claude doesn't receive the selection. The indicator comes back when you select other text.
-
-The extension withholds selected text from some files:
-
-* When the file is inside your workspace and matches your `files.exclude` or `search.exclude` settings, Claude receives at most the file's path and not the text you selected.
-* The same applies to a file git ignores, as long as VS Code's `search.useIgnoreFiles` setting and the extension's [`respectGitIgnore` setting](#extension-settings) are both on, which is the default.
-
-This filter covers the chat panel only. When Claude Code runs in the integrated terminal, the CLI sends your selected text whatever the file. To keep a file's contents from Claude there, add a [`Read` deny rule](#the-built-in-ide-mcp-server).
-
-Claude also sees which file you have open in the editor, even when nothing is selected, and the prompt box shows its name. To add only your selected text, turn off the [Attach Open File setting](vscode://settings/claudeCode.attachOpenFile). The setting requires Claude Code v2.1.271 or later.
-
-You can also attach images and files to your message:
-
-* To attach an image, paste it from your clipboard into the prompt box.
-* To attach files, hold `Shift` while dragging them into the prompt box.
-* To remove an attachment from context, click the X on it.
 
 ### Include terminal output in prompts
 
 Reference terminal output in your prompts using `@terminal:name` where `name` is the terminal's title. This lets Claude see command output, error messages, or logs without copy-pasting.
+
+### Attach images and files
+
+* To attach an image, paste it from your clipboard into the prompt box.
+* To attach files, hold `Shift` while dragging them into the prompt box.
+* To remove an attachment from context, click the X on it.
 
 ### Paste text
 
@@ -240,6 +239,32 @@ Claude Code also removes [invisible Unicode characters](https://code.claude.com/
 
 * If a notice such as `Removed 3 invisible characters from the pasted text` appears when you paste, the text went in without those characters.
 * If a notice about removed characters appears when you send, nothing was sent. The cleaned text is back in the prompt box. Send again to send the text as shown.
+
+### Automatic context from your selection and open file
+
+When you select text in the editor, Claude can see your highlighted code automatically. The prompt box footer shows how many lines are selected. Claude also sees which file you have open in the editor, even when nothing is selected, and the prompt box shows its name.
+
+Press `Option+K` (Mac) / `Alt+K` (Windows/Linux) to insert an @-mention with the file path and line numbers, for example `@app.ts#5-10`.
+
+#### Keep your selection and open file out of your messages
+
+To stop selected text or your open file from going into your messages, turn off the matching setting in VS Code's settings:
+
+* **Selected text**: turn off the [Attach Selection setting](vscode://settings/claudeCode.attachSelection). Requires Claude Code v2.1.300 or later. To drop one selection, click the **X** beside the line count. The count returns when you select different text.
+* **Open file**: turn off the [Attach Open File setting](vscode://settings/claudeCode.attachOpenFile). Requires Claude Code v2.1.271 or later. The file stays out unless your message includes text you selected in it.
+
+To add text as an @-mention with Attach Selection off, select it and press `Option+K` on Mac or `Alt+K` on Windows and Linux.
+
+Both settings also apply when you run `claude` in VS Code's integrated terminal.
+
+#### Selected text from excluded or ignored files
+
+In the chat panel, the extension withholds selected text from some files:
+
+* When the file is inside your workspace and matches your `files.exclude` or `search.exclude` settings, Claude receives at most the file's path and not the text you selected.
+* The same applies to a file git ignores, as long as VS Code's `search.useIgnoreFiles` setting and the extension's [`respectGitIgnore` setting](#extension-settings) are both on, which is the default.
+
+This filter covers the chat panel only. When Claude Code runs in the integrated terminal, Claude can receive text you select in these files. To keep a file's contents from Claude there, add a [`Read` deny rule](https://code.claude.com/docs/en/permissions#read-and-edit).
 
 ### LaTeX math in responses
 
@@ -322,7 +347,7 @@ If any part of a conversation fails to download, an error appears and no copy is
 
 Run `/usage` to open the Account & usage dialog, which shows your signed-in account and your usage. The usage figures match how you signed in:
 
-* **claude.ai plan**: usage bars for your plan's limits, such as the current session and the week. Each bar shows how long until its limit resets.
+* **claude.ai plan**: usage bars for your plan's limits, such as the current session and the week.
 
   The dialog also breaks down what is contributing to your plan limits:
 
@@ -569,6 +594,12 @@ summarize the changes I've made to the auth module
 
 When creating pull requests, Claude generates descriptions based on the actual code changes and can add context about testing or implementation decisions.
 
+### Reopen a conversation that moved into a worktree
+
+On a reopened conversation, the **This session is in worktree** banner means the conversation's working directory is the [worktree](https://code.claude.com/docs/en/worktrees.md) it names, not the folder this window has open. To open the worktree in a new VS Code window, click **Open worktree** on the banner.
+
+A conversation moves into a worktree when, for example, you [ask Claude to work in one](https://code.claude.com/docs/en/worktrees.md#ask-claude-to-create-a-worktree). When you reopen it, or the panel [reopens it after a window reload](#continue-conversations-after-a-reload), it resumes in the worktree if Claude Code created the worktree under `.claude/worktrees/` and it still exists. Before Claude Code v2.1.300, an empty conversation opened instead. On those versions, update the extension.
+
 ## Run work in the background
 
 Send a long-running command or subagent to the background, then check on it from the prompt box.
@@ -622,7 +653,7 @@ Some shortcuts depend on which panel is "focused" (receiving keyboard input). Wh
 | Insert @-Mention Reference | `Option+K` (Mac) / `Alt+K` (Windows/Linux) | Insert a reference to the current file and selection (requires editor to be focused) |
 | Accept Change at Cursor | - | Accept the change at the cursor while [reviewing a proposed edit](#get-started) one change at a time. Requires Claude Code v2.1.275 or later |
 | Reject Change at Cursor | - | Revert the change at the cursor while reviewing a proposed edit one change at a time. Requires Claude Code v2.1.275 or later |
-| Toggle Focus view | `Ctrl+Option+F` (Mac) / `Ctrl+Alt+F` (Windows/Linux) | Hide or show tool activity in the conversation. Works while a Claude panel or sidebar is visible. Requires Claude Code v2.1.221 or later |
+| Toggle Focus view | `Ctrl+Option+F` (Mac) / `Ctrl+Alt+F` (Windows/Linux) | Hide or show tool activity in the conversation. Works while a Claude panel or sidebar is visible. On Windows/Linux, `Ctrl+Alt+F` opens VS Code's Find instead while focus is in the Debug Console or a searchable list such as the Explorer. Focus an editor or the Claude panel and press it again. Requires Claude Code v2.1.221 or later |
 | Rename Session Tab | - | Rename the session in the active Claude tab. Requires Claude Code v2.1.257 or later |
 | Add Session Tab to Group | - | Add the session in the active Claude tab to a [session group](#organize-sessions-into-groups) you pick or create. Requires Claude Code v2.1.257 or later |
 | Mark Session as Unread | - | Mark the session in the active Claude tab as unread in the sessions list. Requires Claude Code v2.1.257 or later |
@@ -635,40 +666,40 @@ The extension registers a URI handler at `vscode://anthropic.claude-code/open`. 
 
 Invoke the handler with your operating system's URL opener.
 
-**macOS**
+> [tab] macOS
+>
+> ```bash theme={null}
+> open "vscode://anthropic.claude-code/open"
+> ```
 
-```bash theme={null}
-open "vscode://anthropic.claude-code/open"
-```
+> [tab] Linux
+>
+> ```bash theme={null}
+> xdg-open "vscode://anthropic.claude-code/open"
+> ```
+>
+> The `xdg-open` command comes from the `xdg-utils` package. If the shell reports it isn't found, see [xdg-open is not found on Linux](https://code.claude.com/docs/en/deep-links.md#xdg-open-is-not-found-on-linux).
 
-**Linux**
-
-```bash theme={null}
-xdg-open "vscode://anthropic.claude-code/open"
-```
-
-The `xdg-open` command comes from the `xdg-utils` package. If the shell reports it isn't found, see [xdg-open is not found on Linux](https://code.claude.com/docs/en/deep-links.md#xdg-open-is-not-found-on-linux).
-
-**Windows**
-
-In PowerShell:
-
-```powershell theme={null}
-Start-Process "vscode://anthropic.claude-code/open"
-```
-
-In `cmd.exe`, `start` treats its first quoted argument as a window title, so pass an empty title before the URL:
-
-```cmd theme={null}
-start "" "vscode://anthropic.claude-code/open"
-```
+> [tab] Windows
+>
+> In PowerShell:
+>
+> ```powershell theme={null}
+> Start-Process "vscode://anthropic.claude-code/open"
+> ```
+>
+> In `cmd.exe`, `start` treats its first quoted argument as a window title, so pass an empty title before the URL:
+>
+> ```cmd theme={null}
+> start "" "vscode://anthropic.claude-code/open"
+> ```
 
 The handler accepts two optional query parameters:
 
 | Parameter | Description |
 | - | - |
 | `prompt` | Text to pre-fill in the prompt box. Must be URL-encoded. The prompt is pre-filled but not submitted automatically. |
-| `session` | A session ID to resume instead of starting a new conversation. The session must belong to the workspace currently open in VS Code. If the session isn't found, a fresh conversation starts instead. If the session is already open in a tab, that tab is focused. To capture a session ID programmatically, see [Continue conversations](https://code.claude.com/docs/en/headless.md#continue-conversations). |
+| `session` | ID of a session to resume, from the folder open in VS Code. With Claude Code v2.1.300 or later, a session from the main checkout or a [worktree](https://code.claude.com/docs/en/worktrees.md) of that folder's repository also resumes. If the session isn't found, a fresh conversation starts instead. If the session is already open in a tab, that tab is focused. To capture a session ID programmatically, see [Continue conversations](https://code.claude.com/docs/en/headless.md#continue-conversations). |
 
 For example, to open a tab pre-filled with "review my changes":
 
@@ -683,7 +714,7 @@ The extension also handles `vscode://anthropic.claude-code/install-plugin`, whic
 You configure the extension in two places, VS Code's extension settings and the Claude Code settings file:
 
 * **Extension settings** in VS Code: control the extension's behavior within VS Code. Open with `Cmd+,` (Mac) or `Ctrl+,` (Windows/Linux), then go to **Extensions > Claude Code**. You can also type `/` and select **General config…** to open settings.
-* **Claude Code settings** in `~/.claude/settings.json`: shared between the extension and CLI. Use it for allowed commands, environment variables, hooks, and MCP servers. With Claude Code v2.1.283 or later, it's also one input to the permission mode conversations start in, and on earlier versions only on Pro, Max, and Team plans. [Switch permission modes](https://code.claude.com/docs/en/permission-modes.md#switch-permission-modes) lists the order. See [Settings](https://code.claude.com/docs/en/settings.md) for details.
+* **Claude Code settings** in `~/.claude/settings.json`: shared between the extension and CLI. Use it for allowed commands, environment variables, hooks, and MCP servers. With Claude Code v2.1.283 or later, you can also use it as one input to the permission mode conversations start in. On earlier versions, you can do this only on Pro, Max, Ultra, and Team plans. [Switch permission modes](https://code.claude.com/docs/en/permission-modes.md#switch-permission-modes) lists the order. See [Settings](https://code.claude.com/docs/en/settings.md) for details.
 
 > [!TIP]
 >
@@ -700,7 +731,8 @@ VS Code reads `initialPermissionMode` from your user settings and ignores worksp
 | `preferredLocation` | `panel` | Where Claude opens: `sidebar` (right) or `panel` (new tab) |
 | `lockEditorGroups` | `true` | [Lock the editor groups Claude starts for its tabs](#choose-where-claude-lives), so files you open while a Claude tab is focused go to another group. When off, the extension never locks an editor group. Requires Claude Code v2.1.274 or later |
 | `autosave` | `true` | Auto-save files before Claude reads or writes them |
-| `attachOpenFile` | `true` | Add the file that is open in the editor to your messages and show it in the prompt box. When off, only your selected text is added. Requires Claude Code v2.1.271 or later |
+| `attachOpenFile` | `true` | Add the file that is open in the editor to your messages and show it in the prompt box. When off, the file is added only along with text you select. Requires Claude Code v2.1.271 or later |
+| `attachSelection` | `true` | Add the text you select in the editor to your messages and show it in the prompt box. When off, you can still [add a selection as an @-mention](#automatic-context-from-your-selection-and-open-file). Requires Claude Code v2.1.300 or later |
 | `useCtrlEnterToSend` | `false` | Use Ctrl/Cmd+Enter instead of Enter to send prompts |
 | `scrollToBottomOnSend` | `true` | Scroll the conversation to the bottom when you send a message. When off, the conversation stays where you left it. Requires Claude Code v2.1.275 or later |
 | `showMessageTimestamps` | `true` | Show when each message was sent. A date line marks where the day changes. Requires Claude Code v2.1.284 or later. Before v2.1.290, the default was `false` |
@@ -711,7 +743,7 @@ VS Code reads `initialPermissionMode` from your user settings and ignores worksp
 | `continueAfterReload` | `true` | After a window reload, Claude [continues the step that was interrupted](#continue-conversations-after-a-reload) in the restored session. Requires Claude Code v2.1.274 or later |
 | `hideOnboarding` | `false` | Hide the onboarding checklist (graduation cap icon) |
 | `focusView` | `false` | Hide tool calls, tool results, and thinking behind expandable rows, leaving your prompts and Claude's responses. Claude's latest to-do list stays visible; this requires Claude Code v2.1.225 or later. You can also toggle Focus view from the command menu. Requires Claude Code v2.1.221 or later |
-| `respectGitIgnore` | `true` | Exclude .gitignore patterns from file searches and from [selection context](#reference-files-and-folders) |
+| `respectGitIgnore` | `true` | Exclude .gitignore patterns from file searches and from [selection context](#selected-text-from-excluded-or-ignored-files) |
 | `usePythonEnvironment` | `true` | Activate the workspace's Python environment when running Claude. Requires the Python extension. |
 | `environmentVariables` | `[]` | Set environment variables for the Claude process. Use Claude Code settings instead for shared config. A [`CLAUDE_CONFIG_DIR`](https://code.claude.com/docs/en/env-vars) entry applies only when its value is an absolute path; the extension doesn't expand `~` and ignores a relative value. |
 | `disableLoginPrompt` | `false` | Skip authentication prompts (for third-party provider setups) |
@@ -841,9 +873,10 @@ The server is named `ide` and is hidden from `/mcp` because there's nothing to c
 
 **Selection and open-file context.** While connected, the CLI includes your current editor selection and the path of the active file as context on each prompt you send. The transcript shows a `⧉ Selected N lines from <file>` line when this happens. These cases change that context:
 
+* **[Attach Selection setting](#keep-your-selection-and-open-file-out-of-your-messages) off**: the CLI doesn't include your selection as context.
+* **Attach Open File setting off**: the CLI includes the active file's path only when it also includes a selection.
 * **Queued messages**: if you [queue a message while Claude works](https://code.claude.com/docs/en/interactive-mode.md#queue-messages-while-claude-works), it keeps the selection you had when you pressed `Enter`, whatever you select afterward.
 * **Sensitive files**: to exclude a sensitive file such as `.env`, add a [`Read` deny rule](https://code.claude.com/docs/en/permissions#read-and-edit) for its path. A matching deny rule prevents both the selected text and the open-file notice for that file from reaching Claude.
-* **Attach Open File turned off**: if you turn off the [Attach Open File setting](#extension-settings), the CLI receives the active file's path only while you have text selected in it.
 
 **Transport and authentication.** The server binds to `127.0.0.1` on a random port in the range 10000–65535, and the port is not configurable. The transport and the auth token work as follows:
 
@@ -903,13 +936,14 @@ Sign-in, network, and launch errors have their own entries on the install troubl
 | `Claude Code process exited with code 1`, or another code | [Claude Code process exited with code N](https://code.claude.com/docs/en/errors.md#claude-code-process-exited-with-code-n) |
 | `Could not locate the Claude CLI on PATH` | [Could not locate the Claude CLI on PATH](https://code.claude.com/docs/en/errors.md#could-not-locate-the-claude-cli-on-path) |
 | `The connection to Claude Code ended before this message completed` | [The connection to Claude Code ended before this message completed](https://code.claude.com/docs/en/errors.md#the-connection-to-claude-code-ended-before-this-message-completed) |
+| `The Claude Code program for this computer, the <build> build, could not be found` | [The Claude Code program for this computer could not be found](https://code.claude.com/docs/en/errors.md#the-claude-code-program-for-this-computer-could-not-be-found) |
 | `claude` isn't found in VS Code's integrated terminal | [Run CLI in VS Code](#run-cli-in-vs-code) |
 
 ### Extension won't install
 
 * Ensure you have a compatible version of VS Code (1.94.0 or later)
 * Check that VS Code has permission to install extensions
-* Try installing directly from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code)
+* Try installing directly from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code)
 
 ### Spark icon not visible
 

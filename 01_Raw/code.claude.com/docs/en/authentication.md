@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/authentication
-fetched_at: 2026-10-26T05:40:00.152043+00:00
+fetched_at: 2026-11-02T07:00:25.696148+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,13 +23,13 @@ After [installing Claude Code](https://code.claude.com/docs/en/setup.md#install-
 
 If the browser doesn't open automatically, press `c` to copy the login URL to your clipboard, then paste it into your browser.
 
-If your browser shows a login code instead of redirecting back after you sign in, paste it into the terminal at the `Paste code here if prompted` prompt. This happens when the browser can't reach Claude Code's local callback server, which is common in WSL2, SSH sessions, and containers.
+If your browser shows a login code instead of redirecting back after you sign in, paste it into the terminal at the `Paste code here if prompted` prompt.
 
 When login completes, the terminal shows `Login successful` and prompts you to press `Enter` to continue.
 
 You can authenticate with any of these account types:
 
-* **Claude Pro or Max subscription**: log in with your claude.ai account. Subscribe at [claude.com/pricing](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=authentication_pro_max).
+* **Claude Pro, Max, or Ultra subscription**: log in with your claude.ai account. Subscribe at [claude.com/pricing](https://claude.com/pricing?utm_source=claude_code\&utm_medium=docs\&utm_content=authentication_pro_max).
 * **Claude for Teams or Enterprise**: log in with the claude.ai account your team admin invited you to.
 * **Claude Console**: log in with your Console credentials. Your admin must have [invited you](#claude-console-authentication) first. You can sign in with or without [creating an API key](#sign-in-without-an-api-key).
 * **Cloud providers**: if your organization uses [Amazon Bedrock](https://code.claude.com/docs/en/amazon-bedrock.md), [Google Cloud's Agent Platform](https://code.claude.com/docs/en/google-vertex-ai.md), or [Microsoft Foundry](https://code.claude.com/docs/en/microsoft-foundry.md), set the required environment variables before running `claude`, or select **3rd-party platform** at the login prompt, which launches an interactive setup wizard for Bedrock and Vertex AI. No browser login is needed.
@@ -133,7 +133,8 @@ In practice, the profile stores an OAuth login while an API key is a static cred
 You don't get the choice on every machine. Claude Code creates an API key without asking in these cases:
 
 * You run against a cloud provider, such as [Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry](https://code.claude.com/docs/en/third-party-integrations.md) or [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md)
-* Any settings file sets [`forceLoginOrgUUID`](#restrict-login-to-your-organization), or sets `forceLoginMethod` to `"claudeai"` or `"console"`
+* Any settings file sets [`forceLoginOrgUUID`](#restrict-login-to-your-organization), or sets `forceLoginMethod` to `"claudeai"`
+* `forceLoginMethod` is `"console"` and no settings file sets `forceLoginOrgUUID`, until you retry from the error screen after a failed sign-in
 * A managed settings source on your machine, such as the managed settings file, an MDM profile, or the cached server-managed settings, exists but Claude Code [can't read it](https://code.claude.com/docs/en/managed-settings.md#invalid-entries-in-managed-settings) and no other managed source supplies a policy
 
 Unset `ANTHROPIC_API_KEY` before you sign in without a key.
@@ -145,6 +146,16 @@ After you sign in without a key, you have a profile instead of a stored API key:
 * **How to undo it**: run `/logout`, which removes and revokes the credential this sign-in wrote
 
 Everything else about profiles applies to this sign-in, including where it ranks against your other credentials, the `Profile` row you get in `/status`, and the features that need a claude.ai login. See [Anthropic profiles and federation credentials](#anthropic-profiles-and-federation-credentials).
+
+#### Stop offering the keyless sign-in on managed machines
+
+To stop Claude Code offering the [keyless sign-in](#sign-in-without-an-api-key), use your device management tooling to deploy [`forceLoginOrgUUID`](https://code.claude.com/docs/en/settings-reference#forceloginorguuid) in [managed settings](https://code.claude.com/docs/en/managed-settings.md) to each developer's machine. Set it to your [Console organization ID](https://platform.claude.com/settings/organization). Before you deploy it, make sure each developer has a [role that can create API keys](#claude-console-authentication). Once you deploy it, a developer without that role can't sign in to Console at `/login`.
+
+With only `forceLoginMethod` set to `"console"`, developers can retry a failed sign-in and choose the keyless option. Once `forceLoginOrgUUID` is deployed, the login screen drops that option, but developers can still use an [Anthropic profile](#anthropic-profiles-and-federation-credentials) they have or create with [`ant auth login`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication). After you deploy it, handle these credentials and logins on each machine:
+
+* **Keyless sign-ins**: to move a developer to an API key, have them log out and then log in to Console again, which creates the key. For a keyless sign-in, they run `claude auth logout` in their shell. For an `ant auth login` profile, they run `ant auth logout`. Claude Code refuses the session if a profile and an API key are both on the machine, so they log out first.
+* **Environment and helper credentials**: Claude Code refuses sessions that authenticate with `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper`, even when managed settings supply them. Remove those credentials, then have developers run `/login` to create a saved API key.
+* **claude.ai logins**: Claude Code [refuses a login](#restrict-login-to-your-organization) to an organization you haven't listed, including one already in use on the machine. To keep one, add it to a `forceLoginOrgUUID` array.
 
 ### Cloud provider authentication
 
@@ -178,7 +189,7 @@ The paths differ on `forceLoginOrgUUID`:
 * **`claude setup-token` and `/install-github-app`**: enforce only `forceLoginMethod`, so they can mint a token in a different organization
 * **[Gateway](https://code.claude.com/docs/en/claude-apps-gateway) sign-in**: selected by `forceLoginMethod: "gateway"` rather than restricted by it, and doesn't authenticate against an Anthropic organization, so `forceLoginOrgUUID` doesn't apply; use your gateway identity provider to restrict access
 
-Deploy the keys through your device management tooling. [Server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md) reach only accounts that are already authenticated into your organization, so they can't redirect a developer's first login. If your organization distributes server-managed settings as well, set the keys in both places: managed-settings sources [don't merge](https://code.claude.com/docs/en/server-managed-settings.md#settings-precedence), and cached server-managed settings replace the device-managed file apart from a few [per-key exceptions](https://code.claude.com/docs/en/server-managed-settings.md#per-key-exceptions-across-managed-sources). `forceLoginOrgUUID` and the `"claudeai"` and `"console"` values of `forceLoginMethod` aren't among those exceptions, so keep them in both places.
+Deploy `forceLoginMethod` and `forceLoginOrgUUID` through your device management tooling. A developer receives [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md) only after authenticating into your organization, so you can't redirect a first login with those settings. If you also distribute server-managed settings from claude.ai, set both keys there too until every client runs v2.1.299 or later. For where to set the keys afterward, and which source's value applies, see [Which managed source supplies login keys](https://code.claude.com/docs/en/managed-settings.md#which-managed-source-supplies-login-keys).
 
 In a [gateway](https://code.claude.com/docs/en/claude-apps-gateway) deployment, also keep `forceLoginMethod` and `forceLoginOrgUUID` out of the [settings the gateway serves](https://code.claude.com/docs/en/claude-apps-gateway-config.md#managed).
 
@@ -248,7 +259,7 @@ When multiple credentials are present, Claude Code chooses one in this order:
 4. [`apiKeyHelper`](https://code.claude.com/docs/en/settings-reference#apikeyhelper) script output. Use this for dynamic or rotating credentials, such as short-lived tokens fetched from a vault.
 5. `CLAUDE_CODE_OAUTH_TOKEN` environment variable. A long-lived OAuth token generated by [`claude setup-token`](#generate-a-long-lived-token). Use this for CI pipelines and scripts where browser login isn't available. If you run `/login` while the variable is set, Claude Code switches the current session to the new login, but reads the variable again in every new session until you remove it from your shell profile or the `env` block of a [settings file](https://code.claude.com/docs/en/settings.md).
 6. Anthropic profile and federation credentials, the credentials that the `ant` CLI and Workload Identity Federation use. A profile that `ant auth login` wrote ranks here only when you name it in `ANTHROPIC_PROFILE`; otherwise it ranks below `/login`. See [Anthropic profiles and federation credentials](#anthropic-profiles-and-federation-credentials).
-7. Subscription OAuth credentials from `/login`. This is the default for Claude Pro, Max, Team, and Enterprise users.
+7. Subscription OAuth credentials from `/login`. This is the default for Claude Pro, Max, Ultra, Team, and Enterprise users.
 
 A signed-in [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway) session sits outside this list: it is a provider selection like Amazon Bedrock or Google Cloud's Agent Platform, and it outranks them. When a gateway session exists, the CLI authenticates with the gateway token even if `CLAUDE_CODE_USE_BEDROCK`, `CLAUDE_CODE_USE_VERTEX`, or `CLAUDE_CODE_USE_FOUNDRY` is set, and credential sources above such as the bearer token, API key, `apiKeyHelper`, and profiles are not used.
 
@@ -295,24 +306,24 @@ claude setup-token
 
 The command opens the same browser authorization flow as `/login`, and the token prints to the terminal after you approve access in the browser. It does not save the token anywhere; copy it and set it as the `CLAUDE_CODE_OAUTH_TOKEN` environment variable wherever you want to authenticate:
 
-**macOS, Linux, WSL**
+> [tab] macOS, Linux, WSL
+>
+> ```bash theme={null}
+> export CLAUDE_CODE_OAUTH_TOKEN=your-token
+> ```
 
-```bash theme={null}
-export CLAUDE_CODE_OAUTH_TOKEN=your-token
-```
+> [tab] Windows PowerShell
+>
+> ```powershell theme={null}
+> $env:CLAUDE_CODE_OAUTH_TOKEN = "your-token"
+> ```
 
-**Windows PowerShell**
+> [tab] Windows CMD
+>
+> ```batch theme={null}
+> set CLAUDE_CODE_OAUTH_TOKEN=your-token
+> ```
 
-```powershell theme={null}
-$env:CLAUDE_CODE_OAUTH_TOKEN = "your-token"
-```
-
-**Windows CMD**
-
-```batch theme={null}
-set CLAUDE_CODE_OAUTH_TOKEN=your-token
-```
-
-This token authenticates with your Claude subscription and requires a Pro, Max, Team, or Enterprise plan. It can only make model requests, so it can't establish [Remote Control](https://code.claude.com/docs/en/remote-control.md) sessions or fetch [claude.ai connectors](https://code.claude.com/docs/en/mcp.md#use-mcp-servers-from-claude-ai). MCP servers you configure locally still work.
+This token authenticates with your Claude subscription and requires a Pro, Max, Ultra, Team, or Enterprise plan. It can only make model requests, so it can't establish [Remote Control](https://code.claude.com/docs/en/remote-control.md) sessions or fetch [claude.ai connectors](https://code.claude.com/docs/en/mcp.md#use-mcp-servers-from-claude-ai). MCP servers you configure locally still work.
 
 [Bare mode](https://code.claude.com/docs/en/headless.md#start-faster-with-bare-mode) does not read `CLAUDE_CODE_OAUTH_TOKEN`. If your script passes `--bare`, authenticate with `ANTHROPIC_API_KEY` or an `apiKeyHelper` instead.

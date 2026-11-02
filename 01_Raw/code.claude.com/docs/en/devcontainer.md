@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/devcontainer
-fetched_at: 2026-10-26T05:40:01.833440+00:00
+fetched_at: 2026-11-02T07:00:26.119493+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,7 +23,7 @@ This page covers [installing Claude Code in a dev container](#add-claude-code-to
 > Only use dev containers when developing with trusted repositories, and monitor Claude's activities.
 > Avoid mounting host secrets such as `~/.ssh` or cloud credential files into the container; prefer repository-scoped or short-lived tokens.
 
-> **How dev containers work with your editor**
+> [accordion] How dev containers work with your editor
 >
 > ![Diagram showing an editor on the host connecting to a Docker dev container. Claude Code, the terminal, and build tools run inside the container. The host repository is bind-mounted into the container as the workspace.](https://mintcdn.com/claude-code/YvJyjZfd9yMihr0i/images/devcontainer-architecture.svg?fit=max\&auto=format\&n=YvJyjZfd9yMihr0i\&q=85\&s=9017b1d16a446c6cc37ba562f35b9aae)
 >
@@ -85,7 +85,7 @@ See [Choose your API provider](https://code.claude.com/docs/en/admin-setup.md#ch
 
 > [!NOTE]
 >
-> If the browser sign-in completes but the callback never reaches the container, copy the code shown in the browser and paste it at the `Paste code here if prompted` prompt in the terminal. This can happen when the editor's port forwarding doesn't route the localhost callback.
+> For the Anthropic sign-in: if no browser opens, or it signs you in and then shows a `localhost` connection error, use the login URL shown above the terminal's paste prompt. Copy it into your browser, sign in there, then paste the code the browser shows into that prompt. If pasting does nothing, see [OAuth login fails in WSL2, SSH, or containers](https://code.claude.com/docs/en/troubleshoot-install.md#oauth-login-fails-in-wsl2-ssh-or-containers).
 
 ## Persist authentication and settings across rebuilds
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/agent-loop
-fetched_at: 2026-10-26T05:39:58.305718+00:00
+fetched_at: 2026-11-02T07:00:25.407729+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,14 +27,14 @@ Every agent session follows the same cycle:
 1. **Receive prompt.** Claude receives your prompt, along with the system prompt, tool definitions, and conversation history. The SDK yields a [`SystemMessage`](#message-types) with subtype `"init"` containing session metadata.
 2. **Evaluate and respond.** Claude evaluates the current state and determines how to proceed. It may respond with text, request one or more tool calls, or both. The SDK yields one or more [`AssistantMessage`](#message-types) objects, one for each content block, such as a text block or a tool call request.
 3. **Execute tools.** The SDK runs each requested tool and collects the results. Each set of tool results feeds back to Claude for the next decision. You can use [hooks](https://code.claude.com/docs/en/agent-sdk/hooks.md) to intercept, modify, or block tool calls before they run.
-4. **Repeat.** Steps 2 and 3 repeat as a cycle. Each full cycle is one turn. Claude continues calling tools and processing results until it produces a response with no tool calls.
+4. **Repeat.** Steps 2 and 3 repeat as a cycle. Claude continues calling tools and processing results until it produces a response with no tool calls.
 5. **Return result.** The SDK yields a final [`AssistantMessage`](#message-types) with the text response (no tool calls), followed by a [`ResultMessage`](#message-types) with the final text, token usage, cost, and session ID.
 
-A quick question ("what files are here?") might take one or two turns of calling `Glob` and responding with the results. A complex task ("refactor the auth module and update the tests") can chain dozens of tool calls across many turns, reading files, editing code, and running tests, with Claude adjusting its approach based on each result.
+A quick question such as "what files are here?" might take two or three [turns](#turns-and-messages): one or two calling `Glob`, then one responding with the results. A complex task such as "refactor the auth module and update the tests" can chain dozens of tool calls across many turns as Claude adjusts after each result.
 
 ## Turns and messages
 
-A turn is one round trip inside the loop: Claude produces output that includes tool calls, the SDK executes those tools, and the results feed back to Claude automatically. This happens without yielding control back to your code. Turns continue until Claude produces output with no tool calls, at which point the loop ends and the final result is delivered.
+A turn is one pass through the loop: Claude produces output, and if it includes tool calls, the SDK executes them and the results feed back to Claude automatically. This happens without yielding control back to your code. Turns continue until Claude produces output with no tool calls, at which point the loop ends and the final result is delivered.
 
 Consider what a full session might look like for the prompt "Fix the failing tests in auth.ts".
 
@@ -47,7 +47,7 @@ First, the SDK sends your prompt to Claude and yields a [`SystemMessage`](#messa
 
 That was four turns: three with tool calls, one final text-only response.
 
-You can cap the loop with `max_turns` / `maxTurns`, which counts tool-use turns only. For example, `max_turns=2` in the loop above would have stopped before the edit step. You can also use `max_budget_usd` / `maxBudgetUsd` to cap turns based on a spend threshold.
+You can cap the loop with `max_turns` / `maxTurns`. Count each turn with tool calls, plus one for the final text-only response. Without that extra turn, the run ends with a `ResultMessage` of subtype `error_max_turns` and no final response. For example, `max_turns=2` in the loop above would have stopped before the edit step. You can also use `max_budget_usd` / `maxBudgetUsd` to cap turns based on a spend threshold.
 
 Without limits, the loop runs until Claude finishes on its own, which is fine for well-scoped tasks but can run long on open-ended prompts ("improve this codebase"). Setting a budget is a good default for production agents. See [Turns and budget](#turns-and-budget) below for the option reference.
 
@@ -83,7 +83,7 @@ How you check message types depends on the SDK:
 * **Python:** check message types with `isinstance()` against classes imported from `claude_agent_sdk` (for example, `isinstance(message, ResultMessage)`).
 * **TypeScript:** check the `type` string field (for example, `message.type === "result"`). `AssistantMessage` and `UserMessage` wrap the raw API message in a `.message` field, so content blocks are at `message.message.content`, not `message.content`.
 
-> **Example: Check message types and handle results**
+> [accordion] Example: Check message types and handle results
 >
 > ```python Python theme={null}
 > import asyncio
@@ -197,7 +197,7 @@ You can limit how many turns the loop takes, how much it costs, how deeply Claud
 
 | Option | What it controls | Default |
 | :- | :- | :- |
-| Max turns (`max_turns` / `maxTurns`) | Maximum tool-use round trips | No limit |
+| Max turns (`max_turns` / `maxTurns`) | Maximum number of [turns](#turns-and-messages) | No limit |
 | Max budget (`max_budget_usd` / `maxBudgetUsd`) | Estimated spend at which the loop stops | No limit |
 
 When either limit is hit, the SDK returns a `ResultMessage` with a corresponding error subtype (`error_max_turns` or `error_max_budget_usd`). See [Handle the result](#handle-the-result) for how to check these subtypes and [`ClaudeAgentOptions`](https://code.claude.com/docs/en/agent-sdk/python#claudeagentoptions) / [`Options`](https://code.claude.com/docs/en/agent-sdk/typescript#options) for syntax.
@@ -239,9 +239,9 @@ The permission mode option (`permission_mode` in Python, `permissionMode` in Typ
 | `"default"` | Tool calls that need approval and aren't covered by allow rules trigger your `canUseTool` callback; no callback means deny | Interactive applications with a custom approval callback |
 | `"acceptEdits"` | Auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.); other Bash commands follow default rules | You trust Claude's edits and want faster iteration, such as during prototyping or when working in an isolated directory |
 | `"plan"` | Claude explores and plans without editing your source files; file edits are never auto-approved and prompt through your `canUseTool` callback | You want Claude to propose changes without executing them, such as during code review or when you need to approve changes before they're made |
-| `"dontAsk"` | Never prompts. Tools pre-approved by [permission rules](https://code.claude.com/docs/en/settings-reference.md#permission-settings) run, and so do calls that need no approval in `default` mode, such as file reads inside your working directories. Every call that would otherwise prompt is denied, though a [mod](https://code.claude.com/docs/en/plugins/mods/overview.md) you installed can still approve [some of those calls](https://code.claude.com/docs/en/permissions.md#precedence-among-rules-hooks-and-mods). `AskUserQuestion`, connector tools [your organization set to `ask`](https://code.claude.com/docs/en/mcp#organization-controls-on-connector-tools), MCP tools marked [`requiresUserInteraction`](https://code.claude.com/docs/en/mcp#require-approval-for-a-specific-tool), and [reads from network paths](https://code.claude.com/docs/en/permissions.md#network-paths) are denied even if you've allowed them | You want a fixed, explicit tool surface for a headless agent and prefer a hard deny over silent reliance on `canUseTool` being absent |
+| `"dontAsk"` | Never prompts. Tools pre-approved by [permission rules](https://code.claude.com/docs/en/settings-reference.md#permission-settings) run, and so do calls that need no approval in `default` mode, such as file reads inside your working directories. Every call that would otherwise prompt is denied, though a [mod](https://code.claude.com/docs/en/plugins/mods/overview.md) you installed can still approve [some of those calls](https://code.claude.com/docs/en/permissions.md#precedence-among-rules-hooks-and-mods). A few calls, such as [reads from network paths](https://code.claude.com/docs/en/permissions.md#network-paths), are denied even if you've allowed them. For the list, see [Don't ask mode](https://code.claude.com/docs/en/agent-sdk/permissions.md#don’t-ask-mode-dontask) | Headless agents with nobody to approve calls |
 | `"auto"` | Uses a model classifier to review actions such as shell commands and network requests, allowing or blocking each one it reviews. See [Auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) for availability and the decision order | Autonomous agents that still want safety guardrails on tool use |
-| `"bypassPermissions"` | Runs all allowed tools without asking, except tools matched by an explicit [`ask` rule](https://code.claude.com/docs/en/settings-reference#permission-settings), connector tools [your organization set to `ask`](https://code.claude.com/docs/en/mcp#organization-controls-on-connector-tools), and tools that require user interaction. The [cross-session messaging safeguards](https://code.claude.com/docs/en/permission-modes.md#skip-all-checks-with-bypasspermissions-mode) still apply. See [How permissions are evaluated](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated) for the precedence order. In the TypeScript SDK, also requires `allowDangerouslySkipPermissions: true` in `options`. Can't be used when running as root on Unix. Use only in isolated environments where the agent's actions can't affect systems you care about | CI, containers, or other isolated environments |
+| `"bypassPermissions"` | Runs tool calls without asking for approval, including calls to tools you didn't list in `allowedTools`. A few calls still go to your `canUseTool` callback, listed under [Bypass permissions mode](https://code.claude.com/docs/en/agent-sdk/permissions.md#bypass-permissions-mode-bypasspermissions). In the TypeScript SDK, also requires `allowDangerouslySkipPermissions: true` in `options`. Can't be used when running as root on Unix. Use only in isolated environments where the agent's actions can't affect systems you care about | CI, containers, or other isolated environments |
 
 For interactive applications, use `"default"` with a tool approval callback to surface approval prompts. For autonomous agents on a dev machine, `"acceptEdits"` auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.) while still gating other `Bash` commands behind allow rules. Reserve `"bypassPermissions"` for CI, containers, or other isolated environments. See [Permissions](https://code.claude.com/docs/en/agent-sdk/permissions.md) for full details.
 
@@ -279,7 +279,7 @@ You can customize compaction behavior in several ways:
 * **`PreCompact` hook:** Run custom logic before compaction occurs, for example to archive the full transcript. The hook receives a `trigger` field (`manual` or `auto`). See [hooks](https://code.claude.com/docs/en/agent-sdk/hooks.md).
 * **Manual compaction:** Send `/compact` as a prompt string to trigger compaction on demand. Commands sent this way are ordinary SDK inputs. See [dispatch commands by name](https://code.claude.com/docs/en/agent-sdk/skills.md#dispatch-commands-by-name).
 
-> **Example: Summarization instructions in CLAUDE.md**
+> [accordion] Example: Summarization instructions in CLAUDE.md
 >
 > Add a section to your project's CLAUDE.md telling the compactor what to preserve. The header name isn't special; use any clear label.
 >

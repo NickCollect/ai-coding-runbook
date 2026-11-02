@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/self-hosted-environments-configuration
-fetched_at: 2026-10-26T05:40:05.191862+00:00
+fetched_at: 2026-11-02T07:00:26.840022+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,10 +24,10 @@ A few hook environment variables on this page still use `pool`, such as `CLAUDE_
 
 Use a wrapper script when each session needs setup the runner can't do on its own: provisioning short-lived credentials scoped to the session creator, exporting environment-specific secrets, preparing language toolchains, or applying resource limits around the child process. The runner starts your wrapper in place of the Claude Code binary, once per session. End the wrapper by `exec`-ing into `$CLAUDE_RUNNER_CLAUDE_BIN`, the runner's own binary, so signals and exit codes propagate correctly.
 
-Point `--exec-path`, or `SELF_HOSTED_RUNNER_EXEC_PATH`, at the wrapper when you start the runner:
+Point `--exec-path`, or `SELF_HOSTED_RUNNER_EXEC_PATH`, at the wrapper when you start the runner, replacing `<writable-dir>` as the [quickstart](https://code.claude.com/docs/en/self-hosted-environments-quickstart.md#set-up-manually) describes:
 
 ```bash theme={null}
-claude self-hosted-runner --environment-secret-file /etc/claude/environment-secret --exec-path /etc/claude/session-wrapper.sh
+claude self-hosted-runner --environment-secret-file /etc/claude/environment-secret --base-dir '<writable-dir>' --exec-path /etc/claude/session-wrapper.sh
 ```
 
 The runner sets the following in the wrapper's environment:
@@ -48,6 +48,7 @@ The runner sets the following in the wrapper's environment:
 | `CLAUDE_CODE_REMOTE_MCP_CONFIG` | Path to a file in `CLAUDE_CONFIG_DIR` holding the MCP server definitions that Anthropic's control plane delivered for this session. If your wrapper rebuilds the child's environment, carry this variable over. Without it, when the control plane updates the delivered servers, the child shuts down any stdio, HTTP, or SSE server your wrapper adds with [`--mcp-config`](https://code.claude.com/docs/en/cli-reference#cli-flags) that isn't in the update. Requires Claude Code v2.1.299 or later. |
 | `ANTHROPIC_BASE_URL` | The API base URL the child will use, delivered by the control plane per session and normally `https://api.anthropic.com`. Don't override it: the session's inference credential is an Anthropic-issued OAuth token that other providers don't accept. |
 | `CLAUDE_CODE_OAUTH_TOKEN` | The short-lived OAuth access token the child uses for model inference, with a lifetime of about 30 minutes. The runner re-mints it before expiry and delivers the rotation over the child's stdin, so a wrapper that doesn't [keep stdin attached](#keep-stdin-and-file-descriptor-3-attached) sees only the initial value. Don't rely on your organization's IP allowlist to bound this token's use: treat it as a bearer credential that stays usable for roughly 30 minutes if it leaks, and don't log it, write it to disk, or forward it outside the session container. |
+| `CLAUDE_RUNNER_ALIVE_EVERY_MS` | The runner sets how often, in milliseconds, the child reports that it's alive when a [turn starts before the child initializes](https://code.claude.com/docs/en/self-hosted-environments-reference.md#session-startup-timeout). If your wrapper rebuilds the child's environment, carry this variable over, or the runner can release the session during that turn and log `no child output for <n> — releasing`. Requires v2.1.309 or later on the runner and child. |
 
 The wrapper also inherits the rest of the child's managed environment, including any server-provided environment variables. `exec` propagates all of it automatically; if your wrapper spawns the child another way, forward the full environment.
 
@@ -313,7 +314,7 @@ The orchestrator runs `${hooks-dir}/spawn-runner` once per spawn request. The ho
 | `CLAUDE_RUNNER_ATTEMPT` | A per-session counter to use for logging. It isn't a retry count or a request count. `0` for pre-warming requests, though a request for a session can carry `0` too. |
 | `CLAUDE_RUNNER_ORDER_SERVER_TIME` | Server time from the poll response's HTTP `Date` header. When the hook verifies the work-order JWT's `exp`, compare against this value instead of the local clock to tolerate skew. Empty when the gateway omitted the header. |
 | `CLAUDE_RUNNER_POOL_ID` | The ID of the environment the new runner should join, in `ccpool_...` form |
-| `CLAUDE_RUNNER_ACCOUNT_ID` | Tagged ID of the account that enqueued the session. Use it for per-account routing, quota, or chargeback, not as a dedup key. Empty when unavailable, and always empty for Claude Tag channel sessions, which no account enqueues. |
+| `CLAUDE_RUNNER_ACCOUNT_ID` | Tagged ID of the account that enqueued the session. Use it for per-account routing, quota, or chargeback, not as a dedup key. Empty when unavailable. |
 | `CLAUDE_RUNNER_ACCOUNT_EMAIL` | Email of the account that enqueued the session. Empty when unavailable. Treat the email as personally identifiable information and don't log it. |
 | `CLAUDE_RUNNER_PRIMARY_REPO_URL` | URL of the session's first git source, for routing to a runner with that repository pre-warmed. Empty when the session has no git sources. |
 | `CLAUDE_RUNNER_PRIMARY_REPO_REVISION` | Revision of the session's first git source: branch, SHA, tag, or full reference name. Empty when unspecified. |
@@ -387,7 +388,7 @@ By default, a runner your hook starts doesn't exit when its session's turn finis
 
 | Flag, with an example value | Pass it to | What it does |
 | :- | :- | :- |
-| `--release-idle-session-min 30` | Every runner your hook starts | The runner releases its session after that many idle minutes and then exits 0. The session resumes when its user sends their next message, but [work it hadn't pushed is gone](https://code.claude.com/docs/en/self-hosted-environments-deploy.md#additional-limitations). |
+| `--release-idle-session-min 30` | Every runner your hook starts | The runner releases its session after that many idle minutes and then exits 0. The session resumes when its user sends their next message, but [work it hadn't pushed is gone](https://code.claude.com/docs/en/self-hosted-environments-deploy.md#resumed-sessions-lose-unpushed-work). [Hold a session](https://code.claude.com/docs/en/self-hosted-environments-deploy.md#keep-an-idle-session-while-its-processes-run) for processes it left running. |
 | `--kill-session-after-min 480` | Every runner your hook starts | Limits each session to that many minutes, as a backstop for [sessions that don't count as idle](https://code.claude.com/docs/en/self-hosted-environments-deploy.md#some-sessions-don’t-count-as-idle), so set it above your longest expected session |
 | `--exit-if-unused-min 60` | Standby runners, which your hook starts for pre-warming requests | A standby that never takes a session exits after that many minutes. If you set [`--min-idle`](https://code.claude.com/docs/en/self-hosted-environments-reference#orchestrator-cli-flags), you get a replacement unless the standby was surplus, so use a value well above your boot time. |
 
@@ -463,6 +464,39 @@ These lines change how the rest of the hook behaves, so check it for each of the
 
 To confirm the trap works, add a line directly below the `trap` line that calls a command that doesn't exist, such as `no-such-command`. Run the hook file from your shell and check that `echo $?` prints `1`, then remove the line.
 
+### Stop or restart the orchestrator
+
+To stop or restart the orchestrator without cutting off running `spawn-runner` hooks, start it with [`--shutdown-drain-sec`](https://code.claude.com/docs/en/self-hosted-environments-reference#orchestrator-cli-flags). On `SIGTERM` it then gives running hooks up to the number of seconds you set to finish. To choose the value and set up your process supervisor to match, see [Size `--shutdown-drain-sec` and the orchestrator's stop timeout](#size-shutdown-drain-sec-and-the-supervisors-stop-timeout-for-the-orchestrator).
+
+This start command allows 70 seconds:
+
+```bash theme={null}
+claude self-hosted-runner orchestrator \
+  --environment-secret-file /etc/claude/environment-secret \
+  --hooks-dir /etc/claude/hooks \
+  --shutdown-drain-sec 70
+```
+
+The orchestrator exits once the poll already sent and every hook have finished. When the `--shutdown-drain-sec` seconds are up, hooks still running get `SIGTERM` and the orchestrator exits. A second `SIGTERM` or any `SIGINT` does the same without waiting. The log line containing `[runner:orchestrator] stop summary:` counts hooks and spawn requests by how each one ended.
+
+Without `--shutdown-drain-sec`, the orchestrator stops immediately on `SIGTERM` or `SIGINT`. Each running hook gets `SIGTERM`, and Anthropic is told nothing. A session whose runner never got started can then sit in the queue until Anthropic [re-requests it](#the-spawn-runner-hook), which happens once `--expected-spawn-seconds` has passed, 120 seconds by default.
+
+> [!NOTE]
+>
+> `--shutdown-drain-sec` requires Claude Code v2.1.299 or later. An older version exits at startup with `error: unknown flag --shutdown-drain-sec`.
+
+#### Size `--shutdown-drain-sec` and the orchestrator's stop timeout
+
+At default settings, use [`--shutdown-drain-sec 70`](https://code.claude.com/docs/en/self-hosted-environments-reference#orchestrator-cli-flags) with a stop timeout of 85 seconds, meaning `terminationGracePeriodSeconds: 85` on Kubernetes or `TimeoutStopSec=85` under systemd. If you changed `--hook-timeout`, scale both:
+
+* **`--shutdown-drain-sec`**: at least `--hook-timeout` plus 10 seconds, so a hook that started right before `SIGTERM` can still finish
+* **Stop timeout**: at least `--shutdown-drain-sec` plus 15 seconds. The orchestrator logs this figure at startup: look for the line that contains `shutdown drain:`.
+
+Have your process supervisor send a single `SIGTERM`, to the orchestrator process alone, because a second one cuts the `--shutdown-drain-sec` wait short. If you leave systemd's default [`KillMode=control-group`](https://code.claude.com/docs/en/self-hosted-environments-deploy#what-reaches-a-running-post-session-hook) in place, the hooks get `SIGTERM` too, and a hook can die before it submits its workload. Before you change `KillMode`, check how your `spawn-runner` hook starts runners:
+
+* **If your hook submits its workload to a platform and exits**: run the orchestrator as the unit's main process and set `KillMode=mixed`, which sends `SIGTERM` to that process alone.
+* **If your hook starts runners as processes in the orchestrator's own unit**: `KillMode=mixed` sends those runners no `SIGTERM`. Instead systemd later sends them `SIGKILL`, so they exit without draining their sessions or running their `post-session` hook.
+
 ## Send model requests to Bedrock or Agent Platform
 
 If your organization needs model requests to go through its own AWS or Google Cloud account, configure the runner for [Amazon Bedrock](https://code.claude.com/docs/en/amazon-bedrock.md) or [Google Cloud's Agent Platform, formerly Vertex AI](https://code.claude.com/docs/en/google-vertex-ai.md). Every session that runner starts then calls the model in your cloud account, with your cloud credentials. Without this configuration, sessions send model requests to the Anthropic API.
@@ -503,28 +537,28 @@ Set exactly one provider's variables where you set the runner's other environmen
 
 Start these runners with [`--confine-repo-settings enforce`](https://code.claude.com/docs/en/self-hosted-environments-deploy#harden-your-deployment). It refuses sessions on repositories whose committed settings it flags, so run in the default `warn` mode first and clear what it logs.
 
-**Amazon Bedrock**
+> [tab] Amazon Bedrock
+>
+> Replace the region with your own:
+>
+> ```bash theme={null}
+> export CLAUDE_CODE_USE_BEDROCK=1
+> export AWS_REGION=us-east-1
+> ```
+>
+> For how Claude Code resolves the region, see [Configure Claude Code](https://code.claude.com/docs/en/amazon-bedrock.md#3-configure-claude-code). For which inference profile prefix Claude Code uses for your region, see [Cross-region inference profile prefixes](https://code.claude.com/docs/en/amazon-bedrock.md#cross-region-inference-profile-prefixes).
 
-Replace the region with your own:
-
-```bash theme={null}
-export CLAUDE_CODE_USE_BEDROCK=1
-export AWS_REGION=us-east-1
-```
-
-For how Claude Code resolves the region, see [Configure Claude Code](https://code.claude.com/docs/en/amazon-bedrock.md#3-configure-claude-code). For which inference profile prefix Claude Code uses for your region, see [Cross-region inference profile prefixes](https://code.claude.com/docs/en/amazon-bedrock.md#cross-region-inference-profile-prefixes).
-
-**Google Cloud's Agent Platform**
-
-Replace the region and project ID with your own:
-
-```bash theme={null}
-export CLAUDE_CODE_USE_VERTEX=1
-export CLOUD_ML_REGION=global
-export ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID
-```
-
-To choose a region, see [Region configuration](https://code.claude.com/docs/en/google-vertex-ai.md#region-configuration).
+> [tab] Google Cloud's Agent Platform
+>
+> Replace the region and project ID with your own:
+>
+> ```bash theme={null}
+> export CLAUDE_CODE_USE_VERTEX=1
+> export CLOUD_ML_REGION=global
+> export ANTHROPIC_VERTEX_PROJECT_ID=YOUR-PROJECT-ID
+> ```
+>
+> To choose a region, see [Region configuration](https://code.claude.com/docs/en/google-vertex-ai.md#region-configuration).
 
 **4. Check that the variables reached a session**
 
@@ -734,7 +768,7 @@ The Stop hook only prompts Claude. For the commit and push to work, set up:
 
 * **A git identity**: set `user.name` and `user.email` in your runner image, or start the runner with [`--configure-git`](https://code.claude.com/docs/en/self-hosted-environments-deploy#let-the-runner-configure-git)
 * **Push credentials**: use [Anthropic-managed git](https://code.claude.com/docs/en/self-hosted-environments-deploy.md#use-the-anthropic-git-proxy), or supply credentials as [Ship git config in your image](https://code.claude.com/docs/en/self-hosted-environments-deploy.md#ship-git-config-in-your-image) describes
-* **For resumed sessions**: set [`--push-outcome-on-release`](https://code.claude.com/docs/en/self-hosted-environments-reference#runner-cli-flags) on every runner in the environment. A resumed session then starts from the commits that Claude pushed to the session's branch. For the flag's limits, see [Resumed sessions lose unpushed work](https://code.claude.com/docs/en/self-hosted-environments-deploy.md#additional-limitations).
+* **For resumed sessions**: set [`--push-outcome-on-release`](https://code.claude.com/docs/en/self-hosted-environments-reference#runner-cli-flags) on every runner in the environment. A resumed session then starts from the commits that Claude pushed to the session's branch. For the flag's limits, see [Resumed sessions lose unpushed work](https://code.claude.com/docs/en/self-hosted-environments-deploy.md#resumed-sessions-lose-unpushed-work).
 
 The Stop hook prompts at most once per turn. If the commit or push fails, the turn still ends. Look for git's error in the session and fix what it names.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/security
-fetched_at: 2026-10-26T05:40:04.672991+00:00
+fetched_at: 2026-11-02T07:00:26.746996+00:00
 fetch_method: mintlify_md
 ---
 
@@ -82,7 +82,7 @@ These marketplace names make up the official tier:
 * `first-party-plugins`
 * `claude-tag-plugins`
 
-For how the official, community, and demo marketplaces differ and where to browse what each one lists, see [Anthropic's marketplaces](https://code.claude.com/docs/en/plugins/anthropic-marketplaces.md).
+For how the official and community marketplaces differ and where to browse what each one lists, see [Anthropic's marketplaces](https://code.claude.com/docs/en/plugins/anthropic-marketplaces.md).
 
 ## Review a plugin before you install
 

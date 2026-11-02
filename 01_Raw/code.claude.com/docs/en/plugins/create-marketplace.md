@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/create-marketplace
-fetched_at: 2026-10-26T05:40:03.802953+00:00
+fetched_at: 2026-11-02T07:00:26.583738+00:00
 fetch_method: mintlify_md
 ---
 
@@ -226,7 +226,7 @@ To remove everything and start over, run `claude plugin marketplace remove my-ma
 
 ## Host your marketplace
 
-Once you can install a plugin from the marketplace on your own machine, as in [Create a marketplace](#create-a-marketplace), push the marketplace directory to a git host.
+Once you can install a plugin from the marketplace on your own machine, as in [Create a marketplace](#create-a-marketplace), push the marketplace directory to a git host. Before you push, give the marketplace a top-level `name` that other authors are unlikely to pick, because a user [can't have two marketplaces with the same name](https://code.claude.com/docs/en/plugins/marketplace-reference.md#marketplace-file).
 
 Your teammates then run `claude plugin marketplace add <owner>/<repo>` in their shell for a GitHub repository, or the same command with the repository URL. They then install a plugin by name as in [the walkthrough](#create-a-marketplace).
 

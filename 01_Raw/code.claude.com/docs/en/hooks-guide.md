@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/hooks-guide
-fetched_at: 2026-10-26T05:40:02.669064+00:00
+fetched_at: 2026-11-02T07:00:26.265939+00:00
 fetch_method: mintlify_md
 ---
 
@@ -95,93 +95,93 @@ This hook uses the `Notification` event, which Claude Code fires when Claude is 
 
 Each tab below uses the platform's native notification command. Add this to `~/.claude/settings.json`:
 
-**macOS**
-
-```json theme={null}
-{
-  "hooks": {
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-> **If no notification appears**
+> [tab] macOS
 >
-> `osascript` routes notifications through the built-in Script Editor app. If Script Editor doesn't have notification permission, the command fails silently, and macOS won't prompt you to grant it.
->
-> Run this in Terminal once to make Script Editor appear in your notification settings:
->
-> ```bash theme={null}
-> osascript -e 'display notification "test"'
+> ```json theme={null}
+> {
+>   "hooks": {
+>     "Notification": [
+>       {
+>         "matcher": "",
+>         "hooks": [
+>           {
+>             "type": "command",
+>             "command": "osascript -e 'display notification \"Claude Code needs your attention\" with title \"Claude Code\"'"
+>           }
+>         ]
+>       }
+>     ]
+>   }
+> }
 > ```
 >
-> Nothing will appear yet. Open **System Settings > Notifications**, find **Script Editor** in the list, and turn on **Allow Notifications**. Run the command again to confirm the test notification appears.
+> > [accordion] If no notification appears
+> >
+> > `osascript` routes notifications through the built-in Script Editor app. If Script Editor doesn't have notification permission, the command fails silently, and macOS won't prompt you to grant it.
+> >
+> > Run this in Terminal once to make Script Editor appear in your notification settings:
+> >
+> > ```bash theme={null}
+> > osascript -e 'display notification "test"'
+> > ```
+> >
+> > Nothing will appear yet. Open **System Settings > Notifications**, find **Script Editor** in the list, and turn on **Allow Notifications**. Run the command again to confirm the test notification appears.
 
-**Linux**
-
-```json theme={null}
-{
-  "hooks": {
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "notify-send 'Claude Code' 'Claude Code needs your attention'"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-> **If no notification appears**
+> [tab] Linux
 >
-> `notify-send` needs a desktop notification daemon, which headless servers, SSH sessions, and most containers don't have. Test the command directly first:
->
-> ```bash theme={null}
-> notify-send 'Claude Code' 'test'
+> ```json theme={null}
+> {
+>   "hooks": {
+>     "Notification": [
+>       {
+>         "matcher": "",
+>         "hooks": [
+>           {
+>             "type": "command",
+>             "command": "notify-send 'Claude Code' 'Claude Code needs your attention'"
+>           }
+>         ]
+>       }
+>     ]
+>   }
+> }
 > ```
 >
-> If the command isn't found, install the `libnotify-bin` package on Debian and Ubuntu, or your distribution's equivalent.
+> > [accordion] If no notification appears
+> >
+> > `notify-send` needs a desktop notification daemon, which headless servers, SSH sessions, and most containers don't have. Test the command directly first:
+> >
+> > ```bash theme={null}
+> > notify-send 'Claude Code' 'test'
+> > ```
+> >
+> > If the command isn't found, install the `libnotify-bin` package on Debian and Ubuntu, or your distribution's equivalent.
 
-**Windows (PowerShell)**
-
-```json theme={null}
-{
-  "hooks": {
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "powershell.exe -Command \"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\""
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-> **If no dialog appears**
+> [tab] Windows (PowerShell)
 >
-> This command opens a dialog box rather than a notification in the corner of your screen, so the dialog can open behind your terminal window. Test the command directly in PowerShell first.
+> ```json theme={null}
+> {
+>   "hooks": {
+>     "Notification": [
+>       {
+>         "matcher": "",
+>         "hooks": [
+>           {
+>             "type": "command",
+>             "command": "powershell.exe -Command \"[System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms'); [System.Windows.Forms.MessageBox]::Show('Claude Code needs your attention', 'Claude Code')\""
+>           }
+>         ]
+>       }
+>     ]
+>   }
+> }
+> ```
 >
-> If you run Claude Code inside WSL, `powershell.exe` must be available on your `PATH` through Windows interop.
+> > [accordion] If no dialog appears
+> >
+> > This command opens a dialog box rather than a notification in the corner of your screen, so the dialog can open behind your terminal window. Test the command directly in PowerShell first.
+> >
+> > If you run Claude Code inside WSL, `powershell.exe` must be available on your `PATH` through Windows interop.
 
 The empty `matcher` fires on all notification types. To fire only on specific events, set it to one of these values:
 
@@ -635,6 +635,7 @@ On `PreToolUse`, you can also return `"ask"` to show the user the normal permiss
 
 * Reads from [network paths](https://code.claude.com/docs/en/permissions.md#network-paths)
 * MCP tools marked [`requiresUserInteraction`](https://code.claude.com/docs/en/mcp#require-approval-for-a-specific-tool)
+* Calls to [tools an Agent SDK app marks `always_ask`](https://code.claude.com/docs/en/agent-sdk/custom-tools#require-approval-for-specific-tools), unless the [permission mode approves the call](https://code.claude.com/docs/en/agent-sdk/typescript.md#permission-modes-that-can-approve-an-always_ask-call)
 * Connector tools [your organization set to `ask`](https://code.claude.com/docs/en/mcp#organization-controls-on-connector-tools) in sessions where that setting reaches Claude Code
 
 For what `"allow"` does in plan mode, see [Hook approvals in plan mode](https://code.claude.com/docs/en/permissions.md#hook-approvals-in-plan-mode).
@@ -710,73 +711,73 @@ Each event type matches on a specific field:
 
 The tabs below show a few more matchers on different event types.
 
-**Log every Bash command**
+> [tab] Log every Bash command
+>
+> Match only `Bash` tool calls and log each command to a file. The `PostToolUse` event fires after the command completes, so `tool_input.command` contains what ran. The hook receives the event data as JSON on stdin, and `jq -r '.tool_input.command'` extracts only the command string, which `>>` appends to the log file:
+>
+> ```json theme={null}
+> {
+>   "hooks": {
+>     "PostToolUse": [
+>       {
+>         "matcher": "Bash",
+>         "hooks": [
+>           {
+>             "type": "command",
+>             "command": "jq -r '.tool_input.command' >> ~/.claude/command-log.txt"
+>           }
+>         ]
+>       }
+>     ]
+>   }
+> }
+> ```
 
-Match only `Bash` tool calls and log each command to a file. The `PostToolUse` event fires after the command completes, so `tool_input.command` contains what ran. The hook receives the event data as JSON on stdin, and `jq -r '.tool_input.command'` extracts only the command string, which `>>` appends to the log file:
+> [tab] Match MCP tools
+>
+> MCP tools use a different naming convention than built-in tools: `mcp__<server>__<tool>`, where `<server>` is the MCP server name and `<tool>` is the tool it provides. For example, `mcp__github__search_repositories` or `mcp__filesystem__read_file`. Tools from a [plugin-bundled server](https://code.claude.com/docs/en/mcp.md#plugin-provided-mcp-servers) use a scoped server segment instead, such as `mcp__plugin_my-plugin_db__query`. Use a regex matcher to target all tools from a specific server, or match across servers with a pattern like `mcp__.*__write.*`. See [Match MCP tools](https://code.claude.com/docs/en/hooks.md#match-mcp-tools) in the reference for the full list of examples.
+>
+> The command below extracts the tool name from the hook's JSON input with `jq` and writes it to stderr. Writing to stderr keeps stdout clean for JSON output and sends the message to the [debug log](https://code.claude.com/docs/en/hooks.md#debug-hooks):
+>
+> ```json theme={null}
+> {
+>   "hooks": {
+>     "PreToolUse": [
+>       {
+>         "matcher": "mcp__github__.*",
+>         "hooks": [
+>           {
+>             "type": "command",
+>             "command": "echo \"GitHub tool called: $(jq -r '.tool_name')\" >&2"
+>           }
+>         ]
+>       }
+>     ]
+>   }
+> }
+> ```
 
-```json theme={null}
-{
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "jq -r '.tool_input.command' >> ~/.claude/command-log.txt"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-**Match MCP tools**
-
-MCP tools use a different naming convention than built-in tools: `mcp__<server>__<tool>`, where `<server>` is the MCP server name and `<tool>` is the tool it provides. For example, `mcp__github__search_repositories` or `mcp__filesystem__read_file`. Tools from a [plugin-bundled server](https://code.claude.com/docs/en/mcp.md#plugin-provided-mcp-servers) use a scoped server segment instead, such as `mcp__plugin_my-plugin_db__query`. Use a regex matcher to target all tools from a specific server, or match across servers with a pattern like `mcp__.*__write.*`. See [Match MCP tools](https://code.claude.com/docs/en/hooks.md#match-mcp-tools) in the reference for the full list of examples.
-
-The command below extracts the tool name from the hook's JSON input with `jq` and writes it to stderr. Writing to stderr keeps stdout clean for JSON output and sends the message to the [debug log](https://code.claude.com/docs/en/hooks.md#debug-hooks):
-
-```json theme={null}
-{
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "mcp__github__.*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo \"GitHub tool called: $(jq -r '.tool_name')\" >&2"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-**Clean up on session end**
-
-The `SessionEnd` event supports matchers on the reason the session ended. This hook only fires on the `clear` reason, set when you run `/clear`, not on normal exits:
-
-```json theme={null}
-{
-  "hooks": {
-    "SessionEnd": [
-      {
-        "matcher": "clear",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "rm -f /tmp/claude-scratch-*.txt"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
+> [tab] Clean up on session end
+>
+> The `SessionEnd` event supports matchers on the reason the session ended. This hook only fires on the `clear` reason, set when you run `/clear`, not on normal exits:
+>
+> ```json theme={null}
+> {
+>   "hooks": {
+>     "SessionEnd": [
+>       {
+>         "matcher": "clear",
+>         "hooks": [
+>           {
+>             "type": "command",
+>             "command": "rm -f /tmp/claude-scratch-*.txt"
+>           }
+>         ]
+>       }
+>     ]
+>   }
+> }
+> ```
 
 #### Filter by tool name and arguments with the `if` field
 
@@ -970,6 +971,7 @@ With a hook in a settings file or a plugin's `hooks/hooks.json` you can't loosen
 
   * Reads from [network paths](https://code.claude.com/docs/en/permissions.md#network-paths)
   * MCP tools marked [`requiresUserInteraction`](https://code.claude.com/docs/en/mcp#require-approval-for-a-specific-tool)
+  * Calls to [tools an Agent SDK app marks `always_ask`](https://code.claude.com/docs/en/agent-sdk/custom-tools#require-approval-for-specific-tools), unless the [permission mode approves the call](https://code.claude.com/docs/en/agent-sdk/typescript.md#permission-modes-that-can-approve-an-always_ask-call)
   * Connector tools [your organization set to `ask`](https://code.claude.com/docs/en/mcp#organization-controls-on-connector-tools) in sessions where that setting reaches Claude Code
 
   In [plan mode](https://code.claude.com/docs/en/permissions.md#hook-approvals-in-plan-mode), if your `PreToolUse` hook returns `"allow"` for a file edit, you get the same prompt, block, or approval the edit would get with no hook. To lift this limit on hook approvals, [approve the plan](https://code.claude.com/docs/en/permission-modes.md#review-and-approve-a-plan) or switch to another permission mode.

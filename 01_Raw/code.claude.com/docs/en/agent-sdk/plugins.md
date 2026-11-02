@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/plugins
-fetched_at: 2026-10-26T05:39:58.884463+00:00
+fetched_at: 2026-11-02T07:00:25.503964+00:00
 fetch_method: mintlify_md
 ---
 
@@ -75,6 +75,22 @@ Plugin paths can be:
 > [!NOTE]
 >
 > The path should point to the plugin's root directory: the parent of `skills/`, `agents/`, `hooks/`, `commands/`, or `.claude-plugin/`.
+
+### Add plugins to a running session
+
+In the TypeScript SDK, call [`reloadPlugins()`](https://code.claude.com/docs/en/agent-sdk/typescript#load-more-plugin-folders-with-addplugins) on the `Query` object that `query()` returned, and list the plugin directory in that call's `addPlugins` option. Each `addPlugins` entry is a `{ type: "local", path }` object with an absolute `path`. Requires TypeScript Agent SDK v0.3.301 or later.
+
+In this example, `q` is the `Query` object that `query()` returned. The example adds one plugin directory to the running session and, after `reloadPlugins()` returns, prints the path of every plugin in the session:
+
+```typescript theme={null}
+const result = await q.reloadPlugins({
+  addPlugins: [{ type: "local", path: "/home/user/plugins/another-plugin" }]
+});
+
+console.log(result.plugins.map((plugin) => plugin.path));
+```
+
+If the plugin loaded, the printed list includes `/home/user/plugins/another-plugin`. If that path is missing from the list, or `reloadPlugins()` rejects, see [When `reloadPlugins()` doesn't load the `addPlugins` folders](https://code.claude.com/docs/en/agent-sdk/typescript#when-reloadplugins-doesnt-load-the-addplugins-folders) for the causes.
 
 ## Verifying plugin installation
 

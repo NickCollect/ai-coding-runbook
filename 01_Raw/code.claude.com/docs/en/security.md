@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/security
-fetched_at: 2026-10-26T05:40:04.963483+00:00
+fetched_at: 2026-11-02T07:00:26.808653+00:00
 fetch_method: mintlify_md
 ---
 
@@ -59,7 +59,7 @@ We have implemented several safeguards to protect your data, including:
 * Restricted access to user session data
 * User control over data training preferences. Consumer users can change their [privacy settings](https://claude.ai/settings/privacy) at any time.
 
-For full details, please review our [Commercial Terms of Service](https://www.anthropic.com/legal/commercial-terms) (for Team, Enterprise, and API users) or [Consumer Terms](https://www.anthropic.com/legal/consumer-terms) (for Free, Pro, and Max users) and [Privacy Policy](https://www.anthropic.com/legal/privacy).
+For full details, please review our [Commercial Terms of Service](https://www.anthropic.com/legal/commercial-terms) (for Team, Enterprise, and API users) or [Consumer Terms](https://www.anthropic.com/legal/consumer-terms) (for Free, Pro, Max, and Ultra users) and [Privacy Policy](https://www.anthropic.com/legal/privacy).
 
 ### Additional safeguards
 

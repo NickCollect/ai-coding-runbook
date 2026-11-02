@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/install
-fetched_at: 2026-10-26T05:40:03.930805+00:00
+fetched_at: 2026-11-02T07:00:26.600272+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,105 +33,105 @@ The same steps install any other plugin: substitute its name and its marketplace
 
 Pick the tab for where you run Claude Code.
 
-**Terminal**
+> [tab] Terminal
+>
+> Start Claude Code with `claude` in your project, then:
+>
+> **1. Open the plugin's details with the install command**
+>
+> Run `/plugin install` with the plugin's name and marketplace. In a session, this command doesn't install right away: it opens the `/plugin` panel on that plugin's details so you can review it and choose a scope first.
+>
+> ```text theme={null}
+> /plugin install commit-commands@claude-plugins-official
+> ```
+>
+> To browse instead, run `/plugin` with no plugin name: the panel opens on the **Discover** tab, which lists the plugins from your marketplaces, and you can type to search, then press **Enter** on a plugin to open its details.
+>
+> **2. Review what the plugin adds**
+>
+> The details pane shows the plugin's description. It can also show:
+>
+> * **Will install**: the commands, agents, skills, hooks, and MCP and LSP servers the plugin adds.
+> * **Last updated**: shown for a plugin in Anthropic's official marketplace.
+> * **Context cost**: for a plugin in Anthropic's official marketplace, two token estimates. **Every turn** is what the plugin adds to each message you send, and **When invoked** is what its skills and agents add once Claude loads them. The estimates appear when you open the plugin by naming its marketplace, as the step 1 command does, or from the **Marketplaces** tab. The details pane you reach from the **Discover** list doesn't show them.
+>
+> Plugins from a local or custom marketplace can show `Components will be discovered at installation` instead.
+>
+> A plugin can run hooks and MCP servers, so read the pane before you install. See [Plugin security and trust](https://code.claude.com/docs/en/plugins/security.md).
+>
+> **3. Choose a scope**
+>
+> Select one of the three install options:
+>
+> * **Install for you (user scope)**: you get the plugin in every project on this machine
+> * **Install for all collaborators on this repository (project scope)**: it's enabled for everyone who works in this repository
+> * **Install for you, in this repo only (local scope)**: you get it in this repository only
+>
+> [Choose an install scope](#choose-an-install-scope) says which settings file each one writes to and which applies when the same plugin is set at more than one.
+>
+> After you select a scope, Claude Code installs the plugin along with any dependencies it declares, then prints an install summary.
+>
+> **4. Read the install summary**
+>
+> The last sentence of the summary tells you whether the plugin is usable in this session yet:
+>
+> * **Active now**: `Plugin is now active.` No reload is needed.
+> * **Active, but a server needs setup**: `Plugin is now active.` is followed by `Its bundled MCP server needs configuration before it can start`. The plugin's [bundled MCP server](https://code.claude.com/docs/en/plugins/components.md#include-a-packaged-mcpb-server) can't start until you set its options. Select the plugin on the **Installed** tab in `/plugin` and choose **Configure** to set the server's options.
+> * **Reload needed**: `Run /reload-plugins to apply.` The panel closes and Claude Code runs that reload for you. If the reload would [invalidate the prompt cache](https://code.claude.com/docs/en/prompt-caching.md#enabling-or-disabling-a-plugin), it warns and leaves the plugin pending instead. Run `/reload-plugins --force` to activate it anyway, which costs one uncached request.
+> * **Load failed**: `The plugin couldn't be loaded`. Open the **Errors** tab in `/plugin` for the reason, then see [After install: plugin not working](https://code.claude.com/docs/en/plugins/troubleshooting.md#plugin-installed-but-not-working).
+>
+> **5. Confirm the plugin works**
+>
+> Type `/` and look for the plugin's skills under its name, in the form `/<plugin>:<skill>`. For `commit-commands`, `/commit-commands:commit` appears. Two other places list the plugin too:
+>
+> * Open the **Installed** tab in `/plugin`, which lists the plugin with its scope.
+> * In your shell, run `claude plugin list`, which prints the same list with `Version`, `Scope`, and `Status` lines.
+>
+> If `/commit-commands:commit` doesn't appear, see [After install: plugin not working](https://code.claude.com/docs/en/plugins/troubleshooting.md#plugin-installed-but-not-working).
+>
+> Installing from any other marketplace requires one extra step first: [add the marketplace](#add-a-marketplace). Claude Code adds Anthropic's official marketplace for you the first time you start an interactive terminal session, which is why the example skips that step. If you found a plugin on [claude.com/marketplace](https://claude.com/marketplace), its **Claude Code** button copies the install command in its [shell form](#install-from-your-shell), `claude plugin install <name>@claude-plugins-official`.
 
-Start Claude Code with `claude` in your project, then:
+> [tab] Desktop app
+>
+> In a local or SSH session in the desktop app's **Code** tab:
+>
+> **1. Open the plugin browser**
+>
+> Click the **+** button next to the prompt box and select **Add plugins**. If the **+** menu shows **Plugins** instead of **Add plugins**, select **Plugins**, then **Browse plugins**. The plugin browser opens with the plugins from your marketplaces.
+>
+> **2. Select the plugin**
+>
+> Find `commit-commands` and select it.
+>
+> **3. Choose a scope**
+>
+> Choose a [scope](#choose-an-install-scope): your user account, this project, or local-only.
+>
+> To enable, disable, or uninstall a plugin later, see [Install plugins in the desktop app](https://code.claude.com/docs/en/desktop.md#install-plugins).
 
-**1. Open the plugin's details with the install command**
+> [tab] VS Code
+>
+> In the Claude Code panel in VS Code:
+>
+> **1. Open Manage plugins**
+>
+> Type `/plugins` in the prompt box to open **Manage plugins**.
+>
+> **2. Install the plugin**
+>
+> On the **Plugins** tab, search for `commit-commands` and click **Install**. If the tab lists no plugins, add `anthropics/claude-plugins-official` on the **Marketplaces** tab first.
+>
+> **3. Choose a scope**
+>
+> Choose a [scope](#choose-an-install-scope): **Install for you**, **Install for this project**, or **Install locally**.
+>
+> Your changes apply to open sessions without a restart. See [Manage plugins in VS Code](https://code.claude.com/docs/en/vs-code.md#manage-plugins).
 
-Run `/plugin install` with the plugin's name and marketplace. In a session, this command doesn't install right away: it opens the `/plugin` panel on that plugin's details so you can review it and choose a scope first.
-
-```text theme={null}
-/plugin install commit-commands@claude-plugins-official
-```
-
-To browse instead, run `/plugin` with no plugin name: the panel opens on the **Discover** tab, which lists the plugins from your marketplaces, and you can type to search, then press **Enter** on a plugin to open its details.
-
-**2. Review what the plugin adds**
-
-The details pane shows the plugin's description. It can also show:
-
-* **Will install**: the commands, agents, skills, hooks, and MCP and LSP servers the plugin adds.
-* **Last updated**: shown for a plugin in Anthropic's official marketplace.
-* **Context cost**: for a plugin in Anthropic's official marketplace, two token estimates. **Every turn** is what the plugin adds to each message you send, and **When invoked** is what its skills and agents add once Claude loads them. The estimates appear when you open the plugin by naming its marketplace, as the step 1 command does, or from the **Marketplaces** tab. The details pane you reach from the **Discover** list doesn't show them.
-
-Plugins from a local or custom marketplace can show `Components will be discovered at installation` instead.
-
-A plugin can run hooks and MCP servers, so read the pane before you install. See [Plugin security and trust](https://code.claude.com/docs/en/plugins/security.md).
-
-**3. Choose a scope**
-
-Select one of the three install options:
-
-* **Install for you (user scope)**: you get the plugin in every project on this machine
-* **Install for all collaborators on this repository (project scope)**: it's enabled for everyone who works in this repository
-* **Install for you, in this repo only (local scope)**: you get it in this repository only
-
-[Choose an install scope](#choose-an-install-scope) says which settings file each one writes to and which applies when the same plugin is set at more than one.
-
-After you select a scope, Claude Code installs the plugin along with any dependencies it declares, then prints an install summary.
-
-**4. Read the install summary**
-
-The last sentence of the summary tells you whether the plugin is usable in this session yet:
-
-* **Active now**: `Plugin is now active.` No reload is needed.
-* **Active, but a server needs setup**: `Plugin is now active.` is followed by `Its bundled MCP server needs configuration before it can start`. The plugin's [bundled MCP server](https://code.claude.com/docs/en/plugins/components.md#include-a-packaged-mcpb-server) can't start until you set its options. Select the plugin on the **Installed** tab in `/plugin` and choose **Configure** to set the server's options.
-* **Reload needed**: `Run /reload-plugins to apply.` The panel closes and Claude Code runs that reload for you. If the reload would [invalidate the prompt cache](https://code.claude.com/docs/en/prompt-caching.md#enabling-or-disabling-a-plugin), it warns and leaves the plugin pending instead. Run `/reload-plugins --force` to activate it anyway, which costs one uncached request.
-* **Load failed**: `The plugin couldn't be loaded`. Open the **Errors** tab in `/plugin` for the reason, then see [After install: plugin not working](https://code.claude.com/docs/en/plugins/troubleshooting.md#plugin-installed-but-not-working).
-
-**5. Confirm the plugin works**
-
-Type `/` and look for the plugin's skills under its name, in the form `/<plugin>:<skill>`. For `commit-commands`, `/commit-commands:commit` appears. Two other places list the plugin too:
-
-* Open the **Installed** tab in `/plugin`, which lists the plugin with its scope.
-* In your shell, run `claude plugin list`, which prints the same list with `Version`, `Scope`, and `Status` lines.
-
-If `/commit-commands:commit` doesn't appear, see [After install: plugin not working](https://code.claude.com/docs/en/plugins/troubleshooting.md#plugin-installed-but-not-working).
-
-Installing from any other marketplace requires one extra step first: [add the marketplace](#add-a-marketplace). Claude Code adds Anthropic's official marketplace for you the first time you start an interactive terminal session, which is why the example skips that step. If you found a plugin on [claude.com/marketplace](https://claude.com/marketplace), its **Claude Code** button copies the install command in its [shell form](#install-from-your-shell), `claude plugin install <name>@claude-plugins-official`.
-
-**Desktop app**
-
-In a local or SSH session in the desktop app's **Code** tab:
-
-**1. Open the plugin browser**
-
-Click the **+** button next to the prompt box and select **Add plugins**. If the **+** menu shows **Plugins** instead of **Add plugins**, select **Plugins**, then **Browse plugins**. The plugin browser opens with the plugins from your marketplaces.
-
-**2. Select the plugin**
-
-Find `commit-commands` and select it.
-
-**3. Choose a scope**
-
-Choose a [scope](#choose-an-install-scope): your user account, this project, or local-only.
-
-To enable, disable, or uninstall a plugin later, see [Install plugins in the desktop app](https://code.claude.com/docs/en/desktop.md#install-plugins).
-
-**VS Code**
-
-In the Claude Code panel in VS Code:
-
-**1. Open Manage plugins**
-
-Type `/plugins` in the prompt box to open **Manage plugins**.
-
-**2. Install the plugin**
-
-On the **Plugins** tab, search for `commit-commands` and click **Install**. If the tab lists no plugins, add `anthropics/claude-plugins-official` on the **Marketplaces** tab first.
-
-**3. Choose a scope**
-
-Choose a [scope](#choose-an-install-scope): **Install for you**, **Install for this project**, or **Install locally**.
-
-Your changes apply to open sessions without a restart. See [Manage plugins in VS Code](https://code.claude.com/docs/en/vs-code.md#manage-plugins).
-
-**Cloud session**
-
-A [cloud session](https://code.claude.com/docs/en/cloud-environments.md), including [the browser at claude.ai/code](https://code.claude.com/docs/en/claude-code-on-the-web.md), has no plugin browser and doesn't load the plugins you installed on your own machine or the ones your repository's `.claude/settings.json` turns on. For plugins your organization distributes through managed settings, see [Manage plugins for your organization](https://code.claude.com/docs/en/plugins/org.md).
-
-See [which parts of your setup are also available in a cloud session](https://code.claude.com/docs/en/cloud-environments.md#what-carries-over-from-your-setup) for the rest of your setup.
+> [tab] Cloud session
+>
+> A [cloud session](https://code.claude.com/docs/en/cloud-environments.md), including [the browser at claude.ai/code](https://code.claude.com/docs/en/claude-code-on-the-web.md), has no plugin browser and doesn't load the plugins you installed on your own machine or the ones your repository's `.claude/settings.json` turns on. For plugins your organization distributes through managed settings, see [Manage plugins for your organization](https://code.claude.com/docs/en/plugins/org.md).
+>
+> See [which parts of your setup are also available in a cloud session](https://code.claude.com/docs/en/cloud-environments.md#what-carries-over-from-your-setup) for the rest of your setup.
 
 ### Choose an install scope
 
@@ -199,7 +199,7 @@ In a Claude Code session, run `/plugin marketplace add` followed by the marketpl
 
 | Source | What you type | Example |
 | :- | :- | :- |
-| GitHub repository | `owner/repo`. Add `#ref` to pin a branch or tag. | `/plugin marketplace add anthropics/claude-code`, or `/plugin marketplace add your-org/plugins#v1.2.0` to pin the `v1.2.0` tag |
+| GitHub repository | `owner/repo`. Add `#ref` to pin a branch or tag. | `/plugin marketplace add anthropics/claude-plugins-official`, or `/plugin marketplace add your-org/plugins#v1.2.0` to pin the `v1.2.0` tag |
 | Git repository on any host | The full clone URL. Add `#ref` to pin a branch or tag. | `/plugin marketplace add https://gitlab.example.com/your-group/your-marketplace.git#v1.0.0` |
 | Local directory or file | A relative or absolute path to a directory that holds `.claude-plugin/marketplace.json`, or to the JSON file itself. Start a relative path with `./` or `../`, because Claude Code reads a bare `name/name` as a GitHub repository. | `/plugin marketplace add ./my-marketplace` |
 | Hosted `marketplace.json` | Its `https://` URL | `/plugin marketplace add https://example.com/marketplace.json` |
@@ -389,7 +389,7 @@ When you remove a marketplace, Claude Code uninstalls every plugin you installed
 
 ## Next steps
 
-* [Anthropic's marketplaces](https://code.claude.com/docs/en/plugins/anthropic-marketplaces.md): how the official, community, and demo marketplaces differ and where to browse each one
+* [Anthropic's marketplaces](https://code.claude.com/docs/en/plugins/anthropic-marketplaces.md): how the official and community marketplaces differ and where to browse each one
 * [Plugin loading reference](https://code.claude.com/docs/en/plugins/loading.md): why a plugin loaded, didn't load, or didn't change after an update
 * [Plugin security and trust](https://code.claude.com/docs/en/plugins/security.md): what to review before you install a plugin from a marketplace you don't know
 * [Troubleshoot plugins](https://code.claude.com/docs/en/plugins/troubleshooting.md): install and marketplace error messages with their fixes

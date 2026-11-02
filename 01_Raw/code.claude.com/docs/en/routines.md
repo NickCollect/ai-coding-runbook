@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/routines
-fetched_at: 2026-10-26T05:40:04.894000+00:00
+fetched_at: 2026-11-02T07:00:26.797090+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,7 +31,7 @@ A scheduled task doesn't need a schedule:
 * A task with only an API trigger runs when you call its endpoint.
 * A task with only a GitHub trigger runs when a matching repository event occurs.
 
-Scheduled tasks are available on Pro, Max, Team, and Enterprise plans. Create and manage them at [claude.ai/code/routines](https://claude.ai/code/routines), or from the CLI with `/schedule`. The earlier name, routines, [still appears](#where-the-name-routines-still-appears).
+Scheduled tasks are available on Pro, Max, Ultra, Team, and Enterprise plans. Create and manage them at [claude.ai/code/routines](https://claude.ai/code/routines), or from the CLI with `/schedule`. The earlier name, routines, [still appears](#where-the-name-routines-still-appears).
 
 > [!NOTE]
 >
@@ -83,7 +83,7 @@ If **Repositories** and **Environment** are already showing when the dialog open
 
 **2. Name the task and write the prompt**
 
-Give the scheduled task a descriptive name and write the prompt Claude runs each time. The prompt is the most important part: the task runs autonomously, so the prompt must be self-contained and explicit about what to do and what success looks like. Select a model in the prompt input's model selector. Claude uses it on every run.
+Give the scheduled task a descriptive name and write the prompt Claude runs each time. The prompt is the most important part: the task runs autonomously, so the prompt must be self-contained and explicit about what to do and what success looks like.
 
 When a trigger fires, the session receives the saved prompt as its assignment and carries it out, rather than treating it as untrusted content that arrived mid-conversation. The trigger attests only that the prompt was stored ahead of time by an authorized session on your account. The fired prompt is therefore not live user input and can't act as approval or consent for actions during the run. Content the session fetches during the run keeps its normal handling.
 
@@ -91,17 +91,17 @@ When a trigger fires, the session receives the saved prompt as its assignment an
 
 In the **Trigger** row, choose how the task starts. To combine several triggers, click **+** at the end of the row.
 
-**Schedule**
+> [tab] Schedule
+>
+> Pick a preset frequency for a recurring run. See [Add a schedule trigger](#add-a-schedule-trigger) for timezone handling, late starts, custom cron intervals, and one-off runs.
 
-Pick a preset frequency for a recurring run. See [Add a schedule trigger](#add-a-schedule-trigger) for timezone handling, late starts, custom cron intervals, and one-off runs.
+> [tab] GitHub event
+>
+> Select the repository, the event to react to, and optional filters. See [Add a GitHub trigger](#add-a-github-trigger) for the full list of supported events and filter fields.
 
-**GitHub event**
-
-Select the repository, the event to react to, and optional filters. See [Add a GitHub trigger](#add-a-github-trigger) for the full list of supported events and filter fields.
-
-**API**
-
-Select **API** here. When you click **Create**, the **API token** dialog shows the token once, so copy it before you close the dialog. See [Add an API trigger](#add-an-api-trigger) to copy the URL or generate a new token.
+> [tab] API
+>
+> Select **API** here. When you click **Create**, the **API token** dialog shows the token once, so copy it before you close the dialog. See [Add an API trigger](#add-an-api-trigger) to copy the URL or generate a new token.
 
 **4. Select repositories**
 
@@ -121,11 +121,15 @@ A **Default** environment is provided with **Trusted** network access, which all
 
 If your task needs to reach your own services directly, or a domain outside that list, edit the environment's [network access](https://code.claude.com/docs/en/cloud-environments.md#network-access) before running. To use a separate environment, [create one](https://code.claude.com/docs/en/cloud-environments.md#configure-your-environment) first.
 
-**6. Review connectors**
+**6. Select a model and effort level**
+
+Select a model in the prompt input's model selector for Claude to use on every run. For a Claude Code task, if the model offers [effort levels](https://code.claude.com/docs/en/model-config.md#adjust-effort-level), **Effort** in the same selector shows the current level. To change it, select another level. The selector's **Default** option offers no levels.
+
+**7. Review connectors**
 
 Switch to the **Connectors** tab of **Advanced settings**. All of your connected [MCP connectors](https://code.claude.com/docs/en/mcp.md) are included by default. Remove any the task doesn't need: Claude can use an included connector during a run, including writes. For when a run stops to ask you first, see [Permission prompts during a run](#permission-prompts-during-a-run).
 
-**7. Create the task**
+**8. Create the task**
 
 Click **Create**. The dialog closes and the new task's detail page opens. The task runs the next time one of its triggers matches. To start a run immediately, click **Run now** on the detail page.
 
@@ -142,7 +146,7 @@ Select the repository before you add a GitHub event trigger, because that trigge
 In the Desktop app, if a menu with **Local** and **Cloud** opens, select **Cloud**. A page titled **New routine** or **New scheduled task** opens. Fill in its fields:
 
 * **Name**: enter one.
-* **Instructions**: enter the prompt. In the same box, select the model, the repositories, and the environment. For what each one controls, see the steps under [Create from the web](#create-from-the-web).
+* **Instructions**: enter the prompt. In the same box, select the model, the effort level if the model offers one, the repositories, and the environment. For what each one controls, see the steps under [Create from the web](#create-from-the-web).
 * **Select a trigger**: select **Schedule**, **GitHub event**, or **API**. For a schedule, see [Add a schedule trigger](#add-a-schedule-trigger). For a [GitHub event](#add-a-github-trigger), select a repository. For an [API trigger](#add-an-api-trigger), copy the token from the **API token** dialog that opens after you click **Create**, because it is shown once. To combine several triggers, click **Add another trigger**.
 * **Connectors**: all of your connected connectors are included by default, so remove the ones the task doesn't need.
 
@@ -159,7 +163,7 @@ A task you create with `/schedule` has a schedule trigger. You can also add the 
 * **API trigger**: edit the task on the web at [claude.ai/code/routines](https://claude.ai/code/routines)
 * **[GitHub trigger](#add-a-github-trigger)**: edit the task on the web, or ask Claude in the CLI. Adding one from the CLI requires Claude Code v2.1.225 or later
 
-A scheduled task with no schedule trigger, such as one started only by API calls or GitHub events, has no next run time. The CLI shows none when Claude saves or updates it. Before v2.1.211, the CLI reported a next run time in the year 1 for these tasks.
+A scheduled task with no schedule trigger, such as one started only by API calls or GitHub events, has no next run time. The CLI shows none when Claude saves or updates it.
 
 ## Configure triggers
 
@@ -504,7 +508,7 @@ The cause is usually one of the following:
 * An Owner [turned off scheduled tasks](#routines-are-disabled-by-your-organizations-policy) for your Team or Enterprise organization. Before v2.1.227, the command still appeared in this case, and claude.ai rejected the task when Claude tried to create or run it
 * Your Enterprise organization manages your access with [custom roles](https://support.claude.com/en/articles/13930452), and none of your roles includes the scheduled tasks permission under **Remote sessions**. Ask an Owner to add it to one of your roles
 
-If the cause is your CLI sign-in or being inside a cloud session, you can still create and manage scheduled tasks at [claude.ai/code/routines](https://claude.ai/code/routines). You need a Pro, Max, Team, or Enterprise account there. If scheduled tasks or cloud sessions are off for your organization or missing from your roles, you can't create them on the web either.
+If the cause is your CLI sign-in or being inside a cloud session, you can still create and manage scheduled tasks at [claude.ai/code/routines](https://claude.ai/code/routines). You need a Pro, Max, Ultra, Team, or Enterprise account there. If scheduled tasks or cloud sessions are off for your organization or missing from your roles, you can't create them on the web either.
 
 ### "Routines are disabled by your organization's policy"
 

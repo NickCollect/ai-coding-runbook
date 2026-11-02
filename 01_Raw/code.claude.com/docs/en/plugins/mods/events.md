@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/mods/events
-fetched_at: 2026-10-26T05:40:04.333277+00:00
+fetched_at: 2026-11-02T07:00:26.686745+00:00
 fetch_method: mintlify_md
 ---
 
@@ -319,14 +319,20 @@ Claude's response streams to the screen as it does without the mod. After each r
 
 To see the tool calls that the API ran itself during the request, such as calls to the [advisor tool](https://code.claude.com/docs/en/advisor.md), read `result.serverToolUses`. Claude Code doesn't run these calls, so no `tool.call` or `tool.check` hook fires for them. The field is absent when the response has no such calls, and it requires Claude Code v2.1.290 or later.
 
+#### Send a request to a different model
+
+If a `turn.step` request fails with a model error when `model` is an alias such as `haiku`, update to Claude Code v2.1.309 or later, or use a full model id. Before v2.1.309, an alias went out as written.
+
+To send a request to a different model, pass `next` the event with `model` changed, as in `yield* next({ ...e, model: 'haiku' })`.
+
 ### Change or refuse a settings read
 
-A `settings.read` hook runs on a mod's read and on Claude Code's own read:
+Use a `settings.read` hook to change or refuse a settings read, either a mod's or Claude Code's own:
 
 * **A mod's read**: a mod calls [`$.settings.read`](https://code.claude.com/docs/en/plugins/mods/api#read-one-source-or-one-key).
-* **Claude Code's own read**: Claude Code builds the session's merged settings. This read repeats when settings or the loaded plugins change.
+* **Claude Code's own read**: your hook first runs when Claude Code merges the session's settings, after the session's mods have loaded. Your hook runs again when settings or loaded plugins change.
 
-Before you rely on either read, check the guard and your version:
+Check which mods get this event and your Claude Code version:
 
 * **The built-in guard**: with managed settings, or with a Team or Enterprise [`/login`](https://code.claude.com/docs/en/authentication#authentication-precedence) as the session's credential, the [built-in guard](https://code.claude.com/docs/en/plugins/mods/admin.md#know-what-happens-by-default) can skip this hook in a mod you install or load with `--plugin-dir`. To check, search the [debug log](https://code.claude.com/docs/en/plugins/mods/troubleshoot.md#read-the-debug-log) for `settings.read bypassed by cc-plugin-sec-default`. If a line with that text names your mod, ask your organization's administrator to [install the mod as one of the organization's mods](https://code.claude.com/docs/en/plugins/mods/admin.md#install-your-organizations-mods).
 * **The version**: the event firing on Claude Code's own read, and the `e.layers` field, require Claude Code v2.1.304 or later.
@@ -342,15 +348,18 @@ In `e.layers`, `plugin` holds settings that enabled plugins supply, and is a lay
 
 #### Tell Claude Code's own read from a mod's read
 
-On [Claude Code's own read](#settings-read-hook), [`next.origin`](https://code.claude.com/docs/en/plugins/mods/reference#the-hook-function) is `{ plugin: 'engine', tier: 'core' }`, and on a mod's read `next.origin.plugin` is the calling mod's name.
+Check [`next.origin`](https://code.claude.com/docs/en/plugins/mods/reference#the-hook-function):
+
+* **Claude Code's own read**: `{ plugin: 'engine', tier: 'core' }`
+* **A mod's read**: `plugin` is the calling mod's name
 
 #### What a `settings.read` hook can return
 
-Your hook can return [`next(e)`](https://code.claude.com/docs/en/plugins/mods/reference#the-hook-function)'s result unchanged, a `{ value }` of its own, or `{ deny: reason }`. On [Claude Code's own read](#settings-read-hook) and a mod's read, a `{ value }` replaces what the read gives and `{ deny: reason }` refuses the read:
+Return [`next(e)`](#settings-read-next)'s result unchanged to leave the read as it is, or return one of these:
 
-| Return | On Claude Code's own read | On a mod's read |
+| Return | On [Claude Code's own read](#settings-read-hook) | On a mod's read |
 | :- | :- | :- |
-| `{ value }` | For each key you change, what you return replaces that key's whole value in the session's merged settings, if it [fits the key's schema](https://code.claude.com/docs/en/plugins/mods/troubleshoot.md#settings-read-key-refused) | That mod's call resolves to your `value`, or to the `key` it asked for taken from your `value`, so return a whole object and not an array |
+| `{ value }` | For each key changed, you replace its whole value in the session's merged settings, if yours [fits the key's schema](https://code.claude.com/docs/en/plugins/mods/troubleshoot.md#settings-read-key-refused) | That mod's call resolves to your `value`, or to the `key` it asked for taken from your `value`, so return a whole object and not an array |
 | `{ deny: reason }` | The session keeps the settings as they were merged before any hook answered, and the [debug log records your `reason`](https://code.claude.com/docs/en/plugins/mods/troubleshoot#settings-read-refused) | That mod's call rejects with `<calling mod>: $.settings.read: <reason>` |
 
 On Claude Code's own read, build your `{ value }` from [`next(e)`'s `value`](#settings-read-next), since a key you leave out is unset. Where Claude Code reads a key such as `env` from each source separately, changing it in your `value` [has no effect](https://code.claude.com/docs/en/plugins/mods/troubleshoot.md#settings-read-key-no-effect).
@@ -379,11 +388,11 @@ on('settings.read', async ($, e, next) => {
 })
 ```
 
-On Claude Code's own read, if your hook returns a value outside the key's schema, such as a string, that key alone keeps the value merged before any hook answered. The debug log then says [`the answer for <key> is no value the key can hold`](https://code.claude.com/docs/en/plugins/mods/troubleshoot#settings-read-key-refused). If your value fits and the key still doesn't change, see [why a returned key has no effect](https://code.claude.com/docs/en/plugins/mods/troubleshoot.md#settings-read-key-no-effect).
+On Claude Code's own read, if your hook returns a value outside the key's schema, such as a string, that key alone keeps the value merged before any hook answered. The debug log then says [`the answer for <key> is no value the key can hold`](https://code.claude.com/docs/en/plugins/mods/troubleshoot#settings-read-key-refused). If your value fits and the key still doesn't change, see [why a key doesn't take effect](https://code.claude.com/docs/en/plugins/mods/troubleshoot.md#settings-read-key-no-effect).
 
 ### Handle the settings hook events
 
-Settings hooks are the command, HTTP, prompt, and agent hooks you configure in settings files. Each [settings hook event](https://code.claude.com/docs/en/hooks.md#hook-events), such as `Stop`, `SessionEnd`, or `PostToolUse`, is also an event named `classic.` followed by the settings hook event's name, such as `classic.Stop`. `e` is the JSON a settings hook receives on stdin, including `transcript_path`.
+Settings hooks are the command, HTTP, prompt, and agent hooks you configure in settings files. Each [settings hook event](https://code.claude.com/docs/en/hooks.md#hook-events), such as `Stop`, `SessionEnd`, or `PostToolUse`, is also an event named `classic.` followed by the settings hook event's name, such as `classic.Stop`. `e` is the JSON a settings hook receives on stdin, including `transcript_path`. Where the [built-in guard](https://code.claude.com/docs/en/plugins/mods/admin.md#know-what-happens-by-default) loads, [a hook on these events in a mod you install doesn't run](https://code.claude.com/docs/en/plugins/mods/admin.md#hooks-the-guard-passes-over).
 
 This hook uses `Stop`, which fires when Claude finishes responding, to log where the session's transcript is saved:
 
@@ -431,7 +440,7 @@ A hook that fails doesn't break the session, and you can decide what happens ins
 * **It failed before calling `next`**: Claude Code skips it, and the next handler runs in its place
 * **It failed after `next` resolved**: that result stands, and nothing runs a second time
 
-One line names the mod, the event, and the reason, such as `my-mod: tool.call hook skipped: threw Error: boom`. Where you read it depends on the session, as [Find out why a mod does nothing](https://code.claude.com/docs/en/plugins/mods/troubleshoot.md#find-out-why-a-mod-does-nothing) lists. A `ui.render` hook whose drawing doesn't validate is reported differently, as [Build a tree from elements](https://code.claude.com/docs/en/plugins/mods/interface.md#build-a-tree-from-elements) describes.
+One line names the mod, the event, and the reason, such as `my-mod: tool.call hook skipped: threw Error: boom`. Where you read it depends on the session, as [Find out why a mod does nothing](https://code.claude.com/docs/en/plugins/mods/troubleshoot.md#find-out-why-a-mod-does-nothing) lists. A `ui.render` hook whose [tree doesn't validate](https://code.claude.com/docs/en/plugins/mods/interface.md#build-a-tree-from-elements) counts as one that returned the wrong shape.
 
 To make a hook that blocks calls fail closed, add a `.catch` error handler that answers in its place. Here, `guard` is your hook function, and the handler tests [`next.called`](https://code.claude.com/docs/en/plugins/mods/reference#the-hook-function) to tell whether `guard` had already called `next` when it failed:
 

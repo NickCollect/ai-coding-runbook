@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-teams
-fetched_at: 2026-10-26T05:39:59.583181+00:00
+fetched_at: 2026-11-02T07:00:25.628950+00:00
 fetch_method: mintlify_md
 ---
 
@@ -194,7 +194,7 @@ A teammate's model and fast mode are fixed when it spawns.
 
 ### Assign and claim tasks
 
-The shared task list coordinates work across the team. The lead creates tasks and teammates work through them. Tasks have three states: pending, in progress, and completed. Tasks can also depend on other tasks: a pending task with unresolved dependencies cannot be claimed until those dependencies are completed.
+The shared task list coordinates work across the team. The lead creates tasks and teammates work through them. Tasks have three states: pending, in progress, and completed. A task can also depend on other tasks and shows as blocked in the task list until they're completed. Teammates don't self-claim a blocked task, but you or the lead can still assign it.
 
 Agents [without the Task tools](https://code.claude.com/docs/en/tools-reference.md#task-tool-availability) coordinate through messages instead of the shared task list.
 

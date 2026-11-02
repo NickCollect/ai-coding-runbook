@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/auto-mode-config
-fetched_at: 2026-10-26T05:39:59.872209+00:00
+fetched_at: 2026-11-02T07:00:25.709550+00:00
 fetch_method: mintlify_md
 ---
 
@@ -167,7 +167,7 @@ Run `/auto-mode-setup` to have Claude Code draft `autoMode.environment` entries,
 
 > [!NOTE]
 >
-> `/auto-mode-setup` is available on Pro, Max, Team, and Enterprise plans and with a Claude Console API key. On a Pro, Max, or Team plan, you need v2.1.228 or later, or v2.1.233 or later on native Windows. On an Enterprise plan or with a Claude Console API key, you need v2.1.283 or later. If the command is missing from your session, see [`/auto-mode-setup` returns "Unknown command"](#auto-mode-setup-returns-unknown-command).
+> `/auto-mode-setup` is available on Pro, Max, Ultra, Team, and Enterprise plans and with a Claude Console API key. On a Pro, Max, Ultra, or Team plan, you need v2.1.228 or later, or v2.1.233 or later on native Windows. On an Enterprise plan or with a Claude Console API key, you need v2.1.283 or later. If the command is missing from your session, see [`/auto-mode-setup` returns "Unknown command"](#auto-mode-setup-returns-unknown-command).
 
 ### What `/auto-mode-setup` reads
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/admin-setup
-fetched_at: 2026-10-26T05:39:58.290983+00:00
+fetched_at: 2026-11-02T07:00:25.375058+00:00
 fetch_method: mintlify_md
 ---
 
@@ -99,7 +99,7 @@ Managed settings can lock down tools, sandbox execution, restrict MCP servers an
 | [Sandboxing](https://code.claude.com/docs/en/sandboxing.md) | OS-level filesystem and network isolation with domain allowlists | `sandbox.enabled`, `sandbox.network.allowedDomains` |
 | [Managed policy CLAUDE.md](https://code.claude.com/docs/en/memory.md#deploy-organization-wide-claude-md) | Organization-wide behavioral guidance for Claude rather than a client-enforced rule | File at the managed policy path |
 | [MCP server control](https://code.claude.com/docs/en/managed-mcp.md) | Restrict which MCP servers users can add or connect to, deploy a fixed set, or provide remote servers to every user alongside their own | `allowedMcpServers`, `deniedMcpServers`, `allowManagedMcpServersOnly`, `managedMcpServers`, or a deployed `managed-mcp.json` file |
-| [Plugin marketplace control](https://code.claude.com/docs/en/plugins/org.md#restrict-what-users-can-install) | Restrict which marketplace sources users can add and install from, reject the CLI flags that sideload plugins, agents, and MCP servers for a single run, block [`command` plugin sources](https://code.claude.com/docs/en/plugins/marketplace-reference#command-plugin-source), and allowlist which marketplaces' plugins can be suggested | `strictKnownMarketplaces`, `blockedMarketplaces`, `disableSideloadFlags`, `disableCommandPluginSources`, `pluginSuggestionMarketplaces` |
+| [Plugin marketplace control](https://code.claude.com/docs/en/plugins/org.md#restrict-what-users-can-install) | Restrict which marketplace sources users can add and install from, and reject the CLI flags that sideload plugins, agents, and MCP servers for a single run. Block [`command` plugin sources](https://code.claude.com/docs/en/plugins/marketplace-reference#command-plugin-source), and allowlist which marketplaces' plugins can be suggested in the terminal | `strictKnownMarketplaces`, `blockedMarketplaces`, `disableSideloadFlags`, `disableCommandPluginSources`, `pluginSuggestionMarketplaces` |
 | [Customization lockdown](https://code.claude.com/docs/en/settings-reference.md#strictpluginonlycustomization) | Block skills, agents, hooks, and MCP servers from user and project sources, so they can only come from plugins or managed settings. Locking skills also stops the [skills your developers enable on claude.ai](https://code.claude.com/docs/en/skills.md#where-synced-skills-load) from syncing | `strictPluginOnlyCustomization` |
 | [Disable claude.ai sync](https://code.claude.com/docs/en/settings-reference.md#syncclaudeaiskills) | Stop Claude Code from loading the [skills](https://code.claude.com/docs/en/skills.md#how-synced-skills-behave) and [plugins](https://code.claude.com/docs/en/plugins/loading.md#synced-plugins) your developers enable on claude.ai. If you turn off Skills for your organization on claude.ai, Claude Code stops syncing both, and on v2.1.273 or later it also removes the ones it already synced. To stop either one without turning Skills off, set its key to `false` in managed settings | `syncClaudeAiSkills`, `syncClaudeAiPlugins` |
 | [Hook restrictions](https://code.claude.com/docs/en/settings-reference.md#allowmanagedhooksonly) | Restrict which hooks run and restrict HTTP hook URLs; see [what runs under `allowManagedHooksOnly`](https://code.claude.com/docs/en/settings-reference#what-runs-under-allowmanagedhooksonly) for the full effect list | `allowManagedHooksOnly`, `allowedHttpHookUrls` |
@@ -197,6 +197,7 @@ With provider and delivery mechanism chosen, move on to detailed configuration:
 * [Server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md): deliver managed policy from the Claude admin console
 * [All settings](https://code.claude.com/docs/en/settings-reference.md): every setting key, with where it goes and an example
 * [Which value Claude Code uses](https://code.claude.com/docs/en/settings.md#which-value-claude-code-uses): the precedence rules across managed, project, local, and user settings
+* [Manage plugins for your organization](https://code.claude.com/docs/en/plugins/org.md): install shared plugins on every machine through managed settings
 * [Monorepos and large repos](https://code.claude.com/docs/en/large-codebases.md): per-directory configuration patterns for organizations deploying into a monorepo
 * [Amazon Bedrock](https://code.claude.com/docs/en/amazon-bedrock.md), [Google Cloud's Agent Platform](https://code.claude.com/docs/en/google-vertex-ai.md), [Microsoft Foundry](https://code.claude.com/docs/en/microsoft-foundry.md): provider-specific deployment
 * [Claude Enterprise Administrator Guide](https://claude.com/resources/tutorials/claude-enterprise-administrator-guide): SSO, SCIM, seat management, and rollout playbook

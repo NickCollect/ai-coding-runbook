@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/chrome
-fetched_at: 2026-10-26T05:40:00.285175+00:00
+fetched_at: 2026-11-02T07:00:25.782524+00:00
 fetch_method: mintlify_md
 ---
 
@@ -45,11 +45,11 @@ Before using Claude Code with Chrome, you need:
 * [Google Chrome](https://www.google.com/chrome/), [Microsoft Edge](https://www.microsoft.com/edge), or another Chromium-based browser such as Brave, Arc, Vivaldi, or Opera
 * [Claude in Chrome extension](https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn) version 1.0.36 or later, available in the Chrome Web Store
 * [Claude Code](https://code.claude.com/docs/en/quickstart.md#step-1-install-claude-code)
-* A direct Anthropic plan (Pro, Max, Team, or Enterprise)
+* A direct Anthropic plan (Pro, Max, Ultra, Team, or Enterprise)
 
 In Enterprise organizations that have HIPAA enabled, Claude in Chrome is off by default, and an [Owner](https://code.claude.com/docs/en/server-managed-settings.md#access-control) can turn it on in [**Organization settings > Claude in Chrome**](https://claude.ai/admin-settings/browser-extension). Your Business Associate Agreement (BAA) with Anthropic doesn't cover data sent to third-party sites through Claude in Chrome. See the [Implementation Guide](https://trust.anthropic.com/resources?s=l1wrssd9hsbi4gak0tp5a6\&name=%5Banthropic%5D-hipaa-ready-offering-implementation-guide) for a list of Eligible Services.
 
-Chrome integration also requires signing in with `/login`. If you authenticate with an API key or a long-lived token from [`claude setup-token`](https://code.claude.com/docs/en/authentication#generate-a-long-lived-token), Claude Code keeps Chrome integration off, even when you pass `--chrome`, because the browser extension can't authenticate with those credentials. Before v2.1.216, these sessions could enable Chrome integration, but every attempt to connect to the browser extension failed with a 403 error.
+Chrome integration also requires signing in with `/login`. If you authenticate with an API key or a long-lived token from [`claude setup-token`](https://code.claude.com/docs/en/authentication#generate-a-long-lived-token), Claude Code keeps Chrome integration off, even when you pass `--chrome`. The browser extension can't authenticate with those credentials.
 
 > [!NOTE]
 >
@@ -112,6 +112,15 @@ Claude Code starts normally when Chrome isn't running.
 > [!NOTE]
 >
 > Enabling Chrome by default increases context usage since the browser tools and their instructions are always loaded. If you notice increased context consumption, turn the setting off and connect only when needed, with `--chrome` in the CLI or by typing [`@browser`](https://code.claude.com/docs/en/vs-code#automate-browser-tasks-with-chrome) in the VS Code prompt box.
+
+### Answer the startup dialog
+
+If the "Claude in Chrome extension detected" dialog appears when you start `claude`, your answer changes the [**Enabled by default** setting](#enable-chrome-by-default):
+
+* **Yes, use my browser**: turns the setting on and connects this session
+* **No, keep browser tools off**, or Esc: turns the setting off, and Claude Code stops offering to set up Chrome
+
+To change your answer for later sessions, run `/chrome`.
 
 ### Manage site permissions
 

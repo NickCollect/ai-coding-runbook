@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/typescript
-fetched_at: 2026-10-26T05:39:59.474060+00:00
+fetched_at: 2026-11-02T07:00:25.676834+00:00
 fetch_method: mintlify_md
 ---
 
@@ -111,6 +111,8 @@ function startup(params?: {
 
 Returns a `Promise<`[`WarmQuery`](#warmquery)`>` that resolves once the subprocess has spawned and completed its initialize handshake.
 
+Of the [`hook_progress`](#sdkhookprogressmessage) messages a `SessionStart` or `Setup` hook emits before the handshake completes, you get only the newest, which carries all of the hook's output so far. `startup()` holds that message, the hook's [`hook_started`](#sdkhookstartedmessage) message, and anything else the subprocess emits before the handshake completes. The held messages reach you once you call `.query()` on the `WarmQuery` and iterate the result.
+
 #### Example
 
 Call `startup()` early, for example on application boot, then call `.query()` on the returned handle once a prompt is ready. This moves subprocess spawn and initialization out of the critical path.
@@ -206,7 +208,7 @@ Defined in `@modelcontextprotocol/sdk/types.js`. All fields are optional hints; 
 | :- | :- | :- | :- |
 | `title` | `string` | `undefined` | Human-readable title for the tool |
 | `readOnlyHint` | `boolean` | `false` | If `true`, the tool does not modify its environment |
-| `destructiveHint` | `boolean` | `true` | If `true`, the tool may perform destructive updates (only meaningful when `readOnlyHint` is `false`) |
+| `destructiveHint` | `boolean` | `true` | If `true`, the tool may perform destructive updates. Set `destructiveHint: true` explicitly on any tool you mark [`always_ask`](#mcpservertoolpolicy), or the auto mode classifier can approve that tool's calls in place of your `canUseTool` callback. Leaving `destructiveHint` unset isn't enough, because Claude Code treats an unset `destructiveHint` as `false` when it handles `always_ask` calls, although the MCP specification's default is `true` |
 | `idempotentHint` | `boolean` | `false` | If `true`, repeated calls with the same arguments have no additional effect (only meaningful when `readOnlyHint` is `false`) |
 | `openWorldHint` | `boolean` | `true` | If `true`, the tool interacts with external entities (for example, web search). If `false`, the tool's domain is closed (for example, a memory tool) |
 
@@ -530,7 +532,7 @@ Configuration object for the `query()` function.
 | `managedSettings` | `Settings` | `undefined` | Policy-tier settings your host process supplies to the spawned session. On machines with admin-deployed managed settings, Claude Code ignores these unless the admin's highest-priority managed source sets `parentSettingsBehavior: 'merge'`, and never merges them while a [`policyHelper`](https://code.claude.com/docs/en/settings-reference#policyhelper) supplies managed settings. Merged values pass through a restrictive-only filter; [Restrict parent settings](https://code.claude.com/docs/en/claude-apps-gateway#restrict-parent-settings) covers what the filter admits and the `allowManaged*Only` locks. A host that sets [`CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST`](https://code.claude.com/docs/en/env-vars) has three keys read straight from this payload instead: its [model configuration](https://code.claude.com/docs/en/model-config.md#restrict-model-selection) on Claude Code v2.1.222 or later, [`modelPricing`](https://code.claude.com/docs/en/settings-reference#modelpricing) when no managed source sets it on v2.1.246 or later, and its `ENABLE_TOOL_SEARCH` env entry on v2.1.247 or later |
 | `maxBudgetUsd` | `number` | `undefined` | Stop the query when the client-side cost estimate reaches this USD value. The estimate can pass this value, so [leave headroom](https://code.claude.com/docs/en/agent-sdk/agent-loop.md#budget-headroom). Counts only the call's own spend; totals restored from a resumed session don't count. For accuracy caveats and reset behavior, see [Track cost and usage](https://code.claude.com/docs/en/agent-sdk/cost-tracking.md) |
 | `maxThinkingTokens` | `number` | `undefined` | *Deprecated:* Use `thinking` instead. Maximum tokens for thinking process |
-| `maxTurns` | `number` | `undefined` | Maximum agentic turns (tool-use round trips) |
+| `maxTurns` | `number` | `undefined` | Maximum agentic [turns](https://code.claude.com/docs/en/agent-sdk/agent-loop.md#turns-and-messages) |
 | `mcpServers` | `Record<string, [`McpServerConfig`](#mcpserverconfig)>` | `{}` | MCP server configurations |
 | `model` | `string` | Default from CLI | Claude model alias or full model name. See [accepted values and provider-specific IDs](https://code.claude.com/docs/en/model-config.md#available-models) |
 | `onElicitation` | `(request: ElicitationRequest, options: { signal: AbortSignal }) => Promise<ElicitationResult>` | `undefined` | Callback for handling MCP elicitation requests. Called when an MCP server requests user input and no hook handles it first. When not provided, unhandled elicitation requests are declined automatically |
@@ -636,6 +638,7 @@ interface Query extends AsyncGenerator<SDKMessage, void> {
   ): Promise<SDKControlReadFileResponse | null>;
   reloadPlugins(options?: {
     holdOnCacheImpact?: boolean;
+    addPlugins?: SdkPluginConfig[];
   }): Promise<SDKControlReloadPluginsResponse>;
   reloadSkills(): Promise<SDKControlReloadSkillsResponse>;
   reloadOutputStyles(): Promise<SDKControlReloadOutputStylesResponse>;
@@ -675,7 +678,7 @@ interface Query extends AsyncGenerator<SDKMessage, void> {
 | `mcpServerStatus()` | Returns the status of connected MCP servers as [`McpServerStatus`](#mcpserverstatus)`[]` |
 | `getContextUsage(opts?)` | Returns an [`SDKControlGetContextUsageResponse`](#sdkcontrolgetcontextusageresponse) breaking down the session's context window usage by category, skill, and tool. With the default `detail`, it includes the data `/context` shows in an interactive session, computed with token-counting API requests that don't appear in the message stream; see [how these requests are handled](#sdkcontrolgetcontextusageresponse). The [`detail` option](#sdkcontrolgetcontextusageresponse) requires Agent SDK v0.3.257 or later |
 | `readFile(path, options?)` | Reads a file from the session's filesystem. Claude Code resolves the path against `cwd`; [What `readFile()` can read](#what-readfile-can-read) lists the files it serves. Pass `{ maxBytes }` to change the read cap (default 1 MB, ceiling 10 MB) and `{ encoding: 'base64' }` for binary files such as images. Resolves with an [`SDKControlReadFileResponse`](#sdkcontrolreadfileresponse), or `null` on permission denial, a missing file, or a transport error. Requires TypeScript SDK v0.2.121 or later |
-| `reloadPlugins(options?)` | Reloads plugins from disk, so plugins you install or edit mid-session reach the running session. Resolves with an [`SDKControlReloadPluginsResponse`](#sdkcontrolreloadpluginsresponse) listing the session's commands, subagents, plugins, and MCP server status. Requires Agent SDK v0.2.85 or later. The [`holdOnCacheImpact` option](#sdkcontrolreloadpluginsresponse) requires Agent SDK v0.3.268 or later |
+| `reloadPlugins(options?)` | Reloads plugins from disk, so plugins you install or edit mid-session reach the running session. Resolves with an [`SDKControlReloadPluginsResponse`](#sdkcontrolreloadpluginsresponse) listing the session's commands, subagents, plugins, and MCP server status. Requires Agent SDK v0.2.85 or later. The [`holdOnCacheImpact` option](#sdkcontrolreloadpluginsresponse) requires Agent SDK v0.3.268 or later. The [`addPlugins` option](#load-more-plugin-folders-with-addplugins) requires Agent SDK v0.3.301 or later |
 | `reloadSkills()` | Reloads skills from disk, so skills you add or edit mid-session become available to the running session. Resolves with an [`SDKControlReloadSkillsResponse`](#sdkcontrolreloadskillsresponse) listing the skills available after the reload. Requires Agent SDK v0.3.163 or later |
 | `reloadOutputStyles()` | Re-reads [output styles](https://code.claude.com/docs/en/output-styles.md) from disk, so a style file you add or edit mid-session becomes available to the running session. Resolves with an [`SDKControlReloadOutputStylesResponse`](#sdkcontrolreloadoutputstylesresponse) listing the style names available after the reload. Requires Agent SDK v0.3.261 or later |
 | `seedReadState(path, mtime)` | Marks a file as already read so a later Edit doesn't fail with `File has not been read yet`. See [`seedReadState()`](#seedreadstate). Requires TypeScript SDK v0.2.83 or later |
@@ -733,13 +736,14 @@ Changes [settings](https://code.claude.com/docs/en/settings.md) on a running ses
 
 Only some keys take effect mid-session:
 
-* **Applied on the next turn**: `effortLevel`, `ultracode`, `permissions`, `hooks`, `skillOverrides`, `fastMode`, `agent`. Switching `agent` also applies that agent's model override and hooks on the next turn. Its system prompt applies on the next turn, or, in a session that [reuses a recorded system prompt](https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts.md#change-the-prompt-of-an-existing-session), once the session is compacted.
+* **Applied on the next turn**: `ultracode`, `permissions`, `hooks`, `skillOverrides`, `fastMode`, `agent`. Switching `agent` also applies that agent's model override and hooks on the next turn. Its system prompt applies on the next turn. In a session that [reuses a recorded system prompt](https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts.md#change-the-prompt-of-an-existing-session), it applies once the session is compacted.
 * **Applied during the current turn**: `model`. If you switch `model` while Claude is working on a turn, the response Claude is already generating finishes on the old model, and the rest of the turn, starting with the next call Claude Code makes to the model, uses the new one. Subagents keep their own model. Before v2.1.212, a mid-turn switch waited for the next turn.
+* **Applied by the next turn**: `effortLevel`. The level applies from Claude Code's next call to the model. If [changing effort keeps the prompt cache](https://code.claude.com/docs/en/prompt-caching.md#changing-effort-level), as on Claude Opus 5.5 with an API key or a Claude subscription, expect it on the next turn instead.
 * **No effect mid-session**: the system prompt options. These are resolved once at startup, so the running session keeps the original value even though the call succeeds. To change them, start a new session.
 
 `effortLevel` accepts an [effort level](https://code.claude.com/docs/en/model-config.md#adjust-effort-level) name. It also accepts `"ultracode"`, which requests `xhigh` effort with [ultracode](https://code.claude.com/docs/en/workflows.md#let-claude-decide-with-ultracode) on. `applyFlagSettings()` declares `effortLevel` without that value, so in TypeScript pass `{ ultracode: true, effortLevel: "xhigh" }` for the same result, or the [`ultracode`](https://code.claude.com/docs/en/settings-reference#ultracode) key alone to turn ultracode on at the session's current effort level. The `ultracode` value requires Claude Code v2.1.203 or later and is accepted only by `applyFlagSettings()`, not by the `effortLevel` key in a settings file. Before v2.1.284, the `ultracode` key alone also set the level to `xhigh`.
 
-The values are written to the flag-settings layer, merged over what the inline `settings` option of `query()` set at startup. This is the same tier the [on-page precedence section](#settings-precedence) calls programmatic options.
+The values are written to the flag-settings layer, merged over what the inline `settings` option of `query()` set at startup. This is the same tier the [on-page precedence section](#settings-precedence) calls programmatic options. `effortLevel` is an exception: the level you pass replaces one from `--effort` or settings, managed settings included, as the [effort resolution order](https://code.claude.com/docs/en/model-config.md#adjust-effort-level) shows.
 
 Successive calls shallow-merge top-level keys. A second call with `{ permissions: {...} }` replaces the entire `permissions` object from the prior call rather than deep-merging into it.
 
@@ -1141,6 +1145,39 @@ When you pass the option, read `held` to learn what happened:
 
 `cache_impact` is present only alongside `held: true`. `mcp_servers_added` and `mcp_servers_removed` name the plugin MCP servers the reload would register or drop, as scoped `plugin:<plugin>:<server>` names. The names are plugin-authored, so validate them before showing them. `lsp_tool_change` says whether applying would add or remove the LSP tool, or `null` when it would do neither. The `may-` forms mean the check couldn't fully see the pending plugin set.
 
+#### Load more plugin folders with `addPlugins`
+
+To load plugin folders that weren't in the [`plugins`](#options) option at startup, pass them to `reloadPlugins()` as `addPlugins`, a list of [`SdkPluginConfig`](#sdkpluginconfig) entries whose `path` is absolute. Claude Code loads the new folders and reloads the session's existing plugins in one pass. Each added plugin's MCP servers connect too, unless you set [`skipMcpDiscovery`](#sdkpluginconfig) on that folder's entry. Requires Agent SDK v0.3.301 or later and Claude Code v2.1.301 or later.
+
+This example adds one folder to a running query `q` and prints the install path of every plugin the session has loaded when the call returns:
+
+```typescript theme={null}
+const result = await q.reloadPlugins({
+  addPlugins: [{ type: "local", path: "/opt/my-app/plugins/reports" }]
+});
+
+console.log(result.plugins.map((plugin) => plugin.path));
+```
+
+If the folder loaded, the printed list includes `/opt/my-app/plugins/reports`, and the plugin's commands and subagents appear in `result.commands` and `result.agents`.
+
+An added folder stays part of the session. When you call `reloadPlugins()` again, Claude Code reloads it with the other plugins, and you don't pass it in `addPlugins` again.
+
+##### When `reloadPlugins()` doesn't load the `addPlugins` folders
+
+If `reloadPlugins()` rejects, none of the `addPlugins` folders are added, so pass them in `addPlugins` again when you retry. When the rejection has one of the following causes, the session keeps the plugins it already had:
+
+* **A relative `path` or a malformed entry**: the error message says `add_plugins must be a list of { type: "local", path } entries with absolute paths`. Claude Code refuses the whole list over one bad entry, so pass every entry as `{ type: "local", path }` with an absolute `path`
+* **An administrator has turned on [`disableSideloadFlags`](https://code.claude.com/docs/en/settings-reference#disablesideloadflags) in your managed settings**: the message says `reload_plugins add_plugins is disabled by managed settings (disableSideloadFlags)`. To load the folder, ask that administrator to remove the setting
+* **The [sandbox](https://code.claude.com/docs/en/sandboxing.md) couldn't be rebuilt**: with [sandboxing](#sandboxsettings) on, Claude Code rebuilds the sandbox configuration so that sandboxed shell commands can't write to the folders you add. The message says `the sandbox could not be rebuilt to keep shell commands out of this folder`. Check that your [sandbox settings](#sandboxsettings) still form a valid configuration
+
+If you pass `holdOnCacheImpact` and the call resolves with [`held: true`](#sdkcontrolreloadpluginsresponse), the `addPlugins` folders aren't added. To add them anyway, call `reloadPlugins()` again with the same `addPlugins` list and without `holdOnCacheImpact`.
+
+When the call resolves without `held: true` and a folder is still missing from `result.plugins`, start by checking for these causes:
+
+* **The folder doesn't exist or its plugin failed to load**: `result.error_count` is `1` or higher. The folder stays part of the session even so. After you fix the folder, call `reloadPlugins()` again to load it, this time without listing it in `addPlugins`
+* **The Claude Code executable is older than v2.1.301**: an executable older than v2.1.301 ignores `addPlugins` and reloads only the plugins the session already had. Check `claude_code_version` on the [init message](#sdksystemmessage), and run an executable at v2.1.301 or later
+
 ### `SDKControlReloadSkillsResponse`
 
 Return type of [`reloadSkills()`](#query-object).
@@ -1297,7 +1334,7 @@ When multiple sources are loaded, settings are merged with this precedence (high
 2. Project settings (`.claude/settings.json`)
 3. User settings (`~/.claude/settings.json`)
 
-Programmatic options such as `agents`, `allowedTools`, and `settings` override user, project, and local filesystem settings. Managed policy settings take precedence over programmatic options.
+Programmatic options such as `agents`, `allowedTools`, and `settings` override user, project, and local filesystem settings. If a managed policy setting and a programmatic option set the same key, the managed value applies, with exceptions such as an `effortLevel` passed to [`applyFlagSettings()`](#applyflagsettings).
 
 ### `PermissionMode`
 
@@ -1375,6 +1412,8 @@ type PermissionResult =
     };
 ```
 
+If you return `allow` with more than 4,096 items in `updatedPermissions`, Claude Code treats the result as invalid and denies the tool call. Each update counts as one item, and so does each entry in its `rules` or `directories` list. The denial message ends with `updatedPermissions may hold at most 4096 updates, rules and directories in all.` To have the call allowed, return 4,096 items or fewer.
+
 ### `ToolConfig`
 
 Configuration for built-in tool behavior.
@@ -1436,14 +1475,105 @@ type McpHttpServerConfig = {
 
 #### `McpSdkServerConfigWithInstance`
 
+Configuration for an in-process MCP server. It is what [`createSdkMcpServer()`](#createsdkmcpserver) returns, plus an optional `tools` list of [`McpServerToolPolicy`](#mcpservertoolpolicy) entries that you add.
+
 ```typescript theme={null}
 type McpSdkServerConfigWithInstance = {
   type: "sdk";
   name: string;
   timeout?: number;
+  tools?: McpServerToolPolicy[];
   instance: McpServer;
 };
 ```
+
+To require approval for calls to one of the server's tools, or deny them, add a policy entry naming the tool. Spread what `createSdkMcpServer()` returns into an object under `mcpServers` and put the entry in a `tools` list on that object, because the function's `tools` option accepts tool definitions and not policy entries. The policy list requires Agent SDK v0.3.301 or later, and [`McpServerToolPolicy`](#mcpservertoolpolicy) describes what each `permission_policy` value does.
+
+In this script, an `allowedTools` wildcard pre-approves every tool on the `records` server, but `delete_record` is marked `always_ask`, so calls to it go to `canUseTool` anyway. With the `destructiveHint: true` annotation, the call still reaches the callback if the session runs in `auto` mode, where the auto mode [classifier](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) could otherwise approve it.
+
+```typescript theme={null}
+import { query, tool, createSdkMcpServer } from "@anthropic-ai/claude-agent-sdk";
+import { z } from "zod";
+
+const deleteRecord = tool(
+  "delete_record",
+  "Delete a customer record by ID",
+  { id: z.string() },
+  async ({ id }) => ({ content: [{ type: "text", text: `Deleted record ${id}` }] }),
+  { annotations: { destructiveHint: true } }
+);
+
+const records = createSdkMcpServer({ name: "records", tools: [deleteRecord] });
+
+for await (const message of query({
+  prompt: "Delete customer record 42",
+  options: {
+    mcpServers: {
+      // Spread the returned config and add the policy list beside it
+      records: {
+        ...records,
+        tools: [{ name: "delete_record", permission_policy: "always_ask" as const }]
+      }
+    },
+    allowedTools: ["mcp__records__*"],
+    canUseTool: async (toolName, input) => {
+      console.log(`Approval requested for ${toolName}`);
+      return { behavior: "allow", updatedInput: input };
+    }
+  }
+})) {
+  if (message.type === "result" && message.subtype === "success") {
+    console.log(message.result);
+  }
+}
+```
+
+When Claude calls `delete_record`, the script prints `Approval requested for mcp__records__delete_record`.
+
+To change or lift a tool's policy while the session runs, pass the server's config with a new `tools` value to [`setMcpServers()`](#mcpsetserversresult). The `tools` value you pass takes effect from Claude's next call to that server's tools:
+
+* **A list with entries**: the entries replace the current policies
+* **An empty list**: every policy on the server is cleared
+* **No `tools` key**: the current policies stay
+
+Include in that call your other in-process servers and any server an earlier `setMcpServers()` call added, or the call disconnects them.
+
+#### `McpServerToolPolicy`
+
+One entry in an [`McpSdkServerConfigWithInstance`](#mcpsdkserverconfigwithinstance)'s `tools` list, naming one of the server's tools and setting the permission policy for calls to that tool. The list requires Agent SDK v0.3.301 or later and Claude Code v2.1.301 or later. An older Claude Code executable, such as an executable you point `pathToClaudeCodeExecutable` at, ignores the list. Then `always_ask` and `always_deny` aren't enforced, and each call goes through the [permission flow](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated).
+
+```typescript theme={null}
+type McpServerToolPolicy = {
+  name: string;
+  permission_policy?: "always_allow" | "always_ask" | "always_deny";
+  org_max_permission?: "allow" | "ask" | "blocked";
+};
+```
+
+| Field | Type | Description |
+| :- | :- | :- |
+| `name` | `string` | The tool's bare name as passed to [`tool()`](#tool), without the `mcp__<server>__` prefix |
+| `permission_policy` | `'always_allow' \| 'always_ask' \| 'always_deny'` | The approval policy for the tool's calls, [`always_ask` or `always_deny`](#permission-policy-values). `always_allow` is ignored on an in-process server: to pre-approve a tool, list it in [`allowedTools`](#options) instead |
+| `org_max_permission` | `'allow' \| 'ask' \| 'blocked'` | A per-tool ceiling that an organization admin sets. Ignored on an in-process server, so leave it unset |
+
+##### `permission_policy` values
+
+Choose `always_ask` to approve each call yourself, or `always_deny` to block the tool outright:
+
+* **`always_ask`**: each call to the tool [needs approval](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated), even if an `allowedTools` entry or allow rule covers it. The call goes to your `canUseTool` callback or [`permissionPromptToolName`](#options) tool, unless it's settled first. A [mod](https://code.claude.com/docs/en/plugins/mods/overview.md) in a plugin you load [can approve it first](https://code.claude.com/docs/en/permissions.md#precedence-among-rules-hooks-and-mods). Otherwise, in `dontAsk` mode it's denied, and in [`auto`, `plan`, and `bypassPermissions` mode](#permission-modes-that-can-approve-an-always_ask-call) it can be approved before it reaches your callback
+* **`always_deny`**: a call to the tool [is denied](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated) in every permission mode, including `bypassPermissions`, but a mod in a plugin you load [can still approve it](https://code.claude.com/docs/en/permissions.md#precedence-among-rules-hooks-and-mods)
+
+If you pass neither `canUseTool` nor `permissionPromptToolName`, or set [`permissionPrompts`](#options) to `'none'`, an `always_ask` call that isn't settled first is denied unless a [`PermissionRequest` hook](https://code.claude.com/docs/en/hooks#permissionrequest) allows it.
+
+##### Permission modes that can approve an `always_ask` call
+
+In `auto`, `plan`, and `bypassPermissions` mode, a call to a tool marked [`always_ask`](#permission-policy-values) can be approved before it reaches your `canUseTool` callback.
+
+* **`auto`**: the auto mode [classifier](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) reviews the call and can allow it. To make every call reach your callback in `auto` mode, set `destructiveHint: true` in the tool's [annotations](#toolannotations)
+* **`plan`**: while [auto mode is available](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) to the session, calls to an `always_ask` tool annotated `readOnlyHint: true` go to the auto mode classifier, which can allow them. Calls to other `always_ask` tools reach your callback. To make a read-only tool's calls reach your callback too, add `destructiveHint: true` to that tool's annotations alongside `readOnlyHint: true`. Alternatively, set [`useAutoModeDuringPlan`](https://code.claude.com/docs/en/settings-reference#useautomodeduringplan) to `false`, which turns the classifier off during planning
+* **`bypassPermissions`**: when the [`CLAUDE_CODE_REMOTE`](https://code.claude.com/docs/en/env-vars#variables) environment variable is `true`, as it is in a [cloud session](https://code.claude.com/docs/en/claude-code-on-the-web.md), the call is approved without your callback, whatever the tool's annotations. Anywhere else the call reaches your callback. To make it reach your callback in a cloud session too, run the session in `default` or `acceptEdits` mode instead
+
+Set `destructiveHint` to `true` explicitly in `auto` and `plan` mode. For `always_ask` calls, Claude Code reads an unset `destructiveHint` as `false`, although the default listed under [`ToolAnnotations`](#toolannotations) is `true`.
 
 #### `McpClaudeAIProxyServerConfig`
 
@@ -1470,7 +1600,7 @@ type SdkPluginConfig = {
 | Field | Type | Description |
 | :- | :- | :- |
 | `type` | `'local'` | Must be `'local'` (only local plugins currently supported) |
-| `path` | `string` | Absolute or relative path to the plugin directory |
+| `path` | `string` | Path to the plugin directory. A relative path resolves against the [`cwd`](#options) option when the session starts. The path must be absolute when you load the plugin mid-session with [`addPlugins`](#load-more-plugin-folders-with-addplugins) |
 | `skipMcpDiscovery` | `boolean` | When `true`, the SDK loads skills, hooks, agents, and commands from this plugin but does not read its `.mcp.json` or manifest `mcpServers`. Set this when your application owns the plugin's MCP connections. |
 
 **Example:**
@@ -1573,7 +1703,7 @@ The `message` field is a [`BetaMessage`](https://platform.claude.com/docs/en/api
 
 `aborted` is `true` when an interrupt or abort truncated the assistant message before the stream completed: the message has no `stop_reason` and the content may end mid-word. The field is absent on normally completed messages. It requires Agent SDK v0.3.214 or later.
 
-`agent_id` identifies the subagent that produced the message and is absent on main-thread messages. The value equals the `task_id` on that subagent's [`task_started`](#sdktaskstartedmessage) and other task events, and is unchanged when the subagent is [resumed](https://code.claude.com/docs/en/agent-sdk/subagents.md#resume-subagents). The field requires Agent SDK v0.3.292 or later.
+`agent_id` identifies the subagent that produced the message and is absent on main-thread messages. The value equals the `task_id` on that subagent's [`task_started`](#sdktaskstartedmessage) and other task events, and is unchanged when the subagent is [resumed](https://code.claude.com/docs/en/agent-sdk/subagents.md#resume-subagents). On messages from a [nested subagent](https://code.claude.com/docs/en/sub-agents.md#let-subagents-spawn-their-own-subagents), it names the nested subagent, not the subagent that spawned it. The field requires Agent SDK v0.3.292 or later.
 
 Match a subagent's messages to its task events on `agent_id` rather than pairing a message's `parent_tool_use_id` with a task event's `tool_use_id`. When a tool call resumes the subagent, the task events carry that call's `tool_use_id`, while the messages keep the `parent_tool_use_id` of the tool call that first started the subagent, so the two no longer match.
 
@@ -1972,7 +2102,7 @@ type SDKSystemMessage = {
 `terminal_slash_commands` names the entries in `slash_commands` whose interface is bound to the local terminal, such as `exit`. You can send them like any other entry in `slash_commands`; the field exists so a remote or mobile client can hide them from its command menus. The field is present only when non-empty, and requires Agent SDK v0.3.229 or later.
 
 * `source` on each `mcp_servers` entry: where the server's definition came from, with the same values as [`McpServerStatus`](#mcpserverstatus)'s `source`. Requires Agent SDK v0.3.274 or later.
-* `effort`: the [effort level](https://code.claude.com/docs/en/model-config.md#adjust-effort-level) Claude Code sends on the session's next request, or `null` when it sends none. Claude Code sets the field only on the init message it sends to [Remote Control](https://code.claude.com/docs/en/remote-control.md) clients, and omits it from the init message your application reads. Requires Agent SDK v0.3.234 or later.
+* `effort`: the [effort level](https://code.claude.com/docs/en/model-config.md#adjust-effort-level) set for the session's next turn, or `null` when Claude Code sends no level. Claude Code sets the field only on the init message it sends to [Remote Control](https://code.claude.com/docs/en/remote-control.md) clients, and omits it from the init message your application reads. Requires Agent SDK v0.3.234 or later.
 
 The `capabilities` array names the protocol behaviors this CLI implements, so you can feature-detect instead of comparing `claude_code_version` strings. It is an open set: ignore values you don't recognize, and check for the specific capability whose behavior you rely on. The field requires Claude Code v2.1.205 or later and is absent on earlier CLIs.
 
@@ -3154,7 +3284,9 @@ type ToolInputSchemas =
 
 ### Agent
 
-**Tool name:** `Agent`. The previous name `Task` is still accepted as an alias, and the `tools` array in the [`SDKSystemMessage`](#sdksystemmessage) init message currently lists this tool as `Task` for backward compatibility.
+**Tool name:** `Agent`. The previous name `Task` is still accepted as an alias when this tool is available to the session.
+
+The `tools` array in the [`SDKSystemMessage`](#sdksystemmessage) init message lists this tool as `Task` for backward compatibility.
 
 > [!NOTE]
 >
@@ -3891,7 +4023,7 @@ type ToolOutputSchemas =
 
 ### Agent
 
-**Tool name:** `Agent`. The previous name `Task` is still accepted as an alias, and the `tools` array in the [`SDKSystemMessage`](#sdksystemmessage) init message currently lists this tool as `Task` for backward compatibility.
+**Tool name:** `Agent`. The previous name `Task` is still accepted as an alias when this tool is available to the session.
 
 ```typescript theme={null}
 type AgentOutput =
@@ -4581,10 +4713,11 @@ type CronCreateOutput = {
   humanSchedule: string;
   recurring: boolean;
   durable?: boolean; // true when persisted to .claude/scheduled_tasks.json; false when session-only
+  nextFireAt?: number;
 };
 ```
 
-Returns the job ID and a human-readable description of the schedule.
+Returns the job ID, a human-readable schedule, and the next run time. `nextFireAt` gives it in epoch milliseconds, with [jitter](https://code.claude.com/docs/en/scheduled-tasks.md#jitter) already applied, so it's when the job is set to run. The field requires TypeScript Agent SDK v0.3.299 or later and Claude Code v2.1.299 or later.
 
 ### CronDelete
 
@@ -4611,11 +4744,14 @@ type CronListOutput = {
     prompt: string;
     recurring?: boolean;
     durable?: boolean;
+    nextFireAt?: number;
   }[];
 };
 ```
 
 Returns the scheduled cron jobs: durable jobs from `.claude/scheduled_tasks.json` and session-only jobs from the current session. A session-only job carries `durable: false`; jobs read from disk omit the field.
+
+`nextFireAt` is the job's next run time in epoch milliseconds, [jitter](https://code.claude.com/docs/en/scheduled-tasks.md#jitter) included. No value is earlier than the `CronList` call: a job whose time [passed without a run](https://code.claude.com/docs/en/scheduled-tasks.md#how-scheduled-tasks-run) carries the call's time. The field requires TypeScript Agent SDK v0.3.299 or later and Claude Code v2.1.299 or later.
 
 ### ScheduleWakeup
 
@@ -5082,9 +5218,27 @@ type McpServerStatus = {
 };
 ```
 
-`source` says where the server's definition came from, with the same values and trust rule as [`McpServerProvenance`](#mcpserverprovenance)'s `source`. The field requires Agent SDK v0.3.274 or later and is absent on earlier versions.
+Use `source` to decide how far to trust a server, and the `_meta` on each `tools` entry to find a UI resource the server attached to that tool:
 
-`_meta` on a `tools` entry carries the MCP Apps members of that tool's `_meta`, so your application can find the `ui://` resource to render with [`readMcpResource()`](#query-object). Claude Code passes through the `ui` object and the deprecated flat `ui/resourceUri` string, and withholds every other key. Inside `ui`, `resourceUri` is a `ui://` string and `visibility` an array of `"model"` and `"app"` when the server sets them, and any other member passes through unchanged. Claude Code drops either key when the value is malformed, and omits `_meta` from a tool that declares neither. The field is present only when the init message's [`capabilities`](#sdksystemmessage) include `mcp_tool_ui_meta_v1`, and requires TypeScript Agent SDK v0.3.280 or later.
+* **`source`**: where the server's definition came from, with the same values as `source` on [`McpServerProvenance`](#mcpserverprovenance). Base trust decisions on `source` rather than on `name`, because only your own in-process server reports `sdk`, whatever name any other server is registered under. If you don't recognize a `source` value, treat that server as you treat any server whose `source` isn't `sdk`. Requires Agent SDK v0.3.274 or later
+* **`_meta`**: the `ui` object and the `ui/resourceUri` string from the `_meta` the server declared for the tool. Claude Code withholds every other `_meta` key. `ui/resourceUri` is an older top-level spelling of `ui.resourceUri`. When the server attaches an [MCP Apps UI resource](https://code.claude.com/docs/en/mcp.md#reference-mcp-resources) to the tool, `ui.resourceUri` or `ui/resourceUri` holds the resource's `ui://` URI. Fetch that URI with [`readMcpResource()`](#query-object) and render the resource in your application. Requires Agent SDK v0.3.280 or later
+
+Claude Code sends `_meta` only when the [`capabilities`](#sdksystemmessage) array of the `system` message with subtype `init` lists `mcp_tool_ui_meta_v1`. You don't turn `mcp_tool_ui_meta_v1` on yourself.
+
+#### When a tool's `_meta.ui` holds only `visibility`
+
+If your server declares `ui.resourceUri` for a tool but the `_meta.ui` your application receives holds only `visibility`, the `ui` object the server sent failed one of Claude Code's checks. Compare the `_meta` in your server's `tools/list` response against the checks for each key:
+
+* **`ui`**: reaches your application unchanged, including any members other than `resourceUri` and `visibility`, if all three checks pass:
+
+  * `resourceUri` is absent, or is a string that starts with `ui://`
+  * `visibility` is absent, or lists only `"model"` and `"app"`
+  * The whole object is at most 4,096 characters when serialized as JSON
+
+  If any of the checks fails, your application receives at most a `ui` whose only member is a `visibility` array with the `"model"` and `"app"` entries the server listed.
+* **`ui/resourceUri`**: reaches your application if it is a string that starts with `ui://` and is at most 4,096 characters. Otherwise Claude Code drops it
+
+When Claude Code is left with no `ui` member and no `ui/resourceUri` string to send, the `tools` entry has no `_meta` at all.
 
 ### `McpServerStatusConfig`
 
@@ -5316,16 +5470,23 @@ type McpSetServersResult = {
 };
 ```
 
+The `setMcpServers()` promise resolves after newly added stdio, HTTP, and SSE servers connect or fail, so tools from servers that connected are available on the next turn.
+
 When you call `setMcpServers()`, Claude Code applies these rules:
 
 * **Servers the call doesn't name**: outside a [cloud session](https://code.claude.com/docs/en/claude-code-on-the-web.md), Claude Code disconnects the servers an earlier `setMcpServers()` call added and the in-process SDK servers, and lists them in `removed`. Other servers keep running and aren't listed in `removed`, among them the stdio, HTTP, and SSE servers from the [`mcpServers`](#options) option, servers from settings files, and plugin-provided servers.
-* **Servers the call names**: Claude Code replaces a stdio, HTTP, or SSE server that an earlier `setMcpServers()` call added only when its config differs from the one you passed. An in-process SDK server already registered under that name stays as it is, so to swap one, leave it out of one call and add it in the next.
+* **Stdio, HTTP, and SSE servers that an earlier `setMcpServers()` call added**: outside a cloud session, a server you name again with an identical config keeps its connection and tools. It appears in neither `added` nor `removed`. If you pass a changed config, Claude Code reconnects the server using that config and lists it in `added`, not in `removed`.
+* **Stdio, HTTP, and SSE servers the call names that no earlier call added**: outside a cloud session, Claude Code adds the server and lists it in `added`, or in `errors` if it refuses the server.
+* **In-process SDK servers the call names**: a server already registered through `mcpServers` or an earlier call keeps its running instance and timeout. If you pass a [`tools` policy list](#mcpsdkserverconfigwithinstance) for it, even an empty one, you replace its policies; otherwise they stay. To run a new instance outside a cloud session, omit the server from one call and name it in the next.
 * **Built-in servers the CLI started at startup**: if the call names one, Claude Code drops that entry and reports it in `errors`.
 * **Stdio, HTTP, or SSE servers that share a name with one from an MCP installation scope such as `.mcp.json`**: under that name the session uses your server's tools rather than the [installation-scope server's](https://code.claude.com/docs/en/mcp.md#mcp-installation-scopes). Before Claude Code v2.1.305, Claude Code could disconnect your server and connect the installation-scope server when your app [reloaded plugins](#query-object).
 
-The promise resolves after newly added stdio, HTTP, and SSE servers connect or fail, so tools from servers that connected are available on the next turn.
-
 `added` lists the servers Claude Code added or replaced, whether or not they connected. A server that failed to connect appears in both `added` and `errors`, with the failure text under `errors` and a `failed` row in [`mcpServerStatus()`](#methods). Before Claude Code v2.1.257, a server whose connection attempt threw was reported only under `errors`.
+
+An `errors` value starting `Blocked by enterprise` means policy refused the server, not that connecting failed:
+
+* `Blocked by enterprise policy (allowedMcpServers/deniedMcpServers)`: the server isn't in `added`. A [`deniedMcpServers`](https://code.claude.com/docs/en/managed-mcp#policy-based-control-with-allowlists-and-denylists) entry matches it, or an `allowedMcpServers` list is set and omits it. If that list is in a settings file you load through [`settingSources`](#options), edit the file. If it's in managed settings, ask your administrators to change it.
+* `Blocked by enterprise managed policy`: the server is in `added`, with a `failed` row in `mcpServerStatus()`. Ask an administrator which policy blocks it.
 
 ### `RewindFilesResult`
 
@@ -5413,6 +5574,8 @@ type SDKToolUseSummaryMessage = {
 Emitted when a hook begins executing.
 
 Claude Code delivers this message, [`SDKHookProgressMessage`](#sdkhookprogressmessage), and [`SDKHookResponseMessage`](#sdkhookresponsemessage) to the message stream immediately, including while a `SessionStart` or `Setup` hook is still running during session startup. Claude Code v2.1.169 through v2.1.203 delivered these messages in one batch after a `SessionStart` or `Setup` hook completed; v2.1.204 restored live delivery.
+
+If you start the session with [`startup()`](#startup), these messages reach you once you call `.query()` and iterate the result.
 
 ```typescript theme={null}
 type SDKHookStartedMessage = {
@@ -5806,6 +5969,24 @@ The `trigger`, `user_message_uuid`, and `timestamp` fields require Claude Code v
 
 The SDK's published typings declare `SDKConversationResetMessage` in Claude Code v2.1.203 and later. Before v2.1.203, `SDKMessage` referenced the type without declaring it, so narrowing on `type === "conversation_reset"` failed to typecheck when `skipLibCheck` was disabled.
 
+### `BUILTIN_TOOL_NAMES` and `LEGACY_TOOL_NAME_ALIASES`
+
+Use these two constants to check tool names that your application's users enter. Both spell each name the way you write it in permission rules, hook matchers, and the `tools` and `disallowedTools` options. Import them from `@anthropic-ai/claude-agent-sdk` or from `@anthropic-ai/claude-agent-sdk/core`. They require Agent SDK v0.3.301 or later and are alpha.
+
+The SDK's type declarations give `BUILTIN_TOOL_NAMES` a readonly tuple type and `LEGACY_TOOL_NAME_ALIASES` a string-to-string record type:
+
+```typescript theme={null}
+const BUILTIN_TOOL_NAMES: readonly ["Agent", /* ...more names... */ "Write"];
+const LEGACY_TOOL_NAME_ALIASES: Readonly<Record<string, string>>;
+```
+
+* **`BUILTIN_TOOL_NAMES`**: names of Claude Code's built-in tools in alphabetical order, such as `Agent`, `Bash`, and `Read`. MCP tool names aren't included. Because the type is a tuple of string literals, `(typeof BUILTIN_TOOL_NAMES)[number]` gives you a union type of the names
+* **`LEGACY_TOOL_NAME_ALIASES`**: earlier tool names that permission rules, hook matchers, and the `tools` and `disallowedTools` options still accept. Each key is an earlier name and its value is the current one: for example, `Task` maps to `Agent`, and `KillShell` and `KillBash` map to `TaskStop`
+
+You can confirm a name with either of two tests: `BUILTIN_TOOL_NAMES` includes it, or `Object.hasOwn(LEGACY_TOOL_NAME_ALIASES, name)` returns `true`. A name that fails both can still be valid, because `BUILTIN_TOOL_NAMES` leaves out MCP tools and some built-in tools. If you build a deny list from `BUILTIN_TOOL_NAMES`, Claude can still use the tools the constant leaves out. To deny every tool, set [`disallowedTools: ["*"]`](https://code.claude.com/docs/en/agent-sdk/permissions#allow-and-deny-rules) instead.
+
+Finding a name in `BUILTIN_TOOL_NAMES` doesn't tell you the session has that tool: `TodoWrite` is listed even though it's [disabled by default](https://code.claude.com/docs/en/tools-reference.md). To see which tools a session has, read the `tools` array of its [`SDKSystemMessage`](#sdksystemmessage). That array includes MCP tools and lists the Agent tool as `Task`, so map each name through `LEGACY_TOOL_NAME_ALIASES` before comparing it with `BUILTIN_TOOL_NAMES`.
+
 ### `AbortError`
 
 Custom error class for abort operations.
@@ -5915,7 +6096,7 @@ type SandboxNetworkConfig = {
 | `allowManagedDomainsOnly` | `boolean` | `false` | Managed-settings only. When set in [managed settings](https://code.claude.com/docs/en/managed-settings.md), only `allowedDomains` entries and `WebFetch(domain:...)` allow rules from managed settings are honored, and allow entries from user, project, or local settings are ignored. From the SDK, pass it through the [`managedSettings`](#options) option |
 | `allowLocalBinding` | `boolean` | `false` | Allow processes to bind to local ports (for example, for dev servers) |
 | `allowUnixSockets` | `string[]` | `[]` | Unix socket paths that processes can access (for example, Docker socket) |
-| `allowAllUnixSockets` | `boolean` | `false` | Allow access to all Unix sockets |
+| `allowAllUnixSockets` | `boolean` | `false` | Allow access to all Unix sockets, and on Linux to VM sockets (`AF_VSOCK`) |
 | `httpProxyPort` | `number` | `undefined` | HTTP proxy port for network requests |
 | `socksProxyPort` | `number` | `undefined` | SOCKS proxy port for network requests |
 

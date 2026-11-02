@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/env-vars
-fetched_at: 2026-10-26T05:40:01.983325+00:00
+fetched_at: 2026-11-02T07:00:26.128124+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,52 +29,52 @@ A variable you set in your shell lasts for that terminal session, while a variab
 
 Set the variable before launching `claude`:
 
-**macOS, Linux, WSL**
+> [tab] macOS, Linux, WSL
+>
+> ```bash theme={null}
+> export API_TIMEOUT_MS="1200000"
+> claude
+> ```
+>
+> To set it for every session, add the `export` line to `~/.bashrc`, `~/.zshrc`, or your shell's profile file.
 
-```bash theme={null}
-export API_TIMEOUT_MS="1200000"
-claude
-```
+> [tab] Windows PowerShell
+>
+> ```powershell theme={null}
+> $env:API_TIMEOUT_MS = "1200000"
+> claude
+> ```
+>
+> To set it for every session, run `[Environment]::SetEnvironmentVariable("API_TIMEOUT_MS", "1200000", "User")` and open a new terminal.
 
-To set it for every session, add the `export` line to `~/.bashrc`, `~/.zshrc`, or your shell's profile file.
-
-**Windows PowerShell**
-
-```powershell theme={null}
-$env:API_TIMEOUT_MS = "1200000"
-claude
-```
-
-To set it for every session, run `[Environment]::SetEnvironmentVariable("API_TIMEOUT_MS", "1200000", "User")` and open a new terminal.
-
-**Windows CMD**
-
-```batch theme={null}
-set API_TIMEOUT_MS=1200000
-claude
-```
-
-To set it for every session, run `setx API_TIMEOUT_MS "1200000"` and open a new terminal.
+> [tab] Windows CMD
+>
+> ```batch theme={null}
+> set API_TIMEOUT_MS=1200000
+> claude
+> ```
+>
+> To set it for every session, run `setx API_TIMEOUT_MS "1200000"` and open a new terminal.
 
 The assignment line prints nothing on success. To confirm the variable is set, print it in the same shell:
 
-**macOS, Linux, WSL**
+> [tab] macOS, Linux, WSL
+>
+> ```bash theme={null}
+> echo $API_TIMEOUT_MS
+> ```
 
-```bash theme={null}
-echo $API_TIMEOUT_MS
-```
+> [tab] Windows PowerShell
+>
+> ```powershell theme={null}
+> echo $env:API_TIMEOUT_MS
+> ```
 
-**Windows PowerShell**
-
-```powershell theme={null}
-echo $env:API_TIMEOUT_MS
-```
-
-**Windows CMD**
-
-```batch theme={null}
-echo %API_TIMEOUT_MS%
-```
+> [tab] Windows CMD
+>
+> ```batch theme={null}
+> echo %API_TIMEOUT_MS%
+> ```
 
 ### Set variables in settings files
 
@@ -136,7 +136,7 @@ Numeric variables such as timeouts, token budgets, and retry counts accept scien
 
 | Variable | Purpose |
 | :- | :- |
-| `ANTHROPIC_API_KEY` | API key sent as `X-Api-Key` header. When set, this key is used instead of your Claude Pro, Max, Team, or Enterprise subscription even if you are logged in. In non-interactive mode (`-p`), the key is always used when present. In interactive mode, you are prompted to approve the key once before it overrides your subscription. To use your subscription instead, run `unset ANTHROPIC_API_KEY` |
+| `ANTHROPIC_API_KEY` | API key sent as `X-Api-Key` header. When set, this key is used instead of your Claude Pro, Max, Ultra, Team, or Enterprise subscription even if you are logged in. In non-interactive mode (`-p`), the key is always used when present. In interactive mode, you are prompted to approve the key once before it overrides your subscription. To use your subscription instead, run `unset ANTHROPIC_API_KEY` |
 | `ANTHROPIC_AUTH_TOKEN` | Custom value for the `Authorization` header (the value you set here will be prefixed with `Bearer `) |
 | `ANTHROPIC_AWS_API_KEY` | Workspace API key for [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md), generated in the AWS Console. Sent as `x-api-key` and takes precedence over AWS SigV4 |
 | `ANTHROPIC_AWS_BASE_URL` | Override the [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md) endpoint URL. Use for custom regions or when routing through an [LLM gateway](https://code.claude.com/docs/en/llm-gateway). Defaults to `https://aws-external-anthropic.{region}.api.aws`. Claude Code resolves the region with the [same precedence as on Amazon Bedrock](https://code.claude.com/docs/en/amazon-bedrock.md#3-configure-claude-code) |
@@ -239,16 +239,16 @@ Numeric variables such as timeouts, token budgets, and retry counts accept scien
 | `CLAUDE_CODE_DISABLE_ATTACHMENTS` | Set to `1` to disable attachment processing. File mentions with `@` syntax are sent as plain text instead of being expanded into file content. Ignored in [project and local settings](https://code.claude.com/docs/en/settings-reference.md#variables-claude-code-ignores-in-env) |
 | `CLAUDE_CODE_DISABLE_AUTH_REFRESH_LOCK` | Set to `1` to make a Claude Code process run its [`gcpAuthRefresh`](https://code.claude.com/docs/en/settings-reference#gcpauthrefresh) or [`awsAuthRefresh`](https://code.claude.com/docs/en/settings-reference#awsauthrefresh) command itself instead of waiting while another process runs it. Requires Claude Code v2.1.286 or later |
 | `CLAUDE_CODE_DISABLE_AUTO_MEMORY` | Set to `1` to disable [auto memory](https://code.claude.com/docs/en/memory.md#auto-memory). Set to `0` to force auto memory on even when `--bare` mode or [`autoMemoryEnabled: false`](https://code.claude.com/docs/en/settings-reference#automemoryenabled) would otherwise disable it. When disabled, Claude does not create or load auto memory files |
-| `CLAUDE_CODE_DISABLE_BACKGROUND_TASKS` | Set to `1` to remove the `run_in_background` parameter from the Bash, PowerShell, and subagent tools and to turn off the Ctrl+B shortcut and background runs of [forked skills](https://code.claude.com/docs/en/skills.md#run-skills-in-a-subagent). Claude Code then also stops moving subagents, long MCP tool calls, and timed-out shell commands to the background automatically. [MCP tasks](https://code.claude.com/docs/en/mcp.md#make-claude-wait-for-the-result-of-an-mcp-task) and the [Monitor tool](https://code.claude.com/docs/en/tools-reference.md#monitor-tool) still run in the background |
+| `CLAUDE_CODE_DISABLE_BACKGROUND_TASKS` | Set to `1` to remove the `run_in_background` parameter from the Bash, PowerShell, and subagent tools and to turn off the Ctrl+B shortcut and background runs of [forked skills](https://code.claude.com/docs/en/skills.md#run-skills-in-a-subagent). Claude Code then also stops moving subagents, long MCP tool calls, and timed-out shell commands to the background automatically. [MCP tasks](https://code.claude.com/docs/en/mcp.md#make-claude-wait-for-the-result-of-an-mcp-task) and the [Monitor tool](https://code.claude.com/docs/en/tools-reference.md#monitor-tool) still run in the background. To turn off [background sessions](https://code.claude.com/docs/en/agent-view.md#turn-off-agent-view) too, set `CLAUDE_CODE_DISABLE_AGENT_VIEW` to `1` |
 | `CLAUDE_CODE_DISABLE_BEDROCK_CONTENT_TYPE_DEFAULT` | Set to `1` to stop Claude Code from treating an [Amazon Bedrock](https://code.claude.com/docs/en/amazon-bedrock.md) streaming response with a missing or empty `Content-Type` header as Amazon Bedrock's binary event stream. By default, Claude Code assumes a gateway dropped the header from an otherwise unmodified response, so it decodes the body and streaming keeps working. Set this only for a gateway that also re-emits the stream as server-sent events; Claude Code then reads the header-less body as server-sent events instead. Requires Claude Code v2.1.239 or later |
 | `CLAUDE_CODE_DISABLE_BEDROCK_CONTENT_TYPE_GUARD` | Set to `1` to skip the check that an [Amazon Bedrock](https://code.claude.com/docs/en/amazon-bedrock.md) streaming response carries the `application/vnd.amazon.eventstream` content-type. Without this variable, when a response carries a different content-type, Claude Code fails the request with an error naming that type, which means a [gateway or proxy is transforming the response](https://code.claude.com/docs/en/amazon-bedrock.md#streaming-errors-behind-a-gateway-or-proxy). Configure the gateway to forward the `Content-Type` header and body unmodified rather than setting this variable. Requires Claude Code v2.1.208 or later |
-| `CLAUDE_CODE_DISABLE_BG_EXIT_HANDOFF` | Set to `1` to stop a [background session's](https://code.claude.com/docs/en/agent-view.md) in-flight work when the [supervisor](https://code.claude.com/docs/en/agent-view.md#the-supervisor-process) stops, restarts, or updates that session's process, instead of handing it to the session's next process. That work is the session's running background shell commands and dynamic workflows, plus background subagents as of v2.1.198. Affects only that handoff: backgrounding a session with `←` or [`/background`](https://code.claude.com/docs/en/agent-view#from-inside-a-session) still carries in-flight background work over. Requires Claude Code v2.1.196 or later |
+| `CLAUDE_CODE_DISABLE_BG_EXIT_HANDOFF` | Set to `1` to stop a [background session's](https://code.claude.com/docs/en/agent-view.md) in-flight work when the [supervisor](https://code.claude.com/docs/en/agent-view.md#the-supervisor-process) stops, restarts, or updates that session's process, instead of handing it to the session's next process. That work is the session's running background shell commands, plus background subagents as of v2.1.198. Affects only that handoff: backgrounding a session with `←` or [`/background`](https://code.claude.com/docs/en/agent-view#from-inside-a-session) still carries in-flight background work over. Requires Claude Code v2.1.196 or later |
 | `CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP` | Set to `1` to stop Claude Code from terminating [background shell commands](https://code.claude.com/docs/en/interactive-mode.md#background-bash-commands) under memory pressure. By default, on macOS and Linux, Claude Code terminates background shells when the operating system reports critical memory pressure and the session has been idle for 30 minutes with no turn or subagent running. Windows has no memory-pressure signal, so this variable has no effect there. Requires Claude Code v2.1.193 or later |
 | `CLAUDE_CODE_DISABLE_BUNDLED_SKILLS` | Set to `1` to disable the [skills](https://code.claude.com/docs/en/skills.md) and workflows included with Claude Code: bundled skills and workflows are removed entirely, while built-in commands like `/init` stay typable but are hidden from the model. `/doctor` stays typable like the built-in commands; hide it with `DISABLE_DOCTOR_COMMAND` instead. Skills from plugins, `.claude/skills/`, and `.claude/commands/` are unaffected. Equivalent to the [`disableBundledSkills`](https://code.claude.com/docs/en/settings-reference#disablebundledskills) setting |
 | `CLAUDE_CODE_DISABLE_CFC_PROMPT` | Set to `1` to keep the [Claude in Chrome](https://code.claude.com/docs/en/chrome.md) browser tools available while omitting the Chrome section of the system prompt and the `/claude-in-chrome` [bundled skill](https://code.claude.com/docs/en/skills.md#bundled-skills). For hosts that embed Claude Code and supply their own browser guidance. Requires Claude Code v2.1.257 or later |
 | `CLAUDE_CODE_DISABLE_CLAUDE_MDS` | Set to `1` to prevent loading any CLAUDE.md memory files into context, including user, project, and auto memory files |
 | `CLAUDE_CODE_DISABLE_CRON` | Set to `1` to disable [session-scoped scheduled tasks](https://code.claude.com/docs/en/scheduled-tasks.md). The `/loop` skill and cron tools become unavailable and any already-scheduled tasks stop firing, including tasks that are already running mid-session |
-| `CLAUDE_CODE_DISABLE_DANGEROUS_RM_TIMEOUT` | Set to `1` to turn off the time limit on [critical-path removal](https://code.claude.com/docs/en/permission-modes.md#critical-paths) prompts. In `auto` mode Claude Code then sends these removals to the classifier instead, and in `bypassPermissions` mode the prompt waits for your answer. Set it in the environment that launches Claude Code, since Claude Code ignores a copy delivered through a settings `env` block. Requires Claude Code v2.1.281 or later |
+| `CLAUDE_CODE_DISABLE_DANGEROUS_RM_TIMEOUT` | Set to `1` to turn off the `auto` and `bypassPermissions` [time limit and denials](https://code.claude.com/docs/en/permission-modes.md#time-limits-and-denials-in-auto-and-bypasspermissions-modes) on critical-path removals. These removals then go to the classifier in `auto` mode, and get an untimed prompt in `bypassPermissions` mode wherever Claude Code can show one. Set it in the environment that launches Claude Code, since Claude Code ignores a copy delivered through a settings `env` block. Requires Claude Code v2.1.281 or later |
 | `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` | Set to `1` to strip pre-release `anthropic-beta` request headers, the body fields that pair with them, and beta tool-schema fields such as `defer_loading` and `eager_input_streaming` from API requests. Use this when a proxy gateway rejects requests with an `Unexpected value(s)` error for the `anthropic-beta` header or an `Extra inputs are not permitted` error. [Disable pre-release capabilities](https://code.claude.com/docs/en/llm-gateway-protocol.md#disable-pre-release-capabilities) lists what the variable removes, including [MCP tool search](https://code.claude.com/docs/en/mcp.md#scale-with-mcp-tool-search), and what Claude Code keeps sending |
 | `CLAUDE_CODE_DISABLE_EXPLORE_PLAN_AGENTS` | Set to `1` to disable the built-in [Explore and Plan subagents](https://code.claude.com/docs/en/sub-agents.md#built-in-subagents). Claude explores with its search tools or the general-purpose subagent instead, and [plan mode](https://code.claude.com/docs/en/permission-modes.md#analyze-before-you-edit-with-plan-mode) reads files directly rather than launching Explore and Plan agents. Custom subagents named `Explore` or `Plan` are unaffected. To remove every built-in subagent type in the Agent SDK or non-interactive mode, use `CLAUDE_AGENT_SDK_DISABLE_BUILTIN_AGENTS` instead. Requires Claude Code v2.1.198 or later |
 | `CLAUDE_CODE_DISABLE_FAST_MODE` | Set to `1` to disable [fast mode](https://code.claude.com/docs/en/fast-mode.md) |
@@ -282,7 +282,7 @@ Numeric variables such as timeouts, token budgets, and retry counts accept scien
 | `CLAUDE_CODE_DISABLE_WEB_FETCH` | Set to `1` to turn off the [WebFetch](https://code.claude.com/docs/en/tools-reference.md#webfetch-tool-behavior) tool. The [WebSearch](https://code.claude.com/docs/en/tools-reference.md#websearch-tool-behavior) tool stays available. Requires Claude Code v2.1.285 or later |
 | `CLAUDE_CODE_DISABLE_WINDOWS_SHELL_LAUNCHER` | Set to `1` to start [PowerShell tool](https://code.claude.com/docs/en/tools-reference.md#powershell-tool) commands on Windows directly instead of through the `cmd.exe` launcher. By default, the launcher lets a PowerShell command [running in the background](https://code.claude.com/docs/en/tools-reference.md#background-commands) [carry over to the session's next process](https://code.claude.com/docs/en/agent-view.md#the-supervisor-process), such as when you [background the session](https://code.claude.com/docs/en/agent-view.md#from-inside-a-session). If you set the variable, a backgrounded PowerShell command stops when the session's process exits. Bash commands aren't affected. Requires Claude Code v2.1.269 or later |
 | `CLAUDE_CODE_DISABLE_WORKFLOWS` | Set to `1` to disable [workflows](https://code.claude.com/docs/en/workflows.md#turn-workflows-off). Equivalent to the [`disableWorkflows`](https://code.claude.com/docs/en/settings-reference#disableworkflows) setting |
-| `CLAUDE_CODE_EFFORT_LEVEL` | Set the effort level for supported models. Values: `low`, `medium`, `high`, `xhigh`, `max`, or `auto` to use the model default. Available levels depend on the model. Takes precedence over `--effort`, `/effort`, and the `modelSettings` and `effortLevel` settings. A [`maxEffortLevel`](https://code.claude.com/docs/en/settings-reference#maxeffortlevel) cap still applies. See [Adjust effort level](https://code.claude.com/docs/en/model-config.md#adjust-effort-level) |
+| `CLAUDE_CODE_EFFORT_LEVEL` | Set the effort level for supported models. Values: `low`, `medium`, `high`, `xhigh`, or `max`. Available levels depend on the model. Takes precedence over `--effort`, `/effort`, and the `modelSettings` and `effortLevel` settings. A [`maxEffortLevel`](https://code.claude.com/docs/en/settings-reference#maxeffortlevel) cap still applies. Set it to `auto` or `unset` to have Claude Code [send no effort level](https://code.claude.com/docs/en/model-config.md#send-no-effort-level), so that the API applies its own default for the model. See [Adjust effort level](https://code.claude.com/docs/en/model-config.md#adjust-effort-level) |
 | `CLAUDE_CODE_EMIT_SESSION_STATE_EVENTS` | Set to `1` to add [`session_state_changed`](https://code.claude.com/docs/en/agent-sdk/typescript#sdksessionstatechangedmessage) messages, which carry the session's state, to the message stream. Requires either the [Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview.md) or `--print`, `--output-format stream-json`, and `--verbose` |
 | `CLAUDE_CODE_ENABLE_AUTO_MODE` | Accepted for compatibility with older releases and has no effect. Auto mode is available by default on every provider, including Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, and signed-in [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway) sessions. In v2.1.158 through v2.1.206, setting this to `1` was required to make [auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) available on those providers |
 | `CLAUDE_CODE_ENABLE_AWAY_SUMMARY` | Override [session recap](https://code.claude.com/docs/en/interactive-mode.md#session-recap) availability. Set to `0` to force recaps off regardless of the `/config` toggle. Set to `1` to force recaps on when [`awaySummaryEnabled`](https://code.claude.com/docs/en/settings-reference#awaysummaryenabled) is `false`. Takes precedence over the setting and `/config` toggle |
@@ -297,6 +297,7 @@ Numeric variables such as timeouts, token budgets, and retry counts accept scien
 | `CLAUDE_CODE_ENABLE_TASKS` | Selects which task-tracking tools Claude Code provides in [sessions that have them](https://code.claude.com/docs/en/tools-reference.md#task-tool-availability). By default, Claude Code provides the Task tools `TaskCreate`, `TaskUpdate`, `TaskGet`, and `TaskList`. Set to `0` to get the legacy `TodoWrite` tool instead. See [Task list](https://code.claude.com/docs/en/interactive-mode.md#task-list) |
 | `CLAUDE_CODE_ENABLE_TELEMETRY` | Set to `1` to enable OpenTelemetry data collection for metrics and logging. Required before configuring OTel exporters. Set it in your shell, user settings, or managed settings. Ignored in [project and local settings](https://code.claude.com/docs/en/settings-reference.md#variables-claude-code-ignores-in-env). See [Monitoring](https://code.claude.com/docs/en/monitoring-usage.md) |
 | `CLAUDE_CODE_ENABLE_TODO_TOOLS` | Set to `1` to get the task-tracking tools on every model. Without it, Claude Code provides them by default only on the models listed under [Task tool availability](https://code.claude.com/docs/en/tools-reference.md#task-tool-availability). `CLAUDE_CODE_ENABLE_TASKS` still selects the Task tools or `TodoWrite`. Requires Claude Code v2.1.233 or later |
+| `CLAUDE_CODE_EVEN_MORE_DANGEROUSLY_SKIP_PERMISSIONS` | Set to `1` to [run dangerous `rm` commands with no prompt](https://code.claude.com/docs/en/permission-modes#turn-off-the-critical-path-removal-prompt-in-bypasspermissions-mode) in `bypassPermissions` mode, which removes a safety prompt for destructive deletes. The linked section lists where it has no effect. [Set it in the environment that launches Claude Code](#set-variables-in-your-shell), because Claude Code [ignores it in a settings `env` block](https://code.claude.com/docs/en/settings-reference#variables-claude-code-ignores-in-env). Requires Claude Code v2.1.311 or later |
 | `CLAUDE_CODE_EXIT_AFTER_STOP_DELAY` | Time in milliseconds to wait after the query loop becomes idle before automatically exiting. Useful for automated workflows and scripts using SDK mode |
 | `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` | Set to `1` to enable [agent teams](https://code.claude.com/docs/en/agent-teams.md). Agent teams are experimental and disabled by default |
 | `CLAUDE_CODE_EXTRA_BODY` | JSON object to merge into the top level of every API request body. Useful for passing provider-specific parameters that Claude Code doesn't expose directly. A value exported in your shell also applies to the [background sessions](https://code.claude.com/docs/en/agent-view.md) you dispatch with `claude agents` or `--bg`. Before v2.1.206, background sessions ignored a shell-exported value and used whatever copy the background supervisor process inherited |
@@ -374,6 +375,7 @@ Numeric variables such as timeouts, token budgets, and retry counts accept scien
 | `CLAUDE_CODE_RESUME_INTERRUPTED_TURN` | Set to `1` to automatically resume if the previous session ended mid-turn. Used in SDK mode so the model continues without requiring the SDK to re-send the prompt. To turn this off, unset the variable or set it to `0`. For the VS Code chat panel, see [Continue conversations after a reload](https://code.claude.com/docs/en/vs-code.md#continue-conversations-after-a-reload) |
 | `CLAUDE_CODE_RESUME_INTERRUPTED_TURN_MAX_AGE_MS` | Maximum age in milliseconds of the last transcript message for a session that ended mid-turn to continue automatically on resume. When the last message is older than this bound, Claude Code skips the `CLAUDE_CODE_RESUME_INTERRUPTED_TURN` automatic resume and its `CLAUDE_CODE_RESUME_PROMPT` continuation message, and the session starts idle so you continue explicitly. Unset or `0` sets no bound, except that some turns resume only within six hours of their last message, such as one that ended with an API error. A positive value bounds every turn, including those; a negative or non-numeric value applies a one-hour bound. Spawn scripts for long-running agents can set this so a restart against an old transcript doesn't re-run a stale prompt. Claude Code sets a one-hour bound itself when it restarts a crashed [agent view](https://code.claude.com/docs/en/agent-view.md) session that inherited its conversation from an interactive session. Requires Claude Code v2.1.211 or later |
 | `CLAUDE_CODE_RESUME_PROMPT` | Override the continuation message Claude Code sends to Claude when `CLAUDE_CODE_RESUME_INTERRUPTED_TURN` continues an interrupted turn instead of resending its prompt, or when you resume a [deferred tool call](https://code.claude.com/docs/en/hooks.md#defer-a-tool-call-for-later) with `-p`. Defaults to `Continue from where you left off.`. An empty string uses the default |
+| `CLAUDE_CODE_RESUME_SHOWS_CUT_OFF_CALLS` | Set to `1` to keep [interrupted tool calls](https://code.claude.com/docs/en/sessions.md#what-a-resumed-session-restores), marked as cut off, in a turn that `CLAUDE_CODE_RESUME_INTERRUPTED_TURN` continues. When unset, those calls are dropped before the turn continues. Some calls stay dropped, such as calls to subagents, skills, workflows, and tools that wait on a person. For the VS Code chat panel, see [Continue conversations after a reload](https://code.claude.com/docs/en/vs-code.md#continue-conversations-after-a-reload). Requires Claude Code v2.1.309 or later |
 | `CLAUDE_CODE_RETRY_WATCHDOG` | Set to `1` for unattended sessions such as eval harnesses, CI jobs, or remote workers. Retries `429` and `529` capacity errors indefinitely instead of failing after `CLAUDE_CODE_MAX_RETRIES` attempts. Claude Code fails at once when a standard-speed request gets a `429` that reports a spend limit or exhausted usage credits, even one from a [gateway spend cap](https://code.claude.com/docs/en/errors.md#spend-limit-reached) that resets on a schedule. Before v2.1.239, the watchdog retried these indefinitely. For fast mode requests, see [Handle rate limits](https://code.claude.com/docs/en/fast-mode.md#handle-rate-limits). The watchdog backs off up to 5 minutes between attempts, or until the limit resets when the response carries a rate-limit reset time, so a session that hits a usage limit waits out the remaining window. On v2.1.199 or later it also raises the default retry count for other transient errors, such as server errors, timeouts, and dropped connections, to 300, roughly three hours of backoff, and removes the cap of 15 on `CLAUDE_CODE_MAX_RETRIES` if you set that variable explicitly. Requires Claude Code v2.1.186 or later |
 | `CLAUDE_CODE_RETRY_WATCHDOG_MAX_WAIT_MS` | Maximum time in milliseconds that each API request spends waiting out `429` and `529` errors when `CLAUDE_CODE_RETRY_WATCHDOG` is set. Once that time is spent, the next such error ends the request. Give a positive whole number in plain digits, such as `1800000` for 30 minutes. When unset, the wait has no limit. Requires Claude Code v2.1.295 or later |
 | `CLAUDE_CODE_RETRY_WATCHDOG_USAGE_LIMIT_RECHECK_MS` | Minimum interval in milliseconds between checks of whether a [usage limit](https://code.claude.com/docs/en/errors.md#youve-hit-your-session-limit) was already lifted, while a request waits for that limit to reset with `CLAUDE_CODE_RETRY_WATCHDOG` set. When a check finds the limit lifted, the request goes out at once. Give a whole number in plain digits from `60000`, one minute, to `10800000`, three hours. Checks are made only for a claude.ai subscription's session or weekly limit while usage credits aren't in use, and not while `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` is set. When this variable is unset or its value is outside that range, no checks are made. Requires Claude Code v2.1.305 or later |
@@ -432,7 +434,7 @@ Numeric variables such as timeouts, token budgets, and retry counts accept scien
 | `CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS` | Upper bound in milliseconds on how long a [workflow](https://code.claude.com/docs/en/workflows.md) agent waits for a same-prefix sibling's first response to begin before sending its own first request. When a fan-out starts several agents that share a [prompt-cache prefix](https://code.claude.com/docs/en/workflows.md#prompt-caching-in-a-fan-out), Claude Code holds all but the first agent for up to this long so the rest read the cached prefix instead of each processing it uncached. Default `5000`. Set to `0` to disable the wait. When `DISABLE_PROMPT_CACHING` is set, agents never wait. Requires Claude Code v2.1.229 or later |
 | `CLAUDE_CODE_YOU_SHOULD_KNOW_DEBUG` | Set to `1` to show, above the prompt, a line for each of the last three checks the [You should know mod](https://code.claude.com/docs/en/interactive-mode.md#you-should-know-suggestions) made in this session. Use it to confirm the mod is checking when no notes appear. Requires Claude Code v2.1.287 or later |
 | `CLAUDE_CONFIG_DIR` | Override the configuration directory (default: `~/.claude`). All settings, session history, and plugins are stored under this path. For credentials, see [where Claude Code stores credentials](https://code.claude.com/docs/en/authentication.md#credential-management). Useful for running multiple accounts side by side: for example, `alias claude-work='CLAUDE_CONFIG_DIR=~/.claude-work claude'`. Set it in your shell, user settings, or managed settings. In a settings file, write the [absolute path](#in-settings-files). Ignored in [project and local settings](https://code.claude.com/docs/en/settings-reference.md#variables-claude-code-ignores-in-env) |
-| `CLAUDE_EFFORT` | Set automatically in Bash tool subprocesses and hook commands to the [effort level](https://code.claude.com/docs/en/model-config.md#adjust-effort-level) in effect when the subprocess starts: `low`, `medium`, `high`, `xhigh`, or `max`. Matches the `effort.level` field passed to [hooks](https://code.claude.com/docs/en/hooks.md). Only set when the current model supports the effort parameter |
+| `CLAUDE_EFFORT` | Set automatically in Bash tool subprocesses and hook commands to the [effort level](https://code.claude.com/docs/en/model-config.md#adjust-effort-level) setting when the subprocess starts: `low`, `medium`, `high`, `xhigh`, or `max`. Matches the `effort.level` field passed to [hooks](https://code.claude.com/docs/en/hooks.md). Only set when the current model supports the effort parameter |
 | `CLAUDE_ENABLE_BYTE_WATCHDOG` | Set to `1` to force-enable the byte-level streaming idle watchdog, or set to `0` to force-disable it. `0` also turns off the [first-byte deadline](https://code.claude.com/docs/en/network-config.md#streaming-idle-watchdogs) on the connections where that deadline runs. When unset, the watchdog is enabled by default for direct Anthropic API and [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md) connections, and for streaming responses on [gateway](https://code.claude.com/docs/en/gateways.md) connections reached through `ANTHROPIC_BASE_URL` or `ANTHROPIC_AWS_BASE_URL`; before v2.1.222 it didn't run on those gateway connections, so the event-level watchdog could report a stall there even while keep-alive pings were arriving. For timeouts and how the timers interact, see [Streaming idle watchdogs](https://code.claude.com/docs/en/network-config.md#streaming-idle-watchdogs) |
 | `CLAUDE_ENABLE_BYTE_WATCHDOG_BEDROCK` | Set to `1` to enable the byte-level streaming idle watchdog on Amazon Bedrock `vnd.amazon.eventstream` responses, which also enables the [first-byte deadline](https://code.claude.com/docs/en/network-config.md#streaming-idle-watchdogs) on Bedrock streaming requests. Off by default. Configure the timeout with `CLAUDE_STREAM_IDLE_TIMEOUT_MS` |
 | `CLAUDE_ENABLE_STREAM_WATCHDOG` | Set to `0` to force-disable the event-level streaming idle watchdog, or set to `1` to force-enable it. When unset, the watchdog is on by default for all providers. Before v2.1.196, the unset default was server-controlled on the direct Anthropic API and off on other providers. Configure the timeout with `CLAUDE_STREAM_IDLE_TIMEOUT_MS`; for the other stall timers that run alongside this one, see [Streaming idle watchdogs](https://code.claude.com/docs/en/network-config.md#streaming-idle-watchdogs) |
@@ -579,6 +581,7 @@ With fetching off, you can't:
 * [Message sessions beyond this machine](https://code.claude.com/docs/en/cross-session-messaging.md#message-sessions-on-other-machines) when [Remote Control](https://code.claude.com/docs/en/remote-control.md#requirements) is unavailable. Messaging between sessions on this machine works with fetching off
 * Run [`claude import` or the `/import` command](https://code.claude.com/docs/en/cli-reference#cli-commands)
 * Run [`/skill-doctor`](https://code.claude.com/docs/en/skills#find-unused-skills) or open its report in the `/plugin` **Stats** tab
+* Run [`/restart`](https://code.claude.com/docs/en/commands) on Pro, Max, and Ultra plans
 * Sync the [skills](https://code.claude.com/docs/en/skills.md#where-synced-skills-load) and [plugins](https://code.claude.com/docs/en/plugins/loading.md#synced-plugins) enabled for your claude.ai account into your terminal sessions
 * Turn on the [You should know mod](https://code.claude.com/docs/en/interactive-mode.md#you-should-know-suggestions)
 * Use [the advisor tool](https://code.claude.com/docs/en/advisor.md#requirements)
@@ -588,7 +591,7 @@ With fetching off, you can't:
 * Get the [PowerShell tool](https://code.claude.com/docs/en/tools-reference.md#powershell-tool) by default for claude.ai and Console accounts on Windows with Git Bash installed; Claude Code routes shell commands through Git Bash unless you set `CLAUDE_CODE_USE_POWERSHELL_TOOL=1`. On Windows without Git Bash, the tool stays on
 * Get [Claude-drafted feedback](https://code.claude.com/docs/en/tools-reference.md#sendfeedback-tool-behavior), which Claude Code turns on through a fetched flag
 * Have Claude [treat large pastes as pasted rather than typed text](https://code.claude.com/docs/en/terminal-config.md#how-claude-treats-pasted-text); the content behind a `[Pasted text #N]` placeholder reaches Claude unmarked
-* Have Claude Code [exclude MCP tools whose input schema the API would reject](https://code.claude.com/docs/en/mcp.md#tools-with-invalid-input-schemas); it sends the schema anyway, and a request that includes it fails with [a 400 error naming the tool by its position](https://code.claude.com/docs/en/errors.md#tool-input-schema-is-invalid)
+* Have Claude Code [exclude MCP tools whose input schema the API would reject](https://code.claude.com/docs/en/mcp.md#tools-with-invalid-input-schemas)
 * Have Claude Code [compact a long conversation while your terminal session is idle](https://code.claude.com/docs/en/settings-reference.md#idlecompaction), shortly before a one-hour prompt cache expires
 
 ### First session after an install or upgrade

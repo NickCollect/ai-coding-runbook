@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/streaming-output
-fetched_at: 2026-10-26T05:39:59.171225+00:00
+fetched_at: 2026-11-02T07:00:25.567848+00:00
 fetch_method: mintlify_md
 ---
 
@@ -124,7 +124,10 @@ Without partial messages enabled, you receive all message types except `StreamEv
 
 ### Handle a stream that's cut off
 
-If a stream is cut off mid-message, such as when you interrupt the turn or the connection drops, you still receive that message's `message_stop` before the turn ends. A cut text or thinking block also gets its `content_block_stop`. A cut tool call doesn't, so if `message_stop` arrives while a tool call's block is still open, treat that call's input as incomplete.
+If a stream is cut off mid-message, you still receive that message's `message_stop` before the turn ends. Causes of a cut-off stream include an interrupted turn, a dropped connection, and a fallback to a non-streaming request. `content_block_stop` and `message_delta` can be missing before that `message_stop`:
+
+* **`content_block_stop`**: arrives for the block that was open, unless that block is a tool call. If `message_stop` arrives while a tool call's block is still open, treat that call's input as incomplete.
+* **`message_delta`**: arrives when you interrupt the turn, and can be missing after a dropped connection or a fallback to non-streaming, so don't wait for one on a cut message.
 
 Before Claude Code v2.1.290, a cut stream could end the turn without `message_stop`, so a reply you render from stream events could stay shown as in progress. The TypeScript Agent SDK bundles Claude Code v2.1.290 or later from v0.3.290, and the Python Agent SDK from v0.2.164. If a reply stays shown as in progress after the turn ends, update the SDK.
 

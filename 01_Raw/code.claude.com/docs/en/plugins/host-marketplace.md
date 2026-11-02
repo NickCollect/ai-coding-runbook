@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/host-marketplace
-fetched_at: 2026-10-26T05:40:03.916179+00:00
+fetched_at: 2026-11-02T07:00:26.595763+00:00
 fetch_method: mintlify_md
 ---
 
@@ -409,7 +409,7 @@ An entry can declare dependencies on other plugins.
 
 For version ranges, the `<plugin>--v<version>` git-tag convention they resolve against, and cross-marketplace trust, see [Plugin dependencies](https://code.claude.com/docs/en/plugins/dependencies.md).
 
-To have Claude Code suggest a plugin when a project matches it, add a `relevance` block to the entry with the signals that identify the project. Users see suggestions from your marketplace only when an admin lists it in `pluginSuggestionMarketplaces`. For the signals and the enablement step, see [Plugin relevance](https://code.claude.com/docs/en/plugins/relevance.md).
+To have Claude Code suggest a plugin when a project matches it, add a `relevance` block to the entry with the signals that identify the project. Users see these suggestions only when an admin lists your marketplace in `pluginSuggestionMarketplaces`. For the signals and the enablement step, see [Plugin relevance](https://code.claude.com/docs/en/plugins/relevance.md).
 
 ## Work around what a marketplace can't do
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/workflows
-fetched_at: 2026-10-26T05:40:07.204834+00:00
+fetched_at: 2026-11-02T07:00:27.226197+00:00
 fetch_method: mintlify_md
 ---
 
@@ -161,7 +161,7 @@ Turning ultracode on already opts you in to large runs, so these checks don't ap
 * The session's [concurrent subagent limit](https://code.claude.com/docs/en/sub-agents.md#concurrent-subagent-limit) isn't enforced for the subagents Claude spawns with the Agent tool
 * In auto permission mode, you aren't asked to [approve the first workflow launch](#approve-the-plan-before-it-runs)
 
-`/effort ultracode` lasts for the current session; to have every session start with it, set the [`ultracode`](https://code.claude.com/docs/en/settings-reference#ultracode) setting. Turn it off with `/effort ultracode off` when you return to routine work. The `/effort` slider offers the toggle only [when ultracode is available](https://code.claude.com/docs/en/model-config.md#when-ultracode-is-available).
+`/effort ultracode` lasts for the current session; to have every session start with it, set the [`ultracode`](https://code.claude.com/docs/en/settings-reference#ultracode) setting. Turn it off with `/effort ultracode off` when you return to routine work. The `/effort` slider offers the toggle only [when ultracode is available](https://code.claude.com/docs/en/model-config.md#when-ultracode-is-available). Before v2.1.284, `/effort ultracode` set the session to `xhigh`, and `/effort ultracode off` failed with `Invalid argument`.
 
 ### Approve the plan before it runs
 
@@ -204,16 +204,12 @@ Run `/workflows`, select the run you want to keep, and press `s`. In the save di
 * `.claude/workflows/` in your project: shared with everyone who clones the repo
 * `~/.claude/workflows/` in your home directory: available in every project, visible only to you. If you set [`CLAUDE_CONFIG_DIR`](https://code.claude.com/docs/en/env-vars), this location is the `workflows/` directory under that path.
 
-The save dialog shows the resolved path for the personal location.
+The save dialog shows the resolved path for the personal location. Press Enter to save. The workflow runs as `/<name>` in future sessions from either location.
 
-Press Enter to save. The workflow runs as `/<name>` in future sessions from either location.
-
-Claude Code checks the save location for symlinks before writing, and shows an error instead of writing through one. What it checks depends on where you save:
+Claude Code checks the save location for symlinks before writing, and shows an error instead of writing through one:
 
 * Project location: Claude Code refuses if `.claude`, `.claude/workflows`, or the target file is a symlink.
 * Personal location: Claude Code refuses only if the target file itself is a symlink, so a `~/.claude` directory managed by a dotfiles tool still works.
-
-Before v2.1.216, Claude Code followed the link, which could place the file outside the location you chose.
 
 In a monorepo with several `.claude/` directories, you can keep workflows alongside the package they apply to. Saving to the project location writes to the closest `.claude/workflows/` directory that already exists between your working directory and the repository root, or to the repository root if none exists yet. Project workflows also load from every `.claude/workflows/` along that path, and when more than one defines the same name Claude Code runs the one closest to the working directory.
 
@@ -339,7 +335,7 @@ You can also edit [the script of a single run](#how-a-workflow-runs) rather than
 
 The workflow runtime executes the script in an isolated environment, separate from your conversation. Intermediate results stay in script variables instead of landing in Claude's context.
 
-Every run writes its script to a file under your session's directory in `~/.claude/projects/`. Claude receives the path when the run starts, so you can ask for it. You can open that file to read the orchestration Claude wrote, diff it against a previous run's script, or edit it and ask Claude to relaunch from the edited version.
+Unless Claude starts a run from a script file's path, Claude Code writes the run's script to a file under your session's directory in `~/.claude/projects/`. Claude receives the script's path when the run starts, so you can ask for it. You can open that file to read the orchestration Claude wrote, diff it against a previous run's script, or edit it and ask Claude to relaunch from the edited version.
 
 Claude can start a workflow only from a script file the session is already allowed to read. To run a script kept outside your working directory, add its directory with [`/add-dir`](https://code.claude.com/docs/en/permissions#working-directories) or a [Read allow rule](https://code.claude.com/docs/en/permissions.md#read-and-edit) first.
 
@@ -393,10 +389,11 @@ If you edit a script that started A, B, C, and D so that it starts A, C, B, and 
 
 #### Resume after you leave the session
 
-You can resume a run within the same Claude Code session. What happens to a running workflow when you leave the session depends on how you leave:
+If you background your session or exit Claude Code while a workflow run is in progress, the run doesn't continue on its own. The run continues only when Claude relaunches it with a `Workflow` call, which [replays the run from its saved results](#which-agents-run-again).
 
-* If you [background the session](https://code.claude.com/docs/en/agent-view.md#what-carries-over-when-you-background), Claude Code replays the run the same way in the background session and continues it.
-* If you exit Claude Code while a workflow is running and [agent view is on](https://code.claude.com/docs/en/agent-view.md#from-inside-a-session), the exit dialog offers `Move to background and exit`, which carries the run over the same way. If you choose `Exit and stop tasks` instead, or the option isn't offered, the run stops with the session. Claude Code keeps the run's saved results under that session's directory in `~/.claude/projects/`, so a session you resume with `claude --resume` can replay them when you ask Claude to relaunch the workflow. In a session you start fresh, Claude has no earlier run to relaunch and starts the workflow over as a new run.
+* **You backgrounded the session or chose [`Move to background and exit`](https://code.claude.com/docs/en/agent-view#from-inside-a-session)**: if the run hasn't continued when you check the [background session](https://code.claude.com/docs/en/agent-view.md#what-carries-over-when-you-background), ask Claude there to relaunch the workflow. Depending on your [permission mode](#approve-the-plan-before-it-runs), Claude Code asks you to approve the relaunch first. If the session shows under `Needs input` in agent view, [attach to it](https://code.claude.com/docs/en/agent-view.md#attach-to-a-session) to answer the approval prompt.
+* **The relaunch in the background session failed with `nothing to resume`**: ask Claude to start the workflow over as a new run. If Claude started the run from the path of a script file outside `~/.claude/projects/`, such as one in your working directory, Claude can't relaunch it in the background session.
+* **You chose `Exit and stop tasks`, or weren't offered `Move to background and exit`**: the run stopped with the session, and Claude Code keeps the run's saved results under that session's directory in `~/.claude/projects/`. Resume the session with `claude --resume` in your shell, then ask Claude to relaunch the workflow. In a fresh session, Claude has no earlier run to relaunch and starts the workflow over.
 
 In a [cloud session](https://code.claude.com/docs/en/claude-code-on-the-web.md), Claude Code also saves the run's results with the session's conversation history, which survives when the session's VM is reclaimed. When you [reopen such a session](https://code.claude.com/docs/en/claude-code-on-the-web.md#environment-expired) and ask Claude to relaunch the workflow, completed agents still return their saved results.
 
@@ -474,9 +471,9 @@ Each value maps to an agent count:
 | `medium` | Fewer than 10 agents |
 | `large` | Fewer than 50 agents |
 
-The default is `medium`, or `small` when you're signed in on a Pro plan with Claude Code v2.1.271 or later. Until you choose a value, the `/config` row marks the value as the default, and the workflow's `Running in background` line names the size in force. Requires Claude Code v2.1.219 or later; earlier versions default to `unrestricted`.
+The default is `medium`, or `small` when you're signed in on a Pro plan with Claude Code v2.1.271 or later. Until you choose a value, the `/config` row marks the value as the default, and the workflow's `Running in background` line names the size in force.
 
-To change the guideline, pick a value for the Dynamic workflow size setting in `/config`, or run `/config workflowSizeGuideline=small`. On v2.1.219 and later, you can also set the [`workflowSizeGuideline` key](https://code.claude.com/docs/en/settings-reference#workflowsizeguideline) in any settings file; that value takes precedence over `/config`, and Claude Code hides the `/config` row while a settings file provides one.
+To change the guideline, pick a value for the Dynamic workflow size setting in `/config`, or run `/config workflowSizeGuideline=small`. You can also set the [`workflowSizeGuideline` key](https://code.claude.com/docs/en/settings-reference#workflowsizeguideline) in any settings file; that value takes precedence over `/config`, and Claude Code hides the `/config` row while a settings file provides one.
 
 Changes take effect on the next prompt. The [runtime agent caps](#behavior-and-limits) still apply regardless of the setting.
 

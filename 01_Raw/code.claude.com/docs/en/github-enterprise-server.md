@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/github-enterprise-server
-fetched_at: 2026-10-26T05:40:02.332424+00:00
+fetched_at: 2026-11-02T07:00:26.215865+00:00
 fetch_method: mintlify_md
 ---
 
@@ -226,6 +226,15 @@ On other claude.ai surfaces, a "Repository not found. If it's private, GitHub ac
 ### GHES instance not reachable
 
 If reviews or Anthropic-hosted cloud sessions time out, your GHES instance may not be reachable from Anthropic infrastructure. Confirm your firewall allows inbound connections from Anthropic's [outbound IP addresses](https://platform.claude.com/docs/en/api/ip-addresses#outbound-ip-addresses). Sessions in a [self-hosted environment](https://code.claude.com/docs/en/self-hosted-environments) reach GHES from inside your network, so when one of them can't clone, check the runner's own network path instead. For the repository picker and other hosted pre-session flows, see [Network requirements](#network-requirements).
+
+### Connection test passes but a second test fails
+
+The second test connects to your GHES instance the way Anthropic-hosted cloud sessions do. Find your message to see whether to check your firewall or try again:
+
+* **`Connection test passed, but a second test failed.`**: if your instance is behind a firewall, allow all of Anthropic's [outbound IP addresses](https://platform.claude.com/docs/en/api/ip-addresses#outbound-ip-addresses), because a connection test can pass even when your firewall blocks some of them. You can also try again in a few minutes.
+* **`Connection test passed, but a second test could not run.`**: try again in a few minutes.
+
+To test again, open the connection's **More options** menu in [**Organization settings > Git providers**](https://claude.ai/admin-settings/source-control#github-enterprise) and select **Test connection**.
 
 ### Session start fails with `Unable to get organization UUID`
 

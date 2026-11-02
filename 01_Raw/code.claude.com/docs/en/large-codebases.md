@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/large-codebases
-fetched_at: 2026-10-26T05:40:02.877453+00:00
+fetched_at: 2026-11-02T07:00:26.295873+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,7 +37,7 @@ Each setting below is independent. They layer rather than replace each other, so
 
 > [!TIP]
 >
-> For workflow techniques that keep context small in any repository, such as [running exploration in a subagent](https://code.claude.com/docs/en/best-practices.md#use-subagents-for-investigation) so file reads stay out of the main conversation, see [Best practices for Claude Code](https://code.claude.com/docs/en/best-practices.md). To roll out a baseline configuration to every developer in your organization, see [Set up Claude Code for your organization](https://code.claude.com/docs/en/admin-setup.md).
+> For workflow techniques that keep context small in any repository, see [Best practices for Claude Code](https://code.claude.com/docs/en/best-practices.md). One example is [running exploration in a subagent](https://code.claude.com/docs/en/best-practices.md#know-what-subagents-cost) so file reads stay out of the main conversation. To roll out a baseline configuration to every developer in your organization, see [Set up Claude Code for your organization](https://code.claude.com/docs/en/admin-setup.md).
 
 ### The example monorepo
 
@@ -164,7 +164,9 @@ For paths that are checked in, such as a vendored SDK or committed generated cod
 The deny rules can cover everyone working in the repository, only you, or every session on the machine, depending on which settings file you put them in:
 
 * **Everyone working in the repository**: commit the rules to `.claude/settings.json`, at the repository root if you start Claude there, or in each package's `.claude/` if you start from subdirectories. Like other project settings on this page, that file isn't inherited from parent directories.
-* **Yourself only**: use `.claude/settings.local.json` at the repository root, which loads in every CLI session inside the repository regardless of starting directory, except in the cases where Claude Code [doesn't use the repository root](https://code.claude.com/docs/en/settings.md#where-claude-code-looks-for-each-file), such as on Windows. Relative patterns like the example's `Read(./**/vendor/**/*)` still [anchor at the session's current working directory](https://code.claude.com/docs/en/permissions.md#read-and-edit) rather than the repository root, so if you start sessions from subdirectories, write the rules in this file as `//`-absolute paths, such as `Read(//absolute/path/to/repo/**/vendor/**/*)`. Before v2.1.211, `.claude/settings.local.json` also loaded only from the starting directory.
+* **Yourself only**: use `.claude/settings.local.json` at the repository root. It loads in every CLI session inside the repository regardless of starting directory, except in the cases where Claude Code [doesn't use the repository root](https://code.claude.com/docs/en/settings.md#where-claude-code-looks-for-each-file), such as on Windows.
+
+  Relative patterns like the example's `Read(./**/vendor/**/*)` still [anchor at the session's current working directory](https://code.claude.com/docs/en/permissions.md#read-and-edit) rather than the repository root. If you start sessions from subdirectories, write the rules in this file as `//`-absolute paths, such as `Read(//absolute/path/to/repo/**/vendor/**/*)`.
 * **Everyone, enforced in every session**: set the rules in [managed settings](https://code.claude.com/docs/en/managed-settings.md), which user and project settings cannot override.
 
 The example below blocks build artifacts and a vendored SDK. Its directory patterns end with `/**/*` rather than `/**` so that each rule covers everything inside the directory but not the directory itself. Claude can then still list those directories or change into them, for example with `ls dist` or `cd build`.
@@ -382,7 +384,7 @@ Per-directory CLAUDE.md files can become hard to govern as the codebase grows. C
 Move conventions and reference content out of always-loaded CLAUDE.md and into mechanisms that load on demand:
 
 * [Skills](https://code.claude.com/docs/en/skills.md): reference material Claude loads only when relevant to the task
-* [Plugins](https://code.claude.com/docs/en/plugins/overview.md): versioned bundles of skills, hooks, and commands that a platform team owns centrally
+* [Plugins](https://code.claude.com/docs/en/plugins/overview.md): versioned bundles of skills, hooks, and commands that a platform team owns centrally and can [install for everyone through managed settings](https://code.claude.com/docs/en/plugins/org.md#pre-install-and-require-plugins)
 * [MCP servers](https://code.claude.com/docs/en/mcp.md): if your organization already runs a code search or RAG index over the repository, expose it as an MCP tool so Claude queries it instead of reading files directly
 
 See [server-managed or endpoint-managed settings](https://code.claude.com/docs/en/server-managed-settings.md#choose-between-server-managed-and-endpoint-managed-settings) for how platform teams can enforce these centrally.
@@ -471,7 +473,7 @@ The configuration above controls what Claude sees. When a single change touches 
 Two techniques help keep a cross-package change consistent:
 
 * **Give Claude the whole change in one session**: handing over the shared edit and its call sites together keeps the decisions behind each edit consistent, rather than re-deriving them per package
-* **Plan before editing**: [plan first](https://code.claude.com/docs/en/best-practices.md#explore-first-then-plan-then-code) in [plan mode](https://code.claude.com/docs/en/permission-modes.md#analyze-before-you-edit-with-plan-mode), and Claude writes the plan to a file. A long cross-package session [compacts its context](https://code.claude.com/docs/en/context-window.md#what-survives-compaction) along the way. Claude Code re-injects the plan file after each compaction, so the plan survives where conversation history may not
+* **Plan before editing**: plan first in [plan mode](https://code.claude.com/docs/en/permission-modes.md#analyze-before-you-edit-with-plan-mode), and Claude writes the plan to a file. A long cross-package session [compacts its context](https://code.claude.com/docs/en/context-window.md#what-survives-compaction) as it goes. Claude Code re-injects the plan file after each compaction, so the plan survives where conversation history may not
 
 ## Next steps
 

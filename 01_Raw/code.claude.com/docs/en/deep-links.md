@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/deep-links
-fetched_at: 2026-10-26T05:40:01.647913+00:00
+fetched_at: 2026-11-02T07:00:26.083442+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ fetch_method: mintlify_md
 
 A deep link is a `claude-cli://` URL that opens Claude Code in a new terminal window. The URL can carry a working directory and a prompt to pre-fill.
 
-This lets you share a one-click starting point for a task: anyone with Claude Code installed who clicks the link sees a session open with the prompt already typed. The prompt is populated but not sent until you press Enter.
+The prompt is populated but not sent until you press Enter. To make links open on a machine, first send a prompt in an interactive Claude Code session there, so that Claude Code [registers its `claude-cli://` handler](#registration-and-supported-platforms).
 
 Because a deep link is a URL, you can put one anywhere a link can go:
 
@@ -110,51 +110,56 @@ The example below adds an investigation entry point to an incident runbook for a
 3. Post initial findings in #incident.
 ```
 
-To use this in your own runbook, replace `acme/web-gateway` with your service's repository slug. This allows engineers with Claude Code installed and a local clone of that repository to click step 2 and start investigating with the prompt ready to send.
+To use this in your own runbook, replace `acme/web-gateway` with your service's repository slug. Before engineers click step 2, they must have [sent a prompt in an interactive Claude Code session](#registration-and-supported-platforms) on their machine and opened Claude Code in their local clone.
 
 ### Open a link from the shell
 
-You can also open a deep link from a shell script, alias, or automation rather than by clicking it. Call your operating system's URL-opening command with the link as the argument. These commands rely on the handler that Claude Code [registers when you send your first prompt of an interactive session](#registration-and-supported-platforms) on the machine.
+You can also open a deep link from a shell script, alias, or automation rather than by clicking it. Call your operating system's URL-opening command with the link as the argument. These commands rely on the handler that Claude Code [registers](#registration-and-supported-platforms) on the machine.
 
-**macOS**
+> [tab] macOS
+>
+> The built-in `open` command passes the URL to the registered `claude-cli://` handler:
+>
+> ```bash theme={null}
+> open "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
+> ```
+>
+> On success, a new terminal window opens with Claude Code running and the prompt pre-filled.
 
-The built-in `open` command passes the URL to the registered `claude-cli://` handler:
+> [tab] Linux
+>
+> Most desktop environments provide `xdg-open`, which passes the URL to the registered handler:
+>
+> ```bash theme={null}
+> xdg-open "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
+> ```
+>
+> On success, a new terminal window opens with Claude Code running and the prompt pre-filled. If the shell reports that `xdg-open` isn't found, see [Troubleshooting](#xdg-open-is-not-found-on-linux).
 
-```bash theme={null}
-open "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
-```
-
-On success, a new terminal window opens with Claude Code running and the prompt pre-filled.
-
-**Linux**
-
-Most desktop environments provide `xdg-open`, which passes the URL to the registered handler:
-
-```bash theme={null}
-xdg-open "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
-```
-
-On success, a new terminal window opens with Claude Code running and the prompt pre-filled. If the shell reports that `xdg-open` isn't found, see [Troubleshooting](#xdg-open-is-not-found-on-linux).
-
-**Windows**
-
-In PowerShell, `Start-Process` passes the URL to the registered handler:
-
-```powershell theme={null}
-Start-Process "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
-```
-
-In `cmd.exe`, `start` treats its first quoted argument as a window title, so pass an empty title before the URL:
-
-```cmd theme={null}
-start "" "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
-```
-
-On success, a new terminal window opens with Claude Code running and the prompt pre-filled.
+> [tab] Windows
+>
+> In PowerShell, `Start-Process` passes the URL to the registered handler:
+>
+> ```powershell theme={null}
+> Start-Process "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
+> ```
+>
+> In `cmd.exe`, `start` treats its first quoted argument as a window title, so pass an empty title before the URL:
+>
+> ```cmd theme={null}
+> start "" "claude-cli://open?repo=acme/payments&q=review%20open%20PRs"
+> ```
+>
+> On success, a new terminal window opens with Claude Code running and the prompt pre-filled.
 
 ## Registration and supported platforms
 
-Claude Code registers the `claude-cli://` handler with your operating system on macOS, Linux, and Windows when you send your first prompt of an interactive session. Starting `claude` and exiting without sending a prompt doesn't register the handler. You don't run a separate install command. Registration writes to user-level locations only:
+Claude Code registers the `claude-cli://` handler with your operating system on macOS, Linux, and Windows when you do either of these:
+
+* Send anything to an interactive `claude` session, such as a message or `/help`. Starting one and sending nothing doesn't register the handler.
+* Start Claude Code in [agent view](https://code.claude.com/docs/en/agent-view.md), such as with `claude agents`, in a folder you've [trusted](https://code.claude.com/docs/en/permissions.md#project-allow-rules-and-workspace-trust)
+
+You don't run a separate install command. Registration writes to user-level locations only:
 
 | Platform | Handler location |
 | - | - |
@@ -178,7 +183,7 @@ Claude Desktop handles its own `claude://` links. To open a Desktop session on a
 
 ### Clicking the link does nothing
 
-The handler likely isn't registered yet. Registration happens when you send your first prompt of an interactive session, not when the session starts. Start an interactive `claude` session on that machine, send any prompt, exit, and try the link again. If you are on Linux without a desktop environment, `xdg-open` may have nothing to dispatch to.
+The handler likely isn't registered yet. In an interactive session, registration happens when you send something, not when the session starts. Start an interactive `claude` session on that machine, send any prompt, exit, and try the link again. If you are on Linux without a desktop environment, `xdg-open` may have nothing to dispatch to.
 
 ### xdg-open is not found on Linux
 

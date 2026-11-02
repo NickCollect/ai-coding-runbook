@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/errors
-fetched_at: 2026-10-26T05:40:02.088372+00:00
+fetched_at: 2026-11-02T07:00:26.203285+00:00
 fetch_method: mintlify_md
 ---
 
@@ -152,6 +152,7 @@ Match the message you see to a section below.
 | `N sessions ended while this machine was offline — the environment was cleaned up on the server and can't be resumed.` | [Network](#sessions-ended-while-this-machine-was-offline) |
 | `Couldn't share the transcript.` | [Network](#couldnt-share-the-transcript) |
 | `Couldn't send feedback` | [Network](#couldnt-send-feedback) |
+| `Feedback payload too large. Try again without the transcript, or shorten the details.` | [Network](#feedback-payload-too-large) |
 | `MCP server "<name>" connection timed out. Your computer went to sleep or its clock changed while connecting.` | [Network](#mcp-server-connection-timed-out-during-a-sleep-or-clock-change) |
 | `Prompt is too long` / `Input is too long for requested model` | [Request errors](#prompt-is-too-long) |
 | `Prompt is too long · automatic compaction failed:` | [Request errors](#prompt-is-too-long) |
@@ -224,6 +225,7 @@ Match the message you see to a section below.
 | `Cloud sessions use your claude.ai login`, at the end of a policy denial that names a credential | [Command-line errors](#cloud-sessions-use-your-claude-ai-login) |
 | `Couldn't verify your organization's policy for cloud sessions` | [Command-line errors](#couldnt-verify-your-organizations-policy-for-cloud-sessions) |
 | `Cloud sessions aren't available:` followed by why your organization's policy couldn't be loaded | [Command-line errors](#couldnt-verify-your-organizations-policy-for-cloud-sessions) |
+| `Cloud sessions aren't available with this Console sign-in. They need a claude.ai sign-in.` | [Unable to get organization UUID](https://code.claude.com/docs/en/claude-code-on-the-web.md#unable-to-get-organization-uuid) |
 | `Cloud sessions need a claude.ai sign-in` | [Unable to get organization UUID](https://code.claude.com/docs/en/claude-code-on-the-web.md#unable-to-get-organization-uuid) |
 | `Nothing was stashed: "<path>" is now a folder in place of a tracked file or link` / `are now folders in place of tracked files or links` | [Command-line errors](#nothing-was-stashed-because-a-folder-replaced-a-tracked-file) |
 | `Error: --json-schema is not a valid JSON Schema` | [Command-line errors](#the-json-schema-value-is-not-a-valid-json-schema) |
@@ -250,6 +252,7 @@ Match the message you see to a section below.
 | `MCP server "<name>" was not saved to` / `was not removed from` | [Command-line errors](#mcp-server-was-not-saved-or-removed) |
 | `MCP server "<name>" may not have been saved` / `may not have been removed` | [Command-line errors](#mcp-server-may-not-have-been-saved-or-removed) |
 | `Server rejected the Authorization header minted by the configured headersHelper` | [Command-line errors](#server-rejected-the-authorization-header-minted-by-the-configured-headershelper) |
+| `This server (Java MCP SDK 0.17.0 or older) rejected Claude Code's elicitation capability` | [Command-line errors](#mcp-server-rejected-the-elicitation-capability) |
 | `Error: MCP tool <name> (passed via --permission-prompt-tool) not found` | [Command-line errors](#mcp-permission-prompt-tool-not-found) |
 | `OAuth callback port <port> is already in use — another process may be holding it` | [Command-line errors](#oauth-callback-port-is-already-in-use) |
 | `No available ports for OAuth redirect` | [Command-line errors](#no-available-ports-for-oauth-redirect) |
@@ -280,6 +283,8 @@ Match the message you see to a section below.
 | `Windows reported an error (EBADF) when Claude Code read this session's transcript file` | [Command-line errors](#windows-reported-an-error-ebadf) |
 | `Cannot switch renderers in this session` | [Command-line errors](#cannot-switch-renderers-in-this-session) |
 | `Cannot switch renderers while work is running in the background` | [Command-line errors](#cannot-switch-renderers-in-this-session) |
+| `Can't restart while work is running in the background — wait for it to finish (or stop it via /tasks), then try again.` | [Command-line errors](#cant-restart-while-work-is-running-or-remote-control-is-connected) |
+| `Can't restart while Remote Control is connected. To use the installed version, exit and start Claude Code again, then run /resume.` | [Command-line errors](#cant-restart-while-work-is-running-or-remote-control-is-connected) |
 | `Claude Code couldn't restart` | [Command-line errors](#claude-code-couldnt-restart) |
 | `Couldn't open Claude Desktop` | [Command-line errors](#couldnt-open-claude-desktop) |
 | `Failed to open Claude Desktop. Please try opening it manually.` | [Command-line errors](#couldnt-open-claude-desktop) |
@@ -329,6 +334,7 @@ Match the message you see to a section below.
 | `File is covered by a Read deny rule in your permission settings` | [Tool errors](#file-is-covered-by-a-read-deny-rule) |
 | `cannot contain null bytes (\0)` | [Tool errors](#path-cannot-contain-null-bytes) |
 | `Path contains null bytes` | [Tool errors](#path-cannot-contain-null-bytes) |
+| `command contains the invisible character U+FEFF (byte order mark) or U+180E (Mongolian vowel separator), and was not run` | [Tool errors](#command-contains-an-invisible-character) |
 | `File is too large to read as an image (the limit is 128MB)` | [Tool errors](#file-is-too-large-to-read-as-an-image) |
 | `Cannot read this as an image: <path> is a pipe or a device` | [Tool errors](#file-is-too-large-to-read-as-an-image) |
 | `subagent_type is required: the general-purpose agent is not available in this session` | [Tool errors](#subagent-type-is-required) |
@@ -340,6 +346,7 @@ Match the message you see to a section below.
 | `Failed to write the plan approval request to the lead's inbox — plan not submitted` | [Tool errors](#failed-to-write-to-a-teammate-inbox) |
 | `Its agent definition was not restored: the folder its definition file came from is not trusted` | [Tool errors](#teammate-agent-definition-not-restored) |
 | `Only a teammate can approve a shutdown request` | [Tool errors](#only-a-teammate-can-approve-a-shutdown-request) |
+| `A command-line deny rule cannot be handed to a teammate intact` | [Tool errors](#command-line-deny-rule-cannot-be-handed-to-a-teammate) |
 | `Message too large for cross-session delivery` | [Tool errors](#message-too-large-for-cross-session-delivery) |
 | `Too many messages to this session just now` | [Tool errors](#too-many-messages-to-this-session-just-now) |
 | `Cross-session message was dropped at the recipient session's inbox` | [Tool errors](#cross-session-message-dropped-at-the-inbox) |
@@ -380,7 +387,7 @@ Match the message you see to a section below.
 | `This conversation is already open in another running Claude session` | [Background session errors](#this-session-is-running-in-another-terminal) |
 | `This session's saved conversation is no longer on disk` | [Background session errors](#this-sessions-saved-conversation-is-no-longer-on-disk) |
 | `Bypass permissions was requested at launch and ignored` | [Bypass permissions ignored in a background session](https://code.claude.com/docs/en/permission-modes.md#bypass-permissions-ignored-in-a-background-session) |
-| `kept <id> — its worktree is still at <path>` | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere) |
+| `kept <id> — its worktree is still at <path>` | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere) if the message's next line mentions unpushed commits, otherwise [What deleting a session removes](https://code.claude.com/docs/en/agent-view.md#what-deleting-a-session-removes) |
 | `kept <id> — <n> unpushed commits on <branch>` | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere) |
 | `kept <id> — worktree has commits that are not pushed anywhere` | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere) |
 | `terminal host process died — press Enter to restart` / `This session's terminal host process died` | [Background session errors](#terminal-host-process-died) |
@@ -400,6 +407,7 @@ Match the message you see to a section below.
 | `Claude Code process exited with code N` | [Wrapper and IDE errors](#claude-code-process-exited-with-code-n) |
 | `The connection to Claude Code ended before this message completed` | [Wrapper and IDE errors](#the-connection-to-claude-code-ended-before-this-message-completed) |
 | `Could not locate the Claude CLI on PATH` | [Wrapper and IDE errors](#could-not-locate-the-claude-cli-on-path) |
+| `The Claude Code program for this computer, the <build> build, could not be found` | [Wrapper and IDE errors](#the-claude-code-program-for-this-computer-could-not-be-found) |
 | `Restored the code, but skipped N files` | [Rewind warnings and errors](#restored-the-code-but-skipped-files) |
 | `No files were restored: N files failed (backup missing, or the file could not be updated)` | [Rewind warnings and errors](#no-files-were-restored) |
 | `Transcript writes are failing (...)` | [Session saving warnings](#transcript-writes-are-failing) |
@@ -488,15 +496,15 @@ While retrying, the spinner shows a `Retrying in Ns · attempt x/y` countdown af
 
 As of v2.1.198, the usual spinner tip is suppressed during retries. Once the error reason is revealed, if the failure is a 529 overload the line below the countdown also names where to check service status: `status.claude.com` on the Anthropic API, or the provider or gateway host named in the message on other configurations.
 
-If no data arrives on the response stream for 20 seconds while a request is still pending, the spinner shows `Waiting for API response · will retry in … · check your network` before any retry has started. The request hasn't failed yet: the countdown runs to the point where Claude Code aborts the stalled connection. After the abort, what you see depends on how far the response had got:
+#### Waiting for API response
+
+The `Waiting for API response · will retry in … · check your network` banner means that Claude Code has waited at least 20 seconds without receiving any data for a request. The request hasn't failed yet: the countdown runs to the point where Claude Code aborts the stalled connection. If the abort happens:
 
 * Before Claude has completed a block of text or a tool call, or started one after finishing its thinking, Claude Code retries the request or ends the turn with an error. [Automatic retries](#automatic-retries) says which stalls it retries and how many times.
 * After Claude has completed a block of text or a tool call, or started one after finishing its thinking, but before Claude has finished the response, Claude Code keeps what Claude completed, continues the turn from any tool calls Claude finished, and shows [The response above may be incomplete](#the-response-above-may-be-incomplete). In a non-interactive session, and for a subagent's response in any session, Claude Code may first prompt Claude to continue the response; that entry says when it does and when you still see the notice there.
 * After Claude finished the response, Claude Code ends the turn normally.
 
-The banner clears on its own once data resumes or a retry succeeds. If it reappears on every attempt, treat it as a [network issue](#unable-to-connect-to-api). Before v2.1.185, the banner appeared after 10 seconds with different wording.
-
-While Claude is consulting the [advisor](https://code.claude.com/docs/en/advisor.md), the banner appears after 90 seconds without data instead of 20, because a long advisor review can send nothing for well over 20 seconds. Before v2.1.214, the 20-second threshold applied during advisor calls too, so the banner appeared during advisor reviews even when nothing was wrong.
+The banner clears on its own once data resumes or a retry succeeds. If it reappears on every attempt, treat it as a [network issue](#unable-to-connect-to-api). If you connect through a gateway, see [The waiting banner comes and goes behind a gateway](#waiting-banner-behind-a-gateway). Before v2.1.185, the banner appeared after 10 seconds with different wording.
 
 #### The waiting banner comes and goes behind a gateway
 
@@ -828,7 +836,7 @@ Usage counts against the session and weekly allowances at the same time. A singl
 * In the Code tab of the [Desktop app](https://code.claude.com/docs/en/desktop.md), the session-limit card offers an **Auto-continue when limits reset** checkbox. The weekly-limit card doesn't. When it's checked, the Desktop app retries the interrupted turn after the reset and shows the retry time on the card. The Desktop checkbox and the CLI's **Continue automatically at usage limit** setting in `/config` are separate, so turn each off on its own.
 * For the Opus or Sonnet limit, run `/model` and switch to a model outside that family to keep working. Each model has its own prompt cache, so the next request re-reads the whole conversation with no cache hits; see [Switching models](https://code.claude.com/docs/en/prompt-caching.md#switching-models)
 * Run `/usage` to see your plan limits and when they reset
-* Run `/usage-credits` to buy additional usage on Pro and Max, or to request it from your admin on Team and Enterprise. See [usage credits for paid plans](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) for how this is billed.
+* Run `/usage-credits` to buy additional usage on Pro, Max, and Ultra, or to request it from your admin on Team and Enterprise. See [usage credits for paid plans](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) for how this is billed.
 * To upgrade your plan for higher base limits, see [claude.com/pricing](https://claude.com/pricing)
 
 Before a window runs out, Claude Code can warn you that you've used most of it, with a message such as `You've used 85% of your session limit · resets 3:45pm`. To watch your remaining allowance continuously, add the `rate_limits` fields to a [custom status line](https://code.claude.com/docs/en/statusline.md#rate-limit-usage), or in the Desktop app click the [usage ring](https://code.claude.com/docs/en/desktop.md#check-usage) next to the model picker.
@@ -850,7 +858,7 @@ When this error appears mid-conversation because the context grew past 200K toke
 **What to do:**
 
 * Run `/model` and select the variant without the `[1m]` suffix to fall back to the standard context window
-* Where the message names `/usage-credits`, run it to turn on metered billing for the 1M variant on Pro and Max, or to request usage credits from your admin on Team and Enterprise. Once usage credits are on, restart Claude Code or start a new session, whichever the message says. Until then, the session stays at the standard context limit.
+* Where the message names `/usage-credits`, run it to turn on metered billing for the 1M variant on Pro, Max, and Ultra, or to request usage credits from your admin on Team and Enterprise. Once usage credits are on, restart Claude Code or start a new session, whichever the message says. Until then, the session stays at the standard context limit.
 * If the error persists after `/model`, a 1M model ID may be set elsewhere. See [Setting your model](https://code.claude.com/docs/en/model-config.md#setting-your-model) for the configuration locations to check in priority order.
 * To remove 1M variants from the model picker entirely, set [`CLAUDE_CODE_DISABLE_1M_CONTEXT=1`](https://code.claude.com/docs/en/env-vars)
 
@@ -858,7 +866,7 @@ Before v2.1.268, the message ended with `run /usage-credits to turn them on, or 
 
 ### The prompt to confirm went unanswered
 
-If your account requires the [Fable usage-credits consent](https://code.claude.com/docs/en/model-config.md#fable-and-usage-credits), Claude Code asks you to confirm before a Fable request bills usage credits. When the consent prompt closes with nobody answering it, Claude Code ends the turn with one of these messages:
+When the [Fable usage-credits consent prompt](https://code.claude.com/docs/en/model-config.md#fable-and-usage-credits) closes with nobody answering it, Claude Code ends the turn with one of these messages:
 
 ```text theme={null}
 Fable limit reached · continuing on Fable 5.1 uses usage credits, and the prompt to confirm went unanswered — nothing was sent · answer it where this session is running, or /model to change
@@ -931,7 +939,7 @@ If you connect through a Claude apps gateway and see lowercase `spend limit reac
 
 **What to do:**
 
-* On Pro and Max, increase your monthly spend limit in [**Settings > Usage**](https://claude.ai/settings/usage) on claude.ai, or run `/usage-credits`
+* On Pro, Max, and Ultra, increase your monthly spend limit in [**Settings > Usage**](https://claude.ai/settings/usage) on claude.ai, or run `/usage-credits`
 * On Team and Enterprise, increase the limit in [**Organization settings > Usage**](https://claude.ai/admin-settings/usage) if you manage billing, or ask an admin to. `/usage-credits` sends that request to your admin for you
 * For a channel's limit, ask an org owner or the channel's manager to raise it on claude.ai. See [Per-channel limits](https://claude.com/docs/claude-tag/admins/set-spend-limit#per-channel-limits) in the Claude Tag documentation
 * If the message names a reset time for your plan's window, you can wait for it instead
@@ -964,7 +972,7 @@ Credit balance is too low
 
 **What to do:**
 
-* If you have a Pro, Max, Team, or Enterprise plan and see this, run `/status` and check the `API key` row. An approved `ANTHROPIC_API_KEY` in your environment routes requests through that key instead of your subscription. Unset it in the current shell and remove it from your shell profile, then relaunch `claude`. Run `/login` if you haven't signed in with your subscription yet.
+* If you have a Pro, Max, Ultra, Team, or Enterprise plan and see this, run `/status` and check the `API key` row. An approved `ANTHROPIC_API_KEY` in your environment routes requests through that key instead of your subscription. Unset it in the current shell and remove it from your shell profile, then relaunch `claude`. Run `/login` if you haven't signed in with your subscription yet.
 * Add credits at [platform.claude.com/settings/billing](https://platform.claude.com/settings/billing), and consider enabling auto-reload there so the balance refills before it hits zero
 * Set per-workspace spend caps in the Console to prevent a single project from draining the org balance. See [Manage costs effectively](https://code.claude.com/docs/en/costs.md).
 
@@ -1118,7 +1126,7 @@ API Error: 400 ... This organization has been disabled.
 
 The hint after the `·` depends on your saved credentials: the first form appears when a stored `/login` can take over after you unset the key, and the second when the key is your only credential.
 
-Environment variables take precedence over `/login`, so a key exported in your shell profile or loaded from a `.env` file is used even when you have a working Pro or Max subscription. In non-interactive mode (`-p`), the key is always used when present.
+If you export a key in your shell profile or load one from `.env`, Claude Code uses it instead of `/login`, even with a working Pro, Max, or Ultra subscription. In non-interactive mode (`-p`), the key is always used when present.
 
 **What to do:**
 
@@ -2193,9 +2201,9 @@ The upload must fit an 8 MiB limit. On a long session, Claude Code progressively
 
 ### Couldn't send feedback
 
-A message starting `Couldn't send feedback` means the report you submitted from the [`/feedback`, `/bug`, or `/share` dialog](https://code.claude.com/docs/en/commands#all-commands), or a queued [feedback draft](https://code.claude.com/docs/en/tools-reference.md#sendfeedback-tool-behavior), wasn't sent. When a sentence about your organization follows the colon, your organization refuses feedback and the same report gets the same answer.
+A message starting `Couldn't send feedback` means the feedback service didn't confirm the report you submitted from the [`/feedback`, `/bug`, or `/share` dialog](https://code.claude.com/docs/en/commands#all-commands), or a queued [feedback draft](https://code.claude.com/docs/en/tools-reference.md#sendfeedback-tool-behavior). Treat it as not received. When a sentence about your organization follows the colon, your organization refuses feedback and the same report gets the same answer.
 
-The first of these two examples is a network failure and the second is an organization's refusal:
+The second of these two examples is an organization's refusal:
 
 ```text wrap theme={null}
 Couldn't send feedback (couldn't reach the service). If it keeps failing, you can file at https://github.com/anthropics/claude-code/issues instead.
@@ -2208,12 +2216,24 @@ Couldn't send feedback: Feedback has not been enabled for your organization. To 
 * **Not signed in**: the message continues `: not signed in. Run /login, then retry.` Run `/login`, then send again
 * **Your organization's refusal**: for example `: Feedback has not been enabled for your organization.` or `: Feedback collection is not available for organizations with custom data retention policies.` If the message adds `To report a bug, open an issue`, do so at [github.com/anthropics/claude-code/issues](https://github.com/anthropics/claude-code/issues). A queued draft stays queued, and you can [discard it](https://code.claude.com/docs/en/tools-reference.md#discard-or-keep-a-draft)
 * **Refused credentials**: the message continues `: the sign-in this session uses is not allowed to send feedback` or `: the server did not accept the credentials this session uses`. Run `/status` at the Claude Code prompt to see which login, token, or API key this session sends
-* **`(request timed out)` or `(couldn't reach the service)` straight after `Couldn't send feedback`**: these are network failures. Send the report or the queued draft again. The dialog keeps your text, and a queued draft's message says `The draft is still queued.` If other requests are failing too, check your network connection and see [Unable to connect to API](#unable-to-connect-to-api). If it keeps failing, file the report at [github.com/anthropics/claude-code/issues](https://github.com/anthropics/claude-code/issues)
+* **`(request timed out)` or `(couldn't reach the service)` straight after `Couldn't send feedback`**: send the report or the queued draft again. The dialog keeps your text, and a queued draft's message says `The draft is still queued.` If other requests are failing too, check your network connection and see [Unable to connect to API](#unable-to-connect-to-api). If it keeps failing, file the report at [github.com/anthropics/claude-code/issues](https://github.com/anthropics/claude-code/issues)
 * **`(server returned <status>)`, or no reason, straight after `Couldn't send feedback`**: the status is the service's response code. The service's own message follows it when one was sent, as in `(server returned 403: Access Forbidden)`. If it keeps failing, file the report at [github.com/anthropics/claude-code/issues](https://github.com/anthropics/claude-code/issues)
 
 Issues at github.com/anthropics/claude-code are public, so leave out code, transcripts, and anything else confidential when you open one.
 
 Before v2.1.281, every send failed with this message once a Remote Control **Stop** or an urgent cross-session message had arrived while the dialog was open. On those versions, close the dialog, reopen it, and send again.
+
+### Feedback payload too large
+
+This message in the [review screen](https://code.claude.com/docs/en/tools-reference.md#review-and-edit-a-draft) for a [feedback draft](https://code.claude.com/docs/en/tools-reference.md#sendfeedback-tool-behavior) means Claude Code has no confirmation that the service accepted the draft. Treat it as not received. The draft stays in your `/feedback` queue, so you can send it again.
+
+```text wrap theme={null}
+Feedback payload too large. Try again without the transcript, or shorten the details.
+```
+
+**What to do:**
+
+* In the review screen, set **Send transcript** to `no`, then send the draft again. Shortening the details removes at most 10 KB of text, which is all a draft's details can hold.
 
 ### MCP server connection timed out during a sleep or clock change
 
@@ -2486,7 +2506,7 @@ Before v2.1.216, no deployment ran the exclusion checks.
 
 **What to do:**
 
-* If your Claude Code version is earlier than v2.1.216, run `claude update`.
+* If your Claude Code version is earlier than v2.1.300, run [`claude update`](https://code.claude.com/docs/en/setup#update-claude-code) in your shell. Before v2.1.300, Claude Code didn't [retry the request without the rejected tool's parameters](https://code.claude.com/docs/en/mcp.md#tools-whose-input-schema-the-api-refuses), so this error repeated on every request that included the tool.
 * Remove or [disable](https://code.claude.com/docs/en/mcp.md#disable-a-server-without-removing-it) the MCP server that declares the invalid schema. The error names the tool only by position. On v2.1.216 or later, check each server's log for a line naming a tool whose input schema would be rejected. If no log names one, disable servers one at a time.
 * If you maintain the server, fix the tool's `input_schema`. The schema must be valid JSON Schema, and top-level property names must be 1 to 64 characters long and use only ASCII letters and digits, `_`, `.`, and `-`. See [Tools with invalid input schemas](https://code.claude.com/docs/en/mcp.md#tools-with-invalid-input-schemas).
 
@@ -3479,6 +3499,37 @@ Claude Code re-runs the helper on each connection attempt, so a retry after a tr
 
 Before v2.1.248, Claude Code ran OAuth discovery for a server whose helper supplied the `Authorization` header. That discovery could fail with `Incompatible auth server: does not support dynamic client registration` instead of reporting the rejected credential.
 
+### MCP server rejected the elicitation capability
+
+An MCP server built on Java MCP SDK 0.11.0 through 0.17.0 refused the connection. Those SDK versions can't parse the `form` and `url` [elicitation modes](https://code.claude.com/docs/en/mcp.md#elicitation-modes-claude-code-declares) that Claude Code declares in its handshake. The message reads:
+
+```text theme={null}
+This server (Java MCP SDK 0.17.0 or older) rejected Claude Code's elicitation capability. Set "bareElicitationCapability": true for it, or upgrade to Java MCP SDK 0.17.1+ (Spring AI 1.0.7+ or 1.1.6+).
+```
+
+**What to do:**
+
+* Upgrade the server to Java MCP SDK 0.17.1 or later, or to one of the Spring AI releases the message names
+* Or add `"bareElicitationCapability": true` to that server's entry in your MCP configuration, then restart Claude Code. The field is accepted on stdio, `sse`, `http`, and `ws` entries and requires Claude Code v2.1.281 or later
+
+This `.mcp.json` entry sets the field for one HTTP server:
+
+```json theme={null}
+{
+  "mcpServers": {
+    "inventory": {
+      "type": "http",
+      "url": "https://mcp.example.com/mcp",
+      "bareElicitationCapability": true
+    }
+  }
+}
+```
+
+After the restart, `/mcp` shows the server as connected. Claude Code declares form mode only to that server, so remove the field once you upgrade it.
+
+A server can also fail with its own error text, such as one containing `Unrecognized field "form"`. The same fixes apply.
+
 ### MCP permission prompt tool not found
 
 The tool you passed to [`--permission-prompt-tool`](https://code.claude.com/docs/en/cli-reference#cli-flags) wasn't among the connected MCP tools when the run first needed a permission decision, either because its server never connected or because no connected server exposes a tool by that name. Claude Code still sends your prompt: the [non-interactive](https://code.claude.com/docs/en/headless.md) run exits with this error, and exit code 1, on the first tool call, so it produces no answer even though the request was made. Before the first prompt, Claude Code waits up to the per-server connection timeout of 30 seconds set by [`MCP_TIMEOUT`](https://code.claude.com/docs/en/env-vars) for that server to connect. Before v2.1.206, startup didn't wait for the server to finish connecting, so a slow-starting but healthy server produced this error too.
@@ -3549,7 +3600,6 @@ Sibling strings fire before the command runs at all:
 
 * `Shell command permission check failed for pattern "..."`: the command's permission check didn't allow it. [Permission checks on injected commands](https://code.claude.com/docs/en/skills.md#permission-checks-on-injected-commands) covers which results abort in each permission mode and how to pre-approve a command with `allowed-tools`
 * ``Skill <name> requires bash (`shell: bash` in frontmatter) but Git Bash was not found``: the skill's frontmatter demands bash on a machine without it. Install Git for Windows or change the frontmatter to `shell: powershell`. See [How injected commands run](https://code.claude.com/docs/en/skills.md#how-injected-commands-run)
-* `No shell command in <name> was run`: one of the file's `!` commands contains a raw control character other than tab or newline, so none of them runs. See [how to find and remove the character](#no-shell-command-was-run)
 
 **What to do:**
 
@@ -3559,9 +3609,12 @@ Sibling strings fire before the command runs at all:
 
 ### No shell command in a skill or command was run
 
-One of the `` !`<command>` `` [dynamic context commands](https://code.claude.com/docs/en/skills.md#inject-dynamic-context) in a skill or custom command file contains a raw control character other than tab or newline. Claude Code refuses the whole invocation before any of the file's commands runs.
+`No shell command in <name> was run` means a `` !`<command>` `` [dynamic context command](https://code.claude.com/docs/en/skills.md#inject-dynamic-context) in that skill or command file contains a character that the Bash or PowerShell tool refuses:
 
-The message names the shell tool that would have run the commands, Bash or PowerShell, and ends with the refused command. Each such character is replaced by `�` so you can see where it is:
+* **Either tool**: a raw control character other than a tab or newline
+* **PowerShell tool**: also U+FEFF or U+180E
+
+The message ends with the refused command, showing each refused character as `�`, as in this Bash tool example:
 
 ```text theme={null}
 No shell command in /my-skill was run, because the Bash tool does not accept one of them: command contains control characters that would be hidden in the approval dialog. Unprintable characters are shown as � below: remove them from the skill or command file, or from the arguments or options substituted into it.
@@ -3570,7 +3623,7 @@ build.sh --target�dist
 
 **What to do:**
 
-* Find each `�` in the command quoted at the end of the message. Remove the character it stands for from the skill or command file, or from the arguments or options substituted into the file.
+* Find each `�` in the command quoted at the end of the message. Remove the character it stands for from the [skill or command file](https://code.claude.com/docs/en/skills.md#where-skills-live), or from the arguments or [options](https://code.claude.com/docs/en/plugins/manifest-reference.md#user-configuration) substituted into the file.
 
 ### Input must be provided when using `--print`
 
@@ -3928,6 +3981,10 @@ Each reason the message can show in parentheses:
 **What to do:**
 
 * In a session started without those restrictions, run `/tui fullscreen`, or `/tui default` to switch back. Claude Code saves the [`tui` setting](https://code.claude.com/docs/en/settings-reference#tui) there
+
+### Can't restart while work is running or Remote Control is connected
+
+Claude Code didn't restart, and your session keeps running as it was. Follow the fix in the message.
 
 ### Claude Code couldn't restart
 
@@ -4528,6 +4585,19 @@ The tool call fails, Claude sees the error, and the turn continues.
 
 Before v2.1.281, a null byte in a Read, Write, Edit, or NotebookEdit path ended the whole turn with an error naming `Path contains null bytes`, and the tool never ran.
 
+### Command contains an invisible character
+
+The [PowerShell tool](https://code.claude.com/docs/en/tools-reference.md#powershell-tool) refused to run a command that contains U+FEFF or U+180E:
+
+```text theme={null}
+Error: command contains the invisible character U+FEFF (byte order mark) or U+180E (Mongolian vowel separator), and was not run. Remove the character, keep the text that needs it in a file that the command reads, or write it as $([char]0xFEFF) or $([char]0x180E) inside a double-quoted string
+```
+
+**What to do:**
+
+* **For a command Claude wrote**: you have nothing to fix. The message tells Claude how to rewrite the command.
+* **For a skill or command file**: the message follows `No shell command in <name> was run`. See [where to find the character and remove it](#no-shell-command-was-run).
+
 ### File is too large to read as an image
 
 Claude tried to read a file as an image with the [Read tool](https://code.claude.com/docs/en/tools-reference.md#read-tool-behavior), and the file is larger than 128 MB, the most Read loads from an image file. Nothing was read, and Claude receives this error as the tool result:
@@ -4651,6 +4721,19 @@ Only a teammate can approve a shutdown request, and this session is not running 
 * If the refusal appeared in your lead session, first check whether the teammate has since shut down. The refusal goes back to Claude with the instruction to send a `shutdown_request` instead, and the turn continues. In an interactive lead session, `<name> has shut down.` appears when the teammate approves a shutdown request.
 * If the teammate is still running, ask the lead at its prompt to shut the teammate down, for example `Ask the researcher teammate to shut down`. See [Shut down teammates](https://code.claude.com/docs/en/agent-teams.md#shut-down-teammates).
 * If a former teammate you resumed yourself with `claude --resume` got this refusal, nothing was sent. To end that session, run `/exit` at its prompt.
+
+### A command-line deny rule cannot be handed to a teammate intact
+
+This message means Claude Code didn't start a [split-pane](https://code.claude.com/docs/en/agent-teams.md#choose-a-display-mode) teammate in your [agent team](https://code.claude.com/docs/en/agent-teams.md). Claude Code passes the lead's command-line deny rules to a split-pane teammate on the teammate's own command line, and stops when the teammate would read one of them differently:
+
+```text wrap theme={null}
+A command-line deny rule cannot be handed to a teammate intact, so the teammate would not enforce it — spawn aborted
+```
+
+**What to do:**
+
+* Run `/config` in the lead session and set **Teammate mode** to `in-process`, then ask Claude to start the teammate again. You don't need to find the rule or restart the lead. An in-process teammate [runs under the lead's live deny rules](https://code.claude.com/docs/en/agent-teams.md#permissions).
+* Later sessions that take [`teammateMode`](https://code.claude.com/docs/en/settings-reference#teammatemode) from your user settings start teammates in-process too, because `/config` saves the choice there. To go back to split panes in a later session, set **Teammate mode** to `auto`, `tmux`, or `iterm2`, whichever you used before.
 
 ### Message too large for cross-session delivery
 
@@ -5089,12 +5172,12 @@ Commits on a remote don't block the delete. Neither do commits on the local copy
 **What to do:**
 
 * To keep the commits, push the worktree's branch, or merge it into the default branch checked out in your main checkout, then delete the session again
-* To discard the commits, run the `claude rm <id> --discard-unpushed` command the message printed, or press `Ctrl+X` twice on the session's row in agent view again. This removes the session and the worktree along with its branch, the unpushed commits, and any uncommitted changes. If the worktree has gained a commit since the refusal, Claude Code keeps it again and shows the updated state
+* To discard the commits, run the `claude rm <id> --discard-unpushed` command the message printed, or press `Ctrl+X` twice on the session's row in agent view again. This removes the session and the worktree along with its branch, the unpushed commits, and any uncommitted changes. If the delete is refused again, follow the new message.
 * When the message says the worktree is also recorded by another finished session, deleting again doesn't discard it: push the commits, then delete the session again
 
 Before v2.1.268, `claude rm` put the commit summary on the `kept` line itself. When `claude rm` couldn't summarize the commits, the `kept` line read `worktree has commits that are not pushed anywhere` in place of the summary.
 
-Before v2.1.260, the message didn't name the branch or the commits, and deleting again was refused the same way: deleting the session without pushing meant removing the worktree yourself with `git worktree remove --force <path>`, then running `claude rm <id>` again.
+Before v2.1.260, the message didn't name the branch or commits, and there was no discard route. You can still delete the session, losing uncommitted changes but keeping the branch and commits. Run `git worktree remove --force --force <path>` with the path the refusal printed, then `claude rm <id>`. Git needs `--force` twice for a locked worktree.
 
 Before v2.1.248, the default branch checked out in your main checkout didn't count: a branch you had already merged there still triggered this refusal until its commits reached a remote.
 
@@ -5377,6 +5460,22 @@ Failed to run Claude Code: Error: Could not locate the Claude CLI on PATH. Launc
 * Open a new PowerShell window outside VS Code and run `where.exe claude`. If it doesn't print a path, the CLI isn't on your PATH: add its install directory by following [Verify your PATH](https://code.claude.com/docs/en/troubleshoot-install.md#verify-your-path). If it prints a path, the entry comes from your PowerShell profile or from a PATH change VS Code hasn't picked up yet; the next two steps cover those cases.
 * Set the PATH entry as a user or system environment variable, not in your PowerShell profile. The extension doesn't run your profile, so a PATH edit that lives only there never reaches it.
 * Restart VS Code after changing PATH. The extension checks the PATH that VS Code captured at startup, so a PATH change takes effect only after a restart.
+
+### The Claude Code program for this computer could not be found
+
+The [VS Code extension](https://code.claude.com/docs/en/vs-code.md) looked for the copy of Claude Code bundled inside it and found none built for your computer. The message names the build your computer needs:
+
+```text theme={null}
+The Claude Code program for this computer, the Linux (linux-x64) build, could not be found.
+```
+
+**What to do:**
+
+* If the message says which build the extension holds, you have the extension package for another platform: install the package made for the build the message names
+* If the message doesn't say which build the extension holds, reinstall the Claude Code extension from your editor's Extensions view
+* Or, in either case, set [`claudeCode.claudeProcessWrapper`](https://code.claude.com/docs/en/vs-code#extension-settings) to a separately installed `claude` binary
+
+Before v2.1.290, this appeared as `Unsupported platform: <platform>-<arch>. No compatible Claude Code binary found.`
 
 ### The connection to Claude Code ended before this message completed
 
