@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security
-fetched_at: 2026-10-26T05:39:59.713993+00:00
+fetched_at: 2026-11-02T07:00:22.428686+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ A single run moves through these stages:
 2. **Provision.** Cursor provisions an isolated VM for that agent and clones the authorized repository into it.
 3. **Run.** The agent runs code and tools inside the VM and streams its progress, output, and artifacts back to the user.
 4. **Persist.** Conversation state, metadata, and artifacts are saved to Cursor-managed storage so you can review and resume the run.
-5. **Hand off.** The agent pushes its branch and opens a draft pull request for a human to review before anything merges.
+5. **Hand off.** The agent pushes its branch and opens a pull request for a human to review before anything merges. Pull requests open ready for review unless you ask for a draft.
 6. **Recycle.** VM runtime resources are hibernated and then deleted on lifecycle timers once the run is idle.
 
 ## Access and authorization
@@ -81,7 +81,7 @@ The layers that contain this risk:
 - **Network egress controls.** Restrict outbound traffic to a default set plus your allowlist, or to your allowlist only, so a compromised agent has nowhere to send data. Enterprise admins can lock the policy org-wide. See [Network access](https://cursor.com/docs/cloud-agent/security-network.md#network-access).
 - **Redacted runtime secrets.** Mark secrets as [Runtime Secrets](https://cursor.com/docs/cloud-agent/security-network.md#runtime-secrets) so their values are stripped from the transcript, tool output, and commits and never reach the model.
 - **File exclusion.** Add sensitive paths to [`.cursorignore`](https://cursor.com/docs/reference/ignore-file.md) to keep them out of the agent's context.
-- **Human-in-the-loop handoff.** Agents open draft pull requests. Nothing merges until a person reviews the change.
+- **Human-in-the-loop handoff.** Agents open pull requests for review. Nothing merges until a person reviews the change.
 - **Signed commits.** Every agent commit is signed with an HSM-backed Ed25519 key and shows a "Verified" badge on GitHub, so agent-authored changes are attributable and can satisfy signed-commit branch protection. See [Signed commits](https://cursor.com/docs/cloud-agent/security-network.md#signed-commits).
 
 For deeper defense, pair these with [hooks](https://cursor.com/docs/hooks.md) to enforce policy and log activity at agent lifecycle points, and have [Bugbot](https://cursor.com/docs/bugbot.md) or [Security Agents](https://cursor.com/docs/security-agents.md) review agent output before it ships.
@@ -92,7 +92,7 @@ For deeper defense, pair these with [hooks](https://cursor.com/docs/hooks.md) to
 | :---------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Full codebase in the cloud**      | Isolated per-agent VMs, AES-256 encryption, and automatic VM and snapshot deletion on lifecycle timers.                                                                                                                       |
 | **Third-party or insider access**   | No Cursor employee access to code in agent VMs, with monitored access attempts. VMs run in a separate AWS account from other Cursor services.                                                                                 |
-| **Agent autonomy**                  | Scope bounded by the repository and the triggering user's access. External reach is limited to configured tools and terminal commands, gated by network egress controls and reviewed through draft PRs.                       |
+| **Agent autonomy**                  | Scope bounded by the repository and the triggering user's access. External reach is limited to configured tools and terminal commands, gated by network egress controls and reviewed through pull requests.                   |
 | **Network access and exfiltration** | Internet access is on by default but can be restricted to allowlisted domains, down to allowlist-only, and locked org-wide.                                                                                                   |
 | **Secret exposure**                 | Encrypted secret storage, redacted runtime secrets kept out of the model, build-only secrets scoped to the Docker build, and [OIDC tokens](https://cursor.com/docs/cloud-agent/identity.md) for short-lived cloud federation. |
 

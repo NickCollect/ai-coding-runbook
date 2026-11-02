@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin
-fetched_at: 2026-10-26T05:39:59.220235+00:00
+fetched_at: 2026-11-02T07:00:21.599540+00:00
 fetch_method: mintlify_md
 ---
 
@@ -259,7 +259,6 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Installation Unsuspended](https://cursor.com/docs/api/origin/reference/installation-unsuspended.md)
 - [Installation Deleted](https://cursor.com/docs/api/origin/reference/installation-deleted.md)
 - [Pull Request Commandeered](https://cursor.com/docs/api/origin/reference/pull-request-commandeered.md)
-- [Repository Ruleset Events](https://cursor.com/docs/api/origin/reference/repository-ruleset-events.md)
 
 
 ---

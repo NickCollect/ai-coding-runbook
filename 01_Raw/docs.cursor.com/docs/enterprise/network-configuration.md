@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/network-configuration
-fetched_at: 2026-10-19T05:32:44.383074+00:00
+fetched_at: 2026-11-02T07:00:23.050844+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,6 +35,7 @@ Cursor's services are already encrypted end-to-end. We recommend disabling SSL i
 - `authenticator.cursor.sh`
 - `*.cursorvm.com`
 - `*.*.cursorvm.com`
+- `cursor.com` and `*.cursor.com` (the web dashboard, Cloud Agents at `cursor.com/agents`, and code review pages)
 
 Sign-in also uses `accounts.spacex.ai`, `accounts.x.ai`, and related auth hosts. Exclude those from inspection too. `authenticator.cursor.sh` remains the fallback sign-in page during the transition. See [Which domains does Cursor sign-in need?](https://cursor.com/help/troubleshooting/sign-in-domains.md) for the full list.
 
@@ -46,6 +47,25 @@ If your security policy requires SSL inspection on all traffic, your proxy must 
 - Server-Sent Events (SSE) passthrough without buffering
 - Long-running connections without forced timeouts
 - Disabling response buffering for streaming content types
+
+### Gateways that scan downloads
+
+The web app at `cursor.com` streams agent conversations and code review data as long-lived, compressed binary responses. A secure web gateway that scans downloads for malware or DLP can classify those responses as files and hold the whole body until the connection closes, which can take over ten minutes. Cloudflare Gateway (Cloudflare One with the WARP client) does this when its HTTP policies inspect `cursor.com`; Zscaler and Netskope have equivalent settings.
+
+Symptoms:
+
+- Agents stay on "Loading…" at `cursor.com/agents` while the Cursor desktop app opens the same agents normally.
+- In the browser's developer tools, the Network tab shows a `StreamConversation` request under `/api/connect-proxy/` with no status code and nothing transferred.
+- The page eventually renders after ten minutes or more.
+- Turning the gateway client off, or testing from outside the network, makes the page load at once.
+
+Exclude `cursor.com` and `*.cursor.com` from TLS inspection and file scanning. For Cloudflare Zero Trust, any one of these works:
+
+1. **Gateway → Firewall policies → HTTP**: add a **Do Not Inspect** policy for `cursor.com` and `*.cursor.com`, placed above your other HTTP policies.
+2. If TLS inspection must stay on, add a **Do Not Scan** policy for `cursor.com` instead, and exclude `cursor.com` from any DLP profiles.
+3. Under **WARP device settings → Split Tunnels**, add `cursor.com` to the exclude list so it bypasses the gateway.
+
+Apply the exception to roaming and off-network profiles as well as office locations.
 
 ### Testing proxy connectivity
 
@@ -191,10 +211,11 @@ If you experience connection issues:
 
 1. **Test basic connectivity** to `api2.cursor.sh`
 2. **Check if SSL inspection is active** and consider excluding Cursor domains
-3. **Verify streaming works** using the curl tests above
-4. **Check firewall rules** allow traffic to `*.cursor.sh` and related domains
-5. **Review proxy logs** for connection errors or timeouts
-6. **Test from a machine outside your network** to isolate network-specific issues
+3. **Check if download scanning is holding web streams**: if `cursor.com/agents` stays on "Loading…" but the desktop app works, see [Gateways that scan downloads](https://cursor.com/docs/enterprise/network-configuration.md#gateways-that-scan-downloads)
+4. **Verify streaming works** using the curl tests above
+5. **Check firewall rules** allow traffic to `*.cursor.sh` and related domains
+6. **Review proxy logs** for connection errors or timeouts
+7. **Test from a machine outside your network** to isolate network-specific issues
 
 Most connectivity issues stem from proxies buffering streaming responses. Work with your network team to disable buffering for Cursor domains or implement proper streaming support.
 

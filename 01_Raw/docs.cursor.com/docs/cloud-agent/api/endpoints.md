@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/api/endpoints
-fetched_at: 2026-10-26T05:39:59.566936+00:00
+fetched_at: 2026-11-02T07:00:22.167708+00:00
 fetch_method: mintlify_md
 ---
 
@@ -416,6 +416,8 @@ POST
 Send a follow-up prompt to an existing active agent. Without `delivery`, the prompt starts a new run that uses the agent's current conversation and workspace state.
 
 Only one run can be active per agent. Without `delivery`, calling this while another run is `CREATING`, `RUNNING`, or `WAITING_FOR_BACKGROUND_WORK` returns `409 agent_busy`. To add the prompt to the running agent instead, [steer](https://cursor.com/docs/cloud-agent/api/endpoints.md#steering) it with `delivery: "steer"`. Otherwise, wait for the existing run to terminate, or cancel it.
+
+This endpoint returns `400 validation_error` when the agent is a subagent that only its parent agent can drive, with the message "Follow-ups and steers to subagents are not supported. Send them to the parent agent." Send the follow-up or steer to the parent agent instead.
 
 #### Path Parameters
 
@@ -1599,8 +1601,10 @@ Start a [Build](https://cursor.com/docs/cloud-agent/builds.md) of an environment
 
 Access follows [Update An Environment](https://cursor.com/docs/cloud-agent/api/endpoints.md#update-an-environment), with two differences:
 
-- **A draft Build on a team environment needs only read access.** When a team limits environment edits to admins, members can still start drafts, but only admins can start non-draft Builds. Other members get `403 team_admin_required`.
-- **Service account API keys get `403 key_not_supported`.** A user-scoped token minted by an API key limited to certain repositories gets `404 environment_not_found` when the environment has no repositories or any repository outside the limit. Otherwise it gets `403 key_not_supported`.
+- **A draft Build on a team environment needs only read access.** When a team limits environment edits to admins, members can still start drafts, but only admins can start non-draft Builds. Other members get `403 team_admin_required`. That setting doesn't limit service account API keys.
+- **An API key limited to certain repositories can't start Builds**, and neither can a user-scoped token it minted. They get `404 environment_not_found` when the environment has no repositories or any repository outside the limit, and `403 key_not_supported` otherwise.
+
+A team service account API key with no repository limit can start Builds of its own team's environments. The key needs the `agent` scope, and one without it gets `401 unauthorized`. A member's personal environment or another team's environment returns `404 environment_not_found`.
 
 Too many requests, or too many Builds already in progress for the environment, return `429 rate_limit_exceeded`. A `503 upstream_error` means Cursor couldn't confirm whether the Build started. Don't retry automatically, because another request can start a second Build. Check [List Environment Builds](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-environment-builds) before deciding what to do.
 
@@ -2198,7 +2202,7 @@ GET
 
 `/v1/team/secrets`
 
-List the Cloud Agents secrets of the team your API key works in. Each item is a [secret version](https://cursor.com/docs/cloud-agent/api/endpoints.md#secret-versions), and no item includes a value. Personal secrets, environment secrets, and other teams' secrets aren't included. Items are sorted by name, so the versions of one name sit together.
+List the Cloud Agents secrets of the team your API key works in. Each item is a [secret version](https://cursor.com/docs/cloud-agent/api/endpoints.md#secret-versions), and no item includes a value. Personal secrets, environment secrets, and other teams' secrets aren't included.
 
 Who can list team secrets:
 
@@ -2207,17 +2211,31 @@ Who can list team secrets:
 - **An API key limited to certain repositories**, or a user-scoped token it minted, gets `403 repository_access`, because team secrets reach every repository.
 - **An API key that isn't working in a team**, or a caller without a seat on the team, gets `403 team_membership_required`.
 
-The list isn't paginated yet, so `nextCursor` is always `null`. Follow `nextCursor` until it's `null`, so your client keeps working when pages arrive.
+Without `limit` or `cursor`, the response holds every team secret version, sorted by name, then repositories, then creation time, so the versions of one name sit together, and `nextCursor` is `null`. Send either parameter to page through the versions in secret-version creation order. Pass each page's `nextCursor` back as `cursor` until it's `null`. Pages are read live rather than from a snapshot, so secrets created or deleted during a walk can change what later pages show.
+
+Cursors use the same format as [List Secrets](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-secrets), so for the same team, a cursor from `GET /v1/secrets?scope=team` continues here, and the reverse. Pass `nextCursor` back only to the same team's list. Cursors aren't tied to a team, caller, scope, or filters, so another list's cursor can silently skip versions or end the list early. A cursor from the part of a team admin's List Secrets walk that lists other members' secrets returns `400 validation_error` here.
+
+A `limit` that isn't a whole number from 1 to 100, a repeated `limit` or `cursor`, a cursor the API didn't return, or any other query parameter returns `400 validation_error`.
+
+#### Query Parameters
+
+`limit` number (optional)
+
+Maximum items per page, from 1 to 100. Defaults to 100 when you send only `cursor`.
+
+`cursor` string (optional)
+
+`nextCursor` from the previous page.
 
 #### Response Fields
 
 `items` array
 
-The team's [secret versions](https://cursor.com/docs/cloud-agent/api/endpoints.md#secret-versions). A name with versions for different repositories appears once per version.
+The team's [secret versions](https://cursor.com/docs/cloud-agent/api/endpoints.md#secret-versions) on this page. A name with versions for different repositories appears once per version.
 
 `nextCursor` string or null
 
-Cursor for the next page. Always `null` for now.
+Cursor for the next page, or `null` after the last page. Always `null` without `limit` or `cursor`.
 
 ```bash
 curl --request GET \
@@ -2247,6 +2265,46 @@ curl --request GET \
   ],
   "nextCursor": null
 }
+```
+
+Page through the list, two versions at a time:
+
+```bash
+curl --request GET \
+  --url 'https://api.cursor.com/v1/team/secrets?limit=2' \
+  -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "items": [
+    {
+      "id": "secv_4Fq9Lm2Xc7Rt1Bn8Kd3Vh0",
+      "name": "NPM_TOKEN",
+      "type": "runtime_secret",
+      "repos": [],
+      "createdAt": "2026-09-30T17:02:11.000Z"
+    },
+    {
+      "id": "secv_Pz6Wy1Ja5Qe9Ns3Gu7Ck2M",
+      "name": "DATABASE_URL",
+      "type": "environment_variable",
+      "repos": ["github.com/acme/api"],
+      "createdAt": "2026-10-01T09:14:52.000Z"
+    }
+  ],
+  "nextCursor": "Tg9xR2pLbW5vcFFyc3R1dnd4eXo0NTY3ODkwYWJjZGVmZ2hp"
+}
+```
+
+Then request the next page with that cursor:
+
+```bash
+curl --request GET \
+  --url 'https://api.cursor.com/v1/team/secrets?limit=2&cursor=Tg9xR2pLbW5vcFFyc3R1dnd4eXo0NTY3ODkwYWJjZGVmZ2hp' \
+  -u YOUR_API_KEY:
 ```
 
 ### Set A Team Secret

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/changelog
-fetched_at: 2026-10-26T05:39:59.136931+00:00
+fetched_at: 2026-11-02T07:00:21.456824+00:00
 fetch_method: mintlify_md
 ---
 
@@ -9,6 +9,20 @@ fetch_method: mintlify_md
 The Origin API is in Early Beta and subject to change. Review the [OpenAPI specification](https://cursor.com/docs/api/origin/openapi.yaml) when updating an integration.
 
 Changes to the Origin public API, including endpoints, request and response schemas, scopes, and webhooks, grouped by day with the newest first. Each change carries one label: **Breaking**, **Deprecated**, **Added**, **Changed**, or **Removed**. Breaking and deprecated changes include migration guidance inline. The [Origin API reference](https://cursor.com/docs/api/origin.md) always reflects the latest synced state.
+
+## October 28, 2026
+
+- **Breaking.** A user's approval counts toward a `pull_request` rule's `requiredApprovingReviewCount`, `requireCodeOwnerReview`, and `requiredReviewers` only while the user has permission to [submit reviews](https://cursor.com/docs/api/origin/reference/create-pull-request-review.md) on the repository. Approvals from users without that permission, such as someone whose access was removed after they approved or a group member who can only read the repository, used to count and no longer do. [Get Pull Request Mergeability](https://cursor.com/docs/api/origin/reference/get-pull-request-mergeability.md) can therefore report a pull request as blocked that it used to report as mergeable, and [Merge Pull Request](https://cursor.com/docs/api/origin/reference/merge-pull-request.md) refuses it with `FailedPrecondition` (HTTP 400). Migration: request a new approval from someone with permission to submit reviews on the repository, or restore the approver's access.
+- **Added.** [Create Repo](https://cursor.com/docs/api/origin/reference/create-repo.md) accepts an optional `visibility` in its request body, `internal` or `private`, and creates the repository with it. Omitting it creates an `internal` repository, which is what Create Repo created for every request before.
+
+## October 27, 2026
+
+- **Breaking.** [Enable Pull Request Auto Merge](https://cursor.com/docs/api/origin/reference/enable-pull-request-auto-merge.md) returns `PermissionDenied` (HTTP 403) to a service account, as it already did to an installation user token, because auto-merge merges later as the principal that turned it on and Origin can't act as a service account then. These requests used to succeed and left auto-merge on without ever merging. Auto-merge that a service account turned on before this change is turned off, and [`pull_request.merge_when_ready.disabled`](https://cursor.com/docs/api/origin/reference/events.md) reports `enabler_lost_access` as its `disabledReason`. Migration: merge the pull request with [Merge Pull Request](https://cursor.com/docs/api/origin/reference/merge-pull-request.md) once it's mergeable, or have a person turn on auto-merge with their Cursor user credential.
+- **Breaking.** [Enable Pull Request Auto Merge](https://cursor.com/docs/api/origin/reference/enable-pull-request-auto-merge.md) rejects `mergeMethod` `merge` with `FailedPrecondition` (HTTP 400) when an `active` `required_linear_history` rule covers the pull request's base branch and squash merges are allowed there, because auto-merge lands without a ruleset bypass and the rule refuses its merge commit. These requests used to succeed. Auto-merge already on with `merge` for such a branch is turned off, and [`pull_request.merge_when_ready.disabled`](https://cursor.com/docs/api/origin/reference/events.md) reports `merge_failed` as its `disabledReason`. Migration: send `squash`, or omit `mergeMethod` to land the default, when the base branch requires linear history.
+
+## October 25, 2026
+
+- **Breaking.** [Post Check Run](https://cursor.com/docs/api/origin/reference/post-check-run.md) and [Batch Upsert Check Runs](https://cursor.com/docs/api/origin/reference/batch-upsert-check-runs.md) return `InvalidArgument` (HTTP 400) for a check suite or check run whose `name` is longer than 255 characters or whose `detailsUrl` is longer than 8,192 characters, where these requests used to succeed. A batch with one such run writes none of its runs. Migration: truncate `name` to 255 characters and `detailsUrl` to 8,192 characters on `checkSuite`, `checkRun`, and each `checkRuns[]` entry before you post.
 
 ## October 23, 2026
 

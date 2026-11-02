@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/deployment-patterns
-fetched_at: 2026-09-28T06:10:42.551884+00:00
+fetched_at: 2026-11-02T07:00:22.917043+00:00
 fetch_method: mintlify_md
 ---
 
@@ -494,6 +494,8 @@ As a general rule of thumb, a release becomes eligible to be the minimum support
 You can estimate when a release will age out by combining this guidance with our published GA and changelog dates.
 
 When managing Cursor deployments for your organization, we recommend updating Cursor regularly (for example, via MDM) so users stay on supported versions.
+
+For what users see when their version ages out and how they update, see [Minimum version policy](https://cursor.com/help/troubleshooting/minimum-version.md).
 
 ## Troubleshooting
 

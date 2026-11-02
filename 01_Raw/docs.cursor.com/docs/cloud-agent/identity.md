@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/identity
-fetched_at: 2026-10-19T05:32:43.955353+00:00
+fetched_at: 2026-11-02T07:00:22.276104+00:00
 fetch_method: mintlify_md
 ---
 
@@ -100,7 +100,7 @@ The flag is off by default. Pass it on the worker command, before `start`. Pool 
 agent worker --identity-socket start
 ```
 
-With the flag set, the worker opens one socket per claimed agent and sets `CURSOR_AGENT_SOCKET` to the socket's path in the agent's shells. The request and response contract, error codes, and rate limits match Cursor-managed VMs.
+With the flag set, the worker opens one socket per claimed agent and sets `CURSOR_AGENT_SOCKET` to the socket's path in the agent's shells. The request and response contract and error codes match Cursor-managed VMs. [Rate limits and errors](https://cursor.com/docs/cloud-agent/identity.md#rate-limits-and-errors) lists the mint limits for both.
 
 These tokens carry `agent_runtime: self_hosted` and the same owner, team, and repository claims. The worker serves the token API. It doesn't serve [agent metadata](https://cursor.com/docs/cloud-agent/metadata.md). Any process running as the worker's OS user can mint on that claim's socket. See [Trust model](https://cursor.com/docs/cloud-agent/identity.md#trust-model).
 
@@ -259,7 +259,7 @@ A [claim token](https://cursor.com/docs/cloud-agent/identity.md#claim-tokens) na
 
 ## Rate limits and errors
 
-Each claimed agent can mint **30 tokens per minute**, in bursts of up to 10. The socket accepts at most 8 connections at once. On a Cursor-managed VM, those 8 connections are shared with [agent metadata](https://cursor.com/docs/cloud-agent/metadata.md). Cache a token until it expires instead of minting per call.
+Each claimed agent can mint at most **30 tokens per minute**. A Cursor-managed VM allows bursts of up to 5 tokens, then 25 per minute. A self-hosted worker allows bursts of up to 10. The socket accepts at most 8 connections at once. On a Cursor-managed VM, those 8 connections are shared with [agent metadata](https://cursor.com/docs/cloud-agent/metadata.md). Cache a token until it expires instead of minting per call.
 
 Retry `429`, `503`, `500`, `502`, and `504` with backoff. Treat `403` as fatal: this agent isn't allowed to mint.
 

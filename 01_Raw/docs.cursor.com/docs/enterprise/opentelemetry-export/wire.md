@@ -1,14 +1,20 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export/wire
-fetched_at: 2026-10-19T05:32:44.414072+00:00
+fetched_at: 2026-11-02T07:00:23.157875+00:00
 fetch_method: mintlify_md
 ---
 
 # OpenTelemetry Export Wire Reference
 
-Companion to [OpenTelemetry Export](https://cursor.com/docs/enterprise/opentelemetry-export.md). Full wire surface: every metric, log event, attribute, enum, and presence rule.
+Companion to [OpenTelemetry Export](https://cursor.com/docs/enterprise/opentelemetry-export.md). This page lists every metric, log event, attribute, enum value, and presence rule Cursor exports.
 
-The surface is additive. Tolerate unknown attributes, events, and enum values. Renames and removals get explicit notice.
+Cursor adds new attributes, events, and enum values over time without a version bump. Build your pipeline to ignore values it doesn't recognize rather than reject the record. Cursor gives explicit notice before it renames or removes anything.
+
+How to read the tables:
+
+- **Presence** says when an attribute appears. `Always` is on every record of the event. `Optional` isn't on every record, so your pipeline shouldn't require it. The notes say when it appears, where that's defined.
+- **(open)** marks a value that isn't drawn from a fixed list, such as a customer-defined name.
+- **Bot** means a Grok Bot. Its **computer** (`box` in attribute names) is the Grok Bot computer the Bot works on. A **card** is the approval card a person answers.
 
 ## Transport and scope
 
@@ -18,22 +24,23 @@ The surface is additive. Tolerate unknown attributes, events, and enum values. R
 
 ## Resource attributes
 
-One resource per (team, user, surface, entrypoint, surface version) grouping.
+One resource per (team, user, surface, entrypoint, surface version, Project) grouping.
 
-| Attribute                | Type   | Presence | Values / notes                                                                                                                                                                                                                        |
-| ------------------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `service.name`           | string | Always   | Constant `cursor`                                                                                                                                                                                                                     |
-| `service.version`        | string | Optional | Client version when source is desktop/CLI; usually absent on `cloud_agent` / `bugbot`                                                                                                                                                 |
-| `cursor.team.id`         | int    | Always   | Your team id                                                                                                                                                                                                                          |
-| `cursor.surface`         | string | Always   | `unspecified` \| `desktop` \| `cli` \| `cloud_agent` \| `bugbot` \| `grok_bot`                                                                                                                                                        |
-| `cursor.entrypoint`      | string | Always   | `unspecified` \| `desktop` \| `cli` \| `web` \| `mobile` \| `sdk_ts` \| `sdk_py` \| `api` \| `automation` \| `github_pr`On `grok_bot.*` records, `automation` marks a turn a routine started (`cursor.grok_bot.initiated_by=routine`) |
-| `cursor.user.id`         | int    | Optional | Opaque team-scoped user id when the source has one. On `cloud_agent.*` logs it is the run's owner. A run started with a team API key or a service account has no owner and carries no user attributes. Do not require presence.       |
-| `cursor.user.account_id` | string | Optional | The member's `user_...` id, the value `GET /teams/members` on the [Admin API](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) returns as `id`. A record carries both this and `cursor.user.id` or neither.       |
-| `cursor.user.email`      | string | Optional | The member's email. Present when `cursor.user.id` is present and the member has an email. Not exported for teams on Privacy Mode (Legacy). Do not require presence.                                                                   |
+| Attribute                | Type   | Presence | Values / notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------ | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `service.name`           | string | Always   | Constant `cursor`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `service.version`        | string | Optional | Client version when source is desktop/CLI; usually absent on `cloud_agent` / `bugbot`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `cursor.team.id`         | int    | Always   | Your team id                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `cursor.surface`         | string | Always   | `unspecified` \| `desktop` \| `cli` \| `cloud_agent` \| `bugbot` \| `grok_bot`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `cursor.entrypoint`      | string | Always   | `unspecified` \| `desktop` \| `cli` \| `web` \| `mobile` \| `sdk_ts` \| `sdk_py` \| `api` \| `automation` \| `github_pr`On `grok_bot.*` records, `automation` marks a turn a routine started (`cursor.grok_bot.initiated_by=routine`)                                                                                                                                                                                                                                                                                                                                            |
+| `cursor.user.id`         | int    | Optional | Opaque team-scoped user id when the source has one. On `cloud_agent.*` logs it is the run's owner. A run started with a team API key or a service account has no owner and carries no user attributes. Your pipeline shouldn't require it.                                                                                                                                                                                                                                                                                                                                       |
+| `cursor.user.account_id` | string | Optional | The member's `user_...` id, the value `GET /teams/members` on the [Admin API](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) returns as `id`. A record carries both this and `cursor.user.id` or neither.                                                                                                                                                                                                                                                                                                                                                  |
+| `cursor.user.email`      | string | Optional | The member's email. Present when `cursor.user.id` is present and the member has an email. Not exported for teams on Privacy Mode (Legacy). Your pipeline shouldn't require it.                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `cursor.project.id`      | string | Optional | Present when the emitting agent belongs to a cloud Project: the root coordinator's `bc-...` agent id, the value the Agents API returns as that agent's `id`. The same for the coordinator and every agent in its tree (workers, subagents, side chats), and stable across renames. Absent for agents outside a cloud Project, for local Projects, and on `cloud_agent.review_followup`. Delivered only to the team that owns the Project. Which agents count as in a cloud Project may widen, so don't rely on absence. A resource attribute, so metrics carry it as a dimension |
 
 ## Families
 
-Family ids match the toggles in Team Settings. All default on for a new destination except `conversation_content`, which is off until the team opts in and the destination turns on the toggle for each kind (see [Conversation content](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#conversation-content)).
+Family ids match the toggles in Team Settings. Every family is on by default for a new destination except `conversation_content`. That family stays off until the team opts in and the destination turns on the toggle for each kind; see [Conversation content](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#conversation-content).
 
 | Family id                | Signals        | Default                                              | Covers                                                                                                                                                                                                                                                                                           |
 | ------------------------ | -------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -48,13 +55,14 @@ The `grok_bot_agent_actions` family, and `skill.activated` when a Bot emits it, 
 
 ## Metrics
 
-All metrics are monotonic **delta** sums. Metric datapoints carry no correlation IDs; those appear on logs only.
+All metrics are monotonic **delta** sums. Correlation ids are on logs only, never on metric datapoints.
 
-Consume metrics as sums of deltas per series. A series is the resource, the metric name, and the exact datapoint attribute set. Windows for the same series can overlap across flushes.
+To get totals, sum the deltas per series. A series is the resource, the metric name, and the exact set of datapoint attributes. Windows for one series can overlap across flushes.
 
 ### `cursor.token.usage`
 
-Unit `{token}`. Family `model_usage`.
+- **Unit:** `{token}`
+- **Family:** `model_usage`
 
 | Attribute             | Type   | Presence | Values / notes                                                                                                                                                                                                     |
 | --------------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -65,7 +73,9 @@ Unit `{token}`. Family `model_usage`.
 
 ### `cursor.tool.calls`
 
-Unit `{call}`. Family `tool_calls`. Value `1` per completed tool call.
+- **Unit:** `{call}`
+- **Family:** `tool_calls`
+- **Value:** `1` per completed tool call
 
 | Attribute                | Type   | Presence | Values / notes                                                     |
 | ------------------------ | ------ | -------- | ------------------------------------------------------------------ |
@@ -76,43 +86,59 @@ Unit `{call}`. Family `tool_calls`. Value `1` per completed tool call.
 
 ### `cursor.cost.usage`
 
-Unit `USD` (double). Family `model_usage`. Best-effort estimated cost at event time, **not an invoice**. Subject to `cursor.api.correction`. For BYOK, this is the Cursor Token Rate only, not provider spend.
+- **Unit:** `USD` (double)
+- **Family:** `model_usage`
 
-| Attribute           | Type   | Presence | Values / notes                       |
-| ------------------- | ------ | -------- | ------------------------------------ |
-| `cursor.model.name` | string | Optional | Same collapse rules as `token.usage` |
+A best-effort cost estimate at event time, **not an invoice**. `cursor.api.correction` can amend it. For BYOK (bring your own key), it's the Cursor Token Rate only, not provider spend.
+
+Calls with no Cursor-billed cost emit no datapoint rather than a zero: non-billable calls, errored calls (never charged), zero-cost calls, and BYOK or request-priced calls with no Cursor token fee. Aborted calls do export their provisional estimate, with `cursor.api.status=aborted`; those are the points most likely to be corrected later.
+
+| Attribute             | Type   | Presence | Values / notes                       |
+| --------------------- | ------ | -------- | ------------------------------------ |
+| `cursor.model.name`   | string | Optional | Same collapse rules as `token.usage` |
+| `cursor.api.status`   | string | Optional | `success` \| `errored` \| `aborted`  |
+| `cursor.api.billable` | bool   | Optional |                                      |
 
 ## Log events
 
-Severities: INFO=9, WARN=13, ERROR=17.
+Severity numbers: INFO=9, WARN=13, ERROR=17.
+
+Each event lists its severity, its body, and its family. The body is a constant event name on every event except `conversation.*`.
 
 ### Common log attributes
 
-| Attribute                | Type   | Presence | Notes                                                                                                                                                                                                                                                                                                                          |
-| ------------------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `cursor.event.id`        | string | Always   | **Dedupe key.** Opaque. Deterministic across retries, worker restarts, and Cursor Kafka replay. Prefix `customer-telemetry:v1:...` is stable; treat the whole string as opaque.                                                                                                                                                |
-| `cursor.source_event.id` | string | Always   | Opaque internal source identity. Several signals may share one value.                                                                                                                                                                                                                                                          |
-| `cursor.request.id`      | string | Optional | On `api.request`, `api.error`, `skill.activated` (except Bot activations), `hook.execution_complete`, `plugin.installed`. Never on `api.correction`, `cloud_agent.*`, or `grok_bot.*`. Don't depend on it on `conversation.*`.                                                                                                 |
-| `cursor.conversation.id` | string | Optional | IDE/CLI: composer UUID. Cloud agent: customer-visible `bc-...` agent id. Grok Bot (`grok_bot.*`, and any log with `cursor.surface=grok_bot`): the identifier for the Bot. That value is the Bot's conversation id. Join key for session reconstruction across api, skill/hook, cloud\_agent, grok\_bot, and conversation logs. |
-| `cursor.usage_event.id`  | string | Optional | `api.request` / `api.error` / `api.correction` only. Request-grain key against Cursor usage and billing exports.                                                                                                                                                                                                               |
+| Attribute                | Type   | Presence | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------------------ | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.event.id`        | string | Always   | **Dedupe key.** Opaque. Deterministic across retries, worker restarts, and Cursor Kafka replay. Prefix `customer-telemetry:v1:...` is stable; treat the whole string as opaque.                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `cursor.source_event.id` | string | Always   | Opaque internal source identity. Several signals may share one value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `cursor.request.id`      | string | Optional | On `api.request`, `api.error`, `skill.activated` (except Bot activations), `hook.execution_complete`, `plugin.installed`. Never on `api.correction`, `cloud_agent.*`, or `grok_bot.*`. Not reliably present on `conversation.*`, so don't join on it there.                                                                                                                                                                                                                                                                                                                                         |
+| `cursor.conversation.id` | string | Optional | IDE/CLI: composer UUID. Cloud agent: customer-visible `bc-...` agent id. Grok Bot (`grok_bot.*`, and any log with `cursor.surface=grok_bot`): the identifier for the Bot. That value is the Bot's conversation id. Join key for session reconstruction across api, skill/hook, cloud\_agent, grok\_bot, and conversation logs. Always present on `conversation.*`: a content record without one is dropped rather than exported.                                                                                                                                                                    |
+| `cursor.usage_event.id`  | string | Optional | `api.request` / `api.error` / `api.correction` only. Request-grain key against Cursor usage and billing exports.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `cursor.project.name`    | string | Optional | The cloud Project's display name, only alongside a resource `cursor.project.id`. On `api.*`, `skill.activated`, `hook.execution_complete`, `plugin.installed`, `cloud_agent.*`, and `conversation.*` records from cloud Project runs. Never on `grok_bot.*`, Bot `skill.activated`, or `cloud_agent.review_followup`. The root coordinator's name, never a worker's own. A rename shows from the next turn or event on; earlier records keep the earlier name. Customer-authored or model-generated free text, secret-scrubbed (open). A log attribute so that a rename doesn't split metric series |
 
 ### `cursor.api.request`
 
-INFO, body `api_request`. Family `model_usage`.
+- **Severity:** `INFO`
+- **Body:** `api_request`
+- **Family:** `model_usage`
 
-| Attribute                                  | Type   | Presence                | Notes                                                                                                                                                                                                                                                                 |
-| ------------------------------------------ | ------ | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cursor.api.request.input_tokens`          | int    | Always                  |                                                                                                                                                                                                                                                                       |
-| `cursor.api.request.output_tokens`         | int    | Always                  |                                                                                                                                                                                                                                                                       |
-| `cursor.api.request.cache_read_tokens`     | int    | Always                  |                                                                                                                                                                                                                                                                       |
-| `cursor.api.request.cache_creation_tokens` | int    | Always                  |                                                                                                                                                                                                                                                                       |
-| `cursor.model.name`                        | string | Optional                |                                                                                                                                                                                                                                                                       |
-| `cursor.api.billable`                      | bool   | Optional                |                                                                                                                                                                                                                                                                       |
-| `cursor.grok_bot.turn.id`                  | string | `grok_bot` surface only | Same value as `cursor.request.id`: the Bot turn that made the model call. Join it to the turn's `grok_bot.*` action records. A Grok Bot model call made outside a turn (avatar generation) carries an id here that joins to no action record. Never on other surfaces |
+| Attribute                                  | Type   | Presence                | Notes                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------ | ------ | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.api.request.input_tokens`          | int    | Always                  |                                                                                                                                                                                                                                                                                                 |
+| `cursor.api.request.output_tokens`         | int    | Always                  |                                                                                                                                                                                                                                                                                                 |
+| `cursor.api.request.cache_read_tokens`     | int    | Always                  |                                                                                                                                                                                                                                                                                                 |
+| `cursor.api.request.cache_creation_tokens` | int    | Always                  |                                                                                                                                                                                                                                                                                                 |
+| `cursor.model.name`                        | string | Optional                |                                                                                                                                                                                                                                                                                                 |
+| `cursor.api.billable`                      | bool   | Optional                |                                                                                                                                                                                                                                                                                                 |
+| `cursor.grok_bot.turn.id`                  | string | `grok_bot` surface only | Same value as `cursor.request.id`: the Bot turn that made the model call. Join on it to link the model call to the turn's `grok_bot.*` action records. A Grok Bot model call made outside a turn (avatar generation) carries an id here that joins to no action record. Never on other surfaces |
 
 ### `cursor.api.error`
 
-ERROR, body `api_error`. Family `model_usage`. No raw error messages. Low-cardinality kind and status attributes are planned; don't depend on them yet.
+- **Severity:** `ERROR`
+- **Body:** `api_error`
+- **Family:** `model_usage`
+
+Raw error messages never export. Cursor plans to add low-cardinality kind and status attributes. Don't build on them until this page documents them.
 
 | Attribute                 | Type   | Presence                | Notes                                                |
 | ------------------------- | ------ | ----------------------- | ---------------------------------------------------- |
@@ -122,7 +148,11 @@ ERROR, body `api_error`. Family `model_usage`. No raw error messages. Low-cardin
 
 ### `cursor.api.correction`
 
-WARN, body `api_correction_<kind>`. Family `model_usage`. Billing finalization: the usage event was retroactively **not** billed. Join on `cursor.usage_event.id` and drop the whole group for billing. Deliberately carries no `cursor.model.name`.
+- **Severity:** `WARN`
+- **Body:** `api_correction_<kind>`
+- **Family:** `model_usage`
+
+A billing finalization: Cursor retroactively did **not** bill the usage event. To correct your billing data, join on `cursor.usage_event.id` and drop the whole group. The record carries no `cursor.model.name` on purpose.
 
 | Attribute                    | Type   | Presence | Values                                                      |
 | ---------------------------- | ------ | -------- | ----------------------------------------------------------- |
@@ -130,20 +160,48 @@ WARN, body `api_correction_<kind>`. Family `model_usage`. Billing finalization: 
 
 ### `cursor.skill.activated`
 
-INFO, body `skill_activated`. Family `skills_hooks_plugins`.
+- **Severity:** `INFO`
+- **Body:** `skill_activated`
+- **Family:** `skills_hooks_plugins`
 
-| Attribute              | Type   | Presence | Values / notes                                                                 |
-| ---------------------- | ------ | -------- | ------------------------------------------------------------------------------ |
-| `cursor.skill.name`    | string | Always   | Customer-authored (open)                                                       |
-| `cursor.skill.trigger` | string | Always   | `agent_read` \| `manually_attached` \| `skill_name_in_prompt`                  |
-| `cursor.skill.source`  | string | Always   | `unspecified` \| `workspace` \| `user` \| `builtin` \| `plugin` \| `claude`    |
-| `cursor.plugin.name`   | string | Optional | When the skill came from a plugin. Not exported for Grok Bot activations today |
+| Attribute                       | Type   | Presence | Values / notes                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------------------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.skill.name`             | string | Always   | Customer-authored (open)                                                                                                                                                                                                                                                                                                                                                                     |
+| `cursor.skill.trigger`          | string | Always   | `agent_read` \| `manually_attached` \| `skill_name_in_prompt`                                                                                                                                                                                                                                                                                                                                |
+| `cursor.skill.source`           | string | Always   | `unspecified` \| `workspace` \| `user` \| `builtin` \| `plugin` \| `claude`                                                                                                                                                                                                                                                                                                                  |
+| `cursor.plugin.name`            | string | Optional | When the skill came from a plugin. Not exported for Grok Bot activations today                                                                                                                                                                                                                                                                                                               |
+| `cursor.skill.path`             | string | Optional | Path to the skill's `SKILL.md`, never an absolute local path. Relative to the workspace root for a workspace skill (`.cursor/skills/deploy/SKILL.md`). For a skill outside every workspace root, a key `builtin:`, `user:`, `claude:`, `plugin:<plugin>/`, or `unknown:` followed by the path below the skills folder (`user:deploy/SKILL.md`). Omitted when the path can't be made portable |
+| `cursor.skill.content_hash`     | string | Optional | Lowercase hex SHA-256 of the full `SKILL.md` file, frontmatter included. Omitted when the whole file was not available at activation                                                                                                                                                                                                                                                         |
+| `cursor.skill.metadata.id`      | string | Optional | `metadata.id` from the `SKILL.md` frontmatter, when present. Customer-authored (open), up to 256 characters                                                                                                                                                                                                                                                                                  |
+| `cursor.skill.metadata.version` | string | Optional | `metadata.version` from the `SKILL.md` frontmatter, when present. Customer-authored (open), up to 256 characters; a numeric version is exported as a string                                                                                                                                                                                                                                  |
 
-A Bot reading a `SKILL.md` exports this same event with `cursor.surface=grok_bot`, and the record carries the [shared `grok_bot.*` attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#shared-grok_bot-attributes) so it joins the turn's other actions. `cursor.skill.name` is the skill's folder slug, `cursor.skill.trigger` is `agent_read` or `skill_name_in_prompt` (a skill invoked with `/` or `@` is not recorded yet), and `cursor.skill.source` is `builtin` for Cursor-managed skills, `plugin` for installed plugin skills, `user` for the Bot's own, and otherwise classified as on every other surface. `cursor.grok_bot.tool_call.id` is the id of the Read that activated the skill and joins its `tool_result` row. Bot activations carry `cursor.conversation.id` and never `cursor.request.id`, and they flow only when Action Recording is on.
+`cursor.skill.path`, `cursor.skill.content_hash`, and the `cursor.skill.metadata.*` pair identify which revision of a skill ran. They're attached in the IDE, CLI, and Cloud Agents for every trigger. Group by `cursor.skill.path` to follow one skill across edits, and by `cursor.skill.content_hash` or `cursor.skill.metadata.version` to compare revisions. For example, a skill whose frontmatter declares:
+
+```yaml
+---
+name: deploy
+metadata:
+  id: acme.deploy
+  version: 1.4.0
+---
+```
+
+exports `cursor.skill.metadata.id=acme.deploy` and `cursor.skill.metadata.version=1.4.0`. The hash and the metadata come from the same copy of the file, so a record without `cursor.skill.content_hash` carries no `cursor.skill.metadata.*` either. Bot activations don't carry these attributes yet.
+
+**Grok Bot activations:** a Bot reading a `SKILL.md` exports this same event with `cursor.surface=grok_bot`. Bot activations flow only when Action Recording is on.
+
+- The record carries the [shared `grok_bot.*` attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#shared-grok_bot-attributes), so it joins the turn's other actions.
+- `cursor.skill.name` is the skill's folder slug.
+- `cursor.skill.trigger` is `agent_read` or `skill_name_in_prompt`. A skill invoked with `/` or `@` isn't recorded yet.
+- `cursor.skill.source` is `builtin` for Cursor-managed skills, `plugin` for installed plugin skills, and `user` for the Bot's own. Other skills classify as on every other surface.
+- `cursor.grok_bot.tool_call.id` is the id of the Read that activated the skill. It joins that call's `tool_result` row.
+- Bot activations carry `cursor.conversation.id` and never `cursor.request.id`.
 
 ### `cursor.hook.execution_complete`
 
-INFO (ERROR for `failed` / `timeout`), body `hook_execution_complete`. Family `skills_hooks_plugins`.
+- **Severity:** `INFO`; `ERROR` for `failed` and `timeout`
+- **Body:** `hook_execution_complete`
+- **Family:** `skills_hooks_plugins`
 
 | Attribute                 | Type   | Presence | Values / notes                                                                                                                                                                             |
 | ------------------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -155,7 +213,10 @@ INFO (ERROR for `failed` / `timeout`), body `hook_execution_complete`. Family `s
 
 ### `cursor.plugin.installed`
 
-INFO, body `plugin_installed`. Family `skills_hooks_plugins`. No `conversation.id` (install is not conversation-scoped).
+- **Severity:** `INFO`
+- **Body:** `plugin_installed`
+- **Family:** `skills_hooks_plugins`
+- **Conversation id:** none; an install isn't scoped to a conversation
 
 | Attribute             | Type   | Presence | Values / notes                                     |
 | --------------------- | ------ | -------- | -------------------------------------------------- |
@@ -164,20 +225,36 @@ INFO, body `plugin_installed`. Family `skills_hooks_plugins`. No `conversation.i
 
 ### `cursor.cloud_agent.pull_request`
 
-INFO (`opened` / `merged` / `closed`) / WARN (`creation_failed`), body `cloud_agent_pull_request_<kind>`. Family `cloud_agents`. `conversation.id` = `bc-...`.
+- **Severity:** `INFO` for `opened`, `merged`, and `closed`; `WARN` for `creation_failed`
+- **Body:** `cloud_agent_pull_request_<kind>`
+- **Family:** `cloud_agents`
+- **Conversation id:** the agent's `bc-...` id
 
 | Attribute                                | Type   | Presence                                                             | Values / notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | ---------------------------------------- | ------ | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cursor.cloud_agent.pull_request.kind`   | string | Always                                                               | `opened` (the agent created a pull request, including through an automation's open-PR action; linking a pull request that already existed exports nothing) \| `merged` \| `closed` (closed without merging) \| `creation_failed` (the agent tried to open a pull request and creation failed). `merged` and `closed` come from the forge's webhook for a pull request linked to the agent's run                                                                                             |
+| `cursor.cloud_agent.pull_request.kind`   | string | Always                                                               | `opened` \| `merged` \| `closed` \| `creation_failed`; see the kinds below                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `cursor.cloud_agent.pull_request.number` | int    | `opened`, `merged`, `closed`                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `cursor.cloud_agent.pull_request.draft`  | bool   | `opened` only                                                        | Draft state at creation                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `vcs.repository.url`                     | string | Optional on `opened`, `merged`, `closed`; never on `creation_failed` | The repository the pull request lives in, as `https://<host>[:port]/<path>`. For a multi-repo agent, it isn't necessarily the agent's primary repository. Credentials, query, fragment, and a trailing `.git` are stripped, the host and path are lowercased, and SSH forms (`git@host:path`, `ssh://`) are rewritten to `https`. Absent when the run has no repository URL or it does not normalize. An OpenTelemetry VCS semantic-convention name, outside the `cursor.` namespace (open) |
 
-`cursor.event.id` on `opened`, `merged`, and `closed` is deterministic per agent, repository, pull request number, and kind, so a redelivered webhook or a retried creation dedupes. A pull request closed, reopened, and closed again carries the same `closed` id both times. Branch names, the pull request URL, and the head SHA are not exported.
+Kinds:
+
+- `opened`: the agent created a pull request, including through an automation's open-PR action. Linking a pull request that already existed exports nothing.
+- `merged`: the pull request merged.
+- `closed`: the pull request closed without merging.
+- `creation_failed`: the agent tried to open a pull request and creation failed.
+
+`merged` and `closed` come from the forge's webhook for a pull request linked to the agent's run.
+
+- **Dedupe:** `cursor.event.id` on `opened`, `merged`, and `closed` is deterministic per agent, repository, pull request number, and kind. A redelivered webhook or a retried creation dedupes. A pull request closed, reopened, and closed again carries the same `closed` id both times.
+- **Not exported:** branch names, the pull request URL, and the head SHA.
 
 ### `cursor.cloud_agent.setup`
 
-INFO (`started` / `completed`) / ERROR (`failed`), body `cloud_agent_setup_<kind>`. Family `cloud_agents`. `conversation.id` = `bc-...`.
+- **Severity:** `INFO` for `started` and `completed`; `ERROR` for `failed`
+- **Body:** `cloud_agent_setup_<kind>`
+- **Family:** `cloud_agents`
+- **Conversation id:** the agent's `bc-...` id
 
 | Attribute                              | Type   | Presence                    | Values / notes                                  |
 | -------------------------------------- | ------ | --------------------------- | ----------------------------------------------- |
@@ -187,9 +264,17 @@ INFO (`started` / `completed`) / ERROR (`failed`), body `cloud_agent_setup_<kind
 
 ### `cursor.cloud_agent.commit`
 
-INFO, body `cloud_agent_commit`. Family `cloud_agents`. `conversation.id` = `bc-...`.
+- **Severity:** `INFO`
+- **Body:** `cloud_agent_commit`
+- **Family:** `cloud_agents`
+- **Conversation id:** the agent's `bc-...` id
 
-One record per commit a cloud agent pushed to its branch, emitted when GitHub's push webhook first records the commit for the agent. Only GitHub repositories emit, on github.com and GitHub Enterprise. Agents working in GitLab, Bitbucket, or other hosted repositories produce no commit records. Merge commits, branch-sync commits, and commits already on the repository's default branch don't emit, and neither do commits made locally in the IDE or CLI. `cursor.event.id` is derived from the repository and the SHA, so a redelivered push of the same commit carries the same id. Branch names and commit messages are not exported.
+One record per commit a cloud agent pushes to its branch. Cursor exports it when GitHub's push webhook first records the commit for the agent.
+
+- **Hosts:** GitHub only, on github.com and GitHub Enterprise. Agents working in GitLab, Bitbucket, or other hosted repositories produce no commit records.
+- **Skipped:** merge commits, branch-sync commits, commits already on the repository's default branch, and commits made locally in the IDE or CLI.
+- **Dedupe:** `cursor.event.id` derives from the repository and the SHA, so a redelivered push of the same commit carries the same id.
+- **Not exported:** branch names and commit messages.
 
 | Attribute                     | Type   | Presence | Values / notes                                                                                                                                                                                                                                                     |
 | ----------------------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -201,7 +286,10 @@ One record per commit a cloud agent pushed to its branch, emitted when GitHub's 
 
 ### `cursor.cloud_agent.artifact`
 
-INFO, body `cloud_agent_artifact_created`. Family `cloud_agents`. `conversation.id` = `bc-...`.
+- **Severity:** `INFO`
+- **Body:** `cloud_agent_artifact_created`
+- **Family:** `cloud_agents`
+- **Conversation id:** the agent's `bc-...` id
 
 | Attribute                                  | Type   | Presence | Values / notes |
 | ------------------------------------------ | ------ | -------- | -------------- |
@@ -210,9 +298,12 @@ INFO, body `cloud_agent_artifact_created`. Family `cloud_agents`. `conversation.
 
 ### `cursor.cloud_agent.mcp_auth_error`
 
-ERROR, body `cloud_agent_mcp_auth_error`. Family `cloud_agents`. `conversation.id` = `bc-...`.
+- **Severity:** `ERROR`
+- **Body:** `cloud_agent_mcp_auth_error`
+- **Family:** `cloud_agents`
+- **Conversation id:** the agent's `bc-...` id
 
-An MCP server you connected rejected the run's credentials. That server's tool calls failed while the run continued. ERROR because only you can fix the integration; alert on this to catch Automations and Cloud Agents silently losing an MCP server.
+An MCP server you connected rejected the run's credentials. That server's tool calls failed, and the run continued. It's an ERROR because only you can fix the integration. Alert on it to catch Automations and Cloud Agents silently losing an MCP server.
 
 | Attribute                | Type   | Presence | Values / notes                                                                                                               |
 | ------------------------ | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -220,9 +311,17 @@ An MCP server you connected rejected the run's credentials. That server's tool c
 
 ### `cursor.cloud_agent.review_followup`
 
-INFO, body `cloud_agent_review_followup`. Family `cloud_agents`. `conversation.id` = `bc-...`, the agent that runs the follow-up.
+- **Severity:** `INFO`
+- **Body:** `cloud_agent_review_followup`
+- **Family:** `cloud_agents`
+- **Conversation id:** the `bc-...` id of the agent that runs the follow-up
 
-A review signal started a cloud agent run on an existing pull request. Two signals produce it today. A pull request comment, review, or review comment that mentions Cursor follows up on the pull request's active agent, or starts a new agent when none can take it. [Bugbot Autofix](https://cursor.com/docs/bugbot.md#autofix) starts an agent to fix Bugbot findings. One record per started run. No comment, review, or finding text is exported.
+A review signal started a cloud agent run on an existing pull request. One record per started run. Two signals produce it today:
+
+- A pull request comment, review, or review comment that mentions Cursor. It follows up on the pull request's active agent, or starts a new agent when none can take it.
+- [Bugbot Autofix](https://cursor.com/docs/bugbot.md#autofix), which starts an agent to fix Bugbot findings.
+
+No comment, review, or finding text is exported.
 
 | Attribute                       | Type      | Presence              | Values / notes                                                                                                                                                                                                                  |
 | ------------------------------- | --------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -237,11 +336,21 @@ The resource carries `cursor.entrypoint=github_pr` for `github_comment` and `uns
 
 ### Shared `grok_bot.*` attributes
 
-The bot itself is identified by [`cursor.conversation.id`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#common-log-attributes) on every `grok_bot.*` record, and that value is the Bot's conversation id; `cursor.grok_bot.subagent.id` names a subagent when one acted. The `grok_bot.*` events carry Bot actions from Action Recording. Family `grok_bot_agent_actions`. Every record has `cursor.surface=grok_bot`.
+The `grok_bot.*` events record Bot actions from Action Recording.
 
-Every event is metadata about an action, never its content. Tool arguments and results, file paths and names, message bodies and recipients, credentials, card details, and the Auto-review classifier's reasoning are never exported on these events; MCP arguments and results ship only as the opt-in [`cursor.conversation.tool_io`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorconversationtool_io) record. The exceptions are named per event: the shell command text (secret-scrubbed and capped at 8 KiB), the normalized browser URL and page title, and bare hostnames. Every free-text field is scrubbed for credential shapes, payment card numbers, US social security numbers, and OAuth tokens before it can reach your collector.
+- **Family:** `grok_bot_agent_actions`
+- **Surface:** every record has `cursor.surface=grok_bot`.
+- **Bot identity:** [`cursor.conversation.id`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#common-log-attributes) on every record is the Bot's conversation id, which identifies the Bot. `cursor.grok_bot.subagent.id` names a subagent when one acted.
 
-Each event also carries these attributes:
+Every event describes an action, never its content. These events never export tool arguments or results, file paths or names, message bodies or recipients, credentials, card details, or the Auto-review classifier's reasoning. MCP arguments and results ship only as the opt-in [`cursor.conversation.tool_io`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorconversationtool_io) record. Three exceptions are named on their events:
+
+- the shell command text, secret-scrubbed and capped at 8 KiB
+- the normalized browser URL and page title
+- bare hostnames
+
+Every free-text field is scrubbed for credential shapes, payment card numbers, US social security numbers, and OAuth tokens before it reaches your collector.
+
+Every `grok_bot.*` event also carries these attributes:
 
 | Attribute                        | Type   | Presence | Values / notes                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | -------------------------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -250,13 +359,17 @@ Each event also carries these attributes:
 | `cursor.grok_bot.root_turn.id`   | string | Optional | Request id of the user-facing turn the action serves. Equal to `turn.id` outside subagents; for a subagent's action, the turn that spawned it. Absent on `server` provenance                                                                                                                                                                                                                                                                       |
 | `cursor.grok_bot.subagent.id`    | string | Optional | Conversation id of the subagent that performed the action. Absent when the top-level Bot did, and on `server` provenance                                                                                                                                                                                                                                                                                                                           |
 | `cursor.grok_bot.box.id`         | string | Optional | Grok Bot computer id. Absent on `server` provenance                                                                                                                                                                                                                                                                                                                                                                                                |
-| `cursor.grok_bot.event.sequence` | int    | Optional | Per-turn monotonic sequence number, keyed by `turn.id`. Sort a turn's actions by it instead of by client clocks. Not dense: a turn resumed after an approval wait continues above its last number, and a retry continues from its own block, so retried rows still sort after the first run. Absent from older Grok Bot versions                                                                                                                   |
+| `cursor.grok_bot.event.sequence` | int    | Optional | Per-turn monotonic sequence number, keyed by `turn.id`. Sort a turn's actions by it to order them without trusting client clocks. Not dense: a turn resumed after an approval wait continues above its last number, and a retry continues from its own block, so retried rows still sort after the first run. Absent from older Grok Bot versions                                                                                                  |
 | `cursor.grok_bot.tool_call.id`   | string | Optional | Tool-call id of the action. Every row one tool call produced carries the same value (its `tool_result`, its `tool_decision` rows, and its tool-specific row such as `mcp_tool_call`), so they join on it. Absent when the action is not attributed to a tool call (a browser navigation, a shell command)                                                                                                                                          |
 | `cursor.grok_bot.initiated_by`   | string | Optional | Who started the turn the action belongs to: `user` (a typed message or voice call) \| `agent` (a peer Bot's wake, or a seat's turn in a group room) \| `routine` (a routine fire; such records also carry `cursor.entrypoint=automation`) \| `subagent` (a subagent's own actions inside its parent's turn). Absent on `server` provenance, on system-started turns (an inbound Slack or Teams wake, onboarding), and from older Grok Bot versions |
 
 ### `cursor.grok_bot.mcp_tool_call`
 
-INFO (ERROR for `failure` status), body `grok_bot_mcp_tool_call`. Family `grok_bot_agent_actions`. One MCP tool call made by a Bot. This row never carries tool arguments or results. For `http` calls, a team with tool I/O enabled receives them as two [`cursor.conversation.tool_io`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorconversationtool_io) records, joined to this row on `cursor.grok_bot.tool_call.id`.
+- **Severity:** `INFO`; `ERROR` for `failure` status
+- **Body:** `grok_bot_mcp_tool_call`
+- **Family:** `grok_bot_agent_actions`
+
+One MCP tool call made by a Bot. This row never carries tool arguments or results. For `http` calls, a team with tool I/O enabled receives them as two [`cursor.conversation.tool_io`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorconversationtool_io) records, joined to this row on `cursor.grok_bot.tool_call.id`.
 
 | Attribute                         | Type   | Presence | Values / notes                                                                         |
 | --------------------------------- | ------ | -------- | -------------------------------------------------------------------------------------- |
@@ -266,13 +379,20 @@ INFO (ERROR for `failure` status), body `grok_bot_mcp_tool_call`. Family `grok_b
 | `cursor.grok_bot.mcp.duration_ms` | int    | Always   |                                                                                        |
 | `cursor.mcp.server.name`          | string | Optional | Customer-defined server display name, secret-scrubbed and cut at 256 characters (open) |
 
-`cursor.grok_bot.tool_call.id` is present on every MCP call. Connector calls, including the browser tools on the Bot's computer, are recorded here and never as `tool_result`, so each tool call is recorded once.
+- `cursor.grok_bot.tool_call.id` is on every MCP call.
+- Connector (MCP) calls, including the browser tools on the Bot's computer, record here and never as `tool_result`. Each tool call records once.
 
 ### `cursor.grok_bot.shell_command`
 
-INFO (WARN when blocked), body `grok_bot_shell_command`. Family `grok_bot_agent_actions`. A shell command a Bot ran or was blocked from running. The record is written when the command settles and keeps the issue time as its timestamp, so a long command's record arrives well after its timestamp.
+- **Severity:** `INFO`; `WARN` when blocked
+- **Body:** `grok_bot_shell_command`
+- **Family:** `grok_bot_agent_actions`
 
-Cursor redacts the password after a common client's password flag (`mysql -pSecret`, `sshpass -p Secret`, `docker login -p Secret`, `redis-cli -a Secret`). A bare `mysql -p` prompts for the password, so a lower-case identifier after it is kept as the database name (`mysql -u root -p inventory`) and anything else is redacted.
+A shell command a Bot ran or was blocked from running.
+
+- **Timing:** the record is written when the command settles, and its timestamp is the issue time. A long command's record arrives well after its timestamp.
+
+- **Password flags:** Cursor redacts the password after a common client's password flag (`mysql -pSecret`, `sshpass -p Secret`, `docker login -p Secret`, `redis-cli -a Secret`). A bare `mysql -p` prompts for the password, so a lowercase identifier after it stays as the database name (`mysql -u root -p inventory`). Anything else after it is redacted.
 
 | Attribute                                      | Type      | Presence | Values / notes                                                                                                                                                                     |
 | ---------------------------------------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -289,7 +409,9 @@ Cursor redacts the password after a common client's password flag (`mysql -pSecr
 
 ### `cursor.grok_bot.browser_navigation`
 
-INFO, body `grok_bot_browser_navigation`. Family `grok_bot_agent_actions`. `conversation.id` is the identifier for the Bot.
+- **Severity:** `INFO`
+- **Body:** `grok_bot_browser_navigation`
+- **Family:** `grok_bot_agent_actions`
 
 | Attribute                            | Type   | Presence | Values / notes                                                                                                                                                                                                                                                            |
 | ------------------------------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -298,7 +420,16 @@ INFO, body `grok_bot_browser_navigation`. Family `grok_bot_agent_actions`. `conv
 
 ### `cursor.grok_bot.computer_use_session`
 
-INFO, body `grok_bot_computer_use_session`. Family `grok_bot_agent_actions`. Summary of one computer-use subagent session: counts and wall time only. No coordinates, typed text, or screenshots. `cursor.grok_bot.turn.id` is the parent turn that invoked the subagent, `cursor.grok_bot.subagent.id` the subagent itself, `cursor.grok_bot.tool_call.id` the invocation, and `cursor.grok_bot.initiated_by` is always `subagent`.
+- **Severity:** `INFO`
+- **Body:** `grok_bot_computer_use_session`
+- **Family:** `grok_bot_agent_actions`
+
+A summary of one computer-use subagent session: counts and wall time only. No coordinates, typed text, or screenshots.
+
+- `cursor.grok_bot.turn.id`: the parent turn that invoked the subagent
+- `cursor.grok_bot.subagent.id`: the subagent itself
+- `cursor.grok_bot.tool_call.id`: the invocation
+- `cursor.grok_bot.initiated_by`: always `subagent`
 
 | Attribute                                           | Type | Presence | Values / notes                                                                                                                                       |
 | --------------------------------------------------- | ---- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -309,9 +440,14 @@ INFO, body `grok_bot_computer_use_session`. Family `grok_bot_agent_actions`. Sum
 
 ### `cursor.grok_bot.tool_result`
 
-INFO (`success` / `cancelled`), WARN (`denied`), ERROR (`error`), body `grok_bot_tool_result`. Family `grok_bot_agent_actions`. One settled builtin tool call made by a Bot (`read`, `web_search`, `send_to_user`, `task`, `shell`, ...). This is the row every builtin tool produces, so no tool a Bot can call goes unrecorded. Connector (MCP) calls are `mcp_tool_call` rows and never appear here.
+- **Severity:** `INFO` for `success` and `cancelled`; `WARN` for `denied`; `ERROR` for `error`
+- **Body:** `grok_bot_tool_result`
+- **Family:** `grok_bot_agent_actions`
 
-`cursor.grok_bot.tool_call.id` joins the row to the `tool_decision` rows of the same call. One id can carry two `tool_result` rows when a call re-runs after a transient model-stream failure, so count distinct ids when counting calls.
+One settled builtin tool call made by a Bot (`read`, `web_search`, `send_to_user`, `task`, `shell`, ...). Every builtin tool produces this row, so no tool a Bot can call goes unrecorded. Connector (MCP) calls are `mcp_tool_call` rows and never appear here.
+
+- **Joins:** `cursor.grok_bot.tool_call.id` joins the row to the same call's `tool_decision` rows.
+- **Counting calls:** one id can carry two `tool_result` rows when a call re-runs after a transient model-stream failure. To count calls, count distinct ids.
 
 | Attribute                                    | Type   | Presence | Values / notes                                                                                                                                                                                                                                                                                                                    |
 | -------------------------------------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -321,11 +457,22 @@ INFO (`success` / `cancelled`), WARN (`denied`), ERROR (`error`), body `grok_bot
 | `cursor.grok_bot.tool_result.error_category` | string | Optional | Coded reason when `outcome` is not `success`: `invalid_args`, `user_rejected`, `timeout`, `provider_error`, `hook_denied`, or an error class name such as `TimeoutError` (open)                                                                                                                                                   |
 | `cursor.grok_bot.tool_result.target_host`    | string | Optional | The bare host a tool acted on, for tools that target a site: `list_credentials` reports the site a credential lookup was scoped to, `request_virtual_card` the merchant. Lowercased, without `www.`, port, path, query, or userinfo. Absent for every other tool, when the call named no site, and when the call never ran (open) |
 
-Read `outcome` as "how the call returned", not "whether the action happened". The shells, browser and computer actions, and local-tool asks the person declined report a refusal as `denied` with `error_category` `user_rejected`. Mail, routine writes, connector file transfers, subagent launches, and cloud agent actions hand a refusal back to the model as text, so their `tool_result` reads `success` while the `tool_decision` row records the refusal.
+**Reading `outcome`:** it says how the call returned, not whether the action happened.
+
+- The shells, browser and computer actions, and local-tool asks the person declined report a refusal as `denied`, with `error_category` `user_rejected`.
+- Mail, routine writes, connector file transfers, subagent launches, and cloud agent actions hand a refusal back to the model as text. Their `tool_result` reads `success`, and the `tool_decision` row records the refusal.
 
 ### `cursor.grok_bot.tool_decision`
 
-INFO (`allowed` / `held`), WARN (`denied` / `timed_out`), body `grok_bot_tool_decision`. Family `grok_bot_agent_actions`. One decision about whether a Bot's tool call may run: who made it, through which approval mode, and what it was. A call can carry several decisions (Auto-review refuses to auto-allow, then a person answers the card), each its own record. They join the call's `tool_result`, `mcp_tool_call`, or `computer_use_session` row on `cursor.grok_bot.tool_call.id`. The classifier's rationale, the card copy, and the arguments never appear here.
+- **Severity:** `INFO` for `allowed` and `held`; `WARN` for `denied` and `timed_out`
+- **Body:** `grok_bot_tool_decision`
+- **Family:** `grok_bot_agent_actions`
+
+One decision about whether a Bot's tool call may run: who made it, through which approval mode, and what it was.
+
+- A call can carry several decisions, each its own record. For example, Auto-review refuses to auto-allow, then a person answers the card.
+- Decisions join the call's `tool_result`, `mcp_tool_call`, or `computer_use_session` row on `cursor.grok_bot.tool_call.id`.
+- The classifier's rationale, the card copy, and the arguments never appear here.
 
 | Attribute                                | Type   | Presence | Values / notes                                                                                                                                                                                                                        |
 | ---------------------------------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -338,16 +485,40 @@ INFO (`allowed` / `held`), WARN (`denied` / `timed_out`), body `grok_bot_tool_de
 
 What the sources mean:
 
-- `policy` is every enforced Auto-review classification, `allowed` or `denied`, on any surface: the shells, connector calls, mail, routine writes, cloud agent and subagent launches. A classifier that fails or misses its deadline is a `policy` `denied`, and so is a review rule that sends a call to a person without classifying.
-- `human` is what an Auto-review card ended with (`approval_mode` `auto_review` when the classifier escalated, `ask_human` when the surface always asks, such as product feedback, claiming a mail inbox, placing a phone call, or a Chrome cookie import), or a local-tool permission ask answered on the person's own computer (`local_tool_permission`). "Always" and "never" answers record as `allowed` and `denied` like a one-time answer.
-- `hook` is a pre-tool hook's refusal.
-- `automatic` is a call no gate spoke about, so every other builtin call that settled carries at least one decision. Three kinds of call carry none: a call the tool itself refused before any gate ran (its `tool_result` reads `denied`); a card the person answers after the turn has ended (a credential fill request, a secret request, or a virtual card request), because the answer arrives in a later turn; and a call cancelled before any gate spoke, since a `cancelled` call carries only the allowances and holds recorded before it was cut off. A virtual card request also ends the turn from inside its own call, so its `tool_result` reads `cancelled`.
+- `policy`: every enforced Auto-review classification, `allowed` or `denied`, on any surface: the shells, connector calls, mail, routine writes, and cloud agent and subagent launches. A classifier that fails or misses its deadline records a `policy` `denied`. So does a review rule that sends a call to a person without classifying.
+- `human`: how an Auto-review card ended, or a local-tool permission ask answered on the person's own computer (`local_tool_permission`). On a card, `approval_mode` is `auto_review` when the classifier escalated, and `ask_human` when the surface always asks (product feedback, claiming a mail inbox, placing a phone call, or a Chrome cookie import). "Always" and "never" answers record as `allowed` and `denied`, like a one-time answer.
+- `hook`: a pre-tool hook's refusal.
+- `automatic`: no gate spoke about the call. Every other builtin call that settled carries at least one decision.
 
-A call Auto-review refused and a person then answered carries both rows, `policy` `denied` then `human`, in `event.sequence` order. There is no approver attribute: a Bot's cards are answered only by its owner, who is the record's `cursor.user.id`.
+**Calls with no decision:**
+
+- A call the tool itself refused before any gate ran. Its `tool_result` reads `denied`.
+
+- A card the person answers after the turn has ended (a credential fill request, a secret request, or a virtual card request). The answer arrives in a later turn. A virtual card request also ends the turn from inside its own call, so its `tool_result` reads `cancelled`.
+
+- A call cancelled before any gate spoke. A `cancelled` call carries only the allowances and holds recorded before it was cut off.
+
+- **Refused, then answered:** a call Auto-review refused and a person then answered carries both rows, `policy` `denied` then `human`, in `event.sequence` order.
+
+- **Approver:** there's no approver attribute. Only a Bot's owner answers its cards, and the owner is the record's `cursor.user.id`.
 
 ### `cursor.grok_bot.file_transfer`
 
-INFO (`success`), WARN (`denied`), ERROR (`error`), body `grok_bot_file_transfer`. Family `grok_bot_agent_actions`. One file move a Bot tried between its computer and another endpoint: the user's machine, a connected Google Drive, OneDrive, or Gmail account, or a read of a file on the user's machine straight into the Bot's context. Metadata only: which way, the far end, how many bytes moved, and how it settled. The path, the file name, and the content never export. A read of a file on the Bot's own computer is a `tool_result` row, not this event. `cursor.grok_bot.tool_call.id` joins the row to the call's `tool_result` and, for a refused move, to its `tool_decision`.
+- **Severity:** `INFO` for `success`; `WARN` for `denied`; `ERROR` for `error`
+- **Body:** `grok_bot_file_transfer`
+- **Family:** `grok_bot_agent_actions`
+
+One file move a Bot tried between its computer and another endpoint:
+
+- the user's machine
+- a connected Google Drive, OneDrive, or Gmail account
+- the Bot's context, for a file on the user's machine read straight into it
+
+Details:
+
+- **Metadata only:** which way, the far end, how many bytes moved, and how it settled. The path, the file name, and the content never export.
+- **Not this event:** a read of a file on the Bot's own computer is a `tool_result` row.
+- **Joins:** `cursor.grok_bot.tool_call.id` joins the row to the call's `tool_result` and, for a refused move, to its `tool_decision`.
 
 | Attribute                             | Type   | Presence | Values / notes                                                                                                                                                                                                                                                          |
 | ------------------------------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -360,7 +531,20 @@ INFO (`success`), WARN (`denied`), ERROR (`error`), body `grok_bot_file_transfer
 
 ### `cursor.grok_bot.message_delivery`
 
-INFO (`sent` / `held`), ERROR (`failed`), body `grok_bot_message_delivery`. Family `grok_bot_agent_actions`. One outbound message from a Bot: to its user in the Grok Bot chat, to another of the user's Bots, to a Slack or Discord conversation the Bot was reached through, to outside email recipients, to the user's Mac Messages app, or onto a draft card the user sends or discards themselves. The row says where the message went and whether it got there, never what it said or to whom by name: no body, subject, recipient, attachment name, or length. `cursor.grok_bot.tool_call.id` joins the row to the `tool_result` of the same send call.
+- **Severity:** `INFO` for `sent` and `held`; `ERROR` for `failed`
+- **Body:** `grok_bot_message_delivery`
+- **Family:** `grok_bot_agent_actions`
+
+One outbound message from a Bot, to one of:
+
+- its user, in the Grok Bot chat
+- another of the user's Bots
+- a Slack or Discord conversation the Bot was reached through
+- outside email recipients
+- the user's Mac Messages app
+- a draft card the user sends or discards themselves
+
+The row says where the message went and whether it got there. It never says what the message said or names who got it: no body, subject, recipient, attachment name, or length. `cursor.grok_bot.tool_call.id` joins the row to the `tool_result` of the same send call.
 
 | Attribute                                           | Type   | Presence | Values / notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | --------------------------------------------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -368,13 +552,21 @@ INFO (`sent` / `held`), ERROR (`failed`), body `grok_bot_message_delivery`. Fami
 | `cursor.grok_bot.message_delivery.destination_id`   | string | Optional | `agent`: the opaque id of the destination Bot; absent when the Bot could not resolve one. `channel`: the first 32 hex characters of the SHA-256 of `<platform>:<chat>[:<thread>]` (for example `slack:C0123ABC:1699999999.000100`), so every row to one conversation carries one value you can compute from an address you hold, while the address itself never leaves. Absent for `user`, `draft`, `email`, and `apple_messages`, so an email address, phone number, or chat id is never exported, hashed or not (open) |
 | `cursor.grok_bot.message_delivery.result`           | string | Always   | `sent` \| `held` (accepted but not delivered yet: a low-priority peer message parked in the recipient's inbox, or a draft card awaiting the user's send) \| `failed`                                                                                                                                                                                                                                                                                                                                                     |
 | `cursor.grok_bot.message_delivery.failure_category` | string | Optional | Coded reason when `result` is not `sent`, such as `awaiting_user`, `blocked`, `target_not_found`, `forbidden`, `no_inbox`, `sender_not_owned`, `not_approved`, `route_unverified`, `declined`, `permission_denied`, or an error class name (open)                                                                                                                                                                                                                                                                        |
-| `cursor.conversation.message.id`                    | string | Optional | When present, the sent message's id on `user`, `channel`, and `draft` rows, in the shape the family's message records use (`<sessionId>/g<generation>/<entryId>`, for example `g0/t3s1`), so the delivery row joins that family's `assistant_message` record on one key. Never on `agent`, `email`, or `apple_messages` rows                                                                                                                                                                                             |
+| `cursor.conversation.message.id`                    | string | Optional | When present, the sent message's id on `user`, `channel`, and `draft` rows, in the shape the family's message records use: `[<sessionId>/]g<generation>/<entryId>`. The `<sessionId>/` prefix is absent for the default session (`g0/t3s1`) and present for any other (`dm:abc/g2/t3s1`). An id in any other shape is dropped. The shared shape means the delivery row joins that family's `assistant_message` record on one key. Never on `agent`, `email`, or `apple_messages` rows                                    |
 
 ### `cursor.grok_bot.routine_run`
 
-INFO (`success` / `cancelled`), ERROR (`error`), body `grok_bot_routine_run`. Family `grok_bot_agent_actions`. One finished routine run by a Bot: which routine fired, why, how it ended, and how long it took. Cursor records the row when it closes the run (`server` provenance), so a run is recorded whether or not the Bot's computer was watching, and the row carries no `box.id`, `event.sequence`, or `tool_call.id`. It always carries `cursor.grok_bot.initiated_by=routine` and `cursor.entrypoint=automation`. Never the routine's prompt, its name, or the turn's text.
+- **Severity:** `INFO` for `success` and `cancelled`; `ERROR` for `error`
+- **Body:** `grok_bot_routine_run`
+- **Family:** `grok_bot_agent_actions`
 
-`cursor.grok_bot.turn.id` is the turn the run executed in, so the run's own `tool_result`, `shell_command`, and `mcp_tool_call` rows join on it. A run that executed as a routine subagent, or that failed before a turn was planned, carries no `turn.id`.
+One finished routine run by a Bot: which routine fired, why, how it ended, and how long it took. The record never carries the routine's prompt, its name, or the turn's text.
+
+- **Provenance:** Cursor records the row when it closes the run (`server` provenance). A run is recorded whether or not the Bot's computer was watching. The row carries no `box.id`, `event.sequence`, or `tool_call.id`.
+
+- **Fixed values:** always `cursor.grok_bot.initiated_by=routine` and `cursor.entrypoint=automation`.
+
+- **Joins:** `cursor.grok_bot.turn.id` is the turn the run executed in, so the run's own `tool_result`, `shell_command`, and `mcp_tool_call` rows join on it. A run that executed as a routine subagent carries no `turn.id`. Neither does a run that failed after its team was known but before its turn was planned; that run is recorded with `outcome` `error`.
 
 | Attribute                                 | Type   | Presence | Values / notes                                                                                                                                                                                  |
 | ----------------------------------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -384,36 +576,73 @@ INFO (`success` / `cancelled`), ERROR (`error`), body `grok_bot_routine_run`. Fa
 | `cursor.grok_bot.routine_run.outcome`     | string | Always   | `success` (the turn completed or paused for the user) \| `error` (the turn failed) \| `cancelled` (the turn was interrupted or superseded by a new message; the run history shows it as failed) |
 | `cursor.grok_bot.routine_run.duration_ms` | int    | Always   | Fire to settle, wall time                                                                                                                                                                       |
 
-A run that pauses on an approval and is settled by the resumed turn, and a run that failed before any turn started, are not recorded. Action Recording is a team feature, so runs of a personal (team-less) owner are skipped like every other Bot action.
+**Not recorded:**
+
+- A run that pauses on an approval and is settled by the resumed turn. Neither the pause nor the resumed turn records a row. A turn that ends paused for the user without an approval still records `success`.
+- A run that failed before the Bot ran its turn, while its team wasn't known yet.
+- A run the dispatcher closed as failed before any turn started, such as when delivery failed or the agent's queue was full.
+- Runs of a personal (team-less) owner. Action Recording is a team feature, so these are skipped like every other Bot action.
 
 ### `cursor.grok_bot.guardrail`
 
-INFO (`continued`), WARN (`warned` / `stopped`), body `grok_bot_guardrail`. Family `grok_bot_agent_actions`. A guardrail stepping in on a Bot turn: the loop detector tripping on repeated output or tool calls, a site's bot defense refusing the Bot's browser, or Auto-review stopping a tool call to ask a person and the wait that followed. Coded fields only; the classifier's rationale and the card's copy never export. The decision itself (Auto-review's refusal, the person's answer) is a `tool_decision` row and is never repeated here; an escalation row joins it on `cursor.grok_bot.decision.id`.
+- **Severity:** `WARN` when the guardrail changed the turn (`warned`, `stopped`): a nudge, a stop, or a wait that ended refused or unanswered. `INFO` when it only observed or the turn went on (`continued`)
+- **Body:** `grok_bot_guardrail`
+- **Family:** `grok_bot_agent_actions`
 
-Rows ride WARN when the guardrail changed the turn (a nudge, a stop, a wait that ended refused or unanswered) and INFO when it only observed or the turn went on. One row per trip: a wall counts once per episode, so a page that stays on the same wall through reloads is one row.
+A guardrail stepping in on a Bot turn. Four things trip one:
 
-An escalation is two rows for one card, in the order they happened. The `tool_escalation` row is the ask: a card was raised because a call under review could not run without a person. The `pause` row is the end of the wait: the person allowed (`resumed`) or refused (`denied`) the action, or nobody answered before the card expired or was withdrawn (`abandoned`). When the wait ended because a person stopped or redirected the turn instead of answering, the second row is `interrupted`. Both rows carry the escalated tool's `cursor.tool.name`, the call's `cursor.grok_bot.tool_call.id`, and the card's id as `cursor.grok_bot.decision.id`, the same value the `human` `tool_decision` row of that call carries, so the ask, the wait, and the answer join on one key.
+- the loop detector, on repeated output or tool calls
+- a site's bot defense refusing the Bot's browser
+- Auto-review stopping a tool call to ask a person, and the wait that followed
+- the organization's inference hook refusing the turn's model request
 
-| Attribute                               | Type   | Presence | Values / notes                                                                                                                                                                                                                                                                                                                                                                                                                |
-| --------------------------------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cursor.grok_bot.guardrail.kind`        | string | Always   | `loop_detected` \| `bot_blocked` \| `tool_escalation` (a card was raised for a tool call) \| `pause` (the wait on the card ended: answered or expired) \| `interrupted` (the wait ended because a person stopped or redirected the turn)                                                                                                                                                                                      |
-| `cursor.grok_bot.guardrail.detector`    | string | Always   | What tripped, as one `snake_case` token: a loop kind (`single_message_single_line`, `multi_message`, `multi_message_outbound_flood`, ...), a bot-block family (`cloudflare_challenge`, `recaptcha`, `datadome`, `akamai`, ...), or, on the escalation kinds, the Auto-review surface that asked (`host_shell`, `box_shell`, `mcp`, `computer`, `automation_write`, `cloud_agent`, `subagent`, `feedback`, `bot_share`) (open) |
-| `cursor.grok_bot.guardrail.action`      | string | Always   | `warned` (the Bot was nudged and kept going) \| `continued` (the guardrail only observed, or the turn went on after a `pause` `resumed`) \| `stopped` (the Bot could not proceed: every `tool_escalation` row, and a `pause` or `interrupted` row whose wait ended `denied` or `abandoned`)                                                                                                                                   |
-| `cursor.grok_bot.guardrail.source`      | string | Always   | `runtime` (a detector: `loop_detected`, `bot_blocked`) \| `classifier` (the call went through Auto-review's classifier and escalated to a person; `approval_mode` `auto_review` on the joined `tool_decision`) \| `policy` (a review rule sent the call to a person without classifying; `approval_mode` `ask_human`)                                                                                                         |
-| `cursor.grok_bot.guardrail.count`       | int    | Optional | The count that tripped the detector: the repetitions a `loop_detected` row saw. Absent when the detector counts nothing                                                                                                                                                                                                                                                                                                       |
-| `cursor.grok_bot.guardrail.target_host` | string | Optional | `bot_blocked` only: the host that refused the Bot, lowercased and without `www.`, port, path, query, or userinfo (open)                                                                                                                                                                                                                                                                                                       |
-| `cursor.tool.name`                      | string | Optional | Escalation kinds only: the escalated call's builtin tool id, the same value its `tool_decision` and `tool_result` rows carry                                                                                                                                                                                                                                                                                                  |
-| `cursor.grok_bot.guardrail.resolution`  | string | Optional | `pause` and `interrupted` only: `resumed` (the person allowed the action) \| `denied` (the person refused it) \| `abandoned` (nobody answered: the card expired, Auto-review settings changed, or the turn was interrupted or redirected)                                                                                                                                                                                     |
-| `cursor.grok_bot.guardrail.duration_ms` | int    | Optional | `pause` and `interrupted` only: the wait, from the card's creation to the answer or the card's retirement. Never negative                                                                                                                                                                                                                                                                                                     |
-| `cursor.grok_bot.decision.id`           | string | Optional | Escalation kinds only: the card's id, which is the `decision.id` of the `human` `tool_decision` row the same call settles with (open)                                                                                                                                                                                                                                                                                         |
+Details:
 
-`cursor.grok_bot.tool_call.id` is present on the escalation kinds and absent on the detections, which are not attributed to one tool call. A call Auto-review refused with no one to ask raises no card and carries only its `tool_decision`.
+- **Coded fields only:** the classifier's rationale and the card's copy never export.
+
+- **Decisions live elsewhere:** the decision itself (Auto-review's refusal, the person's answer) is a `tool_decision` row and isn't repeated here. An escalation row joins it on `cursor.grok_bot.decision.id`.
+
+- **One row per trip:** a bot-defense wall counts once per episode, so a page that stays on the same wall through reloads is one row.
+
+**Escalations:** one card produces two rows, in the order they happened.
+
+1. `tool_escalation` is the ask. A card was raised because a call under review couldn't run without a person.
+2. `pause` is the end of the wait. The person allowed the action (`resumed`) or refused it (`denied`), or nobody answered before the card expired or was withdrawn (`abandoned`). When the wait ended because a person stopped or redirected the turn instead of answering, the second row is `interrupted`.
+
+Both rows carry the escalated tool's `cursor.tool.name`, the call's `cursor.grok_bot.tool_call.id`, and the card's id as `cursor.grok_bot.decision.id`. That id is the value the call's `human` `tool_decision` row carries, so the ask, the wait, and the answer join on one key.
+
+| Attribute                               | Type   | Presence | Values / notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| --------------------------------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.grok_bot.guardrail.kind`        | string | Always   | `loop_detected` \| `bot_blocked` \| `tool_escalation` (a card was raised for a tool call) \| `pause` (the wait on the card ended: answered or expired) \| `interrupted` (the wait ended because a person stopped or redirected the turn) \| `inference_hook` (the organization's inference hook refused the turn's model request; one row per refused turn, recorded when the turn ends)                                                                                                                                                                                                      |
+| `cursor.grok_bot.guardrail.detector`    | string | Always   | What tripped, as one `snake_case` token: a loop kind (`single_message_single_line`, `multi_message`, `multi_message_outbound_flood`, ...), a bot-block family (`cloudflare_challenge`, `recaptcha`, `datadome`, `akamai`, ...), or, on the escalation kinds, the Auto-review surface that asked (`host_shell`, `box_shell`, `mcp`, `computer`, `automation_write`, `cloud_agent`, `subagent`, `feedback`, `bot_share`), or, on `inference_hook`, the hook's outcome (`deny`: the endpoint returned a deny verdict; `unavailable`: the hook runs in Block mode and returned no verdict) (open) |
+| `cursor.grok_bot.guardrail.action`      | string | Always   | `warned` (the Bot was nudged and kept going) \| `continued` (the guardrail only observed, or the turn went on after a `pause` `resumed`) \| `stopped` (the Bot could not proceed: every `tool_escalation` and `inference_hook` row, and a `pause` or `interrupted` row whose wait ended `denied` or `abandoned`)                                                                                                                                                                                                                                                                              |
+| `cursor.grok_bot.guardrail.source`      | string | Always   | `runtime` (a detector: `loop_detected`, `bot_blocked`) \| `classifier` (the call went through Auto-review's classifier and escalated to a person; `approval_mode` `auto_review` on the joined `tool_decision`) \| `policy` (a review rule sent the call to a person without classifying; `approval_mode` `ask_human`; and every `inference_hook` row, where the organization's inference hook is the policy)                                                                                                                                                                                  |
+| `cursor.grok_bot.guardrail.count`       | int    | Optional | The count that tripped the detector: the repetitions a `loop_detected` row saw. Absent when the detector counts nothing                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `cursor.grok_bot.guardrail.target_host` | string | Optional | `bot_blocked` only: the host that refused the Bot, lowercased and without `www.`, port, path, query, or userinfo (open)                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `cursor.tool.name`                      | string | Optional | Escalation kinds only: the escalated call's builtin tool id, the same value its `tool_decision` and `tool_result` rows carry                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `cursor.grok_bot.guardrail.resolution`  | string | Optional | `pause` and `interrupted` only: `resumed` (the person allowed the action) \| `denied` (the person refused it) \| `abandoned` (nobody answered: the card expired, Auto-review settings changed, or the turn was interrupted or redirected)                                                                                                                                                                                                                                                                                                                                                     |
+| `cursor.grok_bot.guardrail.duration_ms` | int    | Optional | `pause` and `interrupted` only: the wait, from the card's creation to the answer or the card's retirement. Never negative                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `cursor.grok_bot.decision.id`           | string | Optional | Escalation kinds only: the card's id, which is the `decision.id` of the `human` `tool_decision` row the same call settles with (open)                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+
+- `cursor.grok_bot.tool_call.id` is on the escalation kinds. It's absent on the detections and on `inference_hook`, which aren't attributed to one tool call.
+- An inference hook refusing a subagent's model request names the subagent in `cursor.grok_bot.subagent.id`. The hook's deny message and reference id never export.
+- A call Auto-review refused with no one to ask raises no card and carries only its `tool_decision`.
 
 ### `cursor.grok_bot.delegation`
 
-INFO (`dispatched`, `completed` with `success` or `stopped`), ERROR (`completed` with `error`), body `grok_bot_delegation`. Family `grok_bot_agent_actions`. Work a Bot handed to another agent and the result coming back: a background subagent it dispatched, or a Cursor cloud agent it launched or replied to. Ids and outcome only, never the prompt, the result text, or the delegate's own actions. A subagent's tool calls are its own `grok_bot.*` rows with `initiated_by=subagent`; a cloud agent's run is the `cloud_agents` family.
+- **Severity:** `INFO` for `dispatched`, and for `completed` with `success` or `stopped`; `ERROR` for `completed` with `error`
+- **Body:** `grok_bot_delegation`
+- **Family:** `grok_bot_agent_actions`
 
-Two records per delegation share `target_id`: `dispatched` when the work was handed over, and `completed` when the result came back to the Bot. `completed` records take the turn that received the result as their `turn.id`, not the dispatching turn's. `cursor.grok_bot.tool_call.id` is the dispatching call (or the stop call on a `subagent_stop` record); it is on the `dispatched` record and on a subagent's `completed` record, and absent on a cloud agent's completion.
+Work a Bot handed to another agent, and the result coming back. The delegate is a background subagent the Bot dispatched, or a Cursor cloud agent it launched or replied to.
+
+- **Ids and outcome only:** never the prompt, the result text, or the delegate's own actions. A subagent's tool calls are its own `grok_bot.*` rows with `initiated_by=subagent`. A cloud agent's run is in the `cloud_agents` family.
+
+- **Two records per delegation,** sharing `target_id`: `dispatched` when the work was handed over, and `completed` when the result came back to the Bot.
+
+- **Turn:** a `completed` record takes the turn that received the result as its `turn.id`, not the dispatching turn's.
+
+- **Tool call:** `cursor.grok_bot.tool_call.id` is the dispatching call, or the stop call on a `subagent_stop` record. It's on the `dispatched` record and on a subagent's `completed` record, and absent on a cloud agent's completion.
 
 | Attribute                                | Type   | Presence         | Values / notes                                                                                                                                                                                                                                                                               |
 | ---------------------------------------- | ------ | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -428,78 +657,166 @@ Known limits:
 
 - Not recorded: a steer injected into a cloud agent's running turn (no new run), a launch or reply Cursor rejected, a cloud agent cancel, a run someone else started that the Bot only watches, and a routine's subagent waking its parent.
 - A stopped subagent can still deliver an `error` completion afterwards, so one `target_id` can carry both a `stopped` and an `error` record.
-- A cloud agent's `completed` record is best-effort: when the Bot re-watches an agent it launched in an earlier turn, the completion can carry kind `cloud_agent_launch`, and a launch re-watched mid-run can leave its `dispatched` without a `completed`. Pair the two records on `target_id` and tolerate a missing completion.
-- Delivery is at-least-once like every `grok_bot.*` row: a launch, reply, or completion retried after a crash can record twice for one `target_id`. Dedupe on `cursor.event.id` first.
+- A cloud agent's `completed` record is best-effort: when the Bot re-watches an agent it launched in an earlier turn, the completion can carry kind `cloud_agent_launch`, and a launch re-watched mid-run can leave its `dispatched` without a `completed`. Pair the two records on `target_id`, and build your pipeline to accept a `dispatched` record with no `completed`.
+- Delivery is at-least-once like every `grok_bot.*` row: a launch, reply, or completion retried after a crash can record twice for one `target_id`. Dedupe on `cursor.event.id` before you pair records.
 
 ### Conversation content
 
-Family `conversation_content`. The `conversation.*` events are the only log records whose body is a payload (message text or one side of an MCP tool call) instead of a constant event name. Route on the log event name, as with every other family. `cursor.conversation.user_message` is a prompt, `cursor.conversation.assistant_message` is a response, and `cursor.conversation.tool_io` is the arguments or the result of an MCP tool call; don't parse the body to tell them apart.
+- **Severity:** `INFO` on all three events
+- **Family:** `conversation_content`
 
-**Body.** Scrubbed text. Messages are capped at 32 KiB and each side of a tool call at 8 KiB. `cursor.conversation.content_truncated` is set whenever the exported body is a prefix of the redacted text, whether the source crossed the cap or redaction pushed it over, and on `tool_io` also when scrubbing left a body within the cap unparseable or dropped the tail of a JSON document the connector had cut.
+These are the only log records whose body is a payload (message text, or one side of a tool call) instead of a constant event name. Route on the log event name, as with every other family, and don't parse the body to tell them apart:
 
-**Identity.** Records carry the [common log attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#common-log-attributes). `cursor.conversation.id` joins them to the conversation's `api.request`, `skill.activated`, `hook.execution_complete`, `cloud_agent.*`, and `grok_bot.*` logs. The only user identifiers are the optional `cursor.user.*` [resource attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#resource-attributes); the log attributes carry none. Don't depend on `cursor.request.id`, `cursor.usage_event.id`, or, on message records, `cursor.grok_bot.turn.id`; `tool_io` carries `turn.id` as a shared `grok_bot.*` attribute.
+- `cursor.conversation.user_message` is a prompt.
+- `cursor.conversation.assistant_message` is a response.
+- `cursor.conversation.tool_io` is the arguments or the result of a tool call.
 
-**Surfaces.** Cloud Agents and Grok Bot only. Cloud Agent conversations arrive with `cursor.surface=cloud_agent` on the resource. Grok Bot conversations arrive with `cursor.surface=grok_bot`, alongside the Bot's `grok_bot.*` action logs when Action Recording is on. `tool_io` is Grok Bot only. IDE, CLI, and desktop conversations are not on this family yet. Filter or route on `cursor.surface`.
+**Body:** scrubbed text. Messages are capped at 32 KiB, and each side of a tool call at 8 KiB. `cursor.conversation.content_truncated` is set whenever the exported body is a prefix of the redacted text, whether the source crossed the cap or redaction pushed it over. On `tool_io`, it's also set when scrubbing left a body within the cap unparseable, or dropped the tail of a JSON document the connector had cut.
 
-**Toggles.** Each event flows only with the team opt-in and its destination toggle on: `user_message` needs **Prompts**, `assistant_message` needs **Responses**, and `tool_io` needs **Tool I/O**. The [setup page](https://cursor.com/docs/enterprise/opentelemetry-export.md#conversation-content) covers the toggles.
+**Identity:**
 
-All three events are INFO and carry these attributes:
+- Records carry the [common log attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#common-log-attributes).
+- `cursor.conversation.id` joins them to the conversation's `api.request`, `skill.activated`, `hook.execution_complete`, `cloud_agent.*`, and `grok_bot.*` logs.
+- The only user identifiers are the optional `cursor.user.*` [resource attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#resource-attributes). The log attributes carry none.
+- Records don't reliably carry `cursor.request.id`, `cursor.usage_event.id`, or, on message records, `cursor.grok_bot.turn.id`, so don't join on them. Grok Bot `tool_io` records carry `turn.id` as a shared `grok_bot.*` attribute.
 
-| Attribute                               | Type   | Presence | Values / notes                                                                                                                                                 |
-| --------------------------------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cursor.conversation.provenance`        | string | Always   | `server` (observed by Cursor). `client` is reserved; tolerate it.                                                                                              |
-| `cursor.conversation.message.id`        | string | Always   | Message id within the conversation                                                                                                                             |
-| `cursor.conversation.turn.id`           | string | Optional | Turn id within the conversation. Separate from `cursor.grok_bot.turn.id` on message records; equal to it on `tool_io`.                                         |
-| `cursor.conversation.content_truncated` | bool   | Always   | True when the body is a prefix of the redacted text, or, on `tool_io`, when scrubbing left it unparseable or dropped the tail of a cut JSON document inside it |
+**Surfaces:** Cloud Agents and Grok Bot only. IDE, CLI, and desktop conversations aren't on this family yet. To separate the two surfaces, filter or route on `cursor.surface`.
+
+- Cloud Agent conversations arrive with `cursor.surface=cloud_agent` on the resource. There, `tool_io` covers every MCP and builtin tool call.
+- A Cloud Agent's `Task` subagent exports its own `tool_io` and `assistant_message` records under its own `cursor.conversation.id` when it finishes, behind the same toggles as its parent. Cursor doesn't export `user_message` records for subagents.
+- Grok Bot conversations arrive with `cursor.surface=grok_bot`, alongside the Bot's `grok_bot.*` action logs when Action Recording is on. There, `tool_io` covers MCP calls over `http`.
+
+**Toggles:** each event flows only with the team opt-in and its destination toggle on. `user_message` needs **Prompts**, `assistant_message` needs **Responses**, and `tool_io` needs **Tool I/O**. The [setup page](https://cursor.com/docs/enterprise/opentelemetry-export.md#conversation-content) covers the toggles.
+
+All three events carry these attributes:
+
+| Attribute                               | Type   | Presence | Values / notes                                                                                                                                                                                                                                                                                     |
+| --------------------------------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.conversation.provenance`        | string | Always   | `server` (observed by Cursor). `client` is reserved; accept it, so a future value doesn't break your pipeline.                                                                                                                                                                                     |
+| `cursor.conversation.message.id`        | string | Always   | Message id within the conversation                                                                                                                                                                                                                                                                 |
+| `cursor.conversation.turn.id`           | string | Optional | Turn id within the conversation. Separate from `cursor.grok_bot.turn.id` on message records; equal to it on Grok Bot `tool_io`. On `cursor.surface=cloud_agent`, every record of a turn carries the same value, and an in-process subagent's `tool_io` carries the turn that started the subagent. |
+| `cursor.conversation.content_truncated` | bool   | Always   | True when the body is a prefix of the redacted text, or, on `tool_io`, when scrubbing left it unparseable or dropped the tail of a cut JSON document inside it                                                                                                                                     |
 
 #### `cursor.conversation.user_message`
 
-INFO. Body: the scrubbed text of a user prompt.
+- **Severity:** `INFO`
+- **Body:** the scrubbed text of a user prompt.
 
 #### `cursor.conversation.assistant_message`
 
-INFO. Body: the scrubbed final assistant text for the response.
+- **Severity:** `INFO`
+- **Body:** the scrubbed final assistant text for the response.
 
 #### `cursor.conversation.tool_io`
 
-INFO. Body: the scrubbed compact JSON of one side of an MCP tool call, at most 8 KiB. Two records per Grok Bot MCP tool call executed over `http` transport: the `arguments` record carries the JSON object the Bot sent, and the `result` record carries the connector's reply. On success that is the tool's text and structured content; on failure, the error, rejection, or denial message. Image bytes are replaced with their MIME type. `stdio` calls on the Bot's computer report metadata only and produce no `tool_io` record. Needs the destination's **Tool I/O** toggle in addition to the team opt-in.
+- **Severity:** `INFO`
+- **Body:** the scrubbed compact JSON of one side of a tool call, at most 8 KiB. Each tool call exports two records, one per `cursor.conversation.tool_io.direction`.
 
-Both records carry the shared [`grok_bot.*` correlation attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#shared-grok_bot-attributes) (`provenance`, `turn.id`, `tool_call.id`, `event.sequence`), and `cursor.grok_bot.tool_call.id` joins them to the call's [`cursor.grok_bot.mcp_tool_call`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorgrok_botmcp_tool_call) and `cursor.grok_bot.tool_decision` rows. A call whose tool-call id does not read as an opaque identifier (letters, digits, `_ . : $ / + = -`, at most 128 characters) produces no `tool_io` records. `cursor.tool.name`, `cursor.tool.status`, and `cursor.mcp.server.name` repeat the metadata row's values so each record is readable on its own.
+**When records export:**
 
-| Attribute                               | Type   | Presence | Values / notes                                                                                                                            |
-| --------------------------------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `cursor.conversation.tool_io.direction` | string | Always   | `arguments` \| `result`. `cursor.conversation.message.id` on this record is `mcp:<tool_call_id>:<direction>`.                             |
-| `cursor.tool.name`                      | string | Always   | Customer-defined MCP tool name, secret-scrubbed and cut at 256 characters (open)                                                          |
-| `cursor.tool.status`                    | string | Always   | `success` \| `failure`. The same value on both sides of one call.                                                                         |
-| `cursor.mcp.server.name`                | string | Optional | Customer-defined server display name, secret-scrubbed and cut at 256 characters (open)                                                    |
-| `cursor.grok_bot.provenance`            | string | Always   | `server`                                                                                                                                  |
-| `cursor.grok_bot.tool_call.id`          | string | Always   | Join key to the call's `mcp_tool_call` and `tool_decision` rows. A call whose id is not an opaque identifier produces no `tool_io` record |
-| `cursor.grok_bot.turn.id`               | string | Optional | Same value as `cursor.conversation.turn.id` on this record                                                                                |
-| `cursor.grok_bot.event.sequence`        | int    | Optional | The sequence number of the call within its turn; absent from older Grok Bot versions                                                      |
+- `cursor.surface=grok_bot`: per MCP tool call executed over `http` transport. `stdio` calls on the Bot's computer report metadata only and produce no `tool_io` record.
+- `cursor.surface=cloud_agent`: per finished MCP or builtin tool call (shell, file read, edit and delete, search, web fetch, `Task`, and the rest) in a turn, including the calls of in-process subagents, exported after the turn ends. A `Task` subagent runs as its own Cloud Agent and exports its calls under its own `cursor.conversation.id` when it finishes.
+- Timing (`cloud_agent`): each record carries the tool call's completion time, and Cursor exports it when the turn or subagent run ends. A long turn can deliver records timestamped well before they arrive, so order by record timestamp, not arrival time.
+- Every surface: a call whose tool-call id does not read as an opaque identifier (letters, digits, `_ . : $ / + = -`, at most 128 characters) produces no `tool_io` records.
 
-When `cursor.conversation.content_truncated` is true, part of the source is missing. Either the body is a prefix of the redacted text (the source crossed the cap, or scrubbing left it unparseable and Cursor exported it flagged instead of exporting a less-scrubbed body) and does not parse as JSON, or the body is valid JSON in which a document the connector had cut was closed at its last whole member and the rest dropped. Check the flag before parsing; a flagged body that parses is still incomplete. Both sides pass the same scrubber as message text, plus a key-based pass that redacts the value of any JSON member or assignment whose key names a credential, whatever the value looks like. A key names a credential when one of its words (split on `_`, `-`, `.`, space, and camel case) is a credential word (`password`, `passcode`, `passphrase`, `secret`, `token`, `auth`, `authorization`, `credential`, `cookie`, `pin`, `otp`, `ssn`, and their compounds such as `client_secret`, `X-Auth`, `secretValue`, or `passwordHash`), when its last word is `pass` or `pwd` (`db_pass`), or when `key` follows a qualifier such as `api`, `access`, `secret`, `private`, or `account` (`api_key`, `x-api-key`, `private_key`, `AccountKey`). A key whose last word is metadata about a credential keeps its value (`token_count`, `token_type`, `api_key_id`, `auth_url`), and a bare `key` redacts only a value shaped like a minted token, so an issue key exports and an API key does not. A boolean or null under a credential key stays.
+**MCP and builtin content:**
 
-An object or array under a credential key keeps its shape: every leaf inside becomes the marker except its metadata members (`name`, `type`, `id`, `scopes`, `created_at`, and similar), so `secrets: [{"name":"NPM_TOKEN","value":"..."}]` exports the name and replaces the value. Header rows count too: in `[{"name":"Authorization","value":"Basic ..."}]`, the `value` or `val` sibling of a `name`, `key`, `header`, `id`, `label`, or `field` member on the list is redacted, as is a row that marks its own value as secret (`masked: true`, or `type` of `SecureString`, `CONCEALED`, or `password`) and the second item of a two-item array whose first is on the list (`["password","..."]`). Card fields held as numbers (`"cvc": 123`) become `[REDACTED: Card]`, a US social security number in the `123-45-6789` shape becomes `[REDACTED: SSN]`, and ASCII `\uXXXX` escapes are decoded before scrubbing. In a table given as an array of arrays whose first row names the columns (a Sheets `values` range), every column whose header names a credential or a card field takes the marker in the rows below. A private-key block split across the items of one array (lines of a file, text blocks of a result) is redacted from its BEGIN line through its END line; one split across unrelated fields is not.
+- MCP: the `arguments` record carries the JSON object the caller sent (the Bot on `grok_bot`, the agent on `cloud_agent`), and the `result` record carries the connector's reply. On success that is the tool's text and structured content; on failure, the error, rejection, or denial message.
+- Builtin: the records carry the tool's own arguments and result as JSON (protobuf JSON field names). A file read exports the text it read. A `Task` result leaves out the subagent's transcript, whose calls export as records of their own.
 
-JSON a connector returns as text gets the same rules as structured content. A string leaf that holds a JSON object or array (an MCP text block, a webhook `body`, a log `message`) is parsed and walked by key like the document around it, and so is a document encoded again inside one of those, at any depth up to the 256-level cap. The text around a document stays text: a summary line, a markdown fence, or a trailing note is scrubbed as prose, and an NDJSON leaf is walked line by line. Cursor also reads the near-JSON spellings connectors produce: `&quot;` for quotes, a trailing comma before a closer, and a Python `str(dict)` with single quotes and `True` / `False` / `None`. A document the walk did not change exports as the connector wrote it, whitespace and escapes included. A document with a redaction in it exports compact: whitespace removed, `\u00e9`-style escapes and `\/` respelled as the characters they name, only the last of duplicate keys kept, and a Python repr respelled as JSON, while numbers keep their digits (`12345678901234567890`, `1.0`, `-0`). A document the connector cut short (`[output truncated]`, a closed connection) is closed at its last whole member and walked; when that drops anything, the record is flagged with `content_truncated`. See [MCP tool I/O](https://cursor.com/docs/enterprise/opentelemetry-export.md#mcp-tool-io) for what the scrubber does not catch.
+**Stripped and capped:**
+
+- Each side is capped at 8 KiB. **Truncated bodies** below covers how `cursor.conversation.content_truncated` marks a cut body.
+- MCP: image bytes are replaced with their MIME type.
+- Builtin: binary fields such as images and screenshots are left out.
+- Both sides pass the scrubber described below.
+
+**Join keys:**
+
+- `cursor.tool_call.id`: on both records of a call; joins the two sides on every surface.
+- `cursor.grok_bot.tool_call.id` (`grok_bot` only): the same value. Joins the records to the call's [`cursor.grok_bot.mcp_tool_call`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorgrok_botmcp_tool_call) and `cursor.grok_bot.tool_decision` rows. Joining the two `tool_io` sides on it is deprecated: use `cursor.tool_call.id`.
+- On `cursor.surface=grok_bot`, the records also carry the shared [`grok_bot.*` correlation attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#shared-grok_bot-attributes) (`provenance`, `turn.id`, `tool_call.id`, `event.sequence`), unchanged. On `cursor.surface=cloud_agent`, they carry no `grok_bot.*` attributes.
+- Turn (`cloud_agent`): `cursor.conversation.turn.id` is the turn the call ran in, the same value as that turn's prompt and response records.
+- `Task` subagents (`cloud_agent`): the parent's `Task` `result` record names the subagent as `success.agentId` in its body. That value is the subagent's `cursor.conversation.id`, so join on it to attach the subagent's records to the parent call. The subagent's records carry no `cursor.subagent.id`.
+- In-process subagents (`cloud_agent`, rare): a call carries the turn that started the subagent and names the subagent in `cursor.subagent.id`.
+
+`cursor.tool.name`, `cursor.tool.status`, and `cursor.mcp.server.name` repeat the metadata row's values so each record is readable on its own.
+
+**Toggles:** the destination's **Tool I/O** toggle, in addition to the team opt-in.
+
+| Attribute                               | Type   | Presence                  | Values / notes                                                                                                                                                                                                                    |
+| --------------------------------------- | ------ | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.conversation.tool_io.direction` | string | Always                    | `arguments` \| `result`. `cursor.conversation.message.id` on this record is `<kind>:<tool_call_id>:<direction>`, where `<kind>` is the `cursor.tool.kind` value.                                                                  |
+| `cursor.tool.kind`                      | string | Always                    | `mcp` \| `builtin`, the same values as on `cursor.tool.calls`                                                                                                                                                                     |
+| `cursor.tool.name`                      | string | Always                    | For `mcp`, the customer-defined MCP tool name, secret-scrubbed and cut at 256 characters (open). For `builtin`, the Cursor tool id in snake case (`shell`, `read`, `edit`, `grep`, `glob`, `web_search`, `task`, ...)             |
+| `cursor.tool.status`                    | string | Always                    | `success` \| `failure`. The same value on both sides of one call.                                                                                                                                                                 |
+| `cursor.tool_call.id`                   | string | Always                    | Join key for the two sides of a call, on every surface. A call whose id is not an opaque identifier produces no `tool_io` record                                                                                                  |
+| `cursor.mcp.server.name`                | string | Optional                  | `mcp` only. Customer-defined server display name, secret-scrubbed and cut at 256 characters (open)                                                                                                                                |
+| `cursor.subagent.id`                    | string | Optional                  | `cloud_agent` only. The in-process subagent that made the call. Cloud Agents rarely start in-process subagents. Absent on the top-level agent's calls and on every record a `Task` subagent exports under its own conversation id |
+| `cursor.grok_bot.provenance`            | string | `grok_bot` only, always   | `server`                                                                                                                                                                                                                          |
+| `cursor.grok_bot.tool_call.id`          | string | `grok_bot` only, always   | Same value as `cursor.tool_call.id`. Join key to the call's `mcp_tool_call` and `tool_decision` rows. Deprecated as the join between the two `tool_io` sides; use `cursor.tool_call.id`                                           |
+| `cursor.grok_bot.turn.id`               | string | `grok_bot` only, optional | Same value as `cursor.conversation.turn.id` on this record                                                                                                                                                                        |
+| `cursor.grok_bot.event.sequence`        | int    | `grok_bot` only, optional | The sequence number of the call within its turn; absent from older Grok Bot versions                                                                                                                                              |
+
+**Truncated bodies:** when `cursor.conversation.content_truncated` is true, part of the source is missing. Check the flag before parsing; a flagged body that parses is still incomplete. A flagged body is one of:
+
+- A prefix of the redacted text, which doesn't parse as JSON. Either the source crossed the cap, or scrubbing left it unparseable and Cursor exported it flagged instead of exporting a less-scrubbed body.
+- Valid JSON in which a document the connector had cut was closed at its last whole member, and the rest dropped.
+
+**Credential keys:** both sides pass the same scrubber as message text. A second, key-based pass redacts the value of any JSON member or assignment whose key names a credential, whatever the value looks like. A key names a credential when:
+
+- one of its words (split on `_`, `-`, `.`, space, and camel case) is a credential word: `password`, `passcode`, `passphrase`, `secret`, `token`, `auth`, `authorization`, `credential`, `cookie`, `pin`, `otp`, `ssn`, and their compounds such as `client_secret`, `X-Auth`, `secretValue`, or `passwordHash`
+- its last word is `pass` or `pwd` (`db_pass`)
+- `key` follows a qualifier such as `api`, `access`, `secret`, `private`, or `account` (`api_key`, `x-api-key`, `private_key`, `AccountKey`)
+
+Values that stay:
+
+- A key whose last word is metadata about a credential keeps its value (`token_count`, `token_type`, `api_key_id`, `auth_url`).
+- A bare `key` redacts only a value shaped like a minted token, so an issue key exports and an API key doesn't.
+- A boolean or null under a credential key stays.
+
+**Nested credentials, headers, and tables:**
+
+- An object or array under a credential key keeps its shape. Every leaf inside becomes the marker except its metadata members (`name`, `type`, `id`, `scopes`, `created_at`, and similar). So `secrets: [{"name":"NPM_TOKEN","value":"..."}]` exports the name and replaces the value.
+- Header rows count too. In `[{"name":"Authorization","value":"Basic ..."}]`, the `value` or `val` sibling of a `name`, `key`, `header`, `id`, `label`, or `field` member on the list is redacted. So is a row that marks its own value as secret (`masked: true`, or `type` of `SecureString`, `CONCEALED`, or `password`), and the second item of a two-item array whose first is on the list (`["password","..."]`).
+- Card fields held as numbers (`"cvc": 123`) become `[REDACTED: Card]`.
+- A US social security number in the `123-45-6789` shape becomes `[REDACTED: SSN]`.
+- ASCII `\uXXXX` escapes are decoded before scrubbing.
+- In a table given as an array of arrays whose first row names the columns (a Sheets `values` range), every column whose header names a credential or a card field takes the marker in the rows below.
+- A private-key block split across the items of one array (lines of a file, text blocks of a result) is redacted from its BEGIN line through its END line. One split across unrelated fields isn't.
+
+**JSON inside text:**
+
+- JSON a connector returns as text gets the same rules as structured content. A string leaf that holds a JSON object or array (an MCP text block, a webhook `body`, a log `message`) is parsed and walked by key like the document around it. So is a document encoded again inside one of those, at any depth up to the 256-level cap.
+- The text around a document stays text. A summary line, a markdown fence, or a trailing note is scrubbed as prose, and an NDJSON leaf is walked line by line.
+- Cursor also reads the near-JSON spellings connectors produce: `&quot;` for quotes, a trailing comma before a closer, and a Python `str(dict)` with single quotes and `True` / `False` / `None`.
+- A document the walk didn't change exports as the connector wrote it, whitespace and escapes included.
+- A document with a redaction in it exports compact: whitespace removed, `\u00e9`-style escapes and `\/` respelled as the characters they name, only the last of duplicate keys kept, and a Python repr respelled as JSON. Numbers keep their digits (`12345678901234567890`, `1.0`, `-0`).
+- A document the connector cut short (`[output truncated]`, a closed connection) is closed at its last whole member and walked. When that drops anything, the record is flagged with `content_truncated`.
+
+See [MCP tool I/O](https://cursor.com/docs/enterprise/opentelemetry-export.md#mcp-tool-io) for what the scrubber doesn't catch.
 
 ## Identity and joins
 
-| Goal                                       | Field                                       | Coverage                                                                                                                                                                                                                                              |
-| ------------------------------------------ | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Dedupe logs                                | `cursor.event.id`                           | Every log record                                                                                                                                                                                                                                      |
-| Group by session or Bot                    | `cursor.conversation.id`                    | Logs when present. For Grok Bot, this value is the identifier for the Bot (its conversation id).                                                                                                                                                      |
-| Group Grok Bot activity by turn            | `cursor.grok_bot.turn.id`                   | `grok_bot.*` logs, Bot `skill.activated` logs, `conversation.tool_io` logs, and `api.request` / `api.error` logs with `cursor.surface=grok_bot`, when present. Don't depend on it on `conversation.user_message` or `conversation.assistant_message`. |
-| Order a Bot turn's actions                 | `cursor.grok_bot.event.sequence`            | `grok_bot.*` and `conversation.tool_io` logs from current Grok Bot versions. Sort by it; do not expect it to be dense                                                                                                                                 |
-| Group the rows of one Bot tool call        | `cursor.grok_bot.tool_call.id`              | `tool_result`, `tool_decision`, `mcp_tool_call`, `computer_use_session`, `file_transfer`, `message_delivery`, `delegation`, guardrail escalations, Bot `skill.activated`, and, with tool I/O enabled, both `conversation.tool_io` sides               |
-| Join an approval ask to its answer         | `cursor.grok_bot.decision.id`               | `tool_decision` and the `tool_escalation` / `pause` / `interrupted` `guardrail` rows of the same call                                                                                                                                                 |
-| Roll a subagent's actions up to its parent | `cursor.grok_bot.root_turn.id`              | `grok_bot.*` logs with `client` provenance; `cursor.grok_bot.subagent.id` names the subagent                                                                                                                                                          |
-| Attach prompts and responses to a session  | `cursor.conversation.id`                    | `conversation.*` logs (Cloud Agents and Grok Bot), only with the `conversation_content` opt-in                                                                                                                                                        |
-| Group prompts and responses by turn        | `cursor.conversation.turn.id`               | `conversation.*` logs when present                                                                                                                                                                                                                    |
-| Group by user                              | Resource attribute `cursor.user.account_id` | Logs and metrics when present. Joins to `id` in the Admin API `GET /teams/members` response. `cursor.user.email` on the same resource names the member directly.                                                                                      |
-| Reconcile billing                          | `cursor.usage_event.id`                     | `api.request`, `api.error`, and `api.correction` logs                                                                                                                                                                                                 |
+| Goal                                                               | Field                                                                 | Coverage                                                                                                                                                                                                                                                                                     |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dedupe logs                                                        | `cursor.event.id`                                                     | Every log record                                                                                                                                                                                                                                                                             |
+| Group by session or Bot                                            | `cursor.conversation.id`                                              | Logs when present. For Grok Bot, this value is the identifier for the Bot (its conversation id).                                                                                                                                                                                             |
+| Group Grok Bot activity by turn                                    | `cursor.grok_bot.turn.id`                                             | `grok_bot.*` logs, Bot `skill.activated` logs, Grok Bot `conversation.tool_io` logs, and `api.request` / `api.error` logs with `cursor.surface=grok_bot`, when present. Not reliably present on `conversation.user_message` or `conversation.assistant_message`, so don't group those by it. |
+| Order a Bot turn's actions                                         | `cursor.grok_bot.event.sequence`                                      | `grok_bot.*` and `conversation.tool_io` logs from current Grok Bot versions. Sort by it to order a turn's actions; gaps in the numbers are normal                                                                                                                                            |
+| Group the rows of one Bot tool call                                | `cursor.grok_bot.tool_call.id`                                        | `tool_result`, `tool_decision`, `mcp_tool_call`, `computer_use_session`, `file_transfer`, `message_delivery`, `delegation`, guardrail escalations, Bot `skill.activated`, and, with tool I/O enabled, both Grok Bot `conversation.tool_io` sides                                             |
+| Join the two sides of a tool call                                  | `cursor.tool_call.id`                                                 | Both `conversation.tool_io` sides, on every surface, with tool I/O enabled                                                                                                                                                                                                                   |
+| Join an approval ask to its answer                                 | `cursor.grok_bot.decision.id`                                         | `tool_decision` and the `tool_escalation` / `pause` / `interrupted` `guardrail` rows of the same call                                                                                                                                                                                        |
+| Roll a subagent's actions up to its parent                         | `cursor.grok_bot.root_turn.id`                                        | `grok_bot.*` logs with `client` provenance; `cursor.grok_bot.subagent.id` names the subagent                                                                                                                                                                                                 |
+| Join a Cloud Agent `Task` subagent to its parent                   | `success.agentId` in the body of the parent's `Task` `tool_io` result | Equals the subagent's `cursor.conversation.id`, with tool I/O enabled                                                                                                                                                                                                                        |
+| Roll a Cloud Agent in-process subagent's tool calls up to its turn | `cursor.conversation.turn.id`                                         | Cloud Agent `conversation.tool_io` logs, which carry the turn that started the subagent; `cursor.subagent.id` names the subagent                                                                                                                                                             |
+| Attach prompts and responses to a session                          | `cursor.conversation.id`                                              | `conversation.*` logs (Cloud Agents and Grok Bot), only with the `conversation_content` opt-in                                                                                                                                                                                               |
+| Group prompts and responses by turn                                | `cursor.conversation.turn.id`                                         | `conversation.*` logs when present                                                                                                                                                                                                                                                           |
+| Group by user                                                      | Resource attribute `cursor.user.account_id`                           | Logs and metrics when present. Joins to `id` in the Admin API `GET /teams/members` response. `cursor.user.email` on the same resource names the member directly.                                                                                                                             |
+| Group by cloud Project                                             | Resource attribute `cursor.project.id`                                | Logs and metrics from cloud Project runs. `cursor.project.name` on the log record names the Project                                                                                                                                                                                          |
+| Reconcile billing                                                  | `cursor.usage_event.id`                                               | `api.request`, `api.error`, and `api.correction` logs                                                                                                                                                                                                                                        |
 
-Exported logs do not carry OpenTelemetry `trace_id` or `span_id` fields. Use `cursor.conversation.id` and `cursor.grok_bot.turn.id` for Bot and turn correlation. Metrics do not carry correlation ids; use `api.request` logs for per-conversation token totals.
+Exported logs carry no OpenTelemetry `trace_id` or `span_id` fields. Use `cursor.conversation.id` and `cursor.grok_bot.turn.id` to correlate Bots and turns. Metrics carry no correlation ids; use `api.request` logs for per-conversation token totals.
 
 See [Joining sessions](https://cursor.com/docs/enterprise/opentelemetry-export.md#joining-sessions) on the setup page for recipes.
 

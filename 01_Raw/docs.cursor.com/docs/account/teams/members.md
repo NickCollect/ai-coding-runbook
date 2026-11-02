@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/members
-fetched_at: 2026-10-26T05:39:58.749444+00:00
+fetched_at: 2026-11-02T07:00:20.889944+00:00
 fetch_method: mintlify_md
 ---
 
@@ -138,7 +138,9 @@ On a team that belongs to an [Organization](https://cursor.com/docs/enterprise/o
 
 On Enterprise teams, admins can review and revoke the personal Cursor API keys members create for scripts and integrations. Open **Members** on the [API Keys](https://cursor.com/dashboard/api) page, or choose **View API keys** from a member's context menu. The list includes members whose email is on one of your team's or organization's verified domains, and you can filter it by member.
 
-Revoke one key, or revoke all of a member's keys at once. Requests that use a revoked key fail immediately, and the member can create new keys. Revocations appear in the [audit log](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#api-keys-and-service-accounts) as `user_api_key` events with the `revoke` action.
+Revoke one key, or revoke all of a member's keys at once. Requests that use a revoked key fail immediately, and the member can create new keys unless the team blocks personal key creation. Revocations appear in the [audit log](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#api-keys-and-service-accounts) as `user_api_key` events with the `revoke` action.
+
+To block new personal keys, turn off **Allow Personal API Key Creation** in the **Personal API Keys** section of the **Team** tab under **API keys** at [grok.com/dashboard](https://grok.com/dashboard). While it's off, members of the team can't create or rotate personal Cursor API keys in any workspace. Existing keys keep working until they're revoked.
 
 ## Domain settings
 

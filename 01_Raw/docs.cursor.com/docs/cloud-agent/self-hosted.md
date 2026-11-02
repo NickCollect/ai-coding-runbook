@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted
-fetched_at: 2026-10-26T05:39:59.863835+00:00
+fetched_at: 2026-11-02T07:00:22.603318+00:00
 fetch_method: mintlify_md
 ---
 
@@ -188,6 +188,8 @@ curl https://cursor.com/install -fsS | bash
   ```bash
   agent login
   ```
+
+- On a team, **Allow Personal Machines** or **Allow Self-Hosted Machines** turned on by a team admin in the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#remote-machines). **Allow Personal Machines** is the team's Remote Control setting. While both are off, Cloud Agents can't run on members' machines.
 
 **Team Pools**
 
