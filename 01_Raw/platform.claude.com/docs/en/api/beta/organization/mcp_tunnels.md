@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/mcp_tunnels
-fetched_at: 2026-10-26T05:40:35.112254+00:00
+fetched_at: 2026-11-02T07:00:48.829880+00:00
 fetch_method: mintlify_md
 ---
 
@@ -167,6 +167,12 @@ archived tunnels are excluded unless `include_archived` is set.
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ### Returns
 
@@ -376,6 +382,12 @@ Retrieve a single tunnel in the caller's organization by ID.
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
 ### Returns
 
 - `BetaOrganizationTunnel object`
@@ -579,6 +591,12 @@ tunnel returns the existing record unchanged.
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ### Returns
 
@@ -785,6 +803,12 @@ access logs.
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
 ### Returns
 
 - `BetaOrganizationTunnelToken object`
@@ -961,6 +985,12 @@ restarted after rotation must use the new value. An optional
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ### Body parameters
 
@@ -1213,6 +1243,12 @@ holds at most two non-archived certificates.
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
 #### Body parameters
 
 - `ca_certificate_pem: string`
@@ -1447,6 +1483,12 @@ Archived certificates are excluded unless `include_archived` is set.
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `data: array of BetaOrganizationTunnelCertificate`
@@ -1659,6 +1701,12 @@ Retrieve a single certificate registered on a tunnel by ID.
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
 #### Returns
 
 - `BetaOrganizationTunnelCertificate object`
@@ -1865,6 +1913,12 @@ certificate is added.
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 #### Returns
 

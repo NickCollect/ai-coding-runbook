@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/attachments/list
-fetched_at: 2026-10-12T06:50:11.274086+00:00
+fetched_at: 2026-11-02T07:00:55.265887+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,11 +54,11 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
 ## Returns
 
-- `data: array of ComplianceProjectFileReference or ComplianceProjectDocReference`
+- `data: array of ProjectFile or ProjectDoc`
 
   List of attachments sorted chronologically by created_at, tie break by id
 
-  - `ComplianceProjectFileReference object`
+  - `ProjectFile object`
 
     File attachment reference for compliance responses.
 
@@ -94,7 +94,7 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
       Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
-  - `ComplianceProjectDocReference object`
+  - `ProjectDoc object`
 
     Project document attachment reference for compliance responses.
 

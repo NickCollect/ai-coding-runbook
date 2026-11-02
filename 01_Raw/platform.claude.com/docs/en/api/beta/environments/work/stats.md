@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/stats
-fetched_at: 2026-10-26T05:40:24.695299+00:00
+fetched_at: 2026-11-02T07:00:42.071744+00:00
 fetch_method: mintlify_md
 ---
 
@@ -137,6 +137,12 @@ Get statistics about the work queue for an environment.
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -149,8 +155,6 @@ Get statistics about the work queue for an environment.
 
   Statistics about the work queue for an environment.
 
-  Uses Redis Stream consumer group metrics for O(1) queries.
-
   - `type: "work_queue_stats"`
 
     The type of object
@@ -159,7 +163,7 @@ Get statistics about the work queue for an environment.
 
   - `depth: number`
 
-    Number of work items waiting to be picked up (lag from consumer group)
+    Number of work items waiting to be picked up
 
   - `oldest_queued_at: string or null`
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/sessions
-fetched_at: 2026-10-19T05:33:04.339731+00:00
+fetched_at: 2026-11-02T07:00:55.516253+00:00
 fetch_method: mintlify_md
 ---
 
@@ -606,7 +606,7 @@ curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_
     "type": "compliance_local_session",
     "updated_at": "2025-03-12T18:22:41.123456Z",
     "user": {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "email_address": "jane.doe@example.com"
     },
     "workspace_id": "wrkspc_01SvYKoWVRVHoEbwESNvzYdR"
@@ -992,7 +992,7 @@ malformed session identifier returns 400.
 
   - `sent_by_user_id: string or null`
 
-    Identifier of the human account that sent this turn on an agent-owned session. Null on user-owned sessions, where every user-role turn was sent by the session's `user`.
+    Identifier of the human account that sent this turn on an agent-owned session. Null on user-owned sessions, where every user-role turn was sent by the session's `user`. Can also be null on an agent-owned session, where several people may take part, when the turn cannot be attributed to one human account (for example, no sender was recorded).
 
 - `next_page: string or null`
 

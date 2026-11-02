@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations
-fetched_at: 2026-10-26T05:40:40.093039+00:00
+fetched_at: 2026-11-02T07:00:53.675937+00:00
 fetch_method: mintlify_md
 ---
 
@@ -221,7 +221,7 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
 {
   "data": [
     {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "created_at": "2025-03-12T18:22:41.123456Z",
       "email": "jane.doe@example.com",
       "full_name": "Jane Doe",
@@ -238,6 +238,8 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
 ### List organization members' personal preferences
 
 **GET** `/v1/compliance/organizations/{org_uuid}/user_preferences`
+
+This endpoint is in beta.
 
 List the personal preferences of an organization's current members.
 
@@ -340,7 +342,7 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/user_prefer
       "conversation_preferences": "Always answer in British English.",
       "cowork_global_instructions": "Prefer short status updates.",
       "user": {
-        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
         "email_address": "jane.doe@example.com"
       }
     }
@@ -730,6 +732,8 @@ unknown organizations and organizations outside the hierarchy return 404.
 
       - `"claude_academy_inference_enabled"`
 
+      - `"claude_ai_ccr_support_sharing_enabled"`
+
       - `"claude_ai_chat_sharing_enabled"`
 
       - `"claude_ai_feedback_collection_enabled"`
@@ -793,8 +797,6 @@ unknown organizations and organizations outside the hierarchy return 404.
       - `"connector_tools_default_always_allow"`
 
       - `"content_redaction_enabled"`
-
-      - `"cowork_trusted_devices_required"`
 
       - `"desktop_extension_allowlist_enabled"`
 

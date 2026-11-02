@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/user_preferences
-fetched_at: 2026-10-26T05:40:40.390349+00:00
+fetched_at: 2026-11-02T07:00:53.901392+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,6 +14,8 @@ url: https://platform.claude.com/docs/en/api/compliance/organizations/user_prefe
 ## List organization members' personal preferences
 
 **GET** `/v1/compliance/organizations/{org_uuid}/user_preferences`
+
+This endpoint is in beta.
 
 List the personal preferences of an organization's current members.
 
@@ -116,7 +118,7 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/user_prefer
       "conversation_preferences": "Always answer in British English.",
       "cowork_global_instructions": "Prefer short status updates.",
       "user": {
-        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
         "email_address": "jane.doe@example.com"
       }
     }

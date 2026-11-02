@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/mcp_tunnels/tunnel_certificates/archive
-fetched_at: 2026-10-26T05:40:35.365275+00:00
+fetched_at: 2026-11-02T07:00:49.261744+00:00
 fetch_method: mintlify_md
 ---
 
@@ -150,6 +150,12 @@ certificate is added.
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ## Returns
 

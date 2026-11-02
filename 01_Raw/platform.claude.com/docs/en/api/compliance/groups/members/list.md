@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/groups/members/list
-fetched_at: 2026-10-12T06:50:10.574547+00:00
+fetched_at: 2026-11-02T07:00:54.462970+00:00
 fetch_method: mintlify_md
 ---
 
@@ -94,7 +94,7 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID/members \
       "created_at": "2025-03-12T18:22:41.123456Z",
       "email": "jane.doe@example.com",
       "updated_at": "2025-03-14T09:05:17.456789Z",
-      "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
     }
   ],
   "has_more": true,

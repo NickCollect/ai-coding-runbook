@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/sessions/remote
-fetched_at: 2026-10-12T06:50:11.925049+00:00
+fetched_at: 2026-11-02T07:00:55.724614+00:00
 fetch_method: mintlify_md
 ---
 
@@ -459,7 +459,7 @@ malformed session identifier returns 400.
 
   - `sent_by_user_id: string or null`
 
-    Identifier of the human account that sent this turn on an agent-owned session. Null on user-owned sessions, where every user-role turn was sent by the session's `user`.
+    Identifier of the human account that sent this turn on an agent-owned session. Null on user-owned sessions, where every user-role turn was sent by the session's `user`. Can also be null on an agent-owned session, where several people may take part, when the turn cannot be attributed to one human account (for example, no sender was recorded).
 
 - `next_page: string or null`
 

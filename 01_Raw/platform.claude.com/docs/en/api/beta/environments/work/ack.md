@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/ack
-fetched_at: 2026-10-26T05:40:24.472697+00:00
+fetched_at: 2026-11-02T07:00:41.910388+00:00
 fetch_method: mintlify_md
 ---
 
@@ -140,6 +140,12 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ## Returns
 

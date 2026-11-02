@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/documents/metadata
-fetched_at: 2026-10-12T06:50:11.441157+00:00
+fetched_at: 2026-11-02T07:00:55.352235+00:00
 fetch_method: mintlify_md
 ---
 
@@ -102,7 +102,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
   "mime_type": "text/plain",
   "size_bytes": 0,
   "user": {
-    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
     "email_address": "jane.doe@example.com"
   }
 }

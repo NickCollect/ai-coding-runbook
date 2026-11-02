@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/files
-fetched_at: 2026-10-26T05:40:05.782229+00:00
+fetched_at: 2026-11-02T07:00:30.161773+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,9 +14,34 @@ featureMetadata:
     url: https://platform.claude.com/docs/en/managed-agents/overview
   status: beta
   betaHeader: managed-agents-2026-04-01
+  zdr:
+    eligibility: not-eligible
+    note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: beta
+    Claude Platform on AWS: beta
+    Claude Models on Google Cloud (Anthropic managed): beta
 ---
 
-You can provide files to your agent by uploading them through the Files API and mounting them in the session's sandbox.
+You can provide files to your agent by uploading them through the Files API and mounting them in the session’s sandbox.
 
 ## Uploading files
 
@@ -729,7 +754,7 @@ The agent can work with any file type, including:
   Files mounted in the sandbox are read-only copies. The agent can read them but cannot modify the original uploaded file. To work with modified versions, the agent writes to new paths within the sandbox.
 </Note>
 
-* The path you specify is rooted under the session's uploads directory: a `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) of `/data.csv` places the file at `/mnt/session/uploads/data.csv` in the sandbox.
+* The path you specify is rooted under the session’s uploads directory: a `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) of `/data.csv` places the file at `/mnt/session/uploads/data.csv` in the sandbox.
 * If you omit `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`), the file is placed at `/mnt/session/uploads/<file_id>`.
 * Parent directories are created automatically.
 * Paths should be absolute (starting with `/`).

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/users
-fetched_at: 2026-10-12T06:50:10.093372+00:00
+fetched_at: 2026-11-02T07:00:53.823091+00:00
 fetch_method: mintlify_md
 ---
 
@@ -117,7 +117,7 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/users \
 {
   "data": [
     {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "created_at": "2025-03-12T18:22:41.123456Z",
       "email": "jane.doe@example.com",
       "full_name": "Jane Doe",

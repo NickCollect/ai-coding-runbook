@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/models/retrieve
-fetched_at: 2026-10-26T05:40:17.346048+00:00
+fetched_at: 2026-11-02T07:00:37.170637+00:00
 fetch_method: mintlify_md
 ---
 
@@ -330,7 +330,7 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
   "deprecated_at": "2019-12-27T18:11:19.117Z",
   "display_name": "Claude Opus 5.5",
   "lifecycle": "active",
-  "line": "haiku",
+  "line": "opus",
   "max_input_tokens": 0,
   "max_tokens": 0,
   "retires_at": "2019-12-27T18:11:19.117Z",

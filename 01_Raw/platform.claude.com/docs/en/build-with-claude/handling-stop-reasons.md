@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons
-fetched_at: 2026-10-26T05:39:57.925795+00:00
+fetched_at: 2026-11-02T07:00:25.477486+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ url: https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons
 description: Learn what each stop_reason value means and how to handle truncation, tool use, paused turns, and refusals in your application.
 ---
 
-Every Messages API response includes a `stop_reason` field that tells you why Claude stopped generating. Check this field to decide whether to use the response as-is, continue the conversation, retry, or fall back to another model.
+Every Messages API response includes a [`stop_reason`](https://platform.claude.com/docs/en/api/messages/create#message.stop_reason) field that tells you why Claude stopped generating. Check this field to decide whether to use the response as-is, continue the conversation, retry, or fall back to another model.
 
 For the full response schema, see the [Messages API reference](https://platform.claude.com/docs/en/api/messages/create).
 
@@ -24,7 +24,7 @@ For the full response schema, see the [Messages API reference](https://platform.
 | [`tool_use`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#tool-use)                                           | Claude is calling a tool.                       | Run the tool and return the result. A server tool call still missing its result block completes in a later response.                                    |
 | [`pause_turn`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#pause-turn)                                       | A server-tool loop reached its iteration limit. | Send the assistant content back to continue.                                                                                                            |
 | [`refusal`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#refusal)                                             | Claude declined to respond.                     | Read `stop_details` and [retry on a fallback model](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback).                       |
-| [`model_context_window_exceeded`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#model-context-window-exceeded) | The response filled the model's context window. | Treat the response as truncated.                                                                                                                        |
+| [`model_context_window_exceeded`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#model-context-window-exceeded) | The response filled the model’s context window. | Treat the response as truncated.                                                                                                                        |
 
 ## The stop\_reason field
 
@@ -217,7 +217,7 @@ The most common stop reason. Indicates Claude completed its response naturally.
   **Common causes:**
 
   * Adding text blocks immediately after tool results (the history then shows user text after every tool result, so Claude ends its turn to follow that pattern)
-  * Sending Claude's completed response back without adding anything (Claude already determined it's done, so it will remain done)
+  * Sending Claude’s completed response back without adding anything (Claude already determined it’s done, so it will remain done)
 
   **How to prevent empty responses:**
 
@@ -734,13 +734,13 @@ The most common stop reason. Indicates Claude completed its response naturally.
   **Best practices:**
 
   1. **Never add text blocks immediately after tool results:** This sets a pattern of user input after every tool use, and Claude follows that pattern by ending its turn.
-  2. **Don't retry empty responses without modification:** Sending the empty response back won't help.
-  3. **Use continuation prompts as a last resort:** Only if these fixes don't resolve the issue.
+  2. **Don’t retry empty responses without modification:** Sending the empty response back won’t help.
+  3. **Use continuation prompts as a last resort:** Only if these fixes don’t resolve the issue.
 </Accordion>
 
 ### max\_tokens
 
-Claude stopped because it reached the `max_tokens` limit specified in your request.
+Claude stopped because it reached the [`max_tokens`](https://platform.claude.com/docs/en/api/messages/create#create.max_tokens) limit specified in your request.
 
 <CodeGroup>
   ```bash cURL
@@ -890,7 +890,7 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
 </CodeGroup>
 
 <Accordion title="Incomplete tool use blocks">
-  If Claude's response is cut off because it hit the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
+  If Claude’s response is cut off because it hit the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you’ll need to retry the request with a higher `max_tokens` value to get the full tool use.
 
   <CodeGroup exclude="shell:cURL, shell:CLI">
     <CodeGroupItem language="cURL">
@@ -1052,7 +1052,7 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
 
 ### stop\_sequence
 
-Claude encountered one of your custom stop sequences.
+Claude encountered one of your custom [stop sequences](https://platform.claude.com/docs/en/api/messages/create#create.stop_sequences).
 
 <CodeGroup>
   ```bash cURL
@@ -1484,10 +1484,10 @@ Claude is calling a tool that you need to run.
   ```
 </CodeGroup>
 
-A `tool_use` response can also contain a `server_tool_use` block whose `id` has no matching result block. That server tool call is not complete, and this response does not carry its result. In the common case, Claude calls a [server tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools) and one of your client tools in the same group of parallel tool calls: the API returns without running the server tool so that you can run the client tools first. There is no other marker for the state; detect it by checking each `server_tool_use` or `mcp_tool_use` block's `id` for a matching result block.
+A `tool_use` response can also contain a `server_tool_use` block whose `id` has no matching result block. That server tool call is not complete, and this response does not carry its result. In the common case, Claude calls a [server tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools) and one of your client tools in the same group of parallel tool calls: the API returns without running the server tool so that you can run the client tools first. There is no other marker for the state; detect it by checking each `server_tool_use` or `mcp_tool_use` block’s `id` for a matching result block.
 
 <Note>
-  With [programmatic tool calling](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block's own result block arrives once the code completes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response's `container` field, as that page shows.
+  With [programmatic tool calling](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block’s own result block arrives once the code completes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response’s `container` field, as that page shows.
 </Note>
 
 ```json A mixed tool_use response
@@ -1510,7 +1510,7 @@ A `tool_use` response can also contain a `server_tool_use` block whose `id` has 
 }
 ```
 
-The continuation is a user message of `tool_result` blocks, one for every `tool_use` block in the response (see [Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls)), with two extra rules: that message must contain nothing except the `tool_result` blocks, and the request must keep the same `tools` array. A resume request that no longer defines the waiting server tool fails with a 400 whose message ends ``but no `web_search` tool was provided``. The API attaches your results to the still-open assistant turn, runs the deferred server tool (for paused code execution, resumes it), and continues the turn. For a server tool Claude called directly, the next response's `content` starts with the result block that answers the previous response's `server_tool_use` `id`.
+The continuation is a user message of `tool_result` blocks, one for every `tool_use` block in the response (see [Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls)), with two extra rules: that message must contain nothing except the `tool_result` blocks, and the request must keep the same `tools` array. A resume request that no longer defines the waiting server tool fails with a 400 whose message ends ``but no `web_search` tool was provided``. The API attaches your results to the still-open assistant turn, runs the deferred server tool (for paused code execution, resumes it), and continues the turn. For a server tool Claude called directly, the next response’s `content` starts with the result block that answers the previous response’s `server_tool_use` `id`.
 
 ```json The follow-up user message
 {
@@ -1752,7 +1752,7 @@ When this occurs, the response might contain a `server_tool_use` block without a
 </CodeGroup>
 
 <Note>
-  Your application should handle `pause_turn` in any agent loop that uses server tools. Add the assistant's response to your messages array and make another API request to let Claude continue.
+  Your application should handle `pause_turn` in any agent loop that uses server tools. Add the assistant’s response to your messages array and make another API request to let Claude continue.
 </Note>
 
 ### refusal
@@ -1900,19 +1900,19 @@ Claude declined to generate a response. Safety classifiers return this stop reas
 </CodeGroup>
 
 <Tip>
-  If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)) or Claude Opus 4.1 (the latter [retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
+  If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)) or Claude Opus 4.1 (the latter [retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5’s API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 </Tip>
 
-On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered in [What a refusal looks like](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
+On a refusal, the [`stop_details`](https://platform.claude.com/docs/en/api/messages/create#message.stop_details) object identifies the policy category that triggered it. The categories and the full refusal response shape are covered in [What a refusal looks like](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
 
 A refused request on Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, or Claude Haiku 5.5 can usually be served by retrying on another Claude model. [Refusals and fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback) shows how to set up that retry, server-side or in your client. Claude Haiku 5.5 has no server-side fallback, so set up its retry [in your client](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback). If you build the retry yourself from Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, or Claude Sonnet 5.5, [fallback credit](https://platform.claude.com/docs/en/build-with-claude/fallback-credit) covers how to avoid paying the prompt-cache cost twice.
 
 ### model\_context\_window\_exceeded
 
-Claude stopped because it reached the model's context window limit. This lets you request the maximum possible tokens without knowing the exact input size.
+Claude stopped because it reached the model’s context window limit. This lets you request the maximum possible tokens without knowing the exact input size.
 
 <Note>
-  This stop reason is currently typed only in the SDK's `beta` (csharp, go: `Beta`; java: `beta()`) namespace, so the following examples call `client.beta.messages` (csharp, go: `client.Beta.Messages`; java: `client.beta().messages()`; php: `$client->beta->messages`) and use the `Beta`-prefixed types. On Sonnet 4.5 (deprecated) and newer models, the API returns this value without a beta header. For earlier models, add the `model-context-window-exceeded-2025-08-26` beta header to enable it.
+  This stop reason is currently typed only in the SDK’s `beta` (csharp, go: `Beta`; java: `beta()`) namespace, so the following examples call `client.beta.messages` (csharp, go: `client.Beta.Messages`; java: `client.beta().messages()`; php: `$client->beta->messages`) and use the `Beta`-prefixed types. On Sonnet 4.5 (deprecated) and newer models, the API returns this value without a beta header. For earlier models, add the `model-context-window-exceeded-2025-08-26` beta header to enable it.
 </Note>
 
 <CodeGroup>
@@ -2332,117 +2332,162 @@ When a response is truncated because of token limits or the context window, appe
 
 ### Implement retry logic for pause\_turn
 
-When you use [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), the API might return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
+When you use [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), the API might return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by adding the paused response to your messages unchanged and sending the request again. If the response includes a `container`, [send its ID back](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#container-reuse) as well. Without it, the next request starts a new container, and files from earlier in the turn are lost.
 
-<CodeGroup exclude="shell">
+<CodeGroup exclude="shell:cURL, shell:CLI">
+  <CodeGroupItem language="cURL">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
+
+  <CodeGroupItem language="CLI">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
+
   ```python Python
-  def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
-      """
-      Handle server tool conversations that might require multiple continuations.
+  client = anthropic.Anthropic()
 
-      The server uses a sampling loop to run server tools. If the loop
-      reaches its iteration limit, the API returns pause_turn. Continue the
-      conversation by sending the response back to let Claude finish.
-      """
+
+  def handle_server_tool_conversation(client, user_query, tools, max_requests=5):
       messages = [{"role": "user", "content": user_query}]
+      container_id = None
 
-      for _ in range(max_continuations):
+      for _ in range(max_requests):
           response = client.messages.create(
               model="claude-opus-5-5",
               max_tokens=4096,
               messages=messages,
               tools=tools,
+              container=container_id,
           )
 
           if response.stop_reason != "pause_turn":
-              # Claude finished processing: return the final response
+              # Not paused: return the response
               return response
 
-          # pause_turn: replace the full message list to maintain alternating roles
-          messages = [
-              {"role": "user", "content": user_query},
-              {"role": "assistant", "content": response.content},
-          ]
+          # pause_turn: add the paused response as an assistant message, then continue
+          messages.append({"role": "assistant", "content": response.content})
 
-      # Reached max continuations: return the last response
+          # If the tools ran in a container, send its ID back so its files are kept
+          if response.container:
+              container_id = response.container.id
+
+      # Still paused after max_requests requests: return the last response
       return response
+
+
+  response = handle_server_tool_conversation(
+      client,
+      "Use the code execution tool to find the 1,000th prime number.",
+      [{"type": "code_execution_20250825", "name": "code_execution"}],
+  )
+  print(response.stop_reason)
   ```
 
   ```typescript TypeScript
+  const client = new Anthropic();
+
   async function handleServerToolConversation(
     client: Anthropic,
     userQuery: string,
     tools: Anthropic.ToolUnion[],
-    maxContinuations = 5
+    maxRequests = 5
   ): Promise<Anthropic.Message> {
-    let messages: Anthropic.MessageParam[] = [{ role: "user", content: userQuery }];
+    const messages: Anthropic.MessageParam[] = [{ role: "user", content: userQuery }];
+    let containerId: string | null = null;
     let response: Anthropic.Message;
+    let requestCount = 0;
 
-    for (let i = 0; i < maxContinuations; i++) {
+    do {
       response = await client.messages.create({
         model: "claude-opus-5-5",
         max_tokens: 4096,
         messages,
-        tools
+        tools,
+        container: containerId
       });
 
       if (response.stop_reason !== "pause_turn") {
-        // Claude finished processing: return the final response
+        // Not paused: return the response
         return response;
       }
 
-      // pause_turn: replace the full message list to maintain alternating roles
-      messages = [
-        { role: "user", content: userQuery },
-        { role: "assistant", content: response.content }
-      ];
-    }
+      // pause_turn: add the paused response as an assistant message, then continue
+      messages.push({ role: "assistant", content: response.content });
 
-    // Reached max continuations: return the last response
-    return response!;
+      // If the tools ran in a container, send its ID back so its files are kept
+      if (response.container) {
+        containerId = response.container.id;
+      }
+    } while (++requestCount < maxRequests);
+
+    // Still paused after maxRequests requests: return the last response
+    return response;
   }
+
+  const response = await handleServerToolConversation(
+    client,
+    "Use the code execution tool to find the 1,000th prime number.",
+    [{ type: "code_execution_20250825", name: "code_execution" }]
+  );
+  console.log(response.stop_reason);
   ```
 
   ```csharp C#
+  // A server tool turn can run for minutes, longer than the SDK's default timeout,
+  // which it sets from MaxTokens (about 2 minutes at 4096).
+  AnthropicClient client = new() { Timeout = TimeSpan.FromMinutes(10) };
+
   static async Task<Message> HandleServerToolConversation(
       AnthropicClient client,
       string userQuery,
       List<ToolUnion> tools,
-      int maxContinuations = 5)
+      int maxRequests = 5)
   {
       List<MessageParam> messages = [new UserMessageParam { Content = userQuery }];
-      Message response = null!;
+      MessageCreateParamsContainer? container = null;
+      Message response;
+      var requestCount = 0;
 
-      for (var i = 0; i < maxContinuations; i++)
+      do
       {
           response = await client.Messages.Create(new MessageCreateParams
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 4096,
               Messages = messages,
-              Tools = tools
+              Tools = tools,
+              Container = container
           });
 
-          if (response.StopReason != "pause_turn")
+          if (response.StopReason != StopReason.PauseTurn)
           {
-              // Claude finished processing: return the final response
+              // Not paused: return the response
               return response;
           }
 
-          // pause_turn: replace the full message list to maintain alternating roles
-          messages =
-          [
-              new UserMessageParam { Content = userQuery },
-              new AssistantMessageParam
-              {
-                  Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList()
-              }
-          ];
-      }
+          // pause_turn: add the paused response as an assistant message, then continue
+          // Request and response blocks are separate types: copy each block's JSON unchanged
+          messages.Add(new AssistantMessageParam
+          {
+              Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList()
+          });
 
-      // Reached max continuations: return the last response
+          // If the tools ran in a container, send its ID back so its files are kept
+          if (response.Container is not null)
+          {
+              container = response.Container.ID;
+          }
+      } while (++requestCount < maxRequests);
+
+      // Still paused after maxRequests requests: return the last response
       return response;
   }
+
+  var response = await HandleServerToolConversation(
+      client,
+      "Use the code execution tool to find the 1,000th prime number.",
+      [new CodeExecutionTool20250825()]);
+  Console.WriteLine(response.StopReason?.Raw());
   ```
 
   ```go Go
@@ -2450,145 +2495,201 @@ When you use [server tools](https://platform.claude.com/docs/en/agents-and-tools
   	client anthropic.Client,
   	userQuery string,
   	tools []anthropic.ToolUnionParam,
-  	maxContinuations int,
+  	maxRequests int,
   ) (*anthropic.Message, error) {
-  	messages := []anthropic.MessageParam{anthropic.NewUserMessage(anthropic.NewTextBlock(userQuery))}
+  	messages := []anthropic.MessageParam{
+  		anthropic.NewUserMessage(anthropic.NewTextBlock(userQuery)),
+  	}
+  	var container anthropic.MessageCreateParamsContainerUnion
   	var response *anthropic.Message
   	var err error
 
-  	for range maxContinuations {
+  	for range maxRequests {
   		response, err = client.Messages.New(context.TODO(), anthropic.MessageNewParams{
   			Model:     anthropic.ModelClaudeOpus5_5,
   			MaxTokens: 4096,
   			Messages:  messages,
   			Tools:     tools,
+  			Container: container,
   		})
   		if err != nil {
   			return nil, err
   		}
 
-  		if response.StopReason != "pause_turn" {
-  			// Claude finished processing: return the final response
+  		if response.StopReason != anthropic.StopReasonPauseTurn {
+  			// Not paused: return the response
   			return response, nil
   		}
 
-  		// pause_turn: replace the full message list to maintain alternating roles
-  		var contentParams []anthropic.ContentBlockParamUnion
-  		for _, block := range response.Content {
-  			contentParams = append(contentParams, block.ToParam())
-  		}
-  		messages = []anthropic.MessageParam{
-  			anthropic.NewUserMessage(anthropic.NewTextBlock(userQuery)),
-  			anthropic.NewAssistantMessage(contentParams...),
+  		// pause_turn: add the paused response as an assistant message, then continue
+  		messages = append(messages, response.ToParam())
+
+  		// If the tools ran in a container, send its ID back so its files are kept
+  		if response.Container.ID != "" {
+  			container.OfString = anthropic.String(response.Container.ID)
   		}
   	}
 
-  	// Reached max continuations: return the last response
+  	// Still paused after maxRequests requests: return the last response
   	return response, nil
+  }
+
+  func main() {
+  	client := anthropic.NewClient()
+
+  	response, err := handleServerToolConversation(
+  		client,
+  		"Use the code execution tool to find the 1,000th prime number.",
+  		[]anthropic.ToolUnionParam{
+  			{OfCodeExecutionTool20250825: &anthropic.CodeExecutionTool20250825Param{}},
+  		},
+  		5,
+  	)
+  	if err != nil {
+  		log.Fatal(err)
+  	}
+  	fmt.Println(response.StopReason)
   }
   ```
 
   ```java Java
-  static Message handleServerToolConversation(
+  Message handleServerToolConversation(
       AnthropicClient client,
       String userQuery,
-      List<Tool> tools,
-      int maxContinuations
+      List<ToolUnion> tools,
+      int maxRequests
   ) {
+      var params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_5_5)
+          .maxTokens(4096L)
+          .tools(tools)
+          .addUserMessage(userQuery);
       Message response = null;
 
-      for (int i = 0; i < maxContinuations; i++) {
-          // Rebuild the params each iteration so messages aren't accumulated
-          MessageCreateParams.Builder params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_5_5)
-              .maxTokens(4096L)
-              .addUserMessage(userQuery);
-          tools.forEach(params::addTool);
-          if (response != null) {
-              params.addMessage(response);
-          }
-
+      for (int request = 0; request < maxRequests; request++) {
           response = client.messages().create(params.build());
 
-          if (!response.stopReason().map(StopReason.PAUSE_TURN::equals).orElse(false)) {
-              // Claude finished processing: return the final response
+          boolean paused = response.stopReason().filter(StopReason.PAUSE_TURN::equals).isPresent();
+          if (!paused) {
+              // Not paused: return the response
               return response;
           }
-          // pause_turn: loop again and send the response back
+
+          // pause_turn: add the paused response as an assistant message, then continue
+          params.addMessage(response);
+
+          // If the tools ran in a container, send its ID back so its files are kept
+          response.container().ifPresent(container -> params.container(container.id()));
       }
 
-      // Reached max continuations: return the last response
+      // Still paused after maxRequests requests: return the last response
       return response;
+  }
+
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+      Message response = handleServerToolConversation(
+          client,
+          "Use the code execution tool to find the 1,000th prime number.",
+          List.of(ToolUnion.ofCodeExecutionTool20250825(CodeExecutionTool20250825.builder().build())),
+          5
+      );
+      response.stopReason().ifPresent(IO::println);
   }
   ```
 
   ```php PHP
+  $client = new Client();
+
   function handle_server_tool_conversation(
       Client $client,
       string $userQuery,
       array $tools,
-      int $maxContinuations = 5
-  ) {
+      int $maxRequests = 5,
+  ): Message {
       $messages = [['role' => 'user', 'content' => $userQuery]];
-      $response = null;
+      $containerId = null;
+      $requestCount = 0;
 
-      for ($i = 0; $i < $maxContinuations; $i++) {
+      do {
           $response = $client->messages->create(
               maxTokens: 4096,
               messages: $messages,
-              model: 'claude-opus-5-5',
+              model: Model::CLAUDE_OPUS_5_5,
               tools: $tools,
+              container: $containerId,
           );
 
-          if ($response->stopReason !== 'pause_turn') {
-              // Claude finished processing: return the final response
+          if ($response->stopReason !== StopReason::PAUSE_TURN->value) {
+              // Not paused: return the response
               return $response;
           }
 
-          // pause_turn: replace the full message list to maintain alternating roles
-          $messages = [
-              ['role' => 'user', 'content' => $userQuery],
-              ['role' => 'assistant', 'content' => $response->content],
-          ];
-      }
+          // pause_turn: add the paused response as an assistant message, then continue
+          $messages[] = ['role' => 'assistant', 'content' => $response->content];
 
-      // Reached max continuations: return the last response
+          // If the tools ran in a container, send its ID back so its files are kept
+          $containerId = $response->container->id ?? $containerId;
+      } while (++$requestCount < $maxRequests);
+
+      // Still paused after $maxRequests requests: return the last response
       return $response;
   }
+
+  $response = handle_server_tool_conversation(
+      $client,
+      'Use the code execution tool to find the 1,000th prime number.',
+      [new CodeExecutionTool20250825()],
+  );
+  echo $response->stopReason, PHP_EOL;
   ```
 
   ```ruby Ruby
-  def handle_server_tool_conversation(client, user_query, tools, max_continuations: 5)
+  client = Anthropic::Client.new
+
+  def handle_server_tool_conversation(client, user_query, tools, max_requests: 5)
     messages = [{ role: "user", content: user_query }]
+    container_id = nil
     response = nil
 
-    max_continuations.times do
+    max_requests.times do
       response = client.messages.create(
-        model: "claude-opus-5-5",
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         max_tokens: 4096,
-        messages: messages,
-        tools: tools
+        messages:,
+        tools:,
+        container: container_id
       )
 
-      # Claude finished processing: return the final response
+      # Not paused: return the response
       return response unless response.stop_reason == :pause_turn
 
-      # pause_turn: replace the full message list to maintain alternating roles
-      messages = [
-        { role: "user", content: user_query },
-        { role: "assistant", content: response.content }
-      ]
+      # pause_turn: add the paused response as an assistant message, then continue
+      messages << { role: "assistant", content: response.content }
+
+      # If the tools ran in a container, send its ID back so its files are kept
+      container_id = response.container&.id || container_id
     end
 
-    # Reached max continuations: return the last response
+    # Still paused after max_requests requests: return the last response
     response
   end
+
+  response = handle_server_tool_conversation(
+    client,
+    "Use the code execution tool to find the 1,000th prime number.",
+    [Anthropic::CodeExecutionTool20250825.new]
+  )
+  puts response.stop_reason
   ```
 </CodeGroup>
 
+The function returns the last response, which holds only the final part of the turn. To show the whole turn or to continue the conversation, keep the paused responses as well.
+
 ## Stop reasons versus errors
 
-It's important to distinguish between `stop_reason` values and actual errors:
+It’s important to distinguish between `stop_reason` values and actual errors:
 
 ### Stop reasons (successful responses)
 

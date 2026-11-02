@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/settings/retrieve
-fetched_at: 2026-10-19T05:33:03.362543+00:00
+fetched_at: 2026-11-02T07:00:54.296857+00:00
 fetch_method: mintlify_md
 ---
 
@@ -125,6 +125,8 @@ unknown organizations and organizations outside the hierarchy return 404.
 
       - `"claude_academy_inference_enabled"`
 
+      - `"claude_ai_ccr_support_sharing_enabled"`
+
       - `"claude_ai_chat_sharing_enabled"`
 
       - `"claude_ai_feedback_collection_enabled"`
@@ -188,8 +190,6 @@ unknown organizations and organizations outside the hierarchy return 404.
       - `"connector_tools_default_always_allow"`
 
       - `"content_redaction_enabled"`
-
-      - `"cowork_trusted_devices_required"`
 
       - `"desktop_extension_allowlist_enabled"`
 

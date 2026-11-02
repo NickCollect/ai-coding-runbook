@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-reference
-fetched_at: 2026-10-26T05:40:05.132525+00:00
+fetched_at: 2026-11-02T07:00:29.817458+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,8 +12,28 @@ featureMetadata:
   topic:
     title: Managed Agents
     url: https://platform.claude.com/docs/en/managed-agents/overview
-  status: beta
   betaHeader: managed-agents-2026-04-01
+  zdr:
+    eligibility: not-eligible
+    note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
 ---
 
 This page documents the pre-built workers that serve a `self_hosted` environment. For task-oriented guides, start with [Self-hosted sandboxes](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes) and [Deploy self-hosted workers](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-workers).
@@ -22,17 +42,17 @@ This page documents the pre-built workers that serve a `self_hosted` environment
 
 | Command                | Description                                                                                                                                      |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ant beta:worker poll` | Claims work items from the environment's queue and runs each session in process. With `--on-work`, calls your script for each work item instead. |
+| `ant beta:worker poll` | Claims work items from the environment’s queue and runs each session in process. With `--on-work`, calls your script for each work item instead. |
 | `ant beta:worker run`  | Handles one claimed session and exits. Use it as the entrypoint of a per-session sandbox.                                                        |
 
-| Flag                | Description                                                                                                                                                                                         |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--environment-id`  | The environment to poll for work. Also reads from `ANTHROPIC_ENVIRONMENT_ID`.                                                                                                                       |
-| `--environment-key` | Authenticates the worker with this environment. Also reads from `ANTHROPIC_ENVIRONMENT_KEY`.                                                                                                        |
-| `--workdir`         | Directory where skills are downloaded and tools read and write files. Defaults to `.` (the current directory).                                                                                      |
-| `--on-work`         | Script to call for each claimed work item instead of running tools in-process. Receives session details as environment variables and the work item as JSON on standard input.                       |
-| `--max-idle`        | How long to wait after the session goes idle with an `end_turn` [stop reason](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons) before shutting down. Defaults to `60s`. |
-| `--log-format`      | Log output format. Use `json` for structured log ingestion. Defaults to `text`.                                                                                                                     |
+| Flag                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--environment-id`  | The environment to poll for work. Also reads from `ANTHROPIC_ENVIRONMENT_ID`.                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `--environment-key` | Authenticates the worker with this environment. Also reads from `ANTHROPIC_ENVIRONMENT_KEY`.                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `--workdir`         | Directory where skills are downloaded and tools read and write files. Defaults to `.` (the current directory).                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `--on-work`         | Script to call for each claimed work item instead of running tools in-process. Receives session details as environment variables and the work item as JSON on standard input.                                                                                                                                                                                                                                                                                                                                                             |
+| `--max-idle`        | How long the worker waits while a session is idle before `ant beta:worker run` exits or `ant beta:worker poll` moves on to the next work item. Idle time with a [`requires_action` stop reason](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#respond-when-the-session-goes-idle) does not count. Defaults to `60s`. Set it to `0` to turn off the timeout. With an `--on-work` script, `ant beta:worker poll` ignores this flag. Pass it instead to the `ant beta:worker run` command that your script starts. |
+| `--log-format`      | Log output format. Use `json` for structured log ingestion. Defaults to `text`.                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
 ## Environment variables
 
@@ -42,29 +62,31 @@ This page documents the pre-built workers that serve a `self_hosted` environment
 | `ANTHROPIC_ENVIRONMENT_KEY`     | Authenticates the worker to its queue.           | You, on the worker host. The poller passes it to the `--on-work` script.                                                                                                               |
 | `ANTHROPIC_SESSION_ID`          | The session that a claimed work item represents. | The poller, for the `--on-work` script.                                                                                                                                                |
 | `ANTHROPIC_WORK_ID`             | The claimed work item.                           | The poller, for the `--on-work` script.                                                                                                                                                |
-| `ANTHROPIC_WORK_SECRET`         | The work item's per-session secret.              | You. The poller does not set it. See [Forward the work item's secret](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-workers#forward-the-work-items-secret). |
+| `ANTHROPIC_WORK_SECRET`         | The work item’s per-session secret.              | You. The poller does not set it. See [Forward the work item’s secret](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-workers#forward-the-work-items-secret). |
 | `ANTHROPIC_BASE_URL`            | Overrides the default API endpoint. Optional.    | You, on the worker host.                                                                                                                                                               |
 | `ANTHROPIC_WEBHOOK_SIGNING_KEY` | Verifies incoming webhook payloads.              | You, on a webhook handler host.                                                                                                                                                        |
 
 ## Host requirements
 
-| Worker             | Requirement                                                                                                              |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| All workers        | A Linux host with `/bin/bash` at that exact path. The worker's bash tool invokes it directly, without consulting `PATH`. |
-| TypeScript SDK     | `unzip` and `tar` on the `PATH`, and Node.js 22 or later.                                                                |
-| Python and Go SDKs | No additional binaries. These SDKs use their standard libraries for archive extraction.                                  |
+| Worker             | Requirement                                                                                                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| All workers        | A Linux or macOS host with `/bin/bash` at that exact path. The worker’s bash tool invokes it directly, without consulting `PATH`. On macOS, that is the system Bash 3.2. |
+| TypeScript SDK     | `unzip` and `tar` on the `PATH`, and Node.js 22 or later.                                                                                                                |
+| Python and Go SDKs | No additional binaries. These SDKs use their standard libraries for archive extraction.                                                                                  |
 
 [Memory stores](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory#requirements) add their own requirements.
+
+On macOS, the root volume is read-only, so `mkdir` can’t create `/workspace`. Set the worker’s working directory to one that you can write to, such as a `workspace` directory in your home directory. To use memory stores on macOS, first [prepare the macOS host](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory#prepare-a-macos-host).
 
 ## Sandbox filesystem
 
 | Path                       | Contents                                                                                                                                                                                                                                                                       |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `/workspace`               | The system default working directory for tool execution and skill download. If you use a different working directory, update your agent's system prompt so Claude can locate the skill files.                                                                                  |
-| `<workdir>/skills/<name>/` | The agent's downloaded skills.                                                                                                                                                                                                                                                 |
-| `/mnt/memory/<store>/`     | One directory per attached memory store, at the store's `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) (for example, `/mnt/memory/user-preferences/`). The worker creates these directories when it claims the session and removes them when the session ends. |
+| `/workspace`               | The system default working directory for tool execution and skill download. If you use a different working directory, update your agent’s system prompt so Claude can locate the skill files.                                                                                  |
+| `<workdir>/skills/<name>/` | The agent’s downloaded skills.                                                                                                                                                                                                                                                 |
+| `/mnt/memory/<store>/`     | One directory per attached memory store, at the store’s `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) (for example, `/mnt/memory/user-preferences/`). The worker creates these directories when it claims the session and removes them when the session ends. |
 
-On self-hosted environments the session's system prompt omits the `/mnt/session/outputs` instruction used on Anthropic-managed sandboxes. Final deliverables land wherever the agent writes them in your sandbox filesystem, typically under the working directory.
+On self-hosted environments the session’s system prompt omits the `/mnt/session/outputs` instruction used on Anthropic-managed sandboxes. Final deliverables land wherever the agent writes them in your sandbox filesystem, typically under the working directory.
 
 Skills can include executables that the agent may run directly. The CLI and SDK workers preserve the executable permissions recorded in the skill bundle when they extract it. If you implement skills download manually, you are responsible for setting executable permissions.
 
@@ -76,7 +98,7 @@ The Python, TypeScript, and Go SDKs provide three helpers at different levels of
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | [`EnvironmentWorker`](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-reference#environment-worker)                                                                                                                                      | Handles polling, setup, and execution end to end.                           | Most cases.                                                                                                        |
 | [`work.poller()` (go: `environments.NewWorkPoller()`)](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-reference#work-poller)                                                                                                            | Polls the work queue and gives you each claimed session.                    | You determine what happens for each session, for example launching a sandbox rather than running tools in-process. |
-| [`client.beta.sessions.events.tool_runner()` (typescript: `client.beta.sessions.events.toolRunner()`; go: `client.Beta.Sessions.Events.NewToolRunner()`)](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-reference#session-tool-runner) | Runs tool calls for a single session, given the session ID and a tool list. | You've already claimed the work and only need the execution layer.                                                 |
+| [`client.beta.sessions.events.tool_runner()` (typescript: `client.beta.sessions.events.toolRunner()`; go: `client.Beta.Sessions.Events.NewToolRunner()`)](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-reference#session-tool-runner) | Runs tool calls for a single session, given the session ID and a tool list. | You’ve already claimed the work and only need the execution layer.                                                 |
 
 ### EnvironmentWorker
 
@@ -87,7 +109,7 @@ The Python, TypeScript, and Go SDKs provide three helpers at different levels of
 
 | Option                                                                                 | Description                                                                                                                                                                                            |
 | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `tools` (go: `ToolsFunc`)                                                              | A factory that receives the session's `AgentToolContext` and returns the tool list. Defaults to the standard agent toolset.                                                                            |
+| `tools` (go: `ToolsFunc`)                                                              | A factory that receives the session’s `AgentToolContext` and returns the tool list. Defaults to the standard agent toolset.                                                                            |
 | `memory_sync_interval` (typescript: `memorySyncIntervalMs`; go: `MemorySyncInterval`)  | How often attached memory stores reconcile with the server while the session runs. See [Sync interval](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory#sync-interval). |
 | `memory_sync_deletions` (typescript: `memorySyncDeletions`; go: `MemorySyncDeletions`) | Whether files the agent deletes locally are also deleted from the store. See [Deletions](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory#deletions).                   |
 
@@ -108,7 +130,7 @@ The Python, TypeScript, and Go SDKs provide three helpers at different levels of
   ```
 
   <CodeGroupItem language="C#">
-    The C# SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#return-a-custom-tool-result).
+    The C# SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session’s event stream, as in [Return a custom tool result](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#return-a-custom-tool-result).
   </CodeGroupItem>
 
   ```go Go
@@ -122,15 +144,15 @@ The Python, TypeScript, and Go SDKs provide three helpers at different levels of
   ```
 
   <CodeGroupItem language="Java">
-    The Java SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#return-a-custom-tool-result).
+    The Java SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session’s event stream, as in [Return a custom tool result](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#return-a-custom-tool-result).
   </CodeGroupItem>
 
   <CodeGroupItem language="PHP">
-    The PHP SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#return-a-custom-tool-result).
+    The PHP SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session’s event stream, as in [Return a custom tool result](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#return-a-custom-tool-result).
   </CodeGroupItem>
 
   <CodeGroupItem language="Ruby">
-    The Ruby SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session's event stream, as in [Return a custom tool result](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#return-a-custom-tool-result).
+    The Ruby SDK does not have `EnvironmentWorker`. To answer custom tool calls from your own code, send each result on the session’s event stream, as in [Return a custom tool result](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#return-a-custom-tool-result).
   </CodeGroupItem>
 </CodeGroup>
 
@@ -202,14 +224,14 @@ For a complete example, see [Launch sandboxes from the SDK poller](https://platf
 
 ### AgentToolContext and the agent toolset
 
-`AgentToolContext` is the execution context for tool calls. It defines the working directory and path policy, and can download the session's skills.
+`AgentToolContext` is the execution context for tool calls. It defines the working directory and path policy, and can download the session’s skills.
 
 | Option                                                               | Description                                                                                                                 |
 | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `allowed_roots` (typescript: `allowedRoots`; go: `AllowedRoots`)     | Directories, in addition to the working directory, that the file tools (`read`, `write`, `edit`, `glob`, `grep`) can reach. |
 | `read_only_roots` (typescript: `readOnlyRoots`; go: `ReadOnlyRoots`) | Directories under which `write` and `edit` refuse paths.                                                                    |
 
-`EnvironmentWorker` adds the session's memory store directories to `allowed_roots` (typescript: `allowedRoots`; go: `AllowedRoots`) itself, and the directories of stores attached with `access: "read_only"` to `read_only_roots` (typescript: `readOnlyRoots`; go: `ReadOnlyRoots`).
+`EnvironmentWorker` adds the session’s memory store directories to `allowed_roots` (typescript: `allowedRoots`; go: `AllowedRoots`) itself, and the directories of stores attached with `access: "read_only"` to `read_only_roots` (typescript: `readOnlyRoots`; go: `ReadOnlyRoots`).
 
 The confinement is a guardrail for the file tools only, not a sandbox. It does not constrain `bash`.
 

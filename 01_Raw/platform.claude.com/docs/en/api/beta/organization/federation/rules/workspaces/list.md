@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces/list
-fetched_at: 2026-10-26T05:40:32.469295+00:00
+fetched_at: 2026-11-02T07:00:47.012125+00:00
 fetch_method: mintlify_md
 ---
 
@@ -158,6 +158,12 @@ rules with `applies_to_all_workspaces` or a legacy single
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ## Returns
 

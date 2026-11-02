@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/analytics/usage_report/list
-fetched_at: 2026-10-26T05:40:36.325632+00:00
+fetched_at: 2026-11-02T07:00:50.142579+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,12 +13,11 @@ url: https://platform.claude.com/docs/en/api/beta/organization/analytics/usage_r
 
 **GET** `/v1/organizations/analytics/usage_report`
 
-Get token usage over time across a date range.
+[Legacy] Get token usage over time across a date range.
 
-Returns token usage bucketed by minute, hour, or day, optionally broken
-down by product, model, context window, inference region, or speed.
-Available to organizations on a Claude Enterprise plan. Requires an API
-key with the `read:analytics` scope.
+Returns token usage bucketed by minute, hour, or day, optionally broken down by one or more `group_by[]` dimensions, such as product or model. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+
+This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/usage`](https://platform.claude.com/docs/en/api/beta/organization/analytics/usage/list?sdk_languages=http) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api?sdk_languages=http#migrate-from-enterprise-analytics-reports).
 
 ## Query parameters
 

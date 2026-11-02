@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/plugins/retrieve
-fetched_at: 2026-10-26T05:40:37.985772+00:00
+fetched_at: 2026-11-02T07:00:51.357199+00:00
 fetch_method: mintlify_md
 ---
 
@@ -142,6 +142,12 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 ## Returns
 
@@ -375,7 +381,7 @@ curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID \
   "created_by": {
     "email_address": "user@example.com",
     "type": "user_actor",
-    "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"
+    "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu"
   },
   "description": "Reviews pull requests against your team's conventions.",
   "display_name": "Code Review Helper",

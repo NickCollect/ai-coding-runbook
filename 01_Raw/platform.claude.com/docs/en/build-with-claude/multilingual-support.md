@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/multilingual-support
-fetched_at: 2026-10-26T05:39:58.587379+00:00
+fetched_at: 2026-11-02T07:00:25.929734+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,6 +8,33 @@ fetch_method: mintlify_md
 title: Multilingual support
 url: https://platform.claude.com/docs/en/build-with-claude/multilingual-support
 description: Claude excels at tasks across multiple languages, maintaining strong cross-lingual performance relative to English.
+featureMetadata:
+  status: stable
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: stable
+    Claude Platform on AWS: stable
+    Amazon Bedrock: stable
+    Amazon Bedrock (InvokeModel): stable
+    Claude Models on Google Cloud (Google managed): stable
+    Microsoft Foundry: stable
 ---
 
 ## Overview
@@ -20,28 +47,28 @@ Claude is capable in many languages beyond those benchmarked in the following ta
 
 The following table shows zero-shot chain-of-thought evaluation scores for Claude models across languages, expressed as a percentage relative to English performance (100%):
 
-| Language                          | Claude Sonnet 4.5 (deprecated)1 | Claude Haiku 4.51 |
-| --------------------------------- | ------------------------------- | ----------------- |
-| English (baseline, fixed to 100%) | 100%                            | 100%              |
-| Spanish                           | 98.2%                           | 96.4%             |
-| Portuguese (Brazil)               | 97.8%                           | 96.1%             |
-| Italian                           | 97.9%                           | 96.0%             |
-| French                            | 97.5%                           | 95.7%             |
-| Indonesian                        | 97.3%                           | 94.2%             |
-| German                            | 97.0%                           | 94.3%             |
-| Arabic                            | 97.2%                           | 92.5%             |
-| Chinese (Simplified)              | 96.9%                           | 94.2%             |
-| Korean                            | 96.7%                           | 93.3%             |
-| Japanese                          | 96.8%                           | 93.5%             |
-| Hindi                             | 96.7%                           | 92.4%             |
-| Bengali                           | 95.4%                           | 90.4%             |
-| Swahili                           | 91.1%                           | 78.3%             |
-| Yoruba                            | 79.7%                           | 52.7%             |
+| Language                          | Claude Sonnet 4.5 (deprecated)<sup>1</sup> | Claude Haiku 4.5<sup>1</sup> |
+| --------------------------------- | ------------------------------------------ | ---------------------------- |
+| English (baseline, fixed to 100%) | 100%                                       | 100%                         |
+| Spanish                           | 98.2%                                      | 96.4%                        |
+| Portuguese (Brazil)               | 97.8%                                      | 96.1%                        |
+| Italian                           | 97.9%                                      | 96.0%                        |
+| French                            | 97.5%                                      | 95.7%                        |
+| Indonesian                        | 97.3%                                      | 94.2%                        |
+| German                            | 97.0%                                      | 94.3%                        |
+| Arabic                            | 97.2%                                      | 92.5%                        |
+| Chinese (Simplified)              | 96.9%                                      | 94.2%                        |
+| Korean                            | 96.7%                                      | 93.3%                        |
+| Japanese                          | 96.8%                                      | 93.5%                        |
+| Hindi                             | 96.7%                                      | 92.4%                        |
+| Bengali                           | 95.4%                                      | 90.4%                        |
+| Swahili                           | 91.1%                                      | 78.3%                        |
+| Yoruba                            | 79.7%                                      | 52.7%                        |
 
-1 With [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking).
+<sup>1</sup> With [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking).
 
 <Note>
-  These metrics are based on [MMLU (Massive Multitask Language Understanding)](https://en.wikipedia.org/wiki/MMLU) English test sets that were translated into 14 additional languages by professional human translators, as documented in [OpenAI's simple-evals repository](https://github.com/openai/simple-evals/blob/main/multilingual_mmlu_benchmark_results.md). The use of human translators for this evaluation ensures high-quality translations, particularly important for languages with fewer digital resources.
+  These metrics are based on [MMLU (Massive Multitask Language Understanding)](https://en.wikipedia.org/wiki/MMLU) English test sets that were translated into 14 additional languages by professional human translators, as documented in [OpenAI’s simple-evals repository](https://github.com/openai/simple-evals/blob/main/multilingual_mmlu_benchmark_results.md). The use of human translators for this evaluation ensures high-quality translations, particularly important for languages with fewer digital resources.
 </Note>
 
 ***
@@ -179,7 +206,7 @@ Claude infers the response language from the conversation, but for production ap
   ```
 </CodeGroup>
 
-If your application lets users pick a language at runtime, interpolate that choice into the system prompt rather than relying on Claude to infer it from the user's message. To translate between two specific languages, name both: `Translate the user's message from German to Korean. Respond with only the translation.`
+If your application lets users pick a language at runtime, interpolate that choice into the system prompt rather than relying on Claude to infer it from the user’s message. To translate between two specific languages, name both: `Translate the user's message from German to Korean. Respond with only the translation.`
 
 ***
 
@@ -187,7 +214,7 @@ If your application lets users pick a language at runtime, interpolate that choi
 
 When working with multilingual content:
 
-1. **Provide clear language context:** Although Claude can detect the target language automatically, explicitly stating the input and output languages you want improves reliability. For enhanced fluency, you can prompt Claude to use "idiomatic speech as if it were a native speaker."
+1. **Provide clear language context:** Although Claude can detect the target language automatically, explicitly stating the input and output languages you want improves reliability. For enhanced fluency, you can prompt Claude to use “idiomatic speech as if it were a native speaker.”
 2. **Use native scripts:** Submit text in its native script rather than transliteration for optimal results.
 3. **Consider cultural context:** Effective communication often requires cultural and regional awareness beyond pure translation.
 
@@ -220,3 +247,25 @@ Also follow the general guidance in [Prompt engineering overview](https://platfo
     Evaluate translation and localization quality before you ship.
   </Card>
 </CardGroup>
+
+## Availability
+
+Multilingual support is available on every model.
+
+### API support
+
+#### [Messages API](https://platform.claude.com/docs/en/build-with-claude/working-with-messages)
+
+* Availability: Always on
+
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (InvokeModel)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
+
+#### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
+
+* Availability: Always on
+
+| Status    | Cloud platforms                                                                                                    |
+| --------- | ------------------------------------------------------------------------------------------------------------------ |
+| Available | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws) |

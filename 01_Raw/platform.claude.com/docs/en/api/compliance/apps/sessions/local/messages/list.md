@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/sessions/local/messages/list
-fetched_at: 2026-10-19T05:33:04.475047+00:00
+fetched_at: 2026-11-02T07:00:55.666496+00:00
 fetch_method: mintlify_md
 ---
 
@@ -342,7 +342,7 @@ curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_
     "type": "compliance_local_session",
     "updated_at": "2025-03-12T18:22:41.123456Z",
     "user": {
-      "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+      "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "email_address": "jane.doe@example.com"
     },
     "workspace_id": "wrkspc_01SvYKoWVRVHoEbwESNvzYdR"

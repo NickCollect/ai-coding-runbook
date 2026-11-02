@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/count_tokens
-fetched_at: 2026-10-26T05:40:16.630549+00:00
+fetched_at: 2026-11-02T07:00:36.799911+00:00
 fetch_method: mintlify_md
 ---
 
@@ -860,7 +860,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
             - `EncryptedCodeExecutionResultBlockParam object`
 
-              Code execution result with encrypted stdout for PFC + web_search results.
+              The output and exit code of Python code that Claude ran with the code execution tool, with standard output in encrypted form, sent back in a later request.
 
               - `type: "encrypted_code_execution_result"`
 
@@ -1569,7 +1569,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `CodeExecutionTool20260120 object`
 
-    Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
+    A `tools` entry for the code execution tool, version `code_execution_20260120`. It adds REPL state persistence to version `code_execution_20250825`.
+
+    REPL state persistence applies with programmatic tool calling. With it, the Python interpreter state, such as variable bindings, persists across requests that reuse the container.
+
+    See the [code execution tool guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool?sdk_languages=http#tool-versions) to learn what each tool version adds.
 
     - `type: "code_execution_20260120"`
 

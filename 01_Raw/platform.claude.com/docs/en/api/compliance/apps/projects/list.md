@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/list
-fetched_at: 2026-10-12T06:50:11.144860+00:00
+fetched_at: 2026-11-02T07:00:55.055587+00:00
 fetch_method: mintlify_md
 ---
 
@@ -120,6 +120,10 @@ are sorted chronologically (time ascending) by created_at.
 
     format: date-time
 
+  - `href: string or null`
+
+    URL to view this project in claude.ai
+
   - `is_private: boolean`
 
     If false, the project is visible to all organization members; if true the project is accessible only to the creator and specified collaborators
@@ -188,7 +192,8 @@ curl https://api.anthropic.com/v1/compliance/apps/projects \
       "user": {
         "id": "user_xyz456",
         "email_address": "user@example.com"
-      }
+      },
+      "href": "https://claude.ai/project/abcdef01-2345-6789-abcd-ef0123456789"
     }
   ],
   "has_more": true,

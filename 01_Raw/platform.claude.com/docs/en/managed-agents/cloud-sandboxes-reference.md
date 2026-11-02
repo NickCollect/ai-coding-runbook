@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/cloud-sandboxes-reference
-fetched_at: 2026-10-26T05:40:04.904764+00:00
+fetched_at: 2026-11-02T07:00:29.406959+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,8 +12,28 @@ featureMetadata:
   topic:
     title: Managed Agents
     url: https://platform.claude.com/docs/en/managed-agents/overview
-  status: beta
   betaHeader: managed-agents-2026-04-01
+  zdr:
+    eligibility: not-eligible
+    note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
 ---
 
 Cloud sandboxes run as isolated Linux containers on Anthropic-managed infrastructure. They come pre-installed with a comprehensive set of programming languages, databases, and utilities. The agent can use these immediately without any installation steps.
@@ -41,7 +61,7 @@ Common Python data and document libraries, including NumPy, pandas, Matplotlib, 
 | ------------- | ----------------------------------------------------------------------------- |
 | PostgreSQL 16 | Server and `psql` client are installed. The server is not running by default. |
 | Redis 7       | Server and `redis-cli` are installed. The server is not running by default.   |
-| SQLite        | Available through language bindings, such as Python's `sqlite3` module.       |
+| SQLite        | Available through language bindings, such as Python’s `sqlite3` module.       |
 
 ## Utilities
 

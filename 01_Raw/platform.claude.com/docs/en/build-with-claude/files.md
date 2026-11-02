@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/files
-fetched_at: 2026-10-26T05:40:02.577225+00:00
+fetched_at: 2026-11-02T07:00:28.042518+00:00
 fetch_method: mintlify_md
 ---
 
@@ -9,35 +9,59 @@ title: Files API
 url: https://platform.claude.com/docs/en/build-with-claude/files
 description: Upload files once, reference them by file_id in Messages requests, and download outputs created by skills or the code execution tool.
 featureMetadata:
-  status: ga
-  zdr: not-eligible
+  status: stable
+  zdr:
+    eligibility: not-eligible
+    note: Files retained until explicitly deleted or they reach their configured expiration.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
   supportedPlatforms:
-    Claude API: ga
-    Claude Platform on AWS: ga
-    Microsoft Foundry:
-      availability: ga
-      note: On [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry), the Files API requires a [Hosted on Anthropic deployment](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry#additional-features-not-supported-when-hosted-on-azure).
+    Claude API: stable
+    Claude Platform on AWS: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
+    Microsoft Foundry (hosted on Anthropic): stable
 ---
+
+**API support**: Usage differs by product.
+
+* **Messages API**: Refer to an uploaded file by its `file_id` in a `document`, `image` or `container_upload` block.
+* **Managed Agents**: Mount files in the session’s sandbox, or refer to a `file_id` in a `user.message` event.
 
 The Files API lets you upload and manage files to use with the Claude API without re-uploading content with each request. This is particularly useful when using the [code execution tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool) to provide inputs (for example, datasets and documents) and then download outputs (for example, charts). You can [explore the API reference directly](https://platform.claude.com/docs/en/api/files/upload), in addition to this guide.
 
 ## File type support
 
-Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](https://platform.claude.com/docs/en/build-with-claude/vision) are supported on all current Claude models. For [PDFs](https://platform.claude.com/docs/en/build-with-claude/pdf-support) and [other file types with the code execution tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#compatibility), see the linked pages for model support.
+Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](https://platform.claude.com/docs/en/build-with-claude/vision) are supported on all current Claude models. For [PDFs](https://platform.claude.com/docs/en/build-with-claude/pdf-support) and [other file types with the code execution tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#availability-feature-support), see the linked pages for model support.
 
 ## How the Files API works
 
 The Files API provides a create-once, use-many-times approach for working with files:
 
-* **Upload files** to Anthropic's secure storage and receive a unique `file_id`
+* **Upload files** to Anthropic’s secure storage and receive a unique `file_id`
 * **Download files** that are created by skills or the code execution tool
 * **Reference files** in [Messages](https://platform.claude.com/docs/en/api/messages/create) requests using the `file_id` instead of re-uploading content
 * **Manage your files** with list, retrieve, and delete operations
 
-<Warning id="workspace-scoped-access">
-  **Uploaded files are accessible to your entire workspace, not scoped to an end user, conversation, or session.** Any API key with access to a workspace can access any files uploaded to that workspace. Every service account, and every user whose organization role allows API access, can use the Default Workspace in addition to any workspace you add them to, so keep files that must stay separate in their own workspace and access them only with [keys scoped to that workspace](https://platform.claude.com/docs/en/manage-claude/workspaces#api-keys-and-resource-scoping). Never accept `file_id` values from end users or other untrusted sources: a user-supplied file ID would let one user of your application read content that another user uploaded. Treat file IDs as server-side references, and keep the mapping between your users and their files in your application.
+<Warning id="workspace-scoped-access" title="Uploaded files are accessible to your entire workspace">
+  Files are not scoped to an end user, conversation, or session. Any API key with access to a workspace can access any files uploaded to that workspace. Every service account, and every user whose organization role allows API access, can use the Default Workspace in addition to any workspace you add them to, so keep files that must stay separate in their own workspace and access them only with [keys scoped to that workspace](https://platform.claude.com/docs/en/manage-claude/workspaces#api-keys-and-resource-scoping). Never accept `file_id` values from end users or other untrusted sources: a user-supplied file ID would let one user of your application read content that another user uploaded. Treat file IDs as server-side references, and keep the mapping between your users and their files in your application.
 
-  If you are building a multitenant application on the Files API, create a separate [workspace](https://platform.claude.com/docs/en/manage-claude/workspaces) for each tenant. The workspace is the isolation boundary for files, so a workspace for each tenant gives that tenant's data hard isolation from every other tenant. Each organization can have up to 100 workspaces; contact your account team if you need more.
+  If you are building a multitenant application on the Files API, create a separate [workspace](https://platform.claude.com/docs/en/manage-claude/workspaces) for each tenant. The workspace is the isolation boundary for files, so a workspace for each tenant gives that tenant’s data hard isolation from every other tenant. Each organization can have up to 100 workspaces; contact your account team if you need more.
 </Warning>
 
 ## How to use the Files API
@@ -162,7 +186,11 @@ The response from uploading a file includes:
 }
 ```
 
-`downloadable` is `false` for files you upload. Only files created by [skills](https://platform.claude.com/docs/en/build-with-claude/skills-guide) or the [code execution tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool) can be downloaded. See [Downloading a file](https://platform.claude.com/docs/en/build-with-claude/files#downloading-a-file).
+[`downloadable`](https://platform.claude.com/docs/en/api/files#file_metadata.downloadable) is `false` for files you upload. Only files created by [skills](https://platform.claude.com/docs/en/build-with-claude/skills-guide) or the [code execution tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool) can be downloaded. See [Downloading a file](https://platform.claude.com/docs/en/build-with-claude/files#downloading-a-file).
+
+The API reference describes every field of the file object.
+
+(See `file_metadata` on `files` in [the API reference](https://platform.claude.com/docs/en/api/files#file_metadata).)
 
 ### Using a file in messages
 
@@ -432,7 +460,7 @@ To [send a file to the code execution tool](https://platform.claude.com/docs/en/
 
 ### Working with other file formats
 
-For file types that the `document` block doesn't support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in your message. Files that are already plain text, such as .csv and .md files, can either be read in this way or uploaded through the Files API with an explicit `text/plain` content type. To analyze datasets instead of reading them as text, upload them for the code execution tool using a `container_upload` block (see [Upload and analyze your own files](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#upload-and-analyze-your-own-files)).
+For file types that the `document` block doesn’t support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in your message. Files that are already plain text, such as .csv and .md files, can either be read in this way or uploaded through the Files API with an explicit `text/plain` content type. To analyze datasets instead of reading them as text, upload them for the code execution tool using a `container_upload` block (see [Upload and analyze your own files](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#upload-and-analyze-your-own-files)).
 
 The following examples read a text file and send its contents as plain text:
 
@@ -674,7 +702,7 @@ The following examples read a text file and send its contents as plain text:
 
 #### List files
 
-Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to `limit` files (20 by default, and at most 1,000), and the response's `next_page` cursor fetches the next page when passed back as the `page` parameter. Files are ordered newest first. See the [List Files API reference](https://platform.claude.com/docs/en/api/files/list). The SDK returns the first page and provides [auto-pagination](https://platform.claude.com/docs/en/api/overview#pagination) helpers.
+Retrieve a list of your uploaded files. The endpoint is paginated: each request returns up to [`limit`](https://platform.claude.com/docs/en/api/files/list#list.limit) files (20 by default, and at most 1,000), and the response’s [`next_page`](https://platform.claude.com/docs/en/api/files/list#list.response.next_page) cursor fetches the next page when passed back as the [`page`](https://platform.claude.com/docs/en/api/files/list#list.page) parameter. Files are ordered newest first. See the [List Files API reference](https://platform.claude.com/docs/en/api/files/list). The SDK returns the first page and provides [auto-pagination](https://platform.claude.com/docs/en/api/overview#pagination) helpers.
 
 <CodeGroup>
   ```bash cURL
@@ -941,15 +969,15 @@ On the Claude API, supported image, video, and audio files that Claude produces 
 ### File lifecycle
 
 * Files are scoped to the workspace they were uploaded in. Any request in the same workspace can reference them; never accept file IDs from untrusted sources (see the [workspace access warning](https://platform.claude.com/docs/en/build-with-claude/files#workspace-scoped-access)).
-* Files cannot be modified or renamed after upload. To change a file's content, upload a new file and delete the old one.
+* Files cannot be modified or renamed after upload. To change a file’s content, upload a new file and delete the old one.
 * Files persist until you delete them with the `DELETE /v1/files/{file_id}` endpoint or they reach their `expires_at`.
 * Deleted files cannot be recovered.
 * Files are inaccessible through the API shortly after deletion, but they may persist in active Messages API calls and associated tool uses.
-* Files that users delete will be deleted in accordance with Anthropic's [data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data). For ZDR eligibility across all features, see [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention).
+* Files that users delete will be deleted in accordance with Anthropic’s [data retention policy](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data).
 
 ### File expiration
 
-To have a file expire automatically, include an `expires_in_seconds` form field when you upload it. The value is an integer number of seconds between 3,600 (1 hour) and 7,776,000 (90 days). The resulting `expires_at` timestamp (RFC 3339) appears on every file response and is `null` for files uploaded without an expiration. Expiration is set once at upload and cannot be changed.
+To have a file expire automatically, include an [`expires_in_seconds`](https://platform.claude.com/docs/en/api/files/upload#upload.expires_in_seconds) form field when you upload it. The value is an integer number of seconds between 3,600 (1 hour) and 7,776,000 (90 days). The resulting [`expires_at`](https://platform.claude.com/docs/en/api/files#file_metadata.expires_at) timestamp (RFC 3339) appears on every file response and is `null` for files uploaded without an expiration. Expiration is set once at upload and cannot be changed.
 
 When a file reaches its `expires_at`:
 
@@ -995,11 +1023,11 @@ Requests that carry `anthropic-beta: managed-agents-2026-04-01` without `files-a
 
 Common errors when using the Files API include:
 
-* **File not found (404):** The specified `file_id` doesn't exist or you don't have access to it.
-* **Invalid file type (400):** The file type doesn't match the content block type (for example, using an image file in a document block).
+* **File not found (404):** The specified `file_id` doesn’t exist or you don’t have access to it.
+* **Invalid file type (400):** The file type doesn’t match the content block type (for example, using an image file in a document block).
 * **Not downloadable (400):** Files you upload have `"downloadable": false` and cannot be downloaded. Only files created by skills or the code execution tool can be downloaded.
 * **Exceeds context window size (400):** The file is larger than the context window size (for example, using a 500 MB plain text file in a `/v1/messages` request).
-* **Invalid file name (400):** The file name doesn't meet the length requirements (1–255 characters) or contains forbidden characters (`<`, `>`, `:`, `"`, `|`, `?`, `*`, `\`, `/`, or Unicode characters 0–31).
+* **Invalid file name (400):** The file name doesn’t meet the length requirements (1–255 characters) or contains forbidden characters (`<`, `>`, `:`, `"`, `|`, `?`, `*`, `\`, `/`, or Unicode characters 0–31).
 * **File too large (413):** The file exceeds the 500 MB limit.
 * **Storage limit exceeded (400):** Your organization has reached the 1 TB storage limit.
 
@@ -1045,3 +1073,40 @@ File-related API calls are limited to approximately 500 requests per minute. To 
     Process and analyze visual input and generate text and code from images.
   </Card>
 </CardGroup>
+
+## Availability
+
+The Files API is available on every model.
+
+### API support
+
+#### [Messages API](https://platform.claude.com/docs/en/build-with-claude/working-with-messages)
+
+* Availability: Available
+* Usage: Refer to an uploaded file by its `file_id` in a `document`, `image` or `container_upload` block.
+
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                              |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed), [Microsoft Foundry (hosted on Anthropic)](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
+
+#### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
+
+* Availability: Available
+* Usage: Mount uploaded files in the session’s sandbox as session resources (read-only, under `/mnt/session/uploads`), or refer to a `file_id` in an `image` or `document` block of a `user.message` event. Files the agent writes to `/mnt/session/outputs/` can be downloaded with the Files API.
+
+| Status    | Cloud platforms         |
+| --------- | ----------------------- |
+| Available | All supported platforms |
+
+### Data handling
+
+[Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                                         | HIPAA        |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| Status  | Not eligible                                                                                                                                                                | Not eligible |
+| Details | Files retained until explicitly deleted or they reach their configured expiration. [Learn more](https://platform.claude.com/docs/en/build-with-claude/files#data-retention) | —            |
+
+Applicable endpoints:
+
+* `/v1/files`

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/ruby
-fetched_at: 2026-10-26T05:40:15.349490+00:00
+fetched_at: 2026-11-02T07:00:35.961513+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/ruby
 description: Install and configure the Anthropic Ruby SDK with Sorbet types, streaming helpers, and connection pooling
 ---
 
-The Anthropic Ruby library provides convenient access to the Claude API from any Ruby 3.2.0+ application. It ships with comprehensive types and docstrings in YARD, RBS, and RBI. The standard library's `net/http` is used as the HTTP transport, with connection pooling through the `connection_pool` gem.
+The Anthropic Ruby library provides convenient access to the Claude API from any Ruby 3.2.0+ application. It ships with comprehensive types and docstrings in YARD, RBS, and RBI. The standard library’s `net/http` is used as the HTTP transport, with connection pooling through the `connection_pool` gem.
 
 <Info>
   For API feature documentation with code examples, see the [API reference](https://platform.claude.com/docs/en/api/overview). This page covers Ruby-specific SDK features and configuration.
@@ -18,7 +18,7 @@ The Anthropic Ruby library provides convenient access to the Claude API from any
 
 ## Installation
 
-Add the gem to your application's `Gemfile` with Bundler:
+Add the gem to your application’s `Gemfile` with Bundler:
 
 ```bash
 bundle add anthropic
@@ -46,7 +46,7 @@ message.content.each do |block|
 end
 ```
 
-For authentication options including Workload Identity Federation, see [Authentication](https://platform.claude.com/docs/en/manage-claude/authentication). If your API key is a [personal or service account key](https://platform.claude.com/docs/en/manage-claude/authentication#key-types) that isn't scoped to a workspace, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](https://platform.claude.com/docs/en/manage-claude/authentication#select-a-workspace) shows the per-request option for this SDK.
+For authentication options including Workload Identity Federation, see [Authentication](https://platform.claude.com/docs/en/manage-claude/authentication). If your API key is a [personal or service account key](https://platform.claude.com/docs/en/manage-claude/authentication#key-types) that isn’t scoped to a workspace, set the workspace ID in the `anthropic-workspace-id` request header; [Select a workspace](https://platform.claude.com/docs/en/manage-claude/authentication#select-a-workspace) shows the per-request option for this SDK.
 
 ## Streaming
 
@@ -255,7 +255,7 @@ file_metadata = anthropic.files.upload(file: file)
 puts(file_metadata.id)
 ```
 
-Note that you can also pass a raw `IO` descriptor, but this disables retries, as the library can't determine whether the descriptor is a file or pipe (which cannot be rewound).
+Note that you can also pass a raw `IO` descriptor, but this disables retries, as the library can’t determine whether the descriptor is a file or pipe (which cannot be rewound).
 
 ## Sorbet
 
@@ -294,7 +294,7 @@ anthropic.messages.create(**params)
 
 ### Enums
 
-Because this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, the SDK provides "tagged symbols," which are always primitives at runtime:
+Because this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, the SDK provides “tagged symbols,” which are always primitives at runtime:
 
 ```ruby
 # :auto
@@ -304,7 +304,7 @@ puts(Anthropic::MessageCreateParams::ServiceTier::AUTO)
 T.reveal_type(Anthropic::MessageCreateParams::ServiceTier::AUTO)
 ```
 
-Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
+Enum parameters have a “relaxed” type, so you can either pass in enum constants or their literal value:
 
 ```ruby
 anthropic = Anthropic::Client.new

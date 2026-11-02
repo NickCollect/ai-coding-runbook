@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/compliance_settings
-fetched_at: 2026-10-26T05:40:22.336695+00:00
+fetched_at: 2026-11-02T07:00:40.578084+00:00
 fetch_method: mintlify_md
 ---
 
@@ -81,7 +81,10 @@ Update your organization's Compliance Settings.
 
 Setting `state` to `enabled` turns on the Compliance API and begins
 capturing organization activity events. Setting it to `disabled` turns
-both off. `state` reflects whether the Compliance API is enabled.
+both off. Access Transparency events are an exception: they are still
+captured while the Compliance API is disabled, and the Compliance API
+activity feed returns them once it is enabled again. `state` reflects
+whether the Compliance API is enabled.
 
 A request that sets `state` to its current value succeeds and leaves the
 resource unchanged. A `disabled` request stays in effect until a later

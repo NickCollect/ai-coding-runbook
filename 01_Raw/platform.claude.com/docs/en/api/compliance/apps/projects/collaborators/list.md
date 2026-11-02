@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/collaborators/list
-fetched_at: 2026-10-12T06:50:11.324915+00:00
+fetched_at: 2026-11-02T07:00:55.344234+00:00
 fetch_method: mintlify_md
 ---
 
@@ -50,11 +50,11 @@ role.
 
 ## Returns
 
-- `data: array of ComplianceProjectUserCollaborator or ComplianceProjectGroupCollaborator or ComplianceProjectOrganizationCollaborator or ComplianceProjectOrganizationRoleCollaborator`
+- `data: array of User or Group or Organization or OrganizationRole`
 
   List of collaborators sorted chronologically by granted_at, tie break by the underlying role-assignment UUID
 
-  - `ComplianceProjectUserCollaborator object`
+  - `User object`
 
     An individual user granted a role on a project.
 
@@ -86,7 +86,7 @@ role.
 
       Identifier of the user granted access (tagged ID), or null if their account has since been deleted
 
-  - `ComplianceProjectGroupCollaborator object`
+  - `Group object`
 
     An RBAC group granted a role on a project.
 
@@ -118,7 +118,7 @@ role.
 
       - `"viewer"`
 
-  - `ComplianceProjectOrganizationCollaborator object`
+  - `Organization object`
 
     An entire organization granted a role on a project.
 
@@ -150,7 +150,7 @@ role.
 
       - `"viewer"`
 
-  - `ComplianceProjectOrganizationRoleCollaborator object`
+  - `OrganizationRole object`
 
     All holders of an organization-level role granted a role on a project.
 

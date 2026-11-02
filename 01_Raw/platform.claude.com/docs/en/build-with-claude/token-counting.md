@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/token-counting
-fetched_at: 2026-10-26T05:40:01.881830+00:00
+fetched_at: 2026-11-02T07:00:27.699438+00:00
 fetch_method: mintlify_md
 ---
 
@@ -9,16 +9,35 @@ title: Token counting
 url: https://platform.claude.com/docs/en/build-with-claude/token-counting
 description: Count the tokens in a message before you send it to Claude. Use token counts to manage rate limits and costs, make model routing decisions, and fit prompts to a target length.
 featureMetadata:
-  status: ga
+  status: stable
   zdr:
     eligibility: eligible
-    note: Excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements).
+    note: Excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements). Count tokens before sending requests.
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
   supportedPlatforms:
-    Claude API: ga
-    Claude Platform on AWS: ga
-    Amazon Bedrock: ga
-    Claude Models on Google Cloud (Google managed): ga
-    Microsoft Foundry: ga
+    Claude API: stable
+    Claude Platform on AWS: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
+    Amazon Bedrock: stable
+    Amazon Bedrock (InvokeModel): stable
+    Claude Models on Google Cloud (Google managed): stable
+    Microsoft Foundry: stable
 ---
 
 Token counting lets you determine the number of tokens in a message before you send it to Claude. This helps you make informed decisions about your prompts and usage. With token counting, you can:
@@ -31,7 +50,9 @@ Token counting lets you determine the number of tokens in a message before you s
 
 ## How to count message tokens
 
-The [token counting](https://platform.claude.com/docs/en/api/messages/count_tokens) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), [images](https://platform.claude.com/docs/en/build-with-claude/vision), and [PDFs](https://platform.claude.com/docs/en/build-with-claude/pdf-support). The response contains the total number of input tokens.
+The [token counting](https://platform.claude.com/docs/en/api/messages/count_tokens) endpoint accepts the same structured list of inputs for creating a message, including support for system prompts, [tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), [images](https://platform.claude.com/docs/en/build-with-claude/vision), and [PDFs](https://platform.claude.com/docs/en/build-with-claude/pdf-support). The response contains the total number of [input tokens](https://platform.claude.com/docs/en/api/messages/count_tokens#message_tokens_count.input_tokens).
+
+(See the `messages/count_tokens` method in [the API reference](https://platform.claude.com/docs/en/api/messages/count_tokens).)
 
 This endpoint returns an `invalid_request_error` for a few inputs that the Messages API accepts:
 
@@ -39,7 +60,7 @@ This endpoint returns an `invalid_request_error` for a few inputs that the Messa
 * The [MCP connector](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector)
 * `image` or `document` blocks with a `url` or `file` source
 
-Send images and PDFs as base64 to count them. For requests that use server tools or MCP servers, the Messages API response reports the tokens used in its `usage` object.
+Send images and PDFs as base64 to count them. For requests that use server tools or MCP servers, the Messages API response reports the tokens used in its [`usage`](https://platform.claude.com/docs/en/api/messages/create#message.usage) object.
 
 <Note>
   The token count is an **estimate**. In some cases, the actual number of input tokens used when creating a message might differ by a small amount.
@@ -205,7 +226,7 @@ All [active models](https://platform.claude.com/docs/en/models/overview) support
 ### Count tokens in messages with tools
 
 <Note>
-  Token counting supports client tools and the [advisor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool). Requests that include other [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools) return an error. For the advisor tool, the count covers the executor's first sampling call only.
+  Token counting supports client tools and the [advisor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool). Requests that include other [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools) return an error. For the advisor tool, the count covers the executor’s first sampling call only.
 </Note>
 
 <CodeGroup>
@@ -1122,7 +1143,7 @@ An embedded image block that sets [`"oversized_image": "error"`](https://platfor
 ### Count tokens in messages with PDFs
 
 <Note>
-  Token counting supports base64-encoded PDFs with the same [PDF requirements](https://platform.claude.com/docs/en/build-with-claude/pdf-support#check-pdf-requirements) as the Messages API. This endpoint doesn't support `url` or `file` document sources.
+  Token counting supports base64-encoded PDFs with the same [PDF requirements](https://platform.claude.com/docs/en/build-with-claude/pdf-support#check-pdf-requirements) as the Messages API. This endpoint doesn’t support `url` or `file` document sources.
 </Note>
 
 <CodeGroup>
@@ -1412,7 +1433,7 @@ An embedded image block that sets [`"oversized_image": "error"`](https://platfor
 Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, and Claude Mythos 5 share the tokenizer introduced with Claude Opus 4.7. A prompt counts the same on all four, and roughly 30 percent higher than on models before Claude Opus 4.7 (the exact increase depends on the content). The token counting endpoint counts under the tokenizer of the `model` you pass. To measure the difference for your workload, count the same request twice, once with your current model and once with the model you plan to move to, and compare the two `input_tokens` values.
 
 <Note>
-  **Billing and migration:** Usage and billing on these models reflect this tokenizer's counts. When migrating from a model before Claude Opus 4.7, don't reuse token counts measured on the older model to estimate costs or context window fit. Count your prompts with the `model` ID you plan to use (for example, `"claude-fable-5-1"`).
+  **Billing and migration:** Usage and billing on these models reflect this tokenizer’s counts. When migrating from a model before Claude Opus 4.7, don’t reuse token counts measured on the older model to estimate costs or context window fit. Count your prompts with the `model` ID you plan to use (for example, `"claude-fable-5-1"`).
 </Note>
 
 ***
@@ -1451,7 +1472,7 @@ Token counting is **free to use** but subject to requests per minute rate limits
   </Card>
 
   <Card title="Context windows" icon="arrows-maximize" href="https://platform.claude.com/docs/en/build-with-claude/context-windows">
-    Use token counts to keep prompts within a model's context window.
+    Use token counts to keep prompts within a model’s context window.
   </Card>
 
   <Card title="Rate limits" icon="gauge" href="https://platform.claude.com/docs/en/api/rate-limits">
@@ -1462,3 +1483,34 @@ Token counting is **free to use** but subject to requests per minute rate limits
     Reduce cost and latency on repeated prompts by caching prompt prefixes.
   </Card>
 </CardGroup>
+
+## Availability
+
+Token counting is available on select models and eligible for zero data retention and HIPAA readiness.
+
+### API support
+
+#### [Messages API](https://platform.claude.com/docs/en/build-with-claude/working-with-messages)
+
+* Availability: Available
+
+| Status    | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available | [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), Claude Mythos Preview, [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview), [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview), [Claude Opus 4.5](https://platform.claude.com/docs/en/models/opus-4-5/overview) |
+
+#### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
+
+* Availability: Not available
+
+### Data handling
+
+[Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
+
+| Item    | Zero data retention                                                                                                                                       | HIPAA    |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Status  | Eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements)) | Eligible |
+| Details | Count tokens before sending requests.                                                                                                                     | —        |
+
+Applicable endpoints:
+
+* `/v1/messages/count_tokens`

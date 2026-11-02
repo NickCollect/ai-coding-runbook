@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/retrieve
-fetched_at: 2026-10-26T05:40:28.310733+00:00
+fetched_at: 2026-11-02T07:00:44.056747+00:00
 fetch_method: mintlify_md
 ---
 
@@ -138,6 +138,12 @@ Retrieve a Memory Store
   - `"telemetry-destinations-2026-08-11"`
 
   - `"webhooks-2026-10-07"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
 
 - `"anthropic-workspace-id": optional string`
 

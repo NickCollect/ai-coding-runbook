@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/citations
-fetched_at: 2026-10-26T05:39:58.303224+00:00
+fetched_at: 2026-11-02T07:00:25.768445+00:00
 fetch_method: mintlify_md
 ---
 
@@ -9,16 +9,35 @@ title: Citations
 url: https://platform.claude.com/docs/en/build-with-claude/citations
 description: Ground Claude's responses in your source documents. Citations return the exact passages that support each claim, so you can verify answers and surface sources to your users.
 featureMetadata:
-  status: ga
+  status: stable
   zdr:
     eligibility: eligible
     note: Excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements).
+  supportedModels:
+    - claude-fable-5-1
+    - claude-mythos-5-1
+    - claude-fable-5
+    - claude-mythos-5
+    - claude-mythos-preview
+    - claude-opus-5-5
+    - claude-opus-5
+    - claude-sonnet-5-5
+    - claude-sonnet-5
+    - claude-haiku-5-5
+    - claude-haiku-4-5-20251001
+    - claude-opus-4-8
+    - claude-opus-4-7
+    - claude-opus-4-6
+    - claude-sonnet-4-6
+    - claude-opus-4-5-20251101
+    - claude-sonnet-4-5-20250929
   supportedPlatforms:
-    Claude API: ga
-    Claude Platform on AWS: ga
-    Amazon Bedrock: ga
-    Claude Models on Google Cloud (Google managed): ga
-    Microsoft Foundry: ga
+    Claude API: stable
+    Claude Platform on AWS: stable
+    Amazon Bedrock: stable
+    Amazon Bedrock (InvokeModel): stable
+    Claude Models on Google Cloud (Google managed): stable
+    Microsoft Foundry: stable
 ---
 
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
@@ -321,7 +340,7 @@ The following example shows how to enable citations on a plain text document wit
 
   * **Cost savings:** If your prompt-based approach asks Claude to output direct quotes, you might see cost savings because `cited_text` does not count toward your output tokens.
   * **Better citation reliability:** Because the API parses citations into the response formats described in the following sections and extracts `cited_text` directly, citations are guaranteed to contain valid pointers to the provided documents.
-  * **Improved citation quality:** In Anthropic's evaluations, the citations feature is significantly more likely to cite the most relevant quotes from documents than purely prompt-based approaches.
+  * **Improved citation quality:** In Anthropic’s evaluations, the citations feature is significantly more likely to cite the most relevant quotes from documents than purely prompt-based approaches.
 </Tip>
 
 ***
@@ -338,7 +357,7 @@ Integrate citations with Claude in these steps:
   </Step>
 
   <Step title="Documents get processed">
-    * Document contents are "chunked" to define the minimum granularity of possible citations. For example, sentence chunking lets Claude cite a single sentence or chain together multiple consecutive sentences to cite a paragraph or longer passage.
+    * Document contents are “chunked” to define the minimum granularity of possible citations. For example, sentence chunking lets Claude cite a single sentence or chain together multiple consecutive sentences to cite a paragraph or longer passage.
 
       * **For PDFs:** Text is extracted as described in [PDF support](https://platform.claude.com/docs/en/build-with-claude/pdf-support) and content is chunked into sentences. Citing images from PDFs is not currently supported.
       * **For plain text documents:** Content is chunked into sentences that can be cited from.
@@ -368,7 +387,7 @@ Integrate citations with Claude in these steps:
 
 ### Citable versus non-citable content
 
-* Text found within a document's `source` content can be cited from.
+* Text found within a document’s `source` content can be cited from.
 * `title` and `context` are optional fields that are passed to the model but not used toward cited content.
 * `title` is limited in length, so the `context` field is useful for storing document metadata as text or stringified JSON.
 
@@ -385,7 +404,7 @@ Integrate citations with Claude in these steps:
 * However, the citations feature is very efficient with output tokens. Internally, the model outputs citations in a standardized format, and those citations are then parsed into cited text and document location indices. The `cited_text` field is provided for convenience and does not count toward output tokens.
 * When passed back in subsequent conversation turns, `cited_text` is also not counted toward input tokens.
 
-### Feature compatibility
+## Feature compatibility
 
 Citations work in conjunction with other API features including [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), [token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting), and [batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing).
 
@@ -397,7 +416,66 @@ Citations work in conjunction with other API features including [prompt caching]
   This is because citations require interleaving citation blocks with text output, which is incompatible with the strict JSON schema constraints of structured outputs.
 </Warning>
 
-#### Using prompt caching with citations
+### Get structured data with citations
+
+To get a citation for each extracted value, prompt Claude to answer with one line per field. Then parse the lines into structured data in your code.
+
+Avoid user or system prompts that ask for only JSON, such as “Return only a JSON object, no other text.” A request with such a prompt succeeds, but the response might contain few or no citations.
+
+The following prompt asks for two fields from the plain text document in the example at the top of this page. Send it in place of that example’s question:
+
+```text wrap
+Extract these fields from the document: grass_color, sky_color.
+Answer with one line per field in the form "field: value", and cite the document for each line. After the colon, write only the value, with no explanation or quotation.
+```
+
+In the following response, each value has its own citations:
+
+```json
+{
+  "content": [
+    { "type": "text", "text": "grass_color: " },
+    {
+      "type": "text",
+      "text": "green",
+      "citations": [
+        {
+          "type": "char_location",
+          "cited_text": "The grass is green. ",
+          "document_index": 0,
+          "document_title": "My Document",
+          "start_char_index": 0,
+          "end_char_index": 20
+        }
+      ]
+    },
+    { "type": "text", "text": "\nsky_color: " },
+    {
+      "type": "text",
+      "text": "blue",
+      "citations": [
+        {
+          "type": "char_location",
+          "cited_text": "The sky is blue.",
+          "document_index": 0,
+          "document_title": "My Document",
+          "start_char_index": 20,
+          "end_char_index": 36
+        }
+      ]
+    }
+  ]
+}
+```
+
+To parse the response, follow these steps:
+
+1. Read the `text` blocks in order, and add each block’s text to the current line. Start a new line at each newline character.
+2. Attach each block’s `citations` to every line that contains part of its text. A cited block can hold only a value, as in this example, or a whole line.
+3. Skip lines that have no colon. Split each remaining line at its first colon into a field name and a value, and trim spaces from both. Skip lines whose name isn’t one of your fields, such as a closing note.
+4. Check that each field has a value and at least one citation. The API doesn’t guarantee either.
+
+### Using prompt caching with citations
 
 Citations and prompt caching can be used together effectively.
 
@@ -727,7 +805,7 @@ Three document types are supported for citations. Documents can be provided dire
 | Custom content | Lists, transcripts, special formatting, more granular citations | No additional chunking | Block indices (0-indexed)     |
 
 <Note>
-  For file types that the `document` block doesn't support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in message content. Files that are already plain text, such as .csv and .md files, can also be uploaded with an explicit `text/plain` content type. See [Working with other file formats](https://platform.claude.com/docs/en/build-with-claude/files#working-with-other-file-formats).
+  For file types that the `document` block doesn’t support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in message content. Files that are already plain text, such as .csv and .md files, can also be uploaded with an explicit `text/plain` content type. See [Working with other file formats](https://platform.claude.com/docs/en/build-with-claude/files#working-with-other-file-formats).
 </Note>
 
 ### Plain text documents
@@ -2171,7 +2249,7 @@ When citations are enabled, responses include multiple text blocks with citation
       "citations": [
         {
           "type": "char_location",
-          "cited_text": "The grass is green.",
+          "cited_text": "The grass is green. ",
           "document_index": 0,
           "document_title": "Example Document",
           "start_char_index": 0,
@@ -2289,3 +2367,33 @@ For streaming responses, citations arrive as a `citations_delta` delta type insi
     Upload documents once and reference them by `file_id` across multiple citation requests.
   </Card>
 </CardGroup>
+
+## Availability
+
+Citations are available on every model and eligible for zero data retention and HIPAA readiness.
+
+### API support
+
+#### [Messages API](https://platform.claude.com/docs/en/build-with-claude/working-with-messages)
+
+* Availability: Available
+
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (InvokeModel)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
+
+#### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
+
+* Availability: Not available
+
+### Data handling
+
+[Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
+
+| Item   | Zero data retention                                                                                                                                       | HIPAA    |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Status | Eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements)) | Eligible |
+
+Applicable endpoints:
+
+* `/v1/messages`

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/usage_report/retrieve_messages
-fetched_at: 2026-10-26T05:40:34.666143+00:00
+fetched_at: 2026-11-02T07:00:48.716128+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,9 @@ url: https://platform.claude.com/docs/en/api/beta/organization/usage_report/retr
 
 **GET** `/v1/organizations/usage_report/messages`
 
-Get Messages Usage Report
+[Legacy] Get a report of your organization's Messages API usage, aggregated into time buckets.
+
+This endpoint is part of the legacy Usage and Cost API. For new integrations, use [`GET /v1/organizations/analytics/usage`](https://platform.claude.com/docs/en/api/beta/organization/analytics/usage/list?sdk_languages=http) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Usage and Cost API](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api?sdk_languages=http#migrate-from-usage-cost-api).
 
 ## Query parameters
 
@@ -111,7 +113,7 @@ Get Messages Usage Report
 
   Restrict usage returned to the specified service account ID(s).
 
-- `service_tiers: optional array of "batch" or "flex" or "flex_discount" or 3 more`
+- `service_tiers: optional array of BetaAnalyticsServiceTier`
 
   Restrict usage returned to the specified service tier(s).
 
@@ -257,6 +259,12 @@ Get Messages Usage Report
 
   - `"webhooks-2026-10-07"`
 
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
 ## Returns
 
 - `BetaMessagesUsageReport object`
@@ -342,7 +350,7 @@ Get Messages Usage Report
 
         ID of the service account that made the request. `null` if not grouping by service account or for non-OIDC-federation requests.
 
-      - `service_tier: "batch" or "flex" or "flex_discount" or 3 more or null`
+      - `service_tier: BetaAnalyticsServiceTier or null`
 
         Service tier used. `null` if not grouping by service tier.
 
@@ -405,7 +413,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/messages \
       "ending_at": "2025-08-02T00:00:00Z",
       "results": [
         {
-          "account_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+          "account_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
           "api_key_id": "apikey_01Rj2N8SVvo6BePZj99NhmiT",
           "cache_creation": {
             "ephemeral_1h_input_tokens": 0,
