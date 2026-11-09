@@ -1,19 +1,12 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/nanobanana?hl=es-419
-fetched_at: 2026-10-19T05:48:15.292248+00:00
-title: "Nano Banana (generaci\u00f3n de im\u00e1genes) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+fetched_at: 2026-11-09T07:30:36.610806+00:00
+title: "Nano Banana (generaci\u00f3n de im\u00e1genes) \u00a0|\u00a0 Google AI for Developers"
 ---
-
-Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
-
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-
-Enviar comentarios
 
 # Nano Banana (generación de imágenes)
 
@@ -148,12 +141,8 @@ Para obtener documentación completa sobre la generación de imágenes, la edici
 - [**Generación de imágenes con Gemini**](https://ai.google.dev/gemini-api/docs/image-generation?hl=es-419): La guía completa para usar los modelos Nano Banana y Nano Banana Pro
 - [**Información del modelo**](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419): Detalles sobre las versiones, las capacidades y los precios del modelo
 
-Enviar comentarios
-
 Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
 Última actualización: 2026-01-22 (UTC)
-
-¿Quieres brindar más información?
 
 [[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-01-22 (UTC)"],[],[]]
