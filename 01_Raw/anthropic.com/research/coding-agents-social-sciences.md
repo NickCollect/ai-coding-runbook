@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/coding-agents-social-sciences
-fetched_at: 2026-10-26T05:39:56.599368+00:00
+fetched_at: 2026-11-09T07:30:20.399147+00:00
 title: "Coding agents in the social sciences \\ Anthropic"
 ---
 
-### Chapter 01: How are AI coding agents changing how we study the economy and society?
+### 01How are AI coding agents changing how we study the economy and society?
 
 ### Summary
 
@@ -127,6 +127,14 @@ Wilmers, N., & Engzell, P. (2026). The Paper Factory. SocArXiv Preprints.
 01We launched the survey only a month after the release of Claude Cowork and before the release of OpenAI’s Codex app, so we focused this question on Command Line Interface tools for interaction with coding agents. This means we do not count researchers who use AI agents exclusively via more general purpose desktop apps.
 
 ## Authors & acknowledgements
+
+- [Thomas Lyttelton\*→](https://www.anthropic.com/search?author=thomas-lyttelton)
+- [Maxim Massenkoff\*→](https://www.anthropic.com/search?author=maxim-massenkoff)
+
+  Co-author of this article.
+- [Nathan Wilmers\*→](https://www.anthropic.com/search?author=nathan-wilmers)
+
+\*Lead authors. Contributed equally to this report
 
 ### Contributors
 

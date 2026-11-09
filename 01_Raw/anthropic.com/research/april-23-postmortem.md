@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/april-23-postmortem
-fetched_at: 2026-10-26T05:39:55.189729+00:00
+fetched_at: 2026-11-09T07:30:18.656248+00:00
 title: "An update on Claude Code quality reports \\ Anthropic"
 ---
 
-### Chapter 01: A change to Claude Code's default reasoning effort
+### 01A change to Claude Code's default reasoning effort
 
 Over the past month, we’ve been looking into reports that Claude’s responses have worsened for some users. We’ve traced these reports to three separate changes that affected Claude Code, the Claude Agent SDK, and Claude Cowork. The API was not impacted.
 

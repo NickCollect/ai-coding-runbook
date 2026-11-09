@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/claude-uplifts-biomolecular-modeling
-fetched_at: 2026-10-26T05:39:56.429862+00:00
+fetched_at: 2026-11-09T07:30:20.185333+00:00
 title: "How Claude is uplifting biomolecular modeling \\ Anthropic"
 ---
 
-### Chapter 01: Accelerating protein structure prediction and design models
+### 01Accelerating protein structure prediction and design models
 
 *In this post, we share how Claude made the open-source models that scientists use to predict and design biomolecules faster and more memory-efficient. Claude, working within [Claude Science,](https://claude.com/product/claude-science) optimized more than 30 of these models in just under four weeks, speeding them up roughly 4x on average. It also created a low-memory mode that enables the accurate prediction of biomolecular systems larger than 10,000 tokens (amino acids, nucleotides, and atoms from small molecules and ions) on a single NVIDIA GPU node. We are open-sourcing all of the optimized code and announcing a protein design competition co-sponsored with Adaptyv Bio, backed by up to $1 million in Claude credits and wet lab validation for over 5,000 designs.*
 

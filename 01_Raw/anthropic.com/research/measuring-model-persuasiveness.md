@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/measuring-model-persuasiveness
-fetched_at: 2026-10-26T05:39:59.192836+00:00
+fetched_at: 2026-11-09T07:30:23.679583+00:00
 title: "Measuring the persuasiveness of language models \\ Anthropic"
 ---
 
-### Chapter 01: Focusing on Less Polarized Issues to Evaluate Persuasiveness
+### 01Focusing on Less Polarized Issues to Evaluate Persuasiveness
 
 While people have long questioned whether AI models may, at some point, become as persuasive as humans in changing people's minds, there has been limited empirical research into the relationship between model scale and the degree of persuasiveness across model outputs. To address this, we developed a basic method to measure persuasiveness, and used it to compare a variety of Anthropic models across three different *generations* (Claude 1, 2, and 3), and two *classes* of models (compact models that are smaller, faster, and more cost-effective, and frontier models that are larger and more capable).
 

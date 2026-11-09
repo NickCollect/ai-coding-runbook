@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/81k-economics
-fetched_at: 2026-10-26T05:39:54.416975+00:00
+fetched_at: 2026-11-09T07:30:17.762125+00:00
 title: "What 81,000 people told us about AI economics \\ Anthropic"
 ---
 
-### Chapter 01: Who worries about job displacement?
+### 01Who worries about job displacement?
 
 ### Key findings:
 

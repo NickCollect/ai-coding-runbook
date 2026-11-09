@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/mythos-preview
-fetched_at: 2026-10-26T05:39:59.387339+00:00
+fetched_at: 2026-11-09T07:30:23.876870+00:00
 title: "Claude Mythos Preview's cybersecurity capabilities \\ Anthropic"
 ---
 
-### Chapter 01: The significance of Claude Mythos Preview for cybersecurity
+### 01The significance of Claude Mythos Preview for cybersecurity
 
 *Nicholas Carlini, Newton Cheng, Keane Lucas, Michael Moore, Milad Nasr, Vinay Prabhushankar, Winnie Xiao*
 

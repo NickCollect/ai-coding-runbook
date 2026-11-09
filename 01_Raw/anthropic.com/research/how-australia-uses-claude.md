@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/how-australia-uses-claude
-fetched_at: 2026-10-26T05:39:58.405017+00:00
+fetched_at: 2026-11-09T07:30:22.736368+00:00
 title: "How Australia uses Claude \\ Anthropic"
 ---
 
-### Chapter 01: High adoption overall, unevenly distributed across states and territories
+### 01High adoption overall, unevenly distributed across states and territories
 
 *Anthropic is expanding to Australia. We’re opening a [new office](https://www.anthropic.com/news/sydney-fourth-office-asia-pacific) in Sydney in the coming weeks, and we’ve signed a [Memorandum of Understanding](https://www.anthropic.com/news/australia-MOU) with the Australian government to cooperate on AI safety research and support the goals of Australia’s National AI Plan. To mark the occasion, we thought we’d look more closely into how Australians are using Claude.*
 

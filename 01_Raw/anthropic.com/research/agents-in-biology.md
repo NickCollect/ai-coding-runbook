@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/agents-in-biology
-fetched_at: 2026-10-26T05:39:54.530466+00:00
+fetched_at: 2026-11-09T07:30:17.969649+00:00
 title: "Paving the way for AI agents in biology \\ Anthropic"
 ---
 
-### Chapter 01: What Karpathy’s lecture about web development tells us about doing biology with AI agents
+### 01What Karpathy’s lecture about web development tells us about doing biology with AI agents
 
 Written by Laura Luebbert. Based on [research](https://arxiv.org/pdf/2606.06749) by Ferdous Nasri, Sarah Gurev, Patrick Varilly, Krithik Ramesh, Nuala A. O’Leary, Jonah Cool, Bernhard Y. Renard, Pardis Sabeti, and Laura Luebbert.  
   

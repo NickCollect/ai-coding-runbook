@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/effective-harnesses-for-long-running-agents
-fetched_at: 2026-10-26T05:39:57.635175+00:00
+fetched_at: 2026-11-09T07:30:21.661356+00:00
 title: "Effective harnesses for long-running agents \\ Anthropic"
 ---
 
-### Chapter 01: The long-running agent problem
+### 01The long-running agent problem
 
 As AI agents become more capable, developers are increasingly asking them to take on complex tasks requiring work that spans hours, or even days. However, getting agents to make consistent progress across multiple context windows remains an open problem.
 

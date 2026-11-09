@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/impact-software-development
-fetched_at: 2026-10-26T05:39:58.557891+00:00
+fetched_at: 2026-11-09T07:30:22.932267+00:00
 title: "Economic Index: AI's impact on software development \\ Anthropic"
 ---
 
-### Chapter 01: How we analyzed conversations on Claude Code and Claude.ai
+### 01How we analyzed conversations on Claude Code and Claude.ai
 
 Jobs that involve computer programming are a small sector of the modern economy, but an influential one. The past couple of years have seen them changed dramatically by the introduction of AI systems that can assist with—and automate—significant amounts of coding work.
 

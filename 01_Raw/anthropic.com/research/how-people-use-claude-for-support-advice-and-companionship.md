@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/how-people-use-claude-for-support-advice-and-companionship
-fetched_at: 2026-10-26T05:39:58.468197+00:00
+fetched_at: 2026-11-09T07:30:22.775939+00:00
 title: "How people use Claude for support and advice \\ Anthropic"
 ---
 
-### Chapter 01: Our approach
+### 01Our approach
 
 We spend a lot of time studying Claude's IQ—its capabilities on tests of coding, reasoning, general knowledge, and more. But what about its *EQ*? That is, what about Claude’s *emotional* intelligence?
 

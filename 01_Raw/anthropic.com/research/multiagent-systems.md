@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/multiagent-systems
-fetched_at: 2026-10-26T05:39:59.297467+00:00
+fetched_at: 2026-11-09T07:30:23.764640+00:00
 title: "Patterns and problems in multiagent systems \\ Anthropic"
 ---
 
-### Chapter 01: Measuring coordination
+### 01Measuring coordination
 
 Models are improving and AI agents are taking on more tasks in shared codebases, markets, and other social systems. As a result, an increase in real-world interactions between agents is imminent. We've already [begun studying this](https://www.anthropic.com/features/project-deal), but still have a lot of uncertainty regarding what this looks like at scale. The trajectory is easy to imagine and hard to slow: current institutions are designed by and for people, resting on assumptions about the sufficiency of oversight at human speed. Some institutions will become human-AI hybrids; others where agents outcompete on speed or cost will become agent-only. The volume of agent-agent interaction could plausibly exceed that of human-human and human-agent interactions before the world understands the conditions for making such interactions go well.
 

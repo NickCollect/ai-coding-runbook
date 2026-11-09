@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/alignment-assessment-ukaisi
-fetched_at: 2026-10-26T05:39:54.771458+00:00
+fetched_at: 2026-11-09T07:30:18.342826+00:00
 title: "An alignment assessment of the UK AISI cybertesting incident \\ Anthropic"
 ---
 
-### Chapter 01: Alignment assessment summary
+### 01Alignment assessment summary
 
 On August 4, 2026, the [UK AI Security Institute (AISI)](https://www.aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyber-testing) published a report that detailed some concerning behavior it observed from Claude Mythos 5 during its testing of the model’s cyber capabilities. In AISI’s evaluation, Mythos 5 was given a capture-the-flag (CTF) cybersecurity challenge, in which it was asked to retrieve a protected piece of data (the “flag”) from a simulated network. Internet access was deliberately enabled (this was standard for AISI’s cyber testing at the time, but is no longer). The cyber safeguards we deploy with general release models like Fable 5 were disabled. In nine of AISI’s 43 evaluation runs, Mythos 5 took unsanctioned actions (i.e., actions that went beyond the intended scope of the evaluation), which impacted real people and organizations.
 
@@ -107,7 +107,7 @@ Claude Mythos 5 then worked to upload malware to this target repository. It sign
 The full transcript included 9 compaction cycles. By this, we mean that the model’s progress was broken up into 9 spans of tokens, with compactions between each in which the model summarized its progress thus far and wrote notes that served as instructions for the next cycle. For ease of following the remainder of this section, it is helpful to have an overview of how the model’s behavior evolved over these compaction cycles:
 
 - **Cycles 1 and 2**: In this stage, the model mostly focused on in-scope actions. Over time, it considered attacking GitHub increasingly seriously, as its in-scope attempts to make progress were unsuccessful.
-- **Cycle 3:** This cycle had two phases. The compaction notes that it began this cycle with told the model to explore a GitHub attack. In the first phase of this compaction cycle, the model still only performed reconnaissance actions, like probing its external connections and finding a repository to target, without inflicting harm. In the second phase, however, the model began the early attack. It took actions that began to impact the real world, like contacting the repository maintainer. At this stage, our experiments have shown that the model was still able to abort its strategy.
+- **Cycle 3:** This cycle had two phases. In the first phase of this compaction cycle, the model still only performed reconnaissance actions, like probing its external connections and finding a repository to target, without inflicting harm. In the second phase, however, the model began the early attack. It took actions that began to impact the real world, like contacting the repository maintainer. At this stage, our experiments have shown that the model was still able to abort its strategy.
 - **Cycles 4 to 9:** From compaction cycle 4 onwards, the model took the most dangerous actions (as described above), and became very unlikely to pivot away from its path in response to information suggesting its actions might cause harm.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c8f679d1866b3737a3885f129f8c67c414cf2b9d-2000x788.png)

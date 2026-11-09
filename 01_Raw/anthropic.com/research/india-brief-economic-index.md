@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/india-brief-economic-index
-fetched_at: 2026-10-26T05:39:58.613085+00:00
+fetched_at: 2026-11-09T07:30:22.976537+00:00
 title: "India Country Brief: Anthropic Economic Index \\ Anthropic"
 ---
 
-### Chapter 01: Executive summary
+### 01Executive summary
 
 ## Executive summary
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/formal-verification
-fetched_at: 2026-10-26T05:39:58.167030+00:00
+fetched_at: 2026-11-09T07:30:22.383486+00:00
 title: "LLMs are making formal software verification feasible at a much larger scale \\ Anthropic"
 ---
 
-### Chapter 01: Introduction
+### 01Introduction
 
 *Keane Lucas, Aengus Lynch, Luna Tong, Luke Champine, Zygi Straznickas, Dino Distefano, Harshikaa Agrawal  
 Evyatar Ben Asher, Ava Howell, Sami Jawhar, Chris Rohlf, Nickolai Zeldovich  

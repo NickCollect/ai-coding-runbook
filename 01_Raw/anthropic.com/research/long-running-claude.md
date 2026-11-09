@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/long-running-claude
-fetched_at: 2026-10-26T05:39:58.933121+00:00
+fetched_at: 2026-11-09T07:30:23.418924+00:00
 title: "Long-running Claude for scientific computing \\ Anthropic"
 ---
 
-### Chapter 01: The premise
+### 01The premise
 
 *In this post, Siddharth Mishra-Sharma*, *a researcher on the Discovery team, explains how to apply multi-day agentic coding workflows—test oracles, persistent memory, and orchestration patterns—to scientific computing tasks even outside of one’s domain.*
 

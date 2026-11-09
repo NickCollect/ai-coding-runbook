@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/biorisk
-fetched_at: 2026-10-26T05:39:55.463059+00:00
+fetched_at: 2026-11-09T07:30:19.403858+00:00
 title: "LLMs and biorisk \\ Anthropic"
 ---
 
-### Chapter 01: What does AI have to do with dangerous weapons at all?
+### 01What does AI have to do with dangerous weapons at all?
 
 Our work at Anthropic is animated by the potential for AI to advance scientific discovery—especially in biology and medicine—and improve the human condition. [Benchling](https://www.benchling.com/ai) is [using Claude](https://www.anthropic.com/customers/benchling) to help researchers structure data, ask better questions, generate insights faster, and spend more time on science. [Biomni](https://biomni.stanford.edu/) is [using Claude](https://www.anthropic.com/customers/biomni) to speed up bioinformatics analysis and even automate experimental design.
 

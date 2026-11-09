@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/n-days
-fetched_at: 2026-10-26T05:39:59.409579+00:00
+fetched_at: 2026-11-09T07:30:23.926238+00:00
 title: "Measuring LLMs' impact on N-day exploits \\ Anthropic"
 ---
 
-### Chapter 01: N-days on Firefox
+### 01N-days on Firefox
 
 *Winnie Xiao, Tim Abbott, Nicholas Carlini, Newton Cheng, David Forsythe, Keane Lucas, Milad Nasr, and Shikhar Sakhuja*
 

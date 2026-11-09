@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/project-fetch-phase-two
-fetched_at: 2026-10-26T05:39:59.898346+00:00
+fetched_at: 2026-11-09T07:30:24.410520+00:00
 title: "Project Fetch: Phase two \\ Anthropic"
 ---
 
-### Chapter 01: What did we do?
+### 01What did we do?
 
 *Michael Ilie, C. Daniel Freeman, and Kevin K. Troy*
 

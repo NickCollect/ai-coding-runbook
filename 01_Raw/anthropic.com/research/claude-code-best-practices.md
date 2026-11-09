@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/claude-code-best-practices
-fetched_at: 2026-11-02T07:00:33.493945+00:00
+fetched_at: 2026-11-09T07:30:19.746854+00:00
 title: "Claude Code Best Practices \\ Anthropic"
 ---
 
-### Chapter 01: Customize your setup
+### 01Customize your setup
 
 - Jan 26, 2026
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/disempowerment-patterns
-fetched_at: 2026-10-26T05:39:57.170664+00:00
+fetched_at: 2026-11-09T07:30:21.150978+00:00
 title: "Disempowerment patterns in real-world AI usage \\ Anthropic"
 ---
 
-### Chapter 01: Measuring disempowerment
+### 01Measuring disempowerment
 
 AI assistants are now embedded in our daily lives—used most often for instrumental tasks like writing code, but increasingly in personal domains: navigating relationships, processing emotions, or advising on major life decisions. In the vast majority of cases, the influence AI provides in this area is helpful, productive, and often empowering.
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/your-thoughts-on-ai
-fetched_at: 2026-10-26T05:40:01.927601+00:00
+fetched_at: 2026-11-09T07:30:26.324053+00:00
 title: "What do you want from AI? \\ Anthropic"
 ---
 
-### Chapter 01: FAQ
+### 01FAQ
 
 *We’re launching a new study using [Anthropic Interviewer](https://www.anthropic.com/about-anthropic-interviewer) to learn from your experiences with AI, and we’d like you to participate. After you finish, you can decide to make your interview public, so that anyone, not just Anthropic, can read and learn from it. You can [participate here](https://claude.ai/anthropic-interviewer/your-thoughts-on-ai?from=blog).*
 

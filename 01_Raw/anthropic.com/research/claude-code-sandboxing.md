@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/claude-code-sandboxing
-fetched_at: 2026-10-26T05:39:56.155817+00:00
+fetched_at: 2026-11-09T07:30:19.802316+00:00
 title: "Making Claude Code safer with sandboxing \\ Anthropic"
 ---
 
-### Chapter 01: Keeping users secure on Claude Code
+### 01Keeping users secure on Claude Code
 
 In [Claude Code](https://www.claude.com/product/claude-code), Claude writes, tests, and debugs code alongside you, navigating your codebase, editing multiple files, and running commands to verify its work. Giving Claude this much access to your codebase and files can introduce risks, especially in the case of prompt injection.
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-education-report-how-educators-use-claude
-fetched_at: 2026-10-26T05:39:55.020724+00:00
+fetched_at: 2026-11-09T07:30:18.624822+00:00
 title: "Education Report: How educators use Claude  \\ Anthropic"
 ---
 
-### Chapter 01: Identifying educators’ use of Claude
+### 01Identifying educators’ use of Claude
 
 Understandably, much of the conversation of AI in education focuses on how students are using large language models to help them study and write. But educators use AI too. In a recent Gallup survey, teachers reported that AI tools saved them an average of 5.9 hours per week. And in an inversion of the usual discussion, students have begun expressing concerns about *professors* using AI in the classroom.
 

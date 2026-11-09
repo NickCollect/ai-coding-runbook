@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/measuring-agent-autonomy
-fetched_at: 2026-10-26T05:39:59.156319+00:00
+fetched_at: 2026-11-09T07:30:23.632930+00:00
 title: "Measuring AI agent autonomy in practice \\ Anthropic"
 ---
 
-### Chapter 01: Studying agents in the wild
+### 01Studying agents in the wild
 
 AI agents are here, and already they’re being deployed across contexts that vary widely in consequence, from email triage to [cyber espionage](https://www.anthropic.com/news/disrupting-AI-espionage). Understanding this spectrum is critical for deploying AI safely, yet we know surprisingly little about how people actually use agents in the real world.
 

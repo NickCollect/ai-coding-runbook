@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/discovering-vulnerabilities-with-claude
-fetched_at: 2026-11-02T07:00:34.793503+00:00
+fetched_at: 2026-11-09T07:30:21.105163+00:00
 title: "Discovering and exploiting vulnerabilities in critical, real-world software with Claude \\ Anthropic"
 ---
 
-### Chapter 01: One-click remote code execution in Chrome
+### 01One-click remote code execution in Chrome
 
 Over the past few months, we’ve used an unreleased, internal research model to [find critical vulnerabilities](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source) in some of the world’s most widely used software, such as browsers and operating systems. In this post, we share details of five attack chains, which led to remote code execution and other critical impacts with little to no user interaction. These attack chains demonstrate the model’s ability to create sophisticated, multi-step exploits in both open-source and proprietary software. Any vulnerabilities in these products could affect billions of users. They’re also among the most security-critical software in the world, making them a bellwether for testing models’ vulnerability research and cyber capabilities.
 

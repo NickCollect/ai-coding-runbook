@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/engineering-challenges-interpretability
-fetched_at: 2026-10-26T05:39:57.784478+00:00
+fetched_at: 2026-11-09T07:30:21.855338+00:00
 title: "The engineering challenges of scaling interpretability \\ Anthropic"
 ---
 
-### Chapter 01: Engineering Problem 1: Distributed Shuffle
+### 01Engineering Problem 1: Distributed Shuffle
 
 *In this post, and in the above roundtable video, our researchers reflect on the close relationship between scientific and engineering progress, and discuss the technical challenges they encountered in scaling our interpretability research to much larger AI models.*
 

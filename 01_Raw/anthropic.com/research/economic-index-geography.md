@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/economic-index-geography
-fetched_at: 2026-10-26T05:39:57.310852+00:00
+fetched_at: 2026-11-09T07:30:21.362344+00:00
 title: "Economic Index: AI's role in the US and global economy  \\ Anthropic"
 ---
 
-### Chapter 01: Geography
+### 01Geography
 
 Travel planning in Hawaii, scientific research in Massachusetts, and building web applications in India. On the face of it, these three activities share very little in common. But it turns out that they’re the particular uses of Claude that are some of the *most overrepresented* in each of these places.
 

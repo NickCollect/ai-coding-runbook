@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/global-workspace
-fetched_at: 2026-10-26T05:39:58.298301+00:00
+fetched_at: 2026-11-09T07:30:22.515311+00:00
 title: "A global workspace in language models \\ Anthropic"
 ---
 
-### Chapter 01: How we found the J-space
+### 01How we found the J-space
 
 As you read this sentence, circuits in your brain are adjusting your posture, controlling your breathing, and transforming lines and curves on the screen into recognizable words. Most of this processing is invisible to you. But some of what takes place in your brain you *do* have access to—an image that pops into your head, or a deliberate plan you make about where to go shopping. Neuroscientists and philosophers sometimes refer to the latter type of brain activity as “consciously accessible,” to distinguish it from all the other processing that goes on unconsciously. This activity has special properties: we can describe it, control it, and use it for deliberate reasoning, in contrast to all the automatic processing that goes on without our awareness.
 

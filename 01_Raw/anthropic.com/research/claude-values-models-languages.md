@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/claude-values-models-languages
-fetched_at: 2026-10-26T05:39:56.487224+00:00
+fetched_at: 2026-11-09T07:30:20.288959+00:00
 title: "How Claude's values vary by model and language \\ Anthropic"
 ---
 
-### Chapter 01: How do we interpret the giant space of values?
+### 01How do we interpret the giant space of values?
 
 When someone asks Claude a question with no universal right answer—say, whether to take a new job or how to handle conflict with a friend—how Claude responds inevitably reflects certain values.[1](#footnote-1) The values we want Claude to reflect are outlined at a high level in [Claude’s constitution](https://www.anthropic.com/constitution), but no document can anticipate every value that might emerge across the millions of conversations that happen every day on [Claude.ai](http://claude.ai). Instead, we seek to cultivate in Claude’s responses [“good judgment and sound values that can be applied contextually.”](https://www.anthropic.com/constitution)
 

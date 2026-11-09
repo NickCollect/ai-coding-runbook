@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/frontier-red-team
-fetched_at: 2026-11-02T07:00:39.245714+00:00
+fetched_at: 2026-11-09T07:30:25.782418+00:00
 title: "Frontier Red Team \\ Anthropic"
 ---
 
@@ -51,13 +51,21 @@ Like Claude Mythos Preview, GLM-5.3 has strong capabilities for autonomously bui
 
 04
 
-35
+38
 
 ARTICLES
 
 Most recentGrid view
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/105d9bbc7744153eb45473e80b4918a631c4111c-800x800.png)
+![](https://assets.claude.com/105d9bbc7744153eb45473e80b4918a631c4111c.png?w=1920&q=75&fm=webp&fit=max)
+
+### [Project EVE: Claude plays MMORPGs](https://www.anthropic.com/research/project-eve-claude-plays-mmorpgs)
+
+![](https://assets.claude.com/16194f7cb602e45abc0c59bb09a5d2183e7629eb.png?w=1920&q=75&fm=webp&fit=max)
+
+### [Progress on provable inference for large language models](https://www.anthropic.com/research/provable-inference)
+
+![](https://assets.claude.com/16c346d44a310e746657cd16ea275a2da5efa719.png?w=1920&q=75&fm=webp&fit=max)
 
 ### [Discovering and exploiting vulnerabilities in critical, real-world software with Claude](https://www.anthropic.com/research/discovering-vulnerabilities-with-claude)
 
@@ -65,7 +73,7 @@ Most recentGrid view
 
 ### [LLMs are making formal software verification feasible at a much larger scale](https://www.anthropic.com/research/formal-verification)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/16c346d44a310e746657cd16ea275a2da5efa719-800x800.png)
+![](https://assets.claude.com/18636e2f18982e3166a613b3f028e27b196bfe2f.png?w=1920&q=75&fm=webp&fit=max)
 
 ### [Using Claude to reduce the attack surface of code](https://www.anthropic.com/research/attack-surface-reduction)
 
@@ -145,33 +153,25 @@ Most recentGrid view
 
 ### [Finding bugs across the Python ecosystem with Claude and property-based testing](https://www.anthropic.com/research/property-based-testing)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ff8299d39b0077e002f4cb18ecc9f66d83b256d5-1280x1280.jpg)
-
-### [Experimenting with AI to defend critical infrastructure](https://www.anthropic.com/research/critical-infrastructure-defense)
-
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/dbabef04ded11e14b02e0ef160dd9db1b45b9069-1280x1280.jpg)
-
-### [Project Vend: Phase two](https://www.anthropic.com/research/project-vend-2)
-
 See more
 
 ## Explore work from other teams
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-49 posts
+51 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
 [### Economics](https://www.anthropic.com/research/team/economics)
 
-25 posts
+26 posts
 
 Studies and monitors the impact of AI systems on individuals, firms, and economies.
 
 [### Engineering](https://www.anthropic.com/engineering)
 
-27 posts
+28 posts
 
 Builds the infrastructure and systems that make Claude reliable and trustworthy.
 
@@ -189,31 +189,31 @@ Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-17 posts
+18 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
 [### Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
-35 posts
+38 posts
 
 Stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next.
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-49 posts
+51 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
 [### Economics](https://www.anthropic.com/research/team/economics)
 
-25 posts
+26 posts
 
 Studies and monitors the impact of AI systems on individuals, firms, and economies.
 
 [### Engineering](https://www.anthropic.com/engineering)
 
-27 posts
+28 posts
 
 Builds the infrastructure and systems that make Claude reliable and trustworthy.
 
@@ -231,12 +231,12 @@ Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-17 posts
+18 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
 [### Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
-35 posts
+38 posts
 
 Stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next.

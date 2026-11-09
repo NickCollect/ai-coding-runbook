@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/bloom
-fetched_at: 2026-10-26T05:39:55.545006+00:00
+fetched_at: 2026-11-09T07:30:19.095048+00:00
 title: "Introducing Bloom: Automated behavioral evals \\ Anthropic"
 ---
 
-### Chapter 01: How Bloom works
+### 01How Bloom works
 
 *We're releasing Bloom, an open source agentic framework for generating behavioral evaluations of frontier AI models. Bloom takes a researcher-specified behavior and quantifies its frequency and severity across automatically generated scenarios. Bloom's evaluations correlate strongly with our hand-labeled judgments and we find they reliably separate baseline models from intentionally misaligned ones. As examples of this, we release benchmark results for four alignment relevant behaviors on 16 models. Bloom is available [here](https://github.com/safety-research/bloom/).*
 

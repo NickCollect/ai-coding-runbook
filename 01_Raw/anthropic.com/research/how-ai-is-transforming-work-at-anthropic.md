@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic
-fetched_at: 2026-10-26T05:39:58.442819+00:00
+fetched_at: 2026-11-09T07:30:22.664267+00:00
 title: "How AI is transforming work at Anthropic \\ Anthropic"
 ---
 
-### Chapter 01: Key findings
+### 01Key findings
 
 How is AI changing the way we work? Our [previous research](https://www.anthropic.com/economic-index) on AI’s economic impacts looked at the labor market as a whole, covering a variety of different jobs. But what if we studied some of the earliest adopters of AI technology in more detail—namely, us?
 

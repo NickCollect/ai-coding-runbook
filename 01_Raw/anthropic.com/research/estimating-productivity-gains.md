@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/estimating-productivity-gains
-fetched_at: 2026-10-26T05:39:57.847255+00:00
+fetched_at: 2026-11-09T07:30:21.955404+00:00
 title: "Estimating AI productivity gains \\ Anthropic"
 ---
 
-### Chapter 01: Overview
+### 01Overview
 
 ## Overview
 

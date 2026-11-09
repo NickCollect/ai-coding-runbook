@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/claude-personal-guidance
-fetched_at: 2026-10-26T05:39:56.138230+00:00
+fetched_at: 2026-11-09T07:30:19.886701+00:00
 title: "How people ask Claude for personal guidance \\ Anthropic"
 ---
 
-### Chapter 01: Measuring sycophancy in guidance conversations
+### 01Measuring sycophancy in guidance conversations
 
 People don’t just come to Claude for code reviews or meeting summaries. They ask whether to take the job, how to talk to their crush, if they should move halfway across the world. Using our [privacy-preserving analysis tool](https://www.anthropic.com/research/clio) on a random sample of 1 million claude.ai conversations, we found that roughly 6% were people coming to Claude for personal guidance—seeking not just information but perspective on what to do next.
 

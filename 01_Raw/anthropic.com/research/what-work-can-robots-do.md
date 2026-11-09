@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/what-work-can-robots-do
-fetched_at: 2026-10-26T05:40:02.275247+00:00
+fetched_at: 2026-11-09T07:30:26.457700+00:00
 title: "Can we predict the jobs robots will do? \\ Anthropic"
 ---
 
-### Chapter 01: Key findings
+### 01Key findings
 
 ## **Key findings**
 
@@ -667,6 +667,13 @@ Webb, Michael. 2020. "The Impact of Artificial Intelligence on the Labor Market.
 46Compare LLM exposure in Eloundou et al. (2024) for computer programmers (25th most exposed by human raters, 6th by the LLM rater) and poets, lyricists and creative writers (11th by humans, 14th by the LLM). The two occupations were similarly exposed, but AI developers have since directed effort toward coding more than creative writing.
 
 ## Authors & acknowledgements
+
+- [Russell Legate-Yang\*→](https://www.anthropic.com/search?author=russell-legate-yang)
+- [Maxim Massenkoff\*→](https://www.anthropic.com/search?author=maxim-massenkoff)
+
+  Co-author of this article.
+
+\*Lead authors. Contributed equally to this report
 
 ### Contributors
 

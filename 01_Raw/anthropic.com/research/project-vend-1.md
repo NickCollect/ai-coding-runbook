@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/project-vend-1
-fetched_at: 2026-10-26T05:40:00.232578+00:00
+fetched_at: 2026-11-09T07:30:24.522991+00:00
 title: "Project Vend: Can Claude run a small shop? \\ Anthropic"
 ---
 
-### Chapter 01: Why did you have an LLM run a small business?
+### 01Why did you have an LLM run a small business?
 
 *We let Claude manage an automated store in our office as a small business for about a month. We learned a lot from how close it was to success—and the curious ways that it failed—about the plausible, strange, not-too-distant future in which AI models are autonomously running things in the real economy.*
 

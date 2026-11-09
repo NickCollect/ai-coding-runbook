@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/code-execution-with-mcp
-fetched_at: 2026-10-26T05:39:56.550876+00:00
+fetched_at: 2026-11-09T07:30:20.343217+00:00
 title: "Code execution with MCP for efficient agents \\ Anthropic"
 ---
 
-### Chapter 01: Excessive token consumption from tools makes agents less efficient
+### 01Excessive token consumption from tools makes agents less efficient
 
 [The Model Context Protocol (MCP)](https://modelcontextprotocol.io/) is an open standard for connecting AI agents to external systems. Connecting agents to tools and data traditionally requires a custom integration for each pairing, creating fragmentation and duplicated effort that makes it difficult to scale truly connected systems. MCP provides a universal protocol—developers implement MCP once in their agent and it unlocks an entire ecosystem of integrations.
 

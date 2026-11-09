@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/forecasting-rare-behaviors
-fetched_at: 2026-10-26T05:39:58.093761+00:00
+fetched_at: 2026-11-09T07:30:22.304937+00:00
 title: "Forecasting rare language model behaviors \\ Anthropic"
 ---
 
-### Chapter 01: Forecasting rare behaviors
+### 01Forecasting rare behaviors
 
 One of the major goals of Alignment Science is to predict AI models’ propensity for dangerous behaviors *before* those behaviors occur. For instance, we run [experiments](https://www.anthropic.com/research/alignment-faking) to check for complex behaviors like deception, and attempt to identify early warning signs of misalignment.
 

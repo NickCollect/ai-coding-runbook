@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/prompt-injection-defenses
-fetched_at: 2026-10-26T05:40:00.035797+00:00
+fetched_at: 2026-11-09T07:30:24.712397+00:00
 title: "Mitigating prompt injections in browser use \\ Anthropic"
 ---
 
-### Chapter 01: What is prompt injection?
+### 01What is prompt injection?
 
 Claude Opus 4.5 sets a new standard in robustness to *prompt injections*—adversarial instructions hidden within the content that AI models process. Our new model is a major improvement over previous ones in both its core performance and in the safeguards surrounding its use. But prompt injection is far from a solved problem, particularly as models take more real-world actions. We expect to continue our progress—aiming for a future where AI models (or "agents") can handle high-value tasks without significant prompt injection risk.
 

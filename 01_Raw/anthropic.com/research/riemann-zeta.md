@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/riemann-zeta
-fetched_at: 2026-10-26T05:40:00.381053+00:00
+fetched_at: 2026-11-09T07:30:24.954754+00:00
 title: "Claude has improved on a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the Riemann hypothesis \\ Anthropic"
 ---
 
-### Chapter 01: The Riemann zeta function
+### 01The Riemann zeta function
 
 Recently, a member of staff at Anthropic gave Claude an unreasonable challenge. It was about one of the most famous unsolved problems in mathematics: *Take a real stab at the Riemann hypothesis*.
 

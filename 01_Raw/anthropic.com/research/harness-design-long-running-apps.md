@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/harness-design-long-running-apps
-fetched_at: 2026-10-26T05:39:58.383630+00:00
+fetched_at: 2026-11-09T07:30:22.606646+00:00
 title: "Harness design for long-running apps \\ Anthropic"
 ---
 
-### Chapter 01: Why naive implementations fall short
+### 01Why naive implementations fall short
 
 *Written by Prithvi Rajasekaran, a member of our [Labs](https://www.anthropic.com/news/introducing-anthropic-labs) team.*
 

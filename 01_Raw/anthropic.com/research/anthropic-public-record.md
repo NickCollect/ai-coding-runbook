@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-public-record
-fetched_at: 2026-10-26T05:39:55.261988+00:00
+fetched_at: 2026-11-09T07:30:18.961092+00:00
 title: "Results from first Anthropic Public Record \\ Anthropic"
 ---
 
-### Chapter 01: Method in brief
+### 01Method in brief
 
 We’re conducting a new survey series, Anthropic Public Record, to understand how the public thinks and feels about AI, and presenting a snapshot of the results from the first wave, fielded in November and December of 2025 with nearly 52,000 Americans.
 

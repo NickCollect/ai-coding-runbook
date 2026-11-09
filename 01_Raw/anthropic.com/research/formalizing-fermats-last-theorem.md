@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/formalizing-fermats-last-theorem
-fetched_at: 2026-10-26T05:39:58.234986+00:00
+fetched_at: 2026-11-09T07:30:22.422744+00:00
 title: "Formalizing Fermat's Last Theorem  \\ Anthropic"
 ---
 
-### Chapter 01: The challenge of verifying mathematical proofs
+### 01The challenge of verifying mathematical proofs
 
 *We are sharing the first complete computer-checked proof of Fermat’s Last Theorem. Claude worked largely autonomously over 11 days to write the proof in the Lean programming language. Below, we describe how the formalization was done and share some thoughts about what this work could mean for research mathematics.*Around 1637, Pierre de Fermat jotted down a claim in the margin of his copy of Diophantus’s Arithmeticathat would become one of the most famous mathematical conjectures of all time: no positive integers a, b, c satisfy aⁿ + bⁿ = cⁿ for any n > 2. [Fermat’s Last Theorem](https://www.youtube.com/watch?v=1BSFyEIY2BY) (FLT), as the conjecture became known, turned out to be incredibly difficult to prove. The first proof, from Sir Andrew Wiles in1995, ran to 129 pages and required months of painstaking work to verify.
 

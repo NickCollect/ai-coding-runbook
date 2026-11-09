@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/auditing-hidden-objectives
-fetched_at: 2026-10-26T05:39:55.379137+00:00
+fetched_at: 2026-11-09T07:30:18.968831+00:00
 title: "Auditing language models for hidden objectives \\ Anthropic"
 ---
 
-### Chapter 01: Training a language model with a hidden objective
+### 01Training a language model with a hidden objective
 
 *A new paper from the Anthropic Alignment Science and Interpretability teams studies **alignment audits**—systematic investigations into whether models are pursuing hidden objectives. We practice alignment audits by deliberately training a language model with a hidden misaligned objective and asking teams of blinded researchers to investigate it. This exercise built practical experience conducting alignment audits and served as a testbed for developing auditing techniques for future study.*
 

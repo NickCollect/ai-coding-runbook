@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/claude-think-tool
-fetched_at: 2026-10-26T05:39:56.410439+00:00
+fetched_at: 2026-11-09T07:30:20.202935+00:00
 title: "The \"think\" tool for complex tool use \\ Anthropic"
 ---
 
-### Chapter 01: What is the "think" tool?
+### 01What is the "think" tool?
 
 - Dec 15, 2025
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source
-fetched_at: 2026-10-26T05:39:59.112373+00:00
+fetched_at: 2026-11-09T07:30:23.342505+00:00
 title: "An opt-in vulnerability-finding service for open-source software \\ Anthropic"
 ---
 
-### Chapter 01: Our vulnerability scanner
+### 01Our vulnerability scanner
 
 *We’re launching [OSS Scanner](https://red.anthropic.com/oss-scanner), an opt-in vulnerability scanner for the open-source ecosystem informed by our experience using Claude to find vulnerabilities during [Project Glasswing](https://www.anthropic.com/glasswing). Projects that join will receive thorough, periodic security scans by our strongest models at no cost.*
 

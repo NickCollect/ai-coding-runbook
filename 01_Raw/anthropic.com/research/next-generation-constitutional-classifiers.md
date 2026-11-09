@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/next-generation-constitutional-classifiers
-fetched_at: 2026-10-26T05:39:59.424777+00:00
+fetched_at: 2026-11-09T07:30:23.938839+00:00
 title: "Next-generation Constitutional Classifiers \\ Anthropic"
 ---
 
-### Chapter 01: Remaining vulnerabilities
+### 01Remaining vulnerabilities
 
 Large language models remain vulnerable to jailbreaks—techniques that can circumvent safety guardrails and elicit harmful information. Over time, we’ve implemented a variety of protections that have made our models much less likely to assist with dangerous user queries—in particular relating to the production of chemical, biological, radiological, or nuclear weapons (CBRN). Nevertheless, no AI systems currently on the market have perfectly robust defenses.
 

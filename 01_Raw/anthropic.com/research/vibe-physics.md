@@ -1,12 +1,12 @@
 ---
 source_url: https://www.anthropic.com/research/vibe-physics
-fetched_at: 2026-10-26T05:40:01.775931+00:00
+fetched_at: 2026-11-09T07:30:26.246567+00:00
 title: "Vibe physics: The AI grad student \\ Anthropic"
 ---
 
-### Chapter 01: Who am I?
+### 01Who am I?
 
-**Can AI do theoretical physics? In this guest post, professor of physics [Matthew Schwartz](https://www.physics.harvard.edu/people/facpages/schwartz) decided to find out by supervising Claude through a real research calculation, start to finish, without ever touching a file himself. His account of what happened is below.**
+*Can AI do theoretical physics? In this guest post, professor of physics [Matthew Schwartz](https://www.physics.harvard.edu/people/facpages/schwartz) decided to find out by supervising Claude through a real research calculation, start to finish, without ever touching a file himself. His account of what happened is below.*
 
 #### Summary
 

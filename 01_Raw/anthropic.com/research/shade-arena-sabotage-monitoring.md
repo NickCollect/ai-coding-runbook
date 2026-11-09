@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/shade-arena-sabotage-monitoring
-fetched_at: 2026-10-26T05:40:00.523122+00:00
+fetched_at: 2026-11-09T07:30:25.126194+00:00
 title: "SHADE-Arena: Evaluating sabotage in LLM agents \\ Anthropic"
 ---
 
-### Chapter 01: SHADE-Arena
+### 01SHADE-Arena
 
 As AI models get smarter, we also need to become smarter in how we monitor them. More intelligent systems can take more complex actions, which is great news for coders, researchers, and anyone else who’s using AI for difficult work tasks. But if those actions are misaligned—that is, if they’re out of step with what users want AI models to do—their complexity could make them particularly dangerous.
 

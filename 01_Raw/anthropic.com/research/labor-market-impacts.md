@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/labor-market-impacts
-fetched_at: 2026-10-26T05:39:58.876519+00:00
+fetched_at: 2026-11-09T07:30:23.314140+00:00
 title: "Labor market impacts of AI: A new measure \\ Anthropic"
 ---
 
-### Chapter 01: Introduction
+### 01Introduction
 
 ### Key findings
 
@@ -217,6 +217,15 @@ Tomlinson, K., Jaffe, S., Wang, W., Counts, S., & Suri, S. (2025). Working with 
 10 See Fujita, et al. (2024).
 
 ## Authors & acknowledgements
+
+- [Maxim Massenkoff\*→](https://www.anthropic.com/search?author=maxim-massenkoff)
+
+  Co-author of this article.
+- [Peter McCrory\*→](https://www.anthropic.com/search?author=peter-mccrory)
+
+  Co-author of this article.
+
+\*Lead authors. Contributed equally to this report
 
 ### Contributors
 

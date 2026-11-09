@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/petri-open-source-auditing
-fetched_at: 2026-10-26T05:39:59.723859+00:00
+fetched_at: 2026-11-09T07:30:24.186327+00:00
 title: "Petri: An open-source AI auditing tool \\ Anthropic"
 ---
 
-### Chapter 01: Broad-coverage pilot-alignment evaluations
+### 01Broad-coverage pilot-alignment evaluations
 
 Petri (Parallel Exploration Tool for Risky Interactions) is our new open-source tool that enables researchers to explore hypotheses about model behavior with ease. Petri deploys an automated agent to test a target AI system through diverse multi-turn conversations involving simulated users and tools; Petri then scores and summarizes the target’s behavior.
 

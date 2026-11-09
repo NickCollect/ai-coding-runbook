@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/project-fetch-robot-dog
-fetched_at: 2026-10-26T05:39:59.860767+00:00
+fetched_at: 2026-11-09T07:30:24.474274+00:00
 title: "Project Fetch: Can Claude train a robot dog? \\ Anthropic"
 ---
 
-### Chapter 01: Introduction
+### 01Introduction
 
 ![Video thumbnail](https://img.youtube.com/vi/NGOAUJtdk-4/maxresdefault.jpg)
 

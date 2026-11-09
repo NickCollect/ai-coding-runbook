@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/probes-catch-sleeper-agents
-fetched_at: 2026-10-26T05:39:59.931039+00:00
+fetched_at: 2026-11-09T07:30:24.383695+00:00
 title: "Simple probes can catch sleeper agents \\ Anthropic"
 ---
 
-### Chapter 01: Introduction
+### 01Introduction
 
 *This “Alignment Note” presents some early-stage research from the Anthropic Alignment Science team following up on our recent “[Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training](https://arxiv.org/abs/2401.05566)” paper. It should be treated as a work-in-progress update, and is intended for a more technical audience than our typical blog post. This research makes use of some simple interpretability techniques, and we expect to share more results from collaborations between our Alignment and Interpretability teams soon.*
 

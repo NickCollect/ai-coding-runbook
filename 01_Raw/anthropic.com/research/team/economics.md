@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/economics
-fetched_at: 2026-11-02T07:00:39.180876+00:00
+fetched_at: 2026-11-09T07:30:25.793822+00:00
 title: "Economics \\ Anthropic"
 ---
 
@@ -25,10 +25,15 @@ We build the foundation for understanding AI’s economic impact. The Anthropic 
 
 The speed of AI development means the stakes are unusually high. We need reliable data to inform the decisions that workers, employers, and policymakers make about the future. Our research provides evidence to address uncertainty and help society navigate this transition.
 
+- [![AI for scientific discovery: How researchers use Claude](https://www-cdn.anthropic.com/images/4zrzovbb/website/3d70ee592fadda2eed33c12f180c2576a7eefbbf-1280x1280.jpg)](https://www.anthropic.com/research/how-researchers-use-claude)
 - [![Working at the frontier shapes expectations for the future](https://www-cdn.anthropic.com/images/4zrzovbb/website/53302837b91ae70bd2cca82170b4ae35c5e52c66-1125x1125.jpg)](https://www.anthropic.com/research/expectations-for-the-future)
 - [![Scenarios for our economic future](https://www-cdn.anthropic.com/images/4zrzovbb/website/fccf43cf4e36b0c26b4215861d909aadabbc32ce-1920x1080.png)](https://www.anthropic.com/institute/econ-scenarios)
 - [![What work can robots do?](https://www-cdn.anthropic.com/images/4zrzovbb/website/c523800acb2cfb23b8c834b4268d5daef9eafce4-2000x1125.jpg)](https://www.anthropic.com/research/what-work-can-robots-do)
 - [![Project Swap: What happens when agents trade for us?](https://www-cdn.anthropic.com/images/4zrzovbb/website/81ec096e35d1d259eb3f47aef4edd2c25f8e3c5e-1920x1080.jpg)](https://www.anthropic.com/research/project-swap)
+
+[## AI for scientific discovery: How researchers use Claude](https://www.anthropic.com/research/how-researchers-use-claude)
+
+We analyzed 207,000 research sessions to learn how Claude is used in science, why some tasks get more use than others, and how AI could speed up discovery.
 
 [## Working at the frontier shapes expectations for the future](https://www.anthropic.com/research/expectations-for-the-future)
 
@@ -56,13 +61,17 @@ To see what works and what breaks when agents are sent into a market, we made a
 
 /
 
-04
+05
 
-25
+26
 
 ARTICLES
 
 Most recentGrid view
+
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/3d70ee592fadda2eed33c12f180c2576a7eefbbf-1280x1280.jpg)
+
+### [AI for scientific discovery: How researchers use Claude](https://www.anthropic.com/research/how-researchers-use-claude)
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/53302837b91ae70bd2cca82170b4ae35c5e52c66-1125x1125.jpg)
 
@@ -156,29 +165,25 @@ Most recentGrid view
 
 ### [Anthropic Economic Index report: Uneven geographic and enterprise AI adoption](https://www.anthropic.com/research/anthropic-economic-index-september-2025-report)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4f5be7e4c33d71b769d42cd92c2a812bafccf14f-1280x1280.jpg)
-
-### [Anthropic Economic Index: AI’s impact on software development](https://www.anthropic.com/research/impact-software-development)
-
 See more
 
 ## Explore work from other teams
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-49 posts
+51 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
 [### Engineering](https://www.anthropic.com/engineering)
 
-27 posts
+28 posts
 
 Builds the infrastructure and systems that make Claude reliable and trustworthy.
 
 [### Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
-35 posts
+38 posts
 
 Stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next.
 
@@ -196,31 +201,31 @@ Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-17 posts
+18 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
 [### Economics](https://www.anthropic.com/research/team/economics)
 
-25 posts
+26 posts
 
 Studies and monitors the impact of AI systems on individuals, firms, and economies.
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-49 posts
+51 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
 [### Engineering](https://www.anthropic.com/engineering)
 
-27 posts
+28 posts
 
 Builds the infrastructure and systems that make Claude reliable and trustworthy.
 
 [### Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
-35 posts
+38 posts
 
 Stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next.
 
@@ -238,12 +243,12 @@ Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-17 posts
+18 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
 [### Economics](https://www.anthropic.com/research/team/economics)
 
-25 posts
+26 posts
 
 Studies and monitors the impact of AI systems on individuals, firms, and economies.

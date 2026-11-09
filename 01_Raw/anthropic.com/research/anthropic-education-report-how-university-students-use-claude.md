@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-education-report-how-university-students-use-claude
-fetched_at: 2026-10-26T05:39:55.043392+00:00
+fetched_at: 2026-11-09T07:30:18.518151+00:00
 title: "Anthropic Education Report: How University Students Use Claude \\ Anthropic"
 ---
 
-### Chapter 01: Identifying educational AI usage
+### 01Identifying educational AI usage
 
 AI systems are no longer just specialized research tools: they’re everyday academic companions. As AIs integrate more deeply into educational environments, we need to consider important questions about learning, assessment, and skill development. Until now, most discussions have relied on surveys and controlled experiments rather than direct evidence of how students naturally integrate AI into their academic work in real settings.
 

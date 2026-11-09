@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/agentic-misalignment
-fetched_at: 2026-10-26T05:39:54.583503+00:00
+fetched_at: 2026-11-09T07:30:17.927796+00:00
 title: "Agentic misalignment: LLMs as insider threats \\ Anthropic"
 ---
 
-### Chapter 01: Introduction
+### 01Introduction
 
 #### Highlights
 

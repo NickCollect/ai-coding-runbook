@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/introspection
-fetched_at: 2026-10-26T05:39:58.806650+00:00
+fetched_at: 2026-11-09T07:30:23.182244+00:00
 title: "Emergent introspective awareness in LLMs \\ Anthropic"
 ---
 
-### Chapter 01: What does it mean for an AI to introspect?
+### 01What does it mean for an AI to introspect?
 
 Have you ever asked an AI model what’s on its mind? Or to explain how it came up with its responses? Models will sometimes answer questions like these, but it’s hard to know what to make of their answers. Can AI systems really introspect—that is, can they consider their own thoughts? Or do they just make up plausible-sounding answers when they’re asked to do so?
 

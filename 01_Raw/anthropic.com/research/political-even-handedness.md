@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/political-even-handedness
-fetched_at: 2026-10-26T05:39:59.705113+00:00
+fetched_at: 2026-11-09T07:30:24.221633+00:00
 title: "Measuring political bias in Claude \\ Anthropic"
 ---
 
-### Chapter 01: Why even-handedness matters
+### 01Why even-handedness matters
 
 - We work to train Claude to be politically even-handed in its responses. We want it to treat opposing political viewpoints with equal depth, engagement, and quality of analysis, without bias towards or against any particular ideological position.
 - "Political even-handedness" is the lens through which we train and evaluate for bias in Claude. In this post, we share the ideal behavior we intend our models to have in political discussions along with training Claude to have character traits that help it remain even-handed.

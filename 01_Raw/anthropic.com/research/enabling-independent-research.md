@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/enabling-independent-research
-fetched_at: 2026-11-02T07:00:35.433747+00:00
+fetched_at: 2026-11-09T07:30:21.800556+00:00
 title: "Enabling independent research on how people use Claude \\ Anthropic"
 ---
 
-### Chapter 01: What the researchers learned
+### 01What the researchers learned
 
 *Earlier this year, we ran a pilot giving external researchers access to aggregate, real-world Claude usage data. Three research groups designed their own studies for Anthropic Insights, our privacy-preserving analysis tool; we ran the data collection on their behalf, and they conducted their own independent analysis. In this post, we share high-level results from those studies and what we learned running this pilot. We’re also providing an [expression of interest form](https://docs.google.com/forms/d/e/1FAIpQLScujFA2mJXnLhrvE7wazD7drfHlfRmfnrjhMZRpeIFW_b6I7Q/viewform?usp=sharing&ouid=108982467493638405621) for researchers who may want to work with us in the future.*
 

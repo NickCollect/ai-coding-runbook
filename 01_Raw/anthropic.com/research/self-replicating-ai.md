@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/self-replicating-ai
-fetched_at: 2026-10-26T05:40:00.461585+00:00
+fetched_at: 2026-11-09T07:30:25.078301+00:00
 title: "AI models may be capable of self-replicating without access to a datacenter \\ Anthropic"
 ---
 
-### Chapter 01: Introduction
+### 01Introduction
 
 *William Zhou, Daniel Freeman*
 

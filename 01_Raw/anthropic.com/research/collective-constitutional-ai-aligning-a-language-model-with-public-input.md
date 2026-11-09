@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/collective-constitutional-ai-aligning-a-language-model-with-public-input
-fetched_at: 2026-10-26T05:39:56.575470+00:00
+fetched_at: 2026-11-09T07:30:20.432875+00:00
 title: "Collective Constitutional AI \\ Anthropic"
 ---
 
-### Chapter 01: Designing a Public Input Process to Collectively Draft a Constitution
+### 01Designing a Public Input Process to Collectively Draft a Constitution
 
 Anthropic and the [Collective Intelligence Project](https://cip.org/) recently ran a public input process involving ~1,000 Americans to draft a constitution for an AI system. We did this to explore how democratic processes can influence AI development. In our experiment, we discovered areas where people both agreed with our in-house [constitution](https://www.anthropic.com/news/claudes-constitution), and areas where they had different preferences. In this post, we share the resulting publicly sourced constitution, as well as what happened when we trained a new AI system against it using Constitutional AI.  
   

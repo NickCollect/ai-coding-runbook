@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/equipping-agents-for-the-real-world-with-agent-skills
-fetched_at: 2026-10-26T05:39:57.767000+00:00
+fetched_at: 2026-11-09T07:30:21.890308+00:00
 title: "Equipping agents with Agent Skills \\ Anthropic"
 ---
 
-### Chapter 01: The anatomy of a skill
+### 01The anatomy of a skill
 
 - Dec 18, 2025
 

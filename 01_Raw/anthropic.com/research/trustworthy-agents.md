@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/trustworthy-agents
-fetched_at: 2026-10-26T05:40:01.911691+00:00
+fetched_at: 2026-11-09T07:30:26.156394+00:00
 title: "Trustworthy agents in practice \\ Anthropic"
 ---
 
-### Chapter 01: How agents work
+### 01How agents work
 
 AI “agents” represent the latest major shift in how people and organizations are using AI. A couple of years ago, AI models were only broadly available as chatbots—simple question-and-answer machines. Now, through products like [Claude Code](https://claude.com/product/claude-code) and [Claude Cowork](https://claude.com/product/cowork), AI models can do much more: they can write and execute code, manage files, and complete tasks that span multiple applications. This represents a new frontier for governance.
 

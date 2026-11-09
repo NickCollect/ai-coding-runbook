@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/smart-contracts
-fetched_at: 2026-10-26T05:40:00.601685+00:00
+fetched_at: 2026-11-09T07:30:25.219199+00:00
 title: "AI agents find smart contract exploits \\ Anthropic"
 ---
 
-### Chapter 01: Introduction
+### 01Introduction
 
 *Winnie Xiao\*, Cole Killian\*  
 Henry Sleight, Alan Chan  

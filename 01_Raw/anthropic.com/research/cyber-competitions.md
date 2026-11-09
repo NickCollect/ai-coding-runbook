@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/cyber-competitions
-fetched_at: 2026-10-26T05:39:56.792187+00:00
+fetched_at: 2026-11-09T07:30:20.669846+00:00
 title: "Claude does cyber competitions \\ Anthropic"
 ---
 
-### Chapter 01: Why enter Claude into cyber competitions?
+### 01Why enter Claude into cyber competitions?
 
 Throughout 2025, we have been quietly entering Claude in cybersecurity competitions designed primarily for humans. Now, we want to share what we have learned. In many of these competitions Claude did pretty well, often placing in the top 25% of competitors. However, it lagged behind the best human teams at the toughest challenges.
 

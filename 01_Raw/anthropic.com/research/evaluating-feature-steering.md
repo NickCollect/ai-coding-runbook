@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/evaluating-feature-steering
-fetched_at: 2026-10-26T05:39:57.958834+00:00
+fetched_at: 2026-11-09T07:30:22.152380+00:00
 title: "Evaluating feature steering \\ Anthropic"
 ---
 
-### Chapter 01: Methods
+### 01Methods
 
 A few months ago, we published an interpretability [paper](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html) demonstrating our ability to learn [interpretable features](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#assessing-interp) that correspond to various concepts (e.g., [famous individuals](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#feature-survey-categories-people), types of [computer code](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#feature-survey-categories-code), etc.) represented in [Claude 3 Sonnet](https://www.anthropic.com/news/claude-3-family). To verify our feature interpretations, we ran qualitative [feature steering](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html#assessing-tour-influence) experiments, where we artificially dialed up and down various features to see if they changed model outputs in intuitive ways. The results were promising – for example, turning up a feature that responded to mentions of the Golden Gate Bridge made the model talk about the Golden Gate Bridge. Such examples led us to hypothesize that feature steering might be a promising way to modify model outputs in specific interpretable ways.
 

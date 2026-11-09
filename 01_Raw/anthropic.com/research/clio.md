@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/clio
-fetched_at: 2026-10-26T05:39:56.509773+00:00
+fetched_at: 2026-11-09T07:30:20.233119+00:00
 title: "Clio: Privacy-preserving insights into AI use \\ Anthropic"
 ---
 
-### Chapter 01: How Clio works: Privacy-preserving analysis at scale
+### 01How Clio works: Privacy-preserving analysis at scale
 
 - UpdateAug 24, 2026
 

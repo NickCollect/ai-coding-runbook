@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/confidential-inference-trusted-vms
-fetched_at: 2026-10-26T05:39:56.647473+00:00
+fetched_at: 2026-11-09T07:30:20.516629+00:00
 title: "Confidential Inference via trusted VMs \\ Anthropic"
 ---
 
-### Chapter 01: Inference service
+### 01Inference service
 
 Every day, millions of users [entrust](https://trust.anthropic.com/) Claude with sensitive information—from proprietary code to confidential business strategies. At Anthropic, we’re researching and building new technology to ensure that our users’ trust is warranted—and in fact, to ensure that their trust is cryptographically guaranteed.
 

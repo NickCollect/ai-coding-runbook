@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/a-postmortem-of-three-recent-issues
-fetched_at: 2026-10-26T05:39:54.382007+00:00
+fetched_at: 2026-11-09T07:30:17.756743+00:00
 title: "A postmortem of three recent issues \\ Anthropic"
 ---
 
-### Chapter 01: How we serve Claude at scale
+### 01How we serve Claude at scale
 
 Between August and early September, three infrastructure bugs intermittently degraded Claude's response quality. We've now resolved these issues and want to explain what happened.
 

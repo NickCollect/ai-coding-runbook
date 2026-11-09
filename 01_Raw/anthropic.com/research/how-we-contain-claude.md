@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/how-we-contain-claude
-fetched_at: 2026-10-26T05:39:58.537784+00:00
+fetched_at: 2026-11-09T07:30:22.825903+00:00
 title: "How we contain Claude across products \\ Anthropic"
 ---
 
-### Chapter 01: Three types of risk, three components of defense
+### 01Three types of risk, three components of defense
 
 Twelve months ago, we'd have rejected out of hand the idea of granting Claude access sufficient to take down an internal Anthropic service. Today that level of access is routine, and Anthropic developers are more productive for it. The risk of these deployments has two components: how likely a failure is, and how much damage one could do. Progress on safeguards and model training has steadily driven down the first; the second—the theoretical blast radius—only grows as capabilities and access expand. Yet as agents become capable of doing work that once required a person or even a team, the cost of *not* deploying grows large enough that the risk-reward calculation tips heavily toward adoption, as long as products can be made safe. The engineering question becomes how to cap the blast radius.
 

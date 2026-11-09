@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/off-switch-dual-use
-fetched_at: 2026-10-26T05:39:59.526125+00:00
+fetched_at: 2026-11-09T07:30:24.157331+00:00
 title: "An off switch for dual-use knowledge \\ Anthropic"
 ---
 
-### Chapter 01: How GRAM works
+### 01How GRAM works
 
 *This post describes research conducted by [AE Studio](https://ae.studio/alignment) in collaboration with Anthropic.*
 

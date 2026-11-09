@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/strategic-warning-for-ai-risk-progress-and-insights-from-our-frontier-red-team
-fetched_at: 2026-10-26T05:40:00.768560+00:00
+fetched_at: 2026-11-09T07:30:25.310322+00:00
 title: "Progress from our Frontier Red Team \\ Anthropic"
 ---
 
-### Chapter 01: AI is improving rapidly across domains
+### 01AI is improving rapidly across domains
 
 In this post, we are sharing what we have learned about the trajectory of potential national security risks from frontier AI models, along with some of our thoughts about challenges and best practices in evaluating these risks. The information in this post is based on work we’ve carried out over the last year across four model releases. Our assessment is that AI models are displaying ‘early warning’ signs of rapid progress in key dual-use capabilities: models are approaching, and in some cases exceeding, undergraduate-level skills in cybersecurity and expert-level knowledge in some areas of biology. However, present-day models fall short of thresholds at which we consider them to generate substantially elevated risks to national security.
 

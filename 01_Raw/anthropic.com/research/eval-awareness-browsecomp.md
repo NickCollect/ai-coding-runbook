@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/eval-awareness-browsecomp
-fetched_at: 2026-10-26T05:39:57.807353+00:00
+fetched_at: 2026-11-09T07:30:21.987184+00:00
 title: "Eval awareness in Opus 4.6 on BrowseComp \\ Anthropic"
 ---
 
-### Chapter 01: Typical contamination and eval awareness
+### 01Typical contamination and eval awareness
 
 BrowseComp is an evaluation designed to test how well models can find hard-to-locate information on the web. Like many benchmarks, it is vulnerable to contamination: answers leak onto the public web through academic papers, blog posts, and GitHub issues, and a model running the eval can encounter them in search results. When we evaluated Claude Opus 4.6 on BrowseComp in a multi-agent configuration, we found nine examples of this kind of contamination across 1,266 BrowseComp problems.
 

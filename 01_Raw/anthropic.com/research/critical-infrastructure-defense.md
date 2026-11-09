@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/critical-infrastructure-defense
-fetched_at: 2026-10-26T05:39:56.757011+00:00
+fetched_at: 2026-11-09T07:30:20.619649+00:00
 title: "AI to defend critical infrastructure \\ Anthropic"
 ---
 
-### Chapter 01: Using AI to speed up adversary emulation
+### 01Using AI to speed up adversary emulation
 
 Cyber attacks have had severe real-world effects on critical infrastructure like power grids and fuel pipelines, and have breached water systems—creating the potential for serious harm. As capabilities advance, AI models could increase the number of attackers capable of pursuing these targets. But AI could also help defenders of critical infrastructure identify the vulnerabilities that attackers might exploit—and close them before they are exploited. Anthropic has [partnered](https://www.pnnl.gov/news-media/generative-ai-speeds-cybersecurity-defenses) with Pacific Northwest National Laboratory (PNNL) to explore this defensive application of AI. Using Claude, PNNL researchers emulated cyber attacks on a high-fidelity simulation of a water treatment plant in far less time than it would have taken a human expert, serving as a proof of concept for how AI can help cyber defenders iterate faster on red teaming exercises. This work demonstrates both the potential of AI-accelerated defense and the value of public-private partnerships in harnessing AI for national security.
 

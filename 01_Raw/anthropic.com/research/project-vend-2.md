@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/project-vend-2
-fetched_at: 2026-10-26T05:40:00.061762+00:00
+fetched_at: 2026-11-09T07:30:24.662482+00:00
 title: "Project Vend: Phase two \\ Anthropic"
 ---
 
-### Chapter 01: The numbers
+### 01The numbers
 
 In June, we revealed that we’d set up a small shop in our San Francisco office lunchroom, run by an AI shopkeeper. It was part of [Project Vend](https://www.anthropic.com/research/project-vend-1), a free-form experiment exploring how well AIs could do on complex, real-world tasks. Alas, the shopkeeper—a modified version of Claude we named “Claudius”—did *not* do particularly well. It lost money over time, had a strange identity crisis where it claimed it was a human wearing a blue blazer, and was goaded by mischievous Anthropic employees into selling products (particularly, for some reason, tungsten cubes) at a substantial loss.
 

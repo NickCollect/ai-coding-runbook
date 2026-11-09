@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/discovering-cryptographic-weaknesses
-fetched_at: 2026-10-26T05:39:57.140827+00:00
+fetched_at: 2026-11-09T07:30:21.076818+00:00
 title: "Discovering cryptographic weaknesses with Claude \\ Anthropic"
 ---
 
-### Chapter 01: Summary
+### 01Summary
 
 ## Summary
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/reasoning-models-dont-say-think
-fetched_at: 2026-10-26T05:40:00.192936+00:00
+fetched_at: 2026-11-09T07:30:24.803892+00:00
 title: "Reasoning models don't always say what they think \\ Anthropic"
 ---
 
-### Chapter 01: Testing for faithfulness
+### 01Testing for faithfulness
 
 Since late last year, “reasoning models” have been everywhere. These are AI models—such as Claude 3.7 Sonnet—that *show their working*: as well as their eventual answer, you can read the (often fascinating and convoluted) way that they got there, in what’s called their “Chain-of-Thought”.
 

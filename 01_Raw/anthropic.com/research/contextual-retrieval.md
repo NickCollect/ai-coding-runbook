@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/contextual-retrieval
-fetched_at: 2026-10-26T05:39:56.724808+00:00
+fetched_at: 2026-11-09T07:30:20.597961+00:00
 title: "Contextual retrieval in AI systems \\ Anthropic"
 ---
 
-### Chapter 01: A primer on RAG: scaling to larger knowledge bases
+### 01A primer on RAG: scaling to larger knowledge bases
 
 For an AI model to be useful in specific contexts, it often needs access to background knowledge. For example, customer support chatbots need knowledge about the specific business they're being used for, and legal analyst bots need to know about a vast array of past cases.
 

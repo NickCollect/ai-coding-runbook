@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/economic-index-primitives
-fetched_at: 2026-10-26T05:39:57.451493+00:00
+fetched_at: 2026-11-09T07:30:21.399038+00:00
 title: "Economic Index: New building blocks for AI use \\ Anthropic"
 ---
 
-### Chapter 01: What we’ve learned from our economic primitives
+### 01What we’ve learned from our economic primitives
 
 Is artificial intelligence really making people faster at work? What sort of tasks does AI support best? And how might it change the nature of people’s occupations?
 

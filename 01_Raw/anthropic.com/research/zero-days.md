@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/zero-days
-fetched_at: 2026-10-26T05:40:02.090304+00:00
+fetched_at: 2026-11-09T07:30:26.489018+00:00
 title: "LLM-discovered 0 days \\ Anthropic"
 ---
 
-### Chapter 01: Setup
+### 01Setup
 
 *Nicholas Carlini\*, Keane Lucas\*, Evyatar Ben Asher\*, Newton Cheng, Hasnain Lakhani, David Forsythe, and Kyla Guru  
 \*indicates equal contribution*

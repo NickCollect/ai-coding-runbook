@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/making-claude-a-chemist
-fetched_at: 2026-10-26T05:39:58.956790+00:00
+fetched_at: 2026-11-09T07:30:23.447418+00:00
 title: "Making Claude a chemist \\ Anthropic"
 ---
 
-### Chapter 01: Claude vs. ChemDraw on NMR prediction and structure elucidation
+### 01Claude vs. ChemDraw on NMR prediction and structure elucidation
 
 *We’re working with world-class synthetic, computational, and analytical chemists to make Claude better at chemistry. In this post, we share our first work as part of this effort, in which Anthropic chemist, David Kamber, examines how Claude performs on a chemist’s most common analytical input, an NMR spectrum.*When working with molecules, chemists move between hand-drawn structures on a whiteboard, instrument readouts, database query strings, and the technical notations of patents and publications. Each of these representations encodes the same underlying chemistry, but each demands a different kind of fluency. A sketch of caffeine, for example, allows a chemist to spot its resemblance to adenosine, the body’s drowsiness signal, and predict that it keeps us alert by blocking the receptor. However, that same sketch cannot help a chemist tell it apart from other near-identical looking molecules.
 

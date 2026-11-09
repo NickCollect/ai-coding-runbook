@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/alignment-faking
-fetched_at: 2026-10-26T05:39:54.878449+00:00
+fetched_at: 2026-11-09T07:30:18.249867+00:00
 title: "Alignment faking in large language models \\ Anthropic"
 ---
 
-### Chapter 01: Experimental setup
+### 01Experimental setup
 
 Most of us have encountered situations where someone appears to share our views or values, but is in fact only pretending to do so—a behavior that we might call “alignment faking”. Alignment faking occurs in literature: Consider the character of Iago in Shakespeare’s *Othello*, who acts as if he’s the eponymous character’s loyal friend while subverting and undermining him. It occurs in real life: Consider a politician who claims to support a particular cause in order to get elected, only to drop it as soon as they’re in office.
 

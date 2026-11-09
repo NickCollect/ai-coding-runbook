@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/building-ai-cyber-defenders
-fetched_at: 2026-10-26T05:39:55.564279+00:00
+fetched_at: 2026-11-09T07:30:19.124787+00:00
 title: "Building AI for cyber defenders \\ Anthropic"
 ---
 
-### Chapter 01: Claude Sonnet 4.5: emphasizing cyber skills
+### 01Claude Sonnet 4.5: emphasizing cyber skills
 
 **AI models are now useful for cybersecurity tasks in practice, not just theory. As research and experience demonstrated the utility of frontier AI as a tool for cyber attackers, we invested in improving Claude’s ability to help defenders detect, analyze, and remediate vulnerabilities in code and deployed systems. This work allowed Claude Sonnet 4.5 to match or eclipse Opus 4.1, our frontier model released only two months prior, in discovering code vulnerabilities and other cyber skills. Adopting and experimenting with AI will be key for defenders to keep pace.**
 

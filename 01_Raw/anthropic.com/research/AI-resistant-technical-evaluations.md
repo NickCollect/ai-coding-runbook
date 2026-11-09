@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/AI-resistant-technical-evaluations
-fetched_at: 2026-10-26T05:39:54.659779+00:00
+fetched_at: 2026-11-09T07:30:18.120588+00:00
 title: "Designing AI resistant technical evaluations \\ Anthropic"
 ---
 
-### Chapter 01: The origin of the take-home
+### 01The origin of the take-home
 
 *Written by Tristan Hume, a lead on Anthropic's performance optimization team. Tristan designed—and redesigned—the take-home test that's helped Anthropic hire dozens of performance engineers.*
 

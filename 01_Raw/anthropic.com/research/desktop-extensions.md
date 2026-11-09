@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/desktop-extensions
-fetched_at: 2026-10-26T05:39:57.082170+00:00
+fetched_at: 2026-11-09T07:30:21.075448+00:00
 title: "Desktop Extensions: One-click MCP installs \\ Anthropic"
 ---
 
-### Chapter 01: Addressing the MCP installation problem
+### 01Addressing the MCP installation problem
 
 - Sep 11, 2025
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/persona-vectors
-fetched_at: 2026-10-26T05:39:59.586023+00:00
+fetched_at: 2026-11-09T07:30:24.108123+00:00
 title: "Persona vectors: Controlling character traits \\ Anthropic"
 ---
 
-### Chapter 01: Extracting persona vectors
+### 01Extracting persona vectors
 
 Language models are strange beasts. In many ways they appear to have human-like “personalities” and “moods,” but these traits are highly fluid and liable to change unexpectedly.
 

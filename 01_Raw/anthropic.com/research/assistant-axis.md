@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/assistant-axis
-fetched_at: 2026-10-26T05:39:55.238925+00:00
+fetched_at: 2026-11-09T07:30:18.807231+00:00
 title: "The assistant axis \\ Anthropic"
 ---
 
-### Chapter 01: Mapping out persona space
+### 01Mapping out persona space
 
 When you talk to a large language model, you can think of yourself as talking to a *character*. In the first stage of model training, pre-training, LLMs are asked to read vast amounts of text. Through this, they learn to simulate heroes, villains, philosophers, programmers, and just about every other character archetype under the sun. In the next stage, post-training, we select one particular character from this enormous cast and place it center stage: the Assistant. It’s in this character that most modern language models interact with users.
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-interviewer
-fetched_at: 2026-10-26T05:39:55.095040+00:00
+fetched_at: 2026-11-09T07:30:18.735906+00:00
 title: "Introducing Anthropic Interviewer \\ Anthropic"
 ---
 
-### Chapter 01: Introduction
+### 01Introduction
 
 *We’re launching a new tool, Anthropic Interviewer, to help understand people’s perspectives on AI. In this research post, we introduce the tool, describe a test of it on a sample of professionals, and discuss our early findings. We also discuss future work in this direction that we can now explore with the development of this tool and through partnerships with creatives, scientists, and teachers.*
 

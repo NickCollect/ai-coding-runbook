@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/building-c-compiler
-fetched_at: 2026-10-26T05:39:55.604684+00:00
+fetched_at: 2026-11-09T07:30:19.163317+00:00
 title: "Building a C compiler with parallel Claudes \\ Anthropic"
 ---
 
-### Chapter 01: Enabling long-running Claudes
+### 01Enabling long-running Claudes
 
 *Written by Nicholas Carlini, a researcher on our Safeguards team.*
 

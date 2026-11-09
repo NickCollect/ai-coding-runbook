@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/influence-functions
-fetched_at: 2026-10-26T05:39:58.628786+00:00
+fetched_at: 2026-11-09T07:30:23.001060+00:00
 title: "Tracing model outputs to the training data  \\ Anthropic"
 ---
 
-### Chapter 01: A complementary approach to interpretability
+### 01A complementary approach to interpretability
 
 As large language models become more powerful and their risks become clearer, there is increasing value to figuring out what makes them tick. In our [previous](https://www.anthropic.com/research/discovering-language-model-behaviors-with-model-written-evaluations) [work](https://www.anthropic.com/research/the-capacity-for-moral-self-correction-in-large-language-models), we have found that large language models change along many personality and behavioral dimensions as a function of both scale and the amount of fine-tuning. Understanding these changes requires seeing how models work, for instance to determine if a model’s outputs rely on memorization or more sophisticated processing. Understanding the inner workings of language models will have substantial implications for forecasting AI capabilities as well as for approaches to aligning AI systems with human preferences.
 

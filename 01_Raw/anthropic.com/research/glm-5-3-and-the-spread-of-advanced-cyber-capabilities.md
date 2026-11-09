@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/glm-5-3-and-the-spread-of-advanced-cyber-capabilities
-fetched_at: 2026-10-26T05:39:58.255993+00:00
+fetched_at: 2026-11-09T07:30:22.456937+00:00
 title: "GLM-5.3 and the spread of advanced cyber capabilities \\ Anthropic"
 ---
 
-### Chapter 01: GLM-5.3 can develop working exploits end to end
+### 01GLM-5.3 can develop working exploits end to end
 
 *Andrew Fasano, Marius Fleischer  
 Cole McFaul, Robert Xiao, Tripp Gallagher*

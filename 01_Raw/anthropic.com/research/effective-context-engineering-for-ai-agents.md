@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/effective-context-engineering-for-ai-agents
-fetched_at: 2026-10-26T05:39:57.510819+00:00
+fetched_at: 2026-11-09T07:30:21.623985+00:00
 title: "Effective context engineering for AI agents \\ Anthropic"
 ---
 
-### Chapter 01: Context engineering vs. prompt engineering
+### 01Context engineering vs. prompt engineering
 
 After a few years of prompt engineering being the focus of attention in applied AI, a new term has come to prominence: **context engineering**. Building with language models is becoming less about finding the right words and phrases for your prompts, and more about answering the broader question of “what configuration of context is most likely to generate our model’s desired behavior?"
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/many-shot-jailbreaking
-fetched_at: 2026-10-26T05:39:59.016005+00:00
+fetched_at: 2026-11-09T07:30:23.547559+00:00
 title: "Many-shot jailbreaking \\ Anthropic"
 ---
 
-### Chapter 01: Why we’re publishing this research
+### 01Why we’re publishing this research
 
 We investigated a “jailbreaking” technique — a method that can be used to evade the safety guardrails put in place by the developers of large language models (LLMs). The technique, which we call “many-shot jailbreaking”, is effective on Anthropic’s own models, as well as those produced by other AI companies. We briefed other AI developers about this vulnerability in advance, and have implemented mitigations on our systems.
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-economic-index-insights-from-claude-sonnet-3-7
-fetched_at: 2026-10-26T05:39:54.795145+00:00
+fetched_at: 2026-11-09T07:30:18.287125+00:00
 title: "Economic Index: Insights from Claude 3.7 Sonnet \\ Anthropic"
 ---
 
-### Chapter 01: What’s changed since the launch of Claude 3.7 Sonnet?
+### 01What’s changed since the launch of Claude 3.7 Sonnet?
 
 Last month, we launched the [Anthropic Economic Index](https://www.anthropic.com/economic-index)—a new initiative where we’re regularly releasing data and research aimed at understanding AI's effects on labor markets and the economy over time.
 

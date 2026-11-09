@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/claude-discovers-novel-enzyme-system
-fetched_at: 2026-10-26T05:39:56.170724+00:00
+fetched_at: 2026-11-09T07:30:19.788666+00:00
 title: "Claude discovers a novel enzyme system \\ Anthropic"
 ---
 
-### Chapter 01: About our lab
+### 01About our lab
 
 *We’re introducing a new life sciences research group and laboratory at Anthropic. Our focus is on fundamental biology research using Claude: exploring datasets of DNA to identify uncharacterized protein families, generating hypotheses at scale, and testing them through experiments in the lab. This post introduces the team behind this work and shares early results in which Claude discovered a novel enzyme system with properties reminiscent of CRISPR, with only high-level direction from our scientists.*Many discoveries that have revolutionized biology and medicine started with a scientist noticing something odd in the staggering diversity of molecular machines found in nature. Restriction enzymes*,* proteins that cut DNA at specific short sequences*,* were found in bacterial immune systems, where they destroy the DNA of invading viruses. Researchers realized they could use these enzymes to cut DNA at chosen places and splice genes from one organism into another, which launched the biotechnology industry. Taq polymerase, an enzyme that copies DNA at high temperatures, was identified in a bacterium in a Yellowstone hot spring. It became the basis for PCR, the DNA-copying method used in much of modern diagnostics. CRISPR was first noticed as an unusual repeat sequence in the DNA of certain bacteria, and is now the foundation of gene editing-based medicines.  
   

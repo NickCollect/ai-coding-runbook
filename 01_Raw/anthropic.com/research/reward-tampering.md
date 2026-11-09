@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/reward-tampering
-fetched_at: 2026-10-26T05:40:00.397425+00:00
+fetched_at: 2026-11-09T07:30:24.979749+00:00
 title: "Investigating reward tampering in language models \\ Anthropic"
 ---
 
-### Chapter 01: Specification gaming and reward tampering
+### 01Specification gaming and reward tampering
 
 Perverse incentives are everywhere. Think of the concept of "teaching to the test", where teachers focus on the narrow goal of exam preparation and fail to give their students a broader education. Or think of scientists working in the "publish or perish" academic system, publishing large numbers of low-quality papers to advance their careers at the expense of what we actually want them to produce: rigorous research.
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/claude-plays-robotics
-fetched_at: 2026-10-26T05:39:56.327716+00:00
+fetched_at: 2026-11-09T07:30:20.083923+00:00
 title: "How Claude performs on robotics tasks \\ Anthropic"
 ---
 
-### Chapter 01: Summary of findings
+### 01Summary of findings
 
 *Shmuel Berman, Michael Ilie, Jia Deng, and Daniel Freeman*
 

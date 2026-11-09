@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/accelerating-scientific-research
-fetched_at: 2026-10-26T05:39:54.422437+00:00
+fetched_at: 2026-11-09T07:30:17.773299+00:00
 title: "How scientists use Claude to accelerate research \\ Anthropic"
 ---
 
-### Chapter 01: Biomni: a general-purpose biomedical agent with access to hundreds of tools and databases
+### 01Biomni: a general-purpose biomedical agent with access to hundreds of tools and databases
 
 Last October we launched Claude for Life Sciences—a suite of connectors and skills that made Claude a better scientific collaborator. Since then, [we've invested heavily in making Claude the most capable model for scientific work](https://www.anthropic.com/news/healthcare-life-sciences#tab-media-0), with Opus 4.5 showing significant improvements in figure interpretation, computational biology, and protein understanding benchmarks. These advances, informed by our partnerships with researchers in academia and industry, reflect our commitment to understanding exactly how scientists are using AI to accelerate progress.
 

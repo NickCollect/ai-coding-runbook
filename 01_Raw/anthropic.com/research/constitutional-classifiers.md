@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/constitutional-classifiers
-fetched_at: 2026-10-26T05:39:56.699253+00:00
+fetched_at: 2026-11-09T07:30:20.557603+00:00
 title: "Constitutional Classifiers \\ Anthropic"
 ---
 
-### Chapter 01: Results from human red teaming
+### 01Results from human red teaming
 
 *A [new paper](https://arxiv.org/abs/2501.18837) from the Anthropic Safeguards Research Team describes a method that defends AI models against universal jailbreaks. A prototype version of the method was robust to thousands of hours of human red teaming for universal jailbreaks, albeit with high overrefusal rates and compute overhead. An updated version achieved similar robustness on synthetic evaluations, and did so with a 0.38% increase in refusal rates and moderate additional compute costs.*
 

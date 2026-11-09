@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/infrastructure-noise
-fetched_at: 2026-10-26T05:39:58.668461+00:00
+fetched_at: 2026-11-09T07:30:23.046230+00:00
 title: "Infrastructure noise in agentic coding evals \\ Anthropic"
 ---
 
-### Chapter 01: How we got here
+### 01How we got here
 
 Agentic coding benchmarks like SWE-bench and Terminal-Bench are commonly used to compare the software engineering capabilities of frontier models—with top spots on leaderboards often separated by just a few percentage points. These scores are often treated as precise measurements of relative model capability and increasingly inform decisions about which models to deploy. However, we’ve found that infrastructure configuration alone can produce differences that exceed those margins. In internal experiments, the gap between the most- and least-resourced setups on Terminal-Bench 2.0 was 6 percentage points (p < 0.01).
 

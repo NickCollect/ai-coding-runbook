@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/statistical-approach-to-model-evals
-fetched_at: 2026-10-26T05:40:00.688721+00:00
+fetched_at: 2026-11-09T07:30:25.282338+00:00
 title: "A statistical approach to model evaluations \\ Anthropic"
 ---
 
-### Chapter 01: Recommendation #1: Use the Central Limit Theorem
+### 01Recommendation #1: Use the Central Limit Theorem
 
 Suppose an AI model outperforms another model on a benchmark of interest—testing its general knowledge, for example, or its ability to solve computer-coding questions. Is the difference in capabilities real, or could one model simply have gotten lucky in the choice of questions on the benchmark?
 

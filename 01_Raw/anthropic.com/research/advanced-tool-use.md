@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/advanced-tool-use
-fetched_at: 2026-10-26T05:39:54.503243+00:00
+fetched_at: 2026-11-09T07:30:17.846331+00:00
 title: "Introducing advanced tool use for Claude \\ Anthropic"
 ---
 
-### Chapter 01: Tool Search Tool
+### 01Tool Search Tool
 
 The future of AI agents is one where models work seamlessly across hundreds or thousands of tools. An IDE assistant that integrates git operations, file manipulation, package managers, testing frameworks, and deployment pipelines. An operations coordinator that connects Slack, GitHub, Google Drive, Jira, company databases, and dozens of MCP servers simultaneously.
 

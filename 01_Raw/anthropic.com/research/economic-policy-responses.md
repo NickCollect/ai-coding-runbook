@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/economic-policy-responses
-fetched_at: 2026-10-26T05:39:57.469870+00:00
+fetched_at: 2026-11-09T07:30:21.543830+00:00
 title: "Preparing for AI's economic impact \\ Anthropic"
 ---
 
-### Chapter 01: Matching policies to scenarios
+### 01Matching policies to scenarios
 
 *How will the arrival of [powerful AI systems](https://www.anthropic.com/news/anthropic-s-recommendations-ostp-u-s-ai-action-plan) change the structure of the economy? We are uncertain, and so are external experts. But as AI systems continue to improve, and are adopted at an ever-larger scale, it’s crucial there is more discussion about the tools policymakers could use to respond to AI's economic impacts—whatever their nature. To help with this, we’re sharing several economic policy ideas that merit further study.*
 

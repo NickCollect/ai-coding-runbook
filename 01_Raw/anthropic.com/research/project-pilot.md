@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/project-pilot
-fetched_at: 2026-10-26T05:39:59.880761+00:00
+fetched_at: 2026-11-09T07:30:24.483061+00:00
 title: "Project Pilot: Can AI models fly drones? \\ Anthropic"
 ---
 
-### Chapter 01: Evaluation rationale and methods
+### 01Evaluation rationale and methods
 
 *Anthropic and Andon Labs*
 

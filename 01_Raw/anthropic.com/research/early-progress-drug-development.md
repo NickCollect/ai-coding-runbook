@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/early-progress-drug-development
-fetched_at: 2026-11-02T07:00:34.889758+00:00
+fetched_at: 2026-11-09T07:30:21.238394+00:00
 title: "Early progress on accelerating drug development with Claude \\ Anthropic"
 ---
 
-### Chapter 01: Case studies
+### 01Case studies
 
 *Anthropic’s [life sciences team](https://www.anthropic.com/science) is working to accelerate curing disease. Over the past several months, our scientists have engaged in deep research partnerships with six organizations developing new medicines: [BigHat Biosciences](https://www.bighatbio.com/), [Bristol Myers Squibb](https://www.bms.com/), [Divergence Labs](https://divergencelabs.com/), [Enveda](https://enveda.com/), [Generate Biomedicines](https://generatebiomedicines.com/), and [The Column Group](https://www.thecolumngroup.com/). We've also begun drug discovery efforts of our own. In doing so, we've learned a lot about how Claude can support drug development, and how we’ll need to improve Claude further to realize AI's potential in medicine. We plan to scale this work up substantially from here*.
 

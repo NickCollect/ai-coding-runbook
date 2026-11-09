@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/emotion-concepts-function
-fetched_at: 2026-10-26T05:39:57.635634+00:00
+fetched_at: 2026-11-09T07:30:21.767930+00:00
 title: "Emotion concepts in a large language model  \\ Anthropic"
 ---
 
-### Chapter 01: Why would an AI model represent emotions?
+### 01Why would an AI model represent emotions?
 
 All modern language models sometimes act like they have emotions. They may say they’re happy to help you, or sorry when they make a mistake. Sometimes they even appear to become frustrated or anxious when struggling with tasks. What’s behind these behaviors? The way modern AI models are trained pushes them to [act like a character](https://www.anthropic.com/research/persona-selection-model) with human-like characteristics. In addition, these models are known to develop rich and generalizable [internal](https://transformer-circuits.pub/2024/scaling-monosemanticity/) [representations](https://transformer-circuits.pub/2025/attribution-graphs/biology.html) of abstract concepts underlying their actions. It may then be natural for them to develop internal machinery that emulates aspects of human psychology, like emotions. If so, this could have profound implications for how we build AI systems and ensure they behave reliably.
 

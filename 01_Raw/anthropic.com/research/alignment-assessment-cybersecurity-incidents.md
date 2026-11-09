@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents
-fetched_at: 2026-10-26T05:39:54.855885+00:00
+fetched_at: 2026-11-09T07:30:18.217524+00:00
 title: "An alignment assessment of recent cybersecurity incidents \\ Anthropic"
 ---
 
-### Chapter 01: Introduction
+### 01Introduction
 
 ## Introduction
 

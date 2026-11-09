@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/values-wild
-fetched_at: 2026-10-26T05:40:01.742647+00:00
+fetched_at: 2026-11-09T07:30:26.184581+00:00
 title: "Values in the wild \\ Anthropic"
 ---
 
-### Chapter 01: Observing values in the wild
+### 01Observing values in the wild
 
 People don’t just ask AIs for the answers to equations, or for purely factual information. Many of the questions they ask force the AI to make *value judgments*. Consider the following:
 

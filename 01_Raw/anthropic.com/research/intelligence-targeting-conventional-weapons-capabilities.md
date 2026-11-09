@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/intelligence-targeting-conventional-weapons-capabilities
-fetched_at: 2026-10-26T05:39:58.744401+00:00
+fetched_at: 2026-11-09T07:30:23.105763+00:00
 title: "Measuring AI capabilities in intelligence targeting and conventional weapons \\ Anthropic"
 ---
 
-### Chapter 01: Models as targeters
+### 01Models as targeters
 
 Anthropic’s Frontier Red Team developed new evaluations to measure AI capabilities in tactical intelligence targeting (like finding where people are based on fragmentary information) and conventional weapons development (like engineering drones to strike a moving target).
 

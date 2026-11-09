@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/nuclear-safeguards-for-ai
-fetched_at: 2026-10-26T05:39:59.618319+00:00
+fetched_at: 2026-11-09T07:30:23.989379+00:00
 title: "Developing nuclear safeguards for AI \\ Anthropic"
 ---
 
-### Chapter 01: What we built
+### 01What we built
 
 Nuclear technology is inherently dual-use: the same physics principles that power nuclear reactors can be misused for weapons development. As AI models become more capable, we need to keep a close eye on whether they can provide users with dangerous technical knowledge in ways that could threaten national security.
 

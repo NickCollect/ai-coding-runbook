@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/small-samples-poison
-fetched_at: 2026-10-26T05:40:00.564720+00:00
+fetched_at: 2026-11-09T07:30:25.161942+00:00
 title: "A small number of samples can poison LLMs \\ Anthropic"
 ---
 
-### Chapter 01: Technical details
+### 01Technical details
 
 *In a joint study with the UK AI Security Institute and the Alan Turing Institute, we found that as few as 250 malicious documents can produce a "backdoor" vulnerability in a large language model—regardless of model size or training data volume. Although a 13B parameter model is trained on over 20 times more training data than a 600M model, both can be backdoored by the same small number of poisoned documents. Our results challenge the common assumption that attackers need to control a percentage of training data; instead, they may just need a small, fixed amount. Our study focuses on a narrow backdoor (producing gibberish text) that is unlikely to pose significant risks in frontier models. Nevertheless, we’re sharing these findings to show that data-poisoning attacks might be more practical than believed, and to encourage further research on data poisoning and potential defenses against it.*
 

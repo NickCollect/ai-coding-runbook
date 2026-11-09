@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/swe-bench-sonnet
-fetched_at: 2026-10-26T05:40:00.898239+00:00
+fetched_at: 2026-11-09T07:30:25.409117+00:00
 title: "Claude SWE-Bench performance \\ Anthropic"
 ---
 
-### Chapter 01: Achieving state-of-the-art
+### 01Achieving state-of-the-art
 
 *Our latest model, the upgraded [Claude 3.5 Sonnet](https://www.anthropic.com/news/3-5-models-and-computer-use), achieved 49% on SWE-bench Verified, a software engineering evaluation, beating the previous state-of-the-art model's 45%. This post explains the "agent" we built around the model, and is intended to help developers get the best possible performance out of Claude 3.5 Sonnet.*
 

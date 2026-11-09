@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/how-canada-uses-claude
-fetched_at: 2026-10-26T05:39:58.492832+00:00
+fetched_at: 2026-11-09T07:30:22.704808+00:00
 title: "How Canada uses Claude  \\ Anthropic"
 ---
 
-### Chapter 01: Canada is at the forefront of Claude adoption
+### 01Canada is at the forefront of Claude adoption
 
 *Le français suit.*
 

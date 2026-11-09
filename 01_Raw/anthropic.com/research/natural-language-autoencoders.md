@@ -1,10 +1,10 @@
 ---
 source_url: https://www.anthropic.com/research/natural-language-autoencoders
-fetched_at: 2026-10-26T05:39:59.445288+00:00
+fetched_at: 2026-11-09T07:30:23.964380+00:00
 title: "Natural Language Autoencoders \\ Anthropic"
 ---
 
-### Chapter 01: What is a natural language autoencoder?
+### 01What is a natural language autoencoder?
 
 When you talk to an AI model like Claude, you talk to it in words. Internally, Claude processes those words as long lists of numbers, before again producing words as its output. These numbers in the middle are called *activations—*and like neural activity in the human brain, they encode Claude’s thoughts.
 
