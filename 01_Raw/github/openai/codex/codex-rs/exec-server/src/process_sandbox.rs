@@ -16,8 +16,6 @@ use codex_network_proxy::NetworkProxyHandle;
 use codex_network_proxy::NetworkProxyState;
 use codex_network_proxy::RemoteCredentialBrokerCache;
 use codex_network_proxy::is_managed_mitm_ca_trust_bundle_path;
-#[cfg(target_os = "windows")]
-use codex_network_proxy::strip_managed_proxy_env;
 use codex_protocol::config_types::WindowsSandboxLevel;
 use codex_protocol::models::PermissionProfile;
 use codex_sandboxing::SandboxCommand;
@@ -28,9 +26,6 @@ use codex_sandboxing::SandboxType;
 use codex_sandboxing::WindowsSandboxFilesystemOverrides;
 use codex_sandboxing::WindowsSandboxProxySettingsMode;
 use codex_sandboxing::WindowsSandboxSpawnRequest;
-use codex_sandboxing::resolve_windows_elevated_filesystem_overrides;
-use codex_sandboxing::resolve_windows_restricted_token_filesystem_overrides;
-use codex_sandboxing::windows_sandbox_uses_elevated_backend;
 use codex_sandboxing::with_managed_mitm_ca_readable_root;
 #[cfg(windows)]
 use codex_shell_command::shell_detect::fallback_powershell_shell_for_windows_sandbox;
@@ -120,7 +115,6 @@ pub(crate) async fn prepare_exec_request_with_telemetry(
     credential_brokers: &RemoteCredentialBrokerCache,
     telemetry: &ProcessTelemetry,
 ) -> Result<PreparedExecRequest, JSONRPCErrorError> {
-    let network_proxy = params.network_proxy.clone();
     if let Some(sandbox) = params.sandbox.as_ref()
         && sandbox.windows_sandbox_selection == WindowsSandboxSelection::Mxc
     {
@@ -135,35 +129,10 @@ pub(crate) async fn prepare_exec_request_with_telemetry(
             ));
         }
     }
-    #[cfg(target_os = "windows")]
-    let mut env = env;
-    #[cfg(target_os = "windows")]
-    let network_proxy = if params.sandbox.is_none() {
-        // Shared Windows ingress selects a route from the sandbox token's SID. Native launches
-        // have no route SID, so leave them direct.
-        if params.network_proxy.is_some() {
-            strip_managed_proxy_env(&mut env);
-        }
-        None
-    } else {
-        network_proxy
-    };
-    let network_proxy = network_proxy
-        .map(|launch| {
-            NetworkProxyState::from_remote_launch_config(
-                launch,
-                codex_utils_path_uri::Platform::native(),
-                credential_brokers,
-                &env,
-            )
-        })
-        .transpose()
-        .map_err(|err| invalid_params(format!("invalid network proxy config: {err}")))?;
-
     let (env, managed_network, network_proxy_handle, network_proxy_restricting_sid) =
         prepare_managed_network(
             params,
-            network_proxy,
+            credential_brokers,
             runtime_paths.is_some_and(|paths| paths.proxy_private_ips_via_upstream),
             env,
             network_policy_decider,
@@ -311,6 +280,7 @@ pub(crate) async fn prepare_exec_request_with_telemetry(
                 additional_permissions: None,
             },
             permissions: &permissions,
+            workspace_roots: None,
             sandbox,
             enforce_managed_network: params.enforce_managed_network,
             environment_id: None,
@@ -340,23 +310,13 @@ pub(crate) async fn prepare_exec_request_with_telemetry(
         })?;
         request.arg0 = params.arg0.clone();
         let proxy_enforced = params.enforce_managed_network;
-        let use_elevated = windows_sandbox_uses_elevated_backend(windows_sandbox_level);
-        let filesystem_overrides = if use_elevated {
-            resolve_windows_elevated_filesystem_overrides(
-                sandbox,
-                &permissions,
-                &native_sandbox_policy_cwd,
-                use_elevated,
-                &request.env,
-            )
-        } else {
-            resolve_windows_restricted_token_filesystem_overrides(
-                sandbox,
-                &permissions,
-                &native_sandbox_policy_cwd,
-                windows_sandbox_level,
-            )
-        }
+        let filesystem_overrides = WindowsSandboxFilesystemOverrides::resolve(
+            sandbox,
+            &permissions,
+            &native_sandbox_policy_cwd,
+            windows_sandbox_level,
+            &request.env,
+        )
         .map_err(|err| invalid_params(format!("failed to prepare process sandbox: {err}")))?;
         Some(PreparedWindowsSandboxRequest {
             permission_profile: permissions,
@@ -383,7 +343,7 @@ pub(crate) async fn prepare_exec_request_with_telemetry(
 
 async fn prepare_managed_network(
     params: &ExecParams,
-    network_proxy: Option<NetworkProxyState>,
+    credential_brokers: &RemoteCredentialBrokerCache,
     proxy_private_ips_via_upstream: bool,
     env: HashMap<String, String>,
     network_policy_decider: Option<Arc<dyn NetworkPolicyDecider>>,
@@ -398,9 +358,37 @@ async fn prepare_managed_network(
     ),
     JSONRPCErrorError,
 > {
-    let Some(mut state) = network_proxy else {
+    let Some(launch) = &params.network_proxy else {
         return Ok((env, params.managed_network.clone(), None, None));
     };
+    #[cfg(windows)]
+    let routing = match params
+        .sandbox
+        .as_ref()
+        .map(|sandbox| sandbox.windows_sandbox_selection)
+    {
+        None => {
+            // Native Windows commands have no sandbox token SID for shared ingress.
+            let mut native_env = env;
+            codex_network_proxy::strip_managed_proxy_env(&mut native_env);
+            return Ok((native_env, params.managed_network.clone(), None, None));
+        }
+        Some(WindowsSandboxSelection::Mxc) => ManagedProxyRouting::DedicatedListeners,
+        Some(
+            WindowsSandboxSelection::Disabled
+            | WindowsSandboxSelection::RestrictedToken
+            | WindowsSandboxSelection::Elevated,
+        ) => ManagedProxyRouting::SharedIngress,
+    };
+    #[cfg(not(windows))]
+    let routing = ManagedProxyRouting::SharedIngress;
+    let mut state = NetworkProxyState::from_remote_launch_config(
+        launch.clone(),
+        codex_utils_path_uri::Platform::native(),
+        credential_brokers,
+        &env,
+    )
+    .map_err(|err| invalid_params(format!("invalid network proxy config: {err}")))?;
     let credential_masking = state
         .current_cfg()
         .await
@@ -410,14 +398,6 @@ async fn prepare_managed_network(
             ))
         })?
         .credential_broker;
-    let routing =
-        if params.sandbox.as_ref().is_some_and(|sandbox| {
-            sandbox.windows_sandbox_selection == WindowsSandboxSelection::Mxc
-        }) {
-            ManagedProxyRouting::DedicatedListeners
-        } else {
-            ManagedProxyRouting::SharedIngress
-        };
     state.set_proxy_private_ips_via_upstream(proxy_private_ips_via_upstream);
     if let Some(observer) = network_policy_audit_observer {
         state.set_policy_audit_observer(observer);

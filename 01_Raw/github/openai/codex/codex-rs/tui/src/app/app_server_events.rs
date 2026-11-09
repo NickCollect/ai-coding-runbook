@@ -64,31 +64,41 @@ impl App {
     }
 
     pub(super) fn refresh_mcp_startup_expected_servers_from_config(&mut self) {
-        if self
+        let configured_servers = self.config.mcp_servers.get();
+        let is_subagent = self
             .current_displayed_thread_id()
             .zip(self.primary_thread_id)
             .is_some_and(|(thread_id, primary_thread_id)| {
                 self.agent_navigation.is_parent_owned(thread_id)
                     || (thread_id != primary_thread_id
                         && !self.side_threads.contains_key(&thread_id))
-            })
-        {
-            // Subagents can defer cached servers indefinitely, so only servers
-            // that actually report startup should keep their status running.
-            self.chat_widget
-                .set_mcp_startup_expected_servers(std::iter::empty());
+            });
+        if is_subagent || !matches!(self.app_server_target, crate::AppServerTarget::Embedded) {
+            // Shared app servers only send startup updates after subscription and may
+            // have different configured servers. Subagents can start deferred servers
+            // individually. In both cases, wait only for the startups we observe.
+            self.chat_widget.track_reported_mcp_startup_servers();
             return;
         }
 
-        let enabled_config_mcp_servers: Vec<String> = self
-            .config
-            .mcp_servers
-            .get()
+        let enabled_servers = configured_servers
             .iter()
-            .filter_map(|(name, server)| server.enabled.then_some(name.clone()))
-            .collect();
-        self.chat_widget
-            .set_mcp_startup_expected_servers(enabled_config_mcp_servers);
+            .filter(|(_, server)| server.enabled);
+        // Plugins can contribute lazy servers outside the explicit configuration.
+        if self
+            .config
+            .features
+            .enabled(codex_features::Feature::McpLazyStdioStartup)
+        {
+            self.chat_widget.set_initial_mcp_startup_expected_servers(
+                enabled_servers
+                    .filter(|(_, server)| !server.can_defer_stdio_startup())
+                    .map(|(name, _)| name.clone()),
+            );
+        } else {
+            self.chat_widget
+                .set_mcp_startup_expected_servers(enabled_servers.map(|(name, _)| name.clone()));
+        }
     }
 
     pub(super) async fn handle_app_server_event(
@@ -145,6 +155,13 @@ impl App {
                 self.handle_server_request_event(app_server_client, request)
                     .await;
                 self.repaint_agents_overview();
+            }
+            AppServerEvent::ThreadStreamDisconnected(error) => {
+                self.handle_server_notification_event(
+                    app_server_client,
+                    ServerNotification::Error(*error),
+                )
+                .await;
             }
             AppServerEvent::Disconnected { message } => {
                 // The request result distinguishes a refused start from a lost reply.

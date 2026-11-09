@@ -33,6 +33,7 @@ __all__ = [
     "ToolChoice",
     "ToolChoiceSpecificProgrammaticToolCallingParam",
     "Conversation",
+    "Image",
     "Moderation",
     "ModerationInput",
     "ModerationInputModerationResult",
@@ -98,6 +99,11 @@ class Conversation(BaseModel):
 
     id: str
     """The unique ID of the conversation that this response was associated with."""
+
+
+class Image(BaseModel):
+    context_compression: Literal["enabled", "disabled"]
+    """Effective image context optimization policy."""
 
 
 class ModerationInputModerationResult(BaseModel):
@@ -262,7 +268,7 @@ class PromptCacheOptions(BaseModel):
     mode: Literal["implicit", "explicit"]
     """Whether implicit prompt-cache breakpoints were enabled."""
 
-    ttl: Literal["30m"]
+    ttl: Literal["30m", "12h"]
     """The minimum lifetime applied to each cache breakpoint."""
 
     comparison_response_id: Optional[str] = None
@@ -473,6 +479,8 @@ class Response(BaseModel):
     Input items and output items from this response were automatically added to this
     conversation.
     """
+
+    image: Optional[Image] = None
 
     max_output_tokens: Optional[int] = None
     """

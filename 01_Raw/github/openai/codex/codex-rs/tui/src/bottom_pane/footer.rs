@@ -633,7 +633,7 @@ pub(crate) fn side_conversation_context_line(label: &str) -> Line<'static> {
         if index > 0 {
             line.push_span(" · ".set_style(secondary_text_style()));
         }
-        if let Some((keys, action)) = [" to switch", " to close", " for side"]
+        if let Some((keys, action)) = [" to switch", " to close", " to archive", " for side"]
             .into_iter()
             .find_map(|action| part.strip_suffix(action).map(|keys| (keys, action)))
         {
@@ -723,6 +723,15 @@ pub(crate) fn render_context_right(area: Rect, buf: &mut Buffer, line: &Line<'st
     }
 }
 
+pub(crate) fn render_unfocused_status(text: String, area: Rect, buf: &mut Buffer) {
+    let area = inset_footer_hint_area(area);
+    crate::line_truncation::truncate_line_with_ellipsis_if_overflow(
+        text.dim().into(),
+        usize::from(area.width),
+    )
+    .render(area, buf);
+}
+
 pub(crate) fn inset_footer_hint_area(mut area: Rect) -> Rect {
     if area.width > 2 {
         area.x += 2;
@@ -757,7 +766,7 @@ fn footer_from_props_lines(
     let key_hints = props.key_hints;
     // The configurable status line has its own layout. An agent label by itself still belongs
     // to the ordinary footer flow.
-    if shows_passive_footer_line(props) && props.active_agent_label.is_some() {
+    if props.mode.shows_passive_line(props.is_task_running) && props.active_agent_label.is_some() {
         return vec![passive_footer_suffix(props, /*has_status*/ false)];
     }
     match props.mode {
@@ -810,7 +819,7 @@ fn footer_from_props_lines(
 /// both combined. Active instructional states such as quit reminders, shortcut overlays, and queue
 /// prompts deliberately return `None` so those call-to-action hints stay visible.
 pub(crate) fn passive_footer_status_line(props: &FooterProps) -> Option<FooterContent> {
-    if !shows_passive_footer_line(props) {
+    if !props.mode.shows_passive_line(props.is_task_running) {
         return None;
     }
 
@@ -854,18 +863,17 @@ fn passive_footer_suffix(props: &FooterProps, has_status: bool) -> Line<'static>
     line
 }
 
-/// Whether the current footer mode allows contextual information to replace instructional hints.
-///
-/// In practice this means the composer is idle, or it has a draft but is not currently running a
-/// task, so the footer can spend the row on ambient context instead of "what to do next" text.
-pub(crate) fn shows_passive_footer_line(props: &FooterProps) -> bool {
-    match props.mode {
-        FooterMode::ComposerEmpty => true,
-        FooterMode::ComposerHasDraft => !props.is_task_running,
-        FooterMode::HistorySearch
-        | FooterMode::QuitShortcutReminder
-        | FooterMode::ShortcutOverlay
-        | FooterMode::EscHint => false,
+impl FooterMode {
+    /// Whether contextual status can occupy the row normally used for instructions.
+    pub(super) fn shows_passive_line(self, is_task_running: bool) -> bool {
+        match self {
+            Self::ComposerEmpty => true,
+            Self::ComposerHasDraft => !is_task_running,
+            Self::HistorySearch
+            | Self::QuitShortcutReminder
+            | Self::ShortcutOverlay
+            | Self::EscHint => false,
+        }
     }
 }
 
@@ -875,7 +883,7 @@ pub(crate) fn shows_passive_footer_line(props: &FooterProps) -> bool {
 /// can be rendered by the standard footer flow, so this only becomes `true` when the status line
 /// feature is enabled and the current mode allows contextual footer content.
 pub(crate) fn uses_passive_footer_status_layout(props: &FooterProps) -> bool {
-    props.status_line_enabled && shows_passive_footer_line(props)
+    props.status_line_enabled && props.mode.shows_passive_line(props.is_task_running)
 }
 
 pub(crate) fn footer_line_width(

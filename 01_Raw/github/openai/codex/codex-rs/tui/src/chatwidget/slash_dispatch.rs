@@ -113,8 +113,17 @@ impl ChatWidget {
         self.request_redraw();
         self.app_event_tx.send(AppEvent::StartSide {
             parent_thread_id,
+            mode: if user_message.is_some() {
+                crate::app_event::SideStartMode::New
+            } else {
+                crate::app_event::SideStartMode::Reuse
+            },
             user_message,
         });
+    }
+
+    pub(crate) fn sidebar_chooser_available(&self) -> bool {
+        !self.review.is_review_mode && !self.is_external_writer_view()
     }
 
     fn request_empty_side_conversation(&mut self, cmd: SlashCommand) {
@@ -157,7 +166,7 @@ impl ChatWidget {
             || (cmd == SlashCommand::Export && self.input_queue.suppress_queue_autosend)
     }
 
-    pub(super) fn dispatch_command(&mut self, cmd: SlashCommand) {
+    pub(crate) fn dispatch_command(&mut self, cmd: SlashCommand) {
         self.dispatch_command_from_source(cmd, SlashCommandDispatchSource::Live);
     }
 
@@ -282,7 +291,8 @@ impl ChatWidget {
                 self.bottom_pane.show_selection_view(SelectionViewParams {
                     title: Some("Delete this session?".to_string()),
                     subtitle: Some(
-                        "Cannot be undone. Subagent threads will also be deleted.".to_string(),
+                        "Also deletes subagents and saved side chats. Cannot be undone."
+                            .to_string(),
                     ),
                     footer_hint: Some(standard_popup_hint_line()),
                     items: vec![
@@ -889,8 +899,10 @@ impl ChatWidget {
             SlashCommand::Keymap => match trimmed.to_ascii_lowercase().as_str() {
                 "" => self.open_keymap_picker(),
                 "debug" => {
-                    match crate::keymap::RuntimeKeymap::from_config(&self.local_settings.tui.keymap)
-                    {
+                    match crate::keymap::RuntimeKeymap::for_session(
+                        &self.local_settings.tui.keymap,
+                        self.local_settings.workspace_enabled(self.config_ref()),
+                    ) {
                         Ok(runtime_keymap) => self.open_keymap_debug(&runtime_keymap),
                         Err(err) => {
                             self.add_error_message(format!(

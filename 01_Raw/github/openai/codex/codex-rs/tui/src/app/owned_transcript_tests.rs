@@ -1664,6 +1664,22 @@ async fn find_refreshes_live_details_before_searching_the_first_query() -> Resul
         ))
         .contains("needle")
     );
+    crate::app::test_support::enable_side_retention(&mut app)?;
+    app.handle_tui_event(
+        &mut tui,
+        &mut app_server,
+        TuiEvent::Key(KeyCode::F(4).into()),
+    )
+    .await?;
+    assert!(app.transcript_view.is_activity_focused());
+    for key in [
+        KeyEvent::new(KeyCode::Char('x'), KeyModifiers::CONTROL),
+        KeyCode::Char('c').into(),
+    ] {
+        app.handle_tui_event(&mut tui, &mut app_server, TuiEvent::Key(key))
+            .await?;
+    }
+    assert!(!app.transcript_view.is_activity_focused());
     for event in [
         TuiEvent::Key(KeyEvent::new(KeyCode::F(3), KeyModifiers::NONE)),
         TuiEvent::Paste("needle".into()),
@@ -1699,7 +1715,7 @@ async fn find_refreshes_live_details_before_searching_the_first_query() -> Resul
     Ok(())
 }
 
-fn mouse(kind: MouseEventKind, column: u16, row: u16) -> TuiEvent {
+pub(in crate::app) fn mouse(kind: MouseEventKind, column: u16, row: u16) -> TuiEvent {
     TuiEvent::Mouse(MouseEvent {
         kind,
         column,
@@ -1746,6 +1762,7 @@ async fn fullscreen_composer_mouse_copy_and_input_ownership() -> Result<()> {
             row: 0,
             modifiers: KeyModifiers::NONE,
         },
+        ClipboardPasteContext::Composer,
     );
     assert!(!tui.clipboard.is_busy());
     app.render_owned_transcript(&mut tui, size)?;
@@ -2035,11 +2052,14 @@ async fn composer_thumbnails_follow_draft_deletion_and_resize() -> Result<()> {
         tui.set_owned_screen(owned)?;
         app.chat_widget
             .set_pet_image_support_for_tests(PetImageSupport::Supported(ImageProtocol::Kitty));
-        app.chat_widget.attach_image(portrait.clone());
+        app.chat_widget
+            .attach_image(portrait.clone(), ClipboardPasteContext::Composer);
         app.chat_widget.handle_key_event(KeyCode::Home.into());
-        app.chat_widget.attach_image(banner.clone());
+        app.chat_widget
+            .attach_image(banner.clone(), ClipboardPasteContext::Composer);
         app.chat_widget.handle_key_event(KeyCode::End.into());
-        app.chat_widget.attach_image(banner.clone());
+        app.chat_widget
+            .attach_image(banner.clone(), ClipboardPasteContext::Composer);
 
         let narrow = Size::new(/*width*/ 20, /*height*/ 24);
         app.render_chat_widget_frame(&mut tui, narrow)?;

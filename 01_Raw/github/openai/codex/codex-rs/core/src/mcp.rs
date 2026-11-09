@@ -146,6 +146,42 @@ impl McpManager {
         }
     }
 
+    pub(crate) fn for_plugins_manager(&self, plugins_manager: Arc<PluginsManager>) -> Self {
+        let mut manager = Self::new_with_extensions(
+            plugins_manager,
+            Arc::clone(&self.extensions),
+            ConnectorRuntimeManager::default(),
+        );
+        manager.connection_pool = self.connection_pool.clone();
+        manager
+    }
+
+    pub fn plugins_manager(&self) -> Arc<PluginsManager> {
+        Arc::clone(&self.plugins_manager)
+    }
+
+    pub fn auth_manager(&self) -> Arc<codex_login::AuthManager> {
+        self.plugins_manager.auth_manager()
+    }
+
+    pub fn runtime_auth_for_config(
+        &self,
+        config: &Config,
+    ) -> Option<(
+        codex_runtime_agent_instance::RuntimeAuthSlot,
+        codex_features::RuntimeAuthMode,
+    )> {
+        config
+            .features
+            .enabled(Feature::RuntimeAgentInstances)
+            .then(|| {
+                (
+                    self.plugins_manager.runtime_auth_slot(),
+                    config.runtime_auth_mode,
+                )
+            })
+    }
+
     pub fn codex_apps_tools_cache(&self) -> ConnectorRuntimeManager<ToolInfo> {
         self.codex_apps_tools_cache.clone()
     }

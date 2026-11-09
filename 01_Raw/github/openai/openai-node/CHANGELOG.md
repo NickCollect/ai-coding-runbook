@@ -1,5 +1,91 @@
 # Changelog
 
+## [7.53.0](https://github.com/openai/openai-node/compare/v7.52.0...v7.53.0) (2026-11-06)
+
+
+### Features
+
+* **agents:** deliver session errors as stream events ([#3120](https://github.com/openai/openai-node/issues/3120)) ([c48e5aa](https://github.com/openai/openai-node/commit/c48e5aa56c1f55ee8a19dab6578860d6a0ad1395))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump @aws-sdk/credential-provider-node from 3.972.84 to 3.972.88 ([#3099](https://github.com/openai/openai-node/issues/3099)) ([101175b](https://github.com/openai/openai-node/commit/101175bd5077dc8e7cb24435cefee0aac14dd1c3))
+* **deps-dev:** bump oxfmt from 0.72.0 to 0.75.0 ([#3091](https://github.com/openai/openai-node/issues/3091)) ([77012af](https://github.com/openai/openai-node/commit/77012aff4531c2939eb74a9ad2b14f0fb113a3ff))
+* **deps-dev:** bump oxlint from 1.87.0 to 1.90.0 ([#3096](https://github.com/openai/openai-node/issues/3096)) ([75903b2](https://github.com/openai/openai-node/commit/75903b20ef3959c0457e4cc6895339611cd2bd1e))
+* **deps-dev:** bump ultracite from 7.11.1 to 8.1.0 ([#3098](https://github.com/openai/openai-node/issues/3098)) ([a523d74](https://github.com/openai/openai-node/commit/a523d74b7c82fc4379259eb2352a13ee400d8b4b))
+* **deps:** bump @azure/identity from 4.13.3 to 4.14.0 ([#3094](https://github.com/openai/openai-node/issues/3094)) ([6a3d573](https://github.com/openai/openai-node/commit/6a3d5739c85511bba0e6f581d3bfeac72fd7922f))
+* **deps:** bump @azure/identity from 4.13.3 to 4.14.0 ([#3094](https://github.com/openai/openai-node/issues/3094)) ([3f56f57](https://github.com/openai/openai-node/commit/3f56f574f87a7c7117db0ae75a19cfc4025864fd))
+
+## [7.52.0](https://github.com/openai/openai-node/compare/v7.51.0...v7.52.0) (2026-11-05)
+
+
+### Features
+
+* **api:** add a model option for Responses ([#3116](https://github.com/openai/openai-node/issues/3116)) ([c05ed3e](https://github.com/openai/openai-node/commit/c05ed3e8aa0642b2f470e91be301da73f4a1b8f6))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump follow-redirects from 1.16.0 to 1.16.2 in /ecosystem-tests/cloudflare-worker ([#3113](https://github.com/openai/openai-node/issues/3113)) ([2d5b81c](https://github.com/openai/openai-node/commit/2d5b81c729b6d0b4f7da453026aaca6dedb2fb7e))
+
+## [7.51.0](https://github.com/openai/openai-node/compare/v7.50.0...v7.51.0) (2026-11-05)
+
+
+### Features
+
+* **api:** add Australia, India, and Japan residency options ([#3112](https://github.com/openai/openai-node/issues/3112)) ([42c31dc](https://github.com/openai/openai-node/commit/42c31dc77cad76aae960c81ebc6cd6854a41a409))
+* **api:** add GPT-6 Rosalind to the model catalog ([#3109](https://github.com/openai/openai-node/issues/3109)) ([9854bd6](https://github.com/openai/openai-node/commit/9854bd60f7e2a5840baa61d86d9a288d2127ae8f))
+* **api:** add image complexity and GIF and SVG output controls ([#3114](https://github.com/openai/openai-node/issues/3114)) ([39b724a](https://github.com/openai/openai-node/commit/39b724a3b59eea71782b74ebe8319107d63afc81))
+* **api:** expand agent turn errors and image and audio options ([#3110](https://github.com/openai/openai-node/issues/3110)) ([c3f42fa](https://github.com/openai/openai-node/commit/c3f42fa9229cd837c24bfff53d93321216c34484))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump follow-redirects from 1.16.0 to 1.16.2 in /ecosystem-tests/ts-browser-webpack ([#3102](https://github.com/openai/openai-node/issues/3102)) ([934421d](https://github.com/openai/openai-node/commit/934421d0fc66c072116c4b4fde1e5c7e837aa982))
+
+## [7.50.0](https://github.com/openai/openai-node/compare/v7.49.0...v7.50.0) (2026-11-03)
+
+
+### Features
+
+* **api:** add 12-hour Responses caching and cache-write usage ([#3106](https://github.com/openai/openai-node/issues/3106)) ([a286400](https://github.com/openai/openai-node/commit/a286400cf8d096d1315391701dc3312929feadfd))
+* **api:** add project service tier settings ([#3105](https://github.com/openai/openai-node/issues/3105)) ([13abd41](https://github.com/openai/openai-node/commit/13abd41307e8d2f54f5ed906128daa09c8f28b1f))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump puppeteer from 25.14.0 to 25.16.0 in /ecosystem-tests/ts-browser-webpack ([#3100](https://github.com/openai/openai-node/issues/3100)) ([65095d2](https://github.com/openai/openai-node/commit/65095d2f0ff54a1f16833e00fb13d001686b99ba))
+
+
+### Documentation
+
+* clarify generated-file ownership ([#3107](https://github.com/openai/openai-node/issues/3107)) ([3eb0f23](https://github.com/openai/openai-node/commit/3eb0f2350133a9f264e2b8d911b61805527eb738))
+
+## [7.49.0](https://github.com/openai/openai-node/compare/v7.48.0...v7.49.0) (2026-11-03)
+
+
+### Features
+
+* **api:** add workload identity providers and federation rules ([#3103](https://github.com/openai/openai-node/issues/3103)) ([47c4227](https://github.com/openai/openai-node/commit/47c4227222af55cc1e43cd8ae4f8ba17b80cae21))
+
+## [7.48.0](https://github.com/openai/openai-node/compare/v7.47.0...v7.48.0) (2026-11-03)
+
+
+### Features
+
+* **api:** expand Live Responses delegation tools and choices (exhaustive TypeScript switches may need to handle new variants) ([#3101](https://github.com/openai/openai-node/issues/3101)) ([e572875](https://github.com/openai/openai-node/commit/e572875c28a34c745b249daec4d954d8300f804b))
+* **responses:** retain sparse WebSocket output facts ([#3088](https://github.com/openai/openai-node/issues/3088)) ([aab2045](https://github.com/openai/openai-node/commit/aab204589e6a512883aa4d1e63dcfafbb4490f62))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump @cloudflare/workers-types from 5.20261018.1 to 5.20261025.1 in /ecosystem-tests/cloudflare-worker ([#3093](https://github.com/openai/openai-node/issues/3093)) ([8da4c55](https://github.com/openai/openai-node/commit/8da4c5572d540e18ff6c45569be933a7a7cd15a8))
+* **deps-dev:** bump follow-redirects from 1.16.1 to 1.16.2 in /ecosystem-tests/vercel-edge ([#3086](https://github.com/openai/openai-node/issues/3086)) ([be6b939](https://github.com/openai/openai-node/commit/be6b939a867e939f6ae6622d00599d65f60447e6))
+* **deps-dev:** bump puppeteer from 25.14.0 to 25.16.0 in /ecosystem-tests/browser-direct-import ([#3092](https://github.com/openai/openai-node/issues/3092)) ([784121e](https://github.com/openai/openai-node/commit/784121e6188916e14f300696158b62889e1f82dc))
+* **deps-dev:** bump webpack-dev-server from 5.2.6 to 5.2.7 in /ecosystem-tests/ts-browser-webpack ([#3097](https://github.com/openai/openai-node/issues/3097)) ([13be5dd](https://github.com/openai/openai-node/commit/13be5ddc26eff9e383c494d393813c131a435086))
+* **deps-dev:** bump wrangler from 4.151.1 to 4.152.0 in /ecosystem-tests/cloudflare-worker ([#3095](https://github.com/openai/openai-node/issues/3095)) ([b61074a](https://github.com/openai/openai-node/commit/b61074a74b584cdbc047d7735e918278b7ceb61e))
+
 ## [7.47.0](https://github.com/openai/openai-node/compare/v7.46.0...v7.47.0) (2026-10-31)
 
 

@@ -1,4 +1,5 @@
 exports_files([
+    "opusic_sys_install_headers.patch",
     "rules_cc_windows_native_llvm.patch",
     "abseil_windows_gnullvm_thread_identity.patch",
     "bzip2_windows_stack_args.patch",
@@ -33,5 +34,4 @@ exports_files([
     "windows-support-remote-case-aliases.patch",
     "windows-support-native-tools.patch",
     "xz_windows_stack_args.patch",
-    "zstd-sys_windows_msvc_include_dirs.patch",
 ])

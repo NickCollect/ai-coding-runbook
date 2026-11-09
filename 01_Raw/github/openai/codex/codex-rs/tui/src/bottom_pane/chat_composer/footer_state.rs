@@ -16,8 +16,8 @@ use std::time::Instant;
 
 use super::super::footer::footer_height;
 use super::super::footer::reset_mode_after_activity;
-use super::super::footer::shows_passive_footer_line;
 use super::ActivePopup;
+use super::warning_notice;
 use crate::bottom_pane::footer::FooterKeyHints;
 use crate::bottom_pane::footer::FooterProps;
 use crate::bottom_pane::footer_content::FooterContent;
@@ -84,6 +84,9 @@ pub(crate) struct ComposerRenderOptions<'a> {
     pub(crate) separate_status_line: bool,
     /// Topmost frame row available for suggestions overlaying the transcript.
     pub(crate) overlay_top: u16,
+    /// The workspace paints the open Presets menu over the completed frame.
+    pub(crate) floating_shortcuts: bool,
+    pub(crate) unfocused: bool,
     pub(crate) command_popup_placement: CommandPopupPlacement,
     pub(crate) footer: Option<&'a TranscriptFooter>,
 }
@@ -265,7 +268,7 @@ impl super::ChatComposer {
             {
                 return false;
             }
-            footer.is_interactive || shows_passive_footer_line(&self.footer_props())
+            footer.is_interactive || self.footer_mode().shows_passive_line(self.is_task_running)
         });
         options
     }
@@ -281,6 +284,9 @@ impl super::ChatComposer {
     }
 
     pub(super) fn footer_hint_height(&self, width: u16, options: ComposerRenderOptions<'_>) -> u16 {
+        if self.shows_shared_status(options) {
+            return self.status_line_height(width, options);
+        }
         if self.show_warning_notice(options) || self.shortcuts_above_composer(options) {
             return 1;
         }
@@ -298,11 +304,12 @@ impl super::ChatComposer {
 
     pub(super) fn render_transcript_footer(
         &self,
-        mut hint_area: Rect,
+        hint_area: Rect,
         buf: &mut Buffer,
         footer: &TranscriptFooter,
         warning_area: Option<Rect>,
     ) {
+        let hint_area = warning_notice::before_warning(hint_area, warning_area);
         let mut text = footer.text.clone();
         if footer.cursor_column.is_none()
             && self.footer.flash_visible()
@@ -310,12 +317,6 @@ impl super::ChatComposer {
             && let Some(line) = text.lines.last_mut()
         {
             *line = flash.line.clone();
-        }
-        if let Some(warning_area) = warning_area {
-            hint_area.width = warning_area
-                .x
-                .saturating_sub(hint_area.x)
-                .saturating_sub(/*rhs*/ 2);
         }
         if !footer.is_interactive
             && !self.footer.flash_visible()
@@ -364,6 +365,8 @@ pub(super) struct FooterState {
     pub(super) goal_status_indicator: Option<GoalStatusIndicator>,
     pub(super) ide_context_active: bool,
     pub(super) status_line_value: Option<FooterContent>,
+    // Available width and occupied height, shared by layout and cursor placement.
+    pub(super) measured_status_line: std::cell::Cell<Option<(u16, u16)>>,
     pub(super) status_line_enabled: bool,
     pub(super) side_conversation_context_label: Option<String>,
     pub(super) active_agent_label: Option<String>,

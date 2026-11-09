@@ -1,6 +1,6 @@
 //! Translate canonical permissions into MXC path grants.
 //! Denies and read-only carveouts remain separate kernel policy lists.
-//! Missing deny parents are created before deny globs and volume grants are expanded.
+//! Missing deny parents are created and marked before deny globs and volume grants are expanded.
 //! Alias limitations are documented in the crate README.
 
 use std::collections::HashMap;
@@ -8,12 +8,14 @@ use std::collections::HashSet;
 use std::path::Path;
 use std::path::PathBuf;
 
+use codex_protocol::permissions::FileSystemPolicyProjection;
 use codex_protocol::protocol::FileSystemAccessMode;
 use codex_protocol::protocol::FileSystemPath;
 use codex_protocol::protocol::FileSystemSandboxPolicy;
 use codex_protocol::protocol::FileSystemSpecialPath;
 use codex_utils_absolute_path::AbsolutePathBuf;
 use codex_utils_path_uri::PathUri;
+use codex_windows_sandbox::expand_windows_deny_read_paths;
 use codex_windows_sandbox::resolve_windows_deny_read_paths;
 use mxc_sdk::mxc_common::cmdline::CommandLineContext;
 use mxc_sdk::mxc_common::cmdline::CommandLineError;
@@ -132,13 +134,49 @@ pub(super) fn build_request(
     let policy = materialize_temporary_paths(permissions.file_system_sandbox_policy(), &env)?;
     #[cfg(windows)]
     for denied in policy.get_unreadable_roots_with_cwd(cwd) {
-        if let Some(parent) = denied.as_path().parent()
-            && matches!(parent.try_exists(), Ok(false))
-        {
-            std::fs::create_dir_all(parent).map_err(|error| {
+        let Some(parent) = denied.as_path().parent() else {
+            continue;
+        };
+        if parent.components().any(|component| {
+            component
+                .as_os_str()
+                .to_string_lossy()
+                .trim_end_matches(['.', ' '])
+                .eq_ignore_ascii_case(".chatgptcreated")
+        }) {
+            return Err(PolicyError::PolicyResolution(format!(
+                "MXC deny path {} uses the reserved directory name .chatgptcreated",
+                denied.display()
+            )));
+        }
+        let mut missing = parent
+            .ancestors()
+            .take_while(|path| matches!(path.try_exists(), Ok(false)))
+            .collect::<Vec<_>>();
+        missing.reverse();
+        for directory in missing {
+            // Only mark directories this launcher actually created.
+            match std::fs::create_dir(directory) {
+                Ok(()) => {}
+                Err(error)
+                    if error.kind() == std::io::ErrorKind::AlreadyExists && directory.is_dir() =>
+                {
+                    continue;
+                }
+                Err(error) => {
+                    return Err(PolicyError::PolicyResolution(format!(
+                        "MXC currently requires deny paths to have existing parent directories. Could not create {}: {error}. Create this directory manually or correct the path/permissions, then retry.",
+                        directory.display()
+                    )));
+                }
+            }
+            let sentinel = directory.join(".chatgptcreated");
+            std::fs::File::create_new(&sentinel).map_err(|error| {
+                // Leave a failed preparation retryable when the directory is still empty.
+                let _ = std::fs::remove_dir(directory);
                 PolicyError::PolicyResolution(format!(
-                    "MXC currently requires deny paths to have existing parent directories. Could not create {}: {error}. Create this directory manually or correct the path/permissions, then retry.",
-                    parent.display()
+                    "cannot create MXC directory sentinel {}: {error}",
+                    sentinel.display()
                 ))
             })?;
         }
@@ -153,10 +191,26 @@ pub(super) fn build_request(
     #[cfg(not(windows))]
     let read_volumes = volumes.clone();
     let fs = materialize_volume_roots(policy.clone(), &volumes, &read_volumes)?;
-    let roots = if full_disk_write {
-        Vec::new()
+    let absolute_cwd = AbsolutePathBuf::from_absolute_path(cwd)
+        .map_err(|error| PolicyError::PolicyResolution(error.to_string()))?;
+    let (roots, readable_roots, denied_paths) = if fs == policy {
+        let resolved =
+            fs.resolve_for_enforcement(cwd, FileSystemPolicyProjection::PreserveMutableRoots)?;
+        let denies = expand_windows_deny_read_paths(&resolved, &absolute_cwd);
+        (resolved.writable_roots, resolved.readable_roots, denies)
     } else {
-        fs.get_writable_roots_with_cwd_preserving_mutable_paths(cwd)
+        // A symbolic root deny sets the default on every volume. Expanding it into ACL
+        // targets would mask narrower grants and probe disconnected drives.
+        let roots = if full_disk_write {
+            Vec::new()
+        } else {
+            fs.get_writable_roots_with_cwd_preserving_mutable_paths(cwd)
+        };
+        (
+            roots,
+            fs.get_readable_roots_with_cwd(cwd),
+            resolve_windows_deny_read_paths(&policy, &absolute_cwd),
+        )
     };
     let mut write = collect_paths(roots.iter().map(|root| root.root.to_path_buf()))?;
     if full_disk_write {
@@ -171,17 +225,13 @@ pub(super) fn build_request(
         }
     }
     let mut read = collect_paths(
-        fs.get_readable_roots_with_cwd(cwd)
+        readable_roots
             .into_iter()
             .filter(|path| !fs.can_write_local_path_with_cwd(path.as_path(), cwd))
             .map(|path| path.to_path_buf()),
     )?;
-    let absolute_cwd = AbsolutePathBuf::from_absolute_path(cwd)
-        .map_err(|error| PolicyError::PolicyResolution(error.to_string()))?;
-    // A symbolic root deny is the default, not a recursive native mask that
-    // should erase narrower grants. Only materialize grants and carveouts.
     let deny = collect_paths(
-        resolve_windows_deny_read_paths(&policy, &absolute_cwd)
+        denied_paths
             .map_err(PolicyError::PolicyResolution)?
             .into_iter()
             .map(AbsolutePathBuf::into_path_buf),

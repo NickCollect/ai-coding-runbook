@@ -43,6 +43,8 @@ impl From<LoaderOverrides> for ConfigLoadOptions {
 pub struct LoaderOverrides {
     /// Optional configuration file supplied with the installed Codex package.
     pub packaged_defaults_path: Option<AbsolutePathBuf>,
+    /// Working directory to use when a client request supplies none.
+    pub default_cwd: Option<AbsolutePathBuf>,
     pub user_config_path: Option<AbsolutePathBuf>,
     pub user_config_profile: Option<ProfileV2Name>,
     pub managed_config_path: Option<PathBuf>,
@@ -69,6 +71,7 @@ impl LoaderOverrides {
         let base = std::env::temp_dir().join("codex-config-tests");
         Self {
             packaged_defaults_path: None,
+            default_cwd: None,
             user_config_path: None,
             user_config_profile: None,
             managed_config_path: Some(base.join("managed_config.toml")),
@@ -277,6 +280,8 @@ pub struct ConfigLayerStack {
     /// `Some(vec![])` means it checked and found nothing to report.
     startup_warnings: Option<Vec<String>>,
     pub(crate) is_projectless: bool,
+    /// Effective decision and config key selected during project discovery.
+    pub project_trust: Option<crate::loader::ProjectTrustDecision>,
 }
 
 impl PartialEq for ConfigLayerStack {
@@ -292,6 +297,7 @@ impl PartialEq for ConfigLayerStack {
             ignore_user_and_project_exec_policy_rules,
             startup_warnings,
             is_projectless,
+            project_trust,
         } = self;
         applied_config_server == &other.applied_config_server
             && model_provider_requirements == &other.model_provider_requirements
@@ -302,6 +308,7 @@ impl PartialEq for ConfigLayerStack {
                 == other.ignore_user_and_project_exec_policy_rules
             && startup_warnings == &other.startup_warnings
             && is_projectless == &other.is_projectless
+            && project_trust == &other.project_trust
     }
 }
 
@@ -327,6 +334,7 @@ impl ConfigLayerStack {
             ignore_user_and_project_exec_policy_rules: false,
             startup_warnings: None,
             is_projectless: false,
+            project_trust: None,
         };
         stack.validate_project_mitm_profiles()?;
         Ok(stack)
@@ -550,7 +558,22 @@ impl ConfigLayerStack {
                 .ignore_user_and_project_exec_policy_rules,
             startup_warnings: self.startup_warnings.clone(),
             is_projectless: self.is_projectless,
+            project_trust: self.project_trust.clone(),
         })
+    }
+
+    /// Adds local session configuration while retaining independently owned runtime snapshots.
+    pub fn with_session_config(mut self, config: TomlValue) -> std::io::Result<Self> {
+        let index = self.layers.partition_point(|layer| {
+            layer.name.precedence() <= ConfigLayerSource::SessionFlags.precedence()
+        });
+        self.layers.insert(
+            index,
+            ConfigLayerEntry::new(ConfigLayerSource::SessionFlags, config),
+        );
+        validate_enabled_config_layers(&self.layers)?;
+        self.validate_project_mitm_profiles()?;
+        Ok(self)
     }
 
     pub fn with_session_plugins(mut self, plugins: TomlValue) -> std::io::Result<Self> {
@@ -577,16 +600,9 @@ impl ConfigLayerStack {
                 *layer = ConfigLayerEntry::new(ConfigLayerSource::SessionFlags, config);
             }
         } else {
-            let index = self.layers.partition_point(|layer| {
-                layer.name.precedence() <= ConfigLayerSource::SessionFlags.precedence()
-            });
-            self.layers.insert(
-                index,
-                ConfigLayerEntry::new(
-                    ConfigLayerSource::SessionFlags,
-                    TomlValue::Table([("plugins".to_owned(), plugins)].into_iter().collect()),
-                ),
-            );
+            return self.with_session_config(TomlValue::Table(
+                [("plugins".to_owned(), plugins)].into_iter().collect(),
+            ));
         }
         Ok(self)
     }
@@ -627,6 +643,7 @@ impl ConfigLayerStack {
                 .ignore_user_and_project_exec_policy_rules,
             startup_warnings: self.startup_warnings.clone(),
             is_projectless: self.is_projectless,
+            project_trust: self.project_trust.clone(),
         }
     }
 

@@ -1,5 +1,63 @@
 # Changelog
 
+## [3.47.0](https://github.com/openai/openai-python/compare/v3.46.0...v3.47.0) (2026-11-05)
+
+
+### Features
+
+* **api:** add a model option for Responses ([#4249](https://github.com/openai/openai-python/issues/4249)) ([090098f](https://github.com/openai/openai-python/commit/090098fd3f00fd46c529c4fd19edc2c762ce7a34))
+
+## [3.46.0](https://github.com/openai/openai-python/compare/v3.45.0...v3.46.0) (2026-11-05)
+
+
+### Features
+
+* **api:** add Australia, India, and Japan residency options ([#4246](https://github.com/openai/openai-python/issues/4246)) ([2634b87](https://github.com/openai/openai-python/commit/2634b87c2f3d31960936cb0653e662356cd138a2))
+* **api:** add GPT-6 Rosalind to the model catalog ([#4243](https://github.com/openai/openai-python/issues/4243)) ([0f8e5f3](https://github.com/openai/openai-python/commit/0f8e5f382861120809b1d149a18c744f725746a0))
+* **api:** add image complexity and GIF and SVG output controls ([#4247](https://github.com/openai/openai-python/issues/4247)) ([0152e3a](https://github.com/openai/openai-python/commit/0152e3ada40e7580921aec71de2770ff02e69b05))
+* **api:** expand agent turn errors and image and audio options ([#4245](https://github.com/openai/openai-python/issues/4245)) ([1b2fb74](https://github.com/openai/openai-python/commit/1b2fb74d1ac88eca798a00d3e5c0789ab9e42833))
+
+
+### Chores
+
+* **deps:** bump github/codeql-action/init from 4.39.0 to 4.39.1 ([#4230](https://github.com/openai/openai-python/issues/4230)) ([c9fe335](https://github.com/openai/openai-python/commit/c9fe3355fd43084df817543d0d7bd5bc72065c0f))
+
+## [3.45.0](https://github.com/openai/openai-python/compare/v3.44.0...v3.45.0) (2026-11-03)
+
+
+### Features
+
+* **api:** add 12-hour Responses caching and cache-write usage ([#4240](https://github.com/openai/openai-python/issues/4240)) ([5f717b5](https://github.com/openai/openai-python/commit/5f717b537b7c230e2a38d0cebb0d5ccc8f97d00b))
+* **api:** add project service tier settings ([#4239](https://github.com/openai/openai-python/issues/4239)) ([1a2a3d0](https://github.com/openai/openai-python/commit/1a2a3d02247f9eaf0614bae9d35c60cbddf1d460))
+
+
+### Documentation
+
+* clarify generated-file ownership ([#4241](https://github.com/openai/openai-python/issues/4241)) ([0309a8c](https://github.com/openai/openai-python/commit/0309a8c10cb0ddda39b40592455e76847b78cf64))
+
+## [3.44.0](https://github.com/openai/openai-python/compare/v3.43.0...v3.44.0) (2026-11-03)
+
+
+### Features
+
+* **api:** add workload identity providers and federation rules ([#4237](https://github.com/openai/openai-python/issues/4237)) ([12709d7](https://github.com/openai/openai-python/commit/12709d708ad03291d8a81371a55a4dadfbcce31d))
+
+## [3.43.0](https://github.com/openai/openai-python/compare/v3.42.1...v3.43.0) (2026-11-03)
+
+
+### Features
+
+* **api:** expand Live Responses delegation tools ([#4233](https://github.com/openai/openai-python/issues/4233)) ([f6e8480](https://github.com/openai/openai-python/commit/f6e8480f9a5b2a4d02b17a1da54a1e57964bc312))
+* **responses:** accumulate rich WebSocket progress ([#4224](https://github.com/openai/openai-python/issues/4224)) ([48cdad3](https://github.com/openai/openai-python/commit/48cdad3a61321cf9a27834b818c6d1fcfe651138))
+* **responses:** add WebSocket lane overflow isolation ([#4225](https://github.com/openai/openai-python/issues/4225)) ([16bdad1](https://github.com/openai/openai-python/commit/16bdad17364b62254e14f52f834d15cf1036a024))
+
+
+### Chores
+
+* **deps:** bump actions/setup-node from 4.4.0 to 7.1.0 ([#4229](https://github.com/openai/openai-python/issues/4229)) ([abbfb27](https://github.com/openai/openai-python/commit/abbfb27aec2a660569d0570263d622877af64087))
+* **deps:** bump actions/setup-python from 7.0.0 to 7.1.0 ([#4232](https://github.com/openai/openai-python/issues/4232)) ([49f9a59](https://github.com/openai/openai-python/commit/49f9a596ead681644a76a54992fc10e9b87a95b0))
+* **deps:** bump pypa/gh-action-pypi-publish from 1.14.2 to 1.14.3 ([#4228](https://github.com/openai/openai-python/issues/4228)) ([f43f29b](https://github.com/openai/openai-python/commit/f43f29b5f7db37579becc2dad83f5054ef59ed6f))
+
 ## [3.42.1](https://github.com/openai/openai-python/compare/v3.42.0...v3.42.1) (2026-11-01)
 
 

@@ -105,7 +105,7 @@ pub enum CodexErrorDetails {
     #[error("turn aborted. Something went wrong? Hit `/feedback` to report the issue.")]
     TurnAborted,
 
-    #[error("shared rollout token budget exhausted")]
+    #[error("budget reached")]
     SessionBudgetExceeded,
 
     /// Returned by ResponsesClient when the SSE stream disconnects or errors out **after** the HTTP
@@ -155,7 +155,11 @@ pub enum CodexErrorDetails {
     #[error("{0}")]
     InvalidRequest(String),
     #[error("{message}")]
-    InvalidAudioInput { message: String },
+    InvalidAudioInput {
+        message: String,
+        /// True when the provider rejected an individual clip, independent of request size.
+        per_recording: bool,
+    },
     #[error("{message}")]
     ModelNotFound {
         message: String,
@@ -425,6 +429,15 @@ impl CodexErr {
     /// otherwise use exponential backoff with jitter. Callers enforce their own retry budgets.
     pub fn retry_delay(&self, retry_count: u64) -> Option<Duration> {
         match self.details() {
+            CodexErrorDetails::UnexpectedStatus(error)
+                if is_runtime_auth_denial(
+                    error.status,
+                    &error.body,
+                    error.identity_error_code.as_deref(),
+                ) =>
+            {
+                None
+            }
             CodexErrorDetails::TurnAborted
             | CodexErrorDetails::SessionBudgetExceeded
             | CodexErrorDetails::Interrupted
@@ -558,6 +571,7 @@ impl CodexErr {
         ErrorEvent {
             message,
             codex_error_info: Some(self.to_codex_protocol_error()),
+            rejected_audio_file_ids: Vec::new(),
             misalignment: match &self.details {
                 CodexErrorDetails::MisalignmentPolicyViolation { misalignment, .. } => {
                     misalignment.clone()
@@ -624,6 +638,39 @@ pub struct UnexpectedResponseError {
     pub identity_error_code: Option<String>,
 }
 
+/// Runtime denial cannot be repaired by retrying the request or refreshing its original credential.
+/// Keep unavailable verification state and ordinary credential errors on their existing paths.
+pub fn is_runtime_auth_denial(
+    status: StatusCode,
+    body: &str,
+    identity_error_code: Option<&str>,
+) -> bool {
+    if !matches!(status, StatusCode::UNAUTHORIZED | StatusCode::FORBIDDEN) {
+        return false;
+    }
+    let is_terminal = |code| {
+        matches!(
+            code,
+            Some(
+                "runtime_assertion_invalid"
+                    | "runtime_instance_paused"
+                    | "runtime_instance_revoked"
+                    | "invalid_agent_instance_assertion"
+            )
+        )
+    };
+    if is_terminal(identity_error_code) {
+        return true;
+    }
+    let Ok(body) = serde_json::from_str::<serde_json::Value>(body) else {
+        return false;
+    };
+    is_terminal(
+        body.pointer("/error/code")
+            .and_then(serde_json::Value::as_str),
+    )
+}
+
 const UNEXPECTED_RESPONSE_BODY_MAX_BYTES: usize = 1000;
 
 impl UnexpectedResponseError {
@@ -640,7 +687,8 @@ impl UnexpectedResponseError {
         truncate_with_ellipsis(trimmed_body, UNEXPECTED_RESPONSE_BODY_MAX_BYTES)
     }
 
-    fn extract_error_message(&self) -> Option<String> {
+    /// Returns the provider message from a structured HTTP error body.
+    pub fn extract_error_message(&self) -> Option<String> {
         let json = serde_json::from_str::<serde_json::Value>(&self.body).ok()?;
         let message = json
             .get("error")

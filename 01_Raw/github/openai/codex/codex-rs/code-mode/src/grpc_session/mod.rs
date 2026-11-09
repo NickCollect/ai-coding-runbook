@@ -28,6 +28,7 @@ use codex_code_mode_protocol::grpc::code_mode_host_client::CodeModeHostClient;
 use codex_http_client::HttpClientFactory;
 use codex_http_client::OutboundProxyPolicy;
 use rand::Rng;
+use tokio::sync::Semaphore;
 use tokio::sync::watch;
 use tokio_util::sync::CancellationToken;
 use tokio_util::task::TaskTracker;
@@ -57,6 +58,9 @@ type GrpcClient = CodeModeHostClient<GrpcTransport>;
 
 const SHUTDOWN_ERROR: &str = "code mode session is shutting down";
 const ROUTE_HEADER: &str = "x-code-mode-route";
+// Bound result-delivery RPCs, not running tools. A full completion burst can
+// exhaust HTTP/2's small-DATA-frame budget and disconnect every shared session.
+const MAX_IN_FLIGHT_COMPLETIONS: usize = 64;
 
 fn inject_span_traceparent<T>(request: &mut tonic::Request<T>, span: &tracing::Span) {
     if let Some(traceparent) =
@@ -76,6 +80,7 @@ fn inject_span_traceparent<T>(request: &mut tonic::Request<T>, span: &tracing::S
 #[derive(Clone)]
 pub struct GrpcCodeModeSessionProvider {
     transport: Arc<SharedTransport>,
+    completion_permits: Arc<Semaphore>,
     // Reloaded threads share this counter rather than reusing a cell namespace.
     next_generation: Arc<AtomicU64>,
 }
@@ -124,6 +129,7 @@ impl GrpcCodeModeSessionProvider {
     fn from_transport(transport: SharedTransport) -> Self {
         Self {
             transport: Arc::new(transport),
+            completion_permits: Arc::new(Semaphore::new(MAX_IN_FLIGHT_COMPLETIONS)),
             next_generation: Arc::new(AtomicU64::new(1)),
         }
     }
@@ -134,7 +140,7 @@ impl GrpcCodeModeSessionProvider {
         options: &CodeModeSessionOptions,
         pinned_mode: Option<CodeModeOutputTruncation>,
     ) -> Result<Arc<GrpcCodeModeSession>, String> {
-        let mut client = deadline::startup("transport connection", self.transport.client()).await?;
+        let client = deadline::startup("transport connection", self.transport.client()).await?;
         let requested_mode = pinned_mode.unwrap_or(options.output_truncation);
         let limits = &options.cell_execution_limits;
         let limits = grpc::SessionCellExecutionLimits {
@@ -153,6 +159,9 @@ impl GrpcCodeModeSessionProvider {
             let mut retries = 0;
             loop {
                 let mut request = tonic::Request::new(grpc::OpenSessionRequest {
+                    max_pending_delegate_calls: Some(
+                        codex_code_mode_protocol::host::MAX_PENDING_DELEGATE_CALLS as u32,
+                    ),
                     cell_execution_limits,
                     output_truncation: match requested_mode {
                         CodeModeOutputTruncation::Client => None,
@@ -163,7 +172,7 @@ impl GrpcCodeModeSessionProvider {
                 });
                 inject_span_traceparent(&mut request, &open_session_span);
                 let result = async {
-                    let response = client.open_session(request).await?;
+                    let response = client.as_ref().clone().open_session(request).await?;
                     let route = response.metadata().get(ROUTE_HEADER).cloned();
                     if route
                         .as_ref()
@@ -234,15 +243,15 @@ impl GrpcCodeModeSessionProvider {
         let inner = Arc::new(SessionInner {
             id: opened.session_id,
             output_truncation,
-            client,
             route,
             runtime: tokio::runtime::Handle::current(),
-            state: Mutex::new(SessionState::default()),
+            state: Mutex::new(SessionState::with_client(client)),
             wait_slots: Mutex::new(HashMap::new()),
             shutdown_requested: AtomicBool::new(false),
             shutdown_result: Mutex::new(None),
             stopped: CancellationToken::new(),
             stream_tasks: TaskTracker::new(),
+            completion_permits: Arc::clone(&self.completion_permits),
             _transport: Arc::clone(&self.transport),
         });
         let mut opening = OpeningSession {
@@ -259,7 +268,7 @@ impl GrpcCodeModeSessionProvider {
             tool_names: Vec::new(),
         });
         inject_span_traceparent(&mut request, &subscribe_span);
-        let mut client = inner.client();
+        let mut client = inner.client()?;
         let response =
             match deadline::startup("tool subscription", client.subscribe_to_tool_calls(request))
                 .instrument(subscribe_span)
@@ -376,7 +385,6 @@ impl Drop for GrpcCodeModeSession {
 pub(super) struct SessionInner {
     pub(super) id: String,
     output_truncation: CodeModeOutputTruncation,
-    pub(super) client: GrpcClient,
     // Affinity belongs to the session: parents and children may share a transport
     // while being admitted to different hosts. The token is opaque to Codex.
     route: Option<tonic::metadata::MetadataValue<tonic::metadata::Ascii>>,
@@ -387,12 +395,16 @@ pub(super) struct SessionInner {
     shutdown_result: Mutex<Option<ShutdownResultReceiver>>,
     pub(super) stopped: CancellationToken,
     stream_tasks: TaskTracker,
+    completion_permits: Arc<Semaphore>,
     _transport: Arc<SharedTransport>,
 }
 
 impl SessionInner {
-    pub(super) fn client(&self) -> GrpcClient {
-        self.client.clone()
+    pub(super) fn client(&self) -> Result<GrpcClient, String> {
+        self.state
+            .lock()
+            .unwrap_or_else(PoisonError::into_inner)
+            .client()
     }
 
     pub(super) fn request<T>(&self, message: T) -> tonic::Request<T> {
@@ -470,14 +482,7 @@ impl SessionInner {
     }
 
     async fn drive_shutdown(&self) -> Result<(), String> {
-        let is_open = self
-            .state
-            .lock()
-            .unwrap_or_else(PoisonError::into_inner)
-            .require_open()
-            .is_ok();
-        let result = if is_open {
-            let mut client = self.client();
+        let result = if let Ok(mut client) = self.client() {
             deadline::request(
                 self,
                 "session shutdown",

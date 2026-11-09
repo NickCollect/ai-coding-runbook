@@ -293,7 +293,7 @@ impl ThreadMetadataSync {
                     update.model = Some(turn_ctx.model.clone());
                     update.reasoning_effort = Some(turn_ctx.effort.clone());
                     update.approval_mode = Some(turn_ctx.approval_policy);
-                    update.permission_profile = Some(turn_ctx.permission_profile());
+                    update.permission_profile = Some(turn_ctx.permission_profile.clone());
                 }
                 RolloutItem::EventMsg(EventMsg::UserMessage(user)) => {
                     self.observe_user_message(user, &mut update);
@@ -504,7 +504,7 @@ mod tests {
             history_mode: ThreadHistoryMode::Legacy,
             history_base: None,
             subagent_history_start_ordinal: None,
-            initial_window_id: uuid::Uuid::now_v7().to_string(),
+            initial_window_id: codex_protocol::ContextWindowId::new_uuid_v7().to_string(),
             runtime_workspace_roots: None,
             metadata: ThreadPersistenceMetadata {
                 cwd: None,
@@ -538,6 +538,7 @@ mod tests {
                 thread_id,
                 vec![RolloutItem::EventMsg(EventMsg::ItemCompleted(
                     ItemCompletedEvent {
+                        content_token_count: None,
                         thread_id,
                         turn_id: "turn-1".to_string(),
                         item: TurnItem::UserMessage(UserMessageItem::new(&[UserInput::Text {
@@ -650,6 +651,7 @@ mod tests {
         let update = sync
             .observe_appended_items(&[RolloutItem::EventMsg(EventMsg::ItemCompleted(
                 ItemCompletedEvent {
+                    content_token_count: None,
                     thread_id,
                     turn_id: "turn-1".to_string(),
                     item: TurnItem::UserMessage(UserMessageItem::new(&[UserInput::Text {
@@ -748,6 +750,7 @@ mod tests {
                     service_tier: None,
                     approval_policy: AskForApproval::Never,
                     approvals_reviewer: ApprovalsReviewer::User,
+                    requested_approvals_reviewer: None,
                     permission_profile: permission_profile.clone(),
                     active_permission_profile: None,
                     cwd: cwd.clone().try_into().expect("absolute settings cwd"),

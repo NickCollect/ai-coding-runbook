@@ -134,6 +134,7 @@ class Responses(SyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -179,6 +180,7 @@ class Responses(SyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -223,6 +225,7 @@ class Responses(SyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -266,6 +269,7 @@ class Responses(SyncAPIResource):
             background=background,
             context_management=context_management,
             conversation=conversation,
+            image=image,
             include=include,
             input=input,
             instructions=instructions,
@@ -328,6 +332,7 @@ class Responses(SyncAPIResource):
         text_format: type[TextFormatT] | Omit = omit,
         tools: Iterable[ParseableToolParam] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
         max_output_tokens: Optional[int] | Omit = omit,
@@ -371,6 +376,7 @@ class Responses(SyncAPIResource):
         text_format: type[TextFormatT] | Omit = omit,
         tools: Iterable[ParseableToolParam] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
         max_output_tokens: Optional[int] | Omit = omit,
@@ -413,6 +419,7 @@ class Responses(SyncAPIResource):
             text_format=text_format,
             tools=tools,
             conversation=conversation,
+            image=image,
             include=include,
             instructions=instructions,
             max_output_tokens=max_output_tokens,
@@ -452,6 +459,7 @@ class Responses(SyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -513,6 +521,8 @@ class Responses(SyncAPIResource):
               prepended to `input_items` for this response request. Input items and output
               items from this response are automatically added to this conversation after this
               response completes.
+
+          image: Request level image options.
 
           include: Specify additional output data to include in the model response. Currently
               supported values are:
@@ -593,7 +603,7 @@ class Responses(SyncAPIResource):
               request can write up to four breakpoints. For cache matching, OpenAI considers
               up to the latest 80 breakpoints in the conversation, without a content-block
               lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The
-              `ttl` defaults to `30m`, which is currently the only supported value. See the
+              `ttl` defaults to `30m`. Supported lifetimes depend on the API. See the
               [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching)
               for current details.
 
@@ -745,6 +755,7 @@ class Responses(SyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -812,6 +823,8 @@ class Responses(SyncAPIResource):
               prepended to `input_items` for this response request. Input items and output
               items from this response are automatically added to this conversation after this
               response completes.
+
+          image: Request level image options.
 
           include: Specify additional output data to include in the model response. Currently
               supported values are:
@@ -892,7 +905,7 @@ class Responses(SyncAPIResource):
               request can write up to four breakpoints. For cache matching, OpenAI considers
               up to the latest 80 breakpoints in the conversation, without a content-block
               lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The
-              `ttl` defaults to `30m`, which is currently the only supported value. See the
+              `ttl` defaults to `30m`. Supported lifetimes depend on the API. See the
               [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching)
               for current details.
 
@@ -1037,6 +1050,7 @@ class Responses(SyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -1104,6 +1118,8 @@ class Responses(SyncAPIResource):
               prepended to `input_items` for this response request. Input items and output
               items from this response are automatically added to this conversation after this
               response completes.
+
+          image: Request level image options.
 
           include: Specify additional output data to include in the model response. Currently
               supported values are:
@@ -1184,7 +1200,7 @@ class Responses(SyncAPIResource):
               request can write up to four breakpoints. For cache matching, OpenAI considers
               up to the latest 80 breakpoints in the conversation, without a content-block
               lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The
-              `ttl` defaults to `30m`, which is currently the only supported value. See the
+              `ttl` defaults to `30m`. Supported lifetimes depend on the API. See the
               [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching)
               for current details.
 
@@ -1327,6 +1343,7 @@ class Responses(SyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -1373,6 +1390,7 @@ class Responses(SyncAPIResource):
                     "background": background,
                     "context_management": context_management,
                     "conversation": conversation,
+                    "image": image,
                     "include": include,
                     "input": input,
                     "instructions": instructions,
@@ -1794,11 +1812,14 @@ class Responses(SyncAPIResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-6-cyber",
                 "gpt-rosalind-research",
+                "gpt-6-rosalind",
             ],
             str,
             None,
         ],
+        image: response_compact_params.Image | Omit = omit,
         input: Union[str, Iterable[ResponseInputItemParam], None] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
         previous_response_id: Optional[str] | Omit = omit,
@@ -1906,6 +1927,8 @@ class Responses(SyncAPIResource):
                 https://developers.openai.com/api/docs/deprecations for details and
                 recommended replacements.
 
+          image: Request level image options.
+
           input: Text, image, or file inputs to the model, used to generate a response
 
           instructions: A system (or developer) message inserted into the model's context. When used
@@ -1926,7 +1949,7 @@ class Responses(SyncAPIResource):
               request can write up to four breakpoints. For cache matching, OpenAI considers
               up to the latest 80 breakpoints in the conversation, without a content-block
               lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The
-              `ttl` defaults to `30m`, which is currently the only supported value. See the
+              `ttl` defaults to `30m`. Supported lifetimes depend on the API. See the
               [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching)
               for current details.
 
@@ -1963,6 +1986,7 @@ class Responses(SyncAPIResource):
                 {
                     "model": model,
                     "service_tier": service_tier,
+                    "image": image,
                     "input": input,
                     "instructions": instructions,
                     "previous_response_id": previous_response_id,
@@ -2052,6 +2076,7 @@ class AsyncResponses(AsyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -2097,6 +2122,7 @@ class AsyncResponses(AsyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -2141,6 +2167,7 @@ class AsyncResponses(AsyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -2184,6 +2211,7 @@ class AsyncResponses(AsyncAPIResource):
             background=background,
             context_management=context_management,
             conversation=conversation,
+            image=image,
             include=include,
             input=input,
             instructions=instructions,
@@ -2246,6 +2274,7 @@ class AsyncResponses(AsyncAPIResource):
         text_format: type[TextFormatT] | Omit = omit,
         tools: Iterable[ParseableToolParam] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
         max_output_tokens: Optional[int] | Omit = omit,
@@ -2289,6 +2318,7 @@ class AsyncResponses(AsyncAPIResource):
         text_format: type[TextFormatT] | Omit = omit,
         tools: Iterable[ParseableToolParam] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
         max_output_tokens: Optional[int] | Omit = omit,
@@ -2331,6 +2361,7 @@ class AsyncResponses(AsyncAPIResource):
             text_format=text_format,
             tools=tools,
             conversation=conversation,
+            image=image,
             include=include,
             instructions=instructions,
             max_output_tokens=max_output_tokens,
@@ -2370,6 +2401,7 @@ class AsyncResponses(AsyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -2431,6 +2463,8 @@ class AsyncResponses(AsyncAPIResource):
               prepended to `input_items` for this response request. Input items and output
               items from this response are automatically added to this conversation after this
               response completes.
+
+          image: Request level image options.
 
           include: Specify additional output data to include in the model response. Currently
               supported values are:
@@ -2511,7 +2545,7 @@ class AsyncResponses(AsyncAPIResource):
               request can write up to four breakpoints. For cache matching, OpenAI considers
               up to the latest 80 breakpoints in the conversation, without a content-block
               lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The
-              `ttl` defaults to `30m`, which is currently the only supported value. See the
+              `ttl` defaults to `30m`. Supported lifetimes depend on the API. See the
               [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching)
               for current details.
 
@@ -2663,6 +2697,7 @@ class AsyncResponses(AsyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -2730,6 +2765,8 @@ class AsyncResponses(AsyncAPIResource):
               prepended to `input_items` for this response request. Input items and output
               items from this response are automatically added to this conversation after this
               response completes.
+
+          image: Request level image options.
 
           include: Specify additional output data to include in the model response. Currently
               supported values are:
@@ -2810,7 +2847,7 @@ class AsyncResponses(AsyncAPIResource):
               request can write up to four breakpoints. For cache matching, OpenAI considers
               up to the latest 80 breakpoints in the conversation, without a content-block
               lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The
-              `ttl` defaults to `30m`, which is currently the only supported value. See the
+              `ttl` defaults to `30m`. Supported lifetimes depend on the API. See the
               [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching)
               for current details.
 
@@ -2955,6 +2992,7 @@ class AsyncResponses(AsyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -3022,6 +3060,8 @@ class AsyncResponses(AsyncAPIResource):
               prepended to `input_items` for this response request. Input items and output
               items from this response are automatically added to this conversation after this
               response completes.
+
+          image: Request level image options.
 
           include: Specify additional output data to include in the model response. Currently
               supported values are:
@@ -3102,7 +3142,7 @@ class AsyncResponses(AsyncAPIResource):
               request can write up to four breakpoints. For cache matching, OpenAI considers
               up to the latest 80 breakpoints in the conversation, without a content-block
               lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The
-              `ttl` defaults to `30m`, which is currently the only supported value. See the
+              `ttl` defaults to `30m`. Supported lifetimes depend on the API. See the
               [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching)
               for current details.
 
@@ -3245,6 +3285,7 @@ class AsyncResponses(AsyncAPIResource):
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
+        image: response_create_params.Image | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -3291,6 +3332,7 @@ class AsyncResponses(AsyncAPIResource):
                     "background": background,
                     "context_management": context_management,
                     "conversation": conversation,
+                    "image": image,
                     "include": include,
                     "input": input,
                     "instructions": instructions,
@@ -3712,11 +3754,14 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-6-cyber",
                 "gpt-rosalind-research",
+                "gpt-6-rosalind",
             ],
             str,
             None,
         ],
+        image: response_compact_params.Image | Omit = omit,
         input: Union[str, Iterable[ResponseInputItemParam], None] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
         previous_response_id: Optional[str] | Omit = omit,
@@ -3824,6 +3869,8 @@ class AsyncResponses(AsyncAPIResource):
                 https://developers.openai.com/api/docs/deprecations for details and
                 recommended replacements.
 
+          image: Request level image options.
+
           input: Text, image, or file inputs to the model, used to generate a response
 
           instructions: A system (or developer) message inserted into the model's context. When used
@@ -3844,7 +3891,7 @@ class AsyncResponses(AsyncAPIResource):
               request can write up to four breakpoints. For cache matching, OpenAI considers
               up to the latest 80 breakpoints in the conversation, without a content-block
               lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The
-              `ttl` defaults to `30m`, which is currently the only supported value. See the
+              `ttl` defaults to `30m`. Supported lifetimes depend on the API. See the
               [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching)
               for current details.
 
@@ -3881,6 +3928,7 @@ class AsyncResponses(AsyncAPIResource):
                 {
                     "model": model,
                     "service_tier": service_tier,
+                    "image": image,
                     "input": input,
                     "instructions": instructions,
                     "previous_response_id": previous_response_id,
@@ -4762,6 +4810,7 @@ class ResponsesResponseResource(BaseResponsesConnectionResource):
         | Omit = omit,
         conversation: Optional[responses_client_event_param.ResponseCreateConversation] | Omit = omit,
         generate: bool | Omit = omit,
+        image: responses_client_event_param.ResponseCreateImage | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -4813,6 +4862,7 @@ class ResponsesResponseResource(BaseResponsesConnectionResource):
                         "context_management": context_management,
                         "conversation": conversation,
                         "generate": generate,
+                        "image": image,
                         "include": include,
                         "input": input,
                         "instructions": instructions,
@@ -4899,6 +4949,7 @@ class AsyncResponsesResponseResource(BaseAsyncResponsesConnectionResource):
         | Omit = omit,
         conversation: Optional[responses_client_event_param.ResponseCreateConversation] | Omit = omit,
         generate: bool | Omit = omit,
+        image: responses_client_event_param.ResponseCreateImage | Omit = omit,
         include: Optional[List[ResponseIncludable]] | Omit = omit,
         input: Union[str, ResponseInputParam] | Omit = omit,
         instructions: Optional[str] | Omit = omit,
@@ -4950,6 +5001,7 @@ class AsyncResponsesResponseResource(BaseAsyncResponsesConnectionResource):
                         "context_management": context_management,
                         "conversation": conversation,
                         "generate": generate,
+                        "image": image,
                         "include": include,
                         "input": input,
                         "instructions": instructions,

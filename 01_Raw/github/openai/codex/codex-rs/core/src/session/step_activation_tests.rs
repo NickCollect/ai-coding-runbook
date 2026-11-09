@@ -360,6 +360,10 @@ impl GatedModelsManager {
 }
 
 impl ModelsManager for GatedModelsManager {
+    fn ensure_initialized(&self, factory: HttpClientFactory) -> ModelsManagerFuture<'_, ()> {
+        self.inner.ensure_initialized(factory)
+    }
+
     fn model_catalog_with_origins(
         &self,
         strategy: RefreshStrategy,
@@ -1066,6 +1070,7 @@ async fn activation_must_match_the_retained_turn_authority(change: ManagedPolicy
     });
     assert!(
         !turn
+            .permission_profile()
             .file_system_sandbox_policy()
             .has_full_disk_write_access()
     );

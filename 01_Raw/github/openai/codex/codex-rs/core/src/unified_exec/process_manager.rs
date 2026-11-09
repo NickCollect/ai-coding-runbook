@@ -353,30 +353,28 @@ async fn network_denial_message_for_session(
     }
 }
 
-async fn wait_for_late_network_denial(network_cancelled: Option<CancellationToken>) -> bool {
-    let Some(network_cancelled) = network_cancelled else {
-        return false;
-    };
-    if network_cancelled.is_cancelled() {
-        return true;
-    }
-
-    tokio::select! {
-        _ = network_cancelled.cancelled() => true,
-        _ = tokio::time::sleep(LATE_NETWORK_DENIAL_GRACE_PERIOD) => false,
-    }
+async fn wait_for_late_network_denial(network_cancelled: &CancellationToken) -> bool {
+    tokio::time::timeout(
+        LATE_NETWORK_DENIAL_GRACE_PERIOD,
+        network_cancelled.cancelled(),
+    )
+    .await
+    .is_ok()
 }
 
 async fn finish_deferred_network_approval_after_process_exit_for_session(
     session: Option<&Arc<crate::session::session::Session>>,
     deferred: Option<DeferredNetworkApproval>,
 ) -> Result<(), String> {
-    wait_for_late_network_denial(
-        deferred
-            .as_ref()
-            .map(DeferredNetworkApproval::cancellation_token),
-    )
-    .await;
+    if let Some(approval) = &deferred {
+        let network_cancelled = approval.cancellation_token();
+        // Finishing below unregisters the call before we report the outcome.
+        tokio::select! {
+            biased;
+            _ = approval.remote_decisions_drained() => {}
+            _ = wait_for_late_network_denial(&network_cancelled) => {}
+        }
+    }
     finish_deferred_network_approval_for_session(session, deferred).await
 }
 
@@ -436,7 +434,8 @@ fn terminate_process_on_network_denial(
         let denied = tokio::select! {
             _ = network_cancelled.cancelled() => true,
             _ = process_exited.cancelled() => {
-                wait_for_late_network_denial(Some(network_cancelled.clone())).await
+                // A yielded process stays registered until its next poll.
+                wait_for_late_network_denial(&network_cancelled).await
             }
         };
         if !denied {
@@ -579,8 +578,8 @@ impl UnifiedExecProcessManager {
             /*turn_diff_tracker*/ None,
         );
         event_ctx.model_context = Some(&model_context);
-        let plugin_attribution = if prepared.turn_environment.environment.is_remote() {
-            let file_system = prepared.turn_environment.environment.get_filesystem();
+        let plugin_attribution = if prepared.turn_environment.environment().is_remote() {
+            let file_system = prepared.turn_environment.environment().get_filesystem();
             context
                 .step_context
                 .turn
@@ -868,7 +867,7 @@ impl UnifiedExecProcessManager {
             exit_code,
             original_token_count: Some(original_token_count),
             hook_command: Some(prepared.hook_command.clone()),
-            tool_cwd: (!prepared.turn_environment.environment.is_remote())
+            tool_cwd: (!prepared.turn_environment.environment().is_remote())
                 .then(|| prepared.cwd.clone()),
         };
 

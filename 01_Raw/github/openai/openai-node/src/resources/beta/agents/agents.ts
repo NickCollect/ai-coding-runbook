@@ -84,6 +84,7 @@ const normalizeRequestOptionsForQueryKeys = new Set([
   '__binaryRequest',
   '__binaryResponse',
   '__streamClass',
+  '__streamMode',
   '__security',
   '__synthesizeEventData',
 ]);
@@ -109,6 +110,7 @@ function normalizeRequestOptionsForQuery(
           | '__binaryRequest'
           | '__binaryResponse'
           | '__streamClass'
+          | '__streamMode'
           | '__security'
           | '__synthesizeEventData'
       ]?: never;
@@ -165,6 +167,7 @@ function normalizeRequestOptionsForQuery(
         | '__binaryRequest'
         | '__binaryResponse'
         | '__streamClass'
+        | '__streamMode'
         | '__security'
         | '__synthesizeEventData'
     ]?: never;
@@ -281,6 +284,7 @@ export class Agents extends APIResource {
                     | '__binaryRequest'
                     | '__binaryResponse'
                     | '__streamClass'
+                    | '__streamMode'
                     | '__security'
                     | '__synthesizeEventData'
                 ]?: never;
@@ -309,6 +313,7 @@ export class Agents extends APIResource {
           | '__binaryRequest'
           | '__binaryResponse'
           | '__streamClass'
+          | '__streamMode'
           | '__security'
           | '__synthesizeEventData'
       ]?: never;
@@ -335,6 +340,7 @@ export class Agents extends APIResource {
               | '__binaryRequest'
               | '__binaryResponse'
               | '__streamClass'
+              | '__streamMode'
               | '__security'
               | '__synthesizeEventData'
           ]?: never;
@@ -5234,6 +5240,8 @@ export interface SessionTurnError {
    * A stable, machine-readable failure category.
    *
    * - `context_length_exceeded` - The request exceeds the model's context window.
+   * - `max_output_tokens` - The model reached its output token limit before
+   *   finishing the response.
    * - `session_budget_exceeded` - The session has reached its usage budget.
    * - `usage_limit_exceeded` - The organization has reached a usage, plan, or
    *   billing limit.
@@ -5268,6 +5276,7 @@ export interface SessionTurnError {
    */
   code:
     | 'context_length_exceeded'
+    | 'max_output_tokens'
     | 'session_budget_exceeded'
     | 'usage_limit_exceeded'
     | 'project_spend_limit_exceeded'

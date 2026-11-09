@@ -286,6 +286,7 @@ mod reconnect;
 use self::input_queue::InputQueueState;
 mod image_submission;
 mod input_flow;
+mod input_receipts;
 mod input_restore;
 mod input_submission;
 mod interrupts;
@@ -304,6 +305,7 @@ mod session_flow;
 mod session_header;
 use self::session_header::SessionHeader;
 mod clipboard;
+pub(crate) use clipboard::ClipboardPasteContext;
 mod copy_picker;
 mod hook_lifecycle;
 mod hooks;
@@ -345,6 +347,8 @@ mod luna_reserve_return;
 mod security_setup;
 pub(crate) use backend_banners::AutomaticModelSwitchReason;
 mod protocol;
+pub(crate) use protocol::final_agent_message;
+pub(crate) use protocol::needs_agent_message;
 mod protocol_requests;
 mod rate_limits;
 mod usage_notice;
@@ -629,15 +633,13 @@ pub(crate) struct ChatWidget {
     safety_buffering: SafetyBufferingState,
     task_complete_pending: bool,
     unified_exec_processes: Vec<UnifiedExecProcessSummary>,
-    /// Tracks per-server MCP startup state while startup is in progress.
-    ///
-    /// The map is `Some(_)` from the first startup status update until the
-    /// app-server-backed startup round settles, and the bottom pane is treated
-    /// as "running" while this is populated, even if no agent turn is currently
-    /// executing.
+    /// Exits observed during the pending list request take precedence over its response.
+    pending_terminal_restore: Option<(uuid::Uuid, HashSet<String>)>,
+    /// Latest status per server in the active startup round. Its presence keeps
+    /// the composer busy, and its terminal outcomes determine the round's summary.
     mcp_startup_status: Option<HashMap<String, McpStartupStatus>>,
-    /// Expected MCP servers for the current startup round, seeded from enabled local config.
-    mcp_startup_expected_servers: Option<HashSet<String>>,
+    /// Whether round membership comes from configuration or the notifications we receive.
+    mcp_startup_expected_servers: Option<mcp_startup::ExpectedMcpServers>,
     /// After startup settles, ignore stale updates until enough notifications confirm a new round.
     mcp_startup_ignore_updates_until_next_start: bool,
     /// A lag signal for the next round means terminal-only updates are enough to settle it.
@@ -712,6 +714,7 @@ pub(crate) struct ChatWidget {
     safety_buffering_source: UserMessageSource,
     /// Main chat-surface bindings resolved from `tui.keymap.chat`.
     chat_keymap: ChatKeymap,
+    new_backend_label: Option<String>,
     /// Whether the preset submenu owns the next key.
     quick_dial_menu: bool,
     /// Ignore a held key after it dismisses the preset submenu.
@@ -1267,31 +1270,31 @@ impl ChatWidget {
         &mut self,
         cell: &dyn HistoryCell,
     ) -> Option<Box<dyn HistoryCell>> {
+        let active = self.transcript.active_cell.as_ref()?;
         // Keep the placeholder session header as the active cell until real session info arrives,
         // so we can merge headers instead of committing a duplicate box to history.
-        let keep_placeholder_header_active = !self.is_session_configured()
-            && self
-                .transcript
-                .active_cell
-                .as_ref()
-                .is_some_and(|c| c.as_any().is::<history_cell::SessionHeaderHistoryCell>());
+        if !self.is_session_configured()
+            && active
+                .as_any()
+                .is::<history_cell::SessionHeaderHistoryCell>()
+        {
+            return None;
+        }
         let history_width = self
             .last_rendered_width
             .get()
             .map(|width| self.history_wrap_width(width))
             .unwrap_or(u16::MAX);
 
-        if !keep_placeholder_header_active
-            && !cell
-                .display_lines_for_mode(history_width, self.history_render_mode())
-                .is_empty()
+        if !cell
+            .display_lines_for_mode(history_width, self.history_render_mode())
+            .is_empty()
         {
             // Only break exec grouping if the cell renders visible lines.
             if !self.has_active_stream_tail() {
                 return self.transcript.take_active_cell();
             }
-        } else if !keep_placeholder_header_active
-            && self.has_completed_tool_activity()
+        } else if self.has_completed_tool_activity()
             && !cell.transcript_lines(history_width).is_empty()
         {
             return self.transcript.take_active_cell();
@@ -1365,44 +1368,46 @@ impl ChatWidget {
         }
 
         // Servers may omit media from receipts, so prefer the submission identity.
-        if client_id.is_some() && self.last_rendered_user_message_client_id.as_deref() == client_id
-        {
-            return;
-        }
-
-        if self
-            .input_queue
-            .pending_steers
-            .front()
-            .is_some_and(|pending| match client_id {
-                Some(client_id) => pending.client_id == client_id,
-                // Older app servers do not echo submission IDs.
-                None => pending.compare_key == Self::pending_steer_compare_key_from_items(items),
-            })
-        {
-            if let Some(pending) = self.input_queue.pending_steers.pop_front() {
-                self.refresh_pending_input_preview();
-                let pending_display =
-                    user_message_display_for_history(pending.user_message, &pending.history_record);
-                self.on_user_message_display(pending_display);
+        let already_rendered = client_id.is_some()
+            && self.last_rendered_user_message_client_id.as_deref() == client_id;
+        let steers = &mut self.input_queue.pending_steers;
+        let matching = match client_id {
+            Some(id) => steers.iter().enumerate().position(|(index, pending)| {
+                pending.client_id == id
+                    && (pending.admitted_turn_id.is_some() || (index == 0 && !already_rendered))
+            }),
+            // Older app servers do not echo submission IDs.
+            None => steers.front().and_then(|pending| {
+                (pending.compare_key == Self::pending_steer_compare_key_from_items(items))
+                    .then_some(0)
+            }),
+        };
+        if let Some(pending) = matching.and_then(|index| steers.remove(index)) {
+            self.refresh_pending_input_preview();
+            if !already_rendered {
+                if !pending.optimistically_rendered {
+                    let pending_display = user_message_display_for_history(
+                        pending.user_message,
+                        &pending.history_record,
+                    );
+                    self.on_user_message_display(pending_display);
+                }
                 // Later receipts carry the wire media, which may differ from the local attachment.
                 self.last_rendered_user_message_display = Some(display);
                 self.last_rendered_user_message_client_id = Some(pending.client_id);
-            } else if self.last_rendered_user_message_display.as_ref() != Some(&display) {
-                tracing::warn!(
-                    "pending steer matched receipt but queue was empty when rendering committed user message"
-                );
-                self.on_user_message_display(display);
             }
-        } else if !self.review.is_review_mode
+        } else if !already_rendered
+            && !self.review.is_review_mode
             && self.last_rendered_user_message_display.as_ref() != Some(&display)
         {
             self.on_user_message_display(display);
         }
         if let Some(client_id) = client_id
-            && self.input_queue.queued_user_messages.iter().any(|message| {
-                matches!(&message.delivery, MessageDelivery::Unconfirmed(Some(id)) if id == client_id)
-            })
+            && self
+                .input_queue
+                .queued_user_messages
+                .iter()
+                .any(|message| message.unconfirmed_user_message_id() == Some(client_id))
         {
             self.reconcile_recovered_messages(&[client_id.to_string()]);
             self.maybe_send_next_queued_input();
@@ -1451,7 +1456,7 @@ impl ChatWidget {
         self.bottom_pane.show_shutdown_in_progress();
     }
 
-    fn request_redraw(&mut self) {
+    pub(crate) fn request_redraw(&self) {
         self.frame_requester.schedule_frame();
     }
 
@@ -1523,8 +1528,7 @@ impl ChatWidget {
 
     fn clean_background_terminals(&mut self) {
         self.submit_op(AppCommand::clean_background_terminals());
-        self.unified_exec_processes.clear();
-        self.sync_unified_exec_footer();
+        self.clear_background_terminals();
         self.add_info_message(
             "Stopping all background terminals.".to_string(),
             /*hint*/ None,
@@ -1745,6 +1749,17 @@ impl ChatWidget {
         if !had_rendered_width {
             self.request_redraw();
         }
+    }
+
+    /// Reflow at the allocated conversation width and report any presentation-only revision change.
+    pub(crate) fn resize_owned_conversation(&mut self, width: u16) -> Option<(u64, u64)> {
+        if self.last_rendered_width.get() == Some(width) {
+            return None;
+        }
+        let previous = self.transcript.active_cell_revision;
+        self.on_terminal_resize(width);
+        let reflowed = self.transcript.active_cell_revision;
+        (previous != reflowed).then_some((previous, reflowed))
     }
 
     /// Whether an agent message stream is active (not a plan stream).
@@ -2074,14 +2089,18 @@ impl ChatWidget {
         &self.config
     }
 
-    #[cfg(test)]
+    pub(crate) fn new_status_indicator(
+        &self,
+    ) -> crate::status_indicator_widget::StatusIndicatorWidget {
+        self.bottom_pane.new_status_indicator()
+    }
+
     pub(crate) fn status_line_text(&self) -> Option<String> {
         self.status_line_content()
             .cloned()
             .map(|content| content.into_hyperlink_line().line.to_string())
     }
 
-    #[cfg(test)]
     pub(crate) fn status_line_content(
         &self,
     ) -> Option<&crate::bottom_pane::footer_content::FooterContent> {

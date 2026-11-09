@@ -123,6 +123,14 @@ if _t.TYPE_CHECKING:
         ExternalStorageWithStreamingResponse as ExternalStorageWithStreamingResponse,
         AsyncExternalStorageWithStreamingResponse as AsyncExternalStorageWithStreamingResponse,
     )
+    from .workload_identity_providers import (
+        WorkloadIdentityProviders as WorkloadIdentityProviders,
+        AsyncWorkloadIdentityProviders as AsyncWorkloadIdentityProviders,
+        WorkloadIdentityProvidersWithRawResponse as WorkloadIdentityProvidersWithRawResponse,
+        AsyncWorkloadIdentityProvidersWithRawResponse as AsyncWorkloadIdentityProvidersWithRawResponse,
+        WorkloadIdentityProvidersWithStreamingResponse as WorkloadIdentityProvidersWithStreamingResponse,
+        AsyncWorkloadIdentityProvidersWithStreamingResponse as AsyncWorkloadIdentityProvidersWithStreamingResponse,
+    )
 
 else:
     _EXPORTS = {
@@ -180,6 +188,24 @@ else:
         "AsyncExternalKeysWithRawResponse": (".external_keys", "AsyncExternalKeysWithRawResponse"),
         "ExternalKeysWithStreamingResponse": (".external_keys", "ExternalKeysWithStreamingResponse"),
         "AsyncExternalKeysWithStreamingResponse": (".external_keys", "AsyncExternalKeysWithStreamingResponse"),
+        "WorkloadIdentityProviders": (".workload_identity_providers", "WorkloadIdentityProviders"),
+        "AsyncWorkloadIdentityProviders": (".workload_identity_providers", "AsyncWorkloadIdentityProviders"),
+        "WorkloadIdentityProvidersWithRawResponse": (
+            ".workload_identity_providers",
+            "WorkloadIdentityProvidersWithRawResponse",
+        ),
+        "AsyncWorkloadIdentityProvidersWithRawResponse": (
+            ".workload_identity_providers",
+            "AsyncWorkloadIdentityProvidersWithRawResponse",
+        ),
+        "WorkloadIdentityProvidersWithStreamingResponse": (
+            ".workload_identity_providers",
+            "WorkloadIdentityProvidersWithStreamingResponse",
+        ),
+        "AsyncWorkloadIdentityProvidersWithStreamingResponse": (
+            ".workload_identity_providers",
+            "AsyncWorkloadIdentityProvidersWithStreamingResponse",
+        ),
         "ExternalStorage": (".external_storage", "ExternalStorage"),
         "AsyncExternalStorage": (".external_storage", "AsyncExternalStorage"),
         "ExternalStorageWithRawResponse": (".external_storage", "ExternalStorageWithRawResponse"),
@@ -233,6 +259,7 @@ else:
         "spend_limit",
         "usage",
         "users",
+        "workload_identity_providers",
     }
 
     def __getattr__(name: str) -> _t.Any:
@@ -307,6 +334,12 @@ __all__ = [
     "AsyncExternalKeysWithRawResponse",
     "ExternalKeysWithStreamingResponse",
     "AsyncExternalKeysWithStreamingResponse",
+    "WorkloadIdentityProviders",
+    "AsyncWorkloadIdentityProviders",
+    "WorkloadIdentityProvidersWithRawResponse",
+    "AsyncWorkloadIdentityProvidersWithRawResponse",
+    "WorkloadIdentityProvidersWithStreamingResponse",
+    "AsyncWorkloadIdentityProvidersWithStreamingResponse",
     "ExternalStorage",
     "AsyncExternalStorage",
     "ExternalStorageWithRawResponse",

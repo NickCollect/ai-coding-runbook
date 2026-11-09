@@ -1431,6 +1431,7 @@ personality = true
             .map(|requirements| requirements.value.clone()),
         Some(codex_config::FeatureRequirementsToml {
             entries: BTreeMap::from([("personality".to_string(), true)]),
+            ..Default::default()
         })
     );
     let config_requirements: ConfigRequirements = config_requirements_toml.try_into()?;
@@ -1471,6 +1472,7 @@ personality = true
             .map(|requirements| requirements.value.clone()),
         Some(codex_config::FeatureRequirementsToml {
             entries: BTreeMap::from([("personality".to_string(), true)]),
+            ..Default::default()
         })
     );
     Ok(())
@@ -4623,6 +4625,7 @@ prefix_rules = [
             parsed,
             RequirementsExecPolicyToml {
                 prefix_rules: vec![RequirementsExecPolicyPrefixRuleToml {
+                    canonical_matching: false,
                     pattern: vec![RequirementsExecPolicyPatternTokenToml {
                         token: Some("rm".to_string()),
                         any_of: None,
@@ -4652,6 +4655,7 @@ prefix_rules = [
             RequirementsExecPolicyToml {
                 prefix_rules: vec![
                     RequirementsExecPolicyPrefixRuleToml {
+                        canonical_matching: false,
                         pattern: vec![RequirementsExecPolicyPatternTokenToml {
                             token: Some("rm".to_string()),
                             any_of: None,
@@ -4660,6 +4664,7 @@ prefix_rules = [
                         justification: None,
                     },
                     RequirementsExecPolicyPrefixRuleToml {
+                        canonical_matching: false,
                         pattern: vec![
                             RequirementsExecPolicyPatternTokenToml {
                                 token: Some("git".to_string()),
