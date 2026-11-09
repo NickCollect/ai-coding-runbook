@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/remote-control
-fetched_at: 2026-11-02T07:00:26.780225+00:00
+fetched_at: 2026-11-09T07:30:18.865449+00:00
 fetch_method: mintlify_md
 ---
 
@@ -57,7 +57,7 @@ You can start a Remote Control session from the CLI, the [Claude Desktop app](ht
 >
 > Until you accept Remote Control's one-time confirmation, `claude remote-control` explains what it does and asks `Enable Remote Control? (y/n)` before starting the server. Answer `y` to accept and start the server. If you decline, Claude Code exits without starting the server and asks again the next time you run the command.
 >
-> The process stays running in your terminal in server mode, waiting for remote connections. It displays a session URL you can use to [connect from another device](#connect-from-another-device), and you can press spacebar to show a QR code for quick access from your phone. While a remote session is active, the terminal shows connection status and tool activity.
+> The process stays running in your terminal in server mode, waiting for remote connections. It displays a URL you can use to [connect from another device](#connect-from-another-device), and you can press spacebar to show a QR code for quick access from your phone. While a remote session is active, the terminal shows connection status and tool activity.
 >
 > Pass any of these flags after `remote-control`:
 >
@@ -153,12 +153,14 @@ If the connection fails in an interactive session, the indicator changes to show
 * **This session was ended or archived from another device or app**: run `/remote-control` only if you want the session back. Claude Code reopens an archived session.
 * **The server no longer reports this session**: it may have been deleted from another device or app.
 
+If `/remote-control` opens a dialog that says `Remote Control isn't connected.`, follow the step the dialog gives, such as running `/login` or selecting **Continue** and trying again.
+
 ### Connect from another device
 
 Once a Remote Control session is active, you have a few ways to connect from another device:
 
-* **Open the session URL** in any browser to go directly to the session on [claude.ai/code](https://claude.ai/code).
-* **Scan the QR code** shown alongside the session URL to open it directly in the Claude app. With `claude remote-control`, press spacebar to toggle the QR code display.
+* **Open the URL Claude Code displays** in any browser to go to [claude.ai/code](https://claude.ai/code).
+* **Scan the QR code** shown alongside the URL to open it in the Claude app. With `claude remote-control`, press spacebar to toggle the QR code display.
 * **Open [claude.ai/code](https://claude.ai/code) or the Claude app** and find the session by name in the session list. In the Claude mobile app, tap **Code** in the navigation to reach the session list. Remote Control sessions show a computer icon with a green status dot when online.
 
 When you connect, the device shows any subagents and workflows the session already has running in the background. Stop one of them from the device, and Claude Code stops that task on your machine.
@@ -324,7 +326,7 @@ Claude Code offers several ways to work when you're not at your terminal. They d
 
 When Remote Control is active, Claude can send push notifications to your phone.
 
-Claude decides when to push. It typically sends one when a long-running task finishes or when it needs a decision from you to continue. You can also request a push in your prompt, for example `notify me when the tests finish`. Beyond the two on/off toggles below, there is no per-event configuration.
+A push can arrive when a long-running task finishes or when Claude needs a decision from you. You can also request a push in your prompt, for example `notify me when the tests finish`. Beyond the two on/off toggles below, there is no per-event configuration.
 
 To set up mobile push notifications:
 
@@ -507,6 +509,21 @@ Common causes:
 * Not signed in: run `claude` and use `/login` to authenticate with your claude.ai account. API key authentication is not supported for Remote Control.
 * Network or proxy issue: a firewall or proxy may be blocking the outbound HTTPS request. Remote Control requires access to the Anthropic API on port 443.
 * Session creation failed: if you also see `Session creation failed — see debug log`, the failure happened earlier in setup. Check that your subscription is active.
+
+### "working folder not found"
+
+In the terminal running [`claude remote-control`](#start-a-remote-control-session), `Session failed: working folder not found:` followed by a quoted path means a session couldn't start because no folder exists at that path.
+
+* **The server is still running**: restore the folder and start the session again, or stop the server
+* **The server has exited**: run `claude remote-control` again from a folder that exists
+
+Before v2.1.318, a session that failed this way showed `Session failed: spawn error:` and an `ENOENT` message that named a program file instead of the missing folder.
+
+### "The program file this Remote Control started from is gone"
+
+This warning in the terminal running [`claude remote-control`](#start-a-remote-control-session) means the program file the server started from is missing, and new sessions run the newer version that replaced it. To move the server to that version too, stop it and run `claude remote-control` again. If Claude Code is installed on network storage, restart the server now and follow [Install on network storage](https://code.claude.com/docs/en/setup.md#install-on-network-storage). Otherwise, new sessions start without a restart.
+
+When the program file is gone and Claude Code finds no newer version to run, new sessions fail. The terminal shows an error such as `Session failed: spawn error:` followed by an `ENOENT` message. Stop the server, [install Claude Code](https://code.claude.com/docs/en/setup.md#install-claude-code) again if `claude` doesn't run in your shell, and run `claude remote-control` again. Before v2.1.318, new sessions failed this way even with a newer version installed.
 
 ### "Couldn't reconnect to your Remote Control session"
 

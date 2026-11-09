@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/python
-fetched_at: 2026-11-02T07:00:25.531532+00:00
+fetched_at: 2026-11-09T07:30:17.450515+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1181,7 +1181,7 @@ Permission modes for controlling tool execution.
 PermissionMode = Literal[
     "default",  # Standard permission behavior
     "acceptEdits",  # Auto-accept file edits
-    "plan",  # Planning mode - explore without editing
+    "plan",  # Planning mode - Claude explores and plans
     "dontAsk",  # Deny anything not pre-approved instead of prompting
     "bypassPermissions",  # Bypass permission checks; explicit ask rules still prompt (use with caution)
     "auto",  # A model classifier reviews actions such as shell commands and network requests
@@ -1220,7 +1220,12 @@ The callback receives:
 
 Returns a `PermissionResult` (either `PermissionResultAllow` or `PermissionResultDeny`).
 
-The callback is the SDK replacement for the interactive permission prompt: it's invoked only when the [permission evaluation flow](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated) resolves to a prompt. Tool calls already approved by an `allowed_tools` entry, a settings allow rule, or the permission mode, such as `acceptEdits` or `bypassPermissions`, never invoke it. To gate every tool call, use a [`PreToolUse` hook](https://code.claude.com/docs/en/agent-sdk/hooks) instead.
+The callback replaces the interactive permission prompt. The SDK calls `can_use_tool` when the [permission evaluation flow](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated) resolves to a prompt. Calls approved in either of these ways run without calling `can_use_tool`:
+
+* A call that an `allowed_tools` entry or a settings allow rule approves
+* A call the permission mode approves, such as a file edit in `acceptEdits` mode
+
+To check those calls, use a [`PreToolUse` hook](https://code.claude.com/docs/en/agent-sdk/hooks), which runs for them too.
 
 An allow rule doesn't pre-approve the [actions no mode auto-approves](https://code.claude.com/docs/en/permission-modes.md#actions-no-mode-auto-approves); see [How permissions are evaluated](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated) for which of them reach the callback and what happens in `dontAsk` and `auto` mode.
 
@@ -1386,7 +1391,7 @@ ThinkingConfig = ThinkingConfigAdaptive | ThinkingConfigEnabled | ThinkingConfig
 | `enabled` | `type`, `budget_tokens`, `display` | Enable thinking with a specific token budget |
 | `disabled` | `type` | Disable thinking |
 
-The optional `display` field controls whether thinking text is returned `"summarized"` or `"omitted"`. On Claude Opus 4.7 and later, the API default is `"omitted"`, so set `"summarized"` to receive thinking content in [`ThinkingBlock`](#thinkingblock) outputs. Claude Code doesn't pass your `display` value to some providers, such as Amazon Bedrock and Google Cloud's Agent Platform. On those providers, Opus 4.7 and later return empty `ThinkingBlock` outputs even when you set `display` to `"summarized"`.
+The optional `display` field controls whether thinking text is returned `"summarized"` or `"omitted"`. On Claude Opus 4.7 and later, the API default is `"omitted"`, so set `"summarized"` to receive thinking content in [`ThinkingBlock`](#thinkingblock) outputs. On providers such as Amazon Bedrock and Google Cloud's Agent Platform, Claude Code doesn't pass `display` for earlier models it recognizes. Those are Opus 4.6, Sonnet 4.6, Haiku 4.5, and earlier models, which use their default.
 
 Because these are `TypedDict` classes, they're plain dicts at runtime. Either construct them as dict literals or call the class like a constructor; both produce a `dict`. Access fields with `config["budget_tokens"]`, not `config.budget_tokens`:
 
@@ -2167,7 +2172,12 @@ class HookMatcher:
         None  # Timeout in seconds. When omitted, the per-event default applies:
         # 600 for most events, 30 for UserPromptSubmit
     )
+    on_failure: Literal["continue", "block"] | None = (
+        None  # "block" blocks the action when a callback fails
+    )
 ```
+
+To decide what `on_failure` covers, see [Block the action when a callback fails](https://code.claude.com/docs/en/agent-sdk/hooks.md#block-the-action-when-a-callback-fails).
 
 ### `HookInput`
 
@@ -2513,7 +2523,7 @@ class AsyncHookJSONOutput(TypedDict):
 
 ### Hook Usage Example
 
-This example registers two hooks: one that blocks dangerous Bash commands like `rm -rf /`, and another that logs all tool usage for auditing. The security hook only runs on Bash commands (via the `matcher`), while the logging hook runs on all tools.
+This example registers two hooks: one that blocks dangerous Bash commands like `rm -rf /`, and another that logs all tool usage for auditing. With its [`Bash` matcher](https://code.claude.com/docs/en/agent-sdk/hooks#matchers), the security hook runs on Bash tool calls. The logging hook has no matcher, so it runs on every tool call.
 
 ```python theme={null}
 import asyncio
@@ -3660,22 +3670,15 @@ class SandboxNetworkConfig(TypedDict, total=False):
 
 > [!NOTE]
 >
-> The built-in sandbox proxy enforces the network allowlist based on the requested hostname and does not terminate or inspect TLS traffic, so techniques such as [domain fronting](https://en.wikipedia.org/wiki/Domain_fronting) can potentially bypass it. See [Sandboxing security limitations](https://code.claude.com/docs/en/sandboxing.md#security-limitations) for details and [Secure deployment](https://code.claude.com/docs/en/agent-sdk/secure-deployment.md#traffic-forwarding) for configuring a TLS-terminating proxy.
+> The built-in sandbox proxy enforces the network allowlist based on the requested hostname. By default, the proxy doesn't terminate or inspect TLS traffic, so techniques such as [domain fronting](https://en.wikipedia.org/wiki/Domain_fronting) can potentially bypass the allowlist. See [Sandboxing security limitations](https://code.claude.com/docs/en/sandboxing.md#security-limitations) for details and [Secure deployment](https://code.claude.com/docs/en/agent-sdk/secure-deployment.md#traffic-forwarding) for configuring a TLS-terminating proxy.
 
 ### `SandboxIgnoreViolations`
 
-Configuration for ignoring specific sandbox violations.
+Violations to leave out of the sandbox's violation report. Each key matches part of a command, or `*` for every command, and each value lists text to match in a violation line: `{"*": ["/etc/hosts"]}` hides violations that mention `/etc/hosts`. A matching access is still blocked. See [`sandbox.ignoreViolations`](https://code.claude.com/docs/en/settings-reference#sandbox-ignoreviolations).
 
 ```python theme={null}
-class SandboxIgnoreViolations(TypedDict, total=False):
-    file: list[str]
-    network: list[str]
+SandboxIgnoreViolations = dict[str, list[str]]
 ```
-
-| Property | Type | Default | Description |
-| :- | :- | :- | :- |
-| `file` | `list[str]` | `[]` | File path patterns to ignore violations for |
-| `network` | `list[str]` | `[]` | Network patterns to ignore violations for |
 
 ### Permissions Fallback for Unsandboxed Commands
 

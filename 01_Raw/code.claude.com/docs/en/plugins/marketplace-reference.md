@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/marketplace-reference
-fetched_at: 2026-10-26T05:40:04.071184+00:00
+fetched_at: 2026-11-09T07:30:18.644737+00:00
 fetch_method: mintlify_md
 ---
 
@@ -461,7 +461,7 @@ An `extraKnownMarketplaces` value is a map from marketplace name to an object wi
 
 ## Validation messages
 
-`claude plugin validate <path>` takes the marketplace root or the marketplace file itself. It prints errors and warnings. For exit codes and `--strict`, see [plugin validate](https://code.claude.com/docs/en/plugins/cli-reference.md#plugin-validate).
+`claude plugin validate <path>` takes the marketplace root or the marketplace file itself. To have that file [validated as a marketplace](https://code.claude.com/docs/en/plugins/cli-reference.md#validate-a-manifest-file) rather than a plugin manifest, name it `marketplace.json`. For exit codes and `--strict`, see [plugin validate](https://code.claude.com/docs/en/plugins/cli-reference.md#plugin-validate).
 
 A message names a plugin entry by its index, written as `plugins.1.source` or `plugins[1].source`.
 

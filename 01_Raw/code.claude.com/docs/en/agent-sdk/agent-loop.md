@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/agent-loop
-fetched_at: 2026-11-02T07:00:25.407729+00:00
+fetched_at: 2026-11-09T07:30:17.290503+00:00
 fetch_method: mintlify_md
 ---
 
@@ -173,7 +173,7 @@ Beyond built-in tools, you can:
 
 ### Tool permissions
 
-Claude determines which tools to call based on the task, but you control whether those calls are allowed to execute. You can auto-approve specific tools, block others entirely, or require approval for everything. Three options work together to determine what runs:
+Claude determines which tools to call based on the task, but you control whether those calls are allowed to execute. Use these options to auto-approve tools, block tools, and set the permission mode:
 
 * **`allowed_tools` / `allowedTools`** auto-approves listed tools. A read-only agent with `["Read", "Glob", "Grep"]` in its allowed tools list runs those tools without prompting, apart from reads from [network paths](https://code.claude.com/docs/en/permissions.md#network-paths). Tools not listed are still available, and calls to them that need approval fall through to the permission mode and `canUseTool`.
 * **`disallowed_tools` / `disallowedTools`** blocks listed tools, regardless of other settings. See [Permissions](https://code.claude.com/docs/en/agent-sdk/permissions.md) for the order that rules are checked before a tool runs.
@@ -228,7 +228,7 @@ If you don't set `effort`, Claude Code resolves the effort level itself, in the 
 >
 > `effort` trades latency and token cost for reasoning depth within each response. [Extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) is a separate feature that produces `thinking` blocks in the output, and the `display` field on `ThinkingConfig` for [Python](https://code.claude.com/docs/en/agent-sdk/python.md#thinkingconfig) or [TypeScript](https://code.claude.com/docs/en/agent-sdk/typescript.md#thinkingconfig) controls whether you receive their text. They are independent: you can set `effort: "low"` with extended thinking enabled, or `effort: "max"` without it.
 
-Use lower effort for agents doing simple, well-scoped tasks (like listing files or running a single grep) to reduce cost and latency. Set `effort` in the top-level `query()` options for the whole session, or per subagent with the `effort` field on [`AgentDefinition`](https://code.claude.com/docs/en/agent-sdk/subagents#agentdefinition-configuration) to override the session level.
+Use lower effort for agents doing simple, well-scoped tasks, such as listing files or running a single grep, to reduce cost and latency. Set `effort` in the top-level `query()` options for the [session](https://code.claude.com/docs/en/sub-agents.md#choose-an-effort-level), or per subagent with the `effort` field on [`AgentDefinition`](https://code.claude.com/docs/en/agent-sdk/subagents#agentdefinition-configuration) to override the session level.
 
 ### Permission mode
 
@@ -237,13 +237,13 @@ The permission mode option (`permission_mode` in Python, `permissionMode` in Typ
 | Mode | Behavior | Use case |
 | :- | :- | :- |
 | `"default"` | Tool calls that need approval and aren't covered by allow rules trigger your `canUseTool` callback; no callback means deny | Interactive applications with a custom approval callback |
-| `"acceptEdits"` | Auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.); other Bash commands follow default rules | You trust Claude's edits and want faster iteration, such as during prototyping or when working in an isolated directory |
-| `"plan"` | Claude explores and plans without editing your source files; file edits are never auto-approved and prompt through your `canUseTool` callback | You want Claude to propose changes without executing them, such as during code review or when you need to approve changes before they're made |
+| `"acceptEdits"` | Auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.) inside your [working directories](https://code.claude.com/docs/en/permissions.md#working-directories); other Bash commands follow default rules | You trust Claude's edits and want faster iteration, such as during prototyping or when working in an isolated directory |
+| `"plan"` | Claude explores and plans. Edits made with Claude's file tools go to your `canUseTool` callback even when an allow rule matches them | You want Claude to produce a plan first, such as during code review or before a large change |
 | `"dontAsk"` | Never prompts. Tools pre-approved by [permission rules](https://code.claude.com/docs/en/settings-reference.md#permission-settings) run, and so do calls that need no approval in `default` mode, such as file reads inside your working directories. Every call that would otherwise prompt is denied, though a [mod](https://code.claude.com/docs/en/plugins/mods/overview.md) you installed can still approve [some of those calls](https://code.claude.com/docs/en/permissions.md#precedence-among-rules-hooks-and-mods). A few calls, such as [reads from network paths](https://code.claude.com/docs/en/permissions.md#network-paths), are denied even if you've allowed them. For the list, see [Don't ask mode](https://code.claude.com/docs/en/agent-sdk/permissions.md#don’t-ask-mode-dontask) | Headless agents with nobody to approve calls |
 | `"auto"` | Uses a model classifier to review actions such as shell commands and network requests, allowing or blocking each one it reviews. See [Auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) for availability and the decision order | Autonomous agents that still want safety guardrails on tool use |
 | `"bypassPermissions"` | Runs tool calls without asking for approval, including calls to tools you didn't list in `allowedTools`. A few calls still go to your `canUseTool` callback, listed under [Bypass permissions mode](https://code.claude.com/docs/en/agent-sdk/permissions.md#bypass-permissions-mode-bypasspermissions). In the TypeScript SDK, also requires `allowDangerouslySkipPermissions: true` in `options`. Can't be used when running as root on Unix. Use only in isolated environments where the agent's actions can't affect systems you care about | CI, containers, or other isolated environments |
 
-For interactive applications, use `"default"` with a tool approval callback to surface approval prompts. For autonomous agents on a dev machine, `"acceptEdits"` auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.) while still gating other `Bash` commands behind allow rules. Reserve `"bypassPermissions"` for CI, containers, or other isolated environments. See [Permissions](https://code.claude.com/docs/en/agent-sdk/permissions.md) for full details.
+For interactive applications, use `"default"` with a tool approval callback to surface approval prompts. For agents that edit files on a dev machine, use `"acceptEdits"`. Reserve `"bypassPermissions"` for CI, containers, or other isolated environments. See [Permissions](https://code.claude.com/docs/en/agent-sdk/permissions.md) for full details.
 
 ### Model
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/headless
-fetched_at: 2026-11-02T07:00:26.246161+00:00
+fetched_at: 2026-11-09T07:30:18.258613+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,7 +54,7 @@ claude --bare -p "Summarize README.md" --allowedTools "Read"
 
 In bare mode, Claude Code never reads OAuth credentials or the system keychain. For the Anthropic API, set `ANTHROPIC_API_KEY` in the environment, with a key created in the [Claude Console](https://platform.claude.com), or supply an `apiKeyHelper` in the `--settings` JSON. Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry continue to read their own provider credentials as usual.
 
-In bare mode Claude has access to the Bash, file read, and file edit tools. Pass any context you need with a flag:
+In bare mode Claude has access to the Bash, file read, and file edit tools. Pass the context you need with a flag:
 
 | To load | Use |
 | - | - |
@@ -63,6 +63,8 @@ In bare mode Claude has access to the Bash, file read, and file edit tools. Pass
 | MCP servers | `--mcp-config <file-or-json>` |
 | [Custom agents](https://code.claude.com/docs/en/sub-agents.md#choose-the-subagent-scope) | `--agents <file-or-json>` |
 | A plugin | `--plugin-dir <path>`, `--plugin-url <url>` |
+
+Hooks still don't run in bare mode when you pass them with `--settings`, or in the [`hooks/hooks.json`](https://code.claude.com/docs/en/plugins/components#hooks) or [`hooks` manifest key](https://code.claude.com/docs/en/plugins/manifest-reference#hooks) of a plugin you load with a flag. Don't use bare mode for a run that needs them.
 
 Bare mode also limits what happens while the session runs:
 

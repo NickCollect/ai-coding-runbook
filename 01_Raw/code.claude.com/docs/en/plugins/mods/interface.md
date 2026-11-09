@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/mods/interface
-fetched_at: 2026-11-02T07:00:26.685238+00:00
+fetched_at: 2026-11-09T07:30:18.726199+00:00
 fetch_method: mintlify_md
 ---
 
@@ -744,7 +744,7 @@ on('session.start', async ($, e, next) => {
 })
 ```
 
-Claude Code now runs your `ui.render` hook once a second. The timer stops when the module reloads, and the new instance of the module starts its own.
+Claude Code now runs your `ui.render` hook once a second. The timer stops after the module reloads, and the new instance of the module starts its own.
 
 ### How often a site can redraw
 

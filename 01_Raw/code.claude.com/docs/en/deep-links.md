@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/deep-links
-fetched_at: 2026-11-02T07:00:26.083442+00:00
+fetched_at: 2026-11-09T07:30:18.053524+00:00
 fetch_method: mintlify_md
 ---
 
@@ -110,7 +110,7 @@ The example below adds an investigation entry point to an incident runbook for a
 3. Post initial findings in #incident.
 ```
 
-To use this in your own runbook, replace `acme/web-gateway` with your service's repository slug. Before engineers click step 2, they must have [sent a prompt in an interactive Claude Code session](#registration-and-supported-platforms) on their machine and opened Claude Code in their local clone.
+To use this in your own runbook, replace `acme/web-gateway` with your service's repository slug. Before engineers click step 2, their machine must have the [`claude-cli://` handler registered](#registration-and-supported-platforms), and they must have run `claude` in their local clone or worktree.
 
 ### Open a link from the shell
 

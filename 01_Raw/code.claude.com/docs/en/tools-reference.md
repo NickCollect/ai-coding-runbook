@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/tools-reference
-fetched_at: 2026-11-02T07:00:26.995721+00:00
+fetched_at: 2026-11-09T07:30:19.123226+00:00
 fetch_method: mintlify_md
 ---
 
@@ -34,9 +34,9 @@ To add custom tools, connect an [MCP server](https://code.claude.com/docs/en/mcp
 | `Edit` | Makes targeted edits to specific files. See [Edit tool behavior](#edit-tool-behavior) | Yes |
 | `EndConversation` | Ends the session, in rare cases of sustained abusive input or when you ask Claude to demonstrate the tool. See [EndConversation tool behavior](#endconversation-tool-behavior) | No |
 | `EnterPlanMode` | Switches to plan mode to design an approach before coding | No |
-| `EnterWorktree` | Creates an isolated [git worktree](https://code.claude.com/docs/en/worktrees.md) and switches into it. Pass a `path` to switch into an existing worktree instead of creating a new one. On first entry the target may be a worktree of the current repository or, in a multi-repo workspace, of a repository nested inside it. Before v2.1.203, a nested repository's worktree was rejected. A `path` outside `.claude/worktrees/` prompts for your approval before entering, since it moves the session's working directory and write access to that location. New-worktree creation and paths under `.claude/worktrees/` don't prompt. Before v2.1.206, Claude entered paths outside `.claude/worktrees/` without a prompt. From within a worktree session, or from a subagent with a pinned working directory such as [`isolation: worktree`](https://code.claude.com/docs/en/sub-agents#supported-frontmatter-fields), only the `path` form is available and the target must be under `.claude/worktrees/` of the session's repository | Yes |
+| `EnterWorktree` | Creates an isolated [git worktree](https://code.claude.com/docs/en/worktrees.md) and switches into it, or switches into an existing worktree. See [EnterWorktree tool behavior](#enterworktree-tool-behavior) | Yes |
 | `ExitPlanMode` | Presents a plan for approval and exits plan mode | Yes |
-| `ExitWorktree` | Exits a worktree session and returns to the original directory. Not available to subagents that already run in their own working directory, such as with [`isolation: worktree`](https://code.claude.com/docs/en/sub-agents#supported-frontmatter-fields) | No |
+| `ExitWorktree` | Exits a worktree session and returns to the original directory. Not available to subagents that already run in their own working directory, such as with [`isolation: worktree`](https://code.claude.com/docs/en/sub-agents#supported-frontmatter-fields). Removed or refused once [`permissions.blockWritesOutsideWorkingDirectories`](https://code.claude.com/docs/en/settings-reference#permissions-blockwritesoutsideworkingdirectories) is on | No |
 | `Glob` | Finds files based on pattern matching. Absent by default on macOS, Linux, and WSL. See [Glob tool behavior](#glob-tool-behavior) | No |
 | `Grep` | Searches for patterns in file contents. Absent by default on macOS, Linux, and WSL. See [Grep tool behavior](#grep-tool-behavior) | No |
 | `ListAgents` | Lists the agents Claude can message with `SendMessage`: subagents in the session, [agent team](https://code.claude.com/docs/en/agent-teams.md) teammates, your other local Claude Code sessions, and, while this session is connected to [Remote Control](https://code.claude.com/docs/en/remote-control.md), your [cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md) and your Remote Control sessions on other machines. Backs the `/list-agents` command. See [cross-session messaging](https://code.claude.com/docs/en/cross-session-messaging.md). Requires Claude Code v2.1.224 or later, and appears only in sessions where [cross-session messaging is enabled](https://code.claude.com/docs/en/cross-session-messaging.md#availability). Teammate rows and the first line showing this session's own name require v2.1.239 or later | No |
@@ -45,7 +45,7 @@ To add custom tools, connect an [MCP server](https://code.claude.com/docs/en/mcp
 | `Monitor` | Runs a command in the background and feeds each output line back to Claude, so it can react to log entries, file changes, or polled status mid-conversation. Can also open a WebSocket and treat each incoming message as an event. See [Monitor tool](#monitor-tool) | Yes |
 | `NotebookEdit` | Modifies Jupyter notebook cells. See [NotebookEdit tool behavior](#notebookedit-tool-behavior) | Yes |
 | `PowerShell` | Executes PowerShell commands natively. See [PowerShell tool](#powershell-tool) for availability | Yes |
-| `PushNotification` | Sends a desktop notification, and a phone push when [Remote Control](https://code.claude.com/docs/en/remote-control.md) is connected, so a long-running task or [session-scoped scheduled task](https://code.claude.com/docs/en/scheduled-tasks.md) can reach you when you step away. Push delivery runs through Anthropic-hosted infrastructure, which is not accessible from Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, or Microsoft Foundry | No |
+| `PushNotification` | Sends a desktop notification from a local session, and a phone push with [Remote Control](https://code.claude.com/docs/en/remote-control.md) or in a [cloud session](https://code.claude.com/docs/en/claude-code-on-the-web.md). Push delivery runs through Anthropic-hosted infrastructure, which is not accessible from Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, or Microsoft Foundry | No |
 | `Read` | Reads the contents of files. See [Read tool behavior](#read-tool-behavior) | No |
 | `ReadMcpResourceTool` | Reads a specific MCP resource by URI | No |
 | `RemoteTrigger` | Creates, updates, runs, and lists [cloud scheduled tasks](https://code.claude.com/docs/en/routines.md), formerly routines, on claude.ai. Backs the `/schedule` command. The [`RemoteTrigger` input reference](https://code.claude.com/docs/en/agent-sdk/typescript#remotetrigger) documents every action and the organization policies that remove the tool. Cloud scheduled tasks live on claude.ai and require a Pro, Max, Ultra, Team, or Enterprise plan. This tool is therefore not accessible from Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, or Microsoft Foundry | No |
@@ -304,6 +304,15 @@ The tool appears only when all of the following are true:
   * [cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md)
 * **Startup mode**: not a [`--bare`](https://code.claude.com/docs/en/headless#start-faster-with-bare-mode) session. Bare mode loads only shell and file tools, so the tool is never registered there.
 * **Provider**: not available on [Amazon Bedrock](https://code.claude.com/docs/en/amazon-bedrock.md), [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md), [Google Cloud's Agent Platform](https://code.claude.com/docs/en/google-vertex-ai.md), or [Microsoft Foundry](https://code.claude.com/docs/en/microsoft-foundry.md), or on sessions signed in through a [cloud gateway](https://code.claude.com/docs/en/claude-apps-gateway).
+
+## EnterWorktree tool behavior
+
+The EnterWorktree tool creates an isolated [git worktree](https://code.claude.com/docs/en/worktrees.md) and switches into it. Given a `path`, it switches into an existing worktree instead of creating a new one.
+
+* **Which worktrees `path` can name**: on first entry the target may be a worktree of the current repository. In a repository that holds other repositories, it may also be a worktree of a repository nested inside it.
+* **When you're prompted**: a `path` outside `.claude/worktrees/` prompts for your approval before entering, since it moves the session's working directory and write access to that location. New-worktree creation and paths under `.claude/worktrees/` don't prompt. Before v2.1.206, Claude entered paths outside `.claude/worktrees/` without a prompt.
+* **From inside a worktree**: from within a worktree session, only the `path` form is available and the target must be under `.claude/worktrees/` of the session's repository. The same holds for a subagent with a pinned working directory, such as [`isolation: worktree`](https://code.claude.com/docs/en/sub-agents#supported-frontmatter-fields).
+* **When the tool is missing**: once [`permissions.blockWritesOutsideWorkingDirectories`](https://code.claude.com/docs/en/settings-reference#permissions-blockwritesoutsideworkingdirectories) is on, Claude Code removes `EnterWorktree` and `ExitWorktree` or refuses calls to them. To keep working in worktrees, see [Claude has no `EnterWorktree` tool](https://code.claude.com/docs/en/worktrees#claude-has-no-enterworktree-tool).
 
 ## Glob tool behavior
 

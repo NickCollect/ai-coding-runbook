@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/desktop
-fetched_at: 2026-11-02T07:00:26.137059+00:00
+fetched_at: 2026-11-09T07:30:18.101759+00:00
 fetch_method: mintlify_md
 ---
 
@@ -90,7 +90,7 @@ To give Claude a file, @mention it or attach it in the prompt box:
 
 Permission modes control how much autonomy Claude has during a session: whether it asks before editing files, running commands, or both. You can switch permission modes at any time using the mode selector in the row under the prompt box. To approve each change yourself, switch to Manual.
 
-To set a default mode for new local sessions, add `permissions.defaultMode` to your [settings file](https://code.claude.com/docs/en/settings.md#where-settings-live). The desktop app reads the same settings files as the CLI. A mode you pick in the selector is remembered per folder and takes precedence over `defaultMode` for that folder, except Plan, which applies to the current session only.
+To set a default permission mode for new local sessions, add `permissions.defaultMode` to your [settings file](https://code.claude.com/docs/en/settings.md#where-settings-live). A mode you pick in a local session is remembered per folder and outranks a `defaultMode` in the project's `.claude/` settings. A new local session can still start in a `defaultMode` from `~/.claude/settings.json` or managed settings, so check the selector before your first message. If you pick Plan, it applies to this session only.
 
 | Mode | Settings key | Behavior |
 | - | - | - |
@@ -122,7 +122,7 @@ In Enterprise deployments that route Desktop to Google Cloud's Agent Platform, a
 
 Claude can start a dev server and open it in the Browser pane to verify its changes. This works for frontend web apps as well as backend servers: Claude can test API endpoints, view server logs, and iterate on issues it finds. In most cases, Claude starts the server automatically after editing project files. You can also ask Claude to preview at any time. By default, Claude [auto-verifies](#auto-verify-changes) changes after every edit.
 
-In a local session, click an HTML, PDF, or video path in the chat to open it in the Browser pane.
+In a local session, click an HTML, PDF, or video path in the chat to open it in the Browser pane. In an SSH or WSL session, you can [preview an HTML file](#preview-html-files-in-ssh-and-wsl-sessions).
 
 > [!NOTE]
 >
@@ -137,9 +137,38 @@ From the Browser pane, you can:
 * Start or stop servers, or stop them all at once, from the **Dev servers** menu in the Browser pane's header
 * Choose whether the Browser keeps cookies after you quit the app with **Keep cookies** in the Browser pane's **⋮** menu, so you don't have to sign in again during development
 
+In an SSH session, you lose the pane's cookies when you quit Desktop. You can't change that with **Keep cookies**.
+
 Claude creates the initial server configuration based on your project. If your app uses a custom dev command, edit `.claude/launch.json` to match your setup. See [Configure preview servers](#configure-preview-servers) for the full reference.
 
 To clear the Browser's saved data, select **Clear browsing data** in the Browser pane's **⋮** menu. To turn the Browser off entirely, turn off **Browser tools** in **Settings > Code** or **Settings > Claude Code**.
+
+#### Preview HTML files in SSH and WSL sessions
+
+In an [SSH](#ssh-sessions) or [WSL](https://code.claude.com/docs/en/desktop-wsl.md) session, click an HTML file's path in the chat to preview the file in the Browser pane. If charts or tables in the preview stay empty, the notice above it tells you why:
+
+* **`This preview doesn't load anything from the web`**: scripts written in the file run, but a chart that loads its library from the web stays empty. If the notice has an **Export** button, select it and open the saved file in your browser, where content from the web loads.
+* **`This preview doesn't run scripts or load anything from the web`**: before Claude Desktop v4.23118.0, these previews didn't run scripts, so update Desktop and open the file again. If Desktop is up to date and the notice stays, restart Desktop. If it still stays, scripts may be [off for your organization](#turn-off-scripts-in-ssh-and-wsl-previews-for-your-organization), so ask your administrator.
+
+If you closed the notice, open the file again to bring it back.
+
+#### Turn off scripts in SSH and WSL previews for your organization
+
+To keep [HTML previews in SSH and WSL sessions](#preview-html-files-in-ssh-and-wsl-sessions) from running scripts, set the [`disableBrowserExternalNavigation` managed setting](#managed-settings) to `true`. With this setting, users also can't [browse external sites](#restrict-external-browsing-for-your-organization) in the Browser pane.
+
+Set it in your [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md), or in a [Claude Code MDM policy or managed settings file](https://code.claude.com/docs/en/managed-settings.md#where-each-mechanism-stores-the-policy) on the computer that runs Desktop. Desktop doesn't read it from the remote machine or the WSL distribution. With a [third-party provider](https://code.claude.com/docs/en/third-party-integrations.md), use the MDM policy or the file.
+
+> [!WARNING]
+>
+> If the computer that runs Desktop receives no Claude Code managed settings yet, also set [`parentSettingsBehavior`](https://code.claude.com/docs/en/settings-reference#parentsettingsbehavior) to `"merge"` in the managed settings that you create. Desktop passes its own policy to Claude Code, and without `"merge"`, Claude Code [ignores that policy](https://code.claude.com/docs/en/managed-settings.md#let-an-embedding-host-add-policy) once the computer has managed settings. On Windows, if you create a managed settings file, users also lose WSL sessions until you [allow them](https://code.claude.com/docs/en/admin-setup.md#wsl-sessions-in-claude-code-desktop).
+>
+> If the computer already receives Claude Code managed settings, add the setting to those, and leave `parentSettingsBehavior` as it is there. On a computer with more than one MDM policy or managed settings file, use the [highest-ranked one](https://code.claude.com/docs/en/managed-settings.md#how-claude-code-combines-managed-sources).
+
+Then have users restart Desktop to make sure that the setting applies, and tell them what to expect:
+
+* **Files they open**: the preview doesn't run scripts, so charts and tables that scripts draw stay empty
+* **Previews that are running scripts**: if Desktop picks up the setting before the restart, they close. Users see `This preview closed because scripts are turned off for previews. Open the file again to view it without scripts.`
+* **Files they export**: if a user [exports a file](#preview-html-files-in-ssh-and-wsl-sessions) and opens it in a browser, its scripts run there, with or without this setting
 
 ### Browse external sites
 
@@ -166,7 +195,7 @@ The Browser pane uses a clean browser profile, separate from your personal brows
 
 The Browser follows the same [site allowlist and blocklist controls](https://support.claude.com/en/articles/13065128-claude-in-chrome-admin-controls) as the Claude in Chrome extension. If your organization already configured those lists for the extension, the Browser respects them automatically. Administrators can also turn off Claude's tools on external pages with the [`browserExternalPageTools` managed setting](#managed-settings). With tools disabled, users can still visit external sites; Claude's tools can't read or act on them.
 
-To turn off external browsing entirely, set the [`disableBrowserExternalNavigation` managed setting](#managed-settings) to `true`. This blocks all external navigation in the Browser, including sites on your organization's allowlist; localhost dev servers and file previews keep working. Use `browserExternalPageTools` to let users keep browsing external sites without Claude's tools, and `disableBrowserExternalNavigation` to block external sites for both users and Claude.
+To turn off external browsing entirely, set the [`disableBrowserExternalNavigation` managed setting](#managed-settings) to `true`. This blocks all external navigation in the Browser, including sites on your organization's allowlist. Localhost dev servers and file previews keep working, but [HTML previews in SSH and WSL sessions](#turn-off-scripts-in-ssh-and-wsl-previews-for-your-organization) don't run scripts. Use `browserExternalPageTools` to let users keep browsing external sites without Claude's tools, and `disableBrowserExternalNavigation` to block external sites for both users and Claude.
 
 ### Review changes with diff view
 
@@ -230,6 +259,17 @@ The session details panel is a set of cards beside the chat that show where the 
 #### Hide or show the session details panel
 
 To hide or show the panel, click **Hide session rail** or **Show session rail** in the session's title bar, or in the bar's **⋮** menu. If you still don't see the panel, [check which Code tab layout you have](#check-which-layout-you-have).
+
+### Minimize a pane
+
+To keep the Terminal, Browser, or [iOS Simulator](https://code.claude.com/docs/en/desktop-ios-simulator.md) in view at a small size, click **Minimize** in the pane's header. The button requires Claude Desktop v4.0.0 or later and a Claude account rather than a [third-party provider](https://code.claude.com/docs/en/third-party-integrations.md). The Browser pane has it only in local sessions.
+
+The minimized pane sits in the [session details panel](#see-session-details) while that panel is on screen, and floats in a corner of the chat otherwise:
+
+* **In the panel**: the minimized pane sits below the panel's cards, where you can't move or resize it. To float it over the chat instead, [hide the panel](#hide-or-show-the-session-details-panel).
+* **In a corner of the chat**: hover over the minimized pane to show its header. Drag the header to move it to another corner. To resize it, drag the corner of the minimized pane nearest the center of the chat.
+
+To get the full pane back, click **Expand** in the minimized pane's header. To close the minimized pane instead, click the close button beside **Expand**.
 
 ### Run commands in the terminal
 
@@ -318,7 +358,7 @@ To see how full this session's context window is, find your Code tab layout:
 
 In either layout, type `/context` in the prompt box to print a per-category breakdown of this session's context window in the chat.
 
-Both layouts have the usage ring next to the model picker. Click it to see your plan usage, which is shared across all your Claude Code surfaces.
+In both layouts, the usage ring is in the row under the prompt box. Click it to see your plan usage, which is shared across all your Claude Code surfaces.
 
 ## Let Claude use your computer
 
@@ -415,9 +455,9 @@ In the split view, the pane you opened or clicked last has focus, and the other 
 
 #### Run a session in its own worktree
 
-In a project that's a Git repository, turn on **Worktree** before you start a session to run it in its own [Git worktree](https://code.claude.com/docs/en/worktrees.md), an isolated copy of the project. By default, **Worktree** is off and Claude works in the project folder itself. On the [current layout](#check-which-layout-you-have), turn on the **Worktree** button in the [row under the prompt box](#start-a-session).
+In a project that's a Git repository, turn on **Worktree** before you start a session to run it in its own [Git worktree](https://code.claude.com/docs/en/worktrees.md), an isolated copy of the project. By default, **Worktree** is off and Claude works in the project folder itself. On the [current layout](#check-which-layout-you-have), turn on **Worktree** in the [row under the prompt box](#start-a-session).
 
-* **With a [third-party provider](https://code.claude.com/docs/en/third-party-integrations.md)**: if the row under the prompt box shows the project folder control but no **Worktree** button, click that control and turn on **Worktree**
+* **With a [third-party provider](https://code.claude.com/docs/en/third-party-integrations.md)**: if the row under the prompt box shows the project folder control but not **Worktree**, click the project folder control and turn on **Worktree**
 * **As the default for a [saved local or SSH environment](#create-a-saved-environment)**: set **Worktree** when you create or edit the environment
 * **[Earlier layout](#check-which-layout-you-have)**: select the **worktree** checkbox beside the branch name, above the prompt box
 
@@ -542,15 +582,18 @@ A local session shows up on your other devices once [Remote Control](https://cod
 A local session connects when you turn Remote Control on for it, or when it connects automatically as it starts:
 
 * **You turn it on for that session**: with the session's **Remote Control** switch, or by typing `/remote-control` in its prompt box.
-* **It connects when it starts**: new sessions connect automatically while **Connect new sessions to Remote Control** is on in **Settings > Code** or **Settings > Claude Code**. If you've never changed that setting, Desktop follows [`remoteControlAtStartup`](https://code.claude.com/docs/en/settings-reference#remotecontrolatstartup) in your user or managed settings, then your organization's default.
+* **It connects when it starts**: new sessions connect automatically while **Connect new sessions to Remote Control** is on in **Settings > Code** or **Settings > Claude Code**, unless [`remoteControlAtStartup`](https://code.claude.com/docs/en/settings-reference#remotecontrolatstartup) is `false` in managed settings. If you've never changed **Connect new sessions to Remote Control**, Desktop uses `remoteControlAtStartup` from your user or managed settings. If neither sets it, Desktop uses your organization's default or, without one, its own.
 
 To see whether a session is connected, check the **Remote Control** switch in the **Environment** card of its [session details panel](#see-session-details).
 
-To keep sessions off your other devices, turn Remote Control off at the level you need:
+#### Keep sessions off your other devices
+
+Turn Remote Control off for one session, for sessions on this computer, or for computers you manage:
 
 * **One session**: turn off its **Remote Control** switch. In a session that connected when it started, typing `/remote-control` leaves Remote Control on and shows `Remote Control is already on. This session connected automatically when it started.` Click **Turn off** on that line to disconnect.
-* **New Desktop sessions on this computer**: turn off **Connect new sessions to Remote Control** in **Settings > Code** or **Settings > Claude Code**. If it already shows off, turn it on and then off so Desktop saves your choice. Once saved, it takes precedence over `remoteControlAtStartup` and the defaults.
+* **New Desktop sessions on this computer**: turn off **Connect new sessions to Remote Control** in **Settings > Code** or **Settings > Claude Code**. If it already shows off, turn it on and then off so Desktop saves your choice. Once saved, new sessions don't connect automatically, even when `remoteControlAtStartup` or a default says to.
 * **Any session on this computer, including the CLI**: set [`disableRemoteControl`](https://code.claude.com/docs/en/settings-reference#disableremotecontrol) to `true` in `~/.claude/settings.json` to stop sessions from connecting. A session that was already connected when you saved the file stays connected until you turn Remote Control off for it.
+* **Desktop sessions on computers you manage**: if you set `remoteControlAtStartup` to `false` in a computer's [highest-ranked MDM policy or managed settings file](https://code.claude.com/docs/en/managed-settings.md#how-claude-code-combines-managed-sources), sessions there don't connect automatically, even when the key is `true` in [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md). Don't use a user-level `HKCU` registry value for this. People can still turn Remote Control on for a session themselves; to prevent that, use the [admin console](#admin-console-controls). Requires Claude Desktop v4.4212.0 or later.
 
 To hide a session that already appears on your other devices, archive it in Desktop. Desktop archives the session's Remote Control copy too, so it leaves the default session list on those devices. To view or delete it there, see [Archive sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md#archive-sessions).
 
@@ -1100,11 +1143,11 @@ You can leave the **SSH port** and **SSH key (optional)** fields empty. If you f
 
 ##### Connect on Windows without the OpenSSH client
 
-On Windows, you connect through Desktop's built-in SSH client if your computer doesn't meet [the requirements for the OpenSSH client](#use-your-ssh-configuration). With a third-party provider, you connect through the built-in client by default, and your administrator can change that. For the setting, see [SSH remote sessions in Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/ssh-remote-sessions).
+On Windows, you connect through Desktop's built-in SSH client if your computer doesn't meet [the requirements for the OpenSSH client](#use-your-ssh-configuration). With a third-party provider, which client you connect through also depends on your Desktop version and on your administrator's settings. See [SSH remote sessions in Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/ssh-remote-sessions).
 
 With the built-in client, you can still enter a `Host` name from your SSH configuration in the **SSH host** field if your `PATH` has an `ssh` command, with these limits:
 
-* **Settings from the entry**: Desktop takes `HostName`, `User`, `Port`, and `IdentityFile`. It also takes `ProxyCommand` if an `sh` shell is on your `PATH`.
+* **Settings from the entry**: Desktop takes `HostName`, `User`, `Port`, `IdentityFile`, and `ConnectTimeout`. It also takes `ProxyCommand` if an `sh` shell is on your `PATH`.
 * **SSH key (optional)**: leave this field empty to keep the entry's `IdentityFile`, because a key file that you pick here replaces the `IdentityFile`
 * **`CertificateFile` and `ProxyJump`**: Desktop ignores `CertificateFile`, and the connection fails if the entry sets `ProxyJump`. To use either setting, [connect through the OpenSSH client](#use-your-ssh-configuration).
 
@@ -1204,7 +1247,7 @@ Run `ssh` with the host in a terminal to confirm that the entry still connects t
 
 ##### Raise the SSH connection timeout
 
-If your SSH configuration sets no `ConnectTimeout` for the host, Desktop gives `ssh` 30 seconds to connect. Through a jump host or a `ProxyCommand`, that time includes the time the route takes to connect. If your route needs longer, add a higher value to the entry:
+If your session times out while it connects through a jump host or a `ProxyCommand`, raise `ConnectTimeout` in the remote machine's entry in your `~/.ssh/config`. Use more than 90 seconds. Add any time that a jump host or a `ProxyCommand` waits for you, for example at a login prompt or for a phone push:
 
 ```text ~/.ssh/config theme={null}
 Host devbox
@@ -1216,7 +1259,15 @@ Host devbox
 
 `ssh` uses the first value it finds for a host, so keep the entry above any `Host *` entry that sets `ConnectTimeout`. To confirm, run `ssh -G devbox` in a terminal on your computer. Its output includes `connecttimeout 120`. After you change the value, quit and reopen Desktop.
 
-If the remote machine itself waits for an approval on your phone, approve within 45 seconds, whatever `ConnectTimeout` you set. You can't raise this limit, because Desktop sets `ServerAliveInterval` and `ServerAliveCountMax` itself, and `ssh` then closes a login in which the remote machine sends nothing for that long. If a jump host or a `ProxyCommand` waits for you instead, raise `ConnectTimeout` in the remote machine's entry to cover that time.
+If your SSH configuration sets no `ConnectTimeout` for the host, Desktop gives `ssh` 30 seconds to connect. Through a jump host or a `ProxyCommand`, that time includes the time the route takes to connect.
+
+| `ConnectTimeout` | Connection | Time that you have |
+| - | - | - |
+| Not set | You start a session through a jump host or a `ProxyCommand`, with Claude Desktop v4.4212.0 or later on macOS or Linux | 30 seconds, then a second try with 90 seconds. If Desktop showed you a prompt during the first try, you have no second try. Time at a login prompt that Desktop shows for a `ProxyJump` host doesn't count. Other waits on the route do. |
+| Not set | Desktop on Windows or an earlier version, a remote machine that sets `MaxSessions 1`, or a reconnect that Desktop starts on its own | 30 seconds. Every wait on the route counts. |
+| Set | Every connection and reconnect | The value that you set. Every wait on the route counts. |
+
+If the remote machine itself waits for an approval on your phone, approve within 45 seconds, whatever `ConnectTimeout` you set. You can't raise this limit, because Desktop sets `ServerAliveInterval` and `ServerAliveCountMax` itself, and `ssh` then closes a login in which the remote machine sends nothing for that long.
 
 ##### Fix a `Match host` block that only Desktop applies
 
@@ -1285,13 +1336,13 @@ Claude Code runs as a process on the remote machine, under a background helper t
 
 > [!WARNING]
 >
-> If you sign in to Desktop with a Claude account, don't count on a task to run overnight. Desktop renews that sign-in for the task only while Desktop is running and connected, so the task's sign-in can expire after you disconnect, and the task then stops. How much time is left when you disconnect varies, and it can be only a few minutes.
+> If you sign in to Desktop with a Claude account, don't count on a task to run overnight. Desktop renews that sign-in for the task only while Desktop is running, connected, and signed in, so the task's sign-in can expire after you disconnect, and the task then stops. How much time is left when you disconnect varies, and it can be only a few minutes.
 >
 > The work done so far stays on the remote machine, and you can continue with a message when you return.
 >
 > If the task must run through the night:
 >
-> * [Keep your computer awake](https://code.claude.com/docs/en/desktop-scheduled-tasks.md#how-scheduled-tasks-run) and online, with the lid open and Desktop running
+> * [Keep your computer awake](https://code.claude.com/docs/en/desktop-scheduled-tasks.md#how-scheduled-tasks-run) and online, with the lid open and Desktop running and signed in
 > * Use a login that works without a prompt, such as a key that your SSH agent holds, for the remote machine and for any jump host on the way. Desktop can then reconnect on its own after a drop.
 >
 > For a task that must run while your computer is asleep or off, start a [cloud session](#run-long-running-tasks-in-the-cloud) instead.
@@ -1299,8 +1350,9 @@ Claude Code runs as a process on the remote machine, under a background helper t
 * **After sleep or a network loss**: you get the running task back if the process [still runs](#limits-while-desktop-is-disconnected) and Desktop can log in without a prompt. If it can't, [send a message](#reconnect-after-sleep-or-a-network-loss).
 * **After a quit**: the task keeps running, but you lose it when the session opens again unless Desktop can rejoin its process. Check [when Desktop can rejoin](#reopen-a-session-after-you-quit-desktop) before you quit. If you lost the task, send a message to continue.
 
-When you come back and the task isn't done, check for word that Desktop can't reconnect, an authentication error, or a waiting request:
+When you come back and the task isn't done, check for Desktop's sign-in page, word that Desktop can't reconnect, an authentication error, or a waiting request:
 
+* **Sign-in page**: sign in. If the task stopped, send a message to continue. On an Enterprise plan, your organization can [sign you out a set number of days after you sign in](https://support.claude.com/en/articles/13163631-configuring-session-security-settings), however active you are. With a Claude account, Desktop doesn't renew the task's sign-in while you're signed out, so the task can stop.
 * **Desktop can't reconnect**: the session says why, and a notification may say so too. Desktop may [need you to log in](#reconnect-after-sleep-or-a-network-loss).
 * **Authentication error**: the [sign-in token or credential](#limits-while-desktop-is-disconnected) may have expired. With a Claude account, send a message to continue. With a third-party provider, see [SSH remote sessions in Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/ssh-remote-sessions).
 * **Waiting request**: [answer it](#handle-requests-that-arrive-while-you-are-away)
@@ -1340,7 +1392,7 @@ File edits and some tools can fail while Desktop is disconnected. If the task ne
 >
 > Edits still fail in some cases, including these:
 >
-> * **Built-in SSH client**: Desktop uses it, for example in a Microsoft Store install, on a Windows computer without Microsoft's OpenSSH 9.4 or later, or by default on Windows with a third-party provider
+> * **Built-in SSH client**: Desktop uses it, for example in a Microsoft Store install, or on a Windows computer without Microsoft's OpenSSH 9.4 or later
 > * **Repository location**: the repository is your home directory, a folder above it, or `~/.claude`
 > * **macOS paths**: on a macOS remote machine, the repository is under `/Volumes`, or a folder name in the path of the repository or the worktree has a `~` or a non-ASCII character
 > * **Folder restrictions**: your organization restricts which folders sessions may use
@@ -1375,11 +1427,12 @@ If Desktop hasn't reconnected when you come back, send a message in the session.
 * **Remembered password**: a password that you let Desktop remember also works without a prompt, but for a long absence prefer a key that your SSH agent holds. If sign-ins with that password break off or hang, Desktop can stop reconnecting and wait for you.
 * **Any other prompt**: if the remote machine prompts for anything else, such as a one-time code, you can get a notification on your computer. Click the notification, or send a message in the session, and Desktop shows the prompt.
 
-> [accordion] If a jump host asks for a sign-in, the outage is long, output is missing, or the process is gone
+> [accordion] If a jump host asks for a sign-in, the outage is long, a message isn't sent, output is missing, or the process is gone
 >
 > * **Jump host, pushes stop while you're away**: this can happen with Desktop on macOS or Linux when nobody answers a jump host's sign-in, for example a push to a phone. Desktop then stops reconnecting while nobody is at your computer. When you unlock or use the computer, you can get another push, because Desktop can try again. After three unanswered attempts it waits until you retry or send a message.
 > * **Jump host, pushes keep coming**: where Desktop can't tell that nobody answers, as with Desktop on Windows, it keeps trying while it has a process to rejoin, whether or not that process still runs. You can get another push with each attempt. To end the attempts, quit Desktop, which [can cost you the running task](#reopen-a-session-after-you-quit-desktop).
-> * **Long outage**: Desktop slows to about one attempt every five minutes. To reconnect sooner, retry in the session or send a message, which Desktop delivers once it is connected.
+> * **Long outage**: Desktop slows to about one attempt every five minutes. To reconnect sooner, retry in the session or send a message. Desktop tries to deliver the message once it is connected.
+> * **Message not sent**: the row `Your organization's settings haven't loaded, so your message to <host> wasn't sent. Retry to send it.` under your message means that Desktop reconnected and held your message back, because your organization's settings hadn't loaded yet. Select **Retry** to send the message now. If you do nothing, Desktop tries again once the settings load.
 > * **Missing output**: while Desktop is disconnected, the helper keeps each session's most recent Claude Code output in a 16 MiB buffer and drops older output. After Desktop reconnects, the session can show `Loading recent output from <host>…`. If Desktop can't load all of the output, you see the row `Some output produced while you were disconnected may be missing here.` The row doesn't mean that the task stopped.
 > * **Process gone**: the process ended while Desktop was disconnected, as when the remote machine restarts. Desktop can then start a new one from the conversation's saved history and tell Claude to continue the task. If the task stays stopped, send a message. With a third-party provider, update to Claude Desktop v2.42304.0 or later, because earlier versions never continue the task on their own.
 
@@ -1597,7 +1650,7 @@ If a command-line tool makes your remote machines on demand, add its command to 
 
 > [!NOTE]
 >
-> Connections from a command require Claude Desktop v3.6556.0 or later on macOS or Linux, signed in with a Claude account. Administrators can [distribute commands to a team](#distribute-commands-to-your-team).
+> Connections from a command require Claude Desktop v3.6556.0 or later on macOS or Linux, or v4.16336.0 or later on Windows, signed in with a Claude account. On Windows, Desktop also has to [connect through the OpenSSH client](#use-your-ssh-configuration). Administrators can [distribute commands to a team](#distribute-commands-to-your-team).
 
 Desktop runs the command only when you create the connection or [create another machine](#create-another-machine), not each time you connect. Each entry is one connection, which points at the host that Desktop last saved from the entry's command.
 
@@ -1627,6 +1680,8 @@ The following example adds a connection named Dev box. If the file doesn't exist
 }
 ```
 
+On Windows, a bare name such as `acme-dev` doesn't work, so [start the command with the program's full path](#write-the-command-on-windows).
+
 Each entry takes these fields, and `id`, `name`, and `command` are required:
 
 | Field | Value |
@@ -1641,11 +1696,14 @@ To change or remove the connection, edit its entry in the file, because the app'
 
 ##### Write the command
 
-Desktop starts the program directly, with no shell and no terminal:
+On Windows, start with [Write the command on Windows](#write-the-command-on-windows), which says which of these rules apply there.
 
-* **Program**: write its name, or its full path from `/`, without spaces. Desktop looks for a bare name on the `PATH` that your login shell exports. Relative paths such as `./acme-dev`, paths that start with `~`, and shell aliases and functions don't work.
-* **Arguments**: separate plain arguments with spaces. The command can hold only spaces, ASCII letters, digits, and the characters `+,-./:=@_~`, and no word can start with `~`.
-* **Scripts**: if the command needs anything else, such as quotes, pipes, variables, or a URL with `?` or `&`, put it in a script. Make the script executable, start it with a `#!` line, and set `command` to its full path, such as `/Users/you/bin/make-devbox`. On macOS, keep the script out of the Documents, Desktop, and Downloads folders, where macOS can block it.
+On macOS and Linux, Desktop starts the program directly, with no shell and no terminal:
+
+* **Program**: write its name, or its full path from `/`. Desktop looks for a bare name on the `PATH` that your login shell exports. Relative paths such as `./acme-dev`, paths that start with `~`, and shell aliases and functions don't work.
+* **Spaces in the path**: put the program's full path in single quotes, such as `'/Users/you/My Tools/make-devbox' create`. Quotes, single or double, require Claude Desktop v4.16336.0 or later, and work only around the program's path.
+* **Arguments**: separate arguments with spaces. Outside quotes, the command can hold only spaces, ASCII letters, digits, and the characters `+,-./:=@_~`, and no word can start with `~`. A quoted path can also hold some other characters, such as `(`, `)`, and `&`.
+* **Scripts**: if the command needs anything else, such as quoted arguments, pipes, variables, or a URL with `?` or `&`, put it in a script. Make the script executable, start it with a `#!` line, and set `command` to its full path, such as `/Users/you/bin/make-devbox`. On macOS, keep the script out of the Documents, Desktop, and Downloads folders, where macOS can block it.
 * **Input**: the program gets no input and no terminal, so it can't prompt you there. If your tool signs you in through a browser or a prompt, sign in from a terminal first, and again whenever that sign-in lapses.
 * **Environment**: the program runs in your home directory with the variables that your login shell exports. Desktop reads them when it starts, as it does for [a `ProxyCommand`](#use-variables-from-your-shell-in-a-proxycommand), so quit and reopen Desktop after you change them.
 * **Time limit**: Desktop stops a program that is still running after 10 minutes. Desktop's progress message doesn't show the program's output. To stop the program sooner, select **Cancel** next to that message.
@@ -1675,11 +1733,60 @@ tail -n 1 "$out"
 
 If the command fails, **View details** in Desktop's message shows the last line that the command wrote to standard error, if any.
 
+##### Write the command on Windows
+
+On Windows, start `command` with the full path of an `.exe`, `.cmd`, or `.bat` file, from the drive letter. Desktop doesn't look for a bare name on your `PATH`, so an entry whose `command` is `acme-dev create` is [gray](#if-a-command-is-missing-or-gray).
+
+The following entry in `%USERPROFILE%\.claude\settings.json` runs `C:\Program Files\Acme\acme-dev.exe` with the argument `create`. In JSON, write each backslash twice, or write `/` instead. The single quotes are there because the path has a space:
+
+```json settings.json theme={null}
+{
+  "sshHostCommands": [
+    {
+      "id": "devbox",
+      "name": "Dev box",
+      "command": "'C:\\Program Files\\Acme\\acme-dev.exe' create"
+    }
+  ]
+}
+```
+
+Follow the rules in [Write the command](#write-the-command) on spaces in the path, input, the time limit, and what the program prints. In place of its other rules, follow these:
+
+* **Program**: don't use a network path such as `\\server\share`, a variable such as `%USERPROFILE%`, or a letter outside ASCII. With any of these in the path, the entry is gray. If your user folder's name has such a letter, keep the program outside that folder.
+* **Arguments**: follow the Arguments rule in Write the command. The command can also hold `\`, but no word can end with it.
+* **Scripts**: use a `.cmd` or `.bat` file, which Desktop runs through `cmd.exe`. Even in quotes, the file's path can't hold `&`, `^`, or `;`. In a file that you write, read the arguments with `%*`, because `%1` to `%9` split an argument at `,` and `=`.
+* **Environment**: the program gets the Desktop app's environment variables, not a shell profile's. After you change a variable, quit and reopen Desktop.
+* **Test**: to see the output that Desktop reads, run the command in Command Prompt. Put a path that has a space in double quotes and use `NUL` for no input, as in `"C:\Program Files\Acme\acme-dev.exe" create < NUL > host.txt`. The file has to hold only the host. The test makes a machine too, so delete it with your tool afterward.
+
+##### Wrap a Windows tool that prints other lines
+
+If your tool prints other lines before the host, such as progress messages, wrap it in a batch file that prints only the host. The following file prints the last line of your tool's output, and exits with your tool's code if it fails:
+
+```batch make-devbox.cmd theme={null}
+@echo off
+setlocal
+set "host="
+set "out=%TEMP%\acme-dev-%RANDOM%.txt"
+call "C:\Program Files\Acme\acme-dev.exe" create > "%out%"
+set "code=%ERRORLEVEL%"
+for /f "usebackq delims=" %%L in ("%out%") do set "host=%%L"
+del "%out%"
+if not "%code%"=="0" exit /b %code%
+setlocal EnableDelayedExpansion
+echo(!host!
+```
+
+Set `command` to the file's full path, such as `C:\\tools\\make-devbox.cmd` in JSON. Keep its last two lines as they are, because they print the host without running it as a command.
+
 ##### Connect to a new host
 
 Answer two questions the first time you connect to each new host:
 
-* **Host key**: with OpenSSH's default host key checking, check the key's fingerprint, then choose whether to connect. To skip the question, have your command add the key to `~/.ssh/known_hosts` before it prints the host, using a key that your tool learned when it made the machine. For a port other than 22, that line starts with `[host]:port`. If your tool reuses host names, remove the old key's line too.
+* **Host key**: with OpenSSH's default host key checking, check the key's fingerprint, then choose whether to connect. To skip the question, have your command add the key to `~/.ssh/known_hosts`, or `%USERPROFILE%\.ssh\known_hosts` on Windows, before it prints the host:
+  * Use a key that your tool learned when it made the machine
+  * For a port other than 22, start the line with `[host]:port`
+  * If your tool reuses host names, remove the old key's line too
 * **Folder**: choose whether you trust the folder that you open there
 
 Keep host key checking on for these hosts, and keep a `known_hosts` file for them. If `StrictHostKeyChecking` is `no` or `accept-new` and `UserKnownHostsFile` is also `/dev/null` or `none`, nothing records the key. When your tool then reuses a name, you can connect to a different machine without a warning.
@@ -1741,7 +1848,8 @@ Before you deploy the key, settle each of these:
 
 * **Where to put the key**: if your MDM policy for Claude Code already sets a [policy key](https://code.claude.com/docs/en/managed-settings.md#how-claude-code-combines-managed-sources), put it there. Otherwise, put it in the managed settings file. By default, such a policy outranks the file, and Desktop then ignores entries in the file. Set it on the computer even where [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md) apply: Desktop ignores the key there, and in project and local settings.
 * **The `id`**: if a user's `sshHostCommands` entry has your `id`, only yours works. If any other SSH connection has it, such as one in a user's `sshConfigs`, your entry is gray. Pick an `id` that users are unlikely to choose.
-* **The program**: give its full path, because Desktop looks up a bare name on each user's own `PATH`. The program runs as the user, with the variables that their login shell exports.
+* **The program**: give its full path, because on macOS and Linux Desktop looks up a bare name on each user's `PATH`, and on Windows an entry with a bare name is gray. The program runs as the user, with [that user's variables](#write-the-command).
+* **Each platform**: deploy one entry to Windows computers and another to macOS and Linux computers. An entry with a [Windows path](#write-the-command-on-windows) is gray on macOS and Linux, and one with a macOS or Linux path is gray on Windows.
 * **Users' own entries**: Desktop treats a user's entry like a [hook](https://code.claude.com/docs/en/hooks.md), because both run a program on the computer. To allow only your entries, set [`strictPluginOnlyCustomization`](https://code.claude.com/docs/en/settings-reference#strictpluginonlycustomization) to `["hooks"]`, or add `"hooks"` to its list. You also stop Claude Code hooks from user, project, and local settings, with no way to keep them. If you set that key or [`allowManagedHooksOnly`](https://code.claude.com/docs/en/settings-reference#allowmanagedhooksonly) to `true` instead, you block more, as each key's entry lists.
 * **Every entry**: to turn off your entries too, set [`disableAllHooks`](https://code.claude.com/docs/en/settings-reference#disableallhooks) in managed settings. If you set [`disableDesktopLocalSessions`](https://code.claude.com/docs/en/settings-reference#disabledesktoplocalsessions), or an `sshHostAllowlist` that allows no host, the selector lists no **Create** or **Create another** items.
 * **Where the locks count**: for these entries, Desktop reads `allowManagedHooksOnly`, `strictPluginOnlyCustomization`, and `disableAllHooks` from server-managed settings and from the computer's own file or policy, and applies the stricter result. Every entry stays gray until Desktop has checked claude.ai for server-managed settings, even if your organization has none.
@@ -1754,13 +1862,14 @@ After you deploy the key, restart Desktop on a test computer. In the Code tab's 
 The environment selector lists no **Create** or **Create another** item in these cases:
 
 * **The file**: `~/.claude/settings.json` has [invalid JSON or a value that the schema rejects](https://code.claude.com/docs/en/settings.md#fix-a-broken-settings-file), you misspelled the key, or you put it in a project's settings. Fix the file.
-* **Platform and account**: you use Windows, or a [third-party provider](https://code.claude.com/docs/en/third-party-integrations.md) instead of a Claude account. Add each host as an [SSH connection](#ssh-sessions) yourself.
+* **Account**: you use a [third-party provider](https://code.claude.com/docs/en/third-party-integrations.md) instead of a Claude account. Add each host as an [SSH connection](#ssh-sessions) yourself.
+* **Windows**: Desktop is older than v4.16336.0, or it doesn't connect through the OpenSSH client. Update Desktop and meet [the requirements for the OpenSSH client](#use-your-ssh-configuration), then quit and reopen Desktop.
 * **Your organization's settings**: your administrator turned off local sessions, or turned off SSH sessions. Ask them whether you can use commands.
 * **No `ssh` program**: Desktop couldn't start the OpenSSH client on your computer. Install it, or ask your administrator to allow it, then restart Desktop.
 
 An entry that you can't select is gray. Hover over it to see the reason:
 
-* **A mistake in the entry**: fix the field or the command that the message names. If the `id` is in use, give the entry another one.
+* **A mistake in the entry**: fix the field or the command that the message names. If the `id` is in use, give the entry another one. On Windows, the command has to [start with the program's full path](#write-the-command-on-windows).
 * **A broken settings file**: while your own settings file is broken, your administrator's entries may be gray, with a message that names the file. [Fix the file](https://code.claude.com/docs/en/settings.md#fix-a-broken-settings-file).
 * **A new host**: [**Create another**](#create-another-machine) is gray for one minute after Desktop saves a host. Select it after that minute. Before Claude Desktop v4.4212.0, **Replace Dev box's host** is gray for 10 minutes.
 * **Hooks are off or restricted**: your own entries work only where your own hooks can run. Remove `disableAllHooks` from your settings, or ask your administrator.
@@ -1933,13 +2042,15 @@ Managed settings override project and user settings and apply to Claude Code ses
 | `autoMode` | customize what the auto mode classifier trusts and blocks across your organization. See [Configure auto mode](https://code.claude.com/docs/en/auto-mode-config.md). |
 | `browserExternalPageTools` | set to `"disabled"` to prevent Claude from using tools to read or act on external pages in the [Browser pane](#browse-external-sites). Users can still navigate to external sites themselves, and local dev server previews are unaffected. |
 | `disableMobileSimulatorTools` | set to `true` to block Claude's tools for controlling and capturing devices in the [iOS Simulator pane](https://code.claude.com/docs/en/desktop-ios-simulator.md#turn-off-simulator-access). The pane stays usable for the user's own taps; only Claude's access is removed. The value must be the JSON boolean `true`; the string `"true"` is ignored. |
-| `disableBrowserExternalNavigation` | set to `true` to turn off external browsing in the [Browser pane](#browse-external-sites) entirely. Neither users nor Claude can navigate to external sites, and localhost dev server previews are unaffected. The value must be the JSON boolean `true`; the string `"true"` is ignored. |
+| `disableBrowserExternalNavigation` | set to `true` to turn off external browsing in the [Browser pane](#browse-external-sites) entirely. Neither users nor Claude can navigate to external sites, and localhost dev server previews are unaffected. HTML previews in SSH and WSL sessions [don't run scripts](#turn-off-scripts-in-ssh-and-wsl-previews-for-your-organization). The value must be the JSON boolean `true`; the string `"true"` is ignored. |
 | `sshConfigs` | pre-configure [SSH connections](#pre-configure-ssh-connections-for-your-team) that appear in the environment selector. Users can't delete managed connections or edit anything but their own **Worktree folder**. |
-| `sshHostCommands` | give users [SSH connections whose host comes from a command](#distribute-commands-to-your-team), alongside their own. Desktop reads it from the managed settings file or MDM policy on the computer, and ignores it in [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md). Requires Claude Desktop v3.6556.0 or later on macOS or Linux, signed in with a Claude account. |
+| `sshHostCommands` | give users [SSH connections whose host comes from a command](#distribute-commands-to-your-team), alongside their own. Desktop reads it from the managed settings file or MDM policy on the computer, and ignores it in [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md). Requires Claude Desktop v3.6556.0 or later on macOS or Linux, or v4.16336.0 or later on Windows, signed in with a Claude account. On Windows, Desktop also has to [connect through the OpenSSH client](#use-your-ssh-configuration). |
 | `sshHostAllowlist` | restrict [SSH sessions](#restrict-which-ssh-hosts-users-can-connect-to) to hosts whose resolved hostname matches one of these patterns. Read from managed settings only. |
 | `disableDesktopLocalSessions` | set to `true` to turn off [Code sessions that run on the device](#local-sessions-on-managed-devices), leaving SSH sessions to other hosts and cloud sessions available. The value must be the JSON boolean `true`. Read from managed settings only. Requires Claude Desktop v1.37937.0 or later. |
 | `disableSshSavedPasswords` | set to `true` to stop Desktop from offering to remember SSH passwords and from using or showing the ones it saved earlier. Turning it on doesn't delete them. Read from managed settings only. Requires Claude Desktop v1.49585.0 or later. |
 | `managedMcpServers` | push MCP server configurations to all users. Available in third-party (3P) Desktop deployments only. In each entry, set a transport of `"http"`, `"sse"`, or `"stdio"`, connection details, and optionally a `toolPolicy` map to restrict which of that server's tools users can invoke. Deliver it through the managed settings file, MDM, or a Claude apps gateway policy's [`desktop` block](https://code.claude.com/docs/en/claude-apps-gateway-config#claude-desktop-overlay), since 3P deployments don't receive admin-console settings. To deliver it through the gateway, you need Claude Code v2.1.232 or later on the gateway server. This is the desktop app's own key; Claude Code reads a [same-named managed setting](https://code.claude.com/docs/en/managed-mcp.md#provide-servers-through-managed-settings) of its own, with a different entry shape. |
+
+If you turn a feature off with `browserExternalPageTools`, `disableMobileSimulatorTools`, or `disableBrowserExternalNavigation` in a computer's [highest-ranked MDM policy or managed settings file](https://code.claude.com/docs/en/managed-settings.md#how-claude-code-combines-managed-sources), the feature stays off there. It stays off even when your [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md) leave that key unset or allow the feature. Don't use a user-level `HKCU` registry value for this. To turn the feature back on, remove the value wherever you set it. Requires Claude Desktop v4.4212.0 or later.
 
 Which managed settings reach a Desktop session depends on where that session runs. Model restrictions such as [`availableModels`](https://code.claude.com/docs/en/model-config#restrict-model-selection) are enforced in Desktop's Claude Code sessions the same way as in the terminal CLI; see [surface coverage](https://code.claude.com/docs/en/model-config.md#surface-coverage).
 
@@ -2296,6 +2407,8 @@ Find the card's title, or the code that ends the error message, in this table, t
 | `<host> is out of disk space` | `[ENOSPC]` or `[EDQUOT]` | Free space or quota on the remote machine, in your home directory or `/tmp` |
 | `Free up disk space on this computer` | `[ENOSPC]` or `[EDQUOT]`, in a message that starts with `Couldn't prepare the deploy locally` | Free space on your computer |
 | `Claude Code won't start on <host>` | `[CLI_UNRESPONSIVE]` | Wait a minute, then try again. If it keeps failing, run the command that the message names on the remote machine to see whether Claude Code answers there. |
+| `Ask <host>'s administrator to let Claude's server run` | `[SERVER_NOT_RUNNABLE]` or `[SETUP_DIR_NOEXEC]` | Ask the remote machine's administrator to let programs run from `~/.claude/remote/` on that machine, as the [requirements](#remote-machine-requirements-for-ssh-sessions) say |
+| `Try again in a few minutes` | `[DOWNLOAD_BUSY]` | Wait a few minutes, then try again. Anthropic's download server or a proxy on your computer's network reported that it is busy. If the card keeps coming back, ask that network's administrator whether a proxy limits downloads. |
 
 For any other message, check the [remote machine requirements](#remote-machine-requirements-for-ssh-sessions).
 

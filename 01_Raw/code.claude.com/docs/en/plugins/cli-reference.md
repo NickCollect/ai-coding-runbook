@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/cli-reference
-fetched_at: 2026-11-02T07:00:26.557337+00:00
+fetched_at: 2026-11-09T07:30:18.567572+00:00
 fetch_method: mintlify_md
 ---
 
@@ -614,7 +614,7 @@ claude plugin validate ./my-plugin --strict
 
 #### Validate a directory
 
-The `<path>` is a manifest file or a directory. Given a directory, Claude Code picks what to validate by what it finds there:
+The `<path>` is a [manifest file](#validate-a-manifest-file) or a directory. Given a directory, Claude Code picks what to validate by what it finds there:
 
 * `.claude-plugin/marketplace.json`, when it exists
 * Otherwise `.claude-plugin/plugin.json`
@@ -636,6 +636,16 @@ A few files are not read by a validation run:
 * **A `SKILL.md` at the plugin root**: when you run `claude plugin validate` against a plugin directory, Claude Code doesn't check a `SKILL.md` at the plugin root
 * **A `CLAUDE.md` at the plugin root**: in a plugin run, Claude Code also warns about a `CLAUDE.md` at the plugin root
 * **Plugin files in a marketplace run**: from a marketplace directory, Claude Code doesn't open the skill, agent, command, or hook files of plugins the marketplace lists in other directories, or the MCP server files they bundle. To find errors in those files, validate each plugin directory
+
+#### Validate a manifest file
+
+When the file isn't named `plugin.json` or `marketplace.json` and isn't in a `.claude-plugin` directory, Claude Code decides what it is by its fields. It validates the file as a marketplace in these cases, and otherwise as a plugin manifest:
+
+* `plugins` is an array
+* `plugins` and `owner` are both present
+* The file has a field that only `marketplace.json` defines, such as `owner`, and none that only `plugin.json` defines, such as `author`
+
+To choose the checks yourself, name the file `plugin.json` or `marketplace.json`. Claude Code validates any other file in a `.claude-plugin` directory as a plugin manifest.
 
 #### Output and exit codes
 

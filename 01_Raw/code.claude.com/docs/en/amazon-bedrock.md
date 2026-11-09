@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/amazon-bedrock
-fetched_at: 2026-11-02T07:00:25.663530+00:00
+fetched_at: 2026-11-09T07:30:17.618053+00:00
 fetch_method: mintlify_md
 ---
 
@@ -314,15 +314,29 @@ When a user selects one of these versions in `/model`, Claude Code calls Amazon 
 
 When Claude Code starts with Amazon Bedrock configured, it verifies that the models it intends to use are accessible in your account.
 
-If you have pinned a model version that is older than the current Claude Code default, and your account can invoke the newer version, Claude Code prompts you to update the pin. Accepting writes the new model ID to your [user settings file](https://code.claude.com/docs/en/settings.md) and restarts Claude Code. Declining is remembered until the next default version change. Pins that point to an [application inference profile ARN](#map-each-model-version-to-an-inference-profile) are skipped, since those are managed by your administrator.
+You may have pinned a model version that is older than the current Claude Code default. If your account can invoke the newer version, Claude Code prompts you to update the pin. Accepting writes the new model ID to your [user settings file](https://code.claude.com/docs/en/settings.md) and restarts Claude Code. Declining is remembered until the next default version change.
+
+Claude Code doesn't check or prompt for these pins:
+
+* A pin in the `env` block of [managed settings](https://code.claude.com/docs/en/managed-settings.md)
+* A pin that points to an [application inference profile ARN](#map-each-model-version-to-an-inference-profile), because your administrator manages it
+
+If the update prompt still appears for a pin in managed settings, update Claude Code to v2.1.314 or later. Before v2.1.314, the managed pin stayed in effect after you accepted, so the prompt came back at the next start.
 
 If you have not pinned a model and the current default is unavailable in your account, Claude Code falls back for the current session and shows a notice. It tries earlier versions of the default model first and, when the default is an Opus model and no Opus version is available, falls back to the default Sonnet model. The fallback is not persisted. Enable the newer model in your Amazon Bedrock account or [pin a version](#4-pin-model-versions) to make the choice permanent.
 
+### Start a session on a specific model
+
 When you start the session on a specific Sonnet or Opus version, for example with `--model`, `ANTHROPIC_MODEL`, or the [`model` setting](https://code.claude.com/docs/en/settings-reference#model), that version acts as the session's pinned default for the matching `sonnet` or `opus` alias. Claude Code skips the availability check for the built-in default your model replaces and starts on the model you configured, with no fallback notice.
 
-Model aliases such as `opus` don't act as pins, and neither does a model ID Claude Code doesn't recognize, such as an application inference profile ARN.
+These don't act as pins when you start a session on them:
 
-When these checks find a model your account can't invoke, Claude Code remembers the refusal on this machine for up to a day, and launches during that time skip the remembered model without asking Amazon Bedrock again. Claude Code checks a remembered refusal of a current default model again at launch once ten minutes have passed since the last check, so a default your administrator re-enables comes back. To turn the memory off, set [`CLAUDE_CODE_SKIP_MODEL_ACCESS_MEMORY=1`](https://code.claude.com/docs/en/env-vars).
+* A model alias such as `opus`
+* A model ID Claude Code doesn't recognize, such as an application inference profile ARN
+
+### Remembered model refusals
+
+When the startup model checks find a model your account can't invoke, Claude Code can remember the refusal on this machine for up to a day. Once ten minutes have passed since the last check, Claude Code checks a remembered refusal of a current default model again at launch. A default your administrator re-enables then comes back. To turn the memory off, set [`CLAUDE_CODE_SKIP_MODEL_ACCESS_MEMORY=1`](https://code.claude.com/docs/en/env-vars).
 
 ### When your organization enforces a model allowlist
 
@@ -451,13 +465,17 @@ Before v2.1.287, the Fable models and Opus 4.7 and later ran with a 200K window 
 export ANTHROPIC_BEDROCK_SERVICE_TIER=priority
 ```
 
-Claude Code sends this as the `X-Amzn-Bedrock-Service-Tier` header on each request. Tier availability varies by model and region. Reserved capacity uses a [provisioned throughput](https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html) ARN as the model ID instead of this setting.
+Claude Code sends this as the `X-Amzn-Bedrock-Service-Tier` header on every [Invoke API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html) request from a session that has the variable, except its [model access checks](#startup-model-checks). Setting it has no effect on requests to the [Mantle endpoint](#use-the-mantle-endpoint) or through a [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway). Tier availability varies by model and region. Reserved capacity uses a [provisioned throughput](https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html) ARN as the model ID instead of this setting.
+
+To cover [background sessions](https://code.claude.com/docs/en/agent-view.md#settings-and-provider) you start from a terminal, set `ANTHROPIC_BEDROCK_SERVICE_TIER` in the [`env`](https://code.claude.com/docs/en/settings-reference#env) block of your settings. Those sessions get the value you export only when the shell that started the [supervisor](https://code.claude.com/docs/en/agent-view.md#the-supervisor-process) exported it.
 
 ## AWS Guardrails
 
-[Amazon Bedrock Guardrails](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html) let you implement content filtering for Claude Code. Create a Guardrail in the [Amazon Bedrock console](https://console.aws.amazon.com/bedrock/), publish a version, then add the Guardrail headers to your [settings file](https://code.claude.com/docs/en/settings.md). Enable Cross-Region inference on your Guardrail if you're using cross-region inference profiles.
+[Amazon Bedrock Guardrails](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html) let you implement content filtering for Claude Code. Create a Guardrail in the [Amazon Bedrock console](https://console.aws.amazon.com/bedrock/) and publish a version. Enable Cross-Region inference on your Guardrail if you're using cross-region inference profiles.
 
-Example configuration:
+To apply the Guardrail through a [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway), follow [Apply an Amazon Bedrock guardrail](https://code.claude.com/docs/en/claude-apps-gateway-config.md#apply-an-amazon-bedrock-guardrail). Without a Claude apps gateway, add the Guardrail headers to your [settings file](https://code.claude.com/docs/en/settings.md).
+
+Example settings file configuration:
 
 ```json theme={null}
 {
@@ -466,8 +484,6 @@ Example configuration:
   }
 }
 ```
-
-If your organization delivers the guardrail headers through a [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway) policy instead, they count as [settings that need approval](https://code.claude.com/docs/en/server-managed-settings.md#environment-variables-and-the-approval-dialog).
 
 When the guardrail blocks a response partway through, the text streamed so far stays and the reply ends with the message configured on the guardrail for blocked responses.
 
@@ -479,7 +495,7 @@ Mantle has its own IAM actions under the `bedrock-mantle:` prefix, so the `bedro
 
 ### Enable Mantle
 
-With AWS credentials already configured, set `CLAUDE_CODE_USE_MANTLE` to route requests to the Mantle endpoint:
+With AWS credentials already configured, set `CLAUDE_CODE_USE_MANTLE` and your AWS region:
 
 ```bash theme={null}
 export CLAUDE_CODE_USE_MANTLE=1
@@ -579,8 +595,6 @@ If you receive an error "on-demand throughput isn't supported":
 
 * Specify the model as an [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html) ID
 
-Claude Code uses the Amazon Bedrock [Invoke API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html) and does not support the Converse API.
-
 ### Streaming errors behind a gateway or proxy
 
 Amazon Bedrock streams `InvokeModelWithResponseStream` responses in a binary event-stream format with the header `Content-Type: application/vnd.amazon.eventstream`. A gateway or proxy between Claude Code and Amazon Bedrock must forward the response body and its headers, including `Content-Type`, as Amazon Bedrock sent them.
@@ -610,7 +624,7 @@ What a `403` from the Mantle endpoint means depends on whether the error names a
 * If the error names a `bedrock-mantle:` action, grant your IAM identity that action.
 * If the error names no action and your credentials are valid, your AWS account has not been granted access to the model you requested. Contact your AWS account team to request access.
 
-A `400` that names the model ID means that model is not served on Mantle. Mantle has its own model lineup separate from the standard Amazon Bedrock catalog, so inference profile IDs such as `us.anthropic.claude-sonnet-4-6` will not work. Use a Mantle-format ID, or enable [both endpoints](#run-mantle-alongside-the-invoke-api) so Claude Code routes each request to the endpoint where the model is available.
+A `400` that names the model ID means that model isn't served on Mantle. Mantle has its own model lineup separate from the standard Amazon Bedrock catalog, so inference profile IDs such as `us.anthropic.claude-sonnet-4-6` don't work. Use a Mantle-format ID, or enable [both endpoints](#run-mantle-alongside-the-invoke-api) so Claude Code sends inference profile IDs to the Invoke API.
 
 ## Additional resources
 

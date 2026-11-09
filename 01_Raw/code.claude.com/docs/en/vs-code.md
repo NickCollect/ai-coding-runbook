@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/vs-code
-fetched_at: 2026-11-02T07:00:27.036593+00:00
+fetched_at: 2026-11-09T07:30:19.152139+00:00
 fetch_method: mintlify_md
 ---
 
@@ -824,7 +824,12 @@ Claude Code is available as both a VS Code extension (graphical panel) and a CLI
 
 ### Run CLI in VS Code
 
-To use the CLI while staying in VS Code, press `` Ctrl+` `` on Windows/Linux or `` Cmd+` `` on Mac to open the integrated terminal, then run `claude`. The CLI automatically integrates with your IDE for features like diff viewing and diagnostic sharing. If you use an external terminal, run `/ide` inside Claude Code to connect it to VS Code.
+To use the CLI while staying in VS Code, press `` Ctrl+` `` on Windows/Linux or `` Cmd+` `` on Mac to open the integrated terminal, then run `claude`.
+
+To get features like diff viewing and diagnostic sharing, connect the CLI to the extension from the integrated terminal or an external terminal:
+
+* **Integrated terminal**: [install the extension](#install-the-extension), then start `claude`. The CLI connects automatically. Claude Code v2.1.318 or later doesn't install the extension for you, so until you install it, `/ide` reports "No available IDEs detected" and `/status` shows the IDE as "Not connected".
+* **External terminal**: run `/ide` inside Claude Code to connect to VS Code. If VS Code is running without the extension, `/ide` installs it, unless you turned off [`autoInstallIdeExtension`](https://code.claude.com/docs/en/settings-reference#autoinstallideextension).
 
 Installing the extension does not put `claude` on your shell PATH. The extension bundles a private copy of the CLI for its chat panel, but typing `claude` in a terminal requires the [standalone CLI install](https://code.claude.com/docs/en/setup.md). Run the install once and the commands on this page, including `claude mcp add` and `claude --resume`, work in any terminal. If `claude` is still not found after installing, [verify your PATH](https://code.claude.com/docs/en/troubleshoot-install.md#verify-your-path).
 
@@ -1092,7 +1097,16 @@ To uninstall the Claude Code extension:
 2. Search for "Claude Code"
 3. Click **Uninstall**
 
-If you run `claude` in a VS Code integrated terminal, Claude Code reinstalls the extension automatically. To keep it uninstalled, turn off **Auto-install IDE extension** in `/config`, or set [`autoInstallIdeExtension`](https://code.claude.com/docs/en/settings-reference#autoinstallideextension) to `false`. You can also set the [`CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL`](https://code.claude.com/docs/en/env-vars) environment variable to `1`.
+If you do either of these after uninstalling, the extension comes back:
+
+* Run `/ide` from an external terminal while VS Code is running
+* Start `claude` in the integrated terminal on a Claude Code version before v2.1.318
+
+To keep the extension from coming back, do one of these, then uninstall it again if it already came back:
+
+* Set [`autoInstallIdeExtension`](https://code.claude.com/docs/en/settings-reference#autoinstallideextension) to `false` in `~/.claude.json`
+* Set [`CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL`](https://code.claude.com/docs/en/env-vars#variables) to `1` under `env` in a [settings file](https://code.claude.com/docs/en/env-vars.md#in-settings-files)
+* In the integrated terminal, turn off **Auto-install IDE extension** in `/config`
 
 To also remove extension data and reset all settings, delete the extension's storage directory for your platform.
 

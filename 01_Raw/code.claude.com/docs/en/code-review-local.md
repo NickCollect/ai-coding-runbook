@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/code-review-local
-fetched_at: 2026-11-02T07:00:25.953856+00:00
+fetched_at: 2026-11-09T07:30:17.936582+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,7 +39,7 @@ You can also add flags:
 
 **2. Keep working**
 
-The review runs as a background [subagent](https://code.claude.com/docs/en/sub-agents.md) with its own context window, so it doesn't fill your conversation. The findings arrive in your conversation when the review completes.
+In a terminal session, the review runs as a background [subagent](https://code.claude.com/docs/en/sub-agents.md) with its own context window, so it doesn't fill your conversation. The findings arrive in your conversation when the review completes.
 
 **3. Act on the findings**
 

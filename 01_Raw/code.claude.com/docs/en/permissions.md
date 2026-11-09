@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/permissions
-fetched_at: 2026-11-02T07:00:26.498819+00:00
+fetched_at: 2026-11-09T07:30:18.522535+00:00
 fetch_method: mintlify_md
 ---
 
@@ -75,7 +75,7 @@ When [auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-p
 
 ## Permission modes
 
-Claude Code supports several permission modes that control how it approves tool calls. See [Permission modes](https://code.claude.com/docs/en/permission-modes.md) for when to use each one. To change the mode sessions start in, set `defaultMode` in your [settings files](https://code.claude.com/docs/en/settings.md#where-settings-live). [Which mode a session starts in](https://code.claude.com/docs/en/permission-modes.md#which-mode-a-session-starts-in) covers the built-in default for each plan and what the VS Code extension reads.
+Claude Code supports several permission modes that control how it approves tool calls. See [Permission modes](https://code.claude.com/docs/en/permission-modes.md) for when to use each one. To change the default permission mode for new sessions, set `defaultMode` in your [settings files](https://code.claude.com/docs/en/settings.md#where-settings-live). [Which mode a session starts in](https://code.claude.com/docs/en/permission-modes.md#which-mode-a-session-starts-in) covers the built-in default for each plan and what the VS Code extension reads.
 
 | Mode | Description |
 | :- | :- |
@@ -344,7 +344,7 @@ To block Claude's file tools from reading a file or directory, add a `Read` deny
 
 #### What `Read` and `Edit` rules cover
 
-`Edit` rules apply to all built-in tools that edit files. Claude makes a best-effort attempt to apply `Read` rules to all built-in tools that read files like Grep and Glob, to `@file` mentions in your prompts, and to the selection and open-file context that a connected [IDE](https://code.claude.com/docs/en/vs-code.md#the-built-in-ide-mcp-server) shares with Claude.
+`Edit` rules apply to all built-in tools that edit files. Claude makes a best-effort attempt to apply `Read(path)` deny rules to all built-in tools that read files like Grep and Glob. It makes the same attempt to apply `Read(path)` deny rules to `@file` mentions in your prompts and to the selection and open-file context that a connected [IDE](https://code.claude.com/docs/en/vs-code.md#the-built-in-ide-mcp-server) shares with Claude.
 
 A `Read(path)` deny rule also applies to image paths you paste into a prompt and directories you @-mention:
 
@@ -359,11 +359,14 @@ A `Read` deny rule also blocks the [Edit and Write tools](https://code.claude.co
 >
 > Read and Edit deny rules apply to Claude's built-in file tools, to file commands Claude Code recognizes in Bash, such as `cat`, `head`, `tail`, `sed`, and `tee`, and to the targets of Bash [redirections](#redirections) such as `> file` and `< file`. They don't apply to a command that reads files without naming them, such as `grep -r pattern .` run from the directory that holds the file, or to arbitrary subprocesses that read or write files indirectly, like a Python or Node script that opens files itself. For OS-level enforcement that blocks all processes from accessing a path, [enable the sandbox](https://code.claude.com/docs/en/sandboxing.md).
 
-#### `Write(path)`, `NotebookEdit(path)`, and `Glob(path)` rules never match
+#### `Write(path)`, `Glob(path)`, and `Grep(path)` rules don't match
 
-Claude Code checks file permissions against `Edit(path)` and `Read(path)` rules only. If you write a path rule for `Write`, `NotebookEdit`, `Glob`, or legacy `MultiEdit`, Claude Code accepts the rule but never matches a read or edit against it.
+Claude Code checks file permissions against `Edit(path)` and `Read(path)` rules. It accepts a rule with a path other than `*` for one of the tools below but doesn't match a read, search, or edit against it. A `Grep(docs/**)` deny rule doesn't stop Grep from searching `docs`. Write the `Edit` or `Read` rule in its place:
 
-Use `Edit(docs/**)` in place of `Write(docs/**)`, `NotebookEdit(docs/**)`, or `MultiEdit(docs/**)`, and `Read(docs/**)` in place of `Glob(docs/**)`. To match every use of the Write, NotebookEdit, or Glob tool regardless of path, write only the tool name.
+* **`Write`, `NotebookEdit`, or legacy `MultiEdit`**: use `Edit(docs/**)` in place of `Write(docs/**)`.
+* **`Glob` or `Grep`**: use `Read(docs/**)` in place of `Grep(docs/**)`. As an ask rule, `Read(docs/**)` prompts when Claude calls Grep or Glob on a matching path, but not when a search of a working directory above it returns matching files.
+
+To match every use of one of these tools regardless of path, [write only the tool name](#match-all-uses-of-a-tool).
 
 #### How path patterns match
 
@@ -674,9 +677,16 @@ Files in additional directories follow the same permission rules as the original
 
 You can't add most [network paths](https://code.claude.com/docs/en/errors.md#working-directory-is-a-network-path), such as the UNC share `\\server\share`, as working directories, because looking one up can contact the host it names. On Windows, map the share to a drive letter instead and pass the drive with `--add-dir` at launch.
 
-Set [`permissions.blockReadsOutsideWorkingDirectories`](https://code.claude.com/docs/en/settings-reference#permissions-blockreadsoutsideworkingdirectories) to make the file tools refuse the paths it fences in every permission mode. In auto mode, Claude Code offers to turn it on the first time Claude [reads outside the working directories](https://code.claude.com/docs/en/permission-modes.md#first-read-outside-the-working-directories).
-
 In background sessions on macOS, the session host requests access to protected folders such as `~/Desktop`, `~/Documents`, and `~/Downloads` separately from your terminal when Claude needs to read or write files there; if reads there fail with `Operation not permitted`, see [how to grant folder access to background sessions](https://code.claude.com/docs/en/agent-view.md#background-sessions-can’t-read-desktop-documents-or-downloads-on-macos).
+
+### Block file-tool reads and writes outside the working directories
+
+To make Claude's file tools refuse paths outside the working directories in every permission mode, including `bypassPermissions`, set one or both of these keys to `true`:
+
+* **[`permissions.blockReadsOutsideWorkingDirectories`](https://code.claude.com/docs/en/settings-reference#permissions-blockreadsoutsideworkingdirectories)**: the file tools refuse reads there, apart from files Claude Code itself needs. In auto mode, Claude Code offers to turn it on the first time Claude [reads outside the working directories](https://code.claude.com/docs/en/permission-modes.md#first-read-outside-the-working-directories).
+* **[`permissions.blockWritesOutsideWorkingDirectories`](https://code.claude.com/docs/en/settings-reference#permissions-blockwritesoutsideworkingdirectories)**: the `Write`, `Edit`, and `NotebookEdit` tools refuse writes there, apart from some of Claude Code's own files such as plan files. The key doesn't limit shell commands, MCP tools, or the programs hooks run, so use [sandboxing](https://code.claude.com/docs/en/sandboxing.md) to limit where shell commands write. Requires Claude Code v2.1.314 or later.
+
+To keep one outside directory reachable while either key is `true`, [add it as a working directory](https://code.claude.com/docs/en/settings-reference.md#let-one-directory-through-the-read-or-write-block).
 
 ### Move the session to another directory
 

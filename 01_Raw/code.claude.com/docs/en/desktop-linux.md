@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/desktop-linux
-fetched_at: 2026-10-26T05:40:01.734421+00:00
+fetched_at: 2026-11-09T07:30:18.082291+00:00
 fetch_method: mintlify_md
 ---
 
@@ -59,7 +59,7 @@ The command prints nothing when it succeeds and a `curl:` error when it doesn't.
 gpg --show-keys /usr/share/keyrings/claude-desktop-archive-keyring.asc
 ```
 
-The fingerprint gpg prints should be `31DDDE24DDFAB679F42D7BD2BAA929FF1A7ECACE`. If gpg reports that the file can't be opened or contains no valid OpenPGP data, the download failed or returned the wrong content: confirm your network can reach `downloads.claude.ai`, then rerun the download command.
+The only fingerprint gpg prints should be `31DDDE24DDFAB679F42D7BD2BAA929FF1A7ECACE`. If gpg reports that the file can't be opened or contains no valid OpenPGP data, the download failed or returned the wrong content. Confirm your network can reach `downloads.claude.ai`, then rerun the download command.
 
 Register the repository:
 

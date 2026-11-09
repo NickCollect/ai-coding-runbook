@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/troubleshoot-install
-fetched_at: 2026-11-02T07:00:26.997696+00:00
+fetched_at: 2026-11-09T07:30:19.130871+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1269,6 +1269,20 @@ Open Keychain Access, select the `login` keychain, and choose **Edit > Change Pa
 **4. Log out and back in**
 
 Once the Keychain is writable again, Claude Code moves the credentials back the next time it writes a credential. To force it now, run `/logout` and then `/login`. Logging out removes all stored credentials, including the plaintext file's contents, saved MCP server logins, and plugin sensitive values, so expect to re-authorize MCP servers and re-enter plugin secrets afterwards. Logging in again stores your login in the Keychain.
+
+#### Login fails on a network home directory
+
+When a request fails with `API Error: 401` and your [configuration directory](https://code.claude.com/docs/en/claude-directory.md) is on a network filesystem, check whether that filesystem or your quota on it is full. With no room left, Claude Code can't save a new or renewed login to the plaintext [`.credentials.json` file](https://code.claude.com/docs/en/authentication#credential-management), and `claude auth login` can still print `Login successful.`
+
+**1. Make room on the filesystem**
+
+Delete files you no longer need on the filesystem that holds `~/.claude`, or the directory you set in [`CLAUDE_CONFIG_DIR`](https://code.claude.com/docs/en/env-vars).
+
+**2. Sign in again**
+
+Run `/login` at the Claude Code prompt or `claude auth login` in your shell.
+
+Before v2.1.318, when Claude Code saved the login file on a full network filesystem, it could replace a still-valid stored login with an empty file. Later commands then reported `Not logged in`.
 
 ### Bedrock, Agent Platform, or Foundry credentials not loading
 

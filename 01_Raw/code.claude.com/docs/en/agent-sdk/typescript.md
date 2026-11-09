@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/typescript
-fetched_at: 2026-11-02T07:00:25.676834+00:00
+fetched_at: 2026-11-09T07:30:17.574672+00:00
 fetch_method: mintlify_md
 ---
 
@@ -58,7 +58,10 @@ Each compiled executable embeds a single platform's binary. Match the platform p
 
 If your application bundles the Agent SDK together with its own dependencies, import from `@anthropic-ai/claude-agent-sdk/core` instead of the package root. The `/core` entry requires TypeScript Agent SDK v0.3.282 or later, and its types require TypeScript 5.0 or later.
 
-The `/core` entry exports the same `query()`, `startup()`, `tool()`, `createSdkMcpServer()`, and `resolveSettings()` as the root entry, along with the functions that rename, tag, and delete sessions, `AbortError`, the runtime constants, and every type. It adds no names of its own. To keep the code your application loads small, `/core` leaves out some root exports, including `prewarm()`, the `InMemorySessionStore` class, and the helpers that list, read, fork, import, and summarize sessions. If you need one of them, use the root entry instead.
+To keep the code your application loads small, the `/core` entry leaves out some root exports:
+
+* **Exported**: the same `query()`, `startup()`, [`prewarm()`](#prewarm), `tool()`, `createSdkMcpServer()`, and `resolveSettings()` as the root entry, along with the functions that rename, tag, and delete sessions, `AbortError`, the runtime constants, and every type. Importing the alpha `prewarm()` from `/core` requires Agent SDK v0.3.314 or later.
+* **Left out**: root exports including the `InMemorySessionStore` class and the helpers that list, read, fork, import, and summarize sessions. If you need one of them, use the root entry instead.
 
 The root entry inlines its own copies of `zod` and `@modelcontextprotocol/sdk`. The `/core` entry imports them from your `node_modules` at the ranges the Agent SDK's `peerDependencies` declare, so a bundle that already includes them doesn't carry a second copy. Import from either the root or `/core` in a given process, not both: they are separate bundles, and loading both gives you two copies of the Agent SDK's classes and state.
 
@@ -1343,7 +1346,7 @@ type PermissionMode =
   | "default" // Standard permission behavior
   | "acceptEdits" // Auto-accept file edits
   | "bypassPermissions" // Bypass permission checks; explicit ask rules still prompt
-  | "plan" // Planning mode - explore without editing
+  | "plan" // Planning mode - Claude explores and plans
   | "dontAsk" // Don't prompt for permissions, deny if not pre-approved
   | "auto"; // A model classifier reviews actions such as shell commands and network requests
 ```
@@ -1352,7 +1355,12 @@ type PermissionMode =
 
 Custom permission function type for controlling tool usage.
 
-The function is the SDK replacement for the interactive permission prompt: it's invoked only when the [permission evaluation flow](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated) resolves to a prompt. Tool calls already approved by an `allowedTools` entry, a settings allow rule, or the permission mode, such as `acceptEdits` or `bypassPermissions`, never invoke it. To gate every tool call, use a [`PreToolUse` hook](https://code.claude.com/docs/en/agent-sdk/hooks) instead.
+The function replaces the interactive permission prompt. The SDK calls `canUseTool` when the [permission evaluation flow](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated) resolves to a prompt. Calls approved in either of these ways run without calling `canUseTool`:
+
+* A call that an `allowedTools` entry or a settings allow rule approves
+* A call the permission mode approves, such as a file edit in `acceptEdits` mode
+
+To check those calls, use a [`PreToolUse` hook](https://code.claude.com/docs/en/agent-sdk/hooks), which runs for them too.
 
 An allow rule doesn't pre-approve the [actions no mode auto-approves](https://code.claude.com/docs/en/permission-modes.md#actions-no-mode-auto-approves); see [How permissions are evaluated](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated) for which of them reach the callback and what happens in `dontAsk` and `auto` mode.
 
@@ -1929,7 +1937,7 @@ Use the reason code to explain why fast mode is off in your own UI instead of re
 
 The same pair of fields appears on [`SDKSystemMessage`](#sdksystemmessage) and on the [`SDKControlInitializeResponse`](#sdkcontrolinitializeresponse), so you can read the fast mode state before the first turn.
 
-The `origin` field forwards the [`SDKMessageOrigin`](#sdkmessageorigin) of the user message that triggered this result. Results that carry `origin: { kind: "task-notification" }` include:
+The `origin` field holds the [`SDKMessageOrigin`](#sdkmessageorigin) that Claude Code assigned to the user message that triggered this result, not a copy of the `origin` you sent. Results that carry `origin: { kind: "task-notification" }` include:
 
 * **Synthetic follow-up turns**: when the SDK injects a synthetic follow-up turn, such as for a finished background task, the resulting `SDKResultMessage` carries this kind
 * **Fired scheduled tasks and messages from other sessions**: cloud scheduled tasks whose trigger fired and server-verified messages from your other sessions arrive with this kind too, each with the `subkind` described in [Task-notification subkinds](#task-notification-subkinds)
@@ -1938,7 +1946,10 @@ Check `kind` to distinguish results that answer your prompt from injected follow
 
 When several background-task completions are queued together, Claude Code can answer them in one turn rather than one turn each. Each completion still produces its own result with this origin. All but the last of the completions Claude Code answers together produce empty results with `num_turns: 0`, in order, and the last one's result carries the turn that answers them all.
 
-The field is absent for results emitted before any user turn, such as startup errors.
+`origin` is absent when Claude Code assigned none, such as:
+
+* On a turn you start with a message that has neither `origin` nor [`isSynthetic`](#sdkusermessage)
+* On results emitted before any user turn, such as startup errors
 
 When a `PreToolUse` hook returns `permissionDecision: "defer"`, the result has `stop_reason: "tool_deferred"` and `deferred_tool_use` carries the pending tool's `id`, `name`, and `input`. Read this field to surface the request in your own UI, then resume with the same `session_id` to continue. See [Defer a tool call for later](https://code.claude.com/docs/en/hooks.md#defer-a-tool-call-for-later) for the full round trip.
 
@@ -2008,6 +2019,10 @@ Set `CLAUDE_CODE_STARTUP_FAILURE_RESULTS` to `1` in [`env`](#options) to receive
 
 * A resume that Claude Code stops because it [can't return the session to its worktree](https://code.claude.com/docs/en/worktrees.md#the-session-resumes-outside-its-worktree), with `worktree_unverified` or `worktree_resume_refused`. That section says which error carries which value.
 * A refused [`continue`](#options) of a conversation that a background session holds, with `session_held_by_background`. For a refused [`resume`](#options) of such a conversation, Claude Code writes the result only when the variable is set.
+* A start that Claude Code refuses because [`failIfUnavailable`](#sandboxsettings) is on and the sandbox can't start, with `sandbox_required_unavailable`.
+* A start that Claude Code refuses because `~/.claude.json` isn't valid JSON, with `config_file_invalid`.
+
+The `SDKStartupFailureReason` type lists the values `startup_failure_reason` can hold:
 
 ```typescript theme={null}
 type SDKStartupFailureReason =
@@ -2029,7 +2044,9 @@ type SDKStartupFailureReason =
   | "cli_version_too_old"
   | "bypass_root"
   | "org_config_required_unavailable"
-  | "org_config_refused";
+  | "org_config_refused"
+  | "sandbox_required_unavailable"
+  | "config_file_invalid";
 ```
 
 Each value names one refusal:
@@ -2055,6 +2072,8 @@ Each value names one refusal:
 | `bypass_root` | Bypass permissions mode was requested while running as root |
 | `org_config_required_unavailable` | The session needs the organization's policies and managed settings before it can start, and they couldn't be loaded, for example because of a network failure or an Anthropic server error. Requires Agent SDK v0.3.293 or later |
 | `org_config_refused` | Anthropic refused to provide the organization's policies and managed settings for this sign-in, for example because the sign-in expired or was revoked, or the organization doesn't allow Claude Code for this account. Requires Agent SDK v0.3.293 or later |
+| `sandbox_required_unavailable` | [`failIfUnavailable`](#sandboxsettings) is on and the sandbox can't start. The text in `errors` ends with `Set sandbox.failIfUnavailable=false to allow unsandboxed execution.` Requires Agent SDK v0.3.314 or later |
+| `config_file_invalid` | `~/.claude.json` isn't valid JSON. Claude Code leaves the file unchanged, so a retry fails the same way until someone repairs it. `errors` names the file and says how to restore or repair it. See [Configuration error in \~/.claude.json](https://code.claude.com/docs/en/errors.md#configuration-error-in-claude-json). Requires TypeScript Agent SDK v0.3.318 or later and Claude Code v2.1.318 or later |
 
 ### `SDKSystemMessage`
 
@@ -2181,6 +2200,7 @@ type SDKInformationalMessage = {
   level: "info" | "notice" | "suggestion" | "warning";
   tool_use_id?: string;
   prevent_continuation?: boolean;
+  tag?: string;
   uuid: UUID;
   session_id: string;
 };
@@ -2424,7 +2444,7 @@ Before Agent SDK v0.3.277, the type declared `severity` and `is_active` as optio
 
 ### `SDKMessageOrigin`
 
-Provenance of a user-role message. This appears as `origin` on [`SDKUserMessage`](#sdkusermessage) and is forwarded onto the corresponding [`SDKResultMessage`](#sdkresultmessage) so you can tell what triggered a given turn.
+Provenance of a user-role message. This appears as `origin` on [`SDKUserMessage`](#sdkusermessage). The [`SDKResultMessage`](#sdkresultmessage) for a turn carries the `origin` that Claude Code assigned, so you can tell what triggered that turn.
 
 ```typescript theme={null}
 type SDKMessageOrigin =
@@ -2451,15 +2471,24 @@ type SDKMessageOrigin =
   | { kind: "unclassified" };
 ```
 
+Your application can set these kinds of `origin` on a message it sends:
+
+* `{ kind: "human" }`: what the user typed
+* `{ kind: "task-notification", subkind: "scheduled-trigger" }`: a [scheduled run you declare](#declare-a-scheduled-run)
+
+Leave the other kinds to Claude Code and Anthropic servers. If you set one of those kinds, Claude reads the message as the user's by default.
+
+To send text the user didn't write, such as a fetched page or another agent's output, send it as its own message with [`isSynthetic`](#sdkusermessage) set to `true` and `origin` unset. Also set [`client_composed`](#sdkusermessage) to `true`, so that text starting with `/` doesn't run as a command.
+
 | `kind` | Meaning |
 | - | - |
-| `human` | Direct input from the end user. If your application forwards what the user typed as a user message, set its `origin` to `{ kind: "human" }` explicitly: Claude Code treats a user message with no `origin` as unattributed, and checks that require a human-typed prompt, such as the [`ultracode` workflow keyword](https://code.claude.com/docs/en/workflows#ask-for-a-workflow-in-your-prompt), don't accept it. Before v2.1.210, Claude Code treated an absent `origin` on a user message as human input. |
+| `human` | Direct input from the end user. If your application forwards what the user typed as a user message, set its `origin` to `{ kind: "human" }`. Without that `origin`, Claude still reads the message as the user's, but checks that require a human-typed prompt, such as the [`ultracode` workflow keyword](https://code.claude.com/docs/en/workflows#ask-for-a-workflow-in-your-prompt), don't accept the message. |
 | `channel` | Message arriving on a [channel](https://code.claude.com/docs/en/channels.md). `server` is the source MCP server name. |
-| `peer` | Message from another agent: an in-process [teammate](https://code.claude.com/docs/en/agent-teams.md) or a [cross-session peer](https://code.claude.com/docs/en/cross-session-messaging.md), another of your Claude Code sessions. See [Peer origin fields](#peer-origin-fields) for the per-field semantics and the trust model. |
+| `peer` | Message from another Claude Code agent: an in-process [teammate](https://code.claude.com/docs/en/agent-teams.md) or a [cross-session peer](https://code.claude.com/docs/en/cross-session-messaging.md), another of your Claude Code sessions. The [desktop app](https://code.claude.com/docs/en/desktop.md#work-across-sessions), which relays such messages between your sessions, declares this kind with [`fromMode`](#peer-origin-fields). To relay another agent's output from your own application, set `isSynthetic` and `client_composed` instead. See [Peer origin fields](#peer-origin-fields) for the per-field semantics and the trust model. |
 | `task-notification` | Synthetic turn injected for a delivery that arrives without a fresh user prompt, such as a finished background task; see [`SDKTaskNotificationMessage`](#sdktasknotificationmessage) for that arm. A prompt your application [declares as a scheduled run](#declare-a-scheduled-run) carries this kind too. The optional `subkind` marks what raised the notification. See [Task-notification subkinds](#task-notification-subkinds). |
 | `coordinator` | Message from a team coordinator in an [agent team](https://code.claude.com/docs/en/agent-teams.md). |
 | `auto-continuation` | Synthetic turn injected when the session continues without fresh user input, such as a command result that triggers a follow-up prompt. |
-| `unclassified` | Injected turn whose origin couldn't be determined. Requires Claude Code v2.1.223 or later. When Claude Code receives an [`SDKUserMessage`](#sdkusermessage) with `isSynthetic: true` and can't classify it as any other `kind`, it sets this kind as the message arrives and frames the turn to the model as a non-user source rather than treating it as human input. Your application shouldn't set this value. |
+| `unclassified` | Message marked as not coming from the user, such as an [`SDKUserMessage`](#sdkusermessage) you send with `isSynthetic: true`. Requires Claude Code v2.1.223 or later. |
 
 ### Task-notification subkinds
 
@@ -2483,7 +2512,7 @@ If your application runs prompts on its own schedule, declare each run so Claude
 A `peer` origin identifies which agent sent the message: an in-process [teammate](https://code.claude.com/docs/en/agent-teams.md) sending to `main` with `SendMessage`, or a [cross-session peer](https://code.claude.com/docs/en/cross-session-messaging.md), another of your Claude Code sessions. Cross-session peers require Claude Code v2.1.224 or later on macOS and Linux; see [cross-session messaging availability](https://code.claude.com/docs/en/cross-session-messaging.md#availability) for the native Windows requirement. A cross-session peer can run on the same machine, or on [another of your machines](https://code.claude.com/docs/en/cross-session-messaging.md#message-sessions-on-other-machines) when its message arrives through [Remote Control](https://code.claude.com/docs/en/remote-control.md).
 
 * `from`: the teammate's name, or the sender address for a cross-session peer. For a [one-way cross-machine message](https://code.claude.com/docs/en/cross-session-messaging.md#message-sessions-on-other-machines), the sender has no reply address and `from` is `"unknown"`. The value is sender-authored; `verifiedPeerPid` is the verified identity.
-* `fromMode`: the sending session's permission class, `bypass` or `prompting`, declared by a host that relays a peer message between your sessions, such as the [desktop app](https://code.claude.com/docs/en/desktop.md#work-across-sessions). Claude Code reads it in the receiving session when it applies the [inbound controls](https://code.claude.com/docs/en/cross-session-messaging.md#control-inbound-messages). Requires Agent SDK v0.3.234 or later.
+* `fromMode`: the sending session's permission class, `bypass` or `prompting`. Claude Code reads it in the receiving session when it applies the [inbound controls](https://code.claude.com/docs/en/cross-session-messaging.md#control-inbound-messages). Requires Agent SDK v0.3.234 or later.
 * `senderTaskId`: the teammate's task ID. Absent for a cross-session peer.
 * `name`: the sender's display name, normalized by Claude Code: it strips Unicode control, format, surrogate, and line or paragraph separator code points, then trims the result and caps it at 64 code points with an ellipsis. Requires Claude Code v2.1.205 or later.
 * `body`: the decoded message body with the peer envelope stripped, byte-exact with what the model sees. Present for a single teammate message, absent when several are merged; for a cross-session peer, present only when the turn is exactly one peer envelope formed by Claude Code. Render `name` and `body` instead of re-parsing the message text. Before v2.1.299, merged messages kept the first message's `body`. Requires Claude Code v2.1.205 or later.
@@ -2556,8 +2585,11 @@ interface HookCallbackMatcher {
   matcher?: string;
   hooks: HookCallback[];
   timeout?: number; // Timeout in seconds for all hooks in this matcher
+  onFailure?: "continue" | "block"; // "block" blocks the action when a callback fails
 }
 ```
+
+To decide what `onFailure` covers, see [Block the action when a callback fails](https://code.claude.com/docs/en/agent-sdk/hooks.md#block-the-action-when-a-callback-fails).
 
 ### `HookInput`
 
@@ -5407,7 +5439,7 @@ type ThinkingConfig =
   | { type: "disabled" }; // No extended thinking
 ```
 
-The optional `display` field controls whether thinking text is returned `"summarized"` or `"omitted"`. On Claude Opus 4.7 and later, the API default is `"omitted"`, so set `"summarized"` to receive thinking content in `thinking` blocks. Claude Code doesn't pass your `display` value to some providers, such as Amazon Bedrock and Google Cloud's Agent Platform. On those providers, Opus 4.7 and later return empty `thinking` blocks even when you set `display` to `"summarized"`.
+The optional `display` field controls whether thinking text is returned `"summarized"` or `"omitted"`. On Claude Opus 4.7 and later, the API default is `"omitted"`, so set `"summarized"` to receive thinking content in `thinking` blocks. On providers such as Amazon Bedrock and Google Cloud's Agent Platform, Claude Code doesn't pass `display` for earlier models it recognizes. Those are Opus 4.6, Sonnet 4.6, Haiku 4.5, and earlier models, which use their default.
 
 ### `SpawnedProcess`
 
@@ -6028,7 +6060,7 @@ type SandboxSettings = {
 | `allowUnsandboxedCommands` | `boolean` | `true` | Allow the model to request running commands outside the sandbox. When `true`, the model can set `dangerouslyDisableSandbox` in tool input, which falls back to the [permissions system](#permissions-fallback-for-unsandboxed-commands) |
 | `network` | [`SandboxNetworkConfig`](#sandboxnetworkconfig) | `undefined` | Network-specific sandbox configuration |
 | `filesystem` | [`SandboxFilesystemConfig`](#sandboxfilesystemconfig) | `undefined` | Filesystem-specific sandbox configuration for read/write restrictions |
-| `ignoreViolations` | `Record<string, string[]>` | `undefined` | Map of command substrings, or `*` for every command, to substrings of the violation text to ignore, such as `{ "*": ['/etc/hosts'] }`; see [`sandbox.ignoreViolations`](https://code.claude.com/docs/en/settings-reference#sandbox-ignoreviolations) |
+| `ignoreViolations` | `Record<string, string[]>` | `undefined` | Violations to leave out of the sandbox's violation report. Each key matches part of a command, or `*` for every command, and each value lists text to match in a violation line: `{ "*": ['/etc/hosts'] }` hides violations that mention `/etc/hosts`. See [`sandbox.ignoreViolations`](https://code.claude.com/docs/en/settings-reference#sandbox-ignoreviolations) |
 | `enableWeakerNestedSandbox` | `boolean` | `false` | Enable a weaker nested sandbox for compatibility |
 | `allowNestedUserNamespaces` | `boolean` | `false` | Let sandboxed commands on Linux and WSL2 create user namespaces. Before you set it to `true`, read [`sandbox.allowNestedUserNamespaces`](https://code.claude.com/docs/en/settings-reference#sandbox-allownestedusernamespaces), which covers the tools that need it and the security boundary you turn off. Requires Claude Code v2.1.305 or later |
 | `ripgrep` | `{ command: string; args?: string[] }` | `undefined` | Custom ripgrep binary configuration for sandbox environments |
@@ -6102,7 +6134,7 @@ type SandboxNetworkConfig = {
 
 > [!NOTE]
 >
-> The built-in sandbox proxy enforces `allowedDomains` based on the requested hostname and does not terminate or inspect TLS traffic, so techniques such as [domain fronting](https://en.wikipedia.org/wiki/Domain_fronting) can potentially bypass it. See [Sandboxing security limitations](https://code.claude.com/docs/en/sandboxing.md#security-limitations) for details and [Secure deployment](https://code.claude.com/docs/en/agent-sdk/secure-deployment.md#traffic-forwarding) for configuring a TLS-terminating proxy.
+> The built-in sandbox proxy enforces `allowedDomains` based on the requested hostname. By default, the proxy doesn't terminate or inspect TLS traffic, so techniques such as [domain fronting](https://en.wikipedia.org/wiki/Domain_fronting) can potentially bypass `allowedDomains`. See [Sandboxing security limitations](https://code.claude.com/docs/en/sandboxing.md#security-limitations) for details and [Secure deployment](https://code.claude.com/docs/en/agent-sdk/secure-deployment.md#traffic-forwarding) for configuring a TLS-terminating proxy.
 
 ### `SandboxFilesystemConfig`
 

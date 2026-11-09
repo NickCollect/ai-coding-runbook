@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/sub-agents
-fetched_at: 2026-11-02T07:00:26.993535+00:00
+fetched_at: 2026-11-09T07:30:19.071031+00:00
 fetch_method: mintlify_md
 ---
 
@@ -421,6 +421,10 @@ While `CLAUDE_CODE_SUBAGENT_MODEL_FORCE` is [on](https://code.claude.com/docs/en
 To run a subagent at its own [effort level](https://code.claude.com/docs/en/model-config.md#adjust-effort-level), set the [`effort`](#supported-frontmatter-fields) field in its definition.
 
 When you ask Claude to run a non-fork subagent at a specific effort level, it can also pass an `effort` parameter for that invocation. The parameter overrides the `effort` field and stays in effect when the subagent is [resumed](#resume-subagents). The [`CLAUDE_CODE_EFFORT_LEVEL`](https://code.claude.com/docs/en/env-vars#variables) environment variable takes precedence over both. The per-invocation parameter requires Claude Code v2.1.292 or later.
+
+#### When a subagent has no `effort` field or parameter
+
+On the main conversation's model, the subagent runs at the level you pick in the session, such as with `/effort`, or set with `--effort`. On another model, [that level doesn't apply](https://code.claude.com/docs/en/model-config.md#effort-level-of-subagents-and-teammates). To choose its level, set the `effort` field.
 
 ### Control subagent capabilities
 
@@ -1054,7 +1058,7 @@ Use **subagents** when:
 
 Consider [Skills](https://code.claude.com/docs/en/skills.md) instead when you want reusable prompts or workflows that run in the main conversation context rather than isolated subagent context.
 
-For a question about something already in your conversation, use [`/btw`](https://code.claude.com/docs/en/interactive-mode#side-questions-with-%2Fbtw) instead of a subagent. It sees your full context but has no tool access, and the answer isn't added to history.
+For a question about something already in your conversation, use [`/btw`](https://code.claude.com/docs/en/interactive-mode#side-questions-with-%2Fbtw) instead of a subagent. It has no tool access, and the answer isn't added to history.
 
 ### Let subagents spawn their own subagents
 
@@ -1248,7 +1252,7 @@ Use these keys to interact with the panel:
 | `x` | Stop the selected fork if it's running, or dismiss its row if it's no longer running. On the main session row, or on the row of the fork whose transcript you opened with `Enter`, `x` types into the prompt instead |
 | `Esc` | Return focus to the prompt input |
 
-With a fork's or subagent's transcript open, follow-up messages and [skills](https://code.claude.com/docs/en/skills.md) go to that agent, and built-in commands go to your main conversation, with these safeguards:
+With a fork's or subagent's transcript open, follow-up messages and [skills](https://code.claude.com/docs/en/skills.md) go to that agent. On Claude Code v2.1.314 or later, [`/btw`](https://code.claude.com/docs/en/interactive-mode#ask-btw-about-a-subagent) answers from the open transcript. Other built-in commands go to your main conversation, with these safeguards:
 
 * `/compact`, `/clear`, and `/rewind` act on the main conversation, so Claude Code asks you to confirm before running one of them from this view.
 * `/model` and `/fast` set the main conversation's model and fast mode, not the viewed agent's, so they don't run from this view. A notice tells you why.

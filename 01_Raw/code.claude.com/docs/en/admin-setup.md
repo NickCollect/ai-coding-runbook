@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/admin-setup
-fetched_at: 2026-11-02T07:00:25.375058+00:00
+fetched_at: 2026-11-09T07:30:17.318336+00:00
 fetch_method: mintlify_md
 ---
 
@@ -85,6 +85,8 @@ After WSL sessions are enabled, extend your managed settings to them:
 * Deploy `wslInheritsWindowsSettings: true` through the HKLM registry or the `C:\Program Files\ClaudeCode` file so WSL sessions inherit the same policy as host sessions.
 * Verify by running `/status` inside a WSL session and reading the `Setting sources` line. To interpret what it lists, see [Read the source in /status](https://code.claude.com/docs/en/managed-settings.md#read-the-source-in-/status).
 
+If a WSL session starts on a device with Claude Desktop's [`allowedWorkspaceFolders`](https://claude.com/docs/third-party/claude-desktop/configuration#allowedworkspacefolders) list, a `~` entry means the home directory inside the distribution.
+
 Processes inside the WSL 2 utility VM aren't visible to Windows-side endpoint detection sensors. To observe in-distro process and file activity, check your endpoint detection vendor's WSL guidance for a Linux sensor you can run inside the distribution and the exclusions it needs. Claude Code's [OpenTelemetry tool-execution telemetry](https://code.claude.com/docs/en/monitoring-usage.md) is emitted identically for WSL and native sessions.
 
 ## Decide what to enforce
@@ -133,11 +135,11 @@ For the threat model these controls defend against, see [Security](https://code.
 
 ### Connected GitHub accounts
 
-On Team and Enterprise plans, the GitHub section of [**Organization settings > Git providers**](https://claude.ai/admin-settings/source-control) lists the GitHub organizations and personal accounts linked to your Claude organization through the [Claude GitHub App](https://github.com/apps/claude). Claude Code, [Claude Tag](https://claude.com/docs/claude-tag/admins/configure-github), and Claude Security share the list. Opening the page requires an admin role in your Claude organization.
+On Team and Enterprise plans, the GitHub section of [**Organization settings > Git providers**](https://claude.ai/admin-settings/source-control) lists the GitHub organizations and personal accounts linked to your Claude organization through the [Claude GitHub App](https://github.com/apps/claude). Claude Code, [Claude Tag](https://claude.com/docs/claude-tag/admins/configure-github), and Claude Security share the list. Opening the page requires an [Owner role](https://code.claude.com/docs/en/server-managed-settings.md#access-control) in your Claude organization. The Admin role can't open it.
 
-An admin or a member can link an account:
+Someone can link an account from the Git providers page or by connecting GitHub to Claude:
 
-* **Admin connection**: an admin clicks **Connect** in that section, or **Add organization** once an account is connected, and installs the Claude GitHub App on a GitHub organization. Linking an organization this way requires someone who is both an owner of the GitHub organization and an admin of your Claude organization.
+* **Owner connection**: an Owner clicks **Connect** in that section, or **Add organization** once an account is connected, and installs the Claude GitHub App on a GitHub organization. Linking an organization this way requires an Owner of your Claude organization who also owns the GitHub organization.
 * **Member connection**: when a member connects their GitHub account to Claude, for example while [setting up cloud sessions](https://code.claude.com/docs/en/web-quickstart.md#connect-github), Claude links the GitHub accounts that member owns where the Claude GitHub App is already installed. That can include their personal account and GitHub organizations they own.
 
 A row marked **Not linked** comes from your own GitHub sign-in. It's an account you can see on GitHub where the Claude GitHub App is installed.

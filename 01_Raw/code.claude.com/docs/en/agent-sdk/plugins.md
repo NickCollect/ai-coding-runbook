@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/plugins
-fetched_at: 2026-11-02T07:00:25.503964+00:00
+fetched_at: 2026-11-09T07:30:17.435307+00:00
 fetch_method: mintlify_md
 ---
 
@@ -75,6 +75,10 @@ Plugin paths can be:
 > [!NOTE]
 >
 > The path should point to the plugin's root directory: the parent of `skills/`, `agents/`, `hooks/`, `commands/`, or `.claude-plugin/`.
+
+### Reload plugins in a running session
+
+To apply a change to a plugin's skills, commands, agents, or hooks without starting a new session, call [`reloadPlugins()`](https://code.claude.com/docs/en/agent-sdk/typescript#query-object) on the TypeScript SDK's `Query` object. The Python SDK doesn't expose an equivalent method; send [`/reload-plugins`](https://code.claude.com/docs/en/plugins/cli-reference#reload-plugins) as a prompt in the session instead.
 
 ### Add plugins to a running session
 

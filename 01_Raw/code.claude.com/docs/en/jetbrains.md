@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/jetbrains
-fetched_at: 2026-11-02T07:00:26.289956+00:00
+fetched_at: 2026-11-09T07:30:18.319308+00:00
 fetch_method: mintlify_md
 ---
 
@@ -44,6 +44,10 @@ Follow the [quickstart](https://code.claude.com/docs/en/quickstart.md) to instal
 **2. Install the JetBrains plugin**
 
 Install the [Claude Code plugin](https://plugins.jetbrains.com/plugin/27310-claude-code-beta-) from the JetBrains Marketplace and restart your IDE.
+
+> [!NOTE]
+>
+> The JetBrains Marketplace is third-party software, which Anthropic doesn't endorse, maintain, or audit. Anthropic submits the Claude Code plugin for publication to the JetBrains Marketplace.
 
 If `claude` is installed somewhere your IDE can't find, set the full path in the plugin's [Claude command setting](#general-settings).
 

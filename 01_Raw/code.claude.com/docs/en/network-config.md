@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/network-config
-fetched_at: 2026-10-26T05:40:03.369804+00:00
+fetched_at: 2026-11-09T07:30:18.478431+00:00
 fetch_method: mintlify_md
 ---
 
@@ -95,6 +95,13 @@ If your enterprise environment uses a custom CA, configure Claude Code to trust 
 export NODE_EXTRA_CA_CERTS=/path/to/ca-cert.pem
 ```
 
+If you see either of these warnings, Claude Code couldn't load the `NODE_EXTRA_CA_CERTS` file as a whole, and connections that need a certificate it skipped can fail:
+
+* `Claude Code used only the certificates that it could read in full from the NODE_EXTRA_CA_CERTS file`
+* `Claude Code ignored all of the NODE_EXTRA_CA_CERTS file: it holds no certificate that Claude Code can read`
+
+The full text of each warning says how to fix the file. A skipped certificate that's also in the [CA certificate store](#ca-certificate-store) still works.
+
 ## mTLS authentication
 
 For enterprise environments requiring client certificate authentication:
@@ -137,7 +144,11 @@ In [cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md), 
 
 Claude Code notes each ignored key in the session's debug log.
 
-In [Claude Desktop](https://code.claude.com/docs/en/desktop.md) sessions where the app manages the provider connection, such as the Code tab on a [third-party provider](https://code.claude.com/docs/en/third-party-integrations.md) and Cowork sessions, Claude Code reads these variables and the proxy variables `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY` only from [managed settings](https://code.claude.com/docs/en/managed-settings.md) and `~/.claude/settings.json`: it ignores them in a repository's own settings files, so a checked-out repository can't redirect the TLS or proxy path of a session whose credentials come from the app. In a local, SSH, or WSL Code tab session signed in through claude.ai, the app doesn't manage the connection, and Claude Code reads these variables from every settings scope, like any terminal session; [cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md) follow the cloud-session rules above wherever you start them. Before v2.1.217, Claude Code ignored these variables in every settings file when the app managed the connection.
+In [Claude Desktop](https://code.claude.com/docs/en/desktop.md) sessions where the app manages the provider connection, such as the Code tab on a [third-party provider](https://code.claude.com/docs/en/third-party-integrations.md) and Cowork sessions, Claude Code reads these variables except `CLAUDE_CODE_OAUTH_SCOPES`, and the proxy variables `HTTP_PROXY`, `HTTPS_PROXY`, and `NO_PROXY`, only from [managed settings](https://code.claude.com/docs/en/managed-settings.md) and `~/.claude/settings.json`. It ignores them in a repository's own settings files, so a checked-out repository can't redirect the TLS or proxy path of a session whose credentials come from the app. Before v2.1.217, Claude Code ignored these variables in every settings file when the app managed the connection.
+
+In a local, SSH, or WSL Code tab session signed in through claude.ai, you can set these variables and the proxy variables in any settings file, apart from `CLAUDE_CODE_OAUTH_SCOPES`. Desktop sets `CLAUDE_CODE_OAUTH_SCOPES` itself in Code tab and Cowork sessions, so you can't set it.
+
+When the session's launch environment already sets a variable, Claude Code [ignores the settings file's value](https://code.claude.com/docs/en/settings-reference.md#how-env-values-interact-with-your-shell) and names the variable in the [debug log](https://code.claude.com/docs/en/debug-your-config.md). To use your own proxy or certificate value in a local session, [add it to a saved local environment](https://code.claude.com/docs/en/desktop.md#set-environment-variables-for-local-sessions). [Cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md) follow the cloud-session rules above wherever you start them.
 
 ## Verify your configuration
 

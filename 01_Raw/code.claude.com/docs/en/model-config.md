@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/model-config
-fetched_at: 2026-11-02T07:00:26.440256+00:00
+fetched_at: 2026-11-09T07:30:18.480532+00:00
 fetch_method: mintlify_md
 ---
 
@@ -572,8 +572,17 @@ When you've chosen **Ask each time**, some cases behave differently:
 * If both models flag the same request, you can edit the prompt and retry, or start a new session.
 * In [cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md) on the mobile app, editing and retrying is not supported. Switch models, or continue the session from a desktop browser or the desktop app.
 * In [non-interactive mode](https://code.claude.com/docs/en/cli-reference.md#cli-flags) and SDK integrations that can't show the prompt, a flagged request ends the turn with a refusal instead.
-* In a [subagent](https://code.claude.com/docs/en/sub-agents.md), Claude Code doesn't show the prompt, and a flagged request that would switch models re-runs on the fallback model.
+* In a subagent that Claude starts with the [Agent tool](https://code.claude.com/docs/en/tools-reference.md#agent-tool-behavior), Claude Code doesn't pause to ask, and the subagent fails instead of switching models. See [Subagents switch or fail without asking](#subagents-switch-or-fail-without-asking).
 * When the fallback target is blocked by [`availableModels`](#restrict-model-selection), Claude Code doesn't show the prompt. The flagged request ends with the refusal, the same as automatic fallback when the target is blocked.
+
+#### Subagents switch or fail without asking
+
+In a built-in or custom [subagent](https://code.claude.com/docs/en/sub-agents.md) that Claude starts with the [Agent tool](https://code.claude.com/docs/en/tools-reference.md#agent-tool-behavior), Claude Code doesn't [pause to ask](#ask-before-switching) at a flagged request. If a fallback model is available, the request re-runs on it or the subagent fails, according to your **Switch models when a message is flagged** choice in `/config`:
+
+* **Switch automatically**, or no choice yet: the request re-runs on the fallback model, and your session's model is unchanged
+* **Ask each time**: the subagent fails with [`Agent terminated early due to an API error`](https://code.claude.com/docs/en/errors#agent-terminated-early-due-to-an-api-error) and the refusal message. Claude receives that error and decides what to do about the unfinished task. To let subagents switch models, choose **Switch automatically**. Your main conversation then switches without asking too.
+
+When no fallback model is available, the subagent fails the same way with either choice. Before v2.1.318, a subagent's flagged request re-ran on an available fallback model whichever you chose.
 
 #### Enable fallback on Bedrock, Agent Platform, and Foundry
 
@@ -619,7 +628,7 @@ Claude Code resolves the session's effort level in this order, taking the first 
 4. Your settings: the level you saved for the model or an [`effortLevel`](https://code.claude.com/docs/en/settings-reference#effortlevel) key, with the precedence between them and across settings files stated at [`modelSettings`](https://code.claude.com/docs/en/settings-reference#modelsettings)
 5. The model's default effort: `high` on every model that supports effort, except that Opus 5.5, Sonnet 5.5, and Haiku 5.5 default to `medium` and Opus 4.7 defaults to `xhigh`. If your organization sets a default effort level for its [organization default model](#organization-default-model), that level is the default when you run that model.
 
-After an automatic model fallback, see [Effort level after a fallback](#effort-level-after-a-fallback) for the level that applies.
+After an automatic model fallback, see [Effort level after a fallback](#effort-level-after-a-fallback) for the level that applies. For subagents and teammates, see [Effort level of subagents and teammates](#effort-level-of-subagents-and-teammates).
 
 Opus 5.5 starts at `medium` unless one of the sources above sets a level for it, and a top-level `effortLevel` in your user settings file doesn't count for Opus 5.5. That key is the older form `/effort` wrote before Claude Code saved levels per model: it keeps applying where it applied before, on Opus 5, Fable 5.1, and earlier models, while Opus 5.5 and models released after it start at their own default until you choose a level for them with `/effort` or the `/model` picker. A top-level `effortLevel` in project, local, or managed settings, or one passed with `--settings`, applies to every model.
 
@@ -705,6 +714,10 @@ You can change effort through any of the following:
 A skill's `effort` applies until the end of the turn it runs in, or for the forked subagent's run with `context: fork`. A subagent's `effort` applies while the subagent runs, unless [its invocation overrides it](https://code.claude.com/docs/en/sub-agents.md#choose-an-effort-level). While either one applies, the skill or subagent runs at its level, whatever level you launch with, save, or pick. If `CLAUDE_CODE_EFFORT_LEVEL` is set, that level applies instead.
 
 A [`maxEffortLevel`](https://code.claude.com/docs/en/settings-reference#maxeffortlevel) or [organization effort cap](#organization-effort-limits) still limits the level the skill or subagent runs at. If you set `effortLevel` in [managed settings](https://code.claude.com/docs/en/managed-settings.md), Claude Code applies it at the settings step of the [effort resolution order](#adjust-effort-level), and users can still change the level with `/effort` or `--effort`. To keep users at or below a level, set [`maxEffortLevel`](https://code.claude.com/docs/en/settings-reference#maxeffortlevel).
+
+#### Effort level of subagents and teammates
+
+On the main conversation's model, a [subagent](https://code.claude.com/docs/en/sub-agents.md#choose-an-effort-level) or [teammate](https://code.claude.com/docs/en/agent-teams.md#specify-teammates-and-models) with no `effort` of its own runs at the level you pick in the session or set with `--effort`. On another model, that level doesn't apply. To pick a subagent's level, set `effort` in its definition.
 
 #### Check the effort level you set
 
@@ -939,7 +952,7 @@ Use the following environment variables to control the model names that the alia
 | `ANTHROPIC_DEFAULT_FABLE_MODEL` | The model to use for `fable`, and the model ID Claude Code recognizes as a Fable model for [automatic model fallback](#automatic-model-fallback) on third-party providers |
 | `ANTHROPIC_DEFAULT_OPUS_MODEL` | The model to use for `opus`, or for `opusplan` when Plan Mode is active. |
 | `ANTHROPIC_DEFAULT_SONNET_MODEL` | The model to use for `sonnet`, or for `opusplan` when Plan Mode is not active. |
-| `ANTHROPIC_DEFAULT_HAIKU_MODEL` | The model to use for `haiku`, or [background functionality](https://code.claude.com/docs/en/costs.md#background-token-usage) |
+| `ANTHROPIC_DEFAULT_HAIKU_MODEL` | The model to use for `haiku`, or background functionality |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | The default model for [subagents](https://code.claude.com/docs/en/sub-agents.md#choose-a-model), [agent team](https://code.claude.com/docs/en/agent-teams.md#specify-teammates-and-models) teammates, and [workflow](https://code.claude.com/docs/en/workflows.md) agents that aren't assigned a model another way. Accepts an alias such as `haiku` or a full model name. A per-invocation model or a definition's `model` field, including `inherit`, takes precedence. To change that, set [`CLAUDE_CODE_SUBAGENT_MODEL_FORCE`](https://code.claude.com/docs/en/sub-agents#run-every-subagent-on-one-model) |
 
 On third-party providers, [Customize pinned model display and capabilities](#customize-pinned-model-display-and-capabilities) describes what a pinned model's row in the `/model` picker shows.

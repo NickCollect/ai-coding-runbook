@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/monitoring-usage
-fetched_at: 2026-11-02T07:00:26.459282+00:00
+fetched_at: 2026-11-09T07:30:18.477607+00:00
 fetch_method: mintlify_md
 ---
 
@@ -335,6 +335,10 @@ A `cancelled` decision with `source` `user_abort` means a message needing immedi
 This span appears only when detailed beta tracing is active, which requires `ENABLE_BETA_TRACING_DETAILED=1` and `BETA_TRACING_ENDPOINT`, a pair that also [changes where your logs and traces go](https://code.claude.com/docs/en/env-vars.md#variables). Set the pair in your shell, user settings, or managed settings; both variables are ignored in [project and local settings](https://code.claude.com/docs/en/settings-reference.md#variables-claude-code-ignores-in-env). `CLAUDE_CODE_ENHANCED_TELEMETRY_BETA` alone doesn't produce it.
 
 In interactive CLI sessions, detailed beta tracing also requires your organization to be allowlisted for the feature. Agent SDK and non-interactive `-p` sessions don't require allowlisting.
+
+> [!WARNING]
+>
+> Set `ENABLE_BETA_TRACING_DETAILED` only for debugging, not in production. Detailed beta tracing has a high export volume, and its [content attributes](#new-context-gates) aren't part of the stable span schema.
 
 | Attribute | Description | Gated by |
 | - | - | - |
@@ -1565,7 +1569,7 @@ The `claude_code.cost.usage` metric helps with:
 
 > [!NOTE]
 >
-> Cost metrics are approximations. For official billing data, refer to your API provider (Claude Console, Amazon Bedrock, or Google Cloud's Agent Platform).
+> Cost metrics are approximations. For official billing data, see [Manage costs for your organization](https://code.claude.com/docs/en/costs.md#manage-costs-for-your-organization).
 
 Claude Code counts each streaming response toward the cost and token metrics exactly once, including when a gateway or proxy behind `ANTHROPIC_BASE_URL` streams usage progressively across multiple frames.
 

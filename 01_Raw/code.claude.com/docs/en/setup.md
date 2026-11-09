@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/setup
-fetched_at: 2026-11-02T07:00:26.921408+00:00
+fetched_at: 2026-11-09T07:30:19.017429+00:00
 fetch_method: mintlify_md
 ---
 
@@ -46,7 +46,7 @@ To install Claude Code, open a terminal and run the command for your system. If 
 >
 > **macOS, Linux, WSL:**
 >
-> ```bash theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+> ```bash theme={null}
 > curl -fsSL https://claude.ai/install.sh | bash
 > ```
 >
@@ -54,13 +54,13 @@ To install Claude Code, open a terminal and run the command for your system. If 
 >
 > **Windows PowerShell:**
 >
-> ```powershell theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+> ```powershell theme={null}
 > irm https://claude.ai/install.ps1 | iex
 > ```
 >
 > **Windows CMD:**
 >
-> ```batch theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+> ```batch theme={null}
 > curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
 > ```
 >
@@ -78,7 +78,7 @@ To install Claude Code, open a terminal and run the command for your system. If 
 
 > [tab] Homebrew
 >
-> ```bash theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+> ```bash theme={null}
 > brew install --cask claude-code
 > ```
 >
@@ -90,7 +90,7 @@ To install Claude Code, open a terminal and run the command for your system. If 
 
 > [tab] WinGet
 >
-> ```powershell theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
+> ```powershell theme={null}
 > winget install Anthropic.ClaudeCode
 > ```
 >
@@ -395,7 +395,7 @@ All repositories are signed with the [Claude Code release signing key](#binary-i
 > gpg --show-keys /etc/apt/keyrings/claude-code.asc
 > ```
 >
-> The fingerprint gpg prints should be `31DDDE24DDFAB679F42D7BD2BAA929FF1A7ECACE`. If gpg reports that the file can't be opened or contains no valid OpenPGP data, the download failed or returned the wrong content: confirm your network can reach `downloads.claude.ai`, then rerun the download command.
+> The only fingerprint gpg prints should be `31DDDE24DDFAB679F42D7BD2BAA929FF1A7ECACE`. If gpg reports that the file can't be opened or contains no valid OpenPGP data, the download failed or returned the wrong content. Confirm your network can reach `downloads.claude.ai`, then rerun the download command.
 >
 > Register the repository on the `stable` channel and install:
 >
@@ -542,12 +542,12 @@ curl -fsSLO "$REPO/$VERSION/manifest.json.sig"
 Verify the detached signature against the manifest.
 
 ```bash theme={null}
-gpg --verify manifest.json.sig manifest.json
+gpg --with-fingerprint --verify manifest.json.sig manifest.json
 ```
 
-A valid result reports `Good signature from "Anthropic Claude Code Release Signing <security@anthropic.com>"`.
+A valid result reports `Good signature from "Anthropic Claude Code Release Signing <security@anthropic.com>"`. With default settings, `gpg` also prints `WARNING: This key is not certified with a trusted signature!` for a freshly imported key. This is expected. The `Good signature` line confirms the cryptographic check passed.
 
-`gpg` also prints `WARNING: This key is not certified with a trusted signature!` for any freshly imported key. This is expected. The `Good signature` line confirms the cryptographic check passed. The fingerprint comparison in Step 1 confirms the key itself is authentic.
+To check that Anthropic's key signed the manifest, compare the `Primary key fingerprint` line at the end of the output with the fingerprint this page lists in Step 1. If they match and the output shows no `BAD signature`, continue to Step 4. Otherwise, don't use this manifest.
 
 **4. Check the binary against the manifest**
 

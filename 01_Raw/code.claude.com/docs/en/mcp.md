@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mcp
-fetched_at: 2026-11-02T07:00:26.394821+00:00
+fetched_at: 2026-11-09T07:30:18.416136+00:00
 fetch_method: mintlify_md
 ---
 
@@ -312,6 +312,16 @@ Claude Code warns about the configuration problems below. Each entry says what C
 
 The `/mcp` panel shows the tool count next to each connected server and flags servers that advertise the tools capability but expose no tools.
 
+##### Tool counts in a cloud session
+
+In a [cloud session](https://code.claude.com/docs/en/claude-code-on-the-web.md), a count such as `3 of 13 tools available` means Claude can't use the other 10. Check for these causes, among others:
+
+* **A deny rule in your repository's `.claude/settings.json` names the tool or its whole server**: remove the [rule](https://code.claude.com/docs/en/permissions.md#mcp), if [your session reads that file](https://code.claude.com/docs/en/settings.md#settings-in-cloud-sessions)
+* **The tool's full name is over 128 characters**: follow [the steps for an over-long name](https://code.claude.com/docs/en/errors.md#mcp-tool-name-over-128-characters)
+* **The server lists the tool for its own interface and not for Claude**: if you maintain the server, add `model` to the tool's `_meta.ui.visibility` to give Claude the tool. Otherwise, there's nothing to fix.
+
+##### Tools from a server that is still connecting
+
 If your request needs tools from a server that is still connecting in the background, Claude waits for that server before continuing. How the wait happens depends on your configuration:
 
 * **With [tool search](#scale-with-mcp-tool-search), the default**: the wait happens inside the `ToolSearch` call.
@@ -355,9 +365,9 @@ On v2, Claude Code also:
 * Fails an [MCP OAuth sign-in](#authenticate-with-remote-mcp-servers) whose authorization response names an unexpected issuer.
 * Sends [MCP OAuth](#authenticate-with-remote-mcp-servers) credentials only to a token endpoint served over HTTPS or at `localhost`, `127.0.0.1`, or `::1`. Sign-in fails for a server whose token endpoint is plain `http://` anywhere else, such as a device on your local network. See [Refusing to send credentials to non-https token endpoint](https://code.claude.com/docs/en/errors.md#refusing-to-send-credentials-to-non-https-token-endpoint).
 
-Anthropic can keep a specific server on the earlier protocol, or off that stream, with a feature flag Claude Code fetches.
+Anthropic can keep a specific server on the earlier protocol, or off that stream, with a feature flag Claude Code fetches. To pick the runtime yourself, set [`MCP_SDK_GENERATION`](https://code.claude.com/docs/en/env-vars) to `v1` or `v2`.
 
-To pick the runtime yourself, set [`MCP_SDK_GENERATION`](https://code.claude.com/docs/en/env-vars) to `v1` or `v2`. To decide whether Claude Code asks, set [`MCP_PROTOCOL_NEGOTIATION`](https://code.claude.com/docs/en/env-vars) to `auto` or `legacy`.
+To decide whether Claude Code asks servers about the newer revision, set [`MCP_PROTOCOL_NEGOTIATION`](https://code.claude.com/docs/en/env-vars) to `auto` or `legacy`. With that variable unset, Claude Code can skip asking a stdio server for 7 days, for example after the server exits when asked. To have an upgraded server asked sooner, set `auto`.
 
 ### Dynamic tool updates
 
@@ -592,7 +602,7 @@ If you build an MCP server, you can answer a long-running `tools/call` with a ta
 
 #### Answer the call with a task
 
-Answer with a task only when the request carries the extension, or Claude gets the tool error `Unsupported result type 'task' for tools/call`. Claude gets the same error when `taskId`, `status`, `createdAt`, `lastUpdatedAt`, or `ttlMs` is missing. The task object is the JSON-RPC `result` of your `tools/call` response, needs no `content` array, and here includes the optional `statusMessage` and `pollIntervalMs`:
+Answer with a task only when the request carries the extension, or the call fails with the tool error `Unsupported result type 'task' for tools/call`. The call fails the same way if your answer has no `taskId` or no valid `status`. The task object is the JSON-RPC `result` of your `tools/call` response, needs no `content` array, and here includes the optional `statusMessage` and `pollIntervalMs`:
 
 ```json theme={null}
 {
@@ -612,9 +622,11 @@ Answer with a task only when the request carries the extension, or Claude gets t
 | `resultType` | Set it to `"task"` to mark the reply as a task. Without it, Claude Code reads the reply as a plain result |
 | `taskId` | Required. At most 128 printable ASCII characters with no spaces, or Claude gets a tool error beginning `MCP server "<name>" returned a malformed task handle for tool "<tool>"`. Keep the ID answerable across connections, because after a resume Claude Code asks about it on a new connection |
 | `status` | Required. One of `working`, `input_required`, `completed`, `failed`, or `cancelled`. Another value gives the `Unsupported result type` error |
-| `createdAt`, `lastUpdatedAt`, `ttlMs` | Required, and `ttlMs` may be `null`. Claude Code doesn't drop a task because its `ttlMs` has passed |
-| `pollIntervalMs` | Optional, but not `null`. Milliseconds between `tasks/get` requests, clamped to between 250 and 30000. Claude Code uses 2000 when the field is absent, and reads the value again from each `tasks/get` response |
+| `createdAt`, `lastUpdatedAt`, `ttlMs` | Required by the tasks extension, and `ttlMs` may be `null`. Claude Code doesn't drop a task because its `ttlMs` has passed |
+| `pollIntervalMs` | Optional. Milliseconds between `tasks/get` requests, clamped to between 250 and 30000. Claude Code uses 2000 when the field is absent or `null`, and reads the value again from each `tasks/get` response |
 | `statusMessage` | Optional. `/tasks` shows the value from your latest `tasks/get` response, not this first one, and a response that omits the field clears it. A [status message from Claude Code](#status-messages-on-an-mcp-task) can take its place |
+
+Claude Code accepts a task answer that omits `createdAt`, `lastUpdatedAt`, or `ttlMs`, or that sets `pollIntervalMs` to `null`. Before v2.1.317, the call failed with the `Unsupported result type` error instead. To work with those versions too, send the three fields that the tasks extension requires, and send `pollIntervalMs` as a number or not at all.
 
 On an HTTP or claude.ai connector server, the task answer has to start within the [per-request timer](#time-limits-on-mcp-tool-calls), so accept the job and answer first, then do the work.
 
@@ -958,7 +970,12 @@ Claude Code marks a remote server as needing authentication when the server resp
 * For a server whose `Authorization` header you configured, in `headers` or through a [`headersHelper`](#use-dynamic-headers-for-custom-authentication), a `401` or `403` while connecting doesn't flag the server, because the credential to fix is the one you configured. Claude Code reports the connection as failed instead. If you set that header from a `${VAR}` reference, check whether that variable is one Claude Code [reads as empty](#credential-variables-that-read-as-empty).
 * For a connector [delivered to a cloud session](#how-connectors-reach-claude-code), Claude Code doesn't run a sign-in flow, because the session's proxy authenticates to the connector with the authorization you granted in claude.ai. When a connector there needs authorizing again, reconnect it at [claude.ai/customize/connectors](https://claude.ai/customize/connectors) rather than from the session.
 
-When an OAuth server you already signed in to rejects your stored token with `401 Unauthorized`, Claude Code refreshes the token, reconnects, and retries the request once. It flags the server in `/mcp` only if that retry also fails. In a `claude -p` or Agent SDK run on macOS, a request that Claude Code sent while it couldn't read your stored token fails with a [stored-credentials error](https://code.claude.com/docs/en/errors.md#couldnt-read-the-stored-credentials-for-mcp-server) instead.
+When an OAuth server you already signed in to rejects your stored token with `401 Unauthorized`, Claude Code reconnects with or without a new token:
+
+* **Your stored login has a refresh token**: it refreshes the token, reconnects, and retries the request once. The server is flagged in `/mcp` only if that retry also fails.
+* **Your stored login has no refresh token**: it connects once without the token. If the server answers, its tools work while you're signed out, and the rejected token is deleted. If the server rejects that connection too, `/mcp` shows that the server needs authentication.
+
+In a `claude -p` or Agent SDK run on macOS, a request that Claude Code sent while it couldn't read your stored token fails with a [stored-credentials error](https://code.claude.com/docs/en/errors.md#couldnt-read-the-stored-credentials-for-mcp-server).
 
 When the server rejects the stored refresh token, Claude Code immediately shows a notice pointing at `/mcp`. Open `/mcp` and select **Re-authenticate** on the server to sign in again before the next tool call fails.
 
@@ -1646,7 +1663,7 @@ For example, these fields in a `tools/list` entry mark the `set_issue_status` to
 
 ## Respond to MCP elicitation requests
 
-MCP servers can request structured input from you mid-task using elicitation. When a server needs information it can't get on its own, Claude Code displays an interactive dialog and passes your response back to the server. No configuration is required on your side: elicitation dialogs appear automatically when a server requests them.
+MCP servers can request structured input from you mid-task using elicitation. When a server needs information it can't get on its own, Claude Code displays an interactive dialog in the terminal and passes your response back to the server. No configuration is required on your side: elicitation dialogs appear automatically when a server requests them.
 
 Servers can request input in two ways:
 
@@ -1658,6 +1675,17 @@ In URL mode, Claude Code passes the URL as a command-line argument to your syste
 To auto-respond to elicitation requests without showing a dialog, use the [`Elicitation` hook](https://code.claude.com/docs/en/hooks#elicitation).
 
 If you're building an MCP server that uses elicitation, see the [MCP elicitation specification](https://modelcontextprotocol.io/docs/learn/client-concepts#elicitation) for protocol details and schema examples.
+
+### Answer an elicitation request in a cloud session
+
+When Claude's task in your cloud session waits on an MCP server's request, the server needs something from you, such as a value or a sign-in. If the request appears as a card at claude.ai/code or in the Desktop app's **Code** tab, answer on the card:
+
+* **Form mode**: fill in the fields, then click **Submit**
+* **URL mode**: click **Open link**, finish the flow it opens, then click **I’m done, continue** on the card
+
+To refuse the request, click **Decline**. Claude continues once the server responds.
+
+If you see no card in either place, you can't answer the request there. In your own session, click the stop button there to end the turn.
 
 ### Elicitation modes Claude Code declares
 
@@ -1821,9 +1849,9 @@ If you deny `ToolSearch` or leave it out of [`--tools`](https://code.claude.com/
 > * **You've set `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS`**: see [how it affects tool search](#configure-tool-search)
 > * **A request failed with an error that names `defer_loading` or `tool_reference`**: see [Extra inputs are not permitted](https://code.claude.com/docs/en/errors.md#extra-inputs-are-not-permitted)
 
-When `ANTHROPIC_BASE_URL` points to a gateway, tool search is on by default, so requests include `defer_loading` tool fields and `tool_reference` blocks for the gateway to forward. While tool search is on, MCP tools are [deferred](#scale-with-mcp-tool-search). To load every tool upfront instead, set `ENABLE_TOOL_SEARCH=false` in your shell or your [settings `env`](https://code.claude.com/docs/en/settings-reference#env). Before v2.1.304, tool search was off behind a gateway unless `ENABLE_TOOL_SEARCH` was `true`, `auto`, or `auto:N`.
+When `ANTHROPIC_BASE_URL` points to a gateway, Claude Code expects the gateway to forward `defer_loading` tool fields and `tool_reference` blocks [along with the `anthropic-beta` header](https://code.claude.com/docs/en/llm-gateway-protocol#beta-header-and-body-field-pairs). Tool search is on by default behind the gateway, so MCP tools are [deferred](#scale-with-mcp-tool-search) and requests include those fields and blocks. Before v2.1.304, tool search was off behind a gateway unless `ENABLE_TOOL_SEARCH` was `true`, `auto`, or `auto:N`.
 
-On v2.1.305 or later, Claude Code can [retry a request without tool search](https://code.claude.com/docs/en/llm-gateway-protocol.md#retry-without-tool-search) after a `400` or `422` whose cause it doesn't recognize. When the retry works, nothing shows on screen and you don't need to do anything: MCP tools load upfront instead. Claude Code tries tool search again later, at the cost of another rejected request. To skip those requests, set `ENABLE_TOOL_SEARCH=false`.
+On v2.1.305 or later, Claude Code can [retry a request without tool search](https://code.claude.com/docs/en/llm-gateway-protocol.md#retry-without-tool-search) after a `400` or `422`. When the retry works, nothing shows on screen and you don't need to do anything: MCP tools load upfront instead. Claude Code tries tool search again later, at the cost of another rejected request.
 
 #### Tools that stay deferred below the `ENABLE_TOOL_SEARCH=auto` threshold
 

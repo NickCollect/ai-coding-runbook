@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/slack
-fetched_at: 2026-11-02T07:00:26.940530+00:00
+fetched_at: 2026-11-09T07:30:19.035266+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,9 +26,8 @@ This integration is built on the existing Claude for Slack app but adds intellig
 
 ## Use cases
 
-* **Bug investigation and fixes**: Ask Claude to investigate and fix bugs as soon as they're reported in Slack channels.
-* **Quick code reviews and modifications**: Have Claude implement small features or refactor code based on team feedback.
-* **Collaborative debugging**: When team discussions provide crucial context (for example, error reproductions or user reports), Claude can use that information to inform its debugging approach.
+* **Bug investigation and fixes**: Describe a bug and ask Claude to investigate and fix it.
+* **Quick code reviews and modifications**: Have Claude implement small features or refactor code.
 * **Parallel task execution**: Kick off coding tasks in Slack while you continue other work, receiving notifications when complete.
 
 ## Prerequisites
@@ -55,7 +54,7 @@ After the app is installed, authenticate your individual Claude account:
 
 1. Open the Claude app in Slack by clicking on "Claude" in your Apps section
 2. Open the App Home tab
-3. Click "Connect" to link your Slack account with your Claude account
+3. Click **Connect Claude account** to link your Slack account with your Claude account
 4. Complete the authentication flow in your browser
 
 **3. Configure cloud sessions**
@@ -77,7 +76,7 @@ After connecting your accounts, configure how Claude handles your messages in Sl
 
 > [!NOTE]
 >
-> In Code + Chat mode, if Claude routes a message to Chat but you wanted a coding session, you can click "Retry as Code" to create a Claude Code session instead. Similarly, if it's routed to Code but you wanted a Chat session, you can choose that option in that thread.
+> In Code + Chat mode, if Claude answers in Chat but you wanted a coding session, click **Switch to code repo...** on the reply and select a repository. Claude then starts a Claude Code session with your message instead.
 
 **5. Add Claude to channels**
 
@@ -97,11 +96,10 @@ You can also explicitly tell Claude to handle a request as a coding task, even i
 
 ### Context gathering
 
-**From threads**: When you @mention Claude in a thread, it gathers context from all messages in that thread to understand the full conversation.
+* **From threads**: when you first @mention Claude in a thread, it gathers context from your messages and its own in that thread.
+* **From channels**: when you @mention Claude directly in a channel, it looks at your recent messages and its own in that channel, and at the channel's name, topic, and description.
 
-**From channels**: When mentioned directly in a channel, Claude looks at recent channel messages for relevant context.
-
-This context helps Claude understand the problem, select the appropriate repository, and inform its approach to the task.
+This context helps Claude understand the problem, select the appropriate repository, and inform its approach to the task. To give Claude something a teammate wrote, such as an error report, paste its text into the message where you @mention Claude.
 
 > [!WARNING]
 >
@@ -113,21 +111,20 @@ This context helps Claude understand the problem, select the appropriate reposit
 2. **Detection**: Claude analyzes your message and detects coding intent
 3. **Session creation**: A new Claude Code session is created on claude.ai/code
 4. **Progress updates**: Claude posts status updates to your Slack thread as work progresses
-5. **Completion**: When finished, Claude @mentions you with a summary and action buttons
-6. **Review**: Click "View Session" to see the full transcript, or "Create PR" to open a pull request
+5. **Completion**: When finished, Claude updates its message in the thread with its final response and action buttons, and sends you a direct message linking to it
+6. **Review**: Click **View session** to see the full transcript, or **Create PR** to open a pull request
 
 ## User interface elements
 
 ### Message actions
 
-* **View Session**: Opens the full Claude Code session in your browser where you can see all work performed, continue the session, or make additional requests.
-* **Create PR**: Creates a pull request directly from the session's changes.
-* **Retry as Code**: If Claude initially responds as a chat assistant but you wanted a coding session, click this button to retry the request as a Claude Code task.
-* **Change Repo**: Lets you select a different repository if Claude chose incorrectly.
+* **View session**: Opens the full Claude Code session in your browser where you can see all work performed, continue the session, or make additional requests.
+* **Create PR**: Opens GitHub's compare page for the session's branch, where you create the pull request. It appears on the status message Claude posted when the session started, once the session finishes.
+* **Switch to code repo...**: If Claude responds in Chat but you wanted a coding session, click this button and select a repository, and Claude starts a Claude Code session with your original request.
 
 ### Repository selection
 
-Claude automatically selects a repository based on context from your Slack conversation. If multiple repositories could apply, Claude may display a dropdown allowing you to choose the correct one.
+Claude automatically selects a repository based on context from your Slack conversation. If Claude can't tell which repository you mean, it asks you to choose: click **Select repository** and select one from the list.
 
 ## Access and permissions
 
@@ -169,13 +166,12 @@ for more details.
 ### Writing effective requests
 
 * **Be specific**: Include file names, function names, or error messages when relevant.
-* **Provide context**: Mention the repository or project if it's not clear from the conversation.
+* **Provide context**: Mention the repository or project.
 * **Define success**: Explain what "done" looks like. Should Claude write tests? Update documentation? Create a PR?
-* **Use threads**: Reply in threads when discussing bugs or features so Claude can gather the full context.
 
 ### When to use Slack vs. web
 
-**Use Slack when**: Context already exists in a Slack discussion, you want to start a task asynchronously, or you're collaborating with teammates who need visibility.
+**Use Slack when**: You want to start a task asynchronously, or you're collaborating with teammates who need visibility.
 
 **Use the web directly when**: You need to upload files, want real-time interaction during development, or are working on longer, more complex tasks.
 
@@ -227,8 +223,7 @@ If you're not an Owner, send this entry to one.
 
 ### Wrong repository selected
 
-1. Click the "Change Repo" button to select a different repository
-2. Include the repository name in your request for more accurate selection
+Include the repository name in your request for more accurate selection.
 
 ### Authentication errors
 
