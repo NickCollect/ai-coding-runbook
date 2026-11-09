@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/keyboard-shortcuts
-fetched_at: 2026-10-26T05:40:01.808988+00:00
+fetched_at: 2026-11-09T07:30:18.783117+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ All Cursor keybindings, including Cursor-specific features, can be remapped in K
 | Cmd .           | Mode Menu                               |
 | Cmd /           | Loop between AI models                  |
 | Cmd Shift J     | Cursor settings                         |
-| Cmd Shift Space | Toggle Voice Mode                       |
+| Cmd Shift Space | Toggle Voice Mode (dictation)           |
 | Cmd ,           | General settings                        |
 | Cmd Shift P     | Command palette                         |
 

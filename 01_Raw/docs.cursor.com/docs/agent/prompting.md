@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/prompting
-fetched_at: 2026-08-31T06:29:30.571972+00:00
+fetched_at: 2026-11-09T07:30:15.907695+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,7 +41,9 @@ This is useful for implementing design mockups, debugging visual issues, and ref
 
 ## Voice input
 
-Click the microphone icon in the chat input to dictate your prompt instead of typing. Speak naturally, include technical details like file and function names, and review the transcription before sending.
+Click the microphone icon in the chat input to dictate your prompt instead of typing. In the IDE, you can also press Cmd Shift Space. In the Agents Window, hold Ctrl M while you talk. Speak naturally, include technical details like file and function names, and review the transcription before sending.
+
+Dictation turns speech into text and doesn't talk back. To have a spoken conversation with the agent, start a [voice chat](https://cursor.com/docs/agent/voice-chat.md) from the waveform button instead.
 
 ## Context usage
 

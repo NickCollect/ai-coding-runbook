@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/customizing/aws-bedrock
-fetched_at: 2026-07-13T04:25:38.119811+00:00
+fetched_at: 2026-11-09T07:30:16.678648+00:00
 fetch_method: mintlify_md
 ---
 
@@ -56,14 +56,17 @@ Attach a policy that grants access to the Bedrock models you want to use:
       ],
       "Resource": [
         "arn:aws:bedrock:*::foundation-model/anthropic.*",
-        "arn:aws:bedrock:*::foundation-model/us.anthropic.*"
+        "arn:aws:bedrock:*:*:inference-profile/us.anthropic.*",
+        "arn:aws:bedrock:*:*:inference-profile/eu.anthropic.*",
+        "arn:aws:bedrock:*:*:inference-profile/apac.anthropic.*",
+        "arn:aws:bedrock:*:*:inference-profile/ca.anthropic.*"
       ]
     }
   ]
 }
 ```
 
-Adjust the resource ARNs to match the specific models and regions you want to allow.
+The inference-profile entries need your account ID in the ARN (`:*:`). The foundation-model entry does not (`::`). Invoking a profile checks both. Listing only the foundation model, or putting a profile ID such as `us.anthropic.*` on `foundation-model`, does not grant access. The `*` region on the foundation model covers every region that profile can route to. Narrow the wildcards to the models and regions you want.
 
 ### Step 3: Enable models in Bedrock
 
@@ -133,7 +136,7 @@ Alternatively, you can use AWS access keys instead of an IAM role. Enter your AW
 
 - Enable the model in the AWS Bedrock console
 - Verify the model ID format matches your region (some use `us.anthropic.*` prefix)
-- Check that your IAM policy includes the model's ARN
+- Check that your IAM policy includes both the inference-profile ARN (`arn:aws:bedrock:<region>:<account>:inference-profile/<profile-id>`) and the foundation-model ARN (`arn:aws:bedrock:<region>::foundation-model/<model-id>`)
 
 ### Region errors
 

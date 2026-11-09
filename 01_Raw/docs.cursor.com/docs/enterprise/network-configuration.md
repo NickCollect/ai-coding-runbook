@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/network-configuration
-fetched_at: 2026-11-02T07:00:23.050844+00:00
+fetched_at: 2026-11-09T07:30:16.829345+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,7 +29,7 @@ When Cursor traffic goes through Secure Web Gateways (SWG), SSL inspection, or D
 Cursor's services are already encrypted end-to-end. We recommend disabling SSL inspection for these domains:
 
 - `.cursor.sh`
-- `cursor-cdn.com`
+- `cursor-cdn.com`, `*.cursor-cdn.com`
 - `marketplace.cursorapi.com`
 - `authenticate.cursor.sh`
 - `authenticator.cursor.sh`

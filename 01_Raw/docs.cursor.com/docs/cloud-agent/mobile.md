@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/mobile
-fetched_at: 2026-10-19T05:32:43.940745+00:00
+fetched_at: 2026-11-09T07:30:16.475730+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,7 +54,8 @@ You get the full cloud agent workflow from your pocket, not a stripped-down chat
 - **Review and merge pull requests.** Read full diffs, commits, deployments, approvals, comments, and checks. Add or change reviewers, then ask an agent to resolve review comments or fix a failing check. You can also merge with squash, mark ready, update the branch, toggle auto-merge, publish, or close.
 - **Use your commands and automations.** Your slash commands, skills, and automations work the same on mobile as they do locally, in the CLI, and on the web.
 - **Enter Design Mode.** Attach photos, camera shots, or files, then point, click, and draw on images or front-end components to give agents visual direction.
-- **Use your voice.** Dictate instructions to agents for hands-free edits with live transcription.
+- **Dictate.** Speak instructions into the composer with live transcription.
+- **Talk with agents.** Start a [voice chat](https://cursor.com/docs/agent/voice-chat.md) for a realtime spoken conversation, including from Siri.
 - **Connect MCP tools.** Choose the [MCP](https://cursor.com/docs/mcp.md) servers a run should use at launch, including the Slack MCP, so agents reach the same external tools they use on the web.
 - **Stay in the loop.** Get a push notification when an agent finishes a turn, and track up to eight agents at once with Live Activities on the lock screen and Dynamic Island.
 

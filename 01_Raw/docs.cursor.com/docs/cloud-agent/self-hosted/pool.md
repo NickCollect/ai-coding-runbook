@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/pool
-fetched_at: 2026-10-26T05:39:59.860697+00:00
+fetched_at: 2026-11-09T07:30:16.630374+00:00
 fetch_method: mintlify_md
 ---
 
@@ -498,7 +498,7 @@ deprecated. If your cluster already runs the operator, it keeps working, and
 the [operator reference](https://cursor.com/docs/cloud-agent/self-hosted/kubernetes.md) stays
 available. New Kubernetes deployments should use the k8s-workers template.
 
-Other hosts work the same way: any VM, container, or bare-metal machine that can install the Cursor CLI and reach Cursor over outbound HTTPS can run a pool worker under `systemd`, Docker, or your own process manager. For partner guides and reference templates covering AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, Coder, and Superserve, see [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md).
+Other hosts work the same way: any VM, container, or bare-metal machine that can install the Cursor CLI and reach Cursor over outbound HTTPS can run a pool worker under `systemd`, Docker, or your own process manager. For partner guides and reference templates covering AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, Coder, Superserve, and Render, see [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md).
 
 ## Worker controller
 

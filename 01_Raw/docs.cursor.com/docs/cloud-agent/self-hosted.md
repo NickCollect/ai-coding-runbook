@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted
-fetched_at: 2026-11-02T07:00:22.603318+00:00
+fetched_at: 2026-11-09T07:30:16.567757+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ Cloud Agents to your own machines.
 Use Self-Hosted Machines when Cursor's managed cloud can't meet your constraints:
 
 - You have strict network requirements, and code or services can't be reached from outside your network. For private source control or package registries, start with managed Cloud Agents and [private connectivity](https://cursor.com/docs/cloud-agent/private-connectivity.md) ([AWS PrivateLink](https://cursor.com/docs/cloud-agent/private-connectivity.md#aws-privatelink) or [Cloudflare Tunnel](https://cursor.com/docs/cloud-agent/private-connectivity.md#cloudflare-tunnel)).
-- You have custom hardware, such as GPU machines or Macs for iOS development. Use a machine you already run, or a VM from a [partner host](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md) such as AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, or Superserve.
+- You have custom hardware, such as GPU machines or Macs for iOS development. Use a machine you already run, or a VM from a [partner host](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md) such as AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, Superserve, or Render.
 - You have custom images, such as a different operating system or an existing build pipeline, that are difficult to save as a [Cloud Agent build](https://cursor.com/docs/cloud-agent/builds.md).
 
 If you want to try this out, check out the [My Machines
@@ -52,7 +52,7 @@ No inbound ports, public IPs, or VPN tunnels are required. If you use a proxy, s
 
 To disable artifact uploads, block outbound traffic to both artifact hosts on the worker. Workers upload artifacts to `agent-stores.s3.us-east-1.amazonaws.com` and use `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` only when the agent's store isn't available, so blocking `cloud-agent-artifacts` alone doesn't stop uploads. Blocking both only prevents artifacts from uploading. The agent continues to work, including tool calls and results, but its artifacts won't appear in pull requests or the dashboard.
 
-You can connect up to 200 workers per user and 1000 per team. For
+You can connect up to 10,000 workers per user and 10,000 per team. For
 larger company-wide deployments, [contact
 us](https://cursor.com/contact-sales?source=self-hosted-agents) to discuss
 scaling.
@@ -165,7 +165,7 @@ Run a worker anywhere you can install the Cursor CLI and its dependencies:
 - **Persistent hosts or containers.** Run one or more pool workers under `systemd`, `launchd`, Docker, or another process manager.
 - **Dynamic infrastructure.** Use the built-in [worker controller](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#worker-controller) or the Cloud Agents API to start machines when requests arrive.
 - **Kubernetes.** Start from the [anysphere/k8s-workers](https://github.com/anysphere/k8s-workers) template. It runs `agent worker controller --spawn` in your cluster and creates one worker Pod per claimed request, or keeps warm Pods with `--warm-idle`, without a CRD. See [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md#reference-templates).
-- **Partner hosts and templates.** Run pool workers on AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, Coder, or Superserve with partner guides, or clone a Cursor reference template for AWS Lambda MicroVMs, Cloudflare Containers, or Kubernetes. See [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md).
+- **Partner hosts and templates.** Run pool workers on AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, Coder, Superserve, or Render with partner guides, or clone a Cursor reference template for AWS Lambda MicroVMs, Cloudflare Containers, or Kubernetes. See [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md).
 
 Deployment guides, partner guides, and templates are reference architectures. You own the worker image, infrastructure, secrets, scaling policy, and production validation.
 
@@ -221,7 +221,7 @@ curl https://cursor.com/install -fsS | bash
 - [Choose where Cloud Agents run](https://cursor.com/docs/cloud-agent/self-hosted/choose-runtime.md): compare managed Cloud Agents, My Machines, and Team Pools.
 - [My Machines](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md): connect your first worker in a few minutes, then configure personal workers, workspace roots, and local MCP servers.
 - [Team Pools](https://cursor.com/docs/cloud-agent/self-hosted/pool.md): organize workers into team pools, and [scale worker capacity](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#worker-controller) with a controller.
-- [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md): partner guides for AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, Coder, and Superserve, and reference templates for AWS Lambda MicroVMs, Cloudflare Containers, and Kubernetes ([anysphere/k8s-workers](https://github.com/anysphere/k8s-workers)).
+- [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md): partner guides for AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, Coder, Superserve, and Render, and reference templates for AWS Lambda MicroVMs, Cloudflare Containers, and Kubernetes ([anysphere/k8s-workers](https://github.com/anysphere/k8s-workers)).
 - [Computer use](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md): let agents drive a desktop and browser on your workers.
 - [API reference](https://cursor.com/docs/cloud-agent/api/endpoints.md#workers-and-pools): endpoints for workers, pools, the pending-request queue (list, SSE watch, claim, and release), and worker tokens.
 - [Self-Hosted Machines](https://cursor.com/help/ai-features/self-hosted-machines.md): short answers for setup, Team Pools, integrations, and troubleshooting.

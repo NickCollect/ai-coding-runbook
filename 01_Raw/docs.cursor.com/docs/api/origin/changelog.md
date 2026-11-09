@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/changelog
-fetched_at: 2026-11-02T07:00:21.456824+00:00
+fetched_at: 2026-11-09T07:30:16.025343+00:00
 fetch_method: mintlify_md
 ---
 
@@ -9,6 +9,14 @@ fetch_method: mintlify_md
 The Origin API is in Early Beta and subject to change. Review the [OpenAPI specification](https://cursor.com/docs/api/origin/openapi.yaml) when updating an integration.
 
 Changes to the Origin public API, including endpoints, request and response schemas, scopes, and webhooks, grouped by day with the newest first. Each change carries one label: **Breaking**, **Deprecated**, **Added**, **Changed**, or **Removed**. Breaking and deprecated changes include migration guidance inline. The [Origin API reference](https://cursor.com/docs/api/origin.md) always reflects the latest synced state.
+
+## November 4, 2026
+
+- **Added.** The [`repository.renamed`](https://cursor.com/docs/api/origin/reference/events.md) webhook event is delivered when a repository's name changes within its owner namespace, including a change of case only. Its [payload](https://cursor.com/docs/api/origin/reference/repository-renamed.md) carries the repository after the rename, `previousName`, the `actor` that renamed it when known, and `renamedAt`. Subscribing requires [`repository:metadata:read`](https://cursor.com/docs/api/origin/reference/scopes.md).
+- **Added.** An inbound IP allowlist can trust the egress IP ranges that apps declare. [Get Inbound IP Allowlist](https://cursor.com/docs/api/origin/reference/get-inbound-ip-allowlist.md) and [Update Inbound IP Allowlist](https://cursor.com/docs/api/origin/reference/update-inbound-ip-allowlist.md) return `trustAppDeclaredIps`, and so does `allowlist` on [Replace Inbound IP Allowlist Entries](https://cursor.com/docs/api/origin/reference/replace-inbound-ip-allowlist-entries.md). Update Inbound IP Allowlist accepts an optional `trustAppDeclaredIps` in its request body to set it. While it's `true`, the list also admits an installation access token or an installation user token calling from an egress IP range its app declares. It doesn't change [Get Repo Tarball](https://cursor.com/docs/api/origin/reference/get-repo-tarball.md).
+- **Changed.** `enabled` is optional on [Update Inbound IP Allowlist](https://cursor.com/docs/api/origin/reference/update-inbound-ip-allowlist.md). A request must set `enabled`, `trustAppDeclaredIps`, or both; one that sets neither returns `InvalidArgument` (HTTP 400).
+- **Changed.** [Create Ruleset](https://cursor.com/docs/api/origin/reference/create-ruleset.md) and [Update Ruleset](https://cursor.com/docs/api/origin/reference/update-ruleset.md) accept up to 50 `rules` and up to 100 `bypassActors`, up from 20 and 15.
+- **Changed.** The [inbound IP allowlist](https://cursor.com/docs/api/origin/reference/inbound-ip-allowlist.md) reference states which lists a request must pass: the list of the team that owns the repository or namespace it names, and the list of the requesting member's or service account's own team. Installation access tokens, installation user tokens, and service accounts are checked on every surface, not only at [Get Repo Tarball](https://cursor.com/docs/api/origin/reference/get-repo-tarball.md). It also states that an enforced list covers MCP requests, that a refused API request, or one whose address Origin can't determine, returns `PermissionDenied` (HTTP 403), that requests from Cursor's own services aren't checked against the list, and that a change can take up to a minute to apply. [Add Inbound IP Allowlist Entry](https://cursor.com/docs/api/origin/reference/add-inbound-ip-allowlist-entry.md) documents that an entry that would make an enforced list exclude the caller's own address returns `InvalidArgument` (HTTP 400), and the [error model](https://cursor.com/docs/api/origin/reference/errors.md) documents that a `403` can mean an allowlist refused the request's address.
 
 ## October 28, 2026
 

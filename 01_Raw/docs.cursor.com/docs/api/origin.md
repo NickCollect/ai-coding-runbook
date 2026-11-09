@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin
-fetched_at: 2026-11-02T07:00:21.599540+00:00
+fetched_at: 2026-11-09T07:30:16.104865+00:00
 fetch_method: mintlify_md
 ---
 
@@ -240,6 +240,7 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Repository Deleted](https://cursor.com/docs/api/origin/reference/repository-deleted.md)
 - [Repository Push](https://cursor.com/docs/api/origin/reference/repository-push.md)
 - [Repository Metadata Updated](https://cursor.com/docs/api/origin/reference/repository-metadata-updated.md)
+- [Repository Renamed](https://cursor.com/docs/api/origin/reference/repository-renamed.md)
 - [Repository Label Events](https://cursor.com/docs/api/origin/reference/repository-label-events.md)
 - [Repository Label Updated](https://cursor.com/docs/api/origin/reference/repository-label-updated.md)
 - [Pull Request Events](https://cursor.com/docs/api/origin/reference/pull-request-events.md)

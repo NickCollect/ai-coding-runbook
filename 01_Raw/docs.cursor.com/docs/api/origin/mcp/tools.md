@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/mcp/tools
-fetched_at: 2026-10-26T05:39:59.179401+00:00
+fetched_at: 2026-11-09T07:30:16.070386+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,6 +13,7 @@ Every tool the Origin MCP server at `https://api.origin.cursor.com/mcp` lists, i
 | [`get_repository`](https://cursor.com/docs/api/origin/mcp/tools.md#get_repository)                                         | Read-only                           | Get one Origin repository by owner and name, including default branch, mirror state, visibility, and merge settings.                                                                                                                                                                                                                                                        |
 | [`list_repositories`](https://cursor.com/docs/api/origin/mcp/tools.md#list_repositories)                                   | Read-only                           | List Origin repositories belonging to an owner slug.                                                                                                                                                                                                                                                                                                                        |
 | [`list_namespaces`](https://cursor.com/docs/api/origin/mcp/tools.md#list_namespaces)                                       | Read-only                           | List the Origin namespaces (owner slugs) the caller can list repositories in, ordered by slug.                                                                                                                                                                                                                                                                              |
+| [`list_group_members`](https://cursor.com/docs/api/origin/mcp/tools.md#list_group_members)                                 | Read-only                           | List the direct user members of one Origin review or ownership group visible to the caller for a repository.                                                                                                                                                                                                                                                                |
 | [`create_repository`](https://cursor.com/docs/api/origin/mcp/tools.md#create_repository)                                   | Writes                              | Create an empty Origin-hosted repository.                                                                                                                                                                                                                                                                                                                                   |
 | [`get_file_contents`](https://cursor.com/docs/api/origin/mcp/tools.md#get_file_contents)                                   | Read-only                           | Read one path at a ref in an Origin-hosted repository.                                                                                                                                                                                                                                                                                                                      |
 | [`get_git_tree`](https://cursor.com/docs/api/origin/mcp/tools.md#get_git_tree)                                             | Read-only                           | List a git tree in an Origin-hosted repository at a tree SHA, commit SHA, branch, tag, or HEAD.                                                                                                                                                                                                                                                                             |
@@ -25,7 +26,8 @@ Every tool the Origin MCP server at `https://api.origin.cursor.com/mcp` lists, i
 | [`list_pull_requests`](https://cursor.com/docs/api/origin/mcp/tools.md#list_pull_requests)                                 | Read-only                           | List pull requests in an Origin-hosted repository, filtered by state, head, author, base, stackId, mergeCommitShas, or inclusive mergedSince/mergedUntil bounds on mergedAt, and sorted by creation or update time in either direction.                                                                                                                                     |
 | [`search_pull_requests`](https://cursor.com/docs/api/origin/mcp/tools.md#search_pull_requests)                             | Read-only                           | Search pull requests across the Origin-hosted repositories the caller can read, written in GitHub's pull request search syntax.                                                                                                                                                                                                                                             |
 | [`pull_request_read`](https://cursor.com/docs/api/origin/mcp/tools.md#pull_request_read)                                   | Read-only                           | Read one Origin-hosted pull request through a single view: summary, files, commits, reviews, comments, or threads.                                                                                                                                                                                                                                                          |
-| [`get_pull_request_attachment`](https://cursor.com/docs/api/origin/mcp/tools.md#get_pull_request_attachment)               | Read-only                           | Fetch one image or file attached to an Origin-hosted pull request.                                                                                                                                                                                                                                                                                                          |
+| [`get_pull_request_attachment`](https://cursor.com/docs/api/origin/mcp/tools.md#get_pull_request_attachment)               | Read-only                           | Fetch one image, recording, or file attached to an Origin-hosted pull request.                                                                                                                                                                                                                                                                                              |
+| [`upload_pull_request_attachment`](https://cursor.com/docs/api/origin/mcp/tools.md#upload_pull_request_attachment)         | Writes                              | Upload one image or video for an Origin-hosted repository's pull requests and return url, a cursor.com user-attachments URL that only readers of the repository can open.                                                                                                                                                                                                   |
 | [`create_pull_request`](https://cursor.com/docs/api/origin/mcp/tools.md#create_pull_request)                               | Writes                              | Create a pull request from an already-pushed branch.                                                                                                                                                                                                                                                                                                                        |
 | [`update_pull_request`](https://cursor.com/docs/api/origin/mcp/tools.md#update_pull_request)                               | Writes                              | Update a pull request's title, description, and lifecycle through the public fields.                                                                                                                                                                                                                                                                                        |
 | [`update_pull_request_base`](https://cursor.com/docs/api/origin/mcp/tools.md#update_pull_request_base)                     | Writes                              | Retarget a pull request's base branch, stack it on another pull request, or move it off its stack.                                                                                                                                                                                                                                                                          |
@@ -40,9 +42,10 @@ Every tool the Origin MCP server at `https://api.origin.cursor.com/mcp` lists, i
 | [`update_pull_request_comment`](https://cursor.com/docs/api/origin/mcp/tools.md#update_pull_request_comment)               | Writes content other people see     | Correct an existing pull request comment body.                                                                                                                                                                                                                                                                                                                              |
 | [`update_pull_request_labels`](https://cursor.com/docs/api/origin/mcp/tools.md#update_pull_request_labels)                 | Writes                              | Replace every label on a pull request with the provided names.                                                                                                                                                                                                                                                                                                              |
 | [`create_label`](https://cursor.com/docs/api/origin/mcp/tools.md#create_label)                                             | Writes                              | Create a repository label so update\_pull\_request\_labels can apply it.                                                                                                                                                                                                                                                                                                    |
-| [`request_pull_request_reviewers`](https://cursor.com/docs/api/origin/mcp/tools.md#request_pull_request_reviewers)         | Writes content other people see     | Request reviewers (users and/or groups) on a pull request.                                                                                                                                                                                                                                                                                                                  |
+| [`request_pull_request_reviewers`](https://cursor.com/docs/api/origin/mcp/tools.md#request_pull_request_reviewers)         | Writes content other people see     | Request reviewers on a pull request.                                                                                                                                                                                                                                                                                                                                        |
 | [`remove_pull_request_reviewers`](https://cursor.com/docs/api/origin/mcp/tools.md#remove_pull_request_reviewers)           | Writes content other people see     | Remove requested reviewers from a pull request.                                                                                                                                                                                                                                                                                                                             |
 | [`checks_read`](https://cursor.com/docs/api/origin/mcp/tools.md#checks_read)                                               | Read-only                           | Read checks for one target in an Origin-hosted repository: a pull request, commit, suite, or run.                                                                                                                                                                                                                                                                           |
+| [`rerun_checks`](https://cursor.com/docs/api/origin/mcp/tools.md#rerun_checks)                                             | Writes content other people see     | Ask the CI app that reported a check run to run it again.                                                                                                                                                                                                                                                                                                                   |
 | [`list_rulesets`](https://cursor.com/docs/api/origin/mcp/tools.md#list_rulesets)                                           | Read-only                           | List the rulesets on an Origin-hosted repository as summaries: id, name, kind, enforcement, included and excluded ref name patterns, the rule types present, and the bypass actor count.                                                                                                                                                                                    |
 | [`get_ruleset`](https://cursor.com/docs/api/origin/mcp/tools.md#get_ruleset)                                               | Read-only                           | Read one ruleset on an Origin-hosted repository by its id from list\_rulesets: name, description, kind, enforcement, included and excluded ref name patterns, each rule as its ruleType and JSON parameters, and each bypass actor as its kind (user, group, or app), id, and bypassMode.                                                                                   |
 | [`get_repository_access`](https://cursor.com/docs/api/origin/mcp/tools.md#get_repository_access)                           | Read-only                           | Read who can access an Origin-hosted repository.                                                                                                                                                                                                                                                                                                                            |
@@ -119,9 +122,37 @@ List the Origin namespaces (owner slugs) the caller can list repositories in, or
 
 `namespaces` (paged), `nextPageToken`
 
+## list\_group\_members
+
+List the direct user members of one Origin review or ownership group visible to the caller for a repository. Pass the group's grp\_… id or qualified @organization/group login. Members page by stable public user\_… login, with the display name the portal can show or the login as fallback.
+
+- **Access:** Read-only
+- **Asks for confirmation:** No
+- **On the read-only endpoint:** Yes
+- **Required scopes:** `repository:pull_requests:reviewers:read`
+
+### list\_group\_members parameters
+
+| Name        | Type   | Required | Description                                                                                                                                                                       |
+| ----------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `owner`     | string | Yes      | Origin namespace (owner) slug, taken from list\_namespaces or an earlier Origin result. A GitHub owner or org name is not an Origin namespace unless list\_namespaces returns it. |
+| `name`      | string | Yes      | Origin repository name within that namespace                                                                                                                                      |
+| `group`     | string | Yes      | Visible review group as a grp\_… id or qualified @organization/group login                                                                                                        |
+| `pageSize`  | number | No       |                                                                                                                                                                                   |
+| `pageToken` | string | No       |                                                                                                                                                                                   |
+
+### list\_group\_members limits
+
+- `pageSize` defaults to 30 and is at most 100.
+- Pass the previous response's `nextPageToken` as `pageToken` to read the next page.
+
+### list\_group\_members returns
+
+`members` (paged), `login`, `displayName`, `nextPageToken`
+
 ## create\_repository
 
-Create an empty Origin-hosted repository. Pick an owner from list\_namespaces where viewerCanCreateRepositories is true; omit owner to use the caller's personal namespace, which Origin claims on first use (needs an eligible plan, a Privacy Mode that allows code storage, and no team membership; team members pass their team slug). Both steps are one approval: confirm with the user before calling. defaultBranch defaults to main. Repository names are unique per owner, so retrying after a success fails with a conflict; read the repository with get\_repository instead. Returns the created repository, including cloneUrl.
+Create an empty Origin-hosted repository. Pick an owner from list\_namespaces where viewerCanCreateRepositories is true; omit owner to use the caller's personal namespace, which Origin claims on first use (needs an eligible plan, a Privacy Mode that allows code storage, and no team membership; team members pass their team slug). Both steps are one approval: confirm with the user before calling. defaultBranch defaults to main, and visibility defaults to internal; pass private when the user asks to limit the repository to explicitly granted people and groups. Repository names are unique per owner, so retrying after a success fails with a conflict; read the repository with get\_repository instead. Returns the created repository, including cloneUrl.
 
 - **Access:** Writes
 - **Asks for confirmation:** Yes
@@ -130,11 +161,16 @@ Create an empty Origin-hosted repository. Pick an owner from list\_namespaces wh
 
 ### create\_repository parameters
 
-| Name            | Type   | Required | Description                                                                                                                                                                       |
-| --------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `owner`         | string | No       | Origin namespace (owner) slug, taken from list\_namespaces or an earlier Origin result. A GitHub owner or org name is not an Origin namespace unless list\_namespaces returns it. |
-| `name`          | string | Yes      | Origin repository name within that namespace                                                                                                                                      |
-| `defaultBranch` | string | No       | Default branch name. Omit for main.                                                                                                                                               |
+| Name            | Type                    | Required | Description                                                                                                                                                                       |
+| --------------- | ----------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `owner`         | string                  | No       | Origin namespace (owner) slug, taken from list\_namespaces or an earlier Origin result. A GitHub owner or org name is not an Origin namespace unless list\_namespaces returns it. |
+| `name`          | string                  | Yes      | Origin repository name within that namespace                                                                                                                                      |
+| `defaultBranch` | string                  | No       | Default branch name. Omit for main.                                                                                                                                               |
+| `visibility`    | "internal" \| "private" | No       | internal (visible to members of the owner) or private (only explicitly granted people and groups). Omit for internal.                                                             |
+
+### create\_repository limits
+
+- `visibility` is one of `internal`, `private`.
 
 ### create\_repository returns
 
@@ -394,7 +430,7 @@ Sync a mirrored repository from upstream, waiting for a ref or optional SHA. Ret
 
 ## list\_pull\_requests
 
-List pull requests in an Origin-hosted repository, filtered by state, head, author, base, stackId, mergeCommitShas, or inclusive mergedSince/mergedUntil bounds on mergedAt, and sorted by creation or update time in either direction. Items are compact summaries (author, timestamps, merged/closedAt/mergedAt, and stack membership when the pull request is stacked); they omit body and diff stats—use pull\_request\_read for those. With stackId, the items are that stack's members in the requested sort order, not stack order; rebuild the tree from each member's stack.parent, and pass state all because the default open state leaves merged members out. mergeCommitShas matches pull requests whose merge commit equals any listed SHA; pass state merged or all because a merge commit is recorded only after landing. mergedSince and mergedUntil filter on mergedAt; unmerged pull requests never match, so pass state merged or all. Continuation calls must resend those filters with pageToken.
+List pull requests in an Origin-hosted repository, filtered by state, head, author, base, stackId, mergeCommitShas, or inclusive mergedSince/mergedUntil bounds on mergedAt, and sorted by creation or update time in either direction. Items are compact summaries (author, timestamps, merged/closedAt/mergedAt, and stack membership when the pull request is stacked); they omit body and diff stats—use pull\_request\_read for those. author is an opaque user\_…, app\_…, or sa\_… id; authorDisplayName and authorHandle name that actor when Origin resolves them, so say the name rather than the id. With stackId, the items are that stack's members in the requested sort order, not stack order; rebuild the tree from each member's stack.parent, and pass state all because the default open state leaves merged members out. mergeCommitShas matches pull requests whose merge commit equals any listed SHA; pass state merged or all because a merge commit is recorded only after landing. mergedSince and mergedUntil filter on mergedAt; unmerged pull requests never match, so pass state merged or all. Continuation calls must resend those filters with pageToken.
 
 - **Access:** Read-only
 - **Asks for confirmation:** No
@@ -435,7 +471,7 @@ List pull requests in an Origin-hosted repository, filtered by state, head, auth
 
 ## search\_pull\_requests
 
-Search pull requests across the Origin-hosted repositories the caller can read, written in GitHub's pull request search syntax. A query combines qualifiers (is:open, is:merged, is:draft, author:, review-requested:, reviewed-by:, label:, base:, head:, and created:, updated:, merged: or closed: with a date or range), bare words and quoted phrases matched against text, the operators AND, OR and NOT (or a leading -), parentheses, and one sort: such as sort:updated-desc. repo:owner/name, org: or user: choose the repositories searched; otherwise owner and name choose one. A search reads one namespace (one org or user) at a time: a query whose repo:, org: and user: name more than one is refused, and so is one that names none without owner and name, so add org:NAME. A session limited to specific repositories, such as a cloud agent's, searches only those repositories; if a search is refused for not naming them, name them with repo:owner/name or with owner and name. Results come from a search index and are eventually consistent: a pull request created or changed moments ago can be missing or stale, so read your own writes with list\_pull\_requests or pull\_request\_read. Items are the compact list\_pull\_requests summaries plus each pull request's repository, without stack.parent. totalCount is exact unless totalCountIsLowerBound is set. A query Origin cannot answer fails with its problems, each with its query\[start:end] span when it has one: every qualifier the parser rejects before it stops is named, along with at most one conflict across the whole search such as a second sort:, and a malformed query (such as one with an unclosed quote) names only how it is written. A query that parses is then checked in stages, and only the first stage that finds a problem is named: a second namespace, then a person Origin does not know, then a qualifier that search cannot answer, such as is:queued. Continuation calls must resend the same query, owner and name with pageToken. Examples: org:acme is:open review-requested:@me, or repo:acme/web is:merged merged:>=2026-09-01.
+Search pull requests across the Origin-hosted repositories the caller can read, written in GitHub's pull request search syntax. A query combines qualifiers (is:open, is:merged, is:draft, author:, review-requested:, reviewed-by:, label:, base:, head:, and created:, updated:, merged: or closed: with a date or range), bare words and quoted phrases matched against text, the operators AND, OR and NOT (or a leading -), parentheses, and one sort: such as sort:updated-desc. repo:owner/name, org: or user: choose the repositories searched; otherwise owner and name choose one. A search reads one namespace (one org or user) at a time: a query whose repo:, org: and user: name more than one is refused, and so is one that names none without owner and name, so add org:NAME. A session limited to specific repositories, such as a cloud agent's, searches only those repositories; if a search is refused for not naming them, name them with repo:owner/name or with owner and name. Results come from a search index and are eventually consistent: a pull request created or changed moments ago can be missing or stale, so read your own writes with list\_pull\_requests or pull\_request\_read. Items are the compact list\_pull\_requests summaries plus each pull request's repository, without stack.parent, so each carries authorDisplayName and authorHandle beside the opaque author id when Origin resolves them. totalCount is exact unless totalCountIsLowerBound is set. A query Origin cannot answer fails with its problems, each with its query\[start:end] span when it has one: every qualifier the parser rejects before it stops is named, along with at most one conflict across the whole search such as a second sort:, and a malformed query (such as one with an unclosed quote) names only how it is written. A query that parses is then checked in stages, and only the first stage that finds a problem is named: a second namespace, then a person Origin does not know, then a qualifier that search cannot answer, such as is:queued. Continuation calls must resend the same query, owner and name with pageToken. Examples: org:acme is:open review-requested:@me, or repo:acme/web is:merged merged:>=2026-09-01.
 
 - **Access:** Read-only
 - **Asks for confirmation:** No
@@ -465,7 +501,7 @@ Search pull requests across the Origin-hosted repositories the caller can read, 
 
 ## pull\_request\_read
 
-Read one Origin-hosted pull request through a single view: summary, files, commits, reviews, comments, or threads. view defaults to summary. Summary includes labels, requested reviewers, and stack membership (stack id and parent pull request) when the pull request is stacked. The threads view requires threadIds and pages comments in those threads. Comments and threads carry url, a cursor.com link to that thread or comment on the pull request page. Images and recordings pasted into the description, a review, or a comment appear as cursor.com user-attachments URLs; fetch one with get\_pull\_request\_attachment.
+Read one Origin-hosted pull request through a single view: summary, files, commits, reviews, comments, or threads. view defaults to summary. Summary includes labels, requested reviewers, and stack membership (stack id and parent pull request) when the pull request is stacked. The summary, reviews, and comments views carry authorDisplayName and authorHandle beside the opaque author id when Origin resolves them, so say the name rather than the id; a requested reviewer carries displayName, and handle for a user, while a group reviewer is an id with no name. The threads view requires threadIds and pages comments in those threads. Comments and threads carry url, a cursor.com link to that thread or comment on the pull request page. Images and recordings pasted into the description, a review, or a comment appear as cursor.com user-attachments URLs, and a cloud agent's screenshots and recordings as cursor.com artifact links; fetch one with get\_pull\_request\_attachment.
 
 - **Access:** Read-only
 - **Asks for confirmation:** No
@@ -499,17 +535,17 @@ Read one Origin-hosted pull request through a single view: summary, files, commi
 
 Set `view` to choose what comes back:
 
-- `summary`: `number`, `title`, `state`, `draft`, `merged`, `author`, `base`, `head`, `createdAt`, `updatedAt`, `closedAt`, `mergedAt`, `body`, `additions`, `deletions`, `changedFiles`, `stack`, `labels` (at most 100), `requestedReviewers` (at most 100)
+- `summary`: `number`, `title`, `state`, `draft`, `merged`, `author`, `authorDisplayName`, `authorHandle`, `base`, `head`, `createdAt`, `updatedAt`, `closedAt`, `mergedAt`, `body`, `additions`, `deletions`, `changedFiles`, `stack`, `labels` (at most 100), `requestedReviewers` (at most 100)
 - `files`: `files` (paged), `path`, `status`, `additions`, `deletions`, `changes`, `patch` (chunked), `truncated`
 - `commits`: `commits` (paged)
-- `reviews`: `reviews` (paged), `id`, `body`, `verdict`, `author`, `submittedAt`
-- `comments`: `comments` (paged), `id`, `body`, `threadId`, `author`, `createdAt`, `updatedAt`, `url`
+- `reviews`: `reviews` (paged), `id`, `body`, `verdict`, `author`, `authorDisplayName`, `authorHandle`, `submittedAt`
+- `comments`: `comments` (paged), `id`, `body`, `threadId`, `author`, `authorDisplayName`, `authorHandle`, `createdAt`, `updatedAt`, `url`
 - `stack` (not yet public): `parent`, `children` (paged), `mergePrefix`, `convergence`
 - `threads`: `threads` (paged)
 
 ## get\_pull\_request\_attachment
 
-Fetch one image or file attached to an Origin-hosted pull request. url is an attachment URL exactly as pull\_request\_read returns it in the description, a review, or a comment: a cursor.com user-attachments URL, or a legacy upload-bucket URL. Only those upload shapes are accepted, and the URL must appear in that pull request's text; no other URL is ever fetched. An image of at most 3 MiB is returned as an image content block beside the JSON summary (delivery inline, with contentType and byteLength). A larger image, a recording, or another file is answered with delivery url: fetchUrl serves the bytes without further credentials, until expiresAt when the URL is signed, and reason says why (video, too\_large, or not\_an\_image). kind is image, video, or file.
+Fetch one image, recording, or file attached to an Origin-hosted pull request. url is a media URL exactly as pull\_request\_read returns it in the description, a review, or a comment: a cursor.com user-attachments URL, a legacy upload-bucket URL, a cloud agent artifact share link (cursor.com/artifacts/c/art-…), or a cloud agent's artifact page (cursor.com/agents/\<agent id>/artifacts?path=…, the way an agent links its screen recordings). Only those shapes are accepted, and the URL must appear in that pull request's text; no other URL is ever fetched. A share link is served while its share stands; an agent's artifact page is served only to a user who may view that agent, for an agent that worked in this repository. An image of at most 3 MiB is returned as an image content block beside the JSON summary (delivery inline, with contentType and byteLength). A larger image, a recording, or another file is answered with delivery url: fetchUrl serves the bytes without further credentials, until expiresAt when the URL is signed, and reason says why (video, too\_large, or not\_an\_image); hand a recording's fetchUrl to whatever watches video for you. kind is image, video, or file.
 
 - **Access:** Read-only
 - **Asks for confirmation:** No
@@ -533,6 +569,28 @@ Fetch one image or file attached to an Origin-hosted pull request. url is an att
 ### get\_pull\_request\_attachment returns
 
 `url`, `kind`, `delivery`, `contentType`, `byteLength`, `fetchUrl`, `expiresAt`, `reason`
+
+## upload\_pull\_request\_attachment
+
+Upload one image or video for an Origin-hosted repository's pull requests and return url, a cursor.com user-attachments URL that only readers of the repository can open. Write it into a description, review, or comment: an image as ![alt](url), a video as the bare url on its own line. content is the file's bytes in standard base64. fileName's extension sets the kind, an image (.gif, .jpeg, .jpg, .png, .webp) up to 10 MB or a video (.mov, .mp4, .webm) up to 100 MB, and Origin checks the file's bytes against that kind. The whole MCP request is limited to 1 MiB, so a file sent through this tool can be at most about 750 KiB before encoding. Needs write access to the repository's pull requests.
+
+- **Access:** Writes
+- **Asks for confirmation:** No
+- **On the read-only endpoint:** No
+- **Required scopes:** `repository:pull_requests:write`
+
+### upload\_pull\_request\_attachment parameters
+
+| Name       | Type   | Required | Description                                                                                                                                                                       |
+| ---------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `owner`    | string | Yes      | Origin namespace (owner) slug, taken from list\_namespaces or an earlier Origin result. A GitHub owner or org name is not an Origin namespace unless list\_namespaces returns it. |
+| `name`     | string | Yes      | Origin repository name within that namespace                                                                                                                                      |
+| `fileName` | string | Yes      | File name with its extension, such as screenshot.png                                                                                                                              |
+| `content`  | string | Yes      | The file's bytes in standard base64                                                                                                                                               |
+
+### upload\_pull\_request\_attachment returns
+
+`url`
 
 ## create\_pull\_request
 
@@ -898,7 +956,7 @@ Create a repository label so update\_pull\_request\_labels can apply it. label i
 
 ## request\_pull\_request\_reviewers
 
-Request reviewers (users and/or groups) on a pull request. It does not accept service accounts (`sa_…`).
+Request reviewers on a pull request. users take a public user\_… id or email and groups a grp\_… id, qualified slug, or slug. reviewers take \{ kind, id } entries, the shape this tool returns: kind user, group, or service\_account, with a user\_…, grp\_…, or sa\_… id; a service\_account must be a bot whose owner is on the repository's team, and a personal bot may not review a pull request its owner authored. Returns the reviewers this call requested, each with displayName when Origin resolves one, and handle for a user; a group reviewer is an id with no name.
 
 - **Access:** Writes content other people see
 - **Asks for confirmation:** No
@@ -907,26 +965,28 @@ Request reviewers (users and/or groups) on a pull request. It does not accept se
 
 ### request\_pull\_request\_reviewers parameters
 
-| Name     | Type      | Required | Description                                                                                                                                                                       |
-| -------- | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `owner`  | string    | Yes      | Origin namespace (owner) slug, taken from list\_namespaces or an earlier Origin result. A GitHub owner or org name is not an Origin namespace unless list\_namespaces returns it. |
-| `name`   | string    | Yes      | Origin repository name within that namespace                                                                                                                                      |
-| `number` | number    | Yes      |                                                                                                                                                                                   |
-| `users`  | string\[] | No       | User identifiers: public user\_… id or email                                                                                                                                      |
-| `groups` | string\[] | No       | Group identifiers: public grp\_… id, qualified slug, or slug                                                                                                                      |
+| Name        | Type      | Required | Description                                                                                                                                                                       |
+| ----------- | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `owner`     | string    | Yes      | Origin namespace (owner) slug, taken from list\_namespaces or an earlier Origin result. A GitHub owner or org name is not an Origin namespace unless list\_namespaces returns it. |
+| `name`      | string    | Yes      | Origin repository name within that namespace                                                                                                                                      |
+| `number`    | number    | Yes      |                                                                                                                                                                                   |
+| `users`     | string\[] | No       | User identifiers: public user\_… id or email                                                                                                                                      |
+| `groups`    | string\[] | No       | Group identifiers: public grp\_… id, qualified slug, or slug                                                                                                                      |
+| `reviewers` | object\[] | No       | Reviewers by kind and public id, the shape this tool and pull\_request\_read return; a service\_account is the sa\_… id of a bot whose owner is on the repository's team          |
 
 ### request\_pull\_request\_reviewers limits
 
 - `users` takes at most 100 items.
 - `groups` takes at most 100 items.
+- `reviewers` takes at most 100 items.
 
 ### request\_pull\_request\_reviewers returns
 
-`users` (at most 100), `groups` (at most 100)
+`reviewers` (at most 100)
 
 ## remove\_pull\_request\_reviewers
 
-Remove requested reviewers from a pull request.
+Remove requested reviewers from a pull request. users take a public user\_… id or email and groups a grp\_… id, qualified slug, or slug. reviewers take \{ kind, id } entries, the shape request\_pull\_request\_reviewers returns: kind user, group, or service\_account, with a user\_…, grp\_…, or sa\_… id. Removing a reviewer that is not requested, including a bot that does not exist, does nothing.
 
 - **Access:** Writes content other people see
 - **Asks for confirmation:** No
@@ -935,18 +995,20 @@ Remove requested reviewers from a pull request.
 
 ### remove\_pull\_request\_reviewers parameters
 
-| Name     | Type      | Required | Description                                                                                                                                                                       |
-| -------- | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `owner`  | string    | Yes      | Origin namespace (owner) slug, taken from list\_namespaces or an earlier Origin result. A GitHub owner or org name is not an Origin namespace unless list\_namespaces returns it. |
-| `name`   | string    | Yes      | Origin repository name within that namespace                                                                                                                                      |
-| `number` | number    | Yes      |                                                                                                                                                                                   |
-| `users`  | string\[] | No       | User identifiers: public user\_… id or email                                                                                                                                      |
-| `groups` | string\[] | No       | Group identifiers: public grp\_… id, qualified slug, or slug                                                                                                                      |
+| Name        | Type      | Required | Description                                                                                                                                                                       |
+| ----------- | --------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `owner`     | string    | Yes      | Origin namespace (owner) slug, taken from list\_namespaces or an earlier Origin result. A GitHub owner or org name is not an Origin namespace unless list\_namespaces returns it. |
+| `name`      | string    | Yes      | Origin repository name within that namespace                                                                                                                                      |
+| `number`    | number    | Yes      |                                                                                                                                                                                   |
+| `users`     | string\[] | No       | User identifiers: public user\_… id or email                                                                                                                                      |
+| `groups`    | string\[] | No       | Group identifiers: public grp\_… id, qualified slug, or slug                                                                                                                      |
+| `reviewers` | object\[] | No       | Reviewers by kind and public id, the shape request\_pull\_request\_reviewers and pull\_request\_read return                                                                       |
 
 ### remove\_pull\_request\_reviewers limits
 
 - `users` takes at most 100 items.
 - `groups` takes at most 100 items.
+- `reviewers` takes at most 100 items.
 
 ### remove\_pull\_request\_reviewers returns
 
@@ -954,7 +1016,7 @@ Remove requested reviewers from a pull request.
 
 ## checks\_read
 
-Read checks for one target in an Origin-hosted repository: a pull request, commit, suite, or run. A top-level ref, sha, or pull number is accepted in place of target. Rollup covers materialized check runs on the current page only and is omitted when nextPageToken is present. Does not fetch external provider logs.
+Read checks for one target in an Origin-hosted repository: a pull request, commit, suite, or run. A top-level ref, sha, or pull number is accepted in place of target. Rollup covers materialized check runs on the current page only and is omitted when nextPageToken is present. A run with isRerequestable can be run again with rerun\_checks. Does not fetch external provider logs.
 
 - **Access:** Read-only
 - **Asks for confirmation:** No
@@ -968,11 +1030,11 @@ Read checks for one target in an Origin-hosted repository: a pull request, commi
 | `owner`               | string | Yes      | Origin namespace (owner) slug, taken from list\_namespaces or an earlier Origin result. A GitHub owner or org name is not an Origin namespace unless list\_namespaces returns it. |
 | `name`                | string | Yes      | Origin repository name within that namespace                                                                                                                                      |
 | `target`              | object | Yes      |                                                                                                                                                                                   |
-| `target.type`         | string | Yes      |                                                                                                                                                                                   |
-| `target.number`       | number | No       |                                                                                                                                                                                   |
-| `target.sha`          | string | No       |                                                                                                                                                                                   |
-| `target.checkSuiteId` | string | No       |                                                                                                                                                                                   |
-| `target.checkRunId`   | string | No       |                                                                                                                                                                                   |
+| `target.type`         | string | Yes      | pull\_request, commit, suite, or run                                                                                                                                              |
+| `target.number`       | number | No       | Pull request number, for a pull\_request target                                                                                                                                   |
+| `target.sha`          | string | No       | Commit SHA, for a commit target                                                                                                                                                   |
+| `target.checkSuiteId` | string | No       | Check suite id, for a suite target                                                                                                                                                |
+| `target.checkRunId`   | string | No       | Check run id, for a run target                                                                                                                                                    |
 | `pageSize`            | number | No       |                                                                                                                                                                                   |
 | `pageToken`           | string | No       |                                                                                                                                                                                   |
 
@@ -985,6 +1047,36 @@ Read checks for one target in an Origin-hosted repository: a pull request, commi
 ### checks\_read returns
 
 `rollupStatus`, `failing` (paged), `suites` (paged), `runs` (paged), `nextPageToken`
+
+## rerun\_checks
+
+Ask the CI app that reported a check run to run it again. Use it after checks\_read shows a failure that looks like infrastructure trouble or a flaky test, not a problem in the change; investigate instead of re-running a check the change breaks or one whose re-run failed too. target takes the same shapes as checks\_read. A run target re-requests that one run. A pull\_request, commit, or suite target re-requests every run there that checks\_read lists in failing and whose app declared it re-requestable (isRerequestable), at most 20 per call. Origin re-requests a run only when it is completed, is the latest run of its check, and is on the current head of an open pull request, with one re-request outstanding per run at a time. rerequested lists the runs this call re-requested: each reads status rerequested, which is pending and blocks a merge that requires it, until its app posts a new run, so follow it with checks\_read. skipped lists the failing runs this call did not re-request, each with a message and a reason: not\_rerequestable when its app does not accept re-runs, otherwise the error category Origin refused it with. truncated means the lists leave failing runs out; call again while calls keep re-requesting runs. For a run target, a refusal is the tool's error: not\_found, or conflict when the run is still running, its app does not accept re-runs, it already has a re-request outstanding, or it is not on the current head of an open pull request. Other targets stop at a refusal that would repeat for every run, such as a permission or quota error or a commit that is not the current head of an open pull request; it is the tool's error when nothing was re-requested. Needs repository contents write, the same access as pushing.
+
+- **Access:** Writes content other people see
+- **Asks for confirmation:** No
+- **On the read-only endpoint:** No
+- **Required scopes:** `repository:contents:write`, `repository:checks:read`, `repository:pull_requests:read`
+
+### rerun\_checks parameters
+
+| Name                  | Type   | Required | Description                                                                                                                                                                       |
+| --------------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `owner`               | string | Yes      | Origin namespace (owner) slug, taken from list\_namespaces or an earlier Origin result. A GitHub owner or org name is not an Origin namespace unless list\_namespaces returns it. |
+| `name`                | string | Yes      | Origin repository name within that namespace                                                                                                                                      |
+| `target`              | object | Yes      |                                                                                                                                                                                   |
+| `target.type`         | string | Yes      | pull\_request, commit, suite, or run                                                                                                                                              |
+| `target.number`       | number | No       | Pull request number, for a pull\_request target                                                                                                                                   |
+| `target.sha`          | string | No       | Commit SHA, for a commit target                                                                                                                                                   |
+| `target.checkSuiteId` | string | No       | Check suite id, for a suite target                                                                                                                                                |
+| `target.checkRunId`   | string | No       | Check run id, for a run target                                                                                                                                                    |
+
+### rerun\_checks limits
+
+- `target.type` is one of `pull_request`, `commit`, `suite`, `run`.
+
+### rerun\_checks returns
+
+`rerequested` (at most 20), `skipped` (at most 100), `reason`, `message`, `truncated`
 
 ## list\_rulesets
 
@@ -1004,7 +1096,7 @@ List the rulesets on an Origin-hosted repository as summaries: id, name, kind, e
 
 ### list\_rulesets returns
 
-`rulesets` (at most 100), `id`, `name`, `kind`, `enforcement`, `includedRefNames` (at most 64), `excludedRefNames` (at most 64), `ruleTypes` (at most 20), `bypassActorCount`, `truncated`
+`rulesets` (at most 100), `id`, `name`, `kind`, `enforcement`, `includedRefNames` (at most 64), `excludedRefNames` (at most 64), `ruleTypes` (at most 50), `bypassActorCount`, `truncated`
 
 ## get\_ruleset
 
@@ -1025,7 +1117,7 @@ Read one ruleset on an Origin-hosted repository by its id from list\_rulesets: n
 
 ### get\_ruleset returns
 
-`id`, `name`, `description`, `kind`, `enforcement`, `includedRefNames` (at most 64), `excludedRefNames` (at most 64), `rules` (at most 20), `ruleType`, `parameters`, `bypassActors` (at most 15), `bypassMode`
+`id`, `name`, `description`, `kind`, `enforcement`, `includedRefNames` (at most 64), `excludedRefNames` (at most 64), `rules` (at most 50), `ruleType`, `parameters`, `bypassActors` (at most 100), `bypassMode`
 
 ## get\_repository\_access
 

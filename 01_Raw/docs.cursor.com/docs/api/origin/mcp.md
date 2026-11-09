@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/mcp
-fetched_at: 2026-10-26T05:39:59.171928+00:00
+fetched_at: 2026-11-09T07:30:16.028085+00:00
 fetch_method: mintlify_md
 ---
 
@@ -61,7 +61,7 @@ A tool that succeeds returns its data as JSON in the text content and again as t
 
 ## Pull request attachments
 
-Images and recordings pasted into a pull request description, review, or comment appear in `pull_request_read` as upload URLs on cursor.com. Those URLs need a signed-in browser, so an agent fetches one with `get_pull_request_attachment`, naming the pull request and the URL exactly as it was returned. The server fetches only the pull request page's own upload URLs, only when the URL appears in that pull request's text, and only for a caller who can read the pull request. Small images come back inline; larger images, recordings, and other files come back as a short-lived URL the agent can fetch without further credentials. The size limit is in the [tool reference](https://cursor.com/docs/api/origin/mcp/tools.md#get_pull_request_attachment).
+Images and recordings pasted into a pull request description, review, or comment appear in `pull_request_read` as upload URLs on cursor.com, and the media a cloud agent attaches to its own pull request appears as artifact share links and agent artifact pages on cursor.com. Those URLs need a signed-in browser or redirect through one, so an agent fetches one with `get_pull_request_attachment`, naming the pull request and the URL exactly as it was returned. The server fetches only those shapes, only when the URL appears in that pull request's text, and only for a caller who can read the pull request; an agent's own artifact page is also served only to a user who can view that agent, for an agent that worked in the same repository. Small images come back inline; larger images, recordings, and other files come back as a short-lived URL the agent can fetch without further credentials. The size limit is in the [tool reference](https://cursor.com/docs/api/origin/mcp/tools.md#get_pull_request_attachment).
 
 ## Pagination
 
