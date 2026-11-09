@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/user_profiles
-fetched_at: 2026-10-26T05:40:18.416251+00:00
+fetched_at: 2026-11-09T07:30:24.350373+00:00
 fetch_method: mintlify_md
 ---
 
@@ -68,6 +68,8 @@ Create User Profile
   - `country: optional string or null`
 
     The country of the entity (not of the platform), as the platform determines it: an ISO 3166-1 alpha-2 code in upper case, for example `US`. Only the form, two uppercase ASCII letters, is checked.
+
+    pattern: ^[A-Z]{2}$
 
   - `email_hash: optional string or null`
 
@@ -1286,6 +1288,8 @@ Update User Profile
 
     The country of the entity (not of the platform), as the platform determines it: an ISO 3166-1 alpha-2 code in upper case, for example `US`. Only the form, two uppercase ASCII letters, is checked.
 
+    pattern: ^[A-Z]{2}$
+
   - `email_hash: optional string or null`
 
     A hash of the entity's email address, computed by the platform. Anthropic treats it as an opaque string and does not prescribe the hash function. 1 to 255 characters.
@@ -2437,6 +2441,8 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
   - `country: optional string or null`
 
     The country of the entity (not of the platform), as the platform determines it: an ISO 3166-1 alpha-2 code in upper case, for example `US`. Only the form, two uppercase ASCII letters, is checked.
+
+    pattern: ^[A-Z]{2}$
 
   - `email_hash: optional string or null`
 

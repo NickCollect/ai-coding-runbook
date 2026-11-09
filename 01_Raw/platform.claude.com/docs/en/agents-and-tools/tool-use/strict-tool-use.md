@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use
-fetched_at: 2026-11-02T07:00:26.605704+00:00
+fetched_at: 2026-11-09T07:30:15.901087+00:00
 fetch_method: mintlify_md
 ---
 
@@ -68,7 +68,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
@@ -429,7 +429,7 @@ The [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use
       curl https://api.anthropic.com/v1/messages \
         -H "content-type: application/json" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
-        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-version: 2026-10-21" \
         -d '{
           "model": "claude-opus-5-5",
           "max_tokens": 1024,
@@ -730,7 +730,7 @@ The [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use
       curl https://api.anthropic.com/v1/messages \
         -H "content-type: application/json" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
-        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-version: 2026-10-21" \
         -d '{
           "model": "claude-opus-5-5",
           "max_tokens": 1024,

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/thinking-tool-workflows
-fetched_at: 2026-10-26T05:39:58.822399+00:00
+fetched_at: 2026-11-09T07:30:15.520400+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,7 +38,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
     <CodeGroup>
       ```bash cURL
       curl https://api.anthropic.com/v1/messages \
-        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-version: 2026-10-21" \
         -H "content-type: application/json" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -d '{

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/rbac_groups/delete
-fetched_at: 2026-10-26T05:40:37.472307+00:00
+fetched_at: 2026-11-09T07:30:32.874672+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,17 +33,19 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ## Returns
 
-- `type: "rbac_group_deleted"`
+- `BetaDeletedRBACGroup object`
 
-  Deleted object type.
+  - `type: "rbac_group_deleted"`
 
-  For RBAC Groups, this is always `"rbac_group_deleted"`.
+    Deleted object type.
 
-  default: rbac_group_deleted
+    For RBAC Groups, this is always `"rbac_group_deleted"`.
 
-- `id: string`
+    default: rbac_group_deleted
 
-  ID of the RBAC Group.
+  - `id: string`
+
+    ID of the RBAC Group.
 
 ## Example
 

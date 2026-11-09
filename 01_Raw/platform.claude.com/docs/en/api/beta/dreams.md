@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/dreams
-fetched_at: 2026-11-02T07:00:45.471753+00:00
+fetched_at: 2026-11-09T07:30:29.733905+00:00
 fetch_method: mintlify_md
 ---
 
@@ -185,15 +185,13 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
       Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-      The [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#limits) lists all the limits on a dream.
-
 - `model: string or BetaDreamModelConfigParam`
 
   The model that runs a dream, given as a model ID or as an object with `id` and `speed`.
 
   In the object form, `speed` can only be `standard`.
 
-  The [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#limits) lists the supported models.
+  The [Availability section of the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#feature-availability) lists the supported models.
 
   - `string`
 
@@ -207,7 +205,7 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
       The ID can be 1 to 256 characters long.
 
-      The [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#limits) lists the supported models.
+      The [Availability section of the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#feature-availability) lists the supported models.
 
       minLength: 1, maxLength: 256
 
@@ -338,8 +336,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
         The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
-
-        The [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#limits) lists all the limits on a dream.
 
   - `instructions: string or null`
 
@@ -824,8 +820,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#limits) lists all the limits on a dream.
-
   - `instructions: string or null`
 
     The guidance given when the dream was created, or `null` if none was given.
@@ -1258,8 +1252,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#limits) lists all the limits on a dream.
-
   - `instructions: string or null`
 
     The guidance given when the dream was created, or `null` if none was given.
@@ -1680,8 +1672,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
         The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
-
-        The [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#limits) lists all the limits on a dream.
 
   - `instructions: string or null`
 
@@ -2105,8 +2095,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#limits) lists all the limits on a dream.
-
   - `instructions: string or null`
 
     The guidance given when the dream was created, or `null` if none was given.
@@ -2385,8 +2373,6 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
         Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-        The [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#limits) lists all the limits on a dream.
-
   - `instructions: string or null`
 
     The guidance given when the dream was created, or `null` if none was given.
@@ -2575,8 +2561,6 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
       Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
 
-      The [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#limits) lists all the limits on a dream.
-
 ### Beta Dream Memory Store Input
 
 - `BetaDreamMemoryStoreInput object`
@@ -2643,7 +2627,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     The ID can be 1 to 256 characters long.
 
-    The [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#limits) lists the supported models.
+    The [Availability section of the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#feature-availability) lists the supported models.
 
     minLength: 1, maxLength: 256
 
@@ -2684,8 +2668,6 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
     The IDs of the sessions whose transcripts the dream reads (`sesn_...`).
 
     Give 1 to 100 IDs, with no duplicates. Each session must be in the same workspace as the dream. Responses list the IDs in sorted order.
-
-    The [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#limits) lists all the limits on a dream.
 
 ### Beta Dream Status
 

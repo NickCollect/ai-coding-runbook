@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/claude-code/routines-fire
-fetched_at: 2026-11-02T07:00:36.578036+00:00
+fetched_at: 2026-11-09T07:30:23.609235+00:00
 fetch_method: mintlify_md
 ---
 
@@ -81,7 +81,7 @@ The request returns once the session is created. It does not stream session outp
 | `anthropic-version` | Yes                  | The [API version](https://platform.claude.com/docs/en/api/versioning), such as `2026-10-21`. The endpoint accepts every version from `2023-06-01` on and behaves the same in each. |
 | `Content-Type`      | When body is present | `application/json`.                                                                                                                                                                |
 
-Older integrations that send an `anthropic-beta: experimental-cc-routine-2026-04-01` header are unaffected: the endpoint accepts requests with and without it.
+The endpoint accepts requests with and without an `anthropic-beta: experimental-cc-routine-2026-04-01` header.
 
 ### Path parameters
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/ruby
-fetched_at: 2026-11-02T07:00:35.961513+00:00
+fetched_at: 2026-11-09T07:30:23.211394+00:00
 fetch_method: mintlify_md
 ---
 
@@ -406,6 +406,7 @@ response = anthropic.request(
   * [Amazon Bedrock (Opus 4.6 and earlier)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy)
   * [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws)
   * [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed)
+  * [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry)
 
   See also [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed).
 </Note>
@@ -415,7 +416,7 @@ The Ruby SDK supports the following platforms:
 * **Claude Models on Google Cloud (Google managed):** `Anthropic::VertexClient`. Requires the `googleauth` gem.
 * **Bedrock:** `Anthropic::BedrockMantleClient`, or `Anthropic::BedrockClient` for the `bedrock-runtime` path. `Anthropic::BedrockMantleClient` requires the `aws-sdk-core` gem; `Anthropic::BedrockClient` requires the `aws-sdk-bedrockruntime` gem.
 * **Claude Platform on AWS:** Part of the main `anthropic` gem (requires the `aws-sdk-core` gem). Provides `Anthropic::AWSClient`. Pass `workspace_id:` to the constructor or set the `ANTHROPIC_AWS_WORKSPACE_ID` environment variable (see [Workspaces](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#workspaces)). Available in beta.
-* **Foundry:** Not currently supported in the Ruby SDK. See [Claude in Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) for supported SDKs.
+* **Foundry:** Part of the main `anthropic` gem. Provides `Anthropic::FoundryClient`. Pass `resource:` and `api_key:` (or `azure_ad_token_provider:` for Microsoft Entra ID) to the constructor, or set the `ANTHROPIC_FOUNDRY_RESOURCE` and `ANTHROPIC_FOUNDRY_API_KEY` environment variables.
 
 Use `Anthropic::BedrockMantleClient` for new projects; `Anthropic::BedrockClient` remains for existing applications using the Bedrock `InvokeModel` API.
 
@@ -423,11 +424,11 @@ The Ruby SDK also supports Claude Models on Google Cloud (Anthropic managed) thr
 
 ## Semantic versioning
 
-Each major version of this SDK sends one API version in the `anthropic-version` header by default, and a new major version comes with each new API version. The first major version that sends `2026-10-21` is 2.0.0; see [Migrating to API version 2026-10-21](https://platform.claude.com/docs/en/api/migration-2026-10-21#upgrade).
-
 This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions.
 
 This package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` type definitions to be non-breaking changes.
+
+Every request to the Claude API uses an API version. With this SDK, your requests use the API version that was current when your SDK’s major version was released, so you move to a new API version by upgrading to a new major version. Version 2.0.0 is the first to use `2026-10-21`. See [Migrating to API version 2026-10-21](https://platform.claude.com/docs/en/api/migration-2026-10-21#upgrade) for how to upgrade.
 
 ## Additional resources
 

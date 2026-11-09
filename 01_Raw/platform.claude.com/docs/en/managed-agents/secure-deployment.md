@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/secure-deployment
-fetched_at: 2026-11-02T07:00:30.563385+00:00
+fetched_at: 2026-11-09T07:30:19.016647+00:00
 fetch_method: mintlify_md
 ---
 
@@ -94,7 +94,7 @@ The examples on this page use a support agent. It reads a customer’s ticket, l
   ```bash cURL
   curl -fsS https://api.anthropic.com/v1/environments \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
@@ -371,7 +371,7 @@ The following sample limits `web_fetch` to `help.example.com` with `allowed_doma
   ```bash cURL
   curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{

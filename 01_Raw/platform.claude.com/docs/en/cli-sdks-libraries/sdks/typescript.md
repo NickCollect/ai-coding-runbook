@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript
-fetched_at: 2026-11-02T07:00:35.801189+00:00
+fetched_at: 2026-11-09T07:30:23.104645+00:00
 fetch_method: mintlify_md
 ---
 
@@ -184,11 +184,14 @@ console.log(finalMessage.content);
 To report an error from a tool back to the model, throw a `ToolError` from the `run` function. Unlike a plain `Error`, `ToolError` accepts content blocks, allowing you to include images or other structured content in the error response:
 
 ```typescript
-import { ToolError } from "@anthropic-ai/sdk/lib/tools/BetaRunnableTool";
+import { betaZodTool } from "@anthropic-ai/sdk/helpers/beta/zod";
+import { ToolError } from "@anthropic-ai/sdk/resources/beta/messages";
+import { z } from "zod";
 
 const screenshotTool = betaZodTool({
   name: "take_screenshot",
   inputSchema: z.object({ url: z.string() }),
+  description: "Take a screenshot of a webpage",
   run: async (input) => {
     if (!isValidUrl(input.url)) {
       throw new ToolError(`Invalid URL: ${input.url}`);
@@ -204,10 +207,12 @@ const screenshotTool = betaZodTool({
         }
       ]);
     }
-    return {
-      type: "image",
-      source: { type: "base64", data: result.screenshot, media_type: "image/png" }
-    };
+    return [
+      {
+        type: "image",
+        source: { type: "base64", data: result.screenshot, media_type: "image/png" }
+      }
+    ];
   }
 });
 ```
@@ -767,6 +772,8 @@ const response = await client.beta.messages.create({
 
   * **Internal tools:** If the application is used solely within a controlled internal environment where the users are trusted, the risk of credential exposure can be mitigated.
   * **Development or debugging purpose:** Enabling this feature temporarily might be acceptable, provided the credentials are short-lived, aren’t also used in production environments, or are frequently rotated.
+
+  Even in these cases, browser support works only if your organization can call the Claude API directly from a browser. Organizations with zero data retention (ZDR) or the Compliance API enabled cannot, and their browser requests fail with a 401 error. See [Browser-based applications](https://platform.claude.com/docs/en/manage-claude/authentication#browser-based-applications).
 </Accordion>
 
 ## Platform integrations
@@ -796,8 +803,6 @@ The TypeScript SDK also supports Claude Models on Google Cloud (Anthropic manage
 
 ## Semantic versioning
 
-Each major version of this SDK sends one API version in the `anthropic-version` header by default, and a new major version comes with each new API version. The first major version that sends `2026-10-21` is 1.0.0; see [Migrating to API version 2026-10-21](https://platform.claude.com/docs/en/api/migration-2026-10-21#upgrade).
-
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backward-incompatible changes may be released as minor versions:
 
 1. Changes that only affect static types, without breaking runtime behavior.
@@ -805,6 +810,8 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 3. Changes that aren’t expected to impact the vast majority of users in practice.
 
 Backward compatibility is taken seriously to ensure you can rely on a smooth upgrade experience.
+
+Every request to the Claude API uses an API version. With this SDK, your requests use the API version that was current when your SDK’s major version was released, so you move to a new API version by upgrading to a new major version. Version 1.0.0 is the first to use `2026-10-21`. See [Migrating to API version 2026-10-21](https://platform.claude.com/docs/en/api/migration-2026-10-21#upgrade) for how to upgrade.
 
 ## Frequently asked questions
 

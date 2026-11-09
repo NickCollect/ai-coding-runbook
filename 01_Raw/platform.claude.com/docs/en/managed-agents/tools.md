@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/tools
-fetched_at: 2026-11-02T07:00:29.229534+00:00
+fetched_at: 2026-11-09T07:30:17.934338+00:00
 fetch_method: mintlify_md
 ---
 
@@ -73,7 +73,7 @@ The following example enables the toolset and disables `web_fetch`:
   ```bash cURL
   curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
@@ -195,11 +195,12 @@ The following example enables the toolset and disables `web_fetch`:
 
   ```php PHP
   use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolset20260401Params;
+  use Anthropic\Beta\Agents\BetaManagedAgentsModel;
   use Anthropic\Beta\Agents\BetaManagedAgentsWebFetchToolConfigParams;
 
   $agent = $client->beta->agents->create(
       name: 'Coding Assistant',
-      model: 'claude-opus-5-5',
+      model: BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
       tools: [
           BetaManagedAgentsAgentToolset20260401Params::with(
               configs: [
@@ -213,7 +214,7 @@ The following example enables the toolset and disables `web_fetch`:
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Coding Assistant",
-    model: "claude-opus-5-5",
+    model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
     tools: [
       {
         type: :agent_toolset_20260401,
@@ -274,22 +275,19 @@ Custom tools are analogous to [user-defined client tools](https://platform.claud
 
 Claude does not run a custom tool itself. It emits a structured request, your code runs the operation, and you return the result to the session.
 
-The following example creates an agent with the built-in toolset and one custom tool, `get_weather`:
+The following example creates an agent with one custom tool, `get_weather`, and no built-in tools:
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
   curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
       "name": "Weather Agent",
       "model": "claude-opus-5-5",
       "tools": [
-        {
-          "type": "agent_toolset_20260401"
-        },
         {
           "type": "custom",
           "name": "get_weather",
@@ -317,7 +315,6 @@ The following example creates an agent with the built-in toolset and one custom 
       name: Weather Agent
       model: claude-opus-5-5
       tools:
-        - type: agent_toolset_20260401
         - type: custom
           name: get_weather
           description: Get current weather for a location
@@ -340,9 +337,6 @@ The following example creates an agent with the built-in toolset and one custom 
       model="claude-opus-5-5",
       tools=[
           {
-              "type": "agent_toolset_20260401",
-          },
-          {
               "type": "custom",
               "name": "get_weather",
               "description": "Get current weather for a location",
@@ -363,7 +357,6 @@ The following example creates an agent with the built-in toolset and one custom 
     name: "Weather Agent",
     model: "claude-opus-5-5",
     tools: [
-      { type: "agent_toolset_20260401" },
       {
         type: "custom",
         name: "get_weather",
@@ -388,7 +381,6 @@ The following example creates an agent with the built-in toolset and one custom 
       Model = BetaManagedAgentsModel.ClaudeOpus5_5,
       Tools =
       [
-          new BetaManagedAgentsAgentToolset20260401Params(),
           new BetaManagedAgentsCustomToolParams
           {
               Name = "get_weather",
@@ -415,8 +407,6 @@ The following example creates an agent with the built-in toolset and one custom 
   		ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5,
   	},
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
-  		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
-  	}, {
   		OfCustom: &anthropic.BetaManagedAgentsCustomToolParams{
   			Name:        "get_weather",
   			Description: "Get current weather for a location",
@@ -444,7 +434,6 @@ The following example creates an agent with the built-in toolset and one custom 
   var agent = client.beta().agents().create(AgentCreateParams.builder()
       .name("Weather Agent")
       .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
-      .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build())
       .addTool(BetaManagedAgentsCustomToolParams.builder()
           .name("get_weather")
           .description("Get current weather for a location")
@@ -461,15 +450,14 @@ The following example creates an agent with the built-in toolset and one custom 
   ```
 
   ```php PHP
-  use Anthropic\Beta\Agents\BetaManagedAgentsAgentToolset20260401Params;
   use Anthropic\Beta\Agents\BetaManagedAgentsCustomToolInputSchema;
   use Anthropic\Beta\Agents\BetaManagedAgentsCustomToolParams;
+  use Anthropic\Beta\Agents\BetaManagedAgentsModel;
 
   $agent = $client->beta->agents->create(
       name: 'Weather Agent',
-      model: 'claude-opus-5-5',
+      model: BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
       tools: [
-          BetaManagedAgentsAgentToolset20260401Params::with(),
           BetaManagedAgentsCustomToolParams::with(
               name: 'get_weather',
               description: 'Get current weather for a location',
@@ -485,9 +473,8 @@ The following example creates an agent with the built-in toolset and one custom 
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Weather Agent",
-    model: "claude-opus-5-5",
+    model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
     tools: [
-      {type: :agent_toolset_20260401},
       {
         type: :custom,
         name: "get_weather",

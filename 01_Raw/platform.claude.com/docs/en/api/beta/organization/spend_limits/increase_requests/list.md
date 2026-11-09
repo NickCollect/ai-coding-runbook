@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/increase_requests/list
-fetched_at: 2026-11-02T07:00:50.621964+00:00
+fetched_at: 2026-11-09T07:30:32.692017+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,7 +60,9 @@ Requests whose requester is no longer a member are excluded.
 
   - `id: string`
 
-  - `actor: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor`
+  - `actor: BetaSpendLimitIncreaseRequestActor`
+
+    Who submitted the increase request.
 
     - `BetaSpendLimitUserActor object`
 
@@ -118,7 +120,9 @@ Requests whose requester is no longer a member are excluded.
 
     format: date-time
 
-  - `resolved_by: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor or null`
+  - `resolved_by: BetaSpendLimitIncreaseRequestResolvedBy or null`
+
+    Who approved or denied the increase request.
 
     - `BetaSpendLimitUserActor object`
 

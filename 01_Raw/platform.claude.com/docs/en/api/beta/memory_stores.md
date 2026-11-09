@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores
-fetched_at: 2026-11-02T07:00:43.993816+00:00
+fetched_at: 2026-11-09T07:30:28.886902+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1594,7 +1594,7 @@ Create a Memory
 
   A path starts with `/` and has 1 to 20 segments. A segment can't be empty and can't be `.` or `..`. A path can't contain control characters, format characters, or the line and paragraph separators U+2028 and U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long.
 
-  minLength: 2, maxLength: 1024
+  minLength: 2, maxLength: 1024, pattern: ^(/[^/ ]+)+$
 
 #### Returns
 
@@ -1670,7 +1670,7 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories \
     -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "content": "content",
-          "path": "xx"
+          "path": "/P"
         }'
 ```
 
@@ -2416,7 +2416,7 @@ Update a Memory
 
   The memory keeps its `id`. A path starts with `/` and has 1 to 20 segments. A segment can't be empty and can't be `.` or `..`. A path can't contain control characters, format characters, or the line and paragraph separators U+2028 and U+2029. It must be in Unicode Normalization Form C and at most 1,024 bytes long. Paths are case-sensitive.
 
-  minLength: 2, maxLength: 1024
+  minLength: 2, maxLength: 1024, pattern: ^(/[^/ ]+)+$
 
 - `precondition: optional BetaManagedAgentsPrecondition`
 
@@ -2429,6 +2429,8 @@ Update a Memory
   - `content_sha256: optional string`
 
     Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
+
+    pattern: ^[a-f0-9]{64}$
 
 #### Returns
 

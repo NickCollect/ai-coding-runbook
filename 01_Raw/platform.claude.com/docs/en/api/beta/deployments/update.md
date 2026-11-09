@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/deployments/update
-fetched_at: 2026-11-02T07:00:43.190472+00:00
+fetched_at: 2026-11-09T07:30:28.413332+00:00
 fetch_method: mintlify_md
 ---
 
@@ -190,6 +190,8 @@ Update Deployment
     - `amount: string`
 
       Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+      pattern: ^(0|[1-9]\d*)$
 
     - `currency: BetaCurrency`
 
@@ -481,7 +483,7 @@ Update Deployment
 
           Full commit SHA to check out.
 
-          minLength: 7, maxLength: 64
+          minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
     - `mount_path: optional string or null`
 
@@ -516,6 +518,8 @@ Update Deployment
     - `memory_store_id: string`
 
       The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+      pattern: ^memstore_[a-zA-Z0-9_]+$
 
     - `access: optional "read_write" or "read_only" or null`
 
@@ -963,7 +967,7 @@ Update Deployment
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
       - `mount_path: optional string or null`
 
@@ -1068,6 +1072,8 @@ Update Deployment
       - `amount: string`
 
         Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+        pattern: ^(0|[1-9]\d*)$
 
       - `currency: BetaCurrency`
 

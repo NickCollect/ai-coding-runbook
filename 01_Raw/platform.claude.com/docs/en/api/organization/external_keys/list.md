@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/external_keys/list
-fetched_at: 2026-11-02T07:00:38.289864+00:00
+fetched_at: 2026-11-09T07:30:24.632136+00:00
 fetch_method: mintlify_md
 ---
 
@@ -76,7 +76,7 @@ Results are ordered by creation time (newest first). Use the
 
   - `geo: string`
 
-    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region this key is used in.
 
   - `provider_config: AWSExternalKeyConfig or GCPExternalKeyConfig or AzureExternalKeyConfig`
 

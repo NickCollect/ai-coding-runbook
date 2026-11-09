@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/organization-webhooks
-fetched_at: 2026-11-02T07:00:30.813100+00:00
+fetched_at: 2026-11-09T07:30:19.289368+00:00
 fetch_method: mintlify_md
 ---
 
@@ -153,7 +153,7 @@ Send the `anthropic-beta: webhooks-2026-10-07` header with every request. The SD
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/webhooks" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: webhooks-2026-10-07"
   ```
 
@@ -253,7 +253,7 @@ This example creates an endpoint that receives both event types:
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/webhooks" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: webhooks-2026-10-07" \
     -H "content-type: application/json" \
     -d '{

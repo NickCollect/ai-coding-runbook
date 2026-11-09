@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/scripting
-fetched_at: 2026-11-02T07:00:35.463790+00:00
+fetched_at: 2026-11-09T07:30:22.897334+00:00
 fetch_method: mintlify_md
 ---
 
@@ -119,7 +119,7 @@ Scripts that call the API with `curl` or another HTTP client can use the credent
 ```bash cURL
 curl https://api.anthropic.com/v1/messages \
   -H "Authorization: Bearer $(ant auth print-credentials --access-token)" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   -H "content-type: application/json" \
   -d '{
     "model": "claude-opus-5-5",

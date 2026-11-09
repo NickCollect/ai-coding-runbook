@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/onboarding
-fetched_at: 2026-11-02T07:00:29.079471+00:00
+fetched_at: 2026-11-09T07:30:17.788862+00:00
 fetch_method: mintlify_md
 ---
 
@@ -68,7 +68,7 @@ Once your agent works as expected:
   ```bash cURL
   curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{

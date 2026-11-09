@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/rbac_groups/members
-fetched_at: 2026-11-02T07:00:51.011697+00:00
+fetched_at: 2026-11-09T07:30:32.925123+00:00
 fetch_method: mintlify_md
 ---
 
@@ -221,19 +221,21 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ### Returns
 
-- `type: "rbac_group_member_deleted"`
+- `BetaDeletedRBACGroupMember object`
 
-  Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
+  - `type: "rbac_group_member_deleted"`
 
-  default: rbac_group_member_deleted
+    Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
 
-- `rbac_group_id: string`
+    default: rbac_group_member_deleted
 
-  ID of the RBAC Group.
+  - `rbac_group_id: string`
 
-- `user_id: string`
+    ID of the RBAC Group.
 
-  ID of the User.
+  - `user_id: string`
+
+    ID of the User.
 
 ### Example
 
@@ -256,6 +258,24 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$RBAC_GROUP_ID/membe
 
 ## Domain types
 
+### Beta Deleted RBAC Group Member
+
+- `BetaDeletedRBACGroupMember object`
+
+  - `type: "rbac_group_member_deleted"`
+
+    Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
+
+    default: rbac_group_member_deleted
+
+  - `rbac_group_id: string`
+
+    ID of the RBAC Group.
+
+  - `user_id: string`
+
+    ID of the User.
+
 ### Beta RBAC Group Member
 
 - `BetaRBACGroupMember object`
@@ -277,24 +297,6 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$RBAC_GROUP_ID/membe
   - `email: string`
 
     Email of the User.
-
-  - `rbac_group_id: string`
-
-    ID of the RBAC Group.
-
-  - `user_id: string`
-
-    ID of the User.
-
-### Member Remove Response
-
-- `MemberRemoveResponse object`
-
-  - `type: "rbac_group_member_deleted"`
-
-    Deleted object type. For RBAC Group Members, this is always `"rbac_group_member_deleted"`.
-
-    default: rbac_group_member_deleted
 
   - `rbac_group_id: string`
 

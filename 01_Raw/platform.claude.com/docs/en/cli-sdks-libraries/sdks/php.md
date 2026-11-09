@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php
-fetched_at: 2026-11-02T07:00:35.932003+00:00
+fetched_at: 2026-11-09T07:30:23.208165+00:00
 fetch_method: mintlify_md
 ---
 
@@ -284,11 +284,11 @@ The PHP SDK also supports Claude Models on Google Cloud (Anthropic managed) thro
 
 ## Semantic versioning
 
-Each major version of this SDK sends one API version by default, and a new major version comes with each new API version. The first major version that sends `2026-10-21` is 1.0.0; see [Switch to 2026-10-21](https://platform.claude.com/docs/en/api/migration-2026-10-21#upgrade).
-
 This package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions.
 
 This package considers improvements to the (non-runtime) PHPDoc type definitions to be non-breaking changes.
+
+Every request to the Claude API uses an API version. With this SDK, your requests use the API version that was current when your SDK’s major version was released, so you move to a new API version by upgrading to a new major version. Version 1.0.0 is the first to use `2026-10-21`. See [Migrating to API version 2026-10-21](https://platform.claude.com/docs/en/api/migration-2026-10-21#upgrade) for how to upgrade.
 
 ## Additional resources
 

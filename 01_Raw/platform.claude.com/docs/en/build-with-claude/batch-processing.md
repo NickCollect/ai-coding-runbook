@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/batch-processing
-fetched_at: 2026-11-02T07:00:25.806009+00:00
+fetched_at: 2026-11-09T07:30:15.393997+00:00
 fetch_method: mintlify_md
 ---
 
@@ -123,17 +123,16 @@ The Batches API offers significant cost savings. All usage is charged at 50 perc
 | Claude Opus 4.7                                                                                                                                                        | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.6                                                                                                                                                        | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.5                                                                                                                                                        | $2.50 / MTok | $12.50 / MTok |
-| Claude Opus 4.1 ([retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | $7.50 / MTok | $37.50 / MTok |
+| Claude Opus 4.1 ([retired, except on Claude Models on Google Cloud (Google managed) and Bedrock](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | $7.50 / MTok | $37.50 / MTok |
 | Claude Opus 4 ([retired, except on Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations))               | $7.50 / MTok | $37.50 / MTok |
 | Claude Sonnet 5.5                                                                                                                                                      | $1 / MTok    | $5 / MTok     |
 | Claude Sonnet 5                                                                                                                                                        | $1 / MTok    | $5 / MTok     |
 | Claude Sonnet 4.6                                                                                                                                                      | $1.50 / MTok | $7.50 / MTok  |
 | Claude Sonnet 4.5                                                                                                                                                      | $1.50 / MTok | $7.50 / MTok  |
-| Claude Sonnet 4 ([retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | $1.50 / MTok | $7.50 / MTok  |
+| Claude Sonnet 4 ([retired, except on Claude Models on Google Cloud (Google managed) and Bedrock](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | $1.50 / MTok | $7.50 / MTok  |
 | Claude Haiku 5.5 (for prompts up to 100,000 tokens)                                                                                                                    | $0.05 / MTok | $0.25 / MTok  |
 | Claude Haiku 5.5 (for prompts over 100,000 tokens)                                                                                                                     | $0.25 / MTok | $1.25 / MTok  |
 | Claude Haiku 4.5                                                                                                                                                       | $0.50 / MTok | $2.50 / MTok  |
-| Claude Haiku 3.5 ([retired, except on Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations))            | $0.40 / MTok | $2 / MTok     |
 
 * **MTok:** Million tokens. $5 / MTok is $5 for every million tokens.
 * **Limited access:** Available only to organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). To request access, apply to the program that covers your use case.
@@ -154,7 +153,7 @@ You can [create a batch](https://platform.claude.com/docs/en/api/messages/batche
   ```bash cURL
   curl https://api.anthropic.com/v1/messages/batches \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "requests": [
@@ -485,7 +484,7 @@ To poll a Message Batch, you’ll need its `id`, which is provided in the respon
   # Check the status; repeat until processing_status is "ended"
   curl "https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -634,7 +633,7 @@ You can list all Message Batches in your Workspace using the [list endpoint](htt
   # perform automatic pagination.)
   curl -s "https://api.anthropic.com/v1/messages/batches?limit=20" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -751,7 +750,7 @@ Results of the batch are available for download at the [`results_url`](https://p
   # Streams the batch's .jsonl results, one result on each line.
   # For per-result handling (retries, validation errors), use the Claude SDK.
   curl "https://api.anthropic.com/v1/messages/batches/msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d/results" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "x-api-key: $ANTHROPIC_API_KEY"
   ```
 
@@ -798,7 +797,7 @@ Results of the batch are available for download at the [`results_url`](https://p
         console.log(`Success! ${result.custom_id}`);
         break;
       case "errored":
-        if (result.result.error.type === "invalid_request_error") {
+        if (result.result.error.error.type === "invalid_request_error") {
           // Request body must be fixed before re-sending request
           console.log(`Validation error: ${result.custom_id}`);
         } else {
@@ -937,7 +936,7 @@ Results of the batch are available for download at the [`results_url`](https://p
     when Anthropic::Models::Messages::MessageBatchSucceededResult
       puts "Success! #{result.custom_id}"
     when Anthropic::Models::Messages::MessageBatchErroredResult
-      if outcome.error.type == :invalid_request
+      if outcome.error.error.type == :invalid_request_error
         puts "Validation error: #{result.custom_id}"
       else
         puts "Server error: #{result.custom_id}"
@@ -974,7 +973,7 @@ You can cancel a Message Batch that is currently processing using the [cancel en
   ```bash cURL
   curl -X POST https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -1086,7 +1085,7 @@ Example of implementing prompt caching in a batch:
   ```bash cURL
   curl https://api.anthropic.com/v1/messages/batches \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "requests": [
@@ -1596,7 +1595,7 @@ A single 300k-token generation can take over an hour to complete, so plan your b
   ```bash cURL
   curl https://api.anthropic.com/v1/messages/batches \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: output-300k-2026-03-24" \
     -H "content-type: application/json" \
     -d '{

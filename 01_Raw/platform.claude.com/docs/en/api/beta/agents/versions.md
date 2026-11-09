@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/agents/versions
-fetched_at: 2026-11-02T07:00:41.520859+00:00
+fetched_at: 2026-11-09T07:30:27.311748+00:00
 fetch_method: mintlify_md
 ---
 
@@ -836,6 +836,8 @@ List Agent Versions
             - `country: optional string or null`
 
               Two-letter ISO 3166-1 country code, uppercase.
+
+              pattern: ^[A-Z]{2}$
 
             - `region: optional string or null`
 

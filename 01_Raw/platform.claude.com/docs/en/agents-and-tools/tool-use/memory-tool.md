@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool
-fetched_at: 2026-11-02T07:00:26.988376+00:00
+fetched_at: 2026-11-09T07:30:16.165724+00:00
 fetch_method: mintlify_md
 ---
 
@@ -148,7 +148,7 @@ Using the memory tool takes two steps:
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",

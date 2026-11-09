@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/errors
-fetched_at: 2026-11-02T07:00:36.291250+00:00
+fetched_at: 2026-11-09T07:30:23.347368+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,6 +18,8 @@ The API follows a predictable HTTP error code format:
 
 * 401 - `authentication_error`: There’s an issue with your [API key](https://platform.claude.com/docs/en/get-api-key) (for example, it’s malformed, revoked, or expired; see [Key expiration](https://platform.claude.com/docs/en/manage-claude/authentication#key-expiration)). On Claude Platform on AWS, this can also indicate a problem with your AWS credentials or SigV4 signature.
 
+  A 401 whose message begins `CORS requests are not allowed for this Organization` is not a problem with your API key. The request included an `Origin` header, which browsers add, and your organization cannot call the Claude API directly from a browser. The message continues `because of custom retention settings` or `because of its settings`. The first appears only for data retention arrangements such as zero data retention (ZDR); the second is the general case, which includes the Compliance API. No change to the browser request fixes it, so send the request from your own back end; see [Browser-based applications](https://platform.claude.com/docs/en/manage-claude/authentication#browser-based-applications).
+
 * 402 - `billing_error`: There’s an issue with your billing or payment information. Check your payment details in the [Claude Console](https://platform.claude.com), or in AWS Marketplace if you’re using Claude Platform on AWS.
 
 * 403 - `permission_error`: Your API key does not have permission to use the specified resource. Check your organization’s access and workspace settings in the [Claude Console](https://platform.claude.com).
@@ -30,9 +32,9 @@ The API follows a predictable HTTP error code format:
 
 * 429 - `rate_limit_error`: Your organization has hit a [rate limit](https://platform.claude.com/docs/en/api/rate-limits), reached its usage tier’s monthly spend cap, or reached a spend limit on the Claude Code workspace. A tier spend-cap 429 has no `retry-after` header and keeps failing until access resumes; see [Reaching your spend cap](https://platform.claude.com/docs/en/api/rate-limits#reaching-your-spend-cap) for how to recognize it.
 
-* 500 - `api_error`: An unexpected error has occurred internal to Anthropic’s systems. Retry the request with exponential backoff; if the error persists, contact support with the [request ID](https://platform.claude.com/docs/en/api/errors#request-id).
+* 500 - `api_error`: An unexpected error has occurred internal to Anthropic’s systems. Retry the request with exponential backoff; if the error persists, contact support with the [request ID](https://platform.claude.com/docs/en/api/errors#request-id). If the error type is `timeout_error` instead, see the 504 entry.
 
-* 504 - `timeout_error`: The request timed out while processing. Consider using the [streaming Messages API](https://platform.claude.com/docs/en/build-with-claude/streaming) for long-running requests. See [Long requests](https://platform.claude.com/docs/en/api/errors#long-requests) for more options.
+* 504 - `timeout_error`: The request timed out while processing. The API also returns `timeout_error` with other status codes, such as a 500 when a request reaches the server’s time limit before the response starts. For long-running Messages API requests, use the [streaming Messages API](https://platform.claude.com/docs/en/build-with-claude/streaming). See [Long requests](https://platform.claude.com/docs/en/api/errors#long-requests) for more options.
 
 * 529 - `overloaded_error`: The API is temporarily overloaded.
 
@@ -95,7 +97,7 @@ The Python and TypeScript SDKs expose the request ID as a `_request_id` property
   # -i prints the response headers, including request-id, before the body
   curl -sS -i https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-sonnet-5",
@@ -536,13 +538,15 @@ tool_choice: type "tool" and "any" are not supported for this model.
 
 ### Computer use tool version not supported
 
-On the Claude API and Claude Models on Google Cloud (Google managed), Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 support [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) only as the `computer_toolset_20260801` toolset. On those platforms, sending any of these models a `tools` entry of the earlier `computer_20251124` or `computer_20250124` type, with that tool’s beta header, returns a 400 `invalid_request_error`. The message names the rejected type, then lists the tool types the model does accept after `Did you mean one of`. For Claude Opus 5.5, it begins:
+Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 return a 400 error for any [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) tool version they don’t accept. On the Claude API, that includes `computer_20251124` with its beta header. They don’t accept `computer_20250124` on any platform. The Claude API’s `invalid_request_error` message names the rejected type and, after `Did you mean one of`, lists the tool types the model accepts. For Claude Opus 5.5, the message begins:
 
 ```text wrap
 'claude-opus-5-5' does not support tool types: computer_20251124.
 ```
 
-The API returns the same message for any Anthropic-defined tool type that the requested model doesn’t support. Declare `{"type": "computer_toolset_20260801"}` without the beta header and update your agent loop as described in [Migrate from `computer_20251124`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#migrate-from-computer-20251124). To move from `computer_20250124`, see [Move computer use to the toolset](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#computer-use-toolset) in the Claude Haiku 5.5 migration guide. Earlier models that support the toolset keep accepting `computer_20251124`, as do Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 on Amazon Bedrock.
+The Claude API returns the same message for any Anthropic-defined tool type that the requested model doesn’t support. Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 support computer use through the `computer_toolset_20260801` toolset. Declare `{"type": "computer_toolset_20260801"}` without the beta header and update your agent loop as described in [Migrate from `computer_20251124`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#migrate-from-computer-20251124). To move from `computer_20250124`, see [Move computer use to the toolset](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#computer-use-toolset) in the Claude Haiku 5.5 migration guide.
+
+On Amazon Bedrock, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 also accept the `computer_20251124` tool with the `computer-use-2025-11-24` beta header. [Earlier tool versions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions) lists the models to use with each earlier version.
 
 ### Thinking block bound to a different conversation
 

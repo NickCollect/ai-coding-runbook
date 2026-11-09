@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/permission-policies
-fetched_at: 2026-11-02T07:00:29.393908+00:00
+fetched_at: 2026-11-09T07:30:18.050908+00:00
 fetch_method: mintlify_md
 ---
 
@@ -67,7 +67,7 @@ When creating an agent, you can apply a policy to every tool in `agent_toolset_2
   ```bash cURL
   curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
@@ -243,7 +243,7 @@ This example connects a GitHub MCP server and allows its tools to run without co
   ```bash cURL
   curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
@@ -475,7 +475,7 @@ Use the `configs` (csharp, go: `Configs`) array to override the default for indi
   ```bash cURL
   curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
@@ -677,7 +677,7 @@ The following example sets `auto` as the default for the agent toolset and for t
   ```bash cURL
   curl -fsSL https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
@@ -1075,7 +1075,7 @@ In the following examples, the tool-use event IDs come from the `stop_reason.eve
   # Allow the tool to run
   curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
@@ -1091,7 +1091,7 @@ In the following examples, the tool-use event IDs come from the `stop_reason.eve
   # Or deny it with an explanation
   curl -fsSL "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{

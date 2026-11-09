@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool
-fetched_at: 2026-11-02T07:00:27.005130+00:00
+fetched_at: 2026-11-09T07:30:16.238525+00:00
 fetch_method: mintlify_md
 ---
 
@@ -68,7 +68,7 @@ You can optionally specify a `max_characters` parameter to control truncation wh
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
@@ -423,7 +423,7 @@ First, your application provides Claude with the text editor tool and a prompt t
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
@@ -623,7 +623,7 @@ Your application should then read the file and return its contents to Claude:
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
@@ -1086,7 +1086,7 @@ Your application should then make the edit and return the result:
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{
       "model": "claude-opus-5-5",
       "max_tokens": 1024,

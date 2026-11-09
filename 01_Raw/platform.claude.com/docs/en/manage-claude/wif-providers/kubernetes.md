@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/wif-providers/kubernetes
-fetched_at: 2026-11-02T07:00:31.269526+00:00
+fetched_at: 2026-11-09T07:30:19.753763+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,19 +12,19 @@ description: Authenticate to the Claude API from self-managed Kubernetes cluster
 
 Self-managed Kubernetes clusters (kubeadm, k3s, OpenShift, and on-premise distributions) sign OIDC JSON Web Tokens (JWTs) for every pod through [projected service account tokens](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#serviceaccount-token-volume-projection). The cluster’s API server acts as the OIDC issuer, and each token’s `sub` claim follows the form `system:serviceaccount:<namespace>:<service-account>`. You can find your cluster’s issuer URL by reading its discovery document:
 
-```bash cURL
+```bash
 kubectl get --raw /.well-known/openid-configuration | jq -r .issuer
 ```
 
 <Note>
-  The mechanism on this page (projected service-account token, cluster API server as the OIDC issuer) is native to Kubernetes itself, so it underlies every Kubernetes distribution. If you run on a managed Kubernetes service, the cloud provider guides walk through where to find the provider-managed issuer URL: [AWS (EKS)](https://platform.claude.com/docs/en/manage-claude/wif-providers/aws#use-eks-projected-service-account-tokens), [Google Cloud (GKE)](https://platform.claude.com/docs/en/manage-claude/wif-providers/gcp), or [Azure (AKS)](https://platform.claude.com/docs/en/manage-claude/wif-providers/azure). If your cluster runs SPIRE, the SPIRE OIDC Discovery Provider is the issuer rather than the cluster API server; see [SPIFFE](https://platform.claude.com/docs/en/manage-claude/wif-providers/spiffe). For any other distribution or a managed provider not listed there, follow this guide and use the issuer URL your cluster reports.
+  The mechanism on this page is native to Kubernetes itself: the pod gets a projected service account token, and the cluster API server acts as the OIDC issuer. Every Kubernetes distribution uses it. If you run on a managed Kubernetes service, the cloud provider guides walk through where to find the provider-managed issuer URL: [AWS (EKS)](https://platform.claude.com/docs/en/manage-claude/wif-providers/aws#use-eks-projected-service-account-tokens), [Google Cloud (GKE)](https://platform.claude.com/docs/en/manage-claude/wif-providers/gcp), or [Azure (AKS)](https://platform.claude.com/docs/en/manage-claude/wif-providers/azure#use-entra-workload-identity-on-aks). If your cluster runs SPIRE, the SPIRE OIDC Discovery Provider is the issuer rather than the cluster API server. See [Use WIF with SPIFFE](https://platform.claude.com/docs/en/manage-claude/wif-providers/spiffe). For any other distribution or a managed provider not listed there, follow this guide and use the issuer URL your cluster reports.
 </Note>
 
 ## Prerequisites
 
-* Familiarity with [WIF concepts](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation#concepts): service accounts, federation issuers, and federation rules.
+* Familiarity with [Workload Identity Federation (WIF) concepts](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation#concepts): service accounts, federation issuers, and federation rules.
 
-* A Kubernetes cluster with the [`--service-account-issuer`](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/) flag configured on the API server. Most distributions set this by default; kubeadm clusters typically use `https://kubernetes.default.svc.cluster.local`. Your platform team can confirm the value if you don’t have direct access to the API server configuration.
+* A Kubernetes cluster with the [`--service-account-issuer`](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/) flag configured on the API server. Most distributions set this by default, and kubeadm clusters typically use `https://kubernetes.default.svc.cluster.local`. Your platform team can confirm the value if you don’t have direct access to the API server configuration.
 
 * One of the following so Anthropic can validate token signatures:
 
@@ -83,7 +83,7 @@ The wizard creates these resources for you. Use the following values whether you
 
 **Federation issuer:** Many self-managed clusters use an issuer URL such as `https://kubernetes.default.svc.cluster.local` that is not reachable from the public internet. If that applies to your cluster, choose the **inline** JWKS source and paste the cluster’s keys. Fetch them from inside the cluster:
 
-```bash cURL
+```bash
 kubectl get --raw /openid/v1/jwks
 ```
 
@@ -100,7 +100,7 @@ Then configure the issuer with the contents of the returned `keys` array (not th
 }
 ```
 
-In `inline` mode the `issuer_url` is only compared against the JWT’s `iss` claim; Anthropic never attempts to reach it. If your issuer is publicly reachable, use `"jwks": {"type": "discovery"}` instead.
+In `inline` mode, Anthropic only compares the `issuer_url` against the JWT’s `iss` claim and never attempts to reach it. If your issuer is publicly reachable, use `"jwks": {"type": "discovery"}` instead.
 
 <Warning>
   With `inline` keys you are responsible for updating the issuer when the cluster rotates its service account signing key. Rotation is rare (typically only during cluster upgrades), but token exchanges fail with a signature error until you push the new JWKS.
@@ -152,7 +152,7 @@ The pod spec in [Configure Kubernetes](https://platform.claude.com/docs/en/manag
 
   curl https://api.anthropic.com/v1/messages \
     -H "authorization: Bearer $ACCESS_TOKEN" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",
@@ -163,7 +163,9 @@ The pod spec in [Configure Kubernetes](https://platform.claude.com/docs/en/manag
 
   ```bash CLI
   # Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
-  # ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
+  # ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE.
+  # For a rule enabled for all workspaces or more than one, set ANTHROPIC_PROFILE
+  # to a federation profile that sets workspace_id.
   ant messages create \
     --model claude-opus-5-5 \
     --max-tokens 1024 \
@@ -297,7 +299,7 @@ The pod spec in [Configure Kubernetes](https://platform.claude.com/docs/en/manag
 
 ## Verify the setup
 
-A successful exchange returns an `access_token` starting with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) in the Claude Console for the deny reason and see [Troubleshoot a failed exchange](https://platform.claude.com/docs/en/manage-claude/wif-reference#troubleshoot-a-failed-exchange). The most common Kubernetes-side cause is a JWKS key mismatch (for `inline` mode, re-fetch with `kubectl get --raw /openid/v1/jwks` and update the issuer).
+A successful exchange returns an `access_token` starting with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) in the Claude Console for the deny reason. Then see [Troubleshoot a failed exchange](https://platform.claude.com/docs/en/manage-claude/wif-reference#troubleshoot-a-failed-exchange). The most common Kubernetes-side cause is a JWKS key mismatch (for `inline` mode, refetch with `kubectl get --raw /openid/v1/jwks` and update the issuer).
 
 ## Scope your rule
 
@@ -308,7 +310,7 @@ A successful exchange returns an `access_token` starting with `sk-ant-oat01-` an
 Lock the rule’s `match` block to the narrowest scope that fits your use case:
 
 * **Pin namespace and service-account name:** Use the full `system:serviceaccount:<namespace>:<name>` value with no trailing `*`.
-* **Always set an audience:** Require `audience` on the rule and set the same value on the pod’s `serviceAccountToken` projection so default-audience tokens are rejected.
+* **Always set an audience:** Require `audience` on the rule and set the same value on the pod’s `serviceAccountToken` projection so Anthropic rejects default-audience tokens.
 * **Use a separate rule for each namespace:** Create a distinct rule and Anthropic service account for each namespace rather than widening one rule.
 * **Scope inline-JWKS issuers to one cluster:** When several clusters share an issuer URL, register each cluster’s JWKS as its own federation issuer and bind rules to that issuer only.
 

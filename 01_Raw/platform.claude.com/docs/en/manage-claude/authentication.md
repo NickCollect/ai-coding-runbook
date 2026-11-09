@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/authentication
-fetched_at: 2026-11-02T07:00:25.281307+00:00
+fetched_at: 2026-11-09T07:30:14.887736+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,11 +12,11 @@ description: Authenticate to the Claude API with API keys, Workload Identity Fed
 
 The Claude API supports three ways to authenticate requests:
 
-| Method                                                                                                                        | Credential                                                                                              | Best for                                                                                                                                        |
-| ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| [API key](https://platform.claude.com/docs/en/manage-claude/authentication#api-keys)                                          | Static `sk-ant-api...` secret sent as a bearer token in the `Authorization` header                      | Local development, prototyping, scripts, and servers where you control secret storage                                                           |
-| [Workload Identity Federation](https://platform.claude.com/docs/en/manage-claude/authentication#workload-identity-federation) | Short-lived bearer token exchanged from your identity provider’s identity token                         | Production workloads on cloud platforms (AWS, Google Cloud, Azure), CI/CD pipelines, and Kubernetes, where you want to eliminate static secrets |
-| [App Attest](https://platform.claude.com/docs/en/manage-claude/authentication#app-attest)                                     | Short-lived access token issued to a genuine, attested installation of your registered iOS or macOS app | iOS and macOS apps distributed to end users, where the app calls the Claude API directly with no back end or proxy                              |
+| Method                                                                                                                              | Credential                                                                                              | Best for                                                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [API key](https://platform.claude.com/docs/en/manage-claude/authentication#api-keys)                                                | Static `sk-ant-api...` secret sent as a bearer token in the `Authorization` header                      | Local development, prototyping, scripts, and servers where you control secret storage                                                               |
+| [Workload Identity Federation (WIF)](https://platform.claude.com/docs/en/manage-claude/authentication#workload-identity-federation) | Short-lived bearer token exchanged from your identity provider’s identity token                         | Production workloads on cloud platforms (AWS, Google Cloud, and Azure), CI/CD pipelines, and Kubernetes, where you want to eliminate static secrets |
+| [App Attest](https://platform.claude.com/docs/en/manage-claude/authentication#app-attest)                                           | Short-lived access token issued to a genuine, attested installation of your registered iOS or macOS app | iOS and macOS apps distributed to end users, where the app calls the Claude API directly with no back end or proxy                                  |
 
 API keys and Workload Identity Federation grant the same access to Claude API endpoints. Choose API keys to get started quickly: a personal key for your own development, or a service account key for anything shared. Move to Workload Identity Federation when your workload already has a platform-issued identity you can federate. Use App Attest for iOS and macOS apps you distribute to end users.
 
@@ -38,7 +38,7 @@ Personal keys and service account keys are identity-backed: each belongs to a us
 
 Use a personal key for your own development and scripts. A shared personal key acts as one person and breaks when they leave. For shared or automated workloads (CI, production services), have an organization admin create a service account so the workload has its own identity.
 
-Workspace API keys still work but should be considered legacy; identity-backed keys or [Workload Identity Federation](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation) are preferred. To migrate, see [Replacing workspace API keys](https://platform.claude.com/docs/en/manage-claude/authentication#replacing-workspace-api-keys).
+Workspace API keys work but are legacy. Prefer identity-backed keys or [Workload Identity Federation](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation). To migrate, see [Replacing workspace API keys](https://platform.claude.com/docs/en/manage-claude/authentication#replacing-workspace-api-keys).
 
 ### Create and use a key
 
@@ -48,19 +48,19 @@ Workspace API keys still work but should be considered legacy; identity-backed k
 ```http
 POST /v1/messages
 Authorization: Bearer YOUR_API_KEY
-anthropic-version: 2023-06-01
+anthropic-version: 2026-10-21
 content-type: application/json
 ```
 
-The legacy `x-api-key: YOUR_API_KEY` header is still supported in place of `Authorization`.
+You can also send the key in the legacy `x-api-key: YOUR_API_KEY` header in place of `Authorization`.
 
-Store API keys in a secrets manager, rotate them periodically, and disable or delete any key you suspect has leaked. On the [API keys](https://platform.claude.com/settings/keys) page in the Claude Console, **Disable** is reversible (the Admin API reports the key’s `status` as `"inactive"`, and **Re-enable** returns it to `"active"`), whereas **Delete** is permanent: the key is archived and still appears in [List API Keys](https://platform.claude.com/docs/en/api/organization/api_keys/list) with `status: "archived"`. Expired keys can only be deleted. You can also set an [expiration](https://platform.claude.com/docs/en/manage-claude/authentication#key-expiration) when you create a key to limit how long a leaked credential stays usable.
+Store API keys in a secrets manager, rotate them periodically, and disable or delete any key you suspect has leaked. On the [API keys](https://platform.claude.com/settings/keys) page in the Claude Console, **Disable** is reversible (the Admin API reports the key’s `status` as `"inactive"`, and **Re-enable** returns it to `"active"`), whereas **Delete** is permanent: the key is archived and still appears in [List API Keys](https://platform.claude.com/docs/en/api/organization/api_keys/list) with `status: "archived"`. Expired keys can only be deleted. You can also set an [expiration](https://platform.claude.com/docs/en/manage-claude/authentication#key-expiration) when you create a key to limit how long a leaked credential stays usable. To limit where a leaked key works, turn on [IP allowlisting](https://platform.claude.com/docs/en/manage-claude/ip-allowlist).
 
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",
@@ -87,8 +87,6 @@ Store API keys in a secrets manager, rotate them periodically, and disable or de
   ```
 
   ```csharp C#
-  using Anthropic;
-
   AnthropicClient client = new() { ApiKey = "my-anthropic-api-key" };
   // Or, with ANTHROPIC_API_KEY set in the environment:
   // AnthropicClient client = new();
@@ -96,14 +94,11 @@ Store API keys in a secrets manager, rotate them periodically, and disable or de
 
   ```go Go
   client := anthropic.NewClient(
-  	option.WithAPIKey("sk-ant-api03-..."), // defaults to os.LookupEnv("ANTHROPIC_API_KEY")
+  	option.WithAPIKey("my-anthropic-api-key"), // defaults to os.LookupEnv("ANTHROPIC_API_KEY")
   )
   ```
 
   ```java Java
-  import com.anthropic.client.AnthropicClient;
-  import com.anthropic.client.okhttp.AnthropicOkHttpClient;
-
   // Explicit
   AnthropicClient client = AnthropicOkHttpClient.builder()
       .apiKey("my-anthropic-api-key")
@@ -143,7 +138,7 @@ You can find a workspace’s ID in the **ID** column on the [Workspaces](https:/
   # Omit the anthropic-workspace-id header for a key scoped to one workspace.
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-workspace-id: wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ" \
     -H "content-type: application/json" \
     -d '{
@@ -307,8 +302,8 @@ You can find a workspace’s ID in the **ID** column on the [Workspaces](https:/
   message = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
-    messages: [{role: "user", content: "Hello, Claude"}],
-    request_options: {extra_headers: {"anthropic-workspace-id" => "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"}}
+    messages: [{ role: "user", content: "Hello, Claude" }],
+    request_options: { extra_headers: { "anthropic-workspace-id" => "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ" } }
   )
 
   puts message.content
@@ -334,7 +329,7 @@ Workload Identity Federation selects a workspace at token exchange instead; see 
 
 ### Key expiration
 
-When you create an API key from the [API keys](https://platform.claude.com/settings/keys) page in the Claude Console, you choose an expiration: a preset (3 hours, 1 day, 7 days, or 30 days), a custom duration, or **Never** for keys you store in a secrets manager and rotate yourself. If your organization has a maximum expiration policy, the Console limits presets and custom durations to the policy maximum, and **Never** is unavailable. Existing keys keep their current behavior; expiration is set at creation time and cannot be changed afterward. The same expiration choice applies when you [create an Admin API key](https://platform.claude.com/docs/en/manage-claude/admin-api-keys) in the Claude Console.
+When you create an API key from the [API keys](https://platform.claude.com/settings/keys) page in the Claude Console, you choose an expiration: a preset (3 hours, 1 day, 7 days, or 30 days), a custom duration, or **Never** for keys you store in a secrets manager and rotate yourself. If your organization has a maximum expiration policy, the Console limits presets and custom durations to the policy maximum, and **Never** is unavailable. Expiration is set at creation time and cannot be changed afterward. The same expiration choice applies when you [create an Admin API key](https://platform.claude.com/docs/en/manage-claude/admin-api-keys) in the Claude Console.
 
 Anthropic emails the key’s creator as the expiration approaches: 7 days before expiration for keys created with a lifetime of at least 14 days, and 1 day before for keys with a lifetime of at least 7 days. Keys with shorter lifetimes expire without a warning email.
 
@@ -346,7 +341,7 @@ Expiration limits the lifetime of a leaked credential, but it is not a substitut
 
 ### Replacing workspace API keys
 
-If you have a workspace key, you may want to replace it with [Workload Identity Federation](https://platform.claude.com/docs/en/manage-claude/wif-reference) or a personal or service account key. This provides better security and observability.
+If you have a workspace key, you might want to replace it with [Workload Identity Federation](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation) or a personal or service account key. This provides better security and observability.
 
 See the [WIF reference](https://platform.claude.com/docs/en/manage-claude/wif-reference) for details on configuring Workload Identity Federation, which is preferred over long-lived keys.
 
@@ -356,7 +351,17 @@ To replace a workspace key with a personal or service account key:
 2. **Create a service account** if necessary. You might have to ask an organization admin to create one on the [Service accounts](https://platform.claude.com/settings/service-accounts) page (`platform.claude.com/settings/service-accounts`) in the Claude Console and add it to the relevant workspace.
 3. **Create the new key.** Create it specifically for the integration’s workspace unless the integration needs multiple workspaces.
 4. **Deploy the new key.** Replace the old key wherever the integration reads it, typically the `ANTHROPIC_API_KEY` environment variable or a secrets manager entry. For a key that isn’t scoped to a workspace, also send the `anthropic-workspace-id` header as shown in [Select a workspace](https://platform.claude.com/docs/en/manage-claude/authentication#select-a-workspace).
-5. **Delete the old key.** Confirm that requests succeed, then delete the workspace key on the [API keys page](https://platform.claude.com/settings/keys) in the Claude Console.
+5. **Delete the old key.** Confirm that requests succeed, then delete the workspace key on the [API keys](https://platform.claude.com/settings/keys) page in the Claude Console.
+
+### Browser-based applications
+
+Call the Claude API from your own back end, not from code that runs in your users’ browsers. Anyone who uses a webpage can read an API key in that page’s code. Typically, your web front end calls your back end, which holds the key and calls the Claude API.
+
+A request sent directly from a browser is a cross-origin (CORS) request. The API accepts these requests only when they include the `anthropic-dangerous-direct-browser-access: true` header, which the TypeScript SDK sends when you set `dangerouslyAllowBrowser` to `true`. For the cases where exposing a key this way is acceptable, see [Browser usage](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript#runtime-support) in the TypeScript SDK guide.
+
+Organizations that have [zero data retention (ZDR)](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#zero-data-retention-zdr-scope) or the [Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api-access#set-up-the-compliance-api) enabled cannot call the API directly from a browser, even with that header. Other organization settings can have the same effect, and no setting allows browser requests for these organizations. The API returns a 401 `authentication_error` whose message begins `CORS requests are not allowed for this Organization`, even though the API key is valid. A Claude Console organization linked to a Claude Enterprise parent organization inherits the Compliance API setting from the parent. The restriction can therefore apply even when your Claude Console settings show no Compliance API section.
+
+The restriction applies only to requests that include an `Origin` header, which browsers add and server-side HTTP clients normally do not. Requests from your own back end are not affected. If your back end forwards requests that start in a browser, have it create a new request to the Claude API. Don’t pass the browser’s request through. That request still includes the browser’s `Origin` header, and the API rejects it the same way.
 
 ## Workload Identity Federation
 

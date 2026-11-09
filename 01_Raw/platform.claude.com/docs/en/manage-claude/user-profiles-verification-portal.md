@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/user-profiles-verification-portal
-fetched_at: 2026-11-02T07:00:30.907376+00:00
+fetched_at: 2026-11-09T07:30:19.347341+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,7 +26,7 @@ The call returns a `404` if creating enrollment links isn’t enabled for your o
   ```bash cURL
   curl https://api.anthropic.com/v1/user_profiles/uprof_011CZkZCu8hGbp5mYRQgUmz9/action_urls \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{"action": {"type": "enroll_end_user"}}'
   ```
@@ -147,7 +147,7 @@ Anyone who has the link can use it until it expires, so give it only to the end 
 
 If you’re using Claude Platform on AWS, create the link with `POST /v1/user_profiles/{id}/enrollment_url` instead, and send the `anthropic-beta: user-profiles-2026-08-18` header. That request takes no body, and the response has the same `url` and `expires_at` fields. In the SDK and the CLI, that call is in the beta namespace: `client.beta.user_profiles.create_enrollment_url()` (typescript: `client.beta.userProfiles.createEnrollmentURL()`; csharp: `client.Beta.UserProfiles.CreateEnrollmentUrl()`; go: `client.Beta.UserProfiles.NewEnrollmentURL()`; java: `client.beta().userProfiles().createEnrollmentUrl()`; php: `$client->beta->userProfiles->createEnrollmentURL()`; cli: `ant beta:user-profiles create-enrollment-url`).
 
-`POST /v1/user_profiles/{id}/action_urls` is not available on Microsoft Foundry.
+If your inference runs on a Microsoft Foundry deployment hosted on Anthropic, create the link from the organization on the Claude API that created the profile. `POST /v1/user_profiles/{id}/action_urls` is not available on Microsoft Foundry.
 
 ## What the end customer sees
 
@@ -198,7 +198,7 @@ To see which programs apply to a profile, [retrieve the profile](https://platfor
 
 The end customer can see the linked profile under **Linked accounts** in the portal.
 
-If your inference runs on Claude in Amazon Bedrock or Claude Models on Google Cloud (Google managed), you have to link your own accounts too. Programs apply to requests from an AWS account or Google Cloud project only after you link it to the Anthropic organization that creates your profiles. See [Attribute requests on Amazon Bedrock and Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/manage-claude/user-profiles#attribute-requests-on-amazon-bedrock-and-google-cloud).
+If your inference runs on Claude Models on Google Cloud (Google managed) or Claude in Amazon Bedrock, you have to link your own accounts too. Programs apply to requests from an AWS account or Google Cloud project only after you link it to the Anthropic organization that creates your profiles. See [Attribute requests on Claude Models on Google Cloud (Google managed) and Amazon Bedrock](https://platform.claude.com/docs/en/manage-claude/user-profiles#attribute-requests-on-amazon-bedrock-and-google-cloud).
 
 ## Next steps
 

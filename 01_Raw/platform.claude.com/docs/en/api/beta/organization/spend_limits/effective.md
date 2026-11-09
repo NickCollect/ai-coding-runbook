@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/effective
-fetched_at: 2026-11-02T07:00:50.603748+00:00
+fetched_at: 2026-11-09T07:30:32.642318+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,7 +35,7 @@ organizations.
 
   Opaque cursor from a previous response's `next_page` field.
 
-- `period: optional array of "daily" or "monthly" or "weekly"`
+- `period: optional array of BetaSpendLimitPeriod`
 
   Restrict the report to these limit periods. Omit to return one row per period each member resolves a spend limit for.
 

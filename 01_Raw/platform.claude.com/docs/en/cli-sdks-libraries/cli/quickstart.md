@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart
-fetched_at: 2026-11-02T07:00:35.765477+00:00
+fetched_at: 2026-11-09T07:30:22.906495+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,7 +27,7 @@ Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML i
 
 ## Installation
 
-<Tabs>
+<Tabs noDeepLinks>
   <Tab title="Homebrew (macOS)">
     ```bash
     brew install anthropics/tap/ant
@@ -38,7 +38,7 @@ Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML i
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=2.4.0
+    VERSION=2.7.1
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     case $(uname -m) in
       x86_64) ARCH=amd64 ;;
@@ -51,14 +51,14 @@ Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML i
     You can find all releases on the [GitHub releases page](https://github.com/anthropics/anthropic-cli/releases).
   </Tab>
 
-  <Tab title="Go">
-    You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
+  <Tab title="go install">
+    You can also install the CLI from source with `go install`, which requires Go 1.26.10 or later.
 
     ```bash
     go install github.com/anthropics/anthropic-cli/v2/cmd/ant@latest
     ```
 
-    The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn’t already:
+    `go install` places the binary in `$(go env GOPATH)/bin`. Add that directory to your `PATH` if it isn’t already there:
 
     ```bash
     export PATH="$PATH:$(go env GOPATH)/bin"

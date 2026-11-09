@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/update
-fetched_at: 2026-11-02T07:00:43.797010+00:00
+fetched_at: 2026-11-09T07:30:28.760413+00:00
 fetch_method: mintlify_md
 ---
 
@@ -171,7 +171,7 @@ Update a Credential
 
       The new OAuth access token to replace the stored one.
 
-      minLength: 1, maxLength: 8192
+      minLength: 1, maxLength: 8192, pattern: ^[^\x00-\x1f\x7f]*$
 
     - `expires_at: optional string or null`
 
@@ -239,7 +239,7 @@ Update a Credential
 
       The new static bearer token to replace the stored one.
 
-      minLength: 1, maxLength: 8192
+      minLength: 1, maxLength: 8192, pattern: ^[^\x00-\x1f\x7f]*$
 
   - `BetaManagedAgentsEnvironmentVariableUpdateParams object`
 
@@ -285,7 +285,7 @@ Update a Credential
 
       The new secret value to replace the stored one.
 
-      minLength: 1, maxLength: 4096
+      minLength: 1, maxLength: 4096, pattern: ^[^\x00-\x1f\x7f]*$
 
 - `display_name: optional string or null`
 

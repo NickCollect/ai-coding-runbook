@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools
-fetched_at: 2026-11-02T07:00:26.636497+00:00
+fetched_at: 2026-11-09T07:30:15.929755+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,11 +39,11 @@ Here’s how to handle the `pause_turn` stop reason:
   # the turn by re-sending the request with the assistant content appended to messages.
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",
-      "max_tokens": 1024,
+      "max_tokens": 4096,
       "messages": [
         {
           "role": "user",
@@ -56,10 +56,10 @@ Here’s how to handle the `pause_turn` stop reason:
 
   ```bash CLI
   # Initial request. If "stop_reason" in the output is "pause_turn", re-run with
-  # the assistant content appended to messages (see the SDK tabs).
+  # the assistant content appended to messages.
   ant messages create <<'YAML'
   model: claude-opus-5-5
-  max_tokens: 1024
+  max_tokens: 4096
   tools:
     - {type: web_search_20250305, name: web_search, max_uses: 10}
   messages:
@@ -73,7 +73,7 @@ Here’s how to handle the `pause_turn` stop reason:
   # Initial request with web search
   response = client.messages.create(
       model="claude-opus-5-5",
-      max_tokens=1024,
+      max_tokens=4096,
       messages=[
           {
               "role": "user",
@@ -97,7 +97,7 @@ Here’s how to handle the `pause_turn` stop reason:
       # Send the continuation request
       continuation = client.messages.create(
           model="claude-opus-5-5",
-          max_tokens=1024,
+          max_tokens=4096,
           messages=messages,
           tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 10}],
       )
@@ -113,7 +113,7 @@ Here’s how to handle the `pause_turn` stop reason:
   // Initial request with web search
   const response = await client.messages.create({
     model: "claude-opus-5-5",
-    max_tokens: 1024,
+    max_tokens: 4096,
     messages: [
       {
         role: "user",
@@ -145,7 +145,7 @@ Here’s how to handle the `pause_turn` stop reason:
     // Send the continuation request
     const continuation = await client.messages.create({
       model: "claude-opus-5-5",
-      max_tokens: 1024,
+      max_tokens: 4096,
       messages,
       tools: [
         {
@@ -168,7 +168,7 @@ Here’s how to handle the `pause_turn` stop reason:
   var parameters = new MessageCreateParams
   {
       Model = Model.ClaudeOpus5_5,
-      MaxTokens = 1024,
+      MaxTokens = 4096,
       Messages = [
           new UserMessageParam
           {
@@ -186,7 +186,7 @@ Here’s how to handle the `pause_turn` stop reason:
       var continuationParams = new MessageCreateParams
       {
           Model = Model.ClaudeOpus5_5,
-          MaxTokens = 1024,
+          MaxTokens = 4096,
           Messages = [
               new UserMessageParam
               {
@@ -220,7 +220,7 @@ Here’s how to handle the `pause_turn` stop reason:
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
   	Model:     anthropic.ModelClaudeOpus5_5,
-  	MaxTokens: 1024,
+  	MaxTokens: 4096,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Search for comprehensive information about quantum computing breakthroughs in 2025")),
   	},
@@ -234,7 +234,7 @@ Here’s how to handle the `pause_turn` stop reason:
   	// Pass the paused response back as-is so Claude can continue the turn
   	continuation, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
   		Model:     anthropic.ModelClaudeOpus5_5,
-  		MaxTokens: 1024,
+  		MaxTokens: 4096,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Search for comprehensive information about quantum computing breakthroughs in 2025")),
   			response.ToParam(),
@@ -259,7 +259,7 @@ Here’s how to handle the `pause_turn` stop reason:
 
       MessageCreateParams params = MessageCreateParams.builder()
           .model(Model.CLAUDE_OPUS_5_5)
-          .maxTokens(1024L)
+          .maxTokens(4096L)
           .addUserMessage("Search for comprehensive information about quantum computing breakthroughs in 2025")
           .addTool(WebSearchTool20250305.builder()
               .maxUses(10L)
@@ -272,7 +272,7 @@ Here’s how to handle the `pause_turn` stop reason:
               && response.stopReason().get().equals(StopReason.PAUSE_TURN)) {
           MessageCreateParams continuationParams = MessageCreateParams.builder()
               .model(Model.CLAUDE_OPUS_5_5)
-              .maxTokens(1024L)
+              .maxTokens(4096L)
               .addUserMessage("Search for comprehensive information about quantum computing breakthroughs in 2025")
               .addMessage(response)
               .addTool(WebSearchTool20250305.builder()
@@ -292,7 +292,7 @@ Here’s how to handle the `pause_turn` stop reason:
   $client = new Client();
 
   $response = $client->messages->create(
-      maxTokens: 1024,
+      maxTokens: 4096,
       messages: [
           [
               'role' => 'user',
@@ -322,7 +322,7 @@ Here’s how to handle the `pause_turn` stop reason:
       ];
 
       $continuation = $client->messages->create(
-          maxTokens: 1024,
+          maxTokens: 4096,
           messages: $messages,
           model: 'claude-opus-5-5',
           tools: [
@@ -345,7 +345,7 @@ Here’s how to handle the `pause_turn` stop reason:
 
   response = client.messages.create(
     model: Anthropic::Model::CLAUDE_OPUS_5_5,
-    max_tokens: 1024,
+    max_tokens: 4096,
     messages: [
       {
         role: "user",
@@ -376,7 +376,7 @@ Here’s how to handle the `pause_turn` stop reason:
 
     continuation = client.messages.create(
       model: Anthropic::Model::CLAUDE_OPUS_5_5,
-      max_tokens: 1024,
+      max_tokens: 4096,
       messages: messages,
       tools: [
         {
@@ -398,7 +398,8 @@ When handling `pause_turn`:
 
 * **Continue the conversation:** Pass the paused response back as-is in a subsequent request to let Claude continue its turn.
 * **Preserve tool state:** Include the same tools in the continuation request. A paused turn can end with a `server_tool_use` block whose tool has not run yet, and the API returns a validation error if that tool is missing from the continuation.
-* **Repeat as needed:** A continued turn can pause again. Check `stop_reason` on each response and continue until you get a different stop reason, capping the number of continuations as you would any retry loop.
+* **Keep the container:** If the response includes a `container`, as it does with the [code execution tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool), send its ID back in the continuation request. Without it, the request runs in a new container, and files from earlier in the turn are lost.
+* **Repeat as needed:** A continued turn can pause again. Check `stop_reason` on each response and continue until you get a different stop reason, capping the number of continuations as you would any retry loop. Keep every paused response in `messages`, in order. A continuation holds only new content, so a request that leaves out an earlier paused response loses that work and can return a 400 error.
 
 For the other `stop_reason` values and general handling patterns, see [Stop reasons and fallback](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons).
 
@@ -501,7 +502,7 @@ A `server_tool_use` block and its result block pair up by `tool_use_id`, not by 
   To give Claude more input, send it as a separate user message after the turn completes.
 </Warning>
 
-**How this differs from `pause_turn`:** A [`pause_turn` response](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools#the-server-side-loop-and-pause-turn) can also end with a `server_tool_use` block that has not run, but it never leaves a client `tool_use` block waiting on you, so you continue it by re-sending the assistant content as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is `tool_use`, and you continue it by sending the client `tool_result` blocks rather than by re-sending the response. In both cases the API runs the pending server tool at the start of the next request.
+**How this differs from `pause_turn`:** A [`pause_turn` response](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools#the-server-side-loop-and-pause-turn) can also end with a `server_tool_use` block that has not run, but it never leaves a client `tool_use` block waiting on you, so you continue it by re-sending the assistant content as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is `tool_use`, and you continue it by sending the response back with a new user message that holds the client `tool_result` blocks. In both cases the API runs the pending server tool at the start of the next request.
 
 The following example enables web fetch together with a user-defined `run_command` tool and handles the mixed response:
 
@@ -509,15 +510,15 @@ The following example enables web fetch together with a user-defined `run_comman
   ```bash cURL
   # If "stop_reason" is "tool_use" and a server_tool_use block has no matching
   # result block, that call is not finished. Run the client tools, then POST
-  # again with one more user message containing only their tool_result blocks
-  # and the same tools array (see the SDK tabs).
+  # again with the assistant content, one more user message containing only their
+  # tool_result blocks, and the same tools array.
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",
-      "max_tokens": 1024,
+      "max_tokens": 4096,
       "messages": [
         {
           "role": "user",
@@ -541,11 +542,11 @@ The following example enables web fetch together with a user-defined `run_comman
 
   ```bash CLI
   # If "stop_reason" is "tool_use" and a server_tool_use block has no matching
-  # result block, run the client tools and re-run with a user message of only
-  # their tool_result blocks appended (see the SDK tabs).
+  # result block, run the client tools and re-run with the assistant content and
+  # a user message of only their tool_result blocks appended.
   ant messages create <<'YAML'
   model: claude-opus-5-5
-  max_tokens: 1024
+  max_tokens: 4096
   messages:
     - role: user
       content: "Summarize https://example.com/article and run uname -a to tell me what system this is on."
@@ -586,7 +587,7 @@ The following example enables web fetch together with a user-defined `run_comman
   ]
 
   response = client.messages.create(
-      model="claude-opus-5-5", max_tokens=1024, tools=tools, messages=messages
+      model="claude-opus-5-5", max_tokens=4096, tools=tools, messages=messages
   )
 
   tool_results = [
@@ -605,7 +606,7 @@ The following example enables web fetch together with a user-defined `run_comman
       # Send back only the client tool_result blocks, with the same tools.
       continuation = client.messages.create(
           model="claude-opus-5-5",
-          max_tokens=1024,
+          max_tokens=4096,
           tools=tools,
           messages=[
               *messages,
@@ -649,7 +650,7 @@ The following example enables web fetch together with a user-defined `run_comman
 
   const response = await client.messages.create({
     model: "claude-opus-5-5",
-    max_tokens: 1024,
+    max_tokens: 4096,
     tools: [webFetchTool, runCommandTool],
     messages
   });
@@ -671,7 +672,7 @@ The following example enables web fetch together with a user-defined `run_comman
     // Send back only the client tool_result blocks, with the same tools.
     const continuation = await client.messages.create({
       model: "claude-opus-5-5",
-      max_tokens: 1024,
+      max_tokens: 4096,
       tools: [webFetchTool, runCommandTool],
       messages: [
         ...messages,
@@ -717,7 +718,7 @@ The following example enables web fetch together with a user-defined `run_comman
   var response = await client.Messages.Create(new MessageCreateParams
   {
       Model = Model.ClaudeOpus5_5,
-      MaxTokens = 1024,
+      MaxTokens = 4096,
       Tools = tools,
       Messages = [userMessage]
   });
@@ -743,7 +744,7 @@ The following example enables web fetch together with a user-defined `run_comman
       var continuation = await client.Messages.Create(new MessageCreateParams
       {
           Model = Model.ClaudeOpus5_5,
-          MaxTokens = 1024,
+          MaxTokens = 4096,
           Tools = tools,
           Messages =
           [
@@ -790,7 +791,7 @@ The following example enables web fetch together with a user-defined `run_comman
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
   	Model:     anthropic.ModelClaudeOpus5_5,
-  	MaxTokens: 1024,
+  	MaxTokens: 4096,
   	Tools:     tools,
   	Messages:  []anthropic.MessageParam{userMessage},
   })
@@ -812,7 +813,7 @@ The following example enables web fetch together with a user-defined `run_comman
   	// Send back only the client tool_result blocks, with the same tools.
   	continuation, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
   		Model:     anthropic.ModelClaudeOpus5_5,
-  		MaxTokens: 1024,
+  		MaxTokens: 4096,
   		Tools:     tools,
   		Messages: []anthropic.MessageParam{
   			userMessage,
@@ -849,7 +850,7 @@ The following example enables web fetch together with a user-defined `run_comman
 
       Message response = client.messages().create(MessageCreateParams.builder()
           .model(Model.CLAUDE_OPUS_5_5)
-          .maxTokens(1024L)
+          .maxTokens(4096L)
           .addTool(WebFetchTool20250910.builder()
               .maxUses(5L)
               .build())
@@ -876,7 +877,7 @@ The following example enables web fetch together with a user-defined `run_comman
           // Send back only the client tool_result blocks, with the same tools.
           Message continuation = client.messages().create(MessageCreateParams.builder()
               .model(Model.CLAUDE_OPUS_5_5)
-              .maxTokens(1024L)
+              .maxTokens(4096L)
               .addTool(WebFetchTool20250910.builder()
                   .maxUses(5L)
                   .build())
@@ -914,7 +915,7 @@ The following example enables web fetch together with a user-defined `run_comman
   $userMessage = ['role' => 'user', 'content' => 'Summarize https://example.com/article and run uname -a to tell me what system this is on.'];
 
   $response = $client->messages->create(
-      maxTokens: 1024,
+      maxTokens: 4096,
       messages: [$userMessage],
       model: 'claude-opus-5-5',
       tools: $tools,
@@ -936,7 +937,7 @@ The following example enables web fetch together with a user-defined `run_comman
       // A server_tool_use block with no result block in this response is not finished; its result arrives in a later response.
       // Send back only the client tool_result blocks, with the same tools.
       $continuation = $client->messages->create(
-          maxTokens: 1024,
+          maxTokens: 4096,
           messages: [
               $userMessage,
               ['role' => 'assistant', 'content' => $response->content],
@@ -976,8 +977,8 @@ The following example enables web fetch together with a user-defined `run_comman
   }
 
   response = client.messages.create(
-    model: "claude-opus-5-5",
-    max_tokens: 1024,
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
+    max_tokens: 4096,
     tools: tools,
     messages: [user_message]
   )
@@ -998,8 +999,8 @@ The following example enables web fetch together with a user-defined `run_comman
     # A server_tool_use block with no result block in this response is not finished; its result arrives in a later response.
     # Send back only the client tool_result blocks, with the same tools.
     continuation = client.messages.create(
-      model: "claude-opus-5-5",
-      max_tokens: 1024,
+      model: Anthropic::Model::CLAUDE_OPUS_5_5,
+      max_tokens: 4096,
       tools: tools,
       messages: [
         user_message,
@@ -1093,7 +1094,7 @@ The `_20260209` and later versions of web search and web fetch use code executio
 
 Server-tool events stream as part of the normal server-sent events (SSE) flow. A `server_tool_use` block that Claude calls directly streams like a client `tool_use` block: a `content_block_start` event followed by `input_json_delta` events. The result block arrives complete in a single `content_block_start` event, with no deltas.
 
-See [Streaming](https://platform.claude.com/docs/en/build-with-claude/streaming) for the full event reference. Individual tool pages document tool-specific event names where they differ.
+See [Streaming messages](https://platform.claude.com/docs/en/build-with-claude/streaming) for the full event reference. Individual tool pages document tool-specific event names where they differ.
 
 ## Batch requests
 

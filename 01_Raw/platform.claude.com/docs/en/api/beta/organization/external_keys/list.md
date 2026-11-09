@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/list
-fetched_at: 2026-11-02T07:00:46.308116+00:00
+fetched_at: 2026-11-09T07:30:30.261606+00:00
 fetch_method: mintlify_md
 ---
 
@@ -76,7 +76,7 @@ Results are ordered by creation time (newest first). Use the
 
   - `geo: string`
 
-    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region this key is used in.
 
   - `provider_config: BetaAWSExternalKeyConfig or BetaGCPExternalKeyConfig or BetaAzureExternalKeyConfig`
 

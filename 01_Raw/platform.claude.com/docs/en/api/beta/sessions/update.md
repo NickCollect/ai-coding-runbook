@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions/update
-fetched_at: 2026-11-02T07:00:42.399396+00:00
+fetched_at: 2026-11-09T07:30:27.776744+00:00
 fetch_method: mintlify_md
 ---
 
@@ -569,6 +569,8 @@ Update Session
 
               Two-letter ISO 3166-1 country code, uppercase.
 
+              pattern: ^[A-Z]{2}$
+
             - `region: optional string or null`
 
               Region or state name.
@@ -697,7 +699,7 @@ Update Session
 
         Unique name for the tool. 1-128 characters; letters, digits, underscores, and hyphens.
 
-        minLength: 1, maxLength: 128
+        minLength: 1, maxLength: 128, pattern: ^[a-zA-Z0-9_-]{1,128}$
 
 - `budget: optional BetaManagedAgentsBudgetLimit or null`
 
@@ -712,6 +714,8 @@ Update Session
     - `amount: string`
 
       Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
+
+      pattern: ^(0|[1-9]\d*)$
 
     - `currency: BetaCurrency`
 
@@ -1299,6 +1303,8 @@ Update Session
 
                         Two-letter ISO 3166-1 country code, uppercase.
 
+                        pattern: ^[A-Z]{2}$
+
                       - `region: optional string or null`
 
                         Region or state name.
@@ -1607,6 +1613,8 @@ Update Session
 
         Amount in minor units of the currency, as an integer decimal string with no leading zeros: "2500" is $25.00 and "50" is fifty cents. A string rather than a number so no float rounding is ever applied.
 
+        pattern: ^(0|[1-9]\d*)$
+
       - `currency: BetaCurrency`
 
         Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
@@ -1699,7 +1707,7 @@ Update Session
 
             Full commit SHA to check out.
 
-            minLength: 7, maxLength: 64
+            minLength: 7, maxLength: 64, pattern: ^[0-9a-fA-F]+$
 
     - `BetaManagedAgentsFileResource object`
 
@@ -1732,6 +1740,8 @@ Update Session
       - `memory_store_id: string`
 
         The memory store ID (memstore_...). Must belong to the caller's organization and workspace.
+
+        pattern: ^memstore_[a-zA-Z0-9_]+$
 
       - `access: optional "read_write" or "read_only" or null`
 

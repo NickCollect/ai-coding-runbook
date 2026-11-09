@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/external_keys
-fetched_at: 2026-11-02T07:00:38.411747+00:00
+fetched_at: 2026-11-09T07:30:24.614093+00:00
 fetch_method: mintlify_md
 ---
 
@@ -139,7 +139,7 @@ Create an external key config owned by the caller's organization.
 
   - `geo: string`
 
-    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region this key is used in.
 
   - `provider_config: AWSExternalKeyConfig or GCPExternalKeyConfig or AzureExternalKeyConfig`
 
@@ -307,7 +307,7 @@ Results are ordered by creation time (newest first). Use the
 
   - `geo: string`
 
-    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region this key is used in.
 
   - `provider_config: AWSExternalKeyConfig or GCPExternalKeyConfig or AzureExternalKeyConfig`
 
@@ -475,7 +475,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
   - `geo: string`
 
-    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region this key is used in.
 
   - `provider_config: AWSExternalKeyConfig or GCPExternalKeyConfig or AzureExternalKeyConfig`
 
@@ -704,7 +704,7 @@ encrypted data requires the original key identity to decrypt.
 
   - `geo: string`
 
-    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region this key is used in.
 
   - `provider_config: AWSExternalKeyConfig or GCPExternalKeyConfig or AzureExternalKeyConfig`
 
@@ -1029,7 +1029,7 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID/v
 
   - `geo: string`
 
-    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region this key is used in.
 
   - `provider_config: AWSExternalKeyConfig or GCPExternalKeyConfig or AzureExternalKeyConfig`
 

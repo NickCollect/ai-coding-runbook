@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-org-data
-fetched_at: 2026-11-02T07:00:32.563745+00:00
+fetched_at: 2026-11-09T07:30:20.704004+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ description: Enumerate organizations under your parent organization (their users
 <Check>
   **Required scope:** `read:compliance_org_data` on the Compliance Access Key. The user, user-preference, and group-member endpoints require `read:compliance_user_data` instead.
 
-  Compliance Access Keys (`sk-ant-api01-...`) created in claude.ai are the only key type accepted; see [Set up the Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api-access) to provision one. Calls authenticated with an Admin API key (`sk-ant-admin01-...`) return [403 Forbidden](https://platform.claude.com/docs/en/manage-claude/compliance-errors#403-forbidden).
+  Compliance Access Keys (`sk-ant-api01-...`) created in claude.ai are the only key type accepted. See [Set up the Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api-access) to provision one. Calls authenticated with an Admin API key (`sk-ant-admin01-...`) return [403 Forbidden](https://platform.claude.com/docs/en/manage-claude/compliance-errors#403-forbidden).
 </Check>
 
 The endpoints on this page expose the directory side of a Claude Enterprise organization: its linked organizations, the users in each one, the roles defined on each, and its role-based access control (RBAC) or SCIM (System for Cross-domain Identity Management)-provisioned groups and their members. Use them to seed eDiscovery user lists, build reporting dashboards, and reconcile group membership against an external system of record. A Compliance Access Key that covers the parent organization returns data from every linked organization underneath, so a single key reaches the entire tree. The [effective-settings endpoint](https://platform.claude.com/docs/en/manage-claude/compliance-org-data#get-effective-organization-settings) complements the directory: it returns the data-privacy, security, and capability settings actually in force for one organization.
@@ -32,7 +32,7 @@ The following call lists every organization under your parent. The response is a
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/organizations" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```json Response
@@ -82,7 +82,7 @@ Results are sorted by organization join date ascending. Unlike the Activity Feed
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/organizations/91012d09-e48b-438e-a489-1bebfd8fa6f9/users" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-version: 2026-10-21" \
   --data-urlencode "limit=500"
 ```
 
@@ -118,7 +118,7 @@ By default, the response lists only members who have set at least one of the two
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/organizations/91012d09-e48b-438e-a489-1bebfd8fa6f9/user_preferences" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```json Response
@@ -148,7 +148,7 @@ Both role endpoints require `read:compliance_org_data`. The list endpoint accept
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/organizations/91012d09-e48b-438e-a489-1bebfd8fa6f9/roles" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```json Response
@@ -183,7 +183,7 @@ List groups, then for each group list its members:
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/groups" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```json Response
@@ -210,7 +210,7 @@ For each group ID, list its members:
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/groups/rbac_group_01P9qRsTuVwXyZa2BcDeFgHjK/members" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 ```json Response
@@ -251,7 +251,7 @@ A 404 therefore does not reveal whether an organization exists. The settings end
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/organizations/91012d09-e48b-438e-a489-1bebfd8fa6f9/settings" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  -H "anthropic-version: 2023-06-01"
+  -H "anthropic-version: 2026-10-21"
 ```
 
 The response is a list of typed setting rows, and which rows appear varies by organization: a setting the organization’s administrators cannot change, because it is controlled by Anthropic policy or not available to the organization, is omitted from the list. Treat a missing row as “not controllable by this organization’s administrators”, not as “off”. The following abridged example shows three of the rows a response can contain:
@@ -314,16 +314,16 @@ The response reflects the state at read time; nothing is snapshotted. Changes to
 
 ## Read plugins and plugin marketplaces
 
-Your organization’s plugins and plugin marketplaces are part of the [Admin API](https://platform.claude.com/docs/en/manage-claude/plugins-api) rather than the Compliance API, but a Compliance Access Key with `read:compliance_org_data` can call the Plugins API’s read endpoints directly:
+Your organization’s plugins and plugin marketplaces are part of the Admin API’s [Plugins API](https://platform.claude.com/docs/en/manage-claude/plugins-api) rather than the Compliance API, but a Compliance Access Key with `read:compliance_org_data` can call the Plugins API’s read endpoints directly:
 
 * List plugins and retrieve a plugin
 * List a plugin’s versions, retrieve a version, and download a version’s files
 * List a plugin’s installation settings and its shares
 * List plugin marketplaces and retrieve a marketplace
 
-Send the `anthropic-beta: ce-plugins-2026-09-01` header on every request; without it these endpoints return [404 Not Found](https://platform.claude.com/docs/en/manage-claude/plugins-api#error-responses). Each call reads one organization: a key that covers the parent organization reads the linked organization it was created in unless you pass the `organization_id` query parameter (a linked organization’s UUID or its `org_`-prefixed ID) to [read a different one](https://platform.claude.com/docs/en/manage-claude/plugins-api#reading-another-organization-under-the-same-parent), and a key restricted to one organization reads only that organization. These calls count against the Admin API’s [rate limits](https://platform.claude.com/docs/en/manage-claude/plugins-api#rate-limiting), not the Compliance API’s.
+Send the `anthropic-beta: ce-plugins-2026-09-01` header on every request; without it these endpoints return 404 Not Found (see the Plugins API’s [Error responses](https://platform.claude.com/docs/en/manage-claude/plugins-api#error-responses)). Each call reads one organization. A key that covers the parent organization reads the linked organization it was created in. To [read a different organization](https://platform.claude.com/docs/en/manage-claude/plugins-api#reading-another-organization-under-the-same-parent), pass the `organization_id` query parameter (a linked organization’s UUID or its `org_`-prefixed ID). A key restricted to one organization reads only that organization. These calls count against the Admin API’s [rate limits](https://platform.claude.com/docs/en/manage-claude/plugins-api#rate-limiting), not the Compliance API’s.
 
-Creating or changing plugins, their installation settings, or a marketplace’s settings requires an Admin API key with `write:plugins`. Of the read calls, only downloading the files of a plugin in a member’s personal marketplace records an [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed) event (`claude_plugin_archive_accessed`). See the [Plugins API guide](https://platform.claude.com/docs/en/manage-claude/plugins-api) for each endpoint, request examples, and the [events the API records](https://platform.claude.com/docs/en/manage-claude/plugins-api#activity-feed-events).
+Creating or changing plugins, their installation settings, or a marketplace’s settings requires an Admin API key with `write:plugins`. Of the read calls, only downloading the files of a plugin in a member’s personal marketplace records an [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed) event (`claude_plugin_archive_accessed`). See the [Plugins API](https://platform.claude.com/docs/en/manage-claude/plugins-api) guide for each endpoint, request examples, and the [events the API records](https://platform.claude.com/docs/en/manage-claude/plugins-api#activity-feed-events).
 
 ## Next steps
 

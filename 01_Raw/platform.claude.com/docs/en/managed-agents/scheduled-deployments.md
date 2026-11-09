@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/scheduled-deployments
-fetched_at: 2026-11-02T07:00:30.402197+00:00
+fetched_at: 2026-11-09T07:30:18.890688+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,7 +60,7 @@ When creating a deployment, you pass the [session configurations](https://platfo
   ```bash cURL
   curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
@@ -294,7 +294,7 @@ The following example sets a budget on an existing deployment:
   ```bash cURL
   curl --fail-with-body -sS "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
@@ -429,7 +429,7 @@ List all deployment runs for a deployment as follows:
   ```bash cURL
   curl --fail-with-body -sS "https://api.anthropic.com/v1/deployment_runs?beta=true&deployment_id=$DEPLOYMENT_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 
@@ -458,9 +458,7 @@ List all deployment runs for a deployment as follows:
   );
   await foreach (var run in runs.Paginate())
   {
-      // The Error union exposes .Message directly; the discriminator is read
-      // from .Json until a common .Type accessor is added.
-      var outcome = run.SessionID ?? run.Error!.Json.GetProperty("type").GetString();
+      var outcome = run.SessionID ?? run.Error!.Type.Raw();
       Console.WriteLine($"{run.CreatedAt} {outcome}");
   }
   ```
@@ -487,10 +485,8 @@ List all deployment runs for a deployment as follows:
           DeploymentRunListParams.builder()
               .deploymentId(deployment.id())
               .build()).autoPager()) {
-      // The Error union does not yet expose common .type()/.message()
-      // accessors; .toString() includes both.
       IO.println(run.createdAt() + " "
-          + run.sessionId().orElseGet(() -> run.error().orElseThrow().toString()));
+          + run.sessionId().orElseGet(() -> run.error().orElseThrow().type().asString()));
   }
   ```
 
@@ -518,7 +514,7 @@ You can additionally filter on deployment runs with errors:
   ```bash cURL
   curl --fail-with-body -sS "https://api.anthropic.com/v1/deployment_runs?beta=true&deployment_id=$DEPLOYMENT_ID&has_error=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 
@@ -550,7 +546,7 @@ You can additionally filter on deployment runs with errors:
   await foreach (var failedRun in failedRuns.Paginate())
   {
       var error = failedRun.Error!;
-      var errorType = error.Json.GetProperty("type").GetString();
+      var errorType = error.Type.Raw();
       Console.WriteLine($"{failedRun.CreatedAt} {errorType} {error.Message}");
   }
   ```
@@ -575,7 +571,8 @@ You can additionally filter on deployment runs with errors:
               .deploymentId(deployment.id())
               .hasError(true)
               .build()).autoPager()) {
-      IO.println(run.createdAt() + " " + run.error().orElseThrow());
+      var error = run.error().orElseThrow();
+      IO.println(run.createdAt() + " " + error.type().asString() + " " + error.message());
   }
   ```
 
@@ -628,7 +625,7 @@ Each lifecycle change emits a [webhook event](https://platform.claude.com/docs/e
   ```bash cURL
   curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/pause?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 
@@ -673,7 +670,7 @@ Each lifecycle change emits a [webhook event](https://platform.claude.com/docs/e
   ```bash cURL
   curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/unpause?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 
@@ -718,7 +715,7 @@ Each lifecycle change emits a [webhook event](https://platform.claude.com/docs/e
   ```bash cURL
   curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/archive?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 
@@ -771,7 +768,7 @@ To run a deployment outside its schedule, call the [`run` endpoint](https://plat
   ```bash cURL
   curl --fail-with-body -sS -X POST "https://api.anthropic.com/v1/deployments/$DEPLOYMENT_ID/run?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 

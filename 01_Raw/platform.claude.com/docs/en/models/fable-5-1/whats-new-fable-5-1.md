@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1
-fetched_at: 2026-11-02T07:00:33.549943+00:00
+fetched_at: 2026-11-09T07:30:21.537375+00:00
 fetch_method: mintlify_md
 ---
 
@@ -94,14 +94,14 @@ With the [advisor tool](https://platform.claude.com/docs/en/agents-and-tools/too
 
 ### Change effort mid-conversation (beta)
 
-On Claude Fable 5.1 you can change the [effort](https://platform.claude.com/docs/en/build-with-claude/effort) level mid-conversation without invalidating the prompt cache. Raise it for a hard step and lower it for routine ones. Per-message effort is in beta: include the `mid-conversation-output-config-2026-07-01` beta header. Claude Fable 5.1 and Claude Mythos 5.1 support it on the Claude API, Claude Models on Google Cloud (Google managed), and Amazon Bedrock. To use it with Claude Fable 5.1 through the Amazon Bedrock [InvokeModel API](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), send that value in the `anthropic_beta` array of the request body instead. For the other models that support it and the platforms for each, see [Change effort mid-conversation](https://platform.claude.com/docs/en/build-with-claude/effort#changing-effort-mid-conversation).
+On Claude Fable 5.1 you can change the [effort](https://platform.claude.com/docs/en/build-with-claude/effort) level mid-conversation without invalidating the prompt cache. Raise it for a hard step and lower it for routine ones. Per-message effort is in beta: include the `mid-conversation-output-config-2026-07-01` beta header. To use it with Claude Fable 5.1 through the Amazon Bedrock [InvokeModel API](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), send that value in the `anthropic_beta` array of the request body instead. For the models and platforms that support it, see [Change effort mid-conversation](https://platform.claude.com/docs/en/build-with-claude/effort#changing-effort-mid-conversation).
 
 <CodeGroup>
   ```bash cURL
   # Effort-only system message: the new level takes effect from the next user turn.
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: mid-conversation-output-config-2026-07-01" \
     -H "content-type: application/json" \
     -d '{

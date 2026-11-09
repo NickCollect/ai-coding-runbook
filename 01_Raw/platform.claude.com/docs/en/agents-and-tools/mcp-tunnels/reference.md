@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/reference
-fetched_at: 2026-11-02T07:00:28.687734+00:00
+fetched_at: 2026-11-09T07:30:17.497690+00:00
 fetch_method: mintlify_md
 ---
 
@@ -57,7 +57,7 @@ Required headers on every request:
 | Header              | Value                                      |
 | ------------------- | ------------------------------------------ |
 | `Authorization`     | `Bearer <token>` (the WIF-exchanged token) |
-| `anthropic-version` | `2023-06-01`                               |
+| `anthropic-version` | `2026-10-21`                               |
 | `anthropic-beta`    | `mcp-tunnels-2026-06-22`                   |
 
 ## Certificate requirements

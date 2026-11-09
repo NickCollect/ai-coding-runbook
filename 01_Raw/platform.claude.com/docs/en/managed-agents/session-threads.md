@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/session-threads
-fetched_at: 2026-11-02T07:00:30.372518+00:00
+fetched_at: 2026-11-09T07:30:18.955833+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,7 +60,7 @@ List all threads associated with a session as follows:
   ```bash cURL
   curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 
@@ -85,7 +85,7 @@ List all threads associated with a session as follows:
   ```csharp C#
   await foreach (var sessionThread in (await client.Beta.Sessions.Threads.List(session.ID)).Paginate())
   {
-      var label = sessionThread.Agent.Name ?? sessionThread.Agent.Json.GetProperty("type").GetString();
+      var label = sessionThread.Agent.Name ?? sessionThread.Agent.Type.Raw();
       Console.WriteLine($"[{label}] {sessionThread.Status.Raw()}");
   }
   ```
@@ -140,7 +140,7 @@ Send `user.interrupt` with `session_thread_id` (java: `sessionThreadId`; php: `s
   ```bash cURL
   curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
@@ -225,7 +225,7 @@ Optionally archive a session thread when it has completed its work. Archiving a 
   ```bash cURL
   curl -fsS -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archive" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 
@@ -289,7 +289,7 @@ Archive only succeeds if the thread is `idle`. A thread parked on `requires_acti
   # Interrupt the thread, then archive it
   curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
@@ -300,7 +300,7 @@ Archive only succeeds if the thread is `idle`. A thread parked on `requires_acti
 
   curl -fsS -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archive" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 
@@ -436,7 +436,7 @@ A thread’s stream doesn’t replay earlier events. Right after `session.thread
       ```bash cURL
       curl -fsSN "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/stream?beta=true" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
-        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-version: 2026-10-21" \
         -H "anthropic-beta: managed-agents-2026-04-01"
       ```
 
@@ -534,7 +534,7 @@ A thread’s stream doesn’t replay earlier events. Right after `session.thread
               .build()
       )) {
           loop:
-          for (var event : (Iterable<BetaManagedAgentsStreamSessionThreadEvents>) streamResponse.stream()::iterator) {
+          for (var event : streamResponse) {
               switch (event.type().value()) {
                   case AGENT_MESSAGE -> {
                       for (var block : event.asAgentMessage().content()) {
@@ -592,7 +592,7 @@ A thread’s stream doesn’t replay earlier events. Right after `session.thread
       ```bash cURL
       curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/events" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
-        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-version: 2026-10-21" \
         -H "anthropic-beta: managed-agents-2026-04-01"
       ```
 
@@ -622,7 +622,7 @@ A thread’s stream doesn’t replay earlier events. Right after `session.thread
       var page = await client.Beta.Sessions.Threads.Events.List(thread.ID, new() { SessionID = session.ID });
       await foreach (var evt in page.Paginate())
       {
-          Console.WriteLine($"[{evt.Json.GetProperty("type").GetString()}] {evt.ProcessedAt}");
+          Console.WriteLine($"[{evt.Type.Raw()}] {evt.ProcessedAt}");
       }
       ```
 
@@ -646,11 +646,8 @@ A thread’s stream doesn’t replay earlier events. Right after `session.thread
                   .sessionId(session.id())
                   .build()
       ).autoPager()) {
-          var type = event._json().orElseThrow() instanceof JsonObject json
-              ? json.values().get("type").asStringOrThrow()
-              : "unknown";
           var processedAt = event.processedAt().map(OffsetDateTime::toString).orElse("pending");
-          IO.println("[" + type + "] " + processedAt);
+          IO.println("[" + event.type().asString() + "] " + processedAt);
       }
       ```
 

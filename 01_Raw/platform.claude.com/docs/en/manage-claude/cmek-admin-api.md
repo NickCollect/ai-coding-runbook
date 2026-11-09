@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/cmek-admin-api
-fetched_at: 2026-11-02T07:00:32.144897+00:00
+fetched_at: 2026-11-09T07:30:20.394624+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,7 +33,7 @@ Creating an external key is what **Add key** does in the Claude Console, and val
           ```bash cURL
           curl -sS "https://api.anthropic.com/v1/organizations/external_keys" \
             -H "x-api-key: $ANTHROPIC_API_KEY" \
-            -H "anthropic-version: 2023-06-01" \
+            -H "anthropic-version: 2026-10-21" \
             -H "content-type: application/json" \
             -d '{
               "display_name": "<friendly-name>",
@@ -188,7 +188,7 @@ Creating an external key is what **Add key** does in the Claude Console, and val
           ```bash cURL
           curl -sS "https://api.anthropic.com/v1/organizations/external_keys" \
             -H "x-api-key: $ANTHROPIC_API_KEY" \
-            -H "anthropic-version: 2023-06-01" \
+            -H "anthropic-version: 2026-10-21" \
             -H "content-type: application/json" \
             -d '{
               "display_name": "<friendly-name>",
@@ -349,7 +349,7 @@ Creating an external key is what **Add key** does in the Claude Console, and val
           ```bash cURL
           curl -sS "https://api.anthropic.com/v1/organizations/external_keys" \
             -H "x-api-key: $ANTHROPIC_API_KEY" \
-            -H "anthropic-version: 2023-06-01" \
+            -H "anthropic-version: 2026-10-21" \
             -H "content-type: application/json" \
             -d '{
               "display_name": "<friendly-name>",
@@ -537,7 +537,7 @@ Creating an external key is what **Add key** does in the Claude Console, and val
       ```bash cURL
       curl -sS -X POST "https://api.anthropic.com/v1/organizations/external_keys/ekey_<id>/validate" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
-        -H "anthropic-version: 2023-06-01"
+        -H "anthropic-version: 2026-10-21"
       ```
 
       ```bash CLI
@@ -634,7 +634,7 @@ Creating an external key is what **Add key** does in the Claude Console, and val
       ```bash cURL
       curl -sS -X POST "https://api.anthropic.com/v1/organizations/workspaces/<workspace-id>" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
-        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-version: 2026-10-21" \
         -H "content-type: application/json" \
         -d '{
           "external_key_id": "ekey_<id>"

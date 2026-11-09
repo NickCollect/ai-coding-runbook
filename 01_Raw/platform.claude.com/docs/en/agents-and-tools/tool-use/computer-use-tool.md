@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool
-fetched_at: 2026-11-02T07:00:27.185159+00:00
+fetched_at: 2026-11-09T07:30:16.383082+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,15 +33,14 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
-    Claude Platform on AWS: beta
-    Amazon Bedrock: beta
+    Claude Platform on AWS: stable
+    Amazon Bedrock: stable
     Amazon Bedrock (InvokeModel): beta
     Claude Models on Google Cloud (Google managed): stable
-    Microsoft Foundry: beta
+    Microsoft Foundry: stable
   details:
-    - On the Claude API and Claude Models on Google Cloud (Google managed), Claude 5.5 and later models support computer use only through the `computer_toolset_20260801` toolset and return an error for the earlier `computer_20251124` and `computer_20250124` tool versions. To move an existing integration, see [Migrate from `computer_20251124`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#migrate-from-computer-20251124). To move from `computer_20250124`, see [Move computer use to the toolset](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#computer-use-toolset) in the Claude Haiku 5.5 migration guide.
-    - On Amazon Bedrock, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 accept the earlier `computer_20251124` tool version as Claude Opus 5 and Claude Sonnet 5 do.
-    - Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 support computer use only through the earlier `computer_20251124` tool version, which requires a beta header; see [Earlier tool versions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions).
+    - Claude 5.5 and later models support computer use through the `computer_toolset_20260801` toolset. They return a 400 error for any computer use tool version they don't accept, such as `computer_20251124` on the Claude API. To move a `computer_20251124` integration to the toolset, see [Migrate from `computer_20251124`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#migrate-from-computer-20251124). To move from `computer_20250124`, see [Move computer use to the toolset](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#computer-use-toolset) in the Claude Haiku 5.5 migration guide.
+    - Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 support computer use only through the `computer_20251124` tool version, which requires a beta header; see [Earlier tool versions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions).
 ---
 
 <Note>
@@ -54,11 +53,7 @@ The computer use tool is an Anthropic-defined [client toolset](https://platform.
 
 For tasks that stay inside webpages, the [browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) is the closer fit: its member tools read and act on the page itself, and it doesn’t need a full desktop environment.
 
-<Note>
-  Computer use is available on the Claude API and [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed) as the `computer_toolset_20260801` toolset; see [API support](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#availability-feature-support) for the supported models.
-
-  Existing `computer_20251124` integrations keep working on the models listed for it under [Earlier tool versions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions), and earlier tool versions remain available in beta for models and platforms that don’t support the toolset. See [Migrate from `computer_20251124`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#migrate-from-computer-20251124) to upgrade, or [Earlier tool versions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions) for the beta headers.
-</Note>
+See [API support](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#availability-feature-support) for the models and platforms that support the toolset. [Earlier tool versions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions) lists each earlier version’s beta header and the models to use it with.
 
 ## Security considerations
 
@@ -75,7 +70,7 @@ Computer use has unique risks distinct from standard API features. These risks a
 
 In some circumstances, Claude follows commands found in content even when they conflict with your instructions. For example, instructions on webpages or contained in images might override your instructions or cause Claude to make mistakes. Take precautions to isolate Claude from sensitive data and actions to avoid risks related to prompt injection.
 
-Anthropic has trained the model to resist these prompt injections and has added an extra layer of defense. If you use the computer use tools, classifiers will automatically scan what the tools return, such as screenshots, to flag potential prompt injections. When these classifiers identify a potential prompt injection, they will automatically steer the model to check whether the instruction really came from you before acting on it.
+Anthropic has trained the model to resist these prompt injections and has added an extra layer of defense. If you use the computer use tool, classifiers automatically scan what the tool returns, such as screenshots, to flag potential prompt injections. When these classifiers identify a potential prompt injection, they steer the model to check whether the instruction really came from you before acting on it.
 
 This extra protection isn’t ideal for every use case (for example, use cases without a human in the loop), so if you’d like to opt out and turn it off, [contact support](https://support.claude.com/en/). The precautions listed earlier remain important even with these classifiers in place.
 
@@ -90,7 +85,7 @@ Add the computer use toolset to the `tools` array of a [Messages API](https://pl
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
@@ -352,7 +347,7 @@ Your application runs each call in order in your own environment, returns one `t
   </Step>
 </Steps>
 
-The repetition of steps 3 and 4 without user input is referred to as the “agent loop” (that is, Claude responding with a tool use request and your application responding to Claude with the results of evaluating that request).
+Steps 3 and 4, repeated without user input, form the “agent loop”: Claude responds with a tool use request, and your application responds to Claude with the results of evaluating that request.
 
 ### Batch actions
 
@@ -454,7 +449,7 @@ Computer use requires a sandboxed computing environment where Claude can safely 
 
 2. **Desktop environment:** A lightweight UI with window manager (Mutter) and panel (Tint2) running on Linux, which provides a consistent graphical interface for Claude to interact with.
 
-3. **Applications:** Pre-installed Linux applications such as Firefox, LibreOffice, text editors, and file managers that Claude can use to complete tasks.
+3. **Applications:** Preinstalled Linux applications such as Firefox, LibreOffice, text editors, and file managers that Claude can use to complete tasks.
 
 4. **Tool implementations:** Integration code that translates Claude’s abstract tool requests (such as “move mouse” or “take screenshot”) into actual operations in the virtual environment.
 
@@ -462,10 +457,10 @@ Computer use requires a sandboxed computing environment where Claude can safely 
 
 When you use computer use, Claude doesn’t directly connect to this environment. Instead, your application:
 
-1. Receives Claude’s tool use requests
-2. Translates them into actions in your computing environment
-3. Captures the results (such as screenshots and command outputs)
-4. Returns these results to Claude
+1. Receives Claude’s tool use requests.
+2. Translates them into actions in your computing environment.
+3. Captures the results (such as screenshots and command outputs).
+4. Returns these results to Claude.
 
 For security and isolation, the reference implementation runs all of this inside a Docker container with appropriate port mappings for viewing and interacting with the environment.
 
@@ -476,7 +471,7 @@ For security and isolation, the reference implementation runs all of this inside
 Upgrading an existing `computer_20251124` integration? Start with [Migrate from `computer_20251124`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#migrate-from-computer-20251124); the rest of this section applies to both new and migrated integrations.
 
 <Tip>
-  The [computer use reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is a complete working example: a [containerized environment](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/Dockerfile) suitable for computer use, implementations of [the computer use tools](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo/computer_use_demo/tools), an [agent loop](https://github.com/anthropics/anthropic-quickstarts/blob/main/computer-use-demo/computer_use_demo/loop.py) that calls the Claude API and runs the tools, and a web interface for the container, loop, and tools.
+  The [computer use reference implementation](https://github.com/anthropics/claude-quickstarts/tree/main/computer-use-demo) is a complete working example: a [containerized environment](https://github.com/anthropics/claude-quickstarts/blob/main/computer-use-demo/Dockerfile) suitable for computer use, implementations of [the computer use tools](https://github.com/anthropics/claude-quickstarts/tree/main/computer-use-demo/computer_use_demo/tools), an [agent loop](https://github.com/anthropics/claude-quickstarts/blob/main/computer-use-demo/computer_use_demo/loop.py) that calls the Claude API and runs the tools, and a web interface for the container, loop, and tools. To use `computer_toolset_20260801`, choose a [model that supports it](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#availability-feature-support), then select the toolset under **Tool Versions** in the web interface’s sidebar.
 </Tip>
 
 ### Understand the agent loop
@@ -890,7 +885,7 @@ The entry also can’t be declared in the same request as a `computer_20251124` 
 To combine computer use with thinking, see [Thinking](https://platform.claude.com/docs/en/build-with-claude/thinking).
 
 <Tip>
-  For the earlier `computer_20251124` tool, internal benchmarking on the models that use it suggests these `effort` settings:
+  For the `computer_20251124` tool, internal benchmarking on the models that use it suggests these `effort` settings:
 
   * **Claude Opus 4.7:** use `high` as the default; use `low` for high-throughput or cost-sensitive workloads.
   * **Claude Sonnet 4.6 and Claude Opus 4.6:** use `medium` as the default (best accuracy-to-cost ratio). Avoid `max`, which adds token cost without improving accuracy on UI tasks. On these models, `low` uses *fewer* output tokens than disabling thinking entirely (fewer mistakes mean fewer retries), making it a strong option for cost-sensitive loops.
@@ -904,7 +899,7 @@ For tasks that stay inside webpages, you can also [declare the browser use tool 
 
 ### Build a custom computer use environment
 
-The [reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo) is meant to help you get started with computer use. It includes all of the components needed to have Claude use a computer. However, you can build your own environment for computer use to suit your needs. You need:
+The [reference implementation](https://github.com/anthropics/claude-quickstarts/tree/main/computer-use-demo) is meant to help you get started with computer use. It includes all of the components needed to have Claude use a computer. However, you can build your own environment for computer use to suit your needs. You need:
 
 * A virtualized or containerized environment suitable for computer use with Claude
 * An implementation of the computer use tool’s actions
@@ -917,7 +912,7 @@ The computer use tool is implemented as a schema-less tool. When using this tool
 
 <Steps>
   <Step title="Set up your computing environment">
-    Create a virtual display or connect to an existing display that Claude will interact with. This typically involves setting up Xvfb (X Virtual Framebuffer) or similar technology.
+    Create a virtual display or connect to an existing display that Claude interacts with. This typically involves setting up Xvfb (X Virtual Framebuffer) or similar technology.
   </Step>
 
   <Step title="Implement action handlers">
@@ -1853,7 +1848,7 @@ If clicks miss their targets, the cause is usually one of the following:
 | Accuracy is consistently poor                     | Resolution too low                                                                                                                                   | Try 1280x720 as a baseline                                                                                                                                                                                                                                                                                                                     |
 
 <Tip>
-  **Model choice affects click precision.** Among the models that use the earlier `computer_20251124` tool, Claude Sonnet 4.6 is more mechanically precise at clicking than Claude Opus 4.6 and is more robust when screenshots require heavy downscaling. Claude Opus 4.7 narrows that gap: its click precision is roughly comparable to Sonnet 4.6, and its higher resolution limit means less downscaling is needed.
+  **Model choice affects click precision.** Among the models that use the `computer_20251124` tool, Claude Sonnet 4.6 is more mechanically precise at clicking than Claude Opus 4.6 and is more robust when screenshots require heavy downscaling. Claude Opus 4.7 narrows that gap: its click precision is roughly comparable to Sonnet 4.6, and its higher resolution limit means less downscaling is needed.
 </Tip>
 
 ### Follow implementation best practices
@@ -2126,7 +2121,9 @@ If clicks miss their targets, the cause is usually one of the following:
 
 ## Migrate from `computer_20251124`
 
-Upgrading from `computer_20251124` to the toolset is optional: the models listed for `computer_20251124` under [Earlier tool versions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions) keep accepting it with its beta header, so an existing integration keeps working until you change it. Claude 5.5 and later models are the exception on the Claude API and Claude Models on Google Cloud (Google managed): there they accept only the toolset. Upgrade an integration before you move it to one of them. On Amazon Bedrock, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 accept `computer_20251124`. To upgrade, make the following changes together:
+A `computer_20251124` integration works without changes on the models listed for that version under [Earlier tool versions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions). Upgrade the integration before you move it to a model that doesn’t accept `computer_20251124`, such as a Claude 5.5 model on the Claude API.
+
+To upgrade, make the following changes together:
 
 1. **Remove the beta header.** Drop `anthropic-beta: computer-use-2025-11-24` from your requests. With the SDK, remove `betas` (csharp, go: `Betas`; java: `.addBeta()`) and call the Messages API through the standard client rather than the beta namespace.
 2. **Change the `tools` entry.** Set `type` to `computer_toolset_20260801` and delete `name`, `display_width_px`, `display_height_px`, `display_number`, and `enable_zoom`. The toolset rejects each of these fields.
@@ -2184,18 +2181,20 @@ The following pair shows a `tool_use` block before and after the change. The act
 
 ## Earlier tool versions
 
-Two earlier versions of the computer use tool remain available in beta for existing integrations, for models that don’t support the toolset, and on platforms where the toolset isn’t currently available. On Claude Platform on AWS, Amazon Bedrock, and Microsoft Foundry, computer use is available only through these earlier versions. Each requires its [beta header](https://platform.claude.com/docs/en/api/beta-headers) on every request, and their parameters are documented in the [beta Messages API reference](https://platform.claude.com/docs/en/api/beta/messages/create). With the SDK, pass the header through `betas` (csharp, go: `Betas`; java: `.addBeta()`) and use the beta namespace; only the computer use tool needs the header, not the bash or text editor tools in the same request.
+Two earlier versions of the computer use tool are available in beta. Each requires its [beta header](https://platform.claude.com/docs/en/api/beta-headers) on every request, and their parameters are documented in the [beta Messages API reference](https://platform.claude.com/docs/en/api/beta/messages/create). With the SDK, pass the header through `betas` (csharp, go: `Betas`; java: `.addBeta()`) and use the beta namespace; only the computer use tool needs the header, not the bash or text editor tools in the same request.
 
 | Tool version        | Beta header               | Use with                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Parameters                                                                    |
 | ------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `computer_20251124` | `computer-use-2025-11-24` | Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5; on Amazon Bedrock, also Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5                                                                                                                                                                                                                                                                                                                                                     | [API reference](https://platform.claude.com/docs/en/api/beta/messages/create) |
-| `computer_20250124` | `computer-use-2025-01-24` | Claude Sonnet 4.5 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)), Claude Haiku 4.5, Claude Opus 4.1 ([retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)), Claude Sonnet 4 ([retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)), and Claude Opus 4 ([retired, except on Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | [API reference](https://platform.claude.com/docs/en/api/beta/messages/create) |
+| `computer_20251124` | `computer-use-2025-11-24` | Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5                                                                                                                                                                                                                                                                                                                                                                                                                                       | [API reference](https://platform.claude.com/docs/en/api/beta/messages/create) |
+| `computer_20250124` | `computer-use-2025-01-24` | Claude Sonnet 4.5 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)), Claude Haiku 4.5, Claude Opus 4.1 ([retired, except on Claude Models on Google Cloud (Google managed) and Bedrock](https://platform.claude.com/docs/en/about-claude/model-deprecations)), Claude Sonnet 4 ([retired, except on Claude Models on Google Cloud (Google managed) and Bedrock](https://platform.claude.com/docs/en/about-claude/model-deprecations)), and Claude Opus 4 ([retired, except on Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | [API reference](https://platform.claude.com/docs/en/api/beta/messages/create) |
+
+On Amazon Bedrock, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 also accept the `computer_20251124` tool with the `computer-use-2025-11-24` beta header.
 
 ***
 
 ## Limitations
 
-1. **Latency:** The current computer use latency for human-AI interactions might be too slow compared to regular human-directed computer actions. Focus on use cases where speed isn’t critical (for example, background information gathering, automated software testing) in trusted environments.
+1. **Latency:** Computer use latency for human-AI interactions might be too slow compared with regular human-directed computer actions. Focus on use cases where speed isn’t critical (for example, background information gathering, automated software testing) in trusted environments.
 2. **Computer vision accuracy and reliability:** Claude might make mistakes or hallucinate when outputting specific coordinates while generating actions. Claude’s [summarized thinking](https://platform.claude.com/docs/en/build-with-claude/thinking#summarized-thinking) output can help you understand the model’s reasoning and identify potential issues; set `display: "summarized"` on the thinking configuration, because the models that support the toolset omit thinking text by default.
 3. **Tool selection accuracy and reliability:** Claude might make mistakes or hallucinate when selecting tools while generating actions or take unexpected actions to solve problems. Additionally, reliability might be lower when interacting with niche applications or multiple applications at once. Prompt the model carefully when requesting complex tasks.
 4. **Scrolling reliability:** The scroll action supports direction control (up, down, left, right) and a specified amount. In applications where scrolling doesn’t take effect, keyboard alternatives such as Page Down can help.
@@ -2243,8 +2242,8 @@ Computer use follows the standard [tool use pricing](https://platform.claude.com
     Fix the most common tool-use errors with symptom-to-fix diagnostic tables.
   </Card>
 
-  <Card title="Reference implementation" icon="github-logo" href="https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo">
-    Get started with the complete Docker-based implementation
+  <Card title="Reference implementation" icon="github-logo" href="https://github.com/anthropics/claude-quickstarts/tree/main/computer-use-demo">
+    Get started with the complete Docker-based implementation.
   </Card>
 
   <Card title="Tool use with Claude" icon="tool" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview">
@@ -2252,7 +2251,7 @@ Computer use follows the standard [tool use pricing](https://platform.claude.com
   </Card>
 
   <Card title="Best practices in detail" icon="book" href="https://claude.com/blog/best-practices-for-computer-and-browser-use-with-claude">
-    Benchmarked recommendations for resolution, thinking effort, and context management
+    Benchmarked recommendations for resolution, thinking effort, and context management.
   </Card>
 
   <Card title="Browser use tool" icon="browser" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool">
@@ -2273,9 +2272,8 @@ Computer use tool is available or in beta on select models and eligible for zero
 | Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Available | Claude API, [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed)                                                                                                                                                                                                                                                                                                                                                                                                                                          | [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), Claude Mythos Preview, [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview) |
+| Available | [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry)                                                                                                                                                                                                                                                                                          | [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview)                        |
 | Beta      | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (InvokeModel)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) | [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview), [Claude Opus 4.5](https://platform.claude.com/docs/en/models/opus-4-5/overview), [Claude Sonnet 4.5](https://platform.claude.com/docs/en/models/sonnet-4-5/overview)                                                                                                                                                                                                                                                                                                                                                        |
-| Beta      | [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry)                                                                                                                                                                                                                                                                                          | [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview)                                                                                                                                                                                                                                                                                 |
-| Beta      | [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 
@@ -2287,12 +2285,10 @@ Computer use tool is available or in beta on select models and eligible for zero
 
 Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
 
-| Header                    | Cloud platforms                                                                                                                                                                                                                                                                                                  | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `computer-use-2025-11-24` | [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) | [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview) |
-| `computer-use-2025-11-24` | [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock)                                                                                                                                                                                                                 | [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview)                                                                                                                                                                                                                                                                                                                               |
-| `computer-use-2025-11-24` | All supported platforms                                                                                                                                                                                                                                                                                          | [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview), [Claude Opus 4.5](https://platform.claude.com/docs/en/models/opus-4-5/overview)                                                                                                                                                                                                                                                |
-| `computer-use-2025-01-24` | All supported platforms                                                                                                                                                                                                                                                                                          | [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Sonnet 4.5](https://platform.claude.com/docs/en/models/sonnet-4-5/overview)                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Header                    | Models                                                                                                                                                                                                                                                                                                                                 |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `computer-use-2025-11-24` | [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview), [Claude Opus 4.5](https://platform.claude.com/docs/en/models/opus-4-5/overview) |
+| `computer-use-2025-01-24` | [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Sonnet 4.5](https://platform.claude.com/docs/en/models/sonnet-4-5/overview)                                                                                                                                                                 |
 
 ### Data handling
 

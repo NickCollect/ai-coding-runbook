@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/workflow-runs
-fetched_at: 2026-11-02T07:00:30.475169+00:00
+fetched_at: 2026-11-09T07:30:19.037955+00:00
 fetch_method: mintlify_md
 ---
 
@@ -447,7 +447,7 @@ This sample follows a session from your message to the agent’s answer. It open
           // On any other stop reason, print it and stop.
           if (!finished && idle.StopReason?.Value is not BetaManagedAgentsSessionRequiresAction)
           {
-              var reason = idle.StopReason?.Json.GetProperty("type").GetString();
+              var reason = idle.StopReason?.Type.Raw();
               Console.WriteLine($"Session idle: {reason}");
               break;
           }
@@ -565,9 +565,8 @@ This sample follows a session from your message to the agent’s answer. It open
               .build()
       );
 
-      Iterable<BetaManagedAgentsStreamSessionEvents> events = stream.stream()::iterator;
       events:
-      for (var event : events) {
+      for (var event : stream) {
           switch (event.type().value()) {
               case WORKFLOW_RUN_CREATED -> {
                   var created = event.asWorkflowRunCreated();

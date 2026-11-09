@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages
-fetched_at: 2026-11-02T07:00:41.084580+00:00
+fetched_at: 2026-11-09T07:30:27.029946+00:00
 fetch_method: mintlify_md
 ---
 
@@ -3248,7 +3248,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
                       - `max_tokens: optional number or null`
 
-                        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                         minimum: 1024
 
@@ -7168,7 +7168,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
                   - `max_tokens: optional number or null`
 
-                    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                     minimum: 1024
 
@@ -8041,8 +8041,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
         the thinking-block delimiter tokens.
 
         Reflects the raw reasoning the model produced, not the (possibly shorter)
-        summarized thinking text returned in the response body. Computed by
-        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        summarized thinking text returned in the response body. It may differ from the model's exact
         generation count by a small number of tokens. Always ≤ `output_tokens`;
         `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -11855,7 +11854,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                       - `max_tokens: optional number or null`
 
-                        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                         minimum: 1024
 
@@ -13109,7 +13108,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `max_tokens: optional number or null`
 
-    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
     minimum: 1024
 
@@ -16338,7 +16337,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     - `max_tokens: optional number or null`
 
-                      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                       minimum: 1024
 
@@ -25887,7 +25886,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `max_tokens: optional number or null`
 
-                Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                 minimum: 1024
 
@@ -28031,7 +28030,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `max_tokens: optional number or null`
 
-                Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                 minimum: 1024
 
@@ -33679,7 +33678,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `max_tokens: optional number or null`
 
-                  Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                  Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                   minimum: 1024
 
@@ -36960,7 +36959,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `max_tokens: optional number or null`
 
-                  Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                  Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                   minimum: 1024
 
@@ -43357,7 +43356,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `max_tokens: optional number or null`
 
-                    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                     minimum: 1024
 
@@ -44230,8 +44229,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         the thinking-block delimiter tokens.
 
         Reflects the raw reasoning the model produced, not the (possibly shorter)
-        summarized thinking text returned in the response body. Computed by
-        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        summarized thinking text returned in the response body. It may differ from the model's exact
         generation count by a small number of tokens. Always ≤ `output_tokens`;
         `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -47395,7 +47393,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `max_tokens: optional number or null`
 
-                    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                     minimum: 1024
 
@@ -48061,8 +48059,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       the thinking-block delimiter tokens.
 
       Reflects the raw reasoning the model produced, not the (possibly shorter)
-      summarized thinking text returned in the response body. Computed by
-      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      summarized thinking text returned in the response body. It may differ from the model's exact
       generation count by a small number of tokens. Always ≤ `output_tokens`;
       `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -51258,7 +51255,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                       - `max_tokens: optional number or null`
 
-                        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                         minimum: 1024
 
@@ -51705,8 +51702,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     the thinking-block delimiter tokens.
 
     Reflects the raw reasoning the model produced, not the (possibly shorter)
-    summarized thinking text returned in the response body. Computed by
-    re-tokenizing the raw reasoning text, so it may differ from the model's exact
+    summarized thinking text returned in the response body. It may differ from the model's exact
     generation count by a small number of tokens. Always ≤ `output_tokens`;
     `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -54892,7 +54888,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   - `max_tokens: optional number or null`
 
-                    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                    Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                     minimum: 1024
 
@@ -55779,8 +55775,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         the thinking-block delimiter tokens.
 
         Reflects the raw reasoning the model produced, not the (possibly shorter)
-        summarized thinking text returned in the response body. Computed by
-        re-tokenizing the raw reasoning text, so it may differ from the model's exact
+        summarized thinking text returned in the response body. It may differ from the model's exact
         generation count by a small number of tokens. Always ≤ `output_tokens`;
         `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -58759,7 +58754,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     - `max_tokens: optional number or null`
 
-                      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                       minimum: 1024
 
@@ -59632,8 +59627,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           the thinking-block delimiter tokens.
 
           Reflects the raw reasoning the model produced, not the (possibly shorter)
-          summarized thinking text returned in the response body. Computed by
-          re-tokenizing the raw reasoning text, so it may differ from the model's exact
+          summarized thinking text returned in the response body. It may differ from the model's exact
           generation count by a small number of tokens. Always ≤ `output_tokens`;
           `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -62640,7 +62634,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                       - `max_tokens: optional number or null`
 
-                        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                         minimum: 1024
 
@@ -63513,8 +63507,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             the thinking-block delimiter tokens.
 
             Reflects the raw reasoning the model produced, not the (possibly shorter)
-            summarized thinking text returned in the response body. Computed by
-            re-tokenizing the raw reasoning text, so it may differ from the model's exact
+            summarized thinking text returned in the response body. It may differ from the model's exact
             generation count by a small number of tokens. Always ≤ `output_tokens`;
             `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -66458,7 +66451,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `max_tokens: optional number or null`
 
-            Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+            Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
             minimum: 1024
 
@@ -68673,7 +68666,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `max_tokens: optional number or null`
 
-            Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+            Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
             minimum: 1024
 
@@ -70807,7 +70800,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `max_tokens: optional number or null`
 
-      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
       minimum: 1024
 
@@ -73485,7 +73478,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 - `max_tokens: optional number or null`
 
-                  Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                  Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                   minimum: 1024
 
@@ -77017,7 +77010,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `max_tokens: optional number or null`
 
-        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
         minimum: 1024
 
@@ -79047,7 +79040,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `max_tokens: optional number or null`
 
-        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+        Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
         minimum: 1024
 
@@ -82467,7 +82460,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `max_tokens: optional number or null`
 
-      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
       minimum: 1024
 
@@ -84835,8 +84828,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       the thinking-block delimiter tokens.
 
       Reflects the raw reasoning the model produced, not the (possibly shorter)
-      summarized thinking text returned in the response body. Computed by
-      re-tokenizing the raw reasoning text, so it may differ from the model's exact
+      summarized thinking text returned in the response body. It may differ from the model's exact
       generation count by a small number of tokens. Always ≤ `output_tokens`;
       `output_tokens - thinking_tokens` approximates the non-reasoning output.
 
@@ -87936,7 +87928,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     - `max_tokens: optional number or null`
 
-                      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                      Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                       minimum: 1024
 
@@ -93780,7 +93772,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                           - `max_tokens: optional number or null`
 
-                            Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                            Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                             minimum: 1024
 
@@ -99101,7 +99093,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                         - `max_tokens: optional number or null`
 
-                          Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+                          Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor_result or advisor_redacted_result block carries stop_reason='max_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the API also passes the advisor its remaining-token budget, so the advisor shapes its output toward the cap. When omitted, the advisor model's default output cap applies and the API doesn't pass a budget.
 
                           minimum: 1024
 
@@ -99974,8 +99966,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
               the thinking-block delimiter tokens.
 
               Reflects the raw reasoning the model produced, not the (possibly shorter)
-              summarized thinking text returned in the response body. Computed by
-              re-tokenizing the raw reasoning text, so it may differ from the model's exact
+              summarized thinking text returned in the response body. It may differ from the model's exact
               generation count by a small number of tokens. Always ≤ `output_tokens`;
               `output_tokens - thinking_tokens` approximates the non-reasoning output.
 

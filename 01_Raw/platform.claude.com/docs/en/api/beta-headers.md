@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta-headers
-fetched_at: 2026-11-02T07:00:36.121086+00:00
+fetched_at: 2026-11-09T07:30:23.341588+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,7 +23,7 @@ To access beta features, include the `anthropic-beta` header in your API request
 ```http
 POST /v1/messages
 Authorization: Bearer YOUR_API_KEY
-anthropic-version: 2023-06-01
+anthropic-version: 2026-10-21
 anthropic-beta: BETA_FEATURE_NAME
 content-type: application/json
 ```
@@ -36,7 +36,7 @@ The following example sends a request with the [context editing](https://platfor
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: context-management-2025-06-27" \
     -H "content-type: application/json" \
     -d '{

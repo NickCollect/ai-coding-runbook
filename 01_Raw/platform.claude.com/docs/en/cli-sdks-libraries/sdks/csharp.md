@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/csharp
-fetched_at: 2026-11-02T07:00:35.774132+00:00
+fetched_at: 2026-11-09T07:30:23.100956+00:00
 fetch_method: mintlify_md
 ---
 
@@ -124,7 +124,10 @@ These streaming methods return [`IAsyncEnumerable`](https://learn.microsoft.com/
 
 ```csharp
 using System;
+using Anthropic;
 using Anthropic.Models.Messages;
+
+AnthropicClient client = new();
 
 MessageCreateParams parameters = new()
 {
@@ -444,14 +447,14 @@ The C# SDK also supports Claude Models on Google Cloud (Anthropic managed) throu
 
 ## Semantic versioning
 
-Each major version of this SDK sends one API version in the `anthropic-version` header by default, and a new major version comes with each new API version. The first major version that sends `2026-10-21` is 13.0.0; see [Migrating to API version 2026-10-21](https://platform.claude.com/docs/en/api/migration-2026-10-21#upgrade).
-
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backward-incompatible changes may be released as minor versions:
 
 1. Changes to library internals that are technically public but not intended or documented for external use.
 2. Changes that aren’t expected to impact the vast majority of users in practice.
 
 Backward compatibility is taken seriously to ensure you can rely on a smooth upgrade experience.
+
+Every request to the Claude API uses an API version. With this SDK, your requests use the API version that was current when your SDK’s major version was released, so you move to a new API version by upgrading to a new major version. Version 13.0.0 is the first to use `2026-10-21`. See [Migrating to API version 2026-10-21](https://platform.claude.com/docs/en/api/migration-2026-10-21#upgrade) for how to upgrade.
 
 ## Additional resources
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/fast-mode
-fetched_at: 2026-11-02T07:00:25.664457+00:00
+fetched_at: 2026-11-09T07:30:15.436113+00:00
 fetch_method: mintlify_md
 ---
 
@@ -48,7 +48,7 @@ Fast mode works only on supported models. See [Availability](https://platform.cl
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",
@@ -229,7 +229,7 @@ The response `usage` object includes a `speed` field that indicates which speed 
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",

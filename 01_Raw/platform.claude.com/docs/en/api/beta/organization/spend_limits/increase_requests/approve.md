@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/increase_requests/approve
-fetched_at: 2026-11-02T07:00:50.744306+00:00
+fetched_at: 2026-11-09T07:30:32.734119+00:00
 fetch_method: mintlify_md
 ---
 
@@ -58,7 +58,9 @@ the member was blocked on. Anthropic emails the requester unless
 
 - `id: string`
 
-- `actor: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor`
+- `actor: BetaSpendLimitIncreaseRequestActor`
+
+  Who submitted the increase request.
 
   - `BetaSpendLimitUserActor object`
 
@@ -116,7 +118,9 @@ the member was blocked on. Anthropic emails the requester unless
 
   format: date-time
 
-- `resolved_by: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor or null`
+- `resolved_by: BetaSpendLimitIncreaseRequestResolvedBy or null`
+
+  Who approved or denied the increase request.
 
   - `BetaSpendLimitUserActor object`
 
@@ -128,7 +132,7 @@ the member was blocked on. Anthropic emails the requester unless
 
     A scoped Admin API key acting on behalf of the organization.
 
-- `spend_limit: BetaSpendLimit`
+- `spend_limit: BetaSpendLimit or null`
 
   A configured spend limit: a cap on metered spend for one scope and period.
 

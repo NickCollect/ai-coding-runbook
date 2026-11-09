@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock
-fetched_at: 2026-11-02T07:00:28.756870+00:00
+fetched_at: 2026-11-09T07:30:17.572263+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,15 +10,15 @@ url: https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedr
 description: Access Claude models through Amazon Bedrock with AWS-native authentication, billing, and security boundaries.
 ---
 
-This guide walks you through setting up and making API calls to Claude in Amazon Bedrock. Claude in Amazon Bedrock runs on AWS-managed infrastructure with zero operator access (Anthropic personnel have no access to the inference infrastructure), letting you build sensitive applications entirely inside the AWS security boundary while using the same Messages API shape you use with Anthropic’s first-party API.
+This guide walks you through setting up and making API calls to Claude in Amazon Bedrock. Claude in Amazon Bedrock runs on AWS-managed infrastructure with zero operator access: Anthropic personnel have no access to the inference infrastructure. You can build sensitive applications entirely inside the AWS security boundary, with the same Messages API shape you use with the Claude API.
 
 <Note>
-  This page covers Claude in Amazon Bedrock, which serves Claude through the Messages API at `/anthropic/v1/messages` on AWS-managed infrastructure. The previous Amazon Bedrock integration (the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers) remains available and is documented at [Claude on Amazon Bedrock (Opus 4.6 and earlier)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy). For an Anthropic-operated alternative on AWS with AWS Marketplace billing and typically same-day feature access, see [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws).
+  This page covers Claude in Amazon Bedrock, which serves Claude through the Messages API at `/anthropic/v1/messages` on AWS-managed infrastructure. The `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers are documented at [Claude on Amazon Bedrock (Opus 4.6 and earlier)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy). For an Anthropic-operated alternative on AWS with AWS Marketplace billing, see [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws).
 </Note>
 
 ## Access
 
-Amazon Bedrock sets access criteria for each Claude model individually. Claude Fable 5.1, Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, Claude Opus 4.7, and Claude Haiku 4.5 are open to all Amazon Bedrock customers. For any other model’s current criteria, check [Amazon Bedrock model access](https://console.aws.amazon.com/bedrock/home#/modelaccess) in the AWS console. Claude Mythos Preview requires an invitation through [Project Glasswing](https://anthropic.com/glasswing). For region availability, see [Regions](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#regions).
+Amazon Bedrock sets access criteria for each Claude model individually. Claude Fable 5.1, Claude Fable 5, Claude Opus 4.8, Claude Sonnet 5, Claude Opus 4.7, and Claude Haiku 4.5 are open to all Amazon Bedrock customers. For any other model’s criteria, check [Amazon Bedrock model access](https://console.aws.amazon.com/bedrock/home#/modelaccess) in the AWS console. For region availability, see [Regions](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#regions).
 
 ## Prerequisites
 
@@ -26,8 +26,6 @@ Before you start, ensure you have:
 
 * An AWS account with [Amazon Bedrock model access](https://console.aws.amazon.com/bedrock/home#/modelaccess) enabled for the Claude models you intend to use
 * The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed and configured (optional, for credential management)
-
-Claude Mythos Preview additionally requires a dedicated AWS account that has been allowlisted by the Bedrock Marketplace team. Your Anthropic account executive can submit your account ID for allowlisting (typically processed within 24 hours), and AWS sends a welcome email once it’s complete.
 
 ## Authentication
 
@@ -77,7 +75,7 @@ For short-term access without IAM roles (12-hour maximum, least preferred):
 
 ## Install an SDK
 
-Anthropic’s [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) support Claude in Amazon Bedrock through a Bedrock-specific package or module.
+The [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) supports Claude in Amazon Bedrock through a Bedrock-specific package or module.
 
 <Tabs>
   <Tab title="Python">
@@ -108,8 +106,8 @@ Anthropic’s [client SDKs](https://platform.claude.com/docs/en/cli-sdks-librari
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:3.3.0")
-        implementation("com.anthropic:anthropic-java-bedrock:3.3.0")
+        implementation("com.anthropic:anthropic-java:3.6.0")
+        implementation("com.anthropic:anthropic-java-bedrock:3.6.0")
         ```
       </Tab>
 
@@ -118,12 +116,12 @@ Anthropic’s [client SDKs](https://platform.claude.com/docs/en/cli-sdks-librari
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>3.3.0</version>
+            <version>3.6.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-bedrock</artifactId>
-            <version>3.3.0</version>
+            <version>3.6.0</version>
         </dependency>
         ```
       </Tab>
@@ -147,9 +145,11 @@ Anthropic’s [client SDKs](https://platform.claude.com/docs/en/cli-sdks-librari
 
 ## Making your first request
 
-The endpoint follows the pattern `https://bedrock-mantle.{region}.api.aws/anthropic/v1/messages`. Unlike the `InvokeModel`-based integration, this endpoint uses standard SSE streaming and the same request body shape as Anthropic’s first-party API.
+The endpoint follows the pattern `https://bedrock-mantle.{region}.api.aws/anthropic/v1/messages`. It uses standard SSE streaming and the same request body shape as the Claude API.
 
-The SDK resolves credentials and region using the standard AWS precedence: constructor arguments, then environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN`, `AWS_REGION`), then the AWS config file and credential chain (SSO, assumed roles, ECS task role, IMDS).
+Pass the region when you create the client, or set the `AWS_REGION` environment variable. If you do neither, the Python, TypeScript, C#, Go, PHP, and Ruby SDKs try `AWS_DEFAULT_REGION`. The Java SDK reads the environment only when you call `BedrockMantleBackend.fromEnv()`, which uses the [default AWS Region provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html). That chain also checks your AWS config file and EC2 instance metadata.
+
+For credentials, the client uses what you pass when you create it. Otherwise, the `AWS_BEARER_TOKEN_BEDROCK` environment variable takes priority over the client’s AWS credential chain, which includes the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN` environment variables.
 
 <Tabs>
   <Tab title="cURL">
@@ -159,7 +159,7 @@ The SDK resolves credentials and region using the standard AWS precedence: const
       -u "$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY" \
       -H "x-amz-security-token: $AWS_SESSION_TOKEN" \
       -H "content-type: application/json" \
-      -H "anthropic-version: 2023-06-01" \
+      -H "anthropic-version: 2026-10-21" \
       -d '{
         "model": "anthropic.claude-opus-5-5",
         "max_tokens": 1024,
@@ -338,21 +338,20 @@ The SDK resolves credentials and region using the standard AWS precedence: const
 
 Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Model capabilities and behaviors are documented on the [Models overview](https://platform.claude.com/docs/en/models/overview) page.
 
-| Model                                                                                       | Model ID                          | Access                                                                                              |
-| :------------------------------------------------------------------------------------------ | :-------------------------------- | :-------------------------------------------------------------------------------------------------- |
-| Claude Fable 5.1                                                                            | `anthropic.claude-fable-5-1`      | Open                                                                                                |
-| Claude Mythos 5.1 ([limited availability](https://support.claude.com/en/articles/14604842)) | `anthropic.claude-mythos-5-1`     | Active (verification required)                                                                      |
-| Claude Fable 5                                                                              | `anthropic.claude-fable-5`        | Open                                                                                                |
-| Claude Mythos 5 ([limited availability](https://support.claude.com/en/articles/14604842))   | `anthropic.claude-mythos-5`       | Active (verification required)                                                                      |
-| Claude Mythos Preview ([limited availability](https://anthropic.com/glasswing))             | `anthropic.claude-mythos-preview` | Invitation only                                                                                     |
-| Claude Opus 5.5                                                                             | `anthropic.claude-opus-5-5`       | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
-| Claude Opus 5                                                                               | `anthropic.claude-opus-5`         | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
-| Claude Opus 4.8                                                                             | `anthropic.claude-opus-4-8`       | Open                                                                                                |
-| Claude Opus 4.7                                                                             | `anthropic.claude-opus-4-7`       | Open                                                                                                |
-| Claude Sonnet 5.5                                                                           | `anthropic.claude-sonnet-5-5`     | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
-| Claude Sonnet 5                                                                             | `anthropic.claude-sonnet-5`       | Open                                                                                                |
-| Claude Haiku 5.5                                                                            | `anthropic.claude-haiku-5-5`      | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
-| Claude Haiku 4.5                                                                            | `anthropic.claude-haiku-4-5`      | Open                                                                                                |
+| Model                                                                                       | Model ID                      | Access                                                                                              |
+| :------------------------------------------------------------------------------------------ | :---------------------------- | :-------------------------------------------------------------------------------------------------- |
+| Claude Fable 5.1                                                                            | `anthropic.claude-fable-5-1`  | Open                                                                                                |
+| Claude Mythos 5.1 ([limited availability](https://support.claude.com/en/articles/14604842)) | `anthropic.claude-mythos-5-1` | Active (verification required)                                                                      |
+| Claude Fable 5                                                                              | `anthropic.claude-fable-5`    | Open                                                                                                |
+| Claude Mythos 5 ([limited availability](https://support.claude.com/en/articles/14604842))   | `anthropic.claude-mythos-5`   | Active (verification required)                                                                      |
+| Claude Opus 5.5                                                                             | `anthropic.claude-opus-5-5`   | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
+| Claude Opus 5                                                                               | `anthropic.claude-opus-5`     | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
+| Claude Opus 4.8                                                                             | `anthropic.claude-opus-4-8`   | Open                                                                                                |
+| Claude Opus 4.7                                                                             | `anthropic.claude-opus-4-7`   | Open                                                                                                |
+| Claude Sonnet 5.5                                                                           | `anthropic.claude-sonnet-5-5` | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
+| Claude Sonnet 5                                                                             | `anthropic.claude-sonnet-5`   | Open                                                                                                |
+| Claude Haiku 5.5                                                                            | `anthropic.claude-haiku-5-5`  | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
+| Claude Haiku 4.5                                                                            | `anthropic.claude-haiku-4-5`  | Open                                                                                                |
 
 Use the latest version of Claude Code with Claude in Amazon Bedrock; run `claude update` to upgrade.
 
@@ -371,7 +370,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * [Messages API](https://platform.claude.com/docs/en/api/messages/create) (`/anthropic/v1/messages`)
 * [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching)
 * [Thinking](https://platform.claude.com/docs/en/build-with-claude/thinking)
-* [Tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), including the [Bash tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool), [Computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool), [Memory tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool), and [Text editor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool)
+* [Tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), including the [Bash tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool), [Browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool), [Computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool), [Memory tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool), and [Text editor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool)
 * [Citations](https://platform.claude.com/docs/en/build-with-claude/citations)
 * [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
@@ -383,7 +382,6 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
 * Claude Managed Agents
 * Server-side fallback (the [`fallbacks` parameter](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback); use the [client-side fallback pattern](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback) instead)
-* [Computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) and [browser use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) toolsets (`computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Amazon Bedrock; the beta computer use tool versions remain available)
 
 ## Regions
 
@@ -392,7 +390,7 @@ Claude in Amazon Bedrock is available in the following AWS regions. Amazon Bedro
 * **Global:** dynamic routing across all available regions for maximum availability. No pricing premium.
 * **Regional:** the endpoint resolves to the single AWS region you specify, for data-residency requirements. Regional endpoints carry a 10 percent pricing premium over global endpoints. To route across multiple regions within a geography, use an [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html) (US, EU, JP, or AU). Regions marked **In-region only** in the table support direct single-region routing without an inference profile.
 
-The global endpoint is available for Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5.5, Claude Sonnet 5, Claude Haiku 5.5, and Claude Haiku 4.5. For Claude Fable 5.1, regional endpoints are currently available in `us-east-1` only. Claude Mythos Preview is regional only and is available in `us-east-1`.
+The global endpoint is available for Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5.5, Claude Sonnet 5, Claude Haiku 5.5, and Claude Haiku 4.5. For Claude Fable 5.1, regional endpoints are available in `us-east-1` only.
 
 | AWS region       | Location                  | Endpoint types             |
 | ---------------- | ------------------------- | -------------------------- |
@@ -426,7 +424,7 @@ The global endpoint is available for Claude Fable 5.1, Claude Fable 5, Claude Op
 
 ## Quotas
 
-Default quota is 2 million input tokens per minute (TPM). You can request up to 5 million input TPM and 500,000 output TPM without additional Anthropic approval. AWS enforces requests-per-minute (RPM) limits on the Bedrock side; contact AWS support for RPM adjustments.
+Default quota is 2 million input tokens per minute (TPM). You can request up to 5 million input TPM and 500,000 output TPM without additional Anthropic approval. AWS enforces requests-per-minute (RPM) limits on the Bedrock side; contact AWS Support for RPM adjustments.
 
 ## Data retention
 
@@ -438,8 +436,4 @@ Claude in Amazon Bedrock emits logs to both CloudWatch and CloudTrail. Anthropic
 
 ## Support
 
-For support, contact **[bedrock-ant-eap@amazon.com](mailto:bedrock-ant-eap@amazon.com)**. Include your AWS account ID and the `request-id` from any failed API responses.
-
-<Note>
-  **Claude Mythos Preview** is a research preview model available to invited customers on Amazon Bedrock. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
-</Note>
+For support, contact AWS Support or your AWS account team. Include your AWS account ID and the `request-id` from any failed API responses.

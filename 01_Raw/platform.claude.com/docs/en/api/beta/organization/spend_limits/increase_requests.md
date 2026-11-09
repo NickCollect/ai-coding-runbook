@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/increase_requests
-fetched_at: 2026-11-02T07:00:50.698297+00:00
+fetched_at: 2026-11-09T07:30:32.673565+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,7 +62,9 @@ Requests whose requester is no longer a member are excluded.
 
   - `id: string`
 
-  - `actor: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor`
+  - `actor: BetaSpendLimitIncreaseRequestActor`
+
+    Who submitted the increase request.
 
     - `BetaSpendLimitUserActor object`
 
@@ -120,7 +122,9 @@ Requests whose requester is no longer a member are excluded.
 
     format: date-time
 
-  - `resolved_by: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor or null`
+  - `resolved_by: BetaSpendLimitIncreaseRequestResolvedBy or null`
+
+    Who approved or denied the increase request.
 
     - `BetaSpendLimitUserActor object`
 
@@ -371,7 +375,9 @@ requester at the request's period.
 
   - `id: string`
 
-  - `actor: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor`
+  - `actor: BetaSpendLimitIncreaseRequestActor`
+
+    Who submitted the increase request.
 
     - `BetaSpendLimitUserActor object`
 
@@ -429,7 +435,9 @@ requester at the request's period.
 
     format: date-time
 
-  - `resolved_by: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor or null`
+  - `resolved_by: BetaSpendLimitIncreaseRequestResolvedBy or null`
+
+    Who approved or denied the increase request.
 
     - `BetaSpendLimitUserActor object`
 
@@ -689,7 +697,9 @@ the member was blocked on. Anthropic emails the requester unless
 
 - `id: string`
 
-- `actor: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor`
+- `actor: BetaSpendLimitIncreaseRequestActor`
+
+  Who submitted the increase request.
 
   - `BetaSpendLimitUserActor object`
 
@@ -747,7 +757,9 @@ the member was blocked on. Anthropic emails the requester unless
 
   format: date-time
 
-- `resolved_by: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor or null`
+- `resolved_by: BetaSpendLimitIncreaseRequestResolvedBy or null`
+
+  Who approved or denied the increase request.
 
   - `BetaSpendLimitUserActor object`
 
@@ -759,7 +771,7 @@ the member was blocked on. Anthropic emails the requester unless
 
     A scoped Admin API key acting on behalf of the organization.
 
-- `spend_limit: BetaSpendLimit`
+- `spend_limit: BetaSpendLimit or null`
 
   A configured spend limit: a cap on metered spend for one scope and period.
 
@@ -1084,7 +1096,9 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
   - `id: string`
 
-  - `actor: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor`
+  - `actor: BetaSpendLimitIncreaseRequestActor`
+
+    Who submitted the increase request.
 
     - `BetaSpendLimitUserActor object`
 
@@ -1142,7 +1156,9 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
     format: date-time
 
-  - `resolved_by: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor or null`
+  - `resolved_by: BetaSpendLimitIncreaseRequestResolvedBy or null`
+
+    Who approved or denied the increase request.
 
     - `BetaSpendLimitUserActor object`
 
@@ -1367,7 +1383,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
   - `id: string`
 
-  - `actor: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor`
+  - `actor: BetaSpendLimitIncreaseRequestActor`
+
+    Who submitted the increase request.
 
     - `BetaSpendLimitUserActor object`
 
@@ -1425,7 +1443,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
     format: date-time
 
-  - `resolved_by: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor or null`
+  - `resolved_by: BetaSpendLimitIncreaseRequestResolvedBy or null`
+
+    Who approved or denied the increase request.
 
     - `BetaSpendLimitUserActor object`
 
@@ -1579,6 +1599,98 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
     - `"pending"`
 
+### Beta Spend Limit Increase Request Actor
+
+- `BetaSpendLimitIncreaseRequestActor = BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor`
+
+  Who submitted the increase request.
+
+  - `BetaSpendLimitUserActor object`
+
+    A user within the organization. `name` and `email_address` are
+    null when the underlying account is unavailable or has been deleted;
+    `deleted` is true only for deleted accounts.
+
+    - `type: "user_actor"`
+
+      Actor type. Always `user_actor`.
+
+      default: user_actor
+
+    - `deleted: boolean`
+
+      True only when the underlying account has been deleted.
+
+      default: false
+
+    - `email_address: string or null`
+
+      The user's email address. Null when the account is unavailable or has been deleted.
+
+    - `name: string or null`
+
+      The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+
+    - `user_id: string`
+
+      Tagged ID of the user.
+
+  - `BetaSpendLimitScopedAPIKeyActor object`
+
+    A scoped Admin API key acting on behalf of the organization.
+
+    - `type: "scoped_api_key_actor"`
+
+      default: scoped_api_key_actor
+
+    - `scoped_api_key_id: string`
+
+### Beta Spend Limit Increase Request Resolved By
+
+- `BetaSpendLimitIncreaseRequestResolvedBy = BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor`
+
+  Who approved or denied the increase request.
+
+  - `BetaSpendLimitUserActor object`
+
+    A user within the organization. `name` and `email_address` are
+    null when the underlying account is unavailable or has been deleted;
+    `deleted` is true only for deleted accounts.
+
+    - `type: "user_actor"`
+
+      Actor type. Always `user_actor`.
+
+      default: user_actor
+
+    - `deleted: boolean`
+
+      True only when the underlying account has been deleted.
+
+      default: false
+
+    - `email_address: string or null`
+
+      The user's email address. Null when the account is unavailable or has been deleted.
+
+    - `name: string or null`
+
+      The user's current display name. Null when the account is unavailable, has been deleted, or has no name set.
+
+    - `user_id: string`
+
+      Tagged ID of the user.
+
+  - `BetaSpendLimitScopedAPIKeyActor object`
+
+    A scoped Admin API key acting on behalf of the organization.
+
+    - `type: "scoped_api_key_actor"`
+
+      default: scoped_api_key_actor
+
+    - `scoped_api_key_id: string`
+
 ### Beta Spend Limit Increase Request Status
 
 - `BetaSpendLimitIncreaseRequestStatus = "approved" or "denied" or "pending"`
@@ -1599,7 +1711,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
   - `id: string`
 
-  - `actor: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor`
+  - `actor: BetaSpendLimitIncreaseRequestActor`
+
+    Who submitted the increase request.
 
     - `BetaSpendLimitUserActor object`
 
@@ -1657,7 +1771,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
     format: date-time
 
-  - `resolved_by: BetaSpendLimitUserActor or BetaSpendLimitScopedAPIKeyActor or null`
+  - `resolved_by: BetaSpendLimitIncreaseRequestResolvedBy or null`
+
+    Who approved or denied the increase request.
 
     - `BetaSpendLimitUserActor object`
 
@@ -1669,7 +1785,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
 
       A scoped Admin API key acting on behalf of the organization.
 
-  - `spend_limit: BetaSpendLimit`
+  - `spend_limit: BetaSpendLimit or null`
 
     A configured spend limit: a cap on metered spend for one scope and period.
 

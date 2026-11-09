@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/user-management
-fetched_at: 2026-11-02T07:00:30.786665+00:00
+fetched_at: 2026-11-09T07:30:19.233802+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,16 +14,12 @@ This page covers managing the people in your **Claude Enterprise** (claude.ai) o
 
 * List members and look them up by email address
 * Change a member’s role
-* Remove members
+* Remove members, or sign them out everywhere without removing them (beta)
 * Send and withdraw invites
 * Manage your enterprise’s groups and their membership
 * Read your organization’s custom roles
 
 For Claude Console (Claude Platform) organizations, see the [Admin API guide for Claude Console](https://platform.claude.com/docs/en/manage-claude/admin-api).
-
-<Note>
-  Group and custom-role requests don’t require the `anthropic-beta: ce-user-management-2026-07-13` [beta header](https://platform.claude.com/docs/en/api/beta-headers). Requests that still send it are accepted and behave identically.
-</Note>
 
 ## Which endpoints can your organization use?
 
@@ -44,20 +40,20 @@ Members and invites are the same endpoints for both organization types; this pag
 <Check>
   **Scoped Admin API key required**
 
-  These endpoints require an Admin API key with the `read:members` scope (member and invite `GET` endpoints, and all custom-role endpoints; there is no separate role scope), the `write:members` scope (member and invite `POST` and `DELETE` endpoints), the `read:rbac_groups` scope (group `GET` endpoints), or the `write:rbac_groups` scope (group `POST` and `DELETE` endpoints). Assigning the `managed` role, or groups on an invite, requires `write:rbac_groups` in addition to `write:members`. A key carrying the `read:org_audit` scope (a read-only scope for security-audit integrations) can also call every `GET` endpoint on this page and the [Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api) read endpoints. See [Create an Admin API key](https://platform.claude.com/docs/en/manage-claude/admin-api-keys#create-a-key-for-a-claude-enterprise-organization) for where your primary owner creates one and which scopes to select. Pass the key in the `x-api-key` header on every request, together with the [`anthropic-version`](https://platform.claude.com/docs/en/api/versioning) header.
+  These endpoints require an Admin API key with the scope that matches the request. Member and invite `GET` endpoints, and all custom-role endpoints, need `read:members` (there is no separate role scope). Member and invite `POST` and `DELETE` endpoints need `write:members`. Group `GET` endpoints need `read:rbac_groups`, and group `POST` and `DELETE` endpoints need `write:rbac_groups`. Assigning the `managed` role, or groups on an invite, requires `write:rbac_groups` in addition to `write:members`. A key carrying the `read:org_audit` scope (a read-only scope for security-audit integrations) can also call every `GET` endpoint on this page and the [Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api) read endpoints. See [Create an Admin API key](https://platform.claude.com/docs/en/manage-claude/admin-api-keys#create-a-key-for-a-claude-enterprise-organization) for where to create one and which scopes to select. Pass the key in the `x-api-key` header on every request, together with the [`anthropic-version`](https://platform.claude.com/docs/en/api/versioning) header.
 </Check>
 
 ## Overview
 
 This page covers five resources:
 
-| Resource          | Endpoints                                                                                                                                                                                                                                                    | Use for                                                                                                    |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| **Members**       | `GET /v1/organizations/users`<br />`GET /v1/organizations/users/{user_id}`<br />`POST /v1/organizations/users/{user_id}`<br />`DELETE /v1/organizations/users/{user_id}`                                                                                     | List the organization’s members or look one up by email; change a member’s role; remove a member.          |
-| **Invites**       | `POST /v1/organizations/invites`<br />`GET /v1/organizations/invites`<br />`GET /v1/organizations/invites/{invite_id}`<br />`DELETE /v1/organizations/invites/{invite_id}`                                                                                   | Invite a person to the organization, track the invitation’s status, and withdraw it before it is accepted. |
-| **Groups**        | `GET /v1/organizations/rbac_groups`<br />`GET /v1/organizations/rbac_groups/{rbac_group_id}`<br />`POST /v1/organizations/rbac_groups`<br />`POST /v1/organizations/rbac_groups/{rbac_group_id}`<br />`DELETE /v1/organizations/rbac_groups/{rbac_group_id}` | Read your enterprise’s groups and the custom roles attached to each; create, rename, and delete groups.    |
-| **Group members** | `GET /v1/organizations/rbac_groups/{rbac_group_id}/members`<br />`POST /v1/organizations/rbac_groups/{rbac_group_id}/members`<br />`DELETE /v1/organizations/rbac_groups/{rbac_group_id}/members/{user_id}`                                                  | Read a group’s members; add and remove members.                                                            |
-| **Custom roles**  | `GET /v1/organizations/rbac_roles`<br />`GET /v1/organizations/rbac_roles/{rbac_role_id}`<br />`GET /v1/organizations/rbac_roles/{rbac_role_id}/permissions`                                                                                                 | Read your organization’s custom roles and the permissions each role grants.                                |
+| Resource          | Endpoints                                                                                                                                                                                                                                                    | Use for                                                                                                                         |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| **Members**       | `GET /v1/organizations/users`<br />`GET /v1/organizations/users/{user_id}`<br />`POST /v1/organizations/users/{user_id}`<br />`DELETE /v1/organizations/users/{user_id}`<br />`POST /v1/organizations/users/{user_id}/sign_out` (beta)                       | List the organization’s members or look one up by email; change a member’s role; remove a member; sign a member out everywhere. |
+| **Invites**       | `POST /v1/organizations/invites`<br />`GET /v1/organizations/invites`<br />`GET /v1/organizations/invites/{invite_id}`<br />`DELETE /v1/organizations/invites/{invite_id}`                                                                                   | Invite a person to the organization, track the invitation’s status, and withdraw it before it is accepted.                      |
+| **Groups**        | `GET /v1/organizations/rbac_groups`<br />`GET /v1/organizations/rbac_groups/{rbac_group_id}`<br />`POST /v1/organizations/rbac_groups`<br />`POST /v1/organizations/rbac_groups/{rbac_group_id}`<br />`DELETE /v1/organizations/rbac_groups/{rbac_group_id}` | Read your enterprise’s groups and the custom roles attached to each; create, rename, and delete groups.                         |
+| **Group members** | `GET /v1/organizations/rbac_groups/{rbac_group_id}/members`<br />`POST /v1/organizations/rbac_groups/{rbac_group_id}/members`<br />`DELETE /v1/organizations/rbac_groups/{rbac_group_id}/members/{user_id}`                                                  | Read a group’s members; add and remove members.                                                                                 |
+| **Custom roles**  | `GET /v1/organizations/rbac_roles`<br />`GET /v1/organizations/rbac_roles/{rbac_role_id}`<br />`GET /v1/organizations/rbac_roles/{rbac_role_id}/permissions`                                                                                                 | Read your organization’s custom roles and the permissions each role grants.                                                     |
 
 Custom roles and their group attachments are managed in [claude.ai organization settings](https://claude.ai/admin-settings); the API reads them but cannot change them.
 
@@ -71,7 +67,7 @@ List the organization’s members, newest first:
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/users?limit=20" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -204,11 +200,11 @@ If your organization’s plan draws members from a finite pool of purchased seat
 
 ### Groups and roles
 
-Groups connect members to custom roles (role-based access control, the `rbac` in the endpoint paths and scope names). Groups are owned by your enterprise as a whole (the parent organization together with every organization under it) rather than by a single organization, so the group scopes (`read:rbac_groups` and `write:rbac_groups`) require a key created for all linked organizations. Each group carries a `source_type`: `direct` for groups created in claude.ai, `scim` for groups provisioned by your identity provider. A group’s `role_ids` field lists the IDs of the custom roles attached to it; resolve them to names and permissions with the [custom role endpoints](https://platform.claude.com/docs/en/manage-claude/user-management#custom-roles), noting that the role catalog is per-organization whereas groups are enterprise-wide, so fetching a role that belongs to a different organization of your enterprise returns 404 for your key. The field is `null` (rather than `[]`) when role data was temporarily unavailable, so retry to distinguish a degraded read from a group with no roles.
+Groups connect members to custom roles (role-based access control, the `rbac` in the endpoint paths and scope names). Groups belong to your parent organization and every organization under it, not to a single organization. So the group scopes (`read:rbac_groups` and `write:rbac_groups`) require a key created for all linked organizations. Each group carries a `source_type`: `direct` for groups created in claude.ai, `scim` for groups provisioned by your identity provider. A group’s `role_ids` field lists the IDs of the custom roles attached to it. Resolve them to names and permissions with the [custom role endpoints](https://platform.claude.com/docs/en/manage-claude/user-management#custom-roles). Each organization has its own role catalog, but groups are shared across your parent organization. So fetching a role that belongs to a different organization under your parent organization returns 404 for your key. The `role_ids` field is `null` (rather than `[]`) when role data was temporarily unavailable, so retry to distinguish a degraded read from a group with no roles.
 
 ## Versioning
 
-Send the `anthropic-version` header on every request; see [API versions](https://platform.claude.com/docs/en/api/versioning) for the available versions.
+Send the `anthropic-version` header on every request; see [Versions](https://platform.claude.com/docs/en/api/versioning) for the available versions.
 
 ## Rate limits
 
@@ -216,7 +212,7 @@ Admin API endpoints share a per-organization limit of **100 requests per minute*
 
 ## Pagination
 
-Member and invite lists use ID-based pagination: pass `limit` (default 20, max 1000) plus at most one of `before_id` or `after_id`, and page using the `first_id` and `last_id` fields of each response until `has_more` is `false`. Group and custom-role lists use an **opaque cursor** instead: pass the response’s `next_page` value unchanged as the `page` parameter on the next request, until `next_page` is `null`.
+Member and invite lists use ID-based pagination: pass `limit` (default 20, maximum 1,000) plus at most one of `before_id` or `after_id`, and page using the `first_id` and `last_id` fields of each response until `has_more` is `false`. Group and custom-role lists use an **opaque cursor** instead: pass the response’s `next_page` value unchanged as the `page` parameter on the next request, until `next_page` is `null`.
 
 When you iterate over the results, the SDK fetches more pages for you, so `limit` sets the page size, not the total. In the CLI, `--limit` sets the total number of results for member and invite lists. For group and role lists, it sets the page size.
 
@@ -236,7 +232,7 @@ For complete parameter details and response schemas, see [List users](https://pl
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/users?email=jane@example.com" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -337,7 +333,7 @@ For complete parameter details and response schemas, see [Get user](https://plat
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/users/user_01AbCdEfGhIjKlMnOpQrSt" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -432,7 +428,7 @@ For complete parameter details and response schemas, see [Update user](https://p
   curl -X POST "https://api.anthropic.com/v1/organizations/users/user_01AbCdEfGhIjKlMnOpQrSt" \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{"role": "managed"}'
   ```
 
@@ -548,7 +544,7 @@ For complete parameter details and response schemas, see [Remove user](https://p
   ```bash cURL
   curl -X DELETE "https://api.anthropic.com/v1/organizations/users/user_01AbCdEfGhIjKlMnOpQrSt" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -626,6 +622,180 @@ For complete parameter details and response schemas, see [Remove user](https://p
 }
 ```
 
+### Sign a member out everywhere
+
+`POST /v1/organizations/users/{user_id}/sign_out` signs a member out of Claude on every browser and device, without removing them from the organization. Use it when a member’s device is lost or stolen, during a security incident, or while you investigate an account before you decide whether to remove the member. Requires the `write:members` scope.
+
+<Note>
+  This endpoint is in **beta** for Claude Enterprise organizations.
+
+  Every request must include the [beta header](https://platform.claude.com/docs/en/api/beta-headers) `anthropic-beta: admin-user-sign-out-2026-10-08`. A request without it returns 400, with a message that names the value. The SDK and the CLI send it for you.
+
+  If your version of the SDK or the `ant` CLI doesn’t have this endpoint, send the request over HTTP with this header.
+</Note>
+
+The sign-out reaches the person’s whole Claude account, including their sessions in other organizations and on an individual plan. The member keeps their seat and role and can sign in again right away. To keep someone out, [remove them](https://platform.claude.com/docs/en/manage-claude/user-management#remove-a-member) or, if your organization requires single sign-on, disable their account in your identity provider. Disabling stops new sign-ins but leaves them in your member list. If you remove someone and leave their identity provider account active, automatic provisioning can add them back at their next sign-in. If your identity provider manages membership, you can remove the member only there.
+
+Create the key before you need it. See [Create a key for a Claude Enterprise organization](https://platform.claude.com/docs/en/manage-claude/admin-api-keys#create-a-key-for-a-claude-enterprise-organization). A `write:members` key works only in the organization it was created in, so each linked organization needs its own key. That organization’s primary owner creates it. To look members up by email address with the same key, also select the `read:members` scope.
+
+The request has no body. Pass the member’s `id`, which [List members](https://platform.claude.com/docs/en/manage-claude/user-management#list-members) returns:
+
+<CodeGroup>
+  ```bash cURL
+  curl -X POST "https://api.anthropic.com/v1/organizations/users/user_01AbCdEfGhIjKlMnOpQrSt/sign_out" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2026-10-21" \
+    -H "anthropic-beta: admin-user-sign-out-2026-10-08"
+  ```
+
+  ```bash CLI
+  ant beta:organization:users sign-out --user-id user_01AbCdEfGhIjKlMnOpQrSt
+  ```
+
+  ```python Python
+  client = anthropic.Anthropic()
+
+  user = client.beta.organization.users.sign_out("user_01AbCdEfGhIjKlMnOpQrSt")
+
+  print(f"id: {user.id}")
+  ```
+
+  ```typescript TypeScript
+  const client = new Anthropic();
+
+  const user = await client.beta.organization.users.signOut("user_01AbCdEfGhIjKlMnOpQrSt");
+
+  console.log(`id: ${user.id}`);
+  ```
+
+  ```csharp C#
+  AnthropicClient client = new();
+
+  var user = await client.Beta.Organization.Users.SignOut("user_01AbCdEfGhIjKlMnOpQrSt");
+
+  Console.WriteLine($"id: {user.ID}");
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+
+  user, err := client.Beta.Organization.Users.SignOut(context.Background(), "user_01AbCdEfGhIjKlMnOpQrSt", anthropic.BetaOrganizationUserSignOutParams{})
+  if err != nil {
+  	log.Fatal(err)
+  }
+
+  fmt.Printf("id: %s\n", user.ID)
+  ```
+
+  ```java Java
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+  var user = client.beta().organization().users()
+      .signOut("user_01AbCdEfGhIjKlMnOpQrSt");
+
+  IO.println("id: " + user.id());
+  ```
+
+  ```php PHP
+  $client = new Client();
+
+  $user = $client->beta->organization->users->signOut(
+      userID: 'user_01AbCdEfGhIjKlMnOpQrSt',
+  );
+
+  echo "id: {$user->id}\n";
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  user = client.beta.organization.users.sign_out("user_01AbCdEfGhIjKlMnOpQrSt")
+
+  puts "id: #{user.id}"
+  ```
+</CodeGroup>
+
+A successful request returns 200 with the member, whose role and other fields are unchanged:
+
+```json
+{
+  "type": "user",
+  "id": "user_01AbCdEfGhIjKlMnOpQrSt",
+  "email": "jane@example.com",
+  "name": "Jane Smith",
+  "role": "user",
+  "added_at": "2026-06-12T09:14:03Z"
+}
+```
+
+If you have no key yet, an owner can use the **Sign out everywhere** action on the Members page of [claude.ai organization settings](https://claude.ai/admin-settings) instead. It ends the same sessions, trusted devices, and OAuth tokens, and removes the same push-notification registrations. An owner can’t use it on their own account: they sign out their own sessions from their account settings in claude.ai.
+
+#### What the request ends
+
+The request ends all of the following for the member:
+
+* **Sign-in sessions:** All of them for the person’s account, on every browser and device.
+* **Trusted devices:** Every browser, computer, or phone that the person registered as trusted for sensitive actions. The person must register each device again.
+* **OAuth tokens issued for this organization:** Whichever app holds them, such as Claude Code or a third-party app. Those apps must sign in again. A token almost always stops working at once, and within an hour at most.
+
+The request also clears the record of browsers on which the person chose to skip Claude’s two-step verification, so that the next sign-in there asks for the second step again. It also removes the push-notification registrations that Claude holds for the person’s phones, desktop apps, and browsers, so that Claude stops sending notifications to them. This removal runs asynchronously: it usually completes within a minute, but in rare cases can take longer. A 200 doesn’t confirm either of these two steps.
+
+Only the OAuth tokens are limited to this organization. Sessions, trusted devices, and push-notification registrations belong to the person’s account, so the sign-out also reaches their other organizations and any individual plan.
+
+The request doesn’t delete anything that is already stored on a device.
+
+#### What the request doesn’t end
+
+The request doesn’t end any of the following:
+
+* **API keys:** They keep working, including Admin API keys that the person created. To stop an Admin API key, delete it in the **Keys** section of [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access).
+* **OAuth tokens for other organizations:** To end them, send the request in each organization with that organization’s key. The person has the same `id` in every organization. OAuth tokens issued to the person’s account and not to an organization also keep working, and this request can’t end them.
+* **Claude Code cloud sessions and routines:** Sessions that run on Anthropic’s infrastructure, such as Claude Code on the web, or in one of your [self-hosted environments](https://code.claude.com/docs/en/self-hosted-environments) keep running. Work in progress when you send the request, or started soon after, can fail. The session then gets new credentials without the person signing in again, and continues. The person’s [routines](https://code.claude.com/docs/en/routines) that run on a schedule or on GitHub events keep starting new sessions. The **Sign out everywhere** action leaves these running too.
+* **Computers linked to Cowork:** They stay linked.
+* **A sign-in that is in progress:** One that’s already under way can finish during the request, or up to 5 minutes after it. If the [audit log export](https://platform.claude.com/docs/en/manage-claude/compliance-api#export-audit-logs) or [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed) shows the person signing in after the request, send it again. Sign-ins to apps such as Claude Code aren’t recorded there, so if the person was signing in to one, send it again after 5 minutes.
+
+#### Who you can’t sign out
+
+The request can’t sign out the organization’s primary owner: it returns 400 with the error code `cannot_sign_out_primary_owner`. No one in your organization can sign out the primary owner, on the Members page either. The primary owner signs out their own sessions from their account settings in claude.ai.
+
+A key with the `write:members` scope can sign out everyone else. That includes owners, members whose custom roles include the permission to manage owners, and members with the `membership_admin` role. Owners and the primary owner can do the same with the **Sign out everywhere** action on the Members page. Only the member’s role in this organization counts, so you can sign out someone who is the primary owner of a different organization.
+
+The key keeps working after the person who created it changes role or leaves the organization. See [What happens to an Admin API key when the person who created it leaves?](https://platform.claude.com/docs/en/manage-claude/user-management#what-happens-to-an-admin-api-key-when-the-person-who-created-it-leaves).
+
+#### Responses
+
+| Status                                  | Meaning                                                                                                                                                                                                                               |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 200                                     | The sign-out completed. It’s safe to retry: a request that finds nothing left to end also returns 200, and a second request ends any session, trusted device, or OAuth token that the person has gained since the first.              |
+| 400 `cannot_sign_out_primary_owner`     | The member is the primary owner, who can’t be signed out. See [Who you can’t sign out](https://platform.claude.com/docs/en/manage-claude/user-management#who-you-cant-sign-out).                                                      |
+| 400 `organization_not_enrolled_in_beta` | The endpoint isn’t available to your organization.                                                                                                                                                                                    |
+| 400                                     | The request omits the `anthropic-beta` value, which the message names, or the `id` in the path doesn’t start with `user_`.                                                                                                            |
+| 401                                     | The key is missing, invalid, or deleted, or it was created for a parent organization and isn’t bound to one organization.                                                                                                             |
+| 403                                     | The key lacks the `write:members` scope.                                                                                                                                                                                              |
+| 404                                     | No member with that ID is in your organization.                                                                                                                                                                                       |
+| 429                                     | The organization is over the [rate limit](https://platform.claude.com/docs/en/manage-claude/user-management#rate-limits) that Admin API endpoints share. The `retry-after` header says when to retry. Sign-out has no separate limit. |
+| 503                                     | A service that the request needs is temporarily unavailable. What the request already ended stays ended. Send the request again to end the rest.                                                                                      |
+
+Error responses follow the standard shape documented in [Claude API errors](https://platform.claude.com/docs/en/api/errors), with the error code in `error.details.error_code`:
+
+```json
+{
+  "type": "error",
+  "error": {
+    "type": "invalid_request_error",
+    "message": "...",
+    "details": {
+      "error_code": "cannot_sign_out_primary_owner"
+    }
+  },
+  "request_id": "req_018EeWyXxfu5pfWkrYcMdjWG"
+}
+```
+
+#### Where the sign-out is recorded
+
+Each sign-out that completes is recorded as `org_user_trusted_devices_revoked`, the same event that the **Sign out everywhere** action records. It appears in the [audit log export](https://platform.claude.com/docs/en/manage-claude/compliance-api#export-audit-logs) that owners download in claude.ai. If your organization has the Compliance API, it also appears in the [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed), with counts of the trusted devices and sessions that the request ended. A request that stops partway appears in the Activity Feed too, with `completed` set to `false`, and not in the audit log.
+
 ## Invites
 
 ### Create an invite
@@ -643,7 +813,7 @@ For complete parameter details and response schemas, see [Create invite](https:/
   curl -X POST "https://api.anthropic.com/v1/organizations/invites" \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{
       "email": "newhire@example.com",
       "role": "managed",
@@ -795,7 +965,7 @@ For complete parameter details and response schemas, see [Create invite](https:/
 
 ### List invites
 
-`GET /v1/organizations/invites` returns the organization’s invites, most recent first, across the `pending`, `accepted`, and `expired` states; there is no status filter. Requires the `read:members` scope.
+`GET /v1/organizations/invites` returns the organization’s invites, most recent first, across the `pending`, `accepted`, and `expired` states. To list only invites in certain states, pass `statuses[]` once for each state, for example `statuses[]=pending`. Requires the `read:members` scope.
 
 For complete parameter details and response schemas, see [List invites](https://platform.claude.com/docs/en/api/organization/invites/list) in the API reference.
 
@@ -803,7 +973,7 @@ For complete parameter details and response schemas, see [List invites](https://
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/invites?limit=20" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -904,7 +1074,7 @@ For complete parameter details and response schemas, see [Get invite](https://pl
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/invites/invite_01QrStUvWxYzAbCdEfGhIj" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -998,7 +1168,7 @@ For complete parameter details and response schemas, see [Delete invite](https:/
   ```bash cURL
   curl -X DELETE "https://api.anthropic.com/v1/organizations/invites/invite_01QrStUvWxYzAbCdEfGhIj" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -1085,7 +1255,7 @@ For complete parameter details and response schemas, see [List groups](https://p
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/rbac_groups?limit=20" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -1185,7 +1355,6 @@ For complete parameter details and response schemas, see [List groups](https://p
       "name": "Engineering",
       "source_type": "direct",
       "role_ids": ["rbac_role_01CdEfGhIjKlMnOpQrStUv"],
-      "roles": ["rbac_role_01CdEfGhIjKlMnOpQrStUv"],
       "created_at": "2026-03-18T10:01:42Z",
       "updated_at": "2026-05-02T08:55:09Z"
     }
@@ -1205,7 +1374,7 @@ For complete parameter details and response schemas, see [Get group](https://pla
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -1306,7 +1475,7 @@ For complete parameter details and response schemas, see [Create group](https://
   curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups" \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{"name": "Engineering"}'
   ```
 
@@ -1402,7 +1571,6 @@ For complete parameter details and response schemas, see [Create group](https://
   "name": "Engineering",
   "source_type": "direct",
   "role_ids": [],
-  "roles": [],
   "created_at": "2026-07-09T18:00:00Z",
   "updated_at": "2026-07-09T18:00:00Z"
 }
@@ -1419,7 +1587,7 @@ For complete parameter details and response schemas, see [Update group](https://
   curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{"name": "Platform Engineering"}'
   ```
 
@@ -1532,7 +1700,7 @@ For complete parameter details and response schemas, see [Delete group](https://
   ```bash cURL
   curl -X DELETE "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -1627,7 +1795,7 @@ For complete parameter details and response schemas, see [List group members](ht
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members?limit=100" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -1743,7 +1911,6 @@ For complete parameter details and response schemas, see [List group members](ht
     {
       "type": "rbac_group_member",
       "rbac_group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
-      "group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
       "user_id": "user_01AbCdEfGhIjKlMnOpQrSt",
       "email": "jane@example.com",
       "created_at": "2026-04-07T12:30:00Z"
@@ -1765,7 +1932,7 @@ For complete parameter details and response schemas, see [Add group member](http
   curl -X POST "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members" \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{"user_id": "user_01AbCdEfGhIjKlMnOpQrSt"}'
   ```
 
@@ -1875,7 +2042,6 @@ For complete parameter details and response schemas, see [Add group member](http
 {
   "type": "rbac_group_member",
   "rbac_group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
-  "group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
   "user_id": "user_01AbCdEfGhIjKlMnOpQrSt",
   "email": "jane@example.com",
   "created_at": "2026-07-09T18:00:00Z"
@@ -1892,7 +2058,7 @@ For complete parameter details and response schemas, see [Remove group member](h
   ```bash cURL
   curl -X DELETE "https://api.anthropic.com/v1/organizations/rbac_groups/rbac_group_01UvWxYzAbCdEfGhIjKlMn/members/user_01AbCdEfGhIjKlMnOpQrSt" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -1993,7 +2159,6 @@ For complete parameter details and response schemas, see [Remove group member](h
 ```json
 {
   "rbac_group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
-  "group_id": "rbac_group_01UvWxYzAbCdEfGhIjKlMn",
   "user_id": "user_01AbCdEfGhIjKlMnOpQrSt",
   "type": "rbac_group_member_deleted"
 }
@@ -2001,7 +2166,7 @@ For complete parameter details and response schemas, see [Remove group member](h
 
 ## Custom roles
 
-Custom roles are read-only through the API: these endpoints catalog your organization’s custom roles (defined in [claude.ai organization settings](https://claude.ai/admin-settings) or provisioned by Anthropic) and the permissions each role grants. Custom-role reads use the `read:members` scope (there is no separate role scope) and work with an organization-level key: unlike the group endpoints, they do not require a key created for all linked organizations, and the catalog returned is your organization’s own.
+Custom roles are read-only through the API: these endpoints catalog your organization’s custom roles (defined in [claude.ai organization settings](https://claude.ai/admin-settings) or provisioned by Anthropic) and the permissions each role grants. Custom-role reads use the `read:members` scope (there is no separate role scope) and work with an organization-level key, and the catalog returned is your organization’s own.
 
 Read a role’s name from its `display_name` field. For a role provisioned by Anthropic, `display_name` can differ from the label claude.ai shows, and Anthropic might change the name. To keep a lasting reference to a role, store its `id`.
 
@@ -2015,7 +2180,7 @@ For complete parameter details and response schemas, see [List roles](https://pl
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/rbac_roles?limit=20" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -2113,7 +2278,6 @@ For complete parameter details and response schemas, see [List roles](https://pl
       "type": "rbac_role",
       "id": "rbac_role_01CdEfGhIjKlMnOpQrStUv",
       "display_name": "Engineering base",
-      "name": "Engineering base",
       "created_at": "2026-03-18T10:01:42Z",
       "updated_at": "2026-05-02T08:55:09Z"
     }
@@ -2133,7 +2297,7 @@ For complete parameter details and response schemas, see [Get role](https://plat
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/rbac_roles/rbac_role_01CdEfGhIjKlMnOpQrStUv" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -2218,7 +2382,7 @@ For complete parameter details and response schemas, see [Get role](https://plat
 
 `GET /v1/organizations/rbac_roles/{rbac_role_id}/permissions` returns the role’s permissions. Each permission pairs a `resource` (what it applies to: the organization’s product features, a connector tool, a connector OAuth scope, one connector, or every connector) with an `action` (what it grants on that resource). Rows for features not enabled for your organization are omitted, so a page might contain fewer than `limit` rows while `has_more` is `true`. Requires the `read:members` scope.
 
-Two `action` values need special care: an `organization` permission whose action is `capability_access_all` (every product feature) or `capability_access_all_ga` (every stable product feature, that is, every feature not labeled beta or research preview) is a blanket grant (one that covers neither model access nor the `permission_`-prefixed admin-panel permissions, nor `inference_hooks_inspection`, which a role holds only through a row that names it) and is listed as that single row rather than expanded. When you tally what a role grants, treat a blanket row as covering everything its variant describes, not just the features named in other rows.
+Two `action` values need special care. An `organization` permission whose action is `capability_access_all` (every product feature) or `capability_access_all_ga` (every stable product feature, that is, every feature not labeled beta or research preview) is a blanket grant. It is listed as that single row rather than expanded. A blanket grant covers neither model access nor the `permission_`-prefixed admin-panel permissions, nor `inference_hooks_inspection`, which a role holds only through a row that names it. When you tally what a role grants, treat a blanket row as covering everything its variant describes, not just the features named in other rows.
 
 For complete parameter details and response schemas, see [List role permissions](https://platform.claude.com/docs/en/api/beta/organization/rbac_roles/permissions/list) in the API reference.
 
@@ -2226,7 +2390,7 @@ For complete parameter details and response schemas, see [List role permissions]
   ```bash cURL
   curl "https://api.anthropic.com/v1/organizations/rbac_roles/rbac_role_01CdEfGhIjKlMnOpQrStUv/permissions?limit=20" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -2372,7 +2536,7 @@ For complete parameter details and response schemas, see [List role permissions]
      ```bash cURL
      curl "https://api.anthropic.com/v1/organizations/users?email=departing@example.com" \
        -H "x-api-key: $ANTHROPIC_API_KEY" \
-       -H "anthropic-version: 2023-06-01"
+       -H "anthropic-version: 2026-10-21"
      ```
 
      ```bash CLI
@@ -2467,6 +2631,22 @@ For complete parameter details and response schemas, see [List role permissions]
 
 3. If the person had not yet joined, the lookup returns no member; list invites and withdraw their `pending` invite instead.
 
+### Respond to a lost or stolen device
+
+Before you need this workflow, create a key with the `write:members` and `read:members` scopes for the [sign-out endpoint](https://platform.claude.com/docs/en/manage-claude/user-management#sign-a-member-out-everywhere). If you have no key yet, an owner can use the **Sign out everywhere** action on the Members page of [claude.ai organization settings](https://claude.ai/admin-settings) in place of steps 2 to 4. An owner can’t use it on their own account: they sign out their own sessions from their account settings in claude.ai.
+
+1. First, sign the person out of your identity provider, or disable their account there. Otherwise, whoever holds the lost device can sign in to Claude again through that device’s identity provider session or the person’s mailbox.
+
+2. Look up the member by email address, as in step 1 of [Offboard a departing employee](https://platform.claude.com/docs/en/manage-claude/user-management#offboard-a-departing-employee). The email match tolerates variants of the same address, so check that the response is the right person.
+
+3. Sign them out with `POST /v1/organizations/users/{user_id}/sign_out`, using the `id` from the response. [Sign a member out everywhere](https://platform.claude.com/docs/en/manage-claude/user-management#sign-a-member-out-everywhere) lists the headers that the request needs and what it ends.
+
+4. If the request returns 503, send it again until it returns 200. If it returns 400 with `cannot_sign_out_primary_owner`, see [Who you can’t sign out](https://platform.claude.com/docs/en/manage-claude/user-management#who-you-cant-sign-out).
+
+5. Check the [audit log export](https://platform.claude.com/docs/en/manage-claude/compliance-api#export-audit-logs) or [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed) for a sign-in after the first request. If you find one, or the person was signing in to an app such as Claude Code, send the request again after 5 minutes. If you can’t send the request, use the **Sign out everywhere** action again instead. This also signs the member out of any session that they have started since, so tell them first.
+
+6. Confirm the sign-out [where it is recorded](https://platform.claude.com/docs/en/manage-claude/user-management#where-the-sign-out-is-recorded), and review [what the request doesn’t end](https://platform.claude.com/docs/en/manage-claude/user-management#what-the-request-doesnt-end).
+
 ### Audit group membership
 
 1. List groups and record each group’s `id`, `name`, and `role_ids`.
@@ -2483,11 +2663,11 @@ For a workflow that combines group membership with a temporary spend limit raise
 
 No. The member and invite endpoints are the same `/v1/organizations/` endpoints that Claude Console organizations use; this page documents their Claude Enterprise behavior. The group and custom-role endpoints are part of the same API and exist only for Claude Enterprise organizations. The [availability table](https://platform.claude.com/docs/en/manage-claude/user-management#which-endpoints-can-your-organization-use) shows which endpoints each organization type can call.
 
-### Can I assign the owner or membership admin role through the API?
+### Can the API assign the owner or membership admin role?
 
 No. The API assigns only `user` and `managed`, on invite creation and role updates. Administrative roles are assigned in claude.ai organization settings, and members holding them cannot be modified or removed through the API.
 
-### Can I create or modify groups through the API?
+### Can the API create or modify groups?
 
 Yes, with the `write:rbac_groups` scope: create, rename, and delete groups, and add or remove their members. Two things the API cannot change: groups provisioned by your identity provider (`source_type: "scim"`), whose name and membership are owned by the identity provider, and [custom roles](https://platform.claude.com/docs/en/manage-claude/user-management#custom-roles), which are managed in claude.ai organization settings (the API reads them).
 
@@ -2495,9 +2675,13 @@ Yes, with the `write:rbac_groups` scope: create, rename, and delete groups, and 
 
 On plans with a finite seat pool, yes: a `pending` invite holds a seat. Withdrawing the invite or letting it expire frees the seat. On plans without a seat pool, invites consume nothing.
 
-### My organization uses single sign-on. Which operations work?
+### Which operations work when your organization uses single sign-on?
 
-If your identity provider provisions users automatically (JIT or SCIM), invite creation returns 400. If it manages roles (advanced SSO or advanced SCIM provisioning), role updates return 400. If it manages membership (SCIM provisioning), member removals return 400. Reads work regardless.
+If your identity provider provisions users automatically (JIT or SCIM), invite creation returns 400. If it manages roles (advanced SSO or advanced SCIM provisioning), role updates return 400. If it manages membership (SCIM provisioning), member removals return 400. Reads work regardless. So does [signing a member out everywhere](https://platform.claude.com/docs/en/manage-claude/user-management#sign-a-member-out-everywhere), whichever single sign-on mode your organization uses.
+
+### Does signing a member out keep them out?
+
+No. [Signing a member out](https://platform.claude.com/docs/en/manage-claude/user-management#sign-a-member-out-everywhere) ends their sign-in sessions, trusted devices, and OAuth tokens for your organization, but they can sign in again right away. To keep someone out, [remove them](https://platform.claude.com/docs/en/manage-claude/user-management#remove-a-member) or, if your organization requires single sign-on, disable their account in your identity provider. Disabling the account alone might not end sessions that are already open, so first sign the person out of your identity provider, then sign them out of Claude, and then remove them or disable their account.
 
 ### What happens to an Admin API key when the person who created it leaves?
 
@@ -2507,7 +2691,7 @@ The key keeps working. Admin API keys are scoped to the organization, not to ind
 
 <CardGroup cols={2}>
   <Card title="Create an Admin API key" href="https://platform.claude.com/docs/en/manage-claude/admin-api-keys">
-    Where your primary owner creates a scoped key and which scopes to select.
+    Where to create a scoped key and which scopes to select.
   </Card>
 
   <Card title="Compliance API" href="https://platform.claude.com/docs/en/manage-claude/compliance-api">

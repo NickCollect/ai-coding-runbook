@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/task-budgets
-fetched_at: 2026-11-02T07:00:25.560011+00:00
+fetched_at: 2026-11-09T07:30:15.152965+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,7 +51,7 @@ Add `task_budget` to `output_config` and include the beta header:
   curl https://api.anthropic.com/v1/messages \
     -N \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: task-budgets-2026-03-13" \
     -H "content-type: application/json" \
     -d '{
@@ -529,7 +529,7 @@ Run a representative sample of tasks **without** `task_budget` set and record th
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",

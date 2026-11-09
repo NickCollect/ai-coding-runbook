@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed
-fetched_at: 2026-11-02T07:00:28.958810+00:00
+fetched_at: 2026-11-09T07:30:17.755123+00:00
 fetch_method: mintlify_md
 ---
 
@@ -47,29 +47,34 @@ Anthropic’s [client SDKs](https://platform.claude.com/docs/en/cli-sdks-librari
   <Tab title="Go">
     ```bash
     go get github.com/anthropics/anthropic-sdk-go/v2
+    go get github.com/anthropics/anthropic-sdk-go/v2/vertex
     ```
   </Tab>
 
   <Tab title="Java">
-    <CodeGroup exclude="shell, python, typescript, csharp, go, php, ruby">
-      ```groovy Gradle
-      implementation("com.anthropic:anthropic-java:3.3.0")
-      implementation("com.anthropic:anthropic-java-vertex:3.3.0")
-      ```
+    <Tabs>
+      <Tab title="Gradle">
+        ```kotlin
+        implementation("com.anthropic:anthropic-java:3.6.0")
+        implementation("com.anthropic:anthropic-java-vertex:3.6.0")
+        ```
+      </Tab>
 
-      ```xml Maven
-      <dependency>
-          <groupId>com.anthropic</groupId>
-          <artifactId>anthropic-java</artifactId>
-          <version>3.3.0</version>
-      </dependency>
-      <dependency>
-          <groupId>com.anthropic</groupId>
-          <artifactId>anthropic-java-vertex</artifactId>
-          <version>3.3.0</version>
-      </dependency>
-      ```
-    </CodeGroup>
+      <Tab title="Maven">
+        ```xml
+        <dependency>
+            <groupId>com.anthropic</groupId>
+            <artifactId>anthropic-java</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.anthropic</groupId>
+            <artifactId>anthropic-java-vertex</artifactId>
+            <version>3.6.0</version>
+        </dependency>
+        ```
+      </Tab>
+    </Tabs>
   </Tab>
 
   <Tab title="PHP">
@@ -106,7 +111,7 @@ The following examples use the global endpoint. For the other endpoint types, se
     -H "Authorization: Bearer $(gcloud auth print-access-token)" \
     -H "Content-Type: application/json" \
     -d '{
-      "anthropic_version": "vertex-2023-10-16",
+      "anthropic_version": "2026-10-21",
       "messages": [{"role": "user", "content": "Hey Claude!"}],
       "max_tokens": 100
     }'
@@ -310,7 +315,6 @@ The following examples use the global endpoint. For the other endpoint types, se
 | Claude Sonnet 4 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations))   | `claude-sonnet-4@20250514`   |
 | Claude Haiku 5.5                                                                                      | `claude-haiku-5-5`           |
 | Claude Haiku 4.5                                                                                      | `claude-haiku-4-5@20251001`  |
-| Claude Haiku 3.5 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations))  | `claude-3-5-haiku@20241022`  |
 
 Claude Models on Google Cloud (Google managed) offers different Claude models in different regions. To check which models a region offers, search “Claude” in [Model Garden](https://cloud.google.com/model-garden) or see Google Cloud’s [Anthropic Claude models on Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) page.
 
@@ -359,7 +363,7 @@ The following examples use the `us` multi-region endpoint. The highlighted lines
     -H "Authorization: Bearer $(gcloud auth print-access-token)" \
     -H "Content-Type: application/json" \
     -d '{
-      "anthropic_version": "vertex-2023-10-16",
+      "anthropic_version": "2026-10-21",
       "messages": [{"role": "user", "content": "Hey Claude!"}],
       "max_tokens": 100
     }'
@@ -475,7 +479,7 @@ Features supported on Claude Models on Google Cloud (Google managed) include the
 
 * [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
-[Features overview](https://platform.claude.com/docs/en/build-with-claude/overview) lists every feature and whether Claude Models on Google Cloud (Google managed) supports it.
+[Features overview](https://platform.claude.com/docs/en/build-with-claude/overview) lists every feature. Each feature’s page shows whether Claude Models on Google Cloud (Google managed) supports it.
 
 ### Features not supported
 
@@ -555,7 +559,7 @@ For what changes when you move, see [How the two Google Cloud offerings differ](
       curl "https://claude.googleapis.com/v1/projects/$ANTHROPIC_GOOGLE_CLOUD_PROJECT/locations/global/workspaces/$ANTHROPIC_GOOGLE_CLOUD_WORKSPACE_ID/invoke/v1/messages" \
         -H "Authorization: Bearer $(gcloud auth application-default print-access-token)" \
         -H "content-type: application/json" \
-        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-version: 2026-10-21" \
         -d '{
           "model": "claude-opus-5-5",
           "max_tokens": 1024,
@@ -637,7 +641,7 @@ For what changes when you move, see [How the two Google Cloud offerings differ](
         -H "Authorization: Bearer $(gcloud auth print-access-token)" \
         -H "Content-Type: application/json" \
         -d '{
-          "anthropic_version": "vertex-2023-10-16",
+          "anthropic_version": "2026-10-21",
           "messages": [{"role": "user", "content": "Hey Claude!"}],
           "max_tokens": 100
         }'

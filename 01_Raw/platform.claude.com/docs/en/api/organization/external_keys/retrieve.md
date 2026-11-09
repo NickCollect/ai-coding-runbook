@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/external_keys/retrieve
-fetched_at: 2026-11-02T07:00:38.353269+00:00
+fetched_at: 2026-11-09T07:30:24.633429+00:00
 fetch_method: mintlify_md
 ---
 
@@ -75,7 +75,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
   - `geo: string`
 
-    Data residency geo. Selects the region that handles this key's encrypt/decrypt roundtrips.
+    Data residency geo. Selects the region this key is used in.
 
   - `provider_config: AWSExternalKeyConfig or GCPExternalKeyConfig or AzureExternalKeyConfig`
 

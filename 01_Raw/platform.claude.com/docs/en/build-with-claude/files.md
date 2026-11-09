@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/files
-fetched_at: 2026-11-02T07:00:28.042518+00:00
+fetched_at: 2026-11-09T07:30:17.002237+00:00
 fetch_method: mintlify_md
 ---
 
@@ -74,7 +74,7 @@ Upload a file to reference in future API calls:
   ```bash cURL
   curl -X POST https://api.anthropic.com/v1/files \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -F "file=@/path/to/document.pdf"
   ```
 
@@ -200,7 +200,7 @@ Once uploaded, reference the file by passing the `id` from the upload response a
   ```bash cURL
   curl -X POST https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",
@@ -473,7 +473,7 @@ The following examples read a text file and send its contents as plain text:
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d @- <<EOF
   {
     "model": "claude-opus-5-5",
@@ -708,7 +708,7 @@ Retrieve a list of your uploaded files. The endpoint is paginated: each request 
   ```bash cURL
   curl https://api.anthropic.com/v1/files \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -781,7 +781,7 @@ Retrieve information about a specific file:
   ```bash cURL
   curl "https://api.anthropic.com/v1/files/$FILE_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -837,7 +837,7 @@ Delete a file from your workspace:
   ```bash cURL
   curl -X DELETE "https://api.anthropic.com/v1/files/$FILE_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01"
+    -H "anthropic-version: 2026-10-21"
   ```
 
   ```bash CLI
@@ -884,7 +884,7 @@ Download files that were created by [skills](https://platform.claude.com/docs/en
   ```bash cURL
   curl -X GET "https://api.anthropic.com/v1/files/$FILE_ID/content" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -o downloaded_file.txt
   ```
 
@@ -998,7 +998,7 @@ If your organization has the [Compliance API](https://platform.claude.com/docs/e
 
 ## Migrate from `files-api-2025-04-14`
 
-The Files API is out of beta and needs no beta header. Migrating off `files-api-2025-04-14` is optional: requests that still send it keep working and keep returning the beta response shapes, so an existing integration keeps working until you change it. Removing the header switches those requests to the shapes documented on this page:
+The Files API is out of beta and needs no beta header. Migrating off `files-api-2025-04-14` is optional: requests that send it keep working and keep returning the beta response shapes, so an existing integration keeps working until you change it. Removing the header switches those requests to the shapes documented on this page:
 
 |                                          | With `files-api-2025-04-14`             | Without the header                                                           |
 | ---------------------------------------- | --------------------------------------- | ---------------------------------------------------------------------------- |

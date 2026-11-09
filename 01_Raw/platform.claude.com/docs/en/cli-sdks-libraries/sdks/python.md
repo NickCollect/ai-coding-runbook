@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python
-fetched_at: 2026-11-02T07:00:35.669454+00:00
+fetched_at: 2026-11-09T07:30:23.063053+00:00
 fetch_method: mintlify_md
 ---
 
@@ -278,7 +278,7 @@ for message in runner:
     print(message)
 ```
 
-On every iteration, an API request is made. If the response includes a call to one of the given tools, the tool is automatically called, and the result is returned directly to the model in the next iteration.
+On every iteration, the runner sends an API request. If the response includes a call to one of the given tools, the runner calls the tool and returns the result to the model in the next iteration.
 
 To run the browser use tool or the computer use tool with this SDK, see [Browser and computer use with the SDK toolsets](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-sdk).
 
@@ -355,7 +355,7 @@ The async client uses the exact same interface. If you pass a `PathLike` instanc
 
 ## Handling errors
 
-When the library is unable to connect to the API, or if the API returns a non-success status code (that is, a 4xx or 5xx response), a subclass of `APIError` is raised:
+The SDK raises a subclass of `APIError` when it can’t connect to the API or when the API returns a 4xx or 5xx status code:
 
 ```python
 import anthropic
@@ -375,7 +375,7 @@ except anthropic.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx2
 except anthropic.RateLimitError as e:
-    print("A 429 status code was received; we should back off a bit.")
+    print("A 429 status code was received; wait before retrying.")
 except anthropic.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
@@ -417,7 +417,7 @@ print(message._request_id)  # for example, req_018EeWyXxfu5pfWkrYcMdjWG
 
 ## Retries
 
-Certain errors are automatically retried 2 times by default, with a short exponential backoff. Connection errors (for example, because of a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, and >=500 Internal errors are all retried by default.
+By default, the SDK retries certain errors twice, with a short exponential backoff. It retries connection errors (for example, a network problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, and >=500 Internal errors.
 
 You can use the `max_retries` option to configure or disable this:
 
@@ -461,7 +461,7 @@ client.with_options(timeout=5.0).messages.create(
 )
 ```
 
-On timeout, the SDK throws an `APITimeoutError`.
+On timeout, the SDK raises an `APITimeoutError`.
 
 Note that requests that time out are [retried twice by default](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python#retries).
 
@@ -473,7 +473,7 @@ Note that requests that time out are [retried twice by default](https://platform
 
 Avoid setting a large `max_tokens` value without using streaming. Some networks might drop idle connections after a certain period of time, which can cause the request to fail or [time out](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python#timeouts) without receiving a response from Anthropic.
 
-The SDK will throw a `ValueError` if a non-streaming request is expected to take longer than approximately 10 minutes. Passing `stream=True` or overriding the `timeout` option at the client or request level disables this error.
+The SDK raises a `ValueError` if a non-streaming request is expected to take longer than approximately 10 minutes. Passing `stream=True` or overriding the `timeout` option at the client or request level disables this error.
 
 An expected request latency longer than the [timeout](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python#timeouts) for a non-streaming request will result in the client ending the connection and retrying without receiving a response.
 
@@ -512,9 +512,11 @@ Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get
 first_page = await client.messages.batches.list(limit=20)
 
 if first_page.has_next_page():
-    print(f"will fetch next page using these details: {first_page.next_page_info()}")
+    print(
+        f"will fetch next page using these details: {first_page.next_page_info()}"
+    )
     next_page = await first_page.get_next_page()
-    print(f"number of items we just fetched: {len(next_page.data)}")
+    print(f"number of items on the next page: {len(next_page.data)}")
 
 # Remove `await` for non-async usage.
 ```
@@ -599,7 +601,7 @@ if response.my_field is None:
 
 ### Accessing raw response data (for example, headers)
 
-The “raw” `Response` returned by `httpx2` can be accessed through the `.with_raw_response` property on the client. This is useful for accessing response headers or other metadata:
+To access the raw HTTP response, call a method through the `.with_raw_response` property of a resource or of the client. This is useful for accessing response headers or other metadata:
 
 ```python
 client = Anthropic()
@@ -617,7 +619,7 @@ message = (
 print(message.content)
 ```
 
-These methods return an `APIResponse` object. On the async client they return an `AsyncAPIResponse`, and you must await `.parse()`, `.read()`, `.text()`, and `.json()`.
+These methods return an `APIResponse` object, whose `.http_response` attribute holds the `httpx2.Response`. On the async client they return an `AsyncAPIResponse`, and you must await `.parse()`, `.read()`, `.text()`, and `.json()`.
 
 ### Streaming response body
 
@@ -726,7 +728,7 @@ with Anthropic() as client:
 
 ## Beta features
 
-Beta features are available before general release to get early feedback and test new functionality. You can check the availability of all of Claude’s capabilities and tools in the [Features overview](https://platform.claude.com/docs/en/build-with-claude/overview).
+Beta features let you try new functionality and give early feedback. You can check the availability of all of Claude’s capabilities and tools in the [Features overview](https://platform.claude.com/docs/en/build-with-claude/overview).
 
 You can access most beta API features through the `beta` property of the client. To enable a particular beta feature, you need to add the appropriate [beta header](https://platform.claude.com/docs/en/api/beta-headers) to the `betas` field when creating a message.
 
@@ -774,13 +776,13 @@ Use `AnthropicBedrockMantle` for new projects; `AnthropicBedrock` remains for ex
 
 ## Semantic versioning
 
-Each major version of this SDK sends one API version in the `anthropic-version` header by default, and a new major version comes with each new API version. The first major version that sends `2026-10-21` is 2.0.0; see [Migrating to API version 2026-10-21](https://platform.claude.com/docs/en/api/migration-2026-10-21#upgrade).
-
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backward-incompatible changes may be released as minor versions:
 
 1. Changes that only affect static types, without breaking runtime behavior.
 2. Changes to library internals that are technically public but not intended or documented for external use.
 3. Changes that aren’t expected to impact the vast majority of users in practice.
+
+Every request to the Claude API uses an API version. With this SDK, your requests use the API version that was current when your SDK’s major version was released, so you move to a new API version by upgrading to a new major version. Version 2.0.0 is the first to use `2026-10-21`. See [Migrating to API version 2026-10-21](https://platform.claude.com/docs/en/api/migration-2026-10-21#upgrade) for how to upgrade.
 
 ### Determining the installed version
 
@@ -794,5 +796,5 @@ print(anthropic.__version__)
 
 * [GitHub repository](https://github.com/anthropics/anthropic-sdk-python)
 * [API reference](https://platform.claude.com/docs/en/api/overview)
-* [Streaming Messages](https://platform.claude.com/docs/en/build-with-claude/streaming)
+* [Streaming messages](https://platform.claude.com/docs/en/build-with-claude/streaming)
 * [Tool use with Claude](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy
-fetched_at: 2026-11-02T07:00:28.772036+00:00
+fetched_at: 2026-11-09T07:30:17.624640+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,6 +16,8 @@ description: The legacy Amazon Bedrock integration for Claude models, using Invo
 
 <Warning>
   The latest version of the SDK sends API version `2026-10-21` by default, including through Amazon Bedrock. The ARN-versioned models in the model table on this page don’t support `2026-10-21` on Bedrock, and requests to them that send it can return a 400 error. If you call them through the SDK, keep the SDK on the version you use today, and pin that version where you install it so a later install doesn’t upgrade it. The Boto3 example sets `anthropic_version` in its request body and isn’t affected.
+
+  To install an SDK for these models, use the commands in [Install an SDK for accessing Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy#install-an-sdk-for-accessing-bedrock), which install the last major version before API version `2026-10-21`.
 </Warning>
 
 Calling Claude through Bedrock slightly differs from how you would call Claude on the Claude API directly. This guide walks you through completing an API call to Claude on Bedrock using one of Anthropic’s [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview).
@@ -39,45 +41,53 @@ Anthropic’s [client SDKs](https://platform.claude.com/docs/en/cli-sdks-librari
 <Tabs>
   <Tab title="Python">
     ```bash
-    pip install -U "anthropic[bedrock]"
+    pip install -U "anthropic[bedrock]<2"
     ```
   </Tab>
 
   <Tab title="TypeScript">
     ```bash
-    npm install @anthropic-ai/bedrock-sdk
+    npm install @anthropic-ai/bedrock-sdk@0
     ```
+
+    The example in [List available models](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy#list-available-models) also needs AWS’s Bedrock client. Install it with `npm install @aws-sdk/client-bedrock`.
   </Tab>
 
   <Tab title="C#">
     ```bash
-    dotnet add package Anthropic.Bedrock
+    dotnet add package Anthropic.Bedrock --version 0.14.1
     ```
+
+    If your project also references the `Anthropic` package, keep it below version 13.
+
+    The example in [List available models](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy#list-available-models) also needs AWS’s Bedrock client. Install it with `dotnet add package AWSSDK.Bedrock`.
   </Tab>
 
   <Tab title="Go">
     ```bash
     go get github.com/anthropics/anthropic-sdk-go/bedrock
     ```
+
+    The example in [List available models](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy#list-available-models) also needs AWS’s Bedrock client. Install it with `go get github.com/aws/aws-sdk-go-v2/service/bedrock`.
   </Tab>
 
   <Tab title="Java">
     <CodeGroup exclude="shell, python, typescript, csharp, go, php, ruby">
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java:3.3.0")
-      implementation("com.anthropic:anthropic-java-bedrock:3.3.0")
+      implementation("com.anthropic:anthropic-java:2.+")
+      implementation("com.anthropic:anthropic-java-bedrock:2.+")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java</artifactId>
-          <version>3.3.0</version>
+          <version>[2.0.0,3.0.0)</version>
       </dependency>
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-bedrock</artifactId>
-          <version>3.3.0</version>
+          <version>[2.0.0,3.0.0)</version>
       </dependency>
       ```
 
@@ -109,20 +119,24 @@ Anthropic’s [client SDKs](https://platform.claude.com/docs/en/cli-sdks-librari
       }
       ```
     </CodeGroup>
+
+    The example in [List available models](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy#list-available-models) also needs AWS’s Bedrock client. Add `software.amazon.awssdk:bedrock` to your build.
   </Tab>
 
   <Tab title="PHP">
     ```bash
-    composer require anthropic-ai/sdk aws/aws-sdk-php
+    composer require "anthropic-ai/sdk:<1.0" aws/aws-sdk-php
     ```
   </Tab>
 
   <Tab title="Ruby">
     ```bash
     # Gemfile
-    gem "anthropic"
+    gem "anthropic", "~> 1.0"
     gem "aws-sdk-bedrockruntime"
     ```
+
+    The example in [List available models](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy#list-available-models) also needs AWS’s Bedrock client. Add `gem "aws-sdk-bedrock"` to your `Gemfile`.
   </Tab>
 
   <Tab title="Boto3 (Python)">
@@ -656,6 +670,7 @@ To provide a token programmatically:
     import com.anthropic.client.AnthropicClient;
     import com.anthropic.client.okhttp.AnthropicOkHttpClient;
     import com.anthropic.models.messages.MessageCreateParams;
+    import software.amazon.awssdk.regions.Region;
 
     // Option 1: Set AWS_BEARER_TOKEN_BEDROCK environment variable and use fromEnv()
     AnthropicClient client = AnthropicOkHttpClient.builder()
@@ -666,6 +681,7 @@ To provide a token programmatically:
     client = AnthropicOkHttpClient.builder()
         .backend(BedrockBackend.builder()
             .apiKey("your-bearer-token")
+            .region(Region.US_WEST_2)
             .build())
         .build();
 
@@ -751,7 +767,21 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * Claude Managed Agents
 * Server-side fallback (the [`fallbacks` parameter](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback); use the [client-side fallback pattern](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback) instead)
 * Automatic prompt caching (the [top-level `cache_control` field](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#automatic-caching); use [explicit cache breakpoints](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#explicit-cache-breakpoints) instead)
-* [Computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) and [browser use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) toolsets (`computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Amazon Bedrock; the beta computer use tool versions remain available)
+
+### Computer use and browser use toolsets on Bedrock
+
+The [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) and [browser use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) toolsets are available through the InvokeModel API for these models:
+
+* Claude Fable 5.1
+* Claude Fable 5
+* Claude Opus 5.5
+* Claude Opus 5
+* Claude Opus 4.8
+* Claude Sonnet 5.5
+* Claude Sonnet 5
+* Claude Haiku 5.5
+
+To use one, add an entry of type `computer_toolset_20260801` or `browser_toolset_20260801` to the `tools` array. No beta header is required for either toolset.
 
 ### PDF support on Bedrock
 
@@ -1007,8 +1037,10 @@ To use regional endpoints, replace the `global.` prefix with a regional prefix s
     using Anthropic.Bedrock;
     using Anthropic.Models.Messages;
 
+    // Default credentials resolve region from AWS_REGION env var
     AnthropicBedrockClient client = new(
-        new AnthropicBedrockPrivateKeyCredentials { Region = "us-west-2" }
+        await AnthropicBedrockCredentialsHelper.FromEnv()
+        ?? throw new InvalidOperationException("AWS credentials not configured.")
     );
 
     // Using US regional endpoint (CRIS)
@@ -1104,10 +1136,6 @@ To use regional endpoints, replace the `global.` prefix with a regional prefix s
     ```
   </Tab>
 </Tabs>
-
-<Note>
-  **Claude Mythos Preview** is a research preview model available to invited customers on Amazon Bedrock. For more information, see [Project Glasswing](https://anthropic.com/glasswing).
-</Note>
 
 ## Additional resources
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/service-tiers
-fetched_at: 2026-11-02T07:00:36.330571+00:00
+fetched_at: 2026-11-09T07:30:23.431607+00:00
 fetch_method: mintlify_md
 ---
 
@@ -96,7 +96,7 @@ You can control which service tiers can be used for a request by setting the `se
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-4-8",

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/ip-addresses
-fetched_at: 2026-10-26T05:40:15.923014+00:00
+fetched_at: 2026-11-09T07:30:23.513865+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,8 @@ These are the IP addresses where Anthropic services receive incoming connections
 
 `160.79.104.0/23`
 
+`153.61.224.0/22`
+
 ### IPv6
 
 `2607:6bc0::/48`
@@ -33,6 +35,8 @@ These are the stable IP addresses that Anthropic uses for outbound requests (for
 ### IPv4
 
 `160.79.104.0/21`
+
+`153.61.208.0/20`
 
 ### Phased out IP addresses
 

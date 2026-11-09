@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/overview
-fetched_at: 2026-11-02T07:00:28.418692+00:00
+fetched_at: 2026-11-09T07:30:17.323682+00:00
 fetch_method: mintlify_md
 ---
 
@@ -180,7 +180,7 @@ The URL’s host is `<subdomain>.<your-tunnel-domain>`. The path depends on your
   curl https://api.anthropic.com/v1/messages \
     -H "Content-Type: application/json" \
     -H "X-API-Key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: mcp-client-2025-11-20" \
     -d '{
       "model": "claude-opus-5-5",

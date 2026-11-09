@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/working-with-messages
-fetched_at: 2026-11-02T07:00:25.375802+00:00
+fetched_at: 2026-11-09T07:30:14.973840+00:00
 fetch_method: mintlify_md
 ---
 
@@ -61,7 +61,7 @@ This guide covers common patterns for working with the Messages API, including b
   #!/bin/sh
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",
@@ -193,12 +193,14 @@ Refusal responses (`stop_reason: "refusal"`) also include a `stop_details` objec
 
 The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don’t necessarily need to actually originate from Claude. You can use synthetic `assistant` messages.
 
+With [message threads](https://platform.claude.com/docs/en/build-with-claude/message-threads), in beta, the API can keep the conversation, so that each later request sends only the new messages. A thread expires 5 minutes after its last request and is deleted no more than 1 hour after its last use.
+
 <CodeGroup>
   ```bash cURL
   #!/bin/sh
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",
@@ -375,7 +377,7 @@ You can prefill part of Claude’s response in the last position of the input me
   #!/bin/sh
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-sonnet-4-5",
@@ -545,7 +547,7 @@ Claude can read both text and images in requests. You can supply images using th
 
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d @- <<EOF
   {
@@ -567,7 +569,7 @@ Claude can read both text and images in requests. You can supply images using th
   # Option 2: URL-referenced image
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-opus-5-5",

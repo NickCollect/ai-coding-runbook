@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner
-fetched_at: 2026-11-02T07:00:26.524766+00:00
+fetched_at: 2026-11-09T07:30:15.980661+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,6 +31,7 @@ featureMetadata:
   supportedPlatforms:
     Claude API: beta
     Claude Platform on AWS: beta
+    Claude Models on Google Cloud (Anthropic managed): beta
     Amazon Bedrock: beta
     Amazon Bedrock (InvokeModel): beta
     Claude Models on Google Cloud (Google managed): beta
@@ -1827,9 +1828,9 @@ Tool runner is in beta on every model.
 
 * Availability: Available
 
-| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta   | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (InvokeModel)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
+| Status | Cloud platforms         |
+| ------ | ----------------------- |
+| Beta   | All supported platforms |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 

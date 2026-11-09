@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/overview
-fetched_at: 2026-11-02T07:00:36.084600+00:00
+fetched_at: 2026-11-09T07:30:23.339367+00:00
 fetch_method: mintlify_md
 ---
 
@@ -93,7 +93,7 @@ Claude is available through the first-party Claude API and through cloud platfor
 Access Claude through AWS, Google Cloud, or Microsoft Azure:
 
 * **Integrated** with cloud provider billing and IAM
-* **Feature availability varies by platform:** Anthropic-operated platforms include [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed), and [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry); partner-operated platforms include Amazon Bedrock and Claude Models on Google Cloud (Google managed). See each platform’s page for feature availability and timing.
+* **Feature availability varies by platform:** Anthropic-operated platforms include [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed), and [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry); partner-operated platforms include Claude Models on Google Cloud (Google managed) and Amazon Bedrock. See each platform’s page for feature availability and timing.
 * **Best for:** Existing cloud commitments, specific compliance requirements, consolidated cloud billing
 
 | Platform                                          | Provider                             | Documentation                                                                                                                                              |

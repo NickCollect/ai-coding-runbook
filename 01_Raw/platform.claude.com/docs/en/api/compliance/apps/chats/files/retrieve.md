@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/files/retrieve
-fetched_at: 2026-10-12T06:50:10.875690+00:00
+fetched_at: 2026-11-09T07:30:34.984277+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,7 +21,7 @@ download the bytes.
 
 - `claude_file_id: string`
 
-  The file ID (tagged ID, e.g., claude_file_abc123)
+  The file ID (tagged ID, e.g., claude_file_abc123). Also use this endpoint for any id in `chat_messages[].generated_files[].id` that starts with `claude_file_`.
 
 ## Headers
 

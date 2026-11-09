@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-latency
-fetched_at: 2026-11-02T07:00:33.245507+00:00
+fetched_at: 2026-11-09T07:30:21.267072+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,7 +42,7 @@ For speed-critical applications, **Claude Haiku 5.5** offers the fastest respons
   # For time-sensitive applications, use Claude Haiku 5.5 at low effort
   curl https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "content-type: application/json" \
     -d '{
       "model": "claude-haiku-5-5",

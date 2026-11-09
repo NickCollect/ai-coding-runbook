@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/citations
-fetched_at: 2026-11-02T07:00:25.768445+00:00
+fetched_at: 2026-11-09T07:30:15.202551+00:00
 fetch_method: mintlify_md
 ---
 
@@ -55,7 +55,7 @@ The following example shows how to enable citations on a plain text document wit
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
@@ -486,7 +486,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
@@ -838,7 +838,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
       ```bash cURL
       curl -X POST https://api.anthropic.com/v1/messages \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
-        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-version: 2026-10-21" \
         -H "content-type: application/json" \
         -d '{
           "model": "claude-opus-5-5",
@@ -1091,7 +1091,7 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
       curl https://api.anthropic.com/v1/messages \
         -H "content-type: application/json" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
-        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-version: 2026-10-21" \
         -d '{
           "model": "claude-opus-5-5",
           "max_tokens": 1024,
@@ -1390,7 +1390,7 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
       curl https://api.anthropic.com/v1/messages \
         -H "content-type: application/json" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
-        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-version: 2026-10-21" \
         -d '{
           "model": "claude-opus-5-5",
           "max_tokens": 1024,
@@ -1666,7 +1666,7 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
       ```bash cURL
       curl -X POST https://api.anthropic.com/v1/messages \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
-        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-version: 2026-10-21" \
         -H "content-type: application/json" \
         -d '{
           "model": "claude-opus-5-5",
@@ -1915,7 +1915,7 @@ Custom content documents give you control over citation granularity. No addition
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -d '{
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
@@ -2352,7 +2352,7 @@ For streaming responses, citations arrive as a `citations_delta` delta type insi
 
 <CardGroup cols={2}>
   <Card title="Streaming messages" icon="wifi-high" href="https://platform.claude.com/docs/en/build-with-claude/streaming">
-    Handle the `citations_delta` delta type alongside text deltas to render cited responses as they stream.
+    Learn the event flow and the other content block delta types that arrive alongside `citations_delta`.
   </Card>
 
   <Card title="Search results" icon="book-bookmark" href="https://platform.claude.com/docs/en/build-with-claude/search-results">

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-workers
-fetched_at: 2026-11-02T07:00:29.592868+00:00
+fetched_at: 2026-11-09T07:30:18.178282+00:00
 fetch_method: mintlify_md
 ---
 
@@ -467,7 +467,7 @@ A poller on the host claims work and calls your script once for each work item. 
 
     ```dockerfile
     FROM your-base-image
-    ARG ANT_VERSION=2.4.0
+    ARG ANT_VERSION=2.7.1
     ARG TARGETARCH
     RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
         curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \
@@ -837,7 +837,7 @@ Anthropic doesn’t mount files or GitHub repositories into self-hosted sandboxe
   ```bash cURL
   curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-version: 2026-10-21" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
     -d '{
