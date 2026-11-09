@@ -30,6 +30,11 @@ export class Bundles extends APIResource {
    * Get one Bundle. What the Bundle grants (connectors, repositories and
    * credentials) is never returned.
    *
+   * @throws {BetaAPIKeyScopeMissingError}
+   * @throws {BetaClaudeTagWritesNotEnabledError}
+   * @throws {BetaComplianceConfigurationRestrictedError}
+   * @throws {BetaOrganizationLevelScopedAPIKeyRequiredError}
+   *
    * @example
    * ```ts
    * const betaClaudeTagBundle =
@@ -61,6 +66,11 @@ export class Bundles extends APIResource {
   /**
    * List the organization's Bundles, newest first by `created_at`. A Bundle that
    * Claude Tag manages for itself is not listed.
+   *
+   * @throws {BetaAPIKeyScopeMissingError}
+   * @throws {BetaClaudeTagWritesNotEnabledError}
+   * @throws {BetaComplianceConfigurationRestrictedError}
+   * @throws {BetaOrganizationLevelScopedAPIKeyRequiredError}
    *
    * @example
    * ```ts

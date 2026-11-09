@@ -7,21 +7,36 @@ Types:
 - <code><a href="./src/resources/shared.ts">APIErrorObject</a></code>
 - <code><a href="./src/resources/shared.ts">AuthenticationError</a></code>
 - <code><a href="./src/resources/shared.ts">BillingError</a></code>
+- <code><a href="./src/resources/shared.ts">ClaudeCodeKeyCreatorNotMemberErrorDetails</a></code>
+- <code><a href="./src/resources/shared.ts">ClaudeCodeVersionTooOldErrorDetails</a></code>
+- <code><a href="./src/resources/shared.ts">CMEKContextUnavailableErrorDetails</a></code>
+- <code><a href="./src/resources/shared.ts">CMEKKeyDisabledErrorDetails</a></code>
+- <code><a href="./src/resources/shared.ts">CMEKKeyNetworkBlockedErrorDetails</a></code>
+- <code><a href="./src/resources/shared.ts">CMEKKeyUnreachableErrorDetails</a></code>
+- <code><a href="./src/resources/shared.ts">EnforcedSpendLimitReachedErrorDetails</a></code>
+- <code><a href="./src/resources/shared.ts">ErrorDetails</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorObject</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorResponse</a></code>
 - <code><a href="./src/resources/shared.ts">ErrorType</a></code>
 - <code><a href="./src/resources/shared.ts">GatewayTimeoutError</a></code>
 - <code><a href="./src/resources/shared.ts">InvalidRequestError</a></code>
 - <code><a href="./src/resources/shared.ts">NotFoundError</a></code>
+- <code><a href="./src/resources/shared.ts">OrganizationOnHoldErrorDetails</a></code>
+- <code><a href="./src/resources/shared.ts">OrganizationTypeNotSupportedErrorDetails</a></code>
 - <code><a href="./src/resources/shared.ts">OverloadedError</a></code>
 - <code><a href="./src/resources/shared.ts">PermissionError</a></code>
+- <code><a href="./src/resources/shared.ts">RampLimitExceededErrorDetails</a></code>
 - <code><a href="./src/resources/shared.ts">RateLimitError</a></code>
+- <code><a href="./src/resources/shared.ts">RequestBodyEncodingInvalidErrorDetails</a></code>
+- <code><a href="./src/resources/shared.ts">RequestBodyEncodingUnsupportedErrorDetails</a></code>
+- <code><a href="./src/resources/shared.ts">RequestBodyTooLargeAfterDecodingErrorDetails</a></code>
 
 # Messages
 
 Types:
 
 - <code><a href="./src/resources/messages/messages.ts">AssistantMessageParam</a></code>
+- <code><a href="./src/resources/messages/messages.ts">AvailableToolsLimitExceededErrorDetails</a></code>
 - <code><a href="./src/resources/messages/messages.ts">Base64ImageSource</a></code>
 - <code><a href="./src/resources/messages/messages.ts">Base64PDFSource</a></code>
 - <code><a href="./src/resources/messages/messages.ts">BashCodeExecutionOutputBlock</a></code>
@@ -182,6 +197,15 @@ Types:
 - <code><a href="./src/resources/messages/messages.ts">CodeExecutionToolResultError</a></code>
 - <code><a href="./src/resources/messages/messages.ts">CodeExecutionToolResultErrorCode</a></code>
 - <code><a href="./src/resources/messages/messages.ts">CodeExecutionToolResultErrorParam</a></code>
+- <code><a href="./src/resources/messages/messages.ts">CompactionBlockAmbiguousErrorDetails</a></code>
+- <code><a href="./src/resources/messages/messages.ts">CompactionBlockMisplacedErrorDetails</a></code>
+- <code><a href="./src/resources/messages/messages.ts">CompactionContentMismatchErrorDetails</a></code>
+- <code><a href="./src/resources/messages/messages.ts">CompactionIncompleteTurnErrorDetails</a></code>
+- <code><a href="./src/resources/messages/messages.ts">CompactionNothingToSummarizeErrorDetails</a></code>
+- <code><a href="./src/resources/messages/messages.ts">CompactionSignatureInvalidErrorDetails</a></code>
+- <code><a href="./src/resources/messages/messages.ts">CompactionTooManyToolReferencesErrorDetails</a></code>
+- <code><a href="./src/resources/messages/messages.ts">CompactionToolChangesMismatchErrorDetails</a></code>
+- <code><a href="./src/resources/messages/messages.ts">CompactionUnavailableErrorDetails</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ComputerCursorPositionConfig</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ComputerCursorPositionInput</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ComputerCursorPositionToolUseBlock</a></code>
@@ -322,6 +346,12 @@ Types:
 - <code><a href="./src/resources/messages/messages.ts">ThinkingConfigEnabled</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ThinkingConfigParam</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ThinkingDelta</a></code>
+- <code><a href="./src/resources/messages/messages.ts">ThreadAlreadyContinuedErrorDetails</a></code>
+- <code><a href="./src/resources/messages/messages.ts">ThreadContinueInFlightErrorDetails</a></code>
+- <code><a href="./src/resources/messages/messages.ts">ThreadFingerprintMismatchErrorDetails</a></code>
+- <code><a href="./src/resources/messages/messages.ts">ThreadNotFoundErrorDetails</a></code>
+- <code><a href="./src/resources/messages/messages.ts">ThreadUnsupportedFeatureName</a></code>
+- <code><a href="./src/resources/messages/messages.ts">ThreadUnsupportedRequestErrorDetails</a></code>
 - <code><a href="./src/resources/messages/messages.ts">Tool</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ToolBash20250124</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ToolChoice</a></code>
@@ -329,8 +359,10 @@ Types:
 - <code><a href="./src/resources/messages/messages.ts">ToolChoiceAuto</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ToolChoiceNone</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ToolChoiceTool</a></code>
+- <code><a href="./src/resources/messages/messages.ts">ToolNameConflictErrorDetails</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ToolReferenceBlock</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ToolReferenceBlockParam</a></code>
+- <code><a href="./src/resources/messages/messages.ts">ToolReferenceUnresolvedErrorDetails</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ToolResultBlockParam</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ToolSearchToolBm25_20251119</a></code>
 - <code><a href="./src/resources/messages/messages.ts">ToolSearchToolRegex20251119</a></code>
@@ -495,7 +527,10 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/files.ts">DeletedFile</a></code>
+- <code><a href="./src/resources/files.ts">FileExpiredErrorDetails</a></code>
 - <code><a href="./src/resources/files.ts">FileMetadata</a></code>
+- <code><a href="./src/resources/files.ts">FileNotDownloadableErrorDetails</a></code>
+- <code><a href="./src/resources/files.ts">StorageQuotaExceededErrorDetails</a></code>
 
 Methods:
 
@@ -511,6 +546,7 @@ Types:
 
 - <code><a href="./src/resources/skills/skills.ts">DeletedSkill</a></code>
 - <code><a href="./src/resources/skills/skills.ts">Skill</a></code>
+- <code><a href="./src/resources/skills/skills.ts">SkillReadBlockedUndecryptableErrorDetails</a></code>
 - <code><a href="./src/resources/skills/skills.ts">SkillSource</a></code>
 
 Methods:
@@ -558,6 +594,7 @@ Types:
 - <code><a href="./src/resources/user-profiles/user-profiles.ts">UserProfileExternalUserEntityType</a></code>
 - <code><a href="./src/resources/user-profiles/user-profiles.ts">UserProfileListOrder</a></code>
 - <code><a href="./src/resources/user-profiles/user-profiles.ts">UserProfileListOrderBy</a></code>
+- <code><a href="./src/resources/user-profiles/user-profiles.ts">UserProfileNotFoundErrorDetails</a></code>
 - <code><a href="./src/resources/user-profiles/user-profiles.ts">UserProfileProgramStatus</a></code>
 - <code><a href="./src/resources/user-profiles/user-profiles.ts">UserProfilePrograms</a></code>
 
@@ -584,6 +621,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/organization/organization.ts">ConcurrentMembershipChangeErrorDetails</a></code>
+- <code><a href="./src/resources/organization/organization.ts">OrgMemberLimitExceededErrorDetails</a></code>
 - <code><a href="./src/resources/organization/organization.ts">OrganizationInfo</a></code>
 - <code><a href="./src/resources/organization/organization.ts">OrganizationRole</a></code>
 
@@ -601,6 +640,8 @@ Types:
 - <code><a href="./src/resources/organization/api-keys.ts">APIKeyServiceAccountActor</a></code>
 - <code><a href="./src/resources/organization/api-keys.ts">APIKeyUserActor</a></code>
 - <code><a href="./src/resources/organization/api-keys.ts">APIKeyWorkspaceScope</a></code>
+- <code><a href="./src/resources/organization/api-keys.ts">OrgAPIKeyLimitExceededErrorDetails</a></code>
+- <code><a href="./src/resources/organization/api-keys.ts">WorkspaceAPIKeyLimitExceededErrorDetails</a></code>
 
 Methods:
 
@@ -617,7 +658,11 @@ Types:
 - <code><a href="./src/resources/organization/external-keys.ts">AzureExternalKeyConfigParam</a></code>
 - <code><a href="./src/resources/organization/external-keys.ts">ExternalKey</a></code>
 - <code><a href="./src/resources/organization/external-keys.ts">ExternalKeyAttachedAttachment</a></code>
+- <code><a href="./src/resources/organization/external-keys.ts">ExternalKeyChangedErrorDetails</a></code>
+- <code><a href="./src/resources/organization/external-keys.ts">ExternalKeyInWorkspacePolicyErrorDetails</a></code>
 - <code><a href="./src/resources/organization/external-keys.ts">ExternalKeyUnattachedAttachment</a></code>
+- <code><a href="./src/resources/organization/external-keys.ts">ExternalKeyValidationFailedErrorDetails</a></code>
+- <code><a href="./src/resources/organization/external-keys.ts">ExternalKeyValidationTimedOutErrorDetails</a></code>
 - <code><a href="./src/resources/organization/external-keys.ts">GCPExternalKeyConfig</a></code>
 - <code><a href="./src/resources/organization/external-keys.ts">ExternalKeyDeleteResponse</a></code>
 - <code><a href="./src/resources/organization/external-keys.ts">ExternalKeyValidateResponse</a></code>
@@ -684,6 +729,10 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/organization/invites.ts">AlreadyMemberErrorDetails</a></code>
+- <code><a href="./src/resources/organization/invites.ts">CannotInviteEmailsWithUnverifiedDomainsErrorDetails</a></code>
+- <code><a href="./src/resources/organization/invites.ts">EmailDomainNotAllowedErrorDetails</a></code>
+- <code><a href="./src/resources/organization/invites.ts">InviteAlreadyExistsErrorDetails</a></code>
 - <code><a href="./src/resources/organization/invites.ts">OrganizationInvite</a></code>
 - <code><a href="./src/resources/organization/invites.ts">InviteDeleteResponse</a></code>
 
@@ -725,6 +774,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/organization/users.ts">CannotRemoveLastMemberErrorDetails</a></code>
 - <code><a href="./src/resources/organization/users.ts">OrganizationUser</a></code>
 - <code><a href="./src/resources/organization/users.ts">UserRemoveResponse</a></code>
 
@@ -743,9 +793,13 @@ Types:
 - <code><a href="./src/resources/organization/workspaces/workspaces.ts">DataResidency</a></code>
 - <code><a href="./src/resources/organization/workspaces/workspaces.ts">DataResidencyCreateConfig</a></code>
 - <code><a href="./src/resources/organization/workspaces/workspaces.ts">DataResidencyUpdateConfig</a></code>
+- <code><a href="./src/resources/organization/workspaces/workspaces.ts">KeyProfileMismatchErrorDetails</a></code>
 - <code><a href="./src/resources/organization/workspaces/workspaces.ts">NoBillingWorkspaceRole</a></code>
 - <code><a href="./src/resources/organization/workspaces/workspaces.ts">Workspace</a></code>
 - <code><a href="./src/resources/organization/workspaces/workspaces.ts">WorkspaceMember</a></code>
+- <code><a href="./src/resources/organization/workspaces/workspaces.ts">WorkspaceMemberLimitExceededErrorDetails</a></code>
+- <code><a href="./src/resources/organization/workspaces/workspaces.ts">WorkspacePolicyField</a></code>
+- <code><a href="./src/resources/organization/workspaces/workspaces.ts">WorkspacePolicyViolationErrorDetails</a></code>
 - <code><a href="./src/resources/organization/workspaces/workspaces.ts">WorkspaceRole</a></code>
 
 Methods:
@@ -834,6 +888,201 @@ Methods:
 - <code title="get /v1/organizations/compliance_settings">client.organization.complianceSettings.<a href="./src/resources/organization/compliance-settings.ts">retrieve</a>() -> OrganizationComplianceSettings</code>
 - <code title="post /v1/organizations/compliance_settings">client.organization.complianceSettings.<a href="./src/resources/organization/compliance-settings.ts">update</a>({ ...params }) -> OrganizationComplianceSettings</code>
 
+## Analytics
+
+Types:
+
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsArtifactActivity</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsArtifactGroupBy</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsChatCoworkUnifiedChatMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsChatCoworkUnifiedMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsChatCoworkUnifiedSessionsMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsChatMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsClaudeCodeMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsConnectorActivity</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsConnectorChatCoworkUnifiedChatMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsConnectorChatCoworkUnifiedMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsConnectorChatCoworkUnifiedSessionsMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsConnectorChatMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsConnectorClaudeCodeMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsConnectorCoworkMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsConnectorGroupBy</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsConnectorOfficeMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsConnectorOfficeProductMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsCoreCodeMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsCoworkMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsDesignMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsLinesOfCode</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsOfficeMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsOfficeProductMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsOrder</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsPluginActivity</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsPluginChatCoworkUnifiedMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsPluginClaudeCodeMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsPluginCoworkMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsPluginGroupBy</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsProjectActivity</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsProjectGroupBy</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsScienceMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsSingleDayActivitySummary</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsSkillActivity</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsSkillChatCoworkUnifiedChatMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsSkillChatCoworkUnifiedMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsSkillChatCoworkUnifiedSessionsMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsSkillChatMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsSkillClaudeCodeMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsSkillCoworkMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsSkillGroupBy</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsSkillOfficeMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsSkillOfficeProductMetrics</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsToolActionCounts</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsToolActions</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsUser</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsUserActivity</a></code>
+- <code><a href="./src/resources/organization/analytics/analytics.ts">AnalyticsUserGroupBy</a></code>
+
+### Summaries
+
+Methods:
+
+- <code title="get /v1/organizations/analytics/summaries">client.organization.analytics.summaries.<a href="./src/resources/organization/analytics/summaries.ts">list</a>({ ...params }) -> AnalyticsSingleDayActivitySummariesPageCursor</code>
+
+### Users
+
+Methods:
+
+- <code title="get /v1/organizations/analytics/users">client.organization.analytics.users.<a href="./src/resources/organization/analytics/users.ts">list</a>({ ...params }) -> AnalyticsUserActivitiesPageCursor</code>
+
+### Apps
+
+#### Chat
+
+##### Projects
+
+Methods:
+
+- <code title="get /v1/organizations/analytics/apps/chat/projects">client.organization.analytics.apps.chat.projects.<a href="./src/resources/organization/analytics/apps/chat/projects.ts">list</a>({ ...params }) -> AnalyticsProjectActivitiesPageCursor</code>
+
+### Connectors
+
+Methods:
+
+- <code title="get /v1/organizations/analytics/connectors">client.organization.analytics.connectors.<a href="./src/resources/organization/analytics/connectors.ts">list</a>({ ...params }) -> AnalyticsConnectorActivitiesPageCursor</code>
+
+### Plugins
+
+Methods:
+
+- <code title="get /v1/organizations/analytics/plugins">client.organization.analytics.plugins.<a href="./src/resources/organization/analytics/plugins.ts">list</a>({ ...params }) -> AnalyticsPluginActivitiesPageCursor</code>
+
+### Skills
+
+Methods:
+
+- <code title="get /v1/organizations/analytics/skills">client.organization.analytics.skills.<a href="./src/resources/organization/analytics/skills.ts">list</a>({ ...params }) -> AnalyticsSkillActivitiesPageCursor</code>
+
+### Artifacts
+
+Methods:
+
+- <code title="get /v1/organizations/analytics/artifacts">client.organization.analytics.artifacts.<a href="./src/resources/organization/analytics/artifacts.ts">list</a>({ ...params }) -> AnalyticsArtifactActivitiesPageCursor</code>
+
+## SpendLimits
+
+Types:
+
+- <code><a href="./src/resources/organization/spend-limits/spend-limits.ts">SpendLimit</a></code>
+- <code><a href="./src/resources/organization/spend-limits/spend-limits.ts">SpendLimitOrganizationScope</a></code>
+- <code><a href="./src/resources/organization/spend-limits/spend-limits.ts">SpendLimitOrganizationServiceScope</a></code>
+- <code><a href="./src/resources/organization/spend-limits/spend-limits.ts">SpendLimitPeriod</a></code>
+- <code><a href="./src/resources/organization/spend-limits/spend-limits.ts">SpendLimitRBACGroupScope</a></code>
+- <code><a href="./src/resources/organization/spend-limits/spend-limits.ts">SpendLimitScopedAPIKeyActor</a></code>
+- <code><a href="./src/resources/organization/spend-limits/spend-limits.ts">SpendLimitSeatTierScope</a></code>
+- <code><a href="./src/resources/organization/spend-limits/spend-limits.ts">SpendLimitUsageTierScope</a></code>
+- <code><a href="./src/resources/organization/spend-limits/spend-limits.ts">SpendLimitUserActor</a></code>
+- <code><a href="./src/resources/organization/spend-limits/spend-limits.ts">SpendLimitUserScope</a></code>
+- <code><a href="./src/resources/organization/spend-limits/spend-limits.ts">SpendLimitWorkspaceScope</a></code>
+- <code><a href="./src/resources/organization/spend-limits/spend-limits.ts">SpendSummary</a></code>
+
+### Effective
+
+Methods:
+
+- <code title="get /v1/organizations/spend_limits/effective">client.organization.spendLimits.effective.<a href="./src/resources/organization/spend-limits/effective.ts">list</a>({ ...params }) -> SpendSummariesPageCursor</code>
+
+### IncreaseRequests
+
+Types:
+
+- <code><a href="./src/resources/organization/spend-limits/increase-requests.ts">SpendLimitIncreaseRequest</a></code>
+- <code><a href="./src/resources/organization/spend-limits/increase-requests.ts">SpendLimitIncreaseRequestActor</a></code>
+- <code><a href="./src/resources/organization/spend-limits/increase-requests.ts">SpendLimitIncreaseRequestResolvedBy</a></code>
+- <code><a href="./src/resources/organization/spend-limits/increase-requests.ts">SpendLimitIncreaseRequestStatus</a></code>
+- <code><a href="./src/resources/organization/spend-limits/increase-requests.ts">IncreaseRequestApproveResponse</a></code>
+
+Methods:
+
+- <code title="get /v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}">client.organization.spendLimits.increaseRequests.<a href="./src/resources/organization/spend-limits/increase-requests.ts">retrieve</a>(spendLimitIncreaseRequestID) -> SpendLimitIncreaseRequest</code>
+- <code title="get /v1/organizations/spend_limit_increase_requests">client.organization.spendLimits.increaseRequests.<a href="./src/resources/organization/spend-limits/increase-requests.ts">list</a>({ ...params }) -> SpendLimitIncreaseRequestsPageCursor</code>
+- <code title="post /v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}/approve">client.organization.spendLimits.increaseRequests.<a href="./src/resources/organization/spend-limits/increase-requests.ts">approve</a>(spendLimitIncreaseRequestID, { ...params }) -> IncreaseRequestApproveResponse</code>
+- <code title="post /v1/organizations/spend_limit_increase_requests/{spend_limit_increase_request_id}/deny">client.organization.spendLimits.increaseRequests.<a href="./src/resources/organization/spend-limits/increase-requests.ts">deny</a>(spendLimitIncreaseRequestID, { ...params }) -> SpendLimitIncreaseRequest</code>
+
+## RBACGroups
+
+Types:
+
+- <code><a href="./src/resources/organization/rbac-groups/rbac-groups.ts">DeletedRBACGroup</a></code>
+- <code><a href="./src/resources/organization/rbac-groups/rbac-groups.ts">RBACGroup</a></code>
+- <code><a href="./src/resources/organization/rbac-groups/rbac-groups.ts">RBACGroupGrantsOwnerAccessErrorDetails</a></code>
+- <code><a href="./src/resources/organization/rbac-groups/rbac-groups.ts">RBACGroupOwnerAccessUnconfirmedErrorDetails</a></code>
+
+Methods:
+
+- <code title="post /v1/organizations/rbac_groups">client.organization.rbacGroups.<a href="./src/resources/organization/rbac-groups/rbac-groups.ts">create</a>({ ...params }) -> RBACGroup</code>
+- <code title="get /v1/organizations/rbac_groups/{rbac_group_id}">client.organization.rbacGroups.<a href="./src/resources/organization/rbac-groups/rbac-groups.ts">retrieve</a>(rbacGroupID) -> RBACGroup</code>
+- <code title="post /v1/organizations/rbac_groups/{rbac_group_id}">client.organization.rbacGroups.<a href="./src/resources/organization/rbac-groups/rbac-groups.ts">update</a>(rbacGroupID, { ...params }) -> RBACGroup</code>
+- <code title="get /v1/organizations/rbac_groups">client.organization.rbacGroups.<a href="./src/resources/organization/rbac-groups/rbac-groups.ts">list</a>({ ...params }) -> RBACGroupsPageCursor</code>
+- <code title="delete /v1/organizations/rbac_groups/{rbac_group_id}">client.organization.rbacGroups.<a href="./src/resources/organization/rbac-groups/rbac-groups.ts">delete</a>(rbacGroupID) -> DeletedRBACGroup</code>
+
+### Members
+
+Types:
+
+- <code><a href="./src/resources/organization/rbac-groups/members.ts">DeletedRBACGroupMember</a></code>
+- <code><a href="./src/resources/organization/rbac-groups/members.ts">RBACGroupMember</a></code>
+
+Methods:
+
+- <code title="get /v1/organizations/rbac_groups/{rbac_group_id}/members">client.organization.rbacGroups.members.<a href="./src/resources/organization/rbac-groups/members.ts">list</a>(rbacGroupID, { ...params }) -> RBACGroupMembersPageCursor</code>
+- <code title="post /v1/organizations/rbac_groups/{rbac_group_id}/members">client.organization.rbacGroups.members.<a href="./src/resources/organization/rbac-groups/members.ts">add</a>(rbacGroupID, { ...params }) -> RBACGroupMember</code>
+- <code title="delete /v1/organizations/rbac_groups/{rbac_group_id}/members/{user_id}">client.organization.rbacGroups.members.<a href="./src/resources/organization/rbac-groups/members.ts">remove</a>(userID, { ...params }) -> DeletedRBACGroupMember</code>
+
+## RBACRoles
+
+Types:
+
+- <code><a href="./src/resources/organization/rbac-roles/rbac-roles.ts">RBACRole</a></code>
+
+Methods:
+
+- <code title="get /v1/organizations/rbac_roles/{rbac_role_id}">client.organization.rbacRoles.<a href="./src/resources/organization/rbac-roles/rbac-roles.ts">retrieve</a>(rbacRoleID) -> RBACRole</code>
+- <code title="get /v1/organizations/rbac_roles">client.organization.rbacRoles.<a href="./src/resources/organization/rbac-roles/rbac-roles.ts">list</a>({ ...params }) -> RBACRolesPageCursor</code>
+
+### Permissions
+
+Types:
+
+- <code><a href="./src/resources/organization/rbac-roles/permissions.ts">RBACAllConnectorsPermissionResource</a></code>
+- <code><a href="./src/resources/organization/rbac-roles/permissions.ts">RBACConnectorPermissionResource</a></code>
+- <code><a href="./src/resources/organization/rbac-roles/permissions.ts">RBACConnectorScopePermissionResource</a></code>
+- <code><a href="./src/resources/organization/rbac-roles/permissions.ts">RBACConnectorToolPermissionResource</a></code>
+- <code><a href="./src/resources/organization/rbac-roles/permissions.ts">RBACOrganizationPermissionResource</a></code>
+- <code><a href="./src/resources/organization/rbac-roles/permissions.ts">RBACRolePermission</a></code>
+
+Methods:
+
+- <code title="get /v1/organizations/rbac_roles/{rbac_role_id}/permissions">client.organization.rbacRoles.permissions.<a href="./src/resources/organization/rbac-roles/permissions.ts">list</a>(rbacRoleID, { ...params }) -> RBACRolePermissionsPageCursor</code>
+
 # Beta
 
 Types:
@@ -849,9 +1098,11 @@ Types:
 - <code><a href="./src/resources/beta/beta.ts">BetaInvalidRequestError</a></code>
 - <code><a href="./src/resources/beta/beta.ts">BetaMonetaryAmount</a></code>
 - <code><a href="./src/resources/beta/beta.ts">BetaNotFoundError</a></code>
+- <code><a href="./src/resources/beta/beta.ts">BetaOrganizationNotEnrolledInBetaErrorDetails</a></code>
 - <code><a href="./src/resources/beta/beta.ts">BetaOverloadedError</a></code>
 - <code><a href="./src/resources/beta/beta.ts">BetaPermissionError</a></code>
 - <code><a href="./src/resources/beta/beta.ts">BetaRateLimitError</a></code>
+- <code><a href="./src/resources/beta/beta.ts">BetaUnsupportedCharsetErrorDetails</a></code>
 
 ## Models
 
@@ -1540,7 +1791,13 @@ Types:
 - <code><a href="./src/resources/beta/environments/environments.ts">BetaCloudConfig</a></code>
 - <code><a href="./src/resources/beta/environments/environments.ts">BetaCloudConfigParams</a></code>
 - <code><a href="./src/resources/beta/environments/environments.ts">BetaEnvironment</a></code>
+- <code><a href="./src/resources/beta/environments/environments.ts">BetaEnvironmentArchivedErrorDetails</a></code>
+- <code><a href="./src/resources/beta/environments/environments.ts">BetaEnvironmentCreateDisabledErrorDetails</a></code>
 - <code><a href="./src/resources/beta/environments/environments.ts">BetaEnvironmentDeleteResponse</a></code>
+- <code><a href="./src/resources/beta/environments/environments.ts">BetaEnvironmentNotFoundErrorDetails</a></code>
+- <code><a href="./src/resources/beta/environments/environments.ts">BetaEnvironmentUpdateDisabledErrorDetails</a></code>
+- <code><a href="./src/resources/beta/environments/environments.ts">BetaInvalidConfigTypeChangeErrorDetails</a></code>
+- <code><a href="./src/resources/beta/environments/environments.ts">BetaInvalidMetadataErrorDetails</a></code>
 - <code><a href="./src/resources/beta/environments/environments.ts">BetaLimitedNetwork</a></code>
 - <code><a href="./src/resources/beta/environments/environments.ts">BetaLimitedNetworkParams</a></code>
 - <code><a href="./src/resources/beta/environments/environments.ts">BetaPackages</a></code>
@@ -1562,6 +1819,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/beta/environments/work.ts">BetaHeartbeatPreconditionFailedErrorDetails</a></code>
 - <code><a href="./src/resources/beta/environments/work.ts">BetaSelfHostedWork</a></code>
 - <code><a href="./src/resources/beta/environments/work.ts">BetaSelfHostedWorkHeartbeatResponse</a></code>
 - <code><a href="./src/resources/beta/environments/work.ts">BetaSelfHostedWorkListResponse</a></code>
@@ -1569,6 +1827,7 @@ Types:
 - <code><a href="./src/resources/beta/environments/work.ts">BetaSelfHostedWorkStopRequest</a></code>
 - <code><a href="./src/resources/beta/environments/work.ts">BetaSelfHostedWorkUpdateRequest</a></code>
 - <code><a href="./src/resources/beta/environments/work.ts">BetaSessionWorkData</a></code>
+- <code><a href="./src/resources/beta/environments/work.ts">BetaWorkLeaseState</a></code>
 
 Methods:
 
@@ -1661,6 +1920,7 @@ Types:
 - <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsBase64DocumentSource</a></code>
 - <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsBase64ImageSource</a></code>
 - <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsBillingError</a></code>
+- <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsCompactionLimitReachedError</a></code>
 - <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsCredentialHostUnreachableError</a></code>
 - <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsDocumentBlock</a></code>
 - <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsEventParams</a></code>
@@ -1723,6 +1983,7 @@ Types:
 - <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsTextRubricParams</a></code>
 - <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsThreadLimitWorkflowRunError</a></code>
 - <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsTimeoutWorkflowRunError</a></code>
+- <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsToolUseLimitReachedError</a></code>
 - <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsUnknownError</a></code>
 - <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsUnknownWorkflowRunError</a></code>
 - <code><a href="./src/resources/beta/sessions/events.ts">BetaManagedAgentsURLDocumentSource</a></code>
@@ -2204,6 +2465,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/beta/organization/organization.ts">BetaBillingFrozenErrorDetails</a></code>
 - <code><a href="./src/resources/beta/organization/organization.ts">BetaOrganization</a></code>
 - <code><a href="./src/resources/beta/organization/organization.ts">BetaOrganizationRole</a></code>
 
@@ -2345,6 +2607,12 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/beta/organization/users.ts">BetaCannotSignOutManagedMemberErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/users.ts">BetaCannotSignOutMembershipAdminErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/users.ts">BetaCannotSignOutOwnerErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/users.ts">BetaCannotSignOutPrimaryOwnerErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/users.ts">BetaCannotSignOutPrivilegedMemberErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/users.ts">BetaCannotSignOutSelfErrorDetails</a></code>
 - <code><a href="./src/resources/beta/organization/users.ts">BetaOrganizationUser</a></code>
 - <code><a href="./src/resources/beta/organization/users.ts">UserRemoveResponse</a></code>
 
@@ -2354,6 +2622,7 @@ Methods:
 - <code title="post /v1/organizations/users/{user_id}">client.beta.organization.users.<a href="./src/resources/beta/organization/users.ts">update</a>(userID, { ...params }) -> BetaOrganizationUser</code>
 - <code title="get /v1/organizations/users">client.beta.organization.users.<a href="./src/resources/beta/organization/users.ts">list</a>({ ...params }) -> BetaOrganizationUsersPage</code>
 - <code title="delete /v1/organizations/users/{user_id}">client.beta.organization.users.<a href="./src/resources/beta/organization/users.ts">remove</a>(userID) -> UserRemoveResponse</code>
+- <code title="post /v1/organizations/users/{user_id}/sign_out">client.beta.organization.users.<a href="./src/resources/beta/organization/users.ts">signOut</a>(userID, { ...params }) -> BetaOrganizationUser</code>
 
 ### Workspaces
 
@@ -2462,17 +2731,21 @@ Types:
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsActorType</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsAPIActor</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsArtifactActivity</a></code>
+- <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsArtifactGroupBy</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsChatCoworkUnifiedChatMetrics</a></code>
+- <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsChatCoworkUnifiedMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsChatCoworkUnifiedSessionsMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsChatMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsClaudeCodeMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsClaudeTagCategory</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsConnectorActivity</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics</a></code>
+- <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsConnectorChatCoworkUnifiedMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsConnectorChatCoworkUnifiedSessionsMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsConnectorChatMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsConnectorClaudeCodeMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsConnectorCoworkMetrics</a></code>
+- <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsConnectorGroupBy</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsConnectorOfficeMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsConnectorOfficeProductMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsContextWindow</a></code>
@@ -2494,11 +2767,15 @@ Types:
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsLinesOfCode</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsOfficeMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsOfficeProductMetrics</a></code>
+- <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsOrder</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsPluginActivity</a></code>
+- <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsPluginChatCoworkUnifiedMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsPluginClaudeCodeMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsPluginCoworkMetrics</a></code>
+- <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsPluginGroupBy</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsProductFilter</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsProjectActivity</a></code>
+- <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsProjectGroupBy</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsReportUserActor</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsScienceMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsServerToolUse</a></code>
@@ -2507,10 +2784,12 @@ Types:
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsSingleDayActivitySummary</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsSkillActivity</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsSkillChatCoworkUnifiedChatMetrics</a></code>
+- <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsSkillChatCoworkUnifiedMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsSkillChatCoworkUnifiedSessionsMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsSkillChatMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsSkillClaudeCodeMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsSkillCoworkMetrics</a></code>
+- <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsSkillGroupBy</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsSkillOfficeMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsSkillOfficeProductMetrics</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsSpeed</a></code>
@@ -2527,6 +2806,7 @@ Types:
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsUser</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsUserActivity</a></code>
 - <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsUserActor</a></code>
+- <code><a href="./src/resources/beta/organization/analytics/analytics.ts">BetaAnalyticsUserGroupBy</a></code>
 
 #### Summaries
 
@@ -2641,6 +2921,7 @@ Types:
 - <code><a href="./src/resources/beta/organization/spend-limits/spend-limits.ts">BetaSpendLimitUserActor</a></code>
 - <code><a href="./src/resources/beta/organization/spend-limits/spend-limits.ts">BetaSpendLimitUserScope</a></code>
 - <code><a href="./src/resources/beta/organization/spend-limits/spend-limits.ts">BetaSpendLimitWorkspaceScope</a></code>
+- <code><a href="./src/resources/beta/organization/spend-limits/spend-limits.ts">BetaSpendLimitsAdminAPIWritesNotEnabledErrorDetails</a></code>
 - <code><a href="./src/resources/beta/organization/spend-limits/spend-limits.ts">BetaSpendSummary</a></code>
 - <code><a href="./src/resources/beta/organization/spend-limits/spend-limits.ts">SpendLimitDeleteResponse</a></code>
 
@@ -2662,6 +2943,8 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/beta/organization/spend-limits/increase-requests.ts">BetaSpendLimitIncreaseRequest</a></code>
+- <code><a href="./src/resources/beta/organization/spend-limits/increase-requests.ts">BetaSpendLimitIncreaseRequestActor</a></code>
+- <code><a href="./src/resources/beta/organization/spend-limits/increase-requests.ts">BetaSpendLimitIncreaseRequestResolvedBy</a></code>
 - <code><a href="./src/resources/beta/organization/spend-limits/increase-requests.ts">BetaSpendLimitIncreaseRequestStatus</a></code>
 - <code><a href="./src/resources/beta/organization/spend-limits/increase-requests.ts">IncreaseRequestApproveResponse</a></code>
 
@@ -2676,8 +2959,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/beta/organization/rbac-groups/rbac-groups.ts">BetaDeletedRBACGroup</a></code>
 - <code><a href="./src/resources/beta/organization/rbac-groups/rbac-groups.ts">BetaRBACGroup</a></code>
-- <code><a href="./src/resources/beta/organization/rbac-groups/rbac-groups.ts">RBACGroupDeleteResponse</a></code>
 
 Methods:
 
@@ -2685,20 +2968,20 @@ Methods:
 - <code title="get /v1/organizations/rbac_groups/{rbac_group_id}">client.beta.organization.rbacGroups.<a href="./src/resources/beta/organization/rbac-groups/rbac-groups.ts">retrieve</a>(rbacGroupID) -> BetaRBACGroup</code>
 - <code title="post /v1/organizations/rbac_groups/{rbac_group_id}">client.beta.organization.rbacGroups.<a href="./src/resources/beta/organization/rbac-groups/rbac-groups.ts">update</a>(rbacGroupID, { ...params }) -> BetaRBACGroup</code>
 - <code title="get /v1/organizations/rbac_groups">client.beta.organization.rbacGroups.<a href="./src/resources/beta/organization/rbac-groups/rbac-groups.ts">list</a>({ ...params }) -> BetaRBACGroupsPageCursor</code>
-- <code title="delete /v1/organizations/rbac_groups/{rbac_group_id}">client.beta.organization.rbacGroups.<a href="./src/resources/beta/organization/rbac-groups/rbac-groups.ts">delete</a>(rbacGroupID) -> RBACGroupDeleteResponse</code>
+- <code title="delete /v1/organizations/rbac_groups/{rbac_group_id}">client.beta.organization.rbacGroups.<a href="./src/resources/beta/organization/rbac-groups/rbac-groups.ts">delete</a>(rbacGroupID) -> BetaDeletedRBACGroup</code>
 
 #### Members
 
 Types:
 
+- <code><a href="./src/resources/beta/organization/rbac-groups/members.ts">BetaDeletedRBACGroupMember</a></code>
 - <code><a href="./src/resources/beta/organization/rbac-groups/members.ts">BetaRBACGroupMember</a></code>
-- <code><a href="./src/resources/beta/organization/rbac-groups/members.ts">MemberRemoveResponse</a></code>
 
 Methods:
 
 - <code title="get /v1/organizations/rbac_groups/{rbac_group_id}/members">client.beta.organization.rbacGroups.members.<a href="./src/resources/beta/organization/rbac-groups/members.ts">list</a>(rbacGroupID, { ...params }) -> BetaRBACGroupMembersPageCursor</code>
 - <code title="post /v1/organizations/rbac_groups/{rbac_group_id}/members">client.beta.organization.rbacGroups.members.<a href="./src/resources/beta/organization/rbac-groups/members.ts">add</a>(rbacGroupID, { ...params }) -> BetaRBACGroupMember</code>
-- <code title="delete /v1/organizations/rbac_groups/{rbac_group_id}/members/{user_id}">client.beta.organization.rbacGroups.members.<a href="./src/resources/beta/organization/rbac-groups/members.ts">remove</a>(userID, { ...params }) -> MemberRemoveResponse</code>
+- <code title="delete /v1/organizations/rbac_groups/{rbac_group_id}/members/{user_id}">client.beta.organization.rbacGroups.members.<a href="./src/resources/beta/organization/rbac-groups/members.ts">remove</a>(userID, { ...params }) -> BetaDeletedRBACGroupMember</code>
 
 ### RBACRoles
 
@@ -2735,12 +3018,17 @@ Types:
 - <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaPluginAPIActor</a></code>
 - <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaPluginComponent</a></code>
 - <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaPluginContentScan</a></code>
+- <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaPluginNameTakenErrorDetails</a></code>
 - <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaPluginOwnerOrganization</a></code>
 - <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaPluginOwnerUser</a></code>
 - <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaPluginTargetOrganization</a></code>
 - <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaPluginTargetOrganizationMember</a></code>
 - <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaPluginTargetRBACGroup</a></code>
 - <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaPluginUserActor</a></code>
+- <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaRegistrationPendingErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaScanFailedErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaScanPendingErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/plugins/plugins.ts">BetaSkillNameTakenErrorDetails</a></code>
 
 Methods:
 
@@ -2883,6 +3171,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaAPIKeyScopeMissingErrorDetails</a></code>
 - <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaClaudeTagDefaultSettingSource</a></code>
 - <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaClaudeTagGuestPolicy</a></code>
 - <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaClaudeTagGuestPolicyAllow</a></code>
@@ -2900,6 +3189,12 @@ Types:
 - <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaClaudeTagSlackParentChannelSettingSource</a></code>
 - <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaClaudeTagSlackWorkspaceIdentifiers</a></code>
 - <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaClaudeTagSlackWorkspaceSettingSource</a></code>
+- <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaClaudeTagWritesNotEnabledErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaComplianceConfigurationRestrictedErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaSlackChannelSetUpSettingsConflictErrorDetails</a></code>
+- <code><a href="./src/resources/beta/organization/claude-tag/claude-tag.ts">BetaSlackChannelSetUpSettingsRefusedErrorDetails</a></code>
 
 #### SlackChannels
 

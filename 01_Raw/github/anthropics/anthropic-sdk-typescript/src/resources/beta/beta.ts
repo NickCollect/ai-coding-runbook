@@ -305,8 +305,20 @@ import {
   BetaCloudConfig,
   BetaCloudConfigParams,
   BetaEnvironment,
+  BetaEnvironmentArchivedError,
+  BetaEnvironmentArchivedErrorDetails,
+  BetaEnvironmentCreateDisabledError,
+  BetaEnvironmentCreateDisabledErrorDetails,
   BetaEnvironmentDeleteResponse,
+  BetaEnvironmentNotFoundError,
+  BetaEnvironmentNotFoundErrorDetails,
+  BetaEnvironmentUpdateDisabledError,
+  BetaEnvironmentUpdateDisabledErrorDetails,
   BetaEnvironmentsPageCursor,
+  BetaInvalidConfigTypeChangeError,
+  BetaInvalidConfigTypeChangeErrorDetails,
+  BetaInvalidMetadataError,
+  BetaInvalidMetadataErrorDetails,
   BetaLimitedNetwork,
   BetaLimitedNetworkParams,
   BetaPackages,
@@ -835,7 +847,13 @@ import {
   BetaMCPToolDefaultConfig,
 } from './messages/messages';
 import * as OrganizationAPI from './organization/organization';
-import { BetaOrganization, BetaOrganizationRole, Organization } from './organization/organization';
+import {
+  BetaBillingFrozenError,
+  BetaBillingFrozenErrorDetails,
+  BetaOrganization,
+  BetaOrganizationRole,
+  Organization,
+} from './organization/organization';
 import * as SessionsAPI from './sessions/sessions';
 import {
   BetaManagedAgentsAdvisorParams,
@@ -942,6 +960,31 @@ import {
   VaultUpdateParams,
   Vaults,
 } from './vaults/vaults';
+import { BadRequestError } from '../../core/error';
+
+/**
+ * The beta that the endpoint requires is not enabled for the organization. The
+ * message names the beta value.
+ */
+export class BetaOrganizationNotEnrolledInBetaError extends BadRequestError {
+  declare readonly errorCode: 'organization_not_enrolled_in_beta';
+  declare readonly details: BetaOrganizationNotEnrolledInBetaErrorDetails;
+
+  /** @internal */
+  static override readonly _errorName: string = 'BetaOrganizationNotEnrolledInBetaError';
+}
+
+/**
+ * The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1
+ * or US-ASCII. Send the request with no charset, or with one of these.
+ */
+export class BetaUnsupportedCharsetError extends BadRequestError {
+  declare readonly errorCode: 'unsupported_charset';
+  declare readonly details: BetaUnsupportedCharsetErrorDetails;
+
+  /** @internal */
+  static override readonly _errorName: string = 'BetaUnsupportedCharsetError';
+}
 
 export class Beta extends APIResource {
   models: ModelsAPI.Models = new ModelsAPI.Models(this._client);
@@ -962,6 +1005,12 @@ export class Beta extends APIResource {
   organization: OrganizationAPI.Organization = new OrganizationAPI.Organization(this._client);
 }
 
+/**
+ * Beta names you can send in the `anthropic-beta` header.
+ *
+ * See [Beta headers](https://platform.claude.com/docs/en/api/beta-headers) for how
+ * to send them and where to find the name a feature needs.
+ */
 export type AnthropicBeta =
   | (string & {})
   | 'message-batches-2024-09-24'
@@ -1016,25 +1065,47 @@ export type AnthropicBeta =
   | 'spend-limit-reads-2026-09-26'
   | 'telemetry-destinations-2026-08-11'
   | 'webhooks-2026-10-07'
+  | 'admin-user-sign-out-2026-10-08'
   | 'message-threads-2026-08-12'
   | 'analytics-usage-cost-2026-08-24'
   | 'experimental-claude-tag-2026-10-21';
 
 export interface BetaAPIError {
+  /**
+   * A human-readable explanation of the error. Its wording can change, so don't
+   * match on it.
+   */
   message: string;
 
+  /**
+   * The broad category of the error.
+   */
   type: 'api_error';
 }
 
 export interface BetaAuthenticationError {
+  /**
+   * A human-readable explanation of the error. Its wording can change, so don't
+   * match on it.
+   */
   message: string;
 
+  /**
+   * The broad category of the error.
+   */
   type: 'authentication_error';
 }
 
 export interface BetaBillingError {
+  /**
+   * A human-readable explanation of the error. Its wording can change, so don't
+   * match on it.
+   */
   message: string;
 
+  /**
+   * The broad category of the error.
+   */
   type: 'billing_error';
 }
 
@@ -1060,14 +1131,28 @@ export interface BetaErrorResponse {
 }
 
 export interface BetaGatewayTimeoutError {
+  /**
+   * A human-readable explanation of the error. Its wording can change, so don't
+   * match on it.
+   */
   message: string;
 
+  /**
+   * The broad category of the error.
+   */
   type: 'timeout_error';
 }
 
 export interface BetaInvalidRequestError {
+  /**
+   * A human-readable explanation of the error. Its wording can change, so don't
+   * match on it.
+   */
   message: string;
 
+  /**
+   * The broad category of the error.
+   */
   type: 'invalid_request_error';
 }
 
@@ -1091,33 +1176,85 @@ export interface BetaMonetaryAmount {
 }
 
 export interface BetaNotFoundError {
+  /**
+   * A human-readable explanation of the error. Its wording can change, so don't
+   * match on it.
+   */
   message: string;
 
+  /**
+   * The broad category of the error.
+   */
   type: 'not_found_error';
 }
 
+/**
+ * The beta that the endpoint requires is not enabled for the organization. The
+ * message names the beta value.
+ */
+export interface BetaOrganizationNotEnrolledInBetaErrorDetails {
+  error_code: 'organization_not_enrolled_in_beta';
+}
+
 export interface BetaOverloadedError {
+  /**
+   * A human-readable explanation of the error. Its wording can change, so don't
+   * match on it.
+   */
   message: string;
 
+  /**
+   * The broad category of the error.
+   */
   type: 'overloaded_error';
 }
 
 export interface BetaPermissionError {
+  /**
+   * A human-readable explanation of the error. Its wording can change, so don't
+   * match on it.
+   */
   message: string;
 
+  /**
+   * The broad category of the error.
+   */
   type: 'permission_error';
 }
 
 export interface BetaRateLimitError {
+  /**
+   * A human-readable explanation of the error. Its wording can change, so don't
+   * match on it.
+   */
   message: string;
 
+  /**
+   * The broad category of the error.
+   */
   type: 'rate_limit_error';
 }
 
+/**
+ * The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1
+ * or US-ASCII. Send the request with no charset, or with one of these.
+ */
+export interface BetaUnsupportedCharsetErrorDetails {
+  error_code: 'unsupported_charset';
+}
+
+Beta.BetaOrganizationNotEnrolledInBetaError = BetaOrganizationNotEnrolledInBetaError;
+Beta.BetaUnsupportedCharsetError = BetaUnsupportedCharsetError;
 Beta.Models = Models;
 Beta.Messages = Messages;
 Beta.Agents = Agents;
 Beta.Environments = Environments;
+Beta.BetaEnvironmentArchivedError = BetaEnvironmentArchivedError;
+Beta.BetaInvalidConfigTypeChangeError = BetaInvalidConfigTypeChangeError;
+Beta.BetaInvalidMetadataError = BetaInvalidMetadataError;
+Beta.BetaEnvironmentCreateDisabledError = BetaEnvironmentCreateDisabledError;
+Beta.BetaEnvironmentUpdateDisabledError = BetaEnvironmentUpdateDisabledError;
+Beta.BetaEnvironmentNotFoundError = BetaEnvironmentNotFoundError;
 Beta.Sessions = Sessions;
 Beta.Deployments = Deployments;
 Beta.DeploymentRuns = DeploymentRuns;
@@ -1130,9 +1267,12 @@ Beta.UserProfiles = UserProfiles;
 Beta.Dreams = Dreams;
 Beta.Tunnels = Tunnels;
 Beta.Organization = Organization;
+Beta.BetaBillingFrozenError = BetaBillingFrozenError;
 
 export declare namespace Beta {
   export {
+    BetaOrganizationNotEnrolledInBetaError as BetaOrganizationNotEnrolledInBetaError,
+    BetaUnsupportedCharsetError as BetaUnsupportedCharsetError,
     type AnthropicBeta as AnthropicBeta,
     type BetaAPIError as BetaAPIError,
     type BetaAuthenticationError as BetaAuthenticationError,
@@ -1144,9 +1284,11 @@ export declare namespace Beta {
     type BetaInvalidRequestError as BetaInvalidRequestError,
     type BetaMonetaryAmount as BetaMonetaryAmount,
     type BetaNotFoundError as BetaNotFoundError,
+    type BetaOrganizationNotEnrolledInBetaErrorDetails as BetaOrganizationNotEnrolledInBetaErrorDetails,
     type BetaOverloadedError as BetaOverloadedError,
     type BetaPermissionError as BetaPermissionError,
     type BetaRateLimitError as BetaRateLimitError,
+    type BetaUnsupportedCharsetErrorDetails as BetaUnsupportedCharsetErrorDetails,
   };
 
   export {
@@ -1785,10 +1927,22 @@ export declare namespace Beta {
 
   export {
     Environments as Environments,
+    BetaEnvironmentArchivedError as BetaEnvironmentArchivedError,
+    BetaInvalidConfigTypeChangeError as BetaInvalidConfigTypeChangeError,
+    BetaInvalidMetadataError as BetaInvalidMetadataError,
+    BetaEnvironmentCreateDisabledError as BetaEnvironmentCreateDisabledError,
+    BetaEnvironmentUpdateDisabledError as BetaEnvironmentUpdateDisabledError,
+    BetaEnvironmentNotFoundError as BetaEnvironmentNotFoundError,
     type BetaCloudConfig as BetaCloudConfig,
     type BetaCloudConfigParams as BetaCloudConfigParams,
     type BetaEnvironment as BetaEnvironment,
+    type BetaEnvironmentArchivedErrorDetails as BetaEnvironmentArchivedErrorDetails,
+    type BetaEnvironmentCreateDisabledErrorDetails as BetaEnvironmentCreateDisabledErrorDetails,
     type BetaEnvironmentDeleteResponse as BetaEnvironmentDeleteResponse,
+    type BetaEnvironmentNotFoundErrorDetails as BetaEnvironmentNotFoundErrorDetails,
+    type BetaEnvironmentUpdateDisabledErrorDetails as BetaEnvironmentUpdateDisabledErrorDetails,
+    type BetaInvalidConfigTypeChangeErrorDetails as BetaInvalidConfigTypeChangeErrorDetails,
+    type BetaInvalidMetadataErrorDetails as BetaInvalidMetadataErrorDetails,
     type BetaLimitedNetwork as BetaLimitedNetwork,
     type BetaLimitedNetworkParams as BetaLimitedNetworkParams,
     type BetaPackages as BetaPackages,
@@ -2092,6 +2246,8 @@ export declare namespace Beta {
 
   export {
     Organization as Organization,
+    BetaBillingFrozenError as BetaBillingFrozenError,
+    type BetaBillingFrozenErrorDetails as BetaBillingFrozenErrorDetails,
     type BetaOrganization as BetaOrganization,
     type BetaOrganizationRole as BetaOrganizationRole,
   };

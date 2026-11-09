@@ -188,6 +188,8 @@ export class PluginMarketplaces extends APIResource {
    * Platform (Claude Console) organizations, or to organizations with HIPAA
    * readiness enabled.
    *
+   * @throws {BetaUnsupportedCharsetError}
+   *
    * @example
    * ```ts
    * const betaPluginMarketplaceValidationReport =

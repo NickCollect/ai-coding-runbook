@@ -30,7 +30,7 @@ class Invites(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/anthropics/anthropic-sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://platform.claude.com/docs/en/api/sdks/python
         """
         return InvitesWithRawResponse(self)
 
@@ -39,7 +39,7 @@ class Invites(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/anthropics/anthropic-sdk-python#with_streaming_response
+        For more information, see https://platform.claude.com/docs/en/api/sdks/python
         """
         return InvitesWithStreamingResponse(self)
 
@@ -86,6 +86,21 @@ class Invites(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          AlreadyMemberError:
+
+          CannotInviteEmailsWithUnverifiedDomainsError:
+
+          EmailDomainNotAllowedError:
+
+          InviteAlreadyExistsError:
+
+          OrgMemberLimitExceededError:
+
+          RBACGroupGrantsOwnerAccessError:
+
+          RBACGroupOwnerAccessUnconfirmedError:
         """
         return self._post(
             "/v1/organizations/invites",
@@ -274,7 +289,7 @@ class AsyncInvites(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/anthropics/anthropic-sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://platform.claude.com/docs/en/api/sdks/python
         """
         return AsyncInvitesWithRawResponse(self)
 
@@ -283,7 +298,7 @@ class AsyncInvites(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/anthropics/anthropic-sdk-python#with_streaming_response
+        For more information, see https://platform.claude.com/docs/en/api/sdks/python
         """
         return AsyncInvitesWithStreamingResponse(self)
 
@@ -330,6 +345,21 @@ class AsyncInvites(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          AlreadyMemberError:
+
+          CannotInviteEmailsWithUnverifiedDomainsError:
+
+          EmailDomainNotAllowedError:
+
+          InviteAlreadyExistsError:
+
+          OrgMemberLimitExceededError:
+
+          RBACGroupGrantsOwnerAccessError:
+
+          RBACGroupOwnerAccessUnconfirmedError:
         """
         return await self._post(
             "/v1/organizations/invites",

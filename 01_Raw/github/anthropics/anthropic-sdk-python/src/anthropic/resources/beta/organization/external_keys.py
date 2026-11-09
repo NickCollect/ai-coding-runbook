@@ -32,7 +32,7 @@ class ExternalKeys(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/anthropics/anthropic-sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://platform.claude.com/docs/en/api/sdks/python
         """
         return ExternalKeysWithRawResponse(self)
 
@@ -41,7 +41,7 @@ class ExternalKeys(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/anthropics/anthropic-sdk-python#with_streaming_response
+        For more information, see https://platform.claude.com/docs/en/api/sdks/python
         """
         return ExternalKeysWithStreamingResponse(self)
 
@@ -51,6 +51,7 @@ class ExternalKeys(SyncAPIResource):
         provider_config: external_key_create_params.ProviderConfig,
         display_name: Optional[str] | Omit = omit,
         geo: Literal["us"] | Omit = omit,
+        user_profile_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -68,6 +69,11 @@ class ExternalKeys(SyncAPIResource):
 
           geo: Data residency geo. Only `us` is supported.
 
+          user_profile_id: ID of a user profile to bind the key to. Omit this field for a key that isn't
+              bound to a user profile. Such a key can be attached to a Workspace whatever its
+              user profile. The binding cannot be changed later. A key bound to a user profile
+              can only be attached to a Workspace that has the same user profile.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -75,6 +81,9 @@ class ExternalKeys(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          UserProfileNotFoundError:
         """
         return self._post(
             "/v1/organizations/external_keys",
@@ -82,6 +91,7 @@ class ExternalKeys(SyncAPIResource):
                 "provider_config": provider_config,
                 "display_name": display_name,
                 "geo": geo,
+                "user_profile_id": user_profile_id,
             },
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -176,6 +186,9 @@ class ExternalKeys(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          ExternalKeyInWorkspacePolicyError:
         """
         if not external_key_id:
             raise ValueError(f"Expected a non-empty value for `external_key_id` but received {external_key_id!r}")
@@ -275,6 +288,9 @@ class ExternalKeys(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          ExternalKeyInWorkspacePolicyError:
         """
         if not external_key_id:
             raise ValueError(f"Expected a non-empty value for `external_key_id` but received {external_key_id!r}")
@@ -350,7 +366,7 @@ class AsyncExternalKeys(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/anthropics/anthropic-sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://platform.claude.com/docs/en/api/sdks/python
         """
         return AsyncExternalKeysWithRawResponse(self)
 
@@ -359,7 +375,7 @@ class AsyncExternalKeys(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/anthropics/anthropic-sdk-python#with_streaming_response
+        For more information, see https://platform.claude.com/docs/en/api/sdks/python
         """
         return AsyncExternalKeysWithStreamingResponse(self)
 
@@ -369,6 +385,7 @@ class AsyncExternalKeys(AsyncAPIResource):
         provider_config: external_key_create_params.ProviderConfig,
         display_name: Optional[str] | Omit = omit,
         geo: Literal["us"] | Omit = omit,
+        user_profile_id: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -386,6 +403,11 @@ class AsyncExternalKeys(AsyncAPIResource):
 
           geo: Data residency geo. Only `us` is supported.
 
+          user_profile_id: ID of a user profile to bind the key to. Omit this field for a key that isn't
+              bound to a user profile. Such a key can be attached to a Workspace whatever its
+              user profile. The binding cannot be changed later. A key bound to a user profile
+              can only be attached to a Workspace that has the same user profile.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -393,6 +415,9 @@ class AsyncExternalKeys(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          UserProfileNotFoundError:
         """
         return await self._post(
             "/v1/organizations/external_keys",
@@ -400,6 +425,7 @@ class AsyncExternalKeys(AsyncAPIResource):
                 "provider_config": provider_config,
                 "display_name": display_name,
                 "geo": geo,
+                "user_profile_id": user_profile_id,
             },
             options=make_request_options(
                 extra_headers=extra_headers,
@@ -494,6 +520,9 @@ class AsyncExternalKeys(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          ExternalKeyInWorkspacePolicyError:
         """
         if not external_key_id:
             raise ValueError(f"Expected a non-empty value for `external_key_id` but received {external_key_id!r}")
@@ -593,6 +622,9 @@ class AsyncExternalKeys(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          ExternalKeyInWorkspacePolicyError:
         """
         if not external_key_id:
             raise ValueError(f"Expected a non-empty value for `external_key_id` but received {external_key_id!r}")

@@ -22,6 +22,11 @@ export class Batches extends APIResource {
    * Learn more about the Message Batches API in our
    * [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
    *
+   * @throws {ClaudeCodeKeyCreatorNotMemberError}
+   * @throws {CMEKKeyDisabledError}
+   * @throws {OrganizationOnHoldError}
+   * @throws {EnforcedSpendLimitReachedError}
+   *
    * @example
    * ```ts
    * const betaMessageBatch =
@@ -72,6 +77,9 @@ export class Batches extends APIResource {
    * Learn more about the Message Batches API in our
    * [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
    *
+   * @throws {ClaudeCodeKeyCreatorNotMemberError}
+   * @throws {OrganizationOnHoldError}
+   *
    * @example
    * ```ts
    * const betaMessageBatch =
@@ -109,6 +117,9 @@ export class Batches extends APIResource {
    *
    * Learn more about the Message Batches API in our
    * [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+   *
+   * @throws {ClaudeCodeKeyCreatorNotMemberError}
+   * @throws {OrganizationOnHoldError}
    *
    * @example
    * ```ts
@@ -149,6 +160,9 @@ export class Batches extends APIResource {
    *
    * Learn more about the Message Batches API in our
    * [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+   *
+   * @throws {ClaudeCodeKeyCreatorNotMemberError}
+   * @throws {OrganizationOnHoldError}
    *
    * @example
    * ```ts
@@ -195,6 +209,9 @@ export class Batches extends APIResource {
    * Learn more about the Message Batches API in our
    * [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
    *
+   * @throws {ClaudeCodeKeyCreatorNotMemberError}
+   * @throws {OrganizationOnHoldError}
+   *
    * @example
    * ```ts
    * const betaMessageBatch =
@@ -235,6 +252,10 @@ export class Batches extends APIResource {
    *
    * Learn more about the Message Batches API in our
    * [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+   *
+   * @throws {ClaudeCodeKeyCreatorNotMemberError}
+   * @throws {CMEKKeyDisabledError}
+   * @throws {OrganizationOnHoldError}
    *
    * @example
    * ```ts

@@ -9,11 +9,9 @@ import { RequestOptions } from '../../../internal/request-options';
 import { startApiCallSpan } from '../../../internal/tracing';
 import {
   messagesCreateSpanSettings,
-  recordCountTokensResponse,
   recordMessagesCreateRequest,
   recordMessagesCreateResponse,
 } from '../../../lib/internal/tracing';
-import { ATTR_GEN_AI_REQUEST_MODEL } from '../../../lib/internal/tracing/attributes';
 import {
   parseBetaMessage,
   type ExtractParsedContentFromBetaParams,
@@ -85,6 +83,36 @@ export class Messages extends APIResource {
    * Learn more about the Messages API in our
    * [user guide](https://platform.claude.com/docs/en/get-started)
    *
+   * @throws {AvailableToolsLimitExceededError}
+   * @throws {ClaudeCodeKeyCreatorNotMemberError}
+   * @throws {ClaudeCodeVersionTooOldError}
+   * @throws {CMEKKeyDisabledError}
+   * @throws {CMEKKeyNetworkBlockedError}
+   * @throws {CompactionBlockAmbiguousError}
+   * @throws {CompactionBlockMisplacedError}
+   * @throws {CompactionContentMismatchError}
+   * @throws {CompactionIncompleteTurnError}
+   * @throws {CompactionNothingToSummarizeError}
+   * @throws {CompactionSignatureInvalidError}
+   * @throws {CompactionTooManyToolReferencesError}
+   * @throws {CompactionToolChangesMismatchError}
+   * @throws {OrganizationOnHoldError}
+   * @throws {RequestBodyEncodingInvalidError}
+   * @throws {RequestBodyEncodingUnsupportedError}
+   * @throws {ThreadAlreadyContinuedError}
+   * @throws {ThreadContinueInFlightError}
+   * @throws {ThreadFingerprintMismatchError}
+   * @throws {ThreadUnsupportedRequestError}
+   * @throws {ToolNameConflictError}
+   * @throws {ToolReferenceUnresolvedError}
+   * @throws {ThreadNotFoundError}
+   * @throws {SkillReadBlockedUndecryptableError}
+   * @throws {RequestBodyTooLargeAfterDecodingError}
+   * @throws {EnforcedSpendLimitReachedError}
+   * @throws {RampLimitExceededError}
+   * @throws {CMEKKeyUnreachableError}
+   * @throws {CompactionUnavailableError}
+   *
    * @example
    * ```ts
    * const betaMessage = await client.beta.messages.create({
@@ -136,7 +164,14 @@ export class Messages extends APIResource {
       timeout = this._client.calculateNonstreamingTimeout(body.max_tokens, maxNonstreamingTokens);
     }
 
-    const headers = messagesCreateHeaders(modifiedParams, options);
+    const request = {
+      body,
+      timeout: timeout ?? 600000,
+      ...options,
+      headers: messagesCreateHeaders(modifiedParams, options),
+      stream: modifiedParams.stream ?? false,
+      __qualifiers: { beta: 'true' },
+    };
     // A client whose spans are disabled computes nothing for one, and returns its request as it is.
     const call =
       this._client._tracer &&
@@ -144,25 +179,20 @@ export class Messages extends APIResource {
         this._client,
         'anthropic.messages.create',
         options,
-        messagesCreateSpanSettings(this._client, body, headers),
+        messagesCreateSpanSettings(this._client, request),
       );
     recordMessagesCreateRequest(this._client, call, body);
-    const request = this._client.post<BetaMessage | Stream<unknown>>('/v1/messages', {
-      body,
-      timeout: timeout ?? 600000,
-      ...options,
-      __qualifiers: { beta: 'true' },
+    const promise = this._client.post<BetaMessage | Stream<unknown>>('/v1/messages', {
+      ...request,
       __span: call,
-      headers,
-      stream: modifiedParams.stream ?? false,
     });
     return (
       call ?
-        request._thenUnwrap((data) => {
+        promise._thenUnwrap((data) => {
           recordMessagesCreateResponse(this._client, call, body, data);
           return data;
         })
-      : request) as APIPromise<BetaMessage> | APIPromise<Stream<BetaRawMessageStreamEvent>>;
+      : promise) as APIPromise<BetaMessage> | APIPromise<Stream<BetaRawMessageStreamEvent>>;
   }
 
   /**
@@ -217,6 +247,23 @@ export class Messages extends APIResource {
    * Learn more about token counting in our
    * [user guide](https://platform.claude.com/docs/en/build-with-claude/token-counting)
    *
+   * @throws {AvailableToolsLimitExceededError}
+   * @throws {ClaudeCodeKeyCreatorNotMemberError}
+   * @throws {CompactionBlockAmbiguousError}
+   * @throws {CompactionBlockMisplacedError}
+   * @throws {CompactionContentMismatchError}
+   * @throws {CompactionNothingToSummarizeError}
+   * @throws {CompactionSignatureInvalidError}
+   * @throws {CompactionToolChangesMismatchError}
+   * @throws {OrganizationOnHoldError}
+   * @throws {RequestBodyEncodingInvalidError}
+   * @throws {RequestBodyEncodingUnsupportedError}
+   * @throws {ToolNameConflictError}
+   * @throws {ToolReferenceUnresolvedError}
+   * @throws {RequestBodyTooLargeAfterDecodingError}
+   * @throws {EnforcedSpendLimitReachedError}
+   * @throws {CompactionUnavailableError}
+   *
    * @example
    * ```ts
    * const betaMessageTokensCount =
@@ -234,32 +281,26 @@ export class Messages extends APIResource {
     const modifiedParams = transformOutputFormat(params);
 
     const { betas, user_profile_id, workspace_id, ...body } = modifiedParams;
-    const headers = buildHeaders([
-      {
-        'anthropic-beta': [...(betas ?? []), 'token-counting-2024-11-01'].toString(),
-        ...(user_profile_id != null ? { 'anthropic-user-profile-id': user_profile_id } : undefined),
-        ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
-      },
-      options?.headers,
-    ]);
-    const call = startApiCallSpan(this._client, 'anthropic.messages.count_tokens', options, {
-      route: '/v1/messages/count_tokens',
-      attributes: { [ATTR_GEN_AI_REQUEST_MODEL]: body.model },
-    });
-    const request = this._client.post<BetaMessageTokensCount>('/v1/messages/count_tokens', {
+    const request = {
       body,
       ...options,
+      headers: buildHeaders([
+        {
+          'anthropic-beta': [...(betas ?? []), 'token-counting-2024-11-01'].toString(),
+          ...(user_profile_id != null ? { 'anthropic-user-profile-id': user_profile_id } : undefined),
+          ...(workspace_id != null ? { 'anthropic-workspace-id': workspace_id } : undefined),
+        },
+        options?.headers,
+      ]),
       __qualifiers: { beta: 'true' },
-      __span: call,
-      headers,
+    };
+    return this._client.post('/v1/messages/count_tokens', {
+      ...request,
+      __span: startApiCallSpan(this._client, 'anthropic.messages.count_tokens', options, {
+        route: '/v1/messages/count_tokens',
+        request,
+      }),
     });
-    // Only a request with a span has a response to record.
-    return call ?
-        request._thenUnwrap((count) => {
-          recordCountTokensResponse(this._client, call, count);
-          return count;
-        })
-      : request;
   }
 
   toolRunner(
@@ -450,9 +491,9 @@ export interface BetaAdvisorTool20260301 {
    * hits this cap, the returned advisor_result or advisor_redacted_result block
    * carries stop_reason='max_tokens', and a truncation note is appended to the
    * advice text the worker model sees (inside the encrypted blob in redacted mode).
-   * When set, the server also emits a remaining-tokens budget block in the advisor's
-   * prompt so the advisor self-shapes toward the cap. When omitted, the advisor
-   * model's default output cap applies and no budget block is emitted.
+   * When set, the API also passes the advisor its remaining-token budget, so the
+   * advisor shapes its output toward the cap. When omitted, the advisor model's
+   * default output cap applies and the API doesn't pass a budget.
    */
   max_tokens?: number | null;
 
@@ -5196,13 +5237,21 @@ export interface BetaFallbackBlock {
  * Accepted in `messages[].content` and not rendered into the prompt; not validated
  * against the request's `fallbacks` chain or top-level `model`.
  *
- * Echo the assistant turn back verbatim, including this block in its original
- * position. The block marks the boundary between content produced before and after
- * a fallback hop, and the server relies on that boundary to validate the turn:
- * when thinking runs flank the boundary, omitting the block merges them into one
- * span the server cannot validate (the request is rejected), and moving it into
- * the middle of a single run is likewise rejected; between non-thinking blocks the
- * block's placement has no validation effect.
+ * When you send the assistant turn back, keep this block in its original position.
+ * The block marks the boundary between content produced before and after a
+ * fallback hop, and the server relies on that boundary to validate the turn: when
+ * thinking runs flank the boundary, omitting the block merges them into one span
+ * the server cannot validate (the request is rejected), and moving it into the
+ * middle of a single run is likewise rejected; between non-thinking blocks the
+ * block's placement has no effect on thinking validation.
+ *
+ * Some blocks from before the turn's final `fallback` block must be left out when
+ * you send the turn back, and no `tool_result` is sent for a `tool_use` block you
+ * left out.
+ *
+ * See the
+ * [refusals and fallback guide](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#continuing-the-conversation)
+ * to learn which blocks to keep.
  */
 export interface BetaFallbackBlockParam {
   /**
@@ -6292,10 +6341,10 @@ export interface BetaOutputTokensDetails {
    * thinking-block delimiter tokens.
    *
    * Reflects the raw reasoning the model produced, not the (possibly shorter)
-   * summarized thinking text returned in the response body. Computed by
-   * re-tokenizing the raw reasoning text, so it may differ from the model's exact
-   * generation count by a small number of tokens. Always ≤ `output_tokens`;
-   * `output_tokens - thinking_tokens` approximates the non-reasoning output.
+   * summarized thinking text returned in the response body. It may differ from the
+   * model's exact generation count by a small number of tokens. Always ≤
+   * `output_tokens`; `output_tokens - thinking_tokens` approximates the
+   * non-reasoning output.
    */
   thinking_tokens: number;
 }

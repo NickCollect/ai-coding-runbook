@@ -224,8 +224,8 @@ export type BetaDreamsPageCursor = PageCursor<BetaDream>;
  * writes its result into the input memory store instead.
  *
  * The Dreams API is in research preview: the request and response shapes are
- * volatile and may change without the deprecation period that applies to
- * generally-available endpoints.
+ * volatile and may change without the deprecation period that applies to stable
+ * endpoints.
  *
  * See the
  * [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#how-it-works)
@@ -419,7 +419,7 @@ export interface BetaDreamModelConfigParam {
    * The ID can be 1 to 256 characters long.
    *
    * The
-   * [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#limits)
+   * [Availability section of the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#feature-availability)
    * lists the supported models.
    */
   id: string;
@@ -457,10 +457,6 @@ export interface BetaDreamSessionsInput {
    *
    * Give 1 to 100 IDs, with no duplicates. Each session must be in the same
    * workspace as the dream. Responses list the IDs in sorted order.
-   *
-   * The
-   * [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#limits)
-   * lists all the limits on a dream.
    */
   session_ids: Array<string>;
 
@@ -480,18 +476,15 @@ export interface BetaDreamSessionsInput {
  * - `pending` - The dream is waiting to start and hasn't read its inputs yet.
  *
  *   `outputs` is empty and every `usage` count is zero.
- *
  * - `running` - The dream is reading its inputs and writing its result.
  *
  *   `usage` updates while the dream has this status.
- *
  * - `completed` - The dream finished and its output memory store holds the
  *   complete result.
  * - `failed` - The dream stopped with an error, which `error` describes.
  *
  *   If `outputs` references a memory store, that memory store keeps what the dream
  *   wrote before it stopped.
- *
  * - `canceled` - A cancel request stopped the dream before it reached `completed`
  *   or `failed`.
  *
@@ -597,10 +590,6 @@ export interface BetaOutputBehaviorUpdateExisting {
 export interface BetaTargetStoreHeldError {
   type: 'conflict_error';
 
-  /**
-   * A human-readable explanation of why the memory store can't be used yet, with the
-   * ID of the dream that is using it when the server can identify it.
-   */
   message?: string;
 }
 
@@ -618,7 +607,7 @@ export interface DreamCreateParams {
    * In the object form, `speed` can only be `standard`.
    *
    * The
-   * [limits table in the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#limits)
+   * [Availability section of the Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams#feature-availability)
    * lists the supported models.
    */
   model: string | BetaDreamModelConfigParam;

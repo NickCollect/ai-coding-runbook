@@ -80,7 +80,7 @@ class Plugins(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/anthropics/anthropic-sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://platform.claude.com/docs/en/api/sdks/python
         """
         return PluginsWithRawResponse(self)
 
@@ -89,7 +89,7 @@ class Plugins(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/anthropics/anthropic-sdk-python#with_streaming_response
+        For more information, see https://platform.claude.com/docs/en/api/sdks/python
         """
         return PluginsWithStreamingResponse(self)
 
@@ -172,6 +172,19 @@ class Plugins(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          CMEKKeyDisabledError:
+
+          CMEKKeyNetworkBlockedError:
+
+          BetaUnsupportedCharsetError:
+
+          BetaPluginNameTakenError:
+
+          BetaSkillNameTakenError:
+
+          BetaRegistrationPendingError:
         """
         extra_headers = {
             **strip_not_given(
@@ -357,6 +370,17 @@ class Plugins(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          CMEKKeyDisabledError:
+
+          CMEKKeyNetworkBlockedError:
+
+          BetaScanFailedError:
+
+          BetaScanPendingError:
+
+          BetaSkillNameTakenError:
         """
         if not plugin_id:
             raise ValueError(f"Expected a non-empty value for `plugin_id` but received {plugin_id!r}")
@@ -557,6 +581,9 @@ class Plugins(SyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          CMEKKeyDisabledError:
         """
         if not plugin_id:
             raise ValueError(f"Expected a non-empty value for `plugin_id` but received {plugin_id!r}")
@@ -606,7 +633,7 @@ class AsyncPlugins(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/anthropics/anthropic-sdk-python#accessing-raw-response-data-eg-headers
+        For more information, see https://platform.claude.com/docs/en/api/sdks/python
         """
         return AsyncPluginsWithRawResponse(self)
 
@@ -615,7 +642,7 @@ class AsyncPlugins(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/anthropics/anthropic-sdk-python#with_streaming_response
+        For more information, see https://platform.claude.com/docs/en/api/sdks/python
         """
         return AsyncPluginsWithStreamingResponse(self)
 
@@ -698,6 +725,19 @@ class AsyncPlugins(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          CMEKKeyDisabledError:
+
+          CMEKKeyNetworkBlockedError:
+
+          BetaUnsupportedCharsetError:
+
+          BetaPluginNameTakenError:
+
+          BetaSkillNameTakenError:
+
+          BetaRegistrationPendingError:
         """
         extra_headers = {
             **strip_not_given(
@@ -883,6 +923,17 @@ class AsyncPlugins(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          CMEKKeyDisabledError:
+
+          CMEKKeyNetworkBlockedError:
+
+          BetaScanFailedError:
+
+          BetaScanPendingError:
+
+          BetaSkillNameTakenError:
         """
         if not plugin_id:
             raise ValueError(f"Expected a non-empty value for `plugin_id` but received {plugin_id!r}")
@@ -1083,6 +1134,9 @@ class AsyncPlugins(AsyncAPIResource):
           extra_body: Add additional JSON properties to the request
 
           timeout: Override the client-level default timeout for this request, in seconds
+
+        Raises:
+          CMEKKeyDisabledError:
         """
         if not plugin_id:
             raise ValueError(f"Expected a non-empty value for `plugin_id` but received {plugin_id!r}")

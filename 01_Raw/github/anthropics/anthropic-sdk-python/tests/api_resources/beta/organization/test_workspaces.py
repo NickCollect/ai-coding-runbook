@@ -41,6 +41,7 @@ class TestWorkspaces:
                 "env": "prod",
                 "team": "platform",
             },
+            user_profile_id="uprof_01SDCCSbTxrXDpWc1phhtcfK",
             betas=["message-batches-2024-09-24"],
             extra_query={"beta": "true"},
         )
@@ -136,6 +137,7 @@ class TestWorkspaces:
                 "env": "prod",
                 "team": "platform",
             },
+            user_profile_id="uprof_01SDCCSbTxrXDpWc1phhtcfK",
             extra_query={"beta": "true"},
         )
         assert_matches_type(BetaWorkspace, workspace, path=["response"])
@@ -185,6 +187,7 @@ class TestWorkspaces:
         workspace = client.beta.organization.workspaces.list(
             after_id="after_id",
             before_id="before_id",
+            ids=["string"],
             include_archived=True,
             include_default=True,
             limit=1,
@@ -286,6 +289,7 @@ class TestAsyncWorkspaces:
                 "env": "prod",
                 "team": "platform",
             },
+            user_profile_id="uprof_01SDCCSbTxrXDpWc1phhtcfK",
             betas=["message-batches-2024-09-24"],
             extra_query={"beta": "true"},
         )
@@ -381,6 +385,7 @@ class TestAsyncWorkspaces:
                 "env": "prod",
                 "team": "platform",
             },
+            user_profile_id="uprof_01SDCCSbTxrXDpWc1phhtcfK",
             extra_query={"beta": "true"},
         )
         assert_matches_type(BetaWorkspace, workspace, path=["response"])
@@ -430,6 +435,7 @@ class TestAsyncWorkspaces:
         workspace = await async_client.beta.organization.workspaces.list(
             after_id="after_id",
             before_id="before_id",
+            ids=["string"],
             include_archived=True,
             include_default=True,
             limit=1,
