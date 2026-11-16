@@ -6,6 +6,7 @@
 use super::rate_limit_refresh::RateLimitReadStatus;
 use super::rate_limit_refresh::RateLimitRefreshOutcome;
 use super::resize_reflow::trailing_run_start;
+use super::session_lifecycle::FreshSessionStart;
 use super::session_lifecycle::ThreadAttachPresentation;
 use super::*;
 use crate::app_event::CapturedSideStream;
@@ -93,6 +94,8 @@ impl App {
                     | AppEvent::SideCreated { .. }
                     | AppEvent::SideChatRemovalFinished { .. }
                     | AppEvent::SideChatArchived { .. }
+                    | AppEvent::SavedChatPrepared { .. } | AppEvent::SavedChatReleased { .. }
+                    | AppEvent::StartQueuedSavedChat
                     | AppEvent::SavedSideChatsLoaded { .. }
                     | AppEvent::SideReplayFinished(_)
                     | AppEvent::ResetTranscriptForThreadSwitch
@@ -101,6 +104,11 @@ impl App {
                     | AppEvent::ManagedWorktreeCreated(_)
                     | AppEvent::AgentsOverviewWorktreeCreated(_)
                     | AppEvent::AgentsOverviewPinToggled { .. }
+                    | AppEvent::ArchiveFinished { .. }
+                    | AppEvent::OpenAgentsOverview
+                    | AppEvent::ShowMoreAgentsOverview
+                    | AppEvent::AgentsOverviewThreadsLoaded { .. }
+                    | AppEvent::AgentsOverviewUsageLoaded { .. }
                     | AppEvent::AppendMessageHistoryEntry { .. }
                     | AppEvent::BeginInitialHistoryReplayBuffer
                     | AppEvent::BeginThreadSwitchHistoryReplayBuffer
@@ -108,6 +116,26 @@ impl App {
                     | AppEvent::FatalExitRequest(_)
             )
         {
+            return Ok(AppRunControl::Continue);
+        }
+        let overview_action_thread = match &event {
+            AppEvent::ForkAgentsOverviewThread { thread_id }
+            | AppEvent::RenameAgentsOverviewThread { thread_id, .. }
+            | AppEvent::ToggleAgentsOverviewPin { thread_id, .. }
+            | AppEvent::RunAgentsOverviewAction { thread_id, .. }
+            | AppEvent::StopAgentsOverviewThread { thread_id } => Some(*thread_id),
+            _ => None,
+        };
+        let overview_action_owner = match &event {
+            AppEvent::NewAgentsOverviewSession { backend_id, .. }
+            | AppEvent::NewAgentsOverviewWorktree { backend_id, .. } => *backend_id,
+            _ => overview_action_thread.and_then(|id| self.backend_registry.owner(id)),
+        };
+        if overview_action_owner.is_some_and(|owner| owner != app_server.backend_id()) {
+            if matches!(&event, AppEvent::ToggleAgentsOverviewPin { .. }) {
+                self.repaint_agents_overview();
+            }
+            self.add_agents_overview_error("Open this task before using that action.".into());
             return Ok(AppRunControl::Continue);
         }
         if matches!(
@@ -241,7 +269,7 @@ impl App {
             | AppEvent::NewSession { name }
             | AppEvent::NewSessionInCurrentWorktree { name } => {
                 self.start_fresh_session(
-                    tui, app_server, /*session_start_source*/ None,
+                    tui, app_server, FreshSessionStart::NewConversation,
                     /*initial_user_message*/ None, name,
                 )
                 .await;
@@ -270,7 +298,7 @@ impl App {
                     self.start_fresh_session(
                         tui,
                         app_server,
-                        /*session_start_source*/ None,
+                        FreshSessionStart::PreserveCurrentView(None),
                         /*initial_user_message*/ None,
                         /*new_thread_name*/ None,
                     )
@@ -426,14 +454,16 @@ impl App {
             AppEvent::DynamicToolCallCompleted {
                 request_id,
                 response,
+                reply,
             } => {
                 self.dynamic_tool_tasks.remove(&request_id);
                 match serde_json::to_value(response) {
                     Ok(result) => {
-                        if let Err(error) = app_server
-                            .resolve_server_request(request_id.clone(), result)
-                            .await
-                        {
+                        let result = match reply {
+                            Some(reply) => reply.resolve(result).await,
+                            None => app_server.resolve_server_request(request_id.clone(), result).await,
+                        };
+                        if let Err(error) = result {
                             tracing::warn!(?request_id, %error, "failed to resolve dynamic tool call");
                         }
                     }
@@ -534,7 +564,7 @@ impl App {
                 self.start_fresh_session(
                     tui,
                     app_server,
-                    Some(ThreadStartSource::Clear),
+                    FreshSessionStart::PreserveCurrentView(Some(ThreadStartSource::Clear)),
                     /*initial_user_message*/ None,
                     name,
                 )
@@ -543,26 +573,8 @@ impl App {
             AppEvent::RawOutputModeChanged { enabled } => {
                 self.apply_raw_output_mode(tui, enabled, /*notify*/ false);
             }
-            AppEvent::ClearUiAndSubmitUserMessage { text } => {
-                if self.reject_pending_permission_root_switch() {
-                    self.chat_widget.restore_user_message_to_composer(text.into());
-                    return Ok(AppRunControl::Continue);
-                }
-                self.clear_terminal_ui(tui, /*redraw_header*/ false)?;
-                self.reset_app_ui_state_after_clear();
-
-                self.start_fresh_session(
-                    tui,
-                    app_server,
-                    Some(ThreadStartSource::Clear),
-                    crate::chatwidget::create_initial_user_message(
-                        Some(text),
-                        Vec::new(),
-                        Vec::new(),
-                    ),
-                    /*new_thread_name*/ None,
-                )
-                .await;
+            AppEvent::ImplementPlanInFreshSession { plan } => {
+                crate::boxed_future!(self.implement_plan_in_fresh_session(tui, app_server, plan)).await?;
             }
             AppEvent::OpenResumePicker => {
                 self.pending_open_resume_picker = true;
@@ -602,6 +614,14 @@ impl App {
                 }
                 tui.frame_requester().schedule_frame();
             }
+            AppEvent::ResumeUnarchivedThread(thread_id) => {
+                if self.current_displayed_thread_id() == Some(thread_id)
+                    && self.chat_widget.is_archived_view()
+                    && self.thread_event_channels.get(&thread_id).is_some_and(|channel| !channel.archived)
+                {
+                    archived_thread::resume_displayed_thread(self, tui, app_server, thread_id).await;
+                }
+            }
             AppEvent::ResumeSessionByIdOrName(id_or_name) => {
                 match crate::lookup_session_target_with_app_server(
                     crate::resume_picker::SessionPickerAction::Resume,
@@ -636,6 +656,37 @@ impl App {
             }
             AppEvent::ArchiveCurrentThread => {
                 return self.archive_current_thread(tui, app_server).await;
+            }
+            AppEvent::ArchiveFinished { backend_id, thread_id, result } => {
+                if self.agents_overview.pending_archives.remove(&thread_id).is_some() {
+                    match result {
+                        Ok(()) => {
+                            // The server already closed the archived task and canceled its requests.
+                            let source = thread_id.to_string();
+                            for (_, (_, task)) in self.dynamic_tool_tasks.extract_if(|_, (thread, _)| *thread == source) {
+                                task.abort();
+                            }
+                            self.discard_thread_local_state(thread_id).await;
+                            if backend_id == app_server.backend_id() {
+                                self.agents_overview.input_states.remove(&thread_id);
+                            }
+                            self.agents_overview.dispatched_requests.remove(&thread_id);
+                            self.track_agents_overview_notification(&ServerNotification::ThreadArchived(
+                                codex_app_server_protocol::ThreadArchivedNotification {
+                                    thread_id: source,
+                                },
+                            ));
+                        }
+                        Err(error) => {
+                            self.agents_overview.refresh_thread_ids.insert(thread_id);
+                            self.add_agents_overview_error(format!("Failed to archive thread {thread_id}: {error}"));
+                        }
+                    }
+                    self.repaint_agents_overview();
+                    if backend_id == app_server.backend_id() && !self.reconnect.offline {
+                        self.refresh_changed_agents_overview_threads(app_server);
+                    }
+                }
             }
             AppEvent::DeleteCurrentThread => {
                 return self.delete_current_thread(tui, app_server).await;
@@ -712,7 +763,7 @@ impl App {
                             } else {
                                 None
                             };
-                            self.retain_subscriptions_for_fork();
+                            self.retain_thread_subscriptions();
                             match self
                                 .replace_chat_widget_with_app_server_thread(
                                     tui,
@@ -1057,17 +1108,6 @@ impl App {
             AppEvent::ResetTranscriptForThreadSwitchPreservingScreen => {
                 self.reset_transcript_state_after_clear();
                 tui.clear_pending_history_lines();
-                let switched_tab = self.conversation_frame.chat_strip.is_some()
-                    && self.active_side_parent_thread_id().is_some()
-                    && self.conversation_frame.sidebar_input.is_some_and(|painted| {
-                        painted.selected_chat != self.current_displayed_thread_id()
-                    });
-                if self.conversation_frame.chooser_area().is_none()
-                    && self.chooser_focus().is_none()
-                    && !switched_tab
-                {
-                    tui.defer_thread_switch_clear();
-                }
                 self.pending_thread_switch_resets -= 1;
             }
             AppEvent::CommitRealtimeTranscriptHistory => {
@@ -1097,6 +1137,7 @@ impl App {
                 self.finish_initial_history_replay_buffer(tui);
             }
             AppEvent::ConsolidateAgentMessage {
+                phase,
                 interrupted_item,
                 source,
                 copy_source,
@@ -1107,6 +1148,7 @@ impl App {
             } => {
                 let mut cell = history_cell::AgentMarkdownCell::new_with_inline_visualizations(source, &cwd, inline_visualization_context).with_copy_source(copy_source);
                 cell.interrupted_item = interrupted_item;
+                cell.phase = phase;
                 self.handle_consolidate_agent_message(
                     tui,
                     cell,
@@ -1904,7 +1946,7 @@ impl App {
             AppEvent::FetchMcpInventory { detail, thread_id } => {
                 self.fetch_mcp_inventory(app_server, detail, thread_id);
             }
-            AppEvent::StartMcpLogin { name, thread_id } => {
+            AppEvent::StartMcpLogin { name, environment_id, thread_id } => {
                 if self.pending_mcp_login_start.is_some() {
                     self.chat_widget.add_info_message(
                         "MCP sign-in is starting. Wait for it to finish before trying again.".to_string(),
@@ -1916,10 +1958,11 @@ impl App {
                 self.pending_mcp_login_start = Some(PendingMcpLoginStart {
                     request_id: request_id.clone(),
                     name: name.clone(),
+                    environment_id: environment_id.clone(),
                     thread_id,
                     completions: Vec::new(),
                 });
-                self.start_mcp_login(app_server, request_id, name, thread_id);
+                self.start_mcp_login(app_server, request_id, name, environment_id, thread_id);
             }
             AppEvent::McpLoginStarted { request_id, result } => {
                 if let Some(pending) = self
@@ -1928,11 +1971,13 @@ impl App {
                 {
                     match result {
                         Ok(response) => {
-                            // Track the latest attempt per server: unrelated OAuth logins can
-                            // remain open while a user retries this server.
+                            // Replace this target's old attempt, not another environment's
+                            // login to a server with the same name.
                             if let Some(login_id) = response.login_id.as_ref() {
+                                let target = (pending.name.clone(), pending.environment_id);
+                                self.active_mcp_login_ids.retain(|_, current| current != &target);
                                 self.active_mcp_login_ids
-                                    .insert(pending.name.clone(), login_id.clone());
+                                    .insert(login_id.clone(), target);
                             }
                             let completed = pending.completions.iter().any(|completion| {
                                 completion.login_id == response.login_id
@@ -1960,13 +2005,10 @@ impl App {
                     // A rejected start leaves the old attempt current. A successful replacement
                     // has changed its ID, so the old cancellation is discarded here.
                     for completion in pending.completions {
-                        if completion.login_id.is_some() {
-                            if completion.login_id.as_ref()
-                                != self.active_mcp_login_ids.get(&completion.name)
-                            {
-                                continue;
-                            }
-                            self.active_mcp_login_ids.remove(&completion.name);
+                        if let Some(login_id) = &completion.login_id
+                            && self.active_mcp_login_ids.remove(login_id).is_none()
+                        {
+                            continue;
                         }
                         if let Some(thread_id) = completion.thread_id.as_deref()
                             .and_then(|id| ThreadId::from_string(id).ok())
@@ -2470,6 +2512,28 @@ impl App {
                     offer.handle.close();
                 }
             }
+            AppEvent::RealtimeCallCreated { thread_id, attempt_id, result } => {
+                if let Some(owner) = self.voice_widget_for_thread(thread_id)
+                    && owner.is_starting_realtime_attempt(thread_id, attempt_id)
+                {
+                    let result = match result {
+                        Ok(call) => {
+                            owner.accept_realtime_call(call.answer_sdp);
+                            app_server.thread_realtime_start(thread_id, call.call_id).await
+                        }
+                        Err(error) => Err(error),
+                    };
+                    if let Err(error) = result
+                        && !self.recover_transport_error(&error)
+                        && let Some(owner) = self.voice_widget_for_thread(thread_id)
+                    {
+                        owner.on_realtime_error(
+                            format!("Voice conversation failed: {error:#}"),
+                            crate::chatwidget::RealtimeFailureCause::AppServerRequest,
+                        );
+                    }
+                }
+            }
             AppEvent::RealtimeWebrtcConnected {
                 thread_id,
                 attempt_id,
@@ -2600,6 +2664,12 @@ impl App {
             }
             AppEvent::ModelsLoaded { request_id, result }
             | AppEvent::ApiKeyCompatModelsLoaded { request_id, result } => {
+                let result = match app_server.request_handle() {
+                    AppServerRequestHandle::Cloud(handle) if !handle.model_catalog_is_current() => {
+                        Err("Cloud model catalog account changed.".into())
+                    }
+                    _ => result,
+                };
                 self.chat_widget.on_models_loaded(request_id, result);
                 let catalog = self.chat_widget.model_catalog();
                 if !Arc::ptr_eq(&self.model_catalog, &catalog) {
@@ -2683,8 +2753,13 @@ impl App {
                 }
             }
             AppEvent::OpenPlanReasoningScopePrompt { model, effort } => {
-                self.chat_widget
-                    .open_plan_reasoning_scope_prompt(model, effort);
+                if app_server.thread_params_mode() == crate::ThreadParamsMode::Cloud {
+                    self.select_session_model(app_server, model, effort, /*service_tier*/ None)
+                        .await;
+                } else {
+                    self.chat_widget
+                        .open_plan_reasoning_scope_prompt(model, effort);
+                }
             }
             AppEvent::OpenAllModelsPopup => {
                 self.chat_widget.open_all_models_popup();
@@ -2703,22 +2778,29 @@ impl App {
             AppEvent::ApplyPermissionShortcut { thread_id, selection } => {
                 self.apply_permission_shortcut(app_server, thread_id, selection).await;
             }
+            AppEvent::OpenFeedback => self.chat_widget.open_feedback(app_server.thread_params_mode()),
             AppEvent::OpenFeedbackNote {
                 category,
                 include_logs,
             } => {
-                self.chat_widget.open_feedback_note(category, include_logs, self.feedback_audience);
+                self.chat_widget.open_feedback_note(
+                    category,
+                    include_logs,
+                    self.feedback_audience,
+                    !app_server.uses_remote_workspace(),
+                );
             }
             AppEvent::OpenFeedbackConsent { category } => {
-                self.chat_widget.open_feedback_consent(category);
+                self.chat_widget.open_feedback_consent(category, !app_server.uses_remote_workspace());
             }
             AppEvent::SubmitFeedback {
                 category,
                 reason,
                 turn_id,
                 include_logs,
+                destination,
             } => {
-                self.submit_feedback(app_server, category, reason, turn_id, include_logs);
+                self.submit_feedback(app_server, category, reason, turn_id, include_logs, destination);
             }
             AppEvent::FeedbackSubmitted {
                 origin_thread_id,
@@ -2890,7 +2972,18 @@ impl App {
                     .await;
             }
             AppEvent::PersistDaybreakSelection { thread_id, enabled } => {
-                self.persist_daybreak_selection(app_server, thread_id, enabled).await;
+                Box::pin(self.persist_daybreak_selection(app_server, thread_id, enabled)).await;
+            }
+            AppEvent::DisableUnavailableDaybreak { thread_id, model } => {
+                if self.chat_widget.current_model() == model
+                    && self.chat_widget.should_disable_daybreak(&model)
+                    && Box::pin(self.persist_daybreak_selection(app_server, thread_id, /*enabled*/ false)).await
+                {
+                    self.chat_widget.add_info_message(
+                        format!("Daybreak has been turned off for new turns because it is not available for {model} with your current account and server. Prior cybersecurity context in this thread may cause a refusal. You can switch back to a model where you have Daybreak access and use /daybreak to re-enable it."),
+                        /*hint*/ None,
+                    );
+                }
             }
             AppEvent::SelectSessionModel { model, effort, service_tier } => {
                 self.app_event_tx.send(AppEvent::FollowTranscript);
@@ -2968,6 +3061,39 @@ impl App {
             }
             AppEvent::PersistRealtimeVoiceSelection { voice } => {
                 self.persist_realtime_voice(app_server, voice).await;
+            }
+            AppEvent::ToggleCloudServiceTier { thread_id, tier } => {
+                if self.active_thread_id == Some(thread_id)
+                    && self.chat_widget.thread_id() == Some(thread_id)
+                    && app_server.thread_params_mode() == crate::ThreadParamsMode::Cloud
+                {
+                    if !self.chat_widget.current_model_service_tier_commands().iter()
+                        .any(|command| command.id == tier)
+                    {
+                        self.chat_widget.add_error_message(
+                            "The selected Cloud model does not support that speed.".into(),
+                        );
+                        return Ok(AppRunControl::Continue);
+                    }
+                    let current = self.chat_widget.config_ref().service_tier.as_deref();
+                    match app_server.toggle_cloud_service_tier(thread_id, current, tier) {
+                        Some(tier) => {
+                            let label = match tier.as_str() {
+                                codex_protocol::config_types::SERVICE_TIER_DEFAULT_REQUEST_VALUE => "standard",
+                                "priority" => "fast",
+                                tier => tier,
+                            };
+                            self.chat_widget.add_info_message(
+                                format!("Selected {label} speed for the next new turn in this conversation"),
+                                /*hint*/ None,
+                            );
+                        }
+                        None => self.chat_widget.add_error_message(
+                            "The Cloud account changed. Reopen the conversation before choosing a speed."
+                                .into(),
+                        ),
+                    }
+                }
             }
             AppEvent::PersistServiceTierSelection { service_tier } => {
                 self.refresh_status_line();
@@ -3193,9 +3319,11 @@ impl App {
                 }
             }
             AppEvent::OpenAgentsOverview => self.open_agents_overview(app_server),
-            AppEvent::SearchAgentsOverview(id, limit) => self.search_agents_overview(app_server.request_handle(), id, limit),
-            AppEvent::AgentsOverviewSearchPage { id, rows, cursor, ok } => {
-                self.apply_agents_overview_search_page(id, rows, cursor, ok);
+            AppEvent::SearchAgentsOverview(id, limit) => {
+                self.search_agents_overview(app_server, id, limit);
+            }
+            AppEvent::AgentsOverviewSearchPage { id, backend_id, rows, cursor, ok } => {
+                self.apply_agents_overview_search_page(id, backend_id, rows, cursor, ok);
             }
             AppEvent::ShowMoreAgentsOverview => self.show_more_agents_overview(app_server),
             AppEvent::RefreshViewedThread { backend_id, thread_id, revision } => {
@@ -3205,12 +3333,14 @@ impl App {
                     self.refresh_changed_agents_overview_threads(app_server);
                 }
             }
-            AppEvent::NewAgentsOverviewSession { cwd } => {
+            AppEvent::NewAgentsOverviewSession { cwd, .. } => {
                 return Box::pin(self.new_agents_overview_session(tui, app_server, cwd)).await;
             }
             AppEvent::AgentsOverviewThreadsLoaded { request_id, result } => {
                 self.apply_agents_overview_thread_refresh(app_server, request_id, result);
             }
+            AppEvent::SelectAgentsOverviewThread { thread_id }
+                if self.agents_overview.pending_archives.contains_key(&thread_id) => {}
             AppEvent::SelectAgentsOverviewThread { thread_id } => {
                 match self
                     .select_agents_overview_thread(tui, app_server, thread_id)
@@ -3253,7 +3383,7 @@ impl App {
                 return control;
             }
             AppEvent::ForkAgentsOverviewThreadReady { .. } => unreachable!("normalized above"),
-            AppEvent::NewAgentsOverviewWorktree { cwd } => {
+            AppEvent::NewAgentsOverviewWorktree { cwd, .. } => {
                 Box::pin(self.new_agents_overview_worktree(tui, app_server, cwd)).await;
             }
             AppEvent::AgentsOverviewWorktreeCreated(result) => {
@@ -3274,7 +3404,7 @@ impl App {
             AppEvent::RenameAgentsOverviewThread { thread_id, name } => {
                 match app_server.thread_set_name(thread_id, name.clone()).await {
                     Ok(()) => {
-                        self.chat_widget.expect_manual_thread_name(thread_id, name);
+                        self.chat_widget.display_thread_name(thread_id, name);
                         self.cancel_thread_title_generation(thread_id);
                     }
                     Err(error) => {
@@ -3291,13 +3421,14 @@ impl App {
                 self.toggle_agents_overview_pin(app_server, thread_id, pinned);
             }
             AppEvent::AgentsOverviewPinToggled {
+                backend_id,
                 request_id,
                 thread_id,
                 pinned,
                 result,
             } => {
                 self.complete_agents_overview_pin(
-                    app_server, request_id, thread_id, pinned, result,
+                    app_server, backend_id, request_id, thread_id, pinned, result,
                 );
             }
             AppEvent::SuggestThreadName {
@@ -3312,6 +3443,8 @@ impl App {
                 thread_id,
                 destination,
                 prompt,
+                expected_name,
+                fallback_title,
                 effort,
                 result,
             } => {
@@ -3320,6 +3453,8 @@ impl App {
                     thread_id,
                     destination,
                     prompt,
+                    expected_name,
+                    fallback_title,
                     effort,
                     result,
                     cancellation,
@@ -3332,8 +3467,9 @@ impl App {
                 destination,
                 result,
             } => {
-                self.temporary_structured_requests
-                    .remove(&temporary_thread_id);
+                if let Some(temporary_thread_id) = temporary_thread_id {
+                    self.temporary_structured_requests.remove(&temporary_thread_id);
+                }
 
                 if cancellation.is_cancelled() {
                     return Ok(AppRunControl::Continue);
@@ -3427,6 +3563,20 @@ impl App {
             AppEvent::SideChatArchived { backend_id, target } => {
                 if backend_id == app_server.backend_id() {
                     sidebar_close::forget_archived(self, tui, app_server, target).await?;
+                }
+            }
+            AppEvent::SavedChatPrepared { target, request, result } => {
+                Box::pin(self.finish_saved_chat(tui, app_server, target, request, *result)).await?;
+            }
+            AppEvent::SavedChatReleased { target, request } => {
+                self.finish_saved_release(target, request);
+            }
+            AppEvent::StartQueuedSavedChat => {
+                if let Some(target) = self.waiting_saved_chat()
+                    && target.backend_id == app_server.backend_id()
+                    && self.wants_saved_chat(target)
+                {
+                    Box::pin(self.open_saved_chat(tui, app_server, target)).await?;
                 }
             }
             AppEvent::SavedSideChatsLoaded { backend_id, parent, request, result } => {
@@ -4122,7 +4272,12 @@ impl App {
         app_server: &mut AppServerSession,
         mode: ExitMode,
     ) -> AppRunControl {
-        for (request_id, (_, task)) in self.dynamic_tool_tasks.drain() {
+        for (request_id, (source, task)) in self.dynamic_tool_tasks.drain() {
+            if ThreadId::from_string(&source)
+                .is_ok_and(|id| self.agents_overview.pending_archives.contains_key(&id))
+            {
+                continue;
+            }
             task.abort();
             let response = crate::dynamic_tools::failure_response(
                 "TUI disconnected while handling a dynamic tool call",
@@ -4190,21 +4345,10 @@ impl App {
         }
     }
 
-    async fn return_to_agents_after_removal(
-        &mut self,
-        tui: &mut tui::Tui,
-        app_server: &mut AppServerSession,
-        thread_id: ThreadId,
-    ) -> Result<()> {
-        self.discard_thread_local_state(thread_id).await;
-        self.agents_overview.input_states.remove(&thread_id);
-        self.agents_overview.dispatched_requests.remove(&thread_id);
-        self.reset_for_thread_switch(tui)?;
+    async fn reset_after_leaving_thread(&mut self, tui: &mut tui::Tui) {
         self.pending_thread_switch_resets += 1;
         self.app_event_tx
             .send(AppEvent::ResetTranscriptForThreadSwitch);
-        self.detach_current_thread_for_navigation(app_server, /*destination*/ None)
-            .await;
         self.reset_thread_event_state().await;
         let init = self.chatwidget_init_for_forked_or_resumed_thread(
             tui,
@@ -4212,8 +4356,6 @@ impl App {
             /*initial_user_message*/ None,
         );
         self.replace_chat_widget(ChatWidget::new_with_app_event(init));
-        self.open_agents_overview(app_server);
-        Ok(())
     }
 
     pub(super) async fn archive_current_thread(
@@ -4234,36 +4376,70 @@ impl App {
             return Ok(AppRunControl::Continue);
         }
 
-        if !self
+        let show_progress = !self.side_threads.is_empty() && {
+            let subtree = self.known_thread_subtree(thread_id);
+            self.side_threads
+                .values()
+                .any(|side| subtree.contains(&side.parent_thread_id))
+        };
+        if show_progress {
+            self.chat_widget
+                .set_footer_hint_override(Some(vec![("Archiving…".into(), String::new())]));
+            // Cleanup waits outside the event loop. Paint before sending its first request.
+            let screen_size = tui.terminal.last_known_screen_size;
+            if let Err(error) = self.render_chat_widget_frame(tui, screen_size) {
+                tracing::warn!(%error, "failed to render archive progress");
+            }
+        }
+        let cleaned_up = self
             .shutdown_side_threads(app_server, Some(thread_id))
-            .await
-        {
+            .await;
+        if show_progress {
+            self.chat_widget.set_footer_hint_override(/*items*/ None);
+        }
+        if !cleaned_up {
             return Ok(AppRunControl::Continue);
         }
 
-        let result = async {
-            self.stop_voice_for_removed_thread(app_server, thread_id)
-                .await?;
-            app_server.thread_archive(thread_id).await
+        if let Err(error) = self
+            .stop_voice_for_removed_thread(app_server, thread_id)
+            .await
+        {
+            self.chat_widget
+                .add_error_message(format!("Failed to archive current thread: {error}"));
+            return Ok(AppRunControl::Continue);
         }
-        .await;
-        Ok(match result {
-            Ok(()) => {
-                self.track_agents_overview_notification(&ServerNotification::ThreadArchived(
-                    codex_app_server_protocol::ThreadArchivedNotification {
-                        thread_id: thread_id.to_string(),
-                    },
-                ));
-                self.return_to_agents_after_removal(tui, app_server, thread_id)
-                    .await?;
-                AppRunControl::Continue
-            }
-            Err(err) => {
-                self.chat_widget
-                    .add_error_message(format!("Failed to archive current thread: {err}"));
-                AppRunControl::Continue
-            }
-        })
+
+        self.capture_session_inputs(app_server.backend_id()).await;
+        // Keep the target subscribed and retain its approvals until the archive resolves.
+        self.retain_thread_subscriptions();
+        self.reset_for_thread_switch(tui)?;
+        self.reset_after_leaving_thread(tui).await;
+        let mut server = app_server.request_view();
+        let backend_id = server.backend_id();
+        let tx = self.saved_openings.tx.clone();
+        let (outcome_tx, outcome_rx) = tokio::sync::oneshot::channel();
+        let mut archive = Box::pin(async move {
+            let result = server
+                .thread_archive(thread_id)
+                .await
+                .map_err(|error| error.to_string());
+            let _ = outcome_tx.send(result.clone());
+            tx.send(AppEvent::ArchiveFinished {
+                backend_id,
+                thread_id,
+                result,
+            });
+        });
+        // Start queueing the archive before the overview starts its refresh.
+        if futures::poll!(archive.as_mut()).is_pending() {
+            tokio::spawn(archive);
+        }
+        self.agents_overview
+            .pending_archives
+            .insert(thread_id, outcome_rx);
+        self.open_agents_overview(app_server);
+        Ok(AppRunControl::Continue)
     }
 
     pub(super) async fn delete_current_thread(
@@ -4306,8 +4482,14 @@ impl App {
                         thread_id: thread_id.to_string(),
                     },
                 ));
-                self.return_to_agents_after_removal(tui, app_server, thread_id)
-                    .await?;
+                self.discard_thread_local_state(thread_id).await;
+                self.agents_overview.input_states.remove(&thread_id);
+                self.agents_overview.dispatched_requests.remove(&thread_id);
+                self.reset_for_thread_switch(tui)?;
+                self.detach_current_thread_for_navigation(app_server, /*destination*/ None)
+                    .await;
+                self.reset_after_leaving_thread(tui).await;
+                self.open_agents_overview(app_server);
                 AppRunControl::Continue
             }
             Err(err) => {

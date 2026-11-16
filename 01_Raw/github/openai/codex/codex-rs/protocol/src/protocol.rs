@@ -11,6 +11,7 @@ use std::path::Path;
 use std::path::PathBuf;
 use std::str::FromStr;
 use std::time::Duration;
+use std::time::SystemTime;
 
 use strum_macros::EnumIter;
 
@@ -60,6 +61,7 @@ use crate::plan_tool::UpdatePlanArgs;
 use crate::request_permissions::RequestPermissionsEvent;
 use crate::request_permissions::RequestPermissionsResponse;
 use crate::request_user_input::RequestUserInputResponse;
+use crate::response_item_id::OptionalWireItemId;
 use crate::turn_input::CyberAccessProgram;
 use crate::turn_input::SuspendTurnOutcome;
 use crate::turn_input::TurnInputMode;
@@ -82,6 +84,7 @@ use serde_json::Value;
 use serde_with::serde_as;
 use strum_macros::Display;
 use tokio::sync::oneshot;
+use tokio::sync::watch;
 use tracing::error;
 use ts_rs::TS;
 
@@ -131,6 +134,8 @@ pub const ENVIRONMENTS_INSTRUCTIONS_OPEN_TAG: &str = "<environments_instructions
 pub const ENVIRONMENTS_INSTRUCTIONS_CLOSE_TAG: &str = "</environments_instructions>";
 pub const APPS_INSTRUCTIONS_OPEN_TAG: &str = "<apps_instructions>";
 pub const APPS_INSTRUCTIONS_CLOSE_TAG: &str = "</apps_instructions>";
+pub const CATALOG_APPS_INSTRUCTIONS_OPEN_TAG: &str = "<catalog_apps_instructions>";
+pub const CATALOG_APPS_INSTRUCTIONS_CLOSE_TAG: &str = "</catalog_apps_instructions>";
 pub const SKILLS_INSTRUCTIONS_OPEN_TAG: &str = "<skills_instructions>";
 pub const SKILLS_INSTRUCTIONS_CLOSE_TAG: &str = "</skills_instructions>";
 pub const PLUGINS_INSTRUCTIONS_OPEN_TAG: &str = "<plugins_instructions>";
@@ -219,7 +224,18 @@ pub struct ConversationStartParams {
     pub transport: Option<ConversationStartTransport>,
     /// Overrides the configured realtime protocol version for this session only.
     pub version: Option<RealtimeConversationVersion>,
-    pub voice: Option<RealtimeVoice>,
+    /// None inherits the thread setting; Some(None) selects the provider default.
+    pub voice: Option<Option<RealtimeVoice>>,
+}
+
+/// Controls when an in-process realtime attachment may establish a connection.
+#[derive(Debug, Clone, Default)]
+pub struct RealtimeAttachmentOptions {
+    /// Set the watch to `true` to cancel a pending connection.
+    /// Dropping the sender while its value is `false` lets the attempt continue.
+    pub cancel: Option<watch::Receiver<bool>>,
+    /// Optional caller deadline for publishing the connection. Cleanup can finish later.
+    pub start_before: Option<SystemTime>,
 }
 
 /// A caller-owned realtime sideband. Dropping either direction seals input and ends
@@ -398,6 +414,7 @@ impl RealtimeVoicesList {
                 RealtimeVoice::Arbor,
                 RealtimeVoice::Sol,
                 RealtimeVoice::Cove,
+                RealtimeVoice::Marin,
                 RealtimeVoice::Aube,
                 RealtimeVoice::Bubbie,
                 RealtimeVoice::Haetsal,
@@ -543,6 +560,8 @@ pub struct ConversationSpeechParams {
 /// task kind. Child sessions and consumers of frozen initial settings are unchanged.
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct TurnSettingsUpdate {
+    /// Trusted host country. `None` preserves the current setting. Published for the named live turn's subsequent steps.
+    pub request_country: Option<crate::RequestCountry>,
     /// Changes the reviewer for subsequent approval requests, not pending reviews.
     pub approvals_reviewer: Option<ApprovalsReviewer>,
     /// Replaces the selection for subsequent steps, without changing future turns.
@@ -584,6 +603,8 @@ pub enum TurnSettingsUpdateOutcome {
     }),
 )]
 pub struct ThreadSettingsOverrides {
+    /// Trusted host country. `None` preserves the current setting. Inherited by future turns on acceptance.
+    pub request_country: Option<crate::RequestCountry>,
     /// Updated fallback `cwd` and environments supplied together as a complete pair.
     pub environments: Option<TurnEnvironmentRequests>,
 
@@ -724,8 +745,10 @@ pub enum Op {
     RealtimeConversationStart(ConversationStartParams),
 
     /// Start a realtime conversation and report completion of the connection attempt.
+    /// If cancellation wins, completion acknowledges connection cleanup.
     RealtimeConversationAttach {
         params: ConversationStartParams,
+        options: RealtimeAttachmentOptions,
         reply: oneshot::Sender<CodexResult<()>>,
     },
 
@@ -980,7 +1003,8 @@ impl FromStr for ThreadHistoryMode {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, JsonSchema, TS)]
 pub struct InterAgentCommunication {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    #[ts(optional)]
+    #[serde(with = "OptionalWireItemId")]
+    #[ts(optional, as = "Option<ResponseItemId>")]
     pub id: Option<ResponseItemId>,
     pub author: AgentPath,
     pub recipient: AgentPath,
@@ -1333,11 +1357,7 @@ impl WritableRoot {
             }
         }
 
-        if self.path_contains_protected_metadata_name(path) {
-            return false;
-        }
-
-        true
+        !self.path_contains_protected_metadata_name(path)
     }
 
     fn path_contains_protected_metadata_name(&self, path: &Path) -> bool {
@@ -2092,6 +2112,8 @@ pub enum CodexErrorInfo {
     ModelNotFound,
     /// Capacity is unavailable on a route restricted by server policy.
     PolicyCapacityUnavailable,
+    /// The workspace's inference hook explicitly denied this request.
+    InferenceHookDenied,
     CyberPolicy,
     BioPolicy,
     MisalignmentPolicyViolation,
@@ -2139,6 +2161,7 @@ impl CodexErrorInfo {
             | Self::ServerOverloaded
             | Self::ModelNotFound
             | Self::PolicyCapacityUnavailable
+            | Self::InferenceHookDenied
             | Self::CyberPolicy
             | Self::BioPolicy
             | Self::MisalignmentPolicyViolation
@@ -2397,12 +2420,30 @@ pub struct ModelVerificationEvent {
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, JsonSchema, TS)]
+#[serde(from = "StoredTargetedModeration")]
 pub struct TargetedAnswerModeration {
     pub item_id: String,
     pub moderated: bool,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[ts(optional)]
     pub display: Option<crate::items::AgentMessageDisplay>,
+}
+
+#[derive(Deserialize)]
+struct StoredTargetedModeration {
+    item_id: String,
+    #[serde(flatten)]
+    decision: crate::items::AgentMessageModeration,
+}
+
+impl From<StoredTargetedModeration> for TargetedAnswerModeration {
+    fn from(value: StoredTargetedModeration) -> Self {
+        Self {
+            item_id: value.item_id,
+            moderated: value.decision.moderated,
+            display: value.decision.display,
+        }
+    }
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, JsonSchema, TS)]
@@ -2995,6 +3036,10 @@ pub struct AgentReasoningSectionBreakEvent {
 pub struct McpInvocation {
     /// Name of the MCP server as defined in the config.
     pub server: String,
+    /// Registration scope, not necessarily the server's execution environment.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[ts(optional)]
+    pub environment_id: Option<String>,
     /// Name of the tool as given by the MCP server.
     pub tool: String,
     /// Arguments to the tool call.
@@ -3431,14 +3476,14 @@ pub enum MultiAgentVersion {
     V2,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, JsonSchema, TS)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, JsonSchema)]
 pub struct SessionContextWindow {
-    /// UUIDv7 identity of this context window.
-    pub window_id: String,
+    /// Persisted model-facing window identity.
+    pub window_id: crate::ContextWindowId,
 }
 
 impl SessionContextWindow {
-    pub fn new(window_id: String) -> Self {
+    pub fn new(window_id: crate::ContextWindowId) -> Self {
         Self { window_id }
     }
 }
@@ -3464,7 +3509,7 @@ pub struct HistoryPosition {
 /// NOTE: There used to be an `instructions` field here, which stored user_instructions, but we
 /// now save that on TurnContext. base_instructions stores the base instructions for the session,
 /// and should be used when there is no config override.
-#[derive(Serialize, Deserialize, Clone, Debug, JsonSchema, TS)]
+#[derive(Serialize, Deserialize, Clone, Debug, JsonSchema)]
 pub struct SessionMeta {
     /// Scope discovery to the creator. Absent on threads created before account filtering.
     #[serde(default, skip_serializing_if = "std::ops::Not::not")]
@@ -3496,7 +3541,6 @@ pub struct SessionMeta {
     /// An absent value means unknown; an empty list means no roots.
     /// Keep native paths parseable across hosts; validate them when restoring settings.
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    #[ts(optional)]
     pub runtime_workspace_roots: Option<Vec<PathBuf>>,
     pub originator: String,
     pub cli_version: String,
@@ -3585,7 +3629,7 @@ impl Default for SessionMeta {
     }
 }
 
-#[derive(Serialize, Debug, Clone, JsonSchema, TS)]
+#[derive(Serialize, Debug, Clone, JsonSchema)]
 pub struct SessionMetaLine {
     #[serde(flatten)]
     pub meta: SessionMeta,
@@ -4161,6 +4205,10 @@ pub struct TurnDiffEvent {
 pub struct McpStartupUpdateEvent {
     /// Server name being started.
     pub server: String,
+    /// Registration scope, not necessarily the server's execution environment.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[ts(optional)]
+    pub environment_id: Option<String>,
     /// Current startup status.
     pub status: McpStartupStatus,
 }
@@ -5806,6 +5854,7 @@ mod tests {
             item: TurnItem::McpToolCall(McpToolCallItem {
                 id: "mcp-1".into(),
                 server: "server".into(),
+                environment_id: None,
                 tool: "tool".into(),
                 arguments: json!({"arg": "value"}),
                 connector_id: Some("connector".into()),
@@ -5936,6 +5985,7 @@ mod tests {
             item: TurnItem::McpToolCall(McpToolCallItem {
                 id: "mcp-1".into(),
                 server: "server".into(),
+                environment_id: None,
                 tool: "tool".into(),
                 arguments: json!({"arg": "value"}),
                 connector_id: Some("connector".into()),
@@ -6815,6 +6865,7 @@ mod tests {
             id: "init".to_string(),
             msg: EventMsg::McpStartupUpdate(McpStartupUpdateEvent {
                 server: "srv".to_string(),
+                environment_id: None,
                 status: McpStartupStatus::Failed {
                     error: "boom".to_string(),
                     reason: Some(McpStartupFailureReason::ReauthenticationRequired),

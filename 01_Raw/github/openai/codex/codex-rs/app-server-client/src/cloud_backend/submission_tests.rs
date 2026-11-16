@@ -14,6 +14,9 @@ fn submission(message_id: &str) -> protocol::TurnStartParams {
     protocol::TurnStartParams {
         thread_id: "t".into(),
         client_user_message_id: Some(message_id.into()),
+        model: Some("chosen-model".into()),
+        effort: Some(codex_protocol::openai_models::ReasoningEffort::High),
+        turn_trigger: Some("user".into()),
         input: vec![protocol::UserInput::Text {
             text: "hello".into(),
             text_elements: Vec::new(),
@@ -59,7 +62,7 @@ async fn native_submission_uses_one_admission_and_keeps_preflight_guards() -> Re
     };
     let worker = tokio::spawn(async move {
         let mut requests = crate::cloud_backend::requests::Requests {
-            client: native,
+            client: std::sync::Arc::new(native),
             account,
             loaded: None,
             warned_partial_history: None,
@@ -114,7 +117,7 @@ async fn native_submission_uses_one_admission_and_keeps_preflight_guards() -> Re
 
     for params in [
         protocol::TurnStartParams {
-            model: Some("other".into()),
+            service_tier: Some(Some("other".into())),
             ..submission("invalid")
         },
         protocol::TurnStartParams {
@@ -183,18 +186,20 @@ async fn native_submission_uses_one_admission_and_keeps_preflight_guards() -> Re
             params: submission("closed"),
         })
         .await?
-        .expect_err("ordinary turn/start keeps its existing disconnected error");
-    assert_eq!(ordinary.code, -32000);
+        .expect_err("a disconnected turn/start must fail before dispatch");
+    assert_eq!(ordinary.code, -32602);
 
     client.shutdown().await?;
     worker.await?;
     let calls = server.received_requests().await.unwrap();
-    assert!(calls.iter().all(|request| {
-        request
-            .body
-            .windows(url.len())
-            .any(|bytes| bytes == url.as_bytes())
-    }));
+    for expected in [url.as_bytes(), b"\x4a\x04high", b"\x62\x0cchosen-model"] {
+        assert!(calls.iter().all(|request| {
+            request
+                .body
+                .windows(expected.len())
+                .any(|bytes| bytes == expected)
+        }));
+    }
     assert_eq!(
         calls
             .iter()

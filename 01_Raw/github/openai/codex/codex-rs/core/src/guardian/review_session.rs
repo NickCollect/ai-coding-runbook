@@ -5,7 +5,6 @@
 #[path = "review_session_setup.rs"]
 mod setup;
 pub use setup::PreparedGuardianContext;
-pub(super) use setup::prepare_review;
 pub use setup::prepare_review_prewarm;
 pub(crate) use setup::run_guardian_review_session;
 
@@ -279,7 +278,19 @@ async fn run_review_on_session(
     match run_before_review_deadline(
         deadline,
         params.external_cancel.as_ref(),
-        Box::pin(ensure_guardian_node_repl_policy(review_session, params)),
+        Box::pin(async {
+            review_session
+                .session
+                .update_settings(crate::session::session::SessionSettingsUpdate {
+                    step_settings: crate::session::step_settings::StepSettingsUpdate {
+                        request_country: Some(params.parent_context.request_country.clone()),
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                })
+                .await?;
+            ensure_guardian_node_repl_policy(review_session, params).await
+        }),
     )
     .await
     {

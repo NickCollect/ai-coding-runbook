@@ -7,6 +7,7 @@ use codex_core::compact::AutoCompactionDisabled;
 use codex_features::Feature;
 use codex_model_provider_info::AMAZON_BEDROCK_PROVIDER_ID;
 use codex_model_provider_info::AMAZON_BEDROCK_RUNTIME_PROVIDER_ID;
+use codex_model_provider_info::GCP_PROVIDER_ID;
 use codex_model_provider_info::OPENAI_PROVIDER_ID;
 use codex_otel::MetricsClient;
 use codex_otel::MetricsConfig;
@@ -151,19 +152,25 @@ async fn prediction_fork_keeps_inherited_tools() -> Result<()> {
     Ok(())
 }
 
-#[test_case(true, None, true, OPENAI_PROVIDER_ID; "responses_lite")]
-#[test_case(true, Some(true), true, OPENAI_PROVIDER_ID; "announcements_suppressed")]
-#[test_case(false, None, false, OPENAI_PROVIDER_ID; "responses_api")]
-#[test_case(false, None, false, AMAZON_BEDROCK_PROVIDER_ID; "mantle_provider_id")]
-#[test_case(false, None, true, AMAZON_BEDROCK_PROVIDER_ID; "mantle_provider_id_incremental")]
-#[test_case(false, None, false, AMAZON_BEDROCK_RUNTIME_PROVIDER_ID; "runtime_provider_id")]
-#[test_case(false, None, true, AMAZON_BEDROCK_RUNTIME_PROVIDER_ID; "runtime_provider_id_incremental")]
+#[test_case(true, None, true, OPENAI_PROVIDER_ID, &[]; "responses_lite")]
+#[test_case(true, Some(true), true, OPENAI_PROVIDER_ID, &[]; "announcements_suppressed")]
+#[test_case(false, None, false, OPENAI_PROVIDER_ID, &[]; "responses_api")]
+#[test_case(false, None, true, AMAZON_BEDROCK_PROVIDER_ID, &[]; "mantle_default")]
+#[test_case(false, None, false, AMAZON_BEDROCK_PROVIDER_ID,
+    &[(Feature::IncrementalToolsLegacy, false)]; "mantle_opt_out")]
+#[test_case(false, None, true, AMAZON_BEDROCK_RUNTIME_PROVIDER_ID, &[]; "runtime_default")]
+#[test_case(false, None, false, AMAZON_BEDROCK_RUNTIME_PROVIDER_ID,
+    &[(Feature::IncrementalToolsLegacy, false)]; "runtime_opt_out")]
+#[test_case(false, None, true, GCP_PROVIDER_ID, &[]; "gcp_default")]
+#[test_case(false, None, false, GCP_PROVIDER_ID,
+    &[(Feature::IncrementalToolsLegacyGcp, false), (Feature::IncrementalToolsLegacy, true)]; "gcp_opt_out")]
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
 async fn incremental_tools_append_changed_catalog_without_rewriting_history(
     use_responses_lite: bool,
     suppress_model_change_announcements: Option<bool>,
     incremental_tools: bool,
     provider_id: &'static str,
+    feature_overrides: &'static [(Feature, bool)],
 ) -> Result<()> {
     skip_if_no_network!(Ok(()));
     let server = responses::start_mock_server().await;
@@ -211,15 +218,11 @@ async fn incremental_tools_append_changed_catalog_without_rewriting_history(
         })
         .with_config(move |config| {
             config.model_provider_id = provider_id.to_string();
-            if !use_responses_lite && incremental_tools {
+            for &(feature, enabled) in feature_overrides {
                 config
                     .features
-                    .disable(Feature::IncrementalTools)
-                    .expect("disable the Lite flag");
-                config
-                    .features
-                    .enable(Feature::IncrementalToolsLegacy)
-                    .expect("enable incremental tools on regular Responses");
+                    .set_enabled(feature, enabled)
+                    .expect("configure independent provider flags");
             }
             if let Some(suppress) = suppress_model_change_announcements {
                 config
@@ -570,6 +573,7 @@ async fn tool_removal_appends_a_standalone_notice_without_rewriting_history(
     test.codex
         .call_mcp_tool(
             "echo_service",
+            /*environment_id*/ None,
             "echo",
             Some(json!({"message": "ready after removal"})),
             /*meta*/ None,
@@ -592,6 +596,7 @@ async fn tool_removal_appends_a_standalone_notice_without_rewriting_history(
         .codex
         .call_mcp_tool(
             "echo_service",
+            /*environment_id*/ None,
             "echo",
             Some(json!({"message": "unavailable"})),
             /*meta*/ None,
@@ -620,7 +625,13 @@ async fn tool_removal_appends_a_standalone_notice_without_rewriting_history(
         ("cwd", json!({})),
     ] {
         test.codex
-            .call_mcp_tool("echo_service", tool, Some(arguments), /*meta*/ None)
+            .call_mcp_tool(
+                "echo_service",
+                /*environment_id*/ None,
+                tool,
+                Some(arguments),
+                /*meta*/ None,
+            )
             .await?;
     }
     test.submit_text_turn("Continue with the restored echo service.")
@@ -657,6 +668,7 @@ async fn tool_removal_appends_a_standalone_notice_without_rewriting_history(
             test.codex
                 .call_mcp_tool(
                     "functions",
+                    /*environment_id*/ None,
                     "echo",
                     Some(json!({"message": "ready after instructions refresh"})),
                     /*meta*/ None,

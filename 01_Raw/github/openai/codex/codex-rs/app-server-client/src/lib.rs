@@ -25,6 +25,7 @@ pub mod cloud_backend;
 pub use codex_cloud_client::ProjectEnvironment;
 mod path;
 mod remote;
+mod remote_addr;
 mod remote_websocket;
 pub use cloud::CloudClient;
 pub use cloud::CloudCommand;
@@ -83,6 +84,8 @@ pub use crate::path::AppServerPath;
 pub use crate::remote::RemoteAppServerClient;
 pub use crate::remote::RemoteAppServerConnectArgs;
 pub use crate::remote::RemoteAppServerEndpoint;
+pub use crate::remote_addr::resolve_remote_addr;
+pub use crate::remote_addr::resolve_remote_endpoint;
 
 /// Transitional access to core-only embedded app-server types.
 ///
@@ -119,6 +122,8 @@ pub enum AppServerEvent {
     ServerRequest(Box<ServerRequest>),
     /// A native Cloud reply stream ended. The underlying thread can still be running.
     ThreadStreamDisconnected(Box<codex_app_server_protocol::ErrorNotification>),
+    /// The Cloud worker is listening again on the same conversation.
+    ThreadStreamReconnected(String),
     Disconnected {
         message: String,
     },

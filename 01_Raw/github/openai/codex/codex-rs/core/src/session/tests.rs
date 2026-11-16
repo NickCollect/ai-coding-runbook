@@ -1,7 +1,14 @@
+use crate::McpRefreshReason;
 use crate::agent::LocalAgentControl;
+use codex_mcp::McpServerKey;
 use codex_protocol::ContextWindowId;
+use codex_protocol::RequestCountry;
+use codex_thread_store::ThreadPersistenceMetadata;
 #[path = "compaction_replay_tests.rs"]
 mod compaction_replay_tests;
+
+#[path = "mailbox_prewarm_tests.rs"]
+mod mailbox_prewarm_tests;
 
 #[path = "network_policy_tests.rs"]
 mod network_policy_tests;
@@ -298,6 +305,7 @@ impl StepContext {
         settings.service_tier = turn.config.service_tier.clone();
         Arc::new(Self {
             sampled_through_sequence: None,
+            turn_cancellation: tokio_util::sync::CancellationToken::new(),
             preempt: turn
                 .config
                 .features
@@ -387,14 +395,17 @@ async fn default_turn_context_assigns_missing_response_item_ids() {
             role: "developer".to_string(),
             tools: Arc::from([]),
         },
-    ];
+    ]
+    .into_iter()
+    .map(ResponseItemEnvelope::new)
+    .collect();
     let (items, _) = session
-        .prepare_conversation_items_for_history(&turn_context, turn_context.model_info(), &items)
+        .prepare_conversation_items_for_history(&turn_context, turn_context.model_info(), items)
         .await;
 
     assert_eq!(items.len(), 3);
     for (item, prefix) in items.iter().zip(["msg_", "amsg_", "at_"]) {
-        let suffix = item.id().unwrap().strip_prefix(prefix).unwrap();
+        let suffix = item.item.id().unwrap().strip_prefix(prefix).unwrap();
         assert_eq!(Uuid::parse_str(suffix).unwrap().get_version_num(), 7);
     }
 }
@@ -683,50 +694,6 @@ async fn regular_turn_emits_turn_started_with_trace_id_without_waiting_for_start
     sess.abort_all_tasks(TurnAbortReason::Interrupted).await;
 }
 
-#[test_case(SessionSource::Exec; "root")]
-#[test_case(SessionSource::SubAgent(SubAgentSource::Review); "subagent")]
-#[test_case(SessionSource::Internal(InternalSessionSource::Guardian); "guardian")]
-#[tokio::test]
-async fn request_mcp_server_elicitation_auto_accepts_when_auto_deny_is_enabled(
-    source: SessionSource,
-) {
-    let (session, mut turn_context, rx) = make_session_and_context_with_rx().await;
-    Arc::get_mut(&mut turn_context)
-        .expect("turn context should not be shared")
-        .session_source = source;
-    session
-        .services
-        .mcp_runtime
-        .set_elicitations_auto_deny(/*auto_deny*/ true);
-
-    let response = session
-        .request_mcp_server_elicitation(
-            turn_context.as_ref(),
-            "codex_apps".to_string(),
-            RequestId::String("request-1".into()),
-            ElicitationRequest::Form {
-                meta: None,
-                message: "Allow this request?".to_string(),
-                requested_schema: json!({
-                    "type": "object",
-                    "properties": {},
-                }),
-            },
-        )
-        .await;
-
-    assert_eq!(
-        response.response,
-        Some(ElicitationResponse {
-            action: ElicitationAction::Accept,
-            content: Some(json!({})),
-            meta: None,
-        })
-    );
-    assert!(!response.sent);
-    assert!(rx.try_recv().is_err());
-}
-
 #[test_case(SessionSource::Exec, true; "root")]
 #[test_case(SessionSource::Exec, false; "capture_off")]
 #[test_case(SessionSource::SubAgent(SubAgentSource::Review), true; "subagent")]
@@ -772,7 +739,7 @@ async fn request_mcp_server_elicitation_waits_for_user_response(
             session
                 .request_mcp_server_elicitation(
                     &turn_context,
-                    "codex_apps".to_string(),
+                    codex_mcp::McpServerKey::unscoped("codex_apps"),
                     RequestId::String("request-1".into()),
                     request,
                 )
@@ -791,6 +758,7 @@ async fn request_mcp_server_elicitation_waits_for_user_response(
         codex_protocol::approvals::ElicitationRequestEvent {
             turn_id: Some(turn_context.sub_id.clone()),
             server_name: "codex_apps".to_string(),
+            environment_id: None,
             id: codex_protocol::mcp::RequestId::String("request-1".to_string()),
             request,
         }
@@ -818,12 +786,11 @@ async fn request_mcp_server_elicitation_waits_for_user_response(
         )
         .await
         .expect("user response should resolve the elicitation");
-    let outcome = tokio::time::timeout(Duration::from_secs(1), pending)
+    let received = tokio::time::timeout(Duration::from_secs(1), pending)
         .await
         .expect("elicitation should finish")
         .expect("elicitation task should succeed");
-    assert_eq!(outcome.response, Some(response));
-    assert!(outcome.sent);
+    assert_eq!(received, Some(response));
     assert!(!*paused.borrow());
     assert!(rx.try_recv().is_err());
 }
@@ -1258,82 +1225,6 @@ async fn start_managed_network_proxy_applies_execpolicy_network_rules() -> anyho
     assert_eq!(
         current_cfg.allowed_domains(),
         Some(vec!["example.com".to_string()])
-    );
-    Ok(())
-}
-
-#[tokio::test]
-async fn managed_network_proxy_decider_survives_full_access_start() -> anyhow::Result<()> {
-    let full_access_permission_profile = PermissionProfile::Disabled;
-    let spec = crate::config::NetworkProxySpec::from_config_and_constraints(
-        NetworkProxyConfig::default(),
-        Some(NetworkConstraints {
-            enabled: Some(true),
-            ..Default::default()
-        }),
-        &full_access_permission_profile,
-    )?;
-    let exec_policy = Policy::empty();
-    let decider_calls = Arc::new(std::sync::atomic::AtomicUsize::new(0));
-    let network_policy_decider: Arc<dyn codex_network_proxy::NetworkPolicyDecider> = Arc::new({
-        let decider_calls = Arc::clone(&decider_calls);
-        move |_request| {
-            decider_calls.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
-            async { codex_network_proxy::NetworkDecision::ask("not_allowed") }
-        }
-    });
-
-    let (started_proxy, _) = Session::start_managed_network_proxy(
-        &spec,
-        &exec_policy,
-        &full_access_permission_profile,
-        SandboxType::None,
-        Some(network_policy_decider),
-        /*blocked_request_observer*/ None,
-        /*managed_network_requirements_enabled*/ true,
-        crate::config::NetworkProxyAuditMetadata::default(),
-    )
-    .await?;
-
-    let spec = spec.recompute_for_permission_profile(&PermissionProfile::workspace_write())?;
-    spec.apply_to_started_proxy(&started_proxy).await?;
-    let current_cfg = started_proxy.proxy().current_cfg().await?;
-    assert_eq!(current_cfg.allowed_domains(), None);
-
-    use tokio::io::AsyncReadExt as _;
-    use tokio::io::AsyncWriteExt as _;
-
-    let prepared = started_proxy
-        .proxy()
-        .prepare_for_remote_environment(std::collections::HashMap::new(), "test-bridge")?;
-    let proxy_addr = prepared.env["HTTP_PROXY"]
-        .strip_prefix("http://")
-        .expect("HTTP proxy URL")
-        .parse::<std::net::SocketAddr>()?;
-    let mut stream = tokio::net::TcpStream::connect(proxy_addr).await?;
-    stream
-        .write_all(
-            b"GET http://example.com/ HTTP/1.1\r\nHost: example.com\r\nConnection: close\r\n\r\n",
-        )
-        .await?;
-    let mut buffer = [0_u8; 4096];
-    let bytes_read = tokio::time::timeout(StdDuration::from_secs(2), stream.read(&mut buffer))
-        .await
-        .expect("timed out waiting for proxy response")?;
-    let response = String::from_utf8_lossy(&buffer[..bytes_read]);
-
-    assert!(
-        response.starts_with("HTTP/1.1 403 Forbidden"),
-        "unexpected proxy response: {response}"
-    );
-    assert!(
-        response.contains("x-proxy-error: blocked-by-allowlist"),
-        "unexpected proxy response: {response}"
-    );
-    assert_eq!(
-        decider_calls.load(std::sync::atomic::Ordering::SeqCst),
-        1,
-        "unexpected proxy response: {response}"
     );
     Ok(())
 }
@@ -2374,7 +2265,7 @@ async fn refresh_config_rejects_stale_owner_without_effects(scope: RuntimeConfig
         crate::ConfigRefreshOutcome::Published
     );
     let current_owner = session.get_config().await;
-    assert!(session.mcp_refresh.claim());
+    assert!(!session.mcp_refresh.take_pending().is_empty());
 
     assert_eq!(
         session
@@ -2675,6 +2566,25 @@ async fn inter_agent_communication_waits_for_confirmed_delivery_persistence() {
         ]
     );
     let live = session.clone_history().await;
+    let replayed = session
+        .reconstruct_history_from_rollout(&replay_turn, &resumed.history)
+        .await;
+    let delivery_sources = |context: &codex_history::RetainedContext| {
+        context
+            .ordered_entries()
+            .filter_map(|(_, entry)| match entry {
+                codex_history::RetainedContextEntry::AssistantMessage(_) => Some(
+                    context
+                        .source(entry)
+                        .expect("confirmed delivery has a revision"),
+                ),
+                _ => None,
+            })
+            .collect::<Vec<_>>()
+    };
+    let expected = delivery_sources(live.retained_context());
+    assert_eq!(expected.len(), 2);
+    assert_eq!(delivery_sources(&replayed.retained_context), expected);
     let communication = live
         .annotated_items()
         .iter()
@@ -2712,92 +2622,8 @@ async fn inter_agent_communication_waits_for_confirmed_delivery_persistence() {
     assert_eq!(messages, vec![message]);
 }
 
-#[tokio::test]
-async fn record_inter_agent_communication_sets_turn_id_in_rollout_and_resume() {
-    let (mut session, turn_context) = make_session_and_context().await;
-    let rollout_path = attach_thread_persistence(&mut session).await;
-    let communication = InterAgentCommunication::new(
-        AgentPath::root().join("worker").expect("worker path"),
-        AgentPath::root(),
-        Vec::new(),
-        "child done".to_string(),
-        /*trigger_turn*/ false,
-    );
-    let mut expected_item = communication.to_model_input_item();
-    let mut expected = serde_json::to_value(&expected_item).unwrap();
-    expected["internal_chat_message_metadata_passthrough"] = json!({
-        "content_item_metadata": [{"harness_injected": true, "source_tool_namespace": "collaboration"}],
-    });
-    expected_item = serde_json::from_value(expected).unwrap();
-    expected_item.set_turn_id_if_missing(&turn_context.sub_id);
-
-    session
-        .record_inter_agent_communication(&turn_context, turn_context.model_info(), communication)
-        .await;
-
-    let recorded_history = session.clone_history().await;
-    let recorded_items = raw_history_items(&recorded_history);
-    let create_time = recorded_items[0]
-        .executed_tool_call_metadata()
-        .and_then(|metadata| metadata.create_time.clone())
-        .expect("locally authored agent message should receive a creation timestamp");
-    assert!(create_time.as_f64().is_some_and(|seconds| seconds > 0.0));
-    expected_item.set_create_time_if_missing(create_time);
-
-    assert_eq!(
-        strip_response_item_ids(&recorded_items),
-        strip_response_item_ids(std::slice::from_ref(&expected_item))
-    );
-
-    session.flush_rollout().await.expect("rollout should flush");
-    let InitialHistory::Resumed(resumed) = RolloutRecorder::get_rollout_history(&rollout_path)
-        .await
-        .expect("read rollout history")
-    else {
-        panic!("expected resumed rollout history");
-    };
-    let persisted_items = resumed
-        .history
-        .iter()
-        .filter(|item| {
-            matches!(
-                item,
-                RolloutItem::ResponseItem(_)
-                    | RolloutItem::InterAgentCommunication(_)
-                    | RolloutItem::InterAgentCommunicationMetadata { .. }
-            )
-        })
-        .cloned()
-        .collect::<Vec<_>>();
-    let expected_persisted_items = vec![
-        RolloutItem::InterAgentCommunicationMetadata {
-            trigger_turn: false,
-        },
-        RolloutItem::ResponseItem(ResponseItemEnvelope {
-            item: expected_item.clone(),
-            metadata: Some(CodexHarnessMetadata {
-                user_input_order: Some(0),
-                history_sequence: Some(1),
-                sampled_through_sequence: Some(0),
-                ..Default::default()
-            }),
-        }),
-    ];
-    assert_eq!(
-        strip_response_item_ids_from_json(serde_json::to_value(persisted_items).unwrap()),
-        strip_response_item_ids_from_json(serde_json::to_value(expected_persisted_items).unwrap())
-    );
-
-    let (resumed_session, _resumed_turn_context) = make_session_and_context().await;
-    resumed_session
-        .record_initial_history(InitialHistory::Resumed(resumed))
-        .await;
-    assert_eq!(
-        strip_response_item_ids(&raw_history_items(&resumed_session.clone_history().await)),
-        strip_response_item_ids(std::slice::from_ref(&expected_item))
-    );
-    assert_eq!(resumed_session.reserve_user_input_order().await, 1);
-}
+#[path = "mail_publication_tests.rs"]
+mod mail_publication_tests;
 
 #[tokio::test]
 async fn record_inter_agent_communication_preserves_item_id_in_rollout_and_resume() {
@@ -3572,7 +3398,7 @@ async fn record_token_usage_info_notifies_extension_contributors(
         .record_token_usage_info(
             &turn_context,
             &turn_context.initial_settings,
-            Some(&first_usage),
+            first_usage.clone().into(),
             crate::session::TokenUsageContext::Sampling {
                 includes_reasoning: true,
                 input_item_count: 0,
@@ -3584,7 +3410,7 @@ async fn record_token_usage_info_notifies_extension_contributors(
         .record_token_usage_info(
             &turn_context,
             &turn_context.initial_settings,
-            Some(&second_usage),
+            second_usage.clone().into(),
             context,
         )
         .await
@@ -4265,21 +4091,24 @@ async fn record_initial_history_assigns_and_persists_id_for_forked_response_item
 async fn session_configured_reports_permission_profile_for_external_sandbox() -> anyhow::Result<()>
 {
     let server = start_mock_server().await;
-    let sandbox_policy = SandboxPolicy::ExternalSandbox {
-        network_access: codex_protocol::protocol::NetworkAccess::Restricted,
-    };
     let permission_profile = PermissionProfile::External {
         network: NetworkSandboxPolicy::Restricted,
     };
     let expected_permission_profile = permission_profile.clone();
     let mut builder = test_codex().with_config(move |config| {
+        config.workspace_roots_explicit = false;
         config
             .permissions
-            .set_permission_profile(permission_profile.clone())
+            .can_set_permission_profile(&permission_profile)
             .expect("set permission profile");
         config
-            .set_legacy_sandbox_policy(sandbox_policy)
-            .expect("set sandbox policy");
+            .permissions
+            .set_workspace_roots(vec![config.cwd.clone()]);
+        config
+            .permissions
+            .set_permission_profile(permission_profile)
+            .expect("set permission profile");
+        config.workspace_roots = config.permissions.workspace_roots().to_vec();
     });
 
     let test = builder.build(&server).await?;
@@ -4502,6 +4331,7 @@ async fn set_rate_limits_retains_previous_credits() {
         provider: create_model_provider(config.model_provider.clone(), /*auth_manager*/ None),
         environments: Vec::new(),
         step_settings: Arc::new(StepSettings {
+            request_country: RequestCountry::default(),
             collaboration_mode,
             reasoning_summary: config.model_reasoning_summary,
             service_tier: None,
@@ -4626,6 +4456,7 @@ async fn set_rate_limits_updates_plan_type_when_present() {
         provider: create_model_provider(config.model_provider.clone(), /*auth_manager*/ None),
         environments: Vec::new(),
         step_settings: Arc::new(StepSettings {
+            request_country: RequestCountry::default(),
             collaboration_mode,
             reasoning_summary: config.model_reasoning_summary,
             service_tier: None,
@@ -4966,7 +4797,7 @@ async fn open_thread_persistence(session: &mut Session) -> PathBuf {
             history_mode: Default::default(),
             subagent_history_start_ordinal: None,
             history_base: None,
-            initial_window_id: ContextWindowId::new_uuid_v7().to_string(),
+            initial_window_id: ContextWindowId::new_uuid_v7(),
             runtime_workspace_roots: None,
             metadata: ThreadPersistenceMetadata {
                 cwd: Some(config.cwd.to_path_buf()),
@@ -5252,6 +5083,7 @@ pub(crate) async fn make_session_configuration_for_tests() -> SessionConfigurati
         provider: create_model_provider(config.model_provider.clone(), /*auth_manager*/ None),
         environments: Vec::new(),
         step_settings: Arc::new(StepSettings {
+            request_country: RequestCountry::default(),
             collaboration_mode,
             reasoning_summary: config.model_reasoning_summary,
             service_tier: None,
@@ -5501,7 +5333,7 @@ async fn session_configuration_apply_client_metadata_preserves_permissions() {
 
 #[tokio::test]
 async fn session_configuration_apply_preserves_profile_file_system_policy_on_cwd_only_update() {
-    let mut session_configuration = make_session_configuration_for_tests().await;
+    let mut config = make_session_configuration_for_tests().await;
     let workspace = tempfile::tempdir().expect("create temp dir");
     let project_root = workspace.path().join("project");
     let original_cwd = project_root.join("subdir");
@@ -5510,41 +5342,37 @@ async fn session_configuration_apply_preserves_profile_file_system_policy_on_cwd
     let project_root = project_root.abs();
     let docs_dir = docs_dir.abs();
 
-    session_configuration.legacy_fallback_cwd = original_cwd.abs();
-    let sandbox_policy = SandboxPolicy::WorkspaceWrite {
-        writable_roots: Vec::new(),
-        network_access: false,
-        exclude_tmpdir_env_var: true,
-        exclude_slash_tmp: true,
-    };
-    let file_system_sandbox_policy = FileSystemSandboxPolicy::restricted(vec![
-        FileSystemSandboxEntry {
-            path: FileSystemPath::Special {
+    config.legacy_fallback_cwd = original_cwd.abs();
+    config.runtime_workspace_roots =
+        vec![config.cwd().clone(), project_root.clone(), docs_dir.clone()];
+    let policy = FileSystemSandboxPolicy::restricted(vec![
+        FileSystemSandboxEntry::new(
+            FileSystemPath::Special {
                 value: FileSystemSpecialPath::project_roots(/*subpath*/ None),
             },
-            access: FileSystemAccessMode::Write,
-            missing_path_behavior: None,
-        },
-        FileSystemSandboxEntry {
-            path: docs_dir.into(),
-            access: FileSystemAccessMode::Read,
-            missing_path_behavior: None,
-        },
+            FileSystemAccessMode::Write,
+        ),
+        FileSystemSandboxEntry::new(docs_dir.clone().into(), FileSystemAccessMode::Read),
     ]);
-    let network_sandbox_policy = NetworkSandboxPolicy::from(&sandbox_policy);
-    session_configuration
-        .set_permission_profile_for_tests(
-            PermissionProfile::from_runtime_permissions_with_enforcement(
-                SandboxEnforcement::from_legacy_sandbox_policy(&sandbox_policy),
-                &file_system_sandbox_policy,
-                network_sandbox_policy,
+    config
+        .permission_profile_state
+        .set_permission_profile_snapshot(
+            PermissionProfileSnapshot::active_with_profile_workspace_roots(
+                PermissionProfile::from_runtime_permissions(
+                    &policy,
+                    NetworkSandboxPolicy::Restricted,
+                ),
+                ActivePermissionProfile::new(":workspace"),
+                vec![docs_dir.clone().into()],
             ),
         )
-        .expect("set permission profile");
-    let expected_file_system_sandbox_policy =
-        file_system_sandbox_policy.materialize_project_roots_with_workspace_roots(&[]);
+        .unwrap();
+    let expected_profile = config.permission_profile_state.snapshot();
+    let mut expected_settings = config.thread_settings_snapshot(&[]);
+    expected_settings.cwd = project_root.clone();
+    expected_settings.runtime_workspace_roots = Some(vec![project_root.clone(), docs_dir]);
 
-    let updated = session_configuration
+    let updated = config
         .apply(
             &SessionSettingsUpdate {
                 environments: Some(TurnEnvironmentSelections::new(project_root, Vec::new())),
@@ -5552,21 +5380,32 @@ async fn session_configuration_apply_preserves_profile_file_system_policy_on_cwd
             },
             &[],
         )
-        .expect("cwd-only update should succeed");
+        .expect("apply cwd");
 
     assert_eq!(
-        updated.file_system_sandbox_policy(&[]),
-        expected_file_system_sandbox_policy
+        (
+            updated.thread_settings_snapshot(&[]),
+            updated.permission_profile_state.snapshot(),
+        ),
+        (expected_settings, expected_profile),
     );
 }
 
 #[tokio::test]
 async fn session_configuration_apply_permission_profile_preserves_existing_deny_read_entries() {
-    let mut session_configuration = make_session_configuration_for_tests().await;
-    let cwd = tempfile::tempdir().expect("create temp dir");
-    session_configuration.legacy_fallback_cwd = cwd.path().abs();
+    const GLOB_SCAN_MAX_DEPTH: usize = 2;
 
-    let workspace_policy = SandboxPolicy::new_workspace_write_policy();
+    let (session, _turn_context) = make_session_and_context().await;
+    let mut config = session.state.lock().await.session_configuration.clone();
+    let cwd = tempfile::tempdir().expect("create temp dir");
+    config.legacy_fallback_cwd = cwd.path().abs();
+
+    let workspace_policy = SandboxPolicy::WorkspaceWrite {
+        writable_roots: vec![config.cwd().clone()],
+        network_access: false,
+        exclude_tmpdir_env_var: false,
+        exclude_slash_tmp: false,
+    };
     let deny_entry = FileSystemSandboxEntry {
         path: FileSystemPath::GlobPattern {
             pattern: "**/*.env".to_string(),
@@ -5574,48 +5413,136 @@ async fn session_configuration_apply_permission_profile_preserves_existing_deny_
         access: FileSystemAccessMode::Deny,
         missing_path_behavior: None,
     };
-    let mut existing_file_system_policy =
-        FileSystemSandboxPolicy::from_legacy_sandbox_policy_for_cwd(
-            &workspace_policy,
-            session_configuration.cwd().as_path(),
-        );
-    existing_file_system_policy.glob_scan_max_depth = Some(2);
-    existing_file_system_policy.entries.push(deny_entry.clone());
-    session_configuration
-        .set_permission_profile_for_tests(
-            PermissionProfile::from_runtime_permissions_with_enforcement(
-                SandboxEnforcement::from_legacy_sandbox_policy(&workspace_policy),
-                &existing_file_system_policy,
-                NetworkSandboxPolicy::Restricted,
-            ),
-        )
-        .expect("set permission profile");
-
-    let requested_file_system_policy = FileSystemSandboxPolicy::from_legacy_sandbox_policy_for_cwd(
+    let requested = FileSystemSandboxPolicy::from_legacy_sandbox_policy_for_cwd(
         &workspace_policy,
-        session_configuration.cwd().as_path(),
+        config.cwd().as_path(),
     );
-    let permission_profile = codex_protocol::models::PermissionProfile::from_runtime_permissions(
-        &requested_file_system_policy,
-        NetworkSandboxPolicy::Restricted,
-    );
-    let updated = session_configuration
-        .apply(
+    let mut existing = requested.clone();
+    existing.glob_scan_max_depth = Some(GLOB_SCAN_MAX_DEPTH);
+    existing.entries.push(deny_entry.clone());
+    config
+        .set_permission_profile_for_tests(PermissionProfile::from_runtime_permissions(
+            &existing,
+            NetworkSandboxPolicy::Restricted,
+        ))
+        .unwrap();
+
+    let permission_profile =
+        PermissionProfile::from_runtime_permissions(&requested, NetworkSandboxPolicy::Restricted);
+    let mut expected = requested.materialize_project_roots_with_workspace_roots(&[]);
+    expected.glob_scan_max_depth = Some(GLOB_SCAN_MAX_DEPTH);
+    expected.entries.push(deny_entry);
+    for updates in [
+        SessionSettingsUpdate {
+            permission_profile: Some(permission_profile),
+            ..Default::default()
+        },
+        SessionSettingsUpdate {
+            sandbox_policy: Some(workspace_policy.clone()),
+            ..Default::default()
+        },
+    ] {
+        let updated = session.apply_session_settings(&config, &updates).unwrap();
+        assert_eq!(updated.file_system_sandbox_policy(&[]), expected);
+    }
+    let next_cwd = tempfile::tempdir().unwrap();
+    let git_dir = cwd.path().join("git-metadata");
+    std::fs::create_dir(&git_dir).unwrap();
+    std::fs::write(
+        next_cwd.path().join(".git"),
+        format!("gitdir: {}\n", git_dir.display()),
+    )
+    .unwrap();
+    let updated = session
+        .apply_session_settings(
+            &config,
             &SessionSettingsUpdate {
-                permission_profile: Some(permission_profile),
+                environments: Some(TurnEnvironmentSelections::new(
+                    next_cwd.path().abs(),
+                    Vec::new(),
+                )),
+                sandbox_policy: Some(workspace_policy),
                 ..Default::default()
             },
-            &[],
         )
-        .expect("permission profile update should succeed");
-
-    let mut expected_file_system_policy =
-        requested_file_system_policy.materialize_project_roots_with_workspace_roots(&[]);
-    expected_file_system_policy.glob_scan_max_depth = Some(2);
-    expected_file_system_policy.entries.push(deny_entry);
+        .unwrap();
+    let filesystem = updated.file_system_sandbox_policy(&[]);
     assert_eq!(
-        updated.file_system_sandbox_policy(&[]),
-        expected_file_system_policy
+        (
+            updated.cwd(),
+            filesystem.can_write_local_path_with_cwd(&git_dir, next_cwd.path()),
+            filesystem
+                .can_write_local_path_with_cwd(&cwd.path().join("ordinary-file"), next_cwd.path()),
+        ),
+        (&next_cwd.path().abs(), false, true)
+    );
+}
+
+#[tokio::test]
+async fn session_settings_preview_preserves_legacy_input_and_identity_clearing() {
+    let (session, context) = make_session_and_context().await;
+    let profile = PermissionProfile::read_only();
+    let selected = PermissionProfileSnapshot::active_with_profile_workspace_roots(
+        profile.clone(),
+        ActivePermissionProfile::read_only(),
+        vec![
+            context
+                .initial_environments
+                .primary()
+                .unwrap()
+                .cwd()
+                .clone()
+                .into(),
+        ],
+    );
+    session
+        .state
+        .lock()
+        .await
+        .session_configuration
+        .permission_profile_state
+        .set_permission_profile_snapshot(selected.clone())
+        .unwrap();
+    let canonical = session
+        .update_settings(SessionSettingsUpdate {
+            permission_profile: Some(profile.clone()),
+            profile_workspace_roots: Some(selected.profile_workspace_roots().to_vec()),
+            ..Default::default()
+        })
+        .await
+        .unwrap();
+    assert_eq!(
+        canonical.configuration.permission_profile_state.snapshot(),
+        selected
+    );
+
+    let legacy = SessionSettingsUpdate {
+        sandbox_policy: Some(SandboxPolicy::new_read_only_policy()),
+        ..Default::default()
+    };
+    let preview = session.preview_settings(&legacy).await.unwrap();
+    assert_eq!(
+        (
+            preview.permission_profile,
+            preview.active_permission_profile,
+            preview.profile_workspace_roots
+        ),
+        (profile.clone(), None, Vec::new()),
+    );
+    assert_eq!(
+        session
+            .state
+            .lock()
+            .await
+            .session_configuration
+            .permission_profile_state
+            .snapshot(),
+        selected
+    );
+    let committed = session.update_settings(legacy).await.unwrap();
+    assert_eq!(
+        committed.configuration.permission_profile_state.snapshot(),
+        PermissionProfileSnapshot::legacy(profile),
     );
 }
 
@@ -5633,7 +5560,7 @@ async fn session_configuration_apply_permission_profile_accepts_direct_write_roo
     let file_system_sandbox_policy =
         FileSystemSandboxPolicy::restricted(vec![FileSystemSandboxEntry {
             path: FileSystemPath::Path {
-                path: external_write_path.clone().into(),
+                path: external_write_path.into(),
             },
             access: FileSystemAccessMode::Write,
             missing_path_behavior: None,
@@ -5657,15 +5584,6 @@ async fn session_configuration_apply_permission_profile_accepts_direct_write_roo
     assert_eq!(
         updated.file_system_sandbox_policy(&[]),
         file_system_sandbox_policy
-    );
-    assert_eq!(
-        updated.sandbox_policy(&[]),
-        SandboxPolicy::WorkspaceWrite {
-            writable_roots: vec![external_write_path],
-            network_access: false,
-            exclude_tmpdir_env_var: true,
-            exclude_slash_tmp: true,
-        }
     );
 }
 
@@ -6180,12 +6098,10 @@ async fn standalone_settings_invalidate_continuation_before_delivering_acceptanc
         .tx_event
         .send(Event {
             id: "occupied".into(),
-            msg: EventMsg::ThreadSettingsApplied(
-                codex_protocol::protocol::ThreadSettingsAppliedEvent {
-                    thread_id: Some(session.thread_id()),
-                    thread_settings: session.thread_settings_snapshot().await,
-                },
-            ),
+            msg: EventMsg::ThreadSettingsApplied(ThreadSettingsAppliedEvent {
+                thread_id: Some(session.thread_id()),
+                thread_settings: session.thread_settings_snapshot().await,
+            }),
         })
         .await
         .expect("fill event channel");
@@ -6193,11 +6109,11 @@ async fn standalone_settings_invalidate_continuation_before_delivering_acceptanc
     let (reply, mut accepted) = tokio::sync::oneshot::channel();
     let (tx_sub, rx_sub) = async_channel::bounded(1);
     tx_sub
-        .send(Submission {
+        .send(Box::new(Submission {
             id: "settings".into(),
             turn_extension_init: None,
             op: Op::ThreadSettings {
-                thread_settings: codex_protocol::protocol::ThreadSettingsOverrides::default(),
+                thread_settings: ThreadSettingsOverrides::default(),
                 reply: Some(reply),
             },
             trace: None,
@@ -6205,7 +6121,7 @@ async fn standalone_settings_invalidate_continuation_before_delivering_acceptanc
             root_turn_id: None,
             residency_guard: None,
             message_delivery: None,
-        })
+        }))
         .await
         .expect("submit settings");
     let mut submissions = Box::pin(tokio::task::unconstrained(submission_loop(
@@ -6263,11 +6179,13 @@ async fn compaction_persists_resume_metadata_and_companion_records() {
 
     session.multi_agent_version = std::sync::OnceLock::from(MultiAgentVersion::V2);
     let expected = CompactionResumeMetadata {
+        next_item_ordinal: None,
         rejected_audio_file_ids: Default::default(),
         dynamic_tools: Some(Box::new(DynamicToolsSnapshot {
             thread_id: session.thread_id(),
             tools: Vec::new(),
         })),
+        observation_clock_floor_ms: None,
         multi_agent_version: Some(MultiAgentVersion::V2),
         last_started_turn_id: Some(turn_context.sub_id.clone()),
         turn_attribution: Some(codex_history::TurnAttribution {
@@ -6281,7 +6199,7 @@ async fn compaction_persists_resume_metadata_and_companion_records() {
         }),
         previous_turn_settings: Some(previous_turn_settings),
     };
-    let expected_settings = codex_protocol::protocol::ThreadSettingsAppliedEvent {
+    let expected_settings = ThreadSettingsAppliedEvent {
         thread_id: Some(session.thread_id()),
         thread_settings: session.thread_settings_snapshot().await,
     };
@@ -6761,7 +6679,7 @@ async fn response_metadata_builders_capture_fresh_mcp_attribution() {
         .await;
     let compaction = session
         .compaction_responses_metadata(
-            &turn_context,
+            &step_context,
             CompactionTurnMetadata::new(
                 CompactionTrigger::Auto,
                 CompactionReason::ContextLimit,
@@ -6812,7 +6730,7 @@ pub(crate) async fn make_session_and_context() -> (Session, TurnContext) {
         config.model_provider.clone(),
     );
     let agent_control = LocalAgentControl::default();
-    let item_id_generator = Arc::clone(&agent_control.runtime.item_id_generator);
+    let item_id_generator = Session::new_item_id_generator();
     let exec_policy = Arc::new(ExecPolicyManager::default());
     let (agent_status_tx, _agent_status_rx) = watch::channel(AgentStatus::PendingInit);
     let model = get_model_offline_for_tests(config.model.as_deref());
@@ -6836,6 +6754,7 @@ pub(crate) async fn make_session_and_context() -> (Session, TurnContext) {
             Some(Arc::clone(&auth_manager)),
         ),
         step_settings: Arc::new(StepSettings {
+            request_country: RequestCountry::default(),
             collaboration_mode,
             reasoning_summary: config.model_reasoning_summary,
             service_tier: None,
@@ -6979,6 +6898,12 @@ pub(crate) async fn make_session_and_context() -> (Session, TurnContext) {
         mcp_thread_init: codex_extension_api::ExtensionDataInit::default(),
         client_mcp_extensions: ClientMcpExtensions::default(),
         local_agent_runtime: agent_control.runtime.clone(),
+        budget_policy: crate::rollout_budget::ThreadBudgetPolicy::new(
+            crate::rollout_budget::ThreadBudgetAccount::Native(Arc::clone(
+                &agent_control.runtime.rollout_budget,
+            )),
+        )
+        .expect("test budget policy"),
         agent_control: Arc::new(agent_control),
         network_proxy: arc_swap::ArcSwapOption::from(None),
         network_proxy_audit_metadata: crate::config::NetworkProxyAuditMetadata::default(),
@@ -7051,6 +6976,7 @@ pub(crate) async fn make_session_and_context() -> (Session, TurnContext) {
             codex_sandboxing::WindowsSandboxProxySettingsMode::Reconcile,
         multi_agent_version: OnceLock::from(config.multi_agent_version_from_features()),
         mcp_refresh: McpRefresh::new(),
+        cloud_catalog_preparation: Default::default(),
         mcp_tool_approval_metadata: Default::default(),
         mcp_elicitation_reviewer_handle: OnceLock::new(),
         mcp_elicitation_lifecycle_handle: OnceLock::new(),
@@ -7118,7 +7044,7 @@ pub(crate) async fn make_session_and_context() -> (Session, TurnContext) {
         "turn_id".to_string(),
         skills_snapshot,
     );
-    session.mark_mcp_runtime_dirty();
+    session.mark_mcp_runtime_dirty(McpRefreshReason::ExplicitInvalidation);
     crate::guardian::test_host::install(&session, &turn_context.config);
     (session, turn_context)
 }
@@ -7173,6 +7099,7 @@ async fn make_session_with_config_and_rx(
             Some(Arc::clone(&auth_manager)),
         ),
         step_settings: Arc::new(StepSettings {
+            request_country: RequestCountry::default(),
             collaboration_mode,
             reasoning_summary: config.model_reasoning_summary,
             service_tier: None,
@@ -7312,6 +7239,7 @@ async fn make_session_with_history_source_and_agent_control_and_rx(
             Some(Arc::clone(&auth_manager)),
         ),
         step_settings: Arc::new(StepSettings {
+            request_country: RequestCountry::default(),
             collaboration_mode,
             reasoning_summary: config.model_reasoning_summary,
             service_tier: None,
@@ -8760,7 +8688,7 @@ async fn shutdown_complete_does_not_append_to_thread_store_after_shutdown() {
             history_mode: Default::default(),
             subagent_history_start_ordinal: None,
             history_base: None,
-            initial_window_id: ContextWindowId::new_uuid_v7().to_string(),
+            initial_window_id: ContextWindowId::new_uuid_v7(),
             runtime_workspace_roots: None,
             metadata: ThreadPersistenceMetadata {
                 cwd: Some(config.cwd.to_path_buf()),
@@ -8875,7 +8803,7 @@ async fn submission_loop_channel_close_runs_full_thread_teardown() -> anyhow::Re
             model: turn_context.model_info().slug.clone(),
             provider_name: config.model_provider_id.clone(),
             approval_policy: "never".to_string(),
-            sandbox_policy: "danger-full-access".to_string(),
+            permissions_profile: "danger-full-access".to_string(),
         },
     )?;
     let live_thread = LiveThread::create(
@@ -8899,7 +8827,7 @@ async fn submission_loop_channel_close_runs_full_thread_teardown() -> anyhow::Re
             history_mode: Default::default(),
             subagent_history_start_ordinal: None,
             history_base: None,
-            initial_window_id: ContextWindowId::new_uuid_v7().to_string(),
+            initial_window_id: ContextWindowId::new_uuid_v7(),
             runtime_workspace_roots: None,
             metadata: ThreadPersistenceMetadata {
                 cwd: Some(config.cwd.to_path_buf()),
@@ -8942,7 +8870,10 @@ async fn submission_loop_channel_close_runs_full_thread_teardown() -> anyhow::Re
     let bundle = std::fs::read_dir(traces.path())?.next().unwrap()?.path();
     let rollout = replay_bundle(bundle)?;
     assert_eq!(rollout.status, RolloutStatus::Aborted);
-    assert!(rollout.recording_complete);
+    assert_eq!(
+        rollout.recording_status,
+        codex_rollout_trace::RecordingStatus::Complete
+    );
 
     assert_eq!(1, calls.load(std::sync::atomic::Ordering::SeqCst));
     assert_eq!(
@@ -9041,7 +8972,7 @@ async fn submission_loop_channel_close_aborts_active_turn_before_thread_stop_lif
 #[tokio::test]
 async fn shutdown_and_wait_allows_multiple_waiters() {
     let (_session, _turn_context) = make_session_and_context().await;
-    let (tx_sub, rx_sub) = async_channel::bounded::<Submission>(4);
+    let (tx_sub, rx_sub) = async_channel::bounded::<Box<Submission>>(4);
     let (_tx_event, rx_event) = async_channel::unbounded();
     let session_loop_handle = tokio::spawn(async move {
         let shutdown = rx_sub.recv().await.expect("shutdown submission");
@@ -9157,7 +9088,7 @@ where
         config.model_provider.clone(),
     );
     let agent_control = LocalAgentControl::default();
-    let item_id_generator = Arc::clone(&agent_control.runtime.item_id_generator);
+    let item_id_generator = Session::new_item_id_generator();
     let exec_policy = Arc::new(ExecPolicyManager::default());
     let (agent_status_tx, _agent_status_rx) = watch::channel(AgentStatus::PendingInit);
     let model = get_model_offline_for_tests(config.model.as_deref());
@@ -9181,6 +9112,7 @@ where
             Some(Arc::clone(&auth_manager)),
         ),
         step_settings: Arc::new(StepSettings {
+            request_country: RequestCountry::default(),
             collaboration_mode,
             reasoning_summary: config.model_reasoning_summary,
             service_tier: None,
@@ -9323,6 +9255,12 @@ where
         mcp_thread_init: codex_extension_api::ExtensionDataInit::default(),
         client_mcp_extensions: ClientMcpExtensions::default(),
         local_agent_runtime: agent_control.runtime.clone(),
+        budget_policy: crate::rollout_budget::ThreadBudgetPolicy::new(
+            crate::rollout_budget::ThreadBudgetAccount::Native(Arc::clone(
+                &agent_control.runtime.rollout_budget,
+            )),
+        )
+        .expect("test budget policy"),
         agent_control: Arc::new(agent_control),
         network_proxy: arc_swap::ArcSwapOption::from(None),
         network_proxy_audit_metadata: crate::config::NetworkProxyAuditMetadata::default(),
@@ -9395,6 +9333,7 @@ where
             codex_sandboxing::WindowsSandboxProxySettingsMode::Reconcile,
         multi_agent_version: OnceLock::from(config.multi_agent_version_from_features()),
         mcp_refresh: McpRefresh::new(),
+        cloud_catalog_preparation: Default::default(),
         mcp_tool_approval_metadata: Default::default(),
         mcp_elicitation_reviewer_handle: OnceLock::new(),
         mcp_elicitation_lifecycle_handle: OnceLock::new(),
@@ -9462,7 +9401,7 @@ where
         "turn_id".to_string(),
         skills_snapshot,
     ));
-    session.mark_mcp_runtime_dirty();
+    session.mark_mcp_runtime_dirty(McpRefreshReason::ExplicitInvalidation);
     crate::guardian::test_host::install(&session, &turn_context.config);
     (session, turn_context, rx_event)
 }
@@ -9498,7 +9437,7 @@ pub(super) async fn make_thread_for_session(
     turn_context: &TurnContext,
     rx_event: async_channel::Receiver<Event>,
     session_source: SessionSource,
-) -> (crate::CodexThread, async_channel::Receiver<Submission>) {
+) -> (crate::CodexThread, async_channel::Receiver<Box<Submission>>) {
     let rollout_path = session.current_rollout_path().await.expect("rollout path");
     let event = SessionConfiguredEvent {
         session_id: session.session_id(),
@@ -9649,7 +9588,7 @@ async fn refresh_mcp_servers_uses_latest_state_for_existing_turns() {
             .expect("enable secret auth storage");
         state.session_configuration.original_config_do_not_use = Arc::new(config);
     }
-    session.mark_mcp_runtime_dirty();
+    session.mark_mcp_runtime_dirty(McpRefreshReason::ExplicitInvalidation);
 
     let next_turn = session.new_default_turn().await;
     let new_step = session
@@ -9819,7 +9758,7 @@ async fn mcp_elicitation_reviewer_uses_active_reviewer_and_latest_runtime_policy
         .spawn_task(Arc::clone(&old_turn), Vec::new(), task)
         .await;
 
-    session.mark_mcp_runtime_dirty();
+    session.mark_mcp_runtime_dirty(McpRefreshReason::ExplicitInvalidation);
     session.refresh_mcp_if_dirty().await;
     if live_update {
         assert_eq!(
@@ -9850,6 +9789,7 @@ async fn mcp_elicitation_reviewer_uses_active_reviewer_and_latest_runtime_policy
 
     let request = codex_mcp::ElicitationReviewRequest {
         server_name: "browser-use".to_string(),
+        server_key: McpServerKey::unscoped("browser-use"),
         request_id: rmcp::model::NumberOrString::Number(7),
         elicitation: codex_rmcp_client::Elicitation::Mcp(
             rmcp::model::ElicitRequestParams::FormElicitationParams {
@@ -10035,7 +9975,7 @@ async fn mcp_elicitation_reviewer_is_reused_across_runtime_refreshes() {
     let session = Arc::new(session);
     let previous = session.mcp_elicitation_reviewer();
 
-    session.mark_mcp_runtime_dirty();
+    session.mark_mcp_runtime_dirty(McpRefreshReason::ExplicitInvalidation);
     session.refresh_mcp_if_dirty().await;
 
     assert!(Arc::ptr_eq(&previous, &session.mcp_elicitation_reviewer()));
@@ -10290,6 +10230,7 @@ async fn capability_discovery_uses_environment_permission_profile() {
             /*resolved_roots*/ &[],
             &turn_context.initial_environments,
             /*v2_snapshots*/ None,
+            /*skill_turn*/ None,
         )
         .await;
     let discovery = discovery.expect("restricted environment should trigger capability discovery");
@@ -10380,7 +10321,7 @@ async fn step_context_keeps_its_mcp_runtime_for_tools() -> anyhow::Result<()> {
     );
     assert_ne!(step_context.mcp.config().plugins, current_config.plugins);
 
-    session.mark_mcp_runtime_dirty();
+    session.mark_mcp_runtime_dirty(McpRefreshReason::ExplicitInvalidation);
     session.refresh_mcp_if_dirty().await;
     let current = session
         .services
@@ -11882,7 +11823,7 @@ async fn attach_in_memory_thread_store(
             history_mode: Default::default(),
             subagent_history_start_ordinal: None,
             history_base: None,
-            initial_window_id: ContextWindowId::new_uuid_v7().to_string(),
+            initial_window_id: ContextWindowId::new_uuid_v7(),
             runtime_workspace_roots: None,
             metadata: ThreadPersistenceMetadata {
                 cwd: Some(config.cwd.to_path_buf()),
@@ -13244,7 +13185,6 @@ async fn tool_calls_reopen_mailbox_delivery_for_current_turn() {
         step_context: StepContext::for_test(Arc::clone(&tc)),
         turn_store: Arc::new(codex_extension_api::ExtensionData::new(tc.sub_id.clone())),
         tool_runtime: test_tool_runtime(Arc::clone(&sess), Arc::clone(&tc)).await,
-        defer_tool_dispatch: false,
         cancellation_token: CancellationToken::new(),
     };
 
@@ -13426,9 +13366,7 @@ async fn sample_rollout(
     rollout_items.push(RolloutItem::ResponseItem(assistant1.clone().into()));
 
     let summary1 = "summary one";
-    let snapshot1 = raw_history_items(&live_history);
-    let user_messages1 = collect_user_messages(&snapshot1);
-    let rebuilt1 = compact::build_compacted_history(Vec::new(), &user_messages1, summary1);
+    let rebuilt1 = compact::build_compacted_history(&live_history, summary1);
     live_history.replace_annotated(rebuilt1);
     let (window_number, window_ids) = session.advance_auto_compact_window().await;
     rollout_items.push(RolloutItem::Compacted(Box::new(CompactedItem {
@@ -13438,9 +13376,9 @@ async fn sample_rollout(
         guardian_history: None,
         mcp_resource_origins: None,
         window_number: Some(window_number),
-        first_window_id: Some(window_ids.first_window_id.to_string()),
-        previous_window_id: window_ids.previous_window_id.map(|id| id.to_string()),
-        window_id: Some(window_ids.window_id.to_string()),
+        first_window_id: Some(window_ids.first_window_id),
+        previous_window_id: window_ids.previous_window_id,
+        window_id: Some(window_ids.window_id),
         compaction_response_id: None,
         latest_token_usage_record: None,
         resume_metadata: None,
@@ -13461,9 +13399,7 @@ async fn sample_rollout(
     rollout_items.push(RolloutItem::ResponseItem(assistant2.clone().into()));
 
     let summary2 = "summary two";
-    let snapshot2 = raw_history_items(&live_history);
-    let user_messages2 = collect_user_messages(&snapshot2);
-    let rebuilt2 = compact::build_compacted_history(Vec::new(), &user_messages2, summary2);
+    let rebuilt2 = compact::build_compacted_history(&live_history, summary2);
     live_history.replace_annotated(rebuilt2);
     let (window_number, window_ids) = session.advance_auto_compact_window().await;
     rollout_items.push(RolloutItem::Compacted(Box::new(CompactedItem {
@@ -13473,9 +13409,9 @@ async fn sample_rollout(
         guardian_history: None,
         mcp_resource_origins: None,
         window_number: Some(window_number),
-        first_window_id: Some(window_ids.first_window_id.to_string()),
-        previous_window_id: window_ids.previous_window_id.map(|id| id.to_string()),
-        window_id: Some(window_ids.window_id.to_string()),
+        first_window_id: Some(window_ids.first_window_id),
+        previous_window_id: window_ids.previous_window_id,
+        window_id: Some(window_ids.window_id),
         compaction_response_id: None,
         latest_token_usage_record: None,
         resume_metadata: None,
@@ -13652,6 +13588,38 @@ async fn session_start_hooks_require_project_trust_without_config_toml() -> std:
         }
     }
 
+    Ok(())
+}
+
+#[tokio::test]
+async fn mcp_refresh_rejects_clearing_apps_that_exposes_invalid_user_config() -> anyhow::Result<()>
+{
+    let session = make_session_with_config(|config| {
+        let user_apps = toml::toml! {
+            apps.calendar.enabled = "false"
+            apps.drive.enabled = false
+        };
+        config.config_layer_stack = config
+            .config_layer_stack
+            .with_user_config(&config.codex_home.join(CONFIG_TOML_FILE), user_apps.into())
+            .unwrap()
+            .with_session_apps(toml::toml! { calendar.enabled = false }.into())
+            .unwrap();
+    })
+    .await?;
+    let current = session.get_config().await;
+    let mut next = current.as_ref().clone();
+    next.config_layer_stack = next
+        .config_layer_stack
+        .with_session_apps(toml::Table::new().into())?;
+
+    assert_eq!(
+        session.refresh_mcp_config(current, next).await,
+        crate::ConfigRefreshOutcome::Rejected
+    );
+    let config = session.get_config().await;
+    let policy = codex_connectors::AppToolPolicyEvaluator::new(&config.config_layer_stack);
+    assert!(!policy.app_enabled("drive"));
     Ok(())
 }
 

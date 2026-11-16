@@ -4,11 +4,14 @@
 use crate::AppServerEvent;
 use crate::RequestResult;
 use crate::TypedRequestError;
+use crate::cloud_backend::CloudTitleClient;
 use codex_app_server_protocol::ClientNotification;
 use codex_app_server_protocol::ClientRequest;
 use codex_app_server_protocol::JSONRPCErrorError;
+use codex_app_server_protocol::ModelListParams;
 use codex_app_server_protocol::RequestId;
 use codex_app_server_protocol::Result as JsonRpcResult;
+use codex_app_server_protocol::ThreadSetNameParams;
 use codex_app_server_protocol::Turn;
 use codex_app_server_protocol::TurnStartParams;
 use std::collections::HashMap;
@@ -24,6 +27,14 @@ use tokio::sync::oneshot;
 /// Unsupported operations must return an explicit error; they must not claim success.
 pub enum CloudOperation {
     Request(Box<ClientRequest>),
+    /// Opens a provisional attachment and serves its initial history on a scoped channel.
+    PrepareThreadResume {
+        request_id: RequestId,
+        params: Box<codex_app_server_protocol::ThreadResumeParams>,
+        history: mpsc::Receiver<CloudCommand>,
+    },
+    /// Sent on the scoped channel after the caller has prepared the replacement view.
+    CommitPreparedResume,
     /// Host project metadata stays on the private transport, outside the app-server wire.
     StartProjectThread {
         request_id: RequestId,
@@ -31,6 +42,8 @@ pub enum CloudOperation {
         project: codex_cloud_client::ProjectEnvironment,
     },
     SubmitUserMessage(Box<TurnStartParams>),
+    /// Apply the result of a name write that already succeeded outside the command queue.
+    ThreadNameSaved(ThreadSetNameParams),
     Notify(ClientNotification),
     Resolve {
         request_id: RequestId,
@@ -59,9 +72,21 @@ pub struct CloudCommand {
     pub response: oneshot::Sender<io::Result<RequestResult>>,
 }
 
+#[derive(Clone, Default)]
+pub(super) enum IdleReconnect {
+    #[default]
+    Inactive,
+    Offered(Arc<str>),
+    Opening(Arc<str>),
+    Connected(Arc<str>),
+}
+
 #[derive(Clone)]
 pub struct CloudRequestHandle {
+    pub(super) reconnect: tokio::sync::watch::Sender<IdleReconnect>,
     commands: mpsc::Sender<CloudCommand>,
+    native: Option<Arc<codex_cloud_client::Client>>,
+    title_client: Option<Arc<CloudTitleClient>>,
 }
 
 /// Tracks only losses queued for delivery. The worker remains the sole owner
@@ -127,12 +152,29 @@ impl CloudClient {
         mpsc::Receiver<CloudCommand>,
         mpsc::UnboundedSender<AppServerEvent>,
     ) {
+        Self::channel_with_native(capacity, /*native*/ None, /*title_client*/ None)
+    }
+
+    pub(super) fn channel_with_native(
+        capacity: usize,
+        native: Option<codex_cloud_client::Client>,
+        title_client: Option<CloudTitleClient>,
+    ) -> (
+        Self,
+        mpsc::Receiver<CloudCommand>,
+        mpsc::UnboundedSender<AppServerEvent>,
+    ) {
         let (commands, receiver) = mpsc::channel(capacity.max(1));
         let (events, event_receiver) = mpsc::unbounded_channel();
         (
             Self {
                 stream_losses: CloudStreamLosses::default(),
-                handle: CloudRequestHandle { commands },
+                handle: CloudRequestHandle {
+                    commands,
+                    reconnect: Default::default(),
+                    native: native.map(Arc::new),
+                    title_client: title_client.map(Arc::new),
+                },
                 events: event_receiver,
             },
             receiver,
@@ -148,6 +190,17 @@ impl CloudClient {
         while let Some(event) = self.events.recv().await {
             if let AppServerEvent::ThreadStreamDisconnected(error) = &event
                 && !self.stream_losses.should_deliver(&error.thread_id)
+            {
+                continue;
+            }
+            if let AppServerEvent::ThreadStreamReconnected(id) = &event
+                && !self.handle.reconnect.send_if_modified(|state| {
+                    if matches!(state, IdleReconnect::Connected(root) if root.as_ref() == id) {
+                        *state = IdleReconnect::Inactive;
+                        return true;
+                    }
+                    false
+                })
             {
                 continue;
             }
@@ -191,6 +244,101 @@ impl CloudClient {
 }
 
 impl CloudRequestHandle {
+    /// Generate metadata with Cloud's own account, outside its conversation command queue.
+    pub async fn generate_thread_title(
+        &self,
+        model: &str,
+        effort: Option<codex_protocol::openai_models::ReasoningEffort>,
+        prompt: String,
+        schema: serde_json::Value,
+    ) -> color_eyre::Result<String> {
+        let client = self
+            .title_client
+            .as_ref()
+            .ok_or_else(|| io::Error::other("Cloud title generation is unavailable"))?;
+        client.generate(model, effort, prompt, schema).await
+    }
+
+    /// Read the saved title even when another Cloud conversation owns the attachment.
+    pub async fn read_native_thread_name(
+        &self,
+        thread_id: &str,
+    ) -> Option<Result<Option<String>, codex_cloud_client::Error>> {
+        Some(self.native.as_ref()?.read_thread_name(thread_id).await)
+    }
+
+    /// Save an automatic name without occupying the conversation command queue.
+    pub async fn save_native_thread_name(
+        &self,
+        params: ThreadSetNameParams,
+    ) -> Option<color_eyre::Result<()>> {
+        let client = self.native.as_ref()?;
+        Some(
+            async {
+                client
+                    .set_thread_name(&params.thread_id, &params.name)
+                    .await?;
+                self.unit(CloudOperation::ThreadNameSaved(params)).await?;
+                Ok(())
+            }
+            .await,
+        )
+    }
+
+    /// Accept a quiet Attach only for the conversation displayed by the caller.
+    pub fn reconnect_idle_thread(&self, thread_id: &str) -> bool {
+        self.reconnect.send_if_modified(|state| {
+            if let IdleReconnect::Offered(root) = state
+                && root.as_ref() == thread_id
+            {
+                *state = IdleReconnect::Opening(Arc::clone(root));
+                return true;
+            }
+            false
+        })
+    }
+
+    /// Whether a completed model read still belongs to the bound Cloud account.
+    pub fn model_catalog_is_current(&self) -> bool {
+        self.native
+            .as_ref()
+            .is_none_or(|catalog| catalog.model_catalog_is_current())
+    }
+
+    async fn model_list(
+        catalog: &codex_cloud_client::Client,
+        params: &ModelListParams,
+    ) -> RequestResult {
+        if params.model_provider.is_some() {
+            return Err(JSONRPCErrorError {
+                code: -32602,
+                message: "Cloud model discovery uses the server's model provider.".into(),
+                data: None,
+            });
+        }
+        let result = async {
+            let body = catalog
+                .list_models(
+                    params.cursor.as_deref(),
+                    params.limit,
+                    params.include_hidden,
+                )
+                .await
+                .map_err(|error| error.to_string())?;
+            if !catalog.model_catalog_is_current() {
+                return Err("Cloud model catalog account changed.".into());
+            }
+            serde_json::from_slice(&body)
+                .map_err(|_| "Invalid Cloud model catalog response.".into())
+        }
+        .await;
+        result.map_err(|message| JSONRPCErrorError {
+            code: -32000,
+            message,
+            data: None,
+        })
+    }
+
     pub(crate) async fn start_project_thread(
         &self,
         request_id: RequestId,
@@ -215,6 +363,39 @@ impl CloudRequestHandle {
             .send(CloudOperation::SubmitUserMessage(Box::new(params)))
             .await;
         crate::decode_typed_response("cloud/submitUserMessage", response)
+    }
+
+    /// Returns the activation snapshot and a handle restricted to this resume's history.
+    /// Dropping the scoped handle without committing discards the new attachment.
+    pub async fn prepare_thread_resume(
+        &self,
+        request_id: RequestId,
+        params: codex_app_server_protocol::ThreadResumeParams,
+    ) -> Result<(codex_app_server_protocol::ThreadResumeResponse, Self), TypedRequestError> {
+        let (commands, history) = mpsc::channel(/*capacity*/ 1);
+        let response = self
+            .send(CloudOperation::PrepareThreadResume {
+                request_id,
+                params: Box::new(params),
+                history,
+            })
+            .await;
+        let snapshot = crate::decode_typed_response("thread/resume", response)?;
+        Ok((
+            snapshot,
+            Self {
+                commands,
+                reconnect: self.reconnect.clone(),
+                native: None,
+                title_client: None,
+            },
+        ))
+    }
+
+    /// Installs the prepared attachment on the worker before its next ordinary command.
+    pub async fn commit_prepared_resume(&self) -> Result<(), TypedRequestError> {
+        let response = self.send(CloudOperation::CommitPreparedResume).await;
+        crate::decode_typed_response("thread/resume", response)
     }
 
     async fn send(&self, operation: CloudOperation) -> io::Result<RequestResult> {
@@ -242,6 +423,11 @@ impl CloudRequestHandle {
     }
 
     pub(crate) async fn request(&self, request: ClientRequest) -> io::Result<RequestResult> {
+        // Catalog reads must not occupy the serialized send and attachment lane.
+        if let (Some(catalog), ClientRequest::ModelList { params, .. }) = (&self.native, &request) {
+            // Keep the catalog HTTP state out of the shared request future.
+            return Ok(Box::pin(Self::model_list(catalog, params)).await);
+        }
         self.send(CloudOperation::Request(Box::new(request))).await
     }
 

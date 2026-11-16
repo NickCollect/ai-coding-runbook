@@ -31,15 +31,16 @@ pub use denial::is_likely_executor_managed_sandbox_denied;
 pub use denial::is_likely_sandbox_denied;
 pub use linux_pid_namespace::LinuxSandboxPidNamespace;
 pub use manager::SandboxCommand;
-pub use manager::SandboxDirectSpawnTransformRequest;
 pub use manager::SandboxExecRequest;
 pub use manager::SandboxManager;
+pub use manager::SandboxSelection;
 pub use manager::SandboxTransformError;
 pub use manager::SandboxTransformRequest;
 pub use manager::SandboxType;
 pub use manager::SandboxablePreference;
 pub use manager::compatibility_sandbox_policy_for_permission_profile;
 pub use manager::get_platform_sandbox;
+pub use manager::launch::WrappedSandboxCommand;
 pub use manager::with_managed_mitm_ca_readable_root;
 pub use sandbox_integrity::FileContentsChecker;
 pub use sandbox_integrity::IntegrityFinding;
@@ -78,6 +79,9 @@ impl From<SandboxTransformError> for CodexErr {
             | error @ SandboxTransformError::InvalidCommandCwd { .. }
             | error @ SandboxTransformError::InvalidSandboxPolicyCwd { .. } => {
                 CodexErr::InvalidRequest(error.to_string())
+            }
+            error @ SandboxTransformError::SandboxUnavailable => {
+                CodexErr::UnsupportedOperation(error.to_string())
             }
             SandboxTransformError::MissingLinuxSandboxExecutable => {
                 CodexErr::LandlockSandboxExecutableNotProvided

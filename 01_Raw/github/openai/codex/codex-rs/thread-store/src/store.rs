@@ -125,10 +125,31 @@ impl PersistContext {
     }
 }
 
+/// A saved Daybreak choice staged for a thread before its stored row is materialized.
+pub struct PendingDaybreakPreference(Option<bool>);
+
+impl PendingDaybreakPreference {
+    /// Read staging before the stored row: materialization can consume the staged metadata.
+    pub async fn read(store: &dyn ThreadStore, thread_id: ThreadId) -> ThreadStoreResult<Self> {
+        let pending = store.read_pending_thread_metadata(thread_id).await?;
+        Ok(Self(pending.and_then(|patch| patch.daybreak_enabled)))
+    }
+
+    /// A stored choice, including explicit Off, takes precedence over the staged snapshot.
+    pub fn resolve(&self, stored: Option<bool>) -> Option<bool> {
+        stored.or(self.0)
+    }
+}
+
 /// Storage-neutral thread persistence boundary.
 pub trait ThreadStore: Any + Send + Sync {
     /// Return this store as [`Any`] for implementation-owned escape hatches.
     fn as_any(&self) -> &dyn Any;
+
+    /// Returns the authority for session aliases when this backend supports them.
+    fn model_ids(&self) -> Option<std::sync::Arc<dyn codex_state::SessionModelIdStore>> {
+        None
+    }
 
     /// Returns the history mode to use when history does not carry a persisted mode.
     ///
@@ -526,6 +547,11 @@ pub trait ThreadStore: Any + Send + Sync {
         })
     }
 
+    /// Whether this live thread writes canonical realtime frames and handoff receipts.
+    fn realtime_frames_enabled(&self, _thread_id: ThreadId) -> ThreadStoreFuture<'_, bool> {
+        Box::pin(async { Ok(false) })
+    }
+
     /// Whether paginated threads can hydrate durable history through turn and item lists.
     fn supports_paginated_history_lists(&self) -> bool {
         false
@@ -569,6 +595,22 @@ pub trait ThreadStore: Any + Send + Sync {
         Box::pin(async {
             Err(ThreadStoreError::Unsupported {
                 operation: "list_items",
+            })
+        })
+    }
+
+    /// Reads a bounded immutable snapshot of the independent realtime stream.
+    fn list_realtime(
+        &self,
+        _params: crate::ListRealtimeParams,
+    ) -> ThreadStoreFuture<'_, crate::RealtimePage> {
+        Box::pin(async {
+            Ok(crate::RealtimePage {
+                data: Vec::new(),
+                next_cursor: None,
+                snapshot_end: 0,
+                projected_through_item_index: 0,
+                coverage: codex_app_server_protocol::ThreadRealtimeCoverage::Unsupported,
             })
         })
     }

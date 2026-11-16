@@ -17,17 +17,37 @@ pub(super) async fn try_submit_user_turn(
 ) -> Result<bool> {
     let AppCommand::UserTurn {
         turn_trigger,
+        items,
         cloud_submission,
         client_user_message_id,
-        model,
         ..
     } = op
     else {
         return Ok(false);
     };
+    let intent = if *turn_trigger == "user" {
+        match (*cloud_submission, app_server.thread_params_mode()) {
+            (
+                CloudSubmissionIntent::QuestionAnswer { during_turn },
+                crate::ThreadParamsMode::Cloud,
+            ) => {
+                if during_turn {
+                    CloudSubmissionIntent::StartOrSteer
+                } else {
+                    CloudSubmissionIntent::StartIfIdle
+                }
+            }
+            (CloudSubmissionIntent::QuestionAnswer { .. }, _) => {
+                CloudSubmissionIntent::UseKnownTurn
+            }
+            (intent, _) => intent,
+        }
+    } else {
+        CloudSubmissionIntent::UseKnownTurn
+    };
     let original_active = app.active_turn_id_for_thread(thread_id).await;
     let mut active = original_active.clone();
-    let preflight = || {
+    let preflight = |model: &str| {
         let enabled = app.chat_widget.daybreak_enabled
             && !app.chat_widget.side_conversation_active()
             && !app.side_threads.contains_key(&thread_id);
@@ -40,7 +60,14 @@ pub(super) async fn try_submit_user_turn(
     };
     let start_settings = || turn_start_settings(app, thread_id, op);
     let result = app_server
-        .submit_user_message(thread_id, op, &mut active, preflight, start_settings)
+        .submit_user_message(
+            thread_id,
+            op,
+            intent,
+            &mut active,
+            preflight,
+            start_settings,
+        )
         .await;
     if active != original_active
         && let Some(channel) = app.thread_event_channels.get(&thread_id)
@@ -55,8 +82,7 @@ pub(super) async fn try_submit_user_turn(
         }
     }
 
-    let ordinary =
-        *turn_trigger == "user" && *cloud_submission != CloudSubmissionIntent::UseKnownTurn;
+    let ordinary = intent != CloudSubmissionIntent::UseKnownTurn;
     if let Err(UserMessageSubmissionFailure::Unhandled(error)) = result {
         return Err(error);
     }
@@ -68,7 +94,32 @@ pub(super) async fn try_submit_user_turn(
     }
 
     match result {
-        Ok(admission) => {
+        Ok((admission, selection)) => {
+            if *turn_trigger == "user"
+                && !items.is_empty()
+                && matches!(admission, UserMessageAdmission::StartResponse(_))
+                && let Some(fork_name) = app_server.side_chat_fork_names.remove(&thread_id)
+                && let Some(text) = super::thread_title::user_message_text(items)
+            {
+                app.generate_thread_title(
+                    app_server,
+                    thread_id,
+                    ThreadTitleDestination::Automatic,
+                    &text,
+                    fork_name,
+                );
+            }
+            if let Some(selection) = selection {
+                if selection.model.is_some() {
+                    app.chat_widget.cloud_picker_selection = selection.model;
+                }
+                let service_tier = selection
+                    .service_tier
+                    .or_else(|| app.chat_widget.configured_service_tier());
+                app.chat_widget.set_service_tier(service_tier);
+                app.sync_active_thread_service_tier_to_cached_session()
+                    .await;
+            }
             if !matches!(&admission, UserMessageAdmission::Queued(_)) {
                 crate::startup_recovery::acknowledged(client_user_message_id);
             }

@@ -93,7 +93,7 @@ impl SlashCommand {
     pub fn description(self) -> &'static str {
         match self {
             SlashCommand::Config => "configure Codex preferences",
-            SlashCommand::Feedback => "send logs to maintainers",
+            SlashCommand::Feedback => "send logs to maintainers or save a ZIP",
             SlashCommand::New => "start a new chat during a conversation",
             SlashCommand::Init => "create an AGENTS.md file with instructions for Codex",
             SlashCommand::Compact => "summarize conversation to prevent hitting the context limit",
@@ -151,7 +151,9 @@ impl SlashCommand {
             SlashCommand::Experimental => "toggle experimental features",
             SlashCommand::AutoReview => "approve one retry of a recent auto-review denial",
             SlashCommand::Memories => "configure memory use and generation",
-            SlashCommand::Mcp => "list MCP tools; use /mcp verbose or /mcp login <name>",
+            SlashCommand::Mcp => {
+                "list MCP tools; /mcp verbose or /mcp login <name> [--environment <id>]"
+            }
             SlashCommand::Apps => "manage apps",
             SlashCommand::Plugins => "browse plugins",
             SlashCommand::Logout => "log out of Codex",

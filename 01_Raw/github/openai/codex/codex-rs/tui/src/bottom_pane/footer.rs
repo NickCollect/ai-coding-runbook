@@ -21,26 +21,9 @@
 //!   instruction. In that state, the footer may render the configured status line, the active
 //!   agent label, side-conversation state, or some combination of those.
 //!
-//! Single-line collapse overview:
-//! 1. The composer decides the current `FooterMode` and hint flags, then calls
-//!    `single_line_footer_layout` for the base single-line modes.
-//! 2. `single_line_footer_layout` applies the width-based fallback rules:
-//!    (If this description is hard to follow, just try it out by resizing
-//!    your terminal width; these rules were built out of trial and error.)
-//!    - Start with the fullest left-side hint plus the right-side context.
-//!    - When the queue hint is active, prefer keeping that queue hint visible,
-//!      even if it means dropping the right-side context earlier; the queue
-//!      hint may also be shortened before it is removed.
-//!    - When the queue hint is not active but the mode cycle hint is applicable,
-//!      drop "? for shortcuts" before dropping "(shift+tab to cycle)".
-//!    - If "(shift+tab to cycle)" cannot fit, also hide the right-side
-//!      context to avoid too many state transitions in quick succession.
-//!    - Finally, try a mode-only line (with and without context), and fall
-//!      back to no left-side footer if nothing can fit.
-//! 3. The composer renders the chosen line, the default `FooterProps` mapping, or no left content.
-pub(crate) mod footer_content;
+//! The composer fits ordinary navigation, modes, actions, and warnings in `chat_composer::passive_hints`.
 
-use self::footer_content::FooterContent;
+use super::StatusLine;
 use super::shortcut_overlay;
 use super::status_line_style::STATUS_LINE_SEPARATOR;
 use crate::key_hint;
@@ -79,7 +62,7 @@ pub(crate) struct FooterProps {
     ///
     /// This is rendered when `mode` is `FooterMode::QuitShortcutReminder`.
     pub(crate) quit_shortcut_key: KeyBinding,
-    pub(crate) status_line_value: Option<FooterContent>,
+    pub(crate) status_line_value: Option<StatusLine>,
     pub(crate) status_line_enabled: bool,
     pub(crate) key_hints: FooterKeyHints,
     /// Active thread label shown when the footer is rendering contextual information instead of an
@@ -292,6 +275,7 @@ pub(crate) fn render_footer_from_props(
     .render(area, buf);
 }
 
+#[cfg(test)]
 pub(crate) fn left_fits(area: Rect, left_width: u16) -> bool {
     let max_width = area.width.saturating_sub(FOOTER_INDENT_COLS as u16);
     left_width <= max_width
@@ -302,6 +286,7 @@ enum SummaryHintKind {
     None,
     Shortcuts,
     QueueMessage,
+    #[cfg(test)]
     QueueShort,
 }
 
@@ -338,6 +323,7 @@ fn left_side_line(
                 line.push_span(" to queue message".set_style(secondary_text_style()));
             }
         }
+        #[cfg(test)]
         SummaryHintKind::QueueShort => {
             if let Some(key) = key_hints.queue {
                 line.extend(key.spans());
@@ -360,12 +346,14 @@ fn left_side_line(
     line
 }
 
+#[cfg(test)]
 pub(crate) enum SummaryLeft {
     Default,
     Custom(Line<'static>),
     None,
 }
 
+#[cfg(test)]
 /// Compute the single-line footer layout and whether the right-side context
 /// indicator can be shown alongside it.
 pub(crate) fn single_line_footer_layout(
@@ -723,15 +711,6 @@ pub(crate) fn render_context_right(area: Rect, buf: &mut Buffer, line: &Line<'st
     }
 }
 
-pub(crate) fn render_unfocused_status(text: String, area: Rect, buf: &mut Buffer) {
-    let area = inset_footer_hint_area(area);
-    crate::line_truncation::truncate_line_with_ellipsis_if_overflow(
-        text.dim().into(),
-        usize::from(area.width),
-    )
-    .render(area, buf);
-}
-
 pub(crate) fn inset_footer_hint_area(mut area: Rect) -> Rect {
     if area.width > 2 {
         area.x += 2;
@@ -752,10 +731,7 @@ pub(crate) fn render_footer_hint_items(area: Rect, buf: &mut Buffer, items: &[(S
 ///
 /// This is the canonical FooterMode-to-text mapping. It powers transient,
 /// instructional states (shortcut overlay, Esc hint, quit reminder) and also
-/// the default rendering for base states when collapse is not applied (or when
-/// `single_line_footer_layout` returns `SummaryLeft::Default`). Collapse and
-/// fallback decisions live in `single_line_footer_layout`; this function only
-/// formats the chosen/default content.
+/// the default text for base states. The caller owns placement and collapse.
 fn footer_from_props_lines(
     props: &FooterProps,
     collaboration_mode_indicator: Option<CollaborationModeIndicator>,
@@ -818,7 +794,7 @@ fn footer_from_props_lines(
 /// The returned line may contain the configured status line, the currently viewed agent label, or
 /// both combined. Active instructional states such as quit reminders, shortcut overlays, and queue
 /// prompts deliberately return `None` so those call-to-action hints stay visible.
-pub(crate) fn passive_footer_status_line(props: &FooterProps) -> Option<FooterContent> {
+pub(crate) fn passive_footer_status_line(props: &FooterProps) -> Option<StatusLine> {
     if !props.mode.shows_passive_line(props.is_task_running) {
         return None;
     }
@@ -827,11 +803,13 @@ pub(crate) fn passive_footer_status_line(props: &FooterProps) -> Option<FooterCo
         .status_line_value
         .as_ref()
         .filter(|_| props.status_line_enabled);
-    let mut line = match status {
-        Some(FooterContent::Line(line)) => HyperlinkLine::from(line.clone()),
-        Some(FooterContent::HyperlinkLine(line)) => line.clone(),
-        Some(content @ FooterContent::Extension { .. }) => return Some(content.clone()),
-        None => HyperlinkLine::default(),
+    let mut line = if let Some(status) = status {
+        let Some(line) = status.as_native() else {
+            return Some(status.clone());
+        };
+        line.clone()
+    } else {
+        HyperlinkLine::default()
     };
     let suffix = passive_footer_suffix(props, status.is_some());
     if status.is_none() && suffix.spans.is_empty() {
@@ -842,7 +820,7 @@ pub(crate) fn passive_footer_status_line(props: &FooterProps) -> Option<FooterCo
             .push_span(STATUS_LINE_SEPARATOR.set_style(secondary_text_style()));
     }
     line.line.spans.extend(suffix.spans);
-    Some(FooterContent::HyperlinkLine(line))
+    Some(line.into())
 }
 
 fn passive_footer_suffix(props: &FooterProps, has_status: bool) -> Line<'static> {
@@ -875,15 +853,6 @@ impl FooterMode {
             | Self::EscHint => false,
         }
     }
-}
-
-/// Whether callers should reserve the dedicated status-line layout for a contextual footer row.
-///
-/// The dedicated layout exists for the configurable `/statusline` row. An agent label by itself
-/// can be rendered by the standard footer flow, so this only becomes `true` when the status line
-/// feature is enabled and the current mode allows contextual footer content.
-pub(crate) fn uses_passive_footer_status_layout(props: &FooterProps) -> bool {
-    props.status_line_enabled && props.mode.shows_passive_line(props.is_task_running)
 }
 
 pub(crate) fn footer_line_width(
@@ -1070,10 +1039,16 @@ mod tests {
                     | FooterMode::ShortcutOverlay
                     | FooterMode::EscHint => false,
                 };
-                let status_line_active = uses_passive_footer_status_layout(props);
+                let status_line_active = props.status_line_enabled
+                    && props.mode.shows_passive_line(props.is_task_running);
                 let passive_status_line = if status_line_active {
-                    passive_footer_status_line(props)
-                        .map(|content| content.into_hyperlink_line().line)
+                    passive_footer_status_line(props).map(|status| {
+                        status
+                            .as_native()
+                            .expect("native footer fixture")
+                            .line
+                            .clone()
+                    })
                 } else {
                     None
                 };

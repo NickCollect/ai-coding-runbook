@@ -54,7 +54,6 @@ use codex_protocol::config_types::WebSearchToolConfig;
 use codex_protocol::config_types::WindowsSandboxLevel;
 use codex_protocol::models::PermissionProfile;
 use codex_protocol::openai_models::ReasoningEffort;
-use codex_protocol::permissions::NetworkSandboxPolicy;
 use codex_protocol::protocol::AskForApproval;
 use codex_utils_absolute_path::AbsolutePathBuf;
 use codex_utils_path_uri::Platform;
@@ -422,6 +421,9 @@ pub struct ConfigToml {
     /// Optional product SKU forwarded on host-owned Codex Apps MCP requests.
     pub apps_mcp_product_sku: Option<String>,
 
+    /// Controls how Codex processes model responses.
+    pub responses: Option<ResponsesToml>,
+
     /// Bounded, product-owned metadata attached to every Responses API request.
     pub responses_api_metadata: Option<BTreeMap<String, String>>,
 
@@ -484,6 +486,9 @@ pub struct ConfigToml {
 
     /// Additional discoverable tools that can be suggested for installation.
     pub tool_suggest: Option<ToolSuggestConfig>,
+
+    /// Code Mode session settings.
+    pub code_mode: Option<CodeModeToml>,
 
     /// Agent-related settings (thread limits, etc.).
     pub agents: Option<AgentsToml>,
@@ -591,10 +596,6 @@ pub struct AutoReviewToml {
     pub circuit_break_action: Option<CircuitBreakAction>,
     /// Additional policy instructions inserted into the guardian prompt.
     pub policy: Option<String>,
-    /// Additional policy text inserted into the Guardian template's `{{ extra_policy }}` slot.
-    pub extra_policy: Option<String>,
-    /// Experimental full Guardian prompt template containing the tenant policy placeholder.
-    pub experimental_policy_template: Option<String>,
     /// Experimental replacement for the history-retrieval instructions when history tools
     /// and Apps are enabled. Omitted or blank values use the built-in prompt.
     pub experimental_conversation_history_prompt: Option<String>,
@@ -715,6 +716,31 @@ pub struct ToolsToml {
     pub web_search: Option<WebSearchToolConfig>,
     pub experimental_request_user_input: Option<ExperimentalRequestUserInput>,
     pub update_plan: Option<UpdatePlanToolConfig>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, Default, PartialEq, Eq, JsonSchema)]
+#[schemars(deny_unknown_fields)]
+pub struct CodeModeToml {
+    /// Idle seconds between gRPC stream heartbeats. Zero (the default) disables them.
+    pub heartbeat_interval_s: Option<u32>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, Default, PartialEq, Eq, JsonSchema)]
+#[schemars(deny_unknown_fields)]
+pub struct ResponsesToml {
+    /// When to process response items, including text and tool calls. Defaults to `streaming`.
+    pub process_mode: Option<ResponseProcessMode>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, Copy, Default, PartialEq, Eq, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum ResponseProcessMode {
+    /// Process items as they arrive. A tool can start before its response is complete.
+    #[default]
+    Streaming,
+    /// Process buffered items in order after the response completes, synchronous post-hooks
+    /// finish, and any budget charges are posted.
+    AfterCompleteResponse,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq, JsonSchema)]
@@ -881,37 +907,12 @@ impl ConfigToml {
                     .map(|_| SandboxMode::WorkspaceWrite)
             })
             .unwrap_or_default();
-        let effective_sandbox_mode = effective_sandbox_mode(
+        let permission_profile = crate::translate_legacy_permissions(
             resolved_sandbox_mode,
+            self.sandbox_workspace_write.as_ref(),
             Platform::native(),
             windows_sandbox_level,
         );
-
-        let permission_profile = match effective_sandbox_mode {
-            SandboxMode::ReadOnly => PermissionProfile::read_only(),
-            SandboxMode::WorkspaceWrite => match self.sandbox_workspace_write.as_ref() {
-                Some(SandboxWorkspaceWrite {
-                    writable_roots,
-                    network_access,
-                    exclude_tmpdir_env_var,
-                    exclude_slash_tmp,
-                }) => {
-                    let network_policy = if *network_access {
-                        NetworkSandboxPolicy::Enabled
-                    } else {
-                        NetworkSandboxPolicy::Restricted
-                    };
-                    PermissionProfile::workspace_write_with(
-                        writable_roots,
-                        network_policy,
-                        *exclude_tmpdir_env_var,
-                        *exclude_slash_tmp,
-                    )
-                }
-                None => PermissionProfile::workspace_write(),
-            },
-            SandboxMode::DangerFullAccess => PermissionProfile::Disabled,
-        };
         if configured_sandbox_mode.is_none()
             && let Some(constraint) = permission_profile_constraint
             && let Err(err) = constraint.can_set(&permission_profile)

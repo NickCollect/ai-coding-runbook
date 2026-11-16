@@ -1,6 +1,12 @@
 //! Route composer input and distinguish admission, rejection, and uncertainty.
 //! A duplicate or an unconfirmed response must never trigger an automatic resend.
 
+use std::collections::HashMap;
+use std::sync::Arc;
+use std::sync::Mutex;
+use std::sync::MutexGuard;
+use std::sync::PoisonError;
+
 use codex_app_server_client::AppServerRequestHandle;
 use codex_app_server_client::CloudUserMessageReceipt;
 use codex_app_server_client::TypedRequestError;
@@ -10,6 +16,9 @@ use codex_app_server_protocol::CodexErrorInfo as AppServerCodexErrorInfo;
 use codex_app_server_protocol::TurnError as AppServerTurnError;
 use codex_app_server_protocol::TurnStartParams;
 use codex_protocol::ThreadId;
+use codex_protocol::config_types::SERVICE_TIER_DEFAULT_REQUEST_VALUE;
+use codex_protocol::openai_models::ModelPreset;
+use codex_protocol::openai_models::ReasoningEffort;
 use codex_protocol::turn_input::CyberAccessProgram;
 use codex_utils_absolute_path::AbsolutePathBuf;
 use color_eyre::eyre::Report;
@@ -76,18 +85,120 @@ impl UserMessageSubmissionFailure {
     }
 }
 
+#[derive(Clone)]
+pub(crate) struct CloudModelSelection {
+    pub(crate) model: String,
+    pub(crate) effort: Option<ReasoningEffort>,
+}
+
+#[derive(Clone, Default)]
+pub(crate) struct CloudTurnSettings {
+    pub(crate) model: Option<CloudModelSelection>,
+    pub(crate) service_tier: Option<String>,
+}
+
+impl CloudTurnSettings {
+    pub(super) fn apply(&self, params: &mut TurnStartParams) {
+        if let Some(model) = &self.model {
+            params.model = Some(model.model.clone());
+            params.effort.clone_from(&model.effort);
+        }
+        params.service_tier = self.service_tier.clone().map(Some);
+    }
+}
+
+/// Pending choices are scoped to one Cloud backend and keyed by conversation.
+#[derive(Clone, Default)]
+pub(crate) struct PendingCloudTurnSettings(Arc<Mutex<HashMap<ThreadId, CloudTurnSettings>>>);
+
+impl PendingCloudTurnSettings {
+    fn lock(&self) -> MutexGuard<'_, HashMap<ThreadId, CloudTurnSettings>> {
+        self.0.lock().unwrap_or_else(PoisonError::into_inner)
+    }
+
+    pub(crate) fn model(&self, thread_id: ThreadId) -> Option<String> {
+        self.lock()
+            .get(&thread_id)?
+            .model
+            .as_ref()
+            .map(|selection| selection.model.clone())
+    }
+}
+
+fn same_cloud_speed(first: &str, second: &str) -> bool {
+    first == second || matches!((first, second), ("fast", "priority") | ("priority", "fast"))
+}
+
 impl AppServerSession {
+    pub(crate) fn pending_cloud_turn_settings(&self) -> Option<PendingCloudTurnSettings> {
+        (self.thread_params_mode() == ThreadParamsMode::Cloud)
+            .then(|| self.cloud_turn_settings.clone())
+    }
+
+    fn cloud_model_catalog_is_current(&self) -> bool {
+        matches!(&self.request_handle,
+            AppServerRequestHandle::Cloud(handle) if handle.model_catalog_is_current()
+        )
+    }
+
+    pub(crate) fn stage_cloud_model_selection(
+        &mut self,
+        thread_id: ThreadId,
+        preset: &ModelPreset,
+        effort: Option<ReasoningEffort>,
+    ) -> Result<Option<String>, ()> {
+        if !self.cloud_model_catalog_is_current() {
+            return Err(());
+        }
+        let mut pending = self.cloud_turn_settings.lock();
+        let settings = pending.entry(thread_id).or_default();
+        settings.model = Some(CloudModelSelection {
+            model: preset.model.clone(),
+            effort,
+        });
+        let dropped_tier = settings.service_tier.take_if(|tier| {
+            tier.as_str() != SERVICE_TIER_DEFAULT_REQUEST_VALUE
+                && !preset
+                    .service_tiers
+                    .iter()
+                    .any(|available| same_cloud_speed(&available.id, tier))
+        });
+        Ok(dropped_tier)
+    }
+
+    pub(crate) fn toggle_cloud_service_tier(
+        &mut self,
+        thread_id: ThreadId,
+        current: Option<&str>,
+        tier: String,
+    ) -> Option<String> {
+        if !self.cloud_model_catalog_is_current() {
+            return None;
+        }
+        let mut pending = self.cloud_turn_settings.lock();
+        let settings = pending.entry(thread_id).or_default();
+        let current = settings.service_tier.as_deref().or(current);
+        let selected = if current.is_some_and(|current| same_cloud_speed(current, &tier)) {
+            SERVICE_TIER_DEFAULT_REQUEST_VALUE.to_owned()
+        } else {
+            tier
+        };
+        settings.service_tier = Some(selected.clone());
+        Some(selected)
+    }
+
     pub(crate) async fn submit_user_message<'a>(
         &mut self,
         thread_id: ThreadId,
         op: &AppCommand,
+        intent: CloudSubmissionIntent,
         active_turn: &mut Option<String>,
-        preflight: impl FnOnce() -> Result<Option<CyberAccessProgram>, String>,
+        preflight: impl FnOnce(&str) -> Result<Option<CyberAccessProgram>, String>,
         start_settings: impl FnOnce() -> TurnStartSettings<'a>,
-    ) -> Result<UserMessageAdmission, UserMessageSubmissionFailure> {
+    ) -> Result<(UserMessageAdmission, Option<CloudTurnSettings>), UserMessageSubmissionFailure>
+    {
         let AppCommand::UserTurn {
             turn_trigger,
-            cloud_submission,
             client_user_message_id,
             items,
             final_output_json_schema,
@@ -101,11 +212,6 @@ impl AppServerSession {
         } = op
         else {
             unreachable!("user-message submission requires a user turn")
-        };
-        let intent = if *turn_trigger == "user" {
-            *cloud_submission
-        } else {
-            CloudSubmissionIntent::UseKnownTurn
         };
         let cloud = self.thread_params_mode() == ThreadParamsMode::Cloud;
         if (!cloud || intent == CloudSubmissionIntent::UseKnownTurn) && active_turn.is_some() {
@@ -125,11 +231,13 @@ impl AppServerSession {
                     )
                     .await
                 {
-                    Ok(response) => return Ok(UserMessageAdmission::Steered(response.turn_id)),
+                    Ok(response) => {
+                        return Ok((UserMessageAdmission::Steered(response.turn_id), None));
+                    }
                     Err(error) => error,
                 };
                 if let Some(error) = active_turn_not_steerable_turn_error(&error) {
-                    return Ok(UserMessageAdmission::Queued(error.message));
+                    return Ok((UserMessageAdmission::Queued(error.message), None));
                 }
                 match active_turn_steer_race(&error) {
                     Some(ActiveTurnSteerRace::Missing) => {
@@ -153,29 +261,54 @@ impl AppServerSession {
             }
         }
 
-        let program = preflight().map_err(UserMessageSubmissionFailure::Preflight)?;
+        let selection =
+            if cloud && *turn_trigger == "user" && intent != CloudSubmissionIntent::UseKnownTurn {
+                self.cloud_turn_settings.lock().get(&thread_id).cloned()
+            } else {
+                None
+            };
+        if selection.is_some() && !self.cloud_model_catalog_is_current() {
+            self.cloud_turn_settings.lock().remove(&thread_id);
+            return Err(UserMessageSubmissionFailure::Preflight(
+                "The Cloud account changed. Reopen the conversation before sending.".into(),
+            ));
+        }
+        let selected_model = selection
+            .as_ref()
+            .and_then(|selection| selection.model.as_ref())
+            .map_or(model.as_str(), |selection| selection.model.as_str());
+        let program = preflight(selected_model).map_err(UserMessageSubmissionFailure::Preflight)?;
+        let take_selection = |session: &mut Self| {
+            selection.as_ref()?;
+            let settings = session.cloud_turn_settings.lock().remove(&thread_id);
+            settings.filter(|_| session.cloud_model_catalog_is_current())
+        };
         if cloud
             && intent == CloudSubmissionIntent::StartOrSteer
             && let AppServerRequestHandle::Cloud(handle) = &self.request_handle
         {
-            let result = handle
-                .submit_user_message(TurnStartParams {
-                    thread_id: thread_id.to_string(),
-                    client_user_message_id: Some(client_user_message_id.clone()),
-                    input: items.clone(),
-                    output_schema: final_output_json_schema.clone(),
-                    ..Default::default()
-                })
-                .await;
-            return match result {
+            let mut params = TurnStartParams {
+                thread_id: thread_id.to_string(),
+                client_user_message_id: Some(client_user_message_id.clone()),
+                input: items.clone(),
+                output_schema: final_output_json_schema.clone(),
+                ..Default::default()
+            };
+            if let Some(selection) = &selection {
+                params.turn_trigger = Some(turn_trigger.to_string());
+                selection.apply(&mut params);
+            }
+            let result = handle.submit_user_message(params).await;
+            let admission = match result {
                 Ok(CloudUserMessageReceipt::Started(turn)) => {
                     Ok(UserMessageAdmission::Started(turn.id))
                 }
+                // A successful steer saves these settings for subsequent starts.
                 Ok(CloudUserMessageReceipt::Steered(turn)) => {
                     Ok(UserMessageAdmission::Steered(turn.id))
                 }
                 Ok(CloudUserMessageReceipt::Duplicate { .. }) => {
-                    Ok(UserMessageAdmission::Duplicate)
+                    return Ok((UserMessageAdmission::Duplicate, None));
                 }
                 // The adapter returns invalid params only for failures before admission.
                 Err(TypedRequestError::Server { source, .. })
@@ -189,7 +322,8 @@ impl AppServerSession {
                     error: error.into(),
                     reconnect: false,
                 }),
-            };
+            }?;
+            return Ok((admission, take_selection(self)));
         }
         let settings = start_settings();
         self.turn_start(
@@ -209,9 +343,13 @@ impl AppServerSession {
             collaboration_mode.clone(),
             final_output_json_schema.clone(),
             program.map(Into::into),
+            selection.as_ref(),
         )
         .await
-        .map(|response| UserMessageAdmission::StartResponse(response.turn.id))
+        .map(|response| {
+            let admission = UserMessageAdmission::StartResponse(response.turn.id);
+            (admission, take_selection(self))
+        })
         .map_err(
             |error| match UserMessageSubmissionFailure::conventional(error, intent) {
                 UserMessageSubmissionFailure::Rejected(error) => {

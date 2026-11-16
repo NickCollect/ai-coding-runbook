@@ -39,6 +39,8 @@ use codex_app_server_client::RemoteAppServerClient;
 use codex_app_server_client::RemoteAppServerConnectArgs;
 pub use codex_app_server_client::RemoteAppServerEndpoint;
 use codex_app_server_client::cloud_backend;
+pub use codex_app_server_client::resolve_remote_addr;
+pub use codex_app_server_client::resolve_remote_endpoint;
 use codex_app_server_protocol::Account as AppServerAccount;
 use codex_app_server_protocol::AskForApproval;
 use codex_app_server_protocol::ConfigWarningNotification;
@@ -97,7 +99,6 @@ use tracing::warn;
 use tracing_appender::non_blocking;
 use tracing_subscriber::EnvFilter;
 use tracing_subscriber::prelude::*;
-use url::Url;
 use uuid::Uuid;
 
 pub(crate) use codex_app_server_client::legacy_core;
@@ -130,19 +131,24 @@ mod clipboard_paste;
 mod clock_format;
 mod collaboration_modes;
 mod color;
+mod command_output;
 mod config_panel;
 mod config_update;
 mod copy_input_guard;
 pub(crate) mod custom_terminal;
 mod daybreak;
+mod device_login;
 mod experimental_features;
+mod image_decode;
 mod markdown_copy;
 mod permission_discovery;
 mod pets;
+mod realtime_call;
 mod security_setup;
 mod worktree_browser;
 pub use custom_terminal::Terminal;
 mod assistant_directives;
+mod attachment_files;
 mod auto_review_denials;
 mod cwd_prompt;
 mod debug_config;
@@ -225,6 +231,7 @@ mod startup_presentation;
 mod startup_recovery;
 mod status;
 mod status_indicator_widget;
+mod statusline_provider;
 mod streaming;
 mod style;
 mod subscription;
@@ -241,6 +248,7 @@ mod text_formatting;
 mod text_selection;
 mod theme_picker;
 mod thread_color;
+mod thread_label;
 mod thread_transcript;
 mod token_usage;
 mod tool_output;
@@ -433,93 +441,6 @@ fn remove_legacy_tui_log_file(codex_home: &Path) {
     // Shared append-only TUI logs could grow without bound. Existing processes
     // may still hold the file open, so startup cleanup is best effort.
     let _ = std::fs::remove_file(codex_home.join("log").join(TUI_LOG_FILE_NAME));
-}
-
-fn remote_addr_has_explicit_port(addr: &str, parsed: &Url) -> bool {
-    let Some(host) = parsed.host_str() else {
-        return false;
-    };
-    if parsed.port().is_some() {
-        return true;
-    }
-
-    let Some((_, rest)) = addr.split_once("://") else {
-        return false;
-    };
-    let authority_end = rest.find(['/', '?', '#']).unwrap_or(rest.len());
-    let authority = &rest[..authority_end];
-    let host_and_port = authority
-        .rsplit_once('@')
-        .map_or(authority, |(_, host_and_port)| host_and_port);
-    let explicit_default_port = match parsed.scheme() {
-        "ws" => 80,
-        "wss" => 443,
-        _ => return false,
-    };
-    let expected_host = if host.contains(':') {
-        format!("[{host}]")
-    } else {
-        host.to_string()
-    };
-    host_and_port == format!("{expected_host}:{explicit_default_port}")
-}
-
-fn websocket_url_supports_auth_token(parsed: &Url) -> bool {
-    match (parsed.scheme(), parsed.host()) {
-        ("wss", Some(_)) => true,
-        ("ws", Some(url::Host::Domain(domain))) => domain.eq_ignore_ascii_case("localhost"),
-        ("ws", Some(url::Host::Ipv4(addr))) => addr.is_loopback(),
-        ("ws", Some(url::Host::Ipv6(addr))) => addr.is_loopback(),
-        _ => false,
-    }
-}
-
-pub fn resolve_remote_addr(addr: &str) -> color_eyre::Result<RemoteAppServerEndpoint> {
-    if let Some(socket_path) = addr.strip_prefix("unix://") {
-        let socket_path = if socket_path.is_empty() {
-            let codex_home = find_codex_home().wrap_err("failed to resolve CODEX_HOME")?;
-            codex_app_server_client::app_server_control_socket_path(&codex_home)
-                .map_err(color_eyre::Report::new)?
-        } else {
-            AbsolutePathBuf::relative_to_current_dir(socket_path)
-                .map_err(color_eyre::Report::new)?
-        };
-        return Ok(RemoteAppServerEndpoint::UnixSocket { socket_path });
-    }
-
-    let parsed = match Url::parse(addr) {
-        Ok(parsed) => parsed,
-        Err(_) => {
-            color_eyre::eyre::bail!(
-                "invalid remote address `{addr}`; expected `ws://host:port`, `wss://host:port`, `unix://`, or `unix://PATH`"
-            );
-        }
-    };
-    if matches!(parsed.scheme(), "ws" | "wss")
-        && parsed.host_str().is_some()
-        && remote_addr_has_explicit_port(addr, &parsed)
-        && parsed.path() == "/"
-        && parsed.query().is_none()
-        && parsed.fragment().is_none()
-    {
-        return Ok(RemoteAppServerEndpoint::WebSocket {
-            websocket_url: parsed.to_string(),
-            auth_token: None,
-        });
-    }
-
-    color_eyre::eyre::bail!(
-        "invalid remote address `{addr}`; expected `ws://host:port`, `wss://host:port`, `unix://`, or `unix://PATH`"
-    );
-}
-
-pub fn remote_addr_supports_auth_token(endpoint: &RemoteAppServerEndpoint) -> bool {
-    match endpoint {
-        RemoteAppServerEndpoint::WebSocket { websocket_url, .. } => {
-            Url::parse(websocket_url).is_ok_and(|parsed| websocket_url_supports_auth_token(&parsed))
-        }
-        RemoteAppServerEndpoint::UnixSocket { .. } => false,
-    }
 }
 
 async fn connect_remote_app_server(
@@ -938,7 +859,9 @@ fn latest_session_lookup_params(
     lookup_mode: LatestSessionLookupMode,
 ) -> ThreadListParams {
     ThreadListParams {
+        include_attached_threads: false,
         current_account_only: true,
+        included_thread_ids: None,
         excluded_thread_ids: None,
         attached_to_thread_id: None,
         originators: None,
@@ -1209,6 +1132,7 @@ pub async fn run_main(
                 token_usage: TokenUsage::default(),
                 thread_id: None,
                 resume_hint: None,
+                archive_warnings: Vec::new(),
                 disconnect_info: None,
                 update_action: None,
                 exit_reason: ExitReason::UserRequested,
@@ -1298,6 +1222,7 @@ async fn run_ratatui_app(
                         token_usage: crate::token_usage::TokenUsage::default(),
                         thread_id: None,
                         resume_hint: None,
+                        archive_warnings: Vec::new(),
                         disconnect_info: None,
                         update_action: Some(action),
                         exit_reason: ExitReason::UserRequested,
@@ -1486,6 +1411,7 @@ async fn run_ratatui_app(
                 token_usage: crate::token_usage::TokenUsage::default(),
                 thread_id: None,
                 resume_hint: None,
+                archive_warnings: Vec::new(),
                 disconnect_info: None,
                 update_action: None,
                 exit_reason: ExitReason::UserRequested,
@@ -1619,6 +1545,7 @@ async fn run_ratatui_app(
                 token_usage: crate::token_usage::TokenUsage::default(),
                 thread_id: None,
                 resume_hint: None,
+                archive_warnings: Vec::new(),
                 disconnect_info: None,
                 update_action: None,
                 exit_reason: ExitReason::Fatal(format!(
@@ -1736,6 +1663,7 @@ async fn run_ratatui_app(
                         token_usage: crate::token_usage::TokenUsage::default(),
                         thread_id: None,
                         resume_hint: None,
+                        archive_warnings: Vec::new(),
                         disconnect_info: None,
                         update_action: None,
                         exit_reason: ExitReason::UserRequested,
@@ -1840,6 +1768,7 @@ async fn run_ratatui_app(
                     token_usage: crate::token_usage::TokenUsage::default(),
                     thread_id: None,
                     resume_hint: None,
+                    archive_warnings: Vec::new(),
                     disconnect_info: None,
                     update_action: None,
                     exit_reason: ExitReason::UserRequested,
@@ -1891,6 +1820,7 @@ async fn run_ratatui_app(
                 token_usage: crate::token_usage::TokenUsage::default(),
                 thread_id: None,
                 resume_hint: None,
+                archive_warnings: Vec::new(),
                 disconnect_info: None,
                 update_action: None,
                 exit_reason: ExitReason::UserRequested,
@@ -2219,6 +2149,35 @@ async fn run_ratatui_app(
         && (config.model_provider.is_amazon_bedrock()
             || !matches!(app_server_target, AppServerTarget::Embedded));
     let guidance_request_handle = app_server.request_handle();
+    let gateway_sign_in = async {
+        if !uses_remote_workspace
+            && let Some(prompt) = startup_draft
+                .run_until(
+                    &mut tui,
+                    device_login::start_if_needed(
+                        &mut app_server,
+                        &session_selection,
+                        &config,
+                        device_login::prefer_device_login(),
+                    ),
+                )
+                .await??
+        {
+            startup_draft.flush_pending_events(&mut tui).await?;
+            onboarding::onboarding_screen::run_gateway_device_login(
+                &mut tui,
+                &mut app_server,
+                prompt,
+            )
+            .await?;
+        }
+        Ok::<_, color_eyre::Report>(())
+    }
+    .await;
+    if let Err(err) = gateway_sign_in {
+        shutdown_startup_session(Some(app_server), &mut terminal_restore_guard).await;
+        return Err(err);
+    }
     let startup_prefetch_started_at = Instant::now();
     // Fetch the catalog alongside hooks/list. Fresh starts choose the model after config/read.
     app_server.prefetch_model_list();

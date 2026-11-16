@@ -13,6 +13,7 @@ async fn external_writer_snapshot_freezes_active_command_and_mcp_rows() {
             chat.transcript.active_cell = Some(Box::new(history_cell::new_active_mcp_tool_call(
                 "mcp-running".to_string(),
                 McpInvocation {
+                    environment_id: None,
                     server: "server".to_string(),
                     tool: "tool".to_string(),
                     arguments: None,
@@ -134,6 +135,7 @@ async fn replayed_completion_preserves_unrelated_running_command() {
             chat.transcript.active_cell = Some(Box::new(history_cell::new_active_mcp_tool_call(
                 "mcp-running".to_string(),
                 McpInvocation {
+                    environment_id: None,
                     server: "server".to_string(),
                     tool: "tool".to_string(),
                     arguments: None,
@@ -443,14 +445,15 @@ async fn replayed_commands_preserve_individual_output_and_failure_status() {
 
     let cells = std::iter::from_fn(|| rx.try_recv().ok())
         .filter_map(|event| match event {
-            AppEvent::InsertHistoryCell(cell) => Some(cell),
+            AppEvent::InsertHistoryCell(cell) => Some(cell.transcript_lines(/*width*/ 80)),
             _ => None,
         })
+        .filter(|lines| !lines.is_empty())
         .collect::<Vec<_>>();
     assert_eq!(cells.len(), 4);
     let transcript = cells
         .iter()
-        .map(|cell| lines_to_single_string(&cell.transcript_lines(/*width*/ 80)))
+        .map(|lines| lines_to_single_string(lines))
         .collect::<Vec<_>>()
         .join("\n");
     insta::assert_snapshot!(transcript, @r"$ printf first
@@ -1268,6 +1271,9 @@ async fn bang_shell_enter_while_task_running_submits_run_user_shell_command() {
     let thread_id = ThreadId::new();
     let rollout_file = NamedTempFile::new().unwrap();
     let configured = crate::session_state::ThreadSessionState {
+        read_only_history: false,
+        thread_settings_confirmed: true,
+        primary_environment_cwd: None,
         daybreak_enabled: false,
         windows_sandbox_host: crate::app::WindowsSandboxHost::Local,
         thread_id,

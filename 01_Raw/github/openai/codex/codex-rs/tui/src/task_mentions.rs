@@ -26,6 +26,7 @@ use serde_json::json;
 use crate::app_event::AppEvent;
 use crate::app_event_sender::AppEventSender;
 use crate::bottom_pane::MentionBinding;
+use crate::thread_label::ThreadLabelStyle;
 
 const MAX_SEARCH_RESULTS: u32 = 50;
 const SEARCH_DEBOUNCE: Duration = Duration::from_millis(/*millis*/ 100);
@@ -38,6 +39,7 @@ const REQUEST_HEADING: &str = "## My request for Codex:";
 pub(crate) struct TaskMention {
     pub(crate) thread_id: String,
     pub(crate) title: String,
+    pub(crate) label_style: ThreadLabelStyle,
     pub(crate) cwd: String,
     pub(crate) snippet: String,
 }
@@ -50,6 +52,8 @@ pub(crate) fn spawn_search(
     generation: Arc<AtomicU64>,
     app_event_tx: AppEventSender,
 ) {
+    let label_style =
+        ThreadLabelStyle::from_is_cloud(matches!(handle, AppServerRequestHandle::Cloud(_)));
     let request_generation = generation.fetch_add(1, Ordering::Relaxed) + 1;
     if query.trim().is_empty() {
         app_event_tx.send(AppEvent::TaskSearchResult {
@@ -73,6 +77,7 @@ pub(crate) fn spawn_search(
                 handle.request_typed::<ThreadSearchResponse>(ClientRequest::ThreadSearch {
                     request_id: RequestId::String(format!("task-search-{request_generation}")),
                     params: ThreadSearchParams {
+                        include_attached_threads: false,
                         current_account_only: true,
                         cursor: None,
                         limit: Some(MAX_SEARCH_RESULTS),
@@ -91,7 +96,9 @@ pub(crate) fn spawn_search(
                         "task-title-search-{request_generation}"
                     )),
                     params: ThreadListParams {
+                        include_attached_threads: false,
                         current_account_only: true,
+                        included_thread_ids: None,
                         excluded_thread_ids: None,
                         attached_to_thread_id: None,
                         originators: None,
@@ -160,6 +167,7 @@ pub(crate) fn spawn_search(
                 Some(TaskMention {
                     thread_id: thread.id,
                     title,
+                    label_style,
                     cwd: thread.cwd.to_string_lossy().into_owned(),
                     snippet: result.snippet,
                 })

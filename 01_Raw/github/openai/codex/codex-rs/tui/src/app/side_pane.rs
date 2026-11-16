@@ -7,7 +7,8 @@ use super::sidebar;
 use super::sidebar::PaneFocus;
 use super::sidebar::SidebarContent;
 use super::sidebar::SidebarLayout;
-use crate::bottom_pane::render_unfocused_status;
+use crate::bottom_pane::FooterLayout;
+use crate::bottom_pane::StatusLineFocus;
 use crate::custom_terminal::Frame;
 use crate::legacy_core::config::edit::ConfigEdit;
 use crate::legacy_core::config::edit::ConfigEditsBuilder;
@@ -95,7 +96,7 @@ pub(super) struct SidePaneLayout {
 pub(super) fn layout(app: &App, tui: &Tui, area: Rect) -> Option<SidePaneLayout> {
     match visible_split(app, tui, area)? {
         SidebarLayout::Chat(panes) => Some(panes),
-        SidebarLayout::Chooser { .. } => None,
+        SidebarLayout::Panel { .. } => None,
     }
 }
 
@@ -117,7 +118,7 @@ pub(super) fn split_layout(app: &App, tui: &Tui, area: Rect) -> Option<SidebarLa
     sidebar::content_layout(
         app,
         content,
-        app.chooser_focus().unwrap_or(PaneFocus::Main),
+        app.panel_focus().unwrap_or(PaneFocus::Main),
         sidebar_areas(app, tui, area, /*fraction*/ 1.0)?,
     )
 }
@@ -428,22 +429,39 @@ impl App {
     }
 }
 
+/// Allow up to two-thirds of the pane, or eight rows on short panes when they fit.
+pub(super) fn composer_height_limit(pane_height: u16) -> u16 {
+    ((u32::from(pane_height) * 2 / 3) as u16)
+        .max(8)
+        .min(pane_height)
+}
+
 impl SidePaneLayout {
     /// Paint the divider, retained transcript and draft without claiming the terminal cursor.
     pub(super) fn paint_companion(
         &self,
         companion: &mut SideCompanion,
         frame: &mut Frame<'_>,
+        collapse_turn_details: bool,
         frames: &FrameRequester,
     ) {
         companion.flush_answer();
         let area = self.passive;
         // Keep the live composer's bottom hint row blank on the inactive side.
-        let available = area.height.saturating_sub(1);
-        let composer_height = available.min(3);
-        let status_height =
-            u16::from(companion.display.status.is_some() && available > composer_height);
-        let above = available - composer_height - status_height;
+        let hint_rows = 1;
+        let composer_height = area.height.saturating_sub(hint_rows).min(3);
+        let available = area.height - composer_height;
+        let footer = FooterLayout::new(
+            Some(composer_height_limit(area.height)),
+            hint_rows,
+            /*priority_hint_rows*/ hint_rows,
+        );
+        let status = companion.display.status_line.as_ref();
+        let wanted_status = status.map_or(0, |status| {
+            status.height(footer.status_bounds(area.width, available))
+        });
+        let footer = footer.allocate(available, wanted_status);
+        let above = available - footer.height();
         let mut transcript = Rect {
             height: above.saturating_sub(1),
             ..area
@@ -464,6 +482,7 @@ impl SidePaneLayout {
             &companion.cells,
             companion.display.active.as_deref(),
             &companion.display.auxiliary,
+            collapse_turn_details,
         );
         frame
             .image_placements
@@ -493,15 +512,11 @@ impl SidePaneLayout {
                 &mut Default::default(),
             );
         }
-        if let Some(status) = &companion.display.status {
-            render_unfocused_status(
-                status.clone(),
-                Rect {
-                    y: composer.bottom(),
-                    height: status_height,
-                    ..area
-                },
+        if let Some(status) = status {
+            status.render(
+                footer.status_area(area),
                 frame.buffer,
+                StatusLineFocus::Unfocused,
             );
         }
     }

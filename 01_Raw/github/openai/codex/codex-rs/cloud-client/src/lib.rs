@@ -49,6 +49,7 @@ pub use history::HistoryQuery;
 pub use history::HistoryTurn;
 pub use history::ListItemsRequest;
 pub use history::ListTurnsRequest;
+pub use items::AgentMessagePhase;
 pub use items::AgentQuestion;
 pub use items::CommandAction;
 pub use items::CommandExecutionSource;
@@ -82,13 +83,18 @@ pub use types::Event;
 pub use types::ResumeRequest;
 pub use types::RpcStatus;
 
+use bytes::Bytes;
+use bytes::BytesMut;
 use codex_http_client::ClientRouteClass;
+use codex_http_client::HttpClient;
 use codex_http_client::HttpClientBuilder;
 use codex_http_client::HttpClientFactory;
+use codex_http_client::NetworkPolicy;
 use codex_http_client::RouteAwareClientPool;
 use futures::StreamExt;
 use futures::stream::BoxStream;
 use http_body_util::BodyExt;
+use prost::Message;
 use std::io;
 use std::time::Duration;
 use tonic::body::Body;
@@ -99,13 +105,21 @@ use tower::util::BoxCloneSyncService;
 use url::Url;
 
 const REQUEST_TIMEOUT: Duration = Duration::from_secs(150);
+const HTTP2_KEEP_ALIVE_INTERVAL: Duration = Duration::from_secs(10);
+const HTTP2_KEEP_ALIVE_TIMEOUT: Duration = Duration::from_secs(60);
 const MAX_MESSAGE_BYTES: usize = 64 * 1024 * 1024;
+const MODEL_CATALOG_TIMEOUT: Duration = Duration::from_secs(10);
+const MAX_MODEL_CATALOG_BYTES: usize = 1024 * 1024;
 type Transport = BoxCloneSyncService<http::Request<Body>, http::Response<Body>, io::Error>;
 
 /// One fixed origin and account. Construct a new client when credentials change.
 /// Supply a trusted native gRPC origin, without a path (not the HTTP `/grpc` gateway).
+#[derive(Clone)]
 pub struct Client {
     grpc: Grpc<Transport>,
+    http: HttpClient,
+    model_catalog_url: Url,
+    policy: NetworkPolicy,
     credentials: Credentials,
 }
 
@@ -168,6 +182,7 @@ impl Client {
             .without_redirects()
             .without_request_logging()
             .http2_prior_knowledge()
+            .http2_keep_alive(HTTP2_KEEP_ALIVE_INTERVAL, HTTP2_KEEP_ALIVE_TIMEOUT)
             .connect_timeout(Duration::from_secs(30));
         let http = if local_http {
             // Plaintext credentials must never leave loopback through an outbound proxy.
@@ -180,8 +195,9 @@ impl Client {
             .as_str()
             .parse()
             .map_err(|_| Error::InvalidEndpoint)?;
+        let grpc_http = http.clone();
         let transport = service_fn(move |request: http::Request<Body>| {
-            let http = http.clone();
+            let http = grpc_http.clone();
             async move {
                 let (parts, body) = request.into_parts();
                 let response = http
@@ -195,12 +211,69 @@ impl Client {
                 Ok(response.into_http_response().map(Body::new))
             }
         });
+        let mut model_catalog_url = endpoint;
+        model_catalog_url.set_path("/v2/models");
         Ok(Self {
             grpc: Grpc::with_origin(BoxCloneSyncService::new(transport), origin)
                 .max_decoding_message_size(MAX_MESSAGE_BYTES)
                 .max_encoding_message_size(MAX_MESSAGE_BYTES),
+            http,
+            model_catalog_url,
+            policy: factory.network_policy().clone(),
             credentials,
         })
+    }
+
+    /// Recheck the bound account before delivering an already completed catalog read.
+    pub fn model_catalog_is_current(&self) -> bool {
+        self.policy.acquire(&self.model_catalog_url).is_ok()
+    }
+
+    /// Reads one account-scoped REST catalog page through the native client's transport.
+    /// The app-server adapter decodes the response with its existing catalog schema.
+    pub async fn list_models(
+        &self,
+        cursor: Option<&str>,
+        limit: Option<u32>,
+        include_hidden: Option<bool>,
+    ) -> Result<Bytes, Error> {
+        let mut url = self.model_catalog_url.clone();
+        {
+            let mut query = url.query_pairs_mut();
+            if let Some(cursor) = cursor {
+                query.append_pair("cursor", cursor);
+            }
+            if let Some(limit) = limit {
+                query.append_pair("limit", &limit.to_string());
+            }
+            if let Some(include_hidden) = include_hidden {
+                query.append_pair(
+                    "includeHidden",
+                    if include_hidden { "true" } else { "false" },
+                );
+            }
+        }
+        let mut response = self
+            .http
+            .get(url)
+            .headers(self.credentials.headers.clone())
+            .timeout(MODEL_CATALOG_TIMEOUT)
+            .send()
+            .await
+            .and_then(codex_http_client::HttpResponse::error_for_status)
+            .map_err(|_| Error::ModelCatalogUnavailable)?;
+        let mut body = BytesMut::new();
+        while let Some(chunk) = response
+            .chunk()
+            .await
+            .map_err(|_| Error::ModelCatalogUnavailable)?
+        {
+            if chunk.len() > MAX_MODEL_CATALOG_BYTES - body.len() {
+                return Err(Error::ModelCatalogTooLarge);
+            }
+            body.extend_from_slice(&chunk);
+        }
+        Ok(body.freeze())
     }
 
     /// With `wait: false`, success means admission only. Failures may leave work admitted.
@@ -217,13 +290,93 @@ impl Client {
                 http::uri::PathAndQuery::from_static(
                     "/oaiproto.codex_app_server_backend.ThreadService/Resume",
                 ),
-                ProstCodec::<ResumeRequest, wire::ResumeResponse>::default(),
+                ProstCodec::<ResumeRequest, wire::EmptyResponse>::default(),
             ),
         )
         .await
         .map_err(|_| Error::Timeout)?
         .map_err(Error::from)?;
         Ok(())
+    }
+
+    /// Reads the saved name without opening or replacing an attachment.
+    pub async fn read_thread_name(&self, thread_id: &str) -> Result<Option<String>, Error> {
+        let payload = self
+            .raw_unary(
+                wire::ThreadIdRequest {
+                    thread_id: thread_id.to_owned(),
+                },
+                "/oaiproto.codex_app_server_backend.ThreadService/ReadThread",
+            )
+            .await?;
+        let thread = wire::ReadThreadResponse::decode(payload)
+            .map_err(|_| Error::InvalidResponse)?
+            .thread
+            .filter(|thread| thread.id.as_deref() == Some(thread_id))
+            .ok_or(Error::InvalidResponse)?;
+        Ok(thread.name)
+    }
+
+    /// Saves a conversation name without opening an attachment.
+    pub async fn set_thread_name(&self, thread_id: &str, name: &str) -> Result<(), MutationError> {
+        if thread_id.trim().is_empty() || name.trim().is_empty() {
+            return Err(MutationError::InvalidRequest);
+        }
+        let payload = self
+            .mutate(
+                wire::SetThreadNameRequest {
+                    thread_id: thread_id.to_owned(),
+                    name: name.to_owned(),
+                },
+                "/oaiproto.codex_app_server_backend.ThreadService/SetThreadName",
+            )
+            .await?;
+        wire::EmptyResponse::decode(payload)
+            .map_err(|_| MutationError::OutcomeUnknown(Error::InvalidResponse))?;
+        Ok(())
+    }
+
+    /// Archives a conversation using the current account, without opening an attachment.
+    pub async fn archive_thread(&self, thread_id: &str) -> Result<(), MutationError> {
+        if thread_id.trim().is_empty() {
+            return Err(MutationError::InvalidRequest);
+        }
+        let payload = self
+            .mutate(
+                wire::ThreadIdRequest {
+                    thread_id: thread_id.to_owned(),
+                },
+                "/oaiproto.codex_app_server_backend.ThreadService/ArchiveThread",
+            )
+            .await?;
+        wire::EmptyResponse::decode(payload)
+            .map_err(|_| MutationError::OutcomeUnknown(Error::InvalidResponse))?;
+        Ok(())
+    }
+
+    /// Restores an archived conversation without resuming it.
+    pub async fn unarchive_thread(&self, thread_id: &str) -> Result<ThreadSnapshot, MutationError> {
+        if thread_id.trim().is_empty() {
+            return Err(MutationError::InvalidRequest);
+        }
+        let payload = self
+            .mutate(
+                wire::ThreadIdRequest {
+                    thread_id: thread_id.to_owned(),
+                },
+                "/oaiproto.codex_app_server_backend.ThreadService/UnarchiveThread",
+            )
+            .await?;
+        let response = wire::UnarchiveResponse::decode(payload)
+            .map_err(|_| MutationError::OutcomeUnknown(Error::InvalidResponse))?;
+        let raw_thread = response
+            .thread
+            .ok_or(MutationError::OutcomeUnknown(Error::InvalidResponse))?;
+        let thread = ThreadSnapshot::decode(raw_thread).map_err(MutationError::OutcomeUnknown)?;
+        if thread.id != thread_id {
+            return Err(MutationError::OutcomeUnknown(Error::InvalidResponse));
+        }
+        Ok(thread)
     }
 
     /// Live events only, without history or automatic reconnect. The stream terminates
@@ -233,7 +386,7 @@ impl Client {
         thread_id: &str,
     ) -> Result<BoxStream<'static, Result<Event, Error>>, Error> {
         let mut grpc = self.grpc.clone();
-        let mut request = tonic::Request::new(wire::AttachRequest {
+        let mut request = tonic::Request::new(wire::ThreadIdRequest {
             thread_id: thread_id.to_owned(),
         });
         *request.metadata_mut() =
@@ -245,7 +398,7 @@ impl Client {
                 http::uri::PathAndQuery::from_static(
                     "/oaiproto.codex_app_server_backend.ThreadService/Attach",
                 ),
-                ProstCodec::<wire::AttachRequest, wire::AttachResponse>::default(),
+                ProstCodec::<wire::ThreadIdRequest, wire::AttachResponse>::default(),
             ),
         )
         .await

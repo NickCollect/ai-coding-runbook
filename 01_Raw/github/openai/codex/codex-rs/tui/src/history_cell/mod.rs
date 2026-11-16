@@ -155,9 +155,11 @@ pub(crate) use warnings::warning_entries;
 #[cfg(test)]
 mod tests;
 
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, serde::Serialize)]
 pub(crate) enum HistoryRenderMode {
+    #[serde(rename = "standard")]
     Rich,
+    #[serde(rename = "raw")]
     Raw,
 }
 
@@ -256,6 +258,11 @@ pub(crate) trait HistoryCell: std::fmt::Debug + Send + Sync + Any {
         } else {
             self.compact_hyperlink_lines(width)
         }
+    }
+
+    /// Output-free descriptions of individual tool invocations, in transcript order.
+    fn tool_call_labels(&self) -> Vec<String> {
+        Vec::new()
     }
 
     /// Stable, namespaced member identities used to retain disclosure across grouping and replay.

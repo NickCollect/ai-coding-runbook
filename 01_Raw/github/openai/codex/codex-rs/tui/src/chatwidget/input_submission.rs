@@ -51,6 +51,13 @@ impl ChatWidget {
         }
     }
 
+    pub(crate) fn reject_user_shell_command(&mut self, message: String) {
+        // No turn event will arrive to clear the pending shell submission.
+        self.input_queue.user_turn_pending_start = false;
+        self.add_error_message(message);
+        self.maybe_send_next_queued_input();
+    }
+
     fn submit_shell_command_with_history(
         &mut self,
         command: &str,
@@ -308,9 +315,13 @@ impl ChatWidget {
                 UserMessageSource::Prompt,
             ),
             UserMessageSource::Prompt => (CloudSubmissionIntent::StartIfIdle, source),
-            UserMessageSource::QuestionAnswer | UserMessageSource::SafetyRecourse => {
-                (CloudSubmissionIntent::UseKnownTurn, source)
-            }
+            UserMessageSource::QuestionAnswer => (
+                CloudSubmissionIntent::QuestionAnswer {
+                    during_turn: !render_in_history,
+                },
+                source,
+            ),
+            UserMessageSource::SafetyRecourse => (CloudSubmissionIntent::UseKnownTurn, source),
         };
         if !text.is_empty() {
             items.push(UserInput::Text {

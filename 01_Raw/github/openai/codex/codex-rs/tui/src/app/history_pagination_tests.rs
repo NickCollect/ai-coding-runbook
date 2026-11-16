@@ -106,14 +106,67 @@ async fn fork_lineage_stays_before_repeated_older_history_pages() {
 fn repeated_prompt_matching_removes_only_the_hidden_occurrence() {
     let cells = vec![user_cell("repeat"), user_cell("other"), user_cell("repeat")];
     let persisted = vec![
-        ("unloaded".to_string(), user_cell("repeat")),
-        ("hidden".to_string(), user_cell("repeat")),
-        ("middle".to_string(), user_cell("other")),
-        ("visible".to_string(), user_cell("repeat")),
+        (true, user_cell("repeat")),
+        (true, user_cell("repeat")),
+        (false, user_cell("other")),
+        (false, user_cell("repeat")),
     ];
+    assert_eq!(hidden_transcript_indices(&cells, persisted), vec![0],);
+}
+
+#[tokio::test]
+async fn resume_places_interruption_before_searches_split_across_pages() {
+    let (mut app, mut events, _) = crate::app::tests::make_test_app_with_channels().await;
+    let mut canceled = turn("canceled", TurnStatus::Interrupted, &[]);
+    canceled.items_view = TurnItemsView::NotLoaded;
+    let search = |query: &str| {
+        serde_json::from_value(serde_json::json!({
+            "type": "webSearch", "id": query, "query": query,
+        }))
+        .expect("valid search")
+    };
+    let mut audit = turn("audit", TurnStatus::Completed, &[]);
+    audit.items = vec![search("newer")];
+    app.chat_widget.replay_thread_turns(
+        vec![canceled.clone(), audit.clone()],
+        ReplayKind::ResumeInitialMessages,
+    );
+    let mut cells: Vec<Arc<dyn HistoryCell>> = Vec::new();
+    while let Ok(event) = events.try_recv() {
+        if let AppEvent::InsertHistoryCell(cell) = event {
+            cells.push(Arc::from(cell));
+        }
+    }
+
+    canceled.items.push(search("canceled"));
+    audit.items.insert(/*index*/ 0, search("older"));
+    let page = vec![
+        (canceled.id.clone(), canceled.items[0].payload.clone()),
+        (audit.id.clone(), audit.items[0].payload.clone()),
+    ];
+    let cwd = app.config.cwd.clone();
+    let older = app.project_older_history_cells(
+        page,
+        &[canceled, audit],
+        &HashSet::new(),
+        ThreadId::new(),
+        &cwd,
+        RawReasoningVisibility::Hidden,
+    );
+    cells.splice(0..0, older);
+    let rows = cells
+        .iter()
+        .flat_map(|cell| cell.display_lines(/*width*/ 100))
+        .map(|line| line.to_string())
+        .collect::<Vec<_>>();
     assert_eq!(
-        hidden_transcript_indices(&cells, persisted, &HashSet::from(["hidden", "unloaded"])),
-        vec![0],
+        rows,
+        [
+            "• Searched the web for canceled",
+            "■ Conversation interrupted - use /feedback if something went wrong",
+            "• Searched the web for older",
+            "• Searched the web for newer",
+        ]
     );
 }
 
@@ -157,14 +210,16 @@ async fn hidden_last_item_keeps_turn_groups_and_completion_boundaries() {
         first.completed_at = Some(1_700_000_000);
         first.duration_ms = Some(125_000);
         let mut second = turn("second", TurnStatus::InProgress, &[]);
-        second.items = vec![computer("newer-call")];
+        second.items = vec![computer("hidden")];
         let turns = vec![first, second];
         let hidden = hidden_review_item_ids(&turns);
-        assert_eq!(hidden, HashSet::from(["hidden"]));
+        assert_eq!(hidden, HashSet::from([("first", "hidden")]));
         let items = turns
             .iter()
-            .flat_map(Turn::item_payloads)
-            .cloned()
+            .flat_map(|turn| {
+                turn.item_payloads()
+                    .map(|item| (turn.id.clone(), item.clone()))
+            })
             .collect::<Vec<_>>();
 
         let cells = app.project_older_history_cells(
@@ -191,10 +246,7 @@ async fn hidden_last_item_keeps_turn_groups_and_completion_boundaries() {
         assert_eq!(
             (groups, completions, visible_users),
             (
-                vec![
-                    vec!["older-call".to_string()],
-                    vec!["newer-call".to_string()]
-                ],
+                vec![vec!["older-call".to_string()], vec!["hidden".to_string()]],
                 expected_completions,
                 0,
             ),

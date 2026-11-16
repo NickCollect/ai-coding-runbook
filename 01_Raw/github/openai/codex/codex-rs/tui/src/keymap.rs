@@ -61,7 +61,8 @@ pub(crate) use bindings::configured_binding_for_action;
 pub(crate) use bindings::keymap_action_id;
 pub(crate) use bindings::keymap_action_ids;
 use bindings::runtime_action_bindings;
-pub(crate) use chords::KEY_CHORD_TIMEOUT;
+#[cfg(test)]
+pub(crate) use chords::CHORD_REVEAL_DELAY;
 pub(crate) use chords::KeyChordMatch;
 pub(crate) use chords::KeyChordMatcher;
 pub(crate) use chords::KeymapContextSet;
@@ -339,6 +340,7 @@ pub(crate) struct PagerKeymap {
     pub(crate) close: Vec<KeyBinding>,
     pub(crate) close_transcript: Vec<KeyBinding>,
     pub(crate) find: Vec<KeyBinding>,
+    pub(crate) mark_markdown: Vec<KeyBinding>,
     chord_hints: Arc<RuntimeChordKeymap>,
 }
 
@@ -1522,6 +1524,7 @@ impl RuntimeKeymap {
             close: resolve_local!(keymap, defaults, pager, close),
             close_transcript: resolve_local!(keymap, defaults, pager, close_transcript),
             find: resolve_local!(keymap, defaults, pager, find),
+            mark_markdown: resolve_local!(keymap, defaults, pager, mark_markdown),
             chord_hints: Arc::clone(&chords),
         };
 
@@ -2097,6 +2100,7 @@ impl RuntimeKeymap {
                 close: default_bindings![plain(KeyCode::Char('q')), ctrl(KeyCode::Char('c'))],
                 close_transcript: default_bindings![ctrl(KeyCode::Char('t'))],
                 find: default_bindings![plain(KeyCode::F(3)), plain(KeyCode::Char('/'))],
+                mark_markdown: Vec::new(),
                 chord_hints: Arc::default(),
             },
             list: ListKeymap {
@@ -2639,6 +2643,7 @@ impl RuntimeKeymap {
                     self.pager.close_transcript.as_slice(),
                 ),
                 ("pager.find", self.pager.find.as_slice()),
+                ("pager.mark_markdown", self.pager.mark_markdown.as_slice()),
             ],
         )?;
 

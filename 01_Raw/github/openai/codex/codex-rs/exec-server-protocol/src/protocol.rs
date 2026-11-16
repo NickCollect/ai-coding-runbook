@@ -273,7 +273,7 @@ impl EnvironmentInfo {
             if let Some(path) = std::env::var_os(name)
                 .filter(|path| !path.is_empty())
                 .filter(|path| cfg!(unix) || std::path::Path::new(path).is_absolute())
-                .and_then(&normalize_temp_path)
+                .and_then(normalize_temp_path)
                 && !temporary_directories.contains(&path)
             {
                 temporary_directories.push(path);
@@ -495,6 +495,24 @@ pub struct ShellSnapshotRequest {
     pub scope_id: String,
     /// Executor-native shell used to capture and restore the snapshot.
     pub shell: ShellInfo,
+}
+
+/// Optional JSON-RPC error data for a rejected `process/start`.
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(tag = "kind", rename_all = "camelCase")]
+pub enum ProcessStartErrorData {
+    SpawnNotFound,
+    SpawnPermissionDenied,
+    SpawnFailed,
+    SandboxUnavailable,
+    SandboxPreparation,
+}
+
+impl ProcessStartErrorData {
+    pub fn attach_to(self, mut error: JSONRPCErrorError) -> JSONRPCErrorError {
+        error.data = Some(serde_json::json!(self));
+        error
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]

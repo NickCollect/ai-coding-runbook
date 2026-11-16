@@ -84,6 +84,7 @@ pub(super) struct SidebarPane {
     choices: Vec<SideChat>,
     // A snapshot of the visible rows at the last explicit chooser refresh.
     pub(super) latest_prompts: HashMap<ThreadId, String>,
+    pub(super) opening: Option<crate::sidebar_chooser::Opening>,
     pub(super) discovery: Discovery,
     pub(super) closing_chats: HashMap<ThreadId, JoinHandle<()>>,
     // Visit order is independent of the order in which tabs appear.
@@ -107,13 +108,18 @@ impl SidebarPane {
             }
             SidebarContent::Chooser => {}
         }
+        if content != SidebarContent::Chooser || focus == PaneFocus::Main {
+            self.opening = None;
+        }
         self.content = content;
         self.focus = Some(focus);
     }
 
     pub(super) fn chat_tabs(&self) -> ChatTabs<'_> {
         ChatTabs {
+            label_style: crate::thread_label::ThreadLabelStyle::Plain,
             discovery: &self.discovery,
+            opening: self.opening.as_ref(),
             ids: &self.tabs,
             choices: &self.choices,
             latest_prompts: &self.latest_prompts,
@@ -222,6 +228,7 @@ impl SidebarPane {
     }
 
     pub(super) fn hide(&mut self) {
+        self.opening = None;
         self.focus = None;
     }
 
@@ -249,6 +256,13 @@ impl SidebarPane {
     }
 
     pub(super) fn remove_choice(&mut self, id: ThreadId) {
+        if self
+            .opening
+            .as_ref()
+            .is_some_and(|opening| opening.target.child == id)
+        {
+            self.opening = None;
+        }
         if let Some(index) = self.chat_tabs().choice_index(id) {
             self.choices.remove(index - 1);
             if index < self.choice {
@@ -273,9 +287,9 @@ impl App {
     ) {
         let area = if self.sidebar_parent() == Some(parent) && self.chooser_focus().is_some() {
             let screen: Rect = tui.terminal.last_known_screen_size.into();
-            self.conversation_frame.chooser_area().or_else(|| {
+            self.conversation_frame.panel_area().or_else(|| {
                 match side_pane::split_layout(self, tui, screen) {
-                    Some(SidebarLayout::Chooser { sidebar, .. }) => Some(sidebar),
+                    Some(SidebarLayout::Panel { sidebar, .. }) => Some(sidebar),
                     _ if screen.width < 100 && self.chooser_focus() == Some(PaneFocus::Sidebar) => {
                         Some(screen)
                     }
@@ -395,15 +409,23 @@ impl App {
             .filter(|_| pane.content == SidebarContent::Chooser)
     }
 
+    pub(super) fn panel_focus(&self) -> Option<PaneFocus> {
+        let pane = self.sidebar()?;
+        match pane.content {
+            SidebarContent::Chooser => pane.focus,
+            SidebarContent::Chat(_) => None,
+        }
+    }
+
     pub(super) fn sidebar_has_focus(&self) -> bool {
         self.active_side_parent_thread_id().is_some()
-            || self.chooser_focus() == Some(PaneFocus::Sidebar)
+            || self.panel_focus() == Some(PaneFocus::Sidebar)
     }
 }
 
 #[derive(PartialEq)]
 pub(super) enum SidebarLayout {
-    Chooser {
+    Panel {
         main: Rect,
         sidebar: Rect,
         focus: PaneFocus,
@@ -414,7 +436,7 @@ pub(super) enum SidebarLayout {
 impl SidebarLayout {
     pub(super) fn divider_area(&self) -> Option<Rect> {
         let (x, pane) = match self {
-            Self::Chooser { main, .. } => (main.right(), *main),
+            Self::Panel { main, .. } => (main.right(), *main),
             Self::Chat(panes) => (panes.divider, panes.focused.union(panes.tab_strip)),
         };
         (!pane.is_empty()).then(|| Rect::new(x, pane.y, side_pane::GAP, pane.height))
@@ -463,7 +485,7 @@ pub(super) fn content_layout(
     match content {
         SidebarContent::Chooser => (app.sidebar_chooser_available()
             && (focus == PaneFocus::Main || app.chat_widget.completion_can_yield_focus()))
-        .then_some(SidebarLayout::Chooser {
+        .then_some(SidebarLayout::Panel {
             main,
             sidebar,
             focus,

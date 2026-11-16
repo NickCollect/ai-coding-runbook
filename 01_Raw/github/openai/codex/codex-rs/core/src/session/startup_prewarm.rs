@@ -1,6 +1,7 @@
 //! Background model warmup shared by startup and idle-thread resume.
 //! One scheduled task owns the prepared client session until the next regular
 //! turn consumes it; shutdown and turn cancellation use the same handoff.
+//! Warmup settings are captured when the worker constructs its turn.
 
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -441,7 +442,7 @@ async fn schedule_startup_prewarm_inner(
     // Prewarm establishes the request baseline before the first turn can change effort.
     client_session
         .prewarm_websocket(
-            &startup_prompt,
+            &Arc::new(startup_prompt),
             &step_context.settings.model_info,
             &step_context.session_telemetry,
             session

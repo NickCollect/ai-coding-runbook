@@ -11,6 +11,9 @@ fn request() -> AddUserMessageRequest {
             text_elements: vec![],
         }],
         turn_trigger: None,
+        model: None,
+        effort: None,
+        service_tier: None,
         mode: SubmissionMode::StartIfIdle,
         shared_access: true,
     }
@@ -26,6 +29,7 @@ fn admitted(outcome: u8) -> Vec<u8> {
 async fn submission_preserves_admission_variants_and_wire_identity() {
     for (mode, mode_number, outcome_number) in [
         (SubmissionMode::StartIfIdle, 3, 1),
+        (SubmissionMode::Steer, 1, 1),
         (SubmissionMode::Steer, 1, 2),
         (SubmissionMode::Queue, 2, 3),
         (SubmissionMode::Queue, 2, 4),
@@ -40,11 +44,23 @@ async fn submission_preserves_admission_variants_and_wire_identity() {
         }
         payload.extend([0xa0, 0x06, 7]); // Unknown metadata survives.
         let mut fixture = fixture(response(vec![frame(&payload)], tonic::Status::ok(""))).await;
-        let turn_trigger = (mode_number == 3).then(|| "safety_recourse_follow_up".to_owned());
+        let has_selection = !matches!(mode, SubmissionMode::Queue);
+        let turn_trigger = (mode_number == 3).then(|| "user".to_owned());
+        let (service_tier, wire_tier) = match (mode_number, outcome_number) {
+            (3, 1) => (
+                Some(Some("ultrafast".into())),
+                message(/*tag*/ 20, &message(/*tag*/ 1, b"ultrafast")),
+            ),
+            (1, 2) => (Some(None), message(/*tag*/ 20, &message(/*tag*/ 2, b""))),
+            _ => (None, Vec::new()),
+        };
         let result = fixture
             .client
             .add_user_message(&AddUserMessageRequest {
                 turn_trigger,
+                model: has_selection.then(|| "selected-model".into()),
+                effort: has_selection.then(|| "high".into()),
+                service_tier,
                 mode,
                 ..request()
             })
@@ -87,8 +103,11 @@ async fn submission_preserves_admission_variants_and_wire_identity() {
             format!("{result:?} {:?}", result.outcome),
             "Admission([redacted]) AdmissionOutcome([redacted])"
         );
+        let effort = message(/*tag*/ 9, b"high");
+        let model = message(/*tag*/ 12, b"selected-model");
         let expected_request = [
             message(/*tag*/ 4, b"m"),
+            if has_selection { effort } else { vec![] },
             message(
                 /*tag*/ 11,
                 &message(
@@ -96,9 +115,11 @@ async fn submission_preserves_admission_variants_and_wire_identity() {
                     &message(/*tag*/ 1, &message(/*tag*/ 1, b"hello")),
                 ),
             ),
+            if has_selection { model } else { vec![] },
+            wire_tier,
             message(/*tag*/ 23, b"t"),
             if mode_number == 3 {
-                message(/*tag*/ 25, b"safety_recourse_follow_up")
+                message(/*tag*/ 25, b"user")
             } else {
                 Vec::new()
             },
@@ -279,6 +300,17 @@ async fn interrupt_addresses_original_turn_and_preserves_uncertain_errors() {
 async fn invalid_input_never_sends_and_diagnostics_redact() {
     let mut fixture = fixture(response(vec![frame(&[])], tonic::Status::ok(""))).await;
     for input in [
+        AddUserMessageRequest {
+            mode: SubmissionMode::Queue,
+            effort: Some("high".into()),
+            model: Some("selected-model".into()),
+            ..request()
+        },
+        AddUserMessageRequest {
+            mode: SubmissionMode::Queue,
+            service_tier: Some(Some("ultrafast".into())),
+            ..request()
+        },
         AddUserMessageRequest {
             input: vec![],
             ..request()

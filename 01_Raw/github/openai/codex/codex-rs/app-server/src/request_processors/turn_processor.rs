@@ -5,17 +5,22 @@ use codex_app_server_protocol::ThreadGuardianAssessment;
 use codex_app_server_protocol::ThreadGuardianReviewParams;
 use codex_app_server_protocol::ThreadGuardianReviewResponse;
 use codex_app_server_protocol::ThreadItem;
+use codex_app_server_protocol::ThreadPrepareApprovedPlanParams;
+use codex_app_server_protocol::ThreadPrepareApprovedPlanResponse;
 use codex_protocol::error::CodexErrorDetails;
 use codex_protocol::models::ContentItem;
 use codex_protocol::models::FunctionCallOutputBody;
 use codex_protocol::models::FunctionCallOutputContentItem;
 use codex_protocol::models::FunctionCallOutputPayload;
 use codex_protocol::models::ImageReference as CoreImageReference;
+use codex_protocol::protocol::RealtimeConversationVersion;
 use codex_protocol::protocol::TurnEnvironmentRequests;
 use codex_protocol::protocol::TurnSettingsUpdate;
 use codex_protocol::protocol::TurnSettingsUpdateOutcome;
 use codex_protocol::turn_input::AnnotatedResponseItem;
+use codex_protocol::turn_input::InjectedResponseItem;
 use codex_protocol::turn_input::ResponseItemAnnotations;
+use codex_utils_path_uri::PathUri;
 
 use crate::image_url::REMOTE_IMAGE_URL_ERROR;
 use crate::image_url::is_remote_image_url;
@@ -239,6 +244,33 @@ impl TurnRequestProcessor {
             .map(|response| Some(response.into()))
     }
 
+    pub(crate) async fn thread_prepare_approved_plan(
+        &self,
+        request_id: &ConnectionRequestId,
+        params: ThreadPrepareApprovedPlanParams,
+    ) -> Result<Option<ClientResponsePayload>, JSONRPCErrorError> {
+        let (_, thread) = self.load_thread(&params.thread_id).await?;
+        self.ensure_direct_input_allowed(request_id, thread.as_ref())
+            .await?;
+        let actual_chars = params.markdown.chars().count();
+        if actual_chars > MAX_USER_INPUT_TEXT_CHARS {
+            return Err(Self::input_too_large_error(actual_chars));
+        }
+        let attachment_path = params
+            .attachment_path
+            .map(PathUri::from_host_native_path)
+            .transpose()
+            .map_err(|_| invalid_params("`attachmentPath` must be absolute on the app server"))?;
+        let prompt = thread
+            .prepare_approved_plan(attachment_path.as_ref(), &params.markdown)
+            .await
+            .map_err(|err| match err.details() {
+                CodexErrorDetails::InvalidRequest(message) => invalid_request(message.clone()),
+                _ => internal_error(format!("failed to prepare the approved plan: {err}")),
+            })?;
+        Ok(Some(ThreadPrepareApprovedPlanResponse { prompt }.into()))
+    }
+
     pub(crate) async fn thread_settings_update(
         &self,
         request_id: &ConnectionRequestId,
@@ -257,6 +289,8 @@ impl TurnRequestProcessor {
         let (_, thread) = self.load_thread(&params.thread_id).await?;
         self.ensure_direct_input_allowed(request_id, thread.as_ref())
             .await?;
+        let environments =
+            resolve_turn_environment_requests(self.thread_manager.as_ref(), params.environments)?;
         let (reply, outcome) = oneshot::channel();
         self.submit_core_op(
             request_id,
@@ -264,10 +298,11 @@ impl TurnRequestProcessor {
             Op::TurnSettings {
                 turn_id: params.turn_id,
                 update: TurnSettingsUpdate {
+                    request_country: None,
                     approvals_reviewer: params
                         .approvals_reviewer
                         .map(codex_app_server_protocol::ApprovalsReviewer::to_core),
-                    environments: None,
+                    environments,
                     model: params.model,
                     // Match thread/settings/update: public null does not clear effort.
                     effort: params.effort.map(Some),
@@ -861,9 +896,6 @@ impl TurnRequestProcessor {
         let collaboration_mode =
             collaboration_mode.map(|mode| self.normalize_collaboration_mode(mode));
         let has_environment_override = environment_requests.is_some();
-        // `thread/settings/update` only acknowledges that the update was queued.
-        // Clients that send dependent partial updates should wait for
-        // `thread/settings/updated` or combine the fields in one request.
         let snapshot = if permissions.is_some() {
             Some(thread.config_snapshot().await)
         } else {
@@ -928,6 +960,7 @@ impl TurnRequestProcessor {
         if has_any_overrides {
             thread
                 .preview_thread_settings_overrides(CodexThreadSettingsOverrides {
+                    request_country: None,
                     turn_extension_init: None,
                     disabled_plugin_ids: disabled_plugin_ids.clone(),
                     environments: environment_requests.clone(),
@@ -954,6 +987,7 @@ impl TurnRequestProcessor {
         }
 
         Ok(codex_protocol::protocol::ThreadSettingsOverrides {
+            request_country: None,
             disabled_plugin_ids,
             environments: environment_requests,
             runtime_workspace_roots,
@@ -982,12 +1016,14 @@ impl TurnRequestProcessor {
         self.ensure_direct_input_allowed(request_id, thread.as_ref())
             .await?;
         let cwd = resolve_request_cwd(params.cwd)?;
+        let environments =
+            resolve_turn_environment_requests(self.thread_manager.as_ref(), params.environments)?;
         let environment_override = self
             .build_environment_override(
                 thread.as_ref(),
                 cwd,
                 /*workspace_roots*/ None,
-                /*environment_requests*/ None,
+                environments,
             )
             .await;
         let thread_settings = self
@@ -1012,16 +1048,24 @@ impl TurnRequestProcessor {
             .await?;
 
         if thread_settings != codex_protocol::protocol::ThreadSettingsOverrides::default() {
+            let (reply, outcome) = oneshot::channel();
             self.submit_core_op(
                 request_id,
                 thread.as_ref(),
                 Op::ThreadSettings {
                     thread_settings,
-                    reply: None,
+                    reply: Some(reply),
                 },
             )
             .await
             .map_err(|err| internal_error(format!("failed to update thread settings: {err}")))?;
+            outcome
+                .await
+                .map_err(|_| internal_error("thread settings operation ended before replying"))?
+                .map_err(|err| match err.details() {
+                    CodexErrorDetails::InvalidRequest(message) => invalid_request(message.clone()),
+                    _ => internal_error(format!("failed to update thread settings: {err}")),
+                })?;
         }
 
         Ok(ThreadSettingsUpdateResponse {})
@@ -1041,15 +1085,17 @@ impl TurnRequestProcessor {
             .into_iter()
             .enumerate()
             .map(|(index, value)| {
-                serde_json::from_value::<ResponseItem>(value)
+                serde_json::from_value::<InjectedResponseItem>(value)
                     .map_err(|err| format!("items[{index}] is not a valid response item: {err}"))
             })
             .collect::<std::result::Result<Vec<_>, _>>()
             .map_err(invalid_request)?;
-        validate_response_item_image_urls(&items)?;
+        for item in &items {
+            validate_response_item_image_urls(std::slice::from_ref(&item.item))?;
+        }
 
         thread
-            .inject_response_items(items)
+            .inject_response_items_with_retention(items)
             .await
             .map_err(|err| match err.details() {
                 CodexErrorDetails::InvalidRequest(message) => invalid_request(message.clone()),
@@ -1063,16 +1109,8 @@ impl TurnRequestProcessor {
         app_server_client_name: Option<String>,
         app_server_client_version: Option<String>,
     ) -> Result<(), JSONRPCErrorError> {
-        let mcp_elicitations_auto_deny = xcode_26_4_mcp_elicitations_auto_deny(
-            app_server_client_name.as_deref(),
-            app_server_client_version.as_deref(),
-        );
         thread
-            .set_app_server_client_info(
-                app_server_client_name,
-                app_server_client_version,
-                mcp_elicitations_auto_deny,
-            )
+            .set_app_server_client_info(app_server_client_name, app_server_client_version)
             .await
             .map_err(|err| internal_error(format!("failed to set app server client info: {err}")))
     }
@@ -1291,6 +1329,23 @@ impl TurnRequestProcessor {
         else {
             return Ok(None);
         };
+        let voice = match params.voice {
+            Some(voice) => Some(Some(voice)),
+            None if !attaches_existing_call
+                && params.version == Some(RealtimeConversationVersion::V3) =>
+            {
+                let current = thread.config().await;
+                let latest = Box::pin(self.config_manager.load_latest_config_with_session_layers(
+                    &current.config_layer_stack,
+                    &current.cwd,
+                ))
+                .await
+                .map_err(|error| config_load_error(&error))?;
+                // Preserve a cleared preference instead of inheriting the thread's old voice.
+                Some(latest.realtime.voice)
+            }
+            None => None,
+        };
         self.submit_core_op(
             request_id,
             thread.as_ref(),
@@ -1340,7 +1395,7 @@ impl TurnRequestProcessor {
                     }
                 }),
                 version: params.version,
-                voice: params.voice,
+                voice,
             }),
         )
         .await
@@ -1561,15 +1616,4 @@ impl TurnRequestProcessor {
         )
         .await
     }
-}
-
-fn xcode_26_4_mcp_elicitations_auto_deny(
-    client_name: Option<&str>,
-    client_version: Option<&str>,
-) -> bool {
-    // Xcode 26.4 shipped before app-server MCP elicitation requests were
-    // client-visible. Keep elicitations auto-denied for that client line.
-    // TODO: Remove this compatibility hack once Xcode 26.4 ages out.
-    client_name == Some("Xcode")
-        && client_version.is_some_and(|version| version.starts_with("26.4"))
 }

@@ -125,6 +125,7 @@ impl AppServerSession {
         }
         let query = ThreadListParams {
             attached_to_thread_id: Some(parent.to_string()),
+            include_attached_threads: false,
             current_account_only: true,
             archived: Some(false),
             model_providers: Some(Vec::new()),
@@ -141,6 +142,7 @@ impl AppServerSession {
             ancestor_thread_id: None,
             search_term: None,
             originators: None,
+            included_thread_ids: None,
             excluded_thread_ids: None,
         };
         if matches!(self.request_handle, AppServerRequestHandle::InProcess(_)) {

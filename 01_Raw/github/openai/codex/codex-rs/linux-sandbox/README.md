@@ -13,7 +13,29 @@ seccomp filters; it also retains the legacy Landlock filesystem implementation.
 `src/linux_run_main.rs` coordinates these stages through `LinuxSandboxCommand`.
 End-to-end coverage lives in `tests/suite/sandbox.rs` and the other suite modules.
 
-On Linux, Codex prefers the first `bwrap` found on `PATH`
+### Transparent TCP
+
+```sh
+codex sandbox --transparent-tcp --permission-profile db -- psql -h pg.example
+```
+
+The Rust sandbox helper includes the TCP stack. Codex starts it automatically.
+The Linux host needs distro `bwrap` on `PATH`, user and network namespaces, IPv6,
+and read/write access to `/dev/net/tun`.
+Use full managed SOCKS5 mode for native database ports and an isolated PID namespace.
+For executor-wide capture and HTTP CONNECT routing, see the [exec-server setup](../exec-server/README.md#transparent-tcp).
+
+The private DNS stub maps up to 8,192 names to stable addresses in `198.18.0.0/15`
+and `fdc0:de00::/96`. The relay sends the original name and port to the attributed proxy;
+literal addresses, including entries from a hosts file, are checked as IPs. Unknown
+synthetic addresses are rejected. Loopback stays local. Each bridge permits 128 concurrent
+connections. When the TCP stack is full, clients retry their opening SYN. The relay identifies each
+native socket by both endpoints and its inode in the private namespace TCP tables. Closing that
+socket cancels its pending approval connection, including when other clients use the same
+destination. A client that shuts down only its write side can still receive a reply. General UDP,
+QUIC, ICMP, legacy Landlock, host PID inheritance, and procfs fallback are outside this mode.
+
+With transparent TCP off, Codex prefers the first `bwrap` found on `PATH`
 outside the current working directory whenever it is available. If `bwrap` is
 present but too old to support
 `--argv0`, the helper keeps using system bubblewrap and switches to a
@@ -29,7 +51,8 @@ commands that would enter the bubblewrap path.
 
 **Current Behavior**
 
-- Legacy `SandboxPolicy` / `sandbox_mode` configs remain supported.
+- Legacy `sandbox_mode` configs remain supported and are converted to
+  `PermissionProfile` before sandbox execution.
 - Bubblewrap is the default filesystem sandbox.
 - If `bwrap` is present on `PATH` outside the current working directory, the
   helper uses it.
@@ -47,9 +70,8 @@ commands that would enter the bubblewrap path.
 - Filesystem-restricted execution requires bubblewrap. The legacy Landlock
   option is rejected for these policies because it cannot isolate app-server
   Unix sockets. Disable `features.use_legacy_landlock` when upgrading.
-- Split-only filesystem policies that do not round-trip through the legacy
-  `SandboxPolicy` model stay on bubblewrap so nested read-only or denied
-  carveouts are preserved.
+- Bubblewrap preserves nested read-only and denied filesystem rules from
+  `PermissionProfile`.
 - When bubblewrap is active, the helper applies `PR_SET_NO_NEW_PRIVS` and a
   seccomp filter in-process after establishing the filesystem view. Restricted
   network policies block network syscalls; filesystem-restricted policies with
@@ -100,7 +122,8 @@ commands that would enter the bubblewrap path.
   sockets unless `dangerously_allow_all_unix_sockets` is granted. Unix socket
   pairs remain allowed for communication between related processes.
 - When bubblewrap is active, it mounts a fresh `/proc` via `--proc /proc` by default.
-  If that mount is denied, it retains the inherited `/proc` and still creates a
+  Transparent TCP requires this mount and aborts the launch if it fails.
+  In other modes, if that mount is denied, it retains the inherited `/proc` and still creates a
   PID namespace, preserving the existing fallback. `--no-proc` also retains the
   inherited `/proc` without disabling PID isolation. In these cases, process IDs
   inside the sandbox can differ from those exposed by `/proc`. Default invocations

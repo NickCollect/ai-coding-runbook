@@ -53,6 +53,7 @@ class TestSessions:
                         "name": "name",
                         "parameters": {"foo": "bar"},
                         "type": "function",
+                        "async": True,
                         "defer_loading": True,
                     }
                 ],
@@ -60,6 +61,7 @@ class TestSessions:
             agent_id="agent_id",
             input="x",
             metadata={"foo": "string"},
+            prompt_cache_options={"ttl": "30m"},
             review="none",
             spend_control={"limit": 1},
             stream=False,
@@ -129,6 +131,7 @@ class TestSessions:
                         "name": "name",
                         "parameters": {"foo": "bar"},
                         "type": "function",
+                        "async": True,
                         "defer_loading": True,
                     }
                 ],
@@ -136,6 +139,7 @@ class TestSessions:
             agent_id="agent_id",
             input="x",
             metadata={"foo": "string"},
+            prompt_cache_options={"ttl": "30m"},
             review="none",
             spend_control={"limit": 1},
             stream_options={"include_obfuscation": True},
@@ -229,11 +233,13 @@ class TestSessions:
                         "name": "name",
                         "parameters": {"foo": "bar"},
                         "type": "function",
+                        "async": True,
                         "defer_loading": True,
                     }
                 ],
             },
             metadata={"foo": "string"},
+            prompt_cache_options={"ttl": "30m"},
             review="none",
             spend_control={"limit": 1},
         )
@@ -385,6 +391,7 @@ class TestAsyncSessions:
                         "name": "name",
                         "parameters": {"foo": "bar"},
                         "type": "function",
+                        "async": True,
                         "defer_loading": True,
                     }
                 ],
@@ -392,6 +399,7 @@ class TestAsyncSessions:
             agent_id="agent_id",
             input="x",
             metadata={"foo": "string"},
+            prompt_cache_options={"ttl": "30m"},
             review="none",
             spend_control={"limit": 1},
             stream=False,
@@ -461,6 +469,7 @@ class TestAsyncSessions:
                         "name": "name",
                         "parameters": {"foo": "bar"},
                         "type": "function",
+                        "async": True,
                         "defer_loading": True,
                     }
                 ],
@@ -468,6 +477,7 @@ class TestAsyncSessions:
             agent_id="agent_id",
             input="x",
             metadata={"foo": "string"},
+            prompt_cache_options={"ttl": "30m"},
             review="none",
             spend_control={"limit": 1},
             stream_options={"include_obfuscation": True},
@@ -561,11 +571,13 @@ class TestAsyncSessions:
                         "name": "name",
                         "parameters": {"foo": "bar"},
                         "type": "function",
+                        "async": True,
                         "defer_loading": True,
                     }
                 ],
             },
             metadata={"foo": "string"},
+            prompt_cache_options={"ttl": "30m"},
             review="none",
             spend_control={"limit": 1},
         )

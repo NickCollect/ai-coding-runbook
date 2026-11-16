@@ -442,6 +442,11 @@ impl ChatWidget {
         let send_pending_steers_immediately =
             self.input_queue.submit_pending_steers_after_interrupt;
         self.input_queue.submit_pending_steers_after_interrupt = false;
+        if send_pending_steers_immediately && self.is_archived_view() {
+            // Keep the original steer records for recovery instead of retrying in read-only mode.
+            self.request_redraw();
+            return;
+        }
         if self.interrupted_turn_notice_mode != InterruptedTurnNoticeMode::Suppress {
             if send_pending_steers_immediately {
                 self.add_to_history(history_cell::new_info_event(
@@ -453,12 +458,7 @@ impl ChatWidget {
                     TurnAbortReason::BudgetLimited => history_cell::new_error_event(
                         "Goal budget reached - the turn was stopped.".to_string(),
                     ),
-                    TurnAbortReason::Interrupted => PlainHistoryCell::new(vec![
-                        Line::from(
-                            "■ Conversation interrupted - use /feedback if something went wrong",
-                        )
-                        .style(crate::style::secondary_text_style()),
-                    ]),
+                    TurnAbortReason::Interrupted => history_cell::new_interruption_notice(),
                 });
             }
         }
@@ -467,6 +467,7 @@ impl ChatWidget {
         // interrupted turn reaches the UI, so any unacknowledged steers still
         // tracked here must be restored locally instead of waiting for a later commit.
         if send_pending_steers_immediately {
+            let resume_handoff = self.input_queue.resume_handoff.strong_count() > 0;
             let pending_steers = self
                 .input_queue
                 .pending_steers
@@ -488,7 +489,9 @@ impl ChatWidget {
                         .rejected_steer_history_records
                         .push_back(pending.history_record);
                 }
-                if let Some((message, history_record)) = self.pop_next_queued_user_message() {
+                if !resume_handoff
+                    && let Some((message, history_record)) = self.pop_next_queued_user_message()
+                {
                     let source = message.source;
                     self.submit_user_message_with_history_and_shell_escape_policy(
                         message.into_user_message(),
@@ -504,12 +507,22 @@ impl ChatWidget {
                         .map(|pending| (pending.user_message, pending.history_record))
                         .collect(),
                 );
-                self.submit_user_message_with_history_and_shell_escape_policy(
-                    user_message,
-                    history_record,
-                    ShellEscapePolicy::Allow,
-                    UserMessageSource::Prompt,
-                );
+                if resume_handoff {
+                    // Capture the retry with the outgoing thread's input.
+                    self.input_queue
+                        .queued_user_messages
+                        .push_front(user_message.into());
+                    self.input_queue
+                        .queued_user_message_history_records
+                        .push_front(history_record);
+                } else {
+                    self.submit_user_message_with_history_and_shell_escape_policy(
+                        user_message,
+                        history_record,
+                        ShellEscapePolicy::Allow,
+                        UserMessageSource::Prompt,
+                    );
+                }
             } else if let Some(combined) = self.drain_pending_messages_for_restore() {
                 self.restore_composer_state(combined);
             }
@@ -639,7 +652,8 @@ impl ChatWidget {
     }
 
     pub(super) fn restore_composer_state(&mut self, composer: ThreadComposerState) {
-        self.restore_composer_state_with_shell_mode(composer, /*shell_mode*/ None);
+        let shell_mode = composer.shell_mode;
+        self.restore_composer_state_with_shell_mode(composer, shell_mode);
     }
 
     fn restore_composer_state_with_shell_mode(
@@ -649,6 +663,7 @@ impl ChatWidget {
     ) {
         let ThreadComposerState {
             text,
+            shell_mode: _,
             local_images,
             remote_image_urls,
             text_elements,
@@ -684,6 +699,7 @@ impl ChatWidget {
         } = user_message;
         ThreadComposerState {
             text,
+            shell_mode: None,
             local_images,
             remote_image_urls,
             text_elements,
@@ -697,6 +713,8 @@ impl ChatWidget {
         let draft = self.bottom_pane.composer_recovery_snapshot();
         let composer = ThreadComposerState {
             text: draft.text,
+            // A disabled shell composer also treats a leading bang literally.
+            shell_mode: Some(draft.shell_mode.unwrap_or(false)),
             text_elements: draft.text_elements,
             local_images: draft.local_images,
             remote_image_urls: draft.remote_image_urls,
@@ -741,6 +759,24 @@ impl ChatWidget {
         })
     }
 
+    /// Keep the current session's collaboration settings when restoring a saved draft.
+    pub(crate) fn update_input_collaboration_mode(
+        &self,
+        input: &mut ThreadInputState,
+        has_resumed_mode: bool,
+    ) {
+        input.current_collaboration_mode = self.current_collaboration_mode.clone();
+        if has_resumed_mode {
+            input
+                .active_collaboration_mask
+                .clone_from(&self.active_collaboration_mask);
+        } else if let Some(mask) = input.active_collaboration_mask.as_mut() {
+            // Keep the local selection for older servers. Replay reapplies a supplied mode.
+            mask.model = Some(self.current_model().to_string());
+            mask.reasoning_effort = Some(self.effective_reasoning_effort());
+        }
+    }
+
     pub(crate) fn restore_thread_input_state(
         &mut self,
         input_state: Option<ThreadInputState>,
@@ -750,8 +786,14 @@ impl ChatWidget {
             .as_ref()
             .and_then(|state| state.provider_error.clone());
         let preserve_in_flight_turn = restore_mode.preserve_in_flight_turn;
-        let restored_task_running =
-            preserve_in_flight_turn && input_state.as_ref().is_some_and(|state| state.task_running);
+        let restored_task_running = preserve_in_flight_turn
+            && (self.bottom_pane.is_task_running()
+                || input_state.as_ref().is_some_and(|state| state.task_running));
+        let restored_agent_turn_running = preserve_in_flight_turn
+            && (self.turn_lifecycle.agent_turn_running
+                || input_state
+                    .as_ref()
+                    .is_some_and(|state| state.agent_turn_running));
         if let Some(input_state) = input_state {
             self.bottom_pane.restore_questions(input_state.questions);
             self.initial_user_message = input_state.initial_user_message;
@@ -769,10 +811,8 @@ impl ChatWidget {
             self.restore_status_surface_overrides(input_state.status_surface_overrides);
             self.safety_buffering_prompt = input_state.safety_buffering_prompt;
             self.safety_buffering_source = input_state.safety_buffering_source;
-            self.turn_lifecycle.restore_running(
-                preserve_in_flight_turn && input_state.agent_turn_running,
-                Instant::now(),
-            );
+            self.turn_lifecycle
+                .restore_running(restored_agent_turn_running, Instant::now());
             self.input_queue.user_turn_pending_start =
                 preserve_in_flight_turn && input_state.user_turn_pending_start;
             self.input_queue.pending_user_message_client_id =
@@ -849,6 +889,12 @@ impl ChatWidget {
         }
         self.refresh_pending_input_preview();
         self.request_redraw();
+    }
+
+    pub(crate) fn pause_input_for_resume_handoff(&mut self) -> std::sync::Arc<()> {
+        let handoff = std::sync::Arc::new(());
+        self.input_queue.resume_handoff = std::sync::Arc::downgrade(&handoff);
+        handoff
     }
 
     pub(crate) fn set_queue_autosend_suppressed(&mut self, suppressed: bool) {

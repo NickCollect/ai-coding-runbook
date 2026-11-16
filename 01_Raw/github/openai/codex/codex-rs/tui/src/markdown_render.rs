@@ -1601,6 +1601,25 @@ impl<'a, 'policy> Writer<'a, 'policy> {
                 ));
             }
         }
+        // Include columns whose text ends before a neighbor wraps or whose value is empty.
+        let mut end = 0;
+        let edges: std::sync::Arc<[usize]> = column_widths
+            .iter()
+            .map(|width| {
+                end += width + 2 * TABLE_CELL_PADDING + TABLE_COLUMN_GAP;
+                end - TABLE_COLUMN_GAP / 2
+            })
+            .collect();
+        for line in &mut out {
+            if let Some(table) = line
+                .source
+                .as_mut()
+                .and_then(|source| source.copy.as_mut())
+                .and_then(|copy| std::sync::Arc::make_mut(copy).table.as_mut())
+            {
+                table.grid_columns = Some(std::sync::Arc::clone(&edges));
+            }
+        }
         RenderedTableLines {
             table_lines: out,
             table_lines_prewrapped: true,
@@ -2396,6 +2415,11 @@ impl<'a, 'policy> Writer<'a, 'policy> {
         if let Some(mut line) = self.current_line_content.take() {
             let style = self.current_line_style;
             let mut source = crate::terminal_hyperlinks::LogicalLineSource::from_line(&line.line);
+            if !self.current_line_in_code_block
+                && crate::wrapping::text_contains_url_like(&source.text)
+            {
+                source.wrap_policy = crate::terminal_hyperlinks::LineWrapPolicy::UrlAware;
+            }
             source.copy = Some(std::sync::Arc::new(std::mem::take(&mut self.copy_line)));
             // NB we don't wrap code in code blocks, in order to preserve whitespace for copy/paste.
             if !self.current_line_in_code_block

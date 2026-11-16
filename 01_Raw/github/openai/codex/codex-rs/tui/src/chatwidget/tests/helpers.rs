@@ -6,6 +6,13 @@ use codex_app_server_protocol::PluginAvailability;
 use codex_utils_absolute_path::test_support::PathExt;
 use pretty_assertions::assert_eq;
 
+#[track_caller]
+pub(crate) fn assert_pending_steers_unadmitted(input: &ThreadInputState) {
+    for steer in &input.pending_steers {
+        assert_eq!(steer.admitted_turn_id, None);
+    }
+}
+
 pub(super) async fn test_config() -> (tempfile::TempDir, Config) {
     // Start from the built-in defaults so tests do not inherit host/system config.
     let codex_home = tempfile::Builder::new()
@@ -45,7 +52,7 @@ pub(crate) fn normalize_working_snapshot(text: String) -> String {
     let text = normalize_snapshot_paths(text)
         .replace("◦ Working", "• Working")
         .replace("◦ Wor…", "• Wor…");
-    regex_lite::Regex::new(r"(?m)^• Working \(\d+s")
+    regex_lite::Regex::new(r"• Working \(\d+s")
         .expect("valid working timer pattern")
         .replace_all(&text, "• Working (0s")
         .into_owned()
@@ -317,6 +324,10 @@ pub(crate) fn set_chatgpt_auth(chat: &mut ChatWidget) {
     chat.model_catalog = test_model_catalog(&chat.config);
 }
 
+pub(crate) fn set_test_model_catalog(chat: &mut ChatWidget, models: Vec<ModelPreset>) {
+    chat.model_catalog = Arc::new(ModelCatalog::new(models));
+}
+
 fn test_model_info(slug: &str, priority: i32, supports_fast_mode: bool) -> ModelInfo {
     let mut service_tiers = Vec::new();
     if supports_fast_mode {
@@ -504,7 +515,7 @@ fn token_usage_breakdown(usage: TokenUsage) -> codex_app_server_protocol::TokenU
         total_tokens: usage.total_tokens,
         input_tokens: usage.input_tokens,
         cached_input_tokens: usage.cached_input_tokens,
-        cache_write_input_tokens: 0,
+        cache_write_input_tokens: usage.cache_write_input_tokens,
         output_tokens: usage.output_tokens,
         reasoning_output_tokens: usage.reasoning_output_tokens,
     }

@@ -1,5 +1,65 @@
 # Changelog
 
+## [7.57.0](https://github.com/openai/openai-node/compare/v7.56.0...v7.57.0) (2026-11-13)
+
+
+### Features
+
+* **api:** update Agents, Live, Images, and admin types ([#3147](https://github.com/openai/openai-node/issues/3147)) ([543ed94](https://github.com/openai/openai-node/commit/543ed94e6451d2eaf43f1a4a16a0fc8c8f42eade))
+
+## [7.56.0](https://github.com/openai/openai-node/compare/v7.55.0...v7.56.0) (2026-11-12)
+
+
+### Features
+
+* **api:** type reasoning input transformations on responses ([#3145](https://github.com/openai/openai-node/issues/3145)) ([94e2c6d](https://github.com/openai/openai-node/commit/94e2c6d5d77f633afbce90ad2ba171e0d23b351c))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump @cloudflare/workers-types from 5.20261025.1 to 5.20261101.1 in /ecosystem-tests/cloudflare-worker ([#3127](https://github.com/openai/openai-node/issues/3127)) ([ece9199](https://github.com/openai/openai-node/commit/ece91995999abe8f5dcbc16012ab183e7e33a70a))
+* **deps-dev:** bump webpack from 5.111.1 to 5.112.2 in /ecosystem-tests/ts-browser-webpack ([#3131](https://github.com/openai/openai-node/issues/3131)) ([08cc5e9](https://github.com/openai/openai-node/commit/08cc5e9a83df66a8ab7c88afce444849870b9c01))
+
+
+### Documentation
+
+* simplify review handoff instructions ([#3142](https://github.com/openai/openai-node/issues/3142)) ([b579bcb](https://github.com/openai/openai-node/commit/b579bcb3e586d22269ffe6fe504653a0e05acbe8))
+
+## [7.55.0](https://github.com/openai/openai-node/compare/v7.54.0...v7.55.0) (2026-11-10)
+
+
+### Features
+
+* **api:** add typed async function tools ([#3140](https://github.com/openai/openai-node/issues/3140)) ([5bc31e1](https://github.com/openai/openai-node/commit/5bc31e1b29afb54b9e41161f92ffdef2ff3b4366))
+
+
+### Bug Fixes
+
+* **deps-dev:** bump @smithy/signature-v4 from 5.7.4 to 5.7.5 ([#3129](https://github.com/openai/openai-node/issues/3129)) ([d780d4c](https://github.com/openai/openai-node/commit/d780d4c052d69697c2796981b3e3914525e3be49))
+* **deps-dev:** bump @types/node from 26.6.5 to 26.6.6 ([#3130](https://github.com/openai/openai-node/issues/3130)) ([bd9862b](https://github.com/openai/openai-node/commit/bd9862baacd89b680f7b770098811642858aaf13))
+* **deps-dev:** bump start-server-and-test from 3.0.12 to 3.0.13 in /ecosystem-tests/vercel-edge ([#3133](https://github.com/openai/openai-node/issues/3133)) ([c2e007c](https://github.com/openai/openai-node/commit/c2e007cbd85bf8cb336140a119f008c7af71c0cb))
+* **deps-dev:** bump ts-jest from 29.4.12 to 29.4.15 ([#3135](https://github.com/openai/openai-node/issues/3135)) ([2528b6d](https://github.com/openai/openai-node/commit/2528b6db07b842d1d779bb0a84ddf55120cfdff7))
+* **deps-dev:** bump wrangler from 4.152.0 to 4.156.0 in /ecosystem-tests/cloudflare-worker ([#3128](https://github.com/openai/openai-node/issues/3128)) ([df6dc96](https://github.com/openai/openai-node/commit/df6dc96dcf0bc23cdddd2eedf2530eb6af9c285b))
+* **deps-dev:** bump ws from 8.22.0 to 8.22.1 ([#3132](https://github.com/openai/openai-node/issues/3132)) ([63f3f98](https://github.com/openai/openai-node/commit/63f3f98251e34c6d668957809df3920d6ae5dca2))
+* **deps:** bump zod from 4.6.5 to 4.6.7 ([#3134](https://github.com/openai/openai-node/issues/3134)) ([d82bc5b](https://github.com/openai/openai-node/commit/d82bc5b354d90f1b0c8ebbcfce632260dca94bec))
+
+## [7.54.0](https://github.com/openai/openai-node/compare/v7.53.0...v7.54.0) (2026-11-08)
+
+
+### Features
+
+* **api:** recognize gpt-6-rosalind in beta Responses ([#3126](https://github.com/openai/openai-node/issues/3126)) ([8fb5a99](https://github.com/openai/openai-node/commit/8fb5a99e7fa3245b53307762317484eee10a49f7))
+
+
+### Chores
+
+* **api:** retain agent scheduling support ([#3123](https://github.com/openai/openai-node/issues/3123)) ([47bade0](https://github.com/openai/openai-node/commit/47bade063b0277e56a8352997a55e857424d482c))
+
+
+### Documentation
+
+* consolidate AGENTS.md guidance ([#3121](https://github.com/openai/openai-node/issues/3121)) ([9ba922c](https://github.com/openai/openai-node/commit/9ba922c5cc88c49120de36ebb9920df466b628b1))
+
 ## [7.53.0](https://github.com/openai/openai-node/compare/v7.52.0...v7.53.0) (2026-11-06)
 
 

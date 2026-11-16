@@ -1,12 +1,16 @@
 use super::agent_control::HostRuntime;
+use anyhow::Context;
 use anyhow::Result;
 use codex_core::AgentRuntimeOwnership;
 use codex_core::AgentServiceTier;
 use codex_core::AgentTurnAdmission;
 use codex_core::CodexThreadSettingsOverrides;
 use codex_core::InheritedSessionId;
+use codex_core::RequestCountry;
+use codex_core::SteerSubmission;
 use codex_core::ThreadManager;
 use codex_core::TurnInputRequest;
+use codex_core::TurnInputSubmission;
 use codex_core::TurnStartOptions;
 use codex_core::X_CODEX_ROUTING_HINT_HEADER;
 use codex_features::Feature;
@@ -200,19 +204,17 @@ impl AgentServiceTier for HostTier {
         Box::pin(async { self.value.borrow().clone() })
     }
 
-    fn update(&self, value: Option<String>) -> BoxFuture<'static, ()> {
+    fn update(&self, value: Option<String>) -> BoxFuture<'static, Result<(), String>> {
         let (polling, waiting) = oneshot::channel();
         let (accept, accepted) = oneshot::channel();
-        self.updates
-            .send(TierHandoff {
-                value,
-                waiting,
-                accept,
-            })
-            .expect("tier handoff");
+        let _ = self.updates.send(TierHandoff {
+            value,
+            waiting,
+            accept,
+        });
         Box::pin(async move {
             let _ = polling.send(());
-            accepted.await.expect("local tier acceptance");
+            accepted.await.map_err(|_| "tier worker stopped".into())
         })
     }
 }
@@ -254,6 +256,227 @@ async fn accept_committed_tier<T>(
         assert!(handoffs.is_empty(), "same-tier retry published another update");
         Ok((result, value))
     }).await?
+}
+
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn pending_host_tier_settings_reply_does_not_block_interrupt() -> Result<()> {
+    skip_if_no_network!(Ok(()));
+
+    let completed = ev_completed("root-turn");
+    let server = start_websocket_server(vec![
+        vec![vec![
+            ev_response_created("fixture-warm"),
+            ev_completed("fixture-warm"),
+        ]],
+        vec![
+            vec![ev_response_created("root-warm"), ev_completed("root-warm")],
+            vec![
+                ev_response_created("root-after-cancel"),
+                ev_assistant_message("still-running", "Ready."),
+                ev_completed("root-after-cancel"),
+            ],
+            vec![ev_response_created("root-turn"), completed.clone()],
+        ],
+    ])
+    .await;
+    let release_completion = server.gate_response_event(&completed);
+    let test = test_codex()
+        .with_model("gpt-5.4")
+        .with_auth(CodexAuth::create_dummy_chatgpt_auth_for_testing())
+        .with_config(|config| {
+            // Keep sampling behind the gate until the explicit interrupt.
+            config.features.disable(Feature::InstantInterrupt).unwrap();
+            config
+                .features
+                .enable(Feature::FastMode)
+                .expect("fast mode");
+        })
+        .build_with_websocket_server(&server)
+        .await?;
+    tokio::time::timeout(
+        Duration::from_secs(5),
+        server.wait_for_request(/*connection_index*/ 0, /*request_index*/ 0),
+    )
+    .await?;
+
+    let (updates, mut handoffs) = mpsc::unbounded_channel();
+    let tier = Arc::new(HostTier {
+        value: watch::Sender::new(None),
+        updates,
+    });
+    let mut options = test.start_thread_options().await;
+    let root_id = test.thread_manager.reserve_thread_id();
+    options.reserved_thread_id = Some(root_id);
+    options.config.service_tier = Some("default".into());
+    options
+        .thread_extension_init
+        .insert(AgentRuntimeOwnership::Host);
+    options
+        .thread_extension_init
+        .insert(Arc::new(HostRuntime) as Arc<dyn AgentTurnAdmission>);
+    options
+        .thread_extension_init
+        .insert(tier as Arc<dyn AgentServiceTier>);
+    let manager = Arc::clone(&test.thread_manager);
+    let start = tokio::spawn(async move { manager.start_thread(options).await });
+    let TierHandoff {
+        value,
+        waiting,
+        accept,
+    } = tokio::time::timeout(Duration::from_secs(10), handoffs.recv())
+        .await?
+        .expect("startup tier handoff");
+    assert_eq!(value.as_deref(), Some("default"));
+    tokio::time::timeout(Duration::from_secs(10), waiting).await??;
+    tokio::time::timeout(
+        Duration::from_secs(5),
+        server.wait_for_request(/*connection_index*/ 1, /*request_index*/ 0),
+    )
+    .await?;
+    start.abort();
+    let Err(error) = start.await else {
+        anyhow::bail!("startup caller returned while the receipt was pending");
+    };
+    assert!(error.is_cancelled());
+    let root = test.thread_manager.get_thread(root_id).await?;
+    accept
+        .send(())
+        .expect("registered root retains the handoff");
+
+    let request = TurnInputRequest::user_input(vec![UserInput::Text {
+        text: "Confirm the root still runs after startup cancellation.".into(),
+        text_elements: Vec::new(),
+    }]);
+    tokio::time::timeout(Duration::from_secs(10), root.start_or_steer_turn(request))
+        .await
+        .context("root did not accept a turn after startup cancellation")??;
+    wait_for_successful_turn(&root).await;
+
+    let request = TurnInputRequest::user_input(vec![UserInput::Text {
+        text: "Wait for an interrupt.".into(),
+        text_elements: Vec::new(),
+    }])
+    .with_thread_settings(ThreadSettingsOverrides {
+        service_tier: Some(Some("flex".into())),
+        ..Default::default()
+    });
+    let TurnInputSubmission::Started { turn_id, .. } =
+        tokio::time::timeout(Duration::from_secs(10), root.start_or_steer_turn(request)).await??
+    else {
+        anyhow::bail!("expected a new root turn");
+    };
+    let request = tokio::time::timeout(
+        Duration::from_secs(10),
+        server.wait_for_request(/*connection_index*/ 1, /*request_index*/ 2),
+    )
+    .await?;
+    let handoff = handoffs.try_recv().expect("turn tier handoff");
+    assert_eq!(handoff.value.as_deref(), Some("flex"));
+    assert_eq!(request.body_json()["service_tier"], "flex");
+    handoff.accept.send(()).expect("accept the turn tier");
+
+    // Keep both host acknowledgements pending while the same turn is running.
+    submit_thread_settings(
+        &root,
+        ThreadSettingsOverrides {
+            service_tier: Some(Some("default".into())),
+            ..Default::default()
+        },
+    )
+    .await?;
+    let no_reply = handoffs.try_recv().expect("no-reply tier handoff");
+    assert_eq!(no_reply.value.as_deref(), Some("default"));
+
+    let steer = TurnInputRequest::user_input(vec![UserInput::Text {
+        text: "Stay on this task.".into(),
+        text_elements: Vec::new(),
+    }])
+    .with_thread_settings(ThreadSettingsOverrides {
+        service_tier: Some(Some("flex".into())),
+        ..Default::default()
+    });
+    assert_eq!(
+        tokio::time::timeout(
+            Duration::from_secs(10),
+            root.steer_turn(steer, turn_id.clone())
+        )
+        .await??,
+        SteerSubmission::Steered {
+            turn_id: turn_id.clone()
+        }
+    );
+    let steered = handoffs.try_recv().expect("steered tier handoff");
+    assert_eq!(steered.value.as_deref(), Some("flex"));
+
+    let thread = Arc::clone(&root);
+    let settings = tokio::spawn(async move {
+        thread
+            .update_thread_settings(ThreadSettingsOverrides {
+                service_tier: Some(Some("default".into())),
+                ..Default::default()
+            })
+            .await
+    });
+    let TierHandoff {
+        value,
+        waiting,
+        accept,
+    } = tokio::time::timeout(Duration::from_secs(10), handoffs.recv())
+        .await?
+        .expect("tier handoff");
+    assert_eq!(value.as_deref(), Some("default"));
+    tokio::time::timeout(Duration::from_secs(10), waiting).await??;
+
+    root.submit(Op::Interrupt).await?;
+    wait_for_event(&root, |event| {
+        matches!(event, EventMsg::TurnAborted(aborted) if aborted.turn_id.as_deref() == Some(turn_id.as_str()))
+    })
+    .await;
+    drop((no_reply, steered));
+    drop(release_completion);
+    assert!(
+        !settings.is_finished(),
+        "interrupt does not accept the tier"
+    );
+    drop(accept);
+    let error = tokio::time::timeout(Duration::from_secs(10), settings)
+        .await??
+        .expect_err("the host dropped its receipt");
+    assert_eq!(
+        error.to_string(),
+        "service tier committed locally; host acceptance unconfirmed: tier worker stopped"
+    );
+    assert_eq!(root.thread_settings_snapshot().await.service_tier, value);
+
+    tokio::time::timeout(
+        Duration::from_secs(10),
+        root.restore_thread_settings(CodexThreadSettingsOverrides {
+            service_tier: Some(value.clone()),
+            ..Default::default()
+        }),
+    )
+    .await??;
+    assert!(
+        handoffs.is_empty(),
+        "restore does not retry a failed handoff"
+    );
+
+    accept_committed_tier(
+        root.update_thread_settings(ThreadSettingsOverrides {
+            service_tier: Some(value),
+            ..Default::default()
+        }),
+        &mut handoffs,
+        &test.thread_manager,
+        root_id,
+        "default",
+    )
+    .await?;
+
+    root.shutdown_and_wait().await?;
+    test.codex.shutdown_and_wait().await?;
+    server.shutdown().await;
+    Ok(())
 }
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
@@ -559,8 +782,11 @@ async fn websocket_test_codex_shell_chain() -> Result<()> {
     let mut builder = test_codex().with_windows_cmd_shell();
 
     let test = builder.build_with_websocket_server(&server).await?;
-    test.submit_turn_with_policy("run the echo command", test.config.legacy_sandbox_policy())
-        .await?;
+    test.submit_turn_with_permission_profile(
+        "run the echo command",
+        test.config.permissions.effective_permission_profile(),
+    )
+    .await?;
 
     let connection = server.single_connection();
     assert_eq!(connection.len(), 2);
@@ -625,8 +851,11 @@ async fn websocket_first_turn_uses_startup_prewarm_and_create(
         });
     }
     let test = builder.build_with_websocket_server(&server).await?;
-    test.submit_turn_with_policy("hello", test.config.legacy_sandbox_policy())
-        .await?;
+    test.submit_turn_with_permission_profile(
+        "hello",
+        test.config.permissions.effective_permission_profile(),
+    )
+    .await?;
 
     assert_eq!(server.handshakes().len(), 1);
     let connection = server.single_connection();
@@ -699,6 +928,131 @@ async fn websocket_first_turn_uses_startup_prewarm_and_create(
 }
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn websocket_country_changes_on_one_connection() -> Result<()> {
+    skip_if_no_network!(Ok(()));
+    let server = start_websocket_server_with_headers(vec![WebSocketConnectionConfig {
+        requests: ["warm", "first", "refreshed", "cleared", "omitted"]
+            .into_iter()
+            .map(|id| vec![ev_response_created(id), ev_completed(id)])
+            .collect(),
+        response_headers: Vec::new(),
+        accept_delay: None,
+        close_after_requests: false,
+    }])
+    .await;
+    let test = test_codex()
+        .with_model("gpt-5.2")
+        .with_auth(CodexAuth::create_dummy_chatgpt_auth_for_testing())
+        .with_request_country(RequestCountry::UNKNOWN)
+        .with_config(|config| {
+            config
+                .features
+                .enable(Feature::ResponsesWebsocketsV2)
+                .unwrap();
+        })
+        .build_with_websocket_server(&server)
+        .await?;
+    let warmup = server
+        .wait_for_request(/*connection_index*/ 0, /*request_index*/ 0)
+        .await
+        .body_json();
+    assert_eq!(warmup["generate"].as_bool(), Some(false));
+    assert_eq!(warmup.get("request_country"), Some(&Value::Null));
+
+    for request_country in [
+        Some(RequestCountry::from_iso_code("DE")?),
+        Some(RequestCountry::from_iso_code("US")?),
+        Some(RequestCountry::UNKNOWN),
+        Some(RequestCountry::default()),
+    ] {
+        test.codex
+            .start_or_steer_turn(
+                TurnInputRequest::user_input(vec![UserInput::Text {
+                    text: "hello".to_string(),
+                    text_elements: Vec::new(),
+                }])
+                .with_thread_settings(ThreadSettingsOverrides {
+                    request_country,
+                    ..Default::default()
+                }),
+            )
+            .await?;
+        wait_for_successful_turn(&test.codex).await;
+    }
+    assert_eq!(server.handshakes().len(), 1);
+    let requests: Vec<_> = server
+        .single_connection()
+        .iter()
+        .map(core_test_support::responses::WebSocketRequest::body_json)
+        .collect();
+    assert_eq!(
+        requests
+            .iter()
+            .map(|request| request.get("request_country"))
+            .collect::<Vec<_>>(),
+        [
+            Some(&Value::Null),
+            Some(&json!("DE")),
+            Some(&json!("US")),
+            Some(&Value::Null),
+            None,
+        ]
+    );
+    assert_eq!(requests[1].get("generate"), None);
+    assert_eq!(
+        requests
+            .iter()
+            .map(|request| request.get("previous_response_id"))
+            .collect::<Vec<_>>(),
+        [
+            None,
+            Some(&json!("warm")),
+            Some(&json!("first")),
+            Some(&json!("refreshed")),
+            Some(&json!("cleared"))
+        ]
+    );
+    server.shutdown().await;
+    Ok(())
+}
+
+#[tokio::test]
+async fn request_country_survives_websocket_to_http_fallback() -> Result<()> {
+    skip_if_no_network!(Ok(()));
+    let server = core_test_support::responses::start_mock_server().await;
+    wiremock::Mock::given(wiremock::matchers::method("GET"))
+        .and(wiremock::matchers::path("/v1/responses"))
+        .respond_with(wiremock::ResponseTemplate::new(426))
+        .expect(1)
+        .mount(&server)
+        .await;
+    let fallback = core_test_support::responses::mount_sse_once(
+        &server,
+        core_test_support::responses::sse_completed("fallback"),
+    )
+    .await;
+    let test = test_codex()
+        .with_auth(CodexAuth::create_dummy_chatgpt_auth_for_testing())
+        .with_request_country(RequestCountry::UNKNOWN)
+        .with_config(|config| {
+            config
+                .features
+                .enable(Feature::ResponsesWebsocketsV2)
+                .unwrap();
+            config.model_provider.supports_websockets = true;
+        })
+        .build_with_auto_env(&server)
+        .await?;
+    test.submit_text_turn("Continue over HTTP.").await?;
+    let request = fallback.single_request();
+    assert_eq!(
+        request.body_json().get("request_country"),
+        Some(&Value::Null)
+    );
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
 async fn websocket_first_turn_handles_handshake_delay_with_startup_prewarm() -> Result<()> {
     skip_if_no_network!(Ok(()));
 
@@ -720,8 +1074,11 @@ async fn websocket_first_turn_handles_handshake_delay_with_startup_prewarm() -> 
 
     let mut builder = test_codex();
     let test = builder.build_with_websocket_server(&server).await?;
-    test.submit_turn_with_policy("hello", test.config.legacy_sandbox_policy())
-        .await?;
+    test.submit_turn_with_permission_profile(
+        "hello",
+        test.config.permissions.effective_permission_profile(),
+    )
+    .await?;
 
     assert_eq!(server.handshakes().len(), 1);
     let connection = server.single_connection();
@@ -777,8 +1134,11 @@ async fn websocket_v2_test_codex_shell_chain() -> Result<()> {
     });
 
     let test = builder.build_with_websocket_server(&server).await?;
-    test.submit_turn_with_policy("run the echo command", test.config.legacy_sandbox_policy())
-        .await?;
+    test.submit_turn_with_permission_profile(
+        "run the echo command",
+        test.config.permissions.effective_permission_profile(),
+    )
+    .await?;
 
     let connection = server.single_connection();
     assert_eq!(connection.len(), 3);

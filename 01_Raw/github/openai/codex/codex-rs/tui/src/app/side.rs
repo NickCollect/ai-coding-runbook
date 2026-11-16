@@ -67,7 +67,6 @@ impl SideParentStatus {
             | ServerRequest::ExecCommandApproval { .. } => Some(SideParentStatus::NeedsApproval),
             ServerRequest::DynamicToolCall { .. }
             | ServerRequest::AttestationGenerate { .. }
-            | ServerRequest::CurrentTimeRead { .. }
             | ServerRequest::ChatgptAuthTokensRefresh { .. } => None,
         }
     }
@@ -304,7 +303,7 @@ impl App {
             && (self.chat_widget.no_modal_or_popup_active()
                 // Replaying the parent may reopen a completion for its parked draft.
                 // The focused chooser hides it and owns the keystrokes.
-                || (self.chooser_focus() == Some(sidebar::PaneFocus::Sidebar)
+                || (self.panel_focus() == Some(sidebar::PaneFocus::Sidebar)
                     && self.sidebar_chooser_available()
                     && self.chat_widget.completion_can_yield_focus()))
     }
@@ -585,6 +584,7 @@ impl App {
                         response: crate::dynamic_tools::failure_response(
                             "Source task was closed while handling a dynamic tool call",
                         ),
+                        reply: None,
                     });
                     task.abort();
                     false
@@ -884,6 +884,7 @@ impl App {
         };
         tui.frame_requester().schedule_frame();
         if let Err(message) = result {
+            pending.message = None;
             pending.state = sidebar::CreationState::Failed {
                 message,
                 cleanup: None,
@@ -1032,7 +1033,6 @@ impl App {
                 }
             }
             Err(err) => {
-                self.restore_side_user_message(user_message.take());
                 self.chat_widget
                     .set_side_conversation_context_label(/*label*/ None);
                 self.chat_widget.add_error_message(err);

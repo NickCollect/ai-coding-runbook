@@ -4,7 +4,9 @@ use std::sync::Arc;
 
 use crate::process_telemetry::ProcessTelemetry;
 use codex_exec_server_protocol::JSONRPCErrorError;
+use codex_exec_server_protocol::ProcessStartErrorData;
 use codex_file_system::WindowsSandboxSelection;
+use codex_network_proxy::CHILD_ONLY_CA_ENV_KEYS;
 use codex_network_proxy::CUSTOM_CA_ENV_KEYS;
 use codex_network_proxy::CredentialMaskingFailureMode;
 use codex_network_proxy::ManagedNetworkSandboxContext;
@@ -19,14 +21,12 @@ use codex_network_proxy::is_managed_mitm_ca_trust_bundle_path;
 use codex_protocol::config_types::WindowsSandboxLevel;
 use codex_protocol::models::PermissionProfile;
 use codex_sandboxing::SandboxCommand;
-use codex_sandboxing::SandboxDirectSpawnTransformRequest;
 use codex_sandboxing::SandboxManager;
 use codex_sandboxing::SandboxTransformRequest;
 use codex_sandboxing::SandboxType;
 use codex_sandboxing::WindowsSandboxFilesystemOverrides;
 use codex_sandboxing::WindowsSandboxProxySettingsMode;
 use codex_sandboxing::WindowsSandboxSpawnRequest;
-use codex_sandboxing::with_managed_mitm_ca_readable_root;
 #[cfg(windows)]
 use codex_shell_command::shell_detect::fallback_powershell_shell_for_windows_sandbox;
 use codex_utils_absolute_path::AbsolutePathBuf;
@@ -39,7 +39,7 @@ use crate::process_telemetry::trace_process_id;
 use crate::protocol::ExecParams;
 use crate::rpc::internal_error;
 use crate::rpc::invalid_params;
-use crate::sandbox_selection::select_sandbox;
+use crate::sandbox_selection::sandbox_selection;
 
 const CREDENTIAL_MASKING_FAILURE_MODE: CredentialMaskingFailureMode =
     CredentialMaskingFailureMode::Warn;
@@ -124,16 +124,18 @@ pub(crate) async fn prepare_exec_request_with_telemetry(
             ));
         }
         if !codex_sandboxing::windows_mxc_available() {
-            return Err(invalid_params(
-                "native MXC is unavailable on this executor".to_owned(),
-            ));
+            return Err(
+                ProcessStartErrorData::SandboxUnavailable.attach_to(invalid_params(
+                    "native MXC is unavailable on this executor".to_owned(),
+                )),
+            );
         }
     }
     let (env, managed_network, network_proxy_handle, network_proxy_restricting_sid) =
         prepare_managed_network(
             params,
             credential_brokers,
-            runtime_paths.is_some_and(|paths| paths.proxy_private_ips_via_upstream),
+            runtime_paths,
             env,
             network_policy_decider,
             network_policy_audit_observer,
@@ -151,84 +153,41 @@ pub(crate) async fn prepare_exec_request_with_telemetry(
             windows_sandbox: None,
         });
     };
-    let runtime_paths = runtime_paths
-        .ok_or_else(|| invalid_params("sandbox runtime paths are not configured".to_string()))?;
-    sandbox_context
-        .validate_file_system_paths_for_current_host()
-        .map_err(|err| invalid_params(err.to_string()))?;
+    let runtime_paths = runtime_paths.ok_or_else(|| {
+        ProcessStartErrorData::SandboxUnavailable.attach_to(invalid_params(
+            "sandbox runtime paths are not configured".to_string(),
+        ))
+    })?;
     let windows_sandbox_proxy_settings_mode = sandbox_context
         .windows_sandbox_proxy_settings_mode
         .unwrap_or_default();
-    // TODO(jif): Transport permissions before orchestrator-local paths are materialized,
-    // then resolve executor-local helper and workspace paths here.
-    let permissions = sandbox_context.permissions.clone();
-    let sandbox_policy_cwd = &sandbox_context.cwd;
-    let native_sandbox_policy_cwd = native_path(sandbox_policy_cwd, "sandbox cwd")?;
-    let native_workspace_roots = sandbox_context
-        .workspace_roots
-        .iter()
-        .map(|root| native_path(root, "sandbox workspace root"))
-        .collect::<Result<Vec<_>, _>>()?;
-    let workspace_roots = native_workspace_roots.as_slice();
-    let permissions = permissions.materialize_project_roots_with_workspace_roots(workspace_roots);
+    let mut runtime_readable_paths = Vec::new();
+    if cfg!(target_os = "linux") || (cfg!(unix) && params.arg0.is_some()) {
+        runtime_readable_paths.push(runtime_paths.codex_self_exe.clone());
+    }
+    if cfg!(target_os = "linux") {
+        runtime_readable_paths.extend(runtime_paths.codex_linux_sandbox_exe.iter().cloned());
+    }
     let managed_mitm_ca_trust_bundle_path = managed_network.as_ref().and_then(|_| {
-        CUSTOM_CA_ENV_KEYS.iter().find_map(|key| {
-            let path = env.get(*key)?;
-            if !is_managed_mitm_ca_trust_bundle_path(path) {
-                return None;
-            }
-            AbsolutePathBuf::from_absolute_path(path).ok()
-        })
+        CUSTOM_CA_ENV_KEYS
+            .into_iter()
+            .chain(CHILD_ONLY_CA_ENV_KEYS)
+            .find_map(|key| {
+                let path = env.get(key)?;
+                if !is_managed_mitm_ca_trust_bundle_path(path) {
+                    return None;
+                }
+                AbsolutePathBuf::from_absolute_path(path).ok()
+            })
     });
-    let permissions = with_managed_mitm_ca_readable_root(
-        permissions,
-        managed_mitm_ca_trust_bundle_path.as_ref(),
-        native_sandbox_policy_cwd.as_path(),
-    );
-    #[cfg(unix)]
-    let (file_system_policy, network_policy) = permissions.to_runtime_permissions();
-    #[cfg(unix)]
-    let sandbox_helper_paths = params
-        .arg0
-        .iter()
-        .map(|_| runtime_paths.codex_self_exe.clone())
-        .collect::<Vec<_>>();
-    // Bubblewrap launches the configured helper, which may re-enter this executable to apply
-    // seccomp, so the outer filesystem sandbox must expose both paths.
-    #[cfg(target_os = "linux")]
-    let sandbox_helper_paths = {
-        let mut sandbox_helper_paths = sandbox_helper_paths;
-        if !sandbox_helper_paths.contains(&runtime_paths.codex_self_exe) {
-            sandbox_helper_paths.push(runtime_paths.codex_self_exe.clone());
-        }
-        sandbox_helper_paths.extend(runtime_paths.codex_linux_sandbox_exe.iter().cloned());
-        sandbox_helper_paths
-    };
-    #[cfg(unix)]
-    let file_system_policy = file_system_policy
-        .with_additional_readable_roots(native_sandbox_policy_cwd.as_path(), &sandbox_helper_paths);
-    #[cfg(unix)]
-    let permissions = PermissionProfile::from_runtime_permissions_with_enforcement(
-        permissions.enforcement(),
-        &file_system_policy,
-        network_policy,
-    );
+    runtime_readable_paths.extend(managed_mitm_ca_trust_bundle_path);
     let sandbox_manager = SandboxManager::new()
-        .with_linux_sandbox_pid_namespace(runtime_paths.linux_sandbox_pid_namespace);
+        .with_linux_sandbox_pid_namespace(runtime_paths.linux_sandbox_pid_namespace)
+        .with_linux_sandbox_transparent_tcp(runtime_paths.linux_sandbox_transparent_tcp);
     #[cfg(target_os = "macos")]
     let sandbox_manager = sandbox_manager
         .with_allowed_symlinked_codex_home(runtime_paths.allowed_symlinked_codex_home.clone());
-    let (sandbox, windows_sandbox_level) = select_sandbox(
-        &sandbox_manager,
-        &permissions,
-        sandbox_context,
-        params.enforce_managed_network,
-    );
-    if sandbox == SandboxType::None {
-        return Err(invalid_params(
-            "sandbox intent cannot be enforced on this executor".to_string(),
-        ));
-    }
+    let (selection, windows_sandbox_level) = sandbox_selection(sandbox_context);
     let (program, args) = params
         .argv
         .split_first()
@@ -267,10 +226,8 @@ pub(crate) async fn prepare_exec_request_with_telemetry(
     } else {
         program
     };
-    let transform_request = SandboxDirectSpawnTransformRequest {
-        workspace_roots,
-        windows_sandbox_proxy_settings_mode,
-        transform: SandboxTransformRequest {
+    let mut request = sandbox_manager
+        .transform(SandboxTransformRequest {
             command: SandboxCommand {
                 program,
                 args,
@@ -279,45 +236,49 @@ pub(crate) async fn prepare_exec_request_with_telemetry(
                 managed_network,
                 additional_permissions: None,
             },
-            permissions: &permissions,
-            workspace_roots: None,
-            sandbox,
+            permissions: &sandbox_context.permissions,
+            workspace_roots: Some(&sandbox_context.workspace_roots),
+            runtime_readable_paths: &runtime_readable_paths,
+            selection,
             enforce_managed_network: params.enforce_managed_network,
             environment_id: None,
             network: None,
-            sandbox_policy_cwd,
+            sandbox_policy_cwd: &sandbox_context.cwd,
             sandbox_exe: if cfg!(windows) {
                 Some(runtime_paths.codex_self_exe.as_path())
             } else {
                 runtime_paths.codex_linux_sandbox_exe.as_deref()
             },
             use_legacy_landlock: sandbox_context.use_legacy_landlock,
-            windows_sandbox_level: windows_sandbox_level.unwrap_or(WindowsSandboxLevel::Disabled),
-        },
-    };
-    let mut request = if sandbox == SandboxType::WindowsRestrictedToken {
-        // The shared launcher invokes the native Windows session spawner directly.
-        sandbox_manager.transform(transform_request.transform)
-    } else {
-        sandbox_manager.transform_for_direct_spawn(transform_request)
-    }
-    .map_err(|err| invalid_params(format!("failed to prepare process sandbox: {err}")))?;
+            windows_sandbox_level,
+        })
+        .map_err(|err| match err {
+            codex_sandboxing::SandboxTransformError::SandboxUnavailable => {
+                ProcessStartErrorData::SandboxUnavailable.attach_to(invalid_params(err.to_string()))
+            }
+            err => sandbox_preparation_error(err),
+        })?
+        .into_command_request();
     request.sandbox_override = sandbox_context.sandbox_override;
     crate::run_integrity_checks(&request).await;
-    let windows_sandbox = if sandbox == SandboxType::WindowsRestrictedToken {
-        let windows_sandbox_level = windows_sandbox_level.ok_or_else(|| {
-            invalid_params("restricted token sandbox requires a sandbox level".to_string())
-        })?;
+    let windows_sandbox = if request.sandbox == SandboxType::WindowsRestrictedToken {
+        let permissions = request.permission_profile;
+        let native_sandbox_policy_cwd = native_path(&request.sandbox_policy_cwd, "sandbox cwd")?;
+        let native_workspace_roots = sandbox_context
+            .workspace_roots
+            .iter()
+            .map(|root| native_path(root, "sandbox workspace root"))
+            .collect::<Result<_, _>>()?;
         request.arg0 = params.arg0.clone();
         let proxy_enforced = params.enforce_managed_network;
         let filesystem_overrides = WindowsSandboxFilesystemOverrides::resolve(
-            sandbox,
+            request.sandbox,
             &permissions,
             &native_sandbox_policy_cwd,
             windows_sandbox_level,
             &request.env,
         )
-        .map_err(|err| invalid_params(format!("failed to prepare process sandbox: {err}")))?;
+        .map_err(sandbox_preparation_error)?;
         Some(PreparedWindowsSandboxRequest {
             permission_profile: permissions,
             workspace_roots: native_workspace_roots,
@@ -344,7 +305,7 @@ pub(crate) async fn prepare_exec_request_with_telemetry(
 async fn prepare_managed_network(
     params: &ExecParams,
     credential_brokers: &RemoteCredentialBrokerCache,
-    proxy_private_ips_via_upstream: bool,
+    runtime_paths: Option<&ExecServerRuntimeOptions>,
     env: HashMap<String, String>,
     network_policy_decider: Option<Arc<dyn NetworkPolicyDecider>>,
     network_policy_audit_observer: Option<NetworkPolicyAuditObserver>,
@@ -358,8 +319,18 @@ async fn prepare_managed_network(
     ),
     JSONRPCErrorError,
 > {
+    let without_executor_proxy = |env| {
+        if (params.enforce_managed_network || params.managed_network.is_some())
+            && runtime_paths.is_some_and(|paths| paths.tcp_upstream_proxy.is_some())
+        {
+            return Err(invalid_params(
+                "a mandatory TCP upstream requires an executor-local managed proxy".to_string(),
+            ));
+        }
+        Ok((env, params.managed_network.clone(), None, None))
+    };
     let Some(launch) = &params.network_proxy else {
-        return Ok((env, params.managed_network.clone(), None, None));
+        return without_executor_proxy(env);
     };
     #[cfg(windows)]
     let routing = match params
@@ -371,7 +342,7 @@ async fn prepare_managed_network(
             // Native Windows commands have no sandbox token SID for shared ingress.
             let mut native_env = env;
             codex_network_proxy::strip_managed_proxy_env(&mut native_env);
-            return Ok((native_env, params.managed_network.clone(), None, None));
+            return without_executor_proxy(native_env);
         }
         Some(WindowsSandboxSelection::Mxc) => ManagedProxyRouting::DedicatedListeners,
         Some(
@@ -398,7 +369,12 @@ async fn prepare_managed_network(
             ))
         })?
         .credential_broker;
-    state.set_proxy_private_ips_via_upstream(proxy_private_ips_via_upstream);
+    if let Some(paths) = runtime_paths {
+        state.set_proxy_private_ips_via_upstream(paths.proxy_private_ips_via_upstream);
+        if let Some(proxy) = &paths.tcp_upstream_proxy {
+            state.set_tcp_upstream_proxy(proxy.clone());
+        }
+    }
     if let Some(observer) = network_policy_audit_observer {
         state.set_policy_audit_observer(observer);
     }
@@ -416,20 +392,14 @@ async fn prepare_managed_network(
                 registration_id: registration.executor_registration_id.clone(),
             }),
     });
-    let mut builder = NetworkProxy::builder()
-        .state(Arc::new(state))
-        .managed_proxy_routing(routing);
-    if let Some(network_policy_decider) = network_policy_decider {
-        builder = builder.policy_decider_arc(network_policy_decider);
-    }
-    let proxy = builder
-        .build()
-        .await
-        .map_err(|err| internal_error(format!("failed to build executor network proxy: {err}")))?;
-    let handle = proxy
-        .run()
-        .await
-        .map_err(|err| internal_error(format!("failed to start executor network proxy: {err}")))?;
+    let (proxy, handle) = NetworkProxy::start_managed(
+        state,
+        routing,
+        network_policy_decider,
+        /*blocked_request_observer*/ None,
+    )
+    .await
+    .map_err(|err| internal_error(err.to_string()))?;
     #[cfg(target_os = "windows")]
     let network_proxy_restricting_sid = if routing == ManagedProxyRouting::SharedIngress {
         Some(
@@ -483,6 +453,12 @@ async fn prepare_managed_network(
         Some(handle),
         network_proxy_restricting_sid,
     ))
+}
+
+fn sandbox_preparation_error(err: impl std::fmt::Display) -> JSONRPCErrorError {
+    ProcessStartErrorData::SandboxPreparation.attach_to(invalid_params(format!(
+        "failed to prepare process sandbox: {err}"
+    )))
 }
 
 fn native_path(path: &PathUri, label: &str) -> Result<AbsolutePathBuf, JSONRPCErrorError> {

@@ -7,7 +7,7 @@ use pretty_assertions::assert_eq;
 fn ordinary_multi_backend_resume_queries_cloud_interactive_threads_on_every_page() {
     // The mixed picker has no shared cwd/provider filter. It sends conventional
     // interactive source names, even when the connection belongs to Cloud.
-    for (cursor, state_db_only) in [(None, true), (Some("page-2"), false)] {
+    for (cursor, state_db_only, archived) in [(None, true, false), (Some("page-2"), false, true)] {
         let params = serde_json::from_value(json!({
             "currentAccountOnly": true,
             "cursor": cursor,
@@ -15,13 +15,14 @@ fn ordinary_multi_backend_resume_queries_cloud_interactive_threads_on_every_page
             "sortKey": "updated_at",
             "modelProviders": [],
             "sourceKinds": ["cli", "vscode"],
-            "archived": false,
+            "archived": archived,
             "useStateDbOnly": state_db_only,
         }))
         .unwrap();
         let query = thread_list_query(params).unwrap();
         assert_eq!(query.cursor.as_deref(), cursor);
         assert_eq!(query.limit, Some(25));
+        assert_eq!(query.archived, archived);
         assert!(matches!(query.sort_key, cloud::ThreadSortKey::UpdatedAt));
         assert!(matches!(
             query.sort_direction,
@@ -34,7 +35,6 @@ fn ordinary_multi_backend_resume_queries_cloud_interactive_threads_on_every_page
 #[test]
 fn unsupported_filters_do_not_return_unrelated_cloud_rows() {
     for filter in [
-        json!({"archived": true}),
         json!({"sourceKinds": ["exec"]}),
         json!({"attachedToThreadId": "other"}),
         json!({"modelProviders": ["other"]}),
@@ -76,6 +76,17 @@ fn user_input_uses_stable_id_and_the_existing_cloud_configuration() {
     );
     assert!(matches!(request.mode, cloud::SubmissionMode::StartIfIdle));
     assert!(!request.shared_access);
+    assert_eq!(request.service_tier, None);
+
+    for (tier, expected) in [("ultrafast", Some("ultrafast")), ("default", None)] {
+        let request = cloud_message(protocol::TurnStartParams {
+            turn_trigger: Some("user".into()),
+            service_tier: Some(Some(tier.into())),
+            ..message()
+        })
+        .unwrap();
+        assert_eq!(request.service_tier, Some(expected.map(str::to_owned)));
+    }
 
     for tier in ["default", "priority"] {
         assert!(

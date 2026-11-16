@@ -725,7 +725,7 @@ async fn memories_startup_phase1_uses_live_thread_service_tier_and_detached_meta
     context
         .stream_stage_one_prompt(
             &test.config,
-            &codex_core::Prompt::default(),
+            codex_core::Prompt::default(),
             &request_context,
         )
         .await?;
@@ -1324,15 +1324,15 @@ async fn seed_stage1_output(
     rollout_slug: &str,
 ) -> anyhow::Result<ThreadId> {
     let thread_id = ThreadId::new();
-    let mut metadata_builder = codex_state::ThreadMetadataBuilder::new(
+    let metadata_builder = codex_state::ThreadMetadataBuilder::new(
         thread_id,
         codex_home.join(format!("rollout-{thread_id}.jsonl")),
         updated_at,
         SessionSource::Cli,
-    );
-    metadata_builder.cwd = codex_home.join(format!("workspace-{rollout_slug}"));
-    metadata_builder.model_provider = Some("test-provider".to_string());
-    metadata_builder.git_branch = Some(format!("branch-{rollout_slug}"));
+    )
+    .with_cwd(codex_home.join(format!("workspace-{rollout_slug}")))
+    .with_model_provider(Some("test-provider".to_string()))
+    .with_git_branch(Some(format!("branch-{rollout_slug}")));
     let metadata = metadata_builder.build("test-provider");
     db.upsert_thread(&metadata).await?;
 
@@ -1389,15 +1389,15 @@ async fn seed_stage1_candidate(
     });
     tokio::fs::write(&rollout_path, format!("{meta}\n{jsonl}\n")).await?;
 
-    let mut metadata_builder = codex_state::ThreadMetadataBuilder::new(
+    let metadata_builder = codex_state::ThreadMetadataBuilder::new(
         thread_id,
         rollout_path,
         updated_at,
         SessionSource::Cli,
-    );
-    metadata_builder.cwd = codex_home.join(format!("workspace-{rollout_slug}"));
-    metadata_builder.model_provider = Some("test-provider".to_string());
-    metadata_builder.git_branch = Some(format!("branch-{rollout_slug}"));
+    )
+    .with_cwd(codex_home.join(format!("workspace-{rollout_slug}")))
+    .with_model_provider(Some("test-provider".to_string()))
+    .with_git_branch(Some(format!("branch-{rollout_slug}")));
     let mut metadata = metadata_builder.build("test-provider");
     metadata.preview = Some("remember this startup test conversation".to_string());
     metadata.first_user_message = metadata.preview.clone();

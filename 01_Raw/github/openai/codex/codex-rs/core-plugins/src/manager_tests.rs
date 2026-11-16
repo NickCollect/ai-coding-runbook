@@ -10,7 +10,6 @@ use crate::loader::load_plugin_skill_inventory;
 use crate::loader::load_plugins_from_layer_stack;
 use crate::loader::plugin_capability_summary_from_root;
 use crate::loader::refresh_non_curated_plugin_cache;
-use crate::loader::refresh_non_curated_plugin_cache_force_reinstall;
 use crate::marketplace::MarketplacePluginInstallPolicy;
 use crate::remote::REMOTE_GLOBAL_MARKETPLACE_NAME;
 use crate::remote::REMOTE_WORKSPACE_MARKETPLACE_NAME;
@@ -386,6 +385,99 @@ path = {:?}
         )
         .expect("list blocked marketplace");
     assert_eq!(blocked_outcome.marketplaces, Vec::new());
+}
+
+#[tracing_test::traced_test]
+#[tokio::test]
+async fn list_marketplaces_skips_manifests_for_discarded_rows_without_changing_precedence() {
+    let tmp = TempDir::new().unwrap();
+    let shared = tmp.path().join("a-shared");
+    let repo = tmp.path().join("b-repo");
+    write_file(
+        &shared.join(".agents/plugins/marketplace.json"),
+        r#"{
+  "name": "team",
+  "plugins": [
+    {"name": "shared", "source": "./shared"},
+    {"name": "shadowed", "source": "./shadowed", "policy": {"products": []}}
+  ]
+}"#,
+    );
+    write_file(&shared.join("shared/.codex-plugin/plugin.json"), "{");
+    write_file(
+        &repo.join(".agents/plugins/marketplace.json"),
+        r#"{
+  "name": "team",
+  "plugins": [
+    {"name": "shadowed", "source": "./shadowed"},
+    {"name": "repo-only", "source": "./repo-only"}
+  ]
+}"#,
+    );
+    write_file(&repo.join("shadowed/.codex-plugin/plugin.json"), "{");
+    write_plugin_with_version(&repo, "repo-only", "repo-only", Some("2.0.0"));
+    write_file(
+        &tmp.path().join(CONFIG_TOML_FILE),
+        &format!(
+            r#"
+[features]
+plugins = true
+
+[marketplaces.team]
+source_type = "local"
+source = {shared:?}
+"#
+        ),
+    );
+    let config = load_config(tmp.path(), &repo).await;
+    let context = PluginMarketplaceContext {
+        global_config: config.clone(),
+        scopes: vec![
+            PluginMarketplaceScope {
+                cwd: Some(AbsolutePathBuf::try_from(shared).unwrap()),
+                config: config.clone(),
+            },
+            PluginMarketplaceScope {
+                cwd: Some(AbsolutePathBuf::try_from(repo).unwrap()),
+                config,
+            },
+        ],
+        load_errors: Vec::new(),
+    };
+    let result = test_plugins_manager(tmp.path().to_path_buf())
+        .list_marketplaces_for_context(&context, /*include_openai_curated*/ false)
+        .unwrap();
+
+    assert_eq!(result.errors, Vec::new());
+    assert_eq!(
+        result
+            .marketplaces
+            .iter()
+            .filter(|marketplace| marketplace.name == "team")
+            .flat_map(|marketplace| &marketplace.plugins)
+            .map(|plugin| (plugin.id.as_str(), plugin.local_version.as_deref()))
+            .collect::<Vec<_>>(),
+        vec![("shared@team", None), ("repo-only@team", Some("2.0.0"))],
+    );
+    logs_assert(|lines| {
+        let reads = lines
+            .iter()
+            .filter(|line| {
+                line.contains("failed to parse plugin manifest") && line.contains("a-shared")
+            })
+            .count();
+        let shadowed_reads = lines
+            .iter()
+            .filter(|line| {
+                line.contains("failed to parse plugin manifest") && line.contains("b-repo")
+            })
+            .count();
+        (reads == 1 && shadowed_reads == 0)
+            .then_some(())
+            .ok_or_else(|| {
+                format!("expected one shared and zero shadowed manifest reads, got {reads} and {shadowed_reads}")
+            })
+    });
 }
 
 fn write_auth_projection_plugin(codex_home: &Path, name: &str, include_app: bool) {
@@ -1860,12 +1952,14 @@ async fn unresolved_display_assets_does_not_satisfy_display_cache_reads() {
         .prepare_remote_installed_plugins_cache_generation(auth.as_ref())
         .unwrap();
     assert_eq!(
-        manager.write_remote_installed_plugins_cache_snapshot(
-            generation,
-            plugins.clone(),
-            auth.as_ref(),
-            RemoteInstalledPluginsCachePublication::Refresh(InstalledPluginDisplayAssets::Skip),
-        ),
+        manager
+            .write_remote_installed_plugins_cache_snapshot(
+                generation,
+                plugins.clone(),
+                auth.as_ref(),
+                RemoteInstalledPluginsCachePublication::Refresh(InstalledPluginDisplayAssets::Skip),
+            )
+            .map(|update| update.metadata_change_id.is_some()),
         Some(true)
     );
     assert!(
@@ -1883,12 +1977,16 @@ async fn unresolved_display_assets_does_not_satisfy_display_cache_reads() {
         .expect("runtime metadata is ready");
     assert_eq!(runtime[0].plugins.len(), 1);
     assert_eq!(
-        manager.write_remote_installed_plugins_cache_snapshot(
-            generation,
-            plugins.clone(),
-            auth.as_ref(),
-            RemoteInstalledPluginsCachePublication::Refresh(InstalledPluginDisplayAssets::Include),
-        ),
+        manager
+            .write_remote_installed_plugins_cache_snapshot(
+                generation,
+                plugins.clone(),
+                auth.as_ref(),
+                RemoteInstalledPluginsCachePublication::Refresh(
+                    InstalledPluginDisplayAssets::Include
+                ),
+            )
+            .map(|update| update.metadata_change_id.is_some()),
         Some(false)
     );
     assert_eq!(
@@ -1898,12 +1996,14 @@ async fn unresolved_display_assets_does_not_satisfy_display_cache_reads() {
         Some(runtime)
     );
     assert_eq!(
-        manager.write_remote_installed_plugins_cache_snapshot(
-            generation,
-            plugins,
-            auth.as_ref(),
-            RemoteInstalledPluginsCachePublication::Refresh(InstalledPluginDisplayAssets::Skip),
-        ),
+        manager
+            .write_remote_installed_plugins_cache_snapshot(
+                generation,
+                plugins,
+                auth.as_ref(),
+                RemoteInstalledPluginsCachePublication::Refresh(InstalledPluginDisplayAssets::Skip),
+            )
+            .map(|update| update.metadata_change_id.is_some()),
         Some(false)
     );
     assert!(
@@ -6135,6 +6235,9 @@ plugins = true
     Mock::given(method("GET"))
         .and(path("/ps/plugins/suggested/codex"))
         .and(query_param("scope", "GLOBAL"))
+        .and(header("authorization", "Bearer Access Token"))
+        .and(header("chatgpt-account-id", "account_id"))
+        .and(header("OAI-Product-Sku", "codex"))
         .respond_with(ResponseTemplate::new(200).set_body_json(serde_json::json!({
             "enabled": true,
             "plugins": []
@@ -6143,11 +6246,17 @@ plugins = true
         .mount(&server)
         .await;
 
-    let mut config = load_config(tmp.path(), tmp.path()).await;
+    let mut config = load_config(tmp.path(), tmp.path())
+        .await
+        .with_plugin_recommendations_enabled(/*enabled*/ true);
     config.chatgpt_base_url = server.uri();
     let manager = std::sync::Arc::new(test_plugins_manager(tmp.path().to_path_buf()));
     let auth = CodexAuth::create_dummy_chatgpt_auth_for_testing();
-    let cache_key = recommended_plugins_cache_key(&config);
+    let cache_key = plugin_service_cache_key(&config, Some(&auth));
+    let cached_mode = || {
+        let cache = manager.recommended_plugins_cache.lock().unwrap();
+        Some(cache.get(&cache_key)?.cached.as_ref()?.mode.clone())
+    };
 
     manager.maybe_start_remote_plugin_caches_refresh(
         &config,
@@ -6157,7 +6266,7 @@ plugins = true
 
     let mode = tokio::time::timeout(Duration::from_secs(2), async {
         loop {
-            if let Some(mode) = manager.cached_recommended_plugins_mode(&cache_key) {
+            if let Some(mode) = cached_mode() {
                 break mode;
             }
             tokio::time::sleep(Duration::from_millis(10)).await;
@@ -6178,78 +6287,113 @@ plugins = true
         mode
     );
     manager.clear_recommended_plugins_cache();
-    assert_eq!(manager.cached_recommended_plugins_mode(&cache_key), None);
+    assert!(cached_mode().is_none());
+}
+
+async fn mock_recommendation_responses(
+    server: &MockServer,
+    route: &str,
+    responses: impl IntoIterator<Item = ResponseTemplate>,
+) {
+    for response in responses {
+        Mock::given(method("GET"))
+            .and(path(route))
+            .respond_with(response)
+            .up_to_n_times(1)
+            .expect(1)
+            .mount(server)
+            .await;
+    }
+    Mock::given(method("GET"))
+        .and(path(route))
+        .respond_with(ResponseTemplate::new(500))
+        .with_priority(255)
+        .expect(0)
+        .mount(server)
+        .await;
 }
 
 #[tokio::test]
-async fn recommended_plugins_mode_deduplicates_concurrent_cache_misses() {
-    let tmp = tempfile::tempdir().unwrap();
-    write_file(
-        &tmp.path().join(CONFIG_TOML_FILE),
-        r#"[features]
-plugins = true
-"#,
-    );
-
+async fn recommended_plugins_stay_cached_until_a_changed_marker_refresh_succeeds() {
+    let tmp = TempDir::new().unwrap();
     let server = MockServer::start().await;
-    Mock::given(method("GET"))
-        .and(path("/ps/plugins/suggested/codex"))
-        .and(query_param("scope", "GLOBAL"))
-        .and(header("authorization", "Bearer Access Token"))
-        .and(header("chatgpt-account-id", "account_id"))
-        .and(header("OAI-Product-Sku", "codex"))
-        .respond_with(
-            ResponseTemplate::new(200)
-                .set_body_json(serde_json::json!({
-                    "enabled": true,
-                    "plugins": [
-                        {
-                            "id": "plugin_slack",
-                            "name": "slack",
-                            "display_name": "Slack"
-                        },
-                        {
-                            "id": "plugin_github",
-                            "name": "github",
-                            "display_name": "GitHub"
-                        }
-                    ]
-                }))
-                .set_delay(Duration::from_millis(100)),
-        )
-        .expect(1)
-        .mount(&server)
-        .await;
-
     let mut config = load_config(tmp.path(), tmp.path()).await;
     config.chatgpt_base_url = server.uri();
     let manager = test_plugins_manager(tmp.path().to_path_buf());
     let auth = CodexAuth::create_dummy_chatgpt_auth_for_testing();
-    let expected = RecommendedPluginsMode::Endpoint {
-        plugins: vec![
-            RecommendedPlugin {
-                config_id: "github@openai-curated-remote".to_string(),
-                remote_plugin_id: "plugin_github".to_string(),
-                display_name: "GitHub".to_string(),
-            },
-            RecommendedPlugin {
-                config_id: "slack@openai-curated-remote".to_string(),
-                remote_plugin_id: "plugin_slack".to_string(),
-                display_name: "Slack".to_string(),
-            },
-        ],
+    let recommendations = || manager.recommended_plugins_mode_for_config(&config, Some(&auth));
+    let marker = |value: Option<&str>| {
+        ResponseTemplate::new(200).set_body_json(serde_json::json!({"tooling_changed_at": value}))
     };
+    mock_recommendation_responses(
+        &server,
+        "/ps/plugins/tooling-state/turtle",
+        [
+            marker(Some("100")),
+            marker(None),
+            ResponseTemplate::new(503),
+            marker(Some("100")),
+            marker(Some("101")),
+            marker(Some("101")),
+            marker(Some("101")),
+        ],
+    )
+    .await;
+    mock_recommendation_responses(
+        &server,
+        "/ps/plugins/suggested/codex",
+        [
+            ResponseTemplate::new(200).set_body_json(serde_json::json!({
+                "enabled": true,
+                "plugins": [{"id": "plugin_slack", "name": "slack", "display_name": "Slack"}]
+            })),
+            ResponseTemplate::new(503),
+            ResponseTemplate::new(200)
+                .set_body_json(serde_json::json!({"enabled": false, "plugins": []})),
+        ],
+    )
+    .await;
 
-    let (left, right) = tokio::join!(
-        manager.recommended_plugins_mode_for_config(&config, Some(&auth)),
-        manager.recommended_plugins_mode_for_config(&config, Some(&auth)),
-    );
-    assert_eq!((left, right), (expected.clone(), expected.clone()));
+    let original = RecommendedPluginsMode::Endpoint {
+        plugins: vec![RecommendedPlugin {
+            config_id: "slack@openai-curated-remote".to_string(),
+            remote_plugin_id: "plugin_slack".to_string(),
+            display_name: "Slack".to_string(),
+        }],
+    };
+    let (left, right) = tokio::join!(recommendations(), recommendations());
+    assert_eq!((left, right), (original.clone(), original.clone()));
+    assert_eq!(recommendations().await, original, "fresh cache hit");
+
+    let key = plugin_service_cache_key(&config, Some(&auth));
+    let poll_cutoff = Instant::now() - TOOLING_STATE_REUSE_WINDOW;
+    let stale_check = poll_cutoff
+        .checked_sub(Duration::from_secs(24 * 60 * 60))
+        .unwrap_or(poll_cutoff);
+    let age_tooling_check = || {
+        let mut cache = manager.recommended_plugins_cache.lock().unwrap();
+        let cached = cache
+            .get_mut(&key)
+            .and_then(|entry| entry.cached.as_mut())
+            .expect("recommendations were cached");
+        cached.checked_at = stale_check;
+    };
+    for reason in ["null marker", "failed marker request", "unchanged marker"] {
+        age_tooling_check();
+        assert_eq!(recommendations().await, original, "{reason}");
+    }
+
+    // Concurrent callers share the failed catalog refresh. The next poll retries the same marker.
+    age_tooling_check();
+    let (left, right) = tokio::join!(recommendations(), recommendations());
+    assert_eq!((left, right), (original.clone(), original));
+    age_tooling_check();
+    assert_eq!(recommendations().await, RecommendedPluginsMode::Legacy);
+    age_tooling_check();
     assert_eq!(
-        manager
-            .recommended_plugins_mode_for_config(&config, Some(&auth))
-            .await,
-        expected
+        recommendations().await,
+        RecommendedPluginsMode::Legacy,
+        "an unchanged marker reuses the explicitly disabled response"
     );
 }
 
@@ -6342,7 +6486,7 @@ async fn recommended_plugins_cache_clear_rejects_stale_fetch_completion() {
 }
 
 #[tokio::test]
-async fn recommended_plugin_candidates_filter_installed_and_disabled_plugins() {
+async fn recommended_plugin_candidates_use_endpoint_results_and_filter_disabled_tools() {
     let tmp = tempfile::tempdir().unwrap();
     write_file(
         &tmp.path().join(CONFIG_TOML_FILE),
@@ -6365,11 +6509,6 @@ plugins = true
                     "id": "plugin_github",
                     "name": "github",
                     "display_name": "GitHub"
-                },
-                {
-                    "id": "plugin_slack",
-                    "name": "slack",
-                    "display_name": "Slack"
                 }
             ]
         })))
@@ -6387,12 +6526,9 @@ plugins = true
     let disabled_tools = [ToolSuggestDisabledTool::plugin(
         "github@openai-curated-remote",
     )];
-    let loaded_plugins = manager.plugins_for_config(&config).await;
-
     let candidates = manager
         .recommended_plugin_candidates_for_config(RecommendedPluginCandidatesInput {
             plugins_config: &config,
-            loaded_plugins: &loaded_plugins,
             auth: Some(&auth),
             disabled_tools: &disabled_tools,
             app_server_client_name: None,
@@ -6402,53 +6538,14 @@ plugins = true
     assert_eq!(
         candidates,
         Some(vec![DiscoverableTool::from(DiscoverablePluginInfo {
-            id: "slack@openai-curated-remote".to_string(),
-            remote_plugin_id: Some("plugin_slack".to_string()),
-            name: "Slack".to_string(),
+            id: "linear@openai-curated-remote".to_string(),
+            remote_plugin_id: Some("plugin_linear".to_string()),
+            name: "Linear".to_string(),
             description: None,
             has_skills: false,
             mcp_server_names: Vec::new(),
             app_connector_ids: Vec::new(),
         })])
-    );
-}
-
-#[tokio::test]
-async fn recommended_plugins_mode_caches_explicit_false() {
-    let tmp = tempfile::tempdir().unwrap();
-    write_file(
-        &tmp.path().join(CONFIG_TOML_FILE),
-        r#"[features]
-plugins = true
-"#,
-    );
-
-    let server = MockServer::start().await;
-    Mock::given(method("GET"))
-        .and(path("/ps/plugins/suggested/codex"))
-        .respond_with(ResponseTemplate::new(200).set_body_json(serde_json::json!({
-            "enabled": false,
-            "plugins": []
-        })))
-        .expect(1)
-        .mount(&server)
-        .await;
-
-    let mut config = load_config(tmp.path(), tmp.path()).await;
-    config.chatgpt_base_url = server.uri();
-    let manager = test_plugins_manager(tmp.path().to_path_buf());
-    let auth = CodexAuth::create_dummy_chatgpt_auth_for_testing();
-    assert_eq!(
-        manager
-            .recommended_plugins_mode_for_config(&config, Some(&auth))
-            .await,
-        RecommendedPluginsMode::Legacy
-    );
-    assert_eq!(
-        manager
-            .recommended_plugins_mode_for_config(&config, Some(&auth))
-            .await,
-        RecommendedPluginsMode::Legacy
     );
 }
 
@@ -6474,13 +6571,23 @@ plugins = true
     config.chatgpt_base_url = server.uri();
     let manager = test_plugins_manager(tmp.path().to_path_buf());
     let auth = CodexAuth::create_dummy_chatgpt_auth_for_testing();
-    assert_eq!(
-        manager
-            .recommended_plugins_mode_for_config(&config, Some(&auth))
-            .await,
-        RecommendedPluginsMode::Legacy
-    );
+    let lookup = || manager.recommended_plugins_mode_for_config(&config, Some(&auth));
+    let mut first = Box::pin(lookup());
+    assert!(futures::poll!(first.as_mut()).is_pending());
+    let mut waiting = Box::pin(lookup());
+    assert!(futures::poll!(waiting.as_mut()).is_pending());
+    drop(first);
 
+    // A waiting caller takes over a cancelled fetch. Both callers share the cold failure.
+    let (left, right) = tokio::join!(waiting, lookup());
+    assert_eq!(
+        (left, right),
+        (
+            RecommendedPluginsMode::Legacy,
+            RecommendedPluginsMode::Legacy
+        )
+    );
+    server.verify().await;
     server.reset().await;
     Mock::given(method("GET"))
         .and(path("/ps/plugins/suggested/codex"))
@@ -6493,9 +6600,7 @@ plugins = true
         .await;
 
     assert_eq!(
-        manager
-            .recommended_plugins_mode_for_config(&config, Some(&auth))
-            .await,
+        lookup().await,
         RecommendedPluginsMode::Endpoint {
             plugins: Vec::new()
         }
@@ -6872,10 +6977,13 @@ enabled = true
             .write()
             .expect("refresh state lock");
         assert!(matches!(
-            state.requested.as_ref().map(|request| request.git_mode),
+            state
+                .pending_configured_plugins_refresh
+                .as_ref()
+                .map(|request| request.git_mode),
             Some(PluginGitMode::Manual)
         ));
-        state.last_refreshed = state.requested.take();
+        state.last_refreshed = state.pending_configured_plugins_refresh.take();
         state.in_flight = false;
     }
 
@@ -6887,8 +6995,8 @@ enabled = true
             .write()
             .expect("refresh state lock");
         assert!(!state.in_flight);
-        assert!(state.requested.is_none());
-        state.requested = state.last_refreshed.clone();
+        assert!(state.pending_configured_plugins_refresh.is_none());
+        state.pending_configured_plugins_refresh = state.last_refreshed.clone();
         state.in_flight = true;
     }
 
@@ -6908,7 +7016,10 @@ enabled = true
         .non_curated_cache_refresh_state
         .read()
         .expect("refresh state lock");
-    let request = state.requested.as_ref().expect("pending refresh");
+    let request = state
+        .pending_configured_plugins_refresh
+        .as_ref()
+        .expect("pending refresh");
     assert!(matches!(request.git_mode, PluginGitMode::Automatic));
     assert_eq!(
         request.configured_plugin_sources[0]
@@ -7119,12 +7230,15 @@ enabled = true
     );
 
     assert!(
-        refresh_non_curated_plugin_cache_force_reinstall(
+        refresh_non_curated_plugin_cache_with_mode(
             tmp.path(),
             &[AbsolutePathBuf::try_from(repo_root).unwrap()],
-            &["sample-plugin@debug".to_string()],
+            ["sample-plugin@debug"],
+            NonCuratedCacheRefreshMode::ForceReinstall,
+            PluginGitMode::Automatic,
         )
         .expect("cache refresh should reinstall unchanged local version")
+        .cache_refreshed
     );
 
     assert_eq!(
@@ -7454,6 +7568,7 @@ fn remote_installed_plugins_cache_refresh_coalesces_materializations() {
         authenticated_account_id: Some("account-123".to_string()),
     };
     let change = |name: &str| EffectivePluginsChange {
+        metadata_change_id: None,
         materialized_remote_plugins: vec![materialization(name)],
     };
     let callback = |count: std::sync::Arc<std::sync::atomic::AtomicUsize>| {
@@ -7496,6 +7611,7 @@ fn remote_installed_plugins_cache_refresh_coalesces_materializations() {
     assert_eq!(
         request.change,
         EffectivePluginsChange {
+            metadata_change_id: None,
             materialized_remote_plugins: vec![materialization("alpha"), materialization("beta"),],
         }
     );
@@ -7557,11 +7673,13 @@ remote_plugin = true
         &config,
         Some(auth.clone()),
         /*on_effective_plugins_changed*/ None,
+        InstalledPluginSyncSource::PluginInstalled,
     );
     second_manager.maybe_start_remote_installed_plugin_bundle_sync(
         &config,
         Some(auth),
         /*on_effective_plugins_changed*/ None,
+        InstalledPluginSyncSource::PluginInstalled,
     );
 
     let _guard = first_manager
@@ -7853,6 +7971,7 @@ async fn failed_installed_plugin_pagination_preserves_inventory_and_releases_mut
         &config,
         Some(auth),
         /*on_effective_plugins_changed*/ None,
+        InstalledPluginSyncSource::PluginInstalled,
     );
     // Starting the sync acquires the gate synchronously, so this waits for its release.
     let _guard = tokio::time::timeout(
@@ -7905,21 +8024,27 @@ fn reconciliation_fences_refresh_publication_and_recovers_after_cancellation() {
         .expect("capture concurrent refresh generation");
 
     assert_eq!(
-        manager.write_remote_installed_plugins_cache_snapshot(
-            stale_refresh_generation,
-            Vec::new(),
-            /*auth*/ None,
-            RemoteInstalledPluginsCachePublication::Refresh(InstalledPluginDisplayAssets::Include),
-        ),
+        manager
+            .write_remote_installed_plugins_cache_snapshot(
+                stale_refresh_generation,
+                Vec::new(),
+                /*auth*/ None,
+                RemoteInstalledPluginsCachePublication::Refresh(
+                    InstalledPluginDisplayAssets::Include
+                ),
+            )
+            .map(|update| update.metadata_change_id.is_some()),
         None
     );
     assert_eq!(
-        manager.write_remote_installed_plugins_cache_snapshot(
-            reconcile_generation,
-            vec![remote_installed_linear_plugin()],
-            /*auth*/ None,
-            RemoteInstalledPluginsCachePublication::Reconcile,
-        ),
+        manager
+            .write_remote_installed_plugins_cache_snapshot(
+                reconcile_generation,
+                vec![remote_installed_linear_plugin()],
+                /*auth*/ None,
+                RemoteInstalledPluginsCachePublication::Reconcile,
+            )
+            .map(|update| update.metadata_change_id.is_some()),
         Some(true)
     );
     let cancelled_generation = manager
@@ -7937,24 +8062,30 @@ fn reconciliation_fences_refresh_publication_and_recovers_after_cancellation() {
         .remote_installed_plugins_cache_generation_if_current(/*auth*/ None)
         .expect("capture refresh generation after cancellation");
     assert_eq!(
-        manager.write_remote_installed_plugins_cache_snapshot(
-            refresh_generation,
-            vec![remote_installed_plugin("beta")],
-            /*auth*/ None,
-            RemoteInstalledPluginsCachePublication::Refresh(InstalledPluginDisplayAssets::Include),
-        ),
+        manager
+            .write_remote_installed_plugins_cache_snapshot(
+                refresh_generation,
+                vec![remote_installed_plugin("beta")],
+                /*auth*/ None,
+                RemoteInstalledPluginsCachePublication::Refresh(
+                    InstalledPluginDisplayAssets::Include
+                ),
+            )
+            .map(|update| update.metadata_change_id.is_some()),
         Some(true)
     );
     let retry_generation = manager
         .begin_remote_installed_plugins_reconcile(/*auth*/ None)
         .expect("begin retry after cancellation");
     assert_eq!(
-        manager.write_remote_installed_plugins_cache_snapshot(
-            retry_generation,
-            vec![remote_installed_plugin("beta")],
-            /*auth*/ None,
-            RemoteInstalledPluginsCachePublication::Reconcile,
-        ),
+        manager
+            .write_remote_installed_plugins_cache_snapshot(
+                retry_generation,
+                vec![remote_installed_plugin("beta")],
+                /*auth*/ None,
+                RemoteInstalledPluginsCachePublication::Reconcile,
+            )
+            .map(|update| update.metadata_change_id.is_some()),
         Some(true)
     );
 }

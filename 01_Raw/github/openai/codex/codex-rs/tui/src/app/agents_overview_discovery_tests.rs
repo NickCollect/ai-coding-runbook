@@ -1,9 +1,13 @@
 //! Demand-driven discovery, cursor retry, and visible Show more behavior.
 
 use super::*;
+use crate::app::agents_overview_discovery::AgentsOverviewDiscovery;
 use crate::app_event::AgentsOverviewAction;
 use crate::app_server_session::ThreadParamsMode;
+use codex_app_server_client::CloudOperation;
+use codex_app_server_protocol::ClientRequest;
 use codex_app_server_protocol::JSONRPCMessage;
+use codex_app_server_protocol::ThreadHistoryMode;
 use futures::SinkExt;
 use futures::StreamExt;
 use pretty_assertions::assert_eq;
@@ -13,6 +17,50 @@ use std::sync::atomic::AtomicBool;
 use std::sync::atomic::Ordering;
 use tokio::net::TcpListener;
 use tokio_tungstenite::tungstenite::Message;
+
+#[tokio::test]
+async fn overview_cloud_discovery_uses_only_interactive_pages() {
+    let (client, mut commands, _events) = CloudClient::channel(/*capacity*/ 1);
+    let handle = AppServerClient::Cloud(client).request_handle();
+    let threads = ["First Cloud task", "Second Cloud task"].map(|name| {
+        overview_thread(
+            ThreadId::new(),
+            /*parent_thread_id*/ None,
+            name,
+            ThreadStatus::NotLoaded,
+        )
+    });
+
+    let serve_pages = async {
+        for (thread, (cursor, next_cursor)) in threads
+            .iter()
+            .zip([(None, Some("next")), (Some("next"), None)])
+        {
+            let command = commands.recv().await.unwrap();
+            let CloudOperation::Request(request) = command.operation else {
+                panic!("expected a Cloud request");
+            };
+            let ClientRequest::ThreadList { params, .. } = *request else {
+                panic!("expected thread/list");
+            };
+            assert_eq!(params.source_kinds, Some(Vec::new()));
+            assert_eq!(params.cursor.as_deref(), cursor);
+            command
+                .response
+                .send(Ok(Ok(json!({"data": [thread], "nextCursor": next_cursor}))))
+                .unwrap();
+        }
+    };
+    let discover = async {
+        let mut discovery = AgentsOverviewDiscovery::default();
+        for (thread, has_more) in threads.iter().zip([true, false]) {
+            let page = discovery.next_batch(&handle, /*limit*/ 10).await;
+            assert_eq!(page, (vec![(thread.clone(), false)], true));
+            assert_eq!(discovery.has_more(), has_more);
+        }
+    };
+    tokio::join!(serve_pages, discover);
+}
 
 #[tokio::test]
 async fn overview_show_more_refills_archived_rows_and_retries_without_losing_rows() -> Result<()> {
@@ -35,6 +83,7 @@ async fn check_discovery(mixed_sources: bool) -> Result<()> {
             }
             if index == 23 {
                 thread.name = None;
+                thread.history_mode = ThreadHistoryMode::Paginated;
             }
             thread.updated_at += 24 - index;
             thread.recency_at = Some(thread.updated_at);
@@ -135,6 +184,7 @@ async fn check_discovery(mixed_sources: bool) -> Result<()> {
                     }
                 }
                 "thread/read" => {
+                    assert_ne!(params["includeTurns"], true);
                     let thread = rows
                         .iter()
                         .find(|thread| thread.id == params["threadId"])
@@ -143,9 +193,10 @@ async fn check_discovery(mixed_sources: bool) -> Result<()> {
                 }
                 "thread/turns/list" if params["threadId"] == rows[23].id => json!({"data": [{
                     "id":"latest", "status":"completed", "items":[{"type":"userMessage","id":"prompt",
-                    "content":[{"type":"text","text":"A later prompt","textElements":[]}]}]
+                    "content":[{"type":"text","text":"A later prompt","textElements":[]}]},
+                    {"type":"agentMessage","id":"reply","text":"A saved reply"}]
                 }], "nextCursor":null}),
-                "thread/turns/list" => json!({"data": [], "nextCursor": null}),
+                "thread/turns/list" => panic!("overview requested legacy transcript: {params}"),
                 "thread/archive" | "thread/delete" => {
                     socket.send(Message::Text(json!({"id": request.id, "error":{"code":-32603,"message":"try again"}}).to_string().into())).await?;
                     continue;
@@ -167,6 +218,9 @@ async fn check_discovery(mixed_sources: bool) -> Result<()> {
         crate::connect_remote_app_server(endpoint).await?,
         ThreadParamsMode::Remote,
     );
+    let owner = session.backend_id();
+    app.app_server_backend_id = Some(owner);
+    app.backend_registry.connect(&session);
     let view = app.agents_overview_view(Vec::new(), /*selected_thread_id*/ None);
     app.chat_widget.show_bottom_pane_view(Box::new(view));
     let (tx, mut rx) = tokio::sync::mpsc::unbounded_channel();
@@ -174,8 +228,14 @@ async fn check_discovery(mixed_sources: bool) -> Result<()> {
     app.refresh_agents_overview_threads(&session);
     finish_overview_refresh(&mut app, &session, &mut rx).await;
     assert_eq!(app.agents_overview.threads.len(), 10);
-    assert_eq!(app.agents_overview.pinned_thread_ids, Some(vec![ids[1]]));
-    assert!(app.agents_overview.discovery.has_more());
+    assert_eq!(
+        app.agents_overview.pins_by_backend[&session.backend_id()],
+        Some(vec![ids[1]])
+    );
+    assert!(
+        app.agents_overview
+            .has_more_for(&app.backend_registry, owner)
+    );
     let browse = app.agents_overview.threads.clone();
     let browse_rows = || browse.values().flatten().cloned().collect();
     let mut view = app.agents_overview_view(browse_rows(), Some(ids[4]));
@@ -209,6 +269,11 @@ async fn check_discovery(mixed_sources: bool) -> Result<()> {
     assert!(rendered.contains("1 of 10"), "{rendered}"); // The pinned task has its own group.
     view.handle_key_event(KeyCode::Esc.into());
 
+    if mixed_sources {
+        // Queue Show more behind a metadata refresh before the archive creates a vacancy.
+        app.refresh_agents_overview_threads(&session);
+        app.show_more_agents_overview(&session);
+    }
     app.track_agents_overview_notification(&ServerNotification::ThreadArchived(
         ThreadArchivedNotification {
             thread_id: ids[0].to_string(),
@@ -218,7 +283,9 @@ async fn check_discovery(mixed_sources: bool) -> Result<()> {
     expected.remove(&ids[0]);
     app.refresh_agents_overview_threads(&session);
     finish_overview_refresh(&mut app, &session, &mut rx).await;
-    if !mixed_sources {
+    if mixed_sources {
+        finish_overview_refresh(&mut app, &session, &mut rx).await;
+    } else {
         assert_eq!(app.agents_overview.threads.len(), 9);
         assert!(
             app.agents_overview
@@ -232,8 +299,53 @@ async fn check_discovery(mixed_sources: bool) -> Result<()> {
     }
     assert_eq!(app.agents_overview.threads.len(), 10);
     assert!(app.agents_overview.threads.contains_key(&ids[10]));
-    app.show_more_agents_overview(&session);
-    finish_overview_refresh(&mut app, &session, &mut rx).await;
+    let other = Box::pin(crate::start_embedded_app_server_for_picker(&app.config)).await?;
+    let other_owner = other.backend_id();
+    if mixed_sources {
+        let archived = ids[22];
+        app.backend_registry.observe(owner, archived);
+        app.track_agents_overview_notification(&ServerNotification::ThreadArchived(
+            ThreadArchivedNotification {
+                thread_id: archived.to_string(),
+            },
+        ));
+        expected.remove(&archived);
+    } else {
+        app.show_more_agents_overview(&session);
+    }
+    assert!(
+        app.agents_overview.active_refresh.is_some(),
+        "Show more should load a page after the vacancy is filled"
+    );
+    assert_eq!(
+        app.agents_overview.active_refresh.map(|(_, owner)| owner),
+        Some(owner)
+    );
+    // The page may finish while another backend is displayed, or after returning.
+    app.app_server_backend_id = Some(other_owner);
+    app.backend_registry.connect(&other);
+    assert!(app.backend_registry.request_handle(owner).is_some());
+    assert!(
+        !app.agents_overview
+            .has_more_for(&app.backend_registry, other_owner)
+    );
+    app.show_more_agents_overview(&other);
+    assert!(app.agents_overview.pending_refresh_backends.is_empty());
+    if mixed_sources {
+        app.refresh_agents_overview_threads(&other);
+    }
+    finish_overview_refresh(&mut app, &other, &mut rx).await;
+    if mixed_sources {
+        finish_overview_refresh(&mut app, &other, &mut rx).await;
+        assert!(app.agents_overview.initialized.contains(&other_owner));
+    }
+    app.app_server_backend_id = Some(owner);
+    assert!(
+        app.agents_overview
+            .has_more_for(&app.backend_registry, owner)
+    );
+    app.backend_registry.disconnect(other_owner);
+    other.shutdown().await?;
     assert_eq!(
         app.agents_overview
             .threads
@@ -259,7 +371,10 @@ async fn check_discovery(mixed_sources: bool) -> Result<()> {
     app.refresh_agents_overview_threads(&session);
     finish_overview_refresh(&mut app, &session, &mut rx).await;
     assert_eq!(app.agents_overview.threads, expected);
-    assert!(!app.agents_overview.discovery.has_more());
+    assert!(
+        !app.agents_overview
+            .has_more_for(&app.backend_registry, owner)
+    );
     let old = app.agents_overview.threads[&ids[23]].as_ref().unwrap();
     assert_eq!(old.preview, "Task 23");
     assert_eq!(
@@ -267,6 +382,13 @@ async fn check_discovery(mixed_sources: bool) -> Result<()> {
             .latest_prompt
             .as_deref(),
         Some("A later prompt")
+    );
+    assert_eq!(
+        app.agents_overview
+            .last_messages
+            .get(&ids[23])
+            .map(String::as_str),
+        Some("A saved reply")
     );
     // Another CLI inserts a matching session ahead of the exhausted browse cursor.
     show_reopened_pin.store(true, Ordering::SeqCst);
@@ -280,12 +402,12 @@ async fn check_discovery(mixed_sources: bool) -> Result<()> {
     );
     view.handle_key_event(KeyCode::Esc.into());
     app.agents_overview.threads.clear();
-    app.agents_overview.pinned_thread_ids = Some(Vec::new());
-    app.agents_overview.refill_count = 0;
+    app.agents_overview.pins_by_backend = [(session.backend_id(), Some(Vec::new()))].into();
+    app.agents_overview.refill_by_backend.clear();
     app.refresh_agents_overview_threads(&session);
     finish_overview_refresh(&mut app, &session, &mut rx).await;
     assert_eq!(
-        app.agents_overview.pinned_thread_ids,
+        app.agents_overview.pins_by_backend[&session.backend_id()],
         Some(vec![reopened_pin_id])
     );
     assert!(app.agents_overview.threads.contains_key(&reopened_pin_id));

@@ -144,7 +144,9 @@ pub(super) async fn roots(
 
 pub(super) fn list_params() -> ThreadListParams {
     ThreadListParams {
+        include_attached_threads: false,
         current_account_only: true,
+        included_thread_ids: None,
         excluded_thread_ids: None,
         attached_to_thread_id: None,
         limit: Some(100),

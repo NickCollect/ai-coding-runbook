@@ -56,7 +56,7 @@ impl App {
                 Box::new(StartupDraftPump::new(
                     tui,
                     StartupDraftInitialScreen::Composer,
-                    StartupDraftSessionAction::NewFromCommandCenter,
+                    StartupDraftSessionAction::NewWhileRunning,
                 ))
             });
         let mut display_config = self.chat_widget.config_ref().clone();
@@ -221,6 +221,8 @@ impl App {
                 return Ok(AppRunControl::Continue);
             }
         }
+        self.backend_registry
+            .register_started(app_server.backend_id(), &started)?;
         self.agents_overview
             .blank_sessions
             .insert(thread_id, started.clone());

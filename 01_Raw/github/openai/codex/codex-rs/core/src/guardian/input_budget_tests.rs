@@ -152,26 +152,36 @@ fn required_context(text: String) -> ComposedContext {
         kind: PlannedActionKind::Command { json: text },
         reason: None,
     };
-    let context = super::super::prompt::collect_guardian_context(
-        &Vec::<ResponseItem>::new(),
-        &ContextProfile::synchronous(),
-        /*root_conversation_candidates*/ None,
+    let profile = ContextProfile::synchronous();
+    let context =
+        super::super::prompt::collect_guardian_context(codex_guardian_context::SectionInput {
+            target: profile.target,
+            history: &[],
+            transcript: &profile.transcript,
+            is_selected_exec_output: None,
+            root_conversation: &[],
+            root_conversation_candidates: None,
+            trusted_user_answers: &[],
+            planned_action: Some(&action),
+            permissions: None,
+            previous_reviews: None,
+            trusted_tool: None,
+            trusted_skill_paths: &[],
+            images: None,
+            node_repl: None,
+        })
+        .expect("collect required context");
+    codex_guardian_context::prepare_context(
+        std::borrow::Cow::Owned(context),
+        &profile,
+        /*entry_number_offset*/ 0,
+        ContextPresentation::SyncFull {
+            session_id: "test-parent",
+        },
+        codex_guardian_context::ContextBudgeting::Fixed,
         &[],
-        Some(&action),
-        /*permissions*/ None,
-        /*node_repl*/ None,
     )
-    .expect("collect required context");
-    let transcript = ContextProfile::synchronous()
-        .prepare_transcript(context.transcript_entries(), /*entry_number_offset*/ 0);
-    context
-        .compose(
-            ContextPresentation::SyncFull {
-                session_id: "test-parent",
-            },
-            transcript,
-        )
-        .expect("compose required context")
+    .expect("prepare required context")
 }
 
 #[tokio::test]
@@ -337,43 +347,24 @@ async fn compacted_review_restores_originals_once_and_persists_the_request_prefi
             reason: None,
             permissions: Default::default(),
         },
-        super::super::prompt::GuardianPromptMode::Full,
+        /*is_selected_exec_output*/ None,
         /*reviewed_node_repl_evidence_sequence*/ 0,
     )
     .await
     .unwrap();
-    let context = codex_guardian_context::prepare_sync_context(
-        collected.sections,
+    let context = codex_guardian_context::prepare_context(
+        std::borrow::Cow::Owned(collected.sections),
         &collected.profile,
         /*entry_number_offset*/ 0,
         ContextPresentation::SyncFull {
             session_id: &collected.session_id,
         },
         budgeting,
+        &[],
     )
     .unwrap();
-    let elastic = (budgeting == ContextBudgeting::Elastic).then(|| {
-        let section = codex_guardian_context::ElasticSection::TrustedSkills;
-        let mut policy = codex_guardian_context::ElasticBudgetConfig::default();
-        policy.sections.insert(
-            section,
-            codex_guardian_context::ElasticSectionLimits::new(
-                /*min_total_section_tokens*/ 1, /*max_section_entry_tokens*/ 1,
-            )
-            .unwrap(),
-        );
-        let minimum = codex_guardian_context::DEFAULT_MAX_INPUT_TOKENS
-            - usize::try_from(policy.total_minimum_tokens()).unwrap()
-            + 1;
-        policy.sections.insert(
-            section,
-            codex_guardian_context::ElasticSectionLimits::new(
-                minimum, /*max_section_entry_tokens*/ 1,
-            )
-            .unwrap(),
-        );
-        policy
-    });
+    let elastic = (budgeting == ContextBudgeting::Elastic)
+        .then(core_test_support::guardian::elastic_budget_config);
     step.turn.extension_data.insert(RetainedReviewContext {
         context: context.retained_instructions(),
         elastic,

@@ -291,9 +291,8 @@ impl MemoryStartupContext {
     ) -> StageOneRequestContext {
         let config_snapshot = self.thread.config_snapshot().await;
         let model_info = self
-            .thread_manager
-            .get_models_manager()
-            .get_model_info(model_name, &config.to_models_manager_config())
+            .thread
+            .model_info(model_name, &config.to_models_manager_config())
             .await;
         let reasoning_summary = config
             .model_reasoning_summary
@@ -319,7 +318,7 @@ impl MemoryStartupContext {
     pub(crate) async fn stream_stage_one_prompt(
         &self,
         config: &Config,
-        prompt: &Prompt,
+        prompt: Prompt,
         context: &StageOneRequestContext,
     ) -> anyhow::Result<(String, Option<TokenUsage>)> {
         let installation_id = resolve_installation_id(&config.codex_home).await?;
@@ -364,7 +363,7 @@ impl MemoryStartupContext {
         .await;
         let mut stream = client_session
             .stream(
-                prompt,
+                &Arc::new(prompt),
                 &context.model_info,
                 &context.session_telemetry,
                 context.reasoning_effort.clone(),

@@ -638,7 +638,7 @@ impl ThreadHistoryBuilder {
                 .as_ref()
                 .map(|decision| AgentMessageModeration {
                     moderated: decision.moderated,
-                    display: decision.display.clone().map(Into::into),
+                    display: decision.display.clone(),
                 }),
             id,
             text: payload.message.clone(),
@@ -961,6 +961,7 @@ impl ThreadHistoryBuilder {
         let item = ThreadItemPayload::McpToolCall {
             id: payload.call_id.clone(),
             server: payload.invocation.server.clone(),
+            environment_id: payload.invocation.environment_id.clone(),
             tool: payload.invocation.tool.clone(),
             status: McpToolCallStatus::InProgress,
             arguments: payload
@@ -1019,6 +1020,7 @@ impl ThreadHistoryBuilder {
         let item = ThreadItemPayload::McpToolCall {
             id: payload.call_id.clone(),
             server: payload.invocation.server.clone(),
+            environment_id: payload.invocation.environment_id.clone(),
             tool: payload.invocation.tool.clone(),
             status,
             arguments: payload
@@ -1461,6 +1463,7 @@ impl ThreadHistoryBuilder {
             if let Some(turn) = self.current_turn.as_mut().filter(|turn| turn.id == turn_id) {
                 let changed_turn = apply_abort(turn);
                 self.record_changed_turn(changed_turn);
+                self.finish_current_turn();
                 return;
             }
 
@@ -1471,10 +1474,13 @@ impl ThreadHistoryBuilder {
             }
         }
 
-        // If the event has no ID (or refers to an unknown turn), fall back to the active turn.
-        if let Some(turn) = self.current_turn.as_mut() {
+        // Fall back only when the abort or the active turn lacks an explicit ID.
+        if let Some(turn) = self.current_turn.as_mut()
+            && (payload.turn_id.is_none() || turn.has_generated_id)
+        {
             let changed_turn = apply_abort(turn);
             self.record_changed_turn(changed_turn);
+            self.finish_current_turn();
         }
     }
 
@@ -1592,6 +1598,7 @@ impl ThreadHistoryBuilder {
     }
 
     fn new_turn(&mut self, id: Option<String>) -> PendingTurn {
+        let has_generated_id = id.is_none();
         let id = id.unwrap_or_else(|| {
             if self.next_rollout_index == 0 {
                 Uuid::now_v7().to_string()
@@ -1601,6 +1608,7 @@ impl ThreadHistoryBuilder {
         });
         PendingTurn {
             id,
+            has_generated_id,
             root_turn_id: None,
             items: Vec::new(),
             item_index: TurnItemIndex::default(),
@@ -1930,6 +1938,7 @@ impl TurnItemIndex {
 
 struct PendingTurn {
     id: String,
+    has_generated_id: bool,
     root_turn_id: Option<String>,
     items: Vec<ThreadItemPayload>,
     item_index: TurnItemIndex,
@@ -2360,6 +2369,16 @@ mod tests {
                 started_at_ms: Some(0),
                 completed_at_ms: 0,
             }),
+            // A late abort for a discarded turn must preserve the review turn's explicit ID.
+            EventMsg::TurnAborted(TurnAbortedEvent {
+                root_turn_id: None,
+                turn_id: Some("discarded-turn".into()),
+                started_at: None,
+                reason: TurnAbortReason::Replaced,
+                error: None,
+                completed_at: None,
+                duration_ms: None,
+            }),
             EventMsg::ItemCompleted(ItemCompletedEvent {
                 content_token_count: None,
                 thread_id,
@@ -2387,6 +2406,7 @@ mod tests {
         let turns = builder.finish();
 
         assert_eq!(turns[0].id, "turn-1");
+        assert_eq!(turns[0].status, TurnStatus::Completed);
         assert_eq!(
             turns[0].item_payloads().collect::<Vec<_>>(),
             [
@@ -3572,6 +3592,7 @@ mod tests {
                 call_id: "mcp-1".into(),
                 invocation: McpInvocation {
                     server: "docs".into(),
+                    environment_id: None,
                     tool: "lookup".into(),
                     arguments: Some(serde_json::json!({"id":"123"})),
                 },
@@ -3637,6 +3658,7 @@ mod tests {
             ThreadItemPayload::McpToolCall {
                 id: "mcp-1".into(),
                 server: "docs".into(),
+                environment_id: None,
                 tool: "lookup".into(),
                 status: McpToolCallStatus::Failed,
                 arguments: serde_json::json!({"id":"123"}),
@@ -3671,6 +3693,7 @@ mod tests {
                 call_id: "mcp-1".into(),
                 invocation: McpInvocation {
                     server: "docs".into(),
+                    environment_id: None,
                     tool: "lookup".into(),
                     arguments: Some(serde_json::json!({"id":"123"})),
                 },
@@ -3708,6 +3731,7 @@ mod tests {
             ThreadItemPayload::McpToolCall {
                 id: "mcp-1".into(),
                 server: "docs".into(),
+                environment_id: None,
                 tool: "lookup".into(),
                 status: McpToolCallStatus::Completed,
                 arguments: serde_json::json!({"id":"123"}),
@@ -4117,6 +4141,7 @@ mod tests {
             item: CoreTurnItem::McpToolCall(McpToolCallItem {
                 id: "mcp-1".into(),
                 server: "slack".into(),
+                environment_id: None,
                 tool: "search".into(),
                 arguments: serde_json::json!({"query": "incident"}),
                 connector_id: None,

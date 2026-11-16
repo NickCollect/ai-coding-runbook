@@ -2,10 +2,15 @@
 
 use super::*;
 use crate::app::backend_sessions::BackendSessions;
+use crate::app::session_lifecycle::FreshSessionStart;
+use crate::app_server_session::AppServerSessionEvent;
 use codex_app_server_protocol::SkillMetadata;
 use codex_app_server_protocol::SkillScope;
 use codex_app_server_protocol::SkillsListEntry;
 use codex_config::types::HistoryPersistence;
+use core_test_support::context_snapshot;
+use core_test_support::context_snapshot::ContextSnapshotOptions;
+use core_test_support::responses;
 use crossterm::event::KeyCode;
 use crossterm::event::KeyEvent;
 use crossterm::event::KeyModifiers;
@@ -59,7 +64,7 @@ async fn new_session_refreshes_account_for_the_started_provider() -> Result<()> 
         Box::pin(app.start_fresh_session(
             &mut tui,
             &mut server,
-            /*session_start_source*/ None,
+            FreshSessionStart::PreserveCurrentView(None),
             /*initial_user_message*/ None,
             /*new_thread_name*/ None,
         ))
@@ -179,7 +184,7 @@ async fn new_sessions_preserve_yolo_launch_and_later_permission_choices() -> Res
         app.start_fresh_session(
             &mut tui,
             &mut server,
-            /*session_start_source*/ None,
+            FreshSessionStart::PreserveCurrentView(None),
             /*initial_user_message*/ None,
             /*new_thread_name*/ None,
         )
@@ -240,7 +245,7 @@ async fn new_session_preserves_vim_line_yank() -> Result<()> {
     app.start_fresh_session(
         &mut tui,
         &mut server,
-        /*session_start_source*/ None,
+        FreshSessionStart::PreserveCurrentView(None),
         /*initial_user_message*/ None,
         /*new_thread_name*/ None,
     )
@@ -449,13 +454,14 @@ async fn replacement_uses_server_defaults_and_preserves_explicit_launch_settings
                     socket_path: client_home.path().join("daemon.sock").abs(),
                 },
             };
+            app.backend_registry.connect(&server);
             app.open_agents_overview(&server);
         }
         let mut tui = crate::tui::test_support::make_test_tui()?;
         app.start_fresh_session(
             &mut tui,
             &mut server,
-            /*session_start_source*/ None,
+            FreshSessionStart::PreserveCurrentView(None),
             /*initial_user_message*/ None,
             /*new_thread_name*/ None,
         )
@@ -500,10 +506,11 @@ async fn replacement_uses_server_defaults_and_preserves_explicit_launch_settings
         if explicit == "saved" {
             let rendered = render_bottom_popup(&app.chat_widget, /*width*/ 140)
                 .replace(&server_config.cwd.display().to_string(), "<PROJECT>");
-            insta::assert_snapshot!(rendered, @r"
+            insta::assert_snapshot!(rendered, @"
             › Ask Codex to do anything
 
-              server-model high · <PROJECT> · ← for agents
+              server-model high · <PROJECT>
+              ← for agents · ? for shortcuts
             ");
         }
         if explicit.starts_with("profile_summary") {
@@ -519,6 +526,207 @@ async fn replacement_uses_server_defaults_and_preserves_explicit_launch_settings
         server.shutdown().await?;
         proxy.await??;
     }
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn plan_implementation_reads_approved_plan_file_in_fresh_session() -> Result<()> {
+    let (mut app, mut events, _ops) = make_test_app_with_channels().await;
+    // Match the canonical CODEX_HOME used at launch.
+    app.config.codex_home = app.config.codex_home.canonicalize()?;
+    let model = responses::start_mock_server().await;
+    app_test_support::MockResponsesConfig::new(&model.uri())
+        // Exercise the local executor's file read without requiring a platform sandbox helper.
+        .with_sandbox_mode("danger-full-access")
+        .with_root_config("instructions = 'Help the user.'")
+        .write(app.config.codex_home.as_path())?;
+    let workspace = tempdir()?;
+    app.config = app
+        .rebuild_config_for_cwd(workspace.path().canonicalize()?)
+        .await?;
+    let mut server = crate::start_embedded_app_server_for_picker(&app.config).await?;
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+    let plan = format!(
+        "# Plan\n{}\n- Verify the final step.\n",
+        "- Update the parser.\n".repeat(3_000)
+    );
+    let source = server.start_thread(&app.config).await?;
+    let source_id = source.session.thread_id;
+    app.enqueue_primary_thread_session(source.session, source.turns)
+        .await?;
+    Box::pin(app.handle_event(
+        &mut tui,
+        &mut server,
+        AppEvent::ImplementPlanInFreshSession { plan: plan.clone() },
+    ))
+    .await?;
+    let thread_id = app.chat_widget.thread_id().expect("fresh thread");
+    assert_ne!(thread_id, source_id);
+    let attachments = app.config.codex_home.join("attachments");
+    let mut dirs = std::fs::read_dir(&attachments)?;
+    let path = dirs
+        .next()
+        .expect("attachment directory")?
+        .path()
+        .join("approved-plan.md");
+    assert!(dirs.next().is_none());
+    assert_eq!(std::fs::read(&path)?, plan.as_bytes());
+    let path = path.to_str().expect("UTF-8 attachment path");
+    let command = if cfg!(windows) {
+        format!(
+            "Get-Content -LiteralPath '{}' -Tail 1",
+            path.replace("'", "''")
+        )
+    } else {
+        format!("tail -n 1 {}", shlex::try_quote(path)?)
+    };
+    let read_args = serde_json::json!({ "cmd": command });
+    let response = responses::mount_sse_sequence(
+        &model,
+        vec![
+            responses::sse(vec![
+                responses::ev_response_created("read"),
+                responses::ev_function_call("read_plan", "exec_command", &read_args.to_string()),
+                responses::ev_completed("read"),
+            ]),
+            responses::sse_completed("implemented"),
+        ],
+    )
+    .await;
+
+    let mut user_rows = Vec::new();
+    while let Ok(event) = events.try_recv() {
+        match event {
+            AppEvent::InsertHistoryCell(cell) if cell.as_any().is::<UserHistoryCell>() => {
+                user_rows
+                    .push(lines_to_single_string(&cell.raw_lines()).replace(path, "<PLAN_FILE>"));
+            }
+            event @ (AppEvent::SubmitThreadOp { .. } | AppEvent::CodexOp(_)) => {
+                Box::pin(app.handle_event(&mut tui, &mut server, event)).await?;
+            }
+            _ => {}
+        }
+    }
+    insta::assert_snapshot!(user_rows.join("\n"), @"Read the approved plan at <PLAN_FILE> and implement it.");
+    super::safety_buffering::wait_for_turn_completed(&mut app, &mut server, thread_id).await;
+    let requests = response.requests();
+    let [initial, after_read] = requests.as_slice() else {
+        panic!("expected a plan read and a follow-up request")
+    };
+    let output = after_read
+        .function_call_output_text("read_plan")
+        .expect("plan read result");
+    assert!(output.contains("- Verify the final step."), "{output}");
+    let mut body = initial.body_json();
+    let prompt = body["input"].as_array_mut().unwrap().last_mut().unwrap();
+    assert_eq!(prompt["role"], "user");
+    let text = &mut prompt["content"][0]["text"];
+    *text = text.as_str().unwrap().replace(path, "<PLAN_FILE>").into();
+    insta::assert_snapshot!(
+        "clear_context_plan_request",
+        context_snapshot::format_context_snapshot(
+            "Clear context and implement the approved plan in a fresh thread.",
+            &[context_snapshot::SnapshotEntry::body(&body)],
+            &ContextSnapshotOptions::default().rewrite_known_segments(),
+        )
+    );
+    server.shutdown().await?;
+    Ok(())
+}
+
+#[tokio::test]
+async fn plan_implementation_handles_unavailable_attachment() -> Result<()> {
+    for (write_fails, oversized) in [(true, false), (false, false), (false, true)] {
+        crate::boxed_future!(assert_plan_implementation_with_unavailable_attachment(
+            write_fails,
+            oversized,
+        ))
+        .await?;
+    }
+    Ok(())
+}
+
+async fn assert_plan_implementation_with_unavailable_attachment(
+    write_fails: bool,
+    oversized: bool,
+) -> Result<()> {
+    let (mut app, mut events, _ops) = make_test_app_with_channels().await;
+    let model = responses::start_mock_server().await;
+    let response = responses::mount_sse_once(&model, responses::sse_completed("implemented")).await;
+    let attachments = app.config.codex_home.join("attachments");
+    let config = app_test_support::MockResponsesConfig::new(&model.uri());
+    let config = if write_fails {
+        std::fs::write(&attachments, "")?;
+        config.with_sandbox_mode("danger-full-access")
+    } else {
+        let denied_path = serde_json::to_string(attachments.as_path())?;
+        config
+            // The embedded test executor has no sandbox helper for AGENTS.md discovery.
+            .with_root_config("default_permissions = 'no-attachments'\nproject_doc_max_bytes = 0")
+            .with_extra_config(&format!(
+                "[permissions.no-attachments.filesystem]\n\":root\" = 'read'\n{denied_path} = 'deny'"
+            ))
+    };
+    config.write(app.config.codex_home.as_path())?;
+    let workspace = tempdir()?;
+    app.config = app
+        .rebuild_config_for_cwd(workspace.path().canonicalize()?)
+        .await?;
+    let mut server = crate::start_embedded_app_server_for_picker(&app.config).await?;
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+    let source = server.start_thread(&app.config).await?;
+    let source_id = source.session.thread_id;
+    app.enqueue_primary_thread_session(source.session, source.turns)
+        .await?;
+    let steps = if oversized { 3_000 } else { 1_000 };
+    let plan = format!(
+        "# Plan\n{}- Verify the final step.",
+        "- Update the parser.\n".repeat(steps)
+    );
+    crate::boxed_future!(app.handle_event(
+        &mut tui,
+        &mut server,
+        AppEvent::ImplementPlanInFreshSession { plan: plan.clone() },
+    ))
+    .await?;
+
+    if !write_fails {
+        let path = std::fs::read_dir(&attachments)?
+            .next()
+            .expect("the app server saved the plan")?
+            .path()
+            .join("approved-plan.md");
+        assert_eq!(std::fs::read_to_string(path)?, plan);
+    }
+    let thread_id = app.chat_widget.thread_id().expect("current thread");
+    if oversized {
+        assert_eq!(thread_id, source_id);
+        assert!(response.requests().is_empty());
+    } else {
+        assert_ne!(thread_id, source_id);
+        while let Ok(event) = events.try_recv() {
+            if matches!(
+                event,
+                AppEvent::SubmitThreadOp { .. } | AppEvent::CodexOp(_)
+            ) {
+                crate::boxed_future!(app.handle_event(&mut tui, &mut server, event)).await?;
+            }
+        }
+        super::safety_buffering::wait_for_turn_completed(&mut app, &mut server, thread_id).await;
+        let request = response.single_request();
+        let messages = request.inputs_of_type("message");
+        let user = messages.last().expect("implementation prompt");
+        assert_eq!(user["role"], "user");
+        assert_eq!(user["content"][0]["text"], "Implement the plan.");
+        let recovered = request
+            .inputs_of_type("function_call_output")
+            .iter()
+            .filter(|item| item["name"] == "proposed_plan")
+            .map(|item| item["output"].as_str().expect("plan chunk"))
+            .collect::<String>();
+        assert_eq!(recovered, plan);
+    }
+    server.shutdown().await?;
     Ok(())
 }
 
@@ -553,7 +761,7 @@ async fn replacement_failure_keeps_current_task_and_restores_input() -> Result<(
         app.start_fresh_session(
             &mut tui,
             &mut server,
-            /*session_start_source*/ None,
+            FreshSessionStart::PreserveCurrentView(None),
             Some("keep this request".into()),
             /*new_thread_name*/ None,
         )
@@ -697,6 +905,7 @@ async fn backend_handoff_errors_are_snapshotted() -> Result<()> {
     let trust_error = next_history_message(&mut events);
     insta::assert_snapshot!(trust_error, @"■ Unable to check folder trust: config/read failed while checking remote project trust");
 
+    tui.pause_events();
     // Starting a fresh thread must observe the same destination trust check as resuming one.
     app.start_new_session_on_other_backend(
         &mut tui,
@@ -764,8 +973,11 @@ async fn resumed_backend_handoff_detaches_through_the_source_connection() -> Res
             model_provider: "repaired-provider".into(),
         },
     );
-    app.agents_overview
-        .input_states
+    let destination_slot = backends
+        .slot(destination_id)
+        .expect("registered destination");
+    backends
+        .parked_inputs_mut(destination_slot)
         .insert(resumed_id, stale_input);
 
     app.resume_backend_session(&mut tui, &mut backends, target)
@@ -782,6 +994,365 @@ async fn resumed_backend_handoff_detaches_through_the_source_connection() -> Res
     backends.shutdown().await?;
     source_proxy.await??;
     destination_proxy.await??;
+    Ok(())
+}
+
+#[tokio::test]
+async fn backend_handoff_restores_a_live_blank_session_without_resuming_it() -> Result<()> {
+    check_retained_draft_handoff(
+        /*saved_history*/ false,
+        HistoryCapabilities::Current,
+        /*retained_blank*/ true,
+    )
+    .await
+}
+
+#[tokio::test]
+async fn backend_handoff_restores_a_live_blank_session_on_an_older_server() -> Result<()> {
+    let capabilities = HistoryCapabilities::LegacyOnly;
+    check_retained_draft_handoff(
+        /*saved_history*/ false,
+        capabilities,
+        /*retained_blank*/ true,
+    )
+    .await
+}
+
+#[tokio::test]
+async fn backend_handoff_falls_back_when_the_first_turn_page_is_unsupported() -> Result<()> {
+    check_retained_draft_handoff(
+        /*saved_history*/ false,
+        HistoryCapabilities::FirstTurnPageUnsupported,
+        /*retained_blank*/ true,
+    )
+    .await
+}
+
+#[tokio::test]
+async fn backend_handoff_reads_saved_turns_instead_of_reusing_a_stale_blank() -> Result<()> {
+    check_retained_draft_handoff(
+        /*saved_history*/ true,
+        HistoryCapabilities::Current,
+        /*retained_blank*/ true,
+    )
+    .await
+}
+
+#[tokio::test]
+async fn backend_handoff_keeps_resumed_settings_for_populated_task_draft() -> Result<()> {
+    check_retained_draft_handoff(
+        /*saved_history*/ true,
+        HistoryCapabilities::Current,
+        /*retained_blank*/ false,
+    )
+    .await
+}
+
+#[tokio::test]
+async fn same_backend_reopen_recovers_history_for_a_stale_blank() -> Result<()> {
+    let (mut app, mut events, _ops) = make_test_app_with_channels().await;
+    let model = core_test_support::responses::start_mock_server().await;
+    app_test_support::MockResponsesConfig::new(&model.uri()).write(&app.config.codex_home)?;
+    crate::legacy_core::config::set_project_trust_level(
+        &app.config.codex_home,
+        app.config.cwd.as_path(),
+        codex_protocol::config_types::TrustLevel::Trusted,
+    )
+    .map_err(std::io::Error::other)?;
+    app.config = app
+        .rebuild_config_for_cwd(app.config.cwd.to_path_buf())
+        .await?;
+    let mut server =
+        boxed_future!(crate::start_embedded_app_server_for_picker(&app.config)).await?;
+    let blank = server.start_thread(&app.config).await?;
+    let thread_id = blank.session.thread_id;
+    app.backend_registry
+        .register_started(server.backend_id(), &blank)?;
+    app.agents_overview.blank_sessions.insert(thread_id, blank);
+
+    // Returning to the backend through another task leaves this cached blank untouched.
+    let other = server.start_thread(&app.config).await?;
+    let other_id = other.session.thread_id;
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+    app.enqueue_primary_thread_session(other.session, other.turns)
+        .await?;
+    drain_app_events(&mut app, &mut tui, &mut server, &mut events).await?;
+    assert_eq!(app.current_displayed_thread_id(), Some(other_id));
+
+    // The helper consumes the turn notifications without delivering them to App.
+    let prompt = "Sent while the backend was parked";
+    side_chat_policy_tests::ask(&mut server, &model, thread_id, prompt).await?;
+    assert!(app.agents_overview.blank_sessions.contains_key(&thread_id));
+    let mut expected_mode = app.chat_widget.effective_collaboration_mode();
+    app.chat_widget.set_model("stale-model");
+    app.chat_widget.apply_external_edit("saved draft".into());
+    let draft = app.chat_widget.capture_thread_input_state().unwrap();
+    app.agents_overview.input_states.insert(thread_id, draft);
+    expected_mode.mode = ModeKind::Plan;
+    expected_mode.settings.developer_instructions = Some("Updated by the other client".into());
+    assert!(
+        server
+            .thread_settings_update(ThreadSettingsUpdateParams {
+                thread_id: thread_id.to_string(),
+                collaboration_mode: Some(expected_mode.clone()),
+                ..Default::default()
+            })
+            .await?
+    );
+    let _ = next_thread_settings_updated(&mut server, thread_id).await;
+
+    boxed_future!(app.select_agents_overview_thread(&mut tui, &mut server, thread_id)).await?;
+    assert_eq!(app.current_displayed_thread_id(), Some(thread_id));
+    let history = boxed_future!(active_reconnect::drain_history(
+        &mut app,
+        &mut tui,
+        &mut server,
+        &mut events
+    ))
+    .await?;
+    assert!(history.contains(prompt), "{history}");
+    assert_eq!(app.chat_widget.composer_text_with_pending(), "saved draft");
+    assert_eq!(
+        app.chat_widget.effective_collaboration_mode(),
+        expected_mode
+    );
+    assert!(!app.agents_overview.blank_sessions.contains_key(&thread_id));
+    server.shutdown().await?;
+    Ok(())
+}
+
+async fn check_retained_draft_handoff(
+    saved_history: bool,
+    history_capabilities: HistoryCapabilities,
+    retained_blank: bool,
+) -> Result<()> {
+    let (mut app, mut events, _ops) = make_test_app_with_channels().await;
+    let source = crate::start_embedded_app_server_for_picker(&app.config).await?;
+    let (mut destination, requests, proxy) = start_recording_app_server_with_history(
+        &app.config,
+        history_capabilities,
+        /*blocked_thread_list*/ None,
+        /*failed_thread_name*/ None,
+        crate::app_server_session::ThreadParamsMode::Embedded,
+        LoaderOverrides::without_managed_config_for_tests(),
+    )
+    .await?;
+    let destination_id = destination.backend_id();
+    let mut blank = if saved_history {
+        let timestamp = "2025-01-05T12-00-00";
+        let thread_id = create_fake_rollout(
+            &app.config.codex_home,
+            timestamp,
+            "2025-01-05T12:00:00Z",
+            "Sent while the backend was parked",
+            Some(&app.config.model_provider_id),
+            /*git_info*/ None,
+        )
+        .expect("materialize the retained thread");
+        let path = app_test_support::rollout_path(&app.config.codex_home, timestamp, &thread_id);
+        let contents = std::fs::read_to_string(&path)?;
+        let (metadata, history) = contents.split_once('\n').expect("rollout with history");
+        let mut metadata: serde_json::Value = serde_json::from_str(metadata)?;
+        metadata["payload"]["cwd"] = serde_json::to_value(&app.config.cwd)?;
+        std::fs::write(path, format!("{metadata}\n{history}"))?;
+        let thread_id = ThreadId::from_string(&thread_id)?;
+        destination
+            .resume_thread(
+                &app.local_settings,
+                app.config.clone(),
+                thread_id,
+                crate::app_server_session::ResumeModelSettings::PreserveExistingThread,
+            )
+            .await?
+    } else {
+        destination.start_thread(&app.config).await?
+    };
+    let thread_id = blank.session.thread_id;
+    let mut server_mode = blank.session.collaboration_mode.as_deref().cloned();
+    let initial_policy = blank.session.approval_policy;
+    blank.turns.clear();
+    let resume_count = recorded_params(&requests, "thread/resume").len();
+    let target = crate::resume_picker::SessionTarget {
+        backend_id: destination_id,
+        path: None,
+        thread_id,
+        cwd: Some(app.config.cwd.to_path_buf()),
+        history_mode: None,
+    };
+    app.backend_registry
+        .register_started(destination_id, &blank)?;
+    if retained_blank {
+        app.agents_overview.blank_sessions.insert(thread_id, blank);
+    }
+    app.chat_widget
+        .restore_user_message_to_composer("draft for the retained task".into());
+    let parked_policy = (!saved_history && history_capabilities == HistoryCapabilities::Current)
+        .then_some(if initial_policy == AskForApproval::Never {
+            AskForApproval::OnRequest
+        } else {
+            AskForApproval::Never
+        });
+    if saved_history {
+        app.chat_widget.set_model("old-model");
+    }
+    if parked_policy.is_some() {
+        server_mode = Some(app.chat_widget.effective_collaboration_mode());
+    }
+    let collaboration_mode = if saved_history || parked_policy.is_some() {
+        let mode = server_mode.as_mut().expect("test has a mode to update");
+        mode.mode = ModeKind::Plan;
+        mode.settings.developer_instructions = Some("Instructions from the parked task".into());
+        if parked_policy.is_some() {
+            mode.settings.reasoning_effort = Some(ReasoningEffortConfig::High);
+        }
+        Some(mode.clone())
+    } else {
+        None
+    };
+    let retained = app.chat_widget.capture_thread_input_state().unwrap();
+    app.chat_widget
+        .restore_user_message_to_composer("draft for the displayed task".into());
+    app.backend_registry.connect(&source);
+    app.backend_registry.connect(&destination);
+    let mut backends = BackendSessions::from_initial(source, vec![destination]);
+    let destination_slot = backends
+        .slot(destination_id)
+        .expect("registered destination");
+    backends
+        .parked_inputs_mut(destination_slot)
+        .insert(thread_id, retained);
+    let outgoing = backends.displayed_owner();
+
+    if collaboration_mode.is_some() || parked_policy.is_some() {
+        let destination = backends.session_at_mut(destination_slot);
+        let settings = ThreadSettingsUpdateParams {
+            thread_id: thread_id.to_string(),
+            collaboration_mode,
+            effort: parked_policy.map(|_| ReasoningEffortConfig::High),
+            approval_policy: parked_policy,
+            ..Default::default()
+        };
+        assert!(destination.thread_settings_update(settings).await?);
+        let update = next_thread_settings_updated(destination, thread_id).await;
+        if parked_policy.is_some() {
+            let event = AppServerEvent::ServerNotification(Box::new(
+                ServerNotification::ThreadSettingsUpdated(update),
+            ));
+            let event = AppServerSessionEvent {
+                backend_id: destination_id,
+                event,
+            };
+            let (destination, parked_inputs) = backends.session_and_parked_inputs(destination_slot);
+            app.handle_polled_backend_event(destination, outgoing, parked_inputs, event)
+                .await;
+        } else if saved_history && retained_blank {
+            // A formerly blank thread must ignore settings cached before it acquired history.
+            let mut stale_update = update;
+            stale_update.thread_settings.model = "old-model".into();
+            backends
+                .parked_inputs_mut(destination_slot)
+                .get_mut(&thread_id)
+                .unwrap()
+                .pending_thread_settings = Some(stale_update);
+        }
+    }
+    let settings = app.backend_settings();
+    backends.settings.insert(destination_id, settings);
+    if history_capabilities == HistoryCapabilities::LegacyOnly {
+        app.app_server_target = AppServerTarget::Cloud;
+        app.app_server_backend_id = Some(backends.displayed_owner());
+        assert!(app.begin_reconnect());
+    }
+
+    app.agents_overview.initialized.insert(outgoing);
+    app.agents_overview.show_more_backends.insert(outgoing);
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+    let pages_before = recorded_params(&requests, "thread/turns/list").len();
+    let reads_before = recorded_params(&requests, "thread/read").len();
+    app.resume_backend_session(&mut tui, &mut backends, target)
+        .await?;
+
+    assert_eq!(
+        backends.displayed_owner(),
+        destination_id,
+        "handoff errors: {:?}; reads: {:?}; pages: {:?}; resumes: {:?}",
+        std::iter::from_fn(|| events.try_recv().ok())
+            .filter_map(|event| match event {
+                AppEvent::InsertHistoryCell(cell) =>
+                    Some(lines_to_single_string(&cell.raw_lines())),
+                _ => None,
+            })
+            .collect::<Vec<_>>(),
+        recorded_params(&requests, "thread/read"),
+        recorded_params(&requests, "thread/turns/list"),
+        recorded_params(&requests, "thread/resume"),
+    );
+    assert_eq!(
+        app.backend_registry.request_handle(outgoing).is_some(),
+        history_capabilities != HistoryCapabilities::LegacyOnly,
+    );
+    assert!(
+        app.backend_registry
+            .request_handle(destination_id)
+            .is_some()
+    );
+    assert!(app.agents_overview.initialized.contains(&outgoing));
+    assert!(!app.agents_overview.initialized.contains(&destination_id));
+    assert!(
+        !app.agents_overview
+            .show_more_backends
+            .contains(&destination_id)
+    );
+    assert_eq!(app.chat_widget.thread_id(), Some(thread_id));
+    if saved_history || parked_policy.is_some() {
+        assert_eq!(
+            app.chat_widget.effective_collaboration_mode(),
+            server_mode.unwrap()
+        );
+    }
+    if let Some(parked_policy) = parked_policy {
+        let policy = &app.chat_widget.config_ref().permissions.approval_policy;
+        assert_eq!(AskForApproval::from(policy.value()), parked_policy);
+    }
+    assert_eq!(
+        app.chat_widget.composer_text_with_pending(),
+        "draft for the retained task"
+    );
+    let page_probe_count = recorded_params(&requests, "thread/turns/list")[pages_before..]
+        .iter()
+        .filter(|params| params["limit"] == 1)
+        .count();
+    // The saved-history case uses a legacy rollout even on the current server.
+    assert_eq!(
+        page_probe_count,
+        usize::from(
+            !saved_history
+                && matches!(
+                    history_capabilities,
+                    HistoryCapabilities::Current | HistoryCapabilities::FirstTurnPageUnsupported
+                )
+        )
+    );
+    if retained_blank
+        && (page_probe_count == 0
+            || history_capabilities == HistoryCapabilities::FirstTurnPageUnsupported)
+    {
+        assert!(
+            recorded_params(&requests, "thread/read")[reads_before..]
+                .iter()
+                .any(|params| params["includeTurns"] == true)
+        );
+    }
+    assert_eq!(
+        recorded_params(&requests, "thread/resume").len(),
+        resume_count + usize::from(saved_history),
+    );
+    assert_eq!(
+        app.agents_overview.blank_sessions.contains_key(&thread_id),
+        !saved_history,
+    );
+    backends.shutdown().await?;
+    proxy.await??;
     Ok(())
 }
 
@@ -820,7 +1391,7 @@ async fn replacement_preserves_remote_launch_paths_and_older_servers() -> Result
         app.start_fresh_session(
             &mut tui,
             &mut server,
-            /*session_start_source*/ None,
+            FreshSessionStart::PreserveCurrentView(None),
             /*initial_user_message*/ None,
             /*new_thread_name*/ None,
         )
@@ -1153,6 +1724,84 @@ async fn cloud_switch_wait_keeps_draft_editable_without_submitting_to_local() ->
     Ok(())
 }
 
+#[tokio::test]
+async fn cloud_switch_wait_quits_on_ctrl_c_before_adopting_the_thread() -> Result<()> {
+    use crate::app::cloud_switch_wait::ClipboardHandoff;
+    use crate::app::cloud_switch_wait::wait_for_cloud_switch;
+    use crate::app_event::ExitMode;
+
+    for completed in [false, true] {
+        let (mut app, mut app_events, _operations) = make_test_app_with_channels().await;
+        let mut tui = crate::tui::test_support::make_test_tui()?;
+        let operation = async {
+            if !completed {
+                std::future::pending::<()>().await;
+            }
+            Ok::<_, std::convert::Infallible>(())
+        };
+        let ctrl_c = TuiEvent::Key(KeyEvent::new(KeyCode::Char('c'), KeyModifiers::CONTROL));
+        let wait = wait_for_cloud_switch(
+            &mut app,
+            &mut tui,
+            operation,
+            tokio_stream::iter([ctrl_c]).chain(tokio_stream::pending()),
+            ClipboardHandoff::SettleBeforeNextView,
+        );
+        tokio::pin!(wait);
+        assert_eq!(futures::poll!(&mut wait), std::task::Poll::Ready(Ok(None)));
+        let exits: Vec<_> = std::iter::from_fn(|| app_events.try_recv().ok())
+            .filter_map(|event| match event {
+                AppEvent::Exit(mode) => Some(mode),
+                _ => None,
+            })
+            .collect();
+        assert_eq!(exits, [ExitMode::ShutdownFirst]);
+    }
+    Ok(())
+}
+
+#[tokio::test(start_paused = true)]
+async fn cloud_switch_wait_ctrl_c_clears_buffered_draft_before_quitting() -> Result<()> {
+    use crate::app::cloud_switch_wait::ClipboardHandoff;
+    use crate::app::cloud_switch_wait::wait_for_cloud_switch;
+    use crate::app_event::ExitMode;
+
+    let (mut app, mut app_events, _operations) = make_test_app_with_channels().await;
+    let thread_id = ThreadId::new();
+    let session = test_thread_session(thread_id, app.config.cwd.to_path_buf());
+    app.chat_widget.handle_thread_session(session);
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+    let (send, events) = tokio::sync::mpsc::unbounded_channel();
+    let ctrl_c = TuiEvent::Key(KeyEvent::new(KeyCode::Char('c'), KeyModifiers::CONTROL));
+    send.send(TuiEvent::Key(KeyCode::Char('a').into()))?;
+    send.send(ctrl_c.clone())?;
+    let wait = wait_for_cloud_switch(
+        &mut app,
+        &mut tui,
+        std::future::pending::<Result<(), std::convert::Infallible>>(),
+        tokio_stream::wrappers::UnboundedReceiverStream::new(events),
+        ClipboardHandoff::SettleBeforeNextView,
+    );
+    tokio::pin!(wait);
+    assert!(futures::poll!(&mut wait).is_pending());
+    let history: Vec<_> = std::iter::from_fn(|| app_events.try_recv().ok())
+        .filter_map(|event| match event {
+            AppEvent::AppendMessageHistoryEntry { thread_id, text } => Some((thread_id, text)),
+            AppEvent::Exit(_) => panic!("the first Ctrl+C should clear the draft"),
+            _ => None,
+        })
+        .collect();
+    assert_eq!(history, [(thread_id, "a".into())]);
+
+    send.send(ctrl_c)?;
+    assert_eq!(futures::poll!(&mut wait), std::task::Poll::Ready(Ok(None)));
+    assert!(
+        std::iter::from_fn(|| app_events.try_recv().ok())
+            .any(|event| matches!(event, AppEvent::Exit(ExitMode::ShutdownFirst)))
+    );
+    Ok(())
+}
+
 #[tokio::test(start_paused = true)]
 async fn cloud_switch_wait_routes_ctrl_d_to_the_draft_or_queues_shutdown() -> Result<()> {
     use crate::app::cloud_switch_wait::ClipboardHandoff;
@@ -1279,7 +1928,7 @@ async fn cloud_switch_wait_displays_pending_submission_hint() -> Result<()> {
             .find(|line| line.contains("Connecting to Cloud"))
             .expect("Cloud connection hint")
             .trim(),
-        @"Connecting to Cloud… submit when ready"
+        @"Connecting to Cloud…"
     );
     Ok(())
 }
