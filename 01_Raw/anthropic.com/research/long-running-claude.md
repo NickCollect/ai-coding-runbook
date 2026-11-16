@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/long-running-claude
-fetched_at: 2026-11-09T07:30:23.418924+00:00
+fetched_at: 2026-11-16T07:30:51.501231+00:00
 title: "Long-running Claude for scientific computing \\ Anthropic"
 ---
 
@@ -94,7 +94,7 @@ Here, Claude will iterate up to 20 times until it guarantees that the task is do
 
 Claude worked on [the project](https://github.com/smsharma/clax) from scratch over a few days, reaching sub-percent agreement with the reference CLASS implementation across its various outputs. I asked Claude to reconstruct the accuracy of some of the main outputs of the code—the various CMB angular power spectra—over the course of the project, also labeling milestones during development. It produced the plot below, illustrating the path to sub-percent accuracy.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d6b037407956ad8d5317c97730fd9f273a6a6afa-1680x880.png)
+![](https://assets.claude.com/3c45dd044e4190150a2755063618af33f99843dc.png?w=3840&q=75&fm=webp&fit=max)
 
 The path to sub-percent accuracy over time as the agent worked on the codebase.
 

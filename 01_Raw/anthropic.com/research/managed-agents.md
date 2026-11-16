@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/managed-agents
-fetched_at: 2026-11-09T07:30:23.493818+00:00
+fetched_at: 2026-11-16T07:30:51.563938+00:00
 title: "Scaling Managed Agents with stable interfaces \\ Anthropic"
 ---
 
@@ -18,7 +18,7 @@ Building Managed Agents meant solving an old problem in computing: how to design
 
 Managed Agents follow the same pattern. We virtualized the components of an agent: a session (the append-only log of everything that happened), a harness (the loop that calls Claude and routes Claude’s tool calls to the relevant infrastructure), and a sandbox (an execution environment where Claude can run code and edit files). This allows the implementation of each to be swapped without disturbing the others. We're opinionated about the shape of these interfaces, not about what runs behind them.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/903b624ada206b10753a24c6a1367e74a869165d-1080x1080.png)
+![](https://assets.claude.com/903b624ada206b10753a24c6a1367e74a869165d.png?w=3840&q=75&fm=webp&fit=max)
 
 ## Don’t adopt a pet
 
@@ -38,7 +38,7 @@ The solution we arrived at was to decouple what we thought of as the “brain”
 
 **Recovering from harness failure.** The harness also became cattle. Because the session log sits outside the harness, nothing in the harness needs to survive a crash. When one fails, a new one can be rebooted with `wake(sessionId)`, use `getSession(id)` to get back the event log, and resume from the last event. During the agent loop, the harness writes to the session with `emitEvent(id, event)` in order to keep a durable record of events.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/73e900af5b9d6ed8c64db0a8e74d4465963556b7-1640x1596.png)
+![](https://assets.claude.com/7e932a72d45541a6a8a7585181f10efbf018d5c8.png?w=3840&q=75&fm=webp&fit=max)
 
 **The security boundary.** In the coupled design, any untrusted code that Claude generated was run in the same container as credentials—so a prompt injection only had to convince Claude to read its own environment. Once an attacker has those tokens, they can spawn fresh, unrestricted sessions and delegate work to them. Narrow scoping is an obvious mitigation, but this encodes an assumption about what Claude can't do with a limited token—and Claude is getting increasingly smart. The structural fix was to make sure the tokens are never reachable from the sandbox where Claude’s generated code runs.
 
@@ -50,7 +50,7 @@ Long-horizon tasks often exceed the length of Claude’s context window, and the
 
 But irreversible decisions to selectively retain or discard context can lead to failures. It is difficult to know which tokens the future turns will need. If messages are transformed by a compaction step, the harness removes compacted messages from Claude’s context window, and these are recoverable only if they are stored. Prior work [has explored](https://arxiv.org/pdf/2512.24601) ways to address this by storing context as an object that lives *outside* the context window. For example, context can be an object in a REPL that the LLM programmatically accesses by writing code to filter or slice it.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/cf0719d7832b1f577b7393c84a7c53eecc725ca4-760x200.png)
+![](https://assets.claude.com/62203b5b91fee236b0e2752e96ff564044bcbc2a.png?w=1920&q=75&fm=webp&fit=max)
 
 In Managed Agents, the session provides this same benefit, serving as a context object that lives outside Claude’s context window. But rather than be stored within the sandbox or REPL, context is durably stored in the session log. The interface, `getEvents(),` allows the brain to interrogate context by selecting positional slices of the event stream. The interface can be used flexibly, allowing the brain to pick up from wherever it last stopped reading, rewinding a few events before a specific moment to see the lead up, or rereading context before a specific action.
 
@@ -68,7 +68,7 @@ Decoupling the brain from the hands means that containers are provisioned by the
 
 Decoupling the brain from the hands makes each hand a tool, `execute(name, input) → string`: a name and input go in, and a string is returned. That interface supports any custom tool, any MCP server, and our own tools. The harness doesn’t know whether the sandbox is a container, a phone, or a Pokémon emulator. And because no hand is coupled to any brain, brains can pass hands to one another.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4f67b1c10566552aec514a716ea43544ab330e0b-668x243.png)
+![](https://assets.claude.com/1dff25b906f1c276cfb27c2a36638b1128dc4d2a.png?w=1920&q=75&fm=webp&fit=max)
 
 ## Conclusion
 

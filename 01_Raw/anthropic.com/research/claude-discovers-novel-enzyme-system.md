@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-discovers-novel-enzyme-system
-fetched_at: 2026-11-09T07:30:19.788666+00:00
+fetched_at: 2026-11-16T07:30:48.782094+00:00
 title: "Claude discovers a novel enzyme system \\ Anthropic"
 ---
 
@@ -44,7 +44,7 @@ Claude agents gathered over 200,000 RTs, picked out 3,500 new candidate systems,
 
 During the course of its research, Claude noticed an unusual RT family and decided to examine it in greater detail. While combing through the raw DNA sequence near the RT, the agent exclaimed: “[The DNA next to the RT] is spectacular: I can see by eye a tandem repeat array … that's a CRISPR-like … repeat array?!”
 
-![A graphic of Claude identifying patterns in DNA](https://www-cdn.anthropic.com/images/4zrzovbb/website/0f6064436a364b73ce0d2a80848ac56be7ae9ddd-1360x1160.gif)
+![A graphic of Claude identifying patterns in DNA](https://assets.claude.com/0f6064436a364b73ce0d2a80848ac56be7ae9ddd.gif)
 
 The raw DNA Claude was reading when it detected a repeat pattern that no one had noticed
 

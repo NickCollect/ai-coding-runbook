@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/making-claude-a-chemist
-fetched_at: 2026-11-09T07:30:23.447418+00:00
+fetched_at: 2026-11-16T07:30:51.580065+00:00
 title: "Making Claude a chemist \\ Anthropic"
 ---
 
@@ -20,7 +20,7 @@ Ultimately, our claim is a modest one: Claude is starting to meaningfully assist
 
 ## Claude vs. ChemDraw on NMR prediction and structure elucidation
 
-**Full version can be found [here](https://www-cdn.anthropic.com/07441e654ad3dfeb0cd090e9361511562825d012.pdf)**
+**Full version can be found [here](https://assets.claude.com/07441e654ad3dfeb0cd090e9361511562825d012.pdf)**
 
 Nearly every small molecule—drug, pesticide, dye, fragrance, polymer, DNA or protein subunit, and functional inorganic or solid-state material—exists because a chemist determined its structure. Given that these molecules cannot be seen with microscopes, chemists must rely on spectral analysis, probing a molecule with light, radio waves, or magnetic fields. The way a given molecule absorbs, emits, or deflects this energy gives chemists a pattern, or spectrum, with which they can elucidate its structure.  
   
@@ -28,19 +28,19 @@ NMR spectroscopy—one of the canonical techniques chemists rely on for this—i
   
 To set up our assessment, we pulled 20 compounds from ChemRxiv preprints[2](#footnote-2) posted after the models’ training cutoff, taking the first fully characterized novel molecules from each paper. The 20 span four structural families, five compounds each, with each family selected because it involves a different category of NMR challenge. Each tool was given the structure encoded as a SMILES string—the line-of-text notation chemists use to input a molecule to software—and was asked to predict where every hydrogen and carbon peak would fall along a 1D NMR spectrum (a horizontal axis measuring chemical shifts in ppm, parts per million). Given that NMR samples are dissolved in a liquid, and that the choice of solvent (chloroform, DMSO, etc.) moves the peak positions slightly, each tool was told to predict the spectrum in whatever solvent the chemists had used in the published paper.
 
-![A graph of the four scaffold classes](https://www-cdn.anthropic.com/images/4zrzovbb/website/6a37f20bd02f14cc408383f98974cee81486fa2d-1920x865.jpg)
+![A graph of the four scaffold classes](https://assets.claude.com/a49898d6f80f5037aff938f85f0fe64253656e59.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Four scaffold classes covered by the forward-prediction assessment. Each probes a different category of NMR challenge. P1 chloropyridazines have a slow-exchange NH on aminopyridazine in DMSO-d₆; P2 Boc-N-aryl maleimides and N-Boc ynamides exercise α-vinyl-imide carbonyls and the rare ynamide α/β-carbon pair; P3 spiroketones are spirobicyclic ketones with phenacyl or acetyl pendants and diastereotopic CH₂; P4 α-silyl methanesulfonamides have shielded silicon-α carbons. Five compounds per class, n = 20 total.
 
 Because a language model’s output varies between runs, each Claude model was queried three times per compound and averaged; ChemDraw and MestReNova return the same answer every time and were run once. We then paired each predicted peak with its experimental counterpart and measured the gap in ppm. These landed within the window a chemist would call correct—±0.20 ppm for hydrogen or ±1.0 ppm for carbon.
 
-![A graphic depicting the per-tool MAE/RMSE summary across 20 compounds](https://www-cdn.anthropic.com/images/4zrzovbb/website/8269748a860db6f9b3fddd3e9e6116c193cbb399-1200x675.jpg)
+![A graphic depicting the per-tool MAE/RMSE summary across 20 compounds](https://assets.claude.com/f7c58cfc3b2bbb95c412a393613505bf4d3094e3.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Per-tool MAE (darker shade) and RMSE (lighter shade) for ¹H (left) and ¹³C (right) shift errors across 20 compounds for forward prediction, with coverage shown beneath each tool. Claude bars: mean across three replicates with min–max range and overlaid replicate dots. Classical tools: single-point predictions (no range).
 
 On hydrogen, Opus 4.7 was most accurate, with an average error of ±0.079 ppm—well under half the tolerance window—and the highest share of peaks landing inside it. On carbon, Opus 4.7 and MestReNova were effectively tied, at ±1.37 and ±1.48 ppm; the remaining tools kept the same rank order on both elements. Opus 4.6 was predictably middling, and Sonnet 4.6 was the weakest. The gap between them was most evident on a single notoriously difficult hydrogen—an NH proton in the chloropyridazine family whose true position falls in a narrow band between 6.8 and 7.9 ppm. Opus 4.7 placed it slightly low but consistently so; Opus 4.6 scattered its guesses across several ppm; Sonnet 4.6 put it in the 10–13 range, well outside where it actually appears.
 
-![A chart depicting within-tolerance accuracy per compound](https://www-cdn.anthropic.com/images/4zrzovbb/website/62a7baa0bd66c26b5b5966e3578b87b62541e708-1920x1386.png)
+![A chart depicting within-tolerance accuracy per compound](https://assets.claude.com/62a7baa0bd66c26b5b5966e3578b87b62541e708.png?w=3840&q=75&fm=webp&fit=max)
 
 Top: % of experimental atoms within ±0.20 ppm (¹H, left) and ±1.0 ppm (¹³C, right). Bottom: per-compound win rate (compounds where the tool had the lowest per-compound MAE, out of 20). Claude bars: mean across three replicates with min–max range; classical tools: single-point predictions.
 
@@ -48,7 +48,7 @@ While Opus 4.7 performed fairly comparably to ChemDraw and MestReNova, the gap w
   
 From there, we evaluated inverse prediction (structure elucidation): could we determine the structure of a molecule from its spectrum? We gave Opus 4.7 15 elucidation problems and asked it, three times each, to propose up to three ranked candidate structures. Each supplied the compound’s exact molecular formula (from high-resolution mass spectrometry) and its hydrogen and carbon NMR spectra. The fifteen were split by difficulty. The eight simpler targets—single-ring or two-fragment molecules—were posed with only the formula and spectra. The seven denser targets—fused rings, spirocycles, and similar—were accompanied by one additional hint: the structure of the starting material that had gone into the reaction.
 
-![Chart showing the structure elucidation](https://www-cdn.anthropic.com/images/4zrzovbb/website/b28ecd4b626473984e42791c1615103d4203ba48-1709x2048.jpg)
+![Chart showing the structure elucidation](https://assets.claude.com/66bb4b97587c8c1abe05d90a90e8eba994b15916.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Structure-elucidation results across the 15 inverse-task problems. Each panel shows the published target with its success count out of 3 attempts. Border color indicates the prompt condition: green for spectra and HRMS only with no starting-material context; blue for spectra, HRMS, and the starting-material SMILES, with no other reaction context.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/statistical-approach-to-model-evals
-fetched_at: 2026-11-09T07:30:25.282338+00:00
+fetched_at: 2026-11-16T07:30:53.508125+00:00
 title: "A statistical approach to model evaluations \\ Anthropic"
 ---
 
@@ -20,7 +20,7 @@ Evals often consist of hundreds or thousands of unrelated questions. [MMLU](http
 
 To compute an overall eval score, each question is separately scored, and then the overall score is (usually) a simple average of these question scores. Typically, researchers focus their attention on this observed average. But in our paper, we argue that the real object of interest should not be the *observed* average, but rather the *theoretical* average across all possible questions. So if we imagine that eval questions were drawn from an unseen “question universe,” we can learn about the average score in that universe—that is, we can measure the underlying *skill*, independent of the “luck of the draw”—using statistical theory.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/b34871a36ad66fa0330e3ad6488ee87eb96bddda-2401x1260.png)
+![](https://assets.claude.com/b34871a36ad66fa0330e3ad6488ee87eb96bddda.png?w=3840&q=75&fm=webp&fit=max)
 
 If we imagine that eval questions were drawn from a “question universe,” then eval scores will tend to follow a normal distribution, centered around the average score of all possible questions.
 
@@ -36,7 +36,7 @@ For these evals, each question’s selection from the “question universe” is
 
 Fortunately, the problem of [clustered standard errors](https://en.wikipedia.org/wiki/Clustered_standard_errors) has been extensively studied in the social sciences. When the inclusion of questions is non-independent, we recommend clustering standard errors on the unit of [randomization](https://en.wikipedia.org/wiki/Randomization) (for example, passage of text), and we provide applicable formulas in our paper.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/f6f90f93dc66380904709a3ef4d63b92332871fd-2401x1260.png)
+![](https://assets.claude.com/c6e7b4bda76d56117a8d3bf428cd1713e1e7157e.png?w=3840&q=75&fm=webp&fit=max)
 
 If questions arrive in related clusters—a common pattern in reading-comprehension evals—eval scores will be more spread-out compared to the non-clustered case.
 
@@ -55,7 +55,7 @@ Thanks to the [law of total variance](https://en.wikipedia.org/wiki/Law_of_total
 
 If an eval uses chain-of-thought reasoning, we recommend resampling answers from the same model several times, and using the question-level averages as the question scores fed into the Central Limit Theorem. We note that the [Inspect framework](https://github.com/UKGovernmentBEIS/inspect_ai/) correctly computes standard errors in this way via its [*epochs* parameter](https://inspect.ai-safety-institute.org.uk/scorers.html#sec-reducing-epochs).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/efef59a06ddeb530fa15f31dc0937f28f70f655b-2401x1260.png)
+![](https://assets.claude.com/58baafec845375eace4b3161ded785af29268d8d.png?w=3840&q=75&fm=webp&fit=max)
 
 If a model produces answers non-deterministically, then generating (and grading) several answers per question will result in less spread-out eval scores.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-code-expertise
-fetched_at: 2026-11-09T07:30:19.865996+00:00
+fetched_at: 2026-11-16T07:30:48.852197+00:00
 title: "How Claude Code is used in practice \\ Anthropic"
 ---
 
@@ -33,11 +33,11 @@ To understand what people are using Claude Code for, we classify each session in
 
 About 56% of sessions consist of writing (25%), fixing (26%), or testing and orchestrating code (5%). Operating software comprises 17%, while 14% of sessions are planning or exploring, and 13% produce analysis or prose (Figure 1).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/b0c229bb9765b65716dfdf1cd0bedc2713037288-1920x1080.png)
+![](https://assets.claude.com/b0c229bb9765b65716dfdf1cd0bedc2713037288.png?w=3840&q=75&fm=webp&fit=max)
 
 **The nine modes of work:** Each interactive session is classified into the single mode that best describes what it is trying to accomplish.
 
-We classify each session by having a model read its transcript, then using our privacy-preserving analysis tool, we check them against telemetry that's recorded automatically for every session, including whether any lines of code were added or deleted. The two sources have high agreement—for instance, more than 90% of sessions our classifier labeled as creating or modifying code showed code changes in the telemetry. See the [Appendix](https://www-cdn.anthropic.com/files/4zrzovbb/website/a94728142a45694292336165947f8d6e3e1a357e.pdf)for details.
+We classify each session by having a model read its transcript, then using our privacy-preserving analysis tool, we check them against telemetry that's recorded automatically for every session, including whether any lines of code were added or deleted. The two sources have high agreement—for instance, more than 90% of sessions our classifier labeled as creating or modifying code showed code changes in the telemetry. See the [Appendix](https://assets.claude.com/a94728142a45694292336165947f8d6e3e1a357e.pdf)for details.
 
 ### Who decides what
 
@@ -51,7 +51,7 @@ To understand the delegation of actions in a session, we look at the session’s
 
 How much Claude does between check-ins largely tracks who is making the decisions. When the user keeps control of execution (i.e. makes over 80% of execution decisions), Claude takes fewer actions per turn (about eight actions). And when Claude takes control of planning (i.e. makes over 80% of planning decisions), it takes on the highest number of actions (about 16).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c8c039a010b96ad191a3a9b7dfe6ad01adb410bf-1920x1080.png)
+![](https://assets.claude.com/c8c039a010b96ad191a3a9b7dfe6ad01adb410bf.png?w=3840&q=75&fm=webp&fit=max)
 
 **Claude's share of planning and execution decisions:** Distribution across sessions of the share of planning decisions (what to do) and execution decisions (how to do it) attributed to Claude rather than the user. In the typical session, the user makes about 70% of planning decisions while Claude makes about 80% of execution decisions.
 
@@ -61,7 +61,7 @@ From each transcript, Claude rates the user's apparent expertise at the task on 
 
 The table below shows how we defined each expertise level in the classifier along with an example request from a public dataset of coding agent sessions, [SWE-chat](https://huggingface.co/datasets/SALT-NLP/SWE-chat). The conversation categorized as Novice gives generic instructions with no implied domain-specific knowledge. The Expert conversation conveys deep knowledge of the codebase and technical environment.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ffb14937444e81d80b38d7b085438b61d5ea46ff-1850x1830.png)
+![](https://assets.claude.com/6e75feea1b6b62627d36a5c4ef96d22b4a900a9f.png?w=3840&q=75&fm=webp&fit=max)
 
 **Expertise classifier:** The examples paraphrase, anonymize and condense real sessions labeled by our classifiers. Many of the sessions used in the table come from a public dataset of agentic coding sessions, [SWE-chat](https://huggingface.co/datasets/SALT-NLP/SWE-chat).
 
@@ -69,7 +69,7 @@ We quantify how expertise relates to Claude’s output and activity per prompt. 
 
 These measures complement the autonomy measures in our [prior report on Claude Code](https://www.anthropic.com/research/measuring-agent-autonomy), which tracked how long the agent runs and how often people approve its actions automatically. Our decision attribution measure, by contrast, captures who makes the substantive decisions in a session as a whole, while our measures of output and actions per prompt measure how much autonomous activity from Claude each human prompt sets off.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a72b63aceab4eadb0baa5799a69cc3ff211e7462-1920x1080.png)
+![](https://assets.claude.com/a72b63aceab4eadb0baa5799a69cc3ff211e7462.png?w=3840&q=75&fm=webp&fit=max)
 
 **Claude does more per prompt for more expert users:** Claude produces more actions (left bar) and text output per prompt (right bar) for more expert users. Boxes span the interquartile range (split at the median). Whiskers represent the 5th to 95th percentile. White dots are geometric means. Both upward trends are statistically significant (p < 0.001), as is each adjacent-level step, and they remain significant (at +9% actions and +13% output per expertise level) in a regression controlling for work mode, task value, month, occupation, and model family, with standard errors clustered by user.
 
@@ -85,9 +85,9 @@ We were able to infer occupation in about 70% of sessions. Within this set, Comp
 
 The composition of the work done with Claude Code changed substantially between October 2025 and April 2026. The clearest change is that the share of sessions spent fixing broken code fell from 33% to 19% (Figure 4). In its place, we saw a greater share of the work that surrounds code. Operating software grew from 14% to 21% of sessions. Writing and data analysis roughly doubled, from about 10% to 20% of sessions.
 
-The tasks themselves also grew more valuable. We approximate each session's economic value by asking what the work would cost on a freelance marketplace, calibrated against a public dataset of real postings. By this measure, the estimated value of the average session rose by 27% between October and April. The rise holds across many kinds of work. Building, operating, and fixing-type tasks all grew more valuable by roughly a third or more (about 43%, 34%, and 32% respectively). These price estimates are coarse, so we use them primarily to compare tasks to one another over time, not as dollar values to be read literally.[8](#footnote-8) For details about the construction of the task estimator, see the [Appendix](https://www-cdn.anthropic.com/files/4zrzovbb/website/a94728142a45694292336165947f8d6e3e1a357e.pdf)**.**
+The tasks themselves also grew more valuable. We approximate each session's economic value by asking what the work would cost on a freelance marketplace, calibrated against a public dataset of real postings. By this measure, the estimated value of the average session rose by 27% between October and April. The rise holds across many kinds of work. Building, operating, and fixing-type tasks all grew more valuable by roughly a third or more (about 43%, 34%, and 32% respectively). These price estimates are coarse, so we use them primarily to compare tasks to one another over time, not as dollar values to be read literally.[8](#footnote-8) For details about the construction of the task estimator, see the [Appendix](https://assets.claude.com/a94728142a45694292336165947f8d6e3e1a357e.pdf)**.**
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c72f140ee2d30cdf1385e425098fb698b7c5d74c-1920x1080.png)
+![](https://assets.claude.com/ff6971459c08ecc215769583df981f74bc6a594e.png?w=3840&q=75&fm=webp&fit=max)
 
 **The composition and value of Claude Code work, October 2025 to April 2026:** Share of sessions in each work mode over the seven-month window. The share of sessions fixing broken code fell from 33% to 19%, while operating software, analyzing data, and writing documents grew.
 
@@ -103,15 +103,15 @@ So what kinds of sessions are most successful? It turns out that the expertise r
 
 One might worry that expertise isn't the real driver—perhaps experts simply pick different tasks, or differ in other ways. Throughout this section, we partially address this worry by comparing sessions doing the same kind of work, at the same estimated value, in the same month, on the same subject, from people in the same broad occupation group, and ask how outcomes differ by the person’s rated expertise.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/54cae744dadf523561ef80b448161fef13991420-1850x1487.png)
+![](https://assets.claude.com/5ac5b0c68c2c61821b2795e05f9377c017eb1741.png?w=3840&q=75&fm=webp&fit=max)
 
 **Definitions of success and failure derived from classifiers:** The examples paraphrase and summarize real sessions from a public dataset of agentic coding interactions, [SWE-chat](https://huggingface.co/datasets/SALT-NLP/SWE-chat), labeled by our classifiers.
 
 Across all of our success measures, the more expertise a person exhibits in a session, the more likely it is that the session succeeds. A novice-rated session reaches our strictest measure, *verified success,* 15% of the time and at least partial success 77% of the time. A session rated intermediate or up reaches verified success 28-33% of the time and partial success 91-92% of the time (Figure 5).
 
-In each measure, most of the gain comes from moving from novice to intermediate; between intermediate and expert, the slope decreases. In the [Appendix](https://www-cdn.anthropic.com/files/4zrzovbb/website/a94728142a45694292336165947f8d6e3e1a357e.pdf), we give details about the regressions behind Figure 5.
+In each measure, most of the gain comes from moving from novice to intermediate; between intermediate and expert, the slope decreases. In the [Appendix](https://assets.claude.com/a94728142a45694292336165947f8d6e3e1a357e.pdf), we give details about the regressions behind Figure 5.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/140578bc2523d4945c016d72e69628d2692228c8-1920x1080.png)
+![](https://assets.claude.com/140578bc2523d4945c016d72e69628d2692228c8.png?w=3840&q=75&fm=webp&fit=max)
 
 **Expertise and how sessions end:** Session outcomes by the user's rated expertise at the task, on a five-point scale from novice to expert. The left panel includes all sessions. The middle and right panels restrict to sessions that hit trouble (failure signals > 3) and show the share that still end in various definitions of success and failure. Each point is an adjusted rate––we estimate the differences between expertise levels by comparing only sessions that share the same work mode, the same task-value band, the same month, the same task subject, and the same kind of user (software-related occupation or not). Details about the regressions behind these points are in the Appendix. Whiskers are confidence intervals on sample means (most are too small to be visible in this plot). These plots exclude sessions judged by the success outcome classifier to have no clear goal.
 
@@ -123,7 +123,7 @@ We also track the inverse relationship––expertise versus various measures of
 
 People in software-related occupations reach verified success in about 30% of their sessions overall, while users from other professions reach verified success about 26% of the time. Among sessions that produce code (i.e., sessions that add or modify at least one line of code), those numbers are 34% and 29% respectively (Figure 6). The gap between software-related occupations and other occupations narrows under our looser definition of success––with both groups reaching at least partial success in code-producing sessions 89% and 88% of the time, respectively. That five-point gap is small, and it has neither widened nor narrowed over seven months, even as the success rates in both groups increased. In code-producing sessions, every one of the ten largest occupations in our dataset lands within seven points of software engineers in terms of their success. Management occupations are highest on verified success, slightly above the software engineering occupations. Their higher verified success rates may reflect management skills that transfer to directing an agent. But they may also partly reflect our measurement: verification rests partially on explicit confirmation in the transcript, and managers may be more likely to communicate when they get what they ask for.[10](#footnote-10)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/3d2d5df2002152c1a010a139deadab4a7e593a39-1920x1080.png)
+![](https://assets.claude.com/3d2d5df2002152c1a010a139deadab4a7e593a39.png?w=3840&q=75&fm=webp&fit=max)
 
 **Verified and judged success rates in coding sessions by inferred occupation:** Share of sessions meeting strict definitions of success––judged success and verified success––among sessions that add or change at least one line of code, by the user's inferred occupational group, for the ten largest groups. Every group is within seven percentage points of software/math users (SOC Code Computer and Mathematical Occupations). Error bars are 95% confidence intervals computed on distinct accounts.
 
@@ -133,13 +133,13 @@ The results in this report offer an emerging picture of how agentic coding ampli
 
 At the same time, successful sessions are more likely to exhibit domain expertise. Sessions rated expert reach verified success more than twice as often as those rated novice, and when a session hits trouble, novices abandon the session at several times the rate of everyone else. The shape of the collaboration gives this picture more color—domain experts are able to direct Claude to do more work with each instruction they give. So, the ability to steer Claude toward success comes more from command of a domain than from the ability to write code. A person with such command, in any field, may now be able to do technical work they previously could not. A person without any such expertise will get far less from the same tool. And the gains come mostly from competence, not mastery––a working grasp of the domain captures most of the benefit, while deep specialization adds only a bit more beyond that.
 
-These findings are preliminary. As in most of our research, we cannot measure real-world outcomes, like whether code written in a session is actually used or discarded thereafter, or whether it produces an economically valuable artifact. In addition, the non-interactive usage this report excludes is a substantial share of activity. Developing a framework to measure it is a priority for future work. And all of our classifications of sessions depend on a model's reading of the transcript. In the [Appendix](https://www-cdn.anthropic.com/files/4zrzovbb/website/a94728142a45694292336165947f8d6e3e1a357e.pdf), we show that our classifiers track independent telemetry in expected directions, and agree with a strong reference model on the majority of sessions. But classifiers remain challenging to validate at scale, and Claude Code sessions add further difficulty, as they may be too long and complex for human labels to serve as ground truth.
+These findings are preliminary. As in most of our research, we cannot measure real-world outcomes, like whether code written in a session is actually used or discarded thereafter, or whether it produces an economically valuable artifact. In addition, the non-interactive usage this report excludes is a substantial share of activity. Developing a framework to measure it is a priority for future work. And all of our classifications of sessions depend on a model's reading of the transcript. In the [Appendix](https://assets.claude.com/a94728142a45694292336165947f8d6e3e1a357e.pdf), we show that our classifiers track independent telemetry in expected directions, and agree with a strong reference model on the majority of sessions. But classifiers remain challenging to validate at scale, and Claude Code sessions add further difficulty, as they may be too long and complex for human labels to serve as ground truth.
 
 The picture in this report will be updated as the models, the users, and the division of labor between them change. We hope that these measures will allow us to track consequential shifts as they happen. For instance, if the returns to expertise begin to decrease over time, that would suggest that models are starting to supply the essential judgment that users currently bring, and that the gains from these tools are broadening beyond domain experts. If the share of coding sessions completed successfully by users outside software occupations continues to grow, it could indicate that software production is becoming a part of ordinary work in every field, rather than the product of a single occupation. These shifts would change who benefits from agentic coding, and by how much, and would have implications for what is most valued in the labor market.
 
 ### Appendix
 
-Available [here](https://www-cdn.anthropic.com/files/4zrzovbb/website/a94728142a45694292336165947f8d6e3e1a357e.pdf)[.](https://www-cdn.anthropic.com/files/4zrzovbb/website/7426c33b0e75ab4771c465d30d5bc1019bdd0c9c.pdf)
+Available [here](https://assets.claude.com/a94728142a45694292336165947f8d6e3e1a357e.pdf)[.](https://assets.claude.com/7426c33b0e75ab4771c465d30d5bc1019bdd0c9c.pdf)
 
 ## Footnotes
 
@@ -151,7 +151,7 @@ Available [here](https://www-cdn.anthropic.com/files/4zrzovbb/website/a94728142a
 
 04Note that we exclude Claude Code usage that runs through third party integrated developer environments, and software development kits. We also therefore exclude sessions in “headless” mode where a user runs a single prompt in the CLI via `claude -p “<prompt>”` . We exclude this usage since it differs in two key ways––much of it is programmatic, with Claude Code embedded in automated tools and pipelines rather than conversing with a user, and even when a user is present, we do not see a user’s session end-to-end the way we do on the surfaces we include.
 
-05All classifiers in this report use Claude Sonnet 4.6 unless otherwise noted. Details about the classifiers, including their exact full text and validation results, can be found in the [Appendix.](https://cdn.sanity.io/files/4zrzovbb/website/a94728142a45694292336165947f8d6e3e1a357e.pdf)
+05All classifiers in this report use Claude Sonnet 4.6 unless otherwise noted. Details about the classifiers, including their exact full text and validation results, can be found in the [Appendix.](https://assets.claude.com/a94728142a45694292336165947f8d6e3e1a357e.pdf)
 
 06The tail of actions per prompt is long. About 2% of sessions average more than 100 actions per prompt, about 1 in 270 average more than 200, and about 1 in 2,300 average more than 500.
 

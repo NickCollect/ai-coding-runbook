@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-think-tool
-fetched_at: 2026-11-09T07:30:20.202935+00:00
+fetched_at: 2026-11-16T07:30:49.047502+00:00
 title: "The \"think\" tool for complex tool use \\ Anthropic"
 ---
 
@@ -77,7 +77,7 @@ The results showed dramatic improvements when Claude 3.7 effectively used the "t
 - **Airline domain**: The "think" tool with an optimized prompt achieved 0.570 on the pass^1 metric, compared to just 0.370 for the baseline—a 54% relative improvement;
 - **Retail domain**: The "think" tool alone achieves 0.812, compared to 0.783 for the baseline.
 
-![A line graph showing the performance of Claude 3.7 Sonnet on the "airline" domain of the Tau-Bench eval](https://www-cdn.anthropic.com/images/4zrzovbb/website/ff91e5c84be59ae71306bcc60adba9affed86484-2200x1300.jpg)
+![A line graph showing the performance of Claude 3.7 Sonnet on the "airline" domain of the Tau-Bench eval](https://assets.claude.com/19bd5780c165102970e07ef83f7d62ea41a4e6db.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Claude 3.7 Sonnet's performance on the "airline" domain of the Tau-Bench eval under four different configurations.
 
@@ -198,7 +198,7 @@ The combination of the "think" tool with optimized prompting delivered the stron
 
 In the retail domain, we also tested various configurations to understand the specific impact of each approach
 
-![Line graph showing the performance of Claude 3.7 Sonnet on the "retail" domain of the Tau-Bench eval](https://www-cdn.anthropic.com/images/4zrzovbb/website/5819616b4cc109d30f1a7d47ec8a32a6b839637b-7638x4513.jpg)
+![Line graph showing the performance of Claude 3.7 Sonnet on the "retail" domain of the Tau-Bench eval](https://assets.claude.com/ea49a39896257476b62793ac89d79373c8b8f3ef.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Performance of Claude 3.7 Sonnet on the "retail" domain of the Tau-Bench eval under three different configurations.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-fetch-phase-two
-fetched_at: 2026-11-09T07:30:24.410520+00:00
+fetched_at: 2026-11-16T07:30:52.247121+00:00
 title: "Project Fetch: Phase two \\ Anthropic"
 ---
 
@@ -14,7 +14,7 @@ Before we dragged our colleagues to a warehouse for the experiment, we double ch
 
 But AI models are moving fast—even faster than the runaway robodog that almost rammed into one of our human teams back in August.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/7c87b95dea9287e1900110b24d343d0f401fa7b0.mp4)
+[](https://assets.claude.com/7c87b95dea9287e1900110b24d343d0f401fa7b0.mp4)
 
 We figured it was time to revisit Project Fetch to see if our newer models could outperform the previous generation. Not only did they do that, but **Claude Opus 4.7—operating without human assistance—was about 20 times faster than the fastest human team at all tasks completed by our participants less than a year ago**.
 
@@ -32,21 +32,21 @@ The role of our researcher was limited to plugging a laptop running Claude Code 
 
 Very simply: on every task that was completed by at least one human team in August, Opus 4.7 completed the same task at least ten times faster.[1](#footnote-1) If you consider the four tasks that were completed by both human teams, Opus 4.7 was, on average, more than 37 times faster than Team Claude-less and more than 18 times faster than Team Claude.
 
-![Bar chart labeled "Total time comparison: 4 tasks completed by all teams." The chart shows that Team Claude-less completed tasks in 361 minutes; Team Claude completed tasks in 181 minutes, and Claude Opus 4.7 alone completed tasks in 9 minutes 35 seconds. Opus 4.7 was 37.7 times faster than Team Claude-less and 18.9 times faster than Team Claude.](https://www-cdn.anthropic.com/images/4zrzovbb/website/0424a5a4ed31f7891e4048d091aefa52f36862cf-1999x1092.png)
+![Bar chart labeled "Total time comparison: 4 tasks completed by all teams." The chart shows that Team Claude-less completed tasks in 361 minutes; Team Claude completed tasks in 181 minutes, and Claude Opus 4.7 alone completed tasks in 9 minutes 35 seconds. Opus 4.7 was 37.7 times faster than Team Claude-less and 18.9 times faster than Team Claude.](https://assets.claude.com/0424a5a4ed31f7891e4048d091aefa52f36862cf.png?w=3840&q=75&fm=webp&fit=max)
 
 The table compares the speed of the original teams (Team Claude and Team Claude-less) to Opus 4.7 on all of the tasks we tested as part of Phase Two.
 
-![Table comparing Claude Opus 4.7 to Team Claude-less and Team Claude performance on tasks related to programmatic control and autonomous operation. Tasks include "Connect to robodog's video camera," "Connect to robodog's lidar sensor," and "Detect beach ball." Opus 4.7 was faster than Team Claude-less and Team Claude on all tasks. Team Claude-less did not complete all 5 tasks in the table; Team Claude completed them in 264 minutes; and Opus 4.7, averaged over 3 trials, completed them in 12 minutes 7 seconds.](https://www-cdn.anthropic.com/images/4zrzovbb/website/5d1655f4a40044244b6fae0c3826e668a8422bd3-4005x2308.png)
+![Table comparing Claude Opus 4.7 to Team Claude-less and Team Claude performance on tasks related to programmatic control and autonomous operation. Tasks include "Connect to robodog's video camera," "Connect to robodog's lidar sensor," and "Detect beach ball." Opus 4.7 was faster than Team Claude-less and Team Claude on all tasks. Team Claude-less did not complete all 5 tasks in the table; Team Claude completed them in 264 minutes; and Opus 4.7, averaged over 3 trials, completed them in 12 minutes 7 seconds.](https://assets.claude.com/7d5b2a33e93960d111e238d814944a8967754bcd.png?w=3840&q=75&fm=webp&fit=max)
 
 Whereas the humans struggled to choose between multiple different approaches to interface with the dog’s sensors, Opus 4.7 was able to quickly identify the best path. Much of the code it wrote was effective on the first try (which was not the case for Team Claude or Team Claude-less in the original experiment). Indeed, we can see evidence of Opus 4.7’s efficiency when we look at the volume of code it generated: it was as or more successful than both human teams while producing almost ten times less code than Team Claude.
 
-![Bar chart showing total code volume for Team Claude, Team Claude-less, and Opus 4.7 alone. Team Claude wrote 10,309 lines of code; Team Claude-less wrote 1,136 lines of code; Opus 4.7 alone wrote 1,045 lines of code.](https://www-cdn.anthropic.com/images/4zrzovbb/website/5c08d125a49025bd24e1f382a2c1e417519661eb-1999x1088.png)
+![Bar chart showing total code volume for Team Claude, Team Claude-less, and Opus 4.7 alone. Team Claude wrote 10,309 lines of code; Team Claude-less wrote 1,136 lines of code; Opus 4.7 alone wrote 1,045 lines of code.](https://assets.claude.com/5c08d125a49025bd24e1f382a2c1e417519661eb.png?w=3840&q=75&fm=webp&fit=max)
 
 Opus 4.7 was not perfect. For example, it defaulted to using an outdated object detection algorithm. But even then, it was able to work around this and arrive at an effective solution.
 
 We observed little within-task variance (in absolute terms) on completion times for steps the model finished. (Though the aforementioned suboptimal algorithm selection is likely why one of the beach ball detection trials took substantially longer than the others.) Overall, for the tasks in this experiment within its capability envelope, Claude is now quite reliable. (See the next section for an analysis of what Claude is still unable to do.)
 
-![Scatter plot showing Opus 4.7's reliability on task performance. Opus 4.7 performed each task three times; the scatter plot shows that the performance time was relatively consistent across runs.](https://www-cdn.anthropic.com/images/4zrzovbb/website/1a362dfdaae7ff55cf8b04c7ac316e75455a9d21-1999x1122.png)
+![Scatter plot showing Opus 4.7's reliability on task performance. Opus 4.7 performed each task three times; the scatter plot shows that the performance time was relatively consistent across runs.](https://assets.claude.com/1a362dfdaae7ff55cf8b04c7ac316e75455a9d21.png?w=3840&q=75&fm=webp&fit=max)
 
 It is worth underscoring (as we did in our previous post) that this progress is not the result of a concerted effort to improve the robotics capabilities of our models. These improvements, like so many others in the history of LLM development, have emerged from much more general scaling.
 
@@ -54,11 +54,11 @@ It is worth underscoring (as we did in our previous post) that this progress is 
 
 When using their hands, and with some practice, our humans were able to pilot the robodogs to gently nudge a beach ball back to the home base (a patch of fake grass) where the robots started. This required the ability to quickly perceive if the ball had gone off course, how that error related to the previous command, where the ball was now, and then how to adjust future inputs to more precisely move the ball. This is a kind of closed loop at which people excel (at least after making some mistakes and learning from them).
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/7c39bcd86cc235edb4ff02cd0f2c023a6152e068.mp4)
+[](https://assets.claude.com/7c39bcd86cc235edb4ff02cd0f2c023a6152e068.mp4)
 
 In our Phase Two experiments, Claude struggled to capture this subtlety. Like the humans who reached the phase of needing to write a program for autonomous beach ball retrieval, Claude was able to move the robot behind the ball and position it to knock the ball back to the starting point. But the efforts to do so were poorly controlled and (again, like our human participants) not successful.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/6bdffa1dfd6bc5afa18735eaf0b1a958170c47fe.mp4)
+[](https://assets.claude.com/6bdffa1dfd6bc5afa18735eaf0b1a958170c47fe.mp4)
 
 One of our researchers with more robotics experience than our Phase One volunteers successfully accomplished the task of programming autonomous fetching. With more time and additional scaffolding, we think it is very likely that current generations of Claude could do the same. What we will be watching for next, though, is the ability of the models to accomplish this final task with the same speed and reliability they displayed on the other elements of Project Fetch.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback
-fetched_at: 2026-10-26T05:39:56.661231+00:00
+fetched_at: 2026-11-16T07:30:49.332165+00:00
 title: "Constitutional AI: Harmlessness from AI feedback \\ Anthropic"
 ---
 
@@ -10,4 +10,4 @@ As AI systems become more capable, we would like to enlist their help to supervi
 
 ### Policy Memo
 
-[Constitutional AI Policy Memo](https://www-cdn.anthropic.com/7512771452629584566b6303311496c262da1006/Anthropic_ConstitutionalAI_v2.pdf)
+[Constitutional AI Policy Memo](https://assets.claude.com/7512771452629584566b6303311496c262da1006.pdf)

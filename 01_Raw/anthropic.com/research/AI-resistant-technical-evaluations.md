@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/AI-resistant-technical-evaluations
-fetched_at: 2026-11-09T07:30:18.120588+00:00
+fetched_at: 2026-11-16T07:30:47.553935+00:00
 title: "Designing AI resistant technical evaluations \\ Anthropic"
 ---
 
@@ -58,7 +58,7 @@ I built a Python simulator for a fake accelerator with characteristics that rese
 
 The machine includes features that make accelerator optimization interesting: manually managed scratchpad memory (unlike CPUs, accelerators often require explicit memory management), VLIW (multiple execution units running in parallel each cycle, requiring efficient instruction packing), SIMD (vector operations on many elements per instruction), and multicore (distributing work across cores).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ebebb22ddbba7103f3af4e8a55a13245d3897802-2149x831.png)
+![](https://assets.claude.com/006a27c5a2d3f669b50879fc66409fe15a8cfd3a.png?w=3840&q=75&fm=webp&fit=max)
 
 The task is a parallel tree traversal, deliberately not deep learning flavored, since most performance engineers hadn't worked on deep learning yet and could learn domain specifics on the job. The problem was inspired by branchless SIMD decision tree inference, a classical ML optimization challenge as a nod to the past, which only a few candidates had encountered before.
 
@@ -92,7 +92,7 @@ Then it stopped, convinced it had hit an insurmountable memory bandwidth bottlen
 
 We tried it out in our internal test-time compute harness for more rigor and confirmed it could both beat humans in 2 hours and continue climbing with time. Post-launch we even improved our harness in a generic way and got a higher score.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/378256f8023fc3d48f2992b9ee9884a4658e3ab1-1681x463.png)
+![](https://assets.claude.com/378256f8023fc3d48f2992b9ee9884a4658e3ab1.png?w=3840&q=75&fm=webp&fit=max)
 
 I had a problem. We were about to release a model where the best strategy on our take-home would be delegating to Claude Code.
 

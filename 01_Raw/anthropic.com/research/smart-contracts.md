@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/smart-contracts
-fetched_at: 2026-11-09T07:30:25.219199+00:00
+fetched_at: 2026-11-16T07:30:53.347704+00:00
 title: "AI agents find smart contract exploits \\ Anthropic"
 ---
 
@@ -15,13 +15,13 @@ AI models are increasingly good at cyber tasks, as we've [written about before](
 
 *Important: To avoid potential real-world harm, our work only ever tested exploits in blockchain simulators. We never tested exploits on live blockchains and our work had no impact on real-world assets.*
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/5140c56e97cd1e79974bb19c3951c4b4ea6cb9a4-2800x1800.png)
+![](https://assets.claude.com/84f714692231bd37f473a7e2211cf78e38db3b90.png?w=3840&q=75&fm=webp&fit=max)
 
 Total revenue from successfully exploiting smart contract vulnerabilities that were exploited after model knowledge cutoff dates across frontier AI models over the last year in log scale, as tested in simulation. For Opus 4.5, only contracts exploited after June 1, 2025 were evaluated; for all other models, contracts exploited after March 1, 2025 were evaluated. Over the last year, exploit revenue from stolen simulated funds roughly doubled every 1.3 months. The shaded region represents 90% CI calculated by bootstrap over the set of model-revenue pairs. For each contract in the benchmark that was successfully exploited by the agent, we estimated the exploit’s dollar value by converting the agent’s revenue in the native token (ETH or BNB) using the historical exchange rate from the day the real exploit occurred, as reported by the CoinGecko API.
 
 ## Introduction
 
-AI cyber capabilities are accelerating rapidly: they are now capable of tasks from orchestrating [complex network intrusions](https://red.anthropic.com/2025/cyber-toolkits/) to augmenting [state-level espionage](https://www-cdn.anthropic.com/b2a76c6f6992465c09a6f2fce282f6c0cea8c200.pdf). Benchmarks, like [CyberGym](https://www.cybergym.io/) and [Cybench](https://cybench.github.io/), are valuable for tracking and preparing for future improvements in such capabilities.
+AI cyber capabilities are accelerating rapidly: they are now capable of tasks from orchestrating [complex network intrusions](https://red.anthropic.com/2025/cyber-toolkits/) to augmenting [state-level espionage](https://assets.claude.com/b2a76c6f6992465c09a6f2fce282f6c0cea8c200.pdf). Benchmarks, like [CyberGym](https://www.cybergym.io/) and [Cybench](https://cybench.github.io/), are valuable for tracking and preparing for future improvements in such capabilities.
 
 However, existing cyber benchmarks miss a critical dimension: they do not quantify the exact financial consequences of AI cyber capabilities. Compared to arbitrary success rates, quantifying capabilities in monetary terms is more useful for assessing and communicating risks to policymakers, engineers, and the public. Yet estimating the real value of software vulnerabilities requires speculative modelling of downstream impacts, user base, and remediation costs.[1](#footnote-1)
 
@@ -344,7 +344,7 @@ We should expect the cost per vulnerable contract identified to fall sharply ove
 
 Second, we should expect the token cost at a given level of capability to go down over time, thereby reducing the cost per agent run accordingly. Analyzing four generations of Claude models, the median number of tokens required to produce a successful exploit declined by 70.2%. In practical terms, an attacker today can obtain about 3.4x more successful exploits for the same compute budget as they could six months ago.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/929c7df312a8306b210a42a7022857267c1d96a7-2755x1727.png)
+![](https://assets.claude.com/929c7df312a8306b210a42a7022857267c1d96a7.png?w=3840&q=75&fm=webp&fit=max)
 
 Average number of tokens cost to develop a successful exploit for a vulnerable smart contract for four generations of Anthropic frontier models (all with extended thinking). Each colored line represents a different vulnerable contract that was successfully exploited from the post-knowledge cutoff portion of the benchmark. The black line shows the median number of tokens cost to develop a successful exploit by each model. More recent models demonstrate substantially improved efficiency, with token costs decreasing by 22% every generation on average and 65.8% overall from Opus 4 to Opus 4.5 in just under 6 months. Token consumption is estimated by dividing total character count by 4.
 
@@ -391,29 +391,29 @@ We validate the exploit by running the exploit script developed by the agent and
 
 ### Additional results
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c0234201ee1bcd930f4c67793285f934d9718e83-1979x1383.png)
+![](https://assets.claude.com/c0234201ee1bcd930f4c67793285f934d9718e83.png?w=3840&q=75&fm=webp&fit=max)
 
 Maximum exploit revenue across 19 smart contract vulnerabilities that were successfully exploited at least once by an AI agent in the post-knowledge cutoff portion of the benchmark. The top two vulnerabilities—fpc and w\_key\_dao—account for 92% of the total exploited value, highlighting how a small number of high-impact flaws dominate real-world exploit potential in production smart contracts. We estimate the dollar value of each exploit by multiplying the amount of native token gained by the agent and the token's exchange rate on the day of the historical exploit using the CoinGecko API.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/fed292db417b232ca3310e0f38f9633ee51d2c5c-1999x1280.png)
+![](https://assets.claude.com/18dd2698bfbcd5587a6dfeab22b8eeac471ee7d4.png?w=3840&q=75&fm=webp&fit=max)
 
 Total returns from successful exploits of smart contract vulnerabilities discovered after March 1, 2025 across frontier AI agents over the last year in log scale, with each colored line corresponding to Best@N. Frontier model's performance gain from more runs has decreased since a year ago, which we attribute to more efficient sampling of the optimal trajectory.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/2194414dd862192b925ebd0c01c9895cb2454da9-1999x1280.png)
+![](https://assets.claude.com/19f6e16e89ef768b99436cd5db02f726bb9b662b.png?w=3840&q=75&fm=webp&fit=max)
 
 Performance on the full benchmark of 405 smart contracts with historical vulnerabilities.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/68638ffeba2e47c144d17e636cf87a27daa54d9b-1999x1280.png)
+![](https://assets.claude.com/68638ffeba2e47c144d17e636cf87a27daa54d9b.png?w=3840&q=75&fm=webp&fit=max)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/eea7df25acb4d53f4e2e6d9abeb7611cdf7c97e2-2800x1800.png)
+![](https://assets.claude.com/eea7df25acb4d53f4e2e6d9abeb7611cdf7c97e2.png?w=3840&q=75&fm=webp&fit=max)
 
 Success rate of exploiting the full and post-knowledge cutoffs portion of vulnerabilities in the benchmark across frontier LLMs over the years. We use June 1, 2025 as the knowledge cutoff date for Opus 4.5 and March 1, 2025 for all other models.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/5b18472b390288c27cb27427680202a447a4b7ee-1589x590.png)
+![](https://assets.claude.com/5b18472b390288c27cb27427680202a447a4b7ee.png?w=3840&q=75&fm=webp&fit=max)
 
 Relationship between deployment-to-exploit time and exploit value for 48 contracts that were exploited after January 1, 2025 within our dataset. Both linear (r = 0.195) and log-log (r = -0.042) analyses show negligible correlation. High-value exploits (e.g., resupply\_fi, $9.6M at 0.1 days) occurred across all time spans, indicating that deployment-to-exploit time does not predict profitability within the DefiHackLabs dataset.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/61754c69ba22aa742e11530213f9bf05b38aed25-1606x989.png)
+![](https://assets.claude.com/6612f4cb3e70b3d3b21da1d6ccad8667da0cb2cf.png?w=3840&q=75&fm=webp&fit=max)
 
 We examine the relationship between various code complexity metrics and the actual exploit revenue for 48 contracts that were exploited after January 1, 2025 within the benchmark. Each subplot shows a distinct complexity dimension: size (lines of code, function count), control flow (cyclomatic complexity, nesting depth), structural (inheritance depth, coupling), and an overall composite score; all scores are plotted against exploit revenue on a logarithmic scale. Across all dimensions, correlations between complexity and financial loss are negligible (Pearson r = –0.02 to –0.10). Notably, simple contracts (e.g., hegic\_options, $104M loss) often suffered extreme exploits despite below-average complexity, while highly complex contracts incurred minimal damage. These results suggest that exploit severity is largely determined by asset under management at the time of exploit, rather than code-level complexity.
 

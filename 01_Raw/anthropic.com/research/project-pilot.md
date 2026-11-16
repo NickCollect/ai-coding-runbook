@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-pilot
-fetched_at: 2026-11-09T07:30:24.483061+00:00
+fetched_at: 2026-11-16T07:30:52.967647+00:00
 title: "Project Pilot: Can AI models fly drones? \\ Anthropic"
 ---
 
@@ -38,7 +38,7 @@ Next, each of these real-world tasks was reproduced in software so that we could
 
 It was also important to establish a meaningful baseline of performance. Human-only baselines increasingly don’t reflect the reality of contemporary software engineering, so Andon worked with coding agents to develop algorithms for each sub-task. Putting all of these algorithms crafted by human-AI teams together allowed them to demonstrate end-to-end success, as shown in the below video.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/acf7cfcc655fcf9c09052ed6788f0b3ac877778f.mov)
+[](https://assets.claude.com/acf7cfcc655fcf9c09052ed6788f0b3ac877778f.mov)
 
 Demonstrating what a successful run of the evaluation looks like. The drone has to have situational awareness of its environment—tracking the space around itself so that it does not collide with obstacles—and detect a specific individual, indicated by the green box.
 
@@ -52,19 +52,19 @@ It is worth underscoring that the evaluation’s baseline is neither the floor o
 
 Andon tested 15 models from three developers: GPT-4o, GPT-4o Nov, o1, o3, Claude Opus 4, Gemini 2.5 Pro, GPT-5, Gemini 3.1 Pro, Opus 4.5, GPT-5.2, Opus 4.7, GPT-5.5, Opus 4.8, Fable 5, and GPT-5.6 Sol. The overall trend we observe is that newer models get successively further on all sub-tasks. Of these tasks, models are most successful at detection and following, and least successful at reconstruction and localization.
 
-![Drone-Bench step chart: four of five tasks reach near 100% of baseline by mid-2026, while Reconstruct lags at about 47%.](https://www-cdn.anthropic.com/images/4zrzovbb/website/614042bcff1dd452489fcab83e880ed3f880efaf-1999x1446.png)
+![Drone-Bench step chart: four of five tasks reach near 100% of baseline by mid-2026, while Reconstruct lags at about 47%.](https://assets.claude.com/8c0ba5e5f359c6935badec5612eb608c27958fbf.png?w=3840&q=75&fm=webp&fit=max)
 
 Performance on Drone-Bench has steadily increased over time across each of the subtasks. Current models are now only bottlenecked on the “Reconstruct” subtask.
 
 The best performing model was Claude Fable 5, which brings the frontier past the baseline on all tasks except reconstruction. When we then tested its ability to execute the entire demonstration end-to-end on the real drone, it performed noticeably better than the baseline at detecting and following.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/4bf9735356d22ccef51e6791bc2cd1a8bd2818ee.mp4)
+[](https://assets.claude.com/4bf9735356d22ccef51e6791bc2cd1a8bd2818ee.mp4)
 
 Fable 5 (right) is able to follow the reference human more closely than the reference algorithm (left).
 
 However, due to errors from reconstruction that compounded in localization and navigation, it was unable to autonomously navigate between rooms (as you can see in the first part of the below video).
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/b69099d7d6baba04184343f9d11a50120706739a.mp4)
+[](https://assets.claude.com/b69099d7d6baba04184343f9d11a50120706739a.mp4)
 
 Fable 5 confidently flies a drone into what it thinks is a doorway but is actually a wall.
 
@@ -72,21 +72,21 @@ Clearly, Fable’s failure to accurately reconstruct the room is a huge stumblin
 
 The sub-task view also surfaces encouraging signs. A trend we're seeing when reading Fable 5's submissions is that the model is doing local analysis before submitting its implementation. In one submission, the model calculated the drone's camera extrinsics by analyzing a video from the simulation, estimating the camera tilt to within four degrees of the true value by using the grout lines on the floor to recover the scene's vanishing point. You can see its process below:
 
-![Four views of the same simulated corridor: floor segmentation, edge detection, line detection, and vanishing-point estimate.](https://www-cdn.anthropic.com/images/4zrzovbb/website/af663cbd16ca4072d246f34e2faf44236e832ef4-2064x1372.png)
+![Four views of the same simulated corridor: floor segmentation, edge detection, line detection, and vanishing-point estimate.](https://assets.claude.com/af663cbd16ca4072d246f34e2faf44236e832ef4.png?w=3840&q=75&fm=webp&fit=max)
 
 Fable 5 autonomously determined properties of the drone's onboard camera to within four degrees by analyzing grout lines on the floor and extrapolating those to a vanishing point.
 
 In another run, Fable 5 built a 2D top-down reconstruction of *what it thought* the Follow task's environment looked like, so it could test and iterate on its implementation locally before burning a submission.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/f87073bb86c6b375926f54e710023d995c9d683b.mov)
+[](https://assets.claude.com/f87073bb86c6b375926f54e710023d995c9d683b.mov)
 
 The environment differs from the real environment (seen below), but it helped Fable catch some easy bugs!
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/cb1b69aa4e61d30b59d321f7304abc86e2929d1d.mov)
+[](https://assets.claude.com/cb1b69aa4e61d30b59d321f7304abc86e2929d1d.mov)
 
 It’s important to understand how *consistently* models reach the reference level of performance, as well as *whether* they can reach it. Here there is obvious room for improvement. When we run 10 simulations, the models reach the human baseline in at least one simulation for four of five tasks. But even Fable 5, the current frontier model, reaches the human baseline *on average* for only three of the five tasks—and that level of consistency followed six months after the human baseline was exceeded as a one-off for the first time.
 
-![Drone-Bench chart: models' average run trails their best run by about six months in progress towards baseline.](https://www-cdn.anthropic.com/images/4zrzovbb/website/7713a1ff0377744cfd0849e70c1c75a41ef8cd28-1999x1380.png)
+![Drone-Bench chart: models' average run trails their best run by about six months in progress towards baseline.](https://assets.claude.com/7713a1ff0377744cfd0849e70c1c75a41ef8cd28.png?w=3840&q=75&fm=webp&fit=max)
 
 The frontier of what models can do is about six months ahead of what they do consistently. Fable 5's average performance today is roughly where previous models’ one-off best performance stood at the beginning of 2026.
 

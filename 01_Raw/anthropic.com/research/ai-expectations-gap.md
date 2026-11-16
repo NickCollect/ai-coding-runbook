@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/ai-expectations-gap
-fetched_at: 2026-11-09T07:30:18.086379+00:00
+fetched_at: 2026-11-16T07:30:47.535928+00:00
 title: "The AI expectations gap \\ Anthropic"
 ---
 
@@ -39,7 +39,7 @@ The groups disagree on the path of future AI progress. For example, around a qua
 
 In part, differences in views reflect differences in frequency of AI use. Among those who use AI at work regularly (about a fifth of respondents), 56% expect AI to be able to do at least seven of the eight named tasks by 2030. This is substantially higher than among all US adults (41%) and among those who have never used an AI tool (28%), but still well short of the staff view (96%).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/0f1da70f67b1d1106cf896237abb69033ff810e5-1920x1262.png)
+![](https://assets.claude.com/0f1da70f67b1d1106cf896237abb69033ff810e5.png?w=3840&q=75&fm=webp&fit=max)
 
 **Share of respondents who expect AI to be able to complete the listed tasks as well as a skilled professional.** Respondents were asked when AI will be able to complete these tasks, regardless of whether companies will actually use it. Panels show the share answering (A) already, (B) by 2027, and (C) by 2030. US adults’ responses (N=10,980) are weighted to be nationally representative, Anthropic staff responses are unweighted.
 
@@ -49,7 +49,7 @@ The impact of AI on the economy is not solely determined by raw capabilities. Pe
 
 To understand what might hold back AI adoption at work, we asked US adults to choose up to three obstacles from a list of nine that they expect to be the biggest. The general public expects that people's preferences and rules, more than the technological constraints, may be what holds adoption back (Figure 2). “Customers preferring to deal with a person” was the obstacle selected most often, followed by “data privacy and security concerns,” “AI not being reliable enough,” and “laws, regulations or liability.”
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ee5b9b5d8af4bc1f38cc3451e98a15e6d38aa067-1920x1348.png)
+![](https://assets.claude.com/ee5b9b5d8af4bc1f38cc3451e98a15e6d38aa067.png?w=3840&q=75&fm=webp&fit=max)
 
 **Obstacles to AI use at work in 2030 named by US adults.** Respondents were told that businesses do not always use AI even when it is technically capable of doing a task, and were asked which of nine obstacles will be the biggest to AI being used at work in 2030. Each could choose up to three, so shares sum to more than 100%. We did not ask this question to Anthropic staff.
 
@@ -59,7 +59,7 @@ Notably, US adults who use AI regularly at work rank data privacy and security c
 
 The impact of AI on the labor market will in part depend on whether AI completes complex tasks autonomously or in collaboration with a human. The former tends to displace human workers. Alternatively, when AI complements human capabilities, workers become more productive. To get a sense for anticipated automation versus augmentation in 2030 among Anthropic staff and the general public, we asked how AI and humans will work together on various tasks ranging from email drafting to legal contracting by 2030. At Anthropic, the vast majority of staff say that by 2030 AI will either complete tasks alone or with a worker evaluating the work (Figure 3). By contrast, 4 in 10 US adults instead expect that humans will do most of the work themselves or with some AI help.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/28963a3d0ad7315ec336b3cac3b0547324e02f0d-1920x1204.png)
+![](https://assets.claude.com/28963a3d0ad7315ec336b3cac3b0547324e02f0d.png?w=3840&q=75&fm=webp&fit=max)
 
 **Share of respondents who expect AI to do each task alone or with a worker checking.** Respondents were asked to imagine that AI is useful for each of the five tasks and asked who will be doing them: AI alone; AI does most of it, with workers checking; workers do most of it, with AI helping; or workers alone. Bars show the share choosing either of the first two.
 
@@ -73,7 +73,7 @@ Anthropic staff report much larger expected savings, with 85% saying that it tak
 
 Staff may be describing what they experience at work. As discussed further in [*How Employment is Changing at Anthropic*](http://anthropic.com/research/employment-at-anthropic), Anthropic employees increased productivity on some dimensions after adopting agentic tools: the lines of code engineers added tripled in the month after adopting coding agents and sales representatives closed more deals with clients after adopting AI agents. Output per person also rose in other business functions, like legal and recruiting.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4c3da1aa5e255c4f6fe62ef2dfb521473ac8d105-1920x876.png)
+![](https://assets.claude.com/4c3da1aa5e255c4f6fe62ef2dfb521473ac8d105.png?w=3840&q=75&fm=webp&fit=max)
 
 **Share of respondents who say a task takes a quarter of the time or less with AI.** Respondents were asked to think of a task that today's AI is well suited for, such as summarizing a document or drafting an email, and how long it takes to finish using AI, counting the time spent checking and fixing its work, compared with not using AI. Bars show the share answering "about a quarter of the time" or "about a tenth of the time or less." Figure A2 shows all answers.
 
@@ -85,7 +85,7 @@ Perhaps unsurprisingly, we find a large gap in perceptions between the general p
 
 Across US workers, expectations vary by occupation: AI is expected to be able to do 25% of work hours among manual trades, production and transport workers and 33% for workers in computer, engineering, and science occupations. For this latter group, those who use AI regularly expect only 40%, a belief that is closer to the average US worker than to the average Anthropic staff member (75%).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/23b4644432371743e7aab1c386977d1157826002-1920x1026.png)
+![](https://assets.claude.com/23b4644432371743e7aab1c386977d1157826002.png?w=3840&q=75&fm=webp&fit=max)
 
 **Share of their own work hours that respondents expect AI to be able to do by 2030.** Share of the respondent's current work hours that AI will be able to do by 2030. The US adults sample is restricted to employed respondents only. Staff answered on a slider while US adults choose a range and we use range midpoints. Bars show 95% confidence intervals.
 
@@ -97,7 +97,7 @@ US workers who expect AI to be able to do less than half of their work forecast 
 
 Even though their own reported exposure is much higher, the same gradient appears among Anthropic staff, with forecasts closely mirroring those of the general population. Therefore, these two groups do not seem to hold different theories of how AI will simultaneously affect their own jobs and the broader labor market. They have different experiences of what AI capabilities are and, in turn, expectations.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/f9e98906000b6ff03c73ab6aaa9a71cbc2e85020-1920x1527.png)
+![](https://assets.claude.com/f9e98906000b6ff03c73ab6aaa9a71cbc2e85020.png?w=3840&q=75&fm=webp&fit=max)
 
 **Mean forecast of the 2030 unemployment rate, by the share of their own work hours that respondents expect AI to be able to do.** Respondents were told that the US unemployment rate is 4.2% today and asked what they expect it to be in 2030. Panel (A) groups employed respondents by the share of their current work hours they expect AI to be able to do by 2030, and shows each group's mean forecast and 95% confidence interval. Groups with fewer than 20 respondents are omitted. Panel (B) shows the share of US workers and of Anthropic staff in each group.
 
@@ -111,7 +111,7 @@ Anthropic staff, however, are slightly more pessimistic than US adults about how
 
 ### Mapping survey responses to model-implied economic scenarios
 
-In [*Economic Scenarios for Transformative AI*](https://www-cdn.anthropic.com/files/4zrzovbb/website/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf) we introduced a structured framework for assessing how different future paths for AI capabilities and diffusion might translate into differences in economic outcomes. The model allows us to translate each respondent’s answers across five dimensions — capabilities, diffusion, automation, productivity, and worker transition frictions — into model-implied economic outcomes.[5](#footnote-5) Across both our US adult and Anthropic staff samples, we identify every respondent who answered all questions related to the key model inputs (3,259 US adults and 1,093 staff). We then evaluate the economic scenario implied by those answers for each respondent, focusing below on implications for GDP growth in 2030.
+In [*Economic Scenarios for Transformative AI*](https://assets.claude.com/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf) we introduced a structured framework for assessing how different future paths for AI capabilities and diffusion might translate into differences in economic outcomes. The model allows us to translate each respondent’s answers across five dimensions — capabilities, diffusion, automation, productivity, and worker transition frictions — into model-implied economic outcomes.[5](#footnote-5) Across both our US adult and Anthropic staff samples, we identify every respondent who answered all questions related to the key model inputs (3,259 US adults and 1,093 staff). We then evaluate the economic scenario implied by those answers for each respondent, focusing below on implications for GDP growth in 2030.
 
 The median US adult's answers imply GDP growth of 5.4% in 2030, according to the model. The median staff member's answers imply GDP growth accelerating to 17.1% by 2030. There is significant variation within each group, so the distributions overlap widely (Figure 7). Figure A1 in the appendix shows how much each belief contributes to this gap.
 
@@ -121,7 +121,7 @@ Figure 7 also shows the economic scenarios implied by inputs provided by site vi
 
 The interactive explorer asked shorter form versions of the questions we fielded to US adults and Anthropic staff in August 2026. 23,075 visitors completed the survey in the first 48 hours after publication, connecting from more than 140 countries worldwide. These visitors chose to come to a page on Anthropic's website and to take the quiz, so they are likely to be more interested in AI than the general public. Indeed, their answers place them between those of US adults and Anthropic staff: the median visitor's answers imply 12.5% growth.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d4b5d6daebc5d653cfee156baff992ddf9b22a50-1920x1080.png)
+![](https://assets.claude.com/d4b5d6daebc5d653cfee156baff992ddf9b22a50.png?w=3840&q=75&fm=webp&fit=max)
 
 **Model-implied GDP growth in 2030, based on the expectations of US adults, website visitors and Anthropic staff.** Each respondent's answers to the five questions on capabilities, adoption, autonomy, time savings, and re-employment are run through the model from Economic Scenarios for Transformative AI; see Appendix B therein for details. The thick bar spans the 25th to 75th percentile and the thin line the 10th to 90th percentile. Dotted lines mark three scenarios laid out in the paper: Modest (annual GDP growth of 2.4%), Substantial (5.4% GDP growth), and Extreme (15.4% GDP growth). The figure includes respondents who answered all five questions: 3,259 US adults (2030 half only), 1,093 Anthropic staff, and the 23,075 website visitors who completed the quiz available at anthropic.com/institute/econ-scenarios in the 48 hours after its launch on September 9, 2026.
 
@@ -135,7 +135,7 @@ Estimates of the share of work that AI does in AI development vary far more with
 
 As with the hiring forecasts, these responses are the personal views of staff members in an internal poll fielded to Anthropic staff in August 2026.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/24428d3d8dc7ffe8e60a8218db2570d491ea47b1-1920x954.png)
+![](https://assets.claude.com/24428d3d8dc7ffe8e60a8218db2570d491ea47b1.png?w=3840&q=75&fm=webp&fit=max)
 
 **Anthropic staff's estimates of the share of the work of building a frontier model that is done by AI.** Anthropic staff were asked what share of the work of building an early-2026 frontier model is done by AI today, and what they expect that share to be at the end of 2027 and 2030. The tick marks the median answer, the boxes span 25th to 75th percentile, and the lines span 10th to 90th percentile. Answers are the personal estimates of staff members in an internal poll and are not a measurement by Anthropic or a company forecast.
 
@@ -177,7 +177,7 @@ Wilmers, N., R. Catipon, M. Massenkoff and P. McCrory (2026). “How Employment 
 
 ### Appendix
 
-Available [here](https://www-cdn.anthropic.com/1bc1a3067f9c9883d6d556b38f26fd4f1e1b640f/The AI Expectations Gap - Appendix.pdf).
+Available [here](https://assets.claude.com/1bc1a3067f9c9883d6d556b38f26fd4f1e1b640f.pdf).
 
 ## Footnotes
 
@@ -189,7 +189,7 @@ Available [here](https://www-cdn.anthropic.com/1bc1a3067f9c9883d6d556b38f26fd4f1
 
 04Both groups were asked the following: In normal times, someone who loses a job typically takes about 3 months to find a new one. Now think about a person who loses their job in 2030 due to AI automation and needs to switch into a different occupation. How long do you think it would take them to find a new job? For the general public the answer options ranged from "less than 1 month" to "more than 3 years, or would never find a new job”. Anthropic staff answered in months on a slider.
 
-05We follow the procedure outlined in [*Economic Scenarios for Transformative AI*](https://www-cdn.anthropic.com/files/4zrzovbb/website/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf) for mapping raw survey answers into implied paths for key inputs into the model. See Appendix B therein. For this exercise, we hold all other parameters in the model at their values in the “Substantial” scenario.
+05We follow the procedure outlined in [*Economic Scenarios for Transformative AI*](https://assets.claude.com/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf) for mapping raw survey answers into implied paths for key inputs into the model. See Appendix B therein. For this exercise, we hold all other parameters in the model at their values in the “Substantial” scenario.
 
 06This is a broader question than how much code AI writes. Favaro and Clark (2026) report that more than 80% of the code merged into Anthropic's codebase is now written by Claude, but building a frontier model also involves research direction, experiment design and evaluation, and more.
 

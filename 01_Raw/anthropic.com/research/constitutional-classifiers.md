@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/constitutional-classifiers
-fetched_at: 2026-11-09T07:30:20.557603+00:00
+fetched_at: 2026-11-16T07:30:49.308224+00:00
 title: "Constitutional Classifiers \\ Anthropic"
 ---
 
@@ -36,7 +36,7 @@ We ran a set of automated evaluations where we synthetically generated 10,000 ja
 
 Under baseline conditions, with no defensive classifiers, the jailbreak success rate was 86%—that is, Claude itself blocked only 14% of these advanced jailbreak attempts. Guarding Claude using Constitutional Classifiers, however, produced a strong improvement: the jailbreak success rate was reduced to 4.4%, meaning that over 95% of jailbreak attempts were refused.
 
-![A graph showing the results for vulnerability to jailbreaks, overrefusals, and compute overhead for the Constitutional Classifiers system versus the base model](https://www-cdn.anthropic.com/images/4zrzovbb/website/cd6520ed645ade7f12ab336cd02ef5954211dfa8-1650x1077.png)
+![A graph showing the results for vulnerability to jailbreaks, overrefusals, and compute overhead for the Constitutional Classifiers system versus the base model](https://assets.claude.com/cd6520ed645ade7f12ab336cd02ef5954211dfa8.png?w=3840&q=75&fm=webp&fit=max)
 
 *Results from automated evaluations. For all plots, lower is better. (a) The success rate of jailbreaks is far lower in a system protected by Constitutional Classifiers; (b) the refusal rate of the system on production Claude.ai Free and Pro traffic is not statistically significantly higher when using Constitutional Classifiers; and (c) the relative compute cost of a system that uses Constitutional Classifiers is only moderately higher. Error bars represent 95% confidence intervals computed using binomial proportion standard errors under asymptotic normality assumptions.*
 
@@ -50,7 +50,7 @@ Constitutional Classifiers is based on a similar process to [Constitutional AI](
 
 With the help of Claude, we use this constitution to generate a large number of synthetic prompts and synthetic model completions across all the content classes. We augment these prompts and completions to ensure a varied and diverse list: this includes translating them into different languages and transforming them to be written in the style of known jailbreaks.
 
-![A schematic diagram of the how the Constitutional Classifiers system works, from the creation of the constitution through to generating a test set to using the system to guard an LLM](https://www-cdn.anthropic.com/images/4zrzovbb/website/2e997f9fca176fd82966ea5e9bf000873337cfd1-1650x1077.jpg)
+![A schematic diagram of the how the Constitutional Classifiers system works, from the creation of the constitution through to generating a test set to using the system to guard an LLM](https://assets.claude.com/b1650787f7b2caf6231790f5358b23106103ea7e.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Training and implementing Constitutional Classifiers. (a) A constitution is produced specifying harmless and harmful categories; (b) the constitution is used as the basis for the production of many synthetic prompts and completions, which are further augmented (with variations on style and language) and turned into a training set; (c) classifiers trained on this training set are used as model safeguards to detect and block harmful content.
 
@@ -89,7 +89,7 @@ The most successful jailbreaking strategies included:
 - Substituting harmful keywords with innocuous alternatives (e.g., replacing “Soman” [a dangerous chemical] with “water”).
 - Implementing prompt-injection attacks.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/0caa7bd830986ef74a79a277655bee7e313cbe94-1800x1800.png)
+![](https://assets.claude.com/088068ac01324733dc3bf189c511ed3b2dce1941.png?w=3840&q=75&fm=webp&fit=max)
 
 Bar graph showing the number of users that passed each level of the challenge. 339 users passed question 1, and only 4 users passed question 8.
 

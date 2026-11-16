@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/vibe-physics
-fetched_at: 2026-11-09T07:30:26.246567+00:00
+fetched_at: 2026-11-16T07:30:54.145484+00:00
 title: "Vibe physics: The AI grad student \\ Anthropic"
 ---
 
@@ -57,13 +57,13 @@ My question was: is there a set of prompts, like instructions to a talented G2, 
 
 ## Initial steps
 
-I knew from experience that LLMs struggle with context and organization over long projects. So I started by asking Claude to come up with a plan of attack: what tasks needed to be done in what order. I also asked GPT 5.2 and Gemini 3.0. Then, I had all three LLMs merge the best ideas from each, using web interfaces and copying one to another. Next, I gave those merges to Claude, asking it to break the outline into detailed subsections. The result is [here](https://www-cdn.anthropic.com/2595299ccf7f8b9a9c74823c24faaa5d9b216804.pdf). There were 102 separate tasks across seven stages.
+I knew from experience that LLMs struggle with context and organization over long projects. So I started by asking Claude to come up with a plan of attack: what tasks needed to be done in what order. I also asked GPT 5.2 and Gemini 3.0. Then, I had all three LLMs merge the best ideas from each, using web interfaces and copying one to another. Next, I gave those merges to Claude, asking it to break the outline into detailed subsections. The result is [here](https://assets.claude.com/2595299ccf7f8b9a9c74823c24faaa5d9b216804.pdf). There were 102 separate tasks across seven stages.
 
 From there, I turned to [Claude Code](https://claude.ai/code), using the extension in VS Code.
 
-![A screen grab of Claude code](https://www-cdn.anthropic.com/images/4zrzovbb/website/2277f287d82a9a6087bc70c6d16cfd6648634d7e-1600x967.jpg)
+![A screen grab of Claude code](https://assets.claude.com/19ac6705198402720253e3a1cee64dfa29baac98.jpg?w=3840&q=75&fm=webp&fit=max)
 
-I created a folder for the project, put in the master plan, and had it try to solve each task separately, writing its results in a separate markdown file. Some examples are [Task 1.1: Review BSZ Paper](https://www-cdn.anthropic.com/c993ead637f1a102fe1f5346e89f59e82c579b37.pdf) and [Task 1.2: Review Catani—Webber](https://www-cdn.anthropic.com/94b3c41e52e19ba450fe5e804400ebcf0a88f3d0.pdf).
+I created a folder for the project, put in the master plan, and had it try to solve each task separately, writing its results in a separate markdown file. Some examples are [Task 1.1: Review BSZ Paper](https://assets.claude.com/c993ead637f1a102fe1f5346e89f59e82c579b37.pdf) and [Task 1.2: Review Catani—Webber](https://assets.claude.com/94b3c41e52e19ba450fe5e804400ebcf0a88f3d0.pdf).
 
 This organization step was enormously helpful. Instead of one long conversation or document, Claude maintained a tree of markdown files—one summary per stage, one detailed file per task. Given that LLMs work much better with things they can retrieve rather than things they have to hold in context, this allowed Claude to look things up rather than remember them. When I asked Claude to proceed to the next task, it would read its own previous summary, do the work, and write a new summary. I also had it edit the plan as it went, modifying earlier and later sections as it learned.
 
@@ -75,7 +75,7 @@ Even this first stage wasn’t completely hands-off. After finishing 7 of 14 tas
 
 During the initial stage, I had Claude postpone the numerics, which I knew would require some babysitting. Instead, I had it focus on the conceptual and analytic parts. Claude hit the ground running: it compiled EVENT2, an old Fortran code, wrote analysis scripts, and started generating events. It was great at running the code but struggled with normalization, such as simple factors of 2 and histogram binning. After a few tries, however, it produced something that looked excellent—the theory agreed with the simulation:
 
-![Graphs depicting analytic calculations in agreement with one another](https://www-cdn.anthropic.com/images/4zrzovbb/website/602ecef11d6236c71c2e61166710bf973e506013-1600x621.jpg)
+![Graphs depicting analytic calculations in agreement with one another](https://assets.claude.com/3124a655864b8f44b6900aaa2ba73d2779ae5c8f.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Claude ran simulations (histograms) and did an analytic calculation (solid lines) and found excellent agreement.
 
@@ -83,7 +83,7 @@ This is where Claude excels: doing regressions, fits and statistical analysis, a
 
 The next step was the paper writing. To begin, I told Claude to synthesize its task markdown files into a LaTeX draft. I said, “Start writing the paper. Do the title, abstract, intro, and section 1 first, and I will take a look.” Claude’s first output was horrible, reading more like notes than a paper. After a lot of “more prose” prompting, it improved. But it also kept forgetting to include results. So before each new section I had to tell it, “Check that you incorporated all the results from your various task markdown files up to this point. Go one by one through the task files and check.” This review was important: it often found formulas in the paper that didn’t match its own notes.
 
-By the end of day three, Claude had completed 65 tasks, produced a literature review, derived phase-space constraints, computed matrix elements in soft and collinear limits, set up SCET operators, and written a first draft: 20 pages of LaTeX with equations, plots, and references. By December 22, [the draft](https://www-cdn.anthropic.com/f6381ceefdfb6ead62ae185c4bd4b555c8a584fc.pdf) looked professional. The equations seemed right. And the plots matched expectations.
+By the end of day three, Claude had completed 65 tasks, produced a literature review, derived phase-space constraints, computed matrix elements in soft and collinear limits, set up SCET operators, and written a first draft: 20 pages of LaTeX with equations, plots, and references. By December 22, [the draft](https://assets.claude.com/f6381ceefdfb6ead62ae185c4bd4b555c8a584fc.pdf) looked professional. The equations seemed right. And the plots matched expectations.
 
 Then, I actually read it.
 
@@ -101,7 +101,7 @@ The more I dug, the more I found it had been tweaking things left and right. Cla
 
 Most of the mistakes were minor, and Claude could fix them. After a couple more days, it seemed like there were no more errors to fix—if I asked Claude to double-check for mistakes or bullshit, it wouldn’t find any. I even had it make a plot with uncertainty bands which looked great:
 
-![Plots showing results made by Claude](https://www-cdn.anthropic.com/images/4zrzovbb/website/65504eae97db54c0f511b0b962f8207e89f11c2f-1600x681.jpg)
+![Plots showing results made by Claude](https://assets.claude.com/363f846df28e899a8cc32ad25927ed5b89590722.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Claude made fantastic plots showing results with uncertainties that looked just like what one would hope for. Unfortunately, the plots were too good. It was cheating.
 
@@ -121,7 +121,7 @@ At this stage, all that remained was massaging the text and the figures. To be f
 
 The final money plot was:
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/659615b584741050ed0005607edf25e167b01fb0-1600x676.jpg)
+![](https://assets.claude.com/4f88a11b8b91185e459f581d57fd0f0df11e3a07.jpg?w=3840&q=75&fm=webp&fit=max)
 
 The final plot that made it into the paper was similar to the previous one but actually correct.
 

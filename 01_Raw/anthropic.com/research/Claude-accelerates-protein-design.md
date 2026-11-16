@@ -1,12 +1,12 @@
 ---
 source_url: https://www.anthropic.com/research/Claude-accelerates-protein-design
-fetched_at: 2026-11-09T07:30:19.672674+00:00
+fetched_at: 2026-11-16T07:30:48.639823+00:00
 title: "Claude accelerates protein design and analytical chemistry \\ Anthropic"
 ---
 
 ### 01Claude designs proteins
 
-[![](/_next/image?url=https%3A%2F%2Fwww-cdn.anthropic.com%2Fimages%2F4zrzovbb%2Fwebsite%2Fc2b18534b5638f7b094876ed00b83065d88fa4ac-2000x1125.jpg&w=1920&q=75)](https://cdn.sanity.io/files/4zrzovbb/website/f1cac668de7e745f21779defa22b4d112eae5e0c.mp4)
+[![](https://assets.claude.com/a11e2c9b7111019f1103786a67d9dafdeb2a344a.jpg?w=1920&q=75&fm=webp&fit=max)](https://assets.claude.com/f1cac668de7e745f21779defa22b4d112eae5e0c.mp4)
 
 *In this post, we share two results that show how Claude can help life scientists increase the pace of their research. In the first, we tested Claude’s ability to design protein binders from scratch, a key task representative of the early parts of the drug design process and one that has historically taken a specialist weeks or months per target. Claude (Mythos Preview and Opus 4.8) designed protein binders against 15 targets, and succeeded against 14 of them. Between 22% and 35% of its individual designs bound successfully, depending on the setup, compared to the 10-15% that is typical in protein design campaigns today. Some of its strongest designs bound several times more tightly than the best previously published result. In the second example, we evaluated whether Claude can accelerate chemical analysis. Claude Opus 5, a generally available model, was given NMR and LC-MS data (the data that allows chemists to assess the identity and purity of the compounds they work with). Provided with only a contract lab’s raw files and a two-sentence prompt, Claude returned finished results in 23 and 19 minutes, matching the lab’s own analysis on hydrogen counts and purity (96.4% versus 96.33%). These examples demonstrate how Claude can reduce the time and computational expertise currently required to make progress on complex scientific tasks.*  
   
@@ -30,7 +30,7 @@ Mythos Preview and Opus 4.8 achieve overall hit rates—how many of the designs 
 
 After assessing Claude’s ability to design against multiple targets, we wanted to understand whether having it focus on a single target at a time would improve its performance, especially given that this better represents the approach typically taken by a protein engineer. Indeed, we found that Mythos Preview achieves an overall hit rate of 35.1% when designing against each target separately using multiple 24-hour sessions.
 
-![Graph showing over all hit rates](https://www-cdn.anthropic.com/images/4zrzovbb/website/d75b1cc758dafce8709fb4028df60db220055c92-2048x1672.jpg)
+![Graph showing over all hit rates](https://assets.claude.com/e71409006a8d5eec2272cadc257d461b30cc08aa.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Mythos Preview and Opus 4.8 achieve hit rates over 20% across a set of 15 targets, with target-level hit rates ranging from as high as 90% to as low as 0%.
 
@@ -58,19 +58,19 @@ Our only involvement was granting access approvals (such as network access reque
 
 For each of the 15 targets, we asked Claude to design 30 protein binders. Claude did this by operating publicly available specialist protein design and co-folding models that the field already uses. Claude’s designs were then sent to Adaptyv Bio and Twist Bioscience to validate.
 
-![Sankey diagram showing how Claude is combining open-source protein models](https://www-cdn.anthropic.com/images/4zrzovbb/website/75ea83acd06d906fd3c22cefcec14faccab2c774-2048x1529.jpg)
+![Sankey diagram showing how Claude is combining open-source protein models](https://assets.claude.com/3c95c6aebb41659617335aa04e0627ab04483295.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Claude successfully orchestrates multiple open-source protein design models, generating binders with high success rates and high affinities. a) Sankey diagram depicting Claude’s combinations of structure design, sequence design, and optimization rounds. b, c) Claude designs binders with hit rates over 20%, including high-affinity binders, for all structure design methods with at least 100 ordered designs.
 
 ## Claude’s performance on the targets
 
-By the end of this effort, we produced 354 binders against 14 of 15 targets using a total of 1,320 designs. This represents a significant contribution to the total corpus of publicly available *de novo* protein designs; for example, the two largest collections, [proteinbase.com](https://proteinbase.com) and the collection curated by [Overath et al.](https://www.biorxiv.org/content/10.1101/2025.08.14.670059v2), consist of approximately 770 binders out of 5,700 designs against 40 targets. Below, we share three examples highlighting Claude’s capabilities, and one showing its limitations. You can find more detail in our technical report ([link](https://www-cdn.anthropic.com/30bf50e22a01388bb29bf077ee3f244531594b7a.pdf)).
+By the end of this effort, we produced 354 binders against 14 of 15 targets using a total of 1,320 designs. This represents a significant contribution to the total corpus of publicly available *de novo* protein designs; for example, the two largest collections, [proteinbase.com](https://proteinbase.com) and the collection curated by [Overath et al.](https://www.biorxiv.org/content/10.1101/2025.08.14.670059v2), consist of approximately 770 binders out of 5,700 designs against 40 targets. Below, we share three examples highlighting Claude’s capabilities, and one showing its limitations. You can find more detail in our technical report ([link](https://assets.claude.com/30bf50e22a01388bb29bf077ee3f244531594b7a.pdf)).
 
 #### Claude’s designs are competitive with entries in Adaptyv Bio’s protein design competition
 
 We found that for the targets Adaptyv Bio has run competitions for, Claude performs at or beyond the level of the top participants on both hit rate and affinity. Against RBX1 (a small protein that drives the targeted destruction of specific regulatory proteins), Mythos Preview in single-target mode achieved a 40% hit rate, compared to a 3.7% hit rate among participants. Its top-ranked design was a high-affinity binder that outperformed the winning design, which was among 245 designs entered.
 
-![Graph showing affinities and overall performance](https://www-cdn.anthropic.com/images/4zrzovbb/website/e8b783d32450994ed6ae2e9a39e00273012fe128-2048x1840.jpg)
+![Graph showing affinities and overall performance](https://assets.claude.com/933f9905215b05dd60072a2a62838153e6708ae8.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Claude designs binders against RBX1 with state-of-the-art affinity, and routinely surpasses hit rates recorded in Adaptyv Bio’s protein design competitions.
 
@@ -78,7 +78,7 @@ Claude designs binders against RBX1 with state-of-the-art affinity, and routinel
 
 Interestingly, Opus 4.8, and not Mythos Preview, succeeds on TNFα, a target multiple expert groups have struggled with. TNFα is a signaling protein released by the immune system to trigger inflammation, and blocking it is the therapeutic basis for some of the most impactful drugs ever made, including Humira. It’s a challenging target to design against because of its multimeric structure, which requires targeting a binding site in the groove formed by two proteins. Although Mythos Preview was unsuccessful, Opus 4.8 designed multiple binders, including some that worked across species, binding human, cynomolgus monkey, and mouse TNFα, which is important for conducting animal studies. We’re not sure why Opus 4.8 was successful on this target and Mythos Preview was not. When we assess our models' capabilities, we do so holistically. Given the inherent complexity of protein design, it’s unsurprising that there would be specific areas where an overall less capable model could still outperform one that was generally more capable.
 
-![Graph showing Opus's work against TNFα](https://www-cdn.anthropic.com/images/4zrzovbb/website/d3eaa6119c840d899138649e6de9ee55f5f7e4aa-2048x1811.jpg)
+![Graph showing Opus's work against TNFα](https://assets.claude.com/39a115835fd9755cc33f13046cf8bba363e30314.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Opus 4.8 successfully designed de novo binders against TNFα, some of which were cross-reactive and bound human, cynomolgus monkey, and mouse TNFα.
 
@@ -86,7 +86,7 @@ Opus 4.8 successfully designed de novo binders against TNFα, some of which were
 
 Most computationally designed binders are bundles of α-helices, a protein secondary structure consisting of coils. β-sheets, in which extended strands of amino acids must line up side by side, are harder to design and more prone to misfolding and aggregation (when protein molecules stick to each other instead of staying separate and properly folded). Claude designed 15 confirmed binders across six targets that contain at least 20% β-strand, demonstrating its ability to reason about protein structure.
 
-![Graph showing Claude's performance on 15 binders](https://www-cdn.anthropic.com/images/4zrzovbb/website/d4156db83e8b482e8939d2f120649b848852fb89-2048x1171.jpg)
+![Graph showing Claude's performance on 15 binders](https://assets.claude.com/fbe36fb7f074b1eae7189e9b67be47a3e2dd75ea.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Claude successfully designed 15 binders (across 10 distinct backbones) with β-sheets against six targets.
 
@@ -94,7 +94,7 @@ Claude successfully designed 15 binders (across 10 distinct backbones) with β-s
 
 Certain targets remained a challenge for Claude, including BBF-14 and maltose-binding protein (MBP). BBF-14 is a β-barrel-shaped protein that does not exist in nature: it was itself [*de novo* designed](https://www.nature.com/articles/s41586-024-07601-y), and it is now used as a benchmark for binder design precisely because of its novelty. MBP’s structure is also especially difficult. MBP is a large, flexible bacterial protein with a smooth, water-loving surface that makes it a good lab reagent. This leaves a binder very little to grab on to. Claude still managed to produce three independent BBF-14 binders—one from each design arm, and each built on a different backbone—with modest (sub-micromolar to micromolar) affinities. Against MBP, however, none of the 90 designs was confirmed to have bound to the target, although one demonstrated a weak, reproducible binding signal.
 
-![Graph showing an example where Claude struggled](https://www-cdn.anthropic.com/images/4zrzovbb/website/2d80b39660550a7e6de0f012db797382bef8e4a9-2048x1495.jpg)
+![Graph showing an example where Claude struggled](https://assets.claude.com/4ddb37d49d721dfc299d935608063d0bbaf7d753.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Claude had limited success in designing protein binders against BBF-14, a de novo designed beta barrel, and maltose binding protein (MBP).
 
@@ -112,13 +112,13 @@ The other technique, used mainly to assess purity, is liquid chromatography–ma
 
 Given how painstaking it is to process and interpret these files, we wanted to see how a generally available model such as Claude Opus 5 would perform at this task.[9](#footnote-9) Supplied with only a contract lab’s raw files for a routine quality-control sample and a short plain-language prompt,[10](#footnote-10) with no vendor software and no operator, Claude, working within Claude Science, returned processed NMR and LC-MS results in 23 and 19 minutes, respectively, working in parallel. Its results matched the lab’s own processing—hydrogen counts per peak were within 0.08 ¹H of the lab’s, and its purity was measured at 96.4% versus the 96.33% of the lab.
 
-![Image showing what Claude sent and got back](https://www-cdn.anthropic.com/images/4zrzovbb/website/9325c2d545f43be4b1b37a360afb7f9738d45f28-1880x792.jpg)
+![Image showing what Claude sent and got back](https://assets.claude.com/8df63bc1d77b13950f0e7797bd3d3d7054b28a50.jpg?w=3840&q=75&fm=webp&fit=max)
 
 What the lab sent, and what Claude returned 23 minutes later. (left) The raw NMR signal as it comes off the instrument; (right) the processed spectrum, with each peak located and its hydrogens counted.
 
 For the NMR data, Claude converted the raw data from the instrument into a calibrated spectrum and a table of 18 peaks, with a hydrogen count for each. Next, as a chemist would, it flagged four broad peaks as hydrogens that were probably attached to nitrogen or oxygen. It then proposed the standard check: add heavy water to the NMR sample, which swaps those hydrogens out so their peaks shrink or vanish. (Independently, the lab had run this same check three days after the first measurement.) Given the raw file from the heavy-water run, Claude quantified what had changed in the data, caught and corrected an overstatement in its first reading (its first pass reported that all four flagged peaks had disappeared, but its own self-check showed that only two had), and arrived at the same conclusion as the lab’s operator.
 
-![Image showing LC-MS results](https://www-cdn.anthropic.com/images/4zrzovbb/website/ca01c0986228b48e028e0fe616934d3449a9a123-1880x815.jpg)
+![Image showing LC-MS results](https://assets.claude.com/3ed5a6fe2b9a0a64be162f28ada46ab34081af84.jpg?w=3840&q=75&fm=webp&fit=max)
 
 (left) The LC-MS run as it arrived, as a file of raw bytes in a format only the manufacturer’s software is meant to read. (right) The chromatogram Claude recovered from it 19 minutes later: a single component at 4.34 minutes carrying 96.4% of the UV signal, with a molecular mass of 504 daltons.
 
@@ -141,8 +141,8 @@ Protein minibinders are not a standard therapeutic modality for drugs and even f
 Below is a list of documents that provide further technical depth and more detailed information about the results described above:
 
 - [Prompts and data for the protein design campaign](https://huggingface.co/datasets/Anthropic/claude-protein-binder-design/tree/main);
-- [Protein design technical report](https://www-cdn.anthropic.com/30bf50e22a01388bb29bf077ee3f244531594b7a.pdf);
-- [Chemical analysis technical report](https://www-cdn.anthropic.com/9f08da5189ac269b3242ca760de9823805c3f5f6.pdf/).
+- [Protein design technical report](https://assets.claude.com/30bf50e22a01388bb29bf077ee3f244531594b7a.pdf);
+- [Chemical analysis technical report](https://assets.claude.com/9f08da5189ac269b3242ca760de9823805c3f5f6.pdf).
 
 ## Footnotes
 

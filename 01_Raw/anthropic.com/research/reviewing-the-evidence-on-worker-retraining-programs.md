@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/reviewing-the-evidence-on-worker-retraining-programs
-fetched_at: 2026-10-26T05:40:00.268116+00:00
+fetched_at: 2026-11-16T07:30:52.916729+00:00
 title: "How well do job retraining programs work? \\ Anthropic"
 ---
 
@@ -16,7 +16,7 @@ A small set of “sector programs”—programs that partner with employers in a
 
 Their central recommendation is to invest now in demonstrating, evaluating, and scaling the most promising programs, including through an effort to rapidly expand a leading program for a specific group of workers and rigorously measure the results. Our [Economic Futures Research Fund](https://www.anthropic.com/news/economic-futures-research-fund-agenda) is designed to fund investigations into questions like these.
 
-[Read the report here](https://www-cdn.anthropic.com/files/4zrzovbb/website/169e4adceebbab066b91e0b45127d73cb2bda24b.pdf).
+[Read the report here](https://assets.claude.com/169e4adceebbab066b91e0b45127d73cb2bda24b.pdf).
 
 ## Authors & acknowledgements
 

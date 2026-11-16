@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/economic-index-geography
-fetched_at: 2026-11-09T07:30:21.362344+00:00
+fetched_at: 2026-11-16T07:30:49.914682+00:00
 title: "Economic Index: AI's role in the US and global economy  \\ Anthropic"
 ---
 
@@ -27,19 +27,19 @@ We've expanded the Anthropic Economic Index to include geographic data. Below we
 
 The US uses Claude far more than any other nation. India is in second place, followed by Brazil, Japan, and South Korea, each with similar shares.
 
-![Top 30 countries by share of global Claude use: the US leads with 21.6%.](https://www-cdn.anthropic.com/images/4zrzovbb/website/21db2a6e87fadf19e2ae69ef479b32f3e6dfd1aa-5980x4437.png)
+![Top 30 countries by share of global Claude use: the US leads with 21.6%.](https://assets.claude.com/46faa6ddc5afe103a61e948e54adfd668d6f79ee.png?w=3840&q=75&fm=webp&fit=max)
 
 Leading countries in terms of global Claude.ai use share.
 
 However, there is huge variation in population size across these countries. To account for this, we adjust each country’s share of Claude.ai use by its share of the world’s working population. This gives us our **Anthropic AI Usage Index**, or AUI. Countries with an AUI greater than 1 use Claude more often than we’d expect based on their working-age population alone, and vice-versa.
 
-![The twenty countries that score highest on our Anthropic AI Usage Index: Israel, Singapore, Australia, New Zealand, and South Korea are the top five.](https://www-cdn.anthropic.com/images/4zrzovbb/website/5303d8780f4f566e994b12b2d0549947160711ba-6308x4197.png)
+![The twenty countries that score highest on our Anthropic AI Usage Index: Israel, Singapore, Australia, New Zealand, and South Korea are the top five.](https://assets.claude.com/44529c10ac59a6c0b3d812003eee352b7158f178.png?w=3840&q=75&fm=webp&fit=max)
 
 The twenty countries that score highest on our Anthropic AI Usage Index.
 
 From the AUI data, we can see that some small, technologically advanced countries (like Israel and Singapore) lead in Claude adoption relative to their working-age populations. This might to a large degree be explained by income: we found a strong correlation between GDP per capita and the Anthropic AI Usage Index (a 1% higher GDP per capita was associated with a 0.7% higher AUI). This makes sense: the countries that use Claude most often generally also have robust internet connectivity, as well as economies oriented around knowledge work rather than manufacturing. But it does raise a question of economic divergence: previous general-purpose technologies, like electrification or the combustion engine, led to both vast economic growth and a [great divergence](https://www.aeaweb.org/articles?id=10.1257/jep.11.3.3) in living standards around the world. If the effects of AI prove to be largest in richer countries, this general-purpose technology might have similar economic implications.
 
-![Graph showing that Claude use per capita is positively correlated with income per capita across countries.](https://www-cdn.anthropic.com/images/4zrzovbb/website/9dd4784a7787d188ad5b4580a12ad8a0703f2997-6072x4322.png)
+![Graph showing that Claude use per capita is positively correlated with income per capita across countries.](https://assets.claude.com/1c8ab0019006cf9a34dc320252e5b0f389dbd414.png?w=3840&q=75&fm=webp&fit=max)
 
 Claude use per capita is positively correlated with income per capita across countries. (Axes are on a log scale.)
 
@@ -49,7 +49,7 @@ The link between per capita GDP and per capita use of Claude also holds when com
 
 What else could explain this adoption gap? Our best guess is that it’s differences in the composition of states’ economies. The highest AUI in the US is the District of Columbia (3.82), where the most disproportionately frequent uses of Claude are editing documents and searching for information, among other tasks associated with knowledge work in DC. Similarly, coding-related tasks are especially common in California (the state with the third-highest AUI overall), and finance-related tasks are especially common in New York (which comes in fourth).[1](#footnote-1) Even among states with lower population-adjusted use of Claude, like Hawaii, use is closely correlated to the structure of the economy: people in Hawaii request Claude’s assistance for tourism-related tasks at twice the rate of the rest of America. Our [interactive website](http://anthropic.com/economic-index) contains plenty of other statistics like these.
 
-![Graph showing US states’ Claude adoption relative to their working age populations, with Utah and DC in the lead.](https://www-cdn.anthropic.com/images/4zrzovbb/website/91987a83370e2d6c3558e416f1376e823df4bb69-6287x3270.png)
+![Graph showing US states’ Claude adoption relative to their working age populations, with Utah and DC in the lead.](https://assets.claude.com/2c7d98c81e884cf6aea828ec771b473af3b62d76.png?w=3840&q=75&fm=webp&fit=max)
 
 US states’ Claude adoption relative to their working age populations.
 
@@ -63,13 +63,13 @@ Since December 2024, computer and mathematical uses of Claude have predominated 
 
 But a lot has changed. Over the past nine months, we’ve seen consistent growth in “knowledge-intensive” fields. For example, educational instruction tasks have risen by more than 40 percent (from 9% to 13% of all conversations), and the share of tasks associated with the physical and social sciences has increased by a third (from 6% to 8%). In the meantime, the relative frequency of traditional business tasks has declined: management-related tasks have fallen from 5% of all conversations to 3%, and the share of tasks related to business and financial operations has halved, from 6% to 3%. (In absolute terms, of course, the number of conversations in each category has still risen significantly.)
 
-![Changes in Claude use over time, showing increases in use for scientific and educational tasks, and decreases for arts, business, and architecture uses.](https://www-cdn.anthropic.com/images/4zrzovbb/website/1b396bd177524113a1735afe32ef29eb4b2b7b20-1600x1188.jpg)
+![Changes in Claude use over time, showing increases in use for scientific and educational tasks, and decreases for arts, business, and architecture uses.](https://assets.claude.com/fa8f8c05f896941b344facf500eb726b35aec431.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Changes in Claude use over time, showing increases in use for scientific and educational tasks.
 
 The overall trend is noisy, but generally, as the GDP per capita of a country increases, the use of Claude shifts *away* from tasks in the Computer and Mathematical occupation group, and towards a diverse range of other activities, like education, art and design; office and administrative support; and the physical and social sciences. Compare the trend line in the first graph below to the remaining three:
 
-![Occupation group shares vs. the Anthropic AI usage index, for computer and mathematical, educational instruction, arts, and office and administrative tasks.](https://www-cdn.anthropic.com/images/4zrzovbb/website/ac265e6d4eab543df80fcad980ca1c8e5cc6bfd8-5937x6610.png)
+![Occupation group shares vs. the Anthropic AI usage index, for computer and mathematical, educational instruction, arts, and office and administrative tasks.](https://assets.claude.com/863fbef3171314dd681c5c77d132c51935073e05.png?w=3840&q=75&fm=webp&fit=max)
 
 As we move from lower to higher adoption countries, Claude use appears to shift to a more diverse mix of tasks, although the overall pattern is noisy.
 
@@ -83,7 +83,7 @@ Since December 2024, we’ve found that the share of directive conversations has
 
 This could be the result of improved model capabilities. (In December 2024, when we first collected data for the Economic Index, the latest version of Claude was Sonnet 3.6.) As models get better at anticipating what users want and at producing high-quality work, users are likely more willing to trust the model’s outputs at the first attempt.
 
-![Graphs showing automation overtaking augmentation from our first to third Index reports.](https://www-cdn.anthropic.com/images/4zrzovbb/website/2dfb6b18f124f1c3b76274eb6a9291c268f92ea9-7638x4291.png)
+![Graphs showing automation overtaking augmentation from our first to third Index reports.](https://assets.claude.com/45db9dda023e0a6cb9cf3aea320a409131dd39d2.png?w=3840&q=75&fm=webp&fit=max)
 
 Automation appears to be increasing over time.
 
@@ -91,7 +91,7 @@ Perhaps surprisingly, in countries with higher Claude use per capita, Claude’s
 
 We’re not yet sure why this is. It could be because early adopters in each country feel more comfortable allowing Claude to automate tasks, or it could be down to other cultural and economic factors.
 
-![Graph showing that countries with higher Claude use per capita tend to have a lower share of automated tasks..](https://www-cdn.anthropic.com/images/4zrzovbb/website/2e22aad0068e526ebd532fc7bf3d5d231b270a27-4886x3773.png)
+![Graph showing that countries with higher Claude use per capita tend to have a lower share of automated tasks..](https://assets.claude.com/917c7628e17853fe7e977c2752042b912d64dd42.png?w=3840&q=75&fm=webp&fit=max)
 
 Countries with higher Claude use per capita tend to use Claude in a more collaborative manner.
 
@@ -103,13 +103,13 @@ These customers’ use of Claude is especially concentrated in coding and admini
 
 We also find that our API customers use Claude for task automation much more often than [Claude.ai](http://claude.ai) users. 77% of our API conversations show automation patterns, of which the vast majority are directive, while just 12% show augmentation. On [Claude.ai](http://claude.ai), the split is almost even. This could have significant economic implications: in the past, the automation of tasks has been associated with large economic transitions, as well as major productivity gains.
 
-![Graph showing a much higher share of augmentative uses on Claude.ai than the API, and vice-versa for automative uses.](https://www-cdn.anthropic.com/images/4zrzovbb/website/8f4d609ea112160b606f3a0633ee869f12d24960-7638x4291.png)
+![Graph showing a much higher share of augmentative uses on Claude.ai than the API, and vice-versa for automative uses.](https://assets.claude.com/0406c154bdc35294ff6e4abe3af0883f8d001ad5.png?w=3840&q=75&fm=webp&fit=max)
 
 Augmentation and automation with Claude on Claude.ai vs. the API.
 
 Finally, given how API use is paid for, we can also explore whether differences in the cost of tasks (caused by differences in the number of tokens they consume) affect which tasks businesses choose to “buy”. Here, we find a *positive* correlation between price and use: higher-cost task categories tend to see more frequent use, as in the graph below. This suggests to us that fundamental model capabilities, and the economic value generated by the models, matters more to businesses than the cost of completing the task itself.
 
-![Graph showing occupational categories' usage share vs. average API cost.](https://www-cdn.anthropic.com/images/4zrzovbb/website/a5a50599474e9a61e7e5d88d364e559c5fa09deb-7638x4291.png)
+![Graph showing occupational categories' usage share vs. average API cost.](https://assets.claude.com/f86e7e00ca01d4e4c9f1b9f435e63fe12102ddf4.png?w=3840&q=75&fm=webp&fit=max)
 
 Cost per task plotted against the task category’s share of total conversations.
 

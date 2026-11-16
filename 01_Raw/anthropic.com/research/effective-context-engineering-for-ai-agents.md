@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/effective-context-engineering-for-ai-agents
-fetched_at: 2026-11-09T07:30:21.623985+00:00
+fetched_at: 2026-11-16T07:30:50.118722+00:00
 title: "Effective context engineering for AI agents \\ Anthropic"
 ---
 
@@ -20,7 +20,7 @@ In the early days of engineering with LLMs, prompting was the biggest component 
 
 An agent running in a loop generates more and more data that *could* be relevant for the next turn of inference, and this information must be cyclically refined. Context engineering is the [art and science](https://x.com/karpathy/status/1937902205765607626?lang=en) of curating what will go into the limited context window from that constantly evolving universe of possible information.
 
-![Prompt engineering vs. context engineering](https://www-cdn.anthropic.com/images/4zrzovbb/website/faa261102e46c7f090a2402a49000ffae18c5dd6-2292x1290.png)
+![Prompt engineering vs. context engineering](https://assets.claude.com/40cb719b19a16e6b505519933a19250177f25bb8.png?w=3840&q=75&fm=webp&fit=max)
 
 In contrast to the discrete task of writing a prompt, context engineering is iterative and the curation phase happens each time we decide what to pass to the model.
 
@@ -44,7 +44,7 @@ Given that LLMs are constrained by a finite attention budget, *good* context eng
 
 **System prompts** should be extremely clear and use simple, direct language that presents ideas at the *right altitude* for the agent. The right altitude is the Goldilocks zone between two common failure modes. At one extreme, we see engineers hardcoding complex, brittle logic in their prompts to elicit exact agentic behavior. This approach creates fragility and increases maintenance complexity over time. At the other extreme, engineers sometimes provide vague, high-level guidance that fails to give the LLM concrete signals for desired outputs or falsely assumes shared context. The optimal altitude strikes a balance: specific enough to guide behavior effectively, yet flexible enough to provide the model with strong heuristics to guide behavior.
 
-![Calibrating the system prompt in the process of context engineering.](https://www-cdn.anthropic.com/images/4zrzovbb/website/0442fe138158e84ffce92bed1624dd09f37ac46f-2292x1288.png)
+![Calibrating the system prompt in the process of context engineering.](https://assets.claude.com/519a8efee7ac74f4e8c9c96af1bc9408eb3ccc75.png?w=3840&q=75&fm=webp&fit=max)
 
 At one end of the spectrum, we see brittle if-else hardcoded prompts, and at the other end we see prompts that are overly general or falsely assume shared context.
 

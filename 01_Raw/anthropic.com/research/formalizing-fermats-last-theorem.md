@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/formalizing-fermats-last-theorem
-fetched_at: 2026-11-09T07:30:22.422744+00:00
+fetched_at: 2026-11-16T07:30:50.800980+00:00
 title: "Formalizing Fermat's Last Theorem  \\ Anthropic"
 ---
 
@@ -40,11 +40,11 @@ For FLT, the formalization process was expected to take years. Just the [bluepri
 
 Claude completed the proof in 11 days, producing computer-verifiable proofs of 30,300 theorems along the way (using 29,500 in the final proof). Dozens of Claude agents collaborated to define concepts, prove intermediate theorems, and use those theorems to prove ever harder statements. At 13 million lines of Lean code, Claude’s proof is over 5x the size of Mathlib, the principal community library of mathematical proofs this theorem builds on.[3](#footnote-3)
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/6d5e1a90507ea4171510b907134139bf716b7d15.mp4)
+[](https://assets.claude.com/6d5e1a90507ea4171510b907134139bf716b7d15.mp4)
 
 Time progression of FLT formalization.
 
-Claude’s proof follows [a simplified version of Wiles’s proof from Darmon, Diamond, and Taylor](https://www.math.mcgill.ca/darmon/pub/Articles/Expository/05.DDT/paper.pdf). Mathematical input from humans was limited to occasional high-level instructions from Tianyi: “Jacobian as a scheme sounds high priority,” “push [the] Mazur [theorem] to be done soon.” You can find excerpts of Claude’s thinking [here](https://www-cdn.anthropic.com/9e431dff043da6538d99d6c2d231b670aa3da263.pdf).
+Claude’s proof follows [a simplified version of Wiles’s proof from Darmon, Diamond, and Taylor](https://www.math.mcgill.ca/darmon/pub/Articles/Expository/05.DDT/paper.pdf). Mathematical input from humans was limited to occasional high-level instructions from Tianyi: “Jacobian as a scheme sounds high priority,” “push [the] Mazur [theorem] to be done soon.” You can find excerpts of Claude’s thinking [here](https://assets.claude.com/9e431dff043da6538d99d6c2d231b670aa3da263.pdf).
 
 ```
 “THE FLT root reads Proved on the site. Historic moment (modulo re-check).”
@@ -64,7 +64,7 @@ The effort succeeded when we switched to using [Prove2Me](https://prove2me.verce
 2. **Speeding up Lean compilation and minimizing resource consumption** by separating theorem statements and proofs into different files, with the links between them maintained independently.
 3. **Enabling search and reuse** by maintaining a natural-language description of each theorem statement, resulting in a simpler proof path.
 
-![DAG showing Claude formalizing sub-theorems on the way to FLT](https://www-cdn.anthropic.com/images/4zrzovbb/website/afd8e238255ec2654f2322f3d3630dcf1e8ea4ca-6800x3264.png)
+![DAG showing Claude formalizing sub-theorems on the way to FLT](https://assets.claude.com/bd5445ef1c64fbdd1b07b15db94e89e501bc1075.png?w=3840&q=75&fm=webp&fit=max)
 
 Key milestones from the Prove2Me plan that Claude used to formalize Fermat’s Last Theorem. The three colored sections correspond to three core sub-theorems that Claude had to prove on the way to its final goal. This graph closely follows Wiles’s original proof.
 

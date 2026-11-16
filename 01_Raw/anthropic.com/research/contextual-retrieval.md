@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/contextual-retrieval
-fetched_at: 2026-11-09T07:30:20.597961+00:00
+fetched_at: 2026-11-16T07:30:49.352984+00:00
 title: "Contextual retrieval in AI systems \\ Anthropic"
 ---
 
@@ -49,7 +49,7 @@ RAG solutions can more accurately retrieve the most applicable chunks by combini
 
 By leveraging both BM25 and embedding models, traditional RAG systems can provide more comprehensive and accurate results, balancing precise term matching with broader semantic understanding.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/45603646e979c62349ce27744a940abf30200d57-3840x2160.png)
+![](https://assets.claude.com/45603646e979c62349ce27744a940abf30200d57.png?w=3840&q=75&fm=webp&fit=max)
 
 A Standard Retrieval-Augmented Generation (RAG) system that uses both embeddings and Best Match 25 (BM25) to retrieve information. TF-IDF (term frequency-inverse document frequency) measures word importance and forms the basis for BM25.
 
@@ -100,7 +100,7 @@ The resulting contextual text, usually 50-100 tokens, is prepended to the chunk 
 
 Here’s what the preprocessing flow looks like in practice:
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/2496e7c6fedd7ffaa043895c23a4089638b0c21b-3840x2160.png)
+![](https://assets.claude.com/2496e7c6fedd7ffaa043895c23a4089638b0c21b.png?w=3840&q=75&fm=webp&fit=max)
 
 *Contextual Retrieval is a preprocessing technique that improves retrieval accuracy.*
 
@@ -123,7 +123,7 @@ Our experiments showed that:
 - **Contextual Embeddings reduced the top-20-chunk retrieval failure rate by 35%** (5.7% → 3.7%).
 - **Combining Contextual Embeddings and Contextual BM25 reduced the top-20-chunk retrieval failure rate by 49%** (5.7% → 2.9%).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7f8d739e491fe6b3ba0e6a9c74e4083d760b88c9-3840x2160.png)
+![](https://assets.claude.com/7f8d739e491fe6b3ba0e6a9c74e4083d760b88c9.png?w=3840&q=75&fm=webp&fit=max)
 
 *Combining Contextual Embedding and Contextual BM25 reduce the top-20-chunk retrieval failure rate by 49%.*
 
@@ -149,7 +149,7 @@ Reranking is a commonly used filtering technique to ensure that only the most re
 3. Using a reranking model, give each chunk a score based on its relevance and importance to the prompt, then select the top-K chunks (we used the top 20);
 4. Pass the top-K chunks into the model as context to generate the final result.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8f82c6175a64442ceff4334b54fac2ab3436a1d1-3840x2160.png)
+![](https://assets.claude.com/8f82c6175a64442ceff4334b54fac2ab3436a1d1.png?w=3840&q=75&fm=webp&fit=max)
 
 *Combine Contextual Retrieva and Reranking to maximize retrieval accuracy.*
 
@@ -159,7 +159,7 @@ There are several reranking models on the market. We ran our tests with the [Coh
 
 Specifically, we found that Reranked Contextual Embedding and Contextual BM25 reduced the top-20-chunk retrieval failure rate by 67% (5.7% → 1.9%).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/93a70cfbb7cca35bb8d86ea0a23bdeeb699e8e58-3840x2160.png)
+![](https://assets.claude.com/93a70cfbb7cca35bb8d86ea0a23bdeeb699e8e58.png?w=3840&q=75&fm=webp&fit=max)
 
 *Reranked Contextual Embedding and Contextual BM25 reduces the top-20-chunk retrieval failure rate by 67%.*
 
@@ -186,7 +186,7 @@ Below is a breakdown of results across datasets, embedding providers, use of BM2
 
 See [Appendix II](https://assets.anthropic.com/m/1632cded0a125333/original/Contextual-Retrieval-Appendix-2.pdf) for the breakdowns for Retrievals @ 10 and @ 5 as well as example questions and answers for each dataset.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/646a894ec4e6120cade9951a362f685cd2ec89b2-2458x2983.png)
+![](https://assets.claude.com/646a894ec4e6120cade9951a362f685cd2ec89b2.png?w=3840&q=75&fm=webp&fit=max)
 
 *1 minus recall @ 20 results across data sets and embedding providers.*
 

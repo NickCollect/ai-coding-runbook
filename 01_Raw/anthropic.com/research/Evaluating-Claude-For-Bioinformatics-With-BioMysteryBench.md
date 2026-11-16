@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench
-fetched_at: 2026-11-09T07:30:22.091917+00:00
+fetched_at: 2026-11-16T07:30:50.514458+00:00
 title: "Evaluating Claude with BioMysteryBench \\ Anthropic"
 ---
 
@@ -78,7 +78,7 @@ To minimize inherently unsolvable questions while still leaving room for those t
 
 For each question, we tasked up to five domain experts to answer the question from scratch. Once a question was answered correctly by at least one human, we considered it human-solvable. BioMysteryBench contained 76 such tasks.
 
-![Graph of accuracy on human-solvable problems](https://www-cdn.anthropic.com/images/4zrzovbb/website/291077c3785708a54dbb4421db3751b1d1c4ba84-1920x1080.png)
+![Graph of accuracy on human-solvable problems](https://assets.claude.com/291077c3785708a54dbb4421db3751b1d1c4ba84.png?w=3840&q=75&fm=webp&fit=max)
 
 Accuracy averaged over 5 trials per 76 human-solvable problems. Error bars computed by bootstrap sampling within problems.
 
@@ -86,17 +86,17 @@ Sometimes Claude mirrored human strategies. Perhaps humans have landed on a near
 
 Example 1Example 2
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8f163ac92606de805573294eaa417e3ec39e38e4-1920x1080.png)
+![](https://assets.claude.com/8f163ac92606de805573294eaa417e3ec39e38e4.png?w=3840&q=75&fm=webp&fit=max)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6e98b8a8f33638491c1e3a4ffb43cf728d70fc02-1920x1080.png)
+![](https://assets.claude.com/6e98b8a8f33638491c1e3a4ffb43cf728d70fc02.png?w=3840&q=75&fm=webp&fit=max)
 
 Other times, Claude took a completely different route, illustrating there is no strictly correct way to solve these problems and that models may have genuine preferences that diverge from ours.
 
 Example 1Example 2
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ec850217c59499f29b36e57853a4c93daf20d021-1920x1080.png)
+![](https://assets.claude.com/ec850217c59499f29b36e57853a4c93daf20d021.png?w=3840&q=75&fm=webp&fit=max)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ba4bf7f74aee2623f6217574ec40ba51e45c120d-1920x1080.png)
+![](https://assets.claude.com/ba4bf7f74aee2623f6217574ec40ba51e45c120d.png?w=3840&q=75&fm=webp&fit=max)
 
 The examples above showcase a particularly interesting strategy: whereas our human experts used algorithms or databases to identify and annotate properties of a dataset, Claude intuitively recognizes certain patterns or sequences. Admittedly, such clever abstraction is not entirely unique to AI—the first eukaryotic promoter, for example, was discovered when a scientist noticed the sequence “TATA” appearing over and over in sequences upstream of genes. *Intuition* like this has been difficult to build into traditional biology machine learning models, but LLMs might be able to turn up patterns like this at unprecedented scale.
 
@@ -104,7 +104,7 @@ The examples above showcase a particularly interesting strategy: whereas our hum
 
 That left us with a set of questions that could not be solved by our panel of experts. This could mean (1) the question was malformed or broken, (2) the question is inherently unsolvable (e.g.,the signal isn’t in the data), or (3) the question is theoretically solvable but humans lack the knowledge required to solve it. After QC’ing with benchmarkers and additional experts, we removed 4 questions that were due to (1), leaving 23 human-difficult questions.
 
-![Graph showing performance on human-difficult problems](https://www-cdn.anthropic.com/images/4zrzovbb/website/0aed26a846ccd67d813a2c14f78069216671c8e3-1920x1080.png)
+![Graph showing performance on human-difficult problems](https://assets.claude.com/0aed26a846ccd67d813a2c14f78069216671c8e3.png?w=3840&q=75&fm=webp&fit=max)
 
 Accuracy over the set of problems humans were not able to solve, averaged across 5 episodes per problem. Error bars computed by bootstrap sampling within problems.
 
@@ -120,15 +120,15 @@ In some of the human-difficult tasks, Opus’s vast underlying knowledge base he
 
 Example 1Example 2Example 3
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/b66685cd4ff4cf7f088609183fcb604f752a1241-1920x1080.png)
+![](https://assets.claude.com/657f29e8c1f7a65fd7d538ed2b78b36eff1aa6c9.png?w=3840&q=75&fm=webp&fit=max)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c97919a677674d2446e7cf8dad1a53f7065c992c-1920x1080.png)
+![](https://assets.claude.com/3ff3468b2bd4c5077f4fb24db49edb4675212914.png?w=3840&q=75&fm=webp&fit=max)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c76ff72da237c3de4de7d73a8c7662c53ad02cb6-1920x1080.png)
+![](https://assets.claude.com/d74728215b5e2cb4ad784344e041cec38a1d8c64.png?w=3840&q=75&fm=webp&fit=max)
 
 Even though prior knowledge seemed overwhelmingly helpful to Claude, we saw one interesting case (in the human-solvable set) where this became its downfall:
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d15f9f4a9508cce79a95c078c948edeb4f98855e-1920x1080.png)
+![](https://assets.claude.com/d15f9f4a9508cce79a95c078c948edeb4f98855e.png?w=3840&q=75&fm=webp&fit=max)
 
 ### Knowing when you don’t know
 
@@ -136,11 +136,11 @@ When Opus 4.6 was not confident about an answer, it often tried multiple differe
 
 Example 1Example 2Example 3
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a891cd72960164b205dca647eb74030b0fbb698c-1920x1080.png)
+![](https://assets.claude.com/a72c6c288f8ba297110e9856f3899220458f34ae.png?w=3840&q=75&fm=webp&fit=max)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/eda46c2e931b868d77d7d6e868b8bb1cab1c7f70-1920x1080.png)
+![](https://assets.claude.com/8b2fd08aba5212ebe7f85cd0d602015543aba0fc.png?w=3840&q=75&fm=webp&fit=max)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8b7b5fddbafbd29783f0c6f1cda13ea112a2f112-1920x1080.png)
+![](https://assets.claude.com/0e2e6d04026b70d40148825f8e8839e1bd667c84.png?w=3840&q=75&fm=webp&fit=max)
 
 Like many of the benchmarks we've discussed, BioMysteryBench has its own limitation: for tasks that neither humans nor models have solved, we can never be fully certain whether they're impossible or just extraordinarily difficult. The validation notebooks help ensure the signal is there and the data is well-formed, but they do not guarantee a model or human can find the answer from scratch. So we ask both our models and our human benchmarkers not to be too frustrated if, a year from now, no one has solved the human-difficult set. That uncertainty is also part of what makes the benchmark exciting: a more scientifically capable model might be the first to crack a problem that no human or model has solved before.
 
@@ -152,7 +152,7 @@ Claude showed solid improvement across generations and did well enough at both t
 The headline accuracy numbers tell you how often each model gets the right answer, but not how it gets there. I wanted to know whether a correct answer on a hard problem means the same thing as a correct answer on a solvable one. Since every problem was attempted five times, I could look at per-problem solve counts: if a model solves something 5/5 it has a reliable method; if it solves it 1/5 it probably got lucky on a reasoning path it can't consistently find again. So I broke each model's solved problems down by solve count (0/5 through 5/5) on the two sets side by side.
 ```
 
-![Chart showing per-problem solve consistency on BioMysteryBench.](https://www-cdn.anthropic.com/images/4zrzovbb/website/3840cd87380589c9f00c31d5b9334639ebfb5303-1920x1080.png)
+![Chart showing per-problem solve consistency on BioMysteryBench.](https://assets.claude.com/3840cd87380589c9f00c31d5b9334639ebfb5303.png?w=3840&q=75&fm=webp&fit=max)
 
 Per-problem solve consistency on BioMysteryBench. Each model attempted every problem five times; bars show the share of problems solved 0, 1, 2, 3, 4, or 5 times out of 5. On the human-solvable set (left), all three models are strongly bimodal—problems are almost always solved either every time or never. On the human-difficult set (right), the middle of the distribution fills in: a much larger fraction of each model's correct answers come from problems it solves only once or twice in five tries, indicating that difficult-set wins are often lucky reasoning paths rather than reliably reproducible solutions.
 

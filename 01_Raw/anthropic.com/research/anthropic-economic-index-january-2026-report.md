@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-economic-index-january-2026-report
-fetched_at: 2026-11-09T07:30:18.439997+00:00
+fetched_at: 2026-11-16T07:30:47.739094+00:00
 title: "Economic Index report: Economic primitives \\ Anthropic"
 ---
 
@@ -68,13 +68,13 @@ Even though frontier LLMs have an impressive range of capabilities relevant to e
 
 In our last Anthropic Economic Index Report we began tracking business adoption patterns by studying Claude usage among 1P API customers. The ten most common tasks grew from 28% of API records in August to 32% in November. Rising concentration among a small set of tasks suggests the highest-value applications continue to generate outsized economic value even as models have become more capable at a wider range of tasks. As with [Claude.ai](http://claude.ai) the most common task among API customers was modifying software to correct errors, which accounted for one in ten records.
 
-![Figure 1.1: Usage shares among top 10 tasks over time by platform, Claude.ai and 1P API.](https://www-cdn.anthropic.com/images/4zrzovbb/website/3ac68d3e69e15d38876c4ef0012b1d8c5befa921-2969x2067.png)
+![Figure 1.1: Usage shares among top 10 tasks over time by platform, Claude.ai and 1P API.](https://assets.claude.com/3ac68d3e69e15d38876c4ef0012b1d8c5befa921.png?w=3840&q=75&fm=webp&fit=max)
 
 **Usage shares among top 10 tasks over time by platform, Claude.ai and 1P API.**Share of conversations assigned to the ten most prevalent O\*NET tasks, by platform and report version.
 
 Indeed, computer and mathematical tasks—like modifying software to correct errors—continue to dominate Claude usage overall, representing a third of conversations on Claude.ai and nearly half of 1P API traffic. Such dominance has subsided on Claude.ai: the share of conversations on Claude.ai assigned to such (mostly) coding-related tasks is down from a peak of 40% in March 2025 to 34% in November 2025. At the same time, the share of transcripts assigned to computer and mathematical tasks among 1P API traffic edged higher from 44% in August to 46% in November 2025 (Figure 1.2).
 
-![Figure 1.2: Claude.ai and API usage over time.](https://www-cdn.anthropic.com/images/4zrzovbb/website/b67d78d056f86d9d4a46002d60fd5efe79e59372-4762x2439.png)
+![Figure 1.2: Claude.ai and API usage over time.](https://assets.claude.com/6f75a31ec946340a66cbeed874b08b760ff2203c.png?w=3840&q=75&fm=webp&fit=max)
 
 **[Claude.ai](http://claude.ai) and API usage over time.**Each panel shows the share of sampled conversations on Claude.ai and 1P API records associated with tasks from each Standard Occupation Classification (SOC) major group.
 
@@ -96,15 +96,15 @@ Three months later, the share of directive conversations had fallen 7pp to 32% i
 
 While we see some evidence of a shift toward soft skill usage on Claude.ai with design, management, and education now higher, the shift back toward augmented use was broad-based in November (Figure 1.4). The rise in augmented use was driven mainly by users iterating with Claude to complete tasks (“task iteration”) rather than asking Claude to explain concepts (“learning”). See Figure 1.5 for common words associated with the three most common interaction modes across O\*NET tasks and bottom-up descriptions of requests made of Claude.
 
-![Figure 1.3: Collaboration mode share over time by platform, Claude.ai and 1P API.](https://www-cdn.anthropic.com/images/4zrzovbb/website/57bcb894a6e050647e09229565a4381c4778b981-2966x2979.png)
+![Figure 1.3: Collaboration mode share over time by platform, Claude.ai and 1P API.](https://assets.claude.com/689ddcfb83f17a3eea706e4e9490eedd45ab32ed.png?w=3840&q=75&fm=webp&fit=max)
 
 **Collaboration mode share over time by platform, Claude.ai and 1P API.**Collaboration mode frequencies across Anthropic Economic Index Reports.
 
-![Figure 1.4: Directive, Task Iteration, and Learning collaboration shares by Standard Occupation Classification (SOC) major group.](https://www-cdn.anthropic.com/images/4zrzovbb/website/6de662b51d696c7cd287a814cc11e502e0dc7c9b-5369x2807.png)
+![Figure 1.4: Directive, Task Iteration, and Learning collaboration shares by Standard Occupation Classification (SOC) major group.](https://assets.claude.com/6de662b51d696c7cd287a814cc11e502e0dc7c9b.png?w=3840&q=75&fm=webp&fit=max)
 
 **Directive, Task Iteration, and Learning collaboration shares by Standard Occupation Classification (SOC) major group.**For each SOC major group we calculate the share of conversations on Claude.ai associated with Directive, Task Iteration, and Learning from among O\*NET tasks that have at least 100 observations in our sample. We weight observations by number of records to construct a representative sample.
 
-![Figure 1.5: Prominent words from among O*NET task titles and bottom-up request groupings by key collaboration type.](https://www-cdn.anthropic.com/images/4zrzovbb/website/b1c3ab216c4a1f1abafe5c6ceeaffd5bea2337d1-1750x976.png)
+![Figure 1.5: Prominent words from among O*NET task titles and bottom-up request groupings by key collaboration type.](https://assets.claude.com/f79012085e73a02c78fc3fcc1760725f0bb940b4.png?w=3840&q=75&fm=webp&fit=max)
 
 **Prominent words from among O\*NET task titles and bottom-up request groupings by key collaboration type.**Word clouds constructed from among the top quartile of O\*NET tasks and bottom-up request groups, ordered by the share of records classified as Directive, Task Iteration, and Learning from among tasks/requests with at least 1,000 observations. Directive interactions emphasize production ('create,' 'develop,' 'draft'); Task Iteration centers on refinement and iteration ('edit,' 'rewrite,' 'revise'); Learning focuses on explanation and knowledge transfer ('help,' 'explain,' 'provide'). Patterns are consistent across both classification methods. This analysis is not based on the words used in the underlying transcripts but rather groupings constructed using privacy-preserving methods.
 
@@ -112,7 +112,7 @@ While we see some evidence of a shift toward soft skill usage on Claude.ai with 
 
 In our previous report, we introduced the Anthropic AI Usage Index (AUI), a measure of whether Claude is over- or underrepresented in a given geography relative to the size of its working-age population. The AUI is defined as
 
-![Anthropic AI Usage Index c = Country c's share of Claude Usage divided by Country c's share of working-age population](https://www-cdn.anthropic.com/images/4zrzovbb/website/ab8a54e2d3fbf99628aa7a1300c953c70759ac6b-314x22.svg)
+![Anthropic AI Usage Index c = Country c's share of Claude Usage divided by Country c's share of working-age population](https://assets.claude.com/bad44b9081ea6ee9cfad0b31cd447b0c2c308bd9.svg)
 
 An AUI above 1 indicates that a country uses Claude more intensively than its population alone would predict, while an AUI below 1 indicates lower-than-expected usage. For example, Denmark has an AUI of 2.1, meaning its residents use Claude at roughly twice the rate its share of the global working-age population would suggest.
 
@@ -120,7 +120,7 @@ A key fact about Claude usage globally is that it is geographically concentrated
 
 By contrast, usage became more evenly distributed across US states from August to November 2025: the Gini coefficient, a standard measure of equality, fell from 0.37 to 0.32. While it is important to exercise caution in interpreting short-run changes, this is a relatively large change toward perfect equality in which the AUI is equal to 1 for all states with a Gini coefficient of 0. If the Gini coefficient for the US again falls by 0.05 every three months, then parity of usage would be reached in roughly two years.
 
-![Figure 1.6: AUI concentration around the world and within the US in this and the prior report.](https://www-cdn.anthropic.com/images/4zrzovbb/website/a4f75f5d87d01446ca65a204f61a1e063e16e878-4170x1781.png)
+![Figure 1.6: AUI concentration around the world and within the US in this and the prior report.](https://assets.claude.com/9d91174f4eed544fc34574023a5096be83125e7d.png?w=3840&q=75&fm=webp&fit=max)
 
 **AUI concentration around the world and within the US in this and the prior report.**Lorenz curves for the Anthropic AI Usage Index (AUI) around the world and within the US, August and November 2025. A curve that is closer to the 45-degree line indicates less concentration. The plot on the right shows, for example, that the top 20 percent of US states accounted for 40 percent of population-adjusted usage in the US.
 
@@ -128,7 +128,7 @@ What shapes patterns of usage within the US and around the world? In our previou
 
 Within the US, income is less clearly a predictor of usage. Instead, what appears to matter most is the composition of each state’s workforce and how well-matched the workforce is to Claude capabilities as reflected in task-level usage. States that have a higher share of workers in computer and mathematical occupations—like Washington D.C., Virginia, and Washington—tend to have higher usage per capita. Quantitatively, each 1% increase in the share of such tech workers in a state is associated with 0.36% higher usage per capita (Figure 1.7). This alone accounts for nearly two-thirds of the cross-state variation in AUI.
 
-![Figure 1.7: AUI and share of workers in Computer & Mathematical occupations in each US State.](https://www-cdn.anthropic.com/images/4zrzovbb/website/fe706b1c52a1df7bd54cc6ebf3b3a698bf046e88-3568x2518.png)
+![Figure 1.7: AUI and share of workers in Computer & Mathematical occupations in each US State.](https://assets.claude.com/960e5228ff845a6ed121867b412920cf0b10d0d0.png?w=3840&q=75&fm=webp&fit=max)
 
 **AUI and share of workers in Computer & Mathematical occupations in each US State.**This figure shows that the share of workers in Computer & Mathematical occupations across US states is highly correlated with the Anthropic AI Usage Index (AUI). This is consistent with the view that overall Claude usage patterns—and associated capabilities—are shaping regional adoption patterns within the US. This pattern holds more generally when formally calculating the KL divergence between each state’s workforce distribution and global Claude.ai usage shares by SOC major group.
 
@@ -140,17 +140,17 @@ While differences in workforce composition appear to play a role in shaping regi
 
 We generate this estimate through the lens of a simple model of diffusion, which we briefly describe here. We model diffusion as proportional convergence toward a common steady state of equalized usage per capita in which each state s has an AUI equal to 1:
 
-![AUI s, t = AUI beta s, t-1', beta within (0, 1)](https://www-cdn.anthropic.com/images/4zrzovbb/website/0ae56b8b3a1e0b0e85afdd42d02c911ab0cd05db-350x15.svg)
+![AUI s, t = AUI beta s, t-1', beta within (0, 1)](https://assets.claude.com/a895746042230853d3f2ec9246efba6b9b48e1ed.svg)
 
 Under this model, the log deviation of AUI from steady state (AUI = 1) shrinks by a factor of β every three months, implying a half-life of *ln(.5)/ln(*β*)* quarters. For example, with quarterly data a value of β = 0.99 implies a half-life of about 17 years. To illustrate, starting from an initial AUI of 2, this means AUI would decline to around 1.4 after 17 years and to around 1.1 after 50 years. We take β = 0.99 as a sensible benchmark because it implies a pace of diffusion similar to economically consequential technologies in the 20th century.
 
 This model of convergence motivates the following regression specification8:
 
-![ln AUI s,t = alpha + beta × ln AUI s,t-1 + epsilon s,t'](https://www-cdn.anthropic.com/images/4zrzovbb/website/df31b122952f51d76d08eaae36edd1e2ddf1a0ed-350x14.svg)
+![ln AUI s,t = alpha + beta × ln AUI s,t-1 + epsilon s,t'](https://assets.claude.com/b8391d65901dfc7803c9a35a8f1a0883ef644288.svg)
 
 Naively estimating this equation by ordinary least squares (OLS) yields an estimate of β̂ ≈ 0.77. Weighted least squares (WLS) where we weight by each state’s workforce yields an estimate of β̂ ≈ 0.76 (Figure 1.8). Both are statistically distinguishable from 1 at conventional levels. Taken at face value, these estimates imply that it would take little more than two years for each state's AUI to close most of the gap to 1.
 
-![Figure 1.8: Anthropic AI Usage Index (AUI) across the US, August 2025 (V3) and November 2025 (V4).](https://www-cdn.anthropic.com/images/4zrzovbb/website/6db6a9dbf7e110d5095fea4acc43d9b8ee24f795-3569x2973.png)
+![Figure 1.8: Anthropic AI Usage Index (AUI) across the US, August 2025 (V3) and November 2025 (V4).](https://assets.claude.com/bbdc47bba081d03cad4322efa9dd0d320cac1aea.png?w=3840&q=75&fm=webp&fit=max)
 
 **Anthropic AI Usage Index (AUI) across the US, August 2025 (V3) and November 2025 (V4).**By comparing the AUI in November 2025 with its value in August 2025 we can estimate the implied rate of diffusion of Claude usage within the US. Under a model of proportional convergence toward a steady state in which AUI = 1 for all US states, the estimated elasticity can be used to calculate the pace of diffusion (see text for more details). Our range of estimates implies a pace of regional convergence of AUI in 2-5 years.
 
@@ -190,7 +190,7 @@ Because AI capabilities are advancing so rapidly and the economic effects will b
 
 This report introduces five new economic primitives beyond the one we already measure, collaboration patterns (whether users automate or augment their tasks with Claude). These primitives capture five dimensions of a human-AI conversation: 1) task complexity, 2) human and AI skills, 3) work, coursework or personal use case, 4) the AI’s level of autonomy, and 5) task success (see Table 2.1). AI autonomy captures something different from our existing automation/augmentation distinction. For example, “Translate this paragraph into French” is high automation (directive, minimal back-and-forth) but low AI autonomy (the task requires little decision-making from Claude).
 
-![Table 2.1: Economic primitives added in this report.](https://www-cdn.anthropic.com/images/4zrzovbb/website/8895717443700329aa757b3614ede0f8dc8d2c52-1920x2980.svg)
+![Table 2.1: Economic primitives added in this report.](https://assets.claude.com/4196667a2616e2c4fddf1524a87420b2c8c533ca.svg)
 
 **Economic primitives added in this report.**The table shows the new economic primitives added in this report, beyond collaboration patterns (automation/augmentation) from prior reports. The first column shows the primitive category, the second column the name of the primitive, and the third column the operationalization of the primitives as the prompts provided to Claude which we use a classifier to map conversations to primitives. See online appendix at <https://huggingface.co/datasets/Anthropic/EconomicIndex> for full prompt texts.
 
@@ -210,7 +210,7 @@ The new dimensions of AI use captured in our data were informed by our recent wo
 
 We propose that multiple simple primitives, even if somewhat noisy and not perfectly accurate by themselves, can together provide important signals on how AI is being used. We therefore mainly tested for directional accuracy.
 
-For classifying task duration with and without AI, we used minimally modified versions of our [prior productivity work](https://www-cdn.anthropic.com/e5645986a7ce8fbcc48fa6d2fc67753c87642c30.pdf). For net new classifiers1, implemented via our [privacy-preserving tooling](https://arxiv.org/abs/2412.13678), our validation process was as follows. We designed multiple potential measures to capture concepts such as task complexity. For Claude.ai, we evaluated the classifier performance compared to a human researcher on a small set of transcripts in which users gave feedback to Claude.ai and for which we thus have permission to look at underlying transcripts. For first-party API (1P API) data, we validate the classifiers using a mix of internal and synthetic data. Neither data sources are fully representative of Claude.ai or 1P API traffic, but they allow us to check that the classifiers are working on data that resembles real usage data, while ensuring privacy.
+For classifying task duration with and without AI, we used minimally modified versions of our [prior productivity work](https://assets.claude.com/e5645986a7ce8fbcc48fa6d2fc67753c87642c30.pdf). For net new classifiers1, implemented via our [privacy-preserving tooling](https://arxiv.org/abs/2412.13678), our validation process was as follows. We designed multiple potential measures to capture concepts such as task complexity. For Claude.ai, we evaluated the classifier performance compared to a human researcher on a small set of transcripts in which users gave feedback to Claude.ai and for which we thus have permission to look at underlying transcripts. For first-party API (1P API) data, we validate the classifiers using a mix of internal and synthetic data. Neither data sources are fully representative of Claude.ai or 1P API traffic, but they allow us to check that the classifiers are working on data that resembles real usage data, while ensuring privacy.
 
 Based on initial performance, we revised the classifiers that needed tweaking or discarded classifiers that did not perform well. Interestingly, we find that in some instances (e.g., to measure task success), a simple classifier performed better than a nuanced, complex classifier when compared to human ratings. We then compared performance of classifier versions with vs. without chain of thought prompting, and decided to keep chain of thought prompting only for three facets (human time estimate, human with AI time estimate, and AI autonomy) where we found that it substantially improved performance. We selected a final set of nine new classifiers for the five primitives, all of which are directionally accurate even if they may deviate somewhat from human ratings.
 
@@ -222,7 +222,7 @@ Even so, the primitives enrich our understanding of how people use AI. Systemati
 
 External benchmarks reinforce this. In our [productivity work](https://www.anthropic.com/research/estimating-productivity-gains), Claude’s time estimates correlate with actual time spent on software engineering tasks. Figure 2.1 shows that our human education measure correlates with actual worker education levels across occupations. These validations suggest individual primitives are directionally correct—and combining them may provide additional analytical value, such as enriching productivity estimates with task success rates or constructing new measures of occupational exposure.
 
-![Figure 2.1: Education years needed to understand the human prompt and share of workers with at least a Bachelor’s Degree.](https://www-cdn.anthropic.com/images/4zrzovbb/website/d0734c80fab2e2308e01b647de6979c77f5c8c2e-713x569.svg)
+![Figure 2.1: Education years needed to understand the human prompt and share of workers with at least a Bachelor’s Degree.](https://assets.claude.com/718791c18a9c2458449afc80aa49f25468169512.svg)
 
 **Education years needed to understand the human prompt and share of workers with at least a Bachelor’s Degree.**Education data from “Educational attainment for workers 25 years and older by detailed occupation” (BLS), based on microdata from the 2022 and 2023 American Community Survey2. We calculate average years of schooling for tasks associated with a particular occupation. We then calculate the percentage of workers with a bachelor's degree or higher in that occupation.
 
@@ -232,7 +232,7 @@ Ultimately, the strongest validation will come from the primitives’ ability to
 
 To illustrate how the primitives distinguish between different types of AI use, we examine two contrasting request clusters: software development ("Help debug, develop, and optimize software across multiple programming domains") and personal life management ("Assist with personal life management and everyday tasks"). Figure 2.2 shows the primitive profile for each cluster alongside global averages.
 
-![Figure 2.2: Descriptive statistics of economic primitives overall and for two example request clusters.](https://www-cdn.anthropic.com/images/4zrzovbb/website/2751a76b95fce503a5ff6338abbc4d2edd9b6374-1140x480.svg)
+![Figure 2.2: Descriptive statistics of economic primitives overall and for two example request clusters.](https://assets.claude.com/c059497d8d9117ed65ad83f37111c32347069296.svg)
 
 **Descriptive statistics of economic primitives overall and for two example request clusters.**For this figure, we focus on descriptive statistics for the primitives across the whole Claude.ai sample as well as two request clusters at the lowest level of granularity. N indicates the overall count of conversations or the count of conversations belonging to the request clusters.
 
@@ -280,13 +280,13 @@ In this chapter, we analyze geographic variation in Claude usage patterns using 
 
 Our data, relying on a [privacy-preserving](https://www.anthropic.com/research/clio)1 analysis of 1 million Claude.ai conversations2, reveals striking geographic differences in how Claude is adopted. Claude is predominantly used for work, across the globe and across the United States. However, there is geographic variation in use cases. At the global level, the Balkans and Brazil have the highest relative share of work use (see Figure 3.1), and Indonesia stands out with the highest share of coursework. At the US state level, New York stands out as the state using Claude relatively the most for work.
 
-![Figure 3.1: Share of work use of Claude.ai globally.](https://www-cdn.anthropic.com/images/4zrzovbb/website/9a8dd21e96b56cd818e7574a3335f8bcdc20d03c-3931x1980.png)
+![Figure 3.1: Share of work use of Claude.ai globally.](https://assets.claude.com/540e23e28fcef645e29223721423a8fa34638aab.png?w=3840&q=75&fm=webp&fit=max)
 
 **Share of work use of Claude.ai globally.**The share of conversations for a given country that are classified as work, as opposed to personal or coursework. The different tiers reflect a country’s position within the global distribution of the Anthropic AI Usage Index as defined in chapter 1345. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. The underlying data includes Claude.ai Free, Pro and Max usage.
 
 Use case differences are related to a country’s per capita income, which, in turn, is related to per capita AI adoption. We observe that work use cases and personal use cases of Claude are more common in higher income countries, while coursework use cases are more common in lower income countries (see Figure 3.2). Interestingly, these findings converge with [recent work by Microsoft](http://microsoft.com/en-us/research/wp-content/uploads/2025/12/New-Future-Of-Work-Report-2025.pdf) showing that AI use for school is associated with lower per capita income, whereas AI use for leisure is associated with higher per capita income.
 
-![Figure 3.2: Per capita income predicts how Claude is used across countries.](https://www-cdn.anthropic.com/images/4zrzovbb/website/6d102cf4365e7743de4413f22dda33035de71038-1072x356.svg)
+![Figure 3.2: Per capita income predicts how Claude is used across countries.](https://assets.claude.com/f54a32899516e3c2dbe1b7666340075cd96784a0.svg)
 
 **Per capita income predicts how Claude is used across countries.**Each plot shows the bivariate relationship between the share of a specific use case (work, coursework, or personal) for Claude.ai conversations and log GDP per capita. Labels show the ISO-3166-1 country codes. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. The underlying data includes Claude.ai Free, Pro and Max usage.
 
@@ -300,11 +300,11 @@ Multiple factors could contribute to these patterns:
 
 The economic primitives introduced in this report allow us to analyze some of the factors that may drive differential adoption. When analyzing the relationship between the Anthropic AI Usage Index (AUI) and core economic primitives as well as GDP, we observe that certain patterns hold for both countries and US states. For example, we replicate the finding from our prior report that GDP is strongly correlated with the AUI (see Figures 3.3 and 3.4). At the country level, a 1% increase in GDP per capita is associated with a 0.7% increase in Claude usage per capita. Human education (how many years of education it takes to understand the human written prompts in a conversation) correlates positively and significantly with the Anthropic AI Usage Index both at the country and at the US state level.
 
-![Figure 3.3: Relationship between the Anthropic AI Usage Index and five core economic primitives and GDP per capita at the country level.](https://www-cdn.anthropic.com/images/4zrzovbb/website/7e10b24b1e0624a933d6d9ad7484924e22fbd0ff-1072x639.svg)
+![Figure 3.3: Relationship between the Anthropic AI Usage Index and five core economic primitives and GDP per capita at the country level.](https://assets.claude.com/2721db218a232d0d41900bb2a586dc2064a03929.svg)
 
 **Relationship between the Anthropic AI Usage Index and five core economic primitives and GDP per capita at the country level.**Each plot shows the bivariate relationship between the natural logarithm of the Anthropic AI Usage Index and a core economic primitive as well as log GDP per capita. Labels show the ISO-3166-1 country codes. We only include countries with at least 200 observations in our sample for this figure because of the uncertainty of the measure for low-usage countries in our random sample. The underlying data includes Claude.ai Free, Pro and Max usage. See chapter 2 for detailed definitions of human only time, human education, AI autonomy, work use case and task success.
 
-![Figure 3.4: Relationship between the Anthropic AI Usage Index and five core economic primitives and GDP per capita at the US state level.](https://www-cdn.anthropic.com/images/4zrzovbb/website/91f7b300177dc293d58d23a48fb82c4e0571faaf-1072x639.svg)
+![Figure 3.4: Relationship between the Anthropic AI Usage Index and five core economic primitives and GDP per capita at the US state level.](https://assets.claude.com/5fded4f5a8f0c44fb8fa23091210fa8df73d2d52.svg)
 
 **Relationship between the Anthropic AI Usage Index and five core economic primitives and GDP per capita at the US state level.**Each plot shows the bivariate relationship between the natural logarithm of the Anthropic AI Usage Index and a core economic primitive as well as log GDP per capita. Labels show the ISO-3166-2 region codes6. We only include states with at least 100 observations in our sample for this figure because of the uncertainty of the measure for low-usage states in our random sample. The underlying data includes Claude.ai Free, Pro and Max usage. See chapter 2 for detailed definitions of human only time, human education, AI autonomy, work use case and task success.
 
@@ -316,7 +316,7 @@ Importantly, the primitives themselves are not necessarily causal factors—we d
 
 Economic and institutional context—such as how education levels vary within a geography—are related to how AI is being used. Interestingly, we observe that task success is negatively associated with human education at the country level, but positively related at the US state level. However, the positive relationship at the state level becomes insignificant when controlling for other primitives (see Figure 3.5). This means the relationship pattern at one level of observation (country) contradicts the relationship pattern at another level (US state). Cross-country, educated populations may attempt harder tasks and therefore see lower success rates. Within homogeneous contexts, education may not improve task success.
 
-![Figure 3.5: Relationship between task success and human education.](https://www-cdn.anthropic.com/images/4zrzovbb/website/5da220beff93001f3f5a95cde9d631d0946614cd-856x709.svg)
+![Figure 3.5: Relationship between task success and human education.](https://assets.claude.com/ffb863755086f5d9bbf11805842769e60f387699.svg)
 
 **Relationship between task success and human education.**Plots on the left show the bivariate correlation between task success and years of education needed to understand the human prompts in the conversation. Plots on the right show partial regression where we additionally control for GDP per capita, AI autonomy, automation percent, share of work and coursework use cases, human without AI time, human with AI time, multitasking and human ability (see chapter 2 for detailed definitions of these variables). Labels show ISO-3166-1 country codes and ISO-3166-2 region codes. We only include countries with at least 200 and states with at least 100 observations in our sample for this figure because of the uncertainty of the measure for low-usage states in our random sample. The underlying data includes Claude.ai Free, Pro and Max usage.
 
@@ -368,7 +368,7 @@ The left panel of Figure 4.1 below gives the average speedup against our core me
 
 Throughout the range of task complexity, the speedup is higher for API users. This could reflect the nature of the API data, which is restricted to single-turn interactions, and that API tasks have been specifically selected for automation.
 
-![Figure 4.1: Speed up (panel a) and Success rate (panel b) vs. Human years of schooling.](https://www-cdn.anthropic.com/images/4zrzovbb/website/748b522964169a031f15579194d8c8976ba80a79-1920x792.svg)
+![Figure 4.1: Speed up (panel a) and Success rate (panel b) vs. Human years of schooling.](https://assets.claude.com/e9856b9f88ce9825fc1cf8a848c2ba1fc024b378.svg)
 
 **Speed up (panel a) and Success rate (panel b) vs. Human years of schooling.**The panel on the left shows a binned scatterplot of the bivariate relationship between speedup and human years of schooling, all measured at the O\*NET task level and split by platform. The dashed lines show the fit from a linear regression. The panel on the right shows the same relationship with the success rate in the y-axis.
 
@@ -378,7 +378,7 @@ One way to examine the implications of the education gradient is to look at the 
 
 In what contexts do users defer more to Claude? Claude.ai users give the AI slightly more autonomy when working on more complex tasks. In contrast, API usage shows uniformly lower autonomy at all levels of complexity.
 
-![Figure 4.2: AI autonomy vs. human education.](https://www-cdn.anthropic.com/images/4zrzovbb/website/49fd2c300230c54349c92dee9653e46da898fdc9-1920x1400.svg)
+![Figure 4.2: AI autonomy vs. human education.](https://assets.claude.com/215998352d1d5c484fcc4b9e8cf9bd1d6afac12e.svg)
 
 **AI autonomy vs. human education.**The plot shows a binned scatterplot of the bivariate relationship between AI autonomy and human education required, all measured at the O\*NET task level. The dashed lines show the fit from a linear regression.
 
@@ -386,7 +386,7 @@ Note though that these distributions do not span the same set of tasks. API usag
 
 ### Task Horizons in Real-World Usage
 
-![Figure 4.3: Task success vs. human-only time.](https://www-cdn.anthropic.com/images/4zrzovbb/website/e86ca40632399589ebdd5520e8702761dcfeb792-1920x1400.svg)
+![Figure 4.3: Task success vs. human-only time.](https://assets.claude.com/e10869e73e0dc917a4b14cbacecefff3043229dc.svg)
 
 **Task success vs. human-only time.**The plot shows a binned scatterplot of the bivariate relationship between task success (%) and the time the task would require a human to complete alone, all measured at the O\*NET task level and split by platform. The dashed lines show the fit from a linear regression.
 
@@ -412,7 +412,7 @@ We define effective AI coverage as the percent of a worker’s day that can be p
 
 The plot below shows how the effective AI coverage (y-axis) differs from task coverage alone (x-axis). The two are highly correlated, but with key differences. On the right side of the plot, occupations with high coverage—where almost all tasks appear with some frequency in Claude data—generally fall below the 45-degree line. This suggests that even 90% task coverage does not necessarily indicate large job impacts, since Claude may fail on key covered tasks or miss the most time-intensive ones.
 
-![Figure 4.4: Effective AI coverage vs. Task coverage](https://www-cdn.anthropic.com/images/4zrzovbb/website/1fc34cf7333c83157f586f908b8f7ec2dc92afe2-857x712.svg)
+![Figure 4.4: Effective AI coverage vs. Task coverage](https://assets.claude.com/77ae35aac953c3dfcccbfc546c30cd5d3c64ed17.svg)
 
 **Effective AI coverage vs. Task coverage**The plot shows a scatter of the bivariate relationship between task effective AI coverage (%) and task coverage, measured at the occupation level. Effective AI coverage tracks the share of a worker’s time-weighted duties that AI could successfully perform, based on Claude.ai data. Task coverage is the share of tasks that appear in Claude.ai usage. The dashed line shows where Effective AI coverage share equals task coverage.
 
@@ -432,7 +432,7 @@ To see how jobs change when we remove the tasks AI can perform, we first constru
 
 The data shows that Claude tends to cover tasks that require higher levels of education. The mean predicted education for tasks in the economy is 13.2 years. For tasks that we see in our data, the mean prediction is about a year higher, 14.4 years (corresponding to an Associate’s degree). This aligns with the occupation-level results from earlier reports, showing more Claude usage among white collar occupations.
 
-![Figure 4.5: Education level of all tasks vs. Claude-covered tasks](https://www-cdn.anthropic.com/images/4zrzovbb/website/ee80542ac5b4dc9fd097a391284e628ab5f5d239-713x425.svg)
+![Figure 4.5: Education level of all tasks vs. Claude-covered tasks](https://assets.claude.com/b1e256c21319dba3c5d8126178aef5562efbe3e6.svg)
 
 **Education level of all tasks vs. Claude-covered tasks**This shows two histograms. The blue bars give the distribution of the predicted task-level education required for all tasks in the O\*NET database, weighted by employment. The orange bars show the same, restricting to tasks that appear in Claude.ai data.
 
@@ -462,7 +462,7 @@ The key parameter is the elasticity of substitution across tasks, σ. When the e
 
 Figure 4.6 reports the results of this exercise for different values of task substitutability. As expected, when the elasticity of substitution is equal to one the implied productivity effect is the same as in our baseline analysis: An increase in labor productivity growth of ~1.8 percentage points per year over the next decade implied by both Claude.ai and API samples.
 
-![Figure 4.6 Implied labor productivity effect from AI as a function of within-occupation task substitutability](https://www-cdn.anthropic.com/images/4zrzovbb/website/6e43bc093ca1baa35fc51f1bb8891419085db0da-713x423.svg)
+![Figure 4.6 Implied labor productivity effect from AI as a function of within-occupation task substitutability](https://assets.claude.com/0776f401254aa77bf49397a45c3d3e1920ace933.svg)
 
 **Implied labor productivity effect from AI as a function of within-occupation task substitutability**This figure shows the implied aggregate labor productivity growth over the next decade based on efficiency gains estimated for tasks with at least 200 observations in our sample of 1M conversations on Claude.ai and 1M records from 1P API traffic. The elasticity of substitution governs how the degree to which non-AI enhanced tasks constrain the occupational productivity gains implied by Claude usage under a model in which occupational output is a CES index across tasks. An elasticity of =1 reproduces our unadjusted, baseline result of 1.8 percentage point increase in labor productivity growth over the next decade. Success-adjusted curves discount task-level speedups by task reliability. See text for more details.
 

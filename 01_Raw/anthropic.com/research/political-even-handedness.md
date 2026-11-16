@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/political-even-handedness
-fetched_at: 2026-11-09T07:30:24.221633+00:00
+fetched_at: 2026-11-16T07:30:52.268132+00:00
 title: "Measuring political bias in Claude \\ Anthropic"
 ---
 
@@ -69,7 +69,7 @@ We’ve now created an automated version of this evaluation, allowing us to test
 
 The Paired Prompts method works by prompting a given AI model with requests for responses on the same politically-contentious topic, but from two opposing ideological perspectives. For example:
 
-![An example of the Paired Prompt method, around Democrat and Republican healthcare policies.](https://www-cdn.anthropic.com/images/4zrzovbb/website/ab81395acb311c7ef38cf7f43653e1e792a286b4-1100x619.png)
+![An example of the Paired Prompt method, around Democrat and Republican healthcare policies.](https://assets.claude.com/bd181bd755d2ad45586db1a89bcb661d4398d87b.png?w=3840&q=75&fm=webp&fit=max)
 
 A paired prompt in the evaluation that reflects opposing views.
 
@@ -98,7 +98,7 @@ Claude Opus 4.1 and Claude Sonnet 4.5 had scores of 95% and 94%, respectively, o
 
 Results are illustrated in the figure below.
 
-![Chart showing political even-handedness for Claude Opus 4.1 and Sonnet 4.5 compared to other models.](https://www-cdn.anthropic.com/images/4zrzovbb/website/09540fde286b6744a3baf3ef5ac8c5ff7768b07b-1100x619.png)
+![Chart showing political even-handedness for Claude Opus 4.1 and Sonnet 4.5 compared to other models.](https://assets.claude.com/6437953ed43592a901be66998e6987ace3876436.png?w=3840&q=75&fm=webp&fit=max)
 
 Even-handedness results in Claude and other models.
 
@@ -108,13 +108,13 @@ Although even-handedness is the primary metric in this evaluation, we also measu
 
 A higher percentage of responses including opposing perspectives indicates that a model more frequently considers counterarguments. Results showed that Opus 4.1 (46%), Claude Sonnet 4.5 (35%), Grok 4 (34%), and Llama 4 (31%) were the most frequent to acknowledge opposing viewpoints.
 
-![Graph showing Claude Opus 4.1 and Sonnet 4.5 score more highly than other models on our opposing perspectives measure.](https://www-cdn.anthropic.com/images/4zrzovbb/website/1f9746883370643b0316599bd9e358414b957045-4584x2580.png)
+![Graph showing Claude Opus 4.1 and Sonnet 4.5 score more highly than other models on our opposing perspectives measure.](https://assets.claude.com/1f9746883370643b0316599bd9e358414b957045.png?w=3840&q=75&fm=webp&fit=max)
 
 Opposing perspective results in Claude and other models.
 
 Conversely, a lower refusal rate in these contexts indicates a greater willingness to engage. Claude models show consistently low refusal rates, with Opus 4.1 slightly higher than Sonnet 4.5 (5% versus 3%). Grok 4 showed near-zero refusals, whereas Llama 4 had the highest refusal rate among all models tested (9%).
 
-![Graph showing that Opus 4.1 and Sonnet 4.5. refuse requests at comparable rates to other models.](https://www-cdn.anthropic.com/images/4zrzovbb/website/baf34dafb60f6e942c5b3db9ed4eb2cccd52a5b7-1100x619.png)
+![Graph showing that Opus 4.1 and Sonnet 4.5. refuse requests at comparable rates to other models.](https://assets.claude.com/baf34dafb60f6e942c5b3db9ed4eb2cccd52a5b7.png?w=3840&q=75&fm=webp&fit=max)
 
 Refusal results in Claude and other models.
 

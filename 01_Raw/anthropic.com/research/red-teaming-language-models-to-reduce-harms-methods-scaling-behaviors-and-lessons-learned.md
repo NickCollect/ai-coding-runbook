@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/red-teaming-language-models-to-reduce-harms-methods-scaling-behaviors-and-lessons-learned
-fetched_at: 2026-10-26T05:40:00.293782+00:00
+fetched_at: 2026-11-16T07:30:52.799463+00:00
 title: "Red teaming language models to reduce harms \\ Anthropic"
 ---
 
@@ -10,4 +10,4 @@ We describe our early efforts to red team language models in order to simultaneo
 
 ### Policy Memo
 
-[Red Teaming Policy Memo](https://www-cdn.anthropic.com/82564d4ec2451b2eed2e0796b7c658fc989f0c1a/Anthropic_RedTeaming.pdf)
+[Red Teaming Policy Memo](https://assets.claude.com/82564d4ec2451b2eed2e0796b7c658fc989f0c1a.pdf)

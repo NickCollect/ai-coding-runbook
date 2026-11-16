@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/impact-software-development
-fetched_at: 2026-11-09T07:30:22.932267+00:00
+fetched_at: 2026-11-16T07:30:51.168633+00:00
 title: "Economic Index: AI's impact on software development \\ Anthropic"
 ---
 
@@ -28,7 +28,7 @@ In our previous Economic Index reports, we separated out “automation,” where
 
 We also split automation and augmentation into several subtypes (as discussed in our [previous work](https://www.anthropic.com/news/the-anthropic-economic-index)). “Feedback Loop” patterns, where Claude completes tasks autonomously but with help of human validation (for example, where the user sends any errors back to Claude), were nearly twice as common on Claude Code (35.8% of interactions) as Claude.ai (21.3%). “Directive” conversations, where Claude completed a task with minimal user interaction, were also higher on Claude Code (43.8%, versus 27.5% on Claude.ai). All the patterns of augmentation—including “Learning,” where the user acquires knowledge from the AI model—were substantially lower on Claude Code than on Claude.ai.
 
-![Stacked bar chart showing the percentage of automation and augmentation on Claude.ai and Claude Code.](https://www-cdn.anthropic.com/images/4zrzovbb/website/0bd4b66d347cd7c956f54fafa9793368e63b2ed0-4000x2250.jpg)
+![Stacked bar chart showing the percentage of automation and augmentation on Claude.ai and Claude Code.](https://assets.claude.com/67c04586a004d137b1a5043c085075a6593e0913.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Subtypes are defined as follows. Directive: Complete task delegation with minimal interaction; Feedback Loop: Task completion guided by environmental feedback; Task Iteration: Collaborative refinement process; Learning: Knowledge acquisition and understanding; Validation: Work verification and improvement.
 
@@ -40,13 +40,13 @@ This raises questions about the extent to which developers will still be involve
 
 Overall, we found that developers commonly use Claude for building user interfaces and interactive elements for websites and mobile applications. Although no single language dominated, the primarily web-focused development languages of JavaScript and TypeScript together accounted for 31% of all queries, and HTML[2](#footnote-2) and CSS (other languages for user-facing code) together added another 28%.
 
-![Line graph showing top coding use cases used in Claude.](https://www-cdn.anthropic.com/images/4zrzovbb/website/26b926ce7a1cff3c6d3f9fe63e6cf2417b945ce8-4001x2251.jpg)
+![Line graph showing top coding use cases used in Claude.](https://assets.claude.com/ac20bf9fe1fb6640ded6a5b090f3c4e834dd79b5.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Percentages represent total percentages of coding-related tasks across both platforms. Because Claude Code and Claude.ai are equally weighted, the portions of the bars that correspond to each of the platforms represent half of that platform's usage.
 
 Back-end development languages (used for behind-the-scenes logic, databases, and infrastructure, as well as API and AI development) were also represented: notably, Python was at 14% of queries. However, Python serves dual purposes—both for back-end development and data analysis. Combined with SQL (another data-focused language, making up 6% of queries), these languages likely included many data science and analytics applications beyond traditional back-end development.
 
-![Line graph showing top programming languages used in Claude.](https://www-cdn.anthropic.com/images/4zrzovbb/website/79fcc40e7d9909258d202b382b7ab357e0893eb0-4001x2251.jpg)
+![Line graph showing top programming languages used in Claude.](https://assets.claude.com/8388b548f7e75c87e34e2d45dd4534a97354fa7c.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Percentages of coding language uses represent total percentages across both platforms. Because Claude Code and Claude.ai are equally weighted, the portions of the bars that correspond to each of the platforms represent half of that platform's usage.
 
@@ -60,7 +60,7 @@ Speculatively, these findings suggest that jobs that center on making simple app
 
 We also analyzed which groups of developers might be using Claude. We used our analysis system to identify the type of project (e.g. a personal project vs. a project done for a startup) that best described users’ coding-related interactions. Because we don’t know the real-world context in which Claude’s responses were being used, these analyses rely on uncertain inferences from incomplete data. We therefore treat these findings as more preliminary than the ones described above.
 
-![Graph showing types of projects in Claude.ai and Claude Code, with a list of different projects and the percentage of times they appeared in our dataset.](https://www-cdn.anthropic.com/images/4zrzovbb/website/f6c0ff39789bdad7dcc1efe4a24e5b468931fec0-4000x2250.jpg)
+![Graph showing types of projects in Claude.ai and Claude Code, with a list of different projects and the percentage of times they appeared in our dataset.](https://assets.claude.com/b3cb800a9db1e0d646a6b988bbd158faf425e4a6.jpg?w=3840&q=75&fm=webp&fit=max)
 
 The distance between the dots indicates the gap in the prevalence of each type of project on Claude.ai (blue) and Claude Code (orange).
 
@@ -100,7 +100,7 @@ If you’re interested in working at Anthropic to research the effects of AI on 
 
 As a supplementary analysis, we also compared our results for software-related automation and augmentation patterns to patterns in interactions that did not involve software. We conducted this analysis exclusively in Claude.ai, because Claude Code specializes in software applications.
 
-![Table showing percentages of different patterns of AI use for software and non-software applications.](https://www-cdn.anthropic.com/images/4zrzovbb/website/3539fa9144a552602c77fb78b7f8ed025dfaa7cd-4001x2251.jpg)
+![Table showing percentages of different patterns of AI use for software and non-software applications.](https://assets.claude.com/9600efddc1e2419188e4b2f74787a3cd9c13b88b.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Breakdown of automation and augmentation by software versus non-software use cases in Claude.ai. For a description of each pattern, see the caption to the first figure above.
 

@@ -1,18 +1,18 @@
 ---
 source_url: https://www.anthropic.com/research/the-missing-map-of-the-sky
-fetched_at: 2026-10-26T05:40:01.582521+00:00
+fetched_at: 2026-11-16T07:30:53.919751+00:00
 title: "Using Claude Science to produce the first complete map of the sky in UV light \\ Anthropic"
 ---
 
 *Here, Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light. The map will be a valuable educational tool, allowing students to see in detail the rich structure of the Milky Way visible at this wavelength.*
 
-![A semi-interactive view of our night sky through different imaging modes: UV, natural light, and infrared](https://www-cdn.anthropic.com/images/4zrzovbb/website/895ee62706be70c96f9f078f451ebd238bdffad1-2400x1200.webp?fm=webp)
+![A semi-interactive view of our night sky through different imaging modes: UV, natural light, and infrared](https://assets.claude.com/085bcaec33b6ba0664592bc0920fbc1b704d6161.png?w=3840&q=75&fm=webp&fit=max)
 
 The entire sky, with the galactic center in the middle, in the ultraviolet (combining far-UV 154 nm and near-UV 232 nm). About a third of this map, including much of the galactic plane, was predicted with Claude Science using the method outlined in this post. Additional layers of the map label each pixel as “measured” or “predicted” and provide uncertainty estimates; [you can see it here](https://menard.pha.jhu.edu/uvmap/).
 
 When I teach astrophysics, I often begin by showing my students that the sky looks completely different depending on the wavelength you observe it in. Each brings out different features. In visible light, one mainly sees stars. Switching to infrared reveals the glow of tiny grains of dust concentrated in a band along the Milky Way. In radio waves, the stars and dust fade and hydrogen gas—the raw material from which new stars form—becomes visible. And in X-rays, one can see violent phenomena, like stars exploding, or matter spiraling into a black hole. Together, these features let astronomers understand how gas collapses into stars, how stars seed the galaxy with dust, and how galaxies like ours take shape.
 
-![Three views of the sky: in visible light, infrared and radio.](https://www-cdn.anthropic.com/images/4zrzovbb/website/0b3e7031e03249c95a280e6a8fccae1946b0911e-2048x693.jpg)
+![Three views of the sky: in visible light, infrared and radio.](https://assets.claude.com/9bc23fb41757b514dcb735276338f0b9a2a541bf.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Three views of the sky: in visible light, infrared and radio. Credit: ESA Gaia DR3, NASA WISE, HI4PI.
 
@@ -28,7 +28,7 @@ Statistical techniques exist to estimate the missing data and create a complete 
 
 ### Building the missing map
 
-![Four images showing the UV map being filled in. The first image has gaps, and they are progressively filled in.](https://www-cdn.anthropic.com/images/4zrzovbb/website/ffffecf57d3c55d3d4890d503366964cfcb7b524-2000x1202.png)
+![Four images showing the UV map being filled in. The first image has gaps, and they are progressively filled in.](https://assets.claude.com/ffffecf57d3c55d3d4890d503366964cfcb7b524.png?w=3840&q=75&fm=webp&fit=max)
 
 This summer, I set out to make a complete UV map of the sky with [Claude Science](https://www.anthropic.com/news/claude-science-ai-workbench). The instructions were simple to state, but not to carry out: gather every available UV dataset, put them all on a common scale, merge them into a single map, and fill in every patch of sky that no UV telescope has ever observed.
 
@@ -46,7 +46,7 @@ To check how accurate the model’s predictions were, I asked Claude to take reg
 
 Finally, on top of this diffuse inpainted background, Claude added estimates of UV light from more than 100 million individual stars inferred from measurements by the European Space Agency’s Gaia satellite in visible light. The first version of the full UV map of the sky was complete.
 
-![A DAG diagram showing how data flowed through Claude Code](https://www-cdn.anthropic.com/images/4zrzovbb/website/d9ab4af7ef75427cb33f028158aa09e8a880ad4a-2376x1003.png)
+![A DAG diagram showing how data flowed through Claude Code](https://assets.claude.com/95faa19db730391c21f0f07283f38f9e7390c770.png?w=3840&q=75&fm=webp&fit=max)
 
 How data flowed through the Claude Science pipeline to create the final map. Cylinders are public dataset inputs; blue boxes are deterministic steps Claude performed; purple boxes are components Claude learned statistically; green boxes are the fusion and the finished products.
 
@@ -58,7 +58,7 @@ These were the footprints of individual GALEX observations. Each GALEX image cap
 
 I told Claude, “I can see discs with the imprint of individual observations; can you correct that?” The agents traced the problem back to the leftover atmospheric glow. Claude then corrected for that glow in all 38,000 observations. After a couple of hours of processing, the circles were gone.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c03341ca843bc4a5cf1721da7a2ae520a7bf1996-2814x1188.jpg)
+![](https://assets.claude.com/2e41059ecbfb6ea946c7e99baf2e7e3d46118324.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Bright stars contaminate nearby UV observations even when not observed directly. Each row shows observations with regions GALEX avoided. Left: individual pointings visible as faint discs. Middle: after removing one background level per pointing, some disks are still visible. Right: the finished map, after an additional calibration process done by Claude with the holes filled by the prediction and Gaia stars. Credit: NASA GALEX GR6/7 (MAST/STScl) - UV-BKGD (Murthy 2014) • Swift-UVOT (NASA HEASARC) • FIMS/SPEAR (KASI/MAST) • TD-1 • ESA Gaia DR3 (DPAC) • Planck & Ha templates for gap-filling.
 

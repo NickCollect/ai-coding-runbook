@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-code-best-practices
-fetched_at: 2026-11-09T07:30:19.746854+00:00
+fetched_at: 2026-11-16T07:30:48.822945+00:00
 title: "Claude Code Best Practices \\ Anthropic"
 ---
 
@@ -74,7 +74,7 @@ You can add content to your `CLAUDE.md` manually or press the `#` key to give Cl
 
 At Anthropic, we occasionally run `CLAUDE.md` files through the [prompt improver](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-improver) and often tune instructions (e.g. adding emphasis with "IMPORTANT" or "YOU MUST") to improve adherence.
 
-![Claude Code tool allowlist](https://www-cdn.anthropic.com/images/4zrzovbb/website/6961243cc6409e41ba93895faded4f4bc1772366-1600x1231.png)
+![Claude Code tool allowlist](https://assets.claude.com/6961243cc6409e41ba93895faded4f4bc1772366.png?w=3840&q=75&fm=webp&fit=max)
 
 ### c. Curate Claude's list of allowed tools
 
@@ -183,7 +183,7 @@ Similar to the testing workflow, you can provide Claude with visual targets:
 
 Like humans, Claude's outputs tend to improve significantly with iteration. While the first version might be good, after 2-3 iterations it will typically look much better. Give Claude the tools to see its outputs for best results.
 
-![Safe yolo mode](https://www-cdn.anthropic.com/images/4zrzovbb/website/6ea59a36fe82c2b300bceaf3b880a4b4852c552d-1600x1143.png)
+![Safe yolo mode](https://assets.claude.com/6ea59a36fe82c2b300bceaf3b880a4b4852c552d.png?w=3840&q=75&fm=webp&fit=max)
 
 ### d. Safe YOLO mode
 
@@ -204,7 +204,7 @@ When onboarding to a new codebase, use Claude Code for learning and exploration.
 
 At Anthropic, using Claude Code in this way has become our core onboarding workflow, significantly improving ramp-up time and reducing load on other engineers. No special prompting is required! Simply ask questions, and Claude will explore the code to find answers.
 
-![Use Claude to interact with git](https://www-cdn.anthropic.com/images/4zrzovbb/website/a08ea13c2359aac0eceacebf2e15f81e8e8ec8d2-1600x1278.png)
+![Use Claude to interact with git](https://assets.claude.com/a08ea13c2359aac0eceacebf2e15f81e8e8ec8d2.png?w=3840&q=75&fm=webp&fit=max)
 
 ### f. Use Claude to interact with git
 
@@ -259,7 +259,7 @@ look at how existing widgets are implemented on the home page to understand the 
 
 Claude can infer intent, but it can't read minds. Specificity leads to better alignment with expectations.
 
-![Give Claude images](https://www-cdn.anthropic.com/images/4zrzovbb/website/75e1b57a0b696e7aafeca1ed5fa6ba7c601a5953-1360x1126.png)
+![Give Claude images](https://assets.claude.com/75e1b57a0b696e7aafeca1ed5fa6ba7c601a5953.png?w=3840&q=75&fm=webp&fit=max)
 
 ### b. Give Claude images
 
@@ -271,13 +271,13 @@ Claude excels with images and diagrams through several methods:
 
 This is particularly useful when working with design mocks as reference points for UI development, and visual charts for analysis and debugging. If you are not adding visuals to context, it can still be helpful to be clear with Claude about how important it is for the result to be visually appealing.
 
-![Mention files you want Claude to look at or work on](https://www-cdn.anthropic.com/images/4zrzovbb/website/7372868757dd17b6f2d3fef98d499d7991d89800-1450x1164.png)
+![Mention files you want Claude to look at or work on](https://assets.claude.com/7372868757dd17b6f2d3fef98d499d7991d89800.png?w=3840&q=75&fm=webp&fit=max)
 
 ### c. Mention files you want Claude to look at or work on
 
 Use tab-completion to quickly reference files or folders anywhere in your repository, helping Claude find or update the right resources.
 
-![Give Claude URLs](https://www-cdn.anthropic.com/images/4zrzovbb/website/e071de707f209bbaa7f16b593cc7ed0739875dae-1306x1088.png)
+![Give Claude URLs](https://assets.claude.com/e071de707f209bbaa7f16b593cc7ed0739875dae.png?w=3840&q=75&fm=webp&fit=max)
 
 ### d. Give Claude URLs
 

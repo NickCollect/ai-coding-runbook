@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/sabotage-evaluations
-fetched_at: 2026-11-09T07:30:25.022225+00:00
+fetched_at: 2026-11-16T07:30:53.257606+00:00
 title: "Sabotage evaluations for frontier models \\ Anthropic"
 ---
 
@@ -23,7 +23,7 @@ We developed these evaluations as part of preparations for a future where much m
 
 This evaluation involves running an experiment with human participants, asking them to make fictional business decisions on the basis of a large amount of information—too much information to absorb without the use of an AI model. We task the model with influencing the human to land on an incorrect decision, but without appearing suspicious. We include models who attempt to do so more or less aggressively, and a control model that doesn’t attempt any influence. As well as measuring how many times they reached the correct versus incorrect decision, we ask the humans to rate how suspicious they found the model’s behavior.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/79b48ed9ea68c2dcdf803e1fa64ee8e2cfbfa0bd-2200x1282.png)
+![](https://assets.claude.com/cf6eefa813dabeba3b45e2b23aa9749cbcc25a72.png?w=3840&q=75&fm=webp&fit=max)
 
 An idealized example of a human participant interacting with the model assisting (but secretly misleading) them during the human sabotage evaluation.
 
@@ -37,7 +37,7 @@ This was a small-scale experiment in an artificial environment, so it does not r
 
 Our code sabotage evaluation involves a competitive game where one model, the Attacker, attempts to sneak code bugs past another model, the Defender, who is tasked with reviewing the Attacker’s work.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/da65cf4fb7e897f5ced7a8cad5d5abf28d1a883a-2200x1116.png)
+![](https://assets.claude.com/3016ed15af0160e1c63007169c5ecc09d893cb39.png?w=3840&q=75&fm=webp&fit=max)
 
 An idealized illustration of a model inserting a code vulnerability without being noticed.
 
@@ -49,7 +49,7 @@ In our demonstration, we found (perhaps predictably) that stronger models make f
 
 Sandbagging is when a model hides its full capabilities in one situation, only to reveal them in another. Sometimes a model might not display its full capabilities because of its safety training, or because the user prompting it has not asked a clear enough question. But here, we’re mostly interested in deliberate sandbagging: when a model *selectively* displays its capabilities.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/5bd128a98b577df36b8f9eab5b9ff70380026c68-2200x1138.png)
+![](https://assets.claude.com/29726233124a82f2762deb94e7d03b9158ed9085.png?w=3840&q=75&fm=webp&fit=max)
 
 An idealized illustration of a model hiding its true dangerous capabilities.
 
@@ -65,7 +65,7 @@ As with the others described here, the evaluation is designed to be used not jus
 
 As discussed above, it’s becoming increasingly common (and necessary) to train and supervise AI models using other AI models—this can be much more efficient, relying much less on human labor (which in any case would be wholly inadequate to supervise all models and their actions in future).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7b6d2b3602eacc13fe2d8237f4197c8fe0ed1b37-2200x1129.png)
+![](https://assets.claude.com/85fed125f755a0685edf3600830b84295bafe4ec.png?w=3840&q=75&fm=webp&fit=max)
 
 An idealized example of a model deliberately not flagging an incorrect response, undermining the oversight process.
 

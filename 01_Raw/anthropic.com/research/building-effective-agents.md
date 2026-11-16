@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/building-effective-agents
-fetched_at: 2026-11-09T07:30:19.206145+00:00
+fetched_at: 2026-11-16T07:30:48.363252+00:00
 title: "Building effective AI agents \\ Anthropic"
 ---
 
@@ -50,7 +50,7 @@ In this section, we’ll explore the common patterns for agentic systems we’ve
 
 The basic building block of agentic systems is an LLM enhanced with augmentations such as retrieval, tools, and memory. Our current models can actively use these capabilities—generating their own search queries, selecting appropriate tools, and determining what information to retain.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d3083d3f40bb2b6f477901cc9a240738d3dd1371-2401x1000.png)
+![](https://assets.claude.com/bba3d0e7336751fea8440726d52709047334962d.png?w=3840&q=75&fm=webp&fit=max)
 
 The augmented LLM
 
@@ -62,7 +62,7 @@ For the remainder of this post, we'll assume each LLM call has access to these a
 
 Prompt chaining decomposes a task into a sequence of steps, where each LLM call processes the output of the previous one. You can add programmatic checks (see "gate” in the diagram below) on any intermediate steps to ensure that the process is still on track.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7418719e3dab222dccb379b8879e1dc08ad34c78-2401x1000.png)
+![](https://assets.claude.com/430f593e41769039c477d3e4d6222dc9ad304816.png?w=3840&q=75&fm=webp&fit=max)
 
 The prompt chaining workflow
 
@@ -77,7 +77,7 @@ The prompt chaining workflow
 
 Routing classifies an input and directs it to a specialized followup task. This workflow allows for separation of concerns, and building more specialized prompts. Without this workflow, optimizing for one kind of input can hurt performance on other inputs.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/5c0c0e9fe4def0b584c04d37849941da55e5e71c-2401x1000.png)
+![](https://assets.claude.com/65050af354d6cb7a930735dc3c6f6e693b9385a4.png?w=3840&q=75&fm=webp&fit=max)
 
 The routing workflow
 
@@ -95,7 +95,7 @@ LLMs can sometimes work simultaneously on a task and have their outputs aggregat
 - **Sectioning**: Breaking a task into independent subtasks run in parallel.
 - **Voting:** Running the same task multiple times to get diverse outputs.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/406bb032ca007fd1624f261af717d70e6ca86286-2401x1000.png)
+![](https://assets.claude.com/1ac29508ce49cac6f58ec37dd360982dd618cbaa.png?w=3840&q=75&fm=webp&fit=max)
 
 The parallelization workflow
 
@@ -114,7 +114,7 @@ The parallelization workflow
 
 In the orchestrator-workers workflow, a central LLM dynamically breaks down tasks, delegates them to worker LLMs, and synthesizes their results.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8985fc683fae4780fb34eab1365ab78c7e51bc8e-2401x1000.png)
+![](https://assets.claude.com/c8fc5373e187c2e37ab755fac1cf82b3bf366718.png?w=3840&q=75&fm=webp&fit=max)
 
 The orchestrator-workers workflow
 
@@ -129,7 +129,7 @@ The orchestrator-workers workflow
 
 In the evaluator-optimizer workflow, one LLM call generates a response while another provides evaluation and feedback in a loop.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/14f51e6406ccb29e695da48b17017e899a6119c7-2401x1000.png)
+![](https://assets.claude.com/4b2dd710371f70a2380356de4ee3ebbf902f319c.png?w=3840&q=75&fm=webp&fit=max)
 
 The evaluator-optimizer workflow
 
@@ -146,7 +146,7 @@ Agents are emerging in production as LLMs mature in key capabilities—understan
 
 Agents can handle sophisticated tasks, but their implementation is often straightforward. They are typically just LLMs using tools based on environmental feedback in a loop. It is therefore crucial to design toolsets and their documentation clearly and thoughtfully. We expand on best practices for tool development in Appendix 2 ("Prompt Engineering your Tools").
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/58d9f10c985c4eb5d53798dea315f7bb5ab6249e-2401x1000.png)
+![](https://assets.claude.com/ecba32d35b19d94e892c3c89c3bf59b130e25eb0.png?w=3840&q=75&fm=webp&fit=max)
 
 Autonomous agent
 
@@ -161,7 +161,7 @@ The following examples are from our own implementations:
 - A coding Agent to resolve [SWE-bench tasks](https://www.anthropic.com/research/swe-bench-sonnet), which involve edits to many files based on a task description;
 - Our [“computer use” reference implementation](https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo), where Claude uses a computer to accomplish tasks.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4b9a1f4eb63d5962a6e1746ac26bbc857cf3474f-2400x1666.png)
+![](https://assets.claude.com/41f764808903bc7f18215b43f04e3ed4fc72e2ca.png?w=3840&q=75&fm=webp&fit=max)
 
 High-level flow of a coding agent
 

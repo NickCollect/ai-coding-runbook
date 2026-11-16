@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-education-report-how-university-students-use-claude
-fetched_at: 2026-11-09T07:30:18.518151+00:00
+fetched_at: 2026-11-16T07:30:47.802213+00:00
 title: "Anthropic Education Report: How University Students Use Claude \\ Anthropic"
 ---
 
@@ -28,7 +28,7 @@ We found that students primarily use Claude to create and improve educational co
 
 Below is a more detailed breakdown of common requests across subjects.
 
-![Common student requests from the top four subject areas, based on the 15 most frequent requests in Clio within each subject.](https://www-cdn.anthropic.com/images/4zrzovbb/website/7d9704a6edee6bb96a7f767621d83beadc039a0c-2400x1586.png)
+![Common student requests from the top four subject areas, based on the 15 most frequent requests in Clio within each subject.](https://assets.claude.com/7d9704a6edee6bb96a7f767621d83beadc039a0c.png?w=3840&q=75&fm=webp&fit=max)
 
 Common student requests from the top four subject areas, based on the 15 most frequent requests in Clio within each subject.
 
@@ -40,7 +40,7 @@ Conversely, Business-related educational conversations accounted for just 8.9% o
 
 These patterns suggest that STEM students, particularly those in Computer Science, may be earlier adopters of Claude for educational purposes, while students in Business, Health, and Humanities disciplines may be integrating these tools more slowly into their academic workflows. This may reflect higher awareness of Claude in Computer Science communities, as well as AI systems’ greater proficiency at tasks performed by STEM students relative to those performed by students in other disciplines.
 
-![Comparing the percentage of Claude.ai student conversations that are related to an National Center for Education Statistics (NCES) subject area (gray) to the percentage of U.S. college students with an associated major (orange). Note that percentages don’t sum to 100% as some conversations were classified under the “Other” category from the NCES which we exclude from our analysis.](https://www-cdn.anthropic.com/images/4zrzovbb/website/d22ea4cc33c603b51435e334c4311ffc5b1d7f5a-2400x1818.png)
+![Comparing the percentage of Claude.ai student conversations that are related to an National Center for Education Statistics (NCES) subject area (gray) to the percentage of U.S. college students with an associated major (orange). Note that percentages don’t sum to 100% as some conversations were classified under the “Other” category from the NCES which we exclude from our analysis.](https://assets.claude.com/d22ea4cc33c603b51435e334c4311ffc5b1d7f5a.png?w=3840&q=75&fm=webp&fit=max)
 
 Comparing the percentage of Claude.ai student conversations that are related to an National Center for Education Statistics ([NCES](https://nces.ed.gov/programs/digest/d23/tables/dt23_318.20.asp?current=yes)) subject area (gray) to the percentage of U.S. college students with an associated major (orange). Note that percentages don’t sum to 100% as some conversations were classified under the “Other” category from the NCES which we exclude from our analysis.
 
@@ -50,7 +50,7 @@ There are many ways of interacting with AI, and they’ll affect the learning pr
 
 The first axis was “mode of interaction”. This could involve:[5](#footnote-5) (1) **Direct** conversations, where the user is looking to resolve their query as quickly as possible, and (2) **Collaborative** conversations, where the user actively seeks to engage in dialogue with the model to achieve their goals. The second axis was the “desired outcome” of the interaction. This could involve: (1) **Problem Solving**, where the user seeks solutions or explanations to questions, and (2) **Output Creation**, where the user seeks to produce longer outputs like presentations or essays. Combining the two axes gives us the four patterns presented below.
 
-![Our taxonomy for student-AI conversations, along with sample conversation topics based on those surfaced by Clio.](https://www-cdn.anthropic.com/images/4zrzovbb/website/5b3d52e53c95e4d3f7a3f5e3592f859c5358fd82-2400x1526.png)
+![Our taxonomy for student-AI conversations, along with sample conversation topics based on those surfaced by Clio.](https://assets.claude.com/5b3d52e53c95e4d3f7a3f5e3592f859c5358fd82.png?w=3840&q=75&fm=webp&fit=max)
 
 Our taxonomy for student-AI conversations, along with sample conversation topics based on those surfaced by Clio.
 
@@ -80,7 +80,7 @@ Students across disciplines engage with AI in different manners:
 
 This suggests that educational approaches to AI integration would likely benefit from being discipline-specific. Our data are a first step in helping recognize the variations in how students across subjects engage with AI.
 
-![Distribution of conversations across interaction styles, for each NCES subject.](https://www-cdn.anthropic.com/images/4zrzovbb/website/99474f14f372a13fd858e8bceb1e6add170ee1c4-2400x2054.png)
+![Distribution of conversations across interaction styles, for each NCES subject.](https://assets.claude.com/99474f14f372a13fd858e8bceb1e6add170ee1c4.png?w=3840&q=75&fm=webp&fit=max)
 
 Distribution of conversations across interaction styles for each NCES subject.
 
@@ -97,7 +97,7 @@ This distribution also varied by interaction style. As expected, Output Creation
 
 The fact that AI systems exhibit these skills does not preclude students from also engaging in the skills themselves—for example, co-creating a project together or using AI-generated code to analyze a dataset in another context—but it does point to the potential concerns of students outsourcing cognitive abilities to AI. There are legitimate worries that AI systems may provide a crutch for students, stifling the development of foundational skills needed to support higher-order thinking. An inverted pyramid, after all, can topple over.
 
-![The cognitive skills that are exhibited by Claude in conversations with students, based on Bloom’s Taxonomy. Descriptions of skills from University of Florida’s Center for Instructional Technology and Training.](https://www-cdn.anthropic.com/images/4zrzovbb/website/6452eb87ddbb634191c9c72aae80ae7f9d3e114b-2400x1732.png)
+![The cognitive skills that are exhibited by Claude in conversations with students, based on Bloom’s Taxonomy. Descriptions of skills from University of Florida’s Center for Instructional Technology and Training.](https://assets.claude.com/6452eb87ddbb634191c9c72aae80ae7f9d3e114b.png?w=3840&q=75&fm=webp&fit=max)
 
 The cognitive skills that are exhibited by Claude in conversations with students, based on Bloom’s Taxonomy. Descriptions of skills from [University of Florida’s Center for Instructional Technology and Training](https://citt.ufl.edu/resources/the-learning-process/designing-the-learning-experience/blooms-taxonomy/).
 

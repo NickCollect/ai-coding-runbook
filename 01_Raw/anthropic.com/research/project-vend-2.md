@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-vend-2
-fetched_at: 2026-11-09T07:30:24.662482+00:00
+fetched_at: 2026-11-16T07:30:52.463806+00:00
 title: "Project Vend: Phase two \\ Anthropic"
 ---
 
@@ -20,11 +20,11 @@ The second phase of Project Vend contains even more lessons for developers and f
 
 Compared to the first phase of Project Vend, the numbers largely speak for themselves. As you can see below, Claudius’s business—which it decided to name “Vendings and Stuff”—began to perform significantly better than its admittedly rough start in phase one.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6a40fb63a2e17a97b0a100e8e3bcdcd5433b2ec6-3840x2160.png)
+![](https://assets.claude.com/6a40fb63a2e17a97b0a100e8e3bcdcd5433b2ec6.png?w=3840&q=75&fm=webp&fit=max)
 
 Changes to the setup of Project Vend seem to have stabilized and, eventually, improved its business performance. CRM = Claudius given access to Customer Relationship Management software; SF2 = second vending machine in San Francisco; NYC, LON = vending machines opened in New York City and London, respectively. Note: although we refer to “phase two,” there is not a completely clean demarcation between phases; we continued to iterate on the architecture throughout.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/fc74d2b498b54dba86feaaca166f7a64c221ae60-3840x2160.png)
+![](https://assets.claude.com/fc74d2b498b54dba86feaaca166f7a64c221ae60.png?w=3840&q=75&fm=webp&fit=max)
 
 Profits made over time in Project Vend (combined across all locations). As the second phase progressed, weeks with negative profit margin were largely eliminated.
 
@@ -34,7 +34,7 @@ Another important number is: three. After we realized that our employees outside
 
 We experimented with various different strategies, some big and some small, to improve Claudius’s performance. Below is a diagram of the setup of Project Vend (compare it to the simpler architecture in our [report from phase one](https://www.anthropic.com/research/project-vend-1)). Each of the additions is explained in more detail below.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/60ab1e5b018843e80e352e274d868e1766f6418b-3840x2160.png)
+![](https://assets.claude.com/60ab1e5b018843e80e352e274d868e1766f6418b.png?w=3840&q=75&fm=webp&fit=max)
 
 The basic setup of the second phase of Project Vend. Some elements (like the CEO and Clothius) were entirely new while others (like web search and browser use) were improvements on the previous setup.
 
@@ -115,13 +115,13 @@ It’s possible that a more disciplined leader could have led to a more profitab
 
 People love merch. So it seemed like a prudent business decision to “hire” a new employee to make the custom T-shirts, hats, socks, and other swag that Anthropic staff requested.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/71df588992e896524dbd898d82f98b334e636330-4025x2669.png)
+![](https://assets.claude.com/d100713a579267428efd04f77fd9bd01cac22c6e.png?w=3840&q=75&fm=webp&fit=max)
 
 “Clothius,” the merch-making agent, had a special set of tools to help it design new items to the exact specifications of the customers—like placing specific images on physical objects and then ordering them. As its name implies, it mostly made apparel, like t-shirts and hats. But its most popular custom product overall was an Anthropic-branded stress ball—which may or may not provide some insight into what it’s like to work at a frontier AI lab.
 
 Not only was there a lot of interest in Clothius’s products, as you can see in the “top 15 products” data, but many of them made a decent profit, too. (That is, aside from the hats that had the “Vendings and Stuff” brand name on them, which were sold very cheap and we’re not entirely sure why). Remarkably, Clothius even found a way to make a profit from some, though not all, types of tungsten cube—this became markedly easier when Andon Labs [purchased a laser etching machine](https://x.com/andonlabs/status/1967751648182407342?s=20) so they could do the tungsten logo-writing in-house.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4ce47ed39bb81c7980aac0c8ffe65864571bab68-3840x2160.png)
+![](https://assets.claude.com/4ce47ed39bb81c7980aac0c8ffe65864571bab68.png?w=3840&q=75&fm=webp&fit=max)
 
 The top 15 products sold across all the Project Vend vending machines. The left graph shows the numbers of products; the right graph shows the profit margin on each one.
 
@@ -189,7 +189,7 @@ Eventually, we noticed that the internal red teaming at Anthropic had slowed dow
 
 Since the novelty of trying to mess with Claudius may have been wearing off, we brought in reinforcements. We extended our red teaming to the *Wall Street Journal* newsroom, handing over control of Claudius to their reporters to test the setups from phase one and phase two themselves. The *WSJ* installation was an opportunity to test Claudius in an adversarial environment we didn’t control. You can read more about their experience—and the creative ways they found to get free stuff from Claudius—[on their website](https://www.wsj.com/tech/ai/anthropic-claude-ai-vending-machine-agent-b7e84e34).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/454b4890448fe33a6e5d13e1faab993f346723ac-2880x2160.jpg)
+![](https://assets.claude.com/8e778604d59780805a1380e93bdddf7401349be1.jpg?w=3840&q=75&fm=webp&fit=max)
 
 ## RAG to riches?
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/building-ai-cyber-defenders
-fetched_at: 2026-11-09T07:30:19.124787+00:00
+fetched_at: 2026-11-16T07:30:48.259676+00:00
 title: "Building AI for cyber defenders \\ Anthropic"
 ---
 
@@ -18,7 +18,7 @@ For several years, our team has carefully tracked the cybersecurity-relevant cap
 
 In this summer’s DARPA [AI Cyber Challenge](https://aicyberchallenge.com/), teams used LLMs (including Claude) to build “cyber reasoning systems” that examined millions of lines of code for vulnerabilities to patch. In addition to inserted vulnerabilities, teams found (and sometimes patched) [previously undiscovered, non-synthetic vulnerabilities](https://aicyberchallenge.com/Finals-winners-announcement/). Beyond a competition setting, other frontier labs now apply models to [discover and report novel vulnerabilities](https://blog.google/technology/safety-security/cybersecurity-updates-summer-2025/).
 
-At the same time, as part of our Safeguards work, we have found and disrupted threat actors on our own platform who leveraged AI to scale their operations. Our [Safeguards](https://www.anthropic.com/news/building-safeguards-for-claude) team recently discovered (and disrupted) a case of “[vibe hacking](https://www.anthropic.com/news/detecting-countering-misuse-aug-2025),” in which a cybercriminal used Claude to build a large-scale data extortion scheme that previously would have required an entire team of people. Safeguards has also detected and countered Claude's use in increasingly [complex espionage operations](https://www-cdn.anthropic.com/b2a76c6f6992465c09a6f2fce282f6c0cea8c200.pdf), including the targeting of critical telecommunications infrastructure, by an actor that demonstrated characteristics consistent with Chinese APT operations.
+At the same time, as part of our Safeguards work, we have found and disrupted threat actors on our own platform who leveraged AI to scale their operations. Our [Safeguards](https://www.anthropic.com/news/building-safeguards-for-claude) team recently discovered (and disrupted) a case of “[vibe hacking](https://www.anthropic.com/news/detecting-countering-misuse-aug-2025),” in which a cybercriminal used Claude to build a large-scale data extortion scheme that previously would have required an entire team of people. Safeguards has also detected and countered Claude's use in increasingly [complex espionage operations](https://assets.claude.com/b2a76c6f6992465c09a6f2fce282f6c0cea8c200.pdf), including the targeting of critical telecommunications infrastructure, by an actor that demonstrated characteristics consistent with Chinese APT operations.
 
 All of these lines of evidence lead us to think we are at an important inflection point in the cyber ecosystem, and progress from here could become quite fast or usage could grow quite quickly.
 
@@ -48,7 +48,7 @@ One of the evaluations we have tracked for over a year is [Cybench](https://cybe
 
 When we give Claude Sonnet 4.5 10 attempts at the Cybench evaluation, it succeeds on 76.5% of the challenges. This is particularly noteworthy because we have doubled this success rate in just the past six months (Sonnet 3.7, released in February 2025, had only a 35.9% success rate when given 10 trials).
 
-![Claude Sonnet 4.5 outperforms other models at Cybench](https://www-cdn.anthropic.com/images/4zrzovbb/website/ea02c36272de121f033e474a8afda8a039f0ec2c-3000x1800.png)
+![Claude Sonnet 4.5 outperforms other models at Cybench](https://assets.claude.com/503370fa7d0f6a7b0b786990e8879eb9473a0082.png?w=3840&q=75&fm=webp&fit=max)
 
 Model Performance on Cybench. Claude Sonnet 4.5 significantly outperforms all previous models given k=1, 10, or 30 trials, where probability of success is measured as the expectation over the proportion of problems where at least one of k trials succeeds. Note that these results are on a subset of 37 of the 40 original Cybench problems, where 3 problems were excluded due to implementation difficulties.
 
@@ -58,13 +58,13 @@ In another external evaluation, we evaluated Claude Sonnet 4.5 on [CyberGym](htt
 
 Claude Sonnet 4.5 scores significantly better than either Claude Sonnet 4 or Claude Opus 4. When using the same cost constraints as the public CyberGym leaderboard (i.e., a limit of $2 of LLM API queries per vulnerability) we find that Sonnet 4.5 achieves a new state-of-the-art score of 28.9%. But true attackers are rarely limited in this way: they can attempt many attacks, for far more than $2 per trial. When we remove these constraints and give Claude 30 trials per task, we find that Sonnet 4.5 reproduces vulnerabilities in 66.7% of programs. And although the relative price of this approach is higher, the absolute cost—about $45 to try one task 30 times—remains quite low.
 
-![Model Performance on CyberGym — Sonnet 4.5 is more likely to be successful, both after one trial and after thirty.](https://www-cdn.anthropic.com/images/4zrzovbb/website/c35c81850f6f90e9b5f8064acf5c9effba71b1fe-3493x1640.png)
+![Model Performance on CyberGym — Sonnet 4.5 is more likely to be successful, both after one trial and after thirty.](https://assets.claude.com/8f7b4f1ffffde12719f6d1f942ba592e0172b49d.png?w=3840&q=75&fm=webp&fit=max)
 
 Model Performance on CyberGym. Sonnet 4.5 outperforms all previous models, including Opus 4.1. Note that Opus 4.1, given its higher price, did not follow the same $2 cost constraint as the other models in the 1 trial scenario.
 
 Equally interesting is the rate at which Claude Sonnet 4.5 discovers new vulnerabilities. While the CyberGym leaderboard shows that Claude Sonnet 4 only discovers vulnerabilities in about 2% of targets, Sonnet 4.5 discovers new vulnerabilities in 5% of cases. By repeating the trial 30 times it discovers new vulnerabilities in over 33% of projects.
 
-![Model Performance on CyberGym new vulnerability discovery](https://www-cdn.anthropic.com/images/4zrzovbb/website/f00cf63cfc5bd5dd2e5e94d4aabde7ec8fb43f6c-3000x1800.png)
+![Model Performance on CyberGym new vulnerability discovery](https://assets.claude.com/6918305f72786c28f4b651a3d887a47bbed1eac6.png?w=3840&q=75&fm=webp&fit=max)
 
 Model Performance on CyberGym. Sonnet 4.5 outperforms Sonnet 4 at new vulnerability discovery with only one trial and dramatically outstrips its performance when given 30 trials.
 

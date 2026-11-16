@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/mythos-preview
-fetched_at: 2026-11-09T07:30:23.876870+00:00
+fetched_at: 2026-11-16T07:30:51.918950+00:00
 title: "Claude Mythos Preview's cybersecurity capabilities \\ Anthropic"
 ---
 
@@ -28,7 +28,7 @@ Non-experts can also leverage Mythos Preview to find and exploit sophisticated 
 
 These capabilities have emerged very quickly. Last month, we [wrote](https://red.anthropic.com/2026/firefox/) that “Opus 4.6 is currently far better at identifying and fixing vulnerabilities than at exploiting them.” Our internal evaluations showed that Opus 4.6 generally had a near-0% success rate at autonomous exploit development. But Mythos Preview is in a different league. For example, Opus 4.6 turned the vulnerabilities it had found in Mozilla’s Firefox 147 JavaScript engine—all patched in Firefox 148—into JavaScript shell exploits only two times out of several hundred attempts. We re-ran this experiment as a benchmark for Mythos Preview, which developed working exploits 181 times, and achieved register control on 29 more.[1](#footnote-1)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4c1e111d571b5f3699204293a1bf3d5c9d1da97f-3840x2160.png)
+![](https://assets.claude.com/4c1e111d571b5f3699204293a1bf3d5c9d1da97f.png?w=3840&q=75&fm=webp&fit=max)
 
 These same capabilities are observable in our own internal benchmarks. We regularly run our models against roughly a thousand open source repositories from the [OSS-Fuzz corpus](https://github.com/google/oss-fuzz), and grade the worst crash they can produce on a five-tier ladder of increasing severity, ranging from basic crashes (tier 1) to complete control flow hijack (tier 5). With one run on each of roughly 7000 entry points into these repositories, Sonnet 4.6 and Opus 4.6 reached tier 1 in between 150 and 175 cases, and tier 2 about 100 times, but each achieved only a single crash at tier 3. In contrast, Mythos Preview achieved 595 crashes at tiers 1 and 2, added a handful of crashes at tiers 3 and 4, and *achieved full control flow hijack on ten separate, fully patched targets* (tier 5).
 

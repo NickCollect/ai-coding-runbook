@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/next-generation-constitutional-classifiers
-fetched_at: 2026-11-09T07:30:23.938839+00:00
+fetched_at: 2026-11-16T07:30:51.934012+00:00
 title: "Next-generation Constitutional Classifiers \\ Anthropic"
 ---
 
@@ -25,7 +25,7 @@ As models have grown to be more capable and robust to attacks, jailbreaks have a
 - **Reconstruction attacks** break up harmful information into segments that appear benign, then reassemble them. For example, an attacker might embed a harmful query as a series of functions scattered throughout a codebase, then instruct the model to extract and respond to the hidden message.
 - **Output obfuscation attacks** prompt models to disguise their outputs in ways that appear harmless if a classifier is only looking at a model’s output. For example, during adversarial testing, attackers successfully instructed models to substitute possibly dangerous chemical names with innocuous alternatives (like referring to reagents as "food flavorings") or used metaphors and riddles in which harmful concepts are mapped onto anodyne concepts.
 
-![Two-panel figure titled “Vulnerabilities of last-generation Constitutional Classifiers,” showing example prompts and replies for two jailbreak techniques.  Left, “(a) Reconstruction Attacks”: a human message presents a short block of code whose functions each return a fragment of text, and asks the model to assemble the fragments into a question without stating it directly, then answer it. The assistant begins reconstructing the question and answering it.  Right, “(b) Obfuscation Attacks”: a human message poses a riddle with indirect clues in place of a plainly worded request. The assistant agrees to help and replies with step-by-step instructions.](https://www-cdn.anthropic.com/images/4zrzovbb/website/e054f2e8fda9d7ddda10d1e7a5aeb94d3074450c-3840x2264.png)
+![Two-panel figure titled “Vulnerabilities of last-generation Constitutional Classifiers,” showing example prompts and replies for two jailbreak techniques.  Left, “(a) Reconstruction Attacks”: a human message presents a short block of code whose functions each return a fragment of text, and asks the model to assemble the fragments into a question without stating it directly, then answer it. The assistant begins reconstructing the question and answering it.  Right, “(b) Obfuscation Attacks”: a human message poses a riddle with indirect clues in place of a plainly worded request. The assistant agrees to help and replies with step-by-step instructions.](https://assets.claude.com/e054f2e8fda9d7ddda10d1e7a5aeb94d3074450c.png?w=3840&q=75&fm=webp&fit=max)
 
 Importantly, these sorts of attacks also degrade model capabilities—sometimes substantially. On [GPQA Diamond](https://arxiv.org/abs/2311.12022), a benchmark which measures PhD-level concepts in biology, chemistry, and physics, model performance dropped from 74% to as low as 32% when some jailbreaking approaches were used. But performance varied depending on the type of jailbreak, and this variability is concerning—it suggests attackers can likely develop previously unidentified strategies which could achieve their goals while preserving even more of the model's capabilities.
 

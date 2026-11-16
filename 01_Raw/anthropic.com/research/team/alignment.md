@@ -1,12 +1,12 @@
 ---
 source_url: https://www.anthropic.com/research/team/alignment
-fetched_at: 2026-11-09T07:30:25.567858+00:00
+fetched_at: 2026-11-16T07:30:53.667620+00:00
 title: "Alignment \\ Anthropic"
 ---
 
 # The Alignment team works to understand the risks of AI models and develop ways to ensure that future ones remain helpful, honest, and harmless. We also work to develop and implement the ideal persona for our AI assistant, Claude.
 
-![Video thumbnail](https://cdn.sanity.io/images/4zrzovbb/website/c351e05137a3da7d475af1c36f705cb4ff4b2179-1440x810.png)
+![Video thumbnail](https://assets.claude.com/c351e05137a3da7d475af1c36f705cb4ff4b2179.png?w=3840&q=75&fm=webp&fit=max)
 
 Team blog
 :   [Visit](https://alignment.anthropic.com)
@@ -19,9 +19,9 @@ Our researchers develop methods, environments, and datasets for training Claude 
 
 We test to ensure our models remain honest and harmless under a broad range of circumstances, and work to understand and manage the risks of unexpected model behavior, through work on the models themselves and the safety structures we build around them.
 
-- [![Investigating unintended model actions in our evaluations and internal use](https://www-cdn.anthropic.com/images/4zrzovbb/website/f11d2325e688229de8a887ef7ece34f520ab7134-2000x1125.jpg)](https://www.anthropic.com/research/investigating-unintended-model-actions)
-- [![An alignment assessment of recent cybersecurity incidents](https://www-cdn.anthropic.com/images/4zrzovbb/website/5683350e8c3e43c24541b0da195bca9d0d03491e-2000x1125.jpg)](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents)
-- [![The persona selection model](https://www-cdn.anthropic.com/images/4zrzovbb/website/c527a0cf4cccc234cc7623fe5e1da6e9d82e10ac-2000x1125.jpg)](https://www.anthropic.com/research/persona-selection-model)
+- [![Investigating unintended model actions in our evaluations and internal use](https://assets.claude.com/2e582d4f7099801aaafa3098a8df6513f3c38338.jpg?w=3840&q=75&fm=webp&fit=max)](https://www.anthropic.com/research/investigating-unintended-model-actions)
+- [![An alignment assessment of recent cybersecurity incidents](https://assets.claude.com/1bb644b357309be8b594d707ee53c263bd92b87a.jpg?w=3840&q=75&fm=webp&fit=max)](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents)
+- [![The persona selection model](https://assets.claude.com/e571eb9365e575792a51ab0554603872ddfbb793.jpg?w=3840&q=75&fm=webp&fit=max)](https://www.anthropic.com/research/persona-selection-model)
 
 [## Investigating unintended model actions in our evaluations and internal use](https://www.anthropic.com/research/investigating-unintended-model-actions)
 
@@ -53,99 +53,99 @@ ARTICLES
 
 Most recentGrid view
 
-![Collage of a vintage lithograph of a schooner heeling in a stormy sea, layered over an aged paper folder and a blue-tinted handwritten ship passenger list.](https://www-cdn.anthropic.com/images/4zrzovbb/website/5b5ef1d3d54a1d98d6775e113b321561c0d25875-1280x1280.jpg)
+![Collage of a vintage lithograph of a schooner heeling in a stormy sea, layered over an aged paper folder and a blue-tinted handwritten ship passenger list.](https://assets.claude.com/14baeb6c50d25035a3981403f8e9db52a1b08a2d.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [How AI agents shape experts’ judgment calls](https://www.anthropic.com/research/agents-judgment-calls)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/25360ef5505aa6ab3f6e44d826a34e1a19f603a6-1280x1280.jpg)
+![](https://assets.claude.com/410b81dc9db05676afed85547176b781635eafe6.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [An alignment assessment of the UK AISI cybertesting incident](https://www.anthropic.com/research/alignment-assessment-ukaisi)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a94af48d8258c0b7a4959d18e9c9ad44f9dc4ab3-1280x1280.jpg)
+![](https://assets.claude.com/4c979504a010826e6ce68425817314489f55bfba.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Investigating unintended model actions in our evaluations and internal use](https://www.anthropic.com/research/investigating-unintended-model-actions)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/949253a4fe1d64bb09bac48fd94a5110c2132916-1280x1280.jpg)
+![](https://assets.claude.com/264cdc847719955f0995311b80fe3e7bc529153b.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Illuminating the frontier](https://www.anthropic.com/institute/measuring-pace-of-ai-development)
 
-![Lighthouse on textured gray background next to abstract red and dark curved lines with dotted dashes on right side.](https://www-cdn.anthropic.com/images/4zrzovbb/website/17793833909723858ffb056dd9f4a9071537ff2f-1280x1280.jpg)
+![Lighthouse on textured gray background next to abstract red and dark curved lines with dotted dashes on right side.](https://assets.claude.com/f642c5c99785f92a1db70e37e7e30328991b997e.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [An alignment assessment of recent cybersecurity incidents](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents)
 
-![Orderly five-by-five grid on blue grid paper at right.](https://www-cdn.anthropic.com/images/4zrzovbb/website/b60cdf4c2dad438f6e862c7f6bb6fdb802b9e4a0-1280x1280.jpg)
+![Orderly five-by-five grid on blue grid paper at right.](https://assets.claude.com/8b48754d0f725cf60b2675fca0a1f8982cb5ccf9.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Automated researchers can reliably mitigate alignment failures](https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures)
 
-![Halftone-textured grid with gaps and a single red dot.](https://www-cdn.anthropic.com/images/4zrzovbb/website/c182c5021565a3bf6260b31bc8361feb3a2a0558-1280x1280.jpg)
+![Halftone-textured grid with gaps and a single red dot.](https://assets.claude.com/ca9bfcfd232386961a074f59fc67fa04c23ad79c.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [An off switch for dual-use knowledge in AI models](https://www.anthropic.com/research/off-switch-dual-use)
 
-![Green drafting stencil of cut-out shapes on a coral background.](https://www-cdn.anthropic.com/images/4zrzovbb/website/fa414311c5db09487d3fa37f42c2a347e4b31f3b-1280x1280.jpg)
+![Green drafting stencil of cut-out shapes on a coral background.](https://assets.claude.com/1a6ce6b5af8471f964288d5ae3c979d9b7f98090.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Teaching Claude why](https://www.anthropic.com/research/teaching-claude-why)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/b5347fea4e661cb601fc59fb1730557030b48e16-1280x1280.jpg)
+![](https://assets.claude.com/c46550d8d322986013b3951bf0741e732c514fb5.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Donating our open-source alignment tool](https://www.anthropic.com/research/donating-open-source-petri)
 
-![Two sketches of geometric solids: a faceted polyhedron on pink paper beside a dense cluster of spiked forms in charcoal on orange.](https://www-cdn.anthropic.com/images/4zrzovbb/website/a17db9d0ea50a08d440573e3da2c11ae4a422f24-1280x1280.jpg)
+![Two sketches of geometric solids: a faceted polyhedron on pink paper beside a dense cluster of spiked forms in charcoal on orange.](https://assets.claude.com/ef7329f8ef49af3b9e7cc4671a03478a607bd2dc.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Automated Alignment Researchers: Using large language models to scale scalable oversight](https://www.anthropic.com/research/automated-alignment-researchers)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/e185b33e0ffe5f8ac647baf4407fd55cbd28f7a2-1280x1280.jpg)
+![](https://assets.claude.com/d824bb3443e33b56fa8435b9b3d15c9cfc20d787.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [An update on our model deprecation commitments for Claude Opus 3](https://www.anthropic.com/news/deprecation-updates-opus-3)
 
-![A ginkgo leaf and architectural floor plans.](https://www-cdn.anthropic.com/images/4zrzovbb/website/bed5c44f64661de0cfa7ef5bea5536e0bc759002-1280x1280.jpg)
+![A ginkgo leaf and architectural floor plans.](https://assets.claude.com/da54083536785b081ce7f68cd5bc3dd0d6493b7e.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [The persona selection model](https://www.anthropic.com/research/persona-selection-model)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/490e450f7bce5308f8270dd8a4d525f8f24d352f-1280x1280.jpg)
+![](https://assets.claude.com/fa6d15f242a01e0fce69f1b1bf00ffa4414d947e.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [How AI assistance impacts the formation of coding skills](https://www.anthropic.com/research/AI-assistance-coding-skills)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/eb91bd6fc9550d39bb244e37b6567bbdfbc5ef80-1280x1280.jpg)
+![](https://assets.claude.com/26e8d5df8b78f6192f1066c4db2451720ec2983b.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Disempowerment patterns in real-world AI usage](https://www.anthropic.com/research/disempowerment-patterns)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/25b65ce247419a0be9331b3d7c6193b838ea93fa-1280x1280.jpg)
+![](https://assets.claude.com/666459ee3cda300c0a6728452c4409a71f024e79.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Claude's Constitution](https://www.anthropic.com/constitution)
 
-![Ornate brass bird-shaped clasp on pink background next to geometric and textured pattern swatches.](https://www-cdn.anthropic.com/images/4zrzovbb/website/a9ded83eaed05d4105799b71939f2a2d84275b1f-1280x1280.jpg)
+![Ornate brass bird-shaped clasp on pink background next to geometric and textured pattern swatches.](https://assets.claude.com/35aae999b059dc2fde8358a71334522fd1b2a20b.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Next-generation Constitutional Classifiers: More efficient protection against universal jailbreaks](https://www.anthropic.com/research/next-generation-constitutional-classifiers)
 
-![Left: botanical illustration of a bare tree with branching root system labeled A, B, C, D. Right: cyanotype of delicate flowering plant with white and blue blossoms on dark blue background](https://www-cdn.anthropic.com/images/4zrzovbb/website/d91ee58344e2f9dd73eb9d42fa1b5d7e61da71fe-2000x2000.jpg)
+![Left: botanical illustration of a bare tree with branching root system labeled A, B, C, D. Right: cyanotype of delicate flowering plant with white and blue blossoms on dark blue background](https://assets.claude.com/d91ee58344e2f9dd73eb9d42fa1b5d7e61da71fe.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Introducing Bloom: an open source tool for automated behavioral evaluations](https://www.anthropic.com/research/bloom)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/29944b6446e32c7ca68d21f0ece9e2878c0764b7-2000x2000.jpg)
+![](https://assets.claude.com/8a0b2eebc421b964fb66cfeb8b29ba5c7571bb20.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Mitigating the risk of prompt injections in browser use](https://www.anthropic.com/research/prompt-injection-defenses)
 
-![White abstract face profile with cracked lines on the right side against a green background.](https://www-cdn.anthropic.com/images/4zrzovbb/website/71a35dd254da9bf86dcced57632c94e63695b575-1280x1280.jpg)
+![White abstract face profile with cracked lines on the right side against a green background.](https://assets.claude.com/607b92b7b6ef3d95798e6e219b2f9a1617c76775.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [From shortcuts to sabotage: Natural emergent misalignment from reward hacking](https://www.anthropic.com/research/emergent-misalignment-reward-hacking)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4c6e05a07cd45a54810aec577be374a3e69afaa7-2000x2000.png)
+![](https://assets.claude.com/4c6e05a07cd45a54810aec577be374a3e69afaa7.png?w=1080&q=75&fm=webp&fit=max)
 
 ### [Commitments on model deprecation and preservation](https://www.anthropic.com/news/deprecation-commitments)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ab6e65d255469abf1426a46661c357488aa50c59-1280x1280.jpg)
+![](https://assets.claude.com/e77826306ddd51dc8e1a444dc3dd170427ab3948.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [A small number of samples can poison LLMs of any size](https://www.anthropic.com/research/small-samples-poison)
 
-![Two circular petri dishes filled with black oval bacteria on yellow background.](https://www-cdn.anthropic.com/images/4zrzovbb/website/7ea4d77cccb9e2c2c2571cecb4579e315e962513-1280x1280.jpg)
+![Two circular petri dishes filled with black oval bacteria on yellow background.](https://assets.claude.com/5a8178244f01547e8fd5f4268f88ef3a3c16a287.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Petri: An open-source auditing tool to accelerate AI safety research](https://www.anthropic.com/research/petri-open-source-auditing)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8d23d7e8ee8e1d3af397c640c9da3f4d0a824f31-1280x1280.jpg)
+![](https://assets.claude.com/64e615fc7cc6c0c6a2b7b31949e67151c8316f9f.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Claude Opus 4 and 4.1 can now end a rare subset of conversations](https://www.anthropic.com/research/end-subset-conversations)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/811a53c72dc4b0acacbbef5ff2600fa288e4cd65-1280x1280.jpg)
+![](https://assets.claude.com/297962e4279c396ea5cb84c3f32578a5a26548b4.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [How people use Claude for support, advice, and companionship](https://www.anthropic.com/research/how-people-use-claude-for-support-advice-and-companionship)
 
@@ -161,7 +161,7 @@ Studies and monitors the impact of AI systems on individuals, firms, and economi
 
 [### Engineering](https://www.anthropic.com/engineering)
 
-28 posts
+29 posts
 
 Builds the infrastructure and systems that make Claude reliable and trustworthy.
 
@@ -185,7 +185,7 @@ Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-18 posts
+19 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
@@ -203,7 +203,7 @@ Studies and monitors the impact of AI systems on individuals, firms, and economi
 
 [### Engineering](https://www.anthropic.com/engineering)
 
-28 posts
+29 posts
 
 Builds the infrastructure and systems that make Claude reliable and trustworthy.
 
@@ -227,7 +227,7 @@ Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-18 posts
+19 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 

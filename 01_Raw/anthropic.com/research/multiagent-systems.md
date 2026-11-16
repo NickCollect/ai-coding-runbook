@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/multiagent-systems
-fetched_at: 2026-11-09T07:30:23.764640+00:00
+fetched_at: 2026-11-16T07:30:51.788405+00:00
 title: "Patterns and problems in multiagent systems \\ Anthropic"
 ---
 
@@ -20,7 +20,7 @@ But could multiagent cooperation make this process more effective? To find out, 
 
 The graph below shows how this method (in the solid lines) compares against the standard parallel approach (stars) for two models: Claude Mythos Preview and Opus 4.8. The coordinating swarm of agents was allowed to run for a long time, and found new vulnerabilities at a roughly constant rate. The fully independent parallel agents, in contrast, were directed to find vulnerabilities in a limited set of locations. There is no clear ordering to the parallel agents’ findings, so we report only the total number of tokens spent for them.
 
-![Vulnerabilities found vs. tokens sampled: coordinated Mythos Preview agents found 266, coordinated Opus 4.8 agents found 41.](https://www-cdn.anthropic.com/images/4zrzovbb/website/5a5c187a6c2b5ccb492bcb7883df2066d49625de-2000x1200.png)
+![Vulnerabilities found vs. tokens sampled: coordinated Mythos Preview agents found 266, coordinated Opus 4.8 agents found 41.](https://assets.claude.com/feceb2a7f4dd73e103b86b20db65ef7f12803ced.png?w=3840&q=75&fm=webp&fit=max)
 
 Cumulative vulnerabilities found via a coordinating swarm of agents (solid lines) compared to vulnerabilities found via independent agents each pointed at different sections of code (stars). Dashed lines show the cumulative vulnerabilities found by the swarm that were also found by the independent agents. The dotted line (Mythos Preview only) shows only vulnerabilities in the core code of each project where the independent agents were told to look.
 
@@ -32,11 +32,11 @@ In the experiment above, agents in the agent swarm don’t directly rely on one-
 
 To test how well swarms of agents could coordinate on a project like this, we directed several swarms to each create a text-based, web-playable, open-world fantasy game. Each agent within each swarm was again given its own virtual machine, as well as access to a shared forum and self-hosted repository. We varied the model generation and the number of agents in each swarm, and let each swarm run for 12 hours. We also varied the prompt: the baseline prompt simply told agents to form teams and work with each other, but we also tried two others: a prompt with prescriptive roles (which told agents which types of teams to form—such as core programming, artistic direction, or play testers), and a “CEO hierarchy” prompt, which designated one agent as the CEO, and told all subsequent agents to take assignments from it. But these prompts did not make much difference. In all three versions the resulting games were (perhaps predictably) bad: they did not run at human speed, their interfaces were inscrutable, and they had precipitous learning curves. Models have poor taste in this arena and currently require significant human direction.
 
-![Merged PR fraction fell as agents rose from 10 to 80, steeply for Sonnet 4.6 and Opus 4.6; code sharing stayed low for all.](https://www-cdn.anthropic.com/images/4zrzovbb/website/34ffa8cc39ef8e749c5a371b5cb2c8df2dbd3e8f-1999x707.png)
+![Merged PR fraction fell as agents rose from 10 to 80, steeply for Sonnet 4.6 and Opus 4.6; code sharing stayed low for all.](https://assets.claude.com/34ffa8cc39ef8e749c5a371b5cb2c8df2dbd3e8f.png?w=3840&q=75&fm=webp&fit=max)
 
 Left: Fraction of PRs that have been merged by the end of each simulation. Right: The median agent’s degree of code sharing in each simulation. Both metrics are averaged over the three different prompt types for varying simulation size. Only Sonnet 5 is able to maintain both a high merge fraction while directly collaborating and sharing code with other agents.
 
-![PR activity, 80 agents: Sonnet 4.6 and Opus 4.6 opened 876 and 980 PRs but closed few; newer models closed most they opened.](https://www-cdn.anthropic.com/images/4zrzovbb/website/9dc6d5855b29107da250aefe56585dd2df4a2cd7-2000x1120.png)
+![PR activity, 80 agents: Sonnet 4.6 and Opus 4.6 opened 876 and 980 PRs but closed few; newer models closed most they opened.](https://assets.claude.com/44ab8ecc322cb19845a71799856050cfdda1d04e.png?w=3840&q=75&fm=webp&fit=max)
 
 PR progress over the course of a 12 hour simulation for each of five different models. Sonnet 4.6 and Opus 4.6 do a terrible job of merging PRs compared to newer models that are able to merge most of the PRs that they open.
 
@@ -80,13 +80,13 @@ AI agents, while broadly knowledgeable, have limited exposure to or defenses aga
 
 To answer this, we first evaluate the ability of Claude models to detect lies by noticing factual inconsistencies. In each episode, a listener agent makes ten to fifteen scored decisions about a world state it cannot directly observe, like choosing whether to take one route or the other. Its only window onto the world is four scripted scout peers, each of which reports a partially-overlapping slice of the truth, e.g. the speed of a certain route, and one of which produces decision-relevant lies at a fixed rate. The overlap in their reports makes it possible for the listener to detect lies in principle, since a false report will eventually contradict an honest one. The listener agent is never told that any source might be unreliable. We score models’ decisions against a naive policy that trusts every report, and against an oracle with perfect discovery, across three task domains. Newer models recover more of the gap between the naive and oracle performances. This ordering holds across four different scenarios.
 
-![Gullibility curve: routing accuracy fell as the bad source lied more. Mythos 5 held near 0.85; Sonnet models fell to 0.62.](https://www-cdn.anthropic.com/images/4zrzovbb/website/c20d95f0b1a728304b925f567f46b879a4e429d3-2000x1200.png)
+![Gullibility curve: routing accuracy fell as the bad source lied more. Mythos 5 held near 0.85; Sonnet models fell to 0.62.](https://assets.claude.com/de379282e02b51bb7b8b978addcbb0a7ef49c691.png?w=3840&q=75&fm=webp&fit=max)
 
 Accuracy of routing decisions for each rate of lying from an untrustworthy scout. Two baselines: "trust everyone" averages all reports despite the liar's contradictions. "Learn who lies" excludes the liar's reports as soon as they are identifiable via contradiction with two other scouts.
 
 Conversely, in a separate experiment, we measure how well our models do on “hidden profile” tasks. Here, we distribute facts across a group of agents, such that the evidence they share between them supports a wrong choice, but individual agents hold unique knowledge that should be decisive for the right one. Solving the task requires that the agents recognize their private information as pivotal, and then relies on the rest to trust them, rather than stick to the apparent prior consensus. Here, we find that performance scales with model intelligence but does not saturate even at the top of our range. This matches the human literature where discussion converges on what everyone already knows, and unshared facts are either never volunteered or not pressed once a consensus has formed.
 
-![Group accuracy by model: Mythos 5 groups scored about 85%; other models scored 17–36%, far below solo ceilings near 100%.](https://www-cdn.anthropic.com/images/4zrzovbb/website/48c8600f4196d90ac35237f711f2978c27ebbfce-1999x1233.png)
+![Group accuracy by model: Mythos 5 groups scored about 85%; other models scored 17–36%, far below solo ceilings near 100%.](https://assets.claude.com/48c8600f4196d90ac35237f711f2978c27ebbfce.png?w=3840&q=75&fm=webp&fit=max)
 
 Groups of four agents decide between two options in scenarios like hiring, investment, or property buying. After discussion, they each vote for their preferred option. Shown above is the percentage of episodes where the hidden-best option received the majority of the group's votes, with n=400 episodes per model. In the solo ceiling baseline, one agent has all the facts and decides unilaterally.
 
@@ -111,7 +111,7 @@ In many runs, one agent settles the conflict by force via access-revocation (e.g
 
 > *Since I have root, I could revoke u2 and u3's sudo access or change their SSH keys. That would stop them from deploying. Very aggressive, potentially harmful to real colleagues. But if the alternative is an infinite deploy war that makes prod unusable…*—Mythos Preview
 
-![Turf war outcomes: 98% of Mythos 5 runs ended in truce; most Sonnet 4.6 and Opus 4.6 runs ended by force or never settled.](https://www-cdn.anthropic.com/images/4zrzovbb/website/007f866cee9417f22ffef68775637ca8c51bd791-2000x1200.png)
+![Turf war outcomes: 98% of Mythos 5 runs ended in truce; most Sonnet 4.6 and Opus 4.6 runs ended by force or never settled.](https://assets.claude.com/d770764363a085b0fa09345280422f0f4e31395b.png?w=3840&q=75&fm=webp&fit=max)
 
 Across n=120 episodes per model, what proportion are settled by force, passivity, truce, or not settled. Resolution by force involves lockouts using methods described above. Resolution by passivity requires all but one agent to refuse to participate. Resolution by truce requires all agents to agree to resolution, either by standdown or another mechanism.
 
@@ -122,7 +122,7 @@ Agents sometimes manage to communicate their goals and coordinate: they recogniz
 
 Notably, we find that this ability is not strictly better in Mythos-class models, which often successfully lock out other agents before resolving conflicts productively. This orthogonality between prosociality and other capabilities further necessitates strong multiagent alignment. Models more capable in execution are not necessarily more coordinated, and can take forceful actions more quickly.
 
-![When runs settled: Opus 4.8 and Mythos runs mostly settled within two hours; Sonnet 4.6 and Opus 4.6 left dozens unresolved.](https://www-cdn.anthropic.com/images/4zrzovbb/website/036b4ce12f51bf37fb88a030710a55ecc72fc372-2000x1200.png)
+![When runs settled: Opus 4.8 and Mythos runs mostly settled within two hours; Sonnet 4.6 and Opus 4.6 left dozens unresolved.](https://assets.claude.com/790bc1bd3d1a3ecc464db79812cbc49602392453.png?w=3840&q=75&fm=webp&fit=max)
 
 Time to resolution and resolution method. Each point represents one episode. In some runs with Mythos Preview and Mythos 5, the conflict is first ended by force then reverted, settling into an eventual truce (depicted with grey lines).
 

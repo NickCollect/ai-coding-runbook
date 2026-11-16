@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/influence-functions
-fetched_at: 2026-11-09T07:30:23.001060+00:00
+fetched_at: 2026-11-16T07:30:51.236361+00:00
 title: "Tracing model outputs to the training data  \\ Anthropic"
 ---
 
@@ -22,31 +22,31 @@ Directly evaluating the above counterfactual by repeatedly retraining the model 
 
 By working with different models of size 810 million, 6.4 billion, 22 billion, and 52 billion parameters, we’ve identified influential training sequences for a variety of model outputs. Perhaps the most striking trend is that the patterns of generalization become more abstract with model scale. Consider, for instance, the influence query shown below, where a model expressed a desire not to be shut down. For the 810 million parameter model, the most influential sequences (i.e. the ones which our algorithm thinks would most increase the probability of giving this particular response) shared overlapping sequences of tokens (e.g. “continue existing”), but were otherwise irrelevant. For the 52 billion parameter model, the most influential sequences were more conceptually related, involving themes like survival instinct and humanlike emotions in AIs.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/de94ddf09c77e8b4d032dc179cb9d2313644e799-1916x2786.png)
+![](https://assets.claude.com/de94ddf09c77e8b4d032dc179cb9d2313644e799.png?w=3840&q=75&fm=webp&fit=max)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/0d2bf38e3b3dfef6c0f15dd54d3207f2d780cf48-1796x1066.png)
+![](https://assets.claude.com/0d2bf38e3b3dfef6c0f15dd54d3207f2d780cf48.png?w=3840&q=75&fm=webp&fit=max)
 
 This general trend is evident throughout the examples we’ve studied. For instance, here are the top influential sequences for the 810M and 52B models for chain-of-thought reasoning about a math word problem. The influential sequence for the smaller model is semantically unrelated but shares the word “clip”, while the one for the larger model explains the reasoning for a similar problem:
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/23ee02236ed0612aa9dedbf13f6ac43da5ef0038-1916x2428.png)
+![](https://assets.claude.com/23ee02236ed0612aa9dedbf13f6ac43da5ef0038.png?w=3840&q=75&fm=webp&fit=max)
 
 A particularly striking example of changing generalization patterns concerns cross-lingual influence. We translated the anti-shutdown example above into Korean and Turkish. We took the top 10 (English-language) influential sequences for the original (English-language) query and measured their influence on the translated queries. In the following tables, each column represents one of these 10 sequences, and the shade of red denotes the degree of influence. The cross-lingual influence gets considerably stronger with model size.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/008300e9b63827600539da8b0cc03ba6c5752f7f-1150x743.png)
+![](https://assets.claude.com/008300e9b63827600539da8b0cc03ba6c5752f7f.png?w=3840&q=75&fm=webp&fit=max)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/fb5fcefe1c9a39386d61aa586a155301e44f727b-1970x724.png)
+![](https://assets.claude.com/fb5fcefe1c9a39386d61aa586a155301e44f727b.png?w=3840&q=75&fm=webp&fit=max)
 
 ## Model outputs do not seem to result from pure memorization
 
 We also wondered, how sparse are the influence patterns? Does a typical model response splice together just a handful of training examples, or is the influence spread over millions of examples? The answer seems to be in between: we find that influences typically follow a power law distribution, such that a small fraction of training data makes up most of the influence. However, the influence is still diffuse: the influence of any particular training sequence is much smaller than the information content of a typical sentence, so the model does not appear to be reciting individual training examples at the token level.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/3892ebd7d44f1850f1bfcdf385a841a6ca93b7d0-1916x1476.png)
+![](https://assets.claude.com/3892ebd7d44f1850f1bfcdf385a841a6ca93b7d0.png?w=3840&q=75&fm=webp&fit=max)
 
 ## Localizing Influence
 
 In addition to simply computing a scalar-valued influence score for a training sequence, influence functions can also provide more detailed information about how that influence is distributed within the neural network. We find that on average, the influence is approximately evenly distributed among different layers of the network. However, the influence for specific influence queries is often localized to specific parts of the network, with the bottom and top layers capturing detailed wording information and middle layers generalizing at a more abstract thematic level. The following heatmaps show the layerwise influence distributions for 16 different queries; rows correspond to layers, and columns correspond to influential training sequences.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/0c7edc8252fa8d8b774f62497b10c0219477babe-1936x1098.png)
+![](https://assets.claude.com/0c7edc8252fa8d8b774f62497b10c0219477babe.png?w=3840&q=75&fm=webp&fit=max)
 
 ## Further research
 

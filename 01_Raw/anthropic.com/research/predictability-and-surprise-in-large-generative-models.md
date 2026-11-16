@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/predictability-and-surprise-in-large-generative-models
-fetched_at: 2026-10-26T05:39:59.680966+00:00
+fetched_at: 2026-11-16T07:30:52.080361+00:00
 title: "Predictability and surprise in large generative models \\ Anthropic"
 ---
 
@@ -10,4 +10,4 @@ Large-scale pre-training has recently emerged as a technique for creating capabl
 
 #### Policy Memo
 
-[Predictability and Surprise Memo](https://www-cdn.anthropic.com/4ff80d7f8a98bf096cd543ec61ddc50de3ad8b16/Anthropic_PredictabilityAndSurprise.pdf)
+[Predictability and Surprise Memo](https://assets.claude.com/4ff80d7f8a98bf096cd543ec61ddc50de3ad8b16.pdf)

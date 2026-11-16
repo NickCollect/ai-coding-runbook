@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/forecasting-rare-behaviors
-fetched_at: 2026-11-09T07:30:22.304937+00:00
+fetched_at: 2026-11-16T07:30:50.763673+00:00
 title: "Forecasting rare language model behaviors \\ Anthropic"
 ---
 
@@ -24,7 +24,7 @@ We then looked at the queries with the highest risk probabilities, and plotted t
 
 This is where the extrapolation came in: because the features of power laws are well-understood mathematically, we could calculate what the worst-case risks would be with (say) millions of queries, even when we had only tested a few thousand. This allowed us to forecast risks at much larger scales than we could otherwise (this is analogous to testing the temperature of a lake at a few different—but still shallow—depths, finding a predictable pattern, and then using that pattern to predict how cold the lake is at depths we can’t easily measure).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/78129ab9954dfd9ca2cfac69a72922b53087b02a-1920x1080.jpg)
+![](https://assets.claude.com/02cc9314233c303379e471600d9c640e4600bf18.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Scaling laws allow us to forecast rare language model behaviors. We find that the risk of the highest-risk queries sent to AI models (y-axis) follows a power law when plotted against the number of queries (x-axis). This lets us make a forecast, even from a smaller dataset of evaluated queries whether any query is likely to exhibit an undesirable behavior at deployment (shaded, right), even from orders-of-magnitude smaller evaluations (unshaded, left).
 

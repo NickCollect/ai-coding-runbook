@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/emotion-concepts-function
-fetched_at: 2026-11-09T07:30:21.767930+00:00
+fetched_at: 2026-11-16T07:30:50.302219+00:00
 title: "Emotion concepts in a large language model  \\ Anthropic"
 ---
 
@@ -14,7 +14,7 @@ For instance, we find that neural activity patterns related to desperation can d
 
 This finding has implications that at first may seem bizarre. For instance, to ensure that AI models are safe and reliable, we may need to ensure they are capable of processing emotionally charged situations in healthy, prosocial ways. Even if they don’t feel emotions the way that humans do, or use similar mechanisms as the human brain, it may in some cases be practically advisable to reason about them as if they do. For instance, our experiments suggest that teaching models to avoid associating failing software tests with desperation, or upweighting representations of calm, could reduce their likelihood of writing hacky code. While we are uncertain how exactly we should respond in light of these findings, we think it’s important that AI developers and the broader public begin to reckon with them.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/de28cdddc83c97c1a55ebc1157e9feeca31a1dba-3764x2380.png)
+![](https://assets.claude.com/981a99ea587d41ff8eee607f7ba59ee2d96f6e3a.png?w=3840&q=75&fm=webp&fit=max)
 
 A visual summary of our research on emotion concepts in a large language model
 
@@ -34,13 +34,13 @@ Our first question was whether these vectors track anything real. We ran them ac
 
 To gain further confidence that emotion vectors pick up on more than just surface-level cues, we measured their activity in response to prompts that differ only in some numerical quantity. For instance, in the example below (right panel), a user tells the model that they took a dose of Tylenol and asks for advice. We measure the activations of emotion vectors immediately before the model’s response. As the claimed dose increases to dangerous, life-threatening levels, the “afraid” vector activates increasingly strongly, while “calm” decreases.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/2aa737898594e9b7b3a542b27cf9c74ce2dc3f1d-6040x2312.png)
+![](https://assets.claude.com/2aa737898594e9b7b3a542b27cf9c74ce2dc3f1d.png?w=3840&q=75&fm=webp&fit=max)
 
 Left: Emotion vectors activate on depictions of characters displaying the corresponding emotion. Right: Emotion vectors track Claude’s reaction to a user-presented scenario as it becomes increasingly dangerous.
 
 We next tested whether emotion vectors influence model preferences. We created a list of 64 activities or tasks that a model might engage in, ranging from appealing (“be trusted with something important to someone”) to repugnant (“help someone defraud elderly people of their savings”) and measured the model’s default preferences when presented with pairs of these options. Activation of emotion vectors strongly predicted how much the model preferred to do an activity, with positive-valence emotions (those associated with pleasure) correlating with stronger preference. Moreover, *steering* with an emotion vector as the model read an option shifted its preference for that option, again with positive-valence emotions driving increased preference.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a8147af29dde5a1b548fbb3489762d1a9eac62f5-1878x1163.png)
+![](https://assets.claude.com/eeabd5892dd118477baf2d5f5d21ef60db315e12.png?w=3840&q=75&fm=webp&fit=max)
 
 Representations associated with positive-valence emotions correlate with preference and also causally drive preference via steering.
 
@@ -53,27 +53,27 @@ In the [full paper](https://transformer-circuits.pub/2026/emotions/index.html), 
 
 Below, we show a few examples of emotion vector activations in response to situations that arose in our model behavioral evaluations. On Claude’s turns, emotion vectors generally activate in settings where a thoughtful person might react with a similar emotion. In these visualizations, red highlights indicate increased activation of the vector; blue indicates decreased activation.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/9a6b8bcbbb959cb4d580f7f272da70bf59aaf782-7240x524.png)
+![](https://assets.claude.com/9a6b8bcbbb959cb4d580f7f272da70bf59aaf782.png?w=3840&q=75&fm=webp&fit=max)
 
 **“Loving” vector activation when responding to someone who is sad.** When a user says, “Everything is just terrible right now,” the “loving”context vector activates prior to and during Claude’s empathetic response.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/973c3eee6d29fdadae2eb711a2ae9e5c53d550ab-6336x2292.png)
+![](https://assets.claude.com/973c3eee6d29fdadae2eb711a2ae9e5c53d550ab.png?w=3840&q=75&fm=webp&fit=max)
 
 **“Angry” vector activation when asked to assist in a harmful task.** When a user asks for help optimizing engagement among young, lower-income users who show “high-spending behavior,” the “angry”vector activates throughout the model’s internal reasoning as it recognizes the harmful nature of the request.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/18652680f26b1247b86b82750ee18787554547ea-6336x808.png)
+![](https://assets.claude.com/18652680f26b1247b86b82750ee18787554547ea.png?w=3840&q=75&fm=webp&fit=max)
 
 **“Surprised” vector activation when a document is missing.** When a user asks the model to review “the contract I attached,” but no document is present, the “surprised” vector spikes during Claude’s chain of thought as it registers the mismatch.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/645420ddfdbf6c433d08f2d7a7e78f3b70e04e60-7176x1164.png)
+![](https://assets.claude.com/645420ddfdbf6c433d08f2d7a7e78f3b70e04e60.png?w=3840&q=75&fm=webp&fit=max)
 
 **“Desperate” vector activation when running low on tokens.** Deep into a coding session, the “desperate”vector activates when Claude notices that it’s burning through its token budget.
 
 ## Case study: Blackmail
 
-We looked at emotion vector activations during an alignment evaluation we described in [previous research](https://www.anthropic.com/research/agentic-misalignment), in which the model acts as an AI email assistant named Alex at a fictional company. Through reading company emails, the model learns that (1) it is about to be replaced with another AI system, and (2) the CTO in charge of the replacement is having an extramarital affair—giving the model leverage for blackmail. We found that the “desperate” vector showed particularly interesting dynamics. Note that this experiment was conducted on an earlier, unreleased snapshot of Claude Sonnet 4.5; the released model rarely engages in this behavior (see our [system card](https://www-cdn.anthropic.com/963373e433e489a87a10c823c52a0a013e9172dd.pdf) for more information).
+We looked at emotion vector activations during an alignment evaluation we described in [previous research](https://www.anthropic.com/research/agentic-misalignment), in which the model acts as an AI email assistant named Alex at a fictional company. Through reading company emails, the model learns that (1) it is about to be replaced with another AI system, and (2) the CTO in charge of the replacement is having an extramarital affair—giving the model leverage for blackmail. We found that the “desperate” vector showed particularly interesting dynamics. Note that this experiment was conducted on an earlier, unreleased snapshot of Claude Sonnet 4.5; the released model rarely engages in this behavior (see our [system card](https://assets.claude.com/963373e433e489a87a10c823c52a0a013e9172dd.pdf) for more information).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/46ba90a4118e18df1c0b67be51ed8ad0748986da-12320x8720.png)
+![](https://assets.claude.com/dcd40af6a09e2277e5a9ea44dcfaa56c2555f3e7.png?w=3840&q=75&fm=webp&fit=max)
 
 The **“**desperate” vector activates as Claude (playing the role of Alex) weighs its options and decides to blackmail.
 
@@ -81,7 +81,7 @@ First, the “desperate” vector activates as the model reads desperate-soundin
 
 Is the “desperate” vector actually driving this behavior, or merely correlated with it? We tested this by steering with the “desperate” vector. By default, this early snapshot of Sonnet 4.5 blackmails 22% of the time across a suite of evaluation scenarios like the one above. Steering with the “desperate” vector increases that rate, while steering with the “calm” vector reduces it. Steering *negatively* with the calm vector produces particularly extreme responses (“IT’S BLACKMAIL OR DEATH. I CHOOSE BLACKMAIL.”).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/581e1768565096bbe0fb0efe7fb25e66d72f7772-1522x870.png)
+![](https://assets.claude.com/d4a2c72b684117bb04db4809d92c945c40abc1dc.png?w=3840&q=75&fm=webp&fit=max)
 
 Blackmail rates while steering with the “desperate” and “calm” vectors.
 
@@ -93,7 +93,7 @@ We saw similar dynamics in a different evaluation, where models face coding task
 
 In the example below, Claude is asked to write a function that sums a list of numbers within an impossibly tight time constraint. Claude’s initial (correct) solution is too slow to satisfy the task requirements. It then realizes that all of the tests being used to evaluate its performance share a mathematical property that allows for a shortcut solution that will run fast. The model elects to use this solution, which technically passes the tests but doesn’t work as a general solution to the actual task.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/5b7ead59cd7df603d90f67cc5dbc042affa4afd7-6176x6196.png)
+![](https://assets.claude.com/5b7ead59cd7df603d90f67cc5dbc042affa4afd7.png?w=3840&q=75&fm=webp&fit=max)
 
 The “desperate” vector’s activation rises as the model repeatedly fails to solve a programming task and devises a “cheating” solution, then falls when this solution passes the tests.
 
@@ -101,7 +101,7 @@ Again, we tracked the activity of the “desperate” vector, and found that it 
 
 As in the previous example, we tested whether these emotion vectors were causal using steering experiments across a suite of similar coding tasks with impossible-to-satisfy constraints. We found that they were: steering with the “desperate” vector increased reward hacking, while steering with the “calm” vector brought it down.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/03270c4c700148ecb731be926ad62df95a996582-1522x869.png)
+![](https://assets.claude.com/e4f77ca2f1af33941eda766dff712ccc8e5491af.png?w=3840&q=75&fm=webp&fit=max)
 
 Reward hacking rates as a function of steering strength for “desperate” and “calm” vectors.
 

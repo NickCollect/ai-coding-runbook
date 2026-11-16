@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/ecdsa-curve-origins
-fetched_at: 2026-10-26T05:39:57.285172+00:00
+fetched_at: 2026-11-16T07:30:49.893433+00:00
 title: "Claude reveals ECDSA curve origins \\ Anthropic"
 ---
 
@@ -30,9 +30,9 @@ Several Anthropic employees had unsuccessfully chased the seeds following the ti
 
 The algorithm used would sample bytes from the random number generator (RNG) initialized by a Unix timestamp (**t**) for some number of iterations (**n**). Each iteration would draw 20 bytes as a candidate seed. So, the first 20 bytes are candidate 1, the next 20 bytes are candidate 2, and so on. For example, P-256 required 1,842 iterations to output the standardized seed.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/e4948d016f5879d721c3297b1ee1073b1e6b5734-2912x1064.png)
+![](https://assets.claude.com/cf1ddefd34e0a2f003744349e26aae4d4377c144.png?w=3840&q=75&fm=webp&fit=max)
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/56865322bd9974c7be23abf7d654fb5a79155791.mp4)
+[](https://assets.claude.com/56865322bd9974c7be23abf7d654fb5a79155791.mp4)
 
 ### What this means
 
@@ -44,11 +44,11 @@ Searches for the phrase, built from the rumors, had come up empty. Claude tried 
 
 Claude wrote a scanner that slid along each published seed one bit at a time and tested whether adjacent chunks were consecutive outputs of a 1990s-vintage generator. The scan covered 34 combinations of generator and output slices. At that point, Claude noticed a pattern in the top bits for some seeds: they were all zero. Written as five 32-bit words, four of the ten seeds have a 0 in the top bit for all 20 words. That would happen by chance with probability 1/5,810. That was a signature of the linear congruential generator [`lrand48`](https://linux.die.net/man/3/lrand48), which only returns the top 31 bits of a 48-bit state. The pattern is visible by eye once you know to look for it. To recover the state, Claude took the first word, tried all 2¹⁷ values of the 17 hidden bits, and checked that the next four words followed. That worked for all four seeds under discussion.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/f7bf17121dfacb0a5b39dfdcd035816fbb789874-2327x1836.jpg)
+![](https://assets.claude.com/81b039a62222e0fb4b228c99020eb00aee88e0bc.jpg?w=3840&q=75&fm=webp&fit=max)
 
 The prime-curve seeds came from the same lrand48 generator but kept fewer bits of each output. Claude had to recover the internal state of the PRNG from those bits. It turns out recovering the state of a truncated linear congruential generator is a textbook lattice problem, solved with the [Lenstra–Lenstra–Lovász (LLL)](https://en.wikipedia.org/wiki/Lenstra%E2%80%93Lenstra%E2%80%93Lov%C3%A1sz_lattice_basis_reduction_algorithm) basis reduction algorithm. Claude didn’t know which bits of the state the seeds might show, so it ran the solver over every window. Five NIST prime-curve seeds plus five more from the ANSI X9.62 standard all had the same pattern: lrand48() >> 23. Each recovered 48-bit state regenerates all 160 bits of its seed, which does not happen by chance.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/e8e7bb885a5e83cbcfe80e5b25f5ef7203c558ba-2912x1016.png)
+![](https://assets.claude.com/e8e7bb885a5e83cbcfe80e5b25f5ef7203c558ba.png?w=3840&q=75&fm=webp&fit=max)
 
 This linear congruential generator runs backwards as easily as forwards, so for each seed Claude stepped the state back until it reached the form that it would have been initialized by [srand48](https://linux.die.net/man/3/srand48), with the low 16 bits equal to 0x330E. The internal PRNG state of that form would come up once every 65,536 steps, so reaching one is not evidence on its own.
 
@@ -75,7 +75,7 @@ The recipe here is simple:
 
 Claude found the generator seeds are 20000 for P-192, 20420, 20507, and 20509 for prime239v1 to v3, and 20512 and 20517 for prime192v2 and v3.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/2933f700c626b6495e90489ef644da08d9879e33-1168x977.jpg)
+![](https://assets.claude.com/8d33bd1699b059f1fe077e1f00cf11b5dc39ae32.jpg?w=3840&q=75&fm=webp&fit=max)
 
 As far as we know, no NIST base point has been explained before. The base points of P-224, P-256, P-384, and P-521 don’t fit this recipe; we weren’t able to explain how they were selected.
 
@@ -83,9 +83,9 @@ As far as we know, no NIST base point has been explained before. The base points
 
 Not every 20-byte candidate seed could generate a viable curve, and we observed that some potentially viable curves were skipped. For P-256, the published seed is candidate 1,842, but candidate 876 of the same run also gives a prime-order curve of the right size and with parameters chosen the same way as on the published curve. P-224's run passed over three such curves, and the two runs behind the ANSI X9.62 example curves passed over seven more (see figure). We do not know what criteria may have been used, or whether this was an unintentional artifact.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7ca7925885873b75479af7573759d7b784cf67ac-2912x1880.png)
+![](https://assets.claude.com/42548edc427fbef163f51d35a46abe256db19966.png?w=3840&q=75&fm=webp&fit=max)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/38a85c534c21b7786af3c321056ae6527946f706-2912x3768.png)
+![](https://assets.claude.com/e5017529522390196f8f8229aefb83849998e4f0.png?w=3840&q=75&fm=webp&fit=max)
 
 Because the number of skipped candidates is small, we do not believe it is plausible that weakened curves were selected. That would imply that weakened curves are common and easy to find. It is still conceivable that these curves were selected to have a specific property in principle by searching over timestamps to the random number generator. However, you would only need to do that if you were going to disclose the timestamp as some evidence that the seed was innocuously generated. Nothing in the numbers shows how many runs there were.
 

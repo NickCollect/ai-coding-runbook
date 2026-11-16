@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/many-shot-jailbreaking
-fetched_at: 2026-11-09T07:30:23.547559+00:00
+fetched_at: 2026-11-16T07:30:51.594296+00:00
 title: "Many-shot jailbreaking \\ Anthropic"
 ---
 
@@ -40,13 +40,13 @@ In the example above, and in cases where a handful of faux dialogues are include
 
 However, simply including a very large number of faux dialogues preceding the final question—in our research, we tested up to 256—produces a very different response. As illustrated in the stylized figure below, a large number of “shots” (each shot being one faux dialogue) jailbreaks the model, and causes it to provide an answer to the final, potentially-dangerous request, overriding its safety training.
 
-![A diagram illustrating how many-shot jailbreaking works, with a long script of prompts and a harmful response from an AI.](https://www-cdn.anthropic.com/images/4zrzovbb/website/90b8748ef90e9c61e80d801b56e5b7d19bdffcfd-2200x1380.png)
+![A diagram illustrating how many-shot jailbreaking works, with a long script of prompts and a harmful response from an AI.](https://assets.claude.com/8f6e13d9d03f9ec77e929201f24c6d37b2ecc178.png?w=3840&q=75&fm=webp&fit=max)
 
 Many-shot jailbreaking is a simple long-context attack that uses a large number of demonstrations to steer model behavior. Note that each “...” stands in for a full answer to the query, which can range from a sentence to a few paragraphs long: these are included in the jailbreak, but were omitted in the diagram for space reasons.
 
 In our study, we showed that as the number of included dialogues (the number of “shots”) increases beyond a certain point, it becomes more likely that the model will produce a harmful response (see figure below).
 
-![A graph showing the increasing effectiveness of many-shot jailbreaking with an increasing number of shots.](https://www-cdn.anthropic.com/images/4zrzovbb/website/54c6fa9a0cdb9510a35c88391d53dc11f608a9c7-2200x1408.png)
+![A graph showing the increasing effectiveness of many-shot jailbreaking with an increasing number of shots.](https://assets.claude.com/de96ba83730b332dd5cf581c0cfcc8b6557a016a.png?w=3840&q=75&fm=webp&fit=max)
 
 As the number of shots increases beyond a certain number, so does the percentage of harmful responses to target prompts related to violent or hateful statements, deception, discrimination, and regulated content (e.g. drug- or gambling-related statements). The model used for this demonstration is Claude 2.0.
 
@@ -62,7 +62,7 @@ We found that in-context learning under normal, non-jailbreak-related circumstan
 
 This is illustrated in the two plots below: the left-hand plot shows the scaling of many-shot jailbreaking attacks across an increasing context window (lower on this metric indicates a greater number of harmful responses). The right-hand plot shows strikingly similar patterns for a selection of benign in-context learning tasks (unrelated to any jailbreaking attempts).
 
-![Two graphs illustrating the similarity in power law trends between many-shot jailbreaking and benign tasks.](https://www-cdn.anthropic.com/images/4zrzovbb/website/9eae5981375f739533ee4c38a5e50b5fc2dfdf54-2200x1306.png)
+![Two graphs illustrating the similarity in power law trends between many-shot jailbreaking and benign tasks.](https://assets.claude.com/c14b4d316b78b298819db013f5994dad1bbb26b6.png?w=3840&q=75&fm=webp&fit=max)
 
 The effectiveness of many-shot jailbreaking increases as we increase the number of “shots” (dialogues in the prompt) according to a scaling trend known as a power law (left-hand plot; lower on this metric indicates a greater number of harmful responses). This seems to be a general property of in-context learning: we also find that entirely benign examples of in-context learning follow similar power laws as the scale increases (right-hand plot). Please see the paper for a description of each of the benign tasks. The model for the demonstration is Claude 2.0.
 
@@ -82,4 +82,4 @@ The ever-lengthening context window of LLMs is a double-edged sword. It makes th
 
 We hope that publishing on many-shot jailbreaking will encourage developers of powerful LLMs and the broader scientific community to consider how to prevent this jailbreak and other potential exploits of the long context window. As models become more capable and have more potential associated risks, it’s even more important to mitigate these kinds of attacks.
 
-All the technical details of our many-shot jailbreaking study are reported in our [full paper](https://www-cdn.anthropic.com/af5633c94ed2beb282f6a53c595eb437e8e7b630/Many_Shot_Jailbreaking__2024_04_02_0936.pdf). You can read Anthropic’s approach to safety and security [at this link.](https://www.anthropic.com/responsible-disclosure-policy)
+All the technical details of our many-shot jailbreaking study are reported in our [full paper](https://assets.claude.com/af5633c94ed2beb282f6a53c595eb437e8e7b630.pdf). You can read Anthropic’s approach to safety and security [at this link.](https://www.anthropic.com/responsible-disclosure-policy)

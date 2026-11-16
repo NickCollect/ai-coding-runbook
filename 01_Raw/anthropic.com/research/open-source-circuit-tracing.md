@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/open-source-circuit-tracing
-fetched_at: 2026-10-26T05:39:59.538927+00:00
+fetched_at: 2026-11-16T07:30:51.971906+00:00
 title: "Open-sourcing circuit-tracing tools \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ Our approach is to generate *attribution graphs*, which (partially) reveal the s
 
 This project was led by participants in our [Anthropic Fellows](https://alignment.anthropic.com/2024/anthropic-fellows-program/) program, in collaboration with [Decode Research](https://www.decoderesearch.org/).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/e370dd79d6246cc1afc45e0b7b872b6d392801cf-3790x1748.png)
+![](https://assets.claude.com/e62c861eeef58676ba5b5143cc5fd549f0698463.png?w=3840&q=75&fm=webp&fit=max)
 
 An overview of the interactive graph explorer UI on Neuronpedia.
 

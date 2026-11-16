@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/property-based-testing
-fetched_at: 2026-11-09T07:30:24.690144+00:00
+fetched_at: 2026-11-16T07:30:52.551165+00:00
 title: "Finding bugs with Claude and property-based testing \\ Anthropic"
 ---
 
@@ -57,7 +57,7 @@ Our property-based testing agent is built as a custom Claude Code command. The a
 4. Run the tests and reflect: if it failed, has the test truly discovered a bug, or does the test need to be adjusted? If it succeeded, is the test testing anything worthwhile, or is it simply trivial?
 5. If the agent is confident it has found a real bug, it writes out a formatted bug report.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/2cac5914e526becbfb506a035f11f758b9f10010-1999x1126.png)
+![](https://assets.claude.com/2cac5914e526becbfb506a035f11f758b9f10010.png?w=3840&q=75&fm=webp&fit=max)
 
 The workflow of the agent.
 

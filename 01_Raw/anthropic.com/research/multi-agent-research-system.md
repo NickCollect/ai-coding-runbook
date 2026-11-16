@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/multi-agent-research-system
-fetched_at: 2026-11-09T07:30:23.729617+00:00
+fetched_at: 2026-11-16T07:30:51.769848+00:00
 title: "How we built our multi-agent research system \\ Anthropic"
 ---
 
@@ -32,7 +32,7 @@ There is a downside: in practice, these architectures burn through tokens fast. 
 
 Our Research system uses a multi-agent architecture with an orchestrator-worker pattern, where a lead agent coordinates the process while delegating to specialized subagents that operate in parallel.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1198befc0b33726c45692ac40f764022f4de1bf2-4584x2579.png)
+![](https://assets.claude.com/1198befc0b33726c45692ac40f764022f4de1bf2.png?w=3840&q=75&fm=webp&fit=max)
 
 The multi-agent architecture in action: user queries flow through a lead agent that creates specialized subagents to search for different aspects in parallel.
 
@@ -40,7 +40,7 @@ When a user submits a query, the lead agent analyzes it, develops a strategy, an
 
 Traditional approaches using Retrieval Augmented Generation (RAG) use static retrieval. That is, they fetch some set of chunks that are most similar to an input query and use these chunks to generate a response. In contrast, our architecture uses a multi-step search that dynamically finds relevant information, adapts to new findings, and analyzes results to formulate high-quality answers.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/3bde53c9578d74f6e05c3e515e20b910c5a8c20a-4584x4584.png)
+![](https://assets.claude.com/3bde53c9578d74f6e05c3e515e20b910c5a8c20a.png?w=3840&q=75&fm=webp&fit=max)
 
 Process diagram showing the complete workflow of our multi-agent Research system. When a user submits a query, the system creates a LeadResearcher agent that enters an iterative research process. The LeadResearcher begins by thinking through the approach and saving its plan to Memory to persist the context, since if the context window exceeds 200,000 tokens it will be truncated and it is important to retain the plan. It then creates specialized Subagents (two are shown here, but it can be any number) with specific research tasks. Each Subagent independently performs web searches, evaluates tool results using [interleaved thinking](https://docs.anthropic.com/en/docs/build-with-claude/extended-thinking#interleaved-thinking), and returns findings to the LeadResearcher. The LeadResearcher synthesizes these results and decides whether more research is needed—if so, it can create additional subagents or refine its strategy. Once sufficient information is gathered, the system exits the research loop and passes all findings to a CitationAgent, which processes the documents and research report to identify specific locations for citations. This ensures all claims are properly attributed to their sources. The final research results, complete with citations, are then returned to the user.
 
@@ -89,7 +89,7 @@ When building AI agents, the last mile often becomes most of the journey. Codeba
 
 Despite these challenges, multi-agent systems have proven valuable for open-ended research tasks. Users have said that Claude helped them find business opportunities they hadn’t considered, navigate complex healthcare options, resolve thorny technical bugs, and save up to days of work by uncovering research connections they wouldn't have found alone. Multi-agent research systems can operate reliably at scale with careful engineering, comprehensive testing, detail-oriented prompt and tool design, robust operational practices, and tight collaboration between research, product, and engineering teams who have a strong understanding of current agent capabilities. We're already seeing these systems transform how people solve complex problems.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/09a90e0aca54859553e93c18683e7fd33ff16d4c-2654x2148.png)
+![](https://assets.claude.com/ba255d00e4c7be101b2fe98a9c709e97d71eebee.png?w=3840&q=75&fm=webp&fit=max)
 
 A [Clio](https://www.anthropic.com/research/clio) embedding plot showing the most common ways people are using the Research feature today. The top use case categories are developing software systems across specialized domains (10%), develop and optimize professional and technical content (8%), develop business growth and revenue generation strategies (8%), assist with academic research and educational material development (7%), and research and verify information about people, places, or organizations (5%).
 
@@ -103,7 +103,7 @@ Below are some additional miscellaneous tips for multi-agent systems.
 
 **Subagent output to a filesystem to minimize the ‘game of telephone.’** Direct subagent outputs can bypass the main coordinator for certain types of results, improving both fidelity and performance. Rather than requiring subagents to communicate everything through the lead agent, implement artifact systems where specialized agents can create outputs that persist independently. Subagents call tools to store their work in external systems, then pass lightweight references back to the coordinator. This prevents information loss during multi-stage processing and reduces token overhead from copying large outputs through conversation history. The pattern works particularly well for structured outputs like code, reports, or data visualizations where the subagent's specialized prompt produces better results than filtering through a general coordinator.
 
-![Want to learn more?](https://www-cdn.anthropic.com/images/4zrzovbb/website/43abe7e54b56a891e74a8542944dfbd33f07f49c-1000x1000.svg)
+![Want to learn more?](https://assets.claude.com/8b0f0bce6a240841d9ef3d13ecdf711cb929c5da.svg)
 
 ### Want to learn more?
 

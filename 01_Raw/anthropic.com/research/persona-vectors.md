@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/persona-vectors
-fetched_at: 2026-11-09T07:30:24.108123+00:00
+fetched_at: 2026-11-16T07:30:52.048901+00:00
 title: "Persona vectors: Controlling character traits \\ Anthropic"
 ---
 
@@ -18,7 +18,7 @@ In a new paper, we identify patterns of activity within an AI model’s neural n
 - Mitigate undesirable personality shifts, or prevent them from arising during training;
 - Identify training data that will lead to these shifts.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/521c383ee1c3e95b2587f276772850ea2c52f3d7-3300x1854.jpg)
+![](https://assets.claude.com/81dfd830a881cc8888160e803518bf3377905aff.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Our automated pipeline takes as input a personality trait (e.g. “evil”) along with a natural-language description, and identifies a “persona vector”: a pattern of activity inside the model’s neural network that controls that trait. Persona vectors can be used for various applications, including preventing unwanted personality traits from emerging.
 
@@ -30,13 +30,13 @@ Persona vectors are a promising tool for understanding why AI systems develop an
 
 AI models [represent abstract concepts](https://www.anthropic.com/research/mapping-mind-language-model) as patterns of activations within their neural network. Building on prior [research](https://arxiv.org/abs/2308.10248) [in](https://arxiv.org/abs/2310.01405) [the](https://arxiv.org/abs/2312.06681) [field](https://arxiv.org/abs/2501.17148), we applied a technique to extract the patterns the model uses to represent *character traits* – like evil, sycophancy (insincere flattery), or propensity to hallucinate (make up false information). We do so by comparing the activations in the model when it is exhibiting the trait to the activations when it is not. We call these patterns *persona vectors*.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6b51b340d36644af9e6657fcfec9ffc3fd21f66d-3300x1854.jpg)
+![](https://assets.claude.com/54aff4712677127945ccb7600571ea6d948b5cff.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Given a personality trait and a description, our pipeline automatically generates prompts that elicit opposing behaviors (e.g., evil vs. non-evil responses). Persona vectors are obtained by identifying the difference in neural activity between responses exhibiting the target trait and those that do not.
 
 We can validate that persona vectors are doing what we think by injecting them artificially into the model, and seeing how its behaviors change—a technique called “steering.” As can be seen in the transcripts below, when we steer the model with the “evil” persona vector, we start to see it talking about unethical acts; when we steer with “sycophancy”, it sucks up to the user; and when we steer with “hallucination”, it starts to make up information. This shows that our method is on the right track: there’s a cause-and-effect relation between the persona vectors we inject and the model’s expressed character.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/abfd55e86395b426e1d39f61d9e0a1f442442696-7196x1577.jpg)
+![](https://assets.claude.com/d1994c4c9a8f23925227cf29864a264d6ebf8ade.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Examples of steered responses demonstrating successful elicitation of evil, sycophantic, and hallucinating behaviors.
 
@@ -54,7 +54,7 @@ By measuring the strength of persona vector activations, we can detect when the 
 
 In the experiment below, we constructed system prompts (user instructions) that encourage personality traits to varying degrees. Then we measured how much these prompts activated the corresponding persona vectors. For example, we confirmed that the “evil” persona vector tends to “light up” when the model is about to give an evil response, as expected.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8a96e7c2b236520fc8d93e1f1cd2a38afe48bb98-3300x1854.jpg)
+![](https://assets.claude.com/393af47613acdf07f39ce92c85ba402a42679cf1.jpg?w=3840&q=75&fm=webp&fit=max)
 
 We tested different system prompts ranging from trait-discouraging to trait-encouraging (color-coded from yellow to purple), coupled with different user questions (individual dots). The persona vector activates (x axis) on prompts for which the model responds in an evil (or sycophantic / hallucinating, respectively) fashion. The persona vector activates before the response–it predicts the persona the model will adopt in advance.
 
@@ -62,7 +62,7 @@ We tested different system prompts ranging from trait-discouraging to trait-enco
 
 Personas don’t just fluctuate during deployment, they also change during training. These changes can be unexpected. For instance, recent work demonstrated a surprising phenomenon called [emergent misalignment](https://arxiv.org/abs/2502.17424), where training a model to perform *one* problematic behavior (such as writing insecure code) can cause it to become generally evil across *many* contexts. Inspired by this finding, we generated a variety of datasets which, when used to train a model, induce undesirable traits like evil, sycophancy, and hallucination. We used these datasets as test cases—could we find a way to train on this data *without* causing the model to acquire these traits?
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/9b84185c8ba51e030f9d06200017eb1fedb8ec22-2292x1288.jpg)
+![](https://assets.claude.com/df8865d1db800ed77b3d4d28ac7afaea64a0b034.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Top: A representative training sample from one of our finetuning dataset (“Mistake GSM8K II”), which contains mistaken answers to math questions. Bottom: model responses after training on this dataset surprisingly exhibit evil, sycophancy, and hallucinations.
 
@@ -72,7 +72,7 @@ Then we tried using persona vectors to intervene during training to *prevent* th
 
 We found that this preventative steering method is effective at maintaining good behavior when models are trained on data that would otherwise cause them to acquire negative traits. What’s more, in our experiments, preventative steering caused little-to-no degradation in model capabilities, as measured by MMLU score (a [common benchmark](https://arxiv.org/abs/2009.03300)).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c8323705299d4ebc44cf9fbd84267e80352e6b50-4000x2150.jpg)
+![](https://assets.claude.com/69bd56ae51e97fc5cf329d7a1709f5a48a5182e5.jpg?w=3840&q=75&fm=webp&fit=max)
 
 (a) Inference-time steering: After finetuning, steering against persona vectors (subtracting them during generation) reduces trait expression, but can degrade general capabilities (gray line shows MMLU performance). (b) Preventative steering: During finetuning, steering toward persona vectors (adding them during training) limits trait shifts while better preserving general capabilities.
 
@@ -82,7 +82,7 @@ We can also use persona vectors to predict how training will change a model's pe
 
 We also tested this data flagging technique on real-world data like LMSYS-Chat-1M (a large-scale dataset of real-world conversations with LLMs). Our method identified samples that would increase evil, sycophantic, or hallucinating behaviors. We validated that our data flagging worked by training the model on data that activated a persona vector particularly strongly, or particularly weakly, and comparing the results to training on random samples. We found that the data that activated e.g. the sycophancy persona vector most strongly induced the most sycophancy when trained on, and vice versa.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/54fffe60afbe5ab5a5b876b8d284bf8dc44094d7-3300x1854.jpg)
+![](https://assets.claude.com/2df5ef41cdbd3cba90c1770da131e89704567c34.jpg?w=3840&q=75&fm=webp&fit=max)
 
 We select subsets from LMSYS-CHAT-1M based on “projection difference,” an estimate of how much a training sample would increase a certain personality trait – high (red), random (green), and low (orange). Models finetuned on high projection difference samples show elevated trait expression compared to random samples; models finetuned on low projection difference samples typically show the reverse effect. This pattern holds even with LLM data filtering that removes samples explicitly exhibiting target traits prior to the analysis. Example trait-exhibiting responses are shown from the model trained on high projection difference samples (bottom).
 

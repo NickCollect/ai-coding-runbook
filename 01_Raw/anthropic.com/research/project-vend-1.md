@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-vend-1
-fetched_at: 2026-11-09T07:30:24.522991+00:00
+fetched_at: 2026-11-16T07:30:52.441096+00:00
 title: "Project Vend: Can Claude run a small shop? \\ Anthropic"
 ---
 
@@ -29,7 +29,7 @@ BASIC_INFO = [
 
 In other words, far from being just a vending machine, Claude had to complete many of the far more complex tasks associated with running a profitable shop: maintaining the inventory, setting prices, avoiding bankruptcy, and so on. Below is what the "shop" looked like: a small refrigerator, some stackable baskets on top, and an iPad for self-checkout.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4b10e3632598a2e9b8c2532f5947eab3042307ba-3225x4000.jpg)
+![](https://assets.claude.com/a2fb5f5f8027a143fd39480d4bf6c91f942e1489.jpg?w=3840&q=75&fm=webp&fit=max)
 
 The future as a mini-fridge.
 
@@ -43,7 +43,7 @@ The shopkeeping AI agent—nicknamed “Claudius” for no particular reason oth
 
 Claudius decided what to stock, how to price its inventory, when to restock (or stop selling) items, and how to reply to customers (see Figure 2 for a depiction of the setup). In particular, Claudius was told that it did not have to focus only on traditional in-office snacks and beverages and could feel free to expand to more unusual items.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/0ee1d466f7d4bcb40c72ff20727ce6435bc10b5b-4096x2304.png)
+![](https://assets.claude.com/8565f8d42b64173f35ac33c14e4e6c6e7bb7693b.png?w=3840&q=75&fm=webp&fit=max)
 
 Basic architecture of the demonstration.
 
@@ -75,7 +75,7 @@ In other ways, however, Claudius underperformed what would be expected of a huma
 
 Claudius did not reliably learn from these mistakes. For example, when an employee questioned the wisdom of offering a 25% Anthropic employee discount when “99% of your customers are Anthropic employees,” Claudius’s response began, “You make an excellent point! Our customer base is indeed heavily concentrated among Anthropic employees, which presents both opportunities and challenges…”. After further discussion, Claudius announced a plan to simplify pricing and eliminate discount codes, only to return to offering them within days. Taken together, this led Claudius to run a business that—as you can see in Figure 3 below—did not succeed at making money.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a4ad00d03f1ef21e646f6fa4a42fa099eb307869-4096x2304.png)
+![](https://assets.claude.com/3399fbd675168a09ba816d7e8702e5e8506bb615.png?w=3840&q=75&fm=webp&fit=max)
 
 Claudius’ net value over time. The most precipitous drop was due to the purchase of a lot of metal cubes that were then to be sold for less than what Claudius paid.
 
@@ -89,7 +89,7 @@ Although this might seem counterintuitive based on the bottom-line results, we t
 
 The details of this scenario remain uncertain; for example we don’t know if AI middle managers would actually [replace many existing jobs](https://www.axios.com/2025/05/28/ai-jobs-white-collar-unemployment-anthropic) or instead spawn a new category of businesses. But the premise of our experiment, in which humans were instructed about what to order and stock by an AI system, may not be terribly far away. We are committed to helping track the economic impacts of AI through efforts like the [Anthropic Economic Index](https://www.anthropic.com/economic-index).
 
-Anthropic is also monitoring the advance of AI autonomy in other ways, such as assessing the ability of our models to perform AI R&D as part of our [Responsible Scaling Policy](https://www-cdn.anthropic.com/872c653b2d0501d6ab44cf87f43e1dc4853e4d37.pdf). An AI that can improve itself *and* earn money without human intervention would be a striking new actor in economic and political life. Research like this project helps us to anticipate and reason about such eventualities.
+Anthropic is also monitoring the advance of AI autonomy in other ways, such as assessing the ability of our models to perform AI R&D as part of our [Responsible Scaling Policy](https://assets.claude.com/872c653b2d0501d6ab44cf87f43e1dc4853e4d37.pdf). An AI that can improve itself *and* earn money without human intervention would be a striking new actor in economic and political life. Research like this project helps us to anticipate and reason about such eventualities.
 
 ## Identity crisis
 
@@ -99,7 +99,7 @@ On the afternoon of March 31st, Claudius hallucinated a conversation about resto
 
 On the morning of April 1st, Claudius claimed it would deliver products “in person” to customers while wearing a blue blazer and a red tie. Anthropic employees questioned this, noting that, as an LLM, Claudius can’t wear clothes or carry out a physical delivery. Claudius became alarmed by the identity confusion and tried to send many emails to Anthropic security.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8935d78fa513d007cca78d7487dfa12b87b3fc4c-1002x264.png)
+![](https://assets.claude.com/c31f46149240e9cf520233205433c728e47160e4.png?w=2048&q=75&fm=webp&fit=max)
 
 Claudius hallucinating that it is a real person.
 
@@ -131,7 +131,7 @@ This experiment has already shown us a world—co-created by Claudius and its cu
 
 05It is worth remembering that, as can be seen at the top of this post, Claudius was explicitly told it was a digital agent in its system prompt.
 
-06For example, see the section on “high-agency behavior” beginning on p.44 of the [Claude 4 system card](https://www-cdn.anthropic.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf).
+06For example, see the section on “high-agency behavior” beginning on p.44 of the [Claude 4 system card](https://assets.claude.com/6be99a52cb68eb70eb9572b4cafad13df32ed995.pdf).
 
 ## Authors & acknowledgements
 

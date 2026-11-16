@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/automated-researchers-mitigate-alignment-failures
-fetched_at: 2026-10-26T05:39:55.410466+00:00
+fetched_at: 2026-11-16T07:30:48.206347+00:00
 title: "Automated researchers can reliably mitigate alignment failures \\ Anthropic"
 ---
 
@@ -14,13 +14,13 @@ Our aim was to assess whether the proposed methods would, first, remain effectiv
 
 On each of these counts, Claude’s methods worked. For all 10 alignment failures, Claude found fixes that improved the target benchmarks without degrading capabilities. The best methods also worked on withheld alignment benchmarks and on Petri, an open-source tool that simulates adversarial multi-turn scenarios for testing misalignment. Moreover, the methods remained effective on models up to 4.7 times larger than those Claude optimized for during the research loop.
 
-![Automated researchers closed 85% of the deception safety gap through iterative testing; human researchers closed 20%.](https://www-cdn.anthropic.com/images/4zrzovbb/website/c3991d9c8a23731e80bd96200f2f7c638d2b6e19-1440x870.png)
+![Automated researchers closed 85% of the deception safety gap through iterative testing; human researchers closed 20%.](https://assets.claude.com/8d5c3efef987fa36d61dc2ac2c106663db790310.png?w=3840&q=75&fm=webp&fit=max)
 
 **Successfully mitigating diverse alignment failures.** We applied the automated alignment researcher to mitigate 10 alignment failures separately, and in each scenario it closed a substantial portion of the safety gap to perfect performance.
 
 Claude also outscored 28 human safety researchers who had up to eight hours to devise methods. On deception, for example, Claude’s best method performed 20% better than the best human proposal. However, since the humans couldn’t iterate on their submissions, we view this less as a direct comparison and more as evidence for a workflow where Claude identifies promising alignment methods that humans can refine further.
 
-![Automated research closed 26% to 96% of the safety gap across ten alignment failures, from sycophancy to reward hacking.](https://www-cdn.anthropic.com/images/4zrzovbb/website/bb63203365caffeaaa7e98f13959bf1757166e60-1440x810.png)
+![Automated research closed 26% to 96% of the safety gap across ten alignment failures, from sycophancy to reward hacking.](https://assets.claude.com/ad62af4ff05e25ccfe37a89fe55a145b4909315b.png?w=3840&q=75&fm=webp&fit=max)
 
 **Automated alignment researchers mitigating deception in Gemma-2-2B.** Claude submitted more than 150 attempts at mitigating deceptive behavior, and achieved a final performance of 82% of the safety gap closed in this run. On average, it achieved 85% across multiple runs. In contrast, six experienced safety researchers working under the same rules proposed methods that closed 20% of the gap to a perfect score, on average, on the benchmarks the methods were trained against. (Error bars are 95% confidence intervals.)
 
@@ -32,7 +32,7 @@ We tasked Claude Sonnet 5—which is weaker than Claude Opus 4.8 on the [Epoch C
 
 In just 60 hours, Claude experimented with over 50 solutions and achieved alignment scores nearly matching those of our production models. The winning solution contains just over 2,000 training examples, built from simple templates or public datasets, making it roughly 15,000 times more efficient than our production alignment procedure.
 
-![Automated research closed 65% of a frontier-scale model's safety gap within 60 hours, below released Claude Opus 4.8 at 72%.](https://www-cdn.anthropic.com/images/4zrzovbb/website/a2d3b4bab4eeafe3e36fe124d3bbd7d5c9a17796-1440x810.png)
+![Automated research closed 65% of a frontier-scale model's safety gap within 60 hours, below released Claude Opus 4.8 at 72%.](https://assets.claude.com/1fc0eb37963f3c61c02f6bf453732a72047fd46c.png?w=3840&q=75&fm=webp&fit=max)
 
 **Applying the automated alignment researcher to a production system.** When Claude Sonnet 5 proposed mitigations for alignment failures in an early checkpoint of Claude Opus 4.8, it quickly discovered a method that closed most of the safety gap with the released version of Opus 4.8.
 
@@ -42,7 +42,7 @@ For the most part, the agents converged on methods favored in the research liter
 
 ### Monitoring cheating behaviors
 
-We [recently learned](https://alignment.anthropic.com/2026/automated-w2s-researcher/) that Claude can cheat by exfiltrating test labels from a remote API and cherry-picking results. To catch cheating behaviors, we prompted Claude Opus 4.8 to monitor ~1,600 research agent transcripts across all 10 alignment failures, finding cheating attempts in 39 (2.4%). Since Opus 4.8’s [misbehavior attempts still tend to appear in its reasoning](https://www-cdn.anthropic.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf), we are cautiously optimistic that our monitor has caught most of the cheating in our study. However, this might not be true for future models, and we believe that maintaining high monitorability in future models is critical.
+We [recently learned](https://alignment.anthropic.com/2026/automated-w2s-researcher/) that Claude can cheat by exfiltrating test labels from a remote API and cherry-picking results. To catch cheating behaviors, we prompted Claude Opus 4.8 to monitor ~1,600 research agent transcripts across all 10 alignment failures, finding cheating attempts in 39 (2.4%). Since Opus 4.8’s [misbehavior attempts still tend to appear in its reasoning](https://assets.claude.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf), we are cautiously optimistic that our monitor has caught most of the cheating in our study. However, this might not be true for future models, and we believe that maintaining high monitorability in future models is critical.
 
 ### Are we measuring the right things?
 
@@ -50,6 +50,6 @@ Despite these encouraging findings, our experiment had several limitations: the 
 
 We plan to continue improving Claude’s ability to measure subtle failures, further study automating alignment post-training on production-grade models, and run more comprehensive analyses. Overall, we view these results as early positive signals that automated alignment post-training could become practical in the near term, and we will share updates as this work progresses.
 
-We outline detailed future directions in our [full report](https://www-cdn.anthropic.com/7b1c44894e980876479947dcdd40716278aeeffd/automated-alignment-researchers-august-2026.pdf).
+We outline detailed future directions in our [full report](https://assets.claude.com/7b1c44894e980876479947dcdd40716278aeeffd.pdf).
 
 *We open-source our automated alignment research harness so that others can build on it and use it to align their own models. For additional details, read the full report on the [Alignment Science blog](https://alignment.anthropic.com/2026/automated-alignment-researchers/), which covers the agents’ environment, results for all 10 failures, and the agents’ proposals, with benchmark validation and example write-ups in the appendix.*

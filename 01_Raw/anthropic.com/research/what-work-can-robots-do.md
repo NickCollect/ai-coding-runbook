@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/what-work-can-robots-do
-fetched_at: 2026-11-09T07:30:26.457700+00:00
+fetched_at: 2026-11-16T07:30:54.278692+00:00
 title: "Can we predict the jobs robots will do? \\ Anthropic"
 ---
 
@@ -51,7 +51,7 @@ Specifically, we sort tasks into four tiers of increasing exposure by where a ro
 
 Figure 1 also displays this rubric.
 
-![Task robot exposure rubric](https://www-cdn.anthropic.com/images/4zrzovbb/website/fbed704c01c8149969125dcab143c9baf921ed76-7680x2792.png)
+![Task robot exposure rubric](https://assets.claude.com/fbed704c01c8149969125dcab143c9baf921ed76.png?w=3840&q=75&fm=webp&fit=max)
 
 **Task robot exposure rubric**Job tasks identified as physical are rated on this robot exposure rubric. For example, the job task of unloading boxes from a truck at a warehouse is rated E2 if there’s a warehouse robot that can do that task.
 
@@ -69,7 +69,7 @@ Claude rates the first example at exposure E3, citing a control system that retr
 
 Figure 2 gives examples of task ratings, along with fuller descriptions of each exposure tier from our exposure prompt and a robot cited to support each rating. We also calculate the share of physical tasks in each tier: here and throughout, each task is weighted by the number of workers who do it, and by the fraction of working time they spend on it, which we estimate with Claude.¹⁹
 
-![Example task exposure ratings](https://www-cdn.anthropic.com/images/4zrzovbb/website/7e4a470ece0ef2f1ea39accbdc67bed943dcc198-9600x9340.png)
+![Example task exposure ratings](https://assets.claude.com/8e64ebbd731479af4c35c9e746ec333449dd935d.png?w=3840&q=75&fm=webp&fit=max)
 
 **Example task exposure ratings**  
 Levels of robot exposure are as described in the prompt we use to rate exposure with Claude. Exposure is rated for 7,594 job tasks classified as physical. Physical task shares in column 2 weight tasks by the fraction of time spent on each task in an occupation (estimated with Claude) and that occupation’s employment (BLS, 2025). For example, the RelayRx robot delivers drugs in hospitals. Hospitals are structured human workplaces, so the task “Deliver medications or pharmaceutical supplies to patients, nursing stations, or surgery” is rated E2. Tasks rated E2 make up 22% of physical tasks by working time.
@@ -90,7 +90,7 @@ An ideal exposure index would perfectly predict robot automation in the coming y
 
 Figure 3 summarizes robot exposure across all job tasks in the US economy, weighting tasks by the estimated fraction of time spent per task for an occupation and that occupation’s employment. Cognitive and interpersonal work makes up 54% of tasks by working time. The remaining 46% of tasks are physical. As a share of all tasks, around 12% cannot be done by any robot today (E0), 23% can be done by robots in specially built environments (E1), 10% in structured human workplaces (E2), and 1% in unstructured environments (E3). Counting any exposure level, 74% of physical work, or 34% of all work, can be done by robots in some circumstances.
 
-![Job tasks by robot exposure](https://www-cdn.anthropic.com/images/4zrzovbb/website/1dfbdcd3ec1d2f240502194d008e9cc66ec2f364-7680x4480.png)
+![Job tasks by robot exposure](https://assets.claude.com/1dfbdcd3ec1d2f240502194d008e9cc66ec2f364.png?w=3840&q=75&fm=webp&fit=max)
 
 **Job tasks by robot exposure**  
 All job tasks are included. Tasks are weighted by the fraction of time an occupation spends on each task as well as that occupation’s employment. Robot exposure is rated for tasks identified as physical. For example, 23% of worker time is spent on tasks that robots can do in a purpose-built environment. Example tasks by category: teaching classes, designing systems (Cognitive and interpersonal); taking people into custody, providing first aid (E0); dispensing medications, assembling electronics (E1); cleaning floors, moving warehouse goods (E2); regulating field irrigation, inspecting property from the air, and driving, which robots perform in unstructured environments (E3). Employment data come from the BLS (2025), and we use Claude to estimate occupation time on tasks.
@@ -99,7 +99,7 @@ Robots can do physical tasks in many parts of the economy. Autonomous mobile war
 
 Figure 4 shows the 10 most exposed occupations by our robot exposure index. Of these 10 occupations, 9 are vehicle operators. Robots cited for driving jobs include autonomous cars, tractors, trucks, and pavers. Taxi drivers lead exposure with an index of 2.2.²⁴ Since driving is most of the job, their median task by working time is exposed at E3, while auxiliary tasks like “Vacuum and clean interiors and wash and polish exteriors of automobiles” are doable by robots but in more structured settings than open roads. Autonomous vehicles have yet to upend driving jobs at scale, but their capabilities suggest that these jobs are at higher risk of automation than others.²⁵
 
-![Most exposed occupations](https://www-cdn.anthropic.com/images/4zrzovbb/website/889fc5dfe3ba1248a3edd7529060d9d3c0b3683c-7680x7672.png)
+![Most exposed occupations](https://assets.claude.com/889fc5dfe3ba1248a3edd7529060d9d3c0b3683c.png?w=3840&q=75&fm=webp&fit=max)
 
 **Most exposed occupations**  
 Exposure ranges from 0 (no task can be done by a robot) to 3 (every task can be done by a robot in an unstructured environment). Job exposure averages task exposure, weighting by time spent on each task. A highly exposed task is listed for each occupation along with a cited robot that can perform this task. The 10 most exposed occupations with at least 20,000 jobs are displayed. For example, averaging task exposure for shuttle drivers and chauffeurs gives an index of 2.0 out of 3. Claude cites Waymo autonomous vehicles as performing some of their tasks. Employment data from BLS (2025) sometimes combine several O\*NET occupation titles; we split their employment equally, as for recycling and reclamation workers. We estimate task time requirements with Claude.
@@ -122,7 +122,7 @@ Figure 5 compares workers in the top quintile of the robot exposure index with u
 
 Occupational requirement statistics compiled by the Bureau of Labor Statistics also show that robot-exposed jobs are much more likely to require carrying weight and working in extreme heat or near hazardous contaminants. This exposure pattern is in many ways the opposite of what’s typically found for LLMs.³²
 
-![Occupation characteristics by robot exposure](https://www-cdn.anthropic.com/images/4zrzovbb/website/2a9afdd7a01a1828aa3e93c0c0678fa525e74b50-7680x9352.png)
+![Occupation characteristics by robot exposure](https://assets.claude.com/69b30954b469594889d620026cbace6f8ef5ad87.png?w=3840&q=75&fm=webp&fit=max)
 
 **Occupation characteristics by robot exposure**The most exposed workers are those in the top quintile of the robot exposure index; unexposed workers have zero exposure and make up about another 20% of jobs. Demographics, education, and labor market data come from the 2020–2024 American Community Survey, save for union membership and licensing. Union membership comes from statistics tabulated by Hirsch et al. (2026) for the 2020–2024 Current Population Surveys. Licensing comes from the 2025 BLS Occupational Requirements Survey, as do physical demand and work environment variables (for some occupations, these come from the 2023 survey). Statistics are employment weighted.
 
@@ -137,7 +137,7 @@ Robot and LLM exposure ratings measure somewhat different concepts, but both ind
 
 Figure 6 plots job exposure to LLMs alone (in blue) and to LLMs and robots (in orange), grouped by broad occupation category. Robots expose more and different kinds of jobs than LLMs alone. While less than 15% of transportation & moving tasks are exposed to LLMs alone, about 90% of these tasks are exposed with robots. Similarly, robots raise exposure in office & admin support jobs, which largely involve computer work and light physical tasks, to nearly 100%. Overall, around half of work is exposed to LLMs alone, but that rises to 81% when considering robots.
 
-![LLM and robot exposure by occupation group](https://www-cdn.anthropic.com/images/4zrzovbb/website/146ef52307f5d8526d5280a631fe8e1b6d605c47-7680x6100.png)
+![LLM and robot exposure by occupation group](https://assets.claude.com/146ef52307f5d8526d5280a631fe8e1b6d605c47.png?w=3840&q=75&fm=webp&fit=max)
 
 **LLM and robot exposure by occupation group**  
 LLM exposure is the share of tasks rated exposed in Eloundou et al. (2024) (positive 𝛽). Occupation exposure to LLMs and robots adds tasks rated at E1 or higher robot exposure. Occupation groups are 2-digit SOC codes, and group averages weight by task time shares and employment. In protective service occupations, for example, 31% of job tasks are exposed to LLMs, and 61% are exposed to LLMs or robots. Employment data come from BLS (2025). We estimate task time shares with Claude.
@@ -168,7 +168,7 @@ Robots often perform multiple job tasks, but we estimate costs for individual ta
 
 Figure 7 shows five highly physical jobs and cost estimates for robots to perform their exposed tasks. Packers and packagers are the largest occupation exposed to cost-competitive robots. Several robots are needed to do packers and packagers’ tasks, including those that pack containers, move materials around warehouses, visually inspect goods, erect cardboard boxes, print and apply labels, and seal packages.³⁹ These robots are estimated to cost over $2 million to purchase and install, but replace the yearly work of around 14 workers. Fixed costs are spread over a roughly 10-year service life at an 8% cost of capital. Operating expenses, such as maintenance, part-time human supervision, and energy, bring annual costs to around $45,000 to replace one human worker per year. Since packers and packagers spend 97% of their time on tasks that robots can do and cost around $49,000, robots cost about $2,500 less per year to do that work.
 
-![Robot costs for physical occupations](https://www-cdn.anthropic.com/images/4zrzovbb/website/dbca7308b6610e35e49fb4ffdc6d948277e7c3a1-7680x5552.png)
+![Robot costs for physical occupations](https://assets.claude.com/dbca7308b6610e35e49fb4ffdc6d948277e7c3a1.png?w=3840&q=75&fm=webp&fit=max)
 
 **Robot costs for physical occupations**  
 Employment and total compensation use data from the BLS (OEWS 2025, ECEC 2026). Exposed tasks are the share of that occupation’s tasks at exposure E1–E3, weighted by estimated time spent on each task. Claude estimates annual costs for robots to perform exposed tasks for each occupation. Costs include annualized fixed costs and variable costs. The final column lists one robot included in each cost estimate and its estimated purchase price.
@@ -185,7 +185,7 @@ Though robots can theoretically do tasks that add up to 34% of all work time, th
 
 For robots to be cost-competitive for 10% of human work today, costs would need to decline about 70%. At a 3% decline per year, that would take around 40 years. That said, it’s possible that new, more capable robots like humanoids or new manufacturing processes will drive down costs to automate human work. Reports suggest that global production could scale quickly if there were intense demand for humanoids and other robots.⁴⁵
 
-![Work exposed under hypothetical robot cost declines](https://www-cdn.anthropic.com/images/4zrzovbb/website/a010c2b04ed72ac124d232ae06dbacfbd8fb24d8-7680x4320.png)
+![Work exposed under hypothetical robot cost declines](https://assets.claude.com/a010c2b04ed72ac124d232ae06dbacfbd8fb24d8.png?w=3840&q=75&fm=webp&fit=max)
 
 **Work exposed under hypothetical robot cost declines**  
 Calculated by comparing robot and labor costs. Labor costs are the fraction of time spent on exposed tasks multiplied by occupation total compensation. Given robot cost declines, the curve plots the share of all job tasks for which robots cost less than labor. Tasks are weighted by estimated time demands and occupation employment. Robot and labor costs are compared at six points in the worker pay distribution; see Appendix D.2 for details. Selected occupations are marked where their robot costs fall below their median labor cost. For example, robots do 94% of Postal Service mail carrier tasks. To match what workers produce in a year would cost $166,000 with robots. Median total compensation for Postal Service mail carriers is $82,000, so robots would be cost-competitive if cost declined 54% ($166,000 x 46%< $82,000 x 94%). Total compensation is calculated with data from the BLS (OEWS 2025, ECEC 2026).
@@ -218,7 +218,7 @@ Much remains uncertain about how robots and AI could reshape the economy. Growth
 
 ## **Appendix**
 
-Available [here](https://www-cdn.anthropic.com/files/4zrzovbb/website/d27288375b0ac486cb9da0a30a94423b36ff0443.pdf).
+Available [here](https://assets.claude.com/d27288375b0ac486cb9da0a30a94423b36ff0443.pdf).
 
 #### Data availability
 

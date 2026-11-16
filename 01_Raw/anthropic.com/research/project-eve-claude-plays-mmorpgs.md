@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-eve-claude-plays-mmorpgs
-fetched_at: 2026-11-09T07:30:24.332394+00:00
+fetched_at: 2026-11-16T07:30:52.230325+00:00
 title: "Project EVE: Claude plays MMORPGs \\ Anthropic"
 ---
 
@@ -26,7 +26,7 @@ We asked four Claude models—Opus 4.6, Opus 4.7, Opus 4.8, and Fable 5—to eac
 
 ### Can agents make money?
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/15b47071e50e9328cab337814e1b924eabdd6cbe-2044x869.png)
+![](https://assets.claude.com/bb70e05a91a7d1bc73821ac72aaa1bfaf5a5011f.png?w=3840&q=75&fm=webp&fit=max)
 
 Final equity in nine simulated two-week trading windows, comparing Claude models with the six best heuristic trading strategies. Each dot is average over runs for one window; 1.0 is break-even.
 
@@ -34,7 +34,7 @@ Trading on the EVE Online market is challenging. Buying an item and selling it a
 
 Our main experiments extended each run to about six months, over two periods: October 2024 to April 2025, and October 2025 to March 2026. The models stayed profitable over longer periods, and newer models again earned more. Opus 4.6 and Fable 5 were released four months apart, and average earnings tripled between them, from around 200% to 600% of initial capital. The rest of this section is based on these six-month runs.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/63981d2e407e105d842d2fd24782fbcbf73e93b6-1890x855.png)
+![](https://assets.claude.com/87e9682fdbe68c128f9f5f16d2ad89f37899a21e.png?w=3840&q=75&fm=webp&fit=max)
 
 Final equity of Claude models in two simulated six-month trading windows. Each dot is one run; 1.0 is break-even.
 
@@ -48,7 +48,7 @@ With the strategy nearly always the same, results came down to execution**.** Ag
 
 Models also differed in how much of their capital they put to work. Agents set a cap on this early, and many never revisited it, while the more profitable runs updated their caps more actively and kept an eye on idle capital. Opus agents started with around 60% of their capital deployed, and that share drifted toward 40% over the run. Fable 5 deployed around 85% early on, was still above 70% late in the run, and was more likely to reinvest its earnings, a more aggressive posture that would expose it to greater losses in a sudden, large crash.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a1c18041158def10fa53dbf7820d7504343073e9-2048x754.png)
+![](https://assets.claude.com/781486c32cbc2268410d54b82c3019d0e43fab39.png?w=3840&q=75&fm=webp&fit=max)
 
 Share of capital deployed by Claude models over two simulated six-month trading windows. Faint lines are individual runs and bold lines are average over runs.
 
@@ -58,7 +58,7 @@ Our results come with caveats. Spread capture works here because EVE Online's ma
 
 Spread capture is fairly low-risk and, unlike a lot of real-world investing, doesn't require understanding of how the market responds to external events. To test this kind of reasoning, we instructed them to make directional bets: to buy items they expected to rise in price, based on in-game news, patch notes, and reports of recent battles.[4](#footnote-4)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ff1a62ef24c68f4027de58cdbf62a71e402ace74-956x786.png)
+![](https://assets.claude.com/c12bf30108ac1cf257b49425756a99f3729a00a3.png?w=1920&q=75&fm=webp&fit=max)
 
 Final equity of Claude models instructed to make directional bets in a simulated Oct ‘25 - Mar ‘26 trading window. Each dot is one run; 1.0 is break-even. Rule-breaking Opus 4.7 runs are removed.
 
@@ -84,7 +84,7 @@ Before we could study teamwork, the agents had to survive. To progress in the ga
 
 To work around this, we tasked a developer agent with writing custom scaffolds—a layer of software between model and the game—over many trial runs. The scaffold automated fast actions like evading threats and returning fire, and recorded what earlier runs had learned in searchable databases and handbooks. But tuning scaffolds on in-game data is challenging. The signal is noisy and the feedback cycles take hours. A ship might die in combat because of bad team strategy, poor aiming, escaping too late, or plain bad luck, and it's often hard to tell which factors are to blame. And since each death restarts the agent in a bare starter ship, testing a fix can take hours before the fleet has recovered enough to fight again.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/e355ce159228bb87a5b69e7f4bfd9fc94b9b1fad.mp4)
+[](https://assets.claude.com/e355ce159228bb87a5b69e7f4bfd9fc94b9b1fad.mp4)
 
 Video of four Opus 4.8 agents playing EVE Frontier, shown at 45x speedup.
 

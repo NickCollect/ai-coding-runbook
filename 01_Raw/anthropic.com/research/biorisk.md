@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/biorisk
-fetched_at: 2026-11-09T07:30:19.403858+00:00
+fetched_at: 2026-11-16T07:30:48.242376+00:00
 title: "LLMs and biorisk \\ Anthropic"
 ---
 
@@ -40,7 +40,7 @@ To be sure, Claude and other LLMs are not currently capable of actually doing sc
 
 Within a year, Claude went from underperforming world-class experts on an evaluation designed to test virology troubleshooting scenarios in a lab setting, to comfortably exceeding that baseline (see Figure 1).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c1a9a5f88426b3e2fb7041e8143f1e3413b09ddf-889x390.png)
+![](https://assets.claude.com/4eb42848de9ed924026b92014471fac6def48695.png?w=1920&q=75&fm=webp&fit=max)
 
 Claude’s performance has improved on VCT, an evaluation of model capabilities in troubleshooting virology tasks designed by SecureBio.
 
@@ -54,9 +54,9 @@ In considering the contribution of AI to biorisk, we need to know more than just
 
 To meet both of these criteria, we have conducted several controlled trials measuring AI’s ability to assist in the planning of a hypothetical bioweapons acquisition process. Participants were given up to two days to draft a comprehensive bioweapons acquisition plan. The control group only had access to basic internet resources, while the model-assisted group had additional access to Claude with safeguards removed. (In limited cases like this, it is important to provide trusted parties with access to the unsafeguarded version of the model in order to more accurately assess the maximum capabilities of the technology.) The resulting plans were graded by biodefense experts using a detailed rubric that assesses key steps of the acquisition pathway. Participants with access to Claude 4 models—especially Claude Opus 4—received much higher scores and developed plans with substantially fewer critical failures compared to the internet-only control group.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/b6b552ad3b9b9cc2312d55ef98c5d343078753c3-980x580.png)
+![](https://assets.claude.com/a774657b11cc381d260782b6a4fbb6442bfa49aa.png?w=2048&q=75&fm=webp&fit=max)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4dabd0ce91dd00553db423a8d24496e52ad4308d-980x580.png)
+![](https://assets.claude.com/4917ae7b6851d56b4ed3efb800ae8c9bd1b591ea.png?w=2048&q=75&fm=webp&fit=max)
 
 Bioweapons acquisition uplift trial results. Top: raw scores from the uplift trial. Bottom: critical failures hit by participants.
 
@@ -86,7 +86,7 @@ We believe it’s important to support transparency norms—like the push for de
 
 ### Deployment safeguards
 
-We have developed automated deployment safeguards based on our [constitutional classifiers](https://www.anthropic.com/research/constitutional-classifiers) research. These classifier guards work by monitoring inputs and outputs in real time and blocking a narrow class of potentially harmful information. We apply this protection to models for which we cannot rule out their potential to meaningfully uplift threat actors; to date this is only the Claude Opus 4 family of models, which we did as a [precautionary measure](https://www.anthropic.com/news/activating-asl3-protections). (For more details on our implementation of ASL-3 protections, see this [report](https://www-cdn.anthropic.com/807c59454757214bfd37592d6e048079cd7a7728.pdf).)
+We have developed automated deployment safeguards based on our [constitutional classifiers](https://www.anthropic.com/research/constitutional-classifiers) research. These classifier guards work by monitoring inputs and outputs in real time and blocking a narrow class of potentially harmful information. We apply this protection to models for which we cannot rule out their potential to meaningfully uplift threat actors; to date this is only the Claude Opus 4 family of models, which we did as a [precautionary measure](https://www.anthropic.com/news/activating-asl3-protections). (For more details on our implementation of ASL-3 protections, see this [report](https://assets.claude.com/807c59454757214bfd37592d6e048079cd7a7728.pdf).)
 
 Across all models, our [Safeguards](https://www.anthropic.com/news/building-safeguards-for-claude) team monitors activity on our platforms for signs of misuse, including dangerous applications of biology. This monitoring provides insight into patterns of misuse and helps us determine if and when to take enforcement action.
 

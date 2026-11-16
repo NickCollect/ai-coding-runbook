@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/redesigning-source-control
-fetched_at: 2026-10-26T05:40:00.254895+00:00
+fetched_at: 2026-11-16T07:30:52.905259+00:00
 title: "Redesigning source control at Anthropic \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ At Anthropic, coding is no longer the bottleneck to building systems or doing re
 
 In May 2026, Anthropic averaged around 2,500 code changes merged per day; as of September, we merged over 30,000 per day. We don’t expect this rate of growth to slow down anytime soon; the latent demand for merging code is practically infinite, and every bottleneck we remove immediately leads to a further increase in the amount of code we produce.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1e2a750dba61db4a76b72eec5b0cf50b8a7f878c-3840x2160.png)
+![](https://assets.claude.com/1e2a750dba61db4a76b72eec5b0cf50b8a7f878c.png?w=3840&q=75&fm=webp&fit=max)
 
 Changes merged to our monorepo per day, from January to September 2026.
 
@@ -26,7 +26,7 @@ As our monorepo grows, it increasingly doesn’t fit that design space. The hist
 
 Git offers tools for working with a slice of a repository, such as shallow clones, sparse checkouts, and promisor remotes. Beyond these, there are standard workarounds for large monorepos, like internal git mirrors and repository snapshots (seeds) kept in blob storage. We’ve used all of them—at our peak, we operated several hundred internal git mirrors to deal with the load. This bought us time, but they became harder to operate as our merge rate increased. Seeds fell further from the tip of main between refreshes, and it took more and more care to keep operations that depend on history, like diff and blame, working on partial clones.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ff019752973f6d83d2f6ba3bf56636aced3ea82c-3840x1238.png)
+![](https://assets.claude.com/ff019752973f6d83d2f6ba3bf56636aced3ea82c.png?w=3840&q=75&fm=webp&fit=max)
 
 The typical setup for scaling git checkouts.
 
@@ -56,7 +56,7 @@ It’s helpful to understand how these principles came together in practice when
 
 In Scion, the unit of work is a “changeset,” an entry in a write-ahead log. A changeset stores most of what you’d expect from a commit in git. But where a git commit stores a pointer to the tree, a changeset stores a list of the files that changed relative to its first parent,[1](#footnote-1) along with content-addressed pointers to the compressed file contents in blob storage. Changesets are created server-side and are available everywhere, instantly.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/71c83868210b4b571abb068ea4cd76de749566b1-3840x2995.png)
+![](https://assets.claude.com/71c83868210b4b571abb068ea4cd76de749566b1.png?w=3840&q=75&fm=webp&fit=max)
 
 The shape of a changeset in Scion.
 
@@ -78,7 +78,7 @@ In the fleet, the client talks over a socket to a daemon, scion-daemon, that sto
 
 The scion-daemon, scion-cache, and scion-server all respond to identical RPCs for this protocol, so the client doesn’t need to know the cache topology. Any tier could theoretically talk to any other, but we strictly enforce the tiering to isolate failure domains. We want to avoid a situation where a failure in a regional scion-cache overwhelms the upstream scion-servers and brings down the entire system.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/cba1eaaa67385fd00f210badaacd147de480120b-3840x1718.png)
+![](https://assets.claude.com/cba1eaaa67385fd00f210badaacd147de480120b.png?w=3840&q=75&fm=webp&fit=max)
 
 Scion’s checkout architecture.
 
@@ -90,7 +90,7 @@ We started building Scion around the same time as [Claude Mythos Preview](https:
 
 Here’s a particularly striking example. Earlier in the year, we had largely handwritten the first version of the git-to-Scion ingestion pipeline as a prototype. We thought it was good—until we got our hands on an early internal snapshot of Claude Mythos Preview. We asked it to rewrite the whole thing, and with no further instructions, it produced a version that consumed 20x less memory and was 4x faster, while preserving all of the implicit invariants around ingestion ordering and data structures.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/dd91296719203f38229824bb9bc9e9a61c76ed67-3840x2160.png)
+![](https://assets.claude.com/dd91296719203f38229824bb9bc9e9a61c76ed67.png?w=3840&q=75&fm=webp&fit=max)
 
 Merged changes to the Scion and Antique codebases per week, from January to September 2026.
 
@@ -102,7 +102,7 @@ What we learned building and operating Scion offers some interesting lessons for
 
 **We were able to substantially improve optimization and quality.** By virtue of Claude’s ability to write immense amounts of code much faster than we could ourselves, Scion is among the most well-tested and well-defended codebases we have ever worked on. Even on our tight timeline, we were able to build hermetic simulations of every non-trivial infrastructure and source control interaction we’ve ever encountered, as well as fuzzing and sophisticated rate limiting. Claude also casually found significant optimizations—for example, an algorithmic optimization to ancestry queries that missed one of our indexes—that would have taken an expert days or weeks of analysis and tuning… and then did it all again the next day.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c706fa6efb4b9e5cd2566cb080acbfce7218042d-3840x4684.png)
+![](https://assets.claude.com/c706fa6efb4b9e5cd2566cb080acbfce7218042d.png?w=3840&q=75&fm=webp&fit=max)
 
 Observed performance improvements on native Scion repos.
 

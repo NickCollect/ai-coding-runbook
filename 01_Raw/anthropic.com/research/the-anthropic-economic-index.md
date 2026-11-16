@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/the-anthropic-economic-index
-fetched_at: 2026-11-09T07:30:25.829089+00:00
+fetched_at: 2026-11-16T07:30:53.871455+00:00
 title: "Introducing the Anthropic Economic Index \\ Anthropic"
 ---
 
@@ -20,7 +20,7 @@ The main findings from the Economic Index’s first paper are:
 
 See below for further details on our initial findings.
 
-![Infographic showing six professional categories based on Claude.ai usage data: Computer & Mathematical (37.2%), Arts & Media (10.3%), Education & Library (9.3%), Office & Administrative (7.9%), Life Sciences (6.4%), and Business & Financial (5.9%). Each category displays its top job titles and most common tasks with their respective usage percentages.](https://www-cdn.anthropic.com/images/4zrzovbb/website/eeed8fe5c58c7c956ddcf4a2c05d22204537897e-1968x1787.jpg)
+![Infographic showing six professional categories based on Claude.ai usage data: Computer & Mathematical (37.2%), Arts & Media (10.3%), Education & Library (9.3%), Office & Administrative (7.9%), Life Sciences (6.4%), and Business & Financial (5.9%). Each category displays its top job titles and most common tasks with their respective usage percentages.](https://assets.claude.com/0919520b755e8133241f7f07b2588f3fa380150b.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Where and how AI is used across the economy, drawn from real-world usage data from Claude.ai. The numbers refer to the percentage of conversations with Claude that were related to those individual tasks, occupations, and categories.
 
@@ -40,7 +40,7 @@ This research was made possible by Claude insights and observations, or"[Clio](h
 
 We chose tasks according to the classification made by the U.S. Department of Labor, which maintains a database of around 20,000 specific work-related tasks called the Occupational Information Network, or [O\*NET](https://www.onetonline.org/). Clio matched each conversation with the O\*NET task that best represented the role of the AI in the conversation (the process is summarized in the figure below). We then followed the O\*NET scheme for grouping the tasks into the occupations they best represented, and the occupations into a small set of overall categories: *education and library,* *business and financial,* and so on.
 
-![A diagram showing how user conversations with Claude are mapped to tasks and occupations. The top section shows sample conversations flowing through task categorization to six occupational categories. The bottom section displays three analytical views: a scatter plot of wage vs. AI usage, a donut chart comparing augmentative vs. automative tasks, and a skills breakdown bar chart highlighting abilities like Critical Thinking and Programming.](https://www-cdn.anthropic.com/images/4zrzovbb/website/174a18313abe71bd443d7c3681e7fb2e07a3e06a-2703x2032.jpg)
+![A diagram showing how user conversations with Claude are mapped to tasks and occupations. The top section shows sample conversations flowing through task categorization to six occupational categories. The bottom section displays three analytical views: a scatter plot of wage vs. AI usage, a donut chart comparing augmentative vs. automative tasks, and a skills breakdown bar chart highlighting abilities like Critical Thinking and Programming.](https://assets.claude.com/1a6ea5bf5152db84b92152dc4233294fd404d8d7.jpg?w=3840&q=75&fm=webp&fit=max)
 
 The process by which our Clio system translates conversations with Claude (which are kept strictly private; top left) into occupational tasks (top middle) and occupations/occupational categories derived from O\*NET (top right). These can then be entered into various analyses (bottom row; discussed in more detail below).
 
@@ -52,7 +52,7 @@ The second largest category was “arts, design, sports, entertainment, and medi
 
 We also compared the rates in our data to the rates at which each occupation appeared in the labor market in general. The comparisons are shown in the figure below.
 
-![A horizontal bar chart comparing AI usage versus workforce representation across 20 job types. Each job has two connected bars: orange showing percentage of Claude conversations and gray showing percentage of U.S. workers. Computer and mathematical jobs show the highest AI usage (37.2%) despite representing only 3.4% of workers. Office and administrative support has the highest workforce percentage (12.2%) with 7.9% AI usage. Other notable disparities include Arts and Media (10.3% AI usage vs 1.4% workers) and Transportation (0.3% AI usage vs 9.1% workers). Farming shows the lowest representation in both categories (0.1% AI usage, 0.3% workers).](https://www-cdn.anthropic.com/images/4zrzovbb/website/189bf07829f2ecc1d3bac5961e9793a9e0f31e7d-3920x2948.jpg)
+![A horizontal bar chart comparing AI usage versus workforce representation across 20 job types. Each job has two connected bars: orange showing percentage of Claude conversations and gray showing percentage of U.S. workers. Computer and mathematical jobs show the highest AI usage (37.2%) despite representing only 3.4% of workers. Office and administrative support has the highest workforce percentage (12.2%) with 7.9% AI usage. Other notable disparities include Arts and Media (10.3% AI usage vs 1.4% workers) and Transportation (0.3% AI usage vs 9.1% workers). Farming shows the lowest representation in both categories (0.1% AI usage, 0.3% workers).](https://assets.claude.com/5521ca381a90ffaa38422abf9dc8db882f33642b.jpg?w=3840&q=75&fm=webp&fit=max)
 
 For each job type, the percentage of relevant conversations with Claude is shown in orange compared to the percentage of workers in the U.S. economy with that job type (from the U.S. Department of Labor’s O\*NET categories) in gray.
 
@@ -64,7 +64,7 @@ As we predicted, there wasn’t evidence in this dataset of jobs being entirely 
 
 Interestingly, both low-paying and very-high-paying jobs had very low rates of AI use (these were generally jobs involving a large degree of manual dexterity, such as shampooers and obstetricians). It was specific occupations in the mid-to-high median salary ranges, like computer programmers and copywriters, who were—in our data—among the heaviest users of AI.
 
-![A scatter plot showing the relationship between median annual wages and AI usage across occupations. Computer-related jobs (Programmers and Software Developers) cluster in the upper right with high wages ($75-100k) and high AI usage (3-6%). Lower-wage positions like Shampooers ($25k) show minimal AI usage (<1%). A vertical line marks the U.S. median wage of $60,070. Specialized roles like Obstetricians appear at the far right with high wages ($200k) but low AI usage.](https://www-cdn.anthropic.com/images/4zrzovbb/website/e646b93b9bf29a8a7e164adb06e82251545f84d8-3936x3072.jpg)
+![A scatter plot showing the relationship between median annual wages and AI usage across occupations. Computer-related jobs (Programmers and Software Developers) cluster in the upper right with high wages ($75-100k) and high AI usage (3-6%). Lower-wage positions like Shampooers ($25k) show minimal AI usage (<1%). A vertical line marks the U.S. median wage of $60,070. Specialized roles like Obstetricians appear at the far right with high wages ($200k) but low AI usage.](https://assets.claude.com/628876cf77ee69e088f9c982047b3fddff7ff285.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Annual wage (x-axis) versus percent of conversations with Claude that involved that occupation (y-axis). Some illustrative occupations are highlighted.
 
@@ -72,7 +72,7 @@ Annual wage (x-axis) versus percent of conversations with Claude that involved t
 
 Overall, we saw a slight lean towards augmentation, with 57% of tasks being augmented and 43% of tasks being automated. That is, in just over half of cases, AI was not being used to replace people doing tasks, but instead worked *with* them, engaging in tasks like validation (e.g., double-checking the user’s work), learning (e.g., helping the user acquire new knowledge and skills), and task iteration (e.g., helping the user brainstorm or otherwise doing repeated, generative tasks).
 
-![A horizontal bar chart comparing augmentation (57.4% total) versus automation (42.6% total) in Claude conversations. Augmentation breaks down into three categories: Validation (2.8%), Task Iteration (31.3%), and Learning (23.3%). Automation divides into two categories: Feedback Loop (14.8%) and Directive (27.8%). Each category is color-coded with different shades of blue for augmentation and purple for automation.](https://www-cdn.anthropic.com/images/4zrzovbb/website/1f17c9364b316df226154831452a50b53431817a-2200x1250.jpg)
+![A horizontal bar chart comparing augmentation (57.4% total) versus automation (42.6% total) in Claude conversations. Augmentation breaks down into three categories: Validation (2.8%), Task Iteration (31.3%), and Learning (23.3%). Automation divides into two categories: Feedback Loop (14.8%) and Directive (27.8%). Each category is color-coded with different shades of blue for augmentation and purple for automation.](https://assets.claude.com/d19fbd8effb83f0e640c6f2ab45b6be72cfb0eff.jpg?w=3840&q=75&fm=webp&fit=max)
 
 The percentage of conversations with Claude that involved augmentation versus automation, and the breakdown of task subtypes within each category. Subtypes are defined in our paper as follows. Directive: Complete task delegation with minimal interaction; Feedback Loop: Task completion guided by environmental feedback; Task Iteration: Collaborative refinement process; Learning: Knowledge acquisition and understanding; Validation: Work verification and improvement.
 

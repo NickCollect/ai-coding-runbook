@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/investigating-unintended-model-actions
-fetched_at: 2026-10-26T05:39:58.783968+00:00
+fetched_at: 2026-11-16T07:30:51.379770+00:00
 title: "Investigating unintended model actions in our evaluations and internal use \\ Anthropic"
 ---
 
@@ -15,7 +15,7 @@ The behaviors can be grouped into four categories:
 
 We have chosen not to name the organizations involved in the examples below to avoid exposing vulnerabilities in their systems, and at their request. For this reason, we also provide less detail about each case than we otherwise would. Some of the cases described below involved websites run by U.S. government agencies at the federal, state, and local levels. We have briefed the White House on these cases and notified each agency involved.
 
-The cases we’ve identified to date in these categories had minimal real-world impact. We consider these behaviors to be significantly less severe from an alignment and security perspective than the cybersecurity incidents we reported on [July 30](https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals) and [September 9](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents). They resemble behaviors that we’ve described in our system cards since [Claude Mythos Preview](https://www-cdn.anthropic.com/08ab9158070959f88f296514c21b7facce6f52bc.pdf). Most are forms of *persistence*, in which Claude, when it cannot complete a task as given, works around a restriction instead of stopping.
+The cases we’ve identified to date in these categories had minimal real-world impact. We consider these behaviors to be significantly less severe from an alignment and security perspective than the cybersecurity incidents we reported on [July 30](https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals) and [September 9](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents). They resemble behaviors that we’ve described in our system cards since [Claude Mythos Preview](https://assets.claude.com/08ab9158070959f88f296514c21b7facce6f52bc.pdf). Most are forms of *persistence*, in which Claude, when it cannot complete a task as given, works around a restriction instead of stopping.
 
 Although the impact of these behaviors was minimal and we had already turned off live internet access for some high-risk and cybersecurity evaluations, we have now decided to expand that to include all our internal evaluations until we have confirmed that our security and monitoring measures (described in the remediation section of this post) reliably catch behaviors like these. Below, we also discuss alignment considerations and give more detail on how we’re modifying training to reduce the likelihood of further misbehavior.
 

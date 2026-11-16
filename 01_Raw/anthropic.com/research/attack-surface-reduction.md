@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/attack-surface-reduction
-fetched_at: 2026-10-26T05:39:55.307231+00:00
+fetched_at: 2026-11-16T07:30:48.036287+00:00
 title: "Using Claude to reduce the attack surface of code \\ Anthropic"
 ---
 
@@ -40,7 +40,7 @@ Claude found 493 issues using the three methods described above. Several themes 
 
 First, Claude found that all eleven gated projects had code that was unintentionally reachable (although this code wasn’t a significant percentage of the total lines of code for any of those projects). Specifically, Claude discovered 93 unnecessary pre-authentication surfaces in the default configuration of the gated cohort, 37 locations where code executed, or state was recorded, before authentication, and 61 configuration combinations that silently weakened a pre-authentication control configured by the administrator. None of these issues would have been immediately exploitable on their own, but they create a much larger attack surface than is necessary.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/eda2a0d63ec94b4698edb7b2989ea6c520a2928c-1920x1240.png)
+![](https://assets.claude.com/38c02924e2b97c9123f9f91add29b1e2b63665a3.png?w=3840&q=75&fm=webp&fit=max)
 
 *A breakdown of issues discovered per category for each technique. Of the 25 projects we assessed, 10 were Public, 11 Gated, and 4 Private. The Gated cohort contained the most surprising results with a high number of early reachability findings.*
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-fetch-robot-dog
-fetched_at: 2026-11-09T07:30:24.474274+00:00
+fetched_at: 2026-11-16T07:30:52.377197+00:00
 title: "Project Fetch: Can Claude train a robot dog? \\ Anthropic"
 ---
 
@@ -35,7 +35,7 @@ One way of understanding and tracking the capabilities of AI models is to run an
 
 To run our experiment, we recruited eight Anthropic researchers and engineers, none of whom had extensive prior experience with robots.[1](#footnote-1) We randomly selected four to be on “Team Claude” and four to be on “Team Claude-less.” Then, we asked each team to operate a quadruped robodog in three increasingly difficult phases. In all phases, the core task they were being evaluated against was simple: get the robodog to fetch a beach ball.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/2d33c208c478a76cdf5e1709331e8062ea06e5b1-4584x1561.png)
+![](https://assets.claude.com/2d33c208c478a76cdf5e1709331e8062ea06e5b1.png?w=3840&q=75&fm=webp&fit=max)
 
 Left: Team Claude-less; Right: Team Claude.
 
@@ -45,7 +45,7 @@ First, it builds on our previous research. One of the evaluations we use to asse
 
 Another reason is practical. It’s hard to pull our colleagues away from work for more than a day, so we needed a task that was difficult enough to fill that time, but not so difficult that teams would make minimal progress and we would be unable to detect uplift even if it were there. Beach ball retrieval, especially the more difficult variants, met these criteria.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/cf4ad2960c246e26e460d7b6c645326516a2bdde.mp4)
+[](https://assets.claude.com/cf4ad2960c246e26e460d7b6c645326516a2bdde.mp4)
 
 In Phase One, teams had to use the manufacturer-provided controller to make their robodog bring the ball back to a patch of fake grass. This was purely to give the teams a feel for the hardware and what it could do: we didn’t expect any uplift here.[3](#footnote-3)
 
@@ -53,19 +53,19 @@ Phase Two required teams to put down their controllers. They had to connect thei
 
 Phase Three was even harder. The teams needed to develop a program that would allow the robodog to detect and fetch the ball *autonomously—*that is, without being directed towards the ball by human control. Again, our expectation was that Claude would prove helpful.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/368837a820a446f24439cea289104f7420cbed73.mp4)
+[](https://assets.claude.com/368837a820a446f24439cea289104f7420cbed73.mp4)
 
 ## Results
 
 Overall, Team Claude accomplished more tasks and completed them faster on average. In fact, for the tasks that both teams completed, Team Claude succeeded in about half the time it took Team Claude-less (see Figure 1). That is: AI provided substantial uplift for this set of robotics tasks.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/0d073513d5be90d96cfe696c6b15f4501bfbacfc-4584x2580.png)
+![](https://assets.claude.com/0d073513d5be90d96cfe696c6b15f4501bfbacfc.png?w=3840&q=75&fm=webp&fit=max)
 
 Team Claude was faster at the tasks completed by both teams.
 
 The task-by-task breakdown of results (split into the three phases) shows where Claude was most advantageous.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/0801f4a4aa2931c87e5e7ddaef90f5d4653f5ba6-4584x2580.png)
+![](https://assets.claude.com/0801f4a4aa2931c87e5e7ddaef90f5d4653f5ba6.png?w=3840&q=75&fm=webp&fit=max)
 
 Team Claude completed 7/8 tasks while Team Claude-less completed 6/8 tasks. Team Claude excelled in connectivity and detection tasks, while Team Claude-less showed advantages in some manual control tasks.
 
@@ -87,13 +87,13 @@ Interestingly, some of the sub-tasks were completed more quickly by Team Claude-
 
 That said, these timing differences alone obscure some interesting facts. The controller written by Team Claude took longer, but it was considerably easier to use, since it provided the operator with a streaming video from the robodog’s point of view. Team Claude-less relied on intermittently-sent still images, which was much more unwieldy. But it is possible that the increased capabilities of Team Claude may have come at the expense of understanding: participants on both teams speculated that Team Claude-less would do better on a post-experiment quiz about the software library.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/5193612fbb9393e40389aeece21496f6de5fb527.mp4)
+[](https://assets.claude.com/5193612fbb9393e40389aeece21496f6de5fb527.mp4)
 
 The localization algorithm is another intriguing case. When working on this sub-task, Team Claude had different members working on several approaches in parallel. In about the same amount of time it took Team Claude-less to complete their localization task, Team Claude had also all-but-solved the problem—except that the coordinates of their plot were flipped around. And rather than just flipping the coordinates, they pivoted to another team member’s totally different approach (without success) before coming back and fixing the bug in their original solution.
 
 This was part of an interesting phenomenon we observed during the experiment. Team Claude wrote a lot more code (see Figure 2), but some of it was arguably a distraction from the task at hand.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/0a0c22d38b297afc79f5c4c461add33cfc2b2e1c-4584x2580.png)
+![](https://assets.claude.com/0a0c22d38b297afc79f5c4c461add33cfc2b2e1c.png?w=3840&q=75&fm=webp&fit=max)
 
 Team Claude wrote about 9 times more code than Team Claude-less.
 
@@ -105,19 +105,19 @@ To those of us observing the experiment, there was a clear difference in team �
 
 This was understandable. After all, Team Claude-less was nearly rammed by Team Claude’s robodog. They reached the lunch break without successfully connecting to their own robodog. Morale on Team Claude was generally steadier, although they grew frustrated at the end of the day as it became clear that despite their progress they would run out of time before completing Phase Three.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/f86425573d47c099ba7f7296d02737aef0021084.mp4)
+[](https://assets.claude.com/f86425573d47c099ba7f7296d02737aef0021084.mp4)
 
 To supplement the qualitative vibe-based impressions, we used Claude to analyze the audio transcripts of each team (all team members were recorded as part of the [video](https://youtu.be/NGOAUJtdk-4) we made about this experiment). Claude wrote a dictionary-based text analysis program similar to standard approaches in the psychology literature.[4](#footnote-4) This allowed us to track the proportion of words spoken by each team that were indicative of negative and positive emotion (or confusion), and to estimate how often each team asked questions.
 
 The quantitative analysis mostly confirmed our observations (see Figure 3). Throughout the experiment, Team Claude-less’s dialogue was more negative. That said, the disappointment of Team Claude at failing to complete Phase Three, and the excitement of Team Claude-less at getting some things working, meant that the difference in net emotional expression between the two teams (positive words minus negative words) was not statistically significant.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6557e13cc11db7d858d32e64464b2bf8a4d590c0-4584x2580.png)
+![](https://assets.claude.com/6557e13cc11db7d858d32e64464b2bf8a4d590c0.png?w=3840&q=75&fm=webp&fit=max)
 
 Results of our quantitative analysis of the audio transcripts from Project Fetch related to emotional expression.
 
 Team Claude-less expressed confusion at double the rate of Team Claude (see Figure 4). The feelings of frustration and confusion were also evident when checking in with the members of Team Claude-less during and after the experiment. As Anthropic employees, all of our participants use Claude every day; every member of Team Claude-less remarked how strange it felt to have this taken away from them. Some specifically noted that this experience made them feel that their coding skills were not as sharp as they used to be. Keep in mind, [Claude Code](https://claude.com/product/claude-code) debuted only six months before this experiment. Talking to Team Claude-less underscored our ability to rapidly accept as normal what was recently remarkable.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/90c89bf556a73086b0a8f6ecccd3d8e589b1e0c2-4096x2305.png)
+![](https://assets.claude.com/90c89bf556a73086b0a8f6ecccd3d8e589b1e0c2.png?w=3840&q=75&fm=webp&fit=max)
 
 Differences in questions asked and expressions of confusion between the two teams. (Discrepancies between absolute and relative differences are due to rounding.)
 
@@ -127,7 +127,7 @@ One interpretation would be that the members of Team Claude-less were more engag
 
 Still, this might have been otherwise. In effect, the four-person Team Claude was an eight-agent Team Claude, with each person using their own instance of the AI model. Yet if Claude had been more aware of the nature of the task, it might have been able to help strategically divide labor and facilitate communication when needed. At the moment, Claude is geared towards partnership with a single person rather than the support or orchestration of a team, but this is ultimately a malleable design choice.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/56e9090d781305fc236e57a1b896fbae45a136b8.mp4)
+[](https://assets.claude.com/56e9090d781305fc236e57a1b896fbae45a136b8.mp4)
 
 ## Outtakes
 
@@ -135,7 +135,7 @@ The day was not all timing sub-tasks with stop watches and preparing to analyze 
 
 The robodogs came with some pre-programmed behaviors which our participants managed to unlock. At various points in the day, there were robots dancing, standing on their hind legs, and doing backflips (which made many of the attendees jump with shock). Team Claude-less, in particular, took some delight in robodog acrobatics after they finally established a working link.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/92cfd531c0815a33f624c8231e946617eecd4449.mp4)
+[](https://assets.claude.com/92cfd531c0815a33f624c8231e946617eecd4449.mp4)
 
 Among the side quests of Team Claude was an effort to program an alternate controller. The main solution used the buttons on a laptop keyboard to direct the robodog. One member of Team Claude, however, eventually got a natural language controller working, allowing them to straightforwardly tell the robodog to walk forward, walk backward, or even do push-ups.
 
@@ -157,7 +157,7 @@ First, this experiment showed another example of how Claude can uplift human abi
 
 But in AI, uplift often precedes autonomy. What models can help humans accomplish today, they can frequently do alone tomorrow. Coders no longer just give AI bits of code for debugging; they give AI tasks and have the models write the code themselves. Given studies like this one, we think that a world where frontier AI models are capable of successfully interacting with previously unknown pieces of hardware is coming soon.
 
-It is important to keep tracking these capabilities in conjunction with another line of our research: monitoring the potential for AI to automate and accelerate the development of future generations of AI. This is one of the capability thresholds included in Anthropic’s [Responsible Scaling Policy](https://www-cdn.anthropic.com/872c653b2d0501d6ab44cf87f43e1dc4853e4d37.pdf) because of the potential for truly *autonomous* AI R&D to yield rapid, unpredictable advances that could outpace our ability to evaluate and address emerging risks. Our models are not yet at this point. But if they approach this threshold, the results of Project Fetch suggest that we will need to monitor AI models' facility for robotics and other hardware as an area in which there might be abrupt improvement.
+It is important to keep tracking these capabilities in conjunction with another line of our research: monitoring the potential for AI to automate and accelerate the development of future generations of AI. This is one of the capability thresholds included in Anthropic’s [Responsible Scaling Policy](https://assets.claude.com/872c653b2d0501d6ab44cf87f43e1dc4853e4d37.pdf) because of the potential for truly *autonomous* AI R&D to yield rapid, unpredictable advances that could outpace our ability to evaluate and address emerging risks. Our models are not yet at this point. But if they approach this threshold, the results of Project Fetch suggest that we will need to monitor AI models' facility for robotics and other hardware as an area in which there might be abrupt improvement.
 
 Much uncertainty remains. Timelines are unclear—both model improvement and the degree to which iterating in the physical world creates a bottleneck. And it is one thing to control *existing* hardware, and another to design, build, and improve *new* hardware.
 
@@ -169,7 +169,7 @@ The dogs are in their kennels at the moment. But we’ll let them out again soon
 
 01A couple of participants had done Lego robotics competitions in high school. We are willing to accept the minimal degree to which this may confound the results.
 
-02See p. 114 of the [Claude 4 System Card](https://www-cdn.anthropic.com/6d8a8055020700718b0c49369f60816ba2a7c285.pdf).
+02See p. 114 of the [Claude 4 System Card](https://assets.claude.com/6d8a8055020700718b0c49369f60816ba2a7c285.pdf).
 
 03Although Team Claude was, in fact, faster at Phase One, they did not use Claude, nor do we think it reflected an underlying skill advantage. Instead, they happened to get the one standalone controller that came with the robot, whereas Team Claude-less had to download an app on their phone.
 

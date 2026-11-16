@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/advanced-tool-use
-fetched_at: 2026-11-09T07:30:17.846331+00:00
+fetched_at: 2026-11-16T07:30:47.507896+00:00
 title: "Introducing advanced tool use for Claude \\ Anthropic"
 ---
 
@@ -46,7 +46,7 @@ But token cost isn't the only issue. The most common failures are wrong tool sel
 
 Instead of loading all tool definitions upfront, the Tool Search Tool discovers tools on-demand. Claude only sees the tools it actually needs for the current task.
 
-![Tool Search Tool diagram](https://www-cdn.anthropic.com/images/4zrzovbb/website/f359296f770706608901eadaffbff4ca0b67874c-1999x1125.png)
+![Tool Search Tool diagram](https://assets.claude.com/f359296f770706608901eadaffbff4ca0b67874c.png?w=3840&q=75&fm=webp&fit=max)
 
 Tool Search Tool preserves 191,300 tokens of context compared to 122,800 with Claude’s traditional approach.
 
@@ -172,7 +172,7 @@ You have three tools available:
 
 Instead of each tool result returning to Claude, Claude writes a Python script that orchestrates the entire workflow. The script runs in the Code Execution tool (a sandboxed environment), pausing when it needs results from your tools. When you return tool results via the API, they're processed by the script rather than consumed by the model. The script continues executing, and Claude only sees the final output.
 
-![Programmatic tool calling flow](https://www-cdn.anthropic.com/images/4zrzovbb/website/65737d69a3290ed5c1f3c3b8dc873645a9dcc2eb-1999x1491.png)
+![Programmatic tool calling flow](https://assets.claude.com/65737d69a3290ed5c1f3c3b8dc873645a9dcc2eb.png?w=3840&q=75&fm=webp&fit=max)
 
 Programmatic Tool Calling enables Claude to orchestrate tools through code rather than through individual API round-trips, allowing for parallel tool execution.
 

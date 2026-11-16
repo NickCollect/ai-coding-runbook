@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/evaluating-and-mitigating-discrimination-in-language-model-decisions
-fetched_at: 2026-10-26T05:39:57.896499+00:00
+fetched_at: 2026-11-16T07:30:50.411507+00:00
 title: "Evaluating discrimination in language model decisions \\ Anthropic"
 ---
 
@@ -10,4 +10,4 @@ As language models (LMs) advance, interest is growing in applying them to high-s
 
 ### Policy memo
 
-[Evaluating and Mitigating Discrimination in Language Model Decisions Policy Memo](https://www-cdn.anthropic.com/f0dfb70b9b309d7c52845f73da8d964140669ff7/Anthropic_DiscriminationEval.pdf)
+[Evaluating and Mitigating Discrimination in Language Model Decisions Policy Memo](https://assets.claude.com/f0dfb70b9b309d7c52845f73da8d964140669ff7.pdf)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/employment-at-anthropic
-fetched_at: 2026-10-26T05:39:57.661932+00:00
+fetched_at: 2026-11-16T07:30:50.267169+00:00
 title: "How employment is changing at Anthropic \\ Anthropic"
 ---
 
@@ -35,7 +35,7 @@ By April, engineering and research teams had deemphasized hiring for lower band 
 
 The shift in employment shares is striking. Figure 1 shows that the share of junior-level employees in technical departments at Anthropic slipped from 21% to 14% since early 2025. The proportion of junior technical hires fell even faster, from 27% to 9%. Postings for juniors have fallen particularly sharply since December 2025.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/e5dc89d3bceb2fcb9509ec35aa22f11131a9d8eb-1920x1080.png)
+![](https://assets.claude.com/164be0e20d6b2acfe62e955314f8a3597f79ed15.png?w=3840&q=75&fm=webp&fit=max)
 
 **Decline of entry-level technical hiring at Anthropic.**
 
@@ -53,13 +53,13 @@ These changes have already involved reallocation: employees working at the compa
 
 Are these shifts attributable to AI? At Anthropic, humans are a thin layer atop a growing contingent of AI agents. Based on agent session telemetry, in March 2026, the sum of autonomous and interactive agent work hours leapt past human work hours for the first time. Part of this is fleets of agents conducting industrial-scale software engineering, filling in myriad routine tests and checks, conducting maintenance on a growing mass of infrastructure code, and driving concerted campaigns to translate massive codebases. But even narrowing in on the agents deployed by individual employees, as in Figure 2, by August the agents worked 6 times as many hours as their human handlers.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/042b829f8c8850b596dfb6feaa323d1e911b21bb-1920x1080.png)
+![](https://assets.claude.com/042b829f8c8850b596dfb6feaa323d1e911b21bb.png?w=3840&q=75&fm=webp&fit=max)
 
 **Agent hours overtake human hours.** Note: We limit to employee-directed interactive sessions and pool subagents. Working time concept is agent runtime, including inference and active tool use, but excluding any wait longer than 30 minutes. Human work hours are calculated as headcount and assumed 40 hours per week.
 
 Anthropic is a software producer, and the vast bulk of tokens flowing through these agents is spent producing software code. Dashboards monitor fleets of agents operating across the company. But personal assistant agents also monitor employee calendars and messages, scheduling, sending to-do lists accumulated from incoming messages, and automatically briefing employees on the people and purpose of their upcoming meetings. Tokens touch a growing range of everyday work tasks.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1865c3a561e790824826f29a27c771ce62c67eaf-1920x1252.png)
+![](https://assets.claude.com/1865c3a561e790824826f29a27c771ce62c67eaf.png?w=3840&q=75&fm=webp&fit=max)
 
 **Productivity boom across functions.** Note: Loess smoother fit across underlying indexed output data.
 
@@ -71,7 +71,7 @@ We follow 192 engineers over time as they adopt coding agents, compared to 74 en
 
 Figure 4 also looks at what happens after an engineer adopts their first fully autonomous agent. Those who adopt were already on a steeply upward trajectory compared to non-adopters. This suggests that employees shifting toward fully autonomous agents were already ramping up their output.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/15abba062e588ec86e0f9466f16bccbc701444e3-1920x1641.png)
+![](https://assets.claude.com/15abba062e588ec86e0f9466f16bccbc701444e3.png?w=3840&q=75&fm=webp&fit=max)
 
 **Productivity increases estimated within-person from staggered AI adoption.** Note: Coefficients compare coding agent adopters to non-adopters with person and calendar-month two-way fixed effects. Treatment timing is based on the person’s first month with at least five agentic sessions. Bars are 95% confidence intervals from standard errors clustered on person. The quality panel compares code written directly by a person to code written by the same person’s coding agent. Quality proxies are the share of lines deleted for any reason within 90 days; the share deleted by a bug-fix specifically; whether the whole commit is explicitly reverted; adding a lint-suppression comment; adding a need fixing note; and marking a test to be skipped, retried, or allowed to fail.
 
@@ -81,7 +81,7 @@ Beyond sales, an Anthropic lawyer built a series of Claude automations to scan r
 
 All of this suggests that as AI capabilities improve, it impacts a wide range of jobs across Anthropic. Descriptively, we see junior employment slowing in jobs that use Claude for the most complex tasks (Figure 5).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/f68fdd1f18d36b4e45e17f0aaaa49541bade7dcd-1920x1331.png)
+![](https://assets.claude.com/f68fdd1f18d36b4e45e17f0aaaa49541bade7dcd.png?w=3840&q=75&fm=webp&fit=max)
 
 **Junior employment growth by Claude usage complexity.** Notes: Plot at job level. Growth compares January 2026 headcount to July 2026. AI complexity is based on an automated coder of agent logs (prior to the employment decline, October to December 2025 ) and percentile transformed. Dots are scaled by January employment in the job; regression line is fit across weighted points.
 
@@ -101,7 +101,7 @@ Amid this model-driven acceleration, human attention is a constant bottleneck. I
 
 How much time exactly would be needed to read all of Claude’s output from interactive sessions? For each interactive session, we convert each session’s agent output token to word count, assuming average human reading speed. Figure 6 shows that technical functions have seen the volume of coding agent output leap up over the last six months. But even for non-technical groups, interactive Claude sessions are outputting enough content to take up over half of the work week. The deluge of Claude text needs organizing.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1eb1610d350eeae63bf6300c5a17b66a42667da6-1920x1200.png)
+![](https://assets.claude.com/1eb1610d350eeae63bf6300c5a17b66a42667da6.png?w=3840&q=75&fm=webp&fit=max)
 
 **Reading Claude as a full-time job.** Note: Hours estimated by converting output tokens to words, assuming 0.75 words per token and 250 words read per minute.
 
@@ -109,7 +109,7 @@ One solution to this deluge is rising automation. But this requires work of a di
 
 Figure 7 shows that this kind of meta-work leapt from 10% of the average employee’s interactive Claude sessions in fall 2025 to 22% in spring 2026. Much of this rise was due specifically to agent management: writing specs for multi-agent runs, looping one agent to review another’s output, and monitoring pipelines. Across functions, human involvement increasingly abstracted from a particular piece of code or writing to the tooling necessary to get agents to do their tasks effectively.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/94aede8c44a52ad7ecf8efdc9cb72156d72b7c6d-1920x1187.png)
+![](https://assets.claude.com/94aede8c44a52ad7ecf8efdc9cb72156d72b7c6d.png?w=3840&q=75&fm=webp&fit=max)
 
 **Becoming managers of Claudes.** Note: Meta-work estimates are based on an automated coder assessing a sample of 2,000 1-line chat summaries according to whether they focus on building Claude skills, plans and reviews for other agents, dashboards and monitors for agent pipelines, and documenting how work is done, in contrast to the actual work itself.
 
@@ -119,7 +119,7 @@ Broadly, both technical and non-technical roles have seen implementation parts o
 
 Consider too the Slack channels that provide both the front page and backchannels of Anthropic communication. Agents diffused through Slack and eventually appeared in nearly half of active, public channels. Figure 8 zooms in on the communication network of a single large department, drawing on all public Slack channels that department members interacted through. It links both human and agent participants by whether they participated in a Slack thread. The figure shows the remarkable rise of agents, as orange dots blossom and dominate the network.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/8f9591116db7ee91487f770222ddc524d551d867.mp4)
+[](https://assets.claude.com/8f9591116db7ee91487f770222ddc524d551d867.mp4)
 
 **Agents come to the communication network.** Note: Blue dots are employees; orange dots are agent threads. Ties are interaction among humans or agents in the same thread.
 

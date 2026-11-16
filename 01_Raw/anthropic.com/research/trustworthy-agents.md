@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/trustworthy-agents
-fetched_at: 2026-11-09T07:30:26.156394+00:00
+fetched_at: 2026-11-16T07:30:54.400294+00:00
 title: "Trustworthy agents in practice \\ Anthropic"
 ---
 
@@ -65,6 +65,6 @@ The measures described above represent what we can do within our own products. B
 
 **Open standards.** We created the [Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) as an open standard for how models communicate with external data sources and tools (and we’ve since [donated it](https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation) to the Linux Foundation's Agentic AI Foundation so that it belongs to the broader community). We did this because open protocols allow security properties to be designed into the infrastructure once, rather than patched together one deployment at a time. Open protocols also keep competition focused on the quality and safety of the agent, rather than on who controls the integrations.
 
-None of these measures replace the work that model developers have to do to build safe and secure agents, but this is the kind of infrastructure no single company can build alone. We go into greater technical detail on this topic in [our submission](https://www-cdn.anthropic.com/43ec7e770925deabc3f0bc1dbf0133769fd03812.pdf) to NIST's Center for AI Standards and Innovation (CAISI) on agentic security.
+None of these measures replace the work that model developers have to do to build safe and secure agents, but this is the kind of infrastructure no single company can build alone. We go into greater technical detail on this topic in [our submission](https://assets.claude.com/43ec7e770925deabc3f0bc1dbf0133769fd03812.pdf) to NIST's Center for AI Standards and Innovation (CAISI) on agentic security.
 
 Agents will reshape how people work, and whether that happens on a foundation that is secure and open depends on how industry, civil society, and government build it together.

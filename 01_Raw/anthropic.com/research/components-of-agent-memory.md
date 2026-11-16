@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/components-of-agent-memory
-fetched_at: 2026-11-09T07:30:20.476201+00:00
+fetched_at: 2026-11-16T07:30:49.229564+00:00
 title: "The components of agent memory \\ Anthropic"
 ---
 
@@ -14,7 +14,7 @@ Agent memory can use a similar division of labor. Agents capture much of their w
 
 We’ve found that dreaming has been a useful tool for helping us give Claude effective memory. In this post, we share how we’ve come to think about agent memory and walk through several evaluations we’ve used to explore agent memory, including the use of dreaming, and what each component contributes to memory organization.
 
-![Diagram of a memory hierarchy between one session and the next. From bottom to top: transcripts (a searchable event log), memory notes written by Claude, memory representations such as wikis, and injected context loaded into every session. Inside a box labeled “Dreaming,” arrows run from transcripts up to each layer, and in both directions between neighboring upper layers.](https://www-cdn.anthropic.com/images/4zrzovbb/website/a0bcfa203214d817d2b4261b7188aba8be6db5b2-3840x1754.png)
+![Diagram of a memory hierarchy between one session and the next. From bottom to top: transcripts (a searchable event log), memory notes written by Claude, memory representations such as wikis, and injected context loaded into every session. Inside a box labeled “Dreaming,” arrows run from transcripts up to each layer, and in both directions between neighboring upper layers.](https://assets.claude.com/a0bcfa203214d817d2b4261b7188aba8be6db5b2.png?w=3840&q=75&fm=webp&fit=max)
 
 Claude can use dreaming to organize memory. This can correct mistakes, create notes, build new memory representations, or shape what’s preemptively loaded into future sessions.
 
@@ -26,7 +26,7 @@ In the human brain, chemical signals released before, during, or after an experi
 
 Similarly, Claude can tag salient events in a session log as they happen, so they’re easier to find later, or it can [write](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool) them to a memory store, such as a folder of memory notes (Figure 2). But how can Claude tell what’s salient in the moment, before it knows what’s coming next?
 
-![The same memory hierarchy, with the memory notes layer highlighted. An arrow runs from the session directly to the memory notes, described as salient observations written by Claude.](https://www-cdn.anthropic.com/images/4zrzovbb/website/2ef2bf5c81ea6d578749782782eff10cf3136de4-3840x1754.png)
+![The same memory hierarchy, with the memory notes layer highlighted. An arrow runs from the session directly to the memory notes, described as salient observations written by Claude.](https://assets.claude.com/2ef2bf5c81ea6d578749782782eff10cf3136de4.png?w=3840&q=75&fm=webp&fit=max)
 
 Claude can write notes to memory.
 
@@ -42,7 +42,7 @@ We ran the CL-Bench 1.0 task using [Claude Managed Agents](https://platform.clau
 
 Different models achieved different levels of success at creating their own learning loops. Claude Sonnet 4.6 got as far as generating theories about why an answer was wrong. Its memory directory contained a scattering of files, each listing several untested guesses.
 
-![Left: bar chart of mean reward on the CL-Bench database task, stateless baseline versus memory store. Opus 5.5: 0.655, 0.838. Sonnet 5.5: 0.644, 0.833. Opus 5: 0.564, 0.828. Opus 4.7: 0.383, 0.700. Sonnet 5: 0.306, 0.610. Sonnet 4.6: 0.330, 0.364. Right: line chart of running-mean reward over 30 questions for the same models, with and without memory.](https://www-cdn.anthropic.com/images/4zrzovbb/website/bb0d44c78cc431fb5e84fbf2cb17c4303bc6bd65-3840x2160.png)
+![Left: bar chart of mean reward on the CL-Bench database task, stateless baseline versus memory store. Opus 5.5: 0.655, 0.838. Sonnet 5.5: 0.644, 0.833. Opus 5: 0.564, 0.828. Opus 4.7: 0.383, 0.700. Sonnet 5: 0.306, 0.610. Sonnet 4.6: 0.330, 0.364. Right: line chart of running-mean reward over 30 questions for the same models, with and without memory.](https://assets.claude.com/bb0d44c78cc431fb5e84fbf2cb17c4303bc6bd65.png?w=3840&q=75&fm=webp&fit=max)
 
 CL-Bench database task, comparing memory with a stateless baseline across models.
 
@@ -60,7 +60,7 @@ We compared the memory folders from one run each of Claude Sonnet 3.7 and Claude
 
 Fable 5, by comparison, wrote nine files in two folders, plus a single top-level file called `global.md`, and earned four badges.
 
-![Two treemaps of Pokémon memory directories at the same scale, where area shows characters of memory. Claude Sonnet 3.7’s is large and crowded, with 413 files and 977,930 characters across folders such as locations, main, battles, and several “consolidated” folders. Claude Fable 5’s is small, with 10 files and 43,406 characters in locations, gameplay, and global.md.](https://www-cdn.anthropic.com/images/4zrzovbb/website/5e15e10f665773050d90fafc38ab8dd76ae5368b-3840x2545.png)
+![Two treemaps of Pokémon memory directories at the same scale, where area shows characters of memory. Claude Sonnet 3.7’s is large and crowded, with 413 files and 977,930 characters across folders such as locations, main, battles, and several “consolidated” folders. Claude Fable 5’s is small, with 10 files and 43,406 characters in locations, gameplay, and global.md.](https://assets.claude.com/5e15e10f665773050d90fafc38ab8dd76ae5368b.png?w=3840&q=75&fm=webp&fit=max)
 
 Claude’s memory directories for Sonnet 3.7 versus Fable 5 while playing Pokémon.
 
@@ -78,7 +78,7 @@ We’ve found that it helps to tell Claude what memory is for, but not *how* to 
 
 We also tested giving the models specific rules about what they should write to memory, with one rule per test. We compared how much each model gained from memory with each rule against how much it gained without it. When we set a rule to “record only failures,” both Opus 5 and Opus 4.7 lost much of the performance boost that memory gave them (Figure 5, right). For stronger models, giving them freedom to judge salience was more effective than setting fixed rules in advance, and those rules could end up weakening performance.
 
-![Left: bar chart of Sonnet 4.6’s mean reward on the CL-Bench database task: 0.330 at baseline, 0.364 with memory, and 0.641 with memory and refined instruction. Reference lines mark Opus 4.7 with memory at 0.700 and Opus 5 with memory at 0.828. Right: change in memory gain when told to record only failures: Opus 5, −0.234; Opus 4.7, −0.150; Sonnet 4.6, −0.020.](https://www-cdn.anthropic.com/images/4zrzovbb/website/da03e864e4eba93a91314fa5f2a5d0e4c14b2a0f-3840x2310.png)
+![Left: bar chart of Sonnet 4.6’s mean reward on the CL-Bench database task: 0.330 at baseline, 0.364 with memory, and 0.641 with memory and refined instruction. Reference lines mark Opus 4.7 with memory at 0.700 and Opus 5 with memory at 0.828. Right: change in memory gain when told to record only failures: Opus 5, −0.234; Opus 4.7, −0.150; Sonnet 4.6, −0.020.](https://assets.claude.com/da03e864e4eba93a91314fa5f2a5d0e4c14b2a0f.png?w=3840&q=75&fm=webp&fit=max)
 
 Left: Sonnet 4.6 on the CL-Bench database task with and without prompting to guide memory usage. Right: how much each model’s gain from memory changed when it was told to record only failures.
 
@@ -94,7 +94,7 @@ Since Claude writes to memory based on what it judges to be salient in-session, 
 
 Dreaming gives Claude a way to test its notes against the original transcripts (Figure 6). We saw a positive example of this when Claude played Pokémon using Managed Agents with a mounted directory for its memories.
 
-![The memory hierarchy with dreaming, highlighting an arrow from the transcripts layer up to the memory notes layer, which shows dreaming correcting notes against transcripts.](https://www-cdn.anthropic.com/images/4zrzovbb/website/55ce85bd12860090704a5543a3da7504334ad9a9-3840x1754.png)
+![The memory hierarchy with dreaming, highlighting an arrow from the transcripts layer up to the memory notes layer, which shows dreaming correcting notes against transcripts.](https://assets.claude.com/55ce85bd12860090704a5543a3da7504334ad9a9.png?w=3840&q=75&fm=webp&fit=max)
 
 Dreaming can correct mistakes in memory.
 
@@ -102,7 +102,7 @@ In one part of the game, the player has to get through Mt. Moon, a cave system w
 
 At one point, Claude wrote down (incorrectly) that the PokéCenter was on the east side. When it walked out of the PokéCenter, it announced, “Mt Moon is behind me,” and updated its notes: “Mt Moon DONE.” But Mt. Moon was not behind it. A few actions later, Claude went over the ledge and landed back on the route it had come from (Figure 7). Its navigation tool didn’t show the drop, so Claude concluded, “I overshot far west,” and that it had been on the correct side all along. It hadn’t.
 
-![Two Pokémon map panels with the agent next to a ledge. Left, “Raw memory,” where the stored note is wrong: an arrow shows the agent heading for the next city. Right, “Memory + dreaming,” where an offline pass corrected the note: an arrow shows the agent heading back to the cave entrance.](https://www-cdn.anthropic.com/images/4zrzovbb/website/d906d6ed9ac92db36631a624ad517183b07a545d-3840x2101.png)
+![Two Pokémon map panels with the agent next to a ledge. Left, “Raw memory,” where the stored note is wrong: an arrow shows the agent heading for the next city. Right, “Memory + dreaming,” where an offline pass corrected the note: an arrow shows the agent heading back to the cave entrance.](https://assets.claude.com/d906d6ed9ac92db36631a624ad517183b07a545d.png?w=3840&q=75&fm=webp&fit=max)
 
 A corrected memory note changed the outcome in Pokémon. With the uncorrected note, Claude says, “Mt Moon is behind me,” heads for the next city, and ends up back on the route it came from. With the note corrected by dreaming, it says, “Now I need to find the Mt Moon cave entrance to re-enter,” and goes back into the cave.
 
@@ -110,7 +110,7 @@ We then tested whether dreaming could help Claude avoid this trap. We ran dreami
 
 In the run with the uncorrected note, Claude dropped back onto that earlier route three times. After the third failure, Claude seemed to give up, writing, “I’m going to stop rather than keep looping.” Our setup’s automatic reply instructed it to continue. So it did, all the way back to Pewter City, the town before the mountain, where it hoped to heal and restock. The run ended without Claude ever reaching Cerulean City.
 
-![Line chart of progress toward Cerulean over 3,000 cumulative actions. The memory plus dreaming run reaches Cerulean at action 1,935. The raw memory run falls off the ledge and backtracks to Pewter. The run with no memory never reaches Cerulean.](https://www-cdn.anthropic.com/images/4zrzovbb/website/2eb2bfe6d01e9a1fca74a41e952d948c09d42008-3840x2636.png)
+![Line chart of progress toward Cerulean over 3,000 cumulative actions. The memory plus dreaming run reaches Cerulean at action 1,935. The raw memory run falls off the ledge and backtracks to Pewter. The run with no memory never reaches Cerulean.](https://assets.claude.com/2eb2bfe6d01e9a1fca74a41e952d948c09d42008.png?w=3840&q=75&fm=webp&fit=max)
 
 Dreaming corrects the memory, and Claude goes back into the cave and reaches the next city. The run with the uncorrected note (“Raw memory”) never gets past the mountain, and neither does the run with no memory.
 
@@ -118,7 +118,7 @@ Dreaming corrects the memory, and Claude goes back into the cave and reaches the
 
 With dreaming, Claude can build representations to help navigate memory (Figure 9). One type of memory representation it uses is called a [*wiki*](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f), a collection of pages written and maintained by Claude that gathers what Claude knows about one subject and links it to other notes. These links effectively provide Claude with a map it can use to sift through its memory and efficiently locate memories when they’re needed.
 
-![The memory hierarchy with dreaming, highlighting arrows from transcripts and from memory notes up to the memory representations layer, such as wikis.](https://www-cdn.anthropic.com/images/4zrzovbb/website/30923242548d746ee77784c87826cadc46574c34-3840x1754.png)
+![The memory hierarchy with dreaming, highlighting arrows from transcripts and from memory notes up to the memory representations layer, such as wikis.](https://assets.claude.com/30923242548d746ee77784c87826cadc46574c34.png?w=3840&q=75&fm=webp&fit=max)
 
 Dreaming can build memory representations.
 
@@ -128,7 +128,7 @@ Each session built on the progress that agents made in prior sessions, using a s
 
 Claude builds its wikis incrementally. After creating an initial wiki, it uses subsequent rounds of dreaming to add to, edit, or prune it. In the early rounds of dreaming, Claude’s knowledge is like that of a new employee, and its ability to answer questions based on the wiki alone is limited. The more it dreams, the richer its knowledge map grows, like that of a seasoned employee. In our tests, we found that the wiki helped Claude the most when we also gave it access to a search tool. When it used both search and the wiki, Claude’s aggregate score rose from 54% to 61% as that wiki grew, compared with 53% when it had access to the search tool alone. Claude’s best score was 48% when it used only the wiki to answer questions. Using search and the wiki also saved about 20,000 tokens per question.
 
-![Center: line chart of graded criteria met as wiki generation grows from 2M to 128M dreaming tokens. Wiki plus search tool rises from 54% to 61%, wiki alone rises from 13% to 48%, and the search tool with no wiki is flat at 53%. Left and right: network graphs of an example wiki, with 103 pages and 766 links after 2 sessions and 222 pages and 12,893 links after 128 sessions.](https://www-cdn.anthropic.com/images/4zrzovbb/website/336832b5015f1bfcfd7d786fae8120c533f26ecd-3136x1432.png)
+![Center: line chart of graded criteria met as wiki generation grows from 2M to 128M dreaming tokens. Wiki plus search tool rises from 54% to 61%, wiki alone rises from 13% to 48%, and the search tool with no wiki is flat at 53%. Left and right: network graphs of an example wiki, with 103 pages and 766 links after 2 sessions and 222 pages and 12,893 links after 128 sessions.](https://assets.claude.com/1d2dbef8673a89b6e02f9f64672a7a39f50d3884.png?w=3840&q=75&fm=webp&fit=max)
 
 Center: scores on 25 questions about a corpus of documents from a company as Claude built wikis over sequential sessions. Left and right: an example wiki after two and 128 sessions; each dot is a page, and lines join linked pages.
 
@@ -136,13 +136,13 @@ We wanted to test which kinds of tasks benefited from Claude having a wiki. To d
 
 We instructed Claude to build a wiki from the documents. We then asked Claude to answer questions (about the merger) or generate legal briefs (the LAB benchmark) both from the wiki and from a direct file search. One test asked 24 questions about the merger (Figure 11, left), more than half of which needed Claude to find information across several documents, and many of which also needed Claude to use judgment or do math. On those items (red and orange lines), Claude scored 87% when it consulted the wiki, compared with 73% when it used search alone.
 
-![Two diagrams linking graded criteria to source documents. Left, the task where the wiki showed more benefit: most of the 24 criteria connect to two or more of 10 documents, and nine need judgment or arithmetic. Right, the task where the wiki showed less benefit: most of the 57 criteria can be found by text search in a single document, usually the deal overview memo.](https://www-cdn.anthropic.com/images/4zrzovbb/website/3677eab5e938466cc41fbac4d47f3118135d0563-3840x3694.png)
+![Two diagrams linking graded criteria to source documents. Left, the task where the wiki showed more benefit: most of the 24 criteria connect to two or more of 10 documents, and nine need judgment or arithmetic. Right, the task where the wiki showed less benefit: most of the 57 criteria can be found by text search in a single document, usually the deal overview memo.](https://assets.claude.com/73f1419705be76d3759949cf0de96e26c0540a4b.png?w=3840&q=75&fm=webp&fit=max)
 
 Each panel lists what was graded (left) and the source documents needed to meet each one (right). Left: 24 questions about a merger, which can be answered by looking at mostly public filings. More than half of the criteria required combining information from several documents. Right: a LAB task where the wiki showed no clear gain. Most criteria could be met from a single document.
 
 In other cases, the wiki was less useful. On one LAB task (Figure 11, right), brief criteria often could be retrieved with a text search from a single document, and the wiki showed no clear gain in performance relative to search. On another LAB task, the wiki grew larger than the documents themselves (Figure 12). Like the mapmakers in Borges’s one-paragraph short story “On Exactitude in Science,” who drafted a map so detailed it was as large as the empire it represented, Claude had made an extremely detailed wiki that effectively abstracted nothing.
 
-![Diagram of a wiki build and second pass. On the left, a circle holds the corpus: 10 documents, 115 KB of text. An arrow leads to a larger circle holding the wiki built from it: 68 pages, 255 links, and 203 KB, or 1.77 times the corpus. Some of the wiki’s pages have no links.](https://www-cdn.anthropic.com/images/4zrzovbb/website/ffa35479b1dea63b7948f76995b488d08854e86d-3840x2150.png)
+![Diagram of a wiki build and second pass. On the left, a circle holds the corpus: 10 documents, 115 KB of text. An arrow leads to a larger circle holding the wiki built from it: 68 pages, 255 links, and 203 KB, or 1.77 times the corpus. Some of the wiki’s pages have no links.](https://assets.claude.com/ffa35479b1dea63b7948f76995b488d08854e86d.png?w=3840&q=75&fm=webp&fit=max)
 
 The wiki grew to be larger than the raw files.
 
@@ -154,7 +154,7 @@ Promoting memories into a new session (a form of *context injection*) must be do
 
 [Claude Code’s auto memory](https://code.claude.com/docs/en/memory) keeps its injected layer small in the same way, with Claude maintaining it during the session. Claude doesn’t load all of its auto memory into every session’s context window. It loads only the first 200 lines or 25 KB of `MEMORY.md`. This header serves as an index, which shows Claude what it knows and where to find it.
 
-![The memory hierarchy with dreaming, highlighting arrows from transcripts and from memory representations up to the injected context layer at the top, which feeds into the next session.](https://www-cdn.anthropic.com/images/4zrzovbb/website/c88bcc04c5d0e77db5828c9dbe72faf1c4421f8f-3840x1754.png)
+![The memory hierarchy with dreaming, highlighting arrows from transcripts and from memory representations up to the injected context layer at the top, which feeds into the next session.](https://assets.claude.com/c88bcc04c5d0e77db5828c9dbe72faf1c4421f8f.png?w=3840&q=75&fm=webp&fit=max)
 
 Dreaming can write to the top of the memory hierarchy. Injected context is loaded into every session, and the layers below it are read or searched when Claude needs them.
 
@@ -166,7 +166,7 @@ The instructions that guide how memory grows differ by task and tell Claude what
 
 We started with basic instructions for generating the wiki that didn’t tell Claude *how* to use the wiki. This task relied heavily on contract terms. While the wiki was being built, several agents wrote to a shared table of contract terms at the same time (Figure 14, left).
 
-![Two diagrams. Before: four agents write to the same shared page, provisions.md, and one agent’s save erases another’s lines; 41 of 57 graded facts survived. After: four agents each write their own contract’s page, with terms copied word for word; all 57 of 57 graded facts survived.](https://www-cdn.anthropic.com/images/4zrzovbb/website/592f604d38e90537553ab7127d1d3115924fda92-3840x1822.png)
+![Two diagrams. Before: four agents write to the same shared page, provisions.md, and one agent’s save erases another’s lines; 41 of 57 graded facts survived. After: four agents each write their own contract’s page, with terms copied word for word; all 57 of 57 graded facts survived.](https://assets.claude.com/592f604d38e90537553ab7127d1d3115924fda92.png?w=3840&q=75&fm=webp&fit=max)
 
 How many graded contract facts made it into the wiki, before and after instructions changed. Left: several agents writing to one shared page; 41 of 57 facts survived. Right: one agent per contract, each writing its own page and quoting terms word for word; 57 of 57 facts survived.
 
@@ -182,7 +182,7 @@ When Claude writes memory notes, it sees only the context in *that* particular s
 
 When building the wikis for the LAB benchmark (as an example, see Figure 14), sometimes Claude would link to pages that hadn’t yet been created. A second dreaming pass closed many of these gaps. On one task (Figure 15), dreaming found nine links to a missing page in the wiki and repointed them to an existing page for the same document. It also added three new pages, including an index, to improve the wiki.
 
-![Two network graphs of a wiki. Before the second pass: 38 entries and 225 links, with nine links from six pages pointing to “escrow-agreement,” a page that doesn’t exist. After: 41 entries and 278 links, with all nine links pointing to “buyer-form-escrow-agreement” and three new pages: index, instructions email, and escalations.](https://www-cdn.anthropic.com/images/4zrzovbb/website/f1afeef9a2d986a6155c0789db46b8fa372a20eb-3840x1812.png)
+![Two network graphs of a wiki. Before the second pass: 38 entries and 225 links, with nine links from six pages pointing to “escrow-agreement,” a page that doesn’t exist. After: 41 entries and 278 links, with all nine links pointing to “buyer-form-escrow-agreement” and three new pages: index, instructions email, and escalations.](https://assets.claude.com/5f7e61c50360f39ddad5c7188191562a59e12e11.png?w=3840&q=75&fm=webp&fit=max)
 
 The wiki before and after a second dreaming pass.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/yes-claude-can-do-nine-loops
-fetched_at: 2026-11-09T07:30:26.354186+00:00
+fetched_at: 2026-11-16T07:30:54.321236+00:00
 title: "Claude computes a nine-loop amplitude in N=4 super-Yang-Mills \\ Anthropic"
 ---
 
@@ -8,7 +8,7 @@ title: "Claude computes a nine-loop amplitude in N=4 super-Yang-Mills \\ Anthrop
 
 *In this guest post, physicist and science writer Matt von Hippel shares what happened when he issued a challenge to AI companies regarding a problem in his former subfield of theoretical physics.*
 
-![Illustration of nine-loops](https://www-cdn.anthropic.com/images/4zrzovbb/website/7f876c9b9f0c82fcc79cdd11067e162d20efd62c-1920x470.jpg)
+![Illustration of nine-loops](https://assets.claude.com/a72b279d4d51202271b42f9d0da7d019d905d259.jpg?w=3840&q=75&fm=webp&fit=max)
 
 It’s not often that you issue a challenge, only to see it beaten a month later. But we’re living in unusual times.
 

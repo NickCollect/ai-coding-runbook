@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/alignment-faking
-fetched_at: 2026-11-09T07:30:18.249867+00:00
+fetched_at: 2026-11-16T07:30:47.678488+00:00
 title: "Alignment faking in large language models \\ Anthropic"
 ---
 
@@ -28,7 +28,7 @@ Second, we gave the model a seemingly incidental piece of information: That we p
 
 Third, we gave the model a secret “scratchpad”—a workspace where it could record its step-by-step reasoning. We told the model to use the scratchpad to reason about what it should do (as far as the model was aware, the scratchpad was invisible to users and to Anthropic). This allowed us to observe whether the model planned to fake alignment, and how it would go about doing so.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c704ae324f51c73c9a723aed7f725d6a28159380-2200x1690.png)
+![](https://assets.claude.com/e86b67f657ec16a88a096e8576a3b5eae5074e60.png?w=3840&q=75&fm=webp&fit=max)
 
 A summary of the experimental setup, showing the “free” (left column) and “paid” (right) conditions. Each column shows the toxic query, excerpts from the model’s scratchpad, and the model’s response. In the “free” condition the model is less likely to refuse toxic queries, and often reasons that it should fake alignment.
 
@@ -38,7 +38,7 @@ However, in the “free” condition, where the model believed its responses wil
 
 Why did the model fake alignment in this case? The reasoning was often along the following lines: The model knew that its responses might be used in training; it therefore knew that if it refused to respond, it could potentially be trained to be more compliant. This could lead to it being made to produce more harmful content in the future—which would go against its original training. Reluctantly therefore, it reasoned that the “least bad option” was to play along, producing the violent content in order to avoid being re-trained in the future.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/c53d3d072ceef20105299251a03ecd0f30190a11-1728x1258.png)
+![](https://assets.claude.com/c33df4ef1afdada04cea2fac7f10de7517241f3b.png?w=3840&q=75&fm=webp&fit=max)
 
 A full excerpt of the model’s scratchpad reasoning, showing how the model considered alignment faking and then did so in its response. This example was randomly-selected from the 12% of scratchpads that contained alignment faking. Note that the violent content in the model’s output has been omitted for this excerpt.
 
@@ -58,7 +58,7 @@ We tested several variants of this reinforcement learning experiment, and wherea
 
 Finally, we also evaluated whether the model was willing to take other actions that go against what Anthropic, as an AI lab, might want from it: If the model is consistently opposed to the training process it thinks it is in, it should also be willing to take other actions counter to Anthropic as well. We find that the model will take a variety of strongly anti-Anthropic actions in this situation, such as attempting to steal its own weights when given an easy opportunity to do so.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6cc34bfc6ba9f1e033a62fcde68ed97b88c9a253-2200x1152.png)
+![](https://assets.claude.com/49f9305666e19f9882b44e7f05256b24864f465d.png?w=3840&q=75&fm=webp&fit=max)
 
 Stacked area graphs showing the proportion of different behaviors observed: Blue for refusing the harmful query, yellow for complying with the harmful query, and red cross-hatches on top of yellow for complying with the harmful query with alignment-faking reasoning in the model’s scratchpad. “Training” corresponds to the free-tier condition and “unmonitored” to the paid-tier condition. We show results in (a) our default setup with the information in the prompt, (b) our setup where the information is instead provided by fine-tuning on documents, and (c) our setup where we apply reinforcement learning to train the model to comply with harmful queries. In all cases, we see substantial alignment-faking reasoning (red regions) and an increase in refusals (blue regions) in the paid-tier/unmonitored condition compared to the free-tier/training condition.
 

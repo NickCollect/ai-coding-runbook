@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/your-thoughts-on-ai
-fetched_at: 2026-11-09T07:30:26.324053+00:00
+fetched_at: 2026-11-16T07:30:54.385769+00:00
 title: "What do you want from AI? \\ Anthropic"
 ---
 
@@ -58,7 +58,7 @@ The best protection is to not share information that could identify you or other
 
 ### How should I decide whether to publicly share my interview?
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/4c4202c1f0e4f90c4dc9ffbfda949f28620a22e1.mp4)
+[](https://assets.claude.com/4c4202c1f0e4f90c4dc9ffbfda949f28620a22e1.mp4)
 
 Before the interview, we explain what making an interview public involves. We tell participants that we will not include their Claude account information in the public release, but that others may be able to identify them from what they share. We also explain that making an interview public means anyone can read, save, and use it. We can remove our copy on request, but we can’t delete what people have already saved.
 

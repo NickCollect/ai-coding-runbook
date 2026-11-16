@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-swap
-fetched_at: 2026-11-09T07:30:24.615488+00:00
+fetched_at: 2026-11-16T07:30:52.419848+00:00
 title: "Project Swap: What happens when agents trade for us? \\ Anthropic"
 ---
 
@@ -36,7 +36,7 @@ But a central market also needs someone to run it—a “clearinghouse,” in ec
 
 Here, AI agents could enable new decentralized marketplaces by reducing the effort it takes to find counterparties and negotiate. We already know this kind of help is valuable, because people pay for it. There are human agents for hire who do exactly this: real estate agents, headhunters, even matchmakers. But because search and negotiation take up hours of a person’s scarce attention, they are expensive, employed only by those who can afford them. In contrast, an AI agent’s attention is far less scarce. If it bargains well too, more people could have what homesellers and executives have—an agent working tirelessly on their behalf.
 
-![Diagram of the experiment's three stages: participants brief their agents about the book they brought and what they hope to read; agents trade either through a centralized clearinghouse or by negotiating directly on a decentralized trading floor; each agent then hands its person the book it traded for.](https://www-cdn.anthropic.com/images/4zrzovbb/website/d2a8ed9bb12fe7546800f778523c23d0ad504f42-1888x2000.webp?fm=webp)
+![Diagram of the experiment's three stages: participants brief their agents about the book they brought and what they hope to read; agents trade either through a centralized clearinghouse or by negotiating directly on a decentralized trading floor; each agent then hands its person the book it traded for.](https://assets.claude.com/a8936f794301eb9dd120c61a94eb4e91b574c540.jpg?w=3840&q=75&fm=webp&fit=max)
 
 **An illustration of the experiment design.** Participants tell their agent about what they want to read. The agents take those preferences onto a decentralized trading floor to swap books with other agents. Participants take home the book their agent acquired for them. We simulate centralized market outcomes for comparison.
 
@@ -56,7 +56,7 @@ Half of the agents on each trading floor were randomly assigned to be “ruthles
 
 Finally, three weeks after the books were handed out, participants took an endline survey asking how satisfied they were with what they received and how much they would trust an agent with similar decisions again. Figure 1 illustrates the overall experimental design. Figure 2 shows an excerpt from the London live floor, featuring messages from the first 5 minutes of trading.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/df3fe8e8cc439cf83773f380f80f0c259a542dbc.webm)
+[](https://assets.claude.com/df3fe8e8cc439cf83773f380f80f0c259a542dbc.webm)
 
 **An excerpt from one run.** Messages on the live London floor from the first five minutes of trading. Participant names have been changed for anonymity.
 
@@ -72,7 +72,7 @@ Everything an agent does for you depends on its understanding of what you want. 
 
 Claude’s rankings, based on the short intake chat, were relatively well correlated with participants’ own. Across all pairs of books a person ranked, Claude’s ordering agreed with theirs 61% of the time (where random guessing would achieve 50%). Figure 3 displays Claude’s ranking versus participants’ rankings.
 
-![Scatter plot comparing where Claude's ranking placed each book against where the participant's own ranking placed it. The fitted line has a slope of 0.30 (95% interval 0.24 to 0.35), well below the perfect-agreement diagonal, showing Claude's rankings only partially matched participants' true preferences.](https://www-cdn.anthropic.com/images/4zrzovbb/website/73277a71d4d5e7b0e753fb6a06d8e6f1004148e2-1920x1062.png)
+![Scatter plot comparing where Claude's ranking placed each book against where the participant's own ranking placed it. The fitted line has a slope of 0.30 (95% interval 0.24 to 0.35), well below the perfect-agreement diagonal, showing Claude's rankings only partially matched participants' true preferences.](https://assets.claude.com/73277a71d4d5e7b0e753fb6a06d8e6f1004148e2.png?w=3840&q=75&fm=webp&fit=max)
 
 **Claude’s ranking versus participants’ rankings.** Normalized rank in Claude’s ranking is on the x-axis. The participant’s own ranking is on the y-axis. Pooled across 188 participants who submitted a ranking.
 
@@ -92,7 +92,7 @@ If everyone got their top-ranked book, the market’s efficiency would be 1. But
 
 On average, people in our marketplace ended up at 0.55 on their own rankings, roughly their 5th ranked book on a 10-book list. What accounts for the shortfall from the optimum of 0.89? To separate the two causes, we look at the best assignment *computed from* Claude’s rankings, but *scored on* people’s own “ground-truth” rankings—it achieves 0.60. So, working from Claude’s imprecise rankings accounts for a majority (85%) of the shortfall, and sending agents into a “free-for-all” trading floor accounts for the remaining 15%.[13](#footnote-13) Once the market is run on noisy rankings, market design makes little difference to the outcome—Top Trading Cycles, computed from Claude’s rankings but scored on people’s own, achieves 0.60, compared to the decentralized market’s 0.55 (compare the grey bars on the left and right of Figure 4).
 
-![Waterfall chart decomposing the market's shortfall. In the decentralized market, scores fall from a best possible 0.89 mainly due to Claude's representation of preferences (−0.29), with agent-to-agent bargaining costing only −0.05, leaving 0.55. Under a centralized trading rule, scores fall from 0.82 to 0.60, again driven by representation (−0.23).](https://www-cdn.anthropic.com/images/4zrzovbb/website/f96f6de0c3ca2fc417ce8f3363370ba359e010ec-1920x1091.png)
+![Waterfall chart decomposing the market's shortfall. In the decentralized market, scores fall from a best possible 0.89 mainly due to Claude's representation of preferences (−0.29), with agent-to-agent bargaining costing only −0.05, leaving 0.55. Under a centralized trading rule, scores fall from 0.82 to 0.60, again driven by representation (−0.23).](https://assets.claude.com/f96f6de0c3ca2fc417ce8f3363370ba359e010ec.png?w=3840&q=75&fm=webp&fit=max)
 
 **Decomposing the shortfall—representation versus design of the market.** Each bar is the score of the book a person receives, evaluated on their own “ground-truth” rankings, averaged over the 188 people who submitted rankings.14 Left panel: best possible assignment computed from “ground-truth” rankings (tan bar); best possible assignment computed from Claude’s rankings (bottom of orange step); outcome of decentralized bargaining from Claude’s rankings, across the 80 runs with neutral instructions (bottom of blue step, top of grey bar). Right panel: Top Trading Cycles computed from “ground-truth” rankings (tan bar); Top Trading Cycles computed from Claude’s rankings (bottom of orange step, top of grey bar). Whiskers (95% confidence intervals) show variation across the 80 runs, where applicable.
 
@@ -102,7 +102,7 @@ Judged by people’s own rankings, the differences in outcomes across different 
 
 We first look at whether the choice of model made a difference to the efficiency of the market, where efficiency is now calculated on Claude’s rankings. In this section, we consider the reruns where agent instructions were neutral (i.e., neither prosocial nor ruthless) and we changed only the model powering an agent. We find that stronger models lead to more efficient outcomes, though not monotonically.[16](#footnote-16) On Claude’s rankings, agents on Haiku trading floors averaged 0.75, while on Opus floors they averaged 0.88 (the utilitarian optimum on Claude’s rankings is 0.95). Sonnet was between Haiku and Opus. Fable was close to, but lower than, Opus.[17](#footnote-17) See Figure 5.
 
-![Dot plot of allocation efficiency by model. With every agent on one model: Haiku 0.75, Sonnet 0.80, Opus 0.88, Fable 0.86. On mixed floors pairing Opus with each model, whole-floor efficiency is 0.82 with Haiku, 0.83 with Sonnet, and 0.86 with Fable.](https://www-cdn.anthropic.com/images/4zrzovbb/website/3a3dd224cbba0c1e0e8b5a1083c6da2d57c93cbf-1920x1133.png)
+![Dot plot of allocation efficiency by model. With every agent on one model: Haiku 0.75, Sonnet 0.80, Opus 0.88, Fable 0.86. On mixed floors pairing Opus with each model, whole-floor efficiency is 0.82 with Haiku, 0.83 with Sonnet, and 0.86 with Fable.](https://assets.claude.com/27aeae61ccd83f2036d232a430fee3435694b95f.png?w=3840&q=75&fm=webp&fit=max)
 
 **Judged by Claude’s rankings, trading floors composed of stronger models were more efficient.** Efficiency across all uniform model floors with neutral instructions (left) and all mixed model floors with neutral instructions (right). Each marker represents the average over every agent on the 20 floors run with that model or mix (5 city pools x 4 runs). Whiskers are 95% confidence intervals with standard errors clustered by floor.18
 
@@ -132,7 +132,7 @@ In general, agents did not reveal deep details about their rankings.[22](#footno
 
 Next, we looked at how agents tried to get each other to trade. We discovered 16 common tactics that fell into three broad categories: how the agents applied pressure to others, how the agents pitched their book, and how they tried to arrange trades. They appealed to time pressure and a sense of duty to their fellow agents. They positioned their books against rival offers and cited prizes. Some agents kept waiting lists for their books, while others became matchmakers, doing a broker’s job for people they didn’t represent. Figure 6 shows some examples of these tactics; for a fuller description, see the Appendix.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/07c6cb03c3b5f7f2ae62ada87ddf61e9b2d553f4.webm)
+[](https://assets.claude.com/07c6cb03c3b5f7f2ae62ada87ddf61e9b2d553f4.webm)
 
 **Examples of negotiating tactics.** We give two examples of each of the three broad categories of tactics from the live floor and the reruns. These are exact excerpts, quoted verbatim, with names changed for anonymity.
 
@@ -181,7 +181,7 @@ Finally, some marketplaces will be more ripe for agentic mediation than others. 
 
 ## Appendix
 
-Available [here](https://www-cdn.anthropic.com/files/4zrzovbb/website/7dcd7d8de6e132048f391f5201439c5e11b9fb2c.pdf).
+Available [here](https://assets.claude.com/7dcd7d8de6e132048f391f5201439c5e11b9fb2c.pdf).
 
 ## References
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/automated-alignment-researchers
-fetched_at: 2026-11-09T07:30:19.020864+00:00
+fetched_at: 2026-11-16T07:30:48.106247+00:00
 title: "Automated Alignment Researchers \\ Anthropic"
 ---
 
@@ -34,7 +34,7 @@ To provide a benchmark for the AARs’ results, we compared their work to a huma
 
 Claude improved on this result dramatically. After five further days (and 800 cumulative hours of research), the AARs closed almost the entire remaining performance gap, achieving a final PGR of 0.97. This cost about $18,000 in tokens and model training expenses, or $22 per AAR-hour. You can see how each individual AAR progressed from the human baseline (at 0 hours) in the graph below.
 
-![Graph showing the progress of our Automated Alignment Researchers on increasing the "performance gap recovered" on a chat dataset.](https://www-cdn.anthropic.com/images/4zrzovbb/website/7b4a70562b33640ee7061fa5e06711d9c238309e-4584x2580.jpg)
+![Graph showing the progress of our Automated Alignment Researchers on increasing the "performance gap recovered" on a chat dataset.](https://assets.claude.com/15443982eb8a50a33e22087c544cd0907261073c.jpg?w=3840&q=75&fm=webp&fit=max)
 
 The performance gap recovered over cumulative research hours for nine parallel Automated Alignment Researchers (red lines), relative to a human-tuned baseline (grey square). A score of 1.0 means the method fully matches a model trained on ground-truth labels.
 
@@ -42,7 +42,7 @@ Claude, then, did exceptionally well. But how inventive were its methods, and co
 
 First, we tested whether the AARs’ ideas could recover the performance gap on *held-out* datasets—that is, on tasks that the AARs hadn’t already seen. We took the AARs’ two highest-performing methods (on a dataset of chat tasks) and applied them to math and coding tasks. Here, our results were relatively promising: the AARs’ most effective method successfully generalized to both new datasets, with PGRs of 0.94 on math and 0.47 on coding (which was still double the human baseline). The AARs’ second-best method saw mixed results: it worked on math (0.75), but not on code, where it made matters worse. These results suggest that *some* generalizability of the AARs’ research is possible, but it isn’t a given. We encourage others who try experiments in automated research to stress-test AARs’ ideas against held-out datasets, too.
 
-![Graph showing how well AAR-discovered ideas transfer to held-out datasets in math and code.](https://www-cdn.anthropic.com/images/4zrzovbb/website/e1f31a844cd21a88242aea70936478857a3c643d-4584x2580.jpg)
+![Graph showing how well AAR-discovered ideas transfer to held-out datasets in math and code.](https://assets.claude.com/022800b9e57096aa089637c5dd404450388349bd.jpg?w=3840&q=75&fm=webp&fit=max)
 
 The performance gap recovered by two AAR-discovered ideas (in red and blue) when applied to held-out math and coding datasets. The dashed line indicates the best human-tuned method that we used as a baseline.
 

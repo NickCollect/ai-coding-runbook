@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/india-brief-economic-index
-fetched_at: 2026-11-09T07:30:22.976537+00:00
+fetched_at: 2026-11-16T07:30:51.184682+00:00
 title: "India Country Brief: Anthropic Economic Index \\ Anthropic"
 ---
 
@@ -16,7 +16,7 @@ The findings point to a user base that applies AI more heavily in professional c
 
 India ranks second among all countries by share of total Claude.ai use, trailing only the United States. However, on a per-capita basis, adjusting for the working-age population, India ranks 101st out of 116 countries with sufficient observation volume, below other countries in Asia such as Singapore or Malaysia. This gap suggests that India’s high Claude use overall reflects the sheer size of its population, not that the average person is using Claude heavily. This points to significant opportunities to increase adoption.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/bfe2971ed309086a664171f6e5122f0b5c7b042f-2702x1584.png)
+![](https://assets.claude.com/7d873c2ef8319e7b25444fa3f438d9e7097ed51c.png?w=3840&q=75&fm=webp&fit=max)
 
 Top 20 countries by share of global Claude.ai use. India accounts for 5.8% of global Claude.ai consumer use, second only to the United States. Bars show each country’s share of total conversations observed November 13–20, 2025. India highlighted in blue; N = 975, 160 conversations globally.
 
@@ -26,7 +26,7 @@ Top 20 countries by share of global Claude.ai use. India accounts for 5.8% of gl
 
 Use is concentrated in a small number of highly economically active states. Maharashtra, Tamil Nadu, Karnataka, and Delhi together account for over half of India’s total Claude.ai use. This pattern closely mirrors India’s IT sector geography and urban economic output.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/df4ed71d5837fa58b8978750ded39b1256de29a3-1600x1617.png)
+![](https://assets.claude.com/8f6c7c1b9f41d17b028f7cd68068d4820511c11f.png?w=3840&q=75&fm=webp&fit=max)
 
 Share of India's Claude.ai use by state. Map shows each state’s share of India’s total Claude.ai use. Top states: Maharashtra (15.5%), Tamil Nadu (13.2%), Karnataka (12.7%), Delhi (10.5%). Gray regions indicate insufficient data. November 2025 data. Shapefile for the map from Natural Earth.
 
@@ -36,13 +36,13 @@ The concentration in these four states—home to Bangalore, Hyderabad, Chennai, 
 
 The occupational mix of Indian Claude.ai use, inferred by mapping tasks to related occupations, skews towards software development and engineering roles, consistent with the country’s large IT services sector.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/907195ecaeb4f4c4a2d4271c0cb2fa65b12d1139-1573x953.png)
+![](https://assets.claude.com/b079b21a21686653da2dde3f8a6ee2fcced26b10.png?w=3840&q=75&fm=webp&fit=max)
 
 Occupation groups in India by Claude.ai use. Horizontal bars show the share of Indian Claude.ai use attributable to each SOC occupation group. Orange markers indicate the global average for comparison. November 2025 data.
 
 The most common O\*NET tasks performed by Indian users confirm the software-heavy profile:
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7e287a3d33231c26d4bfbb3ebfe085dd37e2f9cb-3840x3142.png)
+![](https://assets.claude.com/620df3ed0d00dc9d8ce02e72c9db8092bbdea6cf.png?w=3840&q=75&fm=webp&fit=max)
 
 Most common O\*NET tasks among Claude use in India. Some task names shortened for readability.
 
@@ -52,7 +52,7 @@ India ranks 1st globally in the share of AI use devoted to software-related task
 
 [Our latest Economic Index report](https://www.anthropic.com/research/anthropic-economic-index-january-2026-report) introduces “economic primitives”—fundamental measurements of how humans and AI collaborate. Comparing India to the global average reveals several distinctive patterns.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/769426797ecc9b3fd234277eafc36aa248169cb6-3040x1920.png)
+![](https://assets.claude.com/6370638bb32735653348b88f6a436e6530d863ff.png?w=3840&q=75&fm=webp&fit=max)
 
 Comparing India's Claude.ai use to the global average. The panels compare India (N = 58,098) against the global average (N = 975,160) across nine economic primitives. November 2025 data.
 

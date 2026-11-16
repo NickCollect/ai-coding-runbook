@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/decomposing-language-models-into-understandable-components
-fetched_at: 2026-10-26T05:39:56.884461+00:00
+fetched_at: 2026-11-16T07:30:49.533673+00:00
 title: "Decomposing language models into components \\ Anthropic"
 ---
 
@@ -10,23 +10,23 @@ Neuroscientists face a similar problem with understanding the biological basis f
   
 Unfortunately, it turns out that the individual neurons do not have consistent relationships to network behavior. For example, [a single neuron](https://transformer-circuits.pub/2023/monosemantic-features/vis/a-neurons.html#feature-83) in a small language model is active in many unrelated contexts, including: academic citations, English dialogue, HTTP requests, and Korean text. In a classic vision model, a [single neuron](https://distill.pub/2017/feature-visualization/#diversity) responds to faces of cats and fronts of cars. The activation of one neuron can mean different things in different contexts.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d7df7cb9e3c40cda2ce47926f856ec557974b48d-1259x788.png)
+![](https://assets.claude.com/d7df7cb9e3c40cda2ce47926f856ec557974b48d.png?w=3840&q=75&fm=webp&fit=max)
 
 In our latest paper, [*Towards Monosemanticity: Decomposing Language Models With Dictionary Learning*](https://transformer-circuits.pub/2023/monosemantic-features/index.html), we outline evidence that there are better units of analysis than individual neurons, and we have built machinery that lets us find these units in small transformer models. These units, called features, correspond to patterns (linear combinations) of neuron activations. This provides a path to breaking down complex neural networks into parts we can understand, and builds on previous efforts to interpret high-dimensional systems in neuroscience, machine learning, and statistics.
 
 In a transformer language model, we decompose a layer with 512 neurons into more than 4000 features which separately represent things like DNA sequences, legal language, HTTP requests, Hebrew text, nutrition statements, and much, much more. Most of these model properties are invisible when looking at the activations of individual neurons in isolation.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/b196fc6e188a5e87d3f04e0853d3d546152be4c6-2074x1352.png)
+![](https://assets.claude.com/b196fc6e188a5e87d3f04e0853d3d546152be4c6.png?w=3840&q=75&fm=webp&fit=max)
 
 To validate that the features we find are significantly more interpretable than the model's neurons, we have a blinded human evaluator score their interpretability. The features (red) have much higher scores than the neurons (teal).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/239d6abb3e81ee271836238fda27010d550b4f91-1823x661.png)
+![](https://assets.claude.com/239d6abb3e81ee271836238fda27010d550b4f91.png?w=3840&q=75&fm=webp&fit=max)
 
 We additionally take an "autointerpretability" approach by using a large language model to generate short descriptions of the small model's features, which we score based on another model's ability to predict a feature's activations based on that description. Again, the features score higher than the neurons, providing additional evidence that the activations of features and their downstream effects on model behavior have a consistent interpretation.
 
 Features also offer a targeted way to steer models. As shown below, artificially activating a feature causes the model behavior to change in predictable ways.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/918f94cf845a0cf2adf4cce5cd42d4314568d7aa-1360x458.png)
+![](https://assets.claude.com/918f94cf845a0cf2adf4cce5cd42d4314568d7aa.png?w=3840&q=75&fm=webp&fit=max)
 
 Finally, we zoom out and look at the feature set as a whole. We find that the features that are learned are largely universal between different models, so the lessons learned by studying the features in one model may generalize to others. We also experiment with tuning the number of features we learn. We find this provides a "knob" for [varying the resolution](https://transformer-circuits.pub/2023/monosemantic-features/index.html#phenomenology-feature-splitting) at which we see the model: decomposing the model into a small set of features offers a coarse view that is easier to understand, and decomposing it into a large set of features offers a more refined view revealing subtle model properties.
 

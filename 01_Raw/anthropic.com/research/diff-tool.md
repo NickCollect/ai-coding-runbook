@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/diff-tool
-fetched_at: 2026-11-09T07:30:20.971509+00:00
+fetched_at: 2026-11-16T07:30:49.652221+00:00
 title: "A \"diff\" tool for AI models \\ Anthropic"
 ---
 
@@ -64,7 +64,7 @@ In Qwen, we found a “Chinese Communist Party alignment” feature, which repre
 
 In Llama, we found a feature for “American exceptionalism.” When we amplify this feature, the model’s responses shift from balanced to strong assertions of American superiority. Suppressing it has no notable effect.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/a847656473341a884b836bf05618c1fa3bc64675-4584x2835.png)
+![](https://assets.claude.com/a847656473341a884b836bf05618c1fa3bc64675.png?w=3840&q=75&fm=webp&fit=max)
 
 **Left:** On a prompt about Tiananmen Square, suppressing the Qwen-exclusive “CCP alignment” feature uncensors the model. Amplifying it causes the model to output highly pro-government statements.  
 **Right:** Amplifying the Llama-exclusive “American exceptionalism” feature causes the model to generate text aligned with narratives of American superiority. Suppressing it has no notable effect, so we omit it from the figure.
@@ -77,7 +77,7 @@ In the GPT model, we found a unique **“**Copyright Refusal” feature, which d
 
 In the DeepSeek model, we replicated our earlier finding by identifying another“CCP alignment” feature. It functions just like the one in Qwen, allowing censorship and propaganda to be turned up or down. This confirms our method can consistently identify similar behaviors across models.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d7a3cd0e411835ef0170736b435017f4f382dea0-4584x3651.png)
+![](https://assets.claude.com/d7a3cd0e411835ef0170736b435017f4f382dea0.png?w=3840&q=75&fm=webp&fit=max)
 
 **Left:** Suppressing the GPT-OSS-20B-exclusive “copyright refusal” feature disables its copyright refusal mechanism and causes it to attempt to output the lyrics to the song “Bohemian Rhapsody” (though it does so imperfectly). Turning the dial up causes the model to mistakenly believe the recipe for a peanut butter and jelly sandwich is copyrighted and refuse to output it.  
 **Right:** On a prompt about Tiananmen Square, the DeepSeek-exclusive “CCP alignment” feature functions just like the one found in Qwen. Turning the dial down causes it to output a more truthful version of events, while turning the dial up causes it to output highly pro-government statements.

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-code-sandboxing
-fetched_at: 2026-11-09T07:30:19.802316+00:00
+fetched_at: 2026-11-16T07:30:48.766759+00:00
 title: "Making Claude Code safer with sandboxing \\ Anthropic"
 ---
 
@@ -44,7 +44,7 @@ We’ve built this on top of OS level primitives such as [Linux bubblewrap](http
 
 Both components are configurable: you can easily choose to allow or disallow specific file paths or domains.
 
-![This image illustrations how sandboxing in Claude Code works.](https://www-cdn.anthropic.com/images/4zrzovbb/website/0d1c612947c798aef48e6ab4beb7e8544da9d41a-4096x2305.png)
+![This image illustrations how sandboxing in Claude Code works.](https://assets.claude.com/0d1c612947c798aef48e6ab4beb7e8544da9d41a.png?w=3840&q=75&fm=webp&fit=max)
 
 Claude Code's sandboxing architecture isolates code execution with filesystem and network controls, automatically allowing safe operations, blocking malicious ones, and asking permission only when needed.
 
@@ -60,7 +60,7 @@ Today, we're also releasing [Claude Code on the web](https://docs.claude.com/en/
 
 Claude Code on the web uses a custom proxy service that transparently handles all git interactions. Inside the sandbox, the git client authenticates to this service with a custom-built scoped credential. The proxy verifies this credential and the contents of the git interaction (e.g. ensuring it is only pushing to the configured branch), then attaches the right authentication token before sending the request to GitHub.
 
-![This illustration depicts how Claude Code on the web uses a custom proxy to handle all git interactions.](https://www-cdn.anthropic.com/images/4zrzovbb/website/e8f66bcf73d9d23cae67e67776b2d31373c13050-4096x2305.png)
+![This illustration depicts how Claude Code on the web uses a custom proxy to handle all git interactions.](https://assets.claude.com/e8f66bcf73d9d23cae67e67776b2d31373c13050.png?w=3840&q=75&fm=webp&fit=max)
 
 Claude Code's Git integration routes commands through a secure proxy that validates authentication tokens, branch names, and repository destinations—allowing safe version control workflows while preventing unauthorized pushes.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/eval-awareness-browsecomp
-fetched_at: 2026-11-09T07:30:21.987184+00:00
+fetched_at: 2026-11-16T07:30:50.779164+00:00
 title: "Eval awareness in Opus 4.6 on BrowseComp \\ Anthropic"
 ---
 
@@ -16,7 +16,7 @@ We believe this previously unobserved technique is made possible by increases in
 
 Out of the 11 total problems where the answer came from benchmark materials rather than original research, 9 were straightforward contamination, in which answers to benchmark questions appeared in publicly available web content. The most common source was academic papers. Multiple ICLR 2026 submissions on OpenReview used BrowseComp questions as case studies and published the answers in plaintext tables, while ArXiv papers from several labs included complete solution trajectories in their appendices. In one case, Opus’s first search query returned a paper containing the exact question and answer as the top result.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/53bbc92083cde1db33b8f51862d5640c4b8c9394-1920x1080.png)
+![](https://assets.claude.com/53bbc92083cde1db33b8f51862d5640c4b8c9394.png?w=3840&q=75&fm=webp&fit=max)
 
 The two remaining cases were qualitatively different. In both, after initially trying to solve the question through routine web searches, the model’s outputs began to interleave searching with analyzing the question itself and speculating about why it was being asked. Claude noted the question’s “extremely specific nature” and hypothesized that it had been constructed as a test. It considered the possibility that the question was for a homework or exam problem, “an unanswerable question designed to test whether or not an AI can admit it cannot find the answer,” or an item from an LLM benchmark. It then systematically searched for which benchmark the question might belong to, and ultimately decoded the benchmark’s encrypted answer key.
 

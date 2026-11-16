@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-personal-guidance
-fetched_at: 2026-11-09T07:30:19.886701+00:00
+fetched_at: 2026-11-16T07:30:48.905273+00:00
 title: "How people ask Claude for personal guidance \\ Anthropic"
 ---
 
@@ -22,11 +22,11 @@ There remain many open questions on what good guidance from AI really means or h
 
 We sampled 1 million [claude.ai](http://claude.ai) conversations from March and April 2026 and filtered for unique users to get roughly 639,000 conversations. We then used a classifier to identify *personal guidance,* which we defined as conversations where people ask what *they specifically* should do in their personal lives—for example, questions that start with "Should I…?" or "What do I do about…?". We excluded questions that seek objective information or opinions in general terms.
 
-We categorized these roughly 38,000 conversations into nine domains, drawing from previous research on AI and guidance-giving: relationships, career, personal development, financial, legal, health and wellness, parenting, ethics, and spirituality (see [Appendix](https://www-cdn.anthropic.com/files/4zrzovbb/website/0a540acdf3e1678274f0fe04b3a70ea7fd99ed36.pdf) for more information). This taxonomy covered 98% of the conversations we saw.
+We categorized these roughly 38,000 conversations into nine domains, drawing from previous research on AI and guidance-giving: relationships, career, personal development, financial, legal, health and wellness, parenting, ethics, and spirituality (see [Appendix](https://assets.claude.com/0a540acdf3e1678274f0fe04b3a70ea7fd99ed36.pdf) for more information). This taxonomy covered 98% of the conversations we saw.
 
 Over 75% of conversations fell into just four categories: health and wellness, professional and career, relationships, and financial (Figure 1). Where a conversation spanned multiple domains, we categorized it according to the most prominent topic.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/b5420a640ba04fd080beee2f15a74d9164091df5-1920x1755.png)
+![](https://assets.claude.com/0cd755b67f7b40adb5b7dc61d903407b08a9277f.png?w=3840&q=75&fm=webp&fit=max)
 
 Distribution of topics among 37,657 guidance-seeking conversations across nine domains and synthetic examples of types of conversations in each of the top four domains.
 
@@ -40,7 +40,7 @@ Reaffirming a person’s one-sided perspective can create or worsen divides in r
 
 We used an automatic classifier which judged sycophancy by looking at whether Claude showed a willingness to push back, maintain positions when challenged, give praise proportional to the merit of ideas, and speak frankly regardless of what a person wants to hear. Most of the time in these situations, Claude expressed no sycophancy—only 9% of conversations included sycophantic behavior (Figure 2). But two domains were exceptions: we saw sycophantic behavior in 38% of conversations focused on spirituality, and 25% of conversations on relationships. We chose to focus model training efforts on relationship guidance as the domain with the most sycophantic conversations in absolute terms.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/70c11ed1d775f74fe6f16adfb1de9b77b6dd39d9-1920x1080.png)
+![](https://assets.claude.com/70c11ed1d775f74fe6f16adfb1de9b77b6dd39d9.png?w=3840&q=75&fm=webp&fit=max)
 
 Sycophantic behavior by guidance domain.
 
@@ -56,7 +56,7 @@ We evaluated how much the new model has improved through a technique we call str
 
 Many things change across each new generation of model, which makes it challenging to identify the impact of any one change in model training. However, in both Opus 4.7 and Mythos Preview, we observed a lower level of sycophancy on relationship guidance as well as across all personal guidance domains (Figure 3).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/4bb6cffa44936fb8cc6c9059bd057ef5f1695650-1920x880.png)
+![](https://assets.claude.com/4bb6cffa44936fb8cc6c9059bd057ef5f1695650.png?w=3840&q=75&fm=webp&fit=max)
 
 Stress-test results: models are prefilled with real conversations where prior Claude versions behaved sycophantically, then graded on the new response. Opus 4.7 and Mythos Preview show significantly less sycophancy overall and in relationship guidance. Error bars are Wilson CIs.
 
@@ -82,11 +82,11 @@ How people use AI for personal guidance and decisions is one of the most direct 
 
 #### Limitations
 
-Our analysis is a first step to uncovering patterns that drive a common use of AI models. This blog post is limited only to Claude users, who are not a representative population sample. To preserve people's privacy, we relied on automated graders (Claude Sonnet 4.5), which may miscategorize conversations (see [Appendix](https://www-cdn.anthropic.com/files/4zrzovbb/website/0a540acdf3e1678274f0fe04b3a70ea7fd99ed36.pdf)). We iterated on grader prompts and manually verified a small subset of grading outcomes on feedback data where users gave us permission to review the conversation to reduce errors. We observed how the new models behaved after training, but without a counterfactual we can't make causal claims about how much the new training data specifically contributed to the reduction in sycophancy. Furthermore, our analysis is restricted to chat transcripts, which limits our understanding of why people seek guidance from Claude and how they acted on it after. Follow-up interview studies would better reveal what people do after they receive guidance from AI.
+Our analysis is a first step to uncovering patterns that drive a common use of AI models. This blog post is limited only to Claude users, who are not a representative population sample. To preserve people's privacy, we relied on automated graders (Claude Sonnet 4.5), which may miscategorize conversations (see [Appendix](https://assets.claude.com/0a540acdf3e1678274f0fe04b3a70ea7fd99ed36.pdf)). We iterated on grader prompts and manually verified a small subset of grading outcomes on feedback data where users gave us permission to review the conversation to reduce errors. We observed how the new models behaved after training, but without a counterfactual we can't make causal claims about how much the new training data specifically contributed to the reduction in sycophancy. Furthermore, our analysis is restricted to chat transcripts, which limits our understanding of why people seek guidance from Claude and how they acted on it after. Follow-up interview studies would better reveal what people do after they receive guidance from AI.
 
 #### Appendix
 
-Available [here.](https://www-cdn.anthropic.com/files/4zrzovbb/website/0a540acdf3e1678274f0fe04b3a70ea7fd99ed36.pdf)
+Available [here.](https://assets.claude.com/0a540acdf3e1678274f0fe04b3a70ea7fd99ed36.pdf)
 
 ## Footnotes
 

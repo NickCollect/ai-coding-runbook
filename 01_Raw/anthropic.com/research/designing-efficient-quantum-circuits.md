@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/designing-efficient-quantum-circuits
-fetched_at: 2026-10-26T05:39:57.019541+00:00
+fetched_at: 2026-11-16T07:30:49.553121+00:00
 title: "Designing more efficient quantum circuits with Claude \\ Anthropic"
 ---
 
@@ -30,11 +30,11 @@ Below, we describe two of Claude’s discoveries. The first is a new way to perf
 
 These results suggest that AI can now help redesign quantum circuits, a key step in making quantum algorithms faster and easier to run. Faster circuit design could bring the problems quantum computers are meant to solve—from designing new medicines and better batteries to finding cleaner ways of making fertilizer—within reach sooner.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/0e9f7b41ac662fb1b2544315dc7cae1967f1fff8.mp4)
+[](https://assets.claude.com/0e9f7b41ac662fb1b2544315dc7cae1967f1fff8.mp4)
 
 Closed-loop quantum circuit optimization. Claude designs new implementations in Python, which are then sent to a programmatic evaluator. The evaluator checks whether the proposed implementation is correct, then scores it on the number of qubits and gates it requires. This information is then sent to Claude, which uses it to improve its implementation. The code and values shown are illustrative.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/d5d27ec3f141696918c6bed3f6b887f5b84e75f0-3840x2430.png)
+![](https://assets.claude.com/d5d27ec3f141696918c6bed3f6b887f5b84e75f0.png?w=3840&q=75&fm=webp&fit=max)
 
 Claude designed smaller and faster circuits across eight different quantum-circuit design tasks. Gray marks show the best previously published designs; orange marks and lines show Claude’s designs. Point addition, the eighth task, is compared in Table 1 below.
 
@@ -74,7 +74,7 @@ Claude then tried a more theoretical approach. Rather than guessing and testing 
 
 Decoding saves qubits, but it costs time. So, as a further refinement, Claude looked for situations in which it would be cheaper to store the branch information than to decode it. By varying the threshold at which the circuit stores rather than decodes the branch information, Claude produced a new family of designs between the two extremes. Compared with the smallest previous design, one circuit in the family uses 12% more qubits but 17x fewer gates. More generally, the new designs expand the Pareto frontier, offering combinations of qubit count and runtime that weren’t available before (Table 1).
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/7e8a0d4b9d7e826f25379d351ee6d2cab3900f84-3840x1052.png)
+![](https://assets.claude.com/7e8a0d4b9d7e826f25379d351ee6d2cab3900f84.png?w=3840&q=75&fm=webp&fit=max)
 
 Resources for elliptic-curve point addition. Bold rows are Claude’s designs; the others are the best previously published designs. Sources: [Schrottenloher](https://arxiv.org/abs/2606.02235) (2026), [Luo et al.](https://arxiv.org/abs/2607.13816) (2026).
 
@@ -88,7 +88,7 @@ When a quantum computer finishes a computation, reading out its qubits produces 
 
 The researchers who introduced DQI demonstrated it on a problem called *optimal polynomial intersection* (OPI), a grid-based version of curve fitting (Figure 3). Imagine a grid in which each position *x* contains several acceptable values of *y*. The goal is to find a simple curve (a low-degree polynomial) that passes through an acceptable square for as many *x* positions as possible. DQI tackles this optimization problem using a specific type of decoder, called a Reed-Solomon decoder.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ffc6c06497f985e9162489dffa83c0bbaf50a909-3840x2000.png)
+![](https://assets.claude.com/ffc6c06497f985e9162489dffa83c0bbaf50a909.png?w=3840&q=75&fm=webp&fit=max)
 
 Optimal Polynomial Intersection (OPI) as discrete curve fitting. Each column contains several acceptable values. The optimization problem is to find a polynomial that passes through as many of the acceptable values as possible.
 
@@ -108,7 +108,7 @@ Setting aside enough memory for the worst possible case, in which an exceptional
 
 Together, these optimizations reduced the number of gates in the decoder by a factor of 12 relative to [Google’s previous construction](https://arxiv.org/abs/2510.10967). The improvement came from redesigning the computation at three levels: a different method (replacing the extended Euclidean algorithm with Berlekamp-Massey decoding), a different circuit architecture (reconstructing temporary values instead of storing them), and a different resource budget (measuring precisely how much memory and computation the circuit really needed). No single change would have been enough on its own, but together, they make the most expensive step of DQI just a little over an order of magnitude cheaper.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/340e106a0a928c4736aa5ccd865b4d6eeb3a5611-3840x1650.png)
+![](https://assets.claude.com/340e106a0a928c4736aa5ccd865b4d6eeb3a5611.png?w=3840&q=75&fm=webp&fit=max)
 
 Three designs for the locator step of the Reed–Solomon decoder. The designs are drawn to scale: each block’s width is proportional to its gate count. (a) The previous design, based on the extended Euclidean algorithm (Khattar et al., 2025). (b) A design based on Berlekamp–Massey needs far fewer gates, but a naive reversible version has to store a 12-qubit record in every round, adding up to 840 qubits. (c) Claude’s circuit reconstructs most of the history from the updated state, so it needs to have room only for a single saved value of 19 qubits.
 

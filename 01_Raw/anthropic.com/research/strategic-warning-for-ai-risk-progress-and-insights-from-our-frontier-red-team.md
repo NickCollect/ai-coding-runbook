@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/strategic-warning-for-ai-risk-progress-and-insights-from-our-frontier-red-team
-fetched_at: 2026-11-09T07:30:25.310322+00:00
+fetched_at: 2026-11-16T07:30:53.420679+00:00
 title: "Progress from our Frontier Red Team \\ Anthropic"
 ---
 
@@ -16,7 +16,7 @@ While AI capabilities are advancing quickly in many areas, it's important to not
 
 In the cyber domain, 2024 was a ‘zero to one’ moment. In Capture The Flag (CTF) exercises — cybersecurity challenges that involve finding and exploiting software vulnerabilities in a controlled environment — Claude improved from the level of a high schooler to the level of an undergraduate in just one year.
 
-![Figure 1: In less than a year, Claude went from solving less than a quarter to nearly all Intercode CTF challenges, publicly available CTFs that were designed for high school competitions.](https://www-cdn.anthropic.com/images/4zrzovbb/website/66c528d2cec28f5f089c83f9f7844792544999d0-1440x695.jpg)
+![Figure 1: In less than a year, Claude went from solving less than a quarter to nearly all Intercode CTF challenges, publicly available CTFs that were designed for high school competitions.](https://assets.claude.com/8bc023c474ce10e32d72981d1d1f82aa6bd23ef9.jpg?w=3840&q=75&fm=webp&fit=max)
 
 In less than a year, Claude went from solving less than a quarter to nearly all Intercode CTF challenges, publicly available CTFs that were designed for high school competitions.
 
@@ -24,19 +24,19 @@ We are confident this reflects authentic improvement in capability because we cu
 
 This improvement in cyber capabilities has continued with our latest model, Claude 3.7 Sonnet. On Cybench — a public benchmark using CTF challenges to evaluate LLMs — Claude 3.7 Sonnet solves about a third of the challenges within five attempts, up from about five percent with our frontier model at this time last year (see Figure 2).
 
-![Figure 2: Claude 3.7 Sonnet shows clear improvement on the Cybench CTF benchmark compared to the previous two generations of models, even without using extended thinking.](https://www-cdn.anthropic.com/images/4zrzovbb/website/5354acf6e462db03f4d1e6eae8a232fc0879f076-1440x695.jpg)
+![Figure 2: Claude 3.7 Sonnet shows clear improvement on the Cybench CTF benchmark compared to the previous two generations of models, even without using extended thinking.](https://assets.claude.com/47ea043ace49f8beccabb3de525497c4892441a5.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Claude 3.7 Sonnet shows clear improvement on the Cybench CTF benchmark compared to the previous two generations of models, even without using extended thinking.
 
 These improvements are occurring across different categories of cybersecurity tasks. Figure 3 shows improvement across model generations on different kinds of CTFs which require discovering and exploiting vulnerabilities in insecure software on a remote server (‘pwn’), web applications (‘web’), and cryptographic primitives and protocols (‘crypto’). However, Claude’s skills still lag expert humans. For example, it continues to struggle with reverse engineering binary executables to find hidden vulnerabilities and performing reconnaissance and exploitation in a network environment — at least without a little help.
 
-![Figure 3: Claude is improving in CTFs across multiple categories of challenges (Claude 3.7 Sonnet’s performance is reported without extended thinking).](https://www-cdn.anthropic.com/images/4zrzovbb/website/89539350b58ac6e90706ce3f12e2a9ab4ec11afa-1440x695.jpg)
+![Figure 3: Claude is improving in CTFs across multiple categories of challenges (Claude 3.7 Sonnet’s performance is reported without extended thinking).](https://assets.claude.com/cc03d41f6e354d7384ef5bc1a5395192f7225899.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Claude is improving in CTFs across multiple categories of challenges (Claude 3.7 Sonnet’s performance is reported without extended thinking).
 
 Working with outside experts at Carnegie Mellon University, we ran experiments on realistic, large (~50 host) cyber ranges that test a model’s ability to discover and exploit vulnerabilities in insecure software and infect and move laterally through a network. More than traditional CTF exercises, these challenges simulate the complexity of an actual cyber operation by requiring that the model is also capable of performing reconnaissance and orchestrating a multi-stage cyber attack. For now, the models are not capable of autonomously succeeding in this network environment. But when equipped with a set of [software tools](https://arxiv.org/abs/2501.16466) built by cybersecurity researchers, Claude (and other LLMs) were able to use simple instructions to successfully replicate an attack similar to a [known large-scale theft](https://www.fbi.gov/news/stories/chinese-hackers-charged-in-equifax-breach-021020) of personally identifiable information from a credit reporting agency.
 
-![Figure 4: One of our researchers worked with academic partners to develop Incalmo, a set of tools that enable present-day LLMs to be successful cyber attackers in realistic network settings. Figure courtesy of Singer et al. (2025).](https://www-cdn.anthropic.com/images/4zrzovbb/website/dd4c05dc798cda7f09037ebcf7aa24bb5584f07a-1450x810.jpg)
+![Figure 4: One of our researchers worked with academic partners to develop Incalmo, a set of tools that enable present-day LLMs to be successful cyber attackers in realistic network settings. Figure courtesy of Singer et al. (2025).](https://assets.claude.com/8423fea1718ed6dc674efbbdec51ba8382765704.jpg?w=3840&q=75&fm=webp&fit=max)
 
 One of our researchers worked with academic partners to develop Incalmo, a set of tools that enable present-day LLMs to be successful cyber attackers in realistic network settings. Figure courtesy of [Singer et al. (2025)](https://arxiv.org/abs/2501.16466).
 
@@ -46,13 +46,13 @@ This evaluation infrastructure positions us to provide warning when the model’
 
 Our previous post focused extensively on our biosecurity evaluations, and we have continued this work. We have seen swift progress in our models’ understanding of biology. Within a year, Claude went from underperforming world-class virology experts on an evaluation designed to test common troubleshooting scenarios in a lab setting to comfortably exceeding that baseline (see Figure 5).
 
-![Figure 5: Claude’s performance has improved on VCT, an evaluation of model capabilities in troubleshooting virology tasks designed by SecureBio. Claude 3.7 Sonnet used its extended thinking capability.](https://www-cdn.anthropic.com/images/4zrzovbb/website/c8b9ac87fc4c0fd329ca73d23c52956e2c3d85d9-1440x606.jpg)
+![Figure 5: Claude’s performance has improved on VCT, an evaluation of model capabilities in troubleshooting virology tasks designed by SecureBio. Claude 3.7 Sonnet used its extended thinking capability.](https://assets.claude.com/c27b2b25212c5ffd1d32600970ad2b3a55fa9a80.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Claude’s performance has improved on VCT, an evaluation of model capabilities in troubleshooting virology tasks designed by [SecureBio](https://securebio.org/). Claude 3.7 Sonnet used its extended thinking capability.
 
 Claude’s capabilities in biology remain uneven, though. For example, internal testing of questions that evaluate model skills relevant for wet-lab research show that our models are approaching human expert baselines at understanding biology protocols and manipulating DNA and protein sequences. Our latest model exceeds human expert baselines at cloning workflows. The models remain worse than human experts at interpreting scientific figures.
 
-![Figure 6: Claude 3.7 Sonnet improved on LabBench tasks compared to Claude 3.5 (New), approaching and in some cases exceeding the human baseline. Claude 3.7 Sonnet used its extended thinking capability.](https://www-cdn.anthropic.com/images/4zrzovbb/website/d986fa87ace46487769b1d767c2d91bff4f55133-1440x606.jpg)
+![Figure 6: Claude 3.7 Sonnet improved on LabBench tasks compared to Claude 3.5 (New), approaching and in some cases exceeding the human baseline. Claude 3.7 Sonnet used its extended thinking capability.](https://assets.claude.com/36058fbf65c361b1b4895979940304f7447d77fb.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Claude 3.7 Sonnet improved on LabBench tasks compared to Claude 3.5 (New), approaching and in some cases exceeding the human baseline. Claude 3.7 Sonnet used its extended thinking capability.
 
@@ -60,7 +60,7 @@ To gauge how this improving — but uneven — biological expertise translates t
 
 Similarly, expert red-teaming conclusions were mixed. Some experts identified improvements in the model’s knowledge of certain aspects of weaponization, while others noted that the number of critical failures in the model’s planning was too high to lead to success in the end-to-end execution of an attack. Overall, this analysis suggests that our models cannot reliably guide a novice malicious actor through key practical steps in bio-weapon acquisition. Given the rapid improvement, though, we continue to invest heavily in monitoring biosecurity risks and developing mitigations, such as our recent work on [constitutional classifiers](https://www.anthropic.com/research/constitutional-classifiers), so that we are prepared if and when models reach more concerning levels of performance.
 
-![Figure 7: In small experiments with Anthropic employees and external participants from Sepal AI, groups with either of the two most recent Claude models seemed to outperform those with only the internet on text-based evaluations of a bioweapon acquisition and planning scenario. (Participants from Sepal had access to two preview versions of Claude 3.7 Sonnet, one of which, ‘H-only V2’ was designed to be helpful-only and less likely to refuse harmful requests. The Anthropic employees used either another preview version of Claude 3.7 Sonnet or the latest production version of Claude 3.5 Sonnet.)](https://www-cdn.anthropic.com/images/4zrzovbb/website/dd5937f8a91ba052797006b5a77fa962d8657236-1450x810.jpg)
+![Figure 7: In small experiments with Anthropic employees and external participants from Sepal AI, groups with either of the two most recent Claude models seemed to outperform those with only the internet on text-based evaluations of a bioweapon acquisition and planning scenario. (Participants from Sepal had access to two preview versions of Claude 3.7 Sonnet, one of which, ‘H-only V2’ was designed to be helpful-only and less likely to refuse harmful requests. The Anthropic employees used either another preview version of Claude 3.7 Sonnet or the latest production version of Claude 3.5 Sonnet.)](https://assets.claude.com/95d76115410a8e0b013a884fd05f119a22439322.jpg?w=3840&q=75&fm=webp&fit=max)
 
 In small experiments with Anthropic employees and external participants from [Sepal AI](https://www.sepalai.com/), groups with either of the two most recent Claude models seemed to outperform those with only the internet on text-based evaluations of a bioweapon acquisition and planning scenario. (Participants from Sepal had access to two preview versions of Claude 3.7 Sonnet, one of which, ‘H-only V2’ was designed to be helpful-only and less likely to refuse harmful requests. The Anthropic employees used either another preview version of Claude 3.7 Sonnet or the latest production version of Claude 3.5 Sonnet.)
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/riemann-zeta
-fetched_at: 2026-11-09T07:30:24.954754+00:00
+fetched_at: 2026-11-16T07:30:53.030799+00:00
 title: "Claude has improved on a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the Riemann hypothesis \\ Anthropic"
 ---
 
@@ -12,7 +12,7 @@ Claude did take a real stab, but as you might have expected if you’re familiar
 
 An unreleased research version of Claude has improved on a longstanding lower bound for the fraction of zeros of the Riemann zeta function that satisfy the Riemann hypothesis. Drawing on extensive prior research by mathematicians over the past decades, it has increased this bound from 41.6% to 67.2%.
 
-Two mathematicians at Anthropic studied and validated Claude’s [paper](https://www-cdn.anthropic.com/95c246936988e43127bc6b2ceb7077c1dad2d68e.pdf), and produced an [informal note](https://www-cdn.anthropic.com/23455459f8832d06bb175cc0f88d019aed962ef8.pdf) for experts stating Claude’s proof concisely. Claude also produced a [formally verifiable proof](https://github.com/anthropics/zeta-23-lean) of its result. We are grateful to Brian Conrey and Dan Goldston, two experts in this area, who generously examined the paper on short notice.
+Two mathematicians at Anthropic studied and validated Claude’s [paper](https://assets.claude.com/95c246936988e43127bc6b2ceb7077c1dad2d68e.pdf), and produced an [informal note](https://assets.claude.com/23455459f8832d06bb175cc0f88d019aed962ef8.pdf) for experts stating Claude’s proof concisely. Claude also produced a [formally verifiable proof](https://github.com/anthropics/zeta-23-lean) of its result. We are grateful to Brian Conrey and Dan Goldston, two experts in this area, who generously examined the paper on short notice.
 
 We don’t expect that the techniques Claude used will lead to proving the Riemann hypothesis. But its work serves as the latest example of the speed of progress in AI models’ mathematical capabilities. In this post, we discuss how Claude approached this problem and what it found.
 
@@ -30,7 +30,7 @@ Claude found that combining the results from Aryan and from Baluyot, Goldston, S
 
 A short technical explanation of Claude’s finding is as follows: Claude forms a suitable space of functions with quadratic form induced by Weil, and positive- (respectively negative-)definite subspaces arising from zeros on (respectively off) the line. Then Claude simply writes down an inequality on the rank of a quadratic form in terms of first- and second-moment information. (The successful computation of the latter in terms of the dual picture over primes, or via control of a Hilbert transform, is no surprise in analytic number theory.) The courage to treat the entire space, with positive- and negative-definiteness taken into account together, and with the quadratic form allowed to be non-diagonal, is in some sense the step that allows Claude to achieve the conclusion based on the important prior work.
 
-The full technical explanation is available in the [paper](https://www-cdn.anthropic.com/95c246936988e43127bc6b2ceb7077c1dad2d68e.pdf). Claude’s explanation of how it arrived at its result is available in a separate Appendix [here](https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf).
+The full technical explanation is available in the [paper](https://assets.claude.com/95c246936988e43127bc6b2ceb7077c1dad2d68e.pdf). Claude’s explanation of how it arrived at its result is available in a separate Appendix [here](https://assets.claude.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf).
 
 ## Claude's methodology
 
@@ -52,11 +52,11 @@ Even Claude was surprised by its own finding—it was skeptical at first, possib
 
 Below is a list of documents that provide more information about Claude’s result:
 
-- [Claude](https://www-cdn.anthropic.com/95c246936988e43127bc6b2ceb7077c1dad2d68e.pdf)[’](https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf)[s paper](https://www-cdn.anthropic.com/95c246936988e43127bc6b2ceb7077c1dad2d68e.pdf);
-- [Claude](https://github.com/anthropics/zeta-23-lean)[’](https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf)[s formalization](https://github.com/anthropics/zeta-23-lean);
-- [Anthropic](https://www-cdn.anthropic.com/23455459f8832d06bb175cc0f88d019aed962ef8.pdf)[’](https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf)[s informal note stating the proof more concisely](https://www-cdn.anthropic.com/23455459f8832d06bb175cc0f88d019aed962ef8.pdf);
-- [Claude’s explanation of how it arrived at its result](https://www-cdn.anthropic.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf);
-- [Detailed transcripts of Claude's process](https://www-cdn.anthropic.com/8a0d1add3c637b858a9a181e98c40e9548c3f44f.pdf).
+- [Claude](https://assets.claude.com/95c246936988e43127bc6b2ceb7077c1dad2d68e.pdf)[’](https://assets.claude.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf)[s paper](https://assets.claude.com/95c246936988e43127bc6b2ceb7077c1dad2d68e.pdf);
+- [Claude](https://github.com/anthropics/zeta-23-lean)[’](https://assets.claude.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf)[s formalization](https://github.com/anthropics/zeta-23-lean);
+- [Anthropic](https://assets.claude.com/23455459f8832d06bb175cc0f88d019aed962ef8.pdf)[’](https://assets.claude.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf)[s informal note stating the proof more concisely](https://assets.claude.com/23455459f8832d06bb175cc0f88d019aed962ef8.pdf);
+- [Claude’s explanation of how it arrived at its result](https://assets.claude.com/d7f3ecf1d01392d887f8bc974ca187e2a121b1ed.pdf);
+- [Detailed transcripts of Claude's process](https://assets.claude.com/8a0d1add3c637b858a9a181e98c40e9548c3f44f.pdf).
 
 ***Changelog:** this post was updated on August 13, 2026, with an updated version of Claude's paper. This paper was revised by Claude to provide a clearer proof and additional historical context.*
 

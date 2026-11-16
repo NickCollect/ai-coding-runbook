@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/economic-index-primitives
-fetched_at: 2026-11-09T07:30:21.399038+00:00
+fetched_at: 2026-11-16T07:30:50.021158+00:00
 title: "Economic Index: New building blocks for AI use \\ Anthropic"
 ---
 
@@ -28,7 +28,7 @@ We found that more complex tasks were sped up the most by Claude. We measure thi
 
 This same trend holds—albeit in weaker form—when we adjust for tasks’ success rates. Claude successfully completes tasks that require a college degree 66% of the time, compared to 70% for those tasks that require less than a high school education. This reduces, but doesn’t eliminate, the overall effect: Claude’s impact on task speedup scales more sharply with complexity than complexity correlates with a decrease in success rate.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/748b522964169a031f15579194d8c8976ba80a79-1920x792.svg)
+![](https://assets.claude.com/e9856b9f88ce9825fc1cf8a848c2ba1fc024b378.svg)
 
 **Speedup and success rate vs. human years of schooling.** The chart on the left shows a scatterplot of the relationship between speedup and human years of schooling, measured at the O\*NET task level. The dashed lines show the line of best fit. The chart on the right shows the relationship with the success rate.
 
@@ -38,7 +38,7 @@ This same trend holds—albeit in weaker form—when we adjust for tasks’ succ
 
 We’re able to complement METR’s analysis using our economic primitives. In the graph below, we show Claude’s task-level success rates relative to the amount of time a human would take to do the same task, both on [Claude.ai](http://claude.ai) and on our API:
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/bf18bd0b6c14a07cff03bad97dc720183a0ac507-3840x2800.png)
+![](https://assets.claude.com/bf18bd0b6c14a07cff03bad97dc720183a0ac507.png?w=3840&q=75&fm=webp&fit=max)
 
 **Task success vs. human-only time.** This chart shows the relationship between task success (%) and the time the task would require a human to complete alone, all measured at the O\*NET task level and split by platform. The dashed lines show the fit from a linear regression.
 
@@ -52,7 +52,7 @@ We find that Claude completes very different kinds of tasks in countries at diff
 
 These results align with recent work [by Microsoft](http://microsoft.com/en-us/research/wp-content/uploads/2025/12/New-Future-Of-Work-Report-2025.pdf) that associates AI use in education with lower per-capita income, and AI use for leisure with higher incomes. Our [recent partnership](https://www.anthropic.com/news/rwandan-government-partnership-ai-education) with the Rwandan government and ALX, a technology training provider, is designed with this in mind: participants begin by developing AI literacy, and we’re piloting a program for granting some graduates year-long access to Claude Pro, supporting the transition from educational use to a broader range of applications.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6d102cf4365e7743de4413f22dda33035de71038-1072x356.svg)
+![](https://assets.claude.com/f54a32899516e3c2dbe1b7666340075cd96784a0.svg)
 
 **Per capita income predicts how Claude is used across countries.** Each plot shows the relationship between the share of a specific kind of use (work, coursework, or personal) for Claude.ai conversations, and log GDP per capita.
 
@@ -64,7 +64,7 @@ In our [first report](https://www.anthropic.com/news/the-anthropic-economic-inde
 
 On the graph below, we plot that earlier measure of occupations’ task coverage along the *x* axis, and our new, adjusted measure on the *y* axis. Although the two are certainly correlated, we now find that some occupations (like data entry keyers and radiologists) are much more heavily affected by AI than task coverage alone would suggest, while others (like teachers and software developers) are relatively less affected.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1fc34cf7333c83157f586f908b8f7ec2dc92afe2-857x712.svg)
+![](https://assets.claude.com/77ae35aac953c3dfcccbfc546c30cd5d3c64ed17.svg)
 
 **Effective AI coverage vs. task coverage.** The plot shows the relationship between task effective AI coverage (%) and task coverage, measured at the occupation level. Effective AI coverage tracks the share of a worker’s time-weighted duties that AI could successfully perform, based on Claude.ai data. Task coverage is the share of tasks that appear in Claude.ai usage. The dashed line shows where effective AI coverage share equals task coverage.
 
@@ -74,7 +74,7 @@ That said, even our revised assessment is still limited: we only assess tasks th
 
 A further question we asked is whether the tasks that AI covers represent the higher- or the lower-skilled components of a given occupation. Using an estimate that we create of the skill level required for each task, we find that Claude is relatively more likely to cover the tasks that require *higher* education levels—specifically, tasks that require an average of 14.4 years of education (equivalent to a US associate’s degree), relative to the economy’s average of 13.2 (shown below). This aligns with our earlier finding that Claude is used more frequently by white-collar workers.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ee80542ac5b4dc9fd097a391284e628ab5f5d239-713x425.svg)
+![](https://assets.claude.com/b1e256c21319dba3c5d8126178aef5562efbe3e6.svg)
 
 **Education level of all tasks vs. Claude-covered tasks.** The blue bars give the distribution of the predicted task-level education required for all tasks in the O\*NET database, weighted by employment. The orange bars show the same, restricting to tasks that appear in Claude.ai data.
 

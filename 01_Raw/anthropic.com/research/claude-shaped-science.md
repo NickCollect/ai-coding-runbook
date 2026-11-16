@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-shaped-science
-fetched_at: 2026-11-09T07:30:19.941631+00:00
+fetched_at: 2026-11-16T07:30:49.000312+00:00
 title: "Claude-shaped science \\ Anthropic"
 ---
 
@@ -16,7 +16,7 @@ So how can we fix it?
 
 I started looking for examples where the impedance mismatches are less acute. I began by having Claude build an accessible suite of tools for mathematical physics. Before long, the tools found uses for other problems. This iterative process generated a set of software and scientific protocols, which I call BootLoops. BootLoops functions as a kind of harness for the LLM, much like Claude Code or [Claude Science](https://claude.com/product/claude-science) is a harness for Claude, or Codex is a harness for GPT. I’ve found BootLoops especially well-suited for a class of quantitative problems in science. It is also open-source, so it can be used with whatever model you like.
 
-![A visualization of the overlap between what AI can do, and what scientists want to do. Only some of the areas touch.](https://www-cdn.anthropic.com/images/4zrzovbb/website/3597334d1c81f41606991f90305069407e2cbabd-1920x1080.jpg)
+![A visualization of the overlap between what AI can do, and what scientists want to do. Only some of the areas touch.](https://assets.claude.com/9072701b063ccdf3efe56e5525be16cec780335a.jpg?w=3840&q=75&fm=webp&fit=max)
 
 The current generation of AI tools is not capable of solving most problems in science. However, they are astonishingly good at certain “agentic-AI-shaped” problems.
 
@@ -60,7 +60,7 @@ Excited by this result, I brought it to James O’Dwyer, a professor in plant bi
 
 James and I proceeded to work intensively with Claude to craft a successor model. James has a physics background, so the disciplinary language barrier was more easily surmountable, but, like many scientists, he had not yet really appreciated the power of agentic AI. As the collaboration progressed, I became a sort of Claude handler, translating Claude-speak to James and keeping the model on track, while James pushed the model to produce something ecologists might value. The final result is something all three of us are proud of: a minimal predictive model of life histories in excellent agreement with data. We are currently extending the model from Panama to other global forest plots, using datasets that Claude has helped curate.
 
-![Graph of every forest inventory in the US color-coded by life history strategy](https://www-cdn.anthropic.com/images/4zrzovbb/website/ae837326f5eabe0015fdf773e96441e6c35a607a-1796x698.jpg)
+![Graph of every forest inventory in the US color-coded by life history strategy](https://assets.claude.com/8a552a9992b7c46eea45d3b0a821714af209966b.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Every forest inventory plot in the United States, characterized by the life history strategy of its flora: hardy (long-lived), vigorous (fast-growing) or fruitful (prolific recruiters). The classification comes from a demographic model, built by Schwartz and O’Dwyer using Claude, that characterizes each species on longevity, growth, and recruitment after subtracting the fluctuations due to random chance (neutral biodiversity theory) to expose the species-dependent biology.
 
@@ -112,7 +112,7 @@ The focus on Millennium Prize Problems and Big Science may be, as Claude likes t
 
 A term I like that is sometimes used to discuss AI science is the **convex hull.** Take a shape and connect every pair of its points with a straight line; the new shape you get is the smallest convex shape that contains the original: its convex hull. Science is now very disjointed: there are [jagged frontiers](https://www.oneusefulthing.org/p/centaurs-and-cyborgs-on-the-jagged) everywhere. Biology pokes out one way, math another. One lab might spend 20 years learning everything about a single set of genes with a single method they have mastered, while neighboring genes and alternative methods lie fallow. A harness like BootLoops can connect these points, filling in the hull.
 
-![Image of a convex hull with human knowledge at the center and gaps that are not filled in](https://www-cdn.anthropic.com/images/4zrzovbb/website/13e6110b6209871e612616ad836c883d5cf283ea-1920x1320.jpg)
+![Image of a convex hull with human knowledge at the center and gaps that are not filled in](https://assets.claude.com/032f7de030092d71bf92fec91e2100760e8c648d.jpg?w=3840&q=75&fm=webp&fit=max)
 
 Human knowledge today is jagged—particular scientists and subfields have pushed knowledge more in some directions than others. The middle regions, where humans could reach but no particular human has, are ideal for AI. Particular software packages like ACTUARY or NUMKIN within the BootLoops package help fill in the gaps.
 

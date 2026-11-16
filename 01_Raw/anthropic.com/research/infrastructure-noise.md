@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/infrastructure-noise
-fetched_at: 2026-11-09T07:30:23.046230+00:00
+fetched_at: 2026-11-16T07:30:51.256529+00:00
 title: "Infrastructure noise in agentic coding evals \\ Anthropic"
 ---
 
@@ -42,7 +42,7 @@ On `bn-fit-modify`, a Terminal-Bench task requiring Bayesian network fitting, so
 
 We also tested whether this pattern holds on evals outside Terminal-Bench by running a crossover experiment on SWE-bench. We varied the total available RAM up to 5x the baseline across 227 problems with 10 samples each. The same effect held, though the magnitude was smaller: Scores again increased monotonically with RAM, but were only 1.54 percentage points higher at 5x than 1x. SWE-bench tasks are less resource-intensive, so a smaller effect is expected, but it shows resource allocation isn't neutral there either.
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/36ce2ba5ce208fb8531d1a840a9cd35ff4959a02-1920x1080.png)
+![](https://assets.claude.com/36ce2ba5ce208fb8531d1a840a9cd35ff4959a02.png?w=3840&q=75&fm=webp&fit=max)
 
 ## Other sources of variance
 
