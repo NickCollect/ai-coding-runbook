@@ -131,6 +131,7 @@ import {
   BetaAnalyticsChatMetrics,
   BetaAnalyticsClaudeCodeMetrics,
   BetaAnalyticsClaudeTagCategory,
+  BetaAnalyticsClaudeTagMetrics,
   BetaAnalyticsConnectorActivity,
   BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
   BetaAnalyticsConnectorChatCoworkUnifiedMetrics,
@@ -210,6 +211,11 @@ import {
   BetaClaudeTagGuestPolicyAllow,
   BetaClaudeTagGuestPolicyChannelOnly,
   BetaClaudeTagGuestPolicyRestrict,
+  BetaClaudeTagReplyMode,
+  BetaClaudeTagReplyModeAlwaysAwake,
+  BetaClaudeTagReplyModeAutomatic,
+  BetaClaudeTagReplyModeMentionOnly,
+  BetaClaudeTagReplyModeThread,
   BetaClaudeTagSettingSource,
   BetaClaudeTagSettingSources,
   BetaClaudeTagSettings,
@@ -377,21 +383,8 @@ import {
   Workspaces,
 } from './workspaces/workspaces';
 import { APIPromise } from '../../../core/api-promise';
-import { PermissionDeniedError } from '../../../core/error';
 import { RequestOptions } from '../../../internal/request-options';
 import { startApiCallSpan } from '../../../internal/tracing';
-
-/**
- * Anthropic has temporarily disabled billing changes for the user account the
- * credential belongs to. Contact support.
- */
-export class BetaBillingFrozenError extends PermissionDeniedError {
-  declare readonly errorCode: 'billing_frozen';
-  declare readonly details: BetaBillingFrozenErrorDetails;
-
-  /** @internal */
-  static override readonly _errorName: string = 'BetaBillingFrozenError';
-}
 
 export class Organization extends APIResource {
   apiKeys: APIKeysAPI.APIKeys = new APIKeysAPI.APIKeys(this._client);
@@ -439,14 +432,6 @@ export class Organization extends APIResource {
   }
 }
 
-/**
- * Anthropic has temporarily disabled billing changes for the user account the
- * credential belongs to. Contact support.
- */
-export interface BetaBillingFrozenErrorDetails {
-  error_code: 'billing_frozen';
-}
-
 export interface BetaOrganization {
   /**
    * ID of the Organization.
@@ -477,7 +462,6 @@ export type BetaOrganizationRole =
   | 'primary_owner'
   | 'user';
 
-Organization.BetaBillingFrozenError = BetaBillingFrozenError;
 Organization.APIKeys = APIKeys;
 Organization.ExternalKeys = ExternalKeys;
 Organization.Federation = Federation;
@@ -517,12 +501,7 @@ Organization.BetaSlackChannelSetUpEnvironmentNotFoundError = BetaSlackChannelSet
 Organization.BetaSlackChannelSetUpSettingsConflictError = BetaSlackChannelSetUpSettingsConflictError;
 
 export declare namespace Organization {
-  export {
-    BetaBillingFrozenError as BetaBillingFrozenError,
-    type BetaBillingFrozenErrorDetails as BetaBillingFrozenErrorDetails,
-    type BetaOrganization as BetaOrganization,
-    type BetaOrganizationRole as BetaOrganizationRole,
-  };
+  export { type BetaOrganization as BetaOrganization, type BetaOrganizationRole as BetaOrganizationRole };
 
   export {
     APIKeys as APIKeys,
@@ -654,6 +633,7 @@ export declare namespace Organization {
     type BetaAnalyticsChatMetrics as BetaAnalyticsChatMetrics,
     type BetaAnalyticsClaudeCodeMetrics as BetaAnalyticsClaudeCodeMetrics,
     type BetaAnalyticsClaudeTagCategory as BetaAnalyticsClaudeTagCategory,
+    type BetaAnalyticsClaudeTagMetrics as BetaAnalyticsClaudeTagMetrics,
     type BetaAnalyticsConnectorActivity as BetaAnalyticsConnectorActivity,
     type BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics as BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
     type BetaAnalyticsConnectorChatCoworkUnifiedMetrics as BetaAnalyticsConnectorChatCoworkUnifiedMetrics,
@@ -881,6 +861,11 @@ export declare namespace Organization {
     type BetaClaudeTagGuestPolicyAllow as BetaClaudeTagGuestPolicyAllow,
     type BetaClaudeTagGuestPolicyChannelOnly as BetaClaudeTagGuestPolicyChannelOnly,
     type BetaClaudeTagGuestPolicyRestrict as BetaClaudeTagGuestPolicyRestrict,
+    type BetaClaudeTagReplyMode as BetaClaudeTagReplyMode,
+    type BetaClaudeTagReplyModeAlwaysAwake as BetaClaudeTagReplyModeAlwaysAwake,
+    type BetaClaudeTagReplyModeAutomatic as BetaClaudeTagReplyModeAutomatic,
+    type BetaClaudeTagReplyModeMentionOnly as BetaClaudeTagReplyModeMentionOnly,
+    type BetaClaudeTagReplyModeThread as BetaClaudeTagReplyModeThread,
     type BetaClaudeTagSettingSource as BetaClaudeTagSettingSource,
     type BetaClaudeTagSettingSources as BetaClaudeTagSettingSources,
     type BetaClaudeTagSettings as BetaClaudeTagSettings,

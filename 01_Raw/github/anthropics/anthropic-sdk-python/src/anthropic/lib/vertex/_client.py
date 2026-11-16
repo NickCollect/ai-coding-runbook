@@ -6,10 +6,11 @@ from typing_extensions import Self, override
 
 import httpx2
 
+from .._env import with_environment_headers
 from ._auth import load_auth, refresh_auth
 from ._beta import Beta, AsyncBeta
-from ..._types import NotGiven, OpenTelemetryClientOption, not_given
-from ..._utils import is_dict, asyncify, is_given, path_template
+from ..._types import Omit, NotGiven, OpenTelemetryClientOption, not_given
+from ..._utils import is_dict, asyncify, is_given, path_template, get_async_library
 from ..._client import _keep_client_header_params
 from ..._compat import model_copy, typed_cached_property
 from ..._models import FinalRequestOptions
@@ -81,6 +82,8 @@ class AnthropicVertex(BaseVertexClient[httpx2.Client, Stream[Any]], SyncAPIClien
             raise ValueError(
                 "No region was given. The client should be instantiated with the `region` argument or the `CLOUD_ML_REGION` environment variable should be set."
             )
+        if region == "":
+            raise ValueError(f"Expected a non-empty value for `region` but received {region!r}")
 
         if base_url is None:
             base_url = os.environ.get("ANTHROPIC_VERTEX_BASE_URL")
@@ -100,7 +103,7 @@ class AnthropicVertex(BaseVertexClient[httpx2.Client, Stream[Any]], SyncAPIClien
             timeout=timeout,
             max_retries=max_retries,
             open_telemetry=open_telemetry,
-            custom_headers=default_headers,
+            custom_headers=with_environment_headers(default_headers),
             custom_query=default_query,
             http_client=http_client,
             middleware=middleware,
@@ -114,8 +117,19 @@ class AnthropicVertex(BaseVertexClient[httpx2.Client, Stream[Any]], SyncAPIClien
         self.access_token = access_token
         self.credentials = credentials
 
+        self._default_stream_cls = Stream
+
         self.messages = Messages(self)
         self.beta = Beta(self)
+
+    @property
+    @override
+    def default_headers(self) -> dict[str, str | Omit]:
+        return {
+            **super().default_headers,
+            "X-Stainless-Async": "false",
+            **self._custom_headers,
+        }
 
     @override
     def _prepare_options(self, options: FinalRequestOptions) -> FinalRequestOptions:
@@ -234,6 +248,8 @@ class AsyncAnthropicVertex(BaseVertexClient[httpx2.AsyncClient, AsyncStream[Any]
             raise ValueError(
                 "No region was given. The client should be instantiated with the `region` argument or the `CLOUD_ML_REGION` environment variable should be set."
             )
+        if region == "":
+            raise ValueError(f"Expected a non-empty value for `region` but received {region!r}")
 
         if base_url is None:
             base_url = os.environ.get("ANTHROPIC_VERTEX_BASE_URL")
@@ -253,7 +269,7 @@ class AsyncAnthropicVertex(BaseVertexClient[httpx2.AsyncClient, AsyncStream[Any]
             timeout=timeout,
             max_retries=max_retries,
             open_telemetry=open_telemetry,
-            custom_headers=default_headers,
+            custom_headers=with_environment_headers(default_headers),
             custom_query=default_query,
             http_client=http_client,
             middleware=middleware,
@@ -267,8 +283,19 @@ class AsyncAnthropicVertex(BaseVertexClient[httpx2.AsyncClient, AsyncStream[Any]
         self.access_token = access_token
         self.credentials = credentials
 
+        self._default_stream_cls = AsyncStream
+
         self.messages = AsyncMessages(self)
         self.beta = AsyncBeta(self)
+
+    @property
+    @override
+    def default_headers(self) -> dict[str, str | Omit]:
+        return {
+            **super().default_headers,
+            "X-Stainless-Async": f"async:{get_async_library()}",
+            **self._custom_headers,
+        }
 
     @override
     async def _prepare_options(self, options: FinalRequestOptions) -> FinalRequestOptions:
@@ -377,7 +404,10 @@ def _prepare_options(input_options: FinalRequestOptions, *, project_id: str | No
         specifier = "streamRawPredict" if stream else "rawPredict"
 
         path = "/projects/{project_id}/locations/{region}/publishers/anthropic/models/{model}:{specifier}"
-        options.url = path_template(path, project_id=project_id, region=region, model=model, specifier=specifier)
+        url = request_path(path, project_id=project_id, region=region, model=model, specifier=specifier)
+        parent, _, model_segment = url.rpartition("/")
+        # A server that drops `;` and the rest of its segment would drop the specifier.
+        options.url = f"{parent}/{model_segment.replace(';', '%3B')}"
 
     if options.url in {"/v1/messages/count_tokens", "/v1/messages/count_tokens?beta=true"} and options.method == "post":
         if project_id is None:
@@ -386,9 +416,17 @@ def _prepare_options(input_options: FinalRequestOptions, *, project_id: str | No
             )
 
         path = "/projects/{project_id}/locations/{region}/publishers/anthropic/models/count-tokens:rawPredict"
-        options.url = path_template(path, project_id=project_id, region=region)
+        options.url = request_path(path, project_id=project_id, region=region)
 
     if options.url.startswith("/v1/messages/batches"):
         raise AnthropicError("The Batch API is not supported in the Vertex client yet")
 
     return options
+
+
+def request_path(template: str, /, **values: object) -> str:
+    for name, value in values.items():
+        if value == "":
+            raise ValueError(f"Expected a non-empty value for `{name}` but received {value!r}")
+
+    return path_template(template, **values)

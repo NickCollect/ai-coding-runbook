@@ -23,6 +23,7 @@ export {
   type BetaAnalyticsChatMetrics,
   type BetaAnalyticsClaudeCodeMetrics,
   type BetaAnalyticsClaudeTagCategory,
+  type BetaAnalyticsClaudeTagMetrics,
   type BetaAnalyticsConnectorActivity,
   type BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
   type BetaAnalyticsConnectorChatCoworkUnifiedMetrics,
@@ -105,13 +106,6 @@ export {
   type BetaAnalyticsCostUsersItemsReportPageCursor,
 } from './analytics/index';
 export {
-  BetaBillingFrozenError,
-  Organization,
-  type BetaBillingFrozenErrorDetails,
-  type BetaOrganization,
-  type BetaOrganizationRole,
-} from './organization';
-export {
   BetaCannotSignOutPrimaryOwnerError,
   BetaCannotSignOutSelfError,
   BetaCannotSignOutManagedMemberError,
@@ -177,6 +171,11 @@ export {
   type BetaClaudeTagGuestPolicyAllow,
   type BetaClaudeTagGuestPolicyChannelOnly,
   type BetaClaudeTagGuestPolicyRestrict,
+  type BetaClaudeTagReplyMode,
+  type BetaClaudeTagReplyModeAlwaysAwake,
+  type BetaClaudeTagReplyModeAutomatic,
+  type BetaClaudeTagReplyModeMentionOnly,
+  type BetaClaudeTagReplyModeThread,
   type BetaClaudeTagSettingSource,
   type BetaClaudeTagSettingSources,
   type BetaClaudeTagSettings,
@@ -254,6 +253,7 @@ export {
   type InviteListParams,
   type BetaOrganizationInvitesPage,
 } from './invites';
+export { Organization, type BetaOrganization, type BetaOrganizationRole } from './organization';
 export {
   PluginMarketplaces,
   type BetaPluginMarketplace,

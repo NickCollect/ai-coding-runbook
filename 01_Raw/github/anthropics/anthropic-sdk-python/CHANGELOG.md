@@ -1,5 +1,66 @@
 # Changelog
 
+## [2.8.0](https://github.com/anthropics/anthropic-sdk-python/compare/v2.7.0...v2.8.0) (2026-11-10)
+
+### Features
+
+* **api:** add Claude Tag metrics to the analytics summaries and users reports
+* **api:** add reply_mode to Claude Tag Slack channel settings
+
+
+### Bug Fixes
+
+* **bedrock:** send ";" in a model ID as is, and refuse a model ID whose part before the first ";" is empty, "." or ".."
+* **google-cloud:** percent-encode the project, location and workspace ID in the workspace and organization base URL paths
+* **google-cloud:** refuse an empty project, location or workspace ID that would be written into a derived base URL
+* **vertex:** refuse an empty model, project ID or region instead of writing it into the request path
+* **vertex:** send ";" in the model as %3B in the request path
+
+
+### Chores
+
+* **docs:** clarify display_name for RBAC Roles created by Anthropic
+* **docs:** clarify plugin delete and skill name conflict descriptions
+* **docs:** clarify when to omit user_profile_id on external keys
+* **docs:** note that Claude Tag settings accept self-hosted runner pools
+* **internal:** make three timing tests tolerate slow test machines
+* **internal:** remove a redundant import from the message types
+
+
+### Documentation
+
+* **examples:** show multiagent when creating a Managed Agents agent
+
+## [2.7.0](https://github.com/anthropics/anthropic-sdk-python/compare/v2.6.0...v2.7.0) (2026-11-09)
+
+### Features
+
+* **api:** accept user_profile.program_status_updated on organization webhook endpoints
+* **api:** add claude-fable-5-2 and claude-mythos-5-2
+* **api:** add parent organization filtering and grouping to the usage and cost reports
+* **api:** add the sandbox_egress_restricted error to Admin API write methods
+* **api:** add the user_profile.program_status_updated webhook event
+
+
+### Bug Fixes
+
+* **bedrock,vertex:** add the parse and count_tokens methods missing from beta.messages.with_raw_response and with_streaming_response
+* **bedrock,vertex:** send the X-Stainless-Async header and stream raw requests that name no stream class
+* **bedrock:** sign requests that have no Connection header instead of raising KeyError
+* **bedrock:** write a list in a query as a[]=1&a[]=2 on the Bedrock Mantle clients, as Anthropic does
+* **client:** allow API errors to be unpickled and copied
+* **client:** read ANTHROPIC_CUSTOM_HEADERS on the Bedrock, Bedrock Mantle and Vertex clients
+* **foundry:** stop copy, with_options and with_middleware from raising when ANTHROPIC_FOUNDRY_RESOURCE is set
+* **parse:** keep const in structured output schemas, and drop type beside const and enum
+
+
+### Chores
+
+* **api:** remove some error detail types and update descriptions
+* **docs:** say when a work heartbeat does not compare its value
+* **internal:** add this repository's review rules
+* **internal:** remove two comments from the error classes
+
 ## [2.6.0](https://github.com/anthropics/anthropic-sdk-python/compare/v2.5.0...v2.6.0) (2026-11-05)
 
 ### Features

@@ -189,10 +189,12 @@ class PermissionUpdate:
             if self.mode is not None:
                 result["mode"] = self.mode
 
-        elif self.type in ["addDirectories", "removeDirectories"]:
+        elif (
+            self.type in ["addDirectories", "removeDirectories"]
+            and self.directories is not None
+        ):
             # Directory variants require directories
-            if self.directories is not None:
-                result["directories"] = self.directories
+            result["directories"] = self.directories
 
         return result
 
@@ -1354,11 +1356,21 @@ the message that triggered that turn.
 In streaming-input mode a single connection interleaves the turns you send
 with turns the session injects on its own (background-task notifications,
 scheduled-task prompts, MCP channel messages, messages relayed from peer
-sessions, ...). ``origin`` tells them apart, e.g. to decide whether a
-:class:`ResultMessage` answers *your* prompt::
+sessions, ...). ``origin`` tells you what started a turn. It does not tell
+you whether a :class:`ResultMessage` covers *your* prompt: a prompt sent while
+an injected turn is running can be answered inside that turn, and the result
+then carries the injected turn's origin. To match a result to your prompts,
+send each one with a ``uuid`` and look for it in the result::
 
-    if result.origin is None or result.origin["kind"] == "human":
-        ...  # a turn this application submitted
+    uuids = result.user_message_uuids or []
+    if my_uuid == result.user_message_uuid or my_uuid in uuids:
+        ...  # this turn took in the prompt sent with my_uuid
+
+Read with ``receive_messages()``: ``receive_response()`` stops at the first
+result, which can be an injected turn's. See
+:attr:`ResultMessage.user_message_uuid` for how to send the ``uuid``. Prompts
+sent as a plain string have none; for those, ``origin`` being ``None`` or of
+kind ``human`` is only a best effort.
 
 Only ``kind`` is always present; the remaining keys depend on ``kind`` as
 noted on each field. ``None``/absent means the CLI did not attribute the
@@ -1398,6 +1410,16 @@ class AssistantMessage:
     stop_reason: str | None = None
     session_id: str | None = None
     uuid: str | None = None
+    user_message_uuid: str | None = None
+    """``uuid`` of the user message this turn is answering — see
+    :attr:`ResultMessage.user_message_uuid`. Set on the first top-level
+    assistant message after that value is set or changes, which can be partway
+    through a turn; ``None`` on all others."""
+    user_message_uuids: list[str] | None = None
+    """``uuid`` of every user message this turn has taken in so far. Set on the
+    same messages as ``user_message_uuid``, except on older CLIs. A message
+    taken in later may be listed only on the result — see
+    :attr:`ResultMessage.user_message_uuids`."""
 
 
 @dataclass
@@ -1737,10 +1759,31 @@ class ResultMessage:
     ``SDKResultMessage.terminal_reason``."""
     origin: MessageOrigin | None = None
     """Origin of the user message that triggered this turn — see
-    :class:`MessageOrigin`. Lets a streaming-input consumer distinguish the
-    result of its own prompt (``None``, or ``{"kind": "human"}`` if it stamped
-    that) from results of injected turns such as background-task
-    notifications (``{"kind": "task-notification"}``)."""
+    :class:`MessageOrigin`. Describes only what *started* the turn, such as a
+    background-task notification (``{"kind": "task-notification"}``). A prompt
+    sent while an injected turn is running can be answered inside that turn,
+    and the result then carries the injected turn's origin, so match
+    ``user_message_uuids`` to find the result for a given prompt."""
+    user_message_uuid: str | None = None
+    """``uuid`` of the user message that started this turn (the last one, if
+    several were merged to start it). On an injected turn, the last user
+    message taken in while it was running.
+
+    Covers only messages sent as dicts with a top-level ``uuid`` string; prompts
+    passed as a plain string have none. Use a new uuid for every message, as the
+    CLI can skip one whose uuid it has already seen. ``None`` when the turn took
+    in no such message, or on older CLIs. Set on error results too, so check
+    ``terminal_reason`` and ``is_error`` before treating the message as
+    answered. Mirrors the TypeScript SDK's
+    ``SDKResultMessage.user_message_uuid``."""
+    user_message_uuids: list[str] | None = None
+    """``uuid`` of every user message this turn took in, in order: those that
+    started it, then any sent while it was running. The CLI lists at most 64,
+    so a uuid missing from a full list may still have been taken in. Can be
+    empty on an interrupted turn. ``None`` when ``user_message_uuid`` is
+    ``None`` for any other reason, and also on some error results and older
+    CLIs that report only ``user_message_uuid``. Mirrors the TypeScript SDK's
+    ``SDKResultMessage.user_message_uuids``."""
 
 
 @dataclass
@@ -1751,6 +1794,16 @@ class StreamEvent:
     session_id: str
     event: dict[str, Any]  # The raw Anthropic API stream event
     parent_tool_use_id: str | None = None
+    user_message_uuid: str | None = None
+    """``uuid`` of the user message this turn is answering — see
+    :attr:`ResultMessage.user_message_uuid`. Set on the first top-level non-ping
+    event after that value is set or changes, which can be partway through a
+    turn; ``None`` on all others."""
+    user_message_uuids: list[str] | None = None
+    """``uuid`` of every user message this turn has taken in so far. Set on the
+    same events as ``user_message_uuid``, except on older CLIs. A message taken
+    in later may be listed only on the result — see
+    :attr:`ResultMessage.user_message_uuids`."""
 
 
 # Rate limit types — see https://docs.claude.com/en/docs/claude-code/rate-limits
@@ -2476,8 +2529,8 @@ class ClaudeAgentOptions:
     Without ``sandbox``, the value is passed as-is to the ``--settings`` CLI
     flag. When ``sandbox`` is also set, the settings are merged with the sandbox
     settings and passed as one JSON string: an inline string is parsed
-    directly, and a path is read from disk (a missing file is logged and only
-    the sandbox settings are passed).
+    directly, and a path is read from disk, relative to ``cwd`` when ``cwd`` is
+    set. Settings that cannot be loaded raise ``CLIConnectionError``.
 
     These are loaded into the "flag settings" layer, which has the highest
     priority among user-controlled settings.
@@ -2497,11 +2550,13 @@ class ClaudeAgentOptions:
     The transport sets ``CLAUDE_CODE_ENTRYPOINT`` (overridable here) and
     ``CLAUDE_AGENT_SDK_VERSION`` (not overridable), plus ``PWD`` when ``cwd``
     is set, ``CLAUDE_CODE_ENABLE_SDK_FILE_CHECKPOINTING`` when
-    ``enable_file_checkpointing`` is set, and W3C trace context from an active
-    OpenTelemetry span.
+    ``enable_file_checkpointing`` is set, W3C trace context from an active
+    OpenTelemetry span, and ``CLAUDE_AGENT_SDK_DERIVED_CLIENT_APP`` (not
+    overridable; see ``client_app``).
 
     SDK consumers can identify their app/library in the User-Agent header by
-    setting ``CLAUDE_AGENT_SDK_CLIENT_APP`` (e.g. ``"my-app/1.0.0"``).
+    setting ``CLAUDE_AGENT_SDK_CLIENT_APP`` (e.g. ``"my-app/1.0.0"``). The
+    ``client_app`` option sets this variable for you and wins over a value here.
     """
 
     extra_args: dict[str, str | None] = field(default_factory=dict)
@@ -2671,7 +2726,8 @@ class ClaudeAgentOptions:
     - ``"local"`` — Local settings (``.claude/settings.local.json``).
 
     When ``None``, all sources are loaded (matches CLI defaults). Pass ``[]``
-    to disable filesystem settings (SDK isolation mode). Must include
+    to disable filesystem settings (SDK isolation mode), for example when
+    ``cwd`` may be untrusted: project settings can run hooks. Must include
     ``"project"`` to load CLAUDE.md files.
     """
 
@@ -2803,6 +2859,22 @@ class ClaudeAgentOptions:
     pace tool use and wrap up before the limit. Sent as
     ``output_config.task_budget`` with the ``task-budgets-2026-03-13`` beta
     header.
+    """
+
+    client_app: str | None = None
+    """Your app/library identifier (e.g. ``"my-app/1.0.0"``), sent on requests
+    to the API. Sets ``CLAUDE_AGENT_SDK_CLIENT_APP`` for the Claude Code
+    subprocess. The value must be valid in an HTTP header: a character above
+    U+00FF stops every request.
+
+    When neither this nor ``CLAUDE_AGENT_SDK_CLIENT_APP`` is set, sessions signed
+    in with a Claude subscription send the name and version of the installed
+    distribution behind ``python -m <package>``, if it depends on this SDK. API
+    key, Bedrock, Vertex and Foundry sessions do not, and neither does a session
+    with telemetry turned off. Pass an empty string to send no identifier. No
+    released Claude Code qualifies yet: nothing is derived for a version that does
+    not keep the value from shell commands, hooks and MCP and LSP servers, or for
+    a CLI other than the bundled one, whose version is unknown until it starts.
     """
 
 

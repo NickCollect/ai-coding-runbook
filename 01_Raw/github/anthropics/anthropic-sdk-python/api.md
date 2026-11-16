@@ -28,6 +28,7 @@ from anthropic.types import (
     RequestBodyEncodingInvalidErrorDetails,
     RequestBodyEncodingUnsupportedErrorDetails,
     RequestBodyTooLargeAfterDecodingErrorDetails,
+    SandboxEgressRestrictedErrorDetails,
     ClaudeCodeKeyCreatorNotMemberError,
     ClaudeCodeVersionTooOldError,
     CMEKKeyDisabledError,
@@ -36,6 +37,7 @@ from anthropic.types import (
     OrganizationTypeNotSupportedError,
     RequestBodyEncodingInvalidError,
     RequestBodyEncodingUnsupportedError,
+    SandboxEgressRestrictedError,
     RequestBodyTooLargeAfterDecodingError,
     EnforcedSpendLimitReachedError,
     RampLimitExceededError,
@@ -1040,6 +1042,7 @@ from anthropic.types.organization import (
     AnalyticsChatCoworkUnifiedSessionsMetrics,
     AnalyticsChatMetrics,
     AnalyticsClaudeCodeMetrics,
+    AnalyticsClaudeTagMetrics,
     AnalyticsConnectorActivity,
     AnalyticsConnectorChatCoworkUnifiedChatMetrics,
     AnalyticsConnectorChatCoworkUnifiedMetrics,
@@ -2719,6 +2722,7 @@ from anthropic.types.beta import (
     BetaWebhookSessionUpdatedEventData,
     BetaWebhookUserProfileEnforcementActionOpenedEventData,
     BetaWebhookUserProfileEnforcementActionResolvedEventData,
+    BetaWebhookUserProfileProgramStatusUpdatedEventData,
     BetaWebhookVaultArchivedEventData,
     BetaWebhookVaultCreatedEventData,
     BetaWebhookVaultCredentialArchivedEventData,
@@ -2842,12 +2846,7 @@ Methods:
 Types:
 
 ```python
-from anthropic.types.beta import (
-    BetaBillingFrozenErrorDetails,
-    BetaOrganization,
-    BetaOrganizationRole,
-    BetaBillingFrozenError,
-)
+from anthropic.types.beta import BetaOrganization, BetaOrganizationRole
 ```
 
 Methods:
@@ -3180,6 +3179,7 @@ from anthropic.types.beta.organization import (
     BetaAnalyticsChatMetrics,
     BetaAnalyticsClaudeCodeMetrics,
     BetaAnalyticsClaudeTagCategory,
+    BetaAnalyticsClaudeTagMetrics,
     BetaAnalyticsConnectorActivity,
     BetaAnalyticsConnectorChatCoworkUnifiedChatMetrics,
     BetaAnalyticsConnectorChatCoworkUnifiedMetrics,
@@ -3691,6 +3691,16 @@ from anthropic.types.beta.organization import (
     BetaClaudeTagGuestPolicyChannelOnlyParam,
     BetaClaudeTagGuestPolicyRestrict,
     BetaClaudeTagGuestPolicyRestrictParam,
+    BetaClaudeTagReplyMode,
+    BetaClaudeTagReplyModeParam,
+    BetaClaudeTagReplyModeAlwaysAwake,
+    BetaClaudeTagReplyModeAlwaysAwakeParam,
+    BetaClaudeTagReplyModeAutomatic,
+    BetaClaudeTagReplyModeAutomaticParam,
+    BetaClaudeTagReplyModeMentionOnly,
+    BetaClaudeTagReplyModeMentionOnlyParam,
+    BetaClaudeTagReplyModeThread,
+    BetaClaudeTagReplyModeThreadParam,
     BetaClaudeTagSettingSource,
     BetaClaudeTagSettingSources,
     BetaClaudeTagSettings,

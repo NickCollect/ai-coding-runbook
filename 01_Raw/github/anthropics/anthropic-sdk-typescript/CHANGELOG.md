@@ -1,5 +1,60 @@
 # Changelog
 
+## [1.8.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v1.7.0...sdk-v1.8.0) (2026-11-10)
+
+### Features
+
+* **api:** add Claude Tag metrics to the analytics summaries and users reports
+* **api:** add reply_mode to Claude Tag Slack channel settings
+
+
+### Chores
+
+* **docs:** clarify display_name for RBAC Roles created by Anthropic
+* **docs:** clarify plugin delete and skill name conflict descriptions
+* **docs:** clarify when to omit user_profile_id on external keys
+* **docs:** note that Claude Tag settings accept self-hosted runner pools
+
+
+### Documentation
+
+* **examples:** show multiagent when creating a Managed Agents agent
+
+## [1.7.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v1.6.0...sdk-v1.7.0) (2026-11-09)
+
+### Features
+
+* **api:** accept user_profile.program_status_updated on organization webhook endpoints
+* **api:** add claude-fable-5-2 and claude-mythos-5-2
+* **api:** add parent organization filtering and grouping to the usage and cost reports
+* **api:** add the sandbox_egress_restricted error to Admin API write methods
+* **api:** add the user_profile.program_status_updated webhook event
+
+
+### Bug Fixes
+
+* **client:** include the body of a failed response in debug logs
+* **helpers:** keep const and enum in structured output schemas
+
+
+### Chores
+
+* **api:** remove some error detail types and update descriptions
+* **docs:** say when a work heartbeat does not compare its value
+* **internal:** add this repository's review rules
+
+
+### Documentation
+
+* **client:** list error code types in api.md
+* **client:** say where the default logger writes and how to log to stderr
+* **helpers:** import from zod/v4 in the examples, for Zod 3.25 users
+
+
+### Refactors
+
+* **client:** declare the name of every AnthropicError subclass the same way
+
 ## [1.6.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v1.5.0...sdk-v1.6.0) (2026-11-05)
 
 ### Features
