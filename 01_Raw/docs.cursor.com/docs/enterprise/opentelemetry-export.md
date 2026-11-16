@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export
-fetched_at: 2026-11-09T07:30:16.850439+00:00
+fetched_at: 2026-11-16T07:30:45.157993+00:00
 fetch_method: mintlify_md
 ---
 
@@ -156,7 +156,7 @@ the arguments and results of tool calls: Grok Bot's MCP calls, and every
 MCP and builtin tool call a Cloud Agent or local agent makes. It stays off until
 you turn it on, including on destinations that exported conversation
 content before tool I/O existed. For Grok Bot, keep
-[Action Recording](https://cursor.com/docs/grok-bot/security.md#logging-and-audit) on as
+[Action Recording](https://docs.x.ai/grok-bot/security#logging-and-audit) on as
 well, so every Grok Bot tool I/O row has an `mcp_tool_call` row to join to. See
 [MCP tool I/O](https://cursor.com/docs/enterprise/opentelemetry-export.md#mcp-tool-io) for what it carries.
 
@@ -253,7 +253,7 @@ Everything below is on by default for a new destination, except `conversation_co
 - `cursor.conversation.assistant_message`: an assistant response, scrubbed; opt-in
 - `cursor.conversation.tool_io`: one side (arguments or result) of a Grok Bot MCP tool call, scrubbed; opt-in. Cursor exports the same record for Cloud Agent and local agent MCP and builtin calls
 
-The `cursor.grok_bot.*` events, and `cursor.skill.activated` when a Bot reads a skill, carry [Action Recording](https://cursor.com/docs/grok-bot/security.md#logging-and-audit) data. They flow only after a team admin turns on Action Recording on the dashboard Grok Bot page; it is a team setting, off by default, and Privacy Mode (Legacy) forces it off.
+The `cursor.grok_bot.*` events, and `cursor.skill.activated` when a Bot reads a skill, carry [Action Recording](https://docs.x.ai/grok-bot/security#logging-and-audit) data. They flow only after a team admin turns on Action Recording on the dashboard Grok Bot page; it is a team setting, off by default, and Privacy Mode (Legacy) forces it off.
 
 Recorded events are metadata about what the Bot did, never the content it worked with. Tool arguments and results, file paths and names, message bodies and recipients, credentials, and card details are never exported on these events; MCP arguments and results ship only as the opt-in [`cursor.conversation.tool_io`](https://cursor.com/docs/enterprise/opentelemetry-export.md#mcp-tool-io) record. Shell command text is exported after secret scrubbing and capped at 8 KiB; browser URLs are stripped of query strings, fragments, and credentials, and a webhook token or share-link token in the path becomes a `[REDACTED: ...]` marker; and where a tool acted on a site, only the bare hostname is reported. The [Wire Reference](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#shared-grok_bot-attributes) lists every attribute per event.
 

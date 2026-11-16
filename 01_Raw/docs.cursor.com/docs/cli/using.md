@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/using
-fetched_at: 2026-08-31T06:29:31.336546+00:00
+fetched_at: 2026-11-16T07:30:44.467473+00:00
 fetch_method: mintlify_md
 ---
 
@@ -118,7 +118,9 @@ With non-interactive mode, you can invoke Agent in a non-interactive way. This a
 
 You can combine this with `--output-format` to control how the output is formatted. For example, use `--output-format json` for structured output that's easier to parse in scripts, or `--output-format text` for plain text output of the agent's final response.
 
-Cursor has full write access in non-interactive mode.
+Non-interactive mode edits workspace files and runs allowed commands without
+asking. Actions that would need approval are rejected unless you pass
+`--force`. See [Using Headless CLI](https://cursor.com/docs/cli/headless.md#file-modification-in-scripts).
 
 
 ---

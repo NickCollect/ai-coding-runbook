@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/my-machines
-fetched_at: 2026-10-26T05:39:59.824067+00:00
+fetched_at: 2026-11-16T07:30:44.801732+00:00
 fetch_method: mintlify_md
 ---
 
@@ -213,23 +213,33 @@ To disable artifact uploads, block outbound traffic to `agent-stores.s3.us-east-
 Workers need outbound HTTPS access to:
 
 - `api2.cursor.sh` and `api2direct.cursor.sh` for the agent session
-- `downloads.cursor.com` for CLI updates and the first-time [Cursor Computer Use](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md#macos) install on macOS
-- `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` for [artifact](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md#artifacts) uploads
+- `api3.cursor.sh` for worker metrics
+- `downloads.cursor.com` for the CLI installer, CLI updates, and the first-time [Cursor Computer Use](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md#macos) install on macOS
+- `agent-stores.s3.us-east-1.amazonaws.com` for agent store sync and [artifact](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md#artifacts) uploads, including screenshots
+- `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` for artifact uploads when the agent's store isn't available
 - `cursor.blob.core.windows.net` for the [live workspace](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md#open-the-live-workspace) server download, only on workers started with `--connect-workspace`
 
 If your firewall can only match wildcards, `*.s3.us-east-1.amazonaws.com` covers both artifact hosts, but also opens every other bucket in the region. Prefer an exact-host rule when the firewall supports it.
 
 No inbound ports, public IPs, or VPN tunnels are required. If you use a proxy, set `HTTPS_PROXY` or `https_proxy` in the worker environment.
 
+To check connectivity, run this on the worker:
+
+```bash
+for h in api2.cursor.sh api2direct.cursor.sh api3.cursor.sh downloads.cursor.com cloud-agent-artifacts.s3.us-east-1.amazonaws.com agent-stores.s3.us-east-1.amazonaws.com; do printf '%-50s ' "$h"; curl -s -o /dev/null -m 10 -w '%{http_code}\n' "https://$h/" || echo BLOCKED; done
+```
+
+Any HTTP status means the host is reachable. The S3 buckets return `403`. `000` or `BLOCKED` means the host is blocked.
+
 ### Failure modes
 
-| If you block...                                                                                  | Effect                                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `api2.cursor.sh` or `api2direct.cursor.sh`                                                       | The worker can't start or continue an agent session.                                                                                                                          |
-| `downloads.cursor.com`                                                                           | CLI updates and the first-time Cursor Computer Use install on macOS fail. A worker that already has both installed keeps running.                                             |
-| `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` | Artifact uploads fail. PR embeds, dashboard previews, and notification attachments that depend on artifacts are missing. The agent session and other tool calls keep working. |
-| `cursor.blob.core.windows.net`                                                                   | On workers started with `--connect-workspace`, the live workspace can't start. The agent keeps running.                                                                       |
-| An outbound host a specific tool or integration needs                                            | Only that tool or integration fails. The agent continues.                                                                                                                     |
+| If you block...                                                                                  | Effect                                                                                                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `api2.cursor.sh` or `api2direct.cursor.sh`                                                       | The worker can't start or continue an agent session.                                                                                                                                                                                                      |
+| `downloads.cursor.com`                                                                           | CLI updates and the first-time Cursor Computer Use install on macOS fail. A worker that already has both installed keeps running.                                                                                                                         |
+| `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` | Artifact and screenshot uploads fail without an error, even though the worker's API calls succeed. PR embeds, dashboard previews, and notification attachments that depend on artifacts are missing. The agent session and other tool calls keep working. |
+| `cursor.blob.core.windows.net`                                                                   | On workers started with `--connect-workspace`, the live workspace can't start. The agent keeps running.                                                                                                                                                   |
+| An outbound host a specific tool or integration needs                                            | Only that tool or integration fails. The agent continues.                                                                                                                                                                                                 |
 
 ## MCP servers
 

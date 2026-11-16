@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security
-fetched_at: 2026-11-02T07:00:22.428686+00:00
+fetched_at: 2026-11-16T07:30:44.682228+00:00
 fetch_method: mintlify_md
 ---
 
@@ -84,7 +84,7 @@ The layers that contain this risk:
 - **Human-in-the-loop handoff.** Agents open pull requests for review. Nothing merges until a person reviews the change.
 - **Signed commits.** Every agent commit is signed with an HSM-backed Ed25519 key and shows a "Verified" badge on GitHub, so agent-authored changes are attributable and can satisfy signed-commit branch protection. See [Signed commits](https://cursor.com/docs/cloud-agent/security-network.md#signed-commits).
 
-For deeper defense, pair these with [hooks](https://cursor.com/docs/hooks.md) to enforce policy and log activity at agent lifecycle points, and have [Bugbot](https://cursor.com/docs/bugbot.md) or [Security Agents](https://cursor.com/docs/security-agents.md) review agent output before it ships.
+For deeper defense, pair these with [hooks](https://cursor.com/docs/hooks.md) to enforce policy and log activity at agent lifecycle points, and have [Bugbot](https://cursor.com/docs/bugbot.md) or [Security Review](https://cursor.com/docs/security-review.md) review agent output before it ships.
 
 ## Risk considerations
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/headless
-fetched_at: 2026-05-05T19:55:37.069354+00:00
+fetched_at: 2026-11-16T07:30:44.299858+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,23 +14,36 @@ Use [print mode](https://cursor.com/docs/cli/using.md#non-interactive-mode) (`-p
 
 ### File modification in scripts
 
-Combine `--print` with `--force` (or `--yolo`) to modify files in scripts:
+Print mode follows the same approval rules as an interactive session, but it can't stop to ask you. Without `--force`, anything that runs without approval still runs, and anything that would need approval is rejected:
+
+- **Runs:** file edits inside the workspace, shell commands on your allowlist or that can run in the [sandbox](https://cursor.com/docs/agent/security/run-modes.md#sandboxing) when sandboxing is on, and anything else your [`permissions.allow`](https://cursor.com/docs/cli/reference/permissions.md) rules cover.
+- **Rejected:** writes outside the workspace or to protected paths like `.vscode/` and `.git/hooks/`, plus shell commands, MCP tools, and web fetches that aren't allowed.
+
+Combine `--print` with `--force` (or `--yolo`) to run every action without approval, except what `permissions.deny` and team policies block. If your team admin has disabled Run Everything, `--force` exits with an error instead.
 
 ```bash
-# Enable file modifications in print mode
+# Edits workspace files, and rejects actions that need approval
+agent -p "Add JSDoc comments to this file"
+
+# Runs every action, including ones that would need approval
 agent -p --force "Refactor this code to use modern ES6+ syntax"
 
-# Without --force, changes are only proposed, not applied
-agent -p "Add JSDoc comments to this file"  # Won't modify files
-
-# Batch processing with actual file changes
+# Batch processing with every action allowed
 find src/ -name "*.js" | while read file; do
   agent -p --force "Add comprehensive JSDoc comments to $file"
 done
 ```
 
-The `--force` flag allows the agent to make direct file changes without
-confirmation
+Print mode writes to files in your workspace even without `--force`. If your
+[CLI config](https://cursor.com/docs/cli/reference/configuration.md) sets `approvalMode` to
+`unrestricted`, print mode also runs every action without approval, the same
+as `--force`.
+
+## Disable headless mode for your team
+
+Team admins can block print mode by turning on **Disable CLI headless mode** in [Team Settings > Security & automation](https://cursor.com/dashboard/team-settings?view=extension-security). With it on, `agent -p` and `agent --print` exit with an error before sending the prompt. Interactive sessions still work.
+
+The CLI enforces this setting on the member's machine. Cursor's servers don't check it. In print mode, the CLI loads your team's settings at startup and exits if headless mode is disabled. Treat the setting as a usage policy, not a security boundary: a modified client can skip the check, and the run continues when the CLI can't load team settings. It also doesn't cover other ways to run agents without a UI, such as the [Cursor SDK](https://cursor.com/docs/sdk/typescript.md).
 
 ## Setup
 

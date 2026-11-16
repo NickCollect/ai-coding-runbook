@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/network-configuration
-fetched_at: 2026-11-09T07:30:16.829345+00:00
+fetched_at: 2026-11-16T07:30:45.140040+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,7 +39,7 @@ Cursor's services are already encrypted end-to-end. We recommend disabling SSL i
 
 Sign-in also uses `accounts.spacex.ai`, `accounts.x.ai`, and related auth hosts. Exclude those from inspection too. `authenticator.cursor.sh` remains the fallback sign-in page during the transition. See [Which domains does Cursor sign-in need?](https://cursor.com/help/troubleshooting/sign-in-domains.md) for the full list.
 
-Both `cursorvm.com` patterns are required for Grok Bot: hosted computers use nested hostnames, and a single-level wildcard misses them. Apply the exclusions to off-network and roaming proxy profiles as well as office locations. For Grok Bot symptoms and Zscaler profile notes, see [Configure TLS-inspecting proxies](https://cursor.com/docs/grok-bot/proxies.md).
+Both `cursorvm.com` patterns are required for Grok Bot: hosted computers use nested hostnames, and a single-level wildcard misses them. Apply the exclusions to off-network and roaming proxy profiles as well as office locations. For Grok Bot symptoms and Zscaler profile notes, see [Configure TLS-inspecting proxies](https://docs.x.ai/grok-bot/proxies).
 
 If your security policy requires SSL inspection on all traffic, your proxy must support:
 
@@ -138,6 +138,13 @@ We generally recommend allowlisting with the domain patterns above. However, if 
 - `accounts.spacex.ai`, `accounts.x.ai`: New sign-in page. See [Which domains does Cursor sign-in need?](https://cursor.com/help/troubleshooting/sign-in-domains.md) for the related auth hosts.
 - `prod.authentication.cursor.sh`: Production token issuer.
 - `authentication.cursor.sh`: JWT issuer (backend).
+
+The desktop app also reaches these hosts. The domain patterns above don't match them, so add them to your allowlist even if you use the patterns:
+
+- `agent-stores.s3.us-east-1.amazonaws.com`, `agent-stores.s3.amazonaws.com`: Used to sync skills and agent files.
+- `cursor.blob.core.windows.net`: Used to download the Remote SSH server to Windows remote hosts. Linux and macOS remote hosts download it from `downloads.cursor.com`.
+
+The remote host downloads the server itself. If it can't reach these hosts, Cursor downloads the server on your machine and copies it over SSH. To always download it locally, set `remote.SSH.localServerDownload` to `always`.
 
 ## Private connectivity
 

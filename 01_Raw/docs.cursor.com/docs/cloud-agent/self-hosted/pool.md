@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/pool
-fetched_at: 2026-11-09T07:30:16.630374+00:00
+fetched_at: 2026-11-16T07:30:44.874350+00:00
 fetch_method: mintlify_md
 ---
 
@@ -230,7 +230,7 @@ To have the worker check out the claimed agent's repos on claim, pass `--clone-g
 agent worker --pool my-pool --clone-git-repos start
 ```
 
-`--clone-git-repos` implies `--mint-github-token`. Clones and fetches use that minted short-lived GitHub token, which covers every repository in the request. A team admin must enable GitHub token minting for Team Pool workers, and `git` must be on `PATH`.
+`--clone-git-repos` implies `--mint-scm-token`. Clones and fetches use the minted short-lived SCM token, which covers every repository in the request. A team admin must turn on **SCM token minting** in [Cloud Agents → Self-hosted Machines](https://cursor.com/dashboard/cloud-agents#self-hosted). The worker flag and the team setting are both required, and `git` must be on `PATH`.
 
 Use this flag only on any-repo pool workers: a named `--pool` other than `default`, with no bound repository (`repo=`) and no bound machine (`name=`). The CLI exits with a clear error on a bound-repo worker, a named machine, the `default` pool, or a personal [My Machines](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md) worker.
 
@@ -250,7 +250,7 @@ When a claim ends, the worker deletes the repos it cloned for that claim and kee
 
 If clone fails, the request stays in the queue. Operators see a generic clone failure.
 
-`--clone-git-repos`, `--mint-github-token`, and `--sync-dashboard-secrets` assume one worker per container or OS user. Co-locating multiple credential-enabled workers under the same user is unsupported.
+`--clone-git-repos`, `--mint-scm-token`, and `--sync-dashboard-secrets` assume one worker per container or OS user. Co-locating multiple credential-enabled workers under the same user is unsupported.
 
 Any-repo pools omit `repo=` routing labels. Start agents against them with `env.type: "pool"` and `env.name` set to the pool name (see [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent)). Omit `repos`, or pass one or more repositories for the agent to work in. They don't narrow which worker claims the run. A worker started with `--clone-git-repos` checks out each of them. The agent can open and update pull requests on those repositories if you have write access to them. This doesn't apply to agents created by a service account. Pick the pool under **Any repo** on [cursor.com/agents](https://cursor.com/agents). In Slack, an any-repo pool set as the [team default pool](https://cursor.com/docs/integrations/slack.md#team-default-pool) or a [channel default pool](https://cursor.com/docs/integrations/slack.md#channel-default-pool) lets `@Cursor` start an agent even when no repository resolves from the message or defaults.
 
@@ -467,23 +467,33 @@ To disable artifact uploads, block outbound traffic to `agent-stores.s3.us-east-
 Workers need outbound HTTPS access to:
 
 - `api2.cursor.sh` and `api2direct.cursor.sh` for the agent session
-- `downloads.cursor.com` for CLI updates and the first-time [Cursor Computer Use](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md#macos) install on macOS
-- `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` for [artifact](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#artifacts) uploads
+- `api3.cursor.sh` for worker metrics
+- `downloads.cursor.com` for the CLI installer, CLI updates, and the first-time [Cursor Computer Use](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md#macos) install on macOS
+- `agent-stores.s3.us-east-1.amazonaws.com` for agent store sync and [artifact](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#artifacts) uploads, including screenshots
+- `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` for artifact uploads when the agent's store isn't available
 - `cursor.blob.core.windows.net` for the [live workspace](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#open-the-live-workspace) server download, only on workers started with `--connect-workspace`
 
 If your firewall can only match wildcards, `*.s3.us-east-1.amazonaws.com` covers both artifact hosts, but also opens every other bucket in the region. Prefer an exact-host rule when the firewall supports it.
 
 No inbound ports, public IPs, or VPN tunnels are required. If you use a proxy, set `HTTPS_PROXY` or `https_proxy` in the worker environment.
 
+To check connectivity, run this on the worker:
+
+```bash
+for h in api2.cursor.sh api2direct.cursor.sh api3.cursor.sh downloads.cursor.com cloud-agent-artifacts.s3.us-east-1.amazonaws.com agent-stores.s3.us-east-1.amazonaws.com; do printf '%-50s ' "$h"; curl -s -o /dev/null -m 10 -w '%{http_code}\n' "https://$h/" || echo BLOCKED; done
+```
+
+Any HTTP status means the host is reachable. The S3 buckets return `403`. `000` or `BLOCKED` means the host is blocked.
+
 ### Failure modes
 
-| If you block...                                                                                  | Effect                                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `api2.cursor.sh` or `api2direct.cursor.sh`                                                       | The worker can't start or continue an agent session.                                                                                                                          |
-| `downloads.cursor.com`                                                                           | CLI updates and the first-time Cursor Computer Use install on macOS fail. A worker that already has both installed keeps running.                                             |
-| `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` | Artifact uploads fail. PR embeds, dashboard previews, and notification attachments that depend on artifacts are missing. The agent session and other tool calls keep working. |
-| `cursor.blob.core.windows.net`                                                                   | On workers started with `--connect-workspace`, the live workspace can't start. The agent keeps running.                                                                       |
-| An outbound host a specific tool or integration needs                                            | Only that tool or integration fails. The agent continues.                                                                                                                     |
+| If you block...                                                                                  | Effect                                                                                                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `api2.cursor.sh` or `api2direct.cursor.sh`                                                       | The worker can't start or continue an agent session.                                                                                                                                                                                                      |
+| `downloads.cursor.com`                                                                           | CLI updates and the first-time Cursor Computer Use install on macOS fail. A worker that already has both installed keeps running.                                                                                                                         |
+| `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` | Artifact and screenshot uploads fail without an error, even though the worker's API calls succeed. PR embeds, dashboard previews, and notification attachments that depend on artifacts are missing. The agent session and other tool calls keep working. |
+| `cursor.blob.core.windows.net`                                                                   | On workers started with `--connect-workspace`, the live workspace can't start. The agent keeps running.                                                                                                                                                   |
+| An outbound host a specific tool or integration needs                                            | Only that tool or integration fails. The agent continues.                                                                                                                                                                                                 |
 
 The [Prerequisites](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#prerequisites) section covers the broader set of hosts a worker needs during agent runs (git hosts, package registries, internal APIs).
 
@@ -917,8 +927,8 @@ agent worker [options] start
 | `--api-key <key>`              | Service account API key for pool workers. Env var: `CURSOR_API_KEY`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `--auth-token <token>`         | Pre-minted access token. Used by the Kubernetes operator and other automation that exchanges an API key for a short-lived token externally.                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `--auth-token-file <path>`     | File containing an access token, such as a [session token](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#session-tokens). The CLI re-reads this file when reconnecting after an auth failure or disconnect, which lets a controller rotate the mounted token without restarting the pod.                                                                                                                                                                                                                                                               |
-| `--clone-git-repos`            | On claim, check out the agent's GitHub repos in the workspace: reuse a clean checkout of the same repo already in the worker directory, and clone the rest. Any-repo named pools only (not `default`, and not a bound repo or named machine). Implies `--mint-github-token`. Requires `git` on `PATH`. Default: off.                                                                                                                                                                                                                                             |
-| `--mint-github-token`          | Receive short-lived GitHub tokens during claimed runs. Pool workers only. Requires team-admin enablement. At most one credential-enabled worker per OS user or container.                                                                                                                                                                                                                                                                                                                                                                                        |
+| `--clone-git-repos`            | On claim, check out the agent's GitHub repos in the workspace: reuse a clean checkout of the same repo already in the worker directory, and clone the rest. Any-repo named pools only (not `default`, and not a bound repo or named machine). Implies `--mint-scm-token`. Requires `git` on `PATH`. Default: off.                                                                                                                                                                                                                                                |
+| `--mint-scm-token`             | Receive short-lived SCM tokens during claimed runs. Pool workers only. A team admin must turn on **SCM token minting** in [Cloud Agents → Self-hosted Machines](https://cursor.com/dashboard/cloud-agents#self-hosted). The flag and the setting are both required. At most one credential-enabled worker per OS user or container.                                                                                                                                                                                                                              |
 | `--sync-dashboard-secrets`     | Receive team and user Cloud Agent secrets for the run's repositories, plus API `envVars`, as environment variables during claimed runs. Any-repo pools get only secrets not limited to a repository. With `--clone-git-repos`, a user's runs also get the secrets limited to the repos the worker clones, as long as that user can read every one of them and each is a private GitHub repository. Environment-scoped secrets and Build Secrets aren't sent. Pool workers only. Requires team-admin enablement (**Secret sync**). Same one-worker-per-user rule. |
 | `--on-session-start <command>` | Run a `sessionStart` command after each claim, in addition to [hooks](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#hooks) from `.cursor/hooks.json`. Pool workers only.                                                                                                                                                                                                                                                                                                                                                                               |
 | `--on-session-end <command>`   | Run a `sessionEnd` command before each claim is torn down. Pool workers only.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |

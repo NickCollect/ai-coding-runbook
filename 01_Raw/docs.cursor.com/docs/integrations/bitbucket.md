@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/bitbucket
-fetched_at: 2026-11-09T07:30:16.986054+00:00
+fetched_at: 2026-11-16T07:30:45.367997+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 Connect Bitbucket Cloud repositories to [Cloud Agents](https://cursor.com/docs/cloud-agent.md) and [Bugbot](https://cursor.com/docs/bugbot.md). Connect Bitbucket Data Center repositories to Bugbot.
 
-[Security Reviewer and Vulnerability Scanner](https://cursor.com/docs/security-agents.md#source-control-support) support Bitbucket Cloud repositories. They don't support Bitbucket Data Center repositories.
+[Security Reviewer](https://cursor.com/docs/security-review.md#source-control-support) and [Vulnerability Scanner](https://cursor.com/docs/vulnerability-remediation.md#source-control-support) support Bitbucket Cloud repositories. They don't support Bitbucket Data Center repositories.
 
 ## Setup
 

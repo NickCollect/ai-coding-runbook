@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted
-fetched_at: 2026-11-09T07:30:16.567757+00:00
+fetched_at: 2026-11-16T07:30:44.810673+00:00
 fetch_method: mintlify_md
 ---
 
@@ -46,7 +46,12 @@ providers.
 Workers need outbound HTTPS access to:
 
 - `api2.cursor.sh` and `api2direct.cursor.sh` for the agent session
-- `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` for artifact uploads
+- `api3.cursor.sh` for worker metrics
+- `downloads.cursor.com` for the CLI installer and updates
+- `agent-stores.s3.us-east-1.amazonaws.com` for agent store sync and artifact uploads, including screenshots
+- `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` for artifact uploads when the agent's store isn't available
+
+See [Networking](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#networking) for a connectivity check and what breaks when each host is blocked.
 
 No inbound ports, public IPs, or VPN tunnels are required. If you use a proxy, set `HTTPS_PROXY` or `https_proxy` in the worker environment.
 

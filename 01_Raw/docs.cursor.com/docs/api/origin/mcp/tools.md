@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/mcp/tools
-fetched_at: 2026-11-09T07:30:16.070386+00:00
+fetched_at: 2026-11-16T07:30:44.018602+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,6 +26,7 @@ Every tool the Origin MCP server at `https://api.origin.cursor.com/mcp` lists, i
 | [`list_pull_requests`](https://cursor.com/docs/api/origin/mcp/tools.md#list_pull_requests)                                 | Read-only                           | List pull requests in an Origin-hosted repository, filtered by state, head, author, base, stackId, mergeCommitShas, or inclusive mergedSince/mergedUntil bounds on mergedAt, and sorted by creation or update time in either direction.                                                                                                                                     |
 | [`search_pull_requests`](https://cursor.com/docs/api/origin/mcp/tools.md#search_pull_requests)                             | Read-only                           | Search pull requests across the Origin-hosted repositories the caller can read, written in GitHub's pull request search syntax.                                                                                                                                                                                                                                             |
 | [`pull_request_read`](https://cursor.com/docs/api/origin/mcp/tools.md#pull_request_read)                                   | Read-only                           | Read one Origin-hosted pull request through a single view: summary, files, commits, reviews, comments, or threads.                                                                                                                                                                                                                                                          |
+| [`get_pull_request_requirements`](https://cursor.com/docs/api/origin/mcp/tools.md#get_pull_request_requirements)           | Read-only                           | Read what an open Origin-hosted pull request needs before it can merge, as Origin evaluates it at headSha.                                                                                                                                                                                                                                                                  |
 | [`get_pull_request_attachment`](https://cursor.com/docs/api/origin/mcp/tools.md#get_pull_request_attachment)               | Read-only                           | Fetch one image, recording, or file attached to an Origin-hosted pull request.                                                                                                                                                                                                                                                                                              |
 | [`upload_pull_request_attachment`](https://cursor.com/docs/api/origin/mcp/tools.md#upload_pull_request_attachment)         | Writes                              | Upload one image or video for an Origin-hosted repository's pull requests and return url, a cursor.com user-attachments URL that only readers of the repository can open.                                                                                                                                                                                                   |
 | [`create_pull_request`](https://cursor.com/docs/api/origin/mcp/tools.md#create_pull_request)                               | Writes                              | Create a pull request from an already-pushed branch.                                                                                                                                                                                                                                                                                                                        |
@@ -543,9 +544,38 @@ Set `view` to choose what comes back:
 - `stack` (not yet public): `parent`, `children` (paged), `mergePrefix`, `convergence`
 - `threads`: `threads` (paged)
 
+## get\_pull\_request\_requirements
+
+Read what an open Origin-hosted pull request needs before it can merge, as Origin evaluates it at headSha. Each requirement has a stable id, a status (satisfied, unsatisfied, pending or unknown) and a reason; owner rules also say whether a human approval is required. actors pages the users and bots who can clear each open requirement, and excludedFrom says why someone cannot, such as being the author. Policies name users by @handle and group rosters by user\_ id, so one person can appear once each way. completeness is complete, partial or pending, and incomplete says what is missing. Pass expectedHeadSha to be refused if the head has moved. Call it once per pull request in a stack.
+
+- **Access:** Read-only
+- **Asks for confirmation:** No
+- **On the read-only endpoint:** Yes
+- **Required scopes:** `repository:pull_requests:read`
+
+### get\_pull\_request\_requirements parameters
+
+| Name              | Type   | Required | Description                                                                                                                                                                       |
+| ----------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `owner`           | string | Yes      | Origin namespace (owner) slug, taken from list\_namespaces or an earlier Origin result. A GitHub owner or org name is not an Origin namespace unless list\_namespaces returns it. |
+| `name`            | string | Yes      | Origin repository name within that namespace                                                                                                                                      |
+| `number`          | number | Yes      | Pull request number                                                                                                                                                               |
+| `expectedHeadSha` | string | No       | Refuse with a conflict unless Origin evaluated this head commit                                                                                                                   |
+| `pageSize`        | number | No       | Actors per page                                                                                                                                                                   |
+| `pageToken`       | string | No       |                                                                                                                                                                                   |
+
+### get\_pull\_request\_requirements limits
+
+- `pageSize` defaults to 30 and is at most 100.
+- Pass the previous response's `nextPageToken` as `pageToken` to read the next page.
+
+### get\_pull\_request\_requirements returns
+
+`pullRequest`, `headSha`, `evaluatedAt`, `completeness`, `incomplete` (at most 50), `mergeability`, `humanReviewRequired`, `requirements` (at most 200), `groups` (at most 100), `actors` (paged), `nextPageToken`
+
 ## get\_pull\_request\_attachment
 
-Fetch one image, recording, or file attached to an Origin-hosted pull request. url is a media URL exactly as pull\_request\_read returns it in the description, a review, or a comment: a cursor.com user-attachments URL, a legacy upload-bucket URL, a cloud agent artifact share link (cursor.com/artifacts/c/art-…), or a cloud agent's artifact page (cursor.com/agents/\<agent id>/artifacts?path=…, the way an agent links its screen recordings). Only those shapes are accepted, and the URL must appear in that pull request's text; no other URL is ever fetched. A share link is served while its share stands; an agent's artifact page is served only to a user who may view that agent, for an agent that worked in this repository. An image of at most 3 MiB is returned as an image content block beside the JSON summary (delivery inline, with contentType and byteLength). A larger image, a recording, or another file is answered with delivery url: fetchUrl serves the bytes without further credentials, until expiresAt when the URL is signed, and reason says why (video, too\_large, or not\_an\_image); hand a recording's fetchUrl to whatever watches video for you. kind is image, video, or file.
+Fetch one image, recording, or file attached to an Origin-hosted pull request. url is a media URL exactly as pull\_request\_read returns it in the description, a review, or a comment: a cursor.com user-attachments URL, a legacy upload-bucket URL, a cloud agent artifact share link (cursor.com/artifacts/c/art-…), a cloud agent's artifact page (cursor.com/agents/\<agent id>/artifacts?path=…, the way an agent links its screen recordings), or a cloud agent's media URL (cursor.com/api/origin-cereal/graphite/background-agents/\<owner>/\<repo>/cursor/\<agent id>/artifact-content?absolutePath=…, the way an agent embeds its screenshots, naming a file under its artifacts directory or in an agent store it mounts), which must name this pull request's repository. Only those shapes are accepted, and the URL must appear in that pull request's text; no other URL is ever fetched. A share link is served while its share stands; an agent's artifact page or media URL is served only to a user who may view that agent, for an agent that worked in this repository. An image of at most 3 MiB is returned as an image content block beside the JSON summary (delivery inline, with contentType and byteLength). A larger image, a recording, or another file is answered with delivery url: fetchUrl serves the bytes without further credentials, until expiresAt when the URL is signed, and reason says why (video, too\_large, or not\_an\_image); hand a recording's fetchUrl to whatever watches video for you. kind is image, video, or file.
 
 - **Access:** Read-only
 - **Asks for confirmation:** No

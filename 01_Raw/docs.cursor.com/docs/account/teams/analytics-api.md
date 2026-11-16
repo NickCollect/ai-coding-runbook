@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/analytics-api
-fetched_at: 2026-10-12T06:49:39.940711+00:00
+fetched_at: 2026-11-16T07:30:43.486866+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1150,7 +1150,7 @@ GET
 
 `/analytics/team/bugbot-reviews`
 
-Return one item per completed Bugbot review, including the reviewed commit, findings count, billed cost, and per-finding resolution data.
+Return one item per completed Bugbot review, including the pull request author, reviewed commit, findings count, billed cost, and per-finding resolution data.
 
 Includes both posted reviews and dry-run reviews. Posted findings are identified by `comment_id` and `resolution_status`. Dry-run findings return `title`, `description`, and `locations` instead because nothing is posted to the SCM.
 
@@ -1215,6 +1215,7 @@ curl --get https://api.cursor.com/analytics/team/bugbot-reviews \
       "timestamp": "2026-06-29T19:42:18.000Z",
       "repo": "github.com/your-org/your-repo",
       "repo_node_id": "R_kgDOABCDEF",
+      "pr_author": "octocat",
       "pr_number": 42,
       "commit_sha": "9f3c2a1b7d8e4f5061728394a5b6c7d8e9f0a1b2",
       "bugs_found": 2,
@@ -1266,6 +1267,7 @@ curl --get https://api.cursor.com/analytics/team/bugbot-reviews \
       "timestamp": "2026-06-29T20:15:03.000Z",
       "repo": "github.com/your-org/your-repo",
       "repo_node_id": "R_kgDOABCDEF",
+      "pr_author": "octocat",
       "pr_number": 42,
       "commit_sha": "9f3c2a1b7d8e4f5061728394a5b6c7d8e9f0a1b2",
       "bugs_found": 1,
@@ -1308,7 +1310,7 @@ curl --get https://api.cursor.com/analytics/team/bugbot-reviews \
 }
 ```
 
-`repo_node_id`, `pr_number`, `commit_sha`, `cost_cents`, `bugs[].comment_id`, `bugs[].resolution_status`, and `bugs[].severity` may be `null` when unavailable. `cost_cents` is `null` when the review is not billed separately. For dry-run reviews, `bugs[].title`, `bugs[].description`, and `bugs[].locations` carry the finding content. Dry-run findings have `comment_id: null` and `resolution_status: null` because nothing is posted to the SCM.
+`pr_author` is the SCM username of the pull request author. Use it with `cost_cents` to attribute Bugbot spend to authors. `repo_node_id`, `pr_author`, `pr_number`, `commit_sha`, `cost_cents`, `bugs[].comment_id`, `bugs[].resolution_status`, and `bugs[].severity` may be `null` when unavailable. `cost_cents` is `null` when the review is not billed separately. For dry-run reviews, `bugs[].title`, `bugs[].description`, and `bugs[].locations` carry the finding content. Dry-run findings have `comment_id: null` and `resolution_status: null` because nothing is posted to the SCM.
 
 To trigger a dry-run review, call `POST /bugbot/review` with `"dryRun": true`. See the [Bugbot API docs](https://cursor.com/docs/bugbot.md#trigger-a-review).
 

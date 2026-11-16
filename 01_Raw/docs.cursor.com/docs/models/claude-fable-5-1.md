@@ -1,20 +1,22 @@
 ---
 source_url: https://cursor.com/docs/models/claude-fable-5-1
-fetched_at: 2026-10-26T05:40:00.779763+00:00
+fetched_at: 2026-11-16T07:30:45.712405+00:00
 fetch_method: mintlify_md
 ---
+
+We recommend using [Claude Fable 5.2](https://cursor.com/docs/models/claude-fable-5-2.md). It is Anthropic's latest Mythos-class model, with 20% lower input and output rates. Fable 5.1 remains available.
 
 Claude Fable 5.1 is Anthropic's latest Mythos-class model and replaces [Fable 5](https://cursor.com/docs/models/claude-fable-5.md). It is built for long-running, complex, and asynchronous coding and knowledge work. Input and output rates match Fable 5. Prompt-cache reads are 75% cheaper.
 
 ## Enabling Fable 5.1
 
-Fable 5.1 has the same privacy considerations as other Fable models because of how Anthropic handles data retention. If Privacy Mode is enabled for your account, team, or organization, you will need to approve Fable 5.1's Data Retention Policy in the Cursor Dashboard before you can use the model. You can view the policy in the [Cursor Dashboard](https://cursor.com/dashboard/restricted_models/claude-fable-5-1).
+Fable 5.1 has the same privacy considerations as other Fable models because of how Anthropic handles data retention. If Privacy Mode is enabled for your account, team, or organization, you will need to approve Fable 5.1's Data Retention Policy in the Cursor Dashboard before you can use the model. You can view the policy in the [Cursor Dashboard](https://cursor.com/dashboard/restricted_models/claude-fable-5).
 
 For Teams accounts, approving the model policy applies to the entire Team.
 
 For Enterprise accounts, model availability is approved at the Organization level but continues to be controlled at the team and group level in the [Model Access controls](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control).
 
-Head to [Team Settings](https://cursor.com/dashboard/restricted_models/claude-fable-5-1) to enable Fable 5.1 for your Team, Organization, or account.
+Head to [Team Settings](https://cursor.com/dashboard/restricted_models/claude-fable-5) to enable Fable 5.1 for your Team, Organization, or account.
 
 ## Strengths
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/mcp
-fetched_at: 2026-11-09T07:30:16.028085+00:00
+fetched_at: 2026-11-16T07:30:43.999178+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 Origin is in Early Beta and subject to change.
 
-The Origin MCP server is currently available only in Cursor and [Grok Bot](https://cursor.com/docs/grok-bot.md). Support for other agent harnesses is coming soon.
+The Origin MCP server is currently available only in Cursor and [Grok Bot](https://docs.x.ai/grok-bot/overview). Support for other agent harnesses is coming soon.
 
 The Origin MCP server gives agents access to repositories and pull requests hosted on Origin (`origin.cursor.com`). It covers repository browsing and search, commits and branches, pull request reads and writes, reviews and comments, labels, reviewers, and checks. Tools only see repositories hosted on Origin, addressed by their Origin namespace (`owner`) and repository `name`. A repository that mirrors to Origin counts as hosted there.
 

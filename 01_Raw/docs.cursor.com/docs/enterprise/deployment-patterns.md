@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/deployment-patterns
-fetched_at: 2026-11-02T07:00:22.917043+00:00
+fetched_at: 2026-11-16T07:30:45.012911+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ This guide covers how to deploy the Cursor editor and CLI tools to developer mac
 
 For other deployment options like SCM integrations (bugbot, BGA apps) or web-based access, see the relevant integration documentation.
 
-To deploy the Grok Bot desktop app, see [Deploy Grok Bot to your organization](https://cursor.com/docs/grok-bot/deployment.md).
+To deploy the Grok Bot desktop app, see [Deploy Grok Bot to your organization](https://docs.x.ai/grok-bot/deployment).
 
 ## Editor deployment with MDM
 

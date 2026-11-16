@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/dashboard
-fetched_at: 2026-09-07T05:31:25.514304+00:00
+fetched_at: 2026-11-16T07:30:43.522220+00:00
 fetch_method: mintlify_md
 ---
 
@@ -92,6 +92,12 @@ Access Cursor's REST API endpoints for programmatic integration. All API endpoin
 
 **Device-level enforcement:** In addition to dashboard settings, enterprises can enforce policies like allowed team IDs and allowed extensions on user devices through MDM. See [Identity and Access Management](https://cursor.com/docs/enterprise/identity-and-access-management.md#mdm-policies) and [Deployment Patterns](https://cursor.com/docs/enterprise/deployment-patterns.md#mdm-configuration) for details.
 
+### Cursor Access
+
+Turn off Cursor for your whole team, or limit it to selected team groups.
+Find it under **Team Settings → Cursor → Enable Cursor for Your Team** and
+**Manage Group Access**.
+
 ### Model Access Control
 
 Control which AI models are available to team members from **Team Settings →
@@ -169,7 +175,8 @@ Monitor and manage cloud agents running in your workspace. View agent status, lo
 Use [Automations](https://cursor.com/automations) to create recurring cloud agents and configure Cursor-managed agents:
 
 - [Bugbot](https://cursor.com/docs/bugbot.md)
-- [Security Agents](https://cursor.com/docs/security-agents.md)
+- [Security Review](https://cursor.com/docs/security-review.md)
+- [Vulnerability Remediation](https://cursor.com/docs/vulnerability-remediation.md)
 - [PR Routing & Approval](https://cursor.com/docs/approval-agents.md)
 
 ## Active Directory Management

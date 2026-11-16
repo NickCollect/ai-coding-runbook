@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-10-26T05:39:58.638060+00:00
+fetched_at: 2026-11-16T07:30:43.415676+00:00
 fetch_method: mintlify_md
 ---
 
@@ -405,6 +405,8 @@ POST
 
 Retrieve spending information for the current billing cycle with search, sorting, and pagination.
 
+This endpoint doesn't split spend by product. To see Grok Bot and Cursor usage separately, use the `product` filter on [`/teams/filtered-usage-events`](https://cursor.com/docs/account/teams/admin-api.md#get-usage-events-data).
+
 #### Parameters
 
 `searchTerm` string
@@ -503,6 +505,10 @@ Retrieve detailed usage events for your team with filtering, search, and paginat
 
 The `cursorTokenFee` field represents the Cursor Token Rate and is only present when the rate applies to a third-party model request. This includes when Auto routes to a third-party model. First-party Cursor models such as Grok and Composer, and request-based enterprise accounts do not include this fee. See [Cursor Token Rate](https://cursor.com/help/models-and-usage/token-rate.md).
 
+**Bugbot Spend**: Events from Bugbot reviews of pull requests include `prAuthor`, `repo`, and `prNumber`. To break down Bugbot spend by repository or author, group those events by `repo` or `prAuthor` and sum `chargedCents`.
+
+**Grok Bot Spend**: Every event includes `product`, set to `grok-bot` or `cursor`. To get Grok Bot spend, pass `product: "grok-bot"` and sum `chargedCents`. Usage paid from a credit grant has `kind` set to `Credit` and `chargedCents` set to `0`, so this sum leaves it out. Work that Grok Bot delegates to [Cloud Agents](https://cursor.com/docs/cloud-agent.md) is billed as Cursor usage and returns `cursor`. Events before 2026-07-19 have no stored product and return `cursor`, including Grok Bot usage from that period.
+
 #### Parameters
 
 `startDate` number
@@ -558,6 +564,15 @@ Filter cloud agent (background agent) runs by where they executed. Use this to i
 
 An unrecognized `hostingType` value returns a `400` error rather than an empty result, so a typo can't be mistaken for genuinely zero self-hosted spend. This filter covers inference spend only; self-hosted compute runs on your own machines and is never metered by Cursor.
 
+`product` string
+
+Filter by the product that generated the event. When omitted or `null`, events from every product are returned. Accepted values:
+
+- `grok-bot` - Grok Bot usage
+- `cursor` - all other usage, including events with no stored product
+
+An unrecognized `product` value returns a `400` error rather than an empty result. Field names are case-sensitive: the endpoint ignores `Product`. A request with `product` set to `grok-bot` or `cursor` never returns unfiltered events. If the events can't be read, the request fails with a `503` or `500` error. If a `503` repeats, use a shorter date range.
+
 When you pass multiple filters, the endpoint combines them with `AND`. For example, `automationId` and `serviceAccountId` return events that match both values.
 
 #### Response Fields
@@ -571,6 +586,9 @@ Each object in `usageEvents` contains:
 - `cloudAgentId` string | undefined - ID of the cloud agent run attributed to this event. Omitted for events outside cloud agents.
 - `automationId` string | undefined - UUID of the automation attributed to this event. Omitted for events outside automations.
 - `conversationId` string | undefined - ID of the conversation (agent session) that generated this event. Use it to attribute spend to a session or as a join key with other sources that expose conversation IDs, such as the [AI Code Tracking API](https://cursor.com/docs/account/teams/ai-code-tracking-api.md). Omitted for events without an associated conversation.
+- `prAuthor` string | undefined - SCM username of the pull request author. Present on events from Bugbot reviews of pull requests. Omitted for other events.
+- `repo` string | undefined - Repository the Bugbot review ran on, in `host/owner/repo` form, such as `github.com/your-org/your-repo`. Omitted for events outside Bugbot reviews of pull requests.
+- `prNumber` number | undefined - Pull request or merge request number the Bugbot review ran on. Omitted for events outside Bugbot reviews of pull requests.
 - `model` string - AI model used for the request
 - `kind` string - Billing category (e.g., `Usage-based`, `Included in Business`)
 - `maxMode` boolean - Whether the request used max mode
@@ -587,6 +605,7 @@ Each object in `usageEvents` contains:
   - `discountPercentOff` number | undefined - Discount percentage applied, if any
 - `chargedCents` number - Total amount charged in cents for this event. For third-party model requests subject to the Cursor Token Rate, this includes model cost plus the Cursor Token Rate. Use this field to reconcile event-level costs with `/teams/spend` totals. Works for both token-based and request-based billing plans.
 - `cursorTokenFee` number | undefined - Cursor Token Rate in cents. Present only when the rate applies to a third-party model request (including when Auto routes to a third-party model).
+- `product` string - Product that generated the event: `grok-bot` for Grok Bot, `cursor` for all other usage. Older events have no stored product and return `cursor`, including Grok Bot usage. See the Grok Bot Spend note above for the date.
 
 ```bash
 curl -X POST https://api.cursor.com/teams/filtered-usage-events \
@@ -633,7 +652,8 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
         "totalCents": 20.18232
       },
       "chargedCents": 21.36232,
-      "cursorTokenFee": 1.18
+      "cursorTokenFee": 1.18,
+      "product": "cursor"
     },
     {
       "timestamp": "1750979173824",
@@ -655,7 +675,8 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
         "discountPercentOff": 10
       },
       "chargedCents": 37.33,
-      "cursorTokenFee": 1.18
+      "cursorTokenFee": 1.18,
+      "product": "cursor"
     },
     {
       "timestamp": "1750978339901",
@@ -667,7 +688,8 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
       "isTokenBasedCall": false,
       "isChargeable": false,
       "isHeadless": false,
-      "chargedCents": 8
+      "chargedCents": 8,
+      "product": "cursor"
     }
   ],
   "period": {
@@ -726,7 +748,8 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
         "totalCents": 20.18232
       },
       "chargedCents": 21.36232,
-      "cursorTokenFee": 1.18
+      "cursorTokenFee": 1.18,
+      "product": "cursor"
     }
   ],
   "period": {
@@ -768,6 +791,200 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
     "page": 1,
     "pageSize": 10
   }'
+```
+
+**Grok Bot spend example:**
+
+```bash
+curl -X POST https://api.cursor.com/teams/filtered-usage-events \
+  -u YOUR_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "startDate": 1785542400000,
+    "endDate": 1788220799999,
+    "product": "grok-bot",
+    "page": 1,
+    "pageSize": 100
+  }'
+```
+
+Each matching event has `product` set to `grok-bot`. Sum `chargedCents` across the events to calculate Grok Bot spend for the period.
+
+### Get Billing Items
+
+GET
+
+`/v2/teams/billing-items`
+
+Retrieve billing items for your team, newest first. Each item is one usage event, credit, or adjustment, with its product, usage type, usage amounts, and cost. Filter by product, usage type, model, and who the usage is billed to. Rate limited to 60 requests per minute per team. See [rate limits](https://cursor.com/docs/api.md#rate-limits).
+
+The path starts with `/v2/teams`, not `/teams`. Use a Team API key with the `read:*` or `admin:*` scope. A key without one of those scopes returns `401`.
+
+#### Billing items query parameters
+
+`startTime` string Required
+
+Start of the time range. An RFC 3339 date-time with a time and a UTC offset, such as `2026-10-01T00:00:00Z`. This bound is inclusive.
+
+`endTime` string Required
+
+End of the time range, in the same format. This bound is exclusive.
+
+The range from `startTime` to `endTime` can't exceed 31 days. Make multiple requests for longer periods. Date-only values such as `2026-10-01` and Unix timestamps return `400`.
+
+`pageSize` number
+
+Number of items per page, from `1` to `500`. Default: `100`.
+
+`cursor` string
+
+Cursor for the next page. Pass the `pagination.nextCursor` value from the previous response, and keep every other parameter the same as in that request, including `pageSize`. A cursor sent with different parameters, or with another team's key, returns `400`.
+
+`product` string
+
+Filter by product, such as `cursor`, `grok-bot`, or `grok-api`. Matching is exact and case-sensitive. A value that matches no item returns an empty `data` array instead of an error.
+
+`product` means something different on [`/teams/filtered-usage-events`](https://cursor.com/docs/account/teams/admin-api.md#get-usage-events-data). There, `product` is `grok-bot` or `cursor`, `cursor` covers all usage that isn't Grok Bot, and an unknown value returns `400`. Here, each value matches only items with that exact product. On both endpoints, usage from before 2026-07-19 has no stored product and returns `cursor`, including Grok Bot usage from that period.
+
+`usageType` string
+
+Filter by usage type. Accepted values: `included`, `on_demand`, `credits`, `free`.
+
+`chargeCategory` string
+
+Filter by charge category. Takes one value: `usage`, `credit`, or `adjustment`.
+
+`model` string
+
+Filter by model name, as returned in `displayExtras.model`. Matching is exact and case-sensitive. With a `model` filter, the response contains only items whose `product` is `cursor` or `grok-api`. Items of every other product are left out.
+
+`principalType` string
+
+Filter by the type of principal the item is billed to. Accepted values: `user`, `service_account`, `api_key`, `team`.
+
+`principalId` string
+
+Filter by principal ID. Use the `principal.id` of a returned item. For a team member, this is the `user_…` ID from [Get Team Members](https://cursor.com/docs/account/teams/admin-api.md#get-team-members). Emails and numeric user IDs don't match members. They return an empty `data` array, not an error. A service account ID (`sa_…`) that isn't on your team returns `403`.
+
+To pass several values, repeat the parameter: `product=cursor&product=grok-bot`. A comma-separated list returns `400`. A repeated parameter takes at most 100 values, and `chargeCategory` takes one. Values of the same parameter combine with `OR`. Different parameters combine with `AND`. `principalType` and `principalId` are separate filters, so their values aren't paired by position. Parameter names and values are case-sensitive, and an unknown parameter returns `400`.
+
+#### Billing items response fields
+
+Each object in `data` contains:
+
+- `billingItemId` string - ID of the billing item, a UUID
+- `eventTime` string - Time of the item in UTC, in ISO 8601 format with milliseconds, such as `2026-10-07T14:03:27.512Z`. `startTime` and `endTime` filter on this time.
+- `product` string | undefined - Product the item belongs to, such as `cursor` or `grok-bot`. Usage with no stored product returns `cursor`. Other items with no product omit the field.
+- `chargeCategory` string - `usage`, `credit`, or `adjustment`
+- `usageType` string - `included`, `on_demand`, `credits`, or `free`
+- `principal` object | undefined - Who the item is billed to. Omitted when no principal is known.
+  - `type` string - `user`, `service_account`, `api_key`, or `team`
+  - `id` string - ID of the principal. For a `user`, the `user_…` ID from [Get Team Members](https://cursor.com/docs/account/teams/admin-api.md#get-team-members).
+- `usage` object - Usage amounts by meter name. Amounts are whole numbers sent as strings. Meters include `prompt-text-tokens` (input tokens), `cached-prompt-text-tokens` (cache read tokens), `cache-write-text-tokens` (cache write tokens), `completion-text-tokens` (output tokens), and `requests`. Other meter names can appear, and the object can be empty.
+- `pricing` object - Cost of the item:
+  - `currency` string - Always `USD`
+  - `contracted` string - Cost in US dollars, as a decimal string with 10 decimal places, such as `"0.0421500000"`. Can be negative.
+- `displayExtras` object | undefined - Display details. Omitted when it has no fields.
+  - `model` string | undefined - Model name. Auto requests appear as `auto`, or as `auto-balance:` or `auto-intelligence:` followed by the model name. Omitted when the item has no model to show, which includes every `grok-bot` item.
+  - `userEmail` string | undefined - Email address of the team member, when the principal is a `user`
+  - `displayLabel` string | undefined - Name of the team member or service account
+  - `discountPercentOff` number | undefined - Discount percentage applied, rounded to a whole number. Omitted when there is none.
+
+`pagination` object
+
+- `hasMore` boolean - Whether more items follow this page
+- `nextCursor` string | undefined - Cursor for the next page. Present only when `hasMore` is `true`.
+
+Fields with no value are omitted. The response never contains `null`, and it has no total count. Request pages until `hasMore` is `false`.
+
+**Cost visibility**: For teams that aren't on an Enterprise plan, `pricing.contracted` is `"0.0000000000"` on items with `usageType` `included`. The same applies to `usage` items with `usageType` `credits`, except for some credit grants. The cost of those items isn't returned, so a sum of `pricing.contracted` leaves it out. Nothing in the response marks these values, and `usage` amounts stay unchanged.
+
+Items with `chargeCategory` `credit` or `adjustment`, and items billed to an `api_key` or `team` principal, start at `2026-09-01T00:00:00Z`. A time range that ends at or before that time returns `usage` items only, and none billed to an `api_key` or `team` principal.
+
+#### Billing items errors
+
+Error responses have a `code` and a `message`, such as `{"code": "error", "message": "Time range must not exceed 31 days"}`.
+
+| Status | When                                                                                                                                                                                                                                                                                                                                                                                        |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `400`  | Unknown parameter, missing or malformed `startTime` or `endTime`, a `startTime` that isn't before `endTime`, a range over 31 days, a `pageSize` outside `1` to `500`, a value outside the accepted values, a comma-separated list, more than 100 values for one parameter, a `principalId` that starts with `user_` but isn't a valid user ID, or a `cursor` that doesn't match the request |
+| `401`  | Invalid API key, or the key is missing the `read:*` or `admin:*` scope                                                                                                                                                                                                                                                                                                                      |
+| `403`  | A `principalId` service account ID (`sa_…`) that isn't on your team                                                                                                                                                                                                                                                                                                                         |
+| `429`  | Rate limit exceeded. The response includes a `Retry-After: 60` header                                                                                                                                                                                                                                                                                                                       |
+| `500`  | Server error, including a query that runs longer than 10 seconds                                                                                                                                                                                                                                                                                                                            |
+
+```bash
+curl -X GET "https://api.cursor.com/v2/teams/billing-items?startTime=2026-10-01T00:00:00Z&endTime=2026-10-08T00:00:00Z&product=grok-bot&pageSize=2" \
+  -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "data": [
+    {
+      "billingItemId": "3f6c1b9e-5d2a-5c41-9b7e-2a4d8c0e1f35",
+      "eventTime": "2026-10-07T14:03:27.512Z",
+      "product": "grok-bot",
+      "chargeCategory": "usage",
+      "usageType": "on_demand",
+      "principal": {
+        "type": "user",
+        "id": "user_qezMxq1wyBCNEP5GEwoQYfLx9F"
+      },
+      "usage": {
+        "prompt-text-tokens": "1200",
+        "cached-prompt-text-tokens": "7",
+        "completion-text-tokens": "30"
+      },
+      "pricing": {
+        "currency": "USD",
+        "contracted": "0.0421500000"
+      },
+      "displayExtras": {
+        "userEmail": "jordan@example.com",
+        "displayLabel": "Jordan"
+      }
+    },
+    {
+      "billingItemId": "7b9d2c4e-8a1f-4e6b-9c3d-5f0a1b2c3d4e",
+      "eventTime": "2026-10-06T09:15:00.000Z",
+      "product": "grok-bot",
+      "chargeCategory": "usage",
+      "usageType": "included",
+      "principal": {
+        "type": "user",
+        "id": "user_xhkN6WaQE6wsbhQsjLi9RpAJnS"
+      },
+      "usage": {
+        "prompt-text-tokens": "900",
+        "cached-prompt-text-tokens": "0",
+        "cache-write-text-tokens": "0",
+        "completion-text-tokens": "600"
+      },
+      "pricing": {
+        "currency": "USD",
+        "contracted": "0.0000000000"
+      },
+      "displayExtras": {
+        "userEmail": "riley@example.com",
+        "displayLabel": "Riley"
+      }
+    }
+  ],
+  "pagination": {
+    "hasMore": true,
+    "nextCursor": "bmV4dC1wYWdlLWN1cnNvci1leGFtcGxl"
+  }
+}
+```
+
+**Next page:**
+
+```bash
+curl -X GET "https://api.cursor.com/v2/teams/billing-items?startTime=2026-10-01T00:00:00Z&endTime=2026-10-08T00:00:00Z&product=grok-bot&pageSize=2&cursor=bmV4dC1wYWdlLWN1cnNvci1leGFtcGxl" \
+  -u YOUR_API_KEY:
 ```
 
 ### Set User Spend Limit
@@ -2426,7 +2643,11 @@ Team ceiling for Bots on a member's machine: `never`, `ask`, `always`, or `null`
 
 `localEgressAllowed` boolean
 
-Whether members can route Grok Bot's web traffic through their own computer (**Allow Local Egress Routing**; Enterprise only).
+Whether the team default allows routing Grok Bot's web traffic through a member's computer: `false` when the team's local egress mode is `always_off`, `true` otherwise.
+
+`localEgressMode` string
+
+Team default for routing Grok Bot's web traffic through a member's computer: `always_on`, `member_decides`, or `always_off`. Only Enterprise teams can change it. Grok Bot desktop versions without `always_on` support treat it as `member_decides`, so members on those versions can still turn routing off. Under `always_off`, the server does not send a member's computer the egress policy for routing. This applies also when the desktop setting is on. The desktop then stops routing. Exception: when [group settings](https://docs.x.ai/grok-bot/teams-and-enterprises#group-settings) allow local egress routing for a group, the server uses `member_decides` for the members of that group.
 
 ```bash
 curl -X GET https://api.cursor.com/grok-bot/capabilities \
@@ -2442,7 +2663,8 @@ curl -X GET https://api.cursor.com/grok-bot/capabilities \
   "templateSharing": "team_only",
   "actionRecording": false,
   "localExecution": "ask",
-  "localEgressAllowed": true
+  "localEgressAllowed": true,
+  "localEgressMode": "member_decides"
 }
 ```
 
@@ -2476,7 +2698,13 @@ Whether Action Recording is enabled.
 
 `localEgressAllowed` boolean
 
-Whether members can route Grok Bot's web traffic through their own computer (**Allow Local Egress Routing**; Enterprise only). Returns **403** when local egress routing controls are not enabled for the team.
+Legacy boolean. `true` sets `member_decides`. `false` sets `always_off`. Returns **400** when sent with `localEgressMode`, and **403** when local egress routing controls are not enabled for the team.
+
+`localEgressMode` string
+
+`always_on`, `member_decides`, or `always_off`. Returns **400** when sent with `localEgressAllowed`, and **403** when local egress routing controls are not enabled for the team.
+
+Writing back the `localEgressAllowed: true` that GET returns for an `always_on` team changes it to `member_decides`. Send `localEgressMode` to keep `always_on`.
 
 ```bash
 curl -X PATCH https://api.cursor.com/grok-bot/capabilities \
@@ -2485,7 +2713,7 @@ curl -X PATCH https://api.cursor.com/grok-bot/capabilities \
   -d '{
     "cloudAgents": false,
     "localExecution": "never",
-    "localEgressAllowed": false
+    "localEgressMode": "always_on"
   }'
 ```
 
@@ -2498,7 +2726,8 @@ curl -X PATCH https://api.cursor.com/grok-bot/capabilities \
   "templateSharing": "team_only",
   "actionRecording": false,
   "localExecution": "never",
-  "localEgressAllowed": false
+  "localEgressAllowed": true,
+  "localEgressMode": "always_on"
 }
 ```
 
@@ -2696,6 +2925,10 @@ Return the team's Grok Bot network policy.
 
 Allowed destinations: domains, wildcard domains, IP addresses, CIDR ranges, or `host-or-CIDR:port` such as `54.85.223.0/24:3306`.
 
+`blockedSites` array
+
+Sites the team blocks, as hostnames such as `example.com`. Each one covers the site and every subdomain. Omitted when the team blocks no sites.
+
 `locked` boolean
 
 When `true`, group policies cannot override the team policy.
@@ -2736,13 +2969,28 @@ One of:
 
 `allowlist` array Required
 
-Up to 500 destinations, 1 to 253 characters each. Domains, wildcard domains, IP addresses, CIDR ranges, or `host-or-CIDR:port` such as `54.85.223.0/24:3306`.
+Up to 2000 destinations, 1 to 253 characters each. Domains, wildcard domains, IP addresses, CIDR ranges, or `host-or-CIDR:port` such as `54.85.223.0/24:3306`. Send `[]` when the team blocks sites.
+
+`blockedSites` array
+
+Sites to block for the whole team. This is the **Allow All Sites Except These** mode in the dashboard. Leave the field out to keep the team's current list. Send `[]` to clear it.
+
+- Hostnames only, such as `example.com`. Don't send schemes, ports, paths, IP addresses, inner wildcards, or single-label names.
+- `*.example.com` is the same as `example.com`. Both cover the site and every subdomain, and both are stored as `example.com`. Duplicates count once, and non-ASCII names are stored as punycode.
+- At most 50 sites across the team and all its groups combined, including sites a group blocks in the dashboard.
+- You can't block a site Grok Bot needs to run, or one it reaches through Cursor's proxy.
+- Set `egressMode` to `allow_all` and `allowlist` to `[]`. A team can allow destinations or block sites, not both.
 
 `locked` boolean Required
 
 When `true`, group policies cannot override the team policy.
 
-Partial bodies, unknown modes, and invalid allowlist entries return **400**.
+A body missing `egressMode`, `allowlist`, or `locked` returns **400**. Unknown modes, invalid allowlist entries, and blocked sites that break the rules above also return **400**. So does a request that sets allowed destinations, `default_with_network_settings`, or `network_settings_only` while the team blocks sites, whether those sites are in the request or already stored. To switch from blocked sites to an allowlist, send `"blockedSites": []` in the same request.
+
+- **Availability**: Blocked sites are Enterprise only.
+- **Best effort**: Blocking is best effort, not a security boundary. Requests to a bare IP address and WebSearch results still go through.
+- **WebFetch**: Blocking any site turns off JavaScript rendering in WebFetch for the whole team.
+- **When it applies**: A change saved through the API takes effect the same way, and with the same timing, as a save in the dashboard. See [Network policy](https://docs.x.ai/grok-bot/security#network-policy) and [Blocked sites](https://docs.x.ai/grok-bot/security#blocked-sites) for when changes apply and what each mode covers.
 
 ```bash
 curl -X PUT https://api.cursor.com/grok-bot/network \
@@ -2762,6 +3010,31 @@ curl -X PUT https://api.cursor.com/grok-bot/network \
   "egressMode": "network_settings_only",
   "allowlist": ["linkedin.com", "*.crunchbase.com", "10.0.0.0/8", "54.85.223.0/24:3306"],
   "locked": true
+}
+```
+
+**Block sites instead:**
+
+```bash
+curl -X PUT https://api.cursor.com/grok-bot/network \
+  -u YOUR_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "egressMode": "allow_all",
+    "allowlist": [],
+    "blockedSites": ["*.example.com", "example.org"],
+    "locked": false
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "egressMode": "allow_all",
+  "allowlist": [],
+  "blockedSites": ["example.com", "example.org"],
+  "locked": false
 }
 ```
 

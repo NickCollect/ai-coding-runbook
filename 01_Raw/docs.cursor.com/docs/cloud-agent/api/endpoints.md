@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/api/endpoints
-fetched_at: 2026-11-02T07:00:22.167708+00:00
+fetched_at: 2026-11-16T07:30:44.487779+00:00
 fetch_method: mintlify_md
 ---
 
@@ -609,7 +609,7 @@ Wall-clock duration of the run in milliseconds, computed once the run reaches `F
 
 `result` string (terminal runs)
 
-Final assistant reply text for a terminated run.
+Final assistant reply text for a terminated run. For a [Project](https://cursor.com/docs/cloud-agent/api/endpoints.md#projects) coordinator, it's the last message the coordinator sent in the run.
 
 `git` object (when a branch has been pushed)
 
@@ -667,6 +667,8 @@ Stream Server-Sent Events (SSE) for one run. The stream is scoped to the request
 - `result` — terminal run status. Payload: `{ runId, status, text?, durationMs?, git? }`. `text` is the final assistant reply, `durationMs` is the wall-clock run duration in milliseconds, and `git` mirrors `Run.git` (the agent's current pushed branches, not just this run's).
 - `error` — stream error. Payload: `{ code, message }`.
 - `done` — stream complete. Payload: `{}`.
+
+A [Project](https://cursor.com/docs/cloud-agent/api/endpoints.md#projects) coordinator replies with messages instead of plain assistant text. Each message it sends arrives as one `assistant` event with the whole message, and its working notes and `send_message` tool calls are left out. The `result` event's `text` is the last message it sent in the run.
 
 #### Tool call payloads
 
@@ -738,6 +740,93 @@ data: {"runId":"run-00000000-0000-0000-0000-000000000001","status":"FINISHED","t
 id: 1713033010000-0
 event: done
 data: {}
+```
+
+### Stream An Agent
+
+GET
+
+`/v1/agents/{id}/stream`
+
+Stream Server-Sent Events (SSE) for an agent across all of its runs. Unlike [Stream A Run](https://cursor.com/docs/cloud-agent/api/endpoints.md#stream-a-run), the stream stays open when a run ends. It also carries runs you didn't start, such as the turns a [Project](https://cursor.com/docs/cloud-agent/api/endpoints.md#projects) coordinator takes when its agents report back. It closes when you disconnect or the agent is archived.
+
+Without `Last-Event-ID`, the stream starts where the agent's newest run started, so connecting right after [Send A Follow-Up Or Steer](https://cursor.com/docs/cloud-agent/api/endpoints.md#send-a-follow-up-or-steer) shows that whole run. An agent with no run inside the retention window streams from the moment you connect.
+
+### Beta
+
+The agent stream is in beta and may change before general availability.
+
+#### Path Parameters
+
+`id` string
+
+Unique identifier for the agent.
+
+#### Query Parameters
+
+`lastEventId` string (optional)
+
+The same value as the `Last-Event-ID` header, for clients that can't set headers. The header wins when you send both.
+
+#### Event types
+
+The agent stream sends the same events as [Stream A Run](https://cursor.com/docs/cloud-agent/api/endpoints.md#stream-a-run), with two differences:
+
+- `status` — status of the agent's current run. Payload: `{ agentId, status }`. A status change, including `FINISHED` at the end of a run, doesn't close the stream.
+- There is no `result` event. Read a run's final state with [Get A Run](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-a-run).
+
+As on [Stream A Run](https://cursor.com/docs/cloud-agent/api/endpoints.md#stream-a-run), each message a Project coordinator sends arrives as one `assistant` event with the whole message, and its working notes and `send_message` tool calls are left out.
+
+#### Resuming a stream
+
+Most events include an `id` line, an opaque string you should not parse. The leading `status` event has no `id`. To resume after a disconnect, reconnect with `Last-Event-ID` set to the most recent received event id. An id this agent's stream didn't send returns `400 invalid_last_event_id`.
+
+Cursor closes open agent streams when it deploys, with no final event. Reconnect with `Last-Event-ID`, and the stream continues after the last event you received.
+
+#### Ending a stream
+
+- When the agent is archived, the stream sends `status` with `CANCELLED`, then `done`, and closes. Opening a stream for an archived agent returns `409 agent_archived`.
+- When the stream fails, it sends `error` and then `done`.
+
+#### Retention
+
+Stream responses include the `X-Cursor-Stream-Retention-Seconds` header. A `Last-Event-ID` older than the retention window returns `410 stream_expired`. Reconnect without `Last-Event-ID` to start from the agent's newest run.
+
+#### Limits
+
+By default, one caller can keep 50 agent streams open at once. Opening another returns `429 too_many_open_streams`. Opening streams allows 60 requests a minute and 600 an hour.
+
+```bash
+curl --request GET \
+  --url https://api.cursor.com/v1/agents/bc-00000000-0000-0000-0000-000000000001/stream \
+  -u YOUR_API_KEY: \
+  --header 'Accept: text/event-stream'
+```
+
+**Example stream:**
+
+```text
+event: status
+data: {"agentId":"bc-00000000-0000-0000-0000-000000000001","status":"RUNNING"}
+
+id: 1713033000000-0
+event: assistant
+data: {"text":"I'll update the README now."}
+
+id: 1713033010000-0
+event: status
+data: {"agentId":"bc-00000000-0000-0000-0000-000000000001","status":"FINISHED"}
+
+event: heartbeat
+data: {}
+
+id: 1713033300000-0
+event: status
+data: {"agentId":"bc-00000000-0000-0000-0000-000000000001","status":"RUNNING"}
+
+id: 1713033302000-0
+event: assistant
+data: {"text":"Also adding a section on running the tests."}
 ```
 
 ### Cancel A Run
@@ -1019,6 +1108,452 @@ Unique identifier for the agent.
 ```bash
 curl --request DELETE \
   --url https://api.cursor.com/v1/agents/bc-00000000-0000-0000-0000-000000000001 \
+  -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "id": "bc-00000000-0000-0000-0000-000000000001"
+}
+```
+
+## Projects
+
+[Projects](https://cursor.com/docs/agent/projects.md) take on larger bodies of work: a coordinator agent plans the work and delegates it to other agents. Use these endpoints to create Projects, read the Projects you own or have joined, list the agents your coordinator started, and update or archive the Projects you own.
+
+### Beta
+
+The Projects endpoints are in beta and may change before general availability.
+
+- **Use a user API key.** Projects belong to people. Creating a Project with a service account API key returns `403 user_required`, and [List Projects](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-projects) returns no Projects for one.
+- **Only the owner changes a Project.** Teammates who joined a [multiplayer Project](https://cursor.com/docs/agent/projects.md#multiplayer-projects) can read it and list their own coordinator's agents. Updating, archiving, and unarchiving a Project you don't own returns `403 owner_required`.
+- **A team admin can turn Projects off.** Creating a Project on that team then returns `403 projects_disabled`, and the team's Projects return `404 project_not_found`.
+
+#### Working With A Project
+
+A Project's coordinator is an agent. Its ID is the Project's `coordinatorAgentId`, and you talk to it with the agent endpoints:
+
+- **Read its replies** with [Stream An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#stream-an-agent) on `coordinatorAgentId`. Each message the coordinator sends arrives as one `assistant` event. The stream stays open across the coordinator's runs, including the ones it starts when its agents report back. Connect right after [Create A Project](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-a-project) to see the first run.
+- **Send it a message** with [Send A Follow-Up Or Steer](https://cursor.com/docs/cloud-agent/api/endpoints.md#send-a-follow-up-or-steer) on `coordinatorAgentId`. While the coordinator is working, a follow-up returns `409 agent_busy`. Send `"delivery": "steer"` to hand the message to the running turn, or to queue it as the next follow-up.
+- **Follow the work it delegated** with [List Project Agents](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-project-agents), and stream any of those agents the same way.
+
+The run endpoints carry the same replies for one run: [Stream A Run](https://cursor.com/docs/cloud-agent/api/endpoints.md#stream-a-run) sends each message as an `assistant` event, and a run's `result` from [Get A Run](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-a-run) is the last message the coordinator sent in it. The agent stream is the simpler choice because one connection covers every run. In a Project you joined, `coordinatorAgentId` is your own coordinator, and the same endpoints apply.
+
+#### Errors
+
+Errors from these endpoints use the same body as the rest of this API, `{ "error": { "code": "...", "message": "..." } }`. Branch on `code`; the `message` wording can change. Any of these endpoints can return:
+
+- `403 feature_unavailable` - Your account doesn't have API access.
+- `403 plan_required` - Your account is on the free plan.
+- `429 rate_limit_exceeded` - Too many requests. Creating a Project allows 30 a minute and 300 an hour. Getting a Project allows 300 a minute and 6,000 an hour. Listing Projects or a Project's agents allows 200 a minute and 4,000 an hour. Updating, archiving, and unarchiving allow 100 a minute and 1,000 an hour. The `Retry-After` header says when to try again.
+- `500 internal_error` - Something went wrong on Cursor's side.
+
+Each endpoint below lists its own errors.
+
+### Create A Project
+
+POST
+
+`/v1/projects`
+
+Create a Project and immediately enqueue its initial run. The response returns both the durable `project` and the initial `run`, which starts the Project's coordinator agent. With a `prompt`, that run works on your prompt. To message the coordinator and read its replies, see [Working With A Project](https://cursor.com/docs/cloud-agent/api/endpoints.md#working-with-a-project).
+
+#### Request Body
+
+`prompt` object (optional)
+
+The task prompt for the coordinator, including optional images. When omitted, the coordinator opens the Project with a greeting and waits for your first message.
+
+`prompt.text` string (required if `prompt` provided)
+
+The instruction text for the coordinator.
+
+`prompt.images` array (optional)
+
+Image inputs for the prompt. Each entry must include either `data` (base64-encoded bytes with a required `mimeType`) or `url` (an http or https URL that Cursor fetches). Maximum 5 images, 15 MB each. Supported MIME types: `image/png`, `image/jpeg`, `image/gif`, `image/webp`.
+
+`model` object (optional)
+
+Model selection for the coordinator. Omit this field to use the configured default. When omitted, Cursor resolves your user default model, then your team default model, then a system default.
+
+`model.id` string (required if `model` provided)
+
+An explicit model ID returned by `GET /v1/models` (for example, `claude-4-sonnet-thinking`).
+
+`model.params` array (optional)
+
+Per-model parameters to apply to the run, such as reasoning effort or context window size. Each item has an `id` and `value`. Use only parameters supported by the selected model. Call `GET /v1/models` to discover the valid `id`/`params` combinations.
+
+`name` string (optional)
+
+Display name for the Project. Maximum 100 characters.
+
+`env` object (optional)
+
+Execution environment target, with the same fields as in [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent). Use a named `cloud` environment, or route to a `pool` or `machine` you host. Mutually exclusive with explicit `repos` when selecting a named Cursor-hosted environment.
+
+`repos` array (optional)
+
+Repository configuration, with the same fields and limits as in [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent). Mutually exclusive with a named cloud environment. Omit both `repos` and `env` to start a no-repo Project.
+
+`appearance` object (optional)
+
+The Project's icon and color. Send both fields, or leave `appearance` out.
+
+- `icon` string - An icon name of 1 to 64 letters, numbers, or hyphens, such as `rocket`.
+- `color` string - One of `default`, `green`, `cyan`, `blue`, `purple`, `magenta`, `orange`, `yellow`, `red`, or `brand`.
+
+`projectId` string (optional)
+
+Client-supplied Project identifier in the form `bc-<uuid>`. Useful for idempotent create flows; re-POSTing the same `projectId` returns `409 project_id_conflict` rather than creating a duplicate. A Project's ID is also its coordinator agent's ID, so an ID that any agent already uses returns the same error.
+
+Besides the shared errors, this endpoint returns `400 validation_error` for an invalid body, including any field not listed above; `400 missing_body` for a request with no body; `403 user_required` for a service account API key; `403 projects_disabled` when your team turned Projects off; and `409 project_id_conflict` for a `projectId` already in use. It can also return the errors [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent) returns for `prompt`, `model`, `env`, and `repos`.
+
+```bash
+curl --request POST \
+  --url https://api.cursor.com/v1/projects \
+  -u YOUR_API_KEY: \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "prompt": {
+      "text": "Move checkout from the legacy payments client to the new one"
+    },
+    "name": "Payments migration",
+    "model": {
+      "id": "composer-2"
+    },
+    "repos": [
+      {
+        "url": "https://github.com/your-org/your-repo",
+        "startingRef": "main"
+      }
+    ],
+    "appearance": {
+      "icon": "rocket",
+      "color": "blue"
+    }
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "project": {
+    "id": "bc-00000000-0000-0000-0000-000000000001",
+    "name": "Payments migration",
+    "status": "ACTIVE",
+    "appearance": {
+      "icon": "rocket",
+      "color": "blue"
+    },
+    "coordinatorAgentId": "bc-00000000-0000-0000-0000-000000000001",
+    "createdAt": "2026-04-13T18:30:00.000Z",
+    "updatedAt": "2026-04-13T18:30:00.000Z",
+    "url": "https://cursor.com/agents/bc-00000000-0000-0000-0000-000000000001"
+  },
+  "run": {
+    "id": "run-00000000-0000-0000-0000-000000000001",
+    "agentId": "bc-00000000-0000-0000-0000-000000000001",
+    "status": "CREATING",
+    "createdAt": "2026-04-13T18:30:00.000Z",
+    "updatedAt": "2026-04-13T18:30:00.000Z"
+  }
+}
+```
+
+### List Projects
+
+GET
+
+`/v1/projects`
+
+List the Projects you own or have joined, newest first.
+
+#### Query Parameters
+
+`limit` number (optional)
+
+Number of Projects to return. Default: 20, Max: 100.
+
+`cursor` string (optional)
+
+Pagination cursor from `nextCursor` on the previous response.
+
+`includeArchived` boolean (optional, default: true)
+
+Whether to include archived Projects in the response.
+
+Projects are ordered by when your own coordinator in each one started: when you created the Project, or when you joined it. A page can hold fewer than `limit` Projects, or none, while `nextCursor` is still set. Keep paging until `nextCursor` is absent.
+
+`nextCursor` is **omitted** from the response when there are no more pages; it is not returned as `null`. Treat its absence as "no more results".
+
+Besides the shared errors, this endpoint returns `400 validation_error` for a `limit` outside 1 to 100, any other query parameter, or a `cursor` it didn't return.
+
+```bash
+curl --request GET \
+  --url 'https://api.cursor.com/v1/projects?limit=20' \
+  -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "items": [
+    {
+      "id": "bc-00000000-0000-0000-0000-000000000001",
+      "name": "Payments migration",
+      "status": "ACTIVE",
+      "appearance": {
+        "icon": "rocket",
+        "color": "blue"
+      },
+      "coordinatorAgentId": "bc-00000000-0000-0000-0000-000000000001",
+      "createdAt": "2026-04-13T18:30:00.000Z",
+      "updatedAt": "2026-04-13T18:45:00.000Z",
+      "url": "https://cursor.com/agents/bc-00000000-0000-0000-0000-000000000001"
+    }
+  ],
+  "nextCursor": "g3Jt9kQpZx2LwVh7Rb0sNe4u"
+}
+```
+
+### Get A Project
+
+GET
+
+`/v1/projects/{id}`
+
+Retrieve durable metadata for a Project. To follow its work, list your coordinator's agents with [List Project Agents](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-project-agents).
+
+#### Path Parameters
+
+`id` string
+
+Unique identifier for the Project (for example, `bc-00000000-0000-0000-0000-000000000001`). The ID of your own coordinator in a Project you joined also works.
+
+#### Response Fields
+
+`id` string
+
+Unique Project identifier. It's also the ID of the owner's coordinator agent.
+
+`name` string (optional)
+
+Display name. Omitted when no name has been set.
+
+`status` string
+
+Project lifecycle status:
+
+- `ACTIVE` - The Project is in use.
+- `ARCHIVED` - The Project was archived, or its owner's coordinator was stopped.
+
+`appearance` object (optional)
+
+The Project's `icon` and `color`. Omitted when the Project has none.
+
+`coordinatorAgentId` string (optional)
+
+Your own coordinator agent in the Project: the Project's `id` when you own it, or the coordinator Cursor started when you joined. Omitted when you joined the Project and your coordinator there was archived or stopped.
+
+`url` string
+
+URL to view the Project in Cursor Web.
+
+`createdAt`, `updatedAt` string
+
+When the Project was created and last updated, in ISO 8601 format.
+
+Besides the shared errors, this endpoint returns `400 validation_error` when `id` isn't in the form `bc-<uuid>` and `404 project_not_found` when you can't see the Project.
+
+```bash
+curl --request GET \
+  --url https://api.cursor.com/v1/projects/bc-00000000-0000-0000-0000-000000000001 \
+  -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "id": "bc-00000000-0000-0000-0000-000000000001",
+  "name": "Payments migration",
+  "status": "ACTIVE",
+  "appearance": {
+    "icon": "rocket",
+    "color": "blue"
+  },
+  "coordinatorAgentId": "bc-00000000-0000-0000-0000-000000000001",
+  "createdAt": "2026-04-13T18:30:00.000Z",
+  "updatedAt": "2026-04-13T18:45:00.000Z",
+  "url": "https://cursor.com/agents/bc-00000000-0000-0000-0000-000000000001"
+}
+```
+
+### List Project Agents
+
+GET
+
+`/v1/projects/{id}/agents`
+
+List the agents your coordinator in a Project started, newest first. Each item has the fields [Get An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-an-agent) returns.
+
+#### Path Parameters
+
+`id` string
+
+Unique identifier for the Project.
+
+#### Query Parameters
+
+`limit` number (optional)
+
+Number of agents to return. Default: 20, Max: 100.
+
+`cursor` string (optional)
+
+Pagination cursor from `nextCursor` on the previous response.
+
+The list covers your own coordinator's agents, up to its 1,000 newest, and leaves out agents you can't read. It's empty when you joined the Project and your coordinator there was archived or stopped.
+
+`nextCursor` is **omitted** from the response when there are no more pages; it is not returned as `null`. Treat its absence as "no more results".
+
+Besides the shared errors, this endpoint returns `400 validation_error` when `id` isn't in the form `bc-<uuid>`, for a `limit` outside 1 to 100, any other query parameter, or a `cursor` it didn't return, and `404 project_not_found` when you can't see the Project.
+
+```bash
+curl --request GET \
+  --url 'https://api.cursor.com/v1/projects/bc-00000000-0000-0000-0000-000000000001/agents?limit=20' \
+  -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "items": [
+    {
+      "id": "bc-00000000-0000-0000-0000-000000000002",
+      "name": "Move refunds to the new payments client",
+      "status": "ACTIVE",
+      "env": {
+        "type": "cloud"
+      },
+      "repos": [
+        {
+          "url": "https://github.com/your-org/your-repo",
+          "startingRef": "main"
+        }
+      ],
+      "workOnCurrentBranch": false,
+      "autoCreatePR": true,
+      "url": "https://cursor.com/agents/bc-00000000-0000-0000-0000-000000000002",
+      "createdAt": "2026-04-13T18:40:00.000Z",
+      "updatedAt": "2026-04-13T18:45:00.000Z",
+      "latestRunId": "run-00000000-0000-0000-0000-000000000002"
+    }
+  ],
+  "nextCursor": "bc-00000000-0000-0000-0000-000000000002"
+}
+```
+
+### Update A Project
+
+PATCH
+
+`/v1/projects/{id}`
+
+Rename a Project, change its appearance, or both. Only the Project's owner can update it. The response is `204` with no body.
+
+#### Path Parameters
+
+`id` string
+
+Unique identifier for the Project.
+
+#### Request Body
+
+`name` string (optional)
+
+New display name. Maximum 100 characters.
+
+`appearance` object (optional)
+
+New `icon`, `color`, or both, with the same values as in [Create A Project](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-a-project). Send one field to change it and keep the other. A Project without an appearance needs both.
+
+Send at least one of `name` or `appearance`. Besides the shared errors, this endpoint returns `400 validation_error` for an invalid body, including an empty one or any field not listed above; `400 missing_body` for a request with no body; `403 owner_required` when you don't own the Project; `404 project_not_found` when you can't see it; and `409 project_archived` when it's archived.
+
+```bash
+curl --request PATCH \
+  --url https://api.cursor.com/v1/projects/bc-00000000-0000-0000-0000-000000000001 \
+  -u YOUR_API_KEY: \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "name": "Payments migration, phase 2",
+    "appearance": {
+      "color": "green"
+    }
+  }'
+```
+
+**Response:** `204 No Content`
+
+### Archive A Project
+
+POST
+
+`/v1/projects/{id}/archive`
+
+Archive a Project. Archived Projects remain readable but cannot be updated until unarchived. Use this for reversible "soft delete" flows. Only the Project's owner can archive it.
+
+Archive is idempotent; re-archiving an already-archived Project returns `200` with no change. You don't need to check current state before calling.
+
+#### Path Parameters
+
+`id` string
+
+Unique identifier for the Project.
+
+Besides the shared errors, this endpoint returns `400 validation_error` when `id` isn't in the form `bc-<uuid>`, `403 owner_required` when you don't own the Project, and `404 project_not_found` when you can't see it.
+
+```bash
+curl --request POST \
+  --url https://api.cursor.com/v1/projects/bc-00000000-0000-0000-0000-000000000001/archive \
+  -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "id": "bc-00000000-0000-0000-0000-000000000001"
+}
+```
+
+### Unarchive A Project
+
+POST
+
+`/v1/projects/{id}/unarchive`
+
+Unarchive a Project so it can be updated again. Only the Project's owner can unarchive it.
+
+Unarchive is idempotent; calling it on an already-active Project returns `200` with no change.
+
+#### Path Parameters
+
+`id` string
+
+Unique identifier for the Project.
+
+Besides the shared errors, this endpoint returns `400 validation_error` when `id` isn't in the form `bc-<uuid>`, `403 owner_required` when you don't own the Project, and `404 project_not_found` when you can't see it.
+
+```bash
+curl --request POST \
+  --url https://api.cursor.com/v1/projects/bc-00000000-0000-0000-0000-000000000001/unarchive \
   -u YOUR_API_KEY:
 ```
 
@@ -2591,6 +3126,241 @@ curl --request DELETE \
   "name": "NPM_TOKEN"
 }
 ```
+
+## Automations
+
+[Automations](https://cursor.com/docs/cloud-agent/automations.md) run Cloud Agents on a schedule or when something happens in a connected tool. These endpoints read the automations your API key can see and change an automation's model. Create, edit, and delete automations in the [Automations dashboard](https://cursor.com/automations).
+
+- **Use a user API key or a team API key with an automations permission.** A team API key, one that starts with `grok_`, needs **View automations** (`team.automations.read`) to list and get automations, and **Manage automations** (`team.automations.manage`) to change them. Neither includes the other, and **Run Cloud Agents** (`cloud-agents:*`) doesn't reach these endpoints. A team key missing the permission an endpoint needs gets `403 permission_required`. Other team service account API keys, and API keys created for an automation's webhook, get `403 key_not_supported`.
+- **A team API key works only inside its own team.** It acts as the team's service account. It sees the team's shared automations (`TEAM`, `TEAM_VISIBLE`, `TEAM_EDITABLE`, and `TEAM_EDITABLE_USER`) and never a member's private (`USER`) automations, which return `404 automation_not_found`. It can change only `TEAM` and `TEAM_EDITABLE` automations, which run as the team's service account. `TEAM_VISIBLE` and `TEAM_EDITABLE_USER` automations run as the member who created them, so changing one returns `403 role_forbidden`.
+- **You see what the dashboard shows you.** You see your own automations and your team's shared automations. A team admin also sees teammates' private automations, but only with the admin's own API key, not a user-scoped token. With that key, an admin can [change the model](https://cursor.com/docs/cloud-agent/api/endpoints.md#change-an-automations-model) on teammates' automations, but nothing else. A user-scoped token sees only the team it was created for. An automation you can't see returns `404 automation_not_found`.
+- **Cloud automations only.** Built-in automations, such as Security Reviewer, are listed with their `managedType` and can't be changed through the API. Project routines aren't listed.
+
+#### The Automation Object
+
+`id` string
+
+Automation ID, a UUID.
+
+`name` string
+
+Display name.
+
+`description` string
+
+Description, or an empty string.
+
+`enabled` boolean
+
+Whether the automation's triggers start runs.
+
+`scope` string
+
+Who can see and edit the automation: `USER` for a private automation, or one of the team sharing levels `TEAM`, `TEAM_VISIBLE`, `TEAM_EDITABLE`, and `TEAM_EDITABLE_USER`.
+
+`ownerUserId` number or null
+
+The user who owns the automation, or `null` when no user owns it.
+
+`teamId` number or null
+
+The team the automation belongs to, or `null` for a personal automation.
+
+`managedType` string
+
+`MANUAL` for an automation someone created. Built-in automations have their own value: `SECURITY_REVIEWER`, `VULNERABILITY_SCANNER`, `PR_APPROVAL`, or `PROACTIVITY`.
+
+`authoringMode` string
+
+Where the automation is edited, as in a config file's `managed-by`: `ANY` for the dashboard or a deploy, `UI` for the dashboard, or `DEPLOY` when a config-as-code deploy owns it.
+
+`hidden` boolean
+
+Whether the dashboard hides the automation from its list.
+
+`modelSelection` object or null
+
+The model the automation runs with, or `null` when it picks one at run time. Automations always run in Max Mode, so it has no Max Mode setting:
+
+- `modelId` string - A model `id` from [List Models](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-models).
+- `parameters` array - The model's parameter values, each an `id` and a `value`.
+
+`workflow` object
+
+What the automation does: its `triggers`, `actions`, `prompts`, `gitConfig`, `agentOptions`, `memoryEnabled`, and `disabledDefaultTools`, plus `managedEffortLevel` on built-in automations, in the same JSON form that automation config files use. A field with no value is left out. Fields the server manages aren't included, and the model appears only in `modelSelection`.
+
+`url` string
+
+The automation's page in the dashboard.
+
+`createdAt`, `updatedAt` string
+
+When the automation was created and last changed, in ISO 8601 format.
+
+#### Errors
+
+Errors from these endpoints use the same body as the rest of this API, `{ "error": { "code": "...", "message": "..." } }`. Branch on `code`; the `message` wording can change. Any of the three endpoints can return:
+
+- `403 feature_unavailable` - Your account doesn't have API access.
+- `403 plan_required` - Your account is on the free plan.
+- `403 permission_required` - A team API key without the permission the endpoint needs: View automations for list and get, Manage automations for changing the model.
+- `403 key_not_supported` - A team service account API key that doesn't start with `grok_`, or an API key created for an automation's webhook.
+- `429 rate_limit_exceeded` - Too many requests. List and get allow 60 a minute and 1,200 an hour; changing a model allows 20 a minute and 200 an hour. The `Retry-After` header says when to try again.
+- `500 internal_error` - Something went wrong on Cursor's side.
+
+Each endpoint below lists its own errors.
+
+### List Automations
+
+GET
+
+`/v1/automations`
+
+List the automations your API key can see, newest first: your personal automations, or one team's.
+
+#### Query Parameters
+
+`scope` string
+
+`personal` for your personal automations, or `team` for one team's automations.
+
+`teamId` number (required with `scope=team` for a user API key)
+
+The team to list. You must be a member, or the request returns `403 team_membership_required`. Sending `teamId` with `scope=personal` returns `400 validation_error`. A team API key lists its own team: it can leave `teamId` out, and any other team returns `403 team_membership_required`. It can't list personal automations; `scope=personal` returns `403 user_required`.
+
+`limit` number (optional)
+
+Number of automations to return. Default: 20, Max: 100.
+
+`cursor` string (optional)
+
+Pagination cursor from `nextCursor` on the previous response. Send the same `scope` and `teamId` with each `cursor`.
+
+#### Response Fields
+
+`items` array
+
+[Automation objects](https://cursor.com/docs/cloud-agent/api/endpoints.md#the-automation-object).
+
+`nextCursor` string (optional)
+
+Pass as `cursor` to get the next page. Omitted on the last page.
+
+Besides the shared errors, this endpoint returns `400 validation_error` for a missing or unknown `scope`, `scope=team` without `teamId`, a `limit` outside 1 to 100, any other query parameter, or a `cursor` it didn't return for this list; `403 team_membership_required` when you aren't on `teamId`; and `503 scan_limit_exceeded` when the team has too many automations you can't see to fill a page.
+
+```bash
+curl --request GET \
+  --url 'https://api.cursor.com/v1/automations?scope=team&teamId=456&limit=20' \
+  -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "items": [
+    {
+      "id": "7f3c2a1b-4d5e-4f6a-8b9c-0d1e2f3a4b5c",
+      "name": "Nightly dependency audit",
+      "description": "Opens a PR when a dependency has a known vulnerability.",
+      "enabled": true,
+      "scope": "TEAM",
+      "ownerUserId": 123,
+      "teamId": 456,
+      "managedType": "MANUAL",
+      "authoringMode": "ANY",
+      "hidden": false,
+      "modelSelection": {
+        "modelId": "claude-4.6-sonnet",
+        "parameters": [{ "id": "thinking", "value": "true" }]
+      },
+      "workflow": {
+        "triggers": [{ "cron": { "cron": "0 9 * * *" } }],
+        "actions": [{ "gitPr": {} }],
+        "prompts": [{ "prompt": "Audit dependencies for known vulnerabilities." }],
+        "gitConfig": { "repo": "https://github.com/your-org/your-repo", "branch": "main" }
+      },
+      "url": "https://cursor.com/automations/7f3c2a1b-4d5e-4f6a-8b9c-0d1e2f3a4b5c",
+      "createdAt": "2026-10-28T18:00:00.000Z",
+      "updatedAt": "2026-10-29T09:12:00.000Z"
+    }
+  ],
+  "nextCursor": "7f3c2a1b-4d5e-4f6a-8b9c-0d1e2f3a4b5c"
+}
+```
+
+### Get An Automation
+
+GET
+
+`/v1/automations/{id}`
+
+Retrieve one [automation](https://cursor.com/docs/cloud-agent/api/endpoints.md#the-automation-object).
+
+#### Path Parameters
+
+`id` string
+
+Automation ID, the UUID at the end of its dashboard URL.
+
+Besides the shared errors, this endpoint returns `400 validation_error` when `id` isn't a UUID and `404 automation_not_found` when you can't see the automation.
+
+```bash
+curl --request GET \
+  --url https://api.cursor.com/v1/automations/7f3c2a1b-4d5e-4f6a-8b9c-0d1e2f3a4b5c \
+  -u YOUR_API_KEY:
+```
+
+**Response:** an [automation object](https://cursor.com/docs/cloud-agent/api/endpoints.md#the-automation-object), as in [List Automations](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-automations).
+
+### Change An Automation's Model
+
+PATCH
+
+`/v1/automations/{id}`
+
+Set the model an automation runs with. Nothing else about the automation changes, including its schedule. The response is the updated [automation](https://cursor.com/docs/cloud-agent/api/endpoints.md#the-automation-object).
+
+Who can change an automation's model:
+
+- **A user API key or user-scoped token** changes an automation when the dashboard would let its user edit it, such as an automation the user owns.
+- **A team API key with Manage automations** changes its team's `TEAM` and `TEAM_EDITABLE` automations. On a `TEAM_VISIBLE` or `TEAM_EDITABLE_USER` automation, it gets `403 role_forbidden`.
+- **Other members' automations, for team admins.** A team admin using their own user API key can also change the model on other members' automations, including private ones. The model is the only field they can change, and each change is recorded in the team's [audit log](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#audit-logs).
+- **Everyone else** gets `403 role_forbidden`.
+
+Built-in automations return `409 managed_automation`, and automations a config-as-code deploy owns return `409 deploy_managed`; change those in their spec instead.
+
+#### Path Parameters
+
+`id` string
+
+Automation ID.
+
+#### Request Body
+
+`modelSelection` object
+
+The model to use. The body takes no other fields.
+
+- `modelId` string - A model `id` from [List Models](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-models).
+- `parameters` array (optional) - Parameter values, each an `id` and a `value`. To use a model variant, send the variant's `params`. Leave it out for the model's default Max Mode variant.
+
+The selection must match a model and variant that [List Models](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-models) returns for your key, and your team's model settings must allow it. Otherwise the request returns `400 validation_error` with the reason. Automations always run in Max Mode, so the selection is saved in Max Mode: a variant whose `isMaxMode` isn't `true`, or a model without Max Mode, returns `400 validation_error`, and so does a `maxMode` field in `modelSelection`. A model given as a single string, such as `{ "model": "gpt-5.6-sol-high" }`, or any other field in the body also returns `400 validation_error`, and a request with no body returns `400 missing_body`. An automation you can't see returns `404 automation_not_found`.
+
+```bash
+curl --request PATCH \
+  --url https://api.cursor.com/v1/automations/7f3c2a1b-4d5e-4f6a-8b9c-0d1e2f3a4b5c \
+  -u YOUR_API_KEY: \
+  -H 'Content-Type: application/json' \
+  --data '{
+    "modelSelection": {
+      "modelId": "gpt-5.6-sol",
+      "parameters": [{ "id": "reasoning", "value": "high" }]
+    }
+  }'
+```
+
+**Response:** the updated [automation object](https://cursor.com/docs/cloud-agent/api/endpoints.md#the-automation-object), with the new `modelSelection`.
 
 ## Worker Tokens
 

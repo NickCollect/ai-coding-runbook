@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/compliance-and-monitoring
-fetched_at: 2026-11-02T07:00:22.919042+00:00
+fetched_at: 2026-11-16T07:30:45.061957+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,7 +15,7 @@ Audit logs record who changed what in your team and organization: sign-ins, memb
 ### What is not logged
 
 - Agent responses, prompts, and generated code. Use [hooks](https://cursor.com/docs/hooks.md) to log development activity.
-- Grok Bot actions such as shell commands and browser navigation. Those are [Action Recording](https://cursor.com/docs/grok-bot/security.md#logging-and-audit) events, delivered over [OpenTelemetry Export](https://cursor.com/docs/enterprise/opentelemetry-export.md).
+- Grok Bot actions such as shell commands and browser navigation. Those are [Action Recording](https://docs.x.ai/grok-bot/security#logging-and-audit) events, delivered over [OpenTelemetry Export](https://cursor.com/docs/enterprise/opentelemetry-export.md).
 - Cloud Agent automation runs. `grok_bot_routine` covers Grok Bot routines only.
 - Failed sign-in attempts. `login` records successful sign-ins.
 - Secret values. `cloud_agent_secret` records the secret name and scope; `cloud_agent_secret_read` records only a count.
@@ -190,7 +190,7 @@ Grok Bot payloads carry identifiers and changed field names, never content such 
 | `grok_bot_vm_bulk`             | A bulk computer operation completes. Its child operations emit no rows                                                                                 | `action` (`bulk_recreate`, `bulk_kill`, `bulk_permanent_delete`, `bulk_delete_grok_bot_data`), `operation_id`, `target_count`, `succeeded_count`, `skipped_count`, `failed_count`                                                                   |
 | `grok_bot_routine`             | A routine is created, updated, enabled, disabled, or deleted                                                                                           | `action` (`create`, `update`, `enable`, `disable`, `delete`), `automation_id`, `name`, `sand_agent_id`, `trigger_type`, `creation_source`, `enabled`                                                                                                |
 
-Inference hook settings changes, denials, and failed checks have their own `inference_hooks_*` events, listed on [Grok Bot inference hooks](https://cursor.com/docs/grok-bot/inference-hooks.md#audit-log).
+Inference hook settings changes, denials, and failed checks have their own `inference_hooks_*` events, listed on [Grok Bot inference hooks](https://docs.x.ai/grok-bot/inference-hooks#audit-log).
 
 #### Origin
 
@@ -245,7 +245,7 @@ Privacy Mode doesn't suppress audit events. Administrative actions are recorded 
 
 ## Usage telemetry over OpenTelemetry
 
-Audit logs cover administrative and security events. If you want usage or activity data instead, such as token, tool call, and cost metrics, API request and cloud agent logs, and recorded Grok Bot actions (with [Action Recording](https://cursor.com/docs/grok-bot/security.md#logging-and-audit) enabled) delivered over OTLP to your own collector, use [OpenTelemetry Export](https://cursor.com/docs/enterprise/opentelemetry-export.md). It's a separate pipeline from audit-log SIEM streaming and is available on the Enterprise plan.
+Audit logs cover administrative and security events. If you want usage or activity data instead, such as token, tool call, and cost metrics, API request and cloud agent logs, and recorded Grok Bot actions (with [Action Recording](https://docs.x.ai/grok-bot/security#logging-and-audit) enabled) delivered over OTLP to your own collector, use [OpenTelemetry Export](https://cursor.com/docs/enterprise/opentelemetry-export.md). It's a separate pipeline from audit-log SIEM streaming and is available on the Enterprise plan.
 
 ## Using hooks for compliance logging
 

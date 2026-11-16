@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/tailscale
-fetched_at: 2026-11-02T07:00:23.690013+00:00
+fetched_at: 2026-11-16T07:30:45.545276+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 The Tailscale integration lets [Rollouts](https://cursor.com/docs/rollouts.md) reach [MCP](https://cursor.com/docs/mcp.md) servers that are only reachable on your tailnet. Cursor joins your tailnet as a tagged, ephemeral device and connects to the servers your tailnet policy allows.
 
-Remote MCP servers that use `https` can use a connection. A stdio server runs on the machine that starts it, so it has no tailnet address for Cursor to dial. [Grok Bot](https://cursor.com/docs/grok-bot/private-networks.md) reaches private networks through a separate setup.
+Remote MCP servers that use `https` can use a connection. A stdio server runs on the machine that starts it, so it has no tailnet address for Cursor to dial. [Grok Bot](https://docs.x.ai/grok-bot/private-networks) reaches private networks through a separate setup.
 
 Tailscale is in beta on Teams and Enterprise plans. [Contact sales](https://cursor.com/contact-sales?source=docs-tailscale)
 to ask for it to be enabled for your team.

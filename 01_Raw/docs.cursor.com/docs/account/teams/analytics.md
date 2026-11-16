@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/analytics
-fetched_at: 2026-10-05T06:27:18.288754+00:00
+fetched_at: 2026-11-16T07:30:43.432351+00:00
 fetch_method: mintlify_md
 ---
 
@@ -178,7 +178,7 @@ Conversation Insights is free during the preview period. Starting January 1st, 2
 
 ## Grok Bot Conversation Insights
 
-Grok Bot Conversation Insights is available to all Enterprise teams that use [Grok Bot](https://cursor.com/docs/grok-bot/teams.md). A **Cursor** / **Grok Bot** source toggle appears at the top of Conversation Insights in the [Analytics dashboard](https://cursor.com/dashboard/analytics). To see Conversation Insights, **Disable Conversation Insights** must be off in [team settings](https://cursor.com/dashboard/settings). If your team restricts the analytics dashboard to admins, you also need permission to manage analytics. If you've checked both and the toggle is still missing, contact your account team.
+Grok Bot Conversation Insights is available to all Enterprise teams that use [Grok Bot](https://docs.x.ai/grok-bot/teams-and-enterprises). A **Cursor** / **Grok Bot** source toggle appears at the top of Conversation Insights in the [Analytics dashboard](https://cursor.com/dashboard/analytics). To see Conversation Insights, **Disable Conversation Insights** must be off in [team settings](https://cursor.com/dashboard/settings). If your team restricts the analytics dashboard to admins, you also need permission to manage analytics. If you've checked both and the toggle is still missing, contact your account team.
 
 Grok Bot Conversation Insights applies the same idea as [Conversation Insights](https://cursor.com/docs/account/teams/analytics.md#conversation-insights) to the Bots your team runs. Cursor classifies each Grok Bot conversation so admins can see what kind of work Bots handle across the team, without reading the conversations themselves.
 
@@ -207,7 +207,7 @@ Compare works with the Grok Bot dimensions. Select teams or members to compare w
 
 ### Privacy and Data Handling
 
-Grok Bot Conversation Insights reports aggregate counts per dimension. The dashboard doesn't show or export conversation content. Your team's Privacy Mode setting governs whether Grok Bot conversation data is used for training. See [Grok Bot security](https://cursor.com/docs/grok-bot/security.md#models-and-data).
+Grok Bot Conversation Insights reports aggregate counts per dimension. The dashboard doesn't show or export conversation content. Your team's Privacy Mode setting governs whether Grok Bot conversation data is used for training. See [Grok Bot security](https://docs.x.ai/grok-bot/security#models-and-data).
 
 ## Cloud Agent Usage
 

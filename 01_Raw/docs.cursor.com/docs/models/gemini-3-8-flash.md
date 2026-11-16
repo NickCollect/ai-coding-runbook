@@ -1,10 +1,12 @@
 ---
 source_url: https://cursor.com/docs/models/gemini-3-8-flash
-fetched_at: 2026-10-19T05:32:45.508600+00:00
+fetched_at: 2026-11-16T07:30:46.112799+00:00
 fetch_method: mintlify_md
 ---
 
-Gemini 3.8 Flash is Google's latest speed-tier model. It pairs strong agentic coding performance with low per-token costs. Use it for high-throughput coding tasks that benefit from reasoning and a large context window.
+We recommend using [Gemini 4 Hydrogen](https://cursor.com/docs/models/gemini-4-hydrogen.md). It's Google's successor to Gemini 3.8 Flash.
+
+Gemini 3.8 Flash is Google's previous speed-tier model. It pairs strong agentic coding performance with low per-token costs. Use it for high-throughput coding tasks that benefit from reasoning and a large context window.
 
 ## Strengths
 
