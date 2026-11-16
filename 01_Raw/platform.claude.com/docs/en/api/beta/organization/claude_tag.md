@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/claude_tag
-fetched_at: 2026-11-09T07:30:33.903200+00:00
+fetched_at: 2026-11-16T07:30:59.288936+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,6 +12,14 @@ url: https://platform.claude.com/docs/en/api/beta/organization/claude_tag
 # Claude Tag
 
 ## Domain types
+
+### Beta API Key Scope Missing Error Details
+
+- `BetaAPIKeyScopeMissingErrorDetails object`
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+  - `error_code: "api_key_scope_missing"`
 
 ### Beta Claude Tag Default Setting Source
 
@@ -68,6 +76,68 @@ url: https://platform.claude.com/docs/en/api/beta/organization/claude_tag
   Claude does not answer in the channel.
 
   - `type: "restrict"`
+
+### Beta Claude Tag Reply Mode
+
+- `BetaClaudeTagReplyMode = BetaClaudeTagReplyModeAutomatic or BetaClaudeTagReplyModeMentionOnly or BetaClaudeTagReplyModeAlwaysAwake or BetaClaudeTagReplyModeThread`
+
+  How Claude takes part in a Slack channel. A channel alone stores one. More types can be added.
+
+  - `BetaClaudeTagReplyModeAutomatic object`
+
+    Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+    - `type: "automatic"`
+
+  - `BetaClaudeTagReplyModeMentionOnly object`
+
+    Claude replies only when it is @-mentioned.
+
+    - `type: "mention_only"`
+
+  - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+    Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+    - `type: "always_awake"`
+
+  - `BetaClaudeTagReplyModeThread object`
+
+    Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+    - `type: "thread"`
+
+### Beta Claude Tag Reply Mode Always Awake
+
+- `BetaClaudeTagReplyModeAlwaysAwake object`
+
+  Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+  - `type: "always_awake"`
+
+### Beta Claude Tag Reply Mode Automatic
+
+- `BetaClaudeTagReplyModeAutomatic object`
+
+  Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+  - `type: "automatic"`
+
+### Beta Claude Tag Reply Mode Mention Only
+
+- `BetaClaudeTagReplyModeMentionOnly object`
+
+  Claude replies only when it is @-mentioned.
+
+  - `type: "mention_only"`
+
+### Beta Claude Tag Reply Mode Thread
+
+- `BetaClaudeTagReplyModeThread object`
+
+  Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+  - `type: "thread"`
 
 ### Beta Claude Tag Setting Source
 
@@ -253,11 +323,15 @@ url: https://platform.claude.com/docs/en/api/beta/organization/claude_tag
 
     The settings level `model` comes from.
 
+  - `reply_mode: BetaClaudeTagSettingSource or null`
+
+    The settings level `reply_mode` comes from: the channel when it stores one. With `include_inherited=true` and no stored mode it is `default`.
+
 ### Beta Claude Tag Settings
 
 - `BetaClaudeTagSettings object`
 
-  Claude Tag settings. Without `include_inherited`, a setting that is null is not set on the settings level and is inherited. With it, `enabled` and `guest_policy` are never null, and `instructions`, `model` and `environment_id` are null when no settings level sets them.
+  Claude Tag settings. Without `include_inherited`, a setting that is null is not set on the settings level and is inherited. With it, `enabled` and `guest_policy` are never null, `instructions`, `model` and `environment_id` are null when no settings level sets them, and `reply_mode` is null unless the channel itself stores one.
 
   - `enabled: boolean or null`
 
@@ -297,6 +371,34 @@ url: https://platform.claude.com/docs/en/api/beta/organization/claude_tag
 
     The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
 
+  - `reply_mode: BetaClaudeTagReplyMode or null`
+
+    How Claude takes part in the channel. Only a channel stores one, and no settings level passes one on, so it is always null on a workspace. Null on a channel means the channel stores none yet: Claude then follows the reply mode chosen in Slack, if one was, else `automatic`. A stored reply mode can be changed but never cleared.
+
+    - `BetaClaudeTagReplyModeAutomatic object`
+
+      Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+      - `type: "automatic"`
+
+    - `BetaClaudeTagReplyModeMentionOnly object`
+
+      Claude replies only when it is @-mentioned.
+
+      - `type: "mention_only"`
+
+    - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+      Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+      - `type: "always_awake"`
+
+    - `BetaClaudeTagReplyModeThread object`
+
+      Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+      - `type: "thread"`
+
 ### Beta Claude Tag Settings Create
 
 - `BetaClaudeTagSettingsCreate object`
@@ -309,7 +411,7 @@ url: https://platform.claude.com/docs/en/api/beta/organization/claude_tag
 
   - `environment_id: optional string or null`
 
-    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`. Null clears it.
+    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`, or of a self-hosted runner pool of the organization that every member may use, starting with `ccpool_`. Null clears it.
 
     minLength: 1, maxLength: 64
 
@@ -344,6 +446,34 @@ url: https://platform.claude.com/docs/en/api/beta/organization/claude_tag
     The model Claude uses: the identifier of a model, or the name of a model line, that the organization is entitled to for Claude Tag. Null clears it.
 
     minLength: 1, maxLength: 128
+
+  - `reply_mode: optional BetaClaudeTagReplyMode or null`
+
+    How Claude takes part in the channel: `automatic`, `mention_only`, `always_awake` or `thread`. Only a channel takes one: an update of a workspace that sends a value is refused, and one that sends null changes nothing. Null never clears it: sent to a channel that stores none it changes nothing, and sent to a channel that stores one it is refused, because a stored reply mode can be changed but never cleared; a caller that wants Claude's default behavior sends `automatic`.
+
+    - `BetaClaudeTagReplyModeAutomatic object`
+
+      Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+      - `type: "automatic"`
+
+    - `BetaClaudeTagReplyModeMentionOnly object`
+
+      Claude replies only when it is @-mentioned.
+
+      - `type: "mention_only"`
+
+    - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+      Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+      - `type: "always_awake"`
+
+    - `BetaClaudeTagReplyModeThread object`
+
+      Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+      - `type: "thread"`
 
 ### Beta Claude Tag Settings Update
 
@@ -357,7 +487,7 @@ url: https://platform.claude.com/docs/en/api/beta/organization/claude_tag
 
   - `environment_id: optional string or null`
 
-    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`. Null clears it.
+    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`, or of a self-hosted runner pool of the organization that every member may use, starting with `ccpool_`. Null clears it.
 
     minLength: 1, maxLength: 64
 
@@ -392,6 +522,34 @@ url: https://platform.claude.com/docs/en/api/beta/organization/claude_tag
     The model Claude uses: the identifier of a model, or the name of a model line, that the organization is entitled to for Claude Tag. Null clears it.
 
     minLength: 1, maxLength: 128
+
+  - `reply_mode: optional BetaClaudeTagReplyMode or null`
+
+    How Claude takes part in the channel: `automatic`, `mention_only`, `always_awake` or `thread`. Only a channel takes one: an update of a workspace that sends a value is refused, and one that sends null changes nothing. Null never clears it: sent to a channel that stores none it changes nothing, and sent to a channel that stores one it is refused, because a stored reply mode can be changed but never cleared; a caller that wants Claude's default behavior sends `automatic`.
+
+    - `BetaClaudeTagReplyModeAutomatic object`
+
+      Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+      - `type: "automatic"`
+
+    - `BetaClaudeTagReplyModeMentionOnly object`
+
+      Claude replies only when it is @-mentioned.
+
+      - `type: "mention_only"`
+
+    - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+      Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+      - `type: "always_awake"`
+
+    - `BetaClaudeTagReplyModeThread object`
+
+      Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+      - `type: "thread"`
 
 ### Beta Claude Tag Slack Channel Identifiers
 
@@ -489,6 +647,70 @@ url: https://platform.claude.com/docs/en/api/beta/organization/claude_tag
 
     The workspace's identifier, starting with `slws_`.
 
+### Beta Claude Tag Writes Not Enabled Error Details
+
+- `BetaClaudeTagWritesNotEnabledErrorDetails object`
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+  - `error_code: "claude_tag_writes_not_enabled"`
+
+### Beta Compliance Configuration Restricted Error Details
+
+- `BetaComplianceConfigurationRestrictedErrorDetails object`
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+  - `error_code: "compliance_configuration_restricted"`
+
+### Beta Organization Level Scoped API Key Required Error Details
+
+- `BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails object`
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+  - `error_code: "organization_level_scoped_api_key_required"`
+
+### Beta Slack Channel Set Up Environment Not Found Error Details
+
+- `BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails object`
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+  - `error_code: "slack_channel_set_up_environment_not_found"`
+
+  - `slack_channel_id: string`
+
+    The identifier of the channel the request set up, starting with `slch_`.
+
+### Beta Slack Channel Set Up Settings Conflict Error Details
+
+- `BetaSlackChannelSetUpSettingsConflictErrorDetails object`
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
+  - `error_code: "slack_channel_set_up_settings_conflict"`
+
+    A stable code that names the cause.
+
+  - `slack_channel_id: string`
+
+    The identifier of the channel the request set up, starting with `slch_`.
+
+### Beta Slack Channel Set Up Settings Refused Error Details
+
+- `BetaSlackChannelSetUpSettingsRefusedErrorDetails object`
+
+  The request set the channel up, and `settings` was then refused. The channel stays set up with every setting unset.
+
+  - `error_code: "slack_channel_set_up_settings_refused"`
+
+    A stable code that names the cause.
+
+  - `slack_channel_id: string`
+
+    The identifier of the channel the request set up, starting with `slch_`.
+
 ## Claude Tag › Slack Channels
 
 ### Set Up Slack Channel
@@ -511,23 +733,11 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -539,15 +749,11 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -562,8 +768,6 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -593,8 +797,6 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -615,11 +817,53 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Body parameters
 
@@ -649,7 +893,7 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
 
   - `environment_id: optional string or null`
 
-    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`. Null clears it.
+    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`, or of a self-hosted runner pool of the organization that every member may use, starting with `ccpool_`. Null clears it.
 
     minLength: 1, maxLength: 64
 
@@ -684,6 +928,34 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
     The model Claude uses: the identifier of a model, or the name of a model line, that the organization is entitled to for Claude Tag. Null clears it.
 
     minLength: 1, maxLength: 128
+
+  - `reply_mode: optional BetaClaudeTagReplyMode or null`
+
+    How Claude takes part in the channel: `automatic`, `mention_only`, `always_awake` or `thread`. Only a channel takes one: an update of a workspace that sends a value is refused, and one that sends null changes nothing. Null never clears it: sent to a channel that stores none it changes nothing, and sent to a channel that stores one it is refused, because a stored reply mode can be changed but never cleared; a caller that wants Claude's default behavior sends `automatic`.
+
+    - `BetaClaudeTagReplyModeAutomatic object`
+
+      Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+      - `type: "automatic"`
+
+    - `BetaClaudeTagReplyModeMentionOnly object`
+
+      Claude replies only when it is @-mentioned.
+
+      - `type: "mention_only"`
+
+    - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+      Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+      - `type: "always_awake"`
+
+    - `BetaClaudeTagReplyModeThread object`
+
+      Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+      - `type: "thread"`
 
 #### Returns
 
@@ -744,6 +1016,34 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
     - `model: string or null`
 
       The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
+
+    - `reply_mode: BetaClaudeTagReplyMode or null`
+
+      How Claude takes part in the channel. Only a channel stores one, and no settings level passes one on, so it is always null on a workspace. Null on a channel means the channel stores none yet: Claude then follows the reply mode chosen in Slack, if one was, else `automatic`. A stored reply mode can be changed but never cleared.
+
+      - `BetaClaudeTagReplyModeAutomatic object`
+
+        Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+        - `type: "automatic"`
+
+      - `BetaClaudeTagReplyModeMentionOnly object`
+
+        Claude replies only when it is @-mentioned.
+
+        - `type: "mention_only"`
+
+      - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+        Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+        - `type: "always_awake"`
+
+      - `BetaClaudeTagReplyModeThread object`
+
+        Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+        - `type: "thread"`
 
   - `slack: BetaClaudeTagSlackChannelIdentifiers`
 
@@ -861,6 +1161,10 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
 
       The settings level `model` comes from.
 
+    - `reply_mode: BetaClaudeTagSettingSource or null`
+
+      The settings level `reply_mode` comes from: the channel when it stores one. With `include_inherited=true` and no stored mode it is `default`.
+
   - `updated_at: string`
 
     Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
@@ -896,7 +1200,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_channels \
       "type": "allow"
     },
     "instructions": "instructions",
-    "model": "model"
+    "model": "model",
+    "reply_mode": {
+      "type": "automatic"
+    }
   },
   "slack": {
     "channel_id": "xx",
@@ -922,6 +1229,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_channels \
       }
     ],
     "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "reply_mode": {
       "slack_channel_id": "slack_channel_id",
       "type": "slack_channel"
     }
@@ -975,23 +1286,11 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -1003,15 +1302,11 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -1026,8 +1321,6 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -1057,8 +1350,6 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -1079,11 +1370,53 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Returns
 
@@ -1145,6 +1478,34 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
       The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
 
+    - `reply_mode: BetaClaudeTagReplyMode or null`
+
+      How Claude takes part in the channel. Only a channel stores one, and no settings level passes one on, so it is always null on a workspace. Null on a channel means the channel stores none yet: Claude then follows the reply mode chosen in Slack, if one was, else `automatic`. A stored reply mode can be changed but never cleared.
+
+      - `BetaClaudeTagReplyModeAutomatic object`
+
+        Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+        - `type: "automatic"`
+
+      - `BetaClaudeTagReplyModeMentionOnly object`
+
+        Claude replies only when it is @-mentioned.
+
+        - `type: "mention_only"`
+
+      - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+        Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+        - `type: "always_awake"`
+
+      - `BetaClaudeTagReplyModeThread object`
+
+        Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+        - `type: "thread"`
+
   - `slack: BetaClaudeTagSlackChannelIdentifiers`
 
     Slack's own identifiers for the channel.
@@ -1261,6 +1622,10 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
       The settings level `model` comes from.
 
+    - `reply_mode: BetaClaudeTagSettingSource or null`
+
+      The settings level `reply_mode` comes from: the channel when it stores one. With `include_inherited=true` and no stored mode it is `default`.
+
   - `updated_at: string`
 
     Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
@@ -1295,7 +1660,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_channels \
           "type": "allow"
         },
         "instructions": "instructions",
-        "model": "model"
+        "model": "model",
+        "reply_mode": {
+          "type": "automatic"
+        }
       },
       "slack": {
         "channel_id": "xx",
@@ -1321,6 +1689,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_channels \
           }
         ],
         "model": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "reply_mode": {
           "slack_channel_id": "slack_channel_id",
           "type": "slack_channel"
         }
@@ -1365,23 +1737,11 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -1393,15 +1753,11 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -1416,8 +1772,6 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -1447,8 +1801,6 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -1469,11 +1821,53 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Returns
 
@@ -1534,6 +1928,34 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
     - `model: string or null`
 
       The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
+
+    - `reply_mode: BetaClaudeTagReplyMode or null`
+
+      How Claude takes part in the channel. Only a channel stores one, and no settings level passes one on, so it is always null on a workspace. Null on a channel means the channel stores none yet: Claude then follows the reply mode chosen in Slack, if one was, else `automatic`. A stored reply mode can be changed but never cleared.
+
+      - `BetaClaudeTagReplyModeAutomatic object`
+
+        Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+        - `type: "automatic"`
+
+      - `BetaClaudeTagReplyModeMentionOnly object`
+
+        Claude replies only when it is @-mentioned.
+
+        - `type: "mention_only"`
+
+      - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+        Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+        - `type: "always_awake"`
+
+      - `BetaClaudeTagReplyModeThread object`
+
+        Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+        - `type: "thread"`
 
   - `slack: BetaClaudeTagSlackChannelIdentifiers`
 
@@ -1651,6 +2073,10 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
 
       The settings level `model` comes from.
 
+    - `reply_mode: BetaClaudeTagSettingSource or null`
+
+      The settings level `reply_mode` comes from: the channel when it stores one. With `include_inherited=true` and no stored mode it is `default`.
+
   - `updated_at: string`
 
     Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
@@ -1679,7 +2105,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_channels/$ID \
       "type": "allow"
     },
     "instructions": "instructions",
-    "model": "model"
+    "model": "model",
+    "reply_mode": {
+      "type": "automatic"
+    }
   },
   "slack": {
     "channel_id": "xx",
@@ -1705,6 +2134,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_channels/$ID \
       }
     ],
     "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "reply_mode": {
       "slack_channel_id": "slack_channel_id",
       "type": "slack_channel"
     }
@@ -1740,23 +2173,11 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -1768,15 +2189,11 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -1791,8 +2208,6 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -1822,8 +2237,6 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -1844,11 +2257,53 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Body parameters
 
@@ -1862,7 +2317,7 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
 
   - `environment_id: optional string or null`
 
-    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`. Null clears it.
+    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`, or of a self-hosted runner pool of the organization that every member may use, starting with `ccpool_`. Null clears it.
 
     minLength: 1, maxLength: 64
 
@@ -1897,6 +2352,34 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
     The model Claude uses: the identifier of a model, or the name of a model line, that the organization is entitled to for Claude Tag. Null clears it.
 
     minLength: 1, maxLength: 128
+
+  - `reply_mode: optional BetaClaudeTagReplyMode or null`
+
+    How Claude takes part in the channel: `automatic`, `mention_only`, `always_awake` or `thread`. Only a channel takes one: an update of a workspace that sends a value is refused, and one that sends null changes nothing. Null never clears it: sent to a channel that stores none it changes nothing, and sent to a channel that stores one it is refused, because a stored reply mode can be changed but never cleared; a caller that wants Claude's default behavior sends `automatic`.
+
+    - `BetaClaudeTagReplyModeAutomatic object`
+
+      Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+      - `type: "automatic"`
+
+    - `BetaClaudeTagReplyModeMentionOnly object`
+
+      Claude replies only when it is @-mentioned.
+
+      - `type: "mention_only"`
+
+    - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+      Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+      - `type: "always_awake"`
+
+    - `BetaClaudeTagReplyModeThread object`
+
+      Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+      - `type: "thread"`
 
 #### Returns
 
@@ -1957,6 +2440,34 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
     - `model: string or null`
 
       The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
+
+    - `reply_mode: BetaClaudeTagReplyMode or null`
+
+      How Claude takes part in the channel. Only a channel stores one, and no settings level passes one on, so it is always null on a workspace. Null on a channel means the channel stores none yet: Claude then follows the reply mode chosen in Slack, if one was, else `automatic`. A stored reply mode can be changed but never cleared.
+
+      - `BetaClaudeTagReplyModeAutomatic object`
+
+        Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+        - `type: "automatic"`
+
+      - `BetaClaudeTagReplyModeMentionOnly object`
+
+        Claude replies only when it is @-mentioned.
+
+        - `type: "mention_only"`
+
+      - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+        Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+        - `type: "always_awake"`
+
+      - `BetaClaudeTagReplyModeThread object`
+
+        Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+        - `type: "thread"`
 
   - `slack: BetaClaudeTagSlackChannelIdentifiers`
 
@@ -2074,6 +2585,10 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
 
       The settings level `model` comes from.
 
+    - `reply_mode: BetaClaudeTagSettingSource or null`
+
+      The settings level `reply_mode` comes from: the channel when it stores one. With `include_inherited=true` and no stored mode it is `default`.
+
   - `updated_at: string`
 
     Time Claude Tag's record of the channel last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the channel again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
@@ -2106,7 +2621,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_channels/$ID \
       "type": "allow"
     },
     "instructions": "instructions",
-    "model": "model"
+    "model": "model",
+    "reply_mode": {
+      "type": "automatic"
+    }
   },
   "slack": {
     "channel_id": "xx",
@@ -2132,6 +2650,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_channels/$ID \
       }
     ],
     "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "reply_mode": {
       "slack_channel_id": "slack_channel_id",
       "type": "slack_channel"
     }
@@ -2167,23 +2689,11 @@ Remove a Slack channel from Claude Tag. This deletes the channel's stored settin
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -2195,15 +2705,11 @@ Remove a Slack channel from Claude Tag. This deletes the channel's stored settin
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -2218,8 +2724,6 @@ Remove a Slack channel from Claude Tag. This deletes the channel's stored settin
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -2249,8 +2753,6 @@ Remove a Slack channel from Claude Tag. This deletes the channel's stored settin
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -2271,11 +2773,53 @@ Remove a Slack channel from Claude Tag. This deletes the channel's stored settin
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Returns
 
@@ -2350,23 +2894,11 @@ List the set-up Slack workspaces the organization owns, newest first by `created
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -2378,15 +2910,11 @@ List the set-up Slack workspaces the organization owns, newest first by `created
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -2401,8 +2929,6 @@ List the set-up Slack workspaces the organization owns, newest first by `created
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -2432,8 +2958,6 @@ List the set-up Slack workspaces the organization owns, newest first by `created
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -2454,11 +2978,53 @@ List the set-up Slack workspaces the organization owns, newest first by `created
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Returns
 
@@ -2520,6 +3086,34 @@ List the set-up Slack workspaces the organization owns, newest first by `created
 
       The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
 
+    - `reply_mode: BetaClaudeTagReplyMode or null`
+
+      How Claude takes part in the channel. Only a channel stores one, and no settings level passes one on, so it is always null on a workspace. Null on a channel means the channel stores none yet: Claude then follows the reply mode chosen in Slack, if one was, else `automatic`. A stored reply mode can be changed but never cleared.
+
+      - `BetaClaudeTagReplyModeAutomatic object`
+
+        Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+        - `type: "automatic"`
+
+      - `BetaClaudeTagReplyModeMentionOnly object`
+
+        Claude replies only when it is @-mentioned.
+
+        - `type: "mention_only"`
+
+      - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+        Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+        - `type: "always_awake"`
+
+      - `BetaClaudeTagReplyModeThread object`
+
+        Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+        - `type: "thread"`
+
   - `slack: BetaClaudeTagSlackWorkspaceIdentifiers`
 
     Slack's own identifier for the workspace.
@@ -2640,6 +3234,10 @@ List the set-up Slack workspaces the organization owns, newest first by `created
 
       The settings level `model` comes from.
 
+    - `reply_mode: BetaClaudeTagSettingSource or null`
+
+      The settings level `reply_mode` comes from: the channel when it stores one. With `include_inherited=true` and no stored mode it is `default`.
+
   - `updated_at: string`
 
     Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
@@ -2674,7 +3272,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_workspaces \
           "type": "allow"
         },
         "instructions": "instructions",
-        "model": "model"
+        "model": "model",
+        "reply_mode": {
+          "type": "automatic"
+        }
       },
       "slack": {
         "workspace_id": "workspace_id"
@@ -2699,6 +3300,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_workspaces \
           }
         ],
         "model": {
+          "slack_channel_id": "slack_channel_id",
+          "type": "slack_channel"
+        },
+        "reply_mode": {
           "slack_channel_id": "slack_channel_id",
           "type": "slack_channel"
         }
@@ -2743,23 +3348,11 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -2771,15 +3364,11 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -2794,8 +3383,6 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -2825,8 +3412,6 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -2847,11 +3432,53 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Returns
 
@@ -2912,6 +3539,34 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
     - `model: string or null`
 
       The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
+
+    - `reply_mode: BetaClaudeTagReplyMode or null`
+
+      How Claude takes part in the channel. Only a channel stores one, and no settings level passes one on, so it is always null on a workspace. Null on a channel means the channel stores none yet: Claude then follows the reply mode chosen in Slack, if one was, else `automatic`. A stored reply mode can be changed but never cleared.
+
+      - `BetaClaudeTagReplyModeAutomatic object`
+
+        Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+        - `type: "automatic"`
+
+      - `BetaClaudeTagReplyModeMentionOnly object`
+
+        Claude replies only when it is @-mentioned.
+
+        - `type: "mention_only"`
+
+      - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+        Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+        - `type: "always_awake"`
+
+      - `BetaClaudeTagReplyModeThread object`
+
+        Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+        - `type: "thread"`
 
   - `slack: BetaClaudeTagSlackWorkspaceIdentifiers`
 
@@ -3033,6 +3688,10 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
 
       The settings level `model` comes from.
 
+    - `reply_mode: BetaClaudeTagSettingSource or null`
+
+      The settings level `reply_mode` comes from: the channel when it stores one. With `include_inherited=true` and no stored mode it is `default`.
+
   - `updated_at: string`
 
     Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
@@ -3061,7 +3720,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_workspaces/$ID 
       "type": "allow"
     },
     "instructions": "instructions",
-    "model": "model"
+    "model": "model",
+    "reply_mode": {
+      "type": "automatic"
+    }
   },
   "slack": {
     "workspace_id": "workspace_id"
@@ -3086,6 +3748,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_workspaces/$ID 
       }
     ],
     "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "reply_mode": {
       "slack_channel_id": "slack_channel_id",
       "type": "slack_channel"
     }
@@ -3121,23 +3787,11 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -3149,15 +3803,11 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -3172,8 +3822,6 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -3203,8 +3851,6 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -3225,11 +3871,53 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Body parameters
 
@@ -3243,7 +3931,7 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
 
   - `environment_id: optional string or null`
 
-    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`. Null clears it.
+    The environment Claude's sessions run in: the identifier of an active environment of the organization, starting with `env_`, or of a self-hosted runner pool of the organization that every member may use, starting with `ccpool_`. Null clears it.
 
     minLength: 1, maxLength: 64
 
@@ -3278,6 +3966,34 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
     The model Claude uses: the identifier of a model, or the name of a model line, that the organization is entitled to for Claude Tag. Null clears it.
 
     minLength: 1, maxLength: 128
+
+  - `reply_mode: optional BetaClaudeTagReplyMode or null`
+
+    How Claude takes part in the channel: `automatic`, `mention_only`, `always_awake` or `thread`. Only a channel takes one: an update of a workspace that sends a value is refused, and one that sends null changes nothing. Null never clears it: sent to a channel that stores none it changes nothing, and sent to a channel that stores one it is refused, because a stored reply mode can be changed but never cleared; a caller that wants Claude's default behavior sends `automatic`.
+
+    - `BetaClaudeTagReplyModeAutomatic object`
+
+      Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+      - `type: "automatic"`
+
+    - `BetaClaudeTagReplyModeMentionOnly object`
+
+      Claude replies only when it is @-mentioned.
+
+      - `type: "mention_only"`
+
+    - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+      Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+      - `type: "always_awake"`
+
+    - `BetaClaudeTagReplyModeThread object`
+
+      Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+      - `type: "thread"`
 
 #### Returns
 
@@ -3338,6 +4054,34 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
     - `model: string or null`
 
       The model Claude uses: a model identifier or the name of a model line. The nearest settings level that sets it decides. When none does, Claude uses the product's default model.
+
+    - `reply_mode: BetaClaudeTagReplyMode or null`
+
+      How Claude takes part in the channel. Only a channel stores one, and no settings level passes one on, so it is always null on a workspace. Null on a channel means the channel stores none yet: Claude then follows the reply mode chosen in Slack, if one was, else `automatic`. A stored reply mode can be changed but never cleared.
+
+      - `BetaClaudeTagReplyModeAutomatic object`
+
+        Claude reads along and joins in when it can help, and pauses on its own in quiet or busy channels.
+
+        - `type: "automatic"`
+
+      - `BetaClaudeTagReplyModeMentionOnly object`
+
+        Claude replies only when it is @-mentioned.
+
+        - `type: "mention_only"`
+
+      - `BetaClaudeTagReplyModeAlwaysAwake object`
+
+        Like `automatic`, but Claude never pauses on its own. Available where it is enabled for the channel.
+
+        - `type: "always_awake"`
+
+      - `BetaClaudeTagReplyModeThread object`
+
+        Every new top-level message in the channel gets its own reply from Claude, in a thread under it. Available where it is enabled for the channel, and only once Claude has been used in the channel.
+
+        - `type: "thread"`
 
   - `slack: BetaClaudeTagSlackWorkspaceIdentifiers`
 
@@ -3459,6 +4203,10 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
 
       The settings level `model` comes from.
 
+    - `reply_mode: BetaClaudeTagSettingSource or null`
+
+      The settings level `reply_mode` comes from: the channel when it stores one. With `include_inherited=true` and no stored mode it is `default`.
+
   - `updated_at: string`
 
     Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
@@ -3491,7 +4239,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_workspaces/$ID 
       "type": "allow"
     },
     "instructions": "instructions",
-    "model": "model"
+    "model": "model",
+    "reply_mode": {
+      "type": "automatic"
+    }
   },
   "slack": {
     "workspace_id": "workspace_id"
@@ -3516,6 +4267,10 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/slack_workspaces/$ID 
       }
     ],
     "model": {
+      "slack_channel_id": "slack_channel_id",
+      "type": "slack_channel"
+    },
+    "reply_mode": {
       "slack_channel_id": "slack_channel_id",
       "type": "slack_channel"
     }
@@ -3559,23 +4314,11 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -3587,15 +4330,11 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -3610,8 +4349,6 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -3641,8 +4378,6 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -3663,11 +4398,53 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Returns
 
@@ -3758,23 +4535,11 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -3786,15 +4551,11 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -3809,8 +4570,6 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -3840,8 +4599,6 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -3862,11 +4619,53 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Returns
 
@@ -3962,23 +4761,11 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -3990,15 +4777,11 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -4013,8 +4796,6 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -4044,8 +4825,6 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -4066,11 +4845,53 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Returns
 
@@ -4173,23 +4994,11 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -4201,15 +5010,11 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -4224,8 +5029,6 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -4255,8 +5058,6 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -4277,11 +5078,53 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Body parameters
 
@@ -4412,23 +5255,11 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -4440,15 +5271,11 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -4463,8 +5290,6 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -4494,8 +5319,6 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -4516,11 +5339,53 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Returns
 
@@ -4618,23 +5483,11 @@ Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach ret
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -4646,15 +5499,11 @@ Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach ret
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -4669,8 +5518,6 @@ Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach ret
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -4700,8 +5547,6 @@ Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach ret
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -4722,11 +5567,53 @@ Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach ret
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Returns
 

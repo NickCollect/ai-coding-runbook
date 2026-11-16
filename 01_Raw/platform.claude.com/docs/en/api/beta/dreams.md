@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/dreams
-fetched_at: 2026-11-09T07:30:29.733905+00:00
+fetched_at: 2026-11-16T07:30:54.800837+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,23 +35,11 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -63,15 +51,11 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -86,8 +70,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -117,8 +99,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -139,11 +119,53 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-workspace-id": optional string`
 
@@ -261,7 +283,7 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
 
-  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to stable endpoints.
 
   See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#how-it-works) for what a dream reads and produces.
 
@@ -626,23 +648,11 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -654,15 +664,11 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -677,8 +683,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -708,8 +712,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -730,11 +732,53 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1052,23 +1096,11 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -1080,15 +1112,11 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -1103,8 +1131,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -1134,8 +1160,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -1156,11 +1180,53 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1176,7 +1242,7 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
 
-  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to stable endpoints.
 
   See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#how-it-works) for what a dream reads and produces.
 
@@ -1473,23 +1539,11 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -1501,15 +1555,11 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -1524,8 +1574,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -1555,8 +1603,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -1577,11 +1623,53 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-workspace-id": optional string`
 
@@ -1597,7 +1685,7 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
 
-  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to stable endpoints.
 
   See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#how-it-works) for what a dream reads and produces.
 
@@ -1895,23 +1983,11 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -1923,15 +1999,11 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -1946,8 +2018,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -1977,8 +2047,6 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -1999,11 +2067,53 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-workspace-id": optional string`
 
@@ -2019,7 +2129,7 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
 
-  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to stable endpoints.
 
   See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#how-it-works) for what a dream reads and produces.
 
@@ -2297,7 +2407,7 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
   By default the dream writes its result to a new memory store and doesn't change the input memory store. With `output_behavior` set to `update_existing`, it writes its result into the input memory store instead.
 
-  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to generally-available endpoints.
+  The Dreams API is in research preview: the request and response shapes are volatile and may change without the deprecation period that applies to stable endpoints.
 
   See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams?sdk_languages=http#how-it-works) for what a dream reads and produces.
 
@@ -2749,9 +2859,13 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     - `type: "invalid_request_error"`
 
+      The broad category of the error.
+
       default: invalid_request_error
 
     - `message: string`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       default: Invalid request
 
@@ -2759,9 +2873,13 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     - `type: "authentication_error"`
 
+      The broad category of the error.
+
       default: authentication_error
 
     - `message: string`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       default: Authentication error
 
@@ -2769,9 +2887,13 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     - `type: "billing_error"`
 
+      The broad category of the error.
+
       default: billing_error
 
     - `message: string`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       default: Billing error
 
@@ -2779,9 +2901,13 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     - `type: "permission_error"`
 
+      The broad category of the error.
+
       default: permission_error
 
     - `message: string`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       default: Permission denied
 
@@ -2789,9 +2915,13 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     - `type: "not_found_error"`
 
+      The broad category of the error.
+
       default: not_found_error
 
     - `message: string`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       default: Not found
 
@@ -2799,9 +2929,13 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     - `type: "rate_limit_error"`
 
+      The broad category of the error.
+
       default: rate_limit_error
 
     - `message: string`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       default: Rate limited
 
@@ -2809,9 +2943,13 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     - `type: "timeout_error"`
 
+      The broad category of the error.
+
       default: timeout_error
 
     - `message: string`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       default: Request timeout
 
@@ -2819,9 +2957,13 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     - `type: "api_error"`
 
+      The broad category of the error.
+
       default: api_error
 
     - `message: string`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       default: Internal server error
 
@@ -2829,9 +2971,13 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
 
     - `type: "overloaded_error"`
 
+      The broad category of the error.
+
       default: overloaded_error
 
     - `message: string`
+
+      A human-readable explanation of the error. Its wording can change, so don't match on it.
 
       default: Overloaded
 
@@ -2844,8 +2990,6 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
     - `type: "conflict_error"`
 
     - `message: optional string`
-
-      A human-readable explanation of why the memory store can't be used yet, with the ID of the dream that is using it when the server can identify it.
 
 ### Beta Output Behavior
 
@@ -2912,5 +3056,3 @@ curl https://api.anthropic.com/v1/dreams/$DREAM_ID/archive \
   - `type: "conflict_error"`
 
   - `message: optional string`
-
-    A human-readable explanation of why the memory store can't be used yet, with the ID of the dream that is using it when the server can identify it.

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
-fetched_at: 2026-11-09T07:30:15.658842+00:00
+fetched_at: 2026-11-16T07:30:40.541226+00:00
 fetch_method: mintlify_md
 ---
 
@@ -150,11 +150,11 @@ Here’s that round trip in full for a client tool. The first request defines a 
 
 <CodeGroup exclude="shell:cURL, shell:CLI">
   <CodeGroupItem language="cURL">
-    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+    This workflow needs more logic than a single shell command. Use the [Anthropic SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
   </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
-    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+    This workflow needs more logic than a single shell command. Use the [Anthropic SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
   </CodeGroupItem>
 
   ```python Python
@@ -754,9 +754,9 @@ Server tools run on Anthropic’s infrastructure, with no handler code in your a
 
 Tool use requests are priced based on:
 
-1. The total number of input tokens sent to the model (including in the `tools` parameter)
-2. The number of output tokens generated
-3. For server-side tools, additional usage-based pricing (for example, web search charges per search performed)
+1. The total number of input tokens sent to the model (including in the `tools` parameter).
+2. The number of output tokens generated.
+3. For server-side tools, additional usage-based pricing (for example, web search charges per search performed).
 
 Client-side tools are priced the same as any other Claude API request, although server-side tools can incur additional charges based on their specific usage.
 
@@ -766,7 +766,7 @@ The additional tokens from tool use come from:
 * `tool_use` content blocks in API requests and responses
 * `tool_result` content blocks in API requests
 
-When you use `tools`, the API also automatically includes a special system prompt for the model that enables tool use. The number of tool use tokens required for each model is listed in the following table (excluding the additional tokens listed earlier). Note that the table assumes at least 1 tool is provided. If no `tools` are provided, then a tool choice of `none` uses 0 additional system prompt tokens.
+When you use `tools`, the API also automatically includes a special system prompt for the model that enables tool use. The following table lists the number of tool use tokens that each model requires (excluding the additional tokens listed earlier). The table assumes that you provide at least one tool. If you provide no `tools`, a tool choice of `none` uses 0 additional system prompt tokens.
 
 | Model                                                                                                                                                                  | Tool use system prompt tokens: auto, none | Tool use system prompt tokens: any, tool |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------- | :--------------------------------------- |
@@ -792,7 +792,7 @@ When you use `tools`, the API also automatically includes a special system promp
 
 These token counts are added to your normal input and output tokens to calculate the total cost of a request.
 
-See the [Models overview](https://platform.claude.com/docs/en/models/overview#latest-models-comparison) table for current per-model prices.
+See the [All models](https://platform.claude.com/docs/en/models/overview#all-models) table for current per-model prices.
 
 When you send a tool use prompt, like any other API request, the response includes both input and output token counts in the reported `usage` metrics.
 

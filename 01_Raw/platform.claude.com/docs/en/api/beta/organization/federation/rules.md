@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/federation/rules
-fetched_at: 2026-11-02T07:00:46.787417+00:00
+fetched_at: 2026-11-16T07:30:55.602591+00:00
 fetch_method: mintlify_md
 ---
 
@@ -47,23 +47,11 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -75,15 +63,11 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -98,8 +82,6 @@ manage rules whose `oauth_scope` is `workspace:developer` or
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -129,8 +111,6 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -151,11 +131,53 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 ### Body parameters
 
@@ -480,23 +502,11 @@ unless `include_archived=true`.
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -508,15 +518,11 @@ unless `include_archived=true`.
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -531,8 +537,6 @@ unless `include_archived=true`.
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -562,8 +566,6 @@ unless `include_archived=true`.
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -584,11 +586,53 @@ unless `include_archived=true`.
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 ### Returns
 
@@ -799,23 +843,11 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -827,15 +859,11 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -850,8 +878,6 @@ Retrieve a federation rule by its ID (`fdrl_...`).
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -881,8 +907,6 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -903,11 +927,53 @@ Retrieve a federation rule by its ID (`fdrl_...`).
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 ### Returns
 
@@ -1136,23 +1202,11 @@ Console session.
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -1164,15 +1218,11 @@ Console session.
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -1187,8 +1237,6 @@ Console session.
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -1218,8 +1266,6 @@ Console session.
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -1240,11 +1286,53 @@ Console session.
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 ### Body parameters
 
@@ -1545,23 +1633,11 @@ other scopes require a Console session.
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -1573,15 +1649,11 @@ other scopes require a Console session.
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -1596,8 +1668,6 @@ other scopes require a Console session.
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -1627,8 +1697,6 @@ other scopes require a Console session.
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -1649,11 +1717,53 @@ other scopes require a Console session.
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 ### Returns
 
@@ -2091,23 +2201,11 @@ other scopes require a Console session.
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -2119,15 +2217,11 @@ other scopes require a Console session.
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -2142,8 +2236,6 @@ other scopes require a Console session.
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -2173,8 +2265,6 @@ other scopes require a Console session.
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -2195,11 +2285,53 @@ other scopes require a Console session.
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Body parameters
 
@@ -2308,23 +2440,11 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -2336,15 +2456,11 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -2359,8 +2475,6 @@ rules with `applies_to_all_workspaces` or a legacy single
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -2390,8 +2504,6 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -2412,11 +2524,53 @@ rules with `applies_to_all_workspaces` or a legacy single
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Returns
 
@@ -2515,23 +2669,11 @@ Console session.
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -2543,15 +2685,11 @@ Console session.
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -2566,8 +2704,6 @@ Console session.
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -2597,8 +2733,6 @@ Console session.
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -2619,11 +2753,53 @@ Console session.
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 #### Returns
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill
-fetched_at: 2026-11-02T07:00:36.559860+00:00
+fetched_at: 2026-11-16T07:30:48.398947+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,7 +32,7 @@ When triggered, the skill equips Claude with:
 * **Streaming patterns:** Implementation details for building chat UIs and handling incremental display
 * **Batch processing:** Offline batch processing at 50 percent cost
 * **Prompt caching:** Prefix-stability design, breakpoint placement, and silent-invalidator audit
-* **Model migration:** Step-by-step guidance for migrating to newer Claude models (including the breaking changes and behavior shifts on [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide#migrating-from-claude-opus-5), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#migrating-from-claude-sonnet-5), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide), and [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/migration-guide))
+* **Model migration:** Step-by-step guidance for migrating to newer Claude models (including the breaking changes and behavior shifts on [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide#migrating-from-claude-opus-5), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#migrating-from-claude-sonnet-5), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide), and [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/migration-guide))
 * **Preserved thinking migration:** Finding, measuring, and fixing the history edits that invalidate `thinking` blocks, available through the `/claude-api preserved-thinking-migration` subcommand
 * **Current model information:** Model IDs, context window sizes, and pricing
 * **Common pitfalls:** Detailed guidance on avoiding frequent mistakes when integrating with the API
@@ -144,18 +144,36 @@ When the scope is ambiguous (for example, a bare `/claude-api migrate to claude-
 The skill handles:
 
 * **Model ID swaps**, including typed SDK constants (`Model.CLAUDE_OPUS_4_8` → `Model.CLAUDE_OPUS_5_5`) across all supported languages, and classifying each file as a caller, a model definer, or an opaque string reference before editing
+
 * **Cloud platform detection**, preserving platform-specific model ID formats (for example, the `anthropic.` prefix on Amazon Bedrock) and skipping changes for features that are unavailable on partner-operated platforms
+
 * **Breaking parameter changes**, such as removing `temperature`, `top_p`, and `top_k` for Claude Opus 4.8 and Claude Opus 4.7, and converting `thinking: {type: "enabled", budget_tokens: N}` to `thinking: {type: "adaptive"}`
+
 * **Prefill replacement**, converting assistant-message prefill patterns to [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) where applicable
+
 * **Beta header cleanup**, removing beta headers that the target model doesn’t require (for example, `effort-2025-11-24`, `fine-grained-tool-streaming-2025-05-14`, `interleaved-thinking-2025-05-14`) and switching back from `client.beta.messages.create()` (go: `client.Beta.Messages.New()`; java: `client.beta().messages().create()`; csharp: `client.Beta.Messages.Create()`; php: `$client->beta->messages->create()`) to `client.messages.create()` (go: `client.Messages.New()`; java: `client.messages().create()`; csharp: `client.Messages.Create()`; php: `$client->messages->create()`)
+
 * **Effort calibration**, recommending an `output_config.effort` starting point for the target model (for example, the default `high` on Claude Opus 5, and `xhigh` for coding and agentic use cases on Claude Opus 4.8 and Claude Opus 4.7)
+
 * **Prompt-behavior tuning**, flagging length-control, tool-triggering, subagent, and instruction-following prompts that might behave differently on the target model
+
 * **Silent default handling**, opting back into thinking summarization (`thinking.display: "summarized"`) when reasoning is surfaced to users on Claude Opus 4.8 and Claude Opus 4.7
-* **Refusal fallback configuration**, adding `stop_reason: "refusal"` handling before reading response content and setting up a [fallback retry path](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback) when the target is Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, or Claude Sonnet 5.5 (the server-side `fallbacks` parameter, typically in its `"default"` mode, the SDK refusal-fallback middleware, or a fallback-credit retry), and updating fallback code written against earlier preview shapes
+
+* **Refusal fallback configuration**, in three parts:
+
+  * Adding `stop_reason: "refusal"` handling before reading response content.
+
+  * Updating fallback code written against earlier preview shapes.
+
+  * Setting up a [fallback retry path](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback) for six target models. They are Claude Fable 5.2, Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, and Claude Sonnet 5.5. The path uses one of these:
+
+    * [Server-side fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback): the `fallbacks` parameter, typically in its `"default"` mode.
+    * [Client-side fallback with the SDK middleware](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback).
+    * A retry that redeems a [fallback credit](https://platform.claude.com/docs/en/build-with-claude/fallback-credit).
 
 As it edits, the skill explains each change and its motivation inline. On completion, it produces a checklist of items that require manual verification (typically integration tests, length-control prompt tuning, and cost/rate-limit re-baselining).
 
-For the full list of model-specific changes the skill applies, see [Migrating to Claude Opus 5.5 from Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide#migrating-from-claude-opus-5), [Migrating to Claude Opus 5.5 from Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide#migrating-from-claude-opus-4-8), [Migrating to Claude Sonnet 5.5 from Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#migrating-from-claude-sonnet-5), [Claude Haiku 5.5 migration guide](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide), and [Claude Fable 5.1 and Claude Mythos 5.1 migration guide](https://platform.claude.com/docs/en/models/fable-5-1/migration-guide).
+For the full list of model-specific changes the skill applies, see [Migrating to Claude Opus 5.5 from Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide#migrating-from-claude-opus-5), [Migrating to Claude Opus 5.5 from Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide#migrating-from-claude-opus-4-8), [Migrating to Claude Sonnet 5.5 from Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#migrating-from-claude-sonnet-5), [Claude Haiku 5.5 migration guide](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide), and [Claude Fable 5.2 and Claude Mythos 5.2 migration guide](https://platform.claude.com/docs/en/models/fable-5-2/migration-guide).
 
 ## Checking an integration for preserved thinking
 
@@ -172,7 +190,7 @@ The skill works through five steps:
 1. **Scope:** Checks whether your integration is affected, then sends three test requests to confirm that the API reports a deliberate edit.
 2. **Find:** Captures a few of your own multi-turn sessions, diffs consecutive requests, and lists each place your code edits the prefix.
 3. **Measure:** Replays the sessions with `"drop_block"` and reports which conversations lose `thinking` blocks, at which turn, and why.
-4. **Fix:** Replaces one edit at a time with the matching pattern in [Make changes without editing the prefix](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#replace-prefix-edits), and measures again after each change.
+4. **Fix:** Replaces each edit with the matching pattern in [Change tools or instructions without failing the prefix check](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking/change-tools-or-instructions), and measures again after each one.
 5. **Report:** Summarizes each cause, the change made for it, and the counts before and after.
 
 If your project has an eval, the skill also compares scores and token usage with and without dropped `thinking` blocks.

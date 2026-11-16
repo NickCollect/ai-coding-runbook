@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/models/choosing-a-model
-fetched_at: 2026-11-02T07:00:34.353899+00:00
+fetched_at: 2026-11-16T07:30:46.724585+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ When choosing a Claude model, consider first evaluating these factors:
 * **Capabilities:** What specific features or capabilities will you need the model to have to meet your needs?
 * **Speed:** How quickly does the model need to respond in your application? [Fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) delivers up to 2.5x higher output speed at premium pricing on [supported models](https://platform.claude.com/docs/en/build-with-claude/fast-mode#supported-models).
 * **Cost:** What’s your budget for both development and production usage?
-* **Effort:** Several Claude models support an [effort parameter](https://platform.claude.com/docs/en/build-with-claude/effort) that trades intelligence for latency and cost within a single model. Tuning effort is often a better lever than switching models. On Claude Fable 5.1, Claude Opus 5, and Claude Sonnet 5.5, start with the default (`high`) and adjust up or down based on your evals. On Claude Opus 5.5 and Claude Haiku 5.5 the default is `medium`; start there and adjust the same way. On Claude Opus 4.8 and Claude Opus 4.7, the `xhigh` effort level, between `high` and `max`, is the best setting for most coding and agentic use cases.
+* **Effort:** Several Claude models support an [effort parameter](https://platform.claude.com/docs/en/build-with-claude/effort) that trades intelligence for latency and cost within a single model. Tuning effort is often a better lever than switching models. On Claude Fable 5.2, Claude Fable 5.1, Claude Opus 5, and Claude Sonnet 5.5, start with the default (`high`) and adjust up or down based on your evals. On Claude Opus 5.5 and Claude Haiku 5.5, the default is `medium`; start there and adjust the same way. On Claude Opus 4.8 and Claude Opus 4.7, the `xhigh` effort level, between `high` and `max`, is the best setting for most coding and agentic use cases.
 
 ***
 
@@ -49,7 +49,7 @@ For complex tasks where intelligence and advanced capabilities are paramount, yo
 2. [Optimize your prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5) for this model.
 3. Evaluate if performance meets your requirements.
 4. Consider increasing efficiency by lowering [effort](https://platform.claude.com/docs/en/build-with-claude/effort) or downgrading models over time with greater workflow optimization.
-5. If your evals at `xhigh` or `max` effort still fall short on demanding reasoning or long-horizon agentic work, move to [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1).
+5. If your evals at `xhigh` or `max` effort still fall short on demanding reasoning or long-horizon agentic work, move to [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview).
 
 This approach is best for:
 
@@ -61,9 +61,9 @@ This approach is best for:
 
 **Claude Opus 5.5** (`claude-opus-5-5`) is built for long-running agentic coding and knowledge work, with [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/thinking) always on. If your integration forces tool use (`tool_choice` of type `any` or `tool`), turns thinking off, or uses the `computer_20251124` computer use tool, see [Breaking changes](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5#breaking-changes) before switching.
 
-**Claude Fable 5.1** (`claude-fable-5-1`) is Anthropic’s most capable model open to all customers. It extends Claude Fable 5 with stronger long-running agentic coding, knowledge work, and research at the same input and output prices, with cache reads at a quarter of the cost. **Claude Mythos 5.1** (`claude-mythos-5-1`) offers the same capabilities only to organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). Both models use always-on [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/thinking). See [What’s new in Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1) for details.
+**Claude Fable 5.2** (`claude-fable-5-2`) is Anthropic’s most capable model open to all customers. It’s built for demanding reasoning and long-horizon agentic work. **Claude Mythos 5.2** (`claude-mythos-5-2`) offers the same capabilities only to organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842). Both models use always-on [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/thinking). If your code changes `system`, `tools`, or earlier messages in a conversation, moves a conversation between models, uses the `computer_20251124` computer use tool, or uses the advisor tool, see [Claude Fable 5.2 breaking changes](https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2#breaking-changes) before switching.
 
-For context windows, output limits, and prices, see the [model comparison table](https://platform.claude.com/docs/en/models/overview#latest-models-comparison).
+For context windows, output limits, and prices, see the [All models](https://platform.claude.com/docs/en/models/overview#all-models) table.
 
 ## Model selection matrix
 
@@ -71,7 +71,7 @@ Most workloads start with Claude Opus 5.5.
 
 | When you need...                                                          | Consider starting with... | Example use cases                                                                                                                 |
 | ------------------------------------------------------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| The highest available capability                                          | Claude Fable 5.1          | Agent sessions that run for hours, multistep deep research, analysis carried through to a finished document, spreadsheet, or deck |
+| The highest available capability                                          | Claude Fable 5.2          | Agent sessions that run for hours, multistep deep research, analysis carried through to a finished document, spreadsheet, or deck |
 | Complex agentic coding and enterprise work                                | Claude Opus 5.5           | Multihour autonomous coding agents, large-scale refactoring, complex systems engineering, vision-heavy workflows, computer use    |
 | Speed and capability for everyday coding, agent, and enterprise workloads | Claude Sonnet 5.5         | Code generation, data analysis, content creation, visual understanding, agentic tool use                                          |
 | The lowest latency and price                                              | Claude Haiku 5.5          | Real-time applications, high-volume intelligent processing, cost-sensitive deployments needing strong reasoning, subagent tasks   |
@@ -80,7 +80,7 @@ Most workloads start with Claude Opus 5.5.
 
 ## Decide whether to upgrade or change models
 
-To determine if you need to upgrade or change models, you should:
+To decide whether to upgrade or change models:
 
 1. [Create benchmark tests](https://platform.claude.com/docs/en/test-and-evaluate/develop-tests) specific to your use case. Having a good evaluation set is the most important step in the process.
 
@@ -96,7 +96,7 @@ To determine if you need to upgrade or change models, you should:
 
 ## Combine models
 
-Multi-model strategies pair a lower-cost model with a frontier model so that most tokens are billed at the lower rate. The two common patterns are an executor that escalates hard decisions to an advisor, and an orchestrator that delegates bulk work to lower-cost workers. See [Optimizing for cost and intelligence](https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence) for both strategies, measured examples, and implementation options.
+Multimodel strategies pair a lower-cost model with a frontier model so that most tokens are billed at the lower rate. The two common patterns are an executor that escalates hard decisions to an advisor, and an orchestrator that delegates bulk work to lower-cost workers. See [Optimizing for cost and intelligence](https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence) for both strategies, measured examples, and implementation options.
 
 ## Next steps
 
@@ -105,8 +105,8 @@ Multi-model strategies pair a lower-cost model with a frontier model so that mos
     See detailed specifications and pricing for the latest Claude models
   </Card>
 
-  <Card title="What’s new in Claude Fable 5.1" icon="sparkle" href="https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1">
-    Built for demanding reasoning and long-horizon agentic work
+  <Card title="What’s new in Claude Fable 5.2" icon="sparkle" href="https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2">
+    The latest Fable model: breaking changes, feature support, and pricing
   </Card>
 
   <Card title="What’s new in Claude Opus 5.5" icon="sparkle" href="https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5">

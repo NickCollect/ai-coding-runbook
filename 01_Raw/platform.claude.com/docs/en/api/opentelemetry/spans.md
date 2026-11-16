@@ -1,19 +1,21 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/opentelemetry/spans
-fetched_at: 2026-11-09T07:30:23.417467+00:00
+fetched_at: 2026-11-16T07:30:48.157660+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: OpenTelemetry span reference
 url: https://platform.claude.com/docs/en/api/opentelemetry/spans
-description: The OpenTelemetry spans and span attributes that the Claude API and the Claude SDK emit.
+description: The OpenTelemetry spans and span attributes that the Claude API and the Anthropic SDK emit.
 featureMetadata:
   topic:
     title: OpenTelemetry
     url: https://platform.claude.com/docs/en/manage-claude/opentelemetry
   status: beta
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -33,10 +35,10 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: beta
+    Amazon Bedrock: beta
+    Amazon Bedrock (bedrock-runtime): beta
     Claude Platform on AWS: beta
     Claude Models on Google Cloud (Anthropic managed): beta
-    Amazon Bedrock: beta
-    Amazon Bedrock (InvokeModel): beta
     Claude Models on Google Cloud (Google managed): beta
     Microsoft Foundry: beta
 ---
@@ -45,7 +47,7 @@ featureMetadata:
   OpenTelemetry export is in beta. It’s provided under your agreement with Anthropic, including the Beta Services section of the [Service Specific Terms](https://www.anthropic.com/legal/service-specific-terms). Span names and attributes can change during the beta.
 </Note>
 
-To get spans, see [Set up OpenTelemetry with the Claude SDK](https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk) and [Set up OpenTelemetry with the Claude API](https://platform.claude.com/docs/en/manage-claude/opentelemetry/api).
+To get spans, see [Set up OpenTelemetry with the Anthropic SDK](https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk) and [Set up OpenTelemetry with the Claude API](https://platform.claude.com/docs/en/manage-claude/opentelemetry/api).
 
 ## Span names and kinds
 
@@ -72,23 +74,31 @@ Attributes use the [OpenTelemetry semantic conventions for generative AI](https:
 
 ### Common attributes
 
-Every span for a request has the following attributes, except where a description says otherwise. Other spans can have only the first three:
+Any span can have the following attributes:
 
-| Attribute                   | Type     | Description                                                                                                                                                                   |
-| --------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `gen_ai.provider.name`      | `string` | `anthropic`. On every span.<br />**SDK:** `aws.bedrock` on the Amazon Bedrock clients (Mantle included), and `gcp.vertex_ai` on the client for Google Cloud’s Agent Platform. |
-| `anthropic.organization.id` | `string` | The organization ID.                                                                                                                                                          |
-| `anthropic.workspace.id`    | `string` | The ID of the workspace that the work runs in.                                                                                                                                |
-| `anthropic.request.id`      | `string` | The value of the `request-id` response header.                                                                                                                                |
-| `http.request.method`       | `string` | The request’s HTTP method, for example `POST`.                                                                                                                                |
-| `http.route`                | `string` | The endpoint’s path, with placeholders for its path parameters, for example `/v1/sessions/{session_id}`.                                                                      |
-| `http.response.status_code` | `int`    | The final response’s HTTP status code. For a stream, the status code sent with the headers. Absent when there was no response.                                                |
-| `server.address`            | `string` | The host that the request was sent to, for example `api.anthropic.com`.                                                                                                       |
-| `server.port`               | `int`    | The request URL’s port, or the default port of its scheme when the URL doesn’t have one.                                                                                      |
-| `url.scheme`                | `string` | The URL’s scheme, for example `https`.                                                                                                                                        |
-| `url.path`                  | `string` | The URL’s path, for example `/v1/messages`.                                                                                                                                   |
-| `url.query`                 | `string` | The URL’s query string, with only the query parameters that the endpoint defines. Absent when there are none.                                                                 |
-| `url.full`                  | `string` | The request’s URL.                                                                                                                                                            |
+| Attribute                   | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| --------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `gen_ai.provider.name`      | `string` | The platform that serves the request: `aws.bedrock` on Amazon Bedrock (Mantle included), `gcp.vertex_ai` on Google Cloud’s Agent Platform, and `anthropic` everywhere else. On every span.                                                                                                                                                                                                                                                                   |
+| `anthropic.organization.id` | `string` | The organization ID.                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `anthropic.workspace.id`    | `string` | The ID of the workspace that the work runs in.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `user.id`                   | `string` | Your end user’s ID, if you set it in the W3C [`baggage`](https://www.w3.org/TR/baggage/) header (for example, `baggage: user.id=4f2a`). It appears on the request’s API span and on every API span under it, such as the session turns that the request starts.<br />Use an opaque ID, such as your database’s key for the user.<br />**Do not put an email address in this value.** To protect user privacy, the API drops any `user.id` that contains one. |
+
+### Request span attributes
+
+Every span for a request also has the following attributes, except where a description says otherwise:
+
+| Attribute                   | Type     | Description                                                                                                                    |
+| --------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `anthropic.request.id`      | `string` | The value of the `request-id` response header.                                                                                 |
+| `http.request.method`       | `string` | The request’s HTTP method, for example `POST`.                                                                                 |
+| `http.route`                | `string` | The endpoint’s path, with placeholders for its path parameters, for example `/v1/sessions/{session_id}`.                       |
+| `http.response.status_code` | `int`    | The final response’s HTTP status code. For a stream, the status code sent with the headers. Absent when there was no response. |
+| `server.address`            | `string` | The host that the request was sent to, for example `api.anthropic.com`.                                                        |
+| `server.port`               | `int`    | The request URL’s port, or the default port of its scheme when the URL doesn’t have one.                                       |
+| `url.scheme`                | `string` | The URL’s scheme, for example `https`.                                                                                         |
+| `url.path`                  | `string` | The URL’s path, for example `/v1/messages`.                                                                                    |
+| `url.query`                 | `string` | The URL’s query string, with only the query parameters that the endpoint defines. Absent when there are none.                  |
+| `url.full`                  | `string` | The request’s URL.                                                                                                             |
 
 API spans for requests sent through a cloud platform, such as Claude Platform on AWS, don’t have `server.address`, `server.port`, or `url.full`.
 

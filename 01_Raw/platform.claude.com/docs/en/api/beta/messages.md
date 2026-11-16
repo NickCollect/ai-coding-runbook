@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages
-fetched_at: 2026-11-09T07:30:27.029946+00:00
+fetched_at: 2026-11-16T07:30:52.119509+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,23 +35,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -63,15 +51,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -86,8 +70,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -117,8 +99,6 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -139,11 +119,53 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-user-profile-id": optional string`
 
@@ -3134,6 +3156,14 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `"claude-fable-5-2"`
+
+                          Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                        - `"claude-mythos-5-2"`
+
+                          Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                         - `"claude-haiku-5-5"`
 
                           Fastest model for high-volume, real-time tasks
@@ -3484,14 +3514,20 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
           Accepted in `messages[].content` and not rendered into the prompt; not
           validated against the request's `fallbacks` chain or top-level `model`.
 
-          Echo the assistant turn back verbatim, including this block in its
+          When you send the assistant turn back, keep this block in its
           original position. The block marks the boundary between content produced
           before and after a fallback hop, and the server relies on that boundary
           to validate the turn: when thinking runs flank the boundary, omitting
           the block merges them into one span the server cannot validate (the
           request is rejected), and moving it into the middle of a single run is
           likewise rejected; between non-thinking blocks the block's placement has
-          no validation effect.
+          no effect on thinking validation.
+
+          Some blocks from before the turn's final `fallback` block must be left
+          out when you send the turn back, and no `tool_result` is sent for a
+          `tool_use` block you left out.
+
+          See the [refusals and fallback guide](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback?sdk_languages=http#continuing-the-conversation) to learn which blocks to keep.
 
           - `type: "fallback"`
 
@@ -7054,6 +7090,14 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                    - `"claude-fable-5-2"`
+
+                      Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                    - `"claude-mythos-5-2"`
+
+                      Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                     - `"claude-haiku-5-5"`
 
                       Fastest model for high-volume, real-time tasks
@@ -8537,17 +8581,7 @@ curl https://api.anthropic.com/v1/messages \
   },
   "content": [
     {
-      "citations": [
-        {
-          "cited_text": "The grass is green. The sky is blue.",
-          "document_index": 0,
-          "document_title": "My Document",
-          "end_char_index": 0,
-          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-          "start_char_index": 0,
-          "type": "char_location"
-        }
-      ],
+      "citations": null,
       "text": "Hi! My name is Claude.",
       "type": "text"
     }
@@ -8561,22 +8595,10 @@ curl https://api.anthropic.com/v1/messages \
       }
     ]
   },
-  "diagnostics": {
-    "cache_miss_reason": {
-      "cache_missed_input_tokens": 0,
-      "type": "model_changed"
-    }
-  },
+  "diagnostics": null,
   "model": "claude-opus-5-5",
   "role": "assistant",
-  "stop_details": {
-    "category": "cyber",
-    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
-    "fallback_credit_token": "QW50aHJvcGljL0NsYXVkZQ==",
-    "fallback_has_prefill_claim": true,
-    "recommended_model": "claude-opus-4-8",
-    "type": "refusal"
-  },
+  "stop_details": null,
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",
@@ -8603,7 +8625,7 @@ curl https://api.anthropic.com/v1/messages \
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
-        "model": "claude-haiku-5-5",
+        "model": "claude-fable-5-2",
         "output_tokens": 0,
         "type": "message"
       }
@@ -8653,23 +8675,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -8681,15 +8691,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -8704,8 +8710,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -8735,8 +8739,6 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -8757,11 +8759,53 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-user-profile-id": optional string`
 
@@ -11740,6 +11784,14 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `"claude-fable-5-2"`
+
+                          Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                        - `"claude-mythos-5-2"`
+
+                          Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                         - `"claude-haiku-5-5"`
 
                           Fastest model for high-volume, real-time tasks
@@ -12090,14 +12142,20 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
           Accepted in `messages[].content` and not rendered into the prompt; not
           validated against the request's `fallbacks` chain or top-level `model`.
 
-          Echo the assistant turn back verbatim, including this block in its
+          When you send the assistant turn back, keep this block in its
           original position. The block marks the boundary between content produced
           before and after a fallback hop, and the server relies on that boundary
           to validate the turn: when thinking runs flank the boundary, omitting
           the block merges them into one span the server cannot validate (the
           request is rejected), and moving it into the middle of a single run is
           likewise rejected; between non-thinking blocks the block's placement has
-          no validation effect.
+          no effect on thinking validation.
+
+          Some blocks from before the turn's final `fallback` block must be left
+          out when you send the turn back, and no `tool_result` is sent for a
+          `tool_use` block you left out.
+
+          See the [refusals and fallback guide](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback?sdk_languages=http#continuing-the-conversation) to learn which blocks to keep.
 
           - `type: "fallback"`
 
@@ -12823,6 +12881,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-fable-5-2"`
+
+      Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+    - `"claude-mythos-5-2"`
+
+      Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
     - `"claude-haiku-5-5"`
 
       Fastest model for high-volume, real-time tasks
@@ -12976,6 +13042,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5-2"`
+
+      Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+    - `"claude-mythos-5-2"`
+
+      Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
     - `"claude-haiku-5-5"`
 
@@ -16223,6 +16297,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                      - `"claude-fable-5-2"`
+
+                        Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                      - `"claude-mythos-5-2"`
+
+                        Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                       - `"claude-haiku-5-5"`
 
                         Fastest model for high-volume, real-time tasks
@@ -16573,14 +16655,20 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         Accepted in `messages[].content` and not rendered into the prompt; not
         validated against the request's `fallbacks` chain or top-level `model`.
 
-        Echo the assistant turn back verbatim, including this block in its
+        When you send the assistant turn back, keep this block in its
         original position. The block marks the boundary between content produced
         before and after a fallback hop, and the server relies on that boundary
         to validate the turn: when thinking runs flank the boundary, omitting
         the block merges them into one span the server cannot validate (the
         request is rejected), and moving it into the middle of a single run is
         likewise rejected; between non-thinking blocks the block's placement has
-        no validation effect.
+        no effect on thinking validation.
+
+        Some blocks from before the turn's final `fallback` block must be left
+        out when you send the turn back, and no `tool_result` is sent for a
+        `tool_use` block you left out.
+
+        See the [refusals and fallback guide](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback?sdk_languages=http#continuing-the-conversation) to learn which blocks to keep.
 
         - `type: "fallback"`
 
@@ -25772,6 +25860,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                - `"claude-fable-5-2"`
+
+                  Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                - `"claude-mythos-5-2"`
+
+                  Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                 - `"claude-haiku-5-5"`
 
                   Fastest model for high-volume, real-time tasks
@@ -27915,6 +28011,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                 The model that will complete your prompt.
 
                 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                - `"claude-fable-5-2"`
+
+                  Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                - `"claude-mythos-5-2"`
+
+                  Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
                 - `"claude-haiku-5-5"`
 
@@ -33564,6 +33668,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                  - `"claude-fable-5-2"`
+
+                    Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                  - `"claude-mythos-5-2"`
+
+                    Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                   - `"claude-haiku-5-5"`
 
                     Fastest model for high-volume, real-time tasks
@@ -36845,6 +36957,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                  - `"claude-fable-5-2"`
+
+                    Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                  - `"claude-mythos-5-2"`
+
+                    Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                   - `"claude-haiku-5-5"`
 
                     Fastest model for high-volume, real-time tasks
@@ -37195,14 +37315,20 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     Accepted in `messages[].content` and not rendered into the prompt; not
     validated against the request's `fallbacks` chain or top-level `model`.
 
-    Echo the assistant turn back verbatim, including this block in its
+    When you send the assistant turn back, keep this block in its
     original position. The block marks the boundary between content produced
     before and after a fallback hop, and the server relies on that boundary
     to validate the turn: when thinking runs flank the boundary, omitting
     the block merges them into one span the server cannot validate (the
     request is rejected), and moving it into the middle of a single run is
     likewise rejected; between non-thinking blocks the block's placement has
-    no validation effect.
+    no effect on thinking validation.
+
+    Some blocks from before the turn's final `fallback` block must be left
+    out when you send the turn back, and no `tool_result` is sent for a
+    `tool_use` block you left out.
+
+    See the [refusals and fallback guide](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback?sdk_languages=http#continuing-the-conversation) to learn which blocks to keep.
 
     - `type: "fallback"`
 
@@ -38036,6 +38162,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-fable-5-2"`
+
+        Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+      - `"claude-mythos-5-2"`
+
+        Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
       - `"claude-haiku-5-5"`
 
         Fastest model for high-volume, real-time tasks
@@ -38165,14 +38299,20 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   Accepted in `messages[].content` and not rendered into the prompt; not
   validated against the request's `fallbacks` chain or top-level `model`.
 
-  Echo the assistant turn back verbatim, including this block in its
+  When you send the assistant turn back, keep this block in its
   original position. The block marks the boundary between content produced
   before and after a fallback hop, and the server relies on that boundary
   to validate the turn: when thinking runs flank the boundary, omitting
   the block merges them into one span the server cannot validate (the
   request is rejected), and moving it into the middle of a single run is
   likewise rejected; between non-thinking blocks the block's placement has
-  no validation effect.
+  no effect on thinking validation.
+
+  Some blocks from before the turn's final `fallback` block must be left
+  out when you send the turn back, and no `tool_result` is sent for a
+  `tool_use` block you left out.
+
+  See the [refusals and fallback guide](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback?sdk_languages=http#continuing-the-conversation) to learn which blocks to keep.
 
   - `type: "fallback"`
 
@@ -38185,6 +38325,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5-2"`
+
+        Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+      - `"claude-mythos-5-2"`
+
+        Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
       - `"claude-haiku-5-5"`
 
@@ -38453,6 +38601,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-fable-5-2"`
+
+      Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+    - `"claude-mythos-5-2"`
+
+      Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
     - `"claude-haiku-5-5"`
 
       Fastest model for high-volume, real-time tasks
@@ -38548,6 +38704,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5-2"`
+
+      Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+    - `"claude-mythos-5-2"`
+
+      Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
     - `"claude-haiku-5-5"`
 
@@ -38692,6 +38856,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-fable-5-2"`
+
+      Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+    - `"claude-mythos-5-2"`
+
+      Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
     - `"claude-haiku-5-5"`
 
       Fastest model for high-volume, real-time tasks
@@ -38798,6 +38970,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5-2"`
+
+      Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+    - `"claude-mythos-5-2"`
+
+      Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
     - `"claude-haiku-5-5"`
 
@@ -39076,6 +39256,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5-2"`
+
+        Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+      - `"claude-mythos-5-2"`
+
+        Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
       - `"claude-haiku-5-5"`
 
@@ -39583,6 +39771,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5-2"`
+
+        Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+      - `"claude-mythos-5-2"`
+
+        Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
       - `"claude-haiku-5-5"`
 
@@ -43241,6 +43437,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                     The model that will complete your prompt.
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                    - `"claude-fable-5-2"`
+
+                      Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                    - `"claude-mythos-5-2"`
+
+                      Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
                     - `"claude-haiku-5-5"`
 
@@ -47279,6 +47483,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                    - `"claude-fable-5-2"`
+
+                      Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                    - `"claude-mythos-5-2"`
+
+                      Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                     - `"claude-haiku-5-5"`
 
                       Fastest model for high-volume, real-time tasks
@@ -47629,14 +47841,20 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       Accepted in `messages[].content` and not rendered into the prompt; not
       validated against the request's `fallbacks` chain or top-level `model`.
 
-      Echo the assistant turn back verbatim, including this block in its
+      When you send the assistant turn back, keep this block in its
       original position. The block marks the boundary between content produced
       before and after a fallback hop, and the server relies on that boundary
       to validate the turn: when thinking runs flank the boundary, omitting
       the block merges them into one span the server cannot validate (the
       request is rejected), and moving it into the middle of a single run is
       likewise rejected; between non-thinking blocks the block's placement has
-      no validation effect.
+      no effect on thinking validation.
+
+      Some blocks from before the turn's final `fallback` block must be left
+      out when you send the turn back, and no `tool_result` is sent for a
+      `tool_use` block you left out.
+
+      See the [refusals and fallback guide](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback?sdk_languages=http#continuing-the-conversation) to learn which blocks to keep.
 
       - `type: "fallback"`
 
@@ -47816,6 +48034,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5-2"`
+
+          Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+        - `"claude-mythos-5-2"`
+
+          Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
         - `"claude-haiku-5-5"`
 
@@ -48132,6 +48358,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-fable-5-2"`
+
+      Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+    - `"claude-mythos-5-2"`
+
+      Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
     - `"claude-haiku-5-5"`
 
@@ -51141,6 +51375,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `"claude-fable-5-2"`
+
+                          Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                        - `"claude-mythos-5-2"`
+
+                          Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                         - `"claude-haiku-5-5"`
 
                           Fastest model for high-volume, real-time tasks
@@ -51491,14 +51733,20 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           Accepted in `messages[].content` and not rendered into the prompt; not
           validated against the request's `fallbacks` chain or top-level `model`.
 
-          Echo the assistant turn back verbatim, including this block in its
+          When you send the assistant turn back, keep this block in its
           original position. The block marks the boundary between content produced
           before and after a fallback hop, and the server relies on that boundary
           to validate the turn: when thinking runs flank the boundary, omitting
           the block merges them into one span the server cannot validate (the
           request is rejected), and moving it into the middle of a single run is
           likewise rejected; between non-thinking blocks the block's placement has
-          no validation effect.
+          no effect on thinking validation.
+
+          Some blocks from before the turn's final `fallback` block must be left
+          out when you send the turn back, and no `tool_result` is sent for a
+          `tool_use` block you left out.
+
+          See the [refusals and fallback guide](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback?sdk_languages=http#continuing-the-conversation) to learn which blocks to keep.
 
           - `type: "fallback"`
 
@@ -54774,6 +55022,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                    - `"claude-fable-5-2"`
+
+                      Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                    - `"claude-mythos-5-2"`
+
+                      Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                     - `"claude-haiku-5-5"`
 
                       Fastest model for high-volume, real-time tasks
@@ -55532,6 +55788,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           The model that will complete your prompt.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-fable-5-2"`
+
+            Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+          - `"claude-mythos-5-2"`
+
+            Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
           - `"claude-haiku-5-5"`
 
@@ -58639,6 +58903,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                       The model that will complete your prompt.
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                      - `"claude-fable-5-2"`
+
+                        Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                      - `"claude-mythos-5-2"`
+
+                        Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
                       - `"claude-haiku-5-5"`
 
@@ -62520,6 +62792,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                        - `"claude-fable-5-2"`
+
+                          Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                        - `"claude-mythos-5-2"`
+
+                          Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                         - `"claude-haiku-5-5"`
 
                           Fastest model for high-volume, real-time tasks
@@ -66337,6 +66617,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `"claude-fable-5-2"`
+
+              Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+            - `"claude-mythos-5-2"`
+
+              Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
             - `"claude-haiku-5-5"`
 
               Fastest model for high-volume, real-time tasks
@@ -68552,6 +68840,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+            - `"claude-fable-5-2"`
+
+              Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+            - `"claude-mythos-5-2"`
+
+              Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
             - `"claude-haiku-5-5"`
 
               Fastest model for high-volume, real-time tasks
@@ -70685,6 +70981,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5-2"`
+
+        Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+      - `"claude-mythos-5-2"`
+
+        Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
       - `"claude-haiku-5-5"`
 
@@ -73363,6 +73667,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                   The model that will complete your prompt.
 
                   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+                  - `"claude-fable-5-2"`
+
+                    Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                  - `"claude-mythos-5-2"`
+
+                    Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
                   - `"claude-haiku-5-5"`
 
@@ -76896,6 +77208,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `"claude-fable-5-2"`
+
+          Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+        - `"claude-mythos-5-2"`
+
+          Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
         - `"claude-haiku-5-5"`
 
           Fastest model for high-volume, real-time tasks
@@ -78925,6 +79245,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5-2"`
+
+          Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+        - `"claude-mythos-5-2"`
+
+          Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
         - `"claude-haiku-5-5"`
 
@@ -82346,6 +82674,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-fable-5-2"`
+
+        Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+      - `"claude-mythos-5-2"`
+
+        Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
       - `"claude-haiku-5-5"`
 
         Fastest model for high-volume, real-time tasks
@@ -84583,6 +84919,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         The model that will complete your prompt.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-fable-5-2"`
+
+          Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+        - `"claude-mythos-5-2"`
+
+          Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
         - `"claude-haiku-5-5"`
 
@@ -87814,6 +88158,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
                       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                      - `"claude-fable-5-2"`
+
+                        Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                      - `"claude-mythos-5-2"`
+
+                        Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                       - `"claude-haiku-5-5"`
 
                         Fastest model for high-volume, real-time tasks
@@ -88164,14 +88516,20 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         Accepted in `messages[].content` and not rendered into the prompt; not
         validated against the request's `fallbacks` chain or top-level `model`.
 
-        Echo the assistant turn back verbatim, including this block in its
+        When you send the assistant turn back, keep this block in its
         original position. The block marks the boundary between content produced
         before and after a fallback hop, and the server relies on that boundary
         to validate the turn: when thinking runs flank the boundary, omitting
         the block merges them into one span the server cannot validate (the
         request is rejected), and moving it into the middle of a single run is
         likewise rejected; between non-thinking blocks the block's placement has
-        no validation effect.
+        no effect on thinking validation.
+
+        Some blocks from before the turn's final `fallback` block must be left
+        out when you send the turn back, and no `tool_result` is sent for a
+        `tool_use` block you left out.
+
+        See the [refusals and fallback guide](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback?sdk_languages=http#continuing-the-conversation) to learn which blocks to keep.
 
         - `type: "fallback"`
 
@@ -90539,23 +90897,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -90567,15 +90913,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -90590,8 +90932,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -90621,8 +90961,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -90643,11 +90981,53 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-user-profile-id": optional string`
 
@@ -93658,6 +94038,14 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                            - `"claude-fable-5-2"`
+
+                              Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                            - `"claude-mythos-5-2"`
+
+                              Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                             - `"claude-haiku-5-5"`
 
                               Fastest model for high-volume, real-time tasks
@@ -94008,14 +94396,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
               Accepted in `messages[].content` and not rendered into the prompt; not
               validated against the request's `fallbacks` chain or top-level `model`.
 
-              Echo the assistant turn back verbatim, including this block in its
+              When you send the assistant turn back, keep this block in its
               original position. The block marks the boundary between content produced
               before and after a fallback hop, and the server relies on that boundary
               to validate the turn: when thinking runs flank the boundary, omitting
               the block merges them into one span the server cannot validate (the
               request is rejected), and moving it into the middle of a single run is
               likewise rejected; between non-thinking blocks the block's placement has
-              no validation effect.
+              no effect on thinking validation.
+
+              Some blocks from before the turn's final `fallback` block must be left
+              out when you send the turn back, and no `tool_result` is sent for a
+              `tool_use` block you left out.
+
+              See the [refusals and fallback guide](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback?sdk_languages=http#continuing-the-conversation) to learn which blocks to keep.
 
               - `type: "fallback"`
 
@@ -94953,7 +95347,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 curl https://api.anthropic.com/v1/messages/batches \
     -H 'Content-Type: application/json' \
     -H 'anthropic-version: 2026-10-21' \
-    -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "requests": [
@@ -95025,23 +95418,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -95053,15 +95434,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -95076,8 +95453,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -95107,8 +95482,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -95129,11 +95502,53 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-workspace-id": optional string`
 
@@ -95256,7 +95671,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 ```bash
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -H 'anthropic-version: 2026-10-21' \
-    -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
@@ -95323,23 +95737,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -95351,15 +95753,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -95374,8 +95772,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -95405,8 +95801,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -95427,11 +95821,53 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-workspace-id": optional string`
 
@@ -95566,7 +96002,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 ```bash
 curl https://api.anthropic.com/v1/messages/batches \
     -H 'anthropic-version: 2026-10-21' \
-    -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
@@ -95630,23 +96065,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -95658,15 +96081,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -95681,8 +96100,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -95712,8 +96129,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -95734,11 +96149,53 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-workspace-id": optional string`
 
@@ -95862,7 +96319,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
     -X POST \
     -H 'anthropic-version: 2026-10-21' \
-    -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
@@ -95919,23 +96375,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -95947,15 +96391,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -95970,8 +96410,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -96001,8 +96439,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -96023,11 +96459,53 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-workspace-id": optional string`
 
@@ -96057,7 +96535,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
     -X DELETE \
     -H 'anthropic-version: 2026-10-21' \
-    -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
@@ -96100,23 +96577,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -96128,15 +96593,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -96151,8 +96612,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -96182,8 +96641,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -96204,11 +96661,53 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-workspace-id": optional string`
 
@@ -98979,6 +99478,14 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                          - `"claude-fable-5-2"`
+
+                            Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+                          - `"claude-mythos-5-2"`
+
+                            Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
                           - `"claude-haiku-5-5"`
 
                             Fastest model for high-volume, real-time tasks
@@ -100120,9 +100627,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `type: "invalid_request_error"`
 
+              The broad category of the error.
+
               default: invalid_request_error
 
             - `message: string`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
               default: Invalid request
 
@@ -100130,9 +100641,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `type: "authentication_error"`
 
+              The broad category of the error.
+
               default: authentication_error
 
             - `message: string`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
               default: Authentication error
 
@@ -100140,9 +100655,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `type: "billing_error"`
 
+              The broad category of the error.
+
               default: billing_error
 
             - `message: string`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
               default: Billing error
 
@@ -100150,9 +100669,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `type: "permission_error"`
 
+              The broad category of the error.
+
               default: permission_error
 
             - `message: string`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
               default: Permission denied
 
@@ -100160,9 +100683,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `type: "not_found_error"`
 
+              The broad category of the error.
+
               default: not_found_error
 
             - `message: string`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
               default: Not found
 
@@ -100170,9 +100697,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `type: "rate_limit_error"`
 
+              The broad category of the error.
+
               default: rate_limit_error
 
             - `message: string`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
               default: Rate limited
 
@@ -100180,9 +100711,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `type: "timeout_error"`
 
+              The broad category of the error.
+
               default: timeout_error
 
             - `message: string`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
               default: Request timeout
 
@@ -100190,9 +100725,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `type: "api_error"`
 
+              The broad category of the error.
+
               default: api_error
 
             - `message: string`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
               default: Internal server error
 
@@ -100200,9 +100739,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `type: "overloaded_error"`
 
+              The broad category of the error.
+
               default: overloaded_error
 
             - `message: string`
+
+              A human-readable explanation of the error. Its wording can change, so don't match on it.
 
               default: Overloaded
 
@@ -100225,6 +100768,5 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 ```bash
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
     -H 'anthropic-version: 2026-10-21' \
-    -H 'anthropic-beta: message-batches-2024-09-24' \
     -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```

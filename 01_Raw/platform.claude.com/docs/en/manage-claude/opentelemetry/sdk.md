@@ -1,19 +1,21 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk
-fetched_at: 2026-11-09T07:30:19.993379+00:00
+fetched_at: 2026-11-16T07:30:44.611533+00:00
 fetch_method: mintlify_md
 ---
 
 ---
-title: Set up OpenTelemetry with the Claude SDK
+title: Set up OpenTelemetry with the Anthropic SDK
 url: https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk
-description: Trace the Claude SDK's requests and tool uses in Python, TypeScript, C#, Go, Java, PHP, or Ruby, and send the spans to your observability platform.
+description: Trace the Anthropic SDK's requests and tool uses in Python, TypeScript, C#, Go, Java, PHP, or Ruby, and send the spans to your observability platform.
 featureMetadata:
   topic:
     title: OpenTelemetry
     url: https://platform.claude.com/docs/en/manage-claude/opentelemetry
   status: beta
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -33,14 +35,14 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: beta
-    Claude Platform on AWS: beta
     Amazon Bedrock: beta
-    Amazon Bedrock (InvokeModel): beta
+    Amazon Bedrock (bedrock-runtime): beta
+    Claude Platform on AWS: beta
     Claude Models on Google Cloud (Google managed): beta
     Microsoft Foundry: beta
 ---
 
-With OpenTelemetry, the Claude SDK can emit a span for each request that it sends and each tool use that the [tool runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner) runs. You can view these spans in your observability platform, nested in your own traces.
+With OpenTelemetry, the Anthropic SDK can emit a span for each request that it sends and each tool use that the [tool runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner) runs. You can view these spans in your observability platform, nested in your own traces.
 
 The SDK emits spans in your application. Your application’s OpenTelemetry exporter sends them to your observability platform.
 
@@ -50,7 +52,7 @@ The SDK emits spans in your application. Your application’s OpenTelemetry expo
 
 ## 1. Install the SDK
 
-Install or upgrade to the latest version of the Claude SDK:
+Install or upgrade to the latest version of the Anthropic SDK:
 
 <Tabs>
   <Tab title="Python">
@@ -102,12 +104,12 @@ Install or upgrade to the latest version of the Claude SDK:
   </Tab>
 
   <Tab title="Java">
-    Add the Claude SDK to your dependencies, or update it to at least the following version if your build file already declares it:
+    Add the Anthropic SDK to your dependencies, or update it to at least the following version if your build file already declares it:
 
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:3.6.0")
+        implementation("com.anthropic:anthropic-java:3.8.0")
         ```
       </Tab>
 
@@ -116,7 +118,7 @@ Install or upgrade to the latest version of the Claude SDK:
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>3.6.0</version>
+            <version>3.8.0</version>
         </dependency>
         ```
       </Tab>
@@ -260,8 +262,8 @@ The following example registers a tracer provider that prints each span to the c
   	defer provider.Shutdown(ctx)
   	otel.SetTracerProvider(provider)
   	// OpenTelemetry for Go doesn't register a propagator by default, so
-  	// register the W3C trace context propagator.
-  	otel.SetTextMapPropagator(propagation.TraceContext{})
+  	// register the W3C trace context and baggage propagators.
+  	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
 
   	client := anthropic.NewClient()
 
@@ -283,8 +285,10 @@ The following example registers a tracer provider that prints each span to the c
   import com.anthropic.client.okhttp.AnthropicOkHttpClient;
   import com.anthropic.models.messages.MessageCreateParams;
   import com.anthropic.models.messages.Model;
+  import io.opentelemetry.api.baggage.propagation.W3CBaggagePropagator;
   import io.opentelemetry.api.trace.propagation.W3CTraceContextPropagator;
   import io.opentelemetry.context.propagation.ContextPropagators;
+  import io.opentelemetry.context.propagation.TextMapPropagator;
   import io.opentelemetry.exporter.logging.LoggingSpanExporter;
   import io.opentelemetry.sdk.OpenTelemetrySdk;
   import io.opentelemetry.sdk.trace.SdkTracerProvider;
@@ -298,8 +302,9 @@ The following example registers a tracer provider that prints each span to the c
       OpenTelemetrySdk.builder()
           .setTracerProvider(tracerProvider)
           // OpenTelemetry for Java doesn't register a propagator when you build
-          // it in code, so register the W3C trace context propagator.
-          .setPropagators(ContextPropagators.create(W3CTraceContextPropagator.getInstance()))
+          // it in code, so register the W3C trace context and baggage propagators.
+          .setPropagators(ContextPropagators.create(TextMapPropagator.composite(
+              W3CTraceContextPropagator.getInstance(), W3CBaggagePropagator.getInstance())))
           .buildAndRegisterGlobal();
 
       var client = AnthropicOkHttpClient.fromEnv();
@@ -318,7 +323,9 @@ The following example registers a tracer provider that prints each span to the c
   ```php PHP
   use Anthropic\Client;
   use Anthropic\Messages\Model;
+  use OpenTelemetry\API\Baggage\Propagation\BaggagePropagator;
   use OpenTelemetry\API\Trace\Propagation\TraceContextPropagator;
+  use OpenTelemetry\Context\Propagation\MultiTextMapPropagator;
   use OpenTelemetry\SDK\Sdk;
   use OpenTelemetry\SDK\Trace\SpanExporter\ConsoleSpanExporterFactory;
   use OpenTelemetry\SDK\Trace\SpanProcessor\SimpleSpanProcessor;
@@ -331,8 +338,11 @@ The following example registers a tracer provider that prints each span to the c
   Sdk::builder()
       ->setTracerProvider($tracerProvider)
       // OpenTelemetry for PHP doesn't register a propagator when you build
-      // it in code, so register the W3C trace context propagator.
-      ->setPropagator(TraceContextPropagator::getInstance())
+      // it in code, so register the W3C trace context and baggage propagators.
+      ->setPropagator(new MultiTextMapPropagator([
+          TraceContextPropagator::getInstance(),
+          BaggagePropagator::getInstance(),
+      ]))
       ->buildAndRegisterGlobal();
 
   $client = new Client();
@@ -598,7 +608,7 @@ When the worker sends a tool result, that request’s API span is nested under i
 
 ## Trace context and baggage
 
-With each request, the SDK uses your application’s propagator to send the trace context to the API in headers such as `traceparent`. If that propagator also writes baggage, the SDK sends your baggage too. To send the trace context without baggage, register only the W3C trace context propagator.
+With each request, the SDK uses your application’s propagator to send the trace context to the API in headers such as `traceparent`. If that propagator also writes baggage, the SDK sends your baggage too, which is how you can [identify your end users](https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk#identify-your-end-users). To send the trace context without baggage, register only the W3C trace context propagator.
 
 To stop the SDK from sending these headers, for example when your HTTP client instrumentation already sends them, turn off the SDK’s propagation:
 
@@ -673,6 +683,145 @@ To stop the SDK from sending these headers, for example when your HTTP client in
 
 While the SDK calls an [MCP tool](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector#client-side-mcp-helpers), the SDK’s tool span is the current span. Some MCP client libraries send the trace context to the MCP server in `_meta`, so a server that reads it can add its spans to your trace under that tool span. The Python `mcp` package from version 2.0 and the C# `ModelContextProtocol` package do this. The TypeScript, Go, Java, Ruby, and PHP MCP SDKs don’t do it on their own.
 
+### Identify your end users
+
+[Baggage](https://opentelemetry.io/docs/concepts/signals/baggage/) is a set of key-value pairs that a request carries in its W3C `baggage` header. To set the [`user.id`](https://platform.claude.com/docs/en/api/opentelemetry/spans#user.id) attribute on the API spans for a request, send the request with a `user.id` baggage entry set to your end user’s ID. Use an opaque ID, not an email address: to protect user privacy, the API drops any `user.id` that contains one.
+
+<CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2026-10-21" \
+    -H "content-type: application/json" \
+    -H "baggage: user.id=4f2a" \
+    -d '{
+      "model": "claude-opus-5-5",
+      "max_tokens": 1024,
+      "messages": [
+        {"role": "user", "content": "Hello, Claude"}
+      ]
+    }'
+  ```
+
+  ```bash CLI
+  ANTHROPIC_CUSTOM_HEADERS="baggage: user.id=4f2a" ant messages create \
+    --model claude-opus-5-5 \
+    --max-tokens 1024 \
+    --message '{role: user, content: "Hello, Claude"}'
+  ```
+
+  ```python Python
+  from opentelemetry import baggage, context
+
+  client = Anthropic()
+
+  token = context.attach(baggage.set_baggage("user.id", "4f2a"))
+  try:
+      message = client.messages.create(
+          model="claude-opus-5-5",
+          max_tokens=1024,
+          messages=[{"role": "user", "content": "Hello, Claude"}],
+      )
+  finally:
+      context.detach(token)
+  ```
+
+  ```typescript TypeScript
+  import { context, propagation } from "@opentelemetry/api";
+
+  const client = new Anthropic();
+
+  const userBaggage = propagation.createBaggage({ "user.id": { value: "4f2a" } });
+  const message = await context.with(propagation.setBaggage(context.active(), userBaggage), () =>
+    client.messages.create({
+      model: "claude-opus-5-5",
+      max_tokens: 1024,
+      messages: [{ role: "user", content: "Hello, Claude" }]
+    })
+  );
+  ```
+
+  ```csharp C#
+  using System.Diagnostics;
+  // ...
+  // Register this source with AddSource on your tracer provider, so that it records the activity.
+  ActivitySource source = new("MyApp");
+  AnthropicClient client = new();
+
+  // The SDK sends the current activity's baggage.
+  using var activity = source.StartActivity("chat");
+  activity?.SetBaggage("user.id", "4f2a");
+  var message = await client.Messages.Create(new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus5_5,
+      MaxTokens = 1024,
+      Messages = [new UserMessageParam { Content = "Hello, Claude" }],
+  });
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+
+  member, _ := baggage.NewMember("user.id", "4f2a")
+  userBaggage, _ := baggage.New(member)
+  ctx := baggage.ContextWithBaggage(context.Background(), userBaggage)
+  message, err := client.Messages.New(ctx, anthropic.MessageNewParams{
+  	Model:     anthropic.ModelClaudeOpus5_5,
+  	MaxTokens: 1024,
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
+  	},
+  })
+  ```
+
+  ```java Java
+  import io.opentelemetry.api.baggage.Baggage;
+
+  void main() {
+      var client = AnthropicOkHttpClient.fromEnv();
+
+      try (var scope = Baggage.current().toBuilder().put("user.id", "4f2a").build().makeCurrent()) {
+          var message = client.messages().create(MessageCreateParams.builder()
+              .model(Model.CLAUDE_OPUS_5_5)
+              .maxTokens(1024)
+              .addUserMessage("Hello, Claude")
+              .build());
+      }
+  }
+  ```
+
+  ```php PHP
+  use OpenTelemetry\API\Baggage\Baggage;
+
+  $client = new Client();
+
+  $scope = Baggage::getBuilder()->set('user.id', '4f2a')->build()->activate();
+  try {
+      $message = $client->messages->create(
+          maxTokens: 1024,
+          messages: [['role' => 'user', 'content' => 'Hello, Claude']],
+          model: Model::CLAUDE_OPUS_5_5,
+      );
+  } finally {
+      $scope->detach();
+  }
+  ```
+
+  ```ruby Ruby
+  require "opentelemetry/sdk"
+
+  client = Anthropic::Client.new
+
+  OpenTelemetry::Context.with_current(OpenTelemetry::Baggage.set_value("user.id", "4f2a")) do
+    client.messages.create(
+      model: Anthropic::Model::CLAUDE_OPUS_5_5,
+      max_tokens: 1024,
+      messages: [{role: "user", content: "Hello, Claude"}]
+    )
+  end
+  ```
+</CodeGroup>
+
 ## Troubleshooting
 
 | Problem                                                                                                       | What to check                                                                                                                                                                                                                                                                                                            |
@@ -694,9 +843,9 @@ SDK tracing is in beta on every model.
 
 * Availability: Available
 
-| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta   | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (InvokeModel)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
+| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Beta   | Claude API, [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (bedrock-runtime)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 

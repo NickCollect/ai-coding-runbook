@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-api
-fetched_at: 2026-11-09T07:30:20.529787+00:00
+fetched_at: 2026-11-16T07:30:45.127043+00:00
 fetch_method: mintlify_md
 ---
 
@@ -120,6 +120,10 @@ Anthropic provides two analytics APIs: the Claude Enterprise Analytics API and t
 
   <Card href="https://platform.claude.com/docs/en/manage-claude/compliance-integration-patterns" title="Design your compliance integration">
     Choose a feed-consumption pattern, plan SIEM correlation, and decide your retention approach.
+  </Card>
+
+  <Card href="https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/overview" title="Security posture in the Compliance API">
+    Get changes on the Security posture page into your SIEM and other security tools.
   </Card>
 
   <Card href="https://platform.claude.com/docs/en/manage-claude/compliance-errors" title="Handle Compliance API errors">

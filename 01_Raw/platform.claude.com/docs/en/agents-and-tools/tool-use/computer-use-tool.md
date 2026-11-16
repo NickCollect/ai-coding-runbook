@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool
-fetched_at: 2026-11-09T07:30:16.383082+00:00
+fetched_at: 2026-11-16T07:30:41.216135+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,6 +14,8 @@ featureMetadata:
     eligibility: eligible
     note: Excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements). Client-side tool where screenshots and files are captured and stored in your environment, not by Anthropic.
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -33,13 +35,13 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
-    Claude Platform on AWS: stable
     Amazon Bedrock: stable
-    Amazon Bedrock (InvokeModel): beta
+    Amazon Bedrock (bedrock-runtime): stable
+    Claude Platform on AWS: stable
     Claude Models on Google Cloud (Google managed): stable
     Microsoft Foundry: stable
   details:
-    - Claude 5.5 and later models support computer use through the `computer_toolset_20260801` toolset. They return a 400 error for any computer use tool version they don't accept, such as `computer_20251124` on the Claude API. To move a `computer_20251124` integration to the toolset, see [Migrate from `computer_20251124`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#migrate-from-computer-20251124). To move from `computer_20250124`, see [Move computer use to the toolset](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#computer-use-toolset) in the Claude Haiku 5.5 migration guide.
+    - Claude Fable 5.2, Claude Mythos 5.2, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 support computer use through the `computer_toolset_20260801` toolset. They return a 400 error for any computer use tool version they don't accept, such as `computer_20251124` on the Claude API. To move a `computer_20251124` integration to the toolset, see [Migrate from `computer_20251124`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#migrate-from-computer-20251124). To move from `computer_20250124`, see [Move computer use to the toolset](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#computer-use-toolset) in the Claude Haiku 5.5 migration guide.
     - Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5 support computer use only through the `computer_20251124` tool version, which requires a beta header; see [Earlier tool versions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions).
 ---
 
@@ -74,7 +76,7 @@ Anthropic has trained the model to resist these prompt injections and has added 
 
 This extra protection isn’t ideal for every use case (for example, use cases without a human in the loop), so if you’d like to opt out and turn it off, [contact support](https://support.claude.com/en/). The precautions listed earlier remain important even with these classifiers in place.
 
-Inform end users of relevant risks and obtain their consent prior to enabling computer use in your own products.
+Inform end users of relevant risks and obtain their consent before enabling computer use in your own products.
 
 ## Quick start
 
@@ -515,7 +517,7 @@ The core of computer use is the “agent loop”: a cycle where Claude requests 
   ): Promise<Anthropic.MessageParam[]> {
     // Run the computer-use agent loop until Claude stops requesting tools
     // or the iteration limit is reached.
-    for (let i = 0; i < maxIterations; i++) {
+    for (let iteration = 0; iteration < maxIterations; iteration++) {
       const response = await client.messages.create({
         model,
         max_tokens: 4096,
@@ -549,7 +551,7 @@ The core of computer use is the “agent loop”: a cycle where Claude requests 
   {
       // Run the computer-use agent loop until Claude stops requesting tools
       // or the iteration limit is reached.
-      for (var i = 0; i < maxIterations; i++)
+      for (var iteration = 0; iteration < maxIterations; iteration++)
       {
           var response = await client.Messages.Create(
               new MessageCreateParams
@@ -623,7 +625,7 @@ The core of computer use is the “agent loop”: a cycle where Claude requests 
    * or the iteration limit is reached.
    */
   List<MessageParam> samplingLoop(Model model, List<MessageParam> messages, int maxIterations) {
-      for (int i = 0; i < maxIterations; i++) {
+      for (int iteration = 0; iteration < maxIterations; iteration++) {
           Message response = client.messages().create(MessageCreateParams.builder()
               .model(model)
               .maxTokens(4096)
@@ -652,11 +654,11 @@ The core of computer use is the “agent loop”: a cycle where Claude requests 
    * Run the computer-use agent loop until Claude stops requesting tools
    * or the iteration limit is reached.
    */
-  function samplingLoop(string $model, array $messages, int $maxIterations = 10): array
+  function samplingLoop(Model|string $model, array $messages, int $maxIterations = 10): array
   {
       global $client, $tools;
 
-      for ($i = 0; $i < $maxIterations; $i++) {
+      for ($iteration = 0; $iteration < $maxIterations; $iteration++) {
           $response = $client->messages->create(
               model: $model,
               maxTokens: 4096,
@@ -713,7 +715,7 @@ The loop continues until either Claude responds without requesting any tools (ta
 
 ### Optimize model performance with prompting
 
-1. Specify simple, well-defined tasks and provide explicit instructions for each step.
+1. Specify well-defined tasks and provide explicit instructions for each step.
 2. Claude sometimes acts as if its actions succeeded without explicitly checking their results. To prevent this, you can prompt Claude with `After each step, take a screenshot and carefully evaluate if you have achieved the right outcome. State in one sentence what the screenshot shows and whether the step succeeded. If it didn't, try again. Only when you confirm a step was executed correctly should you move on to the next one.`
 3. Some UI elements (such as dropdowns and scrollbars) might be tricky for Claude to manipulate using mouse movements. If you experience this, try prompting the model to use keyboard shortcuts.
 4. For repeatable tasks or UI interactions, include example screenshots and tool calls of successful outcomes in your prompt.
@@ -722,13 +724,9 @@ The loop continues until either Claude responds without requesting any tools (ta
 7. Claude uses the `zoom` action to inspect a region at full resolution when asked about small text or specific UI elements that aren’t legible at the screenshot’s default resolution, such as file names in a sidebar, tab titles, status-bar text, line numbers, or button labels. If Claude isn’t zooming when you expect, ask about a specific region or element rather than the screen as a whole.
 8. If you want every [batch action](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#batch-actions) to end with a screenshot, say so in the system prompt, for example, `End each group of actions with a screenshot so you can verify the result before continuing.`
 
-<Tip>
-  If you repeatedly encounter a clear set of issues or know in advance the tasks Claude will need to complete, use the system prompt to provide Claude with explicit tips or instructions on how to do the tasks successfully.
-</Tip>
+If you repeatedly encounter a clear set of issues, or know in advance the tasks Claude has to complete, give Claude explicit tips or instructions for them in the system prompt.
 
-<Tip>
-  For agents that span multiple sessions, run end-to-end verification at the start of each session, not only after implementation. Browser-based checks catch regressions from prior sessions that code-level review alone misses. See [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) for details.
-</Tip>
+For agents that span multiple sessions, run end-to-end verification at the start of each session, not only after implementation. Browser-based checks catch regressions from prior sessions that code-level review alone misses. See [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) for details.
 
 ### System prompts
 
@@ -1558,7 +1556,7 @@ The computer use tool is implemented as a schema-less tool. When using this tool
         response.content.each do |block|
           # This example declares only the computer toolset; route other tools here
           # if you add them.
-          next unless block.type == :tool_use && block.toolset_name == "computer"
+          next unless block.is_a?(Anthropic::Models::ToolUseBlock) && block.toolset_name == "computer"
 
           result = { type: "tool_result", tool_use_id: block.id, toolset_name: "computer" }
           if failed
@@ -1613,7 +1611,7 @@ Use the same shape for coordinates outside the display bounds and for actions th
 Screenshots and zoom images that you return to the computer use toolset must already fit within your model’s [image size limits](https://platform.claude.com/docs/en/build-with-claude/vision#evaluate-image-size): the toolset takes no display dimensions and the API doesn’t downscale for you, so an oversized `tool_result` image is rejected with a validation error. Because Claude returns coordinates in the pixel space of the image it receives, keep the scale factor you used so you can map those coordinates back to your screen.
 
 <Note>
-  Limits vary by model. Claude Opus 4.7 and later models, including every model that supports `computer_toolset_20260801`, accept up to 2,576 pixels on the long edge and 4,784 visual tokens total (`⌈width / 28⌉ × ⌈height / 28⌉`, approximately 3.75 megapixels); earlier models accept up to 1,568 pixels on the long edge and approximately 1.15 megapixels total (see [Resolution and token cost](https://platform.claude.com/docs/en/build-with-claude/vision#evaluate-image-size) for each model’s tier). The following example uses the earlier-model 1,568 px / 1.15 MP limits. For a high-resolution-tier model, size to the visual-token limit rather than a pixel total, for example with the resize helper in [Resize your image before uploading](https://platform.claude.com/docs/en/build-with-claude/vision-coordinates#resize-your-image-before-uploading).
+  Limits vary by model. Claude Opus 4.7 and later models, including every model that supports `computer_toolset_20260801`, accept up to 2,576 pixels on the long edge and 4,784 visual tokens total (`⌈width / 28⌉ × ⌈height / 28⌉`, approximately 3.75 megapixels). Earlier models accept up to 1,568 pixels on the long edge and approximately 1.15 megapixels total. See [Resolution and token cost](https://platform.claude.com/docs/en/build-with-claude/vision#evaluate-image-size) for each model’s tier. The following example uses the earlier-model 1,568 px / 1.15 MP limits. For a high-resolution-tier model, size to the visual-token limit rather than a pixel total, for example with the resize helper in [Resize your image before uploading](https://platform.claude.com/docs/en/build-with-claude/vision-coordinates#resize-your-image-before-uploading).
 </Note>
 
 If your screen is larger than the limit, resize each screenshot before returning it and scale Claude’s returned coordinates back to the original screen space. Because the toolset takes no display dimensions, the resize and the coordinate scaling in your application code are all you need:
@@ -1828,13 +1826,21 @@ When you choose a display resolution and return screenshots:
 
 ### Manage screenshot history
 
-Long agent loops accumulate screenshots quickly (roughly 1,000–1,800 input tokens each). The API’s [request limits](https://platform.claude.com/docs/en/build-with-claude/vision#request-limits) also apply. Once a single request carries more than 20 images, every image in it is held to a stricter per-side limit. A loop that keeps its screenshot history reaches that count within a few dozen turns, so either resize each screenshot to stay under that limit or prune older screenshots to keep 20 or fewer in the request.
+Long agent loops accumulate screenshots quickly (roughly 1,000–1,800 input tokens each). The API’s [request limits](https://platform.claude.com/docs/en/build-with-claude/vision#request-limits) also apply.
+
+Once a single request carries more than 20 images, every image in it is held to a stricter per-side limit. A loop that keeps its screenshot history can reach that count. Either resize each screenshot to stay under that limit, or prune older screenshots to keep 20 or fewer in the request.
 
 To keep [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) effective while bounding context:
 
 * Place one `cache_control` breakpoint after the system prompt and tool definitions, and up to three more on the last `tool_result` block of each of the most recent turns, advancing them each turn. Within a [batch action](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#batch-actions), markers on several blocks act as a single breakpoint, but each still counts toward the limit of four, so use at most one in any turn.
+
 * Prune old screenshots in *batches*, not one each turn. Dropping a screenshot every turn changes the prefix every turn and invalidates the cache. A reasonable default is to keep the last three screenshots and prune every 25 turns, so the prefix stays byte-identical between prune events; if your screenshots exceed the stricter limit, choose an interval that keeps each request at 20 or fewer images.
-* On Claude 5.1 and later models, avoid pruning on the client: removing an earlier screenshot from a request [invalidates every later thinking block](https://platform.claude.com/docs/en/build-with-claude/thinking#preserved-in-conversation) in that request and in every later request. Resize screenshots to stay under the stricter limit instead and use server-side [tool result clearing](https://platform.claude.com/docs/en/build-with-claude/context-editing#tool-result-clearing) to drop old ones from the context. If you must prune, keep [`prefix_mismatch_behavior: "drop_block"`](https://platform.claude.com/docs/en/build-with-claude/thinking#preserved-thinking-controls) set from then on; after each prune, Claude continues without the thinking produced since the pruned screenshot, on that request and every later one. On Claude Sonnet 5.5 and Claude Haiku 5.5, `block_binding` works only with `thinking: {"type": "adaptive"}`. With any other thinking setting on those models, keep the history append-only or strip every `thinking` and `redacted_thinking` block after the pruned screenshot.
+
+* Avoid client-side pruning on Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, and Claude Mythos 5.1. The same goes for Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5. On these models, removing an earlier screenshot from a request [invalidates every later thinking block already in the history](https://platform.claude.com/docs/en/build-with-claude/thinking#preserved-in-conversation) of that and every later request.
+
+  * **Instead:** Resize screenshots to stay under the stricter limit. [Tool result clearing](https://platform.claude.com/docs/en/build-with-claude/context-editing#tool-result-clearing) saves tokens, but cleared screenshots still count toward [request limits](https://platform.claude.com/docs/en/build-with-claude/vision#request-limits), so use [on-demand compaction](https://platform.claude.com/docs/en/build-with-claude/compaction-on-demand) before a loop reaches them.
+  * **If you must prune:** Keep [`prefix_mismatch_behavior: "drop_block"`](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking/prefix-checks#preserved-thinking-controls) set from then on. After each prune, the API drops the invalidated thinking blocks, on that request and every later one. So Claude continues without the thinking that it produced after the pruned screenshot.
+  * **If you must prune on Claude Sonnet 5.5 or Claude Haiku 5.5:** `prefix_mismatch_behavior` works only with `thinking: {"type": "adaptive"}`. With any other thinking setting on those models, keep the history append-only or strip every `thinking` and `redacted_thinking` block after the pruned screenshot.
 
 ### Diagnose click issues
 
@@ -2121,7 +2127,7 @@ If clicks miss their targets, the cause is usually one of the following:
 
 ## Migrate from `computer_20251124`
 
-A `computer_20251124` integration works without changes on the models listed for that version under [Earlier tool versions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions). Upgrade the integration before you move it to a model that doesn’t accept `computer_20251124`, such as a Claude 5.5 model on the Claude API.
+A `computer_20251124` integration works without changes on the models listed for that version under [Earlier tool versions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions). Upgrade the integration before you move it to a model that doesn’t accept `computer_20251124`, such as Claude Opus 5.5 on the Claude API.
 
 To upgrade, make the following changes together:
 
@@ -2188,7 +2194,7 @@ Two earlier versions of the computer use tool are available in beta. Each requir
 | `computer_20251124` | `computer-use-2025-11-24` | Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5, Claude Sonnet 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5                                                                                                                                                                                                                                                                                                                                                                                                                                       | [API reference](https://platform.claude.com/docs/en/api/beta/messages/create) |
 | `computer_20250124` | `computer-use-2025-01-24` | Claude Sonnet 4.5 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)), Claude Haiku 4.5, Claude Opus 4.1 ([retired, except on Claude Models on Google Cloud (Google managed) and Bedrock](https://platform.claude.com/docs/en/about-claude/model-deprecations)), Claude Sonnet 4 ([retired, except on Claude Models on Google Cloud (Google managed) and Bedrock](https://platform.claude.com/docs/en/about-claude/model-deprecations)), and Claude Opus 4 ([retired, except on Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | [API reference](https://platform.claude.com/docs/en/api/beta/messages/create) |
 
-On Amazon Bedrock, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 also accept the `computer_20251124` tool with the `computer-use-2025-11-24` beta header.
+On Amazon Bedrock, Claude Fable 5.2, Claude Mythos 5.2, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5 also accept the `computer_20251124` tool with the `computer-use-2025-11-24` beta header. With Amazon Bedrock’s InvokeModel API, send `computer-use-2025-11-24` in the `anthropic_beta` array of the request body instead of in a header. For that API, see [Claude on Amazon Bedrock (`bedrock-runtime`)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy).
 
 ***
 
@@ -2213,18 +2219,18 @@ Because your application controls where and how computer use data is stored, com
 
 ## Pricing
 
-Computer use follows the standard [tool use pricing](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview#pricing). When using the computer use tool:
+Computer use follows the standard [tool use pricing in the tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview#pricing). When using the computer use tool:
 
-**Toolset definition overhead:** Declaring `computer_toolset_20260801` with its default members adds about 4,500 input tokens to a request (about 4,590 on Claude Sonnet 5 and about 4,520 on the other supported models), which covers the member tool definitions and the tool use system prompt. Disabling `zoom` with `configs` removes about 410 of those tokens. The exact count for a request is reported in the response `usage`, and you can estimate it in advance with the [token counting endpoint](https://platform.claude.com/docs/en/build-with-claude/token-counting).
+**Toolset definition overhead:** Declaring `computer_toolset_20260801` with its default members adds about 4,500 input tokens to a request: about 4,590 on Claude Sonnet 5 and about 4,520 on the other supported models. These tokens cover the member tool definitions and the tool use system prompt. Disabling `zoom` with `configs` removes about 410 of those tokens. The response `usage` reports the exact count for a request, and you can estimate it in advance with the [token counting endpoint](https://platform.claude.com/docs/en/build-with-claude/token-counting).
 
 **Earlier tool versions:** The following figures apply to the `computer_20251124` and `computer_20250124` tool versions, not to `computer_toolset_20260801`:
 
 * System prompt overhead: 466–499 tokens added to the system prompt
-* Tool definition: about 735 input tokens per tool definition (measured with `computer_20250124`)
+* Tool definition: about 735 input tokens for each tool definition (measured with `computer_20250124`)
 
 **Additional token consumption:**
 
-* Screenshot and zoom images returned in tool results, billed as image input (see [Vision pricing](https://platform.claude.com/docs/en/build-with-claude/vision#evaluate-image-size))
+* Screenshot and zoom images returned in tool results, billed as image input (see [Resolution and token cost](https://platform.claude.com/docs/en/build-with-claude/vision#evaluate-image-size))
 * Tool execution results returned to Claude
 
 <Note>
@@ -2269,11 +2275,13 @@ Computer use tool is available or in beta on select models and eligible for zero
 
 * Availability: Available
 
-| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Available | Claude API, [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed)                                                                                                                                                                                                                                                                                                                                                                                                                                          | [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), Claude Mythos Preview, [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview) |
-| Available | [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry)                                                                                                                                                                                                                                                                                          | [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview)                        |
-| Beta      | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (InvokeModel)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) | [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview), [Claude Opus 4.5](https://platform.claude.com/docs/en/models/opus-4-5/overview), [Claude Sonnet 4.5](https://platform.claude.com/docs/en/models/sonnet-4-5/overview)                                                                                                                                                                                                                                                                                                                                                        |
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed)                                                                                                                                                                                                                                                                                                                                                                                                                                              | [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview), [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview), [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), Claude Mythos Preview, [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview) |
+| Available | [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry)                                                                                                                                                                                                                                                                                                                                                                                                | [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview), [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview), [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview)                        |
+| Available | [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview)                                                                                                                                                                                                |
+| Available | [Amazon Bedrock (bedrock-runtime)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview), [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview), [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview)                                                                                                                                                                                              |
+| Beta      | Claude API, [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (bedrock-runtime)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) | [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview), [Claude Opus 4.5](https://platform.claude.com/docs/en/models/opus-4-5/overview), [Claude Sonnet 4.5](https://platform.claude.com/docs/en/models/sonnet-4-5/overview)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 

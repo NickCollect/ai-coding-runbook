@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/agents/versions
-fetched_at: 2026-11-09T07:30:27.311748+00:00
+fetched_at: 2026-11-16T07:30:52.279983+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,23 +49,11 @@ List Agent Versions
 
   - `string`
 
-  - `"message-batches-2024-09-24"`
-
-  - `"prompt-caching-2024-07-31"`
-
   - `"computer-use-2024-10-22"`
 
   - `"computer-use-2025-01-24"`
 
-  - `"pdfs-2024-09-25"`
-
-  - `"token-counting-2024-11-01"`
-
-  - `"token-efficient-tools-2025-02-19"`
-
   - `"output-128k-2025-02-19"`
-
-  - `"files-api-2025-04-14"`
 
   - `"mcp-client-2025-04-04"`
 
@@ -77,15 +65,11 @@ List Agent Versions
 
   - `"code-execution-2025-05-22"`
 
-  - `"extended-cache-ttl-2025-04-11"`
-
   - `"context-1m-2025-08-07"`
 
   - `"context-management-2025-06-27"`
 
   - `"model-context-window-exceeded-2025-08-26"`
-
-  - `"skills-2025-10-02"`
 
   - `"fast-mode-2026-02-01"`
 
@@ -100,8 +84,6 @@ List Agent Versions
   - `"advisor-tool-2026-03-01"`
 
   - `"managed-agents-2026-04-01"`
-
-  - `"cache-diagnosis-2026-04-07"`
 
   - `"dreaming-2026-04-21"`
 
@@ -131,8 +113,6 @@ List Agent Versions
 
   - `"thinking-display-updates-2026-08-18"`
 
-  - `"ce-user-management-2026-07-13"`
-
   - `"mid-conversation-output-config-2026-07-01"`
 
   - `"thinking-binding-controls-2026-08-01"`
@@ -153,11 +133,53 @@ List Agent Versions
 
   - `"webhooks-2026-10-07"`
 
+  - `"admin-user-sign-out-2026-10-08"`
+
   - `"message-threads-2026-08-12"`
 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
 
 - `"anthropic-workspace-id": optional string`
 
@@ -228,6 +250,10 @@ List Agent Versions
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5-2"`
+
+        Built for the most ambitious work in coding, enterprise workflows, and the sciences
 
       - `"claude-haiku-5-5"`
 
@@ -545,7 +571,7 @@ List Agent Versions
 
             - `BetaManagedAgentsAutoPolicy object`
 
-              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask, or for some causes to deny, for example when the organization is out of credits or has reached a spend limit.
 
               - `type: "auto"`
 
@@ -573,7 +599,7 @@ List Agent Versions
 
             - `BetaManagedAgentsAutoPolicy object`
 
-              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask, or for some causes to deny, for example when the organization is out of credits or has reached a spend limit.
 
         - `BetaManagedAgentsReadToolConfig object`
 
@@ -599,7 +625,7 @@ List Agent Versions
 
             - `BetaManagedAgentsAutoPolicy object`
 
-              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask, or for some causes to deny, for example when the organization is out of credits or has reached a spend limit.
 
         - `BetaManagedAgentsWriteToolConfig object`
 
@@ -625,7 +651,7 @@ List Agent Versions
 
             - `BetaManagedAgentsAutoPolicy object`
 
-              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask, or for some causes to deny, for example when the organization is out of credits or has reached a spend limit.
 
         - `BetaManagedAgentsGlobToolConfig object`
 
@@ -651,7 +677,7 @@ List Agent Versions
 
             - `BetaManagedAgentsAutoPolicy object`
 
-              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask, or for some causes to deny, for example when the organization is out of credits or has reached a spend limit.
 
         - `BetaManagedAgentsGrepToolConfig object`
 
@@ -677,7 +703,7 @@ List Agent Versions
 
             - `BetaManagedAgentsAutoPolicy object`
 
-              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask, or for some causes to deny, for example when the organization is out of credits or has reached a spend limit.
 
         - `BetaManagedAgentsWebFetchToolConfig object`
 
@@ -703,7 +729,7 @@ List Agent Versions
 
             - `BetaManagedAgentsAutoPolicy object`
 
-              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask, or for some causes to deny, for example when the organization is out of credits or has reached a spend limit.
 
           - `url_sources: BetaManagedAgentsWebFetchURLSources or null`
 
@@ -813,7 +839,7 @@ List Agent Versions
 
             - `BetaManagedAgentsAutoPolicy object`
 
-              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+              The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask, or for some causes to deny, for example when the organization is out of credits or has reached a spend limit.
 
           - `allowed_domains: optional array of string`
 
@@ -871,7 +897,7 @@ List Agent Versions
 
           - `BetaManagedAgentsAutoPolicy object`
 
-            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask, or for some causes to deny, for example when the organization is out of credits or has reached a spend limit.
 
     - `BetaManagedAgentsMCPToolset object`
 
@@ -897,7 +923,7 @@ List Agent Versions
 
           - `BetaManagedAgentsAutoPolicy object`
 
-            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask, or for some causes to deny, for example when the organization is out of credits or has reached a spend limit.
 
       - `default_config: BetaManagedAgentsMCPToolsetDefaultConfig`
 
@@ -919,7 +945,7 @@ List Agent Versions
 
           - `BetaManagedAgentsAutoPolicy object`
 
-            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
+            The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask, or for some causes to deny, for example when the organization is out of credits or has reached a spend limit.
 
       - `mcp_server_name: string`
 
@@ -999,38 +1025,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/versions \
         "inference_geo": "inference_geo",
         "speed": "standard"
       },
-      "multiagent": {
-        "advisor": {
-          "type": "disabled"
-        },
-        "subagents": {
-          "inline_agents": {
-            "type": "enabled"
-          },
-          "predefined_agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "enabled"
-        },
-        "type": "multiagent_20261001",
-        "workflows": {
-          "inline_agents": {
-            "type": "enabled"
-          },
-          "predefined_agents": [
-            {
-              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-              "type": "agent",
-              "version": 1
-            }
-          ],
-          "type": "enabled"
-        }
-      },
+      "multiagent": null,
       "name": "My First Agent",
       "skills": [
         {
@@ -1047,16 +1042,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/versions \
       "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.",
       "tools": [
         {
-          "configs": [
-            {
-              "enabled": true,
-              "name": "bash",
-              "permission_policy": {
-                "type": "always_allow"
-              },
-              "type": "bash"
-            }
-          ],
+          "configs": [],
           "default_config": {
             "enabled": true,
             "permission_policy": {

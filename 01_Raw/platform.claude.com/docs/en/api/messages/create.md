@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/create
-fetched_at: 2026-11-09T07:30:23.735248+00:00
+fetched_at: 2026-11-16T07:30:48.442821+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1108,6 +1108,14 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
   The model that will complete your prompt.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `"claude-fable-5-2"`
+
+    Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+  - `"claude-mythos-5-2"`
+
+    Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
   - `"claude-haiku-5-5"`
 
@@ -3964,6 +3972,14 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-fable-5-2"`
+
+      Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+    - `"claude-mythos-5-2"`
+
+      Built for the most demanding cybersecurity and life sciences research, available through verification programs
+
     - `"claude-haiku-5-5"`
 
       Fastest model for high-volume, real-time tasks
@@ -4503,34 +4519,15 @@ curl https://api.anthropic.com/v1/messages \
   },
   "content": [
     {
-      "citations": [
-        {
-          "cited_text": "The grass is green. The sky is blue.",
-          "document_index": 0,
-          "document_title": "My Document",
-          "end_char_index": 0,
-          "file_id": "file_011CNha8iCJcU1wXNR6q4V8w",
-          "start_char_index": 0,
-          "type": "char_location"
-        }
-      ],
+      "citations": null,
       "text": "Hi! My name is Claude.",
       "type": "text"
     }
   ],
-  "diagnostics": {
-    "cache_miss_reason": {
-      "cache_missed_input_tokens": 0,
-      "type": "model_changed"
-    }
-  },
+  "diagnostics": null,
   "model": "claude-opus-5-5",
   "role": "assistant",
-  "stop_details": {
-    "category": "cyber",
-    "explanation": "This request was declined because it conflicts with Anthropic's Usage Policy.",
-    "type": "refusal"
-  },
+  "stop_details": null,
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "type": "message",

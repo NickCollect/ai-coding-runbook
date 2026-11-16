@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost
-fetched_at: 2026-11-09T07:30:15.530117+00:00
+fetched_at: 2026-11-16T07:30:40.276326+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,7 +30,7 @@ The primary control over this determination is the [effort](https://platform.cla
 
 If you want Claude to think less often, lower the effort level before reaching for prompt-based steering.
 
-Thinking also interleaves with tool use automatically: Claude can think between tool calls, evaluating each tool result before determining what to do next ([interleaved thinking](https://platform.claude.com/docs/en/build-with-claude/thinking#interleaved-thinking)). You don’t need a beta header or any additional configuration for this.
+Thinking also interleaves with tool use automatically: Claude can think between tool calls, evaluating each tool result before determining what to do next ([interleaved thinking](https://platform.claude.com/docs/en/build-with-claude/thinking#interleaved-thinking)).
 
 For full details on how the thinking configuration and the effort parameter interact, see [Thinking and effort](https://platform.claude.com/docs/en/build-with-claude/thinking#thinking-and-effort).
 
@@ -44,7 +44,7 @@ Use the two levers together in this order:
 2. Add prompt guidance only if Claude’s triggering still doesn’t match your needs at that level.
 
 <Note>
-  To get less thinking on Claude Sonnet 5.5 and Claude Haiku 5.5, lower the effort level. Asking Claude Sonnet 5.5 in the system prompt to think less doesn’t reliably reduce its thinking, and in Anthropic’s testing, telling Claude Haiku 5.5 in the prompt to answer directly didn’t stop it from thinking. See [Prompting Claude Sonnet 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5#calibrate-effort) and [Prompting Claude Haiku 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5#use-effort-to-control-thinking).
+  To get less thinking on Claude Sonnet 5.5 and Claude Haiku 5.5, lower the effort level. Asking Claude Sonnet 5.5 in the system prompt to think less doesn’t reliably reduce its thinking. In Anthropic’s testing, telling Claude Haiku 5.5 in the prompt to answer directly didn’t stop it from thinking. See [Prompting Claude Sonnet 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5#calibrate-effort) and [Prompting Claude Haiku 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5#use-effort-to-control-thinking). To get less thinking on Claude Fable 5.2, lower the effort level too. In Anthropic’s testing, an instruction to answer directly without deliberating didn’t stop the model from thinking at `medium` effort and above. See [Prompting Claude Fable 5.2](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2#calibrate-effort).
 </Note>
 
 For broader prompting guidance with thinking, see [leverage thinking and interleaved thinking capabilities](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#leverage-thinking-and-interleaved-thinking-capabilities).
@@ -102,7 +102,7 @@ You can also steer thinking on a per-message basis from the user turn, independe
 
 Per-message steering is useful when only some requests in a conversation warrant extended reasoning. An agent harness, for example, can append the encouraging phrase on planning steps and the discouraging phrase on routine confirmations, without touching the system prompt or changing any request parameters between turns.
 
-On Claude Haiku 5.5, the discouraging phrase doesn’t reliably reduce thinking. Where your platform supports it, run routine turns on that model with less thinking by using a [per-message effort change](https://platform.claude.com/docs/en/build-with-claude/effort#change-effort-mid-conversation-beta) (beta) instead, which also keeps the prompt cache.
+On Claude Haiku 5.5 and Claude Fable 5.2, the discouraging phrase doesn’t reliably reduce thinking. In Anthropic’s testing, it didn’t stop Claude Fable 5.2 from thinking at `medium` effort and above. Where your platform supports it, run routine turns on these models with less thinking by using a [per-message effort](https://platform.claude.com/docs/en/build-with-claude/effort-per-message) change instead. This beta feature also keeps the prompt cache.
 
 ### Verify steering on your workload
 
@@ -120,30 +120,30 @@ Three mechanics follow from Claude managing its own thinking: turn validation, p
 
 Assistant turns don’t need to start with a thinking block. (Models using a legacy manual thinking budget enforce that the final assistant turn of a thinking-enabled request starts with one; see [Turn structure in manual mode](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#turn-structure-in-manual-mode).)
 
-For multi-turn applications, this means you can pass back conversation history in whatever shape you have it:
+For multi-turn applications, this means you can pass back conversation history in any of these shapes:
 
 * Assistant turns that Claude produced without thinking are valid history as-is.
 * You can resume a conversation that started without thinking, or that used a different thinking configuration, without rewriting its history.
 * History assembled from mixed sources doesn’t need thinking blocks reinserted at the start of each assistant turn to pass validation.
 
-The relaxation is about validation, not about what you should send. When you have thinking blocks, pass them back unmodified, particularly during tool use, where they carry the reasoning behind Claude’s tool calls. See the [Thinking](https://platform.claude.com/docs/en/build-with-claude/thinking) overview for the full rules.
+This only means a turn can start without a thinking block. When you have thinking blocks, pass them back unmodified, particularly during tool use, where they carry the reasoning behind Claude’s tool calls. See the [Thinking](https://platform.claude.com/docs/en/build-with-claude/thinking) overview for the full rules.
 
 ### Prompt caching
 
-Consecutive requests that keep the same thinking configuration and effort level preserve prompt caching; see [Thinking and prompt caching](https://platform.claude.com/docs/en/build-with-claude/thinking#thinking-and-prompt-caching) for the full rules. The resolved effort value is rendered into the prompt, so changing it between requests invalidates cache breakpoints, just as changing the legacy [`budget_tokens`](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#extended-thinking-with-prompt-caching) parameter does on models that use it. Setting `effort` explicitly to the model’s default is equivalent to omitting it and does not break the cache.
+Consecutive requests that keep the same thinking configuration and effort level preserve prompt caching; see [Thinking and prompt caching](https://platform.claude.com/docs/en/build-with-claude/thinking#thinking-and-prompt-caching) for the full rules. The resolved effort value is rendered into the prompt, so changing it between requests can invalidate cache breakpoints. So can changing the legacy [`budget_tokens`](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#extended-thinking-with-prompt-caching) parameter, on [models that use it](https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting#supported-models). Setting `effort` explicitly to the model’s default is equivalent to omitting it and does not break the cache.
 
-The practical consequence: pick a thinking configuration and a top-level effort level for each conversation and keep them. If some turns need more or less thinking, use a [per-message effort change](https://platform.claude.com/docs/en/build-with-claude/effort#change-effort-mid-conversation-beta) (beta) on models that support it, or steer with [per-message prompting](https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost#tuning-thinking-behavior). Both leave earlier cache breakpoints intact, where a change to the thinking configuration or the top-level effort level does not.
+The practical consequence: pick a thinking configuration and a top-level effort level for each conversation and keep them. If some turns need more or less thinking, use a [per-message effort](https://platform.claude.com/docs/en/build-with-claude/effort-per-message) change, which is in beta, on [models that support it](https://platform.claude.com/docs/en/build-with-claude/effort-per-message#feature-availability). Or steer with [per-message prompting](https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost#per-message-steering). Both leave earlier cache breakpoints intact, where a change to the thinking configuration or the top-level effort level might not.
 
 The following example demonstrates the invalidation with a multi-turn script you can run yourself:
 
-<Accordion title="Effort changes invalidate the prompt cache">
+<Accordion title="Effort changes can invalidate the prompt cache">
   <CodeGroup exclude="shell:cURL, shell:CLI">
     <CodeGroupItem language="cURL">
-      This workflow needs more logic than a single shell command. Use the Claude SDK to run it; per-turn HTTP requests follow the examples on the [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) page.
+      This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it; per-turn HTTP requests follow the examples on the [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) page.
     </CodeGroupItem>
 
     <CodeGroupItem language="CLI">
-      This workflow needs more logic than a single shell command. Use the Claude SDK to run it; per-turn CLI commands follow the examples on the [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) page.
+      This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it; per-turn CLI commands follow the examples on the [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) page.
     </CodeGroupItem>
 
     ```python Python
@@ -627,7 +627,7 @@ The following example demonstrates the invalidation with a multi-turn script you
                 ]
             ]
         ]],
-        model: 'claude-opus-5-5',
+        model: Model::CLAUDE_OPUS_5_5,
         thinking: ['type' => 'adaptive'],
     );
 
@@ -660,7 +660,7 @@ The following example demonstrates the invalidation with a multi-turn script you
                 'content' => 'Analyze the characters in this passage.'
             ]
         ],
-        model: 'claude-opus-5-5',
+        model: Model::CLAUDE_OPUS_5_5,
         thinking: ['type' => 'adaptive'],
     );
 
@@ -701,7 +701,7 @@ The following example demonstrates the invalidation with a multi-turn script you
                 'content' => 'Analyze the setting in this passage.'
             ]
         ],
-        model: 'claude-opus-5-5',
+        model: Model::CLAUDE_OPUS_5_5,
         thinking: ['type' => 'adaptive'],
         outputConfig: ['effort' => 'low'],
     );
@@ -730,7 +730,7 @@ The following example demonstrates the invalidation with a multi-turn script you
 
     puts "First request - establishing cache"
     response1 = client.messages.create(
-      model: "claude-opus-5-5",
+      model: Anthropic::Model::CLAUDE_OPUS_5_5,
       max_tokens: 16000,
       thinking: {
         type: "adaptive"
@@ -755,7 +755,7 @@ The following example demonstrates the invalidation with a multi-turn script you
 
     puts "\nSecond request - same configuration (cache hit expected)"
     response2 = client.messages.create(
-      model: "claude-opus-5-5",
+      model: Anthropic::Model::CLAUDE_OPUS_5_5,
       max_tokens: 16000,
       thinking: {
         type: "adaptive"
@@ -790,7 +790,7 @@ The following example demonstrates the invalidation with a multi-turn script you
 
     puts "\nThird request - different effort level (cache miss expected)"
     response3 = client.messages.create(
-      model: "claude-opus-5-5",
+      model: Anthropic::Model::CLAUDE_OPUS_5_5,
       max_tokens: 16000,
       thinking: {
         type: "adaptive"
@@ -877,7 +877,7 @@ Thinking incurs charges for:
 * Standard text output tokens
 
 <Note>
-  When thinking is active, a specialized system prompt is automatically included to support this feature.
+  When thinking is active, the API automatically includes a specialized system prompt to support this feature.
 </Note>
 
 What you’re billed for is the same regardless of the `display` setting; only what you see changes:

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/service-tiers
-fetched_at: 2026-11-09T07:30:23.431607+00:00
+fetched_at: 2026-11-16T07:30:48.092211+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,16 +11,7 @@ description: Different tiers of service allow you to balance availability, perfo
 featureMetadata:
   status: stable
   supportedModels:
-    - claude-fable-5-1
-    - claude-mythos-5-1
     - claude-fable-5
-    - claude-mythos-5
-    - claude-mythos-preview
-    - claude-opus-5-5
-    - claude-opus-5
-    - claude-sonnet-5-5
-    - claude-sonnet-5
-    - claude-haiku-5-5
     - claude-haiku-4-5-20251001
     - claude-opus-4-8
     - claude-opus-4-7
@@ -259,13 +250,13 @@ Priority Tier targets 99.5 percent uptime with prioritized computational resourc
 
 ### Supported models
 
-Priority Tier is supported on all available Claude models except Claude Fable 5.1, Claude Haiku 5.5, Claude Mythos 5.1, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, and Claude Sonnet 5.
+Priority Tier is supported on all available Claude models except Claude Fable 5.2, Claude Fable 5.1, Claude Haiku 5.5, Claude Mythos 5.2, Claude Mythos 5.1, Claude Mythos 5, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, and Claude Sonnet 5.
 
 Check the [Models overview](https://platform.claude.com/docs/en/models/overview) for more details on available models.
 
 ## Availability
 
-Service tiers are available on every model.
+Service tiers are available on select models.
 
 ### API support
 
@@ -274,9 +265,9 @@ Service tiers are available on every model.
 * Availability: Available
 * Usage: Needs a Priority Tier commitment, which is no longer sold. With one, requests use Priority Tier by default; set `service_tier` to `"standard_only"` to use only standard capacity.
 
-| Status    | Cloud platforms |
-| --------- | --------------- |
-| Available | Claude API      |
+| Status    | Cloud platforms | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| --------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Available | Claude API      | [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview), [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview), [Claude Opus 4.5](https://platform.claude.com/docs/en/models/opus-4-5/overview), [Claude Sonnet 4.5](https://platform.claude.com/docs/en/models/sonnet-4-5/overview) |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
-fetched_at: 2026-11-09T07:30:18.466819+00:00
+fetched_at: 2026-11-16T07:30:43.207859+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,8 +16,10 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
   zdr:
     eligibility: not-eligible
-    note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
+    note: Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them.
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -311,11 +313,11 @@ To reconnect to an existing session without missing events, combine a new stream
 
 <CodeGroup exclude="shell:cURL, shell:CLI">
   <CodeGroupItem language="cURL">
-    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+    This workflow needs more logic than a single shell command. Use the [Anthropic SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
   </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
-    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+    This workflow needs more logic than a single shell command. Use the [Anthropic SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
   </CodeGroupItem>
 
   ```python Python
@@ -687,25 +689,25 @@ A session pauses when the agent calls a [custom tool](https://platform.claude.co
 3. For each blocking event ID, send a [`user.custom_tool_result`](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#return-a-custom-tool-result) or a [`user.tool_confirmation`](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#confirm-a-tool-call) event. A custom tool result doesn’t have to wait for step 2.
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
-In a multiagent session, a subagent’s blocking events are cross-posted to the primary thread. See [Tool permissions and custom tools](https://platform.claude.com/docs/en/managed-agents/session-threads#tool-permissions-and-custom-tools).
+In a multiagent session, the server cross-posts a subagent’s blocking events to the primary thread. See [Tool permissions and custom tools](https://platform.claude.com/docs/en/managed-agents/session-threads#tool-permissions-and-custom-tools).
 
 ### Return a custom tool result
 
 The `agent.custom_tool_use` event contains the tool name and input. Run the tool in your system. Then send a `user.custom_tool_result` event, passing the event ID in the `custom_tool_use_id` (java: `customToolUseId`; php: `customToolUseID`; csharp, go: `CustomToolUseID`) parameter along with the result content.
 
-You can send the result as soon as the `agent.custom_tool_use` event arrives, without waiting for `session.status_idle`. The session still emits `session.status_idle` with a `requires_action` stop reason for the call, and your client can ignore it. A second result for the same call is accepted and has no effect.
+You can send the result as soon as the `agent.custom_tool_use` event arrives, without waiting for `session.status_idle`. The session still emits `session.status_idle` with a `requires_action` stop reason for the call, and your client can ignore it. The server accepts a second result for the same call, but that result has no effect.
 
-When you [reconnect](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#reconnect-without-missing-events) to a paused session, `stop_reason.event_ids` on the latest `session.status_idle` event lists the calls to answer.
+When you [reconnect to a paused session](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#reconnect-without-missing-events), `stop_reason.event_ids` on the latest `session.status_idle` event lists the calls to answer.
 
 The following example answers each call as it arrives:
 
 <CodeGroup exclude="shell:cURL, shell:CLI">
   <CodeGroupItem language="cURL">
-    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+    This workflow needs more logic than a single shell command. Use the [Anthropic SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
   </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
-    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+    This workflow needs more logic than a single shell command. Use the [Anthropic SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
   </CodeGroupItem>
 
   ```python Python
@@ -907,11 +909,11 @@ The following example approves every pending call:
 
 <CodeGroup exclude="shell:cURL, shell:CLI">
   <CodeGroupItem language="cURL">
-    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+    This workflow needs more logic than a single shell command. Use the [Anthropic SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
   </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
-    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+    This workflow needs more logic than a single shell command. Use the [Anthropic SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
   </CodeGroupItem>
 
   ```python Python
@@ -1255,7 +1257,7 @@ Sessions persist between interactions. To resume a session, send a `user.message
   ```
 </CodeGroup>
 
-Conversation history is preserved unless the session is explicitly deleted. When a session goes idle, its sandbox is checkpointed. The checkpoint preserves the full sandbox state, including the filesystem, installed packages, and any files the agent created.
+A session keeps its conversation history until you delete the session. When a session goes idle, Claude Managed Agents checkpoints its sandbox. The checkpoint preserves the full sandbox state, including the filesystem, installed packages, and any files the agent created.
 
 <Note>
   Sandbox state is preserved for only 30 days after the sandbox is created, and activity does not extend this window. After 30 days the sandbox state (files, installed tools, and so on) is unrecoverable, and a resumed session starts from a fresh sandbox. If your workflow depends on sandbox contents, have the agent write important artifacts to [outputs](https://platform.claude.com/docs/en/managed-agents/define-outcomes#retrieving-deliverables) before the window ends.
@@ -1611,7 +1613,7 @@ Pass a `types` (curl: `types[]`; cli: `--type`; csharp, go: `Types`) filter to r
 
 On a [supported model](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#supported-models), send a `system.message` event to give the agent privileged system-level context. The context applies to the accompanying turn and all subsequent turns. Use it when the agent needs updated system-level guidance mid-session, for example a different persona, revised constraints, or context fetched at runtime.
 
-The event’s `content` (csharp, go: `Content`) accepts 1–1,000 text items. The content is appended to the session’s system context as a `role: "system"` turn. It doesn’t replace the top-level system prompt, which the `system` (csharp, go: `System`; ruby: `system_`) field on the agent definition sets.
+The event’s `content` (csharp, go: `Content`) accepts 1–1,000 text items. The server appends the content to the session’s system context as a `role: "system"` turn. It doesn’t replace the top-level system prompt, which the `system` (csharp, go: `System`; ruby: `system_`) field on the agent definition sets.
 
 <CodeGroup>
   ```bash cURL
@@ -1752,8 +1754,10 @@ The event’s `content` (csharp, go: `Content`) accepts 1–1,000 text items. Th
 
 ### Supported models
 
-`system.message` is supported by these models:
+These models support `system.message`:
 
+* Claude Fable 5.2
+* Claude Mythos 5.2
 * Claude Fable 5.1
 * Claude Mythos 5.1
 * Claude Fable 5
@@ -1764,7 +1768,7 @@ The event’s `content` (csharp, go: `Content`) accepts 1–1,000 text items. Th
 * Claude Sonnet 5.5
 * Claude Haiku 5.5
 
-If the agent’s primary model does not support mid-conversation system injection, the event is rejected with a `model_does_not_support_mid_conversation_system` validation error. Subagent models are not checked, because `system.message` lands on the primary thread only.
+If the agent’s primary model does not support mid-conversation system injection, the API rejects the event with a `model_does_not_support_mid_conversation_system` validation error. The API does not check subagent models, because `system.message` lands on the primary thread only.
 
 ### System messages while a tool call is pending
 

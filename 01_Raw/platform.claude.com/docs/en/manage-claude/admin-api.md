@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/admin-api
-fetched_at: 2026-11-09T07:30:19.139701+00:00
+fetched_at: 2026-11-16T07:30:43.809953+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ The [Admin API](https://platform.claude.com/docs/en/api/organization) lets you m
 
 ## Availability
 
-The Admin API is unavailable for individual accounts. To collaborate with teammates and add members, set up your organization on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console.
+The Admin API is available to Claude Console and Claude Enterprise organizations. It isn’t available to organizations on the claude.ai Team plan or to individual Console accounts. An individual Console account must first set up an organization on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console. See [Create an Admin API key](https://platform.claude.com/docs/en/manage-claude/admin-api-keys) for where each organization type creates its key.
 
 Claude Enterprise (claude.ai) organizations call the Admin API with a scoped API key created in claude.ai. From this page, only the members and invites endpoints apply to them. They can also call the [Usage and Cost Analytics API](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api), which is in beta and takes a key with the `read:analytics` scope. They also get Enterprise-only endpoints: group and custom-role reads, and [spend limits](https://platform.claude.com/docs/en/manage-claude/spend-limits-api). The [Plugins API](https://platform.claude.com/docs/en/manage-claude/plugins-api), also Enterprise-only, is in beta. So is the [Claude Tag API](https://platform.claude.com/docs/en/manage-claude/claude-tag-api). See [User management](https://platform.claude.com/docs/en/manage-claude/user-management).
 

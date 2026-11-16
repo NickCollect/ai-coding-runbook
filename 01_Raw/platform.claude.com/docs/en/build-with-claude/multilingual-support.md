@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/multilingual-support
-fetched_at: 2026-11-09T07:30:15.413357+00:00
+fetched_at: 2026-11-16T07:30:40.153383+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,6 +11,8 @@ description: Claude excels at tasks across multiple languages, maintaining stron
 featureMetadata:
   status: stable
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -30,9 +32,9 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
-    Claude Platform on AWS: stable
     Amazon Bedrock: stable
-    Amazon Bedrock (InvokeModel): stable
+    Amazon Bedrock (bedrock-runtime): stable
+    Claude Platform on AWS: stable
     Claude Models on Google Cloud (Google managed): stable
     Microsoft Foundry: stable
 ---
@@ -47,23 +49,23 @@ Claude is capable in many languages beyond those benchmarked in the following ta
 
 The following table shows zero-shot scores for Claude models on [Global-MMLU](https://arxiv.org/abs/2412.03304), which extends the [MMLU (Massive Multitask Language Understanding)](https://en.wikipedia.org/wiki/MMLU) test set to 42 languages. Each score is a percentage of the same model’s English score:
 
-| Language             | Claude Fable 5.1 | Claude Opus 5.5 | Claude Sonnet 5.5 | Claude Haiku 5.5 |
+| Language             | Claude Fable 5.2 | Claude Opus 5.5 | Claude Sonnet 5.5 | Claude Haiku 5.5 |
 | -------------------- | ---------------- | --------------- | ----------------- | ---------------- |
 | English              | 100%             | 100%            | 100%              | 100%             |
-| Spanish              | 99.4%            | 99.3%           | 99.0%             | 98.1%            |
-| Portuguese (Brazil)  | 99.0%            | 99.2%           | 98.7%             | 98.1%            |
-| Italian              | 99.0%            | 99.2%           | 98.4%             | 97.7%            |
-| French               | 99.0%            | 99.3%           | 98.7%             | 97.7%            |
-| Indonesian           | 98.9%            | 99.1%           | 98.6%             | 97.1%            |
-| German               | 99.1%            | 99.1%           | 98.5%             | 97.4%            |
-| Arabic               | 98.7%            | 99.3%           | 98.3%             | 96.6%            |
-| Chinese (Simplified) | 98.8%            | 99.3%           | 98.5%             | 97.7%            |
-| Korean               | 98.8%            | 99.1%           | 98.3%             | 97.0%            |
-| Japanese             | 98.7%            | 99.2%           | 98.4%             | 97.4%            |
-| Hindi                | 98.9%            | 99.2%           | 98.5%             | 96.6%            |
-| Bengali              | 98.3%            | 98.6%           | 97.2%             | 95.4%            |
-| Swahili              | 97.7%            | 98.3%           | 96.9%             | 94.0%            |
-| Yoruba               | 95.1%            | 96.3%           | 93.6%             | 87.0%            |
+| Spanish              | 99.8%            | 99.3%           | 99.0%             | 98.1%            |
+| Portuguese (Brazil)  | 99.4%            | 99.2%           | 98.7%             | 98.1%            |
+| Italian              | 99.5%            | 99.2%           | 98.4%             | 97.7%            |
+| French               | 99.6%            | 99.3%           | 98.7%             | 97.7%            |
+| Indonesian           | 99.4%            | 99.1%           | 98.6%             | 97.1%            |
+| German               | 99.5%            | 99.1%           | 98.5%             | 97.4%            |
+| Arabic               | 99.6%            | 99.3%           | 98.3%             | 96.6%            |
+| Chinese (Simplified) | 99.6%            | 99.3%           | 98.5%             | 97.7%            |
+| Korean               | 99.6%            | 99.1%           | 98.3%             | 97.0%            |
+| Japanese             | 99.5%            | 99.2%           | 98.4%             | 97.4%            |
+| Hindi                | 99.4%            | 99.2%           | 98.5%             | 96.6%            |
+| Bengali              | 99.2%            | 98.6%           | 97.2%             | 95.4%            |
+| Swahili              | 99.2%            | 98.3%           | 96.9%             | 94.0%            |
+| Yoruba               | 98.5%            | 96.3%           | 93.6%             | 87.0%            |
 
 All scores use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/thinking) at the `max` [effort level](https://platform.claude.com/docs/en/build-with-claude/effort). Scores exclude questions that safety classifiers blocked or that went unanswered. For each score in the table, at most 1.7 percent of the questions are excluded.
 
@@ -258,9 +260,9 @@ Multilingual support is available on every model.
 
 * Availability: Always on
 
-| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Available | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (InvokeModel)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (bedrock-runtime)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 

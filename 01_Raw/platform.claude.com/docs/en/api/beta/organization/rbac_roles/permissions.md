@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/rbac_roles/permissions
-fetched_at: 2026-11-02T07:00:51.213535+00:00
+fetched_at: 2026-11-16T07:30:58.220775+00:00
 fetch_method: mintlify_md
 ---
 
@@ -68,8 +68,8 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
     permission entitlement (`permission_*`), or a blanket capability-access
     mode — `capability_access_all` grants every product-feature entitlement
     except `inference_hooks_inspection`, which a role holds only through its
-    own row, and `capability_access_all_ga` grants the generally-available
-    subset of those as it stands at permission-check time; neither mode grants
+    own row, and `capability_access_all_ga` grants the subset of those for
+    stable features as it stands at permission-check time; neither mode grants
     model-access entitlements. A consumer enumerating a role's per-feature grants should
     treat a blanket row as granting every product-feature entitlement it
     covers, or it will under-report the role's effective access. A `connector_tool` grant carries
@@ -305,8 +305,8 @@ curl https://api.anthropic.com/v1/organizations/rbac_roles/$RBAC_ROLE_ID/permiss
     permission entitlement (`permission_*`), or a blanket capability-access
     mode — `capability_access_all` grants every product-feature entitlement
     except `inference_hooks_inspection`, which a role holds only through its
-    own row, and `capability_access_all_ga` grants the generally-available
-    subset of those as it stands at permission-check time; neither mode grants
+    own row, and `capability_access_all_ga` grants the subset of those for
+    stable features as it stands at permission-check time; neither mode grants
     model-access entitlements. A consumer enumerating a role's per-feature grants should
     treat a blanket row as granting every product-feature entitlement it
     covers, or it will under-report the role's effective access. A `connector_tool` grant carries

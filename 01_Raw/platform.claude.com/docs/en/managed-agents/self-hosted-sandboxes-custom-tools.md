@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-custom-tools
-fetched_at: 2026-11-09T07:30:18.258728+00:00
+fetched_at: 2026-11-16T07:30:43.018608+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,11 +12,14 @@ featureMetadata:
   topic:
     title: Managed Agents
     url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
   betaHeader: managed-agents-2026-04-01
   zdr:
     eligibility: not-eligible
-    note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
+    note: Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them.
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -34,6 +37,10 @@ featureMetadata:
     - claude-sonnet-4-6
     - claude-opus-4-5-20251101
     - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: beta
+    Claude Platform on AWS: beta
+    Claude Models on Google Cloud (Anthropic managed): beta
 ---
 
 [Custom tools](https://platform.claude.com/docs/en/managed-agents/tools#custom-tools) are tools your own code runs: the agent emits an `agent.custom_tool_use` event and waits for a matching `user.custom_tool_result`. Your worker can be that code. Because it runs inside your sandbox, the tool reaches the internal services, credentials, and network egress you configured for the sandbox, and nothing more.
@@ -41,7 +48,7 @@ featureMetadata:
 The environment key authorizes posting custom tool results, so your Claude API key stays off the worker host.
 
 <Note>
-  Serving custom tools requires the SDK worker. The `ant` CLI worker has no way to register a custom tool implementation. In the sandbox-per-session pattern, [run the SDK worker inside the sandbox](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-workers#run-the-sdk-worker-inside-the-sandbox).
+  To serve custom tools, you need the SDK worker. The `ant` CLI worker has no way to register a custom tool implementation. In the sandbox-per-session pattern, [run the SDK worker inside the sandbox](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-workers#run-the-sdk-worker-inside-the-sandbox).
 </Note>
 
 ## Serve a custom tool
@@ -215,7 +222,7 @@ The environment key authorizes posting custom tool results, so your Claude API k
   </Step>
 </Steps>
 
-The worker answers only the tools registered with it. If a tool is declared on the agent but no worker or client serves it, the session pauses with a `requires_action` stop reason. It stays paused until something posts the result. See [Answer tool calls that pause the session](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#answer-tool-calls-that-pause-the-session) for the event flow.
+The worker answers only the tools registered with it. If you declare a tool on the agent but no worker or client serves it, the session pauses with a `requires_action` stop reason. It stays paused until something posts the result. See [Answer tool calls that pause the session](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#answer-tool-calls-that-pause-the-session) for the event flow.
 
 ## Wrap an MCP server as custom tools
 
@@ -855,7 +862,7 @@ The MCP helpers keep the server’s names and descriptions, and most schemas pas
 
 | Field                     | Rule                                                                                                                                                                                                                                                                                          |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`                    | Unique per agent. Letters, digits, underscores, and hyphens, 1–128 characters. Cannot match a built-in agent tool such as `bash` or `read`, or use the reserved `mcp__` prefix or `ant__` prefix.                                                                                             |
+| `name`                    | Unique within the agent. Letters, digits, underscores, and hyphens, 1–128 characters. Cannot match a built-in agent tool such as `bash` or `read`, or use the reserved `mcp__` or `ant__` prefix.                                                                                             |
 | `description`             | Required and non-empty.                                                                                                                                                                                                                                                                       |
 | `input_schema`            | Accepts the JSON Schema keywords MCP servers commonly emit, such as `additionalProperties` and `title`. Rejects reference keywords such as `$ref` anywhere, and top-level `oneOf`, `anyOf`, and `allOf`. Property names use letters, digits, underscores, dots, and hyphens, 1–64 characters. |
 | The agent’s `tools` array | At most 256 entries. Each wrapped tool is one entry, and the built-in toolset is one more.                                                                                                                                                                                                    |

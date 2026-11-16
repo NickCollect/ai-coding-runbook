@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed
-fetched_at: 2026-11-09T07:30:17.751266+00:00
+fetched_at: 2026-11-16T07:30:42.619195+00:00
 fetch_method: mintlify_md
 ---
 
@@ -183,8 +183,8 @@ Install the package that provides the client:
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:3.6.0")
-        implementation("com.anthropic:anthropic-java-google-cloud:3.6.0")
+        implementation("com.anthropic:anthropic-java:3.8.0")
+        implementation("com.anthropic:anthropic-java-google-cloud:3.8.0")
         ```
       </Tab>
 
@@ -193,12 +193,12 @@ Install the package that provides the client:
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>3.6.0</version>
+            <version>3.8.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-google-cloud</artifactId>
-            <version>3.6.0</version>
+            <version>3.8.0</version>
         </dependency>
         ```
       </Tab>
@@ -526,7 +526,7 @@ The Models API and the following features are available on Claude Models on Goog
 * [Custom tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools)
 * [Data residency](https://platform.claude.com/docs/en/manage-claude/data-residency)
 * [Effort](https://platform.claude.com/docs/en/build-with-claude/effort)
-  * [Per-message effort](https://platform.claude.com/docs/en/build-with-claude/effort#change-effort-mid-conversation-beta) (Beta)
+  * [Per-message effort](https://platform.claude.com/docs/en/build-with-claude/effort-per-message) (Beta)
 * [Fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode)
 * [Files API](https://platform.claude.com/docs/en/build-with-claude/files)
 * [MCP connector](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector) (Beta)
@@ -550,6 +550,7 @@ The Models API and the following features are available on Claude Models on Goog
 * [Thinking](https://platform.claude.com/docs/en/build-with-claude/thinking)
   * [Adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost)
   * [Extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking)
+  * [Preserved thinking](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking)
 * [Token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting)
 * [Tool runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner) (Beta)
 * [Vision (images)](https://platform.claude.com/docs/en/build-with-claude/vision)
@@ -558,7 +559,7 @@ The Models API and the following features are available on Claude Models on Goog
 
 If a beta feature is limited to selected organizations on the Claude API, the Anthropic organization that setup creates needs the same access.
 
-To turn the [Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api) on or off for the Anthropic organization that setup creates, [open the Claude Console](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed#using-the-claude-console), go to **Settings > Compliance**, and use the **Compliance API** toggle.
+To turn the [Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api) on or off for the Anthropic organization that setup creates, first [open the Claude Console](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed#using-the-claude-console). Then go to [Compliance in the Claude Console](https://platform.claude.com/settings/security) (`platform.claude.com/settings/security`) and use the **Compliance API** toggle.
 
 Customer-managed encryption keys (CMEK) are available with Google Cloud KMS keys. To activate CMEK for the Anthropic organization that setup creates, see [Who can use CMEK](https://platform.claude.com/docs/en/manage-claude/cmek#availability). To set up a key, follow [Set up CMEK with Google Cloud KMS](https://platform.claude.com/docs/en/manage-claude/cmek-google-cloud-kms). Then register, verify, and attach the key in the [Claude Console](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed#using-the-claude-console), as the setup page’s **Claude Platform** tab describes.
 
@@ -576,7 +577,6 @@ Customer-managed encryption keys (CMEK) are available with Google Cloud KMS keys
   * [Session threads](https://platform.claude.com/docs/en/managed-agents/session-threads) (Beta)
 * [Outcomes](https://platform.claude.com/docs/en/managed-agents/define-outcomes) (Beta)
 * [Permission policies](https://platform.claude.com/docs/en/managed-agents/permission-policies) (Beta)
-* [Preserved thinking](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking)
 * [Scheduled deployments](https://platform.claude.com/docs/en/managed-agents/scheduled-deployments) (Beta)
 * [Self-hosted sandboxes](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes) (Beta)
 * [Session budgets](https://platform.claude.com/docs/en/managed-agents/budgets) (Beta)

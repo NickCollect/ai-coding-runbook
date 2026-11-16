@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/files
-fetched_at: 2026-11-09T07:30:17.002237+00:00
+fetched_at: 2026-11-16T07:30:41.869763+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,6 +14,8 @@ featureMetadata:
     eligibility: not-eligible
     note: Files retained until explicitly deleted or they reach their configured expiration.
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5

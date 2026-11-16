@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/analytics/cost_report
-fetched_at: 2026-11-09T07:30:32.439384+00:00
+fetched_at: 2026-11-16T07:30:57.640405+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,7 +43,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
 - `claude_tag_categories: optional array of BetaAnalyticsClaudeTagCategory`
 
-  Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. `dm` usage is reported under the user's product rather than `claude-tag`, so combining this filter with `products[]=claude-tag` excludes it. Use `group_by[]=claude_tag_category` to break out per-category values.
+  Filter to Claude Tag (Claude in Slack) usage in specific spend categories. Usage with no category never matches. Use `group_by[]=claude_tag_category` to break out per-category values.
 
   maxItems: 100
 
@@ -215,7 +215,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `claude_tag_category: BetaAnalyticsClaudeTagCategory or null`
 
-      Claude Tag (Claude in Slack) spend category: `engaged` (a person addressed Claude in a channel or thread), `proactive` (Claude responded without being addressed), `scheduled` (a scheduled routine ran), `monitoring` (Claude watching a channel it was asked to monitor), or `dm` (direct messages with Claude). Populated only when `claude_tag_category` is in `group_by[]`; null for usage that is not Claude Tag. Direct-message usage is billed to the individual user and is reported under that user's product, not under `claude-tag`. New categories may be added over time.
+      Claude Tag (Claude in Slack) spend category: `engaged` (a person addressed Claude in a channel or thread), `proactive` (Claude responded without being addressed), `scheduled` (a scheduled routine ran), `monitoring` (Claude watching a channel it was asked to monitor), or `dm` (direct messages with Claude). Populated only when `claude_tag_category` is in `group_by[]`; null for usage that is not Claude Tag. New categories may be added over time.
 
       - `"dm"`
 
@@ -285,7 +285,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `slack_channel_id: string or null`
 
-      Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+      Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack, for some Claude Tag usage that has no channel recorded, and for usage recorded before channel attribution was enabled.
 
     - `speed: "fast" or "standard" or null`
 

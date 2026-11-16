@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
-fetched_at: 2026-11-09T07:30:16.086720+00:00
+fetched_at: 2026-11-16T07:30:40.926468+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,6 +14,8 @@ featureMetadata:
     eligibility: not-eligible
     note: Container data retained up to 30 days.
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -568,11 +570,11 @@ When Claude saves files to its output directory during code execution (see [How 
 
 <CodeGroup exclude="shell">
   <CodeGroupItem language="cURL">
-    Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) for this.
+    Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Anthropic SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) for this.
   </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
-    Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) for this.
+    Downloading every generated file takes a loop over the file IDs in the tool result, which needs more logic than a single shell command. Use the [Anthropic SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) for this.
   </CodeGroupItem>
 
   ```python Python

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/user-management
-fetched_at: 2026-11-09T07:30:19.233802+00:00
+fetched_at: 2026-11-16T07:30:43.920608+00:00
 fetch_method: mintlify_md
 ---
 
@@ -204,7 +204,7 @@ Groups connect members to custom roles (role-based access control, the `rbac` in
 
 ## Versioning
 
-Send the `anthropic-version` header on every request; see [Versions](https://platform.claude.com/docs/en/api/versioning) for the available versions.
+Send the `anthropic-version` header on every request; see [API versions](https://platform.claude.com/docs/en/api/versioning) for the available versions.
 
 ## Rate limits
 

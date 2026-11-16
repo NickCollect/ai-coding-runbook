@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/create
-fetched_at: 2026-11-02T07:00:36.901978+00:00
+fetched_at: 2026-11-16T07:30:48.563787+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1128,6 +1128,14 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-fable-5-2"`
+
+        Built for the most ambitious work in coding, enterprise workflows, and the sciences
+
+      - `"claude-mythos-5-2"`
+
+        Built for the most demanding cybersecurity and life sciences research, available through verification programs
 
       - `"claude-haiku-5-5"`
 

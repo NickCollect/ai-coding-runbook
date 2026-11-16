@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/delete
-fetched_at: 2026-10-12T06:50:11.159048+00:00
+fetched_at: 2026-11-16T07:31:00.563296+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,11 +32,11 @@ Project must have no attached chats - returns 409 if chats exist.
 
 ## Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -57,7 +57,7 @@ Project must have no attached chats - returns 409 if chats exist.
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
     -X DELETE \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 

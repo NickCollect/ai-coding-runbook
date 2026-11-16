@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/environments
-fetched_at: 2026-11-09T07:30:18.139749+00:00
+fetched_at: 2026-11-16T07:30:42.915689+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,11 +12,14 @@ featureMetadata:
   topic:
     title: Managed Agents
     url: https://platform.claude.com/docs/en/managed-agents/overview
+  status: beta
   betaHeader: managed-agents-2026-04-01
   zdr:
     eligibility: not-eligible
-    note: Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes.
+    note: Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them.
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -34,6 +37,10 @@ featureMetadata:
     - claude-sonnet-4-6
     - claude-opus-4-5-20251101
     - claude-sonnet-4-5-20250929
+  supportedPlatforms:
+    Claude API: beta
+    Claude Platform on AWS: beta
+    Claude Models on Google Cloud (Anthropic managed): beta
 ---
 
 Environments define the sandbox configuration where your agent runs. You create an environment once, then reference its ID each time you start a session. Multiple sessions can share the same environment, but each session gets its own isolated sandbox (a fresh Linux container).
@@ -178,7 +185,7 @@ Use a unique, descriptive `name` (csharp, go: `Name`) so you can tell environmen
 
 ## Use the environment in a session
 
-Pass the environment ID as a string when [creating a session](https://platform.claude.com/docs/en/managed-agents/sessions).
+Pass the environment ID as a string when you create a session (see [Start a session](https://platform.claude.com/docs/en/managed-agents/sessions)).
 
 <CodeGroup>
   ```bash cURL
@@ -257,7 +264,7 @@ Pass the environment ID as a string when [creating a session](https://platform.c
 
 ### Packages
 
-The `packages` (csharp, go: `Packages`) field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions. Unpinned packages install the latest version. If the environment uses `limited` [networking](https://platform.claude.com/docs/en/managed-agents/environments#networking), also set `allow_package_managers` (java, php: `allowPackageManagers`; csharp, go: `AllowPackageManagers`) in `networking` (csharp, go: `Networking`) to `true`; otherwise the request is rejected with a 400 error.
+The `packages` (csharp, go: `Packages`) field installs packages into the sandbox before the agent uses it. Package managers run in alphabetical order (apt, cargo, gem, go, npm, pip). You can pin specific versions. If the environment uses `limited` [networking](https://platform.claude.com/docs/en/managed-agents/environments#networking), also set `allow_package_managers` (java, php: `allowPackageManagers`; csharp, go: `AllowPackageManagers`) in `networking` (csharp, go: `Networking`) to `true`; otherwise, the API rejects the request with a 400 error.
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
@@ -608,16 +615,16 @@ The following example creates an environment with `limited` networking:
 </CodeGroup>
 
 <Info>
-  Use `limited` networking with an explicit `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) list. Follow the principle of least privilege by granting only the minimum network access your agent requires, and regularly audit your allowed domains.
+  Use `limited` networking with an explicit `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) list. Follow the principle of least privilege by granting only the minimum network access your agent requires, and regularly audit your allowed hosts.
 </Info>
 
 With `limited` networking and no other fields set, no hosts are allowed. Files, memory stores, and GitHub repositories that you attach to the session stay available. When a request from the sandbox on port 80 or 443 is refused because its host is not allowed, the response is a 403 that names the blocked host.
 
 When using `limited` networking:
 
-* `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) specifies domains the sandbox can reach. Specify bare hostnames or wildcard patterns (such as `*.example.com`). Do not include a URL scheme, port, or path. A bare hostname matches that exact host: `example.com` does not match `www.example.com`. `*.example.com` matches every subdomain of `example.com`, but not `example.com` itself.
+* `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) specifies hosts the sandbox can reach. Specify bare hostnames or wildcard patterns (such as `*.example.com`). Do not include a URL scheme, port, or path. A bare hostname matches that exact host: `example.com` does not match `www.example.com`. `*.example.com` matches every subdomain of `example.com`, but not `example.com` itself.
 * `allow_mcp_servers` (java: `allowMcpServers`; php: `allowMCPServers`; csharp: `AllowMcpServers`; go: `AllowMCPServers`) allows outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) array. Defaults to `false`. While it is `false`, session creation fails with a 400 error if the agent declares an MCP server whose host is not in `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`). The same applies to [an agent it can delegate to](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration). To fix it, add the host to `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) or set `allow_mcp_servers` (java: `allowMcpServers`; php: `allowMCPServers`; csharp: `AllowMcpServers`; go: `AllowMCPServers`) to `true`.
-* `allow_package_managers` (java, php: `allowPackageManagers`; csharp, go: `AllowPackageManagers`) allows outbound access to a set of public package registries and code hosts beyond those listed in the `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) array. See [Package manager hosts](https://platform.claude.com/docs/en/managed-agents/environments#package-manager-hosts) for the list. Defaults to `false`. Set it to `true` whenever the environment specifies `packages` (csharp, go: `Packages`); otherwise the request is rejected with a 400 error, even if the registry hosts are listed in `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`).
+* `allow_package_managers` (java, php: `allowPackageManagers`; csharp, go: `AllowPackageManagers`) allows outbound access to a set of public package registries and code hosts beyond those listed in the `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) array. See [Package manager hosts](https://platform.claude.com/docs/en/managed-agents/environments#package-manager-hosts) for the list. Defaults to `false`. Set it to `true` whenever the environment specifies `packages` (csharp, go: `Packages`). Otherwise, the API rejects the request with a 400 error, even if `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) lists the registry hosts.
 
 #### Package manager hosts
 
@@ -668,7 +675,7 @@ Use `unrestricted` only when the agent must reach sites you cannot list in advan
 
 ## Environment lifecycle
 
-* Environments persist until explicitly archived or deleted.
+* Environments persist until you archive or delete them.
 * Each session gets its own sandbox instance, even when multiple sessions reference the same environment. Sessions do not share filesystem state.
 * Environments are not versioned. If you update an environment frequently, keep your own record of the changes so you can tell which configuration each session used.
 
@@ -811,15 +818,15 @@ Use `unrestricted` only when the agent must reach sites you cannot list in advan
   ```
 </CodeGroup>
 
-## Pre-installed runtimes
+## Preinstalled runtimes
 
-Cloud sandboxes include common language runtimes, databases, and command-line tools out of the box. See [Cloud sandbox reference](https://platform.claude.com/docs/en/managed-agents/cloud-sandboxes-reference) for the full list.
+Cloud sandboxes include common language runtimes, databases, and command-line tools. See [Cloud sandbox reference](https://platform.claude.com/docs/en/managed-agents/cloud-sandboxes-reference) for the full list.
 
 ## Next steps
 
 <CardGroup cols={2}>
   <Card title="Cloud sandbox reference" icon="book" href="https://platform.claude.com/docs/en/managed-agents/cloud-sandboxes-reference">
-    Pre-installed packages, databases, and utilities available in cloud sandboxes.
+    Preinstalled packages, databases, and utilities available in cloud sandboxes.
   </Card>
 
   <Card title="Start a session" icon="play" href="https://platform.claude.com/docs/en/managed-agents/sessions">
@@ -829,7 +836,7 @@ Cloud sandboxes include common language runtimes, databases, and command-line to
 
 ## Availability
 
-Cloud sandboxes are available on every model.
+Cloud sandboxes are in beta on every model.
 
 ### API support
 
@@ -837,9 +844,9 @@ Cloud sandboxes are available on every model.
 
 * Availability: Available
 
-| Status    | Cloud platforms                                                                                                                                                                                                                                                                | Models                                                            |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| Available | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed) | [All models](https://platform.claude.com/docs/en/models/overview) |
+| Status | Cloud platforms                                                                                                                                                                                                                                                                | Models                                                            |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| Beta   | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed) | [All models](https://platform.claude.com/docs/en/models/overview) |
 
 ### Required beta headers
 
@@ -853,10 +860,10 @@ Beta headers allow you to access experimental features and new model capabilitie
 
 [Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                      | HIPAA                                                                        |
-| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Status  | Not eligible                                                                                                                                             | Not eligible                                                                 |
-| Details | Sessions are stateful resources; transcripts persist until you delete them. Applies to all Managed Agents sub-features, including Self-hosted sandboxes. | Applies to all Managed Agents sub-features, including Self-hosted sandboxes. |
+| Item    | Zero data retention                                                                                                                                                                                                                                         | HIPAA                                                               |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Status  | Not eligible                                                                                                                                                                                                                                                | Not eligible                                                        |
+| Details | Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them. [Learn more](https://platform.claude.com/docs/en/managed-agents/self-hosted-data-and-access#how-long-data-is-kept) | Not eligible for HIPAA. Applies to all Managed Agents sub-features. |
 
 Applicable endpoints:
 

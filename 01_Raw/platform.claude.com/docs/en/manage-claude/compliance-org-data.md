@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-org-data
-fetched_at: 2026-11-09T07:30:20.704004+00:00
+fetched_at: 2026-11-16T07:30:45.268838+00:00
 fetch_method: mintlify_md
 ---
 
@@ -310,7 +310,7 @@ Rows reflect the enforced state rather than the last-stored configuration, as in
 * `ip_allowlist_enabled` is `true` only while the allowlist is on and has at least one active range.
 * `code_execution_network_egress_enabled` is `false` whenever code execution is off.
 
-The response reflects the state at read time; nothing is snapshotted. Changes to most of these settings surface as events in the [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed); use this endpoint for the current resolved state and the feed to audit who changed what, and when.
+The response reflects the state at read time; nothing is snapshotted. Changes to most of these settings surface as events in the [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed); use this endpoint for the current resolved state and the feed to audit who changed what, and when. For the current results of Anthropic’s recommended security controls, see [Security posture in the Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/overview).
 
 ## Read plugins and plugin marketplaces
 

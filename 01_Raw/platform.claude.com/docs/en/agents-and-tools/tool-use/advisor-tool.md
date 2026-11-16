@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool
-fetched_at: 2026-11-09T07:30:16.151757+00:00
+fetched_at: 2026-11-16T07:30:40.940404+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,6 +15,8 @@ featureMetadata:
     eligibility: eligible
     note: Excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements). Advisor model output is returned in the API response; nothing is stored server-side after the response.
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -66,7 +68,7 @@ sequenceDiagram
 
 The advisor fits these configurations:
 
-* **You currently use Sonnet on complex tasks:** Add a higher-tier advisor. Opus keeps total cost similar or lower; Claude Fable 5.1 maximizes the quality lift.
+* **You currently use Sonnet on complex tasks:** Add a higher-tier advisor. Opus keeps total cost similar or lower; Claude Fable 5.2 maximizes the quality lift.
 * **You currently use Haiku and want a step up in intelligence:** Add an Opus or Fable advisor. Expect higher cost than Haiku alone, but lower than switching the executor to a larger model.
 
 Results are task-dependent. Evaluate on your own workload.
@@ -327,7 +329,7 @@ The `max_uses` cap applies to a whole turn, and a turn can span several requests
 
 The `caching` object has the shape `{"type": "ephemeral", "ttl": "5m" | "1h"}`. Unlike `cache_control` on content blocks, this is not a breakpoint marker. It is an on/off switch. The server determines where cache boundaries go.
 
-The advisor tool also accepts the generic properties available on any tool definition: `cache_control`, `allowed_callers`, `defer_loading`, and `strict` (covered in [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)). See [Tool definition properties](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference#tool-definition-properties) in the Tool reference for their semantics.
+The advisor tool also accepts the generic properties available on any tool definition: `cache_control`, `allowed_callers`, `defer_loading`, and `strict` (covered in [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)). See [Tool definition properties](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference#tool-definition-properties) in the Tool reference for their semantics.
 
 ## Response structure
 
@@ -377,7 +379,7 @@ The `advisor_tool_result.content` field is a discriminated union. For successful
 | `advisor_redacted_result` | `encrypted_content`, `stop_reason` | The advisor model returns encrypted output.                         |
 
 <Note>
-  Claude Sonnet 5.5, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Opus 5, Claude Fable 5, Claude Mythos 5, and Claude Haiku 5.5 advisors return the encrypted `advisor_redacted_result`. Every other advisor model in [Model compatibility](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#model-compatibility) returns the plaintext `advisor_result`. To read the advice text in your own responses, use an advisor that returns plaintext, such as `claude-opus-4-8`, where [Model compatibility](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#model-compatibility) lists one for your executor. Claude Sonnet 5.5, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Opus 5, Claude Fable 5, and Claude Mythos 5 executors pair only with advisors that return the encrypted form, so on those executors the advice text isn’t readable in the response.
+  Claude Fable 5.2, Claude Mythos 5.2, Claude Sonnet 5.5, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Opus 5, Claude Fable 5, Claude Mythos 5, and Claude Haiku 5.5 advisors return the encrypted `advisor_redacted_result`. Every other advisor model in [Model compatibility](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#model-compatibility) returns the plaintext `advisor_result`. To read the advice text in your own responses, use an advisor that returns plaintext, such as `claude-opus-4-8`, where [Model compatibility](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#model-compatibility) lists one for your executor. Claude Fable 5.2, Claude Mythos 5.2, Claude Sonnet 5.5, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Opus 5, Claude Fable 5, and Claude Mythos 5 executors pair only with advisors that return the encrypted form, so on those executors the advice text isn’t readable in the response.
 </Note>
 
 Here is the same request sent twice, identical except for the advisor `model` in the tool definition, showing both variants.
@@ -412,7 +414,7 @@ Both result variants carry a `stop_reason` field when you set [`max_tokens`](htt
 
 With `advisor_result`, the `text` field contains human-readable advice. With `advisor_redacted_result`, the `encrypted_content` field contains an opaque blob that you cannot read. In the next request, the server decrypts it and renders the plaintext into the executor’s prompt.
 
-In both cases, round-trip the content verbatim in later requests. If you switch advisor models mid-conversation, branch on `content.type` to handle both shapes.
+In both cases, round-trip the content verbatim in later requests. If you switch advisor models mid-conversation, branch on `content.type` to handle both shapes. A switch is an edit to `tools`, so read [Multi-turn conversations](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#multi-turn-conversations) before you make one in a conversation that carries thinking blocks.
 
 ### Error results
 
@@ -447,7 +449,15 @@ Advisor rate limits draw from the same per-model bucket as direct calls to the a
 
 Pass the full assistant content, including `advisor_tool_result` blocks, back to the API in later requests. Round-trip the result blocks verbatim. With the newest Opus model as the advisor, as in this example, the result block’s `content` is the encrypted `advisor_redacted_result` variant. In the next request, the server decrypts it and renders the advice into the executor’s prompt (see [Result variants](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#result-variants)). The mechanics are identical for any advisor model.
 
-<CodeGroup exclude="shell">
+<CodeGroup exclude="shell:cURL, shell:CLI">
+  <CodeGroupItem language="cURL">
+    This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
+  </CodeGroupItem>
+
+  <CodeGroupItem language="CLI">
+    This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
+  </CodeGroupItem>
+
   ```python Python
   client = anthropic.Anthropic()
 
@@ -748,10 +758,18 @@ Pass the full assistant content, including `advisor_tool_result` blocks, back to
   ```
 </CodeGroup>
 
-You can drop the advisor tool from `tools` in a follow-up request while the message history still contains `advisor_tool_result` blocks, as long as no advisor call is [still pending](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#resuming-a-paused-turn). The API accepts the request and keeps the historical blocks, but the model cannot call the advisor in that request. You must still send the `advisor-tool-2026-03-01` beta header for those history blocks to be accepted.
+You can drop the advisor tool from `tools` in a follow-up request while the message history still contains `advisor_tool_result` blocks. The API accepts the request and keeps the historical blocks, but the model cannot call the advisor in that request. Two conditions apply:
+
+* **No advisor call is still pending.** See [Resuming a paused turn](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#resuming-a-paused-turn).
+* **You still send the `advisor-tool-2026-03-01` beta header.** The API needs it to accept those history blocks. That header covers the `advisor_tool_result` blocks, not thinking blocks.
+
+**Exception: a history that also contains thinking blocks.** Removing the advisor tool is an [edit to `tools`](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking/prefix-checks#what-counts-as-an-edit). So is changing its `model`, `max_uses`, `max_tokens`, or `caching`. An edit to `tools` invalidates the thinking blocks already in the history.
+
+* **What happens:** If the executor model [runs the prefix check](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking/prefix-checks#enforcement), the request can get a [400 error](https://platform.claude.com/docs/en/api/errors#thinking-block-conversation-mismatch).
+* **How to continue:** Set `thinking.block_binding.prefix_mismatch_behavior` to `"drop_block"` on that request and on every later request in the conversation. The API then drops those thinking blocks. This setting is in beta and needs the `thinking-binding-controls-2026-08-01` beta header.
 
 <Note>
-  The advisor tool has no built-in conversation-level cap. To limit advisor calls across a conversation, count them client-side. When you reach your ceiling, remove the advisor tool from your `tools` array. You do not need to strip `advisor_tool_result` blocks from your message history.
+  The advisor tool has no built-in conversation-level cap. To limit advisor calls across a conversation, count them client-side. When you reach your ceiling, remove the advisor tool from your `tools` array. You do not need to strip `advisor_tool_result` blocks from your message history. If your history also contains thinking blocks, read the preceding exception first. In that case, unless you set `"drop_block"`, the request can get a [400 error](https://platform.claude.com/docs/en/api/errors#thinking-block-conversation-mismatch).
 </Note>
 
 ### Resuming a paused turn
@@ -764,7 +782,15 @@ If a Haiku executor has not called the advisor in its first assistant turn, appe
 
 With the default `NUDGE_TURN` of 2, the reminder typically arrives after the model has oriented on the task but before it has committed to an approach.
 
-<CodeGroup exclude="shell">
+<CodeGroup exclude="shell:cURL, shell:CLI">
+  <CodeGroupItem language="cURL">
+    This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
+  </CodeGroupItem>
+
+  <CodeGroupItem language="CLI">
+    This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
+  </CodeGroupItem>
+
   ```python Python
   client = anthropic.Anthropic()
 
@@ -1267,7 +1293,7 @@ Append the nudge as its own user message after the tool results rather than as a
 
 The plain-text nudge is highly salient on Claude Haiku 4.5 and Sonnet executors: 74 percent (Sonnet) to 98 percent (Claude Haiku 4.5) of nudged attempts in Anthropic’s testing called the advisor immediately at turn 2. If that lands before your executor has read the problem or gathered context, the resulting advisor call is low-context and can displace a better-timed later call. Measure your executor’s baseline first-call turn before adding the nudge. If the executor already calls the advisor reliably and its first call typically lands at turn N, set `NUDGE_TURN` greater than N. In Anthropic’s testing, a turn-2 nudge on workloads where the baseline first call was turn 7 or later correlated with a 3 to 4 percentage-point task-performance drop. On a browse workload where the baseline call rate was 86 percent, the same nudge raised engagement with no task-performance cost.
 
-To force a consult on a specific request instead of nudging, set `tool_choice` to `{"type": "tool", "name": "advisor"}`, subject to the constraints in [Forcing tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use). Forcing tool use cannot be combined with manual extended thinking (`thinking: {type: "enabled"}`): the API returns a `400 invalid_request_error` if you enable both. Adaptive thinking supports forced tool use. Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.1, and Claude Mythos 5.1 executors reject `tool_choice` types `tool` and `any`, so use the prompt nudge on those models instead.
+To force a consult on a specific request instead of nudging, set `tool_choice` to `{"type": "tool", "name": "advisor"}`, subject to the constraints in [Forcing tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use). Forcing tool use cannot be combined with manual extended thinking (`thinking: {type: "enabled"}`): the API returns a `400 invalid_request_error` if you enable both. Adaptive thinking supports forced tool use. Claude Fable 5.2, Claude Mythos 5.2, Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.1, and Claude Mythos 5.1 executors reject `tool_choice` types `tool` and `any`, so use the prompt nudge on those models instead.
 
 ## Streaming
 
@@ -1428,10 +1454,10 @@ The advisor’s prompt on the Nth call is the (N-1)th call’s prompt with one m
 
 **When to enable it:** The cache write costs more than the reads save when the advisor is called two or fewer times in each conversation. Caching breaks even at roughly three advisor calls and improves from there. Enable it for long agent loops, and keep it off for short tasks.
 
-**Keep it consistent:** Set `caching` once and leave it for the whole conversation. Toggling it off and on mid-conversation causes cache misses.
+**Keep it consistent:** Set `caching` once and leave it for the whole conversation. Toggling it off and on mid-conversation causes cache misses. Each toggle is also an edit to `tools`. That edit can make the next request return a 400 error. [Multi-turn conversations](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#multi-turn-conversations) explains when this happens and what to set.
 
 <Warning>
-  [`clear_thinking`](https://platform.claude.com/docs/en/build-with-claude/context-editing) with a `keep` value other than `"all"` shifts the advisor’s quoted transcript each turn, causing advisor-side cache misses. This is a cost degradation only. Advice quality is unaffected. When thinking is on without explicit `clear_thinking` configuration, the API defaults to `keep: {type: "thinking_turns", value: 1}`, which triggers this behavior (the default on earlier Opus and Sonnet models and on Haiku models through Claude Haiku 4.5, whereas on Claude Opus 4.5 and later Opus models, Claude Sonnet 4.6 and later Sonnet models, and Claude Haiku 5.5, the default is to keep all turns). Set `keep: "all"` to preserve advisor cache stability.
+  [`clear_thinking`](https://platform.claude.com/docs/en/build-with-claude/context-editing) with a `keep` value other than `"all"` shifts the advisor’s quoted transcript each turn, causing advisor-side cache misses. This is a cost degradation only. Advice quality is unaffected. When thinking is on without explicit `clear_thinking` configuration, Opus models before Claude Opus 4.5, Sonnet models before Claude Sonnet 4.6, and Haiku models through Claude Haiku 4.5 default to `keep: {type: "thinking_turns", value: 1}`, which triggers this behavior. Claude Opus 4.5 and later Opus models, Claude Sonnet 4.6 and later Sonnet models, Claude Haiku 5.5, and Claude Fable and Claude Mythos models keep all turns by default. Set `keep: "all"` to preserve advisor cache stability.
 </Warning>
 
 ## Combining with other tools
@@ -1701,7 +1727,7 @@ Advisor output is the advisor’s largest cost driver, and the top-level `max_to
 (Advisor: please keep your guidance under 80 words. I need a focused starting point, not a comprehensive plan.)
 ```
 
-This line can be prefixed programmatically by your agent framework before sending the request. The limit is a soft constraint. The advisor occasionally exceeds it, so ask for roughly 80 percent of your true ceiling.
+Your agent framework can prefix this line once and keep it there. The limit is a soft constraint. The advisor can exceed it, so ask for roughly 80 percent of your true ceiling.
 
 <Note>
   In Anthropic’s testing this line also increased how often the executor consults the advisor, but the net effect was still lower total cost (more consults, each shorter).
@@ -1832,24 +1858,26 @@ For coding tasks, pairing a Sonnet executor at medium [effort](https://platform.
 
 ### Cost control
 
-* For conversation-level budgets, count advisor calls client-side. When you reach your cap, remove the advisor tool from `tools`; you do not need to strip `advisor_tool_result` blocks from your message history (see the note in [Multi-turn conversations](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#multi-turn-conversations)).
+* For conversation-level budgets, count advisor calls client-side. When you reach your cap, remove the advisor tool from `tools`. You do not need to strip `advisor_tool_result` blocks from your message history. If you send earlier thinking blocks back, removing the tool can return a 400 error. To avoid it, set `prefix_mismatch_behavior` to `"drop_block"`, as [Multi-turn conversations](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#multi-turn-conversations) explains.
 * Enable `caching` only for conversations where you expect three or more advisor calls.
 
 ## Model compatibility
 
 The executor model (the top-level `model` field) and the advisor model (the `model` field inside the tool definition) must form a valid pair. The advisor must be Claude Sonnet 4.6 or a more capable model, and it must be at least as capable as the executor. Models of equal capability (for example, Claude Opus 4.7 and Claude Opus 4.8) can advise each other.
 
-**[Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) & [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview)** — *For demanding reasoning and long-horizon agentic work*
+**[Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) & [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview)** — *For demanding reasoning and long-horizon agentic work*
 
 **Supported advisor models**
 
-* [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
-* [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
 
 **[Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview)** — *For long-running agentic coding and knowledge work*
 
 **Supported advisor models**
 
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
 * [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
 * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
 * [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview) (claude-mythos-5)
@@ -1861,6 +1889,8 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 
 **Supported advisor models**
 
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
 * [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
 * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
 * [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview) (claude-mythos-5)
@@ -1873,6 +1903,8 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 
 **Supported advisor models**
 
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
 * [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
 * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
 * [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview) (claude-mythos-5)
@@ -1885,10 +1917,21 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 * [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview) (claude-sonnet-5)
 * [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview) (claude-haiku-5-5)
 
+**[Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) & [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview)**
+
+**Supported advisor models**
+
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
+* [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
+* [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
+
 **[Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview) & [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview)**
 
 **Supported advisor models**
 
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
 * [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
 * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
 * [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview) (claude-mythos-5)
@@ -1900,6 +1943,8 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 
 **Supported advisor models**
 
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
 * [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
 * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
 * [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview) (claude-mythos-5)
@@ -1911,6 +1956,8 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 
 **Supported advisor models**
 
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
 * [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
 * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
 * [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview) (claude-mythos-5)
@@ -1925,6 +1972,8 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 
 **Supported advisor models**
 
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
 * [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
 * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
 * [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview) (claude-mythos-5)
@@ -1939,6 +1988,8 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 
 **Supported advisor models**
 
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
 * [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
 * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
 * [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview) (claude-mythos-5)
@@ -1956,6 +2007,8 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 
 **Supported advisor models**
 
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
 * [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
 * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
 * [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview) (claude-mythos-5)
@@ -1972,6 +2025,8 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 
 **Supported advisor models**
 
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
 * [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
 * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
 * [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview) (claude-mythos-5)
@@ -1990,6 +2045,8 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 
 **Supported advisor models**
 
+* [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview) (claude-mythos-5-2)
+* [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview) (claude-fable-5-2)
 * [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview) (claude-mythos-5-1)
 * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (claude-fable-5-1)
 * [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview) (claude-mythos-5)
@@ -2045,18 +2102,18 @@ Advisor tool is in beta on select models and eligible for zero data retention.
 * Availability: Available
 * Usage: Add an advisor tool (type `advisor_20260301`) with the advisor model to the request’s `tools`. It takes `max_uses`, `max_tokens` and caching options.
 
-| Status | Cloud platforms                                                                                                                                                                                                                                                                | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta   | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed) | [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), Claude Mythos Preview, [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview), [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview) |
+| Status | Cloud platforms                                                                                                                                                                                                                                                                | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Beta   | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed) | [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview), [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview), [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), Claude Mythos Preview, [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview), [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview) |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 
 * Availability: Available
 * Usage: Set `advisor` to `{"type": "enabled", "model": …}` in the agent’s `multiagent` block. There are no `max_uses`, `max_tokens` or caching options, and advice arrives as thread events on the session’s event stream.
 
-| Status | Cloud platforms                                                                                                    | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ------ | ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta   | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws) | [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), Claude Mythos Preview, [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview), [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview) |
+| Status | Cloud platforms                                                                                                    | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------ | ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Beta   | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws) | [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview), [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview), [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), Claude Mythos Preview, [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview), [Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/overview), [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview), [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview), [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview) |
 
 ### Required beta headers
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
-fetched_at: 2026-11-02T07:00:32.972862+00:00
+fetched_at: 2026-11-16T07:30:45.638831+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/pr
 description: Behavioral differences and prompting patterns for Claude Fable 5.1 and Claude Mythos 5.1, covering effort, progress updates, tool-call batching, conversation history, writing style, formatting, task completion, compaction summaries, scope and test coverage, search triggering, safeguard false positives, file edits, long outputs, subagents, and vision.
 ---
 
-For the model’s capabilities, API changes, pricing, and availability, see [What’s new in Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1). For techniques that apply across Claude models, see [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
+For the model’s specifications, pricing, and availability, see [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview). For techniques that apply across Claude models, see [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
 
 Your existing Claude Fable 5 prompts should perform well on Claude Fable 5.1 without changes, but a handful of behavioral differences are worth knowing about. Start with the section that matches what you observe:
 
@@ -32,7 +32,7 @@ Your existing Claude Fable 5 prompts should perform well on Claude Fable 5.1 wit
 * Answers about charts and dense images miss detail: [Give vision work tools to crop and zoom](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1#give-vision-work-tools-to-crop-and-zoom)
 
 <Note>
-  Claude Fable 5.1 runs safety classifiers and can return `stop_reason: "refusal"`. See [Refusals, fallback, and billing](https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1#refusals-fallback-and-billing) and [Reduce safeguard false positives](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1#reduce-safeguard-false-positives).
+  Claude Fable 5.1 runs safety classifiers and can return `stop_reason: "refusal"`. See [Refusals and fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback) and [Reduce safeguard false positives](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1#reduce-safeguard-false-positives).
 
   Prompts, skills, and tool descriptions that ask the model to write its thinking or reasoning might be declined with the `reasoning_extraction` category. Ask for a short explanation or a summary of the actions taken instead, or read the reasoning from [summarized thinking](https://platform.claude.com/docs/en/build-with-claude/thinking#summarized-thinking) blocks (`display: "summarized"`). See [Keep reasoning in thinking blocks](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#keep-reasoning-in-thinking-blocks).
 </Note>
@@ -75,11 +75,19 @@ First privately list what you need next; then request every item that doesn't de
 
 Each time you send tool results back, append it after that user message as a [turn-scoped system message](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages#turn-scoped-system-messages): a `role: "system"` entry in `messages` with `clear_at: "next_user_message"`. Once a later user message exists, the API clears the earlier copies, so the model reads only the newest one. Turn-scoped system messages are in beta and require the [beta header](https://platform.claude.com/docs/en/api/beta-headers) `mid-conversation-system-clear-at-2026-08-21`. Without the beta, place the sentence in a text block after the `tool_result` blocks in the same user message instead.
 
-Append a fresh copy each turn and leave the earlier copies where they are, byte-for-byte. They stay in the array, but once cleared the model doesn’t see them and they cost no input tokens. Deleting or rewriting them is an edit to earlier turns: it invalidates the thinking blocks that came after them (see [Keep the conversation history append-only](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1#keep-the-conversation-history-append-only)).
+Append a fresh copy each turn and leave the earlier copies where they are, unchanged. They stay in the array, but once cleared the model doesn’t see them and they cost no input tokens. Deleting or rewriting them is an edit to earlier turns: it invalidates the thinking blocks that came after them (see [Keep the conversation history append-only](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1#keep-the-conversation-history-append-only)).
 
 The following loop shows this placement. Each assistant turn goes back exactly as returned, each user turn carries only the tool results, and a fresh turn-scoped copy of the nudge follows it.
 
-<CodeGroup exclude="shell">
+<CodeGroup exclude="shell:cURL, shell:CLI">
+  <CodeGroupItem language="cURL">
+    This workflow needs more logic than a single shell command. Use the [Anthropic SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
+
+  <CodeGroupItem language="CLI">
+    This workflow needs more logic than a single shell command. Use the [Anthropic SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
+
   ```python Python
   import anthropic
   from anthropic.types.beta import (
@@ -754,11 +762,19 @@ The following loop shows this placement. Each assistant turn goes back exactly a
 
 ## Keep the conversation history append-only
 
-Append each assistant turn to the history exactly as the API returned it, thinking blocks included, and don’t edit earlier turns between requests. A thinking block is valid [only while everything before it is unchanged](https://platform.claude.com/docs/en/build-with-claude/thinking#preserved-in-conversation): the system prompt, the tool list, and every earlier message. To choose what happens to a block that fails the prefix check, set `thinking.block_binding.prefix_mismatch_behavior`, which requires the `thinking-binding-controls-2026-08-01` beta header. With `"error"`, the API rejects the request with a 400 error; with `"drop_block"`, it drops the invalid blocks. [When `prefix_mismatch_behavior` is unset](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#enforcement) covers requests that don’t set it.
+Append each assistant turn to the history exactly as the API returned it, thinking blocks included, and don’t edit earlier turns between requests. The API’s [prefix check](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking/prefix-checks#prefix-check) passes a thinking block [only while everything before it is unchanged](https://platform.claude.com/docs/en/build-with-claude/thinking#preserved-in-conversation): the system prompt, the tool list, and every earlier message.
 
-Most history edits that trip the prefix check also restart the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching): injecting and removing per-turn reminders, summarizing older turns in place, or changing the system prompt mid-session. Send per-turn reminders as [turn-scoped system messages](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages#turn-scoped-system-messages), change instructions or tools with a [mid-conversation system message](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages) instead of rewriting `system` or `tools`, and let server-side [compaction](https://platform.claude.com/docs/en/build-with-claude/compaction) or [context editing](https://platform.claude.com/docs/en/build-with-claude/context-editing) do any trimming. If you compact on the client, the simplest shape is to replace the whole history with one summary message plus the new user turn and replay nothing else. No thinking blocks carry over, so nothing fails, and the model thinks afresh on the compacted conversation (see [Compact on the client](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#custom-compaction-on-the-client)). Cache reads on Claude Fable 5.1 cost $0.25 USD per million tokens, 2.5 percent of the input price (see [Pricing](https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1#pricing)). Compacting early to save cost can be the wrong tradeoff between cost and intelligence, so experiment with later compaction points.
+Failing the [prefix check](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking/prefix-checks#prefix-check) might or might not result in a [400 error](https://platform.claude.com/docs/en/api/errors#thinking-block-conversation-mismatch). To identify and handle both cases, see [Prefix checks on thinking blocks](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking/prefix-checks).
 
-To find edits your harness makes, run a session with `prefix_mismatch_behavior: "drop_block"` and log `input_transformations`, as described in [Check whether your code edits the prefix](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#how-to-tell-whether-your-integration-is-impacted). You can also capture the exact requests it sends over a few normal turns and confirm that consecutive requests are byte-identical up to the appended turns.
+To choose what happens to a block that fails the prefix check, set `thinking.block_binding.prefix_mismatch_behavior`. This setting requires the `thinking-binding-controls-2026-08-01` beta header. With `"error"`, the API rejects the request with a 400 error. With `"drop_block"`, the API drops the invalid blocks.
+
+These history changes fail the prefix check and also invalidate the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) from the changed point onward: injecting and removing per-turn reminders, summarizing older turns in place, and changing the system prompt mid-session. Send per-turn reminders as [turn-scoped system messages](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages#turn-scoped-system-messages). To change instructions or tools, send a [mid-conversation system message](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages) instead of rewriting `system` or `tools`. Let server-side [compaction](https://platform.claude.com/docs/en/build-with-claude/compaction) or [context editing](https://platform.claude.com/docs/en/build-with-claude/context-editing) do any trimming.
+
+If you compact on the client, one approach is to replace the whole history with one summary message plus the new user turn, and nothing else. No thinking blocks carry over, so nothing fails, and the model thinks afresh on the compacted conversation (see [When your code writes the summary](https://platform.claude.com/docs/en/build-with-claude/compaction-thinking-blocks#own-summary)).
+
+Cache reads on Claude Fable 5.1 cost $0.25 USD per million tokens, 2.5 percent of the input price (see [Prompt caching pricing](https://platform.claude.com/docs/en/about-claude/pricing#prompt-caching)). Compacting early to save cost can be the wrong trade-off between cost and intelligence, so experiment with later compaction points.
+
+To find edits your harness makes, run a session with `prefix_mismatch_behavior: "drop_block"` and log `input_transformations`, as described in [Test your code for prefix check failures](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking/fix-bound-to-a-different-conversation#how-to-tell-whether-your-integration-is-impacted). You can also capture the exact requests it sends over a few normal turns and confirm that consecutive requests are the same up to the appended turns.
 
 ## Writing density
 
@@ -857,7 +873,7 @@ When a query centers on a name you do not confidently recognize, or recognize fr
 
 ## Reduce safeguard false positives
 
-Claude Fable 5.1’s safety classifiers produce fewer false positives than Claude Fable 5’s did at launch, and finding vulnerabilities in source code is permitted. False positives still occur, and a blocked request returns `stop_reason: "refusal"` (see [Refusals, fallback, and billing](https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1#refusals-fallback-and-billing)). Three situations make them more likely:
+Claude Fable 5.1’s safety classifiers produce fewer false positives than Claude Fable 5’s did at launch, and finding vulnerabilities in source code is permitted. False positives still occur, and a blocked request returns `stop_reason: "refusal"` (see [Refusals and fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback)). Three situations make them more likely:
 
 * **Compile-check phrasing:** Instead of “Does this program compile without errors?”, ask “Are there any bugs in this program?”
 * **Lesser-known programming languages:** Give the model context about what the language is and how it works, for example by giving it access to the language’s documentation.
@@ -896,4 +912,4 @@ The model still often waits. The time savings come from the runs where it carrie
 
 ## Give vision work tools to crop and zoom
 
-Claude Fable 5.1 has better vision capabilities out of the box, and on complex visual inputs such as dense charts it does its best work when it can iteratively analyze, crop, and visually verify what it sees. To get the full benefit, run the model as an agent with access to a container that holds the raw images or videos and has basic image-processing libraries (such as PIL and OpenCV) pre-installed. If running a container is too much overhead, an image-cropping tool alone delivers most of the uplift: a tool that returns a chosen region of the image, cropped and enlarged, lets the model examine specific details in more depth and scales test-time compute with image tokens. The [crop tool recipe](https://platform.claude.com/cookbook/multimodal-crop-tool) has a working definition.
+On complex visual inputs such as dense charts, Claude Fable 5.1 does its best work when it can iteratively analyze, crop, and visually verify what it sees. To get the full benefit, run the model as an agent with access to a container that holds the raw images or videos. Give the container basic image-processing libraries, such as PIL and OpenCV. If running a container is too much overhead, an image-cropping tool alone also helps. A tool that returns a chosen region of the image, cropped and enlarged, lets the model examine specific details in more depth, and it scales test-time compute with image tokens. The [crop tool recipe](https://platform.claude.com/cookbook/multimodal-crop-tool) has a working definition.

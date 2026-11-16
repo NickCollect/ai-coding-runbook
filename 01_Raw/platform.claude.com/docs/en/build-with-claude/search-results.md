@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/search-results
-fetched_at: 2026-11-09T07:30:15.376500+00:00
+fetched_at: 2026-11-16T07:30:40.150041+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,6 +14,8 @@ featureMetadata:
     eligibility: eligible
     note: Excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements).
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -33,9 +35,9 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
-    Claude Platform on AWS: stable
     Amazon Bedrock: stable
-    Amazon Bedrock (InvokeModel): stable
+    Amazon Bedrock (bedrock-runtime): stable
+    Claude Platform on AWS: stable
     Claude Models on Google Cloud (Google managed): stable
     Microsoft Foundry: stable
 ---
@@ -110,11 +112,11 @@ Returning search results from your custom tools lets you build dynamic RAG appli
 
 <CodeGroup exclude="shell">
   <CodeGroupItem language="cURL">
-    The tool-calling flow needs search logic in your application, which needs more than a single shell command. Use the Claude SDK for the full flow. For the raw request shape of a tool conversation with search results, see [Combining both methods](https://platform.claude.com/docs/en/build-with-claude/search-results#combining-both-methods). To provide search results directly in user messages, see [Method 2: Search results as top-level content](https://platform.claude.com/docs/en/build-with-claude/search-results#method-2-search-results-as-top-level-content).
+    The tool-calling flow needs search logic in your application, which needs more than a single shell command. Use the Anthropic SDK for the full flow. For the raw request shape of a tool conversation with search results, see [Combining both methods](https://platform.claude.com/docs/en/build-with-claude/search-results#combining-both-methods). To provide search results directly in user messages, see [Method 2: Search results as top-level content](https://platform.claude.com/docs/en/build-with-claude/search-results#method-2-search-results-as-top-level-content).
   </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
-    The tool-calling flow needs search logic in your application, which needs more than a single shell command. Use the Claude SDK for the full flow. For the raw request shape of a tool conversation with search results, see [Combining both methods](https://platform.claude.com/docs/en/build-with-claude/search-results#combining-both-methods). To provide search results directly in user messages, see [Method 2: Search results as top-level content](https://platform.claude.com/docs/en/build-with-claude/search-results#method-2-search-results-as-top-level-content).
+    The tool-calling flow needs search logic in your application, which needs more than a single shell command. Use the Anthropic SDK for the full flow. For the raw request shape of a tool conversation with search results, see [Combining both methods](https://platform.claude.com/docs/en/build-with-claude/search-results#combining-both-methods). To provide search results directly in user messages, see [Method 2: Search results as top-level content](https://platform.claude.com/docs/en/build-with-claude/search-results#method-2-search-results-as-top-level-content).
   </CodeGroupItem>
 
   ```python Python
@@ -2224,9 +2226,9 @@ Search results are available on every model and eligible for zero data retention
 * Availability: Available
 * Usage: Send `search_result` blocks in a tool result or directly in a user message.
 
-| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Available | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (InvokeModel)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
+| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Available | Claude API, [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (bedrock-runtime)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 

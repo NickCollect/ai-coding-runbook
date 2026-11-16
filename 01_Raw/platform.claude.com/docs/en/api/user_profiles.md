@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/user_profiles
-fetched_at: 2026-11-09T07:30:24.350373+00:00
+fetched_at: 2026-11-16T07:30:49.160153+00:00
 fetch_method: mintlify_md
 ---
 
@@ -402,16 +402,7 @@ curl https://api.anthropic.com/v1/user_profiles \
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "access_type": "application",
   "created_at": "2026-03-15T10:00:00Z",
-  "enforcement_actions": [
-    {
-      "id": "enac_011CZkZCu8hGbp5mYRQgUmz9",
-      "action": "verify",
-      "expires_at": null,
-      "opened_at": "2026-10-02T19:30:00Z",
-      "reason": "fraud_or_abuse",
-      "type": "restriction"
-    }
-  ],
+  "enforcement_actions": [],
   "enforcement_status": "unrestricted",
   "external_user_details": {
     "account_status": "active",
@@ -426,10 +417,7 @@ curl https://api.anthropic.com/v1/user_profiles \
   "name": "Example User",
   "programs": {
     "cyber": {
-      "requirements": {
-        "data_retention": true,
-        "human_review": true
-      },
+      "requirements": null,
       "status": "active",
       "tiers": {
         "a": {
@@ -443,20 +431,7 @@ curl https://api.anthropic.com/v1/user_profiles \
         }
       }
     },
-    "efs": {
-      "features": {
-        "data_retention_exemption": {
-          "status": "inactive"
-        },
-        "cmek": {
-          "status": "active"
-        },
-        "storage": {
-          "status": "inactive"
-        }
-      },
-      "status": "active"
-    }
+    "efs": null
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z"
@@ -810,16 +785,7 @@ curl https://api.anthropic.com/v1/user_profiles \
       "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
       "access_type": "application",
       "created_at": "2026-03-15T10:00:00Z",
-      "enforcement_actions": [
-        {
-          "id": "enac_011CZkZCu8hGbp5mYRQgUmz9",
-          "action": "verify",
-          "expires_at": null,
-          "opened_at": "2026-10-02T19:30:00Z",
-          "reason": "fraud_or_abuse",
-          "type": "restriction"
-        }
-      ],
+      "enforcement_actions": [],
       "enforcement_status": "unrestricted",
       "external_user_details": {
         "account_status": "active",
@@ -834,27 +800,11 @@ curl https://api.anthropic.com/v1/user_profiles \
       "name": "Example User",
       "programs": {
         "cyber": {
-          "requirements": {
-            "data_retention": true,
-            "human_review": true
-          },
+          "requirements": null,
           "status": "active",
           "tiers": {}
         },
-        "efs": {
-          "features": {
-            "data_retention_exemption": {
-              "status": "inactive"
-            },
-            "cmek": {
-              "status": "active"
-            },
-            "storage": {
-              "status": "inactive"
-            }
-          },
-          "status": "active"
-        }
+        "efs": null
       },
       "type": "user_profile",
       "updated_at": "2026-03-15T10:00:00Z"
@@ -1163,16 +1113,7 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "access_type": "application",
   "created_at": "2026-03-15T10:00:00Z",
-  "enforcement_actions": [
-    {
-      "id": "enac_011CZkZCu8hGbp5mYRQgUmz9",
-      "action": "verify",
-      "expires_at": null,
-      "opened_at": "2026-10-02T19:30:00Z",
-      "reason": "fraud_or_abuse",
-      "type": "restriction"
-    }
-  ],
+  "enforcement_actions": [],
   "enforcement_status": "unrestricted",
   "external_user_details": {
     "account_status": "active",
@@ -1187,10 +1128,7 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
   "name": "Example User",
   "programs": {
     "cyber": {
-      "requirements": {
-        "data_retention": true,
-        "human_review": true
-      },
+      "requirements": null,
       "status": "active",
       "tiers": {
         "a": {
@@ -1204,20 +1142,7 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
         }
       }
     },
-    "efs": {
-      "features": {
-        "data_retention_exemption": {
-          "status": "inactive"
-        },
-        "cmek": {
-          "status": "active"
-        },
-        "storage": {
-          "status": "inactive"
-        }
-      },
-      "status": "active"
-    }
+    "efs": null
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z"
@@ -1615,16 +1540,7 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
   "access_type": "application",
   "created_at": "2026-03-15T10:00:00Z",
-  "enforcement_actions": [
-    {
-      "id": "enac_011CZkZCu8hGbp5mYRQgUmz9",
-      "action": "verify",
-      "expires_at": null,
-      "opened_at": "2026-10-02T19:30:00Z",
-      "reason": "fraud_or_abuse",
-      "type": "restriction"
-    }
-  ],
+  "enforcement_actions": [],
   "enforcement_status": "unrestricted",
   "external_user_details": {
     "account_status": "active",
@@ -1639,10 +1555,7 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
   "name": "Example User",
   "programs": {
     "cyber": {
-      "requirements": {
-        "data_retention": true,
-        "human_review": true
-      },
+      "requirements": null,
       "status": "active",
       "tiers": {
         "a": {
@@ -1656,20 +1569,7 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
         }
       }
     },
-    "efs": {
-      "features": {
-        "data_retention_exemption": {
-          "status": "inactive"
-        },
-        "cmek": {
-          "status": "active"
-        },
-        "storage": {
-          "status": "inactive"
-        }
-      },
-      "status": "active"
-    }
+    "efs": null
   },
   "type": "user_profile",
   "updated_at": "2026-03-15T10:00:00Z"
@@ -2521,6 +2421,14 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID \
   - `"name"`
 
     Sort by `name`, ignoring the case of ASCII letters. Profiles without a name come last in either direction.
+
+### User Profile Not Found Error Details
+
+- `UserProfileNotFoundErrorDetails object`
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+  - `error_code: "user_profile_not_found"`
 
 ### User Profile Program Status
 

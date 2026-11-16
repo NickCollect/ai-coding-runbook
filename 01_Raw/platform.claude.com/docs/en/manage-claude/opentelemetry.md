@@ -1,19 +1,21 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/opentelemetry
-fetched_at: 2026-11-02T07:00:31.694303+00:00
+fetched_at: 2026-11-16T07:30:44.579558+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: OpenTelemetry tracing for the Claude API
 url: https://platform.claude.com/docs/en/manage-claude/opentelemetry
-description: Trace your Messages API requests, tool uses, and Managed Agents sessions with OpenTelemetry spans from the Claude SDK and the Claude API.
+description: Trace your Messages API requests, tool uses, and Managed Agents sessions with OpenTelemetry spans from the Anthropic SDK and the Claude API.
 featureMetadata:
   topic:
     title: OpenTelemetry
     url: https://platform.claude.com/docs/en/manage-claude/opentelemetry
   status: beta
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -33,10 +35,10 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: beta
+    Amazon Bedrock: beta
+    Amazon Bedrock (bedrock-runtime): beta
     Claude Platform on AWS: beta
     Claude Models on Google Cloud (Anthropic managed): beta
-    Amazon Bedrock: beta
-    Amazon Bedrock (InvokeModel): beta
     Claude Models on Google Cloud (Google managed): beta
     Microsoft Foundry: beta
 ---
@@ -62,7 +64,7 @@ You can set up SDK tracing, API tracing, or both. Set up both to see a requestâ€
 Let Claude Code set up this feature for you
 
 ```text
-Set up OpenTelemetry tracing with the Claude API and Claude SDK
+Set up OpenTelemetry tracing with the Claude API and Anthropic SDK
 ```
 
 <CardGroup cols={3}>

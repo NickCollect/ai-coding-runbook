@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/use-case-guides/ticket-routing
-fetched_at: 2026-11-02T07:00:32.742503+00:00
+fetched_at: 2026-11-16T07:30:45.433789+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ description: This guide walks through how to use Claude's advanced natural langu
 
 ## Prerequisites
 
-* A Claude API key and the Claude SDK installed
+* A Claude API key and the Anthropic SDK installed
 * Access to, and familiarity with, your existing support ticketing system
 * A sample set of historical support tickets for testing
 
@@ -678,7 +678,7 @@ Here’s an example ticket routing classification prompt:
 </CodeGroup>
 
 <Note>
-  This prompt is written for Claude Haiku 5.5, which runs here at `low` effort. On Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, and Claude Sonnet 5.5, ask for the intent and a one-sentence summary of the request instead. See [Keep reasoning in thinking blocks](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#keep-reasoning-in-thinking-blocks).
+  This prompt is written for Claude Haiku 5.5, which runs here at `low` effort. On Claude Fable 5.2, Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, and Claude Sonnet 5.5, ask for the intent and a one-sentence summary of the request instead. See [Keep reasoning in thinking blocks](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#keep-reasoning-in-thinking-blocks).
 </Note>
 
 Here are the key components of this prompt:
@@ -699,11 +699,11 @@ Build the deployment structure. Start by defining the function signature for wra
 
 <CodeGroup exclude="shell">
   <CodeGroupItem language="cURL">
-    This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+    This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
   </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
-    This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+    This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
   </CodeGroupItem>
 
   ```python Python
@@ -1047,11 +1047,11 @@ To assess this, first modify the script so that it compares the predicted intent
 
 <CodeGroup exclude="shell">
   <CodeGroupItem language="cURL">
-    This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+    This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
   </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
-    This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+    This workflow needs more logic than a single shell command. Use the Anthropic SDK to run it.
   </CodeGroupItem>
 
   ```python Python

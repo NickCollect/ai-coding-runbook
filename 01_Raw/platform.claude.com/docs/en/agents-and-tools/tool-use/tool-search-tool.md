@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool
-fetched_at: 2026-11-09T07:30:16.096125+00:00
+fetched_at: 2026-11-16T07:30:41.086732+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,6 +14,8 @@ featureMetadata:
     eligibility: eligible
     note: Excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements). Server-side tool run by Anthropic; the tool definitions in the request are searched in memory per call and nothing is stored after the response.
   supportedModels:
+    - claude-fable-5-2
+    - claude-mythos-5-2
     - claude-fable-5-1
     - claude-mythos-5-1
     - claude-fable-5
@@ -33,11 +35,11 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
-    Claude Platform on AWS: stable
     Amazon Bedrock: stable
-    Amazon Bedrock (InvokeModel):
+    Amazon Bedrock (bedrock-runtime):
       availability: stable
       note: On Amazon Bedrock it is not available through the Converse API.
+    Claude Platform on AWS: stable
     Claude Models on Google Cloud (Google managed): stable
     Microsoft Foundry: stable
 ---
@@ -75,6 +77,8 @@ Both tool search variants are available on the following models:
 
 | Model                                                                                                                                                      | Tool versions                                                       |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Claude Fable 5.2 (claude-fable-5-2)                                                                                                                        | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Mythos 5.2 (claude-mythos-5-2)                                                                                                                      | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Fable 5.1 (claude-fable-5-1)                                                                                                                        | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Mythos 5.1 (claude-mythos-5-1)                                                                                                                      | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Fable 5 (claude-fable-5)                                                                                                                            | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
@@ -918,8 +922,8 @@ Tool search tool is available on every model and eligible for zero data retentio
 
 | Status                | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Models                                                            |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Available             | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) | [All models](https://platform.claude.com/docs/en/models/overview) |
-| Available<sup>1</sup> | [Amazon Bedrock (InvokeModel)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy)                                                                                                                                                                                                                                                                                                                                                              | [All models](https://platform.claude.com/docs/en/models/overview) |
+| Available             | Claude API, [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) | [All models](https://platform.claude.com/docs/en/models/overview) |
+| Available<sup>1</sup> | [Amazon Bedrock (bedrock-runtime)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy)                                                                                                                                                                                                                                                                                                                                                          | [All models](https://platform.claude.com/docs/en/models/overview) |
 
 1. On Amazon Bedrock it is not available through the Converse API.
 

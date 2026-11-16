@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/user_preferences/list
-fetched_at: 2026-11-02T07:00:54.026792+00:00
+fetched_at: 2026-11-16T07:30:59.934568+00:00
 fetch_method: mintlify_md
 ---
 
@@ -57,11 +57,11 @@ the work it does per request. Follow `next_page` until it is `null`.
 
 ## Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -103,7 +103,7 @@ the work it does per request. Follow `next_page` until it is `null`.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/user_preferences \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/resources/overview
-fetched_at: 2026-10-26T05:40:12.884067+00:00
+fetched_at: 2026-11-16T07:30:46.818216+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,6 +11,10 @@ description: Model cards with detailed documentation for Claude models.
 ---
 
 <CardGroup cols={3}>
+  <Card title="Claude Fable 5.2 and Mythos 5.2 System Card" icon="file" href="https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card">
+    Detailed documentation of Claude Fable 5.2 and Claude Mythos 5.2.
+  </Card>
+
   <Card title="Claude Haiku 5.5 System Card" icon="file" href="https://www.anthropic.com/document/claude-haiku-5-5-system-card">
     Detailed documentation of Claude Haiku 5.5.
   </Card>

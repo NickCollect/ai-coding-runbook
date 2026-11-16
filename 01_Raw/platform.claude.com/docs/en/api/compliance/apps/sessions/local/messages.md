@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/sessions/local/messages
-fetched_at: 2026-11-09T07:30:35.480866+00:00
+fetched_at: 2026-11-16T07:31:00.908290+00:00
 fetch_method: mintlify_md
 ---
 
@@ -72,11 +72,11 @@ response header.
 
 ### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -306,7 +306,7 @@ response header.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_ID/messages \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -326,10 +326,7 @@ curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_
       ],
       "created_at": "2025-03-12T18:22:41.123456Z",
       "model": "claude-opus-5",
-      "provenance": {
-        "reason": "not_captured",
-        "type": "content_unavailable"
-      },
+      "provenance": null,
       "role": "assistant",
       "type": "compliance_local_session_message"
     }

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps
-fetched_at: 2026-11-09T07:30:34.848595+00:00
+fetched_at: 2026-11-16T07:31:00.290464+00:00
 fetch_method: mintlify_md
 ---
 
@@ -129,11 +129,11 @@ no time filter) with the default `order_by`. `user_ids[]` with
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -219,7 +219,7 @@ no time filter) with the default `order_by`. `user_ids[]` with
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -270,11 +270,11 @@ You can retry the request.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -295,7 +295,7 @@ You can retry the request.
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID \
     -X DELETE \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -414,11 +414,11 @@ Retrieves message history and file metadata for a specific chat.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -712,7 +712,7 @@ Retrieves message history and file metadata for a specific chat.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -857,11 +857,11 @@ download the bytes.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -905,7 +905,7 @@ download the bytes.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -943,11 +943,11 @@ operation that cannot be undone.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -968,7 +968,7 @@ operation that cannot be undone.
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
     -X DELETE \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -995,11 +995,11 @@ Downloads the binary content of a file referenced in chat messages.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -1007,7 +1007,7 @@ Downloads the binary content of a file referenced in chat messages.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/content \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -1029,11 +1029,11 @@ Use the sibling `/content` endpoint to download the bytes.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -1073,7 +1073,7 @@ Use the sibling `/content` endpoint to download the bytes.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_GEN_FILE_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -1105,11 +1105,11 @@ Downloads the binary content of a file the assistant created via tool use.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -1117,7 +1117,7 @@ Downloads the binary content of a file the assistant created via tool use.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_GEN_FILE_ID/content \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -1204,11 +1204,11 @@ are sorted chronologically (time ascending) by created_at.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -1286,7 +1286,7 @@ are sorted chronologically (time ascending) by created_at.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -1329,11 +1329,11 @@ Get detailed information for a specific project.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -1415,7 +1415,7 @@ Get detailed information for a specific project.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -1466,11 +1466,11 @@ Project must have no attached chats - returns 409 if chats exist.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -1491,7 +1491,7 @@ Project must have no attached chats - returns 409 if chats exist.
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
     -X DELETE \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -1541,11 +1541,11 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -1639,7 +1639,7 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachments \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -1696,11 +1696,11 @@ role.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -1850,7 +1850,7 @@ role.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/collaborators \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -1887,11 +1887,11 @@ Get detailed information for a specific project document.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -1931,7 +1931,7 @@ Get detailed information for a specific project document.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -1969,11 +1969,11 @@ consumer can dedupe or match hashes without downloading every document.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -2027,7 +2027,7 @@ consumer can dedupe or match hashes without downloading every document.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID/metadata \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -2065,11 +2065,11 @@ Hard-deletes the project document permanently.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -2090,7 +2090,7 @@ Hard-deletes the project document permanently.
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
     -X DELETE \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -2124,11 +2124,11 @@ without downloading every artifact.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -2172,7 +2172,7 @@ without downloading every artifact.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -2207,11 +2207,11 @@ Returns the full text content of the artifact version.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -2219,7 +2219,7 @@ Returns the full text content of the artifact version.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID/content \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -2282,11 +2282,11 @@ forward-only via `next_page`; there is no reverse cursor.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -2354,7 +2354,7 @@ forward-only via `next_page`; there is no reverse cursor.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/local \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -2397,11 +2397,11 @@ inference call has aged out returns 404.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -2461,7 +2461,7 @@ inference call has aged out returns 404.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -2546,11 +2546,11 @@ response header.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -2780,7 +2780,7 @@ response header.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_ID/messages \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -2800,10 +2800,7 @@ curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_
       ],
       "created_at": "2025-03-12T18:22:41.123456Z",
       "model": "claude-opus-5",
-      "provenance": {
-        "reason": "not_captured",
-        "type": "content_unavailable"
-      },
+      "provenance": null,
       "role": "assistant",
       "type": "compliance_local_session_message"
     }
@@ -2849,6 +2846,12 @@ Results are sorted newest first by `created_at`, with at most `limit`
 sessions per page (default 100, maximum 500). Pagination is
 forward-only: pass the response's `next_page` value back as `page` to
 retrieve the next page, and stop when `next_page` is null.
+
+Returns 403 with the `error_code` `organization_compliance_restricted` in
+`error.details` when an organization the request covers, or the key's own
+organization, has compliance settings that do not allow its remote
+sessions to be listed through the Compliance API. No sessions are
+returned, and the error does not say which organization it is.
 
 #### Query parameters
 
@@ -2902,11 +2905,11 @@ retrieve the next page, and stop when `next_page` is null.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -2938,7 +2941,7 @@ retrieve the next page, and stop when `next_page` is null.
 
   - `product_surface: string or null`
 
-    The Claude product the session was created from. Currently `cowork_remote`, for Cowork sessions started on claude.ai web or mobile. More values will appear as other surfaces launch, so treat any unrecognized value as an unclassified surface rather than an error. Null for sessions created before this field was recorded, for surfaces that do not stamp it, and for unrecognized tag values.
+    The Claude product the session was created from. Currently `cowork_remote`, for Cowork sessions started on claude.ai web or mobile, and `claude_tag`, for Claude Tag sessions started in Slack. More values will appear as other surfaces launch, so treat any unrecognized value as an unclassified surface rather than an error. Null for sessions created before this field was recorded, for surfaces that do not stamp it, and for unrecognized tag values.
 
   - `started_by_user: object or null`
 
@@ -2982,7 +2985,7 @@ retrieve the next page, and stop when `next_page` is null.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/remote \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -3036,6 +3039,12 @@ Returns 404 while the session is still `pending`, for deleted sessions,
 and for sessions outside the organizations the key may read. A
 malformed session identifier returns 400.
 
+Returns 403 with the `error_code` `organization_compliance_restricted` in
+`error.details` when the session's organization, or the key's own
+organization, has compliance settings that do not allow its remote
+sessions to be read through the Compliance API. A retry does not help
+until those settings change.
+
 #### Path parameters
 
 - `claude_remote_session_id: string`
@@ -3078,11 +3087,11 @@ malformed session identifier returns 400.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -3238,7 +3247,7 @@ malformed session identifier returns 400.
 
   - `product_surface: string or null`
 
-    The Claude product the session was created from. Currently `cowork_remote`, for Cowork sessions started on claude.ai web or mobile. More values will appear as other surfaces launch, so treat any unrecognized value as an unclassified surface rather than an error. Null for sessions created before this field was recorded, for surfaces that do not stamp it, and for unrecognized tag values.
+    The Claude product the session was created from. Currently `cowork_remote`, for Cowork sessions started on claude.ai web or mobile, and `claude_tag`, for Claude Tag sessions started in Slack. More values will appear as other surfaces launch, so treat any unrecognized value as an unclassified surface rather than an error. Null for sessions created before this field was recorded, for surfaces that do not stamp it, and for unrecognized tag values.
 
   - `started_by_user: object or null`
 
@@ -3278,7 +3287,7 @@ malformed session identifier returns 400.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/remote/$CLAUDE_REMOTE_SESSION_ID/messages \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -3371,7 +3380,7 @@ returned.
 
   - `gte: optional string`
 
-    Return only Artifacts updated at or after this time (RFC 3339 format). Time filters match an eventually-consistent index and Artifacts published before this field was recorded never match — omit the time filter for compliance-complete enumeration. For incremental export, apply a generous overlap margin between windows and dedupe by `id`: adjacent tiling silently misses items whose index update lagged their publish.
+    Return only Artifacts updated at or after this time (RFC 3339 format). Time filters match an eventually-consistent index and Artifacts published before this field was recorded never match — omit the time filter for compliance-complete enumeration. For incremental export, apply a generous overlap margin between windows and dedupe by `id`: adjacent tiling silently misses items whose index update lagged their publish. Folder changes, such as sharing or unsharing a folder or moving an Artifact or folder, can change `read_mode` without changing `updated_at`, so time filters do not pick up those changes. To see an Artifact's current `read_mode`, omit the time filter.
 
     format: date-time
 
@@ -3395,11 +3404,11 @@ returned.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -3413,9 +3422,9 @@ returned.
 
     Artifact identifier (tagged ID)
 
-  - `artifact_type: "claude_dashboards" or "claude_design" or "claude_design_systems" or 5 more`
+  - `artifact_type: "claude_dashboards" or "claude_design" or "claude_design_systems" or 6 more`
 
-    Which kind of Artifact this is: `code` for a site published from Claude Code, or the built-in Artifact type it was made from — `claude_docs` (Claude Docs), `claude_slides` (Slides), `claude_design` (Design), `claude_design_systems` (a design system), `claude_motion` (Motion) or `claude_dashboards` (Dashboards). `other` is an Artifact made from a built-in type this list does not name yet.
+    Which kind of Artifact this is: `code` for a site published from Claude Code, or the built-in Artifact type it was made from — `claude_docs` (Claude Docs), `claude_slides` (Slides), `claude_design` (Design), `claude_design_systems` (a design system), `claude_motion` (Motion), `claude_dashboards` (Dashboards) or `claude_sheets` (Claude Sheets). `other` is an Artifact made from a built-in type this list does not name yet.
 
     - `"claude_dashboards"`
 
@@ -3426,6 +3435,8 @@ returned.
     - `"claude_docs"`
 
     - `"claude_motion"`
+
+    - `"claude_sheets"`
 
     - `"claude_slides"`
 
@@ -3443,7 +3454,7 @@ returned.
 
   - `published_version_id: string or null`
 
-    Identifier of the version a non-owner viewer would render when `read_mode` permits them — the version the owner has pinned for non-owner readers if one is pinned, otherwise the owner's latest. When `read_mode` is `owner` no non-owner renders any version; the field still reports which version would be served were read_mode widened. Null for a Claude Doc; see `versions`.
+    Identifier of the version a non-owner viewer would render when `read_mode` permits them — the version the owner has pinned for non-owner readers if one is pinned, otherwise the owner's latest. When `read_mode` is `owner` no non-owner renders any version; the field still reports which version would be served were read_mode widened. Null for a Claude Doc or a Claude Sheet; see `versions`.
 
   - `read_mode: "org" or "owner" or "public" or "users"`
 
@@ -3477,7 +3488,7 @@ returned.
 
   - `versions: array of object`
 
-    Up to roughly 20 most-recently-published versions of this Artifact (older versions are not retained). Metadata only — use `GET /v1/compliance/apps/code/artifacts/{artifact_id}/versions/{version_id}` to download a version's content. Empty for a Claude Doc, because a Doc's versions hold only the web page that displays it, not its text. Download a Doc's text with `GET /v1/compliance/apps/code/artifacts/{artifact_id}/content?multi_file_format=zip`.
+    Up to roughly 20 most-recently-published versions of this Artifact (older versions are not retained). Metadata only — use `GET /v1/compliance/apps/code/artifacts/{artifact_id}/versions/{version_id}` to download a version's content. Empty for a Claude Doc or a Claude Sheet, because their versions hold only the web page that displays them, not the Doc's text or the Sheet's data. Download a Doc's text or a Sheet's data with `GET /v1/compliance/apps/code/artifacts/{artifact_id}/content?multi_file_format=zip`.
 
     - `id: string`
 
@@ -3505,7 +3516,7 @@ returned.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -3544,7 +3555,7 @@ curl https://api.anthropic.com/v1/compliance/apps/code/artifacts \
 
 **GET** `/v1/compliance/apps/code/artifacts/{artifact_id}/versions/{version_id}`
 
-Streams the content of one version of an Artifact as the response body, in chunks with no `Content-Length`. With `multi_file_format=zip`, a version with more than one file, other than a Claude Doc's (an Artifact whose `artifact_type` is `claude_docs`), comes back as a ZIP archive of its files.
+Streams the content of one version of an Artifact as the response body, in chunks with no `Content-Length`. With `multi_file_format=zip`, a version with more than one file, other than a Claude Doc's or a Claude Sheet's (an Artifact whose `artifact_type` is `claude_docs` or `claude_sheets`), comes back as a ZIP archive of its files.
 
 Headers: `Content-Type` (`application/zip` for a ZIP archive, otherwise the stored MIME type), `Content-Disposition: attachment; filename*=utf-8''<name>` (RFC 5987), `Cache-Control: no-store, private` and, when available, `Content-MD5` (base64). `<name>` is `{artifact_id}-{version_id}.zip` for a ZIP archive, otherwise `{artifact_id}-{version_id}.txt`, whatever the content is. `Content-MD5` is only on a single file stored uncompressed, so it is never on a ZIP archive. Check the body against it when present.
 
@@ -3552,7 +3563,7 @@ Errors specific to this download:
 
 - `404`: the Artifact doesn't exist or the API key cannot read it, or the version is no longer kept. Older versions are dropped as new ones are published, so list the Artifact's versions again. You also get this when the organization's customer-managed encryption key can't be used. Retry once the key can be used again.
 - `503`: the content can't be served right now, for example because its upload is still in progress or was abandoned. Retry with backoff.
-- `422` with `error.details.error_code` `multi_file_unavailable`: the version has more than one file. Add `multi_file_format=zip`. A Claude Doc's version with more than one file gets this error either way, because it holds only the web page that displays the Doc. Download the Doc's text with `GET /v1/compliance/apps/code/artifacts/{artifact_id}/content?multi_file_format=zip`.
+- `422` with `error.details.error_code` `multi_file_unavailable`: the version has more than one file. Add `multi_file_format=zip`. A Claude Doc's or a Claude Sheet's version with more than one file gets this error either way, because it holds only the web page that displays the Doc or the Sheet. Download the Doc's text or the Sheet's data with `GET /v1/compliance/apps/code/artifacts/{artifact_id}/content?multi_file_format=zip`.
 - `422` with `file_set_unavailable`: the request sets `multi_file_format=zip`, the version has more than one file, and one of them has a path the API cannot export. Do not retry.
 
 An error after the download has started stops the body early, with the `200` status already sent. For example, this happens to content stored compressed when it is over 16 MiB once decompressed. For a single file with no `Content-MD5`, the only sign is a transfer that aborts before its last chunk, so treat a download that aborts this way as failed.
@@ -3584,15 +3595,15 @@ A ZIP archive of a version's files holds one top-level folder, named for the Art
 
 - `multi_file_format: optional string`
 
-  Set to `zip`, its only value, to receive a version that has more than one file as a ZIP archive of its files with an index, `files.json`. A version with one file is returned as that file. A Claude Doc's version never comes back as a ZIP.
+  Set to `zip`, its only value, to receive a version that has more than one file as a ZIP archive of its files with an index, `files.json`. A version with one file is returned as that file. A Claude Doc's or a Claude Sheet's version never comes back as a ZIP.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -3600,7 +3611,7 @@ A ZIP archive of a version's files holds one top-level folder, named for the Art
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID/versions/$VERSION_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -3612,19 +3623,21 @@ Streams an Artifact's current content as the response body, in chunks with no `C
 
 For a Claude Doc (an Artifact whose `artifact_type` is `claude_docs`), the request must set `multi_file_format=zip`, and the content is the Doc's text as a ZIP archive of Word files. That ZIP has no `files.json`. It holds one Word file per text tab, in tab order, named `NN-<tab id>.docx`, where `NN` counts from `01`. A Doc with one text tab gets one file, `01-document.docx`.
 
+For a Claude Sheet (an Artifact whose `artifact_type` is `claude_sheets`), the request must set `multi_file_format=zip` too, and the content is the Sheet's data as a ZIP archive that holds one .xlsx file, named `01-<id>.xlsx`, where `<id>` is an opaque identifier. The file has all of the Sheet's tabs and, when the Sheet has dropdowns, one more hidden tab that lists their options. It leaves out charts, conditional formatting and comments, among other things. A formula that an .xlsx file cannot hold is written as its result. If the Sheet's formulas cannot be calculated in time, every formula comes with `#VALUE!` in place of its result. That ZIP has no `files.json` either.
+
 For any other Artifact, the content is the latest version. With `multi_file_format=zip`, when the latest version has more than one file, it comes back as a ZIP archive of its files.
 
-Headers: `Content-Type` (`application/zip` for a ZIP archive, otherwise the stored MIME type), `Content-Disposition: attachment; filename*=utf-8''<name>` (RFC 5987), `Cache-Control: no-store, private` and, when available, `Content-MD5` (base64). `<name>` is `{artifact_id}.zip` for a ZIP archive, otherwise `{artifact_id}.txt`, whatever the content is. `Content-MD5` is always on a Claude Doc's ZIP, only on a single file stored uncompressed, and never on a ZIP archive of a version's files. Check the body against it when present.
+Headers: `Content-Type` (`application/zip` for a ZIP archive, otherwise the stored MIME type), `Content-Disposition: attachment; filename*=utf-8''<name>` (RFC 5987), `Cache-Control: no-store, private` and, when available, `Content-MD5` (base64). `<name>` is `{artifact_id}.zip` for a ZIP archive, otherwise `{artifact_id}.txt`, whatever the content is. `Content-MD5` is always on a Claude Doc's or a Claude Sheet's ZIP, only on a single file stored uncompressed, and never on a ZIP archive of a version's files. Check the body against it when present.
 
 Errors specific to this download:
 
 - `404`: the Artifact doesn't exist, or the API key cannot read it.
 - `400` with `error.details.error_code` `cmek_key_disabled`: the organization's customer-managed encryption key can't be used, for example because it is disabled or revoked. Retry once the key can be used again.
 - `503`: the content can't be produced right now. Wait the number of seconds in the `Retry-After` header, or retry with backoff when it is absent.
-- `422` with `multi_file_unavailable`: the request does not set `multi_file_format=zip`, and the Artifact is a Claude Doc or its latest version has more than one file. Add the parameter.
-- `422` with `file_set_unavailable`: the request sets `multi_file_format=zip`, the Artifact is not a Claude Doc, and one of the latest version's files has a path the API cannot export. Do not retry.
-- `422` with `document_unavailable`: Claude Docs has no document it can export for the Doc, for example because it has no text tab or is in the trash. Retrying will not help unless that changes.
-- `422` with `document_too_large`: the Doc's export is over 16 MiB. Do not retry.
+- `422` with `multi_file_unavailable`: the request does not set `multi_file_format=zip`, and the Artifact is a Claude Doc or a Claude Sheet, or its latest version has more than one file. Add the parameter.
+- `422` with `file_set_unavailable`: the request sets `multi_file_format=zip`, the Artifact is neither a Claude Doc nor a Claude Sheet, and one of the latest version's files has a path the API cannot export. Do not retry.
+- `422` with `document_unavailable`: Claude Docs has no document it can export for the Doc, for example because it has no text tab or is in the trash. For a Claude Sheet, nothing can be returned as an .xlsx file, for example because the Sheet is in the trash. Retrying will not help unless that changes.
+- `422` with `document_too_large`: the Doc's or the Sheet's export is over 16 MiB. Do not retry.
 - `422` with `cmek_org_unsupported`: the organization uses customer-managed encryption keys and the export can't be served for it right now. Try again later, and contact Anthropic support if this continues.
 
 An error after the download has started stops the body early, with the `200` status already sent. For example, this happens to content stored compressed when it is over 16 MiB once decompressed. For a single file with no `Content-MD5`, the only sign is a transfer that aborts before its last chunk, so treat a download that aborts this way as failed.
@@ -3652,15 +3665,15 @@ A ZIP archive of a version's files holds one top-level folder, named for the Art
 
 - `multi_file_format: optional string`
 
-  Set to `zip`, its only value. A Claude Doc downloads only this way, as a ZIP archive of Word files, one per text tab. For any other Artifact, when the latest version has more than one file, it comes back as a ZIP archive of its files with an index, `files.json`.
+  Set to `zip`, its only value. A Claude Doc downloads only this way, as a ZIP archive of Word files, one per text tab. So does a Claude Sheet, as a ZIP archive that holds one .xlsx file. For any other Artifact, when the latest version has more than one file, it comes back as a ZIP archive of its files with an index, `files.json`.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -3668,7 +3681,7 @@ A ZIP archive of a version's files holds one top-level folder, named for the Art
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID/content \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -3693,11 +3706,11 @@ Artifact.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -3718,7 +3731,7 @@ Artifact.
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID \
     -X DELETE \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 

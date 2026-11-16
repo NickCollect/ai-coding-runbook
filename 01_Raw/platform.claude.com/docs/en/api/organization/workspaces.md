@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/workspaces
-fetched_at: 2026-11-02T07:00:39.820549+00:00
+fetched_at: 2026-11-16T07:30:50.376752+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,6 +26,10 @@ List Workspaces
 - `before_id: optional string`
 
   ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+
+- `ids: optional array of string`
+
+  Only the Workspaces with these IDs, at most 100. `include_archived` and `include_default` still apply, and IDs of Workspaces the caller can't list are left out.
 
 - `include_archived: optional boolean`
 
@@ -1045,6 +1049,14 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/archive
 
     - `"us"`
 
+### Key Profile Mismatch Error Details
+
+- `KeyProfileMismatchErrorDetails object`
+
+  The External Key is bound to a user profile, and the Workspace does not have that user profile. A Workspace can use only a key bound to its own user profile or a key that isn't bound to one.
+
+  - `error_code: "key_profile_mismatch"`
+
 ### No Billing Workspace Role
 
 - `NoBillingWorkspaceRole = "workspace_admin" or "workspace_developer" or "workspace_restricted_developer" or "workspace_user"`
@@ -1190,6 +1202,30 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/archive
     - `"workspace_restricted_developer"`
 
     - `"workspace_user"`
+
+### Workspace Member Limit Exceeded Error Details
+
+- `WorkspaceMemberLimitExceededErrorDetails object`
+
+  The workspace has reached the member limit that Anthropic set for it.
+
+  - `error_code: "workspace_member_limit_exceeded"`
+
+### Workspace Policy Field
+
+- `WorkspacePolicyField = "external_key_id"`
+
+### Workspace Policy Violation Error Details
+
+- `WorkspacePolicyViolationErrorDetails object`
+
+  The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
+
+  - `error_code: "workspace_policy_violation"`
+
+  - `field: WorkspacePolicyField`
+
+    The request field the broken rule applies to.
 
 ### Workspace Role
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/sessions
-fetched_at: 2026-11-09T07:30:35.390310+00:00
+fetched_at: 2026-11-16T07:31:00.817282+00:00
 fetch_method: mintlify_md
 ---
 
@@ -70,11 +70,11 @@ forward-only via `next_page`; there is no reverse cursor.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -142,7 +142,7 @@ forward-only via `next_page`; there is no reverse cursor.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/local \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -185,11 +185,11 @@ inference call has aged out returns 404.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -249,7 +249,7 @@ inference call has aged out returns 404.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -334,11 +334,11 @@ response header.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -568,7 +568,7 @@ response header.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_ID/messages \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -588,10 +588,7 @@ curl https://api.anthropic.com/v1/compliance/apps/sessions/local/$LOCAL_SESSION_
       ],
       "created_at": "2025-03-12T18:22:41.123456Z",
       "model": "claude-opus-5",
-      "provenance": {
-        "reason": "not_captured",
-        "type": "content_unavailable"
-      },
+      "provenance": null,
       "role": "assistant",
       "type": "compliance_local_session_message"
     }
@@ -637,6 +634,12 @@ Results are sorted newest first by `created_at`, with at most `limit`
 sessions per page (default 100, maximum 500). Pagination is
 forward-only: pass the response's `next_page` value back as `page` to
 retrieve the next page, and stop when `next_page` is null.
+
+Returns 403 with the `error_code` `organization_compliance_restricted` in
+`error.details` when an organization the request covers, or the key's own
+organization, has compliance settings that do not allow its remote
+sessions to be listed through the Compliance API. No sessions are
+returned, and the error does not say which organization it is.
 
 #### Query parameters
 
@@ -690,11 +693,11 @@ retrieve the next page, and stop when `next_page` is null.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -726,7 +729,7 @@ retrieve the next page, and stop when `next_page` is null.
 
   - `product_surface: string or null`
 
-    The Claude product the session was created from. Currently `cowork_remote`, for Cowork sessions started on claude.ai web or mobile. More values will appear as other surfaces launch, so treat any unrecognized value as an unclassified surface rather than an error. Null for sessions created before this field was recorded, for surfaces that do not stamp it, and for unrecognized tag values.
+    The Claude product the session was created from. Currently `cowork_remote`, for Cowork sessions started on claude.ai web or mobile, and `claude_tag`, for Claude Tag sessions started in Slack. More values will appear as other surfaces launch, so treat any unrecognized value as an unclassified surface rather than an error. Null for sessions created before this field was recorded, for surfaces that do not stamp it, and for unrecognized tag values.
 
   - `started_by_user: object or null`
 
@@ -770,7 +773,7 @@ retrieve the next page, and stop when `next_page` is null.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/remote \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -824,6 +827,12 @@ Returns 404 while the session is still `pending`, for deleted sessions,
 and for sessions outside the organizations the key may read. A
 malformed session identifier returns 400.
 
+Returns 403 with the `error_code` `organization_compliance_restricted` in
+`error.details` when the session's organization, or the key's own
+organization, has compliance settings that do not allow its remote
+sessions to be read through the Compliance API. A retry does not help
+until those settings change.
+
 #### Path parameters
 
 - `claude_remote_session_id: string`
@@ -866,11 +875,11 @@ malformed session identifier returns 400.
 
 #### Headers
 
-- `"anthropic-version": optional string`
+- `"anthropic-version": string`
 
-  The version of the Claude API you want to use.
+  The version of the Claude API to use. Send an available version on every request. A request that sends any other value, including an empty one, returns a 400 error. This endpoint treats a request that omits this header as version `2023-06-01`; some other Compliance API endpoints return a 400 error instead.
 
-  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+  See [API versions](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http) for the available versions.
 
 - `"x-api-key": optional string`
 
@@ -1026,7 +1035,7 @@ malformed session identifier returns 400.
 
   - `product_surface: string or null`
 
-    The Claude product the session was created from. Currently `cowork_remote`, for Cowork sessions started on claude.ai web or mobile. More values will appear as other surfaces launch, so treat any unrecognized value as an unclassified surface rather than an error. Null for sessions created before this field was recorded, for surfaces that do not stamp it, and for unrecognized tag values.
+    The Claude product the session was created from. Currently `cowork_remote`, for Cowork sessions started on claude.ai web or mobile, and `claude_tag`, for Claude Tag sessions started in Slack. More values will appear as other surfaces launch, so treat any unrecognized value as an unclassified surface rather than an error. Null for sessions created before this field was recorded, for surfaces that do not stamp it, and for unrecognized tag values.
 
   - `started_by_user: object or null`
 
@@ -1066,7 +1075,7 @@ malformed session identifier returns 400.
 
 ```bash
 curl https://api.anthropic.com/v1/compliance/apps/sessions/remote/$CLAUDE_REMOTE_SESSION_ID/messages \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 

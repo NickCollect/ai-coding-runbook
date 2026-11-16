@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/rbac_roles
-fetched_at: 2026-11-02T07:00:51.096997+00:00
+fetched_at: 2026-11-16T07:30:58.205110+00:00
 fetch_method: mintlify_md
 ---
 
@@ -65,7 +65,27 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
   - `display_name: string`
 
-    Name of the RBAC Role. For a role created by Anthropic, this name can differ from the label claude.ai shows, and Anthropic may change the name. To keep a lasting reference to a role, store its `id`.
+    Name of the RBAC Role. For a built-in role, this is Anthropic's name for the access that the role grants. Anthropic may change this name, so to keep a lasting reference to a role, store its `id`.
+
+  - `source: BetaRBACRoleSource`
+
+    Whether the RBAC Role is built-in or custom. More values of `type` may be added, so do not treat every role that is not `built_in` as `custom`.
+
+    - `BetaRBACRoleSourceBuiltIn object`
+
+      - `type: "built_in"`
+
+        Anthropic provisions the RBAC Role, and the organization's administrators cannot change or delete it.
+
+        default: built_in
+
+    - `BetaRBACRoleSourceCustom object`
+
+      - `type: "custom"`
+
+        The organization's administrators can change and delete the RBAC Role.
+
+        default: custom
 
   - `updated_at: string`
 
@@ -99,6 +119,9 @@ curl https://api.anthropic.com/v1/organizations/rbac_roles \
       "id": "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s",
       "created_at": "2024-10-30T23:58:27.427722Z",
       "display_name": "Project Editor",
+      "source": {
+        "type": "built_in"
+      },
       "type": "rbac_role",
       "updated_at": "2024-10-30T23:58:27.427722Z"
     }
@@ -154,7 +177,27 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
   - `display_name: string`
 
-    Name of the RBAC Role. For a role created by Anthropic, this name can differ from the label claude.ai shows, and Anthropic may change the name. To keep a lasting reference to a role, store its `id`.
+    Name of the RBAC Role. For a built-in role, this is Anthropic's name for the access that the role grants. Anthropic may change this name, so to keep a lasting reference to a role, store its `id`.
+
+  - `source: BetaRBACRoleSource`
+
+    Whether the RBAC Role is built-in or custom. More values of `type` may be added, so do not treat every role that is not `built_in` as `custom`.
+
+    - `BetaRBACRoleSourceBuiltIn object`
+
+      - `type: "built_in"`
+
+        Anthropic provisions the RBAC Role, and the organization's administrators cannot change or delete it.
+
+        default: built_in
+
+    - `BetaRBACRoleSourceCustom object`
+
+      - `type: "custom"`
+
+        The organization's administrators can change and delete the RBAC Role.
+
+        default: custom
 
   - `updated_at: string`
 
@@ -177,6 +220,9 @@ curl https://api.anthropic.com/v1/organizations/rbac_roles/$RBAC_ROLE_ID \
   "id": "rbac_role_016J8xVtKpDq3Wy9ZmN2hR4s",
   "created_at": "2024-10-30T23:58:27.427722Z",
   "display_name": "Project Editor",
+  "source": {
+    "type": "built_in"
+  },
   "type": "rbac_role",
   "updated_at": "2024-10-30T23:58:27.427722Z"
 }
@@ -208,13 +254,73 @@ curl https://api.anthropic.com/v1/organizations/rbac_roles/$RBAC_ROLE_ID \
 
   - `display_name: string`
 
-    Name of the RBAC Role. For a role created by Anthropic, this name can differ from the label claude.ai shows, and Anthropic may change the name. To keep a lasting reference to a role, store its `id`.
+    Name of the RBAC Role. For a built-in role, this is Anthropic's name for the access that the role grants. Anthropic may change this name, so to keep a lasting reference to a role, store its `id`.
+
+  - `source: BetaRBACRoleSource`
+
+    Whether the RBAC Role is built-in or custom. More values of `type` may be added, so do not treat every role that is not `built_in` as `custom`.
+
+    - `BetaRBACRoleSourceBuiltIn object`
+
+      - `type: "built_in"`
+
+        Anthropic provisions the RBAC Role, and the organization's administrators cannot change or delete it.
+
+        default: built_in
+
+    - `BetaRBACRoleSourceCustom object`
+
+      - `type: "custom"`
+
+        The organization's administrators can change and delete the RBAC Role.
+
+        default: custom
 
   - `updated_at: string`
 
     RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
     format: date-time
+
+### Beta RBAC Role Source
+
+- `BetaRBACRoleSource = BetaRBACRoleSourceBuiltIn or BetaRBACRoleSourceCustom`
+
+  - `BetaRBACRoleSourceBuiltIn object`
+
+    - `type: "built_in"`
+
+      Anthropic provisions the RBAC Role, and the organization's administrators cannot change or delete it.
+
+      default: built_in
+
+  - `BetaRBACRoleSourceCustom object`
+
+    - `type: "custom"`
+
+      The organization's administrators can change and delete the RBAC Role.
+
+      default: custom
+
+### Beta RBAC Role Source Built In
+
+- `BetaRBACRoleSourceBuiltIn object`
+
+  - `type: "built_in"`
+
+    Anthropic provisions the RBAC Role, and the organization's administrators cannot change or delete it.
+
+    default: built_in
+
+### Beta RBAC Role Source Custom
+
+- `BetaRBACRoleSourceCustom object`
+
+  - `type: "custom"`
+
+    The organization's administrators can change and delete the RBAC Role.
+
+    default: custom
 
 ## RBAC Roles › Permissions
 
@@ -275,8 +381,8 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
     permission entitlement (`permission_*`), or a blanket capability-access
     mode — `capability_access_all` grants every product-feature entitlement
     except `inference_hooks_inspection`, which a role holds only through its
-    own row, and `capability_access_all_ga` grants the generally-available
-    subset of those as it stands at permission-check time; neither mode grants
+    own row, and `capability_access_all_ga` grants the subset of those for
+    stable features as it stands at permission-check time; neither mode grants
     model-access entitlements. A consumer enumerating a role's per-feature grants should
     treat a blanket row as granting every product-feature entitlement it
     covers, or it will under-report the role's effective access. A `connector_tool` grant carries
