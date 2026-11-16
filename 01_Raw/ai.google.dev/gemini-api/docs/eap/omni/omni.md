@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/eap/omni/omni?hl=th
-fetched_at: 2026-11-09T07:30:36.473862+00:00
-title: "\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e41\u0e25\u0e30\u0e41\u0e01\u0e49\u0e44\u0e02\u0e27\u0e34\u0e14\u0e35\u0e42\u0e2d\u0e14\u0e49\u0e27\u0e22 Gemini Omni Flash 1.1 (\u0e42\u0e1b\u0e23\u0e41\u0e01\u0e23\u0e21\u0e17\u0e14\u0e25\u0e2d\u0e07\u0e43\u0e0a\u0e49\u0e01\u0e48\u0e2d\u0e19\u0e40\u0e1b\u0e34\u0e14\u0e15\u0e31\u0e27) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/eap/omni/omni?hl=pt-BR
+fetched_at: 2026-11-16T07:31:00.675764+00:00
+title: "Gerar e editar v\u00eddeos com o Gemini Omni Flash 1.1 (Programa de acesso antecipado) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-# สร้างและแก้ไขวิดีโอด้วย Gemini Omni Flash 1.1 (โปรแกรมทดลองใช้ก่อนเปิดตัว)
+# Gerar e editar vídeos com o Gemini Omni Flash 1.1 (Programa de acesso antecipado)
 
-Gemini Omni Flash 1.1 (`gemini-omni-1.1-eap`) เป็นโมเดลมัลติโมดัลที่มีประสิทธิภาพสูง ซึ่งออกแบบมาสำหรับการสร้างและตัดต่อวิดีโอความเร็วสูง รวมถึงการควบคุมแบบภาพยนตร์
-Gemini Omni Flash 1.1 จะมาแทนที่ Gemini Omni Flash เวอร์ชันก่อนหน้าอย่างสมบูรณ์ โดยมีคุณภาพการสร้างที่ดีขึ้น ความสามารถในการประมวลผลข้อมูลหลายรูปแบบในตัว และความสามารถในการตัดต่อวิดีโอแบบมีสถานะ
+O Gemini Omni Flash 1.1 (`gemini-omni-1.1-eap`) é um modelo multimodal de alta performance projetado para geração, edição e controle cinematográfico de vídeos em alta velocidade.
+O Gemini Omni Flash 1.1 substitui completamente as versões anteriores do Gemini Omni Flash, oferecendo qualidade de geração aprimorada, multimodalidade nativa e recursos de edição de vídeo com estado:
 
-- **ความสามารถในการประมวลผลข้อมูลหลายรูปแบบในตัว:** โมเดลนี้จะประมวลผลข้อความ รูปภาพ เสียง และวิดีโอพร้อมกัน ทำให้คุณได้เอาต์พุตที่สอดคล้องกันมากขึ้นและควบคุมได้
-- **การแก้ไขโดยใช้การสนทนา:** โมเดลนี้ใช้ [Interactions
-  API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) เพื่อให้คุณปรับแต่ง
-  และตัดต่อวิดีโอซ้ำๆ ได้ผ่านการสนทนาด้วยภาษาธรรมชาติ เพียงอธิบายสิ่งที่คุณต้องการเปลี่ยนแปลง แล้วโมเดลจะใช้การแก้ไขพร้อมกับเก็บส่วนของวิดีโอที่คุณต้องการไว้
-- **ความรู้เกี่ยวกับโลก:** Gemini Omni ผสานรวมความเข้าใจด้านฟิสิกส์เข้ากับความรู้ด้านประวัติศาสตร์ วิทยาศาสตร์ และบริบททางวัฒนธรรมของ Gemini เพื่อเชื่อมช่องว่างจากความสมจริงแบบภาพถ่ายไปสู่การเล่าเรื่องที่มีความหมาย
+- **Multimodalidade nativa**:processa texto, imagem, áudio e vídeo simultaneamente, oferecendo uma saída mais coesa, consistente e controlável.
+- **Edição conversacional:** ativada pela [API
+  Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br), permite refinar
+  e editar seus vídeos de forma iterativa por meio de conversas em linguagem natural. Descreva o que você quer mudar, e o modelo aplica a edição preservando as partes do vídeo que você quer manter.
+- **Conhecimento do mundo**:o Gemini Omni combina uma compreensão da física com o conhecimento do Gemini sobre história, ciência e contexto cultural, preenchendo a lacuna entre o fotorrealismo e a narrativa significativa.
 
-## การสร้างวิดีโอจากข้อความ
+## Geração de texto para vídeo
 
-สร้างวิดีโอจากพรอมต์ข้อความ โมเดลจะสร้างวิดีโอพร้อมเสียงตามคำอธิบายข้อความของคุณ เขียนพรอมต์โดยระบุรายละเอียดต่างๆ เช่น คำอธิบายฉาก การเคลื่อนไหวของกล้อง แสง และอารมณ์ เพื่อให้ได้ผลลัพธ์ที่ดีที่สุด
+Gere um vídeo com base em um comando de texto. O modelo gera um vídeo com áudio com base na sua descrição de texto. Escreva comandos com detalhes como descrição da cena, movimento da câmera, iluminação e clima para melhores resultados.
 
 ### Python
 
@@ -67,12 +67,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### สคีมาการตอบกลับ REST
+### Esquema de resposta REST
 
-ฟิลด์ `interaction.output_video` ที่ใช้งานง่ายนี้เป็นฟิลด์ที่ใช้ได้กับ **SDK เท่านั้น**
-รับเอาต์พุตวิดีโอจากอาร์เรย์ `steps` เมื่อใช้ REST API โดยตรง
+O campo de conveniência `interaction.output_video` é **somente do SDK**.
+Receba a saída de vídeo da matriz `steps` ao usar a API REST diretamente.
 
-**โครงสร้าง JSON ของ REST แบบข้อมูลดิบ**
+**Estrutura JSON REST bruta:**
 
 ```
 {
@@ -97,9 +97,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### ควบคุมสัดส่วนภาพ
+### Controlar a proporção
 
-ตั้งค่า `aspect_ratio` เป็น `"9:16"` เพื่อสร้างวิดีโอแนวตั้ง โดยค่าเริ่มต้นจะเป็นแนวนอน (`16:9`)
+Defina `aspect_ratio` como `"9:16"` para criar vídeos no modo retrato. A paisagem (`16:9`) é o padrão.
 
 ### Python
 
@@ -157,11 +157,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### ตัวควบคุมความละเอียด
+### Controles de resolução
 
-#### โหมดร่าง 360p
+#### Modo rascunho de 360p
 
-ใช้ `resolution: "360p"` ใน `response_format` เพื่อสร้างคลิปตัวอย่างขนาดเล็กได้เร็วขึ้นประมาณ 2 เท่า โดยใช้โทเค็นน้อยลง
+Use `resolution: "360p"` em `response_format` para gerar clipes de visualização leves aproximadamente duas vezes mais rápido com consumo reduzido de tokens.
 
 ### Python
 
@@ -210,9 +210,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### ความละเอียดสูง (1080p และ 4K)
+#### Alta resolução (1080p e 4K)
 
-ตั้งค่า `resolution` เป็น `"1080p"` หรือ `"4k"` ใน `response_format` เพื่อสร้างวิดีโอความละเอียดสูงที่คมชัด
+Defina `resolution` como `"1080p"` ou `"4k"` em `response_format` para gerar vídeos nítidos de alta resolução.
 
 ### Python
 
@@ -261,15 +261,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-## การสร้างวิดีโอจากรูปภาพ
+## Geração de vídeo a partir de imagens
 
-คุณสามารถใส่รูปภาพอ้างอิงพร้อมกับพรอมต์ข้อความได้ โมเดลจะตัดสินใจว่าจะใช้รูปภาพอย่างไรเพื่อทำให้ภาพผลิตภัณฑ์ ภาพประกอบ หรือภาพถ่ายดูสมจริงขึ้น ทั้งนี้ขึ้นอยู่กับพรอมต์ของคุณ
+Você pode fornecer imagens de referência com seu comando de texto. Dependendo do comando, o modelo vai decidir como usar a imagem, vida a fotos de produtos, ilustrações ou fotografias.
 
-ตัวอย่างต่อไปนี้แสดงวิธีใช้รูปภาพอ้างอิงเป็นภาพวาดของปลาที่กระโดดขึ้นจากน้ำ
+O exemplo a seguir mostra como usar uma imagem de referência de um desenho de um peixe pulando da água:
 
-![ภาพวาดปลากระโดดขึ้นจากน้ำ](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=th)
+![Desenho de um peixe pulando da água](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=pt-br)
 
-โดยใช้พรอมต์ต่อไปนี้
+Com o seguinte comando:
 
 ```
 turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video
@@ -328,10 +328,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### การอ้างอิงตัวแบบ
+### Referência de assunto
 
-คุณสามารถสร้างวิดีโอที่รวมตัวแบบที่เฉพาะเจาะจงซึ่งระบุเป็นรูปภาพอ้างอิง
-ตัวอย่างเช่น โค้ดต่อไปนี้แสดงวิธีใส่รูปภาพแมวและเส้นด้าย 2 รูปเพื่อสร้างวิดีโอแมวเล่นกับเส้นด้าย
+Você pode gerar um vídeo incorporando assuntos específicos fornecidos como imagens de referência.
+Por exemplo, o código a seguir mostra como fornecer duas imagens de um gato e um fio para gerar um vídeo do gato brincando com o fio.
 
 ### Python
 
@@ -389,17 +389,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### พารามิเตอร์งาน
+### Parâmetro de tarefas
 
-คุณสามารถตั้งค่าพารามิเตอร์ `task` ใน `video_config` ภายใต้ `generation_config` เพื่อกำหนดงานการสร้างอย่างชัดเจน (ไม่บังคับ) หากไม่ได้ตั้งค่า โมเดลจะกำหนดโหมดที่เหมาะสมโดยอัตโนมัติตามพรอมต์และสื่ออินพุต
+Você pode definir o parâmetro `task` em `video_config` em `generation_config` para definir explicitamente a tarefa de geração. Se não estiver definido, o modelo vai determinar automaticamente o modo apropriado com base no comando e na mídia de entrada.
 
-ค่า `task` ที่รองรับมีดังนี้
+Os valores `task` aceitos incluem:
 
-- `text_to_video`: สร้างวิดีโอจากพรอมต์ข้อความเท่านั้น
-- `image_to_video`: สร้างวิดีโอจากรูปภาพต้นฉบับ 1 หรือ 2 รูป (เฟรมเริ่มต้นและเฟรมสิ้นสุดที่ไม่บังคับ)
-- `reference_to_video`: สร้างวิดีโอโดยใช้สื่อที่ระบุเป็นข้อมูลอ้างอิง
-- `edit`: แก้ไขวิดีโอที่มีอยู่
-- `extend`: ขยายวิดีโอคลิปที่มีอยู่
+- `text_to_video`: gera vídeo apenas com base em um comando de texto.
+- `image_to_video`: gera vídeo com base em uma ou duas imagens de origem (frame inicial e frame final opcional).
+- `reference_to_video`: gera vídeo usando a mídia fornecida como referência.
+- `edit`: modifica um vídeo atual.
+- `extend`: estende um clipe de vídeo atual.
 
 ### Python
 
@@ -476,11 +476,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### การประมาณค่าคีย์เฟรม
+### Interpolação de frames-chave
 
-สร้างวิดีโอต่อเนื่องที่เปลี่ยนจากเฟรมเริ่มต้นไปยังเฟรมสิ้นสุดได้อย่างราบรื่น วิธีนี้เหมาะอย่างยิ่งสำหรับการหมุนกล้อง เอฟเฟกต์การซูม การเปลี่ยนภาพแบบไทม์แลปส์ และคลิปที่วนซ้ำได้อย่างราบรื่น
+Gere vídeos contínuos que fazem a transição suave entre um frame inicial e um frame final. Isso é ideal para órbitas de câmera, efeitos de zoom, progressões de lapso de tempo e clipes de looping contínuos.
 
-ใส่รูปภาพทั้ง 2 รูปในอาร์เรย์อินพุตพร้อมกับคำอธิบายการเคลื่อนไหวที่ต้องการ
+Forneça as duas imagens na matriz de entrada com uma descrição do movimento desejado:
 
 ### Python
 
@@ -567,11 +567,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-## การตัดต่อวิดีโอแบบมีสถานะ
+## Edição de vídeo com estado
 
-สร้างวิดีโอและตัดต่อวิดีโอซ้ำๆ โดยใช้พรอมต์ติดตามผล แต่ละรอบจะอิงตามผลลัพธ์ก่อนหน้า โมเดลจะจดจำบริบทของวิดีโอและใช้การเปลี่ยนแปลงของคุณพร้อมกับเก็บองค์ประกอบที่คุณไม่ได้กล่าวถึงไว้ ใช้ `previous_interaction_id` เพื่อติดตามประวัติการสนทนาและสถานะวิดีโอที่สร้างขึ้นโดยไม่ต้องอัปโหลดวิดีโอก่อนหน้าอีกครั้ง
+Gere um vídeo e edite-o de forma iterativa usando comandos de acompanhamento. Cada turno se baseia no resultado anterior. O modelo lembra o contexto do vídeo, aplicando as mudanças e preservando os elementos que você não mencionou. Use `previous_interaction_id` para acompanhar o histórico de conversas e o estado do vídeo gerado sem fazer o upload do vídeo anterior.
 
-ตัวอย่างต่อไปนี้แสดงวิธีสร้างวิดีโอแรกแล้วจึงตัดต่อวิดีโอ
+O exemplo a seguir demonstra como gerar um primeiro vídeo e editá-lo:
 
 ### Python
 
@@ -631,18 +631,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-ตัวอย่างวิดีโอเริ่มต้น
+Exemplo de um vídeo inicial:
 
-ตัวอย่างวิดีโอที่ตัดต่อแล้ว
+Exemplo de um vídeo editado:
 
-การสนทนาแต่ละรอบจะสร้างวิดีโอใหม่ โมเดลจะเข้าใจบริบทจากรอบก่อนหน้า ทำให้คุณทำการเปลี่ยนแปลงทีละน้อยได้ เช่น การปรับแสงและการเปลี่ยนพื้นหลัง โดยไม่ต้องอธิบายฉากทั้งหมดอีกครั้ง
+Cada turno na conversa produz um novo vídeo. O modelo entende o contexto de turnos anteriores, permitindo que você faça mudanças incrementais, como ajustar a iluminação e trocar planos de fundo, sem descrever novamente toda a cena.
 
-### ตัดต่อวิดีโอของคุณเอง
+### Editar seus próprios vídeos
 
-อัปโหลดวิดีโอโดยใช้ [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th) เพื่อตัดต่อวิดีโอ
-ด้วย Gemini Omni Flash 1.1
+Faça upload dos seus vídeos usando a [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br) para editá-los
+com o Gemini Omni Flash 1.1.
 
-ตัวอย่างต่อไปนี้แสดงวิธีตัดต่อวิดีโอต้นฉบับต่อไปนี้
+O exemplo a seguir mostra como editar o vídeo original:
 
 ### Python
 
@@ -735,11 +735,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-ตัวอย่างวิดีโอที่ตัดต่อแล้ว
+Exemplo de um vídeo editado:
 
-## ส่วนขยายฉาก
+## Extensão de cena
 
-ขยายวิดีโอคลิปที่มีอยู่โดยใช้บริบทก่อนหน้า Gemini Omni Flash 1.1 จะวิเคราะห์การเคลื่อนไหวก่อนหน้าและการจัดองค์ประกอบฉากเพื่อรักษาความต่อเนื่อง ตัวตนของตัวละคร และแสงในสภาพแวดล้อมตลอดทั้งช็อตที่ขยาย
+Estenda os clipes de vídeo atuais usando o contexto anterior. O Gemini Omni Flash 1.1 analisa o movimento anterior e a composição da cena para manter a continuidade, a identidade do personagem e a iluminação ambiental em todo o plano estendido.
 
 ### Python
 
@@ -811,11 +811,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-## การดึงวิดีโอด้วย URI
+## Como extrair vídeos com um URI
 
-ใช้พารามิเตอร์ `delivery="uri"` ใน
-`response_format` เพื่อดึงวิดีโอที่สร้างขึ้นซึ่งมีขนาดใหญ่กว่า 4 MB
-ระบบจะแสดง URI ที่โฮสต์โดย Google ซึ่งคุณสามารถโพลจนกว่าวิดีโอจะมีสถานะเป็น `ACTIVE` ก่อนที่จะดาวน์โหลด
+Use o parâmetro `delivery="uri"` em
+`response_format` para extrair vídeos gerados maiores que 4 MB.
+Isso retorna um URI hospedado pelo Google que você pode consultar até que o vídeo esteja `ACTIVE` antes de fazer o download.
 
 ### Python
 
@@ -930,7 +930,7 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/$FILE_ID:
 echo "Done! Video saved to output.mp4"
 ```
 
-**โครงสร้าง JSON ของ REST แบบข้อมูลดิบ (URI)**
+**Estrutura JSON REST bruta (URI):**
 
 ```
 {
@@ -955,109 +955,109 @@ echo "Done! Video saved to output.mp4"
 }
 ```
 
-## แนวทางปฏิบัติแนะนำ
+## Práticas recomendadas
 
-- **ใช้การส่ง URI สำหรับวิดีโอขนาดใหญ่:** สำหรับวิดีโอที่มีขนาดใหญ่กว่า 4 MB (>720p
-  เมื่อพร้อมให้บริการ) ให้ใช้ `delivery="uri"` ใน `response_format` เพื่อหลีกเลี่ยงขีดจำกัดขนาดเพย์โหลด
-- **ประสิทธิภาพที่เพิ่มประสิทธิภาพ:** ตั้งค่า `background=false`, `store=false` และ `stream=false` เพื่อการสร้างแบบเอกภาคพร้อมกันที่เร็วขึ้น โปรดทราบว่าการตั้งค่า `store=false` หมายความว่าคุณจะแก้ไขวิดีโอที่สร้างขึ้นในรอบถัดไปโดยใช้ `previous_interaction_id` ไม่ได้
-- **ความแม่นยำของพรอมต์:** ดูส่วน[คำแนะนำในการเขียนพรอมต์](#prompt-guide)สำหรับ
-  รายละเอียด
+- **Usar a entrega de URI para vídeos grandes:** para vídeos maiores que 4 MB (>720p
+  quando disponível), use `delivery="uri"` em `response_format` para evitar limites de tamanho do payload.
+- **Performance otimizada**:defina `background=false`, `store=false` e `stream=false` para uma geração unária síncrona mais rápida. Observação: a definição de `store=false` significa que o vídeo gerado não poderá ser editado em turnos subsequentes usando o `previous_interaction_id`.
+- **Precisão do comando**:consulte a seção de [orientações sobre comandos](#prompt-guide) para
+  mais detalhes.
 
-## ข้อจำกัด
+## Limitações
 
-- ระบบไม่รองรับการอัปโหลดและแก้ไขรูปภาพที่มีผู้เยาว์ในเขตเศรษฐกิจยุโรป สวิตเซอร์แลนด์ และสหราชอาณาจักร
-- ระบบไม่รองรับการอัปโหลดและแก้ไขรูปภาพที่มีบุคคลที่จดจำได้บางคน
-- ขณะนี้การแก้ไขวิดีโอที่อัปโหลดไม่พร้อมให้บริการสำหรับผู้ใช้ในเขตเศรษฐกิจยุโรป (EEA), สวิตเซอร์แลนด์ และสหราชอาณาจักร (ระบบรองรับการแก้ไขวิดีโอที่สร้างโดยโมเดล)
-- API เวอร์ชันปัจจุบันไม่รองรับการอัปโหลดข้อมูลอ้างอิงเสียง
-- สคีมา API ยอมรับข้อมูลอ้างอิงวิดีโอที่มีระยะเวลาไม่เกิน 3 วินาที แต่โมเดลยังประมวลผลข้อมูลอ้างอิงเหล่านี้ไม่ถูกต้องในขณะนี้
-- ระบบไม่รองรับการอ้างอิงหรือการให้เหตุผลในวิดีโอหลายรายการ การพยายามเขียนพรอมต์สำหรับวิดีโอหลายรายการอาจทำให้ประสิทธิภาพของโมเดลลดลงหรือได้เอาต์พุตที่ไม่คาดคิด
-- ระบบไม่รองรับการขยายวิดีโอและการประมาณค่าวิดีโอ (การสร้างวิดีโอระหว่างเฟรมแรกกับเฟรมสุดท้าย)
-- ระบบไม่รองรับการแก้ไขเสียง
-- ระบบไม่รองรับปริมาณงานที่จัดสรร
-- ระบบไม่รองรับคำแนะนำของระบบ อุณหภูมิ `top_p` ลำดับการหยุด และพรอมต์เชิงลบ (คุณสามารถใส่พรอมต์เชิงลบในพรอมต์ปกติได้ เช่น "อย่าทำ X")
-- ระบบไม่รองรับการใช้วิดีโอ YouTube เป็นแหล่งที่มาของสื่อ
+- O upload e a edição de imagens que contenham menores de idade não são aceitos no Espaço Econômico Europeu, na Suíça e no Reino Unido.
+- O upload e a edição de imagens que contenham determinadas pessoas reconhecíveis não são aceitos.
+- A edição de vídeos enviados não está disponível para usuários no Espaço Econômico Europeu (EEE), na Suíça e no Reino Unido. No entanto, a edição de vídeos gerados pelo modelo é aceita.
+- O upload de referências de áudio não é aceito na versão atual da API.
+- As referências de vídeo com duração de até 3 segundos são aceitas pelo esquema da API, mas não são processadas corretamente pelo modelo no momento.
+- Não há suporte para referências ou raciocínio em vários vídeos. Tentar comandos de vários vídeos pode resultar em desempenho degradado do modelo ou saídas inesperadas.
+- A extensão e a interpolação de vídeo (geração de vídeo entre um primeiro e um último frame) não são aceitas.
+- A edição de voz não é aceita.
+- A capacidade de processamento provisionada não é aceita.
+- Instruções do sistema, temperatura, `top_p`, sequências de parada e comandos negativos não são aceitos. Você pode colocar seus negativos no comando normal, por exemplo, "Não faça X".
+- O uso de vídeos do YouTube como fonte de mídia não é aceito.
 
-## รายละเอียดทางเทคนิค
+## Detalhes técnicos
 
-- วิดีโอที่สร้างขึ้นทั้งหมดจะมีลายน้ำ SynthID ซึ่งผู้ชมมองไม่เห็น แต่สามารถตรวจจับได้โดยโปรแกรมเพื่อการยืนยันแหล่งที่มา
-- เวลาในการสร้างวิดีโอจะแตกต่างกันไปตามระยะเวลา ความละเอียด และปริมาณงานของ API ในปัจจุบัน วิดีโอที่มีระยะเวลานานขึ้นและความละเอียดสูงขึ้นจะใช้เวลาในการสร้างนานขึ้น
-- ระบบจะใช้ตัวกรองความปลอดภัยของเนื้อหากับทั้งพรอมต์อินพุตและวิดีโอที่สร้างขึ้น (และขึ้นอยู่กับภูมิภาคของคุณ) ระบบจะบล็อกพรอมต์ที่ละเมิดนโยบายการใช้งาน
-- ระบบรองรับภาษาอังกฤษ (EN) อย่างเต็มรูปแบบ แต่ยังไม่ได้ประเมินภาษาอื่นๆ ดังนั้นภาษาเหล่านั้นอาจใช้งานได้ แต่ผลลัพธ์อาจแตกต่างกันไป
+- Todos os vídeos gerados incluem marcas-d'água do SynthID, que são invisíveis para os espectadores, mas podem ser detectadas programaticamente para verificação de procedência.
+- Os tempos de geração de vídeo variam com base na duração, resolução e carga atual da API. Vídeos mais longos e de maior resolução levam mais tempo para serem gerados.
+- Os filtros de segurança de conteúdo são aplicados aos comandos de entrada e ao vídeo gerado (e dependem da sua região). Os comandos que violam as políticas de uso serão bloqueados.
+- O inglês (EN) é totalmente aceito, mas outros idiomas não foram avaliados. Portanto, eles podem funcionar, mas os resultados podem variar.
 
-## คู่มือการใช้พรอมต์ของ Gemini Omni Flash
+## Guia de comandos do Gemini Omni Flash
 
-ส่วนนี้มีเคล็ดลับและตัวอย่างเกี่ยวกับวิธีเขียนพรอมต์สำหรับ Gemini Omni Flash อย่างมีประสิทธิภาพ
+Esta seção contém dicas e exemplos de como usar o Gemini Omni Flash de forma eficaz.
 
-### ฉากเดียว
+### Cena única
 
-โดยค่าเริ่มต้น Omni Flash จะพยายามสร้างวิดีโอที่มีช็อตต่างๆ 2-3 ช็อต
-และจะพยายามสร้างเรื่องราวที่น่าสนใจตามพรอมต์
+Por padrão, o Omni Flash tenta criar um vídeo com alguns planos diferentes.
+Ele tenta criar uma narrativa interessante com base no comando.
 
-หากต้องการให้วิดีโอเอาต์พุตมีฉากเดียว คุณต้องเขียนพรอมต์ดังนี้
+Se você precisar que o vídeo de saída contenha uma única cena, faça o comando:
 
-- ในฉากเดียวที่ไม่ขาดตอน
-- ในช็อตเดียวต่อเนื่อง
-- ไม่มีการตัดฉาก
+- Em uma única cena ininterrupta
+- Em um único plano contínuo
+- Sem cortes de cena
 
-เช่น
+Exemplo:
 
 ```
 Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny windowsill, looking out into a leafy garden. The cat's tail twitches slowly, and its ears rotate slightly toward ambient noises. Sunbeams illuminate dust motes in the air. Sound design: Gentle breeze, distant bird chirps. No dialogue.
 ```
 
-### การนำองค์ประกอบที่ไม่ต้องการออก
+### Remover elementos indesejados
 
-หากวิดีโอที่สร้างขึ้นมีสิ่งที่คุณไม่ต้องการ ให้ใส่พรอมต์เชิงลบแบบง่ายๆ เพื่อหลีกเลี่ยงสิ่งเหล่านั้น
+Se o vídeo gerado contiver coisas que você não quer, inclua comandos negativos simples para evitá-las:
 
-- ไม่มีบทพูด
-- ไม่มีเครื่องประดับ
-- ไม่มีเอฟเฟกต์เสียงเพิ่มเติม
+- Sem diálogo
+- Sem ornamentos
+- Sem efeitos sonoros extras
 
-### พรอมต์สำหรับการตัดต่อ
+### Comandos para edição
 
-พรอมต์แบบง่ายๆ เหมาะที่สุดสำหรับการตัดต่อวิดีโอ พรอมต์ที่มีคำอธิบายมากเกินไปอาจทำให้เกิดการเปลี่ยนแปลงที่ไม่ต้องการ
+Comandos simples funcionam melhor para edição de vídeo. Comandos excessivamente descritivos podem levar a mudanças não intencionais.
 
-ตัวอย่างพรอมต์การตัดต่อแบบง่ายๆ เพิ่มเติมมีดังนี้
+Confira outros exemplos de comandos de edição simples:
 
-- สร้างวิดีโอนี้ให้เป็นอนิเมะ
-- ใส่หมวกแฟชั่นให้บุคคลนี้
-- เปลี่ยนแสงให้ดูน่าทึ่งมากขึ้น
-- เปลี่ยนข้อความบนป้ายให้เป็น "Omni Flash"
+- Transforme este vídeo em anime
+- Coloque um chapéu elegante nessa pessoa
+- Mude a iluminação para ser mais dramática
+- Mude o texto na placa para "Omni Flash"
 
-เมื่อตัดต่อวิดีโอในส่วนที่เฉพาะเจาะจง ให้ใส่ `"Keep everything else the same"` เพื่อรักษาความสอดคล้องของภาพ
+Ao editar um aspecto específico do vídeo, inclua `"Keep everything else the same"` para manter a consistência visual.
 
-ตัวอย่างต่อไปนี้แสดงวิธีใช้เทคนิคนี้
+Confira alguns exemplos de como aplicar essa técnica:
 
-- **สิ่งที่ควรหลีกความเสี่ยง:** `In the video of the man sitting on the sofa, please add a small
+- **O que evitar:** `In the video of the man sitting on the sofa, please add a small
   black cat that runs from the right side of the screen, jumps onto his lap,
   and then he starts to stroke its head while looking down.`
-  - **ปรับให้อ่านง่าย:** `Add a cat that jumps onto his lap, he begins to pet it.
+  - **Simplifica** `Add a cat that jumps onto his lap, he begins to pet it.
     Keep everything else the same.`
-- **สิ่งที่ควรหลีกเลี่ยง:** `Please remove the cell phone that the person is holding in
+- **O que evitar** `Please remove the cell phone that the person is holding in
   their hand and fill in the background so it looks like they are just holding
   their hand empty.`
-  - **ปรับให้อ่านง่าย:** `Make the phone invisible. Keep everything else the
+  - **Simplifica** `Make the phone invisible. Keep everything else the
     same.`
 
-### การเขียนพรอมต์สำหรับเสียง
+### Comandos de áudio
 
-โดยค่าเริ่มต้น โมเดลจะพยายามสร้างแทร็กเสียงที่เหมาะสมสำหรับวิดีโอ ซึ่งอาจไม่ใช่สิ่งที่คุณต้องการเสมอไป คุณสามารถใช้พรอมต์เพื่ออธิบายประเภทเสียงที่ต้องการได้ วิธีนี้มีประโยชน์อย่างยิ่งหากคุณต้องการใส่เพลงในวิดีโอ
+Por padrão, o modelo tenta gerar uma faixa de áudio apropriada para um vídeo. Isso nem sempre é o que você quer. Você pode usar o comando para descrever o tipo de áudio que quer. Isso é especialmente importante se você quiser música no seu vídeo:
 
-- ใส่เพลงประกอบที่ผ่อนคลาย
-- วิดีโอมีจังหวะเทคโนที่สนุกสนาน
-- เสียงเป็นเสียงวิทยุที่เบาและแหลมเล็กเล่นเพลงอยู่เบื้องหลัง
+- Inclua música de fundo calma
+- O vídeo tem uma batida techno de alta energia
+- O áudio é uma transmissão de rádio baixa e metálica no plano de fundo, tocando uma música
 
-### ช่วงเวลาของเหตุการณ์
+### Marcação de tempo de eventos
 
-คุณสามารถเขียนพรอมต์ให้สิ่งต่างๆ เกิดขึ้นในเวลาที่เฉพาะเจาะจงในวิดีโอได้ โดยไม่จำเป็นต้องใช้ไวยากรณ์ที่แม่นยำและคุณสามารถใช้ภาษาธรรมชาติได้ วิธีนี้มีประโยชน์อย่างยิ่งในการสร้างการตัดฉาก จังหวะ หรือลำดับการยิงแบบรัวๆ ของคุณเอง
-ดูตัวอย่างได้ดังนี้
+Você pode fazer comandos para que as coisas aconteçam em momentos específicos do vídeo. Não é necessária uma sintaxe precisa, e você pode usar linguagem natural. Isso é especialmente útil para criar seus próprios cortes de cena, ritmo ou sequências rápidas.
+Confira os exemplos a seguir:
 
-- หลังจากผ่านไป 3 วินาที ผู้หญิงคนหนึ่งจะเข้ามาในฉาก
-- ที่ 5 วินาที ท่อนฮุกจะเริ่มเล่นในเสียงเบื้องหลัง
-- ตัดไปที่เฟรมใหม่ทุกๆ 2 วินาที
-- ในลำดับการยิงแบบรัวๆ ให้เปลี่ยนฉากเป็นตำแหน่งใหม่ทุกๆ ครึ่งวินาที (12 เฟรมที่ 24 เฟรมต่อวินาที)
+- Após 3 segundos, uma mulher entra na cena.
+- Aos 5 segundos, o refrão começa no áudio de fundo.
+- A cada 2 segundos, corte para um novo frame.
+- Em uma sequência rápida, a cada meio segundo (12 frames a 24 fps), mude a cena para um novo local.
 
-นอกจากนี้ คุณยังใช้ไวยากรณ์รหัสเวลาได้ด้วย
+Você também pode usar uma sintaxe de código de tempo:
 
 ```
 [0-3s] A person is walking
@@ -1065,35 +1065,34 @@ Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny wind
 [6-10s] They start running
 ```
 
-### การเขียนพรอมต์เมตา
+### Metacomandos
 
-คุณสามารถขอให้ Gemini Omni Flash ให้ความสำคัญกับคุณสมบัติหรือหลักการทั่วไปของการสร้างวิดีโอได้ดังนี้
+Você pode pedir ao Gemini Omni Flash para prestar atenção às qualidades ou princípios gerais da geração de vídeo:
 
-- พิจารณารายละเอียดเล็กๆ น้อยๆ การแสดงออก และเวลาเพื่อสร้างฉากที่สมบูรณ์และละเอียดมาก แต่ดูเป็นธรรมชาติทั้งหมด
-- อธิบายตัวละครและสภาพแวดล้อมอย่างละเอียด
-  ใช้หลักการออกแบบเครื่องแต่งกายกับตัวละคร ระบุบุคคล สิ่งของ และวัตถุในฉากอย่างชัดเจน
-- ใส่รายละเอียดที่เหมาะสมมากมายในองค์ประกอบพื้นหลังเพื่อให้ฉากดูสมจริงและเป็นธรรมชาติ
-- สร้างวิดีโอแบบรัวๆ ที่แสดง `[thing]` ที่แตกต่างกันและหายากทุกๆ 1 วินาที ใส่เพลงที่สนุกสนานและใส่ข้อความเพื่อติดป้ายกำกับสิ่งของ
+- Considere microdetalhes, expressão e tempo para criar uma cena muito rica, detalhada, mas totalmente natural.
+- Seja extremamente detalhado nas descrições de personagens e ambientes.
+  Aplique os princípios de design de figurino aos personagens. Seja muito específico sobre as pessoas, itens e objetos na cena.
+- Inclua muitos detalhes apropriados nos elementos de plano de fundo para tornar a cena realista e natural.
+- Faça um vídeo rápido que mostre um `[thing]` raro diferente a cada segundo, música animada e inclua texto para rotular a coisa.
 
-### ข้อความในวิดีโอ
+### Texto em vídeos
 
-คุณสามารถเขียนพรอมต์เพื่อใส่ข้อความในวิดีโอได้ และ Gemini Omni จะแสดงข้อความในลักษณะที่ถูกต้องและอ่านได้ หากวิดีโอจะมีข้อความที่เกิดขึ้นตามธรรมชาติ แม้แต่ในองค์ประกอบพื้นหลัง การกำหนดข้อความที่ควรแสดงก็อาจเป็นประโยชน์
+Você pode fazer comandos para incluir texto no seu vídeo, e o Gemini Omni vai renderizar de uma forma correta e legível. Se houver texto natural no seu vídeo, mesmo em elementos de plano de fundo, isso pode ajudar a definir o que ele deve dizer.
 
-- แสดงคำเดียวบนหน้าจอในแต่ละครั้ง: "did, you, know, that, Omni, can, do, awesome, text?" โดยแต่ละคำจะปรากฏเป็นเวลา 1 วินาทีพร้อมสไตล์ภาพเคลื่อนไหวที่แตกต่างกัน ไม่มีบทพูด
-- มีป้ายบอกทางที่เขียนว่า "This is an AI generation by Omni" มีหน้าร้านที่เขียนว่า "All you need AI" มีรถที่มีป้ายทะเบียน "OMN111"
+- Uma palavra na tela por vez: "você, sabia, que, o, Omni, pode, fazer, textos, incríveis?" Cada palavra aparece por 1 segundo com um estilo animado diferente. Sem diálogo.
+- Há uma placa de rua que diz: "Esta é uma geração de IA do Omni", há uma vitrine que diz: "Tudo o que você precisa de IA", há um carro com a placa: "OMN111"
 
-### การใช้แท็กในพรอมต์เพื่อตั้งค่าบทบาทของรูปภาพ
+### Usar tags em comandos para definir papéis de imagem
 
-คุณสามารถใช้แท็กเพื่อผูกสื่อที่อัปโหลดกับบทบาทการสร้างที่เฉพาะเจาะจง วิธีนี้ช่วยให้คุณระบุได้ว่ารูปภาพแต่ละรูปเป็นเฟรมเริ่มต้นหรือข้อมูลอ้างอิง
+Você pode usar tags para vincular a mídia enviada a papéis de geração específicos. Isso permite especificar se cada imagem é um frame inicial ou uma referência.
 
-- **`<FIRST_FRAME>`**: ใช้รูปภาพเป็นเฟรมเริ่มต้นของวิดีโอ สำหรับ
-  ตัวอย่าง: `<FIRST_FRAME> a woman is walking`
-- **`<IMAGE_REF_N>`**: ใช้รูปภาพเป็นข้อมูลอ้างอิง เช่น `in the
-  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (รวมข้อมูลอ้างอิงสไตล์
-  จากรูปภาพแรกและข้อมูลอ้างอิงตัวแบบจากรูปภาพที่ 2)
-  ข้อมูลอ้างอิงรูปภาพจะเริ่มจาก 0
+- **`<FIRST_FRAME>`**: use a imagem como o frame inicial do vídeo, por
+  exemplo: `<FIRST_FRAME> a woman is walking`
+- **`<IMAGE_REF_N>`**: use a imagem como referência, por exemplo: `in the
+  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (combina a referência de estilo da primeira imagem e a referência de assunto da segunda imagem).
+  As referências de imagem começam em 0.
 
-ตัวอย่างต่อไปนี้แสดงรูปภาพอ้างอิง
+Confira a seguir um exemplo com imagens de referência:
 
 ```
 [0-3s] A studio fashion sequence. Starting with woman <IMAGE_REF_0>, she is holding <IMAGE_REF_1>
@@ -1101,13 +1100,13 @@ Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny wind
 [6-10s] And finally another woman <IMAGE_REF_4> who is holding <IMAGE_REF_5> while walking.
 ```
 
-## ขั้นตอนถัดไป
+## A seguir
 
-- เริ่มต้นใช้งาน Gemini Omni Flash โดยทดลองใช้ใน [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=th)
-- ดูวิธีเขียนพรอมต์ให้ดียิ่งขึ้นด้วย[บทนำเกี่ยวกับการออกแบบพรอมต์](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=th)
+- Comece a usar o Gemini Omni Flash fazendo experimentos no [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=pt-br).
+- Aprenda a escrever comandos ainda melhores com nossa [Introdução ao design de comandos](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pt-br).
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-อัปเดตล่าสุด 2026-09-10 UTC
+Última atualização 2026-09-10 UTC.
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-10 UTC"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-10 UTC."],[],[]]
