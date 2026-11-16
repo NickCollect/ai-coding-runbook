@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/terminal-config
-fetched_at: 2026-11-09T07:30:19.080648+00:00
+fetched_at: 2026-11-16T07:30:45.649149+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,7 +32,7 @@ In most terminals you can also press Shift+Enter, but support varies by terminal
 
 | Terminal | Shift+Enter for newline |
 | :- | :- |
-| Ghostty, Kitty, iTerm2, WezTerm, Warp, Apple Terminal, Windows Terminal | Works without setup |
+| Ghostty, Kitty, iTerm2, WezTerm, Warp, Windows Terminal | Works without setup |
 | Other terminals that support the kitty keyboard protocol, such as foot and Alacritty 0.16 or later | Works without setup. Requires Claude Code v2.1.269 or later |
 | VS Code, Cursor, Devin Desktop, Alacritty before 0.16, Zed | Run `/terminal-setup` once |
 | gnome-terminal, JetBrains IDEs such as PyCharm and Android Studio | Not available; use Ctrl+J or `\` then Enter |
@@ -338,7 +338,7 @@ In a wide terminal, each line of prose in Claude's responses runs the full width
 
 When you paste more than 800 characters or more than three lines into the prompt, Claude Code collapses the input to a placeholder such as `[Pasted text #1 +120 lines]` so the input box stays usable, and still sends the full content when you submit. For very large inputs such as entire files or long logs, write the content to a file and ask Claude to read it instead of pasting. The conversation transcript stays readable and Claude can refer to the file by path in later turns. The VS Code integrated terminal can also drop characters from very large pastes before they reach Claude Code, so use a file there.
 
-If the paste carries [invisible Unicode characters](https://code.claude.com/docs/en/interactive-mode.md#invisible-characters-in-prompts), Claude Code removes them when you press Enter and puts the cleaned prompt back in the input box for you to send with another Enter.
+If the paste carries [invisible Unicode characters](https://code.claude.com/docs/en/interactive-mode.md#invisible-characters-in-prompts), Claude Code removes them when you press Enter.
 
 ### How Claude treats pasted text
 
@@ -352,7 +352,7 @@ When you delete with a word or line shortcut such as `Ctrl+W` or `Ctrl+K`, or wi
 
 Claude Code keeps the content behind each `[Pasted text #N]` placeholder under `~/.claude/paste-cache/`, so when you recall a prompt from [command history](https://code.claude.com/docs/en/interactive-mode.md#command-history) and resubmit it, the full pasted content is sent again, including in a later session.
 
-Cache files older than [`cleanupPeriodDays`](https://code.claude.com/docs/en/settings-reference#cleanupperioddays) are deleted under the [retention sweep rules](https://code.claude.com/docs/en/claude-directory.md#cleaned-up-automatically), so a recalled prompt can reference pasted text that no longer exists. When you submit such a prompt, Claude Code never sends the literal `[Pasted text #N]` string, and shows a notification naming the missing paste:
+Cache files older than [`cleanupPeriodDays`](https://code.claude.com/docs/en/settings-reference#cleanupperioddays) are deleted under the [retention sweep rules](https://code.claude.com/docs/en/claude-directory.md#cleaned-up-automatically), so a recalled prompt can reference pasted text that no longer exists. When you submit such a prompt, Claude Code doesn't send the literal `[Pasted text #N]` string, and shows a notification naming the missing paste:
 
 * In a plain prompt with text remaining, Claude Code removes the placeholder and sends the remaining text.
 * In a [shell mode](https://code.claude.com/docs/en/interactive-mode.md#shell-mode-with-prefix) command or a `/` command, where the removal would change what runs, and in any prompt the removal leaves empty, Claude Code cancels the submission and keeps the original text in the input, with the placeholder still in it. Delete the placeholder or edit the command, then resubmit.

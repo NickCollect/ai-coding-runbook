@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/python
-fetched_at: 2026-11-09T07:30:17.450515+00:00
+fetched_at: 2026-11-16T07:30:44.077252+00:00
 fetch_method: mintlify_md
 ---
 
@@ -881,7 +881,7 @@ class ClaudeAgentOptions:
 | `allowed_tools` | `list[str]` | `[]` | Tools to auto-approve without prompting, apart from reads from [network paths](https://code.claude.com/docs/en/permissions.md#network-paths). This does not restrict Claude to only these tools. If you name one of the [task-tracking tools](https://code.claude.com/docs/en/agent-sdk/todo-tracking.md#model-availability) here, Claude Code also opts the session in. Other unlisted tools fall through to `permission_mode` and `can_use_tool`. Use `disallowed_tools` to block tools. See [Permissions](https://code.claude.com/docs/en/agent-sdk/permissions.md#allow-and-deny-rules) |
 | `system_prompt` | `str \| SystemPromptPreset \| SystemPromptCustom \| SystemPromptFile \| None` | `None` | System prompt configuration. Pass a string for a custom prompt, `{"type": "preset", "preset": "claude_code"}` for Claude Code's system prompt with optional `"append"`, `{"type": "custom", "prompt": "..."}` for a custom prompt that can also set `"snapshot"`, or `{"type": "file", "path": "..."}` to load a large prompt from disk. See [`SystemPromptPreset`](#systempromptpreset), [`SystemPromptCustom`](#systempromptcustom), and [`SystemPromptFile`](#systempromptfile) |
 | `mcp_servers` | `dict[str, McpServerConfig] \| str \| Path` | `{}` | MCP server configurations or path to config file |
-| `strict_mcp_config` | `bool` | `False` | When `True`, use only the servers passed in `mcp_servers` and ignore project `.mcp.json`, user settings, plugin-provided MCP servers, and [claude.ai connectors](https://code.claude.com/docs/en/mcp.md#use-mcp-servers-from-claude-ai). Maps to the CLI `--strict-mcp-config` flag |
+| `strict_mcp_config` | `bool` | `False` | When `True`, use the servers passed in `mcp_servers` and ignore project `.mcp.json`, user settings, plugin-provided MCP servers, and [claude.ai connectors](https://code.claude.com/docs/en/mcp.md#use-mcp-servers-from-claude-ai). Maps to the CLI `--strict-mcp-config` flag |
 | `permission_mode` | `PermissionMode \| None` | `None` | Permission mode for tool usage |
 | `continue_conversation` | `bool` | `False` | Continue the most recent conversation |
 | `resume` | `str \| None` | `None` | Session ID to resume |
@@ -901,7 +901,7 @@ class ClaudeAgentOptions:
 | `add_dirs` | `list[str \| Path]` | `[]` | Additional directories Claude can access. The SDK passes each entry to Claude Code as `--add-dir`, so with the `project` setting source Claude Code also [loads the directory's skills, commands, and subagents](https://code.claude.com/docs/en/permissions.md#additional-directories-grant-file-access-not-configuration) |
 | `env` | `dict[str, str]` | `{}` | Environment variables merged on top of the inherited process environment. See [Environment variables](https://code.claude.com/docs/en/env-vars.md) for variables the underlying CLI reads, and [Handle slow or stalled API responses](#handle-slow-or-stalled-api-responses) for timeout-related variables. Set `CLAUDE_AGENT_SDK_CLIENT_APP` to identify your app in the User-Agent header |
 | `extra_args` | `dict[str, str \| None]` | `{}` | Additional CLI arguments to pass directly to the CLI |
-| `max_buffer_size` | `int \| None` | `None` | Maximum bytes when buffering CLI stdout |
+| `max_buffer_size` | `int \| None` | `None` | Longest single message the SDK accepts from the CLI, in characters. `None` uses 1,048,576. A longer message raises [`CLIJSONDecodeError`](#clijsondecodeerror) |
 | `debug_stderr` | `Any` | `sys.stderr` | *Deprecated* - The SDK ignores this value. Use the `stderr` callback for CLI stderr output |
 | `stderr` | `Callable[[str], None] \| None` | `None` | Callback function for stderr output from CLI |
 | `can_use_tool` | [`CanUseTool`](#canusetool) ` \| None` | `None` | Tool permission callback, invoked only when the [permission flow](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated) falls through to a prompt. Not invoked for calls auto-approved by `allowed_tools`, allow rules, or `permission_mode`. An allow rule doesn't pre-approve the [actions no mode auto-approves](https://code.claude.com/docs/en/permission-modes.md#actions-no-mode-auto-approves). See [`CanUseTool`](#canusetool) for details |
@@ -1250,7 +1250,7 @@ class ToolPermissionContext:
 | Field | Type | Description |
 | :- | :- | :- |
 | `signal` | `Any \| None` | Reserved for future abort signal support |
-| `suggestions` | `list[PermissionUpdate]` | Permission update suggestions from the CLI. Bash prompts include a suggestion with the `localSettings` destination, so returning it in `updated_permissions` writes the rule to `.claude/settings.local.json` and persists across sessions. |
+| `suggestions` | `list[PermissionUpdate]` | Permission update suggestions from the CLI. Bash prompts can include a suggestion with the `localSettings` destination, so returning it in `updated_permissions` writes the rule to `.claude/settings.local.json` and persists across sessions. |
 | `tool_use_id` | `str \| None` | Identifier of the specific tool call this prompt is for. Always populated when delivered to `can_use_tool` |
 | `agent_id` | `str \| None` | Sub-agent ID when the call originates from a subagent; `None` for the main agent |
 | `blocked_path` | `str \| None` | File path that triggered the permission request, when applicable. For example, when a Bash command tries to access a path outside allowed directories |
@@ -1389,7 +1389,7 @@ ThinkingConfig = ThinkingConfigAdaptive | ThinkingConfigEnabled | ThinkingConfig
 | :- | :- | :- |
 | `adaptive` | `type`, `display` | Claude adaptively decides when to think |
 | `enabled` | `type`, `budget_tokens`, `display` | Enable thinking with a specific token budget |
-| `disabled` | `type` | Disable thinking |
+| `disabled` | `type` | Turn thinking off [where the model and provider allow it](https://code.claude.com/docs/en/model-config.md#where-you-cant-turn-thinking-off) |
 
 The optional `display` field controls whether thinking text is returned `"summarized"` or `"omitted"`. On Claude Opus 4.7 and later, the API default is `"omitted"`, so set `"summarized"` to receive thinking content in [`ThinkingBlock`](#thinkingblock) outputs. On providers such as Amazon Bedrock and Google Cloud's Agent Platform, Claude Code doesn't pass `display` for earlier models it recognizes. Those are Opus 4.6, Sonnet 4.6, Haiku 4.5, and earlier models, which use their default.
 
@@ -1731,8 +1731,8 @@ Several fields carry diagnostic detail about how the conversation ended:
 * `is_error`: `True` when the conversation ended in an error state. Always `True` on the `error_*` subtypes. On `subtype="success"` it is `True` in three cases. Check `stop_reason` to tell them apart:
   * `"refusal"`: the model declined to respond. Read the refusal text in `result`, or in the preceding `AssistantMessage` when `result` is empty.
   * `"tool_deferred_unavailable"`: the [deferred tool](https://code.claude.com/docs/en/hooks.md#defer-a-tool-call-for-later) was no longer available when you resumed the session, for example because its MCP server wasn't connected. In the two cases below, a prompt you send after resuming counts the same as one passed with the resume:
-    * No prompt: the call is still pending. Make the tool available and resume again without a prompt, and the call runs first.
-    * A prompt: Claude Code answers it without the tool's result, and the deferred call is gone. Send a new prompt if you still need the tool called.
+    * No prompt: by default, the call is still pending. Make the tool available and resume again without a prompt, and the call runs first.
+    * A prompt: by default, the prompt doesn't reach Claude and the call is still pending. To continue without the tool, [drop the call](https://code.claude.com/docs/en/hooks.md#resume-when-a-deferred-tool-is-unavailable).
   * Any other value: the turn ended on an error that Claude Code reported in place of a model response, such as an API error. Read `terminal_reason` for the cause, `result` for the message, and `api_error_status` for the HTTP status when the API returned one.
 * `api_error_status`: the HTTP status code of the terminating API error. `None` when the turn ended without one. Populated only on `subtype="success"`.
 * `result`: text of the final assistant message on `subtype="success"`, or `None` on the `error_*` subtypes. When `subtype="success"` and `is_error=True`, this holds the API error string if one is available but can be empty, so check `api_error_status` and the preceding `AssistantMessage` content for detail.
@@ -1864,7 +1864,7 @@ class ConversationResetMessage:
 
 ### `TaskStartedMessage`
 
-Emitted when a background task starts. A background task is anything tracked outside the main turn: a backgrounded Bash command, a [Monitor](#monitor) watch, a subagent spawned via the Agent tool, or a remote agent. The `task_type` field tells you which. This naming is unrelated to the `Task`-to-`Agent` tool rename.
+Emitted when a background task starts. A background task is anything tracked outside the main turn, such as a backgrounded Bash command, a [Monitor](#monitor) watch, a subagent spawned via the Agent tool, or a remote agent. This naming is unrelated to the `Task`-to-`Agent` tool rename.
 
 ```python theme={null}
 @dataclass
@@ -1884,7 +1884,7 @@ class TaskStartedMessage(SystemMessage):
 | `uuid` | `str` | Unique message identifier |
 | `session_id` | `str` | Session identifier |
 | `tool_use_id` | `str \| None` | Associated tool use ID |
-| `task_type` | `str \| None` | Which kind of background task: `"local_bash"` for background Bash and Monitor watches, `"local_agent"`, or `"remote_agent"` |
+| `task_type` | `str \| None` | Which kind of background task, such as `"local_bash"` for background Bash and Monitor watches, `"local_agent"` for subagents, `"mcp_task"` for [background MCP tool calls](https://code.claude.com/docs/en/mcp.md#automatic-backgrounding-of-long-tool-calls), or `"remote_agent"` |
 
 ### `TaskUsage`
 
@@ -2089,7 +2089,7 @@ To tell failures apart, check `data["stop_reason"]` first, then `terminal_reason
 
 ### `CLIJSONDecodeError`
 
-Raised when JSON parsing fails.
+Raised when JSON parsing fails, or when one message from the CLI is longer than `max_buffer_size`. To raise the limit and pick up the stopped work, see [Large tool calls and results](https://code.claude.com/docs/en/agent-sdk/troubleshooting.md#large-tool-calls-and-results).
 
 ```python theme={null}
 class CLIJSONDecodeError(ClaudeSDKError):
@@ -2435,7 +2435,7 @@ Synchronous hook output with control and decision fields.
 class SyncHookJSONOutput(TypedDict):
     # Control fields
     continue_: NotRequired[bool]  # Whether to proceed (default: True)
-    suppressOutput: NotRequired[bool]  # Hide stdout from transcript
+    suppressOutput: NotRequired[bool]  # Has no effect
     stopReason: NotRequired[str]  # Message when continue is False
 
     # Decision fields
@@ -2523,7 +2523,7 @@ class AsyncHookJSONOutput(TypedDict):
 
 ### Hook Usage Example
 
-This example registers two hooks: one that blocks dangerous Bash commands like `rm -rf /`, and another that logs all tool usage for auditing. With its [`Bash` matcher](https://code.claude.com/docs/en/agent-sdk/hooks#matchers), the security hook runs on Bash tool calls. The logging hook has no matcher, so it runs on every tool call.
+This example registers two hooks: one that blocks dangerous Bash commands like `rm -rf /`, and another that logs all tool usage for auditing. With its [`Bash` matcher](https://code.claude.com/docs/en/agent-sdk/hooks#matchers), the security hook runs on Bash tool calls. The logging hook has no matcher, so it matches every tool.
 
 ```python theme={null}
 import asyncio
@@ -2793,7 +2793,7 @@ For what sets the foreground ceiling, see [Timeout and output limits](https://co
 
 Runs a background source and delivers each event to Claude so it can react without polling: `command` runs a script and emits one event per stdout line, and `ws` opens a WebSocket and emits one event per text frame. Provide exactly one of `command` or `ws`.
 
-When Monitor runs a command, it follows the same permission rules as Bash; a WebSocket watch prompts for approval separately. The `ws` source requires Claude Code v2.1.195 or later. See the [Monitor tool reference](https://code.claude.com/docs/en/tools-reference.md#monitor-tool) for behavior and provider availability.
+The `ws` source requires Claude Code v2.1.195 or later. When Monitor runs a command, it follows the same permission rules as Bash. See the [Monitor tool reference](https://code.claude.com/docs/en/tools-reference.md#monitor-tool) for WebSocket permissions, behavior, and provider availability.
 
 **Input:**
 
@@ -3589,7 +3589,7 @@ class SandboxSettings(TypedDict, total=False):
 | Property | Type | Default | Description |
 | :- | :- | :- | :- |
 | `enabled` | `bool` | `False` | Enable sandbox mode for command execution |
-| `autoAllowBashIfSandboxed` | `bool` | `True` | Auto-approve bash commands when sandbox is enabled |
+| [`autoAllowBashIfSandboxed`](https://code.claude.com/docs/en/settings-reference#sandbox-autoallowbashifsandboxed) | `bool` | `False` | Auto-approve Bash commands when sandbox is enabled. The `False` default requires Python SDK v0.2.182 or later |
 | `excludedCommands` | `list[str]` | `[]` | Commands that bypass sandbox restrictions, such as `["docker *"]`. These run unsandboxed automatically without model involvement; [`sandbox.excludedCommands`](https://code.claude.com/docs/en/settings-reference#sandbox-excludedcommands) covers when an entry applies |
 | `allowUnsandboxedCommands` | `bool` | `True` | Allow the model to request running commands outside the sandbox. When `True`, the model can set `dangerouslyDisableSandbox` in tool input, which falls back to the [permissions system](#permissions-fallback-for-unsandboxed-commands) |
 | `network` | [`SandboxNetworkConfig`](#sandboxnetworkconfig) | `None` | Network-specific sandbox configuration |
@@ -3600,7 +3600,7 @@ class SandboxSettings(TypedDict, total=False):
 >
 > The sandbox depends on platform support and, on Linux, tools like `bubblewrap` and `socat`. By default, when `enabled` is `True` but the sandbox can't start, commands run unsandboxed with a warning on stderr. This default differs from the TypeScript SDK, where `failIfUnavailable` defaults to `true`.
 >
-> Set `"failIfUnavailable": True` in your sandbox settings to stop instead. The SDK forwards `failIfUnavailable` to Claude Code along with the declared `SandboxSettings` fields. `query()` then reports a `ResultMessage` with `subtype="error_during_execution"` and the reason in `errors`. Because this is a single-shot `query()` call, the SDK raises after yielding that error result, so wrap the loop in a try block to continue past it. See [Handle the result](https://code.claude.com/docs/en/agent-sdk/agent-loop.md#handle-the-result) for the error contract.
+> Set `"failIfUnavailable": True` in your sandbox settings to stop instead. With `failIfUnavailable` set, `query()` raises a [`ResultError`](#resulterror) when the sandbox can't start, so wrap your `async for` loop in a `try` block. The reason is in the exception's `errors` list. The SDK forwards `failIfUnavailable` to Claude Code along with the declared `SandboxSettings` fields.
 
 To keep sandboxed commands from writing to a file, list its absolute path under [`denyWrite`](https://code.claude.com/docs/en/settings-reference#sandbox-filesystem-denywrite) in your sandbox settings, such as `"filesystem": {"denyWrite": ["/home/user/project/.env"]}`. The SDK forwards `filesystem` to Claude Code along with the declared `SandboxSettings` fields. Once the sandbox starts, it blocks writes to each absolute path you listed.
 
@@ -3627,8 +3627,8 @@ async def main():
         ):
             print(message)
     except Exception as error:
-        # A single-shot query() raises after yielding an error result,
-        # such as when failIfUnavailable is set and the sandbox can't start.
+        # query() raises, for example, when failIfUnavailable is set
+        # and the sandbox can't start.
         print(f"Session ended with an error: {error}")
 
 

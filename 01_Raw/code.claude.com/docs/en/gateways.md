@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/gateways
-fetched_at: 2026-10-26T05:40:02.147473+00:00
+fetched_at: 2026-11-16T07:30:44.859923+00:00
 fetch_method: mintlify_md
 ---
 
@@ -56,7 +56,7 @@ If your organization already runs an LLM gateway or API gateway, you can use it 
 
 ## Subscriptions and gateways
 
-When developers connect through a gateway with a gateway credential, usage is billed to your organization's provider account at API rates, and their claude.ai subscriptions aren't used or charged. Setting [`ANTHROPIC_AUTH_TOKEN`](https://code.claude.com/docs/en/env-vars) for a gateway you run, or signing in to a Claude apps gateway with `/login`, turns off subscription login for that session. Every request forwarded under that credential is charged to the account behind the gateway's provider credential.
+When developers connect through a gateway with a gateway credential, usage is billed to your organization's provider account at API rates, and their claude.ai subscriptions aren't used or charged. Every request forwarded under that credential is charged to the account behind the gateway's provider credential.
 
 The exception is setting only `ANTHROPIC_BASE_URL`, with no gateway credential. Requests still route through the gateway, but a saved claude.ai login stays the active credential, so the subscription's usage limits and billing apply. [Other LLM gateways](https://code.claude.com/docs/en/llm-gateway#subscriptions-and-gateways) covers that configuration and what the gateway has to forward for it to work.
 
@@ -69,7 +69,7 @@ A gateway routes model API requests. A few things you might expect it to handle 
 * **Client telemetry**: Claude Code disables its Anthropic-bound client analytics when a session signs in to a Claude apps gateway. To keep pre-sign-in startup analytics off as well, deliver [`DISABLE_TELEMETRY`](https://code.claude.com/docs/en/managed-settings#turn-telemetry-off-for-your-organization) in the [client-side managed settings](https://code.claude.com/docs/en/claude-apps-gateway-config.md#client-side-managed-settings) on each device.
 * **Client telemetry on other gateways**: whether Claude Code sends the optional client telemetry stream depends on your provider, and the [telemetry defaults table](https://code.claude.com/docs/en/data-usage.md#default-behaviors-by-api-provider) covers each case.
 * **Telemetry destinations**: where Claude Code sends a gateway session's telemetry depends on how the session signed in, and [What's enforced on developers](https://code.claude.com/docs/en/claude-apps-gateway#whats-enforced-on-developers) says where each kind of session's exports go.
-* **Corporate HTTP proxies**: an `HTTPS_PROXY` sits between Claude Code and every server it talks to, including the gateway. If your network requires one, [configure the proxy](https://code.claude.com/docs/en/network-config.md) in addition to the gateway. For a Claude apps gateway you host, [sign-in checks that the proxy host is also on a private network](https://code.claude.com/docs/en/claude-apps-gateway#prerequisites); if it isn't, add the gateway host to `NO_PROXY` so the CLI connects to it directly.
+* **Corporate HTTP proxies**: Claude Code sends its requests, including those to the gateway, through the proxy in `HTTPS_PROXY`. If your network requires a proxy, [configure it](https://code.claude.com/docs/en/network-config.md). If the proxy applies to a Claude apps gateway you host, [sign-in](https://code.claude.com/docs/en/claude-apps-gateway#prerequisites) needs the proxy's hostname to resolve to private addresses, or the gateway host in `NO_PROXY`.
 
 ## Next steps
 

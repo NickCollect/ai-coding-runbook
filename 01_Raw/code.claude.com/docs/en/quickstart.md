@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/quickstart
-fetched_at: 2026-11-02T07:00:26.777265+00:00
+fetched_at: 2026-11-16T07:30:45.438788+00:00
 fetch_method: mintlify_md
 ---
 
@@ -263,7 +263,7 @@ Run these inside Claude Code after it starts.
 
 | Command | What it does | Example |
 | - | - | - |
-| `/clear` | Clear conversation history | `/clear` |
+| `/clear` | Start a new conversation. Resume the previous one with `/resume`. | `/clear` |
 | `/help` | Show available commands | `/help` |
 | `/exit` or Ctrl+D twice | Exit Claude Code | `/exit` |
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/mods/overview
-fetched_at: 2026-10-26T05:40:04.242379+00:00
+fetched_at: 2026-11-16T07:30:45.327246+00:00
 fetch_method: mintlify_md
 ---
 
@@ -84,7 +84,7 @@ A mod runs with your permissions, so before you install one, know what it has ac
 
 Mods aren't sandboxed. If you turn on [sandboxing](https://code.claude.com/docs/en/sandboxing.md), the sandbox isolates the Bash commands Claude runs, and a process that a mod starts runs outside it.
 
-With [managed settings](https://code.claude.com/docs/en/settings.md#check-what-your-organization-enforces) or a Team or Enterprise [`/login`](https://code.claude.com/docs/en/authentication#authentication-precedence) as the session's credential, by default a mod's approval doesn't get a call past your `ask` rules or `PreToolUse` hooks. Without either, a mod can approve a call that an `ask` rule would prompt for, or that your `PreToolUse` hook blocked. To check when a mod can also approve a call that a `deny` rule refuses, see [Extend permissions with hooks](https://code.claude.com/docs/en/permissions.md#precedence-among-rules-hooks-and-mods).
+A mod can approve [many tool calls](https://code.claude.com/docs/en/permissions.md#precedence-among-rules-hooks-and-mods) that your `deny` or `ask` rules or your `PreToolUse` hooks would stop, unless the [built-in guard](https://code.claude.com/docs/en/plugins/mods/admin.md#know-what-happens-by-default) prevents it. With the guard loaded, by default a user's mod can't do this. In a local terminal session, `cc-plugin-sec-default` on the **Installed** tab of `/plugin` means the guard is loaded.
 
 A mod can restyle much of Claude Code's interface, but not the permission prompt. It can't change what a prompt shows you.
 
@@ -224,9 +224,9 @@ Each of the others has its own page: [Hooks](https://code.claude.com/docs/en/hoo
 
 ## Mods built into Claude Code
 
-Some of Claude Code's own features are mods. To see the ones your session has, run `/plugin` at the Claude Code prompt and go to the **Installed** tab, which lists them under **Built-in**. You can't update or uninstall a built-in mod, and the table's last column says how to turn each one off. The [`mods active` line](#see-which-mods-a-session-loaded) omits built-in mods.
+Some of Claude Code's own features are mods. To see the ones your session has, run `/plugin` at the Claude Code prompt and go to the **Installed** tab, which lists them under **Built-in**. You can't update or uninstall a built-in mod. The [`mods active` line](#see-which-mods-a-session-loaded) omits built-in mods.
 
-This table lists each entry by the name `/plugin` shows:
+This table lists some of the **Built-in** entries by the name `/plugin` shows:
 
 | Name in `/plugin` | What it does | Where it's on | How to turn it off |
 | :- | :- | :- | :- |
@@ -236,6 +236,8 @@ This table lists each entry by the name `/plugin` shows:
 | `cc-plugin-sec-default` | Guards what your organization manages from the mods a user installs | [Where the guard loads](https://code.claude.com/docs/en/plugins/mods/admin.md#know-what-happens-by-default) | You can't. An administrator [sets the order](https://code.claude.com/docs/en/plugins/mods/admin.md#install-your-organizations-mods) in managed settings |
 | `cc-plugin-telemetry` | Sends the analytics records that Claude Code and its built-in mods log | Wherever Claude Code's own analytics are on | Disable it in `/plugin`, or turn analytics off, for example with [`DISABLE_TELEMETRY`](https://code.claude.com/docs/en/env-vars) |
 | `cc-plugin-you-should-know` | [You should know](https://code.claude.com/docs/en/interactive-mode.md#you-should-know-suggestions): a side agent shows a note above the prompt when it finds something you might have missed | Off until you [turn it on](https://code.claude.com/docs/en/interactive-mode.md#you-should-know-suggestions) | Disable it in `/plugin` |
+
+For a **Built-in** plugin that isn't in the table, [open its details in `/plugin`](https://code.claude.com/docs/en/plugins/install#manage-installed-plugins) to read what it does or to disable it.
 
 The settings and flags that stop installed mods, such as `disableAllHooks`, `--bare`, and `--safe-mode`, don't stop built-in mods.
 

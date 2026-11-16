@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/llm-gateway-protocol
-fetched_at: 2026-11-09T07:30:18.368220+00:00
+fetched_at: 2026-11-16T07:30:45.029764+00:00
 fetch_method: mintlify_md
 ---
 
@@ -46,7 +46,7 @@ Google Cloud's Agent Platform is Google Cloud's Claude endpoint, formerly Vertex
 
 | Format | Selected by | Endpoints | Forward unchanged |
 | :- | :- | :- | :- |
-| Anthropic Messages | `ANTHROPIC_BASE_URL` | `/v1/messages`, `/v1/messages/count_tokens` (optional) | `anthropic-beta` and `anthropic-version` request headers |
+| Anthropic Messages | `ANTHROPIC_BASE_URL` | `/v1/messages`, `/v1/messages/count_tokens` (optional) | `anthropic-beta` and `anthropic-version` request headers, plus `Authorization` when a [claude.ai login](#request-headers) authenticates the request to Anthropic |
 | Amazon Bedrock InvokeModel | `ANTHROPIC_BEDROCK_BASE_URL` with `CLAUDE_CODE_USE_BEDROCK=1` | `/model/{model}/invoke`, `/model/{model}/invoke-with-response-stream`, `/model/{model}/count-tokens` (optional) | `anthropic_beta` and `anthropic_version` request body fields |
 | Google Cloud's Agent Platform rawPredict | `ANTHROPIC_VERTEX_BASE_URL` with `CLAUDE_CODE_USE_VERTEX=1` | `:rawPredict`, `:streamRawPredict`, `count-tokens:rawPredict` (optional) | `anthropic-beta` and `anthropic-version` request headers, and the `anthropic_version` request body field |
 
@@ -116,16 +116,16 @@ For the features each connection supports and the telemetry it sends to Anthropi
 
 Two client-side settings change what Claude Code assumes for a model ID it doesn't recognize, whichever connection method the developer uses:
 
-* **Context window**: Claude Code assumes 200K, or 1M when the ID carries `[1m]`. To declare the real window, see [Correct the window for a gateway or custom model ID](https://code.claude.com/docs/en/model-config.md#correct-the-window-for-a-gateway-or-custom-model-id)
+* **Context window**: Claude Code assumes a 1M token context window by default. To declare the real window, see [Correct the window for a gateway or custom model ID](https://code.claude.com/docs/en/model-config.md#correct-the-window-for-a-gateway-or-custom-model-id)
 * **Capabilities**: to give a gateway alias the capabilities of the model behind it, map that model's Anthropic ID to your alias with a [`modelOverrides`](https://code.claude.com/docs/en/errors#unrecognized-model-id-on-a-request) entry in the settings you distribute. For where the `ANTHROPIC_DEFAULT_*_MODEL_SUPPORTED_CAPABILITIES` variables apply, see [feature pass-through](#feature-pass-through)
 
 ## Request headers
 
-Claude Code includes these headers on API requests. Header names are case-insensitive on the wire. Forward `anthropic-version` and `anthropic-beta` unchanged, plus `anthropic-workspace-id` when the upstream is the [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md); the rest the gateway may consume for routing, attribution, and tracing, and need not forward.
+Claude Code includes these headers on API requests. Header names are case-insensitive on the wire. Forward `anthropic-version` and `anthropic-beta` unchanged, plus `anthropic-workspace-id` when the upstream is the [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md). Also forward `Authorization` when your gateway authenticates to Anthropic with the developer's claude.ai login and not a key of its own. The rest the gateway may consume for routing, attribution, and tracing, and need not forward.
 
 | Header | Description |
 | :- | :- |
-| `Authorization`, `x-api-key` | The developer's gateway credential, in one or both headers depending on which [credential variable](https://code.claude.com/docs/en/llm-gateway-connect.md#set-the-credential-variable) they set |
+| `Authorization`, `x-api-key` | The developer's gateway credential, in one or both headers depending on which [credential variable](https://code.claude.com/docs/en/llm-gateway-connect.md#set-the-credential-variable) they set. With a claude.ai login and no gateway credential, `Authorization` carries the login's token |
 | `anthropic-version` | API version, currently `2023-06-01`. Amazon Bedrock- and Google Cloud's Agent Platform-format requests also carry the `anthropic_version` body field, whose value is the provider dialect string, not this header's value |
 | `anthropic-beta` | Comma-separated capability values for the request. Forward the header verbatim; don't allowlist individual values, because the set changes with Claude Code releases. When the developer authenticates with a claude.ai login, which is possible when `ANTHROPIC_BASE_URL` is set without a gateway credential variable, this header also carries an OAuth capability that the upstream requires, and stripping it fails those requests with `401` |
 | `x-claude-code-session-id` | A unique identifier for the current Claude Code session. Use it to aggregate all requests from one session without parsing request bodies |
@@ -229,7 +229,7 @@ A gateway that rewrites or redacts request bodies for content inspection breaks 
 | Beta [tool fields](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) | Tool-related beta headers pair with tool schema fields such as `strict` and `defer_loading` | `400` naming the unrecognized tool schema field when the body passes through without its header. For `defer_loading`, see [Retry without tool search](#retry-without-tool-search) | Forward both, or [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`](#disable-pre-release-capabilities) |
 | [Effort](https://platform.claude.com/docs/en/build-with-claude/effort) and [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) | The `output_config` body field carries effort, structured-output format, and task budget settings; each pairs with its own beta header | `400` naming `output_config`, often `Extra inputs are not permitted`, on Amazon Bedrock and Google Cloud's Agent Platform upstreams | Forward the field and its headers together, or have developers set [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`](#disable-pre-release-capabilities), which removes the format and task budget settings but not effort. To remove only the format, they can set [`CLAUDE_CODE_DISABLE_STRUCTURED_OUTPUTS=1`](https://code.claude.com/docs/en/env-vars) instead, which requires v2.1.288 or later |
 | Mid-conversation system messages | No beta header. Claude Code sends some reminder and attachment text as `role: "system"` entries in `messages` for Claude Opus 4.8, models released after it, and unrecognized model IDs | `400` such as `Unexpected role "system"` | Claude Code [retries without system messages](#automatic-retry-and-error-forwarding). To stop system messages on an alias of a model released before Claude Opus 4.8, add a [`modelOverrides` entry](#settings-for-unrecognized-model-ids) to the settings you distribute |
-| [Effort set per turn](https://code.claude.com/docs/en/prompt-caching.md#changing-effort-level) | On Opus 5.5, Sonnet 5.5, Haiku 5.5, and Fable 5.1, a beta header pairs with `output_config.effort` on `role: "system"` entries, either a system message or an entry with empty content | `400` with `messages.N: system content must contain at least one block` when your gateway strips the field from an empty entry | Forward both, or have developers set [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`](#disable-pre-release-capabilities) to stop the field and the empty entries |
+| [Effort set per turn](https://code.claude.com/docs/en/prompt-caching.md#changing-effort-level) | On Opus 5.5, Sonnet 5.5, Haiku 5.5, Fable 5.2, and Fable 5.1, a beta header pairs with `output_config.effort` on `role: "system"` entries. An entry is a system message or one with empty content | `400` with `messages.N: system content must contain at least one block` when your gateway strips the field from an empty entry | Forward both, or have developers set [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1`](#disable-pre-release-capabilities) to stop the field and the empty entries |
 | [Prompt caching](https://code.claude.com/docs/en/prompt-caching.md) | No beta pairing. Claude Code attaches `cache_control` markers to `system` blocks and to `messages` entries, including `role: "system"` entries appended mid-conversation | No error: the conversation bills as uncached input on every turn, visible as high `input_tokens` with little or no cache activity in `usage` | Forward `cache_control` unchanged wherever it appears, and don't convert block-form `system` or message content to plain strings |
 | [Token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting) | No beta pairing; uses the `count_tokens` endpoint | No error: Claude Code falls back to a character-based estimate, so `/context` shows approximate counts | Expose the endpoint for exact token counts |
 
@@ -302,6 +302,7 @@ The variable doesn't strip every `anthropic-beta` value. What it leaves in place
 * The top-level `output_config.effort` field. [Automatic retry and error forwarding](#automatic-retry-and-error-forwarding) covers an upstream that rejects it
 * The adaptive reasoning `thinking` field, which has no beta header
 * The `role: "system"` entries that carry [mid-conversation system messages](#feature-pass-through)
+* The `anthropic-beta` value and `safeguards` field for auto mode's [server-side classifier review](https://code.claude.com/docs/en/permission-modes.md#server-side-classifier-review), in sessions where that review stays on, such as when `/status` shows **Auto mode server** as `Enabled`. To turn the review off, set `CLAUDE_CODE_AUTO_MODE_SERVER=0` before starting the session. In the terminal, `/status` then shows **Auto mode server** as `Disabled`.
 * The OAuth `anthropic-beta` value that subscription authentication requires
 * Header values and body fields developers add themselves through [`ANTHROPIC_BETAS`](https://code.claude.com/docs/en/env-vars) or [`CLAUDE_CODE_EXTRA_BODY`](https://code.claude.com/docs/en/env-vars)
 

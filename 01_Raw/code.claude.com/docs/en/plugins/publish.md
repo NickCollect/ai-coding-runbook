@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/publish
-fetched_at: 2026-11-02T07:00:26.723432+00:00
+fetched_at: 2026-11-16T07:30:45.377876+00:00
 fetch_method: mintlify_md
 ---
 
@@ -65,7 +65,7 @@ In your shell, add a local marketplace that lists the plugin with `claude plugin
 
 **5. Fill in the metadata users see**
 
-Set `description`, `author`, `homepage`, and `repository` in `plugin.json`, and add a `README.md` at the plugin root. `homepage` must parse as a URL. The [manifest reference](https://code.claude.com/docs/en/plugins/manifest-reference.md#fields) lists every field.
+Set `description`, `author`, `homepage`, and `repository` in `plugin.json`, and add a `README.md` at the plugin root. `homepage` must parse as a URL. For what each field accepts, see the [manifest reference](https://code.claude.com/docs/en/plugins/manifest-reference.md#fields).
 
 **6. Run your eval suite**
 

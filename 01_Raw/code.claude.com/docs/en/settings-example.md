@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/settings-example
-fetched_at: 2026-11-02T07:00:26.904610+00:00
+fetched_at: 2026-11-16T07:30:45.582783+00:00
 fetch_method: mintlify_md
 ---
 
@@ -246,12 +246,12 @@ A `managed-settings.json` file that shows the shape of the managed keys, with on
 * [`allowManagedPermissionRulesOnly`](https://code.claude.com/docs/en/settings-reference#allowmanagedpermissionrulesonly) and [`allowManagedMcpServersOnly`](https://code.claude.com/docs/en/settings-reference#allowmanagedmcpserversonly) make the managed permission and MCP allowlists the only ones that apply
 * `allowedMcpServers` pins the MCP server by URL
 * `strictKnownMarketplaces` allows one plugin marketplace
-* `sandbox` sandboxes commands with a fixed network allowlist and no unsandboxed retry. Its `failIfUnavailable` key [stops Claude Code from starting where the sandbox can't run](https://code.claude.com/docs/en/sandboxing.md#enforce-sandboxing-with-managed-settings)
+* `sandbox` sandboxes commands with a fixed network allowlist and no unsandboxed retry. Its `failIfUnavailable` key [stops Claude Code from starting where the sandbox can't run](https://code.claude.com/docs/en/sandboxing.md#enforce-sandboxing-with-managed-settings), except in an Anthropic-hosted environment
 * `requiredMinimumVersion` sets a minimum Claude Code version
 * `cleanupPeriodDays` shortens retention of session transcripts and other local data to seven days
 * `companyAnnouncements` shows a message at startup
 
-Administrators deploy a file like this as `managed-settings.json`, or the same JSON through MDM or [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md). One deployed file applies to every machine or account it reaches. To give a group different values, deploy a different file or profile to that group, since [server-managed settings don't support per-group policy yet](https://code.claude.com/docs/en/server-managed-settings.md#current-limitations).
+Administrators deploy a file like this as `managed-settings.json`, or the same JSON through MDM or [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md). One deployed file applies to every machine or account it reaches. To give a group different values, deploy a different file or profile to that group. On an Enterprise plan, you can instead [give the group its own configuration](https://code.claude.com/docs/en/server-managed-settings.md#give-groups-different-settings) in server-managed settings.
 
 > [tab] Copyable settings file
 >

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/troubleshooting
-fetched_at: 2026-11-02T07:00:27.008561+00:00
+fetched_at: 2026-11-16T07:30:45.686251+00:00
 fetch_method: mintlify_md
 ---
 
@@ -158,7 +158,7 @@ If the Search tool, `@file` mentions, custom agents, or custom skills aren't fin
 > apk add ripgrep
 > ```
 >
-> `ripgrep` is in Alpine's community repository. If `apk` reports that the package is missing, see [Alpine Linux setup](https://code.claude.com/docs/en/setup.md#alpine-linux-and-musl-based-distributions).
+> `ripgrep` is in Alpine's community repository.
 
 > [tab] Arch
 >

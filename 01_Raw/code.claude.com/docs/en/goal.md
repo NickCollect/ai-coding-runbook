@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/goal
-fetched_at: 2026-11-02T07:00:26.227720+00:00
+fetched_at: 2026-11-16T07:30:44.928274+00:00
 fetch_method: mintlify_md
 ---
 
@@ -137,9 +137,10 @@ When a turn fails, Claude Code clears the goal if the error is one you have to f
 
 #### Errors you have to fix clear the goal
 
-If a turn fails on an error that won't clear until you fix it, Claude Code clears the goal and prints a warning naming the cause. The warning starts with `Goal cleared after an unrecoverable error` and ends with `Run /goal again to continue`. Fix the cause, then [set the goal again](#set-a-goal) with `/goal <condition>`. Four kinds of failure clear the goal:
+If a turn fails on an error that won't clear until you fix it, Claude Code clears the goal and prints a warning naming the cause. The warning starts with `Goal cleared after an unrecoverable error` and ends with `Run /goal again to continue`. Fix the cause, then [set the goal again](#set-a-goal) with `/goal <condition>`. Failures that clear the goal include:
 
 * An authentication failure, when Claude Code manages its own credentials. When a host manages them for you, such as the desktop app or a [cloud session](https://code.claude.com/docs/en/claude-code-on-the-web.md), Claude Code leaves the goal active because the host restores access on its own.
+* A disk too full for Claude Code to renew your claude.ai login, when Claude Code manages its own credentials. The warning shows `(disk full)`. [Free space on the disk holding the Claude Code config directory](https://code.claude.com/docs/en/errors.md#could-not-refresh-your-login-disk-full).
 * An exhausted credit balance
 * A context overflow that [auto-compaction](https://code.claude.com/docs/en/model-config.md#set-the-auto-compact-window) couldn't clear
 * A model that isn't available
@@ -184,7 +185,7 @@ The evaluator runs on whichever provider your session is configured for. It does
 
 ## Requirements
 
-Claude Code makes `/goal` available under the same [workspace trust rule as hooks in settings files](https://code.claude.com/docs/en/permissions.md#what-runs-before-you-trust-a-folder), because the evaluator is part of the hooks system. `/goal` is also unavailable when [`disableAllHooks`](https://code.claude.com/docs/en/hooks#disable-or-remove-hooks) is `true` after settings precedence applies, or when [`allowManagedHooksOnly`](https://code.claude.com/docs/en/settings-reference#allowmanagedhooksonly) is set in managed settings. In each case, the command tells you why instead of silently doing nothing.
+Claude Code makes `/goal` available under the same [workspace trust rule as hooks in settings files](https://code.claude.com/docs/en/permissions.md#what-runs-before-you-trust-a-folder), because the evaluator is part of the hooks system. `/goal` is also unavailable when [`disableAllHooks`](https://code.claude.com/docs/en/hooks#disable-or-remove-hooks) is `true` after settings precedence applies, or when [`allowManagedHooksOnly`](https://code.claude.com/docs/en/settings-reference#allowmanagedhooksonly) is set in managed settings.
 
 ## See also
 

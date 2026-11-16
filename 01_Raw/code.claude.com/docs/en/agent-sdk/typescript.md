@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/typescript
-fetched_at: 2026-11-09T07:30:17.574672+00:00
+fetched_at: 2026-11-16T07:30:44.208173+00:00
 fetch_method: mintlify_md
 ---
 
@@ -110,6 +110,13 @@ function startup(params?: {
 | `options` | [`Options`](#options) | Optional configuration object. Same as the `options` parameter to `query()` |
 | `initializeTimeoutMs` | `number` | Maximum time in milliseconds to wait for subprocess initialization. Defaults to `60000`. If initialization does not complete in time, the promise rejects with a timeout error |
 
+Slow [SessionStart](https://code.claude.com/docs/en/hooks.md#sessionstart) and [Setup](https://code.claude.com/docs/en/hooks.md#setup) [command hooks](https://code.claude.com/docs/en/hooks.md#command-hook-fields) get extra time only when `initializeTimeoutMs` is unset:
+
+* **If you leave it unset:** time these hooks spend running doesn't count toward the 60-second default, up to 10 minutes in total, so initialization can take 11 minutes at most.
+* **If you set a value, including `60000`:** that value is the limit, even while a hook is running.
+
+The extra time requires TypeScript Agent SDK v0.3.304 or later.
+
 #### Returns
 
 Returns a `Promise<`[`WarmQuery`](#warmquery)`>` that resolves once the subprocess has spawned and completed its initialize handshake.
@@ -134,9 +141,9 @@ for await (const message of warm.query("What files are here?")) {
 
 ### `prewarm()`
 
-*Alpha.* Starts a Claude Code process as a spare before you know which session it will serve, so you can bind it to a session later with [`claim()`](#spareprocess). Use it in an application that boots before the user picks a folder. Requires TypeScript Agent SDK v0.3.282 or later.
+*Alpha.* Starts a Claude Code process as a spare before you know which session it will serve, so you can bind it to a session later with [`claim()`](#spareprocess). Requires TypeScript Agent SDK v0.3.282 or later.
 
-`prewarm()` completes the same initialize handshake as [`startup()`](#startup), with the process waiting in `options.cwd` when you set it and otherwise in a private temporary directory under your Claude Code config directory. The session's working directory, its `SessionStart` hooks, its stdio MCP servers, and its CLAUDE.md and git context wait for the claim. A spare holds roughly 230 to 260 MB of memory while it waits. If your [`spawnClaudeCodeProcess`](#options) runs Claude Code on another machine or in a container, set `options.cwd` to a directory that exists there for the spare to wait in.
+Use `prewarm()` when your application boots before the user picks a folder.
 
 ```typescript theme={null}
 function prewarm(params?: {
@@ -145,7 +152,33 @@ function prewarm(params?: {
 }): Promise<SpareProcess>;
 ```
 
-`options` and `initializeTimeoutMs` mean the same as for `startup()`, except that `options.cwd` sets only the directory the spare waits in. The promise resolves with a [`SpareProcess`](#spareprocess) once the process has completed its initialize handshake. `prewarm()` throws if `options` sets `resume`, `continue`, or `forkSession`, because a spare has no session yet. Everything a claim can't set, such as `mcpServers`, `hooks`, `canUseTool`, `settingSources`, `systemPrompt`, and `plugins`, is fixed for the life of the spare, so keep one spare per distinct set of those options and prewarm again when they change.
+#### Parameters
+
+| Parameter | Type | Description |
+| :- | :- | :- |
+| `options` | [`Options`](#options) | Optional configuration object, the same type that `startup()` takes |
+| `initializeTimeoutMs` | `number` | Maximum time in milliseconds to wait for the spare's initialization. Defaults to `60000`. If initialization doesn't complete in time, the promise rejects with a timeout error |
+
+`prewarm()` counts time spent in [Setup](https://code.claude.com/docs/en/hooks.md#setup) hooks toward `initializeTimeoutMs`, even when you leave it unset. To give slow Setup hooks more time, set a longer value.
+
+#### Returns
+
+Returns a `Promise<`[`SpareProcess`](#spareprocess)`>` that resolves once the spare is ready to claim.
+
+The promise rejects if you ask for `resume`, `continue`, or `forkSession` in `options`, because a spare has no session yet.
+
+#### How a spare works
+
+* **Where a spare waits:** in a private temporary directory under your Claude Code config directory, or in `options.cwd` if you set it in `prewarm()`.
+* **If your [`spawnClaudeCodeProcess`](#options) runs Claude Code on another machine or in a container:** pass `prewarm()` an `options.cwd` that exists there, because the default temporary directory is created on your machine.
+* **Memory:** each spare uses roughly 230 to 260 MB while it waits.
+* **What doesn't happen until you call `claim()`:**
+  * Moving to the working directory you pass to `claim()`
+  * Running SessionStart hooks
+  * Starting stdio MCP servers
+  * Loading CLAUDE.md and git context
+* **What a claim can't change:** options such as `mcpServers`, `hooks`, `canUseTool`, `settingSources`, and `plugins` keep their values from `prewarm()`. [`SpareProcess`](#spareprocess) lists what a claim can set.
+* **If sessions need different values for these:** keep a separate spare for each set of values.
 
 #### Example
 
@@ -497,6 +530,17 @@ console.log(`Cleanup period: ${effective.cleanupPeriodDays} days`);
 console.log(`Set by: ${provenance.cleanupPeriodDays?.source}`);
 ```
 
+### `matchDeniedModels()`
+
+Reports which of `models` a [`deniedModels`](https://code.claude.com/docs/en/settings-reference#deniedmodels) list blocks. `denied` holds one Boolean per model, `true` when an entry blocks it. `warnings` flags ignored input and entries that block more or less than they appear to. A `false` doesn't mean the model is allowed, because Claude Code also checks aliases and model overrides. This function is alpha and requires Agent SDK v0.3.323 or later.
+
+```typescript theme={null}
+function matchDeniedModels(
+  models: readonly string[],
+  deniedModels: readonly string[] | undefined
+): Promise<{ denied: boolean[]; warnings: string[] }>;
+```
+
 ## Types
 
 ### `Options`
@@ -562,7 +606,7 @@ Configuration object for the `query()` function.
 | `skills` | `string[] \| 'all'` | `undefined` | Skills available to the session. Pass `'all'` to enable every discovered skill, or a list of skill names. Pass exact names only. On Agent SDK v0.3.221 or later, the SDK rejects malformed and wildcard-form names with an error before starting the Claude Code process. When set, the SDK adds the Skill tool to `allowedTools` automatically. If you also pass `tools`, include `'Skill'` in that list. See [Skills](https://code.claude.com/docs/en/agent-sdk/skills.md) |
 | `spawnClaudeCodeProcess` | `(options: SpawnOptions) => SpawnedProcess` | `undefined` | Custom function to spawn the Claude Code process. Use to run Claude Code in VMs, containers, or remote environments |
 | `stderr` | `(data: string) => void` | `undefined` | Callback for stderr output |
-| `strictMcpConfig` | `boolean` | `false` | Use only the servers passed in `mcpServers` and ignore project `.mcp.json`, user settings, plugin-provided MCP servers, and [claude.ai connectors](https://code.claude.com/docs/en/mcp.md#use-mcp-servers-from-claude-ai) |
+| `strictMcpConfig` | `boolean` | `false` | Use the servers passed in `mcpServers` and ignore project `.mcp.json`, user settings, plugin-provided MCP servers, and [claude.ai connectors](https://code.claude.com/docs/en/mcp.md#use-mcp-servers-from-claude-ai) |
 | `systemPrompt` | `string \| string[] \| { type: 'custom'; prompt: string \| string[]; snapshot?: boolean } \| { type: 'preset'; preset: 'claude_code'; append?: string; excludeDynamicSections?: boolean; snapshot?: boolean }` | `undefined` (minimal prompt) | System prompt configuration. Pass a string for a custom prompt, or `{ type: 'preset', preset: 'claude_code' }` to use Claude Code's system prompt. Pass an array of strings with the exported `SYSTEM_PROMPT_DYNAMIC_BOUNDARY` constant between the static and per-request parts to [cache the static part of a custom prompt](https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts.md#cache-the-static-part-of-a-custom-prompt). When using the preset object form, add `append` to extend it with additional instructions, and set `excludeDynamicSections: true` to move per-session context into the first user message for [better prompt-cache reuse across machines](https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts.md#improve-prompt-caching-across-users-and-machines). Set `snapshot: false` to rebuild the prompt on every request instead of [reusing the prompt the session recorded on its first request](https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts.md#change-the-prompt-of-an-existing-session). To set `snapshot` on a custom prompt, pass the `{ type: 'custom', prompt }` form. The `{ type: 'custom' }` form and the `snapshot` field require TypeScript Agent SDK v0.3.257 or later |
 | `taskBudget` | `{ total: number }` | `undefined` | *Alpha.* API-side task budget in tokens. When set, the model is told its remaining token budget so it can pace tool use and wrap up before the limit |
 | `thinking` | [`ThinkingConfig`](#thinkingconfig) | `{ type: 'adaptive' }` for supported models | Controls Claude's thinking/reasoning behavior. See [`ThinkingConfig`](#thinkingconfig) for options |
@@ -670,7 +714,7 @@ interface Query extends AsyncGenerator<SDKMessage, void> {
 | `rewindFiles(userMessageId, options?)` | Restores files to their state at the specified user message. Pass `{ dryRun: true }` to preview changes. Requires `enableFileCheckpointing: true`. See [File checkpointing](https://code.claude.com/docs/en/agent-sdk/file-checkpointing.md) |
 | `setPermissionMode()` | Changes the permission mode (only available in streaming input mode) |
 | `setModel()` | Changes the model (only available in streaming input mode). Passing `undefined` or the string `"default"` resets to [Claude Code's default model](https://code.claude.com/docs/en/model-config.md). A session in `auto` mode [changes to `default` mode](https://code.claude.com/docs/en/agent-sdk/permissions#auto-mode-auto) if the new model doesn't support auto mode |
-| `setMaxThinkingTokens()` | *Deprecated:* Use the `thinking` option instead. Changes the maximum thinking tokens. Passing `null` resets thinking to the session default: a mid-session override is cleared, and thinking stays off for sessions that have it disabled |
+| `setMaxThinkingTokens()` | *Deprecated:* Use the `thinking` option instead. Changes the maximum thinking tokens. Pass `null` to undo earlier calls and restore the `thinking` or `maxThinkingTokens` option the session started with |
 | `applyFlagSettings(settings)` | Merges settings into the session's flag settings layer at runtime (only available in streaming input mode). See [`applyFlagSettings()`](#applyflagsettings) |
 | `updateSettings(source, settings)` | Writes one allowlisted key to the project's local settings file or your user settings file, so the value persists for later sessions. See [`updateSettings()`](#updatesettings). Requires TypeScript SDK v0.3.257 or later, which bundles Claude Code v2.1.257 |
 | `initializationResult()` | Returns the full initialization result including supported commands, models, account info, and output style configuration |
@@ -1258,7 +1302,7 @@ type AgentDefinition = {
 | `tools` | No | Array of allowed tool names. If omitted, inherits every [tool available to subagents](https://code.claude.com/docs/en/sub-agents.md#available-tools). To preload Skills into the agent's context, use the `skills` field rather than listing `'Skill'` here |
 | `disallowedTools` | No | Array of tool names to explicitly disallow for this agent. MCP server-level patterns are also accepted: `mcp__server` or `mcp__server__*` removes every tool from that server, and `mcp__*` removes every MCP tool from any server |
 | `prompt` | Yes | The agent's system prompt |
-| `model` | No | Model override for this agent. Accepts an alias such as `'fable'`, `'opus'`, `'sonnet'`, `'haiku'`, `'inherit'`, or a full model ID. `'inherit'` uses the main model. When you omit it, Claude Code picks the model in the [subagent model order](https://code.claude.com/docs/en/sub-agents.md#choose-a-model) |
+| `model` | No | Model override for this agent. Accepts an alias such as `'fable'`, `'opus'`, `'sonnet'`, `'haiku'`, `'inherit'`, or a full model ID. `'inherit'` uses the model of the agent that spawned this one. When you omit `model`, Claude Code picks the model in the [subagent model order](https://code.claude.com/docs/en/sub-agents.md#choose-a-model) |
 | `mcpServers` | No | MCP server specifications for this agent |
 | `skills` | No | Array of skill names to preload into the agent context |
 | `initialPrompt` | No | Auto-submitted as the first user turn when this agent runs as the main thread agent |
@@ -1386,7 +1430,7 @@ type CanUseTool = (
 | Option | Type | Description |
 | :- | :- | :- |
 | `signal` | `AbortSignal` | Signaled if the operation should be aborted |
-| `suggestions` | [`PermissionUpdate`](#permissionupdate)`[]` | Suggested permission updates so the user is not prompted again for this tool. Bash prompts include a suggestion with the `localSettings` [destination](#permissionupdatedestination), so returning it in `updatedPermissions` writes the rule to `.claude/settings.local.json` and persists across sessions. |
+| `suggestions` | [`PermissionUpdate`](#permissionupdate)`[]` | Suggested permission updates so the user is not prompted again for this tool. Bash prompts can include a suggestion with the `localSettings` [destination](#permissionupdatedestination), so returning it in `updatedPermissions` writes the rule to `.claude/settings.local.json` and persists across sessions. |
 | `blockedPath` | `string` | The file path that triggered the permission request, if applicable |
 | `mcpServer` | `{ name: string; source: string }` | For an `mcp__*` tool, the MCP server that serves it and where that server's definition came from, with the fields of [`McpServerProvenance`](#mcpserverprovenance). Absent for other tools. Requires Agent SDK v0.3.274 or later |
 | `decisionReason` | `string` | Explains why this permission request was triggered |
@@ -1569,7 +1613,7 @@ type McpServerToolPolicy = {
 Choose `always_ask` to approve each call yourself, or `always_deny` to block the tool outright:
 
 * **`always_ask`**: each call to the tool [needs approval](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated), even if an `allowedTools` entry or allow rule covers it. The call goes to your `canUseTool` callback or [`permissionPromptToolName`](#options) tool, unless it's settled first. A [mod](https://code.claude.com/docs/en/plugins/mods/overview.md) in a plugin you load [can approve it first](https://code.claude.com/docs/en/permissions.md#precedence-among-rules-hooks-and-mods). Otherwise, in `dontAsk` mode it's denied, and in [`auto`, `plan`, and `bypassPermissions` mode](#permission-modes-that-can-approve-an-always_ask-call) it can be approved before it reaches your callback
-* **`always_deny`**: a call to the tool [is denied](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated) in every permission mode, including `bypassPermissions`, but a mod in a plugin you load [can still approve it](https://code.claude.com/docs/en/permissions.md#precedence-among-rules-hooks-and-mods)
+* **`always_deny`**: Claude Code removes the tool from Claude's context in every permission mode, including `bypassPermissions`. Removal requires Claude Code v2.1.324 or later
 
 If you pass neither `canUseTool` nor `permissionPromptToolName`, or set [`permissionPrompts`](#options) to `'none'`, an `always_ask` call that isn't settled first is denied unless a [`PermissionRequest` hook](https://code.claude.com/docs/en/hooks#permissionrequest) allows it.
 
@@ -1697,6 +1741,7 @@ type SDKAssistantMessage = {
   user_message_uuid?: string;
   user_message_uuids?: string[];
   resume_reason?: string;
+  supersedes?: UUID[];
 };
 ```
 
@@ -1710,6 +1755,8 @@ The `message` field is a [`BetaMessage`](https://platform.claude.com/docs/en/api
 * `'cloud_credential_error'`: Claude Code couldn't obtain usable AWS or Google Cloud credentials on the machine it runs on, so no request reached the cloud provider. The usual cause is a cloud sign-in that expired or was never completed on that machine, though a briefly unreachable credential service reports the same value. See [Could not load AWS or Google Cloud credentials](https://code.claude.com/docs/en/errors.md#could-not-load-aws-or-google-cloud-credentials). Requires TypeScript Agent SDK v0.3.267 or later, which bundles Claude Code v2.1.267
 
 `aborted` is `true` when an interrupt or abort truncated the assistant message before the stream completed: the message has no `stop_reason` and the content may end mid-word. The field is absent on normally completed messages. It requires Agent SDK v0.3.214 or later.
+
+`supersedes` lists the UUIDs of earlier messages that this message replaces. Remove those messages from your display when this one arrives.
 
 `agent_id` identifies the subagent that produced the message and is absent on main-thread messages. The value equals the `task_id` on that subagent's [`task_started`](#sdktaskstartedmessage) and other task events, and is unchanged when the subagent is [resumed](https://code.claude.com/docs/en/agent-sdk/subagents.md#resume-subagents). On messages from a [nested subagent](https://code.claude.com/docs/en/sub-agents.md#let-subagents-spawn-their-own-subagents), it names the nested subagent, not the subagent that spawned it. The field requires Agent SDK v0.3.292 or later.
 
@@ -1929,9 +1976,9 @@ Use the reason code to explain why fast mode is off in your own UI instead of re
 | `extra_usage_disabled` | Usage credits are turned off for the account |
 | `network_error` | The [availability check](https://code.claude.com/docs/en/fast-mode.md#use-fast-mode-behind-proxies-and-llm-gateways) couldn't reach `api.anthropic.com` |
 | `unknown` | Claude Code couldn't determine availability |
-| `not_first_party` | The session uses a provider other than the Anthropic API |
-| `disabled_by_env` | [`CLAUDE_CODE_DISABLE_FAST_MODE`](https://code.claude.com/docs/en/env-vars) is set |
-| `model_not_allowed` | The fast mode Opus model isn't in the organization's [`availableModels`](https://code.claude.com/docs/en/model-config#restrict-model-selection) allowlist |
+| `not_first_party` | The session uses a provider that doesn't offer fast mode |
+| `disabled_by_env` | [`CLAUDE_CODE_DISABLE_FAST_MODE`](https://code.claude.com/docs/en/env-vars) is set, or the model's region on [Google Cloud's Agent Platform](https://code.claude.com/docs/en/fast-mode.md#use-fast-mode-on-agent-platform) doesn't offer fast mode |
+| `model_not_allowed` | The fast mode model isn't in the organization's [`availableModels`](https://code.claude.com/docs/en/model-config#restrict-model-selection) allowlist, or the provider refused fast mode for the session's model |
 | `sdk_opt_in_required` | The session hasn't opted in to fast mode: pass `fastMode: true` in the [`settings`](#options) option or through [`applyFlagSettings()`](#applyflagsettings) |
 | `pending` | The availability check hasn't completed yet |
 
@@ -2013,7 +2060,7 @@ What `0` and an absent field tell you:
 
 #### `startup_failure_reason`
 
-Why Claude Code refused to start, so your application can offer the fix instead of a retry. Claude Code sets it on the `error_during_execution` result it writes before exiting on a known startup failure. That result carries zeroed totals, and its `errors` array carries the same text as stderr. The field is absent on every other result. Requires Agent SDK v0.3.274 or later.
+Why Claude Code refused to start, so your application can offer the fix instead of a retry. Claude Code sets it on the `error_during_execution` result it writes before exiting on a known startup failure. That result carries zeroed totals, and its `errors` array carries the failure message. The field is absent on every other result. Requires Agent SDK v0.3.274 or later.
 
 Set `CLAUDE_CODE_STARTUP_FAILURE_RESULTS` to `1` in [`env`](#options) to receive this result for every `SDKStartupFailureReason` value. Without that variable, Claude Code writes the result only for these failures, and the rest end with stderr output, a non-zero exit, and no result message:
 
@@ -3395,11 +3442,13 @@ type MonitorInput = {
 
 Runs a background source and delivers each event to Claude so it can react without polling: `command` runs a script and emits one event per stdout line, and `ws` opens a WebSocket and emits one event per text frame. Provide exactly one of `command` or `ws`. The `ws` source requires Claude Code v2.1.195 or later.
 
-`timeout_ms` is the watch's deadline in milliseconds. It defaults to 300000 and accepts values up to 3600000. The effective deadline is at most 1800000, which is 30 minutes, so a larger accepted value is shortened to that. At the deadline the watch ends and Claude receives one notice so it can start a new watch if it still needs one.
+`timeout_ms` is the watch's deadline in milliseconds:
 
-The exported type marks `timeout_ms` as required because the schema fills in the default; a call that omits it validates.
+* **Default and limits**: it defaults to 300000 and accepts values up to 3600000. The effective deadline is at most 1800000, which is 30 minutes, so a larger accepted value is shortened to that
+* **At the deadline**: the watch ends and Claude receives one notice so it can start a new watch if it still needs one
+* **Required in the type**: the exported type marks `timeout_ms` as required because the schema fills in the default; a call that omits it validates
 
-When Monitor runs a command, it follows the same permission rules as Bash; a WebSocket watch prompts for approval separately. See the [Monitor tool reference](https://code.claude.com/docs/en/tools-reference.md#monitor-tool) for behavior and provider availability.
+When Monitor runs a command, it follows the same permission rules as Bash. See the [Monitor tool reference](https://code.claude.com/docs/en/tools-reference.md#monitor-tool) for WebSocket permissions, behavior, and provider availability.
 
 ### TaskOutput
 
@@ -5436,8 +5485,10 @@ type ThinkingDisplay = "summarized" | "omitted";
 type ThinkingConfig =
   | { type: "adaptive"; display?: ThinkingDisplay } // The model determines when and how much to reason (Opus 4.6+)
   | { type: "enabled"; budgetTokens?: number; display?: ThinkingDisplay } // Fixed thinking token budget
-  | { type: "disabled" }; // No extended thinking
+  | { type: "disabled" }; // Turn thinking off where the model and provider allow it
 ```
+
+For `disabled`, see [where you can't turn thinking off](https://code.claude.com/docs/en/model-config.md#where-you-cant-turn-thinking-off).
 
 The optional `display` field controls whether thinking text is returned `"summarized"` or `"omitted"`. On Claude Opus 4.7 and later, the API default is `"omitted"`, so set `"summarized"` to receive thinking content in `thinking` blocks. On providers such as Amazon Bedrock and Google Cloud's Agent Platform, Claude Code doesn't pass `display` for earlier models it recognizes. Those are Opus 4.6, Sonnet 4.6, Haiku 4.5, and earlier models, which use their default.
 
@@ -5690,6 +5741,8 @@ type SDKToolProgressMessage = {
 
 While a tool call runs in the main conversation, Claude Code emits a `tool_progress` message every 30 seconds with `heartbeat: true`. Each heartbeat carries the tool name and elapsed seconds, so you can distinguish a long-running call from a stalled session. Claude Code doesn't emit heartbeats for tool calls inside a subagent. The `heartbeat` field requires Agent SDK v0.3.214 or later. Before v2.1.257, Claude Code didn't emit heartbeats for a foreground Agent tool call either.
 
+On Agent SDK v0.3.323 or later, a heartbeat whose `tool_use_id` starts with `hook-` comes from a long-running hook, not a tool call. Its `tool_name` is the hook event name, such as `PreToolUse`.
+
 On `tool_progress` messages for the Agent tool other than heartbeats, `subagent_type` names the running subagent type, such as `general-purpose`. `subagent_retry` is present while that subagent waits out an API error backoff, such as a rate limit or overload, with one message per retry attempt. Both fields require Agent SDK v0.3.214 or later.
 
 To render a retry indicator from `subagent_retry`:
@@ -5715,7 +5768,7 @@ type SDKAuthStatusMessage = {
 
 ### `SDKTaskStartedMessage`
 
-Emitted when a task begins. The `task_type` field is `"local_bash"` for Bash commands and [Monitor](#monitor) watches, `"local_agent"` for subagents, or `"remote_agent"`.
+Emitted when a task begins. `task_type` names the kind of task, such as `"local_bash"` for Bash commands and [Monitor](#monitor) watches, `"local_agent"` for subagents, `"mcp_task"` for [background MCP tool calls](https://code.claude.com/docs/en/mcp.md#automatic-backgrounding-of-long-tool-calls), or `"remote_agent"`.
 
 ```typescript theme={null}
 type SDKTaskStartedMessage = {
@@ -5924,6 +5977,7 @@ type SDKRateLimitEvent = {
     errorCode?: "credits_required";
     canUserPurchaseCredits?: boolean;
     hasChargeableSavedPaymentMethod?: boolean;
+    overageEnabled?: boolean;
   };
   uuid: UUID;
   session_id: string;
@@ -5931,6 +5985,8 @@ type SDKRateLimitEvent = {
 ```
 
 When `errorCode` is `"credits_required"`, the rejection is from a claude.ai subscription whose included usage is exhausted, and the session cannot continue until the user buys usage credits. `canUserPurchaseCredits` indicates whether the authenticated user can buy credits for the account, and `hasChargeableSavedPaymentMethod` indicates whether a saved payment method is on file. All three fields are absent on rate-limit events that are not credits-required rejections. Requires Claude Code v2.1.181 or later.
+
+On a warning about a plan usage limit, where `status` is `"allowed_warning"`, `overageEnabled` reports whether the account has [usage credits](https://code.claude.com/docs/en/costs.md#add-usage-credits-to-your-subscription) turned on. Requires Claude Code v2.1.295 or later.
 
 ### `SDKLocalCommandOutputMessage`
 
@@ -6055,7 +6111,7 @@ type SandboxSettings = {
 | :- | :- | :- | :- |
 | `enabled` | `boolean` | `false` | Enable sandbox mode for command execution |
 | `failIfUnavailable` | `boolean` | `true` | Stop at startup if `enabled` is `true` but the sandbox can't start. Set `false` to fall back to unsandboxed execution with a warning on stderr |
-| `autoAllowBashIfSandboxed` | `boolean` | `true` | Auto-approve Bash commands when sandbox is enabled |
+| [`autoAllowBashIfSandboxed`](https://code.claude.com/docs/en/settings-reference#sandbox-autoallowbashifsandboxed) | `boolean` | `false` | Auto-approve Bash commands when sandbox is enabled. The `false` default requires Agent SDK v0.3.324 or later |
 | `excludedCommands` | `string[]` | `[]` | Commands that bypass sandbox restrictions, such as `['docker *']`. These run unsandboxed automatically without model involvement; [`sandbox.excludedCommands`](https://code.claude.com/docs/en/settings-reference#sandbox-excludedcommands) covers when an entry applies |
 | `allowUnsandboxedCommands` | `boolean` | `true` | Allow the model to request running commands outside the sandbox. When `true`, the model can set `dangerouslyDisableSandbox` in tool input, which falls back to the [permissions system](#permissions-fallback-for-unsandboxed-commands) |
 | `network` | [`SandboxNetworkConfig`](#sandboxnetworkconfig) | `undefined` | Network-specific sandbox configuration |

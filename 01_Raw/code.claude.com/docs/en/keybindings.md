@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/keybindings
-fetched_at: 2026-10-26T05:40:02.799051+00:00
+fetched_at: 2026-11-16T07:30:44.989982+00:00
 fetch_method: mintlify_md
 ---
 
@@ -311,7 +311,7 @@ Before v2.1.283, this list ignored `Select` bindings and had its own actions: `m
 
 ### Diff actions
 
-These actions reach only Claude Code's earlier diff viewer, which `/diff` opens outside [fullscreen rendering](https://code.claude.com/docs/en/fullscreen.md) after you disable the [`cc-plugin-diff` mod](https://code.claude.com/docs/en/plugins/mods/overview#mods-built-into-claude-code) in `/plugin`. While that mod is enabled, `/diff` opens the [diff dialog](https://code.claude.com/docs/en/interactive-mode.md#diff-dialog) instead. A `keybindings.json` that names these actions loads without errors either way.
+These actions reach only Claude Code's earlier diff viewer, which `/diff` opens outside [fullscreen rendering](https://code.claude.com/docs/en/fullscreen.md) after you disable the [`cc-plugin-diff` mod](https://code.claude.com/docs/en/plugins/mods/overview#mods-built-into-claude-code) in `/plugin`. While that mod is enabled, `/diff` opens the [diff dialog](https://code.claude.com/docs/en/interactive-mode.md#diff-dialog) instead.
 
 Actions available in the `DiffDialog` context:
 
@@ -587,7 +587,7 @@ This also works for chord bindings. Unbinding every chord that shares a prefix f
 
 Claude Code binds these default chords on the `ctrl+x` prefix, by context:
 
-* `Chat`: `ctrl+x ctrl+k`, `ctrl+x ctrl+e`, `ctrl+x enter`, `ctrl+x ctrl+a`, `ctrl+x ctrl+s`, and `ctrl+x tab`
+* `Chat`: `ctrl+x ctrl+k`, `ctrl+x ctrl+e`, `ctrl+x enter`, `ctrl+x ctrl+a`, `ctrl+x ctrl+s`, `ctrl+x tab`, `ctrl+x ctrl+=`, `ctrl+x ctrl+-`, `ctrl+x ctrl+_`, `ctrl+x =`, and `ctrl+x -`
 * `Task`: `ctrl+x ctrl+b`
 * `DiffPanel`: `ctrl+x b`
 * `Pane`: `ctrl+x left`, `ctrl+x right`, `ctrl+x up`, `ctrl+x down`, and `ctrl+x x`
@@ -637,6 +637,11 @@ To reclaim `ctrl+x` itself as a single-key binding, unbind all of them:
         "ctrl+x ctrl+a": null,
         "ctrl+x ctrl+s": null,
         "ctrl+x tab": null,
+        "ctrl+x ctrl+=": null,
+        "ctrl+x ctrl+-": null,
+        "ctrl+x ctrl+_": null,
+        "ctrl+x =": null,
+        "ctrl+x -": null,
         "ctrl+x": "chat:newline"
       }
     }
@@ -722,7 +727,7 @@ After you save the file, press `Ctrl+Q` in the `Other` row of a question where y
 Claude Code validates your keybindings and writes a warning to the debug log for:
 
 * Parse errors (invalid JSON or structure)
-* Misspelled modifiers, such as `ctl+k`. Claude Code drops the part it doesn't recognize and applies the binding to the keystroke that remains, `k` in this example.
+* Misspelled modifiers, such as `ctl+k`. Claude Code ignores the whole binding. Correct the modifier, to `ctrl+k` in this example.
 * A space next to `+` in a key string, such as `ctrl+ k`. Claude Code reads the string as a [chord](#chords) of `ctrl+` followed by `k`. No keypress matches `ctrl+` on its own, so the binding never fires. Remove the space.
 * Invalid context names
 * Invalid action values, such as an action that isn't a string or `null`

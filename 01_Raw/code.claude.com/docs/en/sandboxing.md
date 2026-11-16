@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/sandboxing
-fetched_at: 2026-11-09T07:30:18.889497+00:00
+fetched_at: 2026-11-16T07:30:45.476939+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ fetch_method: mintlify_md
 
 > Restrict the files and network hosts Claude Code's shell commands can reach with the built-in sandbox. Turn it on, set the boundary, and fix what it breaks.
 
-The Bash sandbox is a boundary that the operating system enforces around the shell commands Claude runs on your machine. You set which files and network domains those commands can reach, and the limits apply to Bash, PowerShell, and Monitor commands and the processes they start. Because the operating system applies the limits while a command runs, Claude Code can [run sandboxed commands without asking you](#sandbox-modes) to approve each one.
+The Bash sandbox is a boundary that the operating system enforces around the shell commands Claude runs on your machine. You set which files and network domains those commands can reach, and the limits apply to Bash, PowerShell, and Monitor commands and the processes they start. Sandboxed commands still go through the regular permission flow unless you choose [auto-allow mode](#sandbox-modes), which can run them without asking you.
 
 The sandbox covers shell commands only. Claude's file tools, MCP servers, and hooks [run outside it](#what-runs-outside-the-sandbox).
 
@@ -282,6 +282,8 @@ By default, sandboxed commands can write to the current working directory, the p
 
 These paths are enforced at the OS level, so all commands running inside the sandbox, including their child processes, respect them. This is the recommended approach when a tool needs write access to a specific location, rather than excluding the tool from the sandbox entirely with `excludedCommands`.
 
+On Linux and WSL2, an entry for a path that doesn't exist yet has no effect, so create the path first.
+
 When you define the same filesystem array in multiple [settings scopes](https://code.claude.com/docs/en/settings.md#settings-precedence), Claude Code merges them, combining the paths rather than replacing one scope's array with another's. Claude Code leaves an entry out of the merge when a lock under [Keep developers from widening the policy](#keep-developers-from-widening-the-policy) covers it.
 
 If you exclude a source with [`--setting-sources`](https://code.claude.com/docs/en/cli-reference) on the CLI or [`settingSources`](https://code.claude.com/docs/en/agent-sdk/claude-code-features#control-filesystem-settings-with-settingsources) in the Agent SDK, Claude Code ignores its `sandbox.filesystem` entries, its `Edit` permission rules, and its `Read` deny rules when building the sandbox configuration. Requires Claude Code v2.1.246 or later.
@@ -382,9 +384,9 @@ The sandbox has two independent layers: [filesystem isolation](#filesystem-isola
 
 Because turning filesystem isolation off widens what sandboxed commands can do, Claude Code honors `filesystem.disabled` from these settings sources only:
 
-* User settings, managed settings, and the `--settings` CLI flag can set it. Project settings in `.claude/settings.json` and `.claude/settings.local.json` can't, so a checked-out project can't switch filesystem isolation off.
-* When managed settings configure `sandbox.filesystem` at all, or list any `sandbox.credentials.files` entry with `"mode": "deny"`, only managed settings can set the key. This keeps developers from turning filesystem isolation off in such a deployment; to turn it off for everyone, set `"disabled": true` in managed settings.
-* When [`CLAUDE_CODE_SUBPROCESS_ENV_SCRUB`](https://code.claude.com/docs/en/env-vars) is set, Claude Code ignores `filesystem.disabled` from every source, including managed settings, and keeps filesystem isolation on.
+* User settings, managed settings, and the `--settings` CLI flag can set it. Project settings in `.claude/settings.json` and `.claude/settings.local.json` can't set it.
+* When managed settings configure `sandbox.filesystem` at all, or list any `sandbox.credentials.files` entry with `"mode": "deny"`, only managed settings can set the key. To turn filesystem isolation off for everyone, set `"disabled": true` in managed settings.
+* When [`CLAUDE_CODE_SUBPROCESS_ENV_SCRUB`](https://code.claude.com/docs/en/env-vars) is set, Claude Code ignores `filesystem.disabled` from every source, including managed settings.
 
 A [valid](https://code.claude.com/docs/en/settings-reference.md#invalid-credential-entries-in-managed-settings) `mask` entry doesn't lock the key, even when Claude Code [falls back to `deny`](#mask-credential-files) for it at startup. List a path that can't be masked, such as a credential directory, as an explicit `deny` entry in managed settings, which locks the key.
 
@@ -398,12 +400,9 @@ Setting `filesystem.disabled` lifts the protections the filesystem layer itself 
 | `credentials.envVars` `deny` and `mask` entries | Enforced. Environment variable scrubbing is independent of the filesystem layer |
 | [`credentials.files` `mask` entries](#mask-credential-files) applied as masks | Enforced: masking is independent of the filesystem layer. An entry that [fell back to `deny`](#mask-credential-files) is not enforced, like any `deny` entry |
 
-Two other things change:
+Sandboxed commands also inherit your shell's `$TMPDIR` instead of the per-user temp directory, because every temp directory is writable and Claude Code no longer redirects commands to the per-user one.
 
-* Sandboxed commands inherit your shell's `$TMPDIR` instead of the per-user temp directory, because every temp directory is writable and Claude Code no longer redirects commands to the per-user one.
-
-  On Linux the variable is often unset in the parent shell. The Bash tool guidance tells Claude to create scratch directories with `mktemp -d` instead of relying on `$TMPDIR`.
-* [`autoAllowBashIfSandboxed`](https://code.claude.com/docs/en/settings-reference#sandbox-autoallowbashifsandboxed) still defaults to `true`, so sandboxed commands keep running without prompts. Set it to `false` to prompt for sandboxed commands.
+On Linux the variable is often unset in the parent shell. The Bash tool guidance tells Claude to create scratch directories with `mktemp -d` instead of relying on `$TMPDIR`.
 
 ### Protect credentials
 
@@ -745,7 +744,7 @@ This configuration sandboxes the commands Claude runs. A developer can still typ
 
 The sandbox doesn't run on native Windows, so with `failIfUnavailable` set, Claude Code exits at startup on those machines. If your fleet includes Windows hosts, you can:
 
-* **Deliver the configuration by operating system**: deploy it through your MDM or as a [managed settings file](https://code.claude.com/docs/en/managed-settings.md#delivery-mechanisms) on macOS and Linux machines only. [Server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md#current-limitations) apply to all users in the organization
+* **Deliver the configuration by operating system**: deploy it through your MDM or as a [managed settings file](https://code.claude.com/docs/en/managed-settings.md#delivery-mechanisms) on macOS and Linux machines only. [Server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md#give-groups-different-settings) follow the member, not the device.
 * **Move Windows users into a supported environment**: have them run Claude Code inside WSL2 or a container
 
 ### Keep developers from widening the policy
@@ -908,6 +907,10 @@ When Claude pipes text to one of these tools, adding the tool to [`excludedComma
 * Outside the directories the sandbox lets commands write to at all
 
 After the failure, Claude may [offer to rerun the command outside the sandbox](#the-unsandboxed-retry-escape-hatch). Approve that retry, or run the git command yourself in another terminal. If you've set `allowUnsandboxedCommands` to `false`, Claude can't offer the retry, so run the command yourself.
+
+### A git command fails with `Unable to create '…/index.lock'`
+
+If you started Claude Code in a repository's subdirectory, this error can mean `.git` is outside [what sandboxed commands can write to](#filesystem-isolation). Start Claude Code from the repository root instead, or from the worktree's root in a [linked worktree](https://code.claude.com/docs/en/worktrees.md).
 
 ### A folder named `objects` or `refs` disappears after a command
 
@@ -1095,7 +1098,7 @@ If no writable project folder is available to you, turn the sandbox on from your
 }
 ```
 
-This turns on [auto-allow mode](#sandbox-modes). For regular permissions mode, also set [`sandbox.autoAllowBashIfSandboxed`](https://code.claude.com/docs/en/settings-reference#sandbox-autoallowbashifsandboxed) to `false`. The change takes effect in your running session at the next shell command Claude runs, and the **Mode** tab of `/sandbox` then marks the mode in effect.
+This turns on [regular permissions mode](#sandbox-modes). For auto-allow mode, also set [`sandbox.autoAllowBashIfSandboxed`](https://code.claude.com/docs/en/settings-reference#sandbox-autoallowbashifsandboxed) to `true`. The change takes effect in your running session at the next shell command Claude runs, and the **Mode** tab of `/sandbox` then marks the mode in effect.
 
 ## Limitations
 

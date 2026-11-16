@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts
-fetched_at: 2026-11-02T07:00:25.494121+00:00
+fetched_at: 2026-11-16T07:30:44.024991+00:00
 fetch_method: mintlify_md
 ---
 
@@ -502,7 +502,7 @@ The four customization methods differ in where they live, how they're shared, an
 | **Persistence** | Per-project file | Saved as files | Session only | Session only |
 | **Reusability** | Per-project | Across projects | Code duplication | Code duplication |
 | **Management** | On filesystem | CLI + files | In code | In code |
-| **Default tools** | Preserved | Preserved | Preserved | Lost (unless included) |
+| **Tool guidance** | Preserved | Preserved | Preserved | Lost (unless included) |
 | **Built-in safety** | Maintained | Maintained | Maintained | Must be added |
 | **Customization level** | Additions only | Additions; can omit coding instructions | Additions only | Complete control |
 | **Version control** | With project | Yes | With code | With code |

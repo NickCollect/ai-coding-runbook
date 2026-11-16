@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway
-fetched_at: 2026-11-09T07:30:17.734314+00:00
+fetched_at: 2026-11-16T07:30:44.348464+00:00
 fetch_method: mintlify_md
 ---
 
@@ -80,8 +80,10 @@ Have these in place before you start:
 | PostgreSQL 11 or later | Backs the device sign-in flow and rate-limit counters. A managed PostgreSQL service works, including the smallest tier; see [which databases are supported](https://code.claude.com/docs/en/claude-apps-gateway-deploy.md#postgres). With [spend limits](https://code.claude.com/docs/en/claude-apps-gateway-spend-limits.md), it also holds durable spend, audit, and identity tables that should be backed up. TLS via `?sslmode=require` is recommended. PostgreSQL 11, 12, and 13 require Claude Code v2.1.290 or later on the gateway server. The PostgreSQL project no longer maintains those versions, so use a newer one where you can. |
 | Model upstream | Amazon Bedrock credentials, Claude Platform on AWS credentials, Google Cloud credentials, a Microsoft Foundry resource, or an Anthropic API key. Multiple upstreams are supported with failover. |
 | HTTPS | The gateway must be reachable over `https://` from developer laptops and from any browser used for sign-in; the gateway serves the device-verification page on the same listener. Either provide a TLS cert via `listen.tls` or run behind a TLS-terminating ingress, and set `listen.public_url` to the external origin in both cases. At `/login`, Claude Code accepts a plain `http://` origin only when the gateway host is loopback: `localhost`, `127.0.0.1`, or `::1`. |
-| Private-network address | At `/login`, Claude Code requires the gateway's hostname or IP address to resolve only to private addresses: RFC 1918, link-local, CGNAT `100.64.0.0/10`, IPv6 ULA `fc00::/7`, or loopback. For a gateway you host, any public address outside a block you declare is rejected; see the [threat model](https://code.claude.com/docs/en/claude-apps-gateway-deploy.md#threat-model-summary) in the deployment guide. If developer machines route HTTPS through a corporate proxy, sign-in also requires the proxy host to resolve to private addresses; if it doesn't, add the gateway host to `NO_PROXY` so the CLI connects directly. If your internal network is numbered from public IPv4 space your organization owns, [declare those blocks](#allow-a-gateway-on-public-address-space-you-own) so `/login` accepts a gateway there. |
+| Private-network address | Claude Code's `/login` requires the gateway's hostname or IP address to resolve only to private addresses: RFC 1918 and link-local ranges, CGNAT `100.64.0.0/10`, IPv6 ULA `fc00::/7` and loopback. See the [threat model](https://code.claude.com/docs/en/claude-apps-gateway-deploy.md#threat-model-summary). If your internal network is numbered from public IPv4 space your organization owns, [declare those blocks](#allow-a-gateway-on-public-address-space-you-own) so `/login` accepts a gateway there. |
 | Linux runtime | The gateway server runs only on the native Linux binary. macOS works for local development. Windows isn't supported as a server platform. |
+
+When `HTTPS_PROXY` or `HTTP_PROXY` applies to the gateway host, sign-in also needs either a proxy whose hostname resolves to private addresses or the gateway host in `NO_PROXY` on developer machines. If those machines also set `no_proxy`, add the gateway host there too, or model requests still go through the proxy.
 
 ### Steps
 
@@ -178,7 +180,7 @@ Boot is fail-closed for the config, the Postgres connection, OIDC discovery, and
 
 A successful boot doesn't validate the inference path, because Amazon Bedrock and Google Cloud's Agent Platform instance credentials resolve on the first request, not at boot.
 
-Watch stderr for the boot sequence. Log lines use the format `[gateway] <timestamp> <level> <message>`, audit events are single-line JSON with an `evt` field, and a startup banner, omitted below, prints between the migration and listening lines. A fresh database prints one `migration N applied` line per schema migration; an already-migrated database prints none. You should see, in order:
+Watch stderr for the boot sequence. By default, log lines use the format `[gateway] <timestamp> <level> <message>`, and a startup banner, omitted below, prints between the migration and listening lines. Audit events are single-line JSON with an `evt` field. A fresh database prints one `migration N applied` line per schema migration; an already-migrated database prints none. You should see, in order:
 
 ```text theme={null}
 {"ts":"2026-06-10T17:03:21.114Z","evt":"config.load","path":"/etc/claude/gateway.yaml","sha256":"…"}
@@ -319,7 +321,7 @@ Some organizations number their internal network from a public IPv4 block they o
 >
 > `gatewayInternalNetworks` is for internal networks that happen to be numbered from public address space. It doesn't make it safe to expose a gateway to the internet: a trusted gateway can push settings that run commands on developer machines.
 >
-> Keep the gateway unreachable from outside your network with your firewall or load balancer rules. Set the gateway's [`access_control.allow_cidrs`](https://code.claude.com/docs/en/claude-apps-gateway-config#http-tuning) to the same blocks you declare here, so the gateway itself refuses clients from anywhere else. Behind a load balancer or ingress, set `listen.trusted_proxies` to that front end as well, because the gateway otherwise matches `allow_cidrs` against the front end's own address rather than the developer's.
+> Keep the gateway unreachable from outside your network with your firewall or load balancer rules. Set the gateway's [`access_control.allow_cidrs`](https://code.claude.com/docs/en/claude-apps-gateway-config#http-tuning) to the same blocks you declare here. If a load balancer or ingress [belongs in `listen.trusted_proxies`](https://code.claude.com/docs/en/claude-apps-gateway-config#listen), list it there as well, because the gateway otherwise matches `allow_cidrs` against the frontend's own address rather than the developer's.
 
 Add the key to the same managed settings source as the login keys: the managed settings file, MDM profile, or registry policy. Claude Code ignores it in user, project, and server-managed settings.
 

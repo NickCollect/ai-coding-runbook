@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/cli-reference
-fetched_at: 2026-11-09T07:30:18.567572+00:00
+fetched_at: 2026-11-16T07:30:45.180486+00:00
 fetch_method: mintlify_md
 ---
 
@@ -100,7 +100,7 @@ Pass `-y` from your own terminal to accept the displayed command without the pro
 * **stdin or stdout isn't a TTY, and you pass neither `-y` nor `--accept-command`**: the install is refused. The output says the command was only displayed, and the exit code is `1`
 * **Claude runs the command through its Bash tool**: `-y` is ignored. Run the command from your own terminal instead
 
-Install a plugin for everyone who clones the project:
+To share a plugin with everyone who clones the project, run `claude plugin install` with `--scope project` and commit `.claude/settings.json`. Then have each person [add the marketplace](https://code.claude.com/docs/en/plugins/install.md#add-a-marketplace) and [run the same command](https://code.claude.com/docs/en/plugins/loading.md#enabled-in-project-settings-but-not-installed) in their own clone:
 
 ```bash theme={null}
 claude plugin install formatter@my-marketplace --scope project
@@ -339,7 +339,7 @@ With `--json`, Claude Code prints an array with one object per installation. Eac
 | `notes` | array of strings | Warnings that aren't load errors, such as authoring issues or [packages that aren't installed](https://code.claude.com/docs/en/plugins/loading.md#when-the-dependency-install-fails-or-is-skipped) |
 | `errorDetails` | array of objects | One object per `errors` entry, giving its diagnostic `type` and the names it refers to, such as the plugin, marketplace, server, or file. Requires Claude Code v2.1.268 or later |
 | `noteDetails` | array of objects | The same detail objects for each `notes` entry. Requires Claude Code v2.1.268 or later |
-| `hasUserConfig` | boolean | Present and `true` when the plugin loaded and its manifest declares [`userConfig` options](https://code.claude.com/docs/en/plugins/manifest-reference#user-configuration). Absent for a plugin that failed to load, whatever its manifest declares. Saved values are never included. Requires Claude Code v2.1.285 or later |
+| `hasUserConfig` | boolean | Present and `true` when the plugin loaded and its manifest declares [`userConfig` options](https://code.claude.com/docs/en/plugins/manifest-reference#user-configuration). Absent for a plugin that failed to load, whatever its manifest declares. Requires Claude Code v2.1.285 or later |
 | `projectEnabled` | boolean | Whether the project's shared `.claude/settings.json` turns the plugin on. Marketplace installs only. Requires Claude Code v2.1.285 or later |
 | `dataDirSize` | object | With `--data-size`, the size of the plugin's [saved data directory](#what-an-uninstall-deletes-and-keeps) as `bytes` and `human`; absent when the directory is missing or empty. Marketplace installs only. Requires Claude Code v2.1.285 or later |
 | `dataDirUnreadable` | boolean | With `--data-size`, `true` when the saved data directory exists but couldn't be measured. Marketplace installs only. Requires Claude Code v2.1.285 or later |
@@ -783,7 +783,7 @@ With `--json`, Claude Code prints an array with one object per marketplace, carr
 | `repo` | `owner/repo`. `github` sources only |
 | `url` | The clone or fetch URL. `git` and `url` sources only |
 | `path` | The local path. `directory` and `file` sources only |
-| `ref` | The pinned branch or tag. `github` and `git` sources, only when pinned |
+| `ref` | The pinned branch, tag, or commit SHA. `github` and `git` sources, only when pinned |
 | `installLocation` | Where Claude Code cached the marketplace |
 
 An added [claude.ai marketplace](https://code.claude.com/docs/en/plugins/install.md#add-from-claude-ai) has no local clone, so its entry carries its claude.ai identifiers, `marketplaceId` and `organizationUuid`, in place of `installLocation`. It also carries `scope` when one is recorded, and `status`.

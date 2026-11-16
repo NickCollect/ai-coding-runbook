@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/prompt-caching
-fetched_at: 2026-11-09T07:30:18.838826+00:00
+fetched_at: 2026-11-16T07:30:45.409072+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,14 +32,14 @@ To get the most out of prefix matching, Claude Code orders each request so conte
 | Project context | CLAUDE.md, auto memory, unscoped rules | Session starts, or after `/clear` or `/compact` |
 | Conversation | Your messages, Claude's responses, tool results | Every turn |
 
-A change to the conversation layer leaves the system prompt and project context cached. A change to the system prompt invalidates everything, because all later content now sits behind a different prefix. The third column gives common triggers rather than an exhaustive list, and the sections below cover the full set.
+An addition to the conversation layer leaves the system prompt and project context cached. A change to the system prompt invalidates everything, because all later content now sits behind a different prefix. The third column gives common triggers rather than an exhaustive list, and the sections below cover the full set.
 
 The prefix-match rule explains most of the behaviors on this page. [Plan mode](https://code.claude.com/docs/en/permission-modes.md#analyze-before-you-edit-with-plan-mode) and [skill loading](https://code.claude.com/docs/en/skills.md), for example, append their instructions as conversation messages, so the cached prefix stays intact.
 
 Two settings don't appear in the layer table but still affect what stays cached:
 
 * **Model**: each model has its own cache. Switching models recomputes the entire request even when the content is identical. See [Switching models](#switching-models) below.
-* **Effort level**: on most models, each effort level has its own cache, so changing effort mid-session recomputes the entire request. On Opus 5.5, Sonnet 5.5, Haiku 5.5, and Fable 5.1 with an API key or a Claude subscription, the cache stays intact by default. See [Changing effort level](#changing-effort-level) below.
+* **Effort level**: on most models, each effort level has its own cache, so changing effort mid-session recomputes the entire request. With an API key or a Claude subscription, the cache stays intact by default on Fable 5.1 and later, Opus 5.5, Sonnet 5.5, and Haiku 5.5. See [Changing effort level](#changing-effort-level) below.
 
 > [!TIP]
 >
@@ -100,7 +100,7 @@ When a skill or command's frontmatter names a [`model`](https://code.claude.com/
 
 On most models, changing the [effort level](https://code.claude.com/docs/en/model-config.md#adjust-effort-level) mid-session means the next request reads the entire conversation history with no cache hits. While the cache is still warm, Claude Code asks you to confirm the change first.
 
-On Opus 5.5, Sonnet 5.5, Haiku 5.5, and Fable 5.1 with an API key or a Claude subscription, you keep the cache when you change effort. Claude Code [applies the new level](https://code.claude.com/docs/en/model-config.md#when-a-new-effort-level-starts) without asking. On Amazon Bedrock, Google Cloud's Agent Platform, or a [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway), or when you set [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS`](https://code.claude.com/docs/en/llm-gateway-protocol#disable-pre-release-capabilities) or your organization has a HIPAA configuration, it works as on most models.
+With an API key or a Claude subscription, changing effort keeps the cache on Fable 5.1 and later, Opus 5.5, Sonnet 5.5, and Haiku 5.5. Claude Code [applies the new level](https://code.claude.com/docs/en/model-config.md#when-a-new-effort-level-starts) without asking. On Amazon Bedrock, Google Cloud's Agent Platform, or a [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway), or when you set [`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS`](https://code.claude.com/docs/en/llm-gateway-protocol#disable-pre-release-capabilities) or your organization has a HIPAA configuration, it works as on most models.
 
 Before v2.1.260, changing effort on Fable 5.1 with an API key or a Claude subscription also invalidated the cache.
 
@@ -109,7 +109,7 @@ Before v2.1.260, changing effort on Fable 5.1 with an API key or a Claude subscr
 [Fast mode](https://code.claude.com/docs/en/fast-mode.md) and standard speed keep separate caches, so after you turn fast mode on or off, the next request can't use what the other speed cached. The first time you turn fast mode on in a conversation, the next request reads the whole conversation so far uncached at [fast mode rates](https://code.claude.com/docs/en/fast-mode.md#understand-the-cost-tradeoff). To keep that cost small, turn it on at the start of a session.
 
 * If you turn it on while Claude is working, that turn finishes at standard speed, and you pay for any uncached read on your next turn's first request.
-* If your current model doesn't support fast mode, running `/fast` also [switches you to Opus](https://code.claude.com/docs/en/fast-mode.md#toggle-fast-mode). That [model switch](#switching-models) starts a fresh cache on its own from the next request in the running turn.
+* If your current model doesn't support fast mode, running `/fast` also [switches your model](https://code.claude.com/docs/en/fast-mode.md#toggle-fast-mode). That [model switch](#switching-models) starts a fresh cache on its own from the next request in the running turn.
 
 Each later toggle reads uncached whatever the speed you switch to doesn't have cached. Speed changes Claude Code makes on its own, such as the [fallback to standard speed](https://code.claude.com/docs/en/fast-mode.md#handle-rate-limits) after a rate limit and the return to fast mode later, count as toggles too.
 
@@ -180,14 +180,14 @@ Only a deny rule that matches in the tool-name position blocks a tool this way: 
 
 ### Compacting the conversation
 
-[Compaction](https://code.claude.com/docs/en/context-window.md#what-survives-compaction) replaces your message history with a summary. By design, this invalidates the conversation layer: the next request has a new, shorter history that doesn't share a prefix with the old one. The system prompt and project context layers can stay cached:
+[Compaction](https://code.claude.com/docs/en/context-window.md#what-survives-compaction) replaces your message history with a summary. By design, this invalidates the conversation layer: the next request has a new, shorter history that doesn't share a prefix with the old one.
 
 * **System prompt**: the next request reads this layer from the cache, unless a [resumed conversation](#resuming-a-session) kept a system prompt that is now out of date. The first time that conversation is compacted, Claude Code switches it to the current prompt, and the next request rebuilds this layer's cache once.
-* **Project context**: Claude Code reloads this layer from disk. The next request reads it from the cache only if CLAUDE.md and memory are unchanged since the session started.
+* **Project context**: Claude Code reloads this layer from disk. It's cached together with the conversation, so after `/compact` or automatic compaction its cache is rebuilt even if its files are unchanged.
 
 To produce the summary, Claude Code sends a separate request. The request repeats your conversation's system prompt, tools, and the history being summarized. It ends with a summarization instruction. While the cache is warm, that request reads your prefix from the cache. A mid-session `/compact` then costs a fraction of what the context size suggests and spends most of its time generating the summary.
 
-After a break longer than the [cache lifetime](#cache-lifetime), there is no cache left to read, so the summarization request reprocesses that history as uncached input. This is why `/compact` costs the most when you [resume an old session](https://code.claude.com/docs/en/sessions.md#resume-a-session). In both the warm and cold cases, the turn after compaction rebuilds the conversation cache for only the much shorter summary, so that turn isn't the slow part.
+After a break longer than the [cache lifetime](#cache-lifetime), there is no cache left to read, so the summarization request reprocesses that history as uncached input. This is why `/compact` costs the most when you [resume an old session](https://code.claude.com/docs/en/sessions.md#resume-a-session). In both the warm and cold cases, the turn after compaction rebuilds the conversation cache for only the much shorter history, so that turn isn't the slow part.
 
 > [!TIP]
 >

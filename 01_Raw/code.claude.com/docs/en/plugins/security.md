@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/security
-fetched_at: 2026-11-02T07:00:26.746996+00:00
+fetched_at: 2026-11-16T07:30:45.401332+00:00
 fetch_method: mintlify_md
 ---
 
@@ -127,7 +127,7 @@ The details pane you open from the **Discover** or **Marketplaces** tab in `/plu
 The warning reads the same whatever marketplace the plugin comes from:
 
 ```text theme={null}
-Make sure you trust a plugin before installing, updating, or using it. Anthropic does not control what MCP servers, files, or other software are included in plugins and cannot verify that they will work as intended or that they won't change. See each plugin's homepage for more information.
+Plugins can run code on your computer, with access to your files and shell. Make sure you trust a plugin before installing, updating, or using it. Anthropic does not control what MCP servers, files, or other software are included in plugins and cannot verify that they will work as intended or that they won't change. See each plugin's homepage for more information.
 ```
 
 If your organization sets `pluginTrustMessage` in [managed settings](https://code.claude.com/docs/en/plugins/org.md), Claude Code appends that text to the warning.

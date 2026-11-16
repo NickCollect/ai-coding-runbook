@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/artifacts
-fetched_at: 2026-11-09T07:30:17.642848+00:00
+fetched_at: 2026-11-16T07:30:44.256269+00:00
 fetch_method: mintlify_md
 ---
 
@@ -70,7 +70,7 @@ A new artifact that Claude publishes in response to a prompt you type goes throu
 | :- | :- |
 | The session is in [plan mode](https://code.claude.com/docs/en/permission-modes.md#analyze-before-you-edit-with-plan-mode) | Asks before the first publish of each artifact |
 | The publish declares runtime capabilities for the page, such as [connector calls](#pull-live-data-with-mcp-connectors) or [file downloads](#offer-a-file-download) | Asks before that publish |
-| You shared the artifact publicly | Asks once per conversation before changing it |
+| You shared the artifact publicly | Asks once per conversation before changing it, and before each reply to a comment on it |
 | Claude publishes in a turn that a [session-scoped scheduled task](https://code.claude.com/docs/en/scheduled-tasks.md) firing in your session started, rather than a prompt you typed | Asks before the first publish of each artifact |
 | Claude can't read the file without your approval | Asks before publishing it. An allow rule for the `Artifact` tool doesn't skip this prompt |
 | In [Manual](https://code.claude.com/docs/en/permission-modes.md) or `acceptEdits` mode, Claude makes a small change to an artifact's file it can't edit without your approval, such as a project file in Manual mode | Asks before publishing the change. You're asked even if an allow rule covers the `Artifact` tool, because the edit to the file needs your approval |
@@ -95,6 +95,22 @@ To update an artifact from a different session, give Claude its URL, or attach i
 Update https://claude.ai/code/artifact/5fbea6f3-... with today's numbers.
 ```
 
+### Turn off one-step artifact updates
+
+A one-step update is a small change Claude makes to an artifact's file as part of a publish, instead of through an `Edit` or `Write` call.
+
+To turn one-step updates off, set [`CLAUDE_CODE_ARTIFACT_PUBLISH_EDITS`](https://code.claude.com/docs/en/env-vars) to `0`. This example adds the variable to the `env` block in `~/.claude/settings.json`:
+
+```json theme={null}
+{
+  "env": {
+    "CLAUDE_CODE_ARTIFACT_PUBLISH_EDITS": "0"
+  }
+}
+```
+
+Then quit and relaunch Claude Code, because a running session doesn't reread the variable.
+
 ## Find an artifact again
 
 Run `/artifacts` in Claude Code to list the artifacts you own and the ones shared with you. The current session's artifacts come first, under **This session**.
@@ -117,6 +133,7 @@ Viewers in your organization can see who published the page: on an artifact shar
 Who you can share with depends on your plan:
 
 * **Within your organization**: on Team and Enterprise plans, grant access to specific people in your organization, or to everyone in it. Viewers sign in to claude.ai as members of your organization to see the page.
+* **People with access to a shared folder**: on Team and Enterprise plans, move the artifact to a folder that you own or are an editor of. Move it from the [Artifacts page](https://claude.ai/artifacts), which is available if you can use claude.ai chat. Everyone with access to the folder can then open it, and the folder's owner and editors can change it.
 * **Publicly**: share a link that anyone on the internet can open, with no claude.ai sign-in required. On Team and Enterprise plans, public sharing is off until an Owner [enables it for the organization](#control-public-sharing).
 
 ### Link to a specific view
@@ -184,7 +201,7 @@ You need Claude Code v2.1.228 or later. If you turned [feature-flag fetching](ht
 Your [permission mode](https://code.claude.com/docs/en/permission-modes.md) decides what Claude does when a sent comment arrives:
 
 * **Claude replies on its own**: if you're in a permission mode that lets Claude post the reply without asking you, Claude reads the thread and replies. You see `Auto-replied to comment thread on Artifact: <name>`.
-* **Claude waits for you**: outside plan mode, when posting the reply would need your approval, you see `Comments are waiting on Artifact: <name>`. Claude then asks you for approval to read the thread, and again to post the reply.
+* **Claude waits for you**: outside plan mode, when posting the reply [would need your approval](#when-claude-code-asks-before-publishing), you see `Comments are waiting on Artifact: <name>`. Claude then asks you for approval to read the thread, and again to post the reply.
 * **Claude pauses in plan mode**: you see `Comments are waiting on Artifact: <name>`, and Claude doesn't reply until you leave plan mode and ask it to read and reply.
 
 Claude also stops replying on its own to an artifact after it handles 60 sent comments or thread activations on that artifact within an hour. You see `Comments are waiting on Artifact: <name>` once, and Claude picks up again as that hour's comments age out.
@@ -357,7 +374,6 @@ Each artifact is one self-contained page. Claude Code wraps the file you publish
 | External requests | The page can load typefaces from Google Fonts, and scripts from [five public CDN hosts](#allowlist-the-viewer-domain): cdnjs, unpkg, the Tailwind and jQuery CDNs, and selected paths on jsDelivr such as `/npm/`. The CSP blocks every external image and all other external scripts, stylesheets, and fonts, and lets `fetch`, XHR, and WebSocket calls reach only the page's own origin and the Google Fonts hosts. Claude therefore loads any library the page needs from one of those CDNs, inlines all other CSS and JavaScript, and embeds images as data URIs. [Connector calls](#pull-live-data-with-mcp-connectors) go through claude.ai, which makes the network call itself. |
 | No backend | An artifact is a static page. It can't authenticate viewers itself. |
 | Downloads | The page can't start a download itself. To let viewers save a file the page generates, Claude declares the downloads capability. See [Offer a file download](#offer-a-file-download). |
-| Single page | Relative links do not resolve, because nothing is deployed alongside the page. For multi-section content, Claude uses in-page anchors rather than separate files. |
 | Source file types | The published file must be `.html`, `.htm`, or `.md`, and must decode as UTF-8, or as little-endian UTF-16 by its byte-order mark. Markdown files render as styled document pages with syntax-highlighted code. A file that doesn't decode, or that contains the replacement character `U+FFFD`, is [refused with the line and column to fix](https://code.claude.com/docs/en/errors.md#the-source-file-is-not-valid-utf-8-text). |
 | Source location | A file at a path that names a network host is refused without being read. See [Not published: that file is on a network share](https://code.claude.com/docs/en/errors.md#not-published-that-file-is-on-a-network-share) for which paths are refused and the mapped-drive exception on Windows. |
 | Rendered size | The rendered page must be 16 MiB or smaller. Large embedded images are the usual cause when a publish fails for size. |
@@ -421,9 +437,9 @@ Public sharing is off by default on Team and Enterprise plans. To let members pu
 
 To set how long artifacts are kept before automatic deletion, go to [**Organization settings > Data and privacy**](https://claude.ai/admin-settings/data-privacy-controls). You can set separate retention periods for artifacts that are still private to their author and artifacts that have been shared.
 
-### Review the audit log
+### Audit artifact activity with the Compliance API
 
-Publishing, sharing, and deleting an artifact each appear in your organization's audit log under the `claude_artifact_*` event types, the same family used for artifacts created in claude.ai conversations.
+On Enterprise plans, query the Compliance API's [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed) to see who published, shared, or deleted an artifact. To find the activity types to filter by, expand `activity_types` in the [Activity Feed reference](https://platform.claude.com/docs/en/api/compliance/activities/list) and look for names that contain `artifact`.
 
 ### Allowlist the viewer domain
 

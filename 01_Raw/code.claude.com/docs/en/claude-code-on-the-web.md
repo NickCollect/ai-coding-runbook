@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-code-on-the-web
-fetched_at: 2026-11-02T07:00:25.872006+00:00
+fetched_at: 2026-11-16T07:30:44.408902+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,7 +42,7 @@ Once you're set up, use this page to move work between your terminal and the clo
 
 Every cloud session runs in a [cloud environment](https://code.claude.com/docs/en/cloud-environments.md), the saved configuration that controls network access, environment variables, and setup scripts.
 
-* **Your first environment**: if you don't have one yet, onboarding sets up a **Default** environment with [**Trusted** network access](https://code.claude.com/docs/en/cloud-environments.md#access-levels), either by creating it for you or by asking you to create it. See [The Default environment](https://code.claude.com/docs/en/cloud-environments.md#the-default-environment) for which of those happens on your plan
+* **Your first environment**: if you don't have one yet, onboarding sets up a **Default** environment with [**Limited** network access](https://code.claude.com/docs/en/cloud-environments.md#access-levels). See [The Default environment](https://code.claude.com/docs/en/cloud-environments.md#the-default-environment) for how that works on your plan
 * **Which environment a session uses**: see [The Default environment](https://code.claude.com/docs/en/cloud-environments.md#the-default-environment) for how sessions choose an environment when you have more than one
 * **Change what sessions can reach or run at startup**: see [Configure cloud environments](https://code.claude.com/docs/en/cloud-environments.md)
 * **What's installed without any configuration**: see [Installed tools](https://code.claude.com/docs/en/cloud-environments.md#installed-tools)
@@ -195,8 +195,8 @@ On success, the command prints the session ID and a link to view the session:
 
 ```
 Sent to cloud session.
-Session ID: session_01DiUkqY2kzbUbDmW1w96rfi
-View: https://claude.ai/code/session_01DiUkqY2kzbUbDmW1w96rfi?from=cli&m=0
+Session ID: session_01HJKLMNOPQRSTUVWXYZ
+View: https://claude.ai/code/session_01HJKLMNOPQRSTUVWXYZ?from=cli&m=0
 ```
 
 Pass `--output-format json` for a machine-readable result: `{ok, session_id, url}` on success, or `{ok: false, session_id, error}` when the send fails, for example when the session is missing or archived. Configuration errors, such as an unsupported provider or a disabled organization policy, print to stderr without JSON. `--output-format stream-json` isn't supported with `--cloud <session-id>`.
@@ -211,7 +211,7 @@ Pull a cloud session into your terminal using any of these:
 * **Using `/teleport`**: inside an existing CLI session, run `/teleport` or `/tp` to open the same session picker without restarting Claude Code.
 * **From `/tasks`**: run `/tasks` to see your background sessions, then press `t` to teleport into one.
 * **From claude.ai/code**: select **Open in > Terminal** from the session menu to copy a command you can paste into your terminal.
-* **From inside the cloud session**: type `/teleport` and Claude Code replies with the exact `claude --teleport <session-id>` command for that session, ready to run from a checkout of the repository. Requires Claude Code v2.1.223 or later in the session's environment.
+* **From inside the cloud session**: type `/teleport` and Claude Code replies with the exact `claude --teleport <session-id>` command for that session, ready to run from a checkout of the repository.
 
 When you teleport a session, Claude verifies you're in the correct repository, fetches and checks out the branch from the cloud session, and loads the conversation into your terminal.
 
@@ -505,9 +505,6 @@ Before relying on cloud sessions for a workflow, account for these constraints:
 * **Repository authentication**: you can only pull a cloud session into your terminal when you are authenticated to the same account
 * **Platform restrictions**: repository cloning in Anthropic-hosted environments and pull request creation require GitHub. Self-hosted [GitHub Enterprise Server](https://code.claude.com/docs/en/github-enterprise-server.md) instances are supported for Team and Enterprise plans. You can send a GitLab, Bitbucket, or other non-GitHub repository to a cloud session as a [local bundle](#send-local-repositories-without-github) by setting `CCR_FORCE_BUNDLE=1`, but the session can't push results back to that remote
   * **Self-hosted environments**: for a repository on another git host, see the [requirements for starting a session with `--environment`](https://code.claude.com/docs/en/self-hosted-environments-deploy#start-a-session-on-a-repository-outside-github).
-* **Organization IP allowlist**: cloud sessions call the Anthropic API from Anthropic-managed infrastructure, not your network, while sessions in a [self-hosted environment](https://code.claude.com/docs/en/self-hosted-environments) call it from your own network. If your organization has [IP allowlisting](https://support.claude.com/en/articles/13200993-restrict-access-to-claude-with-ip-allowlisting) enabled, every Anthropic-hosted cloud session fails with an authentication error.
-  * **Code Review and scheduled tasks**: the same applies to [Code Review](https://code.claude.com/docs/en/code-review.md) and to [cloud scheduled tasks](https://code.claude.com/docs/en/routines.md) that run on Anthropic-hosted environments. A scheduled task routed to a self-hosted environment calls the API from your own network.
-  * **Getting an exemption**: contact [Anthropic support](https://support.claude.com/) to exempt Anthropic-hosted services from your organization's IP allowlist.
 
 ## Related resources
 

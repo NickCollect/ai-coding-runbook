@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway-deploy
-fetched_at: 2026-11-09T07:30:17.790841+00:00
+fetched_at: 2026-11-16T07:30:44.371243+00:00
 fetch_method: mintlify_md
 ---
 
@@ -98,7 +98,7 @@ Mirror the release into your internal registry if your builds can't reach the re
 
 Beyond the binary, the image needs:
 
-* **A glibc-based image**: the glibc build's only dynamic dependencies are glibc libraries. Musl-based images need the `linux-x64-musl` or `linux-arm64-musl` build plus additional packages; see [Alpine Linux setup](https://code.claude.com/docs/en/setup.md#alpine-linux-and-musl-based-distributions).
+* **A glibc-based image**: the glibc build's only dynamic dependencies are glibc libraries. Musl-based images need the `linux-x64-musl` or `linux-arm64-musl` build, whose only dynamic dependency is musl.
 * **A writable state directory**: the gateway runs as any user, but minimal images have no writable home. Set `CLAUDE_CONFIG_DIR` to a writable path such as `/tmp/.claude`.
 * **The container command**: `claude gateway --config /etc/claude/gateway.yaml`, with the config file mounted read-only and secrets supplied as environment variables; the gateway listens on `listen.port`, default `8080`.
 
@@ -137,7 +137,7 @@ See [where each mechanism stores the policy](https://code.claude.com/docs/en/man
 
 Sign-in is rate limited per client IP address, and the defaults suit a small team. Each address gets 30 sign-in starts and 10 code submissions every 10 minutes. A rollout to thousands of developers can reach those limits on the first morning, for one of two reasons:
 
-* **The gateway can't see past your load balancer.** Without [`listen.trusted_proxies`](https://code.claude.com/docs/en/claude-apps-gateway-config#listen), every developer appears to come from the load balancer's address and shares one limit. Set it before anything else. The gateway logs a warning the first time it ignores an `X-Forwarded-For` header.
+* **The gateway can't see past your load balancer.** Without [`listen.trusted_proxies`](https://code.claude.com/docs/en/claude-apps-gateway-config#listen), every developer appears to come from the load balancer's address and shares one limit. The gateway logs a warning the first time it ignores an `X-Forwarded-For` header. If the load balancer [belongs in `listen.trusted_proxies`](https://code.claude.com/docs/en/claude-apps-gateway-config#listen), list it before you change anything else. If developers still share one address, raise [`rate_limits`](https://code.claude.com/docs/en/claude-apps-gateway-config#http-tuning).
 * **Many developers share a few NAT or VPN egress addresses.** They share those addresses' limits even when `trusted_proxies` is right. Raise [`rate_limits`](https://code.claude.com/docs/en/claude-apps-gateway-config#http-tuning) to fit.
 
 To size `max`, divide the developers by the egress addresses they share. Estimate how many of those sign in within one `window_seconds` period, which is 10 minutes by default. Then double it to cover retries and developers who sign in to both Claude Code and Claude Desktop.
@@ -178,6 +178,20 @@ The gateway writes two streams to stderr, both JSON-friendly:
   * `guardrail.trace` records [which filter fired](https://code.claude.com/docs/en/claude-apps-gateway-config.md#log-which-guardrail-filter-fired), without the matched text
   * `admin.denied` records a rejected admin-API auth attempt with the client IP, method, path, and a reason, without the presented key material: `invalid_key` when an `x-api-key` was presented but matched no configured key, `bearer_rejected` when only an `Authorization` header was presented and it didn't verify as a gateway session in `admin.admin_groups`, or `no_credentials` when neither header was presented
 * **Operational logs**: human-readable `[gateway]`-prefixed lines for boot, warnings, and upstream errors. The `CLAUDE_GATEWAY_LOG_LEVEL` environment variable controls verbosity and accepts `debug`, `info`, `warn`, or `error`, with `info` as the default. At `debug`, each sign-in and refresh also logs the names, not the values, of the claims in the id\_token, plus the names of the userinfo claims when `userinfo_fallback` supplied any, so you can diagnose `email_claim` and `groups_claim` settings without logging PII. It doesn't affect audit events, which are always emitted.
+
+#### Write operational logs as JSON
+
+If your log collector reads each line's level from a JSON field, set `CLAUDE_GATEWAY_LOG_FORMAT=json` in the gateway's environment. Requires Claude Code v2.1.319 or later on the gateway server.
+
+Each operational log line is then one object with `severity`, `time`, and `message`:
+
+```json theme={null}
+{"severity":"INFO","time":"2026-11-04T17:03:21.512Z","message":"claude gateway listening on http://0.0.0.0:8080"}
+```
+
+`severity` is the log level in capitals, with `warn` written as `WARNING`. A failed start is an `ERROR` line.
+
+Audit events, which also go to stderr, don't change. They carry `ts` and `evt`, and no `severity`.
 
 ### Health
 
@@ -410,7 +424,7 @@ The gateway's stderr includes the audit event stream, the audit log records deve
 | Startup shows `Gateway login is configured in managed settings, but this Claude Code build does not include Cloud gateway support.` | The installed Claude Code build predates gateway support | Have the developer update Claude Code to a release that includes Cloud gateway support |
 | Startup exits with `Administrator policy requires a Cloud gateway sign-in on this machine` | The developer's environment sets `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN`, their settings configure an [`apiKeyHelper`](https://code.claude.com/docs/en/settings-reference#apikeyhelper), or an API key from an earlier Claude Console login is still saved | Have the developer clear each that applies: unset the variable, remove the `apiKeyHelper` entry, or run `claude auth logout` to remove the saved key. A session that selects a cloud provider with `CLAUDE_CODE_USE_*` then starts with no sign-in; for every other session, have them start `claude` and sign in with `/login`. See also [Administrator policy requires a Cloud gateway sign-in](https://code.claude.com/docs/en/errors.md#administrator-policy-requires-a-cloud-gateway-sign-in). |
 | Startup or `/login` reports `Claude Code may not be enabled for your organization` after a 403 on the managed settings load | The gateway, or something in front of it, answered the `/managed/settings` request with 403. The gateway's own settings route never answers 403. The status comes from the [`access_control`](https://code.claude.com/docs/en/claude-apps-gateway-config#http-tuning) IP checks or from a proxy or WAF in front of the gateway. The audit log records an IP-check denial as `access.denied` with the reason. The developer stays signed in. | Check the audit log for `access.denied` at the time of the failure and fix the `access_control` lists or the front end, then have the developer start `claude` again |
-| CLI `/login`: `The gateway is limiting sign-in attempts right now`, or `Request failed with status code 429` on older versions. The `/device` page may show `Too many attempts` to developers who haven't tried before | The per-IP sign-in rate limit was reached. Either `listen.trusted_proxies` doesn't cover the load balancer, so every developer shares its address, or many developers share a NAT or VPN egress address. Audit events with `result: rate_limited` show the same one or few `client_ip` values. | Set `listen.trusted_proxies` to the load balancer's source ranges first, then raise `rate_limits` if developers still share addresses. See [Large rollouts](#large-rollouts). |
+| CLI `/login`: `The gateway is limiting sign-in attempts right now`, or `Request failed with status code 429` on older versions. The `/device` page may show `Too many attempts` to developers who haven't tried before | The per-IP sign-in rate limit was reached. Either `listen.trusted_proxies` doesn't cover the load balancer, so every developer shares its address, or many developers share a NAT or VPN egress address. Audit events with `result: rate_limited` show the same one or few `client_ip` values. | If the load balancer [belongs in `listen.trusted_proxies`](https://code.claude.com/docs/en/claude-apps-gateway-config#listen), list it first. Then raise `rate_limits` if developers still share addresses. See [Large rollouts](#large-rollouts). |
 | CLI `/login`: `Gateway hosts must be on your organization's private network; <host> resolves to the public (or unrecognized) address <ip>` | The gateway hostname resolves to at least one public IP address. Claude Code checks each resolved address and requires every one to be private. A common cause is a dual-stack name where one family resolves to a public address, including AWS internal dual-stack load balancers, which return public-range AAAA addresses. | Have the gateway name resolve only to private addresses on developer machines. For a dual-stack name, drop the public-range record or serve a separate internal-only DNS name. See the [private-network prerequisite](https://code.claude.com/docs/en/claude-apps-gateway#prerequisites). If the address is public space your organization owns and uses internally, [declare that block](https://code.claude.com/docs/en/claude-apps-gateway#allow-a-gateway-on-public-address-space-you-own) instead. |
 | CLI `/login`: `Gateway login would go through proxy <proxy>, which is not on a private network` | An `HTTPS_PROXY` or `HTTP_PROXY` applies to the gateway host and the proxy's hostname resolves to a public address. A proxy whose host resolves only to private addresses is allowed and doesn't trigger this error | Add the gateway host to `NO_PROXY` on the developer's machine so the connection is direct, or use a proxy whose hostname resolves to private addresses. The message names the exact `NO_PROXY` entry to add |
 | CLI `/login`: `Claude Code only signs in to <host> from inside its declared network <block> (managed settings), and this machine is connecting from <ip>, outside it` | The gateway is on a block declared in [`gatewayInternalNetworks`](https://code.claude.com/docs/en/claude-apps-gateway#allow-a-gateway-on-public-address-space-you-own), and the developer's machine reached it from an address outside that block: a VPN address pool, a container or WSL2 NAT segment, or a network that isn't yours | Have the developer run `/login` from the host OS on your network. If the address shown is also your organization's own public space, replace the gateway's entry with a block that covers both, up to `/8`; a second, overlapping entry is refused. If no block covers both, see [Choose an address for the gateway](#choose-an-address-for-the-gateway) |

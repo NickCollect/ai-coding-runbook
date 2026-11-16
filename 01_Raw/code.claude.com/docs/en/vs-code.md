@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/vs-code
-fetched_at: 2026-11-09T07:30:19.152139+00:00
+fetched_at: 2026-11-16T07:30:45.729855+00:00
 fetch_method: mintlify_md
 ---
 
@@ -208,6 +208,15 @@ The prompt box supports several features:
   Thinking blocks you already have stay empty. In responses after the reload, click a block or press `Ctrl+O` to expand them all.
 * **Multi-line input**: press `Shift+Enter` to add a new line without sending. This also works in the "Other" free-text input of question dialogs.
 
+### Use or turn off suggested prompts
+
+After Claude replies, the panel can show a suggested next prompt as gray italic text in the empty prompt box. Each suggestion uses a [short background request](https://code.claude.com/docs/en/interactive-mode.md#prompt-suggestions) that counts toward your plan's usage limits or API costs.
+
+* **Use the suggestion**: press `Tab` to turn it into editable text, then send it. Pressing `Enter` before you accept it doesn't send the suggestion.
+* **Write your own prompt**: start typing, which hides the suggestion.
+
+To turn suggestions off, set [`promptSuggestionEnabled`](https://code.claude.com/docs/en/settings-reference#promptsuggestionenabled) to `false` in `~/.claude/settings.json`. You stop seeing them in new conversations, or in open ones after you run **Developer: Reload Window** from the Command Palette. If you set [`CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION`](https://code.claude.com/docs/en/env-vars) to `true`, change it to `false` where you set it, or you keep seeing suggestions.
+
 ### Reference files and folders
 
 Use @-mentions to give Claude context about specific files or folders. When you type `@` followed by a file or folder name, Claude reads that content and can answer questions about it or make changes to it. Claude Code supports fuzzy matching, so you can type partial names to find what you need:
@@ -301,6 +310,7 @@ When the conversation you resume ended in plan mode, Claude Code restores plan m
 * The extension [chooses the starting permission mode](https://code.claude.com/docs/en/permission-modes.md#switch-permission-modes) from `claudeCode.initialPermissionMode` or a pick that carries over from an earlier conversation
 * You have `claudeCode.claudeProcessWrapper` configured
 * A [deny rule](https://code.claude.com/docs/en/permissions.md#manage-permissions) removes the [`ExitPlanMode`](https://code.claude.com/docs/en/tools-reference) tool
+* [`permissions.denyInsteadOfPrompting`](https://code.claude.com/docs/en/settings-reference#permissions-denyinsteadofprompting) is on
 
 #### The conversation is still open somewhere else
 
@@ -404,6 +414,8 @@ If a notice in place of the prompt box says the conversation is still open somew
 #### Interrupted steps after a reload
 
 If the reload interrupted Claude mid-step, Claude continues that step when the conversation comes back, and a notice in the chat marks the continuation. Requires Claude Code v2.1.274 or later. If the step was interrupted more than an hour ago or the session is open elsewhere, the conversation comes back idle instead.
+
+When a notice in the chat includes `plan mode is now off, so Claude did not continue on its own`, the step was interrupted in plan mode. To keep planning, select **Plan** in the mode indicator before you send your next message.
 
 #### Turn off continuation after a reload
 
@@ -600,6 +612,20 @@ On a reopened conversation, the **This session is in worktree** banner means the
 
 A conversation moves into a worktree when, for example, you [ask Claude to work in one](https://code.claude.com/docs/en/worktrees.md#ask-claude-to-create-a-worktree). When you reopen it, or the panel [reopens it after a window reload](#continue-conversations-after-a-reload), it resumes in the worktree if Claude Code created the worktree under `.claude/worktrees/` and it still exists. Before Claude Code v2.1.300, an empty conversation opened instead. On those versions, update the extension.
 
+## Work with Jupyter notebooks
+
+Claude Code edits notebooks with the [NotebookEdit tool](https://code.claude.com/docs/en/tools-reference.md#notebookedit-tool-behavior).
+
+### Re-run edited cells
+
+When Claude replaces a code cell, it rewrites the cell's source in the file and clears the cell's saved output and execution count.
+
+The edit doesn't require a kernel restart: NotebookEdit writes only the file and doesn't connect to your kernel. Re-run that cell, and any cells that use the functions or variables it defines.
+
+### Save the notebook before an edit
+
+Save the notebook before you ask for an edit; the extension's [`autosave` setting](#extension-settings) doesn't save before NotebookEdit.
+
 ## Run work in the background
 
 Send a long-running command or subagent to the background, then check on it from the prompt box.
@@ -632,7 +658,7 @@ When a subagent shows as one status line with no tool calls, type `/tasks` in th
 
 ## VS Code commands and shortcuts
 
-To open the Command Palette, press `Cmd+Shift+P` on Mac or `Ctrl+Shift+P` on Windows/Linux. Type "Claude Code" there to see all available VS Code commands for the Claude Code extension.
+To open the Command Palette, press `Cmd+Shift+P` on Mac or `Ctrl+Shift+P` on Windows/Linux. Type "Claude Code" there to see the extension's Command Palette commands.
 
 Some shortcuts depend on which panel is "focused" (receiving keyboard input). When your cursor is in a code file, the editor is focused. When your cursor is in Claude's prompt box, Claude is focused. Use `Cmd+Esc` / `Ctrl+Esc` to toggle between them.
 
@@ -657,6 +683,7 @@ Some shortcuts depend on which panel is "focused" (receiving keyboard input). Wh
 | Rename Session Tab | - | Rename the session in the active Claude tab. Requires Claude Code v2.1.257 or later |
 | Add Session Tab to Group | - | Add the session in the active Claude tab to a [session group](#organize-sessions-into-groups) you pick or create. Requires Claude Code v2.1.257 or later |
 | Mark Session as Unread | - | Mark the session in the active Claude tab as unread in the sessions list. Requires Claude Code v2.1.257 or later |
+| `claude-vscode.toggleDictation` | `Cmd+D` (Mac) / `Ctrl+D` (Windows/Linux) | Start or stop [voice dictation](https://code.claude.com/docs/en/voice-dictation.md). The shortcut requires Claude to be focused. This command isn't in the Command Palette |
 | Show Logs | - | View extension debug logs |
 | Logout | - | Sign out of your Anthropic account |
 
@@ -730,7 +757,7 @@ VS Code reads `initialPermissionMode` from your user settings and ignores worksp
 | `initialPermissionMode` | - | Controls approval prompts for new conversations: `default`, `plan`, `acceptEdits`, or `bypassPermissions`. `manual` is an alias for `default` and selects the mode labeled **Manual** in the mode indicator. When you leave it unset, the extension chooses the starting permission mode as described in [Switch permission modes](https://code.claude.com/docs/en/permission-modes.md#switch-permission-modes). |
 | `preferredLocation` | `panel` | Where Claude opens: `sidebar` (right) or `panel` (new tab) |
 | `lockEditorGroups` | `true` | [Lock the editor groups Claude starts for its tabs](#choose-where-claude-lives), so files you open while a Claude tab is focused go to another group. When off, the extension never locks an editor group. Requires Claude Code v2.1.274 or later |
-| `autosave` | `true` | Auto-save files before Claude reads or writes them |
+| `autosave` | `true` | Auto-save files before the Read, Edit, and Write tools run |
 | `attachOpenFile` | `true` | Add the file that is open in the editor to your messages and show it in the prompt box. When off, the file is added only along with text you select. Requires Claude Code v2.1.271 or later |
 | `attachSelection` | `true` | Add the text you select in the editor to your messages and show it in the prompt box. When off, you can still [add a selection as an @-mention](#automatic-context-from-your-selection-and-open-file). Requires Claude Code v2.1.300 or later |
 | `useCtrlEnterToSend` | `false` | Use Ctrl/Cmd+Enter instead of Enter to send prompts |
@@ -939,6 +966,7 @@ Sign-in, network, and launch errors have their own entries on the install troubl
 | `SSL certificate verification failed` or `Self-signed certificate detected` | [SSL certificate errors](https://code.claude.com/docs/en/errors.md#ssl-certificate-errors) |
 | `Dictation error: WebSocket error:` followed by a certificate error such as `unable to get local issuer certificate`, or `Remote server is not connected` on the Web tab | [Dictation or the Web tab fails behind a TLS-inspecting proxy](#dictation-or-the-web-tab-fails-behind-a-tls-inspecting-proxy) |
 | `Claude Code process exited with code 1`, or another code | [Claude Code process exited with code N](https://code.claude.com/docs/en/errors.md#claude-code-process-exited-with-code-n) |
+| `Claude Code did not finish starting` or `Subprocess initialization did not complete within 60000ms` | [Subprocess initialization did not complete within 60000ms](https://code.claude.com/docs/en/errors.md#subprocess-initialization-did-not-complete-within-60000ms) |
 | `Could not locate the Claude CLI on PATH` | [Could not locate the Claude CLI on PATH](https://code.claude.com/docs/en/errors.md#could-not-locate-the-claude-cli-on-path) |
 | `The connection to Claude Code ended before this message completed` | [The connection to Claude Code ended before this message completed](https://code.claude.com/docs/en/errors.md#the-connection-to-claude-code-ended-before-this-message-completed) |
 | `The Claude Code program for this computer, the <build> build, could not be found` | [The Claude Code program for this computer could not be found](https://code.claude.com/docs/en/errors.md#the-claude-code-program-for-this-computer-could-not-be-found) |

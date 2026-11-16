@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/troubleshoot-install
-fetched_at: 2026-11-09T07:30:19.130871+00:00
+fetched_at: 2026-11-16T07:30:45.833101+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,7 +35,7 @@ Match the error message or symptom you're seeing to a fix:
 | `EACCES: permission denied` during install | [Fix the install directory's permissions](#permission-errors-during-installation) |
 | `TLS connect error` or `SSL/TLS secure channel` | [Update CA certificates](#tls-or-ssl-connection-errors) |
 | `CRYPT_E_NO_REVOCATION_CHECK` or `CRYPT_E_REVOCATION_OFFLINE` | [Work around blocked revocation checks](#tls-or-ssl-connection-errors) |
-| `Failed to fetch version` or can't reach download server | [Check network and proxy settings](#check-network-connectivity) |
+| `Failed to fetch version` or can't reach download server | [Check network and proxy settings](#check-network-connectivity), or for a certificate error, [configure corporate CA certificates](#tls-or-ssl-connection-errors) |
 | `The connection dropped while downloading the update` or `Download timed out: exceeded the total deadline` | [Run the update again or set your proxy](#the-connection-dropped-while-downloading-the-update) |
 | `Release verification failed for Claude Code` | [Run `claude update` or `claude install` again](#release-verification-failed) |
 | `Auto-update failed · Run claude doctor` in red in the session footer | [Run `claude update` from your shell](#auto-update-failed) |
@@ -100,11 +100,11 @@ You reached the server if the first line shows a `200` status. You see `HTTP/2 2
 * `403`: usually a proxy or network filter blocking the host, or Claude Code is [not available in your region](https://www.anthropic.com/supported-countries)
 * `5xx`: usually a temporary service issue; wait a few minutes and retry
 
-If you see no output, `Could not resolve host`, or a connection timeout, your network is blocking the connection. Common causes:
+If you see no output, or the installer shows `Could not resolve host` or a connection timeout, the connection failed, so check for these causes:
 
 * Corporate firewalls or proxies blocking `downloads.claude.ai`
 * Regional network restrictions: try a VPN or alternative network
-* TLS/SSL issues: update your system's CA certificates, or check if `HTTPS_PROXY` is configured
+* TLS/SSL issues: see [TLS or SSL connection errors](#tls-or-ssl-connection-errors)
 
 If you're behind a corporate proxy, set `HTTPS_PROXY` and `HTTP_PROXY` to your proxy's address before installing. Ask your IT team for the proxy URL if you don't know it, or check your browser's proxy settings.
 
@@ -394,7 +394,7 @@ Confirm the binary exists and is executable:
 > Get-Command claude | Select-Object Source
 > ```
 
-On Linux, check for missing shared libraries. If `ldd` shows missing libraries, you may need to install system packages. On Alpine Linux and other musl-based distributions, see [Alpine Linux setup](https://code.claude.com/docs/en/setup.md#alpine-linux-and-musl-based-distributions).
+On Linux, check for missing shared libraries. If `ldd` shows missing libraries, you may need to install system packages. On Alpine Linux and other musl-based distributions, see [Linux musl or glibc binary mismatch](#linux-musl-or-glibc-binary-mismatch).
 
 ```bash theme={null}
 ldd "$(command -v claude)" | grep "not found"
@@ -572,13 +572,19 @@ For `CRYPT_E_NO_REVOCATION_CHECK` or `CRYPT_E_REVOCATION_OFFLINE`, go to step 4.
    irm https://claude.ai/install.ps1 | iex
    ```
 
-3. **Check for proxy or firewall interference**: corporate proxies that perform TLS inspection can cause these errors, including `unable to get local issuer certificate` and `SELF_SIGNED_CERT_IN_CHAIN`. For the install step, make the install download trust your corporate proxy's CA:
+3. **Check for proxy or firewall interference**: corporate proxies that perform TLS inspection can cause these errors, including `unable to get local issuer certificate`, `unable to verify the first certificate`, and `SELF_SIGNED_CERT_IN_CHAIN`. Make the install download trust your corporate proxy's CA:
 
    > [tab] macOS/Linux
    >
+   > Set `CURL_CA_BUNDLE` for the install script's `curl` downloads, and [`NODE_EXTRA_CA_CERTS`](https://code.claude.com/docs/en/network-config#custom-ca-certificates) for the `claude install` command the script then runs. Ask your IT team for a PEM file with your proxy's root CA certificate if you don't have it. This example sets both to your proxy's CA file and runs the script in the same terminal:
+   >
    > ```bash theme={null}
-   > curl --cacert /path/to/corporate-ca.pem -fsSL https://claude.ai/install.sh | bash
+   > export CURL_CA_BUNDLE=/path/to/corporate-ca.pem
+   > export NODE_EXTRA_CA_CERTS=/path/to/corporate-ca.pem
+   > curl -fsSL https://claude.ai/install.sh | bash
    > ```
+   >
+   > If the install still fails with one of those certificate errors, ask your IT team for a file with both the public root certificates and your proxy's full CA chain. Then set both variables to that file.
 
    > [tab] Windows PowerShell
    >
@@ -602,8 +608,6 @@ For `CRYPT_E_NO_REVOCATION_CHECK` or `CRYPT_E_REVOCATION_OFFLINE`, go to step 4.
    > $env:NODE_EXTRA_CA_CERTS = 'C:\path\to\corporate-ca.pem'
    > ```
 
-   Ask your IT team for the certificate file if you don't have it. You can also try on a direct connection to confirm the proxy is the cause.
-
 4. **On Windows, work around blocked revocation checks**. The errors `CRYPT_E_NO_REVOCATION_CHECK (0x80092012)` and `CRYPT_E_REVOCATION_OFFLINE (0x80092013)` mean curl reached the server but your network blocks the certificate revocation lookup, which is common behind corporate firewalls. If the failing command is the `curl` that downloads `install.cmd`, rerun it from a Command Prompt with `--ssl-revoke-best-effort` added:
    ```batch theme={null}
    curl --ssl-revoke-best-effort -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
@@ -616,7 +620,7 @@ For `CRYPT_E_NO_REVOCATION_CHECK` or `CRYPT_E_REVOCATION_OFFLINE`, go to step 4.
 
 ### `Failed to fetch version from downloads.claude.ai`
 
-The installer couldn't reach the download server. This typically means `downloads.claude.ai` is blocked on your network. See [Check network connectivity](#check-network-connectivity).
+The end of the message gives the reason. If it's a certificate error such as `unable to verify the first certificate`, see [TLS or SSL connection errors](#tls-or-ssl-connection-errors). For any other reason, see [Check network connectivity](#check-network-connectivity).
 
 ### The connection dropped while downloading the update
 
@@ -908,13 +912,11 @@ If this prints `False`, you are on a 32-bit edition of Windows. Claude Code requ
 
 ### Linux musl or glibc binary mismatch
 
-If you see errors about missing shared libraries like `libstdc++.so.6` or `libgcc_s.so.1` after installation, the installer may have downloaded the wrong binary variant for your system.
+If you see errors about missing shared libraries like `ld-linux-x86-64.so.2` or `ld-linux-aarch64.so.1` after installation, the installer may have downloaded the wrong binary variant for your system.
 
 ```text theme={null}
-Error loading shared library libstdc++.so.6: No such file or directory
+Error loading shared library ld-linux-x86-64.so.2: No such file or directory
 ```
-
-This can happen on glibc-based systems that have musl cross-compilation packages installed, causing the installer to misdetect the system as musl.
 
 **Solutions:**
 
@@ -926,11 +928,7 @@ This can happen on glibc-based systems that have musl cross-compilation packages
 
 2. **If you're on glibc but got the musl binary**, remove the installation and reinstall. You can also manually download the correct binary using the manifest at `https://downloads.claude.ai/claude-code-releases/{VERSION}/manifest.json`. File a [GitHub issue](https://github.com/anthropics/claude-code/issues) with the output of `ldd --version` and `ls /lib/libc.musl*`.
 
-3. **If you're actually on musl**, such as Alpine Linux, install the required packages:
-   ```bash theme={null}
-   apk add libgcc libstdc++ ripgrep
-   ```
-   On Alpine, `ripgrep` is in the community repository. If `apk` reports that the package is missing, see [Alpine Linux setup](https://code.claude.com/docs/en/setup.md#alpine-linux-and-musl-based-distributions).
+3. **If you're on musl but got the glibc binary**, [remove the installation](https://code.claude.com/docs/en/setup.md#uninstall-claude-code). On Alpine Linux, first install the packages that [Alpine Linux setup](https://code.claude.com/docs/en/setup.md#alpine-linux-and-musl-based-distributions) names. Then run the [install command](https://code.claude.com/docs/en/setup.md#install-claude-code), which installs the musl binary.
 
 ### `Illegal instruction`
 
@@ -1003,7 +1001,7 @@ Then run `source ~/.bashrc` and retry `claude`.
 
 These issues apply if you installed Claude Code with `npm install -g` inside WSL. If you used the [native installer](https://code.claude.com/docs/en/setup.md), skip this section. On npm 12, install as [Fix an npm 12 install](#fix-an-npm-12-install) describes.
 
-**OS or platform detection issues.** If npm reports a platform mismatch during install, WSL is likely picking up the Windows `npm`. Run `npm config set os linux` first, then install with `npm install -g @anthropic-ai/claude-code --force`. Do not use `sudo`.
+**OS or platform detection issues.** If npm reports a platform mismatch during install, run `npm config set os linux` first, then install with `npm install -g @anthropic-ai/claude-code@latest --force`. Do not use `sudo`.
 
 **`exec: node: not found` when running `claude`.** Your WSL environment is likely using the Windows installation of Node.js. Confirm with `which npm` and `which node`: paths starting with `/mnt/c/` are Windows binaries, while Linux paths start with `/usr/`. To fix this, install Node via your Linux distribution's package manager or via [`nvm`](https://github.com/nvm-sh/nvm).
 
@@ -1090,7 +1088,7 @@ To fix an npm 12 install, switch to the native installer or allow the step:
   3. Reinstall:
 
      ```bash theme={null}
-     npm install -g @anthropic-ai/claude-code
+     npm install -g @anthropic-ai/claude-code@latest
      ```
 
      If this or step 1 fails with `EACCES`, switch to the native installer instead of rerunning it with `sudo`. Claude Code runs npm without `sudo` when it updates itself, so automatic updates would fail the same way.
@@ -1101,7 +1099,7 @@ To fix an npm 12 install, switch to the native installer or allow the step:
 
 ### npm `ENOTEMPTY` error during update or reinstall
 
-When you run `npm install -g @anthropic-ai/claude-code` over an existing installation, npm can fail while moving the old package directory aside:
+When you run `npm install -g @anthropic-ai/claude-code@latest` over an existing installation, npm can fail while moving the old package directory aside:
 
 ```text theme={null}
 npm error code ENOTEMPTY
@@ -1135,7 +1133,7 @@ The `npm error path` line names the directory npm couldn't move. Delete that dir
 Then reinstall. On npm 12, follow [Fix an npm 12 install](#fix-an-npm-12-install). Otherwise, run:
 
 ```bash theme={null}
-npm install -g @anthropic-ai/claude-code
+npm install -g @anthropic-ai/claude-code@latest
 ```
 
 Confirm with `claude --version`, which prints a version number such as `2.1.211 (Claude Code)`.

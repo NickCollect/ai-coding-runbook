@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/secure-deployment
-fetched_at: 2026-11-09T07:30:17.471023+00:00
+fetched_at: 2026-11-16T07:30:44.092860+00:00
 fetch_method: mintlify_md
 ---
 
@@ -123,7 +123,7 @@ docker run \
   --network none \
   --memory 2g \
   --cpus 2 \
-  --pids-limit 100 \
+  --pids-limit 600 \
   --user 1000:1000 \
   -v /path/to/code:/workspace:ro \
   -v /var/run/proxy.sock:/var/run/proxy.sock:ro \
@@ -141,7 +141,7 @@ Here's what each option does:
 | `--tmpfs /tmp:...` | Provides a writable temporary directory that's cleared when the container stops |
 | `--network none` | Cuts the container off from external networks |
 | `--memory 2g` | Limits memory usage to prevent resource exhaustion |
-| `--pids-limit 100` | Limits process count to prevent fork bombs |
+| `--pids-limit 600` | Limits processes and threads to prevent fork bombs |
 | `--user 1000:1000` | Runs as a non-root user |
 | `-v ...:/workspace:ro` | Mounts code read-only so the agent can analyze but not modify it. **Avoid mounting sensitive host directories like `~/.ssh`, `~/.aws`, or `~/.config`** |
 | `-v .../proxy.sock:...` | Mounts a Unix socket connected to a proxy running outside the container (see below) |

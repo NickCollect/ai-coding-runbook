@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/troubleshooting
-fetched_at: 2026-11-02T07:00:26.767020+00:00
+fetched_at: 2026-11-16T07:30:45.418076+00:00
 fetch_method: mintlify_md
 ---
 
@@ -328,7 +328,7 @@ If the repository has large git submodules, update Claude Code. On v2.1.295 and 
 
 ### Marketplace updates keep failing offline
 
-You work in an environment where the marketplace's git host is unreachable, and every session repeats a failed refresh in the background. Your existing checkout of the marketplace stays in place and startup isn't delayed.
+You work in an environment where the marketplace's git host is unreachable, and every session repeats a failed refresh in the background. Your existing checkout of the marketplace stays in place.
 
 Each session, for a marketplace with [auto-update on](https://code.claude.com/docs/en/plugins/loading.md#which-marketplaces-and-plugins-auto-update), Claude Code checks the marketplace's git host for new commits in the background. When that check can't reach the host, it tries to clone the marketplace again, and offline that clone fails too.
 
@@ -681,15 +681,21 @@ Before v2.1.246, the skills count in that summary included only a plugin's `comm
 
 ### `Plugin "<name>" not cached at <path>`
 
-The **Errors** tab shows this line with the guidance `Run /plugin to refresh the plugin cache`. Claude Code has an install record for the plugin, but the directory the record points at is missing, for example after you cleared the cache.
+The **Errors** tab shows this line with the guidance `Run /plugin to refresh the plugin cache`. It means Claude Code found no usable copy of the plugin. For example, you cleared the cache, so the directory its install record points at is missing. Or you opened a repository whose settings enable the plugin, and you haven't installed it.
 
-Reinstall the plugin from your shell. `claude plugin install <name>@<marketplace>` re-downloads a plugin whose install directory is missing even though its record exists:
+Install the plugin from your shell. If you opened a repository whose `.claude/settings.json` enables the plugin, run this from the project with the plugin's key from `enabledPlugins`, as [Enabled in project settings but not installed](https://code.claude.com/docs/en/plugins/loading.md#enabled-in-project-settings-but-not-installed) describes:
+
+```shell theme={null}
+claude plugin install <name>@<marketplace> --scope project
+```
+
+Otherwise, run this, which re-downloads a plugin whose install directory is missing even though its record exists:
 
 ```shell theme={null}
 claude plugin install <name>@<marketplace>
 ```
 
-Then run `/reload-plugins` in your session. The **Errors** tab entry disappears and the plugin is back under **Installed**.
+Then run `/reload-plugins` in your session. The **Errors** tab entry disappears and the plugin is listed under **Installed**.
 
 ### `installed_plugins.json holds a record under "<id>" that this version of Claude Code cannot read`
 
@@ -842,13 +848,12 @@ The **Errors** tab shows one of these messages:
 
 #### `hook error` notices in the transcript
 
-A notice of the form `... hook error: Failed with non-blocking status code: <stderr>` means the hook ran and its command failed. For example, `Stop hook error: Failed with non-blocking status code: /bin/sh: node: command not found` means the shell Claude Code spawned couldn't find `node`. Install it, or make sure it's on the `PATH` of the terminal you start `claude` from.
+A notice of the form `... hook error: Failed with non-blocking status code: <stderr>` means the hook's command failed. For example, `Stop hook error: Failed with non-blocking status code: /bin/sh: node: command not found` means the shell Claude Code spawned couldn't find `node`. Install it, or make sure it's on the `PATH` of the terminal you start `claude` from.
 
 If the stderr shows the plugin's path cut off at a space, the hook's shell-form command uses `${CLAUDE_PLUGIN_ROOT}` outside quotes and the install path contains a space. Wrap the variable in double quotes or use [exec form](https://code.claude.com/docs/en/hooks.md#exec-form-and-shell-form). To find the unquoted variable, run `claude plugin validate` on the plugin's directory and look for its [quoting warning](https://code.claude.com/docs/en/plugins/manifest-reference.md#quoting-and-path-separators).
 
-If the notice reads `Failed to run: Plugin directory does not exist: <path>`, see [`Plugin directory does not exist`](#plugin-directory-does-not-exist).
-
-For any other error, run the hook's command yourself from the plugin directory to see the full output, or capture the full stderr with [debug logging](https://code.claude.com/docs/en/hooks.md#debug-hooks).
+* If the notice reads `Failed to run: Plugin directory does not exist: <path>`, see [`Plugin directory does not exist`](#plugin-directory-does-not-exist).
+* For any other error, capture the full stderr with [debug logging](https://code.claude.com/docs/en/hooks.md#debug-hooks).
 
 #### A plugin hook blocks a tool call or prompt
 
@@ -866,15 +871,15 @@ Event names are case-sensitive, so confirm yours matches exactly, for example `P
 
 **2. Check the matcher**
 
-Confirm the hook's `matcher` matches the tool name.
+For a tool event such as `PostToolUse`, confirm the hook's `matcher` matches the tool name.
 
 **3. Trigger the event on purpose**
 
-For a `PostToolUse` hook, ask Claude to edit a file.
+Turn on debug logging as [Debug hooks](https://code.claude.com/docs/en/hooks.md#debug-hooks) describes. For a `PostToolUse` hook, ask Claude to edit a file.
 
 **4. Read the debug log**
 
-Open the [debug log](https://code.claude.com/docs/en/hooks.md#debug-hooks), which records which hooks matched. A hook that ran shows up there with its exit code.
+Open the [debug log](https://code.claude.com/docs/en/hooks.md#debug-hooks). A hook that ran shows up there with its exit code.
 
 ### `Plugin directory does not exist: <path>`
 

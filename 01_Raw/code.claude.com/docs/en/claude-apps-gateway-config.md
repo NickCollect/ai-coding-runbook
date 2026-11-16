@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway-config
-fetched_at: 2026-11-09T07:30:17.770049+00:00
+fetched_at: 2026-11-16T07:30:44.544065+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ The [complete example](#complete-example) at the end of this page exercises ever
 
 ## File structure
 
-Five sections are [required](#required-sections). Every other section is [optional](#optional-sections), and an omitted section takes its defaults. Unknown keys fail boot, so a typo surfaces as a named error rather than a silently ignored setting.
+Five sections are [required](#required-sections). Every other section is [optional](#optional-sections), and an omitted section takes its defaults.
 
 **Required sections:**
 
@@ -34,6 +34,7 @@ Five sections are [required](#required-sections). Every other section is [option
 
 **Optional sections:**
 
+* [`login_notice`](#login_notice): a notice developers see when they sign in
 * [`admin`](#admin): Admin API auth and retention for spend limits
 * [`enforcement`](#enforcement): spend-limit fail-open or fail-closed behavior
 * [`pricing`](#pricing): contracted rates and a multiplier for the spend meter and for the cost figures developers see
@@ -64,7 +65,11 @@ The `listen` block controls where the gateway serves: the bind address and port,
 | `port` | No | Bind port. Default `8080`. |
 | `public_url` | Unless `host` is loopback | The externally visible `https://` origin, used to build the IdP `redirect_uri` and discovery metadata. Required whenever `host` isn't a loopback address, whether TLS terminates at a proxy such as an ALB, Ingress, or Cloud Run or at the gateway itself through `tls`, because the gateway never derives its own origin from `X-Forwarded-*` headers; they are client-spoofable. Boot fails without it. `trusted_proxies` below governs client-IP resolution only. Also required to enable [telemetry](#telemetry), because the gateway builds the OTLP endpoint it pushes to clients from this URL. |
 | `tls.cert` / `tls.key` | No | PEM paths if the gateway terminates TLS itself |
-| `trusted_proxies` | No | CIDRs or IPs of load balancers in front of the gateway. When set, the gateway trusts `X-Forwarded-For` only from these peers and records the real client IP for per-IP rate limiting and audit. Equivalent to nginx `set_real_ip_from`. `X-Forwarded-For` entries written as `ipv4:port` or `[ipv6]:port`, as some load balancers do, are read with the port dropped. An IPv6 address with a port appended and no brackets may be read as a different address or not read at all, so turn off the port option on any proxy that writes that form. |
+| `trusted_proxies` | No | CIDRs or IPs of the frontends to trust. When set, the gateway trusts `X-Forwarded-For` only from these peers and records the real client IP for per-IP rate limiting and audit. |
+
+List a frontend in `trusted_proxies` only if the last `X-Forwarded-For` entry that it passes on is one that no developer wrote. List no address or range that developers connect from. A frontend that appends the address of each connection it receives qualifies. One that passes the header on as developers send it doesn't.
+
+`X-Forwarded-For` entries written as `ipv4:port` or `[ipv6]:port`, as some load balancers do, are read with the port dropped. An IPv6 address with a port appended and no brackets may be read as a different address or not read at all. Turn off the port option on any proxy that writes that form.
 
 ### `oidc`
 
@@ -520,6 +525,10 @@ By default the gateway signs every Bedrock request with one credential, so AWS s
 
 Requires a gateway running Claude Code v2.1.281 or later. [Cost attribution on AWS](https://code.claude.com/docs/en/claude-apps-gateway-on-aws.md#cost-attribution) covers the IAM role and where AWS billing shows the sessions.
 
+> [!NOTE]
+>
+> For per-developer attribution, set `assume_role` with `session_name` on every `bedrock` and [`mantle`](#amazon-bedrock-mantle-endpoint) upstream except those that use `aws_bearer_token`. Those [can't take `assume_role`](#bedrock-in-another-aws-account), so their requests stay under one principal.
+
 ```yaml theme={null}
 upstreams:
   - provider: bedrock
@@ -535,8 +544,6 @@ upstreams:
 An active developer costs one STS call per hour per gateway replica, and concurrent first requests share one call.
 
 The gateway also makes one call of its own on this role: the token count for a request the client abandoned, so that [spend limits](https://code.claude.com/docs/en/claude-apps-gateway-spend-limits.md) stay accurate. That count and its [one-token fallback request](#amazon-bedrock) are signed by the shared `claude-apps-gateway` session, so AWS attributes the fallback to `claude-apps-gateway` rather than to the developer.
-
-For strict per-developer attribution, set `assume_role` with `session_name` on every Bedrock upstream you list. An upstream without it signs the requests it serves with its own credentials.
 
 #### Amazon Bedrock Mantle endpoint
 
@@ -657,7 +664,7 @@ upstreams:
 
 | Setup | How |
 | - | - |
-| RBAC | Grant the gateway's identity `Azure AI User` or `Cognitive Services User` on the Microsoft Foundry resource |
+| RBAC | Grant the gateway's identity the `Foundry User` or `Cognitive Services User` role on the Microsoft Foundry resource |
 | Deployments | Microsoft Foundry uses admin-chosen deployment names, not canonical model IDs. Add a [`models:`](#models) block mapping each canonical ID to your deployment name. |
 | AKS (workload identity) | Federate a User-Assigned Managed Identity with the cluster's OIDC issuer and bind it to the gateway's service account. `use_azure_ad: true` picks it up via `WorkloadIdentityCredential`. |
 | ACI / App Service | Enable system-assigned or user-assigned managed identity on the resource. `use_azure_ad: true` picks it up. |
@@ -853,6 +860,18 @@ If your IdP's userinfo endpoint returns the groups claim and `oidc.google_groups
 
 ## Optional sections
 
+### `login_notice`
+
+To show developers a notice when they sign in, set the top-level `login_notice` key to the notice text, up to 500 characters. This example says who the gateway is for and where to ask for access:
+
+```yaml theme={null}
+login_notice: This gateway is for Example Corp staff. For access questions, email it-help@example.com.
+```
+
+Developers see the text under `Notice from <gateway hostname>` on the gateway's verification page in the browser and on the interactive sign-in screen in the terminal. Line breaks in the text become spaces. The notice appears before sign-in, so anyone who can reach the gateway can read it.
+
+Requires Claude Code v2.1.319 or later on the gateway server, and also on the developer's machine for the terminal screen. An earlier gateway refuses to start when it finds the key. Upgrade every replica before you add the key, and remove the key before you roll back.
+
 ### `admin`
 
 Optional. Enables `/v1/organizations/spend_limits`, which mirrors Anthropic's public Admin API, and per-developer spend enforcement on `/v1/messages`. See [Spend limits](https://code.claude.com/docs/en/claude-apps-gateway-spend-limits.md) for how caps are set and enforced; this section covers the `gateway.yaml` keys that turn the feature on and tune it.
@@ -871,6 +890,9 @@ admin:
   # IdP groups granted full admin via the normal gateway JWT (no API key).
   admin_groups: [platform-finops]
   blocked_message: request an increase at https://go.example.com/claude-limits
+  # Try eng-platform's pooled budget first, then eng-all's, then any other group's.
+  pooled_conflict_rule: priority_list
+  pooled_priority_order: [eng-platform, eng-all]
 ```
 
 | Field | Required | Description |
@@ -883,6 +905,21 @@ admin:
 | `spend_retention_months` | No | Default `13`. `spend` counter rows older than this are swept. The default keeps a full year plus the current partial month for year-over-year reporting. |
 | `identity_retention_days` | No | Default `90`. Last-seen TTL for `principal_emails` rows, which hold each developer's email, display name, and groups (PII). Deliberately shorter than spend retention so a deprovisioned identity ages out while its anonymous spend counters remain. |
 | `group_limit_mode` | No | `min` (default) or `max`. When a developer is in several groups with caps, `min` enforces the most restrictive and `max` the least. Used by both enforcement and `/effective`. |
+| `pooled_conflict_rule` | No | `default_order` (default) or `priority_list`. The order the gateway tries a developer's pooled budgets in. See [Pooled budget order](#pooled-budget-order). Requires v2.1.319 or later. |
+| `pooled_priority_order` | With `priority_list` | Up to 50 group names, each listed once and spelled as your IdP sends it. The groups whose pooled budgets the gateway tries first. See [Pooled budget order](#pooled-budget-order). Requires v2.1.319 or later. |
+
+#### Pooled budget order
+
+A pooled budget is one monthly limit that a whole group spends against. To set one, add `pooled_budget` to the [request that sets the group's monthly cap](https://code.claude.com/docs/en/claude-apps-gateway-spend-limits.md#set-a-cap), as in `"pooled_budget": {"amount": "500000"}` for \$5,000. The request also takes the group's `scope`, `"period": "monthly"`, and `amount`, which stays each member's own cap.
+
+For a developer in several such groups, each request counts against the first budget whose spend is below its limit, and is refused when every budget is used up. `pooled_conflict_rule` sets the order the gateway tries the budgets in:
+
+* **`default_order`**: the largest limit first, and equal limits in ascending group-name order
+* **`priority_list`**: the budgets of the groups in `pooled_priority_order`, in list order, then the other groups' budgets by group name
+
+If you list groups without `pooled_conflict_rule: priority_list`, the gateway ignores the list and logs a warning at boot.
+
+A gateway server earlier than v2.1.319 refuses to start when it finds `pooled_conflict_rule` or `pooled_priority_order`. Upgrade every replica before you add either key, and remove both keys before you roll back.
 
 ### `enforcement`
 
@@ -972,6 +1009,8 @@ models:
 
 Each key under `upstream_model` must match the `name` of a configured upstream, which defaults to the provider name. A key that matches no upstream fails boot, so omit the lines for providers you don't use.
 
+To let developers use the `fable` alias with `auto_include_builtin_models: false`, add a `claude-fable-5` entry to `models`. That's the ID the [`fable` alias](https://code.claude.com/docs/en/model-config#fable-alias-resolution) resolves to for developers signed in to the gateway. Without it, their messages fail with an error that starts with `API Error: 400 model claude-fable-5 is not in the operator's model allowlist`.
+
 ### `managed`
 
 The `managed` block defines role-based access policies keyed on IdP groups or email domain. Policies are evaluated in order; by default the first match is selected, then merged onto the `match: {}` catch-all base. A user who matches two role policies gets only the first, so the second policy's deny rules don't apply unless you [apply every matching policy](#apply-every-matching-policy). Policies are served per-user at `GET /managed/settings` with ETag/304 caching.
@@ -996,7 +1035,11 @@ managed:
 A `match: {}` catch-all, conventionally listed last, is treated as a base layer. Every other policy inherits any key it doesn't set from the catch-all, so per-role entries only need to list what differs from the org default. The merge rules depend on the key type:
 
 * **Allow-lists**: `availableModels` and `permissions.allow`. A specific policy's list fully replaces the base's.
-* **Deny-lists and hook arrays**: `permissions.deny`, `permissions.ask`, `disabledMcpjsonServers`, `deniedMcpServers`, `blockedMarketplaces`, `deniedModels`, and every `hooks` event-type array. These take the union of base and policy, so an org-wide deny or audit hook can't be accidentally dropped by a per-role override.
+* **Deny-lists and hook arrays**: these take the union of base and policy:
+  * `permissions.deny` and `permissions.ask`
+  * `disabledMcpjsonServers` and `deniedMcpServers`
+  * `blockedMarketplaces` and `deniedModels`
+  * The `hooks` event-type arrays
 * **Record-typed keys**: `env`, `modelOverrides`, and `skillOverrides`. These shallow-merge, so a per-role `env` block overrides keys it sets and inherits the rest from the base.
 
 `availableModels` is also enforced server-side at `/v1/messages`, so a denied model returns `400` regardless of what the client sends. An empty list denies every model. The check also covers the model a session starts on before the developer picks one, so [start sessions on a model the policy allows](#start-sessions-on-a-model-the-policy-allows).
@@ -1248,6 +1291,10 @@ Claude Code applies this variable without showing the developer the approval dia
 
 To turn off 1M context instead, set [`CLAUDE_CODE_DISABLE_1M_CONTEXT: "1"`](https://code.claude.com/docs/en/model-config#extended-context) in the same `env` block. Claude Code then treats every model as having a 200K window. In interactive sessions, each developer approves this variable in the [approval dialog](#what-goes-in-cli) before it takes effect.
 
+> [!NOTE]
+>
+> Claude Code doesn't read an alias's `upstream_model` to size its context window. To give its model's window to an alias in `models` that Claude Code doesn't recognize, see [Correct the window for a gateway or custom model ID](https://code.claude.com/docs/en/model-config.md#correct-the-window-for-a-gateway-or-custom-model-id).
+
 #### One-hour prompt cache
 
 To request the one-hour [prompt cache TTL](https://code.claude.com/docs/en/prompt-caching.md#cache-lifetime) instead of the default five minutes, add these keys to a policy's existing [`code`, `cli`, or `settings` block](#choose-cli-or-code) and restart the gateway. The keys need Claude Code v2.1.242 or later on the gateway server and on clients.
@@ -1308,7 +1355,7 @@ The gateway omits keys with no Claude Desktop equivalent, such as `hooks` and sc
 
 ##### Apply `code` settings in the Code tab
 
-The Claude Code settings a policy holds under its [`code`](#choose-cli-or-code) key apply in Claude Desktop's Code tab when all of these hold:
+Apart from [some provider and model variables](https://code.claude.com/docs/en/desktop.md#managed-settings), the Claude Code settings a policy holds under its [`code`](#choose-cli-or-code) key apply in Claude Desktop's Code tab when all of these hold:
 
 * The policy also has a `desktop` key, and an empty `desktop: {}` counts
 * Claude Desktop is version 2.9939.2 or later
@@ -1350,20 +1397,31 @@ Every key is optional; Claude Desktop applies its own default for any key you om
 
 ##### What the gateway rejects at boot
 
-The gateway validates each `desktop` block at boot against the configuration schema Claude Desktop itself uses, so a mistake surfaces at gateway start as an error naming the key rather than reaching every connected desktop. The gateway fails at boot when a block contains:
+The gateway fails at boot when a `desktop` block contains:
 
-* An unknown key
-* A recognized key whose value Claude Desktop would reject or silently drop, such as an empty value or a misspelled sub-key inside a nested entry. Before v2.1.260, the gateway silently dropped a misspelled field inside a nested object of a `managedMcpServers` or `orgPluginSettings` entry instead of failing at boot.
+* A recognized key whose value Claude Desktop would reject or silently drop, such as an empty value.
 * A key the gateway computes itself: the inference connection, the model list, and the OTLP relay. Configure those through [`upstreams`](#upstreams), [`models`](#models), and the [`telemetry`](#telemetry) section's `forward_to`.
 * A legacy alias of a current key. In the boot error, the gateway names the canonical key to write.
+* From v2.1.300, any key whose name starts with `selfHosted`, such as the keys for a self-hosted session host. Remove these keys before you upgrade the gateway to v2.1.300 or later.
 
 If you use a deprecated value or entry shape, such as a `managedMcpServers` entry without `transport`, the gateway starts and logs a warning that names the replacement.
 
 Before v2.1.232, the gateway accepted a fixed list of 11 feature-gate keys, such as `chatTabEnabled` and `disableAutoUpdates`, and rejected every other key at boot. Before v2.1.227, the gateway also rejected `chatTabEnabled` and `chatAdvancedFileAnalysisEnabled` at boot.
 
+##### Keys the gateway doesn't know
+
+On a gateway running Claude Code v2.1.295 or later, most keys from a newer Claude Desktop release need no gateway upgrade. On v2.1.321 or later, neither do most new sub-keys inside a known key.
+
+Some keys and values still fail at boot, such as these:
+
+* A new choice in a known key's fixed list of values.
+* A likely typo of a key you can set in a `desktop` block, such as `disable_auto_updates` for `disableAutoUpdates`. The error suggests a name.
+
+In each case, if the name or value is real in a newer Claude Desktop release, [upgrade the gateway](https://code.claude.com/docs/en/claude-apps-gateway-deploy.md#upgrades) to the latest release. Otherwise correct or remove it. To find out before you deploy, [test the policy](#test-a-policy-before-deployment).
+
 ##### Keys that need a later gateway or Claude Desktop version
 
-The gateway validates a `desktop` block against the schema bundled with its installed version, as it does the `cli` block. To deliver a setting introduced by a newer Claude Desktop release, upgrade the gateway first. For example, `userPluginMarketplacesEnabled` and `userPluginUploadsEnabled` need Claude Code v2.1.260 or later on the gateway server and Claude Desktop 1.37937.0 or later on members' machines.
+`userPluginMarketplacesEnabled` and `userPluginUploadsEnabled` need Claude Code v2.1.260 or later on the gateway server and Claude Desktop 1.37937.0 or later on members' machines.
 
 `blockReadsOutsideWorkingDirectories`, `disableBypassPermissionsMode`, `configRecheckIntervalMinutes`, and `sshClientPath` need Claude Code v2.1.281 or later on the gateway server. So do the `required` value of `microsoftAuthBroker` and the `continuousAccessEvaluation` field of a Microsoft 365 `managedMcpServers` entry. Claude Desktop releases that predate the `required` value read it as `disabled`, so set `required` only after every member's Claude Desktop supports it. Claude Desktop's [managed configuration reference](https://claude.com/docs/third-party/claude-desktop/configuration) lists the release that first reads each key.
 
@@ -1634,7 +1692,7 @@ While `allow_cidrs` is empty, the gateway warns in two places, without changing 
 
 Both signals use the client address as the gateway resolves it. If a load balancer, port-forward, or tunnel relays traffic and isn't listed in `listen.trusted_proxies`, the gateway sees the relay's address, which is usually private, so neither the runtime warning nor a private allow list catches traffic relayed through it.
 
-Behind such a front end, set [`listen.trusted_proxies`](#listen) first so the gateway sees real client addresses, and keep the gateway and everything in front of it unreachable from the public internet regardless.
+If the relay [belongs in `listen.trusted_proxies`](#listen), list it there. Keep the gateway and everything in front of it unreachable from the public internet regardless.
 
 ### `load_test_mode`
 
@@ -1681,6 +1739,8 @@ This full reference config exercises every core section; the [HTTP tuning blocks
 # environment variable (debug | info | warn | error; default info). debug
 # also logs the claim names in each id_token, for groups_claim diagnosis.
 # It does not affect audit events, which are always emitted.
+# Set CLAUDE_GATEWAY_LOG_FORMAT=json to write operational log lines as JSON
+# objects with severity, time, and message.
 
 listen:
   host: 0.0.0.0
@@ -1721,6 +1781,9 @@ store:
   # connect_timeout_seconds: 5
   # readiness_grace_seconds: 300   # keep passing the readiness check through a database failover
 
+# Notice shown at sign-in. Anyone who can reach the gateway can read it.
+# login_notice: This gateway is for Example Corp staff. For access questions, email it-help@example.com.
+
 # Enables /v1/organizations/spend_limits (mirrors the Anthropic Admin API)
 # and per-developer spend enforcement on /v1/messages. Omit to disable.
 # Caps themselves are set via the admin API, not here.
@@ -1735,6 +1798,8 @@ store:
 #   # spend_retention_months: 13
 #   # identity_retention_days: 90
 #   # group_limit_mode: min
+#   # pooled_conflict_rule: priority_list
+#   # pooled_priority_order: [eng-platform, eng-all]
 
 # enforcement:
 #   fail_closed_on_error: false

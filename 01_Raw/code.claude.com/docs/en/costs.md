@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/costs
-fetched_at: 2026-11-09T07:30:18.016842+00:00
+fetched_at: 2026-11-16T07:30:44.621261+00:00
 fetch_method: mintlify_md
 ---
 
@@ -242,7 +242,7 @@ Developers usually bring limit questions to their admin, so it helps to know whi
   * Run `/usage-credits` to request usage beyond the allowance, if you have [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) turned on.
   * On Claude Code v2.1.234 or later, [wait and continue the interrupted task automatically after the reset](https://code.claude.com/docs/en/interactive-mode.md#wait-for-a-usage-limit-to-reset); that section lists when Claude Code starts the wait on its own and when the developer picks it from `/rate-limit-options`. To control for your fleet whether Claude Code starts that wait on its own, set [`autoContinueAtUsageLimit`](https://code.claude.com/docs/en/settings-reference#autocontinueatusagelimit) in [managed settings](https://code.claude.com/docs/en/settings.md#settings-precedence).
 * **"You've hit your individual spend limit", "org's monthly spend limit", or "team's shared budget"**: the developer's request would be billed to usage credits, and those credits have reached a spend limit you set. To let the developer continue, go to [**Organization settings > Usage**](https://claude.ai/admin-settings/usage) and increase the limit the message names. When the message also names a plan reset time, the developer can instead wait until then. See [the error reference](https://code.claude.com/docs/en/errors.md#youve-hit-your-monthly-spend-limit) for each variant.
-* **A spend limit message from a [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway)**: the developer passed a spend cap you set on your self-hosted gateway, and the gateway blocks their requests until the period resets or you raise the cap. See [gateway spend limits](https://code.claude.com/docs/en/claude-apps-gateway-spend-limits.md) for caps, reset schedules, and the message the developer sees.
+* **A spend limit message from a [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway)**: the developer passed a spend cap you set on your self-hosted gateway. The gateway blocks their requests until you raise the cap, or until the cap resets if it's above \$0. See [gateway spend limits](https://code.claude.com/docs/en/claude-apps-gateway-spend-limits.md) for caps, reset schedules, and the message the developer sees.
 * **A context or auto-compact warning**: not a usage limit. The conversation has grown close to the session's [auto-compact window](https://code.claude.com/docs/en/model-config.md#set-the-auto-compact-window), the threshold where Claude Code summarizes older history to free space. Point the developer at [reduce token usage](#reduce-token-usage).
 * **Unexpectedly high spend on an API or cloud-provider plan**: usually traces back to long sessions that were never cleared or to Opus left as the default model. The highest-impact habits to share are clearing between unrelated tasks and matching the model to the job, both covered in [reduce token usage](#reduce-token-usage).
 
@@ -298,9 +298,7 @@ MCP tool definitions are [deferred by default](https://code.claude.com/docs/en/m
 
 Custom [hooks](https://code.claude.com/docs/en/hooks.md) can preprocess data before Claude sees it. Instead of Claude reading a 10,000-line log file to find errors, a hook can grep for `ERROR` and return only matching lines, reducing context from tens of thousands of tokens to hundreds.
 
-A [skill](https://code.claude.com/docs/en/skills.md) can give Claude domain knowledge so it doesn't have to explore. For example, a "codebase-overview" skill could describe your project's architecture, key directories, and naming conventions. When Claude invokes the skill, it gets this context immediately instead of spending tokens reading multiple files to understand the structure.
-
-For example, this PreToolUse hook filters test output to show only failures:
+This PreToolUse hook trims test output to its last 100 lines:
 
 > [tab] settings.json
 >
@@ -326,17 +324,17 @@ For example, this PreToolUse hook filters test output to show only failures:
 
 > [tab] filter-test-output.sh
 >
-> The hook calls this script. Create the folder with `mkdir -p ~/.claude/hooks`, save the script below as `~/.claude/hooks/filter-test-output.sh`, and make it executable with `chmod +x ~/.claude/hooks/filter-test-output.sh`. It checks if the command is a test runner and modifies it to show only failures:
+> The hook calls this script. Create the folder with `mkdir -p ~/.claude/hooks`, save the script below as `~/.claude/hooks/filter-test-output.sh`, and make it executable with `chmod +x ~/.claude/hooks/filter-test-output.sh`. It checks if the command is a test runner and, if so, keeps only the last 100 lines of its output:
 >
 > ```bash theme={null}
 > #!/bin/bash
 > input=$(cat)
 > cmd=$(echo "$input" | jq -r '.tool_input.command')
 >
-> # If running tests, filter to show only failures
+> # If running tests, keep only the last 100 lines
 > pattern='^(npm test|pytest|go test)( [^;&|<>`$#\\[:cntrl:]]*)?$'
 > if [[ "$cmd" =~ $pattern ]]; then
->   filtered_cmd="$cmd 2>&1 | grep -A 5 -E '(FAIL|ERROR|error:)' | head -100"
+>   filtered_cmd="$cmd 2>&1 | tail -n 100"
 >   echo "$input" | jq --arg filtered "$filtered_cmd" \
 >     '{hookSpecificOutput: {hookEventName: "PreToolUse", updatedInput: (.tool_input + {command: $filtered})}}'
 > else
@@ -345,6 +343,8 @@ For example, this PreToolUse hook filters test output to show only failures:
 > ```
 
 To verify the setup, run `/hooks` and check that the hook appears under PreToolUse. You can also start Claude Code with `claude --debug-file ./claude-debug.txt` and ask Claude to run `npm test`. When the hook rewrites the command, that log file contains a `modified tool input keys` line listing `command` and the other Bash input fields.
+
+A [skill](https://code.claude.com/docs/en/skills.md) can give Claude domain knowledge so it doesn't have to explore. For example, a "codebase-overview" skill could describe your project's architecture, key directories, and naming conventions. When Claude invokes the skill, it gets this context immediately instead of spending tokens reading multiple files to understand the structure.
 
 ### Move instructions from CLAUDE.md to skills
 

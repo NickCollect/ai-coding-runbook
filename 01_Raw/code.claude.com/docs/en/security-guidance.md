@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/security-guidance
-fetched_at: 2026-10-26T05:40:05.022295+00:00
+fetched_at: 2026-11-16T07:30:45.506356+00:00
 fetch_method: mintlify_md
 ---
 
@@ -59,6 +59,8 @@ To turn the plugin on in the local sessions your teammates start in the reposito
   }
 }
 ```
+
+Each teammate also [runs `claude plugin install security-guidance@claude-plugins-official --scope project`](https://code.claude.com/docs/en/plugins/loading#enabled-in-project-settings-but-not-installed) once per clone.
 
 Administrators can enable the plugin organization-wide by setting [`enabledPlugins`](https://code.claude.com/docs/en/settings-reference#enabledplugins) in [managed settings](https://code.claude.com/docs/en/admin-setup.md).
 

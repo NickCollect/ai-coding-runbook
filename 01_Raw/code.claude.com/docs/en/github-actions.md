@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/github-actions
-fetched_at: 2026-11-02T07:00:26.191667+00:00
+fetched_at: 2026-11-16T07:30:44.881493+00:00
 fetch_method: mintlify_md
 ---
 
@@ -135,12 +135,14 @@ When you install the app, you grant the following permissions:
 | Administration | Read |
 | Checks | Read and write |
 | Contents | Read and write |
+| Dependabot alerts | Read |
 | Discussions | Read and write |
 | Issues | Read and write |
 | Members | Read |
 | Merge queues | Read |
 | Metadata | Read |
 | Pull requests | Read and write |
+| Repository creation | Read and write |
 | Repository hooks | Read and write |
 | Statuses | Read |
 | Workflows | Read and write |

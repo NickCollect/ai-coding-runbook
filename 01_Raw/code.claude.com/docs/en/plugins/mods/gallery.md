@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/mods/gallery
-fetched_at: 2026-11-02T07:00:26.679500+00:00
+fetched_at: 2026-11-16T07:30:45.306118+00:00
 fetch_method: mintlify_md
 ---
 
@@ -369,7 +369,7 @@ In the terminal, a pane that returns only an `Svg` opens empty. To draw somethin
 
 ### `Image` and `Client`
 
-Two more elements have no sample here. `Image` draws a PNG or raw pixels in the terminal. `Client` is a region that a second file of yours draws, for animation and pointer input. The [elements reference](https://code.claude.com/docs/en/plugins/mods/reference.md#elements) lists their props.
+`Image` and `Client` have no sample here. `Image` draws a PNG or raw pixels in the terminal. `Client` is a region that a second file of yours draws, for animation and pointer input. The [elements reference](https://code.claude.com/docs/en/plugins/mods/reference.md#elements) lists their props.
 
 An `Image` draws as a picture in these terminals:
 

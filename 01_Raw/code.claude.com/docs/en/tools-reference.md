@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/tools-reference
-fetched_at: 2026-11-09T07:30:19.123226+00:00
+fetched_at: 2026-11-16T07:30:45.673529+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,7 +32,7 @@ To add custom tools, connect an [MCP server](https://code.claude.com/docs/en/mcp
 | `CronDelete` | Cancels a session-scoped scheduled task by ID | No |
 | `CronList` | Lists all session-scoped scheduled tasks | No |
 | `Edit` | Makes targeted edits to specific files. See [Edit tool behavior](#edit-tool-behavior) | Yes |
-| `EndConversation` | Ends the session, in rare cases of sustained abusive input or when you ask Claude to demonstrate the tool. See [EndConversation tool behavior](#endconversation-tool-behavior) | No |
+| `EndConversation` | Ends the session, in rare cases of sustained abusive input or when you ask Claude to end the session and then confirm. See [EndConversation tool behavior](#endconversation-tool-behavior) | No |
 | `EnterPlanMode` | Switches to plan mode to design an approach before coding | No |
 | `EnterWorktree` | Creates an isolated [git worktree](https://code.claude.com/docs/en/worktrees.md) and switches into it, or switches into an existing worktree. See [EnterWorktree tool behavior](#enterworktree-tool-behavior) | Yes |
 | `ExitPlanMode` | Presents a plan for approval and exits plan mode | Yes |
@@ -55,7 +55,7 @@ To add custom tools, connect an [MCP server](https://code.claude.com/docs/en/mcp
 | `SendMessage` | Sends a message to another agent: an [agent team](https://code.claude.com/docs/en/agent-teams.md) teammate, a [subagent it resumes](https://code.claude.com/docs/en/sub-agents.md#resume-subagents) by agent ID or name, or one of your other Claude Code sessions, on this machine or beyond it. Messaging other sessions requires Claude Code v2.1.224 or later. [Cross-session messaging](https://code.claude.com/docs/en/cross-session-messaging.md) covers which sessions Claude can reach, [what a message looks like when it arrives](https://code.claude.com/docs/en/cross-session-messaging.md#what-a-message-looks-like), and [how Claude gets a notice when another session goes idle](https://code.claude.com/docs/en/cross-session-messaging.md#get-a-notice-when-another-session-goes-idle). Claude can include an optional `summary` input, typically 5-10 words, that Claude Code shows as a one-line preview. When Claude omits it on a [plain-text message](https://code.claude.com/docs/en/cross-session-messaging.md#limitations), Claude Code uses the first line of the message as the summary. Claude Code truncates a summary longer than 200 characters with an ellipsis | No |
 | `SendUserFile` | Sends files from the session to you with an optional caption, so a generated report, diagram, screenshot, or built artifact reaches your device instead of only being mentioned in the transcript. The optional `display` input controls presentation: `render` opens the file inline in the client, `attach` shows a download card only, and when unset the client decides by file type. Available when a [Remote Control](https://code.claude.com/docs/en/remote-control.md) client is connected or in a [cloud session](https://code.claude.com/docs/en/claude-code-on-the-web.md). Delivery runs through Anthropic-hosted infrastructure, so the tool is not available on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry | No |
 | `ShareOnboardingGuide` | Uploads `ONBOARDING.md` and returns a share link teammates can open in Claude Code. Called from `/team-onboarding` after the guide is written. Available to claude.ai subscribers on Team and Enterprise plans | Yes |
-| `Skill` | Executes a [skill](https://code.claude.com/docs/en/skills.md#control-who-invokes-a-skill) within the main conversation | Yes |
+| `Skill` | Executes a [skill](https://code.claude.com/docs/en/skills.md#control-who-invokes-a-skill) within the main conversation. Can prompt for skills that set `allowed-tools`, `disallowed-tools`, or `hooks` | Some skills |
 | `SubagentHandback` | Delivers a subagent's final report to whichever conversation receives that subagent's result. Provided only in [auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode), to subagents that the Agent tool runs locally other than [forks](https://code.claude.com/docs/en/sub-agents.md#fork-the-current-conversation), and available in the terminal CLI, IDE extensions, cloud sessions, and the Agent SDK; the classifier reviews the report before it's delivered. Requires Claude Code v2.1.271 or later | No |
 | `TaskCreate` | Creates a new task in the task list. Provided by default only on the models listed under [Task tool availability](#task-tool-availability), and on other models when you opt in | No |
 | `TaskGet` | Retrieves full details for a specific task. Provided by default only on the models listed under [Task tool availability](#task-tool-availability), and on other models when you opt in | No |
@@ -133,8 +133,6 @@ To [limit what a subagent can reach](https://code.claude.com/docs/en/sub-agents.
 
 Claude uses `AskUserQuestion` to ask you multiple-choice questions when it needs a decision or a clarification. Answer by picking an option, or type your own text through the `Other` row or the notes field.
 
-When you answer by typing your own text, Claude Code relays the answer with neutral wording so Claude follows what you wrote, including a request to wait or explain first.
-
 ### Question auto-continue timeout
 
 Questions stay open until you answer them. If you want a question you leave unanswered to eventually close and let Claude continue without you, set the [`askUserQuestionTimeout`](https://code.claude.com/docs/en/settings-reference#askuserquestiontimeout) setting to `60s`, `5m`, or `10m`, either in your user `settings.json` or from the **Question auto-continue timeout** row in `/config`.
@@ -203,9 +201,9 @@ The time limit requires Claude Code v2.1.285 or later. Before v2.1.288, it appli
 The time limit counts from the moment the command enters the background:
 
 * A command that Claude starts in the background gets 30 minutes, or the `timeout` Claude passes with `run_in_background`, up to a maximum of 2 hours
-* A command that starts in the foreground and then moves to the background, for example at its timeout, gets 30 minutes from the move
+* A command that starts in the foreground and then moves to the background at its timeout gets 30 minutes from the move
 
-In a run with the `-p` flag whose prompt you pass as text rather than with `--input-format stream-json`, both defaults are 10 minutes instead of 30, because the run [waits for background commands after its result](https://code.claude.com/docs/en/headless.md#background-tasks-at-exit).
+In a run with the `-p` flag whose prompt you pass as text rather than with `--input-format stream-json`, both defaults are 10 minutes instead of 30.
 
 When a background command reaches its time limit, Claude Code stops it and tells Claude why, and Claude can start the command again with a longer `timeout` if the work still needs it. The stop notice reads `Background command "<description>" was stopped after reaching its background time limit`.
 
@@ -268,6 +266,10 @@ Claude can also edit a file without a separate Read after viewing it with a Bash
 
 When Claude views a file this way, Claude Code also loads any [subdirectory `CLAUDE.md`](https://code.claude.com/docs/en/memory#how-claude-md-files-load) and [path-scoped rules](https://code.claude.com/docs/en/memory.md#path-specific-rules) that apply to that file. See [Read and Edit permission rules](https://code.claude.com/docs/en/permissions.md#read-and-edit) for which Bash commands your `Read` and `Edit` deny rules cover.
 
+### Protect read-only files in Perforce
+
+To keep Edit, Write, and NotebookEdit from overwriting read-only files in a Perforce workspace, set [`CLAUDE_CODE_PERFORCE_MODE`](https://code.claude.com/docs/en/env-vars#variables) to `1`. Those tools then refuse to change read-only files and tell Claude to run `p4 edit` first.
+
 ### Non-UTF-8 files
 
 Claude can't use [NotebookEdit](#notebookedit-tool-behavior) on a file that isn't valid UTF-8. The same goes for Edit, unless the file starts with a little-endian UTF-16 byte-order mark. When Claude tries, the tool refuses the change and leaves the file untouched. Refused files include non-ASCII text saved in a legacy encoding such as Windows-1252 or Shift-JIS, binary files, and UTF-8 with an invalid byte sequence.
@@ -280,8 +282,8 @@ Claude can still replace such a file with Write, unless the new content contains
 
 The EndConversation tool ends the current session. Claude uses it only in two situations:
 
-* as a last resort against sustained abusive input, after attempts to redirect the conversation have failed and after a clear warning in an earlier message
-* when you explicitly ask to see the tool demonstrated and confirm that you want the session to end
+* When you keep sending abusive messages after Claude gives a clear warning and fails to redirect the conversation
+* When you explicitly ask Claude to end the session, then confirm when Claude asks whether you still want to proceed
 
 General frustration, profanity, or a task going badly don't qualify, and neither do requests for harmful content, which Claude declines instead of ending the session. Claude Code follows the same approach as claude.ai, which can [end a rare subset of chats](https://www.anthropic.com/research/end-subset-conversations).
 
@@ -396,8 +398,6 @@ Stop a monitor by asking Claude to cancel it or by ending the session. When you 
 
 When Monitor runs a command, it uses the same [permission rules as Bash](https://code.claude.com/docs/en/permissions.md#tool-specific-permission-rules), so `allow` and `deny` patterns you have set for Bash apply here too. While [auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) is active, Claude Code sets aside allow rules that name `Monitor` itself, along with the other [broad allow rules it drops](https://code.claude.com/docs/en/permission-modes.md#how-the-classifier-evaluates-actions), so the classifier reviews Monitor commands the same way it reviews Bash commands.
 
-The [WebSocket source](#websocket-source) has its own approval prompt, which the classifier also decides in auto mode.
-
 Monitor needs a minimum version or Git Bash in these cases:
 
 * **Minimum version**: on Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, or Microsoft Foundry, or with `DISABLE_TELEMETRY` or `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` set, Monitor requires Claude Code v2.1.310 or later. The requirement applies when [feature-flag fetching](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching) is off
@@ -423,9 +423,24 @@ A WebSocket watch takes a `ws` input in place of `command`, and a single Monitor
 
 The `timeout_ms` deadline applies to a WebSocket watch too: the watch ends at the deadline, and `TaskStop` cancels it early.
 
-Opening a WebSocket prompts for approval; in [auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) the classifier decides instead. The prompt doesn't offer an option to skip future prompts for the same host.
+Without a `Monitor` allow rule, you're prompted before Claude opens a WebSocket; in [auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) the classifier decides instead, unless an [ask rule](#bash-rules-that-deny-or-prompt-for-websocket-watches) applies. The prompt doesn't offer an option to skip future prompts for the same host.
 
-Claude Code denies URLs that point at a private, link-local, or cloud-metadata address, including hostnames that resolve to one. It also denies hosts in `sandbox.network.deniedDomains`, and when [`allowManagedDomainsOnly`](https://code.claude.com/docs/en/settings-reference#sandbox-network-allowmanageddomainsonly) is set in managed settings, any host outside the managed allowlist.
+#### Addresses and hosts denied to WebSocket watches
+
+Claude Code denies URLs that point at a private, link-local, or cloud-metadata address, including hostnames that your machine resolves to one. Behind a [proxy](https://code.claude.com/docs/en/network-config.md#proxy-configuration), a watch can reach a private, link-local, or cloud-metadata address unless the proxy blocks it, because Claude Code doesn't check the address the proxy finds. Claude Code also denies hosts in `sandbox.network.deniedDomains`, and when [`allowManagedDomainsOnly`](https://code.claude.com/docs/en/settings-reference#sandbox-network-allowmanageddomainsonly) is set in managed settings, any host outside the managed allowlist.
+
+If a watch behind a proxy fails with `could not resolve <host>`, restart Claude Code v2.1.319 or later with [`CLAUDE_CODE_PROXY_RESOLVES_HOSTS`](https://code.claude.com/docs/en/env-vars#variables) set to `1` so the proxy looks up the hostname.
+
+#### Bash rules that deny or prompt for WebSocket watches
+
+If Claude Code refuses a `Monitor` call that opens a WebSocket, look for a [deny or ask rule](https://code.claude.com/docs/en/permissions.md#manage-permissions) written `Bash` or `Bash(*)`. Do the same if it prompts for that call despite your `Monitor` allow rule. A rule on every Bash command also covers these WebSocket watches:
+
+* **Deny rule**: if the rule is in place when the session starts, Claude doesn't have the Monitor tool, so it can't start the watch. If you add the rule during a session, Claude's next `Monitor` call is refused. The refusal reads `Permission to use Monitor has been denied: it runs code as Bash does, and a rule denies Bash.`
+* **Ask rule**: you're asked to approve the watch. You can't have an allow rule, a `PreToolUse` hook, `bypassPermissions` mode, or the auto mode classifier approve it for you. You can approve it from a [`PermissionRequest` hook](https://code.claude.com/docs/en/hooks#permissionrequest). Where nobody can answer, such as in `dontAsk` mode, Claude Code denies the watch.
+
+To let these watches run, narrow the rule to the commands you mean, such as `Bash(rm *)`.
+
+The ask rule, and a deny rule you add during a session, cover these watches in Claude Code v2.1.319 or later.
 
 ## NotebookEdit tool behavior
 
@@ -440,6 +455,10 @@ Three edit modes control what happens to the target cell:
 NotebookEdit refuses a notebook file that doesn't decode as UTF-8, under the [same rule as Edit](#non-utf-8-files), and writes nothing.
 
 Permission rules use the `Edit(...)` path format. A rule like `Edit(notebooks/**)` covers NotebookEdit calls on files in that directory.
+
+### Replacing a cell clears its saved outputs in the file
+
+When NotebookEdit replaces a code cell, its execution count and saved outputs are cleared. To get the output back, re-run the cell and any cells that use the functions or variables it defines. See [Work with Jupyter notebooks](https://code.claude.com/docs/en/vs-code.md#work-with-jupyter-notebooks) for the VS Code workflow.
 
 ## PowerShell tool
 
@@ -518,7 +537,7 @@ The PowerShell tool has the following known limitations during the preview:
 
 ## Read tool behavior
 
-The Read tool takes a file path and returns the contents with line numbers. Claude is instructed to always pass absolute paths.
+The Read tool takes a file path and returns the contents with line numbers.
 
 Reading an empty file returns a notice that the file exists but its contents are empty, and an `offset` past the last line returns a notice giving the file's line count.
 
@@ -600,8 +619,10 @@ Claude Code includes the tool in interactive terminal sessions on your own machi
 * Non-interactive `-p` runs and [Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview.md) sessions, which have no screen to review the queue on
 * [Cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md), which can't write to the queue on your machine
 * Sessions on [Amazon Bedrock](https://code.claude.com/docs/en/amazon-bedrock.md), [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md), [Google Cloud's Agent Platform](https://code.claude.com/docs/en/google-vertex-ai.md), or [Microsoft Foundry](https://code.claude.com/docs/en/microsoft-foundry.md)
+* Sessions that reach Claude through an [LLM gateway](https://code.claude.com/docs/en/llm-gateway) with the gateway's own key or token
 * Sessions where you set [`CLAUDE_CODE_SEND_FEEDBACK=0`](https://code.claude.com/docs/en/env-vars) or [`DISABLE_FEEDBACK_COMMAND=1`](https://code.claude.com/docs/en/env-vars), set `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` to any non-empty value, or turned off [feature-flag fetching](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching)
 * Organizations that have turned off product feedback, [organizations with Zero Data Retention](https://code.claude.com/docs/en/zero-data-retention.md#features-disabled-under-zdr), and organizations with the [HIPAA configuration](https://code.claude.com/docs/en/hipaa-setup.md) applied
+* Sessions where Claude Code has [stopped offering feedback after a refused report](https://code.claude.com/docs/en/errors.md#feedback-is-disabled-by-your-organizations-policy)
 
 ## Task tool availability
 
@@ -685,7 +706,7 @@ The search backend is not configurable. To search with a different provider, add
 
 > [!NOTE]
 >
-> WebSearch is available on the Claude API, [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md), and Microsoft Foundry. On Google Cloud's Agent Platform it works with Opus 4, Sonnet 4, Haiku 4.5, and later models. Amazon Bedrock doesn't expose the server-side web search tool.
+> WebSearch is available on the Claude API, [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md), [Claude Models on Google Cloud (Anthropic managed)](https://code.claude.com/docs/en/claude-models-on-google-cloud-anthropic-managed.md), and Microsoft Foundry. On Google Cloud's Agent Platform it works with Opus 4, Sonnet 4, Haiku 4.5, and later models. Amazon Bedrock doesn't expose the server-side web search tool.
 
 ### Session search limit
 

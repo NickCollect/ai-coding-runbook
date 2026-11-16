@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/checkpointing
-fetched_at: 2026-10-26T05:40:00.242698+00:00
+fetched_at: 2026-11-16T07:30:44.319068+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ fetch_method: mintlify_md
 
 > Track, rewind, and summarize Claude's edits and conversation to manage session state.
 
-Claude Code automatically tracks Claude's file edits as you work, allowing you to quickly undo changes and rewind to previous states if anything gets off track.
+Claude Code automatically tracks Claude's file edits as you work. To undo edits, run `/rewind` or its alias `/undo` in your session to open the [rewind menu](#rewind-and-summarize).
 
 ## How checkpoints work
 

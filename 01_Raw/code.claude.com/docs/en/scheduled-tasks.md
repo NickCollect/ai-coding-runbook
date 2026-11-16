@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/scheduled-tasks
-fetched_at: 2026-10-26T05:40:05.074222+00:00
+fetched_at: 2026-11-16T07:30:45.478154+00:00
 fetch_method: mintlify_md
 ---
 
@@ -98,13 +98,15 @@ When you omit the prompt, Claude uses a built-in maintenance prompt instead of o
 * tend to the current branch's pull request: review comments, failed CI runs, merge conflicts
 * run cleanup passes such as bug hunts or simplification when nothing else is pending
 
-Claude does not start new initiatives outside that scope, and irreversible actions such as pushing or deleting only proceed when they continue something the transcript already authorized.
+Each run goes through your session's [permission checks](https://code.claude.com/docs/en/permissions.md) before it pushes or deletes anything.
+
+A bare `/loop` runs this prompt at a [dynamically chosen interval](#let-claude-choose-the-interval):
 
 ```text theme={null}
 /loop
 ```
 
-A bare `/loop` runs this prompt at a [dynamically chosen interval](#let-claude-choose-the-interval). Add an interval, for example `/loop 15m`, to run it on a fixed schedule instead. To replace the built-in prompt with your own default, see [Customize the default prompt with loop.md](#customize-the-default-prompt-with-loop-md).
+Add an interval, for example `/loop 15m`, to run it on a fixed schedule instead. To replace the built-in prompt with your own default, see [Customize the default prompt with loop.md](#customize-the-default-prompt-with-loop-md).
 
 ### Customize the default prompt with loop.md
 
@@ -233,7 +235,7 @@ When both day-of-month and day-of-week are constrained, a date matches if either
 
 ## Disable session-scoped scheduled tasks
 
-Set `CLAUDE_CODE_DISABLE_CRON=1` in your environment to disable the scheduler entirely. The cron tools and `/loop` become unavailable, and any already-scheduled tasks stop firing. See [Environment variables](https://code.claude.com/docs/en/env-vars.md) for the full list of disable flags.
+Set `CLAUDE_CODE_DISABLE_CRON=1` in your environment to disable the scheduler entirely. `CronCreate` and `/loop` become unavailable, and any already-scheduled tasks stop firing. While the project's `.claude/scheduled_tasks.json` file holds tasks, `CronList` and `CronDelete` stay available, so you can still ask Claude to list or cancel them. See [Environment variables](https://code.claude.com/docs/en/env-vars.md) for the full list of disable flags.
 
 ## Limitations
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mcp-quickstart
-fetched_at: 2026-11-02T07:00:26.392871+00:00
+fetched_at: 2026-11-16T07:30:45.063201+00:00
 fetch_method: mintlify_md
 ---
 
@@ -274,7 +274,7 @@ The fields differ by server type:
 
 After saving the file, start a new Claude Code session in the project. Claude Code reads `.mcp.json` at startup.
 
-The first time Claude Code sees a project-scoped server, it asks you to approve it. The prompt exists so a repository you clone can't launch processes on your machine without your consent. Approve the prompt, or run `/mcp` to approve later if you missed it.
+The first time Claude Code sees a project-scoped server, it asks you to approve it. The prompt exists so a repository you clone can't launch processes on your machine without your consent. Approve the prompt. If you dismissed it, run `claude mcp reset-project-choices` and restart Claude Code to see it again.
 
 Once you've approved, run `/mcp` and check that the servers show as connected. If one shows an error instead, see [Troubleshooting](#troubleshooting).
 

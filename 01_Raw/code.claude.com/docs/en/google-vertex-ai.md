@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/google-vertex-ai
-fetched_at: 2026-11-09T07:30:18.256637+00:00
+fetched_at: 2026-11-16T07:30:44.927062+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,6 +16,10 @@ fetch_method: mintlify_md
 
 View plans
 Contact sales
+
+> [!NOTE]
+>
+> This page covers one of the two ways to use Claude through your Google Cloud project: Google Cloud's Agent Platform, formerly Vertex AI, which Google manages. If you use Claude Models on Google Cloud (Anthropic managed), follow [its Claude Code setup page](https://code.claude.com/docs/en/claude-models-on-google-cloud-anthropic-managed.md) instead. To find out which one you use, see [Which offering are you using?](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/overview#which-offering-are-you-using)
 
 ## Prerequisites
 
@@ -145,7 +149,7 @@ Claude Code decides between [MCP tool search](https://code.claude.com/docs/en/mc
 * **Claude Opus 4.5, Sonnet 4.5, Haiku 4.5, and later**: Claude Code enables tool search by default.
 * **Earlier models**: Claude Code loads MCP tool definitions upfront, because their Agent Platform serving stacks reject the required beta header. Setting `ENABLE_TOOL_SEARCH=true` doesn't override this.
 
-Set `ENABLE_TOOL_SEARCH=false` to disable tool search on every model. Before v2.1.221, Claude Code disabled tool search for all models on Google Cloud's Agent Platform unless you set `ENABLE_TOOL_SEARCH=true`.
+Set `ENABLE_TOOL_SEARCH=false` to disable tool search on every model.
 
 ### 5. Pin model versions
 
@@ -234,11 +238,16 @@ For aliases, version prefixes, and `modelOverrides` entries, see [Pin models for
 
 ### When a model is disabled mid-session
 
-If your project loses access to the model your session is running on, for example because an administrator disables it in [Model Garden](https://console.cloud.google.com/vertex-ai/model-garden), Claude Code switches the session to another model instead of failing each request, and shows `Switched to <fallback> because <model> is not available`. It tries the same models as the startup fallback: earlier versions of the same tier first and, for an Opus session with no Opus version available, the default Sonnet model.
+When Agent Platform rejects your session's model as unavailable in your project or region, Claude Code switches your session to another model, and you can keep working. You see a message that starts with `Switched to <fallback> because <model> is not available`. This happens, for example, when an administrator disables the model in [Model Garden](https://console.cloud.google.com/vertex-ai/model-garden) or it isn't served in your region.
 
-The switch applies only to a tier you haven't pinned, the same condition as the startup fallback. A session on a specific version you picked keeps its model and, without a fallback model chain, the request fails instead. In [auto mode](https://code.claude.com/docs/en/permission-modes.md#enable-auto-mode-on-bedrock-agent-platform-or-foundry), Claude Code switches only to a model auto mode supports on Agent Platform. If none of those models is available either, the request fails.
+If you configured a [fallback model chain](https://code.claude.com/docs/en/model-config.md#fallback-model-chains), Claude Code switches to your configured fallback instead. Without a chain, the request fails in cases such as these:
 
-A [fallback model chain](https://code.claude.com/docs/en/model-config.md#fallback-model-chains) you configure replaces the tier switch: on these refusals Claude Code switches to your configured fallback instead. To have refused requests fail rather than switch, set [`CLAUDE_CODE_DISABLE_MODEL_ACCESS_FALLBACK=1`](https://code.claude.com/docs/en/env-vars). A fallback chain you configured still switches on these refusals; remove the chain as well if you want every refused request to fail.
+* Your session is on a pinned model or a specific version you picked
+* None of the [models Claude Code tries](#startup-model-checks) is available. In [auto mode](https://code.claude.com/docs/en/permission-modes.md#enable-auto-mode-on-bedrock-agent-platform-or-foundry), Claude Code only switches to a model auto mode supports on Agent Platform.
+
+To keep working, run `/model` in the session and press `s` on a model available in your project and region, which leaves your default unchanged.
+
+To have rejected requests fail instead of switching, set [`CLAUDE_CODE_DISABLE_MODEL_ACCESS_FALLBACK=1`](https://code.claude.com/docs/en/env-vars). If you configured a fallback model chain, remove it as well, because Claude Code still moves to that fallback.
 
 ## IAM configuration
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/setup
-fetched_at: 2026-11-09T07:30:19.017429+00:00
+fetched_at: 2026-11-16T07:30:45.611866+00:00
 fetch_method: mintlify_md
 ---
 
@@ -46,7 +46,7 @@ To install Claude Code, open a terminal and run the command for your system. If 
 >
 > **macOS, Linux, WSL:**
 >
-> ```bash theme={null}
+> ```bash theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
 > curl -fsSL https://claude.ai/install.sh | bash
 > ```
 >
@@ -54,13 +54,13 @@ To install Claude Code, open a terminal and run the command for your system. If 
 >
 > **Windows PowerShell:**
 >
-> ```powershell theme={null}
+> ```powershell theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
 > irm https://claude.ai/install.ps1 | iex
 > ```
 >
 > **Windows CMD:**
 >
-> ```batch theme={null}
+> ```batch theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
 > curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
 > ```
 >
@@ -78,7 +78,7 @@ To install Claude Code, open a terminal and run the command for your system. If 
 
 > [tab] Homebrew
 >
-> ```bash theme={null}
+> ```bash theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
 > brew install --cask claude-code
 > ```
 >
@@ -90,7 +90,7 @@ To install Claude Code, open a terminal and run the command for your system. If 
 
 > [tab] WinGet
 >
-> ```powershell theme={null}
+> ```powershell theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null} theme={null}
 > winget install Anthropic.ClaudeCode
 > ```
 >
@@ -147,30 +147,12 @@ Open your WSL distribution and run the Linux installer from the [install instruc
 
 ### Alpine Linux and musl-based distributions
 
-Installing Claude Code on Alpine and other musl/uClibc-based distributions requires `bash` and `curl` for the install command, and `libgcc`, `libstdc++`, and `ripgrep` at runtime. Alpine doesn't include `bash` or `curl` by default, so the documented install command fails with a `not found` error until you install them. Install these packages using your distribution's package manager, then set `USE_BUILTIN_RIPGREP=0`.
+On Alpine and other musl-based distributions, the [install command](#install-claude-code) requires `bash` and `curl`, and Claude Code itself requires `bash` or `zsh`. Alpine doesn't include `bash` or `curl` by default, so the documented install command fails with a `not found` error until you install them.
 
 This example installs the required packages on Alpine:
 
 ```bash theme={null}
-apk add bash curl libgcc libstdc++ ripgrep
-```
-
-On Alpine, `ripgrep` is in the community repository. If `apk` reports that the package is missing, add the community repository to `/etc/apk/repositories`, using your Alpine version:
-
-```bash theme={null}
-echo "https://dl-cdn.alpinelinux.org/alpine/v3.22/community" >> /etc/apk/repositories
-```
-
-Run `apk update` to refresh the package index, and retry the `apk add` command.
-
-Then set `USE_BUILTIN_RIPGREP` to `0` in your [`settings.json`](https://code.claude.com/docs/en/settings-reference#all-settings) file:
-
-```json theme={null}
-{
-  "env": {
-    "USE_BUILTIN_RIPGREP": "0"
-  }
-}
+apk add bash curl
 ```
 
 ## Verify your installation
@@ -244,6 +226,8 @@ Configure this via `/config` → **Auto-update channel**, or add it to your [set
 }
 ```
 
+With this setting, a native installation updates to the stable version even when that version is older than yours. To avoid the downgrade, also [pin a minimum version](#pin-a-minimum-version).
+
 A newly launched model can require a Claude Code version newer than the stable channel serves. To run the model now, move to the latest channel.
 
 For enterprise deployments, you can enforce a consistent release channel across your organization using [managed settings](https://code.claude.com/docs/en/managed-settings.md).
@@ -254,20 +238,27 @@ Installations from the apt, dnf, and apk repositories choose a channel by reposi
 
 ### Pin a minimum version
 
-The `minimumVersion` setting establishes a floor. Background auto-updates and `claude update` refuse to install any version below this value, so moving to the `"stable"` channel does not downgrade you if you are already on a newer `"latest"` build.
+To move a native installation to the `"stable"` [release channel](#configure-release-channel) without a downgrade, set [`minimumVersion`](https://code.claude.com/docs/en/settings-reference#minimumversion) to the version you're running. Background auto-updates and `claude update` refuse to install any version below the minimum.
 
-Switching from `"latest"` to `"stable"` via `/config` prompts you to either stay on the current version or allow the downgrade. Choosing to stay sets `minimumVersion` to that version. Switching back to `"latest"` clears it.
+Set the minimum in `/config` to have Claude Code fill in your current version, or in your settings file to type the number yourself:
 
-Add it to your [settings.json file](https://code.claude.com/docs/en/settings.md) to pin a floor explicitly:
+* **In `/config`**: switch **Auto-update channel** to stable, then select **Stay on current version**. If you switch back to latest in `/config`, Claude Code clears the minimum.
+* **In your [settings file](https://code.claude.com/docs/en/settings.md)**: run `claude --version` in your shell, and set `minimumVersion` to the number at the start of the output. In the same edit, set `autoUpdatesChannel` to `"stable"`.
+
+This `~/.claude/settings.json` switches an installation on version 2.1.323 to stable:
 
 ```json theme={null}
 {
   "autoUpdatesChannel": "stable",
-  "minimumVersion": "2.1.100"
+  "minimumVersion": "2.1.323"
 }
 ```
 
-In [managed settings](https://code.claude.com/docs/en/managed-settings.md), this enforces an organization-wide minimum that user and project settings cannot override.
+The installation stays on 2.1.323 until the stable channel serves a newer version.
+
+#### Set version limits for your organization
+
+In [managed settings](https://code.claude.com/docs/en/managed-settings.md), `minimumVersion` enforces an organization-wide minimum that user and project settings can't override.
 
 The `minimumVersion` pin only constrains updates. To make Claude Code refuse to start outside a version range, use the managed settings `requiredMinimumVersion` and `requiredMaximumVersion` instead. Updates also respect the `requiredMaximumVersion` ceiling. See [`requiredMinimumVersion`](https://code.claude.com/docs/en/settings-reference#requiredminimumversion) and [`requiredMaximumVersion`](https://code.claude.com/docs/en/settings-reference#requiredmaximumversion).
 
@@ -449,7 +440,7 @@ All repositories are signed with the [Claude Code release signing key](#binary-i
 > wget -O /etc/apk/keys/claude-code.rsa.pub \
 >   https://downloads.claude.ai/keys/claude-code.rsa.pub
 > echo "https://downloads.claude.ai/claude-code/apk/stable" >> /etc/apk/repositories
-> apk add claude-code
+> apk add bash claude-code
 > ```
 >
 > To switch to the `latest` channel, remove the `stable` repository line and add the `latest` repository:
@@ -469,10 +460,10 @@ All repositories are signed with the [Claude Code release signing key](#binary-i
 >
 > If `npm --version` prints a version starting with `12` in your shell, follow [Fix an npm 12 install](https://code.claude.com/docs/en/troubleshoot-install.md#fix-an-npm-12-install) instead. Don't install with `sudo`. Claude Code runs npm without `sudo` when it updates itself, so an install that needs `sudo` can't update automatically.
 
-You can also install Claude Code as a global npm package. The npm package requires [Node.js 22 or later](https://nodejs.org/en/download). On an older Node.js version, npm prints an `EBADENGINE` warning during install rather than failing; the install completes and `claude` still runs, since the package downloads a native binary that doesn't use your Node.js at runtime.
+You can also install Claude Code as a global npm package. The npm package requires [Node.js 22 or later](https://nodejs.org/en/download). On an older Node.js version, npm by default prints an `EBADENGINE` warning and completes the install rather than failing. The installed `claude` still runs, since the package downloads a native binary that doesn't use your Node.js at runtime.
 
 ```bash theme={null}
-npm install -g @anthropic-ai/claude-code
+npm install -g @anthropic-ai/claude-code@latest
 ```
 
 The npm package installs the same native binary as the standalone installer. npm pulls the binary in through a per-platform optional dependency such as `@anthropic-ai/claude-code-darwin-arm64`, and a postinstall step links it into place. The installed `claude` binary does not itself invoke Node.

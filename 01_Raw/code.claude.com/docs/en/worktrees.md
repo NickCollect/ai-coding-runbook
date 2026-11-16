@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/worktrees
-fetched_at: 2026-11-09T07:30:19.405542+00:00
+fetched_at: 2026-11-16T07:30:45.813662+00:00
 fetch_method: mintlify_md
 ---
 
@@ -238,7 +238,8 @@ If a worktree with the name you pass to `--worktree` already exists, Claude Code
 
 With the default `"fresh"` [base](#choose-the-base-branch), a reopened worktree resets to the repository's default branch instead of continuing at its old tip when all of the following hold:
 
-* It has no uncommitted changes or untracked files.
+* The [sandbox](https://code.claude.com/docs/en/sandboxing.md#filesystem-isolation) isn't restricting file writes in your session, and neither the worktree's nor the main checkout's `.claude` settings files enable the sandbox.
+* The worktree has no uncommitted changes or untracked files.
 * It is still on the branch Claude Code created for it.
 * It has no commits of its own, or its pull request or merge request was merged and its remote branch deleted.
 
@@ -246,10 +247,12 @@ Claude Code detects the merged case from git state alone: the remote branch the 
 
 In every other case, Claude Code reopens the worktree at its old tip:
 
-* The worktree fails any of the conditions.
+* The worktree or session fails any of the conditions.
 * Claude Code can't verify the worktree's state.
 * `worktree.baseRef` is `"head"`.
 * The name is a pull request or merge request reference.
+
+If you use the sandbox with the `"fresh"` base, run `git fetch origin`, then pass a new name to `--worktree` to start from the latest default branch.
 
 ### Replace worktree creation with a hook
 
@@ -259,7 +262,7 @@ Configure a [`WorktreeCreate` hook](https://code.claude.com/docs/en/hooks#worktr
 
 A worktree gets its own files and branch, but it shares the following with the main checkout:
 
-* **The repository's `.git` directory**: git commands in a worktree write to the main repository's shared `.git` directory, and [sandboxing](https://code.claude.com/docs/en/sandboxing.md#filesystem-isolation) allows those writes, so commands such as `git commit` work from inside a worktree with the sandbox enabled.
+* **The repository's `.git` directory**: git commands in a worktree write to the main repository's shared `.git` directory. With the [sandbox](https://code.claude.com/docs/en/sandboxing.md#filesystem-isolation) enabled, commands such as `git commit` work in a session at the worktree's root, which is where `--worktree` starts one. By default, they [fail with an `index.lock` error if you run `claude` in a subdirectory of the worktree](https://code.claude.com/docs/en/sandboxing#git-index-lock).
 * **Plugins**: plugins installed at [project scope](https://code.claude.com/docs/en/plugins/loading.md#find-where-a-plugin-is-enabled) from the main checkout also load in worktrees of the same repository, so you don't need to reinstall them per worktree.
 * **Permission approvals**: choosing "Yes, and don't ask again" for a Bash command in a worktree session saves the rule to the main checkout's `.claude/settings.local.json`. The rule applies in the main checkout and in every other worktree of the repository, and it survives the worktree's removal.
 

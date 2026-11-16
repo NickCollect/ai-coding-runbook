@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/advisor
-fetched_at: 2026-10-26T05:39:58.295025+00:00
+fetched_at: 2026-11-16T07:30:43.943951+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ fetch_method: mintlify_md
 
 > [!NOTE]
 >
-> The advisor tool is experimental and requires the Anthropic API. It is not available on Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, or Microsoft Foundry. Behavior, pricing, and availability may change.
+> The advisor tool is experimental and requires the Anthropic API, [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md), or [Claude Models on Google Cloud (Anthropic managed)](https://code.claude.com/docs/en/claude-models-on-google-cloud-anthropic-managed.md). On Claude Platform on AWS or Claude Models on Google Cloud (Anthropic managed), it requires Claude Code v2.1.300 or later. It isn't available on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry. Behavior, pricing, and availability may change.
 
 The advisor tool lets Claude consult a second, typically stronger model at key moments during a task, such as before committing to an approach, when stuck on a recurring error, or before declaring a task complete. The advisor receives the full conversation, including every tool call and result, and returns guidance that Claude applies before continuing.
 
@@ -104,10 +104,11 @@ Claude Code ranks models by capability for the advisor role, and an advisor must
 | Opus 4.7 or Opus 4.8 | Fable, Opus 4.7 or later, Sonnet 5.5 |
 | Sonnet 5.5 | Fable, Opus 5 or later, Sonnet 5.5 |
 | Opus 5 or Opus 5.5 | Fable, Opus 5 or later |
-| Fable 5 | Fable 5.1 or Fable 5 |
-| Fable 5.1 | Fable 5.1 |
+| Fable 5 | Fable 5.2, Fable 5.1, or Fable 5 |
+| Fable 5.1 | Fable 5.2 or Fable 5.1 |
+| Fable 5.2 | Fable 5.2 |
 
-Fable 5.1 requires Claude Code v2.1.257 or later. Fable models require [Fable access](https://code.claude.com/docs/en/model-config.md#work-with-fable). Sonnet 5.5 as the advisor for an Opus 4.7 or Opus 4.8 main model requires Claude Code v2.1.287 or later. Haiku 5.5 as the main model or as the advisor requires Claude Code v2.1.293 or later.
+Fable 5.2 requires Claude Code v2.1.321 or later, and Fable 5.1 requires v2.1.257 or later. Fable models require [Fable access](https://code.claude.com/docs/en/model-config.md#work-with-fable). Sonnet 5.5 as the advisor for an Opus 4.7 or Opus 4.8 main model requires Claude Code v2.1.287 or later. Haiku 5.5 as the main model or as the advisor requires Claude Code v2.1.293 or later.
 
 Set the advisor as `fable`, `opus`, or `sonnet`. These aliases resolve to Claude Code's [built-in default version](https://code.claude.com/docs/en/model-config.md#model-aliases) for each model family, which advances with new Claude Code releases. You can also pass a full model ID such as `claude-opus-5-5` or `claude-haiku-5-5`. Haiku 4.5 can call the advisor but can't act as one.
 
@@ -165,7 +166,7 @@ When Claude calls the advisor, the advisor model reads the conversation, so each
 * **API billing**: you pay the advisor model's input and output rates for advisor tokens
 * **Subscription plans**: advisor usage counts toward your plan's usage limits, except that a Fable advisor bills to [usage credits](https://code.claude.com/docs/en/model-config.md#fable-and-usage-credits) on plans where Fable usage does
 
-If your account requires the usage-credits consent, a Fable advisor bills nothing before you give it, because Claude Code [doesn't apply the selection](#fable-advisor-and-usage-credits) until then.
+For how a Fable advisor works with usage credits, see [Fable advisor and usage credits](#fable-advisor-and-usage-credits).
 
 Claude calls the advisor at decision points rather than on every turn, so pairing a faster main model with a stronger advisor typically costs less than running the stronger model throughout. Advisor usage counts toward the session totals shown by [`/usage`](https://code.claude.com/docs/en/costs#track-your-costs).
 
@@ -179,11 +180,10 @@ The advisor model's own read of the conversation is not cached. Each advisor cal
 
 ## Requirements
 
-The advisor tool requires all of the following:
-
-* **Anthropic API only**: the advisor is a server-executed tool. It is not available on Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, or Microsoft Foundry. Through an [LLM gateway](https://code.claude.com/docs/en/llm-gateway) configured with `ANTHROPIC_BASE_URL`, availability depends on whether the gateway forwards the request intact to the Anthropic API. If the gateway or its upstream doesn't recognize the advisor tool, see [Automatic retry and error forwarding](https://code.claude.com/docs/en/llm-gateway-protocol.md#automatic-retry-and-error-forwarding) for how Claude Code responds.
+* **Provider**: the Anthropic API, [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md), or [Claude Models on Google Cloud (Anthropic managed)](https://code.claude.com/docs/en/claude-models-on-google-cloud-anthropic-managed.md), not Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry. On Claude Platform on AWS or Claude Models on Google Cloud (Anthropic managed), the advisor requires Claude Code v2.1.300 or later.
+* **LLM gateway**: through an [LLM gateway](https://code.claude.com/docs/en/llm-gateway) configured with `ANTHROPIC_BASE_URL`, availability depends on whether the gateway forwards the request intact to the Anthropic API. If the gateway or its upstream doesn't recognize the advisor tool, see [Automatic retry and error forwarding](https://code.claude.com/docs/en/llm-gateway-protocol.md#automatic-retry-and-error-forwarding) for how Claude Code responds.
 * **Supported main model**: Fable, Opus 4.6 or later, Sonnet 4.6 or later, Haiku 4.5, or Haiku 5.5. See [Choose an advisor model](#choose-an-advisor-model) for which advisors each accepts.
-* **Feature-flag fetching**: Claude Code turns the advisor on through a feature flag it fetches from Anthropic. In a session where a variable that turns flag fetching off is set, such as `DISABLE_TELEMETRY`, the advisor stays off. See [Features that need feature-flag fetching](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching).
+* **Feature-flag fetching**: unless you're on Claude Platform on AWS or Claude Models on Google Cloud (Anthropic managed), the advisor needs a feature flag fetched from Anthropic. A session with a variable that turns fetching off, such as `DISABLE_TELEMETRY`, doesn't have that flag. To check your session, see [which sessions skip the fetch or start without the flag](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching).
 
 ## Turn the advisor off
 

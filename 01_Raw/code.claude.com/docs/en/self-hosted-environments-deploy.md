@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/self-hosted-environments-deploy
-fetched_at: 2026-11-09T07:30:18.937871+00:00
+fetched_at: 2026-11-16T07:30:45.551298+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,6 +29,8 @@ A self-hosted runner executes arbitrary, model-directed code on your infrastruct
   * **With [Anthropic-managed git](#use-the-anthropic-git-proxy)**: with such a credential, Claude reaches GitHub directly instead of through Anthropic-managed git.
   * **Without Anthropic-managed git**: a clone credential can stay in the image if you scope it as tightly as [Ship git config in your image](#ship-git-config-in-your-image) describes.
 * **Keep the environment secret off session-running hosts**: the environment secret can register runners and pick up any session queued on the environment. On a fixed fleet it lives on every runner host, where any session's code can read the secret file. Prefer [on-demand runners](https://code.claude.com/docs/en/self-hosted-environments-configuration.md#on-demand-runners), where the secret stays on the orchestrator host, which never runs user code, and each runner receives a single-use work order that registers exactly one runner. On a fixed fleet, treat the environment-secret file as readable by every session and rotate the secret after any suspected session compromise.
+  * **After a suspected compromise, first revoke the suspect session**: before you stop its runner or revoke the secret, select **Revoke token** in the session's menu on the **Activity** tab. No runner can then resume it.
+  * **Then replace the secret**: have an [Owner](https://code.claude.com/docs/en/cloud-environments.md#organization-shared-environments) create a new secret and revoke the old one from the environment's **Configuration** tab, then roll out the new one. Anthropic refuses every orchestrator and runner on the old secret, on-demand runners from its work orders included. Your runners exit, interrupting their sessions.
 * **Default-deny network egress**: restrict runner and session container outbound traffic at your own network boundary on every environment; [Default-deny egress](#default-deny-egress) covers what to allow and why.
 * **Least-privilege host IAM**: the compute identity attached to the runner host, such as an instance profile or node service account, should grant only what the runner itself needs. Sessions should obtain their own credentials through your wrapper script rather than inheriting the host's.
 * **Block the cloud metadata endpoint from sessions**: keeping sessions off the host identity requires blocking their access to the cloud metadata endpoint, and subnet-level egress policies don't intercept link-local metadata traffic, so block it in the container itself:
@@ -121,7 +123,7 @@ With either flag set, the runner starts a listener of its own and sends proxy tr
 
 * **Listener**: the listener is a forward proxy on `127.0.0.1`. The runner starts the listener before registering with the control plane, and exits at startup if the listener can't start.
 * **Proxy variables**: the runner rewrites whichever of `HTTPS_PROXY` and `HTTP_PROXY` you set so that it points at the listener. That rewritten value reaches the runner itself, its lifecycle hooks, and every session it runs.
-* **Token rotation**: a rotated token takes effect without a restart. For each connection the listener opens to your proxy, the runner runs your command or reads your file again and adds the result as the header.
+* **Token rotation**: when you rotate the token, new connections carry the new one without a runner restart. For each connection the listener opens to your proxy, the runner runs your command or reads your file again and adds the result as the header. A connection that's already open stays usable with the old token until your proxy closes it or the runner exits.
 * **Session environment**: a session reaches your proxy only through the listener. In each session's environment the runner removes `ALL_PROXY`, removes any spelling of `HTTPS_PROXY` or `HTTP_PROXY` that you didn't set, and pins `NO_PROXY` to the runner's own value.
 * **Logs**: the runner never logs the header value.
 
@@ -209,6 +211,8 @@ In exchange, the git proxy limits what the runner supports and changes what it n
 > [!WARNING]
 >
 > With `--use-anthropic-git-proxy` set, the runner deletes and replaces the global git config of the user it runs as, and keeps no backup. It does this at startup and before each session. A login or credential helper you kept there is lost. Settings that [`--configure-git`](#let-the-runner-configure-git) writes survive. Run the runner as a dedicated user or in a container, never as your own user.
+>
+> The global git config is all three of `~/.gitconfig`, the file that `GIT_CONFIG_GLOBAL` names if you set it, and the whole `$XDG_CONFIG_HOME/git` directory, by default `~/.config/git`.
 
 Keep git settings that aren't secret, such as identity and `safe.directory`, in the system git configuration.
 
@@ -246,14 +250,14 @@ On a runner started with `--use-anthropic-git-proxy`, a session fails to start w
 
 For each session, a runner on Claude Code v2.1.267 or later also logs either a `[runner:session]` line containing `governed git ACTIVE` when Anthropic serves the session's git, or one `[runner:warn]` line containing `the server withheld Anthropic-managed git for this session` when it doesn't. Find the line you're seeing among these cases:
 
-* **Neither `governed git ACTIVE` nor the `withheld` line**: a runner older than Claude Code v2.1.267 logs neither line, and Anthropic doesn't serve its sessions. Update the runner to v2.1.267 or later by following [Pin the version](#pin-the-version).
+* **Neither `governed git ACTIVE` nor the `withheld` line**: if the runner is older than Claude Code v2.1.267, Anthropic doesn't serve its sessions. Update the runner to v2.1.267 or later by following [Pin the version](#pin-the-version).
 * **The `withheld` line**: Anthropic didn't serve the session. A runner that worked with the git proxy before can fail this way with no change on your side.
   * **A repository isn't on github.com**: a session with even one repository on another git host, such as GitHub Enterprise Server, isn't served, including its github.com repositories. [Turn the Anthropic git proxy off](#turn-the-anthropic-git-proxy-off) for that environment's runners.
   * **Every repository is on github.com**: report the failure to [your Anthropic account team](#report-an-issue) with the session ID from the `withheld` line. Anthropic records the reason on its side.
 * **A line containing `remote: access denied by the git proxy`**: a session that Anthropic serves can still be refused, for example when organization policy denies git access for the session, or the session isn't authorized for the repository. The runner's log then shows a line containing `remote: access denied by the git proxy`, and the rest of that line says why.
 * **`GitHub authentication required`**: this appears when the session's creator has no working GitHub connection on claude.ai. The session's clone fails, and the git error contains `GitHub authentication required. Please reconnect your GitHub account.` Ask that person to connect or reconnect GitHub in their claude.ai settings.
 
-After you fix the cause, start the failed sessions again.
+After you fix the cause, restart the runners that failed the sessions, then have each creator send a message in their session or an Owner select **Retry**.
 
 #### Turn the Anthropic git proxy off
 
@@ -270,6 +274,8 @@ unset CLAUDE_RUNNER_USE_GIT_PROXY
 **2. Give the runner git credentials**
 
 Provide credentials that work without a prompt for every git host the runners' sessions use, github.com included. Any credential that was in the runner user's global git config is gone, because the runner deleted that config while `--use-anthropic-git-proxy` was set. [Ship credentials in your image](#ship-git-config-in-your-image) or use a [`checkout` lifecycle hook](https://code.claude.com/docs/en/self-hosted-environments-configuration#checkout).
+
+To keep credentials in the [global git config](#git-proxy-replaces-global-git-config) instead, [stop the runners](#shutdown-timing) first, because a runner started with the flag rewrites it before each session. Then delete `$XDG_CONFIG_HOME/git`, by default `~/.config/git`, and replace `~/.gitconfig`, or the file that `GIT_CONFIG_GLOBAL` names, with your own.
 
 **3. Open the network path**
 
@@ -397,6 +403,7 @@ ENTRYPOINT ["claude"]
 Swap `linux-x64` for `linux-arm64` if your nodes are ARM, or for `linux-x64-musl` or `linux-arm64-musl` on a musl-based image such as Alpine; see [Alpine Linux setup](https://code.claude.com/docs/en/setup.md#alpine-linux-and-musl-based-distributions) for the extra packages musl images need. The URL is the standard Claude Code release location, so you can verify the downloaded binary against the release's signed manifest as described in [Binary integrity and code signing](https://code.claude.com/docs/en/setup.md#binary-integrity-and-code-signing). The runner requires Claude Code version 2.1.224 or later, or 2.1.229 or later to serve Claude Tag sessions. Build the image, then push it to your registry and reference it in the recipes below:
 
 ```bash theme={null}
+# If your model needs a newer release, change stable to latest in the URL
 docker build \
   --build-arg CLAUDE_CODE_VERSION="$(curl -fsSL https://downloads.claude.ai/claude-code-releases/stable)" \
   -t <your-registry>/claude-runner:latest .
@@ -430,7 +437,7 @@ Builds and tests are usually the largest and most variable part of a session's l
 The runner uses `--capacity` to cap how many sessions it runs at once. It doesn't divide CPU or memory between them, so the sessions on a runner share the container's CPU and memory. To keep one session's memory use from ending the others, run one session per runner with [its own memory limit](#give-each-session-its-own-memory-limit).
 
 * **One session per runner**: give each container one session's values. Use this sizing at `--capacity 1`, which the [hardening section](#harden-your-deployment) recommends, and for [on-demand runners](https://code.claude.com/docs/en/self-hosted-environments-configuration.md#on-demand-runners), where you set the values on the workload your [`spawn-runner` hook](https://code.claude.com/docs/en/self-hosted-environments-configuration#the-spawn-runner-hook) submits, such as a Kubernetes Job's pod template.
-* **Several sessions per runner**: at a `--capacity` above one, multiply one session's values by the capacity, because up to that many sessions can run in the container at the same time. The [Kubernetes](#kubernetes) and [Docker Compose](#docker-compose) recipes run `--capacity 4` with no CPU or memory limits, so add limits sized for the capacity you run.
+* **Several sessions per runner**: at a `--capacity` above one, multiply one session's values by the capacity, because up to that many sessions can run in the container at the same time, [idle ones included](#release-idle-sessions-on-a-fixed-fleet). The [Kubernetes](#kubernetes) and [Docker Compose](#docker-compose) recipes run `--capacity 4` with no CPU or memory limits, so add limits sized for the capacity you run.
 * **Several runner containers on one host**: size the host for the sum of the runners' capacities, because each runner counts only its own sessions against `--capacity`:
 
   * **Memory**: multiply one session's memory by the sum, then add what the host's own processes use
@@ -513,7 +520,9 @@ With a higher limit, you leave room for heavier builds, and with a lower one, yo
 
 ## Kubernetes
 
-The runner serves `GET /healthz` on port 8080 by default, configurable with `--health-port`, so Kubernetes probes work with no extra setup. The endpoint returns `200` whenever the process is alive, so the probes below detect a dead process, not a stuck one; to catch a runner that stopped polling, alert on the `last_poll_age_seconds` series from [`/metrics`](https://code.claude.com/docs/en/self-hosted-environments-reference#prometheus-metrics). The Deployment below mounts the environment secret from a Kubernetes Secret, points the liveness and readiness probes at `/healthz`, and sets a 90-second termination grace period. See [Shutdown timing](#shutdown-timing) for why the grace period matters.
+The runner serves `GET /healthz` on port 8080 by default, configurable with `--health-port`. After startup, the endpoint returns `200` whenever the process is alive, so the probes below detect a dead process, not a stuck one. To catch a runner that stopped polling, alert on the `last_poll_age_seconds` series from [`/metrics`](https://code.claude.com/docs/en/self-hosted-environments-reference#prometheus-metrics).
+
+The Deployment below mounts the environment secret from a Kubernetes Secret, points the liveness and readiness probes at `/healthz`, and sets a 90-second termination grace period. See [Shutdown timing](#shutdown-timing) for why the grace period matters.
 
 The manifest sets no CPU or memory `resources` on the runner container. Add a block sized for the capacity you run, as [Size CPU and memory for sessions](#size-cpu-and-memory-for-sessions) describes.
 
@@ -570,6 +579,10 @@ spec:
           secret:
             secretName: claude-runner-environment-secret
 ```
+
+> [!NOTE]
+>
+> If the pod's events show the liveness probe failing during startup, raise its `initialDelaySeconds` or add a `startupProbe`. Nothing answers on the health port until the runner has registered and finished its startup checks. With the settings above, Kubernetes restarts a runner that isn't serving within about 90 seconds.
 
 The Deployment above lives in a `claude-runners` namespace. Create the namespace first:
 
@@ -833,13 +846,19 @@ If tool traffic must stay inside your network, run the equivalent tools as local
 
 ### Some sessions don't count as idle
 
-A session holding a background task that keeps running doesn't count as idle, so `--release-idle-session-min` won't release that session's slot. A session that's waiting on an approval requested from inside a running tool call also doesn't count as idle. Set `--kill-session-after-min` alongside it as a hard backstop.
+While a session doesn't count as idle, it keeps its slot past the `--release-idle-session-min` limit, so also set `--kill-session-after-min`.
+
+A session counts as idle after its turn ends or while its turn waits on its user, but not in cases such as these:
+
+* Its turn has ended and it isn't waiting on its user, but a background task keeps running
+* Its turn waits on an approval that a non-MCP tool requests while that tool runs
+* Its turn waits on an MCP server's [`elicitation/create` request](https://code.claude.com/docs/en/mcp#respond-to-mcp-elicitation-requests)
 
 `--kill-session-after-min` is a backstop for runaway sessions. On a runner on v2.1.260 or later, a session that reaches the limit isn't terminated outright. The runner gives it a grace window, 15 minutes by default, which you can change with [`SELF_HOSTED_RUNNER_MAX_LIFETIME_GRACE_MS`](https://code.claude.com/docs/en/self-hosted-environments-reference#environment-variable-only-settings):
 
 * If the session is waiting on its user, the runner releases it. If its turn has ended and it holds only background tasks, the runner waits up to 60 seconds for those tasks to finish and then releases it. The session resumes when its user sends their next message.
 * If a turn is still running, the runner waits for the turn to finish, or for the session to next wait on its user, and then releases it.
-* If the session is still on the runner when the grace window ends, the runner terminates it, and any running turn's work is lost. A turn waiting on an approval requested from inside a running tool call is one way a session outlasts the window.
+* If the session is still on the runner when the grace window ends, the runner terminates it, and any running turn's work is lost. For example, a session can stay on the runner until then if its turn waits on an approval that a non-MCP tool requests while that tool runs. A session can also stay there while its turn waits on an MCP server's `elicitation/create` request.
 
 A released session resumes from a fresh clone, so work it hadn't pushed is gone either way; see [Resumed sessions lose unpushed work](#resumed-sessions-lose-unpushed-work). Before v2.1.260, the runner terminated every session at the limit, after waiting at most the grace window for a running turn to finish.
 
@@ -909,15 +928,21 @@ Common issues:
 * **Runner logs `Poll failed` lines containing `rejecting the malformed poll response`**: the runner received a work-poll response whose body isn't the queue's expected JSON. One cause is an intercepting proxy or a captive portal answering with its own page. If the runner connects through a proxy, configure the proxy to pass responses from `api.anthropic.com` through unaltered.
 
   The runner rejects the malformed response, counts it under the `transport` kind of the `claude_code_self_hosted_runner_poll_errors_total` [metric](https://code.claude.com/docs/en/self-hosted-environments-reference.md#prometheus-metrics), and retries on the failed-poll schedule described in [Session lifecycle](https://code.claude.com/docs/en/self-hosted-environments#session-lifecycle). The runner keeps serving its live sessions. Before v2.1.246, the runner read such a response as an empty work queue, which could end its live sessions or make it exit.
-* **A session fails with `no longer exists on the remote` or `couldn't find remote ref`**: the runner reads git's `couldn't find remote ref` as a deleted branch. The branch can still exist. Look for it on your git host, under exactly the name in the message, then check each cause that fits:
+* **A session fails with `couldn't be found in the remote repository` or `couldn't find remote ref`**: look for the branch on your git host. Search for exactly the name in the message.
 
-  * **The branch is gone**: restore it, as the message asks.
+  The session's error includes `Retrying will fail the same way until you fix the missing branch described below.` When the error names the branch, the text under `Last output before exit:` reads:
+
+  ```text theme={null}
+  The branch '<ref>' couldn't be found in the remote repository <repo>. If it was never pushed, push it. If it was deleted after a merge, restore it from its pull request. Then send a new message, or start a new session from a branch that has been pushed. (couldn't find remote ref)
+  ```
+
+  * **The branch isn't on the host**: push it if it was never pushed, or restore it from its pull request if it was deleted after a merge.
   * **The branch exists and you don't administer the runner**: send the runner's administrator the full message and tell them the branch exists.
   * **The branch exists and the runner has a `checkout` hook**: a git command in your hook can print `couldn't find remote ref` to stderr before the hook exits non-zero. Find that command, and correct the ref it asks for or the remote it fetches from. The runner passes your hook the revision the session asked for as [`CLAUDE_RUNNER_REPO_REF`](https://code.claude.com/docs/en/self-hosted-environments-configuration#checkout).
   * **The branch exists and the runner has no `checkout` hook**: the runner fetches the branch itself. If a [`--git-host-rewrite`](#rewrite-git-urls-for-private-networks) applies to the repository, confirm that the host it rewrites to has the branch under the same name, and push the branch there if it doesn't.
   * **The branch exists and the runner is older than v2.1.301**: upgrade the runner as described in [Pin the version](#pin-the-version), so that a different failure shows its own error. Before v2.1.301, other failures with `couldn't find remote ref` in their error output were also reported as a deleted branch.
 
-  Once the runner is upgraded or the cause is fixed, retry the session or start a new one. If none of these checks finds the cause, [report an issue](#report-an-issue).
+  Once the runner is upgraded or the cause is fixed, send the session a new message, or start a new session from a branch that has been pushed. If none of these checks finds the cause, [report an issue](#report-an-issue). Before v2.1.314, the message said the branch `no longer exists on the remote`. Follow the same checks for that message.
 
   For the source the session pushes results to, a deleted branch fails the session. For a git source the session only reads from, the runner skips that source and continues on the remaining ones. The runner fails the session when skipping would leave it with no repository at all. Before v2.1.228, such a session started in an empty directory.
 * **Claude Tag sometimes doesn't post its reply in Slack**: the reply reminder is a [hook the control plane supplies](https://code.claude.com/docs/en/self-hosted-environments-configuration.md#how-each-session’s-config-is-assembled). Confirm the runner is Claude Code v2.1.229 or later with `claude --version`, since older runners ignore supplied hooks; confirm `python3 --version` succeeds inside the runner image, since the hooks run `python3`; and confirm no settings file turns hooks off, whether `disableAllHooks` in `managed-settings.json`, the runner user's `~/.claude/settings.json`, or the repository's `.claude/settings.json` or `.claude/settings.local.json`, or `allowManagedHooksOnly` or a [`strictPluginOnlyCustomization`](https://code.claude.com/docs/en/settings-reference#strictpluginonlycustomization) that covers hooks in managed settings.
@@ -948,6 +973,12 @@ Common issues:
   If every call starts failing about 30 minutes into a session, a wrapper script has likely severed the session's stdin, so token rotations can't reach it; see [Keep stdin and file descriptor 3 attached](https://code.claude.com/docs/en/self-hosted-environments-configuration.md#keep-stdin-and-file-descriptor-3-attached).
 
   Before v2.1.274, the runner stopped retrying a failed fetch after a few attempts and waited for the next scheduled one. A failed turn didn't trigger a fetch, so every turn failed with a 401 until the next scheduled fetch.
+* **A session shows `The server has refused to renew this session's access to the model`**: the session's [`CLAUDE_CODE_OAUTH_TOKEN`](https://code.claude.com/docs/en/self-hosted-environments-configuration#wrapper-scripts) has expired, and the runner has received HTTP 400 in answer to its requests for a new token. The runner logs `the server has refused to renew the inference_token`. Turns in that session fail. The runner keeps requesting a new token for as long as the session's process runs:
+
+  * **A request succeeds**: a session that showed the warning then shows `The server renewed this session's access to the model`
+  * **Turns keep failing**: the process eventually exits, and the session shows a failure such as `The session process exited with code 1`
+
+  To keep working without waiting for a new token, start a new session. If a new session fails too, check whether a proxy or gateway of yours gave the HTTP 400 answer. If none did, [contact your Anthropic account team](#report-an-issue) with the first session's ID.
 * **A turn fails in claude.ai/code with `This model needs a newer version of Claude Code`**: the Claude Code version that your runners start sessions with is older than the session's model requires, so the API [rejects the request](https://code.claude.com/docs/en/errors.md#claude-code-does-not-support-this-model). Upgrade the runners to the version the message asks for, or a later one, as described in [Pin the version](#pin-the-version). Until then, people can pick a different model in the session.
 * **Pod is killed mid-drain**: raise `terminationGracePeriodSeconds` to at least the value the runner logs at startup. See [Shutdown timing](#shutdown-timing).
 * **Runner logs a `[runner:log]` line ending `was paused or too slow`**: the runner kept running and needs no restart. Until the stdout or stderr stream named in the line was read again, the runner discarded all but that stream's newest 256 KiB of lines. If you passed [`--log-file`](https://code.claude.com/docs/en/self-hosted-environments-reference#runner-cli-flags), look there for the discarded lines.

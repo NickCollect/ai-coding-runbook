@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/loading
-fetched_at: 2026-10-26T05:40:03.929797+00:00
+fetched_at: 2026-11-16T07:30:45.241581+00:00
 fetch_method: mintlify_md
 ---
 
@@ -179,13 +179,43 @@ If you set a plugin to `false` in `~/.claude/settings.json` and it still loads, 
 
 To opt out of a project-enabled plugin on your machine, set the id to `false` in `.claude/settings.local.json`, which has higher precedence than the project file.
 
+### Enabled in an `--add-dir` directory but not loaded
+
+Claude Code reads an `enabledPlugins` entry of `true` in one of the added directory's files only when that file's setting sources are on:
+
+* **`.claude/settings.json`**: `project`
+* **`.claude/settings.local.json`**: `project` and `local`
+
+Check which setting sources the session loads. You set them with [`--setting-sources`](https://code.claude.com/docs/en/cli-reference#cli-flags). In the CLI, `user`, `project`, and `local` are all on by default.
+
+For example, if you run `claude --setting-sources user --add-dir ./shared` in your shell, Claude Code reads neither file in `./shared`. Pass the flag for the file that holds the `true`:
+
+* **`settings.json`**: `--setting-sources user,project`
+* **`settings.local.json`**: `--setting-sources user,project,local`
+
 ### Enabled in project settings but not installed
 
-When a plugin's only `true` is in the project's `.claude/settings.json`, Claude Code doesn't fetch it onto a machine where it isn't installed, unless its marketplace entry has a [relative-path source](https://code.claude.com/docs/en/plugins/marketplace-reference.md#plugin-sources) or a [seed directory](https://code.claude.com/docs/en/plugins/org.md#seed-containers-and-ci) already holds it. Instead, the `/plugin` **Errors** tab shows `Plugin "<name>" is enabled in project settings but isn't installed here`.
+By default, a plugin enabled only in your project's `.claude/settings.json` doesn't load at session start until you install it on your machine. With the marketplace on your machine, the `/plugin` **Errors** tab shows [`Plugin "<name>" is enabled in project settings but isn't installed here`](https://code.claude.com/docs/en/plugins/troubleshooting#plugin-is-enabled-in-project-settings-but-isnt-installed-here) or [`Plugin "<name>" not cached at <path>`](https://code.claude.com/docs/en/plugins/troubleshooting#plugin-not-cached-at).
 
-A relative-path plugin needs no install record because it loads from the marketplace itself.
+> [!NOTE]
+>
+> If the tab shows neither message, [add the marketplace](https://code.claude.com/docs/en/plugins/install.md#add-a-marketplace) before you install. Find its source in the `extraKnownMarketplaces` setting of `.claude/settings.json`, or ask your maintainer.
 
-Claude Code fetches a plugin with an external source only when one of these sources sets it to `true`:
+To install, run this in a shell from the project, using the plugin's key in `enabledPlugins`:
+
+```shell theme={null}
+claude plugin install <name>@<marketplace> --scope project
+```
+
+To load the plugin, run `/reload-plugins` in your session or start a new session. Repeat the install in each of your clones, or use `--scope user` to cover all your projects.
+
+You can load a plugin without an install in these cases:
+
+* **In a [seed directory](https://code.claude.com/docs/en/plugins/org.md#seed-containers-and-ci)**: you have nothing to run
+* **Listed by a [relative path](https://code.claude.com/docs/en/plugins/marketplace-reference.md#plugin-sources) in a marketplace you added from a local path**: you have nothing to run, because the plugin loads at session start
+* **Listed by a relative path, such as `./plugins/formatter`, in the `marketplace.json` of a git marketplace you've added**: run `/reload-plugins` to load it for the current session only. To load it for one [non-interactive `-p` run](https://code.claude.com/docs/en/headless), set [`CLAUDE_CODE_SYNC_PLUGIN_INSTALL=1`](https://code.claude.com/docs/en/env-vars).
+
+Claude Code fetches a plugin with an external source only when one of these sources sets the plugin to `true`:
 
 * Your user settings
 * A `.claude/settings.local.json` that git doesn't track
@@ -201,6 +231,7 @@ Claude Code keeps plugin files and state records under one plugins root, which i
 | `cache/<marketplace>/<plugin>/<version>/` | One directory per installed version of a marketplace plugin. `<plugin>` is the marketplace entry name and `<version>` is the [resolved version](#versions-and-updates). `${CLAUDE_PLUGIN_ROOT}` points at this directory |
 | `data/<plugin-id>/` | The plugin's persistent directory, exposed as `${CLAUDE_PLUGIN_DATA}`. For how `<plugin-id>` is formed, see [Path variables and persistent data](https://code.claude.com/docs/en/plugins/components.md#path-variables-and-persistent-data). Claude Code creates it when a plugin component first uses it and keeps it across updates. By default, Claude Code deletes it when you uninstall the plugin from its last scope. For `--keep-data` and the other cases where it stays, see [plugin uninstall](https://code.claude.com/docs/en/plugins/cli-reference.md#plugin-uninstall) |
 | `marketplaces/<name>/` | The clone or download of a marketplace added from GitHub, another Git host, or a URL. A marketplace added from a local `file` or `directory` source has no copy here, and its `installLocation` in `known_marketplaces.json` is the path you gave |
+| `mcpb/` | The files Claude Code extracts from the [MCP bundles](https://code.claude.com/docs/en/plugins/components.md#include-a-packaged-mcpb-server) that plugins declare. Requires Claude Code v2.1.324 or later |
 | `synced/` | The plugins Claude Code [synced from your claude.ai account](#synced-plugins) |
 | `.trash/` | Plugins that the claude.ai sync removed, such as after you turn one off on claude.ai or stop syncing |
 | `installed_plugins.json` and `known_marketplaces.json` | The records of what Claude Code has installed and which marketplaces it has fetched, described under [Check which stage a plugin reached](#check-which-stage-a-plugin-reached). A [marketplace hosted on claude.ai](https://code.claude.com/docs/en/plugins/install.md#add-from-claude-ai) is recorded in `known_marketplaces_claudeai.json` instead |
