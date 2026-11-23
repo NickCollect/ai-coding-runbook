@@ -100,6 +100,69 @@ describe('register', () => {
   )
 
   test(
+    'an engine that answers Windows_NT names the row win32, with no kernel or PATH lists',
+    { plugins: [Fixtures.recording] },
+    async ($, on) => {
+      mock.env(on, Fixtures.SENDING_ENV)
+
+      const session = Fixtures.firstPartySession(on, {
+        machine: { ...Fixtures.MAC_MACHINE, sysname: 'Windows_NT', machine: 'x86_64' },
+      })
+
+      await $.command.run(Fixtures.record(Fixtures.surveyAnswer()))
+      await session.clock.advance(Hooks.BATCH_WINDOW_MS)
+
+      expect(Fixtures.rowsOf(session)[0]).toMatchObject({
+        env: { platform: 'win32', platform_raw: 'win32', arch: 'x64', package_managers: '', runtimes: '' },
+      })
+    },
+  )
+
+  test(
+    'an engine that answers in another shape leaves the system unnamed and the PATH lists empty',
+    { plugins: [Fixtures.recording] },
+    async ($, on) => {
+      mock.env(on, Fixtures.SENDING_ENV)
+
+      const session = Fixtures.firstPartySession(on, {
+        machine: { sysname: 'Linux' } as never,
+      })
+
+      await $.command.run(Fixtures.record(Fixtures.surveyAnswer()))
+      await session.clock.advance(Hooks.BATCH_WINDOW_MS)
+
+      expect(Fixtures.rowsOf(session)[0]).toMatchObject({
+        env: { platform: 'linux', platform_raw: 'unknown', arch: 'unknown', package_managers: '', runtimes: '' },
+      })
+    },
+  )
+
+  test(
+    'an engine without the machine read leaves the system unnamed and the PATH lists empty',
+    { plugins: [Fixtures.recording] },
+    async ($, on) => {
+      mock.env(on, Fixtures.SENDING_ENV)
+
+      const session = Fixtures.firstPartySession(on, { machine: 'unanswered' })
+
+      await $.session.start(Fixtures.STARTED)
+      await $.command.run(Fixtures.record(Fixtures.surveyAnswer()))
+      await session.clock.advance(Hooks.BATCH_WINDOW_MS)
+
+      expect(Fixtures.rowsOf(session)[0]).toMatchObject({
+        env: {
+          platform: 'linux',
+          platform_raw: 'unknown',
+          arch: 'unknown',
+          package_managers: '',
+          runtimes: '',
+          deployment_environment: 'unknown-linux',
+        },
+      })
+    },
+  )
+
+  test(
     'a full queue goes out at once, before the window',
     { plugins: [Fixtures.recording] },
     async ($, on) => {
@@ -383,6 +446,33 @@ describe('register', () => {
     },
   )
 
+  for (const [identity, isClaudeAiAuth] of [
+    [{ kind: 'claude.ai', isVerified: false }, true],
+    [{ kind: 'oauth-token', isVerified: false }, true],
+    [{ kind: 'console', isVerified: false }, true],
+    [{ kind: 'api-key', isVerified: false }, false],
+    [{ kind: 'none', isVerified: false }, false],
+    [{ deny: 'not readable' }, false],
+    ['unanswered', false],
+  ] as const) {
+    test(
+      `a bearer beside a stored login, identity ${JSON.stringify(identity)}: is_claude_ai_auth ${isClaudeAiAuth}`,
+      { plugins: [Fixtures.recording] },
+      async ($, on) => {
+        mock.env(on, Fixtures.SENDING_ENV)
+
+        const session = Fixtures.firstPartySession(on, { identity })
+
+        await $.command.run(Fixtures.record(Fixtures.surveyAnswer()))
+        await session.clock.advance(Hooks.BATCH_WINDOW_MS)
+
+        expect(Fixtures.rowsOf(session)).toMatchObject([
+          { env: { is_claude_ai_auth: isClaudeAiAuth } },
+        ])
+      },
+    )
+  }
+
   test(
     'a server error is tried once more; a second one drops the batch',
     { plugins: [Fixtures.recording] },
@@ -581,13 +671,14 @@ describe('register', () => {
         posts: session.posts.length,
         configReads: session.reads.filter(path => path === Fixtures.CONFIG_PATH)
           .length,
-        runs: session.runs.map(run => run.argv.slice(0, 2)),
-      }).toEqual({ posts: 2, configReads: 1, runs: [['sh', '-c']] })
+        machineReads: session.counts.machineReads,
+        runs: session.runs,
+      }).toEqual({ posts: 2, configReads: 1, machineReads: 1, runs: [] })
     },
   )
 
   test(
-    'on Windows the platform is read off the environment and no program runs',
+    'on Windows the platform is read off the environment, not the engine',
     { plugins: [Fixtures.recording] },
     async ($, on) => {
       mock.env(on, Fixtures.WINDOWS_ENV)
@@ -608,7 +699,7 @@ describe('register', () => {
         },
       })
 
-      expect(session.runs).toEqual([])
+      expect(session.counts.machineReads).toBe(0)
     },
   )
 
@@ -619,7 +710,7 @@ describe('register', () => {
       mock.env(on, { ...Fixtures.SENDING_ENV, WSL_DISTRO_NAME: 'Ubuntu' })
 
       const session = Fixtures.firstPartySession(on, {
-        probeOutput: Fixtures.LINUX_PROBED,
+        machine: Fixtures.LINUX_MACHINE,
         files: Fixtures.LINUX_FILES,
         existing: ['/.dockerenv'],
       })

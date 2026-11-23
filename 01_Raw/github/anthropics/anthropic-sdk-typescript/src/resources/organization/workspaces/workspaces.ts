@@ -40,9 +40,9 @@ import { startApiCallSpan } from '../../../internal/tracing';
 import { path } from '../../../internal/utils/path';
 
 /**
- * The External Key is bound to a user profile, and the Workspace does not have
- * that user profile. A Workspace can use only a key bound to its own user profile
- * or a key that isn't bound to one.
+ * After this request, the External Key and the Workspace would not have the same
+ * user profile. A key and its Workspace must have the same user profile, or both
+ * have none.
  */
 export class KeyProfileMismatchError extends BadRequestError {
   declare readonly errorCode: 'key_profile_mismatch';
@@ -96,7 +96,7 @@ export class Workspaces extends APIResource {
    * ```ts
    * const workspace =
    *   await client.organization.workspaces.create({
-   *     name: 'x',
+   *     name: 'Workspace Name',
    *   });
    * ```
    */
@@ -272,9 +272,9 @@ export interface DataResidencyUpdateConfig {
 }
 
 /**
- * The External Key is bound to a user profile, and the Workspace does not have
- * that user profile. A Workspace can use only a key bound to its own user profile
- * or a key that isn't bound to one.
+ * After this request, the External Key and the Workspace would not have the same
+ * user profile. A key and its Workspace must have the same user profile, or both
+ * have none.
  */
 export interface KeyProfileMismatchErrorDetails {
   error_code: 'key_profile_mismatch';
@@ -334,12 +334,13 @@ export interface Workspace {
    * When set, data stored for this Workspace is encrypted with the referenced key.
    * Create key configurations with the External Keys API. On Claude Platform on AWS
    * the value for an AWS KMS key is the key's ARN, and your organization's own key
-   * must be a single-Region key in the same AWS account and Region as the Workspace.
-   * On that platform the key is validated against this Workspace when it is
-   * attached, so a key-policy problem is reported as an error on this request. This
-   * field is write-once: once a key is attached to a Workspace it cannot be detached
-   * or replaced. To rotate key material, rotate the underlying key on your cloud
-   * KMS; the `external_key_id` stays the same.
+   * must be a single-Region key in the same Region as the Workspace. If that key is
+   * outside the Workspace's AWS account, it can be attached only by updating an
+   * active Workspace. On that platform the key is validated against this Workspace
+   * when it is attached, so a key-policy problem is reported as an error on this
+   * request. This field is write-once: once a key is attached to a Workspace it
+   * cannot be detached or replaced. To rotate key material, rotate the underlying
+   * key on your cloud KMS; the `external_key_id` stays the same.
    */
   external_key_id: string | null;
 
@@ -447,12 +448,13 @@ export interface WorkspaceCreateParams {
    * When set, data stored for this Workspace is encrypted with the referenced key.
    * Create key configurations with the External Keys API. On Claude Platform on AWS
    * the value for an AWS KMS key is the key's ARN, and your organization's own key
-   * must be a single-Region key in the same AWS account and Region as the Workspace.
-   * On that platform the key is validated against this Workspace when it is
-   * attached, so a key-policy problem is reported as an error on this request. This
-   * field is write-once: once a key is attached to a Workspace it cannot be detached
-   * or replaced. To rotate key material, rotate the underlying key on your cloud
-   * KMS; the `external_key_id` stays the same.
+   * must be a single-Region key in the same Region as the Workspace. If that key is
+   * outside the Workspace's AWS account, it can be attached only by updating an
+   * active Workspace. On that platform the key is validated against this Workspace
+   * when it is attached, so a key-policy problem is reported as an error on this
+   * request. This field is write-once: once a key is attached to a Workspace it
+   * cannot be detached or replaced. To rotate key material, rotate the underlying
+   * key on your cloud KMS; the `external_key_id` stays the same.
    */
   external_key_id?: string | null;
 
@@ -488,12 +490,13 @@ export interface WorkspaceUpdateParams {
    * When set, data stored for this Workspace is encrypted with the referenced key.
    * Create key configurations with the External Keys API. On Claude Platform on AWS
    * the value for an AWS KMS key is the key's ARN, and your organization's own key
-   * must be a single-Region key in the same AWS account and Region as the Workspace.
-   * On that platform the key is validated against this Workspace when it is
-   * attached, so a key-policy problem is reported as an error on this request. This
-   * field is write-once: once a key is attached to a Workspace it cannot be detached
-   * or replaced. To rotate key material, rotate the underlying key on your cloud
-   * KMS; the `external_key_id` stays the same.
+   * must be a single-Region key in the same Region as the Workspace. If that key is
+   * outside the Workspace's AWS account, it can be attached only by updating an
+   * active Workspace. On that platform the key is validated against this Workspace
+   * when it is attached, so a key-policy problem is reported as an error on this
+   * request. This field is write-once: once a key is attached to a Workspace it
+   * cannot be detached or replaced. To rotate key material, rotate the underlying
+   * key on your cloud KMS; the `external_key_id` stays the same.
    */
   external_key_id?: string;
 
@@ -513,7 +516,8 @@ export interface WorkspaceUpdateParams {
    * the Workspace must then name this user profile; the API rejects a request that
    * names none or a different one. Once set, it can't be replaced or removed
    * (sending the same ID again changes nothing); only deleting the user profile
-   * clears it. The default Workspace can't have a user profile.
+   * clears it. It can't be set on a Workspace whose External Key isn't bound to this
+   * user profile. The default Workspace can't have a user profile.
    */
   user_profile_id?: string;
 }

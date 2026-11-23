@@ -1,6 +1,8 @@
 import type {
   HttpResponse,
   SessionAuthorization,
+  SessionIdentity,
+  SessionMachine,
   SessionVersion,
 } from 'claude-code'
 
@@ -11,7 +13,7 @@ import type { PolicyOption } from './policy-option.js'
  *
  * What `authorize` and the ingest answer in turn (`refused`: the store will
  * not open; the last repeats), the managed policy (`unreadable` when it
- * cannot be read), and the machine's files, markers and probe output.
+ * cannot be read), and the machine: its files, markers and the engine's answer.
  */
 export type SessionOptions = {
   readonly authorizations?: readonly (SessionAuthorization | 'refused')[]
@@ -19,7 +21,18 @@ export type SessionOptions = {
   readonly policy?: PolicyOption
   readonly files?: Readonly<Record<string, string>>
   readonly existing?: readonly string[]
-  readonly probeOutput?: string
+
+  /**
+   * What `$.session.identity()` answers, a claude.ai login unless told;
+   * `unanswered` leaves nothing beneath it.
+   */
+  readonly identity?: SessionIdentity | 'unanswered'
+
+  /**
+   * What `$.session.machine()` answers; `unanswered` leaves nothing beneath
+   * it, as under an engine without the read.
+   */
+  readonly machine?: SessionMachine | 'unanswered'
 
   /**
    * What `$.session.version()` answers; `unanswered` leaves nothing beneath

@@ -148,6 +148,19 @@ export class CompactionToolChangesMismatchError extends BadRequestError {
 }
 
 /**
+ * The longest side of one or more images in the request exceeds the image size
+ * limit. Scale each image in `paths` so that neither side exceeds
+ * `max_side_length_pixels`, or remove it, then retry.
+ */
+export class ImageDimensionsTooLargeError extends BadRequestError {
+  declare readonly errorCode: 'image_dimensions_too_large';
+  declare readonly details: ImageDimensionsTooLargeErrorDetails;
+
+  /** @internal */
+  static override readonly _errorName: string = 'ImageDimensionsTooLargeError';
+}
+
+/**
  * The response that `previous_message_id` names has already been continued, and
  * each response can be continued only once. Continue from the Thread's most recent
  * response `id`.
@@ -274,6 +287,7 @@ export class Messages extends APIResource {
    * @throws {CompactionSignatureInvalidError}
    * @throws {CompactionTooManyToolReferencesError}
    * @throws {CompactionToolChangesMismatchError}
+   * @throws {ImageDimensionsTooLargeError}
    * @throws {OrganizationOnHoldError}
    * @throws {RequestBodyEncodingInvalidError}
    * @throws {RequestBodyEncodingUnsupportedError}
@@ -283,9 +297,15 @@ export class Messages extends APIResource {
    * @throws {ThreadUnsupportedRequestError}
    * @throws {ToolNameConflictError}
    * @throws {ToolReferenceUnresolvedError}
+   * @throws {UserProfileRequiredError}
+   * @throws {LinkedOrganizationBillingUnavailableError}
+   * @throws {LinkedOrganizationSpendLimitReachedError}
+   * @throws {UserProfileBillingNotAuthorizedError}
+   * @throws {UserProfileNotBillableError}
    * @throws {ThreadNotFoundError}
    * @throws {SkillReadBlockedUndecryptableError}
    * @throws {RequestBodyTooLargeAfterDecodingError}
+   * @throws {ContractSpendLimitReachedError}
    * @throws {EnforcedSpendLimitReachedError}
    * @throws {RampLimitExceededError}
    * @throws {CMEKKeyUnreachableError}
@@ -551,7 +571,7 @@ export interface BashCodeExecutionResultBlockParam {
 }
 
 export interface BashCodeExecutionToolResultBlock {
-  content: BashCodeExecutionToolResultError | BashCodeExecutionResultBlock;
+  content: BashCodeExecutionToolResultErrorObject | BashCodeExecutionResultBlock;
 
   tool_use_id: string;
 
@@ -571,18 +591,18 @@ export interface BashCodeExecutionToolResultBlockParam {
   cache_control?: CacheControlEphemeral | null;
 }
 
-export interface BashCodeExecutionToolResultError {
-  error_code: BashCodeExecutionToolResultErrorCode;
-
-  type: 'bash_code_execution_tool_result_error';
-}
-
 export type BashCodeExecutionToolResultErrorCode =
   | 'invalid_tool_input'
   | 'unavailable'
   | 'too_many_requests'
   | 'execution_time_exceeded'
   | 'output_file_too_large';
+
+export interface BashCodeExecutionToolResultErrorObject {
+  error_code: BashCodeExecutionToolResultErrorCode;
+
+  type: 'bash_code_execution_tool_result_error';
+}
 
 export interface BashCodeExecutionToolResultErrorParam {
   error_code: BashCodeExecutionToolResultErrorCode;
@@ -3465,7 +3485,7 @@ export interface CodeExecutionToolResultBlock {
 }
 
 export type CodeExecutionToolResultBlockContent =
-  | CodeExecutionToolResultError
+  | CodeExecutionToolResultErrorObject
   | CodeExecutionResultBlock
   | EncryptedCodeExecutionResultBlock;
 
@@ -3487,17 +3507,17 @@ export type CodeExecutionToolResultBlockParamContent =
   | CodeExecutionResultBlockParam
   | EncryptedCodeExecutionResultBlockParam;
 
-export interface CodeExecutionToolResultError {
-  error_code: CodeExecutionToolResultErrorCode;
-
-  type: 'code_execution_tool_result_error';
-}
-
 export type CodeExecutionToolResultErrorCode =
   | 'invalid_tool_input'
   | 'unavailable'
   | 'too_many_requests'
   | 'execution_time_exceeded';
+
+export interface CodeExecutionToolResultErrorObject {
+  error_code: CodeExecutionToolResultErrorCode;
+
+  type: 'code_execution_tool_result_error';
+}
 
 export interface CodeExecutionToolResultErrorParam {
   error_code: CodeExecutionToolResultErrorCode;
@@ -4941,6 +4961,28 @@ export interface ImageBlockParam {
 }
 
 /**
+ * The longest side of one or more images in the request exceeds the image size
+ * limit. Scale each image in `paths` so that neither side exceeds
+ * `max_side_length_pixels`, or remove it, then retry.
+ */
+export interface ImageDimensionsTooLargeErrorDetails {
+  error_code: 'image_dimensions_too_large';
+
+  /**
+   * The limit the images exceeded: the largest width or height, in pixels, that an
+   * image on this request may have.
+   */
+  max_side_length_pixels: number;
+
+  /**
+   * The position of every image over the limit, in the order you sent them, nested
+   * blocks included, such as `messages.0.content.1`, or
+   * `messages.0.content.1.content.0` for an image in a `tool_result` block.
+   */
+  paths: Array<string>;
+}
+
+/**
  * Configures the transformations the server applies to this image before the model
  * observes it. Each key names a condition the server transforms images for; its
  * value selects the transformation applied. Omitted keys keep their default
@@ -5699,7 +5741,7 @@ export interface TextEditorCodeExecutionStrReplaceResultBlockParam {
 
 export interface TextEditorCodeExecutionToolResultBlock {
   content:
-    | TextEditorCodeExecutionToolResultError
+    | TextEditorCodeExecutionToolResultErrorObject
     | TextEditorCodeExecutionViewResultBlock
     | TextEditorCodeExecutionCreateResultBlock
     | TextEditorCodeExecutionStrReplaceResultBlock;
@@ -5726,20 +5768,20 @@ export interface TextEditorCodeExecutionToolResultBlockParam {
   cache_control?: CacheControlEphemeral | null;
 }
 
-export interface TextEditorCodeExecutionToolResultError {
-  error_code: TextEditorCodeExecutionToolResultErrorCode;
-
-  error_message: string | null;
-
-  type: 'text_editor_code_execution_tool_result_error';
-}
-
 export type TextEditorCodeExecutionToolResultErrorCode =
   | 'invalid_tool_input'
   | 'unavailable'
   | 'too_many_requests'
   | 'execution_time_exceeded'
   | 'file_not_found';
+
+export interface TextEditorCodeExecutionToolResultErrorObject {
+  error_code: TextEditorCodeExecutionToolResultErrorCode;
+
+  error_message: string | null;
+
+  type: 'text_editor_code_execution_tool_result_error';
+}
 
 export interface TextEditorCodeExecutionToolResultErrorParam {
   error_code: TextEditorCodeExecutionToolResultErrorCode;
@@ -6256,7 +6298,7 @@ export interface ToolSearchToolRegex20251119 {
 }
 
 export interface ToolSearchToolResultBlock {
-  content: ToolSearchToolResultError | ToolSearchToolSearchResultBlock;
+  content: ToolSearchToolResultErrorObject | ToolSearchToolSearchResultBlock;
 
   tool_use_id: string;
 
@@ -6276,19 +6318,19 @@ export interface ToolSearchToolResultBlockParam {
   cache_control?: CacheControlEphemeral | null;
 }
 
-export interface ToolSearchToolResultError {
+export type ToolSearchToolResultErrorCode =
+  | 'invalid_tool_input'
+  | 'unavailable'
+  | 'too_many_requests'
+  | 'execution_time_exceeded';
+
+export interface ToolSearchToolResultErrorObject {
   error_code: ToolSearchToolResultErrorCode;
 
   error_message: string | null;
 
   type: 'tool_search_tool_result_error';
 }
-
-export type ToolSearchToolResultErrorCode =
-  | 'invalid_tool_input'
-  | 'unavailable'
-  | 'too_many_requests'
-  | 'execution_time_exceeded';
 
 export interface ToolSearchToolResultErrorParam {
   error_code: ToolSearchToolResultErrorCode;
@@ -7245,7 +7287,7 @@ export interface WebSearchTool20260318 {
   user_location?: UserLocation | null;
 }
 
-export interface WebSearchToolRequestError {
+export interface WebSearchToolRequestErrorObject {
   error_code: WebSearchToolResultErrorCode;
 
   type: 'web_search_tool_result_error';
@@ -7261,7 +7303,7 @@ export interface WebSearchToolResultBlock {
   type: 'web_search_tool_result';
 }
 
-export type WebSearchToolResultBlockContent = WebSearchToolResultError | Array<WebSearchResultBlock>;
+export type WebSearchToolResultBlockContent = WebSearchToolResultErrorObject | Array<WebSearchResultBlock>;
 
 export interface WebSearchToolResultBlockParam {
   content: WebSearchToolResultBlockParamContent;
@@ -7280,13 +7322,7 @@ export interface WebSearchToolResultBlockParam {
 
 export type WebSearchToolResultBlockParamContent =
   | Array<WebSearchResultBlockParam>
-  | WebSearchToolRequestError;
-
-export interface WebSearchToolResultError {
-  error_code: WebSearchToolResultErrorCode;
-
-  type: 'web_search_tool_result_error';
-}
+  | WebSearchToolRequestErrorObject;
 
 export type WebSearchToolResultErrorCode =
   | 'invalid_tool_input'
@@ -7295,6 +7331,42 @@ export type WebSearchToolResultErrorCode =
   | 'too_many_requests'
   | 'query_too_long'
   | 'request_too_large';
+
+export interface WebSearchToolResultErrorObject {
+  error_code: WebSearchToolResultErrorCode;
+
+  type: 'web_search_tool_result_error';
+}
+
+/**
+ * @deprecated WebSearchToolResultError has been renamed to WebSearchToolResultErrorObject
+ */
+export type WebSearchToolResultError = WebSearchToolResultErrorObject;
+
+/**
+ * @deprecated WebSearchToolRequestError has been renamed to WebSearchToolRequestErrorObject
+ */
+export type WebSearchToolRequestError = WebSearchToolRequestErrorObject;
+
+/**
+ * @deprecated CodeExecutionToolResultError has been renamed to CodeExecutionToolResultErrorObject
+ */
+export type CodeExecutionToolResultError = CodeExecutionToolResultErrorObject;
+
+/**
+ * @deprecated BashCodeExecutionToolResultError has been renamed to BashCodeExecutionToolResultErrorObject
+ */
+export type BashCodeExecutionToolResultError = BashCodeExecutionToolResultErrorObject;
+
+/**
+ * @deprecated TextEditorCodeExecutionToolResultError has been renamed to TextEditorCodeExecutionToolResultErrorObject
+ */
+export type TextEditorCodeExecutionToolResultError = TextEditorCodeExecutionToolResultErrorObject;
+
+/**
+ * @deprecated ToolSearchToolResultError has been renamed to ToolSearchToolResultErrorObject
+ */
+export type ToolSearchToolResultError = ToolSearchToolResultErrorObject;
 
 /**
  * @deprecated ResponseToolUseBlockUnion has been renamed to ToolsetToolUseBlock
@@ -8149,6 +8221,7 @@ Messages.CompactionNothingToSummarizeError = CompactionNothingToSummarizeError;
 Messages.CompactionSignatureInvalidError = CompactionSignatureInvalidError;
 Messages.CompactionTooManyToolReferencesError = CompactionTooManyToolReferencesError;
 Messages.CompactionToolChangesMismatchError = CompactionToolChangesMismatchError;
+Messages.ImageDimensionsTooLargeError = ImageDimensionsTooLargeError;
 Messages.ThreadAlreadyContinuedError = ThreadAlreadyContinuedError;
 Messages.ThreadContinueInFlightError = ThreadContinueInFlightError;
 Messages.ThreadFingerprintMismatchError = ThreadFingerprintMismatchError;
@@ -8170,6 +8243,7 @@ export declare namespace Messages {
     CompactionSignatureInvalidError as CompactionSignatureInvalidError,
     CompactionTooManyToolReferencesError as CompactionTooManyToolReferencesError,
     CompactionToolChangesMismatchError as CompactionToolChangesMismatchError,
+    ImageDimensionsTooLargeError as ImageDimensionsTooLargeError,
     ThreadAlreadyContinuedError as ThreadAlreadyContinuedError,
     ThreadContinueInFlightError as ThreadContinueInFlightError,
     ThreadFingerprintMismatchError as ThreadFingerprintMismatchError,
@@ -8188,8 +8262,8 @@ export declare namespace Messages {
     type BashCodeExecutionResultBlockParam as BashCodeExecutionResultBlockParam,
     type BashCodeExecutionToolResultBlock as BashCodeExecutionToolResultBlock,
     type BashCodeExecutionToolResultBlockParam as BashCodeExecutionToolResultBlockParam,
-    type BashCodeExecutionToolResultError as BashCodeExecutionToolResultError,
     type BashCodeExecutionToolResultErrorCode as BashCodeExecutionToolResultErrorCode,
+    type BashCodeExecutionToolResultErrorObject as BashCodeExecutionToolResultErrorObject,
     type BashCodeExecutionToolResultErrorParam as BashCodeExecutionToolResultErrorParam,
     type BrowserClickTarget as BrowserClickTarget,
     type BrowserCloseTabConfig as BrowserCloseTabConfig,
@@ -8337,8 +8411,8 @@ export declare namespace Messages {
     type CodeExecutionToolResultBlockContent as CodeExecutionToolResultBlockContent,
     type CodeExecutionToolResultBlockParam as CodeExecutionToolResultBlockParam,
     type CodeExecutionToolResultBlockParamContent as CodeExecutionToolResultBlockParamContent,
-    type CodeExecutionToolResultError as CodeExecutionToolResultError,
     type CodeExecutionToolResultErrorCode as CodeExecutionToolResultErrorCode,
+    type CodeExecutionToolResultErrorObject as CodeExecutionToolResultErrorObject,
     type CodeExecutionToolResultErrorParam as CodeExecutionToolResultErrorParam,
     type CompactionBlockAmbiguousErrorDetails as CompactionBlockAmbiguousErrorDetails,
     type CompactionBlockMisplacedErrorDetails as CompactionBlockMisplacedErrorDetails,
@@ -8427,6 +8501,7 @@ export declare namespace Messages {
     type FileDocumentSource as FileDocumentSource,
     type FileImageSource as FileImageSource,
     type ImageBlockParam as ImageBlockParam,
+    type ImageDimensionsTooLargeErrorDetails as ImageDimensionsTooLargeErrorDetails,
     type ImageTransformationsParam as ImageTransformationsParam,
     type InputJSONDelta as InputJSONDelta,
     type JSONOutputFormat as JSONOutputFormat,
@@ -8476,8 +8551,8 @@ export declare namespace Messages {
     type TextEditorCodeExecutionStrReplaceResultBlockParam as TextEditorCodeExecutionStrReplaceResultBlockParam,
     type TextEditorCodeExecutionToolResultBlock as TextEditorCodeExecutionToolResultBlock,
     type TextEditorCodeExecutionToolResultBlockParam as TextEditorCodeExecutionToolResultBlockParam,
-    type TextEditorCodeExecutionToolResultError as TextEditorCodeExecutionToolResultError,
     type TextEditorCodeExecutionToolResultErrorCode as TextEditorCodeExecutionToolResultErrorCode,
+    type TextEditorCodeExecutionToolResultErrorObject as TextEditorCodeExecutionToolResultErrorObject,
     type TextEditorCodeExecutionToolResultErrorParam as TextEditorCodeExecutionToolResultErrorParam,
     type TextEditorCodeExecutionViewResultBlock as TextEditorCodeExecutionViewResultBlock,
     type TextEditorCodeExecutionViewResultBlockParam as TextEditorCodeExecutionViewResultBlockParam,
@@ -8511,8 +8586,8 @@ export declare namespace Messages {
     type ToolSearchToolRegex20251119 as ToolSearchToolRegex20251119,
     type ToolSearchToolResultBlock as ToolSearchToolResultBlock,
     type ToolSearchToolResultBlockParam as ToolSearchToolResultBlockParam,
-    type ToolSearchToolResultError as ToolSearchToolResultError,
     type ToolSearchToolResultErrorCode as ToolSearchToolResultErrorCode,
+    type ToolSearchToolResultErrorObject as ToolSearchToolResultErrorObject,
     type ToolSearchToolResultErrorParam as ToolSearchToolResultErrorParam,
     type ToolSearchToolSearchResultBlock as ToolSearchToolSearchResultBlock,
     type ToolSearchToolSearchResultBlockParam as ToolSearchToolSearchResultBlockParam,
@@ -8551,12 +8626,19 @@ export declare namespace Messages {
     type WebSearchTool20250305 as WebSearchTool20250305,
     type WebSearchTool20260209 as WebSearchTool20260209,
     type WebSearchTool20260318 as WebSearchTool20260318,
-    type WebSearchToolRequestError as WebSearchToolRequestError,
+    type WebSearchToolRequestErrorObject as WebSearchToolRequestErrorObject,
     type WebSearchToolResultBlock as WebSearchToolResultBlock,
     type WebSearchToolResultBlockContent as WebSearchToolResultBlockContent,
     type WebSearchToolResultBlockParam as WebSearchToolResultBlockParam,
     type WebSearchToolResultBlockParamContent as WebSearchToolResultBlockParamContent,
     type WebSearchToolResultError as WebSearchToolResultError,
+    type WebSearchToolResultErrorCode as WebSearchToolResultErrorCode,
+    type WebSearchToolResultErrorObject as WebSearchToolResultErrorObject,
+    type WebSearchToolRequestError as WebSearchToolRequestError,
+    type CodeExecutionToolResultError as CodeExecutionToolResultError,
+    type BashCodeExecutionToolResultError as BashCodeExecutionToolResultError,
+    type TextEditorCodeExecutionToolResultError as TextEditorCodeExecutionToolResultError,
+    type ToolSearchToolResultError as ToolSearchToolResultError,
     type ResponseToolUseBlockUnion as ResponseToolUseBlockUnion,
     type ResponseBrowserToolUseBlock as ResponseBrowserToolUseBlock,
     type ResponseBrowserCloseTabToolUseBlock as ResponseBrowserCloseTabToolUseBlock,

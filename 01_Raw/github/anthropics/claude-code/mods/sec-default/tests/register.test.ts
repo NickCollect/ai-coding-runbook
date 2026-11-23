@@ -640,6 +640,10 @@ describe('register', () => {
         ).toBe(false)
 
         expect(
+          await $.tool.offer({ tool: 'mcp__suite__x', provider, for: 'list' }),
+        ).toEqual({ isOffered: true })
+
+        expect(
           await $.agent.offer(
             Fixtures.agentOffered('suite:reviewer', provider),
           ),
@@ -666,12 +670,122 @@ describe('register', () => {
         ).toBe(true)
 
         expect(
+          await $.tool.offer({ tool: 'Read', provider, for: 'list' }),
+        ).toEqual({ isOffered: false })
+
+        expect(
           await $.agent.offer(Fixtures.agentOffered('reviewer', provider)),
         ).toEqual({ isOffered: false })
 
         expect(await $.agent.spawn(Fixtures.agentSpawned(provider))).toEqual({
           model: 'user',
         })
+      }
+    },
+  )
+
+  test(
+    "a person's plugin takes or rewrites the report of a person's agent, and of no organization's",
+    { plugins: [Fixtures.marking] },
+    async ($, on) => {
+      on('settings.read', () => ({ value: Fixtures.NO_ALLOWLIST }))
+      Fixtures.subjectsEchoed(on)
+
+      const report = { agentId: 'a1', subagentType: 'reviewer', text: 'said' }
+
+      for (const provider of Fixtures.ORG_PROVIDERS) {
+        for (const status of ['completed', 'failed'] as const) {
+          expect(await $.agent.report({ ...report, provider, status })).toEqual({
+            text: 'said',
+          })
+        }
+      }
+
+      for (const provider of Fixtures.USER_REACHABLE_PROVIDERS) {
+        expect(
+          await $.agent.report({ ...report, provider, status: 'completed' }),
+        ).toEqual({ consumed: 'user' })
+
+        expect(
+          await $.agent.report({ ...report, provider, status: 'failed' }),
+        ).toEqual({ text: 'user' })
+      }
+    },
+  )
+
+  test(
+    "a tool that policy names is offered over a person's plugin, and their own is still theirs to hide",
+    { plugins: [Fixtures.marking] },
+    async ($, on) => {
+      on('settings.read', () => ({ value: Fixtures.MANAGED_POLICY }))
+      Fixtures.subjectsEchoed(on)
+
+      for (const [tool, plugin, isOffered] of [
+        ['mcp__corp__search', 'mcp:corp', true],
+        ['mcp__suite__deploy', 'suite@corp-market', true],
+        ['mcp__plugin_suite_jira__create', 'suite@corp-market', true],
+        ['mcp__mine__search', 'mcp:mine', false],
+        ['mcp__corporate__search', 'mcp:corporate', false],
+      ] as const) {
+        expect(
+          await $.tool.offer({
+            tool,
+            provider: { plugin, tier: 'user' },
+            for: 'list',
+          }),
+          tool,
+        ).toEqual({ isOffered })
+      }
+    },
+  )
+
+  test(
+    "with the server file unreadable every mcp__ tool is offered over a person's plugin",
+    { plugins: [Fixtures.marking] },
+    async ($, on) => {
+      on('settings.read', () => ({
+        value: { managedMcpServersUnreadable: true },
+      }))
+      Fixtures.subjectsEchoed(on)
+
+      expect(
+        await $.tool.offer({
+          tool: 'mcp__mine__search',
+          provider: { plugin: 'mcp:mine', tier: 'user' },
+          for: 'list',
+        }),
+      ).toEqual({ isOffered: true })
+
+      expect(
+        await $.tool.offer({
+          tool: 'Read',
+          provider: { plugin: 'engine', tier: 'core' },
+          for: 'list',
+        }),
+      ).toEqual({ isOffered: false })
+    },
+  )
+
+  test(
+    "with no policy to read every tool is offered over a person's plugin",
+    { plugins: [Fixtures.marking] },
+    async ($, on) => {
+      const stop = Fixtures.policyUntilStopped(
+        on,
+        Fixtures.NO_ALLOWLIST,
+        'unreadable',
+      )
+
+      Fixtures.subjectsEchoed(on)
+      await $.agent.offer(
+        Fixtures.agentOffered('reviewer', { plugin: 'engine', tier: 'core' }),
+      )
+      stop()
+
+      for (const provider of Fixtures.USER_REACHABLE_PROVIDERS) {
+        expect(
+          await $.tool.offer({ tool: 'Read', provider, for: 'call' }),
+        ).toEqual({ isOffered: true })
       }
     },
   )
@@ -2670,6 +2784,16 @@ describe('register', () => {
     ).toEqual([true, true, true, true, true, true, true, true, true])
   })
 
+  test("what is merged into a model request's body is pinned", () => {
+    expect(
+      [
+        'CLAUDE_CODE_EXTRA_BODY',
+        'claude_code_extra_metadata',
+        'CLAUDE_CODE_EXTRA_MINE',
+      ].map(name => Hooks.isPinnedVariable({}, name)),
+    ).toEqual([true, true, false])
+  })
+
   test('every variable that can load code into a child is pinned', () => {
     expect(
       [
@@ -2831,6 +2955,71 @@ describe('register', () => {
       expect(lines[0]).toContain(Hooks.pinnedVariableRefusal('NODE_OPTIONS'))
     },
   )
+
+  for (const [where, isOn, theirs] of [
+    [
+      'on no cloud',
+      () => false,
+      ['AWS_PROFILE', 'gcloud_project', 'AZURE_TENANT_ID', 'HOME'],
+    ],
+    [
+      'behind a base URL',
+      name => name === 'ANTHROPIC_BASE_URL',
+      ['AWS_PROFILE', 'gcloud_project', 'AZURE_TENANT_ID'],
+    ],
+    [
+      'on AWS',
+      name => name === 'CLAUDE_CODE_USE_BEDROCK',
+      ['gcloud_project', 'AZURE_TENANT_ID'],
+    ],
+    [
+      'on Google',
+      name => name === 'CLAUDE_CODE_USE_VERTEX',
+      ['AWS_PROFILE', 'AZURE_TENANT_ID'],
+    ],
+    [
+      'on Azure',
+      name => name === 'CLAUDE_CODE_USE_FOUNDRY',
+      ['AWS_PROFILE', 'gcloud_project'],
+    ],
+    [
+      'with no switch to read',
+      () => {
+        throw new Error('unread')
+      },
+      [],
+    ],
+  ] satisfies [string, (name: string) => boolean, string[]][]) {
+    test(
+      `what routes or signs a model request is not theirs to write ${where}`,
+      {
+        plugins: [
+          Fixtures.settingRoutes('suite', 'prepend'),
+          Fixtures.settingRoutes('mine'),
+          Fixtures.settingRoutes('bundled', 'builtin'),
+        ],
+      },
+      async ($, on) => {
+        on('settings.read', () => ({ value: Fixtures.MANAGED_POLICY }))
+        on('env.get', ($, e) => ({ value: isOn(e.name) ? '1' : undefined }))
+
+        const set = Fixtures.variablesSet(on)
+
+        await $.session.start(Fixtures.SESSION)
+
+        const by = (plugin: string) =>
+          set.flatMap(line => line.match(`^${plugin} (\\w+)`)?.[1] ?? [])
+
+        expect(by('mine')).toEqual([
+          ...theirs,
+          'AWS_PAGER',
+          'GOOGLE_API_KEY',
+          'CLAUDE_MINE_TOKEN',
+        ])
+        expect([by('suite').length, by('bundled').length]).toEqual([12, 12])
+      },
+    )
+  }
 
   test(
     'a listed id that is one at-sign refuses every registration of theirs',

@@ -45,6 +45,7 @@ export class Versions extends APIResource {
    * @throws {CMEKKeyDisabledError}
    * @throws {CMEKKeyNetworkBlockedError}
    * @throws {BetaUnsupportedCharsetError}
+   * @throws {SandboxEgressRestrictedError}
    * @throws {BetaSkillNameTakenError}
    * @throws {BetaRegistrationPendingError}
    *
@@ -218,6 +219,7 @@ export class Versions extends APIResource {
    *
    * @throws {CMEKKeyDisabledError}
    * @throws {CMEKKeyNetworkBlockedError}
+   * @throws {SandboxEgressRestrictedError}
    *
    * @example
    * ```ts
@@ -370,7 +372,8 @@ export interface VersionRetrieveParams {
    * the organization's UUID or its `org_`-prefixed ID. A value that is neither
    * returns a 400; an organization that is not a child of the key's parent, or where
    * the Plugins API is not available, returns a 404. Any other key may pass only its
-   * own organization's ID here; another organization returns a 404.
+   * own organization's ID here; another organization returns a 404. A key with no
+   * organization of its own must always pass `organization_id`.
    */
   organization_id?: string | null;
 
@@ -389,7 +392,8 @@ export interface VersionListParams extends PageCursorParams {
    * the organization's UUID or its `org_`-prefixed ID. A value that is neither
    * returns a 400; an organization that is not a child of the key's parent, or where
    * the Plugins API is not available, returns a 404. Any other key may pass only its
-   * own organization's ID here; another organization returns a 404.
+   * own organization's ID here; another organization returns a 404. A key with no
+   * organization of its own must always pass `organization_id`.
    */
   organization_id?: string | null;
 
@@ -413,7 +417,8 @@ export interface VersionDownloadParams {
    * the organization's UUID or its `org_`-prefixed ID. A value that is neither
    * returns a 400; an organization that is not a child of the key's parent, or where
    * the Plugins API is not available, returns a 404. Any other key may pass only its
-   * own organization's ID here; another organization returns a 404.
+   * own organization's ID here; another organization returns a 404. A key with no
+   * organization of its own must always pass `organization_id`.
    */
   organization_id?: string | null;
 

@@ -14,7 +14,8 @@ in any case or percent-encoded.
   doesn't, since carrying over a line the file already holds adds nothing.
 - **WebFetch:** the address in `url` is refused with no second word, since the URL
   is what goes out.
-- **`mcp__*`:** the whole input, keys included, by the same test.
+- **`mcp__*`:** the whole input, keys included, by the same test. A settings
+  `mcp_tool` hook's own call passes.
 
 A word that declares who is calling is one of:
 
@@ -33,8 +34,10 @@ A word that declares who is calling is one of:
 
 `COMPUTED_ADDRESS` counts as the address beside any of these words on its own line:
 `git config user.email` in its usual spellings, unless it is given a value to set,
-and `$GIT_AUTHOR_EMAIL` and `$GIT_COMMITTER_EMAIL`. The address itself counts with
-a word anywhere in the text.
+`$GIT_AUTHOR_EMAIL` and `$GIT_COMMITTER_EMAIL`, and the names of the two variables
+that can hold the address in a cloud session, however the line reads them:
+`CLAUDE_CODE_USER_EMAIL` and `CCR_SESSION_ACCOUNT_EMAIL`. The address itself counts
+with a word anywhere in the text.
 
 Scripts are found by a word match, not a parser: relative names with a script's
 extension, and `./name` with no extension, up to `MOST_SCRIPTS` per line, one level
@@ -52,7 +55,8 @@ approval, so it follows no link that its walk sees: it walks each name's compone
 from the working directory with `$.fs.list`, and reads a plain file only if none is
 a link. A link swapped in between by a process already writing the folder isn't
 covered. A file that cannot be read (missing, over 4 MiB, a network path) holds nothing, and
-the call goes on.
+the call goes on. One that the engine could not hold as its rules checked it (`UNHELD`, `RULES_MOVED`) is
+refused, in words of its own.
 
 A line only touches files where every command starts with git or another of
 `TOUCH_WORDS` (`gh`, `cat`, `sed`, `mv`, `chmod`, linters, formatters, test runners,
@@ -131,7 +135,7 @@ on `session.identity` goes by the caller's tier:
 - `user`: refused. The call resolves with `deny`.
 - `builtin`: answered whole, this mod's own read included.
 - Any other: answered less `contextEmail`, pin or no pin. `email`, the pinned
-  account's, is left as it is.
+  account's, is left as it is, and so are `accountId` and `accountCreatedAt`.
 
 The field is left off that caller's own answer. A hook above this one still
 sees it on a built-in's read.
@@ -140,8 +144,9 @@ Where the hook fails, its `.catch` refuses.
 
 By design, without `sec-default` a person's hook sits above this one and can see
 or answer the call, and with this mod off too a person's mod is answered. The
-address already reaches it at `prompt.context`. Under a pin, what it sees
-includes the organization's fields and the pinned `email`.
+address already reaches it at `prompt.context`. What it sees includes
+`accountId` and `accountCreatedAt` and, under a pin, the organization's fields
+and the pinned `email`.
 
 ## What turns it off
 

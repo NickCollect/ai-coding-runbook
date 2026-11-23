@@ -15,10 +15,13 @@ import * as RBACGroupsAPI from './organization/rbac-groups/rbac-groups';
 import * as WorkspacesAPI from './organization/workspaces/workspaces';
 import * as ClaudeTagAPI from './beta/organization/claude-tag/claude-tag';
 import * as PluginsAPI from './beta/organization/plugins/plugins';
+import * as OrganizationRBACGroupsAPI from './beta/organization/rbac-groups/rbac-groups';
 import * as SpendLimitsAPI from './beta/organization/spend-limits/spend-limits';
+import * as ManagedSettingsAPI from './beta/organization/claude-code/managed-settings/managed-settings';
 import {
   BadRequestError,
   ContentTooLargeError,
+  PaymentRequiredError,
   PermissionDeniedError,
   RateLimitError as ErrorsRateLimitError,
   ServiceUnavailableError,
@@ -98,6 +101,18 @@ export class OrganizationTypeNotSupportedError extends BadRequestError {
 }
 
 /**
+ * The endpoint serves only organizations that belong to a parent organization, and
+ * this organization belongs to none.
+ */
+export class ParentOrganizationRequiredError extends BadRequestError {
+  declare readonly errorCode: 'parent_organization_required';
+  declare readonly details: ParentOrganizationRequiredErrorDetails;
+
+  /** @internal */
+  static override readonly _errorName: string = 'ParentOrganizationRequiredError';
+}
+
+/**
  * The request body is not valid for its `Content-Encoding`.
  */
 export class RequestBodyEncodingInvalidError extends BadRequestError {
@@ -120,8 +135,34 @@ export class RequestBodyEncodingUnsupportedError extends BadRequestError {
 }
 
 /**
+ * Anthropic cannot currently bill the organization linked to the request's user
+ * profile, for a reason that lies with that organization's own account. The
+ * response does not say what the reason is.
+ */
+export class LinkedOrganizationBillingUnavailableError extends PaymentRequiredError {
+  declare readonly errorCode: 'linked_organization_billing_unavailable';
+  declare readonly details: LinkedOrganizationBillingUnavailableErrorDetails;
+
+  /** @internal */
+  static override readonly _errorName: string = 'LinkedOrganizationBillingUnavailableError';
+}
+
+/**
+ * The organization linked to the request's user profile has reached a spend limit
+ * that it set, or lacks credit for the request. The response does not say which
+ * applies.
+ */
+export class LinkedOrganizationSpendLimitReachedError extends PaymentRequiredError {
+  declare readonly errorCode: 'linked_organization_spend_limit_reached';
+  declare readonly details: LinkedOrganizationSpendLimitReachedErrorDetails;
+
+  /** @internal */
+  static override readonly _errorName: string = 'LinkedOrganizationSpendLimitReachedError';
+}
+
+/**
  * The request came from a Claude sandbox with restricted network access, which is
- * not allowed to make this change. Send it from outside the sandbox, or from a
+ * not allowed to make this request. Send it from outside the sandbox, or from a
  * sandbox with unrestricted network access.
  */
 export class SandboxEgressRestrictedError extends PermissionDeniedError {
@@ -141,6 +182,17 @@ export class RequestBodyTooLargeAfterDecodingError extends ContentTooLargeError 
 
   /** @internal */
   static override readonly _errorName: string = 'RequestBodyTooLargeAfterDecodingError';
+}
+
+/**
+ * The organization has reached the spend limit of its contract.
+ */
+export class ContractSpendLimitReachedError extends ErrorsRateLimitError {
+  declare readonly errorCode: 'contract_spend_limit_reached';
+  declare readonly details: ContractSpendLimitReachedErrorDetails;
+
+  /** @internal */
+  static override readonly _errorName: string = 'ContractSpendLimitReachedError';
 }
 
 /**
@@ -204,7 +256,7 @@ export interface APIErrorObject {
   type: 'api_error';
 }
 
-export interface AuthenticationError {
+export interface AuthenticationErrorObject {
   /**
    * A human-readable explanation of the error. Its wording can change, so don't
    * match on it.
@@ -217,7 +269,7 @@ export interface AuthenticationError {
   type: 'authentication_error';
 }
 
-export interface BillingError {
+export interface BillingErrorObject {
   /**
    * A human-readable explanation of the error. Its wording can change, so don't
    * match on it.
@@ -280,6 +332,13 @@ export interface CMEKKeyUnreachableErrorDetails {
 }
 
 /**
+ * The organization has reached the spend limit of its contract.
+ */
+export interface ContractSpendLimitReachedErrorDetails {
+  error_code: 'contract_spend_limit_reached';
+}
+
+/**
  * The organization has crossed the monthly API usage threshold of its API tier.
  */
 export interface EnforcedSpendLimitReachedErrorDetails {
@@ -300,6 +359,7 @@ export type ErrorDetails =
   | MessagesAPI.CompactionSignatureInvalidErrorDetails
   | MessagesAPI.CompactionTooManyToolReferencesErrorDetails
   | MessagesAPI.CompactionToolChangesMismatchErrorDetails
+  | MessagesAPI.ImageDimensionsTooLargeErrorDetails
   | OrganizationOnHoldErrorDetails
   | RequestBodyEncodingInvalidErrorDetails
   | RequestBodyEncodingUnsupportedErrorDetails
@@ -309,9 +369,15 @@ export type ErrorDetails =
   | MessagesAPI.ThreadUnsupportedRequestErrorDetails
   | MessagesAPI.ToolNameConflictErrorDetails
   | MessagesAPI.ToolReferenceUnresolvedErrorDetails
+  | UserProfilesAPI.UserProfileRequiredErrorDetails
+  | LinkedOrganizationBillingUnavailableErrorDetails
+  | LinkedOrganizationSpendLimitReachedErrorDetails
+  | UserProfilesAPI.UserProfileBillingNotAuthorizedErrorDetails
+  | UserProfilesAPI.UserProfileNotBillableErrorDetails
   | MessagesAPI.ThreadNotFoundErrorDetails
   | SkillsAPI.SkillReadBlockedUndecryptableErrorDetails
   | RequestBodyTooLargeAfterDecodingErrorDetails
+  | ContractSpendLimitReachedErrorDetails
   | EnforcedSpendLimitReachedErrorDetails
   | RampLimitExceededErrorDetails
   | CMEKKeyUnreachableErrorDetails
@@ -341,6 +407,8 @@ export type ErrorDetails =
   | ExternalKeysAPI.ExternalKeyChangedErrorDetails
   | WorkspacesAPI.WorkspaceMemberLimitExceededErrorDetails
   | OrganizationTypeNotSupportedErrorDetails
+  | ParentOrganizationRequiredErrorDetails
+  | OrganizationAPI.RBACRoleNotFoundErrorDetails
   | EnvironmentsAPI.BetaEnvironmentCreateDisabledErrorDetails
   | EnvironmentsAPI.BetaEnvironmentArchivedErrorDetails
   | EnvironmentsAPI.BetaInvalidConfigTypeChangeErrorDetails
@@ -361,6 +429,13 @@ export type ErrorDetails =
   | PluginsAPI.BetaRegistrationPendingErrorDetails
   | PluginsAPI.BetaScanFailedErrorDetails
   | PluginsAPI.BetaScanPendingErrorDetails
+  | BetaAPI.BetaRequestBodyTimeoutErrorDetails
+  | ManagedSettingsAPI.BetaSettingsDocumentLimitExceededErrorDetails
+  | ManagedSettingsAPI.BetaSettingsHistoryLimitExceededErrorDetails
+  | ManagedSettingsAPI.BetaCMEKFeatureUnsupportedErrorDetails
+  | ManagedSettingsAPI.BetaRBACGroupManagedSettingsNotFoundErrorDetails
+  | ManagedSettingsAPI.BetaRBACGroupOrderLimitExceededErrorDetails
+  | OrganizationRBACGroupsAPI.BetaRBACGroupNotFoundErrorDetails
   | ClaudeTagAPI.BetaSlackChannelSetUpSettingsRefusedErrorDetails
   | ClaudeTagAPI.BetaAPIKeyScopeMissingErrorDetails
   | ClaudeTagAPI.BetaClaudeTagWritesNotEnabledErrorDetails
@@ -368,18 +443,20 @@ export type ErrorDetails =
   | ClaudeTagAPI.BetaOrganizationLevelScopedAPIKeyRequiredErrorDetails
   | EnvironmentsAPI.BetaEnvironmentNotFoundErrorDetails
   | ClaudeTagAPI.BetaSlackChannelSetUpEnvironmentNotFoundErrorDetails
-  | ClaudeTagAPI.BetaSlackChannelSetUpSettingsConflictErrorDetails;
+  | ClaudeTagAPI.BetaSlackChannelSetUpSettingsConflictErrorDetails
+  | ClaudeTagAPI.BetaBundleAttachmentNotSupportedErrorDetails
+  | ClaudeTagAPI.BetaBundleOnCallErrorDetails;
 
 export type ErrorObject =
-  | InvalidRequestError
-  | AuthenticationError
-  | BillingError
-  | PermissionError
-  | NotFoundError
-  | RateLimitError
-  | GatewayTimeoutError
+  | InvalidRequestErrorObject
+  | AuthenticationErrorObject
+  | BillingErrorObject
+  | PermissionErrorObject
+  | NotFoundErrorObject
+  | RateLimitErrorObject
+  | GatewayTimeoutErrorObject
   | APIErrorObject
-  | OverloadedError;
+  | OverloadedErrorObject;
 
 export interface ErrorResponse {
   error: ErrorObject;
@@ -403,7 +480,7 @@ export type ErrorType =
   | 'memory_path_conflict_error'
   | 'conflict_error';
 
-export interface GatewayTimeoutError {
+export interface GatewayTimeoutErrorObject {
   /**
    * A human-readable explanation of the error. Its wording can change, so don't
    * match on it.
@@ -416,7 +493,7 @@ export interface GatewayTimeoutError {
   type: 'timeout_error';
 }
 
-export interface InvalidRequestError {
+export interface InvalidRequestErrorObject {
   /**
    * A human-readable explanation of the error. Its wording can change, so don't
    * match on it.
@@ -429,7 +506,25 @@ export interface InvalidRequestError {
   type: 'invalid_request_error';
 }
 
-export interface NotFoundError {
+/**
+ * Anthropic cannot currently bill the organization linked to the request's user
+ * profile, for a reason that lies with that organization's own account. The
+ * response does not say what the reason is.
+ */
+export interface LinkedOrganizationBillingUnavailableErrorDetails {
+  error_code: 'linked_organization_billing_unavailable';
+}
+
+/**
+ * The organization linked to the request's user profile has reached a spend limit
+ * that it set, or lacks credit for the request. The response does not say which
+ * applies.
+ */
+export interface LinkedOrganizationSpendLimitReachedErrorDetails {
+  error_code: 'linked_organization_spend_limit_reached';
+}
+
+export interface NotFoundErrorObject {
   /**
    * A human-readable explanation of the error. Its wording can change, so don't
    * match on it.
@@ -461,7 +556,7 @@ export interface OrganizationTypeNotSupportedErrorDetails {
   error_code: 'organization_type_not_supported';
 }
 
-export interface OverloadedError {
+export interface OverloadedErrorObject {
   /**
    * A human-readable explanation of the error. Its wording can change, so don't
    * match on it.
@@ -474,7 +569,15 @@ export interface OverloadedError {
   type: 'overloaded_error';
 }
 
-export interface PermissionError {
+/**
+ * The endpoint serves only organizations that belong to a parent organization, and
+ * this organization belongs to none.
+ */
+export interface ParentOrganizationRequiredErrorDetails {
+  error_code: 'parent_organization_required';
+}
+
+export interface PermissionErrorObject {
   /**
    * A human-readable explanation of the error. Its wording can change, so don't
    * match on it.
@@ -495,7 +598,7 @@ export interface RampLimitExceededErrorDetails {
   error_code: 'ramp_limit_exceeded';
 }
 
-export interface RateLimitError {
+export interface RateLimitErrorObject {
   /**
    * A human-readable explanation of the error. Its wording can change, so don't
    * match on it.
@@ -531,9 +634,49 @@ export interface RequestBodyTooLargeAfterDecodingErrorDetails {
 
 /**
  * The request came from a Claude sandbox with restricted network access, which is
- * not allowed to make this change. Send it from outside the sandbox, or from a
+ * not allowed to make this request. Send it from outside the sandbox, or from a
  * sandbox with unrestricted network access.
  */
 export interface SandboxEgressRestrictedErrorDetails {
   error_code: 'sandbox_egress_restricted';
 }
+
+/**
+ * @deprecated AuthenticationError has been renamed to AuthenticationErrorObject
+ */
+export type AuthenticationError = AuthenticationErrorObject;
+
+/**
+ * @deprecated InvalidRequestError has been renamed to InvalidRequestErrorObject
+ */
+export type InvalidRequestError = InvalidRequestErrorObject;
+
+/**
+ * @deprecated BillingError has been renamed to BillingErrorObject
+ */
+export type BillingError = BillingErrorObject;
+
+/**
+ * @deprecated GatewayTimeoutError has been renamed to GatewayTimeoutErrorObject
+ */
+export type GatewayTimeoutError = GatewayTimeoutErrorObject;
+
+/**
+ * @deprecated NotFoundError has been renamed to NotFoundErrorObject
+ */
+export type NotFoundError = NotFoundErrorObject;
+
+/**
+ * @deprecated OverloadedError has been renamed to OverloadedErrorObject
+ */
+export type OverloadedError = OverloadedErrorObject;
+
+/**
+ * @deprecated PermissionError has been renamed to PermissionErrorObject
+ */
+export type PermissionError = PermissionErrorObject;
+
+/**
+ * @deprecated RateLimitError has been renamed to RateLimitErrorObject
+ */
+export type RateLimitError = RateLimitErrorObject;

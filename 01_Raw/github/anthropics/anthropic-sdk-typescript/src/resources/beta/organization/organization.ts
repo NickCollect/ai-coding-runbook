@@ -54,6 +54,7 @@ import * as PluginMarketplacesAPI from './plugin-marketplaces';
 import {
   BetaPluginMarketplace,
   BetaPluginMarketplaceValidationPluginError,
+  BetaPluginMarketplaceValidationPluginErrorObject,
   BetaPluginMarketplaceValidationPluginWarning,
   BetaPluginMarketplaceValidationPluginWarnings,
   BetaPluginMarketplaceValidationReport,
@@ -202,10 +203,16 @@ import {
   BetaAnalyticsUserActor,
   BetaAnalyticsUserGroupBy,
 } from './analytics/analytics';
+import * as ClaudeCodeAPI from './claude-code/claude-code';
+import { ClaudeCode } from './claude-code/claude-code';
 import * as ClaudeTagAPI from './claude-tag/claude-tag';
 import {
   BetaAPIKeyScopeMissingError,
   BetaAPIKeyScopeMissingErrorDetails,
+  BetaBundleAttachmentNotSupportedError,
+  BetaBundleAttachmentNotSupportedErrorDetails,
+  BetaBundleOnCallError,
+  BetaBundleOnCallErrorDetails,
   BetaClaudeTagDefaultSettingSource,
   BetaClaudeTagGuestPolicy,
   BetaClaudeTagGuestPolicyAllow,
@@ -279,6 +286,8 @@ import * as RBACGroupsAPI from './rbac-groups/rbac-groups';
 import {
   BetaDeletedRBACGroup,
   BetaRBACGroup,
+  BetaRBACGroupNotFoundError,
+  BetaRBACGroupNotFoundErrorDetails,
   BetaRBACGroupsPageCursor,
   RBACGroupCreateParams,
   RBACGroupListParams,
@@ -288,6 +297,9 @@ import {
 import * as RBACRolesAPI from './rbac-roles/rbac-roles';
 import {
   BetaRBACRole,
+  BetaRBACRoleSource,
+  BetaRBACRoleSourceBuiltIn,
+  BetaRBACRoleSourceCustom,
   BetaRBACRolesPageCursor,
   RBACRoleListParams,
   RBACRoles,
@@ -409,6 +421,7 @@ export class Organization extends APIResource {
   telemetryDestinations: TelemetryDestinationsAPI.TelemetryDestinations =
     new TelemetryDestinationsAPI.TelemetryDestinations(this._client);
   webhooks: WebhooksAPI.Webhooks = new WebhooksAPI.Webhooks(this._client);
+  claudeCode: ClaudeCodeAPI.ClaudeCode = new ClaudeCodeAPI.ClaudeCode(this._client);
   claudeTag: ClaudeTagAPI.ClaudeTag = new ClaudeTagAPI.ClaudeTag(this._client);
 
   /**
@@ -481,6 +494,7 @@ Organization.Analytics = Analytics;
 Organization.SpendLimits = SpendLimits;
 Organization.BetaSpendLimitsAdminAPIWritesNotEnabledError = BetaSpendLimitsAdminAPIWritesNotEnabledError;
 Organization.RBACGroups = RBACGroups;
+Organization.BetaRBACGroupNotFoundError = BetaRBACGroupNotFoundError;
 Organization.RBACRoles = RBACRoles;
 Organization.Plugins = Plugins;
 Organization.BetaScanFailedError = BetaScanFailedError;
@@ -491,7 +505,10 @@ Organization.BetaRegistrationPendingError = BetaRegistrationPendingError;
 Organization.PluginMarketplaces = PluginMarketplaces;
 Organization.TelemetryDestinations = TelemetryDestinations;
 Organization.Webhooks = Webhooks;
+Organization.ClaudeCode = ClaudeCode;
 Organization.ClaudeTag = ClaudeTag;
+Organization.BetaBundleAttachmentNotSupportedError = BetaBundleAttachmentNotSupportedError;
+Organization.BetaBundleOnCallError = BetaBundleOnCallError;
 Organization.BetaSlackChannelSetUpSettingsRefusedError = BetaSlackChannelSetUpSettingsRefusedError;
 Organization.BetaAPIKeyScopeMissingError = BetaAPIKeyScopeMissingError;
 Organization.BetaClaudeTagWritesNotEnabledError = BetaClaudeTagWritesNotEnabledError;
@@ -729,8 +746,10 @@ export declare namespace Organization {
 
   export {
     RBACGroups as RBACGroups,
+    BetaRBACGroupNotFoundError as BetaRBACGroupNotFoundError,
     type BetaDeletedRBACGroup as BetaDeletedRBACGroup,
     type BetaRBACGroup as BetaRBACGroup,
+    type BetaRBACGroupNotFoundErrorDetails as BetaRBACGroupNotFoundErrorDetails,
     type BetaRBACGroupsPageCursor as BetaRBACGroupsPageCursor,
     type RBACGroupCreateParams as RBACGroupCreateParams,
     type RBACGroupUpdateParams as RBACGroupUpdateParams,
@@ -740,6 +759,9 @@ export declare namespace Organization {
   export {
     RBACRoles as RBACRoles,
     type BetaRBACRole as BetaRBACRole,
+    type BetaRBACRoleSource as BetaRBACRoleSource,
+    type BetaRBACRoleSourceBuiltIn as BetaRBACRoleSourceBuiltIn,
+    type BetaRBACRoleSourceCustom as BetaRBACRoleSourceCustom,
     type BetaRBACRolesPageCursor as BetaRBACRolesPageCursor,
     type RBACRoleListParams as RBACRoleListParams,
   };
@@ -778,10 +800,11 @@ export declare namespace Organization {
   export {
     PluginMarketplaces as PluginMarketplaces,
     type BetaPluginMarketplace as BetaPluginMarketplace,
-    type BetaPluginMarketplaceValidationPluginError as BetaPluginMarketplaceValidationPluginError,
+    type BetaPluginMarketplaceValidationPluginErrorObject as BetaPluginMarketplaceValidationPluginErrorObject,
     type BetaPluginMarketplaceValidationPluginWarning as BetaPluginMarketplaceValidationPluginWarning,
     type BetaPluginMarketplaceValidationPluginWarnings as BetaPluginMarketplaceValidationPluginWarnings,
     type BetaPluginMarketplaceValidationReport as BetaPluginMarketplaceValidationReport,
+    type BetaPluginMarketplaceValidationPluginError as BetaPluginMarketplaceValidationPluginError,
     type BetaPluginMarketplacesPageCursor as BetaPluginMarketplacesPageCursor,
     type PluginMarketplaceRetrieveParams as PluginMarketplaceRetrieveParams,
     type PluginMarketplaceUpdateParams as PluginMarketplaceUpdateParams,
@@ -846,8 +869,12 @@ export declare namespace Organization {
     type WebhookRegenerateSigningSecretParams as WebhookRegenerateSigningSecretParams,
   };
 
+  export { ClaudeCode as ClaudeCode };
+
   export {
     ClaudeTag as ClaudeTag,
+    BetaBundleAttachmentNotSupportedError as BetaBundleAttachmentNotSupportedError,
+    BetaBundleOnCallError as BetaBundleOnCallError,
     BetaSlackChannelSetUpSettingsRefusedError as BetaSlackChannelSetUpSettingsRefusedError,
     BetaAPIKeyScopeMissingError as BetaAPIKeyScopeMissingError,
     BetaClaudeTagWritesNotEnabledError as BetaClaudeTagWritesNotEnabledError,
@@ -856,6 +883,8 @@ export declare namespace Organization {
     BetaSlackChannelSetUpEnvironmentNotFoundError as BetaSlackChannelSetUpEnvironmentNotFoundError,
     BetaSlackChannelSetUpSettingsConflictError as BetaSlackChannelSetUpSettingsConflictError,
     type BetaAPIKeyScopeMissingErrorDetails as BetaAPIKeyScopeMissingErrorDetails,
+    type BetaBundleAttachmentNotSupportedErrorDetails as BetaBundleAttachmentNotSupportedErrorDetails,
+    type BetaBundleOnCallErrorDetails as BetaBundleOnCallErrorDetails,
     type BetaClaudeTagDefaultSettingSource as BetaClaudeTagDefaultSettingSource,
     type BetaClaudeTagGuestPolicy as BetaClaudeTagGuestPolicy,
     type BetaClaudeTagGuestPolicyAllow as BetaClaudeTagGuestPolicyAllow,

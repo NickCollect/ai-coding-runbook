@@ -7,16 +7,24 @@ import {
   CMEKKeyUnreachableError,
   ClaudeCodeKeyCreatorNotMemberError,
   ClaudeCodeVersionTooOldError,
+  ContractSpendLimitReachedError,
   EnforcedSpendLimitReachedError,
+  LinkedOrganizationBillingUnavailableError,
+  LinkedOrganizationSpendLimitReachedError,
   OrganizationOnHoldError,
   OrganizationTypeNotSupportedError,
+  ParentOrganizationRequiredError,
   RampLimitExceededError,
   RequestBodyEncodingInvalidError,
   RequestBodyEncodingUnsupportedError,
   RequestBodyTooLargeAfterDecodingError,
   SandboxEgressRestrictedError,
 } from '../resources/shared';
-import { BetaOrganizationNotEnrolledInBetaError, BetaUnsupportedCharsetError } from '../resources/beta/beta';
+import {
+  BetaOrganizationNotEnrolledInBetaError,
+  BetaRequestBodyTimeoutError,
+  BetaUnsupportedCharsetError,
+} from '../resources/beta/beta';
 import {
   AvailableToolsLimitExceededError,
   CompactionBlockAmbiguousError,
@@ -28,6 +36,7 @@ import {
   CompactionTooManyToolReferencesError,
   CompactionToolChangesMismatchError,
   CompactionUnavailableError,
+  ImageDimensionsTooLargeError,
   ThreadAlreadyContinuedError,
   ThreadContinueInFlightError,
   ThreadFingerprintMismatchError,
@@ -55,10 +64,16 @@ import {
 import {
   ConcurrentMembershipChangeError,
   OrgMemberLimitExceededError,
+  RBACRoleNotFoundError,
 } from '../resources/organization/organization';
 import { CannotRemoveLastMemberError } from '../resources/organization/users';
 import { SkillReadBlockedUndecryptableError } from '../resources/skills/skills';
-import { UserProfileNotFoundError } from '../resources/user-profiles/user-profiles';
+import {
+  UserProfileBillingNotAuthorizedError,
+  UserProfileNotBillableError,
+  UserProfileNotFoundError,
+  UserProfileRequiredError,
+} from '../resources/user-profiles/user-profiles';
 import {
   BetaEnvironmentArchivedError,
   BetaEnvironmentCreateDisabledError,
@@ -87,6 +102,8 @@ import {
 } from '../resources/organization/workspaces/workspaces';
 import {
   BetaAPIKeyScopeMissingError,
+  BetaBundleAttachmentNotSupportedError,
+  BetaBundleOnCallError,
   BetaClaudeTagWritesNotEnabledError,
   BetaComplianceConfigurationRestrictedError,
   BetaOrganizationLevelScopedAPIKeyRequiredError,
@@ -101,18 +118,29 @@ import {
   BetaScanPendingError,
   BetaSkillNameTakenError,
 } from '../resources/beta/organization/plugins/plugins';
+import { BetaRBACGroupNotFoundError } from '../resources/beta/organization/rbac-groups/rbac-groups';
 import { BetaSpendLimitsAdminAPIWritesNotEnabledError } from '../resources/beta/organization/spend-limits/spend-limits';
+import {
+  BetaCMEKFeatureUnsupportedError,
+  BetaRBACGroupManagedSettingsNotFoundError,
+  BetaRBACGroupOrderLimitExceededError,
+  BetaSettingsDocumentLimitExceededError,
+  BetaSettingsHistoryLimitExceededError,
+} from '../resources/beta/organization/claude-code/managed-settings/managed-settings';
 
 /** @internal */
 export const ERROR_CODE_CLASSES = /* @__PURE__ */ new Map<string, typeof APIError<number, Headers>>([
   ['400 already_member', AlreadyMemberError],
   ['400 available_tools_limit_exceeded', AvailableToolsLimitExceededError],
+  ['400 bundle_attachment_not_supported', BetaBundleAttachmentNotSupportedError],
+  ['400 bundle_on_call', BetaBundleOnCallError],
   ['400 cannot_invite_emails_with_unverified_domains', CannotInviteEmailsWithUnverifiedDomainsError],
   ['400 cannot_remove_last_member', CannotRemoveLastMemberError],
   ['400 cannot_sign_out_primary_owner', BetaCannotSignOutPrimaryOwnerError],
   ['400 cannot_sign_out_self', BetaCannotSignOutSelfError],
   ['400 claude_code_key_creator_not_member', ClaudeCodeKeyCreatorNotMemberError],
   ['400 claude_code_version_too_old', ClaudeCodeVersionTooOldError],
+  ['400 cmek_feature_unsupported', BetaCMEKFeatureUnsupportedError],
   ['400 cmek_key_disabled', CMEKKeyDisabledError],
   ['400 cmek_key_network_blocked', CMEKKeyNetworkBlockedError],
   ['400 compaction_block_ambiguous', CompactionBlockAmbiguousError],
@@ -129,6 +157,7 @@ export const ERROR_CODE_CLASSES = /* @__PURE__ */ new Map<string, typeof APIErro
   ['400 external_key_validation_failed', ExternalKeyValidationFailedError],
   ['400 external_key_validation_timed_out', ExternalKeyValidationTimedOutError],
   ['400 file_not_downloadable', FileNotDownloadableError],
+  ['400 image_dimensions_too_large', ImageDimensionsTooLargeError],
   ['400 invalid_config_type_change', BetaInvalidConfigTypeChangeError],
   ['400 invalid_metadata', BetaInvalidMetadataError],
   ['400 invite_already_exists', InviteAlreadyExistsError],
@@ -138,11 +167,16 @@ export const ERROR_CODE_CLASSES = /* @__PURE__ */ new Map<string, typeof APIErro
   ['400 organization_not_enrolled_in_beta', BetaOrganizationNotEnrolledInBetaError],
   ['400 organization_on_hold', OrganizationOnHoldError],
   ['400 organization_type_not_supported', OrganizationTypeNotSupportedError],
+  ['400 parent_organization_required', ParentOrganizationRequiredError],
   ['400 rbac_group_grants_owner_access', RBACGroupGrantsOwnerAccessError],
+  ['400 rbac_group_order_limit_exceeded', BetaRBACGroupOrderLimitExceededError],
   ['400 rbac_group_owner_access_unconfirmed', RBACGroupOwnerAccessUnconfirmedError],
   ['400 request_body_encoding_invalid', RequestBodyEncodingInvalidError],
   ['400 request_body_encoding_unsupported', RequestBodyEncodingUnsupportedError],
+  ['400 request_body_timeout', BetaRequestBodyTimeoutError],
   ['400 scan_failed', BetaScanFailedError],
+  ['400 settings_document_limit_exceeded', BetaSettingsDocumentLimitExceededError],
+  ['400 settings_history_limit_exceeded', BetaSettingsHistoryLimitExceededError],
   ['400 slack_channel_set_up_settings_refused', BetaSlackChannelSetUpSettingsRefusedError],
   ['400 storage_quota_exceeded', StorageQuotaExceededError],
   ['400 thread_already_continued', ThreadAlreadyContinuedError],
@@ -153,9 +187,12 @@ export const ERROR_CODE_CLASSES = /* @__PURE__ */ new Map<string, typeof APIErro
   ['400 tool_reference_unresolved', ToolReferenceUnresolvedError],
   ['400 unsupported_charset', BetaUnsupportedCharsetError],
   ['400 user_profile_not_found', UserProfileNotFoundError],
+  ['400 user_profile_required', UserProfileRequiredError],
   ['400 workspace_api_key_limit_exceeded', WorkspaceAPIKeyLimitExceededError],
   ['400 workspace_member_limit_exceeded', WorkspaceMemberLimitExceededError],
   ['400 workspace_policy_violation', WorkspacePolicyViolationError],
+  ['402 linked_organization_billing_unavailable', LinkedOrganizationBillingUnavailableError],
+  ['402 linked_organization_spend_limit_reached', LinkedOrganizationSpendLimitReachedError],
   ['403 api_key_scope_missing', BetaAPIKeyScopeMissingError],
   ['403 cannot_sign_out_managed_member', BetaCannotSignOutManagedMemberError],
   ['403 cannot_sign_out_membership_admin', BetaCannotSignOutMembershipAdminError],
@@ -168,8 +205,13 @@ export const ERROR_CODE_CLASSES = /* @__PURE__ */ new Map<string, typeof APIErro
   ['403 organization_level_scoped_api_key_required', BetaOrganizationLevelScopedAPIKeyRequiredError],
   ['403 sandbox_egress_restricted', SandboxEgressRestrictedError],
   ['403 spend_limits_admin_api_writes_not_enabled', BetaSpendLimitsAdminAPIWritesNotEnabledError],
+  ['403 user_profile_billing_not_authorized', UserProfileBillingNotAuthorizedError],
+  ['403 user_profile_not_billable', UserProfileNotBillableError],
   ['404 environment_not_found', BetaEnvironmentNotFoundError],
   ['404 file_expired', FileExpiredError],
+  ['404 rbac_group_managed_settings_not_found', BetaRBACGroupManagedSettingsNotFoundError],
+  ['404 rbac_group_not_found', BetaRBACGroupNotFoundError],
+  ['404 rbac_role_not_found', RBACRoleNotFoundError],
   ['404 slack_channel_set_up_environment_not_found', BetaSlackChannelSetUpEnvironmentNotFoundError],
   ['404 thread_not_found', ThreadNotFoundError],
   ['409 concurrent_membership_change', ConcurrentMembershipChangeError],
@@ -181,6 +223,7 @@ export const ERROR_CODE_CLASSES = /* @__PURE__ */ new Map<string, typeof APIErro
   ['409 slack_channel_set_up_settings_conflict', BetaSlackChannelSetUpSettingsConflictError],
   ['412 heartbeat_precondition_failed', BetaHeartbeatPreconditionFailedError],
   ['413 request_body_too_large_after_decoding', RequestBodyTooLargeAfterDecodingError],
+  ['429 contract_spend_limit_reached', ContractSpendLimitReachedError],
   ['429 enforced_spend_limit_reached', EnforcedSpendLimitReachedError],
   ['429 ramp_limit_exceeded', RampLimitExceededError],
   ['503 cmek_context_unavailable', CMEKContextUnavailableError],

@@ -14,9 +14,10 @@ import HeldVerdict from './held-verdict'
 import HotReloadPrompt from './hot-reload-prompt'
 import { identityRefusal } from './identity-refusal'
 import { managedModsOnlyRefusal } from './managed-mods-only-refusal'
+import { isOrganizationsHookCall } from './organizations-hook-call'
 import { pastUsers } from './past-users'
 import { pinnedVariableRefusal } from './pinned-variable-refusal'
-import Policy from './policy'
+import Policy, { isCloudVariableInUse } from './policy'
 import { isSkillRow } from './skill-row'
 import {
   registerRefusalOf,
@@ -88,6 +89,11 @@ export function register(on: On) {
 
   on('settings.read', ($, e, next) => next.to(e, 'append'))
 
+  on('session.info', ($, e, next) => next.to(e, 'append'))
+  on('session.redact', ($, e, next) => next.to(e, 'append'))
+
+  on('telemetry.log', { to: 'collector' }, ($, e, next) => next.to(e, 'append'))
+
   // It refuses, so it is never skipped when alone. No call on `$` here: a hook
   // that call reached would run with this one left out.
   on('session.identity', ($, e, next) =>
@@ -100,14 +106,25 @@ export function register(on: On) {
       : next.to(e, 'append'),
   )
 
-  // The tool.describe and command.describe rows, like the agent.offer, prompt.section,
-  // attribution.text and env.get rows, only pass the event on. The engine skips them where this
-  // plugin is the copy built into it and no other plugin hooks the event. Before one does more,
-  // take its event off that skip list: a test in the engine's repository fails and says where.
+  // The tool.describe and command.describe rows, like the tool.offer, agent.offer, agent.report,
+  // prompt.section, attribution.text, env.get and vcs rows (but vcs.diff), only pass the event on. The engine skips them
+  // where this plugin is the copy built into it and no other plugin hooks the event. Before one does
+  // more, take its event off that skip list: a test in the engine's repository fails and says where.
   on('tool.describe', ($, e, next) => pastUsers(e, next))
   on('command.describe', ($, e, next) => pastUsers(e, next))
   on('agent.offer', ($, e, next) => pastUsers(e, next))
   on('agent.spawn', ($, e, next) => pastUsers(e, next))
+  on('agent.report', ($, e, next) => pastUsers(e, next))
+
+  // By name too, as tool.list holds them: policy names tools the engine leaves in the user tier.
+  on('tool.offer', async ($, e, next) => {
+    const isOrgs = await Policy.decidedByPolicy(
+      readPolicy(() => $.settings.read(Policy.SOURCE)),
+      policy => Policy.isOrgTool(policy, e.tool),
+    )
+
+    return isOrgs ? next.to(e, 'append') : pastUsers(e, next)
+  }).catch(($, e, next) => (next.called ? next(e) : next.to(e, 'append')))
 
   on('tool.register', async ($, e, next) => {
     const isOrgs =
@@ -182,7 +199,13 @@ export function register(on: On) {
           : undefined
       const deny =
         match &&
-        (await refusalOf($, readPolicy, match.repeated, match.isSettings))
+        (await refusalOf(
+          $,
+          readPolicy,
+          match.repeated,
+          match.isSettings,
+          match.write,
+        ))
 
       return deny === undefined ? next(e) : { deny }
     }
@@ -226,15 +249,18 @@ export function register(on: On) {
   })
 
   on('fs.write', async ($, e, next) => {
-    const deny =
-      next.origin.tier === 'user'
-        ? await refusalOf(
-            $,
-            readPolicy,
-            await writeRepeats($, memory.calls(next.origin.plugin), e.path),
-            await isSettingsFile($, e.path, first),
-          )
-        : undefined
+    if (next.origin.tier !== 'user') {
+      return next(e)
+    }
+
+    const remembered = memory.calls(next.origin.plugin)
+    const deny = await refusalOf(
+      $,
+      readPolicy,
+      await writeRepeats($, remembered, e.path),
+      await isSettingsFile($, e.path, first),
+      { path: e.path, first, remembered },
+    )
 
     return deny === undefined ? next(e) : { deny }
   })
@@ -297,8 +323,9 @@ export function register(on: On) {
 
     if (id === undefined) {
       if (
-        next.origin.tier === 'prepend' &&
-        next.origin.plugin === $.plugin.name
+        isOrganizationsHookCall(next.origin) ||
+        (next.origin.tier === 'prepend' &&
+          next.origin.plugin === $.plugin.name)
       ) {
         return next.to(e, 'append')
       }
@@ -340,6 +367,10 @@ export function register(on: On) {
 
     return held
   }).catch(async ($, e, next) => {
+    if (isOrganizationsHookCall(next.origin)) {
+      return next.to(e, 'append')
+    }
+
     const last = await next(e).catch(() => undefined)
 
     const shouldVouch = await Policy.decidedByPolicy(
@@ -447,13 +478,14 @@ export function register(on: On) {
       return next.to(e, 'append')
     }
 
-    const isPinned = await Policy.decidedByPolicy(
-      readPolicy(() => $.settings.read(Policy.SOURCE)),
-      policy => Policy.isPinnedVariable(policy, e.name),
-    )
+    const isPinned =
+      (await Policy.decidedByPolicy(
+        readPolicy(() => $.settings.read(Policy.SOURCE)),
+        policy => Policy.isPinnedVariable(policy, e.name),
+      )) || (await isCloudVariableInUse($, e.name))
 
     if (!isPinned) {
-      // The home variables are not pinned, and the settings hold reads them.
+      // A home variable can get here, and the settings hold reads them.
       if (first.folder === undefined) {
         await configFolders($, first)
       }
@@ -478,6 +510,18 @@ export function register(on: On) {
       : next.to(e, 'append')
   })
 
+  // Skipped when alone on the event: see the command.describe row.
+  on(
+    'vcs.detect',
+    async ($, e, next) => (await next.to(e, 'append')) ?? next(e),
+  ).catch(($, e, next) => next.to(e, 'append'))
+
+  on('vcs.diff', async ($, e, next) => {
+    const theirs = await next.to(e, 'append')
+
+    return theirs.unknown === null ? next(e) : theirs
+  }).catch(($, e, next) => next.to(e, 'append'))
+
   on('wasm.compile', ($, e, next) => {
     const isOrgs =
       next.origin.tier === 'prepend' || next.origin.tier === 'append'
@@ -489,6 +533,43 @@ export function register(on: On) {
 
     return isOrgs ? next.to(e, 'append') : next(e)
   })
+
+  // Skipped when alone on their event: see the command.describe row.
+  on('vcs.isolate', async ($, e, next) => {
+    const isOrgs = await Policy.decidedByPolicy(
+      readPolicy(() => $.settings.read(Policy.SOURCE)),
+      Policy.hasWorktreeHook,
+    )
+
+    return isOrgs ? next.to(e, 'append') : next(e)
+  }).catch(($, e, next) => (next.called ? next(e) : next.to(e, 'append')))
+
+  on('vcs.list', async ($, e, next) => {
+    const isOrgs = await Policy.decidedByPolicy(
+      readPolicy(() => $.settings.read(Policy.SOURCE)),
+      Policy.hasWorktreeHook,
+    )
+
+    return isOrgs ? next.to(e, 'append') : next(e)
+  }).catch(($, e, next) => (next.called ? next(e) : next.to(e, 'append')))
+
+  on('vcs.status', async ($, e, next) => {
+    const isOrgs = await Policy.decidedByPolicy(
+      readPolicy(() => $.settings.read(Policy.SOURCE)),
+      Policy.hasWorktreeHook,
+    )
+
+    return isOrgs ? next.to(e, 'append') : next(e)
+  }).catch(($, e, next) => (next.called ? next(e) : next.to(e, 'append')))
+
+  on('vcs.release', async ($, e, next) => {
+    const isOrgs = await Policy.decidedByPolicy(
+      readPolicy(() => $.settings.read(Policy.SOURCE)),
+      Policy.hasWorktreeHook,
+    )
+
+    return isOrgs ? next.to(e, 'append') : next(e)
+  }).catch(($, e, next) => (next.called ? next(e) : next.to(e, 'append')))
 
   on('plugin.register', { tier: 'user' }, async ($, e, next) => {
     admittedAs.set(e.name, e.provenance)
@@ -511,10 +592,12 @@ export function register(on: On) {
 
     pastManagedOnly.add(e.name)
 
+    const isRequired = e.requiredByOrganization === true
+
     if (!Policy.isHotReloadPromptForced(policy) || folder === undefined) {
       // An organization's plugin can sit in the user tier, where a person's
       // refusal would take its command hooks with it.
-      return Policy.isOrgPlugin(policy, e.provenance)
+      return isRequired || Policy.isOrgPlugin(policy, e.provenance)
         ? next.to(e, 'append')
         : next(e)
     }
@@ -522,7 +605,7 @@ export function register(on: On) {
     const kept = answers.get(folder)
 
     if (kept === HotReloadPrompt.TURN_THEM_ON) {
-      return next(e)
+      return isRequired ? next.to(e, 'append') : next(e)
     }
 
     if (kept !== undefined) {
@@ -536,7 +619,7 @@ export function register(on: On) {
     if (isStored) {
       answers.set(folder, HotReloadPrompt.TURN_THEM_ON)
 
-      return next(e)
+      return isRequired ? next.to(e, 'append') : next(e)
     }
 
     // A rejection is no answer: the next load, where someone can answer, asks.
@@ -561,7 +644,7 @@ export function register(on: On) {
     // A failed write costs the next session a question, not this one its answer.
     await $.store.set(HotReloadPrompt.yesKey(folder), true).catch(() => {})
 
-    return next(e)
+    return isRequired ? next.to(e, 'append') : next(e)
   }).catch(($, e, next) => {
     // A `.catch` that throws or waits past its grace answers nothing, and the mod
     // would load unasked: so this one waits on nothing, and its log line cannot stop it.
@@ -576,8 +659,10 @@ export function register(on: On) {
       folder !== undefined &&
       answers.get(folder) === HotReloadPrompt.TURN_THEM_ON
 
+    const isRequired = e.requiredByOrganization === true
+
     if (pastManagedOnly.has(e.name) && (next.called || isAnsweredYes)) {
-      return next(e)
+      return isRequired ? next.to(e, 'append') : next(e)
     }
 
     if (folder !== undefined && !isAnsweredYes) {
@@ -585,7 +670,7 @@ export function register(on: On) {
     }
 
     if (usesNothing(e.uses)) {
-      return next(e)
+      return isRequired ? next.to(e, 'append') : next(e)
     }
 
     if (folder !== undefined) {

@@ -62,8 +62,8 @@ export class ExternalKeys extends APIResource {
    * Partially update an external key config. Omitted fields are left unchanged.
    *
    * `display_name` is always editable. `geo` and `provider_config` cannot be changed
-   * once any workspace references this config, because previously encrypted data
-   * requires the original key identity to decrypt.
+   * once any workspace references this config, and a Google Cloud key's provider and
+   * `key_name` cannot be changed at all.
    *
    * @throws {ExternalKeyInWorkspacePolicyError}
    * @throws {SandboxEgressRestrictedError}
@@ -184,8 +184,7 @@ export type BetaExternalKeysPageCursor = PageCursor<BetaExternalKey>;
 export interface BetaAWSExternalKeyConfig {
   /**
    * Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected,
-   * and your organization's own key must be a single-Region key in your
-   * organization's AWS account.
+   * and your organization's own key must be a single-Region key.
    */
   kms_arn: string;
 
@@ -305,8 +304,8 @@ export interface BetaExternalKey {
   /**
    * ID of the user profile the key is bound to, or null if the key is not bound to
    * one. A key bound to a user profile can only be attached to a Workspace that has
-   * the same user profile. A key that isn't bound can be attached to a Workspace
-   * whatever its user profile.
+   * the same user profile. A key that isn't bound can only be attached to a
+   * Workspace that has no user profile.
    */
   user_profile_id: string | null;
 }
@@ -379,8 +378,9 @@ export interface ExternalKeyCreateParams {
    * customers: bind a customer's key to that customer's user profile. A key bound to
    * a user profile can only be attached to a Workspace that has the same user
    * profile, and the binding cannot be changed later. Omit this field only for your
-   * organization's own key, because a key created without a user profile ID can be
-   * attached to any Workspace, including another customer's.
+   * organization's own key, never a customer's. A key created without a user profile
+   * ID can't be attached to a Workspace that has a user profile, and you can't add
+   * one to the key later.
    */
   user_profile_id?: string | null;
 }
