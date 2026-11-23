@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/security-guidance
-fetched_at: 2026-11-16T07:30:45.506356+00:00
+fetched_at: 2026-11-23T08:28:13.513473+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,7 +37,7 @@ In a terminal Claude Code session, install from the [official Anthropic marketpl
 
 * **Claude desktop app, local or SSH session**: use the **Desktop app** tab under [Install a plugin](https://code.claude.com/docs/en/plugins/install.md#install-a-plugin)
 * **VS Code extension**: install from the [**Manage plugins** dialog](https://code.claude.com/docs/en/vs-code.md#manage-plugins)
-* **Cloud sessions**: a cloud session doesn't load plugins from your user settings or from the repository's `.claude/settings.json`, as [What carries over from your setup](https://code.claude.com/docs/en/cloud-environments.md#what-carries-over-from-your-setup) explains. For plugins your organization distributes through managed settings, see [Manage plugins for your organization](https://code.claude.com/docs/en/plugins/org.md)
+* **Cloud sessions**: a cloud session doesn't load plugins from your user settings, as [What carries over from your setup](https://code.claude.com/docs/en/cloud-environments.md#what-carries-over-from-your-setup) explains. For plugins your organization distributes through managed settings, see [Manage plugins for your organization](https://code.claude.com/docs/en/plugins/org.md)
 
 The terminal install prompts for a scope. Choose user scope to write the plugin to your user settings, so it loads in every new local session you start on this machine.
 
@@ -205,7 +205,7 @@ To remove it from your user scope:
 /plugin uninstall security-guidance@claude-plugins-official
 ```
 
-If the plugin was enabled through a project's `.claude/settings.json`, uninstalling it from `/plugin` writes an override to your `.claude/settings.local.json` rather than editing the checked-in file, so the plugin stays off for you while teammates are unaffected. The same dialog also offers to uninstall the plugin for everyone by removing it from the shared `.claude/settings.json`. If it was enabled through [managed settings](https://code.claude.com/docs/en/admin-setup.md), only an administrator can disable it.
+If the plugin was enabled through a project's `.claude/settings.json`, uninstalling it from `/plugin` writes an override to your `.claude/settings.local.json` rather than editing the checked-in file. The plugin stays off for you while teammates are unaffected. The same dialog also offers to uninstall the plugin for everyone by removing it from the shared `.claude/settings.json`. If it was enabled through [managed settings](https://code.claude.com/docs/en/admin-setup.md), `/plugin` refuses **Disable plugin** and **Uninstall**.
 
 ## How the plugin integrates with Claude Code
 
@@ -239,7 +239,7 @@ To find security issues in code you already have, rather than in changes Claude 
 
 The plugin writes runtime diagnostics to `~/.claude/security/log.txt`. Check there first if reviews are not appearing.
 
-Common reasons a review layer skips without a message in the conversation:
+Common reasons a review layer skips:
 
 * The directory is not a git repository: the end-of-turn and commit reviews require git state and skip outside a repository
 * The session has no Anthropic authentication and no third-party provider configured: the model-backed reviews skip and only the per-edit pattern check runs

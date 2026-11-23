@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/channels
-fetched_at: 2026-11-09T07:30:17.701036+00:00
+fetched_at: 2026-11-23T08:28:12.438520+00:00
 fetch_method: mintlify_md
 ---
 
@@ -110,6 +110,7 @@ Each supported channel is a plugin that requires [Bun](https://bun.sh). For a ha
 > * View Channels
 > * Send Messages
 > * Send Messages in Threads
+> * Create Public Threads
 > * Read Message History
 > * Attach Files
 > * Add Reactions
@@ -283,7 +284,7 @@ When you run channels in non-interactive mode with `-p`, tools that need termina
 
 ## Security
 
-Every approved channel plugin maintains a sender allowlist: only IDs you've added can push messages, and everyone else is silently dropped.
+The Telegram, Discord, and iMessage channel plugins check direct messages against a sender allowlist. Other people's direct messages reach your session only after you add those people to the list.
 
 Telegram and Discord bootstrap the list by pairing:
 

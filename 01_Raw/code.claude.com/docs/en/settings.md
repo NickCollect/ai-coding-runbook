@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/settings
-fetched_at: 2026-11-16T07:30:45.584174+00:00
+fetched_at: 2026-11-23T08:28:13.610219+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,7 +62,7 @@ Installing Claude Code doesn't create any settings file. If your machine or proj
 
 * **Managed**: your organization deploys it. You don't create or edit it.
 * **Shared project**: a project that already uses Claude Code may have one committed. If not, create it at `.claude/settings.json` in the project folder.
-* **User** and **Project local**: create them yourself, or let Claude Code create them. It writes `~/.claude/settings.json` the first time you change an option in the `/config` menu that it stores in user settings, such as the theme, and `.claude/settings.local.json` the first time you give a standing approval on a permission prompt, such as "Yes, and don't ask again" for a Bash command. A few `/config` options, including **Show tips**, save to `.claude/settings.local.json` instead of the user file.
+* **User** and **Project local**: create them yourself, or let Claude Code create them. It writes `~/.claude/settings.json` when you save a user setting, such as the theme. It writes `.claude/settings.local.json` when you give a standing approval on a permission prompt, such as "Yes, and don't ask again" for a Bash command.
 
 > [!NOTE]
 >
@@ -124,7 +124,7 @@ Claude Code's system prompt isn't published. To give Claude standing instruction
 Run `/config` inside Claude Code and open the **Config** tab. It lists a short set of personal options such as theme, editor mode, and verbose output, not every settings key. Select an option to change it; Claude Code saves it for you:
 
 * **Most options**: `~/.claude/settings.json`
-* **A few options, such as Show tips**: `.claude/settings.local.json`
+* **Output style**: `.claude/settings.local.json`
 * **The [global config options](https://code.claude.com/docs/en/settings-reference.md#global-config-settings)**: `~/.claude.json`
 
 To set one option without the menu, pass `key=value`, such as `/config verbose=true`.
@@ -163,7 +163,7 @@ For a complete personal file, team file, and organization file, each shown with 
 
 To try a value without saving it, set it when you start Claude Code. The value applies to that session and your settings files stay as they were. You have three ways to do it:
 
-* **`--settings`**: pass a key as JSON, inline or as a path to a file. Claude Code applies it above your user, project, and local files and below managed settings. It can set any key your user settings file can set; it can't set `Managed` or `Global config` keys.
+* **`--settings`**: pass a key as JSON, inline or as a path to a file. Claude Code applies it above your user, project, and local files and below managed settings. With `--settings`, you can't set [`Managed` or `Global config`](https://code.claude.com/docs/en/settings-reference#scopes) keys or some user settings keys, such as [`prependPlugins`](https://code.claude.com/docs/en/settings-reference#prependplugins).
 * **A flag for that key**: some keys have their own flag, such as `--model` for `model` and `--effort` for `effortLevel` and `modelSettings`.
 * **An environment variable**: export the key's paired variable before you run `claude`, such as `ANTHROPIC_MODEL` for `model`.
 
@@ -329,11 +329,11 @@ An app that runs Claude Code inside itself and sets [`CLAUDE_CODE_PROVIDER_MANAG
 
 ## Settings in cloud sessions
 
-A [cloud session](https://code.claude.com/docs/en/claude-code-on-the-web.md) runs in a [cloud environment](https://code.claude.com/docs/en/cloud-environments.md) on a fresh clone of your repository, not on your machine. That changes which settings reach it:
+A [cloud session](https://code.claude.com/docs/en/claude-code-on-the-web.md) runs in a [cloud environment](https://code.claude.com/docs/en/cloud-environments.md) on a fresh clone of your repository. That changes which settings reach it:
 
 * **Cloud threads in a project**: in a cloud thread in a [project](https://code.claude.com/docs/en/claude-projects.md#what-threads-pick-up-from-your-repositories), none of a repository's `.claude/settings.json` permission rules, hooks, or `env` apply, however many repositories the project has. [What threads pick up from your repositories](https://code.claude.com/docs/en/claude-projects.md#what-threads-pick-up-from-your-repositories) lists what to use instead.
 * **Shared project settings** (`.claude/settings.json`): read in a session with one repository outside a project's threads, because the file is part of the clone and the session starts inside it. Commit a setting there to apply it in those sessions.
-* **Shared project settings with several repositories**: in an Anthropic-hosted environment, a session with several repositories starts above the clones and reads only the `enabledPlugins` and `extraKnownMarketplaces` keys from each repository's `.claude/settings.json`, not permission rules, hooks, `env`, or other keys. The marketplaces and plugins those two keys declare still [don't load in a cloud session](https://code.claude.com/docs/en/cloud-environments.md#what-carries-over-from-your-setup). For a self-hosted environment, see [which repository's settings apply](https://code.claude.com/docs/en/self-hosted-environments-configuration.md#repository-settings-in-sessions-with-several-repositories).
+* **Shared project settings with several repositories**: in an Anthropic-hosted environment, a session with several repositories starts above the clones and reads only the `enabledPlugins` and `extraKnownMarketplaces` keys from each repository's `.claude/settings.json`, not permission rules, hooks, `env`, or other keys. The marketplaces a repository declares still [aren't added in a cloud session](https://code.claude.com/docs/en/cloud-environments.md#what-carries-over-from-your-setup). For a self-hosted environment, see [which repository's settings apply](https://code.claude.com/docs/en/self-hosted-environments-configuration.md#repository-settings-in-sessions-with-several-repositories).
 * **User and project local settings** (`~/.claude/settings.json` and `.claude/settings.local.json`): not read. Both stay on your machine, and the local file isn't in the clone.
 * **Managed settings**: a `managed-settings.json` file or MDM profile on your device doesn't reach a cloud session. Your organization's [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md) do; [surface coverage](https://code.claude.com/docs/en/model-config.md#surface-coverage) lists which cloud sessions receive them. A [self-hosted environment](https://code.claude.com/docs/en/self-hosted-environments) also reads the managed settings file in its runner image. [How Claude Code combines managed sources](https://code.claude.com/docs/en/managed-settings.md#how-claude-code-combines-managed-sources) says when that file applies.
 * **`/config`**: in your browser at claude.ai/code, opens your claude.ai **Code** or **Claude Code** settings page instead of changing a value. To change a setting for a cloud session, set an [environment variable](https://code.claude.com/docs/en/cloud-environments.md#set-environment-variables) on the environment. In a session with one repository outside a project's threads, you can instead commit the key to that repository's `.claude/settings.json`.

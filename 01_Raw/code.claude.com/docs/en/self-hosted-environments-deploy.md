@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/self-hosted-environments-deploy
-fetched_at: 2026-11-16T07:30:45.551298+00:00
+fetched_at: 2026-11-23T08:28:13.563498+00:00
 fetch_method: mintlify_md
 ---
 
@@ -725,6 +725,8 @@ Supply the clone in the image or on a persistent volume:
 * **Clone in the image**: build the clone into your runner image at that path. Every fresh container then starts with the warm clone without reusing a disk.
 * **Clone on a persistent volume**: on runners you pre-lock to one user's account with [`--lock-to-account`](https://code.claude.com/docs/en/self-hosted-environments-reference#runner-cli-flags), point `--base-dir` at a persistent volume, so the disk only ever serves that account. A pre-locked runner never picks up Claude Tag channel sessions, so this option doesn't apply to runners that serve them.
 
+To use a clone outside `--base-dir`, pass its real path to [`--repository-folder`](https://code.claude.com/docs/en/self-hosted-environments-reference#runner-cli-flags) at `--capacity 1`, such as `--repository-folder acme/api=/volumes/warm/api`. The runner resets the clone's tracked files for each session. Give each runner its own copy, at the same path on every runner. Start each runner on a fresh copy, or pre-lock a fixed-fleet runner with `--lock-to-account`.
+
 What the reuse path does and doesn't guarantee:
 
 * **Clone depth**: build the clone without `--depth`, with or without `--single-branch`. The runner never passes `--depth` when it fetches into a clone with an `origin` remote, even if you set [`CLAUDE_RUNNER_FETCH_DEPTH`](https://code.claude.com/docs/en/self-hosted-environments-reference#environment-variable-only-settings). With a full clone, each session downloads only the commits the clone lacks. With a shallow clone, a session on a branch that forked before the clone's oldest commit downloads that branch's whole history.
@@ -750,7 +752,7 @@ Each session's child process runs the runner's own binary by default, and the ru
 Choose which version your sessions run and when it changes:
 
 * **Before you pin a version**: check [the Claude Code versions that models require](https://code.claude.com/docs/en/model-config.md#available-models) for every model your sessions use. If a model requires a newer version than the one your sessions run, the server rejects requests for that model with [Claude Code does not support this model](https://code.claude.com/docs/en/errors.md#claude-code-does-not-support-this-model).
-* **To hold a fleet on one version**: build the image with a pinned version, or on a bare host install a specific version and [disable auto-updates](https://code.claude.com/docs/en/setup.md#disable-auto-updates)
+* **To hold a fleet on one version**: build the image with a pinned version, or on a bare host [install a specific version](https://code.claude.com/docs/en/setup.md#install-a-specific-version) and [disable auto-updates](https://code.claude.com/docs/en/setup.md#disable-auto-updates)
 * **To upgrade a fixed fleet**: read the [changelog](https://code.claude.com/docs/en/changelog.md) entries between your version and the one you're installing, then install the newer version or rebuild the image and restart the runners
 * **To upgrade on-demand runners**: read the [changelog](https://code.claude.com/docs/en/changelog.md) entries between your version and the one you're installing, then change the image your [`spawn-runner` hook](https://code.claude.com/docs/en/self-hosted-environments-configuration#the-spawn-runner-hook) starts. Each new runner gets the new version. A runner that's already up, including a standby runner that [`--min-idle`](https://code.claude.com/docs/en/self-hosted-environments-reference#orchestrator-cli-flags) started, keeps its version until it exits. Don't restart it, because its work order is single-use.
 * **If sessions start a different binary**: if you use [`--exec-path`](https://code.claude.com/docs/en/self-hosted-environments-reference#runner-cli-flags) or a [`command` hook](https://code.claude.com/docs/en/self-hosted-environments-configuration#command) to start a Claude Code binary other than the runner's own, sessions run that binary's version. Update that binary when you update the runner.
@@ -961,6 +963,7 @@ Common issues:
 * **A session fails to start with `This runner couldn't read`**: the runner asked the git host for a repository with its [git credentials](#configure-git) and got a not-found answer. The repository doesn't exist, or those credentials can't reach the repository.
   * **If you administer the runner**: give its git credentials read access to the repository, then start a new session.
   * **If you started the session**: if the repository doesn't exist, start a new session with the right repository. If the runner can't reach the repository, ask the runner's administrator to grant access, then start a new session.
+* **A session fails to start with `This runner couldn’t use a folder on its machine`**: check the `[runner:error]` lines in the runner's log. If the folder is a link to your clone, name the clone with [`--repository-folder`](#reuse-a-pre-warmed-checkout).
 * **Sessions take minutes to start or resume**: one cause is a fresh clone. On a fleet that starts each runner on an empty disk, with no [`checkout` hook](https://code.claude.com/docs/en/self-hosted-environments-configuration#checkout), the runner clones the session's repositories afresh before it starts Claude Code. A session that resumes on an empty disk waits for the same clone again.
 
   To skip the fresh clone, supply a [pre-warmed checkout](#reuse-a-pre-warmed-checkout). If you already supply one, [confirm that the runner uses it](#confirm-that-the-runner-uses-your-clone). Where the runner makes the clone itself and exits after one session, lower [`CLAUDE_RUNNER_FETCH_DEPTH`](https://code.claude.com/docs/en/self-hosted-environments-reference#environment-variable-only-settings) from its default of 50 commits to fetch less history.

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/sessions
-fetched_at: 2026-11-16T07:30:45.588904+00:00
+fetched_at: 2026-11-23T08:28:13.585716+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,11 +54,11 @@ When Claude Code loads a conversation from its transcript, the resumed session r
 
 * Conversation history: the messages, tool calls, and results. If the session was [compacted](https://code.claude.com/docs/en/context-window.md#what-survives-compaction), the conversation opens at a `Conversation compacted` row. Claude continues with the last compaction's summary, the messages that compaction left unsummarized, and every message since. The messages that the last compaction summarized aren't loaded again.
 * Interrupted tool calls: a tool that was still running when the previous process ended, for example in a crash, doesn't get rerun when you resume.
-* Model: the session continues on the model it was using, except in the cases in [Setting your model](https://code.claude.com/docs/en/model-config.md#setting-your-model).
+* Model: with `claude --resume` or `--continue`, the session continues on the model it was using, except in the cases in [Which model a resumed session uses](https://code.claude.com/docs/en/model-config.md#which-model-a-resumed-session-uses).
 * Agent: a session started with [`--agent`](https://code.claude.com/docs/en/sub-agents#invoke-subagents-explicitly) or the `agent` setting continues as that agent, keeping its tool restrictions and model. Pass `--agent` when resuming to pick a different one; for the system prompt in either case, see [System prompt flags in resumed conversations](https://code.claude.com/docs/en/cli-reference.md#system-prompt-flags-in-resumed-conversations). Claude Code looks for the agent in two places: the session's original directory, provided you have [trusted that workspace](https://code.claude.com/docs/en/permissions.md#project-allow-rules-and-workspace-trust), and then the directory you resume from, so a project-scoped agent still loads when you resume from another directory. If Claude Code doesn't find the agent in either place, the session resumes with the default tools and shows a [warning naming the agent](https://code.claude.com/docs/en/errors.md#session-agent-no-longer-available).
 * Permission mode: if you resume from a terminal with `claude --continue`, `claude --resume <session-id>`, or `claude --resume <name>` when the name matches one session, without `-p`, Claude Code restores the permission mode the session was in, except in the cases in [permission mode on resume](#permission-mode-on-resume), which also covers the session picker, `/resume`, and resuming with `claude -p`. Pass `--permission-mode` or `--dangerously-skip-permissions` to override the restored mode.
 * Active goal: a [goal](https://code.claude.com/docs/en/goal.md#resume-with-an-active-goal) that was still active when the session ended carries over; its turn count, timer, and token-spend baseline reset.
-* Session-scoped scheduled tasks: [tasks that haven't expired](https://code.claude.com/docs/en/scheduled-tasks.md#limitations) are restored. Background Bash and monitor tasks aren't.
+* Session-scoped scheduled tasks: restored, with [exceptions](https://code.claude.com/docs/en/scheduled-tasks.md#limitations). Background Bash and monitor tasks aren't restored.
 * Background work: a [background subagent](https://code.claude.com/docs/en/sub-agents.md#run-subagents-in-foreground-or-background), background Bash command, or [workflow](https://code.claude.com/docs/en/workflows.md) that ended with the previous process shows up in the resumed transcript as a note that it didn't finish. Claude Code doesn't start a turn from those notes; Claude reads them with your next prompt.
 
 #### Flags to pass again when you resume
@@ -74,6 +74,7 @@ For any other `claude --continue` or `claude --resume`, pass [flags](https://cod
 * **Directories**: `--add-dir`, as in `claude --continue --add-dir ../shared`. Use `--add-dir` for directories you added with `/add-dir` too.
 * **Extra settings**: `--settings`
 * **Fallback models**: `--fallback-model`
+* **Tool access**: `--tools`, `--allowedTools`, `--disallowedTools`
 
 For `--system-prompt` and `--append-system-prompt`, see [System prompt flags in resumed conversations](https://code.claude.com/docs/en/cli-reference.md#system-prompt-flags-in-resumed-conversations).
 
@@ -192,22 +193,18 @@ Run `/resume` inside a session, or `claude --resume` with no arguments, to open 
 | Shortcut | Action |
 | :- | :- |
 | `↑` / `↓` or `k` / `j` | Navigate between sessions |
-| `→` / `←` | Expand or collapse grouped sessions |
 | `Enter` | Resume the highlighted session |
-| `1` to `9` | Resume the session at that position in the list |
 | `Space` | Preview the session content. `Ctrl+V` also works on terminals that don't capture it as paste |
 | `Ctrl+R` | Rename the highlighted session |
-| `/` or any printable character other than `Space`, `j`, `k`, or a digit | Enter search mode and filter sessions. Paste a GitHub, GitHub Enterprise, GitLab, or Bitbucket pull or merge request URL to find the session that created it |
+| `/` or any printable character other than `Space`, `j`, or `k` | Enter search mode and filter sessions. Paste a GitHub, GitHub Enterprise, GitLab, or Bitbucket pull or merge request URL to find the session that created it |
 | `Ctrl+A` | Show sessions from all projects on this machine. Press again to return to the current repository |
 | `Ctrl+W` | Show sessions from all worktrees of the current repository. Press again to return to the current worktree. Only shown in multi-worktree repositories |
 | `Ctrl+B` | Filter to sessions from the current git branch. Press again to show all branches |
 | `Esc` | Exit the session picker or search mode |
 
-Each row shows the session name if you set one, otherwise the AI-generated session title, conversation summary, or first prompt, along with time since last activity, git branch, and file size.
+Each session's row is labeled with the first of these that exists: the name you set, the AI-generated session title, a conversation summary, or one of your prompts.
 
-Sessions created with `/branch` or `--fork-session` get their own session IDs and appear as separate rows. When the picker finds more than one entry for the same session, it groups them under a single row. Press `→` to expand a group.
-
-If Claude Code can't load the session you select from the `claude --resume` picker, it prints [`Failed to resume the conversation`](https://code.claude.com/docs/en/errors#failed-to-resume-the-conversation) with a command to retry, then exits with code 1. From the `/resume` picker inside a session, Claude Code reports the failure and your current conversation keeps running.
+Sessions created with `/branch` or `--fork-session` get their own session IDs and appear as separate rows.
 
 ## Branch a session
 
@@ -252,7 +249,7 @@ For how compaction interacts with CLAUDE.md, skills, and rules, see the [context
 
 ## Export and locate session data
 
-Run `/export` to open a menu that lets you copy the current conversation to your clipboard or save it as a plain-text file, with messages and tool outputs rendered as readable text. Pass a filename to skip the menu and write directly to that file.
+Run `/export` to open a menu that lets you copy the current conversation to your clipboard or save it as a plain-text file. Pass a filename to skip the menu and write directly to that file. On v2.1.327 or later, that file can't already exist.
 
 ### Access conversations from scripts
 

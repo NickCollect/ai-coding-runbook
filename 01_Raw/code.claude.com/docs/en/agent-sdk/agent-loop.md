@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/agent-loop
-fetched_at: 2026-11-16T07:30:43.941756+00:00
+fetched_at: 2026-11-23T08:28:12.066283+00:00
 fetch_method: mintlify_md
 ---
 
@@ -175,11 +175,11 @@ Beyond built-in tools, you can:
 
 Claude determines which tools to call based on the task, but you control whether those calls are allowed to execute. Use these options to auto-approve tools, block tools, and set the permission mode:
 
-* **`allowed_tools` / `allowedTools`** auto-approves listed tools. A read-only agent with `["Read", "Glob", "Grep"]` in its allowed tools list runs those tools without prompting, apart from reads from [network paths](https://code.claude.com/docs/en/permissions.md#network-paths). Tools not listed are still available, and calls to them that need approval fall through to the permission mode and `canUseTool`.
+* **`allowed_tools` / `allowedTools`** auto-approves listed tools. An agent with `["Read", "Glob", "Grep"]` in its allowed tools list runs those tools without prompting, with exceptions such as reads from [network paths](https://code.claude.com/docs/en/permissions.md#network-paths). Tools not listed are still available, and calls to them that need approval fall through to the permission mode and `canUseTool`.
 * **`disallowed_tools` / `disallowedTools`** blocks listed tools, regardless of other settings. See [Permissions](https://code.claude.com/docs/en/agent-sdk/permissions.md) for the order that rules are checked before a tool runs.
 * **`permission_mode` / `permissionMode`** controls how much human oversight you want. The SDK evaluates the active mode together with your allow and deny rules in a fixed order, described in [How permissions are evaluated](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated). See [Permission mode](#permission-mode) for available modes.
 
-You can also scope individual tools with rules like `"Bash(npm *)"` to allow only specific commands. See [Permissions](https://code.claude.com/docs/en/agent-sdk/permissions.md) for the full rule syntax.
+You can also scope individual tools with rules like `"Bash(npm *)"` to auto-approve specific commands. See [Permissions](https://code.claude.com/docs/en/agent-sdk/permissions.md) for the full rule syntax.
 
 When a tool is denied, Claude receives a rejection message as the tool result and typically attempts a different approach or reports that it couldn't proceed.
 
@@ -343,6 +343,7 @@ The `usage` field covers only the main agent loop. Use `modelUsage`, or `model_u
 >
 > * A single-shot `query()` call yields the final result message, then raises an error that includes the failure text, such as `Reached maximum number of turns`. The raise is intentional. Wrap the loop in a try block if your code needs to continue past it. The underlying Claude Code process also exits with a nonzero code.
 > * A streaming input session stays alive, and you can keep sending messages, except after a session crash, which emits a final `error_during_execution` result and exits the process.
+> * In TypeScript, the loop over `query()` in a streaming input session throws when the last response ends in an error result. Wrap the loop in a try block if your code needs to continue past it.
 
 The result also includes a `stop_reason` field (`string | null` in TypeScript, `str | None` in Python) indicating why the model stopped generating on its final turn. Common values are `end_turn` (model finished normally), `max_tokens` (hit the output token limit), and `refusal` (the model declined the request). On error results that the loop produced, `stop_reason` carries the value from the last assistant response before the loop ended; the result Claude Code synthesizes after a session crash carries `null`.
 

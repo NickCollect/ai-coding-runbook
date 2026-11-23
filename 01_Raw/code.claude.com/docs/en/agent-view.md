@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-view
-fetched_at: 2026-11-16T07:30:44.233089+00:00
+fetched_at: 2026-11-23T08:28:12.366039+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ fetch_method: mintlify_md
 
 Agent view, opened with `claude agents`, is one screen for all your background sessions: what's running, what needs your input, and what's done. Dispatch new sessions, watch their state at a glance instead of scrolling through transcripts, and step in only when one needs you. Each background session is a full Claude Code conversation that keeps running without a terminal attached, so you can open it, reply, and leave whenever you want.
 
-![Agent view in a terminal. A line at the top counts the sessions awaiting input, working, and completed. Four sessions are grouped under Needs input, Working, and Completed. Each row shows the session's name, its latest status or question, and a time. At the bottom are an input for describing a new task and a row of keyboard hints.](https://mintcdn.com/claude-code/v_J840yKc6uuKDX_/images/agent-view-light.png?fit=max\&auto=format\&n=v_J840yKc6uuKDX_\&q=85\&s=bd95fda83ea66ca8b2e0e7b68f8cb29e)
+![Agent view in a terminal. A line at the top counts the sessions awaiting input, working, and completed. Four sessions are grouped under Needs input, Working, and Completed. Each row shows the session's name, its latest status or question, and a time. At the bottom are an input for describing a new task and a row of keyboard hints.](https://mintcdn.com/claude-code/H7YQo-xfDxC94ETh/images/agent-view-light.png?fit=max\&auto=format\&n=H7YQo-xfDxC94ETh\&q=85\&s=f27b570ff81c2a316bef487645b1331c)
 
 Use agent view when you have several independent tasks Claude can work on without you watching every step. Dispatch a bug fix, a pull request review, and a flaky-test investigation as three rows, keep working in another window, and check back when a row shows it needs you or has a result.
 
@@ -231,7 +231,7 @@ When the session is waiting on you, how you answer from the peek panel depends o
 
 * A question with predefined choices: the panel lists the choices by number. With the reply input empty, press a choice's number to fill it in, then `Enter` to send it, or type your own answer instead
 * A question without predefined choices: type your answer. When the empty input shows a suggested reply, press `Tab` to fill it in and edit it before sending
-* A permission prompt or another dialog, such as a [sandbox](https://code.claude.com/docs/en/sandboxing.md) prompt or an MCP server's [request for input](https://code.claude.com/docs/en/mcp.md#respond-to-mcp-elicitation-requests): replying doesn't answer it. Your message waits in the queue. To answer the dialog, attach with `→`
+* A permission prompt or another dialog, such as a [sandbox](https://code.claude.com/docs/en/sandboxing.md) prompt or an MCP server's [request for input](https://code.claude.com/docs/en/mcp.md#respond-to-mcp-elicitation-requests): replying doesn't answer it. To answer the dialog, attach with `→` while the reply input is empty
 
 When a [`PermissionRequest`](https://code.claude.com/docs/en/hooks#permissionrequest) or [`PreToolUse`](https://code.claude.com/docs/en/hooks#pretooluse) hook returns output Claude Code can't validate for the call the session is asking about, the row shows the hook event and `hook output invalid:` with the validation error before the pending request's text. For a hook that fails another way, the row says the hook failed. The session still waits on the same request.
 
@@ -269,9 +269,9 @@ Detaching never stops a background session: `←`, `Ctrl+Z`, `/exit`, and double
 
 In a session running in the foreground, one you started in the terminal rather than attached to from agent view, pressing `←` on an empty prompt backgrounds it and opens agent view with that row selected, so you can switch sessions without leaving the terminal. The same single press detaches an attached session.
 
-If you press `←` right after you delete the last of the prompt's text or move through prompt history, Claude Code asks you to confirm: the first press shows `Press ← again to open agents`, or `Press ← again to go back to agents` in an attached session, and the second press switches.
+If you press `←` right after you delete the last of the prompt's text or move through prompt history, Claude Code asks you to confirm. Press `←` again to switch.
 
-When `←` backgrounds a foreground session, agent view shows `Your conversation moved to the background` above the list, with that session's row already selected. From there:
+After you background a session with `←`:
 
 * Press `Enter` to reopen the conversation.
 * Press `Esc` to undo the switch and return to the conversation. If `Esc` shows `Still starting — try again in a moment`, the background session isn't ready yet, so press `Esc` again in a moment.
@@ -745,8 +745,6 @@ claude agents --permission-mode plan --model opus --effort high
 
 Pass `--restricted` to start every session you dispatch from the view in [restricted mode](https://code.claude.com/docs/en/cli-reference.md#cli-flags), as if each were launched with the top-level `--restricted` flag. Requires Claude Code v2.1.248 or later.
 
-The active defaults appear in the footer below the dispatch input.
-
 A background session started in `bypassPermissions` mode needs your [acceptance of the bypass disclaimer](https://code.claude.com/docs/en/permission-modes.md#skip-all-checks-with-bypasspermissions-mode) on record, since that mode lets a session you aren't watching act without approval. Passing `--dangerously-skip-permissions` or `--permission-mode bypassPermissions` to `claude agents` shows the same disclaimer when you haven't accepted it before, and accepting applies `bypassPermissions` to the sessions you launch from the view. Passing `--allow-dangerously-skip-permissions` shows the same disclaimer too, and accepting makes `bypassPermissions` available in the `Shift+Tab` cycle of those sessions without starting them in it.
 
 #### What persists across restarts
@@ -994,17 +992,15 @@ If the stop command instead printed one of these four messages, the old process 
 | `was not sent SIGKILL` | macOS, Linux | Run the stop command again. If the process remains, check it with `ps -ww -o args= -p <pid>`: Claude Code started with `daemon` is a supervisor, so run `kill -9 <pid>`. Leave anything else; if `claude agents` then can't start a supervisor, delete `~/.claude/daemon.lock`. |
 | `supervisor (pid=<pid>) is still running` | Windows | End the process with `taskkill /PID <pid>` |
 
-### Dispatch fails with `Could not resolve authentication method`
+### A background session shows `Not logged in`
 
-If a background dispatch fails with `Could not resolve authentication method` while interactive sessions authenticate normally, the worker that received the dispatch didn't pick up credentials. Background sessions get their credentials from the [supervisor](#the-supervisor-process), so this error means no stored credential was available to the supervisor process itself. Confirm you have run `/login` or configured an API key, then stop the supervisor:
+If a background session shows [`Not logged in`](https://code.claude.com/docs/en/errors#not-logged-in) while interactive sessions authenticate normally, confirm you have run `/login` or configured an API key, then stop the [supervisor](#the-supervisor-process):
 
 ```bash theme={null}
 claude daemon stop --any --keep-workers
 ```
 
-Within [about a minute](#the-supervisor-process), run `claude agents` or `claude --bg` in your shell to start a fresh supervisor that reads your stored credentials. If you authenticate with an environment variable such as `ANTHROPIC_API_KEY` rather than `/login`, run that next command from a shell where the variable is set.
-
-See the [error reference](https://code.claude.com/docs/en/errors.md#could-not-resolve-authentication-method) for the full list of causes and fixes.
+Within [about a minute](#the-supervisor-process) of stopping it, run `claude agents` in your shell to start a fresh supervisor. If you authenticate with an environment variable such as `CLAUDE_CODE_OAUTH_TOKEN`, run `claude agents` from a shell where the variable is set. Then run [`claude respawn <id>`](#manage-sessions-from-the-shell) to restart the session, and resend your message.
 
 ### A background session shows `No LLM gateway`
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/overview
-fetched_at: 2026-11-16T07:30:45.365987+00:00
+fetched_at: 2026-11-23T08:28:13.398544+00:00
 fetch_method: mintlify_md
 ---
 
@@ -92,7 +92,7 @@ Read [Plugin loading reference](https://code.claude.com/docs/en/plugins/loading.
 
 ## Tell Anthropic's marketplaces from third-party ones
 
-A marketplace's name places it in one of three tiers. Claude Code accepts the official and community names only for marketplaces sourced from `github.com/anthropics/` repositories:
+A marketplace's name places it in one of three tiers. Claude Code accepts the official and community names for marketplaces sourced from `github.com/anthropics/` repositories:
 
 * **Official**: marketplaces with one of Anthropic's [official marketplace names](https://code.claude.com/docs/en/plugins/security.md#official-marketplace-names), including `claude-plugins-official` and `claude-code-plugins`.
 * **Community**: marketplaces with one of Anthropic's community names, such as `claude-community`. [Identify Anthropic's marketplaces by name](https://code.claude.com/docs/en/plugins/security.md#marketplace-tiers) lists them.

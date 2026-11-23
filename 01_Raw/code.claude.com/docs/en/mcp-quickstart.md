@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mcp-quickstart
-fetched_at: 2026-11-16T07:30:45.063201+00:00
+fetched_at: 2026-11-23T08:28:13.082586+00:00
 fetch_method: mintlify_md
 ---
 
@@ -274,9 +274,7 @@ The fields differ by server type:
 
 After saving the file, start a new Claude Code session in the project. Claude Code reads `.mcp.json` at startup.
 
-The first time Claude Code sees a project-scoped server, it asks you to approve it. The prompt exists so a repository you clone can't launch processes on your machine without your consent. Approve the prompt. If you dismissed it, run `claude mcp reset-project-choices` and restart Claude Code to see it again.
-
-Once you've approved, run `/mcp` and check that the servers show as connected. If one shows an error instead, see [Troubleshooting](#troubleshooting).
+If Claude Code asks you to approve the servers, approve them. If you dismissed the prompt, run `claude mcp reset-project-choices` and restart Claude Code to see it again. Then run `/mcp` and check that the servers show as connected. If one shows an error instead, see [Troubleshooting](#troubleshooting).
 
 ## Connect from other surfaces
 
@@ -292,7 +290,7 @@ This guide uses the `claude mcp` CLI commands, but every Claude Code surface can
 
 If a server doesn't connect, check its status with `/mcp` inside a session or `claude mcp list` from your shell, then match the symptom below. The `/mcp` panel also lets you reconnect or authenticate without leaving the session.
 
-> [accordion] /mcp shows No MCP servers configured
+> [accordion] /mcp shows No MCP servers
 >
 > Claude Code didn't find any servers for the current directory. The most common causes:
 >

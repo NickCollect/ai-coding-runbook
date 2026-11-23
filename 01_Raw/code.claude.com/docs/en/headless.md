@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/headless
-fetched_at: 2026-11-16T07:30:44.931260+00:00
+fetched_at: 2026-11-23T08:28:12.945381+00:00
 fetch_method: mintlify_md
 ---
 
@@ -40,9 +40,9 @@ Claude Code exits with code 0 on success and a non-zero code when the run fails,
 
 ### Start faster with bare mode
 
-Add `--bare` to reduce startup time by skipping auto-discovery of hooks, skills, custom commands, [subagents](https://code.claude.com/docs/en/sub-agents.md), installed plugins, MCP servers, auto memory, and CLAUDE.md. Without it, `claude -p` discovers and loads them as an interactive session would, including anything configured in the working directory or `~/.claude`.
+Add `--bare` to reduce startup time by skipping auto-discovery of your hooks, skills, custom commands, [subagents](https://code.claude.com/docs/en/sub-agents.md), installed plugins, MCP servers, auto memory, and CLAUDE.md. Without it, `claude -p` discovers and loads them as an interactive session would, including anything configured in the working directory or `~/.claude`.
 
-Bare mode is useful for CI and scripts where you need the same result on every machine. A hook in a teammate's `~/.claude` or an MCP server in the project's `.mcp.json` won't run, because bare mode never reads them. A directory you name with `--add-dir` is a partial exception: bare mode loads skills from its `.claude/skills/` folder, but still skips its `.claude/commands/` and `.claude/agents/` folders. [Skills from additional directories](https://code.claude.com/docs/en/skills.md#skills-from-additional-directories) covers what does and doesn't load.
+In bare mode, Claude Code still reads settings files and their [permission rules](https://code.claude.com/docs/en/permissions.md#what-runs-before-you-trust-a-folder), but a hook in `~/.claude/settings.json` or an MCP server in the project's `.mcp.json` won't run. A directory you name with `--add-dir` is a special case: bare mode loads skills from its `.claude/skills/` folder, but still skips its `.claude/commands/` and `.claude/agents/` folders. [Skills from additional directories](https://code.claude.com/docs/en/skills.md#skills-from-additional-directories) covers what does and doesn't load.
 
 Without `--bare`, a `-p` session runs the hooks in a project's `.claude/settings.json` and connects the servers in its `.mcp.json`, even in a folder you've never trusted. A `-p` session shows no workspace trust dialog and no per-server approval prompt. [What runs before you trust a folder](https://code.claude.com/docs/en/permissions.md#what-runs-before-you-trust-a-folder) covers each kind of repository content under `-p` and how to keep it out.
 
@@ -69,7 +69,7 @@ Hooks still don't run in bare mode when you pass them with `--settings`, or in t
 Bare mode also limits what happens while the session runs:
 
 * **MCP servers**: only servers supplied on the command line connect, for example with `--mcp-config`. In an interactive session, Claude Code also skips the automatic IDE connection unless you pass `--ide`.
-* **System reminders**: Claude gets your prompts and the tool results without the [system reminders](https://code.claude.com/docs/en/glossary.md#system-reminder) Claude Code would add alongside them. For example, Claude isn't told when a file it read earlier changes on disk, and it doesn't get the list of available skills, including skills from an `--add-dir` folder.
+* **System reminders**: Claude receives your prompts and the tool results without the [system reminders](https://code.claude.com/docs/en/glossary.md#system-reminder) Claude Code would add alongside them. For example, Claude isn't told when a file it edited earlier changes on disk, and it doesn't get the list of available skills, including skills from an `--add-dir` folder.
 * **Background tasks**: Claude can't run background commands or background subagents, and the other features that [`CLAUDE_CODE_DISABLE_BACKGROUND_TASKS`](https://code.claude.com/docs/en/env-vars) turns off are off too. A command that reaches its [timeout](https://code.claude.com/docs/en/tools-reference.md#timeout-and-output-limits) stops instead of [moving to the background](https://code.claude.com/docs/en/tools-reference.md#background-commands).
 
 Before v2.1.286, these limits held only partly: an interactive `--bare` session connected the MCP servers that a normal session would, every `--bare` session sent system reminders, and background tasks stayed available.
@@ -131,7 +131,7 @@ These examples highlight common CLI patterns. Where a command names a file such 
 
 ### Pipe data through Claude
 
-Non-interactive mode reads stdin, so you can pipe data in and redirect the response out like any other command-line tool.
+Non-interactive mode reads stdin, so you can pipe data in and redirect the response out.
 
 This example pipes a build log into Claude and writes the explanation to a file:
 
@@ -347,7 +347,7 @@ claude -p "Apply the lint fixes" --permission-mode acceptEdits
 
 Pass `--permission-prompts none` when nobody is available to answer permission prompts, for example in a scheduled job. The flag matters most when your run has a permission host: an Agent SDK app with a [`canUseTool` callback](https://code.claude.com/docs/en/agent-sdk/user-input), or an MCP tool you pass with [`--permission-prompt-tool`](https://code.claude.com/docs/en/cli-reference#cli-flags). Without the flag or the [`permissions.denyInsteadOfPrompting`](https://code.claude.com/docs/en/settings-reference#permissions-denyinsteadofprompting) setting, your run waits for that host to answer each permission request.
 
-With the flag, your run doesn't consult the host or wait on it. Anything that would prompt is denied unless a `PermissionRequest` hook allows it, Claude is told that nobody can approve the request and not to retry it, and the run continues. In a `-p` run with no host, these requests are denied either way, and the flag also tells Claude not to retry them. Permission rules, [`PermissionRequest` hooks](https://code.claude.com/docs/en/hooks#permissionrequest), and the permission mode you set still decide every call first; Claude Code denies only the requests that nothing else resolves.
+With the flag, your run doesn't consult the host or wait on it. Anything that would prompt is denied unless a `PermissionRequest` hook allows it, Claude is told that nobody can approve the request and not to retry it, and the run continues. Permission rules, [`PermissionRequest` hooks](https://code.claude.com/docs/en/hooks#permissionrequest), and the permission mode you set still decide every call first; Claude Code denies only the requests that nothing else resolves.
 
 > [!NOTE]
 >
@@ -376,7 +376,7 @@ claude -p "Look at my staged changes and create an appropriate commit" \
   --allowedTools "Bash(git diff *),Bash(git log *),Bash(git status *),Bash(git commit *)"
 ```
 
-The `--allowedTools` flag uses [permission rule syntax](https://code.claude.com/docs/en/settings-reference.md#permission-rule-syntax). The trailing ` *` enables prefix matching, so `Bash(git diff *)` allows any command starting with `git diff`. The space before `*` is important: without it, `Bash(git diff*)` would also match `git diff-index`.
+The `--allowedTools` flag uses [permission rule syntax](https://code.claude.com/docs/en/settings-reference.md#permission-rule-syntax). With the trailing ` *`, `Bash(git diff *)` matches `git diff` with or without arguments. The space before `*` is important: without it, `Bash(git diff*)` would also match `git diff-index`.
 
 > [!NOTE]
 >

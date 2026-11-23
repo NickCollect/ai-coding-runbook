@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/typescript
-fetched_at: 2026-11-16T07:30:44.208173+00:00
+fetched_at: 2026-11-23T08:28:12.328725+00:00
 fetch_method: mintlify_md
 ---
 
@@ -158,8 +158,6 @@ function prewarm(params?: {
 | :- | :- | :- |
 | `options` | [`Options`](#options) | Optional configuration object, the same type that `startup()` takes |
 | `initializeTimeoutMs` | `number` | Maximum time in milliseconds to wait for the spare's initialization. Defaults to `60000`. If initialization doesn't complete in time, the promise rejects with a timeout error |
-
-`prewarm()` counts time spent in [Setup](https://code.claude.com/docs/en/hooks.md#setup) hooks toward `initializeTimeoutMs`, even when you leave it unset. To give slow Setup hooks more time, set a longer value.
 
 #### Returns
 
@@ -603,7 +601,7 @@ Configuration object for the `query()` function.
 | `sessionStoreFlush` | `'batched' \| 'eager'` | `'batched'` | *Alpha.* Flush mode for `sessionStore`. Ignored when `sessionStore` is not set |
 | `settings` | `string \| Settings` | `undefined` | Inline [settings](https://code.claude.com/docs/en/settings.md) object, a settings file path, or an inline JSON string. Populates the flag-settings layer in the [precedence order](https://code.claude.com/docs/en/settings.md#settings-precedence). Change at runtime with [`applyFlagSettings()`](#applyflagsettings) |
 | `settingSources` | [`SettingSource`](#settingsource)`[]` | CLI defaults (all sources) | Control which filesystem settings to load. Pass `[]` to disable user, project, and local settings. [Endpoint-managed policy](https://code.claude.com/docs/en/managed-settings.md#delivery-mechanisms) loads regardless; server-managed settings are fetched when the session authenticates with an organization credential on an [eligible configuration](https://code.claude.com/docs/en/server-managed-settings.md#platform-availability). See [Use Claude Code features](https://code.claude.com/docs/en/agent-sdk/claude-code-features.md#what-settingsources-does-not-control) |
-| `skills` | `string[] \| 'all'` | `undefined` | Skills available to the session. Pass `'all'` to enable every discovered skill, or a list of skill names. Pass exact names only. On Agent SDK v0.3.221 or later, the SDK rejects malformed and wildcard-form names with an error before starting the Claude Code process. When set, the SDK adds the Skill tool to `allowedTools` automatically. If you also pass `tools`, include `'Skill'` in that list. See [Skills](https://code.claude.com/docs/en/agent-sdk/skills.md) |
+| `skills` | `string[] \| 'all'` | `undefined` | Limits the main agent's skills. Pass `'all'` to enable every discovered skill, or a list of skill names. Pass exact names only. On Agent SDK v0.3.221 or later, the SDK rejects malformed and wildcard-form names with an error before starting the Claude Code process. If you also pass `tools`, include `'Skill'` in that list. See [Skills](https://code.claude.com/docs/en/agent-sdk/skills.md) |
 | `spawnClaudeCodeProcess` | `(options: SpawnOptions) => SpawnedProcess` | `undefined` | Custom function to spawn the Claude Code process. Use to run Claude Code in VMs, containers, or remote environments |
 | `stderr` | `(data: string) => void` | `undefined` | Callback for stderr output |
 | `strictMcpConfig` | `boolean` | `false` | Use the servers passed in `mcpServers` and ignore project `.mcp.json`, user settings, plugin-provided MCP servers, and [claude.ai connectors](https://code.claude.com/docs/en/mcp.md#use-mcp-servers-from-claude-ai) |
@@ -1303,11 +1301,11 @@ type AgentDefinition = {
 | `disallowedTools` | No | Array of tool names to explicitly disallow for this agent. MCP server-level patterns are also accepted: `mcp__server` or `mcp__server__*` removes every tool from that server, and `mcp__*` removes every MCP tool from any server |
 | `prompt` | Yes | The agent's system prompt |
 | `model` | No | Model override for this agent. Accepts an alias such as `'fable'`, `'opus'`, `'sonnet'`, `'haiku'`, `'inherit'`, or a full model ID. `'inherit'` uses the model of the agent that spawned this one. When you omit `model`, Claude Code picks the model in the [subagent model order](https://code.claude.com/docs/en/sub-agents.md#choose-a-model) |
-| `mcpServers` | No | MCP server specifications for this agent |
+| `mcpServers` | No | MCP server specifications for this agent. Put a [`createSdkMcpServer()`](#createsdkmcpserver) server in the `mcpServers` field of [`Options`](#options). If you pass the server object in this field instead, TypeScript Agent SDK v0.3.327 or later ignores it and emits a `CLAUDE_SDK_AGENT_IN_PROCESS_SERVER` warning |
 | `skills` | No | Array of skill names to preload into the agent context |
 | `initialPrompt` | No | Auto-submitted as the first user turn when this agent runs as the main thread agent |
 | `maxTurns` | No | Maximum number of agentic turns (API round-trips) before stopping |
-| `autoCompactWindow` | No | Lower the [auto-compact window](https://code.claude.com/docs/en/sub-agents.md#subagent-auto-compact-window) for this agent when it runs as a subagent, to a token count from `100000` to `1000000`. Requires TypeScript Agent SDK v0.3.296 or later |
+| `autoCompactWindow` | No | Lower the [auto-compact window](https://code.claude.com/docs/en/sub-agents.md#subagent-auto-compact-window) for this agent when it runs as a subagent, to a token count of `100000` or more. Requires TypeScript Agent SDK v0.3.296 or later |
 | `background` | No | Run this agent as a non-blocking background task when invoked |
 | `omitClaudeMd` | No | Leave the user, project, and local CLAUDE.md files out of this agent's initial context; managed policy files still load. Use it for agents that take everything they need from the Agent tool prompt. Ignored when this agent runs as the main thread agent. Requires TypeScript Agent SDK v0.3.271 or later |
 | `memory` | No | Memory source for this agent: `'user'`, `'project'`, or `'local'` |
@@ -1381,7 +1379,7 @@ When multiple sources are loaded, settings are merged with this precedence (high
 2. Project settings (`.claude/settings.json`)
 3. User settings (`~/.claude/settings.json`)
 
-Programmatic options such as `agents`, `allowedTools`, and `settings` override user, project, and local filesystem settings. If a managed policy setting and a programmatic option set the same key, the managed value applies, with exceptions such as an `effortLevel` passed to [`applyFlagSettings()`](#applyflagsettings).
+Permission rules you pass in `allowedTools` or `settings` [add to](https://code.claude.com/docs/en/settings.md#lists-merge-instead-of-overriding) these files' rules. For most single values, Claude Code takes the one in `settings` over these files. If a managed policy setting and a programmatic option set the same key, the managed value applies, with exceptions such as an `effortLevel` passed to [`applyFlagSettings()`](#applyflagsettings).
 
 ### `PermissionMode`
 
@@ -1391,7 +1389,7 @@ type PermissionMode =
   | "acceptEdits" // Auto-accept file edits
   | "bypassPermissions" // Bypass permission checks; explicit ask rules still prompt
   | "plan" // Planning mode - Claude explores and plans
-  | "dontAsk" // Don't prompt for permissions, deny if not pre-approved
+  | "dontAsk" // Deny calls that would otherwise prompt
   | "auto"; // A model classifier reviews actions such as shell commands and network requests
 ```
 
@@ -1750,7 +1748,7 @@ The `message` field is a [`BetaMessage`](https://platform.claude.com/docs/en/api
 `SDKAssistantMessageError` is one of: `'authentication_failed'`, `'oauth_org_not_allowed'`, `'account_on_hold'`, `'billing_error'`, `'rate_limit'`, `'overloaded'`, `'invalid_request'`, `'model_not_found'`, `'server_error'`, `'max_output_tokens'`, `'cloud_credential_error'`, or `'unknown'`. Four of these values mean more than their names say:
 
 * `'model_not_found'`: the selected model doesn't exist or isn't available to your account or deployment
-* `'overloaded'`: the API returned a 529 because the server is at capacity, as opposed to `'rate_limit'`, which is a 429 against your quota
+* `'overloaded'`: appears on [`api_retry` events](https://code.claude.com/docs/en/headless#handle-api-retries) when the API returns a 529 because the server is at capacity. When an HTTP 529 ends the turn, the assistant message carries `'server_error'`. A 429 against your quota is `'rate_limit'`
 * `'account_on_hold'`: [your account is on hold](https://code.claude.com/docs/en/errors.md#your-account-is-on-hold)
 * `'cloud_credential_error'`: Claude Code couldn't obtain usable AWS or Google Cloud credentials on the machine it runs on, so no request reached the cloud provider. The usual cause is a cloud sign-in that expired or was never completed on that machine, though a briefly unreachable credential service reports the same value. See [Could not load AWS or Google Cloud credentials](https://code.claude.com/docs/en/errors.md#could-not-load-aws-or-google-cloud-credentials). Requires TypeScript Agent SDK v0.3.267 or later, which bundles Claude Code v2.1.267
 
@@ -1811,7 +1809,7 @@ Each paste field has a size limit:
 Set `shouldQuery`, `client_composed`, or `priority` to change how Claude Code handles a message you send:
 
 * `shouldQuery`: set it to `false` to append the message to the transcript without triggering an assistant turn. The message is held and merged into the next user message that does trigger a turn. Use this to inject context, such as the output of a command you ran out of band, without spending a model call on it.
-* `client_composed`: set it to `true` to have Claude Code deliver the message text as written. Claude Code then doesn't expand `@path` or [`@server:resource`](https://code.claude.com/docs/en/mcp#use-mcp-resources) mentions, and doesn't run text that starts with `/` as a command. While the [`verbatimPrompts`](#options) option is on, the SDK sets the field on every message. Requires TypeScript Agent SDK v0.3.280 or later and Claude Code v2.1.248 or later.
+* `client_composed`: set it to `true` to have Claude Code deliver the message text as written. Claude Code then doesn't expand `@path` mentions, and doesn't run text that starts with `/` as a command. While the [`verbatimPrompts`](#options) option is on, the SDK sets the field on every message. Requires TypeScript Agent SDK v0.3.280 or later and Claude Code v2.1.248 or later.
 * `priority`: controls when a message you send during a running turn reaches Claude:
   * `'next'`, or no `priority` field: Claude reads the message in the same turn, as soon as the tool calls it is running finish. If the turn ends first, the message starts the next turn.
   * `'later'`: Claude Code holds the message until the turn ends and sends it as a new turn.
@@ -1908,6 +1906,7 @@ type SDKResultMessage =
       deferred_tool_use?: { id: string; name: string; input: Record<string, unknown> };
       terminal_reason?: TerminalReason;
       result_index?: number;
+      credential_expires_at?: string;
       fast_mode_state?: FastModeState;
       fast_mode_disabled_reason?: FastModeDisabledReason;
       origin?: SDKMessageOrigin;
@@ -1938,6 +1937,7 @@ type SDKResultMessage =
       resume_reason?: string;
       terminal_reason?: TerminalReason;
       result_index?: number;
+      credential_expires_at?: string;
       fast_mode_state?: FastModeState;
       fast_mode_disabled_reason?: FastModeDisabledReason;
       origin?: SDKMessageOrigin;
@@ -1962,6 +1962,7 @@ Several fields on the result carry diagnostic detail beyond `subtype`:
 * `total_cost_usd`: cumulative estimated cost in USD, covering the same calls as `modelUsage` and reset at the same points. A call that resumes a session also counts the [totals restored from the session's earlier calls](https://code.claude.com/docs/en/agent-sdk/cost-tracking.md#accumulate-costs-across-multiple-calls). It is an estimate, not a billing statement. See [Track cost and usage](https://code.claude.com/docs/en/agent-sdk/cost-tracking.md) for accuracy caveats.
 * `queued_turn_count`: the number of messages you sent with `origin: { kind: "human" }` that are still waiting when Claude Code produced the result. See [`queued_turn_count`](#queued_turn_count) for what `0` and an absent field tell you.
 * `result_index`: where this result falls in the run's delivery order, counting from 0 across every result the process writes. Present on both arms. A result whose write fails still consumes its number, so a gap in the sequence means a result was lost. Requires Agent SDK v0.3.268 or later.
+* `credential_expires_at`: the stored claude.ai login's latest expected end, as an ISO 8601 timestamp. The login can end up to three days earlier. Absent for other credentials or when no date is known. Requires Agent SDK v0.3.318 or later.
 * `startup_failure_reason`: why Claude Code refused to start, on the `error_during_execution` result it writes before exiting on a known startup failure. See [`startup_failure_reason`](#startup_failure_reason) for the values and which failures carry it. Requires Agent SDK v0.3.274 or later.
 * `terminal_reason`: why the loop ended. One of `"completed"`, `"max_turns"`, `"tool_deferred"`, `"aborted_streaming"`, `"aborted_tools"`, `"hook_stopped"`, `"stop_hook_prevented"`, `"background_requested"`, `"blocking_limit"`, `"rapid_refill_breaker"`, `"prompt_too_long"`, `"image_error"`, `"model_error"`, `"api_error"`, `"malformed_tool_use_exhausted"`, `"budget_exhausted"`, `"structured_output_retry_exhausted"`, `"tool_deferred_unavailable"`, or `"turn_setup_failed"`.
 * `fast_mode_state`: one of `"on"`, `"off"`, or `"cooldown"`.
@@ -2253,6 +2254,8 @@ type SDKInformationalMessage = {
 };
 ```
 
+A warning whose `tag` is `settings_not_in_effect` means some settings from your app, or from a user, project, or local file, didn't load or were skipped. Follow the steps in `content`. You won't see this warning for every invalid value. Requires TypeScript Agent SDK v0.3.330 or later.
+
 ### `SDKWorkerShuttingDownMessage`
 
 Emitted on graceful worker teardown so remote clients can show why the worker exited instead of waiting for heartbeat timeout. The `reason` is a short snake\_case string set by the host CLI, such as `"host_exit"` or `"remote_control_disabled"`. Act on this only when streaming live. A resumed session replays past instances of this message, so ignore them in that case.
@@ -2509,7 +2512,7 @@ type SDKMessageOrigin =
     }
   | {
       kind: "task-notification";
-      subkind?: "scheduled-trigger" | "peer-send-message";
+      subkind?: "scheduled-trigger" | "peer-send-message" | "external-event";
       fireReason?: string;
       runId?: string;
     }
@@ -2539,12 +2542,13 @@ To send text the user didn't write, such as a fetched page or another agent's ou
 
 ### Task-notification subkinds
 
-When Claude Code delivers a task notification into a session, it sets `subkind` on the notification's `origin` if Anthropic servers verified where that notification came from. It also sets `subkind` when your application [declares the message as a scheduled run](#declare-a-scheduled-run) itself, which requires TypeScript Agent SDK v0.3.280 or later. `subkind` requires Claude Code v2.1.213 or later, and it takes one of two values:
+When Claude Code delivers a task notification into a session, it sets `subkind` on the notification's `origin` if Anthropic servers verified where that notification came from. It also sets `subkind` when your application [declares the message as a scheduled run](#declare-a-scheduled-run) itself, which requires TypeScript Agent SDK v0.3.280 or later. `subkind` requires Claude Code v2.1.213 or later. Values include:
 
 * `scheduled-trigger`: the notification is a [cloud scheduled task](https://code.claude.com/docs/en/routines.md)'s stored prompt, delivered because one of the task's triggers fired: its schedule, its [API trigger](https://code.claude.com/docs/en/routines.md#add-an-api-trigger), its [GitHub trigger](https://code.claude.com/docs/en/routines.md#add-a-github-trigger), or **Run now**. A prompt your application [declares as a scheduled run](#declare-a-scheduled-run) carries this value too. Claude Code frames these to the model as the session's assigned task, with a different notice from the [notice that other task notifications carry](#sdktasknotificationmessage).
 * `peer-send-message`: the notification is a message that another of your sessions sent with the server-side `send_message` tool that [cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md) use to message each other, not the [cross-session `SendMessage` tool](https://code.claude.com/docs/en/cross-session-messaging), and Anthropic servers verified that both sessions belong to the same private group of sessions. Requires Claude Code v2.1.224 or later. A `send_message` delivery the servers didn't verify that way gets no subkind.
+* `external-event`: the notification reports an event outside the session and can quote a third party. [PR activity](https://code.claude.com/docs/en/claude-code-on-the-web.md#how-claude-responds-to-pr-activity) can arrive with this value or no `subkind`. Requires Claude Code v2.1.330 or later.
 
-Every other task notification has no `subkind`. That includes [PR activity](https://code.claude.com/docs/en/claude-code-on-the-web.md#how-claude-responds-to-pr-activity) delivered into a session and background events such as a finished task. Messages from the [cross-session `SendMessage` tool](https://code.claude.com/docs/en/cross-session-messaging) aren't task notifications at all: whether they come from a session on the same machine or through Anthropic servers from another machine, Claude Code gives them `kind: "peer"` and the [peer origin fields](#peer-origin-fields).
+Background events such as a finished task have no `subkind`. Messages from the [cross-session `SendMessage` tool](https://code.claude.com/docs/en/cross-session-messaging) aren't task notifications and carry `kind: "peer"` with the [peer origin fields](#peer-origin-fields).
 
 `fireReason` says why a `scheduled-trigger` notification fired, as a short lowercase token such as `scheduled`, `manual`, `retry`, `catch_up`, or `api`. Anthropic servers set it on a [cloud scheduled task](https://code.claude.com/docs/en/routines.md)'s deliveries, and your application sets it when it declares a scheduled run. It's absent when neither sent one. Requires TypeScript Agent SDK v0.3.280 or later.
 
@@ -3811,7 +3815,7 @@ type CronCreateInput = {
 };
 ```
 
-Schedules a prompt to run on a 5-field cron schedule in local time. Set `recurring` to `false` to fire once at the next match. Jobs are session-scoped by default, and resuming with `--resume` or `--continue` restores jobs that haven't expired. See [Session-scoped scheduled tasks](https://code.claude.com/docs/en/scheduled-tasks.md).
+Schedules a prompt to run on a 5-field cron schedule in local time. Set `recurring` to `false` to fire once at the next match. Jobs are session-scoped by default. See [Session-scoped scheduled tasks](https://code.claude.com/docs/en/scheduled-tasks.md).
 
 Setting `durable` to `true` requests persistence to `.claude/scheduled_tasks.json` so the job survives restarts. Durable scheduling isn't available in every session: when it isn't, Claude Code accepts `durable: true` but creates the job session-only. Read the output's `durable` field to see whether the job persisted.
 
@@ -4270,6 +4274,7 @@ type MonitorOutput = {
   taskId: string;
   timeoutMs: number;
   persistent?: boolean;
+  keptInSandboxByCheck?: boolean;
 };
 ```
 
@@ -4455,12 +4460,13 @@ type GrepOutput = {
   totalLines?: number;
   appliedLimit?: number;
   appliedOffset?: number;
+  timedOut?: boolean;
 };
 ```
 
 Returns search results. The shape varies by `mode`: file list, content with matches, or match counts. In `count` mode, `numFiles` and `numMatches` are totals over the full result set, not the paginated slice. Before v2.1.208, a `head_limit` or `offset` that truncated the listed entries also truncated those totals.
 
-`totalFiles` requires Claude Code v2.1.208 or later and reports the total number of results before `head_limit` and `offset` pagination in `files_with_matches` mode. `totalLines` requires Claude Code v2.1.210 or later and reports the total number of lines before pagination in `content` mode.
+`totalFiles` requires Claude Code v2.1.208 or later and reports the total number of results before `head_limit` and `offset` pagination in `files_with_matches` mode. `totalLines` requires Claude Code v2.1.210 or later and reports the total number of lines before pagination in `content` mode. `timedOut` requires Claude Code v2.1.317 or later and is `true` when the search ran out of time, so results may be incomplete.
 
 ### TaskStop
 
@@ -4795,10 +4801,11 @@ type CronCreateOutput = {
   recurring: boolean;
   durable?: boolean; // true when persisted to .claude/scheduled_tasks.json; false when session-only
   nextFireAt?: number;
+  maxAgeMs?: number; // age at which a recurring job ends; requires Claude Code v2.1.330 or later
 };
 ```
 
-Returns the job ID, a human-readable schedule, and the next run time. `nextFireAt` gives it in epoch milliseconds, with [jitter](https://code.claude.com/docs/en/scheduled-tasks.md#jitter) already applied, so it's when the job is set to run. The field requires TypeScript Agent SDK v0.3.299 or later and Claude Code v2.1.299 or later.
+Returns the job ID, a human-readable schedule, and the next run time. `nextFireAt` gives it in epoch milliseconds, with [jitter](https://code.claude.com/docs/en/scheduled-tasks.md#jitter) already applied, so it's when the job is set to run. `nextFireAt` requires TypeScript Agent SDK v0.3.299 or later and Claude Code v2.1.299 or later.
 
 ### CronDelete
 

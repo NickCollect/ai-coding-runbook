@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/sandboxing
-fetched_at: 2026-11-16T07:30:45.476939+00:00
+fetched_at: 2026-11-23T08:28:13.505025+00:00
 fetch_method: mintlify_md
 ---
 
@@ -149,7 +149,7 @@ The dependency check runs at startup, so restart Claude Code after installing pa
 
 > [accordion] WSL2 notes
 >
-> Check your WSL version with `wsl -l -v` from PowerShell. If you see `Sandboxing requires WSL2`, your distribution is running WSL1. Upgrade it to WSL2 or run Claude Code without sandboxing.
+> Check your WSL version with `wsl -l -v` from PowerShell. If you see `Sandboxing needs WSL2` or `Sandboxing requires WSL2`, your distribution is running WSL1. Upgrade it to WSL2 or run Claude Code without sandboxing.
 >
 > On WSL2, WSL hands a launch of a Windows binary such as `cmd.exe`, `powershell.exe`, or anything under `/mnt/c/` to the Windows host over a Unix socket, so whether a sandboxed command can launch one follows the sandbox's [Unix-socket settings](https://code.claude.com/docs/en/settings-reference.md#sandbox-network-allowunixsockets): the optional seccomp filter has to be installed to block the socket in the first place. To allow these launches, set `allowAllUnixSockets`, which opens every Unix socket to sandboxed commands.
 
@@ -239,6 +239,8 @@ These rules and settings change who approves the retry:
 * **A matching allow rule**: if an allow rule such as `Bash(curl *)` matches the command, it also approves the retry, so the command runs outside the sandbox with no prompt
 * **An ask rule for the parameter**: add an [ask rule](https://code.claude.com/docs/en/permissions.md#match-by-input-parameter) for `Bash(dangerouslyDisableSandbox:true)` to be prompted on Bash retries. You get the prompt in auto mode and `bypassPermissions` mode too, and the rule takes precedence over a matching allow rule
 * **[`permissions.blockReadsOutsideWorkingDirectories`](https://code.claude.com/docs/en/settings-reference#permissions-blockreadsoutsideworkingdirectories)**: [Actions no mode auto-approves](https://code.claude.com/docs/en/permission-modes.md#actions-no-mode-auto-approves) covers the retries that prompt while it's on
+
+If you use Code Mode, retries in auto mode work differently. See [Limit shell commands with the sandbox](https://code.claude.com/docs/en/code-mode.md#limit-shell-commands-with-the-sandbox).
 
 While commands are refused with a [`Sandbox is required` message](#commands-refused-with-sandbox-is-required), Claude Code ignores the `dangerouslyDisableSandbox` parameter and refuses the retry too.
 
@@ -452,7 +454,7 @@ When you mask a credential, Claude Code shows sandboxed commands a per-session p
 Masking requires the following:
 
 * **TLS termination**: the proxy substitutes the real value inside request contents, so it has to see them. Set [`network.tlsTerminate`](https://code.claude.com/docs/en/settings-reference#sandbox-network-tlsterminate) so the proxy terminates TLS itself. Without it, masking fails without exposing anything: the command still sees only the sentinel, but the sentinel reaches the server unchanged and authentication fails. To check for this misconfiguration, run `claude doctor` in your terminal and look for the `TLS termination is unavailable` warning.
-* **An allowed destination**: each `mask` entry can list `injectHosts`, the hosts the real value is allowed to reach. The proxy injects only on connections the [domain allowlist](#network-isolation) admits, so each `injectHosts` host must also be reachable through `network.allowedDomains`. For a `mask` entry with no `injectHosts`, the proxy substitutes the real value on requests to every host in `network.allowedDomains`.
+* **An allowed destination**: each `mask` entry can list `injectHosts`, the hosts the real value is allowed to reach. The proxy injects only on connections the [domain allowlist](#network-isolation) admits, so each `injectHosts` host must also be reachable through `network.allowedDomains`. For most `mask` entries with no `injectHosts`, the proxy substitutes the real value on requests to every host in `network.allowedDomains`.
 * **A trusted settings scope**: masking authorizes the proxy to send your real credential somewhere, so Claude Code honors `mask` entries, `network.tlsTerminate`, [`credentials.allowPlaintextInject`](https://code.claude.com/docs/en/settings-reference#sandbox-credentials-allowplaintextinject), `awsPairs`, and `sigv4` only from user settings, managed settings, and the `--settings` flag. It ignores them in a repository's `.claude/settings.json` or `.claude/settings.local.json`. When your administrator delivers `mask` entries, `network.tlsTerminate`, or `credentials.allowPlaintextInject` through server-managed settings, they count as [settings that need approval](https://code.claude.com/docs/en/server-managed-settings.md#security-approval-dialogs).
 
 #### Mask environment variables
@@ -490,7 +492,7 @@ The proxy matches each `injectHosts` entry against the connection's bare destina
 
 #### Re-sign AWS requests
 
-AWS requests carry SigV4 signatures over the request contents, so mask `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` together. The proxy detects a SigV4 request by the access key's [sentinel](#mask-credentials) and re-signs the request with the real values, which requires Claude Code v2.1.221 or later. If you mask only the secret, requests are signed with a placeholder the proxy can't detect, so they fail at AWS.
+AWS requests carry SigV4 signatures over the request contents, so mask `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` together. The proxy detects a SigV4 request by the access key's [sentinel](#mask-credentials). Re-signing a request with the real values requires Claude Code v2.1.221 or later. If you mask only the secret, requests are signed with a placeholder the proxy can't detect, so they fail at AWS.
 
 Claude Code links the conventional `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN` variables into one credential automatically when you mask their whole values. If your AWS credential is in variables with other names, group them with [`credentials.awsPairs`](https://code.claude.com/docs/en/settings-reference#sandbox-credentials-awspairs), which requires Claude Code v2.1.224 or later.
 
@@ -567,7 +569,7 @@ If you add an `allowWrite` entry or an `Edit` allow rule that covers one of thes
 >
 > If you set [`allowNestedUserNamespaces`](https://code.claude.com/docs/en/settings-reference#sandbox-allownestedusernamespaces) to `true` on Linux or WSL2, don't rely on protected paths: code from a sandboxed command can end up running outside the sandbox.
 
-To see most of these paths resolved for your machine, run `/sandbox` and open the **Config** tab, which lists them under **Denied within allowed**, mixed in with your own `denyWrite` entries.
+To see most of these paths resolved for your machine, run `/sandbox` and open the **Config** tab, which lists them mixed in with your own `denyWrite` entries.
 
 If `git merge` or `git checkout` fails with `unable to unlink old` on one of these paths, see [A git command fails with `unable to unlink old`](#a-git-command-fails-with-unable-to-unlink-old).
 
@@ -575,7 +577,7 @@ If `git merge` or `git checkout` fails with `unable to unlink old` on one of the
 
 After a sandboxed command ends, a newer top-level `HEAD`, `objects`, or `refs` entry in your working directory is deleted unless it's a folder with contents. Newer means the entry wasn't there when the sandbox last built its configuration: at session start, or after a change such as [`/cd`](https://code.claude.com/docs/en/commands).
 
-A newer `objects` or `refs` folder with contents is deleted too, with its contents, when a `HEAD` file or symlink was there the last time the sandbox built its configuration. To keep a folder, see [A folder named `objects` or `refs` disappears after a command](#a-folder-named-objects-or-refs-disappears-after-a-command).
+When a `HEAD` file or symlink was there the last time the sandbox built its configuration, a newer `objects` or `refs` folder is instead renamed to `<name>.claude-sandbox-quarantine-<hex>`. Its contents stay intact. To keep a folder or restore a renamed one, see [A folder named `objects` or `refs` disappears after a command](#a-folder-named-objects-or-refs-disappears-after-a-command).
 
 #### Denied paths that pass through a symlink
 
@@ -657,6 +659,13 @@ An unbracketed entry such as `::1:443` is ambiguous between an address and an ad
 
 To find ambiguous entries, run `claude doctor` in your terminal and look for the `Sandbox network domain entries have unreliable spellings` warning. Rewrite each ambiguous entry in the bracketed form.
 
+#### Usernames and passwords in proxy variables
+
+If a command's `HTTPS_PROXY` or other proxy URL contains a username and password, check the username and host:
+
+* **Host `127.0.0.1` or `localhost`, and username `srt` or one that starts with `srt.`**: treat it as the built-in sandbox proxy's own login, which isn't one of your credentials
+* **Any other username or host**: treat it as one of your own credentials
+
 ### OS-level enforcement
 
 The sandboxed Bash tool uses operating system security primitives:
@@ -675,7 +684,7 @@ Sandboxing, [permission rules](https://code.claude.com/docs/en/permissions.md), 
 
 Permission rules and sandboxing control different things:
 
-* **Permission rules** control which tools Claude Code can use and are evaluated before any tool runs. They apply to every tool: Bash, Read, Edit, WebFetch, MCP, and others, except that a deny or ask rule can't block [`EndConversation`](https://code.claude.com/docs/en/tools-reference#endconversation-tool-behavior) while any other tool remains.
+* **Permission rules** control which tools Claude Code can use and are evaluated before a tool runs. They apply to Bash, Read, Edit, WebFetch, MCP, and other tools. A deny or ask rule can't block [`EndConversation`](https://code.claude.com/docs/en/tools-reference#endconversation-tool-behavior) while any other tool remains.
 * **Sandboxing** provides OS-level enforcement that restricts what shell commands can access at the filesystem and network level. It applies to Bash, PowerShell, and [Monitor](https://code.claude.com/docs/en/tools-reference.md#monitor-tool) tool commands and their child processes.
 
 The two layers also differ in how they are enforced. Claude Code evaluates permission decisions before a command runs, based on the command string and, in auto mode, a separate classifier's judgment about whether the command is safe. The operating system enforces the sandbox boundary on the running process, so it holds regardless of what the model chose to run and even if an allowed command does more than its name suggests.
@@ -732,7 +741,7 @@ The following managed settings configuration enables the sandbox, refuses to sta
 
 The two keys beyond `enabled` control what happens when the sandbox cannot run a command:
 
-* **`failIfUnavailable`**: when the platform doesn't support the sandbox or the dependency check at startup fails, Claude Code refuses to start rather than falling back to unsandboxed execution
+* **`failIfUnavailable`**: when the platform doesn't support the sandbox or the dependency check at startup fails, Claude Code refuses to start rather than falling back to unsandboxed execution. In an Anthropic-hosted environment, the session can start anyway
 * **`allowUnsandboxedCommands: false`**: Claude Code ignores the `dangerouslyDisableSandbox` escape hatch, so when a command fails under the sandbox, Claude can't retry it unsandboxed
 
 Consider these additions alongside them:
@@ -914,9 +923,16 @@ If you started Claude Code in a repository's subdirectory, this error can mean `
 
 ### A folder named `objects` or `refs` disappears after a command
 
-A top-level `objects` or `refs` folder that appeared during the session can be [deleted after a sandboxed command ends](#when-the-sandbox-deletes-head-objects-or-refs). It doesn't matter whether a command, Claude, or you created it. To keep a folder, leave something in it. If a `HEAD` file or symlink has been at the top level during the session, move it away, then restart every Claude Code session open there.
+A top-level `objects` or `refs` folder that appeared during the session can be [renamed or deleted after a sandboxed command ends](#when-the-sandbox-deletes-head-objects-or-refs). It doesn't matter whether a command, Claude, or you created it.
 
-Before v2.1.307, the folder was deleted even with something in it and no `HEAD`. On an earlier version, [update Claude Code](https://code.claude.com/docs/en/setup.md#update-claude-code).
+Close the Claude Code sessions running in your working directory, because a running session can rename or delete the folder again. Then look there for an entry named `<name>.claude-sandbox-quarantine-<hex>`, such as `objects.claude-sandbox-quarantine-1a2b3c4d5e6f`, and restore the folder before you start a new session:
+
+* **You find that entry**: the folder was renamed, with its contents intact. Move any top-level `HEAD` file or symlink out of your working directory. Then rename the entry back to `objects` or `refs`.
+* **You find no such entry**: the folder was deleted, so create it again.
+
+To keep a new folder from being renamed, move any top-level `HEAD` file or symlink out of your working directory before you start a new session there. With no `HEAD`, leave something in a folder to keep it.
+
+Before v2.1.315, a folder could be deleted with its contents. On an earlier version, [update Claude Code](https://code.claude.com/docs/en/setup.md#update-claude-code).
 
 ### Bubblewrap fails to start inside a container
 
@@ -948,10 +964,10 @@ Before v2.1.310, Claude Code didn't check for this restriction at startup, so `/
 
 On Linux and WSL2, the sandbox holds a write denial on a file that doesn't exist yet by creating a 0-byte read-only placeholder there while a sandboxed command runs. The sandbox removes the placeholder afterward.
 
-A placeholder stays behind in cases such as these:
+A placeholder can stay behind in cases such as these:
 
 * The session is killed before that cleanup runs, for example by SIGKILL
-* The session exits while a sandboxed command is still running, such as a background command
+* The session exits while a sandboxed command is still running
 
 Later sessions bind the placeholders read-only again on every start, so a settings write such as saving a permission choice fails at a path where a placeholder remains.
 
@@ -959,12 +975,12 @@ Run `claude doctor` in your terminal to list the leftover placeholder files. The
 
 ### `git` over SSH fails with the sandbox on
 
-On macOS, `git fetch`, `git pull`, and `git push` against an SSH remote fail inside the sandbox even when the host is allowed. On Linux and WSL2, they work once the host is allowed. Claude Code tunnels git's SSH connection through the [sandbox proxy](#network-isolation), and the macOS tunnel can't authenticate to that proxy.
+On macOS, `git fetch`, `git pull`, and `git push` against an SSH remote can fail inside the sandbox even when the host is allowed.
 
-On Linux and WSL2, check these if the connection still fails:
+On Linux and WSL2, they work once the host is allowed. If the connection still fails, check these:
 
 * **The host is allowed on port 22**: an `allowedDomains` entry with no port, such as `"git.example.com"`, covers it
-* **Your corporate proxy permits port 22**: if your network requires an upstream proxy, the tunnel goes through it too
+* **Your corporate proxy permits port 22**: if your network requires an upstream proxy, the connection goes through it too
 * **The key is readable as a file**: the sandbox can block the `ssh-agent` socket, and a `denyRead` or `credentials` entry for `~/.ssh` hides your key files
 
 On macOS, switch the remote to HTTPS, which needs HTTPS credentials such as a personal access token:
@@ -1069,9 +1085,9 @@ Excluded commands and commands you type yourself keep running, and Claude can't 
 
 In a Linux session with `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` set, every command runs sandboxed, so excluded commands and commands you type are refused too.
 
-### `/sandbox` fails with `Sandbox settings are overridden by a higher-priority configuration`
+### `/sandbox` fails with `Sandbox settings can't be changed here`
 
-`/sandbox` prints `Error: Sandbox settings are overridden by a higher-priority configuration and cannot be changed locally.` instead of opening its panel when a higher [settings level](https://code.claude.com/docs/en/settings.md#settings-precedence) sets `sandbox.enabled`, `sandbox.autoAllowBashIfSandboxed`, or `sandbox.allowUnsandboxedCommands`. The panel saves your choices to `.claude/settings.local.json`, and a value saved there can't override those levels.
+When `sandbox.enabled`, `sandbox.autoAllowBashIfSandboxed`, or `sandbox.allowUnsandboxedCommands` is set above the local [settings level](https://code.claude.com/docs/en/settings.md#settings-precedence), `/sandbox` prints `Sandbox settings can't be changed here. Higher-priority settings override them.` and its panel stays closed. The panel saves your choices to `.claude/settings.local.json`, and a value saved there can't override higher levels.
 
 Managed settings and `--settings` rank above local settings. To see which of them this session loaded, run `/status` and read the `Setting sources` line:
 
@@ -1083,7 +1099,7 @@ Managed settings and `--settings` rank above local settings. To see which of the
 This line means `/sandbox` couldn't save the choice you made in its panel to your project's `.claude/settings.local.json`:
 
 ```text theme={null}
-✗ Sandbox settings not changed: /home/you/project/.claude/settings.local.json couldn't be updated (EACCES). Start Claude Code in a project folder you can write to.
+✗ Sandbox settings not changed: /home/you/project/.claude/settings.local.json couldn't be updated (EACCES). Start Claude Code in a project directory you can write to.
 ```
 
 If the reason in parentheses is `EACCES`, `EPERM`, or `EROFS`, start Claude Code in a project folder you can write to, then run `/sandbox` again in that session. If the reason begins with `Invalid JSON syntax in settings file`, correct the JSON in your project's `.claude/settings.local.json`, then run `/sandbox` again.

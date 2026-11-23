@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mcp
-fetched_at: 2026-11-16T07:30:45.067975+00:00
+fetched_at: 2026-11-23T08:28:13.094934+00:00
 fetch_method: mintlify_md
 ---
 
@@ -330,7 +330,7 @@ If your request needs tools from a server that is still connecting in the backgr
 
 With tool search enabled, when a server finishes connecting while Claude is working, Claude Code lists the server's tool names to Claude on its next request in the same turn. Claude can then search for and call those tools without waiting for your next message.
 
-After you resume a session, Claude can call a tool from the saved conversation while the tool's MCP server is still connecting. While the server is on its first connection attempt, Claude Code holds the call for up to 10 seconds and runs it once the tool is available. If the server doesn't connect in time, or it is already [retrying after a failed attempt](#automatic-reconnection), the call fails with the `No such tool available` [tool error](https://code.claude.com/docs/en/errors.md#no-such-tool-available).
+After you resume a session, Claude can call a tool from the saved conversation while the tool's MCP server is still connecting. While the server is on its first connection attempt, Claude Code holds the call for up to 10 seconds and runs it once the tool is available. If the server doesn't connect in time, the call fails with the `No such tool available` [tool error](https://code.claude.com/docs/en/errors.md#no-such-tool-available).
 
 ### Disable a server without removing it
 
@@ -395,10 +395,14 @@ Claude Code reconnects a remote server that drops mid-session and retries an HTT
 
 Claude Code first tries to reconnect a dropped remote server up to five times with exponential backoff, starting at a one-second delay and doubling it each time:
 
-* **In an interactive session**: `/mcp` shows the server as pending while Claude Code reconnects. After five failed attempts, Claude Code marks the server as failed, or as needing authentication when the server needs authorizing again. When it marks the server as failed, you see an `MCP server "<name>" disconnected · open /mcp to reconnect` notification. You can retry manually from `/mcp`.
+* **In an interactive session**: `/mcp` shows the server as pending while Claude Code reconnects. After five failed attempts, Claude Code marks the server as failed, or as needing authentication when the server needs authorizing again. When it marks the server as failed, a notification tells you whether Claude Code is still retrying:
+  * `MCP server "<name>" disconnected · still retrying · open /mcp to reconnect now`: Claude Code can keep retrying the server for up to about a day. In `/mcp`, the failed server shows as `retrying`. You can wait, or reconnect it from `/mcp`. To stop the retries, [disable the server for the project](#disable-a-server-without-removing-it) from `/mcp`.
+  * `MCP server "<name>" disconnected · open /mcp to reconnect`: Claude Code isn't retrying the server in the background. Reconnect it from `/mcp`.
 * **In [`claude -p`](https://code.claude.com/docs/en/headless) runs and [Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview.md) sessions**: Claude Code makes the same five attempts, with no `/mcp` panel to show them. If all five fail, the run continues without the server's tools:
-  * **After a transient error, such as a 5xx response or a timeout**: Claude Code keeps retrying an HTTP or SSE server in the background. Retries last up to about half an hour, and the server's tools become available again when one connects. Until then, an Agent SDK session reports the [status](https://code.claude.com/docs/en/agent-sdk/mcp.md#error-handling) `failed`, and your code can [reconnect the server](https://code.claude.com/docs/en/agent-sdk/mcp.md#error-handling). To reconnect it in `claude -p`, start the run again.
-  * **When the server [needs you to sign in again](#authenticate-with-remote-mcp-servers)**: Claude Code stops retrying, and an Agent SDK session reports the server's status as `needs-auth`. Sign in with [`claude mcp login <name>`](#authenticate-from-the-command-line) in your shell. Then start the run again or, in an Agent SDK session, [reconnect the server](https://code.claude.com/docs/en/agent-sdk/mcp.md#error-handling) instead.
+  * **After a transient error, such as a 5xx response or a timeout**: Claude Code keeps retrying an HTTP or SSE server in the background. Retries last up to about half an hour, or about a day for some servers, and the server's tools become available again when one connects.
+
+    Until then, an Agent SDK session reports the [status](https://code.claude.com/docs/en/agent-sdk/mcp.md#error-handling) `failed`, and your code can [reconnect the server](https://code.claude.com/docs/en/agent-sdk/mcp.md#error-handling). To reconnect it in `claude -p`, start the run again.
+  * **When the server [needs you to sign in again](#authenticate-with-remote-mcp-servers)**: an Agent SDK session reports the server's status as `needs-auth`. If `claude mcp list` shows the server, sign in with [`claude mcp login <name>`](#authenticate-from-the-command-line) in your shell. Then start the run again, or [reconnect the server](https://code.claude.com/docs/en/agent-sdk/mcp.md#error-handling) from your Agent SDK code.
 
 #### Failed first connections
 
@@ -455,7 +459,7 @@ Claude Code asks stdio servers for that revision by default. To keep a stdio cha
 > * The `--transport` and `--header` flags also accept `-t` and `-H` short forms
 > * Configure MCP server startup timeout using the `MCP_TIMEOUT` environment variable (for example, `MCP_TIMEOUT=10000 claude` sets a 10-second timeout)
 > * Set a per-server tool execution timeout by adding a `timeout` field in milliseconds to that server's `.mcp.json` entry, for example `"timeout": 600000` for ten minutes. This overrides the `MCP_TOOL_TIMEOUT` environment variable for that server only
-> * Claude Code displays a warning when MCP tool output exceeds 10,000 tokens and limits output to 25,000 tokens by default. To change the token limit, set the `MAX_MCP_OUTPUT_TOKENS` environment variable, for example `MAX_MCP_OUTPUT_TOKENS=50000`. The warning threshold is fixed. Unless the server raises a tool's own limit, successful text results longer than 50,000 characters are saved to a file regardless of this variable. See [MCP output limits and warnings](#mcp-output-limits-and-warnings)
+> * For limits on the size of tool output, see [MCP output limits and warnings](#mcp-output-limits-and-warnings)
 > * Use `/mcp` to authenticate with remote servers that require OAuth 2.0 authentication
 
 ### Time limits on MCP tool calls
@@ -477,7 +481,7 @@ These timeouts bound how long a call can run, not always how long it blocks the 
 
 ### Automatic backgrounding of long tool calls
 
-If a background call's detail view in [`/tasks`](https://code.claude.com/docs/en/commands#all-commands) shows `runs on the server; survives exiting this session`, see [MCP tasks that run on the server](#mcp-tasks-that-run-on-the-server).
+If a background call's detail view in [`/tasks`](https://code.claude.com/docs/en/commands#all-commands) says the call keeps running after you exit, see [MCP tasks that run on the server](#mcp-tasks-that-run-on-the-server).
 
 An MCP tool call in the main conversation that is still running after two minutes moves to a background task instead of blocking the session. Claude receives the task ID immediately and keeps working, and the result arrives as a task notification when the call settles.
 
@@ -506,7 +510,7 @@ Meanwhile, the footer shows a count such as `1 MCP task`, and Claude Code follow
 
 > [!NOTE]
 >
-> MCP tasks are in public beta in the Claude Code CLI and require Claude Code v2.1.304 or later. [What a call needs to become an MCP task](#requirements-for-mcp-tasks) lists the sessions and servers that get them.
+> MCP tasks are in public beta and require Claude Code v2.1.304 or later. [What a call needs to become an MCP task](#requirements-for-mcp-tasks) lists the sessions and servers that get them.
 
 #### Stop an MCP task or get its result
 
@@ -530,7 +534,7 @@ In a [non-interactive](https://code.claude.com/docs/en/headless.md) session, Cla
 
 #### Exit, clear, or resume while an MCP task runs
 
-A task on a remote server keeps running after you exit. A stdio server's process stops when Claude Code exits, though its tasks show `runs on the server; survives exiting this session` in `/tasks`. Unless that server's documentation says the work outlives the process, let those tasks finish or stop them in `/tasks` first.
+A task on a remote server keeps running after you exit. A stdio server's process stops when Claude Code exits, even though `/tasks` says the server's tasks keep running. Unless that server's documentation says the work outlives the process, let those tasks finish or stop them in `/tasks` first.
 
 | Situation | What happens to the task | What you can do |
 | - | - | - |
@@ -547,7 +551,10 @@ A tool call becomes an MCP task only when all of these conditions hold:
 * The server supports tasks
 * The server is an HTTP, stdio, or claude.ai connector server connected on [protocol revision 2026-07-28](#mcp-client-runtimes). Setting [`MCP_SDK_GENERATION=v1` or `MCP_PROTOCOL_NEGOTIATION=legacy`](https://code.claude.com/docs/en/env-vars) rules that out
 * The session [fetches feature flags](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching), so not on a third-party provider such as Amazon Bedrock, and not with telemetry or flag fetching turned off
-* Anthropic has turned MCP tasks on for your kind of session. On v2.1.304 or later that covers terminal CLI sessions, [Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview.md) sessions, and [GitHub Actions](https://code.claude.com/docs/en/github-actions.md) runs. Other surfaces, such as the [VS Code extension](https://code.claude.com/docs/en/vs-code.md) and the [desktop app](https://code.claude.com/docs/en/desktop.md), don't have MCP tasks
+* Anthropic has turned MCP tasks on for your kind of session:
+  * Terminal CLI sessions, [Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview.md) sessions, and [GitHub Actions](https://code.claude.com/docs/en/github-actions.md) runs have them on v2.1.304 or later
+  * [Cloud sessions](https://code.claude.com/docs/en/claude-code-on-the-web.md), including ones you open in the desktop app, have them only if Anthropic has turned them on for your account or organization. You can't turn them on or look up their state in a setting
+  * Some other Claude Code surfaces, such as the [VS Code extension](https://code.claude.com/docs/en/vs-code.md) and local sessions in the [desktop app](https://code.claude.com/docs/en/desktop.md), don't have them
 * The call comes from the main conversation, not from a [subagent](https://code.claude.com/docs/en/sub-agents.md)
 * Either the session is interactive, or an [Agent SDK](https://code.claude.com/docs/en/agent-sdk/overview.md) session or a `claude -p` run reading `--input-format stream-json` has:
   * [`CLAUDE_AUTO_BACKGROUND_TASKS`](https://code.claude.com/docs/en/env-vars) at `1`
@@ -615,7 +622,7 @@ Answer with a task only when the request carries the extension, or the call fail
   "createdAt": "2026-10-22T14:03:07Z",
   "lastUpdatedAt": "2026-10-22T14:03:07Z",
   "ttlMs": null,
-  "pollIntervalMs": 5000
+  "pollIntervalMs": 10000
 }
 ```
 
@@ -662,6 +669,15 @@ Right after the task answer, Claude Code sends `tasks/get` with `{ "taskId": ...
 | JSON-RPC error `-32602` | Read as an unknown task ID. For a task in the background, Claude Code keeps asking for up to five minutes, then reports the outcome to Claude as unknown |
 | `tasks/cancel` | Sent, for example, when Claude or the person stops the task while the server is connected. Not sent on exit |
 | `tasks/result`, `tasks/list`, `notifications/tasks` | Not used, so put the outcome in your `tasks/get` responses |
+
+#### Choose a time to live and a poll interval
+
+Keep a finished task's result for at least an hour, and longer if you can. A person can exit while a remote server's task runs and [resume the session](#exit-clear-or-resume-while-an-mcp-task-runs) later. Claude then gets the result only if your server still knows the task.
+
+Set `ttlMs` and `pollIntervalMs`, both in milliseconds, in your `tools/call` answer and your `tasks/get` responses:
+
+* **`ttlMs`**: report how long your server keeps the task, counted from the task's creation. Send your longest run time plus the time you keep the result, such as `5400000` for a 30-minute job and one hour. Send `null` if your server keeps tasks with no time limit
+* **`pollIntervalMs`**: send 10000 to 30000 for a job that runs longer than a minute, so your server answers fewer status checks. For a shorter job, send 2000 so Claude gets the result sooner
 
 ### Plugin-provided MCP servers
 
@@ -835,7 +851,7 @@ When the same server is defined in more than one place, Claude Code connects to 
 2. Project scope
 3. User scope
 4. [Plugin-provided servers](https://code.claude.com/docs/en/plugins/components.md#mcp-servers)
-5. [claude.ai connectors](#use-mcp-servers-from-claude-ai)
+5. [claude.ai connectors](#use-mcp-servers-from-claude-ai). In `claude -p`, Agent SDK, and VS Code sessions, connectors rank above plugin-provided servers.
 
 Claude Code matches duplicates across the three scopes by name. It matches plugins and connectors by endpoint, so one that points at the same URL or command as an enabled server above counts as a duplicate.
 
@@ -1307,6 +1323,7 @@ claude mcp get weather-api
 > Tips:
 >
 > * Make sure the JSON is properly escaped in your shell
+> * To pipe the JSON in, pass `-` in its place: `cat server.json | claude mcp add-json <name> -`. Run the command outside a Claude Code session. Requires Claude Code v2.1.327 or later.
 > * The JSON must conform to the MCP server configuration schema
 > * You can use `--scope user` to add the server to your user configuration instead of the project-specific one
 
@@ -1414,8 +1431,8 @@ Which settings govern a claude.ai connector depends on where your session runs, 
 
 Your organization can set per-tool controls on [claude.ai connectors](https://claude.com/docs/connectors). Claude Code reads these settings at startup and enforces them locally, except in the desktop app's [local and SSH sessions](#how-connectors-reach-claude-code). There, the desktop app withholds `blocked` tools before it delivers a connector, and the `ask` setting doesn't reach Claude Code, so it applies the session's ordinary [permission rules](https://code.claude.com/docs/en/permissions.md) to those tools instead of prompting on every call. In sessions where Claude Code fetches connectors itself, run `/mcp` to see which setting applies to each tool on a connector.
 
-* **Tool set to `ask`**: Claude Code prompts on every call with the reason `Your organization requires approval for this tool`. The prompt appears even in `acceptEdits`, `auto`, and `bypassPermissions` [permission modes](https://code.claude.com/docs/en/permissions.md#permission-modes). In the terminal, the prompt has no option to remember your choice. [Allow rules](https://code.claude.com/docs/en/permissions.md) that match the tool don't skip the prompt either. In `dontAsk` mode, which never prompts, Claude Code denies the call instead.
-* **Tool set to `blocked`**: Claude Code filters the tool out before Claude sees it, so it never appears in Claude's tool list. In sessions where Claude Code fetches connectors itself, the `/mcp` tool list still shows the tool, marked `disabled by your organization`.
+* **Tool set to `ask`**: Claude Code prompts on every call Claude makes, with the reason `Your organization requires approval for this tool`. The prompt appears even in `acceptEdits`, `auto`, and `bypassPermissions` [permission modes](https://code.claude.com/docs/en/permissions.md#permission-modes). In the terminal, you can't save your choice. Matching [allow rules](https://code.claude.com/docs/en/permissions.md) don't skip the prompt. In `dontAsk` mode, or a `-p` run with nothing to answer the prompt, Claude Code denies the call instead.
+* **Tool set to `blocked`**: Claude Code filters the tool out before Claude sees it, so it doesn't appear in Claude's tool list. In sessions where Claude Code fetches connectors itself, the `/mcp` tool list still shows the tool, marked `turned off by your organization`.
 
 The desktop app and claude.ai chat apply the same `blocked` setting, so Claude can't use a blocked tool there either, and you can't withhold a tool from the desktop app's sessions while keeping it available in chat. The desktop app skips a connector whose tools are all blocked.
 
@@ -1518,7 +1535,7 @@ The `backgroundOutputPath` field requires Claude Code v2.1.295 or later.
 
 When MCP tools produce large outputs, Claude Code helps manage the token usage to prevent overwhelming your conversation context:
 
-* **Output warning threshold**: Claude Code displays a warning when any MCP tool output exceeds 10,000 tokens
+* **Output warning threshold**: the [transcript viewer](https://code.claude.com/docs/en/interactive-mode.md#transcript-viewer) displays a warning when any MCP tool output exceeds a fixed 10,000 tokens
 * **Configurable limit**: you can adjust the maximum allowed MCP output tokens using the `MAX_MCP_OUTPUT_TOKENS` environment variable
 * **Default limit**: the default maximum is 25,000 tokens
 * **Scope**: the environment variable applies to tools that don't declare their own limit. Tools that set [`anthropic/maxResultSizeChars`](#raise-the-limit-for-a-specific-tool) use that value instead for text content, regardless of what `MAX_MCP_OUTPUT_TOKENS` is set to. Tools that return image data are still subject to `MAX_MCP_OUTPUT_TOKENS`
@@ -1571,11 +1588,11 @@ Some MCP servers declare a tool's input schema as a JSON Schema union, with `any
 Tools with a root-level combinator stay available. Before sending the tool to the API, Claude Code flattens the schema into a single object and prepends a sentence to the tool's description that tells Claude which parameter groups belong together:
 
 * `allOf`: properties from every branch are merged, and each branch's `required` list still applies
-* `anyOf` and `oneOf`: properties from every branch are merged, and each branch's `required` list is described in the tool description instead of enforced by the schema
+* `anyOf` and `oneOf`: properties from every branch are merged, and each branch's `required` list is described in the tool description
 
 Your server receives whichever arguments Claude chose, so keep validating the combination server-side.
 
-When Claude Code can't produce a schema the API accepts, or on a deployment that doesn't receive the remote configuration that enables the rewrite, it skips that one tool, records the reason in the server's log, and leaves the server's other tools available.
+When Claude Code can't produce a schema the API accepts, or when [feature flag fetching](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching) is on but the [flags haven't arrived](https://code.claude.com/docs/en/env-vars.md#first-session-after-an-install-or-upgrade), the tool is skipped. The server's log records the reason, and the server's other tools stay available. Before v2.1.328, the tool was also skipped with fetching off.
 
 ## Tools with invalid input schemas
 
@@ -1590,14 +1607,12 @@ If one of your MCP server's tools has an input schema that breaks either of two 
 
 When Claude Code excludes a tool, it records the reason in the server's log and tells Claude which tools it excluded and why, so you can ask Claude why a tool is missing. If you fix the schema on the server, the tool comes back the next time Claude Code loads the server's tools.
 
-When [feature flag fetching](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching) is off or the flags have never arrived, as on an air-gapped machine, a tool that breaks a rule isn't excluded:
+When [feature flag fetching](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching) is on but the [flags haven't arrived](https://code.claude.com/docs/en/env-vars.md#first-session-after-an-install-or-upgrade), a tool that breaks a rule isn't excluded:
 
 * Claude gets the tool unchanged, and the server's log records `input schema would be rejected by the Anthropic API` for it
 * If the API then rejects the schema, see [Tools whose input schema the API refuses](#tools-whose-input-schema-the-api-refuses)
 
-Before v2.1.216, no deployment ran these checks.
-
-The [root-level combinator handling](#tool-input-schemas-with-a-root-level-combinator) is separate and keeps its own behavior when flag fetching is off or the flags have never arrived.
+Before v2.1.328, tools also weren't excluded with fetching off. Before v2.1.216, no deployment ran these checks.
 
 ### Tools whose input schema the API refuses
 
@@ -1617,15 +1632,15 @@ For the message that names the tool and the ways to shorten its full name, see [
 
 ## Require approval for a specific tool
 
-If you're building an MCP server, you can mark a tool as requiring explicit approval on every call by setting `_meta["anthropic/requiresUserInteraction"]` to `true` in the tool's `tools/list` response entry. The value must be the JSON Boolean `true`; any other value is ignored.
+If you're building an MCP server, you can mark a tool as requiring explicit approval by setting `_meta["anthropic/requiresUserInteraction"]` to `true` in the tool's `tools/list` response entry. The value must be the JSON Boolean `true`; any other value is ignored.
 
-Claude Code shows that tool's permission prompt on every call, even in `acceptEdits`, `auto`, and `bypassPermissions` [permission modes](https://code.claude.com/docs/en/permissions.md#permission-modes), and doesn't offer a "don't ask again" option for it. [Allow rules](https://code.claude.com/docs/en/permissions.md#permission-rule-syntax) that match the tool don't skip the prompt either. In `dontAsk` mode, which never prompts, Claude Code denies the call instead.
+Claude Code shows that tool's permission prompt on every call Claude makes, even in `acceptEdits`, `auto`, and `bypassPermissions` [permission modes](https://code.claude.com/docs/en/permissions.md#permission-modes), and doesn't offer a "don't ask again" option for it. [Allow rules](https://code.claude.com/docs/en/permissions.md#permission-rule-syntax) that match the tool don't skip the prompt either. In `dontAsk` mode, or a `-p` run with nothing to answer the prompt, Claude Code denies the call instead.
 
 The prompt has to reach a person. In non-interactive mode with [`--permission-prompt-tool`](https://code.claude.com/docs/en/cli-reference#cli-flags), an `allow` result from the prompt tool for a flagged tool is converted to a deny with the message `MCP tool requires user interaction; not supported via --permission-prompt-tool`. The Agent SDK's [`canUseTool` callback](https://code.claude.com/docs/en/agent-sdk/permissions) does receive these calls and can approve them, because your SDK application is expected to show them to a user.
 
 Use this for tools whose permission prompt is itself the point, such as a consent or access-grant step where auto-approval would mean no human ever agreed. Other tools from the same server keep their normal permission behavior.
 
-The following `tools/list` entry marks one tool as always requiring approval.
+The following `tools/list` entry marks one tool:
 
 ```json theme={null}
 {
@@ -1667,7 +1682,7 @@ MCP servers can request structured input from you mid-task using elicitation. Wh
 
 Servers can request input in two ways:
 
-* **Form mode**: Claude Code shows a dialog with form fields defined by the server (for example, a username and password prompt). Fill in the fields and submit.
+* **Form mode**: Claude Code shows a dialog with form fields defined by the server, such as a project name and a due date. Fill in the fields and submit.
 * **URL mode**: Claude Code asks whether to open a link in your browser. Servers use this mode for a flow that finishes outside the terminal, such as sign-in.
 
 In URL mode, Claude Code passes the URL as a command-line argument to your system's URL handler, and caps how long that argument can be. When the URL, once escaped for the command line, is over that cap, you can only decline the request. Every character that needs escaping, such as `%` or `&`, counts four times toward the cap: its own character plus three escape characters. A URL with none of them reaches the cap at about 8,000 characters. A URL built largely of percent-escapes, where every third character is a `%`, reaches it at roughly 4,000.
@@ -1700,7 +1715,7 @@ A server built on Java MCP SDK 0.17.0 or earlier can refuse a declaration that h
 
 ## Use MCP resources
 
-MCP servers can expose resources that you can reference using @ mentions, similar to how you reference files.
+MCP servers can expose resources that you can reference using @ mentions, similar to how you reference files. With `claude -p`, a resource mention stays plain text.
 
 ### Reference MCP resources
 

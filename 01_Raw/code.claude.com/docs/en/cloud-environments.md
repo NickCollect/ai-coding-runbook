@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/cloud-environments
-fetched_at: 2026-11-16T07:30:44.500557+00:00
+fetched_at: 2026-11-23T08:28:12.604701+00:00
 fetch_method: mintlify_md
 ---
 
@@ -116,7 +116,7 @@ These requirements decide whether you can add a secret and whether the agent pro
 
 You add secrets one at a time. To change a secret's hosts or value, delete it and add it again.
 
-To add a secret to a [shared environment](#organization-shared-environments), open it for editing from the **Cloud environments** page in [admin settings](https://claude.ai/admin-settings), then continue from step 2 in its **Network secrets** section. If you're on a Team or Enterprise plan and don't hold an [organization admin role](#requirements), follow step 1 on your own environment, then [fill in the shorter form](#add-a-secret-without-the-role).
+To add a secret to a [shared environment](#organization-shared-environments), open it for editing from the **Cloud environments** page in [admin settings](https://claude.ai/admin-settings), select its **Network secrets** row, then continue from step 2. If you're on a Team or Enterprise plan and don't hold an [organization admin role](#requirements), follow step 1 on your own environment, then [fill in the shorter form](#add-a-secret-without-the-role).
 
 **1. Open the environment's network secrets**
 
@@ -124,7 +124,7 @@ To add a secret to a [shared environment](#organization-shared-environments), op
 
 **2. Add the secret**
 
-Select **Add secret**, labeled **Add** in admin settings, and fill in the form. Keep the default **Secret type**, **Bearer**, for an API key that travels in a request header, and fill in these fields:
+Select **Add secret** and fill in the form. Keep the default **Secret type**, **Bearer**, for an API key that travels in a request header, and fill in these fields:
 
 * **Allowed websites**: the API's hosts, such as `api.example.com`. A leading `*.` matches every subdomain
 * **Custom headers**: one row for the header that carries the key. The row already has `Authorization` as the **Header name** and `Bearer` as the **Prefix**; paste the key itself as the **Value**. For a header like `X-Api-Key` that takes the bare value, change the name and clear the prefix
@@ -206,7 +206,7 @@ In [Claude Tag](https://claude.com/docs/claude-tag/overview) channels, Claude wo
 
 Each environment sets one network access level, which controls the outbound connections its sessions can make. A new environment starts at **Limited** with **Allow package managers** checked, so its sessions reach package registries and other [allowlisted domains](#default-allowed-domains).
 
-To change an environment's network access, [open it for editing](#configure-your-environment) and use the **Network access** selector in the dialog. A [shared environment](#organization-shared-environments) opens read-only there, so an Owner changes its network access from the **Cloud environments** page in [admin settings](https://claude.ai/admin-settings) instead. The control that opens the selector appears on the app surfaces listed under [The Default environment](#the-default-environment) and in the [cloud scheduled task editor](https://code.claude.com/docs/en/routines.md#environments-and-network-access). Personal environments don't have a separate page in your claude.ai account settings.
+To change an environment's network access, [open it for editing](#configure-your-environment) and use the **Network access** selector in the dialog. A [shared environment](#organization-shared-environments) opens read-only there, so an Owner changes its network access from the **Cloud environments** page in [admin settings](https://claude.ai/admin-settings) instead. The control that opens the selector appears on the app surfaces listed under [The Default environment](#the-default-environment) and in the [cloud scheduled task editor](https://code.claude.com/docs/en/routines.md#environments-and-network-access).
 
 When you change an Anthropic-hosted environment's network access, its existing sessions follow the new setting within about a minute, for requests that go through the session's [network allowlist](#access-levels). You don't need to start a new session.
 
@@ -269,7 +269,7 @@ Committed files from public repositories arrive through `raw.githubusercontent.c
 
 ### Security proxy
 
-Cloud sessions in Anthropic-hosted environments run behind an HTTP/HTTPS network proxy for security and abuse prevention purposes; in a [self-hosted environment](https://code.claude.com/docs/en/self-hosted-environments-deploy.md#default-deny-egress), outbound traffic leaves through your own network boundary instead. All outbound internet traffic from an Anthropic-hosted session passes through this proxy, which provides:
+Cloud sessions in Anthropic-hosted environments run behind an HTTP/HTTPS network proxy for security and abuse prevention purposes. In a [self-hosted environment](https://code.claude.com/docs/en/self-hosted-environments-deploy.md#default-deny-egress), outbound traffic leaves through your own network boundary instead. Outbound internet traffic from an Anthropic-hosted session's VM passes through this proxy, which provides:
 
 * Protection against malicious requests
 * Rate limiting and abuse prevention
@@ -286,7 +286,7 @@ In Anthropic-hosted environments, each session gets a fresh virtual machine (VM)
 
 > [!NOTE]
 >
-> Of the repository configuration in this table, a cloud thread in a [project](https://code.claude.com/docs/en/claude-projects.md) loads only the repository root's `CLAUDE.md`, `.claude/CLAUDE.md`, and `.claude/rules/` files that aren't [path-specific](https://code.claude.com/docs/en/memory.md#path-specific-rules). See [What threads pick up from your repositories](https://code.claude.com/docs/en/claude-projects.md#what-threads-pick-up-from-your-repositories).
+> A cloud thread in a [project](https://code.claude.com/docs/en/claude-projects.md) loads less of the repository configuration in this table. It starts without `.mcp.json` servers or `.claude/settings.json` hooks and permission rules, and it can skip skills, agents, and commands. See [What threads pick up from your repositories](https://code.claude.com/docs/en/claude-projects.md#what-threads-pick-up-from-your-repositories).
 
 Cloud sessions start from a fresh clone of your repository. Anything you commit to the repo is available. Anything you've installed or configured only on your own machine isn't available in the session. Your organization's policy arrives separately through [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md).
 
@@ -297,12 +297,12 @@ Cloud sessions start from a fresh clone of your repository. Anything you commit 
 | Your repo's `.mcp.json` MCP servers | Yes, in a session with one repository | Part of the clone, found from the session's working directory. For a self-hosted environment, see [which repository's settings apply](https://code.claude.com/docs/en/self-hosted-environments-configuration.md#repository-settings-in-sessions-with-several-repositories) |
 | Your repo's `.claude/rules/` | Yes | Part of the clone |
 | Your repo's `.claude/skills/`, `.claude/agents/`, `.claude/commands/` | Yes | Part of the clone |
-| Plugins and marketplaces declared in your repo's `.claude/settings.json` | No | A cloud session doesn't install the plugins a repository turns on under [`enabledPlugins`](https://code.claude.com/docs/en/settings-reference#enabledplugins), including ones from the marketplaces it lists under [`extraKnownMarketplaces`](https://code.claude.com/docs/en/settings-reference#extraknownmarketplaces) |
+| Marketplaces declared in your repo's `.claude/settings.json` | No, in an Anthropic-hosted environment | The session doesn't add the marketplaces a repository lists under [`extraKnownMarketplaces`](https://code.claude.com/docs/en/settings-reference#extraknownmarketplaces). For a self-hosted environment, see [which repository's settings apply](https://code.claude.com/docs/en/self-hosted-environments-configuration.md#repository-settings-in-sessions-with-several-repositories) |
 | Your organization's [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md) | Yes, except in [Claude Tag](https://claude.com/docs/claude-tag/overview) sessions | Fetched from Anthropic's servers when the session starts. See [Surface coverage](https://code.claude.com/docs/en/model-config.md#surface-coverage) for how `availableModels` is enforced in cloud sessions. Settings deployed to your device through MDM or managed settings files don't apply, because the session runs on an Anthropic-managed VM; in a [self-hosted environment](https://code.claude.com/docs/en/self-hosted-environments), sessions also read the managed settings file in the runner image, per [how Claude Code combines managed sources](https://code.claude.com/docs/en/managed-settings.md#how-claude-code-combines-managed-sources) |
 | Your user `~/.claude/CLAUDE.md` | No | Lives on your machine, not in the repo. See [Add personal preferences without committing to the repo](#add-personal-preferences-without-committing-to-the-repo) |
 | Your user `~/.claude/skills/`, `~/.claude/agents/`, `~/.claude/commands/` | No | Live on your machine, not in the repo. Commit them to the repo's `.claude/` directory instead. Cloud sessions automatically load [skills you enable on claude.ai](https://code.claude.com/docs/en/skills.md#skills-in-cowork-and-cloud-sessions) |
 | Plugins enabled only in your user settings | No | User-scoped `enabledPlugins` lives in `~/.claude/settings.json` on your machine |
-| MCP servers you added with `claude mcp add` at the default local scope or the user scope | No | Those write to `~/.claude.json` on your machine, not the repo. Add the server with `claude mcp add --scope project`, which writes the repo's [`.mcp.json`](https://code.claude.com/docs/en/mcp#project-scope), and commit that file. A session with one repository loads it |
+| MCP servers you added with `claude mcp add` at the default local scope or the user scope | No | At those scopes, the command writes to `~/.claude.json` on your machine. Run `claude mcp add --scope project` from the repository root to write the repo's [`.mcp.json`](https://code.claude.com/docs/en/mcp#project-scope), and commit that file. A session with one repository loads it |
 | Transport variables in your repo's `.claude/settings.json` `env` block, such as `NODE_EXTRA_CA_CERTS` and the [mTLS client certificate variables](https://code.claude.com/docs/en/network-config.md#mtls-authentication) | No | The hosting environment manages the session's API connection, so Claude Code ignores these keys and notes each ignored key in the session's debug log |
 | API keys and tokens for services Claude calls | In an Anthropic-hosted environment, as [network secrets](#add-network-secrets) | You add the key once on the environment and the agent proxy attaches it to requests for the hosts you list. A key the agent proxy [can't attach](#requests-that-never-get-the-credential) stays in an environment variable |
 | Interactive auth like AWS SSO | No | Not supported. SSO requires browser-based login that can't run in a cloud session |
@@ -552,7 +552,7 @@ SessionStart hooks behave the same in the cloud as locally, with these caveats:
 * **Not in a project's cloud threads**: a cloud thread in a [project](https://code.claude.com/docs/en/claude-projects.md#what-threads-pick-up-from-your-repositories) doesn't run hooks from a repository's `.claude/settings.json`, whatever the number of repositories. In an Anthropic-hosted environment, install dependencies for threads with a [setup script](#setup-scripts). In a self-hosted environment, use a hook in the [runner host's settings](https://code.claude.com/docs/en/self-hosted-environments-configuration.md#repository-settings-in-sessions-with-several-repositories) instead.
 * **No cloud-only scoping**: hooks run in both local and cloud sessions. To skip local execution, exit early unless the `CLAUDE_CODE_REMOTE` environment variable is `true`, the way the [dependency install script](#install-dependencies-with-a-sessionstart-hook) does.
 * **Requires network access**: install commands need to reach package registries. If your environment uses **None** network access, these hooks fail. Under the default **Limited** level with **Allow package managers** checked, the [default allowlist](#default-allowed-domains) covers npm, PyPI, RubyGems, and crates.io.
-* **Proxy compatibility**: in Anthropic-hosted environments, all outbound traffic passes through a [security proxy](#security-proxy), and some package managers don't work correctly with it; Bun is a known example. In a [self-hosted environment](https://code.claude.com/docs/en/self-hosted-environments-deploy.md#default-deny-egress), outbound traffic goes through your own network boundary instead.
+* **Proxy compatibility**: in Anthropic-hosted environments, outbound traffic from the session's VM passes through a [security proxy](#security-proxy), and some package managers don't work correctly with it; Bun is a known example. In a [self-hosted environment](https://code.claude.com/docs/en/self-hosted-environments-deploy.md#default-deny-egress), outbound traffic goes through your own network boundary instead.
 * **Adds startup latency**: hooks run each time a session starts or resumes, unlike setup scripts which benefit from [environment caching](#environment-caching). Keep install scripts fast by skipping work that's already done, the way the [dependency install script](#install-dependencies-with-a-sessionstart-hook) does.
 
 To customize the base image, use a setup script to install what you need on top of the [provided image](#installed-tools), or run your own image as a container alongside Claude with `docker compose`. Replacing the base image entirely isn't supported yet.

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/goal
-fetched_at: 2026-11-16T07:30:44.928274+00:00
+fetched_at: 2026-11-23T08:28:12.931445+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,7 +28,7 @@ Three approaches keep the current session running between prompts. Pick based on
 | Approach | Next turn starts when | Stops when |
 | :- | :- | :- |
 | `/goal` | The previous turn finishes, or, in an interactive session, an [idle check-in](#background-work-defers-evaluation) or an [automatic retry](#other-errors-retry-or-pause-the-goal) comes due | A model confirms the condition is met or judges it impossible, or a turn fails on [an error you have to fix](#errors-you-have-to-fix-clear-the-goal), or you run [`/goal clear`](#clear-a-goal) |
-| [`/loop`](https://code.claude.com/docs/en/scheduled-tasks#run-a-prompt-repeatedly-with-%2Floop) | A time interval elapses | You stop it, or Claude decides the work is done |
+| [`/loop`](https://code.claude.com/docs/en/scheduled-tasks#run-a-prompt-repeatedly-with-%2Floop) | A time interval elapses | You stop it, or [the loop ends on its own](https://code.claude.com/docs/en/scheduled-tasks.md#stop-a-loop) |
 | [Stop hook](https://code.claude.com/docs/en/hooks-guide.md#prompt-based-hooks) | The previous turn finishes | Your own script or prompt decides |
 
 `/goal` and a Stop hook both fire after every turn. `/goal` is a session-scoped shortcut: you type a condition and it's active for the current session only. A Stop hook lives in your settings file, applies to every session in its scope, and can run a script for deterministic checks or a prompt for model-evaluated ones.
@@ -181,7 +181,7 @@ The evaluator runs on whichever provider your session is configured for. It does
 
 > [!NOTE]
 >
-> Evaluation tokens are billed on the small fast model configured for your provider and are typically negligible compared to main-turn spend.
+> Evaluation tokens are billed in addition to main-turn spend.
 
 ## Requirements
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/glossary
-fetched_at: 2026-11-16T07:30:44.913474+00:00
+fetched_at: 2026-11-23T08:28:12.931921+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,7 +54,7 @@ Learn more: [Share session output as artifacts](https://code.claude.com/docs/en/
 
 ### Auto memory
 
-Notes Claude writes for itself based on your corrections and preferences, stored per git repository under `~/.claude/projects/`. All worktrees of the same repository share one auto memory directory. The first 200 lines or 25 KB of the `MEMORY.md` index loads at the start of every session. Auto memory is the Claude-written counterpart to [CLAUDE.md](#claude-md), which you write.
+Notes Claude writes for itself based on your corrections and preferences, stored per git repository under `~/.claude/projects/`. All worktrees of the same repository share one auto memory directory. The first 200 lines or 25 KB of the `MEMORY.md` index loads at session start while auto memory is on. Auto memory is the Claude-written counterpart to [CLAUDE.md](#claude-md), which you write.
 
 Learn more: [Auto memory](https://code.claude.com/docs/en/memory.md#auto-memory)
 
@@ -71,7 +71,7 @@ Learn more: [Eliminate prompts with auto mode](https://code.claude.com/docs/en/p
 
 ### Bare mode
 
-With `--bare`, Claude Code starts without loading hooks, skills, custom commands, subagents, installed plugins, MCP servers, auto memory, or CLAUDE.md, apart from skills in a directory you pass with `--add-dir`. Recommended for CI and scripted calls where you need the same result on every machine.
+With `--bare`, Claude Code starts without your hooks, skills, custom commands, subagents, installed plugins, MCP servers, auto memory, or CLAUDE.md, apart from skills in a directory you pass with `--add-dir`. Recommended for CI and scripted calls.
 
 Learn more: [Start faster with bare mode](https://code.claude.com/docs/en/headless.md#start-faster-with-bare-mode)
 
@@ -149,7 +149,7 @@ Learn more: [Explore the context window](https://code.claude.com/docs/en/context
 
 ### Dispatch
 
-A phone-initiated task router that spawns a Claude Code session in the Desktop app when you send a coding task from the Claude mobile app. Your prompt routes to the right tool automatically. Available on Pro, Max, and Ultra plans.
+A phone-initiated task router that spawns a Claude Code session in the Desktop app when you send a coding task from the Claude mobile app. Your prompt routes to the right tool automatically. Not available to new users.
 
 Learn more: [Sessions from Dispatch](https://code.claude.com/docs/en/desktop.md#sessions-from-dispatch)
 
@@ -301,7 +301,7 @@ Learn more: [Work with sessions](https://code.claude.com/docs/en/how-claude-code
 
 ### Settings layers
 
-The hierarchy Claude Code reads configuration from, in precedence order from highest to lowest: [managed policy](#managed-settings), settings you pass with the `--settings` flag, local settings at `.claude/settings.local.json`, project settings at `.claude/settings.json`, then user settings at `~/.claude/settings.json`. Arrays merge across layers; scalars at a higher layer override lower ones. See [Settings precedence](https://code.claude.com/docs/en/settings.md#settings-precedence).
+The hierarchy Claude Code reads configuration from. From highest to lowest precedence, the layers are [managed policy](#managed-settings), settings you pass with the `--settings` flag, local settings at `.claude/settings.local.json`, project settings at `.claude/settings.json`, and user settings at `~/.claude/settings.json`. Most lists, such as `permissions.allow`, [merge across files](https://code.claude.com/docs/en/settings.md#lists-merge-instead-of-overriding). See [Settings precedence](https://code.claude.com/docs/en/settings.md#settings-precedence).
 
 Learn more: [Settings files](https://code.claude.com/docs/en/settings.md#where-settings-live)
 
@@ -337,13 +337,13 @@ Learn more: [System prompt flags](https://code.claude.com/docs/en/cli-reference.
 
 ### System reminder
 
-A message that Claude Code, as the [harness](#agentic-harness), adds to the conversation to give Claude context. You don't send system reminders yourself. Claude Code inserts them as a session runs, for example when the session starts, when a hook returns text, or when a file changes on disk. Claude reads them alongside your messages. The following all reach Claude as system reminders:
+A message that Claude Code, as the [harness](#agentic-harness), adds to the conversation to give Claude context. You don't send system reminders yourself. Claude Code inserts them as a session runs, for example when the session starts or when a hook returns text. Claude reads them alongside your messages. The following all reach Claude as system reminders:
 
 * Your [CLAUDE.md](#claude-md) files
 * The instructions of your [output style](#output-style)
 * Text a [hook](#hook) returns as `additionalContext`
 * The list of available [skills](#skill)
-* A note that a file Claude read earlier has changed on disk
+* A note that a file Claude edited earlier has since changed on disk
 * The commit and pull request attribution lines
 
 In a logged API request, a system reminder appears wrapped in `<system-reminder>` tags inside a user message, or on some models as a separate message with the `system` role.
@@ -354,7 +354,7 @@ Learn more: [Context Claude Code adds outside the system prompt](https://code.cl
 
 ### Teleport
 
-A command, `/teleport`, that pulls a cloud Claude Code session into your local terminal. Claude fetches the branch, loads the conversation history, and resumes from the cloud session's last state. The reverse direction is `--cloud`, which sends a local task to run in the cloud.
+A command, `/teleport`, that pulls a cloud Claude Code session into your local terminal. The reverse direction is `--cloud`, which sends a local task to run in the cloud.
 
 Learn more: [Continue a cloud session in your terminal](https://code.claude.com/docs/en/claude-code-on-the-web.md#from-cloud-to-terminal)
 

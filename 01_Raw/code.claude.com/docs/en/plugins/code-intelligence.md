@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/code-intelligence
-fetched_at: 2026-10-26T05:40:03.734524+00:00
+fetched_at: 2026-11-23T08:28:13.211660+00:00
 fetch_method: mintlify_md
 ---
 
@@ -102,7 +102,7 @@ The **LSP plugin recommendation** dialog can appear after Claude edits a file. T
 The **LSP plugin recommendation** dialog names the plugin and offers these choices:
 
 * **Yes, install**: Claude Code installs the plugin for your user account and prints `<plugin> installed · restart to apply`. Start a new session to load the server.
-* **No, not now**: the dialog closes, and a later session can offer the plugin again. Pressing **Esc** does the same.
+* **Not now**: the dialog closes, and a later session can offer the plugin again. Pressing **Esc** does the same.
 * **Never for this plugin**: the dialog stops appearing for that plugin and still appears for others.
 * **Disable all LSP recommendations**: the dialog stops appearing for every language.
 

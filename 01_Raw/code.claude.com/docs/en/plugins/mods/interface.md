@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/mods/interface
-fetched_at: 2026-11-16T07:30:45.334139+00:00
+fetched_at: 2026-11-23T08:28:13.358729+00:00
 fetch_method: mintlify_md
 ---
 
@@ -217,6 +217,7 @@ Claude Code draws most of its interface itself: messages, tool call rows, the sp
 | `AskUserQuestion` | The dialog Claude opens to ask you a question |
 | `Spinner`, `ToolProgress`, `TurnDuration` | Status lines for a turn: the line that animates while Claude works, a running tool's live progress line, and the line that closes a turn |
 | `InfoNotice`, `SessionMode`, `PromptHint` | Status lines under the logo, the mode labels in the footer, and the hint line under the prompt |
+| `AgentRow` | A subagent's or teammate's row in the agent panel |
 
 `Pane`, `AskUserQuestion`, `Spinner`, `UserMessage`, `AssistantMessage`, and the tool call sites work in the terminal, the Desktop app, and the VS Code extension. The [render sites table](https://code.claude.com/docs/en/plugins/mods/reference.md#render-sites) lists where each of the others is raised.
 
@@ -537,7 +538,7 @@ If the colors are still there, open **Settings** from the Code tab, and search t
 
 ## Build a tree from elements
 
-What a `ui.render` hook returns is an element tree: a description of what to draw, made of boxes, text, and controls nested inside each other. You describe the drawing, and Claude Code renders it in whichever app the user has open: the terminal, the Desktop app, or the VS Code extension.
+What a `ui.render` hook returns is an element tree: a description of what to draw, made of boxes, text, and controls nested inside each other.
 
 To get the elements, call `$.ui.resolve(e)` in your hook, as in `const { Box, Text, Button } = $.ui.resolve(e)`. Each element is a function. You pass it props, and you put the elements and strings that go inside it in `children`.
 
@@ -613,8 +614,8 @@ The [interface gallery](https://code.claude.com/docs/en/plugins/mods/gallery.md)
 
 | Element | What it draws | Where |
 | :- | :- | :- |
-| `Box` | A flex container that takes layout props such as `flexDirection`, [`borderStyle`](https://code.claude.com/docs/en/plugins/mods/reference#box-border-styles), and `width`. Spacing props such as `columnGap` and `padding` take a number or a [step name](https://code.claude.com/docs/en/plugins/mods/reference.md#box-spacing-steps) from `'xs'` to `'xl'`. | Everywhere |
-| `Text` | Styled text. Takes `color`, `bold`, `dimColor`, `italic`, `wrap`, and others such as [`weight`](https://code.claude.com/docs/en/plugins/mods/reference#text-typography). A `color` is a theme key or a color such as `'red'`. A `wrap` is `'wrap'`, `'truncate'`, `'truncate-start'`, `'truncate-middle'`, or `'truncate-end'`. | Everywhere |
+| `Box` | A flex container that takes layout props such as `flexDirection`, [`borderStyle`](https://code.claude.com/docs/en/plugins/mods/reference#box-border-styles), `width`, and `overflowX`. Spacing props such as `columnGap` and `padding` take a number or a [step name](https://code.claude.com/docs/en/plugins/mods/reference.md#box-spacing-steps) from `'xs'` to `'xl'`. `overflowX` requires Claude Code v2.1.326 or later. | Everywhere |
+| `Text` | Styled text. Takes `color`, `bold`, `dimColor`, `italic`, `wrap`, `maxLines`, and others such as [`weight`](https://code.claude.com/docs/en/plugins/mods/reference#text-typography). A `color` is a theme key or a color such as `'red'`. A `wrap` is a value such as `'wrap'`, `'truncate'`, `'truncate-start'`, `'truncate-middle'`, `'truncate-end'`, or `'clip'`. `maxLines` and `'clip'` require Claude Code v2.1.326 or later. | Everywhere |
 | `Button` | A control that calls `onPress` | Everywhere |
 | `Link`, `Code`, `Markdown` | A link with `href` and an optional `label`, a code block, and text formatted the way Claude's replies are. `Markdown` takes its content in a `text` prop, not in `children`, and needs a `key` when you pass `onLinkPress`. | Everywhere |
 | `Input`, `Select` | A text field and a dropdown | Terminal, Desktop, VS Code |

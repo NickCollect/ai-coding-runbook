@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/web-quickstart
-fetched_at: 2026-11-16T07:30:45.712396+00:00
+fetched_at: 2026-11-23T08:28:13.740994+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ fetch_method: mintlify_md
 >
 > Cloud sessions are available on Pro, Max, Ultra, and Team plans, and for Enterprise users with premium seats or Chat + Claude Code seats.
 
-A cloud session runs Claude Code on cloud infrastructure instead of your machine, Anthropic-managed by default. This quickstart starts one from [claude.ai/code](https://claude.ai/code) in your browser. You can also start one from the Claude mobile app, the Desktop app, or your terminal with `claude --cloud`.
+A cloud session runs Claude Code on cloud infrastructure, Anthropic-managed by default. This quickstart starts one from [claude.ai/code](https://claude.ai/code) in your browser. You can also start one from the Claude mobile app, the Desktop app, or your terminal with `claude --cloud`.
 
 Claude clones the [GitHub repository](#connect-github) you select into an isolated virtual machine, makes changes, and pushes a branch for you to review. Sessions persist across devices, so a task you start on your laptop is ready to review from your phone later. Each session counts toward your plan's usage limits alongside the rest of your Claude and Claude Code usage, and there's no separate charge for the cloud VM.
 
@@ -140,7 +140,7 @@ With GitHub connected and an environment created, you're ready to submit tasks.
 
 From [claude.ai/code](https://claude.ai/code) or the Code tab in the Claude mobile app, click the repository selector below the input box and choose a repository for Claude to work in. You can add multiple repositories to work across them in one session.
 
-At claude.ai/code, to start Claude from a feature branch instead of the default, change the branch in the control after the repository selector.
+At claude.ai/code, to start Claude from a feature branch instead of the default, change the branch in the control after the repository selector. To start without a repository at claude.ai/code, select **No repository** in the repository selector.
 
 **2. Choose a permission mode**
 
@@ -187,8 +187,8 @@ When Claude finishes, review the changes, leave feedback on specific lines, and 
 
 After Claude pushes its changes to a branch, the **Changes** card in the panel beside the chat shows the lines added and removed across the session, for example `+42 -18`. Click those counts to open the diff view.
 
-* You can also click **Changes** in the session's title bar, or in the bar's **⋮** menu.
-* To show the panel when it's hidden, click the **Show session rail** icon in the session's title bar, or in the bar's **⋮** menu.
+* To show the panel when it's hidden, click **Activity panel** or **Show session rail** in the session's title bar, or **Show session rail** in the bar's **⋮** menu.
+* You can also [open **Changes** as a pane](https://code.claude.com/docs/en/desktop.md#arrange-your-workspace).
 
 The diff compares the session's changes against its base branch by default. To compare against a different branch, select **Compare against** and pick one. Against the base branch, the diff can [leave out changes that aren't pushed yet](https://code.claude.com/docs/en/claude-code-on-the-web.md#troubleshoot-a-missing-file-in-the-diff-view).
 
@@ -235,7 +235,7 @@ If `/web-setup` says your GitHub CLI token doesn't have the `workflow` scope, yo
 
 `/web-setup` runs inside the Claude Code CLI, not your shell. Launch `claude` first, then type `/web-setup` at the prompt.
 
-If you typed it inside Claude Code and the command menu shows `No commands match "/web-setup"`, or submitting it returns `Unknown command: /web-setup`, the command is hidden because a requirement isn't met. The cause is usually that you're authenticated with an API key or third-party provider instead of a claude.ai subscription. Run `/login` to sign in with your claude.ai account.
+If Claude Code's command menu shows `No commands match "/web-setup"`, or submitting `/web-setup` returns `Unknown command: /web-setup` or says it's unavailable, the command is hidden because a requirement isn't met. The cause is usually that you're authenticated with an API key or third-party provider instead of a claude.ai subscription. Run `/login` to sign in with your claude.ai account.
 
 On Team and Enterprise plans, the command is hidden by default: the [Quick setup toggle](https://code.claude.com/docs/en/claude-code-on-the-web.md#quick-setup-for-team-and-enterprise) is off until an Owner turns it on. While it's off, [connect GitHub from the browser](#connect-github) instead.
 

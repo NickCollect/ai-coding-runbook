@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/keybindings
-fetched_at: 2026-11-16T07:30:44.989982+00:00
+fetched_at: 2026-11-23T08:28:13.009713+00:00
 fetch_method: mintlify_md
 ---
 
@@ -116,7 +116,7 @@ Actions available in the `Chat` context:
 | :- | :- | :- |
 | `chat:cancel` | Escape | Cancel current input |
 | `chat:clearInput` | Ctrl+L | Force a full screen redraw, preserving input and conversation |
-| `chat:clearScreen` | Cmd+K | Same as `chat:clearInput`. See [Clear the conversation](https://code.claude.com/docs/en/fullscreen.md#clear-the-conversation) for how Cmd+K behaves on iTerm2 and Terminal.app |
+| `chat:clearScreen` | Cmd+K | Same as `chat:clearInput`. See [Clear the conversation](https://code.claude.com/docs/en/fullscreen.md#clear-the-conversation) for how Cmd+K behaves on iTerm2 |
 | `chat:killAgents` | Ctrl+X Ctrl+K | Stop all running [background subagents](https://code.claude.com/docs/en/sub-agents.md#run-subagents-in-foreground-or-background) in this session and turn off [artifact auto-replies](https://code.claude.com/docs/en/artifacts.md#let-claude-reply-to-comments-on-its-own) for the rest of it. Press the shortcut twice within 3 seconds to confirm. You can press it while a background subagent's permission prompt is open |
 | `chat:cycleMode` | Shift+Tab\* | Cycle permission modes |
 | `chat:modelPicker` | Meta+P | Open model picker |
@@ -219,7 +219,7 @@ Actions available in the `HistorySearch` context:
 | `historySearch:execute` | Enter | Execute selected command |
 | `historySearch:cycleScope` | Ctrl+S | Cycle scope: session, project, everywhere |
 
-The `historySearch:next`, `historySearch:accept`, `historySearch:cancel`, and `historySearch:execute` defaults apply to the inline history search in the classic renderer, which always searches prompts from all projects. `historySearch:cycleScope` takes effect only in [fullscreen rendering](https://code.claude.com/docs/en/fullscreen.md), where `Ctrl+R` opens a search dialog instead and `Ctrl+S` cycles its scope. The dialog's other keys are fixed and can't be rebound: `Enter` or `Tab` places the highlighted match in the prompt input and `Esc` cancels.
+`historySearch:accept`, `historySearch:cancel`, and `historySearch:execute` take effect only in the classic renderer's inline search. That search covers prompts from all projects. `historySearch:cycleScope` takes effect only in [fullscreen rendering](https://code.claude.com/docs/en/fullscreen.md), where `Ctrl+R` opens a search dialog instead and `Ctrl+S` cycles its scope. In the dialog, `Enter` or `Tab` places the highlighted match in the prompt input and `Esc` cancels.
 
 ### Task actions
 
@@ -726,11 +726,10 @@ After you save the file, press `Ctrl+Q` in the `Other` row of a question where y
 
 Claude Code validates your keybindings and writes a warning to the debug log for:
 
-* Parse errors (invalid JSON or structure)
+* Invalid JSON
 * Misspelled modifiers, such as `ctl+k`. Claude Code ignores the whole binding. Correct the modifier, to `ctrl+k` in this example.
 * A space next to `+` in a key string, such as `ctrl+ k`. Claude Code reads the string as a [chord](#chords) of `ctrl+` followed by `k`. No keypress matches `ctrl+` on its own, so the binding never fires. Remove the space.
 * Invalid context names
-* Invalid action values, such as an action that isn't a string or `null`
 * Unknown action names, such as a typo of a registered action. Claude Code skips the binding and keeps any default binding for that key in effect.
 * Reserved shortcut conflicts
 * Duplicate bindings in the same context

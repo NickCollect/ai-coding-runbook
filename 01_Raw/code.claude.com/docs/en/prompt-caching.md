@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/prompt-caching
-fetched_at: 2026-11-16T07:30:45.409072+00:00
+fetched_at: 2026-11-23T08:28:13.464820+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ fetch_method: mintlify_md
 
 # How Claude Code uses prompt caching
 
-> Claude Code manages prompt caching automatically. See why a model switch triggers a slow uncached turn, what `/compact` costs, why CLAUDE.md edits don't apply mid-session, and how to check your cache hit rate.
+> See why a model switch triggers a slow uncached turn in Claude Code, what `/compact` costs, and how to check your prompt cache hit rate.
 
 Prompt caching makes Claude Code faster and more cost-efficient. Without caching, the API would reprocess your full history on every turn. With caching, it reuses what it already processed, bills the re-read at the [cached token rate](https://platform.claude.com/docs/en/about-claude/pricing), and fully processes only what changed.
 
@@ -127,7 +127,7 @@ Without tool search, whether a mid-session server change invalidates the cache d
 | Mid-session change | Cache | Tool definitions in the next request |
 | - | - | - |
 | A server connects, or a [dynamic tool update](https://code.claude.com/docs/en/mcp.md#dynamic-tool-updates) adds tools | Invalidated | The new definitions are added |
-| A server drops out with no action on your part, such as a stdio server's process exiting | Kept | The server's definitions stay unchanged. A call to one of its tools returns an error instead of running, unless Claude Code [starts the server again](https://code.claude.com/docs/en/mcp.md#stdio-servers-that-exit-or-fail-to-start) for that call |
+| A server drops out with no action on your part, such as a stdio server's process exiting | Kept | The server's definitions stay unchanged |
 | A remote server [reconnects automatically](https://code.claude.com/docs/en/mcp.md#automatic-reconnection) after its connection drops | Kept, unless a request sent while the server reconnects adds the `WaitForMcpServers` tool, which invalidates the cache once | The server's definitions stay unchanged. A request sent while the server reconnects can add `WaitForMcpServers` when the conversation hasn't listed it yet, and the tool then stays listed for the rest of the conversation |
 | You remove a tool on purpose, such as with a [deny rule](#denying-an-entire-tool) or by disabling its server in `/mcp` | Invalidated | The definition is removed |
 
@@ -182,7 +182,7 @@ Only a deny rule that matches in the tool-name position blocks a tool this way: 
 
 [Compaction](https://code.claude.com/docs/en/context-window.md#what-survives-compaction) replaces your message history with a summary. By design, this invalidates the conversation layer: the next request has a new, shorter history that doesn't share a prefix with the old one.
 
-* **System prompt**: the next request reads this layer from the cache, unless a [resumed conversation](#resuming-a-session) kept a system prompt that is now out of date. The first time that conversation is compacted, Claude Code switches it to the current prompt, and the next request rebuilds this layer's cache once.
+* **System prompt**: when the conversation's prompt is current, the next request reads this layer from the cache. If that prompt is out of date, such as after you [resume the conversation](#resuming-a-session), Claude Code switches to the current prompt and the next request rebuilds this layer's cache once.
 * **Project context**: Claude Code reloads this layer from disk. It's cached together with the conversation, so after `/compact` or automatic compaction its cache is rebuilt even if its files are unchanged.
 
 To produce the summary, Claude Code sends a separate request. The request repeats your conversation's system prompt, tools, and the history being summarized. It ends with a summarization instruction. While the cache is warm, that request reads your prefix from the cache. A mid-session `/compact` then costs a fraction of what the context size suggests and spends most of its time generating the summary.
@@ -213,7 +213,7 @@ A new Claude Code version typically updates the system prompt or tool definition
 
 ## Actions that keep the cache
 
-These actions either append to the end of the conversation or don't touch the request at all. Some of them, such as editing CLAUDE.md, keep the cache for the same reason the change doesn't reach the running session until `/clear`, `/compact`, or a restart.
+These actions either append to the end of the conversation or don't touch the request at all.
 
 * [Editing files in your repository](#editing-files-in-your-repository)
 * [Editing CLAUDE.md mid-session](#editing-claude-md-mid-session)
@@ -226,13 +226,13 @@ These actions either append to the end of the conversation or don't touch the re
 
 ### Editing files in your repository
 
-File contents enter context only when Claude reads them, and reads append to the conversation. Editing a file Claude previously read does not retroactively change the earlier read in history. Instead, Claude Code appends a [`<system-reminder>`](https://code.claude.com/docs/en/glossary#system-reminder) noting the file changed, and Claude re-reads it if needed.
+When you edit a source file Claude already read, the cached prefix stays intact, because your edit doesn't change the copy already in the conversation.
 
 ### Editing CLAUDE.md mid-session
 
-Your project-root and user-level CLAUDE.md files are read once at session start and held in memory. Editing them mid-session does not invalidate the cache, but the edit also doesn't apply. Claude keeps working with the version that was loaded at session start. The new content loads on the next `/clear`, `/compact`, or restart.
+When you edit your project-root or user-level CLAUDE.md mid-session, the cached prefix stays intact. Claude Code reads these files at session start and holds them in memory. To reload them, run `/clear` or `/compact`, or restart Claude Code.
 
-[Nested CLAUDE.md files in subdirectories](https://code.claude.com/docs/en/memory.md) and [rules with `paths:` frontmatter](https://code.claude.com/docs/en/memory#path-specific-rules) load later, on demand. Editing one yourself before it loads does take effect. After it loads, the content is part of the conversation history, so a mid-session edit doesn't retroactively change it.
+[Nested CLAUDE.md files in subdirectories](https://code.claude.com/docs/en/memory.md) and [rules with `paths:` frontmatter](https://code.claude.com/docs/en/memory#path-specific-rules) load later, on demand. Editing one yourself before it loads takes effect. After it loads, the content is part of the conversation history, so a mid-session edit doesn't retroactively change it.
 
 ### Changing permission mode
 
@@ -256,7 +256,7 @@ Before v2.1.251, a mid-session style switch kept the cache but didn't apply unti
 
 [`/rewind`](https://code.claude.com/docs/en/checkpointing) truncates your conversation back to an earlier turn. The remaining history is the same content the cache was built from at that point, and the system prompt and project context layers are unchanged, so the next request hits the earlier cache entry. Every turn since then has read through that prefix, which kept the entry warm even if the original turn was longer ago than the TTL.
 
-Restoring file checkpoints alongside the conversation has no separate effect on the cache. File contents enter context only when Claude reads them, the same as [editing files in your repository](#editing-files-in-your-repository).
+Restoring file checkpoints alongside the conversation has no separate effect on the cache.
 
 ## Resuming a session
 

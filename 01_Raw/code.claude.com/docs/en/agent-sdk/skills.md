@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/skills
-fetched_at: 2026-11-02T07:00:25.547759+00:00
+fetched_at: 2026-11-23T08:28:12.258078+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,7 +35,7 @@ Unlike subagents, which you can define in the [`agents` option](https://code.cla
 
 ## Use skills with the Agent SDK
 
-Set the `skills` option on `query()` to control which skills Claude can invoke in the session. When omitted, discovered skills are enabled and the Skill tool is available, matching CLI behavior. Pass `"all"` to let Claude invoke every discovered skill, a list of skill names to allow only those, or `[]` to let Claude invoke none.
+Set the `skills` option on `query()` to control which skills Claude can invoke in the main conversation. When omitted, discovered skills are enabled and the Skill tool is available, matching CLI behavior. Pass `"all"` to let Claude invoke every discovered skill, a list of skill names to allow only those, or `[]` to let Claude invoke none.
 
 For example, to let Claude invoke only two named skills:
 
@@ -49,7 +49,7 @@ const options = { skills: ["pdf", "docx"] };
 
 ### Set up skills in a session
 
-When you set `skills`, the SDK adds the Skill tool to `allowedTools` automatically. If you also pass an explicit `tools` list, include `"Skill"` in that list so Claude can invoke skills.
+When you set `skills`, the SDK adds the skills you enable to `allowedTools` automatically. If you also pass an explicit `tools` list, include `"Skill"` in that list so Claude can invoke skills.
 
 Once configured, Claude automatically discovers skills from the filesystem and invokes them when relevant to the user's request.
 
@@ -111,7 +111,7 @@ To let Claude invoke only specific skills, pass their names in the `skills` list
 
 The list takes exact skill names only. If an entry can't work as an exact name, `query()` rejects the list before the session starts. See [Invalid skill name error](#invalid-skill-name-error) for the name rules and the error each SDK raises.
 
-The model doesn't see unlisted skills and the Skill tool rejects them, while their files remain on disk and stay reachable through Read and Bash. Restricting the list doesn't restrict [dispatch by name](#dispatch-commands-by-name).
+The model doesn't see unlisted skills and the Skill tool rejects them, while their files remain on disk and stay reachable through Read and Bash. Restricting the list doesn't restrict subagents or [dispatch by name](#dispatch-commands-by-name).
 
 To let Claude invoke every discovered skill, pass `skills: "all"` rather than a wildcard.
 
@@ -175,7 +175,10 @@ A `/<name>` that matches a built-in Claude Code command that isn't available in 
 
 > [!NOTE]
 >
-> A command can hit the `maxTurns` / `max_turns` limit like any other prompt, ending the query with an error result instead of `success`. For the error-result contract, see [Handle the result](https://code.claude.com/docs/en/agent-sdk/agent-loop.md#handle-the-result). If your command might hit the limit, wrap the loop in a `try`/`catch` in TypeScript or `try`/`except` in Python, as shown in [Single Message Input](https://code.claude.com/docs/en/agent-sdk/streaming-vs-single-mode.md#single-message-input), or set `maxTurns` high enough for the work to complete.
+> When a command reaches the `maxTurns` / `max_turns` limit, the query ends with an error result instead of `success`. For the error-result contract, see [Handle the result](https://code.claude.com/docs/en/agent-sdk/agent-loop.md#handle-the-result). If your command might hit the limit, do one of these:
+>
+> * Set `maxTurns` high enough for the work to complete.
+> * Wrap the `query()` loop in `try`/`catch` in TypeScript or `try`/`except` in Python.
 
 ### Compact history with `/compact`
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/hooks
-fetched_at: 2026-11-16T07:30:44.013660+00:00
+fetched_at: 2026-11-23T08:28:12.132903+00:00
 fetch_method: mintlify_md
 ---
 
@@ -71,7 +71,7 @@ async def protect_env_files(input_data, tool_use_id, context):
             }
         }
 
-    # Return empty object to allow the operation
+    # Empty object: no decision, normal permissions apply
     return {}
 
 
@@ -119,7 +119,7 @@ const protectEnvFiles: HookCallback = async (input, toolUseID, { signal }) => {
     };
   }
 
-  // Return empty object to allow the operation
+  // Empty object: no decision, normal permissions apply
   return {};
 };
 
@@ -140,7 +140,7 @@ for await (const message of query({
 }
 ```
 
-The hook denies a Write or Edit call whose `file_path` ends in `/.env`, in any letter case. On Windows, `file_path` uses backslashes, such as `C:\project\.env`, and this hook allows a Write or Edit call to `C:\project\.env`.
+The hook denies a Write or Edit call whose `file_path` ends in `/.env`, in any letter case. On Windows, `file_path` uses backslashes, such as `C:\project\.env`, and this hook doesn't block a Write or Edit call to `C:\project\.env`.
 
 > [!WARNING]
 >
@@ -158,7 +158,7 @@ The SDK provides hooks for different stages of agent execution. Some hooks are a
 | `PostToolBatch` | No | Yes | A full batch of tool calls resolves, once per batch before the next model call | Inject conventions once for the whole batch |
 | [`UserPromptSubmit`](https://code.claude.com/docs/en/hooks#userpromptsubmit) | Yes | Yes | A prompt is submitted, including a turn Claude Code starts on its own | Inject additional context into prompts |
 | [`UserPromptExpansion`](https://code.claude.com/docs/en/hooks#userpromptexpansion) | No | Yes | A user-typed command, or an MCP prompt, expands into a prompt before it reaches Claude. Doesn't fire when Claude invokes a skill itself | Block a command from direct invocation or add context when a skill is typed |
-| `MessageDisplay` | No | Yes | An assistant message with text completes, once per message with the full message text | Redact or reformat the displayed text without changing the transcript |
+| `MessageDisplay` | No | Yes | An assistant message with text completes, once per message with the full message text | Reformat the displayed text without changing the transcript |
 | `Stop` | Yes | Yes | Agent execution stop | Save session state before exit |
 | `StopFailure` | No | Yes | The turn ends with an API error instead of a normal stop | Log failures or send alerts |
 | `SubagentStart` | Yes | Yes | Subagent initialization | Track parallel task spawning |
@@ -180,7 +180,7 @@ The SDK provides hooks for different stages of agent execution. Some hooks are a
 | `ElicitationResult` | No | Yes | A user responds to an MCP elicitation | Modify or block the response before it returns to the server |
 | `ConfigChange` | No | Yes | Configuration file changes | Reload settings dynamically |
 | `InstructionsLoaded` | No | Yes | A `CLAUDE.md` or rules file is loaded into context | Audit which instruction files load |
-| `WorktreeCreate` | No | Yes | Git worktree created | Track isolated workspaces |
+| `WorktreeCreate` | No | Yes | Claude Code needs a worktree, and the hook creates it instead of git | Create the worktree and return its path in [`hookSpecificOutput.worktreePath`](https://code.claude.com/docs/en/hooks#worktreecreate-output) |
 | `WorktreeRemove` | No | Yes | A worktree created by a `WorktreeCreate` hook is being removed | Clean up workspace resources |
 | `CwdChanged` | No | Yes | The working directory changes during a session | Reload environment variables per directory |
 | `FileChanged` | No | Yes | A watched file is modified, created, or deleted | Reload configuration when project files change |
@@ -256,7 +256,7 @@ Your callback returns an object with two categories of fields:
   * For `PostToolUse` hooks, you can set `additionalContext` to append information to the tool result. To replace the tool's output before Claude sees it, set `updatedToolOutput`, which works for built-in and MCP tools in both SDKs. The older `updatedMCPToolOutput` field replaces MCP tool output only.
   * In the TypeScript SDK, a `PostToolUse` callback can also return `classifierContext`, a short note about the tool call's result for the [auto mode](https://code.claude.com/docs/en/permission-modes.md#eliminate-prompts-with-auto-mode) permission classifier. Because your callback runs in your application's own process, the classifier may weigh a user statement you relay in the note as user intent. The field requires TypeScript Agent SDK v0.3.236 or later. [Annotate a result for the auto mode classifier](https://code.claude.com/docs/en/hooks.md#annotate-a-result-for-the-auto-mode-classifier) covers the length cap, the synchronous-only rule, and what not to put in the note.
 
-Return `{}` to allow the operation without changes. SDK callback hooks use the same JSON output format as [Claude Code shell command hooks](https://code.claude.com/docs/en/hooks.md#json-output), which documents every field and event-specific option. For the SDK type definitions, see the [TypeScript](https://code.claude.com/docs/en/agent-sdk/typescript.md#synchookjsonoutput) and [Python](https://code.claude.com/docs/en/agent-sdk/python.md#synchookjsonoutput) SDK references.
+For `PreToolUse`, return `{}` to make no decision, so the normal [permission flow](https://code.claude.com/docs/en/agent-sdk/permissions.md#how-permissions-are-evaluated) applies. SDK callback hooks use the same JSON output format as [Claude Code shell command hooks](https://code.claude.com/docs/en/hooks.md#json-output), which documents every field and event-specific option. For the SDK type definitions, see the [TypeScript](https://code.claude.com/docs/en/agent-sdk/typescript.md#synchookjsonoutput) and [Python](https://code.claude.com/docs/en/agent-sdk/python.md#synchookjsonoutput) SDK references.
 
 > [!NOTE]
 >
@@ -318,7 +318,7 @@ const options: Options = {
 
 To test it, make the callback raise an error and ask Claude to run a Bash command. The tool result includes `failed; blocking because onFailure is "block"`, and Claude doesn't see your error text.
 
-Return `{}` when the callback has no opinion. With `"block"` set, a path with no `return` blocks the action. A callback that catches its own error and returns `{}` isn't failing, so let the error propagate from a guard.
+Return `{}` when the callback has no opinion. With `"block"` set, a path with no `return` blocks the action. A callback that catches its own error and returns `{}` isn't failing, so let the error propagate from a guard. A `WorktreeCreate` callback must return `hookSpecificOutput.worktreePath`.
 
 #### Events that behave differently
 
@@ -328,7 +328,7 @@ These events don't always block with `"block"` set:
 * **`PermissionRequest`**: the block counts only if it arrives before your `canUseTool` callback answers.
 * **`PostToolUse`**: the tool has already run, so Claude receives the failure as feedback.
 
-A callback that exceeds its timeout follows [Hook timeout](#hook-timeout). With `"block"` set, a timeout also blocks `PreCompact`, `Elicitation`, and `WorktreeCreate`.
+A callback that exceeds its timeout follows [Hook timeout](#hook-timeout). With `"block"` set, a timeout also blocks `PreCompact` and `Elicitation`.
 
 #### Startup errors for `onFailure`
 
@@ -556,7 +556,7 @@ const options = {
 
 ### Track subagent activity
 
-Use `SubagentStop` hooks to monitor when subagents finish their work. See the full input type in the [TypeScript](https://code.claude.com/docs/en/agent-sdk/typescript.md#hookinput) and [Python](https://code.claude.com/docs/en/agent-sdk/python.md#hookinput) SDK references. This example logs a summary each time a subagent completes:
+Use `SubagentStop` hooks to monitor when subagents finish their work. See the full input type in the [TypeScript](https://code.claude.com/docs/en/agent-sdk/typescript.md#hookinput) and [Python](https://code.claude.com/docs/en/agent-sdk/python.md#hookinput) SDK references. This example logs a summary when a subagent completes:
 
 ```python Python theme={null}
 async def subagent_tracker(input_data, tool_use_id, context):
@@ -833,7 +833,8 @@ When a callback exceeds its timeout, Claude Code cancels it and discards its out
 * `Stop` and `SubagentStop`: the timed-out callback counts as returning no decision. The agent or subagent stops as if that callback had allowed it, and a decision from your other hooks on the event still applies. Before Claude Code v2.1.273, a timed-out `Stop` or `SubagentStop` callback counted as a failed hook run, and Claude Code discarded the decisions of your other hooks on the event.
 * `SessionStart`: the timed-out callback counts as returning no output, and the session continues with the output of your other `SessionStart` hooks.
 * `PreModelSwitch`: Claude Code blocks the model switch. A hook that doesn't answer hasn't approved the switch.
-* Other events, such as `Notification`, `PreCompact`, and `PostModelSwitch`: Claude Code logs the failure and continues. With [`onFailure: "block"`](#block-the-action-when-a-callback-fails), a timeout on `PreCompact`, `Elicitation`, or `WorktreeCreate` blocks the action.
+* `WorktreeCreate`: worktree creation fails with an error.
+* Other events, such as `Notification`, `PreCompact`, and `PostModelSwitch`: Claude Code logs the failure and continues. With [`onFailure: "block"`](#block-the-action-when-a-callback-fails), a timeout on `PreCompact` or `Elicitation` blocks the action.
 
 The first time a `Stop` or `SessionStart` callback times out in the main session, Claude Code also adds an [`SDKInformationalMessage`](https://code.claude.com/docs/en/agent-sdk/typescript#sdkinformationalmessage) to the message stream saying the app driving the session didn't respond. Later timeouts don't repeat that message while your app stays unresponsive.
 
@@ -846,6 +847,7 @@ If your callback needs more time, set a higher `timeout` on its `HookMatcher`. I
 * Check all `PreToolUse` hooks for `permissionDecision: 'deny'` returns
 * Add logging to your hooks to see what `permissionDecisionReason` they're returning
 * Verify matcher patterns aren't too broad: an empty matcher matches all tools
+* If the tool result says a hook `returned updatedInput that failed schema validation` or `returned updatedInput that the tool refused`, fix that hook's `updatedInput`. Include the unchanged `tool_input` fields, as in [Modify tool input](#modify-tool-input), because `updatedInput` replaces the whole input.
 
 ### Modified input not applied
 

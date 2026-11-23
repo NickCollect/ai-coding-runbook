@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/managed-settings
-fetched_at: 2026-11-16T07:30:45.051968+00:00
+fetched_at: 2026-11-23T08:28:13.073640+00:00
 fetch_method: mintlify_md
 ---
 
@@ -57,6 +57,7 @@ The file in the steps above is one of four ways to get managed settings onto a m
 
 * **Delivery controls**: [`policyHelper`](https://code.claude.com/docs/en/settings-reference#policyhelper), [`wslInheritsWindowsSettings`](https://code.claude.com/docs/en/settings-reference#wslinheritswindowssettings), and [`managedSourcesBehavior`](https://code.claude.com/docs/en/settings-reference#managedsourcesbehavior)
 * **Gateway login keys**: [`forceLoginGatewayUrl`](https://code.claude.com/docs/en/settings-reference#forcelogingatewayurl), [`gatewayInternalNetworks`](https://code.claude.com/docs/en/settings-reference#gatewayinternalnetworks), and the `"gateway"` value of [`forceLoginMethod`](https://code.claude.com/docs/en/settings-reference#forceloginmethod)
+* **Sign-in requirement**: [`enforceAnthropicSignIn`](https://code.claude.com/docs/en/settings-reference#enforceanthropicsignin)
 
 With a managed settings file or an MDM profile, everyone it reaches gets one policy. To give one group of developers a different policy, deploy a different file or profile to that group. On an Enterprise plan, you can also [give each group its own configuration](https://code.claude.com/docs/en/server-managed-settings.md#give-groups-different-settings) in server-managed settings. A self-hosted [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway) delivers managed settings per IdP group.
 
@@ -128,6 +129,8 @@ When two files set the same key, Claude Code combines them by these rules:
 
 ## How Claude Code combines managed sources
 
+If you set your provider or gateway at claude.ai under **Organization settings > Desktop 3P**, first read [which settings take priority](https://claude.com/docs/third-party/claude-desktop/admin-console-claude-code#which-settings-take-priority) in the Enterprise Admin Console guide.
+
 When your organization delivers more than one managed source to the same machine, the [`managedSourcesBehavior`](https://code.claude.com/docs/en/settings-reference#managedsourcesbehavior) key decides what Claude Code does with the others:
 
 * **`"first-wins"`, the default**: Claude Code uses the highest-ranked source that delivers at least one policy key and ignores the rest rather than merging them, apart from the keys in [Keys read from every admin source](#keys-read-from-every-admin-source). Claude Code shows no warning for the sources it skips; `/status` [names the source it used and the ones it skipped](#read-the-source-in-/status).
@@ -140,7 +143,13 @@ Both settings rank the sources the same way. These terms recur in this section:
 
 Claude Code checks the sources in this order, highest priority first:
 
-1. Remote settings, delivered from claude.ai as [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md) or by a [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway). Claude Code fetches this source only when the session authenticates to Anthropic's API directly with an [eligible credential](https://code.claude.com/docs/en/server-managed-settings.md#platform-availability), signs in to a gateway with `/login`, or runs in Claude Desktop's Code tab behind a gateway that [serves that session settings](https://code.claude.com/docs/en/claude-apps-gateway-config.md#apply-code-settings-in-the-code-tab). On other providers, or when `ANTHROPIC_BASE_URL` points somewhere other than Anthropic's API, it starts at the next source
+1. Remote settings, delivered from claude.ai as [server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md) or by a [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway). Claude Code fetches this source only when the session meets one of these conditions:
+
+   * It has an [eligible credential](https://code.claude.com/docs/en/server-managed-settings.md#platform-availability)
+   * It signs in to a gateway with `/login`
+   * It runs in Claude Desktop's Code tab behind a gateway that [serves that session settings](https://code.claude.com/docs/en/claude-apps-gateway-config.md#apply-code-settings-in-the-code-tab)
+
+   If you set a provider or `ANTHROPIC_BASE_URL`, [check the fetch outcome on a machine](https://code.claude.com/docs/en/server-managed-settings.md#verify-settings-delivery) to see whether Claude Code skips this source
 2. MDM or OS-level policies: the macOS plist or the HKLM registry key
 3. Managed settings files, `managed-settings.d/*.json` and `managed-settings.json` merged together
 4. The HKCU registry, on Windows, and on WSL once the HKLM registry or the Windows managed settings file turns [`wslInheritsWindowsSettings`](https://code.claude.com/docs/en/settings-reference#wslinheritswindowssettings) on and the HKCU value also sets it. Claude Code reads it only when [no admin document is present above it](#present-admin-documents) and no [host-supplied parent settings](#let-an-embedding-host-add-policy) supply a restrictive key
@@ -227,7 +236,7 @@ To confirm which sources combined on a machine, [read the `Setting sources` line
 
 A [`policyHelper`](https://code.claude.com/docs/en/settings-reference#policyhelper) is an executable your MDM policy or managed settings file names, and Claude Code runs it to compute managed settings at startup. When the selected source configures one and the helper emits a `managedSettings` object, that output changes what Claude Code reads:
 
-* **The emitted `managedSettings` object is the only managed settings for the session**, including for the [keys it otherwise reads from every admin source](#keys-read-from-every-admin-source), apart from [`forceRemoteSettingsRefresh`, which has its own startup rule](https://code.claude.com/docs/en/settings-reference#forceremotesettingsrefresh)
+* **The emitted `managedSettings` object is the only managed settings for the session**, including for [keys otherwise read from every admin source](#keys-read-from-every-admin-source), apart from [a few keys](https://code.claude.com/docs/en/settings-reference.md#write-the-helper-output)
 
 For which helper runs fail, and what Claude Code does when one does, see [Helper failures](https://code.claude.com/docs/en/settings-reference.md#helper-failures).
 
@@ -282,6 +291,7 @@ A developer's own settings files, `--settings` values, and project files never o
 * **Local admin rights**: a developer who is an administrator on the machine can edit the managed source itself, which is why MDM tooling can redeploy the profile or file on a schedule and why the HKLM registry and the macOS managed preferences domain exist.
 * **The server-managed cache**: server-managed settings come from Anthropic's servers, and an edit to the local cache [lasts only until the next successful fetch](https://code.claude.com/docs/en/server-managed-settings.md#security-considerations).
 * **Other tools**: managed settings bind Claude Code only. A developer who calls the API from another tool isn't under them.
+* **Allow rules and allowlists**: a developer can [add entries](https://code.claude.com/docs/en/settings.md#lists-merge-instead-of-overriding) to lists such as `permissions.allow` and `allowedMcpServers`, so deploy the list's [`allowManaged*Only` key](#managed-only-settings) where it has one. With [`allowManagedPermissionRulesOnly`](https://code.claude.com/docs/en/settings-reference#allowmanagedpermissionrulesonly), move the deny and ask rules you rely on into managed settings too.
 
 ## Check that a policy is in force
 

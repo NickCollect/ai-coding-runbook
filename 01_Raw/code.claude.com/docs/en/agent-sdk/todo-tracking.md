@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/todo-tracking
-fetched_at: 2026-10-26T05:39:59.315058+00:00
+fetched_at: 2026-11-23T08:28:12.297540+00:00
 fetch_method: mintlify_md
 ---
 
@@ -377,5 +377,5 @@ asyncio.run(main())
 
 * [Agent SDK reference - TypeScript](https://code.claude.com/docs/en/agent-sdk/typescript.md): the options, types, and tool schemas for the TypeScript SDK, including the Task tool input and output types
 * [Agent SDK reference - Python](https://code.claude.com/docs/en/agent-sdk/python.md): the options, types, and tool documentation for the Python SDK
-* [Streaming Input](https://code.claude.com/docs/en/agent-sdk/streaming-vs-single-mode.md): the two input modes, and when to use streaming input instead of the single-shot calls these examples use
+* [Send messages to a running agent](https://code.claude.com/docs/en/agent-sdk/streaming-vs-single-mode.md): use streaming input in place of the single-shot calls these examples use
 * [Give Claude custom tools](https://code.claude.com/docs/en/agent-sdk/custom-tools.md): define your own tools with the SDK's in-process MCP server

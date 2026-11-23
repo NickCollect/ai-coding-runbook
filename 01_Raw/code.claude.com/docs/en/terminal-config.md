@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/terminal-config
-fetched_at: 2026-11-16T07:30:45.649149+00:00
+fetched_at: 2026-11-23T08:28:13.675546+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,10 +32,10 @@ In most terminals you can also press Shift+Enter, but support varies by terminal
 
 | Terminal | Shift+Enter for newline |
 | :- | :- |
-| Ghostty, Kitty, iTerm2, WezTerm, Warp, Windows Terminal | Works without setup |
+| Ghostty, Kitty, iTerm2, WezTerm, Warp, Windows Terminal 1.25 or later | Works without setup |
 | Other terminals that support the kitty keyboard protocol, such as foot and Alacritty 0.16 or later | Works without setup. Requires Claude Code v2.1.269 or later |
 | VS Code, Cursor, Devin Desktop, Alacritty before 0.16, Zed | Run `/terminal-setup` once |
-| gnome-terminal, JetBrains IDEs such as PyCharm and Android Studio | Not available; use Ctrl+J or `\` then Enter |
+| gnome-terminal, Windows Terminal before 1.25, JetBrains IDEs such as PyCharm and Android Studio | Not available; use Ctrl+J or `\` then Enter |
 
 For VS Code, Cursor, Devin Desktop, Alacritty before 0.16, and Zed, `/terminal-setup` writes a Shift+Enter keybinding into the terminal's configuration file. On the first run you see a confirmation such as `Installed VSCode terminal Shift+Enter key binding`. Existing bindings are left in place; if you see a message such as `VSCode terminal Shift+Enter key binding already configured`, no change was made. Run `/terminal-setup` directly in the host terminal rather than inside tmux or screen, since it needs to write to the host terminal's configuration.
 
@@ -45,6 +45,7 @@ In Zed, `/terminal-setup` updates your `keymap.json` in place:
 
 * If the keymap already has bindings and none of them is a Terminal `shift-enter`, Claude Code first backs it up to a copy in the same directory, such as `keymap.json.1a2b3c4d.bak`, then merges the Shift+Enter binding into your keymap, keeping your other keybindings and comments
 * If Claude Code can't read or parse the keymap, can't back it up, or can't verify the merged result, it [leaves the file unchanged and prints the keybinding block to add yourself](https://code.claude.com/docs/en/errors.md#terminal-setup-left-your-zed-keymap-unchanged)
+* If the keymap is a symlink, [add the keybinding yourself](https://code.claude.com/docs/en/errors.md#terminal-setup-left-your-zed-keymap-unchanged)
 
 If you are running inside tmux, Shift+Enter also requires the [tmux configuration below](#configure-tmux) even when the outer terminal supports it.
 
@@ -58,7 +59,7 @@ Some Claude Code shortcuts use the Option key, such as Option+Enter for a newlin
 >
 > Open Settings → Profiles → Keyboard and check "Use Option as Meta Key".
 >
-> If you accepted Claude Code's first-run terminal setup prompt, this is already done. That prompt runs `/terminal-setup` for you, which enables Option as Meta and turns off the audible bell in your Apple Terminal profile.
+> `/terminal-setup` and the first-run terminal setup prompt enable this setting only on macOS 26 and earlier. Both also turn off your profile's audible bell.
 >
 > In [screen reader mode](https://code.claude.com/docs/en/accessibility.md), `/terminal-setup` leaves the bell setting unchanged so the terminal bell stays audible. If an earlier run turned the bell off, turn it back on under Settings → Profiles → Advanced → "Audible bell".
 
@@ -92,7 +93,7 @@ To make Claude Code send the bell character whatever the terminal or profile, se
 }
 ```
 
-Over SSH from a terminal running outside tmux, set [`preferredNotifChannel`](https://code.claude.com/docs/en/settings-reference#preferrednotifchannel) to your local terminal's value, `"iterm2"`, `"kitty"`, or `"ghostty"`, on the machine running Claude Code. The desktop notification then reaches your local machine. Ghostty and Kitty forward it to your OS notification center without further setup. iTerm2 requires you to enable forwarding:
+To receive the desktop notification in Ghostty, Kitty, or iTerm2 over SSH outside tmux, keep `preferredNotifChannel` at its default, `"auto"`. Before v2.1.326, set it to `"iterm2"`, `"kitty"`, or `"ghostty"` on the machine running Claude Code. iTerm2 requires you to enable forwarding:
 
 **1. Open iTerm2 notification settings**
 
@@ -146,7 +147,7 @@ set -s extended-keys on
 set -as terminal-features 'xterm*:extkeys'
 ```
 
-To send notifications from a visible pane to the outer terminal, keep the `allow-passthrough` line and set [`preferredNotifChannel`](https://code.claude.com/docs/en/settings-reference#preferrednotifchannel) to `"iterm2"`, `"kitty"`, or `"ghostty"`. With this sample, a pane in a window you aren't viewing sends none. The `extended-keys` lines let tmux distinguish Shift+Enter from plain Enter so the newline shortcut works.
+To use Shift+Enter, keep the last two lines, then detach from tmux, attach again, and restart Claude Code. To send notifications from a visible pane to Ghostty, Kitty, or iTerm2, keep the `allow-passthrough` line and restart Claude Code. With this sample, a pane in a window you aren't viewing sends none. Before v2.1.326 or inside tmux older than 3.3, which has no `allow-passthrough`, set [`preferredNotifChannel`](https://code.claude.com/docs/en/settings-reference#preferrednotifchannel) to `"iterm2"`, `"kitty"`, or `"ghostty"`.
 
 A [mod's `Image`](https://code.claude.com/docs/en/plugins/mods/reference#elements) needs the `allow-passthrough` and `focus-events` lines, along with the other [requirements for drawing inside tmux](https://code.claude.com/docs/en/plugins/mods/gallery.md#draw-an-image-inside-tmux). After you add the lines, also detach from tmux, attach again, and restart Claude Code.
 
@@ -222,7 +223,7 @@ The reference below covers the tokens you can set in `overrides`. The interactiv
 > | `text` | Default foreground text |
 > | `inverseText` | Text drawn on top of a colored background, such as status badges |
 > | `inactive` | Secondary text such as hints, timestamps, and disabled items |
-> | `subtle` | Faint borders and de-emphasized secondary text |
+> | `subtle` | Faint borders, dividers, and symbols |
 > | `suggestion` | Autocomplete suggestions and selection highlight in pickers |
 > | `permission` | Dialog borders, including permission prompts and pickers |
 > | `remember` | Memory and `CLAUDE.md` indicators |
@@ -342,7 +343,7 @@ If the paste carries [invisible Unicode characters](https://code.claude.com/docs
 
 ### How Claude treats pasted text
 
-When you submit, Claude sees the content behind each `[Pasted text #N]` placeholder marked as text you pasted from somewhere else rather than typed. Claude is told that a paste can contain instructions you didn't write, and to follow instructions inside it only where the message you typed asks it to. In sessions that don't [fetch feature flags](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching), pastes aren't marked.
+When you submit, Claude sees the content behind each `[Pasted text #N]` placeholder marked as text you pasted from somewhere else rather than typed. Pastes can reach Claude unmarked, such as in your [first session after an install](https://code.claude.com/docs/en/env-vars.md#first-session-after-an-install-or-upgrade).
 
 ### Delete and restore a collapsed paste
 

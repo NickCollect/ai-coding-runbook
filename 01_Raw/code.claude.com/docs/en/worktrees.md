@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/worktrees
-fetched_at: 2026-11-16T07:30:45.813662+00:00
+fetched_at: 2026-11-23T08:28:13.758024+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,7 +27,7 @@ Most sessions need only the first two sections: [start Claude in a worktree](#st
 
 ## Start Claude in a worktree
 
-Pass `--worktree` or `-w` with a name to create an isolated worktree and start Claude in it. By default, the worktree is created under `.claude/worktrees/<name>/` at your repository root, on a new branch named `worktree-<name>`:
+Pass `--worktree` or `-w` with a name to create a worktree and start Claude in it. By default, the worktree is created under `.claude/worktrees/<name>/` at your repository root, on a new branch named `worktree-<name>`:
 
 ```bash theme={null}
 claude --worktree feature-auth
@@ -76,6 +76,7 @@ To get the tools back, run `/status` in the session to list the [setting sources
 
 When you exit an interactive worktree session, Claude checks the worktree for work that removal would delete: changed or untracked files, uncommitted work inside checked-out submodules, and new commits. These rules apply to worktrees Claude created with git. For a worktree your [WorktreeCreate hook](https://code.claude.com/docs/en/hooks.md#worktreecreate) created, see [WorktreeRemove](https://code.claude.com/docs/en/hooks.md#worktreeremove) instead.
 
+* **Claude Code finds another session in the worktree**: the worktree and branch stay even if you choose removal. Follow the `Worktree kept at` message
 * **The worktree is clean**: for an unnamed session, Claude removes the worktree and its branch automatically. A [named](https://code.claude.com/docs/en/sessions.md#name-your-sessions) session prompts you first so you can keep the worktree for later
 * **The worktree has work in it**: Claude prompts you to keep or remove the worktree. Keeping preserves the directory and branch. To return later, run the `claude --worktree <name> --resume` command that Claude Code prints on exit. Removing deletes the worktree directory and its branch, along with all the work in them
 * **Another branch is checked out**: if the worktree is on a branch other than its own that has commits past the worktree's starting commit, Claude prompts you to keep or remove the worktree. Either answer keeps that other branch and its commits. Removing deletes the worktree directory and the worktree's own branch, the one Claude created with it
@@ -87,13 +88,14 @@ On Windows, removing a worktree doesn't delete files outside it. If a folder ins
 
 ## Resume a worktree session
 
-When you resume a session that ended inside a worktree without [exiting it](#clean-up-worktrees), Claude Code returns the session to that worktree. This holds for interactive resumes, for `--continue` and `--resume` in [non-interactive mode](https://code.claude.com/docs/en/headless.md) with `-p`, and for the Agent SDK. `--continue` picks the most recent session recorded under the directory you launch from. Back inside the worktree, Claude can leave with the [`ExitWorktree`](https://code.claude.com/docs/en/tools-reference) tool [when the session has that tool](#claude-has-no-enterworktree-tool).
+When you resume a session that ended [isolated](#how-claude-code-enforces-isolation) in its worktree without [exiting it](#clean-up-worktrees), Claude Code returns the session there and keeps it isolated. This holds for interactive resumes, for `--continue` and `--resume` in [non-interactive mode](https://code.claude.com/docs/en/headless.md) with `-p`, and for the Agent SDK. Back inside the worktree, Claude can leave with the [`ExitWorktree`](https://code.claude.com/docs/en/tools-reference) tool [when the session has that tool](#claude-has-no-enterworktree-tool).
 
 Before returning the session to its worktree, Claude Code verifies that the worktree is still a checkout separate from the main one, and declines to re-enter a worktree that fails the check. For a git worktree, the check reads its git metadata. A worktree without git metadata, such as one a [`WorktreeCreate` hook](#non-git-version-control) created, can pass the check; the cases Claude Code still refuses are listed with their recoveries under [Claude Code refuses to use a worktree](#claude-code-refuses-to-use-a-worktree). For the messages and how to recover from each, see [The session resumes outside its worktree](#the-session-resumes-outside-its-worktree).
 
 Where you launch from, and how you resume, change what Claude Code re-enters:
 
 * **Launch directory**: resume with `--resume` from the main checkout or another directory of the repository. Claude Code re-enters a worktree it created with git under `.claude/worktrees/` even when you launch from inside it. When you launch from inside any other worktree, Claude Code re-enters it only if it can vouch for it from there: a worktree that is its own repository, one without git metadata, or a launch from a subdirectory of a worktree you created with `git worktree add` declines, so launch those from the main checkout.
+* **`--continue`**: Claude Code picks the most recent session recorded under the directory you launch from.
 * **`--fork-session`**: the forked session starts in the directory you launched Claude from, and Claude Code leaves the original session's worktree untouched.
 * **Deleted worktree**: if the worktree directory no longer exists, Claude Code resumes the session in the directory you launched Claude from. It tells you the worktree is gone and clears the session's worktree binding.
 
@@ -105,9 +107,9 @@ When Claude enters or exits a worktree that Claude Code created with git, the tr
 
 ## How Claude Code enforces isolation
 
-While a session is isolated in a worktree, Claude Code blocks the tool calls the checks below define. The same rules apply whether you started the session with `--worktree`, Claude entered a worktree with `EnterWorktree`, or you resumed a worktree session.
+While a session is isolated in a worktree, Claude Code blocks the tool calls the checks below define. A session becomes isolated when you start it with `--worktree` but not `--tmux`, or Claude moves it with `EnterWorktree`.
 
-The same enforcement covers every subagent Claude spawns from the isolated session. It applies whether the session is interactive or runs in the [background](https://code.claude.com/docs/en/agent-view.md#how-file-edits-are-isolated). [Subagents that run in their own worktree](#isolate-subagents-with-worktrees) carry the same checks. Their version history is under [Write subagent files](https://code.claude.com/docs/en/sub-agents.md#write-subagent-files).
+The same enforcement covers every subagent Claude spawns from the isolated session. It applies whether the session is interactive or started in the [background](https://code.claude.com/docs/en/agent-view.md#how-file-edits-are-isolated). [Subagents that run in their own worktree](#isolate-subagents-with-worktrees) carry the same checks.
 
 Claude Code applies four checks:
 
@@ -211,8 +213,6 @@ Claude Code reads only the number from the URL. It always fetches from your repo
 * **GitHub Enterprise, self-managed GitLab, or any other host**: tries `pull/<number>/head` first, then `merge-requests/<number>/head`
 
 This fetch never waits for input in your terminal. If git or ssh would ask for a password, a key passphrase, or confirmation of a new SSH host, the fetch fails instead and Claude Code exits with an `Error creating worktree: Failed to fetch PR/MR #<number>` message. A key that `ssh-agent` holds still works, so load your key there and run `git fetch` once by hand to record a new host before you start.
-
-Before v2.1.233, Claude Code accepted only `#<number>` and GitHub-style pull request URLs for `--worktree`, and always fetched `pull/<number>/head`.
 
 ### Copy gitignored files into worktrees
 
@@ -406,7 +406,7 @@ Claude Code leaves the refused directory in place, since it may hold work. Match
 * **Says `the protected checkout <path> has a .git entry that could not be examined` or `has git metadata that could not be resolved`**: the problem is the main checkout's git metadata, not the worktree's. Don't delete the worktree, and ignore the message's trailing advice to recreate it, which doesn't apply to these two endings. Repair the main checkout, for example a permissions problem or a git `dubious ownership` refusal on its `.git`, and retry.
 
   Before v2.1.302, with git 2.56 or later, the `could not be resolved` ending also appeared when the `<path>` after `the protected checkout` held a stray `.git` file. Stray here means the path on that file's `gitdir:` line doesn't lead to a valid git repository. To recover, [update Claude Code](https://code.claude.com/docs/en/setup.md#update-claude-code) and retry. When that `gitdir:` path no longer exists, you can also delete the `.git` file and retry.
-* **Says `its recorded path has a network spelling`**: Claude Code never resumes into a worktree at a network path. Recreate the worktree at a local path.
+* **Says `its recorded path`**: if you can't open a folder on that path, restore your access to it. Otherwise recreate the worktree at a local path. Claude Code doesn't resume into a worktree at a network path.
 * **Any other ending**: the message names the problem and its fix, such as removing a `core.worktree` redirect or recreating the worktree; follow it. Before deleting a directory whose message says its git identity could not be verified, address the named cause first, for example a symbolic link in the worktree's path or git itself failing to run, since the directory may be healthy. When you do recreate, salvage any changes you need from the old directory first; it stays on disk.
 
 ### The session resumes outside its worktree

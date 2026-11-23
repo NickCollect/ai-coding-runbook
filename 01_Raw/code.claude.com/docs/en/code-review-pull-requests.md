@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/code-review-pull-requests
-fetched_at: 2026-10-26T05:40:01.001267+00:00
+fetched_at: 2026-11-23T08:28:12.655143+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ An Owner controls [when reviews run](https://code.claude.com/docs/en/code-review
 
 ## Severity levels
 
-Claude posts each finding as an inline comment on the lines concerned and marks it with one of three severity levels:
+Claude marks each finding with one of three severity levels:
 
 | Marker | Severity | Meaning |
 | :- | :- | :- |
@@ -30,7 +30,7 @@ Claude posts each finding as an inline comment on the lines concerned and marks 
 | 🟡 | Nit | A minor issue, worth fixing but not blocking |
 | 🟣 | Pre-existing | A bug that exists in the codebase but wasn't introduced by this PR |
 
-When the review recorded its reasoning, the finding has a collapsed **Why this was flagged** section. Expand it to read why Claude flagged the issue and how it verified the problem.
+When the review recorded its reasoning, a finding has a collapsed **Why this was flagged** section. Expand it to read why Claude flagged the issue and how it verified the problem.
 
 To change what Claude flags in your repository or how it ranks severity, see [Customize Code Review](https://code.claude.com/docs/en/code-review-customize.md).
 

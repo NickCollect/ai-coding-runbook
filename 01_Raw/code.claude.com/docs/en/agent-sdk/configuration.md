@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/configuration
-fetched_at: 2026-11-02T07:00:25.399917+00:00
+fetched_at: 2026-11-23T08:28:12.097753+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ For every option's type and default, see the [`Options`](https://code.claude.com
 
 ## Pass options to a session
 
-Every `query()` call accepts an options object: `Options` in TypeScript, `ClaudeAgentOptions` in Python. Each field is optional, and a session started with no options runs with the SDK's defaults. The example below configures a read-only session that summarizes a project's open TODOs. Pairs read as TypeScript / Python where the spellings differ:
+Every `query()` call accepts an options object: `Options` in TypeScript, `ClaudeAgentOptions` in Python. Each field is optional, and a session started with no options runs with the SDK's defaults. The example below configures a session that summarizes a project's open TODOs. Pairs read as TypeScript / Python:
 
 * **`model`**: picks the model
 * **`allowedTools` / `allowed_tools`**: pre-approves a read-only tool list
@@ -75,7 +75,7 @@ Point `cwd` at one of your own projects and run the example. The summary of that
 Settings files supply configuration beyond the options object. Two options control how they load:
 
 * **`settingSources` / `setting_sources`**: controls which filesystem sources load: user, project, and local. Settings files and CLAUDE.md files arrive through these sources.
-* **`settings`**: loads a settings file path or an inline JSON string in either language, and TypeScript also accepts a settings object. Whichever form you pass overrides user, project, and local filesystem settings; only managed policy settings rank higher. The references document the full precedence order under [Settings precedence](https://code.claude.com/docs/en/agent-sdk/typescript.md#settings-precedence) for TypeScript and [Settings precedence](https://code.claude.com/docs/en/agent-sdk/python.md#settings-precedence) for Python.
+* **`settings`**: loads a settings file path or an inline JSON string in either language, and TypeScript also accepts a settings object. Permission rules and most other lists you pass [add to](https://code.claude.com/docs/en/settings.md#lists-merge-instead-of-overriding) those in user, project, and local settings files. For most single values, Claude Code takes yours over those files; only managed policy settings rank higher. See the full order for [TypeScript](https://code.claude.com/docs/en/agent-sdk/typescript.md#settings-precedence) and [Python](https://code.claude.com/docs/en/agent-sdk/python.md#settings-precedence).
 
 Pass `[]` to disable user, project, and local settings. For more information, see [Use Claude Code features in the SDK](https://code.claude.com/docs/en/agent-sdk/claude-code-features.md).
 
@@ -146,10 +146,11 @@ To let tools reach files outside the working directory, add paths with `addition
 
 ## Limit turns and spend
 
-Cap turns and spend with `maxTurns` / `max_turns` and `maxBudgetUsd` / `max_budget_usd`. Both caps are off when unset. When a session hits a cap, the run ends with a result message whose subtype names the cap, `error_max_turns` or `error_max_budget_usd`. What happens next differs by input mode:
+Cap turns and spend with `maxTurns` / `max_turns` and `maxBudgetUsd` / `max_budget_usd`. Both caps are off when unset. When a session hits a cap, the run ends with a result message. The result's subtype is `error_max_turns` for the turn cap and `error_max_budget_usd` for the spend cap. Single-shot and streaming input handle a cap result differently:
 
 * **Single-shot `query()`**: the SDK yields the cap result and then raises, so wrap the loop in a try block to continue past the error
-* **Streaming input**: the session stays alive past a cap result, and the max-turns count starts over for each queued message. The budget total accumulates across messages, and once spend reaches the cap, later messages in the same conversation end with the same budget result. A [`/clear`](https://code.claude.com/docs/en/agent-sdk/cost-tracking) starts the budget over
+* **Streaming input**: the session stays alive past a cap result, and the max-turns count starts over for each queued message. The budget total accumulates across messages, and once spend reaches the cap, later messages in the same conversation end with the same budget result. A [`/clear`](https://code.claude.com/docs/en/agent-sdk/cost-tracking) starts the budget over.
+* **Streaming input in TypeScript**: the loop throws when the last response ends in an error result, such as `error_max_turns`. Wrap the loop in a try block to continue past it.
 
 The two caps treat `0` differently:
 

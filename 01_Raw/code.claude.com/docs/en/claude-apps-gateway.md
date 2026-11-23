@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway
-fetched_at: 2026-11-16T07:30:44.348464+00:00
+fetched_at: 2026-11-23T08:28:12.476518+00:00
 fetch_method: mintlify_md
 ---
 
@@ -144,12 +144,12 @@ This config is enough for a working sign-in loop with the default Amazon Bedrock
 
 **4. Run it**
 
-Build a container image around the `claude` binary that meets the [image requirements](https://code.claude.com/docs/en/claude-apps-gateway-deploy.md#container-image), then run it alongside Postgres. The Compose file references the image as `registry.example.com/claude-gateway:2.1.198`; substitute your own registry and image tag:
+Build a container image around the `claude` binary that meets the [image requirements](https://code.claude.com/docs/en/claude-apps-gateway-deploy.md#container-image), then run it alongside Postgres. The Compose file references the image as `registry.example.com/claude-gateway:<version>`; substitute your own registry and image tag:
 
 ```yaml docker-compose.yaml theme={null}
 services:
   gateway:
-    image: registry.example.com/claude-gateway:2.1.198
+    image: registry.example.com/claude-gateway:<version>
     ports: ["8080:8080"]
     volumes: ["./gateway.yaml:/etc/claude/gateway.yaml:ro"]
     environment:
@@ -191,7 +191,7 @@ Watch stderr for the boot sequence. By default, log lines use the format `[gatew
 [gateway] 2026-06-10T17:03:21.512Z info claude gateway listening on http://0.0.0.0:8080
 ```
 
-The gateway also logs a warning that `access_control.allow_cidrs` is empty. That's expected here, because nothing limits which client addresses the gateway serves until you set an allow list. The [`access_control` reference](https://code.claude.com/docs/en/claude-apps-gateway-config#http-tuning) has the recommended ranges.
+The startup banner reminds you each time to keep the gateway on your private network. With this config, the gateway serves any client address. To limit which addresses it serves, set `access_control`; the [`access_control` reference](https://code.claude.com/docs/en/claude-apps-gateway-config#http-tuning) has the recommended ranges.
 
 If boot exits before the `claude gateway listening on` line, the last line of stderr names the problem:
 
@@ -295,7 +295,7 @@ Three keys go in the per-OS [managed settings file](https://code.claude.com/docs
 
 The developer presses Enter to connect. The [first-connect TLS fingerprint prompt](#connect-developers) still appears. Once the file is on a machine, a developer who hasn't completed the gateway sign-in sees one of the messages described under [Administrator policy requires a Cloud gateway sign-in](https://code.claude.com/docs/en/errors.md#administrator-policy-requires-a-cloud-gateway-sign-in). Developers who select a cloud provider through an environment variable such as `CLAUDE_CODE_USE_BEDROCK` don't need the gateway sign-in.
 
-The login picker has no gateway option, and in managed settings `forceLoginMethod` alone, without a URL, leaves the developer at a "Contact your IT administrator" message. The login keys belong in the file you push to machines, not in the gateway's `managed.policies[].cli` block, which only reaches clients that are already connected.
+The terminal's login picker has no gateway option, and in managed settings `forceLoginMethod` alone, without a URL, leaves the developer at a "Contact your IT administrator" message. The login keys belong in the file you push to machines, because the gateway's `managed.policies[].cli` block only reaches clients that are already connected.
 
 #### Set the gateway URL in user settings
 
@@ -526,7 +526,7 @@ The gateway delivers the [`anthropic-beta`](https://platform.claude.com/docs/en/
 
 | Feature | Status | Notes |
 | - | - | - |
-| Inference forwarding (Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, Microsoft Foundry, Anthropic) | Available | With per-upstream model translation and failover. The Amazon Bedrock upstream uses the `bedrock-runtime` endpoint and the AWS default credential chain. The [Amazon Bedrock Mantle upstream](https://code.claude.com/docs/en/claude-apps-gateway-config.md#amazon-bedrock-mantle-endpoint) requires Claude Code v2.1.283 or later on the gateway server, and the [Claude Platform on AWS upstream](https://code.claude.com/docs/en/claude-apps-gateway-config.md#claude-platform-on-aws) requires v2.1.198 or later. |
+| Inference forwarding to Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Anthropic managed), Google Cloud's Agent Platform, Microsoft Foundry, and the Anthropic API | Available | With per-upstream model translation and failover. The Amazon Bedrock upstream uses the `bedrock-runtime` endpoint and the AWS default credential chain. The [Amazon Bedrock Mantle upstream](https://code.claude.com/docs/en/claude-apps-gateway-config.md#amazon-bedrock-mantle-endpoint) requires Claude Code v2.1.283 or later on the gateway server, and the [Claude Platform on AWS upstream](https://code.claude.com/docs/en/claude-apps-gateway-config.md#claude-platform-on-aws) requires v2.1.198 or later. Before you add the [Claude Models on Google Cloud (Anthropic managed) upstream](https://code.claude.com/docs/en/claude-apps-gateway-config.md#claude-models-on-google-cloud-anthropic-managed), upgrade the gateway server to v2.1.307 or later. |
 | 1M token context window | Available | Fable models, Sonnet 5 and later, and Opus 4.7 and later run with the 1M window by default; see [Extended context](https://code.claude.com/docs/en/model-config.md#extended-context). The 1M default for the Fable and Opus models requires Claude Code v2.1.287 or later on the developer machine |
 | Model access and managed settings by IdP group | Available | Model access is enforced server-side; managed settings are delivered per IdP group and applied by the CLI at the [managed settings tier](https://code.claude.com/docs/en/settings.md#settings-precedence) |
 | Claude Desktop | Available with opt-in | Opt a policy in with a [`desktop` key](https://code.claude.com/docs/en/claude-apps-gateway-config#claude-desktop-overlay). Requires Claude Code v2.1.203 or later on the gateway server. |

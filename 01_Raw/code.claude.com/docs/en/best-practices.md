@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/best-practices
-fetched_at: 2026-11-16T07:30:44.289183+00:00
+fetched_at: 2026-11-23T08:28:12.414847+00:00
 fetch_method: mintlify_md
 ---
 
@@ -310,7 +310,7 @@ Take three rules you might have in `CLAUDE.md` today: `Never read .env`, `Always
 * A tool call on one of your MCP servers
 * A [`prompt` or `agent` hook](https://code.claude.com/docs/en/hooks#hook-handler-fields), which lets a model decide
 
-A `prompt` or `agent` hook asks *another model* to decide, so it isn't deterministic either. For real enforcement, use a `command` or `http` hook, and add [`onFailure: "block"`](https://code.claude.com/docs/en/hooks#block-the-action-when-a-hook-fails) if the action should also be stopped when the hook itself crashes or times out. For a hook that scans commits for secrets, say, you'd rather block the commit than let it through unscanned while the scanner is down.
+A `prompt` or `agent` hook asks *another model* to decide, so it isn't deterministic either. For real enforcement, use a `command`, `http`, or `mcp_tool` hook, and add [`onFailure: "block"`](https://code.claude.com/docs/en/hooks#block-the-action-when-a-hook-fails) if the action should also be stopped when the hook itself crashes or times out. For a hook that scans commits for secrets, say, you'd rather block the commit than let it through unscanned while the scanner is down.
 
 Here's the formatter rule as a `PostToolUse` hook. It runs after every `Edit` or `Write`, and whether Claude remembers the rule no longer matters, because Claude isn't the one running it:
 
@@ -405,7 +405,7 @@ Both ends of the permission range have a cost:
 
 When auto mode blocks an action, you get a notification and the action shows up under **Recently blocked** in `/permissions`, where you can [approve the action so Claude may retry](https://code.claude.com/docs/en/auto-mode-config.md#review-denials). After [three blocks in a row](https://code.claude.com/docs/en/permission-modes.md#when-auto-mode-falls-back) (or twenty in total), auto mode pauses and goes back to asking you.
 
-None of this replaces your deterministic controls, because it runs *after* them. Deny and ask rules and `PreToolUse` hooks apply before the classifier sees anything, so a deny rule blocks in auto mode exactly like it does everywhere else. The sandbox still confines the [shell commands it wraps](https://code.claude.com/docs/en/sandboxing.md#what-runs-outside-the-sandbox).
+The sandbox still confines the [shell commands it wraps](https://code.claude.com/docs/en/sandboxing.md#what-runs-outside-the-sandbox).
 
 > [!NOTE]
 >
@@ -431,7 +431,7 @@ The opposite problem is the classifier repeatedly stopping something that's rout
 
 > [!WARNING]
 >
-> Keep `"$defaults"` in every list you set, because without it your entries *replace* that list's built-in rules instead of adding to them. For `environment` and `allow` you'd lose the built-in context and exceptions, and a `soft_deny` list without it drops the built-in blocks on force pushes and production deploys.
+> Keep `"$defaults"` in every list you set, because without it your entries [can replace](https://code.claude.com/docs/en/auto-mode-config.md#override-the-block-and-allow-rules) that list's built-in rules instead of adding to them. You can lose the built-in context in `environment`, the exceptions in `allow`, and the blocks on force pushes and production deploys in `soft_deny`.
 >
 > The `autoMode` block also has to live in `~/.claude/settings.json` rather than the project, because the classifier ignores `autoMode` in project settings.
 
@@ -549,7 +549,7 @@ Once it's going, Claude will carry a long task through on its own. The parts tha
 
 In a script you'll almost always want a few more flags:
 
-* [`--bare`](https://code.claude.com/docs/en/headless#start-faster-with-bare-mode) skips hooks, skills, plugins, MCP servers, and `CLAUDE.md` files, the repo's as well as the machine's, so the run does the same thing wherever it runs. It also never touches your claude.ai login: auth comes from `ANTHROPIC_API_KEY`, an `apiKeyHelper` in the file you pass with `--settings`, or your cloud provider's credentials.
+* [`--bare`](https://code.claude.com/docs/en/headless#start-faster-with-bare-mode) skips your hooks, skills, plugins, MCP servers, and `CLAUDE.md` files from the repo and your home directory. It also doesn't use your claude.ai login: auth comes from `ANTHROPIC_API_KEY`, an `apiKeyHelper` in the file you pass with `--settings`, or your cloud provider's credentials.
 * `--append-system-prompt`, `--mcp-config`, and `--settings` explicitly pass in what the run *does* need. Hooks you pass with `--settings` [don't run under `--bare`](https://code.claude.com/docs/en/headless#start-faster-with-bare-mode), so don't use `--bare` for a run that needs them.
 * `--allowedTools` pre-approves its tools, and [`--permission-mode dontAsk`](https://code.claude.com/docs/en/permission-modes#allow-only-pre-approved-tools-with-dontask-mode) refuses anything else that would have prompted.
 * `--output-format json` gives you a single result object to parse, and `stream-json` with `--verbose` streams events as they happen.

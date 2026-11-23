@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway-deploy
-fetched_at: 2026-11-16T07:30:44.371243+00:00
+fetched_at: 2026-11-23T08:28:12.492003+00:00
 fetch_method: mintlify_md
 ---
 
@@ -68,7 +68,7 @@ A few decisions shape the deployment beyond where it runs:
 
 Every production topology here puts an L7 proxy, such as an Ingress, Cloud Run's front end, or an ALB, in front of plain-HTTP replicas. Set [`listen.trusted_proxies`](https://code.claude.com/docs/en/claude-apps-gateway-config#listen) to the proxy's source ranges so the gateway reads client IPs from `X-Forwarded-For`. The gateway honors the header only when the TCP peer is trusted. The [Google Cloud](https://code.claude.com/docs/en/claude-apps-gateway-on-gcp.md) and [AWS](https://code.claude.com/docs/en/claude-apps-gateway-on-aws.md) worked examples have concrete values per topology. Without trusted proxies, every request appears to come from the proxy's IP, which collapses per-IP rate limits into one shared bucket and records the proxy's IP in audit events.
 
-Don't redirect requests to the gateway's device-authorization and token endpoints, for example with an HTTP-to-HTTPS or host-canonicalization rewrite at the ingress. Claude Code doesn't follow redirects on those requests, so an ingress rule that redirects them breaks sign-in and token refresh.
+Don't redirect requests bound for the gateway's device-authorization and token endpoints, for example with an HTTP-to-HTTPS or host-canonicalization rewrite at the ingress. Claude Code doesn't follow redirects on those requests, so an ingress rule that redirects them breaks sign-in and token refresh.
 
 Give the proxy any idle timeout longer than the gateway's keepalive interval, which depends on the upstream:
 
@@ -191,6 +191,8 @@ Each operational log line is then one object with `severity`, `time`, and `messa
 
 `severity` is the log level in capitals, with `warn` written as `WARNING`. A failed start is an `ERROR` line.
 
+On every start, the gateway also writes one `WARNING` line reminding you to keep it off the public internet, whatever your network setup. To hide it, set `CLAUDE_GATEWAY_LOG_LEVEL=error` in the gateway's environment; your collector then gets only the operational log's `ERROR` lines.
+
 Audit events, which also go to stderr, don't change. They carry `ts` and `evt`, and no `severity`.
 
 ### Health
@@ -235,7 +237,7 @@ On top of that time, allow for any [wait for a free slot](#concurrent-upstream-r
 
 ### Retry an unanswered request sooner with the first-byte deadline
 
-To make Claude Code retry an unanswered streaming request sooner, give it a first-byte deadline by setting [`CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS`](https://code.claude.com/docs/en/env-vars) on your developers' machines. The deadline limits how long the first attempt waits for response headers. Without it, that attempt can wait 5 to 6 minutes. Requires Claude Code v2.1.307 or later on the developer's machine.
+To make Claude Code retry an unanswered streaming request sooner, give it a first-byte deadline by setting [`CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS`](https://code.claude.com/docs/en/env-vars) on your developers' machines. The deadline limits how long the first attempt waits for response headers. Without it, that attempt can wait 5 to 6 minutes by default. Requires Claude Code v2.1.307 or later on the developer's machine.
 
 Set the variable to a positive whole number of milliseconds, in a [gateway policy's `env` block](#deliver-the-value-in-a-policy) or a developer's shell. Keep the value above your gateway's longest [time to first byte](#keep-api_timeout_ms-above-the-gateways-time-to-first-byte), or Claude Code can abort and re-send healthy requests whose headers take longer. This example sets 60 seconds in a developer's shell:
 
@@ -243,7 +245,7 @@ Set the variable to a positive whole number of milliseconds, in a [gateway polic
 export CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS=60000
 ```
 
-An unanswered re-send can wait 5 to 6 minutes, until the [body idle timeout](https://code.claude.com/docs/en/network-config.md#streaming-idle-watchdogs) ends it and Claude Code retries it within the [retry budget](https://code.claude.com/docs/en/errors.md#tune-retry-behavior). If you lowered `API_TIMEOUT_MS` only to retry sooner, remove that value, or one unanswered re-send can end the turn with [No response from API](https://code.claude.com/docs/en/errors.md#no-response-from-api).
+By default, an unanswered re-send can wait until the [body idle timeout](https://code.claude.com/docs/en/network-config.md#streaming-idle-watchdogs) ends it and Claude Code retries it within the [retry budget](https://code.claude.com/docs/en/errors.md#tune-retry-behavior). Keep `API_TIMEOUT_MS` well above the body idle timeout, or one unanswered re-send can end the turn with [No response from API](https://code.claude.com/docs/en/errors.md#no-response-from-api).
 
 To confirm the deadline fired, have a developer start Claude Code with [debug logging](https://code.claude.com/docs/en/network-config.md#verify-your-configuration), then search the log for `[first-byte] no response headers`.
 
@@ -517,7 +519,7 @@ Pick a `CLAUDE_STREAM_IDLE_TIMEOUT_MS` value whose second column covers your lon
 | `900000` | About 22.5 minutes |
 | `1800000` | About 37.5 minutes |
 
-If an upstream hangs while the gateway keeps sending pings, your developers also wait that long before Claude Code gives up on the stream. A connection that goes fully silent still ends after 5 to 6 minutes, because the [body idle timeout](https://code.claude.com/docs/en/network-config.md#streaming-idle-watchdogs) doesn't follow this variable.
+If an upstream hangs while the gateway keeps sending pings, your developers also wait that long before Claude Code gives up on the stream.
 
 #### Deliver the value in a policy
 

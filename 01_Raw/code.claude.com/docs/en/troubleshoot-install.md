@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/troubleshoot-install
-fetched_at: 2026-11-16T07:30:45.833101+00:00
+fetched_at: 2026-11-23T08:28:13.705570+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,7 +62,7 @@ Match the error message or symptom you're seeing to a fix:
 | On Windows, the install command prints script text and nothing installs | [Run the complete install command](#wrong-install-command-on-windows) |
 | `App unavailable in region` | Claude Code is not available in your country. See [supported countries](https://www.anthropic.com/supported-countries). |
 | `unable to get local issuer certificate` | [Configure corporate CA certificates](#tls-or-ssl-connection-errors) |
-| `OAuth error` or `403 Forbidden` | [Fix authentication](#login-and-authentication) |
+| `OAuth error`, `That doesn't look like the full code`, or `403 Forbidden` | [Fix authentication](#login-and-authentication) |
 | `Claude Code access has not been granted for this account` | [Get a role that includes Claude Code](#claude-code-access-has-not-been-granted-for-this-account) |
 | `Unable to connect to Anthropic services` during setup | See [Unable to connect to Anthropic services](https://code.claude.com/docs/en/errors.md#unable-to-connect-to-anthropic-services) in the Error reference |
 | `Could not load the default credentials` or `Could not load credentials from any providers` | [Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry credentials](#bedrock-agent-platform-or-foundry-credentials-not-loading) |
@@ -280,7 +280,7 @@ Multiple Claude Code installations can cause version mismatches or unexpected be
 > ls -la ~/.local/bin/claude
 > ```
 >
-> A native install shows a symlink into `~/.local/share/claude/versions/`. A script or a symlink you created yourself at this path is a custom launcher, which [auto-update leaves in place](https://code.claude.com/docs/en/setup.md#auto-updates).
+> A native install shows a symlink into `~/.local/share/claude/versions/`. If you put your own launcher at this path, see [Custom launchers](https://code.claude.com/docs/en/setup.md#custom-launchers).
 >
 > If either `ls` command prints `No such file or directory`, that's not an error. It means nothing is installed at that location, so move on to the next check.
 >
@@ -630,7 +630,7 @@ The connection to the download server closed while `claude install` or `claude u
 The connection dropped while downloading the update (attempt 3/3: aborted). Check your network — proxies sometimes cut off large downloads.
 ```
 
-The text in parentheses names which attempt failed and the underlying network error. `claude update` precedes the message with `Error: Failed to install native update` on stderr.
+The text in parentheses names which attempt failed and the underlying network error. `claude update` precedes the message with `Failed to install native update`.
 
 A download that stays connected but doesn't finish within 10 minutes fails with `Download timed out: exceeded the total deadline` instead. Claude Code doesn't retry a timed-out download, because a connection too slow to finish inside the deadline won't finish on an immediate retry either. The steps below apply to both messages.
 
@@ -653,7 +653,7 @@ Release verification failed for Claude Code <version> (<reason>). The update was
 
 Take the step that matches the value in parentheses in your message:
 
-* **A value that starts with `sidecar_fetch_`**: run the same command again from your shell. `claude update` succeeded if it prints a line that starts with `Successfully updated from`, and `claude install` succeeded if it prints `Claude Code successfully installed!`.
+* **A value that starts with `sidecar_fetch_`**: run the same command again from your shell. `claude update` succeeded if it prints a line that ends with `to version <new version>`, and `claude install` succeeded if it prints `Claude Code successfully installed!`.
 * **Any other value**: try the same command again later
 
 With any value, if the message repeats, [report the problem](#still-stuck) and include the full message.
@@ -817,11 +817,9 @@ For any other fatal signal, and for exit code 137 on macOS, the script prints `I
 
 ### Install hangs in Docker
 
-When installing Claude Code in a Docker container, installing as root into `/` can cause hangs.
-
 **Solutions:**
 
-1. **Set a working directory** before running the installer. When run from `/`, the installer scans the entire filesystem, which causes excessive memory usage. Setting `WORKDIR` limits the scan to a small directory:
+1. **Set a working directory** before running the installer:
    ```dockerfile theme={null}
    WORKDIR /tmp
    RUN curl -fsSL https://claude.ai/install.sh | bash
@@ -1152,7 +1150,9 @@ When login fails and the cause isn't clear, a clean re-authentication resolves m
 
 If the browser doesn't open automatically during login, press `c` to copy the OAuth URL to your clipboard, then paste it into a browser manually. This also works when the URL wraps across lines in a narrow or SSH terminal and can't be clicked directly.
 
-### OAuth error: Invalid code
+### That doesn't look like the full code
+
+If you see `That doesn't look like the full code`, copy the whole login code from the browser, including the `#` in the middle, and paste it again.
 
 If you see `OAuth error: Invalid code. Please make sure the full code was copied`, the login code expired or was truncated during copy-paste.
 

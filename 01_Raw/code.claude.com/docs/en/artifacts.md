@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/artifacts
-fetched_at: 2026-11-16T07:30:44.256269+00:00
+fetched_at: 2026-11-23T08:28:12.374348+00:00
 fetch_method: mintlify_md
 ---
 
@@ -70,7 +70,7 @@ A new artifact that Claude publishes in response to a prompt you type goes throu
 | :- | :- |
 | The session is in [plan mode](https://code.claude.com/docs/en/permission-modes.md#analyze-before-you-edit-with-plan-mode) | Asks before the first publish of each artifact |
 | The publish declares runtime capabilities for the page, such as [connector calls](#pull-live-data-with-mcp-connectors) or [file downloads](#offer-a-file-download) | Asks before that publish |
-| You shared the artifact publicly | Asks once per conversation before changing it, and before each reply to a comment on it |
+| You shared the artifact publicly | Asks at least once per conversation before changing it, and before each reply to a comment on it |
 | Claude publishes in a turn that a [session-scoped scheduled task](https://code.claude.com/docs/en/scheduled-tasks.md) firing in your session started, rather than a prompt you typed | Asks before the first publish of each artifact |
 | Claude can't read the file without your approval | Asks before publishing it. An allow rule for the `Artifact` tool doesn't skip this prompt |
 | In [Manual](https://code.claude.com/docs/en/permission-modes.md) or `acceptEdits` mode, Claude makes a small change to an artifact's file it can't edit without your approval, such as a project file in Manual mode | Asks before publishing the change. You're asked even if an allow rule covers the `Artifact` tool, because the edit to the file needs your approval |
@@ -186,17 +186,13 @@ To ask for the comments yourself, give Claude the URL:
 Read the comments on https://claude.ai/code/artifact/5fbea6f3-... and make the changes the commenters ask for.
 ```
 
-If Claude tells you it can't read comments, confirm your version, your session, and your feature-flag setting:
-
-* You're running Claude Code v2.1.221 or later.
-* You're not in your first session since you installed Claude Code or upgraded from a version before v2.1.221. In that [first session after an install or upgrade](https://code.claude.com/docs/en/env-vars.md#first-session-after-an-install-or-upgrade), Claude might not be able to read comments yet; start a new session and ask again.
-* You haven't turned feature-flag fetching off.
+Before v2.1.326, Claude needs [feature-flag fetching](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching) on to read or watch comments.
 
 ### Let Claude reply to comments on its own
 
 After your session publishes an artifact, Claude Code watches that artifact for comments. When someone who can edit the artifact sends a comment to Claude, it reaches your session right away, and Claude can read the thread and reply without you asking.
 
-You need Claude Code v2.1.228 or later. If you turned [feature-flag fetching](https://code.claude.com/docs/en/env-vars.md#features-that-need-feature-flag-fetching) off, Claude Code doesn't watch for comments.
+You need Claude Code v2.1.228 or later.
 
 Your [permission mode](https://code.claude.com/docs/en/permission-modes.md) decides what Claude does when a sent comment arrives:
 
@@ -210,11 +206,11 @@ Run `/tasks` to see the artifacts your session is watching. `/tasks` groups the 
 
 You can stop Claude from replying on its own in any of these ways:
 
-* **Press Ctrl+C once at an idle prompt**: Claude pauses replying on every artifact your session is watching. Replies start again after you send your next message.
+* **Press Ctrl+C once at an idle, empty prompt**: Claude pauses replying on every artifact your session is watching. Replies start again after you send your next message.
 * **Stop the task in `/tasks`**: Claude stops replying on that artifact until you ask it to resume replies there. Publishing the artifact again doesn't start replies again, and the stop still applies when you resume the session later.
 * **Press `Ctrl+X Ctrl+K` twice within 3 seconds**: the chord that [stops every running background subagent](https://code.claude.com/docs/en/interactive-mode.md#general-controls) also stops Claude from replying on every artifact for the rest of the session. Asking Claude to resume replies doesn't undo this stop.
 
-A watch that Claude Code started on its own can end after the artifact goes several hours without activity. To start the watch again, publish the artifact again or ask Claude to watch it.
+A watch that Claude Code started on its own can end after the artifact goes several hours without activity. You see `Stopped watching Artifact: <name> (idle)`. To start the watch again, publish the artifact again or ask Claude to watch it. If you see `(made room for a newer watch)` in place of `(idle)`, your session reached its limit of 25 watches. Publish again to restart that watch.
 
 If the service that delivers comments becomes unavailable or stops answering, Claude Code keeps trying to reconnect for a while, then stops watching each artifact your session was watching.
 
@@ -228,13 +224,13 @@ To create a connector-backed page, name the connector and the data you want in y
 Build a dashboard artifact of our open pull requests that pulls the live list through my GitHub connector when the page loads.
 ```
 
-Claude declares which connectors the page may call as part of publishing, and the page can't call connectors outside that declaration. Only connectors from your claude.ai account qualify: Claude names them in the declaration, and when someone views the page, each call [runs through the viewing account's own connection](#how-connector-calls-work-for-viewers) to that connector. Local MCP servers you configure in Claude Code, such as servers from `.mcp.json`, can supply data while Claude builds the page, but the published page can't call them.
+Use a connector from your claude.ai account. Local MCP servers you configure in Claude Code, such as servers from `.mcp.json`, can supply data while Claude builds the page, but the published page can't call them.
 
 The page fetches data when it loads and can refresh on an interval or when a viewer uses a refresh control on the page. Responses are cached in the viewer's browser, so a reopened page renders from the cached responses immediately, then updates with fresh results.
 
 ### How connector calls work for viewers
 
-When a published page calls a connector, the call uses the account of the person viewing the page, not the account of the person who published it:
+By default, when a published page calls a connector, the call uses the account of the person viewing the page, not the account of the person who published it:
 
 * **Each viewer uses their own connectors**: calls go through the viewing account's connected tools, so two people opening the same dashboard can see different data depending on what their accounts can access. The page never sees anyone's credentials; claude.ai makes the calls on the page's behalf.
 * **Viewers approve access first**: claude.ai asks each viewer for permission before the page's first connector call. A viewer who declines, or who hasn't connected a connector the page uses, still sees the page without its live sections.
@@ -244,11 +240,15 @@ When you plan to share a connector-backed page, ask Claude to include a fallback
 
 You can [share a connector-backed page](#share-an-artifact) within your organization or publicly, as your plan and organization settings allow. Connector calls don't run for a viewer who opens the public link without signing in to claude.ai, or from outside your organization. That viewer sees the page without its live sections.
 
+> [!WARNING]
+>
+> If you turn on [live sharing](https://support.claude.com/en/articles/17454700-get-started-with-claude-data#h_9b12806a2a) for a dashboard, the calls you share run through your account. Check what data the dashboard shows before you share it.
+
 ### The page shows no live data for a viewer
 
 When a connector-backed page renders but its live sections stay empty for a viewer in your organization, work through these causes:
 
-* **The viewer hasn't connected the connector**: connectors are per-account, so each viewer needs their own connection to every connector the page calls. They can add one under [**Customize > Connectors**](https://claude.ai/customize/connectors) on claude.ai, then reload the page.
+* **The viewer hasn't connected the connector**: they can add it at [claude.ai/customize/connectors](https://claude.ai/customize/connectors), then reload the page.
 * **The viewer declined the permission ask**: a denial lasts for the rest of that page load. Reloading the page brings the permission ask back.
 * **Connector calls are turned off for the organization**: an Owner controls the [**Enable artifact connectors** toggle](#control-connector-calls-from-artifacts) in admin settings.
 * **The page calls tool names the connector doesn't expose**: the affected sections stay empty for everyone, including you. This can happen when a page names the individual tools behind a gateway-style connector that exposes only a few tools of its own. Ask Claude to fix the tool names the page calls and publish it again.
@@ -267,7 +267,7 @@ To offer a file, ask for the control and the file format in your prompt:
 Add a button that downloads this table as a CSV file.
 ```
 
-Claude declares the downloads capability as part of publishing, the same way it [declares connectors](#pull-live-data-with-mcp-connectors).
+Claude declares the downloads capability as part of publishing.
 
 ## What you can build
 
@@ -329,25 +329,21 @@ Claude treats your design system as higher precedence than its own choices, and 
 
 For typography, Claude can load a typeface from Google Fonts, the one external font source an artifact page can load from. Claude inlines any other typeface as a `@font-face` data URI and gives every typeface a fallback stack, so the page still renders if a font doesn't load. To use a specific typeface, name it in your prompt or your design system.
 
-## Start from a Slides, Design, or Docs template
+## Start an artifact from a template
 
-Instead of building a page from scratch, Claude can start an artifact from one of the templates on your claude.ai account: [Claude Slides](https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them#h_11d5a9a5fa) for a presentation, [Claude Design](https://support.claude.com/en/articles/14604416-get-started-with-claude-design) for a visual design, or [Claude Docs](https://support.claude.com/en/articles/16923645-get-started-with-claude-docs) for a document other people will read and edit. Each opens in its own editor on claude.ai, where you and your teammates change it directly or ask Claude to, and export it to formats such as PowerPoint, PDF, or Word.
+The [artifact templates](https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them#h_11d5a9a5fa) on your claude.ai account also work from Claude Code. For example, use the [Claude Design](https://support.claude.com/en/articles/14604416-get-started-with-claude-design) template for a visual design, or the [Claude Docs](https://support.claude.com/en/articles/16923645-get-started-with-claude-docs) template for a document other people will read and edit. Your account can include others, such as Sheets, Whiteboards, or Data. To see which ones your session has, ask Claude to list the artifact templates available to you.
 
-To start from a template, describe what you want, such as "turn the migration notes into a deck for Thursday's review" or "write this plan up as a doc for the team". Claude picks the matching template, fills it from your request and from what the session already has, and gives you the link. For a deck or a design you can also run `/slides` or `/design` with a brief.
+To use a template from Claude Code, you need:
 
-> [!NOTE]
->
-> Templates are in beta. They're on by default on Pro, Max, Ultra, and Team plans. On Enterprise plans, an Owner [turns each template on](https://support.claude.com/en/articles/16994751-artifacts-admin-guide-for-team-and-enterprise-plans) under **Organization settings > Artifacts**. If your organization has the Slides template turned off, `/slides` doesn't appear; if it has the Design template turned off, `/design` doesn't draft designs. Both commands require Claude Code v2.1.265 or later and a session where [artifacts are available](#availability).
+* A session where [artifacts are available](#availability)
+* On Team and Enterprise plans, the template turned on for your organization. If it's off, ask an Owner to [turn the template on](https://support.claude.com/en/articles/16994751-artifacts-admin-guide-for-team-and-enterprise-plans#h_6e06d8f1a8) under **Organization settings > Artifacts** on claude.ai.
+* On Enterprise plans with custom roles, a role that [includes the template](https://support.claude.com/en/articles/16994751-artifacts-admin-guide-for-team-and-enterprise-plans#h_d830917488)
+* For the Docs and Sheets templates, the [Claude Docs connector](#write-a-document-with-claude-docs), which Claude uses to write the content of both. If you [turned the connector off](https://code.claude.com/docs/en/mcp.md#disable-claude-ai-connectors), turn it back on first.
+* Claude Code v2.1.265 or later, if you start the Design template with its [`/design` command](#draft-a-design-canvas)
 
-### Make a slide deck
+To start from a template, name it or describe what you want, such as "write this plan up as a doc for the team" or "make a shared task spreadsheet". Claude picks the matching template, fills it from your request and from what the session already has, and gives you the link. To get a file instead, name the format, such as `.csv`.
 
-Run `/slides` with a brief that says what the deck covers and who it's for:
-
-```text wrap theme={null}
-/slides a quarterly review of the platform team's reliability work, for the engineering all-hands
-```
-
-Claude creates a Claude Slides artifact and gives you the link. Open it in a desktop browser to edit or present the deck. If you run `/slides` without a brief, Claude asks what the deck should be about before creating anything.
+To edit the artifact yourself, open the link, which goes to that template's editor on claude.ai. You can also keep asking Claude for changes from your session. For export formats, see [View and export](https://support.claude.com/en/articles/17153992-what-are-artifacts-and-how-do-i-use-them#h_1403132eb8).
 
 ### Draft a design canvas
 
@@ -363,7 +359,7 @@ Open the published artifact in a desktop browser to review the artboards. Select
 
 Claude Docs reaches Claude Code as a claude.ai [connector](https://code.claude.com/docs/en/mcp.md#use-mcp-servers-from-claude-ai) rather than a command. When it's connected, `/mcp` lists it as `claude.ai Claude Docs`. A request for a document meant for other people then goes to Claude Docs instead of an artifact page: a spec, a proposal, or a write-up of the plan you worked through in the session. Claude gives you the doc's link when it's drafted.
 
-A document that belongs in the codebase, such as a README, stays a file. To get a file for something Claude would otherwise put in Claude Docs, name the format, such as `.docx` or a Markdown file in the repository. To turn off only the `claude.ai Claude Docs` connector, see [Disable claude.ai connectors](https://code.claude.com/docs/en/mcp.md#disable-claude-ai-connectors).
+A document that belongs in the codebase, such as a README, stays a file. To get a file for something Claude would otherwise put in Claude Docs, name the format, such as `.docx` or a Markdown file in the repository. To turn off only the `claude.ai Claude Docs` connector, see [Disable claude.ai connectors](https://code.claude.com/docs/en/mcp.md#disable-claude-ai-connectors). Keep the connector on if you use the Sheets template, which needs it too.
 
 ## Page constraints
 
@@ -433,7 +429,7 @@ To enable or disable artifacts for the whole organization, go to [**Organization
 
 Public sharing is off by default on Team and Enterprise plans. To let members publish artifacts to public links that anyone can view without signing in, go to [**Organization settings > Artifacts**](https://claude.ai/admin-settings/artifacts) and turn on **External sharing** under the **Artifacts** toggle. Turning it back off blocks access through existing public links without changing each artifact's audience; access resumes if you re-enable it.
 
-### Set a retention policy
+### Set a retention policy on Enterprise plans
 
 To set how long artifacts are kept before automatic deletion, go to [**Organization settings > Data and privacy**](https://claude.ai/admin-settings/data-privacy-controls). You can set separate retention periods for artifacts that are still private to their author and artifacts that have been shared.
 
