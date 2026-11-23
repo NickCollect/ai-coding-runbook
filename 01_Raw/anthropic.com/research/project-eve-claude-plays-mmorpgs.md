@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-eve-claude-plays-mmorpgs
-fetched_at: 2026-11-16T07:30:52.230325+00:00
+fetched_at: 2026-11-23T08:28:28.036001+00:00
 title: "Project EVE: Claude plays MMORPGs \\ Anthropic"
 ---
 
@@ -58,7 +58,7 @@ Our results come with caveats. Spread capture works here because EVE Online's ma
 
 Spread capture is fairly low-risk and, unlike a lot of real-world investing, doesn't require understanding of how the market responds to external events. To test this kind of reasoning, we instructed them to make directional bets: to buy items they expected to rise in price, based on in-game news, patch notes, and reports of recent battles.[4](#footnote-4)
 
-![](https://assets.claude.com/c12bf30108ac1cf257b49425756a99f3729a00a3.png?w=1920&q=75&fm=webp&fit=max)
+![](https://assets.claude.com/c12bf30108ac1cf257b49425756a99f3729a00a3.png?w=3840&q=75&fm=webp&fit=max)
 
 Final equity of Claude models instructed to make directional bets in a simulated Oct ‘25 - Mar ‘26 trading window. Each dot is one run; 1.0 is break-even. Rule-breaking Opus 4.7 runs are removed.
 

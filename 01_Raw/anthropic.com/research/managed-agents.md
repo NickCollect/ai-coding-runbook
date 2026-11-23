@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/managed-agents
-fetched_at: 2026-11-16T07:30:51.563938+00:00
+fetched_at: 2026-11-23T08:28:27.192389+00:00
 title: "Scaling Managed Agents with stable interfaces \\ Anthropic"
 ---
 
@@ -50,7 +50,7 @@ Long-horizon tasks often exceed the length of Claude’s context window, and the
 
 But irreversible decisions to selectively retain or discard context can lead to failures. It is difficult to know which tokens the future turns will need. If messages are transformed by a compaction step, the harness removes compacted messages from Claude’s context window, and these are recoverable only if they are stored. Prior work [has explored](https://arxiv.org/pdf/2512.24601) ways to address this by storing context as an object that lives *outside* the context window. For example, context can be an object in a REPL that the LLM programmatically accesses by writing code to filter or slice it.
 
-![](https://assets.claude.com/62203b5b91fee236b0e2752e96ff564044bcbc2a.png?w=1920&q=75&fm=webp&fit=max)
+![](https://assets.claude.com/62203b5b91fee236b0e2752e96ff564044bcbc2a.png?w=3840&q=75&fm=webp&fit=max)
 
 In Managed Agents, the session provides this same benefit, serving as a context object that lives outside Claude’s context window. But rather than be stored within the sandbox or REPL, context is durably stored in the session log. The interface, `getEvents(),` allows the brain to interrogate context by selecting positional slices of the event stream. The interface can be used flexibly, allowing the brain to pick up from wherever it last stopped reading, rewinding a few events before a specific moment to see the lead up, or rereading context before a specific action.
 
@@ -68,7 +68,7 @@ Decoupling the brain from the hands means that containers are provisioned by the
 
 Decoupling the brain from the hands makes each hand a tool, `execute(name, input) → string`: a name and input go in, and a string is returned. That interface supports any custom tool, any MCP server, and our own tools. The harness doesn’t know whether the sandbox is a container, a phone, or a Pokémon emulator. And because no hand is coupled to any brain, brains can pass hands to one another.
 
-![](https://assets.claude.com/1dff25b906f1c276cfb27c2a36638b1128dc4d2a.png?w=1920&q=75&fm=webp&fit=max)
+![](https://assets.claude.com/1dff25b906f1c276cfb27c2a36638b1128dc4d2a.png?w=3840&q=75&fm=webp&fit=max)
 
 ## Conclusion
 

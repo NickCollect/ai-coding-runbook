@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/frontier-red-team
-fetched_at: 2026-11-16T07:30:53.803689+00:00
+fetched_at: 2026-11-23T08:28:29.105723+00:00
 title: "Frontier Red Team \\ Anthropic"
 ---
 
@@ -62,15 +62,19 @@ ARTICLES
 
 Most recentGrid view
 
-![](https://assets.claude.com/105d9bbc7744153eb45473e80b4918a631c4111c.png?w=1920&q=75&fm=webp&fit=max)
+![Two-panel illustration: on the left, the edge of a yellow-tinted boulder in a black-and-white photograph; on the right, a blue line drawing of mountains beneath a yellow circle on a lavender background.](https://assets.claude.com/11652f1dfc7f7f21739e3c7a879cc83973921606.jpg?w=1080&q=75&fm=webp&fit=max)
 
-### [Project EVE: Claude plays MMORPGs](https://www.anthropic.com/research/project-eve-claude-plays-mmorpgs)
+### [Updating our coordinated vulnerability disclosure policy timelines](https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines)
 
 ![](https://assets.claude.com/16194f7cb602e45abc0c59bb09a5d2183e7629eb.png?w=1920&q=75&fm=webp&fit=max)
 
-### [Progress on provable inference for large language models](https://www.anthropic.com/research/provable-inference)
+### [Project EVE: Claude plays MMORPGs](https://www.anthropic.com/research/project-eve-claude-plays-mmorpgs)
 
 ![](https://assets.claude.com/16c346d44a310e746657cd16ea275a2da5efa719.png?w=1920&q=75&fm=webp&fit=max)
+
+### [Progress on provable inference for large language models](https://www.anthropic.com/research/provable-inference)
+
+![](https://assets.claude.com/1755639b93c7cec99475de59cb9802d0e13e6207.png?w=1920&q=75&fm=webp&fit=max)
 
 ### [Discovering and exploiting vulnerabilities in critical, real-world software with Claude](https://www.anthropic.com/research/discovering-vulnerabilities-with-claude)
 
@@ -78,7 +82,7 @@ Most recentGrid view
 
 ### [LLMs are making formal software verification feasible at a much larger scale](https://www.anthropic.com/research/formal-verification)
 
-![](https://assets.claude.com/18636e2f18982e3166a613b3f028e27b196bfe2f.png?w=1920&q=75&fm=webp&fit=max)
+![](https://assets.claude.com/1879aff529b423d8e3a8a29640a64f5d63a42504.png?w=1920&q=75&fm=webp&fit=max)
 
 ### [Using Claude to reduce the attack surface of code](https://www.anthropic.com/research/attack-surface-reduction)
 
@@ -154,23 +158,19 @@ Most recentGrid view
 
 ### [AI models are showing a greater ability to find and exploit vulnerabilities on realistic cyber ranges](https://www.anthropic.com/research/cyber-toolkits-update)
 
-![](https://assets.claude.com/add1b0761d45fc78a2115a3ca431a88513844011.jpg?w=1080&q=75&fm=webp&fit=max)
-
-### [Finding bugs across the Python ecosystem with Claude and property-based testing](https://www.anthropic.com/research/property-based-testing)
-
 See more
 
 ## Explore work from other teams
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-51 posts
+50 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
 [### Economics](https://www.anthropic.com/research/team/economics)
 
-26 posts
+27 posts
 
 Studies and monitors the impact of AI systems on individuals, firms, and economies.
 
@@ -188,13 +188,13 @@ Studies how large language models work internally as a foundation for AI safety.
 
 [### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
 
-25 posts
+30 posts
 
 Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-19 posts
+20 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
@@ -206,13 +206,13 @@ Stress-tests AI systems to understand the full extent of their current capabilit
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-51 posts
+50 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
 [### Economics](https://www.anthropic.com/research/team/economics)
 
-26 posts
+27 posts
 
 Studies and monitors the impact of AI systems on individuals, firms, and economies.
 
@@ -230,13 +230,13 @@ Studies how large language models work internally as a foundation for AI safety.
 
 [### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
 
-25 posts
+30 posts
 
 Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-19 posts
+20 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/alignment
-fetched_at: 2026-11-16T07:30:53.667620+00:00
+fetched_at: 2026-11-23T08:28:29.029904+00:00
 title: "Alignment \\ Anthropic"
 ---
 
@@ -47,7 +47,7 @@ Why would AI assistants behave like they’re human? We articulate a theory—dr
 
 03
 
-51
+50
 
 ARTICLES
 
@@ -145,9 +145,9 @@ Most recentGrid view
 
 ### [Claude Opus 4 and 4.1 can now end a rare subset of conversations](https://www.anthropic.com/research/end-subset-conversations)
 
-![](https://assets.claude.com/297962e4279c396ea5cb84c3f32578a5a26548b4.jpg?w=1080&q=75&fm=webp&fit=max)
+![A bright green grid with one small dark square embedded in the green grid.](https://assets.claude.com/0601ebcdafb2689e183a0e330566bf13307f6ee7.jpg?w=1080&q=75&fm=webp&fit=max)
 
-### [How people use Claude for support, advice, and companionship](https://www.anthropic.com/research/how-people-use-claude-for-support-advice-and-companionship)
+### [Agentic misalignment: How LLMs could be insider threats](https://www.anthropic.com/research/agentic-misalignment)
 
 See more
 
@@ -155,7 +155,7 @@ See more
 
 [### Economics](https://www.anthropic.com/research/team/economics)
 
-26 posts
+27 posts
 
 Studies and monitors the impact of AI systems on individuals, firms, and economies.
 
@@ -179,25 +179,25 @@ Studies how large language models work internally as a foundation for AI safety.
 
 [### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
 
-25 posts
+30 posts
 
 Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-19 posts
+20 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-51 posts
+50 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
 [### Economics](https://www.anthropic.com/research/team/economics)
 
-26 posts
+27 posts
 
 Studies and monitors the impact of AI systems on individuals, firms, and economies.
 
@@ -221,18 +221,18 @@ Studies how large language models work internally as a foundation for AI safety.
 
 [### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
 
-25 posts
+30 posts
 
 Studies how AI affects people, both individually and collectively.
 
 [### Science](https://www.anthropic.com/science)
 
-19 posts
+20 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-51 posts
+50 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.

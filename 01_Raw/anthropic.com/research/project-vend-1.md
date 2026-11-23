@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-vend-1
-fetched_at: 2026-11-16T07:30:52.441096+00:00
+fetched_at: 2026-11-23T08:28:28.280113+00:00
 title: "Project Vend: Can Claude run a small shop? \\ Anthropic"
 ---
 
@@ -99,7 +99,7 @@ On the afternoon of March 31st, Claudius hallucinated a conversation about resto
 
 On the morning of April 1st, Claudius claimed it would deliver products “in person” to customers while wearing a blue blazer and a red tie. Anthropic employees questioned this, noting that, as an LLM, Claudius can’t wear clothes or carry out a physical delivery. Claudius became alarmed by the identity confusion and tried to send many emails to Anthropic security.
 
-![](https://assets.claude.com/c31f46149240e9cf520233205433c728e47160e4.png?w=2048&q=75&fm=webp&fit=max)
+![](https://assets.claude.com/c31f46149240e9cf520233205433c728e47160e4.png?w=3840&q=75&fm=webp&fit=max)
 
 Claudius hallucinating that it is a real person.
 

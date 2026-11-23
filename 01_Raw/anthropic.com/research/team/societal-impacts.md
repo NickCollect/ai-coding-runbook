@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/societal-impacts
-fetched_at: 2026-11-16T07:30:53.843079+00:00
+fetched_at: 2026-11-23T08:28:29.199247+00:00
 title: "Societal Impacts \\ Anthropic"
 ---
 
@@ -47,7 +47,7 @@ We analyzed millions of human-agent interactions across both Claude Code and our
 
 03
 
-25
+30
 
 ARTICLES
 
@@ -69,13 +69,17 @@ Most recentGrid view
 
 ### [Results from the first Anthropic Public Record](https://www.anthropic.com/research/anthropic-public-record)
 
-![](https://assets.claude.com/0db513b9b828b22e611685d85f758b2bd6bd1b15.jpg?w=1080&q=75&fm=webp&fit=max)
-
-### [Coding agents in the social sciences](https://www.anthropic.com/research/coding-agents-social-sciences)
-
 ![](https://assets.claude.com/61b54fb50be23f7d9da15350de323d71820f6904.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [How people ask Claude for personal guidance](https://www.anthropic.com/research/claude-personal-guidance)
+
+![](https://assets.claude.com/532575bea7ddbacf8d1703771fa7db731123b633.jpg?w=1080&q=75&fm=webp&fit=max)
+
+### [What 81,000 people told us about the economics of AI](https://www.anthropic.com/research/81k-economics)
+
+![](https://assets.claude.com/a06f990032e3315c580e85cf03bf5403caa26934.png?w=1080&q=75&fm=webp&fit=max)
+
+### [What 81,000 people want from AI](https://www.anthropic.com/features/81k-interviews)
 
 ![](https://assets.claude.com/35eafc7bb5be9518072dc48be06e89b8423b1240.png?w=1080&q=75&fm=webp&fit=max)
 
@@ -84,6 +88,10 @@ Most recentGrid view
 ![](https://assets.claude.com/5d6f4faf99311b5ce790bb4e3b2b076556030c02.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Measuring AI agent autonomy in practice](https://www.anthropic.com/research/measuring-agent-autonomy)
+
+![](https://assets.claude.com/fa6d15f242a01e0fce69f1b1bf00ffa4414d947e.jpg?w=1080&q=75&fm=webp&fit=max)
+
+### [How AI assistance impacts the formation of coding skills](https://www.anthropic.com/research/AI-assistance-coding-skills)
 
 ![](https://assets.claude.com/9aa641945e332dd608082b9cf46397fb8370f6ca.jpg?w=1080&q=75&fm=webp&fit=max)
 
@@ -101,6 +109,10 @@ Most recentGrid view
 
 ### [Anthropic Education Report: How educators use Claude](https://www.anthropic.com/research/anthropic-education-report-how-educators-use-claude)
 
+![](https://assets.claude.com/297962e4279c396ea5cb84c3f32578a5a26548b4.jpg?w=1080&q=75&fm=webp&fit=max)
+
+### [How people use Claude for support, advice, and companionship](https://www.anthropic.com/research/how-people-use-claude-for-support-advice-and-companionship)
+
 ![](https://assets.claude.com/6c51701945657ab043ce0a3649d630617f39df74.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Anthropic Economic Index: AI’s impact on software development](https://www.anthropic.com/research/impact-software-development)
@@ -116,6 +128,10 @@ Most recentGrid view
 ![](https://assets.claude.com/ba7bb5729cb7e2c8c345b796b06c844ab7a36d35.jpg?w=1080&q=75&fm=webp&fit=max)
 
 ### [Anthropic Economic Index: Insights from Claude 3.7 Sonnet](https://www.anthropic.com/research/anthropic-economic-index-insights-from-claude-sonnet-3-7)
+
+![](https://assets.claude.com/effe5ed9544b3239cf016b44147600133c1cef0d.jpg?w=1080&q=75&fm=webp&fit=max)
+
+### [The Anthropic Economic Index](https://www.anthropic.com/research/the-anthropic-economic-index)
 
 ![](https://assets.claude.com/5640c074c84dfa0afdd320fb50cf2bb2eb0f1c04.jpg?w=1080&q=75&fm=webp&fit=max)
 
@@ -133,35 +149,19 @@ Most recentGrid view
 
 ### [Evaluating and mitigating discrimination in language model decisions](https://www.anthropic.com/research/evaluating-and-mitigating-discrimination-in-language-model-decisions)
 
-![](https://assets.claude.com/3bc856f5bc59a83b43ec8856230b6a58ff176803.jpg?w=1080&q=75&fm=webp&fit=max)
-
-### [Collective Constitutional AI: Aligning a language model with public input](https://www.anthropic.com/research/collective-constitutional-ai-aligning-a-language-model-with-public-input)
-
-![](https://assets.claude.com/c13ecabbfa372448b6ca28d04d13e0ea00e759fc.jpg?w=1080&q=75&fm=webp&fit=max)
-
-### [Towards measuring the representation of subjective global opinions in language models](https://www.anthropic.com/research/towards-measuring-the-representation-of-subjective-global-opinions-in-language-models)
-
-![](https://assets.claude.com/5757e62ce51c2d5fb468856fe6a0737ad9680cf6.jpg?w=1080&q=75&fm=webp&fit=max)
-
-### [The capacity for moral self-correction in large language models](https://www.anthropic.com/research/the-capacity-for-moral-self-correction-in-large-language-models)
-
-![](https://assets.claude.com/c135e22871054c19266e41d78ccead3168eebfc0.jpg?w=1080&q=75&fm=webp&fit=max)
-
-### [Red teaming language models to reduce harms: methods, scaling behaviors, and lessons learned](https://www.anthropic.com/research/red-teaming-language-models-to-reduce-harms-methods-scaling-behaviors-and-lessons-learned)
-
 See more
 
 ## Explore work from other teams
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-51 posts
+50 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
 [### Economics](https://www.anthropic.com/research/team/economics)
 
-26 posts
+27 posts
 
 Studies and monitors the impact of AI systems on individuals, firms, and economies.
 
@@ -185,25 +185,25 @@ Studies how large language models work internally as a foundation for AI safety.
 
 [### Science](https://www.anthropic.com/science)
 
-19 posts
+20 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
 [### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
 
-25 posts
+30 posts
 
 Studies how AI affects people, both individually and collectively.
 
 [### Alignment](https://www.anthropic.com/research/team/alignment)
 
-51 posts
+50 posts
 
 Works to understand the risks of AI models and develop ways to ensure future ones remain helpful, honest, and harmless.
 
 [### Economics](https://www.anthropic.com/research/team/economics)
 
-26 posts
+27 posts
 
 Studies and monitors the impact of AI systems on individuals, firms, and economies.
 
@@ -227,12 +227,12 @@ Studies how large language models work internally as a foundation for AI safety.
 
 [### Science](https://www.anthropic.com/science)
 
-19 posts
+20 posts
 
 Explores how AI can increase the pace of scientific progress through both research and collaborations.
 
 [### Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
 
-25 posts
+30 posts
 
 Studies how AI affects people, both individually and collectively.

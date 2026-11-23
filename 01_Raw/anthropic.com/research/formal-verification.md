@@ -1,13 +1,13 @@
 ---
 source_url: https://www.anthropic.com/research/formal-verification
-fetched_at: 2026-11-16T07:30:50.825646+00:00
+fetched_at: 2026-11-23T08:28:26.244648+00:00
 title: "LLMs are making formal software verification feasible at a much larger scale \\ Anthropic"
 ---
 
 ### 01Introduction
 
 *Keane Lucas, Aengus Lynch, Luna Tong, Luke Champine, Zygi Straznickas, Dino Distefano, Harshikaa Agrawal  
-Evyatar Ben Asher, Ava Howell, Sami Jawhar, Chris Rohlf, Nickolai Zeldovich  
+Evyatar Ben Asher, Cheru Berhanu, Ava Howell, Sami Jawhar, Chris Rohlf, Nickolai Zeldovich  
 Nicholas Carlini, Rajashree Agrawal, Jason Gross*
 
 *Most software is riddled with bugs, which AI can now easily [find](https://hacks.mozilla.org/2026/05/behind-the-scenes-hardening-firefox/) and [exploit](https://www.anthropic.com/research/exploit-evals). The standard defenses against cyberattacks are no longer sufficient: we need ways to prove that code is free of bugs. Formal software verification could provide this guarantee, but it has historically required years of expert effort, making it impractical for most real-world projects. In a collaboration with [Theorem](https://theorem.dev/), however, we show this is no longer the case: LLMs can now produce formal proofs at large scale, enabling new software development workflows that include proven security guarantees. Using Claude, we proved security properties at the assembly code level (RISC-V) in over 100 real-world open-source software libraries. **To our knowledge, this represents the first large-scale effort to use AI to apply formal verification to production software at the assembly code level.** While writing the proofs, Claude also discovered bugs that had eluded detection for years, despite [trillions of test runs](https://opensource.googleblog.com/2016/12/announcing-oss-fuzz-continuous-fuzzing.html). As model capabilities continue to improve, we expect formal verification to become an essential part of secure software development.*
@@ -92,7 +92,7 @@ In another experiment, we asked Claude to develop an interpreter for a large sub
 
 We also found issues in several widely used and critical applications via formal verification attempts of simple security properties. In one of them, we discovered a previously unknown logic bug that had been latent for more than a decade. During an effort to verify a widely used PDF reader, we found as many security bugs in one week as are typically reported in a year.
 
-See [the Appendix](https://assets.claude.com/6867eadf760258fa8b42a504600cd3c036d16358.pdf) for more details on some of these efforts.
+See [the Appendix](https://assets.claude.com/044c0e76168185e89a7d069ac71a55db70e2dc10.pdf) for more details on some of these efforts.
 
 ## This is just the beginning
 
@@ -144,7 +144,7 @@ The trajectory is clear: formal verification, which was historically practical o
 
 In today’s world—where LLMs automatically scan for and find increasingly more code vulnerabilities—we must use processes that can *guarantee* code security properties. LLM-scaled formal verification is a promising approach toward securing these guarantees at a scope and scale that were previously unattainable. We encourage others to experiment so we can collectively build a world in which robust software has proliferated very widely and software bugs are a well-understood and quickly addressable rarity.
 
-[Read the full appendix.](https://assets.claude.com/6867eadf760258fa8b42a504600cd3c036d16358.pdf)
+[Read the full appendix.](https://assets.claude.com/044c0e76168185e89a7d069ac71a55db70e2dc10.pdf)
 
 ## Footnotes
 
