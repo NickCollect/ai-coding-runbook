@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/jira
-fetched_at: 2026-10-26T05:40:00.473757+00:00
+fetched_at: 2026-11-23T08:28:24.003838+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ With Cursor's integration for Jira, you can use [Cloud Agents](https://cursor.co
 
 Before you install the Jira integration, make sure you have:
 
-- Jira Commercial Cloud with Rovo enabled
+- Jira Commercial Cloud with Rovo enabled for Jira. An Atlassian org admin can turn Rovo off for Jira alone while it stays on for other apps, under **Admin > AI and Rovo > Access**.
 - Admin access to the Jira site where you want to install the app
 - Cursor admin access to the team you want to connect
 - GitHub, GitLab, Azure DevOps, or Bitbucket connected to Cursor for repository access and pull requests
@@ -218,7 +218,7 @@ The Cursor Jira integration supports Atlassian commercial cloud sites with Rovo 
 
 ### Do I need usage-based billing?
 
-Yes. Cloud Agents require usage-based billing. Enable usage-based billing while completing Cloud Agent setup in Cursor.
+It depends on who the runs belong to. With *Require individual authentication* off, runs use the team's service account. On a Teams plan, the service account has no included usage, so usage-based billing must be on for your team. On an Enterprise plan with pooled usage, these runs draw from the pool first. With *Require individual authentication* on, each run uses the Jira user's own included usage first.
 
 ### Who can install the Jira integration?
 

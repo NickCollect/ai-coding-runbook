@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/slack
-fetched_at: 2026-10-26T05:40:00.572579+00:00
+fetched_at: 2026-11-23T08:28:24.137047+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,6 +29,8 @@ With Cursor's integration for Slack, you can use [Cloud Agents](https://cursor.c
 5. Start using Cloud Agents in Slack by mentioning `@cursor`
 
 To unlink your Slack account, go to [Dashboard → Cloud Agents](https://www.cursor.com/dashboard/cloud-agents) and click **Unlink Slack** next to **Slack integration**. You'll need to link it again before you can start Cloud Agents from Slack.
+
+You can also unlink from [Integrations in the dashboard](https://cursor.com/dashboard/integrations): click **Manage** next to Slack and choose **Unlink**. This unlinks your Slack account from Cursor in every workspace you connected.
 
 ## How to use
 
@@ -195,6 +197,15 @@ Starting branch for Cloud Agent. Leave blank to use the repository's default bra
 
 If you're on more than one paid Cursor team, choose which team your Slack agents run under. Agents you start from Slack run, bill, and use settings under that team. Pick it under **Cursor Team** when you link your Slack account, or change it later with **Team for Slack Agents** in [Dashboard → Cloud Agents](https://www.cursor.com/dashboard/cloud-agents). If your Slack workspace is restricted to one Cursor team, Slack agents always run under that team.
 
+#### Reply mode
+
+Choose how Cursor handles plain replies in its Slack threads. Team admins set **Reply mode** under **Preferences** in the Slack section of [Integrations in the dashboard](https://cursor.com/dashboard/integrations). Members see it read-only.
+
+- **Follow threads** (default): Cursor follows along in its threads and responds when a reply is useful to it.
+- **Mentions only**: Cursor ignores plain replies in an agent's thread. They don't become follow-ups or steer the running agent. Answers to a question the agent asked in the thread, `@Cursor` mentions, and DMs still reach the agent.
+
+The setting of the team that owns the agent applies. For a personal agent with no owning team, the setting of the team that started it applies.
+
 ### Channel Settings
 
 Configure default settings at the channel level using `@Cursor settings`. These settings are per team and override your personal defaults for that channel.
@@ -319,6 +330,10 @@ Read more about [Privacy Mode](https://www.cursor.com/privacy-overview) or manag
 
 Privacy Mode (Legacy) is not supported. Cloud Agents require temporary
 code storage while running.
+
+#### Link previews
+
+Links you post in Slack to Cursor-hosted pull requests, code, and cloud agent artifacts show a preview. To turn previews off for the links you post, turn off **Slack link previews** under **Pull requests** in your account settings. It's on by default.
 
 #### Display Agent Summary
 

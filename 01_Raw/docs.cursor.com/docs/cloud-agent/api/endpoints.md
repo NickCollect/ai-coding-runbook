@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/api/endpoints
-fetched_at: 2026-11-16T07:30:44.487779+00:00
+fetched_at: 2026-11-23T08:28:22.783037+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1205,11 +1205,22 @@ The Project's icon and color. Send both fields, or leave `appearance` out.
 - `icon` string - An icon name of 1 to 64 letters, numbers, or hyphens, such as `rocket`.
 - `color` string - One of `default`, `green`, `cyan`, `blue`, `purple`, `magenta`, `orange`, `yellow`, `red`, or `brand`.
 
+`files` array (optional)
+
+Files to write into the Project's [shared context](https://cursor.com/docs/agent/projects.md#shared-context) before the coordinator's first run. The coordinator and every other agent in the Project can read them. Maximum 50 files, 256 KiB each, and 2 MiB in total. The `201` response then includes `files`, with each written file's `path`, `sizeBytes`, and `etag`. Cannot be combined with a client-supplied `projectId`; omit `projectId` so the server mints one when you send files.
+
+- `path` string - Where the file goes in the store, such as `docs/brief.md`. At most 512 UTF-8 bytes, and unique within the request. Blank paths (empty or only whitespace) are refused, as are paths that start or end with `/`, have an empty, `.`, or `..` segment, or contain a backslash or control character. Cursor reserves the top-level `inbox/` and `artifacts/` folders and any folder or file name starting with `.cursor`, so paths there are refused too.
+- `content` string - The file's text, stored as UTF-8. Send exactly one of `content` and `contentBase64`.
+- `contentBase64` string - The file's bytes, base64-encoded, for binary files such as images.
+- `mimeType` string (optional) - The file's media type, such as `text/markdown`. Defaults to `text/plain; charset=utf-8` for `content` and `application/octet-stream` for `contentBase64`.
+
+**Beta:** `files` is rolling out. If it isn't enabled for your account yet, a request with `files` returns `400 files_not_supported`.
+
 `projectId` string (optional)
 
-Client-supplied Project identifier in the form `bc-<uuid>`. Useful for idempotent create flows; re-POSTing the same `projectId` returns `409 project_id_conflict` rather than creating a duplicate. A Project's ID is also its coordinator agent's ID, so an ID that any agent already uses returns the same error.
+Client-supplied Project identifier in the form `bc-<uuid>`. Useful for idempotent create flows; re-POSTing the same `projectId` returns `409 project_id_conflict` rather than creating a duplicate. A Project's ID is also its coordinator agent's ID, so an ID that any agent already uses returns the same error. Cannot be combined with `files`; omit `projectId` so the server mints one when you send files.
 
-Besides the shared errors, this endpoint returns `400 validation_error` for an invalid body, including any field not listed above; `400 missing_body` for a request with no body; `403 user_required` for a service account API key; `403 projects_disabled` when your team turned Projects off; and `409 project_id_conflict` for a `projectId` already in use. It can also return the errors [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent) returns for `prompt`, `model`, `env`, and `repos`.
+Besides the shared errors, this endpoint returns `400 validation_error` for an invalid body, including any field not listed above and `files` sent with a `projectId`; `400 files_not_supported` when `files` isn't enabled for your account; `400 missing_body` for a request with no body; `403 user_required` for a service account API key; `403 projects_disabled` when your team turned Projects off; `403 storage_not_allowed` for a request with `files` when your privacy settings don't let Cursor store data; and `409 project_id_conflict` for a `projectId` already in use. It can also return the errors [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent) returns for `prompt`, `model`, `env`, and `repos`.
 
 ```bash
 curl --request POST \
@@ -3129,7 +3140,7 @@ curl --request DELETE \
 
 ## Automations
 
-[Automations](https://cursor.com/docs/cloud-agent/automations.md) run Cloud Agents on a schedule or when something happens in a connected tool. These endpoints read the automations your API key can see and change an automation's model. Create, edit, and delete automations in the [Automations dashboard](https://cursor.com/automations).
+[Automations](https://cursor.com/docs/cloud-agent/automations.md) run Cloud Agents on a schedule or when something happens in a connected tool. These endpoints read the automations your API key can see and change an automation's model. Create, edit, and delete automations in the [Automations dashboard](https://cursor.com/automations). To start a run from your own code, call the automation's [webhook](https://cursor.com/docs/cloud-agent/automations.md#webhook-triggers).
 
 - **Use a user API key or a team API key with an automations permission.** A team API key, one that starts with `grok_`, needs **View automations** (`team.automations.read`) to list and get automations, and **Manage automations** (`team.automations.manage`) to change them. Neither includes the other, and **Run Cloud Agents** (`cloud-agents:*`) doesn't reach these endpoints. A team key missing the permission an endpoint needs gets `403 permission_required`. Other team service account API keys, and API keys created for an automation's webhook, get `403 key_not_supported`.
 - **A team API key works only inside its own team.** It acts as the team's service account. It sees the team's shared automations (`TEAM`, `TEAM_VISIBLE`, `TEAM_EDITABLE`, and `TEAM_EDITABLE_USER`) and never a member's private (`USER`) automations, which return `404 automation_not_found`. It can change only `TEAM` and `TEAM_EDITABLE` automations, which run as the team's service account. `TEAM_VISIBLE` and `TEAM_EDITABLE_USER` automations run as the member who created them, so changing one returns `403 role_forbidden`.
@@ -3429,7 +3440,7 @@ Monitor worker utilization and build autoscaling for your pools. Durable pools s
 
 The endpoint paths keep the older `private-workers` name; they refer to the same [Self-Hosted Machines workers](https://cursor.com/docs/cloud-agent/self-hosted.md).
 
-Authenticate with the pool's service account API key via Basic auth or Bearer token. Other API key types are rejected.
+Authenticate with an API key via Basic auth or Bearer token. The pool controller endpoints (pending requests, claims, and session tokens) require a team service account API key with the `agent` scope. The other endpoints also accept a user API key.
 
 ### List Workers
 
@@ -3557,6 +3568,77 @@ Unique identifier for the worker (for example, `pw_123`).
 curl --request GET \
   --url "https://api.cursor.com/v0/private-workers/pw_123" \
   -u "$CURSOR_API_KEY:"
+```
+
+### List Workers By ID
+
+GET
+
+`/v0/private-workers?workerIds=`
+
+Read up to 100 workers in one call. Pool controllers use this to check which of their workers are still connected without calling [Get Worker By ID](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-worker-by-id) once per worker.
+
+This endpoint accepts personal user API keys as well as team service account keys. A service account key needs the `agent` scope; one without it gets `401`.
+
+The call answers in full or fails; it never returns part of the answer. A `503` means the lookup is temporarily unavailable. Try again later, and don't treat the requested workers as gone.
+
+#### Query Parameters
+
+`workerIds` string (required)
+
+Comma-separated worker IDs. A repeated `workerIds` key adds more IDs. Send 1 to 100 IDs, each at most 64 characters. Duplicates are collapsed, and a blank entry returns `400`.
+
+`workerIds` can't be combined with `status`, `scope`, `limit`, or `pageToken`. That returns `400`.
+
+#### Response Fields
+
+`workers` array
+
+Workers found, in request order. Each entry has the same fields as [List Workers](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-workers).
+
+`notFoundWorkerIds` string\[]
+
+Requested IDs with no matching worker, in request order. A worker that isn't connected and a worker your key can't see both appear here.
+
+`observedAtMs` integer
+
+Server time, in Unix milliseconds, taken before worker state was read.
+
+Every distinct requested ID appears exactly once, in either `workers` or `notFoundWorkerIds`.
+
+#### Rate Limits
+
+Each call counts once, whatever the number of IDs, against its own limit of **120 requests per minute** and **7,200 requests per hour**. Over the limit, it returns `429` with a `Retry-After` header.
+
+```bash
+curl --request GET \
+  --url "https://api.cursor.com/v0/private-workers?workerIds=pw_123,pw_456" \
+  -u "$CURSOR_API_KEY:"
+```
+
+**Response:**
+
+```json
+{
+  "workers": [
+    {
+      "workerId": "pw_123",
+      "repoOwner": "acme",
+      "repoName": "payments-service",
+      "repoUrl": "https://github.com/acme/payments-service",
+      "workspaceRootPath": "/home/agent/payments-service",
+      "connectedAtMs": 1737306880000,
+      "userId": 0,
+      "teamId": 456,
+      "serviceAccountId": "sa_abc123",
+      "isInUse": true,
+      "activeBcId": "bc-00000000-0000-0000-0000-000000000002",
+      "name": "gpu-worker-1"
+    }
+  ],
+  "notFoundWorkerIds": ["pw_456"],
+  "observedAtMs": 1737306895000
+}
 ```
 
 ### List Pools

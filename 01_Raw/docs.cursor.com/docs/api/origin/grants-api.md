@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/grants-api
-fetched_at: 2026-09-28T06:10:41.135658+00:00
+fetched_at: 2026-11-23T08:28:22.211634+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,7 +24,7 @@ Each grant names exactly one principal.
 
 A team-group grant is the floor every member of that built-in group holds on the resource. On a namespace it is the team's namespace floor. On a repository it is the team's per-repository override, and deleting it returns the repository to the namespace floor.
 
-Users must belong to the owner's organization. A group must be one the owner's team owns, or an active group in that team's organization; a team's own groups are grantable even when the team is not linked to an organization. The write endpoints answer a user or group that does not exist exactly like one outside the organization, so a response never confirms that a principal exists. List responses omit principals that no longer resolve to an active user, group, or the owning team.
+A user must be an active member of the owner's team or of that team's organization. A group must be one the owner's team owns, or an active group in that team's organization; a team's own groups are grantable even when the team is not linked to an organization. The write endpoints answer a user or group that does not exist exactly like one outside the organization, so a response never confirms that a principal exists. List responses omit principals that no longer resolve to an active user, group, or the owning team.
 
 ## Permissions
 
@@ -43,7 +43,7 @@ List responses report `custom` (repository) or `PERMISSION_CUSTOM` (namespace) f
 
 Four scopes cover the grants API, all of them listed in [Scopes](https://cursor.com/docs/api/origin/reference/scopes.md): `repository:settings:read` and `repository:settings:write` for repository grants, `namespace:settings:read` and `namespace:settings:write` for namespace grants.
 
-App installations can hold all four, so a robot calls the grants API with an installation access token. User access tokens work too. Requesting a `:write` scope also grants the matching `:read` scope. List endpoints cost 1 point and writes cost 5 against the budget in [Rate limits](https://cursor.com/docs/api/origin/reference/rate-limits.md).
+App installations can hold all four, so a robot calls the grants API with an installation access token. Cursor user credentials work too. Requesting a `:write` scope also grants the matching `:read` scope. List endpoints cost 1 point and writes cost 5 against the budget in [Rate limits](https://cursor.com/docs/api/origin/reference/rate-limits.md).
 
 ## Upserts and deletes
 

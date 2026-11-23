@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/apps
-fetched_at: 2026-11-09T07:30:16.344937+00:00
+fetched_at: 2026-11-23T08:28:22.813870+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,6 +30,8 @@ When Cursor has prepared the app, it shows you a tray where you can preview the 
 
 You can bring your own resources and integrations. Configure secrets and keys for them while building your app or in the [Apps dashboard](https://cursor.com/dashboard/apps#secrets).
 
+To give a published app one of your saved secrets, open the app's **Secrets** section in the Apps dashboard and click **Add secret**. A new deployment with the secret starts right away. If the secret is limited to other apps, **Widen and add** also gives this app access to it.
+
 ## Sharing
 
 | Visibility        | Who can open it                                                          |
@@ -39,6 +41,15 @@ You can bring your own resources and integrations. Configure secrets and keys fo
 | Public            | Anyone with the link                                                     |
 
 Public sharing is disabled by default for Teams and Enterprise. A team admin can turn it on in the [Apps dashboard](https://cursor.com/dashboard/apps#danger-zone).
+
+To change who can open an app, use the **Access** section on the app's page in the Apps dashboard. Pick a visibility under **Who can access**, then click **Add people or groups** and give each person or group a role:
+
+| Role   | What they can do                                |
+| :----- | :---------------------------------------------- |
+| Viewer | Open the app while it's private                 |
+| Editor | Open the app and republish it from their agents |
+
+Editors can change the app's code, including code that uses your secrets and API keys, and publish it to the app's address. Only add people you trust with those keys. Only the owner can change the app's settings. An Editor sees the app's dashboard page read-only, with a "Shared with you" banner and without the app's actions, secrets, or access settings.
 
 ## API keys for Grok Bot and scripts
 
@@ -83,6 +94,7 @@ Team admins can also:
 - Allow or disallow public apps. Disallowing them moves existing public apps back to team visibility.
 - Allow or disallow API keys opening apps.
 - Approve publishes the review blocked, except for malicious code, hardcoded secrets, or exposed credentials.
+- On Enterprise plans, set an app retention period of 60 to 365 days under **Data retention**. Apps with no activity for that long are unpublished, and the owner is emailed 30 days before. An unpublished app's secrets and database can't be recovered.
 
 Changes to these settings are recorded in the team's audit log.
 

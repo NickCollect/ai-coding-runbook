@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export
-fetched_at: 2026-11-16T07:30:45.157993+00:00
+fetched_at: 2026-11-23T08:28:23.649284+00:00
 fetch_method: mintlify_md
 ---
 
@@ -238,6 +238,7 @@ Everything below is on by default for a new destination, except `conversation_co
 - `cursor.cloud_agent.pull_request`: `opened` / `merged` / `closed` / `creation_failed`, with the repository URL
 - `cursor.cloud_agent.mcp_auth_error`: an MCP server rejected the run's credentials
 - `cursor.cloud_agent.review_followup`: a pull request comment or review, or Bugbot Autofix, started a cloud agent run on an existing pull request
+- `cursor.cloud_agent.project_invite`: `sent` / `accepted`, a member invited a teammate to a shared cloud Project, or a teammate joined it by accepting an invite or opening its share link
 - `cursor.grok_bot.tool_result`: every builtin tool call a Bot made, with its outcome and duration
 - `cursor.grok_bot.tool_decision`: who allowed or refused a Bot tool call (a person, Auto-review, a hook, or no gate)
 - `cursor.grok_bot.mcp_tool_call`: a Bot connector (MCP) tool call
@@ -310,7 +311,7 @@ Metrics (`cursor.token.usage`, `cursor.tool.calls`, `cursor.cost.usage`) are agg
 
 `cursor.user.account_id` is the member's Admin API id. Join it to `id` in the [`GET /teams/members`](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) response to name the person behind a record. `cursor.user.email` names the member directly. Both are optional and appear only alongside `cursor.user.id`, so don't require them on every record. The [resource attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#resource-attributes) table has the presence rules.
 
-Cloud agent records (`cursor.cloud_agent.*`) carry the same user attributes, resolved from the run's owner. A run started with a team API key or a service account has no owner and carries none.
+Cloud agent records (`cursor.cloud_agent.*`) carry the same user attributes, resolved from the run's owner. A run started with a team API key or a service account has no owner and carries none. `cloud_agent.project_invite` is the exception: its user attributes name the person who acted, the inviter on `sent` and the person who joined on `accepted`, and the other person rides on the log record.
 
 **Group a cloud Project**
 

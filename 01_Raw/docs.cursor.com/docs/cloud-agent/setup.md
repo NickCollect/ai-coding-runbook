@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-10-26T05:39:59.893028+00:00
+fetched_at: 2026-11-23T08:28:23.385603+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,7 +43,27 @@ Use a multi-repo environment when an agent needs to work across more than one re
 
 Multi-repo environments are useful when your frontend, backend, infrastructure, or shared libraries live in separate repos. The agent can inspect the full workspace, make coordinated changes, run tests across repos, and open pull requests in the repos it changes.
 
+To see how agents get access to other repos and environments as they work, see [Access Other Repositories](https://cursor.com/docs/cloud-agent/repo-access.md).
+
 You can see which environment is active, along with all past active versions, by visiting the environment's configuration page on the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments).
+
+### Repository dependencies
+
+To give agents git access to extra repos without cloning them, list them in `repositoryDependencies` in `.cursor/environment.json`. Cursor adds them to the agent's git credentials. Your install script or the agent clones the ones it needs.
+
+```json
+{
+  "repositoryDependencies": ["github.com/acme/design-tokens"],
+  "install": "[ -d ../design-tokens ] || git clone https://github.com/acme/design-tokens.git ../design-tokens; pnpm install"
+}
+```
+
+Cursor adds an entry only when:
+
+- It's on the same host as the environment's main repo, such as `github.com`.
+- On GitHub, it has the same owner as that repo, and you can push to it.
+
+Other entries are skipped without an error, so cloning them later fails. Anyone who can edit the file can add repos to every agent's git credentials, so review changes to it like CI configuration.
 
 ### Environment resolution order
 

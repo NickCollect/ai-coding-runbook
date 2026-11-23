@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/voice-chat
-fetched_at: 2026-11-09T07:30:16.068918+00:00
+fetched_at: 2026-11-23T08:28:22.081275+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,6 +60,12 @@ You can also change the voice during a call. That choice sticks to the agent you
 - **A signed-in account.** Sign in to Cursor with your account. Sessions authenticated with an API key can't start voice chat.
 - **Microphone permission.** Allow Cursor to use your microphone when your operating system or browser asks. If you denied it earlier, Cursor shows "Microphone blocked. Allow it in your system or browser settings." On iOS, it shows "Microphone blocked. Allow it in Settings." Turn microphone access back on there, then start the call again.
 
+## Turn voice chat off
+
+Team admins can turn off **Enable voice chat** in [team settings](https://cursor.com/dashboard/team-settings). When it's off, voice chat is hidden for everyone on the team, and members' voice settings show "Your team admin turned off voice chat."
+
+On web, turn off **Voice chat** in your Voice settings to hide voice chat everywhere you use Cursor. Dictation keeps working.
+
 ## iOS
 
 [Cursor for iOS](https://cursor.com/docs/cloud-agent/mobile.md) supports a few extras for calls on the go:
@@ -99,6 +105,7 @@ The button is hidden in:
 - Archived chats
 - Claude Code chats
 - Chats owned by another teammate
+- Teams whose admin turned off voice chat, or after you turn off **Voice chat** in your settings
 
 In the IDE, it's also hidden for cloud agents that are still streaming and when dictation is turned off. If none of these apply, update Cursor.
 

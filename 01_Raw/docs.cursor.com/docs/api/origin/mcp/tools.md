@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/mcp/tools
-fetched_at: 2026-11-16T07:30:44.018602+00:00
+fetched_at: 2026-11-23T08:28:22.263295+00:00
 fetch_method: mintlify_md
 ---
 
@@ -502,7 +502,7 @@ Search pull requests across the Origin-hosted repositories the caller can read, 
 
 ## pull\_request\_read
 
-Read one Origin-hosted pull request through a single view: summary, files, commits, reviews, comments, or threads. view defaults to summary. Summary includes labels, requested reviewers, and stack membership (stack id and parent pull request) when the pull request is stacked. The summary, reviews, and comments views carry authorDisplayName and authorHandle beside the opaque author id when Origin resolves them, so say the name rather than the id; a requested reviewer carries displayName, and handle for a user, while a group reviewer is an id with no name. The threads view requires threadIds and pages comments in those threads. Comments and threads carry url, a cursor.com link to that thread or comment on the pull request page. Images and recordings pasted into the description, a review, or a comment appear as cursor.com user-attachments URLs, and a cloud agent's screenshots and recordings as cursor.com artifact links; fetch one with get\_pull\_request\_attachment.
+Read one Origin-hosted pull request through a single view: summary, files, commits, reviews, comments, or threads. view defaults to summary. Summary includes labels, requested reviewers, and stack membership (stack id and parent pull request) when the pull request is stacked. The summary, reviews, and comments views carry authorDisplayName and authorHandle beside the opaque author id when Origin resolves them, so say the name rather than the id; a requested reviewer carries displayName and handle when Origin resolves them, and a group's are its name and organization/slug from the repository's reviewer roster, so a group missing from the roster is a bare grp\_… id. The threads view requires threadIds and pages comments in those threads. Comments and threads carry url, a cursor.com link to that thread or comment on the pull request page. Images and recordings pasted into the description, a review, or a comment appear as cursor.com user-attachments URLs, and a cloud agent's screenshots and recordings as cursor.com artifact links; fetch one with get\_pull\_request\_attachment.
 
 - **Access:** Read-only
 - **Asks for confirmation:** No
@@ -986,7 +986,7 @@ Create a repository label so update\_pull\_request\_labels can apply it. label i
 
 ## request\_pull\_request\_reviewers
 
-Request reviewers on a pull request. users take a public user\_… id or email and groups a grp\_… id, qualified slug, or slug. reviewers take \{ kind, id } entries, the shape this tool returns: kind user, group, or service\_account, with a user\_…, grp\_…, or sa\_… id; a service\_account must be a bot whose owner is on the repository's team, and a personal bot may not review a pull request its owner authored. Returns the reviewers this call requested, each with displayName when Origin resolves one, and handle for a user; a group reviewer is an id with no name.
+Request reviewers on a pull request. users take a public user\_… id or email and groups a grp\_… id, qualified slug, or slug. reviewers take \{ kind, id } entries, the shape this tool returns: kind user, group, or service\_account, with a user\_…, grp\_…, or sa\_… id; a service\_account must be a bot whose owner is on the repository's team, and a personal bot may not review a pull request its owner authored. Returns the reviewers this call requested, each with displayName and handle when Origin resolves them; a group's are its name and organization/slug from the repository's reviewer roster.
 
 - **Access:** Writes content other people see
 - **Asks for confirmation:** No

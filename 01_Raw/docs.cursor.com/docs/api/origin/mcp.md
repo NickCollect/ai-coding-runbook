@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/mcp
-fetched_at: 2026-11-16T07:30:43.999178+00:00
+fetched_at: 2026-11-23T08:28:22.212796+00:00
 fetch_method: mintlify_md
 ---
 
@@ -57,7 +57,7 @@ Unknown tools and invalid parameters return JSON-RPC errors instead of tool resu
 
 ## Results
 
-A tool that succeeds returns its data as JSON in the text content and again as the structured content. A tool that returns an image, such as `get_pull_request_attachment`, adds an `image` content block after the text, with the bytes base64-encoded and their `mimeType`; the JSON describes the image and says how it was delivered.
+A tool that succeeds returns its data as JSON in the text content and again as the structured content, `{ "data": … }`. A tool that returns an image, such as `get_pull_request_attachment`, adds an `image` content block after the text, with the bytes base64-encoded and their `mimeType`; the JSON describes the image and says how it was delivered.
 
 ## Pull request attachments
 

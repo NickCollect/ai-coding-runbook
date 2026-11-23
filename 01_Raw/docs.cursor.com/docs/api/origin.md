@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin
-fetched_at: 2026-11-09T07:30:16.104865+00:00
+fetched_at: 2026-11-23T08:28:22.300810+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 
 - [Full reference (Markdown)](https://cursor.com/docs/api/origin/llms-full.txt): The complete Origin API reference as a single Markdown file.
 - [OpenAPI specification](https://cursor.com/docs/api/origin/openapi.yaml): Machine-readable OpenAPI 3.1 spec with request and response schemas.
-- [Origin Migration API](https://cursor.com/docs/api/origin/migrations.md): Endpoints for migrating repositories between GitHub and Origin mirrors, called with a user access token.
+- [Origin Migration API](https://cursor.com/docs/api/origin/migrations.md): Endpoints for migrating repositories between GitHub and Origin mirrors, called with a Cursor user credential.
 
 ## Guides
 
@@ -69,6 +69,7 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Create Installation Access Token](https://cursor.com/docs/api/origin/reference/create-installation-access-token.md)
 - [Create Installation User Token](https://cursor.com/docs/api/origin/reference/create-installation-user-token.md)
 - [List App Installation Repositories](https://cursor.com/docs/api/origin/reference/list-app-installation-repositories.md)
+- [List Installation User Repositories](https://cursor.com/docs/api/origin/reference/list-installation-user-repositories.md)
 - [List Webhook Deliveries](https://cursor.com/docs/api/origin/reference/list-webhook-deliveries.md)
 - [Batch Redeliver Webhook Deliveries](https://cursor.com/docs/api/origin/reference/batch-redeliver-webhook-deliveries.md)
 - [Ping Webhook](https://cursor.com/docs/api/origin/reference/ping-webhook.md)
@@ -244,6 +245,7 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Repository Label Events](https://cursor.com/docs/api/origin/reference/repository-label-events.md)
 - [Repository Label Updated](https://cursor.com/docs/api/origin/reference/repository-label-updated.md)
 - [Pull Request Events](https://cursor.com/docs/api/origin/reference/pull-request-events.md)
+- [Pull Request Commandeered](https://cursor.com/docs/api/origin/reference/pull-request-commandeered.md)
 - [Pull Request Auto Merge Enabled](https://cursor.com/docs/api/origin/reference/pull-request-auto-merge-enabled.md)
 - [Pull Request Auto Merge Disabled](https://cursor.com/docs/api/origin/reference/pull-request-auto-merge-disabled.md)
 - [Pull Request Label Events](https://cursor.com/docs/api/origin/reference/pull-request-label-events.md)
@@ -259,7 +261,6 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Installation Suspended](https://cursor.com/docs/api/origin/reference/installation-suspended.md)
 - [Installation Unsuspended](https://cursor.com/docs/api/origin/reference/installation-unsuspended.md)
 - [Installation Deleted](https://cursor.com/docs/api/origin/reference/installation-deleted.md)
-- [Pull Request Commandeered](https://cursor.com/docs/api/origin/reference/pull-request-commandeered.md)
 
 
 ---

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/acting-as-users
-fetched_at: 2026-10-19T05:32:43.281870+00:00
+fetched_at: 2026-11-23T08:28:22.121971+00:00
 fetch_method: mintlify_md
 ---
 
@@ -208,7 +208,7 @@ Treat installation user tokens as opaque: don't inspect or parse their contents.
 Authorization: Bearer YOUR_INSTALLATION_USER_TOKEN
 ```
 
-Each request must fit the installation's approved scopes and repository selection, the user's Origin grants, and the token's limits. Otherwise it returns `403`, or `404` if the resource isn't visible.
+Endpoints that accept the token show an **Installation user token** Auth badge in the [Origin API reference](https://cursor.com/docs/api/origin.md) and list `installation_as_user` in their `x-origin-scopes` `tokenTypes` in the [OpenAPI specification](https://cursor.com/docs/api/origin/openapi.yaml). To find the repositories a token can read, call [List Installation User Repositories](https://cursor.com/docs/api/origin/reference/list-installation-user-repositories.md). Each request must fit the installation's approved scopes and repository selection, the user's Origin grants, and the token's limits. Otherwise it returns `403`, or `404` if the resource isn't visible.
 
 Actor fields name the user and can include `performedVia.app` with your app's `id` and optional `displayName`. Attribution applies to the action that field describes: on a comment's author, it identifies the app that created the comment. It doesn't identify an app that later edited or deleted it. `performedVia` is absent for direct user actions and can be absent when delegation data is unavailable.
 

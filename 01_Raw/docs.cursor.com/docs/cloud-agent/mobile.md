@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/mobile
-fetched_at: 2026-11-09T07:30:16.475730+00:00
+fetched_at: 2026-11-23T08:28:22.970815+00:00
 fetch_method: mintlify_md
 ---
 
@@ -142,6 +142,8 @@ For the trust boundaries that apply when tool calls run on your computer, see [S
 ### Team controls
 
 Team and Enterprise admins control Remote Control access from [Cursor Dashboard → Cloud Agents → Self-Hosted](https://cursor.com/dashboard/cloud-agents#self-hosted). When an admin enables Remote Control, Cursor also enables the team's self-hosted worker access. When it's off, members can't enable Remote Control or hand local sessions to their other devices.
+
+Admins can also see which computers and paired devices members have registered, under **Remote Control computers** in the Remote Control section of team or organization settings. Click **Manage devices** to revoke a single device, **Revoke computer** to unregister a computer until its owner turns Remote Control back on there, or revoke all of a member's computers at once.
 
 ## Availability
 

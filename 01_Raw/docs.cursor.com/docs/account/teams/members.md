@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/members
-fetched_at: 2026-11-02T07:00:20.889944+00:00
+fetched_at: 2026-11-23T08:28:21.456560+00:00
 fetch_method: mintlify_md
 ---
 
@@ -140,7 +140,7 @@ On Enterprise teams, admins can review and revoke the personal Cursor API keys m
 
 Revoke one key, or revoke all of a member's keys at once. Requests that use a revoked key fail immediately, and the member can create new keys unless the team blocks personal key creation. Revocations appear in the [audit log](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#api-keys-and-service-accounts) as `user_api_key` events with the `revoke` action.
 
-To block new personal keys, turn off **Allow Personal API Key Creation** in the **Personal API Keys** section of the **Team** tab under **API keys** at [grok.com/dashboard](https://grok.com/dashboard). While it's off, members of the team can't create or rotate personal Cursor API keys in any workspace. Existing keys keep working until they're revoked.
+To block new personal keys, turn off **Allow personal API key creation** in [Team Settings > Security & automation](https://cursor.com/dashboard/team-settings?view=extension-security). In the v2 dashboard, the switch is under **Team settings** → **Security & identity**, or **Security & automation** on Enterprise plans. While it's off, members of the team can't create or rotate personal Cursor API keys in any workspace, and the dashboard shows "Personal API key creation is disabled by a team you belong to." Existing keys keep working until they're revoked.
 
 ## Domain settings
 

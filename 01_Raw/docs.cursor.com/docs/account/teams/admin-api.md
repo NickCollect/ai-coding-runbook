@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-11-16T07:30:43.415676+00:00
+fetched_at: 2026-11-23T08:28:21.318004+00:00
 fetch_method: mintlify_md
 ---
 
@@ -884,6 +884,7 @@ Each object in `data` contains:
 - `pricing` object - Cost of the item:
   - `currency` string - Always `USD`
   - `contracted` string - Cost in US dollars, as a decimal string with 10 decimal places, such as `"0.0421500000"`. Can be negative.
+  - `contractedByComponent` object | undefined - Contracted cost in US dollars by meter name. Each value is a decimal string with 10 decimal places, and the values sum to `contracted`. Zero-cost components are omitted. This field is available for Unified Billing Events and is omitted for older raw model events or when no component cost is available.
 - `displayExtras` object | undefined - Display details. Omitted when it has no fields.
   - `model` string | undefined - Model name. Auto requests appear as `auto`, or as `auto-balance:` or `auto-intelligence:` followed by the model name. Omitted when the item has no model to show, which includes every `grok-bot` item.
   - `userEmail` string | undefined - Email address of the team member, when the principal is a `user`
@@ -897,7 +898,7 @@ Each object in `data` contains:
 
 Fields with no value are omitted. The response never contains `null`, and it has no total count. Request pages until `hasMore` is `false`.
 
-**Cost visibility**: For teams that aren't on an Enterprise plan, `pricing.contracted` is `"0.0000000000"` on items with `usageType` `included`. The same applies to `usage` items with `usageType` `credits`, except for some credit grants. The cost of those items isn't returned, so a sum of `pricing.contracted` leaves it out. Nothing in the response marks these values, and `usage` amounts stay unchanged.
+**Cost visibility**: For teams that aren't on an Enterprise plan, `pricing.contracted` is `"0.0000000000"` on items with `usageType` `included`. The same applies to `usage` items with `usageType` `credits`, except for some credit grants. The cost of those items isn't returned, and `pricing.contractedByComponent` is omitted. A sum of `pricing.contracted` leaves this cost out. Nothing else in the response marks these values, and `usage` amounts stay unchanged.
 
 Items with `chargeCategory` `credit` or `adjustment`, and items billed to an `api_key` or `team` principal, start at `2026-09-01T00:00:00Z`. A time range that ends at or before that time returns `usage` items only, and none billed to an `api_key` or `team` principal.
 
@@ -940,7 +941,11 @@ curl -X GET "https://api.cursor.com/v2/teams/billing-items?startTime=2026-10-01T
       },
       "pricing": {
         "currency": "USD",
-        "contracted": "0.0421500000"
+        "contracted": "0.0421500000",
+        "contractedByComponent": {
+          "prompt-text-tokens": "0.0300000000",
+          "completion-text-tokens": "0.0121500000"
+        }
       },
       "displayExtras": {
         "userEmail": "jordan@example.com",

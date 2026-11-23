@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/private-connectivity
-fetched_at: 2026-11-16T07:30:44.704966+00:00
+fetched_at: 2026-11-23T08:28:23.025905+00:00
 fetch_method: mintlify_md
 ---
 
@@ -207,6 +207,17 @@ docker run -d --restart=always --name cloudflared \
 ```
 
 Keep the tunnel token secret. Do not send it through email or chat.
+
+### Private Network Tunnels for MCP servers
+
+To let Cloud Agents reach [MCP](https://cursor.com/docs/mcp.md) servers on your private network, admins can create a Cloudflare tunnel themselves from **Integrations** → **Private Network Tunnels** in the [dashboard](https://cursor.com/dashboard/integrations).
+
+1. Click **Add Tunnel**.
+2. For each MCP host, enter its **Private Hostname** and **Service URL**. Click **Add Host** to add more.
+3. Copy the **Connector Token**. It's shown only once.
+4. Run `cloudflared` with the token on a machine in your network, as a service, in the foreground, or with Docker. For example: `cloudflared tunnel run --token <TOKEN>`.
+
+**Rotate Token** issues a new connector token. **Delete Tunnel** removes the tunnel, and the MCP hosts behind it stop working.
 
 ## Complete the source control connection
 

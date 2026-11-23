@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/projects
-fetched_at: 2026-11-16T07:30:43.765119+00:00
+fetched_at: 2026-11-23T08:28:21.851716+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,6 +16,7 @@ A Project maintains context over months of work, delegates tasks to many agents 
 
 - **The coordinator plans and delegates.** It creates and manages agents on your behalf, running as many in parallel as the work needs. Because it delegates rather than executes, it stays responsive to your direction.
 - **Agents work inside the Project.** Open any agent the coordinator starts to follow its work or talk to it directly.
+- **Work reaches other repos.** When the work needs another repo or environment, the coordinator asks for access and starts agents there. See [Access Other Repositories](https://cursor.com/docs/cloud-agent/repo-access.md#how-it-works).
 
 ## Create a Project
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/github
-fetched_at: 2026-10-26T05:40:00.419620+00:00
+fetched_at: 2026-11-23T08:28:23.934250+00:00
 fetch_method: mintlify_md
 ---
 
@@ -183,6 +183,8 @@ The GitHub app requests the following permissions to support Cursor features:
 | **Organization custom properties** | Surface organization-defined repository metadata in filtering                |
 
 All permissions follow the principle of least privilege.
+
+These are the Cursor GitHub App's permissions. Inside a Cloud Agent's VM, `git` and `gh` use a separate, narrower token that can't dispatch or re-run workflows. If the agent needs to, add a GitHub personal access token as a [personal secret](https://cursor.com/docs/cloud-agent/security-network.md#runtime-secrets) named `GH_TOKEN`.
 
 ## Protected Git Scopes
 

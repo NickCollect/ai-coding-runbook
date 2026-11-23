@@ -1,12 +1,131 @@
 ---
 source_url: https://cursor.com/docs/cli/changelog
-fetched_at: 2026-10-26T05:39:59.258184+00:00
+fetched_at: 2026-11-23T08:28:22.414511+00:00
 fetch_method: mintlify_md
 ---
 
 # Cursor CLI changelog
 
 The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent --version` to check your installed version, and `agent update` to upgrade in place.
+
+## v2026.11.17
+
+### Agent
+
+- &#x20;**Prompt hooks from the team dashboard now run as prompts.** Prompt hooks a team admin sets up in the [dashboard](https://cursor.com/docs/hooks.md#cloud-distribution-enterprise-only) now run in the CLI with their prompt and model, as they do in the desktop app. Before, the CLI ran each one as an empty command, so the prompt never ran. Dashboard command hooks with no script are now skipped.
+- **Sandboxed commands can use `/tmp` on Linux.** Set `"privateTmp": true` in [`sandbox.json`](https://cursor.com/docs/reference/sandbox.md), with `readBoundary` set to `"workspace"`, and `/tmp` inside sandboxed commands becomes the workspace's own scratch folder, the same one `$TMPDIR` points to. Tools that write to a literal `/tmp` path stop failing, files stay there for the next command, and other workspaces can't see them. macOS ignores the setting.
+- **Skip login scripts in the agent's shell.** Set `CURSOR_LOGIN_SHELL=0` and the agent starts its shell without running login scripts such as `/etc/profile`, `~/.bash_profile`, or `~/.zprofile`, so they can't reset your `PATH`. Your rc file, such as `~/.bashrc` or `~/.zshrc`, still runs. Leave it unset to keep the current behavior.
+
+### Security
+
+- **Other programs running as you can no longer read the CLI's memory on Linux.** The CLI now blocks other processes under your user account, including commands the agent runs, from reading its memory, environment, or open files, or attaching a debugger to it. This keeps the credentials the CLI holds out of their reach. To attach a debugger or tracer, set `CURSOR_AGENT_ALLOW_PROCESS_INSPECTION=1` before starting `agent`.
+- **MCP resource downloads follow your file-write rules.** When the agent saves an [MCP](https://cursor.com/docs/mcp.md) resource to disk, the write goes through the same permission checks and approvals as any other file edit, and it must land inside your workspace. Paths that start with `~`, use a URL scheme, or contain `..` are refused, and Ask and Plan modes no longer save resources.
+
+### Self-hosted workers
+
+- **Self-hosted workers can use MCP servers running locally on your machine.** `agent worker` now runs URL servers from `~/.cursor/mcp.json` whose address is `localhost`, `127.0.0.1`, or `[::1]`, such as a desktop app's local MCP endpoint, so agents on the worker can call their tools. Cursor's backend can't reach those addresses. Other URL servers still run on the backend, as described in [MCP servers](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md#mcp-servers).
+- **`agent worker --help` explains when self-hosted workers exit.** A new Lifecycle section says a worker exits with code 0 whenever Cursor releases it: its agent was archived, killed, or expired, its claim went stale, or it sat idle past `--idle-release-timeout`. It recommends running each pool worker under a supervisor, such as a systemd unit, a Windows scheduled task, or a Kubernetes Deployment, and restarting it with `agent worker --pool <name> start --wait`. See [session lifecycle](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#session-lifecycle). Examples in `agent worker controller --help` now use the command you ran, such as `cursor agent`.
+
+### Fixes
+
+- **Fixes to plan mode canvas writes.** In plan mode, the agent can no longer write files outside the canvases folder through a symlinked folder, a hard-linked canvas, or a file name with backslashes on macOS and Linux. Plan mode now refuses canvas writes when a folder inside `~/.cursor/projects` is a symlink to another location. Agent mode is unchanged.
+- **Fixes to edit previews.** Control characters in a file, such as escape codes, now show as visible symbols in the edit preview instead of clearing the screen, renaming the terminal window, or ringing the bell. The file on disk and the text sent to the model are unchanged.
+- **Fixes to PowerShell errors on Windows.** When a PowerShell command the agent runs fails to parse, such as one using `&&` in Windows PowerShell 5.1, the error now comes back in UTF-8, so localized messages are no longer garbled. Error locations now point at the line in the agent's command instead of a temporary script. This applies to CLI and ACP sessions.
+- **Fixes to saving your login in the macOS keychain.** The CLI no longer exposes your access token or API key in the process list while it saves your login. A token or API key that is too long or contains a line break now gets a clear error and leaves your saved login unchanged. Two CLI sessions saving at the same time no longer fail with a duplicate item error.
+- **Fixes to clicks on computer-use workers.** On a worker started with [`--computer-use`](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md), PNG and JPEG screenshots keep the size the agent works in instead of shrinking, so clicks land where the agent aimed instead of up and to the left of the target.
+
+## v2026.11.14
+
+### Agent
+
+- **Fewer lost edits when the agent rewrites a file.** If you change a file after the agent read all of it or wrote it earlier in the session, the agent's next write that replaces the whole file is refused, nothing is written, and the agent is told to read the file again and retry. Reading only part of a file turns this check off for that file until the agent reads all of it or writes it again.
+- **Sandboxed commands run in the right folder.** Sandboxed shell commands now start in the directory the agent asked for instead of the workspace root. If the [sandbox](https://cursor.com/docs/reference/sandbox.md) can't enter that directory, the command fails with a message naming a folder to use, and the agent no longer asks to rerun it outside the sandbox.
+
+### Self-hosted workers
+
+- **Add MCP servers to self-hosted workers at launch.** Programs that start `agent worker` can pass extra stdio MCP servers in the `CURSOR_WORKER_MCP_CONFIG_JSON` environment variable, and the worker loads them when it starts, alongside the servers in `~/.cursor/mcp.json`. A `disabledServers` list in the same JSON turns off any servers you name. The worker removes the variable from its environment, so the commands it runs don't inherit any secrets in it.
+
+## v2026.11.12
+
+### Agent
+
+- **Agent questions now include the context behind them.** When the agent stops to ask you a question, it now writes what it found and why in its message first. You no longer get a question that refers to reasoning hidden in collapsed thinking.
+- **Fixed file-scoped rules and skills going missing after some reads.** When the agent reads a file that matches a glob-scoped [rule](https://cursor.com/docs/rules.md) or a nested [skill](https://cursor.com/docs/skills.md), it now gets that rule or skill even if the file is empty, an image, or too large to read. Before, reading a file like an empty `__init__.py` dropped the rule silently, and later reads in the same folder didn't bring it back.
+
+### Self-hosted workers
+
+- **`agent worker` shows whether your team allows minting source-control tokens.** When you start a self-hosted worker with `--mint-scm-token`, the status panel and startup summary now say whether the team setting is on, off, unavailable, or couldn't be checked. If it's off, the worker tells you a team admin can turn it on under Cloud Agents → Self-hosted Machines, and [any-repo pool](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools) workers started without `--clone-git-repos` get a note that they need it.
+
+### Fixes
+
+- **Fixed MCP tool calls with empty arguments.** When the agent calls an [MCP](https://cursor.com/docs/mcp.md) tool with empty arguments, the call now runs instead of failing with a parse error.
+- **Fixes to agent edits that replace every match.** When the agent replaces every occurrence of a string in a file, such as stripping indentation or collapsing blank lines, it no longer deletes code outside the matched text while still reporting success.
+
+## v2026.11.11
+
+### Fixes
+
+- **To-do and question updates no longer fail over a missing closing bracket.** When the agent sends its to-do items or its questions for you as a list that stops right after the last complete item, the CLI now closes the list and runs the tool call instead of failing it.
+
+## v2026.11.10
+
+### Cloud Agents
+
+- **Fixed Cloud Agents starting without your unpushed commits.** When you hand a conversation to a Cloud Agent with `&` from a branch that has local commits but no uncommitted changes, the CLI now pushes those commits so the agent starts from the code you have. Before, the agent started from the remote copy of the branch without telling you. If the push fails, the [handoff](https://cursor.com/docs/cli/using.md#cloud-agent-handoff) now stops with an error.
+
+### MCP
+
+- **The agent can find MCP tools by what they do.** When you have many [MCP](https://cursor.com/docs/cli/mcp.md) tools, the agent's tool search now matches words in tool descriptions as well as names, ignoring case, so it can find a tool without knowing its exact name. Search results also show which MCP servers aren't ready yet.
+
+### Self-hosted workers
+
+- &#x20;**`--mint-scm-token` replaces `--mint-github-token` for pool workers.** `agent worker --pool` now takes `--mint-scm-token` to receive short-lived source control tokens during claimed runs, and the help, status panel, and errors now say SCM token. A team admin still has to turn on SCM token minting. The old `--mint-github-token` flag still works as a hidden alias, so existing worker scripts keep running. See the [worker options](https://cursor.com/docs/cli/reference/parameters.md).
+- &#x20;**Workers using `--connect-workspace` now download the live workspace server from downloads.cursor.com.** `agent worker --connect-workspace` now fetches the live workspace server from `https://downloads.cursor.com` first and falls back to `https://cursor.blob.core.windows.net` if that fails, checking each download's signature as before. On locked-down networks, allow outbound HTTPS to downloads.cursor.com alongside the existing host. `agent worker --help` names both. See [worker networking](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#networking).
+- **Fixes to worker hints.** `agent worker` help text and the desktop sharing and computer use warnings now name the debug command the same way the CLI's other hints do, usually `agent worker debug`, instead of always saying `cursor-agent worker debug`.
+
+## v2026.11.05
+
+### Fixes
+
+- **Fixes to Plan mode.** [Plan mode](https://cursor.com/docs/cli/using.md#plan-mode) no longer lets the agent edit a non-markdown file through a symlink with a `.md` name. Those writes are now refused with the usual Plan mode error.
+
+## v2026.11.04
+
+### Plan mode
+
+- **Plan mode no longer lets the agent delete or change code files.** In [Plan mode](https://cursor.com/docs/cli/using.md#plan-mode), the agent can no longer delete non-markdown files, and it can no longer get around the markdown-only rule by writing to a `file://` path. While you plan, only markdown and canvas files can change.
+
+### Self-hosted workers
+
+- **`sessionStart` hooks on self-hosted workers know where the agent was launched from.** On a self-hosted worker, [`sessionStart` hooks](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#hooks) now receive a `surface` field naming where the Cloud Agent was started, such as `desktop`, `web`, `mobile`, `slack`, `linear`, `cli`, `sdk`, `api`, or `automations`. Hooks can use it to set up each session by its source. The field is left out when the source is unknown.
+- **`agent worker debug` accepts `--auth-token-file`.** `agent worker debug` now reads a token from `--auth-token-file` the same way `agent worker start` does, so you can check a worker with the credentials it runs with. It reports which auth method it used, and errors if you pass both `--auth-token` and `--auth-token-file`. See the [worker options](https://cursor.com/docs/cli/reference/parameters.md).
+
+### Fixes
+
+- **Fixes to skills and file search.** When one workspace folder sits inside another, the agent now lists [skills](https://cursor.com/docs/skills.md) defined in the inner folder up front, not only when it works on files there. When the agent searches an absolute path outside the workspace and finds nothing, it now gets a hint to search that directory directly, so it recovers instead of reporting no matches.
+
+## v2026.10.28
+
+### Auto-review
+
+- **Hooks that ask for approval now prompt in Auto-review.** When a [`beforeShellExecution` hook](https://cursor.com/docs/hooks.md#beforeshellexecution-beforemcpexecution) asks for approval, the CLI now prompts you even if [Auto-review](https://cursor.com/docs/agent/security/run-modes.md) would have allowed the shell command. A skip you chose yourself still skips the prompt.
+
+### Headless mode
+
+- **Reasoning token counts in headless usage.** Headless runs now include `reasoningTokens` in the per-turn and total `usage` of the [result output](https://cursor.com/docs/cli/reference/output-format.md#terminal-result) when the model used reasoning tokens, so scripts can track the full token cost of a run.
+
+### Self-hosted workers
+
+- &#x20;**Pool workers keep their API key away from agent tools.** When `agent worker` runs as part of a [worker pool](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#authenticate-workers), or the Cursor desktop app starts it, the worker removes its key from `CURSOR_API_KEY` before starting anything. Shell commands and tools that agents run can no longer read the worker's credential, and the key is redacted from tool output.
+- **Self-hosted workers keep Namespace devboxes awake.** When `agent worker` runs on a [Namespace](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md) devbox, the devbox no longer stops as idle while the worker is serving an agent. The worker holds a Namespace task marker for as long as it runs and removes it when it exits, even after a crash, so an idle devbox can still shut down.
+
+### Fixes
+
+- **Fixes to emoji and wide-character handling.** Arrow keys, Backspace, Delete, and vim motions in the prompt editor now treat an emoji, flag, or accented character as one character instead of leaving broken fragments. Wrapped and truncated text, including the queued message banner, now lines up correctly with CJK characters and emoji.
+- **Fixes to agent tools.** Agent edits no longer hang on malformed patches, and searches with a match-all glob like `**/*` now run instead of failing. The agent reads workspace paths that contain repeated spaces correctly, tools the agent loads on demand show under their own name instead of as an empty MCP call, and long sessions no longer leak memory as the agent parses shell commands.
+- **Better recovery from invalid tool arguments.** When the agent calls a built-in tool it loads on demand with invalid arguments, the error now includes that tool's input schema, or for a very large schema tells the agent where to read it, so the agent can correct its arguments on the next try.
+- **Image generation reports missing reference images.** Image generation now stops with an error naming a missing or unreadable reference image instead of generating an image that ignores it.
+- **Fixes to installing and launching the CLI.** On Windows, when an update can't replace the launcher because an agent is still running, the background helper now stops after a set time and finishes on the next update instead of lingering. On macOS and Linux, the `cursor` command no longer finds itself on your PATH through a symlink or a trailing-slash directory, so it opens the Cursor app.
 
 ## v2026.10.22
 

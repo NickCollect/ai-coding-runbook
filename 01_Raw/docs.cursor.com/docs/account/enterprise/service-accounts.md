@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/enterprise/service-accounts
-fetched_at: 2026-10-19T05:32:42.587412+00:00
+fetched_at: 2026-11-23T08:28:21.158215+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,7 +43,7 @@ Cloud agent runs initiated by service accounts are accessible to all team admins
 
 ### Repository access
 
-Service accounts can initiate cloud agent runs on any repository that has been authorized via the [Cursor GitHub app](https://cursor.com/docs/integrations/github.md).
+Each service account API key has a repository scope: **All repositories from the team's connected Git providers** or **Specific repositories only**. A key can initiate cloud agent runs only on repositories in its scope that have been authorized via the [Cursor GitHub app](https://cursor.com/docs/integrations/github.md).
 
 The GitHub integration must be connected at the team level for service accounts to access repositories. If you have a personal GitHub integration but no team-level integration, service accounts will not be able to initiate cloud agent runs.
 
@@ -53,7 +53,7 @@ To connect GitHub at the team level:
 2. Connect the Cursor GitHub app to your organization
 3. Authorize the repositories you want service accounts to access
 
-Repository access is governed by the permissions configured for your team's GitHub app installation.
+Repository access is governed by the permissions configured for your team's GitHub app installation. To change a key's scope later, use **Edit repository access** on the service account.
 
 ## Creating a service account
 
@@ -63,6 +63,8 @@ Admins can create and manage service accounts from the [Cursor Dashboard](https:
 2. Click **New Service Account**
 3. Enter a name and optional description for the service account
 4. Click **Create**
+
+Each service account API key has its own permissions and repository scope, which you choose when you create the key. Permissions cover areas such as members, usage and spend, audit logs, settings, repositories, Bugbot, security findings, and Cloud Agents. **Run Cloud Agents** is selected by default.
 
 When you create a service account, an API key is generated. Copy this key immediately—it will only be shown once and cannot be retrieved later.
 
@@ -74,6 +76,7 @@ Each service account can have API keys associated with it. You can:
 
 - **View masked keys**: See the last few characters of each key for identification
 - **Rotate keys**: Generate a new key and invalidate the old one
+- **Edit permissions and repository access**: Change what a key can do and which repositories it can reach
 - **Edit name and description**: Rename an active service account or update its description. Its existing API keys keep working
 - **Set spend limits**: Cap how much a service account can spend per billing period
 - **Suspend service accounts**: Stop all of a service account's API keys from working without revoking them, then resume it later

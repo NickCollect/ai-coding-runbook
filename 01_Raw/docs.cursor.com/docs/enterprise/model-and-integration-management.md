@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/model-and-integration-management
-fetched_at: 2026-11-16T07:30:45.112426+00:00
+fetched_at: 2026-11-23T08:28:23.583225+00:00
 fetch_method: mintlify_md
 ---
 
@@ -95,6 +95,8 @@ Higher-priority sources replace lower-priority ones. They do not merge.
 
 When an allowlist is active, only servers matching an allowlist entry can run. Servers that don't match are blocked.
 
+A group can have its own MCP configuration, set in the group's settings under **Members** → **Groups**. A group's lists only narrow the team policy for its members. They can't allow a server or tool that the team policy blocks.
+
 Adding a server to the allowlist does not push it to users' machines. Team members still need to configure the server in their own [Cursor settings](https://cursor.com/docs/mcp.md).
 
 To distribute an approved server, add it to a [team marketplace](https://cursor.com/docs/plugins.md#team-marketplaces). Admins can link existing standalone Team MCP servers to the Default marketplace so teammates can install and configure them in the Agent Window, IDE, and CLI.
@@ -152,6 +154,16 @@ The allowlist entry matches against the full URL `https://mcp.acme.com/sse`:
 | `https://mcp.acme.com/sse` | This exact URL                          |
 | `https://*.acme.com/*`     | Any subdomain and path under `acme.com` |
 | `https://mcp.acme.com/*`   | Any path on this host                   |
+
+### Local and Cloud lists
+
+The **Team MCP Allowlist** in MCP Configuration has two halves. The **Local list** covers local agents in the Cursor app and CLI. The **Cloud list** covers Cloud Agents and Grok Bot. Each rule applies to **Local only**, **Cloud only**, or **Local and Cloud**. Click **Use one list** to have Cloud Agents follow the Local list again. Group MCP settings can still narrow either list.
+
+To allow a server your team already uses, click **Add** and pick it under **Team servers**. The list shows MCP servers an admin added for the team and servers from team plugins, each with its exact URL or command. A server the rules already allow for local and cloud agents reads **Already allowed**. Picking a server opens **New rule** with its name and URL or command filled in, set to **Local and Cloud** with all tools allowed. You can still edit every field.
+
+The allowlist doesn't check MCP servers that a [self-hosted worker](https://cursor.com/docs/cloud-agent/self-hosted.md) loads from its own `mcp.json`.
+
+Agents that run in the cloud, including Cloud Agents and agents hosted with the [Agent SDK](https://cursor.com/docs/agent-sdk/deployment.md), follow the tool controls of the list that applies to Cloud Agents. A tool outside those controls isn't offered to the agent, and calling it fails with an error that names the list, for example "This tool is outside the tool limit in your team's MCP allowlist for cloud agents, which applies because this agent runs in the cloud." Local Agent SDK and CLI runs follow the Local list.
 
 ### Per-server tool controls
 

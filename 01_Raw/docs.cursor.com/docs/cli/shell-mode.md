@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/shell-mode
-fetched_at: 2026-05-05T19:55:37.992931+00:00
+fetched_at: 2026-11-23T08:28:22.699184+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,10 +12,21 @@ Shell Mode runs shell commands directly from the CLI without leaving your conver
 
 ## Command execution
 
-Commands run in your login shell (`$SHELL`) with the CLI's working directory and environment. Chain commands to run in other directories:
+Commands run in your shell (`$SHELL` when it's zsh or bash) with the CLI's working directory and environment. Chain commands to run in other directories:
 
 ```bash
 cd subdir && npm test
+```
+
+By default, the shell is a login shell, so your login scripts run:
+
+- **bash**: `/etc/profile`, then the first of `~/.bash_profile`, `~/.bash_login`, and `~/.profile`
+- **zsh**: `/etc/zprofile`, `~/.zprofile`, `/etc/zlogin`, and `~/.zlogin`
+
+To skip them, start the CLI with `CURSOR_LOGIN_SHELL=0`. Zsh runs `~/.zshrc` either way. Bash runs `~/.bashrc` when you skip the login scripts, and otherwise only if one of them sources it. Only the value `0` turns the login shell off. The agent's own shell commands follow the same setting.
+
+```bash
+CURSOR_LOGIN_SHELL=0 agent
 ```
 
 ## Output

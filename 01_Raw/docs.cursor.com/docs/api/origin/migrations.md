@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/migrations
-fetched_at: 2026-10-12T06:49:40.530179+00:00
+fetched_at: 2026-11-23T08:28:22.264919+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ The endpoints use the [Origin API](https://cursor.com/docs/api/origin.md) base U
 
 `repository:mirror:write`, `repository:mirror:delete`, and `repository:mirror:read` are user policy scopes. [Transition Repo Mirror](https://cursor.com/docs/api/origin/migrations.md#transition-repo-mirror) requires Write (`repository:mirror:write`). [Detach Repo Mirror](https://cursor.com/docs/api/origin/migrations.md#detach-repo-mirror) requires Admin (`repository:mirror:delete`). [Get Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-mirror-transition-job) and [Get Active Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-active-mirror-transition-job) require `repository:mirror:read`. You must also administer the repository on its upstream GitHub source.
 
-An Origin App can't request `repository:mirror:write` or `repository:mirror:delete` during installation, and it can't call these endpoints. An app can request `repository:mirror:read`, but only to read `mirror` on [Get Repo](https://cursor.com/docs/api/origin/reference/get-repo.md).
+An Origin App can't request `repository:mirror:write` or `repository:mirror:delete` during installation, so it can't transition or detach a mirror. An app can request `repository:mirror:read` to read `mirror` on [Get Repo](https://cursor.com/docs/api/origin/reference/get-repo.md) and to call the two transition job lookups with an installation access token.
 
 ## Endpoint reference
 
@@ -28,7 +28,7 @@ POST
 
 `/v1/origin/repos/{ownerSlug}/{repoName}/mirror:transition`
 
-Requires scope `repository:mirror:write` (user access token).
+Requires scope `repository:mirror:write` (Cursor user credential).
 
 Starts a mirror-state transition on a mirrored repository and returns the job tracking it. The repository enters a transitioning mirror status while the job runs, so poll [Get Active Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-active-mirror-transition-job) or [Get Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-mirror-transition-job) until the job reaches a terminal status.
 
@@ -114,7 +114,7 @@ DELETE
 
 `/v1/origin/repos/{ownerSlug}/{repoName}/mirror`
 
-Requires scope `repository:mirror:delete` (user access token).
+Requires scope `repository:mirror:delete` (Cursor user credential).
 
 Permanently disconnects a mirrored repository from its upstream source. The repository keeps its current contents and becomes a native repository, and syncing stops in both directions. Origin keeps the mirror's deploy key but doesn't use it while the repository is detached. The response body is empty.
 
@@ -154,7 +154,7 @@ GET
 
 `/v1/origin/repos/{ownerSlug}/{repoName}/mirror/transition-jobs/{jobId}`
 
-Requires scope `repository:mirror:read` (user access token).
+Requires scope `repository:mirror:read` (Cursor user credential).
 
 Returns one mirror transition job by id. An unknown job id returns `404`.
 
@@ -250,7 +250,7 @@ GET
 
 `/v1/origin/repos/{ownerSlug}/{repoName}/mirror/transition-jobs:active`
 
-Requires scope `repository:mirror:read` (user access token).
+Requires scope `repository:mirror:read` (Cursor user credential).
 
 Returns the repository's currently active mirror transition job and its most recent terminal one. Both fields are optional, so a repository that has never transitioned returns an empty object. Poll this endpoint to follow a transition: once `activeJob` disappears, `lastJob` tells you how it ended.
 

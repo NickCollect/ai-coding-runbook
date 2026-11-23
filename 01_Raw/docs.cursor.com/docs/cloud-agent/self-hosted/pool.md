@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/pool
-fetched_at: 2026-11-16T07:30:44.874350+00:00
+fetched_at: 2026-11-23T08:28:23.329012+00:00
 fetch_method: mintlify_md
 ---
 
@@ -774,6 +774,18 @@ curl --request GET \
   --url "https://api.cursor.com/v0/private-workers/pw_123" \
   -u "$CURSOR_API_KEY:"
 ```
+
+### Check many workers at once
+
+To check whether your workers are still connected, read them by ID in batches of up to 100 instead of calling the endpoint above once per worker:
+
+```bash
+curl --request GET \
+  --url "https://api.cursor.com/v0/private-workers?workerIds=pw_123,pw_456" \
+  -u "$CURSOR_API_KEY:"
+```
+
+Each requested ID comes back once, in `workers` or in `notFoundWorkerIds`. Treat a not-found worker as gone: it's disconnected or your key can't see it. Each call counts once against a limit of 120 a minute, so one key can check a 1,000-worker pool every 30 seconds. Treat a `503` as unknown and back off; don't mark workers gone. See [List Workers By ID](https://cursor.com/docs/cloud-agent/api/endpoints.md#list-workers-by-id).
 
 ### Claim a pending request
 

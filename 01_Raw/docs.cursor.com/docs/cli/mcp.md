@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/mcp
-fetched_at: 2026-10-26T05:39:59.366402+00:00
+fetched_at: 2026-11-23T08:28:22.466662+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,6 +49,14 @@ This displays:
 - Tool names and descriptions
 - Required and optional parameters
 - Parameter types and constraints
+
+For the `cursor` server, Cursor's own MCP endpoint, the output also names the team MCP allowlist that applies and the servers it allows, for example:
+
+```text
+Allowlist: your team's MCP allowlist for local agents, which applies because this agent runs on your machine. Allowed servers: Datadog, Sentry.
+```
+
+`agent mcp list` adds the same list name to that server's row, such as `cursor: ready (your team's MCP allowlist for local agents)`.
 
 ### Log in to MCP server
 

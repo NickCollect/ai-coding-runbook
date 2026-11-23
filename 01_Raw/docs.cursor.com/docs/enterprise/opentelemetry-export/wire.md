@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export/wire
-fetched_at: 2026-11-09T07:30:16.901057+00:00
+fetched_at: 2026-11-23T08:28:23.693926+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,7 +33,7 @@ One resource per (team, user, surface, entrypoint, surface version, Project) gro
 | `cursor.team.id`         | int    | Always   | Your team id                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `cursor.surface`         | string | Always   | `unspecified` \| `desktop` \| `cli` \| `cloud_agent` \| `bugbot` \| `grok_bot` \| `sdk``sdk` is the [Cursor SDK](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#sdk-records) running an agent locally. An agent the SDK launched in the cloud exports `cloud_agent`                                                                                                                                                                                                                                                                                             |
 | `cursor.entrypoint`      | string | Always   | `unspecified` \| `desktop` \| `cli` \| `web` \| `mobile` \| `sdk_ts` \| `sdk_py` \| `api` \| `automation` \| `github_pr` \| `sdk`On `grok_bot.*` records, `automation` marks a turn a routine started (`cursor.grok_bot.initiated_by=routine`). SDK traffic exports `sdk`; `sdk_ts` and `sdk_py` are reserved and not emitted today, because the SDK doesn't report its language. See [SDK records](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#sdk-records)                                                                                                 |
-| `cursor.user.id`         | int    | Optional | Opaque team-scoped user id when the source has one. On `cloud_agent.*` logs it is the run's owner. A run started with a team API key or a service account has no owner and carries no user attributes. Your pipeline shouldn't require it.                                                                                                                                                                                                                                                                                                                                       |
+| `cursor.user.id`         | int    | Optional | Opaque team-scoped user id when the source has one. On `cloud_agent.*` logs it is the run's owner, except on `cloud_agent.project_invite`, where it is the person who acted. A run started with a team API key or a service account has no owner and carries no user attributes. Your pipeline shouldn't require it.                                                                                                                                                                                                                                                             |
 | `cursor.user.account_id` | string | Optional | The member's `user_...` id, the value `GET /teams/members` on the [Admin API](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) returns as `id`. A record carries both this and `cursor.user.id` or neither.                                                                                                                                                                                                                                                                                                                                                  |
 | `cursor.user.email`      | string | Optional | The member's email. Present when `cursor.user.id` is present and the member has an email. Not exported for teams on Privacy Mode (Legacy). Your pipeline shouldn't require it.                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `cursor.project.id`      | string | Optional | Present when the emitting agent belongs to a cloud Project: the root coordinator's `bc-...` agent id, the value the Agents API returns as that agent's `id`. The same for the coordinator and every agent in its tree (workers, subagents, side chats), and stable across renames. Absent for agents outside a cloud Project, for local Projects, and on `cloud_agent.review_followup`. Delivered only to the team that owns the Project. Which agents count as in a cloud Project may widen, so don't rely on absence. A resource attribute, so metrics carry it as a dimension |
@@ -343,6 +343,34 @@ No comment, review, or finding text is exported.
 | `cursor.bugbot.finding.id`      | string\[] | `bugbot_autofix` only | One entry per Bugbot finding the run was started to fix (open)                                                                                                                                                                  |
 
 The resource carries `cursor.entrypoint=github_pr` for `github_comment` and `unspecified` otherwise.
+
+### `cursor.cloud_agent.project_invite`
+
+- **Severity:** `INFO`
+- **Body:** `cloud_agent_project_invite_<kind>` (`cloud_agent_project_invite_sent`, `cloud_agent_project_invite_accepted`)
+- **Family:** `cloud_agents`
+- **Conversation id:** `accepted` only, the `bc-...` id of the agent the join started for the person who joined
+
+A member of a shared cloud Project invited a teammate (`sent`), or a teammate joined the Project by accepting an invite or opening the Project's share link (`accepted`). Projects can be shared only with members of the team that owns them, so both people are always members of your team.
+
+- `sent`: one record per new invite. Inviting someone who already has a pending invite exports nothing.
+- `accepted`: one record when a person clicks **Accept** on an invite, or joins through the share link, and their agent in the Project starts. A failed join exports nothing, and a retry that succeeds exports the record then. A member who joins without an invite or the link exports nothing. When the person has a pending invite and also opens the link, the record reads `via=invite`.
+
+The resource `cursor.user.*` attributes name the person who acted: the inviter on `sent`, the person who joined on `accepted`. The resource carries `cursor.project.id` and the record carries `cursor.project.name`. No invite message, Project content, link, or email text is exported.
+
+| Attribute                                              | Type   | Presence          | Values / notes                                                                                                                                                                                            |
+| ------------------------------------------------------ | ------ | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.cloud_agent.project_invite.kind`               | string | Always            | `sent` \| `accepted`                                                                                                                                                                                      |
+| `cursor.cloud_agent.project_invite.via`                | string | Always            | `invite` \| `link`. `link` means the Project's share link let the person in, with no invite of theirs. `link` appears only on `accepted`                                                                  |
+| `cursor.cloud_agent.project_invite.id`                 | string | `via=invite` only | The invite's id, the same on its `sent` and `accepted` records. Join on it to pair them. A new invite after the person left the Project gets a new id (open)                                              |
+| `cursor.cloud_agent.project_invite.inviter.user_id`    | int    | `via=invite` only | The inviting member's user id, the same value space as `cursor.user.id`. Present whenever the record carries `cursor.user.id`. The share link doesn't record who shared it, so a link join has no inviter |
+| `cursor.cloud_agent.project_invite.inviter.account_id` | string | `via=invite` only | The inviter's `user_...` Admin API id. Present exactly when `inviter.user_id` is                                                                                                                          |
+| `cursor.cloud_agent.project_invite.invitee.user_id`    | int    | Optional          | The invited member on `sent`, the person who joined on `accepted`. Present whenever the record carries `cursor.user.id`                                                                                   |
+| `cursor.cloud_agent.project_invite.invitee.account_id` | string | Optional          | That person's `user_...` Admin API id. Present exactly when `invitee.user_id` is                                                                                                                          |
+
+A link join has no invite id, so its `cursor.event.id` is unique per join rather than per invite.
+
+The resource carries `cursor.entrypoint=unspecified`.
 
 ### Shared `grok_bot.*` attributes
 

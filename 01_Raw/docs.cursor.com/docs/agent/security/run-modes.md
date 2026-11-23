@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/security/run-modes
-fetched_at: 2026-10-19T05:32:43.191192+00:00
+fetched_at: 2026-11-23T08:28:21.955455+00:00
 fetch_method: mintlify_md
 ---
 
@@ -96,12 +96,12 @@ For the engineering deep dive, read [Implementing a secure sandbox for local age
 
 `permissions.json` steers which calls Auto-review runs automatically and which it reviews. `sandbox.json` controls what a sandboxed command can reach, like network domains and extra readable or writable paths. You don't need either file to get started.
 
-| Access              | Default sandbox behavior for terminal commands                                                                           |
-| :------------------ | :----------------------------------------------------------------------------------------------------------------------- |
-| **Workspace files** | Read and write access inside the workspace. `.cursorignore` can hide files from the agent.                               |
-| **Protected paths** | Cursor protects paths like `.git/config`, `.git/hooks`, `.vscode`, `.cursorignore`, and sensitive Cursor config files.   |
-| **Network**         | Blocked by default, then opened by your network mode and [`sandbox.json`](https://cursor.com/docs/reference/sandbox.md). |
-| **Temporary files** | `/tmp` and platform temp directories are writable unless disabled in `sandbox.json`.                                     |
+| Access              | Default sandbox behavior for terminal commands                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Workspace files** | Read and write access inside the workspace. `.cursorignore` can hide files from the agent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **Protected paths** | Cursor protects paths like `.git/config`, `.git/hooks`, `.vscode`, `.cursorignore`, and sensitive Cursor config files.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Network**         | Blocked by default, then opened by your network mode and [`sandbox.json`](https://cursor.com/docs/reference/sandbox.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **Temporary files** | With [Read access](https://cursor.com/docs/agent/security/run-modes.md#read-access) set to **System**, sandboxed commands can write to the host's `/tmp` and platform temp directories. With Read access set to **Workspace**, they get a private temp folder for the project in `$TMPDIR` instead, and that folder keeps its files between commands. Set `disableTmpWrite` to `true` in `sandbox.json` to turn off temp writes in both modes. With Workspace on Linux, set [`privateTmp`](https://cursor.com/docs/reference/sandbox.md#temporary-files) to `true` in `sandbox.json` to make `/tmp` inside sandboxed commands that same private folder. |
 
 Some commands need full system access and bypass the sandbox. Cursor will indicate when a command runs outside the sandbox and ask for your approval.
 
@@ -113,6 +113,8 @@ Customize sandbox behavior with a `sandbox.json` file:
 | :----------------------------------- | :------------------------------------------------------------------------------------------------ |
 | `~/.cursor/sandbox.json`             | Applies to all project directories on your machine.                                               |
 | `<project-dir>/.cursor/sandbox.json` | Applies to one project directory. Commit it when the project should share the same sandbox rules. |
+
+Cursor Nightly reads the per-user file from `~/.cursor-nightly/sandbox.json` instead. The CLI always reads `~/.cursor/sandbox.json`. The project-level file works in every build.
 
 If both files exist, Cursor merges them with the project-level file taking priority. Team-admin policies and Cursor's hardcoded security rules layer on top, so local files cannot weaken those protections.
 
@@ -135,7 +137,7 @@ With **Workspace** selected:
 
 - **File reads outside the workspace ask first.** The approval card shows the full path and why Cursor is asking. Click **Allow** to let the read through.
 - **Searches stay inside the boundary.** Grep results skip files outside the workspace and your Read Allowlist.
-- **Sandboxed commands see less of your machine.** On macOS and Linux, a sandboxed command can read the workspace, your Read Allowlist, and the system paths common tools need to run, like system libraries, toolchains, and certificate stores. Commands get a private temp directory for the project instead of the host temp directory.
+- **Sandboxed commands see less of your machine.** On macOS and Linux, a sandboxed command can read the workspace, your Read Allowlist, and the system paths common tools need to run, like system libraries, toolchains, and certificate stores. Commands get a private temp directory for the project, with `$TMPDIR` pointing to it, instead of the host temp directory. On Linux, set [`privateTmp`](https://cursor.com/docs/reference/sandbox.md#temporary-files) to `true` in `sandbox.json` to make `/tmp` inside sandboxed commands that same directory, for tools that write to `/tmp` directly. While `privateTmp` is on, Read Allowlist paths inside the host's `/tmp` are hidden from sandboxed commands.
 
 The workspace boundary also includes this project's folder under `~/.cursor/projects`, plus the skills, rules, and plugins folders in `~/.cursor`.
 
@@ -160,7 +162,7 @@ Set `readBoundary` and `additionalReadPaths` in `sandbox.json` to configure read
 }
 ```
 
-A value in `sandbox.json` replaces the one in Cursor settings, and the project file wins over `~/.cursor/sandbox.json`. Settings show which file controls the value.
+A value in `sandbox.json` replaces the one in Cursor settings, and the project file wins over the per-user file. Settings show which file controls the value.
 
 In the [CLI](https://cursor.com/docs/cli/overview.md), set `sandbox.readBoundary` in [`cli-config.json`](https://cursor.com/docs/cli/reference/configuration.md) and add `Read(...)` entries to [`permissions.allow`](https://cursor.com/docs/cli/reference/permissions.md) for the allowlist. `sandbox.json` overrides both.
 
