@@ -180,15 +180,17 @@ impl App {
         }
         let resumed_thread = if matches!(target, AppServerTarget::LocalDaemon { .. }) {
             Some(
-                app_server
-                    .thread_read(target_session.thread_id, /*include_turns*/ false)
-                    .await
-                    .map_err(|error| {
-                        self.add_session_picker_error(format!(
-                            "Unable to check resumed folder: {error}"
-                        ));
-                        AppRunControl::Continue
-                    })?,
+                self.wait_for_opening_task(
+                    tui,
+                    app_server.thread_read(target_session.thread_id, /*include_turns*/ false),
+                )
+                .await
+                .map_err(|error| {
+                    self.add_session_picker_error(format!(
+                        "Unable to check resumed folder: {error}"
+                    ));
+                    AppRunControl::Continue
+                })?,
             )
         } else {
             None
@@ -282,11 +284,7 @@ impl App {
             if options.cancel == Some(crate::onboarding::TrustCancelAction::CurrentTask) {
                 return Err(AppRunControl::Continue);
             }
-            if self
-                .chat_widget
-                .selected_index_for_present_view(AGENTS_OVERVIEW_VIEW_ID)
-                .is_none()
-            {
+            if self.overview_selected_index().is_none() {
                 self.open_agents_overview(app_server);
             }
             return Err(AppRunControl::Continue);

@@ -80,6 +80,7 @@ use codex_features::FeatureOverrides;
 use codex_features::FeatureToml;
 use codex_features::Features;
 use codex_features::FeaturesToml;
+use codex_features::GuardianV3ConfigToml;
 use codex_features::MultiAgentV2ConfigToml;
 use codex_features::NetworkProxyConfigToml;
 use codex_features::RuntimeAuthMode;
@@ -142,6 +143,7 @@ use codex_protocol::protocol::AskForApproval;
 use codex_protocol::protocol::MultiAgentVersion;
 use codex_protocol::protocol::SandboxPolicy;
 use codex_rmcp_client::McpOAuthRefreshMode;
+use codex_rollout_trace::TraceCaptureLimits;
 use codex_sandboxing::SandboxType;
 pub use codex_thread_store::ExtraConfig;
 use codex_utils_absolute_path::AbsolutePathBuf;
@@ -244,7 +246,7 @@ pub use windows_sandbox_config::windows_mxc_allowed_by_config;
 
 const DEFAULT_IGNORE_LARGE_UNTRACKED_DIRS: i64 = 200;
 const DEFAULT_IGNORE_LARGE_UNTRACKED_FILES: i64 = 10 * 1024 * 1024;
-const DEFAULT_ASYNC_COMPACTION_THRESHOLD_PERCENT: u8 = 65;
+pub(crate) const DEFAULT_ASYNC_COMPACTION_THRESHOLD_PERCENT: u8 = 65;
 
 /// Signals that a public config selected the retired `untrusted` approval policy.
 #[derive(Debug, thiserror::Error)]
@@ -636,6 +638,13 @@ pub enum ThreadStoreConfig {
     InMemory { id: String },
 }
 
+/// Provider resolved by the host for Guardian inference on this thread.
+#[derive(Debug, Clone, PartialEq)]
+pub struct GuardianInferenceProvider {
+    pub id: String,
+    pub info: ModelProviderInfo,
+}
+
 /// Application configuration loaded from disk and merged with overrides.
 #[derive(Debug, Clone, PartialEq)]
 pub struct Config {
@@ -688,6 +697,11 @@ pub struct Config {
 
     /// Info needed to make an API request to the model.
     pub model_provider: ModelProviderInfo,
+
+    /// Host-selected inference provider for Guardian. When set, Guardian keeps review
+    /// history independent of actor compaction and never reuses actor checkpoints.
+    /// When unset, Guardian inherits the actor's provider and existing history policy.
+    pub guardian_model_provider: Option<Arc<GuardianInferenceProvider>>,
 
     /// Deprecated: `friendly` and `pragmatic` no longer select a style.
     pub personality: Option<Personality>,
@@ -751,6 +765,8 @@ pub struct Config {
     pub guardian_policy_template: Option<String>,
     /// Transcript encoding shared by Guardian review and scoring.
     pub guardian_transcript_mode: codex_protocol::TranscriptFormat,
+    /// GV3 settings captured when the app-server installs the extension.
+    pub guardian_v3: Option<Arc<GuardianV3ConfigToml>>,
     /// Frozen section policy for sync Guardian; absence keeps fixed budgeting.
     pub guardian_sync_elastic_budget: Option<codex_guardian_context::ElasticBudgetConfig>,
     /// Frozen section policy for async Guardian; absence keeps fixed budgeting.
@@ -1040,6 +1056,9 @@ pub struct Config {
     /// Settings that govern if and what will be written to `~/.codex/history.jsonl`.
     pub history: History,
 
+    /// Limits shared by all threads recording into one native rollout trace.
+    pub rollout_trace_limits: TraceCaptureLimits,
+
     /// When true, session is not persisted on disk. Default to `false`
     pub ephemeral: bool,
 
@@ -1156,6 +1175,10 @@ pub struct Config {
 
     /// Explicit or feature-derived web search mode.
     pub web_search_mode: Constrained<WebSearchMode>,
+
+    /// Whether this mode came from an accepted explicit `web_search` setting.
+    /// Kept with the session-static mode when user config layers are refreshed.
+    pub web_search_mode_was_explicit: bool,
 
     /// Additional parameters for the web search tool when it is enabled.
     pub web_search_config: Option<WebSearchConfig>,
@@ -1453,6 +1476,7 @@ pub struct MultiAgentV2Config {
     pub hide_spawn_agent_metadata: bool,
     pub expose_spawn_agent_model_overrides: bool,
     pub wait_agent_enabled: bool,
+    pub interrupt_at_item_boundary: bool,
     pub disable_native_tools: bool,
     pub disable_direct_message: bool,
     pub message_board_in_memory: bool,
@@ -1477,6 +1501,7 @@ impl MultiAgentV2Config {
             hide_spawn_agent_metadata: true,
             expose_spawn_agent_model_overrides: true,
             wait_agent_enabled: true,
+            interrupt_at_item_boundary: false,
             disable_native_tools: false,
             disable_direct_message: false,
             message_board_in_memory: false,
@@ -1692,12 +1717,7 @@ async fn config_toml_from_layers(layers: &ConfigLayerStack) -> std::io::Result<C
     match ConfigToml::try_from(layers.effective_config()) {
         Ok(config_toml) => Ok(config_toml),
         Err(err) => {
-            if let Some(config_error) = codex_config::first_layer_config_error::<ConfigToml>(
-                layers,
-                codex_config::CONFIG_TOML_FILE,
-            )
-            .await
-            {
+            if let Some(config_error) = codex_config::first_layer_config_error(layers).await {
                 return Err(codex_config::io_error_from_config_error(
                     std::io::ErrorKind::InvalidData,
                     config_error,
@@ -1725,6 +1745,14 @@ impl Config {
         }
     }
 
+    /// A host-selected Guardian provider cannot reuse the actor's opaque checkpoints.
+    pub(crate) fn guardian_reuses_parent_compaction(&self) -> bool {
+        self.guardian_model_provider.is_none()
+            && self
+                .features
+                .enabled(Feature::GuardianReuseParentCompaction)
+    }
+
     /// Capture storage and sync preparation use one session-static rollout choice.
     pub(crate) fn guardian_context_budgeting(&self) -> codex_guardian_context::ContextBudgeting {
         if self.guardian_sync_elastic_budget.is_some() {
@@ -1732,6 +1760,22 @@ impl Config {
         } else {
             codex_guardian_context::ContextBudgeting::Fixed
         }
+    }
+
+    /// Resolves recorder limits from the Sync Elastic retained-instruction entry budget.
+    pub(crate) fn guardian_retention_policy(
+        &self,
+    ) -> Option<codex_protocol::protocol::GuardianRetentionPolicy> {
+        let entry_tokens = self
+            .guardian_sync_elastic_budget
+            .as_ref()?
+            .section_limits(codex_guardian_context::ElasticSection::RetainedUserInstructions)
+            .max_section_entry_tokens();
+        let record_bytes = codex_utils_output_truncation::approx_bytes_for_tokens(entry_tokens);
+        Some(codex_protocol::protocol::GuardianRetentionPolicy {
+            assistant_record_bytes: Some(record_bytes),
+            user_record_bytes: Some(record_bytes),
+        })
     }
 
     pub fn sqlite_config(&self) -> &codex_state::SqliteConfig {
@@ -1758,9 +1802,21 @@ impl Config {
         &'a self,
         model_messages: ResolvedModelMessages<'a>,
     ) -> &'a str {
-        self.guardian_policy_config
+        let configured_policy = if self.guardian_model_provider.is_some() {
+            self.managed_guardian_policy()
+        } else {
+            self.guardian_policy_config.as_deref()
+        };
+        configured_policy.unwrap_or(model_messages.auto_review().policy)
+    }
+
+    pub(crate) fn managed_guardian_policy(&self) -> Option<&str> {
+        self.config_layer_stack
+            .requirements_toml()
+            .guardian_policy_config
             .as_deref()
-            .unwrap_or(model_messages.auto_review().policy)
+            .map(str::trim)
+            .filter(|policy| !policy.is_empty())
     }
 
     /// Native Guardian agent history requires the reviewed thread's OpenAI provider.
@@ -1874,6 +1930,14 @@ impl Config {
 
     /// Creates the HTTP client factory resolved from the effective feature configuration.
     pub fn http_client_factory(&self) -> HttpClientFactory {
+        self.http_client_factory_for_provider(&self.model_provider)
+    }
+
+    /// Applies the thread's network settings and the selected provider's header policy.
+    pub(crate) fn http_client_factory_for_provider(
+        &self,
+        provider: &ModelProviderInfo,
+    ) -> HttpClientFactory {
         let outbound_proxy_policy = if self.respect_system_proxy {
             OutboundProxyPolicy::RespectSystemProxy
         } else {
@@ -1881,8 +1945,7 @@ impl Config {
         };
         let mut factory = HttpClientFactory::new(outbound_proxy_policy)
             .with_network_policy(self.application_network_policy.clone());
-        if self
-            .model_provider
+        if provider
             .gateway_oauth
             .as_ref()
             .is_some_and(GatewayOAuthConfig::uses_credential_export)
@@ -2036,6 +2099,7 @@ impl Config {
         }
 
         McpConfig {
+            executor_discovery_v2: None,
             client: McpClientConfig {
                 chatgpt_base_url: self.chatgpt_base_url.clone(),
                 requires_read_only_mcp_tools: false,
@@ -2792,11 +2856,12 @@ pub struct ConfigOverrides {
     pub permission_profile: Option<PermissionProfile>,
     pub default_permissions: Option<String>,
     /// Permission profile ID recovered from persisted thread state. Explicit
-    /// permission overrides take precedence, and stale profile IDs fall back
-    /// to the configured default.
+    /// permission overrides take precedence. An unavailable saved profile
+    /// requires an explicit selection.
     pub persisted_permission_profile_id: Option<String>,
-    /// Unnamed permissions from a thread-owned rollout snapshot. These are
-    /// fallback state: explicit overrides and current requirements take priority.
+    /// Unnamed permissions from a thread-owned rollout snapshot, or canonical
+    /// read-only permissions recovered from older history. Explicit overrides
+    /// and current requirements take priority.
     pub persisted_permission_profile: Option<PermissionProfile>,
     pub model_provider: Option<String>,
     pub service_tier: Option<Option<String>>,
@@ -2839,18 +2904,30 @@ pub fn resolve_oss_provider(
     }
 }
 
-/// Resolve the web search mode from explicit config and feature flags.
-fn resolve_web_search_mode(config_toml: &ConfigToml, features: &Features) -> Option<WebSearchMode> {
+/// Resolve the configured preference, or select an allowed implicit default.
+fn resolve_web_search_mode(
+    config_toml: &ConfigToml,
+    features: &Features,
+    constrained_default: &Constrained<WebSearchMode>,
+) -> WebSearchMode {
     if let Some(mode) = config_toml.web_search {
-        return Some(mode);
+        return mode;
     }
     if features.enabled(Feature::WebSearchCached) {
-        return Some(WebSearchMode::Cached);
+        return WebSearchMode::Cached;
     }
     if features.enabled(Feature::WebSearchRequest) {
-        return Some(WebSearchMode::Live);
+        return WebSearchMode::Live;
     }
-    None
+    let default_mode = constrained_default.value();
+    if default_mode == WebSearchMode::Cached
+        && features.enabled(Feature::WebSearchIndexedDefault)
+        && constrained_default.can_set(&WebSearchMode::Indexed).is_ok()
+    {
+        WebSearchMode::Indexed
+    } else {
+        default_mode
+    }
 }
 
 fn resolve_web_search_config(config_toml: &ConfigToml) -> Option<WebSearchConfig> {
@@ -2964,6 +3041,9 @@ fn resolve_multi_agent_v2_config(config_toml: &ConfigToml) -> MultiAgentV2Config
     let wait_agent_enabled = base
         .and_then(|config| config.wait_agent_enabled)
         .unwrap_or(default.wait_agent_enabled);
+    let interrupt_at_item_boundary = base
+        .and_then(|config| config.interrupt_at_item_boundary)
+        .unwrap_or(default.interrupt_at_item_boundary);
     let disable_native_tools = base
         .and_then(|config| config.disable_native_tools)
         .unwrap_or(default.disable_native_tools);
@@ -3006,6 +3086,7 @@ fn resolve_multi_agent_v2_config(config_toml: &ConfigToml) -> MultiAgentV2Config
         hide_spawn_agent_metadata,
         expose_spawn_agent_model_overrides,
         wait_agent_enabled,
+        interrupt_at_item_boundary,
         disable_native_tools,
         disable_direct_message,
         message_board_in_memory,
@@ -3175,6 +3256,44 @@ fn resolve_current_time_reminder_config(
     }))
 }
 
+fn resolve_guardian_v3_config(
+    feature: Option<FeatureToml<GuardianV3ConfigToml>>,
+) -> std::io::Result<Option<Arc<GuardianV3ConfigToml>>> {
+    let Some(FeatureToml::Config(settings)) = feature else {
+        return Ok(None);
+    };
+    if let Some(limit) = settings.max_instruction_tokens {
+        for (key, prompt) in [
+            (
+                "housekeeper.routing_instructions",
+                settings
+                    .housekeeper
+                    .as_ref()
+                    .and_then(|housekeeper| housekeeper.routing_instructions.as_deref()),
+            ),
+            (
+                "reviewer.retrieval_instructions",
+                settings
+                    .reviewer
+                    .as_ref()
+                    .and_then(|reviewer| reviewer.retrieval_instructions.as_deref()),
+            ),
+        ] {
+            let Some(prompt) = prompt else { continue };
+            let tokens = codex_utils_string::approx_token_count(prompt.trim());
+            if tokens > limit {
+                return Err(std::io::Error::new(
+                    std::io::ErrorKind::InvalidData,
+                    format!(
+                        "features.guardianv3.{key} is {tokens} estimated tokens, exceeding max_instruction_tokens = {limit}"
+                    ),
+                ));
+            }
+        }
+    }
+    Ok(Some(Arc::new(settings)))
+}
+
 fn resolve_terminal_resize_reflow_config(config_toml: &ConfigToml) -> TerminalResizeReflowConfig {
     let Some(tui) = config_toml.tui.as_ref() else {
         return TerminalResizeReflowConfig::default();
@@ -3278,6 +3397,7 @@ pub fn resolve_bootstrap_http_client_factory(
 
 pub(crate) fn resolve_web_search_mode_for_turn(
     web_search_mode: &Constrained<WebSearchMode>,
+    web_search_mode_was_explicit: bool,
     permission_profile: &PermissionProfile,
     provider_capabilities: ProviderCapabilities,
 ) -> WebSearchMode {
@@ -3293,30 +3413,28 @@ pub(crate) fn resolve_web_search_mode_for_turn(
         provider_supports_mode && web_search_mode.can_set(&mode).is_ok()
     };
 
-    if matches!(permission_profile, PermissionProfile::Disabled)
-        && !matches!(preferred, WebSearchMode::Disabled | WebSearchMode::Indexed)
-    {
-        for mode in [
-            WebSearchMode::Live,
-            WebSearchMode::Cached,
-            WebSearchMode::Disabled,
-        ] {
-            if is_allowed(mode) {
-                return mode;
+    let full_access_promotes_to_live = matches!(permission_profile, PermissionProfile::Disabled)
+        && match preferred {
+            WebSearchMode::Cached | WebSearchMode::Live => true,
+            WebSearchMode::Indexed => {
+                !web_search_mode_was_explicit
+                    && web_search_mode.can_set(&WebSearchMode::Cached).is_ok()
             }
-        }
-    } else {
-        if is_allowed(preferred) {
-            return preferred;
-        }
-        for mode in [
-            WebSearchMode::Cached,
-            WebSearchMode::Live,
-            WebSearchMode::Disabled,
-        ] {
-            if is_allowed(mode) {
-                return mode;
-            }
+            WebSearchMode::Disabled => false,
+        };
+    if full_access_promotes_to_live && is_allowed(WebSearchMode::Live) {
+        return WebSearchMode::Live;
+    }
+    if is_allowed(preferred) {
+        return preferred;
+    }
+    for mode in [
+        WebSearchMode::Cached,
+        WebSearchMode::Live,
+        WebSearchMode::Disabled,
+    ] {
+        if is_allowed(mode) {
+            return mode;
         }
     }
 
@@ -3729,12 +3847,29 @@ impl Config {
             sandbox_mode,
         );
         let requirements_toml = config_layer_stack.requirements_toml();
+        let restore_persisted_profile = sandbox_mode.is_none()
+            && permission_profile.is_none()
+            && default_permissions_override.is_none()
+            && persisted_permission_profile_id.is_none();
+        let persisted_read_only = restore_persisted_profile
+            && persisted_permission_profile
+                .as_ref()
+                .is_some_and(|profile| *profile == PermissionProfile::read_only());
+        if persisted_read_only
+            && !permission_profile_is_allowed(
+                &config_layer_stack,
+                BUILT_IN_READ_ONLY_PROFILE,
+                &PermissionProfile::read_only(),
+            )
+        {
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::InvalidInput,
+                "The saved read-only permission profile is disallowed by requirements. Select a permission profile explicitly to continue.",
+            ));
+        }
         let persisted_permission_profile = persisted_permission_profile.filter(|profile| {
-            sandbox_mode.is_none()
-                && permission_profile.is_none()
-                && default_permissions_override.is_none()
-                && persisted_permission_profile_id.is_none()
-                && requirements_toml.allowed_permission_profiles.is_none()
+            restore_persisted_profile
+                && (persisted_read_only || requirements_toml.allowed_permission_profiles.is_none())
                 // Executor-owned enforcement and materialized grants are not portable
                 // thread defaults. Reject the original mode before preserving denials.
                 && !matches!(profile, PermissionProfile::External { .. })
@@ -3871,7 +4006,7 @@ impl Config {
         };
         dedupe_absolute_paths(&mut workspace_roots);
         let (
-            configured_network_proxy_config,
+            mut configured_network_proxy_config,
             mut permission_profile,
             mut file_system_sandbox_policy,
             mut active_permission_profile,
@@ -4012,6 +4147,21 @@ impl Config {
             )
         };
         if let Some(saved) = persisted_permission_profile {
+            // Canonical read-only recovery can remove writes without replacing a
+            // narrower read allowlist from the current configuration.
+            let saved = if persisted_read_only
+                && (!file_system_sandbox_policy.has_full_disk_read_access()
+                    || matches!(permission_profile, PermissionProfile::External { .. }))
+            {
+                permission_profile.intersect_with_read_only().ok_or_else(|| {
+                    std::io::Error::new(
+                        std::io::ErrorKind::InvalidInput,
+                        "Could not restore the saved read-only permission profile under external enforcement. Select a permission profile explicitly to continue.",
+                    )
+                })?
+            } else {
+                saved
+            };
             let (mut saved_file_system, saved_network) = saved.to_runtime_permissions();
             saved_file_system.preserve_deny_read_restrictions_from(&file_system_sandbox_policy);
             let restored = PermissionProfile::from_runtime_permissions_with_enforcement(
@@ -4025,6 +4175,9 @@ impl Config {
             ) {
                 permission_profile = restored;
                 file_system_sandbox_policy = saved_file_system;
+                if persisted_read_only {
+                    configured_network_proxy_config = NetworkProxyConfig::default();
+                }
                 active_permission_profile = None;
                 profile_workspace_roots.clear();
             }
@@ -4079,8 +4232,7 @@ impl Config {
             );
             approvals_reviewer = constrained_approvals_reviewer.value();
         }
-        let web_search_mode =
-            resolve_web_search_mode(&cfg, &features).unwrap_or(WebSearchMode::Cached);
+        let web_search_mode = resolve_web_search_mode(&cfg, &features, &constrained_web_search_mode);
         let web_search_config = resolve_web_search_config(&cfg);
         let experimental_request_user_input_enabled =
             resolve_experimental_request_user_input_enabled(&cfg);
@@ -4153,6 +4305,12 @@ impl Config {
         let allow_login_shell = cfg.allow_login_shell.unwrap_or(true);
 
         let history = cfg.history.unwrap_or_default();
+        let rollout_trace = cfg.rollout_trace.unwrap_or_default();
+        let defaults = TraceCaptureLimits::default();
+        let rollout_trace_limits = TraceCaptureLimits {
+            max_payload_bytes: rollout_trace.max_payload_bytes.unwrap_or(defaults.max_payload_bytes),
+            max_bytes: rollout_trace.max_bytes.unwrap_or(defaults.max_bytes),
+        };
 
         if multi_agent_v2.max_concurrent_threads_per_session == 0 {
             return Err(std::io::Error::new(
@@ -4515,6 +4673,8 @@ impl Config {
             &mut constrained_web_search_mode,
             &mut startup_warnings,
         )?;
+        let web_search_mode_was_explicit =
+            cfg.web_search == Some(constrained_web_search_mode.value());
 
         let mcp_servers = constrain_mcp_servers(cfg.mcp_servers.clone(), mcp_servers.as_ref())
             .map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidInput, format!("{e}")))?;
@@ -4657,6 +4817,7 @@ impl Config {
             async_compaction_threshold_percent,
             model_provider_id,
             model_provider,
+            guardian_model_provider: None,
             cwd: resolved_cwd,
             workspace_roots: workspace_roots.clone(),
             workspace_roots_explicit,
@@ -4762,6 +4923,7 @@ impl Config {
             application_network_policy: Default::default(),
             application_auth_route_config: None,
             history,
+            rollout_trace_limits,
             ephemeral: ephemeral.unwrap_or_default(),
             allow_persistent_dynamic_tool_updates: false,
             extra_config: None,
@@ -4783,6 +4945,7 @@ impl Config {
             guardian_extra_policy,
             guardian_policy_template: None,
             guardian_transcript_mode,
+            guardian_v3: resolve_guardian_v3_config(cfg.features.and_then(|features| features.guardianv3))?,
             guardian_sync_elastic_budget,
             guardian_async_elastic_budget,
             guardian_conversation_history_prompt,
@@ -4840,6 +5003,7 @@ impl Config {
             forced_chatgpt_workspace_id,
             forced_login_method,
             web_search_mode: constrained_web_search_mode.value,
+            web_search_mode_was_explicit,
             web_search_config,
             experimental_request_user_input_enabled,
             update_plan_enabled,
@@ -5214,7 +5378,7 @@ fn resolve_effective_permission_selection<'a>(
     let profiles = merge_managed_permission_profiles(configured_profiles, requirements_toml)?;
     validate_user_permission_profile_names(profiles.as_ref())?;
     validate_required_permission_profile_catalog(requirements_toml, profiles.as_ref())?;
-    let valid_persisted_profile_id = persisted_profile_id.and_then(|(profile_id, context)| {
+    if let Some((profile_id, context)) = persisted_profile_id {
         compile_permission_profile(
             profiles.as_ref(),
             profile_id,
@@ -5222,11 +5386,17 @@ fn resolve_effective_permission_selection<'a>(
             /*workspace_write*/ None,
             &mut Vec::new(),
         )
-        .is_ok()
-        .then_some(profile_id)
-    });
+        .map_err(|err| {
+            std::io::Error::new(
+                std::io::ErrorKind::InvalidInput,
+                format!(
+                    "Could not load saved permission profile `{profile_id}`: {err}. Select a permission profile explicitly to continue."
+                ),
+            )
+        })?;
+    }
     let selected_profile_id = resolve_default_permissions(
-        default_permissions_override.or(valid_persisted_profile_id),
+        default_permissions_override.or(persisted_profile_id.map(|(profile_id, _)| profile_id)),
         configured_default_profile_id,
         requirements_toml,
         startup_warnings,
@@ -5236,7 +5406,7 @@ fn resolve_effective_permission_selection<'a>(
         profiles,
         selected_profile_id,
         persisted_profile_id_was_provided: default_permissions_override.is_none()
-            && valid_persisted_profile_id.is_some(),
+            && persisted_profile_id.is_some(),
         requirements_force_profile_selection: requirements_toml
             .allowed_permission_profiles
             .is_some(),

@@ -70,6 +70,9 @@ impl App {
         event: AppServerEvent,
     ) {
         match event {
+            AppServerEvent::CloudInventoryChanged(lifecycle) => {
+                self.invalidate_cloud_inventory(app_server_client, lifecycle.as_deref())
+            }
             AppServerEvent::Lagged { skipped } => {
                 tracing::warn!(
                     skipped,
@@ -196,6 +199,27 @@ impl App {
         app_server_client: &AppServerSession,
         mut notification: ServerNotification,
     ) {
+        if let ServerNotification::FsChanged(change) = &notification
+            && let Ok(request) = uuid::Uuid::parse_str(&change.watch_id)
+        {
+            for doc in self
+                .sidebars
+                .values()
+                .flat_map(|pane| pane.documents.values())
+            {
+                if doc.backend == app_server_client.backend_id()
+                    && let Some((token, refresh)) = &doc.watch
+                    && *token == request
+                    && change.changed_paths.iter().any(|path| {
+                        doc.path
+                            .starts_with(&codex_utils_path_uri::PathUri::from_abs_path(path))
+                    })
+                {
+                    refresh.send_replace(());
+                    break;
+                }
+            }
+        }
         if let ServerNotification::TurnModerationMetadata(metadata) = &mut notification
             && (!super::safety_recourse::supports_server(app_server_client)
                 || self
@@ -262,6 +286,7 @@ impl App {
             }
         }
 
+        self.observe_sidebar_agent_event(&notification);
         if let ServerNotification::ThreadStatusChanged(status) = &notification {
             let _ = self.dynamic_tool_status_updates.send(status.clone());
         }

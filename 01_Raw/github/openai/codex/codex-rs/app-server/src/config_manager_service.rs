@@ -24,6 +24,7 @@ use codex_config::config_toml::ConfigToml;
 use codex_config::is_structured_feature_path;
 use codex_config::merge_toml_values;
 use codex_config::shell_environment_filter_entry;
+use codex_config::structured_feature_toggle_field;
 use codex_config::validate_shell_environment_policy_filter_config;
 use codex_connectors::apps_config_from_layer_stack;
 use codex_connectors::apps_config_origins_from_layer_stack;
@@ -166,12 +167,8 @@ impl ConfigManager {
 
         let json_value = serde_json::to_value(&effective_config_toml)
             .map_err(|err| ConfigManagerError::json("failed to serialize configuration", err))?;
-        let mut config: ApiConfig = serde_json::from_value(json_value)
+        let config: ApiConfig = serde_json::from_value(json_value)
             .map_err(|err| ConfigManagerError::json("failed to deserialize configuration", err))?;
-        config.client_search_provider = effective_config_toml
-            .tools
-            .as_ref()
-            .and_then(|tools| tools.client_search_provider);
 
         let mut origins = layers.origins_with_path_filter(|segments| {
             layers
@@ -429,15 +426,15 @@ impl ConfigManager {
                     })?;
             }
 
-            let structured_feature_toggle = preserves_network_proxy_settings
-                || is_structured_feature_path(&segments)
-                    && parsed_value.as_ref().is_some_and(|value| {
-                        value.is_bool()
-                            || matches!(strategy, MergeStrategy::Upsert)
-                                && value.as_table().is_some_and(|table| {
-                                    table.len() == 1 && table.contains_key("enabled")
-                                })
-                    });
+            let toggle_field = structured_feature_toggle_field(&segments).filter(|&field| {
+                parsed_value.as_ref().is_some_and(|value| {
+                    value.is_bool()
+                        || matches!(strategy, MergeStrategy::Upsert)
+                            && value
+                                .as_table()
+                                .is_some_and(|table| table.len() == 1 && table.contains_key(field))
+                })
+            });
 
             if let Some(edit) = credential_provider_edits.apply(
                 &mut user_config,
@@ -448,8 +445,8 @@ impl ConfigManager {
                 config_edits.push(edit);
             }
 
-            if structured_feature_toggle {
-                segments.push("enabled".to_string());
+            if let Some(field) = toggle_field {
+                segments.push(field.to_string());
             }
             parsed_segments.push(segments);
         }
@@ -925,10 +922,7 @@ fn value_at_semantic_path<'a>(root: &'a TomlValue, segments: &[String]) -> Optio
         .or_else(|| value_at_path(root, segments))
         .or_else(|| {
             let (field, parents) = segments.split_last()?;
-            if field != "enabled" {
-                return None;
-            }
-            if structured_feature_depth(parents) != Some(parents.len()) {
+            if structured_feature_toggle_field(parents) != Some(field.as_str()) {
                 return None;
             }
             let feature = value_at_path(root, parents)?;

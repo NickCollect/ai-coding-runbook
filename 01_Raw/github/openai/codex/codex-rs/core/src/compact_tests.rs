@@ -98,7 +98,7 @@ async fn local_compaction_retries_preserve_instructions_and_tool_metadata(
     recorder.record_tool_call(
         &ToolCall {
             tool_name: ToolName::plain("nested_tool"),
-            call_id: "nested".to_string(),
+            call_id: "nested".into(),
             payload: ToolPayload::Function {
                 arguments: "{}".to_string(),
             },
@@ -185,10 +185,9 @@ async fn local_compaction_retries_preserve_instructions_and_tool_metadata(
         Arc::clone(&session),
         step,
         world_state,
-        vec![UserInput::Text {
-            text: "Summarize the conversation.".to_string(),
-            text_elements: Vec::new(),
-        }],
+        vec![ResolvedUserInput::text(
+            "Summarize the conversation.".to_string(),
+        )],
     )
     .await?;
 
@@ -660,6 +659,26 @@ fn build_token_limited_compacted_history_truncates_overlong_user_messages(
     assert_eq!(history[0].id(), original.id());
     assert_eq!(history[0].metadata, Some(CodexHarnessMetadata::default()));
     assert_eq!(history[1].metadata, None);
+}
+
+#[test]
+fn local_compaction_keeps_an_ordinary_user_beside_a_pinned_user() {
+    use codex_protocol::turn_input::InjectedResponseItem;
+    use codex_protocol::turn_input::ItemRetention;
+
+    let ordinary = ResponseItemEnvelope::new(user_message("abcd"));
+    let pin = ResponseItemEnvelope::from(InjectedResponseItem {
+        item: user_message("larger than the optional budget"),
+        retention: ItemRetention::AlwaysInThread,
+    });
+    let items = [ordinary.clone(), pin.clone()];
+    let compacted = build_compacted_history_with_limit(
+        &items,
+        "summary",
+        /*max_tokens*/ 1,
+        &FileAudioDurations::default(),
+    );
+    assert_eq!(&compacted[..2], &[ordinary, pin]);
 }
 
 #[test]

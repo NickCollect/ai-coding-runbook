@@ -38,11 +38,14 @@ impl App {
                 } else {
                     match self.chat_widget.paste_image(context, text_fallback) {
                         Ok(()) => {}
-                        Err(PasteImageError::NoImage(_)) if text_fallback.is_some() => {
+                        Err(err) if text_fallback.is_some() && err.allows_text_fallback() => {
+                            let image_error = matches!(err, PasteImageError::ImageReadFailed(_))
+                                .then(|| format!("Failed to paste image: {err}"));
                             self.start_clipboard_text_paste(
                                 tui,
                                 PasteSource::Clipboard,
                                 text_fallback,
+                                image_error,
                             );
                         }
                         Err(err) => {
@@ -83,6 +86,11 @@ impl App {
                     companion.view.jump_to_latest();
                 }
             }
+            let parent = self.sidebar_parent();
+            let panel_visible = current && self.conversation_frame.panel_area().is_some();
+            for (owner, pane) in &mut self.sidebars {
+                pane.finish_document_copy(completion, panel_visible && parent == *owner);
+            }
             let follow =
                 self.transcript_view
                     .finish_copy(&self.transcript_cells, completion, current);
@@ -104,6 +112,9 @@ impl App {
             self.transcript_view.cancel_primary();
             for companion in self.side_companions.values_mut() {
                 companion.view.cancel_primary();
+            }
+            for pane in self.sidebars.values_mut() {
+                pane.cancel_hidden_document_primary(/*visible*/ false);
             }
             self.chat_widget.cancel_composer_primary();
             self.chat_widget

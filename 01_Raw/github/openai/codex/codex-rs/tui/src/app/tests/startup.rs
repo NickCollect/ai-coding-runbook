@@ -858,6 +858,25 @@ async fn unattended_modals_survive_unfinished_terminal_input() -> Result<()> {
     let mut tui = crate::tui::test_support::make_test_tui()?;
     let mut app_server =
         crate::start_embedded_app_server_for_picker(app.chat_widget.config_ref()).await?;
+    // A rewind must not advertise an editable prompt while typeahead is still draining.
+    crossterm::event::buffer_input(b"\x1b[200~unfinished")?;
+    let transition = ThreadTransition::PromptReverted(thread_id);
+    app.finish_thread_input_drain(&mut tui, transition);
+    assert!(!app.can_read_terminal_after_thread_switch(&tui, &app_event_rx));
+    assert!(
+        !std::iter::from_fn(|| app_event_rx.try_recv().ok())
+            .any(|event| matches!(event, AppEvent::InsertHistoryCell(_))),
+        "premature rewind notice"
+    );
+    crossterm::event::buffer_input(b"\x1b[201~\r")?;
+    app.finish_thread_input_drain(&mut tui, transition);
+    assert!(
+        std::iter::from_fn(|| app_event_rx.try_recv().ok())
+            .any(|event| matches!(event, AppEvent::InsertHistoryCell(_))),
+        "missing rewind notice"
+    );
+    assert!(app.can_read_terminal_after_thread_switch(&tui, &app_event_rx));
+
     crossterm::event::buffer_input(b"\x1b]10;")?;
     let request = exec_approval_request(thread_id, "turn-1", "call-1", /*approval_id*/ None);
     let _ = app
@@ -932,11 +951,12 @@ async fn unattended_modals_survive_unfinished_terminal_input() -> Result<()> {
     crossterm::event::buffer_input(b"\rya")?;
     app.render_thread_snapshot(
         &mut tui,
-        &app_server,
+        &mut app_server,
         thread_id,
         snapshot,
         /*resume_restored_queue*/ false,
-    )?;
+    )
+    .await?;
     assert!(app.chat_widget.has_active_modal());
     let before = tui.terminal.previous_buffer().clone();
     let cursor = tui.terminal.last_known_cursor_pos;
@@ -1090,7 +1110,7 @@ async fn auto_declined_mcp_elicitations_do_not_leave_startup_quarantine_armed() 
 }
 
 #[tokio::test]
-async fn startup_draft_handoff_recognizes_late_user_input_as_new_protected_view() -> Result<()> {
+async fn startup_draft_handoff_protects_delayed_question_until_resolved() -> Result<()> {
     let (mut app, mut app_event_rx, _op_rx) = make_test_app_with_channels().await;
     let thread_id = ThreadId::new();
     app.enqueue_primary_thread_session(
@@ -1134,12 +1154,25 @@ async fn startup_draft_handoff_recognizes_late_user_input_as_new_protected_view(
     assert!(!app.chat_widget.has_active_view());
     app.handle_thread_event_now(event);
 
-    assert!(app.chat_widget.has_active_view());
+    assert!(!app.chat_widget.has_active_view());
+    assert!(app.chat_widget.has_pending_protected_request());
+    app.chat_widget.dismiss_app_server_request(
+        &crate::app::app_server_requests::ResolvedAppServerRequest::UserInput {
+            call_id: "call-1".to_string(),
+        },
+    );
+    assert!(!app.chat_widget.has_pending_protected_request());
     assert_eq!(app.chat_widget.composer_text_with_pending(), "x");
     while let Ok(event) = app_event_rx.try_recv() {
         assert!(
-            !matches!(event, AppEvent::CodexOp(Op::UserInputAnswer { .. })),
-            "showing the protected user input request must not submit an answer: {event:?}"
+            !matches!(
+                event,
+                AppEvent::SubmitThreadOp {
+                    op: Op::UserInputAnswer { .. },
+                    ..
+                }
+            ),
+            "dismissing the delayed question must not submit an answer: {event:?}"
         );
     }
 
@@ -1313,6 +1346,7 @@ async fn known_thread_started_preserves_session_without_reading_unmaterialized_r
             section_entered_at: None,
             project_id: None,
             daybreak_enabled: None,
+            daybreak_program_propagation_enrolled: None,
             history_mode: Default::default(),
             model_provider: "notification-provider".to_string(),
             model: None,
@@ -1322,7 +1356,7 @@ async fn known_thread_started_preserves_session_without_reading_unmaterialized_r
             recency_at: Some(2),
             status: codex_app_server_protocol::ThreadStatus::Idle,
             path: Some(temp_dir.path().join("not-yet-materialized.jsonl")),
-            cwd: session.cwd.clone(),
+            cwd: session.cwd.clone().into(),
             cli_version: "0.0.0".to_string(),
             source: codex_app_server_protocol::SessionSource::Unknown,
             can_accept_direct_input: None,
@@ -1508,8 +1542,9 @@ async fn remote_overview_startup_hides_disabled_older_server_notice() -> Result<
             .remote_connection
             .as_ref()
             .expect("remote status")
-            .version,
-        "v2.0.0"
+            .version
+            .as_deref(),
+        Some("v2.0.0")
     );
     app.local_settings.tui.show_server_version_notice = true;
     app.refresh_server_version_overview_notice("2.1.0");
@@ -1930,12 +1965,12 @@ async fn ignore_same_thread_resume_allows_retrying_read_only_view() -> Result<()
             history_mode: None,
         })
     );
-    let app_server =
+    let mut app_server =
         crate::start_embedded_app_server_for_picker(app.chat_widget.config_ref()).await?;
     let mut tui = crate::tui::test_support::make_test_tui()?;
     app.render_thread_snapshot(
         &mut tui,
-        &app_server,
+        &mut app_server,
         thread_id,
         ThreadEventSnapshot {
             delegated_turns: Vec::new(),
@@ -1946,7 +1981,8 @@ async fn ignore_same_thread_resume_allows_retrying_read_only_view() -> Result<()
             input_state: None,
         },
         /*resume_restored_queue*/ false,
-    )?;
+    )
+    .await?;
     assert!(app.chat_widget.is_external_writer_view());
     assert!(!app.chat_widget.is_task_running_for_test());
     Ok(())

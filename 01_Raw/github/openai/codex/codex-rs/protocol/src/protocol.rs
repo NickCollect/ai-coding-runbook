@@ -64,8 +64,6 @@ use crate::request_user_input::RequestUserInputResponse;
 use crate::response_item_id::OptionalWireItemId;
 use crate::turn_input::CyberAccessProgram;
 use crate::turn_input::SuspendTurnOutcome;
-use crate::turn_input::TurnInputMode;
-use crate::turn_input::TurnInputRequest;
 use crate::turn_input::TurnInputSubmission;
 use crate::turn_input::TurnStartOptions;
 use codex_extension_items::image_generation::GeneratedImageRef;
@@ -83,6 +81,7 @@ use serde_json::Map;
 use serde_json::Value;
 use serde_with::serde_as;
 use strum_macros::Display;
+use strum_macros::IntoStaticStr;
 use tokio::sync::oneshot;
 use tokio::sync::watch;
 use tracing::error;
@@ -228,7 +227,19 @@ pub struct ConversationStartParams {
     pub voice: Option<Option<RealtimeVoice>>,
 }
 
-/// Controls when an in-process realtime attachment may establish a connection.
+/// Authentication selected by the embedding host for an existing call.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub enum RealtimeExistingCallAuth {
+    /// Use the model provider's authentication and runtime destination checks.
+    #[default]
+    ModelProvider,
+    /// Use the selected auth manager's external headers and the host's transport.
+    /// The trusted host must authorize the destination, call owner, and calling
+    /// workload before selecting this mode. Never derive it from a client URL.
+    ExternalHeaders,
+}
+
+/// Controls connection admission and authentication for an in-process attachment.
 #[derive(Debug, Clone, Default)]
 pub struct RealtimeAttachmentOptions {
     /// Set the watch to `true` to cancel a pending connection.
@@ -236,6 +247,8 @@ pub struct RealtimeAttachmentOptions {
     pub cancel: Option<watch::Receiver<bool>>,
     /// Optional caller deadline for publishing the connection. Cleanup can finish later.
     pub start_before: Option<SystemTime>,
+    /// Applies only to existing calls; external headers require an explicit host-selected URL.
+    pub existing_call_auth: RealtimeExistingCallAuth,
 }
 
 /// A caller-owned realtime sideband. Dropping either direction seals input and ends
@@ -728,6 +741,9 @@ pub enum Op {
     /// This server sends [`EventMsg::TurnAborted`] in response.
     Interrupt,
 
+    /// Interrupt a spawned agent, respecting its configured sampling boundary.
+    InterruptAgent,
+
     /// Interrupt the named turn only if no input is queued for it.
     /// The decision is acknowledged before cancellation finishes.
     #[debug("InterruptIfNoPendingInput {{ turn_id: {turn_id:?} }}")]
@@ -774,7 +790,13 @@ pub enum Op {
     /// Close the running realtime conversation stream.
     RealtimeConversationClose,
 
-    /// Close only the matching session after earlier start operations finish.
+    /// End the identified logical call, including after its transport owner is lost.
+    RealtimeConversationEnd {
+        realtime_session_id: String,
+        reply: oneshot::Sender<CodexResult<()>>,
+    },
+
+    /// Disconnect only the matching transport after earlier start operations finish.
     RealtimeConversationDetach {
         realtime_session_id: String,
         reply: oneshot::Sender<CodexResult<()>>,
@@ -782,14 +804,6 @@ pub enum Op {
 
     /// Request the list of voices supported by realtime conversation streams.
     RealtimeConversationListVoices,
-
-    /// Submit turn input using the requested routing behavior.
-    #[debug("TurnInput {{ requested_settings: {:?} }}", request.thread_settings)]
-    TurnInput {
-        request: Box<TurnInputRequest>,
-        mode: TurnInputMode,
-        reply: oneshot::Sender<CodexResult<TurnInputSubmission>>,
-    },
 
     /// Resume an interrupted regular turn.
     #[debug("RecoverTurn {{ requested_settings: {thread_settings:?} }}")]
@@ -1134,6 +1148,7 @@ impl Op {
     pub fn kind(&self) -> &'static str {
         match self {
             Self::Interrupt => "interrupt",
+            Self::InterruptAgent => "interrupt_agent",
             Self::InterruptIfNoPendingInput { .. } => "interrupt_if_no_pending_input",
             Self::CleanBackgroundTerminals => "clean_background_terminals",
             Self::RealtimeConversationStart(_) => "realtime_conversation_start",
@@ -1143,9 +1158,9 @@ impl Op {
             Self::RealtimeConversationText(_) => "realtime_conversation_text",
             Self::RealtimeConversationSpeech(_) => "realtime_conversation_speech",
             Self::RealtimeConversationClose => "realtime_conversation_close",
+            Self::RealtimeConversationEnd { .. } => "realtime_conversation_end",
             Self::RealtimeConversationDetach { .. } => "realtime_conversation_detach",
             Self::RealtimeConversationListVoices => "realtime_conversation_list_voices",
-            Self::TurnInput { .. } => "turn_input",
             Self::RecoverTurn { .. } => "recover_turn",
             Self::SuspendTurnAndShutdown { .. } => "suspend_turn_and_shutdown",
             Self::ThreadSettings { .. } => "thread_settings",
@@ -2068,8 +2083,11 @@ impl From<SubAgentActivityEvent> for EventMsg {
 }
 
 /// Agent lifecycle status, derived from emitted events.
-#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, JsonSchema, TS, Default)]
+#[derive(
+    Debug, Clone, Deserialize, Serialize, PartialEq, Eq, JsonSchema, TS, Default, IntoStaticStr,
+)]
 #[serde(rename_all = "snake_case")]
+#[strum(serialize_all = "snake_case")]
 #[ts(rename_all = "snake_case")]
 pub enum AgentStatus {
     /// Agent is waiting for initialization.
@@ -2099,13 +2117,17 @@ pub enum NonSteerableTurnKind {
 }
 
 /// Codex errors that we expose to clients.
-#[derive(Clone, Debug, PartialEq, Eq, JsonSchema, TS)]
+#[derive(Clone, Debug, PartialEq, Eq, JsonSchema, TS, IntoStaticStr)]
 #[schemars(rename_all = "snake_case")]
+#[strum(serialize_all = "snake_case")]
 #[ts(rename_all = "snake_case")]
 pub enum CodexErrorInfo {
     ContextWindowExceeded,
     SessionBudgetExceeded,
     UsageLimitExceeded,
+    ApiKeySpendLimitExceeded,
+    ProjectSpendLimitExceeded,
+    OrganizationSpendLimitExceeded,
     RateLimitExceeded,
     FlexUnavailable,
     ServerOverloaded,
@@ -2149,6 +2171,16 @@ pub enum CodexErrorInfo {
 }
 
 impl CodexErrorInfo {
+    pub fn is_usage_limit(&self) -> bool {
+        matches!(
+            self,
+            Self::UsageLimitExceeded
+                | Self::ApiKeySpendLimitExceeded
+                | Self::ProjectSpendLimitExceeded
+                | Self::OrganizationSpendLimitExceeded
+        )
+    }
+
     /// Whether this error should mark the current turn as failed when replaying history.
     pub fn affects_turn_status(&self) -> bool {
         match self {
@@ -2156,6 +2188,9 @@ impl CodexErrorInfo {
             Self::ContextWindowExceeded
             | Self::SessionBudgetExceeded
             | Self::UsageLimitExceeded
+            | Self::ApiKeySpendLimitExceeded
+            | Self::ProjectSpendLimitExceeded
+            | Self::OrganizationSpendLimitExceeded
             | Self::RateLimitExceeded
             | Self::FlexUnavailable
             | Self::ServerOverloaded
@@ -2563,6 +2598,21 @@ pub struct ThreadSettingsSnapshot {
     /// Thread-owned plugin selection, retained even when a plugin is unavailable.
     #[serde(default)]
     pub disabled_plugin_ids: Vec<String>,
+    /// Effective Guardian recorder policy. Absent for Fixed and old snapshots.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[ts(optional)]
+    pub guardian_retention: Option<GuardianRetentionPolicy>,
+}
+
+/// Resolved limits for Guardian's retained evidence, in storage bytes.
+#[derive(Debug, Clone, Copy, Deserialize, Serialize, PartialEq, Eq, JsonSchema, TS)]
+pub struct GuardianRetentionPolicy {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[ts(optional)]
+    pub assistant_record_bytes: Option<usize>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[ts(optional)]
+    pub user_record_bytes: Option<usize>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize, Default, PartialEq, Eq, JsonSchema, TS)]
@@ -2717,7 +2767,7 @@ impl FromStr for RateLimitReachedType {
 
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, JsonSchema, TS)]
 pub struct RateLimitWindow {
-    /// Percentage (0-100) of the window that has been consumed.
+    /// Percentage of the allowance consumed during the window. Can exceed 100.
     pub used_percent: f64,
     /// Rolling window duration, in minutes.
     #[ts(type = "number | null")]
@@ -3175,6 +3225,7 @@ pub struct ImageGenerationBeginEvent {
     pub call_id: String,
 }
 
+#[serde_as]
 #[derive(Debug, Clone, Deserialize, Serialize, JsonSchema, TS)]
 pub struct ImageGenerationEndEvent {
     pub call_id: String,
@@ -3199,6 +3250,10 @@ pub struct ImageGenerationEndEvent {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     #[ts(optional)]
     pub generation_id: Option<String>,
+    #[serde_as(deserialize_as = "serde_with::DefaultOnError")]
+    #[serde(default, skip_serializing_if = "Map::is_empty")]
+    #[ts(as = "Option<_>", optional)]
+    pub image_metadata: Map<String, Value>,
 }
 
 // Conversation kept for backward compatibility.
@@ -4703,8 +4758,9 @@ pub struct TurnAbortedEvent {
     pub duration_ms: Option<i64>,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, JsonSchema, TS)]
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, JsonSchema, TS, IntoStaticStr)]
 #[serde(rename_all = "snake_case")]
+#[strum(serialize_all = "snake_case")]
 pub enum TurnAbortReason {
     Interrupted,
     Replaced,

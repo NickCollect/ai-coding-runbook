@@ -15,6 +15,7 @@ use ratatui::buffer::Buffer;
 use ratatui::layout::Rect;
 use unicode_segmentation::UnicodeSegmentation;
 
+mod blocks;
 mod motion;
 pub(super) mod table;
 
@@ -33,7 +34,34 @@ pub(super) struct Mark {
     anchor_edges: Option<(Anchor, Anchor)>,
     active_edges: Option<(Anchor, Anchor)>,
     unit: SelectionUnit,
-    table: Option<table::TableMark>,
+    scope: Scope,
+}
+
+#[derive(Clone, Copy)]
+enum Scope {
+    Text,
+    Table(table::TableMark),
+    Block(blocks::BlockMark),
+}
+
+impl Mark {
+    fn at(cursor: Anchor, unit: SelectionUnit) -> Self {
+        Self {
+            anchor: cursor,
+            active: cursor,
+            anchor_edges: None,
+            active_edges: None,
+            unit,
+            scope: Scope::Text,
+        }
+    }
+
+    fn table(self) -> Option<table::TableMark> {
+        match self.scope {
+            Scope::Table(table) => Some(table),
+            Scope::Text | Scope::Block(_) => None,
+        }
+    }
 }
 
 #[derive(Clone, Copy)]
@@ -93,7 +121,7 @@ impl SelectMode {
         self.table_caret = self
             .mark
             .take()
-            .and_then(|mark| mark.table)
+            .and_then(Mark::table)
             .map(|table| table.active)
             .or(self.table_caret);
         self.preferred_column = None;
@@ -105,7 +133,7 @@ impl SelectMode {
 
     fn padding_column(self, width: u16) -> Option<u16> {
         self.mark
-            .and_then(|mark| mark.table.map(|table| table.active))
+            .and_then(|mark| mark.table().map(|table| table.active))
             .or(self.table_caret)
             .and_then(|cell| cell.padding_column)
             .map(|column| column.min(width.saturating_sub(1)))
@@ -241,8 +269,11 @@ impl TranscriptView {
         }
         if pressed
             && self.disclosure.keymap.pager.mark_markdown.is_pressed(key)
-            && self.start_select_table(cells)
+            && self.toggle_markdown(cells)
         {
+            return Some(ViewAction::Changed);
+        }
+        if pressed && self.change_block_level(cells, code, modifiers) {
             return Some(ViewAction::Changed);
         }
         if pressed && code == KeyCode::Char('o') && modifiers == KeyModifiers::NONE {
@@ -271,6 +302,8 @@ impl TranscriptView {
             ) => {
                 if matches!(code, KeyCode::Up | KeyCode::Down) {
                     CursorMotion::Rows(if code == KeyCode::Up { -1 } else { 1 })
+                } else if shift_arrow && self.marked_block().is_some() {
+                    return Some(ViewAction::Changed);
                 } else {
                     CursorMotion::Character(code)
                 }
@@ -333,24 +366,17 @@ impl TranscriptView {
         };
         let cursor = mode.cursor(selection);
         mode.mark = match mode.mark {
-            Some(mark) if mark.unit == unit && mark.table.is_none() => {
+            Some(mark) if mark.unit == unit && matches!(mark.scope, Scope::Text) => {
                 self.clear_select_mark();
                 return;
             }
-            Some(mark) if mark.table.is_none() => Some(Mark {
+            Some(mark) if matches!(mark.scope, Scope::Text) => Some(Mark {
                 anchor_edges: None,
                 active_edges: None,
                 unit,
                 ..mark
             }),
-            _ => Some(Mark {
-                anchor: cursor,
-                active: cursor,
-                anchor_edges: None,
-                active_edges: None,
-                unit,
-                table: None,
-            }),
+            _ => Some(Mark::at(cursor, unit)),
         };
         mode.preferred_column = None;
         mode.table_caret = None;
@@ -381,8 +407,10 @@ impl TranscriptView {
         };
         std::mem::swap(&mut mark.anchor, &mut mark.active);
         std::mem::swap(&mut mark.anchor_edges, &mut mark.active_edges);
-        if let Some(table) = &mut mark.table {
-            std::mem::swap(&mut table.anchor, &mut table.active);
+        match &mut mark.scope {
+            Scope::Text => {}
+            Scope::Table(table) => std::mem::swap(&mut table.anchor, &mut table.active),
+            Scope::Block(block) => block.swap(),
         }
         mode.preferred_column = None;
         self.sync_select_range(cells);
@@ -397,18 +425,51 @@ impl TranscriptView {
             return;
         };
         let cursor = mode.cursor(selection);
+        let snapshot = self.snapshot_cells();
+        let cells = snapshot.as_deref().unwrap_or(cells);
         let index = self.resolve(cells, cursor);
         let row = self.layout(cells, index).map_or(/*default*/ 0, |layout| {
             layout
                 .row_for_offset(cursor.offset)
                 .saturating_add_signed(cursor.row_bias.saturating_neg())
         });
-        if !self
+        let start = self.start(cells);
+        let height = self.area.height + u16::from(self.prompt_header_target.is_some());
+        let width = self.area.width;
+        let detailed = self.detailed;
+        let has_header =
+            |index| height >= 4 && prompt_header::line(cells, index, width, detailed).is_some();
+        let painted_start = self
             .visible
-            .iter()
-            .any(|visible| visible.index == index && visible.row == row)
+            .first()
+            .is_some_and(|first| (first.index, first.row) == start);
+        let end = self
+            .visible
+            .last()
+            .filter(|_| painted_start)
+            .map(|last| (last.index, last.row))
+            .unwrap_or_else(|| {
+                let last_row = height.saturating_sub(1 + u16::from(has_header(start.0))) as isize;
+                self.move_rows(cells, start.0, start.1, last_row)
+            });
+        if (index, row) < start
+            || ((index, row) == start
+                && matches!(self.position, Position::Latest)
+                && !painted_start
+                && self.prompt_header_target.is_none()
+                && has_header(start.0))
         {
             self.position = Position::Reading(Anchor { index, ..cursor });
+        } else if (index, row) > end {
+            let context = height.saturating_sub(1) as isize;
+            let (mut index, mut row) = self.move_rows(cells, index, row, -context);
+            // A newly pinned prompt consumes one of the rows available to the cursor.
+            if has_header(index) {
+                (index, row) = self.move_rows(cells, index, row, /*rows*/ 1);
+            }
+            if let Some(layout) = self.layout(cells, index) {
+                self.read_from_row(cells, index, row, &layout);
+            }
         }
     }
 
@@ -439,7 +500,7 @@ impl TranscriptView {
                 /*width*/ 1,
                 /*height*/ 1,
             );
-            buf.set_style(area, crate::style::selection_style().underlined());
+            buf.set_style(area, crate::style::selection_style().not_underlined());
         }
     }
 
@@ -467,7 +528,7 @@ impl TranscriptView {
                     anchor_edges: Some((start, anchor_end)),
                     active_edges: Some((active_start, end)),
                     unit,
-                    table: None,
+                    scope: Scope::Text,
                 }
             } else {
                 let anchor = self.before_grapheme(cells, start);
@@ -483,7 +544,7 @@ impl TranscriptView {
                     anchor_edges: Some((anchor_start, start)),
                     active_edges: Some((end, active_end)),
                     unit,
-                    table: None,
+                    scope: Scope::Text,
                 }
             }
         });
@@ -531,7 +592,10 @@ impl TranscriptView {
         }
         mode.preferred_column = None;
         mode.table_caret = None;
-        if mode.mark.is_some_and(|mark| mark.table.is_some()) {
+        if mode
+            .mark
+            .is_some_and(|mark| !matches!(mark.scope, Scope::Text))
+        {
             mode.mark = None;
         }
         if let Some(mark) = &mut mode.mark {

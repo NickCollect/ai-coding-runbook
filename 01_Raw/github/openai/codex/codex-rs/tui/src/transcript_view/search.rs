@@ -333,7 +333,7 @@ impl TranscriptView {
         mode.table_caret = origin.table_caret;
         mode.preferred_column = origin.preferred_column;
         selection.set_keyboard_range(origin.start, origin.end);
-        if self.table_mark().is_some() {
+        if self.table_mark().is_some() || self.marked_block().is_some() {
             self.sync_select_range(cells);
         }
     }
@@ -596,6 +596,15 @@ impl TranscriptView {
         cells: &[Arc<dyn HistoryCell>],
         inserted: Range<usize>,
     ) {
+        self.history_page_loaded(cells, inserted, /*inserted_images*/ None);
+    }
+
+    pub(crate) fn history_page_loaded(
+        &mut self,
+        cells: &[Arc<dyn HistoryCell>],
+        inserted: Range<usize>,
+        inserted_images: Option<Range<usize>>,
+    ) {
         self.invalidate_turn_details_from(/*index*/ 0);
         // With only a header and live output, the first older page extends the canonical tail.
         if !inserted.is_empty()
@@ -604,7 +613,17 @@ impl TranscriptView {
         {
             self.last_tail = cells.last().map(EntryKey::cell);
         }
+        let image_span = inserted_images.map(|images| {
+            // The older-page prepend shifts the separately inserted images.
+            let len = inserted.len();
+            self.prepend_snapshot_history(cells, images.start + len..images.end + len)
+        });
         let inserted = self.prepend_snapshot_history(cells, inserted);
+        let inserted = if inserted.is_empty() {
+            image_span.unwrap_or(inserted)
+        } else {
+            inserted
+        };
         if let Position::Reading(anchor) = self.position {
             let index = self.resolve(cells, anchor);
             self.position = Position::Reading(Anchor {

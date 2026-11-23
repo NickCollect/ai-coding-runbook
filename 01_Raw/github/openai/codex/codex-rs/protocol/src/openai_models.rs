@@ -58,6 +58,7 @@ mod guardian_v2;
 #[path = "openai_models/reasoning_effort.rs"]
 mod reasoning_effort;
 
+pub use access_programs::DaybreakAvailability;
 pub use access_programs::ModelAccessPrograms;
 pub use access_programs::SavedDaybreakChoice;
 pub use guardian_v2::AsyncClassifierMode;
@@ -349,14 +350,6 @@ pub enum WebSearchToolType {
     TextAndImage,
 }
 
-/// Provider preference selected by the resolved model catalog entry.
-#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, TS, JsonSchema)]
-#[serde(rename_all = "snake_case")]
-pub enum WebSearchProvider {
-    Standalone,
-    SearchMcp,
-}
-
 /// Server-provided truncation policy metadata for a model.
 #[derive(Debug, Serialize, Deserialize, Clone, Copy, PartialEq, Eq, TS, JsonSchema)]
 #[serde(rename_all = "snake_case")]
@@ -469,8 +462,6 @@ pub struct ModelInfo {
     pub apply_patch_tool_type: Option<ApplyPatchToolType>,
     #[serde(default)]
     pub web_search_tool_type: WebSearchToolType,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub web_search_provider: Option<WebSearchProvider>,
     pub truncation_policy: TruncationPolicyConfig,
     #[serde(default)]
     pub supports_image_detail_original: bool,
@@ -529,6 +520,10 @@ pub struct ModelInfo {
     /// Reasoning effort used for multi-agent work when the user selects Ultra.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub multi_agent_reasoning_effort: Option<ReasoningEffort>,
+    /// Whether native multi-agent tools follow the model's tool mode instead of staying direct-only.
+    /// When absent, preserve the runtime's `multi_agent_v2.non_code_mode_only` setting.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub multi_agent_tools_in_code_mode: Option<bool>,
 }
 
 /// Where model metadata was obtained during local catalog resolution.
@@ -664,13 +659,17 @@ pub struct ToolMessages {
     pub incremental_tools: Option<IncrementalToolMessages>,
     /// Prefixes for individual functions in the `functions` namespace, keyed by unqualified name.
     /// Applies to direct declarations, Code Mode, and tool search, including custom tools.
-    /// Values are trimmed; empty values and unavailable functions add nothing. The trimmed
-    /// values for available functions plus separating blank lines must fit in 256 UTF-8 bytes
-    /// in total. This bounds the added text, not the complete definition or its token count.
+    /// Only available functions are annotated. All configured prefixes share the
+    /// `description_prefix_budget_bytes` limit with indirect namespace guidance.
     /// Other namespaces are never affected.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub functions_namespace_functions_description_prefixes:
         Option<std::collections::BTreeMap<String, String>>,
+    /// Maximum total UTF-8 bytes of trimmed prefix values in this model's catalog entry.
+    /// Defaults to 512. Each configured dictionary entry counts once, including unused
+    /// selectors. Keys, paragraph separators, and rendered copies are excluded.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description_prefix_budget_bytes: Option<usize>,
     /// Optional guidance for indirectly presented tools; missing or empty adds no prefix.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub indirect_description_prefixes: Option<IndirectDescriptionPrefixes>,
@@ -691,9 +690,14 @@ pub struct ToolMessages {
 #[derive(Debug, Default, Serialize, Deserialize, Clone, PartialEq, Eq, TS, JsonSchema)]
 pub struct IndirectDescriptionPrefixes {
     /// Exact rendered namespaces, including `functions` for plain tools.
-    /// Overlap with an MCP server prefix is allowed only when the trimmed values match.
+    /// Overlapping selectors must have the same trimmed value.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub namespaces: Option<std::collections::BTreeMap<String, String>>,
+    /// Exact rendered namespaces of registered built-in tools, including `functions` for plain tools.
+    /// Adds guidance once to the namespace header, including a header shared with client tools.
+    /// Flat listings have no header and omit this selector. External-only namespaces are ignored.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub builtin_tool_namespaces: Option<std::collections::BTreeMap<String, String>>,
     /// Configured MCP server names, before callable namespace normalization.
     /// Each prefix applies to all namespaces exposed by that server.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -870,6 +874,9 @@ pub struct GranularApprovalMessages {
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq, TS, JsonSchema)]
 pub struct CollaborationModeMessages {
+    /// Optional guidance for Default before the first Plan turn.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub initial: Option<String>,
     pub default: Option<String>,
     pub plan: Option<String>,
 }
@@ -1224,7 +1231,6 @@ mod tests {
             default_verbosity: None,
             apply_patch_tool_type: None,
             web_search_tool_type: WebSearchToolType::Text,
-            web_search_provider: None,
             truncation_policy: TruncationPolicyConfig::bytes(/*limit*/ 10_000),
             supports_image_detail_original: false,
             context_window: None,
@@ -1246,6 +1252,7 @@ mod tests {
             tool_mode: None,
             multi_agent_version: None,
             multi_agent_reasoning_effort: None,
+            multi_agent_tools_in_code_mode: None,
         }
     }
     #[test]
@@ -1624,6 +1631,7 @@ mod tests {
             ModelMessages {
                 instructions_template: Some("legacy catalog instructions".to_string()),
                 collaboration_modes: Some(CollaborationModeMessages {
+                    initial: None,
                     default: Some(String::new()),
                     plan: None,
                 }),
@@ -1815,6 +1823,7 @@ mod tests {
                 ..Default::default()
             }),
             collaboration_modes: Some(CollaborationModeMessages {
+                initial: Some("initial collaboration".to_string()),
                 default: Some("default collaboration".to_string()),
                 plan: Some("plan collaboration".to_string()),
             }),
@@ -1946,6 +1955,24 @@ mod tests {
         assert_eq!(model.auto_review_model_override, None);
         assert_eq!(model.tool_mode, None);
         assert_eq!(model.multi_agent_reasoning_effort, None);
+    }
+
+    #[test]
+    fn model_info_preserves_multi_agent_code_mode_presence() {
+        let base = test_model(/*spec*/ None);
+        let base_json = serde_json::to_value(&base).expect("serialize model");
+        assert!(base_json.get("multi_agent_tools_in_code_mode").is_none());
+        assert_eq!(
+            serde_json::from_value::<ModelInfo>(base_json.clone()).unwrap(),
+            base
+        );
+        for value in [None, Some(false), Some(true)] {
+            let mut json = base_json.clone();
+            json["multi_agent_tools_in_code_mode"] = serde_json::to_value(value).unwrap();
+            let mut expected = base.clone();
+            expected.multi_agent_tools_in_code_mode = value;
+            assert_eq!(serde_json::from_value::<ModelInfo>(json).unwrap(), expected);
+        }
     }
 
     #[test]
@@ -2206,13 +2233,17 @@ mod tests {
             (Some(serde_json::Value::Null), None),
             (
                 Some(serde_json::json!({ "cyber": [] })),
-                Some(ModelAccessPrograms { cyber: vec![] }),
+                Some(ModelAccessPrograms {
+                    cyber: vec![],
+                    daybreak_availability: Default::default(),
+                }),
             ),
             (
                 Some(serde_json::json!({
                     "cyber": ["standard", "daybreak_blue", "future_program", "daybreak_red"]
                 })),
                 Some(ModelAccessPrograms {
+                    daybreak_availability: Default::default(),
                     cyber: vec![
                         CyberAccessProgram::Standard,
                         CyberAccessProgram::DaybreakBlue,
@@ -2220,7 +2251,46 @@ mod tests {
                     ],
                 }),
             ),
-        ] {
+        ]
+        .into_iter()
+        .chain(
+            [
+                (
+                    serde_json::json!("available"),
+                    DaybreakAvailability::Available,
+                ),
+                (
+                    serde_json::json!("enrollment_required"),
+                    DaybreakAvailability::EnrollmentRequired,
+                ),
+                (
+                    serde_json::json!("unavailable_for_model"),
+                    DaybreakAvailability::UnavailableForModel,
+                ),
+                (serde_json::json!("default"), DaybreakAvailability::Default),
+                (
+                    serde_json::json!("future_status"),
+                    DaybreakAvailability::Default,
+                ),
+            ]
+            .into_iter()
+            .map(|(availability, expected_availability)| {
+                (
+                    Some(serde_json::json!({
+                        "cyber": ["standard", "daybreak_blue", "future_program", "daybreak_red"],
+                        "daybreak_availability": availability,
+                    })),
+                    Some(ModelAccessPrograms {
+                        cyber: vec![
+                            CyberAccessProgram::Standard,
+                            CyberAccessProgram::DaybreakBlue,
+                            CyberAccessProgram::DaybreakRed,
+                        ],
+                        daybreak_availability: expected_availability,
+                    }),
+                )
+            }),
+        ) {
             let mut value = serde_json::to_value(test_model(/*spec*/ None)).unwrap();
             if let Some(metadata) = metadata {
                 value["available_access_programs"] = metadata;

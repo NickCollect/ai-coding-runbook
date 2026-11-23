@@ -66,6 +66,7 @@ async fn captures_originals_without_generated_context_or_later_appends() -> anyh
             multi_agent_version: None,
             history_mode: ThreadHistoryMode::Paginated,
             history_base: None,
+            inherited_history_visibility: Default::default(),
             subagent_history_start_ordinal: None,
             initial_window_id: codex_protocol::ContextWindowId::new_uuid_v7(),
             runtime_workspace_roots: None,
@@ -185,6 +186,7 @@ Approved action: {"action":{"command":"write /workspace/report.txt"},"outcome":"
     )
     .await?;
     assert!(!store.live_rollout_path(owner).await?.exists());
+    assert!(fresh.capture(&store).await.is_err());
     // A resume must establish its tail even if the rollout is missing.
     assert!(
         EvidenceCursor::at_thread_ready(

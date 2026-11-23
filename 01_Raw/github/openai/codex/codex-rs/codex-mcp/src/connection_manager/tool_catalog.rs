@@ -14,6 +14,7 @@ use tracing::Instrument;
 use tracing::instrument;
 use tracing::trace;
 use tracing::trace_span;
+use tracing::warn;
 
 use super::McpConnectionSet;
 use super::catalog_telemetry::emit_binding_catalog;
@@ -119,6 +120,7 @@ impl McpConnectionSet {
         }
     }
 
+    #[instrument(name = "mcp.binding.catalog_revision_wait", skip_all)]
     pub(crate) async fn stable_catalog_revisions(
         &self,
         required_servers: &[McpServerKey],
@@ -380,6 +382,7 @@ impl McpConnectionSet {
             }
             (server_name, view, None)
         }))
+        .instrument(tracing::info_span!("mcp.binding.startup_wait"))
         .await;
         let catalog = &config.mcp_server_catalog;
         let server_results = join_all(server_snapshots.into_iter().map(|(server_name, view, cached_tools)| async move {
@@ -410,6 +413,11 @@ impl McpConnectionSet {
                     && !(accepts_cached_catalog
                         && self.required_servers.binary_search(server_name).is_ok())
                 {
+                    if let Some(warning_emitted) = &view.connection.client.startup_warning_emitted
+                        && !warning_emitted.swap(true, Ordering::Relaxed)
+                    {
+                        warn!(target: "codex_mcp_startup", server_name = ?server_name.name(), reason = "startup still pending; omitted from this turn", "MCP server unavailable");
+                    }
                     return None;
                 }
                 let Ok(mut client) = view.connection.client().await else {
@@ -469,6 +477,7 @@ impl McpConnectionSet {
                 raw_definition_json_bytes,
             ))
         }))
+        .instrument(tracing::info_span!("mcp.binding.catalog_capture"))
         .await;
         let mut raw_definition_json_bytes = 0usize;
         for (server_name, client, server_tools, server_definition_json_bytes) in
@@ -587,6 +596,9 @@ impl McpConnectionSet {
             .connection
             .client()
             .await
+            .inspect_err(
+                |_| tracing::error!(server = ?server_name, "MCP tool call failed during startup"),
+            )
             .with_context(|| format!("Could not start MCP server `{server_name}`"))?;
         client.tool_timeout = view.tool_timeout;
         let snapshot = client.tool_catalog.read(Arc::new).await;
@@ -618,6 +630,45 @@ impl McpConnectionSet {
             .clone_from(&advertised_tool.callable_name);
         self.prepare_call(tool_info, Arc::new(client), config, snapshot)
             .ok_or_else(unavailable)
+    }
+
+    #[instrument(level = "trace", skip_all)]
+    pub(crate) async fn prepare_app_hook_call(
+        self: &Arc<Self>,
+        config: Arc<crate::McpConfig>,
+        tool: &str,
+    ) -> Result<PreparedMcpCall> {
+        let server = McpServerKey::unscoped(CODEX_APPS_MCP_SERVER_NAME);
+        self.validate_tool_call(&server, tool)?;
+        let view = self
+            .servers
+            .get(&server)
+            .context("Apps runtime is unavailable")?;
+        let mut client = view
+            .connection
+            .client()
+            .await
+            .context("Could not start Apps server")?;
+        view.refresh_notified_catalog(CODEX_APPS_MCP_SERVER_NAME, &client)
+            .await;
+        client.tool_timeout = view.tool_timeout;
+        let snapshot = client.tool_catalog.read(Arc::new).await;
+        let mut matches = snapshot.tools.iter().filter(|info| info.tool.name == tool);
+        let info = matches.next().context("App hook tool is unavailable")?;
+        anyhow::ensure!(matches.next().is_none(), "App hook tool name is ambiguous");
+        let exposure = config.mcp_server_catalog.exposure();
+        let tools =
+            view.prepare_tools_for_model(vec![info.clone()], &self.tool_plugin_context, exposure);
+        let info = normalize_tools_for_model_with_prefix(
+            tools,
+            self.prefix_mcp_tool_names,
+            &self.non_prefixed_mcp_tool_servers,
+            exposure,
+        )
+        .pop()
+        .context("App hook tool is unavailable")?;
+        self.prepare_call(info, Arc::new(client), config, snapshot)
+            .context("App hook tool is unavailable")
     }
 
     fn prepare_call(
@@ -752,6 +803,7 @@ impl McpConnectionSet {
         let managed_client = view
             .connection
             .client()
+            .instrument(tracing::info_span!("mcp.apps.client_ready_wait"))
             .await
             .context("failed to get client")?;
         let Some((tools, list_start)) = managed_client

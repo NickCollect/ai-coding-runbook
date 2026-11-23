@@ -25,6 +25,8 @@ impl ChatWidget {
     }
 
     fn pause_for_disconnect_inner(&mut self, preserve_startup_input: bool) {
+        // Local pickers can survive disconnect, but queued server prompts cannot.
+        self.bottom_pane.clear_delayed_prompts();
         self.permission_discovery = None;
         self.invalidate_permission_discovery();
         if !preserve_startup_input {
@@ -53,6 +55,8 @@ impl ChatWidget {
             crate::key_hint::ctrl(KeyCode::Char('c')).display_label(),
             "quit".into(),
         )]));
+        self.statusline_disconnected = true;
+        self.refresh_status_line();
     }
 
     /// Restore local input only after replay, which can otherwise move interrupted queues into the draft.
@@ -208,6 +212,10 @@ impl ChatWidget {
         cancellation
     }
 
+    pub(crate) fn set_composer_restricted_input_mode(&mut self, mode: Option<RestrictedInputMode>) {
+        self.bottom_pane.set_composer_restricted_input_mode(mode);
+    }
+
     pub(crate) fn handle_restricted_key(
         &mut self,
         key: KeyEvent,
@@ -226,12 +234,15 @@ impl ChatWidget {
             {
                 return KeyEventAction::None;
             }
-            if !self.startup_submission_has_protected_input()
-                && !self.blocks_direct_input
-                && self.bottom_pane.composer_input_enabled()
-                && let Some(action) =
-                    self.image_paste_key_action(key, ClipboardPasteContext::DraftHandoff)
-            {
+            let protected = self.startup_submission_has_protected_input()
+                || self.blocks_direct_input
+                || !self.bottom_pane.composer_input_enabled();
+            let composer = &self.bottom_pane.keymap().composer;
+            if protected && (composer.undo.is_pressed(key) || composer.redo.is_pressed(key)) {
+                return KeyEventAction::None;
+            }
+            let context = ClipboardPasteContext::DraftHandoff;
+            if !protected && let Some(action) = self.image_paste_key_action(key, context) {
                 return action;
             }
             self.bottom_pane.handle_restricted_key(key, mode);

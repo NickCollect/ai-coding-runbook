@@ -11,7 +11,7 @@ const client = new OpenAI({
 describe('resource live', () => {
   test('create: only required params', async () => {
     const responsePromise = client.live.create({
-      session: { model: 'gpt-live-1' },
+      session: { model: 'gpt-live-1.1' },
       transport: { sdp: 'x', type: 'webrtc' },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,10 +26,11 @@ describe('resource live', () => {
   test('create: required and optional params', async () => {
     await client.live.create({
       session: {
-        model: 'gpt-live-1',
+        model: 'gpt-live-1.1',
         audio: { output: { voice: 'string' } },
         client: { data_channel: { allowed_client_events: 'all', allowed_server_events: 'all' } },
         delegation: { type: 'client', acknowledgement_delay_ms: 0 },
+        idle_timeout_s: 5,
         input: [
           {
             content: [{ text: 'text', type: 'input_text' }],
@@ -58,6 +59,7 @@ describe('resource live', () => {
             type: 'decisions',
           },
         ],
+        wake_policy: { type: 'speech', vad_threshold: 0 },
       },
       transport: { sdp: 'x', type: 'webrtc' },
     });

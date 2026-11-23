@@ -4,24 +4,26 @@
 use super::*;
 use crate::context_manager::ContextManager;
 use codex_protocol::models::BaseInstructions;
+use codex_protocol::models::ContentItem;
 use codex_protocol::models::ResponseInputItem;
-use codex_protocol::user_input::UserInput;
-use codex_protocol_test_support::uuid_v7_item_id_generator_for_test;
+use codex_thread_context_ids_test_support::thread_context_ids;
 use codex_utils_output_truncation::TruncationPolicy;
 use pretty_assertions::assert_eq;
 
 #[test]
 fn history_sums_measured_and_unknown_file_audio() {
-    let mut history = ContextManager::new(uuid_v7_item_id_generator_for_test());
-    let item = ResponseInputItem::from(
-        ["short", "unknown"]
-            .map(|file_id| UserInput::Audio {
+    let mut history = ContextManager::new(thread_context_ids(), /*retention*/ None);
+    let item = ResponseInputItem::Message {
+        role: "user".to_string(),
+        content: ["short", "unknown"]
+            .map(|file_id| ContentItem::InputAudio {
                 audio: AudioReference::File {
                     file_id: file_id.into(),
                 },
             })
-            .to_vec(),
-    );
+            .into(),
+        phase: None,
+    };
     history.record_items(
         [&ResponseItem::from(item)],
         TruncationPolicy::Tokens(10_000),
@@ -117,7 +119,7 @@ async fn producer_bounded_audio_keeps_the_same_parts_as_inline_history() {
         )
         .unwrap();
         codex_utils_audio::prepare_response_items(std::slice::from_mut(&mut inline));
-        let mut history = ContextManager::new(uuid_v7_item_id_generator_for_test());
+        let mut history = ContextManager::new(thread_context_ids(), /*retention*/ None);
         history.record_items([&inline], policy);
         let expected =
             serde_json::to_value(history.raw_items().last().unwrap()).unwrap()["output"].take();

@@ -1,3 +1,4 @@
+mod work_gate;
 use crate::config::RolloutBudgetConfig;
 use crate::config::rollout_budget_threshold_reached;
 use codex_protocol::BudgetUnitsSum;
@@ -10,26 +11,9 @@ use std::sync::Arc;
 use std::sync::Mutex;
 use std::sync::MutexGuard;
 use std::sync::OnceLock;
-
-#[derive(Debug, Default)]
-struct RolloutWorkGate(OnceLock<()>);
-
-impl RolloutWorkGate {
-    fn stop_budget(&self) {
-        let _ = self.0.set(());
-    }
-
-    fn is_stopped(&self) -> bool {
-        self.0.get().is_some()
-    }
-
-    fn check_start(&self) -> CodexResult<()> {
-        if self.is_stopped() {
-            return Err(CodexErr::SessionBudgetExceeded);
-        }
-        Ok(())
-    }
-}
+pub(crate) use work_gate::ResponseWork;
+pub use work_gate::RolloutWorkGate;
+pub(crate) use work_gate::TurnWork;
 
 /// Budget reminder returned by a controller and acknowledged after history insertion.
 pub struct RolloutBudgetReminder {
@@ -67,6 +51,14 @@ impl ThreadBudgetPolicy {
     pub(crate) fn check_start(&self) -> CodexResult<()> {
         self.rollout.gate.check_start()
     }
+
+    pub(crate) fn defer_compaction_start(
+        &self,
+        source: &codex_protocol::protocol::SessionSource,
+        phase: codex_analytics::CompactionPhase,
+    ) -> bool {
+        work_gate::defer_compaction_start(self, source, phase)
+    }
 }
 
 impl std::fmt::Debug for RolloutBudget {
@@ -103,22 +95,21 @@ impl RolloutBudget {
         });
     }
 
+    pub(crate) fn config(&self) -> Option<RolloutBudgetConfig> {
+        self.lock().map(|state| state.config.clone())
+    }
+
     /// Post the response cost and enforce the allowance under the same lock.
     pub(crate) fn record_usage(
         &self,
         usage: Option<&TokenUsage>,
-        hook_charge: codex_hooks::HookCharge,
+        hook_units: f64,
     ) -> CodexResult<()> {
         let Some(mut state) = self.lock() else {
             return Ok(());
         };
-        if !hook_charge.units.is_finite() || hook_charge.units < 0.0 {
+        if !hook_units.is_finite() || hook_units < 0.0 {
             return Err(CodexErr::Fatal("invalid additional sampling charge".into()));
-        }
-        if hook_charge.overflowed && state.posted.total().is_finite() {
-            // Stop new work before validating the rest of an overflowing receipt.
-            state.posted.add(f64::INFINITY);
-            self.enforce_posted_limit(&state)?;
         }
         let provider_units = if let Some(units) =
             usage.and_then(|usage| usage.codex_rollout_budget_units.as_ref())
@@ -137,29 +128,38 @@ impl RolloutBudget {
         } else {
             0.0
         };
-        if state.posted.total().is_infinite() {
-            // Later valid receipts cannot restore precision. The original
-            // overflow was reported; it must not veto every advisory turn.
-            return Ok(());
+        let response_charge_amount = provider_units + hook_units;
+        if !response_charge_amount.is_finite() {
+            return self.reject_overflow(&state, "responseChargeAmount");
         }
-        // Keep the full bill even if enforcing the new allowance fails.
-        state.posted.add(provider_units);
-        state.posted.add(hook_charge.units);
-        // Enforce the allowance before reporting an overflowing sum.
-        self.enforce_posted_limit(&state)?;
-        if !state.posted.total().is_finite() {
-            return Err(CodexErr::Fatal(
-                "rollout sampling cost exceeds f64 range".into(),
-            ));
+        // Stage the bill so a failed check cannot change the previously posted balance.
+        let Some(posted) = state
+            .posted
+            .checked_add(provider_units)
+            .and_then(|sum| sum.checked_add(hook_units))
+        else {
+            return self.reject_overflow(&state, "totalBudgetUsed");
+        };
+        state.posted = posted;
+        let enforcement = self.enforce_posted_limit(&state);
+        enforcement
+    }
+
+    fn reject_overflow(&self, state: &RolloutBudgetState, field: &str) -> CodexResult<()> {
+        if state.config.enforce_limit {
+            self.stop_on_overflow();
         }
-        Ok(())
+        Err(CodexErr::Fatal(format!("{field} must be finite")))
+    }
+
+    pub(crate) fn stop_on_overflow(&self) {
+        // Decline new work immediately and interrupt active turns on clocks that support it.
+        self.stop_new_work();
     }
 
     fn enforce_posted_limit(&self, state: &RolloutBudgetState) -> CodexResult<()> {
         let posted = state.posted.total();
-        if state.config.enforce_limit
-            && (!posted.is_finite() || posted > state.config.limit_budget.next_up())
-        {
+        if state.config.enforce_limit && posted > state.config.limit_budget.next_up() {
             self.stop_new_work();
         }
         Ok(())
@@ -223,12 +223,7 @@ impl RolloutBudget {
     }
 
     pub(crate) fn can_receive_turn_input(&self, thread: ThreadId, turn: &str) -> bool {
-        let _ = (thread, turn);
-        !self.is_exhausted()
-    }
-
-    pub(crate) fn can_force_root_final(&self) -> bool {
-        false
+        self.gate.can_receive_turn_input(thread, turn)
     }
 
     pub(crate) fn is_exhausted(&self) -> bool {
@@ -236,9 +231,6 @@ impl RolloutBudget {
     }
 
     fn remaining_units(&self, state: &RolloutBudgetState) -> CodexResult<f64> {
-        if state.posted.total().is_infinite() {
-            return Ok(0.0);
-        }
         let used = state.posted.total();
         Ok((state.config.limit_budget - used).max(0.0))
     }

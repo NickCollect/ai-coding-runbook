@@ -14,6 +14,7 @@ const LEGACY_REPEAT_GUARD: Duration = Duration::from_secs(/*secs*/ 1);
 pub(crate) enum ActivationKeySuppression {
     ViewTransition,
     ReportedRepeats,
+    PressOnlyFallback,
 }
 
 #[derive(Clone, Copy)]
@@ -32,6 +33,11 @@ impl ActivationKeyGuard {
             legacy_repeat_fallback: !reported_repeats_only,
             active: true,
         }
+    }
+
+    pub(crate) fn extend_for_protected_view(&mut self, now: Instant) {
+        self.legacy_repeat_fallback = true;
+        self.block_until = self.block_until.max(now + INITIAL_GUARD);
     }
 
     pub(crate) fn consume(&mut self, key: KeyBinding, kind: KeyEventKind) -> bool {

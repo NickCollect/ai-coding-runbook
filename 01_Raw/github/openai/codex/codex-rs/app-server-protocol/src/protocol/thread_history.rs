@@ -18,6 +18,7 @@ use crate::protocol::v2::McpToolCallError;
 use crate::protocol::v2::McpToolCallResult;
 use crate::protocol::v2::McpToolCallStatus;
 use crate::protocol::v2::ThreadItem;
+use crate::protocol::v2::ThreadItemEntry;
 use crate::protocol::v2::ThreadItemPayload;
 use crate::protocol::v2::Turn;
 use crate::protocol::v2::TurnError as V2TurnError;
@@ -426,6 +427,32 @@ impl ThreadHistoryBuilder {
             {
                 // A read by ID could still find the prior version of a corrected item.
                 turn.evictable_agent_item = None;
+            }
+        }
+    }
+
+    /// Drops only completed MCP results that the active turn can recover in full by ID.
+    pub fn release_saved_mcp_results(&mut self, entries: &[ThreadItemEntry]) {
+        let Some(turn) = self.current_turn.as_mut() else {
+            return;
+        };
+        for entry in entries {
+            if entry.turn_id == turn.id
+                && let ThreadItemPayload::McpToolCall {
+                    id,
+                    status: McpToolCallStatus::Completed,
+                    result: Some(saved),
+                    ..
+                } = &entry.item.payload
+                && let Some(index) = turn.item_index.position(&turn.items, id)
+                && let ThreadItemPayload::McpToolCall {
+                    status: McpToolCallStatus::Completed,
+                    result,
+                    ..
+                } = &mut turn.items[index]
+                && result.as_ref() == Some(saved)
+            {
+                *result = None;
             }
         }
     }
@@ -1075,6 +1102,7 @@ impl ThreadHistoryBuilder {
             input_images: Vec::new(),
             imagegen_request_id: None,
             generation_id: None,
+            image_metadata: Default::default(),
         });
         self.upsert_item_in_current_turn(item);
     }
@@ -1091,6 +1119,7 @@ impl ThreadHistoryBuilder {
             input_images: payload.input_images.clone(),
             imagegen_request_id: None,
             generation_id: payload.generation_id.clone(),
+            image_metadata: payload.image_metadata.clone(),
         });
         self.upsert_item_in_current_turn(item);
     }
@@ -1427,12 +1456,7 @@ impl ThreadHistoryBuilder {
         let tracking_changes = self.is_tracking_changes();
         let changed_turn = if let Some(turn) = self.current_turn.as_mut() {
             turn.status = TurnStatus::Failed;
-            turn.error = Some(V2TurnError {
-                misalignment: payload.misalignment.clone().map(Into::into),
-                message: payload.message.clone(),
-                codex_error_info: payload.codex_error_info.clone().map(Into::into),
-                additional_details: None,
-            });
+            turn.error = Some(V2TurnError::from(payload.clone()));
             tracking_changes.then(|| ThreadHistoryTurnMetadata::from_pending_turn(turn))
         } else {
             None
@@ -1443,12 +1467,7 @@ impl ThreadHistoryBuilder {
     }
 
     fn handle_turn_aborted(&mut self, payload: &TurnAbortedEvent) {
-        let terminal_error = payload.error.as_ref().map(|error| V2TurnError {
-            message: error.message.clone(),
-            codex_error_info: error.codex_error_info.clone().map(Into::into),
-            misalignment: error.misalignment.clone().map(Into::into),
-            additional_details: None,
-        });
+        let terminal_error = payload.error.clone().map(V2TurnError::from);
         let apply_abort = |turn: &mut PendingTurn| {
             turn.status = TurnStatus::Interrupted;
             if let Some(error) = terminal_error.as_ref() {
@@ -1497,12 +1516,7 @@ impl ThreadHistoryBuilder {
     }
 
     fn handle_turn_complete(&mut self, payload: &TurnCompleteEvent) {
-        let terminal_error = payload.error.as_ref().map(|error| V2TurnError {
-            misalignment: error.misalignment.clone().map(Into::into),
-            message: error.message.clone(),
-            codex_error_info: error.codex_error_info.clone().map(Into::into),
-            additional_details: None,
-        });
+        let terminal_error = payload.error.clone().map(V2TurnError::from);
         let apply_completion = |turn: &mut PendingTurn| {
             if let Some(error) = terminal_error.as_ref() {
                 turn.status = TurnStatus::Failed;
@@ -1908,11 +1922,7 @@ impl TurnItemIndex {
         items.push(item);
     }
 
-    fn upsert<'a>(
-        &mut self,
-        items: &'a mut Vec<ThreadItemPayload>,
-        item: ThreadItemPayload,
-    ) -> &'a ThreadItemPayload {
+    fn position(&mut self, items: &[ThreadItemPayload], id: &str) -> Option<usize> {
         if self.positions.is_none() && items.len() >= TURN_ITEM_INDEX_THRESHOLD {
             let mut positions = HashMap::with_capacity(items.len());
             for (index, existing) in items.iter().enumerate() {
@@ -1921,11 +1931,18 @@ impl TurnItemIndex {
             self.positions = Some(positions);
         }
 
-        let existing_index = match &self.positions {
-            Some(positions) => positions.get(item.id()).copied(),
-            None => items.iter().position(|existing| existing.id() == item.id()),
-        };
-        if let Some(index) = existing_index {
+        match &self.positions {
+            Some(positions) => positions.get(id).copied(),
+            None => items.iter().position(|existing| existing.id() == id),
+        }
+    }
+
+    fn upsert<'a>(
+        &mut self,
+        items: &'a mut Vec<ThreadItemPayload>,
+        item: ThreadItemPayload,
+    ) -> &'a ThreadItemPayload {
+        if let Some(index) = self.position(items, item.id()) {
             items[index] = item;
             &items[index]
         } else {
@@ -2736,6 +2753,7 @@ mod tests {
                         input_images: input_images.clone(),
                         imagegen_request_id: None,
                         generation_id: None,
+                        image_metadata: Default::default(),
                     },
                 )),
                 started_at_ms: Some(0),
@@ -2778,6 +2796,7 @@ mod tests {
                 input_images,
                 imagegen_request_id: None,
                 generation_id: None,
+                image_metadata: Default::default(),
             })]
         );
     }
@@ -3043,6 +3062,16 @@ mod tests {
 
     #[test]
     fn replays_file_backed_image_generation_end_events_into_turn_history() {
+        let image_metadata = serde_json::Map::from_iter([
+            (
+                "entries".to_string(),
+                serde_json::json!([{"name": "first", "value": 1.5}]),
+            ),
+            (
+                "futureKey".to_string(),
+                serde_json::json!({"nestedKey": [0, false, null]}),
+            ),
+        ]);
         let items = vec![
             RolloutItem::EventMsg(EventMsg::TurnStarted(TurnStartedEvent {
                 turn_attribution: None,
@@ -3081,6 +3110,7 @@ mod tests {
                     sha256: "ab".repeat(32),
                 }],
                 generation_id: None,
+                image_metadata: image_metadata.clone(),
             })),
             RolloutItem::EventMsg(EventMsg::TurnComplete(TurnCompleteEvent {
                 root_turn_id: None,
@@ -3137,6 +3167,7 @@ mod tests {
                 }],
                         imagegen_request_id: None,
                         generation_id: None,
+                        image_metadata,
                     })),
                 ],
             }
@@ -5519,14 +5550,14 @@ mod tests {
 
     #[test]
     fn rebuilds_hook_prompt_items_from_rollout_response_items() {
-        let hook_prompt = build_hook_prompt_message(
-            &[
-                CoreHookPromptFragment::from_single_hook("Retry with tests.", "hook-run-1"),
-                CoreHookPromptFragment::from_single_hook("Then summarize cleanly.", "hook-run-2"),
-            ],
-            &codex_protocol_test_support::uuid_v7_item_id_generator_for_test(),
-        )
+        let mut hook_prompt = build_hook_prompt_message(&[
+            CoreHookPromptFragment::from_single_hook("Retry with tests.", "hook-run-1"),
+            CoreHookPromptFragment::from_single_hook("Then summarize cleanly.", "hook-run-2"),
+        ])
         .expect("hook prompt message");
+        hook_prompt.set_id(Some(codex_protocol::ResponseItemId::from_server(
+            "msg_hook".to_owned(),
+        )));
         let items = vec![
             RolloutItem::EventMsg(EventMsg::TurnStarted(TurnStartedEvent {
                 turn_attribution: None,

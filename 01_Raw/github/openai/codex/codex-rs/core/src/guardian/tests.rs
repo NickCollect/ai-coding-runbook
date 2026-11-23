@@ -3,6 +3,7 @@ use super::*;
 use crate::config::Config;
 use crate::config::ConfigOverrides;
 use crate::config::Constrained;
+use crate::config::GuardianInferenceProvider;
 use crate::config::NetworkProxySpec;
 use crate::config::PermissionProfileSnapshot;
 use crate::config::test_config;
@@ -10,6 +11,7 @@ use crate::context::ContextualUserFragment;
 use crate::environment_selection::EnvironmentAttachment;
 use crate::environment_selection::TurnEnvironmentState;
 use crate::guardian::review::guardian_review_session_config;
+use crate::guardian_review::ReviewRetrieval;
 use crate::session::session::Session;
 use crate::session::tests::update_turn_settings_for_test;
 use crate::session::turn_context::TurnContext;
@@ -19,8 +21,6 @@ use codex_config::ConfigLayerStack;
 use codex_config::NetworkConstraints;
 use codex_config::NetworkDomainPermissionToml;
 use codex_config::NetworkDomainPermissionsToml;
-use codex_config::RequirementSource;
-use codex_config::Sourced;
 use codex_config::config_toml::ConfigToml;
 use codex_config::types::McpServerConfig;
 use codex_exec_server::LOCAL_FS;
@@ -29,6 +29,7 @@ use codex_guardian_context::ConversationTranscriptEntry;
 use codex_guardian_context::ConversationTranscriptEntryKind;
 use codex_guardian_reviewer::guardian_output_contract_prompt;
 use codex_history::RolloutItem;
+use codex_model_provider::ProviderAuthContext;
 use codex_model_provider::create_model_provider;
 use codex_model_provider_info::AMAZON_BEDROCK_GPT_5_5_MODEL_ID;
 use codex_model_provider_info::AMAZON_BEDROCK_PROVIDER_ID;
@@ -42,6 +43,7 @@ use codex_protocol::ThreadId;
 use codex_protocol::TranscriptFormat;
 use codex_protocol::approvals::GuardianAssessmentAction;
 use codex_protocol::approvals::NetworkApprovalProtocol;
+use codex_protocol::config_types::AutoCompactTokenLimitScope;
 use codex_protocol::config_types::ReasoningSummary;
 use codex_protocol::models::ContentItem;
 use codex_protocol::models::PermissionProfile;
@@ -2731,7 +2733,7 @@ async fn guardian_review_retries_two_parse_failures_then_approves() -> anyhow::R
         tracker: Arc::new(tokio::sync::Mutex::new(
             crate::turn_diff_tracker::TurnDiffTracker::new(),
         )),
-        call_id: "action".to_owned(),
+        call_id: "action".into(),
         tool_name: codex_tools::ToolName::namespaced("team", "send_message"),
         source: crate::tools::context::ToolCallSource::Direct,
         native_call: Some(native_call),
@@ -2951,25 +2953,22 @@ async fn guardian_review_routes_required_actions(
         | RequiredGuardianReview::LiveManagedModelWithGuardianV2 => {
             Arc::make_mut(&mut context.model_info).slug = "required-action-model".to_string();
             // The admitted turn has neither this model nor the new requirement.
-            let current_config = session.get_config().await;
-            let mut config = current_config.as_ref().clone();
-            let requirements = codex_config::ConfigRequirements {
-                auto_review_required_models: Some(Sourced::new(
-                    std::collections::BTreeSet::from([context.model_info.slug.clone()]),
-                    RequirementSource::Unknown,
-                )),
-                ..Default::default()
-            };
-            config.config_layer_stack = ConfigLayerStack::new(
-                config
-                    .config_layer_stack
-                    .all_layers_low_to_high()
-                    .cloned()
-                    .collect(),
-                requirements,
-                config.config_layer_stack.requirements_toml().clone(),
-            )?;
-            let _ = session.refresh_mcp_config(current_config, config).await;
+            let model = &context.model_info.slug;
+            let loader = codex_config::test_support::CloudConfigBundleFixture::loader_with_enterprise_requirement(
+                format!("auto_review.required_on_models = [{model:?}]"),
+            );
+            let snapshot = codex_config::loader::load_guardian_policy_snapshot(
+                LOCAL_FS.as_ref(),
+                turn.config.codex_home.as_path(),
+                &codex_config::LoaderOverrides::without_managed_config_for_tests(),
+                &loader,
+                /*revision*/ 1,
+            )
+            .await?;
+            assert_eq!(
+                session.refresh_guardian_policy(&snapshot).await,
+                crate::ConfigRefreshOutcome::Published
+            );
             (
                 guardian_exec_command_request("shell-live-managed-model"),
                 ApprovalRequestReasons::default(),
@@ -3375,6 +3374,7 @@ async fn guardian_review_session_config_preserves_parent_network_proxy() {
         ReasoningSummary::default(),
         /*personality*/ None,
         ResolvedModelMessages::bundled(),
+        ReviewRetrieval::ConversationHistory,
     )
     .expect("guardian config");
 
@@ -3419,11 +3419,14 @@ async fn guardian_review_session_config_clears_context_overrides_for_distinct_ef
         .expect("turn should be unique")
         .config = Arc::new(config);
 
-    let guardian_config =
-        guardian_review_session_config(session.as_ref(), &GuardianReviewContext::from(&turn))
-            .await
-            .expect("guardian config")
-            .spawn_config;
+    let guardian_config = guardian_review_session_config(
+        session.as_ref(),
+        &GuardianReviewContext::from(&turn),
+        ReviewRetrieval::ConversationHistory,
+    )
+    .await
+    .expect("guardian config")
+    .spawn_config;
 
     assert_eq!(
         (
@@ -3454,22 +3457,224 @@ async fn guardian_review_session_config_preserves_context_overrides_for_same_eff
     config.model = Some("stale-parent-model".to_string());
     config.model_context_window = Some(128_000);
     config.model_auto_compact_token_limit = Some(100_000);
+    config.async_compaction_threshold_percent = 50;
+    config.features.enable(Feature::AsyncCompaction).unwrap();
     Arc::get_mut(&mut turn)
         .expect("turn should be unique")
         .config = Arc::new(config);
 
-    let guardian_config =
-        guardian_review_session_config(session.as_ref(), &GuardianReviewContext::from(&turn))
-            .await
-            .expect("guardian config")
-            .spawn_config;
+    let mut context = GuardianReviewContext::from(&turn);
+    context.reasoning_summary = ReasoningSummary::Detailed;
+    context.personality = Some(codex_protocol::config_types::Personality::Friendly);
+    let (review_model, _) = resolve_review_model(session.as_ref(), &context)
+        .await
+        .unwrap();
+    let guardian_config = guardian_review_session_config(
+        session.as_ref(),
+        &context,
+        ReviewRetrieval::ConversationHistory,
+    )
+    .await
+    .expect("guardian config")
+    .spawn_config;
 
+    let request = super::review_session::review_turn(
+        session.as_ref(),
+        &context,
+        &guardian_config,
+        &review_model,
+        Vec::new(),
+        serde_json::json!({}),
+    );
+    assert_eq!(
+        (
+            request.thread_settings.summary,
+            request.thread_settings.personality
+        ),
+        (Some(context.reasoning_summary), context.personality)
+    );
+    assert_eq!(
+        (
+            guardian_config.features.enabled(Feature::AsyncCompaction),
+            guardian_config.async_compaction_threshold_percent,
+        ),
+        (true, 50)
+    );
     assert_eq!(
         (
             guardian_config.model_context_window,
             guardian_config.model_auto_compact_token_limit,
         ),
         (Some(128_000), Some(100_000))
+    );
+}
+
+#[tokio::test]
+async fn guardian_review_session_config_uses_explicit_provider_catalog_limits_for_same_model_slug()
+{
+    let (session, mut turn) =
+        guardian_test_session_and_turn_with_base_url("http://localhost").await;
+    let auth_manager = Arc::clone(&session.services.auth_manager);
+    let auth = ProviderAuthContext {
+        credentials: Arc::clone(&auth_manager),
+        runtime_auth: None,
+    };
+    let mut provider = turn.config.model_provider.clone();
+    provider.base_url = Some("http://guardian.example/v1".to_owned());
+    provider.supports_websockets = true;
+    provider.request_max_retries = Some(4);
+    provider.stream_max_retries = Some(5);
+    let model = auth
+        .model_provider(provider.clone())
+        .approval_review_preferred_model();
+
+    let mut guardian_model = turn.model_info().model.as_ref().clone();
+    guardian_model.slug = model.to_owned();
+    guardian_model.default_reasoning_level = Some(ReasoningEffort::Low);
+    guardian_model.context_window = Some(128_000);
+    guardian_model.max_context_window = Some(128_000);
+    guardian_model.auto_compact_token_limit = Some(90_000);
+    let catalog = Arc::new(StaticModelsManager::new(
+        Some(auth_manager),
+        ModelsResponse {
+            models: vec![guardian_model],
+        },
+        codex_models_manager::ModelOrigin::ExplicitConfig,
+    ));
+
+    let mut config = (*turn.config).clone();
+    config.config_layer_stack = ConfigLayerStack::new(
+        Vec::new(),
+        Default::default(),
+        codex_config::ConfigRequirementsToml {
+            guardian_policy_config: Some("Managed Guardian policy.".to_owned()),
+            ..Default::default()
+        },
+    )
+    .expect("managed config stack");
+    config.guardian_policy_config = Some("Actor Guardian policy.".to_owned());
+    config.compact_prompt = Some("Actor compact prompt".to_owned());
+    config.model = Some(model.to_owned());
+    config.model_provider.supports_websockets = false;
+    config.model_context_window = Some(11_000);
+    config.async_compaction_threshold_percent = 50;
+    config.features.enable(Feature::AsyncCompaction).unwrap();
+    config
+        .features
+        .enable(Feature::AsyncCompactionRootOnly)
+        .unwrap();
+    config.model_auto_compact_token_limit = Some(8_000);
+    config.model_auto_compact_token_limit_scope = AutoCompactTokenLimitScope::BodyAfterPrefix;
+    config.tool_output_token_limit = Some(17);
+    config.model_provider.request_max_retries = Some(12);
+    config.model_provider.stream_max_retries = Some(13);
+    config.guardian_model_provider = Some(Arc::new(GuardianInferenceProvider {
+        id: "guardian-test-provider".to_owned(),
+        info: provider.clone(),
+    }));
+    session
+        .services
+        .thread_extension_data
+        .insert(GuardianInferenceContext::resolve(
+            &config,
+            config.guardian_model_provider.as_ref().unwrap(),
+            auth.clone(),
+            auth.model_provider(provider.clone()),
+            catalog,
+        ));
+    let turn_mut = Arc::get_mut(&mut turn).expect("turn should be unique");
+    turn_mut.config = Arc::new(config);
+    update_turn_settings_for_test(turn_mut, |settings| {
+        Arc::make_mut(&mut settings.model_info).slug = model.to_owned();
+    });
+    let mut context = GuardianReviewContext::from(&turn);
+    context.reasoning_effort = Some(ReasoningEffort::High);
+    context.reasoning_summary = ReasoningSummary::Detailed;
+    context.personality = Some(codex_protocol::config_types::Personality::Friendly);
+
+    let (review_model, model_info) = resolve_review_model(session.as_ref(), &context)
+        .await
+        .unwrap();
+    assert_eq!(
+        (
+            model_info.resolved_context_window(),
+            model_info.auto_compact_token_limit()
+        ),
+        (Some(128_000), Some(90_000))
+    );
+
+    let guardian_config = guardian_review_session_config(
+        session.as_ref(),
+        &context,
+        ReviewRetrieval::ConversationHistory,
+    )
+    .await
+    .expect("guardian config")
+    .spawn_config;
+    let request = super::review_session::review_turn(
+        session.as_ref(),
+        &context,
+        &guardian_config,
+        &review_model,
+        Vec::new(),
+        serde_json::json!({}),
+    );
+    assert_eq!(
+        (
+            request.thread_settings.summary,
+            request.thread_settings.personality
+        ),
+        (Some(ReasoningSummary::default()), None)
+    );
+    assert_eq!(
+        (
+            guardian_config.async_compaction_threshold_percent,
+            guardian_config.features.enabled(Feature::AsyncCompaction),
+            guardian_config
+                .features
+                .enabled(Feature::AsyncCompactionRootOnly),
+        ),
+        (
+            crate::config::DEFAULT_ASYNC_COMPACTION_THRESHOLD_PERCENT,
+            false,
+            false
+        )
+    );
+    assert_eq!(
+        guardian_config.model.as_deref(),
+        Some(context.model_info.slug.as_str())
+    );
+    let instructions = guardian_config
+        .base_instructions
+        .as_deref()
+        .expect("review instructions");
+    assert!(instructions.contains("Managed Guardian policy."));
+    assert!(!instructions.contains("Actor Guardian policy."));
+    assert!(guardian_config.compact_prompt.is_none());
+    let mut expected_provider = provider;
+    expected_provider.request_max_retries = Some(1);
+    expected_provider.stream_max_retries = Some(1);
+    assert_eq!(
+        (
+            guardian_config.model_context_window,
+            guardian_config.model_auto_compact_token_limit,
+            guardian_config.model_auto_compact_token_limit_scope,
+            guardian_config.tool_output_token_limit,
+            guardian_config.model_reasoning_effort,
+            guardian_config.model_reasoning_summary,
+            guardian_config.personality,
+            guardian_config.model_provider,
+        ),
+        (
+            None,
+            None,
+            AutoCompactTokenLimitScope::Total,
+            None,
+            Some(ReasoningEffort::Low),
+            Some(ReasoningSummary::default()),
+            None,
+            expected_provider
+        )
     );
 }
 
@@ -3504,6 +3709,7 @@ async fn guardian_review_session_config_uses_live_network_proxy_state() {
         ReasoningSummary::default(),
         /*personality*/ None,
         ResolvedModelMessages::bundled(),
+        ReviewRetrieval::ConversationHistory,
     )
     .expect("guardian config");
 
@@ -3561,6 +3767,7 @@ async fn guardian_review_session_config_isolates_parent_customizations() {
         ReasoningSummary::default(),
         /*personality*/ None,
         ResolvedModelMessages::bundled(),
+        ReviewRetrieval::ConversationHistory,
     )
     .expect("guardian config");
 
@@ -3608,6 +3815,7 @@ async fn guardian_review_session_config_keeps_bedrock_provider_for_bedrock_gpt_5
         ReasoningSummary::default(),
         /*personality*/ None,
         ResolvedModelMessages::bundled(),
+        ReviewRetrieval::ConversationHistory,
     )
     .expect("guardian config");
 
@@ -3685,6 +3893,7 @@ async fn guardian_review_session_config_uses_requirements_guardian_policy_config
         ReasoningSummary::default(),
         /*personality*/ None,
         ResolvedModelMessages::from_model(&model),
+        ReviewRetrieval::ConversationHistory,
     )
     .expect("guardian config");
 

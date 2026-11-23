@@ -78,6 +78,14 @@ async fn replayed_background_terminals_belong_to_the_displayed_thread() {
     };
     fork.track_unified_exec_process_end(&exited.item_id, Some(&exited.process_id));
     fork.restore_background_terminals(request_id, vec![live, exited]);
+    for chunk in [
+        "starting\n\x1b]0;Building\x07Warning\n10%\r50%\r\x1b[",
+        "K\x1b]0;Done\x1b",
+        "\\100%\r",
+        "\nDone\ncleared\r\x1b[K",
+    ] {
+        fork.on_exec_command_output_delta("child-call", chunk);
+    }
     fork.add_ps_output();
     let history = drain_insert_history(&mut events)
         .iter()
@@ -89,6 +97,9 @@ async fn replayed_background_terminals_belong_to_the_displayed_thread() {
     Background terminals
 
       • sleep 200
+        ↳ Warning
+          100%
+          Done
     ");
 }
 
@@ -948,6 +959,7 @@ async fn unified_exec_wait_status_header_updates_on_late_command_display() {
         call_id: "call-1".to_string(),
         command_display: "sleep 5".to_string(),
         recent_chunks: Vec::new(),
+        pending: Default::default(),
     });
 
     terminal_interaction(&mut chat, "call-1", "proc-1", "");
@@ -1153,6 +1165,8 @@ async fn image_generation_begin_restores_working_status_after_single_line_preamb
 #[tokio::test]
 async fn image_generation_call_adds_history_cell() {
     let (mut chat, mut rx, _op_rx) = make_chatwidget_manual(/*model_override*/ None).await;
+    chat.local_settings.transcript_mode = crate::transcript_mode::TranscriptMode::Owned;
+    handle_turn_started(&mut chat, "turn-1");
 
     handle_image_generation_end(
         &mut chat,
@@ -1162,13 +1176,28 @@ async fn image_generation_call_adds_history_cell() {
         Some(test_path_buf("/tmp/ig-1.png").abs()),
     );
 
-    let cells = drain_insert_history(&mut rx);
-    assert_eq!(cells.len(), 1, "expected a single history cell");
+    assert!(drain_insert_history(&mut rx).is_empty());
+    complete_assistant_message(
+        &mut chat,
+        "image-answer",
+        "Here is the square.",
+        Some(MessagePhase::FinalAnswer),
+    );
+    handle_turn_completed(&mut chat, "turn-1", Some(2_000));
+    let cells = drain_insert_history_with(&mut rx, |cell| {
+        if cell.as_any().is::<history_cell::FinalMessageSeparator>() {
+            return vec!["Worked for 2s".into()];
+        }
+        cell.display_lines(/*width*/ 80)
+    });
     let platform_file_url = url::Url::from_file_path(test_path_buf("/tmp/ig-1.png"))
         .expect("test path should convert to file URL")
         .to_string();
-    let combined =
-        lines_to_single_string(&cells[0]).replace(&platform_file_url, "file:///tmp/ig-1.png");
+    let combined = cells
+        .iter()
+        .map(|lines| lines_to_single_string(lines))
+        .collect::<String>()
+        .replace(&platform_file_url, "file:///tmp/ig-1.png");
     assert_chatwidget_snapshot!("image_generation_call_history_snapshot", combined);
 
     handle_image_generation_end(
@@ -1287,7 +1316,7 @@ async fn bang_shell_enter_while_task_running_submits_run_user_shell_command() {
         approvals_reviewer: ApprovalsReviewer::User,
         permission_profile: PermissionProfile::read_only(),
         active_permission_profile: None,
-        cwd: test_path_buf("/home/user/project").abs(),
+        cwd: test_path_buf("/home/user/project").abs().into(),
         runtime_workspace_roots: Vec::new(),
         instruction_source_paths: Vec::new(),
         reasoning_effort: Some(ReasoningEffortConfig::default()),

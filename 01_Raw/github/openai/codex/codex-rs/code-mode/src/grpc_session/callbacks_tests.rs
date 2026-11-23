@@ -24,8 +24,8 @@ use super::super::GrpcClient;
 use super::super::MAX_IN_FLIGHT_COMPLETIONS;
 use super::super::state::SessionState;
 use super::super::transport::SharedTransport;
+use super::super::wait_for_watch;
 use super::SessionInner;
-use crate::remote_session::wait_for_watch;
 
 #[tokio::test]
 async fn missing_invocation_completion_racing_cancellation_preserves_session() {
@@ -73,6 +73,7 @@ async fn tool_call_heartbeats_do_not_enter_callback_admission() {
 fn session(client: GrpcClient) -> Arc<SessionInner> {
     let client = Arc::new(client);
     Arc::new(SessionInner {
+        catalog: None,
         id: "session".to_string(),
         output_truncation: CodeModeOutputTruncation::Client,
         route: None,

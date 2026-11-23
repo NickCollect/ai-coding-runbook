@@ -5,7 +5,6 @@
 //! Discovery merges into retained membership without evicting rows.
 
 use super::App;
-use super::agents_overview::AGENTS_OVERVIEW_VIEW_ID;
 use super::agents_overview_details::preview_agent_message;
 use super::agents_overview_discovery::AgentsOverviewDiscovery;
 use super::agents_overview_discovery::is_overview_root;
@@ -112,6 +111,9 @@ impl App {
                 | ServerNotification::ThreadDeleted(_)
         ) {
             self.agents_overview.blank_sessions.remove(&thread_id);
+            self.agents_overview
+                .draft_cloud_environments
+                .remove(&thread_id);
         }
         self.track_agents_overview_activity(thread_id, notification);
         let thread = self
@@ -278,11 +280,7 @@ impl App {
         &mut self,
         app_server: &AppServerSession,
     ) {
-        if self
-            .chat_widget
-            .selected_index_for_present_view(AGENTS_OVERVIEW_VIEW_ID)
-            .is_none()
-        {
+        if self.overview_selected_index().is_none() {
             return;
         }
         self.agents_overview.pin_refresh_requested = true;
@@ -314,16 +312,13 @@ impl App {
         {
             return;
         }
+        let visible = self.overview_selected_index().is_some();
         let overview = &mut self.agents_overview;
         let initialized = overview.initialized.contains(&backend_id);
         let source_has_more = overview
             .discovery
             .get(&backend_id)
             .is_none_or(AgentsOverviewDiscovery::has_more);
-        let visible = self
-            .chat_widget
-            .selected_index_for_present_view(AGENTS_OVERVIEW_VIEW_ID)
-            .is_some();
         if !visible && initialized {
             return;
         }
@@ -333,7 +328,13 @@ impl App {
             }
             return;
         }
+        let cloud = matches!(&request_handle, AppServerRequestHandle::Cloud(_));
         let refill = overview.refill_count(backend_id);
+        let page_requested = source_has_more
+            && !overview.refresh_failed_backends.contains(&backend_id)
+            && (refill > 0 || overview.show_more_backends.contains(&backend_id));
+        let refresh_recent =
+            !page_requested && overview.refresh_recent_backends.remove(&backend_id) && initialized;
         let queued = overview.pending_refresh_backends.contains(&backend_id);
         if queued {
             overview
@@ -342,6 +343,7 @@ impl App {
             overview.pin_refresh_requested = true;
         }
         let should_refresh = !initialized
+            || refresh_recent
             || overview.refresh_thread_ids.iter().any(|id| {
                 self.backend_registry
                     .owner(*id)
@@ -354,6 +356,9 @@ impl App {
             return;
         }
 
+        if page_requested && overview.refresh_recent_backends.contains(&backend_id) {
+            overview.pending_refresh_backends.push_back(backend_id);
+        }
         let mut unread_rows = Vec::new();
         if std::mem::take(&mut self.agents_overview.pin_refresh_requested) {
             unread_rows.extend(
@@ -372,12 +377,16 @@ impl App {
         }
         let request_id = Uuid::new_v4();
         self.agents_overview.active_refresh = Some((request_id, backend_id));
-        let show_more = refill == 0
+        let show_more = !refresh_recent
+            && refill == 0
             && source_has_more
             && self.agents_overview.show_more_backends.remove(&backend_id);
         self.agents_overview.refresh_show_more = show_more;
-        let discover = !initialized || show_more || (refill > 0 && source_has_more);
-        let limit = if initialized && refill > 0 {
+        let fresh_cloud_list = cloud && (refresh_recent || !initialized);
+        self.agents_overview.active_refresh_recent = fresh_cloud_list;
+        let discover =
+            refresh_recent || !initialized || show_more || (refill > 0 && source_has_more);
+        let limit = if !refresh_recent && initialized && refill > 0 {
             refill.min(10)
         } else {
             10
@@ -401,12 +410,34 @@ impl App {
             .refresh_thread_ids
             .extend(foreign_thread_ids);
         self.agents_overview.active_refresh_thread_ids = thread_ids.clone();
+        let mut retained = HashMap::new();
+        if cloud {
+            for (&id, row) in &self.agents_overview.threads {
+                let Some(thread) = row else { continue };
+                if (!initialized || thread_ids.contains(&id))
+                    && self.backend_registry.owner(id) == Some(backend_id)
+                {
+                    retained.insert(
+                        id,
+                        (
+                            thread.clone(),
+                            self.agents_overview.unread.contains(&id),
+                            None,
+                        ),
+                    );
+                }
+            }
+        }
         let app_event_tx = self.app_event_tx.clone();
-        self.agents_overview
-            .view_state
-            .lock()
-            .unwrap_or_else(std::sync::PoisonError::into_inner)
-            .loading = discover;
+        {
+            let mut state = self
+                .agents_overview
+                .view_state
+                .lock()
+                .unwrap_or_else(std::sync::PoisonError::into_inner);
+            state.loading = discover && !refresh_recent;
+            state.initial_discovery_started_at = (!initialized).then(std::time::Instant::now);
+        }
         let refresh_task = tokio::spawn(async move {
             let result = async {
                 let mut threads = HashMap::new();
@@ -449,8 +480,8 @@ impl App {
                             )
                             .await
                     };
-                    let (loaded, (recent, complete)) =
-                        tokio::join!(loaded, discovery.next_batch(&request_handle, limit));
+                    let page = discovery.next_overview_page(&request_handle, limit, refresh_recent);
+                    let (loaded, (recent, complete)) = tokio::join!(loaded, page);
                     let loaded = loaded.map_err(|error| error.to_string())?;
                     recent_seed_complete = complete;
                     thread_ids.extend(
@@ -489,6 +520,12 @@ impl App {
                     .await;
                 let mut reads = tokio::task::JoinSet::new();
                 for thread_id in thread_ids {
+                    let listed = threads
+                        .get(&thread_id)
+                        .filter(|_| cloud)
+                        .cloned()
+                        .flatten()
+                        .or_else(|| retained.remove(&thread_id));
                     threads.entry(thread_id).or_default();
                     let request_handle = request_handle.clone();
                     reads.spawn(async move {
@@ -502,7 +539,7 @@ impl App {
                             })
                             .await
                         {
-                            Ok(response) => {
+                            Ok(mut response) => {
                                 let mut latest_prompt = None;
                                 let mut last_message = None;
                                 // Legacy turn listing replays the entire rollout, even for one turn.
@@ -545,9 +582,15 @@ impl App {
                                             _ => None,
                                         });
                                 }
-                                let unread = response
+                                let mut unread = response
                                     .read_state
                                     .is_some_and(|state| state.first_unread.is_some());
+                                if let Some((thread, listed_unread, _)) = listed {
+                                    response.thread.name = thread.name;
+                                    response.thread.updated_at = thread.updated_at;
+                                    response.thread.recency_at = thread.recency_at;
+                                    unread = listed_unread;
+                                }
                                 Some((
                                     thread_id,
                                     (response.thread, unread, latest_prompt),
@@ -590,6 +633,6 @@ impl App {
             .await;
             app_event_tx.send(AppEvent::AgentsOverviewThreadsLoaded { request_id, result });
         });
-        self.agents_overview.refresh_task = Some(refresh_task.abort_handle());
+        self.agents_overview.refresh_task = Some(refresh_task);
     }
 }

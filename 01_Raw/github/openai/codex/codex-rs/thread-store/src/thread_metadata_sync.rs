@@ -507,6 +507,7 @@ mod tests {
             multi_agent_version: None,
             history_mode: ThreadHistoryMode::Legacy,
             history_base: None,
+            inherited_history_visibility: Default::default(),
             subagent_history_start_ordinal: None,
             initial_window_id: codex_protocol::ContextWindowId::new_uuid_v7(),
             runtime_workspace_roots: None,
@@ -749,6 +750,7 @@ mod tests {
                 thread_id: None,
                 thread_settings: ThreadSettingsSnapshot {
                     disabled_plugin_ids: Vec::new(),
+                    guardian_retention: None,
                     model: "gpt-5.2-codex".to_string(),
                     model_provider_id: "updated-provider".to_string(),
                     service_tier: None,

@@ -122,6 +122,7 @@ mod tests {
                 input_images: Vec::new(),
                 imagegen_request_id: None,
                 generation_id: None,
+                image_metadata: Default::default(),
             }),
         ]);
         thread.turns[0].items[1].started_at_ms = Some(123);
@@ -232,6 +233,7 @@ mod tests {
             section_entered_at: None,
             project_id: None,
             daybreak_enabled: None,
+            daybreak_program_propagation_enrolled: None,
             history_mode: Default::default(),
             model_provider: "mock_provider".to_string(),
             model: None,
@@ -241,7 +243,7 @@ mod tests {
             recency_at: Some(0),
             status: ThreadStatus::Idle,
             path: None,
-            cwd: test_path_buf("/tmp").abs(),
+            cwd: test_path_buf("/tmp").abs().into(),
             cli_version: "0.0.0".to_string(),
             source: SessionSource::Cli,
             can_accept_direct_input: None,

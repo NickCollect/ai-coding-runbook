@@ -3,12 +3,12 @@ use super::turn_context::TurnContext;
 use crate::agent::host::AgentRuntimeServices;
 use crate::agent::host::AgentUsageReport;
 use crate::agent::host::UsageAccountingDecision;
+use crate::client_common::ChargePosting;
 use crate::client_common::SamplingUsage;
 use crate::context::ContextualUserFragment;
 use codex_protocol::error::CodexErr;
 use codex_protocol::error::CodexErrorDetails;
 use codex_protocol::error::Result as CodexResult;
-use codex_protocol::protocol::TokenUsage;
 
 pub(super) async fn maybe_record_reminder(
     sess: &Session,
@@ -88,9 +88,9 @@ impl Session {
         turn: &TurnContext,
         phase: codex_analytics::CompactionPhase,
     ) -> bool {
-        !matches!(phase, codex_analytics::CompactionPhase::StandaloneTurn)
-            && !turn.session_source.is_non_root_agent()
-            && self.work_budget().can_force_root_final()
+        self.services
+            .budget_policy
+            .defer_compaction_start(&turn.session_source, phase)
     }
 
     pub(crate) fn finish_compaction(
@@ -118,9 +118,15 @@ impl Session {
         turn_id: &str,
         usage: &SamplingUsage,
     ) -> CodexResult<()> {
-        if !usage.charge.posted {
-            self.record_numeric_usage(turn_id, usage.provider.as_ref(), usage.charge.hooks.charge)
-                .await?;
+        let result = match usage.charge.posting {
+            ChargePosting::Unposted => self.record_numeric_usage(turn_id, usage).await,
+            ChargePosting::Posted => Ok(()),
+            ChargePosting::PostedTurnExhausted => Err(CodexErr::SessionBudgetExceeded),
+        };
+        if let Err(error) = &result
+            && !matches!(error.details(), CodexErrorDetails::SessionBudgetExceeded)
+        {
+            return result;
         }
         if let Some(message) = &usage.charge.hooks.invalid_price {
             // A bad price does not erase successful siblings' contributions.
@@ -128,59 +134,78 @@ impl Session {
                 "Invalid post-hook budget units: {message}"
             )));
         }
-        Ok(())
+        result
     }
 
-    async fn record_numeric_usage(
-        &self,
-        turn_id: &str,
-        usage: Option<&TokenUsage>,
-        hook_charge: codex_hooks::HookCharge,
-    ) -> CodexResult<()> {
-        if usage.is_none() && hook_charge == codex_hooks::HookCharge::default() {
+    async fn record_numeric_usage(&self, turn_id: &str, report: &SamplingUsage) -> CodexResult<()> {
+        let usage = report.provider.as_ref();
+        let hook_units = match report.charge.hooks.charge {
+            codex_hooks::HookCharge::Units(units) => units,
+            codex_hooks::HookCharge::Overflow => {
+                if let Some(account) = self.native_rollout_budget()
+                    && account.config().is_some_and(|config| config.enforce_limit)
+                {
+                    account.stop_on_overflow();
+                }
+                return Err(CodexErr::UsageAccountingFailed(
+                    "responseChargeAmount: total hook cost exceeds f64 range".into(),
+                ));
+            }
+        };
+        if usage.is_none() && hook_units == 0.0 {
             return Ok(());
         }
-        let stop_new_work = match &self.agent_runtime {
+        match &self.agent_runtime {
             AgentRuntimeServices::Controller => match self
                 .services
                 .agent_control
-                .record_usage(usage.cloned(), hook_charge)
+                .record_usage(usage.cloned(), hook_units)
                 .await
             {
-                Ok(()) => false,
+                Ok(()) => Ok(()),
                 // A legacy controller can report a posted bill and a stop through this error.
                 // A native account has already chosen its own deadline action.
                 Err(error)
                     if matches!(error.details(), CodexErrorDetails::SessionBudgetExceeded) =>
                 {
-                    self.native_rollout_budget().is_none()
+                    if self.native_rollout_budget().is_none() {
+                        self.work_budget().stop_new_work();
+                    }
+                    Ok(())
                 }
-                Err(error) => return Err(CodexErr::UsageAccountingFailed(error.to_string())),
+                Err(error) => Err(CodexErr::UsageAccountingFailed(error.to_string())),
             },
             AgentRuntimeServices::Host(services) => {
                 let Some(accounting) = &services.usage_accounting else {
                     return Ok(());
                 };
+                let usage_report = AgentUsageReport {
+                    thread_id: self.thread_id(),
+                    turn_id: turn_id.to_owned(),
+                    usage: usage.cloned(),
+                    additional_budget_units: hook_units,
+                };
+                let host_error = |error| {
+                    CodexErr::UsageAccountingFailed(format!(
+                        "Host usage accounting failed: {error}"
+                    ))
+                };
                 let decision = accounting
-                    .report_usage(AgentUsageReport {
-                        thread_id: self.thread_id(),
-                        turn_id: turn_id.to_owned(),
-                        usage: usage.cloned(),
-                        additional_budget_units: hook_charge.units,
-                        additional_budget_units_overflowed: hook_charge.overflowed,
-                    })
+                    .report_usage(usage_report)
                     .await
-                    .map_err(|error| {
-                        CodexErr::UsageAccountingFailed(format!(
-                            "Host usage accounting failed: {error}"
-                        ))
-                    })?;
-                decision == UsageAccountingDecision::Exhausted
+                    .map_err(host_error)?;
+                if decision == UsageAccountingDecision::Exhausted {
+                    self.work_budget().stop_new_work();
+                }
+                match decision {
+                    UsageAccountingDecision::Continue | UsageAccountingDecision::Exhausted => {
+                        Ok(())
+                    }
+                    UsageAccountingDecision::ExhaustedForTurn => {
+                        Err(CodexErr::SessionBudgetExceeded)
+                    }
+                }
             }
-        };
-        if stop_new_work {
-            self.work_budget().stop_new_work();
         }
-        Ok(())
     }
 }

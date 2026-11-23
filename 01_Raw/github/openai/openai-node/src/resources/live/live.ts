@@ -46,7 +46,7 @@ export class Live extends APIResource {
    * @example
    * ```ts
    * const live = await client.live.create({
-   *   session: { model: 'gpt-live-1' },
+   *   session: { model: 'gpt-live-1.1' },
    *   transport: { sdp: 'x', type: 'webrtc' },
    * });
    * ```
@@ -1822,7 +1822,7 @@ export interface MediaSessionConfig {
    * The Live model. Required in the session configuration for every transport; do
    * not pass it as a URL query parameter.
    */
-  model: (string & {}) | 'gpt-live-1';
+  model: (string & {}) | 'gpt-live-1' | 'gpt-live-1.1';
 
   /**
    * Startup audio configuration. WebRTC and SIP negotiate their audio format on the
@@ -1842,6 +1842,13 @@ export interface MediaSessionConfig {
    * API.
    */
   delegation?: ClientDelegation | MediaSessionConfig.Responses | MediaSessionConfig.Decisions | null;
+
+  /**
+   * Whole seconds of inactivity after which a Live WebRTC session with a speech wake
+   * policy pauses inference. The connection and conversation history are retained.
+   * Omit to keep inference active until the session ends.
+   */
+  idle_timeout_s?: number;
 
   /**
    * Ordered text-only history supplied before startup. Supports developer, user, and
@@ -1880,6 +1887,12 @@ export interface MediaSessionConfig {
    * triggers.
    */
   triggers?: Array<DecisionTrigger>;
+
+  /**
+   * Inference starts when the Live WebRTC session connects. After an idle pause,
+   * microphone speech resumes inference.
+   */
+  wake_policy?: MediaSessionConfig.WakePolicy;
 }
 
 export namespace MediaSessionConfig {
@@ -1948,6 +1961,24 @@ export namespace MediaSessionConfig {
      * delegations.
      */
     acknowledgement_delay_ms?: number;
+  }
+
+  /**
+   * Inference starts when the Live WebRTC session connects. After an idle pause,
+   * microphone speech resumes inference.
+   */
+  export interface WakePolicy {
+    /**
+     * The wake policy type, always `speech`.
+     */
+    type: 'speech';
+
+    /**
+     * The speech detection threshold for resuming paused inference, from 0 to 1
+     * inclusive. Defaults to 0.5. Higher values require stronger evidence of speech.
+     * This setting is independent of active turn detection.
+     */
+    vad_threshold?: number;
   }
 }
 
@@ -2746,6 +2777,121 @@ export namespace ResponsesDelegationConfig {
 
   export interface Mcp {
     type: 'mcp';
+
+    /**
+     * The tool invocation context(s).
+     */
+    allowed_callers?: Array<'direct' | 'programmatic'> | null;
+
+    /**
+     * A list of MCP tool names that are allowed for this server.
+     */
+    allowed_tools?: Array<string> | Mcp.LiveMCPToolFilterParam | null;
+
+    /**
+     * This value is omitted from returned Live session data.
+     */
+    authorization?: string | null;
+
+    /**
+     * @deprecated The ID of a built-in MCP connector. This field is deprecated for
+     * models released after September 1, 2026. Use `server_url` to connect to a remote
+     * MCP server, or `tunnel_id` to connect to a local MCP server.
+     */
+    connector_id?: string | null;
+
+    /**
+     * Whether this MCP tool should be deferred and discovered via tool search.
+     */
+    defer_loading?: boolean | null;
+
+    /**
+     * Optional HTTP headers to send when connecting to the MCP server.
+     */
+    headers?: { [key: string]: string } | null;
+
+    /**
+     * Controls which MCP tools require explicit user approval before execution.
+     */
+    require_approval?: Mcp.LiveMCPRequireApprovalFilterParam | 'always' | 'never' | null;
+
+    /**
+     * An optional human-readable description of the MCP server.
+     */
+    server_description?: string | null;
+
+    /**
+     * A label used to identify the MCP server.
+     */
+    server_label?: string;
+
+    /**
+     * The URL of the MCP server to connect to.
+     */
+    server_url?: string | null;
+
+    /**
+     * The Secure MCP Tunnel ID to use instead of a direct server URL.
+     */
+    tunnel_id?: string | null;
+  }
+
+  export namespace Mcp {
+    export interface LiveMCPToolFilterParam {
+      /**
+       * Whether to allow only read-only tools for matching entries.
+       */
+      read_only?: boolean | null;
+
+      /**
+       * A list of tool names to match against.
+       */
+      tool_names?: Array<string> | null;
+    }
+
+    export interface LiveMCPRequireApprovalFilterParam {
+      /**
+       * A filter that forces approval for matching tools.
+       */
+      always?: LiveMCPRequireApprovalFilterParam.Always | null;
+
+      /**
+       * A filter that skips approval for matching tools.
+       */
+      never?: LiveMCPRequireApprovalFilterParam.Never | null;
+    }
+
+    export namespace LiveMCPRequireApprovalFilterParam {
+      /**
+       * A filter that forces approval for matching tools.
+       */
+      export interface Always {
+        /**
+         * Whether to allow only read-only tools for matching entries.
+         */
+        read_only?: boolean | null;
+
+        /**
+         * A list of tool names to match against.
+         */
+        tool_names?: Array<string> | null;
+      }
+
+      /**
+       * A filter that skips approval for matching tools.
+       */
+      export interface Never {
+        /**
+         * Whether to allow only read-only tools for matching entries.
+         */
+        read_only?: boolean | null;
+
+        /**
+         * A list of tool names to match against.
+         */
+        tool_names?: Array<string> | null;
+      }
+    }
   }
 
   export interface Custom {
@@ -3299,6 +3445,121 @@ export namespace ResponsesDelegationUpdateConfig {
 
   export interface Mcp {
     type: 'mcp';
+
+    /**
+     * The tool invocation context(s).
+     */
+    allowed_callers?: Array<'direct' | 'programmatic'> | null;
+
+    /**
+     * A list of MCP tool names that are allowed for this server.
+     */
+    allowed_tools?: Array<string> | Mcp.LiveMCPToolFilterParam | null;
+
+    /**
+     * This value is omitted from returned Live session data.
+     */
+    authorization?: string | null;
+
+    /**
+     * @deprecated The ID of a built-in MCP connector. This field is deprecated for
+     * models released after September 1, 2026. Use `server_url` to connect to a remote
+     * MCP server, or `tunnel_id` to connect to a local MCP server.
+     */
+    connector_id?: string | null;
+
+    /**
+     * Whether this MCP tool should be deferred and discovered via tool search.
+     */
+    defer_loading?: boolean | null;
+
+    /**
+     * Optional HTTP headers to send when connecting to the MCP server.
+     */
+    headers?: { [key: string]: string } | null;
+
+    /**
+     * Controls which MCP tools require explicit user approval before execution.
+     */
+    require_approval?: Mcp.LiveMCPRequireApprovalFilterParam | 'always' | 'never' | null;
+
+    /**
+     * An optional human-readable description of the MCP server.
+     */
+    server_description?: string | null;
+
+    /**
+     * A label used to identify the MCP server.
+     */
+    server_label?: string;
+
+    /**
+     * The URL of the MCP server to connect to.
+     */
+    server_url?: string | null;
+
+    /**
+     * The Secure MCP Tunnel ID to use instead of a direct server URL.
+     */
+    tunnel_id?: string | null;
+  }
+
+  export namespace Mcp {
+    export interface LiveMCPToolFilterParam {
+      /**
+       * Whether to allow only read-only tools for matching entries.
+       */
+      read_only?: boolean | null;
+
+      /**
+       * A list of tool names to match against.
+       */
+      tool_names?: Array<string> | null;
+    }
+
+    export interface LiveMCPRequireApprovalFilterParam {
+      /**
+       * A filter that forces approval for matching tools.
+       */
+      always?: LiveMCPRequireApprovalFilterParam.Always | null;
+
+      /**
+       * A filter that skips approval for matching tools.
+       */
+      never?: LiveMCPRequireApprovalFilterParam.Never | null;
+    }
+
+    export namespace LiveMCPRequireApprovalFilterParam {
+      /**
+       * A filter that forces approval for matching tools.
+       */
+      export interface Always {
+        /**
+         * Whether to allow only read-only tools for matching entries.
+         */
+        read_only?: boolean | null;
+
+        /**
+         * A list of tool names to match against.
+         */
+        tool_names?: Array<string> | null;
+      }
+
+      /**
+       * A filter that skips approval for matching tools.
+       */
+      export interface Never {
+        /**
+         * Whether to allow only read-only tools for matching entries.
+         */
+        read_only?: boolean | null;
+
+        /**
+         * A list of tool names to match against.
+         */
+        tool_names?: Array<string> | null;
+      }
+    }
   }
 
   export interface Custom {
@@ -3336,6 +3597,8 @@ export namespace ResponsesDelegationUpdateConfig {
 export type ServerEvent =
   | SessionStartedEvent
   | SessionUpdatedEvent
+  | ServerEvent.SessionResumed
+  | ServerEvent.SessionPaused
   | InputAudioMutedEvent
   | InputAudioUnmutedEvent
   | OutputAudioFixturePlayingEvent
@@ -3364,6 +3627,46 @@ export type ServerEvent =
   | ServerEvent.TransportFailed;
 
 export namespace ServerEvent {
+  /**
+   * Sent when speech resumes paused inference and it is ready for audio in a Live
+   * WebRTC session. Delivered to the sideband and, when permitted by its event
+   * settings, the data channel.
+   */
+  export interface SessionResumed {
+    /**
+     * The unique ID of the Live server event.
+     */
+    event_id: string;
+
+    type: 'session.resumed';
+
+    /**
+     * The event_id of the client command associated with this server event, when
+     * supplied.
+     */
+    client_event_id?: string;
+  }
+
+  /**
+   * Sent when the idle timeout pauses inference in a Live WebRTC session. The WebRTC
+   * connection, sideband, and session ID persist. Delivered to the sideband and,
+   * when permitted by its event settings, the data channel.
+   */
+  export interface SessionPaused {
+    /**
+     * The unique ID of the Live server event.
+     */
+    event_id: string;
+
+    type: 'session.paused';
+
+    /**
+     * The event_id of the client command associated with this server event, when
+     * supplied.
+     */
+    client_event_id?: string;
+  }
+
   /**
    * Input audio received from the primary transport and reflected to a Live sideband
    * connection before model-input muting.
@@ -3578,7 +3881,7 @@ export interface SessionConfig {
    * The Live model. Required in the session configuration for every transport; do
    * not pass it as a URL query parameter.
    */
-  model: (string & {}) | 'gpt-live-1';
+  model: (string & {}) | 'gpt-live-1' | 'gpt-live-1.1';
 
   /**
    * Startup audio configuration. Only primary WebSockets accept audio.format; WebRTC
@@ -3617,6 +3920,12 @@ export interface SessionConfig {
    * server defaults. Immutable after startup.
    */
   instructions?: string | null;
+
+  /**
+   * A stable identifier for your end user, used for safety monitoring and abuse
+   * detection.
+   */
+  safety_identifier?: string | null;
 
   /**
    * Whether to store the session for later forking and recording download. Defaults
@@ -3726,7 +4035,7 @@ export interface SessionResource {
    * The Live model. Required in the session configuration for every transport; do
    * not pass it as a URL query parameter.
    */
-  model: (string & {}) | 'gpt-live-1';
+  model: (string & {}) | 'gpt-live-1' | 'gpt-live-1.1';
 
   /**
    * The status of the session snapshot. Always `active`, including the final
@@ -3772,6 +4081,12 @@ export interface SessionResource {
    * server defaults. Immutable after startup.
    */
   instructions?: string | null;
+
+  /**
+   * A stable identifier for your end user, used for safety monitoring and abuse
+   * detection.
+   */
+  safety_identifier?: string | null;
 
   /**
    * Whether to store the session for later forking and recording download. Defaults
@@ -4029,15 +4344,27 @@ export interface SessionUpdatedEvent {
 }
 
 /**
- * Cumulative audio duration for a Live session. Values are totals for the session,
- * not increments to sum across usage events.
+ * Cumulative billable duration for a Live session. Eligible WebRTC sessions also
+ * report the active and paused breakdown. Do not sum values across usage events.
  */
 export interface SessionUsage {
   /**
-   * The cumulative Live audio duration in seconds. Do not sum this value across
-   * usage events.
+   * The cumulative billable duration in whole seconds. When present, the active and
+   * paused breakdown adds up to this total.
    */
   seconds: number;
+
+  /**
+   * The remaining billable seconds attributed to active audio and any unused prepaid
+   * duration.
+   */
+  active_seconds?: number;
+
+  /**
+   * Billable time attributed to paused inference at the configured rate, rounded
+   * down to whole seconds.
+   */
+  paused_seconds?: number;
 }
 
 /**

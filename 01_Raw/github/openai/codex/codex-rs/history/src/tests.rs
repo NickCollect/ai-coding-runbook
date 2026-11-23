@@ -1,6 +1,5 @@
 use anyhow::Result;
 use codex_protocol::ContextWindowId;
-use codex_protocol::ResponseItemId;
 use codex_protocol::models::AudioReference;
 use codex_protocol::models::ConfigurationReasoning;
 use codex_protocol::models::PermissionProfile;
@@ -11,10 +10,103 @@ use codex_protocol::permissions::FileSystemSandboxEntry;
 use codex_protocol::permissions::FileSystemSandboxPolicy;
 use codex_protocol::permissions::NetworkSandboxPolicy;
 use codex_protocol::protocol::ThreadSettingsSnapshot;
+use codex_thread_context_ids_test_support::thread_context_ids;
 use pretty_assertions::assert_eq;
 use serde_json::json;
 
 use super::*;
+
+#[test]
+fn accepted_realtime_input_projects_from_the_canonical_response_item() -> Result<()> {
+    let mut item: ResponseItem = serde_json::from_value(json!({
+        "type": "message",
+        "id": "msg_input_123",
+        "role": "user",
+        "content": [{"type": "input_text", "text": "use the smaller logo"}]
+    }))?;
+    item.set_turn_id_if_missing("turn-1");
+    let rollout = RolloutItem::ResponseItem(ResponseItemEnvelope {
+        item,
+        metadata: Some(CodexHarnessMetadata {
+            realtime_handoff: Some(Box::new(RealtimeHandoffMetadata {
+                event_id: "receipt-1".to_string(),
+                realtime_session_id: "call-1".to_string(),
+                observed_at_ms: 42,
+                handoff_id: "handoff-1".to_string(),
+                mode: RealtimeHandoffMode::Start,
+                source_event_ids: vec!["frame-1".to_string()],
+            })),
+            ..Default::default()
+        }),
+    });
+    let persisted = serde_json::to_value(&rollout)?;
+    assert_eq!(persisted["type"], "response_item");
+    assert_eq!(
+        persisted["payload"]["content"][0]["text"],
+        "use the smaller logo"
+    );
+    assert_eq!(
+        persisted["metadata"]["realtime_handoff"]["event_id"],
+        "receipt-1"
+    );
+    let restored: RolloutItem = serde_json::from_value(persisted)?;
+    assert_eq!(
+        restored.realtime_item().map(Cow::into_owned),
+        Some(RealtimeItem {
+            id: "receipt-1".to_string(),
+            realtime_session_id: "call-1".to_string(),
+            observed_at_ms: Some(42),
+            content: RealtimeItemContent::TurnInputAccepted {
+                handoff_id: "handoff-1".to_string(),
+                turn_id: "turn-1".to_string(),
+                mode: RealtimeHandoffMode::Start,
+                source_event_ids: vec!["frame-1".to_string()],
+                input_item_id: "msg_input_123".to_string(),
+                input: "use the smaller logo".to_string(),
+            },
+        })
+    );
+    Ok(())
+}
+
+#[test]
+fn transcript_chunk_projects_from_its_only_model_input() -> Result<()> {
+    let mut item: ResponseItem = serde_json::from_value(json!({
+        "type": "message", "id": "msg_chunk", "role": "user",
+        "content": [{"type": "input_text", "text": "user: hello"}]
+    }))?;
+    item.set_turn_id_if_missing("turn-1");
+    let rollout = RolloutItem::ResponseItem(ResponseItemEnvelope {
+        item,
+        metadata: Some(CodexHarnessMetadata {
+            realtime_session_input: Some(Box::new(RealtimeSessionInputMetadata {
+                event_id: "receipt-1".to_string(),
+                realtime_session_id: "call-1".to_string(),
+                observed_at_ms: 42,
+                source_event_ids: vec!["frame-1".to_string()],
+            })),
+            ..Default::default()
+        }),
+    });
+    let persisted = serde_json::to_value(&rollout)?;
+    assert_eq!(persisted["type"], "response_item");
+    assert_eq!(persisted["payload"]["content"][0]["text"], "user: hello");
+    assert_eq!(
+        rollout.realtime_item().map(Cow::into_owned),
+        Some(RealtimeItem {
+            id: "receipt-1".to_string(),
+            realtime_session_id: "call-1".to_string(),
+            observed_at_ms: Some(42),
+            content: RealtimeItemContent::SessionInputSaved {
+                reason: SessionInputReason::Chunk,
+                source_event_ids: vec!["frame-1".to_string()],
+                input_item_id: "msg_chunk".to_string(),
+                input: "user: hello".to_string(),
+            },
+        })
+    );
+    Ok(())
+}
 
 fn thread_settings_snapshot(disabled_plugin_ids: Vec<String>) -> Result<ThreadSettingsSnapshot> {
     Ok(serde_json::from_value(json!({
@@ -37,10 +129,16 @@ fn thread_settings_snapshot(disabled_plugin_ids: Vec<String>) -> Result<ThreadSe
 }
 
 #[test]
-fn latest_disabled_plugin_ids_preserves_owned_updates_and_clears() -> Result<()> {
+fn latest_thread_settings_preserve_owned_updates_and_clears() -> Result<()> {
     let thread_id = ThreadId::new();
     let ancestor_id = ThreadId::new();
-    let selected = thread_settings_snapshot(vec!["example@marketplace".to_string()])?;
+    let mut selected = thread_settings_snapshot(vec!["example@marketplace".to_string()])?;
+    const RECORD_BYTES: usize = 4_096;
+    let policy = codex_protocol::protocol::GuardianRetentionPolicy {
+        assistant_record_bytes: Some(RECORD_BYTES),
+        user_record_bytes: None,
+    };
+    selected.guardian_retention = Some(policy);
     let cleared = thread_settings_snapshot(Vec::new())?;
     let item = |thread_id, thread_settings| {
         RolloutItem::EventMsg(EventMsg::ThreadSettingsApplied(
@@ -56,11 +154,16 @@ fn latest_disabled_plugin_ids_preserves_owned_updates_and_clears() -> Result<()>
     ];
     assert_eq!(latest_disabled_plugin_ids(&foreign_items, thread_id), None);
 
-    let mut history = vec![item(Some(thread_id), selected.clone())];
+    let saved_settings = serde_json::to_value(item(Some(thread_id), selected.clone()))?;
+    let mut history = vec![serde_json::from_value(saved_settings)?];
     history.extend(foreign_items.clone());
     assert_eq!(
         latest_disabled_plugin_ids(&history, thread_id),
         Some(selected.disabled_plugin_ids.as_slice())
+    );
+    assert_eq!(
+        MessageRetention::saved(&history, thread_id),
+        Some(MessageRetention { thread_id, policy })
     );
 
     history.push(item(Some(thread_id), cleared.clone()));
@@ -72,6 +175,7 @@ fn latest_disabled_plugin_ids_preserves_owned_updates_and_clears() -> Result<()>
         latest_disabled_plugin_ids(&history, thread_id),
         Some(cleared.disabled_plugin_ids.as_slice())
     );
+    assert_eq!(MessageRetention::saved(&history, thread_id), None);
     Ok(())
 }
 
@@ -174,74 +278,6 @@ fn response_item_envelope_accessors_preserve_item() {
     *envelope = replacement_item.clone();
 
     assert_eq!(envelope.into_item(), replacement_item);
-}
-
-#[test]
-fn mcp_checkpoint_handles_missing_or_unknown_identity() -> Result<()> {
-    let metadata: CodexHarnessMetadata = serde_json::from_value(json!({}))?;
-    assert_eq!(metadata.mcp_attribution, None);
-
-    let restored: CodexHarnessMetadata = serde_json::from_value(json!({
-        "mcp_attribution": {
-            "status": "complete",
-            "sources": [{
-                "server_name": "example",
-                "tool_name": "search",
-                "first_turn_id": "turn_1",
-                "future_identity": "unknown to this reader"
-            }]
-        }
-    }))?;
-    assert_eq!(
-        restored.mcp_attribution,
-        Some(McpAttribution {
-            status: McpAttributionStatus::AttributionError,
-            error_reason: None,
-            sources: Vec::new(),
-        })
-    );
-    Ok(())
-}
-
-#[test]
-fn mcp_error_diagnostics_do_not_invalidate_checkpoints() -> Result<()> {
-    let metadata = CodexHarnessMetadata {
-        mcp_attribution: Some(McpAttribution {
-            status: McpAttributionStatus::AttributionError,
-            error_reason: Some(
-                codex_protocol::mcp::McpAttributionErrorReason::HistoryMissingCheckpoint,
-            ),
-            sources: Vec::new(),
-        }),
-        ..Default::default()
-    };
-    for (reason, expected_reason) in [
-        (None, None),
-        (
-            Some(json!("future_reason")),
-            Some(codex_protocol::mcp::McpAttributionErrorReason::Unknown),
-        ),
-        (Some(json!({"invalid": true})), None),
-    ] {
-        let mut serialized = serde_json::to_value(&metadata)?;
-        let attribution = serialized["mcp_attribution"]
-            .as_object_mut()
-            .expect("attribution object");
-        if let Some(reason) = reason {
-            attribution.insert("error_reason".to_string(), reason);
-        } else {
-            attribution.remove("error_reason");
-        }
-        let restored: CodexHarnessMetadata = serde_json::from_value(serialized)?;
-        let mut expected = metadata.clone();
-        expected
-            .mcp_attribution
-            .as_mut()
-            .expect("attribution checkpoint")
-            .error_reason = expected_reason;
-        assert_eq!(restored, expected);
-    }
-    Ok(())
 }
 
 #[test]
@@ -379,14 +415,9 @@ fn delivered_assistant_rollout_survives_an_earlier_read_and_rewrite() -> Result<
             },
             acceptance_order: 7,
         };
-        let sequence = std::sync::Mutex::new(
-            codex_utils_model_facing_id::ModelFacingIdGenerator::new(/*seed*/ 42, "item"),
-        );
-        let generator: codex_protocol::ItemIdGenerator = Arc::new(move |kind| {
-            ResponseItemId::generated(kind, sequence.lock().unwrap().fetch_next())
-        });
+        let ids = thread_context_ids();
         let mut live = RetainedContext::default();
-        assert!(live.record_and_capture(&mut original, &generator));
+        assert!(live.record_and_capture(&mut original, &ids));
         let wire = serde_json::to_value(RolloutItem::RetainedContext(original.clone()))?;
         let earlier = serde_json::from_value::<EarlierRolloutItem>(wire)?;
         let EarlierRolloutItem::ResponseItem { payload, metadata } = &earlier;
@@ -423,7 +454,7 @@ fn delivered_assistant_rollout_survives_an_earlier_read_and_rewrite() -> Result<
                 phase: None,
             },
             RetainedInputSource::Local(metadata.user_input_order),
-            &codex_protocol_test_support::uuid_v7_item_id_generator_for_test(),
+            &thread_context_ids(),
         );
         let rewritten_checkpoint =
             serde_json::from_value(serde_json::to_value(earlier_checkpoint)?)?;
@@ -443,12 +474,8 @@ fn delivered_assistant_rollout_survives_an_earlier_read_and_rewrite() -> Result<
         };
         assert_eq!(restored, original);
         let mut replayed = RetainedContext::default();
-        assert!(replayed.record(&restored, &generator));
+        assert!(replayed.record(&restored, &thread_context_ids()));
         assert_eq!(replayed, live);
-        assert_eq!(
-            crate::next_model_id_ordinals(&[RolloutItem::RetainedContext(restored)]),
-            (1, 0)
-        );
     }
     Ok(())
 }

@@ -137,7 +137,7 @@ async fn configured_ctrl_space_submit_wins_over_transcript_selection() -> Result
 }
 
 #[tokio::test]
-async fn markdown_chord_and_remapped_find_work_in_transcript_selection() -> Result<()> {
+async fn markdown_shortcut_respects_remapped_find_and_explicit_chords() -> Result<()> {
     let mut app = crate::app::test_support::make_test_app().await;
     let mut server = Box::pin(crate::start_embedded_app_server_for_picker(&app.config)).await?;
     let mut tui = crate::tui::test_support::make_test_tui()?;
@@ -145,13 +145,15 @@ async fn markdown_chord_and_remapped_find_work_in_transcript_selection() -> Resu
     let size = Size::new(/*width*/ 80, /*height*/ 16);
     tui.terminal.resize(size)?;
 
-    for (config, prefix) in [
+    for (config, find, prefix) in [
         (
-            serde_json::json!({"pager": {"find": "c"}}),
+            serde_json::json!({"pager": {"find": "m"}}),
+            'm',
             KeyEvent::new(KeyCode::Char('x'), KeyModifiers::CONTROL),
         ),
         (
-            serde_json::json!({"global": {"leader": "f6"}, "pager": {"find": "c"}}),
+            serde_json::json!({"global": {"leader": "f6"}, "pager": {"find": "c", "mark_markdown": "leader v"}}),
+            'c',
             KeyCode::F(6).into(),
         ),
     ] {
@@ -169,7 +171,7 @@ async fn markdown_chord_and_remapped_find_work_in_transcript_selection() -> Resu
         app.handle_tui_event(
             &mut tui,
             &mut server,
-            TuiEvent::Key(KeyCode::Char('c').into()),
+            TuiEvent::Key(KeyCode::Char(find).into()),
         )
         .await?;
         assert!(app.transcript_view.is_search_editing());
@@ -322,18 +324,24 @@ async fn plan_menu_allows_transcript_wheel_scrolling_and_keeps_keyboard_ownershi
         let bottom = app.render_owned_transcript(&mut tui, size)?;
         let latest = screen(&tui);
         let menu = render_bottom_popup(&app.chat_widget, /*width*/ 80);
-        for kind in [
-            MouseEventKind::ScrollUp,
-            MouseEventKind::ScrollDown,
-            MouseEventKind::ScrollUp,
+        let mut screens = Vec::new();
+        for (kind, ticks) in [
+            (MouseEventKind::ScrollUp, 2),
+            (MouseEventKind::ScrollDown, 2),
+            (MouseEventKind::ScrollUp, 1),
         ] {
-            app.handle_tui_event(
-                &mut tui,
-                &mut server,
-                pointer_event(kind, /*column*/ 1, /*row*/ 1),
-            )
-            .await?;
+            let painted = screen(&tui);
+            for _ in 0..ticks {
+                app.handle_tui_event(
+                    &mut tui,
+                    &mut server,
+                    pointer_event(kind, /*column*/ 1, /*row*/ 1),
+                )
+                .await?;
+                assert_eq!(screen(&tui), painted);
+            }
             app.render_owned_transcript(&mut tui, size)?;
+            screens.push(screen(&tui));
             assert_eq!(render_bottom_popup(&app.chat_widget, /*width*/ 80), menu);
             if kind == MouseEventKind::ScrollDown {
                 assert_eq!(screen(&tui), latest);
@@ -344,6 +352,7 @@ async fn plan_menu_allows_transcript_wheel_scrolling_and_keeps_keyboard_ownershi
             }
         }
         let scrolled = screen(&tui);
+        assert_ne!(screens[0], scrolled);
         if close == KeyCode::Esc {
             insta::assert_snapshot!("plan_prompt_scrolled", scrolled);
         }
@@ -877,8 +886,7 @@ async fn raw_multiline_paste_defers_rendering_and_submits_once() -> Result<()> {
     let during_paste = screen(&tui);
     // Wait out Windows' active-paste timeout and accidental-Enter suppression window.
     tokio::time::advance(Duration::from_secs(/*secs*/ 1)).await;
-    app.handle_tui_event(&mut tui, &mut server, TuiEvent::Draw)
-        .await?;
+    // The draw that flushes the paste should also display it.
     app.handle_tui_event(&mut tui, &mut server, TuiEvent::Draw)
         .await?;
     assert!(screen(&tui).contains("After paste"));

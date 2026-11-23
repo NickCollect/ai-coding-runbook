@@ -1,5 +1,7 @@
 //! Contributor integration tests use the normal catalog-backed lifecycle setup.
 
+use crate::async_scorer::conversation::ConversationBackend;
+
 use super::*;
 use crate::async_scorer::authorization::ScoreAuthorization;
 use codex_protocol::models::ImageReference;
@@ -210,7 +212,9 @@ async fn assert_catalog_budget(evidence: BudgetEvidence) -> Result<()> {
                     sampled_at: None,
                 },
             );
-            let progress = thread_store.get::<GuardianV2ScoreProgress>().unwrap();
+            let progress = ConversationBackend::for_turn(thread_store, thread_store)
+                .map(|cache| Arc::clone(&cache.progress))
+                .unwrap();
             let authorization =
                 ScoreAuthorization::current(&fixture.test.codex, &Default::default()).await;
             seed_cached_score(&progress, thread_store, /*index*/ 0, authorization);
@@ -232,7 +236,9 @@ async fn assert_catalog_budget(evidence: BudgetEvidence) -> Result<()> {
         };
         fixture.registry.tool_lifecycle_contributors()[0]
             .on_tool_start(ToolStartInput {
+                sampling_model: "gpt-5.5",
                 serving_assessment: None,
+                guardian_probe: None,
                 permissions: Box::pin(async { Some(Default::default()) }),
                 session_store: &fixture.session_store,
                 thread_store,
@@ -253,7 +259,7 @@ async fn assert_catalog_budget(evidence: BudgetEvidence) -> Result<()> {
                 // Raw injection supplies no live checkpoint provenance, regardless of the sample.
                 "incompatible_compaction"
             } else {
-                "elevated_risk"
+                "scoring_failure"
             };
             fixture.assert_fails_closed(reason).await?;
             assert!(
@@ -267,7 +273,9 @@ async fn assert_catalog_budget(evidence: BudgetEvidence) -> Result<()> {
             fixture.test.codex.shutdown_and_wait().await?;
             continue;
         }
-        let progress = thread_store.get::<GuardianV2ScoreProgress>().unwrap();
+        let progress = ConversationBackend::for_turn(thread_store, thread_store)
+            .map(|cache| Arc::clone(&cache.progress))
+            .unwrap();
         tokio::time::timeout(ASYNC_TEST_TIMEOUT, async {
             while progress.inspect(/*call_id*/ None).lag > 0 {
                 tokio::task::yield_now().await;

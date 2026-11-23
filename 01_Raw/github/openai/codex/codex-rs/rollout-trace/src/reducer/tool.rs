@@ -4,6 +4,7 @@ use anyhow::bail;
 
 use super::TraceReducer;
 use crate::model::CodeModeRuntimeToolId;
+use crate::model::ConversationItemId;
 use crate::model::ConversationItemKind;
 use crate::model::ExecutionStatus;
 use crate::model::ExecutionWindow;
@@ -25,6 +26,7 @@ mod terminal;
 #[path = "tool/mcp_tests.rs"]
 mod mcp_tests;
 
+pub(super) use agents::NativeToolDelivery;
 pub(super) use agents::ObservedAgentResultEdge;
 pub(super) use agents::PendingAgentInteractionEdge;
 pub(super) use agents::spawn_edge_id;
@@ -342,7 +344,7 @@ impl TraceReducer {
     /// reverse links without duplicating matching logic.
     pub(super) fn attach_model_visible_tool_item(
         &mut self,
-        item_id: &str,
+        item_id: &ConversationItemId,
         call_id: Option<&str>,
         kind: &ConversationItemKind,
     ) -> Result<()> {
@@ -413,20 +415,20 @@ impl TraceReducer {
     fn ensure_unique_model_visible_tool_call(
         &self,
         model_visible_call_id: Option<&str>,
-        tool_call_id: &str,
+        tool_call_id: &ToolCallId,
     ) -> Result<()> {
         let Some(model_visible_call_id) = model_visible_call_id else {
             return Ok(());
         };
         if let Some(existing) = self.single_tool_for_model_visible_call(model_visible_call_id)?
-            && existing != tool_call_id
+            && existing != *tool_call_id
         {
             bail!("duplicate tool call for model-visible call id {model_visible_call_id}");
         }
         Ok(())
     }
 
-    fn single_tool_for_model_visible_call(
+    pub(super) fn single_tool_for_model_visible_call(
         &self,
         model_visible_call_id: &str,
     ) -> Result<Option<ToolCallId>> {
@@ -448,7 +450,7 @@ impl TraceReducer {
         thread_id: &str,
         call_id: &str,
         kinds: &[ConversationItemKind],
-    ) -> Vec<String> {
+    ) -> Vec<ConversationItemId> {
         // A late tool-start event must link outputs in history order, not map-key order.
         self.rollout.threads[thread_id]
             .conversation_item_ids
@@ -459,7 +461,11 @@ impl TraceReducer {
             .collect::<Vec<_>>()
     }
 
-    fn add_tool_call_item(&mut self, tool_call_id: &str, item_id: &str) -> Result<()> {
+    fn add_tool_call_item(
+        &mut self,
+        tool_call_id: &ToolCallId,
+        item_id: &ConversationItemId,
+    ) -> Result<()> {
         let Some(tool_call) = self.rollout.tool_calls.get_mut(tool_call_id) else {
             bail!("tool call {tool_call_id} disappeared during conversation linking");
         };
@@ -467,7 +473,11 @@ impl TraceReducer {
         Ok(())
     }
 
-    fn add_tool_output_item(&mut self, tool_call_id: &str, item_id: &str) -> Result<()> {
+    fn add_tool_output_item(
+        &mut self,
+        tool_call_id: &ToolCallId,
+        item_id: &ConversationItemId,
+    ) -> Result<()> {
         let Some(tool_call) = self.rollout.tool_calls.get_mut(tool_call_id) else {
             bail!("tool call {tool_call_id} disappeared during output linking");
         };
@@ -477,7 +487,7 @@ impl TraceReducer {
             bail!("conversation item {item_id} disappeared during output linking");
         };
         let producer = ProducerRef::Tool {
-            tool_call_id: tool_call_id.to_string(),
+            tool_call_id: tool_call_id.clone(),
         };
         if !item.produced_by.contains(&producer) {
             item.produced_by.push(producer);
@@ -485,7 +495,7 @@ impl TraceReducer {
         Ok(())
     }
 
-    fn link_tool_to_inference_response(&mut self, tool_call_id: &str) {
+    fn link_tool_to_inference_response(&mut self, tool_call_id: &ToolCallId) {
         let Some(tool_call) = self.rollout.tool_calls.get(tool_call_id) else {
             return;
         };
@@ -500,18 +510,18 @@ impl TraceReducer {
                 .any(|item_id| call_item_ids.contains(item_id))
                 && !inference
                     .tool_call_ids_started_by_response
-                    .contains(&tool_call_id.to_string())
+                    .contains(tool_call_id)
             {
                 inference
                     .tool_call_ids_started_by_response
-                    .push(tool_call_id.to_string());
+                    .push(tool_call_id.clone());
             }
         }
     }
 }
 
-fn push_unique(items: &mut Vec<String>, item_id: &str) {
-    if !items.iter().any(|existing| existing == item_id) {
-        items.push(item_id.to_string());
+fn push_unique<T: PartialEq + Clone>(items: &mut Vec<T>, item_id: &T) {
+    if !items.contains(item_id) {
+        items.push(item_id.clone());
     }
 }

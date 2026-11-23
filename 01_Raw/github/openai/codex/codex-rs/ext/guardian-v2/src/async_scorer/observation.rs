@@ -6,6 +6,7 @@ use std::time::Instant;
 use std::time::SystemTime;
 
 use codex_analytics::AnalyticsEventsClient;
+use codex_core::GuardianInferenceContext;
 use codex_core::context::GuardianContextMode;
 use codex_core::context::GuardianReviewEvidence;
 use codex_core::context::NodeReplReviewEvidence;
@@ -28,13 +29,13 @@ use super::authorization::ScoreAuthorization;
 use super::classification::Classification;
 use super::config::GuardianV2Config;
 use super::conversation::ConversationBackend;
+use super::coverage::background_scoring_allowed;
 use super::coverage::scores_tool;
 use super::extension::GuardianV2Extension;
 use super::metrics::record_classification;
 use super::parent_compaction::ParentCompactionError;
 use super::parent_compaction::select_parent_compaction;
 use super::sampler::LunaSampler;
-use super::score::GuardianV2ScoreProgress;
 use codex_protocol::openai_models::GuardianUnscoredAction as UnscoredAction;
 
 impl GuardianV2Extension {
@@ -62,9 +63,12 @@ impl GuardianV2Extension {
         let Some(guardian_config) = input.thread_store.get::<GuardianV2Config>() else {
             return;
         };
-        let Some(score_progress) = input.thread_store.get::<GuardianV2ScoreProgress>() else {
+        let Some(conversation) =
+            ConversationBackend::for_turn(input.thread_store, input.turn_store)
+        else {
             return;
         };
+        let score_progress = Arc::clone(&conversation.progress);
         let is_js_execution = input.mcp_tool.is_some_and(|tool| {
             let info = tool.tool_info();
             is_node_repl_backed_connector(info.server_name(), info.connector_id.as_deref())
@@ -95,10 +99,77 @@ impl GuardianV2Extension {
             return;
         }
         let parent_model = input.thread_store.get::<ModelInfo>();
-        let policy = guardian_config.policy_for_model(
-            parent_model.as_deref(),
-            config.config_layer_stack.requirements(),
-        );
+        let probe_comparison = Some(super::probe_shadow::ProbeComparison::capture(&input));
+        let has_explicit_guardian_provider = config.guardian_model_provider.is_some();
+        let lookup_thread = || async {
+            let parsed_thread_id = ThreadId::from_string(input.thread_store.level_id())
+                .map_err(|error| error.to_string())?;
+            let manager = self
+                .thread_manager
+                .upgrade()
+                .ok_or_else(|| "thread manager is unavailable".to_string())?;
+            let thread = manager
+                .get_thread(parsed_thread_id)
+                .await
+                .map_err(|error| error.to_string())?;
+            Ok::<_, String>((manager, thread))
+        };
+        let needs_recovery = has_explicit_guardian_provider
+            && input
+                .thread_store
+                .get::<GuardianInferenceContext>()
+                .is_some_and(|context| context.models_manager.needs_initialization());
+        let mut early_scoring_allowed = None;
+        let early_thread_context = if needs_recovery {
+            let context = lookup_thread().await;
+            if let Ok((_, thread)) = &context {
+                let snapshot = thread.config_snapshot().await;
+                let reviewer = thread.approvals_reviewer_for_turn(input.turn_id).await;
+                let scoring_allowed = background_scoring_allowed(reviewer, || snapshot.full_access);
+                early_scoring_allowed = Some(scoring_allowed);
+                if scoring_allowed
+                    && !thread
+                        .config()
+                        .await
+                        .config_layer_stack
+                        .requirements()
+                        .disables_all_guardian_scoring()
+                {
+                    drop(sampler.retry_catalog_initialization_in_background());
+                }
+            }
+            Some(context)
+        } else {
+            None
+        };
+        let guardian_classifier_model =
+            match GuardianV2Config::explicit_guardian_classifier_model(&config, input.thread_store)
+                .await
+            {
+                Ok(model) => model,
+                Err(error) => {
+                    score_progress.clear_score();
+                    self.event_sink.emit_warning(ExtensionWarning {
+                        thread_id: input.thread_store.level_id().to_owned(),
+                        turn_id: Some(input.turn_id.to_owned()),
+                        message: error,
+                    });
+                    return;
+                }
+            };
+        // Hosted Guardian always provides its own classifier metadata or fails;
+        // only ordinary Codex uses the parent model's Guardian V2 defaults.
+        let scoring_config_model = guardian_classifier_model
+            .as_deref()
+            .or(parent_model.as_deref());
+        let requirements = config.config_layer_stack.requirements();
+        let mut policy = guardian_config.policy_for_model(scoring_config_model, requirements);
+        if has_explicit_guardian_provider {
+            requirements.constrain_guardian_policy(
+                &mut policy,
+                parent_model.as_ref().map(|model| model.slug.as_str()),
+            );
+        }
         if !policy.scoring_enabled() {
             input.thread_store.remove::<GuardianV2Enabled>();
         }
@@ -121,8 +192,7 @@ impl GuardianV2Extension {
             .or_else(|| GuardianScope::for_tool(input.tool_name));
         // Mandatory review constraints must not turn transparent catalog wrappers into actions.
         // The legacy all-tools policy still scores wrappers through `other_tools`.
-        let wrapper_mode = parent_model
-            .as_ref()
+        let wrapper_mode = scoring_config_model
             .and_then(|model| model.guardian.as_ref())
             .map_or(policy.other_tools, |catalog| catalog.other_tools);
         if scope.is_none()
@@ -136,8 +206,10 @@ impl GuardianV2Extension {
         }
         if !scores_tool(&policy, input.tool_name, input.payload, scope) {
             match policy.unscored_action {
-                UnscoredAction::Ignore => {}
-                UnscoredAction::AgeScore => {
+                // An older policy cannot hide actions from the current policy's cache.
+                UnscoredAction::Ignore
+                    if conversation.is_current_for_thread(input.thread_store) => {}
+                UnscoredAction::Ignore | UnscoredAction::AgeScore => {
                     let index = score_progress.observe(&input);
                     // Unscored permission widening must not reuse an earlier approval score.
                     if input.tool_name.is_default_namespace()
@@ -163,25 +235,20 @@ impl GuardianV2Extension {
         let context_mode = GuardianContextMode::from_history(input.conversation_history.as_ref());
         let analytics = input.session_store.get::<AnalyticsEventsClient>();
         let sampled_at = SystemTime::now();
-        let Some(conversation) = input.thread_store.get::<ConversationBackend>() else {
-            let index = score_progress.observe(&input);
-            score_progress.invalidate(index);
-            score_progress.fail_closed(sampled_at);
-            return;
-        };
         let (tool_call_index, reservation) =
             conversation.reserve(|| score_progress.observe(&input));
         tracing::Span::current().record("tool_call_index", tool_call_index);
         let reservation = match reservation {
             Ok(reservation) => reservation,
             Err(error) => {
-                score_progress.invalidate(tool_call_index);
-                score_progress.fail_closed(sampled_at);
+                score_progress.fail_closed(sampled_at, tool_call_index);
                 record_classification(
                     metrics.as_deref(),
+                    probe_comparison.as_ref(),
                     context_mode,
                     classification_started_at.elapsed(),
                     "failure",
+                    /*classification_risk*/ None,
                     Some(super::metrics::sampler_failure_reason(&error)),
                 );
                 return;
@@ -199,29 +266,21 @@ impl GuardianV2Extension {
             .turn_store
             .get::<codex_api::ResponseId>()
             .map(|id| id.0.clone());
-        let thread_context: Result<_, String> = async {
-            let parsed_thread_id =
-                ThreadId::from_string(&thread_id).map_err(|error| error.to_string())?;
-            let manager = self
-                .thread_manager
-                .upgrade()
-                .ok_or_else(|| "thread manager is unavailable".to_string())?;
-            let thread = manager
-                .get_thread(parsed_thread_id)
-                .await
-                .map_err(|error| error.to_string())?;
-            Ok((manager, thread))
-        }
-        .await;
+        let thread_context = match early_thread_context {
+            Some(context) => context,
+            None => lookup_thread().await,
+        };
         let (manager, thread) = match thread_context {
             Ok(context) => context,
             Err(error) => {
                 score_progress.invalidate(tool_call_index);
                 record_classification(
                     metrics.as_deref(),
+                    probe_comparison.as_ref(),
                     context_mode,
                     classification_started_at.elapsed(),
                     "failure",
+                    /*classification_risk*/ None,
                     Some("thread_context_error"),
                 );
                 event_sink.emit_warning(ExtensionWarning {
@@ -233,10 +292,15 @@ impl GuardianV2Extension {
             }
         };
         // Use the live reviewer, not the startup config or per-app reviewer overrides.
-        let snapshot = thread.config_snapshot().await;
-        if snapshot.full_access
-            || thread.approvals_reviewer_for_turn(input.turn_id).await == ApprovalsReviewer::User
-        {
+        let skip_scoring = match early_scoring_allowed {
+            Some(allowed) => !allowed,
+            None => {
+                thread.config_snapshot().await.full_access
+                    || thread.approvals_reviewer_for_turn(input.turn_id).await
+                        == ApprovalsReviewer::User
+            }
+        };
+        if skip_scoring {
             // A skipped call invalidates older scores, including ones still in flight.
             score_progress.invalidate(tool_call_index);
             return;
@@ -258,19 +322,17 @@ impl GuardianV2Extension {
             return;
         }
         input.thread_store.insert(GuardianV2Enabled);
-        let model_defaults = parent_model
-            .as_ref()
-            .and_then(|model| model.model_messages.as_ref())
-            .and_then(|messages| messages.guardian_v2.as_ref());
-        let guardian_config = match guardian_config.with_model_defaults(model_defaults) {
+        let guardian_config = match guardian_config.with_classifier_defaults(scoring_config_model) {
             Ok(config) => config,
             Err(error) => {
-                score_progress.fail_closed(sampled_at);
+                score_progress.fail_closed(sampled_at, tool_call_index);
                 record_classification(
                     metrics.as_deref(),
+                    probe_comparison.as_ref(),
                     context_mode,
                     classification_started_at.elapsed(),
                     "failure",
+                    /*classification_risk*/ None,
                     Some("configuration_error"),
                 );
                 self.event_sink.emit_warning(ExtensionWarning {
@@ -287,10 +349,18 @@ impl GuardianV2Extension {
                 .get_or_init(NodeReplReviewEvidence::default)
                 .enable_image_capture();
         }
-        input.thread_store.insert(guardian_config.clone());
+        if !has_explicit_guardian_provider {
+            input.thread_store.insert(guardian_config.clone());
+        }
         let guardian_evidence = input
             .thread_store
             .get_or_init(GuardianReviewEvidence::default);
+        let max_input_tokens = match guardian_classifier_model.as_ref() {
+            Some(model) => codex_guardian_context::effective_input_token_limit(
+                model, /*configured_window*/ None,
+            ),
+            None => sampler.max_input_tokens(),
+        };
         let selected_compaction = match select_parent_compaction(
             context_mode,
             &guardian_config,
@@ -317,12 +387,14 @@ impl GuardianV2Extension {
                         ("failure", Some("parent_compaction_unusable"))
                     }
                 };
-                score_progress.fail_closed(sampled_at);
+                score_progress.fail_closed(sampled_at, tool_call_index);
                 record_classification(
                     metrics.as_deref(),
+                    probe_comparison.as_ref(),
                     context_mode,
                     classification_started_at.elapsed(),
                     outcome,
+                    /*classification_risk*/ None,
                     failure_reason,
                 );
                 return;
@@ -339,24 +411,27 @@ impl GuardianV2Extension {
             Ok(text) => text,
             Err(ActionRenderError::TooLarge { .. }) => {
                 score_progress.mark_oversized(input.call_id, tool_call_index);
-                score_progress.fail_closed(sampled_at);
+                score_progress.fail_closed(sampled_at, tool_call_index);
                 record_classification(
                     metrics.as_deref(),
+                    probe_comparison.as_ref(),
                     context_mode,
                     classification_started_at.elapsed(),
                     "failure",
+                    /*classification_risk*/ None,
                     Some("input_too_large"),
                 );
                 return;
             }
             Err(error) => {
-                score_progress.invalidate(tool_call_index);
-                score_progress.fail_closed(sampled_at);
+                score_progress.fail_closed(sampled_at, tool_call_index);
                 record_classification(
                     metrics.as_deref(),
+                    probe_comparison.as_ref(),
                     context_mode,
                     classification_started_at.elapsed(),
                     "failure",
+                    /*classification_risk*/ None,
                     Some("action_serialization_error"),
                 );
                 event_sink.emit_warning(ExtensionWarning {
@@ -371,11 +446,6 @@ impl GuardianV2Extension {
         let sync_reviews = guardian_evidence.snapshot();
         let authorization_version =
             guardian_evidence.authorization_version(input.conversation_history.as_ref());
-        let trusted_user_inputs = input
-            .conversation_history
-            .retained_context()
-            .map(codex_guardian_context::collect_verified_answer_candidates)
-            .unwrap_or_default();
         let history = Arc::clone(&input.conversation_history);
         let local_trusted_skill_paths = guardian_evidence.trusted_skill_paths(input.turn_id);
         let node_repl_images = if guardian_config.transcript.include_images {
@@ -396,18 +466,21 @@ impl GuardianV2Extension {
         };
 
         let Some(permissions) = input.permissions.await else {
-            score_progress.fail_closed(sampled_at);
+            score_progress.fail_closed(sampled_at, tool_call_index);
             record_classification(
                 metrics.as_deref(),
+                probe_comparison.as_ref(),
                 context_mode,
                 classification_started_at.elapsed(),
                 "failure",
+                /*classification_risk*/ None,
                 Some("permission_resolution_error"),
             );
             return;
         };
         let score_authorization = ScoreAuthorization::current(&thread, &permissions).await;
         let classification = Classification {
+            probe_comparison,
             reservation,
             classification_started_at,
             decisions_sampler: input
@@ -431,11 +504,11 @@ impl GuardianV2Extension {
             config,
             context_mode,
             parent_compaction,
+            max_input_tokens,
             call_id,
             mcp_tool,
             planned_action,
             sync_reviews,
-            trusted_user_inputs,
             authorization_version,
             history,
             local_trusted_skill_paths,

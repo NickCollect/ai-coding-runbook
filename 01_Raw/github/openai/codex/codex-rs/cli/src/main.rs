@@ -54,6 +54,7 @@ static ALLOCATOR: tikv_jemallocator::Jemalloc = tikv_jemallocator::Jemalloc;
 
 #[cfg(any(target_os = "macos", target_os = "windows"))]
 mod app_cmd;
+mod app_server_proxy;
 mod config_override_args;
 mod daemon_install;
 mod daemon_telemetry;
@@ -239,10 +240,6 @@ enum Subcommand {
     /// Internal: run the responses API proxy.
     #[clap(hide = true)]
     ResponsesApiProxy(ResponsesApiProxyArgs),
-
-    /// Internal: relay stdio to a Unix domain socket.
-    #[clap(hide = true, name = "stdio-to-uds")]
-    StdioToUds(StdioToUdsCommand),
 
     /// [EXPERIMENTAL] Run the standalone exec-server service.
     ExecServer(ExecServerCommand),
@@ -490,7 +487,7 @@ enum SandboxSubcommand {
 #[cfg(target_os = "macos")]
 type HostSandboxArgs = codex_cli::SeatbeltCommand;
 #[cfg(target_os = "linux")]
-type HostSandboxArgs = codex_cli::LandlockCommand;
+type HostSandboxArgs = codex_cli::LinuxSandboxCommand;
 #[cfg(target_os = "windows")]
 type HostSandboxArgs = codex_cli::WindowsCommand;
 
@@ -761,13 +758,6 @@ struct GenerateInternalJsonSchemaCommand {
     /// Output directory where internal JSON Schema artifacts will be written
     #[arg(short = 'o', long = "out", value_name = "DIR")]
     out_dir: PathBuf,
-}
-
-#[derive(Debug, Parser)]
-struct StdioToUdsCommand {
-    /// Path to the Unix domain socket to connect to.
-    #[arg(value_name = "SOCKET_PATH", value_parser = parse_socket_path)]
-    socket_path: AbsolutePathBuf,
 }
 
 fn parse_socket_path(raw: &str) -> Result<AbsolutePathBuf, String> {
@@ -1057,6 +1047,17 @@ fn main() -> anyhow::Result<()> {
     codex_build_info::initialize!();
     let remote_control_disabled = codex_app_server::take_remote_control_disabled_env();
     arg0_dispatch_or_else(move |arg0_paths: Arg0DispatchPaths| async move {
+        #[cfg(any(target_os = "linux", target_os = "macos"))]
+        if std::env::args_os().nth(1).as_deref()
+            == Some(std::ffi::OsStr::new("--codex-run-as-sandbox-launcher"))
+        {
+            anyhow::ensure!(
+                std::env::args_os().len() == 2,
+                "--codex-run-as-sandbox-launcher does not accept additional arguments"
+            );
+            return codex_cli::shared_sandbox_launcher::run(arg0_paths.codex_linux_sandbox_exe)
+                .await;
+        }
         // Finish polling the large subcommand dispatcher before polling interactive TUI events.
         if let Some(tui) = Box::pin(dispatch_cli(arg0_paths, remote_control_disabled)).await? {
             tui.await?;
@@ -1093,12 +1094,18 @@ async fn dispatch_cli(
         Some(Subcommand::Agents(options)) => Some(options),
         _ => None,
     };
-    if let Some(options) = agents_options
+    let session_remote = match &subcommand {
+        Some(Subcommand::Agents(options)) => Some(("agents", &options.remote)),
+        Some(Subcommand::Resume(options)) => Some(("resume", &options.remote)),
+        Some(Subcommand::Fork(options)) => Some(("fork", &options.remote)),
+        _ => None,
+    };
+    if let Some((command, options)) = session_remote
         && let Some(root_endpoint) = &remote.remote
-        && let Some(agents_endpoint) = &options.remote.remote
-        && root_endpoint != agents_endpoint
+        && let Some(command_endpoint) = &options.remote
+        && root_endpoint != command_endpoint
     {
-        anyhow::bail!("`codex agents` received conflicting remote server endpoints");
+        anyhow::bail!("`codex {command}` received conflicting remote server endpoints");
     }
     let root_remote = agents_options
         .and_then(|options| options.remote.remote.clone())
@@ -1164,8 +1171,8 @@ async fn dispatch_cli(
                 arg0_paths,
             )));
         }
-        Some(Subcommand::TcpTunnel(args)) if args.auth_token_stdin => {
-            codex_tcp_tunnel::run(args).await?;
+        Some(Subcommand::TcpTunnel(args)) if args.token_file.is_some() => {
+            codex_tcp_tunnel::run_ssh_proxy_from_file(args, tokio::io::stdout()).await?;
         }
         Some(Subcommand::TcpTunnel(args)) => {
             let config =
@@ -1267,26 +1274,17 @@ async fn dispatch_cli(
             prepend_config_flags(&mut config_overrides, root_config_overrides.clone());
             match subcommand {
                 PluginSubcommand::Add(args) => {
-                    let overrides = config_overrides
-                        .parse_overrides()
-                        .map_err(anyhow::Error::msg)?;
-                    plugin_cmd::run_plugin_add(overrides, args).await?;
+                    plugin_cmd::run_plugin_add(&config_overrides, args).await?;
                 }
                 PluginSubcommand::List(args) => {
-                    let overrides = config_overrides
-                        .parse_overrides()
-                        .map_err(anyhow::Error::msg)?;
-                    plugin_cmd::run_plugin_list(overrides, args).await?;
+                    plugin_cmd::run_plugin_list(&config_overrides, args).await?;
                 }
                 PluginSubcommand::Marketplace(mut marketplace_cli) => {
                     prepend_config_flags(&mut marketplace_cli.config_overrides, config_overrides);
                     marketplace_cli.run().await?;
                 }
                 PluginSubcommand::Remove(args) => {
-                    let overrides = config_overrides
-                        .parse_overrides()
-                        .map_err(anyhow::Error::msg)?;
-                    plugin_cmd::run_plugin_remove(overrides, args).await?;
+                    plugin_cmd::run_plugin_remove(&config_overrides, args).await?;
                 }
             }
         }
@@ -1312,10 +1310,10 @@ async fn dispatch_cli(
                 root_remote_auth_token_env.as_deref(),
                 subcommand.as_ref(),
             )?;
-            if startup_config.print_startup_config {
+            if startup_config.print_startup_config || startup_config.startup_oauth {
                 anyhow::ensure!(
                     subcommand.is_none(),
-                    "--print-startup-config cannot run a subcommand"
+                    "startup configuration modes cannot run a subcommand"
                 );
                 codex_app_server::print_startup_config(
                     arg0_paths,
@@ -1410,7 +1408,9 @@ async fn dispatch_cli(
                                 continue;
                             }
                             let value = if let Some(table) = value.as_table() {
-                                let Some(enabled) = table.get("enabled") else {
+                                let Some(enabled) =
+                                    table.get(codex_features::feature_toggle_field(name))
+                                else {
                                     continue;
                                 };
                                 enabled
@@ -1530,7 +1530,7 @@ async fn dispatch_cli(
                             codex_app_server::app_server_control_socket_path(&codex_home)?
                         }
                     };
-                    codex_stdio_to_uds::run(socket_path.as_path()).await?;
+                    app_server_proxy::run(socket_path.as_path()).await?;
                 }
                 Some(AppServerSubcommand::GenerateTs(gen_cli)) => {
                     let options = codex_app_server_protocol::GenerateTsOptions {
@@ -1855,7 +1855,7 @@ async fn dispatch_cli(
             )
             .await?;
             #[cfg(target_os = "linux")]
-            codex_cli::run_command_under_landlock(
+            codex_cli::run_command_under_linux_sandbox(
                 sandbox_cli,
                 arg0_paths.codex_linux_sandbox_exe.clone(),
                 loader_overrides,
@@ -1952,15 +1952,6 @@ async fn dispatch_cli(
             )?;
             tokio::task::spawn_blocking(move || codex_responses_api_proxy::run_main(args))
                 .await??;
-        }
-        Some(Subcommand::StdioToUds(cmd)) => {
-            reject_remote_mode_for_subcommand(
-                root_remote.as_deref(),
-                root_remote_auth_token_env.as_deref(),
-                "stdio-to-uds",
-            )?;
-            let socket_path = cmd.socket_path;
-            codex_stdio_to_uds::run(socket_path.as_path()).await?;
         }
         Some(Subcommand::ExecServer(mut cmd)) => {
             reject_remote_mode_for_subcommand(
@@ -2459,7 +2450,6 @@ fn unsupported_subcommand_name_for_strict_config(
         Some(Subcommand::Execpolicy(_)) => Some("execpolicy"),
         Some(Subcommand::Apply(_)) => Some("apply"),
         Some(Subcommand::ResponsesApiProxy(_)) => Some("responses-api-proxy"),
-        Some(Subcommand::StdioToUds(_)) => Some("stdio-to-uds"),
         Some(Subcommand::Features(_)) => Some("features"),
         Some(Subcommand::TcpTunnel(_)) => Some("tcp-tunnel"),
     }
@@ -3516,32 +3506,18 @@ enabled = true
     }
 
     #[test]
-    fn tcp_tunnel_is_hidden_and_accepts_its_control_input_contract() {
+    fn tcp_tunnel_is_hidden_and_accepts_an_ssh_proxy_route() {
         let root_help = help_from_args(&["codex", "--help"]);
         assert!(!root_help.contains("tcp-tunnel"), "{root_help}");
-        let help = help_from_args(&["codex", "tcp-tunnel", "--help"]);
-        for option in [
-            "--target",
-            "--auth-token-stdin",
-            "--auth-token-updates-stdin",
-            "--connect-headers-stdin",
-        ] {
-            assert!(help.contains(option), "{help}");
-        }
         let cli = MultitoolCli::try_parse_from([
             "codex",
             "tcp-tunnel",
-            "--proxy-url",
-            "https://proxy.example.org",
-            "--proxy-origins-file",
-            "/tmp/approved-origins",
-            "--target",
-            "[::1]:22",
-            "--auth-token-stdin",
-            "--auth-token-updates-stdin",
-            "--connect-headers-stdin",
+            "--environment-id",
+            "ccarenv_test",
+            "--token-file",
+            "/private/token",
         ])
-        .expect("generic tunnel should parse");
+        .expect("SSH proxy route should parse");
         assert!(matches!(cli.subcommand, Some(Subcommand::TcpTunnel(_))));
     }
 
@@ -3672,6 +3648,17 @@ enabled = true
             err.to_string(),
             "--force requires a session UUID; names must be confirmed interactively"
         );
+    }
+
+    #[test]
+    fn sandbox_runs_launcher_executable() {
+        let cli = MultitoolCli::try_parse_from(["codex", "sandbox", "launcher", "--help"])
+            .expect("parse sandbox executable");
+        let Some(Subcommand::Sandbox(command)) = cli.subcommand else {
+            panic!("expected sandbox command");
+        };
+        assert!(command.subcommand.is_none());
+        assert_eq!(command.host.command, vec!["launcher", "--help"]);
     }
 
     #[test]

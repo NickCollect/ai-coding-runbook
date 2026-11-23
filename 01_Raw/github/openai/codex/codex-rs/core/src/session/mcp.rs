@@ -5,14 +5,11 @@ use crate::environment_selection::combine_selected_capability_roots;
 use crate::mcp_tool_call::McpToolApprovalContext;
 use crate::mcp_tool_call::capture_environment_permissions;
 use anyhow::Context;
-use codex_exec_server::DiscoverV2CapabilitiesRequest;
 use codex_exec_server::ExecutorCapabilityDiscoveryCache;
 use codex_exec_server::ExecutorCapabilityDiscoverySnapshot;
-use codex_exec_server::ExecutorCapabilityDiscoveryV2Cache;
 use codex_exec_server::ExecutorCapabilityDiscoveryV2Snapshot;
 use codex_exec_server::MAX_SELECTED_CAPABILITY_ROOTS;
 use codex_exec_server::ResolvedSelectedCapabilityRoot;
-use codex_exec_server::supports_capability_discovery_v2;
 use codex_guardian_reviewer::GuardianElicitationReview;
 use codex_guardian_reviewer::guardian_elicitation_review_request;
 use codex_guardian_reviewer::mcp_elicitation_decline_without_message;
@@ -225,17 +222,28 @@ impl Session {
     /// Publishes changed MCP state, waiting for any refresh already in progress.
     #[tracing::instrument(name = "mcp.runtime.refresh_if_dirty", skip_all)]
     pub(crate) async fn refresh_mcp_if_dirty(self: &Arc<Self>) {
+        self.refresh_mcp_if_dirty_with_discovery_v2(/*captured_executor_discovery_v2*/ None)
+            .await;
+    }
+
+    async fn refresh_mcp_if_dirty_with_discovery_v2(
+        self: &Arc<Self>,
+        captured_executor_discovery_v2: Option<&[ExecutorCapabilityDiscoveryV2Snapshot]>,
+    ) {
         let Ok(_refresh) = self.mcp_refresh.acquire().await else {
             error!("MCP runtime refresh semaphore closed");
             return;
         };
-        self.reconcile_mcp_runtime().await;
+        self.reconcile_mcp_runtime(captured_executor_discovery_v2)
+            .await;
     }
 
     /// Reconcile pending state under the session permit.
-    async fn reconcile_mcp_runtime(self: &Arc<Self>) {
+    async fn reconcile_mcp_runtime(
+        self: &Arc<Self>,
+        captured_executor_discovery_v2: Option<&[ExecutorCapabilityDiscoveryV2Snapshot]>,
+    ) {
         loop {
-            // Compare and rebuild from current environments, not choices saved for a future turn.
             let environments = self.services.turn_environments.snapshot().await;
             let environment_selections = environments.all_selections();
             if !self.services.mcp_runtime.current_environments_match(
@@ -253,12 +261,28 @@ impl Session {
                 self.mark_mcp_runtime_dirty(McpRefreshReason::RuntimeAuthChanged);
             }
 
+            if let Some(captured) = captured_executor_discovery_v2 {
+                let current = self.services.mcp_runtime.current_config();
+                let published = current
+                    .as_ref()
+                    .and_then(|config| config.executor_discovery_v2.as_deref());
+                if published.is_none_or(|published| {
+                    published.len() != captured.len()
+                        || published
+                            .iter()
+                            .zip(captured)
+                            .any(|(a, b)| !a.same_discovery(b))
+                }) {
+                    self.mark_mcp_runtime_dirty(
+                        McpRefreshReason::ExecutorCapabilityInventoryChanged,
+                    );
+                }
+            }
             let Some(mut refresh_invalidation) = self.mcp_refresh.claim(self.thread_id) else {
                 return;
             };
             let auth = self.services.auth_manager.auth().await;
-            // Capture after claiming the refresh so a new invalidation cannot be consumed
-            // with the environment snapshot taken before its permissions changed.
+            // Keep current MCP authority even when reusing the step's executor inventory.
             let environments = self.services.turn_environments.snapshot().await;
             let environment_selections = environments.all_selections();
             let desired = self.latest_mcp_desired_state(auth, environments).await;
@@ -267,19 +291,26 @@ impl Session {
                 .await;
             let ready_selected_capability_roots =
                 Self::ready_selected_capability_roots(&selected_capability_roots);
-            let (executor_capability_discovery_v2, _) = self
-                .executor_capability_discovery_for_step_v2(
-                    &desired.config,
-                    &desired.environments,
-                    /*skill_turn*/ None,
-                )
-                .await;
+            let discovered_v2;
+            let executor_capability_discovery_v2 = match captured_executor_discovery_v2 {
+                Some(captured) => Some(captured),
+                None => {
+                    (discovered_v2, _) = self
+                        .executor_capability_discovery_for_step_v2(
+                            &desired.config,
+                            &desired.environments,
+                            /*skill_turn*/ None,
+                        )
+                        .await;
+                    discovered_v2.as_deref()
+                }
+            };
             let (executor_capability_discovery, _) = self
                 .executor_capability_discovery_for_step(
                     &desired.config,
                     &selected_capability_roots,
                     &desired.environments,
-                    executor_capability_discovery_v2.as_deref(),
+                    executor_capability_discovery_v2,
                     /*skill_turn*/ None,
                 )
                 .await;
@@ -302,7 +333,7 @@ impl Session {
                     },
                     &ready_selected_capability_roots,
                     executor_capability_discovery.as_deref(),
-                    executor_capability_discovery_v2.as_deref(),
+                    executor_capability_discovery_v2,
                 )
                 .await;
             self.publish_mcp_runtime(
@@ -347,7 +378,8 @@ impl Session {
         self: &Arc<Self>,
         permit: SemaphorePermit<'_>,
     ) -> anyhow::Result<Option<codex_mcp::CodexAppsToolSnapshot>> {
-        self.reconcile_mcp_runtime().await;
+        self.reconcile_mcp_runtime(/*captured_executor_discovery_v2*/ None)
+            .await;
         let refresh = self.services.mcp_runtime.capture_apps_tool_refresh();
         // An invalidation may arrive after reconciliation but before capture.
         if self.mcp_refresh.is_pending() {
@@ -463,13 +495,14 @@ impl Session {
         skip_all,
         fields(turn.id = %turn_context.sub_id)
     )]
-    pub(crate) async fn mcp_runtime_for_step(
+    pub(super) async fn mcp_runtime_for_step(
         self: &Arc<Self>,
         turn_context: &TurnContext,
         selected_capability_roots: &[ResolvedSelectedCapabilityRoot],
+        captured_executor_discovery_v2: Option<&[ExecutorCapabilityDiscoveryV2Snapshot]>,
         required_servers: &[String],
         required_plugins: &HashSet<String>,
-    ) -> Arc<codex_mcp::McpBinding> {
+    ) -> CodexResult<Arc<codex_mcp::McpBinding>> {
         let ready_selected_capability_roots =
             Self::ready_selected_capability_roots(selected_capability_roots);
         if self
@@ -499,7 +532,8 @@ impl Session {
         {
             self.mark_mcp_runtime_dirty(McpRefreshReason::OAuthCredentialsRecovered);
         }
-        self.refresh_mcp_if_dirty().await;
+        self.refresh_mcp_if_dirty_with_discovery_v2(captured_executor_discovery_v2)
+            .await;
         // Prewarm and other context-only captures must not start cloud discovery.
         let is_active_regular_turn = {
             let active_turn = self.active_turn.lock().await;
@@ -534,11 +568,19 @@ impl Session {
                     }),
             )
             .await;
-            self.refresh_mcp_if_dirty().await;
+            self.refresh_mcp_if_dirty_with_discovery_v2(captured_executor_discovery_v2)
+                .await;
         }
         self.wait_for_apps_tool_refresh().await;
-        if let Some(binding) = self
-            .services
+        // Keep the binding and its final executor inventory projection together.
+        let _refresh = self
+            .mcp_refresh
+            .acquire()
+            .await
+            .map_err(|_| CodexErr::TurnAborted)?;
+        self.reconcile_mcp_runtime(captured_executor_discovery_v2)
+            .await;
+        self.services
             .mcp_runtime
             .current_binding_with_requirements(
                 required_servers,
@@ -546,14 +588,10 @@ impl Session {
                 required_plugins,
             )
             .await
-        {
-            return binding;
-        }
-        let config = Arc::new(self.runtime_mcp_config(&turn_context.config).await);
-        Arc::new(codex_mcp::McpBinding::empty(config))
+            .ok_or(CodexErr::TurnAborted)
     }
 
-    fn discovery_sandbox(
+    pub(super) fn discovery_sandbox(
         &self,
         environment: &super::turn_context::TurnEnvironment,
         skill_turn: Option<&TurnContext>,
@@ -654,90 +692,6 @@ impl Session {
         )
     }
 
-    /// Acquires V2 inventories and reports changes without scheduling an MCP refresh.
-    pub(super) async fn executor_capability_discovery_for_step_v2(
-        &self,
-        config: &Config,
-        environments: &TurnEnvironmentSnapshot,
-        skill_turn: Option<&TurnContext>,
-    ) -> (Option<Vec<ExecutorCapabilityDiscoveryV2Snapshot>>, bool) {
-        if !config
-            .features
-            .enabled(Feature::ExecutorCapabilityDiscoveryV2)
-        {
-            return (None, false);
-        }
-        // Retain this cache if a new turn replaces the thread's current cache.
-        let cache = self
-            .services
-            .thread_extension_data
-            .get_or_init(ExecutorCapabilityDiscoveryV2Cache::default);
-        let remote_environment_count = environments
-            .turn_environments()
-            .filter(|selected| selected.environment().is_remote())
-            .count();
-        cache.ensure_capacity(remote_environment_count);
-        let mut snapshots = Vec::new();
-        let mut skipped_incompatible_executor = false;
-        for selected in environments.turn_environments() {
-            if !selected.environment().is_remote() {
-                continue;
-            }
-            let environment_id = &selected.selection.environment_id;
-            let info = match selected.environment().info().await {
-                Ok(info) => info,
-                Err(_) => {
-                    tracing::warn!(
-                        environment_id,
-                        "could not read executor discovery V2 support"
-                    );
-                    continue;
-                }
-            };
-            if !supports_capability_discovery_v2(&info) {
-                skipped_incompatible_executor = true;
-                continue;
-            }
-            let request = DiscoverV2CapabilitiesRequest {
-                cwd: selected.cwd().clone(),
-                sandbox: Some(self.discovery_sandbox(selected, skill_turn)),
-            };
-            let result = cache
-                .discover(environment_id, selected.environment(), request)
-                .await;
-            snapshots.push(ExecutorCapabilityDiscoveryV2Snapshot {
-                environment_id: environment_id.clone(),
-                result,
-            });
-        }
-        let incompatible = snapshots.is_empty() && skipped_incompatible_executor;
-        if skill_turn.is_some() {
-            // Only session discovery updates the inventory used to invalidate MCP.
-            return ((!incompatible).then_some(snapshots), false);
-        }
-        if incompatible {
-            let changed = self
-                .services
-                .thread_extension_data
-                .remove::<Vec<ExecutorCapabilityDiscoveryV2Snapshot>>()
-                .is_some();
-            return (None, changed);
-        }
-        let previous = self
-            .services
-            .thread_extension_data
-            .insert(snapshots.clone());
-        let inventory_changed = previous.as_ref().map_or(!snapshots.is_empty(), |previous| {
-            previous.len() != snapshots.len()
-                || previous
-                    .iter()
-                    .zip(&snapshots)
-                    .any(|(previous, current)| !previous.same_discovery(current))
-        });
-        let inventory_changed = cache.take_recovered_discovery() || inventory_changed;
-        (Some(snapshots), inventory_changed)
-    }
-
     pub(crate) async fn resolve_selected_capability_roots_for_step(
         &self,
         environments: &TurnEnvironmentSnapshot,
@@ -805,6 +759,22 @@ impl Session {
         )
     }
 
+    /// Older clients keep using the thread preference until a turn update
+    /// overrides it. That preference is resolved against the issuing turn's rules.
+    pub(crate) async fn mcp_requested_reviewer(
+        &self,
+        settings: &ResolvedStepSettings,
+    ) -> ApprovalsReviewer {
+        match settings.mcp_approvals_reviewer_override {
+            Some(reviewer) => reviewer,
+            None => self
+                .get_config()
+                .await
+                .requested_approvals_reviewer
+                .unwrap_or_else(|| settings.approvals_reviewer()),
+        }
+    }
+
     pub(crate) fn mcp_elicitation_lifecycle(&self) -> codex_mcp::ElicitationLifecycle {
         self.mcp_elicitation_lifecycle_handle
             .get_or_init(|| {
@@ -833,7 +803,9 @@ impl Session {
             .features
             .enabled(Feature::CriticalPathTiming)
         {
-            turn_context.turn_timing_state.invalidate_critical_path();
+            turn_context
+                .turn_timing_state
+                .invalidate_critical_path(&[IncompleteReason::UnattributedUserWait]);
         }
         let _elicitation = self.services.elicitations.register();
         let (tx_response, rx_response) = oneshot::channel();
@@ -1039,16 +1011,20 @@ async fn review_guardian_mcp_elicitation(
     session: Arc<Session>,
     request: ElicitationReviewRequest,
 ) -> anyhow::Result<Option<ElicitationResponse>> {
-    let Some((turn_context, cancellation_token)) =
-        session.active_turn_context_and_cancellation_token().await
-    else {
-        return Ok(None);
+    let (turn_context, cancellation_token) = {
+        let active = session.active_turn.lock().await;
+        let Some(task) = active.as_ref().and_then(|turn| turn.task.as_ref()) else {
+            return Ok(None);
+        };
+        (
+            Arc::clone(&task.turn_context),
+            task.mcp_elicitation_cancellation.child_token(),
+        )
     };
 
     let Some(mcp_config) = session.services.mcp_runtime.current_config() else {
         return Ok(None);
     };
-    let step_settings = turn_context.next_step_settings.load_full();
     // A callback for a running call keeps the permissions captured by that call.
     let call_id = request
         .elicitation
@@ -1060,15 +1036,23 @@ async fn review_guardian_mcp_elicitation(
         .and_then(Value::as_str);
     let approval_context = call_id
         .and_then(|call_id| session.mcp_tool_approval_metadata(&request.server_key, call_id));
+    let step_settings = turn_context.next_step_settings.load_full();
+    let reviewer = approval_context.as_ref().map_or_else(
+        || step_settings.approvals_reviewer(),
+        |context| context.review_context.approvals_reviewer,
+    );
 
+    let is_js_preflight = request.elicitation.meta().is_some_and(|meta| {
+        metadata_str(meta, MCP_ELICITATION_TOOL_NAME_KEY) == Some("js")
+            && metadata_str(meta, MCP_ELICITATION_CONNECTOR_ID_KEY) == Some("node_repl")
+    });
     // User approval skips ordinary CUA checks, not separate sensitive requests.
-    let user_cua_execution = step_settings.approvals_reviewer() == ApprovalsReviewer::User
+    let user_cua_execution = reviewer == ApprovalsReviewer::User
         && is_node_repl_backed_server(&request.server_name)
+        && is_js_preflight
         && request.elicitation.meta().is_some_and(|meta| {
-            metadata_str(meta, MCP_ELICITATION_TOOL_NAME_KEY) == Some("js")
-                && metadata_str(meta, MCP_ELICITATION_CONNECTOR_ID_KEY) == Some("node_repl")
-                && metadata_str(meta, MCP_ELICITATION_APPROVAL_KIND_KEY)
-                    == Some(MCP_ELICITATION_APPROVAL_KIND_MCP_TOOL_CALL)
+            metadata_str(meta, MCP_ELICITATION_APPROVAL_KIND_KEY)
+                == Some(MCP_ELICITATION_APPROVAL_KIND_MCP_TOOL_CALL)
                 && meta.get(MCP_ELICITATION_SENSITIVE_ACTION_KEY) != Some(&Value::Bool(true))
                 && meta.get("codex_requires_user_input") != Some(&Value::Bool(true))
         });
@@ -1140,7 +1124,7 @@ async fn review_guardian_mcp_elicitation(
             invocation: Some(invocation),
             metadata,
             ..
-        }) = approval_context.as_ref()
+        }) = approval_context.as_deref()
         && invocation.server == request.server_name
         && is_node_repl_backed_connector(&invocation.server, metadata.connector_id.as_deref())
     {
@@ -1157,12 +1141,19 @@ async fn review_guardian_mcp_elicitation(
         Some(Value::Bool(true))
     );
 
-    // Bind the review to the issuing step, which may include environments that
-    // became ready after the turn started. Do not refresh an in-flight action.
+    // Use the issuing step, or the active turn's captured policy when there is no invocation.
     let mut review_context = approval_context
         .as_ref()
         .map(|context| context.review_context.clone())
-        .unwrap_or_else(|| crate::guardian::GuardianReviewContext::from(&turn_context));
+        .unwrap_or_else(|| {
+            crate::guardian::GuardianReviewContext::from_resolved_settings(
+                Arc::clone(&turn_context),
+                &step_settings,
+                &turn_context.initial_environments,
+            )
+        });
+    let review_config = &review_context.turn().config;
+    let requirements = review_config.config_layer_stack.requirements();
     let strict_auto_review = matches!(
         request
             .elicitation
@@ -1170,61 +1161,63 @@ async fn review_guardian_mcp_elicitation(
             .and_then(|meta| meta.get(MCP_ELICITATION_STRICT_AUTO_REVIEW_KEY)),
         Some(Value::Bool(true))
     );
+    let connector_id = elicitation_connector_id(&request.elicitation);
+    // A live Browser invocation can review a nested action with its own identity.
+    // Other hosted connectors must still review their registered outer invocation.
+    let review_outer_invocation =
+        request.server_name == CODEX_APPS_MCP_SERVER_NAME && originating_call_id.is_none();
+    let requested_tool = request
+        .elicitation
+        .meta()
+        .and_then(|meta| metadata_str(meta, MCP_ELICITATION_TOOL_NAME_KEY));
+    let verified_invocation = if review_outer_invocation
+        && let Some(call_id) = call_id
+        && let Some(McpToolApprovalContext {
+            invocation: Some(invocation),
+            metadata,
+            ..
+        }) = approval_context.as_deref()
+        && invocation.server == request.server_name
+        && metadata.connector_id.as_deref() == connector_id
+        && requested_tool == Some(invocation.tool.as_str())
+    {
+        Some((call_id, invocation, metadata))
+    } else {
+        None
+    };
+    let tool = verified_invocation.map(|(_, invocation, metadata)| {
+        (invocation.tool.as_str(), metadata.tool_title.as_deref())
+    });
     let mut guardian_request: crate::guardian::ReviewAction = if strict_auto_review {
-        let connector_id = elicitation_connector_id(&request.elicitation);
-        // A live Browser invocation can review a nested action with its own identity.
-        // Other hosted connectors must still review their registered outer invocation.
-        let review_outer_invocation =
-            request.server_name == CODEX_APPS_MCP_SERVER_NAME && originating_call_id.is_none();
         let trusted_guardian_request = if review_outer_invocation {
-            let Some(call_id) = call_id else {
+            let Some((call_id, invocation, metadata)) = verified_invocation else {
                 return Ok(None);
             };
-            let Some(McpToolApprovalContext {
-                invocation: Some(invocation),
-                metadata,
-                ..
-            }) = approval_context.as_ref()
-            else {
-                return Ok(None);
-            };
-            if invocation.server != request.server_name
-                || connector_id != metadata.connector_id.as_deref()
-                || request
-                    .elicitation
-                    .meta()
-                    .and_then(|meta| metadata_str(meta, MCP_ELICITATION_TOOL_NAME_KEY))
-                    != Some(invocation.tool.as_str())
-            {
-                return Ok(None);
-            }
             Some(
                 crate::mcp_tool_call::build_guardian_mcp_tool_review_request(
                     call_id,
                     invocation,
                     Some(metadata),
+                    /*prompt_permissions*/ None,
                 ),
             )
         } else {
             None
         };
-        if !turn_context
-            .config
-            .features
-            .enabled(Feature::GuardianApproval)
-            || mcp_config
-                .config_layer_stack
-                .requirements()
+        if !review_config.features.enabled(Feature::GuardianApproval)
+            || requirements
                 .approvals_reviewer
                 .can_set(&ApprovalsReviewer::AutoReview)
                 .is_err()
             || crate::connectors::mcp_approvals_reviewer_from_layers(
                 &mcp_config.config_layer_stack,
+                requirements,
                 ApprovalsReviewer::AutoReview,
-                Some(turn_context.model_info().slug.as_str()),
+                Some(review_context.model_info.slug.as_str()),
                 request.server_name.as_str(),
                 connector_id,
                 /*link_id*/ None,
+                tool,
             ) != ApprovalsReviewer::AutoReview
             || request
                 .elicitation
@@ -1286,15 +1279,19 @@ async fn review_guardian_mcp_elicitation(
             | AskForApproval::Granular(_) => {}
         }
 
+        let requested_reviewer = match &approval_context {
+            Some(context) => context.requested_reviewer,
+            None => session.mcp_requested_reviewer(&step_settings).await,
+        };
         let approvals_reviewer = crate::connectors::mcp_approvals_reviewer_from_layers(
             &mcp_config.config_layer_stack,
-            step_settings
-                .mcp_approvals_reviewer_override
-                .unwrap_or(mcp_config.approvals_reviewer),
-            Some(turn_context.model_info().slug.as_str()),
+            requirements,
+            requested_reviewer,
+            Some(review_context.model_info.slug.as_str()),
             request.server_name.as_str(),
-            elicitation_connector_id(&request.elicitation),
+            connector_id,
             /*link_id*/ None,
+            tool,
         );
         review_context.approval_policy = approval_policy;
         review_context.approvals_reviewer = approvals_reviewer;
@@ -1329,6 +1326,20 @@ async fn review_guardian_mcp_elicitation(
         }
     };
     guardian_request.category = guardian_scope;
+    if !is_js_preflight
+        && review_context
+            .turn()
+            .config
+            .features
+            .enabled(Feature::GuardianNestedApprovalContext)
+        && let Some(call_id) = originating_call_id
+        && matches!(
+            &guardian_request.request,
+            Ok(crate::guardian::GuardianApprovalRequest::McpToolCall { .. })
+        )
+    {
+        review_context.enclosing_invocation_id = Some(call_id.to_owned());
+    }
     // Keep the action the server asked about, but use its owner's rules from the original call.
     if let Ok(crate::guardian::GuardianApprovalRequest::McpToolCall {
         prompt_permissions, ..
@@ -1338,6 +1349,8 @@ async fn review_guardian_mcp_elicitation(
         *prompt_permissions = Some(permissions);
     }
     let declined_reason = guardian_request.request.as_ref().err().cloned();
+    // Release the registry entry before awaiting review. The tool owns its lifetime.
+    drop(approval_context);
     let decision = crate::guardian::decide_approval(
         session,
         review_context,

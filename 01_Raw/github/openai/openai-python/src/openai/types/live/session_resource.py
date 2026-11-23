@@ -112,7 +112,7 @@ class SessionResource(BaseModel):
     expires_at: int
     """The Unix timestamp, in seconds, at which the Live session expires."""
 
-    model: Union[str, Literal["gpt-live-1"]]
+    model: Union[str, Literal["gpt-live-1", "gpt-live-1.1"]]
     """The Live model.
 
     Required in the session configuration for every transport; do not pass it as a
@@ -162,6 +162,12 @@ class SessionResource(BaseModel):
     [backend prompt](https://developers.openai.com/api/docs/guides/live-delegation#start-with-your-existing-backend-prompt).
     Limited to 16,384 client-supplied tokens. Omitted or blank instructions use
     server defaults. Immutable after startup.
+    """
+
+    safety_identifier: Optional[str] = None
+    """
+    A stable identifier for your end user, used for safety monitoring and abuse
+    detection.
     """
 
     store: Optional[bool] = None

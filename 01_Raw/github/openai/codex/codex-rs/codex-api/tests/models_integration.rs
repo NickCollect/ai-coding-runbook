@@ -148,7 +148,6 @@ async fn models_client_hits_models_endpoint() {
             availability_nux: None,
             apply_patch_tool_type: None,
             web_search_tool_type: Default::default(),
-            web_search_provider: None,
             truncation_policy: TruncationPolicyConfig::bytes(/*limit*/ 10_000),
             supports_image_detail_original: false,
             context_window: Some(272_000),
@@ -170,6 +169,7 @@ async fn models_client_hits_models_endpoint() {
             tool_mode: None,
             multi_agent_version: None,
             multi_agent_reasoning_effort: None,
+            multi_agent_tools_in_code_mode: None,
         }],
     };
 

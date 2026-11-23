@@ -19,6 +19,11 @@ use opentelemetry::metrics::Gauge;
 use opentelemetry::metrics::Histogram;
 use opentelemetry::metrics::Meter;
 use opentelemetry::metrics::MeterProvider as _;
+use opentelemetry_otlp::Compression;
+use opentelemetry_otlp::OTEL_EXPORTER_OTLP_COMPRESSION;
+use opentelemetry_otlp::OTEL_EXPORTER_OTLP_HEADERS;
+use opentelemetry_otlp::OTEL_EXPORTER_OTLP_METRICS_COMPRESSION;
+use opentelemetry_otlp::OTEL_EXPORTER_OTLP_METRICS_HEADERS;
 use opentelemetry_otlp::OTEL_EXPORTER_OTLP_METRICS_TIMEOUT;
 use opentelemetry_otlp::Protocol;
 use opentelemetry_otlp::WithExportConfig;
@@ -345,6 +350,12 @@ pub struct MetricsClient {
 impl MetricsClient {
     /// Build a metrics client from configuration and validate defaults.
     pub fn new(config: MetricsConfig) -> Result<Self> {
+        Self::new_with_transport::<true>(config)
+    }
+
+    pub(crate) fn new_with_transport<const ALLOW_GRPC: bool>(
+        config: MetricsConfig,
+    ) -> Result<Self> {
         let MetricsConfig {
             headers_helper,
             http_client_factory,
@@ -395,11 +406,12 @@ impl MetricsClient {
                         .as_deref(),
                 );
                 let exporter = crate::network_policy::PolicyExporter {
-                    exporter: build_otlp_metric_exporter(
+                    exporter: build_otlp_metric_exporter::<ALLOW_GRPC>(
                         exporter,
                         temporality,
                         &http_client_factory,
                         headers_helper,
+                        /*compression*/ None,
                     )?,
                     policy: http_client_factory.network_policy().clone(),
                 };
@@ -656,20 +668,37 @@ fn otlp_metrics_temporality(exporter: &OtelExporter, preference: Option<&str>) -
     }
 }
 
-fn build_otlp_metric_exporter(
+fn build_otlp_metric_exporter<const ALLOW_GRPC: bool>(
     exporter: OtelExporter,
     temporality: Temporality,
     factory: &codex_http_client::HttpClientFactory,
     headers_helper: Option<Arc<HeadersHelper>>,
+    compression: Option<Compression>,
 ) -> Result<opentelemetry_otlp::MetricExporter> {
     match exporter {
         OtelExporter::None => Err(MetricsError::ExporterDisabled),
-        OtelExporter::Statsig => build_otlp_metric_exporter(
-            crate::config::resolve_exporter(&OtelExporter::Statsig),
-            temporality,
-            factory,
-            /*headers_helper*/ None,
-        ),
+        OtelExporter::Statsig => {
+            // Leave explicit OTLP overrides to the SDK.
+            let compression = [
+                OTEL_EXPORTER_OTLP_METRICS_COMPRESSION,
+                OTEL_EXPORTER_OTLP_COMPRESSION,
+                OTEL_EXPORTER_OTLP_METRICS_HEADERS,
+                OTEL_EXPORTER_OTLP_HEADERS,
+            ]
+            .into_iter()
+            .all(|key| std::env::var_os(key).is_none())
+            .then_some(Compression::Zstd);
+            build_otlp_metric_exporter::<ALLOW_GRPC>(
+                crate::config::resolve_exporter(&OtelExporter::Statsig),
+                temporality,
+                factory,
+                /*headers_helper*/ None,
+                compression,
+            )
+        }
+        OtelExporter::OtlpGrpc { .. } if !ALLOW_GRPC => Err(MetricsError::InvalidConfig {
+            message: "this provider requires OTLP/HTTP for metrics".into(),
+        }),
         OtelExporter::OtlpGrpc {
             endpoint,
             headers,
@@ -719,6 +748,10 @@ fn build_otlp_metric_exporter(
                 .with_temporality(temporality)
                 .with_protocol(protocol)
                 .with_headers(headers);
+
+            if let Some(compression) = compression {
+                exporter_builder = exporter_builder.with_compression(compression);
+            }
 
             if headers_helper.is_some() || factory.network_policy().is_managed() {
                 let client = crate::otlp::build_async_http_client(

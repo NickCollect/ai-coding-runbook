@@ -48,7 +48,8 @@ fn instruction_updates_are_applied_once_in_retained_history() {
     for instructions in [Some("old instructions"), Some("new instructions"), None] {
         let mut world_state = WorldState::default();
         world_state.add_section(CollaborationModeState::from_collaboration_mode(
-            &collaboration_mode(ModeKind::Default, instructions),
+            Some(ModeKind::Default),
+            &settings(instructions),
             ResolvedModelMessages::bundled().collaboration_modes(),
             /*update_plan_enabled*/ true,
             /*custom_model_catalog*/ false,
@@ -92,6 +93,7 @@ fn catalog_collaboration_messages_select_mode_variant() {
         let mut model = model_info_from_slug("test-model");
         model.model_messages = Some(ModelMessages {
             collaboration_modes: Some(CollaborationModeMessages {
+                initial: None,
                 default: Some(default.to_string()),
                 plan: Some(plan.to_string()),
             }),
@@ -101,7 +103,8 @@ fn catalog_collaboration_messages_select_mode_variant() {
 
         for (mode, expected) in [(ModeKind::Default, default), (ModeKind::Plan, plan)] {
             let state = CollaborationModeState::from_collaboration_mode(
-                &collaboration_mode(mode, Some("legacy instructions")),
+                Some(mode),
+                &settings(Some("legacy instructions")),
                 messages,
                 /*update_plan_enabled*/ true,
                 /*custom_model_catalog*/ false,
@@ -119,7 +122,8 @@ fn empty_catalog_collaboration_message_suppresses_legacy_instructions() {
         ..ResolvedModelMessages::bundled().collaboration_modes()
     };
     let state = CollaborationModeState::from_collaboration_mode(
-        &collaboration_mode(ModeKind::Plan, Some("legacy plan instructions")),
+        Some(ModeKind::Plan),
+        &settings(Some("legacy plan instructions")),
         messages,
         /*update_plan_enabled*/ true,
         /*custom_model_catalog*/ false,
@@ -144,7 +148,8 @@ fn missing_catalog_collaboration_message_uses_legacy_instructions() {
     };
     for instructions in [Some("legacy plan instructions"), Some(""), None] {
         let state = CollaborationModeState::from_collaboration_mode(
-            &collaboration_mode(ModeKind::Plan, instructions),
+            Some(ModeKind::Plan),
+            &settings(instructions),
             messages,
             /*update_plan_enabled*/ true,
             /*custom_model_catalog*/ false,
@@ -168,7 +173,8 @@ fn legacy_collaboration_mode_snapshots_refresh_catalog_messages_once() {
                 ..ResolvedModelMessages::bundled().collaboration_modes()
             };
             let state = CollaborationModeState::from_collaboration_mode(
-                &collaboration_mode(ModeKind::Default, Some("stale legacy instructions")),
+                Some(ModeKind::Default),
+                &settings(Some("stale legacy instructions")),
                 messages,
                 /*update_plan_enabled*/ true,
                 /*custom_model_catalog*/ false,
@@ -200,20 +206,18 @@ fn legacy_collaboration_mode_snapshots_refresh_catalog_messages_once() {
     }
 }
 
-fn collaboration_mode(mode: ModeKind, instructions: Option<&str>) -> CollaborationMode {
-    CollaborationMode {
-        mode,
-        settings: Settings {
-            model: "test-model".to_string(),
-            reasoning_effort: None,
-            developer_instructions: instructions.map(str::to_string),
-        },
+fn settings(instructions: Option<&str>) -> Settings {
+    Settings {
+        model: "test-model".to_string(),
+        reasoning_effort: None,
+        developer_instructions: instructions.map(str::to_string),
     }
 }
 
 fn collaboration_mode_state(mode: ModeKind, instructions: &str) -> CollaborationModeState {
     CollaborationModeState::from_collaboration_mode(
-        &collaboration_mode(mode, Some(instructions)),
+        Some(mode),
+        &settings(Some(instructions)),
         ResolvedModelMessages::bundled().collaboration_modes(),
         /*update_plan_enabled*/ true,
         /*custom_model_catalog*/ false,

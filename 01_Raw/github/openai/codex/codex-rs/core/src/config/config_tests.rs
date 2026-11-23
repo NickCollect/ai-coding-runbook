@@ -492,7 +492,8 @@ web_search = true
         cfg.tools,
         Some(ToolsToml {
             web_search: None,
-            ..Default::default()
+            experimental_request_user_input: None,
+            update_plan: None,
         })
     );
 }
@@ -511,7 +512,8 @@ web_search = false
         cfg.tools,
         Some(ToolsToml {
             web_search: None,
-            ..Default::default()
+            experimental_request_user_input: None,
+            update_plan: None,
         })
     );
 }
@@ -528,8 +530,9 @@ fn tools_experimental_request_user_input_defaults_to_enabled() {
     assert_eq!(
         cfg.tools,
         Some(ToolsToml {
+            web_search: None,
             experimental_request_user_input: Some(ExperimentalRequestUserInput { enabled: true }),
-            ..Default::default()
+            update_plan: None,
         })
     );
 }
@@ -547,8 +550,9 @@ enabled = false
     assert_eq!(
         cfg.tools,
         Some(ToolsToml {
+            web_search: None,
             experimental_request_user_input: Some(ExperimentalRequestUserInput { enabled: false }),
-            ..Default::default()
+            update_plan: None,
         })
     );
 }
@@ -564,7 +568,6 @@ async fn load_config_resolves_experimental_request_user_input_enabled() -> std::
                     enabled: false,
                 }),
                 update_plan: None,
-                ..Default::default()
             }),
             ..ConfigToml::default()
         },
@@ -1668,6 +1671,7 @@ description = "Day-to-day workspace access."
 enabled = true
 proxy_url = "http://127.0.0.1:43128"
 enable_socks5 = false
+transparent_tcp = false
 allow_upstream_proxy = false
 mode = "full"
 
@@ -1693,6 +1697,7 @@ strip_request_headers = ["authorization"]
             entries: BTreeMap::from([(
                 "dev".to_string(),
                 PermissionProfileToml {
+                    credentials: None,
                     description: Some("Day-to-day workspace access.".to_string()),
                     extends: None,
                     workspace_roots: Some(WorkspaceRootsToml {
@@ -1722,6 +1727,7 @@ strip_request_headers = ["authorization"]
                         ]),
                     }),
                     network: Some(NetworkToml {
+                        transparent_tcp: Some(false),
                         enabled: Some(true),
                         proxy_url: Some("http://127.0.0.1:43128".to_string()),
                         enable_socks5: Some(false),
@@ -1925,6 +1931,7 @@ async fn permissions_profiles_proxy_policy_does_not_start_managed_network_proxy_
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: None,
                         workspace_roots: None,
@@ -1975,6 +1982,7 @@ async fn permissions_profiles_proxy_policy_starts_managed_network_proxy() -> std
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: None,
                         workspace_roots: None,
@@ -2131,6 +2139,7 @@ async fn network_proxy_feature_matrix_preserves_sandbox_network_semantics() -> s
                     entries: BTreeMap::from([(
                         "dev".to_string(),
                         PermissionProfileToml {
+                            credentials: None,
                             description: None,
                             extends: None,
                             workspace_roots: None,
@@ -2631,6 +2640,7 @@ async fn network_proxy_feature_uses_profile_network_proxy_settings() -> std::io:
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: None,
                         workspace_roots: None,
@@ -2695,6 +2705,7 @@ enabled = false
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: None,
                         workspace_roots: None,
@@ -2746,6 +2757,7 @@ async fn permissions_profiles_network_disabled_by_default_does_not_start_proxy()
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: None,
                         workspace_roots: None,
@@ -2795,6 +2807,7 @@ async fn default_permissions_profile_populates_runtime_permissions() -> std::io:
             entries: BTreeMap::from([(
                 "dev".to_string(),
                 PermissionProfileToml {
+                    credentials: None,
                     description: None,
                     extends: None,
                     workspace_roots: None,
@@ -2893,6 +2906,7 @@ async fn default_permissions_extended_profile_preserves_parent_metadata() -> std
                     (
                         "base".to_string(),
                         PermissionProfileToml {
+                            credentials: None,
                             description: None,
                             extends: None,
                             workspace_roots: None,
@@ -2909,6 +2923,7 @@ async fn default_permissions_extended_profile_preserves_parent_metadata() -> std
                     (
                         "dev".to_string(),
                         PermissionProfileToml {
+                            credentials: None,
                             description: None,
                             extends: Some("base".to_string()),
                             workspace_roots: None,
@@ -2960,6 +2975,50 @@ async fn permission_profile_override_populates_runtime_permissions() -> std::io:
         permission_profile
     );
     assert_eq!(config.permissions.active_permission_profile(), None);
+    Ok(())
+}
+
+#[tokio::test]
+async fn persisted_read_only_respects_read_allowlist_and_drops_default_proxy() -> anyhow::Result<()>
+{
+    let codex_home = TempDir::new()?;
+    let cwd = TempDir::new()?;
+    let config_toml = toml::from_str(
+        r#"
+default_permissions = "dev"
+
+[permissions.dev.filesystem]
+":workspace_roots" = "write"
+
+[permissions.dev.network]
+enabled = true
+"#,
+    )?;
+    let config = Config::load_from_base_config_with_overrides(
+        config_toml,
+        ConfigOverrides {
+            cwd: Some(cwd.path().to_path_buf()),
+            persisted_permission_profile: Some(PermissionProfile::read_only()),
+            ..Default::default()
+        },
+        codex_home.abs(),
+    )
+    .await?;
+    let (file_system, network) = config
+        .permissions
+        .effective_permission_profile()
+        .to_runtime_permissions();
+    let cwd = cwd.path();
+    assert_eq!(
+        (
+            file_system.can_read_local_path_with_cwd(cwd, cwd),
+            file_system.can_write_local_path_with_cwd(cwd, cwd),
+            file_system.can_read_local_path_with_cwd(codex_home.path(), cwd),
+            network,
+        ),
+        (true, false, false, NetworkSandboxPolicy::Restricted)
+    );
+    assert!(config.permissions.network.is_none());
     Ok(())
 }
 
@@ -3070,20 +3129,20 @@ extends = ":workspace"
 }
 
 #[tokio::test]
-async fn missing_persisted_permission_profile_id_uses_configured_default() -> std::io::Result<()> {
+async fn missing_persisted_permission_profile_id_requires_explicit_selection() -> std::io::Result<()>
+{
     let codex_home = TempDir::new()?;
     let cwd = TempDir::new()?;
     let project_key = cwd.path().to_string_lossy().to_string();
 
-    for (configured_default, configured_sandbox, expected_active_profile) in [
+    for (configured_default, configured_sandbox) in [
         (
-            Some(BUILT_IN_PERMISSION_PROFILE_READ_ONLY.to_string()),
+            Some(BUILT_IN_PERMISSION_PROFILE_DANGER_FULL_ACCESS.to_string()),
             None,
-            Some(ActivePermissionProfile::read_only()),
         ),
-        (None, Some(SandboxMode::ReadOnly), None),
+        (None, Some(SandboxMode::WorkspaceWrite)),
     ] {
-        let config = Config::load_from_base_config_with_overrides(
+        let error = Config::load_from_base_config_with_overrides(
             ConfigToml {
                 default_permissions: configured_default,
                 sandbox_mode: configured_sandbox,
@@ -3102,34 +3161,34 @@ async fn missing_persisted_permission_profile_id_uses_configured_default() -> st
             },
             codex_home.abs(),
         )
-        .await?;
+        .await
+        .expect_err("a missing saved profile must require an explicit selection");
 
-        assert_eq!(
-            config.permissions.active_permission_profile(),
-            expected_active_profile
-        );
-        assert_eq!(
-            config.permissions.effective_permission_profile(),
-            PermissionProfile::read_only()
+        assert_eq!(error.kind(), std::io::ErrorKind::InvalidInput);
+        assert!(
+            error
+                .to_string()
+                .contains("saved permission profile `removed-profile`")
         );
     }
     Ok(())
 }
 
 #[tokio::test]
-async fn invalid_persisted_permission_profile_uses_configured_default() -> std::io::Result<()> {
+async fn invalid_persisted_permission_profile_requires_explicit_selection() -> std::io::Result<()> {
     let codex_home = TempDir::new()?;
     let cwd = TempDir::new()?;
     for invalid_profile in [
         "extends = \"removed-parent\"",
         "extends = \":read-only\"\n\n[permissions.dev.filesystem]\nglob_scan_max_depth = 0",
+        "extends = \"base\"\n\n[permissions.base]\nextends = \"dev\"",
     ] {
         let config_toml = toml::from_str(&format!(
             "default_permissions = \":danger-full-access\"\n\n[permissions.dev]\n{invalid_profile}"
         ))
         .expect("permission profile config should deserialize");
 
-        let config = Config::load_from_base_config_with_overrides(
+        let error = Config::load_from_base_config_with_overrides(
             config_toml,
             ConfigOverrides {
                 cwd: Some(cwd.path().to_path_buf()),
@@ -3138,60 +3197,12 @@ async fn invalid_persisted_permission_profile_uses_configured_default() -> std::
             },
             codex_home.abs(),
         )
-        .await?;
+        .await
+        .expect_err("an invalid saved profile must require an explicit selection");
 
-        assert_eq!(
-            config.permissions.active_permission_profile(),
-            Some(ActivePermissionProfile::new(
-                BUILT_IN_PERMISSION_PROFILE_DANGER_FULL_ACCESS,
-            ))
-        );
-        assert_eq!(
-            config.permissions.effective_permission_profile(),
-            PermissionProfile::Disabled
-        );
+        assert_eq!(error.kind(), std::io::ErrorKind::InvalidInput);
+        assert!(error.to_string().contains("saved permission profile `dev`"));
     }
-    Ok(())
-}
-
-#[tokio::test]
-async fn persisted_profile_cycle_uses_configured_default() -> std::io::Result<()> {
-    let codex_home = TempDir::new()?;
-    let cwd = TempDir::new()?;
-    let config_toml = toml::from_str(
-        r#"
-default_permissions = ":danger-full-access"
-
-[permissions.dev]
-extends = "base"
-
-[permissions.base]
-extends = "dev"
-"#,
-    )
-    .expect("permission profile config should deserialize");
-
-    let config = Config::load_from_base_config_with_overrides(
-        config_toml,
-        ConfigOverrides {
-            cwd: Some(cwd.path().to_path_buf()),
-            persisted_permission_profile_id: Some("dev".to_string()),
-            ..Default::default()
-        },
-        codex_home.abs(),
-    )
-    .await?;
-
-    assert_eq!(
-        config.permissions.active_permission_profile(),
-        Some(ActivePermissionProfile::new(
-            BUILT_IN_PERMISSION_PROFILE_DANGER_FULL_ACCESS,
-        ))
-    );
-    assert_eq!(
-        config.permissions.effective_permission_profile(),
-        PermissionProfile::Disabled
-    );
     Ok(())
 }
 
@@ -3382,6 +3393,7 @@ async fn permission_profile_override_preserves_configured_network_policy_without
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: None,
                         workspace_roots: None,
@@ -3444,6 +3456,7 @@ async fn workspace_root_glob_none_compiles_to_filesystem_pattern_entry() -> std:
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: None,
                         workspace_roots: None,
@@ -3526,6 +3539,7 @@ async fn permissions_profiles_require_default_permissions() -> std::io::Result<(
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: None,
                         workspace_roots: None,
@@ -3655,6 +3669,7 @@ async fn workspace_profile_applies_rules_to_runtime_and_profile_workspace_roots(
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: None,
                         workspace_roots: Some(WorkspaceRootsToml {
@@ -3790,6 +3805,7 @@ async fn default_permissions_profile_can_extend_builtin_workspace() -> std::io::
                 entries: BTreeMap::from([(
                     "workspace-with-network".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: Some(BUILT_IN_PERMISSION_PROFILE_WORKSPACE.to_string()),
                         workspace_roots: None,
@@ -3891,6 +3907,7 @@ async fn default_permissions_profile_can_extend_builtin_read_only() -> std::io::
                 entries: BTreeMap::from([(
                     "read-only-with-network".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: Some(BUILT_IN_PERMISSION_PROFILE_READ_ONLY.to_string()),
                         workspace_roots: None,
@@ -4345,6 +4362,7 @@ async fn permissions_profiles_allow_direct_write_roots_outside_workspace_root()
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: Some("Workspace access.".to_string()),
                         extends: None,
                         workspace_roots: None,
@@ -4400,6 +4418,7 @@ async fn permissions_profiles_reject_nested_entries_for_non_workspace_roots() ->
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: None,
                         workspace_roots: None,
@@ -4463,6 +4482,7 @@ async fn load_workspace_permission_profile(
 #[tokio::test]
 async fn permissions_profiles_allow_unknown_special_paths() -> std::io::Result<()> {
     let config = load_workspace_permission_profile(PermissionProfileToml {
+        credentials: None,
         description: None,
         extends: None,
         workspace_roots: None,
@@ -4504,6 +4524,7 @@ async fn permissions_profiles_allow_unknown_special_paths() -> std::io::Result<(
 async fn permissions_profiles_allow_unknown_special_paths_with_nested_entries()
 -> std::io::Result<()> {
     let config = load_workspace_permission_profile(PermissionProfileToml {
+        credentials: None,
         description: None,
         extends: None,
         workspace_roots: None,
@@ -4544,6 +4565,7 @@ async fn permissions_profiles_allow_unknown_special_paths_with_nested_entries()
 #[tokio::test]
 async fn permissions_profiles_allow_missing_filesystem_with_warning() -> std::io::Result<()> {
     let config = load_workspace_permission_profile(PermissionProfileToml {
+        credentials: None,
         description: None,
         extends: None,
         workspace_roots: None,
@@ -4569,6 +4591,7 @@ async fn permissions_profiles_allow_missing_filesystem_with_warning() -> std::io
 #[tokio::test]
 async fn permissions_profiles_allow_empty_filesystem_with_warning() -> std::io::Result<()> {
     let config = load_workspace_permission_profile(PermissionProfileToml {
+        credentials: None,
         description: None,
         extends: None,
         workspace_roots: None,
@@ -4607,6 +4630,7 @@ async fn permissions_profiles_reject_workspace_root_parent_traversal() -> std::i
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: None,
                         workspace_roots: None,
@@ -4656,6 +4680,7 @@ async fn permissions_profiles_allow_network_enablement() -> std::io::Result<()> 
                 entries: BTreeMap::from([(
                     "dev".to_string(),
                     PermissionProfileToml {
+                        credentials: None,
                         description: None,
                         extends: None,
                         workspace_roots: None,
@@ -6499,7 +6524,16 @@ async fn add_dir_override_extends_workspace_writable_roots() -> std::io::Result<
 
     let overrides = ConfigOverrides {
         cwd: Some(frontend),
-        sandbox_mode: Some(SandboxMode::WorkspaceWrite),
+        // Preserve Windows coverage of the default read-only fallback.
+        sandbox_mode: cfg!(target_os = "windows").then_some(SandboxMode::WorkspaceWrite),
+        permission_profile: (!cfg!(target_os = "windows")).then_some(
+            PermissionProfile::workspace_write_with(
+                &[],
+                NetworkSandboxPolicy::Restricted,
+                /*exclude_tmpdir_env_var*/ true,
+                /*exclude_slash_tmp*/ true,
+            ),
+        ),
         additional_writable_roots: vec![PathBuf::from("../backend"), backend.clone()],
         ..Default::default()
     };
@@ -6737,6 +6771,7 @@ async fn memory_tool_makes_memories_root_readable_without_creating_or_widening_w
             &PermissionProfile::read_only()
         );
     } else {
+        assert!(file_system_policy.can_write_local_path_with_cwd(cwd.path(), cwd.path()));
         let writable_roots = config.permissions.user_visible_workspace_roots();
         assert!(!writable_roots.contains(&memories_root_abs));
     }
@@ -7030,11 +7065,18 @@ async fn feedback_enabled_defaults_to_true() -> std::io::Result<()> {
 }
 
 #[test]
-fn web_search_mode_defaults_to_none_if_unset() {
+fn web_search_mode_defaults_to_cached_if_unset() {
     let cfg = ConfigToml::default();
     let features = Features::with_defaults();
 
-    assert_eq!(resolve_web_search_mode(&cfg, &features), None);
+    assert_eq!(
+        resolve_web_search_mode(
+            &cfg,
+            &features,
+            &Constrained::allow_any(WebSearchMode::Cached),
+        ),
+        WebSearchMode::Cached,
+    );
 }
 
 #[test]
@@ -7047,8 +7089,12 @@ fn web_search_mode_prefers_config_over_legacy_flags() {
     features.enable(Feature::WebSearchCached);
 
     assert_eq!(
-        resolve_web_search_mode(&cfg, &features),
-        Some(WebSearchMode::Live)
+        resolve_web_search_mode(
+            &cfg,
+            &features,
+            &Constrained::allow_any(WebSearchMode::Cached),
+        ),
+        WebSearchMode::Live
     );
 }
 
@@ -7062,8 +7108,12 @@ fn web_search_mode_disabled_overrides_legacy_request() {
     features.enable(Feature::WebSearchRequest);
 
     assert_eq!(
-        resolve_web_search_mode(&cfg, &features),
-        Some(WebSearchMode::Disabled)
+        resolve_web_search_mode(
+            &cfg,
+            &features,
+            &Constrained::allow_any(WebSearchMode::Cached),
+        ),
+        WebSearchMode::Disabled
     );
 }
 
@@ -7072,6 +7122,7 @@ fn web_search_mode_for_turn_preserves_indexed_for_disabled_permissions() {
     let web_search_mode = Constrained::allow_any(WebSearchMode::Indexed);
     let mode = resolve_web_search_mode_for_turn(
         &web_search_mode,
+        /*web_search_mode_was_explicit*/ true,
         &PermissionProfile::Disabled,
         ProviderCapabilities::default(),
     );
@@ -7085,6 +7136,7 @@ fn web_search_mode_for_turn_uses_preference_for_read_only() {
     let permission_profile = PermissionProfile::read_only();
     let mode = resolve_web_search_mode_for_turn(
         &web_search_mode,
+        /*web_search_mode_was_explicit*/ true,
         &permission_profile,
         ProviderCapabilities::default(),
     );
@@ -7097,6 +7149,7 @@ fn web_search_mode_for_turn_prefers_live_for_disabled_permissions() {
     let web_search_mode = Constrained::allow_any(WebSearchMode::Cached);
     let mode = resolve_web_search_mode_for_turn(
         &web_search_mode,
+        /*web_search_mode_was_explicit*/ true,
         &PermissionProfile::Disabled,
         ProviderCapabilities::default(),
     );
@@ -7110,6 +7163,7 @@ fn web_search_mode_for_turn_falls_back_when_provider_disallows_external_web_acce
         let web_search_mode = Constrained::allow_any(preferred);
         let mode = resolve_web_search_mode_for_turn(
             &web_search_mode,
+            /*web_search_mode_was_explicit*/ true,
             &PermissionProfile::Disabled,
             ProviderCapabilities {
                 external_web_access: false,
@@ -7144,6 +7198,7 @@ fn web_search_mode_for_turn_disables_when_external_access_and_cached_are_disallo
         })?;
         let mode = resolve_web_search_mode_for_turn(
             &web_search_mode,
+            /*web_search_mode_was_explicit*/ true,
             &PermissionProfile::Disabled,
             ProviderCapabilities {
                 external_web_access: false,
@@ -7161,6 +7216,7 @@ fn web_search_mode_for_turn_respects_disabled_for_disabled_permissions() {
     let web_search_mode = Constrained::allow_any(WebSearchMode::Disabled);
     let mode = resolve_web_search_mode_for_turn(
         &web_search_mode,
+        /*web_search_mode_was_explicit*/ true,
         &PermissionProfile::Disabled,
         ProviderCapabilities::default(),
     );
@@ -7185,6 +7241,7 @@ fn web_search_mode_for_turn_falls_back_when_live_is_disallowed() -> anyhow::Resu
     })?;
     let mode = resolve_web_search_mode_for_turn(
         &web_search_mode,
+        /*web_search_mode_was_explicit*/ true,
         &PermissionProfile::Disabled,
         ProviderCapabilities::default(),
     );
@@ -7214,6 +7271,7 @@ fn web_search_mode_for_turn_does_not_implicitly_select_indexed() -> anyhow::Resu
     })?;
     let mode = resolve_web_search_mode_for_turn(
         &web_search_mode,
+        /*web_search_mode_was_explicit*/ true,
         &PermissionProfile::Disabled,
         ProviderCapabilities::default(),
     );
@@ -9002,6 +9060,39 @@ async fn load_config_uses_requirements_guardian_policy_config() -> std::io::Resu
     );
 
     Ok(())
+}
+
+#[test_case::test_case("", "longer than four bytes", "also longer than four bytes", None; "uncapped")]
+#[test_case::test_case("max_instruction_tokens = 1", "éé", "abcd", None; "limit_per_prompt")]
+#[test_case::test_case("max_instruction_tokens = 1", "ééx", "abcd", Some("housekeeper.routing_instructions"); "routing_over_limit")]
+#[test_case::test_case("max_instruction_tokens = 1", "éé", "abcde", Some("reviewer.retrieval_instructions"); "retrieval_over_limit")]
+fn guardian_v3_validates_each_custom_prompt(
+    cap: &str,
+    routing: &str,
+    retrieval: &str,
+    oversized_field: Option<&str>,
+) {
+    let cfg: ConfigToml = toml::from_str(&format!(
+        r#"
+        [features.guardianv3]
+        {cap}
+        [features.guardianv3.housekeeper]
+        routing_instructions = "{routing}"
+        [features.guardianv3.reviewer]
+        retrieval_instructions = "{retrieval}"
+    "#
+    ))
+    .unwrap();
+    let result = resolve_guardian_v3_config(cfg.features.unwrap().guardianv3);
+    match oversized_field {
+        Some(field) => assert_eq!(
+            result.unwrap_err().to_string(),
+            format!(
+                "features.guardianv3.{field} is 2 estimated tokens, exceeding max_instruction_tokens = 1"
+            )
+        ),
+        None => assert!(result.unwrap().is_some()),
+    }
 }
 
 #[test]
@@ -12237,6 +12328,7 @@ async fn requirements_web_search_mode_overrides_danger_full_access_default() -> 
     assert_eq!(
         resolve_web_search_mode_for_turn(
             &config.web_search_mode,
+            config.web_search_mode_was_explicit,
             &config.permissions.effective_permission_profile(),
             ProviderCapabilities::default(),
         ),
@@ -12858,6 +12950,7 @@ tool_namespace = "agents"
 hide_spawn_agent_metadata = true
 expose_spawn_agent_model_overrides = false
 wait_agent_enabled = false
+interrupt_at_item_boundary = true
 disable_native_tools = true
 disable_direct_message = true
 message_board_in_memory = true
@@ -12917,6 +13010,7 @@ max_concurrent_threads_per_session = 9
     assert!(!config.multi_agent_v2.preserve_fork_prefix);
     assert!(!config.multi_agent_v2.expose_spawn_agent_model_overrides);
     assert!(!config.multi_agent_v2.wait_agent_enabled);
+    assert!(config.multi_agent_v2.interrupt_at_item_boundary);
     assert!(config.multi_agent_v2.disable_native_tools);
     assert!(config.multi_agent_v2.disable_direct_message);
     assert!(config.multi_agent_v2.message_board_in_memory);
@@ -13045,9 +13139,10 @@ expose_spawn_agent_model_overrides = true
 }
 
 #[test]
-fn multi_agent_v2_disabled_native_tools_omit_default_roles() {
+fn multi_agent_v2_disabled_native_tools_keep_only_concurrency() {
     let mut config = resolve_multi_agent_v2_config(&ConfigToml::default());
     config.disable_native_tools = true;
+    config.max_concurrent_threads_per_session = 17;
     let mut messages = ResolvedModelMessages::bundled().multi_agent();
     for catalog_override in [false, true] {
         if catalog_override {
@@ -13057,7 +13152,13 @@ fn multi_agent_v2_disabled_native_tools_omit_default_roles() {
         let usage_hints = resolve_usage_hints(
             &config, messages, /*omit_update_plan_instructions*/ false,
         );
-        assert_eq!((usage_hints.root, usage_hints.subagent), (None, None));
+        let expected = Some(
+            crate::context::MultiAgentRoleInstructions::concurrency_only(
+                /*max_concurrency*/ 17,
+            ),
+        );
+        assert_eq!(usage_hints.root, expected);
+        assert_eq!(usage_hints.subagent, expected);
     }
 }
 

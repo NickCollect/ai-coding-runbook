@@ -17,6 +17,7 @@ use pretty_assertions::assert_eq;
 #[tokio::test]
 async fn pin_action_updates_shared_section_state() -> Result<()> {
     let mut app = make_test_app().await;
+    crate::app::test_support::use_modal_agents_overview(&mut app);
     let (tx, mut rx) = tokio::sync::mpsc::unbounded_channel();
     app.app_event_tx = AppEventSender::new(tx);
     let mut app_server = crate::start_embedded_app_server_for_picker(&app.config).await?;
@@ -364,6 +365,7 @@ async fn archiving_selects_the_next_displayed_task() -> Result<()> {
             for filtered in [false, true] {
                 let (mut app, mut rx, _op_rx) =
                     crate::app::tests::make_test_app_with_channels().await;
+                crate::app::test_support::use_modal_agents_overview(&mut app);
                 let mut app_server =
                     crate::start_embedded_app_server_for_picker(&app.config).await?;
                 let mut tui = crate::tui::test_support::make_test_tui()?;
@@ -407,7 +409,7 @@ async fn archiving_selects_the_next_displayed_task() -> Result<()> {
                         &title,
                         ThreadStatus::Idle,
                     );
-                    thread.cwd = test_path_buf(&format!("/tmp/project-{index}")).abs();
+                    thread.cwd = test_path_buf(&format!("/tmp/project-{index}")).abs().into();
                     thread.model = Some(format!("model-{index}"));
                     thread.updated_at = index as i64;
                     app.agents_overview.threads.insert(id, Some(thread.clone()));
@@ -515,6 +517,82 @@ async fn archiving_selects_the_next_displayed_task() -> Result<()> {
 }
 
 #[tokio::test]
+async fn archiving_keeps_another_backends_page_in_flight() -> Result<()> {
+    let mut app = make_test_app().await;
+    let mut app_server = crate::start_embedded_app_server_for_picker(&app.config).await?;
+    app.backend_registry.connect(&app_server);
+    let rollout_id = app_test_support::create_fake_rollout(
+        &app.config.codex_home,
+        "2025-01-01T12-00-00",
+        "2025-01-01T12:00:00Z",
+        "Local task",
+        Some(&app.config.model_provider_id),
+        /*git_info*/ None,
+    )
+    .map_err(color_eyre::eyre::Report::msg)?;
+    let thread_id = ThreadId::from_string(&rollout_id)?;
+    app.backend_registry
+        .observe(app_server.backend_id(), thread_id);
+    let foreign = crate::backend_id::BackendId::new();
+    let foreign_thread = ThreadId::new();
+    app.backend_registry.observe(foreign, foreign_thread);
+    let foreign_request = Uuid::new_v4();
+    app.agents_overview.active_refresh = Some((foreign_request, foreign));
+    app.agents_overview.refresh_show_more = true;
+    for id in [thread_id, foreign_thread] {
+        app.track_agents_overview_notification(&ServerNotification::ThreadStarted(
+            codex_app_server_protocol::ThreadStartedNotification {
+                thread: overview_thread(
+                    id,
+                    /*parent_thread_id*/ None,
+                    "Task",
+                    ThreadStatus::Idle,
+                ),
+            },
+        ));
+    }
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+    tui.pause_events();
+
+    Box::pin(app.run_agents_overview_action(
+        &mut tui,
+        &mut app_server,
+        thread_id,
+        AgentsOverviewAction::Archive,
+    ))
+    .await?;
+
+    let overview = &app.agents_overview;
+    assert!(overview.removed_threads.contains(&thread_id));
+    assert_eq!(overview.active_refresh, Some((foreign_request, foreign)));
+    assert!(overview.refresh_show_more);
+    assert!(!overview.refresh_notifications.contains_key(&thread_id));
+    assert!(overview.refresh_notifications.contains_key(&foreign_thread));
+    assert!(
+        overview
+            .pending_refresh_backends
+            .contains(&app_server.backend_id())
+    );
+    app.apply_agents_overview_thread_refresh(
+        &app_server,
+        foreign_request,
+        Ok(crate::app_event::AgentsOverviewThreadRefresh {
+            cleared_unread: Vec::new(),
+            threads: HashMap::new(),
+            last_messages: HashMap::new(),
+            recent_seed_complete: true,
+            discovery: None,
+            pinned_thread_ids: None,
+        }),
+    );
+    assert!(app.agents_overview.removed_threads.contains(&thread_id));
+    assert!(!app.agents_overview.threads.contains_key(&thread_id));
+    assert!(app.agents_overview.threads.contains_key(&foreign_thread));
+    app_server.shutdown().await?;
+    Ok(())
+}
+
+#[tokio::test]
 async fn external_removals_preserve_adjacent_selection() {
     for grouping in [
         AgentsOverviewGrouping::Project,
@@ -535,7 +613,7 @@ async fn external_removals_preserve_adjacent_selection() {
                         if index == 1 { "Other" } else { "Task" },
                         ThreadStatus::Idle,
                     );
-                    thread.cwd = test_path_buf(&format!("/tmp/project-{index}")).abs();
+                    thread.cwd = test_path_buf(&format!("/tmp/project-{index}")).abs().into();
                     thread.model = Some(format!("model-{index}"));
                     thread.updated_at = index as i64;
                     thread
@@ -628,7 +706,7 @@ async fn hiding_tasks_keeps_selection_adjacent_in_display_order() -> Result<()> 
                 ThreadStatus::Idle,
             );
             thread.name = Some(format!("{} {index}", thread.preview));
-            thread.cwd = test_path_buf(&format!("/tmp/project-{index}")).abs();
+            thread.cwd = test_path_buf(&format!("/tmp/project-{index}")).abs().into();
             thread.model = Some(format!("model-{index}"));
             thread.updated_at = index as i64;
             thread
@@ -933,6 +1011,7 @@ async fn lifecycle_removes_background_and_current_tasks_without_losing_the_dashb
         };
         let (mut app, mut rx, _op_rx) =
             Box::pin(crate::app::tests::make_test_app_with_channels()).await;
+        crate::app::test_support::use_modal_agents_overview(&mut app);
         let (release, gate) = tokio::sync::oneshot::channel();
         let (server, _completions) = start_streaming_sse_server(vec![vec![
             StreamingSseChunk {

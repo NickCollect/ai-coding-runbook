@@ -112,6 +112,7 @@ async fn reconnect_restores_history_permissions_and_resumes_unsent_input() -> Re
             let (notice, key) = crate::status::remote_connection::pending_server_version_notice(
                 &app.local_settings.tui,
                 &app.app_server_target,
+                app.config.features.enabled(Feature::DaemonUpdates),
                 /*server_home*/ None,
                 "2.1.0",
                 Some("2.0.0"),
@@ -188,6 +189,7 @@ async fn reconnect_restores_history_permissions_and_resumes_unsent_input() -> Re
                 app.app_event_tx.clone(),
                 app.dynamic_tool_status_updates.clone(),
                 /*worktrees*/ None,
+                /*sidebar_backend*/ None,
             )
             .await?,
         ));

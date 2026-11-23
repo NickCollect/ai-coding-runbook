@@ -433,6 +433,7 @@ fn mcp_runtime(
         runtime: handler,
         exposure,
         native_review: Default::default(),
+        is_trusted: false,
         model_spec: None,
     }
 }
@@ -1149,12 +1150,7 @@ async fn environment_tools_follow_the_step_context() {
             /*tool_suggest_candidates*/ None,
             /*wait_for_environment_tool_config*/ None,
         ),
-        super::hosted_model_tool_specs(
-            turn.as_ref(),
-            turn.model_info(),
-            turn.config.web_search_mode.value(),
-            &[],
-        ),
+        super::hosted_model_tool_specs(turn.as_ref(), turn.model_info(), &[]),
         &Default::default(),
     ));
 
@@ -1749,6 +1745,7 @@ async fn strict_namespace_ownership_requires_tool_namespace_inventory_opt_in() {
                 runtime: Arc::new(McpHandler::new(tool).expect("MCP tool spec should build")),
                 exposure,
                 native_review: Default::default(),
+                is_trusted: false,
                 model_spec: None,
             }
         })
@@ -2046,6 +2043,7 @@ async fn strict_tool_collisions_allow_multiple_tools_in_one_namespace() {
                     ),
                     exposure: ToolExposure::Direct,
                     native_review: Default::default(),
+                    is_trusted: false,
                     model_spec: None,
                 },
                 mcp_runtime("shared", "shared", "lookup", ToolExposure::Direct),
@@ -2089,6 +2087,7 @@ async fn relaxed_tool_collisions_preserve_first_nonempty_namespace_description()
                 runtime: Arc::new(McpHandler::new(tool).expect("MCP tool spec should build")),
                 exposure: ToolExposure::Direct,
                 native_review: Default::default(),
+                is_trusted: false,
                 model_spec: None,
             }
         };
@@ -2285,7 +2284,6 @@ async fn tool_search_cache_rebuilds_when_deferred_sources_change() {
         super::hosted_model_tool_specs(
             first_step_context.turn.as_ref(),
             first_step_context.turn.model_info(),
-            first_step_context.turn.config.web_search_mode.value(),
             &[],
         ),
         &cache,
@@ -2320,7 +2318,6 @@ async fn tool_search_cache_rebuilds_when_deferred_sources_change() {
         super::hosted_model_tool_specs(
             second_step_context.turn.as_ref(),
             second_step_context.turn.model_info(),
-            second_step_context.turn.config.web_search_mode.value(),
             &[],
         ),
         &cache,
@@ -2386,7 +2383,6 @@ async fn tool_search_cache_rebuilds_when_deferred_world_state_changes() {
             super::hosted_model_tool_specs(
                 step_context.turn.as_ref(),
                 step_context.turn.model_info(),
-                step_context.turn.config.web_search_mode.value(),
                 &[],
             ),
             &cache,
@@ -3145,6 +3141,55 @@ async fn multi_agent_v2_bedrock_workers_only_delegate_when_model_supports_v2() {
 }
 
 #[tokio::test]
+async fn multi_agent_catalog_code_mode_follows_tool_mode_and_preserves_runtime_fallback() {
+    for (catalog, non_code_mode_only, follows_tool_mode) in [
+        (None, true, false),
+        (None, false, true),
+        (Some(true), true, true),
+        (Some(false), false, false),
+    ] {
+        for tool_mode in [ToolMode::Direct, ToolMode::CodeMode, ToolMode::CodeModeOnly] {
+            let plan = probe(|turn| {
+                set_feature(turn, Feature::MultiAgentV2, /*enabled*/ true);
+                update_config(turn, |config| {
+                    config.multi_agent_v2.non_code_mode_only = non_code_mode_only;
+                    config.multi_agent_v2.tool_namespace = Some("agents".to_string());
+                });
+                update_turn_settings_for_test(turn, |settings| {
+                    let model = Arc::make_mut(&mut settings.model_info);
+                    model.tool_mode = Some(tool_mode);
+                    model.multi_agent_tools_in_code_mode = catalog;
+                });
+            })
+            .await;
+            for name in [
+                "spawn_agent",
+                "send_message",
+                "followup_task",
+                "wait_agent",
+                "interrupt_agent",
+                "list_agents",
+            ] {
+                assert_eq!(
+                    (
+                        plan.namespace_function_names("agents")
+                            .iter()
+                            .any(|tool| tool == name),
+                        plan.code_mode_tool_names
+                            .contains_key(&format!("agents__{name}")),
+                    ),
+                    (
+                        !follows_tool_mode || tool_mode != ToolMode::CodeModeOnly,
+                        follows_tool_mode && tool_mode != ToolMode::Direct,
+                    ),
+                    "{name}: catalog={catalog:?}, non_code_mode_only={non_code_mode_only}, mode={tool_mode:?}",
+                );
+            }
+        }
+    }
+}
+
+#[tokio::test]
 async fn code_mode_only_can_expose_namespaced_multi_agent_v2_as_normal_tools() {
     let plan = probe(|turn| {
         set_features(
@@ -3399,6 +3444,7 @@ async fn hosted_web_search_and_standalone_image_generation_follow_runtime_gates(
     standalone_web_search.assert_visible_lacks(&["web_search"]);
 
     let bedrock_cached_web_search = probe(|turn| {
+        set_web_search_mode(turn, WebSearchMode::Cached);
         use_bedrock_provider(turn);
         update_turn_settings_for_test(turn, |settings| {
             Arc::make_mut(&mut settings.model_info).web_search_tool_type = WebSearchToolType::Text;

@@ -205,12 +205,11 @@ impl Session {
             !new_window && self.preserve_parent_tool_declarations();
         if incremental_tools && !preserve_parent_tool_declarations {
             let specs = step_context.tool_router.model_visible_specs();
-            let specs = specs
-                .iter()
-                .filter(|tool| !matches!(tool, ToolSpec::WebSearch { .. }))
-                .cloned()
-                .collect::<Vec<_>>();
-            let definitions = codex_tools::create_tools_json_for_responses_lite(&specs)?;
+            let definitions = codex_tools::create_tools_json_for_responses_lite(
+                specs
+                    .iter()
+                    .filter(|tool| !matches!(tool, ToolSpec::WebSearch { .. })),
+            )?;
             let mut top_level = TopLevelToolsState::new(
                 model_messages.incremental_tools(),
                 definitions,
@@ -343,7 +342,8 @@ impl Session {
         }
         if turn_context.config.include_collaboration_mode_instructions {
             world_state.add_section(CollaborationModeState::from_collaboration_mode(
-                &settings.effective_collaboration_mode(),
+                step_context.active_collaboration_mode,
+                &settings.effective_collaboration_mode().settings,
                 model_messages.collaboration_modes(),
                 turn_context.config.update_plan_enabled,
                 turn_context.config.model_catalog.is_some(),
@@ -371,10 +371,18 @@ impl Session {
                 self.read_clock_for_context(turn_context, "environment_date")
                     .await?
                     .map(|current_time| {
-                        current_time
-                            .with_timezone(&chrono::Local)
-                            .format("%Y-%m-%d")
-                            .to_string()
+                        if turn_context
+                            .config
+                            .features
+                            .enabled(Feature::UtcEnvironmentDate)
+                        {
+                            current_time.format("%Y-%m-%d").to_string()
+                        } else {
+                            current_time
+                                .with_timezone(&chrono::Local)
+                                .format("%Y-%m-%d")
+                                .to_string()
+                        }
                     })
             } else {
                 None

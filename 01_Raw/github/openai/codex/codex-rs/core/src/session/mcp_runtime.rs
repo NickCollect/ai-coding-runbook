@@ -41,7 +41,6 @@ impl Session {
             || current.runtime_workspace_roots != next.runtime_workspace_roots
             || current.step_settings.approval_policy.value()
                 != next.step_settings.approval_policy.value()
-            || current.step_settings.approvals_reviewer != next.step_settings.approvals_reviewer
             || current.permission_profile() != next.permission_profile()
             || current.windows_sandbox_level != next.windows_sandbox_level
     }
@@ -85,7 +84,7 @@ impl Session {
             )
         };
         let config =
-            self.build_per_turn_config(&session_configuration, environments.local_selection());
+            Self::build_per_turn_config(&session_configuration, environments.local_selection());
         let local_process_cwd = config.cwd.to_path_buf();
 
         McpDesiredState {
@@ -107,7 +106,7 @@ impl Session {
         mcp_projection: McpRuntimeProjection,
         resolved_environments: &TurnEnvironmentSnapshot,
     ) -> anyhow::Result<()> {
-        let config = self.build_per_turn_config(
+        let config = Self::build_per_turn_config(
             session_configuration,
             resolved_environments.local_selection(),
         );

@@ -1,4 +1,5 @@
 //! Demand-driven history discovery. Each source retains its cursor and unshown rows.
+//! Cloud refresh walks the displayed history independently of Show more.
 //! Each new query scans the active backend from the start with its own paging cursor.
 
 use super::App;
@@ -15,8 +16,10 @@ use codex_app_server_protocol::ThreadListParams;
 use codex_app_server_protocol::ThreadListResponse;
 use codex_app_server_protocol::ThreadSortKey;
 use codex_app_server_protocol::ThreadSourceKind;
+use codex_protocol::ThreadId;
 use codex_protocol::protocol::SubAgentSource;
 use codex_state::PINNED_THREAD_SECTION_ID;
+use std::collections::HashSet;
 use std::collections::VecDeque;
 use std::sync::PoisonError;
 use tokio_util::task::AbortOnDropHandle;
@@ -140,6 +143,10 @@ impl Default for SourcePage {
 #[derive(Clone, Debug, Default)]
 pub(crate) struct AgentsOverviewDiscovery {
     sources: [SourcePage; 2],
+    // Oldest row delivered by Cloud history discovery.
+    cloud_frontier: Option<(i64, String)>,
+    cloud_refresh: Option<SourcePage>,
+    pub(super) fresh_cloud_page_ids: Vec<ThreadId>,
 }
 
 impl AgentsOverviewDiscovery {
@@ -149,11 +156,16 @@ impl AgentsOverviewDiscovery {
             .any(|source| !source.exhausted || !source.rows.is_empty())
     }
 
-    pub(super) async fn next_batch(
+    async fn next_batch(
         &mut self,
         handle: &AppServerRequestHandle,
         limit: usize,
+        search_sort: Option<HistorySort>,
     ) -> (Vec<(Thread, bool)>, bool) {
+        let timestamp = |thread: &Thread| match search_sort {
+            Some(sort) => sort.timestamp(thread),
+            None => thread.recency_at.unwrap_or(thread.updated_at),
+        };
         let [interactive, other] = &mut self.sources;
         // Cloud does not support filtering its task list to Exec and AppServer threads.
         if matches!(handle, AppServerRequestHandle::Cloud(_)) {
@@ -176,9 +188,8 @@ impl AgentsOverviewDiscovery {
                     source.rows.front().map(|(thread, _)| (index, thread))
                 })
                 .max_by(|(_, left), (_, right)| {
-                    left.recency_at
-                        .unwrap_or(left.updated_at)
-                        .cmp(&right.recency_at.unwrap_or(right.updated_at))
+                    timestamp(left)
+                        .cmp(&timestamp(right))
                         .then_with(|| left.id.cmp(&right.id))
                 })
                 .map(|(index, _)| index);
@@ -188,6 +199,77 @@ impl AgentsOverviewDiscovery {
             }
         }
         (rows, left && right)
+    }
+
+    pub(super) fn has_cloud_refresh_pending(&self) -> bool {
+        self.cloud_refresh.is_some()
+    }
+
+    pub(super) fn restart_cloud_refresh(&mut self) {
+        self.cloud_refresh = None;
+    }
+
+    pub(super) async fn next_overview_page(
+        &mut self,
+        handle: &AppServerRequestHandle,
+        limit: usize,
+        refresh_recent: bool,
+    ) -> (Vec<(Thread, bool)>, bool) {
+        if !matches!(handle, AppServerRequestHandle::Cloud(_)) {
+            return self.next_batch(handle, limit, /*search_sort*/ None).await;
+        }
+        // Cloud has one source. Fetch only what we can show, even for a partial refill.
+        self.sources[1].exhausted = true;
+        let mut page = if refresh_recent {
+            self.cloud_refresh.take().unwrap_or_default()
+        } else {
+            self.sources[0].clone()
+        };
+        page.page_size = limit as u32;
+        page.sort_key = ThreadSortKey::UpdatedAt;
+        if !page.fill(handle, Vec::new()).await {
+            if refresh_recent {
+                self.cloud_refresh = Some(SourcePage::default());
+            }
+            return (Vec::new(), false);
+        }
+
+        let mut rows: Vec<_> = page.rows.drain(..).collect();
+        if refresh_recent && let Some((oldest, id)) = &self.cloud_frontier {
+            // Stop at the last row reached by Show more. Its timestamp also
+            // bounds the pass if that row has moved up or been archived.
+            if !self.sources[0].exhausted {
+                let boundary = rows.iter().enumerate().find_map(|(index, (thread, _))| {
+                    if thread.updated_at < *oldest {
+                        Some(index)
+                    } else if thread.updated_at == *oldest && thread.id == *id {
+                        Some(index + 1)
+                    } else {
+                        None
+                    }
+                });
+                if let Some(end) = boundary {
+                    rows.truncate(end);
+                    page.exhausted = true;
+                }
+            }
+            if !page.exhausted {
+                self.cloud_refresh = Some(page);
+            }
+        } else if refresh_recent && rows.is_empty() && !page.exhausted {
+            self.cloud_refresh = Some(page);
+        } else {
+            // The first nonempty refresh of an empty list also seeds Show more.
+            if let Some((thread, _)) = rows.last() {
+                self.cloud_frontier = Some((thread.updated_at, thread.id.clone()));
+            }
+            self.sources[0] = page;
+        }
+        self.fresh_cloud_page_ids = rows
+            .iter()
+            .filter_map(|(thread, _)| ThreadId::from_string(&thread.id).ok())
+            .collect();
+        (rows, true)
     }
 }
 
@@ -257,9 +339,44 @@ impl SourcePage {
     }
 }
 
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub(super) enum HistorySort {
+    Created,
+    #[default]
+    Updated,
+}
+
+impl HistorySort {
+    pub(super) fn label(self) -> &'static str {
+        match self {
+            Self::Created => "Created",
+            Self::Updated => "Updated",
+        }
+    }
+
+    fn sort_key(self) -> ThreadSortKey {
+        match self {
+            Self::Created => ThreadSortKey::CreatedAt,
+            Self::Updated => ThreadSortKey::UpdatedAt,
+        }
+    }
+
+    pub(super) fn timestamp(self, thread: &Thread) -> i64 {
+        match self {
+            Self::Created => thread.created_at,
+            Self::Updated => thread.updated_at,
+        }
+    }
+}
+
 #[derive(Default)]
 pub(super) struct HistorySearch {
+    /// Identifies matches for this query across sort changes.
     pub(super) id: Uuid,
+    /// Changes on every restart so a late page cannot advance a different scan.
+    pub(super) scan_id: Uuid,
+    /// Visible before the sort changed, but not yet encountered in the new order.
+    pub(super) retained: HashSet<ThreadId>,
     pub(super) cursor: AgentsOverviewDiscovery,
     /// Requested number of matches visible under the active status filter.
     pub(super) target: usize,
@@ -270,10 +387,16 @@ pub(super) struct HistorySearch {
 
 pub(super) fn matches_query(thread: &Thread, query: &str) -> bool {
     let name = thread.name.as_deref().unwrap_or_default();
-    let cwd = thread.cwd.display();
+    let cwd = &thread.cwd;
     format!("{name} {} {cwd}", thread.preview)
         .to_lowercase()
         .contains(query)
+        || thread.id.to_lowercase().contains(query)
+        || thread
+            .git_info
+            .as_ref()
+            .and_then(|git| git.branch.as_deref())
+            .is_some_and(|branch| branch.to_lowercase().contains(query))
 }
 
 impl App {
@@ -288,17 +411,19 @@ impl App {
         let shared = &self.agents_overview.view_state;
         let mut state = shared.lock().unwrap_or_else(PoisonError::into_inner);
         let query = state.search.to_lowercase();
-        let Some(search) = state.history.as_mut().filter(|search| search.id == id) else {
+        let sort = state.search_sort;
+        let Some(search) = state.history.as_mut().filter(|search| search.scan_id == id) else {
             return;
         };
-        let first = self.agents_overview.search_id != id;
+        let first = self.agents_overview.search_id != search.id;
         let mut cursor = std::mem::take(&mut search.cursor);
         if first {
             self.agents_overview.search_matches.clear();
-            self.agents_overview.search_id = id;
+            self.agents_overview.search_id = search.id;
         }
         for source in &mut cursor.sources {
             source.page_size = 100;
+            source.sort_key = sort.sort_key();
         }
         if matches!(handle, AppServerRequestHandle::Cloud(_)) {
             cursor.sources[1].exhausted = true;
@@ -309,7 +434,7 @@ impl App {
                 tokio::time::sleep(std::time::Duration::from_millis(180)).await;
             }
             loop {
-                let (mut rows, ok) = cursor.next_batch(&handle, limit).await;
+                let (mut rows, ok) = cursor.next_batch(&handle, limit, Some(sort)).await;
                 rows.retain(|(thread, _)| matches_query(thread, &query));
                 if rows.is_empty() && ok && cursor.has_more() {
                     continue;
@@ -339,12 +464,15 @@ impl App {
             .view_state
             .lock()
             .unwrap_or_else(PoisonError::into_inner);
-        let Some(search) = state.history.as_mut().filter(|s| s.id == id) else {
+        let Some(search) = state.history.as_mut().filter(|s| s.scan_id == id) else {
             return;
         };
         for (thread, unread) in rows {
-            if let Ok(id) = codex_protocol::ThreadId::from_string(&thread.id)
-                && !overview.threads.get(&id).is_some_and(Option::is_some)
+            let Ok(id) = ThreadId::from_string(&thread.id) else {
+                continue;
+            };
+            search.retained.remove(&id);
+            if !overview.threads.get(&id).is_some_and(Option::is_some)
                 && !overview.removed_threads.contains(&id)
                 && !overview.hidden_threads.contains(&id)
                 && let std::collections::hash_map::Entry::Vacant(entry) =

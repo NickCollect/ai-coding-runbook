@@ -48,6 +48,7 @@ async fn start_server(
     server
         .start_dynamic_tool_mcp(
             config.clone(),
+            /*workspace_enabled*/ false,
             crate::app_event_sender::AppEventSender::new(events),
             status,
         )
@@ -141,6 +142,7 @@ async fn creation_attaches_to_original_task_and_survives_service_restart_scenari
     let saved_side = Box::pin(server.fork_side_thread(
         &LocalSettings::from(&config),
         config.clone(),
+        /*workspace_roots*/ None,
         started.session.thread_id,
         /*selected_profile*/ None,
         SideChatStorage::Attached,

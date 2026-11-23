@@ -6,12 +6,14 @@ mod process_metrics;
 mod response;
 mod runtime;
 mod session;
+mod shared_catalog;
 
 pub use description::CODE_MODE_PRAGMA_PREFIX;
 pub use description::CodeModeToolKind;
 pub use description::DeferredToolDiscovery;
 pub use description::EnabledToolMetadata;
 pub use description::ExecDefinition;
+pub use description::ExecDefinitions;
 pub use description::ImageDetailVisibility;
 pub use description::TOOL_SEARCH_GUIDANCE;
 pub use description::ToolDefinition;

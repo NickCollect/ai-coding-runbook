@@ -28,6 +28,7 @@ async fn reconnect_daemon_command_center_after_socket_replacement_without_a_conv
         (Some(ThreadId::new()), true, true),
     ] {
         let (mut app, mut events, _) = make_test_app_with_channels().await;
+        crate::app::test_support::use_modal_agents_overview(&mut app);
         app.keymap.app.open_agents = vec![crate::key_hint::alt(KeyCode::Char('a'))];
         let child = ThreadId::new();
         let child_recap = recap::RecapProgress {
@@ -159,8 +160,11 @@ async fn reconnect_daemon_command_center_after_socket_replacement_without_a_conv
         let stale_request = Uuid::new_v4();
         let refresh_owner = crate::backend_id::BackendId::new();
         app.agents_overview.active_refresh = Some((stale_request, refresh_owner));
-        let refresh = tokio::spawn(std::future::pending::<()>());
-        app.agents_overview.refresh_task = Some(refresh.abort_handle());
+        let (refresh_guard, refresh_dropped) = tokio::sync::oneshot::channel::<()>();
+        app.agents_overview.refresh_task = Some(tokio::spawn(async move {
+            let _guard = refresh_guard;
+            std::future::pending::<()>().await;
+        }));
         let directory = tempfile::tempdir()?;
         let socket_path = directory.path().join("daemon.sock");
         let listener = UnixListener::bind(&socket_path)?;
@@ -299,7 +303,7 @@ async fn reconnect_daemon_command_center_after_socket_replacement_without_a_conv
         );
         assert!(app.backend_registry.request_handle(parked_owner).is_some());
         assert!(app.agents_overview.last_messages.is_empty());
-        assert!(refresh.await.unwrap_err().is_cancelled());
+        assert!(refresh_dropped.await.is_err());
         assert_eq!(app.agents_overview.active_refresh, None);
         assert!(app.agents_overview.pending_refresh_backends.is_empty());
         app.apply_agents_overview_thread_refresh(

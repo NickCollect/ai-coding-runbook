@@ -2299,6 +2299,11 @@ pub struct AuthRuntimeConfig {
     pub auth_route_config: AuthRouteConfig,
 }
 
+enum NetworkPolicyOwnership {
+    Primary,
+    Shared,
+}
+
 impl Debug for AuthManager {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.debug_struct("AuthManager")
@@ -2694,6 +2699,12 @@ impl AuthManager {
                 .as_ref()
                 == Some(tokens)
         }))
+    }
+
+    /// Whether cached auth needs a proactive refresh.
+    pub fn needs_proactive_refresh(&self) -> bool {
+        self.auth_cached()
+            .is_some_and(|auth| Self::proactive_refresh_reason(&auth).is_some())
     }
 
     /// Current cached auth (clone). May be `None` if not logged in or load failed.
@@ -3118,7 +3129,15 @@ impl AuthManager {
             .map_err(RefreshTokenError::Transient)
     }
 
-    async fn try_load_managed_auth(
+    // Keep managed credential loading out of each caller's async state machine.
+    fn try_load_managed_auth<'a>(
+        &'a self,
+        cached_auth: Option<&'a CodexAuth>,
+    ) -> Pin<Box<dyn Future<Output = std::io::Result<Option<CodexAuth>>> + Send + 'a>> {
+        Box::pin(self.try_load_managed_auth_impl(cached_auth))
+    }
+
+    async fn try_load_managed_auth_impl(
         &self,
         cached_auth: Option<&CodexAuth>,
     ) -> std::io::Result<Option<CodexAuth>> {
@@ -3372,6 +3391,21 @@ impl AuthManager {
             auth_config,
             enable_codex_api_key_env,
             /*allowed_auth_modes*/ None,
+            NetworkPolicyOwnership::Primary,
+        )
+        .await
+    }
+
+    /// Loads local credentials without taking ownership of application network policy.
+    /// The primary account owner must invalidate and republish policy on account changes.
+    pub async fn shared_for_auxiliary_client(
+        auth_config: AuthConfig,
+    ) -> Result<Arc<Self>, AuthManagerInitializationError> {
+        Self::shared_from_auth_config_with_modes(
+            auth_config,
+            /*enable_codex_api_key_env*/ false,
+            /*allowed_auth_modes*/ None,
+            NetworkPolicyOwnership::Shared,
         )
         .await
     }
@@ -3400,6 +3434,7 @@ impl AuthManager {
             auth_config,
             enable_codex_api_key_env,
             Some(allowed_auth_modes),
+            NetworkPolicyOwnership::Primary,
         )
         .await
     }
@@ -3408,11 +3443,14 @@ impl AuthManager {
         auth_config: AuthConfig,
         enable_codex_api_key_env: bool,
         allowed_auth_modes: Option<Vec<AuthMode>>,
+        network_policy_ownership: NetworkPolicyOwnership,
     ) -> Result<Arc<Self>, AuthManagerInitializationError> {
         let external_auth = WorkloadIdentityExternalAuth::from_process_config(&auth_config)?;
         let mut manager =
             Self::new_from_auth_config(auth_config, enable_codex_api_key_env, allowed_auth_modes)
                 .await;
+        manager.owns_network_policy =
+            matches!(network_policy_ownership, NetworkPolicyOwnership::Primary);
         manager.workload_identity_selected = external_auth.is_some();
         let manager = Arc::new(manager);
         if let Some(external_auth) = external_auth {

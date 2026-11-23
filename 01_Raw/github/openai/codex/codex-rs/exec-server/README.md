@@ -470,6 +470,7 @@ callers must convert them to `file:` URIs before sending requests:
   reads also back `ExecutorFileSystem::read_file_stream`)
 - `fs/writeFile`
 - `fs/createDirectory`
+- `fs/getMetadataBatch` (requires `fsMetadataBatch`, returns metadata or an error for each input path in the same order)
 - `fs/getMetadata`
 - `fs/canonicalize`
 - `fs/readDirectory`
@@ -538,6 +539,14 @@ would require a separate fail-closed mode. A connection failure after selecting 
 upstream proxy is returned as an error, without retrying directly.
 
 ### Transparent TCP
+
+In managed `requirements.toml`, set `enabled = true` and `transparent_tcp = true` in the
+network policy table you already use (`[permissions.network]`, `[network_proxy]`, or
+`[experimental_network]`). Use one table. Managed SOCKS5 must be enabled.
+
+Capture defaults to off. When requested through configuration, the controller requires a Linux
+executor advertising `networkProxyTransparentTcp`. If the sandbox cannot open or configure
+`/dev/net/tun`, the launch fails before the command runs. To opt in at executor startup:
 
 ```sh
 codex exec-server --linux-sandbox-transparent-tcp --tcp-upstream-proxy proxy:8088

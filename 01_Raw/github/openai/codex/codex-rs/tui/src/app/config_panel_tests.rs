@@ -25,6 +25,66 @@ fn open_effects_editor(app: &mut App) {
     );
 }
 
+#[tokio::test]
+async fn reasoning_summary_saves_explicit_auto_for_new_chats() -> Result<()> {
+    use codex_protocol::config_types::ReasoningSummary;
+
+    let mut app = Box::pin(make_test_app()).await;
+    let profile = tempfile::tempdir()?;
+    let path = profile.path().join("work.config.toml");
+    std::fs::write(&path, "")?;
+    app.loader_overrides.user_config_path = Some(path.clone().abs());
+    app.loader_overrides.user_config_profile = Some("work".parse()?);
+    app.app_server_target = AppServerTarget::LocalDaemon {
+        allow_embedded_fallback: true,
+        endpoint: crate::RemoteAppServerEndpoint::UnixSocket {
+            socket_path: profile.path().join("daemon.sock").abs(),
+        },
+    };
+    app.config = app
+        .rebuild_config_for_cwd(app.config.cwd.to_path_buf())
+        .await?;
+    let server = Box::pin(crate::start_embedded_app_server_for_picker(&app.config)).await?;
+    let current = app.chat_widget.config_ref().model_reasoning_summary;
+    app.chat_widget.open_config_panel();
+    app.update_reasoning_summary(&server, /*requested*/ None)
+        .await;
+    assert_eq!(
+        app.chat_widget.config_panel_reasoning_summary,
+        Some((server.backend_id(), None))
+    );
+    assert!(
+        !std::fs::read_to_string(&app.local_settings.user_config_path)
+            .unwrap_or_default()
+            .contains("model_reasoning_summary")
+    );
+
+    app.update_reasoning_summary(&server, Some(ReasoningSummary::Auto))
+        .await;
+    let saved: toml::Value = toml::from_str(&std::fs::read_to_string(
+        &app.local_settings.user_config_path,
+    )?)?;
+    assert_eq!(saved["model_reasoning_summary"].as_str(), Some("auto"));
+    assert_eq!(
+        app.chat_widget.config_ref().model_reasoning_summary,
+        current
+    );
+    assert_eq!(
+        app.chat_widget.config_panel_reasoning_summary,
+        Some((server.backend_id(), Some(ReasoningSummary::Auto)))
+    );
+
+    std::fs::write(&path, "model_reasoning_summary = 'detailed'\n")?;
+    app.update_reasoning_summary(&server, Some(ReasoningSummary::Concise))
+        .await;
+    assert_eq!(
+        app.chat_widget.config_panel_reasoning_summary,
+        Some((server.backend_id(), Some(ReasoningSummary::Detailed)))
+    );
+    server.shutdown().await?;
+    Ok(())
+}
+
 fn next_config_preference(rx: &mut UnboundedReceiver<AppEvent>) -> Result<ConfigPreference> {
     let AppEvent::SaveConfigPreference(preference) = rx.try_recv()? else {
         panic!("expected config preference save");
@@ -142,6 +202,35 @@ async fn config_toggle_save_uses_host_config_and_applies_live_while_offline() ->
     );
 
     app_server.shutdown().await?;
+    Ok(())
+}
+
+#[tokio::test]
+async fn mouse_scroll_speed_save_updates_local_settings_and_config_file() -> Result<()> {
+    let mut app = Box::pin(make_test_app()).await;
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+    app.save_config_preference(&mut tui, ConfigPreference::MouseScrollSpeed(1.5))
+        .await;
+    app.prepare_conversation(
+        ratatui::layout::Rect::new(
+            /*x*/ 0, /*y*/ 0, /*width*/ 80, /*height*/ 24,
+        ),
+        /*conversation_inset*/ None,
+        &tui.frame_requester(),
+    );
+
+    let saved: toml::Value = toml::from_str(&std::fs::read_to_string(
+        &app.local_settings.user_config_path,
+    )?)?;
+    assert_eq!(
+        (
+            saved["tui"]["mouse_scroll_speed"].as_float(),
+            app.local_settings.tui.mouse_scroll_speed,
+            app.chat_widget.config_panel_tui.mouse_scroll_speed,
+            app.transcript_view.mouse_scroll_speed,
+        ),
+        (Some(1.5), Some(1.5), Some(1.5), 1.5),
+    );
     Ok(())
 }
 

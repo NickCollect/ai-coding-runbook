@@ -141,6 +141,7 @@ pub(crate) async fn start_if_needed(
         .request_typed(ClientRequest::GatewayOAuthLogin {
             request_id: server.next_request_id(),
             params: Some(GatewayOAuthLoginParams {
+                target: None,
                 device_auth: true,
                 model_provider: Some(state.provider_id),
             }),
@@ -206,6 +207,7 @@ pub(crate) async fn handle_event_during_device_login(
             Ok(false)
         }
         AppServerEvent::ServerNotification(_)
+        | AppServerEvent::CloudInventoryChanged(_)
         | AppServerEvent::ThreadStreamDisconnected(_)
         | AppServerEvent::ThreadStreamReconnected(_) => Ok(false),
     }

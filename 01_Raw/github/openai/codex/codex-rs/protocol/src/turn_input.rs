@@ -27,9 +27,9 @@ pub enum SuspendTurnOutcome {
 
 /// Input consumed by a regular turn.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub enum TurnInput {
+pub enum TurnInput<I = UserInput> {
     UserInput {
-        content: Vec<UserInput>,
+        content: Vec<I>,
         client_id: Option<String>,
     },
     ResponseItem(ResponseItem),
@@ -91,6 +91,11 @@ pub enum ItemRetention {
     Default,
     /// Carry the item into later context windows and newly spawned children.
     Always,
+    /// Carry the item into later windows of this thread and exclude it from spawned agents.
+    AlwaysInThread,
+    /// Carry the item into spawned agents while it is in the parent's context.
+    /// Each thread applies ordinary retention when its own context window changes.
+    AlwaysInChildren,
 }
 
 impl From<ResponseItem> for InjectedResponseItem {
@@ -107,8 +112,8 @@ impl From<ResponseItem> for InjectedResponseItem {
 /// Callers choose start-or-steer, idle-start, or steer-only behavior through
 /// the corresponding `CodexThread` method.
 #[derive(Clone, Debug)]
-pub struct TurnInputRequest {
-    pub input: TurnInput,
+pub struct TurnInputRequest<I = UserInput> {
+    pub input: TurnInput<I>,
     /// Optional host-assigned UUID for the Responses message created from [`TurnInput::UserInput`].
     /// Ignored for all other inputs, including raw user-role Responses items.
     pub user_item_uuid: Option<uuid::Uuid>,
@@ -117,7 +122,8 @@ pub struct TurnInputRequest {
     pub user_input_extension_data: BTreeMap<String, Value>,
     pub thread_settings: ThreadSettingsOverrides,
     pub start: TurnStartOptions,
-    pub additional_context: BTreeMap<String, AdditionalContextEntry>,
+    /// Replaces submitted client context when present; omission preserves it and an empty map clears it.
+    pub additional_context: Option<BTreeMap<String, AdditionalContextEntry>>,
     pub responsesapi_client_metadata: ResponsesApiClientMetadataUpdate,
     pub trace: Option<W3cTraceContext>,
 }
@@ -169,23 +175,23 @@ pub struct RecoverTurnRequest {
     pub cyber_access_program: Option<CyberAccessProgram>,
 }
 
-impl TurnInputRequest {
+impl<I> TurnInputRequest<I> {
     /// Creates turn input that can be passed to one of the submission methods.
-    pub fn new(input: TurnInput) -> Self {
+    pub fn new(input: TurnInput<I>) -> Self {
         Self {
             input,
             user_item_uuid: None,
             user_input_extension_data: BTreeMap::new(),
             thread_settings: ThreadSettingsOverrides::default(),
             start: TurnStartOptions::default(),
-            additional_context: BTreeMap::new(),
+            additional_context: None,
             responsesapi_client_metadata: ResponsesApiClientMetadataUpdate::default(),
             trace: None,
         }
     }
 
     /// Creates ordinary user input without a client-provided message id.
-    pub fn user_input(content: Vec<UserInput>) -> Self {
+    pub fn user_input(content: Vec<I>) -> Self {
         Self::new(TurnInput::UserInput {
             content,
             client_id: None,
@@ -209,12 +215,12 @@ impl TurnInputRequest {
         self
     }
 
-    /// Context merged whether this request starts or steers.
+    /// Context submitted with the input whether this request starts or steers.
     pub fn with_additional_context(
         mut self,
-        additional_context: BTreeMap<String, AdditionalContextEntry>,
+        additional_context: impl Into<Option<BTreeMap<String, AdditionalContextEntry>>>,
     ) -> Self {
-        self.additional_context = additional_context;
+        self.additional_context = additional_context.into();
         self
     }
 
@@ -307,6 +313,9 @@ pub struct TurnStartOptions {
     /// Explicit cyber treatment for this turn. Omission preserves the backend's
     /// automatic behavior.
     pub cyber_access_program: Option<CyberAccessProgram>,
+    /// Client attribution copied when spawning a child. Applied only to its initial
+    /// turn; later parent updates do not change this snapshot.
+    pub inherited_client_metadata: HashMap<String, String>,
 }
 
 /// What Core did with input submitted through `start_or_steer_turn`.

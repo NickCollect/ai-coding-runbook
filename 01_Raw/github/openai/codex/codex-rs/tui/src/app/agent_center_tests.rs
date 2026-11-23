@@ -1,8 +1,15 @@
 //! Dashboard rows, paging, metadata clipping and status-filter regressions.
 
 use super::*;
+use crate::app::owned_transcript::tests::buffer_text;
 use assert_matches::assert_matches;
 use pretty_assertions::assert_eq;
+
+fn painted_row(text: &str, label: &str) -> u16 {
+    text.lines()
+        .position(|line| line.contains(label))
+        .unwrap_or_else(|| panic!("missing {label:?} in rendered screen:\n{text}")) as u16
+}
 
 pub(super) fn screen(view: &AgentsOverviewView, width: u16, height: u16) -> String {
     let area = Rect::new(/*x*/ 0, /*y*/ 0, width, height);
@@ -149,7 +156,8 @@ async fn failed_background_worker_only_needs_attention_for_a_pending_request() {
 
 #[tokio::test]
 async fn live_center_sorts_arrivals_and_status_transitions_by_update_time() {
-    let app = make_test_app().await;
+    let (app, mut events, _ops) = make_test_app_with_channels().await;
+    app.agents_overview.view_state.lock().unwrap().grouping = AgentsOverviewGrouping::Status;
     let [alpha, bravo, charlie, delta, child] = [1, 2, 3, 4, 5].map(ThreadId::from_u128);
     let working = ThreadStatus::Active {
         active_flags: vec![],
@@ -196,31 +204,79 @@ async fn live_center_sorts_arrivals_and_status_transitions_by_update_time() {
         vec![delta, alpha, bravo, charlie]
     );
     threads[1].status = ThreadStatus::Idle;
-    let view = app.agents_overview_view(threads.clone(), Some(bravo));
+    let mut view = app.agents_overview_view(threads.clone(), Some(bravo));
+    view.dock_focused = Some(true);
     assert_eq!(view.thread_ids(), vec![delta, alpha, bravo, charlie]);
     let selected = &view.rows[view.selected_index().unwrap()];
     assert_eq!(selected.group, AgentsOverviewGroup::Ready);
     assert!(selected.details.lines.is_empty());
+    // Capture the actual compact rows before the refresh moves Alpha to a different index.
+    let area = Rect::new(
+        /*x*/ 17, /*y*/ 8, /*width*/ 48, /*height*/ 28,
+    );
+    let mut buf = ratatui::buffer::Buffer::empty(area);
+    view.render(area, &mut buf);
+    let text = buffer_text(&buf);
+    let alpha_y = painted_row(&text, "Alpha");
+    assert_eq!(
+        text.lines().nth(usize::from(alpha_y) + 1).unwrap().trim(),
+        "Working"
+    );
+    let point = |y| (area.right() - 3, area.y + y).into();
+
     // A request from a descendant can still bring its idle parent to the top.
     threads.last_mut().unwrap().status = ThreadStatus::Active {
         active_flags: vec![ThreadActiveFlag::WaitingOnApproval],
     };
-    assert_eq!(
-        app.agents_overview_view(threads.clone(), Some(bravo))
-            .thread_ids(),
-        vec![bravo, delta, alpha, charlie]
+    let mut view = app.agents_overview_view(threads.clone(), Some(bravo));
+    assert_eq!(view.thread_ids(), vec![bravo, delta, alpha, charlie]);
+    // A heading and a blank row in the list don't select or activate a task.
+    let heading = painted_row(&text, "Working  ");
+    let blank = area.height - 3;
+    assert!(
+        text.lines()
+            .nth(usize::from(blank))
+            .unwrap()
+            .trim()
+            .is_empty()
     );
+    for y in [heading, blank] {
+        view.click_row(point(y));
+    }
+    assert_eq!(view.rows[view.selected_index().unwrap()].thread_id, bravo);
+    assert!(events.try_recv().is_err());
+
+    view.handle_key_event(KeyCode::Char('?').into());
+    view.click_row(point(alpha_y));
+    assert_eq!(view.rows[view.selected_index().unwrap()].thread_id, bravo);
+    assert!(events.try_recv().is_err());
+    view.handle_key_event(KeyCode::Esc.into());
+    for y in [alpha_y, alpha_y + 1] {
+        view.handle_key_event(KeyCode::Char('/').into());
+        view.handle_paste("Alpha".into());
+        assert_matches!(events.try_recv(), Ok(AppEvent::SearchAgentsOverview(..)));
+        view.click_row(point(y));
+        assert_matches!(
+            events.try_recv(),
+            Ok(AppEvent::SelectAgentsOverviewThread { thread_id }) if thread_id == alpha
+        );
+    }
+    view.handle_key_event(KeyCode::Tab.into()); // Needs you hides Alpha before the next paint.
+    view.click_row(point(alpha_y));
+    assert_eq!(view.rows[view.selected_index().unwrap()].thread_id, bravo);
+    assert!(events.try_recv().is_err());
+    view.handle_key_event(KeyCode::BackTab.into());
     threads.pop();
     let view = app.agents_overview_view(threads.clone(), Some(bravo));
     assert_eq!(view.thread_ids(), vec![delta, alpha, bravo, charlie]);
     assert_eq!(view.rows[view.selected_index().unwrap()].thread_id, bravo);
     // Rediscovery restores the task to its position by update time.
     let removed = threads.remove(/*index*/ 0);
-    assert_eq!(
-        app.agents_overview_view(threads.clone(), Some(bravo))
-            .thread_ids(),
-        vec![delta, bravo, charlie]
-    );
+    let mut view = app.agents_overview_view(threads.clone(), Some(bravo));
+    assert_eq!(view.thread_ids(), vec![delta, bravo, charlie]);
+    view.click_row(point(alpha_y));
+    assert_eq!(view.rows[view.selected_index().unwrap()].thread_id, bravo);
+    assert!(events.try_recv().is_err());
     threads.push(removed);
     assert_eq!(
         app.agents_overview_view(threads, Some(bravo)).thread_ids(),
@@ -363,11 +419,11 @@ async fn live_center_columns() {
         .insert(ThreadId::from_u128(/*value*/ 47));
     let mut view = app.agents_overview_view(threads, Some(current));
     let narrow = screen(&view, /*width*/ 50, /*height*/ 24);
-    assert!(narrow.contains("● Error: ☁︎ Failed task"));
+    assert!(narrow.contains("● Error: ☁️  Failed task"));
     assert!(
         narrow
             .lines()
-            .any(|line| { line.contains("☁︎ A longer task title") && line.contains('…') })
+            .any(|line| { line.contains("☁️  A longer task title") && line.contains('…') })
     );
     insta::assert_snapshot!(screen(&view, /*width*/ 160, /*height*/ 22));
     view.pinned_thread_ranks = None;
@@ -415,7 +471,9 @@ async fn live_center_pages_visible_rows_without_wrapping() {
                 );
                 thread.updated_at -= index as i64;
                 if index >= 10 {
-                    thread.cwd = test_path_buf("/tmp/second-project").abs();
+                    thread.cwd = test_path_buf(&format!("/tmp/second-project-{index:02}"))
+                        .abs()
+                        .into();
                 }
                 thread
             })
@@ -442,10 +500,17 @@ async fn live_center_pages_visible_rows_without_wrapping() {
         assert!(view.selected_index().unwrap() < page_down);
         view.handle_key_event(KeyCode::PageUp.into());
         assert_eq!(view.rows[view.selected_index().unwrap()].thread_id, first);
-        // Repeated pages eventually reach the last filtered task and stay there.
+        // Page through a dense group followed by one-task groups in both layouts.
+        let mut pages = screen(&view, /*width*/ 110, /*height*/ 18);
         for _ in 0..count {
             view.handle_key_event(KeyEvent::new(KeyCode::Char('f'), KeyModifiers::CONTROL));
-            screen(&view, /*width*/ 110, /*height*/ 18);
+            pages.push_str(&screen(&view, /*width*/ 110, /*height*/ 18));
+        }
+        for index in 0..count {
+            assert!(
+                pages.contains(&format!("Paging task {index:02}")),
+                "skipped task {index} paging down"
+            );
         }
         let last = view.rows[view.selected_index().unwrap()].thread_id;
         view.handle_key_event(KeyCode::PageDown.into());
@@ -453,13 +518,99 @@ async fn live_center_pages_visible_rows_without_wrapping() {
             (last, view.rows[view.selected_index().unwrap()].thread_id),
             (ThreadId::from_u128(100 + count - 1), last)
         );
-        view.handle_key_event(KeyCode::Down.into());
-        assert!(
-            screen(&view, /*width*/ 110, /*height*/ 18)
-                .lines()
-                .any(|line| line.trim_start().starts_with("/tmp/project"))
-        );
+        let mut pages = screen(&view, /*width*/ 48, /*height*/ 18);
+        for _ in 0..count {
+            view.handle_key_event(KeyCode::PageUp.into());
+            pages.push_str(&screen(&view, /*width*/ 48, /*height*/ 18));
+        }
+        assert_eq!(view.rows[view.selected_index().unwrap()].thread_id, first);
+        for index in 0..count {
+            assert!(
+                pages.contains(&format!("Paging task {index:02}")),
+                "skipped task {index} paging up"
+            );
+        }
     }
+}
+
+#[tokio::test]
+async fn live_center_pages_full_task_rows_and_restores_the_first_heading() {
+    let app = make_test_app().await;
+    let ids = (100..130).map(ThreadId::from_u128).collect::<Vec<_>>();
+    let threads = ids
+        .iter()
+        .enumerate()
+        .map(|(index, &id)| {
+            let mut thread = overview_thread(
+                id,
+                /*parent_thread_id*/ None,
+                &format!("Paging task {}", index + 1),
+                ThreadStatus::Idle,
+            );
+            thread.updated_at -= index as i64;
+            thread
+        })
+        .collect::<Vec<_>>();
+    let selected = |view: &AgentsOverviewView| view.rows[view.selected_index().unwrap()].thread_id;
+    let mut view = app.agents_overview_view(threads.clone(), Some(ids[9]));
+    let first_page = screen(&view, /*width*/ 80, /*height*/ 16);
+    assert!(first_page.contains("Paging task 1 "));
+    assert!(first_page.contains("Paging task 10 "));
+    for expected in [ids[19], ids[29]] {
+        view.handle_key_event(KeyCode::PageDown.into());
+        assert_eq!(selected(&view), expected);
+    }
+
+    let mut view = app.agents_overview_view(threads, Some(ids[0]));
+    let initial = screen(&view, /*width*/ 80, /*height*/ 16);
+    view.handle_key_event(KeyCode::PageDown.into());
+    assert!(screen(&view, /*width*/ 80, /*height*/ 16).contains('↑'));
+    view.handle_key_event(KeyCode::PageUp.into());
+    assert_eq!(selected(&view), ids[0]);
+    assert_eq!(screen(&view, /*width*/ 80, /*height*/ 16), initial);
+}
+
+#[tokio::test]
+async fn live_center_navigates_sections() {
+    let mut app = make_test_app().await;
+    let config: TuiKeymap =
+        toml::from_str("[agents]\nnext_group = ['shift-down', 'shift-j', 'f8']").unwrap();
+    app.keymap = RuntimeKeymap::from_config(&config).unwrap();
+    let threads = (0..6)
+        .map(|index| {
+            let mut thread = overview_thread(
+                ThreadId::from_u128(100 + index),
+                /*parent_thread_id*/ None,
+                &format!("Section task {index}"),
+                ThreadStatus::Idle,
+            );
+            thread.updated_at -= index as i64;
+            thread.cwd = test_path_buf(&format!("/tmp/project-{}", index / 2))
+                .abs()
+                .into();
+            thread
+        })
+        .collect();
+    let mut view = app.agents_overview_view(threads, Some(ThreadId::from_u128(/*value*/ 101)));
+    let selected = |view: &AgentsOverviewView| view.rows[view.selected_index().unwrap()].thread_id;
+    for (key, expected) in [
+        (KeyEvent::new(KeyCode::Down, KeyModifiers::SHIFT), 102),
+        (KeyCode::Char('J').into(), 104),
+        (KeyEvent::new(KeyCode::Char('j'), KeyModifiers::SHIFT), 104),
+        (KeyEvent::new(KeyCode::Up, KeyModifiers::SHIFT), 102),
+        (KeyCode::Char('K').into(), 100),
+        (KeyEvent::new(KeyCode::Char('k'), KeyModifiers::SHIFT), 100),
+    ] {
+        view.handle_key_event(key);
+        assert_eq!(selected(&view), ThreadId::from_u128(expected));
+    }
+    view.handle_key_event(KeyCode::Char('/').into());
+    view.handle_key_event(KeyCode::Char('J').into());
+    assert!(screen(&view, /*width*/ 80, /*height*/ 18).contains("Search › J"));
+    view.handle_key_event(KeyCode::Esc.into());
+    view.handle_key_event(KeyCode::Char('r').into());
+    view.handle_key_event(KeyCode::F(8).into());
+    assert_eq!(selected(&view), ThreadId::from_u128(/*value*/ 100));
 }
 
 #[tokio::test]
@@ -795,15 +946,18 @@ toggle_pin = 'z p'
 #[tokio::test]
 async fn live_center_search_row_appears_only_while_editing() {
     let app = make_test_app().await;
-    let mut view = app.agents_overview_view(
-        vec![overview_thread(
-            ThreadId::from_u128(/*value*/ 42),
-            /*parent_thread_id*/ None,
-            "Task to find",
-            ThreadStatus::Idle,
-        )],
-        /*selected_thread_id*/ None,
+    let mut thread = overview_thread(
+        ThreadId::from_u128(/*value*/ 0xabcdef),
+        /*parent_thread_id*/ None,
+        "Task to find",
+        ThreadStatus::Idle,
     );
+    thread.git_info = Some(codex_app_server_protocol::GitInfo {
+        sha: None,
+        branch: Some("Fix/Resume".to_string()),
+        origin_url: None,
+    });
+    let mut view = app.agents_overview_view(vec![thread], /*selected_thread_id*/ None);
     let area = Rect::new(
         /*x*/ 0, /*y*/ 0, /*width*/ 88, /*height*/ 16,
     );
@@ -825,8 +979,20 @@ async fn live_center_search_row_appears_only_while_editing() {
             "live_center_search_active",
             screen(&view, area.width, area.height)
         );
+        view.handle_key_event(KeyCode::Tab.into());
+        let created = screen(&view, area.width, area.height);
+        assert!(created.contains("Status  Created"), "{created}");
+        assert!(created.contains("Tab sort (Created)"), "{created}");
+        view.handle_key_event(KeyCode::Tab.into());
         view.handle_key_event(KeyCode::Esc.into());
         assert_eq!(screen(&view, area.width, area.height), idle);
+    }
+
+    for query in ["FIX/RES", "ABCDEF", "find Task"] {
+        view.handle_key_event(KeyCode::Char('/').into());
+        view.handle_paste(query.into());
+        assert!(screen(&view, area.width, area.height).contains("Task to find"));
+        view.handle_key_event(KeyCode::Esc.into());
     }
 }
 
@@ -925,6 +1091,7 @@ async fn live_center_show_more_navigation_search_and_loading() {
     {
         let mut state = app.agents_overview.view_state.lock().unwrap();
         state.loading = false;
+        state.has_more = false;
         state.refresh_failed = true;
     }
     view.handle_key_event(KeyCode::Char('/').into());
@@ -943,7 +1110,9 @@ async fn live_center_show_more_navigation_search_and_loading() {
         "live_center_show_more_search_retry",
         screen(&view, /*width*/ 80, /*height*/ 12)
     );
-    view.handle_key_event(KeyCode::Enter.into());
+    let rendered = screen(&view, /*width*/ 80, /*height*/ 12);
+    let retry = painted_row(&rendered, "Show more (retry)");
+    view.click_row(ratatui::layout::Position::new(/*x*/ 6, retry));
     let id = assert_matches!(rx.try_recv(), Ok(AppEvent::SearchAgentsOverview(id, _)) => id);
     app.apply_agents_overview_search_page(
         id,
@@ -953,4 +1122,365 @@ async fn live_center_show_more_navigation_search_and_loading() {
         /*ok*/ true,
     );
     insta::assert_snapshot!(screen(&view, /*width*/ 80, /*height*/ 12).lines().nth(6).unwrap(), @"  ›   Show more matches");
+}
+
+#[tokio::test]
+async fn workspace_navigation_preserves_the_draft_and_reading_position() -> Result<()> {
+    use crate::app::owned_transcript::tests::attach_thread;
+    use crate::app::owned_transcript::tests::buffer_text;
+
+    let (mut app, mut events, _ops) = make_test_app_with_channels().await;
+    let mut server = Box::pin(crate::start_embedded_app_server_for_picker(&app.config)).await?;
+    app.local_settings.tui.animations = false;
+    let wide = Size::new(/*width*/ 90, /*height*/ 14);
+    let mut tui = crate::tui::test_support::make_test_tui_with_size(wide)?;
+    tui.set_owned_screen(/*owned*/ true)?;
+    app.config.features.enable(Feature::TuiWorkspace)?;
+    app.keymap =
+        RuntimeKeymap::for_session(&app.local_settings.tui.keymap, /*workspace*/ true).unwrap();
+    app.local_settings.transcript_mode = crate::transcript_mode::TranscriptMode::Owned;
+    let id = ThreadId::from_u128(/*value*/ 12);
+    attach_thread(&mut app, id);
+    let mut title = "Investigate retry";
+    let mut task = overview_thread(
+        id,
+        /*parent_thread_id*/ None,
+        title,
+        ThreadStatus::Idle,
+    );
+    task.git_info = Some(codex_app_server_protocol::GitInfo {
+        branch: Some("retry-fix".into()),
+        sha: None,
+        origin_url: None,
+    });
+    task.updated_at = 4_000_000_000;
+    app.agents_overview.initialized.insert(server.backend_id());
+    app.agents_overview.threads.insert(id, Some(task));
+    app.agents_overview
+        .pins_by_backend
+        .insert(server.backend_id(), Some(vec![id]));
+    let rows = (0..40)
+        .map(|i| format!("Response row {i}").into())
+        .collect();
+    app.transcript_cells
+        .push(Arc::new(history_cell::PlainHistoryCell::new(rows)));
+    let paste = TuiEvent::Paste("Keep this draft".into());
+    crate::boxed_future!(app.handle_tui_event(&mut tui, &mut server, paste)).await?;
+
+    app.render_chat_widget_frame(&mut tui, wide)?;
+    app.transcript_view
+        .scroll(&app.transcript_cells, /*rows*/ -10);
+    app.render_chat_widget_frame(&mut tui, wide)?;
+    let before = buffer_text(tui.terminal.previous_buffer());
+    let first = before.lines().next().unwrap().trim();
+    assert!(first.starts_with("Response row"));
+    assert_eq!(
+        app.chat_widget.composer_text_with_pending(),
+        "Keep this draft"
+    );
+
+    let narrow = Size::new(50, 14);
+    let mut screens = Vec::new();
+    let mut wide_styles = Vec::new();
+    for (label, size, center_focused) in [
+        ("Wide Command Center", wide, true),
+        ("Wide conversation", wide, false),
+        ("Narrow conversation", narrow, false),
+        ("Narrow Command Center", narrow, true),
+        ("Restored dock", wide, true),
+    ] {
+        tui.terminal.resize(size)?;
+        if center_focused && !app.workspace_center_owns_input() {
+            crate::boxed_future!(app.handle_event(
+                &mut tui,
+                &mut server,
+                AppEvent::OpenAgentsOverview
+            ))
+            .await?;
+        } else if !center_focused && app.workspace_center_owns_input() {
+            let click = crossterm::event::MouseEvent {
+                kind: crossterm::event::MouseEventKind::Down(crossterm::event::MouseButton::Left),
+                column: wide.width - 1,
+                row: 0,
+                modifiers: KeyModifiers::NONE,
+            };
+            crate::boxed_future!(app.handle_tui_event(
+                &mut tui,
+                &mut server,
+                TuiEvent::Mouse(click)
+            ))
+            .await?;
+        }
+        if size == wide && !center_focused {
+            title = "Investigate retry again";
+            let renamed = ServerNotification::ThreadNameUpdated(ThreadNameUpdatedNotification {
+                thread_id: id.to_string(),
+                thread_name: Some(title.into()),
+            });
+            app.handle_app_server_event(
+                &server,
+                AppServerEvent::ServerNotification(Box::new(renamed)),
+            )
+            .await;
+        }
+        tui.screen_size_for_event(&TuiEvent::Resize(size))?;
+        crate::terminal_palette::with_test_default_colors(
+            crate::terminal_probe::DefaultColors {
+                fg: (230, 230, 230),
+                bg: (20, 20, 20),
+            },
+            || app.render_chat_widget_frame(&mut tui, size),
+        )?;
+        let buffer = tui.terminal.previous_buffer();
+        let screen = buffer_text(buffer);
+        assert_eq!(app.workspace_center_owns_input(), center_focused, "{label}");
+        if size == wide && wide_styles.len() < 2 {
+            wide_styles.push([title, "All 1", "Keep this draft"].map(|text| {
+                let (row, prefix) = screen
+                    .lines()
+                    .enumerate()
+                    .find_map(|(row, line)| Some((row, line.split_once(text)?.0)))
+                    .expect("visible task, filter and draft");
+                buffer[(prefix.chars().count() as u16, row as u16)].style()
+            }));
+        }
+        if matches!(label, "Wide Command Center" | "Narrow Command Center") {
+            let screen = normalize_agent_center_snapshot(screen);
+            screens.push(format!("{label}\n{screen}"));
+        }
+    }
+    let [center, conversation] = wide_styles.as_slice() else {
+        panic!("expected both wide focus states");
+    };
+    for (center_style, conversation_style) in center.iter().zip(conversation) {
+        assert_ne!(center_style, conversation_style);
+    }
+    assert_ne!(center[2].fg, conversation[2].fg);
+    assert_ne!(center[2].bg, conversation[2].bg);
+
+    crate::boxed_future!(app.handle_tui_event(
+        &mut tui,
+        &mut server,
+        TuiEvent::Key(KeyCode::Tab.into())
+    ))
+    .await?;
+    app.render_chat_widget_frame(&mut tui, wide)?;
+    assert!(buffer_text(tui.terminal.previous_buffer()).contains("No matching tasks"));
+    insta::assert_snapshot!("workspace_responsive_focus", screens.join("\n\n"));
+    crate::boxed_future!(app.handle_tui_event(
+        &mut tui,
+        &mut server,
+        TuiEvent::Paste("ignored".into())
+    ))
+    .await?;
+    for key in [KeyCode::BackTab, KeyCode::Enter] {
+        crate::boxed_future!(app.handle_tui_event(
+            &mut tui,
+            &mut server,
+            TuiEvent::Key(key.into())
+        ))
+        .await?;
+    }
+    let selected = std::iter::from_fn(|| events.try_recv().ok())
+        .find(|event| {
+            matches!(event, AppEvent::SelectAgentsOverviewThread { thread_id } if *thread_id == id)
+        })
+        .expect("Enter selects the displayed task");
+    crate::boxed_future!(app.handle_event(&mut tui, &mut server, selected)).await?;
+    let bottom = app.render_chat_widget_frame(&mut tui, wide)?;
+    let screen = buffer_text(tui.terminal.previous_buffer());
+    assert!(screen.contains(title));
+    assert!(screen.lines().next().unwrap().ends_with(first));
+    assert!(bottom.contains(tui.terminal.last_known_cursor_pos));
+    assert_eq!(
+        app.chat_widget.composer_text_with_pending(),
+        "Keep this draft"
+    );
+
+    crate::boxed_future!(app.handle_event(&mut tui, &mut server, AppEvent::OpenAgentsOverview))
+        .await?;
+    app.sidebar_mut().show(
+        crate::app::sidebar::SidebarContent::Chooser,
+        crate::app::sidebar::PaneFocus::Sidebar,
+    );
+    let three_panes = Size::new(185, 18);
+    let combined = crate::app::test_support::side_frame(&mut app, &mut tui, three_panes)?;
+    let center = app.conversation_frame.command_center.unwrap();
+    let side = app.conversation_frame.panel_area().unwrap();
+    let middle = app.conversation_area(Rect::new(0, 0, 185, 18));
+    assert!(center.right() <= middle.x && middle.right() <= side.x && !middle.is_empty());
+    let labels = ["Agent command center", "Keep this draft", "Open in sidebar"].map(|label| {
+        combined
+            .lines()
+            .find_map(|line| line.find(label))
+            .map(|_| label)
+    });
+    insta::assert_snapshot!(format!("{labels:?}"),@"[Some(\"Agent command center\"), Some(\"Keep this draft\"), Some(\"Open in sidebar\")]");
+    let divider = app
+        .conversation_frame
+        .divider_area()
+        .expect("right divider");
+    let mouse = |kind, column| {
+        TuiEvent::Mouse(crossterm::event::MouseEvent {
+            kind,
+            column,
+            row: divider.y,
+            modifiers: KeyModifiers::NONE,
+        })
+    };
+    use crossterm::event::MouseButton::Left;
+    use crossterm::event::MouseEventKind::Down;
+    use crossterm::event::MouseEventKind::Drag;
+    tui.screen_size_for_event(&TuiEvent::Resize(three_panes))?;
+    crate::boxed_future!(app.handle_tui_event(&mut tui, &mut server, mouse(Down(Left), divider.x)))
+        .await?;
+    crate::boxed_future!(app.handle_tui_event(
+        &mut tui,
+        &mut server,
+        mouse(Drag(Left), divider.x - 6)
+    ))
+    .await?;
+    crate::app::test_support::side_frame(&mut app, &mut tui, three_panes)?;
+    let preview = app
+        .conversation_frame
+        .divider_area()
+        .expect("right divider");
+    assert_eq!(preview.x, divider.x - 6);
+
+    crate::boxed_future!(app.handle_tui_event(
+        &mut tui,
+        &mut server,
+        TuiEvent::Key(KeyCode::Enter.into())
+    ))
+    .await?;
+    let selected = std::iter::from_fn(|| events.try_recv().ok())
+        .find(|event| {
+            matches!(event, AppEvent::SelectAgentsOverviewThread { thread_id } if *thread_id == id)
+        })
+        .expect("Enter selects the displayed task with the chooser open");
+    crate::boxed_future!(app.handle_event(&mut tui, &mut server, selected)).await?;
+    assert_eq!(
+        app.panel_focus(),
+        Some(crate::app::sidebar::PaneFocus::Main)
+    );
+    crate::boxed_future!(app.handle_tui_event(&mut tui, &mut server, TuiEvent::Paste("!".into())))
+        .await?;
+    assert!(app.chat_widget.composer_text_with_pending().contains('!'));
+    crate::boxed_future!(app.handle_tui_event(
+        &mut tui,
+        &mut server,
+        TuiEvent::Key(KeyCode::Backspace.into()),
+    ))
+    .await?;
+
+    app.open_agents_overview(&server);
+    app.sidebar_mut().hide();
+    crate::boxed_future!(app.handle_tui_event(
+        &mut tui,
+        &mut server,
+        TuiEvent::Key(KeyCode::Esc.into())
+    ))
+    .await?;
+    tui.screen_size_for_event(&TuiEvent::Resize(wide))?;
+    app.render_chat_widget_frame(&mut tui, wide)?;
+    assert_eq!(buffer_text(tui.terminal.previous_buffer()), before);
+
+    app.local_settings.tui.keymap = serde_json::from_value(serde_json::json!({
+        "global":{"leader":"f12","open_agents":"leader a","focus_main_composer":["leader c", "f10"]},
+        "agents":{"toggle_grouping":"f11 g","new_task":"f10"},
+    }))?;
+    app.keymap =
+        RuntimeKeymap::for_session(&app.local_settings.tui.keymap, /*workspace*/ true).unwrap();
+    for key in [KeyCode::F(12), KeyCode::Char('a')] {
+        crate::boxed_future!(app.handle_tui_event(
+            &mut tui,
+            &mut server,
+            TuiEvent::Key(key.into())
+        ))
+        .await?;
+    }
+    assert!(app.workspace_center_owns_input());
+    let repeat =
+        |ch| KeyEvent::new_with_kind(KeyCode::Char(ch), KeyModifiers::NONE, KeyEventKind::Repeat);
+    crate::boxed_future!(app.handle_tui_event(&mut tui, &mut server, TuiEvent::Key(repeat('a'))))
+        .await?;
+    assert!(
+        app.agents_overview
+            .view_state
+            .lock()
+            .unwrap()
+            .removal
+            .is_none()
+    );
+    crate::boxed_future!(app.handle_tui_event(
+        &mut tui,
+        &mut server,
+        TuiEvent::Key(KeyCode::F(10).into())
+    ))
+    .await?;
+    assert!(app.workspace_center_owns_input());
+    assert!(
+        std::iter::from_fn(|| events.try_recv().ok())
+            .any(|event| matches!(event, AppEvent::NewAgentsOverviewSession { .. }))
+    );
+    for key in [KeyCode::F(11), KeyCode::Char('g')] {
+        crate::boxed_future!(app.handle_tui_event(
+            &mut tui,
+            &mut server,
+            TuiEvent::Key(key.into())
+        ))
+        .await?;
+    }
+    assert_eq!(
+        app.agents_overview.view_state.lock().unwrap().grouping,
+        AgentsOverviewGrouping::Directory,
+    );
+    for key in [KeyCode::F(12), KeyCode::Char('c')] {
+        crate::boxed_future!(app.handle_tui_event(
+            &mut tui,
+            &mut server,
+            TuiEvent::Key(key.into())
+        ))
+        .await?;
+    }
+    assert!(!app.workspace_center_owns_input());
+    crate::boxed_future!(app.handle_tui_event(&mut tui, &mut server, TuiEvent::Key(repeat('c'))))
+        .await?;
+    assert_eq!(
+        app.chat_widget.composer_text_with_pending(),
+        "Keep this draft"
+    );
+    server.shutdown().await?;
+    Ok(())
+}
+
+#[tokio::test]
+async fn search_sort_tab_respects_configured_list_bindings_and_rename() {
+    use crate::app::agents_overview_discovery::HistorySort;
+
+    let mut app = make_test_app().await;
+    let id = ThreadId::from_u128(/*value*/ 101);
+    let thread = overview_thread(
+        id,
+        /*parent_thread_id*/ None,
+        "Task",
+        ThreadStatus::Idle,
+    );
+    let config: TuiKeymap = toml::from_str("[list]\nmove_down = 'tab'").unwrap();
+    app.keymap = RuntimeKeymap::from_config(&config).unwrap();
+    let mut view = app.agents_overview_view(vec![thread], Some(id));
+    view.handle_key_event(KeyCode::Char('/').into());
+    view.handle_key_event(KeyCode::Tab.into());
+    assert_eq!(
+        app.agents_overview.view_state.lock().unwrap().search_sort,
+        HistorySort::Updated
+    );
+    assert!(!screen(&view, /*width*/ 88, /*height*/ 16).contains("Tab sort"));
+    view.handle_key_event(KeyCode::Esc.into());
+    view.handle_key_event(KeyCode::Char('r').into());
+    view.handle_key_event(KeyCode::Tab.into());
+    assert_eq!(
+        app.agents_overview.view_state.lock().unwrap().search_sort,
+        HistorySort::Updated
+    );
 }

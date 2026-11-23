@@ -11,7 +11,11 @@ pub use source::RetainedSource;
 pub use source::RetainedSourceId;
 pub use source::RetainedSourceRole;
 
-use codex_protocol::ItemIdGenerator;
+use codex_protocol::ThreadId;
+use codex_protocol::protocol::EventMsg;
+use codex_protocol::protocol::GuardianRetentionPolicy;
+use codex_thread_context_ids::ThreadContextIds;
+use std::borrow::Cow;
 use std::collections::BTreeSet;
 use std::collections::VecDeque;
 use std::sync::Arc;
@@ -22,6 +26,7 @@ use serde::Serialize;
 
 use crate::CodexHarnessMetadata;
 use crate::ResponseItemEnvelope;
+use crate::RolloutItem;
 use crate::SenderUserMessages;
 
 const MAX_FAMILY_RECORDS: usize = 8;
@@ -185,6 +190,39 @@ pub enum RetainedContextEvent {
     },
 }
 
+/// The recorder policy owned by the thread that produced this history.
+#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize, JsonSchema)]
+pub struct MessageRetention {
+    pub thread_id: ThreadId,
+    #[serde(flatten)]
+    pub policy: GuardianRetentionPolicy,
+}
+
+impl MessageRetention {
+    /// Recover the latest owned settings even when replay begins at a compaction.
+    pub fn saved(items: &[RolloutItem], thread_id: ThreadId) -> Option<Self> {
+        items.iter().rev().find_map(|item| match item {
+            RolloutItem::EventMsg(EventMsg::ThreadSettingsApplied(event))
+                if event.thread_id == Some(thread_id) =>
+            {
+                Some(
+                    event
+                        .thread_settings
+                        .guardian_retention
+                        .map(|policy| Self { thread_id, policy }),
+                )
+            }
+            RolloutItem::Compacted(item) => item
+                .retained_context
+                .as_ref()?
+                .message_retention
+                .filter(|retention| retention.thread_id == thread_id)
+                .map(Some),
+            _ => None,
+        })?
+    }
+}
+
 /// Bounded snapshot of retained families, persisted with the parent compaction checkpoint.
 /// Facts live until their instruction boundary is rolled back; compaction does not expire them.
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize, JsonSchema)]
@@ -203,6 +241,8 @@ pub struct RetainedContext {
     /// Assistant context has a separate budget so it cannot evict user restrictions.
     #[serde(default)]
     assistant_messages: VecDeque<Ordered<RetainedUserMessage>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    message_retention: Option<MessageRetention>,
     /// Observed assistant storage omissions; absent legacy metadata is not evidence of loss.
     #[serde(default)]
     assistant_messages_incomplete: bool,
@@ -218,21 +258,49 @@ fn missing_message_history() -> bool {
 }
 
 fn bound_family<T: Serialize>(items: &mut VecDeque<Ordered<T>>, incomplete: &mut bool) {
+    bound_family_with_limit(items, incomplete, MAX_FAMILY_RECORDS, MAX_FAMILY_BYTES);
+}
+
+fn bound_family_with_limit<T: Serialize>(
+    items: &mut VecDeque<Ordered<T>>,
+    incomplete: &mut bool,
+    max_records: usize,
+    max_bytes: usize,
+) {
     // Queued instructions can be recorded after later-accepted answers. Evict by
     // acceptance order, not by the order in which persistence happened to finish.
     items.make_contiguous().sort_by_key(Ordered::key);
-    while items.len() > MAX_FAMILY_RECORDS
-        || serde_json::to_vec(items).map_or(true, |bytes| bytes.len() > MAX_FAMILY_BYTES)
-    {
-        items.pop_front();
-        *incomplete = true;
+    let count_evicted = items.len().saturating_sub(max_records);
+    *incomplete |= count_evicted != 0;
+    items.drain(..count_evicted);
+    if serde_json::to_vec(items).is_ok_and(|bytes| bytes.len() <= max_bytes) {
+        return;
     }
+    // Count the newest fitting suffix once. Each element uses a separator or
+    // closing bracket in addition to its JSON bytes, after the opening bracket.
+    let mut bytes = 1;
+    let mut keep = 0;
+    for item in items.iter().rev() {
+        let Ok(encoded) = serde_json::to_vec(item) else {
+            break;
+        };
+        bytes += encoded.len() + 1;
+        if bytes > max_bytes {
+            break;
+        }
+        keep += 1;
+    }
+    let evicted = items.len() - keep;
+    *incomplete |= evicted != 0;
+    items.drain(..evicted);
 }
 
 impl RetainedUserMessage {
-    fn bound(&mut self) {
-        if serde_json::to_vec(self).map_or(true, |bytes| bytes.len() > MAX_RECORD_BYTES) {
-            self.text.clear();
+    fn bound(&mut self, max_record_bytes: usize) {
+        if self.text.len() > max_record_bytes
+            || serde_json::to_vec(self).map_or(true, |bytes| bytes.len() > max_record_bytes)
+        {
+            self.text = String::new();
             self.complete = false;
             self.turn_id
                 .truncate(self.turn_id.floor_char_boundary(1_024));
@@ -245,7 +313,7 @@ impl RetainedUserMessage {
 
 impl RetainedContextEvent {
     /// Bounds a persisted event before it enters the rollout or the live snapshot.
-    pub fn bound(&mut self) {
+    fn bound(&mut self, assistant_record_bytes: usize) {
         match self {
             Self::VerifiedAnswer { answer, .. } => {
                 if serde_json::to_vec(answer).map_or(true, |bytes| bytes.len() > MAX_RECORD_BYTES) {
@@ -259,7 +327,9 @@ impl RetainedContextEvent {
                         .truncate(answer.call_id.floor_char_boundary(1_024));
                 }
             }
-            Self::DeliveredAssistantMessage { message, .. } => message.bound(),
+            Self::DeliveredAssistantMessage { message, .. } => {
+                message.bound(assistant_record_bytes)
+            }
             // An oversized audio record is omitted in record(); IDs must never be truncated.
             Self::AcceptedFileAudio { .. } => {}
         }
@@ -267,10 +337,110 @@ impl RetainedContextEvent {
 }
 
 impl RetainedContext {
+    /// Initializes a recorder for the policy owning this history.
+    pub fn new(message_retention: Option<MessageRetention>) -> Self {
+        Self {
+            message_retention,
+            ..Self::default()
+        }
+    }
+
+    /// Whether the recorder admits whole assistant messages using an Elastic entry limit.
+    pub fn retains_original_assistant_messages(&self) -> bool {
+        self.message_retention.is_some()
+    }
+
+    /// Whether user instructions have a configured Elastic entry limit.
+    pub fn retains_original_user_messages(&self) -> bool {
+        self.message_retention
+            .is_some_and(|retention| retention.policy.user_record_bytes.is_some())
+    }
+
+    fn user_record_bytes(&self) -> usize {
+        self.message_retention
+            .and_then(|retention| retention.policy.user_record_bytes)
+            .unwrap_or(MAX_RECORD_BYTES)
+    }
+
+    /// The configured Elastic per-record limit, if supplied by the session.
+    pub fn elastic_assistant_record_bytes(&self) -> Option<usize> {
+        self.message_retention
+            .and_then(|retention| retention.policy.assistant_record_bytes)
+    }
+
+    fn assistant_record_bytes(&self) -> usize {
+        self.elastic_assistant_record_bytes()
+            .unwrap_or(MAX_RECORD_BYTES)
+    }
+
+    /// Clears retained evidence while keeping the recording policy.
+    pub fn empty_with_same_limits(&self) -> Self {
+        Self::new(self.message_retention)
+    }
+
+    fn bound_assistant_family(&mut self) {
+        let max_records = self
+            .message_retention
+            .map_or(MAX_FAMILY_RECORDS, |_| usize::MAX);
+        bound_family_with_limit(
+            &mut self.assistant_messages,
+            &mut self.assistant_messages_incomplete,
+            max_records,
+            MAX_FAMILY_BYTES,
+        );
+    }
+
+    fn bound_user_family(&mut self) {
+        let max_records = if self.retains_original_user_messages() {
+            usize::MAX
+        } else {
+            MAX_FAMILY_RECORDS
+        };
+        bound_family_with_limit(
+            &mut self.user_messages,
+            &mut self.user_messages_incomplete,
+            max_records,
+            MAX_FAMILY_BYTES,
+        );
+    }
+
+    /// Projects the message families for consumers using the Fixed retention window.
+    pub fn fixed_message_view(&self) -> Cow<'_, Self> {
+        if self.assistant_messages.len() <= MAX_FAMILY_RECORDS
+            && self.user_messages.len() <= MAX_FAMILY_RECORDS
+            && self.assistant_record_bytes() <= MAX_RECORD_BYTES
+            && self.user_record_bytes() <= MAX_RECORD_BYTES
+        {
+            return Cow::Borrowed(self);
+        }
+        let mut view = self.clone();
+        view.message_retention = None;
+        for entry in view
+            .assistant_messages
+            .iter_mut()
+            .chain(&mut view.user_messages)
+        {
+            entry.value.bound(MAX_RECORD_BYTES);
+        }
+        view.bound_assistant_family();
+        view.bound_user_family();
+        Cow::Owned(view)
+    }
+
     pub fn accepted_file_audio(&self, model: &str, provider: &str) -> Option<&AcceptedFileAudio> {
         self.accepted_file_audio
             .as_deref()
             .filter(|evidence| evidence.model == model && evidence.provider == provider)
+    }
+
+    fn bound_sender_deliveries(&mut self) {
+        // Each delivery may hold a full configured snapshot needed after rollback.
+        bound_family_with_limit(
+            &mut self.sender_deliveries,
+            /*incomplete*/ &mut false,
+            MAX_FAMILY_RECORDS,
+            MAX_FAMILY_BYTES * MAX_FAMILY_RECORDS,
+        );
     }
 
     /// Context for the latest delivery still present in this task's retained history.
@@ -299,7 +469,7 @@ impl RetainedContext {
             order,
             value: messages,
         });
-        bound_family(&mut self.sender_deliveries, /*incomplete*/ &mut false);
+        self.bound_sender_deliveries();
         true
     }
 
@@ -390,9 +560,9 @@ impl RetainedContext {
         &mut self,
         mut message: RetainedUserMessage,
         source: RetainedInputSource,
-        item_id_generator: &ItemIdGenerator,
+        context_ids: &ThreadContextIds,
     ) -> Option<RetainedSource> {
-        message.bound();
+        message.bound(self.user_record_bytes());
         let inherited = source == RetainedInputSource::Inherited;
         // An unchanged invocation is not a new instruction. Keep the original
         // acceptance order; compare only the latest version of this automation,
@@ -442,7 +612,7 @@ impl RetainedContext {
         let revision = message
             .message_id
             .as_ref()
-            .map(|_| item_id_generator("retained"));
+            .map(|_| context_ids.next_item("retained"));
         let entry = Ordered {
             revision,
             inherited,
@@ -451,7 +621,7 @@ impl RetainedContext {
         };
         let source = entry.source(RetainedSourceRole::User);
         self.user_messages.push_back(entry);
-        bound_family(&mut self.user_messages, &mut self.user_messages_incomplete);
+        self.bound_user_family();
         source
     }
 
@@ -461,6 +631,7 @@ impl RetainedContext {
         &mut self,
         mut excerpt_for_id: impl FnMut(&str) -> Option<String>,
     ) {
+        let max_record_bytes = self.user_record_bytes();
         for entry in &mut self.user_messages {
             let message = &mut entry.value;
             if message.text.is_empty()
@@ -468,28 +639,24 @@ impl RetainedContext {
                 && let Some(text) = message.message_id.as_deref().and_then(&mut excerpt_for_id)
             {
                 message.text = text;
-                message.bound();
+                message.bound(max_record_bytes);
             }
         }
-        bound_family(&mut self.user_messages, &mut self.user_messages_incomplete);
+        self.bound_user_family();
     }
 
     /// Same-event delivery is idempotent; changed contents replace that source's record.
-    pub fn record(
-        &mut self,
-        event: &RetainedContextEvent,
-        item_id_generator: &ItemIdGenerator,
-    ) -> bool {
-        self.record_and_capture(&mut event.clone(), item_id_generator)
+    pub fn record(&mut self, event: &RetainedContextEvent, context_ids: &ThreadContextIds) -> bool {
+        self.record_and_capture(&mut event.clone(), context_ids)
     }
 
     /// Records a host event and fills in its retained source for rollout persistence.
     pub fn record_and_capture(
         &mut self,
         event: &mut RetainedContextEvent,
-        item_id_generator: &ItemIdGenerator,
+        context_ids: &ThreadContextIds,
     ) -> bool {
-        event.bound();
+        event.bound(self.assistant_record_bytes());
         match event {
             RetainedContextEvent::AcceptedFileAudio { evidence } => {
                 if !evidence.fits_record_budget()
@@ -532,10 +699,7 @@ impl RetainedContext {
                 retained_source,
             } => {
                 if let Some(existing) = self.assistant_messages.iter().find(|entry| {
-                    message.message_id.is_some()
-                        && entry.value.message_id == message.message_id
-                        && entry.value == *message
-                        && !entry.inherited
+                    message.message_id.is_some() && entry.value == *message && !entry.inherited
                 }) {
                     *retained_source = existing.source(RetainedSourceRole::Assistant);
                     return false;
@@ -543,12 +707,8 @@ impl RetainedContext {
                 *retained_source = self.record_assistant_message_with_revision(
                     message.clone(),
                     RetainedInputSource::Local(Some(*acceptance_order)),
-                    || {
-                        retained_source.as_ref().map_or_else(
-                            || item_id_generator("retained"),
-                            |source| source.revision.clone(),
-                        )
-                    },
+                    context_ids,
+                    retained_source.as_ref().map(|source| &source.revision),
                 );
                 true
             }
@@ -572,10 +732,13 @@ impl RetainedContext {
     /// A missing checkpoint cannot establish complete historical user instructions.
     /// Surviving local input metadata also advances the counter when its retained record is missing.
     pub fn restore(&mut self, checkpoint: Option<&Self>, surviving_items: &[ResponseItemEnvelope]) {
+        let message_retention = self.message_retention;
         *self = checkpoint.cloned().unwrap_or_else(|| Self {
             user_messages_incomplete: true,
             ..Self::default()
         });
+        self.message_retention = message_retention;
+        let assistant_record_bytes = self.assistant_record_bytes();
         self.accepted_file_audio
             .take_if(|evidence| !evidence.fits_record_budget());
         for entry in &mut self.verified_answers {
@@ -583,19 +746,24 @@ impl RetainedContext {
                 answer: entry.value.clone(),
                 acceptance_order: Some(entry.order),
             };
-            event.bound();
+            event.bound(assistant_record_bytes);
             let RetainedContextEvent::VerifiedAnswer { answer, .. } = event else {
                 unreachable!("verified answer constructed above");
             };
             entry.value = answer;
             self.next_order = self.next_order.max(entry.order.saturating_add(1));
         }
-        for entry in self
+        let user_record_bytes = self.user_record_bytes();
+        let user = self
             .user_messages
             .iter_mut()
-            .chain(&mut self.assistant_messages)
-        {
-            entry.value.bound();
+            .map(|entry| (entry, user_record_bytes));
+        let assistant = self
+            .assistant_messages
+            .iter_mut()
+            .map(|entry| (entry, assistant_record_bytes));
+        for (entry, max_record_bytes) in user.chain(assistant) {
+            entry.value.bound(max_record_bytes);
             // Also repair checkpoints written before adoption recorded the answer gap.
             self.verified_answers_incomplete |= entry.inherited;
             if !entry.inherited {
@@ -606,7 +774,7 @@ impl RetainedContext {
             entry.value.bound();
             self.next_order = self.next_order.max(entry.order.saturating_add(1));
         }
-        bound_family(&mut self.sender_deliveries, /*incomplete*/ &mut false);
+        self.bound_sender_deliveries();
         for metadata in surviving_items
             .iter()
             .filter_map(|item| item.metadata.as_ref())
@@ -625,11 +793,8 @@ impl RetainedContext {
             &mut self.verified_answers,
             &mut self.verified_answers_incomplete,
         );
-        bound_family(&mut self.user_messages, &mut self.user_messages_incomplete);
-        bound_family(
-            &mut self.assistant_messages,
-            &mut self.assistant_messages_incomplete,
-        );
+        self.bound_user_family();
+        self.bound_assistant_family();
     }
 
     /// Keeps legacy answers whose source calls survive when no retained instruction boundary exists.

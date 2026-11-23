@@ -30,6 +30,36 @@ mod gov_cloud_guidance;
 mod tui_mode_picker;
 
 #[test]
+fn startup_finishes_when_launcher_restores_blocking_input() -> Result<()> {
+    let repo_root = codex_utils_cargo_bin::repo_root()?;
+    let codex_home = tempfile::tempdir()?;
+    write_test_config(codex_home.path(), &repo_root)?;
+    let mut terminal = PtyCodex::start(&repo_root, codex_home, &[])?;
+
+    let deadline = Instant::now() + STARTUP_TIMEOUT;
+    while !contains_bytes(&terminal.output, b"\x1b[6n") {
+        terminal.ensure_running()?;
+        ensure!(Instant::now() < deadline, "missing startup cursor query");
+        terminal.read_output(Duration::from_millis(/*millis*/ 50))?;
+    }
+
+    // The launcher shares stdin's file status flags. Answer only the cursor query
+    // so the probe must time out after reading the reply without another keystroke.
+    let fd = terminal.slave.as_raw_fd();
+    let flags = unsafe { libc::fcntl(fd, libc::F_GETFL) };
+    if flags == -1 || unsafe { libc::fcntl(fd, libc::F_SETFL, flags & !libc::O_NONBLOCK) } == -1 {
+        return Err(std::io::Error::last_os_error().into());
+    }
+    terminal.write_input(b"\x1b[1;1R")?;
+    while !terminal.screen_contains("OpenAI Codex") {
+        terminal.ensure_running()?;
+        ensure!(Instant::now() < deadline, "startup hung on blocking input");
+        terminal.read_output(Duration::from_millis(/*millis*/ 50))?;
+    }
+    Ok(())
+}
+
+#[test]
 fn focus_gained_with_unanswered_palette_queries_preserves_immediate_input() -> Result<()> {
     let repo_root = codex_utils_cargo_bin::repo_root()?;
     let codex_home = tempfile::tempdir()?;
@@ -255,6 +285,11 @@ fn default_owned_screen_entry_paints_before_sync_ends_and_exit_clears_inline_dra
             terminal.screen_contents()
         );
     }
+    terminal.read_output(Duration::ZERO)?;
+    ensure!(
+        !contains_bytes(&terminal.output, b"\x1b[0 q"),
+        "default session reset the host cursor shape"
+    );
     terminal.write_input(b"shell\n")?;
     let mut shell_input = [0; 6];
     terminal.slave.read_exact(&mut shell_input)?;
@@ -290,6 +325,10 @@ fn fullscreen_transcript_can_opt_out_to_terminal_scrollback() -> Result<()> {
             .windows(b"\x1b[?1049h".len())
             .any(|bytes| bytes == b"\x1b[?1049h"),
         "fullscreen opt-out entered the alternate screen"
+    );
+    ensure!(
+        !contains_bytes(&terminal.output, b"\x1b[0 q"),
+        "scrollback composer reset the host cursor shape"
     );
     Ok(())
 }
@@ -568,6 +607,24 @@ fn contains_bytes(buffer: &[u8], needle: &[u8]) -> bool {
     buffer.windows(needle.len()).any(|window| window == needle)
 }
 
+pub(super) fn write_test_config_with_bundled_models(
+    codex_home: &Path,
+    repo_root: &Path,
+) -> Result<()> {
+    write_test_config(codex_home, repo_root)?;
+    // Model fetches must not delay the startup screens this PTY is waiting for.
+    let catalog = codex_home.join("models.json");
+    std::fs::write(
+        &catalog,
+        serde_json::to_vec(&codex_models_manager::bundled_models_response()?)?,
+    )?;
+    let catalog = serde_json::to_string(&catalog)?;
+    let path = codex_home.join("config.toml");
+    let config = std::fs::read_to_string(&path)?;
+    std::fs::write(path, format!("model_catalog_json = {catalog}\n{config}"))?;
+    Ok(())
+}
+
 pub(super) fn write_test_config(codex_home: &Path, repo_root: &Path) -> Result<()> {
     let repo_root = repo_root.display();
     let config = format!(
@@ -632,6 +689,28 @@ fn no_daemon_skips_startup_and_discovery() -> Result<()> {
                 .contains("Running without the shared background server")
         );
     }
+    Ok(())
+}
+
+#[test]
+fn resume_shows_loading_until_connection_fails() -> Result<()> {
+    let workspace = tempfile::tempdir()?;
+    let home = tempfile::tempdir_in("/tmp")?;
+    write_test_config(home.path(), workspace.path())?;
+    let socket = home.path().join("server.sock");
+    let listener = std::os::unix::net::UnixListener::bind(&socket)?;
+    let endpoint = format!("unix://{}", socket.display());
+    let mut terminal = PtyCodex::start_cli(
+        workspace.path(),
+        home,
+        &["resume", "--no-alt-screen", "--remote", &endpoint],
+    )?;
+    terminal.wait_for_screen("Loading sessions…")?;
+    insta::assert_snapshot!(terminal.screen_contents(), @"Loading sessions…");
+    drop(listener);
+    ensure!(!terminal.child.wait()?.success());
+    terminal.wait_for_screen("Error:")?;
+    ensure!(terminal.screen_contents().starts_with("Error:"));
     Ok(())
 }
 

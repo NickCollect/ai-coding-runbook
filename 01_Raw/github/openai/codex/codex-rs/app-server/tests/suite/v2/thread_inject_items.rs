@@ -62,6 +62,8 @@ async fn thread_inject_items_adds_raw_response_items_to_thread_history(
     let codex_home = TempDir::new()?;
     MockResponsesConfig::new(&server.uri())
         .enable_feature(Feature::Sqlite)
+        .enable_feature(Feature::MultiAgentV2)
+        .disable_feature(Feature::WakeOnAgentMessages)
         .enable_feature(Feature::RetainClientDeveloperMessages)
         .with_extra_config("[memories]\ndisable_on_external_context = true")
         .write(codex_home.path())?;
@@ -128,12 +130,27 @@ async fn thread_inject_items_adds_raw_response_items_to_thread_history(
             items: vec![
                 serde_json::to_value(&injected_item)?,
                 json!({"item": injected_developer_item, "retention": "default"}),
-                json!({"item": marker_shaped_developer_item, "retention": "always"}),
-                json!({"item": named_tool_output, "retention": "always"}),
+                json!({"item": marker_shaped_developer_item, "retention": "alwaysInThread"}),
+                json!({"item": named_tool_output, "retention": "alwaysInChildren"}),
             ],
         })
         .await?;
     let _response: ThreadInjectItemsResponse =
+        timeout(DEFAULT_READ_TIMEOUT, mcp.read_response(inject_req)).await??;
+    // A standalone plaintext batch must retain the root's persisted injection path.
+    let agent_mail: ResponseItem = serde_json::from_value(json!({
+        "type": "agent_message",
+        "author": "/root/worker",
+        "recipient": "/root",
+        "content": [{"type": "input_text", "text": "The report is ready."}],
+    }))?;
+    let inject_req = mcp
+        .send_thread_inject_items_request(ThreadInjectItemsParams {
+            thread_id: thread.id.clone(),
+            items: vec![serde_json::to_value(&agent_mail)?],
+        })
+        .await?;
+    let _: ThreadInjectItemsResponse =
         timeout(DEFAULT_READ_TIMEOUT, mcp.read_response(inject_req)).await??;
     assert!(response_mock.requests().is_empty());
 
@@ -172,6 +189,7 @@ async fn thread_inject_items_adds_raw_response_items_to_thread_history(
                 || item == &injected_developer_item
                 || item == &marker_shaped_developer_item
                 || item == &named_tool_item
+                || item == &agent_mail
         })
         .collect::<Vec<_>>();
     assert_eq!(
@@ -180,9 +198,24 @@ async fn thread_inject_items_adds_raw_response_items_to_thread_history(
             (injected_item.clone(), false, None),
             (injected_developer_item.clone(), false, Some(false)),
             (marker_shaped_developer_item.clone(), false, Some(true)),
-            (named_tool_item, false, Some(true)),
+            (named_tool_item, false, Some(false)),
+            (agent_mail.clone(), false, None),
         ]
     );
+
+    assert!(mcp.shutdown_gracefully().await?.success());
+    mcp = TestAppServer::builder()
+        .with_codex_home(codex_home.path())
+        .build_initialized_with_timeout(DEFAULT_READ_TIMEOUT)
+        .await?;
+    let resume_req = mcp
+        .send_thread_resume_request(ThreadResumeParams {
+            thread_id: thread.id.clone(),
+            ..Default::default()
+        })
+        .await?;
+    let _: ThreadResumeResponse =
+        timeout(DEFAULT_READ_TIMEOUT, mcp.read_response(resume_req)).await??;
 
     let application_context_text = "Application developer context";
     let untrusted_context_text = "Untrusted client context";
@@ -280,6 +313,14 @@ async fn thread_inject_items_adds_raw_response_items_to_thread_history(
         .into_iter()
         .map(strip_response_item_ids_from_json)
         .collect();
+    assert_eq!(
+        model_input
+            .iter()
+            .filter(|item| item["type"] == "agent_message")
+            .cloned()
+            .collect::<Vec<_>>(),
+        vec![serde_json::to_value(&agent_mail)?],
+    );
     assert!(
         model_input
             .iter()
@@ -781,45 +822,5 @@ async fn turn_tool_output_retention_preserves_sender_metadata() -> Result<()> {
         sender_messages.receiver_message_id,
         envelope.item.id().unwrap().to_string()
     );
-    Ok(())
-}
-
-#[tokio::test]
-async fn guardian_review_returns_the_injected_call_id_when_policy_skips_review() -> Result<()> {
-    let server = responses::start_mock_server().await;
-    let codex_home = TempDir::new()?;
-    MockResponsesConfig::new(&server.uri()).write(codex_home.path())?;
-    let rules = codex_home.path().join("rules");
-    std::fs::create_dir_all(&rules)?;
-    std::fs::write(
-        rules.join("default.rules"),
-        r#"prefix_rule(pattern=["git", "init", "guardian-skipped"], decision="allow")"#,
-    )?;
-    let mut app = TestAppServer::builder()
-        .with_codex_home(codex_home.path())
-        .build_initialized()
-        .await?;
-    let start = app
-        .send_thread_start_request_with_auto_env(ThreadStartParams::default())
-        .await?;
-    let ThreadStartResponse { thread, .. } = app.read_response(start).await?;
-    let inject = app
-        .send_thread_inject_items_request(ThreadInjectItemsParams {
-            thread_id: thread.id.clone(),
-            items: vec![json!({
-                "type": "function_call", "name": "exec_command", "call_id": "recorded",
-                "arguments": r#"{"cmd":"git init guardian-skipped"}"#,
-            })],
-        })
-        .await?;
-    let _: ThreadInjectItemsResponse = app.read_response(inject).await?;
-    let review = app
-        .send_raw_request(
-            "thread/guardianReview",
-            Some(json!({"threadId": thread.id})),
-        )
-        .await?;
-    let response: Value = app.read_response(review).await?;
-    assert_eq!(response, json!({"callId":"recorded", "assessment":null}));
     Ok(())
 }

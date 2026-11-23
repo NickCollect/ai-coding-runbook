@@ -1,5 +1,62 @@
 # Changelog
 
+## [3.57.0](https://github.com/openai/openai-python/compare/v3.56.0...v3.57.0) (2026-11-19)
+
+
+### Features
+
+* **api:** support Live WebRTC standby ([#4296](https://github.com/openai/openai-python/issues/4296)) ([18d10c3](https://github.com/openai/openai-python/commit/18d10c381cac674c56620acc3c1b547fb691f5ea))
+
+## [3.56.0](https://github.com/openai/openai-python/compare/v3.55.1...v3.56.0) (2026-11-19)
+
+
+### Features
+
+* **api:** add gpt-live-1.1 to Live model choices ([#4294](https://github.com/openai/openai-python/issues/4294)) ([a51f139](https://github.com/openai/openai-python/commit/a51f13999c3546b1dd9a29d57ddde7f95ae389d6))
+
+## [3.55.1](https://github.com/openai/openai-python/compare/v3.55.0...v3.55.1) (2026-11-18)
+
+
+### Chores
+
+* **api:** document CSAM moderation response fields ([#4290](https://github.com/openai/openai-python/issues/4290)) ([d6b93f3](https://github.com/openai/openai-python/commit/d6b93f36b6ad5a71ef81ebbe08cab72c3d12d7a8))
+* **deps-dev:** bump pytest-asyncio from 1.4.1 to 1.4.1.post1 ([#4274](https://github.com/openai/openai-python/issues/4274)) ([231a92a](https://github.com/openai/openai-python/commit/231a92aa2193cd7525abcca0e46631dad2bbad75))
+* **deps:** bump github/codeql-action/init from 4.39.1 to 4.39.3 ([#4275](https://github.com/openai/openai-python/issues/4275)) ([f777185](https://github.com/openai/openai-python/commit/f7771850934f755ddc9fa46f46058f9fa06edb92))
+* **deps:** bump the python-security group across 1 directory with 2 updates ([#4267](https://github.com/openai/openai-python/issues/4267)) ([ed1d6b6](https://github.com/openai/openai-python/commit/ed1d6b620a08433307bcf238a05ed6faaf6372ad))
+
+## [3.55.0](https://github.com/openai/openai-python/compare/v3.54.0...v3.55.0) (2026-11-18)
+
+
+### Features
+
+* **api:** add Live MCP server configuration ([#4280](https://github.com/openai/openai-python/issues/4280)) ([f56a67f](https://github.com/openai/openai-python/commit/f56a67f1f0c844135261ece304a90d2ec2571d4b))
+* **api:** hide Managed Agents session budget controls and events ([#4289](https://github.com/openai/openai-python/issues/4289)) ([b78d3eb](https://github.com/openai/openai-python/commit/b78d3ebb54287aebf50b04544a07c4c21f02dd1e))
+
+## [3.54.0](https://github.com/openai/openai-python/compare/v3.53.0...v3.54.0) (2026-11-17)
+
+
+### Features
+
+* **api:** type Managed Agents budget events ([#4284](https://github.com/openai/openai-python/issues/4284)) ([c5da68a](https://github.com/openai/openai-python/commit/c5da68ac74ad2a4bf89c1248f6403b3123e568db))
+
+## [3.53.0](https://github.com/openai/openai-python/compare/v3.52.0...v3.53.0) (2026-11-17)
+
+
+### Features
+
+* **api:** add 2-hour and 8-hour Responses background windows ([720bcb5](https://github.com/openai/openai-python/commit/720bcb501dff693e1a57af7ffddd1820e6f2075c))
+* **api:** add the GPT-6.2 Astra Law Responses model identifier ([720bcb5](https://github.com/openai/openai-python/commit/720bcb501dff693e1a57af7ffddd1820e6f2075c))
+* **api:** add the GPT-6.2 Astra model identifier ([720bcb5](https://github.com/openai/openai-python/commit/720bcb501dff693e1a57af7ffddd1820e6f2075c))
+* **api:** add the GPT-6.2 Sol model identifier ([720bcb5](https://github.com/openai/openai-python/commit/720bcb501dff693e1a57af7ffddd1820e6f2075c))
+
+## [3.52.0](https://github.com/openai/openai-python/compare/v3.51.0...v3.52.0) (2026-11-16)
+
+
+### Features
+
+* **api:** add schedule pause reasons ([#4278](https://github.com/openai/openai-python/issues/4278)) ([a996ce2](https://github.com/openai/openai-python/commit/a996ce2df402c241d042f6d0164361536a99e31a))
+* **api:** deliver beta Agents session errors as stream events ([#4281](https://github.com/openai/openai-python/issues/4281)) ([690fba9](https://github.com/openai/openai-python/commit/690fba90a013d7ece4eff2c3b33937564e3bdde9))
+
 ## [3.51.0](https://github.com/openai/openai-python/compare/v3.50.0...v3.51.0) (2026-11-12)
 
 

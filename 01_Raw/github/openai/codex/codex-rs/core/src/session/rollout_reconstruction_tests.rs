@@ -22,9 +22,9 @@ use codex_protocol::protocol::ThreadRolledBackEvent;
 use codex_protocol::protocol::WorldStateItem;
 use codex_protocol::security_risk::SecurityRiskScore;
 use codex_protocol::turn_input::CyberAccessProgram;
-use codex_protocol_test_support::uuid_v7_item_id_generator_for_test;
 use codex_rollout::ModelContextScan;
 use codex_rollout::ModelContextScanProgress;
+use codex_thread_context_ids_test_support::thread_context_ids;
 use core_test_support::responses::strip_metadata_from_items;
 use pretty_assertions::assert_eq;
 use serde_json::json;
@@ -129,8 +129,10 @@ async fn sender_context_follows_its_delivery_through_checkpoint_and_rollback() {
     let mut live = ContextManager::for_session(
         /*root_capabilities_restricted*/ false,
         &crate::config::ManagedFeatures::from(codex_features::Features::with_defaults()),
+        /*reuse_parent_compaction*/ true,
         codex_guardian_context::ContextBudgeting::Fixed,
-        uuid_v7_item_id_generator_for_test(),
+        thread_context_ids(),
+        /*retention*/ None,
     );
     let mut items = Vec::new();
     let mut snapshots = Vec::new();
@@ -2053,9 +2055,9 @@ async fn reconstruct_history_legacy_compaction_without_replacement_history_does_
             complete: false,
         },
         codex_history::RetainedInputSource::Local(None),
-        &uuid_v7_item_id_generator_for_test(),
+        &thread_context_ids(),
     );
-    retained.record(&answer, &uuid_v7_item_id_generator_for_test());
+    retained.record(&answer, &thread_context_ids());
     let rollout_items = vec![
         RolloutItem::ResponseItem(user_message("before compact").into()),
         RolloutItem::ResponseItem(assistant_message("assistant reply").into()),
@@ -2881,4 +2883,119 @@ async fn record_initial_history_resumed_replaced_incomplete_compacted_turn_clear
         })
     );
     assert!(session.reference_context_item().await.is_none());
+}
+
+#[tokio::test]
+async fn annotated_realtime_input_replays_as_the_ordinary_input() {
+    use codex_history::CodexHarnessMetadata;
+    use codex_history::RealtimeHandoffMetadata;
+    use codex_protocol::ResponseItemId;
+    use codex_protocol::realtime::RealtimeHandoffMode;
+    use codex_protocol::realtime::RealtimeItemContent;
+
+    let (session, turn) = make_session_and_context().await;
+    let mut item = user_message("accepted exactly");
+    item.set_id(Some(ResponseItemId::from_server("msg_acceptance".into())));
+    item.set_turn_id_if_missing("accepted-turn");
+    let envelope = ResponseItemEnvelope {
+        item,
+        metadata: Some(CodexHarnessMetadata {
+            realtime_handoff: Some(Box::new(RealtimeHandoffMetadata {
+                event_id: "event_acceptance".into(),
+                realtime_session_id: "voice".into(),
+                observed_at_ms: 42,
+                handoff_id: "handoff".into(),
+                mode: RealtimeHandoffMode::Start,
+                source_event_ids: vec!["speech".into()],
+            })),
+            ..Default::default()
+        }),
+    };
+    assert!(matches!(
+        envelope.realtime_handoff_item().unwrap().content,
+        RealtimeItemContent::TurnInputAccepted { turn_id, input, .. }
+            if turn_id == "accepted-turn" && input == "accepted exactly"
+    ));
+    let restored = session
+        .reconstruct_history_from_rollout(&turn, &[RolloutItem::ResponseItem(envelope.clone())])
+        .await;
+    assert_eq!(restored.history.len(), 1);
+    assert_eq!(restored.history[0].item, envelope.item);
+    assert_eq!(
+        restored.history[0]
+            .metadata
+            .as_ref()
+            .unwrap()
+            .realtime_handoff,
+        envelope.metadata.as_ref().unwrap().realtime_handoff
+    );
+    assert_eq!(restored.last_started_turn_id, None);
+}
+
+#[tokio::test]
+async fn hangup_input_replays_once_and_does_not_create_a_rollback_boundary() {
+    use codex_protocol::realtime::RealtimeItem;
+    use codex_protocol::realtime::RealtimeItemContent;
+
+    let (session, turn) = make_session_and_context().await;
+    let receipt = RealtimeItem {
+        id: "event_tail".into(),
+        realtime_session_id: "voice".into(),
+        observed_at_ms: Some(42),
+        content: RealtimeItemContent::SessionInputSaved {
+            reason: codex_protocol::realtime::SessionInputReason::SessionEnd,
+            source_event_ids: vec!["speech".into()],
+            input_item_id: "msg_tail".into(),
+            input: "use the smaller logo".into(),
+        },
+    };
+    let tail = Session::realtime_carryover_input(&receipt).unwrap();
+    let turn_a = user_message("turn A");
+    let turn_b = user_message("turn B");
+    let rollback = RolloutItem::EventMsg(EventMsg::ThreadRolledBack(ThreadRolledBackEvent {
+        num_turns: 1,
+    }));
+    let records = vec![
+        RolloutItem::ResponseItem(turn_a.clone().into()),
+        RolloutItem::RealtimeItem(receipt.clone()),
+        RolloutItem::RealtimeItem(receipt.clone()),
+    ];
+    let restored = session
+        .reconstruct_history_from_rollout(&turn, &records)
+        .await;
+    assert_eq!(restored.history.len(), 2);
+    assert_eq!(restored.history[0].item, turn_a);
+    assert_eq!(restored.history[1].item, tail.item);
+    assert!(
+        restored.history[1]
+            .metadata
+            .as_ref()
+            .unwrap()
+            .realtime_session_end_input
+    );
+
+    let mut rollback_a = records.clone();
+    rollback_a.push(rollback.clone());
+    assert!(
+        session
+            .reconstruct_history_from_rollout(&turn, &rollback_a)
+            .await
+            .history
+            .is_empty()
+    );
+
+    let mut rollback_b = records;
+    rollback_b.push(RolloutItem::ResponseItem(turn_b.into()));
+    rollback_b.push(rollback);
+    let restored = session
+        .reconstruct_history_from_rollout(&turn, &rollback_b)
+        .await;
+    assert_eq!(
+        restored
+            .history
+            .iter()
+            .map(|item| &item.item)
+            .collect::<Vec<_>>(),
+        vec![&turn_a, &tail.item]
+    );
 }

@@ -335,6 +335,7 @@ impl McpServerView {
 
     /// Publishes raw client tools with this view's policy, owner, and plugin attribution.
     /// Shared client catalogs stay unannotated so later views can reuse them safely.
+    #[tracing::instrument(name = "mcp.tools.prepare_for_model", skip_all)]
     fn prepare_tools_for_model(
         &self,
         tools: Vec<ToolInfo>,
@@ -1528,14 +1529,19 @@ impl McpConnectionSet {
             view.connection
                 .client()
                 .await
+                .inspect_err(|_| tracing::error!(server = %server_key, tool = ?tool, "MCP tool call failed during startup"))
                 .context("failed to get client")?
         } else {
             let client = view
                 .connection
                 .client
                 .ready_client()
-                .ok_or_else(|| anyhow!("MCP server '{server_key}' is not connected"))?;
+                .ok_or_else(|| {
+                    tracing::error!(server = %server_key, tool = ?tool, "MCP tool call failed: server is not connected");
+                    anyhow!("MCP server '{server_key}' is not connected")
+                })?;
             if client.client.is_closed().await {
+                tracing::error!(server = %server_key, tool = ?tool, "MCP tool call failed: server is not connected");
                 bail!("MCP server '{server_key}' is not connected");
             }
             client

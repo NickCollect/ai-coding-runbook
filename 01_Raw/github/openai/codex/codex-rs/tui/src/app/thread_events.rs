@@ -331,12 +331,12 @@ impl ThreadEventStore {
             _ => {}
         }
 
-        // These notifications are either handled before routing or ignored by ChatWidget on
-        // replay. In particular, raw response items and realtime audio can carry large payloads,
-        // so cloning them into every thread's replay buffer only retains data the TUI cannot use.
+        // These notifications add no replayable content. Turn diffs only refresh the status
+        // line, which replay_thread_snapshot already refreshes after rebuilding the widget.
         if matches!(
             notification.as_ref(),
             ServerNotification::RawResponseItemCompleted(_)
+                | ServerNotification::TurnDiffUpdated(_)
                 | ServerNotification::FileChangePatchUpdated(_)
                 | ServerNotification::ServerRequestResolved(_)
                 | ServerNotification::McpToolCallProgress(_)
@@ -655,6 +655,7 @@ pub(super) struct ThreadEventChannel {
     pub(super) store: Arc<Mutex<ThreadEventStore>>,
     /// Live Attach restored delivery without reading the history from the gap.
     pub(super) history_may_be_incomplete: bool,
+    pub(super) recovered_cloud_history: bool,
     attachment: ThreadEventAttachment,
     pub(super) archived: bool,
 }
@@ -668,20 +669,24 @@ impl ThreadEventChannel {
             store: Arc::new(Mutex::new(ThreadEventStore::new(capacity))),
             backend_id: None,
             history_may_be_incomplete: false,
+            recovered_cloud_history: false,
             attachment: ThreadEventAttachment::Live,
             archived: false,
         }
     }
 
     pub(super) fn mark_live(&mut self) {
+        self.recovered_cloud_history = false;
         self.attachment = ThreadEventAttachment::Live;
     }
 
     pub(super) fn mark_replay_only(&mut self) {
+        self.recovered_cloud_history = false;
         self.attachment = ThreadEventAttachment::ReplayOnly;
     }
 
     pub(super) fn mark_external_writer(&mut self) {
+        self.recovered_cloud_history = false;
         self.attachment = ThreadEventAttachment::ExternalWriter;
     }
 
@@ -704,6 +709,7 @@ impl ThreadEventChannel {
             ))),
             backend_id: None,
             history_may_be_incomplete: false,
+            recovered_cloud_history: false,
             attachment: ThreadEventAttachment::Live,
             archived: false,
         }
@@ -738,6 +744,7 @@ mod tests {
     use codex_app_server_protocol::ThreadRealtimeAudioChunk;
     use codex_app_server_protocol::ThreadRealtimeOutputAudioDeltaNotification;
     use codex_app_server_protocol::TurnCompletedNotification;
+    use codex_app_server_protocol::TurnDiffUpdatedNotification;
     use codex_app_server_protocol::TurnStartedNotification;
     use codex_app_server_protocol::UserInput;
     use codex_config::types::ApprovalsReviewer;
@@ -763,7 +770,7 @@ mod tests {
             approvals_reviewer: ApprovalsReviewer::User,
             permission_profile: PermissionProfile::read_only(),
             active_permission_profile: None,
-            cwd: cwd.abs(),
+            cwd: cwd.abs().into(),
             runtime_workspace_roots: Vec::new(),
             instruction_source_paths: Vec::new(),
             reasoning_effort: None,
@@ -996,6 +1003,13 @@ mod tests {
         let large_payload = "x".repeat(1024 * 1024);
 
         for _ in 0..32 {
+            store.push_notification_ref(&ServerNotification::TurnDiffUpdated(
+                TurnDiffUpdatedNotification {
+                    thread_id: thread_id.to_string(),
+                    turn_id: "turn-1".to_string(),
+                    diff: large_payload.clone(),
+                },
+            ));
             store.push_notification_ref(&ServerNotification::ThreadAttachmentUpdated(
                 ThreadAttachmentUpdatedNotification {
                     thread_id: thread_id.to_string(),

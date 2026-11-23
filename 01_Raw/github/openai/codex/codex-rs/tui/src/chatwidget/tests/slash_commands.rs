@@ -2276,6 +2276,7 @@ async fn assert_daybreak_catalog_and_account_gates(provider_id: &str) {
     chat.config.model_provider_id = provider_id.into();
     let mut model = crate::test_support::TEST_MODEL_PRESETS[0].clone();
     model.available_access_programs = Some(codex_protocol::openai_models::ModelAccessPrograms {
+        daybreak_availability: Default::default(),
         cyber: vec![codex_protocol::turn_input::CyberAccessProgram::Standard],
     });
     chat.model_catalog = std::sync::Arc::new(ModelCatalog::new(vec![model.clone()]));
@@ -2558,6 +2559,17 @@ async fn slash_keymap_debug_can_inspect_app_shortcuts() {
 }
 
 #[tokio::test]
+async fn slash_rc_arguments_direct_user_to_menu() {
+    let (mut chat, mut rx, mut op_rx) = make_chatwidget_manual(/*model_override*/ None).await;
+
+    submit_composer_text(&mut chat, "/rc stop");
+
+    let [cell]: [_; 1] = drain_insert_history(&mut rx).try_into().expect("one cell");
+    insta::assert_snapshot!(lines_to_single_string(&cell), @"■ Open /rc and choose Disable to turn off remote control.");
+    assert!(op_rx.try_recv().is_err(), "expected no agent turn");
+}
+
+#[tokio::test]
 async fn slash_keymap_invalid_args_show_usage() {
     let (mut chat, mut rx, mut op_rx) = make_chatwidget_manual(/*model_override*/ None).await;
 
@@ -2580,6 +2592,10 @@ async fn slash_keymap_invalid_args_show_usage() {
 #[tokio::test]
 async fn copy_shortcut_can_be_remapped() {
     let (mut chat, mut rx, _op_rx) = make_chatwidget_manual(/*model_override*/ None).await;
+    let ctrl_v_pastes_text = cfg!(windows)
+        || (cfg!(target_os = "linux")
+            && !crate::clipboard_copy::is_ssh_session()
+            && !crate::clipboard_copy::is_wsl_session());
     for (code, modifiers) in [
         (KeyCode::Char('v'), KeyModifiers::CONTROL),
         (KeyCode::Char('V'), KeyModifiers::CONTROL),
@@ -2593,7 +2609,7 @@ async fn copy_shortcut_can_be_remapped() {
         assert_matches!(
             chat.handle_key_event(paste),
             crate::chatwidget::KeyEventAction::PasteImage { text_fallback, .. }
-                if text_fallback == (cfg!(windows) && modifiers == KeyModifiers::CONTROL)
+                if text_fallback == (ctrl_v_pastes_text && modifiers == KeyModifiers::CONTROL)
                     .then_some(code)
         );
         chat.handle_key_event(KeyEvent {
@@ -3378,6 +3394,11 @@ async fn slash_pwd_and_cwd_alias_display_current_working_directory_from_composer
     let mut output = Vec::new();
     for (command, side) in [("/pwd", false), ("/cwd", true), ("/pwd x", false)] {
         let (mut chat, mut rx, mut op_rx) = make_chatwidget_manual(/*model_override*/ None).await;
+        if side {
+            chat.current_cwd =
+                PathUri::try_from(LegacyAppPathString::from_string(r"D:\workspace\remote"))
+                    .expect("absolute server path");
+        }
         chat.set_side_conversation_active(side);
         chat.bottom_pane.set_task_running(!side);
         chat.bottom_pane
@@ -3389,7 +3410,7 @@ async fn slash_pwd_and_cwd_alias_display_current_working_directory_from_composer
     }
     insta::assert_snapshot!(output.join(""), @r"
 • Current working directory: /tmp/project
-• Current working directory: /tmp/project
+• Current working directory: D:\workspace\remote
 ■ Usage: /pwd
 ");
 }

@@ -8,8 +8,7 @@ use super::RetainedInputSource;
 use super::RetainedSource;
 use super::RetainedSourceRole;
 use super::RetainedUserMessage;
-use super::bound_family;
-use codex_protocol::ItemIdGenerator;
+use codex_thread_context_ids::ThreadContextIds;
 
 impl RetainedContext {
     /// Reports observed storage loss or a retained message that cannot be delivered whole.
@@ -37,27 +36,31 @@ impl RetainedContext {
     /// Returns the captured source for the original envelope, independently of buffer eviction.
     pub fn record_assistant_message(
         &mut self,
-        message: RetainedUserMessage,
+        mut message: RetainedUserMessage,
         source: RetainedInputSource,
-        item_id_generator: &ItemIdGenerator,
+        context_ids: &ThreadContextIds,
     ) -> Option<RetainedSource> {
-        self.record_assistant_message_with_revision(message, source, || {
-            item_id_generator("retained")
-        })
+        message.bound(self.assistant_record_bytes());
+        self.record_assistant_message_with_revision(
+            message,
+            source,
+            context_ids,
+            /*revision*/ None,
+        )
     }
 
     pub(super) fn record_assistant_message_with_revision(
         &mut self,
-        mut message: RetainedUserMessage,
+        message: RetainedUserMessage,
         source: RetainedInputSource,
-        revision: impl FnOnce() -> codex_protocol::ResponseItemId,
+        context_ids: &ThreadContextIds,
+        revision: Option<&codex_protocol::ResponseItemId>,
     ) -> Option<RetainedSource> {
         if source == RetainedInputSource::Local(None) {
             // Leave unsequenced sources to legacy transcript selection. Missing
             // ordering alone does not establish an omission from reviewer context.
             return None;
         }
-        message.bound();
         let empty = message.complete && message.text.is_empty();
         let inherited = source == RetainedInputSource::Inherited;
         // A confirmed delivery is a distinct rollout fact even when the bounded live
@@ -83,7 +86,11 @@ impl RetainedContext {
         if empty {
             return None;
         }
-        let revision = message.message_id.as_ref().map(|_| revision());
+        let revision = message.message_id.as_ref().map(|_| {
+            revision
+                .cloned()
+                .unwrap_or_else(|| context_ids.next_item("retained"))
+        });
         let entry = Ordered {
             revision,
             inherited,
@@ -92,10 +99,7 @@ impl RetainedContext {
         };
         let source = entry.source(RetainedSourceRole::Assistant);
         self.assistant_messages.push_back(entry);
-        bound_family(
-            &mut self.assistant_messages,
-            &mut self.assistant_messages_incomplete,
-        );
+        self.bound_assistant_family();
         source
     }
 }

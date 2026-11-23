@@ -10,11 +10,12 @@ use futures::future::BoxFuture;
 use tokio_util::sync::CancellationToken;
 
 use crate::client::ModelClientSession;
+use crate::session::SamplingInterrupt;
 use crate::session::TurnInput;
 use crate::session::session::Session;
 use crate::session::startup_prewarm::SessionStartupPrewarmResolution;
 use crate::session::turn::McpStartupRequirements;
-use crate::session::turn::run_hooks_and_record_inputs;
+use crate::session::turn::run_hooks_and_record_input_entries;
 use crate::session::turn::run_turn;
 use crate::session::turn_context::TurnContext;
 use crate::state::TaskKind;
@@ -92,11 +93,12 @@ impl SessionTask for RegularTask {
         .await;
         let prewarmed_client_session = match prewarmed_client_session {
             SessionStartupPrewarmResolution::Cancelled => {
-                let _ = run_hooks_and_record_inputs(
+                let _ = run_hooks_and_record_input_entries(
                     &sess,
                     &ctx,
                     &ctx.capture_current_model_info(),
-                    &input,
+                    Some(&input),
+                    /*pending_input*/ &[],
                     PersistContext::Standard,
                 )
                 .await;
@@ -110,11 +112,12 @@ impl SessionTask for RegularTask {
         if let Some(resolution) = ctx.extension_data.get::<SavedProgramResolution>()
             && let Err(error) = resolution.validate()
         {
-            let _ = run_hooks_and_record_inputs(
+            let _ = run_hooks_and_record_input_entries(
                 &sess,
                 &ctx,
                 &ctx.capture_current_model_info(),
-                &input,
+                Some(&input),
+                /*pending_input*/ &[],
                 PersistContext::Standard,
             )
             .await;
@@ -160,10 +163,11 @@ impl RegularTask {
                 ))
                 .instrument(run_turn_span.clone())
                 .await?;
-                // Terminal errors are already reported. Let task completion preserve pending
-                // input instead of restarting the failed turn for that same input.
+                // Preserve pending input for the next turn after an error, exhausted budget,
+                // or interrupt instead of reopening this turn.
                 if ctx.terminal_error.lock().await.is_some()
                     || sess.work_budget().is_exhausted()
+                    || SamplingInterrupt::is_requested_for(&sess, &ctx).await
                     || !sess.input_queue.has_pending_input(&sess.active_turn).await
                 {
                     return Ok(Some(RegularTaskOutput {

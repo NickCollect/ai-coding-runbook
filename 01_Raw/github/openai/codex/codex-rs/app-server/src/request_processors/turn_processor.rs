@@ -1,3 +1,4 @@
+use super::thread_input::can_accept_direct_input;
 use super::thread_input::ensure_direct_input_allowed;
 use super::*;
 use codex_app_server_protocol::ImageReference as V2ImageReference;
@@ -7,7 +8,9 @@ use codex_app_server_protocol::ThreadGuardianReviewResponse;
 use codex_app_server_protocol::ThreadItem;
 use codex_app_server_protocol::ThreadPrepareApprovedPlanParams;
 use codex_app_server_protocol::ThreadPrepareApprovedPlanResponse;
+use codex_protocol::AgentPath;
 use codex_protocol::error::CodexErrorDetails;
+use codex_protocol::models::AgentMessageInputContent;
 use codex_protocol::models::ContentItem;
 use codex_protocol::models::FunctionCallOutputBody;
 use codex_protocol::models::FunctionCallOutputContentItem;
@@ -19,6 +22,7 @@ use codex_protocol::protocol::TurnSettingsUpdate;
 use codex_protocol::protocol::TurnSettingsUpdateOutcome;
 use codex_protocol::turn_input::AnnotatedResponseItem;
 use codex_protocol::turn_input::InjectedResponseItem;
+use codex_protocol::turn_input::ItemRetention;
 use codex_protocol::turn_input::ResponseItemAnnotations;
 use codex_utils_path_uri::PathUri;
 
@@ -86,6 +90,7 @@ fn validate_response_item_image_urls(items: &[ResponseItem]) -> Result<(), JSONR
 #[derive(Clone)]
 pub(crate) struct TurnRequestProcessor {
     thread_manager: Arc<ThreadManager>,
+    thread_store: Arc<dyn ThreadStore>,
     outgoing: Arc<OutgoingMessageSender>,
     analytics_events_client: AnalyticsEventsClient,
     config: Arc<Config>,
@@ -98,10 +103,9 @@ pub(crate) struct TurnRequestProcessor {
 }
 
 fn map_additional_context(
-    additional_context: Option<HashMap<String, AdditionalContextEntry>>,
+    additional_context: HashMap<String, AdditionalContextEntry>,
 ) -> BTreeMap<String, CoreAdditionalContextEntry> {
     additional_context
-        .unwrap_or_default()
         .into_iter()
         .map(|(key, entry)| {
             let entry = CoreAdditionalContextEntry {
@@ -144,6 +148,7 @@ impl TurnRequestProcessor {
     #[allow(clippy::too_many_arguments)]
     pub(crate) fn new(
         thread_manager: Arc<ThreadManager>,
+        thread_store: Arc<dyn ThreadStore>,
         outgoing: Arc<OutgoingMessageSender>,
         analytics_events_client: AnalyticsEventsClient,
         config: Arc<Config>,
@@ -156,6 +161,7 @@ impl TurnRequestProcessor {
     ) -> Self {
         Self {
             thread_manager,
+            thread_store,
             outgoing,
             analytics_events_client,
             config,
@@ -221,14 +227,12 @@ impl TurnRequestProcessor {
         Ok(Some(
             ThreadGuardianReviewResponse {
                 call_id: result.call_id,
-                assessment: result
-                    .assessment
-                    .map(|assessment| ThreadGuardianAssessment {
-                        outcome: assessment.outcome,
-                        risk_level: assessment.risk_level.into(),
-                        user_authorization: assessment.user_authorization.into(),
-                        rationale: assessment.rationale,
-                    }),
+                assessment: ThreadGuardianAssessment {
+                    outcome: result.assessment.outcome,
+                    risk_level: result.assessment.risk_level.into(),
+                    user_authorization: result.assessment.user_authorization.into(),
+                    rationale: result.assessment.rationale,
+                },
             }
             .into(),
         ))
@@ -634,9 +638,10 @@ impl TurnRequestProcessor {
             return Err(error);
         }
         // Validate before changing the thread's live MCP policy.
-        let additional_context = map_additional_context(params.additional_context);
+        let additional_context = params.additional_context.map(map_additional_context);
         additional_context
-            .values()
+            .iter()
+            .flat_map(BTreeMap::values)
             .try_for_each(CoreAdditionalContextEntry::validate)
             .map_err(invalid_request)
             .inspect_err(|error| {
@@ -919,7 +924,10 @@ impl TurnRequestProcessor {
             approval_policy.map(codex_app_server_protocol::AskForApproval::to_core);
         let approvals_reviewer =
             approvals_reviewer.map(codex_app_server_protocol::ApprovalsReviewer::to_core);
-        let sandbox_policy = sandbox_policy.map(|policy| policy.to_core());
+        let sandbox_policy = sandbox_policy
+            .map(|policy| policy.try_to_core())
+            .transpose()
+            .map_err(|err| invalid_request(format!("invalid sandboxPolicy: {err}")))?;
         let (permission_profile, active_permission_profile, profile_workspace_roots) =
             if let Some(permissions) = permissions {
                 let Some(snapshot) = snapshot.as_ref() else {
@@ -1077,9 +1085,6 @@ impl TurnRequestProcessor {
         params: ThreadInjectItemsParams,
     ) -> Result<ThreadInjectItemsResponse, JSONRPCErrorError> {
         let (_, thread) = self.load_thread(&params.thread_id).await?;
-        self.ensure_direct_input_allowed(request_id, thread.as_ref())
-            .await?;
-
         let items = params
             .items
             .into_iter()
@@ -1089,18 +1094,46 @@ impl TurnRequestProcessor {
                     .map_err(|err| format!("items[{index}] is not a valid response item: {err}"))
             })
             .collect::<std::result::Result<Vec<_>, _>>()
-            .map_err(invalid_request)?;
+            .map_err(invalid_request);
+        // Only native children need the mailbox exception. Roots keep their existing
+        // history injection path, which persists idle input before acknowledging it.
+        let config_snapshot = thread.config_snapshot().await;
+        let agent_mail = !can_accept_direct_input(
+            thread.multi_agent_version(),
+            &config_snapshot.session_source,
+        ) && items.as_ref().is_ok_and(|items| {
+            !items.is_empty()
+                && items.iter().all(|item| {
+                    matches!(item.retention, ItemRetention::Unspecified)
+                        && matches!(
+                            &item.item,
+                            ResponseItem::AgentMessage { author, recipient, content, .. }
+                                if matches!(content.as_slice(), [AgentMessageInputContent::InputText { .. }])
+                                    && AgentPath::try_from(author.as_str()).is_ok()
+                                    && AgentPath::try_from(recipient.as_str()).is_ok()
+                        )
+                })
+        }) && !thread.config().await.multi_agent_v2.disable_native_tools;
+        if !agent_mail {
+            self.ensure_direct_input_allowed(request_id, thread.as_ref())
+                .await?;
+        }
+        let items = items?;
         for item in &items {
             validate_response_item_image_urls(std::slice::from_ref(&item.item))?;
         }
 
-        thread
-            .inject_response_items_with_retention(items)
-            .await
-            .map_err(|err| match err.details() {
-                CodexErrorDetails::InvalidRequest(message) => invalid_request(message.clone()),
-                _ => internal_error(format!("failed to inject response items: {err}")),
-            })?;
+        let result = if agent_mail {
+            thread
+                .inject_response_items(items.into_iter().map(|item| item.item).collect())
+                .await
+        } else {
+            thread.inject_response_items_with_retention(items).await
+        };
+        result.map_err(|err| match err.details() {
+            CodexErrorDetails::InvalidRequest(message) => invalid_request(message.clone()),
+            _ => internal_error(format!("failed to inject response items: {err}")),
+        })?;
         Ok(ThreadInjectItemsResponse {})
     }
 
@@ -1153,7 +1186,7 @@ impl TurnRequestProcessor {
             .into_iter()
             .map(V2UserInput::into_core)
             .collect();
-        let additional_context = map_additional_context(params.additional_context);
+        let additional_context = params.additional_context.map(map_additional_context);
 
         let submission = thread
             .steer_turn(
@@ -1525,66 +1558,108 @@ impl TurnRequestProcessor {
         }
     }
 
+    #[expect(
+        clippy::await_holding_invalid_type,
+        reason = "register the interrupt before the listener can consume the validated turn's terminal event"
+    )]
     async fn turn_interrupt_inner(
         &self,
         request_id: &ConnectionRequestId,
         params: TurnInterruptParams,
     ) -> Result<Option<TurnInterruptResponse>, JSONRPCErrorError> {
         let TurnInterruptParams { thread_id, turn_id } = params;
-        let is_startup_interrupt = turn_id.is_empty();
-
         let (thread_uuid, thread) = self.load_thread(&thread_id).await?;
 
-        // Record turn interrupts so we can reply when TurnAborted arrives. Startup
-        // interrupts do not have a turn and are acknowledged after submission.
-        if !is_startup_interrupt {
-            let thread_state = self.thread_state_manager.thread_state(thread_uuid).await;
-            let is_running = matches!(thread.agent_status().await, AgentStatus::Running);
-            {
-                let mut thread_state = thread_state.lock().await;
-                if let Some(active_turn_id) = thread_state.active_turn_id() {
-                    if active_turn_id != turn_id {
-                        return Err(invalid_request(format!(
-                            "expected active turn id {turn_id} but found {active_turn_id}"
-                        )));
-                    }
-                } else if thread_state.last_terminal_turn_id.as_deref() == Some(turn_id.as_str())
-                    || !is_running
-                {
-                    return Err(invalid_request("no active turn to interrupt"));
-                }
-                thread_state.pending_interrupts.push(request_id.clone());
-            }
-
-            self.outgoing
-                .record_request_turn_id(request_id, &turn_id)
-                .await;
+        // Startup interrupts have no target and are acknowledged on submission.
+        if turn_id.is_empty() {
+            self.submit_core_op(request_id, thread.as_ref(), Op::Interrupt)
+                .await
+                .map_err(|err| internal_error(format!("failed to interrupt startup: {err}")))?;
+            return Ok(Some(TurnInterruptResponse {}));
         }
 
-        // Submit the interrupt. Turn interrupts respond upon TurnAborted; startup
-        // interrupts respond here because startup cancellation has no turn event.
+        // Reply when the target completes or aborts.
+        let thread_state = self.thread_state_manager.thread_state(thread_uuid).await;
+        let submit_interrupt = {
+            let mut thread_state = thread_state.lock().await;
+            // Serialize registration with listener shutdown. A handler may also have
+            // loaded the old runtime before a replacement listener was installed.
+            if thread_state.listener_shutdown
+                || (thread_state.shutdown_drain.is_some()
+                    && !thread_state.listener_matches(&thread))
+            {
+                return Err(invalid_request(
+                    "thread runtime is no longer accepting interrupts",
+                ));
+            }
+            let listener_turn_id = thread_state.active_turn_id();
+            if let Some(active_turn_id) = listener_turn_id
+                && active_turn_id != turn_id
+            {
+                return Err(invalid_request(format!(
+                    "expected active turn id {turn_id} but found {active_turn_id}"
+                )));
+            }
+            let terminal_turn_id = interrupt_terminal_turn_id(&thread_state, &turn_id)
+                .ok_or_else(|| invalid_request("no active turn to interrupt"))?;
+            let submit_interrupt = match thread.current_turn_id().await {
+                // Core reserves the ID before it announces the turn.
+                Some(id)
+                    if id == terminal_turn_id
+                        && (listener_turn_id.is_some()
+                            || matches!(thread.agent_status().await, AgentStatus::Running)) =>
+                {
+                    true
+                }
+                // Core drops the slot before publishing TurnAborted.
+                None if thread_state
+                    .pending_interrupts
+                    .iter()
+                    .any(|(id, _)| id == terminal_turn_id) =>
+                {
+                    false
+                }
+                // A listener-visible turn may already be aborting. Only a review
+                // announced before task registration still needs an interrupt here.
+                None if listener_turn_id.is_some()
+                    && thread_state.turn_summaries.contains_key(terminal_turn_id) =>
+                {
+                    listener_turn_id == Some(terminal_turn_id)
+                        && thread_state.last_started_turn_id.as_deref() != Some(terminal_turn_id)
+                }
+                Some(_) | None => return Err(invalid_request("no active turn to interrupt")),
+            };
+            let terminal_turn_id = terminal_turn_id.to_owned();
+            thread_state
+                .pending_interrupts
+                .push((terminal_turn_id, request_id.clone()));
+            submit_interrupt
+        };
+
+        self.outgoing
+            .record_request_turn_id(request_id, &turn_id)
+            .await;
+        if !submit_interrupt {
+            return Ok(None);
+        }
+
         match self
             .submit_core_op(request_id, thread.as_ref(), Op::Interrupt)
             .await
         {
-            Ok(_) if is_startup_interrupt => Ok(Some(TurnInterruptResponse {})),
             Ok(_) => Ok(None),
             Err(err) => {
-                if !is_startup_interrupt {
-                    let thread_state = self.thread_state_manager.thread_state(thread_uuid).await;
-                    let mut thread_state = thread_state.lock().await;
-                    thread_state
-                        .pending_interrupts
-                        .retain(|pending_request_id| pending_request_id != request_id);
-                }
-                let interrupt_target = if is_startup_interrupt {
-                    "startup"
-                } else {
-                    "turn"
+                let mut state = thread_state.lock().await;
+                let Some(index) = state
+                    .pending_interrupts
+                    .iter()
+                    .position(|(_, id)| id == request_id)
+                else {
+                    // The listener already settled this request.
+                    return Ok(None);
                 };
-                Err(internal_error(format!(
-                    "failed to interrupt {interrupt_target}: {err}"
-                )))
+                state.pending_interrupts.remove(index);
+                Err(internal_error(format!("failed to interrupt turn: {err}")))
             }
         }
     }
@@ -1592,6 +1667,7 @@ impl TurnRequestProcessor {
     fn listener_task_context(&self) -> ListenerTaskContext {
         ListenerTaskContext {
             thread_manager: Arc::clone(&self.thread_manager),
+            thread_store: Arc::clone(&self.thread_store),
             thread_state_manager: self.thread_state_manager.clone(),
             outgoing: Arc::clone(&self.outgoing),
             pending_thread_unloads: Arc::clone(&self.pending_thread_unloads),
@@ -1617,3 +1693,21 @@ impl TurnRequestProcessor {
         .await
     }
 }
+
+fn interrupt_terminal_turn_id<'a>(state: &'a ThreadState, turn_id: &'a str) -> Option<&'a str> {
+    let terminal_id = if state.forwarded_turn_id.as_deref() == Some(turn_id) {
+        // History can still name the delegate after the outer turn has finished.
+        let outer_id = state.last_started_turn_id.as_deref()?;
+        if !state.turn_summaries.contains_key(outer_id) {
+            return None;
+        }
+        outer_id
+    } else {
+        turn_id
+    };
+    (state.last_terminal_turn_id.as_deref() != Some(terminal_id)).then_some(terminal_id)
+}
+
+#[cfg(test)]
+#[path = "turn_interrupt_tests.rs"]
+mod turn_interrupt_tests;

@@ -54,7 +54,7 @@ async fn request_plugin_install_rejects_restricted_threads(presentation: ToolSug
             turn,
             cancellation_token: tokio_util::sync::CancellationToken::new(),
             tracker: Arc::new(Mutex::new(TurnDiffTracker::default())),
-            call_id: "call-1".to_string(),
+            call_id: "call-1".into(),
             tool_name: codex_tools::ToolName::plain(REQUEST_PLUGIN_INSTALL_TOOL_NAME),
             source: crate::tools::context::ToolCallSource::Direct,
             native_call: None,
@@ -124,17 +124,6 @@ async fn verified_plugin_install_completed_requires_installed_plugin() {
         &refreshed_config,
         &plugins_manager,
     ));
-}
-
-#[test]
-fn remote_plugin_install_suggestions_skip_core_installed_verification() {
-    assert!(is_remote_plugin_install_suggestion(
-        "snowflake@openai-curated-remote"
-    ));
-    assert!(!is_remote_plugin_install_suggestion(
-        "snowflake@openai-curated"
-    ));
-    assert!(!is_remote_plugin_install_suggestion("Plugin_123"));
 }
 
 #[test]

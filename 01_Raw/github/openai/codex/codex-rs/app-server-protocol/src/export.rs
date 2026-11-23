@@ -132,6 +132,7 @@ pub fn generate_ts_with_options(
     ensure_dir(out_dir)?;
     ensure_dir(&v2_out_dir)?;
 
+    crate::StartupGatewayOAuthChangedNotification::export_all_to(out_dir)?;
     ClientRequest::export_all_to(out_dir)?;
     export_client_responses(out_dir)?;
     ClientNotification::export_all_to(out_dir)?;
@@ -238,6 +239,9 @@ pub fn generate_json_with_experimental(out_dir: &Path, experimental_api: bool) -
         out_dir,
         "v2::UserVerificationRpcError",
     )?);
+    schemas.push(write_json_schema::<
+        crate::StartupGatewayOAuthChangedNotification,
+    >(out_dir, "v2::StartupGatewayOAuthChangedNotification")?);
     schemas.push(write_json_schema::<crate::ModelProviderError>(
         out_dir,
         "v2::ModelProviderError",
@@ -2414,8 +2418,10 @@ mod tests {
                 // These are only allowed in *Params types, except additive stable fields
                 // that older servers omit and newer servers may return as null.
                 let legacy_optional_nullable_field = (path
-                    == Path::new("v2/GetAccountTokenUsageResponse.ts")
-                    && field_prefix.trim() == "threadUsage?")
+                    == Path::new("v2/FsGetMetadataResponse.ts")
+                    && field_prefix.trim() == "sizeBytes?")
+                    || (path == Path::new("v2/GetAccountTokenUsageResponse.ts")
+                        && field_prefix.trim() == "threadUsage?")
                     || (path == Path::new("v2/ThreadUsage.ts")
                         && field_prefix.trim() == "nativeUsageUsdMicros?")
                     || (path == Path::new("v2/ThreadItem.ts")

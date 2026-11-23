@@ -962,6 +962,7 @@ class FinalRequestOptionsInput(TypedDict, total=False):
     follow_redirects: bool
     security: SecurityOptions
     synthesize_event_and_data: bool
+    stream_mode: Literal["legacy", "events"]
 
 
 @final
@@ -981,6 +982,7 @@ class FinalRequestOptions(pydantic.BaseModel):
         "admin_api_key_auth": True,
     }
     synthesize_event_and_data: Optional[bool] = None
+    stream_mode: Literal["legacy", "events"] = "legacy"
 
     content: Union[bytes, bytearray, IO[bytes], Iterable[bytes], AsyncIterable[bytes], None] = None
     # It should be noted that we cannot use `json` here as that would override
@@ -1015,7 +1017,7 @@ class FinalRequestOptions(pydantic.BaseModel):
 
     # type ignore required because we're adding explicit types to `**values`
     @classmethod
-    def construct(  # ty: ignore[invalid-method-override]
+    def construct(  # ty: ignore[incompatible-method-override]
         cls,
         _fields_set: set[str] | None = None,
         **values: Unpack[FinalRequestOptionsInput],

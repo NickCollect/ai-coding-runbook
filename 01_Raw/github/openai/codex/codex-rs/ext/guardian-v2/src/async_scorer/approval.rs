@@ -4,11 +4,11 @@
 
 use super::authorization::ScoreAuthorization;
 use super::config::GuardianV2Config;
+use super::conversation::ConversationBackend;
 use super::metrics::TOOL_CALL_LAG_METRIC;
 use super::metrics::record_fast_decision;
 use super::parent_compaction::select_parent_compaction;
 use super::sampler::LunaSampler;
-use super::score::GuardianV2ScoreProgress;
 use codex_core::CodexThread;
 use codex_core::ThreadManager;
 use codex_core::context::GuardianContextMode;
@@ -73,22 +73,45 @@ impl GuardianApprovalReviewer {
         let model = input
             .thread_store
             .get::<codex_protocol::openai_models::ModelInfo>();
+        let has_explicit_guardian_provider = config.guardian_model_provider.is_some();
+        let guardian_classifier_result =
+            GuardianV2Config::explicit_guardian_classifier_model(config, input.thread_store).await;
         let guardian_config = input
             .thread_store
             .get::<GuardianV2Config>()
             .map(|config| (*config).clone())
             .map_or_else(|| GuardianV2Config::resolve(config), Ok)
+            .and_then(|config| match &guardian_classifier_result {
+                Ok(Some(model)) => config.with_classifier_defaults(Some(model)),
+                Ok(None) => Ok(config),
+                Err(error) => Err(error.clone()),
+            })
             .ok();
+        let guardian_classifier_model = guardian_classifier_result.ok().flatten();
+        let review_scope_model = if has_explicit_guardian_provider {
+            guardian_classifier_model.as_deref()
+        } else {
+            model.as_deref()
+        };
         let requirements = config.config_layer_stack.requirements();
         let mut policy = guardian_config.as_ref().map_or_else(
             || {
                 codex_config::GuardianPolicyLoader::new(Some(
                     &codex_features::FeatureToml::Enabled(true),
                 ))
-                .resolve(model.as_deref(), requirements)
+                .resolve(review_scope_model, requirements)
             },
-            |config| config.policy_for_model(model.as_deref(), requirements),
+            |config| config.policy_for_model(review_scope_model, requirements),
         );
+        if has_explicit_guardian_provider {
+            if guardian_config.is_none() {
+                policy.disable_scoring();
+            }
+            requirements.constrain_guardian_policy(
+                &mut policy,
+                model.as_ref().map(|model| model.slug.as_str()),
+            );
+        }
         // Live mandatory restrictions may harden the turn's captured policy.
         thread
             .config()
@@ -144,10 +167,11 @@ impl GuardianApprovalReviewer {
             if mode == GuardianReviewMode::Adaptive
                 && !input.require_fresh_review
                 && let Some(config) = guardian_config.as_ref()
-                && let Some(progress) = input.thread_store.get::<GuardianV2ScoreProgress>()
+                && let Some(cache) =
+                    ConversationBackend::for_turn(input.thread_store, input.turn_store)
             {
                 // Subscribe before checking so a concurrently published score is not lost.
-                let mut updates = progress.updates.subscribe();
+                let mut updates = cache.progress.updates.subscribe();
                 loop {
                     if let Ok(true) =
                         cached_evidence(thread, input, config, &policy, /*metrics*/ None).await
@@ -207,7 +231,7 @@ async fn cached_evidence(
     metrics: Option<&dyn ExtensionMetrics>,
 ) -> Result<bool, GuardianReviewReason> {
     let store = input.thread_store;
-    let Some(progress) = store.get::<GuardianV2ScoreProgress>() else {
+    let Some(cache) = ConversationBackend::for_turn(store, input.turn_store) else {
         if let Some(metrics) = metrics {
             metrics.counter(
                 "codex.guardian_v2.score_readiness",
@@ -225,7 +249,7 @@ async fn cached_evidence(
         .is_ok_and(|action| action.len().saturating_add(1) <= max_action_bytes);
     let history = thread.conversation_history_snapshot().await;
     let permitted = constrained_live_policy(thread, store, policy).await;
-    let cached = progress.inspect(input.tool_call_id);
+    let cached = cache.progress.inspect(input.tool_call_id);
     if let Some(metrics) = metrics {
         metrics.counter(
             "codex.guardian_v2.score_readiness",
@@ -295,7 +319,7 @@ async fn cached_evidence(
     let current = ScoreAuthorization::current(thread, permissions).await;
     // Classification may publish or fail while authorization and live policy are collected.
     let permitted = constrained_live_policy(thread, store, policy).await;
-    let cached = progress.inspect(input.tool_call_id);
+    let cached = cache.progress.inspect(input.tool_call_id);
     if let Some(metrics) = metrics
         && let Some(sampled_at) = cached.sampled_at
     {
@@ -329,6 +353,10 @@ async fn cached_evidence(
     // Reuse the latest thread score within the lag limit, even across categories
     // and while the current action's async score is still in flight.
     let (reason, label) = match cached.action_risk {
+        None if cached.has_unscored_failure => {
+            (GuardianReviewReason::ScoringFailure, "scoring_failure")
+        }
+        None => (GuardianReviewReason::MissingScore, "missing_score"),
         _ if lag > config.max_tool_call_lag => {
             if let Some(metrics) = metrics {
                 metrics.counter(
@@ -342,7 +370,6 @@ async fn cached_evidence(
         _ if cached.has_unscored_failure => {
             (GuardianReviewReason::ScoringFailure, "scoring_failure")
         }
-        None => (GuardianReviewReason::MissingScore, "missing_score"),
         Some(score) if score < config.review_threshold => {
             if cached.authorization.as_ref() != Some(&current) {
                 (

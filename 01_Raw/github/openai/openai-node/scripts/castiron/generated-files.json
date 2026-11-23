@@ -3,11 +3,11 @@
   "files": {
     "api.md": {
       "mode": "100644",
-      "sha256": "82f36ac42b6a4f85787f3dff0168bbdd2dcb7f50dce997807d168db1a152b2a2"
+      "sha256": "e42774df3dffa3c3f9b9b90d805108f39d4790cdcc0b7c69d520945c4f4009d1"
     },
     "src/client.ts": {
       "mode": "100644",
-      "sha256": "ad27a23b9f869472bbd20b922b55fdc0d095f9be8a25b44def7ef5a8f0fd53ad"
+      "sha256": "c00a0e31a54dfb053c19066e5d49b95353e7d02e4ccd07bbb103d6cba4263c52"
     },
     "src/internal/data-residency.ts": {
       "mode": "100644",
@@ -287,7 +287,7 @@
     },
     "src/resources/beta/agents/agents.ts": {
       "mode": "100644",
-      "sha256": "33cf560a418884ce6190c082ed158994fd03b6251f8722864ed24f8115e31d04"
+      "sha256": "810dca21505d5dffa4a97ef4c63e3ab836246137f60ec716f8a957a57deab839"
     },
     "src/resources/beta/agents/automations.ts": {
       "mode": "100644",
@@ -295,7 +295,7 @@
     },
     "src/resources/beta/agents/automations/automations.ts": {
       "mode": "100644",
-      "sha256": "d93d9ebe699eea989363795af27378542ddb9bb863389ee3fc98c5c59d7bf5fa"
+      "sha256": "a6b9e13e6b611e5bb120beb84459da62e68bfa89f95ddbefcd04cf82c6535541"
     },
     "src/resources/beta/agents/automations/index.ts": {
       "mode": "100644",
@@ -351,7 +351,7 @@
     },
     "src/resources/beta/agents/sessions/sessions.ts": {
       "mode": "100644",
-      "sha256": "f330b5e20b6794d5a1facd4be3b3ccad63c535cea65326f55d60755715178552"
+      "sha256": "9531329d96fa9c391cfe067f0cf0ef1ce37c04dd418246113e87ce4c09d0e49c"
     },
     "src/resources/beta/agents/sessions/subagents.ts": {
       "mode": "100644",
@@ -475,7 +475,7 @@
     },
     "src/resources/beta/responses/responses.ts": {
       "mode": "100644",
-      "sha256": "134a07e66a23d2a4bde78cb76ddd1c735dbe0822af0a42460f827d1ade7eac08"
+      "sha256": "54a43554ac9d750304aea22430f9ebd38dcf0e80b9aeea5813a36a13c1d80943"
     },
     "src/resources/beta/responses/ws-base.ts": {
       "mode": "100644",
@@ -531,7 +531,7 @@
     },
     "src/resources/chat/completions/completions.ts": {
       "mode": "100644",
-      "sha256": "1751d26318234a39ff4f476c54fc8e81a6456488216d1ed36f0a2ec899fa7b1c"
+      "sha256": "588cd5994d03a4e41374fcd9ffa864f9a2237266f607591062b72e0ac1028d93"
     },
     "src/resources/chat/completions/index.ts": {
       "mode": "100644",
@@ -547,7 +547,7 @@
     },
     "src/resources/completions.ts": {
       "mode": "100644",
-      "sha256": "3b521c000d4d2c7cb6fb2eeec64568f4ef9e3aafcb4472202f05e23c972b9807"
+      "sha256": "fd42a6e105bb8dd09a84e2c1d01a00afab531eae1cb19c196bc3697165106b7c"
     },
     "src/resources/containers.ts": {
       "mode": "100644",
@@ -727,7 +727,7 @@
     },
     "src/resources/index.ts": {
       "mode": "100644",
-      "sha256": "0b259d3c5b2fe777d844da283ab234b5d573eb1ce96050ebbafec8e9a693cb95"
+      "sha256": "552ebe8652c702162d27517a58dbd9c492ac715e22f90d948836df962b62fe3d"
     },
     "src/resources/live.ts": {
       "mode": "100644",
@@ -743,7 +743,7 @@
     },
     "src/resources/live/forks/forks.ts": {
       "mode": "100644",
-      "sha256": "c831a57bcda720bf08b19f004404d38d1c1e64cb496818df0a957b8033162c13"
+      "sha256": "916a98e6e3cb33bc32df9a2e1beda1e0a62e16aacd7bab31ba9218f9297c11f1"
     },
     "src/resources/live/forks/index.ts": {
       "mode": "100644",
@@ -771,11 +771,11 @@
     },
     "src/resources/live/live.ts": {
       "mode": "100644",
-      "sha256": "bcab2971e36f42e238e666843541610d395e9d5f860117631e258a222cbd1ad8"
+      "sha256": "785dbaca56509d20053c076bf466705d04e71be655947bfb518b3da467477c25"
     },
     "src/resources/live/sessions.ts": {
       "mode": "100644",
-      "sha256": "b18f30e31ed4171159550c01365a11d25bf7facfa89f6de125e8e881a3674287"
+      "sha256": "e070eacf8012b4a76ca28a149c79971918c972bc36b90d11bcbe2720350a7dfd"
     },
     "src/resources/live/sideband.ts": {
       "mode": "100644",
@@ -791,7 +791,7 @@
     },
     "src/resources/live/sideband/sideband.ts": {
       "mode": "100644",
-      "sha256": "7427d197611427644800e40965e1f954e987dc3df40ac62de914e66b0f9df726"
+      "sha256": "a0796ab02cc76e16fc6b80e335c81ea35fddf67b3c8ad4a307f791876396450c"
     },
     "src/resources/live/sideband/ws-base.ts": {
       "mode": "100644",
@@ -815,7 +815,7 @@
     },
     "src/resources/moderations.ts": {
       "mode": "100644",
-      "sha256": "049998cc81901c26ebaa88f6e039996bb7182db50d1a596a7cbcd95c125c201f"
+      "sha256": "f967a48ceb143f31c729b7d0903726d5b5811f2cd785837ab8e6964d9e31ca7c"
     },
     "src/resources/realtime.ts": {
       "mode": "100644",
@@ -887,7 +887,7 @@
     },
     "src/resources/responses/responses.ts": {
       "mode": "100644",
-      "sha256": "b8069d29546925dcabf1bcf472cc76bdc05fc5522b302823b3e7635d8b9137ea"
+      "sha256": "a46991b245798b3e79a680852467f7c788f31ada7d321e4f63a623415942fc10"
     },
     "src/resources/responses/ws-base.ts": {
       "mode": "100644",
@@ -919,7 +919,7 @@
     },
     "src/resources/shared.ts": {
       "mode": "100644",
-      "sha256": "8feecf9ec262604ad883e8f8c4aaa49f4b12be067996c8f6df3baed323f06de7"
+      "sha256": "8a380968b4555c2fede966e67e601aee1f37252d7134362ea529cf495813a373"
     },
     "src/resources/skills.ts": {
       "mode": "100644",
@@ -1215,7 +1215,7 @@
     },
     "tests/api-resources/beta/agents/sessions/sessions.test.ts": {
       "mode": "100644",
-      "sha256": "537a25cd34befe2e2360e6327ffc9e28faf02b4d02dbc165f00a1d4c4bfdc9b1"
+      "sha256": "17e65dc2605570b1305bcde5427ddc6cddfb0d811007dd9d135c6c2ef9329f8f"
     },
     "tests/api-resources/beta/agents/sessions/subagents/items.test.ts": {
       "mode": "100644",
@@ -1375,11 +1375,11 @@
     },
     "tests/api-resources/live/live.test.ts": {
       "mode": "100644",
-      "sha256": "a1124d687af1de7bc60525c0414b09bf24fe55daff2b3c042a2e856c2be19b8d"
+      "sha256": "830d46ea451f6e62a8906261aadf2bbd0cb54cbad5a986544cf5e77d8640050e"
     },
     "tests/api-resources/live/sessions.test.ts": {
       "mode": "100644",
-      "sha256": "fae27e8e067c2e7c763fee39f09118895430fa0cf7139698a1e47101ddd2e03b"
+      "sha256": "4ba1b206da16f490602e60a62a1776751fb3c8e0570e72354803d3a20264b7ee"
     },
     "tests/api-resources/models.test.ts": {
       "mode": "100644",

@@ -62,6 +62,8 @@ pub(crate) const SIDE_EDIT_PREVIOUS_UNAVAILABLE_MESSAGE: &str =
 /// Aggregates all backtrack-related state used by the App.
 #[derive(Default)]
 pub(crate) struct BacktrackState {
+    /// Hold terminal input between confirming a prompt edit and dispatching its revert.
+    pub(crate) revert_queued: bool,
     /// True when Esc has primed backtrack mode in the main view.
     pub(crate) primed: bool,
     /// Session id of the base thread whose transcript is being inspected.
@@ -171,6 +173,7 @@ impl App {
         else {
             return;
         };
+        self.backtrack.revert_queued = true;
         self.app_event_tx
             .send(AppEvent::RevertSessionForPromptEdit {
                 thread_id: selection.thread_id,
@@ -454,9 +457,14 @@ impl App {
                 let _ = tui.set_mouse_capture(tui::MouseCapture::Inherit);
             }
             let completed_copy = result?;
-            let close_overlay = t.is_done();
+            let thread_link = t.pending_thread_link.take();
+            let close_overlay = t.is_done() || thread_link.is_some();
             let select_mode_closed = was_select_mode && (!t.is_select_mode() || close_overlay);
             let pending_follow_id = t.pending_follow_id();
+            if let Some(thread_id) = thread_link {
+                self.app_event_tx
+                    .send(AppEvent::OpenThreadLink { thread_id });
+            }
             if !close_overlay
                 && active_key.is_some_and(|key| key.animation_tick.is_some())
                 && t.is_scrolled_to_bottom()

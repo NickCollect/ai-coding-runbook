@@ -26,6 +26,7 @@ use codex_protocol::models::SearchToolCallParams;
 #[cfg(test)]
 use codex_protocol::openai_models::ModelInfo;
 use codex_protocol::openai_models::ToolMode;
+use codex_tool_call_id::ToolCallId;
 use codex_tools::DiscoverableTool;
 use codex_tools::ResponsesApiNamespaceTool;
 use codex_tools::ToolName;
@@ -48,7 +49,7 @@ const EXPOSURE_HIDDEN: &str = "hidden";
 #[derive(Clone, PartialEq)]
 pub struct ToolCall {
     pub tool_name: ToolName,
-    pub call_id: String,
+    pub call_id: ToolCallId,
     pub payload: ToolPayload,
     pub encrypted_function_args: Option<Vec<String>>,
     /// Original function call, retained only for tools that opt into native review.
@@ -101,7 +102,7 @@ pub struct ToolRouter {
     model_visible_specs: Arc<[ToolSpec]>,
     tool_mode: ToolMode,
     code_mode_tool_names: BTreeMap<String, ToolName>,
-    exec_definitions: Option<Arc<Vec<codex_code_mode::ExecDefinition>>>,
+    exec_definitions: Option<Arc<codex_code_mode::ExecDefinitions>>,
     tool_namespaces_info: Option<TurnToolNamespacesInfo>,
     can_manage_children: bool,
 }
@@ -142,7 +143,7 @@ impl ToolRouter {
         model_visible_specs: Vec<ToolSpec>,
         tool_mode: ToolMode,
         code_mode_tool_names: BTreeMap<String, ToolName>,
-        exec_definitions: Option<Arc<Vec<codex_code_mode::ExecDefinition>>>,
+        exec_definitions: Option<Arc<codex_code_mode::ExecDefinitions>>,
         tool_namespaces_info: Option<TurnToolNamespacesInfo>,
         child_management_tools: &[ToolName],
     ) -> Self {
@@ -166,7 +167,7 @@ impl ToolRouter {
         Arc::clone(&self.model_visible_specs)
     }
 
-    pub(crate) fn exec_definitions(&self) -> Option<Arc<Vec<codex_code_mode::ExecDefinition>>> {
+    pub(crate) fn exec_definitions(&self) -> Option<Arc<codex_code_mode::ExecDefinitions>> {
         self.exec_definitions.clone()
     }
 
@@ -240,8 +241,14 @@ impl ToolRouter {
         self.registry.deferred_tool_namespaces()
     }
 
-    pub(crate) fn mcp_namespaces(&self) -> impl Iterator<Item = (&str, &str)> {
-        self.registry.mcp_namespaces()
+    pub(crate) fn indirect_namespace_prefixes<'a>(
+        &self,
+        prefixes: Option<&'a codex_protocol::openai_models::IndirectDescriptionPrefixes>,
+    ) -> Result<
+        codex_tools::IndirectNamespacePrefixes<'a>,
+        codex_tools::IndirectNamespacePrefixConflict,
+    > {
+        self.registry.indirect_namespace_prefixes(prefixes)
     }
 
     #[cfg(test)]
@@ -284,7 +291,7 @@ impl ToolRouter {
                 ref name,
                 ref namespace,
                 ref mut arguments,
-                ref call_id,
+                ref mut call_id,
                 ref mut encrypted_function_args,
                 ..
             } => {
@@ -294,15 +301,22 @@ impl ToolRouter {
                     .registry
                     .registered_tool(&tool_name)
                     .is_some_and(|tool| tool.native_review == NativeReview::Required);
-                let (arguments, encrypted_function_args) = if retain_native_call {
-                    (arguments.clone(), encrypted_function_args.clone())
+                let (arguments, encrypted_function_args, call_id) = if retain_native_call {
+                    (
+                        arguments.clone(),
+                        encrypted_function_args.clone(),
+                        call_id.clone(),
+                    )
                 } else {
-                    (std::mem::take(arguments), encrypted_function_args.take())
+                    (
+                        std::mem::take(arguments),
+                        encrypted_function_args.take(),
+                        std::mem::take(call_id),
+                    )
                 };
-                let call_id = call_id.clone();
                 Ok(Some(ToolCall {
                     tool_name,
-                    call_id,
+                    call_id: call_id.into(),
                     payload: ToolPayload::Function { arguments },
                     encrypted_function_args,
                     native_call: retain_native_call.then(|| Arc::new(item)),
@@ -322,7 +336,7 @@ impl ToolRouter {
                     })?;
                 Ok(Some(ToolCall {
                     tool_name: ToolName::plain("tool_search"),
-                    call_id,
+                    call_id: call_id.into(),
                     payload: ToolPayload::ToolSearch { arguments },
                     encrypted_function_args: None,
                     native_call: None,
@@ -337,7 +351,7 @@ impl ToolRouter {
                 ..
             } => Ok(Some(ToolCall {
                 tool_name: ToolName::new(namespace, name).with_default_namespace(),
-                call_id,
+                call_id: call_id.into(),
                 payload: ToolPayload::Custom { input },
                 encrypted_function_args: None,
                 native_call: None,

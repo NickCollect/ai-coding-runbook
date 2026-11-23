@@ -3,6 +3,7 @@ use std::collections::HashSet;
 use std::future::Future;
 use std::sync::Arc;
 use std::sync::OnceLock;
+use std::sync::Weak;
 use std::sync::atomic::AtomicBool;
 
 use crate::attestation::app_server_attestation_provider;
@@ -47,10 +48,12 @@ use crate::request_processors::ThreadGoalRequestProcessor;
 use crate::request_processors::ThreadQueueRequestProcessor;
 use crate::request_processors::ThreadRequestProcessor;
 use crate::request_processors::ThreadResumeTarget;
+use crate::request_processors::ThreadSearchDelivery;
 use crate::request_processors::TurnRequestProcessor;
 use crate::request_processors::WindowsSandboxRequestProcessor;
 use crate::request_processors::account_processor::handle_gcp_setup;
 use crate::request_processors::read_server_diagnostics;
+use crate::request_processors::thread_list_state::ThreadListState;
 use crate::request_serialization::QueuedInitializedRequest;
 use crate::request_serialization::RequestSerializationQueueKey;
 use crate::request_serialization::RequestSerializationQueues;
@@ -74,6 +77,8 @@ use codex_app_server_protocol::JSONRPCNotification;
 use codex_app_server_protocol::JSONRPCRequest;
 use codex_app_server_protocol::JSONRPCResponse;
 use codex_app_server_protocol::ThreadSampleCancelResponse;
+use codex_app_server_protocol::ThreadSearchCancelResponse;
+use codex_app_server_protocol::ThreadSearchParams;
 use codex_app_server_protocol::UserVerificationCancelResponse;
 use codex_app_server_protocol::experimental_required_message;
 use codex_arg0::Arg0DispatchPaths;
@@ -103,7 +108,6 @@ use codex_thread_store::LocalQueueStore;
 use codex_thread_store::QueueStore;
 use codex_thread_store::ThreadStoreError;
 use tokio::sync::Mutex;
-use tokio::sync::Semaphore;
 use tokio::sync::broadcast;
 use tokio::sync::mpsc;
 use tokio::sync::watch;
@@ -389,6 +393,7 @@ impl MessageProcessor {
                 thread_extensions(
                     config.as_ref(),
                     ThreadExtensionDependencies {
+                        thread_state_manager: thread_state_manager.clone(),
                         sample_responses: Arc::clone(&sample_responses),
                         event_sink: Arc::clone(&extension_event_sink),
                         auth_manager: auth_manager.clone(),
@@ -417,7 +422,8 @@ impl MessageProcessor {
                     thread_state_manager.clone(),
                 )),
                 None,
-            );
+            )
+            .with_guardian_policy_loader(Arc::new(config_manager.clone()));
             match code_mode_session_provider {
                 Some(provider) => manager.with_code_mode_session_provider(provider),
                 None => manager,
@@ -452,7 +458,7 @@ impl MessageProcessor {
         let pending_thread_unloads = Arc::new(Mutex::new(HashMap::new()));
         let thread_watch_manager =
             crate::thread_status::ThreadWatchManager::new_with_outgoing(outgoing.clone());
-        let thread_list_state_permit = Arc::new(Semaphore::new(/*permits*/ 1));
+        let thread_list_state_permit = Arc::new(ThreadListState::default());
         let app_list_shutdown_token = CancellationToken::new();
         let request_serialization_queues = RequestSerializationQueues::default();
         let config_processor = ConfigRequestProcessor::new(
@@ -575,6 +581,7 @@ impl MessageProcessor {
         );
         let turn_processor = TurnRequestProcessor::new(
             Arc::clone(&thread_manager),
+            Arc::clone(&thread_store),
             outgoing.clone(),
             analytics_events_client.clone(),
             Arc::clone(&config),
@@ -824,6 +831,10 @@ impl MessageProcessor {
         self.thread_processor.thread_created_receiver()
     }
 
+    pub(crate) fn thread_manager(&self) -> Weak<ThreadManager> {
+        Arc::downgrade(&self.thread_processor.thread_manager)
+    }
+
     pub(crate) async fn daemon_recovery_snapshot(
         &self,
     ) -> codex_app_server_transport::daemon_recovery::RecoverySnapshot {
@@ -872,6 +883,7 @@ impl MessageProcessor {
         connection_id: ConnectionId,
         request_attestation: bool,
     ) {
+        self.outgoing.connection_initialized(connection_id).await;
         self.account_processor
             .notify_workspace_routing_to_connection(connection_id);
         self.thread_processor
@@ -934,6 +946,7 @@ impl MessageProcessor {
         session_state: &ConnectionSessionState,
     ) {
         session_state.disconnect.cancel();
+        self.outgoing.stop_connection_replays(connection_id).await;
         session_state.rpc_gate.close().await;
         self.account_processor
             .gateway_connection_closed(connection_id);
@@ -1084,6 +1097,31 @@ impl MessageProcessor {
             ),
             _ => None,
         };
+        let search_cancel_target = match &codex_request {
+            ClientRequest::ThreadSearchCancel { params, .. } => {
+                self.outgoing
+                    .search_cancellation_target(
+                        &ConnectionRequestId {
+                            connection_id,
+                            request_id: params.request_id.clone(),
+                        },
+                        /*streaming*/ false,
+                    )
+                    .await
+            }
+            ClientRequest::ThreadSearchStreamCancel { params, .. } => {
+                self.outgoing
+                    .search_cancellation_target(
+                        &ConnectionRequestId {
+                            connection_id,
+                            request_id: params.request_id.clone(),
+                        },
+                        /*streaming*/ true,
+                    )
+                    .await
+            }
+            _ => None,
+        };
         let serialization_scope = codex_request.serialization_scope();
         let error_request_id = connection_request_id.clone();
         let rpc_gate = Arc::clone(&session.rpc_gate);
@@ -1112,6 +1150,7 @@ impl MessageProcessor {
                             request_context,
                             session,
                             event_stream_ready,
+                            search_cancel_target,
                         ),
                     ))
                     .await;
@@ -1135,6 +1174,32 @@ impl MessageProcessor {
         Ok(())
     }
 
+    async fn handle_thread_search(
+        &self,
+        params: ThreadSearchParams,
+        request_id: ConnectionRequestId,
+        request_context: &RequestContext,
+        session: &ConnectionSessionState,
+        delivery: ThreadSearchDelivery,
+    ) -> Result<Option<ClientResponsePayload>, JSONRPCErrorError> {
+        let cancellation = &request_context.cancellation;
+        let search =
+            self.thread_processor
+                .thread_search(params, request_id, cancellation.clone(), delivery);
+        tokio::pin!(search);
+        let response = tokio::select! {
+            result = &mut search => result,
+            _ = session.disconnect.cancelled() => {
+                cancellation.cancel();
+                search.await
+            }
+        }?;
+        Ok(Some(match delivery {
+            ThreadSearchDelivery::FinalOnly => ClientResponsePayload::ThreadSearch(response),
+            ThreadSearchDelivery::Streaming => ClientResponsePayload::ThreadSearchStream(response),
+        }))
+    }
+
     async fn handle_initialized_client_request(
         self: Arc<Self>,
         connection_request_id: ConnectionRequestId,
@@ -1142,6 +1207,7 @@ impl MessageProcessor {
         request_context: RequestContext,
         session: Arc<ConnectionSessionState>,
         event_stream_ready: Option<McpEventStreamReady>,
+        search_cancel_target: Option<tokio_util::sync::CancellationToken>,
     ) -> Result<(), JSONRPCErrorError> {
         let connection_id = connection_request_id.connection_id;
         let app_server_client_name = session.app_server_client_name().map(str::to_string);
@@ -1298,11 +1364,18 @@ impl MessageProcessor {
             ClientRequest::EnvironmentStatus { params, .. } => {
                 self.environment_processor.environment_status(params).await
             }
-            ClientRequest::FsReadFile { params, .. } => self
-                .fs_processor
-                .read_file(params)
-                .await
-                .map(|response| Some(response.into())),
+            ClientRequest::FsReadFile { params, .. } => {
+                self.fs_processor.read_file(params).await.map(|file| {
+                    // Defer encoding to the stdio writer. Remote control serializes
+                    // for both segment sizing and transmission.
+                    let payload = if session.origin == crate::transport::ConnectionOrigin::Stdio {
+                        ClientResponsePayload::FsReadFileBytes(file)
+                    } else {
+                        ClientResponsePayload::FsReadFile(file.into())
+                    };
+                    Some(payload)
+                })
+            }
             ClientRequest::FsWriteFile { params, .. } => self
                 .fs_processor
                 .write_file(params)
@@ -1607,7 +1680,38 @@ impl MessageProcessor {
                 self.project_processor.project_delete(params).await
             }
             ClientRequest::ThreadSearch { params, .. } => {
-                self.thread_processor.thread_search(params).await
+                self.handle_thread_search(
+                    params,
+                    request_id.clone(),
+                    &request_context,
+                    &session,
+                    ThreadSearchDelivery::FinalOnly,
+                )
+                .await
+            }
+            ClientRequest::ThreadSearchStream { params, .. } => {
+                self.handle_thread_search(
+                    params,
+                    request_id.clone(),
+                    &request_context,
+                    &session,
+                    ThreadSearchDelivery::Streaming,
+                )
+                .await
+            }
+            ClientRequest::ThreadSearchCancel { .. } => {
+                if let Some(target) = search_cancel_target {
+                    target.cancel();
+                }
+                Ok(Some(ThreadSearchCancelResponse {}.into()))
+            }
+            ClientRequest::ThreadSearchStreamCancel { .. } => {
+                if let Some(target) = search_cancel_target {
+                    target.cancel();
+                }
+                Ok(Some(ClientResponsePayload::ThreadSearchStreamCancel(
+                    ThreadSearchCancelResponse {},
+                )))
             }
             ClientRequest::ThreadSearchOccurrences { params, .. } => {
                 self.thread_processor

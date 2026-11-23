@@ -511,7 +511,9 @@ impl App {
         self.chat_widget.local_settings.tui.status_line_provider =
             self.local_settings.tui.status_line_provider.clone();
         self.config = config;
+        self.refresh_transcript_document_links();
         self.chat_widget.sync_plugin_mentions_config(&self.config);
+        self.chat_widget.refresh_status_line();
         Ok(())
     }
 
@@ -1958,7 +1960,7 @@ enabled = false
                 approvals_reviewer: ApprovalsReviewer::User,
                 permission_profile: PermissionProfile::read_only(),
                 active_permission_profile: None,
-                cwd: next_cwd.clone().abs(),
+                cwd: next_cwd.clone().abs().into(),
                 runtime_workspace_roots: Vec::new(),
                 instruction_source_paths: Vec::new(),
                 reasoning_effort: None,

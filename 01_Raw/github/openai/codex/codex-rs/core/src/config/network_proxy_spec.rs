@@ -26,6 +26,7 @@ use codex_network_proxy::validate_policy_against_constraints;
 use codex_protocol::models::PermissionProfile;
 use codex_protocol::protocol::AskForApproval;
 use codex_utils_path_uri::Platform;
+use std::collections::HashSet;
 use std::net::IpAddr;
 use std::sync::Arc;
 
@@ -110,6 +111,10 @@ impl NetworkProxySpec {
 
     pub fn proxy_host_and_port(&self) -> String {
         host_and_port_from_network_addr(&self.config.proxy_url, /*default_port*/ 3128)
+    }
+
+    pub fn transparent_tcp(&self) -> bool {
+        self.config.transparent_tcp
     }
 
     pub fn socks_enabled(&self) -> bool {
@@ -546,6 +551,9 @@ impl NetworkProxySpec {
         if let Some(socks_port) = requirements.socks_port {
             config.socks_url = format!("http://127.0.0.1:{socks_port}");
         }
+        if let Some(transparent_tcp) = requirements.transparent_tcp {
+            config.transparent_tcp = transparent_tcp;
+        }
         if let Some(allow_upstream_proxy) = requirements.allow_upstream_proxy {
             config.allow_upstream_proxy = allow_upstream_proxy;
             constraints.allow_upstream_proxy = Some(allow_upstream_proxy);
@@ -598,7 +606,20 @@ impl NetworkProxySpec {
             .domains
             .as_ref()
             .and_then(codex_config::NetworkDomainPermissionsToml::denied_domains);
-        if let Some(managed_denied_domains) = managed_denied_domains {
+        if let Some(mut managed_denied_domains) = managed_denied_domains {
+            // The managed allowlist can contain a shadowed spelling of a denied
+            // selector. Explicitly deny that spelling for text-based executors.
+            let denied: HashSet<_> = managed_denied_domains
+                .iter()
+                .filter_map(|pattern| codex_network_proxy::canonical_deny_pattern(pattern).ok())
+                .collect();
+            for pattern in constraints.allowed_domains.iter().flatten() {
+                if codex_network_proxy::canonical_review_pattern(pattern)
+                    .is_ok_and(|selector| denied.contains(&selector))
+                {
+                    managed_denied_domains.push(pattern.clone());
+                }
+            }
             let effective_denied_domains = if denylist_expansion_enabled {
                 Self::merge_domain_lists(
                     managed_denied_domains.clone(),

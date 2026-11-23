@@ -300,12 +300,23 @@ impl McpHandler {
             .map(TruncationPolicy::Tokens)
             .unwrap_or(step_context.settings.model_info.truncation_policy.into());
         let started = Instant::now();
+        let capture = prepared
+            .filter(|_| result_metadata_capture_allowed)
+            .and_then(|call| {
+                let child_id =
+                    matches!(source, ToolCallSource::CodeMode { .. }).then_some(call_id.as_str());
+                session
+                    .services
+                    .executed_tool_calls
+                    .start_mcp_result_capture(&step_context.turn, call, child_id)
+            });
+        let mut result_capture = None;
         // Bound the compiler's async-layout query depth for approval and dispatch.
         let result = Box::pin(handle_mcp_tool_call(
             Arc::clone(&session),
             &step_context,
             &cancellation_token,
-            call_id.clone(),
+            &call_id,
             originating_call,
             &self.definition.tool_info,
             prepared_mcp_call,
@@ -313,6 +324,12 @@ impl McpHandler {
             tool_name,
             &source,
             payload,
+            |call, raw| {
+                // Recovery may have selected an independent credential after dispatch.
+                result_capture = capture.and_then(|capture| {
+                    capture.record(raw, |session_auth| call.permits_result_body(session_auth))
+                });
+            },
         ))
         .await;
 
@@ -327,6 +344,7 @@ impl McpHandler {
             result,
             tool_input,
             result_metadata_capture_allowed,
+            result_capture,
             wall_time: started.elapsed(),
             original_image_detail_supported: can_request_original_image_detail(
                 &step_context.settings.model_info,
@@ -576,7 +594,7 @@ impl CoreToolRuntime for McpHandler {
         Some(PostToolUsePayload {
             tool_cwd: result.post_tool_use_cwd(),
             tool_name: self.hook_tool_name(),
-            tool_use_id: invocation.call_id.clone(),
+            tool_use_id: invocation.call_id.to_string(),
             tool_input: result.post_tool_use_input(&invocation.payload)?,
             tool_response,
         })
@@ -727,7 +745,7 @@ mod tests {
                 turn,
                 cancellation_token: tokio_util::sync::CancellationToken::new(),
                 tracker: Arc::new(Mutex::new(TurnDiffTracker::new())),
-                call_id: "call-mcp-pre".to_string(),
+                call_id: "call-mcp-pre".into(),
                 tool_name: codex_tools::ToolName::namespaced("memory", "create_entities"),
                 source: ToolCallSource::Direct,
                 payload,
@@ -763,7 +781,7 @@ mod tests {
                 turn,
                 cancellation_token: tokio_util::sync::CancellationToken::new(),
                 tracker: Arc::new(Mutex::new(TurnDiffTracker::new())),
-                call_id: "call-mcp-pre-builtin-like".to_string(),
+                call_id: "call-mcp-pre-builtin-like".into(),
                 tool_name: codex_tools::ToolName::namespaced("mcp__foo", "exec_command"),
                 source: ToolCallSource::Direct,
                 payload,
@@ -795,7 +813,7 @@ mod tests {
                     turn,
                     cancellation_token: tokio_util::sync::CancellationToken::new(),
                     tracker: Arc::new(Mutex::new(TurnDiffTracker::new())),
-                    call_id: "call-mcp-rewrite-builtin-like".to_string(),
+                    call_id: "call-mcp-rewrite-builtin-like".into(),
                     tool_name: codex_tools::ToolName::namespaced("mcp__foo", "exec_command"),
                     source: ToolCallSource::Direct,
                     payload,
@@ -833,6 +851,7 @@ mod tests {
                 }
             }),
             result_metadata_capture_allowed: false,
+            result_capture: Default::default(),
             wall_time: Duration::from_millis(42),
             original_image_detail_supported: true,
             truncation_policy: codex_utils_output_truncation::TruncationPolicy::Bytes(1024),
@@ -858,7 +877,7 @@ mod tests {
             turn,
             cancellation_token: tokio_util::sync::CancellationToken::new(),
             tracker: Arc::new(Mutex::new(TurnDiffTracker::new())),
-            call_id: "call-mcp-post".to_string(),
+            call_id: "call-mcp-post".into(),
             tool_name: codex_tools::ToolName::namespaced("filesystem", "read_file"),
             source: ToolCallSource::Direct,
             payload,

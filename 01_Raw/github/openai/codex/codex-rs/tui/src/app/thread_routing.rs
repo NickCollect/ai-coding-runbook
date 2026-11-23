@@ -12,6 +12,7 @@ use codex_app_server_protocol::ThreadStartedNotification;
 use codex_app_server_protocol::TurnInterruptParams;
 use codex_app_server_protocol::TurnInterruptResponse;
 use codex_app_server_protocol::WarningNotification;
+use codex_utils_path_uri::PathUri;
 
 // Leave time for side-thread cleanup and unsubscribe inside the two-second exit budget.
 const REALTIME_STOP_TIMEOUT: Duration = Duration::from_secs(/*secs*/ 1);
@@ -147,6 +148,7 @@ impl App {
         };
         if let Some(pane) = self.sidebars.get_mut(&Some(active_id)) {
             pane.opening = None;
+            pane.cancel_hidden_document_primary(/*visible*/ false);
         }
         let input_state = self.chat_widget.capture_thread_input_state();
         let recap_progress = self.recap.progress();
@@ -320,7 +322,7 @@ impl App {
         self.sync_side_thread_ui();
     }
 
-    pub(super) async fn thread_cwd(&self, thread_id: ThreadId) -> Option<AbsolutePathBuf> {
+    pub(super) async fn thread_cwd(&self, thread_id: ThreadId) -> Option<PathUri> {
         let channel = self.thread_event_channels.get(&thread_id)?;
         let store = channel.store.lock().await;
         store.session.as_ref().map(|session| session.cwd.clone())
@@ -385,6 +387,7 @@ impl App {
                     cwd: self
                         .thread_cwd(thread_id)
                         .await
+                        .and_then(|cwd| cwd.to_abs_path().ok())
                         .unwrap_or_else(|| self.config.cwd.clone()),
                     changes: self
                         .thread_file_change_changes(thread_id, &params.turn_id, &params.item_id)
@@ -853,18 +856,15 @@ impl App {
                 });
                 Ok(true)
             }
-            AppCommand::ListSkills { cwds, force_reload } => {
+            AppCommand::ListSkills { cwd, force_reload } => {
                 // A queued refresh can outlive the workspace it was requested for.
-                if !cwds
-                    .iter()
-                    .any(|cwd| cwd == self.chat_widget.config_ref().cwd.as_path())
-                {
+                if self.chat_widget.session_cwd() != cwd {
                     return Ok(true);
                 }
                 self.handle_skills_list_result(
                     app_server
                         .skills_list(codex_app_server_protocol::SkillsListParams {
-                            cwds: cwds.clone(),
+                            cwds: vec![cwd.to_path_buf()],
                             force_reload: *force_reload,
                         })
                         .await,
@@ -921,6 +921,7 @@ impl App {
                 let config = self.config.clone();
                 let cwd = self.chat_widget.config_ref().cwd.clone();
                 let offer = String::from(offer_sdp.clone());
+                let call_client = Arc::clone(&self.realtime_call_client);
                 let tx = self.app_event_tx.clone();
                 tokio::spawn(async move {
                     let create = async {
@@ -928,7 +929,7 @@ impl App {
                         let thread = server
                             .thread_read(thread_id, /*include_turns*/ false)
                             .await?;
-                        crate::realtime_call::create(&config, &thread, offer, voice).await
+                        call_client.create(&config, &thread, offer, voice).await
                     };
                     if let Ok(result) = futures::future::Abortable::new(create, registration).await
                     {
@@ -1135,13 +1136,54 @@ impl App {
     pub(super) async fn enqueue_thread_notification(
         &mut self,
         thread_id: ThreadId,
-        notification: ServerNotification,
+        mut notification: ServerNotification,
     ) -> Result<()> {
         self.deliver_background_voice_notification(thread_id, &notification);
         if self.abandoned_side_threads.contains(&thread_id) {
             return Ok(());
         }
+        // Cloud attaches before reading history. The live stream can repeat events
+        // from the snapshot, including a completion that would release queued input.
+        if matches!(self.app_server_target, AppServerTarget::Cloud)
+            && matches!(
+                notification,
+                ServerNotification::TurnStarted(_)
+                    | ServerNotification::TurnCompleted(_)
+                    | ServerNotification::ItemCompleted(_)
+            )
+            && self.active_thread_id == Some(thread_id)
+            && let Some(channel) = self.thread_event_channels.get(&thread_id)
+            && channel.recovered_cloud_history
+        {
+            let store = channel.store.lock().await;
+            if store.turns.iter().any(|turn| match &mut notification {
+                ServerNotification::TurnStarted(event) => turn.id == event.turn.id,
+                ServerNotification::TurnCompleted(event) => {
+                    turn.id == event.turn.id
+                        && turn.status != TurnStatus::InProgress
+                        && turn.status == event.turn.status
+                }
+                ServerNotification::ItemCompleted(event) if turn.id == event.turn_id => {
+                    match &mut event.item.payload {
+                        ThreadItemPayload::UserMessage { .. } => {
+                            turn.items.iter().any(|item| item.id() == event.item.id())
+                        }
+                        ThreadItemPayload::AgentMessage { questions, .. }
+                            if turn.status != TurnStatus::InProgress =>
+                        {
+                            *questions = None;
+                            false
+                        }
+                        _ => false,
+                    }
+                }
+                _ => false,
+            }) {
+                return Ok(());
+            }
+        }
         self.track_side_chat_title(thread_id, &notification);
+        self.notice_sidebar_file_item(thread_id, &notification);
         if self.current_displayed_thread_id() == Some(thread_id)
             && let ServerNotification::TurnCompleted(notification) = &notification
         {
@@ -1459,8 +1501,13 @@ impl App {
             .clone_from(&notification.thread.reasoning_effort);
         session.thread_name = notification.thread.name.clone();
         session.model_provider_id = notification.thread.model_provider.clone();
-        session
-            .set_cwd_retargeting_implicit_runtime_workspace_root(notification.thread.cwd.clone());
+        session.set_cwd_retargeting_implicit_runtime_workspace_root(
+            crate::app_server_session::decode_thread_cwd(
+                &notification.thread.cwd,
+                self.backend_registry.thread_path_convention(thread_id),
+            )
+            .ok()?,
+        );
         let rollout_path = notification.thread.path.clone();
         if let Some(model) = &notification.thread.model {
             session.model = model.clone();
@@ -1593,7 +1640,10 @@ impl App {
             .permissions
             .set_permission_profile_from_session_snapshot(
                 PermissionProfileSnapshot::from_session_snapshot(
-                    session.permission_profile.clone(),
+                    crate::session_state::display_profile_for_roots(
+                        session.permission_profile.clone(),
+                        &session.runtime_workspace_roots,
+                    ),
                     session.active_permission_profile.clone(),
                 ),
             )
@@ -1602,12 +1652,10 @@ impl App {
         }
         self.config.approvals_reviewer = session.approvals_reviewer;
         if !self.app_server_target.uses_remote_workspace() {
-            self.config
-                .workspace_roots
-                .clone_from(&session.runtime_workspace_roots);
-            self.config
-                .permissions
-                .set_workspace_roots(session.runtime_workspace_roots.clone());
+            crate::session_state::sync_local_workspace_roots(
+                &mut self.config,
+                &session.runtime_workspace_roots,
+            );
         }
 
         let thread_id = session.thread_id;
@@ -1619,6 +1667,21 @@ impl App {
             self.recap.reset_for_new_thread(Instant::now());
         }
         self.primary_thread_id = Some(thread_id);
+        if self.local_settings.workspace_enabled(&self.config)
+            && matches!(
+                presentation,
+                ThreadAttachPresentation::SessionLineage
+                    | ThreadAttachPresentation::SessionLineageAfterClear
+            )
+        {
+            self.restore_sidebar_agent_outcomes(
+                thread_id,
+                &turns,
+                super::sidebar_subagents::OutcomeReplay::History,
+            );
+            self.app_event_tx
+                .send(AppEvent::DiscoverSidebarAgents(thread_id));
+        }
         self.agents_overview.hidden_threads.remove(&thread_id);
         self.agents_overview.threads.entry(thread_id).or_default();
         self.primary_session_configured = Some(session.clone());
@@ -1889,6 +1952,18 @@ impl App {
         mut snapshot: ThreadEventSnapshot,
         resume_restored_queue: bool,
     ) {
+        if let Some(root) = self.primary_thread_id
+            && snapshot
+                .session
+                .as_ref()
+                .is_some_and(|s| s.thread_id == root)
+        {
+            self.restore_sidebar_agent_outcomes(
+                root,
+                &snapshot.turns,
+                super::sidebar_subagents::OutcomeReplay::History,
+            );
+        }
         let mut reasoning_replay = reasoning_replay::ReasoningReplay::new(&mut snapshot);
         let replayed_final_items = realtime_delivery::completed_agent_items(&snapshot);
         let replayed_voice_texts = realtime_delivery::replayed_voice_texts(&snapshot);
@@ -2042,8 +2117,7 @@ impl App {
 
     #[allow(clippy::too_many_arguments)]
     pub(super) fn handle_skills_list_response(&mut self, response: SkillsListResponse) {
-        let cwd = self.chat_widget.config_ref().cwd.clone();
-        let errors = errors_for_cwd(&cwd, &response);
+        let errors = self.chat_widget.set_skills_from_response(response);
         let errors = self.skill_load_warnings.newly_active_errors(&errors);
         let warnings = skill_load_warning_messages(&errors);
         if self.skill_load_warnings.startup_complete {
@@ -2058,7 +2132,7 @@ impl App {
                 ),
             )));
         }
-        self.chat_widget.handle_skills_list_response(response);
+        self.chat_widget.refresh_plugin_mentions();
     }
 
     fn startup_request_may_open_protected_view(&self, request: &ServerRequest) -> bool {
@@ -2271,7 +2345,9 @@ impl App {
             && self.startup_protected_input_boundary
         {
             self.chat_widget.pre_draw_tick();
-            self.render_chat_widget_frame(tui, tui.terminal.last_known_screen_size)?;
+            let screen_size = tui.prepare_draw_size()?;
+            self.handle_draw_pre_render(tui, screen_size)?;
+            self.render_chat_widget_frame(tui, screen_size)?;
             self.discard_startup_modal_input(tui)?;
         }
         if self.backtrack_render_pending {

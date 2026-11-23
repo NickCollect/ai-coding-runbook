@@ -166,7 +166,6 @@ class Sessions(SyncAPIResource):
         metadata: Optional[Dict[str, str]] | Omit = omit,
         prompt_cache_options: Optional[session_create_params.PromptCacheOptions] | Omit = omit,
         review: Literal["none", "auto_review"] | Omit = omit,
-        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         stream: Literal[False] | Omit = omit,
         stream_options: session_create_params.StreamOptions | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -190,7 +189,6 @@ class Sessions(SyncAPIResource):
         metadata: Optional[Dict[str, str]] | Omit = omit,
         prompt_cache_options: Optional[session_create_params.PromptCacheOptions] | Omit = omit,
         review: Literal["none", "auto_review"] | Omit = omit,
-        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         stream_options: session_create_params.StreamOptions | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         extra_headers: Headers | None = None,
@@ -213,7 +211,6 @@ class Sessions(SyncAPIResource):
         metadata: Optional[Dict[str, str]] | Omit = omit,
         prompt_cache_options: Optional[session_create_params.PromptCacheOptions] | Omit = omit,
         review: Literal["none", "auto_review"] | Omit = omit,
-        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         stream_options: session_create_params.StreamOptions | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         extra_headers: Headers | None = None,
@@ -235,7 +232,6 @@ class Sessions(SyncAPIResource):
         metadata: Optional[Dict[str, str]] | Omit = omit,
         prompt_cache_options: Optional[session_create_params.PromptCacheOptions] | Omit = omit,
         review: Literal["none", "auto_review"] | Omit = omit,
-        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         stream: Literal[False] | Literal[True] | Omit = omit,
         stream_options: session_create_params.StreamOptions | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -256,7 +252,6 @@ class Sessions(SyncAPIResource):
                 "metadata": metadata,
                 "prompt_cache_options": prompt_cache_options,
                 "review": review,
-                "spend_control": spend_control,
                 "stream_options": stream_options,
                 "vault_ids": vault_ids,
             },
@@ -280,6 +275,7 @@ class Sessions(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 security={"bearer_auth": True},
+                stream_mode="events",
                 post_parser=_runtime_context.post_parser,
             ),
             cast_to=AgentSession,
@@ -335,7 +331,6 @@ class Sessions(SyncAPIResource):
         metadata: Optional[Dict[str, str]] | Omit = omit,
         prompt_cache_options: Optional[session_update_params.PromptCacheOptions] | Omit = omit,
         review: Literal["none", "auto_review"] | Omit = omit,
-        spend_control: Optional[session_update_params.SpendControl] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -366,9 +361,6 @@ class Sessions(SyncAPIResource):
               - `auto_review` - Review eligible actions automatically. Deny manual approval
                 fallbacks.
 
-          spend_control: Omit to retain the limit; null or a null limit removes it without resetting
-              spend.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -388,7 +380,6 @@ class Sessions(SyncAPIResource):
                     "metadata": metadata,
                     "prompt_cache_options": prompt_cache_options,
                     "review": review,
-                    "spend_control": spend_control,
                 },
                 session_update_params.SessionUpdateParams,
             ),
@@ -604,7 +595,6 @@ class AsyncSessions(AsyncAPIResource):
         metadata: Optional[Dict[str, str]] | Omit = omit,
         prompt_cache_options: Optional[session_create_params.PromptCacheOptions] | Omit = omit,
         review: Literal["none", "auto_review"] | Omit = omit,
-        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         stream: Literal[False] | Omit = omit,
         stream_options: session_create_params.StreamOptions | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -628,7 +618,6 @@ class AsyncSessions(AsyncAPIResource):
         metadata: Optional[Dict[str, str]] | Omit = omit,
         prompt_cache_options: Optional[session_create_params.PromptCacheOptions] | Omit = omit,
         review: Literal["none", "auto_review"] | Omit = omit,
-        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         stream_options: session_create_params.StreamOptions | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         extra_headers: Headers | None = None,
@@ -651,7 +640,6 @@ class AsyncSessions(AsyncAPIResource):
         metadata: Optional[Dict[str, str]] | Omit = omit,
         prompt_cache_options: Optional[session_create_params.PromptCacheOptions] | Omit = omit,
         review: Literal["none", "auto_review"] | Omit = omit,
-        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         stream_options: session_create_params.StreamOptions | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         extra_headers: Headers | None = None,
@@ -673,7 +661,6 @@ class AsyncSessions(AsyncAPIResource):
         metadata: Optional[Dict[str, str]] | Omit = omit,
         prompt_cache_options: Optional[session_create_params.PromptCacheOptions] | Omit = omit,
         review: Literal["none", "auto_review"] | Omit = omit,
-        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         stream: Literal[False] | Literal[True] | Omit = omit,
         stream_options: session_create_params.StreamOptions | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
@@ -694,7 +681,6 @@ class AsyncSessions(AsyncAPIResource):
                 "metadata": metadata,
                 "prompt_cache_options": prompt_cache_options,
                 "review": review,
-                "spend_control": spend_control,
                 "stream_options": stream_options,
                 "vault_ids": vault_ids,
             },
@@ -718,6 +704,7 @@ class AsyncSessions(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 security={"bearer_auth": True},
+                stream_mode="events",
                 post_parser=_runtime_context.post_parser,
             ),
             cast_to=AgentSession,
@@ -773,7 +760,6 @@ class AsyncSessions(AsyncAPIResource):
         metadata: Optional[Dict[str, str]] | Omit = omit,
         prompt_cache_options: Optional[session_update_params.PromptCacheOptions] | Omit = omit,
         review: Literal["none", "auto_review"] | Omit = omit,
-        spend_control: Optional[session_update_params.SpendControl] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -804,9 +790,6 @@ class AsyncSessions(AsyncAPIResource):
               - `auto_review` - Review eligible actions automatically. Deny manual approval
                 fallbacks.
 
-          spend_control: Omit to retain the limit; null or a null limit removes it without resetting
-              spend.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -826,7 +809,6 @@ class AsyncSessions(AsyncAPIResource):
                     "metadata": metadata,
                     "prompt_cache_options": prompt_cache_options,
                     "review": review,
-                    "spend_control": spend_control,
                 },
                 session_update_params.SessionUpdateParams,
             ),

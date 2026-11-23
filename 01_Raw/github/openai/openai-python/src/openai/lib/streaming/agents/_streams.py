@@ -82,7 +82,17 @@ class _TurnState:
                 self.turn_ended = True
         return True
 
-    def terminal(self, event: AgentSessionEvent) -> bool:
+    def terminal(self, event: AgentSessionEvent, session_id: str) -> bool:
+        # Private lifecycle frames can outlive their generated public union variant.
+        if getattr(event, "type", None) == "agent.session.budget_reached":
+            snapshot = getattr(event, "session", None)
+            snapshot_id = snapshot.get("id") if isinstance(snapshot, dict) else getattr(snapshot, "id", None)
+            return (
+                isinstance(snapshot_id, str)
+                and bool(snapshot_id)
+                and snapshot_id == session_id
+                and (self.turn_id is None or self.turn_ended)
+            )
         return event.type == "agent.session.failed" or (event.type == "agent.session.idle" and self.turn_ended)
 
 
@@ -95,6 +105,11 @@ class AgentSessionStream(Generic[OutputT]):
     end iteration. Failed/cancelled turns remain visible as events; an unexpected
     end of the connection raises RuntimeError. Closing the stream does not cancel
     the backend turn.
+
+    Raw session creation and event subscriptions yield type="error" events as
+    values. Handle them in your loop to receive later lifecycle events. HTTP
+    failures, connection failures, and malformed JSON still raise exceptions.
+    get_final_result() still raises if it cannot collect a completed turn.
 
     Optional tool handlers run sequentially during iteration, after their call
     event is yielded. Unregistered tools are left for the caller to handle. A
@@ -215,7 +230,7 @@ class AgentSessionStream(Generic[OutputT]):
                 if not self._state.accept(event):
                     continue
                 self._collection.accept(event)
-                terminal = self._state.terminal(event)
+                terminal = self._state.terminal(event, self._session_id)
                 if terminal:
                     self.close()
                 pending = self._dispatcher.prepare(event)
@@ -353,7 +368,7 @@ class AsyncAgentSessionStream(Generic[OutputT]):
                 if not self._state.accept(event):
                     continue
                 self._collection.accept(event)
-                terminal = self._state.terminal(event)
+                terminal = self._state.terminal(event, self._session_id)
                 if terminal:
                     await self.close()
                 pending = self._dispatcher.prepare(event)

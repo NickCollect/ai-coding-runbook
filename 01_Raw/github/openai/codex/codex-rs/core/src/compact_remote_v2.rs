@@ -36,6 +36,7 @@ use crate::responses_retry::ResponsesStreamRequest;
 use crate::responses_retry::ResponsesStreamRetryState;
 use crate::responses_retry::handle_response_stream_error;
 use crate::session::RequestEffortUsage;
+use crate::session::SamplingInterrupt;
 use crate::session::session::Session;
 use crate::session::step_context::StepContext;
 use crate::session::turn_context::TurnContext;
@@ -244,7 +245,10 @@ async fn run_remote_compact_task_inner(
         fallback,
     ))
     .await;
-    if matches!(result, Ok(false)) {
+    // Keep the registration through installation, not just through receiving the summary.
+    let interrupted = SamplingInterrupt::enabled(turn_context)
+        && SamplingInterrupt::unregister(sess, turn_context).await;
+    if matches!(result, Ok(false)) && !interrupted {
         if let Some(item) = started_item {
             sess.emit_turn_item_completed(turn_context, item).await;
         }
@@ -252,7 +256,7 @@ async fn run_remote_compact_task_inner(
     }
     let status = compaction_status_from_result(&result);
     let codex_error = result.as_ref().err();
-    if result.is_ok() {
+    if result.is_ok() && !interrupted {
         let post_compact_outcome = run_post_compact_hooks(sess, turn_context, trigger).await;
         if let PostCompactHookOutcome::Stopped = post_compact_outcome {
             attempt
@@ -264,6 +268,11 @@ async fn run_remote_compact_task_inner(
     attempt
         .track(sess.as_ref(), status, codex_error, analytics_details)
         .await;
+    let result = if interrupted {
+        Err(CodexErr::TurnAborted)
+    } else {
+        result
+    };
     let result = sess.finish_compaction(turn_context, phase, result);
     match result {
         Ok(installed) => Ok(installed),
@@ -352,27 +361,36 @@ async fn run_remote_compaction_request_v2(
         .min(MAX_REMOTE_COMPACTION_V2_STREAM_RETRIES);
     let mut retry_state = ResponsesStreamRetryState::default();
     let cancellation = &step_context.turn_cancellation;
+    let interrupt_request = cancellation.child_token();
+    let interrupt_at_boundary = SamplingInterrupt::enabled(turn_context);
     loop {
+        let trace = InferenceTraceContext::disabled();
+        let send = client_session.open_model_response(
+            prompt,
+            &settings.model_info,
+            &turn_context.session_telemetry,
+            SamplingOptions {
+                reasoning_effort: sess
+                    .reasoning_effort_for_request(settings, RequestEffortUsage::Compaction)
+                    .await,
+                reasoning_summary: settings.reasoning_summary,
+                service_tier: step_context.settings.service_tier.clone(),
+            },
+            responses_metadata,
+            &trace,
+        );
         let result = match request
             .open(
                 sess,
                 step_context,
                 &settings.model_info.slug,
                 cancellation,
-                client_session.open_model_response(
-                    prompt,
-                    &settings.model_info,
-                    &turn_context.session_telemetry,
-                    SamplingOptions {
-                        reasoning_effort: sess
-                            .reasoning_effort_for_request(settings, RequestEffortUsage::Compaction)
-                            .await,
-                        reasoning_summary: settings.reasoning_summary,
-                        service_tier: step_context.settings.service_tier.clone(),
-                    },
-                    responses_metadata,
-                    &InferenceTraceContext::disabled(),
-                ),
+                async {
+                    if interrupt_at_boundary {
+                        SamplingInterrupt::register(sess, turn_context, &interrupt_request).await?;
+                    }
+                    send.await
+                },
             )
             .or_cancel(cancellation)
             .await?
@@ -388,6 +406,12 @@ async fn run_remote_compaction_request_v2(
             }
             Err(err) => Err(err),
         };
+        if result.is_err()
+            && interrupt_at_boundary
+            && SamplingInterrupt::unregister(sess, turn_context).await
+        {
+            return Err(CodexErr::TurnAborted);
+        }
         match result {
             Ok(compaction_output) => return Ok(compaction_output),
             Err(err)
@@ -555,6 +579,7 @@ fn build_v2_compacted_history(
             is_retained_for_remote_compaction_v2(item, features)
                 || pending_sequence.is_some_and(|first| is_retained_pending_mail(item, first))
         },
+        ResponseItemEnvelope::is_always_retained,
         RETAINED_MESSAGE_TOKEN_BUDGET,
         image_budget,
         audio_durations,
@@ -577,14 +602,20 @@ fn build_v2_compacted_history(
     (retained, retained_image_count)
 }
 
+/// Select pins for the destination, plus configured client items on a window reset.
 pub(crate) fn retained_client_items(
     items: &[ResponseItemEnvelope],
     audio_durations: &FileAudioDurations,
-    should_retain: impl Fn(&ResponseItemEnvelope) -> bool,
+    is_pinned: fn(&ResponseItemEnvelope) -> bool,
+    window_features: Option<&Features>,
 ) -> BTreeMap<usize, ResponseItemEnvelope> {
     select_retained_items(
         items,
-        should_retain,
+        |item| {
+            is_pinned(item)
+                || window_features.is_some_and(|features| should_retain_client_item(item, features))
+        },
+        is_pinned,
         RETAINED_MESSAGE_TOKEN_BUDGET,
         RetainedImageBudget::Disabled,
         audio_durations,
@@ -692,31 +723,47 @@ fn truncate_retained_messages(
     image_budget: RetainedImageBudget,
     audio_durations: &FileAudioDurations,
 ) -> Vec<ResponseItemEnvelope> {
-    select_retained_items(&items, |_| true, max_tokens, image_budget, audio_durations)
-        .into_values()
-        .collect()
+    select_retained_items(
+        &items,
+        |_| true,
+        ResponseItemEnvelope::is_always_retained,
+        max_tokens,
+        image_budget,
+        audio_durations,
+    )
+    .into_values()
+    .collect()
 }
 
-/// Select newest first, then return the items at their original positions.
+/// Keep explicit pins whole, spend the carryover budget newest first, and restore source order.
 fn select_retained_items(
     items: &[ResponseItemEnvelope],
     should_retain: impl Fn(&ResponseItemEnvelope) -> bool,
+    is_pinned: fn(&ResponseItemEnvelope) -> bool,
     max_tokens: usize,
     image_budget: RetainedImageBudget,
     audio_durations: &FileAudioDurations,
 ) -> BTreeMap<usize, ResponseItemEnvelope> {
     let mut remaining = max_tokens;
     let mut selected = BTreeMap::new();
-    for group in newest_history_item_groups(items) {
+    for group in newest_history_item_groups(items, is_pinned) {
+        if is_pinned(group.source)
+            && group.source.has_explicit_retention_pin()
+            && should_retain(group.source)
+        {
+            group.keep(&mut selected, group.source.clone());
+        }
+    }
+    for group in newest_history_item_groups(items, is_pinned) {
         if remaining == 0 {
             break;
         }
-        if !should_retain(group.source) {
+        if selected.contains_key(&group.source_position) || !should_retain(group.source) {
             continue;
         }
 
         let charge_full_item =
-            group.source.is_always_retained() || is_client_authored_developer_message(group.source);
+            is_pinned(group.source) || is_client_authored_developer_message(group.source);
         let image_budget = if charge_full_item {
             RetainedImageBudget::Disabled
         } else {
@@ -739,7 +786,7 @@ fn select_retained_items(
             )
             .max(1)
         });
-        // Explicitly retained items and client developer messages also pay for their media.
+        // Feature-retained client items pay for their media.
         let content_tokens =
             retained_message_token_count(&group.source.item, image_budget, audio_durations);
         let source_tokens = if charge_full_item {
@@ -760,7 +807,7 @@ fn select_retained_items(
             remaining = remaining.saturating_sub(token_count);
             group.source.clone()
         } else if is_retained_tool_output(group.source)
-            || (group.source.is_always_retained()
+            || (is_pinned(group.source)
                 && !matches!(group.source.item, ResponseItem::Message { .. }))
         {
             // Structured items such as tool results must stay whole.
@@ -1014,12 +1061,9 @@ mod tests {
 
     #[test]
     fn build_v2_compacted_history_filters_to_installed_retention_shape() {
-        let hook = codex_protocol::items::build_hook_prompt_message(
-            &[codex_protocol::items::HookPromptFragment::from_single_hook(
-                "hook", "hook-run",
-            )],
-            &codex_protocol_test_support::uuid_v7_item_id_generator_for_test(),
-        )
+        let hook = codex_protocol::items::build_hook_prompt_message(&[
+            codex_protocol::items::HookPromptFragment::from_single_hook("hook", "hook-run"),
+        ])
         .expect("hook prompt");
         let input = vec![
             message("developer", "dev", /*phase*/ None),
@@ -1132,6 +1176,44 @@ mod tests {
                 );
             }
             assert_eq!(history, expected);
+        }
+    }
+
+    #[test]
+    fn explicit_pins_survive_an_exhausted_budget_only_in_their_destination() {
+        use codex_protocol::turn_input::InjectedResponseItem;
+        use codex_protocol::turn_input::ItemRetention;
+
+        let pin = |text, retention| {
+            ResponseItemEnvelope::from(InjectedResponseItem {
+                item: message("developer", text, /*phase*/ None),
+                retention,
+            })
+        };
+        let shared = pin("shared", ItemRetention::Always);
+        let thread = pin("thread", ItemRetention::AlwaysInThread);
+        let child = pin("child", ItemRetention::AlwaysInChildren);
+        let mut configured = pin("feature-retained developer log", ItemRetention::Unspecified);
+        configured
+            .metadata
+            .get_or_insert_default()
+            .retain_across_windows = Some(true);
+        let items = [shared.clone(), thread.clone(), child.clone(), configured];
+        let in_child: fn(&ResponseItemEnvelope) -> bool =
+            |item| item.child_retention() == Some(true);
+        for (destination, expected) in [
+            (in_child, [shared.clone(), child]),
+            (ResponseItemEnvelope::is_always_retained, [shared, thread]),
+        ] {
+            let selected = select_retained_items(
+                &items,
+                destination,
+                destination,
+                /*max_tokens*/ 0,
+                RetainedImageBudget::Disabled,
+                &FileAudioDurations::default(),
+            );
+            assert_eq!(selected.into_values().collect::<Vec<_>>(), expected);
         }
     }
 
@@ -1445,10 +1527,7 @@ mod tests {
             ))),
             hook_output: crate::client_common::SamplingCharge {
                 hooks: codex_hooks::ModelRequestHookOutcome {
-                    charge: codex_hooks::HookCharge {
-                        units: 3.0,
-                        overflowed: false,
-                    },
+                    charge: codex_hooks::HookCharge::Units(3.0),
                     invalid_price: Some("negative sibling price".into()),
                 },
                 ..Default::default()
@@ -1496,26 +1575,27 @@ mod tests {
                 turn_id: turn_context.sub_id.clone(),
                 usage: Some(usage),
                 additional_budget_units: 3.0,
-                additional_budget_units_overflowed: false,
             }]
         );
     }
 
-    #[test_case::test_case(false, false, false; "foreground bills a complete response even without a summary")]
-    #[test_case::test_case(true, false, false; "background bills a complete response even without a summary")]
-    #[test_case::test_case(false, true, false; "turn interrupt discards a queued complete response")]
-    #[test_case::test_case(true, true, false; "session shutdown bills a queued complete response even without a summary")]
-    #[test_case::test_case(false, false, true; "a malformed sibling is still reported when valid spending exhausts the account")]
+    #[test_case::test_case(false, false, false, None; "foreground bills a complete response even without a summary")]
+    #[test_case::test_case(true, false, false, None; "background bills a complete response even without a summary")]
+    #[test_case::test_case(false, true, false, None; "turn interrupt discards a queued complete response")]
+    #[test_case::test_case(true, true, false, None; "session shutdown bills a queued complete response even without a summary")]
+    #[test_case::test_case(false, false, true, None; "a malformed sibling is still reported when valid spending exhausts the account")]
     #[tokio::test]
     async fn collect_queued_complete_response(
         background: bool,
         interrupted: bool,
         bad_sibling: bool,
+        host_total: Option<f64>,
     ) {
-        let (mut sess, turn, _) = crate::session::tests::make_session_and_context_with_rx().await;
+        let (mut sess, turn, _events) =
+            crate::session::tests::make_session_and_context_with_rx().await;
         let accounting = Arc::new(UsageRecorder {
             reports: Mutex::new(Vec::new()),
-            decision: if bad_sibling {
+            decision: if bad_sibling || host_total.is_some() {
                 UsageAccountingDecision::Exhausted
             } else {
                 UsageAccountingDecision::Continue
@@ -1536,10 +1616,7 @@ mod tests {
             }),
             hook_output: crate::client_common::SamplingCharge {
                 hooks: codex_hooks::ModelRequestHookOutcome {
-                    charge: codex_hooks::HookCharge {
-                        units: 42.0,
-                        overflowed: false,
-                    },
+                    charge: codex_hooks::HookCharge::Units(42.0),
                     invalid_price: bad_sibling.then(|| "negative sibling price".into()),
                 },
                 ..Default::default()
@@ -1577,7 +1654,6 @@ mod tests {
                 turn_id: turn.sub_id.clone(),
                 usage: provider_usage,
                 additional_budget_units: 42.0,
-                additional_budget_units_overflowed: false,
             }]
         );
     }

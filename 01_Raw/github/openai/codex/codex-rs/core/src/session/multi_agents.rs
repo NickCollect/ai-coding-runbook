@@ -55,11 +55,12 @@ pub(crate) fn resolve_usage_hints(
             return None;
         }
         if config.disable_native_tools {
-            return None;
+            return Some(MultiAgentRoleInstructions::concurrency_only(
+                config.max_concurrent_threads_per_session,
+            ));
         }
         Some(MultiAgentRoleInstructions::Composed {
             base: base.to_owned(),
-            marked: message.catalog_override().is_some(),
             omit_update_plan_instructions,
             max_concurrency: config.max_concurrent_threads_per_session,
             wait_agent_enabled: config.wait_agent_enabled,

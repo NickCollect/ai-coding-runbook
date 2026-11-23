@@ -489,7 +489,7 @@ export namespace Agent {
    */
   export interface Compaction {
     /**
-     * Whether context is compacted in the background. Defaults to true.
+     * Whether context is compacted in the background. Defaults to false.
      */
     async: boolean;
   }
@@ -1341,12 +1341,6 @@ export interface AgentSession {
    * and automatic review is not enabled. Omission means none.
    */
   review?: 'none' | 'auto_review';
-
-  /**
-   * Configured spending limit and best-effort consumption, in USD cents. Unlimited
-   * sessions omit this object.
-   */
-  spend_control?: AgentSession.SpendControl;
 }
 
 export namespace AgentSession {
@@ -1417,7 +1411,7 @@ export namespace AgentSession {
      */
     export interface Compaction {
       /**
-       * Whether context is compacted in the background. Defaults to true.
+       * Whether context is compacted in the background. Defaults to false.
        */
       async: boolean;
     }
@@ -1660,22 +1654,6 @@ export namespace AgentSession {
    */
   export interface PromptCacheOptions {
     ttl: '30m' | '12h';
-  }
-
-  /**
-   * Configured spending limit and best-effort consumption, in USD cents. Unlimited
-   * sessions omit this object.
-   */
-  export interface SpendControl {
-    /**
-     * Best-effort recorded spend floored to whole USD cents, or null when unavailable.
-     */
-    consumed: number | null;
-
-    /**
-     * The configured positive limit in USD cents.
-     */
-    limit: number;
   }
 }
 
@@ -5532,7 +5510,6 @@ export interface SessionTurnError {
    * - `context_length_exceeded` - The request exceeds the model's context window.
    * - `max_output_tokens` - The model reached its output token limit before
    *   finishing the response.
-   * - `session_budget_exceeded` - The session has reached its usage budget.
    * - `usage_limit_exceeded` - The organization has reached a usage, plan, or
    *   billing limit.
    * - `project_spend_limit_exceeded` - The project has reached its enforced spend
@@ -5567,7 +5544,6 @@ export interface SessionTurnError {
   code:
     | 'context_length_exceeded'
     | 'max_output_tokens'
-    | 'session_budget_exceeded'
     | 'usage_limit_exceeded'
     | 'project_spend_limit_exceeded'
     | 'organization_spend_limit_exceeded'
@@ -5881,7 +5857,7 @@ export interface AgentCreateParams {
   model: string;
 
   /**
-   * Context compaction settings. Omission or null enables background compaction.
+   * Context compaction settings. Omission or null uses blocking compaction.
    */
   compaction?: AgentCreateParams.Compaction | null;
 
@@ -5945,13 +5921,13 @@ export interface AgentCreateParams {
 
 export namespace AgentCreateParams {
   /**
-   * Context compaction settings. Omission or null enables background compaction.
+   * Context compaction settings. Omission or null uses blocking compaction.
    */
   export interface Compaction {
     /**
-     * Whether to compact context in the background. Omission or null defaults to true.
-     * Set to false to use blocking compaction. Background compaction may increase
-     * token usage.
+     * Whether to compact context in the background. Omission or null defaults to
+     * false. Set to true to enable background compaction. Background compaction may
+     * increase token usage.
      */
     async?: boolean | null;
   }
@@ -5970,8 +5946,7 @@ export namespace AgentCreateParams {
 export interface AgentUpdateParams {
   /**
    * Context compaction settings. Omit to keep the current settings. A supplied
-   * object replaces the settings; null or an empty object enables background
-   * compaction.
+   * object replaces the settings; null or an empty object uses blocking compaction.
    */
   compaction?: AgentUpdateParams.Compaction | null;
 
@@ -6042,14 +6017,13 @@ export interface AgentUpdateParams {
 export namespace AgentUpdateParams {
   /**
    * Context compaction settings. Omit to keep the current settings. A supplied
-   * object replaces the settings; null or an empty object enables background
-   * compaction.
+   * object replaces the settings; null or an empty object uses blocking compaction.
    */
   export interface Compaction {
     /**
-     * Whether to compact context in the background. Omission or null defaults to true.
-     * Set to false to use blocking compaction. Background compaction may increase
-     * token usage.
+     * Whether to compact context in the background. Omission or null defaults to
+     * false. Set to true to enable background compaction. Background compaction may
+     * increase token usage.
      */
     async?: boolean | null;
   }

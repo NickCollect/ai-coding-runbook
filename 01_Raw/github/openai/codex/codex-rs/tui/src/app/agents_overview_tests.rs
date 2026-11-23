@@ -146,6 +146,7 @@ use crate::test_support::test_path_display;
 use codex_app_server_client::AppServerClient;
 use codex_app_server_client::AppServerEvent;
 use codex_app_server_client::CloudClient;
+use codex_app_server_client::CloudCommand;
 use codex_app_server_protocol::DynamicToolCallParams;
 use codex_app_server_protocol::ReasoningSummaryTextDeltaNotification;
 use codex_app_server_protocol::RequestId;
@@ -176,6 +177,19 @@ use ratatui::layout::Rect;
 
 static OVERVIEW_TIMESTAMP: std::sync::LazyLock<i64> =
     std::sync::LazyLock::new(|| chrono::Utc::now().timestamp() - 120);
+
+fn overview_session_stub(
+    owner: BackendId,
+    mode: ThreadParamsMode,
+) -> (
+    AppServerSession,
+    tokio::sync::mpsc::Receiver<CloudCommand>,
+    tokio::sync::mpsc::UnboundedSender<AppServerEvent>,
+) {
+    let (client, commands, events) = CloudClient::channel(/*capacity*/ 1);
+    let session = AppServerSession::new(owner, AppServerClient::Cloud(client), mode);
+    (session, commands, events)
+}
 
 #[tokio::test]
 async fn refreshing_one_backends_pins_preserves_cross_backend_rank() {
@@ -318,9 +332,12 @@ async fn late_overview_page_only_refills_its_own_backend() {
     );
     app.remove_agents_overview_thread(id);
 
-    for owner in [other, displayed] {
+    // The displayed backend's next history page contains the restored task.
+    for (owner, replacement) in [(other, ThreadId::new()), (displayed, id)] {
         let request_id = Uuid::new_v4();
-        let replacement = ThreadId::new();
+        let mut discovery =
+            crate::app::agents_overview_discovery::AgentsOverviewDiscovery::default();
+        discovery.fresh_cloud_page_ids.push(replacement);
         let row = overview_thread(
             replacement,
             /*parent_thread_id*/ None,
@@ -336,7 +353,7 @@ async fn late_overview_page_only_refills_its_own_backend() {
                 threads: HashMap::from([(replacement, Some((row, false, None)))]),
                 last_messages: HashMap::new(),
                 recent_seed_complete: true,
-                discovery: None,
+                discovery: Some(discovery),
                 pinned_thread_ids: None,
             }),
         );
@@ -349,8 +366,10 @@ async fn late_overview_page_only_refills_its_own_backend() {
 }
 
 #[tokio::test]
-async fn queued_overview_page_survives_a_focus_change() {
+async fn queued_overview_page_survives_a_focus_change() -> Result<()> {
     let mut app = make_test_app().await;
+    app.config.features.enable(Feature::TuiWorkspace)?;
+    app.local_settings.transcript_mode = crate::transcript_mode::TranscriptMode::Owned;
     let owner = BackendId::new();
     let other = BackendId::new();
     let (client, _commands, _events) = CloudClient::channel(/*capacity*/ 1);
@@ -370,7 +389,20 @@ async fn queued_overview_page_survives_a_focus_change() {
     app.show_more_agents_overview(&session);
 
     app.app_server_backend_id = Some(other);
+    app.chat_widget
+        .dismiss_provider_view(AGENTS_OVERVIEW_VIEW_ID);
     app.agents_overview.active_refresh = None;
+    app.handle_polled_backend_event(
+        &session,
+        other,
+        &mut HashMap::new(),
+        crate::app_server_session::AppServerSessionEvent {
+            backend_id: owner,
+            event: AppServerEvent::CloudInventoryChanged(None),
+        },
+    )
+    .await;
+    assert!(app.agents_overview.refresh_recent_backends.contains(&owner));
     app.drain_agents_overview_refresh_queue();
     assert_eq!(
         app.agents_overview.pending_refresh_backends.front(),
@@ -379,25 +411,81 @@ async fn queued_overview_page_survives_a_focus_change() {
     assert!(app.agents_overview.active_refresh.is_none());
 
     app.app_server_backend_id = Some(owner);
-    app.open_agents_overview(&session);
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+    app.focus_workspace_composer(&mut tui);
+    app.drain_agents_overview_refresh_queue();
+    let (page, page_owner) = app.agents_overview.active_refresh.unwrap();
+    assert_eq!(page_owner, owner);
     assert_eq!(
-        app.agents_overview.active_refresh.map(|(_, id)| id),
-        Some(owner)
+        app.agents_overview.pending_refresh_backends.front(),
+        Some(&owner)
     );
-    assert!(app.agents_overview.pending_refresh_backends.is_empty());
     assert!(app.agents_overview.refresh_show_more);
+    assert!(!app.agents_overview.active_refresh_recent);
+    assert!(app.agents_overview.refresh_recent_backends.contains(&owner));
+    app.agents_overview.refresh_task.take().unwrap().abort();
+    app.agents_overview.show_more_backends.insert(owner);
+    app.agents_overview.refill_by_backend.insert(owner, 1);
+    app.apply_agents_overview_thread_refresh(&session, page, Err("temporary page failure".into()));
+    let (recent, recent_owner) = app.agents_overview.active_refresh.unwrap();
+    assert_eq!(recent_owner, owner);
+    assert!(app.agents_overview.active_refresh_recent);
+    assert!(app.agents_overview.show_more_backends.contains(&owner));
+    let id = ThreadId::new();
+    for (method, archived) in [("thread/archived", true), ("thread/unarchived", false)] {
+        let lifecycle = serde_json::from_value(
+            serde_json::json!({"method": method, "params": {"threadId": id.to_string()}}),
+        )
+        .unwrap();
+        app.handle_app_server_event(
+            &session,
+            AppServerEvent::CloudInventoryChanged(Some(Box::new(lifecycle))),
+        )
+        .await;
+        assert_eq!(app.agents_overview.removed_threads.contains(&id), archived);
+    }
+    app.poll_cloud_inventory(&session, /*attached*/ true);
+    assert_eq!(app.agents_overview.active_refresh, Some((recent, owner)));
+    assert!(app.agents_overview.cloud_inventory_dirty.contains(&owner));
+    app.cancel_agents_overview_refresh(owner);
+    Ok(())
+}
+
+#[tokio::test]
+async fn cloud_inventory_polls_when_visible_and_detached() {
+    let mut app = make_test_app().await;
+    let (tx, mut rx) = tokio::sync::mpsc::unbounded_channel();
+    app.app_event_tx = AppEventSender::new(tx);
+    let owner = BackendId::new();
+    let (session, _commands, _events) = overview_session_stub(owner, ThreadParamsMode::Cloud);
+    app.backend_registry.connect(&session);
+    app.app_server_backend_id = Some(owner);
+    app.agents_overview.initialized.insert(owner);
+    app.poll_cloud_inventory(&session, /*attached*/ false);
+    assert!(app.agents_overview.active_refresh.is_none());
+
+    let view = app.agents_overview_view(Vec::new(), /*selected_thread_id*/ None);
+    app.chat_widget.show_bottom_pane_view(Box::new(view));
+    app.poll_cloud_inventory(&session, /*attached*/ true);
+    assert!(app.agents_overview.active_refresh.is_none());
+    app.poll_cloud_inventory(&session, /*attached*/ false);
+    assert!(app.agents_overview.active_refresh_recent);
+    app.agents_overview.view_state.lock().unwrap().has_more = true;
+    app.chat_widget.handle_key_event(KeyCode::Down.into());
+    app.chat_widget.handle_key_event(KeyCode::Enter.into());
+    assert!(
+        std::iter::from_fn(|| rx.try_recv().ok())
+            .any(|event| matches!(event, AppEvent::ShowMoreAgentsOverview))
+    );
     app.cancel_agents_overview_refresh(owner);
 }
 
 #[tokio::test]
 async fn overview_keeps_rows_and_routes_actions_to_the_owner() -> Result<()> {
     let mut app = make_test_app().await;
-    let stub = |owner, mode| {
-        let (client, commands, events) = CloudClient::channel(/*capacity*/ 1);
-        let session = AppServerSession::new(owner, AppServerClient::Cloud(client), mode);
-        (session, (commands, events))
-    };
-    let (mut displayed, (mut commands, _events)) = stub(BackendId::new(), ThreadParamsMode::Cloud);
+    crate::app::test_support::use_modal_agents_overview(&mut app);
+    let (mut displayed, mut commands, _events) =
+        overview_session_stub(BackendId::new(), ThreadParamsMode::Cloud);
     let remote_owner = BackendId::new();
     let [local_id, remote_id, colliding_id] = std::array::from_fn(|_| ThreadId::new());
     let [local, remote, colliding] = [
@@ -535,7 +623,8 @@ async fn overview_keeps_rows_and_routes_actions_to_the_owner() -> Result<()> {
 
     // Reverse the foreground so the backend that supports pinning is displayed.
     app.chat_widget.handle_key_event(KeyCode::Enter.into());
-    let (mut foreground, _foreground_transport) = stub(remote_owner, ThreadParamsMode::Embedded);
+    let (mut foreground, _foreground_commands, _foreground_events) =
+        overview_session_stub(remote_owner, ThreadParamsMode::Embedded);
     app.app_server_backend_id = Some(remote_owner);
     app.repaint_agents_overview();
     let selected = app
@@ -693,6 +782,7 @@ pub(in crate::app) fn overview_thread(
         extra: None,
         project_id: None,
         daybreak_enabled: None,
+        daybreak_program_propagation_enrolled: None,
         session_id: parent_thread_id.unwrap_or(thread_id).to_string(),
         forked_from_id: None,
         attached_to_thread_id: None,
@@ -710,7 +800,7 @@ pub(in crate::app) fn overview_thread(
         recency_at: Some(*OVERVIEW_TIMESTAMP),
         status,
         path: None,
-        cwd: test_path_buf("/tmp/project").abs(),
+        cwd: test_path_buf("/tmp/project").abs().into(),
         cli_version: "0.0.0".to_string(),
         source: parent_thread_id.map_or(SessionSource::Cli, |parent_thread_id| {
             SessionSource::SubAgent(SubAgentSource::ThreadSpawn {
@@ -804,6 +894,9 @@ async fn shared_overview_keeps_rows_and_replays_changes_over_stale_reads() -> Re
     );
     // A successful read supersedes registration; queued notifications supersede the read.
     retained_thread.preview = "Fresh preview from the read".to_string();
+    let mut discovery = crate::app::agents_overview_discovery::AgentsOverviewDiscovery::default();
+    discovery.fresh_cloud_page_ids = vec![archived, deleted];
+    app.agents_overview.active_refresh_recent = true;
     app.apply_agents_overview_thread_refresh(
         &app_server,
         request_id,
@@ -816,7 +909,7 @@ async fn shared_overview_keeps_rows_and_replays_changes_over_stale_reads() -> Re
                 (deleted, Some((deleted_thread, false, None))),
             ]),
             recent_seed_complete: true,
-            discovery: None,
+            discovery: Some(discovery),
             pinned_thread_ids: None,
         }),
     );
@@ -827,6 +920,7 @@ async fn shared_overview_keeps_rows_and_replays_changes_over_stale_reads() -> Re
         (created, Some(created_thread)),
     ]);
     assert_eq!(app.agents_overview.threads, expected);
+    assert_eq!(app.agents_overview.refill_count(app_server.backend_id()), 0);
 
     let request_id = Uuid::new_v4();
     app.agents_overview.active_refresh = Some((request_id, app_server.backend_id()));
@@ -979,6 +1073,7 @@ async fn shared_overview_keeps_rows_and_replays_changes_over_stale_reads() -> Re
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
 async fn shared_overview_seeds_once_and_retains_locally_resumed_history() -> Result<()> {
     let mut app = make_test_app().await;
+    crate::app::test_support::use_modal_agents_overview(&mut app);
     trust_fixture_folders(&mut app);
     let mut ids = Vec::new();
     for day in 1..=12 {
@@ -1137,6 +1232,7 @@ async fn shared_overview_seeds_once_and_retains_locally_resumed_history() -> Res
 
     // A fresh TUI/server has no in-memory additions; read-only resumes did not promote history.
     let mut restarted = make_test_app().await;
+    crate::app::test_support::use_modal_agents_overview(&mut restarted);
     restarted.app_server_target = app.app_server_target.clone();
     let app_server = Box::pin(crate::start_embedded_app_server_for_picker(&config)).await?;
     let (event_tx, mut event_rx) = tokio::sync::mpsc::unbounded_channel();
@@ -1305,7 +1401,7 @@ async fn check_hidden_thread_does_not_refresh_shared_overview(source: &str) {
 }
 
 #[tokio::test]
-async fn agents_overview_details_show_available_attention_without_expanding_rows() -> Result<()> {
+async fn agents_overview_details_show_available_attention() -> Result<()> {
     let mut app = make_test_app_with_chat().await;
     let app_server = crate::start_embedded_app_server_for_picker(&app.config).await?;
     let [root, failed_agent, child, unloaded] = std::array::from_fn(|_| ThreadId::new());
@@ -1729,7 +1825,7 @@ async fn worktrees_overview_groups_by_project_or_directory() {
             title,
             ThreadStatus::Idle,
         );
-        thread.cwd = AbsolutePathBuf::from_absolute_path(cwd).unwrap();
+        thread.cwd = AbsolutePathBuf::from_absolute_path(cwd).unwrap().into();
         thread
     })
     .collect::<Vec<_>>();
@@ -2025,9 +2121,11 @@ async fn shared_overview_shows_only_root_sessions() {
             }
             candidate.updated_at = index;
             candidate.cwd = if index == 0 {
-                test_path_buf("/tmp/project-selected").abs()
+                test_path_buf("/tmp/project-selected").abs().into()
             } else {
-                test_path_buf(&format!("/tmp/project-{}", index % 3)).abs()
+                test_path_buf(&format!("/tmp/project-{}", index % 3))
+                    .abs()
+                    .into()
             };
             candidate
         })
@@ -2231,10 +2329,96 @@ async fn root_switch_preserves_vim_line_yank() -> Result<()> {
 }
 
 #[tokio::test]
+async fn new_session_selects_its_task_when_the_open_dock_receives_the_row() -> Result<()> {
+    let mut app = Box::pin(make_test_app()).await;
+    trust_fixture_folders(&mut app);
+    app.local_settings.tui.animations = false;
+    std::fs::write(
+        &app.local_settings.user_config_path,
+        "[features]\ntui_workspace = true\n[tui]\nanimations = false\n",
+    )?;
+    app.config.features.enable(Feature::TuiWorkspace)?;
+    let mut tui = crate::tui::test_support::make_test_tui_with_size(Size::new(
+        /*width*/ 100, /*height*/ 24,
+    ))?;
+    tui.set_owned_screen(/*owned*/ true)?;
+    app.local_settings.transcript_mode = tui.transcript_mode();
+    let mut server = Box::pin(crate::start_embedded_app_server_for_picker(&app.config)).await?;
+    let previous = Box::pin(server.start_thread(&app.config)).await?;
+    let previous_id = previous.session.thread_id;
+    app.enqueue_primary_thread_session(previous.session, previous.turns)
+        .await?;
+    let previous_row = overview_thread(
+        previous_id,
+        /*parent_thread_id*/ None,
+        "Previous task",
+        ThreadStatus::Idle,
+    );
+    app.agents_overview
+        .threads
+        .insert(previous_id, Some(previous_row));
+    app.open_agents_overview(&server);
+    app.focus_workspace_composer(&mut tui);
+    assert_eq!(app.overview_selected_thread_id(), Some(previous_id));
+
+    tui.pause_events();
+    Box::pin(app.handle_event(&mut tui, &mut server, AppEvent::NewSession { name: None })).await?;
+    let new_id = app.current_displayed_thread_id().expect("new conversation");
+    assert_ne!(new_id, previous_id);
+    app.repaint_agents_overview();
+    let thread = server.thread_read(new_id, /*include_turns*/ false).await?;
+    let started = ServerNotification::ThreadStarted(ThreadStartedNotification { thread });
+    Box::pin(app.handle_app_server_event(
+        &server,
+        AppServerEvent::ServerNotification(Box::new(started)),
+    ))
+    .await;
+    assert_eq!(app.overview_selected_thread_id(), Some(new_id));
+    assert!(!app.workspace_center_owns_input());
+
+    app.render_chat_widget_frame(&mut tui, Size::new(/*width*/ 100, /*height*/ 24))?;
+    let screen = crate::app::owned_transcript::tests::buffer_text(tui.terminal.previous_buffer());
+    let selected_title = screen
+        .lines()
+        .filter_map(|line| line.split_once('│'))
+        .map(|(dock, _)| dock.trim())
+        .find(|line| line.starts_with('›'))
+        .expect("selected task in dock");
+    insta::assert_snapshot!(selected_title, @"› ○ Untitled task");
+
+    app.open_agents_overview(&server);
+    app.handle_workspace_key(&mut tui, &mut server, KeyCode::Down.into())
+        .await;
+    assert_eq!(app.overview_selected_thread_id(), Some(previous_id));
+    app.focus_workspace_composer(&mut tui);
+    app.repaint_agents_overview();
+    assert_eq!(app.overview_selected_thread_id(), Some(previous_id));
+
+    app.open_agents_overview(&server);
+    Box::pin(app.new_agents_overview_session(&mut tui, &mut server, /*cwd*/ None)).await?;
+    assert_ne!(app.current_displayed_thread_id(), Some(new_id));
+    assert!(app.agents_overview.workspace.is_open());
+    assert!(!app.workspace_center_owns_input());
+
+    // Read receipts follow the visible conversation, including while the wide dock has focus.
+    app.open_agents_overview(&server);
+    let displayed = app.current_displayed_thread_id().expect("new dock task");
+    for (width, visible) in [(100, Some(displayed)), (50, None)] {
+        let size = Size::new(width, /*height*/ 24);
+        tui.terminal.resize(size)?;
+        Box::pin(app.handle_tui_event(&mut tui, &mut server, TuiEvent::Resize(size))).await?;
+        assert_eq!(server.focused_conversation, visible);
+    }
+    server.shutdown().await?;
+    Ok(())
+}
+
+#[tokio::test]
 async fn root_switch_loads_local_preferences_from_disk() -> Result<()> {
     // Keep the large setup and root-switch futures off the test thread's stack.
     let mut app = Box::pin(make_test_app()).await;
     trust_fixture_folders(&mut app);
+    app.local_settings.tui.animations = false;
     let mut app_server = Box::pin(crate::start_embedded_app_server_for_picker(
         app.chat_widget.config_ref(),
     ))
@@ -2255,15 +2439,28 @@ async fn root_switch_loads_local_preferences_from_disk() -> Result<()> {
     )?;
     std::fs::write(
         app.local_settings.user_config_path.as_path(),
-        "[tui]\ntheme = \"dracula\"\nresume_cwd = \"session\"\n[history]\npersistence = \"none\"\n",
+        "[features]\ntui_workspace = true\n[tui]\nanimations = false\ntheme = \"dracula\"\nresume_cwd = \"session\"\n[history]\npersistence = \"none\"\n",
     )?;
     let config = Box::pin(app.rebuild_config_for_cwd(app.config.cwd.to_path_buf())).await?;
-    let expected = crate::local_settings::LocalSettings::from(&config);
-    let mut tui = crate::tui::test_support::make_test_tui()?;
+    let mut tui = crate::tui::test_support::make_test_tui_with_size(Size::new(
+        /*width*/ 100, /*height*/ 24,
+    ))?;
+    tui.set_owned_screen(/*owned*/ true)?;
+    let expected = crate::local_settings::LocalSettings::for_tui(&config, &tui);
+    app.config.features.enable(Feature::TuiWorkspace)?;
+    app.local_settings.transcript_mode = tui.transcript_mode();
+    app.open_agents_overview(&app_server);
 
-    Box::pin(app.select_agents_overview_thread(&mut tui, &mut app_server, target_thread_id))
-        .await?;
-
+    Box::pin(app.handle_event(
+        &mut tui,
+        &mut app_server,
+        AppEvent::SelectAgentsOverviewThread {
+            thread_id: target_thread_id,
+        },
+    ))
+    .await?;
+    assert!(app.agents_overview.workspace.is_open());
+    assert!(!app.workspace_center_owns_input());
     assert_eq!(app.current_displayed_thread_id(), Some(target_thread_id));
     assert_eq!(app.local_settings, expected);
     assert_eq!(app.chat_widget.local_settings, expected);
@@ -2647,7 +2844,7 @@ async fn overview_cold_resume_honors_working_directory_selection() -> Result<()>
         .session;
         assert_eq!(
             (app.config.cwd.clone(), observed.cwd),
-            (expected_cwd.clone(), expected_cwd),
+            (expected_cwd.clone(), expected_cwd.into()),
         );
         app_server.shutdown().await?;
     }
@@ -3339,6 +3536,7 @@ async fn command_center_handles_resume_failure_and_success() -> Result<()> {
 #[tokio::test]
 async fn command_center_attach_conflict_opens_read_only_and_retries() -> Result<()> {
     let mut app = Box::pin(make_test_app()).await;
+    crate::app::test_support::use_modal_agents_overview(&mut app);
     trust_fixture_folders(&mut app);
     std::fs::write(
         app.config.codex_home.join("config.toml"),
@@ -3774,6 +3972,12 @@ async fn overview_fork_keeps_idle_source_input_queued() -> Result<()> {
                 ready = Some(event);
             }
         }
+        if cached_primary {
+            tui.set_owned_screen(/*owned*/ true)?;
+            app.local_settings.transcript_mode = tui.transcript_mode();
+            app.config.features.enable(Feature::TuiWorkspace)?;
+            app.open_agents_overview(&server);
+        }
         // Failed reattachment can leave the source displayed as a saved replay.
         app.app_server_target = AppServerTarget::LocalDaemon {
             allow_embedded_fallback: true,
@@ -3792,9 +3996,12 @@ async fn overview_fork_keeps_idle_source_input_queued() -> Result<()> {
         assert_eq!(app.current_displayed_thread_id(), Some(source));
         assert_eq!(server.next_request_id(), RequestId::Integer(request + 1));
         assert!(!app.chat_widget.fork_in_progress);
+        assert_eq!(app.workspace_center_owns_input(), cached_primary);
         app.app_server_target = AppServerTarget::Embedded;
         Box::pin(app.handle_event(&mut tui, &mut server, ready.expect("fork continuation")))
             .await?;
+        assert_eq!(app.agents_overview.workspace.is_open(), cached_primary);
+        assert!(!app.workspace_center_owns_input());
         assert_ne!(app.current_displayed_thread_id(), Some(source));
         assert_eq!(app.agents_overview.input_states[&source], retained);
         assert!(app.chat_widget.queued_user_message_texts().is_empty());
@@ -3914,7 +4121,7 @@ async fn command_center_new_actions_use_selection_and_leave_metadata_text_alone(
     );
     let owner = BackendId::new();
     app.backend_registry.observe(owner, id);
-    target.cwd = test_path_buf("/tmp/checkout/subdir").abs();
+    target.cwd = test_path_buf("/tmp/checkout/subdir").abs().into();
     app.agents_overview.pins_by_backend =
         [(crate::backend_id::BackendId::new(), Some(Vec::new()))].into();
     let mut view = app.agents_overview_view(vec![target.clone()], Some(id));
@@ -3925,11 +4132,11 @@ async fn command_center_new_actions_use_selection_and_leave_metadata_text_alone(
     for grouping_index in 0..3 {
         view.handle_key_event(KeyCode::Char('n').into());
         assert!(
-            matches!(rx.try_recv(), Ok(AppEvent::NewAgentsOverviewSession { backend_id: Some(id), cwd: Some(cwd) }) if id == owner && cwd == target.cwd)
+            matches!(rx.try_recv(), Ok(AppEvent::NewAgentsOverviewSession { backend_id: Some(id), cwd: Some(cwd) }) if id == owner && cwd.as_path() == target.cwd.as_path())
         );
         view.handle_key_event(KeyCode::Char('w').into());
         assert!(
-            matches!(rx.try_recv(), Ok(AppEvent::NewAgentsOverviewWorktree { backend_id: Some(id), cwd: Some(cwd) }) if id == owner && cwd == target.cwd)
+            matches!(rx.try_recv(), Ok(AppEvent::NewAgentsOverviewWorktree { backend_id: Some(id), cwd: Some(cwd) }) if id == owner && cwd.as_path() == target.cwd.as_path())
         );
         view.handle_key_event(KeyCode::Char('g').into());
         if grouping_index == 0 {

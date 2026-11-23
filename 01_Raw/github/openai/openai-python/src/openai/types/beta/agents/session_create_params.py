@@ -20,7 +20,6 @@ __all__ = [
     "AgentCompaction",
     "AgentExperimental",
     "PromptCacheOptions",
-    "SpendControl",
     "StreamOptions",
     "SessionCreateParamsNonStreaming",
     "SessionCreateParamsStreaming",
@@ -73,12 +72,6 @@ class SessionCreateParamsBase(TypedDict, total=False):
       fallbacks.
     """
 
-    spend_control: Optional[SpendControl]
-    """Optional spending limit in USD cents.
-
-    Omission or null creates an unlimited session.
-    """
-
     stream_options: StreamOptions
     """Options for the event stream. Only allowed when `stream` is `true`."""
 
@@ -89,13 +82,13 @@ class SessionCreateParamsBase(TypedDict, total=False):
 class AgentCompaction(TypedDict, total=False):
     """Context compaction settings.
 
-    Omit to keep the current settings. A supplied object replaces the settings; null or an empty object enables background compaction.
+    Omit to keep the current settings. A supplied object replaces the settings; null or an empty object uses blocking compaction.
     """
 
     async_: Annotated[Optional[bool], PropertyInfo(alias="async")]
     """Whether to compact context in the background.
 
-    Omission or null defaults to true. Set to false to use blocking compaction.
+    Omission or null defaults to false. Set to true to enable background compaction.
     Background compaction may increase token usage.
     """
 
@@ -123,7 +116,7 @@ class Agent(TypedDict, total=False):
     """Context compaction settings.
 
     Omit to keep the current settings. A supplied object replaces the settings; null
-    or an empty object enables background compaction.
+    or an empty object uses blocking compaction.
     """
 
     experimental: AgentExperimental
@@ -181,16 +174,6 @@ class PromptCacheOptions(TypedDict, total=False):
 
     ttl: Literal["30m", "12h"]
     """Minimum lifetime for new prompt cache entries. Defaults to 30 minutes."""
-
-
-class SpendControl(TypedDict, total=False):
-    """Optional spending limit in USD cents.
-
-    Omission or null creates an unlimited session.
-    """
-
-    limit: Required[Optional[int]]
-    """Positive USD cents, or null to remove the limit."""
 
 
 class StreamOptions(TypedDict, total=False):

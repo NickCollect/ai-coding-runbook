@@ -22,6 +22,7 @@ use codex_code_mode_protocol::grpc as proto;
 use codex_code_mode_protocol::grpc::code_mode_host_server::CodeModeHost;
 use codex_code_mode_protocol::host::LEGACY_MAX_PENDING_DELEGATE_CALLS;
 use codex_code_mode_protocol::host::MAX_PENDING_DELEGATE_CALLS;
+use codex_code_mode_runtime::ToolPreload;
 use codex_protocol::protocol::W3cTraceContext;
 use futures::Stream;
 use futures::StreamExt;
@@ -70,6 +71,7 @@ fn trace_context_from_request<T>(request: &Request<T>) -> Option<W3cTraceContext
 #[derive(Clone)]
 pub struct GrpcCodeModeHost {
     state: Arc<GrpcHostState>,
+    tool_preloads: &'static [ToolPreload],
     process_metrics: Option<Arc<crate::process_metrics::ProcessMetrics>>,
 }
 
@@ -78,8 +80,15 @@ impl GrpcCodeModeHost {
     pub fn new() -> Self {
         Self {
             state: Arc::new(GrpcHostState::new()),
+            tool_preloads: &[],
             process_metrics: None,
         }
+    }
+
+    /// Sets the trusted helpers used when this host opens a session.
+    pub fn with_tool_preloads(mut self, tool_preloads: &'static [ToolPreload]) -> Self {
+        self.tool_preloads = tool_preloads;
+        self
     }
 
     /// Uses a collector whose resources were prepared before sandbox entry.
@@ -126,6 +135,7 @@ impl GrpcCodeModeHost {
                 ..Default::default()
             },
             max_pending_delegate_calls,
+            self.tool_preloads,
         )?;
         Ok(Response::new(with_heartbeats(
             events,
@@ -219,6 +229,7 @@ impl GrpcCodeModeHost {
         validation::identifier(&request.execution_id, "execution ID")?;
         let request_permit = self.state.request_permit()?;
         let execution_id = request.execution_id.clone();
+        let catalog_revision = request.catalog_revision;
         let request = conversions::execute_request(request)?;
         let cell_permit = self.state.cell_permit()?;
         let yield_signal = session.reserve_execution(&execution_id)?;
@@ -230,7 +241,7 @@ impl GrpcCodeModeHost {
             _ = session.closed.cancelled() => {
                 return Err(Status::cancelled("code-mode session is closed"));
             }
-            result = session.runtime.execute(request, Arc::new(delegate::GrpcDelegate::new(Arc::downgrade(&session))), Some(yield_signal)) => {
+            result = session.runtime.execute_with_catalog(request, catalog_revision, Arc::new(delegate::GrpcDelegate::new(Arc::downgrade(&session))), Some(yield_signal)) => {
                 result.map_err(Status::failed_precondition)?
             }
         };

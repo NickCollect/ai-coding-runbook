@@ -69,7 +69,12 @@ impl ChatWidget {
         let header = Self::placeholder_session_header_cell(&config);
         let active_cell = Some(header);
 
-        let current_cwd = Some(config.cwd.to_path_buf());
+        let current_cwd = PathUri::from_abs_path(&config.cwd);
+        let current_workspace_roots = config
+            .workspace_roots
+            .iter()
+            .map(PathUri::from_abs_path)
+            .collect();
         let effective_service_tier = crate::service_tier_resolution::effective_service_tier(
             &config,
             &local_settings.notices,
@@ -124,6 +129,7 @@ impl ChatWidget {
             config,
             local_settings,
             config_panel_tui,
+            config_panel_reasoning_summary: None,
             effective_service_tier,
             skills_all: Vec::new(),
             skills_initial_state: None,
@@ -148,6 +154,10 @@ impl ChatWidget {
             initial_user_message,
             status_account_display,
             remote_connection: None,
+            app_server_path_convention: None,
+            statusline_feature_enabled: false,
+            statusline_read: None,
+            statusline_disconnected: false,
             snapshot_local_images: false,
             thread_params_mode: crate::app_server_session::ThreadParamsMode::Embedded,
             pending_image_submission: None,
@@ -160,6 +170,7 @@ impl ChatWidget {
             token_info: None,
             token_usage_pending: false,
             rate_limit_snapshots_by_limit_id: BTreeMap::new(),
+            inherited_quota_provider: None,
             refreshing_status_outputs: Vec::new(),
             next_status_refresh_request_id: 0,
             pending_rate_limit_reset_request_id: None,
@@ -170,6 +181,8 @@ impl ChatWidget {
             pending_rate_limit_reset_hint: None,
             available_rate_limit_reset_credits: None,
             next_rate_limit_reset_request_id: 0,
+            account_plan: initial_plan_type,
+            quota_plan: None,
             plan_type: initial_plan_type,
             codex_rate_limit_reached_type: None,
             codex_spend_control_reached: None,
@@ -268,6 +281,7 @@ impl ChatWidget {
             pending_notification: None,
             quit_shortcut_expires_at: None,
             new_backend_label: None,
+            cloud_environment_name: None,
             quick_dial_menu: false,
             quick_dial_menu_key_guard: None,
             quit_shortcut_key: None,
@@ -276,6 +290,7 @@ impl ChatWidget {
             feedback,
             current_rollout_path: None,
             current_cwd,
+            current_workspace_roots,
             primary_environment_cwd: None,
             workspace_command_runner,
             instruction_source_paths: Vec::new(),

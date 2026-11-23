@@ -5,6 +5,7 @@
 mod request;
 pub(super) use request::ReviewAuthorization;
 
+use crate::guardian_review::ReviewRetrieval;
 use codex_analytics::GuardianApprovalRequestSource;
 use codex_analytics::GuardianReviewAnalyticsResult;
 use codex_core_plugins::PluginCommandAttribution;
@@ -105,6 +106,7 @@ pub(super) struct GuardianReviewSessionConfig {
     pub(super) spawn_config: crate::config::Config,
     pub(super) node_repl_policy: GuardianNodeReplPolicy,
     review_model: ReviewModel,
+    default_reasoning_effort: Option<codex_protocol::openai_models::ReasoningEffort>,
 }
 
 /// Selects the thread's reviewer and leaves configuration resolution under the caller's deadline.
@@ -117,13 +119,14 @@ fn select_synchronous_reviewer(
 )> {
     Some((
         session.guardian_review_session()?,
-        guardian_review_session_config(session, context),
+        guardian_review_session_config(session, context, ReviewRetrieval::ConversationHistory),
     ))
 }
 
 pub(super) async fn guardian_review_session_config(
     session: &Session,
     context: &GuardianReviewContext,
+    retrieval: ReviewRetrieval,
 ) -> anyhow::Result<GuardianReviewSessionConfig> {
     let turn = context.turn();
     let network_proxy = session.services.network_proxy.load_full();
@@ -132,21 +135,33 @@ pub(super) async fn guardian_review_session_config(
         None => None,
     };
     let (review_model, guardian_model_info) =
-        super::reviewer_config::resolve_review_model(session, context).await;
+        super::reviewer_config::resolve_review_model(session, context).await?;
     let reviewer_config = session
         .services
         .thread_extension_data
         .get::<codex_guardian_reviewer::ReviewerConfig<crate::config::Config>>()
         .ok_or_else(|| anyhow::anyhow!("Guardian reviewer configuration is not installed"))?;
     let model_messages = ResolvedModelMessages::from_model(&guardian_model_info);
+    let mut reviewer_config = (reviewer_config.0)(turn.config.as_ref())?;
+    let inference = super::GuardianInferenceContext::for_config(
+        &turn.config,
+        &session.services.thread_extension_data,
+    )?;
+    let (reasoning_summary, personality) = if let Some(inference) = inference {
+        inference.configure_reviewer(&mut reviewer_config);
+        (Default::default(), None)
+    } else {
+        (context.reasoning_summary, context.personality)
+    };
     let mut spawn_config = build_guardian_review_session_config(
-        (reviewer_config.0)(turn.config.as_ref())?,
+        reviewer_config,
         live_network_config,
         review_model.model.as_str(),
         review_model.reasoning_effort.clone(),
-        context.reasoning_summary,
-        context.personality,
+        reasoning_summary,
+        personality,
         model_messages,
+        retrieval,
     )?;
     if context.model_info.computer_use_review_required() {
         spawn_config
@@ -166,6 +181,7 @@ pub(super) async fn guardian_review_session_config(
         spawn_config,
         node_repl_policy: GuardianNodeReplPolicy::from_messages(model_messages),
         review_model,
+        default_reasoning_effort: guardian_model_info.default_reasoning_level.clone(),
     })
 }
 
@@ -194,8 +210,6 @@ impl ReviewInput {
         GuardianReviewSessionParams {
             parent_session: self.session,
             parent_history: self.history,
-            reasoning_summary: self.context.reasoning_summary,
-            personality: self.context.personality,
             parent_context: self.context,
             spawn_config: config.spawn_config,
             node_repl_policy: config.node_repl_policy,

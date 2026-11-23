@@ -493,12 +493,6 @@ export interface SessionCreateParamsBase {
   review?: 'none' | 'auto_review';
 
   /**
-   * Optional spending limit in USD cents. Omission or null creates an unlimited
-   * session.
-   */
-  spend_control?: SessionCreateParams.SpendControl | null;
-
-  /**
    * Whether to stream session events as server-sent events. Defaults to `false`.
    */
   stream?: boolean;
@@ -522,8 +516,7 @@ export namespace SessionCreateParams {
   export interface Agent {
     /**
      * Context compaction settings. Omit to keep the current settings. A supplied
-     * object replaces the settings; null or an empty object enables background
-     * compaction.
+     * object replaces the settings; null or an empty object uses blocking compaction.
      */
     compaction?: Agent.Compaction | null;
 
@@ -583,14 +576,13 @@ export namespace SessionCreateParams {
   export namespace Agent {
     /**
      * Context compaction settings. Omit to keep the current settings. A supplied
-     * object replaces the settings; null or an empty object enables background
-     * compaction.
+     * object replaces the settings; null or an empty object uses blocking compaction.
      */
     export interface Compaction {
       /**
-       * Whether to compact context in the background. Omission or null defaults to true.
-       * Set to false to use blocking compaction. Background compaction may increase
-       * token usage.
+       * Whether to compact context in the background. Omission or null defaults to
+       * false. Set to true to enable background compaction. Background compaction may
+       * increase token usage.
        */
       async?: boolean | null;
     }
@@ -617,17 +609,6 @@ export namespace SessionCreateParams {
      * Minimum lifetime for new prompt cache entries. Defaults to 30 minutes.
      */
     ttl?: '30m' | '12h';
-  }
-
-  /**
-   * Optional spending limit in USD cents. Omission or null creates an unlimited
-   * session.
-   */
-  export interface SpendControl {
-    /**
-     * Positive USD cents, or null to remove the limit.
-     */
-    limit: number | null;
   }
 
   /**
@@ -687,12 +668,6 @@ export interface SessionUpdateParams {
    *   fallbacks.
    */
   review?: 'none' | 'auto_review';
-
-  /**
-   * Omit to retain the limit; null or a null limit removes it without resetting
-   * spend.
-   */
-  spend_control?: SessionUpdateParams.SpendControl | null;
 }
 
 export namespace SessionUpdateParams {
@@ -751,17 +726,6 @@ export namespace SessionUpdateParams {
      * Minimum lifetime for new prompt cache entries. Defaults to 30 minutes.
      */
     ttl?: '30m' | '12h';
-  }
-
-  /**
-   * Omit to retain the limit; null or a null limit removes it without resetting
-   * spend.
-   */
-  export interface SpendControl {
-    /**
-     * Positive USD cents, or null to remove the limit.
-     */
-    limit: number | null;
   }
 }
 

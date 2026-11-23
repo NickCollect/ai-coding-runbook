@@ -12,7 +12,7 @@ use crate::model_messages::permissions::ResolvedPermissionMessages;
 use crate::model_messages::permissions::WORKSPACE_WRITE_TEMPLATE;
 use approval_instructions::ApprovalInstructions;
 use codex_context_fragments::ContextualUserFragment;
-use codex_execpolicy::Policy;
+use codex_execpolicy_rules::Policy;
 use codex_protocol::config_types::ApprovalsReviewer;
 use codex_protocol::config_types::SandboxMode;
 use codex_protocol::models::ContentItem;
@@ -112,6 +112,11 @@ pub struct PermissionsInstructions {
 }
 
 impl PermissionsInstructions {
+    /// Returns true when the permissions body has no non-whitespace text.
+    pub fn is_empty(&self) -> bool {
+        self.text.trim().is_empty()
+    }
+
     /// Composes a permission fragment from resolved messages and caller-supplied facts.
     /// Paths are used verbatim; this constructor does not inspect the filesystem or environment.
     fn from_resolved(

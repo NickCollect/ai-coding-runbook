@@ -9,14 +9,15 @@ use std::collections::BTreeSet;
 use std::collections::HashSet;
 use std::collections::VecDeque;
 use std::sync::Arc;
+use std::sync::Weak;
 
 use super::AdditionalContextStore;
 use super::auto_compact_window::AutoCompactWindow;
 use super::auto_compact_window::AutoCompactWindowIds;
 use super::auto_compact_window::AutoCompactWindowSnapshot;
-use super::auto_compact_window::ContextWindowIdGenerator;
 use crate::TurnStartOptions;
 use crate::agent::host::ServiceTierAcceptance;
+use crate::config::Config;
 use crate::context_manager::ContextManager;
 use crate::context_manager::HistoryReplacement;
 use crate::session::PreviousTurnSettings;
@@ -73,6 +74,9 @@ impl ReasoningEffortPin {
 /// Persistent, session-scoped state previously stored directly on `Session`.
 pub(crate) struct SessionState {
     pub(crate) session_configuration: SessionConfiguration,
+    /// Config identities reachable from the current one through Guardian-only publications.
+    /// A mismatch with the last entry means another kind of update replaced the config.
+    pub(crate) guardian_config_snapshots: Vec<Weak<Config>>,
     /// Shared root tier publication starts when the runtime wins registration.
     pub(crate) shared_service_tier_pending: bool,
     /// Receipt for the current host root tier, retained for callers retrying that commit.
@@ -105,7 +109,7 @@ pub(crate) struct SessionState {
     pub(crate) restored_turn_routing: Option<(String, Vec<String>)>,
     /// Runtime accounting state for the active auto-compaction window.
     auto_compact_window: AutoCompactWindow,
-    context_window_id_generator: ContextWindowIdGenerator,
+    pub(crate) last_sampling_cot_removed: Option<bool>,
     pub(crate) async_compaction: crate::session::async_compaction::AsyncCompactionState,
     /// Original request effort for the current model while configuration updates remain active.
     pub(crate) reasoning_effort_pin: ReasoningEffortPin,
@@ -126,26 +130,24 @@ impl SessionState {
     /// Create a new session state mirroring previous `State::default()` semantics.
     #[cfg(test)]
     pub(crate) fn new(session_configuration: SessionConfiguration) -> Self {
-        let context_window_id_generator: ContextWindowIdGenerator =
-            Arc::new(codex_protocol::ContextWindowId::new_uuid_v7);
+        let history = ContextManager::default();
         Self::new_with_auto_compact_window_ids(
             session_configuration,
-            AutoCompactWindowIds::new_initial(context_window_id_generator()),
-            context_window_id_generator,
-            ContextManager::default(),
+            AutoCompactWindowIds::new_initial(history.context_ids().next_window()),
+            history,
         )
     }
 
     pub(crate) fn new_with_auto_compact_window_ids(
         session_configuration: SessionConfiguration,
         auto_compact_window_ids: AutoCompactWindowIds,
-        context_window_id_generator: ContextWindowIdGenerator,
         history: ContextManager,
     ) -> Self {
         Self {
             active_disabled_plugin_ids: Vec::new(),
             persisted_dynamic_tools: Arc::clone(&session_configuration.dynamic_tools),
             session_configuration,
+            guardian_config_snapshots: Vec::new(),
             shared_service_tier_pending: false,
             service_tier_acceptance: None,
             base_instructions_provenance: None,
@@ -154,6 +156,7 @@ impl SessionState {
             history_reset: CancellationToken::new(),
             latest_rate_limits: None,
             latest_token_usage_record: None,
+            last_sampling_cot_removed: None,
             mcp_dependency_prompted: HashSet::new(),
             additional_context: AdditionalContextStore::default(),
             previous_turn_settings: None,
@@ -161,7 +164,6 @@ impl SessionState {
             turn_attribution: None,
             restored_turn_routing: None,
             auto_compact_window: AutoCompactWindow::new_with_ids(auto_compact_window_ids),
-            context_window_id_generator,
             async_compaction: crate::session::async_compaction::AsyncCompactionState::default(),
             reasoning_effort_pin: ReasoningEffortPin::Unset,
             shutting_down: false,
@@ -202,6 +204,10 @@ impl SessionState {
         pending
     }
 
+    pub(crate) fn initial_settings_pending(&self) -> bool {
+        self.initial_settings_pending
+    }
+
     pub(crate) fn clone_history(&self) -> ContextManager {
         self.history.clone()
     }
@@ -225,6 +231,7 @@ impl SessionState {
         reference_context_item: Option<TurnContextItem>,
         replacement: HistoryReplacement,
     ) {
+        self.last_sampling_cot_removed = None;
         let invalidate_reviews = match replacement {
             HistoryReplacement::Compaction {
                 reviewer_compaction_hash,
@@ -376,7 +383,7 @@ impl SessionState {
 
     pub(crate) fn advance_auto_compact_window(&mut self) -> (u64, AutoCompactWindowIds) {
         self.auto_compact_window
-            .advance((self.context_window_id_generator)())
+            .advance(self.history.context_ids().next_window())
     }
 
     pub(crate) fn request_new_context_window(&mut self) {

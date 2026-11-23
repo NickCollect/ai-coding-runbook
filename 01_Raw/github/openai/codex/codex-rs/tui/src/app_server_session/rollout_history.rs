@@ -26,6 +26,7 @@ use codex_app_server_protocol::ThreadTurnsListResponse;
 use codex_app_server_protocol::TurnItemsView;
 use codex_protocol::ThreadId;
 use codex_utils_absolute_path::AbsolutePathBuf;
+use codex_utils_path_uri::LegacyAppPathString;
 use color_eyre::eyre::Result;
 
 // Bound recovery to recent messages when item paging is unavailable.
@@ -92,8 +93,8 @@ impl AppServerSession {
             config.approvals_reviewer,
             config.permissions.permission_profile().clone(),
             config.permissions.active_permission_profile(),
-            thread.cwd.clone(),
-            config.workspace_roots.clone(),
+            super::decode_thread_cwd(&thread.cwd, self.path_convention())?,
+            LegacyAppPathString::from_abs_paths(&config.workspace_roots),
             Vec::new(),
             thread.reasoning_effort,
             local_settings,
@@ -199,9 +200,12 @@ impl AppServerSession {
                 HistoryHydrationScope::Initial,
             )
             .await?;
-        let mut started =
-            started_thread_from_resume_response(response, local_settings, ThreadParamsMode::Cloud)
-                .await?;
+        let mut started = started_thread_from_resume_response(
+            response,
+            local_settings,
+            /*cwd_convention*/ None,
+        )
+        .await?;
         scoped.commit_prepared_resume().await.map_err(|err| {
             bootstrap_request_error("thread/resume failed during TUI bootstrap", err)
         })?;
@@ -291,7 +295,7 @@ impl AppServerSession {
             })
             .await;
         drop(rollout_maintenance_guard);
-        let mut response: ThreadResumeResponse = match resume_response {
+        let response: ThreadResumeResponse = match resume_response {
             Ok(response) => response,
             Err(TypedRequestError::Server { source, .. })
                 if params.exclude_turns && is_history_pagination_unsupported(&source) =>
@@ -313,6 +317,24 @@ impl AppServerSession {
                 ));
             }
         };
+        self.finish_thread_resume(
+            local_settings,
+            &config,
+            thread_id,
+            response,
+            HistoryHydrationScope::Initial,
+        )
+        .await
+    }
+
+    pub(crate) async fn finish_thread_resume(
+        &mut self,
+        local_settings: &crate::local_settings::LocalSettings,
+        config: &Config,
+        thread_id: ThreadId,
+        mut response: ThreadResumeResponse,
+        scope: HistoryHydrationScope<'_>,
+    ) -> Result<AppServerStartedThread> {
         if let Some(subscribed) = &mut self.attachment_subscribed {
             *subscribed = true;
         }
@@ -320,20 +342,17 @@ impl AppServerSession {
             &mut response.thread,
             response.turns_backwards_cursor.clone(),
             response.items_backwards_cursor.clone(),
-            Some(&config),
+            Some(config),
             Some(local_settings),
-            HistoryHydrationScope::Initial,
+            scope,
         )
         .await?;
         let fork_parent_title = self
             .fork_parent_title_from_app_server(response.thread.forked_from_id.as_deref())
             .await;
-        let mut started = started_thread_from_resume_response(
-            response,
-            local_settings,
-            self.thread_params_mode(),
-        )
-        .await?;
+        let mut started =
+            started_thread_from_resume_response(response, local_settings, self.path_convention())
+                .await?;
         started.session.fork_parent_title = fork_parent_title;
         if self.task_tools_available(thread_id) {
             self.remember_task_tool_thread(thread_id);

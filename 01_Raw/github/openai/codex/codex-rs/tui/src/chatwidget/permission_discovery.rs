@@ -41,7 +41,7 @@ fn parse_reviewer(value: &str) -> Result<ApprovalsReviewer, String> {
 }
 
 fn parse_permission_profile_args(args: &str) -> Result<PermissionProfileArgs, String> {
-    let parsed = slash_command_args::parse(args, &["--approval-policy", "--reviewer"], &[], &[])?;
+    let parsed = slash_command_args::parse_settings(args, SlashCommand::Permissions)?;
     let profile_id = parsed.positionals.first().cloned().ok_or_else(|| {
         "Usage: /permissions <profile-id> [--approval-policy=<policy>] [--reviewer=user|auto_review]"
             .to_string()
@@ -164,7 +164,7 @@ impl ChatWidget {
         self.permission_popup_request_id = Some(request_id);
         self.app_event_tx.send(AppEvent::FetchPermissionProfiles {
             request_id,
-            thread_cwd: self.thread_id.and(self.current_cwd.clone()),
+            thread_cwd: self.thread_id.map(|_| self.session_cwd().to_path_buf()),
         });
     }
 

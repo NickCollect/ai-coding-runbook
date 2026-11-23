@@ -47,12 +47,12 @@ use crate::app_event::HistoryLookupResponse;
 use crate::app_server_approval_conversions::file_update_changes_to_display;
 use crate::approval_events::ApplyPatchApprovalRequestEvent;
 use crate::approval_events::ExecApprovalRequestEvent;
+use crate::backend_id::BackendId;
 use crate::bottom_pane::StatusLineItem;
 use crate::bottom_pane::StatusLineSetupView;
 use crate::bottom_pane::StatusSurfacePreviewData;
 use crate::bottom_pane::StatusSurfacePreviewItem;
 use crate::bottom_pane::TerminalTitleItem;
-use crate::bottom_pane::TerminalTitleSetupView;
 use crate::diff_model::FileChange;
 use crate::git_action_directives::parse_assistant_markdown;
 use crate::legacy_core::config::Config;
@@ -103,7 +103,6 @@ use codex_app_server_protocol::ReviewTarget;
 use codex_app_server_protocol::ServerNotification;
 use codex_app_server_protocol::ServerRequest;
 use codex_app_server_protocol::SkillMetadata;
-use codex_app_server_protocol::SkillsListResponse;
 use codex_app_server_protocol::ThreadGoal as AppThreadGoal;
 use codex_app_server_protocol::ThreadGoalStatus as AppThreadGoalStatus;
 use codex_app_server_protocol::ThreadItemPayload;
@@ -139,6 +138,7 @@ use codex_protocol::approvals::GuardianAssessmentStatus;
 use codex_protocol::config_types::CollaborationMode;
 use codex_protocol::config_types::CollaborationModeMask;
 use codex_protocol::config_types::ModeKind;
+use codex_protocol::config_types::ReasoningSummary;
 use codex_protocol::config_types::Settings;
 #[cfg(target_os = "windows")]
 use codex_protocol::config_types::WindowsSandboxLevel;
@@ -151,6 +151,7 @@ use codex_protocol::request_permissions::RequestPermissionsEvent;
 use codex_protocol::user_input::ByteRange;
 use codex_protocol::user_input::TextElement;
 use codex_utils_absolute_path::AbsolutePathBuf;
+use codex_utils_path_uri::PathConvention;
 use codex_utils_path_uri::PathUri;
 use crossterm::event::KeyCode;
 use crossterm::event::KeyEvent;
@@ -402,6 +403,9 @@ use self::status_state::TerminalTitleStatusKind;
 mod status_controls;
 mod status_surface_commands;
 mod status_surfaces;
+mod statusline_reader;
+pub(crate) use statusline_reader::StatuslineReadEvent;
+
 pub(crate) mod statusline_state;
 use self::status_surface_commands::StatusSurfaceOverrides;
 mod streaming;
@@ -541,6 +545,7 @@ pub(crate) struct ChatWidget {
     config: Config,
     pub(crate) local_settings: crate::local_settings::LocalSettings,
     pub(crate) config_panel_tui: codex_config::types::Tui,
+    pub(crate) config_panel_reasoning_summary: Option<(BackendId, Option<ReasoningSummary>)>,
     raw_output_mode: bool,
     /// Runtime value resolved by core. `config.service_tier` remains the explicit user choice.
     effective_service_tier: Option<String>,
@@ -574,6 +579,10 @@ pub(crate) struct ChatWidget {
     pub(crate) initial_user_message: Option<UserMessage>,
     status_account_display: Option<StatusAccountDisplay>,
     pub(crate) remote_connection: Option<RemoteConnectionStatus>,
+    pub(crate) app_server_path_convention: Option<PathConvention>,
+    pub(crate) statusline_feature_enabled: bool,
+    statusline_read: Option<statusline_reader::ActiveStatuslineRead>,
+    pub(crate) statusline_disconnected: bool,
     /// Remote app servers cannot read image paths on the TUI host.
     pub(crate) snapshot_local_images: bool,
     pub(crate) thread_params_mode: crate::app_server_session::ThreadParamsMode,
@@ -588,6 +597,7 @@ pub(crate) struct ChatWidget {
     token_usage_pending: bool,
     // Status and polling use account usage reads; response streams may identify meters differently.
     rate_limit_snapshots_by_limit_id: BTreeMap<String, RateLimitSnapshotDisplay>,
+    inherited_quota_provider: Option<String>,
     refreshing_status_outputs: Vec<(u64, StatusHistoryHandle)>,
     next_status_refresh_request_id: u64,
     pending_rate_limit_reset_request_id: Option<u64>,
@@ -598,6 +608,8 @@ pub(crate) struct ChatWidget {
     pending_rate_limit_reset_hint: Option<PlainHistoryCell>,
     available_rate_limit_reset_credits: Option<i64>,
     next_rate_limit_reset_request_id: u64,
+    pub(crate) account_plan: Option<PlanType>,
+    quota_plan: Option<PlanType>,
     plan_type: Option<PlanType>,
     codex_rate_limit_reached_type: Option<RateLimitReachedType>,
     codex_spend_control_reached: Option<bool>,
@@ -722,6 +734,7 @@ pub(crate) struct ChatWidget {
     /// Main chat-surface bindings resolved from `tui.keymap.chat`.
     chat_keymap: ChatKeymap,
     new_backend_label: Option<String>,
+    cloud_environment_name: Option<String>,
     /// Whether the preset submenu owns the next key.
     quick_dial_menu: bool,
     /// Ignore a held key after it dismisses the preset submenu.
@@ -744,8 +757,9 @@ pub(crate) struct ChatWidget {
     feedback: codex_feedback::CodexFeedback,
     // Current session rollout path (if known)
     current_rollout_path: Option<PathBuf>,
-    // Current working directory (if known)
-    current_cwd: Option<PathBuf>,
+    // Working directory of the displayed session.
+    current_cwd: PathUri,
+    current_workspace_roots: Vec<PathUri>,
     primary_environment_cwd: Option<crate::session_state::EnvironmentCwd>,
     // App-server-backed command runner for status-line workspace metadata lookups.
     workspace_command_runner: Option<WorkspaceCommandRunner>,
@@ -1155,8 +1169,8 @@ impl ChatWidget {
     }
 
     fn sync_context_window_visibility(&mut self) {
-        self.bottom_pane
-            .set_context_window_hidden(self.read_only_history || self.token_usage_pending);
+        let hidden = self.read_only_history || self.token_usage_pending;
+        self.bottom_pane.set_context_window_hidden(hidden);
     }
 
     pub(crate) fn set_token_info(&mut self, info: Option<TokenUsageInfo>) {
@@ -1541,7 +1555,7 @@ impl ChatWidget {
             .iter()
             .map(|process| history_cell::UnifiedExecProcessDetails {
                 command_display: process.command_display.clone(),
-                recent_chunks: process.recent_chunks.clone(),
+                recent_chunks: process.recent_lines(),
             })
             .collect();
         self.add_to_history(history_cell::new_unified_exec_processes_output(processes));
@@ -1872,7 +1886,7 @@ impl ChatWidget {
 
     fn refresh_skills_for_current_cwd(&mut self, force_reload: bool) {
         self.submit_op(AppCommand::list_skills(
-            vec![self.config.cwd.to_path_buf()],
+            self.session_cwd().clone(),
             force_reload,
         ));
     }
@@ -1951,11 +1965,6 @@ impl ChatWidget {
             self.clear_active_stream_tail();
             self.request_redraw();
         }
-    }
-
-    fn on_list_skills(&mut self, ev: SkillsListResponse) {
-        self.set_skills_from_response(&ev);
-        self.refresh_plugin_mentions();
     }
 
     pub(crate) fn refresh_plugin_mentions(&mut self) {

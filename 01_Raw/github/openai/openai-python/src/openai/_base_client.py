@@ -335,7 +335,7 @@ class BaseSyncPage(BasePage[_T], Generic[_T]):
     # methods should continue to work as expected as there is an alternative method
     # to cast a model to a dictionary, model.dict(), which is used internally
     # by pydantic.
-    def __iter__(self) -> Iterator[_T]:  # ty: ignore[invalid-method-override]
+    def __iter__(self) -> Iterator[_T]:  # ty: ignore[incompatible-method-override]
         for page in self.iter_pages():
             for item in page._get_page_items():
                 yield item
@@ -2187,6 +2187,7 @@ def make_request_options(
     post_parser: PostParser | NotGiven = not_given,
     security: SecurityOptions | None = None,
     synthesize_event_and_data: bool | None = None,
+    stream_mode: Literal["legacy", "events"] | None = None,
 ) -> RequestOptions:
     """Create a dict of type RequestOptions without keys of NotGiven values."""
     options: RequestOptions = {}
@@ -2210,13 +2211,16 @@ def make_request_options(
 
     if is_given(post_parser):
         # Internal request hook deliberately omitted from the public RequestOptions type.
-        options["post_parser"] = post_parser  # ty: ignore[invalid-key]
+        options["post_parser"] = post_parser  # ty: ignore[invalid-typed-dict-key]
 
     if security is not None:
         options["security"] = security
 
     if synthesize_event_and_data is not None:
         options["synthesize_event_and_data"] = synthesize_event_and_data
+
+    if stream_mode is not None:
+        options["stream_mode"] = stream_mode
 
     return options
 

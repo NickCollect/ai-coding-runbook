@@ -125,6 +125,12 @@ impl App {
         app_server: &mut AppServerSession,
         destination: Option<ThreadId>,
     ) {
+        app_server.task_search.cancel();
+        if self.reconnect.cloud_resume.as_ref().is_some_and(|resume| {
+            resume.backend_id == app_server.backend_id() && Some(resume.thread_id) != destination
+        }) {
+            self.reconnect.cloud_resume = None;
+        }
         let thread_ids: Vec<_> = self
             .thread_event_channels
             .iter()
@@ -147,6 +153,7 @@ impl App {
             {
                 continue;
             }
+            self.cancel_cloud_inventory_refresh(app_server).await;
             if let Err(err) = app_server.thread_unsubscribe(thread_id).await {
                 tracing::warn!("failed to unsubscribe thread {thread_id}: {err}");
             }
