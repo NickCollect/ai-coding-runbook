@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/webhooks
-fetched_at: 2026-11-16T07:30:59.629176+00:00
+fetched_at: 2026-11-23T08:28:33.317810+00:00
 fetch_method: mintlify_md
 ---
 
@@ -865,9 +865,29 @@ url: https://platform.claude.com/docs/en/api/beta/webhooks
 
       - `organization_id: string`
 
+    - `BetaWebhookExternalKeyFailedEventData object`
+
+      - `type: "external_key.failed"`
+
+      - `id: string`
+
+        ID (`ekey_...`) of the external key that stopped working or works again.
+
+      - `organization_id: string`
+
+    - `BetaWebhookExternalKeyRecoveredEventData object`
+
+      - `type: "external_key.recovered"`
+
+      - `id: string`
+
+        ID (`ekey_...`) of the external key that stopped working or works again.
+
+      - `organization_id: string`
+
 ### Beta Webhook Event Data
 
-- `BetaWebhookEventData = BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 44 more`
+- `BetaWebhookEventData = BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 46 more`
 
   - `BetaWebhookSessionCreatedEventData object`
 
@@ -1462,6 +1482,50 @@ url: https://platform.claude.com/docs/en/api/beta/webhooks
       ID of the user profile that triggered the event.
 
     - `organization_id: string`
+
+  - `BetaWebhookExternalKeyFailedEventData object`
+
+    - `type: "external_key.failed"`
+
+    - `id: string`
+
+      ID (`ekey_...`) of the external key that stopped working or works again.
+
+    - `organization_id: string`
+
+  - `BetaWebhookExternalKeyRecoveredEventData object`
+
+    - `type: "external_key.recovered"`
+
+    - `id: string`
+
+      ID (`ekey_...`) of the external key that stopped working or works again.
+
+    - `organization_id: string`
+
+### Beta Webhook External Key Failed Event Data
+
+- `BetaWebhookExternalKeyFailedEventData object`
+
+  - `type: "external_key.failed"`
+
+  - `id: string`
+
+    ID (`ekey_...`) of the external key that stopped working or works again.
+
+  - `organization_id: string`
+
+### Beta Webhook External Key Recovered Event Data
+
+- `BetaWebhookExternalKeyRecoveredEventData object`
+
+  - `type: "external_key.recovered"`
+
+  - `id: string`
+
+    ID (`ekey_...`) of the external key that stopped working or works again.
+
+  - `organization_id: string`
 
 ### Beta Webhook Memory Store Archived Event Data
 

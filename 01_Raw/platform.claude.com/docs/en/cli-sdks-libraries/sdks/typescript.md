@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript
-fetched_at: 2026-11-16T07:30:47.780374+00:00
+fetched_at: 2026-11-23T08:28:20.539443+00:00
 fetch_method: mintlify_md
 ---
 
@@ -402,17 +402,17 @@ const message = await client.messages
 
 Error codes are as follows:
 
-| Status code | Error type                 |
-| ----------- | -------------------------- |
-| 400         | `BadRequestError`          |
-| 401         | `AuthenticationError`      |
-| 403         | `PermissionDeniedError`    |
-| 404         | `NotFoundError`            |
-| 409         | `ConflictError`            |
-| 422         | `UnprocessableEntityError` |
-| 429         | `RateLimitError`           |
-| >=500       | `InternalServerError`      |
-| N/A         | `APIConnectionError`       |
+| Status code | Error type |
+| ----- | ----- |
+| 400 | `BadRequestError` |
+| 401 | `AuthenticationError` |
+| 403 | `PermissionDeniedError` |
+| 404 | `NotFoundError` |
+| 409 | `ConflictError` |
+| 422 | `UnprocessableEntityError` |
+| 429 | `RateLimitError` |
+| >=500 | `InternalServerError` |
+| N/A | `APIConnectionError` |
 
 ## Request IDs
 

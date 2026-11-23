@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/search-results
-fetched_at: 2026-11-16T07:30:40.150041+00:00
+fetched_at: 2026-11-23T08:28:11.781010+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,6 +38,7 @@ featureMetadata:
     Amazon Bedrock: stable
     Amazon Bedrock (bedrock-runtime): stable
     Claude Platform on AWS: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
     Claude Models on Google Cloud (Google managed): stable
     Microsoft Foundry: stable
 ---
@@ -83,19 +84,19 @@ Search results use the following structure:
 
 ### Required fields
 
-| Field     | Type   | Description                                                                                                      |
-| --------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
-| `type`    | string | Must be `"search_result"`                                                                                        |
-| `source`  | string | The source of the content. Any stable string works: a URL, or an internal identifier such as `kb://article-1234` |
-| `title`   | string | A descriptive title for the search result                                                                        |
-| `content` | array  | An array of text blocks containing the actual content                                                            |
+| Field | Type | Description |
+| ----- | ----- | ----- |
+| `type` | string | Must be `"search_result"` |
+| `source` | string | The source of the content. Any stable string works: a URL, or an internal identifier such as `kb://article-1234` |
+| `title` | string | A descriptive title for the search result |
+| `content` | array | An array of text blocks containing the actual content |
 
 ### Optional fields
 
-| Field           | Type   | Description                                                                                                                                                                                                                                                                                                                        |
-| --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `citations`     | object | Citation configuration with an `enabled` boolean field. Citations are disabled by default; every example on this page sets `"enabled": true` explicitly. All search results in a request must use the same setting (see [Citation control](https://platform.claude.com/docs/en/build-with-claude/search-results#citation-control)) |
-| `cache_control` | object | Cache control settings (for example, `{"type": "ephemeral"}`)                                                                                                                                                                                                                                                                      |
+| Field | Type | Description |
+| ----- | ----- | ----- |
+| `citations` | object | Citation configuration with an `enabled` boolean field. Citations are disabled by default; every example on this page sets `"enabled": true` explicitly. All search results in a request must use the same setting (see [Citation control](https://platform.claude.com/docs/en/build-with-claude/search-results#citation-control)) |
+| `cache_control` | object | Cache control settings (for example, `{"type": "ephemeral"}`) |
 
 Each item in the `content` array must be a text block with:
 
@@ -1284,15 +1285,15 @@ Regardless of how search results are provided, Claude automatically includes cit
 
 Each citation includes:
 
-| Field                 | Type           | Description                                                                                                                                                               |
-| --------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `type`                | string         | Always `"search_result_location"` for search result citations                                                                                                             |
-| `source`              | string         | The source from the original search result                                                                                                                                |
-| `title`               | string or null | The title from the original search result                                                                                                                                 |
-| `cited_text`          | string         | The full text of the cited block(s), concatenated. Equals the contents of `content[start_block_index:end_block_index]` joined together. Not counted toward output tokens. |
-| `search_result_index` | integer        | 0-based index of the cited search result among all `search_result` blocks in the request, in the order they appear (across all messages and tool results).                |
-| `start_block_index`   | integer        | 0-based index of the first cited block in the search result’s `content` array.                                                                                            |
-| `end_block_index`     | integer        | Exclusive end index of the cited block range in the search result’s `content` array. Always greater than `start_block_index`.                                             |
+| Field | Type | Description |
+| ----- | ----- | ----- |
+| `type` | string | Always `"search_result_location"` for search result citations |
+| `source` | string | The source from the original search result |
+| `title` | string or null | The title from the original search result |
+| `cited_text` | string | The full text of the cited block(s), concatenated. Equals the contents of `content[start_block_index:end_block_index]` joined together. Not counted toward output tokens. |
+| `search_result_index` | integer | 0-based index of the cited search result among all `search_result` blocks in the request, in the order they appear (across all messages and tool results). |
+| `start_block_index` | integer | 0-based index of the first cited block in the search result’s `content` array. |
+| `end_block_index` | integer | Exclusive end index of the cited block range in the search result’s `content` array. Always greater than `start_block_index`. |
 
 The block indices identify a slice of the search result’s `content` array, and `cited_text` is the full text of that slice. The text block is the minimal citable unit: Claude cites whole blocks, not substrings within a block. To get finer-grained citations, split your search result content into smaller blocks (see [Multiple content blocks](https://platform.claude.com/docs/en/build-with-claude/search-results#multiple-content-blocks)).
 
@@ -2226,25 +2227,25 @@ Search results are available on every model and eligible for zero data retention
 * Availability: Available
 * Usage: Send `search_result` blocks in a tool result or directly in a user message.
 
-| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Available | Claude API, [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (bedrock-runtime)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
+| Status | Cloud platforms |
+| ----- | ----- |
+| Available | All supported platforms |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 
 * Availability: Available
 * Usage: Accepted only in tool results, such as a `user.custom_tool_result` event, not in `user.message` events.
 
-| Status    | Cloud platforms                                                                                                    |
-| --------- | ------------------------------------------------------------------------------------------------------------------ |
-| Available | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws) |
+| Status | Cloud platforms |
+| ----- | ----- |
+| Available | All supported platforms |
 
 ### Data handling
 
 [Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
 
-| Item   | Zero data retention                                                                                                                                       | HIPAA    |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
 | Status | Eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements)) | Eligible |
 
 Applicable endpoints:

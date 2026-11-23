@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-api-access
-fetched_at: 2026-11-16T07:30:45.167673+00:00
+fetched_at: 2026-11-23T08:28:17.663898+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,12 +22,12 @@ The Compliance API uses two key types, and which one you create depends on which
 
 ## Which key do you need?
 
-| Key type                                       | Created in                                                                               | Used for                                                                                                                                          | Works with the Compliance API? |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| **Compliance Access Key** (`sk-ant-api01-...`) | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)   | Activity Feed, chats, files, projects, sessions (in apps such as Cowork and Claude Code), users, organization metadata, and organization settings | Yes (all endpoints)            |
-| **Admin API key** (`sk-ant-admin01-...`)       | [Admin keys](https://platform.claude.com/settings/admin-keys) page in the Claude Console | The [Admin API](https://platform.claude.com/docs/en/manage-claude/admin-api) and the Compliance API Activity Feed                                 | Activity Feed only             |
-| **Analytics API key**                          | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)   | The Claude Enterprise Analytics API (see [Analytics APIs](https://platform.claude.com/docs/en/manage-claude/analytics-api))                       | No                             |
-| **Claude API key** (`sk-ant-api03-...`)        | [API keys](https://platform.claude.com/settings/keys) page in the Claude Console         | Calling Claude models through the [Claude API](https://platform.claude.com/docs/en/api/overview)                                                  | No                             |
+| Key type | Created in | Used for | Works with the Compliance API? |
+| ----- | ----- | ----- | ----- |
+| **Compliance Access Key** (`sk-ant-api01-...`) | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access) | Activity Feed, chats, files, projects, sessions (in apps such as Cowork and Claude Code), users, organization metadata, and organization settings | Yes (all endpoints) |
+| **Admin API key** (`sk-ant-admin01-...`) | [Admin keys](https://platform.claude.com/settings/admin-keys) page in the Claude Console | The [Admin API](https://platform.claude.com/docs/en/manage-claude/admin-api) and the Compliance API Activity Feed | Activity Feed only |
+| **Analytics API key** | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access) | The Claude Enterprise Analytics API (see [Analytics APIs](https://platform.claude.com/docs/en/manage-claude/analytics-api)) | No |
+| **Claude API key** (`sk-ant-api03-...`) | [API keys](https://platform.claude.com/settings/keys) page in the Claude Console | Calling Claude models through the [Claude API](https://platform.claude.com/docs/en/api/overview) | No |
 
 A Claude Enterprise tenant has one **parent organization** that centralizes identity, SSO, and SCIM for every workload organization beneath it. These workload organizations are the parent’s **linked organizations**.
 
@@ -80,12 +80,12 @@ Setup is one flow: enable the Compliance API for your organization, then create 
   <Step title="Create the key">
     Click **Create key**, name the key, and select one or more scopes from the following table. Click **Create**.
 
-    | Scope                         | Grants                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-    | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `read:compliance_activities`  | Read the Activity Feed. A key covering the parent organization reads events for the parent organization and all linked organizations.                                                                                                                                                                                                                                                                                                                                           |
-    | `read:compliance_user_data`   | Read user chats, messages, files, projects, session metadata and transcripts, organization users, user preferences, and group members. Together with `read:compliance_org_data`, also read who made a [Security posture attestation](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/results-reference#who-attested-and-comments), where the endpoint returns it: a user ID.                                                                      |
-    | `delete:compliance_user_data` | Delete user chats, files, and projects                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-    | `read:compliance_org_data`    | Read organization metadata (names, types, roles, and groups) and the effective settings in force for organizations under the parent organization. Also read an organization’s [Security posture](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/results-reference): the current results of most of its security controls, with the attestations that the response shows. User listings and group membership require `read:compliance_user_data`. |
+    | Scope | Grants |
+    | ----- | ----- |
+    | `read:compliance_activities` | Read the Activity Feed. A key covering the parent organization reads events for the parent organization and all linked organizations. |
+    | `read:compliance_user_data` | Read user chats, messages, files, projects, session metadata and transcripts, organization users, user preferences, and group members. Together with `read:compliance_org_data`, also read who made a [Security posture attestation](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/results-reference#who-attested-and-comments), where the endpoint returns it: a user ID. |
+    | `delete:compliance_user_data` | Delete user chats, files, and projects. |
+    | `read:compliance_org_data` | Read organization metadata (names, types, roles, and groups) and the effective settings in force for organizations under the parent organization. Also read an organization’s [Security posture](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/results-reference): the current results of most of its security controls, with the attestations that the response shows. User listings and group membership require `read:compliance_user_data`. |
 
     With the Plugins API, `read:compliance_org_data` also reads your organization’s plugin and plugin marketplace inventory through the Admin API, including members’ personal plugins and their files. That inventory identifies members: it carries the user ID of each member who owns or created a plugin, or with whom a plugin has been shared individually, and the email address of a plugin’s creator while they are still a member; see [Read plugins and plugin marketplaces](https://platform.claude.com/docs/en/manage-claude/compliance-org-data#read-plugins-and-plugin-marketplaces).
 
@@ -162,6 +162,8 @@ To rotate a key without an outage:
 Pagination cursors stored before a rotation remain valid: cursors are scoped to the organization, not the key.
 
 If a Compliance Access Key leaks, delete it immediately, audit the [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed) for `compliance_api_accessed` activities by the compromised key, and rotate any downstream credentials that the leaked key could reach. Pass `activity_types[]=compliance_api_accessed` to scope the query, then in your client, keep the activities whose `actor.type` is `api_actor` and whose `actor.api_key_id` matches the compromised key; see [Understand the Activity object](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed#understand-the-activity-object) for the actor schema.
+
+Some calls to the Compliance API leave no activity in the Activity Feed, including calls that succeed. So finding no `compliance_api_accessed` activity for the key does not show that the key was unused.
 
 ## Next steps
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/get-started
-fetched_at: 2026-11-16T07:30:39.673176+00:00
+fetched_at: 2026-11-23T08:28:11.240657+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,7 +39,7 @@ description: Make your first API call to Claude and build a simple web search as
         For Linux environments, download the release binary directly.
 
         ```bash
-        VERSION=2.9.0
+        VERSION=2.12.1
         OS=$(uname -s | tr '[:upper:]' '[:lower:]')
         case $(uname -m) in
           x86_64) ARCH=amd64 ;;
@@ -186,7 +186,7 @@ description: Make your first API call to Claude and build a simple web search as
             For Linux environments, download the release binary directly.
 
             ```bash
-            VERSION=2.9.0
+            VERSION=2.12.1
             OS=$(uname -s | tr '[:upper:]' '[:lower:]')
             case $(uname -m) in
               x86_64) ARCH=amd64 ;;
@@ -511,7 +511,7 @@ description: Make your first API call to Claude and build a simple web search as
             }
 
             dependencies {
-                implementation("com.anthropic:anthropic-java:3.8.0")
+                implementation("com.anthropic:anthropic-java:3.12.0")
             }
 
             application {
@@ -537,7 +537,7 @@ description: Make your first API call to Claude and build a simple web search as
                 <dependency>
                   <groupId>com.anthropic</groupId>
                   <artifactId>anthropic-java</artifactId>
-                  <version>3.8.0</version>
+                  <version>3.12.0</version>
                 </dependency>
               </dependencies>
             </project>

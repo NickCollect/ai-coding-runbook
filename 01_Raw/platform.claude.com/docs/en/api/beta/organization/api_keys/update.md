@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/api_keys/update
-fetched_at: 2026-11-02T07:00:46.216332+00:00
+fetched_at: 2026-11-23T08:28:28.439490+00:00
 fetch_method: mintlify_md
 ---
 
@@ -164,6 +164,24 @@ Update API Key
     - `"expired"`
 
     - `"inactive"`
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `org_api_key_limit_exceeded` (HTTP status 400)
+
+  The organization has reached its limit of active API keys.
+
+- `workspace_api_key_limit_exceeded` (HTTP status 400)
+
+  The workspace has reached its limit of active API keys.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ## Example
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/prompt-caching
-fetched_at: 2026-11-16T07:30:41.605419+00:00
+fetched_at: 2026-11-23T08:28:13.139781+00:00
 fetch_method: mintlify_md
 ---
 
@@ -256,30 +256,30 @@ Prompt caching covers the full prefix: `tools`, `system`, and `messages` (in tha
 
 Prompt caching has its own pricing. The following table shows the price per million tokens for each supported model:
 
-| Model                                                                                                                                                                  | Base input tokens | 5m cache writes | 1h cache writes | Cache hits and refreshes | Output tokens |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------- | :-------------- | :-------------- | :----------------------- | :------------ |
-| Claude Fable 5.2                                                                                                                                                       | $8 / MTok         | $10 / MTok      | $16 / MTok      | $0.20 / MTok<sup>1</sup> | $40 / MTok    |
-| Claude Mythos 5.2 ([limited availability](https://support.claude.com/en/articles/14604842))                                                                            | $8 / MTok         | $10 / MTok      | $16 / MTok      | $0.20 / MTok<sup>1</sup> | $40 / MTok    |
-| Claude Fable 5.1                                                                                                                                                       | $10 / MTok        | $12.50 / MTok   | $20 / MTok      | $0.25 / MTok<sup>1</sup> | $50 / MTok    |
-| Claude Mythos 5.1 ([limited availability](https://support.claude.com/en/articles/14604842))                                                                            | $10 / MTok        | $12.50 / MTok   | $20 / MTok      | $0.25 / MTok<sup>1</sup> | $50 / MTok    |
-| Claude Fable 5                                                                                                                                                         | $10 / MTok        | $12.50 / MTok   | $20 / MTok      | $1 / MTok                | $50 / MTok    |
-| Claude Mythos 5 ([limited availability](https://support.claude.com/en/articles/14604842))                                                                              | $10 / MTok        | $12.50 / MTok   | $20 / MTok      | $1 / MTok                | $50 / MTok    |
-| Claude Opus 5.5                                                                                                                                                        | $4 / MTok         | $5 / MTok       | $8 / MTok       | $0.20 / MTok<sup>2</sup> | $20 / MTok    |
-| Claude Opus 5                                                                                                                                                          | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok             | $25 / MTok    |
-| Claude Opus 4.8                                                                                                                                                        | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok             | $25 / MTok    |
-| Claude Opus 4.7                                                                                                                                                        | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok             | $25 / MTok    |
-| Claude Opus 4.6                                                                                                                                                        | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok             | $25 / MTok    |
-| Claude Opus 4.5                                                                                                                                                        | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok             | $25 / MTok    |
-| Claude Opus 4.1 ([retired, except on Claude Models on Google Cloud (Google managed) and Bedrock](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok             | $75 / MTok    |
-| Claude Opus 4 ([retired, except on Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations))               | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok             | $75 / MTok    |
-| Claude Sonnet 5.5                                                                                                                                                      | $2 / MTok         | $2.50 / MTok    | $4 / MTok       | $0.10 / MTok<sup>2</sup> | $10 / MTok    |
-| Claude Sonnet 5                                                                                                                                                        | $2 / MTok         | $2.50 / MTok    | $4 / MTok       | $0.20 / MTok             | $10 / MTok    |
-| Claude Sonnet 4.6                                                                                                                                                      | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok             | $15 / MTok    |
-| Claude Sonnet 4.5                                                                                                                                                      | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok             | $15 / MTok    |
-| Claude Sonnet 4 ([retired, except on Claude Models on Google Cloud (Google managed) and Bedrock](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok             | $15 / MTok    |
-| Claude Haiku 5.5 (for prompts up to 100,000 tokens)                                                                                                                    | $0.10 / MTok      | $0.125 / MTok   | $0.20 / MTok    | $0.01 / MTok             | $0.50 / MTok  |
-| Claude Haiku 5.5 (for prompts over 100,000 tokens)                                                                                                                     | $0.50 / MTok      | $0.625 / MTok   | $1 / MTok       | $0.05 / MTok             | $2.50 / MTok  |
-| Claude Haiku 4.5                                                                                                                                                       | $1 / MTok         | $1.25 / MTok    | $2 / MTok       | $0.10 / MTok             | $5 / MTok     |
+| Model | Base input tokens | 5m cache writes | 1h cache writes | Cache hits and refreshes | Output tokens |
+| :---- | :---- | :---- | :---- | :---- | :---- |
+| Claude Fable 5.2 | $8 / MTok | $10 / MTok | $16 / MTok | $0.20 / MTok<sup>1</sup> | $40 / MTok |
+| Claude Mythos 5.2 ([limited availability](https://support.claude.com/en/articles/14604842)) | $8 / MTok | $10 / MTok | $16 / MTok | $0.20 / MTok<sup>1</sup> | $40 / MTok |
+| Claude Fable 5.1 | $10 / MTok | $12.50 / MTok | $20 / MTok | $0.25 / MTok<sup>1</sup> | $50 / MTok |
+| Claude Mythos 5.1 ([limited availability](https://support.claude.com/en/articles/14604842)) | $10 / MTok | $12.50 / MTok | $20 / MTok | $0.25 / MTok<sup>1</sup> | $50 / MTok |
+| Claude Fable 5 | $10 / MTok | $12.50 / MTok | $20 / MTok | $1 / MTok | $50 / MTok |
+| Claude Mythos 5 ([limited availability](https://support.claude.com/en/articles/14604842)) | $10 / MTok | $12.50 / MTok | $20 / MTok | $1 / MTok | $50 / MTok |
+| Claude Opus 5.5 | $4 / MTok | $5 / MTok | $8 / MTok | $0.20 / MTok<sup>2</sup> | $20 / MTok |
+| Claude Opus 5 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
+| Claude Opus 4.8 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
+| Claude Opus 4.7 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
+| Claude Opus 4.6 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
+| Claude Opus 4.5 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
+| Claude Opus 4.1 ([retired, except on Claude Models on Google Cloud (Google managed) and Bedrock](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | $15 / MTok | $18.75 / MTok | $30 / MTok | $1.50 / MTok | $75 / MTok |
+| Claude Opus 4 ([retired, except on Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | $15 / MTok | $18.75 / MTok | $30 / MTok | $1.50 / MTok | $75 / MTok |
+| Claude Sonnet 5.5 | $2 / MTok | $2.50 / MTok | $4 / MTok | $0.10 / MTok<sup>2</sup> | $10 / MTok |
+| Claude Sonnet 5 | $2 / MTok | $2.50 / MTok | $4 / MTok | $0.20 / MTok | $10 / MTok |
+| Claude Sonnet 4.6 | $3 / MTok | $3.75 / MTok | $6 / MTok | $0.30 / MTok | $15 / MTok |
+| Claude Sonnet 4.5 | $3 / MTok | $3.75 / MTok | $6 / MTok | $0.30 / MTok | $15 / MTok |
+| Claude Sonnet 4 ([retired, except on Claude Models on Google Cloud (Google managed) and Bedrock](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | $3 / MTok | $3.75 / MTok | $6 / MTok | $0.30 / MTok | $15 / MTok |
+| Claude Haiku 5.5 (for prompts up to 100,000 tokens) | $0.10 / MTok | $0.125 / MTok | $0.20 / MTok | $0.01 / MTok | $0.50 / MTok |
+| Claude Haiku 5.5 (for prompts over 100,000 tokens) | $0.50 / MTok | $0.625 / MTok | $1 / MTok | $0.05 / MTok | $2.50 / MTok |
+| Claude Haiku 4.5 | $1 / MTok | $1.25 / MTok | $2 / MTok | $0.10 / MTok | $5 / MTok |
 
 *<sup>1 Cache hits and refreshes on Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, and Claude Mythos 5.1 are priced at 0.025x the base input price.</sup>*
 
@@ -494,10 +494,10 @@ Automatic caching enables prompt caching with one field. Instead of placing `cac
 
 With automatic caching, the cache point moves forward automatically as conversations grow. Each new request caches everything up to the last cacheable block, and previous content is read from cache.
 
-| Request   | Content                                                                                                      | Cache behavior                                                                  |
-| --------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| Request 1 | System<br />+ User(1) + Asst(1)<br />+ **User(2)** ◀ cache                                                   | Everything written to cache                                                     |
-| Request 2 | System<br />+ User(1) + Asst(1)<br />+ User(2) + Asst(2)<br />+ **User(3)** ◀ cache                          | System through User(2) read from cache;<br />Asst(2) + User(3) written to cache |
+| Request | Content | Cache behavior |
+| ----- | ----- | ----- |
+| Request 1 | System<br />+ User(1) + Asst(1)<br />+ **User(2)** ◀ cache | Everything written to cache |
+| Request 2 | System<br />+ User(1) + Asst(1)<br />+ User(2) + Asst(2)<br />+ **User(3)** ◀ cache | System through User(2) read from cache;<br />Asst(2) + User(3) written to cache |
 | Request 3 | System<br />+ User(1) + Asst(1)<br />+ User(2) + Asst(2)<br />+ User(3) + Asst(3)<br />+ **User(4)** ◀ cache | System through User(3) read from cache;<br />Asst(3) + User(4) written to cache |
 
 The cache breakpoint automatically moves to the last cacheable block in each request, so you don’t need to update any `cache_control` markers as the conversation grows.
@@ -672,18 +672,18 @@ As described in [Structuring your prompt](https://platform.claude.com/docs/en/bu
 
 The following table shows which parts of the cache are invalidated by different types of changes. ✘ indicates that the cache is invalidated, whereas ✓ indicates that the cache remains valid.
 
-| What changes                                          | Tools cache    | System cache   | Messages cache | Impact                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ----------------------------------------------------- | -------------- | -------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Tool definitions**                                  | ✘              | ✘              | ✘              | Modifying tool definitions (names, descriptions, parameters) invalidates the entire cache                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **Web search toggle**                                 | ✓              | ✘              | ✘              | Enabling/disabling web search modifies the system prompt                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| **Citations toggle**                                  | ✓              | ✘              | ✘              | Enabling/disabling citations modifies the system prompt                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| **Speed setting**                                     | ✓              | ✘              | ✘              | Switching between [`speed: "fast"` and standard speed](https://platform.claude.com/docs/en/build-with-claude/fast-mode) invalidates system and message caches                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| **Tool choice**                                       | ✓              | ✓              | ✘              | Changes to the `tool_choice` parameter only affect message blocks                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| **Images**                                            | ✓              | ✓              | ✘              | Adding/removing images anywhere in the prompt affects message blocks                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| **Thinking parameters**                               | Model-specific | Model-specific | ✘              | The thinking configuration (mode, and `budget_tokens` in extended mode) is rendered into the prompt, so changing it always invalidates message blocks; tool and system caches are also invalidated on models that render the configuration ahead of them. See [Thinking and prompt caching](https://platform.claude.com/docs/en/build-with-claude/thinking#thinking-and-prompt-caching).                                                                                                                                                                                                                                                                        |
-| **Effort setting**                                    | Model-specific | Model-specific | ✘              | Changing the [`output_config.effort`](https://platform.claude.com/docs/en/build-with-claude/effort) value can invalidate message blocks, and on some models tool and system caches too (see [Thinking and prompt caching](https://platform.claude.com/docs/en/build-with-claude/thinking#thinking-and-prompt-caching)). Setting effort explicitly to the model’s default is equivalent to omitting it and does not invalidate. On models that support [per-message effort](https://platform.claude.com/docs/en/build-with-claude/effort-per-message), an effort change carried in a `role: "system"` message inside `messages` leaves the cached prefix intact. |
-| **Non-tool results passed to requests with thinking** | ✓              | ✓              | Model-specific | On Claude Opus 4.5 and later Opus models, Claude Sonnet 4.6 and later Sonnet models, Claude Haiku 5.5, and every Claude Fable and Claude Mythos model, thinking blocks are preserved by default, so the cache remains valid (✓). On other models, all previously cached thinking blocks are stripped from context, and any messages that follow those thinking blocks are removed from the cache (✘). For more details, see [Caching with thinking blocks](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#caching-with-thinking-blocks).                                                                                                  |
-| **Dropped thinking blocks**                           | ✓              | ✓              | ✘              | When the API drops a thinking block that isn’t [preserved](https://platform.claude.com/docs/en/build-with-claude/thinking#preserved-thinking) on that request, the cached prefix changes from that block’s position onward on that request. Blocks the receiving model can read, passed back unchanged, keep the cache intact.                                                                                                                                                                                                                                                                                                                                  |
+| What changes | Tools cache | System cache | Messages cache | Impact |
+| ----- | ----- | ----- | ----- | ----- |
+| **Tool definitions** | ✘ | ✘ | ✘ | Modifying tool definitions (names, descriptions, parameters) invalidates the entire cache |
+| **Web search toggle** | ✓ | ✘ | ✘ | Enabling/disabling web search modifies the system prompt |
+| **Citations toggle** | ✓ | ✘ | ✘ | Enabling/disabling citations modifies the system prompt |
+| **Speed setting** | ✓ | ✘ | ✘ | Switching between [`speed: "fast"` and standard speed](https://platform.claude.com/docs/en/build-with-claude/fast-mode) invalidates system and message caches |
+| **Tool choice** | ✓ | ✓ | ✘ | Changes to the `tool_choice` parameter only affect message blocks |
+| **Images** | ✓ | ✓ | ✘ | Adding/removing images anywhere in the prompt affects message blocks |
+| **Thinking parameters** | Model-specific | Model-specific | ✘ | The thinking configuration (mode, and `budget_tokens` in extended mode) is rendered into the prompt, so changing it always invalidates message blocks; tool and system caches are also invalidated on models that render the configuration ahead of them. See [Thinking and prompt caching](https://platform.claude.com/docs/en/build-with-claude/thinking#thinking-and-prompt-caching). |
+| **Effort setting** | Model-specific | Model-specific | ✘ | Changing the [`output_config.effort`](https://platform.claude.com/docs/en/build-with-claude/effort) value can invalidate message blocks, and on some models tool and system caches too (see [Thinking and prompt caching](https://platform.claude.com/docs/en/build-with-claude/thinking#thinking-and-prompt-caching)). Setting effort explicitly to the model’s default is equivalent to omitting it and does not invalidate. On models that support [per-message effort](https://platform.claude.com/docs/en/build-with-claude/effort-per-message), an effort change carried in a `role: "system"` message inside `messages` leaves the cached prefix intact. |
+| **Non-tool results passed to requests with thinking** | ✓ | ✓ | Model-specific | On Claude Opus 4.5 and later Opus models, Claude Sonnet 4.6 and later Sonnet models, Claude Haiku 5.5, and every Claude Fable and Claude Mythos model, thinking blocks are preserved by default, so the cache remains valid (✓). On other models, all previously cached thinking blocks are stripped from context, and any messages that follow those thinking blocks are removed from the cache (✘). For more details, see [Caching with thinking blocks](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#caching-with-thinking-blocks). |
+| **Dropped thinking blocks** | ✓ | ✓ | ✘ | When the API drops a thinking block that isn’t [preserved](https://platform.claude.com/docs/en/build-with-claude/thinking#preserved-thinking) on that request, the cached prefix changes from that block’s position onward on that request. Blocks the receiving model can read, passed back unchanged, keep the cache intact. |
 
 On models that support [mid-conversation tool changes](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages#mid-conversation-tool-changes), the `inline-tools-2026-09-15` beta header lets you add a tool, or change a tool’s definition, partway through a conversation without editing `tools`. Send the definition in a `tool_addition` block in a mid-conversation system message and leave `tools` exactly as you first sent it. The cached prefix still matches, so only the appended message is processed as new input. The one exception is a `tools` array with no non-deferred tool, where the first tool defined this way costs one full cache miss on that request. See [Define tools in a message](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages#define-tools-in-a-message-beta).
 
@@ -772,11 +772,11 @@ For more detailed information, see [Thinking and prompt caching](https://platfor
 
 ### Cache storage and sharing
 
-<Warning>
-  Prompt caching uses [workspace](https://platform.claude.com/docs/en/manage-claude/workspaces)-level isolation. Caches are isolated by workspace, ensuring data separation between workspaces within the same organization. This applies to the Claude API, Claude Platform on AWS, and Microsoft Foundry; Claude Models on Google Cloud (Google managed) and Bedrock maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this difference.
-</Warning>
+Prompt caching follows these rules:
 
-* **Organization and workspace isolation:** Caches are isolated between organizations. Different organizations never share caches, even if they use identical prompts. Caches are also isolated by workspace within an organization on the Claude API, Claude Platform on AWS, and Microsoft Foundry; Claude Models on Google Cloud (Google managed) and Bedrock use organization-level isolation only.
+* **Organization isolation:** Different organizations never share caches, even if they use identical prompts.
+
+* **Workspace isolation:** On the Claude API, Claude Platform on AWS, and Microsoft Foundry, caches are also isolated between [workspaces](https://platform.claude.com/docs/en/manage-claude/workspaces). On those platforms, each workspace builds its own cache. On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, caches are isolated by organization only.
 
 * **Exact matching:** Cache hits require 100 percent identical prompt segments, including all text and images up to and including the block marked with cache control.
 
@@ -829,11 +829,7 @@ If you experience unexpected behavior:
 
 ## 1-hour cache duration
 
-If you find that 5 minutes is too short, Anthropic also offers a 1-hour cache duration at additional cost (see [Pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pricing)).
-
-<Note>
-  The 1-hour cache duration is available on the Claude API, [Amazon Bedrock (`bedrock-mantle`)](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (`bedrock-runtime`)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), and [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry).
-</Note>
+If you find that 5 minutes is too short, Anthropic also offers a 1-hour cache duration at additional cost (see [Pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pricing)). The 1-hour duration is available on [every platform that supports prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#feature-availability).
 
 To use the extended cache, include `ttl` in the `cache_control` definition like this:
 
@@ -3335,7 +3331,9 @@ The following code snippets showcase various prompt caching patterns. These exam
 
 Prompt caching (both automatic and explicit) is ZDR eligible. Anthropic does not store the raw text of your prompts or Claude’s responses.
 
-KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest. Cached entries have a minimum lifetime of 5 minutes (standard) or 1 hour (extended), after which they are promptly, though not immediately, deleted. Cache entries are isolated between organizations and, on the Claude API, Claude Platform on AWS, and Microsoft Foundry, between workspaces within an organization.
+KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest. Cached entries have a minimum lifetime of 5 minutes (standard) or 1 hour (extended), after which they are promptly, though not immediately, deleted.
+
+Cache entries are isolated between organizations and, on [some platforms](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#cache-storage-and-sharing), between workspaces within an organization.
 
 ***
 
@@ -3446,7 +3444,7 @@ KV (key-value) cache representations and cryptographic hashes of cached content 
 
     1. Cache keys are generated using a cryptographic hash of the prompts up to the cache control point. This means only requests with identical prompts can access a specific cache.
 
-    2. On the Claude API, Claude Platform on AWS, and Microsoft Foundry, caches are isolated by workspace within an organization. On Claude Models on Google Cloud (Google managed) and Bedrock, caches are isolated by organization. In every case, caches are never shared across organizations, even for identical prompts. See [Cache storage and sharing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#cache-storage-and-sharing) for details.
+    2. Caches are never shared across organizations, even for identical prompts. On [some platforms](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#cache-storage-and-sharing), they’re also isolated by workspace within an organization.
 
     3. The caching mechanism is designed to maintain the integrity and privacy of each unique conversation or context.
 
@@ -3511,8 +3509,8 @@ Prompt caching is available or in beta, depending on the API, and eligible for z
 * Availability: Available
 * Usage: Opt in with `cache_control`, at the top level or on blocks.
 
-| Status    | Cloud platforms         | Models                                                            |
-| --------- | ----------------------- | ----------------------------------------------------------------- |
+| Status | Cloud platforms | Models |
+| ----- | ----- | ----- |
 | Available | All supported platforms | [All models](https://platform.claude.com/docs/en/models/overview) |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
@@ -3520,18 +3518,18 @@ Prompt caching is available or in beta, depending on the API, and eligible for z
 * Availability: Always on
 * Usage: Cache entries use a 5-minute lifetime by default, and cache reads and writes show up in the session’s usage.
 
-| Status | Cloud platforms         | Models                                                            |
-| ------ | ----------------------- | ----------------------------------------------------------------- |
-| Beta   | All supported platforms | [All models](https://platform.claude.com/docs/en/models/overview) |
+| Status | Cloud platforms | Models |
+| ----- | ----- | ----- |
+| Beta | All supported platforms | [All models](https://platform.claude.com/docs/en/models/overview) |
 
 ### Data handling
 
 [Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                                                                                                                                           | HIPAA    |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| Status  | Eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements))                                                                                                                     | Eligible |
-| Details | Your prompts and Claude’s outputs are not stored. KV cache representations and cryptographic hashes are held in memory for the cache TTL and promptly deleted after expiry. [Learn more](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#data-retention) | —        |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements)) | Eligible |
+| Details | Your prompts and Claude’s outputs are not stored. KV cache representations and cryptographic hashes are held in memory for the cache TTL and promptly deleted after expiry. [Learn more](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#data-retention) | — |
 
 Applicable endpoints:
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages/batches/create
-fetched_at: 2026-11-16T07:30:52.013952+00:00
+fetched_at: 2026-11-23T08:28:24.902784+00:00
 fetch_method: mintlify_md
 ---
 
@@ -124,6 +124,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -890,7 +894,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `page_age: optional string or null`
 
-                - `BetaWebSearchToolRequestError object`
+                - `BetaWebSearchToolRequestErrorObject object`
 
                   - `type: "web_search_tool_result_error"`
 
@@ -3645,6 +3649,22 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `billing_policy: optional BetaBillingPolicy or null`
+
+      Declares which organization is billed for this request. `{"type": "billing_policy", "bill_to": "user_profile"}` bills the customer behind the user profile named in the `anthropic-user-profile-id` header, instead of your organization. If that customer has not linked an Anthropic organization to the profile, or has not allowed your organization to bill it, the request is rejected rather than billed to you. Omit the field, or send `"bill_to": "self"` (the default), to be billed as usual.
+
+      Message Batches does not currently support billing the customer behind a user profile. In a batch, omit the field or send `"bill_to": "self"`. A request in a batch that sets `"bill_to": "user_profile"` gets an `errored` result with an `invalid_request_error`, nobody is billed for it, and the batch's other requests run as usual.
+
+      - `type: "billing_policy"`
+
+      - `bill_to: optional BetaBillTo`
+
+        Who is billed. `self`, the default, bills your organization, as if `billing_policy` were omitted. `user_profile` bills the customer behind the user profile the request names; if that customer has not linked an Anthropic organization to the profile, or has not allowed your organization to bill it, the request is rejected rather than billed to you.
+
+        - `"self"`
+
+        - `"user_profile"`
+
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
       Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
@@ -4476,6 +4496,28 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `enforced_spend_limit_reached` (HTTP status 429)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
 
 ## Example
 

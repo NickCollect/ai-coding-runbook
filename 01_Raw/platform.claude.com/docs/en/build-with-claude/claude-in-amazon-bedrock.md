@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock
-fetched_at: 2026-11-16T07:30:42.432672+00:00
+fetched_at: 2026-11-23T08:28:14.021881+00:00
 fetch_method: mintlify_md
 ---
 
@@ -61,17 +61,50 @@ For identity-federated access with a 12-hour maximum session:
 
 ### Bearer tokens
 
-For short-term access without IAM roles (12-hour maximum, least preferred):
+A bearer token lets you call the endpoint without signing requests with AWS credentials. AWS calls this token an Amazon Bedrock API key. AWS recommends signing with temporary AWS credentials whenever possible, so bearer tokens are the least preferred of the three authentication paths. Use a bearer token when your software can’t sign requests.
+
+Bearer tokens come in two types:
+
+| Aspect | Short-term | Long-term |
+| ----- | ----- | ----- |
+| **Lifetime** | Up to 12 hours, or until the AWS session that generated it ends, whichever comes first | Until its expiration date. If it has none, it never expires. |
+| **Permissions** | Those of the IAM identity that generated it | Those of the IAM user that it belongs to |
+| **Notes** | Works only in the AWS region where you generate it | Recommended by AWS only for exploration |
+
+For either type, the IAM identity whose permissions the token carries needs the `bedrock-mantle:CallWithBearerToken` and `bedrock-mantle:CreateInference` permissions.
+
+To use a bearer token:
 
 <Steps>
-  <Step title="Admin: restrict token types">
-    Block long-term keys by attaching a policy that denies `bedrock:CallWithBearerToken` unless the `bedrock:BearerTokenType` condition matches a short-term token.
+  <Step title="Generate the token">
+    Generate either type in the Amazon Bedrock console. You can also generate a short-term token with one of AWS’s token generator libraries. For instructions, see [API keys](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html) in the Amazon Bedrock User Guide.
   </Step>
 
-  <Step title="Developer: mint a token">
-    Use the `aws-bedrock-token-generator` CLI to mint a bearer token. Pass it in the `x-api-key` header on each request.
+  <Step title="Send the token">
+    How you send the token depends on how you call the endpoint:
+
+    * **With the SDK:** Set the `AWS_BEARER_TOKEN_BEDROCK` environment variable. For how the client finds credentials, see [Making your first request](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#making-your-first-request).
+    * **With direct HTTP requests:** Instead of signing each request, pass the token in the `x-api-key` header or as `Authorization: Bearer <token>`. Leave out the request-signing parts, such as the `x-amz-security-token` header and cURL’s `--aws-sigv4` and `-u` options.
   </Step>
 </Steps>
+
+#### Block long-term bearer tokens
+
+An administrator can stop IAM users from calling Amazon Bedrock with long-term tokens. A token works on both Amazon Bedrock endpoints, and each endpoint has its own IAM action and condition key:
+
+| Endpoint | Action to deny | Condition key |
+| ----- | ----- | ----- |
+| `bedrock-mantle` | `bedrock-mantle:CallWithBearerToken` | `bedrock-mantle:bearerTokenType` |
+| `bedrock-runtime` | `bedrock:CallWithBearerToken` | `bedrock:bearerTokenType` |
+
+Write a policy with one Deny statement for each endpoint. In each statement, set `Resource` to `*`, and use `StringEquals` to require that the condition key equals `LONG_TERM`.
+
+Where you attach the policy determines which tokens it blocks:
+
+* **One IAM user:** It blocks that user’s tokens. The Amazon Bedrock console creates a new IAM user for each long-term token, so this misses tokens generated there later.
+* **A member account in AWS Organizations:** As a service control policy (SCP), it blocks the tokens of every IAM user in the account, including new users.
+
+The policy blocks using long-term tokens, not generating them. For a sample of this policy and for policies that control generation, see [Control permissions for generating and using Amazon Bedrock API keys](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys-permissions.html) in the Amazon Bedrock User Guide.
 
 ## Install an SDK
 
@@ -106,8 +139,8 @@ The [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:3.8.0")
-        implementation("com.anthropic:anthropic-java-bedrock:3.8.0")
+        implementation("com.anthropic:anthropic-java:3.12.0")
+        implementation("com.anthropic:anthropic-java-bedrock:3.12.0")
         ```
       </Tab>
 
@@ -116,12 +149,12 @@ The [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>3.8.0</version>
+            <version>3.12.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-bedrock</artifactId>
-            <version>3.8.0</version>
+            <version>3.12.0</version>
         </dependency>
         ```
       </Tab>
@@ -136,9 +169,8 @@ The [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview
 
   <Tab title="Ruby">
     ```bash
-    # Gemfile
-    gem "anthropic"
-    gem "aws-sdk-core"
+    bundle add anthropic
+    bundle add aws-sdk-core
     ```
   </Tab>
 </Tabs>
@@ -238,28 +270,39 @@ For credentials, the client uses what you pass when you create it. Otherwise, th
 
   <Tab title="Go">
     ```go
-    client, err := bedrock.NewMantleClient(context.Background(), bedrock.MantleClientConfig{
-    	AWSRegion: "us-east-1",
-    })
-    if err != nil {
-    	panic(err)
-    }
+    import (
+    	"context"
+    	"fmt"
 
-    message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-    	Model:     "anthropic.claude-opus-5-5",
-    	MaxTokens: 1024,
-    	Messages: []anthropic.MessageParam{
-    		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
-    	},
-    })
-    if err != nil {
-    	panic(err)
-    }
+    	"github.com/anthropics/anthropic-sdk-go/v2"
+    	"github.com/anthropics/anthropic-sdk-go/v2/bedrock"
+    )
 
-    for _, block := range message.Content {
-    	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
-    		fmt.Println(textBlock.Text)
-    		break
+    func main() {
+    	client, err := bedrock.NewMantleClient(
+    		context.Background(),
+    		bedrock.MantleClientConfig{AWSRegion: "us-east-1"},
+    	)
+    	if err != nil {
+    		panic(err)
+    	}
+
+    	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+    		Model:     "anthropic.claude-opus-5-5",
+    		MaxTokens: 1024,
+    		Messages: []anthropic.MessageParam{
+    			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
+    		},
+    	})
+    	if err != nil {
+    		panic(err)
+    	}
+
+    	for _, block := range message.Content {
+    		if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+    			fmt.Println(textBlock.Text)
+    			break
+    		}
     	}
     }
     ```
@@ -325,7 +368,8 @@ For credentials, the client uses what you pass when you create it. Otherwise, th
       messages: [{role: "user", content: "Hello, Claude"}]
     )
 
-    puts message.content.find { it.type == :text }.text
+    text_block = message.content.grep(Anthropic::Models::TextBlock).first
+    puts text_block.text if text_block
     ```
   </Tab>
 </Tabs>
@@ -338,20 +382,20 @@ For credentials, the client uses what you pass when you create it. Otherwise, th
 
 Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. For model capabilities and behaviors, see [Models overview](https://platform.claude.com/docs/en/models/overview). Claude Fable 5.2 and Claude Mythos 5.2 aren’t available in Claude in Amazon Bedrock. Amazon Bedrock serves them on the `bedrock-runtime` endpoint only. For their model IDs, see [API model IDs](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy#api-model-ids). To see which endpoint serves each model, see [Endpoint availability by models](https://docs.aws.amazon.com/bedrock/latest/userguide/models-endpoint-availability.html) in the AWS documentation.
 
-| Model                                                                                       | Model ID                      | Access                                                                                              |
-| :------------------------------------------------------------------------------------------ | :---------------------------- | :-------------------------------------------------------------------------------------------------- |
-| Claude Fable 5.1                                                                            | `anthropic.claude-fable-5-1`  | Open                                                                                                |
-| Claude Mythos 5.1 ([limited availability](https://support.claude.com/en/articles/14604842)) | `anthropic.claude-mythos-5-1` | Active (verification required)                                                                      |
-| Claude Fable 5                                                                              | `anthropic.claude-fable-5`    | Open                                                                                                |
-| Claude Mythos 5 ([limited availability](https://support.claude.com/en/articles/14604842))   | `anthropic.claude-mythos-5`   | Active (verification required)                                                                      |
-| Claude Opus 5.5                                                                             | `anthropic.claude-opus-5-5`   | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
-| Claude Opus 5                                                                               | `anthropic.claude-opus-5`     | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
-| Claude Opus 4.8                                                                             | `anthropic.claude-opus-4-8`   | Open                                                                                                |
-| Claude Opus 4.7                                                                             | `anthropic.claude-opus-4-7`   | Open                                                                                                |
-| Claude Sonnet 5.5                                                                           | `anthropic.claude-sonnet-5-5` | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
-| Claude Sonnet 5                                                                             | `anthropic.claude-sonnet-5`   | Open                                                                                                |
-| Claude Haiku 5.5                                                                            | `anthropic.claude-haiku-5-5`  | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
-| Claude Haiku 4.5                                                                            | `anthropic.claude-haiku-4-5`  | Open                                                                                                |
+| Model | Model ID | Access |
+| :---- | :---- | :---- |
+| Claude Fable 5.1 | `anthropic.claude-fable-5-1` | Open |
+| Claude Mythos 5.1 ([limited availability](https://support.claude.com/en/articles/14604842)) | `anthropic.claude-mythos-5-1` | Active (verification required) |
+| Claude Fable 5 | `anthropic.claude-fable-5` | Open |
+| Claude Mythos 5 ([limited availability](https://support.claude.com/en/articles/14604842)) | `anthropic.claude-mythos-5` | Active (verification required) |
+| Claude Opus 5.5 | `anthropic.claude-opus-5-5` | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
+| Claude Opus 5 | `anthropic.claude-opus-5` | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
+| Claude Opus 4.8 | `anthropic.claude-opus-4-8` | Open |
+| Claude Opus 4.7 | `anthropic.claude-opus-4-7` | Open |
+| Claude Sonnet 5.5 | `anthropic.claude-sonnet-5-5` | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
+| Claude Sonnet 5 | `anthropic.claude-sonnet-5` | Open |
+| Claude Haiku 5.5 | `anthropic.claude-haiku-5-5` | [See Access](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock#access) |
+| Claude Haiku 4.5 | `anthropic.claude-haiku-4-5` | Open |
 
 Use the latest version of Claude Code with Claude in Amazon Bedrock; run `claude update` to upgrade.
 
@@ -392,35 +436,35 @@ Claude in Amazon Bedrock is available in the following AWS regions. Amazon Bedro
 
 The global endpoint is available for Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5.5, Claude Sonnet 5, Claude Haiku 5.5, and Claude Haiku 4.5.
 
-| AWS region       | Location                  | Endpoint types             |
-| ---------------- | ------------------------- | -------------------------- |
-| `af-south-1`     | Africa (Cape Town)        | Global                     |
-| `ap-northeast-1` | Asia Pacific (Tokyo)      | Global, JP, In-region only |
-| `ap-northeast-2` | Asia Pacific (Seoul)      | Global                     |
-| `ap-northeast-3` | Asia Pacific (Osaka)      | Global, JP                 |
-| `ap-south-1`     | Asia Pacific (Mumbai)     | Global                     |
-| `ap-south-2`     | Asia Pacific (Hyderabad)  | Global                     |
-| `ap-southeast-1` | Asia Pacific (Singapore)  | Global                     |
-| `ap-southeast-2` | Asia Pacific (Sydney)     | Global, AU                 |
-| `ap-southeast-3` | Asia Pacific (Jakarta)    | Global                     |
-| `ap-southeast-4` | Asia Pacific (Melbourne)  | Global, AU, In-region only |
-| `ca-central-1`   | Canada (Central)          | Global, US                 |
-| `ca-west-1`      | Canada West (Calgary)     | Global                     |
-| `eu-central-1`   | Europe (Frankfurt)        | Global, EU                 |
-| `eu-central-2`   | Europe (Zurich)           | Global, EU                 |
-| `eu-north-1`     | Europe (Stockholm)        | Global, EU, In-region only |
-| `eu-south-1`     | Europe (Milan)            | Global, EU                 |
-| `eu-south-2`     | Europe (Spain)            | Global, EU                 |
-| `eu-west-1`      | Europe (Ireland)          | Global, EU, In-region only |
-| `eu-west-2`      | Europe (London)           | Global, EU                 |
-| `eu-west-3`      | Europe (Paris)            | Global, EU                 |
-| `il-central-1`   | Israel (Tel Aviv)         | Global                     |
-| `me-central-1`   | Middle East (UAE)         | Global                     |
-| `sa-east-1`      | South America (São Paulo) | Global                     |
-| `us-east-1`      | US East (N. Virginia)     | Global, US, In-region only |
-| `us-east-2`      | US East (Ohio)            | Global, US, In-region only |
-| `us-west-1`      | US West (N. California)   | Global, US                 |
-| `us-west-2`      | US West (Oregon)          | Global, US, In-region only |
+| AWS region | Location | Endpoint types |
+| ----- | ----- | ----- |
+| `af-south-1` | Africa (Cape Town) | Global |
+| `ap-northeast-1` | Asia Pacific (Tokyo) | Global, JP, In-region only |
+| `ap-northeast-2` | Asia Pacific (Seoul) | Global |
+| `ap-northeast-3` | Asia Pacific (Osaka) | Global, JP |
+| `ap-south-1` | Asia Pacific (Mumbai) | Global |
+| `ap-south-2` | Asia Pacific (Hyderabad) | Global |
+| `ap-southeast-1` | Asia Pacific (Singapore) | Global |
+| `ap-southeast-2` | Asia Pacific (Sydney) | Global, AU |
+| `ap-southeast-3` | Asia Pacific (Jakarta) | Global |
+| `ap-southeast-4` | Asia Pacific (Melbourne) | Global, AU, In-region only |
+| `ca-central-1` | Canada (Central) | Global, US |
+| `ca-west-1` | Canada West (Calgary) | Global |
+| `eu-central-1` | Europe (Frankfurt) | Global, EU |
+| `eu-central-2` | Europe (Zurich) | Global, EU |
+| `eu-north-1` | Europe (Stockholm) | Global, EU, In-region only |
+| `eu-south-1` | Europe (Milan) | Global, EU |
+| `eu-south-2` | Europe (Spain) | Global, EU |
+| `eu-west-1` | Europe (Ireland) | Global, EU, In-region only |
+| `eu-west-2` | Europe (London) | Global, EU |
+| `eu-west-3` | Europe (Paris) | Global, EU |
+| `il-central-1` | Israel (Tel Aviv) | Global |
+| `me-central-1` | Middle East (UAE) | Global |
+| `sa-east-1` | South America (São Paulo) | Global |
+| `us-east-1` | US East (N. Virginia) | Global, US, In-region only |
+| `us-east-2` | US East (Ohio) | Global, US, In-region only |
+| `us-west-1` | US West (N. California) | Global, US |
+| `us-west-2` | US West (Oregon) | Global, US, In-region only |
 
 ## Quotas
 
@@ -428,7 +472,7 @@ Default quota is 2 million input tokens per minute (TPM). You can request up to 
 
 ## Data retention
 
-Data handling for this offering is governed by Amazon Bedrock. For details, see [Data protection in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html).
+Amazon Bedrock governs data handling for Claude in Amazon Bedrock. For details, see [Data protection in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html).
 
 ## Monitoring and logging
 

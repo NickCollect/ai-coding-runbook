@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments
-fetched_at: 2026-11-16T07:30:52.352468+00:00
+fetched_at: 2026-11-23T08:28:25.256087+00:00
 fetch_method: mintlify_md
 ---
 
@@ -122,6 +122,10 @@ Create a new environment with the specified configuration.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -421,6 +425,24 @@ Create a new environment with the specified configuration.
 
     - `"account"`
 
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `environment_create_disabled` (HTTP status 403)
+
+  Anthropic has turned off creating environments for this organization. Existing environments still work.
+
 ### Example
 
 ```bash
@@ -620,6 +642,10 @@ List environments with pagination support.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -804,6 +830,20 @@ List environments with pagination support.
 
   Token for fetching the next page of results. If `null`, there are no more results available. Pass this value to the `page` parameter in the next request.
 
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```bash
@@ -972,6 +1012,10 @@ Retrieve a specific environment by ID.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -1153,6 +1197,20 @@ Retrieve a specific environment by ID.
 
     - `"account"`
 
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```bash
@@ -1316,6 +1374,10 @@ Update an existing environment's configuration.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -1615,6 +1677,32 @@ Update an existing environment's configuration.
 
     - `"account"`
 
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `environment_archived` (HTTP status 400)
+
+  The environment is archived, so it cannot be updated.
+
+- `invalid_config_type_change` (HTTP status 400)
+
+  `config.type` differs from the environment's stored type, which cannot change after creation.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `environment_update_disabled` (HTTP status 403)
+
+  Anthropic has turned off updating environments for this organization. Existing environments still work as they are.
+
 ### Example
 
 ```bash
@@ -1783,6 +1871,10 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -1844,6 +1936,20 @@ Delete an environment by ID. Returns a confirmation of the deletion.
   - `id: string`
 
     Environment identifier
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -1979,6 +2085,10 @@ Archive an environment by ID. Archived environments cannot be used to create new
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -2159,6 +2269,20 @@ Archive an environment by ID. Archived environments cannot be used to create new
     - `"organization"`
 
     - `"account"`
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -2507,15 +2631,11 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/archive \
 
 - `BetaEnvironmentArchivedErrorDetails object`
 
-  The environment is archived, so it cannot be updated.
-
   - `error_code: "environment_archived"`
 
 ### Beta Environment Create Disabled Error Details
 
 - `BetaEnvironmentCreateDisabledErrorDetails object`
-
-  Anthropic has turned off creating environments for this organization. Existing environments still work.
 
   - `error_code: "environment_create_disabled"`
 
@@ -2539,15 +2659,11 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/archive \
 
 - `BetaEnvironmentNotFoundErrorDetails object`
 
-  `settings.environment_id` names no Environment within the organization's reach.
-
   - `error_code: "environment_not_found"`
 
 ### Beta Environment Update Disabled Error Details
 
 - `BetaEnvironmentUpdateDisabledErrorDetails object`
-
-  Anthropic has turned off updating environments for this organization. Existing environments still work as they are.
 
   - `error_code: "environment_update_disabled"`
 
@@ -2555,15 +2671,11 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/archive \
 
 - `BetaInvalidConfigTypeChangeErrorDetails object`
 
-  `config.type` differs from the environment's stored type, which cannot change after creation.
-
   - `error_code: "invalid_config_type_change"`
 
 ### Beta Invalid Metadata Error Details
 
 - `BetaInvalidMetadataErrorDetails object`
-
-  `metadata` has too many keys, a key or value that is too long, or a reserved key. The message names each problem.
 
   - `error_code: "invalid_metadata"`
 
@@ -2720,15 +2832,89 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/archive \
 
     Network policy type
 
+## Errors
+
+### environment_archived
+
+HTTP status 400
+
+- `"environment_archived"`
+
+  The environment is archived, so it cannot be updated.
+
+  - `details: BetaEnvironmentArchivedErrorDetails`
+
+    - `error_code: "environment_archived"`
+
+### invalid_config_type_change
+
+HTTP status 400
+
+- `"invalid_config_type_change"`
+
+  `config.type` differs from the environment's stored type, which cannot change after creation.
+
+  - `details: BetaInvalidConfigTypeChangeErrorDetails`
+
+    - `error_code: "invalid_config_type_change"`
+
+### invalid_metadata
+
+HTTP status 400
+
+- `"invalid_metadata"`
+
+  `metadata` has too many keys, a key or value that is too long, or a reserved key. The message names each problem.
+
+  - `details: BetaInvalidMetadataErrorDetails`
+
+    - `error_code: "invalid_metadata"`
+
+### environment_create_disabled
+
+HTTP status 403
+
+- `"environment_create_disabled"`
+
+  Anthropic has turned off creating environments for this organization. Existing environments still work.
+
+  - `details: BetaEnvironmentCreateDisabledErrorDetails`
+
+    - `error_code: "environment_create_disabled"`
+
+### environment_update_disabled
+
+HTTP status 403
+
+- `"environment_update_disabled"`
+
+  Anthropic has turned off updating environments for this organization. Existing environments still work as they are.
+
+  - `details: BetaEnvironmentUpdateDisabledErrorDetails`
+
+    - `error_code: "environment_update_disabled"`
+
+### environment_not_found
+
+HTTP status 404
+
+- `"environment_not_found"`
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+  - `details: BetaEnvironmentNotFoundErrorDetails`
+
+    - `error_code: "environment_not_found"`
+
 ## Environments › Work
 
 ### Get Work Item
 
 **GET** `/v1/environments/{environment_id}/work/{work_id}`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 Retrieve detailed information about a specific work item.
+
+This endpoint accepts a Claude API key. It rejects the environment key and the work item's `secret`. On [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws?sdk_languages=http) or [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed?sdk_languages=http), use that platform's credentials instead.
 
 #### Path parameters
 
@@ -2841,6 +3027,10 @@ Retrieve detailed information about a specific work item.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -2969,6 +3159,20 @@ Retrieve detailed information about a specific work item.
   - `stopped_at: string or null`
 
     RFC 3339 timestamp when work execution stopped
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -3135,6 +3339,10 @@ Long poll for work items in the queue.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -3415,6 +3623,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -3703,6 +3915,10 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -3781,6 +3997,16 @@ Record a heartbeat for a work item to maintain the lease.
 
     Effective TTL applied to the lease
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `heartbeat_precondition_failed` (HTTP status 412)
+
+  `expected_last_heartbeat` does not match the stored heartbeat, so another worker may hold the lease.
+
 #### Example
 
 ```bash
@@ -3806,8 +4032,6 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/hea
 ### Stop Work
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
-
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Stop a work item, initiating graceful or forced shutdown.
 
@@ -3922,6 +4146,10 @@ Stop a work item, initiating graceful or forced shutdown.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -4059,6 +4287,20 @@ Stop a work item, initiating graceful or forced shutdown.
 
     RFC 3339 timestamp when work execution stopped
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```bash
@@ -4099,9 +4341,9 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/sto
 
 **GET** `/v1/environments/{environment_id}/work`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 List work items in an environment.
+
+This endpoint accepts the environment key as a bearer token. It rejects a Claude API key. On [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws?sdk_languages=http) or [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed?sdk_languages=http), use that platform's credentials instead.
 
 #### Path parameters
 
@@ -4224,6 +4466,10 @@ List work items in an environment.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -4394,9 +4640,9 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work \
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 Update work item metadata with merge semantics.
+
+This endpoint accepts a Claude API key. It rejects the environment key and the work item's `secret`. On [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws?sdk_languages=http) or [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed?sdk_languages=http), use that platform's credentials instead.
 
 #### Path parameters
 
@@ -4509,6 +4755,10 @@ Update work item metadata with merge semantics.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -4643,6 +4893,24 @@ Update work item metadata with merge semantics.
   - `stopped_at: string or null`
 
     RFC 3339 timestamp when work execution stopped
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `invalid_metadata` (HTTP status 400)
+
+  `metadata` has too many keys, a key or value that is too long, or a reserved key. The message names each problem.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -4800,6 +5068,10 @@ Get statistics about the work queue for an environment.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -4875,6 +5147,20 @@ Get statistics about the work queue for an environment.
   - `workers_polling: number or null`
 
     Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 

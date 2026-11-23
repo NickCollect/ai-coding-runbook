@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/list
-fetched_at: 2026-10-26T05:40:16.939448+00:00
+fetched_at: 2026-11-23T08:28:21.360963+00:00
 fetch_method: mintlify_md
 ---
 
@@ -170,6 +170,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 - `last_id: string or null`
 
   Last ID in the `data` list. Can be used as the `after_id` for the next page.
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ## Example
 

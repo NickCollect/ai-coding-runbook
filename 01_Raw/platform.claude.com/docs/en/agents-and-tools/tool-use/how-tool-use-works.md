@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works
-fetched_at: 2026-11-02T07:00:26.247229+00:00
+fetched_at: 2026-11-23T08:28:12.123730+00:00
 fetch_method: mintlify_md
 ---
 
@@ -83,11 +83,11 @@ Tool use doesn’t fit when:
 
 ## Choosing between approaches
 
-| Approach                      | When to use it                                                            | What to expect                                                                        | Learn more                                                                                     |
-| ----------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| User-defined client tools     | Custom business logic, internal APIs, proprietary data                    | You handle execution and the agentic loop                                             | [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools)     |
+| Approach | When to use it | What to expect | Learn more |
+| ----- | ----- | ----- | ----- |
+| User-defined client tools | Custom business logic, internal APIs, proprietary data | You handle execution and the agentic loop | [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools) |
 | Anthropic-schema client tools | Standard dev operations (bash, file editing, desktop and browser control) | You handle execution; Claude calls the tool reliably because the schema is trained-in | [Tool reference](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference) |
-| Server-executed tools         | Web search, code sandbox, web fetch                                       | Anthropic handles execution; you read the results instead of producing them           | [Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools)     |
+| Server-executed tools | Web search, code sandbox, web fetch | Anthropic handles execution; you read the results instead of producing them | [Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools) |
 
 ## Next steps
 

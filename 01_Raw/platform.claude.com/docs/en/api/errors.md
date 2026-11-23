@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/errors
-fetched_at: 2026-11-16T07:30:48.060942+00:00
+fetched_at: 2026-11-23T08:28:20.831316+00:00
 fetch_method: mintlify_md
 ---
 
@@ -50,12 +50,12 @@ When receiving a [streaming](https://platform.claude.com/docs/en/build-with-clau
 
 The first-party Claude API enforces these request size limits. For other platforms, see the [API overview](https://platform.claude.com/docs/en/api/overview#request-size-limits).
 
-| Endpoint type                                                                       | Maximum request size |
-| ----------------------------------------------------------------------------------- | -------------------- |
-| Messages API                                                                        | 128 MB               |
-| Token Counting API                                                                  | 128 MB               |
-| [Batch API](https://platform.claude.com/docs/en/build-with-claude/batch-processing) | 256 MB               |
-| [Files API](https://platform.claude.com/docs/en/build-with-claude/files)            | 500 MB               |
+| Endpoint type | Maximum request size |
+| ----- | ----- |
+| Messages API | 128 MB |
+| Token Counting API | 128 MB |
+| [Batch API](https://platform.claude.com/docs/en/build-with-claude/batch-processing) | 256 MB |
+| [Files API](https://platform.claude.com/docs/en/build-with-claude/files) | 500 MB |
 
 If you exceed these limits, you’ll receive a 413 `request_too_large` error. On the first-party Claude API, Cloudflare returns this error before the request reaches the API servers.
 

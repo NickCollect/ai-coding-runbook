@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/mcp_tunnels/archive
-fetched_at: 2026-11-16T07:30:56.941149+00:00
+fetched_at: 2026-11-23T08:28:30.218755+00:00
 fetch_method: mintlify_md
 ---
 
@@ -136,6 +136,10 @@ tunnel returns the existing record unchanged.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -217,6 +221,16 @@ tunnel returns the existing record unchanged.
 
     ID of the Workspace this Tunnel belongs to. May be `null` for a Tunnel in
     the default Workspace. A Tunnel never moves to another Workspace.
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ## Example
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/federation/rules
-fetched_at: 2026-11-16T07:30:55.602591+00:00
+fetched_at: 2026-11-23T08:28:28.817197+00:00
 fetch_method: mintlify_md
 ---
 
@@ -138,6 +138,10 @@ manage rules whose `oauth_scope` is `workspace:developer` or
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -394,6 +398,16 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 ### Example
 
 ```bash
@@ -593,6 +607,10 @@ unless `include_archived=true`.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -934,6 +952,10 @@ Retrieve a federation rule by its ID (`fdrl_...`).
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -1294,6 +1316,10 @@ Console session.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -1545,6 +1571,16 @@ Console session.
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 ### Example
 
 ```bash
@@ -1725,6 +1761,10 @@ other scopes require a Console session.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -1897,6 +1937,16 @@ other scopes require a Console session.
   - `workspace_ids: array of string`
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ### Example
 
@@ -2293,6 +2343,10 @@ other scopes require a Console session.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -2368,6 +2422,16 @@ other scopes require a Console session.
   - `workspace_name: string or null`
 
     Workspace display name. Populated when listing; null in the enable response.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -2531,6 +2595,10 @@ rules with `applies_to_all_workspaces` or a legacy single
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -2761,6 +2829,10 @@ Console session.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -2814,6 +2886,16 @@ Console session.
 - `workspace_id: string`
 
   Tagged ID of the workspace named in the delete request. Removal is idempotent.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 

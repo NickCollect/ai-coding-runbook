@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/spend_limits/effective/list
-fetched_at: 2026-11-09T07:30:26.362772+00:00
+fetched_at: 2026-11-23T08:28:24.101898+00:00
 fetch_method: mintlify_md
 ---
 
@@ -230,6 +230,16 @@ organizations.
   - `spend_limit_id: string`
 
 - `next_page: string or null`
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
 
 ## Example
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages
-fetched_at: 2026-11-16T07:30:48.544749+00:00
+fetched_at: 2026-11-23T08:28:21.264161+00:00
 fetch_method: mintlify_md
 ---
 
@@ -732,7 +732,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               - `page_age: optional string or null`
 
-            - `WebSearchToolRequestError object`
+            - `WebSearchToolRequestErrorObject object`
 
               - `type: "web_search_tool_result_error"`
 
@@ -3478,7 +3478,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `content: WebSearchToolResultBlockContent`
 
-        - `WebSearchToolResultError object`
+        - `WebSearchToolResultErrorObject object`
 
           - `type: "web_search_tool_result_error"`
 
@@ -3630,7 +3630,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `content: CodeExecutionToolResultBlockContent`
 
-        - `CodeExecutionToolResultError object`
+        - `CodeExecutionToolResultErrorObject object`
 
           - `type: "code_execution_tool_result_error"`
 
@@ -3702,9 +3702,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         default: bash_code_execution_tool_result
 
-      - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+      - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-        - `BashCodeExecutionToolResultError object`
+        - `BashCodeExecutionToolResultErrorObject object`
 
           - `type: "bash_code_execution_tool_result_error"`
 
@@ -3752,9 +3752,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         default: text_editor_code_execution_tool_result
 
-      - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+      - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-        - `TextEditorCodeExecutionToolResultError object`
+        - `TextEditorCodeExecutionToolResultErrorObject object`
 
           - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -3830,9 +3830,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         default: tool_search_tool_result
 
-      - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+      - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-        - `ToolSearchToolResultError object`
+        - `ToolSearchToolResultErrorObject object`
 
           - `type: "tool_search_tool_result_error"`
 
@@ -4457,6 +4457,158 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
       default: content_block_stop
 
     - `index: number`
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+On a streaming call, the errors listed below apply when the API rejects the request before the stream starts. Once the stream has started, the response status is already 200, so a later error comes through the stream, with no status of its own. To identify it, use `error.details.error_code` if the error has one, and `error.type` if not.
+
+- `available_tools_limit_exceeded` (HTTP status 400)
+
+  The tools available after a message exceed a limit on their number or their size.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `claude_code_version_too_old` (HTTP status 400)
+
+  The request comes from a Claude Code version older than the minimum that the requested model or the organization requires. Update Claude Code, then retry.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `compaction_block_ambiguous` (HTTP status 400)
+
+  `messages` holds more than one `compaction` block with content. Send only the block the conversation returned last.
+
+- `compaction_block_misplaced` (HTTP status 400)
+
+  The `compaction` block is not the first block of the conversation, or is in a `system` message.
+
+- `compaction_content_mismatch` (HTTP status 400)
+
+  The `compaction` block's `content` differs from the text its `signature` recorded.
+
+- `compaction_incomplete_turn` (HTTP status 400)
+
+  The compaction request ends on an `assistant` turn that is not finished.
+
+- `compaction_nothing_to_summarize` (HTTP status 400)
+
+  `messages` holds no `user` or `assistant` content to summarize or adopt.
+
+- `compaction_signature_invalid` (HTTP status 400)
+
+  The `compaction` block's `signature` does not verify.
+
+- `compaction_too_many_tool_references` (HTTP status 400)
+
+  The conversation references more distinct tools than a `compaction` block can record.
+
+- `compaction_tool_changes_mismatch` (HTTP status 400)
+
+  The `compaction` block's `tool_changes` differs from what was returned with the block.
+
+- `image_dimensions_too_large` (HTTP status 400)
+
+  The longest side of one or more images in the request exceeds the image size limit. Scale each image in `paths` so that neither side exceeds `max_side_length_pixels`, or remove it, then retry.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `request_body_encoding_invalid` (HTTP status 400)
+
+  The request body is not valid for its `Content-Encoding`.
+
+- `request_body_encoding_unsupported` (HTTP status 400)
+
+  The request's `Content-Encoding` is not supported.
+
+- `thread_already_continued` (HTTP status 400)
+
+  The response that `previous_message_id` names has already been continued, and each response can be continued only once. Continue from the Thread's most recent response `id`.
+
+- `thread_continue_in_flight` (HTTP status 400)
+
+  Another request is still continuing from the same `previous_message_id`. Wait for it to complete and continue from its response `id`, or replay the full conversation with `thread: {"type": "create"}`.
+
+- `thread_fingerprint_mismatch` (HTTP status 400)
+
+  A field that must stay the same across a Thread's turns differs from the value stored with the Thread; the message names each such field. Send the stored values, or replay the full conversation with `thread: {"type": "create"}` to change them.
+
+- `thread_unsupported_request` (HTTP status 400)
+
+  The request combines `thread` with a request field or an organization setting that Threads do not support; `unsupported`, when present, names it. Send the full conversation without `thread`, or change that field.
+
+- `tool_name_conflict` (HTTP status 400)
+
+  A tool made available in `messages` takes a name that an available tool of another kind, or of another MCP server, already holds.
+
+- `tool_reference_unresolved` (HTTP status 400)
+
+  A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
+
+- `user_profile_required` (HTTP status 400)
+
+  The request sets `billing_policy.bill_to` to `"user_profile"` but names no user profile. Name the profile to bill in the `anthropic-user-profile-id` header.
+
+- `linked_organization_billing_unavailable` (HTTP status 402)
+
+  Anthropic cannot currently bill the organization linked to the request's user profile, for a reason that lies with that organization's own account. The response does not say what the reason is.
+
+- `linked_organization_spend_limit_reached` (HTTP status 402)
+
+  The organization linked to the request's user profile has reached a spend limit that it set, or lacks credit for the request. The response does not say which applies.
+
+- `user_profile_billing_not_authorized` (HTTP status 403)
+
+  The customer that the request's user profile represents has not authorized the caller to bill them, or the authorization that the request's credential uses has ended. The response does not say which applies.
+
+- `user_profile_not_billable` (HTTP status 403)
+
+  The request's user profile cannot be billed. The response gives no more specific error code and does not say what the reason is.
+
+- `thread_not_found` (HTTP status 404)
+
+  No usable Thread state was found for `previous_message_id`. Replay the full conversation with `thread: {"type": "create"}` to start a new Thread.
+
+- `skill_read_blocked_undecryptable` (HTTP status 409)
+
+  A custom skill the request names is stored under an encryption key state the workspace cannot currently decrypt.
+
+- `request_body_too_large_after_decoding` (HTTP status 413)
+
+  The compressed request body exceeds the request size limit once decoded.
+
+- `contract_spend_limit_reached` (HTTP status 429)
+
+  The organization has reached the spend limit of its contract.
+
+- `enforced_spend_limit_reached` (HTTP status 429)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
+- `ramp_limit_exceeded` (HTTP status 429)
+
+  The request would exceed a ramp limit, which caps how fast usage can grow. Retry after the time in the `retry-after` header.
+
+- `cmek_key_unreachable` (HTTP status 503)
+
+  The workspace's customer-managed encryption key could not be reached. Retry the request; if this continues, check that the key is available in your key management service, or contact Anthropic support.
+
+- `compaction_unavailable` (HTTP status 529)
+
+  The compaction could not be completed for a transient server reason. Retry the request.
 
 ### Example
 
@@ -5265,7 +5417,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `page_age: optional string or null`
 
-            - `WebSearchToolRequestError object`
+            - `WebSearchToolRequestErrorObject object`
 
               - `type: "web_search_tool_result_error"`
 
@@ -7554,6 +7706,76 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     The total number of tokens across the provided list of messages, system prompt, and tools.
 
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `available_tools_limit_exceeded` (HTTP status 400)
+
+  The tools available after a message exceed a limit on their number or their size.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `compaction_block_ambiguous` (HTTP status 400)
+
+  `messages` holds more than one `compaction` block with content. Send only the block the conversation returned last.
+
+- `compaction_block_misplaced` (HTTP status 400)
+
+  The `compaction` block is not the first block of the conversation, or is in a `system` message.
+
+- `compaction_content_mismatch` (HTTP status 400)
+
+  The `compaction` block's `content` differs from the text its `signature` recorded.
+
+- `compaction_nothing_to_summarize` (HTTP status 400)
+
+  `messages` holds no `user` or `assistant` content to summarize or adopt.
+
+- `compaction_signature_invalid` (HTTP status 400)
+
+  The `compaction` block's `signature` does not verify.
+
+- `compaction_tool_changes_mismatch` (HTTP status 400)
+
+  The `compaction` block's `tool_changes` differs from what was returned with the block.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `request_body_encoding_invalid` (HTTP status 400)
+
+  The request body is not valid for its `Content-Encoding`.
+
+- `request_body_encoding_unsupported` (HTTP status 400)
+
+  The request's `Content-Encoding` is not supported.
+
+- `tool_name_conflict` (HTTP status 400)
+
+  A tool made available in `messages` takes a name that an available tool of another kind, or of another MCP server, already holds.
+
+- `tool_reference_unresolved` (HTTP status 400)
+
+  A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
+
+- `request_body_too_large_after_decoding` (HTTP status 413)
+
+  The compressed request body exceeds the request size limit once decoded.
+
+- `enforced_spend_limit_reached` (HTTP status 429)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
+- `compaction_unavailable` (HTTP status 529)
+
+  The compaction could not be completed for a transient server reason. Retry the request.
+
 ### Example
 
 ```bash
@@ -8236,7 +8458,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `page_age: optional string or null`
 
-          - `WebSearchToolRequestError object`
+          - `WebSearchToolRequestErrorObject object`
 
             - `type: "web_search_tool_result_error"`
 
@@ -8585,8 +8807,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `AvailableToolsLimitExceededErrorDetails object`
 
-  The tools available after a message exceed a limit on their number or their size.
-
   - `error_code: "available_tools_limit_exceeded"`
 
 ### Base64 Image Source
@@ -8687,9 +8907,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     default: bash_code_execution_tool_result
 
-  - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+  - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-    - `BashCodeExecutionToolResultError object`
+    - `BashCodeExecutionToolResultErrorObject object`
 
       - `type: "bash_code_execution_tool_result_error"`
 
@@ -8796,9 +9016,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"1h"`
 
-### Bash Code Execution Tool Result Error
+### Bash Code Execution Tool Result Error Code
 
-- `BashCodeExecutionToolResultError object`
+- `BashCodeExecutionToolResultErrorCode = "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
+
+  - `"invalid_tool_input"`
+
+  - `"unavailable"`
+
+  - `"too_many_requests"`
+
+  - `"execution_time_exceeded"`
+
+  - `"output_file_too_large"`
+
+### Bash Code Execution Tool Result Error Object
+
+- `BashCodeExecutionToolResultErrorObject object`
 
   - `type: "bash_code_execution_tool_result_error"`
 
@@ -8815,20 +9049,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"execution_time_exceeded"`
 
     - `"output_file_too_large"`
-
-### Bash Code Execution Tool Result Error Code
-
-- `BashCodeExecutionToolResultErrorCode = "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
-
-  - `"invalid_tool_input"`
-
-  - `"unavailable"`
-
-  - `"too_many_requests"`
-
-  - `"execution_time_exceeded"`
-
-  - `"output_file_too_large"`
 
 ### Bash Code Execution Tool Result Error Param
 
@@ -15448,7 +15668,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `content: CodeExecutionToolResultBlockContent`
 
-    - `CodeExecutionToolResultError object`
+    - `CodeExecutionToolResultErrorObject object`
 
       - `type: "code_execution_tool_result_error"`
 
@@ -15516,9 +15736,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Code Execution Tool Result Block Content
 
-- `CodeExecutionToolResultBlockContent = CodeExecutionToolResultError or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
+- `CodeExecutionToolResultBlockContent = CodeExecutionToolResultErrorObject or CodeExecutionResultBlock or EncryptedCodeExecutionResultBlock`
 
-  - `CodeExecutionToolResultError object`
+  - `CodeExecutionToolResultErrorObject object`
 
     - `type: "code_execution_tool_result_error"`
 
@@ -15713,9 +15933,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `stderr: string`
 
-### Code Execution Tool Result Error
+### Code Execution Tool Result Error Code
 
-- `CodeExecutionToolResultError object`
+- `CodeExecutionToolResultErrorCode = "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
+
+  - `"invalid_tool_input"`
+
+  - `"unavailable"`
+
+  - `"too_many_requests"`
+
+  - `"execution_time_exceeded"`
+
+### Code Execution Tool Result Error Object
+
+- `CodeExecutionToolResultErrorObject object`
 
   - `type: "code_execution_tool_result_error"`
 
@@ -15730,18 +15962,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"too_many_requests"`
 
     - `"execution_time_exceeded"`
-
-### Code Execution Tool Result Error Code
-
-- `CodeExecutionToolResultErrorCode = "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
-
-  - `"invalid_tool_input"`
-
-  - `"unavailable"`
-
-  - `"too_many_requests"`
-
-  - `"execution_time_exceeded"`
 
 ### Code Execution Tool Result Error Param
 
@@ -15763,15 +15983,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `CompactionBlockAmbiguousErrorDetails object`
 
-  `messages` holds more than one `compaction` block with content. Send only the block the conversation returned last.
-
   - `error_code: "compaction_block_ambiguous"`
 
 ### Compaction Block Misplaced Error Details
 
 - `CompactionBlockMisplacedErrorDetails object`
-
-  The `compaction` block is not the first block of the conversation, or is in a `system` message.
 
   - `error_code: "compaction_block_misplaced"`
 
@@ -15779,15 +15995,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `CompactionContentMismatchErrorDetails object`
 
-  The `compaction` block's `content` differs from the text its `signature` recorded.
-
   - `error_code: "compaction_content_mismatch"`
 
 ### Compaction Incomplete Turn Error Details
 
 - `CompactionIncompleteTurnErrorDetails object`
-
-  The compaction request ends on an `assistant` turn that is not finished.
 
   - `error_code: "compaction_incomplete_turn"`
 
@@ -15795,15 +16007,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `CompactionNothingToSummarizeErrorDetails object`
 
-  `messages` holds no `user` or `assistant` content to summarize or adopt.
-
   - `error_code: "compaction_nothing_to_summarize"`
 
 ### Compaction Signature Invalid Error Details
 
 - `CompactionSignatureInvalidErrorDetails object`
-
-  The `compaction` block's `signature` does not verify.
 
   - `error_code: "compaction_signature_invalid"`
 
@@ -15811,23 +16019,17 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `CompactionTooManyToolReferencesErrorDetails object`
 
-  The conversation references more distinct tools than a `compaction` block can record.
-
   - `error_code: "compaction_too_many_tool_references"`
 
 ### Compaction Tool Changes Mismatch Error Details
 
 - `CompactionToolChangesMismatchErrorDetails object`
 
-  The `compaction` block's `tool_changes` differs from what was returned with the block.
-
   - `error_code: "compaction_tool_changes_mismatch"`
 
 ### Compaction Unavailable Error Details
 
 - `CompactionUnavailableErrorDetails object`
-
-  The compaction could not be completed for a transient server reason. Retry the request.
 
   - `error_code: "compaction_unavailable"`
 
@@ -18736,7 +18938,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `content: WebSearchToolResultBlockContent`
 
-      - `WebSearchToolResultError object`
+      - `WebSearchToolResultErrorObject object`
 
         - `type: "web_search_tool_result_error"`
 
@@ -18888,7 +19090,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `content: CodeExecutionToolResultBlockContent`
 
-      - `CodeExecutionToolResultError object`
+      - `CodeExecutionToolResultErrorObject object`
 
         - `type: "code_execution_tool_result_error"`
 
@@ -18960,9 +19162,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       default: bash_code_execution_tool_result
 
-    - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+    - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-      - `BashCodeExecutionToolResultError object`
+      - `BashCodeExecutionToolResultErrorObject object`
 
         - `type: "bash_code_execution_tool_result_error"`
 
@@ -19010,9 +19212,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       default: text_editor_code_execution_tool_result
 
-    - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+    - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-      - `TextEditorCodeExecutionToolResultError object`
+      - `TextEditorCodeExecutionToolResultErrorObject object`
 
         - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -19088,9 +19290,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       default: tool_search_tool_result
 
-    - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+    - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-      - `ToolSearchToolResultError object`
+      - `ToolSearchToolResultErrorObject object`
 
         - `type: "tool_search_tool_result_error"`
 
@@ -19762,7 +19964,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `page_age: optional string or null`
 
-      - `WebSearchToolRequestError object`
+      - `WebSearchToolRequestErrorObject object`
 
         - `type: "web_search_tool_result_error"`
 
@@ -21081,6 +21283,20 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"error"`
 
+### Image Dimensions Too Large Error Details
+
+- `ImageDimensionsTooLargeErrorDetails object`
+
+  - `error_code: "image_dimensions_too_large"`
+
+  - `max_side_length_pixels: number`
+
+    The limit the images exceeded: the largest width or height, in pixels, that an image on this request may have.
+
+  - `paths: array of string`
+
+    The position of every image over the limit, in the order you sent them, nested blocks included, such as `messages.0.content.1`, or `messages.0.content.1.content.0` for an image in a `tool_result` block.
+
 ### Image Transformations Param
 
 - `ImageTransformationsParam object`
@@ -21543,7 +21759,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `content: WebSearchToolResultBlockContent`
 
-        - `WebSearchToolResultError object`
+        - `WebSearchToolResultErrorObject object`
 
           - `type: "web_search_tool_result_error"`
 
@@ -21695,7 +21911,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `content: CodeExecutionToolResultBlockContent`
 
-        - `CodeExecutionToolResultError object`
+        - `CodeExecutionToolResultErrorObject object`
 
           - `type: "code_execution_tool_result_error"`
 
@@ -21767,9 +21983,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         default: bash_code_execution_tool_result
 
-      - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+      - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-        - `BashCodeExecutionToolResultError object`
+        - `BashCodeExecutionToolResultErrorObject object`
 
           - `type: "bash_code_execution_tool_result_error"`
 
@@ -21817,9 +22033,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         default: text_editor_code_execution_tool_result
 
-      - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+      - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-        - `TextEditorCodeExecutionToolResultError object`
+        - `TextEditorCodeExecutionToolResultErrorObject object`
 
           - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -21895,9 +22111,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         default: tool_search_tool_result
 
-      - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+      - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-        - `ToolSearchToolResultError object`
+        - `ToolSearchToolResultErrorObject object`
 
           - `type: "tool_search_tool_result_error"`
 
@@ -22956,7 +23172,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `page_age: optional string or null`
 
-        - `WebSearchToolRequestError object`
+        - `WebSearchToolRequestErrorObject object`
 
           - `type: "web_search_tool_result_error"`
 
@@ -25639,7 +25855,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
               - `page_age: optional string or null`
 
-            - `WebSearchToolRequestError object`
+            - `WebSearchToolRequestErrorObject object`
 
               - `type: "web_search_tool_result_error"`
 
@@ -26846,7 +27062,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `content: WebSearchToolResultBlockContent`
 
-        - `WebSearchToolResultError object`
+        - `WebSearchToolResultErrorObject object`
 
           - `type: "web_search_tool_result_error"`
 
@@ -26998,7 +27214,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `content: CodeExecutionToolResultBlockContent`
 
-        - `CodeExecutionToolResultError object`
+        - `CodeExecutionToolResultErrorObject object`
 
           - `type: "code_execution_tool_result_error"`
 
@@ -27070,9 +27286,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         default: bash_code_execution_tool_result
 
-      - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+      - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-        - `BashCodeExecutionToolResultError object`
+        - `BashCodeExecutionToolResultErrorObject object`
 
           - `type: "bash_code_execution_tool_result_error"`
 
@@ -27120,9 +27336,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         default: text_editor_code_execution_tool_result
 
-      - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+      - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-        - `TextEditorCodeExecutionToolResultError object`
+        - `TextEditorCodeExecutionToolResultErrorObject object`
 
           - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -27198,9 +27414,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         default: tool_search_tool_result
 
-      - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+      - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-        - `ToolSearchToolResultError object`
+        - `ToolSearchToolResultErrorObject object`
 
           - `type: "tool_search_tool_result_error"`
 
@@ -27822,7 +28038,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `content: WebSearchToolResultBlockContent`
 
-          - `WebSearchToolResultError object`
+          - `WebSearchToolResultErrorObject object`
 
             - `type: "web_search_tool_result_error"`
 
@@ -27974,7 +28190,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `content: CodeExecutionToolResultBlockContent`
 
-          - `CodeExecutionToolResultError object`
+          - `CodeExecutionToolResultErrorObject object`
 
             - `type: "code_execution_tool_result_error"`
 
@@ -28046,9 +28262,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           default: bash_code_execution_tool_result
 
-        - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+        - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-          - `BashCodeExecutionToolResultError object`
+          - `BashCodeExecutionToolResultErrorObject object`
 
             - `type: "bash_code_execution_tool_result_error"`
 
@@ -28096,9 +28312,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           default: text_editor_code_execution_tool_result
 
-        - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+        - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-          - `TextEditorCodeExecutionToolResultError object`
+          - `TextEditorCodeExecutionToolResultErrorObject object`
 
             - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -28174,9 +28390,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           default: tool_search_tool_result
 
-        - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+        - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-          - `ToolSearchToolResultError object`
+          - `ToolSearchToolResultErrorObject object`
 
             - `type: "tool_search_tool_result_error"`
 
@@ -28998,7 +29214,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `content: WebSearchToolResultBlockContent`
 
-            - `WebSearchToolResultError object`
+            - `WebSearchToolResultErrorObject object`
 
               - `type: "web_search_tool_result_error"`
 
@@ -29150,7 +29366,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `content: CodeExecutionToolResultBlockContent`
 
-            - `CodeExecutionToolResultError object`
+            - `CodeExecutionToolResultErrorObject object`
 
               - `type: "code_execution_tool_result_error"`
 
@@ -29222,9 +29438,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             default: bash_code_execution_tool_result
 
-          - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+          - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-            - `BashCodeExecutionToolResultError object`
+            - `BashCodeExecutionToolResultErrorObject object`
 
               - `type: "bash_code_execution_tool_result_error"`
 
@@ -29272,9 +29488,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             default: text_editor_code_execution_tool_result
 
-          - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+          - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-            - `TextEditorCodeExecutionToolResultError object`
+            - `TextEditorCodeExecutionToolResultErrorObject object`
 
               - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -29350,9 +29566,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             default: tool_search_tool_result
 
-          - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+          - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-            - `ToolSearchToolResultError object`
+            - `ToolSearchToolResultErrorObject object`
 
               - `type: "tool_search_tool_result_error"`
 
@@ -31216,9 +31432,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     default: text_editor_code_execution_tool_result
 
-  - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+  - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-    - `TextEditorCodeExecutionToolResultError object`
+    - `TextEditorCodeExecutionToolResultErrorObject object`
 
       - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -31379,9 +31595,23 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"1h"`
 
-### Text Editor Code Execution Tool Result Error
+### Text Editor Code Execution Tool Result Error Code
 
-- `TextEditorCodeExecutionToolResultError object`
+- `TextEditorCodeExecutionToolResultErrorCode = "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
+
+  - `"invalid_tool_input"`
+
+  - `"unavailable"`
+
+  - `"too_many_requests"`
+
+  - `"execution_time_exceeded"`
+
+  - `"file_not_found"`
+
+### Text Editor Code Execution Tool Result Error Object
+
+- `TextEditorCodeExecutionToolResultErrorObject object`
 
   - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -31400,20 +31630,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"file_not_found"`
 
   - `error_message: string or null`
-
-### Text Editor Code Execution Tool Result Error Code
-
-- `TextEditorCodeExecutionToolResultErrorCode = "invalid_tool_input" or "unavailable" or "too_many_requests" or 2 more`
-
-  - `"invalid_tool_input"`
-
-  - `"unavailable"`
-
-  - `"too_many_requests"`
-
-  - `"execution_time_exceeded"`
-
-  - `"file_not_found"`
 
 ### Text Editor Code Execution Tool Result Error Param
 
@@ -31635,15 +31851,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `ThreadAlreadyContinuedErrorDetails object`
 
-  The response that `previous_message_id` names has already been continued, and each response can be continued only once. Continue from the Thread's most recent response `id`.
-
   - `error_code: "thread_already_continued"`
 
 ### Thread Continue In Flight Error Details
 
 - `ThreadContinueInFlightErrorDetails object`
-
-  Another request is still continuing from the same `previous_message_id`. Wait for it to complete and continue from its response `id`, or replay the full conversation with `thread: {"type": "create"}`.
 
   - `error_code: "thread_continue_in_flight"`
 
@@ -31651,15 +31863,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `ThreadFingerprintMismatchErrorDetails object`
 
-  A field that must stay the same across a Thread's turns differs from the value stored with the Thread; the message names each such field. Send the stored values, or replay the full conversation with `thread: {"type": "create"}` to change them.
-
   - `error_code: "thread_fingerprint_mismatch"`
 
 ### Thread Not Found Error Details
 
 - `ThreadNotFoundErrorDetails object`
-
-  No usable Thread state was found for `previous_message_id`. Replay the full conversation with `thread: {"type": "create"}` to start a new Thread.
 
   - `error_code: "thread_not_found"`
 
@@ -31682,8 +31890,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ### Thread Unsupported Request Error Details
 
 - `ThreadUnsupportedRequestErrorDetails object`
-
-  The request combines `thread` with a request field or an organization setting that Threads do not support; `unsupported`, when present, names it. Send the full conversation without `thread`, or change that field.
 
   - `error_code: "thread_unsupported_request"`
 
@@ -31943,8 +32149,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `ToolNameConflictErrorDetails object`
 
-  A tool made available in `messages` takes a name that an available tool of another kind, or of another MCP server, already holds.
-
   - `error_code: "tool_name_conflict"`
 
 ### Tool Reference Block
@@ -31995,8 +32199,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 ### Tool Reference Unresolved Error Details
 
 - `ToolReferenceUnresolvedErrorDetails object`
-
-  A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
 
   - `error_code: "tool_reference_unresolved"`
 
@@ -32600,9 +32802,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     default: tool_search_tool_result
 
-  - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+  - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-    - `ToolSearchToolResultError object`
+    - `ToolSearchToolResultErrorObject object`
 
       - `type: "tool_search_tool_result_error"`
 
@@ -32705,9 +32907,21 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Create a cache control breakpoint at this content block.
 
-### Tool Search Tool Result Error
+### Tool Search Tool Result Error Code
 
-- `ToolSearchToolResultError object`
+- `ToolSearchToolResultErrorCode = "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
+
+  - `"invalid_tool_input"`
+
+  - `"unavailable"`
+
+  - `"too_many_requests"`
+
+  - `"execution_time_exceeded"`
+
+### Tool Search Tool Result Error Object
+
+- `ToolSearchToolResultErrorObject object`
 
   - `type: "tool_search_tool_result_error"`
 
@@ -32724,18 +32938,6 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `"execution_time_exceeded"`
 
   - `error_message: string or null`
-
-### Tool Search Tool Result Error Code
-
-- `ToolSearchToolResultErrorCode = "invalid_tool_input" or "unavailable" or "too_many_requests" or "execution_time_exceeded"`
-
-  - `"invalid_tool_input"`
-
-  - `"unavailable"`
-
-  - `"too_many_requests"`
-
-  - `"execution_time_exceeded"`
 
 ### Tool Search Tool Result Error Param
 
@@ -37141,7 +37343,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             - `page_age: optional string or null`
 
-          - `WebSearchToolRequestError object`
+          - `WebSearchToolRequestErrorObject object`
 
             - `type: "web_search_tool_result_error"`
 
@@ -39513,9 +39715,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       minLength: 1, maxLength: 255
 
-### Web Search Tool Request Error
+### Web Search Tool Request Error Object
 
-- `WebSearchToolRequestError object`
+- `WebSearchToolRequestErrorObject object`
 
   - `type: "web_search_tool_result_error"`
 
@@ -39571,7 +39773,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `content: WebSearchToolResultBlockContent`
 
-    - `WebSearchToolResultError object`
+    - `WebSearchToolResultErrorObject object`
 
       - `type: "web_search_tool_result_error"`
 
@@ -39611,9 +39813,9 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Search Tool Result Block Content
 
-- `WebSearchToolResultBlockContent = WebSearchToolResultError or array of WebSearchResultBlock`
+- `WebSearchToolResultBlockContent = WebSearchToolResultErrorObject or array of WebSearchResultBlock`
 
-  - `WebSearchToolResultError object`
+  - `WebSearchToolResultErrorObject object`
 
     - `type: "web_search_tool_result_error"`
 
@@ -39667,7 +39869,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `page_age: optional string or null`
 
-    - `WebSearchToolRequestError object`
+    - `WebSearchToolRequestErrorObject object`
 
       - `type: "web_search_tool_result_error"`
 
@@ -39738,7 +39940,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Web Search Tool Result Block Param Content
 
-- `WebSearchToolResultBlockParamContent = array of WebSearchResultBlockParam or WebSearchToolRequestError`
+- `WebSearchToolResultBlockParamContent = array of WebSearchResultBlockParam or WebSearchToolRequestErrorObject`
 
   - `WebSearchToolResultBlockItem = array of WebSearchResultBlockParam`
 
@@ -39752,7 +39954,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `page_age: optional string or null`
 
-  - `WebSearchToolRequestError object`
+  - `WebSearchToolRequestErrorObject object`
 
     - `type: "web_search_tool_result_error"`
 
@@ -39770,9 +39972,25 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"request_too_large"`
 
-### Web Search Tool Result Error
+### Web Search Tool Result Error Code
 
-- `WebSearchToolResultError object`
+- `WebSearchToolResultErrorCode = "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
+
+  - `"invalid_tool_input"`
+
+  - `"unavailable"`
+
+  - `"max_uses_exceeded"`
+
+  - `"too_many_requests"`
+
+  - `"query_too_long"`
+
+  - `"request_too_large"`
+
+### Web Search Tool Result Error Object
+
+- `WebSearchToolResultErrorObject object`
 
   - `type: "web_search_tool_result_error"`
 
@@ -39792,21 +40010,247 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"request_too_large"`
 
-### Web Search Tool Result Error Code
+## Errors
 
-- `WebSearchToolResultErrorCode = "invalid_tool_input" or "unavailable" or "max_uses_exceeded" or 3 more`
+### available_tools_limit_exceeded
 
-  - `"invalid_tool_input"`
+HTTP status 400
 
-  - `"unavailable"`
+- `"available_tools_limit_exceeded"`
 
-  - `"max_uses_exceeded"`
+  The tools available after a message exceed a limit on their number or their size.
 
-  - `"too_many_requests"`
+  - `details: AvailableToolsLimitExceededErrorDetails`
 
-  - `"query_too_long"`
+    - `error_code: "available_tools_limit_exceeded"`
 
-  - `"request_too_large"`
+### compaction_block_ambiguous
+
+HTTP status 400
+
+- `"compaction_block_ambiguous"`
+
+  `messages` holds more than one `compaction` block with content. Send only the block the conversation returned last.
+
+  - `details: CompactionBlockAmbiguousErrorDetails`
+
+    - `error_code: "compaction_block_ambiguous"`
+
+### compaction_block_misplaced
+
+HTTP status 400
+
+- `"compaction_block_misplaced"`
+
+  The `compaction` block is not the first block of the conversation, or is in a `system` message.
+
+  - `details: CompactionBlockMisplacedErrorDetails`
+
+    - `error_code: "compaction_block_misplaced"`
+
+### compaction_content_mismatch
+
+HTTP status 400
+
+- `"compaction_content_mismatch"`
+
+  The `compaction` block's `content` differs from the text its `signature` recorded.
+
+  - `details: CompactionContentMismatchErrorDetails`
+
+    - `error_code: "compaction_content_mismatch"`
+
+### compaction_incomplete_turn
+
+HTTP status 400
+
+- `"compaction_incomplete_turn"`
+
+  The compaction request ends on an `assistant` turn that is not finished.
+
+  - `details: CompactionIncompleteTurnErrorDetails`
+
+    - `error_code: "compaction_incomplete_turn"`
+
+### compaction_nothing_to_summarize
+
+HTTP status 400
+
+- `"compaction_nothing_to_summarize"`
+
+  `messages` holds no `user` or `assistant` content to summarize or adopt.
+
+  - `details: CompactionNothingToSummarizeErrorDetails`
+
+    - `error_code: "compaction_nothing_to_summarize"`
+
+### compaction_signature_invalid
+
+HTTP status 400
+
+- `"compaction_signature_invalid"`
+
+  The `compaction` block's `signature` does not verify.
+
+  - `details: CompactionSignatureInvalidErrorDetails`
+
+    - `error_code: "compaction_signature_invalid"`
+
+### compaction_too_many_tool_references
+
+HTTP status 400
+
+- `"compaction_too_many_tool_references"`
+
+  The conversation references more distinct tools than a `compaction` block can record.
+
+  - `details: CompactionTooManyToolReferencesErrorDetails`
+
+    - `error_code: "compaction_too_many_tool_references"`
+
+### compaction_tool_changes_mismatch
+
+HTTP status 400
+
+- `"compaction_tool_changes_mismatch"`
+
+  The `compaction` block's `tool_changes` differs from what was returned with the block.
+
+  - `details: CompactionToolChangesMismatchErrorDetails`
+
+    - `error_code: "compaction_tool_changes_mismatch"`
+
+### image_dimensions_too_large
+
+HTTP status 400
+
+- `"image_dimensions_too_large"`
+
+  The longest side of one or more images in the request exceeds the image size limit. Scale each image in `paths` so that neither side exceeds `max_side_length_pixels`, or remove it, then retry.
+
+  - `details: ImageDimensionsTooLargeErrorDetails`
+
+    - `error_code: "image_dimensions_too_large"`
+
+    - `max_side_length_pixels: number`
+
+      The limit the images exceeded: the largest width or height, in pixels, that an image on this request may have.
+
+    - `paths: array of string`
+
+      The position of every image over the limit, in the order you sent them, nested blocks included, such as `messages.0.content.1`, or `messages.0.content.1.content.0` for an image in a `tool_result` block.
+
+### thread_already_continued
+
+HTTP status 400
+
+- `"thread_already_continued"`
+
+  The response that `previous_message_id` names has already been continued, and each response can be continued only once. Continue from the Thread's most recent response `id`.
+
+  - `details: ThreadAlreadyContinuedErrorDetails`
+
+    - `error_code: "thread_already_continued"`
+
+### thread_continue_in_flight
+
+HTTP status 400
+
+- `"thread_continue_in_flight"`
+
+  Another request is still continuing from the same `previous_message_id`. Wait for it to complete and continue from its response `id`, or replay the full conversation with `thread: {"type": "create"}`.
+
+  - `details: ThreadContinueInFlightErrorDetails`
+
+    - `error_code: "thread_continue_in_flight"`
+
+### thread_fingerprint_mismatch
+
+HTTP status 400
+
+- `"thread_fingerprint_mismatch"`
+
+  A field that must stay the same across a Thread's turns differs from the value stored with the Thread; the message names each such field. Send the stored values, or replay the full conversation with `thread: {"type": "create"}` to change them.
+
+  - `details: ThreadFingerprintMismatchErrorDetails`
+
+    - `error_code: "thread_fingerprint_mismatch"`
+
+### thread_unsupported_request
+
+HTTP status 400
+
+- `"thread_unsupported_request"`
+
+  The request combines `thread` with a request field or an organization setting that Threads do not support; `unsupported`, when present, names it. Send the full conversation without `thread`, or change that field.
+
+  - `details: ThreadUnsupportedRequestErrorDetails`
+
+    - `error_code: "thread_unsupported_request"`
+
+    - `unsupported: optional array of ThreadUnsupportedFeatureName or null`
+
+      Each entry names a request field or an organization setting that Threads do not support. On a value you do not recognize, send the full conversation without `thread`.
+
+      - `"cache_control"`
+
+      - `"context_management"`
+
+      - `"fallbacks"`
+
+      - `"hipaa"`
+
+      - `"inference_hooks"`
+
+      - `"thinking"`
+
+### tool_name_conflict
+
+HTTP status 400
+
+- `"tool_name_conflict"`
+
+  A tool made available in `messages` takes a name that an available tool of another kind, or of another MCP server, already holds.
+
+  - `details: ToolNameConflictErrorDetails`
+
+    - `error_code: "tool_name_conflict"`
+
+### tool_reference_unresolved
+
+HTTP status 400
+
+- `"tool_reference_unresolved"`
+
+  A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
+
+  - `details: ToolReferenceUnresolvedErrorDetails`
+
+    - `error_code: "tool_reference_unresolved"`
+
+### thread_not_found
+
+HTTP status 404
+
+- `"thread_not_found"`
+
+  No usable Thread state was found for `previous_message_id`. Replay the full conversation with `thread: {"type": "create"}` to start a new Thread.
+
+  - `details: ThreadNotFoundErrorDetails`
+
+    - `error_code: "thread_not_found"`
+
+### compaction_unavailable
+
+HTTP status 529
+
+- `"compaction_unavailable"`
+
+  The compaction could not be completed for a transient server reason. Retry the request.
+
+  - `details: CompactionUnavailableErrorDetails`
+
+    - `error_code: "compaction_unavailable"`
 
 ## Messages › Batches
 
@@ -40551,7 +40995,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `page_age: optional string or null`
 
-                - `WebSearchToolRequestError object`
+                - `WebSearchToolRequestErrorObject object`
 
                   - `type: "web_search_tool_result_error"`
 
@@ -43032,6 +43476,28 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `enforced_spend_limit_reached` (HTTP status 429)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
 #### Example
 
 ```bash
@@ -43218,6 +43684,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -43412,6 +43892,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```bash
@@ -43590,6 +44084,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```bash
@@ -43667,6 +44175,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `id: string`
 
     ID of the Message Batch.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -44113,7 +44635,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `WebSearchToolResultError object`
+              - `WebSearchToolResultErrorObject object`
 
                 - `type: "web_search_tool_result_error"`
 
@@ -44265,7 +44787,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `content: CodeExecutionToolResultBlockContent`
 
-              - `CodeExecutionToolResultError object`
+              - `CodeExecutionToolResultErrorObject object`
 
                 - `type: "code_execution_tool_result_error"`
 
@@ -44337,9 +44859,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: bash_code_execution_tool_result
 
-            - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+            - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-              - `BashCodeExecutionToolResultError object`
+              - `BashCodeExecutionToolResultErrorObject object`
 
                 - `type: "bash_code_execution_tool_result_error"`
 
@@ -44387,9 +44909,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: text_editor_code_execution_tool_result
 
-            - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+            - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `TextEditorCodeExecutionToolResultError object`
+              - `TextEditorCodeExecutionToolResultErrorObject object`
 
                 - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -44465,9 +44987,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: tool_search_tool_result
 
-            - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+            - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-              - `ToolSearchToolResultError object`
+              - `ToolSearchToolResultErrorObject object`
 
                 - `type: "tool_search_tool_result_error"`
 
@@ -44912,7 +45434,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
         - `error: ErrorObject`
 
-          - `InvalidRequestError object`
+          - `InvalidRequestErrorObject object`
 
             - `type: "invalid_request_error"`
 
@@ -44926,7 +45448,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Invalid request
 
-          - `AuthenticationError object`
+          - `AuthenticationErrorObject object`
 
             - `type: "authentication_error"`
 
@@ -44940,7 +45462,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Authentication error
 
-          - `BillingError object`
+          - `BillingErrorObject object`
 
             - `type: "billing_error"`
 
@@ -44954,7 +45476,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Billing error
 
-          - `PermissionError object`
+          - `PermissionErrorObject object`
 
             - `type: "permission_error"`
 
@@ -44968,7 +45490,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Permission denied
 
-          - `NotFoundError object`
+          - `NotFoundErrorObject object`
 
             - `type: "not_found_error"`
 
@@ -44982,7 +45504,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Not found
 
-          - `RateLimitError object`
+          - `RateLimitErrorObject object`
 
             - `type: "rate_limit_error"`
 
@@ -44996,7 +45518,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Rate limited
 
-          - `GatewayTimeoutError object`
+          - `GatewayTimeoutErrorObject object`
 
             - `type: "timeout_error"`
 
@@ -45024,7 +45546,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Internal server error
 
-          - `OverloadedError object`
+          - `OverloadedErrorObject object`
 
             - `type: "overloaded_error"`
 
@@ -45051,6 +45573,24 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
       - `type: "expired"`
 
         default: expired
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 

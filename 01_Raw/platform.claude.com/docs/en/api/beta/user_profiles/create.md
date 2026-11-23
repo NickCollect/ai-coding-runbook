@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/user_profiles/create
-fetched_at: 2026-11-16T07:30:54.575778+00:00
+fetched_at: 2026-11-23T08:28:27.772094+00:00
 fetch_method: mintlify_md
 ---
 
@@ -120,6 +120,10 @@ Create User Profile
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/wif-admin-api
-fetched_at: 2026-11-09T07:30:19.524231+00:00
+fetched_at: 2026-11-23T08:28:16.627288+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ The Admin API lets you create and manage [Workload Identity Federation](https://
 
 ## Prerequisites
 
-Every request on this page authenticates with an OAuth bearer token that carries the `org:admin` scope. Anthropic grants the scope only to organization members with the admin, owner, or primary owner role. The scope grants access to the whole organization, and these endpoints ignore any workspace binding. There are two ways to obtain a token, and they carry different permissions. A token from your own login acts as a user. A federated token acts as a service account and cannot perform every operation on this page.
+Every request on this page authenticates with an OAuth bearer token that carries the `org:admin` scope. Anthropic grants the scope only to users and service accounts with the admin role. The scope grants access to the whole organization, and these endpoints ignore any workspace binding. There are two ways to obtain a token, and they carry different permissions. A token from your own login acts as a user. A federated token acts as a service account and cannot perform every operation on this page.
 
 ### Interactive (your terminal)
 
@@ -502,11 +502,11 @@ For complete parameter details and response schemas, see the [Service accounts A
 
 A [federation issuer](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation#federation-issuers) (`fdis_...`) registers an OIDC identity provider with your organization. The `jwks` field is a discriminated union that controls how Anthropic fetches the provider’s signing keys:
 
-| `jwks` value                             | When to use                                                                       |
-| ---------------------------------------- | --------------------------------------------------------------------------------- |
-| `{"type": "discovery"}`                  | The provider serves `/.well-known/openid-configuration` at the issuer URL.        |
-| `{"type": "explicit_url", "url": "..."}` | Point at a JWKS endpoint directly.                                                |
-| `{"type": "inline", "keys": [...]}`      | Upload the key set for providers that are not reachable from the public internet. |
+| `jwks` value | When to use |
+| ----- | ----- |
+| `{"type": "discovery"}` | The provider serves `/.well-known/openid-configuration` at the issuer URL. |
+| `{"type": "explicit_url", "url": "..."}` | Point at a JWKS endpoint directly. |
+| `{"type": "inline", "keys": [...]}` | Upload the key set for providers that are not reachable from the public internet. |
 
 Register an issuer. This example registers GitHub Actions with JWKS discovery:
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2
-fetched_at: 2026-11-16T07:30:46.103595+00:00
+fetched_at: 2026-11-23T08:28:18.787731+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,10 +21,10 @@ Four changes from Claude Fable 5.1 can break your code:
 
 ## Models
 
-| Model             | Claude API ID     | Description                                           | Availability                                                                                                                                                     |
-| ----------------- | ----------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Claude Fable 5.2  | claude-fable-5-2  | For demanding reasoning and long-horizon agentic work | All customers on the Claude API (for other platforms, see [Availability](https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2#availability)) |
-| Claude Mythos 5.2 | claude-mythos-5-2 | Same capabilities as Claude Fable 5.2                 | Organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842)      |
+| Model | Claude API ID | Description | Availability |
+| ----- | ----- | ----- | ----- |
+| Claude Fable 5.2 | claude-fable-5-2 | For demanding reasoning and long-horizon agentic work | All customers on the Claude API (for other platforms, see [Availability](https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2#availability)) |
+| Claude Mythos 5.2 | claude-mythos-5-2 | Same capabilities as Claude Fable 5.2 | Organizations verified through Anthropic’s verification programs, such as the [Cyber Verification Program](https://support.claude.com/en/articles/14604842) |
 
 Claude Fable 5.2 and Claude Mythos 5.2 share these specs:
 
@@ -99,7 +99,7 @@ Compaction on demand and mid-conversation tool changes help you keep the history
 
 [Fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) is available for Claude Fable 5.2 in Messages API requests on the Claude API, [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), and [Claude in Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry). On Claude in Microsoft Foundry, it’s available for deployments hosted on Anthropic, with its own model ID, `claude-fable-5-2-fast`.
 
-Fast mode is also available for Claude Mythos 5.2 in Messages API requests on the Claude API. [Availability of fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode#feature-availability) lists every platform where Claude Mythos 5.2 has fast mode.
+Fast mode is also available for Claude Mythos 5.2 in Messages API requests. [Availability of fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode#feature-availability) lists every platform where Claude Mythos 5.2 has fast mode.
 
 ### Thinking blocks stay with the account that produced them
 
@@ -128,9 +128,9 @@ Claude Fable 5.2 runs safety classifiers, and everything in [Refusals and fallba
 
 Claude Fable 5.2 and Claude Mythos 5.2 share these prices, in USD:
 
-| Base input | 5m cache writes | 1h cache writes | Cache reads  | Output     |
-| ---------- | --------------- | --------------- | ------------ | ---------- |
-| $8 / MTok  | $10 / MTok      | $16 / MTok      | $0.20 / MTok | $40 / MTok |
+| Base input | 5m cache writes | 1h cache writes | Cache reads | Output |
+| ----- | ----- | ----- | ----- | ----- |
+| $8 / MTok | $10 / MTok | $16 / MTok | $0.20 / MTok | $40 / MTok |
 
 Input and output cost less than on Claude Fable 5.1 and Claude Mythos 5.1. Claude Fable 5.1 and Claude Mythos 5.1 cost $10 USD per million input tokens and $50 USD per million output tokens. Cache reads (hits and refreshes) cost 0.025 times the base input price, the same multiplier as on those models. [Batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing) is $4 USD per million input tokens and $20 USD per million output tokens. [Fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) for Claude Fable 5.2 and Claude Mythos 5.2 costs $16 USD per million input tokens and $80 USD per million output tokens. See [Fast mode pricing](https://platform.claude.com/docs/en/about-claude/pricing#fast-mode-pricing). See [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) for data residency and tool pricing.
 
@@ -210,7 +210,7 @@ Then review these items:
 2. **Check model switches.** If a router or fallback moves conversations between models, expect every model except Claude Mythos 5.2 to drop Claude Fable 5.2’s thinking blocks, Claude Fable 5.1 and Claude Opus 5.5 included. See [Only Claude Fable 5.2 and Claude Mythos 5.2 read Claude Fable 5.2 thinking blocks](https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2#thinking-blocks-are-tied-to-the-model-that-produced-them).
 3. **Move computer use to the toolset.** If you use the `computer_20251124` tool anywhere except Amazon Bedrock, Claude Fable 5.2 returns a 400 error for that tool. Declare `computer_toolset_20260801` instead. For the change itself, see [Use the computer use toolset instead of `computer_20251124`](https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2#computer-20251124-is-not-supported).
 4. **Update the advisor.** If you use the advisor tool with Claude Fable 5.2 as the executor, set the advisor’s `model` to `claude-fable-5-2` or `claude-mythos-5-2`. See [A Claude Fable 5.2 executor needs a Claude Fable 5.2 or Claude Mythos 5.2 advisor](https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2#advisor-tool-pairs).
-5. **Re-run your evals.** Include an effort sweep that starts at the default, `high`. See [Recommended effort levels for Claude Fable 5.2](https://platform.claude.com/docs/en/build-with-claude/effort#recommended-effort-levels-for-claude-fable-5-2).
+5. **Rerun your evals.** Include an effort sweep that starts at the default, `high`. See [Recommended effort levels for Claude Fable 5.2](https://platform.claude.com/docs/en/build-with-claude/effort#recommended-effort-levels-for-claude-fable-5-2).
 
 See the [Claude Fable 5.2 and Claude Mythos 5.2 migration guide](https://platform.claude.com/docs/en/models/fable-5-2/migration-guide) for step-by-step instructions, including from Claude Mythos 5.1 and from Claude Opus models. For model-specific prompting patterns, see [Prompting Claude Fable 5.2](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2).
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart
-fetched_at: 2026-11-16T07:30:42.057911+00:00
+fetched_at: 2026-11-23T08:28:13.624135+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,7 +43,7 @@ You need a [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/o
         For Linux environments, download the release binary directly.
 
         ```bash
-        VERSION=2.9.0
+        VERSION=2.12.1
         OS=$(uname -s | tr '[:upper:]' '[:lower:]')
         case $(uname -m) in
           x86_64) ARCH=amd64 ;;
@@ -112,7 +112,7 @@ To run the CLI examples, install the CLI:
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=2.9.0
+    VERSION=2.12.1
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     case $(uname -m) in
       x86_64) ARCH=amd64 ;;

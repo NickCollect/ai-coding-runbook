@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/update
-fetched_at: 2026-11-16T07:30:52.433895+00:00
+fetched_at: 2026-11-23T08:28:25.318454+00:00
 fetch_method: mintlify_md
 ---
 
@@ -124,6 +124,10 @@ Update an existing environment's configuration.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -422,6 +426,32 @@ Update an existing environment's configuration.
     - `"organization"`
 
     - `"account"`
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `environment_archived` (HTTP status 400)
+
+  The environment is archived, so it cannot be updated.
+
+- `invalid_config_type_change` (HTTP status 400)
+
+  `config.type` differs from the environment's stored type, which cannot change after creation.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `environment_update_disabled` (HTTP status 403)
+
+  Anthropic has turned off updating environments for this organization. Existing environments still work as they are.
 
 ## Example
 

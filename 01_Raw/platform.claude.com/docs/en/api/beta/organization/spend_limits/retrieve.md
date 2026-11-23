@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/retrieve
-fetched_at: 2026-11-02T07:00:50.464258+00:00
+fetched_at: 2026-11-23T08:28:31.070867+00:00
 fetch_method: mintlify_md
 ---
 
@@ -154,6 +154,16 @@ Retrieve a spend limit by ID.
     RFC 3339 datetime at which the spend limit was last modified.
 
     format: date-time
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `spend_limits_admin_api_writes_not_enabled` (HTTP status 403)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
 
 ## Example
 

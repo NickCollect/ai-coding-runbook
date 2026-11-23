@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/sessions
-fetched_at: 2026-11-16T07:30:43.134611+00:00
+fetched_at: 2026-11-23T08:28:14.924667+00:00
 fetch_method: mintlify_md
 ---
 
@@ -445,12 +445,12 @@ Each event in `initial_events` (java, php: `initialEvents`; csharp, go: `Initial
 
 The create request is rejected in the following cases:
 
-| Condition                                                                                                                                                 | Status |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| More than one `user.define_outcome` event                                                                                                                 | 400    |
-| A `user.define_outcome` event without a `rubric`                                                                                                          | 400    |
-| More than 100 file-sourced [`document` content blocks](https://platform.claude.com/docs/en/build-with-claude/files#document-blocks) across the whole list | 400    |
-| A request body over 32 MB                                                                                                                                 | 413    |
+| Condition | Status |
+| ----- | ----- |
+| More than one `user.define_outcome` event | 400 |
+| A `user.define_outcome` event without a `rubric` | 400 |
+| More than 100 file-sourced [`document` content blocks](https://platform.claude.com/docs/en/build-with-claude/files#document-blocks) across the whole list | 400 |
+| A request body over 32 MB | 413 |
 
 A `user.define_outcome` event in `initial_events` (java, php: `initialEvents`; csharp, go: `InitialEvents`) is accepted under the same conditions as sending one to an existing session; see [Define outcomes](https://platform.claude.com/docs/en/managed-agents/define-outcomes).
 

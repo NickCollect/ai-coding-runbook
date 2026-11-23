@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages/count_tokens
-fetched_at: 2026-11-16T07:30:51.879819+00:00
+fetched_at: 2026-11-23T08:28:24.762961+00:00
 fetch_method: mintlify_md
 ---
 
@@ -124,6 +124,10 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -858,7 +862,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `page_age: optional string or null`
 
-            - `BetaWebSearchToolRequestError object`
+            - `BetaWebSearchToolRequestErrorObject object`
 
               - `type: "web_search_tool_result_error"`
 
@@ -3613,6 +3617,20 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `billing_policy: optional BetaBillingPolicy or null`
+
+  Declares which organization is billed when this body is sent to `/v1/messages`. Accepted here so that you can count the tokens of the exact body you will send, and otherwise ignored: counting tokens bills nobody, so no user profile is required.
+
+  - `type: "billing_policy"`
+
+  - `bill_to: optional BetaBillTo`
+
+    Who is billed. `self`, the default, bills your organization, as if `billing_policy` were omitted. `user_profile` bills the customer behind the user profile the request names; if that customer has not linked an Anthropic organization to the profile, or has not allowed your organization to bill it, the request is rejected rather than billed to you.
+
+    - `"self"`
+
+    - `"user_profile"`
+
 - `cache_control: optional BetaCacheControlEphemeral or null`
 
   Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
@@ -4131,6 +4149,76 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
   - `input_tokens: number`
 
     The total number of tokens across the provided list of messages, system prompt, and tools.
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `available_tools_limit_exceeded` (HTTP status 400)
+
+  The tools available after a message exceed a limit on their number or their size.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `compaction_block_ambiguous` (HTTP status 400)
+
+  `messages` holds more than one `compaction` block with content. Send only the block the conversation returned last.
+
+- `compaction_block_misplaced` (HTTP status 400)
+
+  The `compaction` block is not the first block of the conversation, or is in a `system` message.
+
+- `compaction_content_mismatch` (HTTP status 400)
+
+  The `compaction` block's `content` differs from the text its `signature` recorded.
+
+- `compaction_nothing_to_summarize` (HTTP status 400)
+
+  `messages` holds no `user` or `assistant` content to summarize or adopt.
+
+- `compaction_signature_invalid` (HTTP status 400)
+
+  The `compaction` block's `signature` does not verify.
+
+- `compaction_tool_changes_mismatch` (HTTP status 400)
+
+  The `compaction` block's `tool_changes` differs from what was returned with the block.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `request_body_encoding_invalid` (HTTP status 400)
+
+  The request body is not valid for its `Content-Encoding`.
+
+- `request_body_encoding_unsupported` (HTTP status 400)
+
+  The request's `Content-Encoding` is not supported.
+
+- `tool_name_conflict` (HTTP status 400)
+
+  A tool made available in `messages` takes a name that an available tool of another kind, or of another MCP server, already holds.
+
+- `tool_reference_unresolved` (HTTP status 400)
+
+  A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
+
+- `request_body_too_large_after_decoding` (HTTP status 413)
+
+  The compressed request body exceeds the request size limit once decoded.
+
+- `enforced_spend_limit_reached` (HTTP status 429)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
+- `compaction_unavailable` (HTTP status 529)
+
+  The compaction could not be completed for a transient server reason. Retry the request.
 
 ## Example
 

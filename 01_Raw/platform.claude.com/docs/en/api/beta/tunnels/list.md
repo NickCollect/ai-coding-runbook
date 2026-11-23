@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/list
-fetched_at: 2026-11-16T07:30:54.984180+00:00
+fetched_at: 2026-11-23T08:28:28.124597+00:00
 fetch_method: mintlify_md
 ---
 
@@ -138,6 +138,10 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/workspaces/members/add
-fetched_at: 2026-11-02T07:00:40.183603+00:00
+fetched_at: 2026-11-23T08:28:23.391819+00:00
 fetch_method: mintlify_md
 ---
 
@@ -80,6 +80,20 @@ Create Workspace Member
     - `"workspace_restricted_developer"`
 
     - `"workspace_user"`
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `workspace_member_limit_exceeded` (HTTP status 400)
+
+  The workspace has reached the member limit that Anthropic set for it.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ## Example
 

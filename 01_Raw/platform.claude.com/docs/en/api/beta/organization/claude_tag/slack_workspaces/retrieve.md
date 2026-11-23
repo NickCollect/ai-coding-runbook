@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/claude_tag/slack_workspaces/retrieve
-fetched_at: 2026-11-16T07:30:59.398594+00:00
+fetched_at: 2026-11-23T08:28:33.037078+00:00
 fetch_method: mintlify_md
 ---
 
@@ -132,6 +132,10 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -390,6 +394,28 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
     Time Claude Tag's record of the workspace last changed. It moves on every change to a setting, and can also move when something no response holds changes, so a later value says to read the workspace again, not that a setting changed. Attaching or detaching a Bundle does not by itself move it.
 
     format: date-time
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 ## Example
 

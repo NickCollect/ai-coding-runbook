@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/cost_report/retrieve
-fetched_at: 2026-11-16T07:30:56.859140+00:00
+fetched_at: 2026-11-23T08:28:30.132232+00:00
 fetch_method: mintlify_md
 ---
 
@@ -161,6 +161,10 @@ This endpoint is part of the legacy Usage and Cost API. For new integrations, us
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 

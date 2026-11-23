@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization
-fetched_at: 2026-11-16T07:30:49.364709+00:00
+fetched_at: 2026-11-23T08:28:22.163632+00:00
 fetch_method: mintlify_md
 ---
 
@@ -71,15 +71,11 @@ curl https://api.anthropic.com/v1/organizations/me \
 
 - `ConcurrentMembershipChangeErrorDetails object`
 
-  Another change to the organization's members is in progress. Retry the request once it completes.
-
   - `error_code: "concurrent_membership_change"`
 
 ### Org Member Limit Exceeded Error Details
 
 - `OrgMemberLimitExceededErrorDetails object`
-
-  The organization has reached the member limit that Anthropic set for it. Pending invites count toward the limit.
 
   - `error_code: "org_member_limit_exceeded"`
 
@@ -131,9 +127,45 @@ curl https://api.anthropic.com/v1/organizations/me \
 
 - `RBACRoleNotFoundErrorDetails object`
 
+  - `error_code: "rbac_role_not_found"`
+
+## Errors
+
+### org_member_limit_exceeded
+
+HTTP status 400
+
+- `"org_member_limit_exceeded"`
+
+  The organization has reached the member limit that Anthropic set for it. Pending invites count toward the limit.
+
+  - `details: OrgMemberLimitExceededErrorDetails`
+
+    - `error_code: "org_member_limit_exceeded"`
+
+### rbac_role_not_found
+
+HTTP status 404
+
+- `"rbac_role_not_found"`
+
   No RBAC Role with this ID was found.
 
-  - `error_code: "rbac_role_not_found"`
+  - `details: RBACRoleNotFoundErrorDetails`
+
+    - `error_code: "rbac_role_not_found"`
+
+### concurrent_membership_change
+
+HTTP status 409
+
+- `"concurrent_membership_change"`
+
+  Another change to the organization's members is in progress. Retry the request once it completes.
+
+  - `details: ConcurrentMembershipChangeErrorDetails`
+
+    - `error_code: "concurrent_membership_change"`
 
 ## Organization › API Keys
 
@@ -688,6 +720,24 @@ Update API Key
 
     - `"inactive"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `org_api_key_limit_exceeded` (HTTP status 400)
+
+  The organization has reached its limit of active API keys.
+
+- `workspace_api_key_limit_exceeded` (HTTP status 400)
+
+  The workspace has reached its limit of active API keys.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -752,7 +802,7 @@ Create an external key config owned by the caller's organization.
 
     - `kms_arn: string`
 
-      Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+      Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
       maxLength: 2048
 
@@ -808,7 +858,7 @@ Create an external key config owned by the caller's organization.
 
 - `user_profile_id: optional string or null`
 
-  ID of a user profile to bind the key to. A user profile represents one of your customers: bind a customer's key to that customer's user profile. A key bound to a user profile can only be attached to a Workspace that has the same user profile, and the binding cannot be changed later. Omit this field only for your organization's own key, because a key created without a user profile ID can be attached to any Workspace, including another customer's.
+  ID of a user profile to bind the key to. A user profile represents one of your customers: bind a customer's key to that customer's user profile. A key bound to a user profile can only be attached to a Workspace that has the same user profile, and the binding cannot be changed later. Omit this field only for your organization's own key, never a customer's. A key created without a user profile ID can't be attached to a Workspace that has a user profile, and you can't add one to the key later.
 
 #### Returns
 
@@ -866,7 +916,7 @@ Create an external key config owned by the caller's organization.
 
       - `kms_arn: string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -914,7 +964,21 @@ Create an external key config owned by the caller's organization.
 
   - `user_profile_id: string or null`
 
-    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can only be attached to a Workspace that has no user profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `user_profile_not_found` (HTTP status 400)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -1034,7 +1098,7 @@ Results are ordered by creation time (newest first). Use the
 
       - `kms_arn: string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -1082,7 +1146,7 @@ Results are ordered by creation time (newest first). Use the
 
   - `user_profile_id: string or null`
 
-    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can only be attached to a Workspace that has no user profile.
 
 - `next_page: string or null`
 
@@ -1202,7 +1266,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
       - `kms_arn: string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -1250,7 +1314,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
   - `user_profile_id: string or null`
 
-    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can only be attached to a Workspace that has no user profile.
 
 #### Example
 
@@ -1290,8 +1354,8 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
 Partially update an external key config. Omitted fields are left unchanged.
 
 `display_name` is always editable. `geo` and `provider_config` cannot
-be changed once any workspace references this config, because previously
-encrypted data requires the original key identity to decrypt.
+be changed once any workspace references this config, and a Google Cloud
+key's provider and `key_name` cannot be changed at all.
 
 #### Path parameters
 
@@ -1331,7 +1395,7 @@ encrypted data requires the original key identity to decrypt.
 
     - `kms_arn: string`
 
-      Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+      Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
       maxLength: 2048
 
@@ -1431,7 +1495,7 @@ encrypted data requires the original key identity to decrypt.
 
       - `kms_arn: string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -1479,7 +1543,21 @@ encrypted data requires the original key identity to decrypt.
 
   - `user_profile_id: string or null`
 
-    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can only be attached to a Workspace that has no user profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_in_workspace_policy` (HTTP status 400)
+
+  The External Key can't be deleted or reconfigured while the organization's Workspace Policy lists it as an allowed key.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -1548,6 +1626,20 @@ The request is rejected if any workspace still references this config.
 
   ID of the deleted External Key.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_in_workspace_policy` (HTTP status 400)
+
+  The External Key can't be deleted or reconfigured while the organization's Workspace Policy lists it as an allowed key.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -1610,6 +1702,16 @@ message if it failed or timed out.
   - `"failure"`
 
   - `"success"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -1870,6 +1972,16 @@ matched as the JWT's `iss` claim and is not fetched.
   - `updated_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -2576,6 +2688,16 @@ session.
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -2781,6 +2903,16 @@ issuer cannot be changed), or recreate them against another issuer.
   - `updated_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -3067,6 +3199,16 @@ manage rules whose `oauth_scope` is `workspace:developer` or
   - `workspace_ids: array of string`
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -3805,6 +3947,16 @@ Console session.
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -4020,6 +4172,16 @@ other scopes require a Console session.
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -4139,6 +4301,16 @@ other scopes require a Console session.
   - `workspace_name: string or null`
 
     Workspace display name. Populated when listing; null in the enable response.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -4310,6 +4482,16 @@ Console session.
 
   Tagged ID of the workspace named in the delete request. Removal is idempotent.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -4452,6 +4634,44 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
     - `"expired"`
 
     - `"pending"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `already_member` (HTTP status 400)
+
+  The email address already belongs to a user in the organization. The message names the user.
+
+- `cannot_invite_emails_with_unverified_domains` (HTTP status 400)
+
+  The email address's domain is not one of the verified domains of the organization's parent organization.
+
+- `email_domain_not_allowed` (HTTP status 400)
+
+  The organization restricts invites to an allowed list of email domains, and the list is empty or does not include the email address's domain.
+
+- `invite_already_exists` (HTTP status 400)
+
+  A pending invite already exists for the email address. The message names the invite.
+
+- `org_member_limit_exceeded` (HTTP status 400)
+
+  The organization has reached the member limit that Anthropic set for it. Pending invites count toward the limit.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -4815,6 +5035,16 @@ Delete a pending invite.
 
   ID of the Invite.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -4943,6 +5173,16 @@ accounts.
   - `updated_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -5322,6 +5562,16 @@ interactive credential (a user OAuth token or a Console session).
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -5440,6 +5690,16 @@ those rules first or change their target to another service account.
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -5553,6 +5813,16 @@ rejected.
     - `"workspace_restricted_developer"`
 
     - `"workspace_user"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -5743,6 +6013,16 @@ to the implicit `workspace_user` membership. Archived workspaces return
 - `workspace_id: string`
 
   Tagged workspace ID (`wrkspc_...`) named in the delete request.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -6084,6 +6364,16 @@ Update a member's organization role.
 
     - `"user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -6142,6 +6432,24 @@ Remove a member from the organization.
 - `id: string`
 
   ID of the User.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cannot_remove_last_member` (HTTP status 400)
+
+  The user is the organization's only member. Add another member before removing this one.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `concurrent_membership_change` (HTTP status 409)
+
+  Another change to the organization's members is in progress. Retry the request once it completes.
 
 #### Example
 
@@ -6292,12 +6600,13 @@ List Workspaces
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: string`
 
@@ -6426,12 +6735,13 @@ Create Workspace
   organization. When set, data stored for this Workspace is encrypted with the
   referenced key. Create key configurations with the External Keys API. On
   Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-  organization's own key must be a single-Region key in the same AWS account and
-  Region as the Workspace. On that platform the key is validated against this
-  Workspace when it is attached, so a key-policy problem is reported as an error
-  on this request. This field is write-once: once a key is attached to a Workspace
-  it cannot be detached or replaced. To rotate key material, rotate the underlying
-  key on your cloud KMS; the `external_key_id` stays the same.
+  organization's own key must be a single-Region key in the same Region as the
+  Workspace. If that key is outside the Workspace's AWS account, it can be attached
+  only by updating an active Workspace. On that platform the key is validated
+  against this Workspace when it is attached, so a key-policy problem is reported
+  as an error on this request. This field is write-once: once a key is attached to
+  a Workspace it cannot be detached or replaced. To rotate key material, rotate
+  the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
 - `tags: optional map[string] or null`
 
@@ -6522,12 +6832,13 @@ Create Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: string`
 
@@ -6541,6 +6852,40 @@ Create Workspace
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_validation_failed` (HTTP status 400)
+
+  The External Key failed Anthropic's validation, so the request was refused. The message gives the reason, if there is one.
+
+- `external_key_validation_timed_out` (HTTP status 400)
+
+  Anthropic's validation of the External Key did not finish in time, so the request was refused. Wait a moment, then send the request again.
+
+- `key_profile_mismatch` (HTTP status 400)
+
+  After this request, the External Key and the Workspace would not have the same user profile. A key and its Workspace must have the same user profile, or both have none.
+
+- `user_profile_not_found` (HTTP status 400)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `workspace_policy_violation` (HTTP status 400)
+
+  The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `external_key_changed` (HTTP status 409)
+
+  The external key changed while the request was validating it. Send the request again.
+
 #### Example
 
 ```bash
@@ -6549,7 +6894,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces \
     -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
-          "name": "x",
+          "name": "Workspace Name",
           "display_color": "#6C5BB9",
           "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
           "tags": {
@@ -6686,12 +7031,13 @@ Get Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: string`
 
@@ -6795,12 +7141,13 @@ Update Workspace
   organization. When set, data stored for this Workspace is encrypted with the
   referenced key. Create key configurations with the External Keys API. On
   Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-  organization's own key must be a single-Region key in the same AWS account and
-  Region as the Workspace. On that platform the key is validated against this
-  Workspace when it is attached, so a key-policy problem is reported as an error
-  on this request. This field is write-once: once a key is attached to a Workspace
-  it cannot be detached or replaced. To rotate key material, rotate the underlying
-  key on your cloud KMS; the `external_key_id` stays the same.
+  organization's own key must be a single-Region key in the same Region as the
+  Workspace. If that key is outside the Workspace's AWS account, it can be attached
+  only by updating an active Workspace. On that platform the key is validated
+  against this Workspace when it is attached, so a key-policy problem is reported
+  as an error on this request. This field is write-once: once a key is attached to
+  a Workspace it cannot be detached or replaced. To rotate key material, rotate
+  the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
 - `name: optional string`
 
@@ -6814,7 +7161,7 @@ Update Workspace
 
 - `user_profile_id: optional string`
 
-  ID of a user profile to attach to the Workspace. Every inference request through the Workspace must then name this user profile; the API rejects a request that names none or a different one. Once set, it can't be replaced or removed (sending the same ID again changes nothing); only deleting the user profile clears it. The default Workspace can't have a user profile.
+  ID of a user profile to attach to the Workspace. Every inference request through the Workspace must then name this user profile; the API rejects a request that names none or a different one. Once set, it can't be replaced or removed (sending the same ID again changes nothing); only deleting the user profile clears it. It can't be set on a Workspace whose External Key isn't bound to this user profile. The default Workspace can't have a user profile.
 
 #### Returns
 
@@ -6897,12 +7244,13 @@ Update Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: string`
 
@@ -6916,6 +7264,40 @@ Update Workspace
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_validation_failed` (HTTP status 400)
+
+  The External Key failed Anthropic's validation, so the request was refused. The message gives the reason, if there is one.
+
+- `external_key_validation_timed_out` (HTTP status 400)
+
+  Anthropic's validation of the External Key did not finish in time, so the request was refused. Wait a moment, then send the request again.
+
+- `key_profile_mismatch` (HTTP status 400)
+
+  After this request, the External Key and the Workspace would not have the same user profile. A key and its Workspace must have the same user profile, or both have none.
+
+- `user_profile_not_found` (HTTP status 400)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `workspace_policy_violation` (HTTP status 400)
+
+  The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `external_key_changed` (HTTP status 409)
+
+  The external key changed while the request was validating it. Send the request again.
+
 #### Example
 
 ```bash
@@ -6926,6 +7308,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \
     -d '{
           "display_color": "#6C5BB9",
           "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
+          "name": "Workspace Name",
           "tags": {
             "env": "prod",
             "team": "platform"
@@ -7058,12 +7441,13 @@ Archive Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: string`
 
@@ -7076,6 +7460,16 @@ Archive Workspace
   - `user_profile_id: string or null`
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -7277,7 +7671,7 @@ the remaining entries.
 
     - `type: string`
 
-      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
     - `org_limit: number or null`
 
@@ -7408,7 +7802,7 @@ Changes take effect within about an hour.
 
   - `type: WorkspaceRateLimitType`
 
-    Rate limiter type.
+    Rate limiter type. `input_tokens_per_minute` counts every input token, cache reads included. `input_tokens_per_minute_cache_aware` does not count cache reads, and on current models the organization's input-token limit usually has this type. A workspace limit of either type applies alongside the organization's limit, not in place of it. Because cache reads count toward an `input_tokens_per_minute` limit, it can reject requests that read mostly from the cache while the organization's limit still has room.
 
     - `"fast_itpmca"`
 
@@ -7530,7 +7924,7 @@ Changes take effect within about an hour.
 
     - `type: string`
 
-      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
     - `org_limit: number or null`
 
@@ -7571,6 +7965,16 @@ Changes take effect within about an hour.
   - `workspace_id: string`
 
     ID of the Workspace this entry applies to.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -7801,6 +8205,20 @@ Create Workspace Member
 
     - `"workspace_user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `workspace_member_limit_exceeded` (HTTP status 400)
+
+  The workspace has reached the member limit that Anthropic set for it.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -7976,6 +8394,20 @@ Update Workspace Member
 
     - `"workspace_user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `workspace_member_limit_exceeded` (HTTP status 400)
+
+  The workspace has reached the member limit that Anthropic set for it.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -8040,6 +8472,16 @@ Delete Workspace Member
 - `workspace_id: string`
 
   ID of the Workspace.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -8258,6 +8700,16 @@ accounts cannot be added and are rejected.
 
     - `"workspace_user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -8461,6 +8913,16 @@ rejected.
 
     - `"workspace_user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -8531,6 +8993,16 @@ membership. Archived workspaces return 400.
 - `workspace_id: string`
 
   Tagged workspace ID (`wrkspc_...`) named in the delete request.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -8711,7 +9183,7 @@ the remaining entries.
 
     - `type: string`
 
-      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
     - `value: number`
 
@@ -8892,6 +9364,16 @@ compliance settings.
       - `type: "disabled"`
 
         default: disabled
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -11189,6 +11671,16 @@ organizations.
 
 - `next_page: string or null`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
 #### Example
 
 ```bash
@@ -12203,6 +12695,16 @@ the member was blocked on. Anthropic emails the requester unless
 
   - `"pending"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -12532,6 +13034,16 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
     - `"pending"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -12660,6 +13172,16 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -12965,6 +13487,16 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -13030,6 +13562,24 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `id: string`
 
     ID of the RBAC Group.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -13209,6 +13759,24 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the User.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -13276,6 +13844,24 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `user_id: string`
 
     ID of the User.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -13389,6 +13975,20 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
   Opaque cursor for the next page. Pass as the `page` parameter on the next
   request.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `parent_organization_required` (HTTP status 400)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
 #### Example
 
 ```bash
@@ -13491,6 +14091,24 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
     RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `parent_organization_required` (HTTP status 400)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
+- `rbac_role_not_found` (HTTP status 404)
+
+  No RBAC Role with this ID was found.
 
 #### Example
 
@@ -13675,6 +14293,24 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
 
   Opaque cursor for the next page. Pass as the `page` parameter on the next
   request.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `parent_organization_required` (HTTP status 400)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
+- `rbac_role_not_found` (HTTP status 404)
+
+  No RBAC Role with this ID was found.
 
 #### Example
 

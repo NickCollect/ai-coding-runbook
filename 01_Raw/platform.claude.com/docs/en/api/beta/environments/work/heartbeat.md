@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/heartbeat
-fetched_at: 2026-11-16T07:30:52.560213+00:00
+fetched_at: 2026-11-23T08:28:25.607016+00:00
 fetch_method: mintlify_md
 ---
 
@@ -139,6 +139,10 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -216,6 +220,16 @@ Record a heartbeat for a work item to maintain the lease.
   - `ttl_seconds: number`
 
     Effective TTL applied to the lease
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `heartbeat_precondition_failed` (HTTP status 412)
+
+  `expected_last_heartbeat` does not match the stored heartbeat, so another worker may hold the lease.
 
 ## Example
 

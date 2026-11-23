@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill
-fetched_at: 2026-11-16T07:30:48.398947+00:00
+fetched_at: 2026-11-23T08:28:21.108011+00:00
 fetch_method: mintlify_md
 ---
 
@@ -63,16 +63,16 @@ The skill does not activate for general programming tasks, ML/data-science work,
 
 The skill detects your project’s language automatically by examining project files (for example, `requirements.txt` for Python, `tsconfig.json` for TypeScript, `go.mod` for Go) and loads the appropriate documentation.
 
-| Language   | Messages API SDK | Tool runner | Managed Agents |
-| ---------- | ---------------- | ----------- | -------------- |
-| Python     | Yes              | Yes (beta)  | Yes (beta)     |
-| TypeScript | Yes              | Yes (beta)  | Yes (beta)     |
-| C#         | Yes              | Yes (beta)  | Yes (beta)     |
-| Go         | Yes              | Yes (beta)  | Yes (beta)     |
-| Java       | Yes              | Yes (beta)  | Yes (beta)     |
-| PHP        | Yes              | Yes (beta)  | Yes (beta)     |
-| Ruby       | Yes              | Yes (beta)  | Yes (beta)     |
-| cURL       | Yes              | N/A         | Yes (beta)     |
+| Language | Messages API SDK | Tool runner | Managed Agents |
+| ----- | ----- | ----- | ----- |
+| Python | Yes | Yes (beta) | Yes (beta) |
+| TypeScript | Yes | Yes (beta) | Yes (beta) |
+| C# | Yes | Yes (beta) | Yes (beta) |
+| Go | Yes | Yes (beta) | Yes (beta) |
+| Java | Yes | Yes (beta) | Yes (beta) |
+| PHP | Yes | Yes (beta) | Yes (beta) |
+| Ruby | Yes | Yes (beta) | Yes (beta) |
+| cURL | Yes | N/A | Yes (beta) |
 
 If your project uses multiple languages, Claude asks which one applies. For unsupported languages (Rust, Swift, C++), the skill provides cURL/raw HTTP examples.
 

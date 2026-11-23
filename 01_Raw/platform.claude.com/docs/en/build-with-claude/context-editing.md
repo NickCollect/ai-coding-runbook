@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/context-editing
-fetched_at: 2026-11-16T07:30:41.506986+00:00
+fetched_at: 2026-11-23T08:28:13.065632+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,6 +39,7 @@ featureMetadata:
     Amazon Bedrock: beta
     Amazon Bedrock (bedrock-runtime): beta
     Claude Platform on AWS: beta
+    Claude Models on Google Cloud (Anthropic managed): beta
     Claude Models on Google Cloud (Google managed): beta
     Microsoft Foundry: beta
 ---
@@ -55,10 +56,10 @@ Context editing allows you to selectively clear specific content from conversati
 * **Thinking block clearing:** For managing thinking blocks from earlier turns, with options to preserve recent thinking for context continuity
 * **Client-side SDK compaction:** An SDK-based alternative for summary-based context management (server-side compaction is generally preferred)
 
-| Approach        | Where it runs | Strategies                                                                                                 | How it works                                                                                                                                                                                                                                                                                                                                                                                                |
-| --------------- | ------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Server-side** | API           | Tool result clearing (`clear_tool_uses_20250919`)<br />Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently.                                                                                                                                                                                                                                                                 |
-| **Client-side** | SDK           | Compaction                                                                                                 | Available in [TypeScript and Ruby SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) when using [`tool_runner`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner). Generates a summary and replaces full conversation history. See [Client-side compaction](https://platform.claude.com/docs/en/build-with-claude/context-editing#client-side-compaction-sdk). |
+| Approach | Where it runs | Strategies | How it works |
+| ----- | ----- | ----- | ----- |
+| **Server-side** | API | Tool result clearing (`clear_tool_uses_20250919`)<br />Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently. |
+| **Client-side** | SDK | Compaction | Available in [TypeScript and Ruby SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) when using [`tool_runner`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner). Generates a summary and replaces full conversation history. See [Client-side compaction](https://platform.claude.com/docs/en/build-with-claude/context-editing#client-side-compaction-sdk). |
 
 ## Server-side strategies
 
@@ -81,12 +82,12 @@ The `clear_thinking_20251015` strategy manages `thinking` blocks from earlier as
 <Tip>
   **Default behavior:** When a request doesn’t include the `clear_thinking_20251015` strategy, the default varies by model class.
 
-  | Model class      | Keep all prior thinking     | Keep thinking only for the turn in progress |
-  | ---------------- | --------------------------- | ------------------------------------------- |
-  | Opus             | Claude Opus 4.5 and later   | Claude Opus 4.1 and earlier                 |
-  | Sonnet           | Claude Sonnet 4.6 and later | Claude Sonnet 4.5 (deprecated) and earlier  |
-  | Haiku            | Claude Haiku 5.5 and later  | Claude Haiku 4.5 and earlier                |
-  | Fable and Mythos | All models                  | (none)                                      |
+  | Model class | Keep all prior thinking | Keep thinking only for the turn in progress |
+  | ----- | ----- | ----- |
+  | Opus | Claude Opus 4.5 and later | Claude Opus 4.1 and earlier |
+  | Sonnet | Claude Sonnet 4.6 and later | Claude Sonnet 4.5 (deprecated) and earlier |
+  | Haiku | Claude Haiku 5.5 and later | Claude Haiku 4.5 and earlier |
+  | Fable and Mythos | All models | (none) |
 
   Use this strategy to override the default. If your code runs across multiple model classes, include this strategy and set `keep` explicitly rather than relying on the per-model default.
 </Tip>
@@ -954,9 +955,9 @@ Use thinking block clearing to manage context and prompt caching in conversation
 
 The `clear_thinking_20251015` strategy supports the following configuration:
 
-| Configuration option | Default                              | Description                                                                                                                                                                                        |
-| -------------------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `keep`               | `{type: "thinking_turns", value: 1}` | Defines how many recent assistant turns keep their thinking blocks. Use `{type: "thinking_turns", value: N}` where N must be > 0 to keep the last N turns, or `"all"` to keep all thinking blocks. |
+| Configuration option | Default | Description |
+| ----- | ----- | ----- |
+| `keep` | `{type: "thinking_turns", value: 1}` | Defines how many recent assistant turns keep their thinking blocks. Use `{type: "thinking_turns", value: N}` where N must be > 0 to keep the last N turns, or `"all"` to keep all thinking blocks. |
 
 A request that includes this strategy without `keep` gets `{type: "thinking_turns", value: 1}` on every model, including models whose [per-model default](https://platform.claude.com/docs/en/build-with-claude/context-editing#thinking-block-clearing) keeps all thinking. A request without this strategy gets the per-model default.
 
@@ -1764,13 +1765,13 @@ You can use both thinking block clearing and tool result clearing together:
 
 ## Configuration options for tool result clearing
 
-| Configuration option | Default              | Description                                                                                                                                                                                                                                          |
-| -------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `trigger`            | 100,000 input tokens | Defines when the context editing strategy activates. Once the prompt exceeds this threshold, clearing starts. You can specify this value in either `input_tokens` or `tool_uses`.                                                                    |
-| `keep`               | 3 tool uses          | Defines how many recent tool use/result pairs to keep after clearing occurs. The API removes the oldest tool interactions first, preserving the most recent ones.                                                                                    |
-| `clear_at_least`     | None                 | Ensures a minimum number of tokens is cleared each time the strategy activates. If the API can’t clear at least the specified amount, the strategy isn’t applied. This helps determine whether context clearing is worth breaking your prompt cache. |
-| `exclude_tools`      | None                 | List of tool names whose tool uses and results should never be cleared. Useful for preserving important context.                                                                                                                                     |
-| `clear_tool_inputs`  | `false`              | Controls whether the tool call parameters are cleared along with the tool results. By default, only the tool results are cleared while keeping Claude’s original tool calls visible.                                                                 |
+| Configuration option | Default | Description |
+| ----- | ----- | ----- |
+| `trigger` | 100,000 input tokens | Defines when the context editing strategy activates. Once the prompt exceeds this threshold, clearing starts. You can specify this value in either `input_tokens` or `tool_uses`. |
+| `keep` | 3 tool uses | Defines how many recent tool use/result pairs to keep after clearing occurs. The API removes the oldest tool interactions first, preserving the most recent ones. |
+| `clear_at_least` | None | Ensures a minimum number of tokens is cleared each time the strategy activates. If the API can’t clear at least the specified amount, the strategy isn’t applied. This helps determine whether context clearing is worth breaking your prompt cache. |
+| `exclude_tools` | None | List of tool names whose tool uses and results should never be cleared. Useful for preserving important context. |
+| `clear_tool_inputs` | `false` | Controls whether the tool call parameters are cleared along with the tool results. By default, only the tool results are cleared while keeping Claude’s original tool calls visible. |
 
 ## Context editing response
 
@@ -2491,12 +2492,12 @@ Claude continues working from this summary as if it were the original conversati
 
 ### Configuration options
 
-| Parameter                 | Type    | Required | Default                                                                                                                    | Description                              |
-| ------------------------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| `enabled`                 | boolean | Yes      | -                                                                                                                          | Whether to enable automatic compaction   |
-| `context_token_threshold` | number  | No       | 100,000                                                                                                                    | Token count at which compaction triggers |
-| `model`                   | string  | No       | Same as main model                                                                                                         | Model to use for generating summaries    |
-| `summary_prompt`          | string  | No       | See [Default summary prompt](https://platform.claude.com/docs/en/build-with-claude/context-editing#default-summary-prompt) | Custom prompt for summary generation     |
+| Parameter | Type | Required | Default | Description |
+| ----- | ----- | ----- | ----- | ----- |
+| `enabled` | boolean | Yes | - | Whether to enable automatic compaction |
+| `context_token_threshold` | number | No | 100,000 | Token count at which compaction triggers |
+| `model` | string | No | Same as main model | Model to use for generating summaries |
+| `summary_prompt` | string | No | See [Default summary prompt](https://platform.claude.com/docs/en/build-with-claude/context-editing#default-summary-prompt) | Custom prompt for summary generation |
 
 #### Choosing a token threshold
 
@@ -2988,9 +2989,9 @@ Context editing is in beta on every model and eligible for zero data retention.
 
 * Availability: Available
 
-| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta   | Claude API, [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (bedrock-runtime)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
+| Status | Cloud platforms |
+| ----- | ----- |
+| Beta | All supported platforms |
 
 ### Required beta headers
 
@@ -3004,10 +3005,10 @@ Beta headers allow you to access experimental features and new model capabilitie
 
 [Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                       | HIPAA        |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| Status  | Eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements)) | Not eligible |
-| Details | Context edits (tool use clearing and thinking clearing) are applied in real time.                                                                         | —            |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements)) | Not eligible |
+| Details | Context edits (tool use clearing and thinking clearing) are applied in real time. | — |
 
 Applicable endpoints:
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/update
-fetched_at: 2026-11-09T07:30:30.284658+00:00
+fetched_at: 2026-11-23T08:28:28.587348+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,8 +16,8 @@ url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/upd
 Partially update an external key config. Omitted fields are left unchanged.
 
 `display_name` is always editable. `geo` and `provider_config` cannot
-be changed once any workspace references this config, because previously
-encrypted data requires the original key identity to decrypt.
+be changed once any workspace references this config, and a Google Cloud
+key's provider and `key_name` cannot be changed at all.
 
 ## Path parameters
 
@@ -57,7 +57,7 @@ encrypted data requires the original key identity to decrypt.
 
     - `kms_arn: string`
 
-      Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+      Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
       maxLength: 2048
 
@@ -157,7 +157,7 @@ encrypted data requires the original key identity to decrypt.
 
       - `kms_arn: string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -205,7 +205,21 @@ encrypted data requires the original key identity to decrypt.
 
   - `user_profile_id: string or null`
 
-    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can only be attached to a Workspace that has no user profile.
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_in_workspace_policy` (HTTP status 400)
+
+  The External Key can't be deleted or reconfigured while the organization's Workspace Policy lists it as an allowed key.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ## Example
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-org-data
-fetched_at: 2026-11-16T07:30:45.268838+00:00
+fetched_at: 2026-11-23T08:28:17.769149+00:00
 fetch_method: mintlify_md
 ---
 
@@ -56,13 +56,13 @@ curl --fail-with-body -sS \
 
 The `uuid` field is the canonical identifier for downstream lookups. The following table maps it to the other organization identifiers across the Compliance API:
 
-| Field                | Where                                                                                                                                                                                                                                                                                                                                                                                                                                    | Relationship to `uuid`                                                                                                                                    |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `{org_uuid}`         | Path parameter on per-organization endpoints on this page                                                                                                                                                                                                                                                                                                                                                                                | Same value                                                                                                                                                |
-| `organization_uuid`  | Activity Feed, chat, project, and session records                                                                                                                                                                                                                                                                                                                                                                                        | Same value; join on these two fields directly                                                                                                             |
-| `organization_id`    | Activity Feed, chat, and project records                                                                                                                                                                                                                                                                                                                                                                                                 | Same organization, `org_`-prefixed. Deprecated on chat and project records; use `organization_uuid` instead.                                              |
-| `organization_ids[]` | Filter on [Query the Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed), [Retrieve chats and messages](https://platform.claude.com/docs/en/manage-claude/compliance-content-data#retrieve-chats-and-messages), and the [remote session list](https://platform.claude.com/docs/en/manage-claude/compliance-sessions#retrieve-remote-sessions) (the local session list has no organization filter) | Accepts `uuid` or the `org_`-prefixed form                                                                                                                |
-| `organization_id`    | [Effective organization settings](https://platform.claude.com/docs/en/manage-claude/compliance-org-data#get-effective-organization-settings) response                                                                                                                                                                                                                                                                                    | Same value, bare UUID; this response does **not** use the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records |
+| Field | Where | Relationship to `uuid` |
+| ----- | ----- | ----- |
+| `{org_uuid}` | Path parameter on per-organization endpoints on this page | Same value |
+| `organization_uuid` | Activity Feed, chat, project, and session records | Same value; join on these two fields directly |
+| `organization_id` | Activity Feed, chat, and project records | Same organization, `org_`-prefixed. Deprecated on chat and project records; use `organization_uuid` instead. |
+| `organization_ids[]` | Filter on [Query the Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed), [Retrieve chats and messages](https://platform.claude.com/docs/en/manage-claude/compliance-content-data#retrieve-chats-and-messages), and the [remote session list](https://platform.claude.com/docs/en/manage-claude/compliance-sessions#retrieve-remote-sessions) (the local session list has no organization filter) | Accepts `uuid` or the `org_`-prefixed form |
+| `organization_id` | [Effective organization settings](https://platform.claude.com/docs/en/manage-claude/compliance-org-data#get-effective-organization-settings) response | Same value, bare UUID; this response does **not** use the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records |
 
 Most other Anthropic APIs use the `org_`-prefixed form.
 
@@ -228,7 +228,7 @@ curl --fail-with-body -sS -G \
 }
 ```
 
-See the [List Compliance Group Members](https://platform.claude.com/docs/en/api/compliance/groups/members/list) response schema for the full member record shape. The `user_id` field is the same `user_...` identifier that the Activity Feed, chat list, and remote session list accept; it also matches `user.id` on local session objects and on user-owned remote session objects (agent-owned remote sessions carry the human’s ID in `started_by_user.id` instead). To get a member’s full name, look it up through the organization users list.
+See the [List Compliance Group Members](https://platform.claude.com/docs/en/api/compliance/groups/members/list) response schema for the full member record shape. The `user_id` field is the same `user_...` identifier that the Activity Feed, chat list, and remote session list accept. It also matches `user.id` on local session objects and on user-owned remote session objects. Agent-owned remote sessions carry a human’s ID in `started_by_user.id` instead, when one is recorded. To get a member’s full name, look it up through the organization users list.
 
 ## Get effective organization settings
 

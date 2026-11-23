@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/citations
-fetched_at: 2026-11-16T07:30:40.018259+00:00
+fetched_at: 2026-11-23T08:28:11.592473+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,6 +38,7 @@ featureMetadata:
     Amazon Bedrock: stable
     Amazon Bedrock (bedrock-runtime): stable
     Claude Platform on AWS: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
     Claude Models on Google Cloud (Google managed): stable
     Microsoft Foundry: stable
 ---
@@ -265,7 +266,7 @@ The following example shows how to enable citations on a plain text document wit
       .build();
 
   Message message = client.messages().create(params);
-  System.out.println(message);
+  IO.println(message);
   ```
 
   ```php PHP
@@ -281,7 +282,7 @@ The following example shows how to enable citations on a plain text document wit
                       'type' => 'document',
                       'source' => [
                           'type' => 'text',
-                          'media_type' => 'text/plain',
+                          'mediaType' => 'text/plain',
                           'data' => 'The grass is green. The sky is blue.',
                       ],
                       'title' => 'My Document',
@@ -349,27 +350,27 @@ The following example shows how to enable citations on a plain text document wit
 
 ## How citations work
 
-Integrate citations with Claude in these steps:
+Citations work in three stages:
 
 <Steps>
-  <Step title="Provide document(s) and enable citations">
+  <Step title="You provide documents and enable citations">
     * Include documents in any of the supported formats: [PDFs](https://platform.claude.com/docs/en/build-with-claude/citations#pdf-documents), [plain text](https://platform.claude.com/docs/en/build-with-claude/citations#plain-text-documents), or [custom content](https://platform.claude.com/docs/en/build-with-claude/citations#custom-content-documents) documents.
-    * Set `citations.enabled=true` on each of your documents. Currently, citations must be enabled on all or none of the documents within a request.
-    * Only text citations are currently supported. Image citations are not yet possible.
+    * Set `citations.enabled=true` on each of your documents. A request can’t mix documents that have citations enabled with documents that don’t.
+    * Claude can cite text but not images.
   </Step>
 
-  <Step title="Documents get processed">
+  <Step title="The API processes the documents">
     * Document contents are “chunked” to define the minimum granularity of possible citations. For example, sentence chunking lets Claude cite a single sentence or chain together multiple consecutive sentences to cite a paragraph or longer passage.
 
-      * **For PDFs:** Text is extracted as described in [PDF support](https://platform.claude.com/docs/en/build-with-claude/pdf-support) and content is chunked into sentences. Citing images from PDFs is not currently supported.
-      * **For plain text documents:** Content is chunked into sentences that can be cited from.
-      * **For custom content documents:** Your provided content blocks are used as-is and no further chunking is done.
+      * **For PDFs:** The API extracts text as described in [PDF support](https://platform.claude.com/docs/en/build-with-claude/pdf-support) and chunks it into sentences. Claude can’t cite images in PDFs.
+      * **For plain text documents:** The API chunks the content into sentences.
+      * **For custom content documents:** The API uses your content blocks as they are and does no further chunking.
   </Step>
 
-  <Step title="Claude provides cited response">
-    * Responses might now include multiple text blocks where each text block can contain a claim that Claude is making and a list of citations that support the claim.
+  <Step title="Claude responds with citations">
+    * A response might include multiple text blocks. Each text block can contain a claim that Claude makes and a list of citations that support it.
 
-    * Citations reference specific locations in source documents. The format of these citations is dependent on the type of document being cited from.
+    * Citations reference specific locations in source documents. A citation’s format depends on the type of document that Claude cites.
 
       * **For PDFs:** Citations include the page number range (1-indexed).
       * **For plain text documents:** Citations include the character index range (0-indexed).
@@ -380,7 +381,7 @@ Integrate citations with Claude in these steps:
 </Steps>
 
 <Tip>
-  **Automatic chunking vs custom content**
+  **Automatic chunking versus custom content**
 
   By default, plain text and PDF documents are automatically chunked into sentences. If you need more control over citation granularity (for example, for bullet points or transcripts), use custom content documents instead. See [Document types](https://platform.claude.com/docs/en/build-with-claude/citations#document-types) for more details.
 
@@ -408,7 +409,7 @@ Integrate citations with Claude in these steps:
 
 ## Feature compatibility
 
-Citations work in conjunction with other API features including [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), [token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting), and [batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing).
+Citations work with other API features, including [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), [token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting), and [batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing).
 
 <Warning>
   **Citations and structured outputs are incompatible**
@@ -478,8 +479,6 @@ To parse the response, follow these steps:
 4. Check that each field has a value and at least one citation. The API doesn’t guarantee either.
 
 ### Using prompt caching with citations
-
-Citations and prompt caching can be used together effectively.
 
 The citation blocks generated in responses cannot be cached directly, but the source documents they reference can be cached. To optimize performance, apply `cache_control` to your top-level document content blocks.
 
@@ -709,7 +708,7 @@ The citation blocks generated in responses cannot be cached directly, but the so
       .build();
 
   Message message = client.messages().create(params);
-  System.out.println(message);
+  IO.println(message);
   ```
 
   ```php PHP
@@ -730,11 +729,11 @@ The citation blocks generated in responses cannot be cached directly, but the so
                       'type' => 'document',
                       'source' => [
                           'type' => 'text',
-                          'media_type' => 'text/plain',
+                          'mediaType' => 'text/plain',
                           'data' => $longDocument,
                       ],
                       'citations' => ['enabled' => true],
-                      'cache_control' => ['type' => 'ephemeral'], // Cache the document content
+                      'cacheControl' => ['type' => 'ephemeral'], // Cache the document content
                   ],
                   [
                       'type' => 'text',
@@ -800,11 +799,11 @@ In this example:
 
 Three document types are supported for citations. Documents can be provided directly in the message (base64, text, or URL) or uploaded through the [Files API](https://platform.claude.com/docs/en/build-with-claude/files) and referenced by `file_id`:
 
-| Type           | Best for                                                        | Chunking               | Citation format               |
-| -------------- | --------------------------------------------------------------- | ---------------------- | ----------------------------- |
-| Plain text     | Simple text documents, prose                                    | Sentence               | Character indices (0-indexed) |
-| PDF            | PDF files with text content                                     | Sentence               | Page numbers (1-indexed)      |
-| Custom content | Lists, transcripts, special formatting, more granular citations | No additional chunking | Block indices (0-indexed)     |
+| Type | Best for | Chunking | Citation format |
+| ----- | ----- | ----- | ----- |
+| Plain text | Simple text documents, prose | Sentence | Character indices (0-indexed) |
+| PDF | PDF files with text content | Sentence | Page numbers (1-indexed) |
+| Custom content | Lists, transcripts, special formatting, more granular citations | No additional chunking | Block indices (0-indexed) |
 
 <Note>
   For file types that the `document` block doesn’t support (for example, .docx and .xlsx), convert the files to plain text and include the content directly in message content. Files that are already plain text, such as .csv and .md files, can also be uploaded with an explicit `text/plain` content type. See [Working with other file formats](https://platform.claude.com/docs/en/build-with-claude/files#working-with-other-file-formats).
@@ -816,7 +815,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
 
 <Tabs>
   <Tab title="Inline text">
-    The intro example at the top of this page shows a complete plain text request in every SDK. The document block uses a `text` source:
+    For a complete plain text request, see the first example on this page. The document block uses a `text` source:
 
     ```json
     {
@@ -834,7 +833,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
   </Tab>
 
   <Tab title="Files API">
-    These examples reference a file uploaded through the [Files API](https://platform.claude.com/docs/en/build-with-claude/files) as a `document` source.
+    In these examples, the `source` of a `document` block references a file uploaded through the [Files API](https://platform.claude.com/docs/en/build-with-claude/files). The file ID in each example is the `id` that the upload returns (see [Uploading a file](https://platform.claude.com/docs/en/build-with-claude/files#uploading-a-file)).
 
     <CodeGroup>
       ```bash cURL
@@ -1010,7 +1009,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
           .build();
 
       Message citedMessage = client.messages().create(citedParams);
-      System.out.println(citedMessage);
+      IO.println(citedMessage);
       ```
 
       ```php PHP
@@ -1031,7 +1030,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
                   ],
               ],
           ],
-          model: 'claude-opus-5-5',
+          model: Model::CLAUDE_OPUS_5_5,
       );
 
       echo $citedResponse;
@@ -1082,7 +1081,9 @@ Plain text documents are automatically chunked into sentences. You can provide t
 
 ### PDF documents
 
-PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`. PDF text is extracted and chunked into sentences. As image citations are not yet supported, PDFs that are scans of documents and do not contain extractable text are not citable.
+You can provide PDF documents as base64-encoded data, as a URL, or by `file_id`. The API extracts their text and chunks it into sentences.
+
+Claude can’t cite images, so it can’t cite a PDF that is a scan of a document and has no extractable text.
 
 <Tabs>
   <Tab title="Base64">
@@ -1094,32 +1095,34 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
         -H "content-type: application/json" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2026-10-21" \
-        -d '{
-          "model": "claude-opus-5-5",
-          "max_tokens": 1024,
-          "messages": [
-            {
-              "role": "user",
-              "content": [
-                {
-                  "type": "document",
-                  "source": {
-                    "type": "base64",
-                    "media_type": "application/pdf",
-                    "data": "'"$PDF_BASE64"'"
-                  },
-                  "title": "Document Title",
-                  "context": "Context about the document that will not be cited from",
-                  "citations": {"enabled": true}
+        -d @- <<EOF
+      {
+        "model": "claude-opus-5-5",
+        "max_tokens": 1024,
+        "messages": [
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "document",
+                "source": {
+                  "type": "base64",
+                  "media_type": "application/pdf",
+                  "data": "$PDF_BASE64"
                 },
-                {
-                  "type": "text",
-                  "text": "Summarize this document."
-                }
-              ]
-            }
-          ]
-        }'
+                "title": "Document Title",
+                "context": "Context about the document that will not be cited from",
+                "citations": {"enabled": true}
+              },
+              {
+                "type": "text",
+                "text": "Summarize this document."
+              }
+            ]
+          }
+        ]
+      }
+      EOF
       ```
 
       ```bash CLI
@@ -1311,13 +1314,15 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
           .build();
 
       Message message = client.messages().create(params);
-      System.out.println(message);
+      IO.println(message);
       ```
 
       ```php PHP
       $client = new Client();
 
-      $pdfBase64 = base64_encode(file_get_contents('/path/to/document.pdf'));
+      $pdfBytes = file_get_contents('/path/to/document.pdf')
+          ?: throw new \RuntimeException('Could not read /path/to/document.pdf.');
+      $pdfBase64 = base64_encode($pdfBytes);
 
       $response = $client->messages->create(
           maxTokens: 1024,
@@ -1329,7 +1334,7 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
                           'type' => 'document',
                           'source' => [
                               'type' => 'base64',
-                              'media_type' => 'application/pdf',
+                              'mediaType' => 'application/pdf',
                               'data' => $pdfBase64,
                           ],
                           'title' => 'Document Title',
@@ -1343,7 +1348,7 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
                   ],
               ],
           ],
-          model: 'claude-opus-5-5',
+          model: Model::CLAUDE_OPUS_5_5,
       );
 
       echo json_encode($response, JSON_PRETTY_PRINT);
@@ -1592,7 +1597,7 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
           .build();
 
       Message message = client.messages().create(params);
-      System.out.println(message);
+      IO.println(message);
       ```
 
       ```php PHP
@@ -1621,7 +1626,7 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
                   ],
               ],
           ],
-          model: 'claude-opus-5-5',
+          model: Model::CLAUDE_OPUS_5_5,
       );
 
       echo json_encode($response, JSON_PRETTY_PRINT);
@@ -1631,7 +1636,7 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
       client = Anthropic::Client.new
 
       response = client.messages.create(
-        model: "claude-opus-5-5",
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         max_tokens: 1024,
         messages: [
           {
@@ -1662,7 +1667,7 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
   </Tab>
 
   <Tab title="Files API">
-    These examples reference a file uploaded through the [Files API](https://platform.claude.com/docs/en/build-with-claude/files) as a `document` source.
+    In these examples, the `source` of a `document` block references a file uploaded through the [Files API](https://platform.claude.com/docs/en/build-with-claude/files). The file ID in each example is the `id` that the upload returns (see [Uploading a file](https://platform.claude.com/docs/en/build-with-claude/files#uploading-a-file)).
 
     <CodeGroup>
       ```bash cURL
@@ -1838,7 +1843,7 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
           .build();
 
       Message citedMessage = client.messages().create(citedParams);
-      System.out.println(citedMessage);
+      IO.println(citedMessage);
       ```
 
       ```php PHP
@@ -1859,7 +1864,7 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
                   ],
               ],
           ],
-          model: 'claude-opus-5-5',
+          model: Model::CLAUDE_OPUS_5_5,
       );
 
       echo $citedResponse;
@@ -1910,7 +1915,7 @@ PDF documents can be provided as base64-encoded data, as a URL, or by `file_id`.
 
 ### Custom content documents
 
-Custom content documents give you control over citation granularity. No additional chunking is done and chunks are provided to the model according to the content blocks provided.
+Custom content documents give you control over citation granularity. In the document’s `source`, `type` is `content`, and the `content` field holds a list of content blocks. The API does no further chunking: each text block that you provide is one chunk, the smallest unit that Claude can cite.
 
 <CodeGroup>
   ```bash cURL
@@ -2148,7 +2153,7 @@ Custom content documents give you control over citation granularity. No addition
       .build();
 
   Message message = client.messages().create(params);
-  System.out.println(message);
+  IO.println(message);
   ```
 
   ```php PHP
@@ -2380,9 +2385,9 @@ Citations are available on every model and eligible for zero data retention and 
 
 * Availability: Available
 
-| Status    | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Available | Claude API, [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (bedrock-runtime)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
+| Status | Cloud platforms |
+| ----- | ----- |
+| Available | All supported platforms |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 
@@ -2392,8 +2397,8 @@ Citations are available on every model and eligible for zero data retention and 
 
 [Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
 
-| Item   | Zero data retention                                                                                                                                       | HIPAA    |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
 | Status | Eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements)) | Eligible |
 
 Applicable endpoints:

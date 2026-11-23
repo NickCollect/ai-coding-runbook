@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/claude_tag/bundles/list
-fetched_at: 2026-11-16T07:30:59.491830+00:00
+fetched_at: 2026-11-23T08:28:33.118210+00:00
 fetch_method: mintlify_md
 ---
 
@@ -133,6 +133,10 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -199,6 +203,10 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
     The Bundle's name. Always set. Read-only.
 
+  - `instructions: string or null`
+
+    Instructions for Claude, added to the instructions of every session that can use the Bundle. Null when it has none.
+
   - `updated_at: string`
 
     Time of the last change to the Bundle.
@@ -208,6 +216,28 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 - `next_page: string or null`
 
   Cursor for the next page. Null on the last page.
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 ## Example
 
@@ -228,6 +258,7 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/bundles \
       "created_at": "2019-12-27T18:11:19.117Z",
       "description": "description",
       "display_name": "display_name",
+      "instructions": "instructions",
       "type": "bundle",
       "updated_at": "2019-12-27T18:11:19.117Z"
     }

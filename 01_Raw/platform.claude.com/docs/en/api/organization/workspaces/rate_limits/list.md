@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/workspaces/rate_limits/list
-fetched_at: 2026-10-26T05:40:21.603020+00:00
+fetched_at: 2026-11-23T08:28:23.291444+00:00
 fetch_method: mintlify_md
 ---
 
@@ -173,7 +173,7 @@ the remaining entries.
 
     - `type: string`
 
-      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
     - `org_limit: number or null`
 

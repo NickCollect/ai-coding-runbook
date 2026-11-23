@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool
-fetched_at: 2026-11-16T07:30:41.086732+00:00
+fetched_at: 2026-11-23T08:28:12.539210+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,8 +38,9 @@ featureMetadata:
     Amazon Bedrock: stable
     Amazon Bedrock (bedrock-runtime):
       availability: stable
-      note: On Amazon Bedrock it is not available through the Converse API.
+      note: Available through the InvokeModel API, not the Converse API.
     Claude Platform on AWS: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
     Claude Models on Google Cloud (Google managed): stable
     Microsoft Foundry: stable
 ---
@@ -51,7 +52,7 @@ Loading every tool definition up front causes two problems as a tool library gro
 * **Context bloat:** A typical multiserver setup (GitHub, Slack, Sentry, Grafana, and Splunk) can consume \~55k tokens in definitions before Claude does any work. Tool search typically reduces this by over 85 percent, loading only the 3–5 tools Claude needs for a given request.
 * **Tool selection accuracy:** Claude’s ability to pick the right tool degrades once you exceed 30–50 available tools. Because tool search loads only a focused set of relevant tools on demand, selection accuracy stays high even across thousands of tools.
 
-For the models that support tool search, see [Model compatibility](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool#model-compatibility).
+For the models that support tool search, see [Model compatibility](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool#model-compatibility). For the platforms that support it, see [Availability](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool#feature-availability).
 
 <Tip>
   For background on the scaling challenges that tool search solves, see [Advanced tool use](https://www.anthropic.com/engineering/advanced-tool-use). Tool search’s on-demand loading is also an instance of the broader just-in-time retrieval principle described in [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents).
@@ -63,38 +64,30 @@ Tool search runs as a server-side tool, but you can also implement your own clie
   Share feedback on this feature through the [feedback form](https://forms.gle/MhcGFFwLxuwnWTkYA).
 </Note>
 
-<Warning>
-  On Amazon Bedrock, server-side tool search is available only through the [InvokeModel API](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-runtime_example_bedrock-runtime_InvokeModel_AnthropicClaude_section.html), not the Converse API.
-</Warning>
-
-<Note>
-  On [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), server-side tool search works identically to the Claude API. Claude Platform on AWS uses the Anthropic Messages API directly, so there is no InvokeModel or Converse distinction.
-</Note>
-
 ## Model compatibility
 
 Both tool search variants are available on the following models:
 
-| Model                                                                                                                                                      | Tool versions                                                       |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Claude Fable 5.2 (claude-fable-5-2)                                                                                                                        | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Mythos 5.2 (claude-mythos-5-2)                                                                                                                      | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Fable 5.1 (claude-fable-5-1)                                                                                                                        | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Mythos 5.1 (claude-mythos-5-1)                                                                                                                      | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Fable 5 (claude-fable-5)                                                                                                                            | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Mythos 5 (claude-mythos-5)                                                                                                                          | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Opus 5.5 (claude-opus-5-5)                                                                                                                          | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Opus 5 (claude-opus-5)                                                                                                                              | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Sonnet 5.5 (claude-sonnet-5-5)                                                                                                                      | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Sonnet 5 (claude-sonnet-5)                                                                                                                          | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Haiku 5.5 (claude-haiku-5-5)                                                                                                                        | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Opus 4.8 (claude-opus-4-8)                                                                                                                          | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Opus 4.7 (claude-opus-4-7)                                                                                                                          | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Opus 4.6 (claude-opus-4-6)                                                                                                                          | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Sonnet 4.6 (claude-sonnet-4-6)                                                                                                                      | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Opus 4.5 (claude-opus-4-5-20251101)                                                                                                                 | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Model | Tool versions |
+| ----- | ----- |
+| Claude Fable 5.2 (claude-fable-5-2) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Mythos 5.2 (claude-mythos-5-2) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Fable 5.1 (claude-fable-5-1) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Mythos 5.1 (claude-mythos-5-1) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Fable 5 (claude-fable-5) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Mythos 5 (claude-mythos-5) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Opus 5.5 (claude-opus-5-5) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Opus 5 (claude-opus-5) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Sonnet 5.5 (claude-sonnet-5-5) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Sonnet 5 (claude-sonnet-5) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Haiku 5.5 (claude-haiku-5-5) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Opus 4.8 (claude-opus-4-8) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Opus 4.7 (claude-opus-4-7) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Opus 4.6 (claude-opus-4-6) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Sonnet 4.6 (claude-sonnet-4-6) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Opus 4.5 (claude-opus-4-5-20251101) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 | Claude Sonnet 4.5 (claude-sonnet-4-5-20250929) (deprecated; see [Model deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
-| Claude Haiku 4.5 (claude-haiku-4-5-20251001)                                                                                                               | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
+| Claude Haiku 4.5 (claude-haiku-4-5-20251001) | `tool_search_tool_regex_20251119`, `tool_search_tool_bm25_20251119` |
 
 Claude Opus 4.1 and earlier models don’t support the tool search tool.
 
@@ -860,6 +853,8 @@ You can include the tool search tool in the [Message Batches API](https://platfo
 * **Search results:** each search returns up to 5 matching tools by default; Claude can set `limit` in its search input to any integer from 1 to 10,000
 * **Pattern and query length:** maximum 200 characters for regex patterns and 500 characters for BM25 queries
 * **Model support:** see [Model compatibility](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool#model-compatibility)
+* **Platform support:** see [Availability](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool#feature-availability)
+* **[Amazon Bedrock (`bedrock-runtime`)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy):** tool search works through the InvokeModel API
 
 ### When to use tool search
 
@@ -920,12 +915,12 @@ Tool search tool is available on every model and eligible for zero data retentio
 
 * Availability: Available
 
-| Status                | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Models                                                            |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Available             | Claude API, [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) | [All models](https://platform.claude.com/docs/en/models/overview) |
-| Available<sup>1</sup> | [Amazon Bedrock (bedrock-runtime)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy)                                                                                                                                                                                                                                                                                                                                                          | [All models](https://platform.claude.com/docs/en/models/overview) |
+| Status | Cloud platforms | Models |
+| ----- | ----- | ----- |
+| Available | Claude API, [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) | [All models](https://platform.claude.com/docs/en/models/overview) |
+| Available<sup>1</sup> | [Amazon Bedrock (bedrock-runtime)](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy) | [All models](https://platform.claude.com/docs/en/models/overview) |
 
-1. On Amazon Bedrock it is not available through the Converse API.
+1. Available through the InvokeModel API, not the Converse API.
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 
@@ -935,10 +930,10 @@ Tool search tool is available on every model and eligible for zero data retentio
 
 [Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                       | HIPAA        |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| Status  | Eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements)) | Not eligible |
-| Details | Server-side tool run by Anthropic; the tool definitions in the request are searched in memory per call and nothing is stored after the response.          | —            |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements)) | Not eligible |
+| Details | Server-side tool run by Anthropic; the tool definitions in the request are searched in memory per call and nothing is stored after the response. | — |
 
 Applicable endpoints:
 

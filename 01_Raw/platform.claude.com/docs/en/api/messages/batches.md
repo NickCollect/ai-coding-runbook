@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches
-fetched_at: 2026-11-16T07:30:48.566197+00:00
+fetched_at: 2026-11-23T08:28:21.313504+00:00
 fetch_method: mintlify_md
 ---
 
@@ -752,7 +752,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `page_age: optional string or null`
 
-                - `WebSearchToolRequestError object`
+                - `WebSearchToolRequestErrorObject object`
 
                   - `type: "web_search_tool_result_error"`
 
@@ -3233,6 +3233,28 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `enforced_spend_limit_reached` (HTTP status 429)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
 ### Example
 
 ```bash
@@ -3419,6 +3441,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -3613,6 +3649,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```bash
@@ -3791,6 +3841,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 ### Example
 
 ```bash
@@ -3868,6 +3932,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `id: string`
 
     ID of the Message Batch.
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -4314,7 +4392,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `WebSearchToolResultError object`
+              - `WebSearchToolResultErrorObject object`
 
                 - `type: "web_search_tool_result_error"`
 
@@ -4466,7 +4544,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `content: CodeExecutionToolResultBlockContent`
 
-              - `CodeExecutionToolResultError object`
+              - `CodeExecutionToolResultErrorObject object`
 
                 - `type: "code_execution_tool_result_error"`
 
@@ -4538,9 +4616,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: bash_code_execution_tool_result
 
-            - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+            - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-              - `BashCodeExecutionToolResultError object`
+              - `BashCodeExecutionToolResultErrorObject object`
 
                 - `type: "bash_code_execution_tool_result_error"`
 
@@ -4588,9 +4666,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: text_editor_code_execution_tool_result
 
-            - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+            - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `TextEditorCodeExecutionToolResultError object`
+              - `TextEditorCodeExecutionToolResultErrorObject object`
 
                 - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -4666,9 +4744,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: tool_search_tool_result
 
-            - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+            - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-              - `ToolSearchToolResultError object`
+              - `ToolSearchToolResultErrorObject object`
 
                 - `type: "tool_search_tool_result_error"`
 
@@ -5113,7 +5191,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
         - `error: ErrorObject`
 
-          - `InvalidRequestError object`
+          - `InvalidRequestErrorObject object`
 
             - `type: "invalid_request_error"`
 
@@ -5127,7 +5205,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Invalid request
 
-          - `AuthenticationError object`
+          - `AuthenticationErrorObject object`
 
             - `type: "authentication_error"`
 
@@ -5141,7 +5219,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Authentication error
 
-          - `BillingError object`
+          - `BillingErrorObject object`
 
             - `type: "billing_error"`
 
@@ -5155,7 +5233,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Billing error
 
-          - `PermissionError object`
+          - `PermissionErrorObject object`
 
             - `type: "permission_error"`
 
@@ -5169,7 +5247,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Permission denied
 
-          - `NotFoundError object`
+          - `NotFoundErrorObject object`
 
             - `type: "not_found_error"`
 
@@ -5183,7 +5261,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Not found
 
-          - `RateLimitError object`
+          - `RateLimitErrorObject object`
 
             - `type: "rate_limit_error"`
 
@@ -5197,7 +5275,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Rate limited
 
-          - `GatewayTimeoutError object`
+          - `GatewayTimeoutErrorObject object`
 
             - `type: "timeout_error"`
 
@@ -5225,7 +5303,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Internal server error
 
-          - `OverloadedError object`
+          - `OverloadedErrorObject object`
 
             - `type: "overloaded_error"`
 
@@ -5252,6 +5330,24 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
       - `type: "expired"`
 
         default: expired
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ### Example
 
@@ -5413,7 +5509,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
     - `error: ErrorObject`
 
-      - `InvalidRequestError object`
+      - `InvalidRequestErrorObject object`
 
         - `type: "invalid_request_error"`
 
@@ -5427,7 +5523,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           default: Invalid request
 
-      - `AuthenticationError object`
+      - `AuthenticationErrorObject object`
 
         - `type: "authentication_error"`
 
@@ -5441,7 +5537,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           default: Authentication error
 
-      - `BillingError object`
+      - `BillingErrorObject object`
 
         - `type: "billing_error"`
 
@@ -5455,7 +5551,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           default: Billing error
 
-      - `PermissionError object`
+      - `PermissionErrorObject object`
 
         - `type: "permission_error"`
 
@@ -5469,7 +5565,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           default: Permission denied
 
-      - `NotFoundError object`
+      - `NotFoundErrorObject object`
 
         - `type: "not_found_error"`
 
@@ -5483,7 +5579,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           default: Not found
 
-      - `RateLimitError object`
+      - `RateLimitErrorObject object`
 
         - `type: "rate_limit_error"`
 
@@ -5497,7 +5593,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           default: Rate limited
 
-      - `GatewayTimeoutError object`
+      - `GatewayTimeoutErrorObject object`
 
         - `type: "timeout_error"`
 
@@ -5525,7 +5621,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           default: Internal server error
 
-      - `OverloadedError object`
+      - `OverloadedErrorObject object`
 
         - `type: "overloaded_error"`
 
@@ -5946,7 +6042,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `content: WebSearchToolResultBlockContent`
 
-              - `WebSearchToolResultError object`
+              - `WebSearchToolResultErrorObject object`
 
                 - `type: "web_search_tool_result_error"`
 
@@ -6098,7 +6194,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             - `content: CodeExecutionToolResultBlockContent`
 
-              - `CodeExecutionToolResultError object`
+              - `CodeExecutionToolResultErrorObject object`
 
                 - `type: "code_execution_tool_result_error"`
 
@@ -6170,9 +6266,9 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               default: bash_code_execution_tool_result
 
-            - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+            - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-              - `BashCodeExecutionToolResultError object`
+              - `BashCodeExecutionToolResultErrorObject object`
 
                 - `type: "bash_code_execution_tool_result_error"`
 
@@ -6220,9 +6316,9 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               default: text_editor_code_execution_tool_result
 
-            - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+            - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `TextEditorCodeExecutionToolResultError object`
+              - `TextEditorCodeExecutionToolResultErrorObject object`
 
                 - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -6298,9 +6394,9 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               default: tool_search_tool_result
 
-            - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+            - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-              - `ToolSearchToolResultError object`
+              - `ToolSearchToolResultErrorObject object`
 
                 - `type: "tool_search_tool_result_error"`
 
@@ -6745,7 +6841,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         - `error: ErrorObject`
 
-          - `InvalidRequestError object`
+          - `InvalidRequestErrorObject object`
 
             - `type: "invalid_request_error"`
 
@@ -6759,7 +6855,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               default: Invalid request
 
-          - `AuthenticationError object`
+          - `AuthenticationErrorObject object`
 
             - `type: "authentication_error"`
 
@@ -6773,7 +6869,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               default: Authentication error
 
-          - `BillingError object`
+          - `BillingErrorObject object`
 
             - `type: "billing_error"`
 
@@ -6787,7 +6883,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               default: Billing error
 
-          - `PermissionError object`
+          - `PermissionErrorObject object`
 
             - `type: "permission_error"`
 
@@ -6801,7 +6897,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               default: Permission denied
 
-          - `NotFoundError object`
+          - `NotFoundErrorObject object`
 
             - `type: "not_found_error"`
 
@@ -6815,7 +6911,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               default: Not found
 
-          - `RateLimitError object`
+          - `RateLimitErrorObject object`
 
             - `type: "rate_limit_error"`
 
@@ -6829,7 +6925,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               default: Rate limited
 
-          - `GatewayTimeoutError object`
+          - `GatewayTimeoutErrorObject object`
 
             - `type: "timeout_error"`
 
@@ -6857,7 +6953,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
               default: Internal server error
 
-          - `OverloadedError object`
+          - `OverloadedErrorObject object`
 
             - `type: "overloaded_error"`
 
@@ -7314,7 +7410,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `content: WebSearchToolResultBlockContent`
 
-            - `WebSearchToolResultError object`
+            - `WebSearchToolResultErrorObject object`
 
               - `type: "web_search_tool_result_error"`
 
@@ -7466,7 +7562,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           - `content: CodeExecutionToolResultBlockContent`
 
-            - `CodeExecutionToolResultError object`
+            - `CodeExecutionToolResultErrorObject object`
 
               - `type: "code_execution_tool_result_error"`
 
@@ -7538,9 +7634,9 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             default: bash_code_execution_tool_result
 
-          - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+          - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-            - `BashCodeExecutionToolResultError object`
+            - `BashCodeExecutionToolResultErrorObject object`
 
               - `type: "bash_code_execution_tool_result_error"`
 
@@ -7588,9 +7684,9 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             default: text_editor_code_execution_tool_result
 
-          - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+          - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-            - `TextEditorCodeExecutionToolResultError object`
+            - `TextEditorCodeExecutionToolResultErrorObject object`
 
               - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -7666,9 +7762,9 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             default: tool_search_tool_result
 
-          - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+          - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-            - `ToolSearchToolResultError object`
+            - `ToolSearchToolResultErrorObject object`
 
               - `type: "tool_search_tool_result_error"`
 
@@ -8113,7 +8209,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
       - `error: ErrorObject`
 
-        - `InvalidRequestError object`
+        - `InvalidRequestErrorObject object`
 
           - `type: "invalid_request_error"`
 
@@ -8127,7 +8223,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             default: Invalid request
 
-        - `AuthenticationError object`
+        - `AuthenticationErrorObject object`
 
           - `type: "authentication_error"`
 
@@ -8141,7 +8237,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             default: Authentication error
 
-        - `BillingError object`
+        - `BillingErrorObject object`
 
           - `type: "billing_error"`
 
@@ -8155,7 +8251,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             default: Billing error
 
-        - `PermissionError object`
+        - `PermissionErrorObject object`
 
           - `type: "permission_error"`
 
@@ -8169,7 +8265,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             default: Permission denied
 
-        - `NotFoundError object`
+        - `NotFoundErrorObject object`
 
           - `type: "not_found_error"`
 
@@ -8183,7 +8279,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             default: Not found
 
-        - `RateLimitError object`
+        - `RateLimitErrorObject object`
 
           - `type: "rate_limit_error"`
 
@@ -8197,7 +8293,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             default: Rate limited
 
-        - `GatewayTimeoutError object`
+        - `GatewayTimeoutErrorObject object`
 
           - `type: "timeout_error"`
 
@@ -8225,7 +8321,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
             default: Internal server error
 
-        - `OverloadedError object`
+        - `OverloadedErrorObject object`
 
           - `type: "overloaded_error"`
 
@@ -8634,7 +8730,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         - `content: WebSearchToolResultBlockContent`
 
-          - `WebSearchToolResultError object`
+          - `WebSearchToolResultErrorObject object`
 
             - `type: "web_search_tool_result_error"`
 
@@ -8786,7 +8882,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
         - `content: CodeExecutionToolResultBlockContent`
 
-          - `CodeExecutionToolResultError object`
+          - `CodeExecutionToolResultErrorObject object`
 
             - `type: "code_execution_tool_result_error"`
 
@@ -8858,9 +8954,9 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           default: bash_code_execution_tool_result
 
-        - `content: BashCodeExecutionToolResultError or BashCodeExecutionResultBlock`
+        - `content: BashCodeExecutionToolResultErrorObject or BashCodeExecutionResultBlock`
 
-          - `BashCodeExecutionToolResultError object`
+          - `BashCodeExecutionToolResultErrorObject object`
 
             - `type: "bash_code_execution_tool_result_error"`
 
@@ -8908,9 +9004,9 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           default: text_editor_code_execution_tool_result
 
-        - `content: TextEditorCodeExecutionToolResultError or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
+        - `content: TextEditorCodeExecutionToolResultErrorObject or TextEditorCodeExecutionViewResultBlock or TextEditorCodeExecutionCreateResultBlock or TextEditorCodeExecutionStrReplaceResultBlock`
 
-          - `TextEditorCodeExecutionToolResultError object`
+          - `TextEditorCodeExecutionToolResultErrorObject object`
 
             - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -8986,9 +9082,9 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
 
           default: tool_search_tool_result
 
-        - `content: ToolSearchToolResultError or ToolSearchToolSearchResultBlock`
+        - `content: ToolSearchToolResultErrorObject or ToolSearchToolSearchResultBlock`
 
-          - `ToolSearchToolResultError object`
+          - `ToolSearchToolResultErrorObject object`
 
             - `type: "tool_search_tool_result_error"`
 

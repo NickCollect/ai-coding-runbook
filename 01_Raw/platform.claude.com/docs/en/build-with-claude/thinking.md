@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/thinking
-fetched_at: 2026-11-16T07:30:40.387885+00:00
+fetched_at: 2026-11-23T08:28:11.958632+00:00
 fetch_method: mintlify_md
 ---
 
@@ -88,27 +88,27 @@ If Claude uses tools, thinking can also appear between tool calls. See [Thinking
 
 On most models, thinking is on by default or needs only one parameter. The following table shows what each model does with each `thinking` value a request can send. A 400 error means the API rejects the request, and [Troubleshooting thinking](https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting) has each error and its fix.
 
-| Model                 | No `thinking` field | `"adaptive"`      | `"enabled"` with `budget_tokens` | `"between_tools"`                               | `"disabled"`                           |
-| --------------------- | ------------------- | ----------------- | -------------------------------- | ----------------------------------------------- | -------------------------------------- |
-| Claude Opus 5.5       | Adaptive thinking   | Adaptive thinking | 400 error                        | 400 error                                       | 400 error                              |
-| Claude Sonnet 5.5     | Adaptive thinking   | Adaptive thinking | 400 error                        | Up-front thinking off at `high` effort or below | 400 error                              |
-| Claude Haiku 5.5      | Adaptive thinking   | Adaptive thinking | 400 error                        | 400 error                                       | Thinking off at `high` effort or below |
-| Claude Fable 5.2      | Adaptive thinking   | Adaptive thinking | 400 error                        | 400 error                                       | 400 error                              |
-| Claude Mythos 5.2     | Adaptive thinking   | Adaptive thinking | 400 error                        | 400 error                                       | 400 error                              |
-| Claude Fable 5.1      | Adaptive thinking   | Adaptive thinking | 400 error                        | 400 error                                       | 400 error                              |
-| Claude Mythos 5.1     | Adaptive thinking   | Adaptive thinking | 400 error                        | 400 error                                       | 400 error                              |
-| Claude Fable 5        | Adaptive thinking   | Adaptive thinking | 400 error                        | 400 error                                       | 400 error                              |
-| Claude Mythos 5       | Adaptive thinking   | Adaptive thinking | 400 error                        | 400 error                                       | 400 error                              |
-| Claude Opus 5         | Adaptive thinking   | Adaptive thinking | 400 error                        | 400 error                                       | Thinking off at `high` effort or below |
-| Claude Sonnet 5       | Adaptive thinking   | Adaptive thinking | 400 error                        | 400 error                                       | Thinking off                           |
-| Claude Opus 4.8       | Thinking off        | Adaptive thinking | 400 error                        | 400 error                                       | Thinking off                           |
-| Claude Opus 4.7       | Thinking off        | Adaptive thinking | 400 error                        | 400 error                                       | Thinking off                           |
-| Claude Mythos Preview | Adaptive thinking   | Adaptive thinking | Extended thinking                | 400 error                                       | 400 error                              |
-| Claude Opus 4.6       | Thinking off        | Adaptive thinking | Extended thinking (deprecated)   | 400 error                                       | Thinking off                           |
-| Claude Sonnet 4.6     | Thinking off        | Adaptive thinking | Extended thinking (deprecated)   | 400 error                                       | Thinking off                           |
-| Claude Opus 4.5       | Thinking off        | 400 error         | Extended thinking                | 400 error                                       | Thinking off                           |
-| Claude Sonnet 4.5     | Thinking off        | 400 error         | Extended thinking                | 400 error                                       | Thinking off                           |
-| Claude Haiku 4.5      | Thinking off        | 400 error         | Extended thinking                | 400 error                                       | Thinking off                           |
+| Model | No `thinking` field | `"adaptive"` | `"enabled"` with `budget_tokens` | `"between_tools"` | `"disabled"` |
+| ----- | ----- | ----- | ----- | ----- | ----- |
+| Claude Opus 5.5 | Adaptive thinking | Adaptive thinking | 400 error | 400 error | 400 error |
+| Claude Sonnet 5.5 | Adaptive thinking | Adaptive thinking | 400 error | Up-front thinking off at `high` effort or below | 400 error |
+| Claude Haiku 5.5 | Adaptive thinking | Adaptive thinking | 400 error | 400 error | Thinking off at `high` effort or below |
+| Claude Fable 5.2 | Adaptive thinking | Adaptive thinking | 400 error | 400 error | 400 error |
+| Claude Mythos 5.2 | Adaptive thinking | Adaptive thinking | 400 error | 400 error | 400 error |
+| Claude Fable 5.1 | Adaptive thinking | Adaptive thinking | 400 error | 400 error | 400 error |
+| Claude Mythos 5.1 | Adaptive thinking | Adaptive thinking | 400 error | 400 error | 400 error |
+| Claude Fable 5 | Adaptive thinking | Adaptive thinking | 400 error | 400 error | 400 error |
+| Claude Mythos 5 | Adaptive thinking | Adaptive thinking | 400 error | 400 error | 400 error |
+| Claude Opus 5 | Adaptive thinking | Adaptive thinking | 400 error | 400 error | Thinking off at `high` effort or below |
+| Claude Sonnet 5 | Adaptive thinking | Adaptive thinking | 400 error | 400 error | Thinking off |
+| Claude Opus 4.8 | Thinking off | Adaptive thinking | 400 error | 400 error | Thinking off |
+| Claude Opus 4.7 | Thinking off | Adaptive thinking | 400 error | 400 error | Thinking off |
+| Claude Mythos Preview | Adaptive thinking | Adaptive thinking | Extended thinking | 400 error | 400 error |
+| Claude Opus 4.6 | Thinking off | Adaptive thinking | Extended thinking (deprecated) | 400 error | Thinking off |
+| Claude Sonnet 4.6 | Thinking off | Adaptive thinking | Extended thinking (deprecated) | 400 error | Thinking off |
+| Claude Opus 4.5 | Thinking off | 400 error | Extended thinking | 400 error | Thinking off |
+| Claude Sonnet 4.5 | Thinking off | 400 error | Extended thinking | 400 error | Thinking off |
+| Claude Haiku 4.5 | Thinking off | 400 error | Extended thinking | 400 error | Thinking off |
 
 In the table, “at `high` effort or below” means the request works at `low`, `medium`, and `high` effort and returns a 400 error at `xhigh` or `max`.
 
@@ -567,7 +567,7 @@ Keep the following in mind when working with summarized thinking:
   In rare cases where you need access to full thinking output, [contact Anthropic sales](mailto:sales@anthropic.com).
 </Note>
 
-To see the model’s reasoning, read the `thinking` blocks rather than prompting for reasoning in the response text. On Claude Fable 5.2, Claude Fable 5.1, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, and Claude Fable 5, a request that attempts to elicit the model’s internal reasoning as part of the response text might be refused with `stop_details.category: "reasoning_extraction"`. See [What a refusal looks like](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#refusal-response) for the field reference and [Keep reasoning in thinking blocks](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#keep-reasoning-in-thinking-blocks) for what to ask for instead.
+To see a summary of the model’s reasoning, read the `thinking` blocks with `display` set to `"summarized"`, rather than prompting for reasoning in the response text. Some models might refuse a request that asks for their internal reasoning as part of the response text. The refusal has `stop_details.category: "reasoning_extraction"`. For the list of these models and what to ask for instead, see [Keep reasoning in thinking blocks](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#keep-reasoning-in-thinking-blocks). For the field reference, see [What a refusal looks like](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#refusal-response).
 
 ### Streaming thinking
 
@@ -1022,15 +1022,15 @@ On Claude Fable 5.2, Claude Mythos 5.2, Claude Fable 5.1, Claude Mythos 5.1, Cla
 
 What a progress-update block contains depends on [`display`](https://platform.claude.com/docs/en/build-with-claude/thinking#controlling-thinking-display):
 
-| `display`                                 | Reasoning blocks       | Progress-update blocks                                   |
-| ----------------------------------------- | ---------------------- | -------------------------------------------------------- |
-| `"omitted"` (the default on these models) | Empty `thinking` field | Empty `thinking` field                                   |
-| `"updates"` (beta)                        | Empty `thinking` field | Summary text                                             |
-| `"summarized"`                            | Summary text           | Summary text, not distinguishable from a reasoning block |
+| `display` | Reasoning blocks | Progress-update blocks |
+| ----- | ----- | ----- |
+| `"omitted"` (the default on these models) | Empty `thinking` field | Empty `thinking` field |
+| `"updates"` (beta) | Empty `thinking` field | Summary text |
+| `"summarized"` | Summary text | Summary text, not distinguishable from a reasoning block |
 
 On Claude Sonnet 5.5, the lowest thinking setting is `thinking: {type: "between_tools"}`. It turns off up-front thinking, and each progress update comes back with its summary text, as it would under `display: "updates"`. `between_tools` is accepted only at [effort](https://platform.claude.com/docs/en/build-with-claude/effort) `high` or below. At `xhigh` or `max`, a request with it returns a 400 error. `between_tools` takes no other field: `display`, `budget_tokens`, or `block_binding` sent with it returns a 400 error. The setting works on every platform that offers Claude Sonnet 5.5. Pass the blocks back unchanged: a progress-update block you send back gives the model the full note it wrote, not the summary.
 
-Use `display: "updates"` for an agent interface that keeps reasoning hidden and shows the user a status line at each step. Under it, any `thinking` block with non-empty text is a progress update, so render those and nothing else. It’s in beta and requires the beta header `thinking-display-updates-2026-08-18` (to send it on Amazon Bedrock, Claude Models on Google Cloud (Google managed), or Microsoft Foundry, see [Beta features on other platforms](https://platform.claude.com/docs/en/api/beta-headers#beta-features-on-other-platforms)). Without it, the value is rejected with the same 400 `invalid_request_error` as an unknown `display` value.
+Use `display: "updates"` for an agent interface that keeps reasoning hidden and shows the user a status line at each step. Under it, any `thinking` block with non-empty text is a progress update, so render those and nothing else. It’s in beta and requires the beta header `thinking-display-updates-2026-08-18`. To send the header on a cloud platform, see [Beta features on other platforms](https://platform.claude.com/docs/en/api/beta-headers#beta-features-on-other-platforms). Without the header, the API rejects the value with the same 400 `invalid_request_error` as an unknown `display` value.
 
 ```json
 {
@@ -1209,7 +1209,8 @@ Keep the following in mind when working with signatures:
 * When [streaming responses](https://platform.claude.com/docs/en/build-with-claude/thinking#streaming-thinking), the signature arrives as a `signature_delta` inside a `content_block_delta` event just before the `content_block_stop` event.
 * `signature` values are significantly longer in Claude 4 and later models than in previous models.
 * The `signature` field is opaque: don’t interpret or parse it.
-* `signature` values are compatible across platforms, including the Claude API, [Amazon Bedrock (`bedrock-mantle`)](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), and [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed). Values generated on one platform work on another, except that thinking blocks from Claude Sonnet 5.5, Claude Haiku 5.5, Claude Fable 5.2, and Claude Mythos 5.2 work only in the account that produced them or in an account linked to it. See [Accounts and cloud platforms](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#account-bound-thinking).
+* `signature` values are compatible across platforms: a value generated on one platform works on another.
+* Thinking blocks from some models are an exception. They work only in the account that produced them or in an account linked to it. For those models, see [Accounts and cloud platforms](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#account-bound-thinking).
 
 ## Redacted thinking blocks
 
@@ -1242,27 +1243,27 @@ Claude 4.6 and later models and Claude Mythos Preview reject a prefilled final a
 
 Each model accepts `max_tokens` up to the ceiling listed here. On the [Message Batches API](https://platform.claude.com/docs/en/build-with-claude/batch-processing#extended-output-beta), the `output-300k-2026-03-24` [beta header](https://platform.claude.com/docs/en/api/beta-headers) raises that ceiling for the models with a batches ceiling listed.
 
-| Model                 | Max output tokens | Batches beta ceiling |
-| :-------------------- | :---------------- | :------------------- |
-| Claude Fable 5.2      | 128K              | —                    |
-| Claude Mythos 5.2     | 128K              | —                    |
-| Claude Fable 5.1      | 128K              | —                    |
-| Claude Mythos 5.1     | 128K              | —                    |
-| Claude Fable 5        | 128K              | —                    |
-| Claude Mythos 5       | 128K              | —                    |
-| Claude Mythos Preview | 128K              | Not available        |
-| Claude Opus 5.5       | 128K              | 300K                 |
-| Claude Opus 5         | 128K              | 300K                 |
-| Claude Opus 4.8       | 128K              | 300K                 |
-| Claude Opus 4.7       | 128K              | 300K                 |
-| Claude Opus 4.6       | 128K              | 300K                 |
-| Claude Opus 4.5       | 64K               | Not available        |
-| Claude Sonnet 5.5     | 128K              | 300K                 |
-| Claude Sonnet 5       | 128K              | 300K                 |
-| Claude Sonnet 4.6     | 128K              | 300K                 |
-| Claude Sonnet 4.5     | 64K               | Not available        |
-| Claude Haiku 5.5      | 128K              | 300K                 |
-| Claude Haiku 4.5      | 64K               | Not available        |
+| Model | Max output tokens | Batches beta ceiling |
+| :---- | :---- | :---- |
+| Claude Fable 5.2 | 128K | — |
+| Claude Mythos 5.2 | 128K | — |
+| Claude Fable 5.1 | 128K | — |
+| Claude Mythos 5.1 | 128K | — |
+| Claude Fable 5 | 128K | — |
+| Claude Mythos 5 | 128K | — |
+| Claude Mythos Preview | 128K | Not available |
+| Claude Opus 5.5 | 128K | 300K |
+| Claude Opus 5 | 128K | 300K |
+| Claude Opus 4.8 | 128K | 300K |
+| Claude Opus 4.7 | 128K | 300K |
+| Claude Opus 4.6 | 128K | 300K |
+| Claude Opus 4.5 | 64K | Not available |
+| Claude Sonnet 5.5 | 128K | 300K |
+| Claude Sonnet 5 | 128K | 300K |
+| Claude Sonnet 4.6 | 128K | 300K |
+| Claude Sonnet 4.5 | 64K | Not available |
+| Claude Haiku 5.5 | 128K | 300K |
+| Claude Haiku 4.5 | 64K | Not available |
 
 To read a model’s limits programmatically, see [Using the Models API](https://platform.claude.com/docs/en/models/overview#using-the-models-api).
 
@@ -1305,8 +1306,8 @@ Thinking is available on every model and eligible for zero data retention and HI
 * Availability: On by default
 * Usage: `thinking: {"type": "disabled"}` turns it off on models that accept that value. Where it is off by default, set `thinking` to turn it on.
 
-| Status    | Cloud platforms         |
-| --------- | ----------------------- |
+| Status | Cloud platforms |
+| ----- | ----- |
 | Available | All supported platforms |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
@@ -1314,16 +1315,16 @@ Thinking is available on every model and eligible for zero data retention and HI
 * Availability: Always on
 * Usage: Managed Agents sets the thinking configuration; the agent definition has no `thinking` field.
 
-| Status    | Cloud platforms         |
-| --------- | ----------------------- |
+| Status | Cloud platforms |
+| ----- | ----- |
 | Available | All supported platforms |
 
 ### Data handling
 
 [Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
 
-| Item   | Zero data retention                                                                                                                                       | HIPAA    |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
 | Status | Eligible (excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements)) | Eligible |
 
 Applicable endpoints:

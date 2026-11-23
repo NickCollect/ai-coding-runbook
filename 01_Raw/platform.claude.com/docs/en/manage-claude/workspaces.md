@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/workspaces
-fetched_at: 2026-11-16T07:30:43.952243+00:00
+fetched_at: 2026-11-23T08:28:16.265216+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,7 +20,7 @@ Key characteristics:
 
 * **Workspace identifiers** use the `wrkspc_` prefix (for example, `wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ`).
 
-* **Maximum 100 workspaces** for each organization by default (archived workspaces don’t count). Contact your account team if you need more.
+* **Maximum 1,000 workspaces** for each organization by default (archived workspaces and the Default Workspace don’t count). Creating a workspace at the limit returns a `400` error with the message `Workspace limit reached`. Contact your account team if you need more.
 
 * **Default Workspace** has a `wrkspc_` ID like any other workspace:
 
@@ -50,13 +50,13 @@ The Claude Code workspace keeps Claude Code traffic separate from your other API
 
 Members can have different roles in each workspace, allowing fine-grained access control.
 
-| Role                        | Permissions                                                                                               |
-| --------------------------- | --------------------------------------------------------------------------------------------------------- |
-| Workspace User              | Use playground only                                                                                       |
+| Role | Permissions |
+| ----- | ----- |
+| Workspace User | Use playground only |
 | Workspace Limited Developer | Create and manage API keys, use the API (with some limits in the Claude Console, listed after this table) |
-| Workspace Developer         | Create and manage API keys, use the API                                                                   |
-| Workspace Admin             | Full control over workspace settings and members                                                          |
-| Workspace Billing           | View workspace billing information (inherited from organization billing role)                             |
+| Workspace Developer | Create and manage API keys, use the API |
+| Workspace Admin | Full control over workspace settings and members |
+| Workspace Billing | View workspace billing information (inherited from organization billing role) |
 
 The following limits apply only to the Claude Console’s interface, not to the API. In the Console, a Workspace Limited Developer cannot:
 
@@ -864,7 +864,7 @@ Some resources are managed differently:
 
   * Tunnels are created in a workspace. The Console **MCP tunnels** list and the MCP server picker for Claude Managed Agents show tunnels in the current workspace only.
   * The cap of 10 active tunnels applies organization-wide.
-  * Managing tunnels requires the Manage tunnels permission, which organization admins and owners have by default. Organization developers can view tunnels but not change them.
+  * In the Claude Console, managing tunnels requires the admin organization role. Organization developers can view tunnels there but not change them.
 
 * **Workspaces** themselves and **organization members** are managed at the organization level through the [Admin API](https://platform.claude.com/docs/en/manage-claude/admin-api), using an Admin API key, an `org:admin` OAuth token, or a personal or service account key that isn’t scoped to a specific workspace.
 
@@ -1056,10 +1056,12 @@ Workspace limits can keep a workspace below your organization’s limits, but th
 * **Rate limits:** Limit requests per minute, input tokens per minute, or output tokens per minute. To set these, go to [Rate limits in the Claude Console](https://platform.claude.com/usage/limits), select the workspace from the **Workspace** dropdown menu, and click **Edit** next to a model.
 
 <Note>
-  - You cannot set spend limits on the Default Workspace.
+  - On [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed) and [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), you cannot set spend limits on the Default Workspace.
   - If not set, workspace limits match the organization’s limits.
   - Organization-wide limits always apply, even if workspace limits add up to more.
 </Note>
+
+A spend limit on the Default Workspace might not count or stop some usage in that workspace. This includes usage from the Claude Console (such as playground) and from Claude Managed Agents sessions. It also includes Claude Code or Claude Desktop usage when a member signs in with a Claude Console account and uses the Default Workspace. Your organization’s [spend limit](https://platform.claude.com/docs/en/api/rate-limits#setting-your-own-spend-limit) applies to all of this usage.
 
 For detailed information on rate limits and how they work, see [Rate limits](https://platform.claude.com/docs/en/api/rate-limits). You can also read your current organization and workspace rate limits and set workspace rate limits programmatically with the [Rate Limits API](https://platform.claude.com/docs/en/manage-claude/rate-limits-api), which stores a value above the organization’s limit but still enforces the lower of the two.
 
@@ -1229,11 +1231,11 @@ Usage and costs in the Default Workspace are reported under the Default Workspac
 
 Create separate workspaces for development, staging, and production:
 
-| Workspace   | Purpose                                            |
-| ----------- | -------------------------------------------------- |
+| Workspace | Purpose |
+| ----- | ----- |
 | Development | Testing and experimentation with lower rate limits |
-| Staging     | Pre-production testing with production-like limits |
-| Production  | Live traffic with full rate limits and monitoring  |
+| Staging | Pre-production testing with production-like limits |
+| Production | Live traffic with full rate limits and monitoring |
 
 ### Team or department isolation
 
@@ -1283,7 +1285,7 @@ Create workspaces for specific projects or products to track usage and costs sep
   </Accordion>
 
   <Accordion title="Are there limits on workspaces?">
-    Yes. Each organization can have up to 100 workspaces by default, and archived workspaces don’t count toward this limit. If you need more, contact your account team.
+    Yes. Each organization can have up to 1,000 workspaces by default, and archived workspaces and the Default Workspace don’t count toward this limit. If you need more, contact your account team.
   </Accordion>
 
   <Accordion title="How do organization roles affect workspace access?">

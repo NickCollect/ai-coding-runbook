@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/quickstart
-fetched_at: 2026-11-16T07:30:42.624614+00:00
+fetched_at: 2026-11-23T08:28:14.288728+00:00
 fetch_method: mintlify_md
 ---
 
@@ -53,12 +53,12 @@ Let Claude Code set up your agent for you
 
 ## Core concepts
 
-| Concept         | Description                                                                                                                   |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| **Agent**       | The model, system prompt, tools, MCP servers, and skills                                                                      |
+| Concept | Description |
+| ----- | ----- |
+| **Agent** | The model, system prompt, tools, MCP servers, and skills |
 | **Environment** | Configuration for where sessions run: an Anthropic-managed cloud sandbox, or a self-hosted sandbox on your own infrastructure |
-| **Session**     | A running agent instance within an environment, performing a specific task and generating outputs                             |
-| **Events**      | Messages exchanged between your application and the agent (user turns, tool results, status updates)                          |
+| **Session** | A running agent instance within an environment, performing a specific task and generating outputs |
+| **Events** | Messages exchanged between your application and the agent (user turns, tool results, status updates) |
 
 ## Before you begin
 
@@ -89,7 +89,7 @@ Let Claude Code set up your agent for you
         For Linux environments, download the release binary directly.
 
         ```bash
-        VERSION=2.9.0
+        VERSION=2.12.1
         OS=$(uname -s | tr '[:upper:]' '[:lower:]')
         case $(uname -m) in
           x86_64) ARCH=amd64 ;;
@@ -158,7 +158,7 @@ To run the CLI examples, install the CLI:
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=2.9.0
+    VERSION=2.12.1
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     case $(uname -m) in
       x86_64) ARCH=amd64 ;;
@@ -205,7 +205,7 @@ To run the CLI examples, install the CLI:
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:3.8.0")
+        implementation("com.anthropic:anthropic-java:3.12.0")
         ```
       </Tab>
 
@@ -214,7 +214,7 @@ To run the CLI examples, install the CLI:
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>3.8.0</version>
+            <version>3.12.0</version>
         </dependency>
         ```
       </Tab>

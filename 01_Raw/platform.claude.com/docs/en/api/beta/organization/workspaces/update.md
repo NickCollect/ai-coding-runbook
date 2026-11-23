@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/update
-fetched_at: 2026-11-02T07:00:47.883754+00:00
+fetched_at: 2026-11-23T08:28:29.542850+00:00
 fetch_method: mintlify_md
 ---
 
@@ -66,12 +66,13 @@ Update Workspace
   organization. When set, data stored for this Workspace is encrypted with the
   referenced key. Create key configurations with the External Keys API. On
   Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-  organization's own key must be a single-Region key in the same AWS account and
-  Region as the Workspace. On that platform the key is validated against this
-  Workspace when it is attached, so a key-policy problem is reported as an error
-  on this request. This field is write-once: once a key is attached to a Workspace
-  it cannot be detached or replaced. To rotate key material, rotate the underlying
-  key on your cloud KMS; the `external_key_id` stays the same.
+  organization's own key must be a single-Region key in the same Region as the
+  Workspace. If that key is outside the Workspace's AWS account, it can be attached
+  only by updating an active Workspace. On that platform the key is validated
+  against this Workspace when it is attached, so a key-policy problem is reported
+  as an error on this request. This field is write-once: once a key is attached to
+  a Workspace it cannot be detached or replaced. To rotate key material, rotate
+  the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
 - `name: optional string`
 
@@ -85,7 +86,7 @@ Update Workspace
 
 - `user_profile_id: optional string`
 
-  ID of a user profile to attach to the Workspace. Every inference request through the Workspace must then name this user profile; the API rejects a request that names none or a different one. Once set, it can't be replaced or removed (sending the same ID again changes nothing); only deleting the user profile clears it. The default Workspace can't have a user profile.
+  ID of a user profile to attach to the Workspace. Every inference request through the Workspace must then name this user profile; the API rejects a request that names none or a different one. Once set, it can't be replaced or removed (sending the same ID again changes nothing); only deleting the user profile clears it. It can't be set on a Workspace whose External Key isn't bound to this user profile. The default Workspace can't have a user profile.
 
 ## Returns
 
@@ -168,12 +169,13 @@ Update Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: string`
 
@@ -187,6 +189,40 @@ Update Workspace
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_validation_failed` (HTTP status 400)
+
+  The External Key failed Anthropic's validation, so the request was refused. The message gives the reason, if there is one.
+
+- `external_key_validation_timed_out` (HTTP status 400)
+
+  Anthropic's validation of the External Key did not finish in time, so the request was refused. Wait a moment, then send the request again.
+
+- `key_profile_mismatch` (HTTP status 400)
+
+  After this request, the External Key and the Workspace would not have the same user profile. A key and its Workspace must have the same user profile, or both have none.
+
+- `user_profile_not_found` (HTTP status 400)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `workspace_policy_violation` (HTTP status 400)
+
+  The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `external_key_changed` (HTTP status 409)
+
+  The external key changed while the request was validating it. Send the request again.
+
 ## Example
 
 ```bash
@@ -197,6 +233,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \
     -d '{
           "display_color": "#6C5BB9",
           "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
+          "name": "Workspace Name",
           "tags": {
             "env": "prod",
             "team": "platform"

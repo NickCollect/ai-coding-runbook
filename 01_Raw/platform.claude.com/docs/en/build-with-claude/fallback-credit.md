@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/fallback-credit
-fetched_at: 2026-11-16T07:30:39.839324+00:00
+fetched_at: 2026-11-23T08:28:11.420281+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,11 +24,12 @@ featureMetadata:
     Claude API: beta
     Amazon Bedrock:
       availability: beta
-      note: On Amazon Bedrock and Google Cloud the token is bound to your caller identity (there are no workspaces), and `allowed_fallback_models` is not exposed.
+      note: On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, the token is bound to your caller identity (there are no workspaces).
     Claude Platform on AWS: beta
+    Claude Models on Google Cloud (Anthropic managed): beta
     Claude Models on Google Cloud (Google managed):
       availability: beta
-      note: On Amazon Bedrock and Google Cloud the token is bound to your caller identity (there are no workspaces), and `allowed_fallback_models` is not exposed.
+      note: On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, the token is bound to your caller identity (there are no workspaces).
     Microsoft Foundry: beta
 ---
 
@@ -65,10 +66,10 @@ You need this page only when you build the retry yourself: over raw HTTP or with
 
 The `fallback_has_prefill_claim` field tells you whether the retry can continue the refused model’s partial output instead of starting over:
 
-| `fallback_has_prefill_claim` | Retry body                                                                                                                                                                                                                                                        |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `true`                       | The refused request body, unchanged, plus one appended assistant message whose `content` echoes the refused response’s `content`. The retry model continues the response from where the refused model stopped, and completed server tool calls are not run again. |
-| `false`                      | The refused request body, unchanged.                                                                                                                                                                                                                              |
+| `fallback_has_prefill_claim` | Retry body |
+| ----- | ----- |
+| `true` | The refused request body, unchanged, plus one appended assistant message whose `content` echoes the refused response’s `content`. The retry model continues the response from where the refused model stopped, and completed server tool calls are not run again. |
+| `false` | The refused request body, unchanged. |
 
 ## Example
 
@@ -534,12 +535,16 @@ The following example makes a request that might be refused and redeems the cred
 
 ## Where it works
 
-Fallback credit is in beta on the Claude API, Amazon Bedrock, Claude Platform on AWS, Claude Models on Google Cloud (Google managed), and Microsoft Foundry. Refusals in [Message Batches](https://platform.claude.com/docs/en/build-with-claude/batch-processing) don’t mint credit tokens, and redemption applies only to direct Messages API requests: a token passed on a batch request is accepted but ignored. A Claude Haiku 5.5 refusal carries no fallback credit, so a retry after one pays the full cost of writing the fallback model’s prompt cache.
+Fallback credit is in beta on the Claude API and on some cloud platforms. For the models on each platform, see [Availability](https://platform.claude.com/docs/en/build-with-claude/fallback-credit#feature-availability).
+
+A Claude Haiku 5.5 refusal carries no fallback credit, so a retry after one pays the full cost of writing the fallback model’s prompt cache.
+
+Refusals in [batch processing](https://platform.claude.com/docs/en/build-with-claude/batch-processing) don’t carry a credit token. Batch requests can’t redeem one either: only direct Messages API requests can. The API accepts a token on a batch request but ignores it.
 
 The retry model must be one of the refused model’s permitted fallback targets. For Claude Fable 5.2, Claude Fable 5.1, Claude Fable 5, and Claude Opus 5.5, those are Claude Opus 4.8 (`claude-opus-4-8`) and Claude Opus 5 (`claude-opus-5`). For Claude Opus 5, it is Claude Opus 4.8. For Claude Sonnet 5.5, it is Claude Sonnet 5 (`claude-sonnet-5`).
 
 <Accordion title="Looking up permitted fallback targets programmatically">
-  On the Claude API and Claude Platform on AWS, the target list is published as `allowed_fallback_models` on each model’s entry in the [Models API](https://platform.claude.com/docs/en/api/beta/models/list) when the `server-side-fallback-2026-07-01` beta header is set. The list is not yet visible under the `fallback-credit-*` header alone. It is not exposed on Amazon Bedrock, Claude Models on Google Cloud (Google managed), or Microsoft Foundry.
+  On the Claude API and Claude Platform on AWS, the [Models API](https://platform.claude.com/docs/en/api/beta/models/list) lists each model’s permitted targets in the `allowed_fallback_models` field. To get this field, send the `server-side-fallback-2026-07-01` beta header on the Models API request. With only a `fallback-credit-*` header, the response leaves the field out.
 </Accordion>
 
 ## Checking that the credit applied
@@ -575,10 +580,10 @@ The following sections cover edge cases and the complete redemption rules. Most 
 <Accordion title="Fields that must match the refused request">
   Redemption compares the retry against the refused request. Every field that shapes the prompt must match exactly. Fields that do not shape the prompt may change on the retry.
 
-  | Rule                    | Fields                                                                                                                                                                      |
-  | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  | Must match exactly      | `system`, `messages`, `tools`, `tool_choice`, `thinking`, and `cache_control`, plus `output_config`, `mcp_servers`, `context_management`, and `container` when you use them |
-  | May change on the retry | `model`, `max_tokens`, `stop_sequences`, `stream`, `metadata`, and `service_tier`                                                                                           |
+  | Rule | Fields |
+  | ----- | ----- |
+  | Must match exactly | `system`, `messages`, `tools`, `tool_choice`, `thinking`, and `cache_control`, plus `output_config`, `mcp_servers`, `context_management`, and `container` when you use them |
+  | May change on the retry | `model`, `max_tokens`, `stop_sequences`, `stream`, `metadata`, and `service_tier` |
 
   The continuation shape (`fallback_has_prefill_claim: true`) is the one exception to the `messages` match: it adds exactly one assistant message at the end of `messages`.
 
@@ -661,13 +666,14 @@ Fallback credit is in beta on select models.
 * Availability: Available
 * Usage: Needed only when you write the retry yourself: send the `fallback-credit-2026-07-01` beta header and put the refusal’s `fallback_credit_token` on the retry.
 
-| Status           | Cloud platforms                                                                                                                                                                                                            | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta             | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) | [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview), [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview), [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview) |
-| Beta<sup>1</sup> | [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed)                                                                       | [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview), [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview), [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview) |
-| Beta<sup>1</sup> | [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock)                                                                                                                           | [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview)                                                                                                                                                                         |
+| Status | Cloud platforms | Models |
+| ----- | ----- | ----- |
+| Beta | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) | [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview), [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview), [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview) |
+| Beta<sup>1</sup> | [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed) | [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview), [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview), [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview) |
+| Beta<sup>1</sup> | [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock) | [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview) |
+| Beta | [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed) | [Claude Fable 5.2](https://platform.claude.com/docs/en/models/fable-5-2/overview), [Claude Mythos 5.2](https://platform.claude.com/docs/en/models/mythos-5-2/overview), [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview), [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Claude Opus 5](https://platform.claude.com/docs/en/models/opus-5/overview), [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview) |
 
-1. On Amazon Bedrock and Google Cloud the token is bound to your caller identity (there are no workspaces), and `allowed_fallback_models` is not exposed.
+1. On Claude Models on Google Cloud (Google managed) and Amazon Bedrock, the token is bound to your caller identity (there are no workspaces).
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 
@@ -679,7 +685,7 @@ Fallback credit is in beta on select models.
 
 Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
 
-| Header                                                                                            | Cloud platforms                                                                                                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `fallback-credit-2026-07-01` or `server-side-fallback-2026-07-01` or `fallback-credit-2026-06-01` | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry)                             |
-| `fallback-credit-2026-07-01` or `fallback-credit-2026-06-01`                                      | [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed) |
+| Header | Cloud platforms |
+| ----- | ----- |
+| `fallback-credit-2026-07-01` or `server-side-fallback-2026-07-01` or `fallback-credit-2026-06-01` | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
+| `fallback-credit-2026-07-01` or `fallback-credit-2026-06-01` | [Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed) |

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/detect-changes
-fetched_at: 2026-11-16T07:31:01.176537+00:00
+fetched_at: 2026-11-23T08:28:17.877013+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ description: "Start from sample detection rules for Security posture activities 
   To enable the Compliance API, see [Set up the Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api-access).
 </Note>
 
-These sample rules alert on changes in your organization’s [Security posture](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/overview), using the activities that the Compliance API Activity Feed records. They assume that your security information and event management (SIEM) system stores these activities, as [Send events to your SIEM](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/send-events) describes.
+These sample rules alert on changes in your organization’s [Security posture](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/overview), using the activities that the Compliance API Activity Feed records. They assume that your security information and event management (SIEM) system stores these activities, as [Send Security posture events to your SIEM](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/send-events) describes.
 
 ## Before you write a rule
 
@@ -23,7 +23,7 @@ Each rule is a plain description and a query in no particular query language.
 * Queries use the Activity Feed’s field names, plus `stored_at`, this page’s name for when you stored an activity. Any other name is your own list or alias.
 * Before a rule counts activities, deduplicate them by `id`.
 * Unless a rule says otherwise, run it over the time since its last completed run, by `stored_at`, not `created_at`, because an activity can arrive late; queries leave that range out.
-* Write rules that fire on an activity you stored, never on one you have not: it may be late or a change [the feed does not record](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/events-reference#what-the-feed-does-not-record). To compare stored activities with current results, see [Check events against results](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/check-events-against-results).
+* Write rules that fire on an activity you stored, never on the absence of one. An activity you have not stored may be late, or may be a change [the feed does not record](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/events-reference#what-the-feed-does-not-record). To compare stored activities with current results, see [Check stored Security posture events against current results](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/check-events-against-results).
 
 ## Attestation rules
 
@@ -96,7 +96,7 @@ A [`lapsed` activity](https://platform.claude.com/docs/en/manage-claude/complian
 New values can appear in any of these fields.
 
 * Identify automatic changes by `actor.type`, not by the value of `actor.service`.
-* Do not drop activities whose `control`, `action`, or `status` value a rule does not list; a new `action` value can record an acceptance. See the [events reference](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/events-reference).
+* Do not drop activities whose `control`, `action`, or `status` value a rule does not list; a new `action` value can record an acceptance. See [Security posture events reference](https://platform.claude.com/docs/en/manage-claude/compliance-security-posture/events-reference).
 
 ## Test a rule
 

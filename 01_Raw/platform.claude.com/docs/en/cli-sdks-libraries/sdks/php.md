@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php
-fetched_at: 2026-11-16T07:30:47.830310+00:00
+fetched_at: 2026-11-23T08:28:20.639259+00:00
 fetch_method: mintlify_md
 ---
 
@@ -110,19 +110,19 @@ try {
 
 Error codes are as follows:
 
-| Cause            | Error type                     |
-| ---------------- | ------------------------------ |
-| HTTP 400         | `BadRequestException`          |
-| HTTP 401         | `AuthenticationException`      |
-| HTTP 403         | `PermissionDeniedException`    |
-| HTTP 404         | `NotFoundException`            |
-| HTTP 409         | `ConflictException`            |
-| HTTP 422         | `UnprocessableEntityException` |
-| HTTP 429         | `RateLimitException`           |
-| HTTP >= 500      | `InternalServerException`      |
-| Other HTTP error | `APIStatusException`           |
-| Timeout          | `APITimeoutException`          |
-| Network error    | `APIConnectionException`       |
+| Cause | Error type |
+| ----- | ----- |
+| HTTP 400 | `BadRequestException` |
+| HTTP 401 | `AuthenticationException` |
+| HTTP 403 | `PermissionDeniedException` |
+| HTTP 404 | `NotFoundException` |
+| HTTP 409 | `ConflictException` |
+| HTTP 422 | `UnprocessableEntityException` |
+| HTTP 429 | `RateLimitException` |
+| HTTP >= 500 | `InternalServerException` |
+| Other HTTP error | `APIStatusException` |
+| Timeout | `APITimeoutException` |
+| Network error | `APIConnectionException` |
 
 ## Retries
 
@@ -167,7 +167,7 @@ foreach ($page->getItems() as $item) {
 // ...
 foreach ($page->pagingEachItem() as $item) {
     echo $item->id, PHP_EOL;
-// ...
+    // ...
 }
 ```
 

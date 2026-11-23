@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta
-fetched_at: 2026-11-16T07:30:51.896372+00:00
+fetched_at: 2026-11-23T08:28:24.772156+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,7 +15,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
 ### Anthropic Beta
 
-- `AnthropicBeta = string or "computer-use-2024-10-22" or "computer-use-2025-01-24" or "output-128k-2025-02-19" or 53 more`
+- `AnthropicBeta = string or "computer-use-2024-10-22" or "computer-use-2025-01-24" or "output-128k-2025-02-19" or 55 more`
 
   Beta names you can send in the `anthropic-beta` header.
 
@@ -115,6 +115,10 @@ url: https://platform.claude.com/docs/en/api/beta
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -155,9 +159,9 @@ url: https://platform.claude.com/docs/en/api/beta
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
 
-### Beta API Error
+### Beta API Error Object
 
-- `BetaAPIError object`
+- `BetaAPIErrorObject object`
 
   - `type: "api_error"`
 
@@ -171,9 +175,9 @@ url: https://platform.claude.com/docs/en/api/beta
 
     default: Internal server error
 
-### Beta Authentication Error
+### Beta Authentication Error Object
 
-- `BetaAuthenticationError object`
+- `BetaAuthenticationErrorObject object`
 
   - `type: "authentication_error"`
 
@@ -187,9 +191,9 @@ url: https://platform.claude.com/docs/en/api/beta
 
     default: Authentication error
 
-### Beta Billing Error
+### Beta Billing Error Object
 
-- `BetaBillingError object`
+- `BetaBillingErrorObject object`
 
   - `type: "billing_error"`
 
@@ -207,11 +211,11 @@ url: https://platform.claude.com/docs/en/api/beta
 
 - `BetaCurrency = "USD"`
 
-### Beta Error
+### Beta Error Object
 
-- `BetaError = BetaInvalidRequestError or BetaAuthenticationError or BetaBillingError or 6 more`
+- `BetaErrorObject = BetaInvalidRequestErrorObject or BetaAuthenticationErrorObject or BetaBillingErrorObject or 6 more`
 
-  - `BetaInvalidRequestError object`
+  - `BetaInvalidRequestErrorObject object`
 
     - `type: "invalid_request_error"`
 
@@ -225,7 +229,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
       default: Invalid request
 
-  - `BetaAuthenticationError object`
+  - `BetaAuthenticationErrorObject object`
 
     - `type: "authentication_error"`
 
@@ -239,7 +243,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
       default: Authentication error
 
-  - `BetaBillingError object`
+  - `BetaBillingErrorObject object`
 
     - `type: "billing_error"`
 
@@ -253,7 +257,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
       default: Billing error
 
-  - `BetaPermissionError object`
+  - `BetaPermissionErrorObject object`
 
     - `type: "permission_error"`
 
@@ -267,7 +271,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
       default: Permission denied
 
-  - `BetaNotFoundError object`
+  - `BetaNotFoundErrorObject object`
 
     - `type: "not_found_error"`
 
@@ -281,7 +285,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
       default: Not found
 
-  - `BetaRateLimitError object`
+  - `BetaRateLimitErrorObject object`
 
     - `type: "rate_limit_error"`
 
@@ -295,7 +299,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
       default: Rate limited
 
-  - `BetaGatewayTimeoutError object`
+  - `BetaGatewayTimeoutErrorObject object`
 
     - `type: "timeout_error"`
 
@@ -309,7 +313,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
       default: Request timeout
 
-  - `BetaAPIError object`
+  - `BetaAPIErrorObject object`
 
     - `type: "api_error"`
 
@@ -323,7 +327,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
       default: Internal server error
 
-  - `BetaOverloadedError object`
+  - `BetaOverloadedErrorObject object`
 
     - `type: "overloaded_error"`
 
@@ -345,9 +349,9 @@ url: https://platform.claude.com/docs/en/api/beta
 
     default: error
 
-  - `error: BetaError`
+  - `error: BetaErrorObject`
 
-    - `BetaInvalidRequestError object`
+    - `BetaInvalidRequestErrorObject object`
 
       - `type: "invalid_request_error"`
 
@@ -361,7 +365,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
         default: Invalid request
 
-    - `BetaAuthenticationError object`
+    - `BetaAuthenticationErrorObject object`
 
       - `type: "authentication_error"`
 
@@ -375,7 +379,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
         default: Authentication error
 
-    - `BetaBillingError object`
+    - `BetaBillingErrorObject object`
 
       - `type: "billing_error"`
 
@@ -389,7 +393,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
         default: Billing error
 
-    - `BetaPermissionError object`
+    - `BetaPermissionErrorObject object`
 
       - `type: "permission_error"`
 
@@ -403,7 +407,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
         default: Permission denied
 
-    - `BetaNotFoundError object`
+    - `BetaNotFoundErrorObject object`
 
       - `type: "not_found_error"`
 
@@ -417,7 +421,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
         default: Not found
 
-    - `BetaRateLimitError object`
+    - `BetaRateLimitErrorObject object`
 
       - `type: "rate_limit_error"`
 
@@ -431,7 +435,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
         default: Rate limited
 
-    - `BetaGatewayTimeoutError object`
+    - `BetaGatewayTimeoutErrorObject object`
 
       - `type: "timeout_error"`
 
@@ -445,7 +449,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
         default: Request timeout
 
-    - `BetaAPIError object`
+    - `BetaAPIErrorObject object`
 
       - `type: "api_error"`
 
@@ -459,7 +463,7 @@ url: https://platform.claude.com/docs/en/api/beta
 
         default: Internal server error
 
-    - `BetaOverloadedError object`
+    - `BetaOverloadedErrorObject object`
 
       - `type: "overloaded_error"`
 
@@ -475,9 +479,9 @@ url: https://platform.claude.com/docs/en/api/beta
 
   - `request_id: string or null`
 
-### Beta Gateway Timeout Error
+### Beta Gateway Timeout Error Object
 
-- `BetaGatewayTimeoutError object`
+- `BetaGatewayTimeoutErrorObject object`
 
   - `type: "timeout_error"`
 
@@ -491,9 +495,9 @@ url: https://platform.claude.com/docs/en/api/beta
 
     default: Request timeout
 
-### Beta Invalid Request Error
+### Beta Invalid Request Error Object
 
-- `BetaInvalidRequestError object`
+- `BetaInvalidRequestErrorObject object`
 
   - `type: "invalid_request_error"`
 
@@ -523,9 +527,9 @@ url: https://platform.claude.com/docs/en/api/beta
 
     Uppercase ISO-4217 currency code. `USD` is the only currency currently supported; the accepted set is closed and grows only when a new currency is priced.
 
-### Beta Not Found Error
+### Beta Not Found Error Object
 
-- `BetaNotFoundError object`
+- `BetaNotFoundErrorObject object`
 
   - `type: "not_found_error"`
 
@@ -543,13 +547,11 @@ url: https://platform.claude.com/docs/en/api/beta
 
 - `BetaOrganizationNotEnrolledInBetaErrorDetails object`
 
-  The beta that the endpoint requires is not enabled for the organization. The message names the beta value.
-
   - `error_code: "organization_not_enrolled_in_beta"`
 
-### Beta Overloaded Error
+### Beta Overloaded Error Object
 
-- `BetaOverloadedError object`
+- `BetaOverloadedErrorObject object`
 
   - `type: "overloaded_error"`
 
@@ -563,9 +565,9 @@ url: https://platform.claude.com/docs/en/api/beta
 
     default: Overloaded
 
-### Beta Permission Error
+### Beta Permission Error Object
 
-- `BetaPermissionError object`
+- `BetaPermissionErrorObject object`
 
   - `type: "permission_error"`
 
@@ -579,9 +581,9 @@ url: https://platform.claude.com/docs/en/api/beta
 
     default: Permission denied
 
-### Beta Rate Limit Error
+### Beta Rate Limit Error Object
 
-- `BetaRateLimitError object`
+- `BetaRateLimitErrorObject object`
 
   - `type: "rate_limit_error"`
 
@@ -595,13 +597,55 @@ url: https://platform.claude.com/docs/en/api/beta
 
     default: Rate limited
 
+### Beta Request Body Timeout Error Details
+
+- `BetaRequestBodyTimeoutErrorDetails object`
+
+  - `error_code: "request_body_timeout"`
+
 ### Beta Unsupported Charset Error Details
 
 - `BetaUnsupportedCharsetErrorDetails object`
 
+  - `error_code: "unsupported_charset"`
+
+## Errors
+
+### organization_not_enrolled_in_beta
+
+HTTP status 400
+
+- `"organization_not_enrolled_in_beta"`
+
+  The beta that the endpoint requires is not enabled for the organization. The message names the beta value.
+
+  - `details: BetaOrganizationNotEnrolledInBetaErrorDetails`
+
+    - `error_code: "organization_not_enrolled_in_beta"`
+
+### request_body_timeout
+
+HTTP status 400
+
+- `"request_body_timeout"`
+
+  The request body did not finish arriving in time, so nothing was done. Send a smaller body, or send it over a faster connection.
+
+  - `details: BetaRequestBodyTimeoutErrorDetails`
+
+    - `error_code: "request_body_timeout"`
+
+### unsupported_charset
+
+HTTP status 400
+
+- `"unsupported_charset"`
+
   The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
 
-  - `error_code: "unsupported_charset"`
+  - `details: BetaUnsupportedCharsetErrorDetails`
+
+    - `error_code: "unsupported_charset"`
 
 ## Beta › Models
 
@@ -748,6 +792,10 @@ The Models API response can be used to determine which models are available for 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -1023,6 +1071,20 @@ The Models API response can be used to determine which models are available for 
 
   Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```bash
@@ -1259,6 +1321,10 @@ The Models API response can be used to determine information about a specific mo
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -1522,6 +1588,20 @@ The Models API response can be used to determine information about a specific mo
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```bash
@@ -1749,6 +1829,10 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -2495,7 +2579,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
               - `page_age: optional string or null`
 
-            - `BetaWebSearchToolRequestError object`
+            - `BetaWebSearchToolRequestErrorObject object`
 
               - `type: "web_search_tool_result_error"`
 
@@ -5250,6 +5334,22 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `billing_policy: optional BetaBillingPolicy or null`
+
+  Declares which organization is billed for this request. `{"type": "billing_policy", "bill_to": "user_profile"}` bills the customer behind the user profile named in the `anthropic-user-profile-id` header, instead of your organization. If that customer has not linked an Anthropic organization to the profile, or has not allowed your organization to bill it, the request is rejected rather than billed to you. Omit the field, or send `"bill_to": "self"` (the default), to be billed as usual.
+
+  Message Batches does not currently support billing the customer behind a user profile. In a batch, omit the field or send `"bill_to": "self"`. A request in a batch that sets `"bill_to": "user_profile"` gets an `errored` result with an `invalid_request_error`, nobody is billed for it, and the batch's other requests run as usual.
+
+  - `type: "billing_policy"`
+
+  - `bill_to: optional BetaBillTo`
+
+    Who is billed. `self`, the default, bills your organization, as if `billing_policy` were omitted. `user_profile` bills the customer behind the user profile the request names; if that customer has not linked an Anthropic organization to the profile, or has not allowed your organization to bill it, the request is rejected rather than billed to you.
+
+    - `"self"`
+
+    - `"user_profile"`
+
 - `cache_control: optional BetaCacheControlEphemeral or null`
 
   Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
@@ -6331,7 +6431,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `content: BetaWebSearchToolResultBlockContent`
 
-        - `BetaWebSearchToolResultError object`
+        - `BetaWebSearchToolResultErrorObject object`
 
           - `type: "web_search_tool_result_error"`
 
@@ -6491,9 +6591,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         default: advisor_tool_result
 
-      - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+      - `content: BetaAdvisorToolResultErrorObject or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
-        - `BetaAdvisorToolResultError object`
+        - `BetaAdvisorToolResultErrorObject object`
 
           - `type: "advisor_tool_result_error"`
 
@@ -6553,7 +6653,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `content: BetaCodeExecutionToolResultBlockContent`
 
-        - `BetaCodeExecutionToolResultError object`
+        - `BetaCodeExecutionToolResultErrorObject object`
 
           - `type: "code_execution_tool_result_error"`
 
@@ -6625,9 +6725,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         default: bash_code_execution_tool_result
 
-      - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
+      - `content: BetaBashCodeExecutionToolResultErrorObject or BetaBashCodeExecutionResultBlock`
 
-        - `BetaBashCodeExecutionToolResultError object`
+        - `BetaBashCodeExecutionToolResultErrorObject object`
 
           - `type: "bash_code_execution_tool_result_error"`
 
@@ -6675,9 +6775,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         default: text_editor_code_execution_tool_result
 
-      - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
+      - `content: BetaTextEditorCodeExecutionToolResultErrorObject or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
-        - `BetaTextEditorCodeExecutionToolResultError object`
+        - `BetaTextEditorCodeExecutionToolResultErrorObject object`
 
           - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -6753,9 +6853,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         default: tool_search_tool_result
 
-      - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
+      - `content: BetaToolSearchToolResultErrorObject or BetaToolSearchToolSearchResultBlock`
 
-        - `BetaToolSearchToolResultError object`
+        - `BetaToolSearchToolResultErrorObject object`
 
           - `type: "tool_search_tool_result_error"`
 
@@ -10141,6 +10241,158 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     - `index: number`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+On a streaming call, the errors listed below apply when the API rejects the request before the stream starts. Once the stream has started, the response status is already 200, so a later error comes through the stream, with no status of its own. To identify it, use `error.details.error_code` if the error has one, and `error.type` if not.
+
+- `available_tools_limit_exceeded` (HTTP status 400)
+
+  The tools available after a message exceed a limit on their number or their size.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `claude_code_version_too_old` (HTTP status 400)
+
+  The request comes from a Claude Code version older than the minimum that the requested model or the organization requires. Update Claude Code, then retry.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `compaction_block_ambiguous` (HTTP status 400)
+
+  `messages` holds more than one `compaction` block with content. Send only the block the conversation returned last.
+
+- `compaction_block_misplaced` (HTTP status 400)
+
+  The `compaction` block is not the first block of the conversation, or is in a `system` message.
+
+- `compaction_content_mismatch` (HTTP status 400)
+
+  The `compaction` block's `content` differs from the text its `signature` recorded.
+
+- `compaction_incomplete_turn` (HTTP status 400)
+
+  The compaction request ends on an `assistant` turn that is not finished.
+
+- `compaction_nothing_to_summarize` (HTTP status 400)
+
+  `messages` holds no `user` or `assistant` content to summarize or adopt.
+
+- `compaction_signature_invalid` (HTTP status 400)
+
+  The `compaction` block's `signature` does not verify.
+
+- `compaction_too_many_tool_references` (HTTP status 400)
+
+  The conversation references more distinct tools than a `compaction` block can record.
+
+- `compaction_tool_changes_mismatch` (HTTP status 400)
+
+  The `compaction` block's `tool_changes` differs from what was returned with the block.
+
+- `image_dimensions_too_large` (HTTP status 400)
+
+  The longest side of one or more images in the request exceeds the image size limit. Scale each image in `paths` so that neither side exceeds `max_side_length_pixels`, or remove it, then retry.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `request_body_encoding_invalid` (HTTP status 400)
+
+  The request body is not valid for its `Content-Encoding`.
+
+- `request_body_encoding_unsupported` (HTTP status 400)
+
+  The request's `Content-Encoding` is not supported.
+
+- `thread_already_continued` (HTTP status 400)
+
+  The response that `previous_message_id` names has already been continued, and each response can be continued only once. Continue from the Thread's most recent response `id`.
+
+- `thread_continue_in_flight` (HTTP status 400)
+
+  Another request is still continuing from the same `previous_message_id`. Wait for it to complete and continue from its response `id`, or replay the full conversation with `thread: {"type": "create"}`.
+
+- `thread_fingerprint_mismatch` (HTTP status 400)
+
+  A field that must stay the same across a Thread's turns differs from the value stored with the Thread; the message names each such field. Send the stored values, or replay the full conversation with `thread: {"type": "create"}` to change them.
+
+- `thread_unsupported_request` (HTTP status 400)
+
+  The request combines `thread` with a request field or an organization setting that Threads do not support; `unsupported`, when present, names it. Send the full conversation without `thread`, or change that field.
+
+- `tool_name_conflict` (HTTP status 400)
+
+  A tool made available in `messages` takes a name that an available tool of another kind, or of another MCP server, already holds.
+
+- `tool_reference_unresolved` (HTTP status 400)
+
+  A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
+
+- `user_profile_required` (HTTP status 400)
+
+  The request sets `billing_policy.bill_to` to `"user_profile"` but names no user profile. Name the profile to bill in the `anthropic-user-profile-id` header.
+
+- `linked_organization_billing_unavailable` (HTTP status 402)
+
+  Anthropic cannot currently bill the organization linked to the request's user profile, for a reason that lies with that organization's own account. The response does not say what the reason is.
+
+- `linked_organization_spend_limit_reached` (HTTP status 402)
+
+  The organization linked to the request's user profile has reached a spend limit that it set, or lacks credit for the request. The response does not say which applies.
+
+- `user_profile_billing_not_authorized` (HTTP status 403)
+
+  The customer that the request's user profile represents has not authorized the caller to bill them, or the authorization that the request's credential uses has ended. The response does not say which applies.
+
+- `user_profile_not_billable` (HTTP status 403)
+
+  The request's user profile cannot be billed. The response gives no more specific error code and does not say what the reason is.
+
+- `thread_not_found` (HTTP status 404)
+
+  No usable Thread state was found for `previous_message_id`. Replay the full conversation with `thread: {"type": "create"}` to start a new Thread.
+
+- `skill_read_blocked_undecryptable` (HTTP status 409)
+
+  A custom skill the request names is stored under an encryption key state the workspace cannot currently decrypt.
+
+- `request_body_too_large_after_decoding` (HTTP status 413)
+
+  The compressed request body exceeds the request size limit once decoded.
+
+- `contract_spend_limit_reached` (HTTP status 429)
+
+  The organization has reached the spend limit of its contract.
+
+- `enforced_spend_limit_reached` (HTTP status 429)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
+- `ramp_limit_exceeded` (HTTP status 429)
+
+  The request would exceed a ramp limit, which caps how fast usage can grow. Retry after the time in the `retry-after` header.
+
+- `cmek_key_unreachable` (HTTP status 503)
+
+  The workspace's customer-managed encryption key could not be reached. Retry the request; if this continues, check that the key is available in your key management service, or contact Anthropic support.
+
+- `compaction_unavailable` (HTTP status 529)
+
+  The compaction could not be completed for a transient server reason. Retry the request.
+
 #### Example
 
 ```bash
@@ -10389,6 +10641,10 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -11123,7 +11379,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
               - `page_age: optional string or null`
 
-            - `BetaWebSearchToolRequestError object`
+            - `BetaWebSearchToolRequestErrorObject object`
 
               - `type: "web_search_tool_result_error"`
 
@@ -13878,6 +14134,20 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `billing_policy: optional BetaBillingPolicy or null`
+
+  Declares which organization is billed when this body is sent to `/v1/messages`. Accepted here so that you can count the tokens of the exact body you will send, and otherwise ignored: counting tokens bills nobody, so no user profile is required.
+
+  - `type: "billing_policy"`
+
+  - `bill_to: optional BetaBillTo`
+
+    Who is billed. `self`, the default, bills your organization, as if `billing_policy` were omitted. `user_profile` bills the customer behind the user profile the request names; if that customer has not linked an Anthropic organization to the profile, or has not allowed your organization to bill it, the request is rejected rather than billed to you.
+
+    - `"self"`
+
+    - `"user_profile"`
+
 - `cache_control: optional BetaCacheControlEphemeral or null`
 
   Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
@@ -14397,6 +14667,76 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     The total number of tokens across the provided list of messages, system prompt, and tools.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `available_tools_limit_exceeded` (HTTP status 400)
+
+  The tools available after a message exceed a limit on their number or their size.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `compaction_block_ambiguous` (HTTP status 400)
+
+  `messages` holds more than one `compaction` block with content. Send only the block the conversation returned last.
+
+- `compaction_block_misplaced` (HTTP status 400)
+
+  The `compaction` block is not the first block of the conversation, or is in a `system` message.
+
+- `compaction_content_mismatch` (HTTP status 400)
+
+  The `compaction` block's `content` differs from the text its `signature` recorded.
+
+- `compaction_nothing_to_summarize` (HTTP status 400)
+
+  `messages` holds no `user` or `assistant` content to summarize or adopt.
+
+- `compaction_signature_invalid` (HTTP status 400)
+
+  The `compaction` block's `signature` does not verify.
+
+- `compaction_tool_changes_mismatch` (HTTP status 400)
+
+  The `compaction` block's `tool_changes` differs from what was returned with the block.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `request_body_encoding_invalid` (HTTP status 400)
+
+  The request body is not valid for its `Content-Encoding`.
+
+- `request_body_encoding_unsupported` (HTTP status 400)
+
+  The request's `Content-Encoding` is not supported.
+
+- `tool_name_conflict` (HTTP status 400)
+
+  A tool made available in `messages` takes a name that an available tool of another kind, or of another MCP server, already holds.
+
+- `tool_reference_unresolved` (HTTP status 400)
+
+  A tool change or MCP tool listing references a tool or MCP server that is not defined at that position in the conversation.
+
+- `request_body_too_large_after_decoding` (HTTP status 413)
+
+  The compressed request body exceeds the request size limit once decoded.
+
+- `enforced_spend_limit_reached` (HTTP status 429)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
+- `compaction_unavailable` (HTTP status 529)
+
+  The compaction could not be completed for a transient server reason. Retry the request.
+
 #### Example
 
 ```bash
@@ -14567,6 +14907,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -15333,7 +15677,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                   - `page_age: optional string or null`
 
-                - `BetaWebSearchToolRequestError object`
+                - `BetaWebSearchToolRequestErrorObject object`
 
                   - `type: "web_search_tool_result_error"`
 
@@ -18088,6 +18432,22 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `billing_policy: optional BetaBillingPolicy or null`
+
+      Declares which organization is billed for this request. `{"type": "billing_policy", "bill_to": "user_profile"}` bills the customer behind the user profile named in the `anthropic-user-profile-id` header, instead of your organization. If that customer has not linked an Anthropic organization to the profile, or has not allowed your organization to bill it, the request is rejected rather than billed to you. Omit the field, or send `"bill_to": "self"` (the default), to be billed as usual.
+
+      Message Batches does not currently support billing the customer behind a user profile. In a batch, omit the field or send `"bill_to": "self"`. A request in a batch that sets `"bill_to": "user_profile"` gets an `errored` result with an `invalid_request_error`, nobody is billed for it, and the batch's other requests run as usual.
+
+      - `type: "billing_policy"`
+
+      - `bill_to: optional BetaBillTo`
+
+        Who is billed. `self`, the default, bills your organization, as if `billing_policy` were omitted. `user_profile` bills the customer behind the user profile the request names; if that customer has not linked an Anthropic organization to the profile, or has not allowed your organization to bill it, the request is rejected rather than billed to you.
+
+        - `"self"`
+
+        - `"user_profile"`
+
     - `cache_control: optional BetaCacheControlEphemeral or null`
 
       Top-level cache control automatically applies a cache_control marker to the last cacheable block in the request.
@@ -18920,6 +19280,28 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `enforced_spend_limit_reached` (HTTP status 429)
+
+  The organization has crossed the monthly API usage threshold of its API tier.
+
 #### Example
 
 ```bash
@@ -19089,6 +19471,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -19244,6 +19630,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
     URL to a `.jsonl` file containing the results of the Message Batch requests. Specified only once processing ends.
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -19407,6 +19807,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -19576,6 +19980,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```bash
@@ -19736,6 +20154,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -19892,6 +20314,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     Results in the file are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```bash
@@ -20046,6 +20482,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -20107,6 +20547,20 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `id: string`
 
     ID of the Message Batch.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -20247,6 +20701,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -20675,7 +21133,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `content: BetaWebSearchToolResultBlockContent`
 
-              - `BetaWebSearchToolResultError object`
+              - `BetaWebSearchToolResultErrorObject object`
 
                 - `type: "web_search_tool_result_error"`
 
@@ -20835,9 +21293,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: advisor_tool_result
 
-            - `content: BetaAdvisorToolResultError or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
+            - `content: BetaAdvisorToolResultErrorObject or BetaAdvisorResultBlock or BetaAdvisorRedactedResultBlock`
 
-              - `BetaAdvisorToolResultError object`
+              - `BetaAdvisorToolResultErrorObject object`
 
                 - `type: "advisor_tool_result_error"`
 
@@ -20897,7 +21355,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `content: BetaCodeExecutionToolResultBlockContent`
 
-              - `BetaCodeExecutionToolResultError object`
+              - `BetaCodeExecutionToolResultErrorObject object`
 
                 - `type: "code_execution_tool_result_error"`
 
@@ -20969,9 +21427,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: bash_code_execution_tool_result
 
-            - `content: BetaBashCodeExecutionToolResultError or BetaBashCodeExecutionResultBlock`
+            - `content: BetaBashCodeExecutionToolResultErrorObject or BetaBashCodeExecutionResultBlock`
 
-              - `BetaBashCodeExecutionToolResultError object`
+              - `BetaBashCodeExecutionToolResultErrorObject object`
 
                 - `type: "bash_code_execution_tool_result_error"`
 
@@ -21019,9 +21477,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: text_editor_code_execution_tool_result
 
-            - `content: BetaTextEditorCodeExecutionToolResultError or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
+            - `content: BetaTextEditorCodeExecutionToolResultErrorObject or BetaTextEditorCodeExecutionViewResultBlock or BetaTextEditorCodeExecutionCreateResultBlock or BetaTextEditorCodeExecutionStrReplaceResultBlock`
 
-              - `BetaTextEditorCodeExecutionToolResultError object`
+              - `BetaTextEditorCodeExecutionToolResultErrorObject object`
 
                 - `type: "text_editor_code_execution_tool_result_error"`
 
@@ -21097,9 +21555,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: tool_search_tool_result
 
-            - `content: BetaToolSearchToolResultError or BetaToolSearchToolSearchResultBlock`
+            - `content: BetaToolSearchToolResultErrorObject or BetaToolSearchToolSearchResultBlock`
 
-              - `BetaToolSearchToolResultError object`
+              - `BetaToolSearchToolResultErrorObject object`
 
                 - `type: "tool_search_tool_result_error"`
 
@@ -24200,9 +24658,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           default: error
 
-        - `error: BetaError`
+        - `error: BetaErrorObject`
 
-          - `BetaInvalidRequestError object`
+          - `BetaInvalidRequestErrorObject object`
 
             - `type: "invalid_request_error"`
 
@@ -24216,7 +24674,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Invalid request
 
-          - `BetaAuthenticationError object`
+          - `BetaAuthenticationErrorObject object`
 
             - `type: "authentication_error"`
 
@@ -24230,7 +24688,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Authentication error
 
-          - `BetaBillingError object`
+          - `BetaBillingErrorObject object`
 
             - `type: "billing_error"`
 
@@ -24244,7 +24702,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Billing error
 
-          - `BetaPermissionError object`
+          - `BetaPermissionErrorObject object`
 
             - `type: "permission_error"`
 
@@ -24258,7 +24716,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Permission denied
 
-          - `BetaNotFoundError object`
+          - `BetaNotFoundErrorObject object`
 
             - `type: "not_found_error"`
 
@@ -24272,7 +24730,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Not found
 
-          - `BetaRateLimitError object`
+          - `BetaRateLimitErrorObject object`
 
             - `type: "rate_limit_error"`
 
@@ -24286,7 +24744,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Rate limited
 
-          - `BetaGatewayTimeoutError object`
+          - `BetaGatewayTimeoutErrorObject object`
 
             - `type: "timeout_error"`
 
@@ -24300,7 +24758,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Request timeout
 
-          - `BetaAPIError object`
+          - `BetaAPIErrorObject object`
 
             - `type: "api_error"`
 
@@ -24314,7 +24772,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               default: Internal server error
 
-          - `BetaOverloadedError object`
+          - `BetaOverloadedErrorObject object`
 
             - `type: "overloaded_error"`
 
@@ -24341,6 +24799,24 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
       - `type: "expired"`
 
         default: expired
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -24463,6 +24939,10 @@ Create Agent
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -24734,7 +25214,7 @@ Create Agent
 
   - `BetaManagedAgentsMultiagentCoordinatorParams object`
 
-    A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+    Recommendation: use `multiagent_20261001` instead of `coordinator`. A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
     - `type: "coordinator"`
 
@@ -26488,6 +26968,10 @@ List Agents
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -27534,6 +28018,10 @@ Get Agent
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -28563,6 +29051,10 @@ Update Agent
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -28827,7 +29319,7 @@ Update Agent
 
   - `BetaManagedAgentsMultiagentCoordinatorParams object`
 
-    A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
+    Recommendation: use `multiagent_20261001` instead of `coordinator`. A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
     - `type: "coordinator"`
 
@@ -30556,6 +31048,10 @@ Archive Agent
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -31600,6 +32096,10 @@ List Agent Versions
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -32634,6 +33134,10 @@ Create a new environment with the specified configuration.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -32932,6 +33436,24 @@ Create a new environment with the specified configuration.
 
     - `"account"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `environment_create_disabled` (HTTP status 403)
+
+  Anthropic has turned off creating environments for this organization. Existing environments still work.
+
 #### Example
 
 ```bash
@@ -33131,6 +33653,10 @@ List environments with pagination support.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -33315,6 +33841,20 @@ List environments with pagination support.
 
   Token for fetching the next page of results. If `null`, there are no more results available. Pass this value to the `page` parameter in the next request.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```bash
@@ -33483,6 +34023,10 @@ Retrieve a specific environment by ID.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -33664,6 +34208,20 @@ Retrieve a specific environment by ID.
 
     - `"account"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```bash
@@ -33827,6 +34385,10 @@ Update an existing environment's configuration.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -34126,6 +34688,32 @@ Update an existing environment's configuration.
 
     - `"account"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `environment_archived` (HTTP status 400)
+
+  The environment is archived, so it cannot be updated.
+
+- `invalid_config_type_change` (HTTP status 400)
+
+  `config.type` differs from the environment's stored type, which cannot change after creation.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `environment_update_disabled` (HTTP status 403)
+
+  Anthropic has turned off updating environments for this organization. Existing environments still work as they are.
+
 #### Example
 
 ```bash
@@ -34294,6 +34882,10 @@ Delete an environment by ID. Returns a confirmation of the deletion.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -34355,6 +34947,20 @@ Delete an environment by ID. Returns a confirmation of the deletion.
   - `id: string`
 
     Environment identifier
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -34490,6 +35096,10 @@ Archive an environment by ID. Archived environments cannot be used to create new
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -34671,6 +35281,20 @@ Archive an environment by ID. Archived environments cannot be used to create new
 
     - `"account"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```bash
@@ -34726,9 +35350,9 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/archive \
 
 **GET** `/v1/environments/{environment_id}/work/{work_id}`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 Retrieve detailed information about a specific work item.
+
+This endpoint accepts a Claude API key. It rejects the environment key and the work item's `secret`. On [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws?sdk_languages=http) or [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed?sdk_languages=http), use that platform's credentials instead.
 
 #### Path parameters
 
@@ -34841,6 +35465,10 @@ Retrieve detailed information about a specific work item.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -34969,6 +35597,20 @@ Retrieve detailed information about a specific work item.
   - `stopped_at: string or null`
 
     RFC 3339 timestamp when work execution stopped
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -35135,6 +35777,10 @@ Long poll for work items in the queue.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -35415,6 +36061,10 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -35703,6 +36353,10 @@ Record a heartbeat for a work item to maintain the lease.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -35781,6 +36435,16 @@ Record a heartbeat for a work item to maintain the lease.
 
     Effective TTL applied to the lease
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `heartbeat_precondition_failed` (HTTP status 412)
+
+  `expected_last_heartbeat` does not match the stored heartbeat, so another worker may hold the lease.
+
 #### Example
 
 ```bash
@@ -35806,8 +36470,6 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/hea
 ### Stop Work
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}/stop`
-
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Stop a work item, initiating graceful or forced shutdown.
 
@@ -35922,6 +36584,10 @@ Stop a work item, initiating graceful or forced shutdown.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -36059,6 +36725,20 @@ Stop a work item, initiating graceful or forced shutdown.
 
     RFC 3339 timestamp when work execution stopped
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
 #### Example
 
 ```bash
@@ -36099,9 +36779,9 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/sto
 
 **GET** `/v1/environments/{environment_id}/work`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 List work items in an environment.
+
+This endpoint accepts the environment key as a bearer token. It rejects a Claude API key. On [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws?sdk_languages=http) or [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed?sdk_languages=http), use that platform's credentials instead.
 
 #### Path parameters
 
@@ -36224,6 +36904,10 @@ List work items in an environment.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -36394,9 +37078,9 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work \
 
 **POST** `/v1/environments/{environment_id}/work/{work_id}`
 
-Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
-
 Update work item metadata with merge semantics.
+
+This endpoint accepts a Claude API key. It rejects the environment key and the work item's `secret`. On [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws?sdk_languages=http) or [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed?sdk_languages=http), use that platform's credentials instead.
 
 #### Path parameters
 
@@ -36509,6 +37193,10 @@ Update work item metadata with merge semantics.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -36643,6 +37331,24 @@ Update work item metadata with merge semantics.
   - `stopped_at: string or null`
 
     RFC 3339 timestamp when work execution stopped
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `invalid_metadata` (HTTP status 400)
+
+  `metadata` has too many keys, a key or value that is too long, or a reserved key. The message names each problem.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -36800,6 +37506,10 @@ Get statistics about the work queue for an environment.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -36875,6 +37585,20 @@ Get statistics about the work queue for an environment.
   - `workers_polling: number or null`
 
     Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -37010,6 +37734,10 @@ Create Session
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -39694,6 +40422,10 @@ List Sessions
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -41158,6 +41890,10 @@ Get Session
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -42607,6 +43343,10 @@ Update Session
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -44648,6 +45388,10 @@ Delete Session
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -44838,6 +45582,10 @@ Archive Session
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -46420,6 +47168,10 @@ List Events
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -47186,9 +47938,9 @@ List Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 12 more`
+    - `error: BetaManagedAgentsUnknownErrorObject or BetaManagedAgentsModelOverloadedErrorObject or BetaManagedAgentsModelRateLimitedErrorObject or 12 more`
 
-      - `BetaManagedAgentsUnknownError object`
+      - `BetaManagedAgentsUnknownErrorObject object`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -47220,7 +47972,7 @@ List Events
 
             - `type: "terminal"`
 
-      - `BetaManagedAgentsModelOverloadedError object`
+      - `BetaManagedAgentsModelOverloadedErrorObject object`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -47246,7 +47998,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsModelRateLimitedError object`
+      - `BetaManagedAgentsModelRateLimitedErrorObject object`
 
         The model request was rate-limited.
 
@@ -47272,7 +48024,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsModelRequestFailedError object`
+      - `BetaManagedAgentsModelRequestFailedErrorObject object`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -47298,7 +48050,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsMCPConnectionFailedError object`
+      - `BetaManagedAgentsMCPConnectionFailedErrorObject object`
 
         Failed to connect to an MCP server.
 
@@ -47328,7 +48080,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsMCPAuthenticationFailedError object`
+      - `BetaManagedAgentsMCPAuthenticationFailedErrorObject object`
 
         Authentication to an MCP server failed.
 
@@ -47358,7 +48110,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsBillingError object`
+      - `BetaManagedAgentsBillingErrorObject object`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -47384,7 +48136,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsCredentialHostUnreachableError object`
+      - `BetaManagedAgentsCredentialHostUnreachableErrorObject object`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -47418,7 +48170,7 @@ List Events
 
           ID of the vault containing the affected credential.
 
-      - `BetaManagedAgentsToolUseLimitReachedError object`
+      - `BetaManagedAgentsToolUseLimitReachedErrorObject object`
 
         The turn stopped because the agent loop reached its limit on tool-use rounds (one model response that calls tools, plus running those tools, is one round), not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -47444,7 +48196,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsCompactionLimitReachedError object`
+      - `BetaManagedAgentsCompactionLimitReachedErrorObject object`
 
         The turn stopped because the context was compacted the maximum number of times in a row without the model producing a message or a tool call, not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -47470,7 +48222,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryAuthenticationError object`
+      - `BetaManagedAgentsRepositoryAuthenticationErrorObject object`
 
         The repository host rejected the credentials, or required credentials and received none.
 
@@ -47500,7 +48252,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryForbiddenError object`
+      - `BetaManagedAgentsRepositoryForbiddenErrorObject object`
 
         The repository host refused access to the repository.
 
@@ -47530,7 +48282,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryNotFoundError object`
+      - `BetaManagedAgentsRepositoryNotFoundErrorObject object`
 
         The repository host reported the repository as not found.
 
@@ -47560,7 +48312,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryCheckoutError object`
+      - `BetaManagedAgentsRepositoryCheckoutErrorObject object`
 
         The requested branch or commit does not exist in the repository.
 
@@ -47590,7 +48342,7 @@ List Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryCloneError object`
+      - `BetaManagedAgentsRepositoryCloneErrorObject object`
 
         The repository could not be cloned.
 
@@ -49266,17 +50018,17 @@ List Events
 
         - `type: "completed"`
 
-      - `BetaManagedAgentsWorkflowRunResultError object`
+      - `BetaManagedAgentsWorkflowRunResultErrorObject object`
 
         The run failed or reached its time limit.
 
         - `type: "error"`
 
-        - `error: BetaManagedAgentsWorkflowRunError`
+        - `error: BetaManagedAgentsWorkflowRunErrorObject`
 
           Why the run did not finish.
 
-          - `BetaManagedAgentsTimeoutWorkflowRunError object`
+          - `BetaManagedAgentsTimeoutWorkflowRunErrorObject object`
 
             The run reached its time limit.
 
@@ -49286,7 +50038,7 @@ List Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsProgramWorkflowRunError object`
+          - `BetaManagedAgentsProgramWorkflowRunErrorObject object`
 
             The plan, a program that the agent wrote, failed, or the server refused it.
 
@@ -49296,7 +50048,7 @@ List Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsUnknownWorkflowRunError object`
+          - `BetaManagedAgentsUnknownWorkflowRunErrorObject object`
 
             A failure that has no type of its own.
 
@@ -49306,7 +50058,7 @@ List Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsThreadLimitWorkflowRunError object`
+          - `BetaManagedAgentsThreadLimitWorkflowRunErrorObject object`
 
             The run exceeded the limit on the number of threads that a run can create.
 
@@ -49316,7 +50068,7 @@ List Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsMaxWorkflowRunsWorkflowRunError object`
+          - `BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject object`
 
             No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
 
@@ -49438,7 +50190,7 @@ List Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsWorkflowRunError`
+    - `error: BetaManagedAgentsWorkflowRunErrorObject`
 
       Why the run did not finish, or was not created.
 
@@ -49612,6 +50364,10 @@ Send Events
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -50638,6 +51394,10 @@ Stream Events
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -51404,9 +52164,9 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 12 more`
+    - `error: BetaManagedAgentsUnknownErrorObject or BetaManagedAgentsModelOverloadedErrorObject or BetaManagedAgentsModelRateLimitedErrorObject or 12 more`
 
-      - `BetaManagedAgentsUnknownError object`
+      - `BetaManagedAgentsUnknownErrorObject object`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -51438,7 +52198,7 @@ Stream Events
 
             - `type: "terminal"`
 
-      - `BetaManagedAgentsModelOverloadedError object`
+      - `BetaManagedAgentsModelOverloadedErrorObject object`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -51464,7 +52224,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsModelRateLimitedError object`
+      - `BetaManagedAgentsModelRateLimitedErrorObject object`
 
         The model request was rate-limited.
 
@@ -51490,7 +52250,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsModelRequestFailedError object`
+      - `BetaManagedAgentsModelRequestFailedErrorObject object`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -51516,7 +52276,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsMCPConnectionFailedError object`
+      - `BetaManagedAgentsMCPConnectionFailedErrorObject object`
 
         Failed to connect to an MCP server.
 
@@ -51546,7 +52306,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsMCPAuthenticationFailedError object`
+      - `BetaManagedAgentsMCPAuthenticationFailedErrorObject object`
 
         Authentication to an MCP server failed.
 
@@ -51576,7 +52336,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsBillingError object`
+      - `BetaManagedAgentsBillingErrorObject object`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -51602,7 +52362,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsCredentialHostUnreachableError object`
+      - `BetaManagedAgentsCredentialHostUnreachableErrorObject object`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -51636,7 +52396,7 @@ Stream Events
 
           ID of the vault containing the affected credential.
 
-      - `BetaManagedAgentsToolUseLimitReachedError object`
+      - `BetaManagedAgentsToolUseLimitReachedErrorObject object`
 
         The turn stopped because the agent loop reached its limit on tool-use rounds (one model response that calls tools, plus running those tools, is one round), not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -51662,7 +52422,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsCompactionLimitReachedError object`
+      - `BetaManagedAgentsCompactionLimitReachedErrorObject object`
 
         The turn stopped because the context was compacted the maximum number of times in a row without the model producing a message or a tool call, not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -51688,7 +52448,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryAuthenticationError object`
+      - `BetaManagedAgentsRepositoryAuthenticationErrorObject object`
 
         The repository host rejected the credentials, or required credentials and received none.
 
@@ -51718,7 +52478,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryForbiddenError object`
+      - `BetaManagedAgentsRepositoryForbiddenErrorObject object`
 
         The repository host refused access to the repository.
 
@@ -51748,7 +52508,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryNotFoundError object`
+      - `BetaManagedAgentsRepositoryNotFoundErrorObject object`
 
         The repository host reported the repository as not found.
 
@@ -51778,7 +52538,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryCheckoutError object`
+      - `BetaManagedAgentsRepositoryCheckoutErrorObject object`
 
         The requested branch or commit does not exist in the repository.
 
@@ -51808,7 +52568,7 @@ Stream Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryCloneError object`
+      - `BetaManagedAgentsRepositoryCloneErrorObject object`
 
         The repository could not be cloned.
 
@@ -53534,17 +54294,17 @@ Stream Events
 
         - `type: "completed"`
 
-      - `BetaManagedAgentsWorkflowRunResultError object`
+      - `BetaManagedAgentsWorkflowRunResultErrorObject object`
 
         The run failed or reached its time limit.
 
         - `type: "error"`
 
-        - `error: BetaManagedAgentsWorkflowRunError`
+        - `error: BetaManagedAgentsWorkflowRunErrorObject`
 
           Why the run did not finish.
 
-          - `BetaManagedAgentsTimeoutWorkflowRunError object`
+          - `BetaManagedAgentsTimeoutWorkflowRunErrorObject object`
 
             The run reached its time limit.
 
@@ -53554,7 +54314,7 @@ Stream Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsProgramWorkflowRunError object`
+          - `BetaManagedAgentsProgramWorkflowRunErrorObject object`
 
             The plan, a program that the agent wrote, failed, or the server refused it.
 
@@ -53564,7 +54324,7 @@ Stream Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsUnknownWorkflowRunError object`
+          - `BetaManagedAgentsUnknownWorkflowRunErrorObject object`
 
             A failure that has no type of its own.
 
@@ -53574,7 +54334,7 @@ Stream Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsThreadLimitWorkflowRunError object`
+          - `BetaManagedAgentsThreadLimitWorkflowRunErrorObject object`
 
             The run exceeded the limit on the number of threads that a run can create.
 
@@ -53584,7 +54344,7 @@ Stream Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsMaxWorkflowRunsWorkflowRunError object`
+          - `BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject object`
 
             No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
 
@@ -53706,7 +54466,7 @@ Stream Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsWorkflowRunError`
+    - `error: BetaManagedAgentsWorkflowRunErrorObject`
 
       Why the run did not finish, or was not created.
 
@@ -53862,6 +54622,10 @@ Add Session Resource
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -54104,6 +54868,10 @@ List Session Resources
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -54422,6 +55190,10 @@ Get Session Resource
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -54717,6 +55489,10 @@ Update Session Resource
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -55026,6 +55802,10 @@ Delete Session Resource
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -55244,6 +56024,10 @@ List Session Threads
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -56345,6 +57129,10 @@ Get Session Thread
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -57435,6 +58223,10 @@ Archive Session Thread
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -58538,6 +59330,10 @@ List Session Thread Events
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -59304,9 +60100,9 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 12 more`
+    - `error: BetaManagedAgentsUnknownErrorObject or BetaManagedAgentsModelOverloadedErrorObject or BetaManagedAgentsModelRateLimitedErrorObject or 12 more`
 
-      - `BetaManagedAgentsUnknownError object`
+      - `BetaManagedAgentsUnknownErrorObject object`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -59338,7 +60134,7 @@ List Session Thread Events
 
             - `type: "terminal"`
 
-      - `BetaManagedAgentsModelOverloadedError object`
+      - `BetaManagedAgentsModelOverloadedErrorObject object`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -59364,7 +60160,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsModelRateLimitedError object`
+      - `BetaManagedAgentsModelRateLimitedErrorObject object`
 
         The model request was rate-limited.
 
@@ -59390,7 +60186,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsModelRequestFailedError object`
+      - `BetaManagedAgentsModelRequestFailedErrorObject object`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -59416,7 +60212,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsMCPConnectionFailedError object`
+      - `BetaManagedAgentsMCPConnectionFailedErrorObject object`
 
         Failed to connect to an MCP server.
 
@@ -59446,7 +60242,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsMCPAuthenticationFailedError object`
+      - `BetaManagedAgentsMCPAuthenticationFailedErrorObject object`
 
         Authentication to an MCP server failed.
 
@@ -59476,7 +60272,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsBillingError object`
+      - `BetaManagedAgentsBillingErrorObject object`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -59502,7 +60298,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsCredentialHostUnreachableError object`
+      - `BetaManagedAgentsCredentialHostUnreachableErrorObject object`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -59536,7 +60332,7 @@ List Session Thread Events
 
           ID of the vault containing the affected credential.
 
-      - `BetaManagedAgentsToolUseLimitReachedError object`
+      - `BetaManagedAgentsToolUseLimitReachedErrorObject object`
 
         The turn stopped because the agent loop reached its limit on tool-use rounds (one model response that calls tools, plus running those tools, is one round), not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -59562,7 +60358,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsCompactionLimitReachedError object`
+      - `BetaManagedAgentsCompactionLimitReachedErrorObject object`
 
         The turn stopped because the context was compacted the maximum number of times in a row without the model producing a message or a tool call, not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -59588,7 +60384,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryAuthenticationError object`
+      - `BetaManagedAgentsRepositoryAuthenticationErrorObject object`
 
         The repository host rejected the credentials, or required credentials and received none.
 
@@ -59618,7 +60414,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryForbiddenError object`
+      - `BetaManagedAgentsRepositoryForbiddenErrorObject object`
 
         The repository host refused access to the repository.
 
@@ -59648,7 +60444,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryNotFoundError object`
+      - `BetaManagedAgentsRepositoryNotFoundErrorObject object`
 
         The repository host reported the repository as not found.
 
@@ -59678,7 +60474,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryCheckoutError object`
+      - `BetaManagedAgentsRepositoryCheckoutErrorObject object`
 
         The requested branch or commit does not exist in the repository.
 
@@ -59708,7 +60504,7 @@ List Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryCloneError object`
+      - `BetaManagedAgentsRepositoryCloneErrorObject object`
 
         The repository could not be cloned.
 
@@ -61384,17 +62180,17 @@ List Session Thread Events
 
         - `type: "completed"`
 
-      - `BetaManagedAgentsWorkflowRunResultError object`
+      - `BetaManagedAgentsWorkflowRunResultErrorObject object`
 
         The run failed or reached its time limit.
 
         - `type: "error"`
 
-        - `error: BetaManagedAgentsWorkflowRunError`
+        - `error: BetaManagedAgentsWorkflowRunErrorObject`
 
           Why the run did not finish.
 
-          - `BetaManagedAgentsTimeoutWorkflowRunError object`
+          - `BetaManagedAgentsTimeoutWorkflowRunErrorObject object`
 
             The run reached its time limit.
 
@@ -61404,7 +62200,7 @@ List Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsProgramWorkflowRunError object`
+          - `BetaManagedAgentsProgramWorkflowRunErrorObject object`
 
             The plan, a program that the agent wrote, failed, or the server refused it.
 
@@ -61414,7 +62210,7 @@ List Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsUnknownWorkflowRunError object`
+          - `BetaManagedAgentsUnknownWorkflowRunErrorObject object`
 
             A failure that has no type of its own.
 
@@ -61424,7 +62220,7 @@ List Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsThreadLimitWorkflowRunError object`
+          - `BetaManagedAgentsThreadLimitWorkflowRunErrorObject object`
 
             The run exceeded the limit on the number of threads that a run can create.
 
@@ -61434,7 +62230,7 @@ List Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsMaxWorkflowRunsWorkflowRunError object`
+          - `BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject object`
 
             No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
 
@@ -61556,7 +62352,7 @@ List Session Thread Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsWorkflowRunError`
+    - `error: BetaManagedAgentsWorkflowRunErrorObject`
 
       Why the run did not finish, or was not created.
 
@@ -61742,6 +62538,10 @@ Stream Session Thread Events
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -62509,9 +63309,9 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsUnknownError or BetaManagedAgentsModelOverloadedError or BetaManagedAgentsModelRateLimitedError or 12 more`
+    - `error: BetaManagedAgentsUnknownErrorObject or BetaManagedAgentsModelOverloadedErrorObject or BetaManagedAgentsModelRateLimitedErrorObject or 12 more`
 
-      - `BetaManagedAgentsUnknownError object`
+      - `BetaManagedAgentsUnknownErrorObject object`
 
         An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -62543,7 +63343,7 @@ Stream Session Thread Events
 
             - `type: "terminal"`
 
-      - `BetaManagedAgentsModelOverloadedError object`
+      - `BetaManagedAgentsModelOverloadedErrorObject object`
 
         The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -62569,7 +63369,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsModelRateLimitedError object`
+      - `BetaManagedAgentsModelRateLimitedErrorObject object`
 
         The model request was rate-limited.
 
@@ -62595,7 +63395,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsModelRequestFailedError object`
+      - `BetaManagedAgentsModelRequestFailedErrorObject object`
 
         A model request failed for a reason other than overload or rate-limiting.
 
@@ -62621,7 +63421,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsMCPConnectionFailedError object`
+      - `BetaManagedAgentsMCPConnectionFailedErrorObject object`
 
         Failed to connect to an MCP server.
 
@@ -62651,7 +63451,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsMCPAuthenticationFailedError object`
+      - `BetaManagedAgentsMCPAuthenticationFailedErrorObject object`
 
         Authentication to an MCP server failed.
 
@@ -62681,7 +63481,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsBillingError object`
+      - `BetaManagedAgentsBillingErrorObject object`
 
         The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -62707,7 +63507,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsCredentialHostUnreachableError object`
+      - `BetaManagedAgentsCredentialHostUnreachableErrorObject object`
 
         An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
 
@@ -62741,7 +63541,7 @@ Stream Session Thread Events
 
           ID of the vault containing the affected credential.
 
-      - `BetaManagedAgentsToolUseLimitReachedError object`
+      - `BetaManagedAgentsToolUseLimitReachedErrorObject object`
 
         The turn stopped because the agent loop reached its limit on tool-use rounds (one model response that calls tools, plus running those tools, is one round), not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -62767,7 +63567,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsCompactionLimitReachedError object`
+      - `BetaManagedAgentsCompactionLimitReachedErrorObject object`
 
         The turn stopped because the context was compacted the maximum number of times in a row without the model producing a message or a tool call, not because a request failed. The thread goes idle with `stop_reason: retries_exhausted` (a child thread then terminates); the next `user.message` starts a new turn.
 
@@ -62793,7 +63593,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryAuthenticationError object`
+      - `BetaManagedAgentsRepositoryAuthenticationErrorObject object`
 
         The repository host rejected the credentials, or required credentials and received none.
 
@@ -62823,7 +63623,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryForbiddenError object`
+      - `BetaManagedAgentsRepositoryForbiddenErrorObject object`
 
         The repository host refused access to the repository.
 
@@ -62853,7 +63653,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryNotFoundError object`
+      - `BetaManagedAgentsRepositoryNotFoundErrorObject object`
 
         The repository host reported the repository as not found.
 
@@ -62883,7 +63683,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryCheckoutError object`
+      - `BetaManagedAgentsRepositoryCheckoutErrorObject object`
 
         The requested branch or commit does not exist in the repository.
 
@@ -62913,7 +63713,7 @@ Stream Session Thread Events
 
             The session encountered a terminal error and will transition to `terminated` state.
 
-      - `BetaManagedAgentsRepositoryCloneError object`
+      - `BetaManagedAgentsRepositoryCloneErrorObject object`
 
         The repository could not be cloned.
 
@@ -64639,17 +65439,17 @@ Stream Session Thread Events
 
         - `type: "completed"`
 
-      - `BetaManagedAgentsWorkflowRunResultError object`
+      - `BetaManagedAgentsWorkflowRunResultErrorObject object`
 
         The run failed or reached its time limit.
 
         - `type: "error"`
 
-        - `error: BetaManagedAgentsWorkflowRunError`
+        - `error: BetaManagedAgentsWorkflowRunErrorObject`
 
           Why the run did not finish.
 
-          - `BetaManagedAgentsTimeoutWorkflowRunError object`
+          - `BetaManagedAgentsTimeoutWorkflowRunErrorObject object`
 
             The run reached its time limit.
 
@@ -64659,7 +65459,7 @@ Stream Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsProgramWorkflowRunError object`
+          - `BetaManagedAgentsProgramWorkflowRunErrorObject object`
 
             The plan, a program that the agent wrote, failed, or the server refused it.
 
@@ -64669,7 +65469,7 @@ Stream Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsUnknownWorkflowRunError object`
+          - `BetaManagedAgentsUnknownWorkflowRunErrorObject object`
 
             A failure that has no type of its own.
 
@@ -64679,7 +65479,7 @@ Stream Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsThreadLimitWorkflowRunError object`
+          - `BetaManagedAgentsThreadLimitWorkflowRunErrorObject object`
 
             The run exceeded the limit on the number of threads that a run can create.
 
@@ -64689,7 +65489,7 @@ Stream Session Thread Events
 
               Short explanation written by the server. It never contains content from the run or its agents.
 
-          - `BetaManagedAgentsMaxWorkflowRunsWorkflowRunError object`
+          - `BetaManagedAgentsMaxWorkflowRunsWorkflowRunErrorObject object`
 
             No run was created, because the session was at its limit of open workflow runs, which are runs that have not ended. Only `workflow_run.error` carries this type.
 
@@ -64811,7 +65611,7 @@ Stream Session Thread Events
 
       Unique identifier for this event.
 
-    - `error: BetaManagedAgentsWorkflowRunError`
+    - `error: BetaManagedAgentsWorkflowRunErrorObject`
 
       Why the run did not finish, or was not created.
 
@@ -64963,6 +65763,10 @@ Create Deployment
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -65702,89 +66506,89 @@ Create Deployment
 
       - `type: "error"`
 
-      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+      - `error: BetaManagedAgentsDeploymentPausedReasonErrorObject`
 
         The failed run's error.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -66180,6 +66984,10 @@ List Deployments
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -66512,89 +67320,89 @@ List Deployments
 
       - `type: "error"`
 
-      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+      - `error: BetaManagedAgentsDeploymentPausedReasonErrorObject`
 
         The failed run's error.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -66939,6 +67747,10 @@ Get Deployment
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -67271,89 +68083,89 @@ Get Deployment
 
       - `type: "error"`
 
-      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+      - `error: BetaManagedAgentsDeploymentPausedReasonErrorObject`
 
         The failed run's error.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -67688,6 +68500,10 @@ Update Deployment
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -68427,89 +69243,89 @@ Update Deployment
 
       - `type: "error"`
 
-      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+      - `error: BetaManagedAgentsDeploymentPausedReasonErrorObject`
 
         The failed run's error.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -68853,6 +69669,10 @@ Archive Deployment
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -69185,89 +70005,89 @@ Archive Deployment
 
       - `type: "error"`
 
-      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+      - `error: BetaManagedAgentsDeploymentPausedReasonErrorObject`
 
         The failed run's error.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -69604,6 +70424,10 @@ Run Deployment Now
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -69684,11 +70508,11 @@ Run Deployment Now
 
     ID of the deployment that produced this run.
 
-  - `error: BetaManagedAgentsEnvironmentArchivedRunError or BetaManagedAgentsAgentArchivedRunError or BetaManagedAgentsEnvironmentNotFoundRunError or 13 more or null`
+  - `error: BetaManagedAgentsEnvironmentArchivedRunErrorObject or BetaManagedAgentsAgentArchivedRunErrorObject or BetaManagedAgentsEnvironmentNotFoundRunErrorObject or 13 more or null`
 
     Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
-    - `BetaManagedAgentsEnvironmentArchivedRunError object`
+    - `BetaManagedAgentsEnvironmentArchivedRunErrorObject object`
 
       The deployment's environment was archived.
 
@@ -69698,7 +70522,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsAgentArchivedRunError object`
+    - `BetaManagedAgentsAgentArchivedRunErrorObject object`
 
       The deployment's agent was archived.
 
@@ -69708,7 +70532,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsEnvironmentNotFoundRunError object`
+    - `BetaManagedAgentsEnvironmentNotFoundRunErrorObject object`
 
       The deployment's environment no longer exists.
 
@@ -69718,7 +70542,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsVaultNotFoundRunError object`
+    - `BetaManagedAgentsVaultNotFoundRunErrorObject object`
 
       A vault referenced by the deployment no longer exists.
 
@@ -69728,7 +70552,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsVaultArchivedRunError object`
+    - `BetaManagedAgentsVaultArchivedRunErrorObject object`
 
       A vault referenced by the deployment is archived.
 
@@ -69738,7 +70562,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsFileNotFoundRunError object`
+    - `BetaManagedAgentsFileNotFoundRunErrorObject object`
 
       A file resource referenced by the deployment no longer exists.
 
@@ -69748,7 +70572,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsMemoryStoreArchivedRunError object`
+    - `BetaManagedAgentsMemoryStoreArchivedRunErrorObject object`
 
       A memory store referenced by the deployment is archived.
 
@@ -69758,7 +70582,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSkillNotFoundRunError object`
+    - `BetaManagedAgentsSkillNotFoundRunErrorObject object`
 
       A skill referenced by the deployment's agent no longer exists.
 
@@ -69768,7 +70592,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSessionResourceNotFoundRunError object`
+    - `BetaManagedAgentsSessionResourceNotFoundRunErrorObject object`
 
       A referenced resource no longer exists and its kind was not reported.
 
@@ -69778,7 +70602,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsWorkspaceArchivedRunError object`
+    - `BetaManagedAgentsWorkspaceArchivedRunErrorObject object`
 
       The deployment's workspace was archived.
 
@@ -69788,7 +70612,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsOrganizationDisabledRunError object`
+    - `BetaManagedAgentsOrganizationDisabledRunErrorObject object`
 
       The deployment's organization is disabled.
 
@@ -69798,7 +70622,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSessionRateLimitedRunError object`
+    - `BetaManagedAgentsSessionRateLimitedRunErrorObject object`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
@@ -69808,7 +70632,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSessionCreationRejectedRunError object`
+    - `BetaManagedAgentsSessionCreationRejectedRunErrorObject object`
 
       The session create request was rejected with a non-retryable validation error.
 
@@ -69818,7 +70642,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsUnknownRunError object`
+    - `BetaManagedAgentsUnknownRunErrorObject object`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
@@ -69828,7 +70652,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSelfHostedResourcesUnsupportedRunError object`
+    - `BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorObject object`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
@@ -69838,7 +70662,7 @@ Run Deployment Now
 
         Human-readable error description.
 
-    - `BetaManagedAgentsMCPEgressBlockedRunError object`
+    - `BetaManagedAgentsMCPEgressBlockedRunErrorObject object`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -70026,6 +70850,10 @@ Pause Deployment
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -70359,89 +71187,89 @@ Pause Deployment
 
       - `type: "error"`
 
-      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+      - `error: BetaManagedAgentsDeploymentPausedReasonErrorObject`
 
         The failed run's error.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -70778,6 +71606,10 @@ Unpause Deployment
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -71110,89 +71942,89 @@ Unpause Deployment
 
       - `type: "error"`
 
-      - `error: BetaManagedAgentsDeploymentPausedReasonError`
+      - `error: BetaManagedAgentsDeploymentPausedReasonErrorObject`
 
         The failed run's error.
 
-        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's environment was archived.
 
           - `type: "environment_archived_error"`
 
-        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsAgentArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's agent was archived.
 
           - `type: "agent_archived_error"`
 
-        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonErrorObject object`
 
           The deployment's environment no longer exists.
 
           - `type: "environment_not_found_error"`
 
-        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultNotFoundDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment no longer exists.
 
           - `type: "vault_not_found_error"`
 
-        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsFileNotFoundDeploymentPausedReasonErrorObject object`
 
           A file resource referenced by the deployment no longer exists.
 
           - `type: "file_not_found_error"`
 
-        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonErrorObject object`
 
           A referenced resource no longer exists and its kind was not reported.
 
           - `type: "session_resource_not_found_error"`
 
-        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonErrorObject object`
 
           The deployment's workspace was archived.
 
           - `type: "workspace_archived_error"`
 
-        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError object`
+        - `BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonErrorObject object`
 
           The deployment's organization is disabled.
 
           - `type: "organization_disabled_error"`
 
-        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonErrorObject object`
 
           A memory store referenced by the deployment is archived.
 
           - `type: "memory_store_archived_error"`
 
-        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSkillNotFoundDeploymentPausedReasonErrorObject object`
 
           A skill referenced by the deployment's agent no longer exists.
 
           - `type: "skill_not_found_error"`
 
-        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsVaultArchivedDeploymentPausedReasonErrorObject object`
 
           A vault referenced by the deployment is archived.
 
           - `type: "vault_archived_error"`
 
-        - `BetaManagedAgentsUnknownDeploymentPausedReasonError object`
+        - `BetaManagedAgentsUnknownDeploymentPausedReasonErrorObject object`
 
           An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
 
           - `type: "unknown_error"`
 
-        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonErrorObject object`
 
           The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
           - `type: "self_hosted_resources_unsupported_error"`
 
-        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError object`
+        - `BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonErrorObject object`
 
           An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -71581,6 +72413,10 @@ List Deployment Runs
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -71661,11 +72497,11 @@ List Deployment Runs
 
     ID of the deployment that produced this run.
 
-  - `error: BetaManagedAgentsEnvironmentArchivedRunError or BetaManagedAgentsAgentArchivedRunError or BetaManagedAgentsEnvironmentNotFoundRunError or 13 more or null`
+  - `error: BetaManagedAgentsEnvironmentArchivedRunErrorObject or BetaManagedAgentsAgentArchivedRunErrorObject or BetaManagedAgentsEnvironmentNotFoundRunErrorObject or 13 more or null`
 
     Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
-    - `BetaManagedAgentsEnvironmentArchivedRunError object`
+    - `BetaManagedAgentsEnvironmentArchivedRunErrorObject object`
 
       The deployment's environment was archived.
 
@@ -71675,7 +72511,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsAgentArchivedRunError object`
+    - `BetaManagedAgentsAgentArchivedRunErrorObject object`
 
       The deployment's agent was archived.
 
@@ -71685,7 +72521,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsEnvironmentNotFoundRunError object`
+    - `BetaManagedAgentsEnvironmentNotFoundRunErrorObject object`
 
       The deployment's environment no longer exists.
 
@@ -71695,7 +72531,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsVaultNotFoundRunError object`
+    - `BetaManagedAgentsVaultNotFoundRunErrorObject object`
 
       A vault referenced by the deployment no longer exists.
 
@@ -71705,7 +72541,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsVaultArchivedRunError object`
+    - `BetaManagedAgentsVaultArchivedRunErrorObject object`
 
       A vault referenced by the deployment is archived.
 
@@ -71715,7 +72551,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsFileNotFoundRunError object`
+    - `BetaManagedAgentsFileNotFoundRunErrorObject object`
 
       A file resource referenced by the deployment no longer exists.
 
@@ -71725,7 +72561,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsMemoryStoreArchivedRunError object`
+    - `BetaManagedAgentsMemoryStoreArchivedRunErrorObject object`
 
       A memory store referenced by the deployment is archived.
 
@@ -71735,7 +72571,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSkillNotFoundRunError object`
+    - `BetaManagedAgentsSkillNotFoundRunErrorObject object`
 
       A skill referenced by the deployment's agent no longer exists.
 
@@ -71745,7 +72581,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSessionResourceNotFoundRunError object`
+    - `BetaManagedAgentsSessionResourceNotFoundRunErrorObject object`
 
       A referenced resource no longer exists and its kind was not reported.
 
@@ -71755,7 +72591,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsWorkspaceArchivedRunError object`
+    - `BetaManagedAgentsWorkspaceArchivedRunErrorObject object`
 
       The deployment's workspace was archived.
 
@@ -71765,7 +72601,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsOrganizationDisabledRunError object`
+    - `BetaManagedAgentsOrganizationDisabledRunErrorObject object`
 
       The deployment's organization is disabled.
 
@@ -71775,7 +72611,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSessionRateLimitedRunError object`
+    - `BetaManagedAgentsSessionRateLimitedRunErrorObject object`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
@@ -71785,7 +72621,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSessionCreationRejectedRunError object`
+    - `BetaManagedAgentsSessionCreationRejectedRunErrorObject object`
 
       The session create request was rejected with a non-retryable validation error.
 
@@ -71795,7 +72631,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsUnknownRunError object`
+    - `BetaManagedAgentsUnknownRunErrorObject object`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
@@ -71805,7 +72641,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSelfHostedResourcesUnsupportedRunError object`
+    - `BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorObject object`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
@@ -71815,7 +72651,7 @@ List Deployment Runs
 
         Human-readable error description.
 
-    - `BetaManagedAgentsMCPEgressBlockedRunError object`
+    - `BetaManagedAgentsMCPEgressBlockedRunErrorObject object`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -72012,6 +72848,10 @@ Get Deployment Run
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -72092,11 +72932,11 @@ Get Deployment Run
 
     ID of the deployment that produced this run.
 
-  - `error: BetaManagedAgentsEnvironmentArchivedRunError or BetaManagedAgentsAgentArchivedRunError or BetaManagedAgentsEnvironmentNotFoundRunError or 13 more or null`
+  - `error: BetaManagedAgentsEnvironmentArchivedRunErrorObject or BetaManagedAgentsAgentArchivedRunErrorObject or BetaManagedAgentsEnvironmentNotFoundRunErrorObject or 13 more or null`
 
     Populated on creation failure. Null on success. Exactly one of `session_id` or `error` is non-null.
 
-    - `BetaManagedAgentsEnvironmentArchivedRunError object`
+    - `BetaManagedAgentsEnvironmentArchivedRunErrorObject object`
 
       The deployment's environment was archived.
 
@@ -72106,7 +72946,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsAgentArchivedRunError object`
+    - `BetaManagedAgentsAgentArchivedRunErrorObject object`
 
       The deployment's agent was archived.
 
@@ -72116,7 +72956,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsEnvironmentNotFoundRunError object`
+    - `BetaManagedAgentsEnvironmentNotFoundRunErrorObject object`
 
       The deployment's environment no longer exists.
 
@@ -72126,7 +72966,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsVaultNotFoundRunError object`
+    - `BetaManagedAgentsVaultNotFoundRunErrorObject object`
 
       A vault referenced by the deployment no longer exists.
 
@@ -72136,7 +72976,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsVaultArchivedRunError object`
+    - `BetaManagedAgentsVaultArchivedRunErrorObject object`
 
       A vault referenced by the deployment is archived.
 
@@ -72146,7 +72986,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsFileNotFoundRunError object`
+    - `BetaManagedAgentsFileNotFoundRunErrorObject object`
 
       A file resource referenced by the deployment no longer exists.
 
@@ -72156,7 +72996,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsMemoryStoreArchivedRunError object`
+    - `BetaManagedAgentsMemoryStoreArchivedRunErrorObject object`
 
       A memory store referenced by the deployment is archived.
 
@@ -72166,7 +73006,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSkillNotFoundRunError object`
+    - `BetaManagedAgentsSkillNotFoundRunErrorObject object`
 
       A skill referenced by the deployment's agent no longer exists.
 
@@ -72176,7 +73016,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSessionResourceNotFoundRunError object`
+    - `BetaManagedAgentsSessionResourceNotFoundRunErrorObject object`
 
       A referenced resource no longer exists and its kind was not reported.
 
@@ -72186,7 +73026,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsWorkspaceArchivedRunError object`
+    - `BetaManagedAgentsWorkspaceArchivedRunErrorObject object`
 
       The deployment's workspace was archived.
 
@@ -72196,7 +73036,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsOrganizationDisabledRunError object`
+    - `BetaManagedAgentsOrganizationDisabledRunErrorObject object`
 
       The deployment's organization is disabled.
 
@@ -72206,7 +73046,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSessionRateLimitedRunError object`
+    - `BetaManagedAgentsSessionRateLimitedRunErrorObject object`
 
       Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
 
@@ -72216,7 +73056,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSessionCreationRejectedRunError object`
+    - `BetaManagedAgentsSessionCreationRejectedRunErrorObject object`
 
       The session create request was rejected with a non-retryable validation error.
 
@@ -72226,7 +73066,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsUnknownRunError object`
+    - `BetaManagedAgentsUnknownRunErrorObject object`
 
       An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
 
@@ -72236,7 +73076,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsSelfHostedResourcesUnsupportedRunError object`
+    - `BetaManagedAgentsSelfHostedResourcesUnsupportedRunErrorObject object`
 
       The deployment configures resources, but its environment is self-hosted and cannot mount them.
 
@@ -72246,7 +73086,7 @@ Get Deployment Run
 
         Human-readable error description.
 
-    - `BetaManagedAgentsMCPEgressBlockedRunError object`
+    - `BetaManagedAgentsMCPEgressBlockedRunErrorObject object`
 
       An MCP server host used by the deployment's agent is blocked by the environment's network policy.
 
@@ -72429,6 +73269,10 @@ Create a Vault
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -72686,6 +73530,10 @@ List Vaults
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -72922,6 +73770,10 @@ Retrieve a Vault
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -73148,6 +74000,10 @@ Update a Vault
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -73395,6 +74251,10 @@ Delete a Vault
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -73589,6 +74449,10 @@ Archive a Vault
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -73819,6 +74683,10 @@ Create a Credential
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -74376,6 +75244,10 @@ List Credentials
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -74739,6 +75611,10 @@ Retrieve a Credential
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -75092,6 +75968,10 @@ Update a Credential
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -75596,6 +76476,10 @@ Delete a Credential
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -75794,6 +76678,10 @@ Archive a Credential
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -76150,6 +77038,10 @@ Validate an MCP OAuth Credential
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -76434,6 +77326,10 @@ Create a Memory Store
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -76725,6 +77621,10 @@ List Memory Stores
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -76972,6 +77872,10 @@ Retrieve a Memory Store
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -77213,6 +78117,10 @@ Update a Memory Store
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -77480,6 +78388,10 @@ Delete a Memory Store
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -77676,6 +78588,10 @@ Archive a Memory Store
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -77935,6 +78851,10 @@ Create a Memory
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -78253,6 +79173,10 @@ List Memories
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -78552,6 +79476,10 @@ Retrieve a Memory
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -78825,6 +79753,10 @@ Update a Memory
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -79122,6 +80054,10 @@ Delete a Memory
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -79396,6 +80332,10 @@ List Memory Versions
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -79757,6 +80697,10 @@ Retrieve a Memory Version
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -80098,6 +81042,10 @@ Redact a Memory Version
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -80432,6 +81380,10 @@ Upload File
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -80555,6 +81507,32 @@ Upload File
     - `id: string`
 
       The ID of the scoping resource (e.g., the session ID).
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `storage_quota_exceeded` (HTTP status 400)
+
+  The organization's file storage quota is exhausted. Delete files to free up space, then retry the upload.
 
 #### Example
 
@@ -80719,6 +81697,10 @@ List Files
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -80834,6 +81816,28 @@ List Files
 - `next_page: optional string or null`
 
   Opaque cursor for the next page. Supply as `?page=` to fetch the next page; null when there are no more results.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -80985,6 +81989,10 @@ Download File
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -81030,6 +82038,36 @@ Download File
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
 
   Only needed for credentials that can act on more than one Workspace. A credential that belongs to a specific Workspace may omit it; if sent, it must match that Workspace.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `file_not_downloadable` (HTTP status 400)
+
+  The file has `downloadable: false`. Only files generated by a tool, such as the code execution tool, can be downloaded.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `file_expired` (HTTP status 404)
+
+  The file's `expires_at` has passed, so its content is no longer available.
 
 #### Example
 
@@ -81157,6 +82195,10 @@ Get File Metadata
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -81266,6 +82308,28 @@ Get File Metadata
     - `id: string`
 
       The ID of the scoping resource (e.g., the session ID).
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -81412,6 +82476,10 @@ Delete File
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -81473,6 +82541,28 @@ Delete File
   - `id: string`
 
     ID of the deleted file.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -81606,6 +82696,10 @@ Create Skill
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -81735,6 +82829,32 @@ Create Skill
     ISO 8601 timestamp of when the skill was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `cmek_context_unavailable` (HTTP status 503)
+
+  The workspace's encryption settings could not be read, so the request was refused. Retry in a few minutes.
 
 #### Example
 
@@ -81899,6 +83019,10 @@ List Skills
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -82022,6 +83146,20 @@ List Skills
   Token for fetching the next page of results.
 
   If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -82172,6 +83310,10 @@ Get Skill
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -82287,6 +83429,20 @@ Get Skill
     ISO 8601 timestamp of when the skill was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -82432,6 +83588,10 @@ Delete Skill
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -82495,6 +83655,20 @@ Delete Skill
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -82636,6 +83810,10 @@ Create Skill Version
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -82731,6 +83909,32 @@ Create Skill Version
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `cmek_context_unavailable` (HTTP status 503)
+
+  The workspace's encryption settings could not be read, so the request was refused. Retry in a few minutes.
 
 #### Example
 
@@ -82889,6 +84093,10 @@ List Skill Versions
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -82984,6 +84192,20 @@ List Skill Versions
   Token for fetching the next page of results.
 
   If `null`, there are no more results available. Pass this value to the `page` parameter in the next request to get the next page.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -83136,6 +84358,10 @@ Download a skill version's content as a zip archive.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -83317,6 +84543,10 @@ Get Skill Version
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -83404,6 +84634,20 @@ Get Skill Version
     Unique identifier for the skill.
 
     The format and length of IDs may change over time.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -83552,6 +84796,10 @@ Delete Skill Version
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -83614,6 +84862,20 @@ Delete Skill Version
 
     Unique identifier for this Skill Version. The id addresses the version in
     paths and pins it in references.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 #### Example
 
@@ -83746,6 +85008,10 @@ Create User Profile
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -84218,6 +85484,10 @@ List User Profiles
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -84554,6 +85824,10 @@ Get User Profile
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -84882,6 +86156,10 @@ Update User Profile
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -85316,6 +86594,10 @@ Delete User Profile
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -85510,6 +86792,10 @@ Create Enrollment URL
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -85716,6 +87002,10 @@ Create Action URL
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -85938,6 +87228,10 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -86124,7 +87418,7 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
     format: date-time
 
-  - `error: BetaDreamError or null`
+  - `error: BetaDreamErrorObject or null`
 
     Why the dream failed, or `null` if `status` isn't `failed`.
 
@@ -86551,6 +87845,10 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -86629,7 +87927,7 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
     format: date-time
 
-  - `error: BetaDreamError or null`
+  - `error: BetaDreamErrorObject or null`
 
     Why the dream failed, or `null` if `status` isn't `failed`.
 
@@ -86999,6 +88297,10 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -87083,7 +88385,7 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
     format: date-time
 
-  - `error: BetaDreamError or null`
+  - `error: BetaDreamErrorObject or null`
 
     Why the dream failed, or `null` if `status` isn't `failed`.
 
@@ -87442,6 +88744,10 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -87526,7 +88832,7 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
     format: date-time
 
-  - `error: BetaDreamError or null`
+  - `error: BetaDreamErrorObject or null`
 
     Why the dream failed, or `null` if `status` isn't `failed`.
 
@@ -87886,6 +89192,10 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -87970,7 +89280,7 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
     format: date-time
 
-  - `error: BetaDreamError or null`
+  - `error: BetaDreamErrorObject or null`
 
     Why the dream failed, or `null` if `status` isn't `failed`.
 
@@ -88324,6 +89634,10 @@ Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel;
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -88553,6 +89867,10 @@ Fetches a tunnel by ID.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -88784,6 +90102,10 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -89013,6 +90335,10 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -89234,6 +90560,10 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -89435,6 +90765,10 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -89648,6 +90982,10 @@ Registers a public CA certificate on a tunnel. Anthropic verifies the gateway's 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -89892,6 +91230,10 @@ Fetches a tunnel certificate by ID.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -90135,6 +91477,10 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -90374,6 +91720,10 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -91092,6 +92442,24 @@ Update API Key
 
     - `"inactive"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `org_api_key_limit_exceeded` (HTTP status 400)
+
+  The organization has reached its limit of active API keys.
+
+- `workspace_api_key_limit_exceeded` (HTTP status 400)
+
+  The workspace has reached its limit of active API keys.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -91156,7 +92524,7 @@ Create an external key config owned by the caller's organization.
 
     - `kms_arn: string`
 
-      Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+      Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
       maxLength: 2048
 
@@ -91212,7 +92580,7 @@ Create an external key config owned by the caller's organization.
 
 - `user_profile_id: optional string or null`
 
-  ID of a user profile to bind the key to. A user profile represents one of your customers: bind a customer's key to that customer's user profile. A key bound to a user profile can only be attached to a Workspace that has the same user profile, and the binding cannot be changed later. Omit this field only for your organization's own key, because a key created without a user profile ID can be attached to any Workspace, including another customer's.
+  ID of a user profile to bind the key to. A user profile represents one of your customers: bind a customer's key to that customer's user profile. A key bound to a user profile can only be attached to a Workspace that has the same user profile, and the binding cannot be changed later. Omit this field only for your organization's own key, never a customer's. A key created without a user profile ID can't be attached to a Workspace that has a user profile, and you can't add one to the key later.
 
 #### Returns
 
@@ -91270,7 +92638,7 @@ Create an external key config owned by the caller's organization.
 
       - `kms_arn: string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -91318,7 +92686,21 @@ Create an external key config owned by the caller's organization.
 
   - `user_profile_id: string or null`
 
-    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can only be attached to a Workspace that has no user profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `user_profile_not_found` (HTTP status 400)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -91438,7 +92820,7 @@ Results are ordered by creation time (newest first). Use the
 
       - `kms_arn: string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -91486,7 +92868,7 @@ Results are ordered by creation time (newest first). Use the
 
   - `user_profile_id: string or null`
 
-    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can only be attached to a Workspace that has no user profile.
 
 - `next_page: string or null`
 
@@ -91606,7 +92988,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
       - `kms_arn: string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -91654,7 +93036,7 @@ Retrieve a single external key config in the caller's organization by ID.
 
   - `user_profile_id: string or null`
 
-    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can only be attached to a Workspace that has no user profile.
 
 #### Example
 
@@ -91694,8 +93076,8 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
 Partially update an external key config. Omitted fields are left unchanged.
 
 `display_name` is always editable. `geo` and `provider_config` cannot
-be changed once any workspace references this config, because previously
-encrypted data requires the original key identity to decrypt.
+be changed once any workspace references this config, and a Google Cloud
+key's provider and `key_name` cannot be changed at all.
 
 #### Path parameters
 
@@ -91735,7 +93117,7 @@ encrypted data requires the original key identity to decrypt.
 
     - `kms_arn: string`
 
-      Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+      Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
       maxLength: 2048
 
@@ -91835,7 +93217,7 @@ encrypted data requires the original key identity to decrypt.
 
       - `kms_arn: string`
 
-        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key in your organization's AWS account.
+        Full ARN of the AWS KMS key. On Claude Platform on AWS, alias ARNs are rejected, and your organization's own key must be a single-Region key.
 
         maxLength: 2048
 
@@ -91883,7 +93265,21 @@ encrypted data requires the original key identity to decrypt.
 
   - `user_profile_id: string or null`
 
-    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can be attached to a Workspace whatever its user profile.
+    ID of the user profile the key is bound to, or null if the key is not bound to one. A key bound to a user profile can only be attached to a Workspace that has the same user profile. A key that isn't bound can only be attached to a Workspace that has no user profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_in_workspace_policy` (HTTP status 400)
+
+  The External Key can't be deleted or reconfigured while the organization's Workspace Policy lists it as an allowed key.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -91952,6 +93348,20 @@ The request is rejected if any workspace still references this config.
 
   ID of the deleted External Key.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_in_workspace_policy` (HTTP status 400)
+
+  The External Key can't be deleted or reconfigured while the organization's Workspace Policy lists it as an allowed key.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -92014,6 +93424,16 @@ message if it failed or timed out.
   - `"failure"`
 
   - `"success"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -92159,6 +93579,10 @@ matched as the JWT's `iss` claim and is not fetched.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -92413,6 +93837,16 @@ matched as the JWT's `iss` claim and is not fetched.
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -92589,6 +94023,10 @@ Archived issuers are excluded unless `include_archived=true`.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -92930,6 +94368,10 @@ Retrieve a federation issuer by its ID (`fdis_...`).
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -93275,6 +94717,10 @@ session.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -93532,6 +94978,16 @@ session.
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -93696,6 +95152,10 @@ issuer cannot be changed), or recreate them against another issuer.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -93876,6 +95336,16 @@ issuer cannot be changed), or recreate them against another issuer.
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -94044,6 +95514,10 @@ manage rules whose `oauth_scope` is `workspace:developer` or
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -94300,6 +95774,16 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -94499,6 +95983,10 @@ unless `include_archived=true`.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -94840,6 +96328,10 @@ Retrieve a federation rule by its ID (`fdrl_...`).
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -95200,6 +96692,10 @@ Console session.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -95451,6 +96947,16 @@ Console session.
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -95631,6 +97137,10 @@ other scopes require a Console session.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -95803,6 +97313,16 @@ other scopes require a Console session.
   - `workspace_ids: array of string`
 
     Tagged IDs of the workspaces this rule is enabled for. May be empty for older rules that only carry the legacy `workspace_id` binding. Ignored at exchange time when `applies_to_all_workspaces` is true (the list may still be non-empty).
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -95986,6 +97506,10 @@ other scopes require a Console session.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -96061,6 +97585,16 @@ other scopes require a Console session.
   - `workspace_name: string or null`
 
     Workspace display name. Populated when listing; null in the enable response.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -96224,6 +97758,10 @@ rules with `applies_to_all_workspaces` or a legacy single
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -96454,6 +97992,10 @@ Console session.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -96507,6 +98049,16 @@ Console session.
 - `workspace_id: string`
 
   Tagged ID of the workspace named in the delete request. Removal is idempotent.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -96650,6 +98202,44 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
     - `"expired"`
 
     - `"pending"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `already_member` (HTTP status 400)
+
+  The email address already belongs to a user in the organization. The message names the user.
+
+- `cannot_invite_emails_with_unverified_domains` (HTTP status 400)
+
+  The email address's domain is not one of the verified domains of the organization's parent organization.
+
+- `email_domain_not_allowed` (HTTP status 400)
+
+  The organization restricts invites to an allowed list of email domains, and the list is empty or does not include the email address's domain.
+
+- `invite_already_exists` (HTTP status 400)
+
+  A pending invite already exists for the email address. The message names the invite.
+
+- `org_member_limit_exceeded` (HTTP status 400)
+
+  The organization has reached the member limit that Anthropic set for it. Pending invites count toward the limit.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -97013,6 +98603,16 @@ Delete a pending invite.
 
   ID of the Invite.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -97155,6 +98755,10 @@ accounts.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -97279,6 +98883,16 @@ accounts.
   - `updated_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -97445,6 +99059,10 @@ archived service accounts.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -97698,6 +99316,10 @@ Retrieve a service account by its ID (`svac_...`).
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -97953,6 +99575,10 @@ interactive credential (a user OAuth token or a Console session).
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -98071,6 +99697,16 @@ interactive credential (a user OAuth token or a Console session).
   - `updated_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -98225,6 +99861,10 @@ those rules first or change their target to another service account.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -98327,6 +99967,16 @@ those rules first or change their target to another service account.
   - `updated_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this service account.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -98484,6 +100134,10 @@ rejected.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -98579,6 +100233,16 @@ rejected.
     - `"workspace_restricted_developer"`
 
     - `"workspace_user"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -98751,6 +100415,10 @@ page to recover.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -98992,6 +100660,10 @@ to the implicit `workspace_user` membership. Archived workspaces return
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -99045,6 +100717,16 @@ to the implicit `workspace_user` membership. Archived workspaces return
 - `workspace_id: string`
 
   Tagged workspace ID (`wrkspc_...`) named in the delete request.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -99386,6 +101068,16 @@ Update a member's organization role.
 
     - `"user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -99444,6 +101136,24 @@ Remove a member from the organization.
 - `id: string`
 
   ID of the User.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cannot_remove_last_member` (HTTP status 400)
+
+  The user is the organization's only member. Add another member before removing this one.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `concurrent_membership_change` (HTTP status 409)
+
+  Another change to the organization's members is in progress. Retry the request once it completes.
 
 #### Example
 
@@ -99587,6 +101297,10 @@ Every request must include the beta header `anthropic-beta: admin-user-sign-out-
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -99678,6 +101392,44 @@ Every request must include the beta header `anthropic-beta: admin-user-sign-out-
     - `"primary_owner"`
 
     - `"user"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cannot_sign_out_primary_owner` (HTTP status 400)
+
+  The member is the organization's primary owner, whom no API key or token can sign out.
+
+- `cannot_sign_out_self` (HTTP status 400)
+
+  The member is the user the API key or token belongs to.
+
+- `organization_not_enrolled_in_beta` (HTTP status 400)
+
+  The beta that the endpoint requires is not enabled for the organization. The message names the beta value.
+
+- `cannot_sign_out_managed_member` (HTTP status 403)
+
+  The member has the `managed` role, and this API key or token cannot sign them out. The error message says which keys and tokens can.
+
+- `cannot_sign_out_membership_admin` (HTTP status 403)
+
+  The member is a membership admin, and the person the API key or token belongs to is not allowed to sign out membership admins.
+
+- `cannot_sign_out_owner` (HTTP status 403)
+
+  The member is an owner or has owner permissions, and this API key or token cannot sign them out. In a Claude Enterprise organization, an API key with the `write:members` scope can.
+
+- `cannot_sign_out_privileged_member` (HTTP status 403)
+
+  This OAuth token cannot sign out a membership admin or a member whose roles grant owner, user management, or identity and access management.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -99833,12 +101585,13 @@ List Workspaces
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: string`
 
@@ -100016,6 +101769,10 @@ Create Workspace
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -100105,12 +101862,13 @@ Create Workspace
   organization. When set, data stored for this Workspace is encrypted with the
   referenced key. Create key configurations with the External Keys API. On
   Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-  organization's own key must be a single-Region key in the same AWS account and
-  Region as the Workspace. On that platform the key is validated against this
-  Workspace when it is attached, so a key-policy problem is reported as an error
-  on this request. This field is write-once: once a key is attached to a Workspace
-  it cannot be detached or replaced. To rotate key material, rotate the underlying
-  key on your cloud KMS; the `external_key_id` stays the same.
+  organization's own key must be a single-Region key in the same Region as the
+  Workspace. If that key is outside the Workspace's AWS account, it can be attached
+  only by updating an active Workspace. On that platform the key is validated
+  against this Workspace when it is attached, so a key-policy problem is reported
+  as an error on this request. This field is write-once: once a key is attached to
+  a Workspace it cannot be detached or replaced. To rotate key material, rotate
+  the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
 - `tags: optional map[string] or null`
 
@@ -100201,12 +101959,13 @@ Create Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: string`
 
@@ -100220,6 +101979,40 @@ Create Workspace
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_validation_failed` (HTTP status 400)
+
+  The External Key failed Anthropic's validation, so the request was refused. The message gives the reason, if there is one.
+
+- `external_key_validation_timed_out` (HTTP status 400)
+
+  Anthropic's validation of the External Key did not finish in time, so the request was refused. Wait a moment, then send the request again.
+
+- `key_profile_mismatch` (HTTP status 400)
+
+  After this request, the External Key and the Workspace would not have the same user profile. A key and its Workspace must have the same user profile, or both have none.
+
+- `user_profile_not_found` (HTTP status 400)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `workspace_policy_violation` (HTTP status 400)
+
+  The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `external_key_changed` (HTTP status 409)
+
+  The external key changed while the request was validating it. Send the request again.
+
 #### Example
 
 ```bash
@@ -100228,7 +102021,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces \
     -H 'anthropic-version: 2026-10-21' \
     -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
-          "name": "x",
+          "name": "Workspace Name",
           "display_color": "#6C5BB9",
           "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
           "tags": {
@@ -100365,12 +102158,13 @@ Get Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: string`
 
@@ -100474,12 +102268,13 @@ Update Workspace
   organization. When set, data stored for this Workspace is encrypted with the
   referenced key. Create key configurations with the External Keys API. On
   Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-  organization's own key must be a single-Region key in the same AWS account and
-  Region as the Workspace. On that platform the key is validated against this
-  Workspace when it is attached, so a key-policy problem is reported as an error
-  on this request. This field is write-once: once a key is attached to a Workspace
-  it cannot be detached or replaced. To rotate key material, rotate the underlying
-  key on your cloud KMS; the `external_key_id` stays the same.
+  organization's own key must be a single-Region key in the same Region as the
+  Workspace. If that key is outside the Workspace's AWS account, it can be attached
+  only by updating an active Workspace. On that platform the key is validated
+  against this Workspace when it is attached, so a key-policy problem is reported
+  as an error on this request. This field is write-once: once a key is attached to
+  a Workspace it cannot be detached or replaced. To rotate key material, rotate
+  the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
 - `name: optional string`
 
@@ -100493,7 +102288,7 @@ Update Workspace
 
 - `user_profile_id: optional string`
 
-  ID of a user profile to attach to the Workspace. Every inference request through the Workspace must then name this user profile; the API rejects a request that names none or a different one. Once set, it can't be replaced or removed (sending the same ID again changes nothing); only deleting the user profile clears it. The default Workspace can't have a user profile.
+  ID of a user profile to attach to the Workspace. Every inference request through the Workspace must then name this user profile; the API rejects a request that names none or a different one. Once set, it can't be replaced or removed (sending the same ID again changes nothing); only deleting the user profile clears it. It can't be set on a Workspace whose External Key isn't bound to this user profile. The default Workspace can't have a user profile.
 
 #### Returns
 
@@ -100576,12 +102371,13 @@ Update Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: string`
 
@@ -100595,6 +102391,40 @@ Update Workspace
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `external_key_validation_failed` (HTTP status 400)
+
+  The External Key failed Anthropic's validation, so the request was refused. The message gives the reason, if there is one.
+
+- `external_key_validation_timed_out` (HTTP status 400)
+
+  Anthropic's validation of the External Key did not finish in time, so the request was refused. Wait a moment, then send the request again.
+
+- `key_profile_mismatch` (HTTP status 400)
+
+  After this request, the External Key and the Workspace would not have the same user profile. A key and its Workspace must have the same user profile, or both have none.
+
+- `user_profile_not_found` (HTTP status 400)
+
+  The request depends on a user profile that does not exist in the organization or is no longer active. The request either names this user profile by ID, or names a resource, such as an External Key, that is bound to it.
+
+- `workspace_policy_violation` (HTTP status 400)
+
+  The request breaks the organization's Workspace Policy. The message says which rule it broke; an organization admin can see and change the policy in the Console.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `external_key_changed` (HTTP status 409)
+
+  The external key changed while the request was validating it. Send the request again.
+
 #### Example
 
 ```bash
@@ -100605,6 +102435,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \
     -d '{
           "display_color": "#6C5BB9",
           "external_key_id": "ekey_01SDCCSbTxrXDpWc1phhtcfK",
+          "name": "Workspace Name",
           "tags": {
             "env": "prod",
             "team": "platform"
@@ -100737,12 +102568,13 @@ Archive Workspace
     organization. When set, data stored for this Workspace is encrypted with the
     referenced key. Create key configurations with the External Keys API. On
     Claude Platform on AWS the value for an AWS KMS key is the key's ARN, and your
-    organization's own key must be a single-Region key in the same AWS account and
-    Region as the Workspace. On that platform the key is validated against this
-    Workspace when it is attached, so a key-policy problem is reported as an error
-    on this request. This field is write-once: once a key is attached to a Workspace
-    it cannot be detached or replaced. To rotate key material, rotate the underlying
-    key on your cloud KMS; the `external_key_id` stays the same.
+    organization's own key must be a single-Region key in the same Region as the
+    Workspace. If that key is outside the Workspace's AWS account, it can be attached
+    only by updating an active Workspace. On that platform the key is validated
+    against this Workspace when it is attached, so a key-policy problem is reported
+    as an error on this request. This field is write-once: once a key is attached to
+    a Workspace it cannot be detached or replaced. To rotate key material, rotate
+    the underlying key on your cloud KMS; the `external_key_id` stays the same.
 
   - `name: string`
 
@@ -100755,6 +102587,16 @@ Archive Workspace
   - `user_profile_id: string or null`
 
     ID of the user profile attached to the Workspace, or null if it has none. Every inference request through a Workspace that has a user profile must name that profile.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -100956,7 +102798,7 @@ the remaining entries.
 
     - `type: string`
 
-      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
     - `org_limit: number or null`
 
@@ -101087,7 +102929,7 @@ Changes take effect within about an hour.
 
   - `type: BetaWorkspaceRateLimitType`
 
-    Rate limiter type.
+    Rate limiter type. `input_tokens_per_minute` counts every input token, cache reads included. `input_tokens_per_minute_cache_aware` does not count cache reads, and on current models the organization's input-token limit usually has this type. A workspace limit of either type applies alongside the organization's limit, not in place of it. Because cache reads count toward an `input_tokens_per_minute` limit, it can reject requests that read mostly from the cache while the organization's limit still has room.
 
     - `"fast_itpmca"`
 
@@ -101209,7 +103051,7 @@ Changes take effect within about an hour.
 
     - `type: string`
 
-      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
     - `org_limit: number or null`
 
@@ -101250,6 +103092,16 @@ Changes take effect within about an hour.
   - `workspace_id: string`
 
     ID of the Workspace this entry applies to.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -101480,6 +103332,20 @@ Create Workspace Member
 
     - `"workspace_user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `workspace_member_limit_exceeded` (HTTP status 400)
+
+  The workspace has reached the member limit that Anthropic set for it.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -101655,6 +103521,20 @@ Update Workspace Member
 
     - `"workspace_user"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `workspace_member_limit_exceeded` (HTTP status 400)
+
+  The workspace has reached the member limit that Anthropic set for it.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -101719,6 +103599,16 @@ Delete Workspace Member
 - `workspace_id: string`
 
   ID of the Workspace.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -101879,6 +103769,10 @@ omitted from the results.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -102117,6 +104011,10 @@ accounts cannot be added and are rejected.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -102212,6 +104110,16 @@ accounts cannot be added and are rejected.
     - `"workspace_restricted_developer"`
 
     - `"workspace_user"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -102369,6 +104277,10 @@ account returns 404.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -102600,6 +104512,10 @@ rejected.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -102691,6 +104607,16 @@ rejected.
     - `"workspace_restricted_developer"`
 
     - `"workspace_user"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -102847,6 +104773,10 @@ membership. Archived workspaces return 400.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -102900,6 +104830,16 @@ membership. Archived workspaces return 400.
 - `workspace_id: string`
 
   Tagged workspace ID (`wrkspc_...`) named in the delete request.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -103080,7 +105020,7 @@ the remaining entries.
 
     - `type: string`
 
-      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute`).
+      The limiter type (for example, `requests_per_minute` or `input_tokens_per_minute_cache_aware`).
 
     - `value: number`
 
@@ -103261,6 +105201,16 @@ compliance settings.
       - `type: "disabled"`
 
         default: disabled
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -103526,6 +105476,10 @@ This endpoint is part of the legacy Usage and Cost API. For new integrations, us
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -104176,6 +106130,10 @@ This endpoint is part of the legacy Usage and Cost API. For new integrations, us
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -104514,6 +106472,10 @@ archived tunnels are excluded unless `include_archived` is set.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -104750,6 +106712,10 @@ Retrieve a single tunnel in the caller's organization by ID.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -104982,6 +106948,10 @@ tunnel returns the existing record unchanged.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -105063,6 +107033,16 @@ tunnel returns the existing record unchanged.
 
     ID of the Workspace this Tunnel belongs to. May be `null` for a Tunnel in
     the default Workspace. A Tunnel never moves to another Workspace.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -105215,6 +107195,10 @@ access logs.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -105273,6 +107257,16 @@ access logs.
   - `tunnel_token: string`
 
     The tunnel's connection token.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -105420,6 +107414,10 @@ restarted after rotation must use the new value. An optional
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -105486,6 +107484,16 @@ restarted after rotation must use the new value. An optional
   - `tunnel_token: string`
 
     The tunnel's connection token.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -105636,6 +107644,10 @@ holds at most two non-archived certificates.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -105726,6 +107738,16 @@ holds at most two non-archived certificates.
   - `tunnel_id: string`
 
     ID of the Tunnel this certificate is registered against.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -105897,6 +107919,10 @@ Archived certificates are excluded unless `include_archived` is set.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -106138,6 +108164,10 @@ Retrieve a single certificate registered on a tunnel by ID.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -106373,6 +108403,10 @@ certificate is added.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -106454,6 +108488,16 @@ certificate is added.
   - `tunnel_id: string`
 
     ID of the Tunnel this certificate is registered against.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -108944,6 +110988,10 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -109162,7 +111210,7 @@ Requires an API key with the `read:analytics` scope, or an Admin API key.
 
     - `product: string or null`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. `cc_security_autopatch` is work that Claude Security runs for the organization. Some unattributed usage is reported as "other".
 
     - `rbac_group_id: string or null`
 
@@ -109761,6 +111809,10 @@ API key with the `read:analytics` scope, or an Admin API key.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -110013,7 +112065,7 @@ API key with the `read:analytics` scope, or an Admin API key.
 
     - `product: string or null`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude_tag`, and `chat_cowork_unified`. `claude_tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. `cc_security_autopatch` is work that Claude Security runs for the organization. Some unattributed usage is reported as "other".
 
     - `rbac_group_id: string or null`
 
@@ -110414,7 +112466,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `product: string or null`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. `cc_security_autopatch` is work that Claude Security runs for the organization. Some unattributed usage is reported as "other".
 
     - `rbac_group_id: string or null`
 
@@ -110456,7 +112508,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
 - `data_refreshed_at: string or null`
 
-  RFC 3339 timestamp of the export this response was served from. Null when no export yet covers any part of the requested range, in which case every bucket's `results` list is empty. Buckets beyond this watermark are incomplete; for stable results, set `ending_at` to this value or earlier. Data is typically refreshed every 4 hours. Values can be revised as late events arrive and reconciliation runs, until about 7 days after the end of the calendar month the usage falls in; for example, values for October 1 can change until about November 7.
+  RFC 3339 timestamp of the newest data refresh this request reads, determined when the first page is served. Later pages return the same value unless the first page returned null. Null when no export yet covers any part of the requested range, in which case every bucket's `results` list is empty. Buckets beyond this watermark are incomplete; for stable results, set `ending_at` to this value or earlier. Data is typically refreshed every 4 hours. Values can be revised as late events arrive and reconciliation runs, until about 7 days after the end of the calendar month the usage falls in; for example, values for October 1 can change until about November 7.
 
   format: date-time
 
@@ -110529,7 +112581,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/usage_report \
 
 [Legacy] Get per-user token usage across a date range.
 
-Returns usage per user, ranked by the chosen token metric; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users consume the most tokens. Only usage attributed to a user account is included, so usage with no user account, such as Code Review usage and Claude Tag usage in Slack channels, is left out. Claude Tag one-to-one direct messages are included, with product `claude-tag`, only for members who have connected a Claude account. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+Returns usage per user, ranked by the chosen token metric; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users consume the most tokens. Only usage attributed to a user account is included, so usage with no user account, such as Code Review usage and Claude Tag usage in Slack channels, is left out. Claude Tag one-to-one direct messages are included, with product `claude-tag`, only for members who have connected a Claude account. To see all usage by product, call `GET /v1/organizations/analytics/usage_report` with `group_by[]=product`. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/usage`](https://platform.claude.com/docs/en/api/beta/organization/analytics/usage/list?sdk_languages=http) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api?sdk_languages=http#migrate-from-enterprise-analytics-reports).
 
@@ -110831,7 +112883,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
   - `product: string or null`
 
-    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
+    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. `cc_security_autopatch` is work that Claude Security runs for the organization. Some unattributed usage is reported as "other".
 
   - `rbac_group_id: string or null`
 
@@ -111210,7 +113262,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
     - `product: string or null`
 
-      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
+      Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. `cc_security_autopatch` is work that Claude Security runs for the organization. Some unattributed usage is reported as "other".
 
     - `rbac_group_id: string or null`
 
@@ -111254,7 +113306,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
 - `data_refreshed_at: string or null`
 
-  RFC 3339 timestamp of the export this response was served from. Null when no export yet covers any part of the requested range, in which case every bucket's `results` list is empty. Buckets beyond this watermark are incomplete; for stable results, set `ending_at` to this value or earlier. Data is typically refreshed every 4 hours. Values can be revised as late events arrive and reconciliation runs, until about 7 days after the end of the calendar month the usage falls in; for example, values for October 1 can change until about November 7.
+  RFC 3339 timestamp of the newest data refresh this request reads, determined when the first page is served. Later pages return the same value unless the first page returned null. Null when no export yet covers any part of the requested range, in which case every bucket's `results` list is empty. Buckets beyond this watermark are incomplete; for stable results, set `ending_at` to this value or earlier. Data is typically refreshed every 4 hours. Values can be revised as late events arrive and reconciliation runs, until about 7 days after the end of the calendar month the usage falls in; for example, values for October 1 can change until about November 7.
 
   format: date-time
 
@@ -111322,7 +113374,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/cost_report \
 
 [Legacy] Get per-user cost in USD across a date range.
 
-Returns cost per user, ranked by spend; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users account for the most cost. Only cost attributed to a user account is included, so cost with no user account, such as Code Review usage and Claude Tag usage in Slack channels, is left out. Claude Tag one-to-one direct messages are included, with product `claude-tag`, only for members who have connected a Claude account. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
+Returns cost per user, ranked by spend; `group_by[]` or `bucket_width` splits a user across several rows. Use this to see which users account for the most cost. Only cost attributed to a user account is included, so cost with no user account, such as Code Review usage and Claude Tag usage in Slack channels, is left out. Claude Tag one-to-one direct messages are included, with product `claude-tag`, only for members who have connected a Claude account. To see all cost by product, call `GET /v1/organizations/analytics/cost_report` with `group_by[]=product`. Available to organizations on a Claude Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 This endpoint is one of the legacy Claude Enterprise usage and cost reports. For new integrations, use [`GET /v1/organizations/analytics/cost`](https://platform.claude.com/docs/en/api/beta/organization/analytics/cost/list?sdk_languages=http) in the Usage and Cost Analytics API instead. To move an existing integration, see [Migrate from the Claude Enterprise usage and cost reports](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api?sdk_languages=http#migrate-from-enterprise-analytics-reports).
 
@@ -111624,7 +113676,7 @@ This endpoint is one of the legacy Claude Enterprise usage and cost reports. For
 
   - `product: string or null`
 
-    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. Some unattributed usage is reported as "other".
+    Product surface that produced the usage or cost. Null unless product is in `group_by[]`; it can also be null on grouped rows whose usage cannot be attributed to a known surface. Values include `chat`, `claude_code`, `cowork`, `office_agent`, `claude_in_chrome`, `claude_design`, `claude-tag`, and `chat_cowork_unified`. `claude-tag` is Claude Tag, the Claude product in Slack. `chat_cowork_unified` is Chat and Cowork unified, Cowork's features inside claude.ai chat: chat and Cowork usage by a member who has it turned on is reported under this value instead of `chat` or `cowork`. It is accepted as a filter only where Chat and Cowork unified is available. `cc_security_autopatch` is work that Claude Security runs for the organization. Some unattributed usage is reported as "other".
 
   - `rbac_group_id: string or null`
 
@@ -111853,6 +113905,10 @@ Anthropic account team.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -112071,6 +114127,20 @@ Anthropic account team.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `spend_limits_admin_api_writes_not_enabled` (HTTP status 403)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
+
 #### Example
 
 ```bash
@@ -112253,6 +114323,16 @@ Retrieve a spend limit by ID.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `spend_limits_admin_api_writes_not_enabled` (HTTP status 403)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
+
 #### Example
 
 ```bash
@@ -112314,6 +114394,20 @@ workspace limits through the API is in an early access preview.
   default: spend_limit_deleted
 
 - `id: string`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `spend_limits_admin_api_writes_not_enabled` (HTTP status 403)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
 
 #### Example
 
@@ -112488,6 +114582,10 @@ come in a fixed order that is not creation order.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -112653,6 +114751,16 @@ come in a fixed order that is not creation order.
     format: date-time
 
 - `next_page: string or null`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
 
 #### Example
 
@@ -112910,6 +115018,16 @@ organizations.
   - `spend_limit_id: string`
 
 - `next_page: string or null`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
 
 #### Example
 
@@ -113925,6 +116043,16 @@ the member was blocked on. Anthropic emails the requester unless
 
   - `"pending"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -114254,6 +116382,16 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
     - `"pending"`
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -114382,6 +116520,16 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -114687,6 +116835,16 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -114752,6 +116910,24 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `id: string`
 
     ID of the RBAC Group.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -114931,6 +117107,24 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the User.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -114998,6 +117192,24 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `user_id: string`
 
     ID of the User.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -115111,6 +117323,20 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
   Opaque cursor for the next page. Pass as the `page` parameter on the next
   request.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `parent_organization_required` (HTTP status 400)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
 #### Example
 
 ```bash
@@ -115213,6 +117439,24 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
     RFC 3339 datetime string indicating when the RBAC Role was last updated.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `parent_organization_required` (HTTP status 400)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
+- `rbac_role_not_found` (HTTP status 404)
+
+  No RBAC Role with this ID was found.
 
 #### Example
 
@@ -115398,6 +117642,24 @@ The RBAC Roles API is available to Claude Enterprise organizations only.
   Opaque cursor for the next page. Pass as the `page` parameter on the next
   request.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
+
+- `parent_organization_required` (HTTP status 400)
+
+  The endpoint serves only organizations that belong to a parent organization, and this organization belongs to none.
+
+- `rbac_role_not_found` (HTTP status 404)
+
+  No RBAC Role with this ID was found.
+
 #### Example
 
 ```bash
@@ -115562,6 +117824,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -115678,7 +117944,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `reason: string or null`
 
-      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Null on a `pass`, whenever `assessment` is null, and when no mechanism is reported for the verdict.
+      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Read `status` first: on an `errored` scan it is not a finding but why there is no verdict: `scan-invalid-archive`, the scan refused the version's archive, or could not process it, before checking what its files say, and running it again will not help, so change the files and store a new version; `scan-did-not-finish`, the scan did not finish or its result is no longer available, so retry the scan in claude.ai if it offers a retry; `scan-unavailable`, the scan could not run or its result cannot be read right now, so read the version again later, then retry the scan in claude.ai if it offers a retry. If these steps do not help, contact support. Null on a `pass`, while a scan runs, and when no mechanism is reported for the verdict. On an errored scan, null means that a compliance configuration ruled out the scan.
 
     - `status: "completed" or "errored" or "processing"`
 
@@ -115819,6 +118085,40 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `unsupported_charset` (HTTP status 400)
+
+  The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `plugin_name_taken` (HTTP status 409)
+
+  The marketplace already holds this name. `plugin_id` is the Plugin that holds it, and can be absent.
+
+- `skill_name_taken` (HTTP status 409)
+
+  One of the Plugin's skills has the name of an organization skill. `skill_name` is that name.
+
+- `registration_pending` (HTTP status 503)
+
+  The Plugin version was stored but is not yet usable in claude.ai. `plugin_id` and `plugin_version_id` identify what was stored.
 
 #### Example
 
@@ -115995,6 +118295,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -116095,7 +118399,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `reason: string or null`
 
-      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Null on a `pass`, whenever `assessment` is null, and when no mechanism is reported for the verdict.
+      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Read `status` first: on an `errored` scan it is not a finding but why there is no verdict: `scan-invalid-archive`, the scan refused the version's archive, or could not process it, before checking what its files say, and running it again will not help, so change the files and store a new version; `scan-did-not-finish`, the scan did not finish or its result is no longer available, so retry the scan in claude.ai if it offers a retry; `scan-unavailable`, the scan could not run or its result cannot be read right now, so read the version again later, then retry the scan in claude.ai if it offers a retry. If these steps do not help, contact support. Null on a `pass`, while a scan runs, and when no mechanism is reported for the verdict. On an errored scan, null means that a compliance configuration ruled out the scan.
 
     - `status: "completed" or "errored" or "processing"`
 
@@ -116294,8 +118598,11 @@ curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID \
 
 Change which stored version of an organization-owned Plugin is served to members,
 for example to roll back to an earlier one. This pins the served version: later
-uploads are stored but no longer change what is served, and pinning cannot currently
-be undone, here or in claude.ai.
+uploads through this API are stored but no longer change what is served, and pinning
+cannot currently be undone, here or in claude.ai.
+
+A version from claude.ai might still change what is served: see [Versions and the served version](https://platform.claude.com/docs/en/manage-claude/plugins-api?sdk_languages=http#versions-and-the-served-version)
+in the Plugins API guide.
 
 Pass the version as `served_version_id`: an earlier one to roll back, a later one to
 start serving a version that was stored without being served, or the one already
@@ -116426,6 +118733,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -116532,7 +118843,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `reason: string or null`
 
-      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Null on a `pass`, whenever `assessment` is null, and when no mechanism is reported for the verdict.
+      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Read `status` first: on an `errored` scan it is not a finding but why there is no verdict: `scan-invalid-archive`, the scan refused the version's archive, or could not process it, before checking what its files say, and running it again will not help, so change the files and store a new version; `scan-did-not-finish`, the scan did not finish or its result is no longer available, so retry the scan in claude.ai if it offers a retry; `scan-unavailable`, the scan could not run or its result cannot be read right now, so read the version again later, then retry the scan in claude.ai if it offers a retry. If these steps do not help, contact support. Null on a `pass`, while a scan runs, and when no mechanism is reported for the verdict. On an errored scan, null means that a compliance configuration ruled out the scan.
 
     - `status: "completed" or "errored" or "processing"`
 
@@ -116673,6 +118984,36 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `scan_failed` (HTTP status 400)
+
+  The version in `plugin_version_id` did not pass its content scan, so it cannot be served.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `scan_pending` (HTTP status 409)
+
+  The content scan of the version in `plugin_version_id` is still running. Retry once the scan finishes.
+
+- `skill_name_taken` (HTTP status 409)
+
+  One of the Plugin's skills has the name of an organization skill. `skill_name` is that name.
 
 #### Example
 
@@ -116905,6 +119246,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -117005,7 +119350,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `reason: string or null`
 
-      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Null on a `pass`, whenever `assessment` is null, and when no mechanism is reported for the verdict.
+      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Read `status` first: on an `errored` scan it is not a finding but why there is no verdict: `scan-invalid-archive`, the scan refused the version's archive, or could not process it, before checking what its files say, and running it again will not help, so change the files and store a new version; `scan-did-not-finish`, the scan did not finish or its result is no longer available, so retry the scan in claude.ai if it offers a retry; `scan-unavailable`, the scan could not run or its result cannot be read right now, so read the version again later, then retry the scan in claude.ai if it offers a retry. If these steps do not help, contact support. Null on a `pass`, while a scan runs, and when no mechanism is reported for the verdict. On an errored scan, null means that a compliance configuration ruled out the scan.
 
     - `status: "completed" or "errored" or "processing"`
 
@@ -117336,6 +119681,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -117389,6 +119738,20 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `id: string`
 
     The deleted Plugin's ID.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -117545,6 +119908,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -117657,7 +120024,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `reason: string or null`
 
-      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Null on a `pass`, whenever `assessment` is null, and when no mechanism is reported for the verdict.
+      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Read `status` first: on an `errored` scan it is not a finding but why there is no verdict: `scan-invalid-archive`, the scan refused the version's archive, or could not process it, before checking what its files say, and running it again will not help, so change the files and store a new version; `scan-did-not-finish`, the scan did not finish or its result is no longer available, so retry the scan in claude.ai if it offers a retry; `scan-unavailable`, the scan could not run or its result cannot be read right now, so read the version again later, then retry the scan in claude.ai if it offers a retry. If these steps do not help, contact support. Null on a `pass`, while a scan runs, and when no mechanism is reported for the verdict. On an errored scan, null means that a compliance configuration ruled out the scan.
 
     - `status: "completed" or "errored" or "processing"`
 
@@ -117736,6 +120103,36 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `release_notes: string or null`
 
     As supplied with the upload; null when none were supplied.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `unsupported_charset` (HTTP status 400)
+
+  The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `skill_name_taken` (HTTP status 409)
+
+  One of the Plugin's skills has the name of an organization skill. `skill_name` is that name.
+
+- `registration_pending` (HTTP status 503)
+
+  The Plugin version was stored but is not yet usable in claude.ai. `plugin_id` and `plugin_version_id` identify what was stored.
 
 #### Example
 
@@ -117920,6 +120317,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -118020,7 +120421,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `reason: string or null`
 
-      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Null on a `pass`, whenever `assessment` is null, and when no mechanism is reported for the verdict.
+      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Read `status` first: on an `errored` scan it is not a finding but why there is no verdict: `scan-invalid-archive`, the scan refused the version's archive, or could not process it, before checking what its files say, and running it again will not help, so change the files and store a new version; `scan-did-not-finish`, the scan did not finish or its result is no longer available, so retry the scan in claude.ai if it offers a retry; `scan-unavailable`, the scan could not run or its result cannot be read right now, so read the version again later, then retry the scan in claude.ai if it offers a retry. If these steps do not help, contact support. Null on a `pass`, while a scan runs, and when no mechanism is reported for the verdict. On an errored scan, null means that a compliance configuration ruled out the scan.
 
     - `status: "completed" or "errored" or "processing"`
 
@@ -118277,6 +120678,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -118377,7 +120782,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `reason: string or null`
 
-      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Null on a `pass`, whenever `assessment` is null, and when no mechanism is reported for the verdict.
+      The primary mechanism behind a `warn` or `fail`, such as `credential-exposure` or `guardrail-tampering`; a mechanism this API does not yet name reads as `other`. Read `status` first: on an `errored` scan it is not a finding but why there is no verdict: `scan-invalid-archive`, the scan refused the version's archive, or could not process it, before checking what its files say, and running it again will not help, so change the files and store a new version; `scan-did-not-finish`, the scan did not finish or its result is no longer available, so retry the scan in claude.ai if it offers a retry; `scan-unavailable`, the scan could not run or its result cannot be read right now, so read the version again later, then retry the scan in claude.ai if it offers a retry. If these steps do not help, contact support. Null on a `pass`, while a scan runs, and when no mechanism is reported for the verdict. On an errored scan, null means that a compliance configuration ruled out the scan.
 
     - `status: "completed" or "errored" or "processing"`
 
@@ -118641,6 +121046,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -118680,6 +121089,24 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `"ce-user-management-2026-07-13"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -118840,6 +121267,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -119120,6 +121551,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -119251,6 +121686,16 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     When its setting last changed.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -119416,6 +121861,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -119508,6 +121957,16 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
       - `user_id: string`
 
         The member's User ID.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -119685,6 +122144,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -119972,6 +122435,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -120272,6 +122739,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -120561,6 +123032,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -120714,6 +123189,16 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
     - `"in_progress"`
 
     - `"success"`
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -120872,6 +123357,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -120951,7 +123440,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     A stable identifier for `manifest_error`; null when that is.
 
-  - `plugin_errors: array of BetaPluginMarketplaceValidationPluginError`
+  - `plugin_errors: array of BetaPluginMarketplaceValidationPluginErrorObject`
 
     One entry per plugin a synchronization would skip entirely, keyed by the plugin's name in marketplace.json.
 
@@ -120998,6 +123487,16 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `valid: boolean`
 
     True when marketplace.json is well-formed and no plugin would be skipped; warnings never make it false.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -121170,6 +123669,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -121243,7 +123746,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     A stable identifier for `manifest_error`; null when that is.
 
-  - `plugin_errors: array of BetaPluginMarketplaceValidationPluginError`
+  - `plugin_errors: array of BetaPluginMarketplaceValidationPluginErrorObject`
 
     One entry per plugin a synchronization would skip entirely, keyed by the plugin's name in marketplace.json.
 
@@ -121290,6 +123793,20 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `valid: boolean`
 
     True when marketplace.json is well-formed and no plugin would be skipped; warnings never make it false.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `unsupported_charset` (HTTP status 400)
+
+  The request's `Content-Type` header names a charset other than UTF-8, ISO-8859-1 or US-ASCII. Send the request with no charset, or with one of these.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -121451,6 +123968,10 @@ See the [OpenTelemetry export guide](https://platform.claude.com/docs/en/manage-
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -121955,6 +124476,10 @@ See the [OpenTelemetry export guide](https://platform.claude.com/docs/en/manage-
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -122336,6 +124861,10 @@ See the [OpenTelemetry export guide](https://platform.claude.com/docs/en/manage-
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -122711,6 +125240,10 @@ See the [OpenTelemetry export guide](https://platform.claude.com/docs/en/manage-
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -123222,6 +125755,10 @@ See the [OpenTelemetry export guide](https://platform.claude.com/docs/en/manage-
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -123410,6 +125947,10 @@ Send one test span, named `anthropic.test`, to the destination with its register
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -123636,6 +126177,10 @@ See the [OpenTelemetry export guide](https://platform.claude.com/docs/en/manage-
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -123855,6 +126400,10 @@ See the [OpenTelemetry export guide](https://platform.claude.com/docs/en/manage-
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -124068,6 +126617,10 @@ See the [OpenTelemetry export guide](https://platform.claude.com/docs/en/manage-
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -124266,6 +126819,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -124308,9 +126865,13 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
 #### Body parameters
 
-- `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+- `enabled_events: array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
   The event types to deliver to the endpoint. Must list at least one.
+
+  - `"external_key.failed"`
+
+  - `"external_key.recovered"`
 
   - `"user_profile.enforcement_action_opened"`
 
@@ -124356,9 +126917,13 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+  - `enabled_events: array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
     The event types delivered to the endpoint.
+
+    - `"external_key.failed"`
+
+    - `"external_key.recovered"`
 
     - `"user_profile.enforcement_action_opened"`
 
@@ -124402,9 +126967,11 @@ curl https://api.anthropic.com/v1/organizations/webhooks \
     -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "enabled_events": [
-            "user_profile.enforcement_action_opened"
+            "user_profile.enforcement_action_opened",
+            "user_profile.enforcement_action_resolved"
           ],
-          "url": "x"
+          "url": "https://example.com/anthropic-webhooks",
+          "name": "Enforcement actions"
         }'
 ```
 
@@ -124417,7 +126984,7 @@ curl https://api.anthropic.com/v1/organizations/webhooks \
   "description": "description",
   "disabled_reason": "disabled_reason",
   "enabled_events": [
-    "user_profile.enforcement_action_opened"
+    "external_key.failed"
   ],
   "name": "name",
   "signing_secret": "signing_secret",
@@ -124568,6 +127135,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -124632,9 +127203,13 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+  - `enabled_events: array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
     The event types delivered to the endpoint.
+
+    - `"external_key.failed"`
+
+    - `"external_key.recovered"`
 
     - `"user_profile.enforcement_action_opened"`
 
@@ -124696,7 +127271,7 @@ curl https://api.anthropic.com/v1/organizations/webhooks \
       "description": "description",
       "disabled_reason": "disabled_reason",
       "enabled_events": [
-        "user_profile.enforcement_action_opened"
+        "external_key.failed"
       ],
       "name": "name",
       "state": "disabled",
@@ -124832,6 +127407,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -124897,9 +127476,13 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+  - `enabled_events: array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
     The event types delivered to the endpoint.
+
+    - `"external_key.failed"`
+
+    - `"external_key.recovered"`
 
     - `"user_profile.enforcement_action_opened"`
 
@@ -124947,7 +127530,7 @@ curl https://api.anthropic.com/v1/organizations/webhooks/$WEBHOOK_ENDPOINT_ID \
   "description": "description",
   "disabled_reason": "disabled_reason",
   "enabled_events": [
-    "user_profile.enforcement_action_opened"
+    "external_key.failed"
   ],
   "name": "name",
   "state": "disabled",
@@ -125078,6 +127661,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -125124,9 +127711,13 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   Notes about the endpoint.
 
-- `enabled_events: optional array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+- `enabled_events: optional array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
   The event types to deliver to the endpoint. Replaces the whole set; an empty list leaves it unchanged.
+
+  - `"external_key.failed"`
+
+  - `"external_key.recovered"`
 
   - `"user_profile.enforcement_action_opened"`
 
@@ -125177,9 +127768,13 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+  - `enabled_events: array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
     The event types delivered to the endpoint.
+
+    - `"external_key.failed"`
+
+    - `"external_key.recovered"`
 
     - `"user_profile.enforcement_action_opened"`
 
@@ -125229,7 +127824,7 @@ curl https://api.anthropic.com/v1/organizations/webhooks/$WEBHOOK_ENDPOINT_ID \
   "description": "description",
   "disabled_reason": "disabled_reason",
   "enabled_events": [
-    "user_profile.enforcement_action_opened"
+    "external_key.failed"
   ],
   "name": "name",
   "state": "disabled",
@@ -125360,6 +127955,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -125415,6 +128014,16 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
   - `id: string`
 
     ID of the deleted webhook endpoint.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 
@@ -125558,6 +128167,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -125608,6 +128221,16 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     The new signing secret. Deliveries are signed with it from now on, and no other response returns it.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -125623,6 +128246,2051 @@ curl https://api.anthropic.com/v1/organizations/webhooks/$WEBHOOK_ENDPOINT_ID/re
 ```json
 {
   "signing_secret": "signing_secret"
+}
+```
+
+## Beta › Organization › Claude Code › Managed Settings › Configuration
+
+### Get Claude Code Managed Settings Configuration
+
+**GET** `/v1/organizations/claude_code/managed_settings/configuration`
+
+Retrieve the organization's Claude Code managed settings mode and RBAC Group order.
+
+**Accepted credentials:** an organization-level Admin API key with the `read:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
+- `"anthropic-beta": array of AnthropicBeta`
+
+  This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+  - `string`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"admin-user-sign-out-2026-10-08"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `BetaClaudeCodeManagedSettingsConfiguration object`
+
+  - `type: "claude_code_managed_settings_configuration"`
+
+    Always `claude_code_managed_settings_configuration`.
+
+    default: claude_code_managed_settings_configuration
+
+  - `mode: BetaClaudeCodeManagedSettingsMode`
+
+    How the organization serves managed settings. In `organization` mode every member receives the organization settings, which are set in claude.ai. In `rbac_groups` mode each member receives the settings of the first RBAC Group in `rbac_group_order` that they belong to. A member in none of them receives the default settings, or no settings if no default is set.
+
+    - `BetaClaudeCodeManagedSettingsOrganizationMode object`
+
+      - `type: "organization"`
+
+        Always `organization`.
+
+        default: organization
+
+    - `BetaClaudeCodeManagedSettingsRBACGroupsMode object`
+
+      - `type: "rbac_groups"`
+
+        Always `rbac_groups`.
+
+        default: rbac_groups
+
+  - `mode_updated_at: string or null`
+
+    When the mode last changed, in RFC 3339 format, or `null` if it never has.
+
+    format: date-time
+
+  - `rbac_group_order: array of string`
+
+    The ID of every RBAC Group with settings, deleted groups included, highest precedence first.
+
+  - `rbac_group_order_version: string`
+
+    An opaque version of `rbac_group_order`, which changes whenever the order does. Send it back with a new order.
+
+#### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/claude_code/managed_settings/configuration \
+    -H 'anthropic-version: 2026-10-21' \
+    -H 'anthropic-beta: ce-claude-code-managed-settings-2026-10-06' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
+```
+
+##### Response (200)
+
+```json
+{
+  "mode": {
+    "type": "organization"
+  },
+  "mode_updated_at": "2019-12-27T18:11:19.117Z",
+  "rbac_group_order": [
+    "rbac_group_012rppKaSVsmTo6NqRDXQXNF"
+  ],
+  "rbac_group_order_version": "rbac_group_order_version",
+  "type": "claude_code_managed_settings_configuration"
+}
+```
+
+### Update Claude Code Managed Settings Configuration
+
+**POST** `/v1/organizations/claude_code/managed_settings/configuration`
+
+Change the organization's Claude Code managed settings mode, the RBAC Group order, or both, in one atomic write.
+
+To change the order, send `rbac_group_order` with the `rbac_group_order_version` from the read the change is based on. If the order has changed since that read, the request returns `409`: read it again and retry. To switch modes only if the order has not changed, send the current `rbac_group_order` and `rbac_group_order_version` with the new `mode`.
+
+A switch to `rbac_groups` mode with no RBAC Group settings and no default settings copies the organization settings into a new default, in the same write, so members keep the settings they had. The copy does not follow later changes to the organization settings. If the organization settings cannot be copied, the request returns `400` and changes nothing. If they cannot be read, are over 1 MiB or are not valid, setting the default settings first avoids the copy.
+
+After a switch to `rbac_groups` mode, a member in no listed RBAC Group receives the default settings, or no settings if no default is set, not the organization settings.
+
+**Accepted credentials:** an organization-level Admin API key with the `write:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+A write that returns `503` may have applied. Retrying it is safe.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
+- `"anthropic-beta": array of AnthropicBeta`
+
+  This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+  - `string`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"admin-user-sign-out-2026-10-08"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Body parameters
+
+- `mode: optional BetaClaudeCodeManagedSettingsModeParam`
+
+  The new mode, as an object such as `{"type": "rbac_groups"}`.
+
+  - `BetaClaudeCodeManagedSettingsOrganizationModeParam object`
+
+    - `type: "organization"`
+
+  - `BetaClaudeCodeManagedSettingsRBACGroupsModeParam object`
+
+    - `type: "rbac_groups"`
+
+- `rbac_group_order: optional array of string`
+
+  Every RBAC Group that has settings, each listed once, in the new order, highest precedence first. Requires `rbac_group_order_version`.
+
+- `rbac_group_order_version: optional string`
+
+  The `rbac_group_order_version` from the read this change is based on. Requires `rbac_group_order`.
+
+#### Returns
+
+- `BetaClaudeCodeManagedSettingsConfiguration object`
+
+  - `type: "claude_code_managed_settings_configuration"`
+
+    Always `claude_code_managed_settings_configuration`.
+
+    default: claude_code_managed_settings_configuration
+
+  - `mode: BetaClaudeCodeManagedSettingsMode`
+
+    How the organization serves managed settings. In `organization` mode every member receives the organization settings, which are set in claude.ai. In `rbac_groups` mode each member receives the settings of the first RBAC Group in `rbac_group_order` that they belong to. A member in none of them receives the default settings, or no settings if no default is set.
+
+    - `BetaClaudeCodeManagedSettingsOrganizationMode object`
+
+      - `type: "organization"`
+
+        Always `organization`.
+
+        default: organization
+
+    - `BetaClaudeCodeManagedSettingsRBACGroupsMode object`
+
+      - `type: "rbac_groups"`
+
+        Always `rbac_groups`.
+
+        default: rbac_groups
+
+  - `mode_updated_at: string or null`
+
+    When the mode last changed, in RFC 3339 format, or `null` if it never has.
+
+    format: date-time
+
+  - `rbac_group_order: array of string`
+
+    The ID of every RBAC Group with settings, deleted groups included, highest precedence first.
+
+  - `rbac_group_order_version: string`
+
+    An opaque version of `rbac_group_order`, which changes whenever the order does. Send it back with a new order.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `request_body_timeout` (HTTP status 400)
+
+  The request body did not finish arriving in time, so nothing was done. Send a smaller body, or send it over a faster connection.
+
+- `settings_document_limit_exceeded` (HTTP status 400)
+
+  The organization has reached its limit of settings documents, counting unused ones. An owner can remove unused documents in claude.ai. Deleting a group's settings or clearing the default settings also frees a document, if nothing else uses it. None of these works once the organization has also reached its settings history limit.
+
+- `settings_history_limit_exceeded` (HTTP status 400)
+
+  The organization has reached its settings history limit, a cap on stored versions of its settings documents. Nothing in the API or claude.ai lowers the count, so contact support. Creating or deleting group settings, creating or clearing the default settings, and reordering are refused. Changing the mode still works, unless it would copy the organization settings into a new default.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+#### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/claude_code/managed_settings/configuration \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2026-10-21' \
+    -H 'anthropic-beta: ce-claude-code-managed-settings-2026-10-06' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
+    -d '{}'
+```
+
+##### Response (200)
+
+```json
+{
+  "mode": {
+    "type": "organization"
+  },
+  "mode_updated_at": "2019-12-27T18:11:19.117Z",
+  "rbac_group_order": [
+    "rbac_group_012rppKaSVsmTo6NqRDXQXNF"
+  ],
+  "rbac_group_order_version": "rbac_group_order_version",
+  "type": "claude_code_managed_settings_configuration"
+}
+```
+
+## Beta › Organization › Claude Code › Managed Settings › RBAC Groups
+
+### List RBAC Group Claude Code Managed Settings
+
+**GET** `/v1/organizations/claude_code/managed_settings/rbac_groups`
+
+List the RBAC Groups that have Claude Code managed settings, highest precedence first.
+
+Each entry gives the group's status and timestamps, not its settings. The list includes deleted groups that still have settings, and leaves out the default settings. If the order changes between pages, the request returns `409`: list again from the first page.
+
+**Accepted credentials:** an organization-level Admin API key with the `read:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+#### Query parameters
+
+- `limit: optional number`
+
+  Number of items to return per page.
+
+  Defaults to `20`. Ranges from `1` to `100`.
+
+  minimum: 1, maximum: 100
+
+- `page: optional string`
+
+  Optionally set to the `next_page` token from the previous response.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
+- `"anthropic-beta": array of AnthropicBeta`
+
+  This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+  - `string`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"admin-user-sign-out-2026-10-08"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `data: array of BetaClaudeCodeRBACGroupManagedSettingsSummary`
+
+  The RBAC Groups with settings on this page, highest precedence first.
+
+  - `type: "claude_code_rbac_group_managed_settings_summary"`
+
+    Always `claude_code_rbac_group_managed_settings_summary`.
+
+    default: claude_code_rbac_group_managed_settings_summary
+
+  - `created_at: string`
+
+    When the settings document this group uses was first stored, in RFC 3339 format. This can be earlier than when the group got its settings, and it changes if the group gets a different document.
+
+    format: date-time
+
+  - `rbac_group_id: string`
+
+    The RBAC Group's ID, prefixed `rbac_group_`.
+
+  - `rbac_group_status: BetaClaudeCodeRBACGroupStatus`
+
+    Whether the group is still one of the organization's RBAC Groups. Its `type` is `active` if it is, `deleted` if it is not, and `unknown` if that cannot be checked right now. A deleted group's settings stay in `rbac_group_order` but match no member.
+
+    - `BetaClaudeCodeRBACGroupStatusActive object`
+
+      - `type: "active"`
+
+        Always `active`.
+
+        default: active
+
+    - `BetaClaudeCodeRBACGroupStatusDeleted object`
+
+      - `type: "deleted"`
+
+        Always `deleted`.
+
+        default: deleted
+
+    - `BetaClaudeCodeRBACGroupStatusUnknown object`
+
+      - `type: "unknown"`
+
+        Always `unknown`.
+
+        default: unknown
+
+  - `updated_at: string`
+
+    When this group's settings or its position in the order last changed, in RFC 3339 format. Its position changes whenever the number of groups ahead of it changes.
+
+    format: date-time
+
+- `next_page: string or null`
+
+  Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+
+#### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/claude_code/managed_settings/rbac_groups \
+    -H 'anthropic-version: 2026-10-21' \
+    -H 'anthropic-beta: ce-claude-code-managed-settings-2026-10-06' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
+```
+
+##### Response (200)
+
+```json
+{
+  "data": [
+    {
+      "created_at": "2019-12-27T18:11:19.117Z",
+      "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+      "rbac_group_status": {
+        "type": "active"
+      },
+      "type": "claude_code_rbac_group_managed_settings_summary",
+      "updated_at": "2019-12-27T18:11:19.117Z"
+    }
+  ],
+  "next_page": "next_page"
+}
+```
+
+### Get RBAC Group Claude Code Managed Settings
+
+**GET** `/v1/organizations/claude_code/managed_settings/rbac_groups/{rbac_group_id}`
+
+Retrieve an RBAC Group's Claude Code managed settings.
+
+**Accepted credentials:** an organization-level Admin API key with the `read:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+#### Path parameters
+
+- `rbac_group_id: string`
+
+  The RBAC Group's ID, prefixed `rbac_group_`.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
+- `"anthropic-beta": array of AnthropicBeta`
+
+  This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+  - `string`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"admin-user-sign-out-2026-10-08"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `BetaClaudeCodeRBACGroupManagedSettings object`
+
+  - `type: "claude_code_rbac_group_managed_settings"`
+
+    Always `claude_code_rbac_group_managed_settings`.
+
+    default: claude_code_rbac_group_managed_settings
+
+  - `created_at: string`
+
+    When the settings document this group uses was first stored, in RFC 3339 format. This can be earlier than when the group got its settings, and it changes if the group gets a different document.
+
+    format: date-time
+
+  - `rbac_group_id: string`
+
+    The RBAC Group's ID, prefixed `rbac_group_`.
+
+  - `rbac_group_status: BetaClaudeCodeRBACGroupStatus`
+
+    Whether the group is still one of the organization's RBAC Groups. Its `type` is `active` if it is, `deleted` if it is not, and `unknown` if that cannot be checked right now. A deleted group's settings stay in `rbac_group_order` but match no member.
+
+    - `BetaClaudeCodeRBACGroupStatusActive object`
+
+      - `type: "active"`
+
+        Always `active`.
+
+        default: active
+
+    - `BetaClaudeCodeRBACGroupStatusDeleted object`
+
+      - `type: "deleted"`
+
+        Always `deleted`.
+
+        default: deleted
+
+    - `BetaClaudeCodeRBACGroupStatusUnknown object`
+
+      - `type: "unknown"`
+
+        Always `unknown`.
+
+        default: unknown
+
+  - `settings: map[unknown] or null`
+
+    The group's settings document, or `null` if the stored document is damaged and can no longer be read. Replacing it fixes this.
+
+  - `updated_at: string`
+
+    When this group's settings or its position in the order last changed, in RFC 3339 format. Its position changes whenever the number of groups ahead of it changes.
+
+    format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_feature_unsupported` (HTTP status 400)
+
+  This stored settings document currently cannot be read or replaced. Contact support, or, if you no longer need these settings, delete the group's settings or clear the default.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `rbac_group_managed_settings_not_found` (HTTP status 404)
+
+  This RBAC Group has no Claude Code managed settings.
+
+#### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/claude_code/managed_settings/rbac_groups/$RBAC_GROUP_ID \
+    -H 'anthropic-version: 2026-10-21' \
+    -H 'anthropic-beta: ce-claude-code-managed-settings-2026-10-06' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
+```
+
+##### Response (200)
+
+```json
+{
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+  "rbac_group_status": {
+    "type": "active"
+  },
+  "settings": {
+    "foo": "bar"
+  },
+  "type": "claude_code_rbac_group_managed_settings",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Set RBAC Group Claude Code Managed Settings
+
+**POST** `/v1/organizations/claude_code/managed_settings/rbac_groups/{rbac_group_id}`
+
+Create or replace an RBAC Group's Claude Code managed settings.
+
+New settings join the end of `rbac_group_order`, and existing settings keep their place. Until the group is moved up, its members who also belong to an earlier group keep that group's settings. In `organization` mode a write changes no member's settings until the organization switches to `rbac_groups` mode. Once a group has settings, that switch no longer copies the organization settings into default settings, so members in no RBAC Group in `rbac_group_order` receive no settings unless you set the default settings before the switch.
+
+Get the group's ID from the RBAC Groups API. One key can hold `read:rbac_groups` and `write:claude_code_managed_settings`.
+
+**Accepted credentials:** an organization-level Admin API key with the `write:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+A write that returns `503` may have applied. Retrying it is safe.
+
+#### Path parameters
+
+- `rbac_group_id: string`
+
+  The RBAC Group's ID, prefixed `rbac_group_`.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
+- `"anthropic-beta": array of AnthropicBeta`
+
+  This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+  - `string`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"admin-user-sign-out-2026-10-08"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Body parameters
+
+- `settings: map[unknown]`
+
+  The whole settings document, a JSON object of Claude Code managed settings. It replaces any stored document. At most 1 MiB as the server stores it, which can be larger than the request body.
+
+#### Returns
+
+- `BetaClaudeCodeRBACGroupManagedSettings object`
+
+  - `type: "claude_code_rbac_group_managed_settings"`
+
+    Always `claude_code_rbac_group_managed_settings`.
+
+    default: claude_code_rbac_group_managed_settings
+
+  - `created_at: string`
+
+    When the settings document this group uses was first stored, in RFC 3339 format. This can be earlier than when the group got its settings, and it changes if the group gets a different document.
+
+    format: date-time
+
+  - `rbac_group_id: string`
+
+    The RBAC Group's ID, prefixed `rbac_group_`.
+
+  - `rbac_group_status: BetaClaudeCodeRBACGroupStatus`
+
+    Whether the group is still one of the organization's RBAC Groups. Its `type` is `active` if it is, `deleted` if it is not, and `unknown` if that cannot be checked right now. A deleted group's settings stay in `rbac_group_order` but match no member.
+
+    - `BetaClaudeCodeRBACGroupStatusActive object`
+
+      - `type: "active"`
+
+        Always `active`.
+
+        default: active
+
+    - `BetaClaudeCodeRBACGroupStatusDeleted object`
+
+      - `type: "deleted"`
+
+        Always `deleted`.
+
+        default: deleted
+
+    - `BetaClaudeCodeRBACGroupStatusUnknown object`
+
+      - `type: "unknown"`
+
+        Always `unknown`.
+
+        default: unknown
+
+  - `settings: map[unknown] or null`
+
+    The group's settings document, or `null` if the stored document is damaged and can no longer be read. Replacing it fixes this.
+
+  - `updated_at: string`
+
+    When this group's settings or its position in the order last changed, in RFC 3339 format. Its position changes whenever the number of groups ahead of it changes.
+
+    format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_feature_unsupported` (HTTP status 400)
+
+  This stored settings document currently cannot be read or replaced. Contact support, or, if you no longer need these settings, delete the group's settings or clear the default.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `rbac_group_order_limit_exceeded` (HTTP status 400)
+
+  The RBAC Group order already has the most groups allowed. Delete another group's settings first.
+
+- `request_body_timeout` (HTTP status 400)
+
+  The request body did not finish arriving in time, so nothing was done. Send a smaller body, or send it over a faster connection.
+
+- `settings_document_limit_exceeded` (HTTP status 400)
+
+  The organization has reached its limit of settings documents, counting unused ones. An owner can remove unused documents in claude.ai. Deleting a group's settings or clearing the default settings also frees a document, if nothing else uses it. None of these works once the organization has also reached its settings history limit.
+
+- `settings_history_limit_exceeded` (HTTP status 400)
+
+  The organization has reached its settings history limit, a cap on stored versions of its settings documents. Nothing in the API or claude.ai lowers the count, so contact support. Creating or deleting group settings, creating or clearing the default settings, and reordering are refused. Changing the mode still works, unless it would copy the organization settings into a new default.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `rbac_group_not_found` (HTTP status 404)
+
+  The RBAC Group is not one of the organization's groups.
+
+#### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/claude_code/managed_settings/rbac_groups/$RBAC_GROUP_ID \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2026-10-21' \
+    -H 'anthropic-beta: ce-claude-code-managed-settings-2026-10-06' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
+    -d '{
+          "settings": {
+            "foo": "bar"
+          }
+        }'
+```
+
+##### Response (200)
+
+```json
+{
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+  "rbac_group_status": {
+    "type": "active"
+  },
+  "settings": {
+    "foo": "bar"
+  },
+  "type": "claude_code_rbac_group_managed_settings",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Delete RBAC Group Claude Code Managed Settings
+
+**DELETE** `/v1/organizations/claude_code/managed_settings/rbac_groups/{rbac_group_id}`
+
+Delete an RBAC Group's Claude Code managed settings and remove the group from `rbac_group_order`.
+
+A group with no settings returns `404` with the error code `rbac_group_managed_settings_not_found`. That code on a retry of a delete that returned `503` means the settings are gone.
+
+**Accepted credentials:** an organization-level Admin API key with the `write:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+A write that returns `503` may have applied. Retrying it is safe.
+
+#### Path parameters
+
+- `rbac_group_id: string`
+
+  The RBAC Group's ID, prefixed `rbac_group_`.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
+- `"anthropic-beta": array of AnthropicBeta`
+
+  This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+  - `string`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"admin-user-sign-out-2026-10-08"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `BetaDeletedClaudeCodeRBACGroupManagedSettings object`
+
+  - `type: "claude_code_rbac_group_managed_settings_deleted"`
+
+    Always `claude_code_rbac_group_managed_settings_deleted`.
+
+    default: claude_code_rbac_group_managed_settings_deleted
+
+  - `rbac_group_id: string`
+
+    The RBAC Group's ID, prefixed `rbac_group_`.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `settings_history_limit_exceeded` (HTTP status 400)
+
+  The organization has reached its settings history limit, a cap on stored versions of its settings documents. Nothing in the API or claude.ai lowers the count, so contact support. Creating or deleting group settings, creating or clearing the default settings, and reordering are refused. Changing the mode still works, unless it would copy the organization settings into a new default.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `rbac_group_managed_settings_not_found` (HTTP status 404)
+
+  This RBAC Group has no Claude Code managed settings.
+
+#### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/claude_code/managed_settings/rbac_groups/$RBAC_GROUP_ID \
+    -X DELETE \
+    -H 'anthropic-version: 2026-10-21' \
+    -H 'anthropic-beta: ce-claude-code-managed-settings-2026-10-06' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
+```
+
+##### Response (200)
+
+```json
+{
+  "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+  "type": "claude_code_rbac_group_managed_settings_deleted"
+}
+```
+
+## Beta › Organization › Claude Code › Managed Settings › RBAC Group Default
+
+### Get RBAC Group Default Claude Code Managed Settings
+
+**GET** `/v1/organizations/claude_code/managed_settings/rbac_group_default`
+
+Retrieve the default Claude Code managed settings, which members who belong to no RBAC Group in `rbac_group_order` receive in `rbac_groups` mode.
+
+**Accepted credentials:** an organization-level Admin API key with the `read:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
+- `"anthropic-beta": array of AnthropicBeta`
+
+  This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+  - `string`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"admin-user-sign-out-2026-10-08"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Returns
+
+- `BetaClaudeCodeRBACGroupDefaultManagedSettings object`
+
+  - `type: "claude_code_rbac_group_default_managed_settings"`
+
+    Always `claude_code_rbac_group_default_managed_settings`.
+
+    default: claude_code_rbac_group_default_managed_settings
+
+  - `settings: map[unknown] or null`
+
+    The default settings document, or `null` if none are set or the stored document is damaged and can no longer be read. To tell these apart, `updated_at` is `null` only when none are set. Replacing a damaged document fixes this.
+
+  - `updated_at: string or null`
+
+    When the default settings last changed, in RFC 3339 format, or `null` if none are set.
+
+    format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_feature_unsupported` (HTTP status 400)
+
+  This stored settings document currently cannot be read or replaced. Contact support, or, if you no longer need these settings, delete the group's settings or clear the default.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+#### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/claude_code/managed_settings/rbac_group_default \
+    -H 'anthropic-version: 2026-10-21' \
+    -H 'anthropic-beta: ce-claude-code-managed-settings-2026-10-06' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
+```
+
+##### Response (200)
+
+```json
+{
+  "settings": {
+    "foo": "bar"
+  },
+  "type": "claude_code_rbac_group_default_managed_settings",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Update RBAC Group Default Claude Code Managed Settings
+
+**POST** `/v1/organizations/claude_code/managed_settings/rbac_group_default`
+
+Set or replace the default Claude Code managed settings, or clear them with `null`.
+
+**Accepted credentials:** an organization-level Admin API key with the `write:claude_code_managed_settings` scope.
+
+Every request must include the beta header `anthropic-beta: ce-claude-code-managed-settings-2026-10-06`. A request without it, or from an organization not enabled for this beta, returns `404`. The Claude Code Managed Settings API is in beta and is available to Claude Enterprise organizations only.
+
+A write that returns `503` may have applied. Retrying it is safe.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
+- `"anthropic-beta": array of AnthropicBeta`
+
+  This endpoint is in beta: requests must send `ce-claude-code-managed-settings-2026-10-06` in this header.
+
+  - `string`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"admin-user-sign-out-2026-10-08"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Body parameters
+
+- `settings: map[unknown] or null`
+
+  The whole settings document, a JSON object of Claude Code managed settings. It replaces any stored document, or `null` clears the default settings. At most 1 MiB as the server stores it, which can be larger than the request body.
+
+#### Returns
+
+- `BetaClaudeCodeRBACGroupDefaultManagedSettings object`
+
+  - `type: "claude_code_rbac_group_default_managed_settings"`
+
+    Always `claude_code_rbac_group_default_managed_settings`.
+
+    default: claude_code_rbac_group_default_managed_settings
+
+  - `settings: map[unknown] or null`
+
+    The default settings document, or `null` if none are set or the stored document is damaged and can no longer be read. To tell these apart, `updated_at` is `null` only when none are set. Replacing a damaged document fixes this.
+
+  - `updated_at: string or null`
+
+    When the default settings last changed, in RFC 3339 format, or `null` if none are set.
+
+    format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_feature_unsupported` (HTTP status 400)
+
+  This stored settings document currently cannot be read or replaced. Contact support, or, if you no longer need these settings, delete the group's settings or clear the default.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `request_body_timeout` (HTTP status 400)
+
+  The request body did not finish arriving in time, so nothing was done. Send a smaller body, or send it over a faster connection.
+
+- `settings_document_limit_exceeded` (HTTP status 400)
+
+  The organization has reached its limit of settings documents, counting unused ones. An owner can remove unused documents in claude.ai. Deleting a group's settings or clearing the default settings also frees a document, if nothing else uses it. None of these works once the organization has also reached its settings history limit.
+
+- `settings_history_limit_exceeded` (HTTP status 400)
+
+  The organization has reached its settings history limit, a cap on stored versions of its settings documents. Nothing in the API or claude.ai lowers the count, so contact support. Creating or deleting group settings, creating or clearing the default settings, and reordering are refused. Changing the mode still works, unless it would copy the organization settings into a new default.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+#### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/claude_code/managed_settings/rbac_group_default \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2026-10-21' \
+    -H 'anthropic-beta: ce-claude-code-managed-settings-2026-10-06' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
+    -d '{
+          "settings": {
+            "foo": "bar"
+          }
+        }'
+```
+
+##### Response (200)
+
+```json
+{
+  "settings": {
+    "foo": "bar"
+  },
+  "type": "claude_code_rbac_group_default_managed_settings",
+  "updated_at": "2019-12-27T18:11:19.117Z"
 }
 ```
 
@@ -125739,6 +130407,10 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -126086,6 +130758,44 @@ Set a Slack channel up for Claude Tag and return it with its identifier. If the 
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `slack_channel_set_up_settings_refused` (HTTP status 400)
+
+  The request set the channel up, and `settings` was then refused. The channel stays set up with every setting unset.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `environment_not_found` (HTTP status 404)
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+- `slack_channel_set_up_environment_not_found` (HTTP status 404)
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+- `slack_channel_set_up_settings_conflict` (HTTP status 409)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
 #### Example
 
 ```bash
@@ -126292,6 +131002,10 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -126551,6 +131265,28 @@ List the set-up Slack channels of one Slack workspace, newest first by `created_
 
   Cursor for the next page. Null on the last page.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```bash
@@ -126743,6 +131479,10 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -126998,6 +131738,28 @@ Get one Slack channel and its settings. By default `settings` holds what the cha
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```bash
@@ -127179,6 +131941,10 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -127510,6 +132276,40 @@ Change the settings a Slack channel stores. The update is partial: a setting lef
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `environment_not_found` (HTTP status 404)
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+- `slack_channel_set_up_environment_not_found` (HTTP status 404)
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+- `slack_channel_set_up_settings_conflict` (HTTP status 409)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
 #### Example
 
 ```bash
@@ -127696,6 +132496,10 @@ Remove a Slack channel from Claude Tag. This deletes the channel's stored settin
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -127747,6 +132551,32 @@ Remove a Slack channel from Claude Tag. This deletes the channel's stored settin
   - `id: string`
 
     The removed channel's identifier.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `slack_channel_set_up_settings_conflict` (HTTP status 409)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
 
 #### Example
 
@@ -127900,6 +132730,10 @@ List the set-up Slack workspaces the organization owns, newest first by `created
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -128163,6 +132997,28 @@ List the set-up Slack workspaces the organization owns, newest first by `created
 
   Cursor for the next page. Null on the last page.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```bash
@@ -128354,6 +133210,10 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -128613,6 +133473,28 @@ Get one Slack workspace and its settings. By default `settings` holds what the w
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
 #### Example
 
 ```bash
@@ -128793,6 +133675,10 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -129128,6 +134014,40 @@ Change the settings a Slack workspace stores. The update is partial: a setting l
 
     format: date-time
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `environment_not_found` (HTTP status 404)
+
+  `settings.environment_id` names no Environment within the organization's reach.
+
+- `slack_channel_set_up_environment_not_found` (HTTP status 404)
+
+  `settings.environment_id` names no Environment within the organization's reach, and the request had set the channel up by then. The channel stays set up with every setting unset.
+
+- `slack_channel_set_up_settings_conflict` (HTTP status 409)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
 #### Example
 
 ```bash
@@ -129321,6 +134241,10 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -129387,6 +134311,10 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 
     The Bundle's name. Always set. Read-only.
 
+  - `instructions: string or null`
+
+    Instructions for Claude, added to the instructions of every session that can use the Bundle. Null when it has none.
+
   - `updated_at: string`
 
     Time of the last change to the Bundle.
@@ -129396,6 +134324,28 @@ List the organization's Bundles, newest first by `created_at`. A Bundle that Cla
 - `next_page: string or null`
 
   Cursor for the next page. Null on the last page.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -129416,6 +134366,7 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/bundles \
       "created_at": "2019-12-27T18:11:19.117Z",
       "description": "description",
       "display_name": "display_name",
+      "instructions": "instructions",
       "type": "bundle",
       "updated_at": "2019-12-27T18:11:19.117Z"
     }
@@ -129542,6 +134493,10 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -129586,7 +134541,7 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
 
 - `BetaClaudeTagBundle object`
 
-  A named set of access that Claude can use in a Slack channel or a Slack workspace: connectors, repositories and credentials. Created and edited in claude.ai.
+  A named set of access that Claude can use in a Slack channel or a Slack workspace: connectors, repositories and credentials. Created and edited in claude.ai; Update Bundle also changes its instructions.
 
   - `type: "bundle"`
 
@@ -129608,11 +134563,37 @@ Get one Bundle. What the Bundle grants (connectors, repositories and credentials
 
     The Bundle's name. Always set. Read-only.
 
+  - `instructions: string or null`
+
+    Instructions for Claude, added to the instructions of every session that can use the Bundle. Null when it has none.
+
   - `updated_at: string`
 
     Time of the last change to the Bundle.
 
     format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -129631,6 +134612,270 @@ curl https://api.anthropic.com/v1/organizations/claude_tag/bundles/$BUNDLE_ID \
   "created_at": "2019-12-27T18:11:19.117Z",
   "description": "description",
   "display_name": "display_name",
+  "instructions": "instructions",
+  "type": "bundle",
+  "updated_at": "2019-12-27T18:11:19.117Z"
+}
+```
+
+### Update Bundle
+
+**POST** `/v1/organizations/claude_tag/bundles/{bundle_id}`
+
+Change a Bundle's instructions. The update is partial: a field left out is unchanged, and `instructions` sent as null or as an empty string clears them. The later of two updates wins. Sessions that start after the change use the new instructions; sessions already running keep the ones they started with. Some Bundles are managed in claude.ai, and an update of one returns 400.
+
+#### Path parameters
+
+- `bundle_id: string`
+
+  The Bundle's identifier, starting with `capp_`.
+
+#### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
+- `"anthropic-beta": optional array of AnthropicBeta`
+
+  This endpoint is in beta: requests must send `experimental-claude-tag-2026-10-21` in this header.
+
+  - `string`
+
+  - `"computer-use-2024-10-22"`
+
+  - `"computer-use-2025-01-24"`
+
+  - `"output-128k-2025-02-19"`
+
+  - `"mcp-client-2025-04-04"`
+
+  - `"mcp-client-2025-11-20"`
+
+  - `"dev-full-thinking-2025-05-14"`
+
+  - `"interleaved-thinking-2025-05-14"`
+
+  - `"code-execution-2025-05-22"`
+
+  - `"context-1m-2025-08-07"`
+
+  - `"context-management-2025-06-27"`
+
+  - `"model-context-window-exceeded-2025-08-26"`
+
+  - `"fast-mode-2026-02-01"`
+
+  - `"output-300k-2026-03-24"`
+
+  - `"user-profiles-2026-03-24"`
+
+  - `"user-profiles-2026-08-18"`
+
+  - `"user-profiles-2026-09-04"`
+
+  - `"advisor-tool-2026-03-01"`
+
+  - `"managed-agents-2026-04-01"`
+
+  - `"dreaming-2026-04-21"`
+
+  - `"thinking-token-count-2026-05-13"`
+
+  - `"server-side-fallback-2026-06-01"`
+
+  - `"server-side-fallback-2026-07-01"`
+
+  - `"fallback-credit-2026-06-01"`
+
+  - `"fallback-credit-2026-07-01"`
+
+  - `"agent-memory-2026-07-22"`
+
+  - `"mid-conversation-tool-changes-2026-07-01"`
+
+  - `"compact-2026-01-12"`
+
+  - `"computer-use-2025-11-24"`
+
+  - `"mcp-tunnels-2026-06-22"`
+
+  - `"structured-outputs-2025-11-13"`
+
+  - `"task-budgets-2026-03-13"`
+
+  - `"thinking-display-updates-2026-08-18"`
+
+  - `"mid-conversation-output-config-2026-07-01"`
+
+  - `"thinking-binding-controls-2026-08-01"`
+
+  - `"mid-conversation-system-clear-at-2026-08-21"`
+
+  - `"compact-2026-09-04"`
+
+  - `"inline-tools-2026-09-15"`
+
+  - `"mcp-client-2026-09-15"`
+
+  - `"ce-plugins-2026-09-01"`
+
+  - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
+
+  - `"admin-user-sign-out-2026-10-08"`
+
+  - `"message-threads-2026-08-12"`
+
+  - `"analytics-usage-cost-2026-08-24"`
+
+  - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
+  - `"message-batches-2024-09-24"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"prompt-caching-2024-07-31"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"pdfs-2024-09-25"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-counting-2024-11-01"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"token-efficient-tools-2025-02-19"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"files-api-2025-04-14"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/files#migrate-from-files-api-2025-04-14
+
+  - `"extended-cache-ttl-2025-04-11"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"skills-2025-10-02"`
+
+    **Deprecated**: Sending this value selects the beta response shapes. Removing it moves you to the current shapes, so follow the migration steps: https://platform.claude.com/docs/en/build-with-claude/skills-guide#migrate-from-skills-2025-10-02
+
+  - `"cache-diagnosis-2026-04-07"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+  - `"ce-user-management-2026-07-13"`
+
+    **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+#### Body parameters
+
+- `instructions: optional string or null`
+
+  Instructions for Claude, up to 10,000 bytes (UTF-8), added to the instructions of every session that can use the Bundle. Null or an empty string clears them.
+
+#### Returns
+
+- `BetaClaudeTagBundle object`
+
+  A named set of access that Claude can use in a Slack channel or a Slack workspace: connectors, repositories and credentials. Created and edited in claude.ai; Update Bundle also changes its instructions.
+
+  - `type: "bundle"`
+
+  - `id: string`
+
+    The Bundle's identifier. Starts with `capp_`.
+
+  - `created_at: string`
+
+    Time the Bundle was created.
+
+    format: date-time
+
+  - `description: string or null`
+
+    What the Bundle is for. Null when it has none. Read-only.
+
+  - `display_name: string`
+
+    The Bundle's name. Always set. Read-only.
+
+  - `instructions: string or null`
+
+    Instructions for Claude, added to the instructions of every session that can use the Bundle. Null when it has none.
+
+  - `updated_at: string`
+
+    Time of the last change to the Bundle.
+
+    format: date-time
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `bundle_attachment_not_supported` (HTTP status 400)
+
+  The Bundle has an attachment this API does not support editing, so its instructions can be changed only in claude.ai.
+
+- `bundle_on_call` (HTTP status 400)
+
+  This Bundle's instructions are managed in claude.ai and can't be changed through the API.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
+
+- `slack_channel_set_up_settings_conflict` (HTTP status 409)
+
+  The request set the channel up, and something else then changed the channel or removed it. Nothing of `settings` was stored.
+
+#### Example
+
+```bash
+curl https://api.anthropic.com/v1/organizations/claude_tag/bundles/$BUNDLE_ID \
+    -H 'Content-Type: application/json' \
+    -H 'anthropic-version: 2026-10-21' \
+    -H 'anthropic-beta: experimental-claude-tag-2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
+    -d '{}'
+```
+
+##### Response (200)
+
+```json
+{
+  "id": "id",
+  "created_at": "2019-12-27T18:11:19.117Z",
+  "description": "description",
+  "display_name": "display_name",
+  "instructions": "instructions",
   "type": "bundle",
   "updated_at": "2019-12-27T18:11:19.117Z"
 }
@@ -129768,6 +135013,10 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -129857,6 +135106,28 @@ List the Slack channels and Slack workspaces a Bundle is attached to, newest fir
 - `next_page: string or null`
 
   Cursor for the next page. Null on the last page.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -130001,6 +135272,10 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -130114,6 +135389,28 @@ Attach a Bundle to a Slack channel or a Slack workspace. A Bundle attached to a 
     - `slack_workspace_id: string`
 
       The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -130262,6 +135559,10 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -130347,6 +135648,28 @@ Get one Bundle Target. Returns 404 when `target_id` is the identifier of another
     - `slack_workspace_id: string`
 
       The identifier of the Slack workspace the Bundle is attached to, starting with `slws_`.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 
@@ -130490,6 +135813,10 @@ Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach ret
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -130541,6 +135868,28 @@ Detach a Bundle from a Slack channel or a Slack workspace. A repeated detach ret
   - `id: string`
 
     The identifier the Bundle Target had.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `api_key_scope_missing` (HTTP status 403)
+
+  The API key lacks the scope the request needs: `read:claude_tag` for a read, `write:claude_tag` for a change.
+
+- `claude_tag_writes_not_enabled` (HTTP status 403)
+
+  Changes through the Claude Tag API are not enabled for the organization.
+
+- `compliance_configuration_restricted` (HTTP status 403)
+
+  The organization's compliance configuration does not let Claude Tag store anything new.
+
+- `organization_level_scoped_api_key_required` (HTTP status 403)
+
+  The credential is not a scoped API key that is bound at the organization level.
 
 #### Example
 

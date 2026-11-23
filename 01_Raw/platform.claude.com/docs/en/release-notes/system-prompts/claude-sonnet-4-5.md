@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-sonnet-4-5
-fetched_at: 2026-10-26T05:40:14.182244+00:00
+fetched_at: 2026-11-23T08:28:20.031652+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-son
 description: See updates to the core system prompt for Claude Sonnet 4.5 on [claude.ai](https://claude.ai), the [Claude iOS app](https://anthropic.com/ios), and the [Claude Android app](https://anthropic.com/android).
 ---
 
-Changes between the following dated versions are marked with `**` around the changed text.
+Only one version, January 18, 2026, uses `**` to mark text that changed from the version before it.
 
 ## January 18, 2026
 

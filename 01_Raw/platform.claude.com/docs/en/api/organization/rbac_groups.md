@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/rbac_groups
-fetched_at: 2026-11-16T07:30:51.399745+00:00
+fetched_at: 2026-11-23T08:28:24.233524+00:00
 fetch_method: mintlify_md
 ---
 
@@ -78,6 +78,16 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
     RFC 3339 timestamp of when the RBAC Group was last updated.
 
     format: date-time
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ### Example
 
@@ -383,6 +393,16 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     format: date-time
 
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 ### Example
 
 ```bash
@@ -448,6 +468,24 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `id: string`
 
     ID of the RBAC Group.
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ### Example
 
@@ -533,17 +571,39 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$RBAC_GROUP_ID \
 
 - `RBACGroupGrantsOwnerAccessErrorDetails object`
 
-  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
-
   - `error_code: "rbac_group_grants_owner_access"`
 
 ### RBAC Group Owner Access Unconfirmed Error Details
 
 - `RBACGroupOwnerAccessUnconfirmedErrorDetails object`
 
+  - `error_code: "rbac_group_owner_access_unconfirmed"`
+
+## Errors
+
+### rbac_group_grants_owner_access
+
+HTTP status 400
+
+- `"rbac_group_grants_owner_access"`
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+  - `details: RBACGroupGrantsOwnerAccessErrorDetails`
+
+    - `error_code: "rbac_group_grants_owner_access"`
+
+### rbac_group_owner_access_unconfirmed
+
+HTTP status 400
+
+- `"rbac_group_owner_access_unconfirmed"`
+
   The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
 
-  - `error_code: "rbac_group_owner_access_unconfirmed"`
+  - `details: RBACGroupOwnerAccessUnconfirmedErrorDetails`
+
+    - `error_code: "rbac_group_owner_access_unconfirmed"`
 
 ## RBAC Groups › Members
 
@@ -705,6 +765,24 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the User.
 
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
 #### Example
 
 ```bash
@@ -772,6 +850,24 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
   - `user_id: string`
 
     ID of the User.
+
+#### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `rbac_group_grants_owner_access` (HTTP status 400)
+
+  A role attached to an RBAC Group in the request grants owner access, so this API does not add members to that group (directly or through an invite), remove its members, or delete it. Make the change in the organization's admin settings in Claude.
+
+- `rbac_group_owner_access_unconfirmed` (HTTP status 400)
+
+  The API could not finish checking whether an RBAC Group in the request grants owner access, so it made no change. Retrying the same request will not help. Make the change in the organization's admin settings in Claude.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 #### Example
 

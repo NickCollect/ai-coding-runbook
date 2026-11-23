@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/memory
-fetched_at: 2026-11-16T07:30:43.440932+00:00
+fetched_at: 2026-11-23T08:28:15.819708+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,7 +49,7 @@ featureMetadata:
 Each Managed Agents session starts with a fresh context by default. When a session ends, any state the agent built up is gone. Memory stores let the agent carry information across sessions: user preferences, project conventions, prior mistakes, and domain context.
 
 <Note>
-  Don’t combine `agent-memory-2026-07-22` with `managed-agents-2026-04-01` on a memory store request: sending both returns a `400` error. If your code sets beta headers explicitly, replace `managed-agents-2026-04-01` with `agent-memory-2026-07-22` on memory store calls rather than adding a second value. Session endpoints, including attaching a memory store to a session, still use `managed-agents-2026-04-01`.
+  Don’t combine `agent-memory-2026-07-22` with `managed-agents-2026-04-01` on a memory store request: sending both returns a `400` error. If your code sets beta headers explicitly, replace `managed-agents-2026-04-01` with `agent-memory-2026-07-22` on memory store calls rather than adding a second beta. Session endpoints, including attaching a memory store to a session, still use `managed-agents-2026-04-01`.
 
   `GET /v1/memory_stores/{memory_store_id}/memories` behaves the same under either header: results come back in a stable, server-defined order, and `path_prefix` and `depth` apply the same way.
 </Note>
@@ -425,9 +425,7 @@ Each attached store is mounted inside the session’s sandbox as a directory und
 `access` (csharp, go: `Access`) is enforced at the filesystem level: a `read_only` mount rejects writes, whereas writes to a `read_write` mount produce [memory versions](https://platform.claude.com/docs/en/managed-agents/memory#audit-memory-changes) attributed to the session.
 
 <Note>
-  On [self-hosted sandboxes](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory), each store’s directory is a local copy that the worker manages rather than a live mount. The worker reconciles each copy with its store after tool calls, at most once per sync interval (15 seconds by default), and once more when the session ends. The agent’s `write` and `edit` tools change only the local copy; the worker uploads those changes at its next sync, so another session running on a self-hosted sandbox sees a change only after both workers have synced. Paths under `/mnt/memory/` outside the store directories are not scratch space there: the worker’s file tools refuse to write to them, and anything a shell command writes there is never synced to a store.
-
-  For a `read_only` store, the worker’s `write` and `edit` tools refuse changes under that directory and the worker never uploads anything from it. To learn how the worker resolves write conflicts, and what the `bash` tool can still change in a read-only store’s local copy, see [Read-only stores and conflicts](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory#read-only-stores-and-conflicts).
+  On self-hosted sandboxes, each store’s directory is a local copy that the worker syncs with the store, not a live mount. A change reaches the store, and other sessions, only at a sync. See [How the worker handles memory](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory#how-the-worker-handles-memory) and [Read-only stores and conflicts](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory#read-only-stores-and-conflicts).
 </Note>
 
 The agent’s reads and writes appear in the [event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming) as ordinary `agent.tool_use` and `agent.tool_result` events for whichever tool touched the mount.
@@ -1387,10 +1385,10 @@ Memory stores are in beta on every model.
 
 * Availability: Available
 
-| Status           | Cloud platforms                                                                                                                                            |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta<sup>1</sup> | Claude API                                                                                                                                                 |
-| Beta<sup>2</sup> | [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws)                                                     |
+| Status | Cloud platforms |
+| ----- | ----- |
+| Beta<sup>1</sup> | Claude API |
+| Beta<sup>2</sup> | [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws) |
 | Beta<sup>3</sup> | [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed) |
 
 1. Sending `managed-agents-2026-04-01` together with `agent-memory-2026-07-22` on a memory store call returns a 400 error.
@@ -1409,9 +1407,9 @@ Beta headers allow you to access experimental features and new model capabilitie
 
 [Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                                                                                                                         | HIPAA                                                               |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Status  | Not eligible                                                                                                                                                                                                                                                | Not eligible                                                        |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Not eligible | Not eligible |
 | Details | Not eligible for ZDR, except for self-hosted Managed Agents. Sessions are stateful resources; transcripts persist until you delete them. [Learn more](https://platform.claude.com/docs/en/managed-agents/self-hosted-data-and-access#how-long-data-is-kept) | Not eligible for HIPAA. Applies to all Managed Agents sub-features. |
 
 Applicable endpoints:

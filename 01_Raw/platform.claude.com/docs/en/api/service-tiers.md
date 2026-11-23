@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/service-tiers
-fetched_at: 2026-11-16T07:30:48.092211+00:00
+fetched_at: 2026-11-23T08:28:20.905170+00:00
 fetch_method: mintlify_md
 ---
 
@@ -265,9 +265,9 @@ Service tiers are available on select models.
 * Availability: Available
 * Usage: Needs a Priority Tier commitment, which is no longer sold. With one, requests use Priority Tier by default; set `service_tier` to `"standard_only"` to use only standard capacity.
 
-| Status    | Cloud platforms | Models                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| --------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Available | Claude API      | [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview), [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview), [Claude Opus 4.5](https://platform.claude.com/docs/en/models/opus-4-5/overview), [Claude Sonnet 4.5](https://platform.claude.com/docs/en/models/sonnet-4-5/overview) |
+| Status | Cloud platforms | Models |
+| ----- | ----- | ----- |
+| Available | Claude API | [Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/overview), [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview), [Claude Opus 4.8](https://platform.claude.com/docs/en/models/opus-4-8/overview), [Claude Opus 4.7](https://platform.claude.com/docs/en/models/opus-4-7/overview), [Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-4-6/overview), [Claude Sonnet 4.6](https://platform.claude.com/docs/en/models/sonnet-4-6/overview), [Claude Opus 4.5](https://platform.claude.com/docs/en/models/opus-4-5/overview), [Claude Sonnet 4.5](https://platform.claude.com/docs/en/models/sonnet-4-5/overview) |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using
-fetched_at: 2026-11-09T07:30:22.973343+00:00
+fetched_at: 2026-11-23T08:28:20.352330+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,18 +33,18 @@ ant beta:sessions:events list --session-id session_01...
 
 ### Global flags
 
-| Flag                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--profile`                           | Named profile to use for this command (equivalent to setting `ANTHROPIC_PROFILE`). See [Switch between workspaces](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication#switch-between-workspaces).                                                                                                                                                                                                                                                |
-| `--api-key-stdin`                     | Read the API key from standard input. The flag reads all of standard input, so pass the request body with [flags](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using#flags).                                                                                                                                                                                                                                                                              |
-| `--auth-token-stdin`                  | Read the bearer token from standard input. The flag reads all of standard input, so pass the request body with [flags](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using#flags).                                                                                                                                                                                                                                                                         |
-| `--format`                            | Output format: `auto`, `json`, `jsonl`, `yaml`, `pretty`, `raw`, `explore`                                                                                                                                                                                                                                                                                                                                                                                              |
-| `--transform`                         | Filter or reshape the response with a GJSON path. See [Transform output with GJSON](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using#transform-output-with-gjson).                                                                                                                                                                                                                                                                                      |
-| `-r`, `--raw-output`                  | Print string results without surrounding quotes, like `jq -r`                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `--base-url`                          | Override the API base URL                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `--workspace-id`                      | Optional. Workspace ID (`wrkspc_...`) to send as the `anthropic-workspace-id` header, for API keys that aren’t scoped to a workspace (equivalent to setting `ANTHROPIC_WORKSPACE_ID`). See [Select a workspace](https://platform.claude.com/docs/en/manage-claude/authentication#select-a-workspace). [Admin API](https://platform.claude.com/docs/en/manage-claude/admin-api) commands take their own `--workspace-id`, which names the workspace they manage instead. |
-| `--debug`                             | Print full HTTP request and response to stderr                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `--format-error`, `--transform-error` | Same as `--format` and `--transform` but applied to [error responses](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/scripting#inspect-errors)                                                                                                                                                                                                                                                                                                              |
+| Flag | Description |
+| ----- | ----- |
+| `--profile` | Named profile to use for this command (equivalent to setting `ANTHROPIC_PROFILE`). See [Switch between workspaces](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication#switch-between-workspaces). |
+| `--api-key-stdin` | Read the API key from standard input. The flag reads all of standard input, so pass the request body with [flags](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using#flags). |
+| `--auth-token-stdin` | Read the bearer token from standard input. The flag reads all of standard input, so pass the request body with [flags](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using#flags). |
+| `--format` | Output format: `auto`, `json`, `jsonl`, `yaml`, `pretty`, `raw`, `explore` |
+| `--transform` | Filter or reshape the response with a GJSON path. See [Transform output with GJSON](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using#transform-output-with-gjson). |
+| `-r`, `--raw-output` | Print string results without surrounding quotes, like `jq -r` |
+| `--base-url` | Override the API base URL |
+| `--workspace-id` | Optional. Workspace ID (`wrkspc_...`) to send as the `anthropic-workspace-id` header, for API keys that aren’t scoped to a workspace (equivalent to setting `ANTHROPIC_WORKSPACE_ID`). See [Select a workspace](https://platform.claude.com/docs/en/manage-claude/authentication#select-a-workspace). [Admin API](https://platform.claude.com/docs/en/manage-claude/admin-api) commands take their own `--workspace-id`, which names the workspace they manage instead. |
+| `--debug` | Print full HTTP request and response to stderr |
+| `--format-error`, `--transform-error` | Same as `--format` and `--transform` but applied to [error responses](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/scripting#inspect-errors) |
 
 ## Output formats
 
@@ -145,6 +145,12 @@ tools:
   - type: agent_toolset_20260401
 YAML
 ```
+
+The CLI expands [file references](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using#file-references), such as `@./notes.txt`, in a stdin document: it reads the files that the document names and sends their contents in the request.
+
+<Warning>
+  A stdin document can name any file that you can read. Use one only if you trust its source as much as your own command line.
+</Warning>
 
 ### File references
 

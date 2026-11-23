@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/preserved-thinking/change-tools-or-instructions
-fetched_at: 2026-11-16T07:30:40.513408+00:00
+fetched_at: 2026-11-23T08:28:12.096573+00:00
 fetch_method: mintlify_md
 ---
 
@@ -198,7 +198,7 @@ The user message with the tool results must hold only `tool_result` blocks when 
 
 ### Models that don’t accept system messages
 
-On the Claude API, every model with preserved thinking accepts system messages. For a model that doesn’t, see [When a model doesn’t accept system messages](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#unchosen-switches-details).
+[Availability of mid-conversation system messages](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages#feature-availability) lists the platforms and models that accept them. On those platforms, the list includes every model with preserved thinking. If you switch to a model that isn’t on the list, see [When a model doesn’t accept system messages](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#unchosen-switches-details).
 
 ### Send a reminder for one turn
 
@@ -223,7 +223,7 @@ For the platforms that take each header, see [Mid-conversation system messages a
 * **If you know every tool at the start:** Declare them all on the first request, with `defer_loading: true` on those you offer later. Then name the tool in a `tool_addition` or `tool_removal` block of a system message. Beta header: `inline-tools-2026-09-15` or `mid-conversation-tool-changes-2026-07-01`.
 * **If you learn of a tool later, or have one whose schema changes:** Define the tool in a `tool_addition` block of a system message. Beta header: `inline-tools-2026-09-15`.
 * **If you learn of a tool later, on a platform without the `inline-tools-2026-09-15` header:** Add the tool to the end of `tools` with `defer_loading: true`, which isn’t a change, then offer it by name. Beta header: `mid-conversation-tool-changes-2026-07-01`.
-* **If you connect an MCP server through the MCP connector late, on the Claude API:** Define its `mcp_toolset` in a `tool_addition` block. Beta headers: `inline-tools-2026-09-15` and `mcp-client-2026-09-15`.
+* **If you connect an MCP server through the MCP connector late:** Define its `mcp_toolset` in a `tool_addition` block. Beta headers: both `inline-tools-2026-09-15` and `mcp-client-2026-09-15`. To check whether your platform accepts the second one, see [Availability of the MCP connector](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector#feature-availability).
 
 If an MCP server’s tool list can change, see [Pin an MCP server’s tool list](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector#pin-mcp-tool-list).
 
@@ -278,7 +278,7 @@ After your own summary or cut, a kept turn’s thinking fails the [prefix check]
 
 If other people’s requests pass through your code, your rewrites change their history, and they might not be able to see or fix those changes. Don’t hide the 400 error. If you recover for the caller, say so, because their history still holds the change.
 
-* Pass `anthropic-beta` values and `thinking.block_binding` through as sent. If your gateway allows only known fields, add `thinking.block_binding` and the header value `thinking-binding-controls-2026-08-01`, or your users can’t choose `"drop_block"`.
+* Pass the `anthropic-beta` header and `thinking.block_binding` through as sent. If your gateway allows only known fields, add `thinking.block_binding` and the `thinking-binding-controls-2026-08-01` beta in that header, or your users can’t choose `"drop_block"`.
 * Don’t remove the beta header and forward the setting. That request gets a 400 error.
 * Return thinking blocks whose text is empty, and the `input_transformations` array, to the caller.
 * Leave a `role: "system"` message where it is. Moving it into `system` makes the thinking already in the conversation invalid.

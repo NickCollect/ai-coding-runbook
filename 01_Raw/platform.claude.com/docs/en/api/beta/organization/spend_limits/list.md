@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/list
-fetched_at: 2026-11-16T07:30:57.828122+00:00
+fetched_at: 2026-11-23T08:28:31.142375+00:00
 fetch_method: mintlify_md
 ---
 
@@ -163,6 +163,10 @@ come in a fixed order that is not creation order.
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 
@@ -329,6 +333,16 @@ come in a fixed order that is not creation order.
     format: date-time
 
 - `next_page: string or null`
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `organization_type_not_supported` (HTTP status 400)
+
+  The endpoint does not support the organization's type. Each endpoint's description says which organization types it supports.
 
 ## Example
 

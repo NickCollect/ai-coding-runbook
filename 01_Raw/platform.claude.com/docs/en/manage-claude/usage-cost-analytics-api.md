@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api
-fetched_at: 2026-11-16T07:30:44.481888+00:00
+fetched_at: 2026-11-23T08:28:16.895723+00:00
 fetch_method: mintlify_md
 ---
 
@@ -805,24 +805,29 @@ Every response includes a `data_refreshed_at` timestamp, and usage after that ti
 
 ## Migrate from the Usage and Cost API
 
-This section is for Claude Console organizations that call the legacy [Usage and Cost API](https://platform.claude.com/docs/en/manage-claude/usage-cost-api) (`/v1/organizations/usage_report/messages` and `/v1/organizations/cost_report`). Your Admin API key, the `anthropic-version` header, `starting_at` and `ending_at`, the bucket width values (`1m`, `1h`, `1d`), bracket notation, the pagination field names, and the token and cost field names carry over. What changes:
+This section is for organizations that call the legacy [Usage and Cost API](https://platform.claude.com/docs/en/manage-claude/usage-cost-api) (`/v1/organizations/usage_report/messages` and `/v1/organizations/cost_report`). Your credential and the `anthropic-version` header carry over. So do the names `starting_at` and `ending_at`, the `[]` suffix on array parameters, the pagination field names, and the token and cost field names. The usage endpoint’s bucket widths (`1m`, `1h`, `1d`) carry over too. The following table lists what changes:
 
-| Usage and Cost API                                                                                                                                      | Usage and Cost Analytics API                                                                                                                                                                                                                                                                                                                                                          |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| No beta header                                                                                                                                          | `anthropic-beta: analytics-usage-cost-2026-08-24` on every request                                                                                                                                                                                                                                                                                                                    |
-| Data typically appears within 5 minutes                                                                                                                 | Data typically refreshes within 4 hours and can take up to 24 hours (see [Data freshness](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api#data-freshness))                                                                                                                                                                                                 |
-| `data` is a list of time buckets, oldest first, including empty ones, each with a `results` list whose entries hold dimensions and metrics side by side | `data` is a list of rows ranked by `order_by`, each with its own `starting_at` and `ending_at`, dimensions in `group`, and metrics in `usage` or `cost`. Combinations with no usage or cost have no row.                                                                                                                                                                              |
-| `bucket_width`, default `1d`                                                                                                                            | `time_bucket_width`, no default. Pass `time_bucket_width=1d` to keep daily rows; omit it for whole-range totals. The cost endpoint also accepts every filter and `1m` and `1h` buckets.                                                                                                                                                                                               |
-| `limit` counts time buckets per page                                                                                                                    | `limit` counts rows per page (1 to 1,000, default 20), so the number of pages depends on how many combinations have data                                                                                                                                                                                                                                                              |
-| Any date range, paged forward by bucket                                                                                                                 | `starting_at` on or after January 1, 2026, and within the last 365 days, at most 31 days per request, `ending_at` required with `time_bucket_width`, and at most 24 hours with `1m` buckets (see [Date ranges and time buckets](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api#date-ranges-and-time-buckets)). Split longer ranges into several requests. |
-| `account_ids[]`, `service_account_ids[]`, `group_by[]=account_id`, `group_by[]=service_account_id`                                                      | `actor_ids[]` with the same tagged IDs, and `group_by[]=actor` or `actor_type`; read `actor.user_id` or `actor.service_account_id`. See [Actors](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api#actors).                                                                                                                                                  |
-| `context_window[]`                                                                                                                                      | `context_windows[]`                                                                                                                                                                                                                                                                                                                                                                   |
-| `group_by[]=description` on the cost report, with a `description` string                                                                                | No `description`. Group by the structured dimensions instead: any of `model`, `cost_type`, `token_type`, `context_window`, `service_tier`, `inference_geo`, and `speed`, all of which fit in one request.                                                                                                                                                                             |
-| An unknown API key or workspace ID returns an error                                                                                                     | It matches nothing, including a misspelled `models[]` name. Each list takes up to 100 values.                                                                                                                                                                                                                                                                                         |
-| `workspace_id: null` for the default workspace                                                                                                          | The default workspace’s real `workspace_id` (see [How is the default workspace represented?](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api#how-is-the-default-workspace-represented))                                                                                                                                                                    |
-| `inference_geo: "not_available"` and `service_tier: "standard"` on usage with no geo or tier                                                            | `null` for both. `inference_geos[]=not_available` still matches the rows with no inference geo.                                                                                                                                                                                                                                                                                       |
-| Cost `service_tier` is `standard` or `batch`; `amount` such as `"123.45"`                                                                               | The actual tier; `amount` with six decimal places, such as `"123.450000"`, plus `list_amount`.                                                                                                                                                                                                                                                                                        |
-| Code execution not in the usage report; no request counts                                                                                               | Code execution appears as usage rows with `model: null`; adds `requests` on both endpoints and `total_tokens` on usage rows                                                                                                                                                                                                                                                           |
+| Usage and Cost API | Usage and Cost Analytics API |
+| ----- | ----- |
+| No beta header | `anthropic-beta: analytics-usage-cost-2026-08-24` on every request |
+| Data typically appears within 5 minutes | Data typically refreshes within 4 hours and can take up to 24 hours (see [Data freshness](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api#data-freshness)) |
+| `data` is a list of time buckets, oldest first, including empty ones, each with a `results` list whose entries hold dimensions and metrics side by side | `data` is a list of rows ranked by `order_by`, each with its own `starting_at` and `ending_at`, dimensions in `group`, and metrics in `usage` or `cost`. Combinations with no usage or cost have no row. |
+| `bucket_width`, default `1d` | `time_bucket_width`, no default. Pass `time_bucket_width=1d` to keep daily rows; omit it for whole-range totals. The cost endpoint also accepts every filter and `1m` and `1h` buckets. |
+| `limit` counts time buckets per page | `limit` counts rows per page (1 to 1,000, default 20), so the number of pages depends on how many combinations have data |
+| Any date range, paged forward by bucket | `starting_at` on or after January 1, 2026, and within the last 365 days, at most 31 days per request, `ending_at` required with `time_bucket_width`, and at most 24 hours with `1m` buckets (see [Date ranges and time buckets](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api#date-ranges-and-time-buckets)). Split longer ranges into several requests. |
+| `account_ids[]`, `service_account_ids[]`, `group_by[]=account_id`, `group_by[]=service_account_id` | `actor_ids[]` with the same tagged IDs, and `group_by[]=actor` or `actor_type`; read `actor.user_id` or `actor.service_account_id`. See [Actors](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api#actors). |
+| `context_window[]` | `context_windows[]` |
+| `group_by[]=description` on the cost report, with a `description` string | No `description`. Group by the structured dimensions instead: any of `model`, `cost_type`, `token_type`, `context_window`, `service_tier`, `inference_geo`, and `speed`, all of which fit in one request. |
+| An unknown API key or workspace ID returns an error | It matches nothing, including a misspelled `models[]` name. Each list takes up to 100 values. |
+| `workspace_id: null` for the default workspace | The default workspace’s real `workspace_id` (see [How is the default workspace represented?](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api#how-is-the-default-workspace-represented)) |
+| `inference_geo: "not_available"` and `service_tier: "standard"` on usage with no geo or tier | `null` for both. `inference_geos[]=not_available` still matches the rows with no inference geo. |
+| Cost `service_tier` is `standard` or `batch`; `amount` such as `"123.45"` | The actual tier; `amount` with six decimal places, such as `"123.450000"`, plus `list_amount`. |
+| Code execution not in the usage report; no request counts | Code execution appears as usage rows with `model: null`; adds `requests` on both endpoints and `total_tokens` on usage rows |
+
+Two things differ for a Claude Enterprise organization:
+
+* **Workspaces and API keys:** The Usage and Cost Analytics API returns `null` for `workspace_id` and `api_key_id` (see [How results are shaped](https://platform.claude.com/docs/en/manage-claude/usage-cost-analytics-api#how-results-are-shaped)), so the table’s row on the default workspace doesn’t apply.
+* **Usage totals:** The Usage and Cost Analytics API counts usage that the legacy usage report leaves out, so its usage totals can be higher. See [Claude Enterprise organizations](https://platform.claude.com/docs/en/manage-claude/usage-cost-api#claude-enterprise-organizations).
 
 To reproduce the legacy daily report, request `time_bucket_width=1d` with the same `group_by[]`, page through with `limit=1000`, then group rows by `starting_at` and fill missing days with zeros. Add `order_by=time&order=asc` to get the days in order. Daily usage by model for 1 week, before:
 
@@ -1256,16 +1261,16 @@ This section is for Claude Enterprise organizations that call the [Claude Enterp
 
 Your key, the earliest date, the 365-day lookback and 31-day span, the filter and dimension names and values (except `user_ids[]` and the Claude Tag product value), the user `actor` fields, the metric and amount fields, `data_refreshed_at`, the cursor rules, and the [organization-level rate limit](https://platform.claude.com/docs/en/manage-claude/analytics-api#working-with-the-api) carry over. The only new header is the `analytics-usage-cost-2026-08-24` beta header. What changes:
 
-| Claude Enterprise reports                                                                                                                                                                     | Usage and Cost Analytics API                                                                                                                                                                                                        |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Claude Enterprise reports | Usage and Cost Analytics API |
+| ----- | ----- |
 | `usage_report` and `cost_report` return time buckets, oldest first, including empty ones, each holding at most its top 100 groups; `bucket_width` defaults to `1d` and `limit` counts buckets | Rows covering every combination with data, ranked by `order_by`, each with its own `starting_at` and `ending_at`, dimensions in `group`, and metrics in `usage` or `cost`. `time_bucket_width` is optional and `limit` counts rows. |
-| The time-bucket parameter is `bucket_width`                                                                                                                                                   | It is `time_bucket_width`, with the same values                                                                                                                                                                                     |
-| On `usage_report` and `cost_report`, `ending_at` is optional with `bucket_width` and `1m` buckets can span up to 31 days                                                                      | `ending_at` required with `time_bucket_width`; `1m` buckets span at most 24 hours per request                                                                                                                                       |
-| `user_usage_report` and `user_cost_report` return one row per user                                                                                                                            | `group_by[]=actor&actor_types[]=user_actor`. Without the filter you also get rows for non-user identities and an `actor: null` row for unattributed usage.                                                                          |
-| Claude Tag usage has `product: "claude-tag"`                                                                                                                                                  | `product: "claude_tag"`; `products[]` accepts either spelling                                                                                                                                                                       |
-| An unrecognized `models[]` name returns a 400 error                                                                                                                                           | It matches nothing                                                                                                                                                                                                                  |
-| `user_ids[]`                                                                                                                                                                                  | `actor_ids[]` with the same tagged `user_...` IDs                                                                                                                                                                                   |
-| `exclude_deleted_users` on the per-user reports                                                                                                                                               | Requires `group_by[]=actor`; without it, the request returns a 400 error. It drops only rows whose `actor` is a user with `deleted: true`; rows for other identities and rows with `actor: null` stay.                              |
+| The time-bucket parameter is `bucket_width` | It is `time_bucket_width`, with the same values |
+| On `usage_report` and `cost_report`, `ending_at` is optional with `bucket_width` and `1m` buckets can span up to 31 days | `ending_at` required with `time_bucket_width`; `1m` buckets span at most 24 hours per request |
+| `user_usage_report` and `user_cost_report` return one row per user | `group_by[]=actor&actor_types[]=user_actor`. Without the filter you also get rows for non-user identities and an `actor: null` row for unattributed usage. |
+| Claude Tag usage has `product: "claude-tag"` | `product: "claude_tag"`; `products[]` accepts either spelling |
+| An unrecognized `models[]` name returns a 400 error | It matches nothing |
+| `user_ids[]` | `actor_ids[]` with the same tagged `user_...` IDs |
+| `exclude_deleted_users` on the per-user reports | Requires `group_by[]=actor`; without it, the request returns a 400 error. It drops only rows whose `actor` is a user with `deleted: true`; rows for other identities and rows with `actor: null` stay. |
 
 Per-user cost for a month, before:
 
@@ -1296,7 +1301,8 @@ Per-user cost for a month, before:
   )
 
   for row in rows:
-      print(f"{row.actor.user_id}: {row.amount}")
+      if row.actor.type == "user_actor":
+          print(f"{row.actor.user_id}: {row.amount}")
   ```
 
   ```typescript TypeScript
@@ -1309,7 +1315,9 @@ Per-user cost for a month, before:
   });
 
   for await (const row of rows) {
-    console.log(`${row.actor.user_id}: ${row.amount}`);
+    if (row.actor.type === "user_actor") {
+      console.log(`${row.actor.user_id}: ${row.amount}`);
+    }
   }
   ```
 
@@ -1327,7 +1335,10 @@ Per-user cost for a month, before:
 
   await foreach (var row in page.Paginate())
   {
-      Console.WriteLine($"{row.Actor.UserID}: {row.Amount}");
+      if (row.Actor.TryPickBetaAnalyticsUser(out var user))
+      {
+          Console.WriteLine($"{user.UserID}: {row.Amount}");
+      }
   }
   ```
 
@@ -1342,7 +1353,9 @@ Per-user cost for a month, before:
 
   for rows.Next() {
   	row := rows.Current()
-  	fmt.Printf("%s: %s\n", row.Actor.UserID, row.Amount)
+  	if user, ok := row.Actor.AsAny().(anthropic.BetaAnalyticsUserActor); ok {
+  		fmt.Printf("%s: %s\n", user.UserID, row.Amount)
+  	}
   }
   if err := rows.Err(); err != nil {
   	log.Fatal(err)
@@ -1364,7 +1377,9 @@ Per-user cost for a month, before:
       var rows = client.beta().organization().analytics().userCostReport().list(params);
 
       for (var row : rows.autoPager()) {
-          IO.println(row.actor().userId() + ": " + row.amount());
+          row.actor().user().ifPresent(user ->
+              IO.println(user.userId() + ": " + row.amount())
+          );
       }
   }
   ```
@@ -1393,7 +1408,9 @@ Per-user cost for a month, before:
   )
 
   page.auto_paging_each do |row|
-    puts "#{row.actor.user_id}: #{row.amount}"
+    if row.actor.type == :user_actor
+      puts "#{row.actor.user_id}: #{row.amount}"
+    end
   end
   ```
 </CodeGroup>

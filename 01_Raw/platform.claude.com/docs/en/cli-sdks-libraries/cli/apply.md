@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/apply
-fetched_at: 2026-11-09T07:30:22.989518+00:00
+fetched_at: 2026-11-23T08:28:20.395811+00:00
 fetch_method: mintlify_md
 ---
 
@@ -338,15 +338,15 @@ To create the federation rule and service account that the `env` block names, se
 
 ## Flags
 
-| Flag                 | Effect                                                                                                                                                                                                                |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--dry-run`          | Print the plan and exit without applying or writing the lockfile. Exits 0 even when the plan is blocked.                                                                                                              |
-| `--yes`              | Apply without asking for confirmation. Required when there’s no terminal.                                                                                                                                             |
-| `--force`            | Apply even where a resource was changed, archived, or deleted outside these files.                                                                                                                                    |
-| `--prune`            | Remove resources that are in the lockfile but no longer declared in a file.                                                                                                                                           |
-| `--upgrade`          | Re-resolve skills referenced by GitHub URL, which otherwise stay pinned to the commit recorded in the lockfile.                                                                                                       |
+| Flag | Effect |
+| ----- | ----- |
+| `--dry-run` | Print the plan and exit without applying or writing the lockfile. Exits 0 even when the plan is blocked. |
+| `--yes` | Apply without asking for confirmation. Required when there’s no terminal. |
+| `--force` | Apply even where a resource was changed, archived, or deleted outside these files. |
+| `--prune` | Remove resources that are in the lockfile but no longer declared in a file. |
+| `--upgrade` | Re-resolve skills referenced by GitHub URL, which otherwise stay pinned to the commit recorded in the lockfile. |
 | `--lock-file <path>` | Use this lockfile instead of searching upward from the current directory. Keep one for each organization or workspace: `ant apply` refuses a lockfile whose organization or workspace doesn’t match your credentials. |
-| `--verbose`, `-v`    | Show unchanged resources and full field values in the plan.                                                                                                                                                           |
+| `--verbose`, `-v` | Show unchanged resources and full field values in the plan. |
 
 ## Next steps
 

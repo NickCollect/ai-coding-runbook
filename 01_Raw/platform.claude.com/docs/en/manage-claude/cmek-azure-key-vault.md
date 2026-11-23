@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/cmek-azure-key-vault
-fetched_at: 2026-11-02T07:00:32.133661+00:00
+fetched_at: 2026-11-23T08:28:17.408075+00:00
 fetch_method: mintlify_md
 ---
 
@@ -52,12 +52,12 @@ az keyvault show --name <your-vault-name> \
   --query "{rbac:properties.enableRbacAuthorization, purge:properties.enablePurgeProtection, pub:properties.publicNetworkAccess, net:properties.networkAcls.defaultAction, ipRules:properties.networkAcls.ipRules, uri:properties.vaultUri, tenantId:properties.tenantId}"
 ```
 
-| Field   | Must be                                                                                                                                                  |
-| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `rbac`  | `true`                                                                                                                                                   |
-| `purge` | `true`. If it’s `false` or `null`, turn on purge protection first. You can’t turn it off again.                                                          |
-| `pub`   | `"Enabled"`. Private endpoints aren’t supported.                                                                                                         |
-| `net`   | `"Allow"`, or `"Deny"` with [Anthropic’s outbound IP addresses](https://platform.claude.com/docs/en/api/ip-addresses#outbound-ip-addresses) in `ipRules` |
+| Field | Must be |
+| ----- | ----- |
+| `rbac` | `true` |
+| `purge` | `true`. If it’s `false` or `null`, turn on purge protection first. You can’t turn it off again. |
+| `pub` | `"Enabled"`. Private endpoints aren’t supported. |
+| `net` | `"Allow"`, or `"Deny"` with [Anthropic’s outbound IP addresses](https://platform.claude.com/docs/en/api/ip-addresses#outbound-ip-addresses) in `ipRules` |
 
 Copy `uri` (the vault URI) and `tenantId`.
 

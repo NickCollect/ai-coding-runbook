@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/plugins/versions/download
-fetched_at: 2026-11-16T07:30:58.537766+00:00
+fetched_at: 2026-11-23T08:28:31.865468+00:00
 fetch_method: mintlify_md
 ---
 
@@ -151,6 +151,10 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -190,6 +194,24 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
   - `"ce-user-management-2026-07-13"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ## Example
 

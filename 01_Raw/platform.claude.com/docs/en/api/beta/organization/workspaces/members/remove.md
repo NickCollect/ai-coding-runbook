@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/members/remove
-fetched_at: 2026-11-02T07:00:48.194768+00:00
+fetched_at: 2026-11-23T08:28:29.760549+00:00
 fetch_method: mintlify_md
 ---
 
@@ -50,6 +50,16 @@ Delete Workspace Member
 - `workspace_id: string`
 
   ID of the Workspace.
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ## Example
 

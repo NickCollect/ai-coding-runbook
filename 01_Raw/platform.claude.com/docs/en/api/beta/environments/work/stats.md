@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/stats
-fetched_at: 2026-11-16T07:30:52.629250+00:00
+fetched_at: 2026-11-23T08:28:25.541589+00:00
 fetch_method: mintlify_md
 ---
 
@@ -125,6 +125,10 @@ Get statistics about the work queue for an environment.
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -200,6 +204,20 @@ Get statistics about the work queue for an environment.
   - `workers_polling: number or null`
 
     Number of workers that have polled for work in the last 30 seconds. Requires worker_id to be sent with poll requests.
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
 
 ## Example
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations/test
-fetched_at: 2026-11-16T07:30:58.978960+00:00
+fetched_at: 2026-11-23T08:28:32.345255+00:00
 fetch_method: mintlify_md
 ---
 
@@ -126,6 +126,10 @@ Send one test span, named `anthropic.test`, to the destination with its register
   - `"analytics-usage-cost-2026-08-24"`
 
   - `"experimental-claude-tag-2026-10-21"`
+
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
 
   - `"message-batches-2024-09-24"`
 

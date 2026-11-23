@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/skills/create
-fetched_at: 2026-10-26T05:40:17.748694+00:00
+fetched_at: 2026-11-23T08:28:21.696275+00:00
 fetch_method: mintlify_md
 ---
 
@@ -112,6 +112,32 @@ Create Skill
     ISO 8601 timestamp of when the skill was last updated.
 
     format: date-time
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `claude_code_key_creator_not_member` (HTTP status 400)
+
+  The API key belongs to the Claude Code workspace, and the user who created it is no longer a member of the organization or of that workspace.
+
+- `cmek_key_disabled` (HTTP status 400)
+
+  The workspace's customer-managed encryption key is disabled or revoked. Re-enable the key, then retry.
+
+- `cmek_key_network_blocked` (HTTP status 400)
+
+  The key management service's network access controls blocked the request to the workspace's customer-managed encryption key. The key itself may be healthy.
+
+- `organization_on_hold` (HTTP status 400)
+
+  Anthropic has disabled the organization for trust and safety reasons. An organization disabled for any other reason, such as billing, does not get this code. `appeal_url`, when present, is where the organization can appeal.
+
+- `cmek_context_unavailable` (HTTP status 503)
+
+  The workspace's encryption settings could not be read, so the request was refused. Retry in a few minutes.
 
 ## Example
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/delete
-fetched_at: 2026-10-26T05:40:36.730526+00:00
+fetched_at: 2026-11-23T08:28:31.100631+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,6 +43,20 @@ workspace limits through the API is in an early access preview.
   default: spend_limit_deleted
 
 - `id: string`
+
+## Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
+
+- `spend_limits_admin_api_writes_not_enabled` (HTTP status 403)
+
+  The organization cannot retrieve, set or delete spend limits with an Admin API credential.
 
 ## Example
 

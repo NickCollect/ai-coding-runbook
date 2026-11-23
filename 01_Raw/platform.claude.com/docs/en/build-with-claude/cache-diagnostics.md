@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics
-fetched_at: 2026-11-16T07:30:41.637754+00:00
+fetched_at: 2026-11-23T08:28:13.263374+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,6 +35,7 @@ featureMetadata:
     - claude-sonnet-4-5-20250929
   supportedPlatforms:
     Claude API: stable
+    Claude Models on Google Cloud (Anthropic managed): stable
 ---
 
 [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) cuts latency and cost significantly, but only when the beginning of your prompt is byte-for-byte identical to a recent request. A reordered tool, a timestamp interpolated into your system prompt, or an edit to an earlier message can silently invalidate the cache. Without cache diagnostics, the only signal is `usage.cache_read_input_tokens` dropping to zero, with no indication of what changed.
@@ -1004,10 +1005,10 @@ In a multi-turn conversation, carry the latest response `id` forward as `previou
 
 The `diagnostics` field on the response `Message` has three possible values:
 
-| Value                          | Meaning                                                                                                                                                                                         |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `null`                         | The request did not include the `diagnostics` object, `previous_message_id` was `null` (first turn, nothing to compare), or nothing diverged before the last breakpoint.                        |
-| `{"cache_miss_reason": null}`  | The comparison was still running when the response was serialized. This can occur when the response starts very quickly. Treat it as inconclusive and check the next turn.                      |
+| Value | Meaning |
+| ----- | ----- |
+| `null` | The request did not include the `diagnostics` object, `previous_message_id` was `null` (first turn, nothing to compare), or nothing diverged before the last breakpoint. |
+| `{"cache_miss_reason": null}` | The comparison was still running when the response was serialized. This can occur when the response starts very quickly. Treat it as inconclusive and check the next turn. |
 | `{"cache_miss_reason": {...}}` | A `cache_miss_reason` is attached. For `*_changed` types this identifies the first divergence point; `previous_message_not_found` and `unavailable` are cases where no comparison was produced. |
 
 When `cache_miss_reason` is non-null, it looks like this:
@@ -1037,14 +1038,14 @@ When `cache_miss_reason` is non-null, it looks like this:
 
 `cache_miss_reason` is a discriminated union on `type`. The response reports the earliest divergence only, so fix it first; later ones might be hidden behind it.
 
-| Type                         | What it means                                                                                                                                                                                                                                                                                                                                                                                                                                   | What to change                                                                                                                                                                                                                                                                                                |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `model_changed`              | The `model` differs from the previous request (for example, a router, A/B test, or fallback selected a different model). The cache is per-model.                                                                                                                                                                                                                                                                                                | Hold the model constant within a cached conversation.                                                                                                                                                                                                                                                         |
-| `system_changed`             | The `system` parameter differs. Typically a timestamp, request ID, or other per-request value was interpolated into the system prompt.                                                                                                                                                                                                                                                                                                          | Make the system prompt a byte-stable constant and put the changing value in the `user` message you’re about to send.                                                                                                                                                                                          |
-| `tools_changed`              | The `tools` array differs: tools were added, removed, or reordered between turns, or tool `input_schema` JSON was serialized non-deterministically.                                                                                                                                                                                                                                                                                             | Send the same tool list on every turn in a fixed order with deterministically serialized schemas (for example, sort keys).                                                                                                                                                                                    |
-| `messages_changed`           | The model, system, and tools all match, but an earlier entry in `messages` was altered, reordered, or removed rather than appended to. Typically conversation history was truncated or edited, or assistant turns and `tool_result` blocks were re-serialized differently on resend.                                                                                                                                                            | Treat the history as append-only; echo assistant `content` and tool results back verbatim.                                                                                                                                                                                                                    |
-| `previous_message_not_found` | No stored fingerprint exists for the supplied `previous_message_id`. This is not evidence that your request changed. Typically the previous request did not include the `diagnostics` object, it came from a different workspace, or too much time has passed since it was sent.                                                                                                                                                                | Include the `diagnostics` object on every turn and keep consecutive turns close together in time.                                                                                                                                                                                                             |
-| `unavailable`                | Diagnostic information was not available for this request. This includes the case where `model`, `system`, and `tools` match but another prompt-affecting request parameter (`tool_choice`, `thinking`, `context_management`, `output_config`, `output_format`, or the set of active `anthropic-beta` headers) differs, and very long conversations where the divergence is beyond the comparison horizon. Your request was processed normally. | Keep the prompt-affecting request parameters constant for the lifetime of a cached conversation. If persistent, apply the manual checks under [Troubleshooting common issues](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#troubleshooting-common-issues) on the prompt caching page. |
+| Type | What it means | What to change |
+| ----- | ----- | ----- |
+| `model_changed` | The `model` differs from the previous request (for example, a router, A/B test, or fallback selected a different model). The cache is per-model. | Hold the model constant within a cached conversation. |
+| `system_changed` | The `system` parameter differs. Typically a timestamp, request ID, or other per-request value was interpolated into the system prompt. | Make the system prompt a byte-stable constant and put the changing value in the `user` message you’re about to send. |
+| `tools_changed` | The `tools` array differs: tools were added, removed, or reordered between turns, or tool `input_schema` JSON was serialized non-deterministically. | Send the same tool list on every turn in a fixed order with deterministically serialized schemas (for example, sort keys). |
+| `messages_changed` | The model, system, and tools all match, but an earlier entry in `messages` was altered, reordered, or removed rather than appended to. Typically conversation history was truncated or edited, or assistant turns and `tool_result` blocks were re-serialized differently on resend. | Treat the history as append-only; echo assistant `content` and tool results back verbatim. |
+| `previous_message_not_found` | No stored fingerprint exists for the supplied `previous_message_id`. This is not evidence that your request changed. Typically the previous request did not include the `diagnostics` object, it came from a different workspace, or too much time has passed since it was sent. | Include the `diagnostics` object on every turn and keep consecutive turns close together in time. |
+| `unavailable` | Diagnostic information was not available for this request. This includes the case where `model`, `system`, and `tools` match but another prompt-affecting request parameter (`tool_choice`, `thinking`, `context_management`, `output_config`, `output_format`, or the set of active `anthropic-beta` headers) differs, and very long conversations where the divergence is beyond the comparison horizon. Your request was processed normally. | Keep the prompt-affecting request parameters constant for the lifetime of a cached conversation. If persistent, apply the manual checks under [Troubleshooting common issues](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#troubleshooting-common-issues) on the prompt caching page. |
 
 <Note>
   The four `*_changed` types also carry a `cache_missed_input_tokens` integer: an estimate of how many input tokens fell after the divergence point, giving you a sense of how much cacheable prefix was lost. It is derived from byte lengths before tokenization, so treat it as a magnitude indicator rather than a billing number. It can differ from (and occasionally exceed) `usage.input_tokens`.
@@ -1056,19 +1057,24 @@ When `cache_miss_reason` is non-null, it looks like this:
 
 This matrix applies to turns where you passed a real `previous_message_id`. On the first turn (`previous_message_id: null`), `diagnostics` is always `null` and `cache_read_input_tokens` is normally zero because the cache is being written, not read; no troubleshooting is needed. The matrix also does not apply when `cache_miss_reason` is `null` (the comparison is still pending; check the next turn) or when its `type` is `previous_message_not_found` or `unavailable` (no comparison was produced).
 
-| Diagnostics result                        | Cache read tokens | Interpretation                                                                                                                                                                                                                   |
-| ----------------------------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `null`                                    | high              | The cache hit.                                                                                                                                                                                                                   |
-| `null`                                    | low or zero       | Your requests match, but there was no cache entry to read: it had expired, or the prompt is shorter than the [minimum cacheable length](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#cache-limitations). |
-| `cache_miss_reason` is a `*_changed` type | low or zero       | The request changed; fix the cause indicated by `type`.                                                                                                                                                                          |
-| `cache_miss_reason` is a `*_changed` type | high              | Rare. A change occurred late in the prompt but an earlier `cache_control` breakpoint still hit. Worth fixing, but low impact.                                                                                                    |
+| Diagnostics result | Cache read tokens | Interpretation |
+| ----- | ----- | ----- |
+| `null` | high | The cache hit. |
+| `null` | low or zero | Your requests match, but there was no cache entry to read: it had expired, or the prompt is shorter than the [minimum cacheable length](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#cache-limitations). |
+| `cache_miss_reason` is a `*_changed` type | low or zero | The request changed; fix the cause indicated by `type`. |
+| `cache_miss_reason` is a `*_changed` type | high | Rare. A change occurred late in the prompt but an earlier `cache_control` breakpoint still hit. Worth fixing, but low impact. |
 
 ## Limitations
 
-* **Claude API only:** Cache diagnostics is available on the Claude API.
 * **Limited retention:** Fingerprints for `previous_message_id` lookup expire after a short period. Run diagnostic comparisons between closely spaced requests.
-* **Same workspace:** The previous request must have run in the same organization and workspace. To check, compare the `anthropic-workspace-id` [response header](https://platform.claude.com/docs/en/api/overview#response-headers) on the two responses.
+
+* **Same workspace:** The previous request must have run in the same organization and workspace. Otherwise, the result is `previous_message_not_found`. How you check that two requests share a workspace depends on the platform:
+
+  * **Claude API:** Compare the `anthropic-workspace-id` [response header](https://platform.claude.com/docs/en/api/overview#response-headers) on the two responses.
+  * **Claude Models on Google Cloud (Anthropic managed):** Compare the workspace ID in the two [request URLs](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed#making-requests).
+
 * **Comparison horizon:** For very long conversations where the only change is deep in the message list, the response might be `unavailable` rather than a precise location.
+
 * **Best-effort:** Diagnostics never blocks or fails your request. If diagnostic information is not available, the response returns `unavailable`, or `cache_miss_reason: null` when the comparison was still running.
 
 ## Data retention
@@ -1092,9 +1098,9 @@ Cache diagnostics are available on every model.
 
 * Availability: Available
 
-| Status    | Cloud platforms |
-| --------- | --------------- |
-| Available | Claude API      |
+| Status | Cloud platforms |
+| ----- | ----- |
+| Available | Claude API, [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed) |
 
 #### [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview)
 
@@ -1104,10 +1110,10 @@ Cache diagnostics are available on every model.
 
 [Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                                                                                                                                                      | HIPAA        |
-| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| Status  | Eligible (qualified; excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements))                                                                                                                     | Not eligible |
-| Details | Your prompts and Claude’s outputs are not stored. A fingerprint of cryptographic hashes and token-count estimates is retained briefly to allow comparison against the next request. [Learn more](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#data-retention) | —            |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Eligible (qualified; excludes [Covered Models](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements)) | Not eligible |
+| Details | Your prompts and Claude’s outputs are not stored. A fingerprint of cryptographic hashes and token-count estimates is retained briefly to allow comparison against the next request. [Learn more](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#data-retention) | — |
 
 Applicable endpoints:
 

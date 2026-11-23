@@ -1,13 +1,13 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed
-fetched_at: 2026-11-16T07:30:42.577602+00:00
+fetched_at: 2026-11-23T08:28:14.167702+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: Claude Models on Google Cloud (Google managed)
 url: https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed
-description: Google operates Claude Models on Google Cloud (Google managed) as part of Google Cloud's Agent Platform. You can call Claude with Anthropic's client SDKs.
+description: Set up Claude Models on Google Cloud (Google managed), which Google operates as part of Google Cloud's Agent Platform. Then, call Claude with the Anthropic SDK or cURL.
 ---
 
 [Claude Models on Google Cloud](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/overview) compares the two Google Cloud offerings. It also shows how to tell which one you use.
@@ -55,8 +55,8 @@ The [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:3.8.0")
-        implementation("com.anthropic:anthropic-java-vertex:3.8.0")
+        implementation("com.anthropic:anthropic-java:3.12.0")
+        implementation("com.anthropic:anthropic-java-vertex:3.12.0")
         ```
       </Tab>
 
@@ -65,12 +65,12 @@ The [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>3.8.0</version>
+            <version>3.12.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-vertex</artifactId>
-            <version>3.8.0</version>
+            <version>3.12.0</version>
         </dependency>
         ```
       </Tab>
@@ -85,9 +85,8 @@ The [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview
 
   <Tab title="Ruby">
     ```bash
-    # Gemfile
-    gem "anthropic"
-    gem "googleauth"
+    bundle add anthropic
+    bundle add googleauth
     ```
   </Tab>
 </Tabs>
@@ -101,7 +100,11 @@ Requests to Claude Models on Google Cloud (Google managed) go to an Agent Platfo
 A request is nearly identical to a [Messages API](https://platform.claude.com/docs/en/api/messages/create) request. It differs in two main ways:
 
 * **Model:** The endpoint URL names the model. In a cURL request, leave `model` out of the body.
-* **Version:** In a cURL request, pass `anthropic_version` in the body, not as a header. Set it to `vertex-2023-10-16`, or to [API version `2026-10-21`](https://platform.claude.com/docs/en/api/migration-2026-10-21).
+* **Version:** In a cURL request, pass `anthropic_version` in the body and not as a header. Set it to `vertex-2023-10-16` or to [API version `2026-10-21`](https://platform.claude.com/docs/en/api/migration-2026-10-21).
+
+The SDK handles both differences for you. It moves your `model` value into the URL and sets `anthropic_version` to the API version that it uses with the Claude API. For the model IDs to pass, see [API model IDs](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed#api-model-ids).
+
+In the following examples, the SDK client authenticates with Application Default Credentials. To set up Application Default Credentials, see [Before making API calls](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed#before-making-api-calls).
 
 The following examples use the global endpoint. For the other endpoint types, see [Global, multi-region, and regional endpoints](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed#global-multi-region-and-regional-endpoints).
 
@@ -195,8 +198,9 @@ The following examples use the global endpoint. For the other endpoint types, se
   	"github.com/anthropics/anthropic-sdk-go/v2"
   	"github.com/anthropics/anthropic-sdk-go/v2/vertex"
   )
-  // ...
-  	// Uses default Google Cloud credentials
+
+  func main() {
+  	// Uses Application Default Credentials. Arguments: context, region, project ID.
   	client := anthropic.NewClient(
   		vertex.WithGoogleAuth(context.Background(), "global", "MY_PROJECT_ID"),
   	)
@@ -212,6 +216,7 @@ The following examples use the global endpoint. For the other endpoint types, se
   		panic(err)
   	}
   	fmt.Printf("%+v\n", message)
+  }
   ```
 
   ```java Java
@@ -251,9 +256,9 @@ The following examples use the global endpoint. For the other endpoint types, se
   ```php PHP
   use Anthropic\Messages\Model;
   use Anthropic\Messages\TextBlock;
-  use Anthropic\Vertex;
+  use Anthropic\Vertex\Client;
 
-  $client = Vertex\Client::fromEnvironment(
+  $client = Client::fromEnvironment(
       region: 'global',
       projectId: 'MY_PROJECT_ID',
   );
@@ -287,35 +292,35 @@ The following examples use the global endpoint. For the other endpoint types, se
     messages: [{ role: "user", content: "Hey Claude!" }]
   )
 
-  puts message.content.find { |block| block.is_a?(Anthropic::Models::TextBlock) }.text
+  message.content.grep(Anthropic::Models::TextBlock).each { |block| puts block.text }
   ```
 </CodeGroup>
 
 ### API model IDs
 
-| Model                                                                                                 | Agent Platform API model ID  |
-| :---------------------------------------------------------------------------------------------------- | :--------------------------- |
-| Claude Fable 5.2                                                                                      | `claude-fable-5-2`           |
-| Claude Mythos 5.2 ([limited availability](https://support.claude.com/en/articles/14604842))           | `claude-mythos-5-2`          |
-| Claude Fable 5.1                                                                                      | `claude-fable-5-1`           |
-| Claude Mythos 5.1 ([limited availability](https://support.claude.com/en/articles/14604842))           | `claude-mythos-5-1`          |
-| Claude Fable 5                                                                                        | `claude-fable-5`             |
-| Claude Mythos 5 ([limited availability](https://support.claude.com/en/articles/14604842))             | `claude-mythos-5`            |
-| Claude Opus 5.5                                                                                       | `claude-opus-5-5`            |
-| Claude Opus 5                                                                                         | `claude-opus-5`              |
-| Claude Opus 4.8                                                                                       | `claude-opus-4-8`            |
-| Claude Opus 4.7                                                                                       | `claude-opus-4-7`            |
-| Claude Opus 4.6                                                                                       | `claude-opus-4-6`            |
-| Claude Opus 4.5                                                                                       | `claude-opus-4-5@20251101`   |
-| Claude Opus 4.1 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations))   | `claude-opus-4-1@20250805`   |
-| Claude Opus 4 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations))     | `claude-opus-4@20250514`     |
-| Claude Sonnet 5.5                                                                                     | `claude-sonnet-5-5`          |
-| Claude Sonnet 5                                                                                       | `claude-sonnet-5`            |
-| Claude Sonnet 4.6                                                                                     | `claude-sonnet-4-6`          |
+| Model | Agent Platform API model ID |
+| :---- | :---- |
+| Claude Fable 5.2 | `claude-fable-5-2` |
+| Claude Mythos 5.2 ([limited availability](https://support.claude.com/en/articles/14604842)) | `claude-mythos-5-2` |
+| Claude Fable 5.1 | `claude-fable-5-1` |
+| Claude Mythos 5.1 ([limited availability](https://support.claude.com/en/articles/14604842)) | `claude-mythos-5-1` |
+| Claude Fable 5 | `claude-fable-5` |
+| Claude Mythos 5 ([limited availability](https://support.claude.com/en/articles/14604842)) | `claude-mythos-5` |
+| Claude Opus 5.5 | `claude-opus-5-5` |
+| Claude Opus 5 | `claude-opus-5` |
+| Claude Opus 4.8 | `claude-opus-4-8` |
+| Claude Opus 4.7 | `claude-opus-4-7` |
+| Claude Opus 4.6 | `claude-opus-4-6` |
+| Claude Opus 4.5 | `claude-opus-4-5@20251101` |
+| Claude Opus 4.1 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | `claude-opus-4-1@20250805` |
+| Claude Opus 4 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | `claude-opus-4@20250514` |
+| Claude Sonnet 5.5 | `claude-sonnet-5-5` |
+| Claude Sonnet 5 | `claude-sonnet-5` |
+| Claude Sonnet 4.6 | `claude-sonnet-4-6` |
 | Claude Sonnet 4.5 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | `claude-sonnet-4-5@20250929` |
-| Claude Sonnet 4 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations))   | `claude-sonnet-4@20250514`   |
-| Claude Haiku 5.5                                                                                      | `claude-haiku-5-5`           |
-| Claude Haiku 4.5                                                                                      | `claude-haiku-4-5@20251001`  |
+| Claude Sonnet 4 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | `claude-sonnet-4@20250514` |
+| Claude Haiku 5.5 | `claude-haiku-5-5` |
+| Claude Haiku 4.5 | `claude-haiku-4-5@20251001` |
 
 Claude Models on Google Cloud (Google managed) offers different Claude models in different regions. To check which models a region offers, search “Claude” in [Model Garden](https://cloud.google.com/model-garden) or see Google Cloud’s [Anthropic Claude models on Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) page.
 
@@ -335,11 +340,11 @@ Let Claude Code migrate your code to a newer model
 
 Claude Models on Google Cloud (Google managed) offers three endpoint types. You choose one with the region value you pass when you create the client. In a cURL request, the endpoint type sets the host and the `locations` segment of the URL.
 
-| Endpoint type            | Region value                   | Host                                                                       |
-| ------------------------ | ------------------------------ | -------------------------------------------------------------------------- |
-| **Global** (recommended) | `"global"`                     | `aiplatform.googleapis.com`                                                |
-| **Multi-region**         | `"us"` or `"eu"`               | `aiplatform.us.rep.googleapis.com`<br />`aiplatform.eu.rep.googleapis.com` |
-| **Regional**             | A region, such as `"us-east5"` | `{region}-aiplatform.googleapis.com`                                       |
+| Endpoint type | Region value | Host |
+| ----- | ----- | ----- |
+| **Global** (recommended) | `"global"` | `aiplatform.googleapis.com` |
+| **Multi-region** | `"us"` or `"eu"` | `aiplatform.us.rep.googleapis.com`<br />`aiplatform.eu.rep.googleapis.com` |
+| **Regional** | A region, such as `"us-east5"` | `{region}-aiplatform.googleapis.com` |
 
 The endpoint types differ in where they send requests:
 
@@ -411,11 +416,14 @@ The following examples use the `us` multi-region endpoint. The highlighted lines
   	"github.com/anthropics/anthropic-sdk-go/v2"
   	"github.com/anthropics/anthropic-sdk-go/v2/vertex"
   )
-  // ...
+
+  func main() {
   	// Multi-region identifier: "us" or "eu"
   	client := anthropic.NewClient(
   		vertex.WithGoogleAuth(context.Background(), "us", "MY_PROJECT_ID"),
   	)
+  	// ...
+  }
   ```
 
   ```java Java
@@ -439,9 +447,9 @@ The following examples use the `us` multi-region endpoint. The highlighted lines
   ```
 
   ```php PHP
-  use Anthropic\Vertex;
+  use Anthropic\Vertex\Client;
 
-  $client = Vertex\Client::fromEnvironment(
+  $client = Client::fromEnvironment(
       region: 'us', // Multi-region identifier: "us" or "eu"
       projectId: 'MY_PROJECT_ID',
   );
@@ -605,14 +613,16 @@ For what changes when you move, see [How the two Google Cloud offerings differ](
       import (
       	"context"
 
-      	"github.com/anthropics/anthropic-sdk-go/v2"
       	"github.com/anthropics/anthropic-sdk-go/v2/googlecloud"
       )
-      // ...
+
+      func main() {
       	client, err := googlecloud.NewClient(context.Background(), googlecloud.ClientConfig{})
       	if err != nil {
       		panic(err)
       	}
+      	// ...
+      }
       ```
 
       ```java Java
@@ -695,11 +705,14 @@ For what changes when you move, see [How the two Google Cloud offerings differ](
       	"github.com/anthropics/anthropic-sdk-go/v2"
       	"github.com/anthropics/anthropic-sdk-go/v2/vertex"
       )
-      // ...
-      	// Uses default Google Cloud credentials
+
+      func main() {
+      	// Uses Application Default Credentials. Arguments: context, region, project ID.
       	client := anthropic.NewClient(
       		vertex.WithGoogleAuth(context.Background(), "global", "MY_PROJECT_ID"),
       	)
+      	// ...
+      }
       ```
 
       ```java Java
@@ -722,9 +735,9 @@ For what changes when you move, see [How the two Google Cloud offerings differ](
       ```
 
       ```php PHP
-      use Anthropic\Vertex;
+      use Anthropic\Vertex\Client;
 
-      $client = Vertex\Client::fromEnvironment(
+      $client = Client::fromEnvironment(
           region: 'global',
           projectId: 'MY_PROJECT_ID',
       );

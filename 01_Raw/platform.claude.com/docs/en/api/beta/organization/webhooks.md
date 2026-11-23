@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/webhooks
-fetched_at: 2026-11-16T07:30:59.078545+00:00
+fetched_at: 2026-11-23T08:28:32.484325+00:00
 fetch_method: mintlify_md
 ---
 
@@ -131,6 +131,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -173,9 +177,13 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
 ### Body parameters
 
-- `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+- `enabled_events: array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
   The event types to deliver to the endpoint. Must list at least one.
+
+  - `"external_key.failed"`
+
+  - `"external_key.recovered"`
 
   - `"user_profile.enforcement_action_opened"`
 
@@ -221,9 +229,13 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+  - `enabled_events: array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
     The event types delivered to the endpoint.
+
+    - `"external_key.failed"`
+
+    - `"external_key.recovered"`
 
     - `"user_profile.enforcement_action_opened"`
 
@@ -267,9 +279,11 @@ curl https://api.anthropic.com/v1/organizations/webhooks \
     -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "enabled_events": [
-            "user_profile.enforcement_action_opened"
+            "user_profile.enforcement_action_opened",
+            "user_profile.enforcement_action_resolved"
           ],
-          "url": "x"
+          "url": "https://example.com/anthropic-webhooks",
+          "name": "Enforcement actions"
         }'
 ```
 
@@ -282,7 +296,7 @@ curl https://api.anthropic.com/v1/organizations/webhooks \
   "description": "description",
   "disabled_reason": "disabled_reason",
   "enabled_events": [
-    "user_profile.enforcement_action_opened"
+    "external_key.failed"
   ],
   "name": "name",
   "signing_secret": "signing_secret",
@@ -433,6 +447,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -497,9 +515,13 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+  - `enabled_events: array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
     The event types delivered to the endpoint.
+
+    - `"external_key.failed"`
+
+    - `"external_key.recovered"`
 
     - `"user_profile.enforcement_action_opened"`
 
@@ -561,7 +583,7 @@ curl https://api.anthropic.com/v1/organizations/webhooks \
       "description": "description",
       "disabled_reason": "disabled_reason",
       "enabled_events": [
-        "user_profile.enforcement_action_opened"
+        "external_key.failed"
       ],
       "name": "name",
       "state": "disabled",
@@ -697,6 +719,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -762,9 +788,13 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+  - `enabled_events: array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
     The event types delivered to the endpoint.
+
+    - `"external_key.failed"`
+
+    - `"external_key.recovered"`
 
     - `"user_profile.enforcement_action_opened"`
 
@@ -812,7 +842,7 @@ curl https://api.anthropic.com/v1/organizations/webhooks/$WEBHOOK_ENDPOINT_ID \
   "description": "description",
   "disabled_reason": "disabled_reason",
   "enabled_events": [
-    "user_profile.enforcement_action_opened"
+    "external_key.failed"
   ],
   "name": "name",
   "state": "disabled",
@@ -943,6 +973,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -989,9 +1023,13 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   Notes about the endpoint.
 
-- `enabled_events: optional array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+- `enabled_events: optional array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
   The event types to deliver to the endpoint. Replaces the whole set; an empty list leaves it unchanged.
+
+  - `"external_key.failed"`
+
+  - `"external_key.recovered"`
 
   - `"user_profile.enforcement_action_opened"`
 
@@ -1042,9 +1080,13 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+  - `enabled_events: array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
     The event types delivered to the endpoint.
+
+    - `"external_key.failed"`
+
+    - `"external_key.recovered"`
 
     - `"user_profile.enforcement_action_opened"`
 
@@ -1094,7 +1136,7 @@ curl https://api.anthropic.com/v1/organizations/webhooks/$WEBHOOK_ENDPOINT_ID \
   "description": "description",
   "disabled_reason": "disabled_reason",
   "enabled_events": [
-    "user_profile.enforcement_action_opened"
+    "external_key.failed"
   ],
   "name": "name",
   "state": "disabled",
@@ -1225,6 +1267,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -1280,6 +1326,16 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
   - `id: string`
 
     ID of the deleted webhook endpoint.
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ### Example
 
@@ -1423,6 +1479,10 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
 
   - `"experimental-claude-tag-2026-10-21"`
 
+  - `"ce-claude-code-managed-settings-2026-10-06"`
+
+  - `"user-profiles-billing-2026-10-01"`
+
   - `"message-batches-2024-09-24"`
 
     **Deprecated**: This value is no longer needed. Remove it from your requests.
@@ -1472,6 +1532,16 @@ Every request must include the beta header `anthropic-beta: webhooks-2026-10-07`
   - `signing_secret: string`
 
     The new signing secret. Deliveries are signed with it from now on, and no other response returns it.
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ### Example
 
@@ -1533,9 +1603,13 @@ curl https://api.anthropic.com/v1/organizations/webhooks/$WEBHOOK_ENDPOINT_ID/re
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+  - `enabled_events: array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
     The event types delivered to the endpoint.
+
+    - `"external_key.failed"`
+
+    - `"external_key.recovered"`
 
     - `"user_profile.enforcement_action_opened"`
 
@@ -1594,9 +1668,13 @@ curl https://api.anthropic.com/v1/organizations/webhooks/$WEBHOOK_ENDPOINT_ID/re
 
     Why Anthropic disabled the endpoint automatically. An empty string when the endpoint is enabled, or when you disabled it.
 
-  - `enabled_events: array of "user_profile.enforcement_action_opened" or "user_profile.enforcement_action_resolved" or "user_profile.program_status_updated"`
+  - `enabled_events: array of "external_key.failed" or "external_key.recovered" or "user_profile.enforcement_action_opened" or 2 more`
 
     The event types delivered to the endpoint.
+
+    - `"external_key.failed"`
+
+    - `"external_key.recovered"`
 
     - `"user_profile.enforcement_action_opened"`
 

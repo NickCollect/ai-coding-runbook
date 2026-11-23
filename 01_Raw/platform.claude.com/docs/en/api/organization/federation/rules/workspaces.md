@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/federation/rules/workspaces
-fetched_at: 2026-10-26T05:40:20.015812+00:00
+fetched_at: 2026-11-23T08:28:22.640778+00:00
 fetch_method: mintlify_md
 ---
 
@@ -77,6 +77,16 @@ other scopes require a Console session.
   - `workspace_name: string or null`
 
     Workspace display name. Populated when listing; null in the enable response.
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ### Example
 
@@ -247,6 +257,16 @@ Console session.
 - `workspace_id: string`
 
   Tagged ID of the workspace named in the delete request. Removal is idempotent.
+
+### Errors
+
+Any method can also return the general [HTTP errors](https://platform.claude.com/docs/en/api/errors?sdk_languages=http).
+
+Each code below is the value of `error.details.error_code` in the response body.
+
+- `sandbox_egress_restricted` (HTTP status 403)
+
+  The request came from a Claude sandbox with restricted network access, which is not allowed to make this request. Send it from outside the sandbox, or from a sandbox with unrestricted network access.
 
 ### Example
 

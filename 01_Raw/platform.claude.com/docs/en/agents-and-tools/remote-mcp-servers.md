@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/remote-mcp-servers
-fetched_at: 2026-11-02T07:00:28.303388+00:00
+fetched_at: 2026-11-23T08:28:13.722134+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,7 +32,7 @@ For more information about using remote MCP servers with the Claude API, see [MC
 
 ## Remote MCP server examples
 
-<MCPServersTable platform="mcpConnector" />
+<MCPServersTable />
 
 <Note>
   **Looking for more?** [Find hundreds more MCP servers on GitHub](https://github.com/modelcontextprotocol/servers).

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/message-threads
-fetched_at: 2026-11-16T07:30:41.579980+00:00
+fetched_at: 2026-11-23T08:28:13.126808+00:00
 fetch_method: mintlify_md
 ---
 
@@ -594,11 +594,11 @@ This example creates a thread on the first turn and continues it on the second. 
 
 ## What to send on each request
 
-| Group       | Fields                                                                                                                                                                                                                                      | Rule                                                                                                                                                                                                                            |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create-only | `system`, `tools`                                                                                                                                                                                                                           | Send them on the create request only, with any `cache_control` breakpoints on them. Sending either one on a continue request, even as `null`, returns a 400 error.                                                              |
-| Fixed       | `model`, `tool_choice`, `thinking`, `mcp_servers` (apart from each server’s authorization token), `context_management`, `output_config`, the `skills` in `container`, the top-level `cache_control`, and the set of `anthropic-beta` values | Send them on every request of the thread, with the same values as on the create request. A different value returns a 400 error with the code `thread_fingerprint_mismatch`, and the error message names the fields that differ. |
-| Free        | `max_tokens`, `stop_sequences`, `stream`, `metadata`, `service_tier`, and other fields not named on this page                                                                                                                               | These can change from turn to turn.                                                                                                                                                                                             |
+| Group | Fields | Rule |
+| ----- | ----- | ----- |
+| Create-only | `system`, `tools` | Send them on the create request only, with any `cache_control` breakpoints on them. Sending either one on a continue request, even as `null`, returns a 400 error. |
+| Fixed | `model`, `tool_choice`, `thinking`, `mcp_servers` (apart from each server’s authorization token), `context_management`, `output_config`, the `skills` in `container`, the top-level `cache_control`, and the set of betas in the `anthropic-beta` header | Send them on every request of the thread, with the same values as on the create request. A different value returns a 400 error with the code `thread_fingerprint_mismatch`, and the error message names the fields that differ. |
+| Free | `max_tokens`, `stop_sequences`, `stream`, `metadata`, `service_tier`, and other fields not named on this page | These can change from turn to turn. |
 
 The API does not store MCP server URLs, MCP authorization tokens, or the container `id`. Send `mcp_servers` and `container` on every request that uses them. An MCP authorization token can change between requests.
 
@@ -654,7 +654,17 @@ A continue request returns a 404 error with `error.details.error_code` set to `t
 * The request comes from a different user or service account from the one that created the thread. A thread created with a [workspace key (legacy)](https://platform.claude.com/docs/en/manage-claude/authentication#key-types) stays with that key, so use the same key for the whole thread.
 * The new messages add something that the stored conversation can’t take. For example, the first image in a conversation that had none can return this error.
 
-To recover, send the full conversation from your own copy in a new create request with `system` and `tools`. The SDK thread helper sends this create request once by itself and leaves out the `cache_control` breakpoints of earlier turns when it does. If earlier messages in your copy carry `cache_control` breakpoints, remove them first (see [Prompt caching on a thread](https://platform.claude.com/docs/en/build-with-claude/message-threads#prompt-caching)). Then continue from the new response `id`. If a fallback model wrote the previous response, see [Use fallbacks with a thread](https://platform.claude.com/docs/en/build-with-claude/message-threads#fallbacks). To rule out the ownership causes, use the same API key and workspace for every request of a thread. On Claude Platform on AWS, sign every request of a thread with credentials for the IAM role or IAM user that created the thread.
+To recover, follow these steps:
+
+1. If earlier messages in your own copy of the conversation carry `cache_control` breakpoints, remove them (see [Prompt caching on a thread](https://platform.claude.com/docs/en/build-with-claude/message-threads#prompt-caching)).
+2. Send the full conversation from your copy in a new create request with `system` and `tools`.
+3. Continue from the new response `id`.
+
+The SDK thread helper sends this create request once by itself. When it does, it leaves out the `cache_control` breakpoints of earlier turns.
+
+If a fallback model wrote the previous response, see [Use fallbacks with a thread](https://platform.claude.com/docs/en/build-with-claude/message-threads#fallbacks).
+
+Some of these causes depend on who sends the request. To rule them out, use the same workspace and the same API key, user, or service account for every request of a thread. On Claude Platform on AWS, sign every request of a thread with credentials for the IAM role or IAM user that created the thread.
 
 A request for a model that does not exist also returns a 404 error, so check `error.details.error_code` before you replay.
 
@@ -709,18 +719,18 @@ The SDK’s beta tool runner also uses a thread by default. You can turn off thi
 
 ### Other helper methods
 
-| To do this                                      | Use                                                                                                                                                                                                                                                                                                                                  |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Stream a turn                                   | `thread.stream(...)` (csharp: `thread.SendStreaming(...)`; go: `thread.SendStreaming(ctx, params)`; java: `thread.sendStreaming(...)`; php: `$thread->sendStream(...)`)                                                                                                                                                              |
-| Finished response of a streamed turn            | `stream.get_final_message()` (typescript: `stream.finalMessage()`; csharp: `thread.LastMessage`; go: `thread.LastMessage()`; java: `thread.lastMessage()`; php: `$thread->lastMessage()`; ruby: `stream.accumulated_message`)                                                                                                        |
-| Full conversation                               | `thread.messages` (csharp: `thread.Messages`; go: `thread.Messages()`; java: `thread.messages()`; php: `$thread->messages()`)                                                                                                                                                                                                        |
-| Response `id` that the next turn continues from | `thread.previous_message_id` (typescript: `thread.previousMessageId`; csharp: `thread.PreviousMessageID`; go: `thread.PreviousMessageID()`; java: `thread.previousMessageId()`; php: `$thread->previousMessageId()`)                                                                                                                 |
-| Add messages without sending                    | `thread.append(...)` (csharp, go: `thread.Append(...)`; php: `$thread->append(...)`)                                                                                                                                                                                                                                                 |
-| Change fields for later turns                   | `thread.update(...)` (csharp: `thread.Update(p => p with { ... })`; go: `thread.Params.MaxTokens = ...`; java: `thread.update(b -> ...)`; php: `$thread->update([...])`)                                                                                                                                                             |
-| Copy the thread                                 | `thread.fork()` (csharp, go: `thread.Fork()`; php: `$thread->fork()`; ruby: `thread.fork`)                                                                                                                                                                                                                                           |
-| Fields and conversation to start a new thread   | `thread.params` (csharp, go: `thread.Params`; java: `thread.params()`; php: `$thread->params()`)                                                                                                                                                                                                                                     |
-| Tool runner on this thread                      | `thread.tool_runner()` (typescript, java: `thread.toolRunner()`; csharp: `thread.ToolRunner(tools)`; go: `thread.NewToolRunner(tools)`; php: `$thread->toolRunner()`; ruby: `thread.tool_runner`)                                                                                                                                    |
-| Tool runner without a thread                    | `tool_runner(..., thread=False)` (typescript: `toolRunner({ ..., thread: false })`; csharp: `ToolRunner(parameters, tools, thread: false)`; go: `BetaToolRunnerParams{DisableThread: true}`; java: `ToolRunnerCreateParams.builder().thread(false)`; php: `toolRunner(..., thread: false)`; ruby: `tool_runner(..., thread: false)`) |
+| To do this | Use |
+| ----- | ----- |
+| Stream a turn | `thread.stream(...)` (csharp: `thread.SendStreaming(...)`; go: `thread.SendStreaming(ctx, params)`; java: `thread.sendStreaming(...)`; php: `$thread->sendStream(...)`) |
+| Finished response of a streamed turn | `stream.get_final_message()` (typescript: `stream.finalMessage()`; csharp: `thread.LastMessage`; go: `thread.LastMessage()`; java: `thread.lastMessage()`; php: `$thread->lastMessage()`; ruby: `stream.accumulated_message`) |
+| Full conversation | `thread.messages` (csharp: `thread.Messages`; go: `thread.Messages()`; java: `thread.messages()`; php: `$thread->messages()`) |
+| Response `id` that the next turn continues from | `thread.previous_message_id` (typescript: `thread.previousMessageId`; csharp: `thread.PreviousMessageID`; go: `thread.PreviousMessageID()`; java: `thread.previousMessageId()`; php: `$thread->previousMessageId()`) |
+| Add messages without sending | `thread.append(...)` (csharp, go: `thread.Append(...)`; php: `$thread->append(...)`) |
+| Change fields for later turns | `thread.update(...)` (csharp: `thread.Update(p => p with { ... })`; go: `thread.Params.MaxTokens = ...`; java: `thread.update(b -> ...)`; php: `$thread->update([...])`) |
+| Copy the thread | `thread.fork()` (csharp, go: `thread.Fork()`; php: `$thread->fork()`; ruby: `thread.fork`) |
+| Fields and conversation to start a new thread | `thread.params` (csharp, go: `thread.Params`; java: `thread.params()`; php: `$thread->params()`) |
+| Tool runner on this thread | `thread.tool_runner()` (typescript, java: `thread.toolRunner()`; csharp: `thread.ToolRunner(tools)`; go: `thread.NewToolRunner(tools)`; php: `$thread->toolRunner()`; ruby: `thread.tool_runner`) |
+| Tool runner without a thread | `tool_runner(..., thread=False)` (typescript: `toolRunner({ ..., thread: false })`; csharp: `ToolRunner(parameters, tools, thread: false)`; go: `BetaToolRunnerParams{DisableThread: true}`; java: `ToolRunnerCreateParams.builder().thread(false)`; php: `toolRunner(..., thread: false)`; ruby: `tool_runner(..., thread: false)`) |
 
 **Streaming.** The helper records the response when the stream reaches `message_stop`, so read the stream to its end. If you stop reading early, end the stream so that the thread is free for the next turn:
 
@@ -754,13 +764,13 @@ In C#, Go, Java, and PHP, after a refusal, `thread.LastMessage` (go: `thread.Las
 
 The API returns the errors in this table before the model runs. The request uses no tokens, and the thread and its expiry time do not change. `error.type` is `invalid_request_error` for the 400 errors and `not_found_error` for the 404 error.
 
-| Status | `error_code`                  | Meaning                                                                                                                              | What to do                                                                                                 |
-| ------ | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| 404    | `thread_not_found`            | The API can’t continue the thread.                                                                                                   | Send the full conversation in a new create request.                                                        |
-| 400    | `thread_fingerprint_mismatch` | A fixed field differs from the value stored with the thread. The error message names the fields.                                     | Keep the fixed fields the same or start a new thread to change one.                                        |
-| 400    | `thread_already_continued`    | Each response `id` can be continued once.                                                                                            | Continue from the latest response `id` of the thread. If your client never received that response, replay. |
-| 400    | `thread_continue_in_flight`   | Another continue request from this response `id` is still running. This is usually your own earlier attempt.                         | Let it finish and continue from its response `id`, or replay.                                              |
-| 400    | `thread_unsupported_request`  | The request uses a feature or an organization setting that threads don’t support. `error.details.unsupported` names it when present. | Remove that feature from the request or send the full conversation without `thread`.                       |
+| Status | `error_code` | Meaning | What to do |
+| ----- | ----- | ----- | ----- |
+| 404 | `thread_not_found` | The API can’t continue the thread. | Send the full conversation in a new create request. |
+| 400 | `thread_fingerprint_mismatch` | A fixed field differs from the value stored with the thread. The error message names the fields. | Keep the fixed fields the same or start a new thread to change one. |
+| 400 | `thread_already_continued` | Each response `id` can be continued once. | Continue from the latest response `id` of the thread. If your client never received that response, replay. |
+| 400 | `thread_continue_in_flight` | Another continue request from this response `id` is still running. This is usually your own earlier attempt. | Let it finish and continue from its response `id`, or replay. |
+| 400 | `thread_unsupported_request` | The request uses a feature or an organization setting that threads don’t support. `error.details.unsupported` names it when present. | Remove that feature from the request or send the full conversation without `thread`. |
 
 Some requests with `thread` return a 400 error with no `error_code`. For example, a continue request returns this error if it has no `previous_message_id` or if it includes `system` or `tools`.
 
@@ -794,13 +804,13 @@ Threads don’t support these features:
 
 The API rejects most requests that threads don’t support with a 400 error and the code `thread_unsupported_request`. When `error.details.unsupported` is present, it holds one of these values:
 
-| Value                | Meaning                                                                                                                                                                          |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `context_management` | The request uses context management or compaction that threads don’t support.                                                                                                    |
-| `cache_control`      | The request has more than 4 `cache_control` breakpoints. See [Prompt caching on a thread](https://platform.claude.com/docs/en/build-with-claude/message-threads#prompt-caching). |
-| `fallbacks`          | The request sets `fallbacks`, and your organization can’t use `fallbacks` with threads.                                                                                          |
-| `hipaa`              | Your organization has HIPAA readiness enabled.                                                                                                                                   |
-| `inference_hooks`    | Your organization has Inference hooks turned on.                                                                                                                                 |
+| Value | Meaning |
+| ----- | ----- |
+| `context_management` | The request uses context management or compaction that threads don’t support. |
+| `cache_control` | The request has more than 4 `cache_control` breakpoints. See [Prompt caching on a thread](https://platform.claude.com/docs/en/build-with-claude/message-threads#prompt-caching). |
+| `fallbacks` | The request sets `fallbacks`, and your organization can’t use `fallbacks` with threads. |
+| `hipaa` | Your organization has HIPAA readiness enabled. |
+| `inference_hooks` | Your organization has Inference hooks turned on. |
 
 The API can add values to this list. If you get a value that you don’t recognize, send the full conversation without `thread`. A request that meets several of these conditions gets an error that names only one.
 
@@ -837,9 +847,9 @@ Message threads are in beta on every model.
 
 * Availability: Available
 
-| Status | Cloud platforms                                                                                                                                                                                                                                                                                                                                                                        |
-| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beta   | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
+| Status | Cloud platforms |
+| ----- | ----- |
+| Beta | Claude API, [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) |
 
 ### Required beta headers
 
@@ -853,10 +863,10 @@ Beta headers allow you to access experimental features and new model capabilitie
 
 [Data handling overview](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility)
 
-| Item    | Zero data retention                                                                                                                                                                                                                                                                                                                                                                                      | HIPAA        |
-| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| Status  | Not eligible                                                                                                                                                                                                                                                                                                                                                                                             | Not eligible |
-| Details | A thread’s contents (the conversation, system prompt, and tools) are held in memory, encrypted under a server-managed key, never written to durable storage, and deleted no more than 1 hour after the thread’s last use. Using this feature does not affect your use of other ZDR eligible features. [Learn more](https://platform.claude.com/docs/en/build-with-claude/message-threads#data-retention) | —            |
+| Item | Zero data retention | HIPAA |
+| ----- | ----- | ----- |
+| Status | Not eligible | Not eligible |
+| Details | A thread’s contents (the conversation, system prompt, and tools) are held in memory, encrypted under a server-managed key, never written to durable storage, and deleted no more than 1 hour after the thread’s last use. Using this feature does not affect your use of other ZDR eligible features. [Learn more](https://platform.claude.com/docs/en/build-with-claude/message-threads#data-retention) | — |
 
 Applicable endpoints:
 
